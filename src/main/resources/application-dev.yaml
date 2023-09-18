@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/geonetwork?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
+    username: postgres
+    password: password
+
+app:
+  http:
+    auth-token: sample-auth-token
+
+server:
+    port: 8081
