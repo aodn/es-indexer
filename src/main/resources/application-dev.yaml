@@ -1,18 +1,18 @@
 # Client calling the Indexer API must provide this token in the Authorization header
 app:
   http:
-    auth-token: sample
+    auth-token: Q*z6OfL^4u^1nMhH
 
 server:
   port: 8081
 
 elasticsearch:
   gn_index:
-    host: localhost
-    port: 9200
+    serverUrl: http://localhost:9200
+    apiKey: c015MnE0b0JWM3JSNjdqaF84d2U6UnlucUFGczdSOHlWNDZxLUF4NXlXdw==
   portal_index:
-    host: 3.27.134.253
-    port: 9200
+    serverUrl: http://3.27.134.253:9200
+    apiKey: cEFDM3E0b0JJMG9OZ1R4YzlCR1Q6ZGxsQnBvRXlTcm12SFVaYjFIM24zdw==
 
 geonetwork:
   search:
