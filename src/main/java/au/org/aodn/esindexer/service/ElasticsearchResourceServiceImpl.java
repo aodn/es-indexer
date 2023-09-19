@@ -8,10 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ElasticsearchResourceServiceImpl implements ElasticsearchResourceService {
     @Autowired
-    @Qualifier("geoNetworkElasticsearchClient")
-    ElasticsearchClient geoNetworkElasticsearchClient;
-
-    @Autowired
-    @Qualifier("portalElasticsearchClient")
     ElasticsearchClient portalElasticsearchClient;
+
+
 }

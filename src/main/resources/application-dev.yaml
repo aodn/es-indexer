@@ -7,9 +7,6 @@ server:
   port: 8081
 
 elasticsearch:
-  gn_index:
-    serverUrl: http://localhost:9200
-    apiKey: c015MnE0b0JWM3JSNjdqaF84d2U6UnlucUFGczdSOHlWNDZxLUF4NXlXdw==
   portal_index:
     serverUrl: http://3.27.134.253:9200
     apiKey: cEFDM3E0b0JJMG9OZ1R4YzlCR1Q6ZGxsQnBvRXlTcm12SFVaYjFIM24zdw==

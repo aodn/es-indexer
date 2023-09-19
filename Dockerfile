@@ -11,7 +11,7 @@ RUN mvn package -DskipTests
 #########################3
 
 # Stage 2: Run the Spring Boot application
-FROM openjdk:11
+FROM amazoncorretto:11
 
 WORKDIR /app
 
