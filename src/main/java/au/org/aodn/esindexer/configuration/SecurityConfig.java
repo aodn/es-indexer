@@ -58,12 +58,20 @@ public class SecurityConfig {
             .authorizeRequests()
             .antMatchers("/error")
             .permitAll()
-            .antMatchers(
-                    "/v3/api-docs/**",
-                    "/swagger-resources/**",
-                    "/swagger-ui.html")
+            .antMatchers("/",
+                "/favicon.ico",
+                "/**/*.png",
+                "/**/*.gif",
+                "/**/*.svg",
+                "/**/*.jpg",
+                "/**/*.html",
+                "/**/*.css",
+                "/**/*.js")
             .permitAll()
-            .antMatchers(HttpMethod.GET, "/api/v1/indexer/index/**")
+            .antMatchers(
+                "/v3/api-docs/**",
+                "/swagger-resources/**",
+                "/swagger-ui.html")
             .permitAll()
             .anyRequest()
             .authenticated();

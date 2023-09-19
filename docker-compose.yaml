@@ -1,0 +1,10 @@
+version: "3.5"
+
+services:
+  indexer:
+    build: .
+    container_name: aodn_es_indexer
+    env_file:
+      - .env
+    ports:
+      - "8080:8080"

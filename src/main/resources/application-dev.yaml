@@ -1,12 +1,45 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/geonetwork?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
+    url: jdbc:postgresql://localhost:5432/es_indexer?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
     username: postgres
     password: password
 
+# Client calling the Indexer API must provide this token in the Authorization header
 app:
   http:
-    auth-token: sample-auth-token
+    auth-token: sample
 
 server:
-    port: 8081
+  port: 8081
+
+elasticsearch:
+  gn_index:
+    host: localhost
+    port: 9200
+  portal_index:
+    host: localhost
+    port: 9300
+
+geonetwork:
+  search:
+    api:
+      endpoint: http://localhost:8080/geonetwork/srv/api/0.1/records
+  database:
+    host: localhost
+    port: 5432
+    name: geonetwork
+    username: postgres
+    password: postgres
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    disable-swagger-default-url: true
+
+logging:
+  level:
+    au.org.aodn.esindexer.service: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
