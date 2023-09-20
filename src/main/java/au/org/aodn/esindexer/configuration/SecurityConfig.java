@@ -68,6 +68,8 @@ public class SecurityConfig {
                 "/**/*.css",
                 "/**/*.js")
             .permitAll()
+            .antMatchers(HttpMethod.GET, "/api/v1/indexer/index/gn_records/**")
+            .permitAll()
             .antMatchers(
                 "/v3/api-docs/**",
                 "/swagger-resources/**",

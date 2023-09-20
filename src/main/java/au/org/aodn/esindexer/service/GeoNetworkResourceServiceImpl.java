@@ -2,8 +2,6 @@ package au.org.aodn.esindexer.service;
 
 import au.org.aodn.esindexer.dto.GeoNetworkSearchRequestBodyDTO;
 import au.org.aodn.esindexer.exception.MetadataNotFoundException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -25,18 +23,13 @@ public class GeoNetworkResourceServiceImpl implements GeoNetworkResourceService 
     @Value("${geonetwork.search.api.endpoint}")
     private String searchEndpoint;
 
-    private static final Logger logger = LoggerFactory.getLogger(GeoNetworkResourceServiceImpl.class);
-
     public Map<String, Object> searchMetadataRecordByUUID(String uuid) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         GeoNetworkSearchRequestBodyDTO searchRequestBodyDTO = new GeoNetworkSearchRequestBodyDTO(uuid);
         HttpEntity<GeoNetworkSearchRequestBodyDTO> requestEntity = new HttpEntity<>(searchRequestBodyDTO, headers);
-        logger.info("requestEntity: "  + requestEntity);
-
         ResponseEntity<Map> responseEntity = restTemplate.postForEntity(searchEndpoint, requestEntity, Map.class);
-
         if (responseEntity.getStatusCode().is2xxSuccessful()) {
             Map<String, Object> outerHits = (Map<String, Object>) Objects.requireNonNull(responseEntity.getBody()).get("hits");
             Map<String, Object> total = (Map<String, Object>) outerHits.get("total");
