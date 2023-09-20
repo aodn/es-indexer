@@ -1,28 +1,16 @@
 package au.org.aodn.esindexer.controller;
 
 import au.org.aodn.esindexer.service.ElasticsearchResourceService;
-import au.org.aodn.esindexer.service.GeonetworkResourceService;
+import au.org.aodn.esindexer.service.GeoNetworkResourceService;
 import au.org.aodn.esindexer.service.IndexerService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
-import org.springframework.security.core.Authentication;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.client.HttpClientErrorException;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 @RestController
 @RequestMapping(value = "/api/v1/indexer/index")
@@ -34,18 +22,16 @@ public class IndexerController {
     ElasticsearchResourceService elasticsearchResourceService;
 
     @Autowired
-    GeonetworkResourceService geonetworkResourceService;
+    GeoNetworkResourceService geonetworkResourceService;
 
     @Autowired
     IndexerService indexerService;
 
     @GetMapping(path="/gn_records/{uuid}", produces = "application/json")
-    public ResponseEntity getDocumentFromGNRecordsIndexByUUID(@PathVariable("uuid") Long uuid) {
+    public ResponseEntity getDocumentFromGNRecordsIndexByUUID(@PathVariable("uuid") String uuid) {
         logger.info("getting a document by uuid from gn_records index: " + uuid);
-
-
-
-        return ResponseEntity.status(HttpStatus.OK).body("Hello World");
+        Map<String, Object> response =  geonetworkResourceService.searchMetadataRecordByUUID(uuid);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @GetMapping(path="/{uuid}", produces = "application/json")
