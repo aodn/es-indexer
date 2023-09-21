@@ -4,11 +4,15 @@ import au.org.aodn.esindexer.exception.DocumentExistingException;
 import au.org.aodn.esindexer.exception.IndexExistingException;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.ElasticsearchException;
+import co.elastic.clients.elasticsearch.core.GetResponse;
 import co.elastic.clients.elasticsearch.core.IndexRequest;
 import co.elastic.clients.elasticsearch.core.IndexResponse;
+import co.elastic.clients.elasticsearch.core.SearchResponse;
+import co.elastic.clients.elasticsearch.core.search.TotalHits;
 import co.elastic.clients.elasticsearch.indices.CreateIndexRequest;
 import co.elastic.clients.elasticsearch.indices.CreateIndexResponse;
 import co.elastic.clients.json.JsonData;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,20 +44,45 @@ public class IndexerServiceImpl implements IndexerService {
         return mappedMetadataValues;
     }
 
-    public void ingestNewDocument(JSONObject metadataValues) {
+    protected boolean isMetadataPublished(JSONObject metadataValues) {
+        return true;
+    }
+
+    protected boolean isMetadataUpdated(JSONObject metadataValues) {
+        return false;
+    }
+
+    protected boolean isMetadataExists(String uuid) throws IOException {
+        SearchResponse<ObjectNode> response = portalElasticsearchClient.search(s -> s
+            .index(indexName)
+            .query(q -> q
+                .match(t -> t
+                    .field("metadataIdentifier")
+                    .query(uuid)
+                )
+            ),
+                ObjectNode.class
+        );
+
+        TotalHits total = response.hits().total();
+        if (total != null) {
+            return total.value() > 0;
+        } else {
+            return false;
+        }
+    }
+
+    public void ingestNewDocument(JSONObject metadataValues) throws IOException {
         IndexRequest<JsonData> req;
         JSONObject mappedMetadataValues = mapMetadataValuesForPortalIndex(metadataValues);
-
-        // change to if?
-        try {
-            // TODO: check duplicate docs with same UUID
-            // TODO: check if metadata is published or not
+        // TODO: check if metadata is published or not
+        if (isMetadataExists((String) metadataValues.get("metadataIdentifier"))) {
+            throw new DocumentExistingException("Metadata with UUID: " + metadataValues.get("metadataIdentifier") + " already exists in index: " + indexName);
+        } else {
             logger.info("Ingesting a new metadata with UUID: " + metadataValues.get("metadataIdentifier") + " to index: " + indexName);
             req = IndexRequest.of(b -> b.index(indexName).withJson(new ByteArrayInputStream(mappedMetadataValues.toString().getBytes())));
             IndexResponse response = portalElasticsearchClient.index(req);
             logger.info("Metadata with UUID: " + metadataValues.get("metadataIdentifier") + " indexed with version: " + response.version());
-        } catch (IOException e) {
-            throw new DocumentExistingException("Metadata with UUID: " + metadataValues.get("metadataIdentifier") + " already exists in index: " + indexName);
         }
     }
 
@@ -88,7 +117,7 @@ public class IndexerServiceImpl implements IndexerService {
 
     }
 
-    public void indexAllMetadataRecordsFromGeoNetwork() {
+    protected void indexAllMetadataRecordsFromGeoNetwork() {
         // TODO: look for reindexing strategy instead? Note: need to create a new index first with selected mapping
         logger.info("All metadata records from GeoNetwork have been indexed to index: " + indexName);
     }

@@ -33,7 +33,7 @@ public class IndexerController {
     }
 
     @GetMapping(path="/{uuid}", produces = "application/json")
-    public ResponseEntity getDocumentFromPortalIndexByUUID(@PathVariable("uuid") Long uuid) {
+    public ResponseEntity getDocumentFromPortalIndexByUUID(@PathVariable("uuid") String uuid) {
 
         logger.info("getting a document by UUID: " + uuid);
 
@@ -41,7 +41,7 @@ public class IndexerController {
     }
 
     @PostMapping(path="/{uuid}", produces = "application/json")
-    public ResponseEntity addDocumentToIndexByUUID(@PathVariable("uuid") String uuid) {
+    public ResponseEntity addDocumentToIndexByUUID(@PathVariable("uuid") String uuid) throws IOException {
         JSONObject metadataValues = geonetworkResourceService.searchMetadataRecordByUUID(uuid);
         /* we don't know if the destination index exists or not when this request is called
         given the Elasticsearch instance can be reset/reinstalled at any time
@@ -51,6 +51,7 @@ public class IndexerController {
             which includes the one received in this request,
             so it's not necessary to call ingestNewDocument() from indexerService here */
             indexerService.createIndexFromMappingJSONFile();
+            // TODO: what to do if the destination index already exists but ES7 of GeoNetwork4 is reinstalled?
         } catch (IndexExistingException e) {
             logger.info("** Skip creating new index ** - " + e.getMessage());
             // ingest the GeoNetwork metadata as a new document to the existing destination index
