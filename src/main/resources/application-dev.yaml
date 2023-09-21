@@ -7,9 +7,10 @@ server:
   port: 8081
 
 elasticsearch:
-  portal_index:
-    serverUrl: http://3.27.134.253:9200
-    apiKey: cEFDM3E0b0JJMG9OZ1R4YzlCR1Q6ZGxsQnBvRXlTcm12SFVaYjFIM24zdw==
+  index:
+    name: dummy_index
+  serverUrl: http://3.27.147.190:9200
+  apiKey: cmVER3NJb0JsbTJqVmhzN1NOSWk6NjNtaGxldjRUV2lHY2FSMVIyWkc4UQ==
 
 geonetwork:
   search:

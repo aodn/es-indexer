@@ -15,10 +15,10 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class PortalElasticsearchConfig {
 
-    @Value("${elasticsearch.portal_index.serverUrl}")
+    @Value("${elasticsearch.serverUrl}")
     private String serverUrl;
 
-    @Value("${elasticsearch.portal_index.apiKey}")
+    @Value("${elasticsearch.apiKey}")
     private String apiKey;
 
     @Bean(name = "portalElasticsearchClient")
