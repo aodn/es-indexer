@@ -6,4 +6,5 @@ import java.util.Map;
 
 public interface GeoNetworkResourceService {
     JSONObject searchMetadataRecordByUUID(String uuid);
+    int getMetadataRecordsCount();
 }

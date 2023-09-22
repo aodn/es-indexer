@@ -1,8 +1,11 @@
 package au.org.aodn.esindexer.controller;
 
-import au.org.aodn.esindexer.exception.IndexExistingException;
 import au.org.aodn.esindexer.service.IndexerService;
 import au.org.aodn.esindexer.service.GeoNetworkResourceService;
+import co.elastic.clients.elasticsearch.core.search.Hit;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,30 +36,31 @@ public class IndexerController {
     }
 
     @GetMapping(path="/{uuid}", produces = "application/json")
-    public ResponseEntity getDocumentFromPortalIndexByUUID(@PathVariable("uuid") String uuid) {
-
+    public ResponseEntity getDocumentByUUID(@PathVariable("uuid") String uuid) throws IOException {
         logger.info("getting a document by UUID: " + uuid);
+        Hit<ObjectNode> doc =  indexerService.getDocumentByUUID(uuid);
+        return ResponseEntity.status(HttpStatus.OK).body(doc);
+    }
 
+    @PostMapping(path="/all", consumes = "application/json", produces = "application/json")
+    @Operation(security = { @SecurityRequirement(name = "X-API-Key") })
+    public ResponseEntity indexAllMetadataRecords(@RequestParam(value = "confirm", defaultValue = "false") Boolean confirm) {
+        indexerService.indexAllMetadataRecordsFromGeoNetwork(confirm);
         return ResponseEntity.status(HttpStatus.OK).body("Hello World");
     }
 
     @PostMapping(path="/{uuid}", produces = "application/json")
-    public ResponseEntity addDocumentToIndexByUUID(@PathVariable("uuid") String uuid) throws IOException {
+    @Operation(security = { @SecurityRequirement(name = "X-API-Key") })
+    public ResponseEntity addDocumentByUUID(@PathVariable("uuid") String uuid) throws IOException {
         JSONObject metadataValues = geonetworkResourceService.searchMetadataRecordByUUID(uuid);
-        /* we don't know if the destination index exists or not when this request is called
-        given the Elasticsearch instance can be reset/reinstalled at any time
-        do try to create a new destination index every time this request is called */
-        try {
-            /* successfully created a new destination index will trigger bulk indexing all metadata records from GeoNetwork
-            which includes the one received in this request,
-            so it's not necessary to call ingestNewDocument() from indexerService here */
-            indexerService.createIndexFromMappingJSONFile();
-            // TODO: what to do if the destination index already exists but ES7 of GeoNetwork4 is reinstalled?
-        } catch (IndexExistingException e) {
-            logger.info("** Skip creating new index ** - " + e.getMessage());
-            // ingest the GeoNetwork metadata as a new document to the existing destination index
-            indexerService.ingestNewDocument(metadataValues);
-        }
+        indexerService.indexMetadata(metadataValues);
+        return ResponseEntity.status(HttpStatus.OK).body("Hello World");
+    }
+
+    @DeleteMapping(path="/{uuid}", produces = "application/json")
+    @Operation(security = { @SecurityRequirement(name = "X-API-Key") })
+    public ResponseEntity deleteDocumentByUUID(@PathVariable("uuid") String uuid) throws IOException {
+        indexerService.deleteDocumentByUUID(uuid);
         return ResponseEntity.status(HttpStatus.OK).body("Hello World");
     }
 }
