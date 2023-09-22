@@ -73,11 +73,15 @@ public class IndexerServiceImpl implements IndexerService {
                 ), ObjectNode.class
             );
             TotalHits total = Objects.requireNonNull(response.hits().total());
-            boolean isExactResult = total.relation() == TotalHitsRelation.Eq && uuid.equals(Objects.requireNonNull(response.hits().hits().get(0).source()).get("metadataIdentifier").asText());
-            if (!isExactResult) {
-                throw new DocumentNotFoundException("Document with UUID: " + uuid + " not found in index: " + indexName);
+            if (total.value() > 0) {
+                boolean isExactResult = total.relation() == TotalHitsRelation.Eq && Objects.equals(uuid, Objects.requireNonNull(Objects.requireNonNull(response.hits().hits().get(0).source()).get("metadataIdentifier").asText()));
+                if (!isExactResult) {
+                    throw new DocumentNotFoundException("Document with UUID: " + uuid + " not found in index: " + indexName);
+                } else {
+                    return response.hits().hits().get(0);
+                }
             } else {
-                return response.hits().hits().get(0);
+                throw new DocumentNotFoundException("Document with UUID: " + uuid + " not found in index: " + indexName);
             }
         } catch (IOException e) {
             throw new IOException("Failed to get document with UUID: " + uuid + " | " + e.getMessage());
@@ -90,6 +94,8 @@ public class IndexerServiceImpl implements IndexerService {
             */
         int geoNetworkResourceServiceMetadataRecordsCount = geoNetworkResourceService.getMetadataRecordsCount();
         long portalIndexDocumentsCount = this.getDocumentsCount();
+        logger.info("GeoNetwork metadata records count: " + geoNetworkResourceServiceMetadataRecordsCount);
+        logger.info("Portal index documents count: " + portalIndexDocumentsCount);
         return geoNetworkResourceServiceMetadataRecordsCount == 1 && portalIndexDocumentsCount > 0;
     }
 
@@ -158,13 +164,14 @@ public class IndexerServiceImpl implements IndexerService {
 
     public void deleteDocumentByUUID(String uuid) throws IOException {
         logger.info("Deleting document with UUID: " + uuid + " from index: " + indexName);
-        Hit<ObjectNode> doc = this.getDocumentByUUID(uuid);
-        if (doc != null) {
+        try {
+            Hit<ObjectNode> doc = this.getDocumentByUUID(uuid);
             portalElasticsearchClient.delete(b -> b
-                .index(indexName)
-                .id(doc.id())
+                    .index(indexName)
+                    .id(doc.id())
             );
-        } else {
+            logger.info("Document with UUID: " + uuid + " deleted from index: " + indexName);
+        } catch (DocumentNotFoundException e) {
             logger.info("Document with UUID: " + uuid + " not found in index: " + indexName + ", skip deleting");
         }
     }

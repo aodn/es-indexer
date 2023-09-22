@@ -38,7 +38,7 @@ public class IndexerController {
     @GetMapping(path="/{uuid}", produces = "application/json")
     public ResponseEntity getDocumentByUUID(@PathVariable("uuid") String uuid) throws IOException {
         logger.info("getting a document by UUID: " + uuid);
-        Hit<ObjectNode> doc =  indexerService.getDocumentByUUID(uuid);
+        ObjectNode doc =  indexerService.getDocumentByUUID(uuid).source();
         return ResponseEntity.status(HttpStatus.OK).body(doc);
     }
 
