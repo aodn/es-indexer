@@ -44,6 +44,7 @@ public class IndexerServiceImpl implements IndexerService {
 
     private static final Logger logger = LoggerFactory.getLogger(IndexerServiceImpl.class);
 
+    // TODO: map metadata values from GeoNetwork to portal index
     protected JSONObject mapMetadataValuesForPortalIndex(JSONObject metadataValues) {
         JSONObject mappedMetadataValues = new JSONObject();
         mappedMetadataValues.put("metadataIdentifier", metadataValues.get("metadataIdentifier"));
