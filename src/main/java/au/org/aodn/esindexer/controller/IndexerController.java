@@ -2,7 +2,6 @@ package au.org.aodn.esindexer.controller;
 
 import au.org.aodn.esindexer.service.IndexerService;
 import au.org.aodn.esindexer.service.GeoNetworkResourceService;
-import co.elastic.clients.elasticsearch.core.search.Hit;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
