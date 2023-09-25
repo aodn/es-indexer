@@ -99,9 +99,8 @@ public class IndexerServiceImpl implements IndexerService {
         return geoNetworkResourceServiceMetadataRecordsCount == 1 && portalIndexDocumentsCount > 0;
     }
 
-    // TODO: check if metadata is published
     protected boolean isMetadataPublished(JSONObject metadataValues) {
-        return true;
+        return metadataValues.get("isPublishedToAll") == "true";
     }
 
     protected void deleteIndexStore() {
