@@ -1,11 +1,9 @@
 package au.org.aodn.esindexer.service;
 
 import au.org.aodn.esindexer.configuration.AppConstants;
-import au.org.aodn.esindexer.exception.CreateIndexException;
-import au.org.aodn.esindexer.exception.DeleteIndexException;
-import au.org.aodn.esindexer.exception.DocumentNotFoundException;
-import au.org.aodn.esindexer.exception.IndexAllRequestNotConfirmedException;
+import au.org.aodn.esindexer.exception.*;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
+import co.elastic.clients.elasticsearch._types.ElasticsearchException;
 import co.elastic.clients.elasticsearch.core.IndexRequest;
 import co.elastic.clients.elasticsearch.core.IndexResponse;
 import co.elastic.clients.elasticsearch.core.SearchResponse;
@@ -56,8 +54,8 @@ public class IndexerServiceImpl implements IndexerService {
             return portalElasticsearchClient.count(s -> s
                     .index(indexName)
             ).count();
-        } catch (IOException e) {
-            return 0;
+        } catch (ElasticsearchException | IOException e) {
+            throw new IndexNotFoundException("Failed to get documents count from index: " + indexName + " | " + e.getMessage());
         }
     }
 
@@ -83,19 +81,16 @@ public class IndexerServiceImpl implements IndexerService {
             } else {
                 throw new DocumentNotFoundException("Document with UUID: " + uuid + " not found in index: " + indexName);
             }
-        } catch (IOException e) {
+        } catch (ElasticsearchException | IOException e) {
             throw new IOException("Failed to get document with UUID: " + uuid + " | " + e.getMessage());
         }
     }
 
-    protected boolean isGeoNetworkInstanceReinstalled() {
+    protected boolean isGeoNetworkInstanceReinstalled(long portalIndexDocumentsCount) {
         /* compare if GeoNetwork has 1 only metadata (the recently added one which triggered the indexer)
             and the portal index has more than 0 documents (the most recent metadata yet indexed to portal index at this point)
             */
         int geoNetworkResourceServiceMetadataRecordsCount = geoNetworkResourceService.getMetadataRecordsCount();
-        long portalIndexDocumentsCount = this.getDocumentsCount();
-        logger.info("GeoNetwork metadata records count: " + geoNetworkResourceServiceMetadataRecordsCount);
-        logger.info("Portal index documents count: " + portalIndexDocumentsCount);
         return geoNetworkResourceServiceMetadataRecordsCount == 1 && portalIndexDocumentsCount > 0;
     }
 
@@ -110,10 +105,8 @@ public class IndexerServiceImpl implements IndexerService {
                 logger.info("Deleting index: " + indexName);
                 portalElasticsearchClient.indices().delete(b -> b.index(indexName));
                 logger.info("Index: " + indexName + " deleted");
-            } else {
-                logger.info("Index: " + indexName + " not found");
             }
-        } catch (IOException e) {
+        } catch (ElasticsearchException | IOException e) {
             throw new DeleteIndexException("Failed to delete index: " + indexName + " | " + e.getMessage());
         }
     }
@@ -122,15 +115,24 @@ public class IndexerServiceImpl implements IndexerService {
     public void indexMetadata(JSONObject metadataValues) throws IOException {
         IndexRequest<JsonData> req;
         JSONObject mappedMetadataValues = mapMetadataValuesForPortalIndex(metadataValues);
+        long portalIndexDocumentsCount = 0;
 
-        // check if GeoNetwork instance has been reinstalled
-        if (this.isGeoNetworkInstanceReinstalled()) {
-            logger.info("GeoNetwork instance has been reinstalled, recreating index: " + indexName);
+        // count portal index documents, or create index if not found from defined mapping JSON file
+        try {
+           portalIndexDocumentsCount = this.getDocumentsCount();
+
+            // check if GeoNetwork instance has been reinstalled
+            if (this.isGeoNetworkInstanceReinstalled(portalIndexDocumentsCount)) {
+                logger.info("GeoNetwork instance has been reinstalled, recreating index: " + indexName);
+                this.createIndexFromMappingJSONFile();
+            } else {
+                // delete the existing document if found first
+                this.deleteDocumentByUUID((String) metadataValues.get("metadataIdentifier"));
+            }
+        } catch (IndexNotFoundException e) {
+            logger.info("Index: " + indexName + " not found, creating index");
             this.createIndexFromMappingJSONFile();
         }
-
-        // delete the existing document if found first
-        this.deleteDocumentByUUID((String) metadataValues.get("metadataIdentifier"));
 
         // index the metadata if it is published
         if (this.isMetadataPublished(metadataValues)) {
@@ -157,7 +159,7 @@ public class IndexerServiceImpl implements IndexerService {
             );
             CreateIndexResponse response = portalElasticsearchClient.indices().create(req);
             logger.info(response.toString());
-        } catch (IOException e) {
+        } catch (ElasticsearchException | IOException e) {
             throw new CreateIndexException("Failed to create index: " + indexName + " | " + e.getMessage());
         }
     }

@@ -9,8 +9,8 @@ server:
 elasticsearch:
   index:
     name: dummy_index
-  serverUrl: http://3.27.147.190:9200
-  apiKey: cmVER3NJb0JsbTJqVmhzN1NOSWk6NjNtaGxldjRUV2lHY2FSMVIyWkc4UQ==
+  serverUrl: http://localhost:9201
+  apiKey: cU81dHpvb0JkZHZ5YkVCWFNRWjM6ZkR0cVZjN0ZSLUtTZkNZNklXU1JZdw==
 
 geonetwork:
   search:
