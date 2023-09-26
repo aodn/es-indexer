@@ -16,7 +16,8 @@ import co.elastic.clients.elasticsearch.indices.CreateIndexRequest;
 import co.elastic.clients.elasticsearch.indices.CreateIndexResponse;
 import co.elastic.clients.json.JsonData;
 import co.elastic.clients.transport.endpoints.BooleanResponse;
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -42,6 +43,9 @@ public class IndexerServiceImpl implements IndexerService {
 
     @Value("${elasticsearch.index.name}")
     private String indexName;
+
+    @Autowired
+    ObjectMapper objectMapper;
 
     @Autowired
     MetadataMapper metadataMapper;
@@ -97,9 +101,9 @@ public class IndexerServiceImpl implements IndexerService {
     }
 
     protected boolean isMetadataPublished(String uuid) {
-        // read for the published status from GN Elasticsearch index
+        /* read for the published status from GN Elasticsearch index, the flag is not part of the XML body */
         JSONObject elasticSearchMetadataValues = geoNetworkResourceService.searchMetadataRecordByUUIDFromGNRecordsIndex(uuid);
-        return elasticSearchMetadataValues.get("isPublishedToAll") == "true";
+        return elasticSearchMetadataValues.get("isPublishedToAll").equals("true");
     }
 
     protected void deleteIndexStore() {
@@ -118,7 +122,9 @@ public class IndexerServiceImpl implements IndexerService {
 
     public void indexMetadata(JSONObject metadataValues) throws IOException {
         IndexRequest<JsonData> req;
-        JSONObject mappedMetadataValues = metadataMapper.mapMetadataValuesForPortalIndex(metadataValues);
+        JsonNode rootNode = objectMapper.readTree(metadataValues.toString());
+        String uuid = metadataParser.getMetadataIdentifier(rootNode);
+        JSONObject mappedMetadataValues = metadataMapper.mapMetadataValuesForPortalIndex(rootNode);
         long portalIndexDocumentsCount;
 
         // count portal index documents, or create index if not found from defined mapping JSON file
@@ -131,7 +137,7 @@ public class IndexerServiceImpl implements IndexerService {
                 this.createIndexFromMappingJSONFile();
             } else {
                 // delete the existing document if found first
-                this.deleteDocumentByUUID(metadataParser.getMetadataIdentifier(metadataValues));
+                this.deleteDocumentByUUID(uuid);
             }
         } catch (IndexNotFoundException e) {
             logger.info("Index: " + indexName + " not found, creating index");
@@ -139,13 +145,13 @@ public class IndexerServiceImpl implements IndexerService {
         }
 
         // index the metadata if it is published
-        if (this.isMetadataPublished(metadataParser.getMetadataIdentifier(metadataValues))) {
-            logger.info("Ingesting a new metadata with UUID: " + metadataParser.getMetadataIdentifier(metadataValues) + " to index: " + indexName);
+        if (this.isMetadataPublished(uuid)) {
+            logger.info("Ingesting a new metadata with UUID: " + uuid + " to index: " + indexName);
             req = IndexRequest.of(b -> b.index(indexName).withJson(new ByteArrayInputStream(mappedMetadataValues.toString().getBytes())));
             IndexResponse response = portalElasticsearchClient.index(req);
-            logger.info("Metadata with UUID: " + metadataParser.getMetadataIdentifier(metadataValues) + " indexed with version: " + response.version());
+            logger.info("Metadata with UUID: " + uuid + " indexed with version: " + response.version());
         } else {
-            logger.info("Metadata with UUID: " + metadataParser.getMetadataIdentifier(metadataValues) + " is not published yet, skip indexing");
+            logger.info("Metadata with UUID: " + uuid + " is not published yet, skip indexing");
         }
     }
 

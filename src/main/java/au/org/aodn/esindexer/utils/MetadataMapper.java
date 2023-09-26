@@ -16,14 +16,11 @@ public class MetadataMapper {
     MetadataParser metadataParser;
 
     // TODO: map metadata values from GeoNetwork to portal index
-    public JSONObject mapMetadataValuesForPortalIndex(JSONObject metadataValues) throws JsonProcessingException {
+    public JSONObject mapMetadataValuesForPortalIndex(JsonNode rootNode) {
         JSONObject mappedMetadataValues = new JSONObject();
 
-        // find the values from GeoNetwork metadata record
-        String metadataIdentifier = metadataParser.getMetadataIdentifier(metadataValues);
-
-        // put the values into the portal index structure
-        mappedMetadataValues.put("metadataIdentifier", metadataIdentifier);
+        // put the parsed values into the portal index structure
+        mappedMetadataValues.put("metadataIdentifier", metadataParser.getMetadataIdentifier(rootNode));
 
         // return the mapped metadata values
         return mappedMetadataValues;
