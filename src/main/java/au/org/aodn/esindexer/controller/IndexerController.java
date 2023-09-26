@@ -28,13 +28,23 @@ public class IndexerController {
     GeoNetworkResourceService geonetworkResourceService;
 
     @GetMapping(path="/gn_records/{uuid}", produces = "application/json")
+    @Operation(description = "Get a document from GeoNetwork Elasticsearch by UUID")
+    public ResponseEntity getMetadataRecordFromGeoNetworkElasticsearchByUUID(@PathVariable("uuid") String uuid) {
+        logger.info("getting a document by UUID: " + uuid);
+        JSONObject response =  geonetworkResourceService.searchMetadataRecordByUUIDFromGNRecordsIndex(uuid);
+        return ResponseEntity.status(HttpStatus.OK).body(response.toString());
+    }
+
+    @GetMapping(path="/records/{uuid}", produces = "application/json")
+    @Operation(description = "Get a document from GeoNetwork by UUID directly - JSON format response")
     public ResponseEntity getMetadataRecordFromGeoNetworkByUUID(@PathVariable("uuid") String uuid) {
         logger.info("getting a document by UUID: " + uuid);
-        JSONObject response =  geonetworkResourceService.searchMetadataRecordByUUID(uuid);
+        JSONObject response =  geonetworkResourceService.searchMetadataRecordByUUIDFromGN4(uuid);
         return ResponseEntity.status(HttpStatus.OK).body(response.toString());
     }
 
     @GetMapping(path="/{uuid}", produces = "application/json")
+    @Operation(description = "Get a document from portal index by UUID")
     public ResponseEntity getDocumentByUUID(@PathVariable("uuid") String uuid) throws IOException {
         logger.info("getting a document by UUID: " + uuid);
         ObjectNode doc =  indexerService.getDocumentByUUID(uuid).source();
@@ -42,22 +52,22 @@ public class IndexerController {
     }
 
     @PostMapping(path="/all", consumes = "application/json", produces = "application/json")
-    @Operation(security = { @SecurityRequirement(name = "X-API-Key") })
+    @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Index all metadata records from GeoNetwork")
     public ResponseEntity indexAllMetadataRecords(@RequestParam(value = "confirm", defaultValue = "false") Boolean confirm) {
         indexerService.indexAllMetadataRecordsFromGeoNetwork(confirm);
         return ResponseEntity.status(HttpStatus.OK).body("Hello World");
     }
 
     @PostMapping(path="/{uuid}", produces = "application/json")
-    @Operation(security = { @SecurityRequirement(name = "X-API-Key") })
+    @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Index a metadata record by UUID")
     public ResponseEntity addDocumentByUUID(@PathVariable("uuid") String uuid) throws IOException {
-        JSONObject metadataValues = geonetworkResourceService.searchMetadataRecordByUUID(uuid);
+        JSONObject metadataValues = geonetworkResourceService.searchMetadataRecordByUUIDFromGN4(uuid);
         indexerService.indexMetadata(metadataValues);
         return ResponseEntity.status(HttpStatus.OK).body("Hello World");
     }
 
     @DeleteMapping(path="/{uuid}", produces = "application/json")
-    @Operation(security = { @SecurityRequirement(name = "X-API-Key") })
+    @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Delete a metadata record by UUID")
     public ResponseEntity deleteDocumentByUUID(@PathVariable("uuid") String uuid) throws IOException {
         indexerService.deleteDocumentByUUID(uuid);
         return ResponseEntity.status(HttpStatus.OK).body("Hello World");

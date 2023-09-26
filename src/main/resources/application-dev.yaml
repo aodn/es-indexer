@@ -13,6 +13,8 @@ elasticsearch:
   apiKey: cU81dHpvb0JkZHZ5YkVCWFNRWjM6ZkR0cVZjN0ZSLUtTZkNZNklXU1JZdw==
 
 geonetwork:
+  records:
+    endpoint: http://localhost:8080/geonetwork/srv/api/records/
   search:
     api:
       endpoint: http://localhost:8080/geonetwork/srv/api/search/records/_search

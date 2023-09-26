@@ -7,12 +7,11 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
+
 import java.util.Map;
 
 @Service
@@ -21,14 +20,17 @@ public class GeoNetworkResourceServiceImpl implements GeoNetworkResourceService 
     RestTemplate restTemplate;
 
     @Value("${geonetwork.search.api.endpoint}")
-    private String searchEndpoint;
+    private String geoNetworkElasticsearchEndpoint;
 
-    public JSONObject searchMetadataRecordByUUID(String uuid) {
+    @Value("${geonetwork.records.endpoint}")
+    private String geoNetworkRecordsEndpoint;
+
+    public JSONObject searchMetadataRecordByUUIDFromGNRecordsIndex(String uuid) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         GeoNetworkSearchRequestBodyDTO searchRequestBodyDTO = new GeoNetworkSearchRequestBodyDTO(uuid);
         HttpEntity<GeoNetworkSearchRequestBodyDTO> requestEntity = new HttpEntity<>(searchRequestBodyDTO, headers);
-        ResponseEntity<Map> responseEntity = restTemplate.postForEntity(searchEndpoint, requestEntity, Map.class);
+        ResponseEntity<Map> responseEntity = restTemplate.postForEntity(geoNetworkElasticsearchEndpoint, requestEntity, Map.class);
         if (responseEntity.getStatusCode().is2xxSuccessful()) {
             JSONObject jsonResult = new JSONObject(responseEntity.getBody());
             JSONObject outerHits = jsonResult.getJSONObject("hits");
@@ -44,12 +46,28 @@ public class GeoNetworkResourceServiceImpl implements GeoNetworkResourceService 
         }
     }
 
+    public JSONObject searchMetadataRecordByUUIDFromGN4(String uuid) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<String> requestEntity = new HttpEntity<>(headers);
+        try {
+            ResponseEntity<Map> responseEntity = restTemplate.exchange(geoNetworkRecordsEndpoint + uuid, HttpMethod.GET, requestEntity, Map.class);
+            if (responseEntity.getStatusCode().is2xxSuccessful()) {
+                return new JSONObject(responseEntity.getBody());
+            } else {
+                throw new RuntimeException("Failed to fetch data from the API");
+            }
+        } catch (HttpClientErrorException.NotFound e) {
+            throw new MetadataNotFoundException("Unable to find metadata record with UUID: " + uuid + " in GeoNetwork");
+        }
+    }
+
     public int getMetadataRecordsCount() {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         MetadataRecordsCountRequestBodyDTO requestBodyDTO = new MetadataRecordsCountRequestBodyDTO();
         HttpEntity<MetadataRecordsCountRequestBodyDTO> requestEntity = new HttpEntity<>(requestBodyDTO, headers);
-        ResponseEntity<Map> responseEntity = restTemplate.postForEntity(searchEndpoint, requestEntity, Map.class);
+        ResponseEntity<Map> responseEntity = restTemplate.postForEntity(geoNetworkElasticsearchEndpoint, requestEntity, Map.class);
         if (responseEntity.getStatusCode().is2xxSuccessful()) {
             JSONObject jsonResult = new JSONObject(responseEntity.getBody());
             JSONObject outerHits = jsonResult.getJSONObject("hits");
