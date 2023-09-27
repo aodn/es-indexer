@@ -19,17 +19,40 @@ public class MetadataParser {
     private JsonNode extractingConfig;
     private static final Logger logger = LoggerFactory.getLogger(MetadataParser.class);
 
-    protected String getTextValueAtPath(JsonNode node, String key) {
-        String[] pathElements = extractingConfig.get(key).toString().replace("\"", "").split("/");
-        for (String currentElement : pathElements) {
-            node = node.path(currentElement);
-            if (node.isMissingNode()) {
-                throw new ExtractingValueException("Error extracting value from GeoNetwork metadata JSON");
-            }
-            if (currentElement.equals("#text")) {
-                return node.asText();
+    protected String getTextValueAtPath(JsonNode rootNode, String key) {
+
+         /*
+         Some metadata fields can be retrieved by different GML paths in different metadata records.
+
+         E.g
+         "license" can be retrieved by "mdb:identificationInfo/mri:MD_DataIdentification/mri:resourceConstraints/mco:MD_LegalConstraints/mco:reference/cit:CI_Citation/cit:onlineResource/cit:CI_OnlineResource/cit:linkage/gco:CharacterString/#text"
+         OR "mdb:identificationInfo/mri:MD_DataIdentification/mri:resourceConstraints/mco:MD_LegalConstraints/mco:otherConstraints/gco:CharacterString/#text"
+
+         Hence, the mapping config file contains the path to the field in the following format:
+
+         {
+            "key": ["path_option_1", "path_option_2", ...]
+         }
+
+         Notice "OR", if the field cannot be found in the first path, it will try the second path, and so on.
+         */
+        for (JsonNode pathOption : extractingConfig.get(key)) {
+            String[] pathElements = pathOption.toString().replace("\"", "").split("/");
+            JsonNode searchNode = rootNode;
+            logger.info("Trying path: " + pathOption);
+            for (String currentElement : pathElements) {
+                searchNode = searchNode.path(currentElement);
+                if (searchNode.isMissingNode()) {
+                    logger.info("Path not found: " + pathOption);
+                    break;
+                }
+                if (currentElement.equals("#text")) {
+                    logger.info("Found value: " + searchNode.asText()) ;
+                    return searchNode.asText();
+                }
             }
         }
+
         // throw exception if it reaches here
         throw new ExtractingValueException("Error extracting value from GeoNetwork metadata JSON");
     }
