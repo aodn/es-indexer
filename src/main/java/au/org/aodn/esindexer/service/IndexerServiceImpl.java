@@ -2,10 +2,10 @@ package au.org.aodn.esindexer.service;
 
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.exception.*;
-import au.org.aodn.esindexer.utils.MetadataMapper;
 import au.org.aodn.esindexer.utils.MetadataParser;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.ElasticsearchException;
+import co.elastic.clients.elasticsearch.core.DeleteResponse;
 import co.elastic.clients.elasticsearch.core.IndexRequest;
 import co.elastic.clients.elasticsearch.core.IndexResponse;
 import co.elastic.clients.elasticsearch.core.SearchResponse;
@@ -19,12 +19,15 @@ import co.elastic.clients.transport.endpoints.BooleanResponse;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import jakarta.json.stream.JsonGenerator;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayInputStream;
@@ -48,9 +51,6 @@ public class IndexerServiceImpl implements IndexerService {
     ObjectMapper objectMapper;
 
     @Autowired
-    MetadataMapper metadataMapper;
-
-    @Autowired
     MetadataParser metadataParser;
 
     private static final Logger logger = LoggerFactory.getLogger(IndexerServiceImpl.class);
@@ -67,18 +67,20 @@ public class IndexerServiceImpl implements IndexerService {
 
     public Hit<ObjectNode> getDocumentByUUID(String uuid) throws IOException {
         try {
+            /* Return JSONObject type won't work, hence return ObjectNode type which supported by Elasticsearch JAVA API,
+            there's no need to convert returned ObjectNode to JSONObject as well */
             SearchResponse<ObjectNode> response = portalElasticsearchClient.search(s -> s
                 .index(indexName)
                 .query(q -> q
                     .match(t -> t
-                        .field("metadataIdentifier")
+                        .field("id")
                         .query(uuid)
                     )
                 ), ObjectNode.class
             );
             TotalHits total = Objects.requireNonNull(response.hits().total());
             if (total.value() > 0) {
-                boolean isExactResult = total.relation() == TotalHitsRelation.Eq && Objects.equals(uuid, Objects.requireNonNull(Objects.requireNonNull(response.hits().hits().get(0).source()).get("metadataIdentifier").asText()));
+                boolean isExactResult = total.relation() == TotalHitsRelation.Eq && Objects.equals(uuid, Objects.requireNonNull(Objects.requireNonNull(response.hits().hits().get(0).source()).get("id").asText()));
                 if (!isExactResult) {
                     throw new DocumentNotFoundException("Document with UUID: " + uuid + " not found in index: " + indexName);
                 } else {
@@ -120,11 +122,11 @@ public class IndexerServiceImpl implements IndexerService {
     }
 
 
-    public void indexMetadata(JSONObject metadataValues) throws IOException {
+    public ResponseEntity<String> indexMetadata(JSONObject metadataValues) throws IOException {
         IndexRequest<JsonData> req;
-        JsonNode rootNode = objectMapper.readTree(metadataValues.toString());
-        String uuid = metadataParser.getMetadataIdentifier(rootNode);
-        JSONObject mappedMetadataValues = metadataMapper.mapMetadataValuesForPortalIndex(rootNode);
+        JsonNode rootMetadataFromGN = objectMapper.readTree(metadataValues.toString());
+        JSONObject mappedMetadataValues = metadataParser.extractToMappedValues(rootMetadataFromGN);
+        String uuid = mappedMetadataValues.getString("id");
         long portalIndexDocumentsCount;
 
         // count portal index documents, or create index if not found from defined mapping JSON file
@@ -150,13 +152,15 @@ public class IndexerServiceImpl implements IndexerService {
             req = IndexRequest.of(b -> b.index(indexName).withJson(new ByteArrayInputStream(mappedMetadataValues.toString().getBytes())));
             IndexResponse response = portalElasticsearchClient.index(req);
             logger.info("Metadata with UUID: " + uuid + " indexed with version: " + response.version());
+            return ResponseEntity.status(HttpStatus.OK).body(response.toString());
         } else {
             logger.info("Metadata with UUID: " + uuid + " is not published yet, skip indexing");
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
         }
     }
 
     protected void createIndexFromMappingJSONFile() {
-        ClassPathResource resource = new ClassPathResource("index_mapping_jsons/" + AppConstants.PORTAL_RECORDS_MAPPING_JSON_FILE);
+        ClassPathResource resource = new ClassPathResource("config_files/" + AppConstants.PORTAL_RECORDS_MAPPING_JSON_FILE);
 
         // delete the existing index if found first
         this.deleteIndexStore();
@@ -174,21 +178,23 @@ public class IndexerServiceImpl implements IndexerService {
         }
     }
 
-    public void deleteDocumentByUUID(String uuid) throws IOException {
+    public ResponseEntity<String> deleteDocumentByUUID(String uuid) throws IOException {
         logger.info("Deleting document with UUID: " + uuid + " from index: " + indexName);
         try {
             Hit<ObjectNode> doc = this.getDocumentByUUID(uuid);
-            portalElasticsearchClient.delete(b -> b
+            DeleteResponse response = portalElasticsearchClient.delete(b -> b
                     .index(indexName)
                     .id(doc.id())
             );
             logger.info("Document with UUID: " + uuid + " deleted from index: " + indexName);
+            return ResponseEntity.status(HttpStatus.OK).body(response.toString());
         } catch (DocumentNotFoundException e) {
             logger.info("Document with UUID: " + uuid + " not found in index: " + indexName + ", skip deleting");
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
         }
     }
 
-    public void indexAllMetadataRecordsFromGeoNetwork(Boolean confirm) {
+    public ResponseEntity<String> indexAllMetadataRecordsFromGeoNetwork(Boolean confirm) {
         if (!confirm) {
             throw new IndexAllRequestNotConfirmedException("Please confirm that you want to index all metadata records from GeoNetwork");
         }
@@ -198,5 +204,7 @@ public class IndexerServiceImpl implements IndexerService {
         logger.info("Indexing all metadata records from GeoNetwork");
         // TODO : reindex all metadata records from GeoNetwork
         logger.info("All metadata records from GeoNetwork have been indexed to index: " + indexName);
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
     }
 }

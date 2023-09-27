@@ -1,0 +1,5 @@
+{
+  "id": "mdb:metadataIdentifier/mcc:MD_Identifier/mcc:code/gco:CharacterString/#text",
+  "title": "mdb:identificationInfo/mri:MD_DataIdentification/mri:citation/cit:CI_Citation/cit:title/gco:CharacterString/#text",
+  "description": "mdb:identificationInfo/mri:MD_DataIdentification/mri:abstract/gco:CharacterString/#text"
+}

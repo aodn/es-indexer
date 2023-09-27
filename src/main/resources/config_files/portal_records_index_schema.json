@@ -1,0 +1,36 @@
+{
+  "mappings": {
+    "dynamic": "strict",
+    "properties": {
+      "id": { "type": "text" },
+      "stac_version": { "type": "text" },
+      "type": { "type": "text" },
+      "title": { "type": "text" },
+      "keywords": {
+        "type": "nested",
+        "properties": {
+          "keyword": {
+            "type": "text"
+          }
+        }
+      },
+      "description": { "type": "text" },
+      "license": { "type": "text" },
+      "links": {
+        "type": "nested",
+        "properties": {
+          "link" : {
+            "type": "nested",
+            "properties": {
+              "href": { "type": "text" },
+              "rel": { "type": "text" },
+              "type": { "type": "text" },
+              "title": { "type": "text" },
+              "description": { "type": "text" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

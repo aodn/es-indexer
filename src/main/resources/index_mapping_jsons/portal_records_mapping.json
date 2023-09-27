@@ -1,7 +1,0 @@
-{
-  "mappings": {
-    "properties": {
-      "metadataIdentifier": { "type": "text" }
-    }
-  }
-}
