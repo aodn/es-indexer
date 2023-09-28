@@ -5,6 +5,8 @@ import au.org.aodn.esindexer.dto.GeoNetworkSearchRequestBodyDTO;
 import au.org.aodn.esindexer.exception.MetadataNotFoundException;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
@@ -12,6 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -24,6 +28,8 @@ public class GeoNetworkResourceServiceImpl implements GeoNetworkResourceService 
 
     @Value("${geonetwork.records.endpoint}")
     private String geoNetworkRecordsEndpoint;
+
+    private static final Logger logger = LoggerFactory.getLogger(GeoNetworkResourceServiceImpl.class);
 
     public JSONObject searchMetadataRecordByUUIDFromGNRecordsIndex(String uuid) {
         HttpHeaders headers = new HttpHeaders();
@@ -62,17 +68,47 @@ public class GeoNetworkResourceServiceImpl implements GeoNetworkResourceService 
         }
     }
 
-    public int getMetadataRecordsCount() {
+    protected ResponseEntity<Map> responseEntityInit() {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         MetadataRecordsCountRequestBodyDTO requestBodyDTO = new MetadataRecordsCountRequestBodyDTO();
         HttpEntity<MetadataRecordsCountRequestBodyDTO> requestEntity = new HttpEntity<>(requestBodyDTO, headers);
-        ResponseEntity<Map> responseEntity = restTemplate.postForEntity(geoNetworkElasticsearchEndpoint, requestEntity, Map.class);
+        return restTemplate.postForEntity(geoNetworkElasticsearchEndpoint, requestEntity, Map.class);
+    }
+
+    public int getMetadataRecordsCount() {
+        ResponseEntity<Map> responseEntity = this.responseEntityInit();
         if (responseEntity.getStatusCode().is2xxSuccessful()) {
             JSONObject jsonResult = new JSONObject(responseEntity.getBody());
             JSONObject outerHits = jsonResult.getJSONObject("hits");
             JSONObject total = outerHits.getJSONObject("total");
             return (int) total.get("value");
+        } else {
+            throw new RuntimeException("Failed to fetch data from the API");
+        }
+    }
+
+    public List<JSONObject> getAllMetadataRecords() {
+        responseEntityInit();
+        ResponseEntity<Map> responseEntity = this.responseEntityInit();
+        if (responseEntity.getStatusCode().is2xxSuccessful()) {
+            JSONObject jsonResult = new JSONObject(responseEntity.getBody());
+            JSONObject outerHits = jsonResult.getJSONObject("hits");
+            JSONArray innerHit = outerHits.getJSONArray("hits");
+            if (!innerHit.isEmpty()) {
+                logger.info("Found " + innerHit.length() + " metadata records in GeoNetwork");
+                List<JSONObject> metadataRecords = new ArrayList<>();
+                for (int i = 0; i < innerHit.length(); i++) {
+                    // TODO: can this be optimised pulling all records directly from some endpoint of GN4?
+                    // for now assume that gn_records contents are same as in GN4, search for list of UUIDs from gn_records to get metadata records from GN4
+                    String uuid = (String) innerHit.getJSONObject(i).getJSONObject("_source").get("uuid");
+                    logger.info("Fetching metadata record with UUID: " + uuid);
+                    metadataRecords.add(this.searchMetadataRecordByUUIDFromGN4(uuid));
+                }
+                return metadataRecords;
+            } else {
+                throw new MetadataNotFoundException("Unable to find metadata records in GeoNetwork");
+            }
         } else {
             throw new RuntimeException("Failed to fetch data from the API");
         }

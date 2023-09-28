@@ -9,6 +9,6 @@ import java.io.IOException;
 public interface IndexerService {
     ResponseEntity<String> indexMetadata(JSONObject metadataValues) throws IOException;
     ResponseEntity<String> deleteDocumentByUUID(String uuid) throws IOException;
-    ResponseEntity<String> indexAllMetadataRecordsFromGeoNetwork(Boolean confirm);
+    ResponseEntity<String> indexAllMetadataRecordsFromGeoNetwork(Boolean confirm) throws IOException;
     Hit<ObjectNode> getDocumentByUUID(String uuid) throws IOException;
 }

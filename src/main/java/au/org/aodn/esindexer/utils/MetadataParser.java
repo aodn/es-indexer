@@ -16,7 +16,7 @@ import java.io.IOException;
 @Component
 public class MetadataParser {
 
-    private JsonNode extractingConfig;
+    private final JsonNode extractingConfig;
     private static final Logger logger = LoggerFactory.getLogger(MetadataParser.class);
 
     protected String getTextValueAtPath(JsonNode rootNode, String key) {

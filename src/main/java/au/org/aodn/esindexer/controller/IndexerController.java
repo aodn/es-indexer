@@ -55,7 +55,7 @@ public class IndexerController {
 
     @PostMapping(path="/all", consumes = "application/json", produces = "application/json")
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Index all metadata records from GeoNetwork")
-    public ResponseEntity<String> indexAllMetadataRecords(@RequestParam(value = "confirm", defaultValue = "false") Boolean confirm) {
+    public ResponseEntity<String> indexAllMetadataRecords(@RequestParam(value = "confirm", defaultValue = "false") Boolean confirm) throws IOException {
         return indexerService.indexAllMetadataRecordsFromGeoNetwork(confirm);
     }
 

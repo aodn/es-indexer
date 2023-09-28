@@ -5,10 +5,8 @@ import au.org.aodn.esindexer.exception.*;
 import au.org.aodn.esindexer.utils.MetadataParser;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.ElasticsearchException;
-import co.elastic.clients.elasticsearch.core.DeleteResponse;
-import co.elastic.clients.elasticsearch.core.IndexRequest;
-import co.elastic.clients.elasticsearch.core.IndexResponse;
-import co.elastic.clients.elasticsearch.core.SearchResponse;
+import co.elastic.clients.elasticsearch.core.*;
+import co.elastic.clients.elasticsearch.core.bulk.BulkResponseItem;
 import co.elastic.clients.elasticsearch.core.search.Hit;
 import co.elastic.clients.elasticsearch.core.search.TotalHits;
 import co.elastic.clients.elasticsearch.core.search.TotalHitsRelation;
@@ -16,10 +14,12 @@ import co.elastic.clients.elasticsearch.indices.CreateIndexRequest;
 import co.elastic.clients.elasticsearch.indices.CreateIndexResponse;
 import co.elastic.clients.json.JsonData;
 import co.elastic.clients.transport.endpoints.BooleanResponse;
+import co.elastic.clients.util.BinaryData;
+import co.elastic.clients.util.ContentType;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import jakarta.json.stream.JsonGenerator;
+import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -135,7 +135,7 @@ public class IndexerServiceImpl implements IndexerService {
 
             // check if GeoNetwork instance has been reinstalled
             if (this.isGeoNetworkInstanceReinstalled(portalIndexDocumentsCount)) {
-                logger.info("GeoNetwork instance has been reinstalled, recreating index: " + indexName);
+                logger.info("GeoNetwork instance has been reinstalled, recreating portal index: " + indexName);
                 this.createIndexFromMappingJSONFile();
             } else {
                 // delete the existing document if found first
@@ -194,16 +194,42 @@ public class IndexerServiceImpl implements IndexerService {
         }
     }
 
-    public ResponseEntity<String> indexAllMetadataRecordsFromGeoNetwork(Boolean confirm) {
+    public ResponseEntity<String> indexAllMetadataRecordsFromGeoNetwork(Boolean confirm) throws IOException {
+        BulkRequest.Builder bulkRequest = new BulkRequest.Builder();
         if (!confirm) {
             throw new IndexAllRequestNotConfirmedException("Please confirm that you want to index all metadata records from GeoNetwork");
         }
 
+        // recreate index from mapping JSON file
         this.createIndexFromMappingJSONFile();
 
         logger.info("Indexing all metadata records from GeoNetwork");
-        // TODO : reindex all metadata records from GeoNetwork
-        logger.info("All metadata records from GeoNetwork have been indexed to index: " + indexName);
+        for (JSONObject metadataRecord : geoNetworkResourceService.getAllMetadataRecords()) {
+            JSONObject mappedMetadataValues = metadataParser.extractToMappedValues(objectMapper.readTree(metadataRecord.toString()));
+            ByteArrayInputStream input = new ByteArrayInputStream(mappedMetadataValues.toString().getBytes());
+            BinaryData data = BinaryData.of(IOUtils.toByteArray(input), ContentType.APPLICATION_JSON);
+            bulkRequest.operations(op -> op
+                .index(idx -> idx
+                    .index(indexName)
+                        .document(data)
+                    )
+                );
+        }
+
+        BulkResponse result = portalElasticsearchClient.bulk(bulkRequest.build());
+
+        // Log errors, if any
+        if (result.errors()) {
+            logger.error("Bulk had errors");
+            for (BulkResponseItem item: result.items()) {
+                if (item.error() != null) {
+                    logger.error(item.error().reason());
+                }
+            }
+        } else {
+            logger.info("All metadata records from GeoNetwork have been indexed to index: " + indexName);
+            return ResponseEntity.status(HttpStatus.OK).body(result.toString());
+        }
 
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
     }
