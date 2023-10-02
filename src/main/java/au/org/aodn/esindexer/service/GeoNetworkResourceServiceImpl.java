@@ -102,7 +102,6 @@ public class GeoNetworkResourceServiceImpl implements GeoNetworkResourceService 
                     // TODO: can this be optimised pulling all records directly from some endpoint of GN4?
                     // for now assume that gn_records contents are same as in GN4, search for list of UUIDs from gn_records to get metadata records from GN4
                     String uuid = (String) innerHit.getJSONObject(i).getJSONObject("_source").get("uuid");
-                    logger.info("Fetching metadata record with UUID: " + uuid);
                     metadataRecords.add(this.searchMetadataRecordByUUIDFromGN4(uuid));
                 }
                 return metadataRecords;

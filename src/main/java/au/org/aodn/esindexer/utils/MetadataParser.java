@@ -12,6 +12,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.concurrent.atomic.AtomicLong;
 
 @Component
 public class MetadataParser {
@@ -39,22 +40,18 @@ public class MetadataParser {
         for (JsonNode pathOption : extractingConfig.get(key)) {
             String[] pathElements = pathOption.toString().replace("\"", "").split("/");
             JsonNode searchNode = rootNode;
-            logger.info("Trying path: " + pathOption);
             for (String currentElement : pathElements) {
                 searchNode = searchNode.path(currentElement);
                 if (searchNode.isMissingNode()) {
-                    logger.info("Path not found: " + pathOption);
+                    logger.warn("Path not found: " + pathOption);
                     break;
                 }
                 if (currentElement.equals("#text")) {
-                    logger.info("Found value: " + searchNode.asText()) ;
                     return searchNode.asText();
                 }
             }
         }
-
-        // throw exception if it reaches here
-        throw new ExtractingValueException("Error extracting value from GeoNetwork metadata JSON");
+        throw new ExtractingValueException("Error extracting value for key: " + key);
     }
 
     // inject ObjectMapper via constructor to read extracting config file
@@ -71,9 +68,17 @@ public class MetadataParser {
     public JSONObject extractToMappedValues(JsonNode rootNode) {
         JSONObject mappedValues = new JSONObject();
         extractingConfig.fieldNames().forEachRemaining(key -> {
-            logger.info("Extracting value for key: " + key);
             // TODO: not everything is a string, need to handle other types
-            mappedValues.put(key, this.getTextValueAtPath(rootNode, key));
+            try {
+                mappedValues.put(key, this.getTextValueAtPath(rootNode, key));
+            } catch (ExtractingValueException e) {
+                if (!key.equals("id")) {
+                    mappedValues.put(key, "");
+                } else {
+                    logger.error("Fatal, unable to extract id from source JSON");
+                    throw new ExtractingValueException("Error extracting value for key: " + key);
+                }
+            }
         });
         return mappedValues;
     }

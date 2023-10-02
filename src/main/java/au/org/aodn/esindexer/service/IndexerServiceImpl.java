@@ -20,6 +20,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.commons.io.IOUtils;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,6 +34,8 @@ import org.springframework.stereotype.Service;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -204,16 +207,30 @@ public class IndexerServiceImpl implements IndexerService {
         this.createIndexFromMappingJSONFile();
 
         logger.info("Indexing all metadata records from GeoNetwork");
+
         for (JSONObject metadataRecord : geoNetworkResourceService.getAllMetadataRecords()) {
-            JSONObject mappedMetadataValues = metadataParser.extractToMappedValues(objectMapper.readTree(metadataRecord.toString()));
-            ByteArrayInputStream input = new ByteArrayInputStream(mappedMetadataValues.toString().getBytes());
-            BinaryData data = BinaryData.of(IOUtils.toByteArray(input), ContentType.APPLICATION_JSON);
-            bulkRequest.operations(op -> op
-                .index(idx -> idx
-                    .index(indexName)
+            try {
+                // get mapped metadata values from GeoNetwork to STAC collection schema
+                JSONObject mappedRecord = metadataParser.extractToMappedValues(objectMapper.readTree(metadataRecord.toString()));
+
+                // convert mapped values to binary data
+                ByteArrayInputStream input = new ByteArrayInputStream(mappedRecord.toString().getBytes());
+                BinaryData data = BinaryData.of(IOUtils.toByteArray(input), ContentType.APPLICATION_JSON);
+
+                // send bulk request to Elasticsearch
+                bulkRequest.operations(op -> op
+                    .index(idx -> idx
+                        .index(indexName)
                         .document(data)
                     )
                 );
+                logger.info("Metadata with UUID: " + mappedRecord.getString("id") + " indexed");
+            } catch (ExtractingValueException e) {
+                /* it will reach here if cannot extract values of all the keys in GeoNetwork metadata JSON
+                or ID is not found, which is fatal.
+                * */
+                logger.error("Error extracting values from GeoNetwork metadata JSON: " + metadataRecord);
+            }
         }
 
         BulkResponse result = portalElasticsearchClient.bulk(bulkRequest.build());
@@ -227,10 +244,9 @@ public class IndexerServiceImpl implements IndexerService {
                 }
             }
         } else {
-            logger.info("All metadata records from GeoNetwork have been indexed to index: " + indexName);
-            return ResponseEntity.status(HttpStatus.OK).body(result.toString());
+            logger.info("Finished bulk indexing records to index: " + indexName);
         }
 
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+        return ResponseEntity.status(HttpStatus.OK).body(result.toString());
     }
 }
