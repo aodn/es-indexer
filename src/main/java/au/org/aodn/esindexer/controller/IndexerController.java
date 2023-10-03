@@ -34,7 +34,7 @@ public class IndexerController {
     public ResponseEntity getMetadataRecordFromGeoNetworkElasticsearchByUUID(@PathVariable("uuid") String uuid) {
         logger.info("getting a document by UUID: " + uuid);
         JSONObject response =  geonetworkResourceService.searchMetadataRecordByUUIDFromGNRecordsIndex(uuid);
-        return ResponseEntity.status(HttpStatus.OK).body(response);
+        return ResponseEntity.status(HttpStatus.OK).body(response.toString());
     }
 
     @GetMapping(path="/records/{uuid}", produces = "application/json")
@@ -42,7 +42,7 @@ public class IndexerController {
     public ResponseEntity getMetadataRecordFromGeoNetworkByUUID(@PathVariable("uuid") String uuid) {
         logger.info("getting a document by UUID: " + uuid);
         JSONObject response =  geonetworkResourceService.searchMetadataRecordByUUIDFromGN4(uuid);
-        return ResponseEntity.status(HttpStatus.OK).body(response);
+        return ResponseEntity.status(HttpStatus.OK).body(response.toString());
     }
 
     @GetMapping(path="/{uuid}", produces = "application/json")

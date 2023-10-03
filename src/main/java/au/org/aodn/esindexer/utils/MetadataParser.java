@@ -4,6 +4,7 @@ import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.exception.ExtractingValueException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +13,6 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.util.concurrent.atomic.AtomicLong;
 
 @Component
 public class MetadataParser {
@@ -20,7 +20,7 @@ public class MetadataParser {
     private final JsonNode extractingConfig;
     private static final Logger logger = LoggerFactory.getLogger(MetadataParser.class);
 
-    protected String getTextValueAtPath(JsonNode rootNode, String key) {
+    protected Object getValuesAtPath(JsonNode rootNode, String key) {
 
          /*
          Some metadata fields can be retrieved by different GML paths in different metadata records.
@@ -38,16 +38,37 @@ public class MetadataParser {
          Notice "OR", if the field cannot be found in the first path, it will try the second path, and so on.
          */
         for (JsonNode pathOption : extractingConfig.get(key)) {
-            String[] pathElements = pathOption.toString().replace("\"", "").split("/");
             JsonNode searchNode = rootNode;
-            for (String currentElement : pathElements) {
-                searchNode = searchNode.path(currentElement);
-                if (searchNode.isMissingNode()) {
-                    logger.warn("Path not found: " + pathOption);
-                    break;
+            String[] pathElements;
+            switch (key) {
+                case "keywords" -> {
+                    pathElements = pathOption.asText().replace("\"", "").split("(?<!/)#");
+                    // TODO: just a boilerplate here
+                    for (String currentElement : pathElements) {
+                        searchNode = searchNode.path(currentElement);
+                        if (searchNode.isMissingNode()) {
+                            logger.warn("Path not found: " + pathOption);
+                            break;
+                        }
+                        if (currentElement.equals("#text")) {
+                            return new JSONArray();
+                        }
+                    }
                 }
-                if (currentElement.equals("#text")) {
-                    return searchNode.asText();
+                case "extent" -> logger.info("Extracting bbox values");
+                case "contact" -> logger.info("Extracting contact values");
+                default -> {
+                    pathElements = pathOption.asText().replace("\"", "").split("/");
+                    for (String currentElement : pathElements) {
+                        searchNode = searchNode.path(currentElement);
+                        if (searchNode.isMissingNode()) {
+                            logger.warn("Path not found: " + pathOption);
+                            break;
+                        }
+                        if (currentElement.equals("#text")) {
+                            return searchNode.asText();
+                        }
+                    }
                 }
             }
         }
@@ -68,18 +89,22 @@ public class MetadataParser {
     public JSONObject extractToMappedValues(JsonNode rootNode) {
         JSONObject mappedValues = new JSONObject();
         extractingConfig.fieldNames().forEachRemaining(key -> {
-            // TODO: not everything is a string, need to handle other types
             try {
-                mappedValues.put(key, this.getTextValueAtPath(rootNode, key));
+                mappedValues.put(key, this.getValuesAtPath(rootNode, key));
             } catch (ExtractingValueException e) {
                 if (!key.equals("id")) {
                     mappedValues.put(key, "");
                 } else {
                     logger.error("Fatal, unable to extract id from source JSON");
-                    throw new ExtractingValueException("Error extracting value for key: " + key);
+                    throw new ExtractingValueException(e.getMessage());
                 }
             }
         });
+
+        // STAC static fields
+        mappedValues.put("stac_version", AppConstants.STAC_VERSION);
+        mappedValues.put("type", AppConstants.STAC_TYPE);
+
         return mappedValues;
     }
 }

@@ -224,7 +224,7 @@ public class IndexerServiceImpl implements IndexerService {
                         .document(data)
                     )
                 );
-                logger.info("Metadata with UUID: " + mappedRecord.getString("id") + " indexed");
+
             } catch (ExtractingValueException e) {
                 /* it will reach here if cannot extract values of all the keys in GeoNetwork metadata JSON
                 or ID is not found, which is fatal.
