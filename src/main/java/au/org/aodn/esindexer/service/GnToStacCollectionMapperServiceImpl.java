@@ -1,4 +1,4 @@
-package au.org.aodn.esindexer.utils;
+package au.org.aodn.esindexer.service;
 
 import au.org.aodn.esindexer.utils.BBoxUtils;
 import au.org.aodn.esindexer.model.StacCollectionModel;
@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 @Service
 @Mapper(componentModel = "spring")
-public abstract class GnToStacCollectionMapper {
+public abstract class GnToStacCollectionMapperServiceImpl implements StacCollectionMapperService {
 
     @Mapping(target="uuid", expression = "java(java.util.UUID.fromString(source.getMetadataIdentifier().getMDIdentifier().getCode().getCharacterString().getValue().toString()))")
     @Mapping(target="title", source = "source", qualifiedByName = "mapTitle" )

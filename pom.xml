@@ -191,6 +191,13 @@
             <artifactId>gt-epsg-hsql</artifactId>
             <version>22.2</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/jakarta.activation/jakarta.activation-api -->
+        <dependency>
+            <groupId>jakarta.activation</groupId>
+            <artifactId>jakarta.activation-api</artifactId>
+            <version>2.1.2</version>
+        </dependency>
+
     </dependencies>
     <build>
         <plugins>
