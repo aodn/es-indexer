@@ -68,10 +68,14 @@ public class SecurityConfig {
                 "/**/*.css",
                 "/**/*.js")
             .permitAll()
+            .antMatchers(HttpMethod.GET, "/api/v1/indexer/index/gn_records/**")
+            .permitAll()
+            .antMatchers(HttpMethod.GET, "/api/v1/indexer/index/records/**")
+            .permitAll()
             .antMatchers(
-                "/v3/api-docs/**",
-                "/swagger-resources/**",
-                "/swagger-ui.html")
+            "/v3/api-docs/**",
+            "/swagger-resources/**",
+            "/swagger-ui.html")
             .permitAll()
             .anyRequest()
             .authenticated();
