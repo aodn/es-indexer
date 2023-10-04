@@ -14,9 +14,24 @@
     <packaging>jar</packaging>
     <name>es-indexer</name>
     <description>es-indexer</description>
+
+    <repositories>
+        <repository>
+            <id>mvnrepository.com</id>
+            <url>https://repo.osgeo.org/repository/release/</url>
+        </repository>
+    </repositories>
+
     <properties>
-        <java.version>17</java.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
+        <jakarta.xml.bind.version>4.0.1</jakarta.xml.bind.version>
+        <org.projectlombok.version>1.18.30</org.projectlombok.version>
+        <org.geotools.version>29.2</org.geotools.version>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -26,6 +41,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-rest</artifactId>
         </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-configuration-processor</artifactId>-->
+<!--            <optional>true</optional>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
@@ -133,6 +153,51 @@
             <artifactId>sjsonnet_2.13</artifactId>
             <version>0.4.7</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/jakarta.xml.bind/jakarta.xml.bind-api -->
+        <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+            <version>${jakarta.xml.bind.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+            <version>${jakarta.xml.bind.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+            <version>${org.mapstruct.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-main</artifactId>
+            <version>${org.geotools.version}</version> <!-- Use the latest version available -->
+        </dependency>
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-geometry</artifactId>
+            <version>24.6</version> <!-- Use the latest version available -->
+        </dependency>
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-referencing</artifactId>
+            <version>${org.geotools.version}</version> <!-- Use the latest version available -->
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.geotools/gt-epsg-hsql -->
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-epsg-hsql</artifactId>
+            <version>22.2</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/jakarta.activation/jakarta.activation-api -->
+        <dependency>
+            <groupId>jakarta.activation</groupId>
+            <artifactId>jakarta.activation-api</artifactId>
+            <version>2.1.2</version>
+        </dependency>
+
     </dependencies>
     <build>
         <plugins>
@@ -142,6 +207,63 @@
                 <configuration>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jaxb2-maven-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>xjc</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>xjc</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <packageName>au.org.aodn.metadata.iso19115_3</packageName>
+                    <sources>
+                        <source>src/main/resources/iso19115-3.2018.xsd</source>
+                    </sources>
+                    <xjbSources>
+                        <xjbSource>src/main/resources/iso19115-3.2018.xjb</xjbSource>
+                    </xjbSources>
+                    <outputDirectory>${basedir}/target/generated-sources</outputDirectory>
+                    <clearOutputDir>false</clearOutputDir>
+                    <verbose>false</verbose>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>17</source> <!-- depending on your project -->
+                    <target>17</target> <!-- depending on your project -->
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.mapstruct</groupId>
+                            <artifactId>mapstruct-processor</artifactId>
+                            <version>${org.mapstruct.version}</version>
+                        </path>
+                        <!-- other annotation processors -->
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${org.projectlombok.version}</version>
+                        </path>
+                        <!-- additional annotation processor required as of Lombok 1.18.16 -->
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok-mapstruct-binding</artifactId>
+                            <version>0.2.0</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+
         </plugins>
     </build>
 </project>

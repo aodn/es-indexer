@@ -7,7 +7,10 @@ import co.elastic.clients.elasticsearch.core.IndexResponse;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import jakarta.xml.bind.JAXBException;
 import org.json.JSONObject;
+import org.opengis.referencing.FactoryException;
+import org.opengis.referencing.operation.TransformException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,8 +44,8 @@ public class IndexerController {
     @Operation(description = "Get a document from GeoNetwork by UUID directly - JSON format response")
     public ResponseEntity getMetadataRecordFromGeoNetworkByUUID(@PathVariable("uuid") String uuid) {
         logger.info("getting a document by UUID: " + uuid);
-        JSONObject response =  geonetworkResourceService.searchMetadataRecordByUUIDFromGN4(uuid);
-        return ResponseEntity.status(HttpStatus.OK).body(response.toString());
+        String response =  geonetworkResourceService.searchMetadataRecordByUUIDFromGN4(uuid);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @GetMapping(path="/{uuid}", produces = "application/json")
@@ -61,8 +64,8 @@ public class IndexerController {
 
     @PostMapping(path="/{uuid}", produces = "application/json")
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Index a metadata record by UUID")
-    public ResponseEntity<String> addDocumentByUUID(@PathVariable("uuid") String uuid) throws IOException {
-        JSONObject metadataValues = geonetworkResourceService.searchMetadataRecordByUUIDFromGN4(uuid);
+    public ResponseEntity<String> addDocumentByUUID(@PathVariable("uuid") String uuid) throws IOException, FactoryException, JAXBException, TransformException {
+        String metadataValues = geonetworkResourceService.searchMetadataRecordByUUIDFromGN4(uuid);
         return indexerService.indexMetadata(metadataValues);
     }
 

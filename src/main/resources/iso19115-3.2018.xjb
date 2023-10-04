@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<jaxb:bindings version="3.0" xmlns:jaxb="https://jakarta.ee/xml/ns/jaxb"
+    xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    jaxb:extensionBindingPrefixes="xjc">
+
+    <jaxb:bindings schemaLocation="schema/others/xlink/xlink.xsd">
+        <jaxb:bindings node="//xs:element[@name='arc']">
+            <jaxb:factoryMethod name="Arc2"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:attribute[@name = 'title']">
+            <jaxb:property name="titleAttribute"/>
+         </jaxb:bindings>
+         <jaxb:bindings node="//xs:complexType[@name='arcType']">
+            <jaxb:class name="ArcType2"/>
+         </jaxb:bindings>
+    </jaxb:bindings>
+
+    <jaxb:bindings schemaLocation="schema/others/ISO19136/geometryPrimitives.xsd" node="//xs:complexType[@name = 'AbstractGriddedSurfaceType' and @abstract='true']">
+        <jaxb:bindings node=".//*[@name='rows']">
+            <jaxb:property name="rowsAttribute"/>
+        </jaxb:bindings>
+    </jaxb:bindings>
+
+    <jaxb:bindings schemaLocation="schema/standards.iso.org/19115/-3/cit/2.0/citation.xsd">
+        <jaxb:bindings node="//xs:element[@name='CI_Address']">
+            <jaxb:factoryMethod name="CIAddress2"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:complexType[@name='CI_Address_Type']">
+            <jaxb:class name="CIAddressType2"/>
+        </jaxb:bindings>
+
+        <jaxb:bindings node="//xs:element[@name='CI_Citation']">
+            <jaxb:factoryMethod name="CICitation2"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:complexType[@name='CI_Citation_Type']">
+            <jaxb:class name="CICitationType2"/>
+        </jaxb:bindings>
+
+        <jaxb:bindings node="//xs:element[@name='CI_Contact']">
+            <jaxb:factoryMethod name="CIContact2"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:complexType[@name='CI_Contact_Type']">
+            <jaxb:class name="CIContactType2"/>
+        </jaxb:bindings>
+
+        <jaxb:bindings node="//xs:element[@name='CI_Date']">
+            <jaxb:factoryMethod name="CIDate2"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:complexType[@name='CI_Date_Type']">
+            <jaxb:class name="CIDateType2"/>
+        </jaxb:bindings>
+
+        <jaxb:bindings node="//xs:element[@name='CI_Individual']">
+            <jaxb:factoryMethod name="CIIndividual2"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:complexType[@name='CI_Individual_Type']">
+            <jaxb:class name="CIIndividualType2"/>
+        </jaxb:bindings>
+
+        <jaxb:bindings node="//xs:element[@name='AbstractCI_Party']">
+            <jaxb:factoryMethod name="AbstractCIParty2"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:complexType[@name='AbstractCI_Party_Type']">
+            <jaxb:class name="AbstractCIPartyType2"/>
+        </jaxb:bindings>
+
+        <jaxb:bindings node="//xs:complexType[@name='CI_OnlineResource_Type']">
+            <jaxb:class name="CIOnlineResourceType2"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:complexType[@name='CI_Organisation_Type']">
+            <jaxb:class name="CIOrganisationType2"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:complexType[@name='CI_Responsibility_Type']">
+            <jaxb:class name="CIResponsibilityType2"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:complexType[@name='CI_Series_Type']">
+            <jaxb:class name="CISeriesType2"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:complexType[@name='CI_Telephone_Type']">
+            <jaxb:class name="CITelephoneType2"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:complexType[@name='CI_Address_PropertyType']">
+            <jaxb:class name="CIAddressPropertyType2"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:complexType[@name='CI_Citation_PropertyType']">
+            <jaxb:class name="CICitationPropertyType2"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:complexType[@name='CI_Contact_PropertyType']">
+            <jaxb:class name="CIContactPropertyType2"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:complexType[@name='CI_Date_PropertyType']">
+            <jaxb:class name="CIDatePropertyType2"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:element[@name='CI_DateTypeCode']">
+            <jaxb:factoryMethod name="CI_DateTypeCode"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:complexType[@name='CI_DateTypeCode_PropertyType']">
+            <jaxb:class name="CIDateTypeCodePropertyType2"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:complexType[@name='CI_Individual_PropertyType']">
+            <jaxb:class name="CIIndividualPropertyType2"/>
+        </jaxb:bindings>
+
+        <jaxb:bindings node="//xs:element[@name='CI_OnLineFunctionCode']">
+            <jaxb:factoryMethod name="CIOnLineFunctionCode2"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:complexType[@name='CI_OnLineFunctionCode_PropertyType']">
+            <jaxb:class name="CIOnLineFunctionCodePropertyType2"/>
+        </jaxb:bindings>
+
+        <jaxb:bindings node="//xs:element[@name='CI_OnlineResource']">
+            <jaxb:factoryMethod name="CIOnlineResource2"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:complexType[@name='CI_OnlineResource_PropertyType']">
+            <jaxb:class name="CIOnlineResourcePropertyType2"/>
+        </jaxb:bindings>
+
+        <jaxb:bindings node="//xs:element[@name='CI_Organisation']">
+            <jaxb:factoryMethod name="CIOrganisation2"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:complexType[@name='CI_Organisation_PropertyType']">
+            <jaxb:class name="CIOrganisationPropertyType2"/>
+        </jaxb:bindings>
+
+        <jaxb:bindings node="//xs:complexType[@name='AbstractCI_Party_PropertyType']">
+            <jaxb:class name="AbstractCIPartyPropertyType2"/>
+        </jaxb:bindings>
+
+        <jaxb:bindings node="//xs:element[@name='CI_PresentationFormCode']">
+            <jaxb:factoryMethod name="CIPresentationFormCode2"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:complexType[@name='CI_PresentationFormCode_PropertyType']">
+            <jaxb:class name="CIPresentationFormCodePropertyType2"/>
+        </jaxb:bindings>
+
+        <jaxb:bindings node="//xs:element[@name='CI_Responsibility']">
+            <jaxb:factoryMethod name="CIResponsibility2"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:complexType[@name='CI_Responsibility_PropertyType']">
+            <jaxb:class name="CIResponsibilityPropertyType2"/>
+        </jaxb:bindings>
+
+        <jaxb:bindings node="//xs:element[@name='CI_RoleCode']">
+            <jaxb:factoryMethod name="CIRoleCode2"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:complexType[@name='CI_RoleCode_PropertyType']">
+            <jaxb:class name="CIRoleCodePropertyType2"/>
+        </jaxb:bindings>
+
+        <jaxb:bindings node="//xs:element[@name='CI_Series']">
+            <jaxb:factoryMethod name="CISeries2"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:complexType[@name='CI_Series_PropertyType']">
+            <jaxb:class name="CISeriesPropertyType2"/>
+        </jaxb:bindings>
+
+        <jaxb:bindings node="//xs:element[@name='CI_Telephone']">
+            <jaxb:factoryMethod name="CITelephone2"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:complexType[@name='CI_Telephone_PropertyType']">
+            <jaxb:class name="CITelephonePropertyType2"/>
+        </jaxb:bindings>
+
+        <jaxb:bindings node="//xs:element[@name='CI_TelephoneTypeCode']">
+            <jaxb:factoryMethod name="CITelephoneTypeCode2"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:complexType[@name='CI_TelephoneTypeCode_PropertyType']">
+            <jaxb:class name="CITelephoneTypeCodePropertyType2"/>
+        </jaxb:bindings>
+    </jaxb:bindings>
+
+    <jaxb:bindings schemaLocation="schema/others/ISO19136/basicTypes.xsd">
+        <jaxb:bindings node="//xs:complexType[@name='MeasureType']">
+            <jaxb:class name="MeasureType2"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:complexType[@name='CodeType']">
+            <jaxb:class name="CodeType2"/>
+        </jaxb:bindings>
+    </jaxb:bindings>
+
+    <jaxb:bindings schemaLocation="schema/others/ISO19136/datums.xsd">
+        <jaxb:bindings node="//xs:element[@name='ImageDatum']">
+            <jaxb:factoryMethod name="ImageDatum2"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:element[@name='EngineeringDatum']">
+            <jaxb:factoryMethod name="EngineeringDatum2"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:element[@name='primeMeridian']">
+            <jaxb:factoryMethod name="PrimeMeridian2"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:element[@name='GeodeticDatum']">
+            <jaxb:factoryMethod name="GeodeticDatum2"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:element[@name='ellipsoid']">
+            <jaxb:factoryMethod name="Ellipsoid2"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:element[@name='secondDefiningParameter']">
+            <jaxb:class name="SecondDefiningParameter2"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:element[@name='VerticalDatum']">
+            <jaxb:class name="VerticalDatum2"/>
+        </jaxb:bindings>
+    </jaxb:bindings>
+
+    <jaxb:bindings schemaLocation="schema/others/ISO19136/deprecatedTypes.xsd">
+        <jaxb:bindings node="//xs:complexType[@name='AbstractMetaDataType']">
+            <jaxb:class name="AbstractMetaDataType2"/>
+        </jaxb:bindings>
+    </jaxb:bindings>
+
+    <jaxb:bindings schemaLocation="schema/others/ISO19136/gmlBase.xsd">
+        <jaxb:bindings node="//xs:element[@name='AbstractObject']">
+            <jaxb:factoryMethod name="AbstractObject2"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:complexType[@name='AbstractMetadataPropertyType']">
+            <jaxb:class name="AbstractMetadataPropertyType2"/>
+        </jaxb:bindings>
+    </jaxb:bindings>
+
+    <jaxb:bindings schemaLocation="schema/others/ISO19136/valueObjects.xsd">
+        <jaxb:bindings node="//xs:element[@name='Boolean']">
+            <jaxb:factoryMethod name="Boolean2"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:complexType[@name='BooleanPropertyType']">
+            <jaxb:class name="BooleanPropertyType2"/>
+        </jaxb:bindings>
+    </jaxb:bindings>
+
+    <jaxb:bindings schemaLocation="schema/others/ISO19136/measures.xsd">
+        <jaxb:bindings node="//xs:element[@name='measure']">
+            <jaxb:factoryMethod name="Measure2"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:element[@name='angle']">
+            <jaxb:factoryMethod name="Angle2"/>
+        </jaxb:bindings>
+    </jaxb:bindings>
+
+    <jaxb:bindings schemaLocation="schema/others/ISO19136/coordinateOperations.xsd">
+        <jaxb:bindings node="//xs:element[@name='parameterValue' and @type='gml:AbstractGeneralParameterValuePropertyType']">
+            <jaxb:factoryMethod name="ParameterValue2"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:element[@name='operationParameter' and @type='gml:OperationParameterPropertyType']">
+            <jaxb:factoryMethod name="OperationParameter2"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:element[@name='Conversion' and @type='gml:ConversionType']">
+            <jaxb:factoryMethod name="Conversion2"/>
+        </jaxb:bindings>
+    </jaxb:bindings>
+
+    <jaxb:bindings schemaLocation="schema/others/ISO19136/coordinateSystems.xsd">
+        <jaxb:bindings node="//xs:element[@name='AffineCS' and @type='gml:AffineCSType']">
+            <jaxb:factoryMethod name="AffineCS2"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:element[@name='EllipsoidalCS' and @type='gml:EllipsoidalCSType']">
+            <jaxb:factoryMethod name="EllipsoidalCS2"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:element[@name='CartesianCS' and @type='gml:CartesianCSType']">
+            <jaxb:factoryMethod name="CartesianCS2"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:element[@name='SphericalCS' and @type='gml:SphericalCSType']">
+            <jaxb:factoryMethod name="SphericalCS2"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:element[@name='VerticalCS' and @type='gml:VerticalCSType']">
+            <jaxb:factoryMethod name="VerticalCS2"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:element[@name='CylindricalCS' and @type='gml:CylindricalCSType']">
+            <jaxb:factoryMethod name="CylindricalCS2"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:element[@name='LinearCS' and @type='gml:LinearCSType']">
+            <jaxb:factoryMethod name="LinearCS2"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:element[@name='PolarCS' and @type='gml:PolarCSType']">
+            <jaxb:factoryMethod name="PolarCS2"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:element[@name='UserDefinedCS' and @type='gml:UserDefinedCSType']">
+            <jaxb:factoryMethod name="UserDefinedCS2"/>
+        </jaxb:bindings>
+        <jaxb:bindings node="//xs:element[@name='TimeCS' and @type='gml:TimeCSType']">
+            <jaxb:factoryMethod name="TimeCS2"/>
+        </jaxb:bindings>
+    </jaxb:bindings>
+
+    <jaxb:bindings schemaLocation="schema/others/ISO19136/coordinateReferenceSystems.xsd">
+        <jaxb:bindings node="//xs:element[@name='temporalDatum' and @type='gml:TemporalDatumPropertyType']">
+            <jaxb:factoryMethod name="TemporalDatum2"/>
+        </jaxb:bindings>
+    </jaxb:bindings>
+</jaxb:bindings>
