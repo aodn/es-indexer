@@ -8,7 +8,5 @@ import java.util.List;
 @Data
 @Builder
 public class ExtentModel {
-
     protected List<List<Double>> bbox;
-
 }

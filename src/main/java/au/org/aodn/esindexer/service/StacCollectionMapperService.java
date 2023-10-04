@@ -6,5 +6,5 @@ import org.opengis.referencing.operation.TransformException;
 import au.org.aodn.metadata.iso19115_3.*;
 
 public interface StacCollectionMapperService {
-    StacCollectionModel sourceToDestination(MDMetadataType source) throws FactoryException, TransformException;
+    StacCollectionModel mapToSTACCollection(MDMetadataType source) throws FactoryException, TransformException;
 }

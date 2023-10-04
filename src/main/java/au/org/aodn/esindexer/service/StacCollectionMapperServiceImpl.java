@@ -15,13 +15,13 @@ import java.util.stream.Collectors;
 
 @Service
 @Mapper(componentModel = "spring")
-public abstract class GnToStacCollectionMapperServiceImpl implements StacCollectionMapperService {
+public abstract class StacCollectionMapperServiceImpl implements StacCollectionMapperService {
 
     @Mapping(target="uuid", expression = "java(java.util.UUID.fromString(source.getMetadataIdentifier().getMDIdentifier().getCode().getCharacterString().getValue().toString()))")
     @Mapping(target="title", source = "source", qualifiedByName = "mapTitle" )
     @Mapping(target="description", source = "source", qualifiedByName = "mapDescription")
     @Mapping(target="extent.bbox", source = "source", qualifiedByName = "mapExtentBbox")
-    public abstract StacCollectionModel sourceToDestination(MDMetadataType source);
+    public abstract StacCollectionModel mapToSTACCollection(MDMetadataType source);
 
     @Named("mapExtentBbox")
     List<List<Double>> mapExtentBbox(MDMetadataType source) throws FactoryException, TransformException {

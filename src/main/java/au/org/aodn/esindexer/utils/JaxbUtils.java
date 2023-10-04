@@ -4,8 +4,9 @@ import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBElement;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Unmarshaller;
-
-import java.io.File;
+import javax.xml.transform.Source;
+import javax.xml.transform.stream.StreamSource;
+import java.io.StringReader;
 
 public class JaxbUtils<T> {
 
@@ -16,9 +17,10 @@ public class JaxbUtils<T> {
         jaxbUnmarshaller = jaxbContext.createUnmarshaller();
     }
 
-    public T unmarshal(File f) throws JAXBException {
+    public T unmarshal(String input) throws JAXBException {
+        Source source = new StreamSource(new StringReader(input));
         synchronized (jaxbUnmarshaller) {
-            return ((JAXBElement<T>)jaxbUnmarshaller.unmarshal(f)).getValue();
+            return ((JAXBElement<T>)jaxbUnmarshaller.unmarshal(source)).getValue();
         }
     }
 }

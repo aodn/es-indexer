@@ -1,6 +1,6 @@
 {
   "mappings": {
-    "dynamic": "strict",
+    "dynamic": true,
     "properties": {
       "id": { "type": "text" },
       "stac_version": { "type": "text" },
@@ -11,6 +11,14 @@
         "properties": {
           "keyword": {
             "type": "text"
+          }
+        }
+      },
+      "extent": {
+        "type": "nested",
+        "properties": {
+          "coordinate": {
+            "type": "double"
           }
         }
       },
