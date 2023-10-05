@@ -14,7 +14,7 @@ elasticsearch:
 
 geonetwork:
   records:
-    endpoint: http://ec2-3-24-110-244.ap-southeast-2.compute.amazonaws.com:8080/geonetwork/srv/api/records/
+    endpoint: http://ec2-3-24-110-244.ap-southeast-2.compute.amazonaws.com:8080/geonetwork/srv/api/records/{uuid}/formatters/iso19115-3.2018
   search:
     api:
       endpoint: http://ec2-3-24-110-244.ap-southeast-2.compute.amazonaws.com:8080/geonetwork/srv/api/search/records/_search
