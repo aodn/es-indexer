@@ -13,11 +13,7 @@ elasticsearch:
   apiKey: NC1Dc19Jb0JsbTJqVmhzNy1OS1k6LTdqN0Y0QktRVHVKRHVpYU1TNkhSZw==
 
 geonetwork:
-  records:
-    endpoint: http://ec2-3-24-110-244.ap-southeast-2.compute.amazonaws.com:8080/geonetwork/srv/api/records/
-  search:
-    api:
-      endpoint: http://ec2-3-24-110-244.ap-southeast-2.compute.amazonaws.com:8080/geonetwork/srv/api/search/records/_search
+  host: http://ec2-3-24-110-244.ap-southeast-2.compute.amazonaws.com:8080
 
 springdoc:
   api-docs:

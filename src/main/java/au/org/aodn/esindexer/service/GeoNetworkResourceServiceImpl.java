@@ -50,17 +50,30 @@ public class GeoNetworkResourceServiceImpl implements GeoNetworkResourceService 
     }
 
     public String searchMetadataRecordByUUIDFromGN4(String uuid) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_XML));
-        HttpEntity<String> requestEntity = new HttpEntity<>(headers);
+
         try {
-            ResponseEntity<String> responseEntity = restTemplate.exchange(geoNetworkRecordsEndpoint + uuid, HttpMethod.GET, requestEntity, String.class);
+            HttpHeaders headers = new HttpHeaders();
+            headers.setAccept(Collections.singletonList(MediaType.APPLICATION_XML));
+            HttpEntity<String> requestEntity = new HttpEntity<>(headers);
+
+            Map<String, Object> params = new HashMap<>();
+            params.put("uuid", uuid);
+
+            ResponseEntity<String> responseEntity = restTemplate.exchange(
+                    geoNetworkRecordsEndpoint,
+                    HttpMethod.GET,
+                    requestEntity,
+                    String.class,
+                    params);
+
             if (responseEntity.getStatusCode().is2xxSuccessful()) {
                 return responseEntity.getBody();
-            } else {
+            }
+            else {
                 throw new RuntimeException("Failed to fetch data from the API");
             }
-        } catch (HttpClientErrorException.NotFound e) {
+        }
+        catch (HttpClientErrorException.NotFound e) {
             throw new MetadataNotFoundException("Unable to find metadata record with UUID: " + uuid + " in GeoNetwork");
         }
     }
