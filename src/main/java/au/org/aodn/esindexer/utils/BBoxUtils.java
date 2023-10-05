@@ -1,6 +1,6 @@
 package au.org.aodn.esindexer.utils;
 
-import au.org.aodn.metadata.iso19115_3.*;
+import au.org.aodn.metadata.iso19115_3_2018.*;
 import org.geotools.geometry.jts.JTS;
 import org.geotools.geometry.jts.JTSFactoryFinder;
 import org.geotools.referencing.CRS;

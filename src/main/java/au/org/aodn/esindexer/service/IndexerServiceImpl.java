@@ -3,7 +3,7 @@ package au.org.aodn.esindexer.service;
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.exception.*;
 import au.org.aodn.esindexer.utils.JaxbUtils;
-import au.org.aodn.metadata.iso19115_3.*;
+import au.org.aodn.metadata.iso19115_3_2018.*;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.ElasticsearchException;
 import co.elastic.clients.elasticsearch.core.*;
