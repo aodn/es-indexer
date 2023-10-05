@@ -1,0 +1,16 @@
+server:
+  port: 8080
+  error:
+    include-stacktrace: never
+app:
+  http:
+    auth-token-header-name: X-API-Key
+
+geonetwork:
+  host: http://localhost:8080
+  records:
+    endpoint: ${geonetwork.host}/geonetwork/srv/api/records/{uuid}/formatters/iso19115-3.2018
+  search:
+    api:
+      endpoint: ${geonetwork.host}/geonetwork/srv/api/search/records/_search
+
