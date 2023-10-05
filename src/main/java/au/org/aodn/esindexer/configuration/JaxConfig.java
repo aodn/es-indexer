@@ -4,7 +4,7 @@ import au.org.aodn.esindexer.utils.JaxbUtils;
 import jakarta.xml.bind.JAXBException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import au.org.aodn.metadata.iso19115_3.*;
+import au.org.aodn.metadata.iso19115_3_2018.*;
 
 @Configuration
 public class JaxConfig {

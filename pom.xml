@@ -222,12 +222,12 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <packageName>au.org.aodn.metadata.iso19115_3</packageName>
+                    <packageName>au.org.aodn.metadata.iso19115_3_2018</packageName>
                     <sources>
-                        <source>src/main/resources/iso19115-3.2018.xsd</source>
+                        <source>src/main/resources/iso19115_3_2018/iso19115-3.2018.xsd</source>
                     </sources>
                     <xjbSources>
-                        <xjbSource>src/main/resources/iso19115-3.2018.xjb</xjbSource>
+                        <xjbSource>src/main/resources/iso19115_3_2018/iso19115-3.2018.xjb</xjbSource>
                     </xjbSources>
                     <outputDirectory>${basedir}/target/generated-sources</outputDirectory>
                     <clearOutputDir>false</clearOutputDir>

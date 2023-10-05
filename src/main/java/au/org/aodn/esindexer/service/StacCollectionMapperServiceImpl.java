@@ -2,7 +2,7 @@ package au.org.aodn.esindexer.service;
 
 import au.org.aodn.esindexer.utils.BBoxUtils;
 import au.org.aodn.esindexer.model.StacCollectionModel;
-import au.org.aodn.metadata.iso19115_3.*;
+import au.org.aodn.metadata.iso19115_3_2018.*;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
