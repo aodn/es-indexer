@@ -8,16 +8,16 @@ server:
 
 elasticsearch:
   index:
-    name: dummy_index
-  serverUrl: http://localhost:9201
-  apiKey: cU81dHpvb0JkZHZ5YkVCWFNRWjM6ZkR0cVZjN0ZSLUtTZkNZNklXU1JZdw==
+    name: portal_records
+  serverUrl: http://3.27.147.190:9200
+  apiKey: NC1Dc19Jb0JsbTJqVmhzNy1OS1k6LTdqN0Y0QktRVHVKRHVpYU1TNkhSZw==
 
 geonetwork:
   records:
-    endpoint: http://localhost:8080/geonetwork/srv/api/records/
+    endpoint: http://ec2-3-24-110-244.ap-southeast-2.compute.amazonaws.com:8080/geonetwork/srv/api/records/
   search:
     api:
-      endpoint: http://localhost:8080/geonetwork/srv/api/search/records/_search
+      endpoint: http://ec2-3-24-110-244.ap-southeast-2.compute.amazonaws.com:8080/geonetwork/srv/api/search/records/_search
 
 springdoc:
   api-docs:

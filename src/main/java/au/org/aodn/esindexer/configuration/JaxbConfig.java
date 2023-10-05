@@ -7,13 +7,13 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class JaxbConfig {
-    @Bean("metadataJaxb")
-    public JaxbUtils<au.org.aodn.metadata.iso19115_3_2018.MDMetadataType> createJaxbUtilsForMDMetadataType() throws JAXBException {
+    @Bean("metadataJaxb.2018")
+    public JaxbUtils<au.org.aodn.metadata.iso19115_3_2018.MDMetadataType> createJaxbUtilsForMDMetadataType2018() throws JAXBException {
         return new JaxbUtils<>(au.org.aodn.metadata.iso19115_3_2018.MDMetadataType.class);
     }
 
-    @Bean("metadataJaxb.2018")
-    public JaxbUtils<au.org.aodn.metadata.iso19115_3.MDMetadataType> createJaxbUtilsForMDMetadataType2018() throws JAXBException {
+    @Bean("metadataJaxb")
+    public JaxbUtils<au.org.aodn.metadata.iso19115_3.MDMetadataType> createJaxbUtilsForMDMetadataType() throws JAXBException {
         return new JaxbUtils<>(au.org.aodn.metadata.iso19115_3.MDMetadataType.class);
     }
 }
