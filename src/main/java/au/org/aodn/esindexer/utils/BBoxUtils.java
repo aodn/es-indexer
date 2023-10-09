@@ -1,5 +1,6 @@
 package au.org.aodn.esindexer.utils;
 
+import au.org.aodn.esindexer.exception.MappingValueException;
 import au.org.aodn.metadata.iso19115_3_2018.*;
 import org.geotools.geometry.jts.JTS;
 import org.geotools.geometry.jts.JTSFactoryFinder;
@@ -122,9 +123,7 @@ public class BBoxUtils {
             return result;
         }
         else {
-            //TODO: need to print the content and uuid here
-            logger.error("No logic to BBOX");
-            return null;
+            throw new MappingValueException("No applicable BBOX calculation found");
         }
     }
 }

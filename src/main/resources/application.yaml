@@ -9,7 +9,7 @@ app:
 geonetwork:
   host: http://localhost:8080
   records:
-    endpoint: ${geonetwork.host}/geonetwork/srv/api/records/{uuid}/formatters/iso19115-3.2018
+    endpoint: ${geonetwork.host}/geonetwork/srv/api/records/{uuid}
   search:
     api:
       endpoint: ${geonetwork.host}/geonetwork/srv/api/search/records/_search
