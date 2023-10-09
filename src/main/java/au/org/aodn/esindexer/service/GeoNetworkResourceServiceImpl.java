@@ -3,6 +3,7 @@ package au.org.aodn.esindexer.service;
 import au.org.aodn.esindexer.dto.MetadataRecordsCountRequestBodyDTO;
 import au.org.aodn.esindexer.dto.GeoNetworkSearchRequestBodyDTO;
 import au.org.aodn.esindexer.exception.MetadataNotFoundException;
+import com.fasterxml.jackson.databind.JsonNode;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -13,6 +14,7 @@ import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
+
 import java.util.*;
 
 @Service
@@ -49,8 +51,36 @@ public class GeoNetworkResourceServiceImpl implements GeoNetworkResourceService 
         }
     }
 
-    public String searchMetadataRecordByUUIDFromGN4(String uuid) {
+    protected String findFormatterId(String uuid) {
+        try {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+            HttpEntity<String> requestEntity = new HttpEntity<>(headers);
+            Map<String, Object> params = new HashMap<>();
+            params.put("uuid", uuid);
+            ResponseEntity<JsonNode> responseEntity = restTemplate.exchange(
+                    geoNetworkRecordsEndpoint,
+                    HttpMethod.GET,
+                    requestEntity,
+                    JsonNode.class, params);
 
+            if (responseEntity.getStatusCode().is2xxSuccessful()) {
+                if (Objects.requireNonNull(responseEntity.getBody()).get("@xsi:schemaLocation").asText().contains("www.isotc211.org/2005/gmd")) {
+                    return "iso19115-3.2018";
+                } else {
+                    return "xml";
+                }
+            }
+            else {
+                throw new RuntimeException("Failed to fetch data from the API");
+            }
+        }
+        catch (HttpClientErrorException.NotFound e) {
+            throw new MetadataNotFoundException("Unable to find metadata record with UUID: " + uuid + " in GeoNetwork");
+        }
+    }
+
+    public String searchMetadataRecordByUUIDFromGN4(String uuid) {
         try {
             HttpHeaders headers = new HttpHeaders();
             headers.setAccept(Collections.singletonList(MediaType.APPLICATION_XML));
@@ -58,9 +88,10 @@ public class GeoNetworkResourceServiceImpl implements GeoNetworkResourceService 
 
             Map<String, Object> params = new HashMap<>();
             params.put("uuid", uuid);
+            params.put("formatterId", this.findFormatterId(uuid));
 
             ResponseEntity<String> responseEntity = restTemplate.exchange(
-                    geoNetworkRecordsEndpoint,
+                    geoNetworkRecordsEndpoint+"/formatters/{formatterId}",
                     HttpMethod.GET,
                     requestEntity,
                     String.class,

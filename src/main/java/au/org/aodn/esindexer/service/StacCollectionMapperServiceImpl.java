@@ -1,5 +1,6 @@
 package au.org.aodn.esindexer.service;
 
+import au.org.aodn.esindexer.exception.MappingValueException;
 import au.org.aodn.esindexer.utils.BBoxUtils;
 import au.org.aodn.esindexer.model.StacCollectionModel;
 import au.org.aodn.metadata.iso19115_3_2018.*;
@@ -8,20 +9,30 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.operation.TransformException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
 @Mapper(componentModel = "spring")
 public abstract class StacCollectionMapperServiceImpl implements StacCollectionMapperService {
 
-    @Mapping(target="uuid", expression = "java(java.util.UUID.fromString(source.getMetadataIdentifier().getMDIdentifier().getCode().getCharacterString().getValue().toString()))")
+    @Mapping(target="uuid", source = "source", qualifiedByName = "mapUUID")
     @Mapping(target="title", source = "source", qualifiedByName = "mapTitle" )
     @Mapping(target="description", source = "source", qualifiedByName = "mapDescription")
     @Mapping(target="extent.bbox", source = "source", qualifiedByName = "mapExtentBbox")
     public abstract StacCollectionModel mapToSTACCollection(MDMetadataType source);
+
+    private static final Logger logger = LoggerFactory.getLogger(StacCollectionMapperServiceImpl.class);
+
+    @Named("mapUUID")
+    UUID mapUUID(MDMetadataType source) {
+        return UUID.fromString(source.getMetadataIdentifier().getMDIdentifier().getCode().getCharacterString().getValue().toString());
+    }
 
     @Named("mapExtentBbox")
     List<List<Double>> mapExtentBbox(MDMetadataType source) throws FactoryException, TransformException {
@@ -40,13 +51,17 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
                         .collect(Collectors.toList());
 
                 for(EXExtentType e : ext) {
-                    return BBoxUtils.createBBoxFromEXBoundingPolygonType(
-                            e.getGeographicElement()
-                                    .stream()
-                                    .map(m -> m.getAbstractEXGeographicExtent())
-                                    .filter(m -> m.getValue() instanceof EXBoundingPolygonType)
-                                    .map(m -> (EXBoundingPolygonType)m.getValue())
-                                    .collect(Collectors.toList()));
+                    try {
+                        BBoxUtils.createBBoxFromEXBoundingPolygonType(
+                                e.getGeographicElement()
+                                        .stream()
+                                        .map(m -> m.getAbstractEXGeographicExtent())
+                                        .filter(m -> m.getValue() instanceof EXBoundingPolygonType)
+                                        .map(m -> (EXBoundingPolygonType)m.getValue())
+                                        .collect(Collectors.toList()));
+                    } catch (MappingValueException ex) {
+                        logger.warn(ex.getMessage() + " for metadata record: " + this.mapUUID(source));
+                    }
                 }
             }
         }
