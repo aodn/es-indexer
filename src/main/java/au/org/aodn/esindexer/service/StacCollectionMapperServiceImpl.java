@@ -53,20 +53,31 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
                 for(EXExtentType e : ext) {
                     try {
                         // TODO: pay attention here
-                        return BBoxUtils.createBBoxFromEXBoundingPolygonType(
-                                e.getGeographicElement()
-                                        .stream()
-                                        .map(AbstractEXGeographicExtentPropertyType::getAbstractEXGeographicExtent)
-                                        .filter(m -> m.getValue() instanceof EXBoundingPolygonType)
-                                        .map(m -> (EXBoundingPolygonType)m.getValue())
-                                        .collect(Collectors.toList()));
+                        List<Object> rawInput = e.getGeographicElement()
+                            .stream()
+                            .map(AbstractEXGeographicExtentPropertyType::getAbstractEXGeographicExtent)
+                            .filter(m -> m.getValue() instanceof EXBoundingPolygonType || m.getValue() instanceof EXGeographicBoundingBoxType)
+                            .map(m -> {
+                                if (m.getValue() instanceof EXBoundingPolygonType) {
+                                    return (EXBoundingPolygonType) m.getValue();
+                                } else if (m.getValue() instanceof EXGeographicBoundingBoxType) {
+                                    return (EXGeographicBoundingBoxType) m.getValue();
+                                }
+                                return null; // Handle other cases or return appropriate default value
+                            })
+                            .filter(Objects::nonNull) // Filter out null values if any
+                            .collect(Collectors.toList());
+                        if (!rawInput.isEmpty() && rawInput.get(0) instanceof EXBoundingPolygonType) {
+                            return BBoxUtils.createBBoxFromEXBoundingPolygonType(rawInput);
+                        } else if (!rawInput.isEmpty() && rawInput.get(0) instanceof EXGeographicBoundingBoxType) {
+                            return BBoxUtils.createBBoxFromEXGeographicBoundingBoxType(rawInput);
+                        }
                     } catch (MappingValueException ex) {
                         logger.warn(ex.getMessage() + " for metadata record: " + this.mapUUID(source));
                     }
                 }
             }
         }
-
         return null;
     }
     /**

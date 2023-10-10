@@ -62,7 +62,12 @@ public class BBoxUtils {
         return boundingBox;
     }
 
-    public static List<List<Double>> createBBoxFromEXBoundingPolygonType(List<EXBoundingPolygonType> input) throws FactoryException, TransformException {
+    public static List<List<Double>> createBBoxFromEXBoundingPolygonType(List<Object> rawInput) throws FactoryException, TransformException {
+
+        List<EXBoundingPolygonType>  input = rawInput.stream()
+                .filter(f -> f instanceof EXBoundingPolygonType)
+                .map(m -> (EXBoundingPolygonType)m)
+                .toList();
 
         // This is used to store the envelope of all polygon
         Envelope envelope = new Envelope();
@@ -107,6 +112,62 @@ public class BBoxUtils {
                 }
             }
         }
+
+        if(!polygons.isEmpty()) {
+            // If it didn't contain polygon, then the envelope is just the initial object and thus invalid.
+            List<List<Double>> result = new ArrayList<>();
+            result.add(List.of(envelope.getMinX(), envelope.getMinY(), envelope.getMaxX(), envelope.getMaxY()));
+
+            for(Polygon p : polygons) {
+                result.add(List.of(
+                        p.getEnvelopeInternal().getMinX(),
+                        p.getEnvelopeInternal().getMinY(),
+                        p.getEnvelopeInternal().getMaxX(),
+                        p.getEnvelopeInternal().getMaxY()));
+            }
+            return result;
+        } else {
+            throw new MappingValueException("No applicable BBOX calculation found");
+        }
+    }
+
+    public static List<List<Double>> createBBoxFromEXGeographicBoundingBoxType(List<Object> rawInput) throws FactoryException, TransformException {
+
+        List<EXGeographicBoundingBoxType>  input = rawInput.stream()
+                .filter(f -> f instanceof EXGeographicBoundingBoxType)
+                .map(m -> (EXGeographicBoundingBoxType)m)
+                .toList();
+
+        CoordinateReferenceSystem system = CRS.decode("CRS:84", true);
+        GeometryFactory factory = new GeometryFactory(new PrecisionModel(), 4326);
+
+        Envelope envelope = new Envelope();
+        List<Polygon> polygons = new ArrayList<>();
+
+        logger.info("createBBoxFromEXGeographicBoundingBoxType: input.size() = {}", input.size());
+
+        for (EXGeographicBoundingBoxType bbt : input) {
+            Double east = bbt.getEastBoundLongitude().getDecimal().doubleValue();
+            Double west = bbt.getWestBoundLongitude().getDecimal().doubleValue();
+            Double north = bbt.getNorthBoundLatitude().getDecimal().doubleValue();
+            Double south = bbt.getSouthBoundLatitude().getDecimal().doubleValue();
+
+            // Define the coordinates for the bounding box
+            Coordinate[] coordinates = new Coordinate[]{
+                    new Coordinate(west, south),
+                    new Coordinate(east, south),
+                    new Coordinate(east, north),
+                    new Coordinate(west, north),
+                    new Coordinate(west, south)  // Closing the ring
+            };
+
+            Polygon polygon = factory.createPolygon(coordinates);
+            polygons.add(polygon);
+
+            envelope = calculateBoundingBox(envelope, system, polygon);
+        }
+
+        logger.info("createBBoxFromEXGeographicBoundingBoxType: polygons.size() = {}", polygons.size());
 
         if(!polygons.isEmpty()) {
             // If it didn't contain polygon, then the envelope is just the initial object and thus invalid.
