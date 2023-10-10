@@ -38,6 +38,9 @@
             }
           }
         }
+      },
+      "summaries": {
+        "type": "nested"
       }
     }
   }

@@ -13,8 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -24,6 +23,7 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
     @Mapping(target="uuid", source = "source", qualifiedByName = "mapUUID")
     @Mapping(target="title", source = "source", qualifiedByName = "mapTitle" )
     @Mapping(target="description", source = "source", qualifiedByName = "mapDescription")
+    @Mapping(target="summaries", source = "source", qualifiedByName = "mapSummaries")
     @Mapping(target="extent.bbox", source = "source", qualifiedByName = "mapExtentBbox")
     public abstract StacCollectionModel mapToSTACCollection(MDMetadataType source);
 
@@ -48,14 +48,15 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
                         .filter(f -> f.getAbstractExtent().getValue() instanceof EXExtentType)
                         .map(f -> (EXExtentType)f.getAbstractExtent().getValue())
                         .filter(f -> f.getGeographicElement() != null)
-                        .collect(Collectors.toList());
+                        .toList();
 
                 for(EXExtentType e : ext) {
                     try {
-                        BBoxUtils.createBBoxFromEXBoundingPolygonType(
+                        // TODO: pay attention here
+                        return BBoxUtils.createBBoxFromEXBoundingPolygonType(
                                 e.getGeographicElement()
                                         .stream()
-                                        .map(m -> m.getAbstractEXGeographicExtent())
+                                        .map(AbstractEXGeographicExtentPropertyType::getAbstractEXGeographicExtent)
                                         .filter(m -> m.getValue() instanceof EXBoundingPolygonType)
                                         .map(m -> (EXBoundingPolygonType)m.getValue())
                                         .collect(Collectors.toList()));
@@ -65,6 +66,7 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
                 }
             }
         }
+
         return null;
     }
     /**
@@ -85,6 +87,60 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
         }
         return "";
     }
+
+    @Named("mapSummaries")
+    List<Map<String, Object>> mapSummaries(MDMetadataType source) {
+        List<Map<String, Object>> summaries = new ArrayList<>();
+        List<MDDataIdentificationType> items = findMDDataIdentificationType(source);
+        if (!items.isEmpty()) {
+            for (MDDataIdentificationType i : items) {
+                // score
+                // TODO: Custom calculation for score for ranking
+                summaries.add(Map.of(
+                        "score", 0
+                ));
+
+                // status
+                // mdb:identificationInfo/mri:MD_DataIdentification/mri:status/mcc:MD_ProgressCode/@codeListValue
+                for (MDProgressCodePropertyType s : i.getStatus()) {
+                    summaries.add(Map.of(
+                            "status", s.getMDProgressCode().getCodeListValue()
+                    ));
+                }
+
+
+                // mdb:dateInfo/cit:CI_Date/cit:date/gco:DateTime/#text
+                // TODO: these backward compatible code make the code ugly, need to refactor
+                try {
+                    AbstractCitationType ac = i.getCitation().getAbstractCitation().getValue();
+                    if(ac instanceof CICitationType2 type2) {
+                        type2.getDate().forEach(f -> {
+                            if (f.getCIDate().getDateType().getCIDateTypeCode().getCodeListValue().equals("creation")) {
+                                summaries.add(Map.of(
+                                        "creation", f.getCIDate().getDate().getDateTime().toXMLFormat()
+                                ));
+                            }
+                        });
+                    }
+                    if(ac instanceof CICitationType type1) {
+                        // Backward compatible
+                        type1.getDate().forEach(f -> {
+                            if (f.getCIDate().getDateType().getCIDateTypeCode().getCodeListValue().equals("creation")) {
+                                summaries.add(Map.of(
+                                        "creation", f.getCIDate().getDate().getDateTime().toXMLFormat()
+                                ));
+                            }
+                        });
+                    }
+                } catch (NullPointerException e) {
+                    // Do nothing
+                    logger.warn("Unable to find creation date for metadata record: " + this.mapUUID(source));
+                }
+            }
+        }
+        return summaries;
+    }
+
     /**
      * Custom mapping for title field, name convention is start with map then the field name
      * @param source
