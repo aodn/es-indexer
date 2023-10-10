@@ -121,8 +121,7 @@ public class BBoxUtils {
                         p.getEnvelopeInternal().getMaxY()));
             }
             return result;
-        }
-        else {
+        } else {
             throw new MappingValueException("No applicable BBOX calculation found");
         }
     }

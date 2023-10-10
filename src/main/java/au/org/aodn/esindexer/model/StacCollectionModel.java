@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.util.UUID;
+import java.util.List;
+import java.util.Map;
 
 @Data
 @Builder
@@ -15,8 +17,8 @@ public class StacCollectionModel {
     protected UUID uuid;
     protected String title;
     protected String description;
-
     protected ExtentModel extent;
+    protected List<Map<String, Object>> summaries;
 
     @JsonProperty("stac_version")
     public String getStacVersion() {
