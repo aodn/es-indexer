@@ -1,15 +1,29 @@
 package au.org.aodn.esindexer.configuration;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
+
+import javax.annotation.PostConstruct;
 import java.util.Arrays;
 
 @Configuration
 public class WebMvcConfig {
+
+    @Autowired
+    protected ObjectMapper objectMapper;
+
+    @PostConstruct
+    public void init() {
+        objectMapper.registerModule(new JavaTimeModule());
+    }
+
     @Bean
     public RestTemplate restTemplate() {
         final RestTemplate restTemplate = new RestTemplate();

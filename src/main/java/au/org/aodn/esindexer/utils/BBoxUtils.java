@@ -64,155 +64,173 @@ public class BBoxUtils {
         return boundingBox;
     }
 
-    public static List<List<Double>> createBBoxFromEXBoundingPolygonType(List<Object> rawInput) throws FactoryException, TransformException {
+    public static List<List<Double>> createBBoxFromEXBoundingPolygonType(List<Object> rawInput) {
 
-        List<EXBoundingPolygonType>  input = rawInput.stream()
-                .filter(f -> f instanceof EXBoundingPolygonType)
-                .map(m -> (EXBoundingPolygonType)m)
-                .toList();
+        try {
+            List<EXBoundingPolygonType> input = rawInput.stream()
+                    .filter(f -> f instanceof EXBoundingPolygonType)
+                    .map(m -> (EXBoundingPolygonType) m)
+                    .toList();
 
-        // This is used to store the envelope of all polygon
-        Envelope envelope = new Envelope();
-        List<Polygon> polygons = new ArrayList<>();
+            // This is used to store the envelope of all polygon
+            Envelope envelope = new Envelope();
+            List<Polygon> polygons = new ArrayList<>();
 
-        // Create polygon base on coordinate system
-        for(EXBoundingPolygonType pt : input) {
-            for (GMObjectPropertyType i : pt.getPolygon()) {
-                AbstractGeometryType type = i.getAbstractGeometry().getValue();
-                /// TODO: fix here more cases
-                if (type instanceof MultiSurfaceType mst) {
+            // Create polygon base on coordinate system
+            for (EXBoundingPolygonType pt : input) {
+                for (GMObjectPropertyType i : pt.getPolygon()) {
+                    AbstractGeometryType type = i.getAbstractGeometry().getValue();
+                    /// TODO: fix here more cases
+                    if (type instanceof MultiSurfaceType mst) {
 
-                    // Set the coor system for the factory
-                    // CoordinateReferenceSystem system = CRS.decode(mst.getSrsName().trim(), true);
-                    // TODO: should come from the doc rather than hard coded CRS84
-                    CoordinateReferenceSystem system = CRS.decode("CRS:84", true);
-                    // TODO: should come from the doc rather than hard coded 4326
-                    GeometryFactory factory = new GeometryFactory(new PrecisionModel(), 4326);
+                        // Set the coor system for the factory
+                        // CoordinateReferenceSystem system = CRS.decode(mst.getSrsName().trim(), true);
+                        // TODO: should come from the doc rather than hard coded CRS84
+                        CoordinateReferenceSystem system = CRS.decode("CRS:84", true);
+                        // TODO: should come from the doc rather than hard coded 4326
+                        GeometryFactory factory = new GeometryFactory(new PrecisionModel(), 4326);
 
-                    for (SurfacePropertyType j : mst.getSurfaceMember()) {
-                        // TODO: Only process Polygon for now.
-                        if (j.getAbstractSurface().getValue() instanceof PolygonType polygonType) {
-                            // TODO: Only process LinearRingType for now
-                            if (polygonType.getExterior() != null && polygonType.getExterior().getAbstractRing().getValue() instanceof LinearRingType linearRingType) {
-                                // TODO: Handle 2D now, can be 3D
-                                if (linearRingType.getPosList().getSrsDimension().doubleValue() == 2.0) {
-                                    List<Double> v = linearRingType.getPosList().getValue();
-                                    List<Coordinate> items = new ArrayList<>();
+                        for (SurfacePropertyType j : mst.getSurfaceMember()) {
+                            // TODO: Only process Polygon for now.
+                            if (j.getAbstractSurface().getValue() instanceof PolygonType polygonType) {
+                                // TODO: Only process LinearRingType for now
+                                if (polygonType.getExterior() != null && polygonType.getExterior().getAbstractRing().getValue() instanceof LinearRingType linearRingType) {
+                                    // TODO: Handle 2D now, can be 3D
+                                    if (linearRingType.getPosList().getSrsDimension().doubleValue() == 2.0) {
+                                        List<Double> v = linearRingType.getPosList().getValue();
+                                        List<Coordinate> items = new ArrayList<>();
 
-                                    for (int z = 0; z < v.size(); z += 2) {
-                                        items.add(new Coordinate(v.get(z), v.get(z + 1)));
+                                        for (int z = 0; z < v.size(); z += 2) {
+                                            items.add(new Coordinate(v.get(z), v.get(z + 1)));
+                                        }
+
+                                        // We need to store it so that we can create the multi-array as told by spec
+                                        Polygon polygon = factory.createPolygon(items.toArray(new Coordinate[items.size()]));
+                                        polygons.add(polygon);
+
+                                        logger.debug("2D Polygon added {}", polygon);
+                                        envelope = calculateBoundingBox(envelope, system, polygon);
                                     }
-
-                                    // We need to store it so that we can create the multi-array as told by spec
-                                    Polygon polygon = factory.createPolygon(items.toArray(new Coordinate[items.size()]));
-                                    polygons.add(polygon);
-
-                                    logger.debug("2D Polygon added {}", polygon);
-                                    envelope = calculateBoundingBox(envelope, system, polygon);
                                 }
                             }
                         }
-                    }
-                } else if (type instanceof PolygonType plt) {
-                    // TODO: Only process LinearRingType for now
-                    // Set the coor system for the factory
-                    // CoordinateReferenceSystem system = CRS.decode(mst.getSrsName().trim(), true);
-                    // TODO: should come from the doc rather than hard coded CRS84
-                    CoordinateReferenceSystem system = CRS.decode("CRS:84", true);
-                    // TODO: should come from the doc rather than hard coded 4326
-                    GeometryFactory factory = new GeometryFactory(new PrecisionModel(), 4326);
+                    } else if (type instanceof PolygonType plt) {
+                        // TODO: Only process LinearRingType for now
+                        // Set the coor system for the factory
+                        // CoordinateReferenceSystem system = CRS.decode(mst.getSrsName().trim(), true);
+                        // TODO: should come from the doc rather than hard coded CRS84
+                        CoordinateReferenceSystem system = CRS.decode("CRS:84", true);
+                        // TODO: should come from the doc rather than hard coded 4326
+                        GeometryFactory factory = new GeometryFactory(new PrecisionModel(), 4326);
 
 
-                    if (plt.getExterior() != null && plt.getExterior().getAbstractRing().getValue() instanceof LinearRingType linearRingType) {
-                        // TODO: Handle 2D now, can be 3D
-                        if (linearRingType.getPosList().getSrsDimension().doubleValue() == 2.0) {
-                            List<Double> v = linearRingType.getPosList().getValue();
-                            List<Coordinate> items = new ArrayList<>();
+                        if (plt.getExterior() != null && plt.getExterior().getAbstractRing().getValue() instanceof LinearRingType linearRingType) {
+                            // TODO: Handle 2D now, can be 3D
+                            if (linearRingType.getPosList().getSrsDimension().doubleValue() == 2.0) {
+                                List<Double> v = linearRingType.getPosList().getValue();
+                                List<Coordinate> items = new ArrayList<>();
 
-                            for (int z = 0; z < v.size(); z += 2) {
-                                items.add(new Coordinate(v.get(z), v.get(z + 1)));
+                                for (int z = 0; z < v.size(); z += 2) {
+                                    items.add(new Coordinate(v.get(z), v.get(z + 1)));
+                                }
+
+                                // We need to store it so that we can create the multi-array as told by spec
+                                Polygon polygon = factory.createPolygon(items.toArray(new Coordinate[items.size()]));
+                                polygons.add(polygon);
+
+                                logger.debug("2D Polygon added {}", polygon);
+                                envelope = calculateBoundingBox(envelope, system, polygon);
                             }
-
-                            // We need to store it so that we can create the multi-array as told by spec
-                            Polygon polygon = factory.createPolygon(items.toArray(new Coordinate[items.size()]));
-                            polygons.add(polygon);
-
-                            logger.debug("2D Polygon added {}", polygon);
-                            envelope = calculateBoundingBox(envelope, system, polygon);
                         }
                     }
                 }
             }
-        }
 
-        if(!polygons.isEmpty()) {
-            List<List<Double>> result = new ArrayList<>();
-            result.add(List.of(envelope.getMinX(), envelope.getMinY(), envelope.getMaxX(), envelope.getMaxY()));
+            if (!polygons.isEmpty()) {
+                List<List<Double>> result = new ArrayList<>();
+                result.add(List.of(envelope.getMinX(), envelope.getMinY(), envelope.getMaxX(), envelope.getMaxY()));
 
-            for(Polygon p : polygons) {
-                List<Double> points = new ArrayList<>();
-                for (Coordinate c : p.getCoordinates()) {
-                    points.addAll(List.of(
-                        c.getX(), c.getY()
-                    ));
+                for (Polygon p : polygons) {
+                    List<Double> points = new ArrayList<>();
+                    for (Coordinate c : p.getCoordinates()) {
+                        points.addAll(List.of(
+                                c.getX(), c.getY()
+                        ));
+                    }
+                    result.add(points);
                 }
-                result.add(points);
+                return result;
             }
-            return result;
-        } else {
-            throw new MappingValueException("No applicable BBOX calculation found");
+            else {
+                logger.warn("No applicable BBOX calculation found");
+                return null;
+            }
         }
+        catch(Exception e) {
+            logger.error("Exception {}", e);
+            return null;
+        }
+
     }
 
-    public static List<List<Double>> createBBoxFromEXGeographicBoundingBoxType(List<Object> rawInput) throws FactoryException, TransformException {
+    public static List<List<Double>> createBBoxFromEXGeographicBoundingBoxType(List<Object> rawInput) {
 
-        List<EXGeographicBoundingBoxType>  input = rawInput.stream()
-                .filter(f -> f instanceof EXGeographicBoundingBoxType)
-                .map(m -> (EXGeographicBoundingBoxType)m)
-                .toList();
+        try {
 
-        CoordinateReferenceSystem system = CRS.decode("CRS:84", true);
-        GeometryFactory factory = new GeometryFactory(new PrecisionModel(), 4326);
+            List<EXGeographicBoundingBoxType> input = rawInput.stream()
+                    .filter(f -> f instanceof EXGeographicBoundingBoxType)
+                    .map(m -> (EXGeographicBoundingBoxType) m)
+                    .toList();
 
-        Envelope envelope = new Envelope();
-        List<Polygon> polygons = new ArrayList<>();
+            CoordinateReferenceSystem system = CRS.decode("CRS:84", true);
+            GeometryFactory factory = new GeometryFactory(new PrecisionModel(), 4326);
 
-        for (EXGeographicBoundingBoxType bbt : input) {
-            Double east = bbt.getEastBoundLongitude().getDecimal().doubleValue();
-            Double west = bbt.getWestBoundLongitude().getDecimal().doubleValue();
-            Double north = bbt.getNorthBoundLatitude().getDecimal().doubleValue();
-            Double south = bbt.getSouthBoundLatitude().getDecimal().doubleValue();
+            Envelope envelope = new Envelope();
+            List<Polygon> polygons = new ArrayList<>();
 
-            // Define the coordinates for the bounding box
-            Coordinate[] coordinates = new Coordinate[]{
-                    new Coordinate(west, south),
-                    new Coordinate(east, south),
-                    new Coordinate(east, north),
-                    new Coordinate(west, north),
-                    new Coordinate(west, south)  // Closing the ring
-            };
+            for (EXGeographicBoundingBoxType bbt : input) {
+                Double east = bbt.getEastBoundLongitude().getDecimal().doubleValue();
+                Double west = bbt.getWestBoundLongitude().getDecimal().doubleValue();
+                Double north = bbt.getNorthBoundLatitude().getDecimal().doubleValue();
+                Double south = bbt.getSouthBoundLatitude().getDecimal().doubleValue();
 
-            Polygon polygon = factory.createPolygon(coordinates);
-            polygons.add(polygon);
+                // Define the coordinates for the bounding box
+                Coordinate[] coordinates = new Coordinate[]{
+                        new Coordinate(west, south),
+                        new Coordinate(east, south),
+                        new Coordinate(east, north),
+                        new Coordinate(west, north),
+                        new Coordinate(west, south)  // Closing the ring
+                };
 
-            envelope = calculateBoundingBox(envelope, system, polygon);
-        }
+                Polygon polygon = factory.createPolygon(coordinates);
+                polygons.add(polygon);
 
-        if(!polygons.isEmpty()) {
-            // If it didn't contain polygon, then the envelope is just the initial object and thus invalid.
-            List<List<Double>> result = new ArrayList<>();
-            result.add(List.of(envelope.getMinX(), envelope.getMinY(), envelope.getMaxX(), envelope.getMaxY()));
-
-            for(Polygon p : polygons) {
-                result.add(List.of(
-                        p.getEnvelopeInternal().getMinX(),
-                        p.getEnvelopeInternal().getMinY(),
-                        p.getEnvelopeInternal().getMaxX(),
-                        p.getEnvelopeInternal().getMaxY()));
+                envelope = calculateBoundingBox(envelope, system, polygon);
             }
-            return result;
-        } else {
-            throw new MappingValueException("No applicable BBOX calculation found");
+
+            if (!polygons.isEmpty()) {
+                // If it didn't contain polygon, then the envelope is just the initial object and thus invalid.
+                List<List<Double>> result = new ArrayList<>();
+                result.add(List.of(envelope.getMinX(), envelope.getMinY(), envelope.getMaxX(), envelope.getMaxY()));
+
+                for (Polygon p : polygons) {
+                    result.add(List.of(
+                            p.getEnvelopeInternal().getMinX(),
+                            p.getEnvelopeInternal().getMinY(),
+                            p.getEnvelopeInternal().getMaxX(),
+                            p.getEnvelopeInternal().getMaxY()));
+                }
+                return result;
+            }
+            else {
+                logger.warn("No applicable BBOX calculation found");
+                return null;
+            }
+        }
+        catch(Exception e) {
+            logger.error("Exception {}", e);
+            return null;
         }
     }
 }
