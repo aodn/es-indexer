@@ -160,11 +160,14 @@ public class IndexerServiceImpl implements IndexerService {
             if (this.isMetadataPublished(uuid)) {
                 try {
                     logger.info("Ingesting a new metadata with UUID: " + uuid + " to index: " + indexName);
+                    logger.info("{}", mappedMetadataValues);
                     req = IndexRequest.of(b -> b.index(indexName).withJson(new ByteArrayInputStream(mappedMetadataValues.toString().getBytes())));
+
                     IndexResponse response = portalElasticsearchClient.index(req);
                     logger.info("Metadata with UUID: " + uuid + " indexed with version: " + response.version());
                     return ResponseEntity.status(HttpStatus.OK).body(response.toString());
-                } catch (ElasticsearchException e) {
+                }
+                catch (ElasticsearchException e) {
                     logger.error(e.getMessage());
                     throw new IndexingRecordException(e.getMessage());
                 }

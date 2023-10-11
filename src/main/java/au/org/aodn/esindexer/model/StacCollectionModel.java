@@ -17,7 +17,7 @@ public class StacCollectionModel {
     protected String title;
     protected String description;
     protected ExtentModel extent;
-    protected List<Map<String, Object>> summaries;
+    protected SummariesModel summaries;
 
     @JsonProperty("stac_version")
     public String getStacVersion() {
