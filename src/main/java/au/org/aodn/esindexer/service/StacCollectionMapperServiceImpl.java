@@ -30,8 +30,8 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
     private static final Logger logger = LoggerFactory.getLogger(StacCollectionMapperServiceImpl.class);
 
     @Named("mapUUID")
-    UUID mapUUID(MDMetadataType source) {
-        return UUID.fromString(source.getMetadataIdentifier().getMDIdentifier().getCode().getCharacterString().getValue().toString());
+    String mapUUID(MDMetadataType source) {
+        return source.getMetadataIdentifier().getMDIdentifier().getCode().getCharacterString().getValue().toString();
     }
 
     @Named("mapExtentBbox")

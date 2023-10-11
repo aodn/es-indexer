@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Data;
 
-import java.util.UUID;
 import java.util.List;
 import java.util.Map;
 
@@ -14,7 +13,7 @@ import java.util.Map;
 public class StacCollectionModel {
 
     @JsonProperty("id")
-    protected UUID uuid;
+    protected String uuid;
     protected String title;
     protected String description;
     protected ExtentModel extent;
