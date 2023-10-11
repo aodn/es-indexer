@@ -40,6 +40,8 @@ This class is tailor for the above operation
  */
 public class BBoxUtils {
 
+    // TODO: this class seriously need some refactoring at the end
+
     protected static Logger logger = LoggerFactory.getLogger(BBoxUtils.class);
 
     public static Envelope calculateBoundingBox(Envelope boundingBox, CoordinateReferenceSystem sourceCRS, Polygon... polygons) throws FactoryException, TransformException {
@@ -77,12 +79,14 @@ public class BBoxUtils {
         for(EXBoundingPolygonType pt : input) {
             for (GMObjectPropertyType i : pt.getPolygon()) {
                 AbstractGeometryType type = i.getAbstractGeometry().getValue();
-
+                /// TODO: fix here more cases
                 if (type instanceof MultiSurfaceType mst) {
+
                     // Set the coor system for the factory
                     // CoordinateReferenceSystem system = CRS.decode(mst.getSrsName().trim(), true);
+                    // TODO: should come from the doc rather than hard coded CRS84
                     CoordinateReferenceSystem system = CRS.decode("CRS:84", true);
-
+                    // TODO: should come from the doc rather than hard coded 4326
                     GeometryFactory factory = new GeometryFactory(new PrecisionModel(), 4326);
 
                     for (SurfacePropertyType j : mst.getSurfaceMember()) {
@@ -109,21 +113,50 @@ public class BBoxUtils {
                             }
                         }
                     }
+                } else if (type instanceof PolygonType plt) {
+                    // TODO: Only process LinearRingType for now
+                    // Set the coor system for the factory
+                    // CoordinateReferenceSystem system = CRS.decode(mst.getSrsName().trim(), true);
+                    // TODO: should come from the doc rather than hard coded CRS84
+                    CoordinateReferenceSystem system = CRS.decode("CRS:84", true);
+                    // TODO: should come from the doc rather than hard coded 4326
+                    GeometryFactory factory = new GeometryFactory(new PrecisionModel(), 4326);
+
+
+                    if (plt.getExterior() != null && plt.getExterior().getAbstractRing().getValue() instanceof LinearRingType linearRingType) {
+                        // TODO: Handle 2D now, can be 3D
+                        if (linearRingType.getPosList().getSrsDimension().doubleValue() == 2.0) {
+                            List<Double> v = linearRingType.getPosList().getValue();
+                            List<Coordinate> items = new ArrayList<>();
+
+                            for (int z = 0; z < v.size(); z += 2) {
+                                items.add(new Coordinate(v.get(z), v.get(z + 1)));
+                            }
+
+                            // We need to store it so that we can create the multi-array as told by spec
+                            Polygon polygon = factory.createPolygon(items.toArray(new Coordinate[items.size()]));
+                            polygons.add(polygon);
+
+                            logger.debug("2D Polygon added {}", polygon);
+                            envelope = calculateBoundingBox(envelope, system, polygon);
+                        }
+                    }
                 }
             }
         }
 
         if(!polygons.isEmpty()) {
-            // If it didn't contain polygon, then the envelope is just the initial object and thus invalid.
             List<List<Double>> result = new ArrayList<>();
             result.add(List.of(envelope.getMinX(), envelope.getMinY(), envelope.getMaxX(), envelope.getMaxY()));
 
             for(Polygon p : polygons) {
-                result.add(List.of(
-                        p.getEnvelopeInternal().getMinX(),
-                        p.getEnvelopeInternal().getMinY(),
-                        p.getEnvelopeInternal().getMaxX(),
-                        p.getEnvelopeInternal().getMaxY()));
+                List<Double> points = new ArrayList<>();
+                for (Coordinate c : p.getCoordinates()) {
+                    points.addAll(List.of(
+                        c.getX(), c.getY()
+                    ));
+                }
+                result.add(points);
             }
             return result;
         } else {
@@ -143,8 +176,6 @@ public class BBoxUtils {
 
         Envelope envelope = new Envelope();
         List<Polygon> polygons = new ArrayList<>();
-
-        logger.info("createBBoxFromEXGeographicBoundingBoxType: input.size() = {}", input.size());
 
         for (EXGeographicBoundingBoxType bbt : input) {
             Double east = bbt.getEastBoundLongitude().getDecimal().doubleValue();
@@ -166,8 +197,6 @@ public class BBoxUtils {
 
             envelope = calculateBoundingBox(envelope, system, polygon);
         }
-
-        logger.info("createBBoxFromEXGeographicBoundingBoxType: polygons.size() = {}", polygons.size());
 
         if(!polygons.isEmpty()) {
             // If it didn't contain polygon, then the envelope is just the initial object and thus invalid.
