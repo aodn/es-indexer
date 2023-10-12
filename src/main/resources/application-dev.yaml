@@ -8,7 +8,7 @@ server:
 
 elasticsearch:
   index:
-    name: viet_playground
+    name: portal_records
   serverUrl: http://3.27.147.190:9200
   apiKey: NC1Dc19Jb0JsbTJqVmhzNy1OS1k6LTdqN0Y0QktRVHVKRHVpYU1TNkhSZw==
 

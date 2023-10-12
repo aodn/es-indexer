@@ -1,6 +1,7 @@
 package au.org.aodn.esindexer.configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -21,7 +22,11 @@ public class WebMvcConfig {
 
     @PostConstruct
     public void init() {
-        objectMapper.registerModule(new JavaTimeModule());
+        JavaTimeModule module = new JavaTimeModule();
+
+        // Avoid output date-time string become number
+        objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        objectMapper.registerModule(module);
     }
 
     @Bean
