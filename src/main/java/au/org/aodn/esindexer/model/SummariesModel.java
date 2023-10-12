@@ -1,5 +1,6 @@
 package au.org.aodn.esindexer.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Data;
 
@@ -12,4 +13,7 @@ public class SummariesModel {
     protected Integer score;
     protected String status;
     protected List<ZonedDateTime> creation;
+
+    @JsonProperty("proj:geometry")
+    protected String geometry;
 }
