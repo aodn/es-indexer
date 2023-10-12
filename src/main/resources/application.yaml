@@ -14,3 +14,6 @@ geonetwork:
     api:
       endpoint: ${geonetwork.host}/geonetwork/srv/api/search/records/_search
 
+logging:
+  level:
+    au.org.aodn.esindexer: debug

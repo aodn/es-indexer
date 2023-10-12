@@ -5,6 +5,7 @@ import org.locationtech.jts.geom.Polygon;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 /*
@@ -32,7 +33,7 @@ public class StacUtils {
 
     protected static Logger logger = LoggerFactory.getLogger(StacUtils.class);
 
-    public static List<List<Double>> createStacBBox(List<Polygon> polygons) {
+    public static List<List<BigDecimal>> createStacBBox(List<Polygon> polygons) {
         Envelope envelope = new Envelope();
         try {
             for(Polygon polygon : polygons) {
@@ -43,15 +44,19 @@ public class StacUtils {
 
             if (!polygons.isEmpty()) {
                 // If it didn't contain polygon, then the envelope is just the initial empty object and thus invalid.
-                List<List<Double>> result = new ArrayList<>();
-                result.add(List.of(envelope.getMinX(), envelope.getMinY(), envelope.getMaxX(), envelope.getMaxY()));
+                List<List<BigDecimal>> result = new ArrayList<>();
+                result.add(List.of(
+                        BigDecimal.valueOf(envelope.getMinX()),
+                        BigDecimal.valueOf(envelope.getMinY()),
+                        BigDecimal.valueOf(envelope.getMaxX()),
+                        BigDecimal.valueOf(envelope.getMaxY())));
 
                 for (Polygon p : polygons) {
                     result.add(List.of(
-                            p.getEnvelopeInternal().getMinX(),
-                            p.getEnvelopeInternal().getMinY(),
-                            p.getEnvelopeInternal().getMaxX(),
-                            p.getEnvelopeInternal().getMaxY()));
+                            BigDecimal.valueOf(p.getEnvelopeInternal().getMinX()),
+                            BigDecimal.valueOf(p.getEnvelopeInternal().getMinY()),
+                            BigDecimal.valueOf(p.getEnvelopeInternal().getMaxX()),
+                            BigDecimal.valueOf(p.getEnvelopeInternal().getMaxY())));
                 }
                 return result;
             }

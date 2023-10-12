@@ -231,8 +231,11 @@ public class IndexerServiceImpl implements IndexerService {
             try {
                 MDMetadataType metadataType = jaxbUtils.unmarshal(metadataRecord);
                 // get mapped metadata values from GeoNetwork to STAC collection schema
-                JSONObject mappedRecord = new JSONObject(objectMapper.writerWithDefaultPrettyPrinter()
+                JSONObject mappedRecord = new JSONObject(objectMapper
+                        .writerWithDefaultPrettyPrinter()
                         .writeValueAsString(mapper.mapToSTACCollection(metadataType)));
+
+                logger.debug("Final output json is {}", mappedRecord);
 
                 // convert mapped values to binary data
                 ByteArrayInputStream input = new ByteArrayInputStream(mappedRecord.toString().getBytes());

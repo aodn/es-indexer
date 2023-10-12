@@ -40,7 +40,12 @@
         }
       },
       "summaries": {
-        "type": "nested"
+        "properties" : {
+          "score": { "type": "integer" },
+          "status": { "type": "text" },
+          "creation": { "type": "date" },
+          "proj:geometry": { "type": "shape" }
+        }
       }
     }
   }
