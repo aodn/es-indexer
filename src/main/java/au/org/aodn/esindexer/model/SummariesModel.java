@@ -6,14 +6,16 @@ import lombok.Data;
 
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.Map;
 
 @Data
 @Builder
 public class SummariesModel {
+
     protected Integer score;
     protected String status;
     protected List<ZonedDateTime> creation;
 
     @JsonProperty("proj:geometry")
-    protected String geometry;
+    protected Map geometry;
 }

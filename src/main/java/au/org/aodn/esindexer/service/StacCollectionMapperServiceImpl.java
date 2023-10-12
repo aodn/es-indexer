@@ -1,9 +1,12 @@
 package au.org.aodn.esindexer.service;
 
 import au.org.aodn.esindexer.exception.MappingValueException;
+import au.org.aodn.esindexer.model.SummariesModel;
 import au.org.aodn.esindexer.utils.BBoxUtils;
 import au.org.aodn.esindexer.model.StacCollectionModel;
+import au.org.aodn.esindexer.utils.GeometryUtils;
 import au.org.aodn.metadata.iso19115_3_2018.*;
+import org.json.JSONObject;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
@@ -11,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 import java.util.*;
 import java.util.function.Function;
@@ -26,6 +30,7 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
     @Mapping(target="summaries.score", source = "source", qualifiedByName = "mapSummaries.score")
     @Mapping(target="summaries.status", source = "source", qualifiedByName = "mapSummaries.status")
     @Mapping(target="summaries.creation", source = "source", qualifiedByName = "mapSummaries.creation")
+    @Mapping(target="summaries.geometry", source = "source", qualifiedByName = "mapSummaries.geometry")
     @Mapping(target="extent.bbox", source = "source", qualifiedByName = "mapExtentBbox")
     public abstract StacCollectionModel mapToSTACCollection(MDMetadataType source);
 
@@ -37,14 +42,13 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
     }
 
     @Named("mapExtentBbox")
-    List<List<Double>> mapExtentBbox(MDMetadataType source) {
+    List<List<BigDecimal>> mapExtentBbox(MDMetadataType source) {
         return createGeometryItems(
                 source,
                 BBoxUtils::createBBoxFromEXBoundingPolygonType,
                 BBoxUtils::createBBoxFromEXGeographicBoundingBoxType
         );
     }
-
     /**
      * Custom mapping for description field, name convention is start with map then the field name
      * @param source
@@ -62,6 +66,15 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
             }
         }
         return "";
+    }
+
+    @Named("mapSummaries.geometry")
+    Map mapSummariesGeometry(MDMetadataType source) {
+        return createGeometryItems(
+                source,
+                GeometryUtils::createGeometryFromFromEXBoundingPolygonType,
+                GeometryUtils::createGeometryFromEXGeographicBoundingBoxType
+        );
     }
 
     @Named("mapSummaries.score")
