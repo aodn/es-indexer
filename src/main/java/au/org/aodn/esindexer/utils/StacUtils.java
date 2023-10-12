@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 /*
@@ -34,6 +35,20 @@ public class StacUtils {
 
     protected static Logger logger = LoggerFactory.getLogger(StacUtils.class);
 
+    protected static int scale = 10;
+
+    /**
+     * Default sale aka number of decimal to use is 10
+     * @param s
+     */
+    public void setScale(int s) {
+        this.scale = s;
+    }
+    /**
+     *
+     * @param polygons
+     * @return
+     */
     public static List<List<BigDecimal>> createStacBBox(List<Polygon> polygons) {
         Envelope envelope = new Envelope();
         try {
@@ -47,16 +62,17 @@ public class StacUtils {
                 // If it didn't contain polygon, then the envelope is just the initial empty object and thus invalid.
                 List<List<BigDecimal>> result = new ArrayList<>();
                 result.add(List.of(
-                        BigDecimal.valueOf(envelope.getMinX()),
-                        BigDecimal.valueOf(envelope.getMinY()),
-                        BigDecimal.valueOf(envelope.getMaxX()),
-                        BigDecimal.valueOf(envelope.getMaxY())));
+                        BigDecimal.valueOf(envelope.getMinX()).setScale(scale, RoundingMode.HALF_UP),
+                        BigDecimal.valueOf(envelope.getMinY()).setScale(scale, RoundingMode.HALF_UP),
+                        BigDecimal.valueOf(envelope.getMaxX()).setScale(scale, RoundingMode.HALF_UP),
+                        BigDecimal.valueOf(envelope.getMaxY()).setScale(scale, RoundingMode.HALF_UP)));
 
                 for (Polygon p : polygons) {
                     List<BigDecimal> points = new ArrayList<>();
                     for (Coordinate c : p.getCoordinates()) {
                         points.addAll(List.of(
-                            BigDecimal.valueOf(c.getX()), BigDecimal.valueOf(c.getY())
+                            BigDecimal.valueOf(c.getX()).setScale(scale, RoundingMode.HALF_UP),
+                                BigDecimal.valueOf(c.getY()).setScale(scale, RoundingMode.HALF_UP)
                         ));
                     }
                     result.add(points);
@@ -65,14 +81,14 @@ public class StacUtils {
             }
             else {
                 logger.warn("No applicable BBOX calculation found");
-                return null;
+                return new ArrayList<>();
             }
         }
         catch(Exception e) {
             logger.error("Error processing", e);
             e.printStackTrace();
         }
-        return null;
+        return new ArrayList<>();
     }
 }
 

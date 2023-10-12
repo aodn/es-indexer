@@ -8,22 +8,14 @@ server:
 
 elasticsearch:
   index:
-    name: portal_records
+    name: dev_portal_records
   serverUrl: http://3.27.147.190:9200
   apiKey: NC1Dc19Jb0JsbTJqVmhzNy1OS1k6LTdqN0Y0QktRVHVKRHVpYU1TNkhSZw==
 
 geonetwork:
   host: http://ec2-3-24-110-244.ap-southeast-2.compute.amazonaws.com:8080
 
-springdoc:
-  api-docs:
-    enabled: true
-  swagger-ui:
-    enabled: true
-    disable-swagger-default-url: true
-
 logging:
   level:
-    au.org.aodn.esindexer.service: DEBUG
     org.hibernate.SQL: DEBUG
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
