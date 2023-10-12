@@ -6,6 +6,10 @@ app:
   http:
     auth-token-header-name: X-API-Key
 
+elasticsearch:
+  index:
+    name: portal_records
+
 geonetwork:
   host: http://localhost:8080
   records:
@@ -13,6 +17,13 @@ geonetwork:
   search:
     api:
       endpoint: ${geonetwork.host}/geonetwork/srv/api/search/records/_search
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    disable-swagger-default-url: true
 
 logging:
   level:
