@@ -41,7 +41,7 @@
       },
       "summaries": {
         "properties" : {
-          "score": { "type": "integer" },
+          "score": { "type": "long" },
           "status": { "type": "text" },
           "creation": { "type": "date" },
           "proj:geometry": { "type": "shape" }
