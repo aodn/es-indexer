@@ -23,6 +23,8 @@ public class WebMvcConfig {
     @PostConstruct
     public void init() {
         JavaTimeModule module = new JavaTimeModule();
+
+        // Avoid output date-time string become number
         objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
         objectMapper.registerModule(module);
     }
