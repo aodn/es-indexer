@@ -1,5 +1,6 @@
 package au.org.aodn.esindexer.utils;
 
+import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.Envelope;
 import org.locationtech.jts.geom.Polygon;
 import org.slf4j.Logger;
@@ -52,11 +53,13 @@ public class StacUtils {
                         BigDecimal.valueOf(envelope.getMaxY())));
 
                 for (Polygon p : polygons) {
-                    result.add(List.of(
-                            BigDecimal.valueOf(p.getEnvelopeInternal().getMinX()),
-                            BigDecimal.valueOf(p.getEnvelopeInternal().getMinY()),
-                            BigDecimal.valueOf(p.getEnvelopeInternal().getMaxX()),
-                            BigDecimal.valueOf(p.getEnvelopeInternal().getMaxY())));
+                    List<BigDecimal> points = new ArrayList<>();
+                    for (Coordinate c : p.getCoordinates()) {
+                        points.addAll(List.of(
+                            BigDecimal.valueOf(c.getX()), BigDecimal.valueOf(c.getY())
+                        ));
+                    }
+                    result.add(points);
                 }
                 return result;
             }
