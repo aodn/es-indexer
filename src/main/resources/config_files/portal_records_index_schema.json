@@ -44,7 +44,7 @@
           "score": { "type": "long" },
           "status": { "type": "text" },
           "creation": { "type": "date" },
-          "proj:geometry": { "type": "shape" }
+          "proj:geometry": { "type": "geo_shape" }
         }
       }
     }
