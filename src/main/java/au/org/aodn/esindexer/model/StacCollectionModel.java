@@ -20,6 +20,8 @@ public class StacCollectionModel {
     protected SummariesModel summaries;
     protected List<Map<String, Object>> contacts;
 
+    protected List<Object> themes;
+
     @JsonProperty("stac_version")
     public String getStacVersion() {
         return AppConstants.STAC_VERSION;

@@ -33,6 +33,7 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
     @Mapping(target="summaries.geometry", source = "source", qualifiedByName = "mapSummaries.geometry")
     @Mapping(target="extent.bbox", source = "source", qualifiedByName = "mapExtentBbox")
     @Mapping(target="contacts", source = "source", qualifiedByName = "mapContacts")
+    @Mapping(target="themes", source = "source", qualifiedByName = "mapThemes")
     public abstract StacCollectionModel mapToSTACCollection(MDMetadataType source);
 
     private static final Logger logger = LoggerFactory.getLogger(StacCollectionMapperServiceImpl.class);
@@ -165,6 +166,41 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
             }
         }
         return "";
+    }
+
+    @Named("mapThemes")
+    List<Object> mapThemes(MDMetadataType source) {
+        List<Object> themes = new ArrayList<>();
+        List<MDDataIdentificationType> items = findMDDataIdentificationType(source);
+        if (!items.isEmpty()) {
+            for (MDDataIdentificationType i : items) {
+                i.getDescriptiveKeywords().forEach(descriptiveKeyword -> {
+                    List<Map<String, Object>> keywords = new ArrayList<>();
+                    descriptiveKeyword.getMDKeywords().getKeyword().forEach(keyword -> {
+                        if (keyword.getCharacterString().getValue() instanceof AnchorType value) {
+                            keywords.add(Map.of("id", value.getValue(),
+                                    "url", value.getHref()));
+                        } else {
+                            keywords.add(Map.of("id", keyword.getCharacterString().getValue().toString()));
+                        }
+                    });
+
+//                    if (descriptiveKeyword.getMDKeywords().getThesaurusName().getAbstractCitation().getValue() instanceof CICitationType2 value) {
+//                        themes.add(Map.of(
+//                                "scheme", descriptiveKeyword.getMDKeywords().getType().getMDKeywordTypeCode().getCodeListValue(),
+//                                "concepts", keywords,
+//                                "title", value.getTitle().getCharacterString().getValue().toString()
+//                        ));
+//                    }
+
+                    themes.add(Map.of(
+                            "scheme", descriptiveKeyword.getMDKeywords().getType().getMDKeywordTypeCode().getCodeListValue(),
+                            "concepts", keywords)
+                    );
+                });
+            }
+        }
+        return themes;
     }
 
     @Named("mapContacts")
