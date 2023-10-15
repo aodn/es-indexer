@@ -2,7 +2,10 @@
   "mappings": {
     "dynamic": true,
     "properties": {
-      "id": { "type": "text" },
+      "id": {
+        "type": "text",
+        "analyzer": "keyword"
+      },
       "stac_version": { "type": "text" },
       "type": { "type": "text" },
       "title": { "type": "text" },
