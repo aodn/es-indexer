@@ -1,6 +1,7 @@
 package au.org.aodn.esindexer.service;
 
 import au.org.aodn.esindexer.exception.MappingValueException;
+import au.org.aodn.esindexer.model.ContactsModel;
 import au.org.aodn.esindexer.model.ThemesModel;
 import au.org.aodn.esindexer.utils.BBoxUtils;
 import au.org.aodn.esindexer.model.StacCollectionModel;
@@ -235,9 +236,66 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
         return results;
     }
 
-    //TODO: need refactoring
+
     @Named("mapContacts")
-    List<Map<String, Object>> mapContact(MDMetadataType source) {
+    List<ContactsModel> mapContacts(MDMetadataType source) {
+        List<ContactsModel> results = new ArrayList<>();
+        List<MDDataIdentificationType> items = findMDDataIdentificationType(source);
+        if (!items.isEmpty()) {
+            for (MDDataIdentificationType item : items) {
+                item.getPointOfContact().forEach(poc -> {
+                    AbstractResponsibilityType responsibilityType = poc.getAbstractResponsibility().getValue();
+                    if (responsibilityType instanceof CIResponsibilityType2 ciResponsibility) {
+                        ContactsModel contactsModel = ContactsModel.builder().build();
+                        contactsModel.setRoles(mapContactsRole(ciResponsibility));
+                        ciResponsibility.getParty().forEach(party -> {
+                            contactsModel.setOrganization(mapContactsOrganization(party));
+                            try {
+                                ((CIOrganisationType2) party.getAbstractCIParty().getValue()).getIndividual().forEach(individual -> {
+                                    contactsModel.setName(mapContactsName(individual));
+                                    contactsModel.setPosition(mapContactsPosition(individual));
+
+                                    individual.getCIIndividual().getContactInfo().forEach(contactInfo -> {
+
+
+                                    });
+                                });
+                            } catch (Exception e) {
+                                logger.warn("Unable to find contact info for metadata record: " + this.mapUUID(source));
+                            }
+                        });
+                        results.add(contactsModel);
+                    }
+                });
+            }
+        }
+        return results;
+    }
+
+    protected String mapContactsRole(CIResponsibilityType2 ciResponsibility) {
+        CodeListValueType roleCode = ciResponsibility.getRole().getCIRoleCode();
+        if (roleCode != null) { return roleCode.getCodeListValue(); } else { return ""; }
+    }
+
+    protected String mapContactsOrganization(AbstractCIPartyPropertyType2 party) {
+        String organisationString = party.getAbstractCIParty().getValue().getName().getCharacterString().getValue().toString();
+        if (organisationString != null) { return organisationString; } else { return ""; }
+
+    }
+
+    protected String mapContactsName(CIIndividualPropertyType2 individual) {
+        CharacterStringPropertyType nameString = individual.getCIIndividual().getName();
+        if (nameString != null) { return individual.getCIIndividual().getName().getCharacterString().getValue().toString(); } else { return ""; }
+    }
+
+    protected String mapContactsPosition(CIIndividualPropertyType2 individual) {
+        CharacterStringPropertyType positionString = individual.getCIIndividual().getPositionName();
+        if (positionString != null) { return individual.getCIIndividual().getPositionName().getCharacterString().getValue().toString(); } else { return ""; }
+    }
+
+    //TODO: need refactoring
+    @Named("mapContactsx")
+    List<Map<String, Object>> mapContactsx(MDMetadataType source) {
         List<Map<String, Object>> contacts = new ArrayList<>();
         List<MDDataIdentificationType> items = findMDDataIdentificationType(source);
         if (!items.isEmpty()) {
