@@ -14,7 +14,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.time.ZonedDateTime;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -28,7 +27,7 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
     @Mapping(target="description", source = "source", qualifiedByName = "mapDescription")
     @Mapping(target="summaries.score", source = "source", qualifiedByName = "mapSummaries.score")
     @Mapping(target="summaries.status", source = "source", qualifiedByName = "mapSummaries.status")
-    @Mapping(target="summaries.creation", source = "source", qualifiedByName = "mapSummaries.creation")
+    @Mapping(target="summaries.scope", source = "source", qualifiedByName = "mapSummaries.scope")
     @Mapping(target="summaries.geometry", source = "source", qualifiedByName = "mapSummaries.geometry")
     @Mapping(target="extent.bbox", source = "source", qualifiedByName = "mapExtentBbox")
     @Mapping(target="contacts", source = "source", qualifiedByName = "mapContacts")
@@ -102,43 +101,23 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
         return null;
     }
 
-    @Named("mapSummaries.creation")
-    List<ZonedDateTime> createSummariesCreation(MDMetadataType source) {
-        List<Map<String, Object>> summaries = new ArrayList<>();
-        List<MDDataIdentificationType> items = findMDDataIdentificationType(source);
-
+    @Named("mapSummaries.scope")
+    Map<String, String> createSummariesScope(MDMetadataType source) {
+        List<MDMetadataScopeType> items = findMDMetadataScopePropertyType(source);
         if (!items.isEmpty()) {
-            for (MDDataIdentificationType i : items) {
-                List<ZonedDateTime> temp = new ArrayList<>();
-                // mdb:dateInfo/cit:CI_Date/cit:date/gco:DateTime/#text
-                // TODO: these backward compatible code make the code ugly, need to refactor
-                try {
-                    AbstractCitationType ac = i.getCitation().getAbstractCitation().getValue();
-                    if(ac instanceof CICitationType2 type2) {
-                        type2.getDate().forEach(f -> {
-                            if (f.getCIDate().getDateType().getCIDateTypeCode().getCodeListValue().equals("creation")) {
-                                temp.add(f.getCIDate().getDate().getDateTime().toGregorianCalendar().toZonedDateTime());
-                            }
-                        });
-                    }
-                    else if(ac instanceof CICitationType type1) {
-                        // Backward compatible
-                        type1.getDate().forEach(f -> {
-                            if (f.getCIDate().getDateType().getCIDateTypeCode().getCodeListValue().equals("creation")) {
-                                temp.add(f.getCIDate().getDate().getDateTime().toGregorianCalendar().toZonedDateTime());
-                            }
-                        });
-                    }
-                } catch (NullPointerException e) {
-                    // Do nothing
-                    logger.warn("Unable to find creation date for metadata record: " + this.mapUUID(source));
-                }
-                finally {
-                    return temp;
-                }
+            for (MDMetadataScopeType i : items) {
+
+                Map<String, String> result = new HashMap<>();
+                CodeListValueType codeListValueType = i.getResourceScope().getMDScopeCode();
+                result.put("code", codeListValueType != null ? codeListValueType.getCodeListValue() : "");
+                CharacterStringPropertyType nameString = i.getName();
+                result.put("name", nameString != null ? nameString.getCharacterString().getValue().toString() : "");
+
+                return result;
             }
         }
-        logger.warn("Unable to find creation metadata record: " + this.mapUUID(source));
+
+        logger.warn("Unable to find scope metadata record: " + this.mapUUID(source));
         return null;
     }
 
@@ -177,32 +156,41 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
                 i.getDescriptiveKeywords().forEach(descriptiveKeyword -> {
                     List<Map<String, Object>> keywords = new ArrayList<>();
 
-                    //TODO: handle null exception
                     descriptiveKeyword.getMDKeywords().getKeyword().forEach(keyword -> {
-                        if (keyword.getCharacterString().getValue() instanceof AnchorType value) {
-                            keywords.add(Map.of("id", value.getValue(),
-                                    "url", value.getHref()));
-                        } else {
-                            keywords.add(Map.of("id", keyword.getCharacterString().getValue().toString()));
+                        if (keyword != null) {
+                            if (keyword.getCharacterString().getValue() instanceof AnchorType value) {
+                                keywords.add(Map.of("id", value.getValue(),
+                                        "url", value.getHref()));
+                            } else {
+                                keywords.add(Map.of("id", keyword.getCharacterString().getValue().toString()));
+                            }
                         }
                     });
 
-                    CICitationType2 thesaurusNameType2 = (CICitationType2) descriptiveKeyword.getMDKeywords().getThesaurusName().getAbstractCitation().getValue();
-                    if (thesaurusNameType2.getTitle().getCharacterString().getValue() instanceof  AnchorType value) {
-                        themes.add(Map.of(
-                                "scheme", descriptiveKeyword.getMDKeywords().getType().getMDKeywordTypeCode().getCodeListValue(),
-                                "concepts", keywords,
-                                "title", value.getValue(),
-                                "description", value.getTitleAttribute() != null ? value.getTitleAttribute() : ""
-                        ));
-                    } else if (thesaurusNameType2.getTitle().getCharacterString().getValue() instanceof String value) {
-                        themes.add(Map.of(
-                                "scheme", descriptiveKeyword.getMDKeywords().getType().getMDKeywordTypeCode().getCodeListValue(),
-                                "concepts", keywords,
-                                "title", value,
-                                "description", thesaurusNameType2.getAlternateTitle().stream().map(CharacterStringPropertyType::getCharacterString).map(JAXBElement::getValue).map(Object::toString).collect(Collectors.joining(", "))
-                        ));
+                    if (!keywords.isEmpty()) {
+                        AbstractCitationPropertyType abstractCitationPropertyType = descriptiveKeyword.getMDKeywords().getThesaurusName();
+                        if (abstractCitationPropertyType != null) {
+                            CICitationType2 thesaurusNameType2 = (CICitationType2) abstractCitationPropertyType.getAbstractCitation().getValue();
+
+                            CharacterStringPropertyType titleString = thesaurusNameType2.getTitle();
+                            if (titleString != null && titleString.getCharacterString().getValue() instanceof  AnchorType value) {
+                                themes.add(Map.of(
+                                        "scheme", descriptiveKeyword.getMDKeywords().getType().getMDKeywordTypeCode() != null ? descriptiveKeyword.getMDKeywords().getType().getMDKeywordTypeCode().getCodeListValue() : "",
+                                        "concepts", keywords,
+                                        "title", value.getValue() != null ? value.getValue() : "",
+                                        "description", value.getTitleAttribute() != null ? value.getTitleAttribute() : ""
+                                ));
+                            } else if (titleString != null && titleString.getCharacterString().getValue() instanceof String value) {
+                                themes.add(Map.of(
+                                        "scheme", descriptiveKeyword.getMDKeywords().getType() != null ? descriptiveKeyword.getMDKeywords().getType().getMDKeywordTypeCode().getCodeListValue() : "",
+                                        "concepts", keywords,
+                                        "title", value,
+                                        "description", thesaurusNameType2.getAlternateTitle().stream().map(CharacterStringPropertyType::getCharacterString).map(JAXBElement::getValue).map(Object::toString).collect(Collectors.joining(", "))
+                                ));
+                            }
+                        }
                     }
+
                 });
             }
         }
@@ -382,6 +370,14 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
                 .filter(f -> f.getAbstractResourceDescription().getValue() != null)
                 .filter(f -> f.getAbstractResourceDescription().getValue() instanceof MDDataIdentificationType)
                 .map(f -> (MDDataIdentificationType)f.getAbstractResourceDescription().getValue())
+                .collect(Collectors.toList());
+    }
+
+    protected List<MDMetadataScopeType> findMDMetadataScopePropertyType(MDMetadataType source) {
+        return source.getMetadataScope()
+                .stream()
+                .map(MDMetadataScopePropertyType::getMDMetadataScope)
+                .filter(Objects::nonNull)
                 .collect(Collectors.toList());
     }
 }

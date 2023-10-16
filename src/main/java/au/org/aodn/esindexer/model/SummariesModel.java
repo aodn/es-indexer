@@ -15,8 +15,7 @@ public class SummariesModel {
 
     protected Integer score;
     protected String status;
-
-    protected List<ZonedDateTime> creation;
+    protected Map<String, String> scope;
 
     @JsonProperty("proj:geometry")
     protected Map geometry;
