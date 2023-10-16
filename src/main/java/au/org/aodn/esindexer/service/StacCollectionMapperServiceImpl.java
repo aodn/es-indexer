@@ -1,6 +1,7 @@
 package au.org.aodn.esindexer.service;
 
 import au.org.aodn.esindexer.exception.MappingValueException;
+import au.org.aodn.esindexer.model.ThemesModel;
 import au.org.aodn.esindexer.utils.BBoxUtils;
 import au.org.aodn.esindexer.model.StacCollectionModel;
 import au.org.aodn.esindexer.utils.GeometryUtils;
@@ -12,9 +13,11 @@ import org.mapstruct.Named;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.context.ThemeSource;
 
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -146,57 +149,93 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
         return "";
     }
 
-    // TODO: need refactoring
+    protected List<Map<String, String>> mapThemesConcepts(MDKeywordsPropertyType descriptiveKeyword) {
+        List<Map<String, String>> keywords = new ArrayList<>();
+        descriptiveKeyword.getMDKeywords().getKeyword().forEach(keyword -> {
+            if (keyword != null) {
+                if (keyword.getCharacterString().getValue() instanceof AnchorType value) {
+                    keywords.add(Map.of("id", value.getValue(),
+                            "url", value.getHref()));
+                } else {
+                    keywords.add(Map.of("id", keyword.getCharacterString().getValue().toString()));
+                }
+            }
+        });
+        return keywords;
+    }
+
+    protected String mapThemesTitle(MDKeywordsPropertyType descriptiveKeyword, String uuid) {
+        AbstractCitationPropertyType abstractCitationPropertyType = descriptiveKeyword.getMDKeywords().getThesaurusName();
+        if (abstractCitationPropertyType != null) {
+            CICitationType2 thesaurusNameType2 = (CICitationType2) abstractCitationPropertyType.getAbstractCitation().getValue();
+            CharacterStringPropertyType titleString = thesaurusNameType2.getTitle();
+            if (titleString != null && titleString.getCharacterString().getValue() instanceof  AnchorType value) {
+                if (value.getValue() != null) {
+                    return value.getValue();
+                } else {
+                    return "";
+                }
+            } else if (titleString != null && titleString.getCharacterString().getValue() instanceof String value) {
+                return value;
+            }
+        }
+        logger.debug("Unable to find themes' title for metadata record: " + uuid);
+        return null;
+    }
+
+    protected String mapThemesDescription(MDKeywordsPropertyType descriptiveKeyword, String uuid) {
+        AbstractCitationPropertyType abstractCitationPropertyType = descriptiveKeyword.getMDKeywords().getThesaurusName();
+        if (abstractCitationPropertyType != null) {
+            CICitationType2 thesaurusNameType2 = (CICitationType2) abstractCitationPropertyType.getAbstractCitation().getValue();
+            CharacterStringPropertyType titleString = thesaurusNameType2.getTitle();
+            if (titleString != null && titleString.getCharacterString().getValue() instanceof  AnchorType value) {
+                if (value.getTitleAttribute() != null) {
+                    return value.getTitleAttribute();
+                } else {
+                    return "";
+                }
+            } else if (titleString != null && titleString.getCharacterString().getValue() instanceof String value) {
+                return thesaurusNameType2.getAlternateTitle().stream().map(CharacterStringPropertyType::getCharacterString).map(JAXBElement::getValue).map(Object::toString).collect(Collectors.joining(", "));
+            }
+        }
+        logger.debug("Unable to find themes' description for metadata record: " + uuid);
+        return null;
+    }
+
+    protected String mapThemesScheme(MDKeywordsPropertyType descriptiveKeyword, String uuid) {
+        AbstractCitationPropertyType abstractCitationPropertyType = descriptiveKeyword.getMDKeywords().getThesaurusName();
+        if (abstractCitationPropertyType != null) {
+            if (descriptiveKeyword.getMDKeywords().getType() != null) {
+                return descriptiveKeyword.getMDKeywords().getType().getMDKeywordTypeCode().getCodeListValue();
+            } else {
+                return "";
+            }
+        }
+        logger.debug("Unable to find themes' scheme for metadata record: " + uuid);
+        return null;
+    }
+
     @Named("mapThemes")
-    List<Object> mapThemes(MDMetadataType source) {
-        List<Object> themes = new ArrayList<>();
+    List<ThemesModel> mapThemes(MDMetadataType source) {
+        List<ThemesModel> results = new ArrayList<>();
         List<MDDataIdentificationType> items = findMDDataIdentificationType(source);
         if (!items.isEmpty()) {
             for (MDDataIdentificationType i : items) {
                 i.getDescriptiveKeywords().forEach(descriptiveKeyword -> {
-                    List<Map<String, Object>> keywords = new ArrayList<>();
-
-                    descriptiveKeyword.getMDKeywords().getKeyword().forEach(keyword -> {
-                        if (keyword != null) {
-                            if (keyword.getCharacterString().getValue() instanceof AnchorType value) {
-                                keywords.add(Map.of("id", value.getValue(),
-                                        "url", value.getHref()));
-                            } else {
-                                keywords.add(Map.of("id", keyword.getCharacterString().getValue().toString()));
-                            }
-                        }
-                    });
-
-                    if (!keywords.isEmpty()) {
-                        AbstractCitationPropertyType abstractCitationPropertyType = descriptiveKeyword.getMDKeywords().getThesaurusName();
-                        if (abstractCitationPropertyType != null) {
-                            CICitationType2 thesaurusNameType2 = (CICitationType2) abstractCitationPropertyType.getAbstractCitation().getValue();
-
-                            CharacterStringPropertyType titleString = thesaurusNameType2.getTitle();
-                            if (titleString != null && titleString.getCharacterString().getValue() instanceof  AnchorType value) {
-                                themes.add(Map.of(
-                                        "scheme", descriptiveKeyword.getMDKeywords().getType().getMDKeywordTypeCode() != null ? descriptiveKeyword.getMDKeywords().getType().getMDKeywordTypeCode().getCodeListValue() : "",
-                                        "concepts", keywords,
-                                        "title", value.getValue() != null ? value.getValue() : "",
-                                        "description", value.getTitleAttribute() != null ? value.getTitleAttribute() : ""
-                                ));
-                            } else if (titleString != null && titleString.getCharacterString().getValue() instanceof String value) {
-                                themes.add(Map.of(
-                                        "scheme", descriptiveKeyword.getMDKeywords().getType() != null ? descriptiveKeyword.getMDKeywords().getType().getMDKeywordTypeCode().getCodeListValue() : "",
-                                        "concepts", keywords,
-                                        "title", value,
-                                        "description", thesaurusNameType2.getAlternateTitle().stream().map(CharacterStringPropertyType::getCharacterString).map(JAXBElement::getValue).map(Object::toString).collect(Collectors.joining(", "))
-                                ));
-                            }
-                        }
-                    }
-
+                    ThemesModel themesModel = ThemesModel.builder().build();
+                    String uuid = this.mapUUID(source);
+                    themesModel.setTitle(mapThemesTitle(descriptiveKeyword, uuid));
+                    themesModel.setConcepts(mapThemesConcepts(descriptiveKeyword));
+                    themesModel.setDescription(mapThemesDescription(descriptiveKeyword, uuid));
+                    themesModel.setScheme(mapThemesScheme(descriptiveKeyword, uuid));
+                    results.add(themesModel);
                 });
             }
         }
-        return themes;
+        return results;
     }
 
+    //TODO: need refactoring
     @Named("mapContacts")
     List<Map<String, Object>> mapContact(MDMetadataType source) {
         List<Map<String, Object>> contacts = new ArrayList<>();
