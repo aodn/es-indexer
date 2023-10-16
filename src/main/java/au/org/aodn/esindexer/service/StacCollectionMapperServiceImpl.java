@@ -1,12 +1,11 @@
 package au.org.aodn.esindexer.service;
 
 import au.org.aodn.esindexer.exception.MappingValueException;
-import au.org.aodn.esindexer.model.SummariesModel;
 import au.org.aodn.esindexer.utils.BBoxUtils;
 import au.org.aodn.esindexer.model.StacCollectionModel;
 import au.org.aodn.esindexer.utils.GeometryUtils;
 import au.org.aodn.metadata.iso19115_3_2018.*;
-import org.json.JSONObject;
+import jakarta.xml.bind.JAXBElement;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
@@ -168,6 +167,7 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
         return "";
     }
 
+    // TODO: need refactoring
     @Named("mapThemes")
     List<Object> mapThemes(MDMetadataType source) {
         List<Object> themes = new ArrayList<>();
@@ -176,6 +176,8 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
             for (MDDataIdentificationType i : items) {
                 i.getDescriptiveKeywords().forEach(descriptiveKeyword -> {
                     List<Map<String, Object>> keywords = new ArrayList<>();
+
+                    //TODO: handle null exception
                     descriptiveKeyword.getMDKeywords().getKeyword().forEach(keyword -> {
                         if (keyword.getCharacterString().getValue() instanceof AnchorType value) {
                             keywords.add(Map.of("id", value.getValue(),
@@ -185,18 +187,22 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
                         }
                     });
 
-//                    if (descriptiveKeyword.getMDKeywords().getThesaurusName().getAbstractCitation().getValue() instanceof CICitationType2 value) {
-//                        themes.add(Map.of(
-//                                "scheme", descriptiveKeyword.getMDKeywords().getType().getMDKeywordTypeCode().getCodeListValue(),
-//                                "concepts", keywords,
-//                                "title", value.getTitle().getCharacterString().getValue().toString()
-//                        ));
-//                    }
-
-                    themes.add(Map.of(
-                            "scheme", descriptiveKeyword.getMDKeywords().getType().getMDKeywordTypeCode().getCodeListValue(),
-                            "concepts", keywords)
-                    );
+                    CICitationType2 thesaurusNameType2 = (CICitationType2) descriptiveKeyword.getMDKeywords().getThesaurusName().getAbstractCitation().getValue();
+                    if (thesaurusNameType2.getTitle().getCharacterString().getValue() instanceof  AnchorType value) {
+                        themes.add(Map.of(
+                                "scheme", descriptiveKeyword.getMDKeywords().getType().getMDKeywordTypeCode().getCodeListValue(),
+                                "concepts", keywords,
+                                "title", value.getValue(),
+                                "description", value.getTitleAttribute() != null ? value.getTitleAttribute() : ""
+                        ));
+                    } else if (thesaurusNameType2.getTitle().getCharacterString().getValue() instanceof String value) {
+                        themes.add(Map.of(
+                                "scheme", descriptiveKeyword.getMDKeywords().getType().getMDKeywordTypeCode().getCodeListValue(),
+                                "concepts", keywords,
+                                "title", value,
+                                "description", thesaurusNameType2.getAlternateTitle().stream().map(CharacterStringPropertyType::getCharacterString).map(JAXBElement::getValue).map(Object::toString).collect(Collectors.joining(", "))
+                        ));
+                    }
                 });
             }
         }
