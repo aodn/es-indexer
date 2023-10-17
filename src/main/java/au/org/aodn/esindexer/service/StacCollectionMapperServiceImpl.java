@@ -256,9 +256,32 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
                                     contactsModel.setPosition(mapContactsPosition(individual));
 
                                     individual.getCIIndividual().getContactInfo().forEach(contactInfo -> {
-
-
+                                        List<Map<String, Object>> addresses = new ArrayList<>();
+                                        List<String> emailAddresses = new ArrayList<>();
+                                        List<Map<String, String>> phones = new ArrayList<>();
+                                        List<Map<String, String>> onlineResources = new ArrayList<>();
+                                        contactInfo.getCIContact().getAddress().forEach(address -> {
+                                            // addresses
+                                            addresses.add(mapContactsAddress(address));
+                                            // emails
+                                            address.getCIAddress().getElectronicMailAddress().forEach(electronicMailAddress -> {
+                                                emailAddresses.add(mapContactsEmail(electronicMailAddress));
+                                            });
+                                            // phones
+                                            contactInfo.getCIContact().getPhone().forEach(phone -> {
+                                                phones.add(mapContactsPhone(phone));
+                                            });
+                                            // online resources
+                                            contactInfo.getCIContact().getOnlineResource().forEach(onlineResource -> {
+                                                onlineResources.add(mapContactsOnlineResource(onlineResource));
+                                            });
+                                        });
+                                        contactsModel.setAddresses(addresses);
+                                        contactsModel.setEmails(emailAddresses);
+                                        contactsModel.setPhones(phones);
+                                        contactsModel.setLinks(onlineResources);
                                     });
+
                                 });
                             } catch (Exception e) {
                                 logger.warn("Unable to find contact info for metadata record: " + this.mapUUID(source));
@@ -293,117 +316,64 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
         if (positionString != null) { return individual.getCIIndividual().getPositionName().getCharacterString().getValue().toString(); } else { return ""; }
     }
 
-    //TODO: need refactoring
-    @Named("mapContactsx")
-    List<Map<String, Object>> mapContactsx(MDMetadataType source) {
-        List<Map<String, Object>> contacts = new ArrayList<>();
-        List<MDDataIdentificationType> items = findMDDataIdentificationType(source);
-        if (!items.isEmpty()) {
-            for (MDDataIdentificationType item : items) {
-                item.getPointOfContact().forEach(poc -> {
-                    AbstractResponsibilityType responsibilityType = poc.getAbstractResponsibility().getValue();
-                    if (responsibilityType instanceof CIResponsibilityType2 ciResponsibility) {
-                        Map<String, Object> contactItem = new HashMap<>();
+    protected Map<String, Object> mapContactsAddress(CIAddressPropertyType2 address) {
+        Map<String, Object> addressItem = new HashMap<>();
+        List<String> deliveryPoints = new ArrayList<>();
 
-                        CodeListValueType roleCode = ciResponsibility.getRole().getCIRoleCode();
-                        contactItem.put("roles", roleCode != null ? roleCode.getCodeListValue() : "");
+        address.getCIAddress().getDeliveryPoint().forEach(deliveryPoint -> {
+            String deliveryPointString = deliveryPoint.getCharacterString().getValue().toString();
+            deliveryPoints.add(deliveryPointString != null ? deliveryPointString : "");
+        });
+        addressItem.put("deliveryPoint", deliveryPoints);
 
-                        ciResponsibility.getParty().forEach(party -> {
-                            String organisationString = party.getAbstractCIParty().getValue().getName().getCharacterString().getValue().toString();
-                            contactItem.put("organization", organisationString != null ? organisationString : "");
+        CharacterStringPropertyType cityString = address.getCIAddress().getCity();
+        addressItem.put("city", cityString != null ? cityString.getCharacterString().getValue().toString() : "");
 
-                            try {
-                                ((CIOrganisationType2) party.getAbstractCIParty().getValue()).getIndividual().forEach(individual -> {
+        CharacterStringPropertyType administrativeAreaString = address.getCIAddress().getAdministrativeArea();
+        addressItem.put("administrativeArea", administrativeAreaString != null ? administrativeAreaString.getCharacterString().getValue().toString() : "");
 
-                                    CharacterStringPropertyType nameString = individual.getCIIndividual().getName();
-                                    contactItem.put("name", nameString != null ? individual.getCIIndividual().getName().getCharacterString().getValue().toString() : "");
+        CharacterStringPropertyType postalCodeString = address.getCIAddress().getPostalCode();
+        addressItem.put("postalCode", postalCodeString != null ? postalCodeString.getCharacterString().getValue().toString() : "");
 
-                                    CharacterStringPropertyType positionString = individual.getCIIndividual().getPositionName();
-                                    contactItem.put("position", positionString != null ? individual.getCIIndividual().getPositionName().getCharacterString().getValue().toString(): "");
+        CharacterStringPropertyType countryString = address.getCIAddress().getCountry();
+        addressItem.put("country", countryString != null ? countryString.getCharacterString().getValue().toString() : "");
 
-                                    individual.getCIIndividual().getContactInfo().forEach(contactInfo -> {
-                                        List<Map<String, Object>> addresses = new ArrayList<>();
-                                        List<String> emailAddresses = new ArrayList<>();
-                                        contactInfo.getCIContact().getAddress().forEach(address -> {
-                                            Map<String, Object> addressItem = new HashMap<>();
-                                            List<String> deliveryPoints = new ArrayList<>();
-                                            address.getCIAddress().getDeliveryPoint().forEach(deliveryPoint -> {
-                                                String deliveryPointString = deliveryPoint.getCharacterString().getValue().toString();
-                                                deliveryPoints.add(deliveryPointString != null ? deliveryPointString : "");
-                                            });
-                                            addressItem.put("deliveryPoint", deliveryPoints);
+        return addressItem;
+    }
 
-                                            CharacterStringPropertyType cityString = address.getCIAddress().getCity();
-                                            addressItem.put("city", cityString != null ? cityString.getCharacterString().getValue().toString() : "");
-
-                                            CharacterStringPropertyType administrativeAreaString = address.getCIAddress().getAdministrativeArea();
-                                            addressItem.put("administrativeArea", administrativeAreaString != null ? administrativeAreaString.getCharacterString().getValue().toString() : "");
-
-                                            CharacterStringPropertyType postalCodeString = address.getCIAddress().getPostalCode();
-                                            addressItem.put("postalCode", postalCodeString != null ? postalCodeString.getCharacterString().getValue().toString() : "");
-
-                                            CharacterStringPropertyType countryString = address.getCIAddress().getCountry();
-                                            addressItem.put("country", countryString != null ? countryString.getCharacterString().getValue().toString() : "");
-
-
-                                            address.getCIAddress().getElectronicMailAddress().forEach(electronicMailAddress -> {
-                                                emailAddresses.add(electronicMailAddress != null ? electronicMailAddress.getCharacterString().getValue().toString() : "");
-                                            });
-
-
-                                            addresses.add(addressItem);
-                                        });
-
-                                        contactItem.put("addresses", addresses);
-                                        contactItem.put("emails", emailAddresses);
-
-                                        // ** PHONE
-                                        // list of phone AND code type
-                                        List<Map<String, String>> phones = new ArrayList<>();
-                                        contactInfo.getCIContact().getPhone().forEach(phone -> {
-                                            Map<String, String> phoneItem = new HashMap<>();
-
-                                            CharacterStringPropertyType phoneString = phone.getCITelephone().getNumber();
-                                            phoneItem.put("value", phoneString != null ? phoneString.getCharacterString().getValue().toString() : "");
-
-                                            CodeListValueType phoneCode = phone.getCITelephone().getNumberType().getCITelephoneTypeCode();
-                                            phoneItem.put("roles", phoneCode != null ? phoneCode.getCodeListValue() : "");
-
-                                            phones.add(phoneItem);
-                                        });
-                                        contactItem.put("phones", phones);
-
-                                        // ** ONLINE RESOURCES
-                                        // list of resources including link and name
-                                        List<Map<String, String>> onlineResources = new ArrayList<>();
-                                        contactInfo.getCIContact().getOnlineResource().forEach(onlineResource -> {
-                                            Map<String, String> onlineResourceItem = new HashMap<>();
-
-                                            CharacterStringPropertyType linkString = onlineResource.getCIOnlineResource().getLinkage();
-                                            onlineResourceItem.put("href", linkString != null ? linkString.getCharacterString().getValue().toString() : "");
-
-                                            CharacterStringPropertyType resourceNameString = onlineResource.getCIOnlineResource().getName();
-                                            onlineResourceItem.put("title", resourceNameString != null ? resourceNameString.getCharacterString().getValue().toString() : "");
-
-                                            CharacterStringPropertyType linkTypeString = onlineResource.getCIOnlineResource().getProtocol();
-                                            onlineResourceItem.put("type", linkTypeString != null ? linkTypeString.getCharacterString().getValue().toString() : "");
-
-                                            onlineResources.add(onlineResourceItem);
-                                        });
-                                        contactItem.put("links", onlineResources);
-                                    });
-                                });
-                            } catch (Exception e) {
-                                logger.warn("Unable to find contact info for metadata record: " + this.mapUUID(source));
-                            }
-
-                        });
-                        contacts.add(contactItem);
-                    }
-                });
-            }
+    protected String mapContactsEmail(CharacterStringPropertyType electronicMailAddress) {
+        if (electronicMailAddress != null) {
+            return electronicMailAddress.getCharacterString().getValue().toString();
+        } else {
+            return "";
         }
-        return contacts;
+    }
+
+    protected Map<String, String> mapContactsPhone(CITelephonePropertyType2 phone) {
+        Map<String, String> phoneItem = new HashMap<>();
+
+        CharacterStringPropertyType phoneString = phone.getCITelephone().getNumber();
+        phoneItem.put("value", phoneString != null ? phoneString.getCharacterString().getValue().toString() : "");
+
+        CodeListValueType phoneCode = phone.getCITelephone().getNumberType().getCITelephoneTypeCode();
+        phoneItem.put("roles", phoneCode != null ? phoneCode.getCodeListValue() : "");
+
+        return phoneItem;
+    }
+
+    protected Map<String, String> mapContactsOnlineResource(CIOnlineResourcePropertyType2 onlineResource) {
+        Map<String, String> onlineResourceItem = new HashMap<>();
+
+        CharacterStringPropertyType linkString = onlineResource.getCIOnlineResource().getLinkage();
+        onlineResourceItem.put("href", linkString != null ? linkString.getCharacterString().getValue().toString() : "");
+
+        CharacterStringPropertyType resourceNameString = onlineResource.getCIOnlineResource().getName();
+        onlineResourceItem.put("title", resourceNameString != null ? resourceNameString.getCharacterString().getValue().toString() : "");
+
+        CharacterStringPropertyType linkTypeString = onlineResource.getCIOnlineResource().getProtocol();
+        onlineResourceItem.put("type", linkTypeString != null ? linkTypeString.getCharacterString().getValue().toString() : "");
+
+        return onlineResourceItem;
     }
 
     protected <R> R createGeometryItems(
