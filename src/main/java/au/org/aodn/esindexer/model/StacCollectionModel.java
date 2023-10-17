@@ -6,7 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
-import java.util.Map;
 
 @Data
 @Builder
@@ -20,6 +19,7 @@ public class StacCollectionModel {
     protected SummariesModel summaries;
     protected List<ContactsModel> contacts;
     protected List<ThemesModel> themes;
+    protected List<LanguageModel> languages;
 
     @JsonProperty("stac_version")
     public String getStacVersion() {

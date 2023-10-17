@@ -2,6 +2,7 @@ package au.org.aodn.esindexer.service;
 
 import au.org.aodn.esindexer.exception.MappingValueException;
 import au.org.aodn.esindexer.model.ContactsModel;
+import au.org.aodn.esindexer.model.LanguageModel;
 import au.org.aodn.esindexer.model.ThemesModel;
 import au.org.aodn.esindexer.utils.BBoxUtils;
 import au.org.aodn.esindexer.model.StacCollectionModel;
@@ -14,7 +15,6 @@ import org.mapstruct.Named;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.context.ThemeSource;
 
 import java.math.BigDecimal;
 import java.util.*;
@@ -36,6 +36,7 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
     @Mapping(target="extent.bbox", source = "source", qualifiedByName = "mapExtentBbox")
     @Mapping(target="contacts", source = "source", qualifiedByName = "mapContacts")
     @Mapping(target="themes", source = "source", qualifiedByName = "mapThemes")
+    @Mapping(target="languages", source = "source", qualifiedByName = "mapLanguages")
     public abstract StacCollectionModel mapToSTACCollection(MDMetadataType source);
 
     private static final Logger logger = LoggerFactory.getLogger(StacCollectionMapperServiceImpl.class);
@@ -181,7 +182,7 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
             }
         }
         logger.debug("Unable to find themes' title for metadata record: " + uuid);
-        return null;
+        return "";
     }
 
     protected String mapThemesDescription(MDKeywordsPropertyType descriptiveKeyword, String uuid) {
@@ -200,7 +201,7 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
             }
         }
         logger.debug("Unable to find themes' description for metadata record: " + uuid);
-        return null;
+        return "";
     }
 
     protected String mapThemesScheme(MDKeywordsPropertyType descriptiveKeyword, String uuid) {
@@ -213,7 +214,7 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
             }
         }
         logger.debug("Unable to find themes' scheme for metadata record: " + uuid);
-        return null;
+        return "";
     }
 
     @Named("mapThemes")
@@ -225,8 +226,10 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
                 i.getDescriptiveKeywords().forEach(descriptiveKeyword -> {
                     ThemesModel themesModel = ThemesModel.builder().build();
                     String uuid = this.mapUUID(source);
-                    themesModel.setTitle(mapThemesTitle(descriptiveKeyword, uuid));
+
                     themesModel.setConcepts(mapThemesConcepts(descriptiveKeyword));
+
+                    themesModel.setTitle(mapThemesTitle(descriptiveKeyword, uuid));
                     themesModel.setDescription(mapThemesDescription(descriptiveKeyword, uuid));
                     themesModel.setScheme(mapThemesScheme(descriptiveKeyword, uuid));
                     results.add(themesModel);
@@ -248,46 +251,59 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
                     if (responsibilityType instanceof CIResponsibilityType2 ciResponsibility) {
                         ContactsModel contactsModel = ContactsModel.builder().build();
                         contactsModel.setRoles(mapContactsRole(ciResponsibility));
-                        ciResponsibility.getParty().forEach(party -> {
-                            contactsModel.setOrganization(mapContactsOrganization(party));
-                            try {
-                                ((CIOrganisationType2) party.getAbstractCIParty().getValue()).getIndividual().forEach(individual -> {
-                                    contactsModel.setName(mapContactsName(individual));
-                                    contactsModel.setPosition(mapContactsPosition(individual));
 
-                                    individual.getCIIndividual().getContactInfo().forEach(contactInfo -> {
-                                        List<Map<String, Object>> addresses = new ArrayList<>();
-                                        List<String> emailAddresses = new ArrayList<>();
-                                        List<Map<String, String>> phones = new ArrayList<>();
-                                        List<Map<String, String>> onlineResources = new ArrayList<>();
-                                        contactInfo.getCIContact().getAddress().forEach(address -> {
-                                            // addresses
-                                            addresses.add(mapContactsAddress(address));
-                                            // emails
-                                            address.getCIAddress().getElectronicMailAddress().forEach(electronicMailAddress -> {
-                                                emailAddresses.add(mapContactsEmail(electronicMailAddress));
-                                            });
-                                            // phones
-                                            contactInfo.getCIContact().getPhone().forEach(phone -> {
-                                                phones.add(mapContactsPhone(phone));
-                                            });
-                                            // online resources
-                                            contactInfo.getCIContact().getOnlineResource().forEach(onlineResource -> {
-                                                onlineResources.add(mapContactsOnlineResource(onlineResource));
+                        if (ciResponsibility.getParty().isEmpty()) {
+                            logger.warn("Unable to find contact info for metadata record: " + this.mapUUID(source));
+                        } else {
+                            ciResponsibility.getParty().forEach(party -> {
+                                contactsModel.setOrganization(mapContactsOrganization(party));
+                                try {
+
+                                    AtomicReference<String> name = new AtomicReference<>("");
+                                    AtomicReference<String> position = new AtomicReference<>("");
+                                    List<Map<String, Object>> addresses = new ArrayList<>();
+                                    List<String> emailAddresses = new ArrayList<>();
+                                    List<Map<String, String>> phones = new ArrayList<>();
+                                    List<Map<String, String>> onlineResources = new ArrayList<>();
+
+                                    ((CIOrganisationType2) party.getAbstractCIParty().getValue()).getIndividual().forEach(individual -> {
+
+                                        name.set(mapContactsName(individual));
+                                        position.set(mapContactsPosition(individual));
+
+                                        individual.getCIIndividual().getContactInfo().forEach(contactInfo -> {
+                                            contactInfo.getCIContact().getAddress().forEach(address -> {
+                                                // addresses
+                                                addresses.add(mapContactsAddress(address));
+                                                // emails
+                                                address.getCIAddress().getElectronicMailAddress().forEach(electronicMailAddress -> {
+                                                    emailAddresses.add(mapContactsEmail(electronicMailAddress));
+                                                });
+                                                // phones
+                                                contactInfo.getCIContact().getPhone().forEach(phone -> {
+                                                    phones.add(mapContactsPhone(phone));
+                                                });
+                                                // online resources
+                                                contactInfo.getCIContact().getOnlineResource().forEach(onlineResource -> {
+                                                    onlineResources.add(mapContactsOnlineResource(onlineResource));
+                                                });
                                             });
                                         });
-                                        contactsModel.setAddresses(addresses);
-                                        contactsModel.setEmails(emailAddresses);
-                                        contactsModel.setPhones(phones);
-                                        contactsModel.setLinks(onlineResources);
                                     });
 
-                                });
-                            } catch (Exception e) {
-                                logger.warn("Unable to find contact info for metadata record: " + this.mapUUID(source));
-                            }
-                        });
-                        results.add(contactsModel);
+                                    contactsModel.setName(name.get());
+                                    contactsModel.setPosition(position.get());
+                                    contactsModel.setAddresses(addresses);
+                                    contactsModel.setEmails(emailAddresses);
+                                    contactsModel.setPhones(phones);
+                                    contactsModel.setLinks(onlineResources);
+
+                                } catch (Exception e) {
+                                    logger.warn("Unable to find contact info for metadata record: " + this.mapUUID(source));
+                                }
+                            });
+                            results.add(contactsModel);
+                        }
                     }
                 });
             }
@@ -375,6 +391,44 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
 
         return onlineResourceItem;
     }
+
+    @Named("mapLanguages")
+    protected List<LanguageModel> mapLanguages(MDMetadataType source) {
+        List<LanguageModel> results = new ArrayList<>();
+        List<MDDataIdentificationType> items = findMDDataIdentificationType(source);
+        if (!items.isEmpty()) {
+            for (MDDataIdentificationType i : items) {
+
+                LanguageModel languageModel = LanguageModel.builder().build();
+
+                String langCode = mapLanguagesCode(i) != null ? mapLanguagesCode(i) : "";
+                languageModel.setCode(langCode);
+
+                // all metadata records are in English anyway
+                switch (langCode) {
+                    case "eng" -> languageModel.setName("English");
+                    case "fra" -> languageModel.setName("French");
+                    default -> {
+                        logger.warn("Making assumption...unable to find language name for metadata record: " + this.mapUUID(source));
+                        languageModel.setCode("eng");
+                        languageModel.setName("English");
+                    }
+                }
+
+                results.add(languageModel);
+            }
+        }
+        return results;
+    }
+
+    protected String mapLanguagesCode(MDDataIdentificationType i) {
+        try {
+            return i.getDefaultLocale().getPTLocale().getValue().getLanguage().getLanguageCode().getCodeListValue();
+        } catch (NullPointerException e) {
+            return null;
+        }
+    }
+
 
     protected <R> R createGeometryItems(
             MDMetadataType source,
