@@ -23,134 +23,134 @@ public class GeometryBase {
 
     protected static Map<String, Integer> codeToSID = new HashMap<>();
 
-    static {
-        codeToSID.put("CRS:84", 4326);
-    }
+    public static final String COORDINATE_SYSTEM_CRS84 = "CRS:84";
+    public static final String COORDINATE_SYSTEM_WGS84 = "WGS:84";  // Same as EPSG:4326
 
-    public static Envelope calculateBoundingBox(Envelope boundingBox, String crs, Polygon... polygons) throws FactoryException, TransformException {
-        // Define the CRS:84 coordinate reference system as state in STAC, EPSG:4326 = CRS:84
-        CoordinateReferenceSystem sourceCRS = CRS.decode(crs, true);
-
-        // Output is always assume CRS:84
-        CoordinateReferenceSystem crs84 = CRS.decode("CRS:84", true);
-
-        // Create an empty bounding box
-        MathTransform transform = CRS.findMathTransform(sourceCRS, crs84);
+    // Must hardcode 4326 as all GeoJson use WGS84 which is EPSG 4326
+    protected static GeometryFactory geoJsonFactory = new GeometryFactory(new PrecisionModel(), 4326);
+    /**
+     *
+     * @param boundingBox
+     * @param polygons - The polygon that fit into the bounding box.
+     * @return
+     * @throws FactoryException
+     * @throws TransformException
+     */
+    public static Envelope calculateBoundingBox(Envelope boundingBox, Polygon... polygons) throws FactoryException, TransformException {
 
         // Iterate through the polygons
         for (Polygon polygon : polygons) {
             // Transform the polygon to CRS:84
-            GeometryFactory geometryFactory = JTSFactoryFinder.getGeometryFactory();
-            Geometry transformedPolygon = JTS.transform(polygon, transform);
-
             // Update the bounding box with the current polygon's envelope
-            boundingBox.expandToInclude(transformedPolygon.getEnvelopeInternal());
+            boundingBox.expandToInclude(polygon.getEnvelopeInternal());
         }
 
         return boundingBox;
     }
 
-    public static List<Polygon> findPolygonsFromEXBoundingPolygonType(String crs, List<Object> rawInput) {
+    public static List<Polygon> findPolygonsFromEXBoundingPolygonType(String rawCRS, List<Object> rawInput) {
         List<Polygon> polygons = new ArrayList<>();
 
-        List<List<GMObjectPropertyType>> input = rawInput.stream()
-                .filter(f -> f instanceof EXBoundingPolygonType)
-                .map(m -> (EXBoundingPolygonType) m)
-                .map(m -> m.getPolygon())
-                .toList();
+        if(COORDINATE_SYSTEM_CRS84.equals(rawCRS)) {
+            List<List<GMObjectPropertyType>> input = rawInput.stream()
+                    .filter(f -> f instanceof EXBoundingPolygonType)
+                    .map(m -> (EXBoundingPolygonType) m)
+                    .map(m -> m.getPolygon())
+                    .toList();
 
-        GeometryFactory factory = new GeometryFactory(new PrecisionModel(), codeToSID.get(crs));
+            for (List<GMObjectPropertyType> i : input) {
+                for (GMObjectPropertyType t : i) {
+                    AbstractGeometryType type = t.getAbstractGeometry().getValue();
 
-        for(List<GMObjectPropertyType> i : input) {
-            for(GMObjectPropertyType t : i) {
-                AbstractGeometryType type = t.getAbstractGeometry().getValue();
+                    // TODO: fix here more cases
+                    if (type instanceof MultiSurfaceType mst) {
+                        for (SurfacePropertyType j : mst.getSurfaceMember()) {
+                            // TODO: Only process Polygon for now.
+                            if (j.getAbstractSurface().getValue() instanceof PolygonType polygonType) {
+                                // TODO: Only process LinearRingType for now
+                                if (polygonType.getExterior() != null && polygonType.getExterior().getAbstractRing().getValue() instanceof LinearRingType linearRingType) {
+                                    // TODO: Handle 2D now, can be 3D
+                                    if (linearRingType.getPosList().getSrsDimension().doubleValue() == 2.0) {
+                                        List<Double> v = linearRingType.getPosList().getValue();
+                                        List<Coordinate> items = new ArrayList<>();
 
-                // TODO: fix here more cases
-                if(type instanceof MultiSurfaceType mst) {
-                    for (SurfacePropertyType j : mst.getSurfaceMember()) {
-                        // TODO: Only process Polygon for now.
-                        if (j.getAbstractSurface().getValue() instanceof PolygonType polygonType) {
-                            // TODO: Only process LinearRingType for now
-                            if (polygonType.getExterior() != null && polygonType.getExterior().getAbstractRing().getValue() instanceof LinearRingType linearRingType) {
-                                // TODO: Handle 2D now, can be 3D
-                                if (linearRingType.getPosList().getSrsDimension().doubleValue() == 2.0) {
-                                    List<Double> v = linearRingType.getPosList().getValue();
-                                    List<Coordinate> items = new ArrayList<>();
+                                        for (int z = 0; z < v.size(); z += 2) {
+                                            items.add(new Coordinate(v.get(z), v.get(z + 1)));
+                                        }
 
-                                    for (int z = 0; z < v.size(); z += 2) {
-                                        items.add(new Coordinate(v.get(z), v.get(z + 1)));
+                                        // We need to store it so that we can create the multi-array as told by spec
+                                        Polygon polygon = geoJsonFactory.createPolygon(items.toArray(new Coordinate[items.size()]));
+                                        polygons.add(polygon);
+                                        logger.debug("2D Polygon added {}", polygon);
                                     }
-
-                                    // We need to store it so that we can create the multi-array as told by spec
-                                    Polygon polygon = factory.createPolygon(items.toArray(new Coordinate[items.size()]));
-                                    polygons.add(polygon);
-                                    logger.debug("2D Polygon added {}", polygon);
                                 }
                             }
                         }
-                    }
-                }
-                else if(type instanceof PolygonType plt) {
-                    // TODO: Only process LinearRingType for now
-                    // Set the coor system for the factory
-                    // CoordinateReferenceSystem system = CRS.decode(mst.getSrsName().trim(), true);
-                    if (plt.getExterior() != null && plt.getExterior().getAbstractRing().getValue() instanceof LinearRingType linearRingType) {
-                        // TODO: Handle 2D now, can be 3D
-                        if (linearRingType.getPosList().getSrsDimension().doubleValue() == 2.0) {
-                            List<Double> v = linearRingType.getPosList().getValue();
-                            List<Coordinate> items = new ArrayList<>();
+                    } else if (type instanceof PolygonType plt) {
+                        // TODO: Only process LinearRingType for now
+                        // Set the coor system for the factory
+                        // CoordinateReferenceSystem system = CRS.decode(mst.getSrsName().trim(), true);
+                        if (plt.getExterior() != null && plt.getExterior().getAbstractRing().getValue() instanceof LinearRingType linearRingType) {
+                            // TODO: Handle 2D now, can be 3D
+                            if (linearRingType.getPosList().getSrsDimension().doubleValue() == 2.0) {
+                                List<Double> v = linearRingType.getPosList().getValue();
+                                List<Coordinate> items = new ArrayList<>();
 
-                            for (int z = 0; z < v.size(); z += 2) {
-                                items.add(new Coordinate(v.get(z), v.get(z + 1)));
+                                for (int z = 0; z < v.size(); z += 2) {
+                                    items.add(new Coordinate(v.get(z), v.get(z + 1)));
+                                }
+
+                                // We need to store it so that we can create the multi-array as told by spec
+                                Polygon polygon = geoJsonFactory.createPolygon(items.toArray(new Coordinate[items.size()]));
+                                polygons.add(polygon);
+
+                                logger.debug("2D Polygon added {}", polygon);
                             }
-
-                            // We need to store it so that we can create the multi-array as told by spec
-                            Polygon polygon = factory.createPolygon(items.toArray(new Coordinate[items.size()]));
-                            polygons.add(polygon);
-
-                            logger.debug("2D Polygon added {}", polygon);
                         }
                     }
                 }
             }
         }
+        if(polygons.isEmpty()) {
+            logger.warn("No applicable BBOX calculation found for findPolygonsFromEXBoundingPolygonType using CRS {}", rawCRS);
+        }
         return polygons;
     }
 
-    public static List<Polygon> findPolygonsFromEXGeographicBoundingBoxType(String crs, List<Object> rawInput) {
+    public static List<Polygon> findPolygonsFromEXGeographicBoundingBoxType(String rawCRS, List<Object> rawInput) {
         List<Polygon> polygons = new ArrayList<>();
 
-        List<EXGeographicBoundingBoxType> input = rawInput.stream()
-                .filter(f -> f instanceof EXGeographicBoundingBoxType)
-                .map(m -> (EXGeographicBoundingBoxType) m)
-                .toList();
+        if(COORDINATE_SYSTEM_CRS84.equals(rawCRS)) {
+            List<EXGeographicBoundingBoxType> input = rawInput.stream()
+                    .filter(f -> f instanceof EXGeographicBoundingBoxType)
+                    .map(m -> (EXGeographicBoundingBoxType) m)
+                    .toList();
 
-        GeometryFactory factory = new GeometryFactory(new PrecisionModel(), codeToSID.get(crs));
+            for (EXGeographicBoundingBoxType bbt : input) {
+                Double east = bbt.getEastBoundLongitude().getDecimal().doubleValue();
+                Double west = bbt.getWestBoundLongitude().getDecimal().doubleValue();
+                Double north = bbt.getNorthBoundLatitude().getDecimal().doubleValue();
+                Double south = bbt.getSouthBoundLatitude().getDecimal().doubleValue();
 
-        for (EXGeographicBoundingBoxType bbt : input) {
-            Double east = bbt.getEastBoundLongitude().getDecimal().doubleValue();
-            Double west = bbt.getWestBoundLongitude().getDecimal().doubleValue();
-            Double north = bbt.getNorthBoundLatitude().getDecimal().doubleValue();
-            Double south = bbt.getSouthBoundLatitude().getDecimal().doubleValue();
+                // Define the coordinates for the bounding box
+                Coordinate[] coordinates = new Coordinate[]{
+                        new Coordinate(west, south),
+                        new Coordinate(east, south),
+                        new Coordinate(east, north),
+                        new Coordinate(west, north),
+                        new Coordinate(west, south)  // Closing the ring
+                };
 
-            // Define the coordinates for the bounding box
-            Coordinate[] coordinates = new Coordinate[]{
-                    new Coordinate(west, south),
-                    new Coordinate(east, south),
-                    new Coordinate(east, north),
-                    new Coordinate(west, north),
-                    new Coordinate(west, south)  // Closing the ring
-            };
-
-            Polygon polygon = factory.createPolygon(coordinates);
-            polygons.add(polygon);
+                Polygon polygon = geoJsonFactory.createPolygon(coordinates);
+                polygons.add(polygon);
+            }
         }
 
         if(!polygons.isEmpty()) {
             return polygons;
         }
         else {
-            logger.warn("No applicable BBOX calculation found");
+            logger.warn("No applicable BBOX calculation found for findPolygonsFromEXGeographicBoundingBoxType using CRS {}", rawCRS);
             return null;
         }
     }

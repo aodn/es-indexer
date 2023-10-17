@@ -23,7 +23,11 @@ public class GeometryUtils {
     protected static GeometryFactory factory = new GeometryFactory(new PrecisionModel(), 4326);
 
     protected static ObjectMapper objectMapper = new ObjectMapper();
-
+    /**
+     *
+     * @param polygons - Assume to be EPSG:4326, as GeoJson always use this encoding.
+     * @return
+     */
     protected static Map createGeoJson(List<Polygon> polygons) {
 
         if(!polygons.isEmpty()) {
@@ -47,14 +51,16 @@ public class GeometryUtils {
     }
 
     public static Map createGeometryFromEXGeographicBoundingBoxType(List<Object> rawInput) {
-        // Always use CRS:84 -> 4326
-        List<Polygon> polygons = GeometryBase.findPolygonsFromEXGeographicBoundingBoxType("CRS:84", rawInput);
+        // The return polygon is in EPSG:4326, so we can call createGeoJson directly
+        //TODO: avoid hardcode CRS, get it from document
+        List<Polygon> polygons = GeometryBase.findPolygonsFromEXGeographicBoundingBoxType(GeometryBase.COORDINATE_SYSTEM_CRS84, rawInput);
         return createGeoJson(polygons);
     }
 
     public static Map createGeometryFromFromEXBoundingPolygonType(List<Object> rawInput) {
-        // Always use CRS:84 -> 4326
-        List<Polygon> polygons = GeometryBase.findPolygonsFromEXBoundingPolygonType("CRS:84", rawInput);
+        // The return polygon is in EPSG:4326, so we can call createGeoJson directly
+        //TODO: avoid hardcode CRS, get it from document
+        List<Polygon> polygons = GeometryBase.findPolygonsFromEXBoundingPolygonType(GeometryBase.COORDINATE_SYSTEM_CRS84, rawInput);
         return createGeoJson(polygons);
     }
 }
