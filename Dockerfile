@@ -1,12 +1,12 @@
 # Stage 1: Build the Spring Boot application
-FROM maven:3.6.3 AS builder
+FROM maven:latest AS builder
 WORKDIR /app
 COPY pom.xml .
 RUN mvn dependency:go-offline
 
 COPY src ./src
 
-RUN mvn package -DskipTests
+RUN mvn clean install -DskipTests
 
 #########################3
 
