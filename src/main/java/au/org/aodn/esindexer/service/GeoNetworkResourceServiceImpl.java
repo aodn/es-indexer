@@ -2,6 +2,7 @@ package au.org.aodn.esindexer.service;
 
 import au.org.aodn.esindexer.dto.MetadataRecordsCountRequestBodyDTO;
 import au.org.aodn.esindexer.dto.GeoNetworkSearchRequestBodyDTO;
+import au.org.aodn.esindexer.exception.GNConnectionRefusedException;
 import au.org.aodn.esindexer.exception.MetadataNotFoundException;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.json.JSONArray;
@@ -58,21 +59,26 @@ public class GeoNetworkResourceServiceImpl implements GeoNetworkResourceService 
             HttpEntity<String> requestEntity = new HttpEntity<>(headers);
             Map<String, Object> params = new HashMap<>();
             params.put("uuid", uuid);
-            ResponseEntity<JsonNode> responseEntity = restTemplate.exchange(
-                    geoNetworkRecordsEndpoint,
-                    HttpMethod.GET,
-                    requestEntity,
-                    JsonNode.class, params);
 
-            if (responseEntity.getStatusCode().is2xxSuccessful()) {
-                if (Objects.requireNonNull(responseEntity.getBody()).get("@xsi:schemaLocation").asText().contains("www.isotc211.org/2005/gmd")) {
-                    return "iso19115-3.2018";
-                } else {
-                    return "xml";
+            try {
+                ResponseEntity<JsonNode> responseEntity = restTemplate.exchange(
+                        geoNetworkRecordsEndpoint,
+                        HttpMethod.GET,
+                        requestEntity,
+                        JsonNode.class, params);
+
+                if (responseEntity.getStatusCode().is2xxSuccessful()) {
+                    if (Objects.requireNonNull(responseEntity.getBody()).get("@xsi:schemaLocation").asText().contains("www.isotc211.org/2005/gmd")) {
+                        return "iso19115-3.2018";
+                    } else {
+                        return "xml";
+                    }
                 }
-            }
-            else {
-                throw new RuntimeException("Failed to fetch data from the API");
+                else {
+                    throw new RuntimeException("Failed to fetch data from the API");
+                }
+            } catch (HttpClientErrorException e) {
+                throw new GNConnectionRefusedException("Unable to connect to GeoNetwork");
             }
         }
         catch (HttpClientErrorException.NotFound e) {
@@ -90,18 +96,21 @@ public class GeoNetworkResourceServiceImpl implements GeoNetworkResourceService 
             params.put("uuid", uuid);
             params.put("formatterId", this.findFormatterId(uuid));
 
-            ResponseEntity<String> responseEntity = restTemplate.exchange(
-                    geoNetworkRecordsEndpoint+"/formatters/{formatterId}",
-                    HttpMethod.GET,
-                    requestEntity,
-                    String.class,
-                    params);
+            try {
+                ResponseEntity<String> responseEntity = restTemplate.exchange(
+                        geoNetworkRecordsEndpoint + "/formatters/{formatterId}",
+                        HttpMethod.GET,
+                        requestEntity,
+                        String.class,
+                        params);
 
-            if (responseEntity.getStatusCode().is2xxSuccessful()) {
-                return responseEntity.getBody();
-            }
-            else {
-                throw new RuntimeException("Failed to fetch data from the API");
+                if (responseEntity.getStatusCode().is2xxSuccessful()) {
+                    return responseEntity.getBody();
+                } else {
+                    throw new RuntimeException("Failed to fetch data from the API");
+                }
+            } catch (HttpClientErrorException e) {
+                throw new GNConnectionRefusedException("Unable to connect to GeoNetwork");
             }
         }
         catch (HttpClientErrorException.NotFound e) {
