@@ -24,7 +24,7 @@ public class SecurityConfig {
     @Value("${app.http.auth-token-header-name}")
     private String principalRequestHeader;
 
-    @Value("${app.http.auth-token}")
+    @Value("${app.http.authToken}")
     private String principalRequestValue;
 
     @Autowired
@@ -33,6 +33,8 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         APIKeyAuthFilter filter = new APIKeyAuthFilter(principalRequestHeader);
+
+        System.out.print("principalRequestValue: " + principalRequestValue);
 
         filter.setAuthenticationManager(
             authentication -> {
