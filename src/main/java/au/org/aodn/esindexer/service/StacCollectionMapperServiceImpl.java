@@ -290,27 +290,35 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
                                     List<Map<String, String>> phones = new ArrayList<>();
                                     List<Map<String, String>> onlineResources = new ArrayList<>();
 
-                                    ((CIOrganisationType2) party.getAbstractCIParty().getValue()).getIndividual().forEach(individual -> {
 
-                                        name.set(mapContactsName(individual));
-                                        position.set(mapContactsPosition(individual));
+                                    CIOrganisationType2 organisation = (CIOrganisationType2) party.getAbstractCIParty().getValue();
+                                    AtomicReference<List<CIContactPropertyType2>> contactInfoList = new AtomicReference<>();
 
-                                        individual.getCIIndividual().getContactInfo().forEach(contactInfo -> {
-                                            contactInfo.getCIContact().getAddress().forEach(address -> {
-                                                // addresses
-                                                addresses.add(mapContactsAddress(address));
-                                                // emails
-                                                address.getCIAddress().getElectronicMailAddress().forEach(electronicMailAddress -> {
-                                                    emailAddresses.add(mapContactsEmail(electronicMailAddress));
-                                                });
-                                                // phones
-                                                contactInfo.getCIContact().getPhone().forEach(phone -> {
-                                                    phones.add(mapContactsPhone(phone));
-                                                });
-                                                // online resources
-                                                contactInfo.getCIContact().getOnlineResource().forEach(onlineResource -> {
-                                                    onlineResources.add(mapContactsOnlineResource(onlineResource));
-                                                });
+                                    if (organisation.getIndividual().isEmpty()) {
+                                        contactInfoList.set(organisation.getContactInfo());
+                                    } else {
+                                        organisation.getIndividual().forEach(individual -> {
+                                            name.set(mapContactsName(individual));
+                                            position.set(mapContactsPosition(individual));
+                                            contactInfoList.set(individual.getCIIndividual().getContactInfo());
+                                        });
+                                    }
+
+                                    contactInfoList.get().forEach(contactInfo -> {
+                                        contactInfo.getCIContact().getAddress().forEach(address -> {
+                                            // addresses
+                                            addresses.add(mapContactsAddress(address));
+                                            // emails
+                                            address.getCIAddress().getElectronicMailAddress().forEach(electronicMailAddress -> {
+                                                emailAddresses.add(mapContactsEmail(electronicMailAddress));
+                                            });
+                                            // phones
+                                            contactInfo.getCIContact().getPhone().forEach(phone -> {
+                                                phones.add(mapContactsPhone(phone));
+                                            });
+                                            // online resources
+                                            contactInfo.getCIContact().getOnlineResource().forEach(onlineResource -> {
+                                                onlineResources.add(mapContactsOnlineResource(onlineResource));
                                             });
                                         });
                                     });
