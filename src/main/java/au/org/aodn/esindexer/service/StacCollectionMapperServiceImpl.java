@@ -249,11 +249,13 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
                     transferOption.getMDDigitalTransferOptions().getOnLine().forEach(link -> {
                         if (link.getAbstractOnlineResource().getValue() instanceof CIOnlineResourceType2 ciOnlineResource) {
                             LinkModel linkModel = LinkModel.builder().build();
-                            linkModel.setType(Objects.equals(ciOnlineResource.getProtocol().getCharacterString().getValue().toString(), "WWW:LINK-1.0-http--link") ? "text/html" : "");
-                            linkModel.setHref(ciOnlineResource.getLinkage().getCharacterString().getValue().toString());
-                            linkModel.setRel(AppConstants.RECOMMENDED_LINK_REL_TYPE);
-                            linkModel.setTitle(ciOnlineResource.getName().getCharacterString().getValue().toString());
-                            results.add(linkModel);
+                            if (!ciOnlineResource.getLinkage().getCharacterString().getValue().toString().isEmpty()) {
+                                linkModel.setType(Objects.equals(ciOnlineResource.getProtocol().getCharacterString().getValue().toString(), "WWW:LINK-1.0-http--link") ? "text/html" : "");
+                                linkModel.setHref(ciOnlineResource.getLinkage().getCharacterString().getValue().toString());
+                                linkModel.setRel(AppConstants.RECOMMENDED_LINK_REL_TYPE);
+                                linkModel.setTitle(ciOnlineResource.getName().getCharacterString().getValue().toString());
+                                results.add(linkModel);
+                            }
                         }
                     });
                 });
