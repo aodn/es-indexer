@@ -34,8 +34,6 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         APIKeyAuthFilter filter = new APIKeyAuthFilter(principalRequestHeader);
 
-        System.out.print("principalRequestValue: " + principalRequestValue);
-
         filter.setAuthenticationManager(
             authentication -> {
                 String principal = (String) authentication.getPrincipal();

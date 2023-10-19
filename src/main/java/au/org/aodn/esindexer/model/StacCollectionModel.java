@@ -20,6 +20,7 @@ public class StacCollectionModel {
     protected List<ContactsModel> contacts;
     protected List<ThemesModel> themes;
     protected List<LanguageModel> languages;
+    protected List<LinkModel> links;
 
     @JsonProperty("stac_version")
     public String getStacVersion() {

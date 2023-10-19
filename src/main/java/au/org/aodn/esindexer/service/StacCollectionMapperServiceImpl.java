@@ -1,11 +1,9 @@
 package au.org.aodn.esindexer.service;
 
+import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.exception.MappingValueException;
-import au.org.aodn.esindexer.model.ContactsModel;
-import au.org.aodn.esindexer.model.LanguageModel;
-import au.org.aodn.esindexer.model.ThemesModel;
+import au.org.aodn.esindexer.model.*;
 import au.org.aodn.esindexer.utils.BBoxUtils;
-import au.org.aodn.esindexer.model.StacCollectionModel;
 import au.org.aodn.esindexer.utils.GeometryUtils;
 import au.org.aodn.metadata.iso19115_3_2018.*;
 import jakarta.xml.bind.JAXBElement;
@@ -37,6 +35,7 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
     @Mapping(target="contacts", source = "source", qualifiedByName = "mapContacts")
     @Mapping(target="themes", source = "source", qualifiedByName = "mapThemes")
     @Mapping(target="languages", source = "source", qualifiedByName = "mapLanguages")
+    @Mapping(target="links", source = "source", qualifiedByName = "mapLinks")
     public abstract StacCollectionModel mapToSTACCollection(MDMetadataType source);
 
     private static final Logger logger = LoggerFactory.getLogger(StacCollectionMapperServiceImpl.class);
@@ -239,6 +238,29 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
         return results;
     }
 
+    @Named("mapLinks")
+    List<LinkModel> mapLinks(MDMetadataType source) {
+        List<LinkModel> results = new ArrayList<>();
+        List<MDDistributionType> items = findMDDistributionType(source);
+        if (!items.isEmpty()) {
+            for (MDDistributionType i : items) {
+                System.out.println(i);
+                i.getTransferOptions().forEach(transferOption -> {
+                    transferOption.getMDDigitalTransferOptions().getOnLine().forEach(link -> {
+                        if (link.getAbstractOnlineResource().getValue() instanceof CIOnlineResourceType2 ciOnlineResource) {
+                            LinkModel linkModel = LinkModel.builder().build();
+                            linkModel.setType(Objects.equals(ciOnlineResource.getProtocol().getCharacterString().getValue().toString(), "WWW:LINK-1.0-http--link") ? "text/html" : "");
+                            linkModel.setHref(ciOnlineResource.getLinkage().getCharacterString().getValue().toString());
+                            linkModel.setRel(AppConstants.RECOMMENDED_LINK_REL_TYPE);
+                            linkModel.setTitle(ciOnlineResource.getName().getCharacterString().getValue().toString());
+                            results.add(linkModel);
+                        }
+                    });
+                });
+            }
+        }
+        return results;
+    }
 
     @Named("mapContacts")
     List<ContactsModel> mapContacts(MDMetadataType source) {
@@ -499,6 +521,16 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
                 .stream()
                 .map(MDMetadataScopePropertyType::getMDMetadataScope)
                 .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+    }
+
+    protected List<MDDistributionType> findMDDistributionType(MDMetadataType source) {
+        return source.getDistributionInfo()
+                .stream()
+                .filter(f -> f.getAbstractDistribution() != null)
+                .filter(f -> f.getAbstractDistribution().getValue() != null)
+                .filter(f -> f.getAbstractDistribution().getValue() instanceof MDDistributionType)
+                .map(f -> (MDDistributionType)f.getAbstractDistribution().getValue())
                 .collect(Collectors.toList());
     }
 }
