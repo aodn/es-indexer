@@ -21,6 +21,7 @@ public class StacCollectionModel {
     protected List<ThemesModel> themes;
     protected List<LanguageModel> languages;
     protected List<LinkModel> links;
+    protected String license;
 
     @JsonProperty("stac_version")
     public String getStacVersion() {

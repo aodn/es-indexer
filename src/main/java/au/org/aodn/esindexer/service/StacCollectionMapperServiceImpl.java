@@ -36,6 +36,7 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
     @Mapping(target="themes", source = "source", qualifiedByName = "mapThemes")
     @Mapping(target="languages", source = "source", qualifiedByName = "mapLanguages")
     @Mapping(target="links", source = "source", qualifiedByName = "mapLinks")
+    @Mapping(target="license", source = "source", qualifiedByName = "mapLicense")
     public abstract StacCollectionModel mapToSTACCollection(MDMetadataType source);
 
     private static final Logger logger = LoggerFactory.getLogger(StacCollectionMapperServiceImpl.class);
@@ -262,6 +263,47 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
             }
         }
         return results;
+    }
+
+    @Named("mapLicense")
+    String mapLicense(MDMetadataType source) {
+        List<MDDataIdentificationType> items = findMDDataIdentificationType(source);
+        List<String> potentialKeys = Arrays.asList("license", "creative commons");
+        List<String> licenses = new ArrayList<>();
+        if (!items.isEmpty()) {
+            for (MDDataIdentificationType i : items) {
+                i.getResourceConstraints().forEach(resourceConstraint -> {
+                    if (resourceConstraint.getAbstractConstraints().getValue() instanceof MDLegalConstraintsType legalConstraintsType) {
+                        legalConstraintsType.getOtherConstraints().forEach(otherConstraints -> {
+                            for (String potentialKey : potentialKeys) {
+                                if (otherConstraints.getCharacterString() != null && otherConstraints.getCharacterString().getValue().toString().toLowerCase().contains(potentialKey)) {
+                                    licenses.add(otherConstraints.getCharacterString().getValue().toString());
+                                }
+                            }
+                        });
+                        // try finding in different location if above didn't add any values to licenses array
+                        if (licenses.isEmpty()) {
+                            if (!legalConstraintsType.getReference().isEmpty() || legalConstraintsType.getReference() != null) {
+                                legalConstraintsType.getReference().forEach(reference -> {
+                                    if (reference.getAbstractCitation().getValue() instanceof CICitationType2 ciCitationType2) {
+                                        System.out.println(ciCitationType2);
+                                        if (ciCitationType2.getTitle() != null) {
+                                            licenses.add(ciCitationType2.getTitle().getCharacterString().getValue().toString());
+                                        }
+                                    }
+                                });
+                            }
+                        }
+                    }
+                });
+            }
+        }
+        if (!licenses.isEmpty()) {
+            return String.join(" | ", licenses);
+        } else {
+            logger.debug("Unable to find license information for metadata record: " + this.mapUUID(source));
+            return "";
+        }
     }
 
     @Named("mapContacts")
