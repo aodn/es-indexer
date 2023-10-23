@@ -131,14 +131,14 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
             if (!inputDateString.contains("T")) {
                 inputDateTimeString += "T00:00:00";
             }
-            DateTimeFormatter formatter =  DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")
-                    .withZone(ZoneId.of(timeZoneId));
-            return ZonedDateTime.parse(inputDateTimeString, formatter).toString();
+            DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+            ZonedDateTime zonedDateTime = ZonedDateTime.parse(inputDateTimeString, inputFormatter.withZone(ZoneId.of(timeZoneId)));
+            DateTimeFormatter outputFormatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME;
+            return zonedDateTime.format(outputFormatter);
         } catch (Exception e) {
-            logger.warn("Unable to convert date to ZonedDateTime: " + inputDateString);
+            logger.warn("Unable to convert date to ISO_OFFSET_DATE_TIME: " + inputDateString);
             return null;
         }
-
     }
 
     /**
