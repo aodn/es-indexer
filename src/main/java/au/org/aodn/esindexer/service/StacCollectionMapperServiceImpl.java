@@ -12,9 +12,13 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
@@ -32,6 +36,7 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
     @Mapping(target="summaries.scope", source = "source", qualifiedByName = "mapSummaries.scope")
     @Mapping(target="summaries.geometry", source = "source", qualifiedByName = "mapSummaries.geometry")
     @Mapping(target="extent.bbox", source = "source", qualifiedByName = "mapExtentBbox")
+    @Mapping(target="extent.temporal", source = "source", qualifiedByName = "mapExtentTemporal")
     @Mapping(target="contacts", source = "source", qualifiedByName = "mapContacts")
     @Mapping(target="themes", source = "source", qualifiedByName = "mapThemes")
     @Mapping(target="languages", source = "source", qualifiedByName = "mapLanguages")
@@ -40,6 +45,9 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
     public abstract StacCollectionModel mapToSTACCollection(MDMetadataType source);
 
     private static final Logger logger = LoggerFactory.getLogger(StacCollectionMapperServiceImpl.class);
+
+    @Value("${spring.jpa.properties.hibernate.jdbc.time_zone}")
+    private String timeZoneId;
 
     @Named("mapUUID")
     String mapUUID(MDMetadataType source) {
@@ -54,6 +62,85 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
                 BBoxUtils::createBBoxFromEXGeographicBoundingBoxType
         );
     }
+
+    @Named("mapExtentTemporal")
+    List<String[]> mapExtentTemporal(MDMetadataType source) {
+        List<MDDataIdentificationType> items = findMDDataIdentificationType(source);
+        if (items.isEmpty()) {
+            logger.warn("Unable to find extent temporal information for metadata record: " + this.mapUUID(source));
+            return null;
+        }
+        List<String[]> result = new ArrayList<>();
+        for (MDDataIdentificationType i : items) {
+            i.getExtent().forEach(extent -> {
+                if (extent.getAbstractExtent().getValue() instanceof EXExtentType exExtentType) {
+
+                    exExtentType.getTemporalElement().forEach(temporalElement -> {
+
+                        String[] temporalPair = new String[2];
+                        temporalPair[0] = null;
+                        temporalPair[1] = null;
+
+                        EXTemporalExtentType exTemporalExtent = temporalElement.getEXTemporalExtent().getValue();
+                        if (exTemporalExtent != null) {
+                            AbstractTimePrimitiveType abstractTimePrimitive = exTemporalExtent.getExtent().getAbstractTimePrimitive().getValue();
+                            if (abstractTimePrimitive instanceof TimePeriodType timePeriodType) {
+
+
+                                if (timePeriodType.getBegin() != null) {
+                                    if (timePeriodType.getBegin().getTimeInstant() != null) {
+                                        if (timePeriodType.getBegin().getTimeInstant().getTimePosition() != null) {
+                                           if (!timePeriodType.getBegin().getTimeInstant().getTimePosition().getValue().isEmpty()) {
+                                               temporalPair[0] = convertDateToZonedDateTime(timePeriodType.getBegin().getTimeInstant().getTimePosition().getValue().get(0));
+                                           }
+                                        }
+                                    }
+                                } else {
+                                    if (!timePeriodType.getBeginPosition().getValue().isEmpty()) {
+                                        temporalPair[0] = convertDateToZonedDateTime(timePeriodType.getBeginPosition().getValue().get(0));
+                                    }
+                                }
+
+                                if (timePeriodType.getEnd() != null) {
+                                    if (timePeriodType.getEnd().getTimeInstant() != null) {
+                                        if (timePeriodType.getEnd().getTimeInstant().getTimePosition() != null) {
+                                            if (!timePeriodType.getEnd().getTimeInstant().getTimePosition().getValue().isEmpty()) {
+                                                temporalPair[1] = convertDateToZonedDateTime(timePeriodType.getEnd().getTimeInstant().getTimePosition().getValue().get(0));
+                                            }
+                                        }
+                                    }
+                                } else {
+                                    if (!timePeriodType.getEndPosition().getValue().isEmpty()) {
+                                        temporalPair[1] = convertDateToZonedDateTime(timePeriodType.getEndPosition().getValue().get(0));
+                                    }
+                                }
+                            }
+
+                            result.add(temporalPair);
+                        }
+                    });
+                }
+            });
+        }
+        return result;
+    }
+
+    private String convertDateToZonedDateTime(String inputDateString) {
+        try {
+            String inputDateTimeString = inputDateString;
+            if (!inputDateString.contains("T")) {
+                inputDateTimeString += "T00:00:00";
+            }
+            DateTimeFormatter formatter =  DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")
+                    .withZone(ZoneId.of(timeZoneId));
+            return ZonedDateTime.parse(inputDateTimeString, formatter).toString();
+        } catch (Exception e) {
+            logger.warn("Unable to convert date to ZonedDateTime: " + inputDateString);
+            return null;
+        }
+
+    }
+
     /**
      * Custom mapping for description field, name convention is start with map then the field name
      * @param source
@@ -245,7 +332,6 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
         List<MDDistributionType> items = findMDDistributionType(source);
         if (!items.isEmpty()) {
             for (MDDistributionType i : items) {
-                System.out.println(i);
                 i.getTransferOptions().forEach(transferOption -> {
                     transferOption.getMDDigitalTransferOptions().getOnLine().forEach(link -> {
                         if (link.getAbstractOnlineResource().getValue() instanceof CIOnlineResourceType2 ciOnlineResource) {
@@ -254,7 +340,7 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
                                 linkModel.setType(Objects.equals(ciOnlineResource.getProtocol().getCharacterString().getValue().toString(), "WWW:LINK-1.0-http--link") ? "text/html" : "");
                                 linkModel.setHref(ciOnlineResource.getLinkage().getCharacterString().getValue().toString());
                                 linkModel.setRel(AppConstants.RECOMMENDED_LINK_REL_TYPE);
-                                linkModel.setTitle(ciOnlineResource.getName().getCharacterString().getValue().toString());
+                                linkModel.setTitle(ciOnlineResource.getName() != null ? ciOnlineResource.getName().getCharacterString().getValue().toString() : null);
                                 results.add(linkModel);
                             }
                         }
@@ -286,7 +372,6 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
                             if (!legalConstraintsType.getReference().isEmpty() || legalConstraintsType.getReference() != null) {
                                 legalConstraintsType.getReference().forEach(reference -> {
                                     if (reference.getAbstractCitation().getValue() instanceof CICitationType2 ciCitationType2) {
-                                        System.out.println(ciCitationType2);
                                         if (ciCitationType2.getTitle() != null) {
                                             licenses.add(ciCitationType2.getTitle().getCharacterString().getValue().toString());
                                         }

@@ -10,4 +10,5 @@ import java.util.List;
 @Builder
 public class ExtentModel {
     protected List<List<BigDecimal>> bbox;
+    protected List<String[]> temporal;
 }
