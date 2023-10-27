@@ -4,6 +4,7 @@ import au.org.aodn.esindexer.security.APIKeyAuthFilter;
 import java.util.Objects;
 
 import au.org.aodn.esindexer.security.JwtAuthenticationEntryPoint;
+import jakarta.servlet.Filter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -11,10 +12,16 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import static org.springframework.security.config.Customizer.withDefaults;
+import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -44,41 +51,31 @@ public class SecurityConfig {
                 return authentication;
             });
 
-        http.cors()
-            .and()
-            .csrf()
-            .disable()
-            .exceptionHandling()
-            .authenticationEntryPoint(unauthorizedHandler)
-            .and()
-            .sessionManagement()
-            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-            .and()
+
+        http.cors(withDefaults())
+            .csrf(AbstractHttpConfigurer::disable)
+            .exceptionHandling(config -> config.authenticationEntryPoint(unauthorizedHandler))
+            .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .addFilter(filter)
-            .authorizeRequests()
-            .antMatchers("/error")
-            .permitAll()
-            .antMatchers("/",
-                "/favicon.ico",
-                "/**/*.png",
-                "/**/*.gif",
-                "/**/*.svg",
-                "/**/*.jpg",
-                "/**/*.html",
-                "/**/*.css",
-                "/**/*.js")
-            .permitAll()
-            .antMatchers(HttpMethod.GET, "/api/v1/indexer/index/gn_records/**")
-            .permitAll()
-            .antMatchers(HttpMethod.GET, "/api/v1/indexer/index/records/**")
-            .permitAll()
-            .antMatchers(
-            "/v3/api-docs/**",
-            "/swagger-resources/**",
-            "/swagger-ui.html")
-            .permitAll()
-            .anyRequest()
-            .authenticated();
+            .authorizeHttpRequests((requests) -> requests
+                    .requestMatchers(antMatcher("/error")).permitAll()
+                    .requestMatchers(antMatcher("/")).permitAll()
+                    .requestMatchers(antMatcher("/favicon.ico")).permitAll()
+                    .requestMatchers(antMatcher("/**/*.png")).permitAll()
+                    .requestMatchers(antMatcher("/**/*.gif")).permitAll()
+                    .requestMatchers(antMatcher("/**/*.svg")).permitAll()
+                    .requestMatchers(antMatcher("/**/*.jpg")).permitAll()
+                    .requestMatchers(antMatcher("/**/*.html")).permitAll()
+                    .requestMatchers(antMatcher("/**/*.css")).permitAll()
+                    .requestMatchers(antMatcher("/**/*.js")).permitAll()
+                    .requestMatchers(antMatcher(HttpMethod.GET,"/api/v1/indexer/index/gn_records/**")).permitAll()
+                    .requestMatchers(antMatcher(HttpMethod.GET,"/api/v1/indexer/index/records/**")).permitAll()
+                    .requestMatchers(antMatcher("/v3/api-docs/**")).permitAll()
+                    .requestMatchers(antMatcher("/swagger-resources/**")).permitAll()
+                    .requestMatchers(antMatcher("/swagger-ui.html")).permitAll()
+                    .anyRequest().authenticated()
+            );
+;
 
         return http.build();
     }
