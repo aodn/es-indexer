@@ -47,7 +47,20 @@
           "score": { "type": "long" },
           "status": { "type": "text" },
           "creation": { "type": "date" },
-          "proj:geometry": { "type": "geo_shape" }
+          "proj:geometry": { "type": "geo_shape" },
+          "temporal" : {
+            "type": "nested",
+            "properties" : {
+              "start" : {
+                "type": "date",
+                "null_value": "NULL"
+              },
+              "end" : {
+                "type": "date",
+                "null_value": "NULL"
+              }
+            }
+          }
         }
       }
     }
