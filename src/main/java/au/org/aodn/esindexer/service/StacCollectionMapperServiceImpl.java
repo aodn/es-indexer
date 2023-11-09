@@ -5,6 +5,7 @@ import au.org.aodn.esindexer.exception.MappingValueException;
 import au.org.aodn.esindexer.model.*;
 import au.org.aodn.esindexer.utils.BBoxUtils;
 import au.org.aodn.esindexer.utils.GeometryUtils;
+import au.org.aodn.esindexer.utils.TemporalUtils;
 import au.org.aodn.metadata.iso19115_3_2018.*;
 import jakarta.xml.bind.JAXBElement;
 import org.mapstruct.Mapper;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -35,6 +37,7 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
     @Mapping(target="summaries.status", source = "source", qualifiedByName = "mapSummaries.status")
     @Mapping(target="summaries.scope", source = "source", qualifiedByName = "mapSummaries.scope")
     @Mapping(target="summaries.geometry", source = "source", qualifiedByName = "mapSummaries.geometry")
+    @Mapping(target="summaries.temporal", source = "source", qualifiedByName = "mapSummaries.temporal")
     @Mapping(target="extent.bbox", source = "source", qualifiedByName = "mapExtentBbox")
     @Mapping(target="extent.temporal", source = "source", qualifiedByName = "mapExtentTemporal")
     @Mapping(target="contacts", source = "source", qualifiedByName = "mapContacts")
@@ -65,11 +68,17 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
 
     @Named("mapExtentTemporal")
     List<String[]> mapExtentTemporal(MDMetadataType source) {
+        return TemporalUtils.concatOverallTemporalRange(createExtentTemporal(source));
+    }
+
+    List<String[]> createExtentTemporal(MDMetadataType source) {
+
         List<MDDataIdentificationType> items = findMDDataIdentificationType(source);
         if (items.isEmpty()) {
             logger.warn("Unable to find extent temporal information for metadata record: " + this.mapUUID(source));
             return null;
         }
+
         List<String[]> result = new ArrayList<>();
         for (MDDataIdentificationType i : items) {
             i.getExtent().forEach(extent -> {
@@ -131,11 +140,11 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
             if (!inputDateString.contains("T")) {
                 inputDateTimeString += "T00:00:00";
             }
-            DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
-            ZonedDateTime zonedDateTime = ZonedDateTime.parse(inputDateTimeString, inputFormatter.withZone(ZoneId.of(timeZoneId)));
+
+            ZonedDateTime zonedDateTime = ZonedDateTime.parse(inputDateTimeString, TemporalUtils.TIME_FORMATTER.withZone(ZoneId.of(timeZoneId)));
 
             // Convert to UTC
-            ZonedDateTime utcZonedDateTime = zonedDateTime.withZoneSameInstant(ZoneId.of("UTC"));
+            ZonedDateTime utcZonedDateTime = zonedDateTime.withZoneSameInstant(ZoneOffset.UTC);
 
             DateTimeFormatter outputFormatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME;
 
@@ -163,6 +172,22 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
             }
         }
         return "";
+    }
+
+    @Named("mapSummaries.temporal")
+    List<Map<String,String>> mapSummariesTemporal(MDMetadataType source) {
+        List<Map<String,String>> result = new ArrayList<>();
+        List<String[]> temp = createExtentTemporal(source);
+
+        for(String[] t : temp) {
+            Map<String,String> m = new HashMap<>();
+            m.put("start", t[0]);
+            m.put("end", t[1]);
+
+            result.add(m);
+        }
+
+        return result;
     }
 
     @Named("mapSummaries.geometry")
