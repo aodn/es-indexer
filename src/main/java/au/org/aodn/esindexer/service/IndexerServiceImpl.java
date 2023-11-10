@@ -168,8 +168,9 @@ public class IndexerServiceImpl implements IndexerService {
                     return ResponseEntity.status(HttpStatus.OK).body(response.toString());
                 }
                 catch (ElasticsearchException e) {
-                    logger.error(e.getMessage());
-                    throw new IndexingRecordException(e.getMessage());
+                    String fullError = String.format("%s -> %s", e.getMessage(), e.error().causedBy());
+                    logger.error(fullError);
+                    throw new IndexingRecordException(fullError);
                 }
             } else {
                 logger.info("Metadata with UUID: " + uuid + " is not published yet, skip indexing");
@@ -195,8 +196,9 @@ public class IndexerServiceImpl implements IndexerService {
             );
             CreateIndexResponse response = portalElasticsearchClient.indices().create(req);
             logger.info(response.toString());
-        } catch (ElasticsearchException | IOException e) {
-            throw new CreateIndexException("Failed to create index: " + indexName + " | " + e.getMessage());
+        }
+        catch (ElasticsearchException | IOException e) {
+            throw new CreateIndexException("Failed to elastic index from schema file: " + indexName + " | " + e.getMessage());
         }
     }
 
