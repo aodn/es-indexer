@@ -646,8 +646,10 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
                                 .map(AbstractEXGeographicExtentPropertyType::getAbstractEXGeographicExtent)
                                 .filter(m -> m.getValue() instanceof EXBoundingPolygonType || m.getValue() instanceof EXGeographicBoundingBoxType)
                                 .map(m -> {
-                                    if (m.getValue() instanceof EXBoundingPolygonType) {
-                                        return (EXBoundingPolygonType) m.getValue();
+                                    if (m.getValue() instanceof EXBoundingPolygonType exBoundingPolygonType) {
+                                        if (!exBoundingPolygonType.getPolygon().isEmpty() && exBoundingPolygonType.getPolygon().get(0).getAbstractGeometry() != null) {
+                                            return exBoundingPolygonType;
+                                        }
                                     } else if (m.getValue() instanceof EXGeographicBoundingBoxType) {
                                         return (EXGeographicBoundingBoxType) m.getValue();
                                     }
