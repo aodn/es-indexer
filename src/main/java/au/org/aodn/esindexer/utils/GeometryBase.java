@@ -60,53 +60,57 @@ public class GeometryBase {
 
             for (List<GMObjectPropertyType> i : input) {
                 for (GMObjectPropertyType t : i) {
-                    AbstractGeometryType type = t.getAbstractGeometry().getValue();
 
-                    // TODO: fix here more cases
-                    if (type instanceof MultiSurfaceType mst) {
-                        for (SurfacePropertyType j : mst.getSurfaceMember()) {
-                            // TODO: Only process Polygon for now.
-                            if (j.getAbstractSurface().getValue() instanceof PolygonType polygonType) {
-                                // TODO: Only process LinearRingType for now
-                                if (polygonType.getExterior() != null && polygonType.getExterior().getAbstractRing().getValue() instanceof LinearRingType linearRingType) {
-                                    // TODO: Handle 2D now, can be 3D
-                                    if (linearRingType.getPosList().getSrsDimension().doubleValue() == 2.0) {
-                                        List<Double> v = linearRingType.getPosList().getValue();
-                                        List<Coordinate> items = new ArrayList<>();
+                    if (t.getAbstractGeometry() != null) {
+                        AbstractGeometryType type = t.getAbstractGeometry().getValue();
 
-                                        for (int z = 0; z < v.size(); z += 2) {
-                                            items.add(new Coordinate(v.get(z), v.get(z + 1)));
+                        // TODO: fix here more cases
+                        if (type instanceof MultiSurfaceType mst) {
+                            for (SurfacePropertyType j : mst.getSurfaceMember()) {
+                                // TODO: Only process Polygon for now.
+                                if (j.getAbstractSurface().getValue() instanceof PolygonType polygonType) {
+                                    // TODO: Only process LinearRingType for now
+                                    if (polygonType.getExterior() != null && polygonType.getExterior().getAbstractRing().getValue() instanceof LinearRingType linearRingType) {
+                                        // TODO: Handle 2D now, can be 3D
+                                        if (linearRingType.getPosList().getSrsDimension().doubleValue() == 2.0) {
+                                            List<Double> v = linearRingType.getPosList().getValue();
+                                            List<Coordinate> items = new ArrayList<>();
+
+                                            for (int z = 0; z < v.size(); z += 2) {
+                                                items.add(new Coordinate(v.get(z), v.get(z + 1)));
+                                            }
+
+                                            // We need to store it so that we can create the multi-array as told by spec
+                                            Polygon polygon = geoJsonFactory.createPolygon(items.toArray(new Coordinate[items.size()]));
+                                            polygons.add(polygon);
+                                            logger.debug("2D Polygon added {}", polygon);
                                         }
-
-                                        // We need to store it so that we can create the multi-array as told by spec
-                                        Polygon polygon = geoJsonFactory.createPolygon(items.toArray(new Coordinate[items.size()]));
-                                        polygons.add(polygon);
-                                        logger.debug("2D Polygon added {}", polygon);
                                     }
                                 }
                             }
-                        }
-                    } else if (type instanceof PolygonType plt) {
-                        // TODO: Only process LinearRingType for now
-                        // Set the coor system for the factory
-                        // CoordinateReferenceSystem system = CRS.decode(mst.getSrsName().trim(), true);
-                        if (plt.getExterior() != null && plt.getExterior().getAbstractRing().getValue() instanceof LinearRingType linearRingType) {
-                            // TODO: Handle 2D now, can be 3D
-                            if (linearRingType.getPosList().getSrsDimension().doubleValue() == 2.0) {
-                                List<Double> v = linearRingType.getPosList().getValue();
-                                List<Coordinate> items = new ArrayList<>();
+                        } else if (type instanceof PolygonType plt) {
+                            // TODO: Only process LinearRingType for now
+                            // Set the coor system for the factory
+                            // CoordinateReferenceSystem system = CRS.decode(mst.getSrsName().trim(), true);
+                            if (plt.getExterior() != null && plt.getExterior().getAbstractRing().getValue() instanceof LinearRingType linearRingType) {
+                                // TODO: Handle 2D now, can be 3D
+                                if (linearRingType.getPosList().getSrsDimension().doubleValue() == 2.0) {
+                                    List<Double> v = linearRingType.getPosList().getValue();
+                                    List<Coordinate> items = new ArrayList<>();
 
-                                for (int z = 0; z < v.size(); z += 2) {
-                                    items.add(new Coordinate(v.get(z), v.get(z + 1)));
+                                    for (int z = 0; z < v.size(); z += 2) {
+                                        items.add(new Coordinate(v.get(z), v.get(z + 1)));
+                                    }
+
+                                    // We need to store it so that we can create the multi-array as told by spec
+                                    Polygon polygon = geoJsonFactory.createPolygon(items.toArray(new Coordinate[items.size()]));
+                                    polygons.add(polygon);
+
+                                    logger.debug("2D Polygon added {}", polygon);
                                 }
-
-                                // We need to store it so that we can create the multi-array as told by spec
-                                Polygon polygon = geoJsonFactory.createPolygon(items.toArray(new Coordinate[items.size()]));
-                                polygons.add(polygon);
-
-                                logger.debug("2D Polygon added {}", polygon);
                             }
                         }
+
                     }
                 }
             }
