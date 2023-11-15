@@ -45,6 +45,7 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
     @Mapping(target="languages", source = "source", qualifiedByName = "mapLanguages")
     @Mapping(target="links", source = "source", qualifiedByName = "mapLinks")
     @Mapping(target="license", source = "source", qualifiedByName = "mapLicense")
+    @Mapping(target="provider", source = "source", qualifiedByName = "mapProvider")
     public abstract StacCollectionModel mapToSTACCollection(MDMetadataType source);
 
     private static final Logger logger = LoggerFactory.getLogger(StacCollectionMapperServiceImpl.class);
@@ -379,6 +380,34 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
             }
         }
         return results;
+    }
+
+    // TODO: need to handle exception
+    @Named("mapProvider")
+    ProviderModel mapProvider(MDMetadataType source) {
+        ProviderModel providerModel = ProviderModel.builder().build();
+
+        source.getContact().forEach(item -> {
+            if (item.getAbstractResponsibility().getValue() instanceof CIResponsibilityType2 ciResponsibility) {
+                providerModel.setRoles(Collections.singletonList(ciResponsibility.getRole().getCIRoleCode().getCodeListValue()));
+                ciResponsibility.getParty().forEach(party -> {
+                    try {
+                        CIOrganisationType2 organisationType2 = (CIOrganisationType2) party.getAbstractCIParty().getValue();
+                        providerModel.setName(organisationType2.getName().getCharacterString().getValue().toString());
+                        organisationType2.getIndividual().forEach(individual -> {
+                            individual.getCIIndividual().getContactInfo().forEach(contactInfo -> {
+                                contactInfo.getCIContact().getOnlineResource().forEach(onlineResource -> {
+                                    providerModel.setUrl(onlineResource.getCIOnlineResource().getLinkage().getCharacterString().getValue().toString());
+                                });
+                            });
+                        });
+                    } catch (ClassCastException e) {
+                        logger.error("Unable to cast getAbstractCIParty().getValue() to CIOrganisationType2 for metadata record: " + this.mapUUID(source));
+                    }
+                });
+            }
+        });
+        return providerModel;
     }
 
     @Named("mapLicense")
