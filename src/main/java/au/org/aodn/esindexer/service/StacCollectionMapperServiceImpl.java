@@ -46,7 +46,7 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
     @Mapping(target="languages", source = "source", qualifiedByName = "mapLanguages")
     @Mapping(target="links", source = "source", qualifiedByName = "mapLinks")
     @Mapping(target="license", source = "source", qualifiedByName = "mapLicense")
-    @Mapping(target="provider", source = "source", qualifiedByName = "mapProvider")
+    @Mapping(target="providers", source = "source", qualifiedByName = "mapProviders")
     public abstract StacCollectionModel mapToSTACCollection(MDMetadataType source);
 
     private static final Logger logger = LoggerFactory.getLogger(StacCollectionMapperServiceImpl.class);
@@ -384,15 +384,15 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
     }
 
     // TODO: need to handle exception
-    @Named("mapProvider")
-    ProviderModel mapProvider(MDMetadataType source) {
-        ProviderModel providerModel = ProviderModel.builder().build();
-
+    @Named("mapProviders")
+    List<ProviderModel> mapProviders(MDMetadataType source) {
+        List<ProviderModel> results = new ArrayList<>();
         source.getContact().forEach(item -> {
             if (item.getAbstractResponsibility().getValue() instanceof CIResponsibilityType2 ciResponsibility) {
-                providerModel.setRoles(Collections.singletonList(ciResponsibility.getRole().getCIRoleCode().getCodeListValue()));
                 ciResponsibility.getParty().forEach(party -> {
                     try {
+                        ProviderModel providerModel = ProviderModel.builder().build();
+                        providerModel.setRoles(Collections.singletonList(ciResponsibility.getRole().getCIRoleCode().getCodeListValue()));
                         CIOrganisationType2 organisationType2 = (CIOrganisationType2) party.getAbstractCIParty().getValue();
                         providerModel.setName(organisationType2.getName().getCharacterString().getValue().toString());
                         organisationType2.getIndividual().forEach(individual -> {
@@ -402,13 +402,14 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
                                 });
                             });
                         });
+                        results.add(providerModel);
                     } catch (ClassCastException e) {
                         logger.error("Unable to cast getAbstractCIParty().getValue() to CIOrganisationType2 for metadata record: " + this.mapUUID(source));
                     }
                 });
             }
         });
-        return providerModel;
+        return results;
     }
 
     @Named("mapLicense")
