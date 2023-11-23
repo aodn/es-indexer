@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 import au.org.aodn.esindexer.model.StacCollectionModel;
 
 @Service
-public class EvaluateCompletenessServiceImpl implements EvaluateCompletenessService {
-    public Integer evaluate(StacCollectionModel stacCollectionModel) {
+public class RankingServiceImpl implements RankingService {
+    public Integer evaluateCompleteness(StacCollectionModel stacCollectionModel) {
         return 0;
     }
 }

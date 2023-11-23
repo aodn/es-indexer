@@ -60,7 +60,7 @@ public class IndexerServiceImpl implements IndexerService {
     JaxbUtils<MDMetadataType> jaxbUtils;
 
     @Autowired
-    EvaluateCompletenessService evaluateCompletenessService;
+    RankingService rankingService;
 
     private static final Logger logger = LoggerFactory.getLogger(IndexerServiceImpl.class);
 
@@ -136,7 +136,7 @@ public class IndexerServiceImpl implements IndexerService {
         StacCollectionModel stacCollectionModel = mapper.mapToSTACCollection(metadataType);
 
         // evaluate completeness
-        Integer completeness = evaluateCompletenessService.evaluate(stacCollectionModel);
+        Integer completeness = rankingService.evaluateCompleteness(stacCollectionModel);
         // TODO: in future, evaluate other aspects of the data such as relevance, quality, etc using NLP
 
         // expand score with other aspect of the data such as relevance, quality, etc.
