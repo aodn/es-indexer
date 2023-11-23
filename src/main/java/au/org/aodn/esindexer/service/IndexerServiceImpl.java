@@ -139,7 +139,12 @@ public class IndexerServiceImpl implements IndexerService {
         Integer completeness = rankingService.evaluateCompleteness(stacCollectionModel);
         // TODO: in future, evaluate other aspects of the data such as relevance, quality, etc using NLP
 
-        // expand score with other aspect of the data such as relevance, quality, etc.
+        /* expand score with other aspect of the data such as relevance, quality, etc.
+        * can maintain 100 points as the maximum score by dividing the score by the number of aspects (round up/down to the nearest integer)
+        * given max score is 100 for each aspect
+        * e.g completeness = 80, relevance = 90, quality = 100
+        * final score = (80 + 90 + 100) / 3 = 90
+        */
         Integer score = completeness;
 
         stacCollectionModel.getSummaries().setScore(score);
