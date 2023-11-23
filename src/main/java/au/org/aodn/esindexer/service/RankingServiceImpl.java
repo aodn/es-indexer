@@ -41,17 +41,17 @@ public class RankingServiceImpl implements RankingService {
             total += 15;
         }
 
-        if (stacCollectionModel.getExtent().getBbox() != null) {
+        if (stacCollectionModel.getExtent().getBbox() != null && stacCollectionModel.getExtent().getBbox().size() > 0) {
             logger.debug("Extent found");
             total += 10;
         }
 
-        if (stacCollectionModel.getExtent().getTemporal() != null) {
+        if (stacCollectionModel.getExtent().getTemporal() != null && stacCollectionModel.getExtent().getTemporal().size() > 0) {
             logger.debug("Temporal found");
             total += 10;
         }
 
-        if (stacCollectionModel.getLinks() != null && stacCollectionModel.getLinks().size() != 0) {
+        if (stacCollectionModel.getLinks() != null && stacCollectionModel.getLinks().size() > 0) {
             if (stacCollectionModel.getLinks().size() <= 2) {
                 logger.debug("Links found with size: " + stacCollectionModel.getLinks().size());
                 total += 10;
@@ -64,7 +64,7 @@ public class RankingServiceImpl implements RankingService {
             }
         }
 
-        if (stacCollectionModel.getThemes() != null && stacCollectionModel.getThemes().size() != 0) {
+        if (stacCollectionModel.getThemes() != null && stacCollectionModel.getThemes().size() > 0) {
             if (stacCollectionModel.getThemes().size() <= 2) {
                 logger.debug("Themes found with size: " + stacCollectionModel.getThemes().size());
                 total += 10;
@@ -77,7 +77,7 @@ public class RankingServiceImpl implements RankingService {
             }
         }
 
-        if (stacCollectionModel.getContacts() != null && stacCollectionModel.getContacts().size() != 0) {
+        if (stacCollectionModel.getContacts() != null && stacCollectionModel.getContacts().size() > 0) {
             logger.debug("Contacts found");
             total += 10;
         }
