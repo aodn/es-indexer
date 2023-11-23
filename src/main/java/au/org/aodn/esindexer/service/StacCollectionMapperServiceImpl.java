@@ -14,6 +14,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +35,6 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
     @Mapping(target="uuid", source = "source", qualifiedByName = "mapUUID")
     @Mapping(target="title", source = "source", qualifiedByName = "mapTitle" )
     @Mapping(target="description", source = "source", qualifiedByName = "mapDescription")
-    @Mapping(target="summaries.score", source = "source", qualifiedByName = "mapSummaries.score")
     @Mapping(target="summaries.status", source = "source", qualifiedByName = "mapSummaries.status")
     @Mapping(target="summaries.scope", source = "source", qualifiedByName = "mapSummaries.scope")
     @Mapping(target="summaries.geometry", source = "source", qualifiedByName = "mapSummaries.geometry")
@@ -48,6 +48,7 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
     @Mapping(target="license", source = "source", qualifiedByName = "mapLicense")
     @Mapping(target="providers", source = "source", qualifiedByName = "mapProviders")
     public abstract StacCollectionModel mapToSTACCollection(MDMetadataType source);
+
 
     private static final Logger logger = LoggerFactory.getLogger(StacCollectionMapperServiceImpl.class);
 
@@ -199,12 +200,6 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
                 GeometryUtils::createGeometryFromFromEXBoundingPolygonType,
                 GeometryUtils::createGeometryFromEXGeographicBoundingBoxType
         );
-    }
-
-    @Named("mapSummaries.score")
-    Integer createSummariesScore(MDMetadataType source) {
-        //TODO: need cal logic
-        return 0;
     }
 
     @Named("mapSummaries.status")
