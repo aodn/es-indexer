@@ -32,7 +32,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
+import au.org.aodn.esindexer.model.StacCollectionModel;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -58,6 +58,9 @@ public class IndexerServiceImpl implements IndexerService {
 
     @Autowired
     JaxbUtils<MDMetadataType> jaxbUtils;
+
+    @Autowired
+    EvaluateCompletenessService evaluateCompletenessService;
 
     private static final Logger logger = LoggerFactory.getLogger(IndexerServiceImpl.class);
 
@@ -127,14 +130,28 @@ public class IndexerServiceImpl implements IndexerService {
         }
     }
 
+    protected JSONObject getMappedMetadataValues(String metadataValues) throws IOException, FactoryException, TransformException, JAXBException {
+        MDMetadataType metadataType = jaxbUtils.unmarshal(metadataValues);
+
+        StacCollectionModel stacCollectionModel = mapper.mapToSTACCollection(metadataType);
+
+        // evaluate completeness
+        Integer completeness = evaluateCompletenessService.evaluate(stacCollectionModel);
+        // TODO: in future, evaluate other aspects of the data such as relevance, quality, etc using NLP
+
+        // expand score with other aspect of the data such as relevance, quality, etc.
+        Integer score = completeness;
+
+        stacCollectionModel.getSummaries().setScore(score);
+
+        return new JSONObject(objectMapper.writerWithDefaultPrettyPrinter()
+                .writeValueAsString(stacCollectionModel));
+    }
 
     public ResponseEntity<String> indexMetadata(String metadataValues) {
         try {
-            JSONObject mappedMetadataValues;
+            JSONObject mappedMetadataValues = this.getMappedMetadataValues(metadataValues);
             IndexRequest<JsonData> req;
-            MDMetadataType metadataType = jaxbUtils.unmarshal(metadataValues);
-            mappedMetadataValues = new JSONObject(objectMapper.writerWithDefaultPrettyPrinter()
-                    .writeValueAsString(mapper.mapToSTACCollection(metadataType)));
 
             String uuid = mappedMetadataValues.getString("id");
             long portalIndexDocumentsCount;
@@ -231,16 +248,13 @@ public class IndexerServiceImpl implements IndexerService {
 
         for (String metadataRecord : geoNetworkResourceService.getAllMetadataRecords()) {
             try {
-                MDMetadataType metadataType = jaxbUtils.unmarshal(metadataRecord);
                 // get mapped metadata values from GeoNetwork to STAC collection schema
-                JSONObject mappedRecord = new JSONObject(objectMapper
-                        .writerWithDefaultPrettyPrinter()
-                        .writeValueAsString(mapper.mapToSTACCollection(metadataType)));
+                JSONObject mappedMetadataValues = this.getMappedMetadataValues(metadataRecord);
 
-                logger.debug("Final output json is {}", mappedRecord);
+                logger.debug("Final output json is {}", mappedMetadataValues);
 
                 // convert mapped values to binary data
-                ByteArrayInputStream input = new ByteArrayInputStream(mappedRecord.toString().getBytes());
+                ByteArrayInputStream input = new ByteArrayInputStream(mappedMetadataValues.toString().getBytes());
                 BinaryData data = BinaryData.of(IOUtils.toByteArray(input), ContentType.APPLICATION_JSON);
 
                 // send bulk request to Elasticsearch
@@ -251,7 +265,7 @@ public class IndexerServiceImpl implements IndexerService {
                     )
                 );
 
-                logger.info("Ingested a new metadata document with UUID: " + mappedRecord.getString("id"));
+                logger.info("Ingested a new metadata document with UUID: " + mappedMetadataValues.getString("id"));
 
             } catch (FactoryException | JAXBException | TransformException e) {
                 /* it will reach here if cannot extract values of all the keys in GeoNetwork metadata JSON
