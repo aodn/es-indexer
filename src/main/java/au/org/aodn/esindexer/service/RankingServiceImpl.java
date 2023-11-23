@@ -31,12 +31,12 @@ public class RankingServiceImpl implements RankingService {
         * Total: 100 points
         * */
 
-        if (stacCollectionModel.getTitle() != null || !stacCollectionModel.getTitle().equals("")) {
+        if (stacCollectionModel.getTitle() != null && !stacCollectionModel.getTitle().equals("")) {
             logger.debug("Title found");
             total += 15;
         }
 
-        if (stacCollectionModel.getDescription() != null || !stacCollectionModel.getDescription().equals("")) {
+        if (stacCollectionModel.getDescription() != null && !stacCollectionModel.getDescription().equals("")) {
             logger.debug("Description found");
             total += 15;
         }
