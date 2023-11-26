@@ -13,6 +13,11 @@ app:
   http:
     auth-token-header-name: X-API-Key
 
+management:
+  health:
+    elasticsearch:
+      enabled: false
+
 elasticsearch:
   index:
     name: portal_records
