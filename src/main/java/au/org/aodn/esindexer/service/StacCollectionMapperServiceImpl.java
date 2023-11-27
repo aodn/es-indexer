@@ -14,7 +14,6 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -254,11 +253,11 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
                 // TODO: Null or empty check
                 AbstractCitationType ac = i.getCitation().getAbstractCitation().getValue();
                 if(ac instanceof CICitationType2 type2) {
-                    return StringUtil.toUTF8String(type2.getTitle().getCharacterString().getValue().toString());
+                    return type2.getTitle().getCharacterString().getValue().toString();
                 }
                 else if(ac instanceof CICitationType type1) {
                     // Backward compatible
-                    return StringUtil.toUTF8String(type1.getTitle().getCharacterString().getValue().toString());
+                    return type1.getTitle().getCharacterString().getValue().toString();
                 }
             }
         }
@@ -270,10 +269,10 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
         descriptiveKeyword.getMDKeywords().getKeyword().forEach(keyword -> {
             if (keyword != null) {
                 if (keyword.getCharacterString().getValue() instanceof AnchorType value) {
-                    keywords.add(Map.of("id", StringUtil.toUTF8String(value.getValue()),
-                            "url", StringUtil.toUTF8String(value.getHref())));
+                    keywords.add(Map.of("id", value.getValue(),
+                            "url", value.getHref()));
                 } else {
-                    keywords.add(Map.of("id", StringUtil.toUTF8String(keyword.getCharacterString().getValue().toString())));
+                    keywords.add(Map.of("id", keyword.getCharacterString().getValue().toString()));
                 }
             }
         });
@@ -287,12 +286,12 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
             CharacterStringPropertyType titleString = thesaurusNameType2.getTitle();
             if (titleString != null && titleString.getCharacterString().getValue() instanceof  AnchorType value) {
                 if (value.getValue() != null) {
-                    return StringUtil.toUTF8String(value.getValue());
+                    return value.getValue();
                 } else {
                     return "";
                 }
             } else if (titleString != null && titleString.getCharacterString().getValue() instanceof String value) {
-                return StringUtil.toUTF8String(value);
+                return value;
             }
         }
         logger.debug("Unable to find themes' title for metadata record: " + uuid);
@@ -306,12 +305,12 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
             CharacterStringPropertyType titleString = thesaurusNameType2.getTitle();
             if (titleString != null && titleString.getCharacterString().getValue() instanceof  AnchorType value) {
                 if (value.getTitleAttribute() != null) {
-                    return StringUtil.toUTF8String(value.getTitleAttribute());
+                    return value.getTitleAttribute();
                 } else {
                     return "";
                 }
             } else if (titleString != null && titleString.getCharacterString().getValue() instanceof String value) {
-                return StringUtil.toUTF8String(thesaurusNameType2.getAlternateTitle().stream().map(CharacterStringPropertyType::getCharacterString).map(JAXBElement::getValue).map(Object::toString).collect(Collectors.joining(", ")));
+                return thesaurusNameType2.getAlternateTitle().stream().map(CharacterStringPropertyType::getCharacterString).map(JAXBElement::getValue).map(Object::toString).collect(Collectors.joining(", "));
             }
         }
         logger.debug("Unable to find themes' description for metadata record: " + uuid);
@@ -322,7 +321,7 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
         AbstractCitationPropertyType abstractCitationPropertyType = descriptiveKeyword.getMDKeywords().getThesaurusName();
         if (abstractCitationPropertyType != null) {
             if (descriptiveKeyword.getMDKeywords().getType() != null) {
-                return StringUtil.toUTF8String(descriptiveKeyword.getMDKeywords().getType().getMDKeywordTypeCode().getCodeListValue());
+                return descriptiveKeyword.getMDKeywords().getType().getMDKeywordTypeCode().getCodeListValue();
             } else {
                 return "";
             }
@@ -367,7 +366,7 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
                                 linkModel.setType(Objects.equals(ciOnlineResource.getProtocol().getCharacterString().getValue().toString(), "WWW:LINK-1.0-http--link") ? "text/html" : "");
                                 linkModel.setHref(ciOnlineResource.getLinkage().getCharacterString().getValue().toString());
                                 linkModel.setRel(AppConstants.RECOMMENDED_LINK_REL_TYPE);
-                                linkModel.setTitle(ciOnlineResource.getName() != null ? StringUtil.toUTF8String(ciOnlineResource.getName().getCharacterString().getValue().toString()) : null);
+                                linkModel.setTitle(ciOnlineResource.getName() != null ? ciOnlineResource.getName().getCharacterString().getValue().toString() : null);
                                 results.add(linkModel);
                             }
                         }
@@ -419,7 +418,7 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
                         legalConstraintsType.getOtherConstraints().forEach(otherConstraints -> {
                             for (String potentialKey : potentialKeys) {
                                 if (otherConstraints.getCharacterString() != null && otherConstraints.getCharacterString().getValue().toString().toLowerCase().contains(potentialKey)) {
-                                    licenses.add(StringUtil.toUTF8String(otherConstraints.getCharacterString().getValue().toString()));
+                                    licenses.add(otherConstraints.getCharacterString().getValue().toString());
                                 }
                             }
                         });
@@ -429,7 +428,7 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
                                 legalConstraintsType.getReference().forEach(reference -> {
                                     if (reference.getAbstractCitation().getValue() instanceof CICitationType2 ciCitationType2) {
                                         if (ciCitationType2.getTitle() != null) {
-                                            licenses.add(StringUtil.toUTF8String(ciCitationType2.getTitle().getCharacterString().getValue().toString()));
+                                            licenses.add(ciCitationType2.getTitle().getCharacterString().getValue().toString());
                                         }
                                     }
                                 });
@@ -528,23 +527,23 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
 
     protected String mapContactsRole(CIResponsibilityType2 ciResponsibility) {
         CodeListValueType roleCode = ciResponsibility.getRole().getCIRoleCode();
-        if (roleCode != null) { return StringUtil.toUTF8String(roleCode.getCodeListValue()); } else { return ""; }
+        if (roleCode != null) { return roleCode.getCodeListValue(); } else { return ""; }
     }
 
     protected String mapContactsOrganization(AbstractCIPartyPropertyType2 party) {
         String organisationString = party.getAbstractCIParty().getValue().getName().getCharacterString().getValue().toString();
-        if (organisationString != null) { return StringUtil.toUTF8String(organisationString); } else { return ""; }
+        if (organisationString != null) { return organisationString; } else { return ""; }
 
     }
 
     protected String mapContactsName(CIIndividualPropertyType2 individual) {
         CharacterStringPropertyType nameString = individual.getCIIndividual().getName();
-        if (nameString != null) { return StringUtil.toUTF8String(individual.getCIIndividual().getName().getCharacterString().getValue().toString()); } else { return ""; }
+        if (nameString != null) { return individual.getCIIndividual().getName().getCharacterString().getValue().toString(); } else { return ""; }
     }
 
     protected String mapContactsPosition(CIIndividualPropertyType2 individual) {
         CharacterStringPropertyType positionString = individual.getCIIndividual().getPositionName();
-        if (positionString != null) { return StringUtil.toUTF8String(individual.getCIIndividual().getPositionName().getCharacterString().getValue().toString()); } else { return ""; }
+        if (positionString != null) { return individual.getCIIndividual().getPositionName().getCharacterString().getValue().toString(); } else { return ""; }
     }
 
     protected Map<String, Object> mapContactsAddress(CIAddressPropertyType2 address) {
@@ -553,28 +552,28 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
 
         address.getCIAddress().getDeliveryPoint().forEach(deliveryPoint -> {
             String deliveryPointString = deliveryPoint.getCharacterString().getValue().toString();
-            deliveryPoints.add(deliveryPointString != null ? StringUtil.toUTF8String(deliveryPointString) : "");
+            deliveryPoints.add(deliveryPointString != null ? deliveryPointString : "");
         });
         addressItem.put("deliveryPoint", deliveryPoints);
 
         CharacterStringPropertyType cityString = address.getCIAddress().getCity();
-        addressItem.put("city", cityString != null ? StringUtil.toUTF8String(cityString.getCharacterString().getValue().toString()) : "");
+        addressItem.put("city", cityString != null ? cityString.getCharacterString().getValue().toString() : "");
 
         CharacterStringPropertyType administrativeAreaString = address.getCIAddress().getAdministrativeArea();
-        addressItem.put("administrativeArea", administrativeAreaString != null ? StringUtil.toUTF8String(administrativeAreaString.getCharacterString().getValue().toString()) : "");
+        addressItem.put("administrativeArea", administrativeAreaString != null ? administrativeAreaString.getCharacterString().getValue().toString() : "");
 
         CharacterStringPropertyType postalCodeString = address.getCIAddress().getPostalCode();
-        addressItem.put("postalCode", postalCodeString != null ? StringUtil.toUTF8String(postalCodeString.getCharacterString().getValue().toString()) : "");
+        addressItem.put("postalCode", postalCodeString != null ? postalCodeString.getCharacterString().getValue().toString() : "");
 
         CharacterStringPropertyType countryString = address.getCIAddress().getCountry();
-        addressItem.put("country", countryString != null ? StringUtil.toUTF8String(countryString.getCharacterString().getValue().toString()) : "");
+        addressItem.put("country", countryString != null ? countryString.getCharacterString().getValue().toString() : "");
 
         return addressItem;
     }
 
     protected String mapContactsEmail(CharacterStringPropertyType electronicMailAddress) {
         if (electronicMailAddress != null) {
-            return StringUtil.toUTF8String(electronicMailAddress.getCharacterString().getValue().toString());
+            return electronicMailAddress.getCharacterString().getValue().toString();
         } else {
             return "";
         }
@@ -584,10 +583,10 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
         Map<String, String> phoneItem = new HashMap<>();
 
         CharacterStringPropertyType phoneString = phone.getCITelephone().getNumber();
-        phoneItem.put("value", phoneString != null ? StringUtil.toUTF8String(phoneString.getCharacterString().getValue().toString()) : "");
+        phoneItem.put("value", phoneString != null ? phoneString.getCharacterString().getValue().toString() : "");
 
         CodeListValueType phoneCode = phone.getCITelephone().getNumberType().getCITelephoneTypeCode();
-        phoneItem.put("roles", phoneCode != null ? StringUtil.toUTF8String(phoneCode.getCodeListValue()) : "");
+        phoneItem.put("roles", phoneCode != null ? phoneCode.getCodeListValue() : "");
 
         return phoneItem;
     }
@@ -596,13 +595,13 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
         Map<String, String> onlineResourceItem = new HashMap<>();
 
         CharacterStringPropertyType linkString = onlineResource.getCIOnlineResource().getLinkage();
-        onlineResourceItem.put("href", linkString != null ? StringUtil.toUTF8String(linkString.getCharacterString().getValue().toString()) : "");
+        onlineResourceItem.put("href", linkString != null ? linkString.getCharacterString().getValue().toString() : "");
 
         CharacterStringPropertyType resourceNameString = onlineResource.getCIOnlineResource().getName();
-        onlineResourceItem.put("title", resourceNameString != null ? StringUtil.toUTF8String(resourceNameString.getCharacterString().getValue().toString()) : "");
+        onlineResourceItem.put("title", resourceNameString != null ? resourceNameString.getCharacterString().getValue().toString() : "");
 
         CharacterStringPropertyType linkTypeString = onlineResource.getCIOnlineResource().getProtocol();
-        onlineResourceItem.put("type", linkTypeString != null ? StringUtil.toUTF8String(linkTypeString.getCharacterString().getValue().toString()) : "");
+        onlineResourceItem.put("type", linkTypeString != null ? linkTypeString.getCharacterString().getValue().toString() : "");
 
         return onlineResourceItem;
     }
@@ -638,7 +637,7 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
 
     protected String mapLanguagesCode(MDDataIdentificationType i) {
         try {
-            return StringUtil.toUTF8String(i.getDefaultLocale().getPTLocale().getValue().getLanguage().getLanguageCode().getCodeListValue());
+            return i.getDefaultLocale().getPTLocale().getValue().getLanguage().getLanguageCode().getCodeListValue();
         } catch (NullPointerException e) {
             return null;
         }
