@@ -4,6 +4,7 @@ import au.org.aodn.esindexer.dto.MetadataRecordsCountRequestBodyDTO;
 import au.org.aodn.esindexer.dto.GeoNetworkSearchRequestBodyDTO;
 import au.org.aodn.esindexer.exception.GNConnectionRefusedException;
 import au.org.aodn.esindexer.exception.MetadataNotFoundException;
+import au.org.aodn.esindexer.utils.StringUtil;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -100,7 +101,7 @@ public class GeoNetworkResourceServiceImpl implements GeoNetworkResourceService 
                     params);
 
             if (responseEntity.getStatusCode().is2xxSuccessful()) {
-                return responseEntity.getBody();
+                return StringUtil.encodeUTF8(Objects.requireNonNull(responseEntity.getBody()));
             } else {
                 throw new RuntimeException("Failed to fetch data from the API");
             }

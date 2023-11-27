@@ -2,26 +2,34 @@ import au.org.aodn.esindexer.utils.StringUtil;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.nio.charset.StandardCharsets;
 
 public class StringUtilTest {
     @Test
     public void testToUTF8String_withAsciiString() {
         String asciiString = "Hello World";
-        String result = StringUtil.toUTF8String(asciiString);
-        assertEquals(asciiString, result, "The UTF-8 conversion of an ASCII string should not change the string");
+        String result = StringUtil.encodeUTF8(asciiString);
+        assertEquals(asciiString, result);
     }
 
     @Test
     public void testToUTF8String_withFrenchCharacters() {
         String frenchString = "Bonjour le monde! Ça va?";
-        String result = StringUtil.toUTF8String(frenchString);
-        assertEquals(frenchString, result, "The UTF-8 conversion of a string with French characters should not change the string");
+        // Manually encoding the string to ISO-8859-1
+        String manuallyEncoded = new String(frenchString.getBytes(StandardCharsets.UTF_8), StandardCharsets.ISO_8859_1);
+        // convert it back to UTF-8
+        String result = StringUtil.encodeUTF8(manuallyEncoded);
+        assertEquals(frenchString, result);
     }
 
     @Test
     public void testToUTF8String_withDegreeSign() {
-        String stringWithDegreeSign = "Temperature: 25°C";
-        String result = StringUtil.toUTF8String(stringWithDegreeSign);
-        assertEquals(stringWithDegreeSign, result, "The UTF-8 conversion of a string with a degree sign should not change the string");
+        // Example string containing the degree symbol
+        String original = "Temperature: 25° Celsius";
+        // Manually encoding the string to ISO-8859-1
+        String manuallyEncoded = new String(original.getBytes(StandardCharsets.UTF_8), StandardCharsets.ISO_8859_1);
+        // convert it back to UTF-8
+        String result = StringUtil.encodeUTF8(manuallyEncoded);
+        assertEquals(original, result);
     }
 }
