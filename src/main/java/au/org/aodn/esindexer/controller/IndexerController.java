@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 import java.io.IOException;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/api/v1/indexer/index")
@@ -56,7 +57,8 @@ public class IndexerController {
 
     @PostMapping(path="/all", consumes = "application/json", produces = "application/json")
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Index all metadata records from GeoNetwork")
-    public ResponseEntity<String> indexAllMetadataRecords(@RequestParam(value = "confirm", defaultValue = "false") Boolean confirm) throws IOException {
+    public ResponseEntity<String> indexAllMetadataRecords(@RequestBody Map<String, Boolean> requestBody) throws IOException {
+        Boolean confirm = requestBody.getOrDefault("confirm", false);
         return indexerService.indexAllMetadataRecordsFromGeoNetwork(confirm);
     }
 
