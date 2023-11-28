@@ -1,0 +1,77 @@
+{
+    "containerDefinitions": [
+        {
+            "name": "aodn-es-indexer",
+            "image": "<IMAGE>",
+            "cpu": 0,
+            "portMappings": [
+                {
+                    "name": "aodn-es-indexer-80-tcp",
+                    "containerPort": 80,
+                    "hostPort": 80,
+                    "protocol": "tcp",
+                    "appProtocol": "http"
+                },
+                {
+                    "name": "aodn-es-indexer-8081-tcp",
+                    "containerPort": 8081,
+                    "hostPort": 8081,
+                    "protocol": "tcp",
+                    "appProtocol": "http"
+                }
+            ],
+            "essential": true,
+            "environment": [
+                {
+                    "name": "ELASTIC_URL",
+                    "value": "<ELASTIC_URL>"
+                },
+                {
+                    "name": "ELASTIC_KEY",
+                    "value": "<ELASTIC_KEY>"
+                },
+                {
+                    "name": "PORT",
+                    "value": "<PORT>"
+                },
+                {
+                    "name": "ENVIRONMENT",
+                    "value": "<ENVIRONMENT>"
+                }
+            ],
+            "environmentFiles": [],
+            "mountPoints": [],
+            "volumesFrom": [],
+            "ulimits": [],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-create-group": "true",
+                    "awslogs-group": "/ecs/aodn-es-indexer",
+                    "awslogs-region": "ap-southeast-2",
+                    "awslogs-stream-prefix": "ecs"
+                },
+                "secretOptions": []
+            }
+        }
+    ],
+    "family": "aodn-es-indexer",
+    "executionRoleArn": "arn:aws:iam::704910415367:role/ecsTaskExecutionRole",
+    "networkMode": "awsvpc",
+    "volumes": [],
+    "placementConstraints": [],
+    "compatibilities": [
+        "EC2",
+        "FARGATE"
+    ],
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "1024",
+    "memory": "3072",
+    "runtimePlatform": {
+        "cpuArchitecture": "X86_64",
+        "operatingSystemFamily": "LINUX"
+    },
+    "tags": []
+}

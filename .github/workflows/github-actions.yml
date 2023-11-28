@@ -16,7 +16,7 @@ env:
   ECS_CLUSTER: aodn-imos-v2                 # set this to your Amazon ECS cluster name
   ECS_TASK_DEFINITION: ./es-indexer-dev-td.json     #MY_ECS_TASK_DEFINITION # set this to the path to your Amazon ECS task definition
                                                # file, e.g. .aws/task-definition.json
-  CONTAINER_NAME: aodn_es_indexer     #MY_CONTAINER_NAME           # set this to the name of the container in the
+  CONTAINER_NAME: aodn-es-indexer     #MY_CONTAINER_NAME           # set this to the name of the container in the
                                                # containerDefinitions section of your task definition
   #ROLE_ARN: arn:aws:iam::#########:role/tlc-ci-cd
   name: development
