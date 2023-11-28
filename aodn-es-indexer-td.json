@@ -60,10 +60,6 @@
     "networkMode": "awsvpc",
     "volumes": [],
     "placementConstraints": [],
-    "compatibilities": [
-        "EC2",
-        "FARGATE"
-    ],
     "requiresCompatibilities": [
         "FARGATE"
     ],
