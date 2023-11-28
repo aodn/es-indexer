@@ -70,8 +70,8 @@ jobs:
           java-version: '17'
           cache: 'maven'
           
-      - name: Build with Maven
-        run: mvn -B package --file pom.xml
+      # - name: Build with Maven
+      #   run: mvn -B package --file pom.xml
       
       - name: Login to Amazon ECR
         id: login-ecr
@@ -128,13 +128,13 @@ jobs:
           container-name: ${{ env.CONTAINER_NAME }}
           image: ${{ steps.push-image.outputs.image }}
           environment-variables: |
-            ENVIRONMENT=${{ env.ENVIRONMENT }}
-            HOST=${{ vars.HOST }} 
-            PORT=${{ vars.PORT }} 
-            ELASTIC_URL=${{ vars.ELASTIC_URL }} 
-            ELASTIC_KEY=${{ vars.ELASTIC_KEY }}
+            GEONETWORK_HOST=${{ vars.GEONETWORK_HOST }} 
+            SERVER_PORT=${{ vars.SERVER_PORT }} 
+            ELASTICSEARCH_SERVERURL=${{ vars.ELASTICSEARCH_SERVERURL }} 
+            ELASTICSEARCH_APIKEY=${{ vars.ELASTICSEARCH_APIKEY }}
+            APP_HTTP_AUTHTOKEN=${{ vars.APP_HTTP_AUTHTOKEN }}
+            ELASTICSEARCH_INDEX_NAME=${{ vars.ELASTICSEARCH_INDEX_NAME }}
             IMAGE=${{ steps.push-image.outputs.image }}
-        
 
       - name: Deploy Amazon ECS task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1

@@ -23,20 +23,28 @@
             "essential": true,
             "environment": [
                 {
-                    "name": "ELASTIC_URL",
-                    "value": "<ELASTIC_URL>"
+                    "name": "SERVER_PORT",
+                    "value": "<SERVER_PORT>"
                 },
                 {
-                    "name": "ELASTIC_KEY",
-                    "value": "<ELASTIC_KEY>"
+                    "name": "ELASTICSEARCH_SERVERURL",
+                    "value": "<ELASTICSEARCH_SERVERURL>"
                 },
                 {
-                    "name": "PORT",
-                    "value": "<PORT>"
+                    "name": "APP_HTTP_AUTHTOKEN",
+                    "value": "<APP_HTTP_AUTHTOKEN>"
                 },
                 {
-                    "name": "ENVIRONMENT",
-                    "value": "<ENVIRONMENT>"
+                    "name": "ELASTICSEARCH_APIKEY",
+                    "value": "<ELASTICSEARCH_APIKEY>"
+                },
+                {
+                    "name": "GEONETWORK_HOST",
+                    "value": "<GEONETWORK_HOST>"
+                },
+                {
+                    "name": "ELASTICSEARCH_INDEX_NAME",
+                    "value": "<ELASTICSEARCH_INDEX_NAME>"
                 }
             ],
             "environmentFiles": [],
