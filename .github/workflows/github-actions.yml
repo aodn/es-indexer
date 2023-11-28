@@ -14,7 +14,7 @@ env:
   #ECR_REPOSITORY: #########.dkr.ecr.ap-southeast-2.amazonaws.com/aodn-v2           # set this to your Amazon ECR repository name
   ECS_SERVICE: es-indexer-service #MY_ECS_SERVICE                 # set this to your Amazon ECS service name
   ECS_CLUSTER: aodn-imos-v2                 # set this to your Amazon ECS cluster name
-  ECS_TASK_DEFINITION: ./es-indexer-dev-td.json     #MY_ECS_TASK_DEFINITION # set this to the path to your Amazon ECS task definition
+  ECS_TASK_DEFINITION: ./aodn-es-indexer-td.json     #MY_ECS_TASK_DEFINITION # set this to the path to your Amazon ECS task definition
                                                # file, e.g. .aws/task-definition.json
   CONTAINER_NAME: aodn-es-indexer     #MY_CONTAINER_NAME           # set this to the name of the container in the
                                                # containerDefinitions section of your task definition
