@@ -6,6 +6,7 @@
             "cpu": 0,
             "portMappings": [
                 {
+
                     "name": "aodn-es-indexer-8081-tcp",
                     "containerPort": 8081,
                     "hostPort": 8081,
