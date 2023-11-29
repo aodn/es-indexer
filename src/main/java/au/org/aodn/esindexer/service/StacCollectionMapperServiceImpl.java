@@ -5,7 +5,7 @@ import au.org.aodn.esindexer.exception.MappingValueException;
 import au.org.aodn.esindexer.model.*;
 import au.org.aodn.esindexer.utils.BBoxUtils;
 import au.org.aodn.esindexer.utils.GeometryUtils;
-import au.org.aodn.esindexer.utils.StringUtil;
+
 import au.org.aodn.esindexer.utils.TemporalUtils;
 import au.org.aodn.metadata.iso19115_3_2018.*;
 import jakarta.xml.bind.JAXBElement;
@@ -31,6 +31,8 @@ import java.util.stream.Collectors;
 @Mapper(componentModel = "spring")
 public abstract class StacCollectionMapperServiceImpl implements StacCollectionMapperService {
 
+    public static final String REAL_TIME = "real-time";
+
     @Mapping(target="uuid", source = "source", qualifiedByName = "mapUUID")
     @Mapping(target="title", source = "source", qualifiedByName = "mapTitle" )
     @Mapping(target="description", source = "source", qualifiedByName = "mapDescription")
@@ -38,6 +40,8 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
     @Mapping(target="summaries.scope", source = "source", qualifiedByName = "mapSummaries.scope")
     @Mapping(target="summaries.geometry", source = "source", qualifiedByName = "mapSummaries.geometry")
     @Mapping(target="summaries.temporal", source = "source", qualifiedByName = "mapSummaries.temporal")
+    @Mapping(target="summaries.updateFrequency", source = "source", qualifiedByName = "mapSummaries.updateFrequency")
+    @Mapping(target="summaries.datasetProvider", source = "source", qualifiedByName = "mapSummaries.datasetProvider")
     @Mapping(target="extent.bbox", source = "source", qualifiedByName = "mapExtentBbox")
     @Mapping(target="extent.temporal", source = "source", qualifiedByName = "mapExtentTemporal")
     @Mapping(target="contacts", source = "source", qualifiedByName = "mapContacts")
@@ -238,7 +242,6 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
         logger.warn("Unable to find scope metadata record: " + this.mapUUID(source));
         return null;
     }
-
     /**
      * Custom mapping for title field, name convention is start with map then the field name
      * @param source
@@ -262,6 +265,28 @@ public abstract class StacCollectionMapperServiceImpl implements StacCollectionM
             }
         }
         return "";
+    }
+    /**
+     * TODO: Very simple logic here, a dataset is flag as real-time if title contains the word
+     *
+     * @param source
+     * @return
+     */
+    @Named("mapSummaries.updateFrequency")
+    String mapUpdateFrequency(MDMetadataType source) {
+        String t = mapTitle(source);
+        return t.toLowerCase().contains(REAL_TIME) ? REAL_TIME : null;
+    }
+    /**
+     * TODO: Very simple logic here, if provider name contains IMOS
+     *
+     * @param source
+     * @return
+     */
+    @Named("mapSummaries.datasetProvider")
+    String mapDatasetOwner(MDMetadataType source) {
+        List<au.org.aodn.esindexer.model.ProviderModel> providers = mapProviders(source);
+        return providers.stream().anyMatch(p -> p.getName().contains("IMOS")) ? "IMOS" : null;
     }
 
     protected List<Map<String, String>> mapThemesConcepts(MDKeywordsPropertyType descriptiveKeyword) {
