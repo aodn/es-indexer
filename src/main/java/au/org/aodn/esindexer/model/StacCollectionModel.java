@@ -18,11 +18,15 @@ public class StacCollectionModel {
     protected ExtentModel extent;
     protected SummariesModel summaries;
     protected List<ContactsModel> contacts;
-    protected List<ThemesModel> themes;
     protected List<LanguageModel> languages;
     protected List<LinkModel> links;
     protected String license;
     protected List<ProviderModel> providers;
+    /**
+     * Do not use keywords and use theme instead, read here
+     * protected List<String> keywords
+     */
+    protected List<ThemesModel> themes;
 
     @JsonProperty("stac_version")
     public String getStacVersion() {
