@@ -12,11 +12,11 @@ env:
   ENVIRONMENT: development
   AWS_REGION: ap-southeast-2 #MY_AWS_REGION                   # set this to your preferred AWS region, e.g. us-west-1
   #ECR_REPOSITORY: #########.dkr.ecr.ap-southeast-2.amazonaws.com/aodn-v2           # set this to your Amazon ECR repository name
-  ECS_SERVICE: es-indexer-service #MY_ECS_SERVICE                 # set this to your Amazon ECS service name
-  ECS_CLUSTER: aodn-imos-v2                 # set this to your Amazon ECS cluster name
+  #ECS_SERVICE: es-indexer-service #MY_ECS_SERVICE                 # set this to your Amazon ECS service name
+  #ECS_CLUSTER: aodn-imos-v2                 # set this to your Amazon ECS cluster name
   ECS_TASK_DEFINITION: ./aodn-es-indexer-td.json     #MY_ECS_TASK_DEFINITION # set this to the path to your Amazon ECS task definition
                                                # file, e.g. .aws/task-definition.json
-  CONTAINER_NAME: aodn-es-indexer     #MY_CONTAINER_NAME           # set this to the name of the container in the
+  #CONTAINER_NAME: aodn-es-indexer     #MY_CONTAINER_NAME           # set this to the name of the container in the
                                                # containerDefinitions section of your task definition
   #ROLE_ARN: arn:aws:iam::#########:role/tlc-ci-cd
   name: development
@@ -76,8 +76,18 @@ jobs:
 
             # Perform actions using parameter values here
             # For example, set environment variables
-            #echo "Setting $name=$value as environment variable"
-            #echo "$name=$value" >> $GITHUB_ENV
+            if [ "$name" = "/core/es_indexer/dev_ecr_ecs_config/ecr_repo" ]; then
+              echo "$ECR_REPOSITORY=$value" >> $GITHUB_ENV
+            fi
+            if [ "$name" = "/core/es_indexer/dev_ecr_ecs_config/ecs_cluster" ]; then
+              echo "$ECS_CLUSTER=$value" >> $GITHUB_ENV
+            fi
+            if [ "$name" = "/core/es_indexer/dev_ecr_ecs_config/ecs_service" ]; then
+              echo "$ECS_SERVICE=$value" >> $GITHUB_ENV
+            fi
+            if [ "$name" = "/core/es_indexer/dev_ecr_ecs_config/container_name" ]; then
+              echo "$CONTAINER_NAME=$value" >> $GITHUB_ENV
+            fi
           done
 
       # - name: Prepare
