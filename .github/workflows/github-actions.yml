@@ -46,14 +46,15 @@ jobs:
         run: |
           aws sts get-caller-identity
 
-      - name: Platform env vars from aws ssm parameter store
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Retrieve Parameters - ssm parameter store
+        id: getParameters
         run: |
-          # Loop through all repository variables
-          parameters=$(aws ssm get-parameters-by-path --path "/core/es_indexer/dev_ecr_ecs_config/" --recursive --query 'Parameters[*].[Name,Value]' --output json)
-         
-          #parameters=$(aws ssm get-parameters-by-path --path "/YourPath/" --recursive --query 'Parameters[*].[Name,Value]' --output json)
-          echo "$parameters" > parameters.json
-          echo "::set-output name=parameters_json::$parameters"
+          # Replace 'YourPath' with your specific path in Parameter Store
+          aws ssm get-parameters-by-path --path "/core/es_indexer/dev_ecr_ecs_config/" --recursive --query 'Parameters[*].[Name,Value]' --output json > parameters.json
+      
       - name: Process Parameters
         run: |
           # Read the contents of the parameters.json file and loop through them
