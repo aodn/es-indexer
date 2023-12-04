@@ -77,7 +77,7 @@ jobs:
             # Perform actions using parameter values here
             # For example, set environment variables
             if [ "$name" = "/core/es_indexer/dev_ecr_ecs_config/ecr_repo" ]; then
-              echo "$ECR_REPOSITORY=$value" >> $GITHUB_ENV
+              echo "ECR_REPOSITORY=$value" >> "$GITHUB_ENV"
             fi
             
           done
