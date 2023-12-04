@@ -55,7 +55,9 @@ jobs:
           # Replace 'YourPath' with your specific path in Parameter Store
           parameters=$(aws ssm get-parameters-by-path --path "/core/es_indexer/dev_ecr_ecs_config/" --recursive --query 'Parameters[*].[Name,Value]' --output json)
           echo "$parameters" > parameters.json
-   
+          echo "::set-output name=parameters_json::$parameters"
+      - name: Display Retrieved Parameters
+        run: cat parameters.json
 
       # - name: Prepare
       #   id: prep
