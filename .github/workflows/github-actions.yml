@@ -54,18 +54,8 @@ jobs:
         run: |
           # Replace 'YourPath' with your specific path in Parameter Store
           aws ssm get-parameters-by-path --path "/core/es_indexer/dev_ecr_ecs_config/" --recursive --query 'Parameters[*].[Name,Value]' --output json > parameters.json
-      
-      - name: Process Parameters
-        run: |
-          # Read the contents of the parameters.json file and loop through them
-          while IFS= read -r line; do
-            echo "Processing line: $line"
-            # Perform actions on each line (JSON object) using jq
-            # For example, extracting specific fields or values
-            name=$(echo "$line" | jq -r '.[0]')
-            value=$(echo "$line" | jq -r '.[1]')
-            echo "Name: $name, Value: $value"
-          done < parameters.json
+          echo parameters.json
+   
 
       # - name: Prepare
       #   id: prep
