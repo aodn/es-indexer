@@ -54,11 +54,17 @@ jobs:
           #parameters=$(aws ssm get-parameters-by-path --path "/YourPath/" --recursive --query 'Parameters[*].[Name,Value]' --output json)
           echo "$parameters" > parameters.json
           echo "::set-output name=parameters_json::$parameters"
-          
-          for var in $(jq -r '.Parameters[]' parameters.json); do
-            name=$(echo $var | jq -r .Name)
-            value=$(echo $var | jq -r .Value)
-          done
+      - name: Process Parameters
+        run: |
+          # Read the contents of the parameters.json file and loop through them
+          while IFS= read -r line; do
+            echo "Processing line: $line"
+            # Perform actions on each line (JSON object) using jq
+            # For example, extracting specific fields or values
+            name=$(echo "$line" | jq -r '.[0]')
+            value=$(echo "$line" | jq -r '.[1]')
+            echo "Name: $name, Value: $value"
+          done < parameters.json
 
       # - name: Prepare
       #   id: prep
