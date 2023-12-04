@@ -11,6 +11,7 @@ on:
 env:
   ENVIRONMENT: development
   AWS_REGION: ap-southeast-2 #MY_AWS_REGION                   # set this to your preferred AWS region, e.g. us-west-1
+  ECR_REPOSITORY: test
   #ECR_REPOSITORY: #########.dkr.ecr.ap-southeast-2.amazonaws.com/aodn-v2           # set this to your Amazon ECR repository name
   ECS_SERVICE: es-indexer-service #MY_ECS_SERVICE                 # set this to your Amazon ECS service name
   ECS_CLUSTER: aodn-imos-v2                 # set this to your Amazon ECS cluster name
@@ -81,6 +82,11 @@ jobs:
             fi
             
           done
+      - name: Print new env var vaules
+        run: |
+          printf '%s\n' "$ECR_REPOSITORY"
+            
+
 
       # - name: Prepare
       #   id: prep
