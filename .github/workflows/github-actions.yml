@@ -34,6 +34,7 @@ jobs:
     steps:
       - name: Git clone the repository
         uses: actions/checkout@v3
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -44,102 +45,106 @@ jobs:
       - name: Sts GetCallerIdentity
         run: |
           aws sts get-caller-identity
-      - name: Prepare
-        id: prep
+
+      - name: Get platform env vars from aws ssm parameter store
         run: |
-          BRANCH=${GITHUB_REF##*/}
-          TS=$(date +%s)
-          REVISION=${GITHUB_SHA::8}
-          BUILD_ID="${BRANCH}-${REVISION}-${TS}"
-          LATEST_ID=canary
-          if [[ $GITHUB_REF == refs/tags/* ]]; then
-            BUILD_ID=${GITHUB_REF/refs\/tags\//}
-            LATEST_ID=latest
-          fi
-          echo ::set-output name=BUILD_DATE::$(date -u +'%Y-%m-%dT%H:%M:%SZ')
-          echo ::set-output name=BUILD_ID::${BUILD_ID}
-          echo ::set-output name=LATEST_ID::${LATEST_ID} >> $GITHUB_OUTPUT
+          # Loop through all repository variables
+          VAR_NAME= aws ssm get-parameters-by-path --path "/core/es_indexer/dev_ecr_ecs_config/"
+          echo "envvars=VAR_NAME" >> $GITHUB_OUTPUT
 
-      - name: Checkout
-        uses: actions/checkout@v3
+      # - name: Prepare
+      #   id: prep
+      #   run: |
+      #     BRANCH=${GITHUB_REF##*/}
+      #     TS=$(date +%s)
+      #     REVISION=${GITHUB_SHA::8}
+      #     BUILD_ID="${BRANCH}-${REVISION}-${TS}"
+      #     LATEST_ID=canary
+      #     if [[ $GITHUB_REF == refs/tags/* ]]; then
+      #       BUILD_ID=${GITHUB_REF/refs\/tags\//}
+      #       LATEST_ID=latest
+      #     fi
+      #     echo ::set-output name=BUILD_DATE::$(date -u +'%Y-%m-%dT%H:%M:%SZ')
+      #     echo ::set-output name=BUILD_ID::${BUILD_ID}
+      #     echo ::set-output name=LATEST_ID::${LATEST_ID} >> $GITHUB_OUTPUT
+
+      # - name: Checkout
+      #   uses: actions/checkout@v3
       
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'temurin'
-          java-version: '17'
-          cache: 'maven'
-          
-      # - name: Build with Maven
-      #   run: mvn -B package --file pom.xml
+      # - name: Set up JDK 17
+      #   uses: actions/setup-java@v3
+      #   with:
+      #     distribution: 'temurin'
+      #     java-version: '17'
+      #     cache: 'maven'
       
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v2
+      # - name: Login to Amazon ECR
+      #   id: login-ecr
+      #   uses: aws-actions/amazon-ecr-login@v2
 
-      - name: Build and tag image
-        id: build-image
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: ${{ vars.ECR_REPOSITORY }}
-          IMAGE_TAG: ${{ steps.prep.outputs.BUILD_ID }}
-          LATEST_ID: ${{ steps.prep.outputs.LATEST_ID }}
-        run: |
-          # Build a docker container and
-          # be deployed to ECS.
-          # docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-          # echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
-          # aws ecr get-login-password --region ap-southeast-2 | docker login --username AWS --password-stdin $ACCOUNT_ID
-          docker build -t $ECR_REPOSITORY:$IMAGE_TAG .
-          echo "image=$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
+      # - name: Build and tag image
+      #   id: build-image
+      #   env:
+      #     ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+      #     ECR_REPOSITORY: ${{ vars.ECR_REPOSITORY }}
+      #     IMAGE_TAG: ${{ steps.prep.outputs.BUILD_ID }}
+      #     LATEST_ID: ${{ steps.prep.outputs.LATEST_ID }}
+      #   run: |
+      #     # Build a docker container and
+      #     # be deployed to ECS.
+      #     # docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+      #     # echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
+      #     # aws ecr get-login-password --region ap-southeast-2 | docker login --username AWS --password-stdin $ACCOUNT_ID
+      #     docker build -t $ECR_REPOSITORY:$IMAGE_TAG .
+      #     echo "image=$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
 
-      - name: Run Trivy vulnerability scanner in docker mode
-        uses: aquasecurity/trivy-action@master
-        with:
-            image-ref: ${{ steps.build-image.outputs.image }}
-            format: 'table'
-            severity: 'HIGH,CRITICAL'
-            vuln-type: 'os,library'
-            exit-code: 1
-            ignore-unfixed: true
-        continue-on-error: true
+      # - name: Run Trivy vulnerability scanner in docker mode
+      #   uses: aquasecurity/trivy-action@master
+      #   with:
+      #       image-ref: ${{ steps.build-image.outputs.image }}
+      #       format: 'table'
+      #       severity: 'HIGH,CRITICAL'
+      #       vuln-type: 'os,library'
+      #       exit-code: 1
+      #       ignore-unfixed: true
+      #   continue-on-error: true
       
-      - name: Push image to Amazon ECR
-        id: push-image
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: ${{ vars.ECR_REPOSITORY }}
-          IMAGE_TAG: ${{ steps.prep.outputs.BUILD_ID }}
-          LATEST_ID: ${{ steps.prep.outputs.LATEST_ID }}
-        run: |
-          # Build a docker container and
-          # be deployed to ECS.
-          # docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-          # echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
-          # aws ecr get-login-password --region ap-southeast-2 | docker login --username AWS --password-stdin $ACCOUNT_ID
-          docker push $ECR_REPOSITORY:$IMAGE_TAG
-          echo "image=$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
+      # - name: Push image to Amazon ECR
+      #   id: push-image
+      #   env:
+      #     ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+      #     ECR_REPOSITORY: ${{ vars.ECR_REPOSITORY }}
+      #     IMAGE_TAG: ${{ steps.prep.outputs.BUILD_ID }}
+      #     LATEST_ID: ${{ steps.prep.outputs.LATEST_ID }}
+      #   run: |
+      #     # Build a docker container and
+      #     # be deployed to ECS.
+      #     # docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+      #     # echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
+      #     # aws ecr get-login-password --region ap-southeast-2 | docker login --username AWS --password-stdin $ACCOUNT_ID
+      #     docker push $ECR_REPOSITORY:$IMAGE_TAG
+      #     echo "image=$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
 
-      - name: Fill in the new image ID in the Amazon ECS task definition
-        id: task-def
-        uses: aws-actions/amazon-ecs-render-task-definition@v1
-        with:
-          task-definition: ${{ env.ECS_TASK_DEFINITION }}
-          container-name: ${{ env.CONTAINER_NAME }}
-          image: ${{ steps.push-image.outputs.image }}
-          environment-variables: |
-            GEONETWORK_HOST=${{ vars.GEONETWORK_HOST }} 
-            SERVER_PORT=${{ vars.SERVER_PORT }} 
-            ELASTICSEARCH_SERVERURL=${{ vars.ELASTICSEARCH_SERVERURL }} 
-            ELASTICSEARCH_APIKEY=${{ vars.ELASTICSEARCH_APIKEY }}
-            APP_HTTP_AUTHTOKEN=${{ vars.APP_HTTP_AUTHTOKEN }}
-            ELASTICSEARCH_INDEX_NAME=${{ vars.ELASTICSEARCH_INDEX_NAME }}
-            IMAGE=${{ steps.push-image.outputs.image }}
+      # - name: Fill in the new image ID in the Amazon ECS task definition
+      #   id: task-def
+      #   uses: aws-actions/amazon-ecs-render-task-definition@v1
+      #   with:
+      #     task-definition: ${{ env.ECS_TASK_DEFINITION }}
+      #     container-name: ${{ env.CONTAINER_NAME }}
+      #     image: ${{ steps.push-image.outputs.image }}
+      #     environment-variables: |
+      #       GEONETWORK_HOST=${{ vars.GEONETWORK_HOST }} 
+      #       SERVER_PORT=${{ vars.SERVER_PORT }} 
+      #       ELASTICSEARCH_SERVERURL=${{ vars.ELASTICSEARCH_SERVERURL }} 
+      #       ELASTICSEARCH_APIKEY=${{ vars.ELASTICSEARCH_APIKEY }}
+      #       APP_HTTP_AUTHTOKEN=${{ vars.APP_HTTP_AUTHTOKEN }}
+      #       ELASTICSEARCH_INDEX_NAME=${{ vars.ELASTICSEARCH_INDEX_NAME }}
+      #       IMAGE=${{ steps.push-image.outputs.image }}
 
-      - name: Deploy Amazon ECS task definition
-        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
-        with:
-          task-definition: ${{ steps.task-def.outputs.task-definition }}
-          service: ${{ env.ECS_SERVICE }}
-          cluster: ${{ env.ECS_CLUSTER }}
-          wait-for-service-stability: true
+      # - name: Deploy Amazon ECS task definition
+      #   uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+      #   with:
+      #     task-definition: ${{ steps.task-def.outputs.task-definition }}
+      #     service: ${{ env.ECS_SERVICE }}
+      #     cluster: ${{ env.ECS_CLUSTER }}
+      #     wait-for-service-stability: true
