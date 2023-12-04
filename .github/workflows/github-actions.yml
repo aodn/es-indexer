@@ -53,7 +53,7 @@ jobs:
         id: getParameters
         run: |
           # Replace 'YourPath' with your specific path in Parameter Store
-          aws ssm get-parameters-by-path --path "/core/es_indexer/dev_ecr_ecs_config/" --recursive --query 'Parameters[*].[Name,Value]' --output json > parameters.json
+          parameters=$(aws ssm get-parameters-by-path --path "/core/es_indexer/dev_ecr_ecs_config/" --recursive --query 'Parameters[*].[Name,Value]' --output json)
           echo "$parameters" > parameters.json
    
 
