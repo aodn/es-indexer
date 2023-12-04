@@ -80,13 +80,23 @@ jobs:
             if [ "$name" = "/core/es_indexer/dev_ecr_ecs_config/ecr_repo" ]; then
               echo "ECR_REPOSITORY=$value" >> "$GITHUB_ENV"
             fi
-            
+            if [ "$name" = "/core/es_indexer/dev_ecr_ecs_config/ecs_cluster" ]; then
+              echo "ECS_CLUSTER=$value" >> "$GITHUB_ENV"
+            fi
+            if [ "$name" = "/core/es_indexer/dev_ecr_ecs_config/ecs_service" ]; then
+              echo "ECS_SERVICE=$value" >> "$GITHUB_ENV"
+            fi
+            if [ "$name" = "/core/es_indexer/dev_ecr_ecs_config/container_name" ]; then
+              echo "CONTAINER_NAME=$value" >> "$GITHUB_ENV"
+            fi
           done
-      - name: Print new env var vaules
+
+      - name: Print new env var values
         run: |
           printf '%s\n' "$ECR_REPOSITORY"
-            
-
+          printf '%s\n' "$ECS_CLUSTER"
+          printf '%s\n' "$ECS_SERVICE"
+          printf '%s\n' "$CONTAINER_NAME"
 
       # - name: Prepare
       #   id: prep
