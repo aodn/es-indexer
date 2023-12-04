@@ -52,7 +52,7 @@ jobs:
           VAR_LIST= aws ssm get-parameters-by-path --path "/core/es_indexer/dev_ecr_ecs_config/"
          
           echo VAR_LIST
-          for var in "$(VAR_LIST | jq -r '.Parameters[]')"; do
+          for var in $(VAR_LIST | jq -r '.Parameters[]'); do
             name=$(echo $var | jq -r .Name)
             value=$(echo $var | jq -r .Value)
           done
