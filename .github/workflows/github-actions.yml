@@ -49,10 +49,13 @@ jobs:
       - name: Get platform env vars from aws ssm parameter store
         run: |
           # Loop through all repository variables
-          aws ssm get-parameters-by-path --path "/core/es_indexer/dev_ecr_ecs_config/" --output text > parameter_list.json
+          parameters=$(aws ssm get-parameters-by-path --path "/core/es_indexer/dev_ecr_ecs_config/" --output json)
          
-          echo parameter_list.json
-          for var in $(jq -r '.Parameters[]' parameter_list.json); do
+          #parameters=$(aws ssm get-parameters-by-path --path "/YourPath/" --recursive --query 'Parameters[*].[Name,Value]' --output json)
+          echo "$parameters" > parameters.json
+          echo "::set-output name=parameters_json::$parameters"
+          
+          for var in $(jq -r '.Parameters[]' parameters.json); do
             name=$(echo $var | jq -r .Name)
             value=$(echo $var | jq -r .Value)
           done
