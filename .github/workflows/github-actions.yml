@@ -49,9 +49,11 @@ jobs:
       - name: Get platform env vars from aws ssm parameter store
         run: |
           # Loop through all repository variables
-          VAR_LIST= aws ssm get-parameters-by-path --path "/core/es_indexer/dev_ecr_ecs_config/"
-          echo "$envvars=VAR_LIST" >> $GITHUB_OUTPUT
-          for var in "$($envvars | jq -r '.Parameters[]')"; do
+          $VAR_LIST= aws ssm get-parameters-by-path --path "/core/es_indexer/dev_ecr_ecs_config/"
+          #echo "$envvars=VAR_LIST" >> $GITHUB_OUTPUT
+          #echo $VAR_LIST
+
+          for var in "$($VAR_LIST | jq -r '.Parameters[]')"; do
             name=$(echo $var | jq -r .Name)
             value=$(echo $var | jq -r .Value)
           done
