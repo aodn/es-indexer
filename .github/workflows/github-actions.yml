@@ -56,8 +56,29 @@ jobs:
           parameters=$(aws ssm get-parameters-by-path --path "/core/es_indexer/dev_ecr_ecs_config/" --recursive --query 'Parameters[*].[Name,Value]' --output json)
           echo "$parameters" > parameters.json
           echo "::set-output name=parameters_json::$parameters"
+      
       - name: Display Retrieved Parameters
         run: cat parameters.json
+
+      - name: Process Parameters
+        run: |
+          parameters=$(cat parameters.json)
+          # Loop through the JSON array of parameters using jq
+          for row in $(echo "${parameters}" | jq -r '.[] | @base64'); do
+            _jq() {
+              echo "${row}" | base64 --decode | jq -r "${1}"
+            }
+
+            name=$(_jq '.[0]')
+            value=$(_jq '.[1]')
+
+            echo "Name: $name, Value: $value"
+
+            # Perform actions using parameter values here
+            # For example, set environment variables
+            #echo "Setting $name=$value as environment variable"
+            #echo "$name=$value" >> $GITHUB_ENV
+          done
 
       # - name: Prepare
       #   id: prep
