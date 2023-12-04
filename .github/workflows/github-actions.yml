@@ -46,10 +46,10 @@ jobs:
         run: |
           aws sts get-caller-identity
 
-      - name: Get platform env vars from aws ssm parameter store
+      - name: Platform env vars from aws ssm parameter store
         run: |
           # Loop through all repository variables
-          parameters=$(aws ssm get-parameters-by-path --path "/core/es_indexer/dev_ecr_ecs_config/" --output json)
+          parameters=$(aws ssm get-parameters-by-path --path "/core/es_indexer/dev_ecr_ecs_config/" --recursive --query 'Parameters[*].[Name,Value]' --output json)
          
           #parameters=$(aws ssm get-parameters-by-path --path "/YourPath/" --recursive --query 'Parameters[*].[Name,Value]' --output json)
           echo "$parameters" > parameters.json
