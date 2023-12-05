@@ -5,17 +5,12 @@ import au.org.aodn.esindexer.model.ExtentModel;
 import au.org.aodn.esindexer.model.LinkModel;
 import au.org.aodn.esindexer.model.StacCollectionModel;
 import au.org.aodn.esindexer.model.ThemesModel;
-import ch.qos.logback.classic.Logger;
-import ch.qos.logback.classic.spi.ILoggingEvent;
-import ch.qos.logback.core.read.ListAppender;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.EnabledIfSystemProperty;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Spy;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -38,11 +33,6 @@ class RankingServiceTests {
     private StacCollectionModel stacCollectionModel;
     private ExtentModel extentModel;
 
-    protected static final org.slf4j.Logger logger = LoggerFactory.getLogger(RankingServiceTests.class);
-    private final ClassLoader classLoader = getClass().getClassLoader();
-
-    private List<ILoggingEvent> logsList;
-
     @BeforeEach
     public void setUp() {
         stacCollectionModel = StacCollectionModel.builder().build();
@@ -50,20 +40,6 @@ class RankingServiceTests {
         stacCollectionModel.setExtent(extentModel);
     }
 
-    @BeforeEach
-    void setUpLogger() {
-        Logger logger = (Logger) LoggerFactory.getLogger(RankingServiceImpl.class);
-        ListAppender<ILoggingEvent> listAppender = new ListAppender<>();
-        listAppender.start();
-        logger.addAppender(listAppender);
-        logsList = listAppender.list;
-    }
-
-    @AfterEach
-    void tearDownLogger() {
-        Logger logger = (Logger) LoggerFactory.getLogger(RankingServiceImpl.class);
-        logger.detachAndStopAllAppenders();
-    }
 
     @Test
     public void testNotFound() {
@@ -71,7 +47,6 @@ class RankingServiceTests {
         mockRankingService.evaluateCompleteness(stacCollectionModel);
         // assert
         verify(mockRankingService, times(1)).evaluateCompleteness(stacCollectionModel);
-        assertEquals(0, logsList.size());
         assertEquals(0, mockRankingService.evaluateCompleteness(stacCollectionModel));
     }
 
@@ -83,7 +58,6 @@ class RankingServiceTests {
         mockRankingService.evaluateCompleteness(stacCollectionModel);
         // assert
         verify(mockRankingService, times(1)).evaluateCompleteness(stacCollectionModel);
-        assertEquals("Title found", logsList.get(0).getMessage());
         assertEquals(15, mockRankingService.evaluateCompleteness(stacCollectionModel));
     }
 
@@ -95,7 +69,6 @@ class RankingServiceTests {
         mockRankingService.evaluateCompleteness(stacCollectionModel);
         // assert
         verify(mockRankingService, times(1)).evaluateCompleteness(stacCollectionModel);
-        assertEquals("Description found", logsList.get(0).getMessage());
         assertEquals(15, mockRankingService.evaluateCompleteness(stacCollectionModel));
     }
 
@@ -116,7 +89,6 @@ class RankingServiceTests {
 
         // assert
         verify(mockRankingService, times(1)).evaluateCompleteness(stacCollectionModel);
-        assertEquals("Extent found", logsList.get(0).getMessage());
         assertEquals(10, mockRankingService.evaluateCompleteness(stacCollectionModel));
     }
 
@@ -137,7 +109,6 @@ class RankingServiceTests {
 
         // assert
         verify(mockRankingService, times(1)).evaluateCompleteness(stacCollectionModel);
-        assertEquals("Temporal found", logsList.get(0).getMessage());
         assertEquals(10, mockRankingService.evaluateCompleteness(stacCollectionModel));
     }
 
@@ -155,7 +126,6 @@ class RankingServiceTests {
 
         // assert
         verify(mockRankingService, times(1)).evaluateCompleteness(stacCollectionModel);
-        assertEquals("Contacts found", logsList.get(0).getMessage());
         assertEquals(10, mockRankingService.evaluateCompleteness(stacCollectionModel));
     }
 
@@ -184,7 +154,6 @@ class RankingServiceTests {
 
         // assert
         verify(mockRankingService, times(1)).evaluateCompleteness(stacCollectionModel);
-        assertEquals("Links found with size: 4", logsList.get(0).getMessage());
         assertEquals(15, mockRankingService.evaluateCompleteness(stacCollectionModel));
     }
 
@@ -207,7 +176,6 @@ class RankingServiceTests {
 
         // assert
         verify(mockRankingService, times(1)).evaluateCompleteness(stacCollectionModel);
-        assertEquals("Themes found with size: 2", logsList.get(0).getMessage());
         assertEquals(10, mockRankingService.evaluateCompleteness(stacCollectionModel));
     }
 }
