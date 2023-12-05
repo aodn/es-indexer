@@ -1,4 +1,4 @@
-import au.org.aodn.esindexer.utils.StringUtil;
+package au.org.aodn.esindexer.utils;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
