@@ -1,0 +1,74 @@
+{
+    "containerDefinitions": [
+        {
+            "name": "aodn-es-indexer",
+            "image": "<IMAGE>",
+            "cpu": 0,
+            "portMappings": [
+                {
+                    "name": "aodn-es-indexer-8081-tcp",
+                    "containerPort": 8081,
+                    "hostPort": 8081,
+                    "protocol": "tcp",
+                    "appProtocol": "http"
+                }
+            ],
+            "essential": true,
+            "environment": [
+                {
+                    "name": "SERVER_PORT",
+                    "value": "<SERVER_PORT>"
+                },
+                {
+                    "name": "ELASTICSEARCH_SERVERURL",
+                    "value": "<ELASTICSEARCH_SERVERURL>"
+                },
+                {
+                    "name": "APP_HTTP_AUTHTOKEN",
+                    "value": "<APP_HTTP_AUTHTOKEN>"
+                },
+                {
+                    "name": "ELASTICSEARCH_APIKEY",
+                    "value": "<ELASTICSEARCH_APIKEY>"
+                },
+                {
+                    "name": "GEONETWORK_HOST",
+                    "value": "<GEONETWORK_HOST>"
+                },
+                {
+                    "name": "ELASTICSEARCH_INDEX_NAME",
+                    "value": "<ELASTICSEARCH_INDEX_NAME>"
+                }
+            ],
+            "environmentFiles": [],
+            "mountPoints": [],
+            "volumesFrom": [],
+            "ulimits": [],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-create-group": "true",
+                    "awslogs-group": "/ecs/aodn-es-indexer",
+                    "awslogs-region": "ap-southeast-2",
+                    "awslogs-stream-prefix": "ecs"
+                },
+                "secretOptions": []
+            }
+        }
+    ],
+    "family": "aodn-es-indexer",
+    "executionRoleArn": "arn:aws:iam::704910415367:role/ecsTaskExecutionRole",
+    "networkMode": "awsvpc",
+    "volumes": [],
+    "placementConstraints": [],
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "1024",
+    "memory": "3072",
+    "runtimePlatform": {
+        "cpuArchitecture": "X86_64",
+        "operatingSystemFamily": "LINUX"
+    },
+    "tags": []
+}
