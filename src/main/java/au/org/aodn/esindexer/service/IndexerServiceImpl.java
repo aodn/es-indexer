@@ -259,18 +259,19 @@ public class IndexerServiceImpl implements IndexerService {
                 logger.debug("Final output json is {}", mappedMetadataValues);
 
                 // convert mapped values to binary data
-                ByteArrayInputStream input = new ByteArrayInputStream(mappedMetadataValues.toString().getBytes());
-                BinaryData data = BinaryData.of(IOUtils.toByteArray(input), ContentType.APPLICATION_JSON);
+                try(ByteArrayInputStream input = new ByteArrayInputStream(mappedMetadataValues.toString().getBytes())) {
+                    BinaryData data = BinaryData.of(IOUtils.toByteArray(input), ContentType.APPLICATION_JSON);
 
-                // send bulk request to Elasticsearch
-                bulkRequest.operations(op -> op
-                    .index(idx -> idx
-                        .index(indexName)
-                        .document(data)
-                    )
-                );
+                    // send bulk request to Elasticsearch
+                    bulkRequest.operations(op -> op
+                            .index(idx -> idx
+                                    .index(indexName)
+                                    .document(data)
+                            )
+                    );
 
-                logger.info("Ingested a new metadata document with UUID: " + mappedMetadataValues.getString("id"));
+                    logger.info("Ingested a new metadata document with UUID: " + mappedMetadataValues.getString("id"));
+                }
 
             } catch (FactoryException | JAXBException | TransformException e) {
                 /* it will reach here if cannot extract values of all the keys in GeoNetwork metadata JSON
