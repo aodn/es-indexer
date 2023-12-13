@@ -20,11 +20,12 @@ import java.util.*;
 
 @Service
 public class GeoNetworkResourceServiceImpl implements GeoNetworkResourceService {
+    
     @Autowired
     RestTemplate restTemplate;
 
     @Value("${geonetwork.search.api.endpoint}")
-    private String geoNetworkElasticsearchEndpoint;
+    private String geoNetworkSearchEndpoint;
 
     @Value("${geonetwork.records.endpoint}")
     private String geoNetworkRecordsEndpoint;
@@ -32,11 +33,13 @@ public class GeoNetworkResourceServiceImpl implements GeoNetworkResourceService 
     private static final Logger logger = LoggerFactory.getLogger(GeoNetworkResourceServiceImpl.class);
 
     public JSONObject searchMetadataRecordByUUIDFromGNRecordsIndex(String uuid) {
+
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         GeoNetworkSearchRequestBodyDTO searchRequestBodyDTO = new GeoNetworkSearchRequestBodyDTO(uuid);
         HttpEntity<GeoNetworkSearchRequestBodyDTO> requestEntity = new HttpEntity<>(searchRequestBodyDTO, headers);
-        ResponseEntity<Map> responseEntity = restTemplate.postForEntity(geoNetworkElasticsearchEndpoint, requestEntity, Map.class);
+
+        ResponseEntity<Map> responseEntity = restTemplate.postForEntity(geoNetworkSearchEndpoint, requestEntity, Map.class);
         if (responseEntity.getStatusCode().is2xxSuccessful()) {
             JSONObject jsonResult = new JSONObject(responseEntity.getBody());
             JSONObject outerHits = jsonResult.getJSONObject("hits");
@@ -44,7 +47,8 @@ public class GeoNetworkResourceServiceImpl implements GeoNetworkResourceService 
             if ((int) total.get("value") > 0) {
                 JSONArray innerHits = outerHits.getJSONArray("hits");
                 return innerHits.getJSONObject(0).getJSONObject("_source");
-            } else {
+            }
+            else {
                 throw new MetadataNotFoundException("Unable to find metadata record with UUID: " + uuid + " in GeoNetwork");
             }
         } else {
@@ -72,17 +76,15 @@ public class GeoNetworkResourceServiceImpl implements GeoNetworkResourceService 
                 } else {
                     return "xml";
                 }
-            }
-            else {
+            } else {
                 throw new RuntimeException("Failed to fetch data from the API");
             }
-        }
-        catch (HttpClientErrorException.NotFound e) {
+        } catch (HttpClientErrorException.NotFound e) {
             throw new MetadataNotFoundException("Unable to find metadata record with UUID: " + uuid + " in GeoNetwork");
         }
     }
 
-    public String searchMetadataRecordByUUIDFromGN4(String uuid) {
+    public String searchGN4RecordBy(String uuid) {
         try {
             HttpHeaders headers = new HttpHeaders();
             headers.setAccept(Collections.singletonList(MediaType.APPLICATION_XML));
@@ -104,8 +106,7 @@ public class GeoNetworkResourceServiceImpl implements GeoNetworkResourceService 
             } else {
                 throw new RuntimeException("Failed to fetch data from the API");
             }
-        }
-        catch (HttpClientErrorException.NotFound e) {
+        } catch (HttpClientErrorException.NotFound e) {
             throw new MetadataNotFoundException("Unable to find metadata record with UUID: " + uuid + " in GeoNetwork");
         }
     }
@@ -115,7 +116,7 @@ public class GeoNetworkResourceServiceImpl implements GeoNetworkResourceService 
         headers.setContentType(MediaType.APPLICATION_JSON);
         MetadataRecordsCountRequestBodyDTO requestBodyDTO = new MetadataRecordsCountRequestBodyDTO();
         HttpEntity<MetadataRecordsCountRequestBodyDTO> requestEntity = new HttpEntity<>(requestBodyDTO, headers);
-        return restTemplate.postForEntity(geoNetworkElasticsearchEndpoint, requestEntity, Map.class);
+        return restTemplate.postForEntity(geoNetworkSearchEndpoint, requestEntity, Map.class);
     }
 
     public int getMetadataRecordsCount() {
@@ -143,7 +144,7 @@ public class GeoNetworkResourceServiceImpl implements GeoNetworkResourceService 
                     // TODO: can this be optimised pulling all records directly from some endpoint of GN4?
                     // for now assume that gn_records contents are same as in GN4, search for list of UUIDs from gn_records to get metadata records from GN4
                     String uuid = (String) innerHit.getJSONObject(i).getJSONObject("_source").get("uuid");
-                    metadataRecords.add(this.searchMetadataRecordByUUIDFromGN4(uuid));
+                    metadataRecords.add(this.searchGN4RecordBy(uuid));
                 }
                 return metadataRecords;
             } else {

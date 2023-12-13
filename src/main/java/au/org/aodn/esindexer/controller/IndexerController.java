@@ -42,7 +42,7 @@ public class IndexerController {
     @Operation(description = "Get a document from GeoNetwork by UUID directly - JSON format response")
     public ResponseEntity getMetadataRecordFromGeoNetworkByUUID(@PathVariable("uuid") String uuid) {
         logger.info("getting a document by UUID: " + uuid);
-        String response =  geonetworkResourceService.searchMetadataRecordByUUIDFromGN4(uuid);
+        String response =  geonetworkResourceService.searchGN4RecordBy(uuid);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
@@ -63,7 +63,7 @@ public class IndexerController {
     @PostMapping(path="/{uuid}", produces = "application/json")
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Index a metadata record by UUID")
     public ResponseEntity<String> addDocumentByUUID(@PathVariable("uuid") String uuid) throws IOException, FactoryException, JAXBException, TransformException {
-        String metadataValues = geonetworkResourceService.searchMetadataRecordByUUIDFromGN4(uuid);
+        String metadataValues = geonetworkResourceService.searchGN4RecordBy(uuid);
         return indexerService.indexMetadata(metadataValues);
     }
 
