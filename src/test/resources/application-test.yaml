@@ -3,14 +3,11 @@ app:
   http:
     authToken: sample-auth-token
 
-server:
-  port: 8081
-
 elasticsearch:
+  docker:
+    elasticVersion: "8.11.1"
   index:
     name: sample-portal-records
-  serverUrl: http://localhost:9200
-  apiKey: sample-api-key
 
 geonetwork:
   host:  http://localhost:8080/geonetwork

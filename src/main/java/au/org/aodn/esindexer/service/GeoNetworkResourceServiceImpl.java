@@ -2,7 +2,6 @@ package au.org.aodn.esindexer.service;
 
 import au.org.aodn.esindexer.dto.MetadataRecordsCountRequestBodyDTO;
 import au.org.aodn.esindexer.dto.GeoNetworkSearchRequestBodyDTO;
-import au.org.aodn.esindexer.exception.GNConnectionRefusedException;
 import au.org.aodn.esindexer.exception.MetadataNotFoundException;
 import au.org.aodn.esindexer.utils.StringUtil;
 import com.fasterxml.jackson.databind.JsonNode;
