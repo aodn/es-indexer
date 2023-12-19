@@ -41,8 +41,8 @@ public class StacUtils {
      * Default sale aka number of decimal to use is 10
      * @param s
      */
-    public void setScale(int s) {
-        this.scale = s;
+    public static void setScale(int s) {
+        scale = s;
     }
     /**
      *

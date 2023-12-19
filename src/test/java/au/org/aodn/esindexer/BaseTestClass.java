@@ -17,7 +17,7 @@ import java.io.IOException;
 
 public class BaseTestClass {
 
-    protected Logger logger = LoggerFactory.getLogger(BaseTestClass.class);
+    protected final Logger logger = LoggerFactory.getLogger(BaseTestClass.class);
 
     @LocalServerPort
     private int port;

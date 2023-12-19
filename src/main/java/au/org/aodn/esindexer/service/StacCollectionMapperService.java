@@ -386,20 +386,18 @@ public abstract class StacCollectionMapperService {
         List<MDDistributionType> items = findMDDistributionType(source);
         if (!items.isEmpty()) {
             for (MDDistributionType i : items) {
-                i.getTransferOptions().forEach(transferOption -> {
-                    transferOption.getMDDigitalTransferOptions().getOnLine().forEach(link -> {
-                        if (link.getAbstractOnlineResource().getValue() instanceof CIOnlineResourceType2 ciOnlineResource) {
-                            LinkModel linkModel = LinkModel.builder().build();
-                            if (!ciOnlineResource.getLinkage().getCharacterString().getValue().toString().isEmpty()) {
-                                linkModel.setType(Objects.equals(ciOnlineResource.getProtocol().getCharacterString().getValue().toString(), "WWW:LINK-1.0-http--link") ? "text/html" : "");
-                                linkModel.setHref(ciOnlineResource.getLinkage().getCharacterString().getValue().toString());
-                                linkModel.setRel(AppConstants.RECOMMENDED_LINK_REL_TYPE);
-                                linkModel.setTitle(ciOnlineResource.getName() != null ? ciOnlineResource.getName().getCharacterString().getValue().toString() : null);
-                                results.add(linkModel);
-                            }
+                i.getTransferOptions().forEach(transferOption -> transferOption.getMDDigitalTransferOptions().getOnLine().forEach(link -> {
+                    if (link.getAbstractOnlineResource().getValue() instanceof CIOnlineResourceType2 ciOnlineResource) {
+                        LinkModel linkModel = LinkModel.builder().build();
+                        if (!ciOnlineResource.getLinkage().getCharacterString().getValue().toString().isEmpty()) {
+                            linkModel.setType(Objects.equals(ciOnlineResource.getProtocol().getCharacterString().getValue().toString(), "WWW:LINK-1.0-http--link") ? "text/html" : "");
+                            linkModel.setHref(ciOnlineResource.getLinkage().getCharacterString().getValue().toString());
+                            linkModel.setRel(AppConstants.RECOMMENDED_LINK_REL_TYPE);
+                            linkModel.setTitle(ciOnlineResource.getName() != null ? ciOnlineResource.getName().getCharacterString().getValue().toString() : null);
+                            results.add(linkModel);
                         }
-                    });
-                });
+                    }
+                }));
             }
         }
         return results;
@@ -417,13 +415,11 @@ public abstract class StacCollectionMapperService {
                         providerModel.setRoles(Collections.singletonList(ciResponsibility.getRole().getCIRoleCode().getCodeListValue()));
                         CIOrganisationType2 organisationType2 = (CIOrganisationType2) party.getAbstractCIParty().getValue();
                         providerModel.setName(organisationType2.getName().getCharacterString().getValue().toString());
-                        organisationType2.getIndividual().forEach(individual -> {
-                            individual.getCIIndividual().getContactInfo().forEach(contactInfo -> {
-                                contactInfo.getCIContact().getOnlineResource().forEach(onlineResource -> {
-                                    providerModel.setUrl(onlineResource.getCIOnlineResource().getLinkage().getCharacterString().getValue().toString());
-                                });
+                        organisationType2.getIndividual().forEach(individual -> individual.getCIIndividual().getContactInfo().forEach(contactInfo -> {
+                            contactInfo.getCIContact().getOnlineResource().forEach(onlineResource -> {
+                                providerModel.setUrl(onlineResource.getCIOnlineResource().getLinkage().getCharacterString().getValue().toString());
                             });
-                        });
+                        }));
                         results.add(providerModel);
                     } catch (ClassCastException e) {
                         logger.error("Unable to cast getAbstractCIParty().getValue() to CIOrganisationType2 for metadata record: " + this.mapUUID(source));
@@ -514,24 +510,22 @@ public abstract class StacCollectionMapperService {
                                         });
                                     }
 
-                                    contactInfoList.get().forEach(contactInfo -> {
-                                        contactInfo.getCIContact().getAddress().forEach(address -> {
-                                            // addresses
-                                            addresses.add(mapContactsAddress(address));
-                                            // emails
-                                            address.getCIAddress().getElectronicMailAddress().forEach(electronicMailAddress -> {
-                                                emailAddresses.add(mapContactsEmail(electronicMailAddress));
-                                            });
-                                            // phones
-                                            contactInfo.getCIContact().getPhone().forEach(phone -> {
-                                                phones.add(mapContactsPhone(phone));
-                                            });
-                                            // online resources
-                                            contactInfo.getCIContact().getOnlineResource().forEach(onlineResource -> {
-                                                onlineResources.add(mapContactsOnlineResource(onlineResource));
-                                            });
+                                    contactInfoList.get().forEach(contactInfo -> contactInfo.getCIContact().getAddress().forEach(address -> {
+                                        // addresses
+                                        addresses.add(mapContactsAddress(address));
+                                        // emails
+                                        address.getCIAddress().getElectronicMailAddress().forEach(electronicMailAddress -> {
+                                            emailAddresses.add(mapContactsEmail(electronicMailAddress));
                                         });
-                                    });
+                                        // phones
+                                        contactInfo.getCIContact().getPhone().forEach(phone -> {
+                                            phones.add(mapContactsPhone(phone));
+                                        });
+                                        // online resources
+                                        contactInfo.getCIContact().getOnlineResource().forEach(onlineResource -> {
+                                            onlineResources.add(mapContactsOnlineResource(onlineResource));
+                                        });
+                                    }));
 
                                     contactsModel.setName(name.get());
                                     contactsModel.setPosition(position.get());
