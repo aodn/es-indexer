@@ -35,6 +35,7 @@ import au.org.aodn.esindexer.model.StacCollectionModel;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
 @Service
@@ -260,22 +261,16 @@ public class IndexerServiceImpl implements IndexerService {
                 // get mapped metadata values from GeoNetwork to STAC collection schema
                 StacCollectionModel mappedMetadataValues = this.getMappedMetadataValues(metadataRecord);
 
-                logger.debug("Final output json is {}", mappedMetadataValues);
-
                 // convert mapped values to binary data
-                try(ByteArrayInputStream input = new ByteArrayInputStream(objectMapper.writeValueAsBytes(mappedMetadataValues))) {
-                    BinaryData data = BinaryData.of(IOUtils.toByteArray(input), ContentType.APPLICATION_JSON);
+                logger.debug("Ingested json is {}", objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(mappedMetadataValues));
 
-                    // send bulk request to Elasticsearch
-                    bulkRequest.operations(op -> op
-                            .index(idx -> idx
-                                    .index(indexName)
-                                    .document(data)
-                            )
-                    );
-
-                    logger.info("Ingested a new metadata document with UUID: " + mappedMetadataValues.getUuid());
-                }
+                // send bulk request to Elasticsearch
+                bulkRequest.operations(op -> op
+                        .index(idx -> idx
+                                .index(indexName)
+                                .document(mappedMetadataValues)
+                        )
+                );
 
             } catch (FactoryException | JAXBException | TransformException e) {
                 /* it will reach here if cannot extract values of all the keys in GeoNetwork metadata JSON

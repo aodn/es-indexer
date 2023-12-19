@@ -24,7 +24,9 @@ public class OpenAPIConfig {
                                         .in(SecurityScheme.In.HEADER)
                                         .scheme("ApiKeyAuth")
                                         .bearerFormat("JWT")))
-                .info(new Info().title("ES Indexer API").description(
-                        "API for the Portal Elasticsearch Indexer"));
+                .info(new Info()
+                        .title("ES Indexer API")
+                        .description("API for the Portal Elasticsearch Indexer")
+                );
     }
 }

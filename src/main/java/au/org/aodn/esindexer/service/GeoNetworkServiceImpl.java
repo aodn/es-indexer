@@ -38,9 +38,9 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
 
     protected static final Logger logger = LoggerFactory.getLogger(GeoNetworkServiceImpl.class);
 
-    protected final CountRequest GEONETWORK_DATA_COUNT;
-
     protected final SearchRequest GEONETWORK_ALL_UUID;
+
+    protected final SearchRequest GEONETWORK_ALL_COUNT;
 
     public GeoNetworkServiceImpl(@Value("${geonetwork.search.api.index}") String indexName) {
 
@@ -51,7 +51,13 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
                         .filter(f -> f.includes("uuid")))           // Only select uuid field
                 .build();
 
-        GEONETWORK_DATA_COUNT = CountRequest.of(c -> c.index(indexName));
+        GEONETWORK_ALL_COUNT = new SearchRequest.Builder()
+                .index(indexName)
+                .size(0)            // Do not return value, use count is enough
+                .query(new MatchAllQuery.Builder().build()._toQuery())    // Match all
+                .source(s -> s
+                        .filter(f -> f.includes("uuid")))           // Only select uuid field
+                .build();
     }
 
     /**
@@ -151,11 +157,12 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
 
     public long getMetadataRecordsCount() {
         try {
-            CountResponse response = gn4ElasticClient.count(GEONETWORK_DATA_COUNT);
-            return response.count();
+            // Do not use hits().total() as it may be different from hits().hits().size() if index isn't refresh
+            final SearchResponse<ObjectNode> response = gn4ElasticClient.search(GEONETWORK_ALL_COUNT, ObjectNode.class);
+            return response.hits().hits().size();
         }
         catch (IOException e) {
-            throw new RuntimeException("Failed to fetch data from the API");
+            throw new RuntimeException("Failed to fetch data from the API", e);
         }
     }
 
@@ -163,7 +170,8 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
 
         try {
             final SearchResponse<ObjectNode> response = gn4ElasticClient.search(GEONETWORK_ALL_UUID, ObjectNode.class);
-            if(Objects.requireNonNull(response.hits().total()).value() != 0) {
+            // Do not use hits().total() as it may be different from hits().hits().size() if index isn't refresh
+            if(Objects.requireNonNull(response.hits().hits()).size() != 0) {
                 // Delay the
                 return () -> new Iterator<>() {
 
@@ -171,14 +179,14 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
 
                     @Override
                     public boolean hasNext() {
-                        return index < response.hits().total().value();
+                        return index < response.hits().hits().size();
                     }
 
                     @Override
                     public String next() {
                         // TODO: Potential problem with edge case where the list is bigger then default fetch
                         // and you need to page, the response.hits().total().value() return long but get() below use int.
-                        String uuid = response.hits().hits().get(index).fields().get("uuid").toString();
+                        String uuid = response.hits().hits().get(index++).source().get("uuid").asText();
                         return GeoNetworkServiceImpl.this.searchRecordBy(uuid);
                     }
                 };

@@ -4,6 +4,7 @@ import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.json.jackson.JacksonJsonpMapper;
 import co.elastic.clients.transport.rest_client.RestClientTransport;
 import org.apache.http.Header;
+import org.apache.http.HttpHeaders;
 import org.apache.http.HttpHost;
 import org.apache.http.message.BasicHeader;
 import org.elasticsearch.client.RestClient;
@@ -13,6 +14,8 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 @Configuration
 public class ElasticSearchConfig {
@@ -53,6 +56,9 @@ public class ElasticSearchConfig {
         RestClient restClient = RestClient
                 .builder(HttpHost.create(host))
                 .setPathPrefix(path)
+                .setDefaultHeaders(new BasicHeader[] {
+                        new BasicHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                })
                 .build();
 
         // Create the transport with a Jackson mapper
