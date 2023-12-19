@@ -21,7 +21,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import jakarta.xml.bind.JAXBException;
 import org.apache.commons.io.IOUtils;
-import org.json.JSONObject;
 import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.operation.TransformException;
 import org.slf4j.Logger;
@@ -42,7 +41,7 @@ import java.util.Objects;
 public class IndexerServiceImpl implements IndexerService {
 
     @Autowired
-    GeoNetworkResourceService geoNetworkResourceService;
+    GeoNetworkService geoNetworkResourceService;
 
     @Autowired
     ElasticsearchClient portalElasticsearchClient;
@@ -76,8 +75,6 @@ public class IndexerServiceImpl implements IndexerService {
 
     public Hit<ObjectNode> getDocumentByUUID(String uuid) throws IOException {
         try {
-            /* Return JSONObject type won't work, hence return ObjectNode type which supported by Elasticsearch JAVA API,
-            there's no need to convert returned ObjectNode to JSONObject as well */
             SearchResponse<ObjectNode> response = portalElasticsearchClient.search(s -> s
                 .index(indexName)
                 .query(q -> q
@@ -104,17 +101,23 @@ public class IndexerServiceImpl implements IndexerService {
     }
 
     protected boolean isGeoNetworkInstanceReinstalled(long portalIndexDocumentsCount) {
-        /* compare if GeoNetwork has 1 only metadata (the recently added one which triggered the indexer)
-            and the portal index has more than 0 documents (the most recent metadata yet indexed to portal index at this point)
-            */
-        int geoNetworkResourceServiceMetadataRecordsCount = geoNetworkResourceService.getMetadataRecordsCount();
-        return geoNetworkResourceServiceMetadataRecordsCount == 1 && portalIndexDocumentsCount > 0;
+        /**
+         * compare if GeoNetwork has 1 only metadata (the recently added one which triggered the indexer)
+         * and the portal index has more than 0 documents (the most recent metadata yet indexed to portal index at this point)
+         */
+        long count = geoNetworkResourceService.getMetadataRecordsCount();
+        return count == 1 && portalIndexDocumentsCount > 0;
     }
 
     protected boolean isMetadataPublished(String uuid) {
         /* read for the published status from GN Elasticsearch index, the flag is not part of the XML body */
-        JSONObject elasticSearchMetadataValues = geoNetworkResourceService.searchMetadataRecordByUUIDFromGNRecordsIndex(uuid);
-        return elasticSearchMetadataValues.get("isPublishedToAll").equals("true");
+        try {
+            geoNetworkResourceService.searchRecordBy(uuid);
+            return true;
+        }
+        catch(MetadataNotFoundException e) {
+            return false;
+        }
     }
 
     protected void deleteIndexStore() {
@@ -130,7 +133,7 @@ public class IndexerServiceImpl implements IndexerService {
         }
     }
 
-    protected JSONObject getMappedMetadataValues(String metadataValues) throws IOException, FactoryException, TransformException, JAXBException {
+    protected StacCollectionModel getMappedMetadataValues(String metadataValues) throws IOException, FactoryException, TransformException, JAXBException {
         MDMetadataType metadataType = jaxbUtils.unmarshal(metadataValues);
 
         StacCollectionModel stacCollectionModel = mapper.mapToSTACCollection(metadataType);
@@ -149,16 +152,15 @@ public class IndexerServiceImpl implements IndexerService {
 
         stacCollectionModel.getSummaries().setScore(score);
 
-        return new JSONObject(objectMapper.writerWithDefaultPrettyPrinter()
-                .writeValueAsString(stacCollectionModel));
+        return stacCollectionModel;
     }
 
     public ResponseEntity<String> indexMetadata(String metadataValues) {
         try {
-            JSONObject mappedMetadataValues = this.getMappedMetadataValues(metadataValues);
+            StacCollectionModel mappedMetadataValues = this.getMappedMetadataValues(metadataValues);
             IndexRequest<JsonData> req;
 
-            String uuid = mappedMetadataValues.getString("id");
+            String uuid = mappedMetadataValues.getUuid();
             long portalIndexDocumentsCount;
 
             // count portal index documents, or create index if not found from defined mapping JSON file
@@ -180,10 +182,12 @@ public class IndexerServiceImpl implements IndexerService {
 
             // index the metadata if it is published
             if (this.isMetadataPublished(uuid)) {
-                try {
+                try(InputStream is = new ByteArrayInputStream(objectMapper.writeValueAsBytes(mappedMetadataValues))) {
                     logger.info("Ingesting a new metadata with UUID: " + uuid + " to index: " + indexName);
                     logger.info("{}", mappedMetadataValues);
-                    req = IndexRequest.of(b -> b.index(indexName).withJson(new ByteArrayInputStream(mappedMetadataValues.toString().getBytes())));
+                    req = IndexRequest.of(b -> b
+                            .index(indexName)
+                            .withJson(is));
 
                     IndexResponse response = portalElasticsearchClient.index(req);
                     logger.info("Metadata with UUID: " + uuid + " indexed with version: " + response.version());
@@ -254,12 +258,12 @@ public class IndexerServiceImpl implements IndexerService {
         for (String metadataRecord : geoNetworkResourceService.getAllMetadataRecords()) {
             try {
                 // get mapped metadata values from GeoNetwork to STAC collection schema
-                JSONObject mappedMetadataValues = this.getMappedMetadataValues(metadataRecord);
+                StacCollectionModel mappedMetadataValues = this.getMappedMetadataValues(metadataRecord);
 
                 logger.debug("Final output json is {}", mappedMetadataValues);
 
                 // convert mapped values to binary data
-                try(ByteArrayInputStream input = new ByteArrayInputStream(mappedMetadataValues.toString().getBytes())) {
+                try(ByteArrayInputStream input = new ByteArrayInputStream(objectMapper.writeValueAsBytes(mappedMetadataValues))) {
                     BinaryData data = BinaryData.of(IOUtils.toByteArray(input), ContentType.APPLICATION_JSON);
 
                     // send bulk request to Elasticsearch
@@ -270,7 +274,7 @@ public class IndexerServiceImpl implements IndexerService {
                             )
                     );
 
-                    logger.info("Ingested a new metadata document with UUID: " + mappedMetadataValues.getString("id"));
+                    logger.info("Ingested a new metadata document with UUID: " + mappedMetadataValues.getUuid());
                 }
 
             } catch (FactoryException | JAXBException | TransformException e) {

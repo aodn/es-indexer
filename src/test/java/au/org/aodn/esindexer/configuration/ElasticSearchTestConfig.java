@@ -20,7 +20,7 @@ import org.testcontainers.elasticsearch.ElasticsearchContainer;
 import org.testcontainers.utility.DockerImageName;
 
 @Configuration
-public class PortalElasticSearchTestConfig {
+public class ElasticSearchTestConfig {
 
     @Lazy
     @Autowired
@@ -59,7 +59,7 @@ public class PortalElasticSearchTestConfig {
      * Superseded the rest client transport in the run, so test case use this test container.
      * @return
      */
-    @Bean
+    @Bean("portalElasticTransport")
     public RestClientTransport testRestClientTransport() {
         final CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
 

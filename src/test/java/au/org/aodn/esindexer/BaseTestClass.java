@@ -7,6 +7,7 @@ import co.elastic.clients.transport.rest_client.RestClientTransport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
@@ -25,9 +26,11 @@ public class BaseTestClass {
     protected TestRestTemplate testRestTemplate;
 
     @Autowired
+    @Qualifier("portalElasticTransport")
     protected RestClientTransport transport;
 
     @Autowired
+    @Qualifier("portalElasticsearchClient")
     protected ElasticsearchClient client;
 
     @Autowired

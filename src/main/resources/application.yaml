@@ -28,7 +28,8 @@ geonetwork:
     endpoint: ${geonetwork.host}/geonetwork/srv/api/records/{uuid}
   search:
     api:
-      endpoint: ${geonetwork.host}/geonetwork/srv/api/search/records/_search
+      index: "records"
+      endpoint: /geonetwork/srv/api/search
 
 springdoc:
   api-docs:
