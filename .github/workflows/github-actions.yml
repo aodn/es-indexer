@@ -38,7 +38,7 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: ${{ vars.ROLE_ARN }}
+          role-to-assume: ${{ secrets.ROLE_ARN }}
           role-session-name: GitHub_to_AWS_via_FederatedOIDC
           aws-region: ${{ vars.AWS_REGION }}
       # Hello from AWS: WhoAmI
@@ -181,8 +181,8 @@ jobs:
             GEONETWORK_HOST=${{ vars.GEONETWORK_HOST }} 
             SERVER_PORT=${{ vars.SERVER_PORT }} 
             ELASTICSEARCH_SERVERURL=${{ vars.ELASTICSEARCH_SERVERURL }} 
-            ELASTICSEARCH_APIKEY=${{ vars.ELASTICSEARCH_APIKEY }}
-            APP_HTTP_AUTHTOKEN=${{ vars.APP_HTTP_AUTHTOKEN }}
+            ELASTICSEARCH_APIKEY=${{ secrets.ELASTICSEARCH_APIKEY }}
+            APP_HTTP_AUTHTOKEN=${{ secrets.APP_HTTP_AUTHTOKEN }}
             ELASTICSEARCH_INDEX_NAME=${{ vars.ELASTICSEARCH_INDEX_NAME }}
             IMAGE=${{ steps.push-image.outputs.image }}
 
