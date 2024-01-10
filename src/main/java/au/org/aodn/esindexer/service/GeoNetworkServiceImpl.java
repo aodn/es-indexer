@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
@@ -33,16 +34,25 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
     @Qualifier("gn4ElasticsearchClient")
     protected ElasticsearchClient gn4ElasticClient;
 
-    @Value("${geonetwork.records.endpoint}")
-    private String geoNetworkRecordsEndpoint;
-
     protected static final Logger logger = LoggerFactory.getLogger(GeoNetworkServiceImpl.class);
 
     protected final SearchRequest GEONETWORK_ALL_UUID;
 
     protected final SearchRequest GEONETWORK_ALL_COUNT;
 
-    public GeoNetworkServiceImpl(@Value("${geonetwork.search.api.index}") String indexName) {
+    protected String indexName;
+
+    protected String server;
+
+    protected HttpEntity<String> getRequestEntity(String body) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_XML));
+        return body == null ? new HttpEntity<>(headers) : new HttpEntity<>(body, headers);
+    }
+
+    public GeoNetworkServiceImpl(
+            @Value("${geonetwork.host}") String server,
+            @Value("${geonetwork.search.api.index}") String indexName) {
 
         GEONETWORK_ALL_UUID = new SearchRequest.Builder()
                 .index(indexName)
@@ -58,50 +68,21 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
                 .source(s -> s
                         .filter(f -> f.includes("uuid")))           // Only select uuid field
                 .build();
-    }
 
-    /**
-     * This function use the search function provided by GeoNetwork to get information not possible by normal API,
-     * Geonetwork4 use elastic search at the back and hence we issue an Elastic Search here.
-     *
-     * Since it access the internal structure directly, try to avoid using it if possible.
-     * @param uuid
-     * @return
-     */
-//    public JSONObject searchMetadataBy(String uuid) {
-//
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setContentType(MediaType.APPLICATION_JSON);
-//        GeoNetworkSearchRequestBodyDTO searchRequestBodyDTO = new GeoNetworkSearchRequestBodyDTO(uuid);
-//        HttpEntity<GeoNetworkSearchRequestBodyDTO> requestEntity = new HttpEntity<>(searchRequestBodyDTO, headers);
-//
-//        ResponseEntity<Map> responseEntity = restTemplate.postForEntity(geoNetworkSearchEndpoint, requestEntity, Map.class);
-//        if (responseEntity.getStatusCode().is2xxSuccessful()) {
-//            JSONObject jsonResult = new JSONObject(responseEntity.getBody());
-//            JSONObject outerHits = jsonResult.getJSONObject("hits");
-//            JSONObject total = outerHits.getJSONObject("total");
-//            if ((int) total.get("value") > 0) {
-//                JSONArray innerHits = outerHits.getJSONArray("hits");
-//                return innerHits.getJSONObject(0).getJSONObject("_source");
-//            }
-//            else {
-//                throw new MetadataNotFoundException("Unable to find metadata record with UUID: " + uuid + " in GeoNetwork");
-//            }
-//        } else {
-//            throw new RuntimeException("Failed to fetch data from the API");
-//        }
-//    }
+        setIndexName(indexName);
+        setServer(server);
+    }
 
     protected String findFormatterId(String uuid) {
         try {
-            HttpHeaders headers = new HttpHeaders();
-            headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-            HttpEntity<String> requestEntity = new HttpEntity<>(headers);
+            HttpEntity<String> requestEntity = getRequestEntity(null);
+
             Map<String, Object> params = new HashMap<>();
+            params.put("indexName", getIndexName());
             params.put("uuid", uuid);
 
             ResponseEntity<JsonNode> responseEntity = restTemplate.exchange(
-                    geoNetworkRecordsEndpoint,
+                    getGeoNetworkRecordsEndpoint(),
                     HttpMethod.GET,
                     requestEntity,
                     JsonNode.class, params);
@@ -122,16 +103,15 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
 
     public String searchRecordBy(String uuid) {
         try {
-            HttpHeaders headers = new HttpHeaders();
-            headers.setAccept(Collections.singletonList(MediaType.APPLICATION_XML));
-            HttpEntity<String> requestEntity = new HttpEntity<>(headers);
+            HttpEntity<String> requestEntity = getRequestEntity(null);
 
             Map<String, Object> params = new HashMap<>();
+            params.put("indexName", getIndexName());
             params.put("uuid", uuid);
             params.put("formatterId", this.findFormatterId(uuid));
 
             ResponseEntity<String> responseEntity = restTemplate.exchange(
-                    geoNetworkRecordsEndpoint + "/formatters/{formatterId}",
+                    getGeoNetworkRecordsEndpoint() + "/formatters/{formatterId}",
                     HttpMethod.GET,
                     requestEntity,
                     String.class,
@@ -147,13 +127,6 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
         }
     }
 
-//    protected ResponseEntity<Map> responseEntityInit() {
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setContentType(MediaType.APPLICATION_JSON);
-//        MetadataRecordsCountRequestBodyDTO requestBodyDTO = new MetadataRecordsCountRequestBodyDTO();
-//        HttpEntity<MetadataRecordsCountRequestBodyDTO> requestEntity = new HttpEntity<>(requestBodyDTO, headers);
-//        return restTemplate.postForEntity(geoNetworkSearchEndpoint, requestEntity, Map.class);
-//    }
 
     public long getMetadataRecordsCount() {
         try {
@@ -199,26 +172,20 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
             throw new RuntimeException("Failed to fetch data from the API");
         }
     }
-//    public List<String> getAllMetadataRecords() {
-//        ResponseEntity<Map> responseEntity = this.responseEntityInit();
-//        if (responseEntity.getStatusCode().is2xxSuccessful()) {
-//            JSONObject jsonResult = new JSONObject(responseEntity.getBody());
-//            JSONObject outerHits = jsonResult.getJSONObject("hits");
-//            JSONArray innerHit = outerHits.getJSONArray("hits");
-//            if (!innerHit.isEmpty()) {
-//                logger.info("Found " + innerHit.length() + " metadata records in GeoNetwork");
-//                List<String> metadataRecords = new ArrayList<>();
-//                for (int i = 0; i < innerHit.length(); i++) {
-//                    // TODO: Potential problem with consume too many memory as you read all record.
-//                    String uuid = (String) innerHit.getJSONObject(i).getJSONObject("_source").get("uuid");
-//                    metadataRecords.add(this.searchRecordBy(uuid));
-//                }
-//                return metadataRecords;
-//            } else {
-//                throw new MetadataNotFoundException("Unable to find metadata records in GeoNetwork");
-//            }
-//        } else {
-//            throw new RuntimeException("Failed to fetch data from the API");
-//        }
-//    }
+
+    @Override
+    public String getIndexName() { return indexName; }
+
+    @Override
+    public void setIndexName(String i) { indexName = i; }
+
+    @Override
+    public String getServer() { return server; }
+
+    @Override
+    public void setServer(String s) { server = s; }
+
+    protected String getGeoNetworkRecordsEndpoint() {
+        return getServer() + "/geonetwork/srv/api/{indexName}/{uuid}";
+    }
 }

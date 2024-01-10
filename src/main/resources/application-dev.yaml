@@ -12,9 +12,6 @@ elasticsearch:
   serverUrl: http://localhost:9200
   apiKey: sample-api-key
 
-geonetwork:
-  host:  http://localhost:8080/geonetwork
-
 logging:
   level:
     au.org.aodn.esindexer: DEBUG

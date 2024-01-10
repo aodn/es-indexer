@@ -24,13 +24,13 @@ public class ElasticSearchTestConfig {
 
     @Lazy
     @Autowired
-    protected ElasticsearchContainer container;
+    protected ElasticsearchContainer elasticsearchContainer;
 
     public static final String ES_USERNAME = "elastic";
 
     @PreDestroy
     public void shutDownElasticSearch() {
-        container.close();
+        elasticsearchContainer.close();
     }
 
     @Bean
@@ -60,7 +60,7 @@ public class ElasticSearchTestConfig {
      * @return
      */
     @Bean("portalElasticTransport")
-    public RestClientTransport testRestClientTransport() {
+    public RestClientTransport testRestClientTransport(ElasticsearchContainer container) {
         final CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
 
         credentialsProvider.setCredentials(
