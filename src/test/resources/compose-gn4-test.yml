@@ -55,3 +55,7 @@ services:
       ES_USERNAME: ${ES_USERNAME:-elastic}
       ES_PASSWORD: ${ES_PASSWORD:-password}
       KB_URL: ${KB_URL:-http://kibana:5601}
+    # If you want to debug this yml, you can uncomment the port mapping
+    # however port is of no use when running in testcontainer
+    # ports:
+    #  - 8080:8080

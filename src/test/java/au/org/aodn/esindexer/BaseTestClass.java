@@ -17,12 +17,18 @@ import org.springframework.web.client.RestClientException;
 import org.testcontainers.containers.DockerComposeContainer;
 import org.testcontainers.elasticsearch.ElasticsearchContainer;
 
+import javax.annotation.PostConstruct;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
+
+import static org.junit.Assert.assertEquals;
 
 public class BaseTestClass {
 
     protected final Logger logger = LoggerFactory.getLogger(BaseTestClass.class);
+
+    protected String xsrfToken = null;
 
     @LocalServerPort
     private int port;
@@ -63,14 +69,28 @@ public class BaseTestClass {
     }
 
     protected HttpEntity<String> getRequestEntity(String body) {
-        return getRequestEntity(Optional.empty(), body);
+        return getRequestEntity(Optional.empty(), null, body);
     }
 
-    protected HttpEntity<String> getRequestEntity(Optional<Map<String, String>> oh, String body) {
+    protected HttpEntity<String> getRequestEntity(Optional<Map<String, String>> oh, MediaType contentType, String body) {
         HttpHeaders headers = new HttpHeaders();
 
         headers.setAccept(List.of(MediaType.APPLICATION_JSON, MediaType.ALL, MediaType.TEXT_PLAIN));
-        headers.setContentType(MediaType.APPLICATION_XML);
+        headers.setContentType(contentType == null ? MediaType.APPLICATION_XML : contentType);
+        headers.setCacheControl(CacheControl.empty());
+
+        headers.add(HttpHeaders.USER_AGENT, "TestRestTemplate");
+        headers.add(HttpHeaders.ACCEPT_ENCODING, "gzip, deflate, br");
+
+        if(xsrfToken != null) {
+            // This is very important and is needed to login geonetwork4, the logic is first you need to
+            // do a REST call, it will come back with the XSRF-TOKEN, and subsequence call require
+            // the following to be set in order to authenticate correctly
+            headers.add(HttpHeaders.COOKIE, "XSRF-TOKEN=" + xsrfToken);
+            headers.add("X-XSRF-TOKEN", xsrfToken);
+        }
+
+        // This is use for test container only, so it is ok to hardcode
         headers.setBasicAuth("admin", "admin");
 
         if(oh.isPresent()) {
@@ -83,7 +103,14 @@ public class BaseTestClass {
         return body == null ? new HttpEntity<>(headers) : new HttpEntity<>(body, headers);
     }
 
-    protected String getGeoNetworkRecordsInsert() {
+    protected String getLoginUrl() {
+        return String.format("http://%s:%s/geonetwork/srv/eng/info?type=me",
+                dockerComposeContainer.getServiceHost(GeoNetworkSearchTestConfig.GN_NAME, GeoNetworkSearchTestConfig.GN_PORT),
+                dockerComposeContainer.getServicePort(GeoNetworkSearchTestConfig.GN_NAME, GeoNetworkSearchTestConfig.GN_PORT));
+
+    }
+
+    protected String getGeoNetworkRecordsInsertUrl() {
         String host = String.format("http://%s:%s/geonetwork/srv/api/records?metadataType=METADATA&transformWith=_none_&group=2&uuidProcessing=OVERWRITE&category=",
                 dockerComposeContainer.getServiceHost(GeoNetworkSearchTestConfig.GN_NAME, GeoNetworkSearchTestConfig.GN_PORT),
                 dockerComposeContainer.getServicePort(GeoNetworkSearchTestConfig.GN_NAME, GeoNetworkSearchTestConfig.GN_PORT));
@@ -92,56 +119,57 @@ public class BaseTestClass {
         return host;
     }
     /**
-     * In order to call geonetwork on privileged operation, you need to authenticate with username / password plus this token
-     * and the way to get this token is by making a POST call.
-     * @return token
+     * Must call to get the XSRF token
      */
-    protected <T> ResponseEntity<T> exchangeWithXSRF(String query, HttpMethod method, String body, Class<T> type) {
+    @PostConstruct
+    public void login() {
+        if(xsrfToken == null) {
+            HttpEntity<String> requestEntity = getRequestEntity(Optional.empty(), MediaType.APPLICATION_JSON, null);
 
-        HttpEntity<String> requestEntity = getRequestEntity(body);
-
-        ResponseEntity<T> responseEntity  = testRestTemplate
-                .exchange(
-                        query,
-                        method,
-                        requestEntity,
-                        type
-                );
-
-        if(responseEntity.getStatusCode() == HttpStatus.FORBIDDEN) {
-            // This is the behavior of geonetwork that you need to setup the session id, once you make the request
-            // with correct username password, it will return with a session id
-            String set_cookie = responseEntity.getHeaders().getFirst(HttpHeaders.SET_COOKIE);
-
-            // The string in set_cookie will be like XSRF-TOKEN=xxxxx ; Path=/geonetwork
-            String xsrfToken = set_cookie.split(";")[0].split("=")[1].trim();
-            logger.info("XSRF token {}", xsrfToken);
-
-            // Now you can make the request again with the session id
-            Map<String, String> optionalHeaders = new HashMap<>();
-            optionalHeaders.put("X-XSRF-TOKEN", xsrfToken);
-
-            requestEntity = getRequestEntity(Optional.of(optionalHeaders), body);
-
-            responseEntity  = testRestTemplate
+            ResponseEntity<String> responseEntity = testRestTemplate
                     .exchange(
-                            query,
-                            method,
+                            getLoginUrl(),
+                            HttpMethod.POST,
                             requestEntity,
-                            type
+                            String.class
                     );
-        }
 
-        return responseEntity;
+            if (responseEntity.getStatusCode() == HttpStatus.FORBIDDEN) {
+
+                // This is the behavior of geonetwork that you need to setup the session id, once you make the request
+                // with correct username password, it will return with a session id
+                String set_cookie = responseEntity.getHeaders().getFirst(HttpHeaders.SET_COOKIE);
+
+                // The string in set_cookie will be like XSRF-TOKEN=xxxxx ; Path=/geonetwork
+                xsrfToken = set_cookie.split(";")[0].split("=")[1].trim();
+                logger.info("XSRF token {}", xsrfToken);
+
+                HttpEntity<String> re = getRequestEntity(Optional.empty(), MediaType.APPLICATION_JSON, null);
+
+                ResponseEntity<String> answer = testRestTemplate
+                        .exchange(
+                                getLoginUrl(),
+                                HttpMethod.POST,
+                                re,
+                                String.class
+                        );
+
+                assertEquals("Login and get XSRF token", HttpStatus.OK, answer.getStatusCode());
+            }
+        }
     }
 
     public void insertMetadataRecords(String xmlContent) throws RestClientException {
 
-        ResponseEntity<String> responseEntity = exchangeWithXSRF(
-                getGeoNetworkRecordsInsert(),
-                HttpMethod.PUT,
-                xmlContent,
-                String.class);
+        HttpEntity<String> requestEntity = getRequestEntity(Optional.empty(), null, xmlContent);
+
+        ResponseEntity<String> responseEntity = testRestTemplate
+                .exchange(
+                        getGeoNetworkRecordsInsertUrl(),
+                        HttpMethod.PUT,
+                        requestEntity,
+                        String.class
+                );
 
         logger.info("insertMetadataRecords -> {}", responseEntity);
         responseEntity.getStatusCode();
