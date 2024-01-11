@@ -18,25 +18,25 @@ import org.springframework.http.MediaType;
 public class GeoNetworkSearchConfig {
 
     @Bean(name = "gn4ElasticsearchClient")
-    public ElasticsearchClient createGN4ElasticsearchClient(@Qualifier("gn4ElasticTransport") RestClientTransport transport) {
+    public ElasticsearchClient createGN4ElasticsearchClient(@Qualifier("gn4ElasticRestClient") RestClient restClient) {
+
+        RestClientTransport c = new RestClientTransport(restClient, new JacksonJsonpMapper());
+
         // Create the API client
-        return new ElasticsearchClient(transport);
+        return new ElasticsearchClient(c);
     }
 
-    @Bean(name = "gn4ElasticTransport")
-    @ConditionalOnMissingBean(name = "gn4ElasticTransport")
-    public RestClientTransport createRestClientTransport1(@Value("${geonetwork.host}") String host,
+    @Bean(name = "gn4ElasticRestClient")
+    @ConditionalOnMissingBean(name = "gn4ElasticRestClient")
+    public RestClient createRestClientTransport1(@Value("${geonetwork.host}") String host,
                                                           @Value("${geonetwork.search.api.endpoint}") String path) {
         // Create the low-level client
-        RestClient restClient = RestClient
+        return RestClient
                 .builder(HttpHost.create(host))
                 .setPathPrefix(path)
                 .setDefaultHeaders(new BasicHeader[] {
                         new BasicHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 })
                 .build();
-
-        // Create the transport with a Jackson mapper
-        return new RestClientTransport(restClient, new JacksonJsonpMapper());
     }
 }

@@ -23,6 +23,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class BaseTestClass {
 
@@ -110,6 +111,27 @@ public class BaseTestClass {
 
     }
 
+    protected String getIndexUrl() {
+        return String.format("http://%s:%s/geonetwork/srv/api/site/index?reset=false&asynchronous=true",
+                dockerComposeContainer.getServiceHost(GeoNetworkSearchTestConfig.GN_NAME, GeoNetworkSearchTestConfig.GN_PORT),
+                dockerComposeContainer.getServicePort(GeoNetworkSearchTestConfig.GN_NAME, GeoNetworkSearchTestConfig.GN_PORT));
+
+    }
+
+    protected String isIndexUrl() {
+        return String.format("http://%s:%s/geonetwork/srv/api/site/indexing",
+                dockerComposeContainer.getServiceHost(GeoNetworkSearchTestConfig.GN_NAME, GeoNetworkSearchTestConfig.GN_PORT),
+                dockerComposeContainer.getServicePort(GeoNetworkSearchTestConfig.GN_NAME, GeoNetworkSearchTestConfig.GN_PORT));
+
+    }
+
+    protected String getPublishUrl(String uuid) {
+        return String.format("http://%s:%s/geonetwork/srv/api/records/" + uuid + "/publish",
+                dockerComposeContainer.getServiceHost(GeoNetworkSearchTestConfig.GN_NAME, GeoNetworkSearchTestConfig.GN_PORT),
+                dockerComposeContainer.getServicePort(GeoNetworkSearchTestConfig.GN_NAME, GeoNetworkSearchTestConfig.GN_PORT));
+
+    }
+
     protected String getGeoNetworkRecordsInsertUrl() {
         String host = String.format("http://%s:%s/geonetwork/srv/api/records?metadataType=METADATA&transformWith=_none_&group=2&uuidProcessing=OVERWRITE&category=",
                 dockerComposeContainer.getServiceHost(GeoNetworkSearchTestConfig.GN_NAME, GeoNetworkSearchTestConfig.GN_PORT),
@@ -155,24 +177,48 @@ public class BaseTestClass {
                         );
 
                 assertEquals("Login and get XSRF token", HttpStatus.OK, answer.getStatusCode());
+
             }
         }
     }
 
-    public void insertMetadataRecords(String xmlContent) throws RestClientException {
+    public void insertMetadataRecords(String uuid, String xmlContent) throws RestClientException, InterruptedException {
 
         HttpEntity<String> requestEntity = getRequestEntity(Optional.empty(), null, xmlContent);
 
-        ResponseEntity<String> responseEntity = testRestTemplate
+        ResponseEntity<Map> r = testRestTemplate
                 .exchange(
                         getGeoNetworkRecordsInsertUrl(),
+                        HttpMethod.PUT,
+                        requestEntity,
+                        Map.class
+                );
+
+        assertEquals("Insert record OK", HttpStatus.CREATED, r.getStatusCode());
+
+        // Index the item so that query yield the right result
+        Map<String, Object> param = new HashMap<>();
+        param.put("uuid", uuid);
+
+        ResponseEntity<String> responseEntity = testRestTemplate
+                .exchange(
+                        getPublishUrl(uuid),
+                        HttpMethod.PUT,
+                        getRequestEntity(Optional.empty(), null, null),
+                        String.class,
+                        param
+                );
+        assertEquals("Published OK", HttpStatus.NO_CONTENT, responseEntity.getStatusCode());
+
+        // Index the item so that query yield the right result
+        responseEntity = testRestTemplate
+                .exchange(
+                        getIndexUrl(),
                         HttpMethod.PUT,
                         requestEntity,
                         String.class
                 );
 
-        logger.info("insertMetadataRecords -> {}", responseEntity);
-        responseEntity.getStatusCode();
+        assertEquals("Trigger index OK", HttpStatus.OK, responseEntity.getStatusCode());
     }
-
 }

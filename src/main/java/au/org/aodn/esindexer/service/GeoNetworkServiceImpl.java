@@ -18,7 +18,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
@@ -45,8 +44,12 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
     protected String server;
 
     protected HttpEntity<String> getRequestEntity(String body) {
+        return getRequestEntity(null, body);
+    }
+
+    protected HttpEntity<String> getRequestEntity(MediaType accept, String body) {
         HttpHeaders headers = new HttpHeaders();
-        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_XML));
+        headers.setAccept(Collections.singletonList(accept == null ? MediaType.APPLICATION_XML : accept));
         return body == null ? new HttpEntity<>(headers) : new HttpEntity<>(body, headers);
     }
 
@@ -60,6 +63,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
                 .source(s -> s
                         .filter(f -> f.includes("uuid")))           // Only select uuid field
                 .build();
+        logger.info("GEONETWORK_ALL_UUID -> {}", GEONETWORK_ALL_UUID);
 
         GEONETWORK_ALL_COUNT = new SearchRequest.Builder()
                 .index(indexName)
@@ -69,13 +73,15 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
                         .filter(f -> f.includes("uuid")))           // Only select uuid field
                 .build();
 
+        logger.info("GEONETWORK_ALL_COUNT -> {}", GEONETWORK_ALL_COUNT);
+
         setIndexName(indexName);
         setServer(server);
     }
 
     protected String findFormatterId(String uuid) {
         try {
-            HttpEntity<String> requestEntity = getRequestEntity(null);
+            HttpEntity<String> requestEntity = getRequestEntity(MediaType.APPLICATION_JSON, null);
 
             Map<String, Object> params = new HashMap<>();
             params.put("indexName", getIndexName());
@@ -119,10 +125,12 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
 
             if (responseEntity.getStatusCode().is2xxSuccessful()) {
                 return StringUtil.encodeUTF8(Objects.requireNonNull(responseEntity.getBody()));
-            } else {
+            }
+            else {
                 throw new RuntimeException("Failed to fetch data from the API");
             }
-        } catch (HttpClientErrorException.NotFound e) {
+        }
+        catch (HttpClientErrorException.NotFound e) {
             throw new MetadataNotFoundException("Unable to find metadata record with UUID: " + uuid + " in GeoNetwork");
         }
     }
@@ -132,7 +140,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
         try {
             // Do not use hits().total() as it may be different from hits().hits().size() if index isn't refresh
             final SearchResponse<ObjectNode> response = gn4ElasticClient.search(GEONETWORK_ALL_COUNT, ObjectNode.class);
-            return response.hits().hits().size();
+            return response.hits().total().value();
         }
         catch (IOException e) {
             throw new RuntimeException("Failed to fetch data from the API", e);
