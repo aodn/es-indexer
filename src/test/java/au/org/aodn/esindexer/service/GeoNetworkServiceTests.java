@@ -151,6 +151,25 @@ public class GeoNetworkServiceTests extends BaseTestClass {
 
     @Test
     public void verifyAllMetadataRecords() throws IOException, InterruptedException  {
+        File f = ResourceUtils.getFile("classpath:canned/sample1.xml");
+        String content = new String(Files.readAllBytes(f.toPath()));
+        insertMetadataRecords("9e5c3031-a026-48b3-a153-a70c2e2b78b9", content);
 
+        f = ResourceUtils.getFile("classpath:canned/sample2.xml");
+        content = new String(Files.readAllBytes(f.toPath()));
+        insertMetadataRecords("830f9a83-ae6b-4260-a82a-24c4851f7119", content);
+
+        Iterable<String> i = geoNetworkService.getAllMetadataRecords();
+
+        // The content verified above, just make sure it returned the correct number
+        int count = 0;
+        for(String x : i) {
+            count++;
+        }
+
+        assertEquals("Count matches", 2, count);
+
+        deleteRecord("830f9a83-ae6b-4260-a82a-24c4851f7119");
+        deleteRecord("9e5c3031-a026-48b3-a153-a70c2e2b78b9");
     }
 }
