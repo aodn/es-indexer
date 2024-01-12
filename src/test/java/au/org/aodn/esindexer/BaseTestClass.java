@@ -202,13 +202,14 @@ public class BaseTestClass {
                 );
 
         // Index the item so that query yield the right result
-        testRestTemplate
+        ResponseEntity<Void> t = testRestTemplate
                 .exchange(
                         getIndexUrl(),
                         HttpMethod.PUT,
                         requestEntity,
                         Void.class
                 );
+        assertEquals("Trigger index OK", HttpStatus.OK, t.getStatusCode());
 
         return r.getBody();
     }
@@ -253,7 +254,6 @@ public class BaseTestClass {
                 );
 
         assertEquals("Trigger index OK", HttpStatus.OK, responseEntity.getStatusCode());
-
         return content;
     }
 }

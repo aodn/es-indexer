@@ -59,7 +59,6 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
 
         GEONETWORK_ALL_UUID = new SearchRequest.Builder()
                 .index(indexName)
-                .size(Integer.MAX_VALUE)
                 .query(new MatchAllQuery.Builder().build()._toQuery())    // Match all
                 .source(s -> s
                         .filter(f -> f.includes("uuid")))           // Only select uuid field
@@ -68,7 +67,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
 
         GEONETWORK_ALL_COUNT = new SearchRequest.Builder()
                 .index(indexName)
-                .size(0)            // Do not return value, use count is enough
+                //.size(0)            // Do not return value, use count is enough
                 .query(new MatchAllQuery.Builder().build()._toQuery())    // Match all
                 .source(s -> s
                         .filter(f -> f.includes("uuid")))           // Only select uuid field
@@ -142,7 +141,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
 
     public long getMetadataRecordsCount() {
         try {
-            // Do not use hits().total() as it may be different from hits().hits().size() if index isn't refresh
+            // TODO: Can the elastic index not update after insert dataset into GeoNetwork?
             final SearchResponse<ObjectNode> response = gn4ElasticClient.search(GEONETWORK_ALL_COUNT, ObjectNode.class);
             return response.hits().hits().size();
         }
@@ -154,10 +153,12 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
     public Iterable<String> getAllMetadataRecords() {
 
         try {
+            // TODO: Can the elastic index not update after insert dataset into GeoNetwork?
             final SearchResponse<ObjectNode> response = gn4ElasticClient.search(GEONETWORK_ALL_UUID, ObjectNode.class);
-            // Do not use hits().total() as it may be different from hits().hits().size() if index isn't refresh
-            if(Objects.requireNonNull(response.hits().hits()).size() != 0) {
-                // Delay the
+
+            if(Objects.requireNonNull(response.hits().hits().size() != 0)) {
+                // Use iterator so that we can get record by record, otherwise we need to store all record
+                // in memory which use up lots of memory
                 return () -> new Iterator<>() {
 
                     protected int index = 0;
