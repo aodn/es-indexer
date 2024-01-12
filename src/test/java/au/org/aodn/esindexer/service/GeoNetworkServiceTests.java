@@ -94,4 +94,44 @@ public class GeoNetworkServiceTests extends BaseTestClass {
 
         assertTrue("Unable to find metadata record with UUID: NOT_FOUND in GeoNetwork".contains(exception.getMessage()));
     }
+
+    @Test
+    public void verifySearchRecordBy() throws IOException, InterruptedException {
+        File f = ResourceUtils.getFile("classpath:canned/sample1.xml");
+        String content = new String(Files.readAllBytes(f.toPath()));
+
+        insertMetadataRecords("9e5c3031-a026-48b3-a153-a70c2e2b78b9", content);
+        String xml = geoNetworkService.searchRecordBy("9e5c3031-a026-48b3-a153-a70c2e2b78b9");
+
+        Diff d  = DiffBuilder
+                .compare(content)
+                .withTest(xml)
+                .ignoreWhitespace()
+                .ignoreComments()
+                .build();
+
+        assertFalse("XML equals for 9e5c3031-a026-48b3-a153-a70c2e2b78b9", d.hasDifferences());
+
+        f = ResourceUtils.getFile("classpath:canned/sample2.xml");
+        content = new String(Files.readAllBytes(f.toPath()));
+
+        insertMetadataRecords("830f9a83-ae6b-4260-a82a-24c4851f7119", content);
+        xml = geoNetworkService.searchRecordBy("830f9a83-ae6b-4260-a82a-24c4851f7119");
+
+        // The sample2 is of old format, the indexer only works for iso19115, hence the search will convert it
+        // so the return result will not be the same as sample2 input.
+        f = ResourceUtils.getFile("classpath:canned/transformed_sample2.xml");
+        String transformed = new String(Files.readAllBytes(f.toPath()));
+
+        d  = DiffBuilder
+                .compare(transformed)
+                .withTest(xml)
+                .ignoreWhitespace()
+                .ignoreComments()
+                .ignoreElementContentWhitespace()
+                .normalizeWhitespace()
+                .build();
+
+        assertFalse("XML transformed for 830f9a83-ae6b-4260-a82a-24c4851f7119", d.hasDifferences());
+    }
 }
