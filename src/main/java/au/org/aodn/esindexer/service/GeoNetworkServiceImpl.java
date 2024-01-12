@@ -143,7 +143,8 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
         try {
             // TODO: Can the elastic index not update after insert dataset into GeoNetwork?
             final SearchResponse<ObjectNode> response = gn4ElasticClient.search(GEONETWORK_ALL_COUNT, ObjectNode.class);
-            return response.hits().hits().size();
+            logger.debug("Metadata count details {}", response);
+            return response.hits().total().value();
         }
         catch (IOException e) {
             throw new RuntimeException("Failed to fetch data from the API", e);

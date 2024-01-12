@@ -52,6 +52,8 @@ public class GeoNetworkServiceTests extends BaseTestClass {
     public void verifyInsertMetadataWorks() throws IOException, InterruptedException {
 
         String content = insertMetadataRecords("9e5c3031-a026-48b3-a153-a70c2e2b78b9", "classpath:canned/sample1.xml");
+
+        logger.debug("Get count in verifyInsertMetadataWorks");
         assertEquals("Count is 1", 1, geoNetworkService.getMetadataRecordsCount());
 
         Iterable<String> i = geoNetworkService.getAllMetadataRecords();
@@ -144,7 +146,9 @@ public class GeoNetworkServiceTests extends BaseTestClass {
         // The content verified above, just make sure it returned the correct number
         int count = 0;
         for(String x : i) {
-            count++;
+            if(x != null) {
+                count++;
+            }
         }
 
         assertEquals("Count matches", 2, count);

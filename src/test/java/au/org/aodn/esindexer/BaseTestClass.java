@@ -191,6 +191,8 @@ public class BaseTestClass {
     }
 
     public String deleteRecord(String uuid) {
+
+        logger.info("Deleting GN doc {}", uuid);
         HttpEntity<String> requestEntity = getRequestEntity(null);
 
         ResponseEntity<String> r = testRestTemplate
@@ -200,6 +202,7 @@ public class BaseTestClass {
                         requestEntity,
                         String.class
                 );
+        logger.info("{}", r.getStatusCode());
 
         // Index the item so that query yield the right result
         ResponseEntity<Void> t = testRestTemplate
