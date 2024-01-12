@@ -46,8 +46,8 @@ public class IndexerServiceTests extends BaseTestClass {
         assertTrue("830f9a83-ae6b-4260-a82a-24c4851f7119 published", indexerService.isMetadataPublished("830f9a83-ae6b-4260-a82a-24c4851f7119"));
         assertFalse("Not exist and not published", indexerService.isMetadataPublished("not-exist"));
 
+        deleteRecord("9e5c3031-a026-48b3-a153-a70c2e2b78b9");
         deleteRecord("830f9a83-ae6b-4260-a82a-24c4851f7119");
-
     }
     /**
      * Read the function implementation on why need to insert 1 docs
@@ -63,11 +63,14 @@ public class IndexerServiceTests extends BaseTestClass {
 
     @Test
     public void verifyGetDocumentCount() throws IOException {
-        insertMetadataRecords("9e5c3031-a026-48b3-a153-a70c2e2b78b9", "classpath:canned/sample1.xml");
         insertMetadataRecords("830f9a83-ae6b-4260-a82a-24c4851f7119", "classpath:canned/sample2.xml");
-        
+        insertMetadataRecords("9e5c3031-a026-48b3-a153-a70c2e2b78b9", "classpath:canned/sample1.xml");
+
         indexerService.indexAllMetadataRecordsFromGeoNetwork(true);
 
-        assertEquals("Doc count correct", 2L, indexerService.getDocumentsCount());
+        assertEquals("Doc count correct", 1L, indexerService.getDocumentsCount());
+        
+        deleteRecord("9e5c3031-a026-48b3-a153-a70c2e2b78b9");
+        deleteRecord("830f9a83-ae6b-4260-a82a-24c4851f7119");
     }
 }

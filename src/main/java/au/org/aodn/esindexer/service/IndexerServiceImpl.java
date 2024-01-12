@@ -279,12 +279,16 @@ public class IndexerServiceImpl implements IndexerService {
 
         BulkResponse result = portalElasticsearchClient.bulk(bulkRequest.build());
 
+        // Flush after insert, otherwise you need to wait for next auto-refresh. It is
+        // especially a problem with autotest, where assert happens very fast.
+        portalElasticsearchClient.indices().refresh();
+
         // Log errors, if any
         if (result.errors()) {
             logger.error("Bulk had errors");
             for (BulkResponseItem item: result.items()) {
                 if (item.error() != null) {
-                    logger.error(item.error().reason());
+                    logger.error("{} {}", item.error().reason(), item.error().causedBy());
                 }
             }
         } else {
