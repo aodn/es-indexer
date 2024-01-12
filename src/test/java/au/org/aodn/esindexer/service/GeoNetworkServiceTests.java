@@ -29,9 +29,6 @@ public class GeoNetworkServiceTests extends BaseTestClass {
     @Autowired
     protected GeoNetworkServiceImpl geoNetworkService;
 
-    @Autowired
-    protected DockerComposeContainer dockerComposeContainer;
-
     @BeforeAll
     public void setup() {
         // Update the server for geonetwork RESTful URL
@@ -53,11 +50,8 @@ public class GeoNetworkServiceTests extends BaseTestClass {
     @Test
     @Order(1)
     public void verifyInsertMetadataWorks() throws IOException, InterruptedException {
-        File f = ResourceUtils.getFile("classpath:canned/sample1.xml");
-        String content = new String(Files.readAllBytes(f.toPath()));
 
-        insertMetadataRecords("9e5c3031-a026-48b3-a153-a70c2e2b78b9", content);
-
+        String content = insertMetadataRecords("9e5c3031-a026-48b3-a153-a70c2e2b78b9", "classpath:canned/sample1.xml");
         assertEquals("Count is 1", 1, geoNetworkService.getMetadataRecordsCount());
 
         Iterable<String> i = geoNetworkService.getAllMetadataRecords();
@@ -78,18 +72,13 @@ public class GeoNetworkServiceTests extends BaseTestClass {
 
     @Test
     public void verifyFindFormatterId() throws IOException, InterruptedException {
-        File f = ResourceUtils.getFile("classpath:canned/sample1.xml");
-        String content = new String(Files.readAllBytes(f.toPath()));
 
-        insertMetadataRecords("9e5c3031-a026-48b3-a153-a70c2e2b78b9", content);
+        insertMetadataRecords("9e5c3031-a026-48b3-a153-a70c2e2b78b9", "classpath:canned/sample1.xml");
         assertEquals("Format is correct",
                 AppConstants.FORMAT_XML,
                 geoNetworkService.findFormatterId("9e5c3031-a026-48b3-a153-a70c2e2b78b9"));
 
-        f = ResourceUtils.getFile("classpath:canned/sample2.xml");
-        content = new String(Files.readAllBytes(f.toPath()));
-
-        insertMetadataRecords("830f9a83-ae6b-4260-a82a-24c4851f7119", content);
+        insertMetadataRecords("830f9a83-ae6b-4260-a82a-24c4851f7119", "classpath:canned/sample2.xml");
         assertEquals("Format is correct",
                 AppConstants.FORMAT_ISO19115_3_2018,
                 geoNetworkService.findFormatterId("830f9a83-ae6b-4260-a82a-24c4851f7119"));
@@ -106,10 +95,8 @@ public class GeoNetworkServiceTests extends BaseTestClass {
 
     @Test
     public void verifySearchRecordBy() throws IOException, InterruptedException {
-        File f = ResourceUtils.getFile("classpath:canned/sample1.xml");
-        String content = new String(Files.readAllBytes(f.toPath()));
 
-        insertMetadataRecords("9e5c3031-a026-48b3-a153-a70c2e2b78b9", content);
+        String content = insertMetadataRecords("9e5c3031-a026-48b3-a153-a70c2e2b78b9", "classpath:canned/sample1.xml");
         String xml = geoNetworkService.searchRecordBy("9e5c3031-a026-48b3-a153-a70c2e2b78b9");
 
         Diff d  = DiffBuilder
@@ -123,15 +110,12 @@ public class GeoNetworkServiceTests extends BaseTestClass {
 
         assertFalse("XML equals for 9e5c3031-a026-48b3-a153-a70c2e2b78b9", d.hasDifferences());
 
-        f = ResourceUtils.getFile("classpath:canned/sample2.xml");
-        content = new String(Files.readAllBytes(f.toPath()));
-
-        insertMetadataRecords("830f9a83-ae6b-4260-a82a-24c4851f7119", content);
+        insertMetadataRecords("830f9a83-ae6b-4260-a82a-24c4851f7119", "classpath:canned/sample2.xml");
         xml = geoNetworkService.searchRecordBy("830f9a83-ae6b-4260-a82a-24c4851f7119");
 
         // The sample2 is of old format, the indexer only works for iso19115, hence the search will convert it
         // so the return result will not be the same as sample2 input.
-        f = ResourceUtils.getFile("classpath:canned/transformed_sample2.xml");
+        File f = ResourceUtils.getFile("classpath:canned/transformed_sample2.xml");
         String transformed = new String(Files.readAllBytes(f.toPath()));
 
         d  = DiffBuilder
@@ -151,13 +135,9 @@ public class GeoNetworkServiceTests extends BaseTestClass {
 
     @Test
     public void verifyAllMetadataRecords() throws IOException, InterruptedException  {
-        File f = ResourceUtils.getFile("classpath:canned/sample1.xml");
-        String content = new String(Files.readAllBytes(f.toPath()));
-        insertMetadataRecords("9e5c3031-a026-48b3-a153-a70c2e2b78b9", content);
 
-        f = ResourceUtils.getFile("classpath:canned/sample2.xml");
-        content = new String(Files.readAllBytes(f.toPath()));
-        insertMetadataRecords("830f9a83-ae6b-4260-a82a-24c4851f7119", content);
+        insertMetadataRecords("9e5c3031-a026-48b3-a153-a70c2e2b78b9", "classpath:canned/sample1.xml");
+        insertMetadataRecords("830f9a83-ae6b-4260-a82a-24c4851f7119", "classpath:canned/sample2.xml");
 
         Iterable<String> i = geoNetworkService.getAllMetadataRecords();
 

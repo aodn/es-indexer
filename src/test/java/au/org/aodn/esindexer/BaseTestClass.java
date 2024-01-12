@@ -13,17 +13,18 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.*;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.client.RestClientException;
 import org.testcontainers.containers.DockerComposeContainer;
 import org.testcontainers.elasticsearch.ElasticsearchContainer;
 
 import javax.annotation.PostConstruct;
+import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.*;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class BaseTestClass {
 
@@ -203,9 +204,11 @@ public class BaseTestClass {
         return r.getBody();
     }
 
-    public void insertMetadataRecords(String uuid, String xmlContent) throws RestClientException, InterruptedException {
+    public String insertMetadataRecords(String uuid, String path) throws RestClientException, IOException {
+        File f = ResourceUtils.getFile(path);
+        String content = new String(Files.readAllBytes(f.toPath()));
 
-        HttpEntity<String> requestEntity = getRequestEntity(Optional.empty(), null, xmlContent);
+        HttpEntity<String> requestEntity = getRequestEntity(Optional.empty(), null, content);
 
         ResponseEntity<Map> r = testRestTemplate
                 .exchange(
@@ -241,5 +244,7 @@ public class BaseTestClass {
                 );
 
         assertEquals("Trigger index OK", HttpStatus.OK, responseEntity.getStatusCode());
+
+        return content;
     }
 }
