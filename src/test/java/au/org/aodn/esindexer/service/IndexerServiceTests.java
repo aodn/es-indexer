@@ -68,9 +68,29 @@ public class IndexerServiceTests extends BaseTestClass {
 
         indexerService.indexAllMetadataRecordsFromGeoNetwork(true);
 
+        // The sample1 geometry have error [1:9695] failed to parse field [summaries.proj:geometry] of type [geo_shape]
+        // ErrorCause: {"type":"illegal_argument_exception","reason":"Polygon self-intersection at lat=57.0 lon=-66.0"}
+        //
+        // So it will not insert correctly and result in 1 doc only
         assertEquals("Doc count correct", 1L, indexerService.getDocumentsCount());
-        
+
         deleteRecord("9e5c3031-a026-48b3-a153-a70c2e2b78b9");
         deleteRecord("830f9a83-ae6b-4260-a82a-24c4851f7119");
+    }
+
+    @Test
+    public void verifyDeleteDocumentByUUID() throws IOException {
+        insertMetadataRecords("830f9a83-ae6b-4260-a82a-24c4851f7119", "classpath:canned/sample2.xml");
+        insertMetadataRecords("06b09398-d3d0-47dc-a54a-a745319fbece", "classpath:canned/sample3.xml");
+
+        indexerService.indexAllMetadataRecordsFromGeoNetwork(true);
+        assertEquals("Doc count correct", 2L, indexerService.getDocumentsCount());
+
+        // Only 2 doc in elastic, if we delete it then should be zero
+        indexerService.deleteDocumentByUUID("830f9a83-ae6b-4260-a82a-24c4851f7119");
+        assertEquals("Doc count correct", 1L, indexerService.getDocumentsCount());
+
+        deleteRecord("830f9a83-ae6b-4260-a82a-24c4851f7119");
+        deleteRecord("06b09398-d3d0-47dc-a54a-a745319fbece");
     }
 }

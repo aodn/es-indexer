@@ -234,9 +234,16 @@ public class IndexerServiceImpl implements IndexerService {
                     .index(indexName)
                     .id(doc.id())
             );
+
             logger.info("Document with UUID: " + uuid + " deleted from index: " + indexName);
+
+            // Flush after insert, otherwise you need to wait for next auto-refresh. It is
+            // especially a problem with autotest, where assert happens very fast.
+            portalElasticsearchClient.indices().refresh();
+
             return ResponseEntity.status(HttpStatus.OK).body(response.toString());
-        } catch (DocumentNotFoundException e) {
+        }
+        catch (DocumentNotFoundException e) {
             logger.info("Document with UUID: " + uuid + " not found in index: " + indexName + ", skip deleting");
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
         }
@@ -254,26 +261,28 @@ public class IndexerServiceImpl implements IndexerService {
         logger.info("Indexing all metadata records from GeoNetwork");
 
         for (String metadataRecord : geoNetworkResourceService.getAllMetadataRecords()) {
-            try {
-                // get mapped metadata values from GeoNetwork to STAC collection schema
-                StacCollectionModel mappedMetadataValues = this.getMappedMetadataValues(metadataRecord);
+            if(metadataRecord != null) {
+                try {
+                    // get mapped metadata values from GeoNetwork to STAC collection schema
+                    StacCollectionModel mappedMetadataValues = this.getMappedMetadataValues(metadataRecord);
 
-                // convert mapped values to binary data
-                logger.debug("Ingested json is {}", objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(mappedMetadataValues));
+                    // convert mapped values to binary data
+                    logger.debug("Ingested json is {}", objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(mappedMetadataValues));
 
-                // send bulk request to Elasticsearch
-                bulkRequest.operations(op -> op
-                        .index(idx -> idx
-                                .index(indexName)
-                                .document(mappedMetadataValues)
-                        )
-                );
+                    // send bulk request to Elasticsearch
+                    bulkRequest.operations(op -> op
+                            .index(idx -> idx
+                                    .index(indexName)
+                                    .document(mappedMetadataValues)
+                            )
+                    );
 
-            } catch (FactoryException | JAXBException | TransformException e) {
+                } catch (FactoryException | JAXBException | TransformException e) {
                 /* it will reach here if cannot extract values of all the keys in GeoNetwork metadata JSON
                 or ID is not found, which is fatal.
                 * */
-                logger.error("Error extracting values from GeoNetwork metadata JSON: " + metadataRecord);
+                    logger.error("Error extracting values from GeoNetwork metadata JSON: " + metadataRecord);
+                }
             }
         }
 

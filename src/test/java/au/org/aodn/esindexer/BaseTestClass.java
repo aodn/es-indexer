@@ -113,7 +113,7 @@ public class BaseTestClass {
     }
 
     protected String getIndexUrl() {
-        return String.format("http://%s:%s/geonetwork/srv/api/site/index?reset=false&asynchronous=true",
+        return String.format("http://%s:%s/geonetwork/srv/api/site/index?reset=false&asynchronous=false",
                 dockerComposeContainer.getServiceHost(GeoNetworkSearchTestConfig.GN_NAME, GeoNetworkSearchTestConfig.GN_PORT),
                 dockerComposeContainer.getServicePort(GeoNetworkSearchTestConfig.GN_NAME, GeoNetworkSearchTestConfig.GN_PORT));
 
@@ -199,6 +199,15 @@ public class BaseTestClass {
                         HttpMethod.DELETE,
                         requestEntity,
                         String.class
+                );
+
+        // Index the item so that query yield the right result
+        testRestTemplate
+                .exchange(
+                        getIndexUrl(),
+                        HttpMethod.PUT,
+                        requestEntity,
+                        Void.class
                 );
 
         return r.getBody();

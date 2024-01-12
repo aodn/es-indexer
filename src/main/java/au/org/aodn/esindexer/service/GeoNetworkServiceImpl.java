@@ -59,6 +59,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
 
         GEONETWORK_ALL_UUID = new SearchRequest.Builder()
                 .index(indexName)
+                .size(Integer.MAX_VALUE)
                 .query(new MatchAllQuery.Builder().build()._toQuery())    // Match all
                 .source(s -> s
                         .filter(f -> f.includes("uuid")))           // Only select uuid field
@@ -143,7 +144,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
         try {
             // Do not use hits().total() as it may be different from hits().hits().size() if index isn't refresh
             final SearchResponse<ObjectNode> response = gn4ElasticClient.search(GEONETWORK_ALL_COUNT, ObjectNode.class);
-            return response.hits().total().value();
+            return response.hits().hits().size();
         }
         catch (IOException e) {
             throw new RuntimeException("Failed to fetch data from the API", e);
@@ -165,13 +166,25 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
                     public boolean hasNext() {
                         return index < response.hits().hits().size();
                     }
-
+                    /**
+                     * There is a problem with query the elastic directly because the index maybe outdated (not reindexed)
+                     * hence there is a chance that the hit size > number of docs, so in case the doc is not found,
+                     * we should return null
+                     *
+                     * @return - The xmldocument or null
+                     */
                     @Override
                     public String next() {
-                        // TODO: Potential problem with edge case where the list is bigger then default fetch
-                        // and you need to page, the response.hits().total().value() return long but get() below use int.
+                        // TODO: Potential problem with edge case where the list is bigger then size set Integer.MAX
                         String uuid = response.hits().hits().get(index++).source().get("uuid").asText();
-                        return GeoNetworkServiceImpl.this.searchRecordBy(uuid);
+                        try {
+                            return GeoNetworkServiceImpl.this.searchRecordBy(uuid);
+                        }
+                        catch(MetadataNotFoundException me) {
+                            // Should be a very rare case where someone deleted the doc in geonetwork
+                            // but the index is not refresh yet, so you will get document not found
+                            return null;
+                        }
                     }
                 };
             }
@@ -198,5 +211,9 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
 
     protected String getGeoNetworkRecordsEndpoint() {
         return getServer() + "/geonetwork/srv/api/{indexName}/{uuid}";
+    }
+
+    protected String getReIndexEndpoint() {
+        return getServer() + "/geonetwork/srv/api/site/index?reset=false&asynchronous=false";
     }
 }
