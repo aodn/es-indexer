@@ -4,8 +4,7 @@ import au.org.aodn.esindexer.exception.MetadataNotFoundException;
 import au.org.aodn.esindexer.utils.StringUtil;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.query_dsl.MatchAllQuery;
-import co.elastic.clients.elasticsearch.core.CountRequest;
-import co.elastic.clients.elasticsearch.core.CountResponse;
+
 import co.elastic.clients.elasticsearch.core.SearchRequest;
 import co.elastic.clients.elasticsearch.core.SearchResponse;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -96,10 +95,12 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
             if (responseEntity.getStatusCode().is2xxSuccessful()) {
                 if (Objects.requireNonNull(responseEntity.getBody()).get("@xsi:schemaLocation").asText().contains("www.isotc211.org/2005/gmd")) {
                     return "iso19115-3.2018";
-                } else {
+                }
+                else {
                     return "xml";
                 }
-            } else {
+            }
+            else {
                 throw new RuntimeException("Failed to fetch data from the API");
             }
         } catch (HttpClientErrorException.NotFound e) {

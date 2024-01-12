@@ -2,7 +2,7 @@ package au.org.aodn.esindexer.service;
 
 import au.org.aodn.esindexer.BaseTestClass;
 import au.org.aodn.esindexer.configuration.GeoNetworkSearchTestConfig;
-import ch.qos.logback.core.joran.spi.XMLUtil;
+
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,9 +24,9 @@ import static org.junit.Assert.assertFalse;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class GeoNetworkServiceTests extends BaseTestClass {
-
+    // Must use the impl to access protected method for testing
     @Autowired
-    protected GeoNetworkService geoNetworkService;
+    protected GeoNetworkServiceImpl geoNetworkService;
 
     @Autowired
     protected DockerComposeContainer dockerComposeContainer;
@@ -67,5 +67,20 @@ public class GeoNetworkServiceTests extends BaseTestClass {
 
             assertFalse("XML equals", d.hasDifferences());
         }
+    }
+
+    @Test
+    public void verifyFindFormatterId() throws IOException, InterruptedException {
+        File f = ResourceUtils.getFile("classpath:canned/sample1.xml");
+        String content = new String(Files.readAllBytes(f.toPath()));
+
+        insertMetadataRecords("9e5c3031-a026-48b3-a153-a70c2e2b78b9", content);
+        assertEquals("Format is correct", "xml", geoNetworkService.findFormatterId("9e5c3031-a026-48b3-a153-a70c2e2b78b9"));
+
+        ResourceUtils.getFile("classpath:canned/sample2.xml");
+        content = new String(Files.readAllBytes(f.toPath()));
+
+        insertMetadataRecords("830f9a83-ae6b-4260-a82a-24c4851f7119", content);
+        assertEquals("Format is correct", "iso19115-3.2018", geoNetworkService.findFormatterId("830f9a83-ae6b-4260-a82a-24c4851f7119"));
     }
 }
