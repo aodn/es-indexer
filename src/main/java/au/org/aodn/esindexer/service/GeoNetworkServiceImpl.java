@@ -1,5 +1,6 @@
 package au.org.aodn.esindexer.service;
 
+import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.exception.MetadataNotFoundException;
 import au.org.aodn.esindexer.utils.StringUtil;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
@@ -94,16 +95,17 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
 
             if (responseEntity.getStatusCode().is2xxSuccessful()) {
                 if (Objects.requireNonNull(responseEntity.getBody()).get("@xsi:schemaLocation").asText().contains("www.isotc211.org/2005/gmd")) {
-                    return "iso19115-3.2018";
+                    return AppConstants.FORMAT_ISO19115_3_2018;
                 }
                 else {
-                    return "xml";
+                    return AppConstants.FORMAT_XML;
                 }
             }
             else {
-                throw new RuntimeException("Failed to fetch data from the API");
+                throw new MetadataNotFoundException("Unable to find metadata record with UUID: " + uuid + " in GeoNetwork");
             }
-        } catch (HttpClientErrorException.NotFound e) {
+        }
+        catch (HttpClientErrorException.NotFound e) {
             throw new MetadataNotFoundException("Unable to find metadata record with UUID: " + uuid + " in GeoNetwork");
         }
     }

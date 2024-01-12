@@ -1,8 +1,10 @@
 package au.org.aodn.esindexer.service;
 
 import au.org.aodn.esindexer.BaseTestClass;
+import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.configuration.GeoNetworkSearchTestConfig;
 
+import au.org.aodn.esindexer.exception.MetadataNotFoundException;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,8 +18,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
@@ -75,12 +76,22 @@ public class GeoNetworkServiceTests extends BaseTestClass {
         String content = new String(Files.readAllBytes(f.toPath()));
 
         insertMetadataRecords("9e5c3031-a026-48b3-a153-a70c2e2b78b9", content);
-        assertEquals("Format is correct", "xml", geoNetworkService.findFormatterId("9e5c3031-a026-48b3-a153-a70c2e2b78b9"));
+        assertEquals("Format is correct",
+                AppConstants.FORMAT_XML,
+                geoNetworkService.findFormatterId("9e5c3031-a026-48b3-a153-a70c2e2b78b9"));
 
-        ResourceUtils.getFile("classpath:canned/sample2.xml");
+        f = ResourceUtils.getFile("classpath:canned/sample2.xml");
         content = new String(Files.readAllBytes(f.toPath()));
 
         insertMetadataRecords("830f9a83-ae6b-4260-a82a-24c4851f7119", content);
-        assertEquals("Format is correct", "iso19115-3.2018", geoNetworkService.findFormatterId("830f9a83-ae6b-4260-a82a-24c4851f7119"));
+        assertEquals("Format is correct",
+                AppConstants.FORMAT_ISO19115_3_2018,
+                geoNetworkService.findFormatterId("830f9a83-ae6b-4260-a82a-24c4851f7119"));
+
+        Exception exception = assertThrows(MetadataNotFoundException.class, () -> {
+            geoNetworkService.findFormatterId("NOT_FOUND");
+        });
+
+        assertTrue("Unable to find metadata record with UUID: NOT_FOUND in GeoNetwork".contains(exception.getMessage()));
     }
 }
