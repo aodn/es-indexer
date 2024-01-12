@@ -41,6 +41,10 @@ public class GeoNetworkServiceTests extends BaseTestClass {
         );
     }
 
+    @AfterEach
+    public void clear() throws IOException {
+        clearElasticIndex();
+    }
     /**
      * We need to make sure this works before you can do any meaningful transformation
      *
@@ -68,6 +72,8 @@ public class GeoNetworkServiceTests extends BaseTestClass {
 
             assertFalse("XML equals", d.hasDifferences());
         }
+
+        deleteRecord("9e5c3031-a026-48b3-a153-a70c2e2b78b9");
     }
 
     @Test
@@ -93,6 +99,9 @@ public class GeoNetworkServiceTests extends BaseTestClass {
         });
 
         assertTrue("Unable to find metadata record with UUID: NOT_FOUND in GeoNetwork".contains(exception.getMessage()));
+
+        deleteRecord("830f9a83-ae6b-4260-a82a-24c4851f7119");
+        deleteRecord("9e5c3031-a026-48b3-a153-a70c2e2b78b9");
     }
 
     @Test
@@ -108,6 +117,8 @@ public class GeoNetworkServiceTests extends BaseTestClass {
                 .withTest(xml)
                 .ignoreWhitespace()
                 .ignoreComments()
+                .ignoreElementContentWhitespace()
+                .normalizeWhitespace()
                 .build();
 
         assertFalse("XML equals for 9e5c3031-a026-48b3-a153-a70c2e2b78b9", d.hasDifferences());
@@ -133,5 +144,13 @@ public class GeoNetworkServiceTests extends BaseTestClass {
                 .build();
 
         assertFalse("XML transformed for 830f9a83-ae6b-4260-a82a-24c4851f7119", d.hasDifferences());
+
+        deleteRecord("830f9a83-ae6b-4260-a82a-24c4851f7119");
+        deleteRecord("9e5c3031-a026-48b3-a153-a70c2e2b78b9");
+    }
+
+    @Test
+    public void verifyAllMetadataRecords() throws IOException, InterruptedException  {
+
     }
 }

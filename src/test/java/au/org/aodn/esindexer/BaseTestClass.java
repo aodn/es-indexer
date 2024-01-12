@@ -132,6 +132,13 @@ public class BaseTestClass {
 
     }
 
+    protected String getRecordUrl(String uuid) {
+        return String.format("http://%s:%s/geonetwork/srv/api/records/" + uuid,
+                dockerComposeContainer.getServiceHost(GeoNetworkSearchTestConfig.GN_NAME, GeoNetworkSearchTestConfig.GN_PORT),
+                dockerComposeContainer.getServicePort(GeoNetworkSearchTestConfig.GN_NAME, GeoNetworkSearchTestConfig.GN_PORT));
+
+    }
+
     protected String getGeoNetworkRecordsInsertUrl() {
         String host = String.format("http://%s:%s/geonetwork/srv/api/records?metadataType=METADATA&transformWith=_none_&group=2&uuidProcessing=OVERWRITE&category=",
                 dockerComposeContainer.getServiceHost(GeoNetworkSearchTestConfig.GN_NAME, GeoNetworkSearchTestConfig.GN_PORT),
@@ -180,6 +187,20 @@ public class BaseTestClass {
 
             }
         }
+    }
+
+    public String deleteRecord(String uuid) {
+        HttpEntity<String> requestEntity = getRequestEntity(null);
+
+        ResponseEntity<String> r = testRestTemplate
+                .exchange(
+                        getRecordUrl(uuid),
+                        HttpMethod.DELETE,
+                        requestEntity,
+                        String.class
+                );
+
+        return r.getBody();
     }
 
     public void insertMetadataRecords(String uuid, String xmlContent) throws RestClientException, InterruptedException {
