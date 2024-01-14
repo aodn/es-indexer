@@ -60,14 +60,16 @@ public class GeoNetworkServiceTests extends BaseTestClass {
         Iterable<String> i = geoNetworkService.getAllMetadataRecords();
 
         for(String x : i) {
-            Diff d  = DiffBuilder
+            if(x != null) {
+                Diff d = DiffBuilder
                         .compare(content)
                         .withTest(x)
                         .ignoreWhitespace()
                         .ignoreComments()
                         .build();
 
-            assertFalse("XML equals", d.hasDifferences());
+                assertFalse("XML equals", d.hasDifferences());
+            }
         }
 
         deleteRecord("9e5c3031-a026-48b3-a153-a70c2e2b78b9");

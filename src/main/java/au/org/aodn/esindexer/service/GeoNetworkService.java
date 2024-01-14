@@ -10,6 +10,10 @@ public interface GeoNetworkService {
     String getIndexName();
 
     String searchRecordBy(String uuid);
+    /**
+     * Return Iterable of records, noted that the item inside can be null, so please check null on each item
+     * @return
+     */
     Iterable<String> getAllMetadataRecords();
     /**
      * This function can avoid elastic outsync and achieve what we need here as the only use case is
