@@ -2,6 +2,10 @@ package au.org.aodn.esindexer.service;
 
 import au.org.aodn.esindexer.BaseTestClass;
 import au.org.aodn.esindexer.configuration.GeoNetworkSearchTestConfig;
+import au.org.aodn.esindexer.model.StacCollectionModel;
+import co.elastic.clients.elasticsearch.core.search.Hit;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,6 +26,9 @@ public class IndexerServiceTests extends BaseTestClass {
 
     @Autowired
     protected IndexerServiceImpl indexerService;
+
+    @Autowired
+    protected ObjectMapper objectMapper;
 
     @BeforeAll
     public void setup() {
@@ -91,6 +98,22 @@ public class IndexerServiceTests extends BaseTestClass {
         assertEquals("Doc count correct", 1L, indexerService.getDocumentsCount());
 
         deleteRecord("830f9a83-ae6b-4260-a82a-24c4851f7119");
+        deleteRecord("06b09398-d3d0-47dc-a54a-a745319fbece");
+    }
+
+    @Test
+    public void verifyGetDocumentByUUID() throws IOException {
+        String expected = readResourceFile("classpath:canned/sample3_stac.json");
+
+        insertMetadataRecords("06b09398-d3d0-47dc-a54a-a745319fbece", "classpath:canned/sample3.xml");
+
+        indexerService.indexAllMetadataRecordsFromGeoNetwork(true);
+        Hit<ObjectNode> objectNodeHit = indexerService.getDocumentByUUID("06b09398-d3d0-47dc-a54a-a745319fbece");
+
+        String test = objectNodeHit.source().toPrettyString();
+
+        assertEquals("Stac equals", objectMapper.readTree(expected), objectMapper.readTree(test));
+
         deleteRecord("06b09398-d3d0-47dc-a54a-a745319fbece");
     }
 }

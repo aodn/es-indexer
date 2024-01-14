@@ -1,0 +1,340 @@
+{
+  "title": "IMOS - Animal Tracking Facility - Satellite Relay Tagging Program - Delayed mode data °",
+  "description": "The Animal Tracking Facility (formerly known as the Australian Animal Tracking And Monitoring System (AATAMS)) is a coordinated marine animal tagging project. Satellite Relay Data Loggers (SRDL) (most with CTDs, and some also with fluorometers) are used to explore how marine mammal behaviour relates to their oceanic environment. Loggers developed at the University of St Andrews Sea Mammal Research Unit transmit data in near real time via the Argo satellite system. The Satellite Relay Data Loggers are deployed on marine mammals, including Elephant Seals, Weddell Seals, Australian Fur Seals, Australian Sea Lions, New Zealand Fur Seals. Data is being collected in the Southern Ocean, the Great Australian Bight, and off the South-East Coast of Australia.\n                    This metadata record, represents several different datasets listed hereafter, which can all be accessed through a multi-WFS service. The data represented by this record are presented in delayed mode.\n                    CTD - parameters measured by the instruments include time, conductivity (salinity), temperature, speed, fluorescence (available in the future) and depth.\n                    Diving - parameters measured by the instruments include start and end time and longitude/latitude of each individual dive, post-dive surface duration, dive duration, maximum dive depth, intermediate dive depths and times.\n                    Haulout - a haulout begins when the SRDL has been continuously dry for a specified length of time (usually 10 minutes). It ends when continuously wet for another interval (usually 40 seconds). Haulout data parameters measured by the instruments include haulout start and end dates and longitude/latitude, and haulout number.\n                    Argos locations - location data parameters measured by the instruments include time, longitude, latitude, location quality, along with other diagnostic information provided by Argos (http://www.argos-system.org/).\n                    Summary Statistics - as well as sending records of individual events such as dives and haulouts, the SRDL also calculates summary statistics of those events over a specified time period (usually 3, 4 or 6 hours). Summary statistics computed by the instruments include the proportion of time spent diving, at the surface and hauled-out, the number of dives, and the average, standard deviation and maximum dive duration and dive depth during each summary period. These statistics are based on all the data recorded by the SRDL and so are not prone to distortion by variations in the efficiency of transmission via Argos.\n\n                    ** For data after October 2018, please consult IMOS - Animal Tracking Facility - Satellite Relay Tagging Program - Delayed mode data with quality-controlled locations (https://catalogue-imos.aodn.org.au:443/geonetwork/srv/api/records/70f148b1-7040-4fad-944a-456413c95472), to access data with improved satellite locations. In the near future all historical delayed mode data will be reprocessed with the new quality control (QC) process, to improve the accuracy of the satellite location data, and this dataset will be replaced by the new QC’d one. **",
+  "extent": {
+    "temporal": [
+      [
+        "2007-03-26T06:00:00Z",
+        "2019-11-29T13:00:00Z"
+      ],
+      [
+        "2007-03-26T06:00:00Z",
+        "2019-11-29T13:00:00Z"
+      ]
+    ]
+  },
+  "summaries": {
+    "score": 90,
+    "status": "completed",
+    "scope": {
+      "code": "dataset",
+      "name": "IMOS dataset level record"
+    },
+    "dataset_provider": "IMOS",
+    "temporal": [
+      {
+        "start": "2007-03-26T06:00:00Z",
+        "end": "2019-11-29T13:00:00Z"
+      }
+    ]
+  },
+  "contacts": [
+    {
+      "emails": [
+        "robert.harcourt@mq.edu.au"
+      ],
+      "addresses": [
+        {
+          "deliveryPoint": [
+            "Marine Predator Research Group, Department of Biological Sciences",
+            "Macquarie University"
+          ],
+          "country": "Australia",
+          "city": "North Ryde",
+          "postalCode": "2109",
+          "administrativeArea": "New South Wales"
+        }
+      ],
+      "roles": "principalInvestigator",
+      "organization": "Department of Biological Sciences, Macquarie University",
+      "name": "Harcourt, Rob",
+      "phones": [],
+      "links": [
+        {
+          "href": "http://web.science.mq.edu.au/directory/listing/person.htm?id=rharcour",
+          "title": "Maquarie University staff profile for Rob Harcourt",
+          "type": "WWW:LINK-1.0-http--link"
+        }
+      ],
+      "position": "Animal Tracking Facility Leader"
+    }
+  ],
+  "languages": [
+    {
+      "code": "eng",
+      "name": "English"
+    }
+  ],
+  "links": [
+    {
+      "href": "http://imos.org.au/animaltracking.html",
+      "rel": "self",
+      "type": "text/html",
+      "title": "Animal Tracking Facility page on IMOS website"
+    },
+    {
+      "href": "https://portal.aodn.org.au/search?uuid=06b09398-d3d0-47dc-a54a-a745319fbece",
+      "rel": "self",
+      "type": "text/html",
+      "title": "View and download data though the AODN Portal"
+    },
+    {
+      "href": "http://oceancurrent.imos.org.au/aatams.php",
+      "rel": "self",
+      "type": "",
+      "title": "View profile plots from Oceancurrent SealCTDs page"
+    },
+    {
+      "href": "http://geoserver-123.aodn.org.au/geoserver/wms",
+      "rel": "self",
+      "type": "",
+      "title": "imos:aatams_sattag_dm_profile_map"
+    },
+    {
+      "href": "http://geoserver-123.aodn.org.au/geoserver/ows",
+      "rel": "self",
+      "type": "",
+      "title": "aatams_sattag_dm_profile_data"
+    },
+    {
+      "href": "http://geoserver-123.aodn.org.au/geoserver/ows",
+      "rel": "self",
+      "type": "",
+      "title": "aatams_sattag_dm_location_data"
+    },
+    {
+      "href": "http://geoserver-123.aodn.org.au/geoserver/ows",
+      "rel": "self",
+      "type": "",
+      "title": "aatams_sattag_dm_dive_profile_data"
+    },
+    {
+      "href": "http://geoserver-123.aodn.org.au/geoserver/ows",
+      "rel": "self",
+      "type": "",
+      "title": "aatams_sattag_dm_haulout_data"
+    },
+    {
+      "href": "http://geoserver-123.aodn.org.au/geoserver/ows",
+      "rel": "self",
+      "type": "",
+      "title": "aatams_sattag_dm_summary_data"
+    },
+    {
+      "href": "https://help.aodn.org.au/web-services/ogc-wfs/",
+      "rel": "self",
+      "type": "text/html",
+      "title": "OGC WFS help documentation"
+    }
+  ],
+  "license": "Creative Commons Attribution 4.0 International License",
+  "providers": [
+    {
+      "name": "Integrated Marine Observing System (IMOS)",
+      "roles": [
+        "distributor"
+      ],
+      "url": "http://imos.org.au/aodn.html"
+    }
+  ],
+  "themes": [
+    {
+      "concepts": [
+        {
+          "id": "Oceans | Ocean Temperature | Water Temperature"
+        },
+        {
+          "id": "Oceans | Salinity/density | Conductivity"
+        },
+        {
+          "id": "Oceans | Marine Biology | Marine Mammals"
+        },
+        {
+          "id": "Oceans | Marine Biology | Marine Birds"
+        }
+      ],
+      "scheme": "",
+      "description": "GCMD",
+      "title": "NASA/Global Change Master Directory Earth Science Keywords Version 5.3.8"
+    },
+    {
+      "concepts": [
+        {
+          "id": "Satellite Tag"
+        },
+        {
+          "id": "CTD Satellite Relay Data Logger"
+        },
+        {
+          "id": "Agency | SMRU | Sea Mammal Research Unit"
+        }
+      ],
+      "scheme": "",
+      "description": "IMOS",
+      "title": "IMOS Keywords Thesaurus"
+    },
+    {
+      "concepts": [
+        {
+          "id": "Tags and Tracking Devices"
+        }
+      ],
+      "scheme": "theme",
+      "description": "",
+      "title": "Marine Community Profile of ISO19115 v1.4 Collection Methods Vocabulary (Annex C.1.3)"
+    },
+    {
+      "concepts": [
+        {
+          "id": "Global / Oceans | Atlantic Ocean"
+        },
+        {
+          "id": "Global / Oceans | Southern Ocean"
+        },
+        {
+          "id": "Global / Oceans | Indian Ocean"
+        },
+        {
+          "id": "Global / Oceans | Pacific Ocean"
+        },
+        {
+          "id": "Marine Features (Australia) | Great Australian Bight, SA/WA"
+        },
+        {
+          "id": "Marine Features (Australia) | Bass Strait, TAS/VIC"
+        },
+        {
+          "id": "Regional Seas | Coral Sea"
+        },
+        {
+          "id": "Regional Seas | Tasman Sea"
+        }
+      ],
+      "scheme": "place",
+      "description": "",
+      "title": "AODN Geographic Extents Vocabulary"
+    },
+    {
+      "concepts": [
+        {
+          "id": "Continents | Antarctica"
+        },
+        {
+          "id": "Countries | Australia"
+        },
+        {
+          "id": "Countries | New Zealand"
+        },
+        {
+          "id": "Offshore Islands (Australia) | Heard & McDonald Islands"
+        },
+        {
+          "id": "Offshore Islands (Australia) | Macquarie Island"
+        },
+        {
+          "id": "States, Territories (Australia) | Western Australia"
+        },
+        {
+          "id": "States, Territories (Australia) | South Australia"
+        },
+        {
+          "id": "States, Territories (Australia) | Victoria"
+        },
+        {
+          "id": "States, Territories (Australia) | Tasmania"
+        },
+        {
+          "id": "States, Territories (Australia) | New South Wales"
+        }
+      ],
+      "scheme": "place",
+      "description": "",
+      "title": "AODN Geographic Extents Vocabulary"
+    },
+    {
+      "concepts": [
+        {
+          "id": "land-sea mammals",
+          "url": "http://vocab.nerc.ac.uk/collection/L06/current/77"
+        }
+      ],
+      "scheme": "theme",
+      "description": "",
+      "title": "AODN Platform Vocabulary"
+    },
+    {
+      "concepts": [
+        {
+          "id": "Temperature of the water body",
+          "url": "http://vocab.nerc.ac.uk/collection/P01/current/TEMPPR01"
+        },
+        {
+          "id": "Practical salinity of the water body",
+          "url": "http://vocab.nerc.ac.uk/collection/P01/current/PSLTZZ01"
+        },
+        {
+          "id": "Pressure (measured variable) in the water body exerted by overlying sea water and any medium above it",
+          "url": "http://vocab.aodn.org.au/def/discovery_parameter/entity/565"
+        }
+      ],
+      "scheme": "theme",
+      "description": "",
+      "title": "AODN Discovery Parameter Vocabulary"
+    },
+    {
+      "concepts": [
+        {
+          "id": "Latitude north",
+          "url": "http://vocab.nerc.ac.uk/collection/P01/current/ALATZZ01"
+        },
+        {
+          "id": "Longitude east",
+          "url": "http://vocab.nerc.ac.uk/collection/P01/current/ALONZZ01"
+        }
+      ],
+      "scheme": "theme",
+      "description": "",
+      "title": "AODN Sampling Parameter Vocabulary"
+    },
+    {
+      "concepts": [
+        {
+          "id": "water temperature sensor",
+          "url": "http://vocab.nerc.ac.uk/collection/L05/current/134"
+        },
+        {
+          "id": "CTD",
+          "url": "http://vocab.nerc.ac.uk/collection/L05/current/130"
+        },
+        {
+          "id": "SMRU Ltd Satellite Relay Data Logger 9000x",
+          "url": "http://vocab.nerc.ac.uk/collection/L22/current/TOOL0719"
+        }
+      ],
+      "scheme": "theme",
+      "description": "",
+      "title": "AODN Instrument Vocabulary"
+    },
+    {
+      "concepts": [
+        {
+          "id": "Animal Tagging Sub-Facility, Integrated Marine Observing System (IMOS)",
+          "url": "http://vocab.aodn.org.au/def/organisation/entity/497"
+        }
+      ],
+      "scheme": "discipline",
+      "description": "",
+      "title": "AODN Organisation Vocabulary"
+    }
+  ],
+  "id": "06b09398-d3d0-47dc-a54a-a745319fbece",
+  "type": "Collection",
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/contacts/v0.1.1/schema.json",
+    "https://stac-extensions.github.io/projection/v1.1.0/schema.json",
+    "https://stac-extensions.github.io/language/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/themes/v1.0.0/schema.json"
+  ]
+}

@@ -217,9 +217,13 @@ public class BaseTestClass {
         return r.getBody();
     }
 
-    public String insertMetadataRecords(String uuid, String path) throws RestClientException, IOException {
+    public String readResourceFile(String path) throws IOException {
         File f = ResourceUtils.getFile(path);
-        String content = new String(Files.readAllBytes(f.toPath()));
+        return new String(Files.readAllBytes(f.toPath()));
+    }
+
+    public String insertMetadataRecords(String uuid, String path) throws RestClientException, IOException {
+        String content = readResourceFile(path);
 
         HttpEntity<String> requestEntity = getRequestEntity(Optional.empty(), null, content);
 
