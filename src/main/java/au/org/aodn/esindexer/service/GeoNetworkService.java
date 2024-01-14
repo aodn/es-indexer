@@ -10,7 +10,19 @@ public interface GeoNetworkService {
     String getIndexName();
 
     String searchRecordBy(String uuid);
-
-    long getMetadataRecordsCount();
     Iterable<String> getAllMetadataRecords();
+    /**
+     * This function can avoid elastic outsync and achieve what we need here as the only use case is
+     * check if there is only 1 document in elastic.
+     *
+     * Orginally, we define long getMetadataRecordsCount(); but this is not reliable implemented.
+     *
+     * The total record return by elastic can be outdated if you query immediately after insert or delete,
+     * you can call reindex but that require you to have privilege permission aka user/password to geonetwork.
+     * Given the only use case here can be re-write with different function, this method is removed.
+     *
+     * @param c
+     * @return
+     */
+    boolean isMetadataRecordsCountLessThan(int c);
 }

@@ -138,19 +138,32 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
         }
     }
 
+    @Override
+    public boolean isMetadataRecordsCountLessThan(int c) {
 
-    public long getMetadataRecordsCount() {
-        try {
-            // TODO: Can the elastic index not update after insert dataset into GeoNetwork?
-            final SearchResponse<ObjectNode> response = gn4ElasticClient.search(GEONETWORK_ALL_COUNT, ObjectNode.class);
-            logger.debug("Metadata count details {}", response);
-            return response.hits().total().value();
+        if(c < 1) {
+            throw new IllegalArgumentException("Compare value less then 1 do not make sense");
         }
-        catch (IOException e) {
-            throw new RuntimeException("Failed to fetch data from the API", e);
+
+        int count = 0;
+        Iterable<String> i = this.getAllMetadataRecords();
+
+        for(String s : i) {
+            if(s != null) {
+                // Null if elastic outsync with geonetwork, that is value deleted in
+                // geonetwork but elastic have not re-index.
+                count++;
+            }
+
+            if(count >= c) {
+                return false;
+            }
         }
+
+        return true;
     }
 
+    @Override
     public Iterable<String> getAllMetadataRecords() {
 
         try {

@@ -103,8 +103,7 @@ public class IndexerServiceImpl implements IndexerService {
          * compare if GeoNetwork has 1 only metadata (the recently added one which triggered the indexer)
          * and the portal index has more than 0 documents (the most recent metadata yet indexed to portal index at this point)
          */
-        long count = geoNetworkResourceService.getMetadataRecordsCount();
-        return count == 1 && portalIndexDocumentsCount > 0;
+        return geoNetworkResourceService.isMetadataRecordsCountLessThan(2) && portalIndexDocumentsCount > 0;
     }
 
     protected boolean isMetadataPublished(String uuid) {

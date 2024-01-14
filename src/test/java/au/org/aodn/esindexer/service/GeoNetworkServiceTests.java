@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.util.ResourceUtils;
-import org.testcontainers.containers.DockerComposeContainer;
 import org.xmlunit.builder.DiffBuilder;
 import org.xmlunit.diff.Diff;
 
@@ -49,12 +48,14 @@ public class GeoNetworkServiceTests extends BaseTestClass {
      */
     @Test
     @Order(1)
-    public void verifyInsertMetadataWorks() throws IOException, InterruptedException {
+    public void verifyInsertMetadataWorks() throws IOException {
 
         String content = insertMetadataRecords("9e5c3031-a026-48b3-a153-a70c2e2b78b9", "classpath:canned/sample1.xml");
 
         logger.debug("Get count in verifyInsertMetadataWorks");
-        assertEquals("Count is 1", 1, geoNetworkService.getMetadataRecordsCount());
+
+        assertFalse("Compare false", geoNetworkService.isMetadataRecordsCountLessThan(1));
+        assertTrue("Compare true", geoNetworkService.isMetadataRecordsCountLessThan(2));
 
         Iterable<String> i = geoNetworkService.getAllMetadataRecords();
 
