@@ -15,13 +15,9 @@ import co.elastic.clients.elasticsearch.indices.CreateIndexRequest;
 import co.elastic.clients.elasticsearch.indices.CreateIndexResponse;
 import co.elastic.clients.json.JsonData;
 import co.elastic.clients.transport.endpoints.BooleanResponse;
-import co.elastic.clients.util.BinaryData;
-import co.elastic.clients.util.ContentType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import jakarta.xml.bind.JAXBException;
-import org.apache.commons.io.IOUtils;
-import org.json.JSONObject;
 import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.operation.TransformException;
 import org.slf4j.Logger;
@@ -36,13 +32,14 @@ import au.org.aodn.esindexer.model.StacCollectionModel;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+
 import java.util.Objects;
 
 @Service
 public class IndexerServiceImpl implements IndexerService {
 
     @Autowired
-    GeoNetworkResourceService geoNetworkResourceService;
+    GeoNetworkService geoNetworkResourceService;
 
     @Autowired
     ElasticsearchClient portalElasticsearchClient;
@@ -76,8 +73,6 @@ public class IndexerServiceImpl implements IndexerService {
 
     public Hit<ObjectNode> getDocumentByUUID(String uuid) throws IOException {
         try {
-            /* Return JSONObject type won't work, hence return ObjectNode type which supported by Elasticsearch JAVA API,
-            there's no need to convert returned ObjectNode to JSONObject as well */
             SearchResponse<ObjectNode> response = portalElasticsearchClient.search(s -> s
                 .index(indexName)
                 .query(q -> q
@@ -104,17 +99,22 @@ public class IndexerServiceImpl implements IndexerService {
     }
 
     protected boolean isGeoNetworkInstanceReinstalled(long portalIndexDocumentsCount) {
-        /* compare if GeoNetwork has 1 only metadata (the recently added one which triggered the indexer)
-            and the portal index has more than 0 documents (the most recent metadata yet indexed to portal index at this point)
-            */
-        int geoNetworkResourceServiceMetadataRecordsCount = geoNetworkResourceService.getMetadataRecordsCount();
-        return geoNetworkResourceServiceMetadataRecordsCount == 1 && portalIndexDocumentsCount > 0;
+        /**
+         * compare if GeoNetwork has 1 only metadata (the recently added one which triggered the indexer)
+         * and the portal index has more than 0 documents (the most recent metadata yet indexed to portal index at this point)
+         */
+        return geoNetworkResourceService.isMetadataRecordsCountLessThan(2) && portalIndexDocumentsCount > 0;
     }
 
     protected boolean isMetadataPublished(String uuid) {
         /* read for the published status from GN Elasticsearch index, the flag is not part of the XML body */
-        JSONObject elasticSearchMetadataValues = geoNetworkResourceService.searchMetadataRecordByUUIDFromGNRecordsIndex(uuid);
-        return elasticSearchMetadataValues.get("isPublishedToAll").equals("true");
+        try {
+            geoNetworkResourceService.searchRecordBy(uuid);
+            return true;
+        }
+        catch(MetadataNotFoundException e) {
+            return false;
+        }
     }
 
     protected void deleteIndexStore() {
@@ -130,7 +130,7 @@ public class IndexerServiceImpl implements IndexerService {
         }
     }
 
-    protected JSONObject getMappedMetadataValues(String metadataValues) throws IOException, FactoryException, TransformException, JAXBException {
+    protected StacCollectionModel getMappedMetadataValues(String metadataValues) throws IOException, FactoryException, TransformException, JAXBException {
         MDMetadataType metadataType = jaxbUtils.unmarshal(metadataValues);
 
         StacCollectionModel stacCollectionModel = mapper.mapToSTACCollection(metadataType);
@@ -149,16 +149,15 @@ public class IndexerServiceImpl implements IndexerService {
 
         stacCollectionModel.getSummaries().setScore(score);
 
-        return new JSONObject(objectMapper.writerWithDefaultPrettyPrinter()
-                .writeValueAsString(stacCollectionModel));
+        return stacCollectionModel;
     }
 
     public ResponseEntity<String> indexMetadata(String metadataValues) {
         try {
-            JSONObject mappedMetadataValues = this.getMappedMetadataValues(metadataValues);
+            StacCollectionModel mappedMetadataValues = this.getMappedMetadataValues(metadataValues);
             IndexRequest<JsonData> req;
 
-            String uuid = mappedMetadataValues.getString("id");
+            String uuid = mappedMetadataValues.getUuid();
             long portalIndexDocumentsCount;
 
             // count portal index documents, or create index if not found from defined mapping JSON file
@@ -180,10 +179,12 @@ public class IndexerServiceImpl implements IndexerService {
 
             // index the metadata if it is published
             if (this.isMetadataPublished(uuid)) {
-                try {
+                try(InputStream is = new ByteArrayInputStream(objectMapper.writeValueAsBytes(mappedMetadataValues))) {
                     logger.info("Ingesting a new metadata with UUID: " + uuid + " to index: " + indexName);
                     logger.info("{}", mappedMetadataValues);
-                    req = IndexRequest.of(b -> b.index(indexName).withJson(new ByteArrayInputStream(mappedMetadataValues.toString().getBytes())));
+                    req = IndexRequest.of(b -> b
+                            .index(indexName)
+                            .withJson(is));
 
                     IndexResponse response = portalElasticsearchClient.index(req);
                     logger.info("Metadata with UUID: " + uuid + " indexed with version: " + response.version());
@@ -232,9 +233,16 @@ public class IndexerServiceImpl implements IndexerService {
                     .index(indexName)
                     .id(doc.id())
             );
+
             logger.info("Document with UUID: " + uuid + " deleted from index: " + indexName);
+
+            // Flush after insert, otherwise you need to wait for next auto-refresh. It is
+            // especially a problem with autotest, where assert happens very fast.
+            portalElasticsearchClient.indices().refresh();
+
             return ResponseEntity.status(HttpStatus.OK).body(response.toString());
-        } catch (DocumentNotFoundException e) {
+        }
+        catch (DocumentNotFoundException e) {
             logger.info("Document with UUID: " + uuid + " not found in index: " + indexName + ", skip deleting");
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
         }
@@ -252,42 +260,43 @@ public class IndexerServiceImpl implements IndexerService {
         logger.info("Indexing all metadata records from GeoNetwork");
 
         for (String metadataRecord : geoNetworkResourceService.getAllMetadataRecords()) {
-            try {
-                // get mapped metadata values from GeoNetwork to STAC collection schema
-                JSONObject mappedMetadataValues = this.getMappedMetadataValues(metadataRecord);
+            if(metadataRecord != null) {
+                try {
+                    // get mapped metadata values from GeoNetwork to STAC collection schema
+                    StacCollectionModel mappedMetadataValues = this.getMappedMetadataValues(metadataRecord);
 
-                logger.debug("Final output json is {}", mappedMetadataValues);
+                    // convert mapped values to binary data
+                    logger.debug("Ingested json is {}", objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(mappedMetadataValues));
 
-                // convert mapped values to binary data
-                ByteArrayInputStream input = new ByteArrayInputStream(mappedMetadataValues.toString().getBytes());
-                BinaryData data = BinaryData.of(IOUtils.toByteArray(input), ContentType.APPLICATION_JSON);
+                    // send bulk request to Elasticsearch
+                    bulkRequest.operations(op -> op
+                            .index(idx -> idx
+                                    .index(indexName)
+                                    .document(mappedMetadataValues)
+                            )
+                    );
 
-                // send bulk request to Elasticsearch
-                bulkRequest.operations(op -> op
-                    .index(idx -> idx
-                        .index(indexName)
-                        .document(data)
-                    )
-                );
-
-                logger.info("Ingested a new metadata document with UUID: " + mappedMetadataValues.getString("id"));
-
-            } catch (FactoryException | JAXBException | TransformException e) {
+                } catch (FactoryException | JAXBException | TransformException e) {
                 /* it will reach here if cannot extract values of all the keys in GeoNetwork metadata JSON
                 or ID is not found, which is fatal.
                 * */
-                logger.error("Error extracting values from GeoNetwork metadata JSON: " + metadataRecord);
+                    logger.error("Error extracting values from GeoNetwork metadata JSON: " + metadataRecord);
+                }
             }
         }
 
         BulkResponse result = portalElasticsearchClient.bulk(bulkRequest.build());
+
+        // Flush after insert, otherwise you need to wait for next auto-refresh. It is
+        // especially a problem with autotest, where assert happens very fast.
+        portalElasticsearchClient.indices().refresh();
 
         // Log errors, if any
         if (result.errors()) {
             logger.error("Bulk had errors");
             for (BulkResponseItem item: result.items()) {
                 if (item.error() != null) {
-                    logger.error(item.error().reason());
+                    logger.error("{} {}", item.error().reason(), item.error().causedBy());
                 }
             }
         } else {

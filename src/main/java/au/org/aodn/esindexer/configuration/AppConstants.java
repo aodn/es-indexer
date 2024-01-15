@@ -6,4 +6,7 @@ public interface AppConstants {
     String STAC_TYPE = "Collection";
 
     String RECOMMENDED_LINK_REL_TYPE = "self";
+
+    String FORMAT_XML = "xml";
+    String FORMAT_ISO19115_3_2018 = "iso19115-3.2018";
 }

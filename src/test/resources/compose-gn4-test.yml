@@ -1,0 +1,61 @@
+version: '3.9'
+
+# start a test instance of gn4 and elastic search 7 that required by gn4, it is better to debug this by
+# first start this compose locally and make sure it works before you run it with the autotest. That makes
+# your debug easier.
+services:
+  elastic:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.12
+    environment:
+      - ES_JAVA_OPTS=-Xms4g -Xmx4g
+      - ELASTIC_PASSWORD=password
+      - xpack.security.enabled=true
+      - discovery.type=single-node
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "curl -s http://elastic:9200 | grep -q 'missing authentication credentials'",
+        ]
+      interval: 10s
+      timeout: 10s
+      retries: 120
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.17.12
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elastic:9200
+      - ELASTICSEARCH_USERNAME=elastic
+      - ELASTICSEARCH_PASSWORD=password
+      - ENTERPRISESEARCH_HOST=http://enterprise-search:3002
+    depends_on:
+      elastic:
+        condition: service_healthy
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "curl -s -I http://kibana:5601 | grep -q 'HTTP/1.1 302 Found'",
+        ]
+      interval: 10s
+      timeout: 10s
+      retries: 120
+
+  geonetwork:
+    image: geonetwork:4.2.5
+    restart: always
+    # https://github.com/docker/compose/issues/8154
+    depends_on:
+      kibana:
+        condition: service_healthy
+    environment:
+      ES_PROTOCOL: ${ES_PROTOCOL:-http}
+      ES_HOST: ${ES_HOST:-elastic}
+      ES_PORT: ${ES_PORT:-9200}
+      ES_USERNAME: ${ES_USERNAME:-elastic}
+      ES_PASSWORD: ${ES_PASSWORD:-password}
+      KB_URL: ${KB_URL:-http://kibana:5601}
+    # If you want to debug this yml, you can uncomment the port mapping
+    # however port is of no use when running in testcontainer
+    # ports:
+    #  - 8080:8080

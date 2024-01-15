@@ -1,30 +1,38 @@
 package au.org.aodn.esindexer.service;
 
+import au.org.aodn.esindexer.BaseTestClass;
 import au.org.aodn.esindexer.model.ContactsModel;
 import au.org.aodn.esindexer.model.ExtentModel;
 import au.org.aodn.esindexer.model.LinkModel;
 import au.org.aodn.esindexer.model.StacCollectionModel;
 import au.org.aodn.esindexer.model.ThemesModel;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.condition.EnabledIfSystemProperty;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Spy;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-@SpringBootTest
-@RunWith(SpringRunner.class)
-//@EnabledIfSystemProperty(named = "spring.profiles.active", matches="test")
-class RankingServiceTests {
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ActiveProfiles("test")
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+class RankingServiceTests extends BaseTestClass {
+
+    @AfterAll
+    public void clear() throws IOException {
+        super.clearElasticIndex();
+    }
 
     @Spy
     @InjectMocks
@@ -39,7 +47,6 @@ class RankingServiceTests {
         extentModel = ExtentModel.builder().build();
         stacCollectionModel.setExtent(extentModel);
     }
-
 
     @Test
     public void testNotFound() {

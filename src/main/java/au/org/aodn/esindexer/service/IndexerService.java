@@ -1,4 +1,5 @@
 package au.org.aodn.esindexer.service;
+
 import co.elastic.clients.elasticsearch.core.search.Hit;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import jakarta.xml.bind.JAXBException;

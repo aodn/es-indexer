@@ -55,7 +55,7 @@ public class GeometryBase {
             List<List<GMObjectPropertyType>> input = rawInput.stream()
                     .filter(f -> f instanceof EXBoundingPolygonType)
                     .map(m -> (EXBoundingPolygonType) m)
-                    .map(m -> m.getPolygon())
+                    .map(EXBoundingPolygonType::getPolygon)
                     .toList();
 
             for (List<GMObjectPropertyType> i : input) {

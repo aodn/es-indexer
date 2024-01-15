@@ -8,14 +8,10 @@ server:
 
 elasticsearch:
   index:
-    name: sample-portal-records
+    name: dev_portal_records
   serverUrl: http://localhost:9200
   apiKey: sample-api-key
 
-geonetwork:
-  host:  http://localhost:8080/geonetwork
-
 logging:
   level:
-    org.hibernate.SQL: DEBUG
-    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    au.org.aodn.esindexer: DEBUG

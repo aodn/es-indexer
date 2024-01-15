@@ -1,12 +1,11 @@
 package au.org.aodn.esindexer.controller;
 
 import au.org.aodn.esindexer.service.IndexerService;
-import au.org.aodn.esindexer.service.GeoNetworkResourceService;
+import au.org.aodn.esindexer.service.GeoNetworkService;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.xml.bind.JAXBException;
-import org.json.JSONObject;
 import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.operation.TransformException;
 import org.slf4j.Logger;
@@ -28,21 +27,21 @@ public class IndexerController {
     IndexerService indexerService;
 
     @Autowired
-    GeoNetworkResourceService geonetworkResourceService;
+    GeoNetworkService geonetworkResourceService;
 
-    @GetMapping(path="/gn_records/{uuid}", produces = "application/json")
-    @Operation(description = "Get a document from GeoNetwork Elasticsearch by UUID")
-    public ResponseEntity getMetadataRecordFromGeoNetworkElasticsearchByUUID(@PathVariable("uuid") String uuid) {
-        logger.info("getting a document by UUID: " + uuid);
-        JSONObject response =  geonetworkResourceService.searchMetadataRecordByUUIDFromGNRecordsIndex(uuid);
-        return ResponseEntity.status(HttpStatus.OK).body(response.toString());
-    }
+//    @GetMapping(path="/gn_records/{uuid}", produces = "application/json")
+//    @Operation(description = "Get a document from GeoNetwork Elasticsearch by UUID")
+//    public ResponseEntity getMetadataRecordFromGeoNetworkElasticsearchByUUID(@PathVariable("uuid") String uuid) {
+//        logger.info("getting a document by UUID: " + uuid);
+//        JSONObject response =  geonetworkResourceService.searchMetadataBy(uuid);
+//        return ResponseEntity.status(HttpStatus.OK).body(response.toString());
+//    }
 
     @GetMapping(path="/records/{uuid}", produces = "application/json")
     @Operation(description = "Get a document from GeoNetwork by UUID directly - JSON format response")
     public ResponseEntity getMetadataRecordFromGeoNetworkByUUID(@PathVariable("uuid") String uuid) {
         logger.info("getting a document by UUID: " + uuid);
-        String response =  geonetworkResourceService.searchMetadataRecordByUUIDFromGN4(uuid);
+        String response =  geonetworkResourceService.searchRecordBy(uuid);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
@@ -63,7 +62,7 @@ public class IndexerController {
     @PostMapping(path="/{uuid}", produces = "application/json")
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Index a metadata record by UUID")
     public ResponseEntity<String> addDocumentByUUID(@PathVariable("uuid") String uuid) throws IOException, FactoryException, JAXBException, TransformException {
-        String metadataValues = geonetworkResourceService.searchMetadataRecordByUUIDFromGN4(uuid);
+        String metadataValues = geonetworkResourceService.searchRecordBy(uuid);
         return indexerService.indexMetadata(metadataValues);
     }
 
