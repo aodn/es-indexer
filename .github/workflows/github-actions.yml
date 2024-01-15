@@ -1,5 +1,5 @@
 # This is a basic workflow to help you get started with Actions
-name: Connect to an AWS role from a GitHub repository
+name: Build & Deploy - Dev
 
 # Controls when the action will run. Invokes the workflow on push events but only for the main branch
 on:
@@ -28,7 +28,7 @@ permissions:
   contents: read    # This is required for actions/checkout
 
 jobs:
-  AWS-ECR-ECS-Deploy:
+  build-deploy:
     runs-on: ubuntu-latest
     environment: development
     steps:
@@ -41,6 +41,7 @@ jobs:
           role-to-assume: ${{ secrets.ROLE_ARN }}
           role-session-name: GitHub_to_AWS_via_FederatedOIDC
           aws-region: ${{ vars.AWS_REGION }}
+
       # Hello from AWS: WhoAmI
       - name: Sts GetCallerIdentity
         run: |
@@ -105,7 +106,8 @@ jobs:
         id: prep
         run: |
           BRANCH=${GITHUB_REF##*/}
-          TS=$(date +%s)
+          TS=$(date +%F%H%M%S | sed 's/-//g')
+          echo "TimeStamp=$TS"
           REVISION=${GITHUB_SHA::8}
           BUILD_ID="${BRANCH}-${REVISION}-${TS}"
           LATEST_ID=canary
@@ -116,6 +118,32 @@ jobs:
           echo "BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
           echo "LATEST_ID=$LATEST_ID"
           echo "BUILD_ID=$BUILD_ID" >> $GITHUB_OUTPUT
+
+      - name: Get and calculate latest package version - AWS CodeArtifact
+        id: ca-getversion
+        env:
+          BUILD_ID: ${{ steps.prep.outputs.BUILD_ID }}
+        run: |
+          FLAG_INITIAL=false
+          
+          CURRENT_VERSION=$(aws codeartifact list-package-versions --domain $CA_DOMAIN --repository $CA_REPO --format generic --package $CA_PACKAGE --namespace $CA_NAMESPACE --query defaultDisplayVersion | jq -r ".")
+          echo "current version: $CURRENT_VERSION"
+          
+          if [ -z "$CURRENT_VERSION" ] || [ "$CURRENT_VERSION" == "null" ]; then
+            CURRENT_VERSION="1.0.0"
+            FLAG_INITIAL=true
+          fi
+          IFS='.' read -ra version_parts <<< "$CURRENT_VERSION"
+          MAJOR=${version_parts[0]}
+          MINOR=${version_parts[1]}
+          NEW_MINOR=$((MINOR + 1))
+          if [ "$FLAG_INITIAL" == "true" ]; then
+            NEW_MINOR="0"
+          fi
+          
+          #version format[major.minor.build_number] 
+          #build_number format{BRANCH}-${REVISION}-${TS}
+          echo "latest_version=v$MAJOR.$NEW_MINOR.${{ env.BUILD_ID }}" >> $GITHUB_OUTPUT
 
       - name: Checkout
         uses: actions/checkout@v3
@@ -134,7 +162,7 @@ jobs:
       - name: Build and tag image
         id: build-image
         env:
-          IMAGE_TAG: ${{ steps.prep.outputs.BUILD_ID }}
+          IMAGE_TAG: ${{ steps.ca-getversion.outputs.latest_version }}
         run: |
           # Build a docker container and
           # be deployed to ECS.
@@ -158,8 +186,7 @@ jobs:
       - name: Push image to Amazon ECR
         id: push-image
         env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          IMAGE_TAG: ${{ steps.prep.outputs.BUILD_ID }}
+          IMAGE_TAG: ${{ steps.ca-getversion.outputs.latest_version }}
         run: |
           # Build a docker container and
           # be deployed to ECS.
@@ -209,31 +236,6 @@ jobs:
             else
               echo "Deployment successfull."
             fi
-
-      - name: Get and calculate latest package version - AWS CodeArtifact
-        id: ca-getversion
-        env:
-          BUILD_ID: ${{ steps.prep.outputs.BUILD_ID }}
-        run: |
-          FLAG_INITIAL=false
-          
-          CURRENT_VERSION=$(aws codeartifact list-package-versions --domain $CA_DOMAIN --repository $CA_REPO --format generic --package $CA_PACKAGE --namespace $CA_NAMESPACE --query defaultDisplayVersion | jq -r ".")
-          echo "current version: $CURRENT_VERSION"
-          
-          if [ -z "$CURRENT_VERSION" ]; then
-            CURRENT_VERSION="1.0.0"
-            FLAG_INITIAL=true
-          fi
-          IFS='.' read -ra version_parts <<< "$CURRENT_VERSION"
-          MAJOR=${version_parts[0]}
-          MINOR=${version_parts[1]}
-          NEW_MINOR=$((MINOR + 1))
-          if [ "$FLAG_INITIAL" == "true" ]; then
-            NEW_MINOR="0"
-          fi
-          #version format[major.minor.build_number] 
-          #build_number format{BRANCH}-${REVISION}-${TS} 
-          echo "latest_version=$MAJOR.$NEW_MINOR.${{ env.BUILD_ID }}" >> $GITHUB_OUTPUT
 
       - name: Publish JAR file - AWS CodeArtifact
         id: ca-deploy
