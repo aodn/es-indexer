@@ -37,8 +37,6 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
 
     protected final SearchRequest GEONETWORK_ALL_UUID;
 
-    protected final SearchRequest GEONETWORK_ALL_COUNT;
-
     protected String indexName;
 
     protected String server;
@@ -64,16 +62,6 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
                         .filter(f -> f.includes("uuid")))           // Only select uuid field
                 .build();
         logger.info("GEONETWORK_ALL_UUID -> {}", GEONETWORK_ALL_UUID);
-
-        GEONETWORK_ALL_COUNT = new SearchRequest.Builder()
-                .index(indexName)
-                //.size(0)            // Do not return value, use count is enough
-                .query(new MatchAllQuery.Builder().build()._toQuery())    // Match all
-                .source(s -> s
-                        .filter(f -> f.includes("uuid")))           // Only select uuid field
-                .build();
-
-        logger.info("GEONETWORK_ALL_COUNT -> {}", GEONETWORK_ALL_COUNT);
 
         setIndexName(indexName);
         setServer(server);
