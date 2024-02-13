@@ -59,7 +59,13 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
                 .index(indexName)
                 .query(new MatchAllQuery.Builder().build()._toQuery())    // Match all
                 .source(s -> s
-                        .filter(f -> f.includes("uuid")))           // Only select uuid field
+                        .filter(f -> f.includes("uuid")))// Only select uuid field
+                // TODO: redesign the iterator to be more efficient
+                /* by default ES will return just 10 top hits (10 records of the thousands available records),
+                the iterator implementation in getAllMetadataRecords() method will help saving memory but process those 10 records only,
+                need to temporarily increase the size of returning hits
+                 */
+                .size(2000)
                 .build();
         logger.info("GEONETWORK_ALL_UUID -> {}", GEONETWORK_ALL_UUID);
 
@@ -158,12 +164,12 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
             // TODO: Can the elastic index not update after insert dataset into GeoNetwork?
             final SearchResponse<ObjectNode> response = gn4ElasticClient.search(GEONETWORK_ALL_UUID, ObjectNode.class);
 
-            if(Objects.requireNonNull(response.hits().hits().size() != 0)) {
+            if(!response.hits().hits().isEmpty()) {
                 // Use iterator so that we can get record by record, otherwise we need to store all record
                 // in memory which use up lots of memory
                 return () -> new Iterator<>() {
 
-                    protected int index = 0;
+                    private int index = 0;
 
                     @Override
                     public boolean hasNext() {

@@ -259,6 +259,7 @@ public class IndexerServiceImpl implements IndexerService {
 
         logger.info("Indexing all metadata records from GeoNetwork");
 
+        int counter = 0;
         for (String metadataRecord : geoNetworkResourceService.getAllMetadataRecords()) {
             if(metadataRecord != null) {
                 try {

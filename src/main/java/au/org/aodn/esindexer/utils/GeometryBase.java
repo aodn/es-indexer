@@ -94,7 +94,7 @@ public class GeometryBase {
                             // CoordinateReferenceSystem system = CRS.decode(mst.getSrsName().trim(), true);
                             if (plt.getExterior() != null && plt.getExterior().getAbstractRing().getValue() instanceof LinearRingType linearRingType) {
                                 // TODO: Handle 2D now, can be 3D
-                                if (linearRingType.getPosList().getSrsDimension().doubleValue() == 2.0) {
+                                if (linearRingType.getPosList() != null &&  linearRingType.getPosList().getSrsDimension().doubleValue() == 2.0) {
                                     List<Double> v = linearRingType.getPosList().getValue();
                                     List<Coordinate> items = new ArrayList<>();
 
