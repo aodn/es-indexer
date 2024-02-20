@@ -48,7 +48,7 @@ jobs:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
 
       - name: Build with Maven
-        run: mvn -B package --file pom.xml -DskipTests
+        run: mvn -B verify --file pom.xml
 
       - name: Login to ECR
         uses: docker/login-action@v3
