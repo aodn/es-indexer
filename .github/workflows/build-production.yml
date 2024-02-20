@@ -66,11 +66,8 @@ jobs:
             --output text)
           echo "CODEARTIFACT_REPO_URL=$REPO_URL" >> "$GITHUB_ENV"
 
-      - name: Build with Maven
-        run: mvn -B package --file pom.xml
-
-      - name: Publish Artifacts to CodeArtifact Repository
-        run: mvn -B deploy
+      - name: Build with Maven & Publish to CodeArtifact
+        run: mvn -B clean deploy --file pom.xml
         env:
           CODEARTIFACT_AUTH_TOKEN: ${{ env.CODEARTIFACT_AUTH_TOKEN }}
           CODEARTIFACT_REPO_URL: ${{ env.CODEARTIFACT_REPO_URL }}
