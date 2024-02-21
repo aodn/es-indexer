@@ -10,7 +10,7 @@
     </parent>
     <groupId>au.org.aodn</groupId>
     <artifactId>es-indexer</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.0</version>
     <packaging>jar</packaging>
     <name>es-indexer</name>
     <description>es-indexer</description>
@@ -286,4 +286,17 @@
             </plugin>
         </plugins>
     </build>
+
+    <distributionManagement>
+        <repository>
+            <id>codeartifact</id>
+            <name>codeartifact</name>
+            <url>${env.CODEARTIFACT_REPO_URL}</url>
+        </repository>
+        <snapshotRepository>
+            <id>codeartifact</id>
+            <name>codeartifact</name>
+            <url>${env.CODEARTIFACT_REPO_URL}</url>
+        </snapshotRepository>
+    </distributionManagement>
 </project>
