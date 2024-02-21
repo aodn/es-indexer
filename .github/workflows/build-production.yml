@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 env:
-  app_name: es-indexer4
+  app_name: es-indexer
   environment_name: production
 
 jobs:
