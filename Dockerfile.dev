@@ -15,7 +15,7 @@ FROM amazoncorretto:17
 
 WORKDIR /app
 
-COPY --from=builder /app/target/es-indexer-0.0.1-SNAPSHOT.jar /app/app.jar
+COPY --from=builder /app/target/es-indexer*.jar /app/app.jar
 
 EXPOSE 8080
 
