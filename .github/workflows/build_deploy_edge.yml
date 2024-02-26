@@ -3,7 +3,7 @@ name: Build/Deploy Edge
 on:
   pull_request:
     branches:
-      - 5320_mvp_ci_cd #TODO remove before merging
+      - main
   push:
     branches:
       - main
