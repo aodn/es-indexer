@@ -75,3 +75,4 @@ jobs:
       app_name: es-indexer
       environment: edge
       digest: ${{ needs.build_push.outputs.digest }}
+    secrets: inherit
