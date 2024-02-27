@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" 
-xmlns:fcc="http://standards.iso.org/iso/19110/fcc/1.0" 
-xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0" 
-xmlns:gmw="http://standards.iso.org/iso/19115/-3/gmw/1.0"  
-xmlns:lan="http://standards.iso.org/iso/19115/-3/lan/1.0" xmlns:mcc="http://standards.iso.org/iso/19115/-3/mcc/1.0" 
-xmlns:mrc="http://standards.iso.org/iso/19115/-3/mrc/2.0" elementFormDefault="qualified" 
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema"
+xmlns:fcc="http://standards.iso.org/iso/19110/fcc/1.0"
+xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0"
+xmlns:gmw="http://standards.iso.org/iso/19115/-3/gmw/1.0"
+xmlns:lan="http://standards.iso.org/iso/19115/-3/lan/1.0" xmlns:mcc="http://standards.iso.org/iso/19115/-3/mcc/1.0"
+xmlns:mrc="http://standards.iso.org/iso/19115/-3/mrc/2.0" elementFormDefault="qualified"
 targetNamespace="http://standards.iso.org/iso/19115/-3/mrc/2.0" version="1.0">
   <include schemaLocation="contentInformationImagery.xsd"/>
   <include schemaLocation="mrc.xsd"/>

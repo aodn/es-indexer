@@ -2,7 +2,7 @@ version: "3.5"
 
 services:
   indexer:
-    build: 
+    build:
       context: .
       dockerfile: ./Dockerfile.dev
     container_name: aodn_es_indexer_dev

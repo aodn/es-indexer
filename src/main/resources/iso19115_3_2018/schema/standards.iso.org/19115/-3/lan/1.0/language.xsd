@@ -10,7 +10,7 @@
   <import namespace="http://standards.iso.org/iso/19115/-3/cit/1.0"
     schemaLocation="../../cit/1.0/cit.xsd"/>
   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-  <!-- hand-craft adjustments starting at line 29 and 71. ShapeChange does not have rules for 
+  <!-- hand-craft adjustments starting at line 29 and 71. ShapeChange does not have rules for
   implementing language localisation according to ISO19139  -->
   <element name="CountryCode" substitutionGroup="gco:CharacterString" type="gco:CodeListValue_Type"/>
   <complexType name="CountryCode_PropertyType">
@@ -26,7 +26,7 @@
     </sequence>
     <attribute ref="gco:nilReason"/>
   </complexType>
-  
+
   <!-- hand craft, copy from gmd freeText.xsd, following ISO 19139 -->
   <!-- =========================================================================== -->
   <complexType name="LocalisedCharacterString_Type">
@@ -57,9 +57,9 @@
     <attributeGroup ref="gco:ObjectReference"/>
     <attribute ref="gco:nilReason"/>
   </complexType>
-  
+
   <!-- ........................................................................ -->
-  
+
   <element name="MD_CharacterSetCode" substitutionGroup="gco:CharacterString"
     type="gco:CodeListValue_Type"/>
   <complexType name="MD_CharacterSetCode_PropertyType">

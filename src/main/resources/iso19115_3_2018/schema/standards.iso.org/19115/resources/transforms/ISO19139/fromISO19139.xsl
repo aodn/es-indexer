@@ -97,7 +97,7 @@
 
 
   <xsl:template match="/">
-    <!-- 
+    <!--
     root element (MD_Metadata or MI_Metadata)
     -->
     <xsl:for-each select="/*">

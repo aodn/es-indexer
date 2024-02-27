@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:cit="http://standards.iso.org/iso/19115/-3/cit/2.0" 
-  xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0" 
-  xmlns:mcc="http://standards.iso.org/iso/19115/-3/mcc/1.0" 
-  elementFormDefault="qualified" 
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:cit="http://standards.iso.org/iso/19115/-3/cit/2.0"
+  xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0"
+  xmlns:mcc="http://standards.iso.org/iso/19115/-3/mcc/1.0"
+  elementFormDefault="qualified"
   targetNamespace="http://standards.iso.org/iso/19115/-3/cit/2.0" version="1.0">
   <include schemaLocation="cit.xsd"/>
   <import namespace="http://standards.iso.org/iso/19115/-3/gco/1.0" schemaLocation="../../gco/1.0/gco.xsd"/>
@@ -205,7 +205,7 @@
         <sequence>
 <!--          <element name="date" type="gco:DateTime_PropertyType">-->
           <!-- use of gco:DateTime property did not implement the intention of the 19115-1 committee, the desire was
-          for the more general representation allowing date, datetime, yy, yymm, etc. 
+          for the more general representation allowing date, datetime, yy, yymm, etc.
           See discussion on github https://github.com/ISO-TC211/XML/issues/117https://github.com/ISO-TC211/XML/issues/117
           SMR 2015-09-01 -->
           <element name="date" type="gco:Date_PropertyType">

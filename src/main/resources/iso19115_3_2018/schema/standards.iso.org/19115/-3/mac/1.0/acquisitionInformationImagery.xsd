@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" 
-  xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0" 
-  xmlns:gmw="http://standards.iso.org/iso/19115/-3/gmw/1.0" 
-  xmlns:mac="http://standards.iso.org/iso/19115/-3/mac/1.0" 
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema"
+  xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0"
+  xmlns:gmw="http://standards.iso.org/iso/19115/-3/gmw/1.0"
+  xmlns:mac="http://standards.iso.org/iso/19115/-3/mac/1.0"
   xmlns:mcc="http://standards.iso.org/iso/19115/-3/mcc/1.0" elementFormDefault="qualified" targetNamespace="http://standards.iso.org/iso/19115/-3/mac/1.0" version="1.0">
 <!--  <include schemaLocation="mac.xsd"/>-->
   <import namespace="http://standards.iso.org/iso/19115/-3/gco/1.0" schemaLocation="../../gco/1.0/gco.xsd"/>
@@ -190,7 +190,7 @@ shortName: instDesc</documentation>
   </complexType>
   <element name="MI_Objective" substitutionGroup="gco:AbstractObject" type="mac:MI_Objective_Type">
     <annotation>
-      <documentation>Description: Describes the characteristics, spatial and temportal extent of the intended object to be observed 
+      <documentation>Description: Describes the characteristics, spatial and temportal extent of the intended object to be observed
 shortName: TargetId</documentation>
     </annotation>
   </element>

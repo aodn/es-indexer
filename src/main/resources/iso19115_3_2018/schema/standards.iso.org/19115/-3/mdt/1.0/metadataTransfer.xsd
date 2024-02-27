@@ -43,7 +43,7 @@
   <!--
     Fix made by Ted Habermann - 20151123
     <element name="MX_DataSet" substitutionGroup="gco:AbstractObject" type="mdt:MX_DataSet_Type"/>
-  -->  
+  -->
   <element name="MX_DataSet" substitutionGroup="mda:AbstractDS_Resource" type="mdt:MX_DataSet_Type"/>
   <complexType name="MX_DataSet_Type">
     <complexContent>

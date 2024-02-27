@@ -186,4 +186,3 @@ class RankingServiceTests extends BaseTestClass {
         assertEquals(10, mockRankingService.evaluateCompleteness(stacCollectionModel));
     }
 }
-
