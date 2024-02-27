@@ -57,7 +57,7 @@
           <element name="maxAltitude" type="gco:Real_PropertyType"/>
           <element name="meterologicalConditions" type="gco:CharacterString_PropertyType"/>
           <element name="solarAzimuth" type="gco:Real_PropertyType"/>
-          <element name="solarElevation" type="gco:Real_PropertyType"/>          
+          <element name="solarElevation" type="gco:Real_PropertyType"/>
         </sequence>
       </extension>
     </complexContent>
@@ -318,7 +318,7 @@
               <documentation>instance of otherPropertyType that defines attributes not explicitly included in MI_Operation</documentation>
             </annotation>
           </element>
-          
+
         </sequence>
       </extension>
     </complexContent>

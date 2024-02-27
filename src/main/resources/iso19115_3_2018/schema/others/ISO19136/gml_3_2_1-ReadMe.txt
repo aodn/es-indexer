@@ -55,7 +55,7 @@ The Open Geospatial Consortium, Inc. official schema repository is at
 Policies, Procedures, Terms, and Conditions of OGC(r) are available
   http://www.opengeospatial.org/ogc/policies/ .
 Additional rights of use are described at
-  http://www.opengeospatial.org/legal/ . 
+  http://www.opengeospatial.org/legal/ .
 
 Copyright (c) 2007 Open Geospatial Consortium, Inc. All Rights Reserved.
 

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--  
-    This stylesheet provides a simple HTML view of the 
+<!--
+    This stylesheet provides a simple HTML view of the
     GML codelist dictionaries. It is built in to the GML dictionaries
     and included here as a convienience to users.
-    (c) 2009 interactive instruments GmbH  
+    (c) 2009 interactive instruments GmbH
 -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0">
     <xsl:output method="html"/>

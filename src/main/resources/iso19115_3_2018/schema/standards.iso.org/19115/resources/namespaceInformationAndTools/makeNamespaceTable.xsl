@@ -18,12 +18,12 @@
     </xd:desc>
   </xd:doc>
   <!-- Parameter schemaRootDirectory:
-    This is the root of the schema directories. 
+    This is the root of the schema directories.
     Example: /Users/tedhabermann/GitRepositories/ISOTC211-XML/XML/schemas.isotc211.org/iso
   -->
   <xsl:param name="schemaRootDirectory"/>
   <!-- Parameter standard:
-    This is a space delimited list of the schemaStandardNumbers to be included in the output. 
+    This is a space delimited list of the schemaStandardNumbers to be included in the output.
     Namespaces whose schemaStandardNumber is in this list will be included in the output.
     Example: 19115-3 19157-2 19110 19111 19135
   -->

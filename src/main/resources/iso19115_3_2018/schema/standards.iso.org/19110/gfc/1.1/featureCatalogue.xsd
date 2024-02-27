@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:fcc="http://standards.iso.org/iso/19110/fcc/1.0" 
-  xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0" xmlns:gfc="http://standards.iso.org/iso/19110/gfc/1.1" 
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:fcc="http://standards.iso.org/iso/19110/fcc/1.0"
+  xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0" xmlns:gfc="http://standards.iso.org/iso/19110/gfc/1.1"
   xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:gmw="http://standards.iso.org/iso/19115/-3/gmw/1.0"
-  xmlns:lan="http://standards.iso.org/iso/19115/-3/lan/1.0" 
+  xmlns:lan="http://standards.iso.org/iso/19115/-3/lan/1.0"
   xmlns:mcc="http://standards.iso.org/iso/19115/-3/mcc/1.0" elementFormDefault="qualified" targetNamespace="http://standards.iso.org/iso/19110/gfc/1.1" version="1.1">
   <include schemaLocation="gfc.xsd"/>
   <import namespace="http://standards.iso.org/iso/19115/-3/gco/1.0" schemaLocation="../../../19115/-3/gco/1.0/gco.xsd"/>
@@ -14,7 +14,7 @@
   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
   <!-- SMR 2015-02-07 change gml:CodeType to gco:CodeType for 2014-12-25 build; UnitOfMeasure is in gmw, not gco so change that too -->
   <!-- SMR 2015-06-14 hand craft to put featureType association before inheritanceRelation on FC_FeatureCatalogue -->
-  
+
   <element name="FC_AssociationRole" substitutionGroup="gfc:AbstractFC_PropertyType" type="gfc:FC_AssociationRole_Type">
     <annotation>
       <documentation>A role of the association FC_AssociationRole::relation. &lt;ocl&gt; roleName = FC_Member::memberName; FC_PropertyType::cardinality realizes GF_AssociationRole::cardinality &lt;/ocl&gt;</documentation>

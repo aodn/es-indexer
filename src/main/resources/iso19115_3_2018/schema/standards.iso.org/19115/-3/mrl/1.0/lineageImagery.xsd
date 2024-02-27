@@ -77,7 +77,7 @@ shortName: groundRes</documentation>
   <element name="LE_ProcessStep" substitutionGroup="mrl:LI_ProcessStep" type="mrl:LE_ProcessStep_Type">
     <annotation>
       <documentation>Description: Information about an event or transformation in the life of the dataset including details of the algorithm and software used for processing
-FGDC: 
+FGDC:
 shortName: DetailProcStep</documentation>
     </annotation>
   </element>

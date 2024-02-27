@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" 
-  xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" 
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
   xmlns:cat="http://standards.iso.org/iso/19115/-3/cat/1.0"
   xmlns:lan="http://standards.iso.org/iso/19115/-3/lan/1.0"
-  xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0" 
-  xmlns:gml="http://www.opengis.net/gml/3.2" 
+  xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0"
+  xmlns:gml="http://www.opengis.net/gml/3.2"
   xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0">
   <xd:doc scope="stylesheet">
     <xd:desc>
       <xd:p><xd:b>Created on: </xd:b>April 17, 2015</xd:p>
       <xd:p><xd:b>Author: </xd:b>Ted Habermann</xd:p>
       <xd:p><xd:b>Updated on: </xd:b>September 10, 20175</xd:p>
-      <xd:p>Added Catalog information and summary fields (counts of codelists and items), updated Version date</xd:p>     
+      <xd:p>Added Catalog information and summary fields (counts of codelists and items), updated Version date</xd:p>
     </xd:desc>
   </xd:doc>
   <xsl:param name="contents"/>
@@ -22,7 +22,7 @@
       <a name="top"/>
       <h1>Codelist Catalog</h1>
       <p>This report describes the ISO TC211 codelist catalogs, the codelists they contain, and the values and definitions of the codes.</p>
-      <p> 
+      <p>
         Please contact <a href="mailto:rehabermann@me.com">Ted Habermann</a> if you have questions or suggestions.</p>
       <h2>Catalog</h2>
       <b>Name: </b><xsl:value-of select="cat:CT_CodelistCatalogue/cat:name/gco:CharacterString"/><br/>
@@ -115,7 +115,7 @@
               <td valign="top">
                 <xsl:value-of select="$entry"/>
               </td>
-              
+
               <td valign="top">
                 <xsl:value-of select="$definition"/>
               </td>

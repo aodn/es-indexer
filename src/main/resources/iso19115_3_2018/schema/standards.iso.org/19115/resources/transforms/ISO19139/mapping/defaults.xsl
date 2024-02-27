@@ -131,7 +131,7 @@
           and not(ancestor-or-self::gmi:LE_Source) and not(ancestor-or-self::gmi:MI_CoverageDescription)">
           <xsl:text>msr</xsl:text>
         </xsl:when>
-        <xsl:when test="starts-with(name(),'gmi:') and 
+        <xsl:when test="starts-with(name(),'gmi:') and
           (ancestor-or-self::gmi:LE_ProcessStep or ancestor-or-self::gmi:LE_Source)">
           <xsl:text>mrl</xsl:text>
         </xsl:when>
@@ -139,7 +139,7 @@
           <xsl:text>mrc</xsl:text>
         </xsl:when>
         <xsl:when test="ancestor-or-self::gmd:MD_Constraints
-          or ancestor-or-self::gmd:MD_SecurityConstraints 
+          or ancestor-or-self::gmd:MD_SecurityConstraints
           or ancestor-or-self::gmd:MD_LegalConstraints
           ">
           <xsl:text>mco</xsl:text>
@@ -150,7 +150,7 @@
         <xsl:when test="ancestor-or-self::gmd:CI_ResponsibleParty or ancestor-or-self::gmd:CI_OnlineResource">
           <xsl:text>cit</xsl:text>
         </xsl:when>
-        <xsl:when test="ancestor-or-self::gmd:MD_ScopeCode or ancestor-or-self::gmx:MX_ScopeCode 
+        <xsl:when test="ancestor-or-self::gmd:MD_ScopeCode or ancestor-or-self::gmx:MX_ScopeCode
           or ancestor-or-self::gmd:MD_ScopeDescription">
           <xsl:text>mcc</xsl:text>
         </xsl:when>

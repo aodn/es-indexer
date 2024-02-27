@@ -66,10 +66,10 @@
                     </mdq:measure>
                   </xsl:if>
                   <xsl:if
-                    test="gmd:evaluationMethodDescription or gmd:evaluationProcedure/gmd:CI_Citation 
+                    test="gmd:evaluationMethodDescription or gmd:evaluationProcedure/gmd:CI_Citation
                     or gmd:evaluationMethodType/gmd:DQ_EvaluationMethodTypeCode/@codeListValue">
-                    <!-- output quality evaluation method information only if gmd:evaluationMethodDescription 
-                      or gmd:evaluationProcedure/gmd:CI_Citation 
+                    <!-- output quality evaluation method information only if gmd:evaluationMethodDescription
+                      or gmd:evaluationProcedure/gmd:CI_Citation
                       or gmd:evaluationMethodType/gmd:DQ_EvaluationMethodTypeCode/@codeListValue exist -->
                     <mdq:evaluationMethod>
                       <mdq:DQ_FullInspection>
