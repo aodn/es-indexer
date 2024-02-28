@@ -188,13 +188,13 @@ public abstract class StacCollectionMapperService {
         List<Map<String,String>> result = new ArrayList<>();
         List<String[]> temp = createExtentTemporal(source);
 
-        for(String[] t : temp) {
+        Objects.requireNonNull(temp).forEach(t -> {
             Map<String,String> m = new HashMap<>();
             m.put("start", t[0]);
             m.put("end", t[1]);
 
             result.add(m);
-        }
+        });
 
         return result;
     }
@@ -693,7 +693,7 @@ public abstract class StacCollectionMapperService {
                         List<Object> rawInput = e.getGeographicElement()
                                 .stream()
                                 .map(AbstractEXGeographicExtentPropertyType::getAbstractEXGeographicExtent)
-                                .filter(m -> m.getValue() instanceof EXBoundingPolygonType || m.getValue() instanceof EXGeographicBoundingBoxType)
+                                .filter(m -> Objects.requireNonNull(m.getValue() instanceof EXBoundingPolygonType || m.getValue() instanceof EXGeographicBoundingBoxType))
                                 .map(m -> {
                                     if (m.getValue() instanceof EXBoundingPolygonType exBoundingPolygonType) {
                                         if (!exBoundingPolygonType.getPolygon().isEmpty() && exBoundingPolygonType.getPolygon().get(0).getAbstractGeometry() != null) {
