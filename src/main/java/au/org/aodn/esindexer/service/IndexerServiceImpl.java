@@ -33,7 +33,8 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class IndexerServiceImpl implements IndexerService {
@@ -130,6 +131,17 @@ public class IndexerServiceImpl implements IndexerService {
         }
     }
 
+    protected List<String> generateTitleSuggest(String input) {
+        Set<String> uniqueWords = new HashSet<>();
+        // Filter out stop words
+        return Arrays.stream(input.split("\\s+"))
+                .map(String::toLowerCase)
+                .filter(word -> !AppConstants.STOP_WORDS.contains(word))
+                .filter(uniqueWords::add)
+                .collect(Collectors.toList());
+
+    }
+
     protected StacCollectionModel getMappedMetadataValues(String metadataValues) throws IOException, FactoryException, TransformException, JAXBException {
         MDMetadataType metadataType = jaxbUtils.unmarshal(metadataValues);
 
@@ -148,6 +160,9 @@ public class IndexerServiceImpl implements IndexerService {
         Integer score = completeness;
 
         stacCollectionModel.getSummaries().setScore(score);
+
+        // set title suggest for each metadata record, this will be used by the autocomplete search
+        stacCollectionModel.setTitleSuggest(this.generateTitleSuggest(stacCollectionModel.getTitle()));
 
         return stacCollectionModel;
     }
