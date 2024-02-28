@@ -3,6 +3,7 @@ package au.org.aodn.esindexer.service;
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.exception.*;
 import au.org.aodn.esindexer.utils.JaxbUtils;
+import au.org.aodn.esindexer.utils.StringUtil;
 import au.org.aodn.metadata.iso19115_3_2018.*;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.ElasticsearchException;
@@ -131,17 +132,6 @@ public class IndexerServiceImpl implements IndexerService {
         }
     }
 
-    protected List<String> generateTitleSuggest(String input) {
-        Set<String> uniqueWords = new HashSet<>();
-        // Filter out stop words
-        return Arrays.stream(input.split("\\s+"))
-                .map(String::toLowerCase)
-                .filter(word -> !AppConstants.STOP_WORDS.contains(word))
-                .filter(uniqueWords::add)
-                .collect(Collectors.toList());
-
-    }
-
     protected StacCollectionModel getMappedMetadataValues(String metadataValues) throws IOException, FactoryException, TransformException, JAXBException {
         MDMetadataType metadataType = jaxbUtils.unmarshal(metadataValues);
 
@@ -162,7 +152,8 @@ public class IndexerServiceImpl implements IndexerService {
         stacCollectionModel.getSummaries().setScore(score);
 
         // set title suggest for each metadata record, this will be used by the autocomplete search
-        stacCollectionModel.setTitleSuggest(this.generateTitleSuggest(stacCollectionModel.getTitle()));
+        List<String> filteredWords = StringUtil.generateTitleSuggest(stacCollectionModel.getTitle());
+        stacCollectionModel.setTitleSuggest(filteredWords);
 
         return stacCollectionModel;
     }
