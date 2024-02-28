@@ -128,7 +128,7 @@ public abstract class StacCollectionMapperService {
                                         }
                                     }
                                 } else {
-                                    if (!timePeriodType.getEndPosition().getValue().isEmpty()) {
+                                    if (timePeriodType.getEndPosition() != null && !timePeriodType.getEndPosition().getValue().isEmpty()) {
                                         temporalPair[1] = convertDateToZonedDateTime(timePeriodType.getEndPosition().getValue().get(0));
                                     }
                                 }
@@ -387,10 +387,10 @@ public abstract class StacCollectionMapperService {
         if (!items.isEmpty()) {
             for (MDDistributionType i : items) {
                 i.getTransferOptions().forEach(transferOption -> transferOption.getMDDigitalTransferOptions().getOnLine().forEach(link -> {
-                    if (link.getAbstractOnlineResource().getValue() instanceof CIOnlineResourceType2 ciOnlineResource) {
+                    if (link.getAbstractOnlineResource() != null && link.getAbstractOnlineResource().getValue() instanceof CIOnlineResourceType2 ciOnlineResource) {
                         LinkModel linkModel = LinkModel.builder().build();
-                        if (!ciOnlineResource.getLinkage().getCharacterString().getValue().toString().isEmpty()) {
-                            linkModel.setType(Objects.equals(ciOnlineResource.getProtocol().getCharacterString().getValue().toString(), "WWW:LINK-1.0-http--link") ? "text/html" : "");
+                        if (ciOnlineResource.getLinkage().getCharacterString() != null && !ciOnlineResource.getLinkage().getCharacterString().getValue().toString().isEmpty()) {
+                            if (ciOnlineResource.getProtocol() != null) linkModel.setType(Objects.equals(ciOnlineResource.getProtocol().getCharacterString().getValue().toString(), "WWW:LINK-1.0-http--link") ? "text/html" : "");
                             linkModel.setHref(ciOnlineResource.getLinkage().getCharacterString().getValue().toString());
                             linkModel.setRel(AppConstants.RECOMMENDED_LINK_REL_TYPE);
                             linkModel.setTitle(ciOnlineResource.getName() != null ? ciOnlineResource.getName().getCharacterString().getValue().toString() : null);
@@ -408,7 +408,7 @@ public abstract class StacCollectionMapperService {
     List<ProviderModel> mapProviders(MDMetadataType source) {
         List<ProviderModel> results = new ArrayList<>();
         source.getContact().forEach(item -> {
-            if (item.getAbstractResponsibility().getValue() instanceof CIResponsibilityType2 ciResponsibility) {
+            if (item.getAbstractResponsibility() != null && item.getAbstractResponsibility().getValue() instanceof CIResponsibilityType2 ciResponsibility) {
                 ciResponsibility.getParty().forEach(party -> {
                     try {
                         ProviderModel providerModel = ProviderModel.builder().build();
@@ -477,68 +477,70 @@ public abstract class StacCollectionMapperService {
         if (!items.isEmpty()) {
             for (MDDataIdentificationType item : items) {
                 item.getPointOfContact().forEach(poc -> {
-                    AbstractResponsibilityType responsibilityType = poc.getAbstractResponsibility().getValue();
-                    if (responsibilityType instanceof CIResponsibilityType2 ciResponsibility) {
-                        ContactsModel contactsModel = ContactsModel.builder().build();
-                        contactsModel.setRoles(mapContactsRole(ciResponsibility));
+                    if (poc.getAbstractResponsibility() != null) {
+                        AbstractResponsibilityType responsibilityType = poc.getAbstractResponsibility().getValue();
+                        if (responsibilityType instanceof CIResponsibilityType2 ciResponsibility) {
+                            ContactsModel contactsModel = ContactsModel.builder().build();
+                            contactsModel.setRoles(mapContactsRole(ciResponsibility));
 
-                        if (ciResponsibility.getParty().isEmpty()) {
-                            logger.warn("Unable to find contact info for metadata record: " + this.mapUUID(source));
-                        } else {
-                            ciResponsibility.getParty().forEach(party -> {
-                                contactsModel.setOrganization(mapContactsOrganization(party));
-                                try {
+                            if (ciResponsibility.getParty().isEmpty()) {
+                                logger.warn("Unable to find contact info for metadata record: " + this.mapUUID(source));
+                            } else {
+                                ciResponsibility.getParty().forEach(party -> {
+                                    contactsModel.setOrganization(mapContactsOrganization(party));
+                                    try {
 
-                                    AtomicReference<String> name = new AtomicReference<>("");
-                                    AtomicReference<String> position = new AtomicReference<>("");
-                                    List<Map<String, Object>> addresses = new ArrayList<>();
-                                    List<String> emailAddresses = new ArrayList<>();
-                                    List<Map<String, String>> phones = new ArrayList<>();
-                                    List<Map<String, String>> onlineResources = new ArrayList<>();
+                                        AtomicReference<String> name = new AtomicReference<>("");
+                                        AtomicReference<String> position = new AtomicReference<>("");
+                                        List<Map<String, Object>> addresses = new ArrayList<>();
+                                        List<String> emailAddresses = new ArrayList<>();
+                                        List<Map<String, String>> phones = new ArrayList<>();
+                                        List<Map<String, String>> onlineResources = new ArrayList<>();
 
 
-                                    CIOrganisationType2 organisation = (CIOrganisationType2) party.getAbstractCIParty().getValue();
-                                    AtomicReference<List<CIContactPropertyType2>> contactInfoList = new AtomicReference<>();
+                                        CIOrganisationType2 organisation = (CIOrganisationType2) party.getAbstractCIParty().getValue();
+                                        AtomicReference<List<CIContactPropertyType2>> contactInfoList = new AtomicReference<>();
 
-                                    if (organisation.getIndividual().isEmpty()) {
-                                        contactInfoList.set(organisation.getContactInfo());
-                                    } else {
-                                        organisation.getIndividual().forEach(individual -> {
-                                            name.set(mapContactsName(individual));
-                                            position.set(mapContactsPosition(individual));
-                                            contactInfoList.set(individual.getCIIndividual().getContactInfo());
-                                        });
+                                        if (organisation.getIndividual().isEmpty()) {
+                                            contactInfoList.set(organisation.getContactInfo());
+                                        } else {
+                                            organisation.getIndividual().forEach(individual -> {
+                                                name.set(mapContactsName(individual));
+                                                position.set(mapContactsPosition(individual));
+                                                contactInfoList.set(individual.getCIIndividual().getContactInfo());
+                                            });
+                                        }
+
+                                        contactInfoList.get().forEach(contactInfo -> contactInfo.getCIContact().getAddress().forEach(address -> {
+                                            // addresses
+                                            addresses.add(mapContactsAddress(address));
+                                            // emails
+                                            address.getCIAddress().getElectronicMailAddress().forEach(electronicMailAddress -> {
+                                                emailAddresses.add(mapContactsEmail(electronicMailAddress));
+                                            });
+                                            // phones
+                                            contactInfo.getCIContact().getPhone().forEach(phone -> {
+                                                phones.add(mapContactsPhone(phone));
+                                            });
+                                            // online resources
+                                            contactInfo.getCIContact().getOnlineResource().forEach(onlineResource -> {
+                                                onlineResources.add(mapContactsOnlineResource(onlineResource));
+                                            });
+                                        }));
+
+                                        contactsModel.setName(name.get());
+                                        contactsModel.setPosition(position.get());
+                                        contactsModel.setAddresses(addresses);
+                                        contactsModel.setEmails(emailAddresses);
+                                        contactsModel.setPhones(phones);
+                                        contactsModel.setLinks(onlineResources);
+
+                                    } catch (Exception e) {
+                                        logger.warn("Unable to find contact info for metadata record: " + this.mapUUID(source));
                                     }
-
-                                    contactInfoList.get().forEach(contactInfo -> contactInfo.getCIContact().getAddress().forEach(address -> {
-                                        // addresses
-                                        addresses.add(mapContactsAddress(address));
-                                        // emails
-                                        address.getCIAddress().getElectronicMailAddress().forEach(electronicMailAddress -> {
-                                            emailAddresses.add(mapContactsEmail(electronicMailAddress));
-                                        });
-                                        // phones
-                                        contactInfo.getCIContact().getPhone().forEach(phone -> {
-                                            phones.add(mapContactsPhone(phone));
-                                        });
-                                        // online resources
-                                        contactInfo.getCIContact().getOnlineResource().forEach(onlineResource -> {
-                                            onlineResources.add(mapContactsOnlineResource(onlineResource));
-                                        });
-                                    }));
-
-                                    contactsModel.setName(name.get());
-                                    contactsModel.setPosition(position.get());
-                                    contactsModel.setAddresses(addresses);
-                                    contactsModel.setEmails(emailAddresses);
-                                    contactsModel.setPhones(phones);
-                                    contactsModel.setLinks(onlineResources);
-
-                                } catch (Exception e) {
-                                    logger.warn("Unable to find contact info for metadata record: " + this.mapUUID(source));
-                                }
-                            });
-                            results.add(contactsModel);
+                                });
+                                results.add(contactsModel);
+                            }
                         }
                     }
                 });
