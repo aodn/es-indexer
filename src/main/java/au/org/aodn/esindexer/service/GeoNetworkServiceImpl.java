@@ -164,7 +164,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
             // TODO: Can the elastic index not update after insert dataset into GeoNetwork?
             final SearchResponse<ObjectNode> response = gn4ElasticClient.search(GEONETWORK_ALL_UUID, ObjectNode.class);
 
-            if(!response.hits().hits().isEmpty()) {
+            if(Objects.requireNonNull(!response.hits().hits().isEmpty())) {
                 // Use iterator so that we can get record by record, otherwise we need to store all record
                 // in memory which use up lots of memory
                 return () -> new Iterator<>() {
