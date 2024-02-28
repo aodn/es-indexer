@@ -99,42 +99,44 @@ public abstract class StacCollectionMapperService {
                         temporalPair[0] = null;
                         temporalPair[1] = null;
 
-                        EXTemporalExtentType exTemporalExtent = temporalElement.getEXTemporalExtent().getValue();
-                        if (exTemporalExtent != null) {
-                            AbstractTimePrimitiveType abstractTimePrimitive = exTemporalExtent.getExtent().getAbstractTimePrimitive().getValue();
-                            if (abstractTimePrimitive instanceof TimePeriodType timePeriodType) {
+                        if (temporalElement.getEXTemporalExtent() != null) {
+                            EXTemporalExtentType exTemporalExtent = temporalElement.getEXTemporalExtent().getValue();
+                            if (exTemporalExtent != null) {
+                                AbstractTimePrimitiveType abstractTimePrimitive = exTemporalExtent.getExtent().getAbstractTimePrimitive().getValue();
+                                if (abstractTimePrimitive instanceof TimePeriodType timePeriodType) {
 
 
-                                if (timePeriodType.getBegin() != null) {
-                                    if (timePeriodType.getBegin().getTimeInstant() != null) {
-                                        if (timePeriodType.getBegin().getTimeInstant().getTimePosition() != null) {
-                                           if (!timePeriodType.getBegin().getTimeInstant().getTimePosition().getValue().isEmpty()) {
-                                               temporalPair[0] = convertDateToZonedDateTime(timePeriodType.getBegin().getTimeInstant().getTimePosition().getValue().get(0));
-                                           }
-                                        }
-                                    }
-                                } else {
-                                    if (!timePeriodType.getBeginPosition().getValue().isEmpty()) {
-                                        temporalPair[0] = convertDateToZonedDateTime(timePeriodType.getBeginPosition().getValue().get(0));
-                                    }
-                                }
-
-                                if (timePeriodType.getEnd() != null) {
-                                    if (timePeriodType.getEnd().getTimeInstant() != null) {
-                                        if (timePeriodType.getEnd().getTimeInstant().getTimePosition() != null) {
-                                            if (!timePeriodType.getEnd().getTimeInstant().getTimePosition().getValue().isEmpty()) {
-                                                temporalPair[1] = convertDateToZonedDateTime(timePeriodType.getEnd().getTimeInstant().getTimePosition().getValue().get(0));
+                                    if (timePeriodType.getBegin() != null) {
+                                        if (timePeriodType.getBegin().getTimeInstant() != null) {
+                                            if (timePeriodType.getBegin().getTimeInstant().getTimePosition() != null) {
+                                                if (!timePeriodType.getBegin().getTimeInstant().getTimePosition().getValue().isEmpty()) {
+                                                    temporalPair[0] = convertDateToZonedDateTime(timePeriodType.getBegin().getTimeInstant().getTimePosition().getValue().get(0));
+                                                }
                                             }
                                         }
+                                    } else {
+                                        if (!timePeriodType.getBeginPosition().getValue().isEmpty()) {
+                                            temporalPair[0] = convertDateToZonedDateTime(timePeriodType.getBeginPosition().getValue().get(0));
+                                        }
                                     }
-                                } else {
-                                    if (timePeriodType.getEndPosition() != null && !timePeriodType.getEndPosition().getValue().isEmpty()) {
-                                        temporalPair[1] = convertDateToZonedDateTime(timePeriodType.getEndPosition().getValue().get(0));
+
+                                    if (timePeriodType.getEnd() != null) {
+                                        if (timePeriodType.getEnd().getTimeInstant() != null) {
+                                            if (timePeriodType.getEnd().getTimeInstant().getTimePosition() != null) {
+                                                if (!timePeriodType.getEnd().getTimeInstant().getTimePosition().getValue().isEmpty()) {
+                                                    temporalPair[1] = convertDateToZonedDateTime(timePeriodType.getEnd().getTimeInstant().getTimePosition().getValue().get(0));
+                                                }
+                                            }
+                                        }
+                                    } else {
+                                        if (timePeriodType.getEndPosition() != null && !timePeriodType.getEndPosition().getValue().isEmpty()) {
+                                            temporalPair[1] = convertDateToZonedDateTime(timePeriodType.getEndPosition().getValue().get(0));
+                                        }
                                     }
                                 }
-                            }
 
-                            result.add(temporalPair);
+                                result.add(temporalPair);
+                            }
                         }
                     });
                 }
