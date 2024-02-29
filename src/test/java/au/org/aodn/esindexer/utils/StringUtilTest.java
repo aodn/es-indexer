@@ -3,6 +3,7 @@ package au.org.aodn.esindexer.utils;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 public class StringUtilTest {
     @Test
@@ -20,6 +21,13 @@ public class StringUtilTest {
         // convert it back to UTF-8
         String result = StringUtil.encodeUTF8(manuallyEncoded);
         assertEquals(frenchString, result);
+    }
+
+    @Test
+    void generateTitleSuggest() {
+        String input = "IMOS - Animal Tracking Facility - Satellite Relay Tagging Program - Delayed mode data °";
+        List<String> result = StringUtil.generateTitleSuggest(input);
+        assertEquals(List.of("imos", "animal", "tracking", "facility", "satellite", "relay", "tagging", "program", "delayed", "mode", "data"), result);
     }
 
     @Test

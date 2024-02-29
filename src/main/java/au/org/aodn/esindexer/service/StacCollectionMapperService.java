@@ -99,42 +99,44 @@ public abstract class StacCollectionMapperService {
                         temporalPair[0] = null;
                         temporalPair[1] = null;
 
-                        EXTemporalExtentType exTemporalExtent = temporalElement.getEXTemporalExtent().getValue();
-                        if (exTemporalExtent != null) {
-                            AbstractTimePrimitiveType abstractTimePrimitive = exTemporalExtent.getExtent().getAbstractTimePrimitive().getValue();
-                            if (abstractTimePrimitive instanceof TimePeriodType timePeriodType) {
+                        if (temporalElement.getEXTemporalExtent() != null) {
+                            EXTemporalExtentType exTemporalExtent = temporalElement.getEXTemporalExtent().getValue();
+                            if (exTemporalExtent != null) {
+                                AbstractTimePrimitiveType abstractTimePrimitive = exTemporalExtent.getExtent().getAbstractTimePrimitive().getValue();
+                                if (abstractTimePrimitive instanceof TimePeriodType timePeriodType) {
 
 
-                                if (timePeriodType.getBegin() != null) {
-                                    if (timePeriodType.getBegin().getTimeInstant() != null) {
-                                        if (timePeriodType.getBegin().getTimeInstant().getTimePosition() != null) {
-                                           if (!timePeriodType.getBegin().getTimeInstant().getTimePosition().getValue().isEmpty()) {
-                                               temporalPair[0] = convertDateToZonedDateTime(timePeriodType.getBegin().getTimeInstant().getTimePosition().getValue().get(0));
-                                           }
-                                        }
-                                    }
-                                } else {
-                                    if (!timePeriodType.getBeginPosition().getValue().isEmpty()) {
-                                        temporalPair[0] = convertDateToZonedDateTime(timePeriodType.getBeginPosition().getValue().get(0));
-                                    }
-                                }
-
-                                if (timePeriodType.getEnd() != null) {
-                                    if (timePeriodType.getEnd().getTimeInstant() != null) {
-                                        if (timePeriodType.getEnd().getTimeInstant().getTimePosition() != null) {
-                                            if (!timePeriodType.getEnd().getTimeInstant().getTimePosition().getValue().isEmpty()) {
-                                                temporalPair[1] = convertDateToZonedDateTime(timePeriodType.getEnd().getTimeInstant().getTimePosition().getValue().get(0));
+                                    if (timePeriodType.getBegin() != null) {
+                                        if (timePeriodType.getBegin().getTimeInstant() != null) {
+                                            if (timePeriodType.getBegin().getTimeInstant().getTimePosition() != null) {
+                                                if (!timePeriodType.getBegin().getTimeInstant().getTimePosition().getValue().isEmpty()) {
+                                                    temporalPair[0] = convertDateToZonedDateTime(timePeriodType.getBegin().getTimeInstant().getTimePosition().getValue().get(0));
+                                                }
                                             }
                                         }
+                                    } else {
+                                        if (!timePeriodType.getBeginPosition().getValue().isEmpty()) {
+                                            temporalPair[0] = convertDateToZonedDateTime(timePeriodType.getBeginPosition().getValue().get(0));
+                                        }
                                     }
-                                } else {
-                                    if (timePeriodType.getEndPosition() != null && !timePeriodType.getEndPosition().getValue().isEmpty()) {
-                                        temporalPair[1] = convertDateToZonedDateTime(timePeriodType.getEndPosition().getValue().get(0));
+
+                                    if (timePeriodType.getEnd() != null) {
+                                        if (timePeriodType.getEnd().getTimeInstant() != null) {
+                                            if (timePeriodType.getEnd().getTimeInstant().getTimePosition() != null) {
+                                                if (!timePeriodType.getEnd().getTimeInstant().getTimePosition().getValue().isEmpty()) {
+                                                    temporalPair[1] = convertDateToZonedDateTime(timePeriodType.getEnd().getTimeInstant().getTimePosition().getValue().get(0));
+                                                }
+                                            }
+                                        }
+                                    } else {
+                                        if (timePeriodType.getEndPosition() != null && !timePeriodType.getEndPosition().getValue().isEmpty()) {
+                                            temporalPair[1] = convertDateToZonedDateTime(timePeriodType.getEndPosition().getValue().get(0));
+                                        }
                                     }
                                 }
-                            }
 
-                            result.add(temporalPair);
+                                result.add(temporalPair);
+                            }
                         }
                     });
                 }
@@ -188,15 +190,16 @@ public abstract class StacCollectionMapperService {
         List<Map<String,String>> result = new ArrayList<>();
         List<String[]> temp = createExtentTemporal(source);
 
-        Objects.requireNonNull(temp).forEach(t -> {
-            Map<String,String> m = new HashMap<>();
-            m.put("start", t[0]);
-            m.put("end", t[1]);
-
-            result.add(m);
-        });
-
-        return result;
+        if (temp != null) {
+            for (String[] t : temp) {
+                Map<String, String> temporal = new HashMap<>();
+                temporal.put("start", t[0]);
+                temporal.put("end", t[1]);
+                result.add(temporal);
+            }
+            return result;
+        }
+        return null;
     }
 
     @Named("mapSummaries.geometry")
@@ -693,7 +696,7 @@ public abstract class StacCollectionMapperService {
                         List<Object> rawInput = e.getGeographicElement()
                                 .stream()
                                 .map(AbstractEXGeographicExtentPropertyType::getAbstractEXGeographicExtent)
-                                .filter(m -> Objects.requireNonNull(m.getValue() instanceof EXBoundingPolygonType || m.getValue() instanceof EXGeographicBoundingBoxType))
+                                .filter(m -> m != null && (m.getValue() instanceof EXBoundingPolygonType || m.getValue() instanceof EXGeographicBoundingBoxType))
                                 .map(m -> {
                                     if (m.getValue() instanceof EXBoundingPolygonType exBoundingPolygonType) {
                                         if (!exBoundingPolygonType.getPolygon().isEmpty() && exBoundingPolygonType.getPolygon().get(0).getAbstractGeometry() != null) {

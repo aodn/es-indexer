@@ -3,6 +3,7 @@ package au.org.aodn.esindexer.service;
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.exception.*;
 import au.org.aodn.esindexer.utils.JaxbUtils;
+import au.org.aodn.esindexer.utils.StringUtil;
 import au.org.aodn.metadata.iso19115_3_2018.*;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.ElasticsearchException;
@@ -33,7 +34,8 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class IndexerServiceImpl implements IndexerService {
@@ -148,6 +150,10 @@ public class IndexerServiceImpl implements IndexerService {
         Integer score = completeness;
 
         stacCollectionModel.getSummaries().setScore(score);
+
+        // set title suggest for each metadata record, this will be used by the autocomplete search
+        List<String> filteredWords = StringUtil.generateTitleSuggest(stacCollectionModel.getTitle());
+        stacCollectionModel.setTitleSuggest(filteredWords);
 
         return stacCollectionModel;
     }
