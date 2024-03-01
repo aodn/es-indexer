@@ -411,23 +411,32 @@ public abstract class StacCollectionMapperService {
     List<ProviderModel> mapProviders(MDMetadataType source) {
         List<ProviderModel> results = new ArrayList<>();
         source.getContact().forEach(item -> {
-            if (item.getAbstractResponsibility() != null && item.getAbstractResponsibility().getValue() instanceof CIResponsibilityType2 ciResponsibility) {
-                ciResponsibility.getParty().forEach(party -> {
-                    try {
-                        ProviderModel providerModel = ProviderModel.builder().build();
-                        providerModel.setRoles(Collections.singletonList(ciResponsibility.getRole().getCIRoleCode().getCodeListValue()));
-                        CIOrganisationType2 organisationType2 = (CIOrganisationType2) party.getAbstractCIParty().getValue();
-                        providerModel.setName(organisationType2.getName().getCharacterString().getValue().toString());
-                        organisationType2.getIndividual().forEach(individual -> individual.getCIIndividual().getContactInfo().forEach(contactInfo -> {
-                            contactInfo.getCIContact().getOnlineResource().forEach(onlineResource -> {
-                                providerModel.setUrl(onlineResource.getCIOnlineResource().getLinkage().getCharacterString().getValue().toString());
-                            });
-                        }));
-                        results.add(providerModel);
-                    } catch (ClassCastException e) {
-                        logger.error("Unable to cast getAbstractCIParty().getValue() to CIOrganisationType2 for metadata record: " + this.mapUUID(source));
-                    }
-                });
+            if (item.getAbstractResponsibility() != null) {
+                if(item.getAbstractResponsibility().getValue() instanceof CIResponsibilityType2 ciResponsibility) {
+                    ciResponsibility.getParty().forEach(party -> {
+                        try {
+                            ProviderModel providerModel = ProviderModel.builder().build();
+                            providerModel.setRoles(Collections.singletonList(ciResponsibility.getRole().getCIRoleCode().getCodeListValue()));
+                            CIOrganisationType2 organisationType2 = (CIOrganisationType2) party.getAbstractCIParty().getValue();
+                            providerModel.setName(organisationType2.getName().getCharacterString().getValue().toString());
+                            organisationType2.getIndividual().forEach(individual -> individual.getCIIndividual().getContactInfo().forEach(contactInfo -> {
+                                contactInfo.getCIContact().getOnlineResource().forEach(onlineResource -> {
+                                    providerModel.setUrl(onlineResource.getCIOnlineResource().getLinkage().getCharacterString().getValue().toString());
+                                });
+                            }));
+                            results.add(providerModel);
+                        }
+                        catch (ClassCastException e) {
+                            logger.error("Unable to cast getAbstractCIParty().getValue() to CIOrganisationType2 for metadata record: {}", mapUUID(source));
+                        }
+                    });
+                }
+                else {
+                    logger.warn("getContact().getAbstractResponsibility() in mapProviders is not of type CIResponsibilityType2 for UUID {}", mapUUID(source));
+                }
+            }
+            else {
+                logger.warn("Null value fround for getContact().getAbstractResponsibility() in mapProviders transform for UUID {}", mapUUID(source));
             }
         });
         return results;
@@ -481,6 +490,7 @@ public abstract class StacCollectionMapperService {
             for (MDDataIdentificationType item : items) {
                 item.getPointOfContact().forEach(poc -> {
                     if (poc.getAbstractResponsibility() != null) {
+
                         AbstractResponsibilityType responsibilityType = poc.getAbstractResponsibility().getValue();
                         if (responsibilityType instanceof CIResponsibilityType2 ciResponsibility) {
                             ContactsModel contactsModel = ContactsModel.builder().build();
@@ -488,7 +498,8 @@ public abstract class StacCollectionMapperService {
 
                             if (ciResponsibility.getParty().isEmpty()) {
                                 logger.warn("Unable to find contact info for metadata record: " + this.mapUUID(source));
-                            } else {
+                            }
+                            else {
                                 ciResponsibility.getParty().forEach(party -> {
                                     contactsModel.setOrganization(mapContactsOrganization(party));
                                     try {
@@ -506,7 +517,8 @@ public abstract class StacCollectionMapperService {
 
                                         if (organisation.getIndividual().isEmpty()) {
                                             contactInfoList.set(organisation.getContactInfo());
-                                        } else {
+                                        }
+                                        else {
                                             organisation.getIndividual().forEach(individual -> {
                                                 name.set(mapContactsName(individual));
                                                 position.set(mapContactsPosition(individual));
@@ -538,13 +550,17 @@ public abstract class StacCollectionMapperService {
                                         contactsModel.setPhones(phones);
                                         contactsModel.setLinks(onlineResources);
 
-                                    } catch (Exception e) {
-                                        logger.warn("Unable to find contact info for metadata record: " + this.mapUUID(source));
+                                    }
+                                    catch (Exception e) {
+                                        logger.warn("Unable to find contact info for metadata record: {}", mapUUID(source));
                                     }
                                 });
                                 results.add(contactsModel);
                             }
                         }
+                    }
+                    else {
+                        logger.warn("getAbstractResponsibility() is null in mapContact for metadata record: {}", mapUUID(source));
                     }
                 });
             }
@@ -554,23 +570,27 @@ public abstract class StacCollectionMapperService {
 
     protected String mapContactsRole(CIResponsibilityType2 ciResponsibility) {
         CodeListValueType roleCode = ciResponsibility.getRole().getCIRoleCode();
-        if (roleCode != null) { return roleCode.getCodeListValue(); } else { return ""; }
+        return roleCode != null ?
+                roleCode.getCodeListValue() : "";
     }
 
     protected String mapContactsOrganization(AbstractCIPartyPropertyType2 party) {
         String organisationString = party.getAbstractCIParty().getValue().getName().getCharacterString().getValue().toString();
-        if (organisationString != null) { return organisationString; } else { return ""; }
+        return organisationString != null ?
+                organisationString : "";
 
     }
 
     protected String mapContactsName(CIIndividualPropertyType2 individual) {
         CharacterStringPropertyType nameString = individual.getCIIndividual().getName();
-        if (nameString != null) { return individual.getCIIndividual().getName().getCharacterString().getValue().toString(); } else { return ""; }
+        return nameString != null ?
+                individual.getCIIndividual().getName().getCharacterString().getValue().toString() : "";
     }
 
     protected String mapContactsPosition(CIIndividualPropertyType2 individual) {
         CharacterStringPropertyType positionString = individual.getCIIndividual().getPositionName();
-        if (positionString != null) { return individual.getCIIndividual().getPositionName().getCharacterString().getValue().toString(); } else { return ""; }
+        return positionString != null ?
+                individual.getCIIndividual().getPositionName().getCharacterString().getValue().toString() : "";
     }
 
     protected Map<String, Object> mapContactsAddress(CIAddressPropertyType2 address) {
@@ -599,11 +619,8 @@ public abstract class StacCollectionMapperService {
     }
 
     protected String mapContactsEmail(CharacterStringPropertyType electronicMailAddress) {
-        if (electronicMailAddress != null) {
-            return electronicMailAddress.getCharacterString().getValue().toString();
-        } else {
-            return "";
-        }
+        return electronicMailAddress != null ?
+            electronicMailAddress.getCharacterString().getValue().toString() : "";
     }
 
     protected Map<String, String> mapContactsPhone(CITelephonePropertyType2 phone) {
@@ -665,7 +682,8 @@ public abstract class StacCollectionMapperService {
     protected String mapLanguagesCode(MDDataIdentificationType i) {
         try {
             return i.getDefaultLocale().getPTLocale().getValue().getLanguage().getLanguageCode().getCodeListValue();
-        } catch (NullPointerException e) {
+        }
+        catch (NullPointerException e) {
             return null;
         }
     }

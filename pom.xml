@@ -17,7 +17,11 @@
 
     <repositories>
         <repository>
-            <id>mvnrepository.com</id>
+            <id>osgeo</id>
+            <url>https://repo.osgeo.org/repository/geonetwork-releases</url>
+        </repository>
+        <repository>
+            <id>geotools</id>
             <url>https://repo.osgeo.org/repository/release/</url>
         </repository>
     </repositories>
