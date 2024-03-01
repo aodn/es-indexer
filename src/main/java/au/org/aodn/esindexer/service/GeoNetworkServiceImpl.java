@@ -164,7 +164,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
             // TODO: Can the elastic index not update after insert dataset into GeoNetwork?
             final SearchResponse<ObjectNode> response = gn4ElasticClient.search(GEONETWORK_ALL_UUID, ObjectNode.class);
 
-            if(Objects.requireNonNull(!response.hits().hits().isEmpty())) {
+            if(response.hits() != null && response.hits().hits() != null && !response.hits().hits().isEmpty()) {
                 // Use iterator so that we can get record by record, otherwise we need to store all record
                 // in memory which use up lots of memory
                 return () -> new Iterator<>() {
@@ -198,7 +198,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
                 };
             }
             else {
-                throw new MetadataNotFoundException("Unable to find metadata records in GeoNetwork");
+                throw new MetadataNotFoundException("Unable to find any metadata records in GeoNetwork");
             }
         }
         catch(IOException e) {
