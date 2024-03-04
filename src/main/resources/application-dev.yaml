@@ -1,8 +1,3 @@
-# Client calling the Indexer API must provide this token in the Authorization header
-app:
-  http:
-    authToken: sample-auth-token
-
 server:
   port: 8081
 

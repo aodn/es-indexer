@@ -9,9 +9,12 @@ server:
   port: 8080
   error:
     include-stacktrace: never
+
+# Client calling the Indexer API must provide this token in the Authorization header
 app:
   http:
     auth-token-header-name: X-API-Key
+    authToken: ${INDEXER_APIKEY:sample-auth-token}
 
 management:
   health:
