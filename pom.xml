@@ -35,6 +35,7 @@
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
+        <maven.sourceplugin.version>3.3.0</maven.sourceplugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
         <jakarta.xml.bind.version>4.0.1</jakarta.xml.bind.version>
