@@ -305,7 +305,7 @@ public abstract class StacCollectionMapperService {
     String mapGeoNetworkGroup(MDMetadataType source) {
         try {
             String group = geoNetworkService.findGroupById(mapUUID(source));
-            return group != null ? group : null;
+            return group != null ? group.toLowerCase() : null;
         }
         catch (IOException e) {
             return null;
