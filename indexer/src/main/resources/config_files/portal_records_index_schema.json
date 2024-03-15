@@ -56,6 +56,19 @@
         "properties" : {
           "score": { "type": "long" },
           "status": { "type": "text" },
+          "scope" : {
+            "type": "nested",
+            "properties" : {
+              "code" : {
+                "type": "text"
+              },
+              "name" : {
+                "type": "text"
+              }
+            }
+          },
+          "dataset_provider": { "type": "text" },
+          "dataset_group": { "type": "text" },
           "creation": { "type": "date" },
           "proj:geometry": {
             "type": "geo_shape"

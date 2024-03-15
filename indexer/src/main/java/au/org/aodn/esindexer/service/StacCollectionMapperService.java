@@ -14,9 +14,11 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
@@ -45,6 +47,7 @@ public abstract class StacCollectionMapperService {
     @Mapping(target="summaries.temporal", source = "source", qualifiedByName = "mapSummaries.temporal")
     @Mapping(target="summaries.updateFrequency", source = "source", qualifiedByName = "mapSummaries.updateFrequency")
     @Mapping(target="summaries.datasetProvider", source = "source", qualifiedByName = "mapSummaries.datasetProvider")
+    @Mapping(target="summaries.datasetGroup", source = "source", qualifiedByName = "mapSummaries.datasetGroup")
     @Mapping(target="extent.bbox", source = "source", qualifiedByName = "mapExtentBbox")
     @Mapping(target="extent.temporal", source = "source", qualifiedByName = "mapExtentTemporal")
     @Mapping(target="contacts", source = "source", qualifiedByName = "mapContacts")
@@ -60,6 +63,9 @@ public abstract class StacCollectionMapperService {
 
     @Value("${spring.jpa.properties.hibernate.jdbc.time_zone}")
     private String timeZoneId;
+
+    @Autowired
+    private GeoNetworkService geoNetworkService;
 
     @Named("mapUUID")
     String mapUUID(MDMetadataType source) {
@@ -293,6 +299,17 @@ public abstract class StacCollectionMapperService {
     String mapDatasetOwner(MDMetadataType source) {
         List<ProviderModel> providers = mapProviders(source);
         return providers.stream().anyMatch(p -> p.getName().contains("IMOS")) ? "IMOS" : null;
+    }
+
+    @Named("mapSummaries.datasetGroup")
+    String mapGeoNetworkGroup(MDMetadataType source) {
+        try {
+            String group = geoNetworkService.findGroupById(mapUUID(source));
+            return group != null ? group : null;
+        }
+        catch (IOException e) {
+            return null;
+        }
     }
 
     protected List<Map<String, String>> mapThemesConcepts(MDKeywordsPropertyType descriptiveKeyword) {

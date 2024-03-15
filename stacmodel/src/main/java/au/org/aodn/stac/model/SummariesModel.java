@@ -14,7 +14,11 @@ public class SummariesModel {
     protected Integer score;
     protected String status;
     protected Map<String, String> scope;
-
+    /**
+     * Group info as setup in geonetwork
+     */
+    @JsonProperty("dataset_group")
+    protected String datasetGroup;
     /**
      * It is used to flag who owns the dataset, right now this field appears if it is from IMOS
      */

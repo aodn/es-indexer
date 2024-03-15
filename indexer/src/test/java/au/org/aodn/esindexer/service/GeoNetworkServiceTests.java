@@ -99,7 +99,18 @@ public class GeoNetworkServiceTests extends BaseTestClass {
     }
 
     @Test
-    public void verifySearchRecordBy() throws IOException, InterruptedException {
+    public void verifyFindGroupById() throws IOException {
+        // By default, record will assign to group with group id = 2
+        insertMetadataRecords("9e5c3031-a026-48b3-a153-a70c2e2b78b9", "classpath:canned/sample1.xml");
+        String group = geoNetworkService.findGroupById("9e5c3031-a026-48b3-a153-a70c2e2b78b9");
+
+        assertEquals("Default group equals", "sample", group);
+
+        deleteRecord("9e5c3031-a026-48b3-a153-a70c2e2b78b9");
+    }
+
+    @Test
+    public void verifySearchRecordBy() throws IOException {
 
         String content = insertMetadataRecords("9e5c3031-a026-48b3-a153-a70c2e2b78b9", "classpath:canned/sample1.xml");
         String xml = geoNetworkService.searchRecordBy("9e5c3031-a026-48b3-a153-a70c2e2b78b9");

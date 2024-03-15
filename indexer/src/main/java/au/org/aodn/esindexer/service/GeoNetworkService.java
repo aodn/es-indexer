@@ -2,6 +2,8 @@ package au.org.aodn.esindexer.service;
 
 import org.springframework.http.ResponseEntity;
 
+import java.io.IOException;
+
 public interface GeoNetworkService {
     void setServer(String server);
     String getServer();
@@ -10,6 +12,8 @@ public interface GeoNetworkService {
     String getIndexName();
 
     String searchRecordBy(String uuid);
+    String findGroupById(String uuid) throws IOException;
+
     /**
      * Return Iterable of records, noted that the item inside can be null, so please check null on each item
      * @return

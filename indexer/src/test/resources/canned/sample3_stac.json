@@ -21,6 +21,7 @@
       "name": "IMOS dataset level record"
     },
     "dataset_provider": "IMOS",
+    "dataset_group":"sample",
     "temporal": [
       {
         "start": "2007-03-26T06:00:00Z",

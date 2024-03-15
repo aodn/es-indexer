@@ -51,6 +51,9 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
         return body == null ? new HttpEntity<>(headers) : new HttpEntity<>(body, headers);
     }
 
+    protected final static String UUID = "uuid";
+    protected final static String GEONETWORK_GROUP = "groupOwner";
+
     public GeoNetworkServiceImpl(
             @Value("${geonetwork.host}") String server,
             @Value("${geonetwork.search.api.index}") String indexName) {
@@ -59,7 +62,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
                 .index(indexName)
                 .query(new MatchAllQuery.Builder().build()._toQuery())    // Match all
                 .source(s -> s
-                        .filter(f -> f.includes("uuid")))// Only select uuid field
+                        .filter(f -> f.includes(UUID)))// Only select uuid field
                 // TODO: redesign the iterator to be more efficient
                 /* by default ES will return just 10 top hits (10 records of the thousands available records),
                 the iterator implementation in getAllMetadataRecords() method will help saving memory but process those 10 records only,
@@ -73,13 +76,52 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
         setServer(server);
     }
 
+    public String findGroupById(String uuid) throws IOException {
+        SearchRequest request = new SearchRequest.Builder()
+                .index(indexName)
+                .query(q -> q.bool(b -> b.filter(f -> f.matchPhrase(p -> p.field(UUID).query(uuid)))))
+                .source(s -> s
+                        .filter(f -> f.includes(GEONETWORK_GROUP)))
+                .size(1)
+                .build();
+
+        final SearchResponse<ObjectNode> response = gn4ElasticClient.search(request, ObjectNode.class);
+
+        if(response.hits() != null && response.hits().hits() != null && !response.hits().hits().isEmpty()) {
+            // UUID should result in only 1 record, hence get(0) is ok.
+            String group = response.hits().hits().get(0).source().get(GEONETWORK_GROUP).asText();
+
+            Map<String, Object> params = new HashMap<>();
+            params.put("id", group);
+
+            HttpEntity<String> requestEntity = getRequestEntity(MediaType.APPLICATION_JSON, null);
+
+            ResponseEntity<JsonNode> responseEntity = restTemplate.exchange(
+                    getGeoNetworkGroupsEndpoint(),
+                    HttpMethod.GET,
+                    requestEntity,
+                    JsonNode.class, params);
+
+            if(responseEntity.getStatusCode().is2xxSuccessful()) {
+                return Objects.requireNonNull(responseEntity.getBody()).get("name").asText();
+            }
+            else {
+                return null;
+            }
+        }
+        else {
+            return null;
+        }
+
+    }
+
     protected String findFormatterId(String uuid) {
         try {
             HttpEntity<String> requestEntity = getRequestEntity(MediaType.APPLICATION_JSON, null);
 
             Map<String, Object> params = new HashMap<>();
             params.put("indexName", getIndexName());
-            params.put("uuid", uuid);
+            params.put(UUID, uuid);
 
             ResponseEntity<JsonNode> responseEntity = restTemplate.exchange(
                     getGeoNetworkRecordsEndpoint(),
@@ -110,7 +152,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
 
             Map<String, Object> params = new HashMap<>();
             params.put("indexName", getIndexName());
-            params.put("uuid", uuid);
+            params.put(UUID, uuid);
             params.put("formatterId", this.findFormatterId(uuid));
 
             ResponseEntity<String> responseEntity = restTemplate.exchange(
@@ -185,7 +227,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
                     @Override
                     public String next() {
                         // TODO: Potential problem with edge case where the list is bigger then size set Integer.MAX
-                        String uuid = response.hits().hits().get(index++).source().get("uuid").asText();
+                        String uuid = response.hits().hits().get(index++).source().get(UUID).asText();
                         try {
                             return GeoNetworkServiceImpl.this.searchRecordBy(uuid);
                         }
@@ -220,6 +262,10 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
 
     protected String getGeoNetworkRecordsEndpoint() {
         return getServer() + "/geonetwork/srv/api/{indexName}/{uuid}";
+    }
+
+    protected String getGeoNetworkGroupsEndpoint() {
+        return getServer() + "/geonetwork/srv/api/groups/{id}";
     }
 
     protected String getReIndexEndpoint() {
