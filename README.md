@@ -13,7 +13,10 @@ This application is built with `Spring Boot 3` and `Java 17`.
 There are required environment variables to run the `es-indexer`:
 
 ```env
-# Client calling the Indexer API must provide this token in the Authorization header
+# Client calling the Indexer API must provide this token in the Authorization header, these value is set
+# in [appdeply](https://github.com/aodn/appdeploy/blob/main/tg/edge/es-indexer/ecs/variables.yaml) for edge env
+# under environment_variables:
+
 APP_HTTP_AUTH_TOKEN=sampletoken
 
 SERVER_PORT=8080
@@ -28,18 +31,33 @@ GEONETWORK_HOST=http://localhost:8080
 ### Maven build
 
 ```console
+mvn clean install
+or
 mvn clean install [-DskipTests]
+
+# If you do not use skipTest, then autotest will run where it will create a docker geonetwork instance, inject the
+sample data and then run the indexer. You can treat this as kind of integration testing.
 ```
+
+This project container 3 submodules:
+* geonetwork - This is used to compile JAXB lib to handle XML return from GEONetowrk, it is iso19115 standard
+* stacmodel - A group of java class that create the STAC json which store in elastic search, so if app needs to read
+STAC from elastic, use this lib
+* indexer - The main app that do the transformation.
 
 ### Docker
 
 ```console
+# Start a local instance of indexer
+
 docker-compose -f docker-compose-dev.yaml up [-d: in daemon mode | --build: to see the console logs]
 ```
 
 ### Endpoints:
 
-- Health check: `/actuator/health`
-- POST/GET/DELETE against specific record: `/api/v1/indexer/index/{records-uuid}`
-- Bulk index: `/api/v1/indexer/index/all`
-- Swagger UI: `/swagger-ui/index.html`
+| Description | Endpoints |
+|-------------|-------|
+| Health check | `/actuator/health` |
+| POST/GET/DELETE against specific record | `/api/v1/indexer/index/{records-uuid}`|
+| Bulk index | `/api/v1/indexer/index/all`|
+| Swagger UI: | `/swagger-ui/index.html`|
