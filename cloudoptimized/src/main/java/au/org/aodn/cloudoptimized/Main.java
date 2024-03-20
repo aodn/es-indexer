@@ -23,6 +23,6 @@ public class Main implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        parquetReader.getDatasetLastUpdate("anmn_ctd_ts_fv01");
+        log.info("Max time {}", parquetReader.getDatasetLastUpdate("anmn_ctd_ts_fv01"));
     }
 }

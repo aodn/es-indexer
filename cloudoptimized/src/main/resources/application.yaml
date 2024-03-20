@@ -1,2 +1,8 @@
 cloudoptimized:
   s3path: 's3a://imos-data-lab-optimised/parquet/raymond/'
+
+logging:
+  level:
+    root: INFO
+    org.apache.spark: WARN
+    org.apache.hadoop: WARN
