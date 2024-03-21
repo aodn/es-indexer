@@ -8,8 +8,8 @@ cloud ready parquet / zarr.
 We use Spark and SparkQL to query data against S3 bucket, in theory we should setup a Spark cluster with multiple node
 so that processing can happens in parallel. Without that we can only use a single machine with multiple thread.
 
-For local run with 16 core, aka 16 tasks. A run to get the max TIME is around 4 mins. Most of the time spend on initial 
-scan on MAX timestamp as it need to go through all directory, once we have the max timestamp and site_code access 
+For local run with 16 core, aka 16 tasks. A run to get the max TIME is around 4 mins. Most of the time spend on initial
+scan on MAX timestamp as it need to go through all directory, once we have the max timestamp and site_code access
 to individual partition is very fast.
 
 We may be able to optimized this query by asking if max timestamp is > certain time if we know the site_code.
@@ -147,4 +147,5 @@ After you login successfully, you can run the Main to test it, but remember to a
 
 ```text
 --add-exports java.base/sun.nio.ch=ALL-UNNAMED
+
 ```
