@@ -30,22 +30,22 @@ public class ParquetReader {
     @Autowired
     protected SparkSession session;
 
-    public ZonedDateTime getDatasetLastUpdate(String filename) {
+    protected StructType schema = new StructType(
+            new StructField[] {
+                    new StructField("site_code", DataTypes.StringType, false, Metadata.empty()),
+                    new StructField("timestamp", DataTypes.LongType, false, Metadata.empty()),
+                    new StructField("TIME", DataTypes.LongType, false, Metadata.empty()),
+            }
+    );
 
-        StructType schema = new StructType(
-                new StructField[] {
-                        new StructField("site_code", DataTypes.StringType, false, Metadata.empty()),
-                        new StructField("timestamp", DataTypes.LongType, false, Metadata.empty()),
-                        new StructField("TIME", DataTypes.LongType, false, Metadata.empty()),
-                }
-        );
+    public ZonedDateTime getDatasetMaxTimestamp(String filename) {
 
         Dataset<Row> df = session.read()
                 .schema(schema)
                 .parquet(s3path + filename);
 
         df.createOrReplaceTempView("DATASET");
-
+        // TODO: Seems slow operation, may be use s3 ListObject faster?
         Dataset<Row> findMaxTimestampIndex = session.sql("select site_code, max(timestamp) as timestamp from DATASET group by site_code order by timestamp desc");
         findMaxTimestampIndex.explain(true);
 
@@ -62,5 +62,26 @@ public class ParquetReader {
 
         return ZonedDateTime.ofInstant(Instant.ofEpochMilli(t), ZoneId.of(timeZone));
 
+    }
+
+    public void getDatasetFromRange(String filename, String siteCode, ZonedDateTime start, ZonedDateTime end) {
+        Dataset<Row> df = session.read()
+                .parquet(s3path + filename);
+
+        df.createOrReplaceTempView("DATASET");
+
+        // timestamp is in sec but TIME is in nanosecond
+        String sql = String.format("select LATITUDE,LONGITUDE,CNDC,CNDC_quality_control,TEMP,TEMP_quality_control from DATASET where timestamp >= %d and timestamp <= %d and site_code='%s' and TIME >= %d and TIME <= %d",
+                start.toInstant().getEpochSecond(),
+                end.toInstant().getEpochSecond(),
+                siteCode,
+                TimeUnit.NANOSECONDS.convert(start.toInstant().toEpochMilli(), TimeUnit.MILLISECONDS),
+                TimeUnit.NANOSECONDS.convert(end.toInstant().toEpochMilli(), TimeUnit.MILLISECONDS)
+        );
+
+        Dataset<Row> rows = session.sql(sql);
+        rows.explain(true);
+
+        rows.show(10);
     }
 }

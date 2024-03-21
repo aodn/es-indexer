@@ -6,9 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ConfigurableApplicationContext;
 
 import java.io.IOException;
+import java.time.ZonedDateTime;
+
 @Slf4j
 @SpringBootApplication
 public class Main implements CommandLineRunner {
@@ -23,6 +24,9 @@ public class Main implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        log.info("Max time {}", parquetReader.getDatasetLastUpdate("anmn_ctd_ts_fv01"));
+        log.info("Find Max Time {}", parquetReader.getDatasetMaxTimestamp("anmn_ctd_ts_fv01"));
+
+        log.info("Subset dataset");
+        parquetReader.getDatasetFromRange("anmn_ctd_ts_fv01", "GBROTE", ZonedDateTime.now().minusMonths(10), ZonedDateTime.now());
     }
 }
