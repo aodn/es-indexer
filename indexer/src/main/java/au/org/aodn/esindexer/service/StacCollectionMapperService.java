@@ -431,11 +431,12 @@ public abstract class StacCollectionMapperService {
             if (item.getAbstractResponsibility() != null) {
                 if(item.getAbstractResponsibility().getValue() instanceof CIResponsibilityType2 ciResponsibility) {
                     ciResponsibility.getParty().forEach(party -> {
-                        try {
+                        try
+                        {
                             ProviderModel providerModel = ProviderModel.builder().build();
                             providerModel.setRoles(Collections.singletonList(ciResponsibility.getRole().getCIRoleCode().getCodeListValue()));
                             CIOrganisationType2 organisationType2 = (CIOrganisationType2) party.getAbstractCIParty().getValue();
-                            providerModel.setName(organisationType2.getName().getCharacterString().getValue().toString());
+                            providerModel.setName(organisationType2.getName() != null ? organisationType2.getName().getCharacterString().getValue().toString() : "");
                             organisationType2.getIndividual().forEach(individual -> individual.getCIIndividual().getContactInfo().forEach(contactInfo -> {
                                 contactInfo.getCIContact().getOnlineResource().forEach(onlineResource -> {
                                     providerModel.setUrl(onlineResource.getCIOnlineResource().getLinkage().getCharacterString().getValue().toString());
@@ -592,10 +593,11 @@ public abstract class StacCollectionMapperService {
     }
 
     protected String mapContactsOrganization(AbstractCIPartyPropertyType2 party) {
-        String organisationString = party.getAbstractCIParty().getValue().getName().getCharacterString().getValue().toString();
-        return organisationString != null ?
-                organisationString : "";
-
+        String organisationString = "";
+        if (party.getAbstractCIParty() != null) {
+            organisationString = party.getAbstractCIParty().getValue().getName().getCharacterString().getValue().toString();
+        }
+        return organisationString;
     }
 
     protected String mapContactsName(CIIndividualPropertyType2 individual) {
