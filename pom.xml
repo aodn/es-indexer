@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.1.5</version>
+        <version>3.2.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>au.org.aodn</groupId>
@@ -16,6 +16,7 @@
     <description>es-indexer</description>
 
     <modules>
+        <module>cloudoptimized</module>
         <module>geonetwork</module>
         <module>stacmodel</module>
         <module>indexer</module>
@@ -47,6 +48,30 @@
 
     <dependencyManagement>
         <dependencies>
+            <!-- AWS Java SDK -->
+            <dependency>
+                <groupId>com.amazonaws</groupId>
+                <artifactId>aws-java-sdk</artifactId>
+                <version>1.12.678</version> <!-- Use a compatible version -->
+            </dependency>
+            <!-- Hadoop AWS -->
+            <dependency>
+                <groupId>org.apache.hadoop</groupId>
+                <artifactId>hadoop-aws</artifactId>
+                <version>3.3.6</version> <!-- Ensure compatibility with your Hadoop version -->
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-common -->
+            <dependency>
+                <groupId>org.apache.hadoop</groupId>
+                <artifactId>hadoop-client</artifactId>
+                <version>3.3.6</version>
+            </dependency>
+            <!-- Apache Parquet -->
+            <dependency>
+                <groupId>org.apache.parquet</groupId>
+                <artifactId>parquet-hadoop</artifactId>
+                <version>1.13.1</version>
+            </dependency>
             <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-actuator -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
