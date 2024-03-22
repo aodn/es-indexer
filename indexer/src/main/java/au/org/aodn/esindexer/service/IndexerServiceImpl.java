@@ -152,8 +152,8 @@ public class IndexerServiceImpl implements IndexerService {
         stacCollectionModel.getSummaries().setScore(score);
 
         // set title suggest for each metadata record, this will be used by the autocomplete search
-        List<String> filteredWords = StringUtil.generateTitleSuggest(stacCollectionModel.getTitle());
-        stacCollectionModel.setTitleSuggest(filteredWords);
+//        List<String> filteredWords = StringUtil.generateTitleSuggest(stacCollectionModel.getTitle());
+        stacCollectionModel.setTitleSuggest(stacCollectionModel.getTitle());
 
         return stacCollectionModel;
     }
