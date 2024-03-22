@@ -329,19 +329,7 @@
     }
   ],
   "id": "06b09398-d3d0-47dc-a54a-a745319fbece",
-  "title_suggest": [
-    "imos",
-    "animal",
-    "tracking",
-    "facility",
-    "satellite",
-    "relay",
-    "tagging",
-    "program",
-    "delayed",
-    "mode",
-    "data"
-  ],
+  "title_suggest": "IMOS - Animal Tracking Facility - Satellite Relay Tagging Program - Delayed mode data °",
   "type": "Collection",
   "stac_version": "1.0.0",
   "stac_extensions": [
