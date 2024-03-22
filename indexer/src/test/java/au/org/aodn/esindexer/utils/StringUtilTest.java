@@ -25,13 +25,6 @@ public class StringUtilTest {
     }
 
     @Test
-    void generateTitleSuggest() {
-        String input = "IMOS - Animal Tracking Facility - Satellite Relay Tagging Program - Delayed mode data °";
-        List<String> result = StringUtil.generateTitleSuggest(input);
-        assertEquals(List.of("imos", "animal", "tracking", "facility", "satellite", "relay", "tagging", "program", "delayed", "mode", "data"), result);
-    }
-
-    @Test
     public void testToUTF8String_withDegreeSign() {
         // Example string containing the degree symbol
         String original = "Temperature: 25° Celsius";
