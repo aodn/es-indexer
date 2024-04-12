@@ -1,15 +1,15 @@
 package au.org.aodn.esindexer.utils;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.locationtech.jts.geom.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 public class BBoxUtils {
 
-    protected static Logger logger = LoggerFactory.getLogger(BBoxUtils.class);
+    protected static Logger logger = LogManager.getLogger(BBoxUtils.class);
 
     public static List<List<BigDecimal>> createBBoxFromEXBoundingPolygonType(List<Object> rawInput) {
         //TODO: avoid hardcode CRS, get it from document

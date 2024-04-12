@@ -1,7 +1,7 @@
 package au.org.aodn.esindexer.service;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import au.org.aodn.stac.model.StacCollectionModel;
@@ -9,7 +9,7 @@ import au.org.aodn.stac.model.StacCollectionModel;
 @Service
 public class RankingServiceImpl implements RankingService {
 
-    protected static Logger logger = LoggerFactory.getLogger(RankingServiceImpl.class);
+    protected static Logger logger = LogManager.getLogger(RankingServiceImpl.class);
 
     public Integer evaluateCompleteness(StacCollectionModel stacCollectionModel) {
         Integer total = 0;

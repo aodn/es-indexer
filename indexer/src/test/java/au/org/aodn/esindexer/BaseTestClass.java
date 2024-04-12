@@ -5,8 +5,8 @@ import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.ElasticsearchException;
 import co.elastic.clients.elasticsearch._types.query_dsl.QueryBuilders;
 import co.elastic.clients.transport.rest_client.RestClientTransport;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,7 +28,7 @@ import static org.junit.Assert.assertEquals;
 
 public class BaseTestClass {
 
-    protected final Logger logger = LoggerFactory.getLogger(BaseTestClass.class);
+    protected final Logger logger = LogManager.getLogger(BaseTestClass.class);
 
     protected String xsrfToken = null;
 

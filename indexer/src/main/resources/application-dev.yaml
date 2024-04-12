@@ -4,9 +4,22 @@ server:
 elasticsearch:
   index:
     name: dev_portal_records
-  serverUrl: http://localhost:9200
+  serverUrl: https://dev-discovery-index.es.ap-southeast-2.aws.found.io
   apiKey: sample-api-key
+
+geonetwork:
+  host: https://geonetwork-edge.mvp.aodn.org.au
+  search:
+    api:
+      index: "records"
+      endpoint: /geonetwork/srv/api/search
 
 logging:
   level:
     au.org.aodn.esindexer: DEBUG
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health,info,env,beans,logfile"

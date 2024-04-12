@@ -1,13 +1,13 @@
 package au.org.aodn.esindexer.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.geotools.geojson.geom.GeometryJSON;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.MultiPolygon;
 import org.locationtech.jts.geom.Polygon;
 import org.locationtech.jts.geom.PrecisionModel;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -17,7 +17,7 @@ import java.util.Map;
 
 public class GeometryUtils {
 
-    protected static Logger logger = LoggerFactory.getLogger(GeometryUtils.class);
+    protected static Logger logger = LogManager.getLogger(GeometryUtils.class);
 
     protected static GeometryFactory factory = new GeometryFactory(new PrecisionModel(), 4326);
 

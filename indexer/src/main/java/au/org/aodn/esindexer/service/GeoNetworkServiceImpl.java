@@ -10,8 +10,8 @@ import co.elastic.clients.elasticsearch.core.SearchRequest;
 import co.elastic.clients.elasticsearch.core.SearchResponse;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -33,7 +33,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
     @Qualifier("gn4ElasticsearchClient")
     protected ElasticsearchClient gn4ElasticClient;
 
-    protected static final Logger logger = LoggerFactory.getLogger(GeoNetworkServiceImpl.class);
+    protected static final Logger logger = LogManager.getLogger(GeoNetworkServiceImpl.class);
 
     protected final SearchRequest GEONETWORK_ALL_UUID;
 
