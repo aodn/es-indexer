@@ -6,10 +6,10 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.xml.bind.JAXBException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.operation.TransformException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +21,7 @@ import java.io.IOException;
 @RequestMapping(value = "/api/v1/indexer/index")
 @Tag(name="Indexer", description = "The Indexer API")
 public class IndexerController {
-    private static final Logger logger = LoggerFactory.getLogger(IndexerController.class);
+    private static final Logger logger = LogManager.getLogger(IndexerController.class);
 
     @Autowired
     IndexerService indexerService;
@@ -39,16 +39,16 @@ public class IndexerController {
 
     @GetMapping(path="/records/{uuid}", produces = "application/json")
     @Operation(description = "Get a document from GeoNetwork by UUID directly - JSON format response")
-    public ResponseEntity getMetadataRecordFromGeoNetworkByUUID(@PathVariable("uuid") String uuid) {
-        logger.info("getting a document by UUID: " + uuid);
+    public ResponseEntity<String> getMetadataRecordFromGeoNetworkByUUID(@PathVariable("uuid") String uuid) {
+        logger.info("getting a document from geonetwork by UUID: {}", uuid);
         String response =  geonetworkResourceService.searchRecordBy(uuid);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @GetMapping(path="/{uuid}", produces = "application/json")
     @Operation(description = "Get a document from portal index by UUID")
-    public ResponseEntity getDocumentByUUID(@PathVariable("uuid") String uuid) throws IOException {
-        logger.info("getting a document by UUID: " + uuid);
+    public ResponseEntity<ObjectNode> getDocumentByUUID(@PathVariable("uuid") String uuid) throws IOException {
+        logger.info("getting a document form portal by UUID: {}", uuid);
         ObjectNode response =  indexerService.getDocumentByUUID(uuid).source();
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }

@@ -17,9 +17,15 @@ app:
     authToken: ${INDEXER_APIKEY:sample-auth-token}
 
 management:
+  endpoints:
+    web:
+      base-path: /manage
   health:
     elasticsearch:
       enabled: false
+  endpoint:
+    logfile:
+      external-file: /tmp/logs/indexer.log
 
 elasticsearch:
   index:
@@ -41,4 +47,4 @@ springdoc:
 
 logging:
   level:
-    au.org.aodn.esindexer: debug
+    au.org.aodn.esindexer: INFO

@@ -1,10 +1,11 @@
 package au.org.aodn.esindexer.utils;
 
+import lombok.Setter;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.Envelope;
 import org.locationtech.jts.geom.Polygon;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -33,17 +34,11 @@ This class is tailor for the above operation
  */
 public class StacUtils {
 
-    protected static Logger logger = LoggerFactory.getLogger(StacUtils.class);
+    protected static Logger logger = LogManager.getLogger(StacUtils.class);
 
+    @Setter
     protected static int scale = 10;
 
-    /**
-     * Default sale aka number of decimal to use is 10
-     * @param s
-     */
-    public static void setScale(int s) {
-        scale = s;
-    }
     /**
      *
      * @param polygons - Assume to be EPSG:4326 as this is what GeoJson use
@@ -86,7 +81,6 @@ public class StacUtils {
         }
         catch(Exception e) {
             logger.error("Error processing", e);
-            e.printStackTrace();
         }
         return new ArrayList<>();
     }

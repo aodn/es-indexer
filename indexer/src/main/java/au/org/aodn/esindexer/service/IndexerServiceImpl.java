@@ -20,10 +20,10 @@ import co.elastic.clients.transport.endpoints.BooleanResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import jakarta.xml.bind.JAXBException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.operation.TransformException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
@@ -61,7 +61,7 @@ public class IndexerServiceImpl implements IndexerService {
     @Autowired
     RankingService rankingService;
 
-    private static final Logger logger = LoggerFactory.getLogger(IndexerServiceImpl.class);
+    private static final Logger logger = LogManager.getLogger(IndexerServiceImpl.class);
 
     protected long getDocumentsCount() {
         try {

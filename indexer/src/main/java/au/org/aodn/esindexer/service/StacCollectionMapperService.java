@@ -9,11 +9,11 @@ import au.org.aodn.esindexer.utils.BBoxUtils;
 import au.org.aodn.esindexer.utils.TemporalUtils;
 import au.org.aodn.metadata.iso19115_3_2018.*;
 import jakarta.xml.bind.JAXBElement;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -59,7 +59,7 @@ public abstract class StacCollectionMapperService {
     public abstract StacCollectionModel mapToSTACCollection(MDMetadataType source);
 
 
-    private static final Logger logger = LoggerFactory.getLogger(StacCollectionMapperService.class);
+    private static final Logger logger = LogManager.getLogger(StacCollectionMapperService.class);
 
     @Value("${spring.jpa.properties.hibernate.jdbc.time_zone}")
     private String timeZoneId;

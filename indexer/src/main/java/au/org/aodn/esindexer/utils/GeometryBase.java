@@ -1,11 +1,11 @@
 package au.org.aodn.esindexer.utils;
 
 import au.org.aodn.metadata.iso19115_3_2018.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.locationtech.jts.geom.*;
 import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.operation.TransformException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class GeometryBase {
 
-    protected static Logger logger = LoggerFactory.getLogger(GeometryBase.class);
+    protected static Logger logger = LogManager.getLogger(GeometryBase.class);
 
     protected static Map<String, Integer> codeToSID = new HashMap<>();
 
