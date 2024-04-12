@@ -55,9 +55,13 @@ docker-compose -f docker-compose-dev.yaml up [-d: in daemon mode | --build: to s
 
 ### Endpoints:
 
-| Description | Endpoints |
-|-------------|-------|
-| Health check | `/actuator/health` |
-| POST/GET/DELETE against specific record | `/api/v1/indexer/index/{records-uuid}`|
-| Bulk index | `/api/v1/indexer/index/all`|
-| Swagger UI: | `/swagger-ui/index.html`|
+| Description                             | Endpoints                              | Environment |
+|-----------------------------------------|----------------------------------------|-------------|
+| Logfile                                 | `/manage/logfile`                      | Edge        |
+| Beans info                              | `/manage/beans`                        | Edge        |
+| Env info                                | `/manage/env`                          | Edge        |
+| Info                                    | `/manage/info`                         | Edge        |
+| Health check                            | `/manage/health`                       | Edge        |
+| POST/GET/DELETE against specific record | `/api/v1/indexer/index/{records-uuid}` | All         |
+| Bulk index                              | `/api/v1/indexer/index/all`            | All         |
+| Swagger UI:                             | `/swagger-ui/index.html`               | All         |
