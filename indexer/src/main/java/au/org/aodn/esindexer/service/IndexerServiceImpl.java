@@ -1,5 +1,6 @@
 package au.org.aodn.esindexer.service;
 
+import au.org.aodn.esindexer.abstracts.OgcApiRequestEntityCreator;
 import au.org.aodn.stac.model.StacCollectionModel;
 import au.org.aodn.esindexer.utils.StringUtil;
 import au.org.aodn.esindexer.configuration.AppConstants;
@@ -17,6 +18,7 @@ import co.elastic.clients.elasticsearch.indices.CreateIndexRequest;
 import co.elastic.clients.elasticsearch.indices.CreateIndexResponse;
 import co.elastic.clients.json.JsonData;
 import co.elastic.clients.transport.endpoints.BooleanResponse;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import jakarta.xml.bind.JAXBException;
@@ -27,10 +29,11 @@ import org.opengis.referencing.operation.TransformException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
+import javax.annotation.PostConstruct;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -48,6 +51,15 @@ public class IndexerServiceImpl implements IndexerService {
 
     @Value("${elasticsearch.index.name}")
     private String indexName;
+
+    @Value("${ogc-api.host}")
+    private String ogcApiHost;
+
+    @Autowired
+    RestTemplate restTemplate;
+
+    @Autowired
+    OgcApiRequestEntityCreator ogcApiRequestEntityCreator;
 
     @Autowired
     ObjectMapper objectMapper;
@@ -154,6 +166,17 @@ public class IndexerServiceImpl implements IndexerService {
         stacCollectionModel.setTitleSuggest(stacCollectionModel.getTitle());
 
         return stacCollectionModel;
+    }
+
+    @PostConstruct
+    protected JsonNode fetchARDCVocabs() {
+        HttpEntity<String> requestEntity = ogcApiRequestEntityCreator.getRequestEntity(MediaType.APPLICATION_JSON, null);
+        ResponseEntity<JsonNode> responseEntity = restTemplate.exchange(
+                ogcApiHost + "/api/v1/ogc/ext/parameter/categories",
+                HttpMethod.GET,
+                requestEntity,
+                JsonNode.class);
+        return responseEntity.getBody();
     }
 
     public ResponseEntity<String> indexMetadata(String metadataValues) {
