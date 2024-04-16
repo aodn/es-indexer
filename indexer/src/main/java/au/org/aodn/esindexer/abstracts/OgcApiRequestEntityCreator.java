@@ -8,6 +8,7 @@ import java.util.Collections;
 
 @Component
 public class OgcApiRequestEntityCreator extends AbstractRequestEntityCreator {
+    // used by OGC-API related requests
     @Override
     HttpHeaders createHeaders(MediaType accept) {
         HttpHeaders headers = new HttpHeaders();

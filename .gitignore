@@ -3,7 +3,8 @@ target/
 !.mvn
 !**/src/main/**/target/
 !**/src/test/**/target/
-src/main/generated/
+**/main/generated/
+
 
 ### STS ###
 .apt_generated

@@ -5,6 +5,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 
 public abstract class AbstractRequestEntityCreator {
+    // abstract method to be implemented differently by subclasses
     abstract HttpHeaders createHeaders(MediaType accept);
 
     public HttpEntity<String> getRequestEntity(String body) {

@@ -14,6 +14,7 @@ public class SummariesModel {
     protected Integer score;
     protected String status;
     protected Map<String, String> scope;
+
     /**
      * Group info as setup in geonetwork
      */
@@ -39,4 +40,10 @@ public class SummariesModel {
      */
     @JsonProperty("temporal")
     protected List<Map<String, String>> temporal;
+
+    /**
+     * second-level AODN discovery parameter vocabularies
+     */
+    @JsonProperty("aodn_discovery_categories")
+    protected List<String> aodnDiscoveryCategories;
 }

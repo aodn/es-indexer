@@ -7,6 +7,7 @@ import java.util.Collections;
 
 @Component
 public class GeoNetworkRequestEntityCreator extends AbstractRequestEntityCreator {
+    // used by GeoNetwork related requests
     @Override
     HttpHeaders createHeaders(MediaType accept) {
         HttpHeaders headers = new HttpHeaders();
