@@ -17,6 +17,9 @@ app:
     authToken: ${INDEXER_APIKEY:sample-auth-token}
 
 management:
+  info:
+    env:
+      enabled: true
   endpoints:
     web:
       base-path: /manage
@@ -44,6 +47,13 @@ springdoc:
   swagger-ui:
     enabled: true
     disable-swagger-default-url: true
+
+# Actuator info point
+info:
+  application:
+    name: '@project.name@'
+    description: '@project.description@'
+    version: '@project.version@'
 
 logging:
   level:
