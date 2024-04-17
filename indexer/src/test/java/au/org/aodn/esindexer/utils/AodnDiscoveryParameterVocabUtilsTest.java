@@ -5,8 +5,6 @@ import au.org.aodn.esindexer.service.AodnDiscoveryParameterVocabService;
 import au.org.aodn.stac.model.ConceptModel;
 import au.org.aodn.stac.model.ThemesModel;
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -19,7 +17,6 @@ import static org.junit.jupiter.api.Assertions.*;
 @ActiveProfiles("test")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-@ExtendWith(MockitoExtension.class)
 public class AodnDiscoveryParameterVocabUtilsTest {
 
     @Autowired
