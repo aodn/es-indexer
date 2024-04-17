@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -16,12 +18,18 @@ import java.util.List;
 
 @Slf4j
 @Component
+// create and inject a stub proxy to self due to the circular reference
+@Scope(proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class CacheArdcVocabsUtils {
     @Value(AppConstants.AODN_DISCOVERY_PARAMETER_VOCAB_API)
     protected String vocabApi;
 
     @Autowired
     ArdcVocabsService ardcVocabsService;
+
+    // self-injection to avoid self-invocation problems when calling the cachable method within the same bean
+    @Autowired
+    CacheArdcVocabsUtils self;
 
     /*
     call it after the bean is created to populate the cache
@@ -42,6 +50,8 @@ public class CacheArdcVocabsUtils {
     public void refreshCache() {
         log.info("Refreshing AODN Discovery Parameter Vocabularies cache");
         clearCache();
+        // call the cachable method to re-populate the cache
+        self.getCachedData();
     }
 
     @CacheEvict(value = AppConstants.AODN_DISCOVERY_CATEGORIES_CACHE, allEntries = true)
