@@ -1,5 +1,6 @@
 package au.org.aodn.esindexer.utils;
 
+import au.org.aodn.ardcvocabs.model.CategoryVocabModel;
 import au.org.aodn.esindexer.abstracts.OgcApiRequestEntityCreator;
 import au.org.aodn.stac.model.ConceptModel;
 import au.org.aodn.stac.model.ThemesModel;
@@ -57,7 +58,7 @@ public class AodnDiscoveryParameterVocabUtilsTest {
 
     @Test
     void testFetchAodnDiscoveryParameterVocabs() {
-        JsonNode results = aodnDiscoveryParameterVocabUtils.fetchAodnDiscoveryParameterVocabs();
+        List<CategoryVocabModel> results = aodnDiscoveryParameterVocabUtils.fetchAodnDiscoveryParameterVocabs();
         // Verification
         assertEquals(33, results.size());
     }

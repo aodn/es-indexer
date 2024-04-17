@@ -1,15 +1,11 @@
-package au.org.aodn.esindexer.utils;
+package au.org.aodn.esindexer.service;
 
+import au.org.aodn.ardcvocabs.model.CategoryVocabModel;
 import au.org.aodn.esindexer.abstracts.OgcApiRequestEntityCreator;
+import au.org.aodn.esindexer.utils.CacheArdcVocabsUtils;
 import au.org.aodn.stac.model.ConceptModel;
 import au.org.aodn.stac.model.ThemesModel;
-import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -17,26 +13,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class AodnDiscoveryParameterVocabUtils {
-
-    @Value("${ogc-api.host}")
-    private String ogcApiHost;
-
+public class AodnDiscoveryParameterVocabService {
     @Autowired
     RestTemplate restTemplate;
 
     @Autowired
     OgcApiRequestEntityCreator ogcApiRequestEntityCreator;
 
-    protected JsonNode fetchAodnDiscoveryParameterVocabs() {
-        HttpEntity<String> requestEntity = ogcApiRequestEntityCreator.getRequestEntity(MediaType.APPLICATION_JSON, null);
-        ResponseEntity<JsonNode> responseEntity = restTemplate.exchange(
-                ogcApiHost + "/api/v1/ogc/ext/parameter/categories",
-                HttpMethod.GET,
-                requestEntity,
-                JsonNode.class);
-        return responseEntity.getBody();
-    }
+    CacheArdcVocabsUtils cacheArdcVocabsUtils;
 
     protected boolean themesMatchConcept(List<ThemesModel> themes, ConceptModel concept) {
         for (ThemesModel theme : themes) {
@@ -57,16 +41,16 @@ public class AodnDiscoveryParameterVocabUtils {
     public List<String> getAodnDiscoveryCategories(List<ThemesModel> themes) {
         List<String> results = new ArrayList<>();
         // Iterate over the top-level vocabularies
-        for (JsonNode topLevelVocab : this.fetchAodnDiscoveryParameterVocabs()) {
-            if (topLevelVocab.has("narrower") && !topLevelVocab.get("narrower").isEmpty()) {
-                for (JsonNode secondLevelVocab : topLevelVocab.get("narrower")) {
-                    String secondLevelVocabLabel = secondLevelVocab.get("label").asText();
-                    if (secondLevelVocab.has("narrower") && !secondLevelVocab.get("narrower").isEmpty()) {
-                        for (JsonNode bottomLevelVocab : secondLevelVocab.get("narrower")) {
+        for (CategoryVocabModel topLevelVocab : cacheArdcVocabsUtils.getCachedData()) {
+            if (!topLevelVocab.getNarrower().isEmpty()) {
+                for (CategoryVocabModel secondLevelVocab : topLevelVocab.getNarrower()) {
+                    String secondLevelVocabLabel = secondLevelVocab.getLabel();
+                    if (!secondLevelVocab.getNarrower().isEmpty()) {
+                        for (CategoryVocabModel bottomLevelVocab : secondLevelVocab.getNarrower()) {
                             // map the original values to a ConceptModel object for doing comparison
                             ConceptModel bottomConcept = ConceptModel.builder()
-                                    .id(bottomLevelVocab.get("label").asText())
-                                    .url(bottomLevelVocab.get("about").asText())
+                                    .id(bottomLevelVocab.getLabel())
+                                    .url(bottomLevelVocab.getAbout())
                                     .build();
                             // Compare with themes' concepts
                             if (themesMatchConcept(themes, bottomConcept)) {
