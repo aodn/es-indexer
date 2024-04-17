@@ -11,6 +11,12 @@ import java.util.Objects;
 public class ConceptModel {
     private String id;
     private String url;
+
+    public ConceptModel(String id, String url) {
+        this.id = id;
+        this.url = url;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

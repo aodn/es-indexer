@@ -4,7 +4,6 @@ import au.org.aodn.esindexer.abstracts.OgcApiRequestEntityCreator;
 import au.org.aodn.stac.model.ConceptModel;
 import au.org.aodn.stac.model.ThemesModel;
 import com.fasterxml.jackson.databind.JsonNode;
-import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -16,7 +15,6 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Component
 public class AodnDiscoveryParameterVocabUtils {
@@ -30,31 +28,14 @@ public class AodnDiscoveryParameterVocabUtils {
     @Autowired
     OgcApiRequestEntityCreator ogcApiRequestEntityCreator;
 
-    /* run this method after the bean is created */
-    @PostConstruct
-    protected List<JsonNode> fetchAodnDiscoveryParameterVocabs() {
+    protected JsonNode fetchAodnDiscoveryParameterVocabs() {
         HttpEntity<String> requestEntity = ogcApiRequestEntityCreator.getRequestEntity(MediaType.APPLICATION_JSON, null);
         ResponseEntity<JsonNode> responseEntity = restTemplate.exchange(
                 ogcApiHost + "/api/v1/ogc/ext/parameter/categories",
                 HttpMethod.GET,
                 requestEntity,
                 JsonNode.class);
-
-        List<JsonNode> results = new ArrayList<>();
-        for (JsonNode obj : Objects.requireNonNull(responseEntity.getBody())) {
-            /*
-            the json object contains all level vocabs (first -> second -> bottom)
-            has list of items inside "narrower" field but empty inside "broader" field,
-            the pattern can be verified by inspecting the response from OGCApi parameter categories endpoint
-            and from the current AODN portal's parameter menu
-            "results" length should be 4;
-             */
-            if (!obj.get("narrower").isEmpty() && obj.get("broader").isEmpty()) {
-                results.add(obj);
-            }
-        }
-
-        return results;
+        return responseEntity.getBody();
     }
 
     protected boolean themesMatchConcept(List<ThemesModel> themes, ConceptModel concept) {

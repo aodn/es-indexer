@@ -76,6 +76,7 @@
         "properties" : {
           "score": { "type": "long" },
           "status": { "type": "text" },
+          "aodn_discovery_categories" : { "type": "text" },
           "scope" : {
             "type": "nested",
             "properties" : {
