@@ -38,9 +38,6 @@ geonetwork:
       index: "records"
       endpoint: /geonetwork/srv/api/search
 
-ogc-api:
-  host: http://localhost:8082
-
 springdoc:
   api-docs:
     enabled: true

@@ -199,6 +199,11 @@
         </dependency>
         <dependency>
             <groupId>au.org.aodn</groupId>
+            <artifactId>ardcvocabs</artifactId>
+            <version>${parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>au.org.aodn</groupId>
             <artifactId>stacmodel</artifactId>
             <version>${parent.version}</version>
         </dependency>

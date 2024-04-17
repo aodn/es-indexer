@@ -6,13 +6,14 @@ import au.org.aodn.esindexer.utils.CacheArdcVocabsUtils;
 import au.org.aodn.stac.model.ConceptModel;
 import au.org.aodn.stac.model.ThemesModel;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
+
+@Service
 public class AodnDiscoveryParameterVocabService {
     @Autowired
     RestTemplate restTemplate;
@@ -20,6 +21,7 @@ public class AodnDiscoveryParameterVocabService {
     @Autowired
     OgcApiRequestEntityCreator ogcApiRequestEntityCreator;
 
+    @Autowired
     CacheArdcVocabsUtils cacheArdcVocabsUtils;
 
     protected boolean themesMatchConcept(List<ThemesModel> themes, ConceptModel concept) {
@@ -42,10 +44,10 @@ public class AodnDiscoveryParameterVocabService {
         List<String> results = new ArrayList<>();
         // Iterate over the top-level vocabularies
         for (CategoryVocabModel topLevelVocab : cacheArdcVocabsUtils.getCachedData()) {
-            if (!topLevelVocab.getNarrower().isEmpty()) {
+            if (topLevelVocab.getNarrower() != null && !topLevelVocab.getNarrower().isEmpty()) {
                 for (CategoryVocabModel secondLevelVocab : topLevelVocab.getNarrower()) {
                     String secondLevelVocabLabel = secondLevelVocab.getLabel();
-                    if (!secondLevelVocab.getNarrower().isEmpty()) {
+                    if (secondLevelVocab.getNarrower() != null && !secondLevelVocab.getNarrower().isEmpty()) {
                         for (CategoryVocabModel bottomLevelVocab : secondLevelVocab.getNarrower()) {
                             // map the original values to a ConceptModel object for doing comparison
                             ConceptModel bottomConcept = ConceptModel.builder()

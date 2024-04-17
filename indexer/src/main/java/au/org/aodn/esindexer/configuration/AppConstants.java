@@ -15,4 +15,7 @@ public interface AppConstants {
             "a", "an", "and", "are", "as", "at", "be", "by", "for", "from", "has", "he", "in", "is",
             "it", "its", "of", "on", "that", "the", "to", "was", "were", "will", "with"
     );
+
+    String AODN_DISCOVERY_PARAMETER_VOCAB_API = "https://vocabs.ardc.edu.au/repository/api/lda/aodn";
+    String AODN_DISCOVERY_CATEGORIES_CACHE = "parameter_categories";
 }

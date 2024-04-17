@@ -1,6 +1,5 @@
 package au.org.aodn.esindexer.service;
 
-import au.org.aodn.esindexer.utils.AodnDiscoveryParameterVocabUtils;
 import au.org.aodn.stac.model.StacCollectionModel;
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.exception.*;
@@ -60,7 +59,7 @@ public class IndexerServiceImpl implements IndexerService {
     RankingService rankingService;
 
     @Autowired
-    AodnDiscoveryParameterVocabUtils aodnDiscoveryParameterVocabUtils;
+    AodnDiscoveryParameterVocabService aodnDiscoveryParameterVocabService;
 
     private static final Logger logger = LogManager.getLogger(IndexerServiceImpl.class);
 
@@ -155,7 +154,7 @@ public class IndexerServiceImpl implements IndexerService {
         stacCollectionModel.setTitleSuggest(stacCollectionModel.getTitle());
 
         // set AODN Discovery Categories
-        List<String> aodnDiscoveryCategories = aodnDiscoveryParameterVocabUtils.getAodnDiscoveryCategories(stacCollectionModel.getThemes());
+        List<String> aodnDiscoveryCategories = aodnDiscoveryParameterVocabService.getAodnDiscoveryCategories(stacCollectionModel.getThemes());
         stacCollectionModel.getSummaries().setAodnDiscoveryCategories(aodnDiscoveryCategories);
 
         return stacCollectionModel;

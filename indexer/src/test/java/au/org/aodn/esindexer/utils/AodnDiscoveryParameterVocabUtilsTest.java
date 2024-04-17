@@ -1,67 +1,32 @@
 package au.org.aodn.esindexer.utils;
 
-import au.org.aodn.ardcvocabs.model.CategoryVocabModel;
-import au.org.aodn.esindexer.abstracts.OgcApiRequestEntityCreator;
+import au.org.aodn.ardcvocabs.service.ArdcVocabsService;
+import au.org.aodn.esindexer.service.AodnDiscoveryParameterVocabService;
 import au.org.aodn.stac.model.ConceptModel;
 import au.org.aodn.stac.model.ThemesModel;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.ResponseEntity;
-import org.springframework.util.ResourceUtils;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.http.MediaType;
-import org.springframework.http.HttpMethod;
-
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ActiveProfiles("test")
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @ExtendWith(MockitoExtension.class)
 public class AodnDiscoveryParameterVocabUtilsTest {
-    @Mock
-    private RestTemplate restTemplate;
 
-    @Mock
-    private OgcApiRequestEntityCreator ogcApiRequestEntityCreator;
+    @Autowired
+    ArdcVocabsService ardcVocabsService;
 
-    @InjectMocks
-    AodnDiscoveryParameterVocabUtils aodnDiscoveryParameterVocabUtils;
-
-    @BeforeEach
-    void setup() throws IOException {
-        File f = ResourceUtils.getFile("classpath:canned/aodn_discovery_parameter_vocabs.json");
-        String jsonString = new String(Files.readAllBytes(f.toPath()));
-        ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode responseJsonNode = objectMapper.readTree(jsonString);
-        HttpEntity<String> mockHttpEntity = new HttpEntity<>(MediaType.APPLICATION_JSON_VALUE);
-        ResponseEntity<JsonNode> mockResponseEntity = ResponseEntity.ok(responseJsonNode);
-
-        when(ogcApiRequestEntityCreator.getRequestEntity(MediaType.APPLICATION_JSON, null)).thenReturn(mockHttpEntity);
-        when(restTemplate.exchange(
-                anyString(),
-                eq(HttpMethod.GET),
-                eq(mockHttpEntity),
-                eq(JsonNode.class)
-        )).thenReturn(mockResponseEntity);
-    }
-
-    @Test
-    void testFetchAodnDiscoveryParameterVocabs() {
-        List<CategoryVocabModel> results = aodnDiscoveryParameterVocabUtils.fetchAodnDiscoveryParameterVocabs();
-        // Verification
-        assertEquals(33, results.size());
-    }
+    @Autowired
+    AodnDiscoveryParameterVocabService aodnDiscoveryParameterVocabService;
 
     @Test
     void testGetAodnDiscoveryCategories() {
@@ -79,7 +44,7 @@ public class AodnDiscoveryParameterVocabUtilsTest {
         );
 
         // Perform the test
-        List<String> categories = aodnDiscoveryParameterVocabUtils.getAodnDiscoveryCategories(themes);
+        List<String> categories = aodnDiscoveryParameterVocabService.getAodnDiscoveryCategories(themes);
 
         // Assertions
         assertNotNull(categories);
