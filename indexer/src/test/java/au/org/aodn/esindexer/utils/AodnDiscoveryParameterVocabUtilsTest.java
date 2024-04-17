@@ -1,45 +1,46 @@
 package au.org.aodn.esindexer.utils;
 
-import au.org.aodn.esindexer.BaseTestClass;
 import au.org.aodn.esindexer.abstracts.OgcApiRequestEntityCreator;
 import au.org.aodn.stac.model.ConceptModel;
 import au.org.aodn.stac.model.ThemesModel;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.ActiveProfiles;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.http.MediaType;
 import org.springframework.http.HttpMethod;
+
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ActiveProfiles("test")
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class AodnDiscoveryParameterVocabUtilsTest extends BaseTestClass {
+@ExtendWith(MockitoExtension.class)
+public class AodnDiscoveryParameterVocabUtilsTest {
     @Mock
     private RestTemplate restTemplate;
 
     @Mock
     private OgcApiRequestEntityCreator ogcApiRequestEntityCreator;
 
-    @Autowired
+    @InjectMocks
     AodnDiscoveryParameterVocabUtils aodnDiscoveryParameterVocabUtils;
 
     @BeforeEach
     void setup() throws IOException {
-        String jsonString = readResourceFile("classpath:canned/aodn_discovery_parameter_vocabs.json");
+        File f = ResourceUtils.getFile("classpath:canned/aodn_discovery_parameter_vocabs.json");
+        String jsonString = new String(Files.readAllBytes(f.toPath()));
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode responseJsonNode = objectMapper.readTree(jsonString);
         HttpEntity<String> mockHttpEntity = new HttpEntity<>(MediaType.APPLICATION_JSON_VALUE);
@@ -62,7 +63,7 @@ public class AodnDiscoveryParameterVocabUtilsTest extends BaseTestClass {
     }
 
     @Test
-    void testGetAodnDiscoveryCategories() throws Exception {
+    void testGetAodnDiscoveryCategories() {
         // Prepare themes
         List<ThemesModel> themes = List.of(
                 new ThemesModel(Arrays.asList(

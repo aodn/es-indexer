@@ -102,17 +102,17 @@ public class IndexerServiceTests extends BaseTestClass {
 
     @Test
     public void verifyGetDocumentByUUID() throws IOException {
-        String expected = readResourceFile("classpath:canned/sample3_stac.json");
+        String expected = readResourceFile("classpath:canned/sample4_stac.json");
 
-        insertMetadataRecords("06b09398-d3d0-47dc-a54a-a745319fbece", "classpath:canned/sample3.xml");
+        insertMetadataRecords("7709f541-fc0c-4318-b5b9-9053aa474e0e", "classpath:canned/sample4.xml");
 
         indexerService.indexAllMetadataRecordsFromGeoNetwork(true);
-        Hit<ObjectNode> objectNodeHit = indexerService.getDocumentByUUID("06b09398-d3d0-47dc-a54a-a745319fbece");
+        Hit<ObjectNode> objectNodeHit = indexerService.getDocumentByUUID("7709f541-fc0c-4318-b5b9-9053aa474e0e");
 
         String test = objectNodeHit.source().toPrettyString();
 
         assertEquals("Stac equals", objectMapper.readTree(expected), objectMapper.readTree(test));
 
-        deleteRecord("06b09398-d3d0-47dc-a54a-a745319fbece");
+        deleteRecord("7709f541-fc0c-4318-b5b9-9053aa474e0e");
     }
 }
