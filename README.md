@@ -60,7 +60,7 @@ docker-compose -f docker-compose-dev.yaml up [-d: in daemon mode | --build: to s
 | Logfile                                 | `/manage/logfile`                      | Edge        |
 | Beans info                              | `/manage/beans`                        | Edge        |
 | Env info                                | `/manage/env`                          | Edge        |
-| Info                                    | `/manage/info`                         | Edge        |
+| Info  (Show version)                    | `/manage/info`                         | Edge        |
 | Health check                            | `/manage/health`                       | Edge        |
 | POST/GET/DELETE against specific record | `/api/v1/indexer/index/{records-uuid}` | All         |
 | Bulk index                              | `/api/v1/indexer/index/all`            | All         |
