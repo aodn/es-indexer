@@ -17,7 +17,7 @@ public class Config {
     }
 
     @Bean("ardcVocabRestTemplate")
-    @ConditionalOnMissingBean(name = "restTemplate")
+    @ConditionalOnMissingBean(RestTemplate.class)
     public RestTemplate ardcVocabRestTemplate() {
         return new RestTemplate();
     }

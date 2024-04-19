@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
@@ -22,7 +21,6 @@ import java.util.function.Function;
 @Service
 public class ArdcVocabsService {
     @Autowired
-    @Qualifier("ardcVocabRestTemplate")
     protected RestTemplate ardcVocabRestTemplate;
 
     protected static String path = "/aodn-parameter-category-vocabulary/version-2-1/concept.json";

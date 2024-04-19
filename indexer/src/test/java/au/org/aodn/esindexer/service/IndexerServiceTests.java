@@ -29,7 +29,7 @@ public class IndexerServiceTests extends BaseTestClass {
     protected IndexerServiceImpl indexerService;
 
     @Autowired
-    protected ObjectMapper objectMapper;
+    protected ObjectMapper indexerObjectMapper;
 
     @Autowired
     protected ElasticSearchIndexService elasticSearchIndexService;
@@ -119,7 +119,7 @@ public class IndexerServiceTests extends BaseTestClass {
 
         String test = objectNodeHit.source().toPrettyString();
 
-        assertEquals("Stac equals", objectMapper.readTree(expected), objectMapper.readTree(test));
+        assertEquals("Stac equals", indexerObjectMapper.readTree(expected), indexerObjectMapper.readTree(test));
 
         deleteRecord("7709f541-fc0c-4318-b5b9-9053aa474e0e");
     }

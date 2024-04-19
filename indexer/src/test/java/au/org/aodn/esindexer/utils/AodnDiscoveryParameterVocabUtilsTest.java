@@ -1,6 +1,5 @@
 package au.org.aodn.esindexer.utils;
 
-import au.org.aodn.ardcvocabs.service.ArdcVocabsService;
 import au.org.aodn.esindexer.service.AodnDiscoveryParameterVocabService;
 import au.org.aodn.stac.model.ConceptModel;
 import au.org.aodn.stac.model.ThemesModel;
@@ -20,10 +19,6 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class AodnDiscoveryParameterVocabUtilsTest {
-
-    @Autowired
-    ArdcVocabsService ardcVocabsService;
-
     @Autowired
     AodnDiscoveryParameterVocabService aodnDiscoveryParameterVocabService;
 
