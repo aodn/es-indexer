@@ -46,10 +46,10 @@ public class IndexerServiceImpl implements IndexerService {
     private String indexName;
 
     @Autowired
-    ObjectMapper objectMapper;
+    ObjectMapper indexerObjectMapper;
 
     @Autowired
-    protected StacCollectionMapperService mapper;
+    protected StacCollectionMapperService stacCollectionMapperService;
 
     @Autowired
     JaxbUtils<MDMetadataType> jaxbUtils;
@@ -111,7 +111,7 @@ public class IndexerServiceImpl implements IndexerService {
     protected StacCollectionModel getMappedMetadataValues(String metadataValues) throws IOException, FactoryException, TransformException, JAXBException {
         MDMetadataType metadataType = jaxbUtils.unmarshal(metadataValues);
 
-        StacCollectionModel stacCollectionModel = mapper.mapToSTACCollection(metadataType);
+        StacCollectionModel stacCollectionModel = stacCollectionMapperService.mapToSTACCollection(metadataType);
 
         // evaluate completeness
         Integer completeness = rankingService.evaluateCompleteness(stacCollectionModel);
@@ -165,7 +165,7 @@ public class IndexerServiceImpl implements IndexerService {
 
             // index the metadata if it is published
             if (this.isMetadataPublished(uuid)) {
-                try(InputStream is = new ByteArrayInputStream(objectMapper.writeValueAsBytes(mappedMetadataValues))) {
+                try(InputStream is = new ByteArrayInputStream(indexerObjectMapper.writeValueAsBytes(mappedMetadataValues))) {
                     logger.info("Ingesting a new metadata with UUID: " + uuid + " to index: " + indexName);
                     logger.info("{}", mappedMetadataValues);
                     req = IndexRequest.of(b -> b
@@ -233,7 +233,7 @@ public class IndexerServiceImpl implements IndexerService {
                     StacCollectionModel mappedMetadataValues = this.getMappedMetadataValues(metadataRecord);
 
                     // convert mapped values to binary data
-                    logger.debug("Ingested json is {}", objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(mappedMetadataValues));
+                    logger.debug("Ingested json is {}", indexerObjectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(mappedMetadataValues));
 
                     // send bulk request to Elasticsearch
                     bulkRequest.operations(op -> op

@@ -4,6 +4,7 @@ import au.org.aodn.ardcvocabs.service.ArdcVocabsService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
@@ -16,7 +17,6 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.client.RestTemplate;
 
-import javax.annotation.PostConstruct;
 import java.util.Arrays;
 
 @Configuration
@@ -26,7 +26,7 @@ import java.util.Arrays;
 public class WebMvcConfig {
 
     @Autowired
-    protected ObjectMapper objectMapper;
+    protected ObjectMapper indexObjectMapper;
 
     @Autowired
     protected ArdcVocabsService ardcVocabsService;
@@ -41,12 +41,12 @@ public class WebMvcConfig {
         JavaTimeModule module = new JavaTimeModule();
 
         // Avoid output date-time string become number
-        objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-        objectMapper.registerModule(module);
+        indexObjectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        indexObjectMapper.registerModule(module);
     }
 
-    @Bean
-    public RestTemplate restTemplate() {
+    @Bean("indexerRestTemplate")
+    public RestTemplate indexerRestTemplate() {
         final RestTemplate restTemplate = new RestTemplate();
         restTemplate.getMessageConverters().add(jacksonSupportedTypes());
         return restTemplate;

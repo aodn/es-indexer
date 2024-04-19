@@ -1,6 +1,5 @@
 package au.org.aodn.esindexer.service;
 
-import au.org.aodn.esindexer.abstracts.GeoNetworkRequestEntityCreator;
 import au.org.aodn.esindexer.exception.MetadataNotFoundException;
 import au.org.aodn.esindexer.utils.StringUtil;
 import au.org.aodn.esindexer.configuration.AppConstants;
@@ -25,13 +24,10 @@ import java.io.IOException;
 import java.util.*;
 
 @Service
-public class GeoNetworkServiceImpl implements GeoNetworkService  {
+public class GeoNetworkServiceImpl implements GeoNetworkService {
 
     @Autowired
-    RestTemplate restTemplate;
-
-    @Autowired
-    GeoNetworkRequestEntityCreator geoNetworkRequestEntityCreator;
+    RestTemplate indexerRestTemplate;
 
     @Autowired
     @Qualifier("gn4ElasticsearchClient")
@@ -44,6 +40,16 @@ public class GeoNetworkServiceImpl implements GeoNetworkService  {
     protected String indexName;
 
     protected String server;
+
+    protected HttpEntity<String> getRequestEntity(String body) {
+        return getRequestEntity(null, body);
+    }
+
+    protected HttpEntity<String> getRequestEntity(MediaType accept, String body) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Collections.singletonList(accept == null ? MediaType.APPLICATION_XML : accept));
+        return body == null ? new HttpEntity<>(headers) : new HttpEntity<>(body, headers);
+    }
 
     protected final static String UUID = "uuid";
     protected final static String GEONETWORK_GROUP = "groupOwner";
@@ -88,9 +94,9 @@ public class GeoNetworkServiceImpl implements GeoNetworkService  {
             Map<String, Object> params = new HashMap<>();
             params.put("id", group);
 
-            HttpEntity<String> requestEntity = geoNetworkRequestEntityCreator.getRequestEntity(MediaType.APPLICATION_JSON, null);
+            HttpEntity<String> requestEntity = getRequestEntity(MediaType.APPLICATION_JSON, null);
 
-            ResponseEntity<JsonNode> responseEntity = restTemplate.exchange(
+            ResponseEntity<JsonNode> responseEntity = indexerRestTemplate.exchange(
                     getGeoNetworkGroupsEndpoint(),
                     HttpMethod.GET,
                     requestEntity,
@@ -111,13 +117,13 @@ public class GeoNetworkServiceImpl implements GeoNetworkService  {
 
     protected String findFormatterId(String uuid) {
         try {
-            HttpEntity<String> requestEntity = geoNetworkRequestEntityCreator.getRequestEntity(MediaType.APPLICATION_JSON, null);
+            HttpEntity<String> requestEntity = getRequestEntity(MediaType.APPLICATION_JSON, null);
 
             Map<String, Object> params = new HashMap<>();
             params.put("indexName", getIndexName());
             params.put(UUID, uuid);
 
-            ResponseEntity<JsonNode> responseEntity = restTemplate.exchange(
+            ResponseEntity<JsonNode> responseEntity = indexerRestTemplate.exchange(
                     getGeoNetworkRecordsEndpoint(),
                     HttpMethod.GET,
                     requestEntity,
@@ -142,14 +148,14 @@ public class GeoNetworkServiceImpl implements GeoNetworkService  {
 
     public String searchRecordBy(String uuid) {
         try {
-            HttpEntity<String> requestEntity = geoNetworkRequestEntityCreator.getRequestEntity(null);
+            HttpEntity<String> requestEntity = getRequestEntity(null);
 
             Map<String, Object> params = new HashMap<>();
             params.put("indexName", getIndexName());
             params.put(UUID, uuid);
             params.put("formatterId", this.findFormatterId(uuid));
 
-            ResponseEntity<String> responseEntity = restTemplate.exchange(
+            ResponseEntity<String> responseEntity = indexerRestTemplate.exchange(
                     getGeoNetworkRecordsEndpoint() + "/formatters/{formatterId}",
                     HttpMethod.GET,
                     requestEntity,

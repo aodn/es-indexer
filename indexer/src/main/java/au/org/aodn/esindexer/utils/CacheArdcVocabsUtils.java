@@ -53,7 +53,7 @@ public class CacheArdcVocabsUtils {
     String categoriesIndexName;
 
     @Autowired
-    ObjectMapper objectMapper;
+    ObjectMapper indexerObjectMapper;
 
 
     protected void indexingDiscoveryCategoriesIndex(List<CategoryVocabModel> categoryVocabModels) throws IOException {
@@ -64,7 +64,7 @@ public class CacheArdcVocabsUtils {
         for (CategoryVocabModel categoryVocabModel : categoryVocabModels) {
             try {
                 // convert categoryVocabModel values to binary data
-                log.debug("Ingested json is {}", objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(categoryVocabModel));
+                log.debug("Ingested json is {}", indexerObjectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(categoryVocabModel));
                 // send bulk request to Elasticsearch
                 bulkRequest.operations(op -> op
                     .index(idx -> idx
@@ -109,6 +109,7 @@ public class CacheArdcVocabsUtils {
         indexingDiscoveryCategoriesIndex(categoryVocabModels);
     }
 
+    // TODO research strategy to avoid multiple refresh runs on multiple indexer instance
     @Cacheable(AppConstants.AODN_DISCOVERY_CATEGORIES_CACHE)
     public List<JsonNode> getDiscoveryCategories() throws IOException {
         List<JsonNode> categories = new ArrayList<>();

@@ -1,13 +1,11 @@
 package au.org.aodn.esindexer.service;
 
-import au.org.aodn.esindexer.abstracts.OgcApiRequestEntityCreator;
 import au.org.aodn.esindexer.utils.CacheArdcVocabsUtils;
 import au.org.aodn.stac.model.ConceptModel;
 import au.org.aodn.stac.model.ThemesModel;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,23 +15,21 @@ import java.util.List;
 @Service
 public class AodnDiscoveryParameterVocabService {
     @Autowired
-    RestTemplate restTemplate;
-
-    @Autowired
-    OgcApiRequestEntityCreator ogcApiRequestEntityCreator;
-
-    @Autowired
     CacheArdcVocabsUtils cacheArdcVocabsUtils;
 
-    protected boolean themesMatchConcept(List<ThemesModel> themes, ConceptModel concept) {
+    protected boolean themesMatchConcept(List<ThemesModel> themes, ConceptModel thatConcept) {
         for (ThemesModel theme : themes) {
-            for (ConceptModel themeConcept : theme.getConcepts()) {
+            for (ConceptModel thisConcept : theme.getConcepts()) {
                 /*
-                comparing by hashcode (id and url) of the concept object
+                comparing by combined values (id and url) of the concept object
                 this will prevent cases where bottom-level vocabs are the same in text, but their parent vocabs are different
                 e.g "car -> parts" vs "bike -> parts" ("parts" is the same but different parent)
                  */
-                if (themeConcept.equals(concept)) {
+                if (thisConcept.equals(thatConcept)) {
+                    /* thisConcept is the extracted from the themes of the record...theme.getConcepts()
+                    thatConcept is the object created by iterating over the discovery_categories cache...ConceptModel thatConcept = ConceptModel.builder()
+                    using overriding equals method to compare the two objects, this is not checking instanceof ConceptModel class
+                     */
                     return true;
                 }
             }
@@ -41,6 +37,10 @@ public class AodnDiscoveryParameterVocabService {
         return false;
     }
 
+    /*
+    this method for analysing the AODN discovery parameter vocabularies of a record aka bottom-level vocabs (found in the themes section)
+    and returning the second-level vocabularies that match (1 level up from the bottom-level vocabularies)
+     */
     public List<String> getAodnDiscoveryCategories(List<ThemesModel> themes) throws IOException {
         List<String> results = new ArrayList<>();
         // Iterate over the top-level vocabularies

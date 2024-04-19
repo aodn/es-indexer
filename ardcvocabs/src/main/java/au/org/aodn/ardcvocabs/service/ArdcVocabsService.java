@@ -23,7 +23,7 @@ import java.util.function.Function;
 public class ArdcVocabsService {
     @Autowired
     @Qualifier("ardcVocabRestTemplate")
-    protected RestTemplate template;
+    protected RestTemplate ardcVocabRestTemplate;
 
     protected static String path = "/aodn-parameter-category-vocabulary/version-2-1/concept.json";
     protected static String leafPath = "/aodn-discovery-parameter-vocabulary/version-1-6/concept.json";
@@ -53,7 +53,7 @@ public class ArdcVocabsService {
         while (url != null) {
             log.debug("Query api -> {}", url);
 
-            ObjectNode r = template.getForObject(url, ObjectNode.class);
+            ObjectNode r = ardcVocabRestTemplate.getForObject(url, ObjectNode.class);
             if (r != null && !r.isEmpty()) {
                 JsonNode node = r.get("result");
 
@@ -63,7 +63,7 @@ public class ArdcVocabsService {
                         String dl = String.format(vocabApiBase + details, about.apply(j));
                         try {
                             log.debug("Query api -> {}", dl);
-                            ObjectNode d = template.getForObject(dl, ObjectNode.class);
+                            ObjectNode d = ardcVocabRestTemplate.getForObject(dl, ObjectNode.class);
 
                             if(isNodeValid.apply(d, "result") && isNodeValid.apply(d.get("result"), "primaryTopic")) {
                                 JsonNode target = d.get("result").get("primaryTopic");
@@ -116,7 +116,7 @@ public class ArdcVocabsService {
             try {
                 log.debug("Query api -> {}", url);
 
-                ObjectNode r = template.getForObject(url, ObjectNode.class);
+                ObjectNode r = ardcVocabRestTemplate.getForObject(url, ObjectNode.class);
 
                 if (r != null && !r.isEmpty()) {
                     JsonNode node = r.get("result");
