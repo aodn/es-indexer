@@ -596,7 +596,9 @@ public abstract class StacCollectionMapperService {
     protected String mapContactsOrganization(AbstractCIPartyPropertyType2 party) {
         String organisationString = "";
         if (party.getAbstractCIParty() != null) {
-            organisationString = party.getAbstractCIParty().getValue().getName().getCharacterString().getValue().toString();
+            if (party.getAbstractCIParty().getValue().getName().getCharacterString() != null) {
+                organisationString = party.getAbstractCIParty().getValue().getName().getCharacterString().getValue().toString();
+            }
         }
         return organisationString;
     }

@@ -53,13 +53,21 @@ public class GeometryUtils {
         // The return polygon is in EPSG:4326, so we can call createGeoJson directly
         //TODO: avoid hardcode CRS, get it from document
         List<Polygon> polygons = GeometryBase.findPolygonsFromEXGeographicBoundingBoxType(GeometryBase.COORDINATE_SYSTEM_CRS84, rawInput);
-        return createGeoJson(polygons);
+
+        if (polygons != null && !polygons.isEmpty()) {
+            return createGeoJson(polygons);
+        }
+        return null;
     }
 
     public static Map createGeometryFromFromEXBoundingPolygonType(List<Object> rawInput) {
         // The return polygon is in EPSG:4326, so we can call createGeoJson directly
         //TODO: avoid hardcode CRS, get it from document
         List<Polygon> polygons = GeometryBase.findPolygonsFromEXBoundingPolygonType(GeometryBase.COORDINATE_SYSTEM_CRS84, rawInput);
-        return createGeoJson(polygons);
+
+        if (polygons != null && !polygons.isEmpty()) {
+            return createGeoJson(polygons);
+        }
+        return null;
     }
 }

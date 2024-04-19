@@ -42,8 +42,8 @@ public class SummariesModel {
     protected List<Map<String, String>> temporal;
 
     /**
-     * second-level AODN discovery parameter vocabularies
+     * Discovery categories
      */
-    @JsonProperty("aodn_discovery_categories")
-    protected List<String> aodnDiscoveryCategories;
+    @JsonProperty("discovery_categories")
+    protected List<String> discoveryCategories;
 }

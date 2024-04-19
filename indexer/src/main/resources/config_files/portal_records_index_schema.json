@@ -30,11 +30,8 @@
       "type": { "type": "text" },
       "title": { "type": "text" },
       "title_suggest": {
-        "type": "completion",
-        "analyzer": "my_stop_analyzer",
-        "preserve_separators": true,
-        "preserve_position_increments": true,
-        "max_input_length": 1000
+        "type": "search_as_you_type",
+        "analyzer": "my_stop_analyzer"
       },
       "keywords": {
         "type": "nested",
@@ -76,7 +73,6 @@
         "properties" : {
           "score": { "type": "long" },
           "status": { "type": "text" },
-          "aodn_discovery_categories" : { "type": "text" },
           "scope" : {
             "type": "nested",
             "properties" : {

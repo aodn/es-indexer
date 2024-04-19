@@ -153,9 +153,10 @@ public class IndexerServiceImpl implements IndexerService {
 
         stacCollectionModel.setTitleSuggest(stacCollectionModel.getTitle());
 
-        // set AODN Discovery Categories
         List<String> aodnDiscoveryCategories = aodnDiscoveryParameterVocabService.getAodnDiscoveryCategories(stacCollectionModel.getThemes());
-        stacCollectionModel.getSummaries().setAodnDiscoveryCategories(aodnDiscoveryCategories);
+        if (!aodnDiscoveryCategories.isEmpty()) {
+            stacCollectionModel.getSummaries().setDiscoveryCategories(aodnDiscoveryCategories);
+        }
 
         return stacCollectionModel;
     }
@@ -310,6 +311,8 @@ public class IndexerServiceImpl implements IndexerService {
         } else {
             logger.info("Finished bulk indexing records to index: " + indexName);
         }
+
+        // TODO now processing for record_suggestions index
 
         return ResponseEntity.status(HttpStatus.OK).body(result.toString());
     }
