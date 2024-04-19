@@ -9,6 +9,7 @@ import au.org.aodn.stac.model.ThemesModel;
 import org.junit.jupiter.api.*;
 import org.mockito.InjectMocks;
 import org.mockito.Spy;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
@@ -26,9 +27,12 @@ import java.util.List;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class RankingServiceTests extends BaseTestClass {
 
+    @Value("${elasticsearch.index.name}")
+    protected String INDEX_NAME;
+
     @AfterAll
     public void clear() throws IOException {
-        super.clearElasticIndex();
+        super.clearElasticIndex(INDEX_NAME);
     }
 
     @Spy

@@ -49,17 +49,14 @@ public class BaseTestClass {
     @Autowired
     protected ElasticsearchContainer container;
 
-    @Value("${elasticsearch.index.name}")
-    protected String INDEX_NAME;
-
     @Autowired
     protected DockerComposeContainer dockerComposeContainer;
 
-    protected void clearElasticIndex() throws IOException {
+    protected void clearElasticIndex(String indexName) throws IOException {
         logger.debug("Clear elastic index");
         try {
             client.deleteByQuery(f -> f
-                    .index(INDEX_NAME)
+                    .index(indexName)
                     .query(QueryBuilders.matchAll().build()._toQuery())
             );
             // Must all, otherwise index is not rebuild immediately

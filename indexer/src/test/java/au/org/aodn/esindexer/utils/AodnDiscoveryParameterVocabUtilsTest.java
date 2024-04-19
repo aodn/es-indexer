@@ -8,6 +8,8 @@ import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -26,7 +28,7 @@ public class AodnDiscoveryParameterVocabUtilsTest {
     AodnDiscoveryParameterVocabService aodnDiscoveryParameterVocabService;
 
     @Test
-    void testGetAodnDiscoveryCategories() {
+    void testGetAodnDiscoveryCategories() throws IOException {
         // Prepare themes
         List<ThemesModel> themes = List.of(
                 new ThemesModel(Arrays.asList(
