@@ -13,6 +13,7 @@
         "type": "search_as_you_type",
         "analyzer": "standard"
       },
+      "discovery_categories" : { "type":  "keyword" },
       "keywords": {
         "type": "nested",
         "properties": {

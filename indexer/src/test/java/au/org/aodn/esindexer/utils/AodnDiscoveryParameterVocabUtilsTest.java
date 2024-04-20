@@ -42,9 +42,9 @@ public class AodnDiscoveryParameterVocabUtilsTest {
 
         // Assertions
         assertNotNull(categories);
-        assertTrue(categories.contains("Alkalinity"));
-        assertTrue(categories.contains("Temperature"));
-        assertTrue(categories.contains("Salinity"));
+        assertTrue(categories.contains("alkalinity"));
+        assertTrue(categories.contains("temperature"));
+        assertTrue(categories.contains("salinity"));
         assertEquals(3, categories.size());
     }
 }

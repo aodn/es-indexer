@@ -57,7 +57,7 @@ public class AodnDiscoveryParameterVocabService {
                                     .build();
                             // Compare with themes' concepts
                             if (themesMatchConcept(themes, bottomConcept)) {
-                                results.add(secondLevelVocabLabel);
+                                results.add(secondLevelVocabLabel.toLowerCase());
                                 break; // To avoid duplicates because under the same second-level vocab there can be multiple bottom-level vocabs that pass the condition
                             }
                         }
