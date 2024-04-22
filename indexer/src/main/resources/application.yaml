@@ -35,6 +35,8 @@ management:
 elasticsearch:
   index:
     name: portal_records
+  categories-index:
+    name: discovery_category
 
 geonetwork:
   host: http://localhost:8080

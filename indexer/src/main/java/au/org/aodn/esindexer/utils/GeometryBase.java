@@ -126,22 +126,14 @@ public class GeometryBase {
                     .toList();
 
             for (EXGeographicBoundingBoxType bbt : input) {
-                Double east = bbt.getEastBoundLongitude().getDecimal().doubleValue();
-                Double west = bbt.getWestBoundLongitude().getDecimal().doubleValue();
-                Double north = bbt.getNorthBoundLatitude().getDecimal().doubleValue();
-                Double south = bbt.getSouthBoundLatitude().getDecimal().doubleValue();
-
-                // Define the coordinates for the bounding box
-                Coordinate[] coordinates = new Coordinate[]{
-                        new Coordinate(west, south),
-                        new Coordinate(east, south),
-                        new Coordinate(east, north),
-                        new Coordinate(west, north),
-                        new Coordinate(west, south)  // Closing the ring
-                };
-
-                Polygon polygon = geoJsonFactory.createPolygon(coordinates);
-                polygons.add(polygon);
+                if (bbt.getWestBoundLongitude().getDecimal() == null || bbt.getEastBoundLongitude().getDecimal() == null || bbt.getNorthBoundLatitude().getDecimal() == null || bbt.getSouthBoundLatitude().getDecimal() == null) {
+                    logger.warn("Invalid BBOX found for findPolygonsFromEXGeographicBoundingBoxType using CRS {}", rawCRS);
+                } else {
+                    logger.debug("BBOX found for findPolygonsFromEXGeographicBoundingBoxType using CRS {}", rawCRS);
+                    Coordinate[] coordinates = getCoordinates(bbt);
+                    Polygon polygon = geoJsonFactory.createPolygon(coordinates);
+                    polygons.add(polygon);
+                }
             }
         }
 
@@ -152,5 +144,20 @@ public class GeometryBase {
             logger.warn("No applicable BBOX calculation found for findPolygonsFromEXGeographicBoundingBoxType using CRS {}", rawCRS);
             return null;
         }
+    }
+
+    protected static Coordinate[] getCoordinates(EXGeographicBoundingBoxType bbt) {
+        double east = bbt.getEastBoundLongitude().getDecimal().doubleValue();
+        double west = bbt.getWestBoundLongitude().getDecimal().doubleValue();
+        double north = bbt.getNorthBoundLatitude().getDecimal().doubleValue();
+        double south = bbt.getSouthBoundLatitude().getDecimal().doubleValue();
+        // Define the coordinates for the bounding box
+        return new Coordinate[]{
+                new Coordinate(west, south),
+                new Coordinate(east, south),
+                new Coordinate(east, north),
+                new Coordinate(west, north),
+                new Coordinate(west, south)  // Closing the ring
+        };
     }
 }

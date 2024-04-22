@@ -27,7 +27,7 @@ import java.util.*;
 public class GeoNetworkServiceImpl implements GeoNetworkService {
 
     @Autowired
-    RestTemplate restTemplate;
+    RestTemplate indexerRestTemplate;
 
     @Autowired
     @Qualifier("gn4ElasticsearchClient")
@@ -96,7 +96,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
 
             HttpEntity<String> requestEntity = getRequestEntity(MediaType.APPLICATION_JSON, null);
 
-            ResponseEntity<JsonNode> responseEntity = restTemplate.exchange(
+            ResponseEntity<JsonNode> responseEntity = indexerRestTemplate.exchange(
                     getGeoNetworkGroupsEndpoint(),
                     HttpMethod.GET,
                     requestEntity,
@@ -123,7 +123,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
             params.put("indexName", getIndexName());
             params.put(UUID, uuid);
 
-            ResponseEntity<JsonNode> responseEntity = restTemplate.exchange(
+            ResponseEntity<JsonNode> responseEntity = indexerRestTemplate.exchange(
                     getGeoNetworkRecordsEndpoint(),
                     HttpMethod.GET,
                     requestEntity,
@@ -155,7 +155,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
             params.put(UUID, uuid);
             params.put("formatterId", this.findFormatterId(uuid));
 
-            ResponseEntity<String> responseEntity = restTemplate.exchange(
+            ResponseEntity<String> responseEntity = indexerRestTemplate.exchange(
                     getGeoNetworkRecordsEndpoint() + "/formatters/{formatterId}",
                     HttpMethod.GET,
                     requestEntity,

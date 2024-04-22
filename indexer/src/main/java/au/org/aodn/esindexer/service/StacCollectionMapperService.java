@@ -312,19 +312,21 @@ public abstract class StacCollectionMapperService {
         }
     }
 
-    protected List<Map<String, String>> mapThemesConcepts(MDKeywordsPropertyType descriptiveKeyword) {
-        List<Map<String, String>> keywords = new ArrayList<>();
+    protected List<ConceptModel> mapThemesConcepts(MDKeywordsPropertyType descriptiveKeyword) {
+        List<ConceptModel> concepts = new ArrayList<>();
         descriptiveKeyword.getMDKeywords().getKeyword().forEach(keyword -> {
             if (keyword != null) {
+                ConceptModel conceptModel = ConceptModel.builder().build();
                 if (keyword.getCharacterString().getValue() instanceof AnchorType value) {
-                    keywords.add(Map.of("id", value.getValue(),
-                            "url", value.getHref()));
+                    conceptModel.setId(value.getValue());
+                    conceptModel.setUrl(value.getHref());
                 } else {
-                    keywords.add(Map.of("id", keyword.getCharacterString().getValue().toString()));
+                    conceptModel.setId(keyword.getCharacterString().getValue().toString());
                 }
+                concepts.add(conceptModel);
             }
         });
-        return keywords;
+        return concepts;
     }
 
     protected String mapThemesTitle(MDKeywordsPropertyType descriptiveKeyword, String uuid) {
@@ -389,7 +391,6 @@ public abstract class StacCollectionMapperService {
                     String uuid = this.mapUUID(source);
 
                     themesModel.setConcepts(mapThemesConcepts(descriptiveKeyword));
-
                     themesModel.setTitle(mapThemesTitle(descriptiveKeyword, uuid));
                     themesModel.setDescription(mapThemesDescription(descriptiveKeyword, uuid));
                     themesModel.setScheme(mapThemesScheme(descriptiveKeyword, uuid));
@@ -595,7 +596,9 @@ public abstract class StacCollectionMapperService {
     protected String mapContactsOrganization(AbstractCIPartyPropertyType2 party) {
         String organisationString = "";
         if (party.getAbstractCIParty() != null) {
-            organisationString = party.getAbstractCIParty().getValue().getName().getCharacterString().getValue().toString();
+            if (party.getAbstractCIParty().getValue().getName().getCharacterString() != null) {
+                organisationString = party.getAbstractCIParty().getValue().getName().getCharacterString().getValue().toString();
+            }
         }
         return organisationString;
     }

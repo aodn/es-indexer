@@ -7,6 +7,7 @@ import au.org.aodn.esindexer.configuration.GeoNetworkSearchTestConfig;
 import au.org.aodn.esindexer.exception.MetadataNotFoundException;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.util.ResourceUtils;
@@ -28,6 +29,9 @@ public class GeoNetworkServiceTests extends BaseTestClass {
     @Autowired
     protected GeoNetworkServiceImpl geoNetworkService;
 
+    @Value("${elasticsearch.index.name}")
+    protected String INDEX_NAME;
+
     @BeforeAll
     public void setup() {
         // Update the server for geonetwork RESTful URL
@@ -39,7 +43,7 @@ public class GeoNetworkServiceTests extends BaseTestClass {
 
     @AfterEach
     public void clear() throws IOException {
-        clearElasticIndex();
+        clearElasticIndex(INDEX_NAME);
     }
     /**
      * We need to make sure this works before you can do any meaningful transformation

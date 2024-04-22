@@ -7,8 +7,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+import org.testcontainers.shaded.org.checkerframework.checker.units.qual.A;
 
 import java.io.IOException;
 
@@ -27,7 +29,13 @@ public class IndexerServiceTests extends BaseTestClass {
     protected IndexerServiceImpl indexerService;
 
     @Autowired
-    protected ObjectMapper objectMapper;
+    protected ObjectMapper indexerObjectMapper;
+
+    @Autowired
+    protected ElasticSearchIndexService elasticSearchIndexService;
+
+    @Value("${elasticsearch.index.name}")
+    protected String INDEX_NAME;
 
     @BeforeAll
     public void setup() {
@@ -40,7 +48,7 @@ public class IndexerServiceTests extends BaseTestClass {
 
     @AfterEach
     public void clear() throws IOException {
-        clearElasticIndex();
+        clearElasticIndex(INDEX_NAME);
     }
 
     @Test
@@ -78,7 +86,7 @@ public class IndexerServiceTests extends BaseTestClass {
         // ErrorCause: {"type":"illegal_argument_exception","reason":"Polygon self-intersection at lat=57.0 lon=-66.0"}
         //
         // So it will not insert correctly and result in 1 doc only
-        assertEquals("Doc count correct", 1L, indexerService.getDocumentsCount());
+        assertEquals("Doc count correct", 1L, elasticSearchIndexService.getDocumentsCount(INDEX_NAME));
 
         deleteRecord("9e5c3031-a026-48b3-a153-a70c2e2b78b9");
         deleteRecord("830f9a83-ae6b-4260-a82a-24c4851f7119");
@@ -90,11 +98,11 @@ public class IndexerServiceTests extends BaseTestClass {
         insertMetadataRecords("06b09398-d3d0-47dc-a54a-a745319fbece", "classpath:canned/sample3.xml");
 
         indexerService.indexAllMetadataRecordsFromGeoNetwork(true);
-        assertEquals("Doc count correct", 2L, indexerService.getDocumentsCount());
+        assertEquals("Doc count correct", 2L, elasticSearchIndexService.getDocumentsCount(INDEX_NAME));
 
         // Only 2 doc in elastic, if we delete it then should be zero
         indexerService.deleteDocumentByUUID("830f9a83-ae6b-4260-a82a-24c4851f7119");
-        assertEquals("Doc count correct", 1L, indexerService.getDocumentsCount());
+        assertEquals("Doc count correct", 1L, elasticSearchIndexService.getDocumentsCount(INDEX_NAME));
 
         deleteRecord("830f9a83-ae6b-4260-a82a-24c4851f7119");
         deleteRecord("06b09398-d3d0-47dc-a54a-a745319fbece");
@@ -102,17 +110,17 @@ public class IndexerServiceTests extends BaseTestClass {
 
     @Test
     public void verifyGetDocumentByUUID() throws IOException {
-        String expected = readResourceFile("classpath:canned/sample3_stac.json");
+        String expected = readResourceFile("classpath:canned/sample4_stac.json");
 
-        insertMetadataRecords("06b09398-d3d0-47dc-a54a-a745319fbece", "classpath:canned/sample3.xml");
+        insertMetadataRecords("7709f541-fc0c-4318-b5b9-9053aa474e0e", "classpath:canned/sample4.xml");
 
         indexerService.indexAllMetadataRecordsFromGeoNetwork(true);
-        Hit<ObjectNode> objectNodeHit = indexerService.getDocumentByUUID("06b09398-d3d0-47dc-a54a-a745319fbece");
+        Hit<ObjectNode> objectNodeHit = indexerService.getDocumentByUUID("7709f541-fc0c-4318-b5b9-9053aa474e0e");
 
         String test = objectNodeHit.source().toPrettyString();
 
-        assertEquals("Stac equals", objectMapper.readTree(expected), objectMapper.readTree(test));
+        assertEquals("Stac equals", indexerObjectMapper.readTree(expected), indexerObjectMapper.readTree(test));
 
-        deleteRecord("06b09398-d3d0-47dc-a54a-a745319fbece");
+        deleteRecord("7709f541-fc0c-4318-b5b9-9053aa474e0e");
     }
 }

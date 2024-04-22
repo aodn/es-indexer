@@ -50,7 +50,9 @@ public class StacUtils {
             for(Polygon polygon : polygons) {
                 // Add polygon one by one to extend the overall bounding box area, this is requirement
                 // of STAC to have an overall bounding box of all smaller area as the first bbox in the list.
-                envelope = GeometryBase.calculateBoundingBox(envelope, polygon);
+                if (polygon != null) {
+                    envelope.expandToInclude(polygon.getEnvelopeInternal());
+                }
             }
 
             if (!polygons.isEmpty()) {

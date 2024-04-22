@@ -1,7 +1,6 @@
 package au.org.aodn.esindexer.service;
 
 import au.org.aodn.stac.model.StacCollectionModel;
-import au.org.aodn.esindexer.utils.StringUtil;
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.exception.*;
 import au.org.aodn.esindexer.utils.JaxbUtils;
@@ -13,10 +12,7 @@ import co.elastic.clients.elasticsearch.core.bulk.BulkResponseItem;
 import co.elastic.clients.elasticsearch.core.search.Hit;
 import co.elastic.clients.elasticsearch.core.search.TotalHits;
 import co.elastic.clients.elasticsearch.core.search.TotalHitsRelation;
-import co.elastic.clients.elasticsearch.indices.CreateIndexRequest;
-import co.elastic.clients.elasticsearch.indices.CreateIndexResponse;
 import co.elastic.clients.json.JsonData;
-import co.elastic.clients.transport.endpoints.BooleanResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import jakarta.xml.bind.JAXBException;
@@ -26,11 +22,8 @@ import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.operation.TransformException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
-
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -46,14 +39,17 @@ public class IndexerServiceImpl implements IndexerService {
     @Autowired
     ElasticsearchClient portalElasticsearchClient;
 
+    @Autowired
+    ElasticSearchIndexService elasticSearchIndexService;
+
     @Value("${elasticsearch.index.name}")
     private String indexName;
 
     @Autowired
-    ObjectMapper objectMapper;
+    ObjectMapper indexerObjectMapper;
 
     @Autowired
-    protected StacCollectionMapperService mapper;
+    protected StacCollectionMapperService stacCollectionMapperService;
 
     @Autowired
     JaxbUtils<MDMetadataType> jaxbUtils;
@@ -61,17 +57,10 @@ public class IndexerServiceImpl implements IndexerService {
     @Autowired
     RankingService rankingService;
 
-    private static final Logger logger = LogManager.getLogger(IndexerServiceImpl.class);
+    @Autowired
+    AodnDiscoveryParameterVocabService aodnDiscoveryParameterVocabService;
 
-    protected long getDocumentsCount() {
-        try {
-            return portalElasticsearchClient.count(s -> s
-                    .index(indexName)
-            ).count();
-        } catch (ElasticsearchException | IOException e) {
-            throw new IndexNotFoundException("Failed to get documents count from index: " + indexName + " | " + e.getMessage());
-        }
-    }
+    private static final Logger logger = LogManager.getLogger(IndexerServiceImpl.class);
 
     public Hit<ObjectNode> getDocumentByUUID(String uuid) throws IOException {
         try {
@@ -119,23 +108,10 @@ public class IndexerServiceImpl implements IndexerService {
         }
     }
 
-    protected void deleteIndexStore() {
-        try {
-            BooleanResponse response = portalElasticsearchClient.indices().exists(b -> b.index(indexName));
-            if (response.value()) {
-                logger.info("Deleting index: " + indexName);
-                portalElasticsearchClient.indices().delete(b -> b.index(indexName));
-                logger.info("Index: " + indexName + " deleted");
-            }
-        } catch (ElasticsearchException | IOException e) {
-            throw new DeleteIndexException("Failed to delete index: " + indexName + " | " + e.getMessage());
-        }
-    }
-
     protected StacCollectionModel getMappedMetadataValues(String metadataValues) throws IOException, FactoryException, TransformException, JAXBException {
         MDMetadataType metadataType = jaxbUtils.unmarshal(metadataValues);
 
-        StacCollectionModel stacCollectionModel = mapper.mapToSTACCollection(metadataType);
+        StacCollectionModel stacCollectionModel = stacCollectionMapperService.mapToSTACCollection(metadataType);
 
         // evaluate completeness
         Integer completeness = rankingService.evaluateCompleteness(stacCollectionModel);
@@ -151,7 +127,13 @@ public class IndexerServiceImpl implements IndexerService {
 
         stacCollectionModel.getSummaries().setScore(score);
 
+        // TODO: in future, blah blah here
         stacCollectionModel.setTitleSuggest(stacCollectionModel.getTitle());
+
+        List<String> aodnDiscoveryCategories = aodnDiscoveryParameterVocabService.getAodnDiscoveryCategories(stacCollectionModel.getThemes());
+        if (!aodnDiscoveryCategories.isEmpty()) {
+            stacCollectionModel.getSummaries().setDiscoveryCategories(aodnDiscoveryCategories);
+        }
 
         return stacCollectionModel;
     }
@@ -166,24 +148,24 @@ public class IndexerServiceImpl implements IndexerService {
 
             // count portal index documents, or create index if not found from defined mapping JSON file
             try {
-                portalIndexDocumentsCount = this.getDocumentsCount();
+                portalIndexDocumentsCount = elasticSearchIndexService.getDocumentsCount(indexName);
 
                 // check if GeoNetwork instance has been reinstalled
                 if (this.isGeoNetworkInstanceReinstalled(portalIndexDocumentsCount)) {
                     logger.info("GeoNetwork instance has been reinstalled, recreating portal index: " + indexName);
-                    this.createIndexFromMappingJSONFile();
+                    elasticSearchIndexService.createIndexFromMappingJSONFile(AppConstants.PORTAL_RECORDS_MAPPING_JSON_FILE, indexName);
                 } else {
                     // delete the existing document if found first
                     this.deleteDocumentByUUID(uuid);
                 }
             } catch (IndexNotFoundException e) {
                 logger.info("Index: " + indexName + " not found, creating index");
-                this.createIndexFromMappingJSONFile();
+                elasticSearchIndexService.createIndexFromMappingJSONFile(AppConstants.PORTAL_RECORDS_MAPPING_JSON_FILE, indexName);
             }
 
             // index the metadata if it is published
             if (this.isMetadataPublished(uuid)) {
-                try(InputStream is = new ByteArrayInputStream(objectMapper.writeValueAsBytes(mappedMetadataValues))) {
+                try(InputStream is = new ByteArrayInputStream(indexerObjectMapper.writeValueAsBytes(mappedMetadataValues))) {
                     logger.info("Ingesting a new metadata with UUID: " + uuid + " to index: " + indexName);
                     logger.info("{}", mappedMetadataValues);
                     req = IndexRequest.of(b -> b
@@ -209,25 +191,6 @@ public class IndexerServiceImpl implements IndexerService {
         }
     }
 
-    protected void createIndexFromMappingJSONFile() {
-        ClassPathResource resource = new ClassPathResource("config_files/" + AppConstants.PORTAL_RECORDS_MAPPING_JSON_FILE);
-
-        // delete the existing index if found first
-        this.deleteIndexStore();
-
-        try (InputStream input = resource.getInputStream()) {
-            logger.info("Creating index: " + indexName);
-            CreateIndexRequest req = CreateIndexRequest.of(b -> b
-                .index(indexName)
-                .withJson(input)
-            );
-            CreateIndexResponse response = portalElasticsearchClient.indices().create(req);
-            logger.info(response.toString());
-        }
-        catch (ElasticsearchException | IOException e) {
-            throw new CreateIndexException("Failed to elastic index from schema file: " + indexName + " | " + e.getMessage());
-        }
-    }
 
     public ResponseEntity<String> deleteDocumentByUUID(String uuid) throws IOException {
         logger.info("Deleting document with UUID: " + uuid + " from index: " + indexName);
@@ -259,7 +222,7 @@ public class IndexerServiceImpl implements IndexerService {
         }
 
         // recreate index from mapping JSON file
-        this.createIndexFromMappingJSONFile();
+        elasticSearchIndexService.createIndexFromMappingJSONFile(AppConstants.PORTAL_RECORDS_MAPPING_JSON_FILE, indexName);
 
         logger.info("Indexing all metadata records from GeoNetwork");
 
@@ -270,7 +233,7 @@ public class IndexerServiceImpl implements IndexerService {
                     StacCollectionModel mappedMetadataValues = this.getMappedMetadataValues(metadataRecord);
 
                     // convert mapped values to binary data
-                    logger.debug("Ingested json is {}", objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(mappedMetadataValues));
+                    logger.debug("Ingested json is {}", indexerObjectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(mappedMetadataValues));
 
                     // send bulk request to Elasticsearch
                     bulkRequest.operations(op -> op
@@ -306,6 +269,8 @@ public class IndexerServiceImpl implements IndexerService {
         } else {
             logger.info("Finished bulk indexing records to index: " + indexName);
         }
+
+        // TODO now processing for record_suggestions index
 
         return ResponseEntity.status(HttpStatus.OK).body(result.toString());
     }

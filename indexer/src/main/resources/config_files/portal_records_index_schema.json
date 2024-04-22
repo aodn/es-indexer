@@ -2,7 +2,7 @@
   "settings":{
     "analysis":{
       "analyzer":{
-        "my_stop_analyzer":{
+        "custom_analyser":{
           "type":"custom",
           "tokenizer":"standard",
           "filter":[
@@ -30,12 +30,10 @@
       "type": { "type": "text" },
       "title": { "type": "text" },
       "title_suggest": {
-        "type": "completion",
-        "analyzer": "my_stop_analyzer",
-        "preserve_separators": true,
-        "preserve_position_increments": true,
-        "max_input_length": 1000
+        "type": "search_as_you_type",
+        "analyzer": "custom_analyser"
       },
+      "discovery_categories" : { "type":  "keyword" },
       "keywords": {
         "type": "nested",
         "properties": {

@@ -1,0 +1,73 @@
+{
+  "mappings": {
+    "dynamic": true,
+    "properties": {
+      "label": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      },
+      "definition": {
+        "type": "text"
+      },
+      "about": {
+        "type": "keyword"
+      },
+      "broader": {
+        "type": "nested",
+        "properties": {
+          "label": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "about": {
+            "type": "keyword"
+          }
+        }
+      },
+      "narrower": {
+        "type": "nested",
+        "properties": {
+          "label": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "about": {
+            "type": "keyword"
+          },
+          "narrower": {
+            "type": "nested",
+            "properties": {
+              "label": {
+                "type": "text",
+                "fields": {
+                  "keyword": {
+                    "type": "keyword",
+                    "ignore_above": 256
+                  }
+                }
+              },
+              "about": {
+                "type": "keyword"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
