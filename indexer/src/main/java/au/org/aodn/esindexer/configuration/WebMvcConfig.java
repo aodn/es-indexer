@@ -41,14 +41,12 @@ public class WebMvcConfig {
 
     @Bean("indexerRestTemplate")
     public RestTemplate indexerRestTemplate() {
-        final RestTemplate restTemplate = new RestTemplate();
-        restTemplate.getMessageConverters().add(jacksonSupportedTypes());
-        return restTemplate;
-    }
-
-    private HttpMessageConverter jacksonSupportedTypes() {
         MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
         converter.setSupportedMediaTypes(Arrays.asList(MediaType.parseMediaType("text/plain;charset=utf-8"), MediaType.APPLICATION_OCTET_STREAM));
-        return converter;
+
+        final RestTemplate restTemplate = new RestTemplate();
+        restTemplate.getMessageConverters().add(converter);
+
+        return restTemplate;
     }
 }

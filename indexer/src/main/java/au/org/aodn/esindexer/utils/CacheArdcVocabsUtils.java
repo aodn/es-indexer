@@ -111,6 +111,7 @@ public class CacheArdcVocabsUtils {
 
     @Cacheable(AppConstants.AODN_DISCOVERY_CATEGORIES_CACHE)
     // TODO research strategy to avoid multiple refresh runs at the same schedule by multiple indexer instances
+    // A way to do it is read the value from Elastic search, if it has updated within say 24 hrs then use it
     public List<JsonNode> getDiscoveryCategories() throws IOException {
         List<JsonNode> categories = new ArrayList<>();
         log.info("Fetching AODN Discovery Parameter Vocabularies from {}", categoriesIndexName);
