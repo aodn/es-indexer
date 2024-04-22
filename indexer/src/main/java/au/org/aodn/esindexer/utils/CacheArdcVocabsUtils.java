@@ -49,7 +49,7 @@ public class CacheArdcVocabsUtils {
     @Autowired
     ElasticsearchClient portalElasticsearchClient;
 
-    @Value("${elasticsearch.categories-index.name}")
+    @Value("${elasticsearch.index.categories.name}")
     String categoriesIndexName;
 
     @Autowired
