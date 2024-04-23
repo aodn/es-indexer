@@ -32,7 +32,7 @@ import java.util.List;
 @Component
 // create and inject a stub proxy to self due to the circular reference http://bit.ly/4aFvYtt
 @Scope(proxyMode = ScopedProxyMode.TARGET_CLASS)
-public class CacheArdcVocabsUtils {
+public class VocabsUtils {
     @Value(AppConstants.AODN_DISCOVERY_PARAMETER_VOCAB_API)
     protected String vocabApi;
 
@@ -41,7 +41,7 @@ public class CacheArdcVocabsUtils {
 
     // self-injection to avoid self-invocation problems when calling the cachable method within the same bean
     @Autowired
-    CacheArdcVocabsUtils self;
+    VocabsUtils self;
 
     @Autowired
     ElasticSearchIndexService elasticSearchIndexService;
@@ -112,7 +112,7 @@ public class CacheArdcVocabsUtils {
     @Cacheable(AppConstants.AODN_DISCOVERY_CATEGORIES_CACHE)
     // TODO research strategy to avoid multiple refresh runs at the same schedule by multiple indexer instances
     // A way to do it is read the value from Elastic search, if it has updated within say 24 hrs then use it
-    public List<JsonNode> getDiscoveryCategories() throws IOException {
+    public List<JsonNode> getDiscoveryCategories(String categoriesIndexName) throws IOException {
         List<JsonNode> categories = new ArrayList<>();
         log.info("Fetching AODN Discovery Parameter Vocabularies from {}", categoriesIndexName);
         try {
@@ -140,7 +140,7 @@ public class CacheArdcVocabsUtils {
         log.info("Refreshing AODN Discovery Parameter Vocabularies cache");
         clearCache();
         this.refreshDiscoveryCategoriesIndex();
-        self.getDiscoveryCategories();
+        self.getDiscoveryCategories(categoriesIndexName);
     }
 
     @CacheEvict(value = AppConstants.AODN_DISCOVERY_CATEGORIES_CACHE, allEntries = true)

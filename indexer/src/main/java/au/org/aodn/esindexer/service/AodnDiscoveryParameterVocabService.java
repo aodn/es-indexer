@@ -1,10 +1,12 @@
 package au.org.aodn.esindexer.service;
 
-import au.org.aodn.esindexer.utils.CacheArdcVocabsUtils;
+import au.org.aodn.esindexer.utils.VocabsUtils;
 import au.org.aodn.stac.model.ConceptModel;
 import au.org.aodn.stac.model.ThemesModel;
+import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -15,7 +17,13 @@ import java.util.List;
 @Service
 public class AodnDiscoveryParameterVocabService {
     @Autowired
-    CacheArdcVocabsUtils cacheArdcVocabsUtils;
+    VocabsUtils cacheArdcVocabsUtils;
+
+    @Value("${elasticsearch.index.categories.name}")
+    String categoriesIndexName;
+
+    @Autowired
+    ElasticsearchClient portalElasticsearchClient;
 
     protected boolean themesMatchConcept(List<ThemesModel> themes, ConceptModel thatConcept) {
         for (ThemesModel theme : themes) {
@@ -44,7 +52,7 @@ public class AodnDiscoveryParameterVocabService {
     public List<String> getAodnDiscoveryCategories(List<ThemesModel> themes) throws IOException {
         List<String> results = new ArrayList<>();
         // Iterate over the top-level vocabularies
-        for (JsonNode topLevelVocab : cacheArdcVocabsUtils.getDiscoveryCategories()) {
+        for (JsonNode topLevelVocab : cacheArdcVocabsUtils.getDiscoveryCategories(categoriesIndexName)) {
             if (topLevelVocab.has("narrower") && !topLevelVocab.get("narrower").isEmpty()) {
                 for (JsonNode secondLevelVocab : topLevelVocab.get("narrower")) {
                     String secondLevelVocabLabel = secondLevelVocab.get("label").asText();

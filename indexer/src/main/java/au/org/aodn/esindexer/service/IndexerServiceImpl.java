@@ -5,6 +5,7 @@ import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.exception.*;
 import au.org.aodn.esindexer.utils.JaxbUtils;
 import au.org.aodn.metadata.iso19115_3_2018.*;
+import au.org.aodn.stac.model.RecordSuggest;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.ElasticsearchException;
 import co.elastic.clients.elasticsearch.core.*;
@@ -127,13 +128,20 @@ public class IndexerServiceImpl implements IndexerService {
 
         stacCollectionModel.getSummaries().setScore(score);
 
-        // TODO: in future, blah blah here
-        stacCollectionModel.setTitleSuggest(stacCollectionModel.getTitle());
-
         List<String> aodnDiscoveryCategories = aodnDiscoveryParameterVocabService.getAodnDiscoveryCategories(stacCollectionModel.getThemes());
         if (!aodnDiscoveryCategories.isEmpty()) {
             stacCollectionModel.getSummaries().setDiscoveryCategories(aodnDiscoveryCategories);
         }
+
+
+        // categories suggest using a different index
+
+        // extendable for other aspects of the records data. eg. title, description, etc. something that are unique to the record and currently using "text" type
+        RecordSuggest recordSuggest = RecordSuggest.builder()
+                .title(stacCollectionModel.getTitle())
+                .description(null) // purely for demonstrating the extendability, manage extra suggest field in RecordSuggest class, and the index JSON schema
+                .build();
+        stacCollectionModel.setRecordSuggest(recordSuggest);
 
         return stacCollectionModel;
     }
