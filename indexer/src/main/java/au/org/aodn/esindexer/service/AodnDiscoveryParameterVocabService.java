@@ -19,9 +19,6 @@ public class AodnDiscoveryParameterVocabService {
     @Autowired
     VocabsUtils cacheArdcVocabsUtils;
 
-    @Value("${elasticsearch.index.categories.name}")
-    String categoriesIndexName;
-
     @Autowired
     ElasticsearchClient portalElasticsearchClient;
 
@@ -52,7 +49,7 @@ public class AodnDiscoveryParameterVocabService {
     public List<String> getAodnDiscoveryCategories(List<ThemesModel> themes) throws IOException {
         List<String> results = new ArrayList<>();
         // Iterate over the top-level vocabularies
-        for (JsonNode topLevelVocab : cacheArdcVocabsUtils.getDiscoveryCategories(categoriesIndexName)) {
+        for (JsonNode topLevelVocab : cacheArdcVocabsUtils.getDiscoveryCategories()) {
             if (topLevelVocab.has("narrower") && !topLevelVocab.get("narrower").isEmpty()) {
                 for (JsonNode secondLevelVocab : topLevelVocab.get("narrower")) {
                     String secondLevelVocabLabel = secondLevelVocab.get("label").asText();

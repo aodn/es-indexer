@@ -112,7 +112,7 @@ public class VocabsUtils {
     @Cacheable(AppConstants.AODN_DISCOVERY_CATEGORIES_CACHE)
     // TODO research strategy to avoid multiple refresh runs at the same schedule by multiple indexer instances
     // A way to do it is read the value from Elastic search, if it has updated within say 24 hrs then use it
-    public List<JsonNode> getDiscoveryCategories(String categoriesIndexName) throws IOException {
+    public List<JsonNode> getDiscoveryCategories() throws IOException {
         List<JsonNode> categories = new ArrayList<>();
         log.info("Fetching AODN Discovery Parameter Vocabularies from {}", categoriesIndexName);
         try {
@@ -140,7 +140,7 @@ public class VocabsUtils {
         log.info("Refreshing AODN Discovery Parameter Vocabularies cache");
         clearCache();
         this.refreshDiscoveryCategoriesIndex();
-        self.getDiscoveryCategories(categoriesIndexName);
+        self.getDiscoveryCategories();
     }
 
     @CacheEvict(value = AppConstants.AODN_DISCOVERY_CATEGORIES_CACHE, allEntries = true)
