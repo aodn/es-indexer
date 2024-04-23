@@ -1,13 +1,10 @@
 package au.org.aodn.esindexer.utils;
 
-import au.org.aodn.ardcvocabs.configuration.ArdcAutoConfiguration;
 import au.org.aodn.esindexer.service.AodnDiscoveryParameterVocabService;
 import au.org.aodn.stac.model.ConceptModel;
 import au.org.aodn.stac.model.ThemesModel;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
@@ -23,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @ActiveProfiles("test")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class AodnDiscoveryParameterVocabUtilsTest {
+public class VocabUtilsTest {
     @Autowired
     AodnDiscoveryParameterVocabService aodnDiscoveryParameterVocabService;
 
