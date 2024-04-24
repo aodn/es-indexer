@@ -32,7 +32,7 @@ import java.util.List;
 @Component
 // create and inject a stub proxy to self due to the circular reference http://bit.ly/4aFvYtt
 @Scope(proxyMode = ScopedProxyMode.TARGET_CLASS)
-public class CacheArdcVocabsUtils {
+public class VocabsUtils {
     @Value(AppConstants.AODN_DISCOVERY_PARAMETER_VOCAB_API)
     protected String vocabApi;
 
@@ -41,7 +41,7 @@ public class CacheArdcVocabsUtils {
 
     // self-injection to avoid self-invocation problems when calling the cachable method within the same bean
     @Autowired
-    CacheArdcVocabsUtils self;
+    VocabsUtils self;
 
     @Autowired
     ElasticSearchIndexService elasticSearchIndexService;

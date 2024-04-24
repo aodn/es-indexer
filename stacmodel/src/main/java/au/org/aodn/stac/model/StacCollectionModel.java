@@ -14,8 +14,8 @@ public class StacCollectionModel {
     @JsonProperty("id")
     protected String uuid;
     protected String title;
-    @JsonProperty("title_suggest")
-    protected String titleSuggest;
+    @JsonProperty("record_suggest")
+    protected RecordSuggest recordSuggest;
     protected String description;
     protected ExtentModel extent;
     protected SummariesModel summaries;
