@@ -3,6 +3,7 @@ package au.org.aodn.ardcvocabs.service;
 import au.org.aodn.ardcvocabs.model.CategoryVocabModel;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.databind.node.TextNode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.client.RestClientException;
@@ -125,14 +126,22 @@ public class ArdcVocabsService {
                             log.debug("Processing label {}", label.apply(j));
                             if (j.has("broader")) {
                                 for (JsonNode b : j.get("broader")) {
-                                    if (b.has("prefLabel") && b.has("_about")) {
-                                        CategoryVocabModel c = CategoryVocabModel
-                                                .builder()
-                                                .about(about.apply(b))
-                                                .label(label.apply(b))
-                                                .build();
-                                        broader.add(c);
+                                    CategoryVocabModel c = null;
+                                    if (b instanceof ObjectNode objectNode) {
+                                        if (objectNode.has("prefLabel") && objectNode.has("_about")) {
+                                            c = CategoryVocabModel
+                                                    .builder()
+                                                    .about(about.apply(b))
+                                                    .label(label.apply(b))
+                                                    .build();
+                                        }
                                     }
+                                    if (b instanceof TextNode textNode && textNode.asText().contains("parameter_classes")) {
+                                        c = CategoryVocabModel.builder()
+                                                .about(textNode.asText())
+                                                .build();
+                                    }
+                                    broader.add(c);
                                 }
                             }
 
@@ -185,6 +194,7 @@ public class ArdcVocabsService {
                 url = null;
             }
         }
+
         return result;
     }
 }
