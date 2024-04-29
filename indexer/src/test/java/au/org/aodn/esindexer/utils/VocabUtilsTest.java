@@ -47,6 +47,7 @@ public class VocabUtilsTest {
         assertTrue(categories.contains("alkalinity"));
         assertTrue(categories.contains("temperature"));
         assertTrue(categories.contains("salinity"));
-        assertEquals(3, categories.size());
+        assertTrue(categories.contains("carbon"));
+        assertEquals(4, categories.size());
     }
 }
