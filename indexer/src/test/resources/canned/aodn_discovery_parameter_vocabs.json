@@ -251,14 +251,28 @@
     "label": "Nutrient",
     "definition": "This category contains vocabulary terms describing nutrient parameters",
     "about": "http://vocab.aodn.org.au/def/parameter_classes/category/51",
-    "broader": [],
+    "broader": [
+      {
+        "label": "Chemical",
+        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/54"
+      },
+      {
+        "label": "Biological",
+        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/55"
+      }
+    ],
     "narrower": []
   },
   {
     "label": "Carbon",
     "definition": "This category contains vocabulary terms describing carbon parameters",
     "about": "http://vocab.aodn.org.au/def/parameter_classes/category/52",
-    "broader": [],
+    "broader": [
+      {
+        "label": "Chemical",
+        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/54"
+      }
+    ],
     "narrower": []
   },
   {
@@ -360,6 +374,73 @@
           {
             "label": "Downwelling vector irradiance as energy (ultra-violet wavelengths) in the atmosphere",
             "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/733"
+          }
+        ]
+      },
+      {
+        "label": "Wind",
+        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/6",
+        "narrower": [
+          {
+            "label": "Wind speed of gust in the atmosphere",
+            "definition": "Maximum speed of the wind (distance moved per unit time by a parcel of air) parallel to the ground during a gust event (generally regarded as an increase over sustained speed of more than 5m/s lasting less than 20 seconds).",
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/395"
+          },
+          {
+            "label": "Wind to direction in the atmosphere",
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/396"
+          },
+          {
+            "label": "Wind stress on the water body",
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/406"
+          },
+          {
+            "label": "Wind direction (relative to moving platform) in the atmosphere",
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/ERWDZZ01"
+          },
+          {
+            "label": "Wind speed (relative to moving platform) in the atmosphere",
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/ERWSZZ01"
+          },
+          {
+            "label": "Eastward wind velocity in the atmosphere",
+            "definition": "The component of the wind blowing towards true east. The value could result from any kind of measurement or prediction.",
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/ESEWZZXX"
+          },
+          {
+            "label": "Northward wind velocity in the atmosphere",
+            "definition": "The component of the wind blowing towards true north. The value could result from any kind of measurement or prediction.",
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/ESNSZZXX"
+          },
+          {
+            "label": "Wind speed in the atmosphere",
+            "definition": "Sustained speed of the wind (distance moved per unit time by a parcel of air) parallel to the ground at a given place and time",
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/ESSAZZ01"
+          },
+          {
+            "label": "Wind from direction in the atmosphere",
+            "definition": "Direction relative to true north from which the wind is blowing",
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/EWDAZZ01"
+          }
+        ]
+      },
+      {
+        "label": "Air temperature",
+        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/7",
+        "narrower": [
+          {
+            "label": "Dew point temperature of the atmosphere",
+            "definition": "The temperature to which air must cool to become saturated with water vapour",
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/CDEWZZ01"
+          },
+          {
+            "label": "Temperature of the atmosphere",
+            "definition": "The degree of hotness of the atmosphere expressed against a standard scale.  Includes both IPTS-68 and ITS-90 scales.",
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/CTMPZZ01"
+          },
+          {
+            "label": "Wet bulb temperature of the atmosphere",
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/CWETZZ01"
           }
         ]
       },
@@ -475,6 +556,131 @@
           {
             "label": "Concentration of suspended particulate material (inorganic) per unit volume of the water body",
             "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/656"
+          }
+        ]
+      },
+      {
+        "label": "Nutrient",
+        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/51",
+        "narrower": [
+          {
+            "label": "Concentration of nitrate {NO3} per unit volume of the water body",
+            "definition": "Concentration of nitrate per unit volume of the water column. Nitrate may be expressed in terms of mass or quantity of substance.",
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/374"
+          },
+          {
+            "label": "Concentration of nitrate {NO3} per unit mass of the water body",
+            "definition": "Concentration (moles or mass) of nitrogen as nitrate per unit mass of the water column",
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/375"
+          },
+          {
+            "label": "Concentration of silicate {SiO4} per unit volume of the water body",
+            "definition": "Concentration of silicate per unit volume of the water column. Silicate may be expressed in terms of mass or quantity of substance.",
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/376"
+          },
+          {
+            "label": "Concentration of ammonium {NH4} per unit volume of the water body",
+            "definition": "Concentration of ammonium per unit volume of the water column. Ammonium may be expressed in terms of mass or quantity of substance.",
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/377"
+          },
+          {
+            "label": "Concentration of silicate {SiO4} per unit mass of the water body",
+            "definition": "Concentration (moles or mass) of silicon as silicate per unit mass of the water column",
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/378"
+          },
+          {
+            "label": "Concentration of phosphate {PO4} per unit volume of the water body",
+            "definition": "Concentration of phosphate per unit volume of the water column. Phosphate may be expressed in terms of mass or quantity of substance",
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/379"
+          },
+          {
+            "label": "Concentration of phosphate {PO4} per unit mass of the water body",
+            "definition": "Concentration of phosphate dissolved per unit mass of the water column. Solute may be expressed in terms of mass, volume or quantity of substance",
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/380"
+          },
+          {
+            "label": "Concentration of nitrate and nitrite {NO3 and NO2} per unit mass of the water body",
+            "definition": "Concentration (moles or mass) of nitrogen as both nitrate and nitrite per unit mass of the water column.",
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/45"
+          },
+          {
+            "label": "Concentration of nitrate and nitrite {NO3 and NO2} per unit volume of the water body",
+            "definition": "Concentration of nitrate and nitrite per unit volume of the water column. May be expressed in terms of mass or quantity of substance.",
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/46"
+          },
+          {
+            "label": "Concentration of total phosphorus per unit volume of the water body",
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/47"
+          },
+          {
+            "label": "Concentration of total phosphorus per unit mass of the water body",
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/48"
+          },
+          {
+            "label": "Concentration of nitrite {NO2} per unit mass of the water body",
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/49"
+          },
+          {
+            "label": "Concentration of nitrite {NO2} per unit volume of the water body",
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/50"
+          },
+          {
+            "label": "Concentration of phosphate (water soluble reactive) per unit volume of the water body",
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/53"
+          }
+        ]
+      },
+      {
+        "label": "Carbon",
+        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/52",
+        "narrower": [
+          {
+            "label": "Concentration of carbon (total inorganic) per unit mass of the water body",
+            "definition": "Concentration of dissolved inorganic carbon per unit mass of the water column. Solute may be expressed in terms of mass or quantity of substance.",
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/1"
+          },
+          {
+            "label": "Partial pressure of carbon dioxide in the atmosphere",
+            "definition": "The partial pressure of carbon dioxide in air",
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/422"
+          },
+          {
+            "label": "Partial pressure of carbon dioxide in the water body",
+            "definition": "The partial pressure of carbon dioxide in air in equilibrium with a water sample",
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/425"
+          },
+          {
+            "label": "Fugacity anomaly (water - air) of carbon dioxide in the water body",
+            "definition": "The difference in the CO2 fugacity (effective partial pressure allowing for non-ideal gas) between air in equilibrium with seawater and the atmosphere",
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/427"
+          },
+          {
+            "label": "Fugacity of carbon dioxide (at 100% humidity) in the atmosphere",
+            "definition": "The fugacity (effective partial pressure allowing for non-ideal gas) of carbon dioxide in the atmosphere assuming a humidity of 100 per cent.",
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/FCO2WTAT"
+          },
+          {
+            "label": "Fugacity of carbon dioxide (at 100% humidity) in the water body",
+            "definition": "Fugacity (partial pressure corrected for non-ideality of gases) of carbon dioxide in air that is in equilibrium with a seawater sample",
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/FCO2XXXX"
+          },
+          {
+            "label": "Mole fraction of carbon dioxide (dry air) in the atmosphere",
+            "definition": "The proportion as a ratio of quantity of matter of CO2 in a sample of atmosphere expressed on a dry air basis",
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/XCO2DRAT"
+          },
+          {
+            "label": "Mole fraction of carbon dioxide (dry air) in the equilibrated marine sample",
+            "definition": "The proportion as a ratio of quantity of matter of CO2 in a sample of air equilibrated with seawater expressed on a dry air basis",
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/XCO2WBDY"
+          },
+          {
+            "label": "Saturation state of aragonite in the water body",
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/24"
+          },
+          {
+            "label": "Saturation state of calcite in the water body",
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/25"
           }
         ]
       }
@@ -815,6 +1021,77 @@
           {
             "label": "Concentration of suspended particulate material (inorganic) per unit volume of the water body",
             "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/656"
+          }
+        ]
+      },
+      {
+        "label": "Nutrient",
+        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/51",
+        "narrower": [
+          {
+            "label": "Concentration of nitrate {NO3} per unit volume of the water body",
+            "definition": "Concentration of nitrate per unit volume of the water column. Nitrate may be expressed in terms of mass or quantity of substance.",
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/374"
+          },
+          {
+            "label": "Concentration of nitrate {NO3} per unit mass of the water body",
+            "definition": "Concentration (moles or mass) of nitrogen as nitrate per unit mass of the water column",
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/375"
+          },
+          {
+            "label": "Concentration of silicate {SiO4} per unit volume of the water body",
+            "definition": "Concentration of silicate per unit volume of the water column. Silicate may be expressed in terms of mass or quantity of substance.",
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/376"
+          },
+          {
+            "label": "Concentration of ammonium {NH4} per unit volume of the water body",
+            "definition": "Concentration of ammonium per unit volume of the water column. Ammonium may be expressed in terms of mass or quantity of substance.",
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/377"
+          },
+          {
+            "label": "Concentration of silicate {SiO4} per unit mass of the water body",
+            "definition": "Concentration (moles or mass) of silicon as silicate per unit mass of the water column",
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/378"
+          },
+          {
+            "label": "Concentration of phosphate {PO4} per unit volume of the water body",
+            "definition": "Concentration of phosphate per unit volume of the water column. Phosphate may be expressed in terms of mass or quantity of substance",
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/379"
+          },
+          {
+            "label": "Concentration of phosphate {PO4} per unit mass of the water body",
+            "definition": "Concentration of phosphate dissolved per unit mass of the water column. Solute may be expressed in terms of mass, volume or quantity of substance",
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/380"
+          },
+          {
+            "label": "Concentration of nitrate and nitrite {NO3 and NO2} per unit mass of the water body",
+            "definition": "Concentration (moles or mass) of nitrogen as both nitrate and nitrite per unit mass of the water column.",
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/45"
+          },
+          {
+            "label": "Concentration of nitrate and nitrite {NO3 and NO2} per unit volume of the water body",
+            "definition": "Concentration of nitrate and nitrite per unit volume of the water column. May be expressed in terms of mass or quantity of substance.",
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/46"
+          },
+          {
+            "label": "Concentration of total phosphorus per unit volume of the water body",
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/47"
+          },
+          {
+            "label": "Concentration of total phosphorus per unit mass of the water body",
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/48"
+          },
+          {
+            "label": "Concentration of nitrite {NO2} per unit mass of the water body",
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/49"
+          },
+          {
+            "label": "Concentration of nitrite {NO2} per unit volume of the water body",
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/50"
+          },
+          {
+            "label": "Concentration of phosphate (water soluble reactive) per unit volume of the water body",
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/53"
           }
         ]
       }
@@ -1330,6 +1607,28 @@
             "about": "http://vocab.nerc.ac.uk/collection/P01/current/PSLTZZ01"
           }
         ]
+      },
+      {
+        "label": "Sea surface height",
+        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/57",
+        "narrower": [
+          {
+            "label": "Sea surface height anomaly",
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/642"
+          },
+          {
+            "label": "Sea surface height above geoid",
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/643"
+          },
+          {
+            "label": "Sea surface height above reference datum",
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/43"
+          }
+        ]
+      },
+      {
+        "label": "Depth",
+        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/58"
       }
     ]
   },
@@ -1337,28 +1636,48 @@
     "label": "Sea surface height",
     "definition": "This category contains vocabulary terms describing sea surface height parameters",
     "about": "http://vocab.aodn.org.au/def/parameter_classes/category/57",
-    "broader": [],
+    "broader": [
+      {
+        "label": "Physical-Water",
+        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/56"
+      }
+    ],
     "narrower": []
   },
   {
     "label": "Depth",
     "definition": "This category contains vocabulary terms describing depth parameters",
     "about": "http://vocab.aodn.org.au/def/parameter_classes/category/58",
-    "broader": [],
+    "broader": [
+      {
+        "label": "Physical-Water",
+        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/56"
+      }
+    ],
     "narrower": []
   },
   {
     "label": "Wind",
     "definition": "This category contains vocabulary terms describing wind parameters",
     "about": "http://vocab.aodn.org.au/def/parameter_classes/category/6",
-    "broader": [],
+    "broader": [
+      {
+        "label": "Physical-Atmosphere",
+        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/53"
+      }
+    ],
     "narrower": []
   },
   {
     "label": "Air temperature",
     "definition": "This category contains vocabulary terms describing air temperature parameters",
     "about": "http://vocab.aodn.org.au/def/parameter_classes/category/7",
-    "broader": [],
+    "broader": [
+      {
+        "label": "Physical-Atmosphere",
+        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/53"
+      }
+    ],
     "narrower": []
   },
   {
