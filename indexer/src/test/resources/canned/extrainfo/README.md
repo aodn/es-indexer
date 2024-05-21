@@ -4,7 +4,7 @@ Our customized Geonetwork contains extra API call to get some internal data of d
 standard API call.
 
 Since we use standard Geonetwork image to do the testing, these API call will not be
-there, we solve it by using as Mockito.spy() to intercept certain call and return 
+there, we solve it by using as Mockito.spy() to intercept certain call and return
 the cannded data.
 
 This folder is use to store values for API /aodn/records/{uuid}/info, the UUID will
