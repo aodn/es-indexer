@@ -26,6 +26,7 @@ import org.testcontainers.shaded.com.fasterxml.jackson.core.type.TypeReference;
 import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.time.Duration;
 import java.util.Map;
 
@@ -95,16 +96,22 @@ public class GeoNetworkSearchTestConfig {
 
                 log.debug("Request mock info for record uuid {}", param.get(GeoNetworkServiceImpl.UUID));
                 if(param.containsKey(GeoNetworkServiceImpl.UUID)) {
-                    String json = BaseTestClass.readResourceFile(
-                            String.format(
-                                    "classpath:canned/extrainfo/%s.json",
-                                    param.get(GeoNetworkServiceImpl.UUID)
-                            )
-                    );
+                    try {
+                        String json = BaseTestClass.readResourceFile(
+                                String.format(
+                                        "classpath:canned/extrainfo/%s.json",
+                                        param.get(GeoNetworkServiceImpl.UUID)
+                                )
+                        );
 
-                    return ResponseEntity.ok(
-                            objectMapper.readValue(json, new TypeReference<Map<String, Object>>(){})
-                    );
+                        return ResponseEntity.ok(
+                                objectMapper.readValue(json, new TypeReference<Map<String, Object>>() {
+                                })
+                        );
+                    }
+                    catch(FileNotFoundException fileNotFoundException) {
+                        return ResponseEntity.notFound().build();
+                    }
                 }
             }
             return ResponseEntity.notFound().build();
