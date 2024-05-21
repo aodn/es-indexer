@@ -214,7 +214,7 @@ public class BaseTestClass {
         return r.getBody();
     }
 
-    public String readResourceFile(String path) throws IOException {
+    public static String readResourceFile(String path) throws IOException {
         File f = ResourceUtils.getFile(path);
         return new String(Files.readAllBytes(f.toPath()));
     }

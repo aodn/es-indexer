@@ -196,17 +196,17 @@
         <dependency>
             <groupId>au.org.aodn</groupId>
             <artifactId>geonetwork</artifactId>
-            <version>${parent.version}</version>
+            <version>${project.parent.version}</version>
         </dependency>
         <dependency>
             <groupId>au.org.aodn</groupId>
             <artifactId>ardcvocabs</artifactId>
-            <version>${parent.version}</version>
+            <version>${project.parent.version}</version>
         </dependency>
         <dependency>
             <groupId>au.org.aodn</groupId>
             <artifactId>stacmodel</artifactId>
-            <version>${parent.version}</version>
+            <version>${project.parent.version}</version>
         </dependency>
     </dependencies>
     <build>

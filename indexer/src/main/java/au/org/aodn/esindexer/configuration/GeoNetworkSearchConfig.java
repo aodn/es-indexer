@@ -1,5 +1,6 @@
 package au.org.aodn.esindexer.configuration;
 
+import au.org.aodn.esindexer.service.GeoNetworkServiceImpl;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.json.jackson.JacksonJsonpMapper;
 import co.elastic.clients.transport.rest_client.RestClientTransport;
@@ -13,6 +14,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
+import org.springframework.web.client.RestTemplate;
 
 @Configuration
 public class GeoNetworkSearchConfig {
@@ -38,5 +40,16 @@ public class GeoNetworkSearchConfig {
                         new BasicHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 })
                 .build();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean(GeoNetworkServiceImpl.class)
+    public GeoNetworkServiceImpl createGeoNetworkServiceImpl(
+            @Value("${geonetwork.host}") String server,
+            @Value("${geonetwork.search.api.index}") String indexName,
+            @Qualifier("gn4ElasticsearchClient") ElasticsearchClient gn4ElasticsearchClient,
+            RestTemplate indexerRestTemplate) {
+
+        return new GeoNetworkServiceImpl(server, indexName, gn4ElasticsearchClient, indexerRestTemplate);
     }
 }

@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -29,7 +30,6 @@ import java.util.List;
 
 
 @Slf4j
-@Component
 // create and inject a stub proxy to self due to the circular reference http://bit.ly/4aFvYtt
 @Scope(proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class VocabsUtils {
@@ -40,6 +40,7 @@ public class VocabsUtils {
     ArdcVocabsService ardcVocabsService;
 
     // self-injection to avoid self-invocation problems when calling the cachable method within the same bean
+    @Lazy
     @Autowired
     VocabsUtils self;
 
@@ -97,8 +98,6 @@ public class VocabsUtils {
         }
         log.info("Total documents in index: " + categoriesIndexName + " is " + elasticSearchIndexService.getDocumentsCount(categoriesIndexName));
     }
-
-
     /*
     fetch vocabularies from ARDC and index to discovery categories index once the bean is created
      */
@@ -110,8 +109,6 @@ public class VocabsUtils {
     }
 
     @Cacheable(AppConstants.AODN_DISCOVERY_CATEGORIES_CACHE)
-    // TODO research strategy to avoid multiple refresh runs at the same schedule by multiple indexer instances
-    // A way to do it is read the value from Elastic search, if it has updated within say 24 hrs then use it
     public List<JsonNode> getDiscoveryCategories() throws IOException {
         List<JsonNode> categories = new ArrayList<>();
         log.info("Fetching AODN Discovery Parameter Vocabularies from {}", categoriesIndexName);
@@ -134,12 +131,12 @@ public class VocabsUtils {
         return categories;
     }
 
-    // refresh every day at midnight
+    // TODO: A smarter refresh and check if the values are diff before evict cache
     @Scheduled(cron = "0 0 0 * * *")
     public void refreshCache() throws IOException {
         log.info("Refreshing AODN Discovery Parameter Vocabularies cache");
-        clearCache();
-        this.refreshDiscoveryCategoriesIndex();
+        self.clearCache();
+        self.refreshDiscoveryCategoriesIndex();
         self.getDiscoveryCategories();
     }
 

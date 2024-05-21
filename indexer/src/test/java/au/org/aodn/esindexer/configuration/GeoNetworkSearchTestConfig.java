@@ -1,19 +1,33 @@
 package au.org.aodn.esindexer.configuration;
 
+import au.org.aodn.esindexer.service.GeoNetworkServiceImpl;
+import co.elastic.clients.elasticsearch.ElasticsearchClient;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
 import org.apache.http.HttpHeaders;
 import org.apache.http.HttpHost;
 import org.apache.http.message.BasicHeader;
 import org.elasticsearch.client.RestClient;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
 import org.testcontainers.containers.DockerComposeContainer;
 import org.testcontainers.containers.wait.strategy.Wait;
 
 import java.io.File;
 import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.*;
 
 @Configuration
 public class GeoNetworkSearchTestConfig {
@@ -56,5 +70,31 @@ public class GeoNetworkSearchTestConfig {
                         new BasicHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 })
                 .build();
+    }
+
+    @Bean
+    public GeoNetworkServiceImpl createGeoNetworkServiceImpl(
+            @Value("${geonetwork.host}") String server,
+            @Value("${geonetwork.search.api.index}") String indexName,
+            @Qualifier("gn4ElasticsearchClient") ElasticsearchClient gn4ElasticsearchClient) {
+
+        RestTemplate template = Mockito.spy(new RestTemplate());
+        GeoNetworkServiceImpl impl = new GeoNetworkServiceImpl(server, indexName, gn4ElasticsearchClient, template);
+
+        // Spy the object and only create fake return on geonetwork extension api we created, this
+        // is because the image we use for testing is a generic geonetwork image without any customization
+        doAnswer(answer -> {
+            Map<String, Object> map = new HashMap<>();
+            return ResponseEntity.ok(map);
+        })
+                .when(template)
+                .exchange(
+                        eq(impl.getAodnExtRecordsEndpoint()),
+                        eq(HttpMethod.GET),
+                        any(HttpEntity.class),
+                        any(ParameterizedTypeReference.class),
+                        anyMap());
+
+        return impl;
     }
 }
