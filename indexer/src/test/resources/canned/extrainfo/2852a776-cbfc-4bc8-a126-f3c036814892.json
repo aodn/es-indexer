@@ -1,0 +1,11 @@
+{
+  "sourceId": "dbee258b-8730-4072-96d4-2818a69a4afd",
+  "suggest_logos": [
+    "http://localhost:8080/geonetwork/images/logos/dbee258b-8730-4072-96d4-2818a69a4afd.png",
+    "https://catalogue-imos.aodn.org.au/geonetwork/images/logos/dbee258b-8730-4072-96d4-2818a69a4afd.png"
+  ],
+  "schemaid": "iso19115-3.2018",
+  "harvesterUri": "https://catalogue-imos.aodn.org.au/geonetwork",
+  "isHarvested": true,
+  "harvesterType": "org.fao.geonet.kernel.harvest.harvester.geonet.GeonetHarvester"
+}

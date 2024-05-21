@@ -25,6 +25,7 @@ import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -427,28 +428,29 @@ public abstract class StacCollectionMapperService {
         }
 
         // Now add links for logos
-//        Optional<Map<String, Object>> optAdditionalInfo = geoNetworkService.getRecordExtraInfo(this.mapUUID(source));
-//        if(optAdditionalInfo.isPresent()) {
-//            // We iterate logos link and add it to STAC
-//            Map<String, Object> additionalInfo = optAdditionalInfo.get();
-//            if(additionalInfo.containsKey(SUGGEST_LOGOS)) {
-//                if(additionalInfo.get(SUGGEST_LOGOS) instanceof List) {
-//                    ((List<?>) additionalInfo.get(SUGGEST_LOGOS))
-//                            .stream()
-//                            .map(p -> (p instanceof String) ? (String) p : null)
-//                            .filter(Objects::nonNull)
-//                            .forEach(i -> {
-//                                LinkModel linkModel = LinkModel.builder().build();
-//                                linkModel.setHref(i);
-//                                // Geonetwork always return png logo
-//                                linkModel.setType("image/png");
-//                                linkModel.setRel("icon");
-//                                linkModel.setTitle("Suggest icon for dataset");
-//                                results.add(linkModel);
-//                            });
-//                }
-//            }
-//        }
+        Optional<Map<String, Object>> optAdditionalInfo = geoNetworkService.getRecordExtraInfo(this.mapUUID(source));
+        if(optAdditionalInfo.isPresent()) {
+            // We iterate logos link and add it to STAC
+            Map<String, Object> additionalInfo = optAdditionalInfo.get();
+            if(additionalInfo.containsKey(SUGGEST_LOGOS)) {
+                if(additionalInfo.get(SUGGEST_LOGOS) instanceof List) {
+                    final AtomicInteger index = new AtomicInteger(1);
+                    ((List<?>) additionalInfo.get(SUGGEST_LOGOS))
+                            .stream()
+                            .map(p -> (p instanceof String) ? (String) p : null)
+                            .filter(Objects::nonNull)
+                            .forEach(i -> {
+                                LinkModel linkModel = LinkModel.builder().build();
+                                linkModel.setHref(i);
+                                // Geonetwork always return png logo
+                                linkModel.setType("image/png");
+                                linkModel.setRel("icon");
+                                linkModel.setTitle("Suggest icon for dataset " + index.getAndIncrement());
+                                results.add(linkModel);
+                            });
+                }
+            }
+        }
 
         return results;
     }

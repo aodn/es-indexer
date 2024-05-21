@@ -41,7 +41,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
         return body == null ? new HttpEntity<>(headers) : new HttpEntity<>(body, headers);
     }
 
-    protected final static String UUID = "uuid";
+    public final static String UUID = "uuid";
     protected final static String GEONETWORK_GROUP = "groupOwner";
 
     public GeoNetworkServiceImpl(
@@ -119,8 +119,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
                     getAodnExtRecordsEndpoint(),
                     HttpMethod.GET,
                     requestEntity,
-                    new ParameterizedTypeReference<>() {
-                    },
+                    new ParameterizedTypeReference<>() {},
                     params);
 
             if (responseEntity.getStatusCode().is2xxSuccessful() && responseEntity.getBody() != null) {
@@ -283,7 +282,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
         return getServer() + "/geonetwork/srv/api/{indexName}/{uuid}";
     }
 
-    public String getAodnExtRecordsEndpoint() {
+    protected String getAodnExtRecordsEndpoint() {
         return getServer() + "/geonetwork/srv/api/aodn/records/{uuid}/info";
     }
 
