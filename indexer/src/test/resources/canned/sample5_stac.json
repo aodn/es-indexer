@@ -1,0 +1,127 @@
+{
+  "title" : "IMOS - ACORN - Bonney Coast HF ocean radar site (South Australia, Australia)",
+  "description" : "The Bonney Coast (BONC) HF ocean radar system covers an area of the Bonney Coast, South Australia, which has a recurring annual upwelling feature near to the coast that significantly changes the ecosystem from one of warm water originating in Western Australia, to one dominated by cold upwelling water from off the continental shelf.  The dynamics of this area and the relationship between ocean circulation, chemistry and sediments control the larval species and the higher marine species and ecosystems in which they forage.\n\n                    The data from this site provide linking observations between the Southern Ocean and NSW through processes that occur on weekly to El Nino time scales.\n\n                    The BONC HF ocean radar system consists of two SeaSonde crossed loop direction finding stations located at Nora Creina (37.329 S 139.850 E) and Blackfellows Cave (37.940 S 140.457 E).  These radars operate at a frequency of 5.211 MHz, with a bandwidth of 50 KHz, a maximum range of 200 Km\n                    and a range resolution of 3 Km.  Within the HF radar coverage area surface currents are measured.\n\n                    This site was decommissioned in March 2017.",
+  "extent" : {
+    "bbox" : [ [ 138.2, -39.4, 140.8, -37.0 ], [ 138.2, -39.4, 140.8, -39.4, 140.8, -37.0, 138.2, -37.0, 138.2, -39.4 ] ],
+    "temporal" : [ [ "2010-01-21T01:00:00Z", "2017-03-26T13:00:00Z" ], [ "2010-01-21T01:00:00Z", "2017-03-26T13:00:00Z" ] ]
+  },
+  "summaries" : {
+    "score" : 90,
+    "status" : "completed",
+    "scope" : {
+      "code" : "series",
+      "name" : "IMOS Site level record"
+    },
+    "dataset_group" : "sample",
+    "dataset_provider" : "IMOS",
+    "proj:geometry" : {
+      "coordinates" : [ [ [ [ 138.2, -39.4 ], [ 140.8, -39.4 ], [ 140.8, -37 ], [ 138.2, -37 ], [ 138.2, -39.4 ] ] ] ],
+      "type" : "MultiPolygon"
+    },
+    "temporal" : [ {
+      "start" : "2010-01-21T01:00:00Z",
+      "end" : "2017-03-26T13:00:00Z"
+    } ]
+  },
+  "contacts" : [ {
+    "emails" : [ "info@aodn.org.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "University of Tasmania", "Private Bag 110" ],
+      "country" : "Australia",
+      "city" : "Hobart",
+      "postalCode" : "7001",
+      "administrativeArea" : "Tasmania"
+    } ],
+    "roles" : "pointOfContact",
+    "organization" : "Integrated Marine Observing System (IMOS)",
+    "name" : "",
+    "phones" : [ {
+      "roles" : "voice",
+      "value" : "61 3 6226 7488"
+    }, {
+      "roles" : "facsimile",
+      "value" : "61 3 6226 2107"
+    } ],
+    "links" : [ {
+      "href" : "http://imos.org.au/aodn.html",
+      "title" : "Website of the Australian Ocean Data Network (AODN)",
+      "type" : "WWW:LINK-1.0-http--link"
+    } ],
+    "position" : "Data Officer"
+  } ],
+  "languages" : [ {
+    "code" : "eng",
+    "name" : "English"
+  } ],
+  "links" : [ {
+    "href" : "http://imos.org.au/facilities/oceanradar",
+    "rel" : "self",
+    "type" : "text/html",
+    "title" : "Ocean Radar page on IMOS website"
+  }, {
+    "href" : "http://localhost:8080/geonetwork/images/logos/dbee258b-8730-4072-96d4-2818a69a4afd.png",
+    "rel" : "icon",
+    "type" : "image/png",
+    "title" : "Suggest icon for dataset 1"
+  }, {
+    "href" : "https://catalogue-imos.aodn.org.au/geonetwork/images/logos/dbee258b-8730-4072-96d4-2818a69a4afd.png",
+    "rel" : "icon",
+    "type" : "image/png",
+    "title" : "Suggest icon for dataset 2"
+  } ],
+  "license" : "Creative Commons Attribution 4.0 International License",
+  "providers" : [ {
+    "name" : "Integrated Marine Observing System (IMOS)",
+    "roles" : [ "distributor" ],
+    "url" : "http://imos.org.au/aodn.html"
+  } ],
+  "themes" : [ {
+    "concepts" : [ {
+      "id" : "Oceans | Ocean Circulation | Eddies"
+    }, {
+      "id" : "Oceans | Ocean Circulation | Ocean Currents"
+    }, {
+      "id" : "Oceans | Ocean Circulation | Upwelling"
+    }, {
+      "id" : "Oceans | Ocean Circulation | Wind-driven Circulation"
+    }, {
+      "id" : "Oceans | Coastal Processes | Coral Reefs"
+    }, {
+      "id" : "Radiance Or Imagery | Radio Wave | Radio Wave"
+    } ],
+    "scheme" : "theme",
+    "description" : "GCMD",
+    "title" : "NASA/Global Change Master Directory Earth Science Keywords Version 5.3.8"
+  }, {
+    "concepts" : [ {
+      "id" : "IMOS Site | BONC | Bonney Coast HF ocean radar site"
+    }, {
+      "id" : "Marine Features (Australia) | Bonney Coast, SA"
+    }, {
+      "id" : "SeaSonde (CODAR) HF Radar | Amplitude Direction Finding"
+    }, {
+      "id" : "Doppler Frequency"
+    }, {
+      "id" : "Physical Oceanography"
+    } ],
+    "scheme" : "theme",
+    "description" : "IMOS",
+    "title" : "IMOS Keywords Thesaurus"
+  }, {
+    "concepts" : [ {
+      "id" : "Global / Oceans | Southern Ocean"
+    }, {
+      "id" : "States, Territories (Australia) | South Australia"
+    } ],
+    "scheme" : "theme",
+    "description" : "MCP",
+    "title" : "Marine Community Profile of ISO19115 v1.4 Geographic Extent Vocabulary (Annex C.1.2)"
+  } ],
+  "id" : "2852a776-cbfc-4bc8-a126-f3c036814892",
+  "record_suggest" : {
+    "title" : "IMOS - ACORN - Bonney Coast HF ocean radar site (South Australia, Australia)"
+  },
+  "type" : "Collection",
+  "stac_extensions" : [ "https://stac-extensions.github.io/scientific/v1.0.0/schema.json", "https://stac-extensions.github.io/contacts/v0.1.1/schema.json", "https://stac-extensions.github.io/projection/v1.1.0/schema.json", "https://stac-extensions.github.io/language/v1.0.0/schema.json", "https://stac-extensions.github.io/themes/v1.0.0/schema.json" ],
+  "stac_version" : "1.0.0"
+}

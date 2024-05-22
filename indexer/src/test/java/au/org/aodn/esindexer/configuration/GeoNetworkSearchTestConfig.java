@@ -1,20 +1,39 @@
 package au.org.aodn.esindexer.configuration;
 
+import au.org.aodn.esindexer.BaseTestClass;
+import au.org.aodn.esindexer.service.GeoNetworkServiceImpl;
+import co.elastic.clients.elasticsearch.ElasticsearchClient;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
 import org.apache.http.HttpHeaders;
 import org.apache.http.HttpHost;
 import org.apache.http.message.BasicHeader;
 import org.elasticsearch.client.RestClient;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
 import org.testcontainers.containers.DockerComposeContainer;
 import org.testcontainers.containers.wait.strategy.Wait;
+import org.testcontainers.shaded.com.fasterxml.jackson.core.type.TypeReference;
+import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.time.Duration;
+import java.util.Map;
 
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.*;
+
+@Slf4j
 @Configuration
 public class GeoNetworkSearchTestConfig {
 
@@ -56,5 +75,55 @@ public class GeoNetworkSearchTestConfig {
                         new BasicHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 })
                 .build();
+    }
+
+    @Bean
+    public GeoNetworkServiceImpl createGeoNetworkServiceImpl(
+            @Value("${geonetwork.host}") String server,
+            @Value("${geonetwork.search.api.index}") String indexName,
+            @Qualifier("gn4ElasticsearchClient") ElasticsearchClient gn4ElasticsearchClient) {
+
+        RestTemplate template = Mockito.spy(new RestTemplate());
+        GeoNetworkServiceImpl impl = new GeoNetworkServiceImpl(server, indexName, gn4ElasticsearchClient, template);
+
+        final ObjectMapper objectMapper = new ObjectMapper();
+
+        // Spy the object and only create fake return on geonetwork extension api we created, this
+        // is because the image we use for testing is a generic geonetwork image without any customization
+        doAnswer((answer) -> {
+            if (answer.getArgument(4) instanceof Map<?, ?>) {
+                Map<String, Object> param = answer.getArgument(4);
+
+                log.debug("Request mock info for record uuid {}", param.get(GeoNetworkServiceImpl.UUID));
+                if(param.containsKey(GeoNetworkServiceImpl.UUID)) {
+                    try {
+                        String json = BaseTestClass.readResourceFile(
+                                String.format(
+                                        "classpath:canned/extrainfo/%s.json",
+                                        param.get(GeoNetworkServiceImpl.UUID)
+                                )
+                        );
+
+                        return ResponseEntity.ok(
+                                objectMapper.readValue(json, new TypeReference<Map<String, Object>>() {
+                                })
+                        );
+                    }
+                    catch(FileNotFoundException fileNotFoundException) {
+                        return ResponseEntity.notFound().build();
+                    }
+                }
+            }
+            return ResponseEntity.notFound().build();
+        })
+                .when(template)
+                .exchange(
+                        argThat(s -> s.contains("/geonetwork/srv/api/aodn/records/") && s.endsWith("/info")),
+                        eq(HttpMethod.GET),
+                        any(HttpEntity.class),
+                        any(ParameterizedTypeReference.class),
+                        anyMap());
+
+        return impl;
     }
 }

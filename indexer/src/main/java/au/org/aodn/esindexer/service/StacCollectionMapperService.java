@@ -25,6 +25,7 @@ import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -37,6 +38,7 @@ import java.util.stream.Collectors;
 public abstract class StacCollectionMapperService {
 
     public static final String REAL_TIME = "real-time";
+    public static final String SUGGEST_LOGOS = "suggest_logos";
 
     @Mapping(target="uuid", source = "source", qualifiedByName = "mapUUID")
     @Mapping(target="title", source = "source", qualifiedByName = "mapTitle" )
@@ -403,15 +405,18 @@ public abstract class StacCollectionMapperService {
 
     @Named("mapLinks")
     List<LinkModel> mapLinks(MDMetadataType source) {
-        List<LinkModel> results = new ArrayList<>();
+        final List<LinkModel> results = new ArrayList<>();
+
         List<MDDistributionType> items = findMDDistributionType(source);
         if (!items.isEmpty()) {
             for (MDDistributionType i : items) {
                 i.getTransferOptions().forEach(transferOption -> transferOption.getMDDigitalTransferOptions().getOnLine().forEach(link -> {
                     if (link.getAbstractOnlineResource() != null && link.getAbstractOnlineResource().getValue() instanceof CIOnlineResourceType2 ciOnlineResource) {
-                        LinkModel linkModel = LinkModel.builder().build();
                         if (ciOnlineResource.getLinkage().getCharacterString() != null && !ciOnlineResource.getLinkage().getCharacterString().getValue().toString().isEmpty()) {
-                            if (ciOnlineResource.getProtocol() != null) linkModel.setType(Objects.equals(ciOnlineResource.getProtocol().getCharacterString().getValue().toString(), "WWW:LINK-1.0-http--link") ? "text/html" : "");
+                            LinkModel linkModel = LinkModel.builder().build();
+                            if (ciOnlineResource.getProtocol() != null) {
+                                linkModel.setType(Objects.equals(ciOnlineResource.getProtocol().getCharacterString().getValue().toString(), "WWW:LINK-1.0-http--link") ? "text/html" : "");
+                            }
                             linkModel.setHref(ciOnlineResource.getLinkage().getCharacterString().getValue().toString());
                             linkModel.setRel(AppConstants.RECOMMENDED_LINK_REL_TYPE);
                             linkModel.setTitle(ciOnlineResource.getName() != null ? ciOnlineResource.getName().getCharacterString().getValue().toString() : null);
@@ -421,6 +426,32 @@ public abstract class StacCollectionMapperService {
                 }));
             }
         }
+
+        // Now add links for logos
+        Optional<Map<String, Object>> optAdditionalInfo = geoNetworkService.getRecordExtraInfo(this.mapUUID(source));
+        if(optAdditionalInfo.isPresent()) {
+            // We iterate logos link and add it to STAC
+            Map<String, Object> additionalInfo = optAdditionalInfo.get();
+            if(additionalInfo.containsKey(SUGGEST_LOGOS)) {
+                if(additionalInfo.get(SUGGEST_LOGOS) instanceof List) {
+                    final AtomicInteger index = new AtomicInteger(1);
+                    ((List<?>) additionalInfo.get(SUGGEST_LOGOS))
+                            .stream()
+                            .map(p -> (p instanceof String) ? (String) p : null)
+                            .filter(Objects::nonNull)
+                            .forEach(i -> {
+                                LinkModel linkModel = LinkModel.builder().build();
+                                linkModel.setHref(i);
+                                // Geonetwork always return png logo
+                                linkModel.setType("image/png");
+                                linkModel.setRel("icon");
+                                linkModel.setTitle("Suggest icon for dataset " + index.getAndIncrement());
+                                results.add(linkModel);
+                            });
+                }
+            }
+        }
+
         return results;
     }
 

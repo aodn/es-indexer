@@ -123,4 +123,22 @@ public class IndexerServiceTests extends BaseTestClass {
 
         deleteRecord("7709f541-fc0c-4318-b5b9-9053aa474e0e");
     }
+    /**
+     * Some dataset can provide links to logos, this test is use to verify the logo links added correctly to the
+     * @throws IOException - If file not found
+     */
+    @Test
+    public void verifyLogoLinkAddedOnIndex() throws IOException {
+        String expected = readResourceFile("classpath:canned/sample5_stac.json");
+
+        insertMetadataRecords("2852a776-cbfc-4bc8-a126-f3c036814892", "classpath:canned/sample5.xml");
+
+        indexerService.indexAllMetadataRecordsFromGeoNetwork(true);
+        Hit<ObjectNode> objectNodeHit = indexerService.getDocumentByUUID("2852a776-cbfc-4bc8-a126-f3c036814892");
+
+        String test = objectNodeHit.source().toPrettyString();
+        assertEquals("Stac equals", indexerObjectMapper.readTree(expected), indexerObjectMapper.readTree(test));
+
+        deleteRecord("2852a776-cbfc-4bc8-a126-f3c036814892");
+    }
 }

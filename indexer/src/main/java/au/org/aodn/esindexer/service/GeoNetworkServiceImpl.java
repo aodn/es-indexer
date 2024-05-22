@@ -12,34 +12,24 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
-import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.util.*;
 
-@Service
 public class GeoNetworkServiceImpl implements GeoNetworkService {
-
-    @Autowired
-    RestTemplate indexerRestTemplate;
-
-    @Autowired
-    @Qualifier("gn4ElasticsearchClient")
-    protected ElasticsearchClient gn4ElasticClient;
 
     protected static final Logger logger = LogManager.getLogger(GeoNetworkServiceImpl.class);
 
+    protected RestTemplate indexerRestTemplate;
+    protected ElasticsearchClient gn4ElasticClient;
     protected final SearchRequest GEONETWORK_ALL_UUID;
-
     protected String indexName;
-
     protected String server;
+    protected HttpEntity<String> defaultRequestEntity = getRequestEntity(MediaType.APPLICATION_JSON, null);
 
     protected HttpEntity<String> getRequestEntity(String body) {
         return getRequestEntity(null, body);
@@ -51,12 +41,17 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
         return body == null ? new HttpEntity<>(headers) : new HttpEntity<>(body, headers);
     }
 
-    protected final static String UUID = "uuid";
+    public final static String UUID = "uuid";
     protected final static String GEONETWORK_GROUP = "groupOwner";
 
     public GeoNetworkServiceImpl(
-            @Value("${geonetwork.host}") String server,
-            @Value("${geonetwork.search.api.index}") String indexName) {
+            String server,
+            String indexName,
+            ElasticsearchClient gn4ElasticClient,
+            RestTemplate indexerRestTemplate) {
+
+        this.gn4ElasticClient = gn4ElasticClient;
+        this.indexerRestTemplate = indexerRestTemplate;
 
         GEONETWORK_ALL_UUID = new SearchRequest.Builder()
                 .index(indexName)
@@ -94,12 +89,10 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
             Map<String, Object> params = new HashMap<>();
             params.put("id", group);
 
-            HttpEntity<String> requestEntity = getRequestEntity(MediaType.APPLICATION_JSON, null);
-
             ResponseEntity<JsonNode> responseEntity = indexerRestTemplate.exchange(
                     getGeoNetworkGroupsEndpoint(),
                     HttpMethod.GET,
-                    requestEntity,
+                    defaultRequestEntity,
                     JsonNode.class, params);
 
             if(responseEntity.getStatusCode().is2xxSuccessful()) {
@@ -113,6 +106,31 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
             return null;
         }
 
+    }
+
+    @Override
+    public Optional<Map<String, Object>> getRecordExtraInfo(String uuid) {
+        HttpEntity<String> requestEntity = getRequestEntity(MediaType.APPLICATION_JSON, null);
+        Map<String, Object> params = new HashMap<>();
+        params.put(UUID, uuid);
+
+        try {
+            ResponseEntity<Map<String, Object>> responseEntity = indexerRestTemplate.exchange(
+                    getAodnExtRecordsEndpoint(),
+                    HttpMethod.GET,
+                    requestEntity,
+                    new ParameterizedTypeReference<>() {},
+                    params);
+
+            if (responseEntity.getStatusCode().is2xxSuccessful() && responseEntity.getBody() != null) {
+                return Optional.of(responseEntity.getBody());
+            }
+        }
+        catch(HttpClientErrorException clientErrorException) {
+            logger.warn("Fail to call API on additional info, please check api exist?", clientErrorException);
+            return Optional.empty();
+        }
+        return Optional.empty();
     }
 
     protected String findFormatterId(String uuid) {
@@ -262,6 +280,10 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
 
     protected String getGeoNetworkRecordsEndpoint() {
         return getServer() + "/geonetwork/srv/api/{indexName}/{uuid}";
+    }
+
+    protected String getAodnExtRecordsEndpoint() {
+        return getServer() + "/geonetwork/srv/api/aodn/records/{uuid}/info";
     }
 
     protected String getGeoNetworkGroupsEndpoint() {

@@ -6,7 +6,10 @@
     "broader": [
       {
         "label": "Physical-Atmosphere",
-        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/53"
+        "definition": null,
+        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/53",
+        "broader": null,
+        "narrower": null
       }
     ],
     "narrower": []
@@ -18,7 +21,10 @@
     "broader": [
       {
         "label": "Chemical",
-        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/54"
+        "definition": null,
+        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/54",
+        "broader": null,
+        "narrower": null
       }
     ],
     "narrower": []
@@ -30,7 +36,10 @@
     "broader": [
       {
         "label": "Biological",
-        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/55"
+        "definition": null,
+        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/55",
+        "broader": null,
+        "narrower": null
       }
     ],
     "narrower": []
@@ -42,7 +51,10 @@
     "broader": [
       {
         "label": "Physical-Water",
-        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/56"
+        "definition": null,
+        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/56",
+        "broader": null,
+        "narrower": null
       }
     ],
     "narrower": []
@@ -54,7 +66,10 @@
     "broader": [
       {
         "label": "Physical-Atmosphere",
-        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/53"
+        "definition": null,
+        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/53",
+        "broader": null,
+        "narrower": null
       }
     ],
     "narrower": []
@@ -66,7 +81,10 @@
     "broader": [
       {
         "label": "Physical-Water",
-        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/56"
+        "definition": null,
+        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/56",
+        "broader": null,
+        "narrower": null
       }
     ],
     "narrower": []
@@ -78,7 +96,10 @@
     "broader": [
       {
         "label": "Physical-Water",
-        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/56"
+        "definition": null,
+        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/56",
+        "broader": null,
+        "narrower": null
       }
     ],
     "narrower": []
@@ -90,7 +111,10 @@
     "broader": [
       {
         "label": "Biological",
-        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/55"
+        "definition": null,
+        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/55",
+        "broader": null,
+        "narrower": null
       }
     ],
     "narrower": []
@@ -102,7 +126,10 @@
     "broader": [
       {
         "label": "Chemical",
-        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/54"
+        "definition": null,
+        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/54",
+        "broader": null,
+        "narrower": null
       }
     ],
     "narrower": []
@@ -114,7 +141,10 @@
     "broader": [
       {
         "label": "Physical-Water",
-        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/56"
+        "definition": null,
+        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/56",
+        "broader": null,
+        "narrower": null
       }
     ],
     "narrower": []
@@ -126,7 +156,10 @@
     "broader": [
       {
         "label": "Physical-Water",
-        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/56"
+        "definition": null,
+        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/56",
+        "broader": null,
+        "narrower": null
       }
     ],
     "narrower": []
@@ -138,11 +171,17 @@
     "broader": [
       {
         "label": "Physical-Atmosphere",
-        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/53"
+        "definition": null,
+        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/53",
+        "broader": null,
+        "narrower": null
       },
       {
         "label": "Physical-Water",
-        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/56"
+        "definition": null,
+        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/56",
+        "broader": null,
+        "narrower": null
       }
     ],
     "narrower": []
@@ -154,7 +193,10 @@
     "broader": [
       {
         "label": "Biological",
-        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/55"
+        "definition": null,
+        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/55",
+        "broader": null,
+        "narrower": null
       }
     ],
     "narrower": []
@@ -166,7 +208,10 @@
     "broader": [
       {
         "label": "Physical-Water",
-        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/56"
+        "definition": null,
+        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/56",
+        "broader": null,
+        "narrower": null
       }
     ],
     "narrower": []
@@ -178,11 +223,17 @@
     "broader": [
       {
         "label": "Chemical",
-        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/54"
+        "definition": null,
+        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/54",
+        "broader": null,
+        "narrower": null
       },
       {
         "label": "Biological",
-        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/55"
+        "definition": null,
+        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/55",
+        "broader": null,
+        "narrower": null
       }
     ],
     "narrower": []
@@ -194,7 +245,10 @@
     "broader": [
       {
         "label": "Physical-Water",
-        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/56"
+        "definition": null,
+        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/56",
+        "broader": null,
+        "narrower": null
       }
     ],
     "narrower": []
@@ -206,7 +260,10 @@
     "broader": [
       {
         "label": "Physical-Atmosphere",
-        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/53"
+        "definition": null,
+        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/53",
+        "broader": null,
+        "narrower": null
       }
     ],
     "narrower": []
@@ -218,7 +275,10 @@
     "broader": [
       {
         "label": "Physical-Water",
-        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/56"
+        "definition": null,
+        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/56",
+        "broader": null,
+        "narrower": null
       }
     ],
     "narrower": []
@@ -230,7 +290,10 @@
     "broader": [
       {
         "label": "Physical-Water",
-        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/56"
+        "definition": null,
+        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/56",
+        "broader": null,
+        "narrower": null
       }
     ],
     "narrower": []
@@ -242,7 +305,10 @@
     "broader": [
       {
         "label": "Physical-Water",
-        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/56"
+        "definition": null,
+        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/56",
+        "broader": null,
+        "narrower": null
       }
     ],
     "narrower": []
@@ -254,11 +320,17 @@
     "broader": [
       {
         "label": "Chemical",
-        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/54"
+        "definition": null,
+        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/54",
+        "broader": null,
+        "narrower": null
       },
       {
         "label": "Biological",
-        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/55"
+        "definition": null,
+        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/55",
+        "broader": null,
+        "narrower": null
       }
     ],
     "narrower": []
@@ -270,7 +342,10 @@
     "broader": [
       {
         "label": "Chemical",
-        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/54"
+        "definition": null,
+        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/54",
+        "broader": null,
+        "narrower": null
       }
     ],
     "narrower": []
@@ -283,218 +358,331 @@
     "narrower": [
       {
         "label": "Air pressure",
+        "definition": null,
         "about": "http://vocab.aodn.org.au/def/parameter_classes/category/10",
+        "broader": null,
         "narrower": [
           {
             "label": "Pressure (measured variable) exerted by the atmosphere and correction to sea level",
             "definition": "Measurement as a phenomenon (as opposed to a co-ordinate) of the force per unit area exerted by the atmosphere determined in-situ at a known altitude and converted to the value at sea level assuming an isothermal layer.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/77"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/77",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Pressure (measured variable) exerted by the atmosphere",
             "definition": "Measurement as a phenomenon (as opposed to a co-ordinate) of the force per unit area exerted by the atmosphere determined in-situ at a known altitude.",
-            "about": "http://vocab.nerc.ac.uk/collection/P01/current/CAPHZZ01"
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/CAPHZZ01",
+            "broader": null,
+            "narrower": null
           }
         ]
       },
       {
         "label": "Visibility",
+        "definition": null,
         "about": "http://vocab.aodn.org.au/def/parameter_classes/category/22",
+        "broader": null,
         "narrower": [
           {
             "label": "Horizontal visibility in the atmosphere",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/390"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/390",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Present weather in the atmosphere",
             "definition": "Visual observation using WMO code table 4677 or 4501",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/397"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/397",
+            "broader": null,
+            "narrower": null
           }
         ]
       },
       {
         "label": "Air-Sea Fluxes",
+        "definition": null,
         "about": "http://vocab.aodn.org.au/def/parameter_classes/category/30",
+        "broader": null,
         "narrower": [
           {
             "label": "Net shortwave heat flux",
             "definition": "The net shortwave heat flux is the difference between the downwelling radiation from the sun as modified by the gases and clouds of the atmosphere and the radiation returned from the sea surface, which is either reflected by the surface or backscattered from within the water column.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/10"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/10",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Net heat flux",
             "definition": "Net surface heat flux across the air-sea interface.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/11"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/11",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Net mass flux",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/12"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/12",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Downwelling vector irradiance as photons (PAR wavelengths) in the atmosphere",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/572"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/572",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Downwelling vector irradiance as energy (solar (300-3000nm) wavelengths) in the atmosphere",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/576"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/576",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Sensible heat flux",
             "definition": "Heat exchange due to difference in temperature between air and water.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/6"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/6",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Downwelling vector irradiance as energy in the atmosphere",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/651"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/651",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Latent heat flux",
             "definition": "Heat loss due to evaporation",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/7"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/7",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Sensible heat flux due to precipitation",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/8"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/8",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Net longwave heat flux",
             "definition": "The net longwave heat flux is the net flux of the greybody emissions from the sea surface, cloud layers and the gases of the atmosphere.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/9"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/9",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Downwelling vector irradiance as energy (longwave) in the atmosphere",
-            "about": "http://vocab.nerc.ac.uk/collection/P01/current/LWRDZZ01"
+            "definition": null,
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/LWRDZZ01",
+            "broader": null,
+            "narrower": null
           }
         ]
       },
       {
         "label": "UV radiation",
+        "definition": null,
         "about": "http://vocab.aodn.org.au/def/parameter_classes/category/48",
+        "broader": null,
         "narrower": [
           {
             "label": "Downwelling vector irradiance as energy (ultra-violet wavelengths) in the atmosphere",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/733"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/733",
+            "broader": null,
+            "narrower": null
           }
         ]
       },
       {
         "label": "Wind",
+        "definition": null,
         "about": "http://vocab.aodn.org.au/def/parameter_classes/category/6",
+        "broader": null,
         "narrower": [
           {
             "label": "Wind speed of gust in the atmosphere",
             "definition": "Maximum speed of the wind (distance moved per unit time by a parcel of air) parallel to the ground during a gust event (generally regarded as an increase over sustained speed of more than 5m/s lasting less than 20 seconds).",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/395"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/395",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Wind to direction in the atmosphere",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/396"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/396",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Wind stress on the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/406"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/406",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Wind direction (relative to moving platform) in the atmosphere",
-            "about": "http://vocab.nerc.ac.uk/collection/P01/current/ERWDZZ01"
+            "definition": null,
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/ERWDZZ01",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Wind speed (relative to moving platform) in the atmosphere",
-            "about": "http://vocab.nerc.ac.uk/collection/P01/current/ERWSZZ01"
+            "definition": null,
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/ERWSZZ01",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Eastward wind velocity in the atmosphere",
             "definition": "The component of the wind blowing towards true east. The value could result from any kind of measurement or prediction.",
-            "about": "http://vocab.nerc.ac.uk/collection/P01/current/ESEWZZXX"
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/ESEWZZXX",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Northward wind velocity in the atmosphere",
             "definition": "The component of the wind blowing towards true north. The value could result from any kind of measurement or prediction.",
-            "about": "http://vocab.nerc.ac.uk/collection/P01/current/ESNSZZXX"
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/ESNSZZXX",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Wind speed in the atmosphere",
             "definition": "Sustained speed of the wind (distance moved per unit time by a parcel of air) parallel to the ground at a given place and time",
-            "about": "http://vocab.nerc.ac.uk/collection/P01/current/ESSAZZ01"
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/ESSAZZ01",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Wind from direction in the atmosphere",
             "definition": "Direction relative to true north from which the wind is blowing",
-            "about": "http://vocab.nerc.ac.uk/collection/P01/current/EWDAZZ01"
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/EWDAZZ01",
+            "broader": null,
+            "narrower": null
           }
         ]
       },
       {
         "label": "Air temperature",
+        "definition": null,
         "about": "http://vocab.aodn.org.au/def/parameter_classes/category/7",
+        "broader": null,
         "narrower": [
           {
             "label": "Dew point temperature of the atmosphere",
             "definition": "The temperature to which air must cool to become saturated with water vapour",
-            "about": "http://vocab.nerc.ac.uk/collection/P01/current/CDEWZZ01"
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/CDEWZZ01",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Temperature of the atmosphere",
             "definition": "The degree of hotness of the atmosphere expressed against a standard scale.  Includes both IPTS-68 and ITS-90 scales.",
-            "about": "http://vocab.nerc.ac.uk/collection/P01/current/CTMPZZ01"
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/CTMPZZ01",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Wet bulb temperature of the atmosphere",
-            "about": "http://vocab.nerc.ac.uk/collection/P01/current/CWETZZ01"
+            "definition": null,
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/CWETZZ01",
+            "broader": null,
+            "narrower": null
           }
         ]
       },
       {
         "label": "Humidity",
+        "definition": null,
         "about": "http://vocab.aodn.org.au/def/parameter_classes/category/8",
+        "broader": null,
         "narrower": [
           {
             "label": "Dew point temperature of the atmosphere",
             "definition": "The temperature to which air must cool to become saturated with water vapour",
-            "about": "http://vocab.nerc.ac.uk/collection/P01/current/CDEWZZ01"
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/CDEWZZ01",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Specific humidity of the atmosphere",
-            "about": "http://vocab.nerc.ac.uk/collection/P01/current/CHUMSS01"
+            "definition": null,
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/CHUMSS01",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Relative humidity of the atmosphere",
             "definition": "The ratio of the amount of water vapour in the air compared to the maximum amount of water vapour that can theoretically be held at the air's temperature",
-            "about": "http://vocab.nerc.ac.uk/collection/P01/current/CRELZZ01"
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/CRELZZ01",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Wet bulb temperature of the atmosphere",
-            "about": "http://vocab.nerc.ac.uk/collection/P01/current/CWETZZ01"
+            "definition": null,
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/CWETZZ01",
+            "broader": null,
+            "narrower": null
           }
         ]
       },
       {
         "label": "Precipitation and evaporation",
+        "definition": null,
         "about": "http://vocab.aodn.org.au/def/parameter_classes/category/9",
+        "broader": null,
         "narrower": [
           {
             "label": "Thickness of precipitation amount (liquid water equivalent) in the atmosphere",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/386"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/386",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Precipitation duration (liquid water equivalent) in the atmosphere",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/405"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/405",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Hail duration in the atmosphere",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/637"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/637",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Thickness of hail amount in the atmosphere",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/638"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/638",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Hail intensity in the atmosphere",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/639"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/639",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Precipitation rate (liquid water equivalent) in the atmosphere",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/94"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/94",
+            "broader": null,
+            "narrower": null
           }
         ]
       }
@@ -508,179 +696,265 @@
     "narrower": [
       {
         "label": "Oxygen",
+        "definition": null,
         "about": "http://vocab.aodn.org.au/def/parameter_classes/category/11",
+        "broader": null,
         "narrower": [
           {
             "label": "Concentration of oxygen {O2} per unit volume of the water body",
             "definition": "Concentration of dissolved oxygen per unit volume of the water column. Oxygen may be expressed in terms of mass, volume or quantity of substance.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/372"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/372",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of oxygen {O2} per unit mass of the water body",
             "definition": "Concentration of dissolved oxygen per unit mass of the water column. Oxygen may be expressed in terms of mass, volume or quantity of substance.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/373"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/373",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Saturation of oxygen {O2} in the water body [dissolved phase]",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/84"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/84",
+            "broader": null,
+            "narrower": null
           }
         ]
       },
       {
         "label": "Alkalinity",
+        "definition": null,
         "about": "http://vocab.aodn.org.au/def/parameter_classes/category/27",
+        "broader": null,
         "narrower": [
           {
             "label": "Total alkalinity per unit mass of the water body",
             "definition": "Concentration (moles or mass) of acid-neutralising bases per unit mass of the water column",
-            "about": "http://vocab.nerc.ac.uk/collection/P01/current/MDMAP014"
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/MDMAP014",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of carbonate ions per unit mass of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/26"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/26",
+            "broader": null,
+            "narrower": null
           }
         ]
       },
       {
         "label": "Suspended particulate material",
+        "definition": null,
         "about": "http://vocab.aodn.org.au/def/parameter_classes/category/46",
+        "broader": null,
         "narrower": [
           {
             "label": "Concentration of suspended particulate material per unit volume of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/654"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/654",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of suspended particulate material (organic) per unit volume of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/655"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/655",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of suspended particulate material (inorganic) per unit volume of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/656"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/656",
+            "broader": null,
+            "narrower": null
           }
         ]
       },
       {
         "label": "Nutrient",
+        "definition": null,
         "about": "http://vocab.aodn.org.au/def/parameter_classes/category/51",
+        "broader": null,
         "narrower": [
           {
             "label": "Concentration of nitrate {NO3} per unit volume of the water body",
             "definition": "Concentration of nitrate per unit volume of the water column. Nitrate may be expressed in terms of mass or quantity of substance.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/374"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/374",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of nitrate {NO3} per unit mass of the water body",
             "definition": "Concentration (moles or mass) of nitrogen as nitrate per unit mass of the water column",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/375"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/375",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of silicate {SiO4} per unit volume of the water body",
             "definition": "Concentration of silicate per unit volume of the water column. Silicate may be expressed in terms of mass or quantity of substance.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/376"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/376",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of ammonium {NH4} per unit volume of the water body",
             "definition": "Concentration of ammonium per unit volume of the water column. Ammonium may be expressed in terms of mass or quantity of substance.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/377"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/377",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of silicate {SiO4} per unit mass of the water body",
             "definition": "Concentration (moles or mass) of silicon as silicate per unit mass of the water column",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/378"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/378",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of phosphate {PO4} per unit volume of the water body",
             "definition": "Concentration of phosphate per unit volume of the water column. Phosphate may be expressed in terms of mass or quantity of substance",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/379"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/379",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of phosphate {PO4} per unit mass of the water body",
             "definition": "Concentration of phosphate dissolved per unit mass of the water column. Solute may be expressed in terms of mass, volume or quantity of substance",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/380"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/380",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of nitrate and nitrite {NO3 and NO2} per unit mass of the water body",
             "definition": "Concentration (moles or mass) of nitrogen as both nitrate and nitrite per unit mass of the water column.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/45"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/45",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of nitrate and nitrite {NO3 and NO2} per unit volume of the water body",
             "definition": "Concentration of nitrate and nitrite per unit volume of the water column. May be expressed in terms of mass or quantity of substance.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/46"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/46",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of total phosphorus per unit volume of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/47"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/47",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of total phosphorus per unit mass of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/48"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/48",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of nitrite {NO2} per unit mass of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/49"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/49",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of nitrite {NO2} per unit volume of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/50"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/50",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of phosphate (water soluble reactive) per unit volume of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/53"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/53",
+            "broader": null,
+            "narrower": null
           }
         ]
       },
       {
         "label": "Carbon",
+        "definition": null,
         "about": "http://vocab.aodn.org.au/def/parameter_classes/category/52",
+        "broader": null,
         "narrower": [
           {
             "label": "Concentration of carbon (total inorganic) per unit mass of the water body",
             "definition": "Concentration of dissolved inorganic carbon per unit mass of the water column. Solute may be expressed in terms of mass or quantity of substance.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/1"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/1",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Partial pressure of carbon dioxide in the atmosphere",
             "definition": "The partial pressure of carbon dioxide in air",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/422"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/422",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Partial pressure of carbon dioxide in the water body",
             "definition": "The partial pressure of carbon dioxide in air in equilibrium with a water sample",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/425"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/425",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Fugacity anomaly (water - air) of carbon dioxide in the water body",
             "definition": "The difference in the CO2 fugacity (effective partial pressure allowing for non-ideal gas) between air in equilibrium with seawater and the atmosphere",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/427"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/427",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Fugacity of carbon dioxide (at 100% humidity) in the atmosphere",
             "definition": "The fugacity (effective partial pressure allowing for non-ideal gas) of carbon dioxide in the atmosphere assuming a humidity of 100 per cent.",
-            "about": "http://vocab.nerc.ac.uk/collection/P01/current/FCO2WTAT"
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/FCO2WTAT",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Fugacity of carbon dioxide (at 100% humidity) in the water body",
             "definition": "Fugacity (partial pressure corrected for non-ideality of gases) of carbon dioxide in air that is in equilibrium with a seawater sample",
-            "about": "http://vocab.nerc.ac.uk/collection/P01/current/FCO2XXXX"
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/FCO2XXXX",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Mole fraction of carbon dioxide (dry air) in the atmosphere",
             "definition": "The proportion as a ratio of quantity of matter of CO2 in a sample of atmosphere expressed on a dry air basis",
-            "about": "http://vocab.nerc.ac.uk/collection/P01/current/XCO2DRAT"
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/XCO2DRAT",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Mole fraction of carbon dioxide (dry air) in the equilibrated marine sample",
             "definition": "The proportion as a ratio of quantity of matter of CO2 in a sample of air equilibrated with seawater expressed on a dry air basis",
-            "about": "http://vocab.nerc.ac.uk/collection/P01/current/XCO2WBDY"
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/XCO2WBDY",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Saturation state of aragonite in the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/24"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/24",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Saturation state of calcite in the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/25"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/25",
+            "broader": null,
+            "narrower": null
           }
         ]
       }
@@ -694,404 +968,636 @@
     "narrower": [
       {
         "label": "Chlorophyll",
+        "definition": null,
         "about": "http://vocab.aodn.org.au/def/parameter_classes/category/19",
+        "broader": null,
         "narrower": [
           {
             "label": "Concentration of inferred chlorophyll from relative fluorescence per unit mass of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/893"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/893",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of inferred chlorophyll from relative fluorescence per unit volume of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/894"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/894",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of total chlorophyll-a per unit volume of the water body",
             "definition": "The amount (mass or moles) of the following pigments (divinyl chlorophyll-a, chlorophyll-a, chlorophyllide-a, chlorophyll-a allomers and chlorophyll-a prime) in a known volume of any water body.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/13"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/13",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of total chlorophyll-c per unit volume of the water body",
             "definition": "The amount (mass or moles) of the following pigments (chlorophyll-c1, chlorophyll-c2, chlorophyll-c1c2, chlorophyll-c3) in a known volume of any water body.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/14"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/14",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of total chlorophyll-a plus chlorophyll-b plus chlorophyll-c per unit volume of the water body",
             "definition": "The amount (mass or moles) of total chlorophyll-a (divinyl chlorophyll-a, chlorophyll-a, chlorophyllide-a, chlorophyll-a allomers and chlorophyll-a prime) plus total chlorophyll-b (divinyl chlorophyll-b, chlorophyll-b) plus total chlorophyll-c (chlorophyll-c1, chlorophyll-c2, chlorophyll-c1c2, chlorophyll-c3) in a known volume of any water body.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/15"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/15",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of chlorophyll-b per unit volume of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/745"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/745",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of divinyl chlorophyll-b per unit volume of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/746"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/746",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of chlorophyll-a per unit volume of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/750"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/750",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of chlorophyll-a plus divinyl chlorophyll-a per unit volume of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/752"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/752",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of chlorophyll-b plus divinyl chlorophyll-b per unit volume of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/753"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/753",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of divinyl chlorophyll-a per unit volume of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/754"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/754",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of chlorophyllide-a per unit volume of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/757"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/757",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of chlorophyll-c2 per unit volume of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/758"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/758",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of chlorophyll-c1 per unit volume of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/759"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/759",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of chlorophyll-c1c2 per unit volume of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/760"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/760",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of chlorophyll-c3 per unit volume of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/761"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/761",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of chlorophyll per unit mass of the water body",
             "definition": "The mass of all types of chlorophyll per unit mass of the water column held in particles of any size",
-            "about": "http://vocab.nerc.ac.uk/collection/P01/current/CHLTMASS"
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/CHLTMASS",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of chlorophyll per unit volume of the water body",
             "definition": "The mass of all types of chlorophyll per unit volume of the water column held in particles of any size",
-            "about": "http://vocab.nerc.ac.uk/collection/P01/current/CHLTVOLU"
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/CHLTVOLU",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Fluorescence of the water body",
             "definition": "The amount of radiation generated in the water column in response to higher energy radiation transmission expressed relative to an unspecified baseline",
-            "about": "http://vocab.nerc.ac.uk/collection/P01/current/FLUOZZZZ"
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/FLUOZZZZ",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of total chlorophyll-b per unit volume of the water body",
             "definition": "The amount (mass or moles) of the following pigments (divinyl chlorophyll-b and chlorophyll-b) in a known volume of any water body.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/52"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/52",
+            "broader": null,
+            "narrower": null
           }
         ]
       },
       {
         "label": "Other Pigment",
+        "definition": null,
         "about": "http://vocab.aodn.org.au/def/parameter_classes/category/26",
+        "broader": null,
         "narrower": [
           {
             "label": "Light absorption coefficient of dissolved organic matter",
             "definition": "The proportion of the incident light that is absorbed by the dissolved component of a sample from any body of fresh or salt water.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/890"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/890",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Light absorption coefficient of phytoplankton",
             "definition": "The proportion of the incident light that is absorbed by the algal (phytoplankton) component of a sample from any body of fresh or salt water.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/891"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/891",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Light absorption coefficient of nonalgal particles",
             "definition": "The proportion of the incident light that is absorbed by the detrital or non-algal component of a sample from any body of fresh or salt water.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/892"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/892",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of photoprotective carotenoids per unit volume of the water body",
             "definition": "The amount (mass or moles) of the following pigments (alloxanthin, diadinoxanthin, diatoxanthin, Zeaxanthin, alpha carotene, beta carotene) in a known volume of any water body.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/16"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/16",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of photosynthetic carotenoids per unit volume of the water body",
             "definition": "The amount (mass or moles) of the following pigments (19-butanoyloxyfucoxanthin, fucoxanthin, 19-hexanoyloxyfucoxanthin, peridinin) in a known volume of any water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/17"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/17",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of photosynthetic pigments per unit volume of the water body",
             "definition": "The amount (mass or moles) of photosynthetic carotenoids (19-butanoyloxyfucoxanthin, fucoxanthin, 19-hexanoyloxyfucoxanthin, peridinin) plus total chlorophyll-a pigments (divinyl chlorophyll-a, chlorophyll-a, chlorophyllide-a, chlorophyll-a allomers and chlorophyll-a prime) plus total chlorophyll-b pigments (divinyl chlorophyll-b, chlorophyll-b) plus total chlorophyll-c pigments (chlorophyll-c1, chlorophyll-c2, chlorophyll-c1c2, chlorophyll-c3) in a known volume of any water body.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/18"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/18",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of total accessory pigments per unit volume of the water body",
             "definition": "The amount (mass or moles) of photosynthetic carotenoids (19-butanoyloxyfucoxanthin, fucoxanthin, 19-hexanoyloxyfucoxanthin, peridinin) plus photoprotective carotenoids (alloxanthin, diadinoxanthin, diatoxanthin, Zeaxanthin, alpha carotene, beta carotene) plus total chlorophyll-b pigments (divinyl chlorophyll-b, chlorophyll-b) plus total chlorophyll-c pigments (chlorophyll-c1, chlorophyll-c2, chlorophyll-c1c2, chlorophyll-c3) in a known volume of any water body.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/19"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/19",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of total pigment per unit volume of the water body",
             "definition": "The amount (mass or moles) of all pigments in a known volume of any water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/20"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/20",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of total diagnostic pigments per unit volume of the water body",
             "definition": "The amount (mass or moles) of photosynthetic carotenoids (19-butanoyloxyfucoxanthin, fucoxanthin, 19-hexanoyloxyfucoxanthin, peridinin) plus total chlorophyll-b pigments (divinyl chlorophyll-b, chlorophyll-b) plus alloxanthin and zeaxanthin in a known volume of any water body.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/21"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/21",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of echinenone per unit mass of the water body",
             "definition": "The amount (mass or moles) of the specified pigment determined by HPLC assay of a sample collected by dissolution in acteone of the residue collected by GF/F filtration of a known volume of any water body. The quoted value either results from a single determination or the average of replicate determinations",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/478"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/478",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of antheraxanthin per unit volume of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/658"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/658",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of canthaxanthin per unit volume of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/659"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/659",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of lutein per unit volume of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/660"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/660",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of neoxanthin per unit volume of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/734"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/734",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of prasinoxanthin per unit volume of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/735"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/735",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of violaxanthin per unit volume of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/736"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/736",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of astaxanthin per unit volume of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/737"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/737",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of dinoxanthin per unit volume of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/738"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/738",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of diatoxanthin per unit volume of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/739"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/739",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of zeaxanthin per unit volume of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/740"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/740",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of lycopene per unit volume of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/741"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/741",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of diadinoxanthin per unit volume of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/742"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/742",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of gyroxanthin diester per unit volume of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/743"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/743",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of diadinochrome per unit volume of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/744"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/744",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of 19-hexanoyloxyfucoxanthin per unit volume of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/747"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/747",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of pheophytin-a per unit volume of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/748"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/748",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of pheophytin-b per unit volume of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/749"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/749",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of pyropheophytin-a per unit volume of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/751"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/751",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of pyropheophorbide-a per unit volume of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/755"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/755",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of pheophorbide-a per unit volume of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/756"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/756",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of 19-butanoyloxyfucoxanthin per unit volume of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/762"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/762",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of 4-keto-19-hexanoyloxyfucoxanthin per unit volume of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/763"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/763",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of alpha-carotene per unit volume of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/764"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/764",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of beta-carotene per unit volume of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/765"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/765",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of alpha-carotene and beta-carotene per unit volume of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/766"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/766",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of Mg-2,4-divinyl pheoporphyrin a5 monomethyl ester per unit volume of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/767"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/767",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of alloxanthin per unit volume of the water body",
             "definition": "Concentration of the carotenoid pigment alloxanthin per unit volume of a water body.  The pigment is contained in suspended particles of unspecified size",
-            "about": "http://vocab.nerc.ac.uk/collection/P01/current/ALLOXXPX"
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/ALLOXXPX",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of fucoxanthin per unit volume of the water body",
             "definition": "Concentration of the carotenoid pigment fucoxanthin per unit volume of a water body.  The pigment is contained in suspended particles of unspecified size",
-            "about": "http://vocab.nerc.ac.uk/collection/P01/current/FUCXZZZZ"
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/FUCXZZZZ",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of peridinin per unit volume of the water body",
             "definition": "Concentration of the carotenoid pigment peridinin per unit volume of a water body.  The pigment is contained in suspended particles of unspecified size",
-            "about": "http://vocab.nerc.ac.uk/collection/P01/current/PERDXXXX"
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/PERDXXXX",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of phycoerythrin per unit volume of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/51"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/51",
+            "broader": null,
+            "narrower": null
           }
         ]
       },
       {
         "label": "Ocean Biota",
+        "definition": null,
         "about": "http://vocab.aodn.org.au/def/parameter_classes/category/4",
+        "broader": null,
         "narrower": [
           {
             "label": "Biovolume",
             "definition": "The volume of a biological object described elsewhere in the metadata (e.g.: single-species populations, all species within a phytoplankton sample …) occurring in a given volume of water.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/22"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/22",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Mean unit biovolume",
             "definition": "The average volume of individual organisms (cells or colonies).",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/23"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/23",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Phytoplankton Colour Index",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/407"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/407",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Abundance of biota",
             "definition": "The relative representation of flora and fauna in a particular sample or region.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/488"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/488",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Biotic taxonomic identification",
             "definition": "The identification of the biotic elements to the relevant scientific classification group (taxa), e.g. genus or species.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/489"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/489",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Dry weight biomass per unit volume of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/570"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/570",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Wet weight biomass per unit volume of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/571"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/571",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Detection of acoustic tag",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/596"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/596",
+            "broader": null,
+            "narrower": null
           }
         ]
       },
       {
         "label": "Suspended particulate material",
+        "definition": null,
         "about": "http://vocab.aodn.org.au/def/parameter_classes/category/46",
+        "broader": null,
         "narrower": [
           {
             "label": "Concentration of suspended particulate material per unit volume of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/654"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/654",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of suspended particulate material (organic) per unit volume of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/655"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/655",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of suspended particulate material (inorganic) per unit volume of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/656"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/656",
+            "broader": null,
+            "narrower": null
           }
         ]
       },
       {
         "label": "Nutrient",
+        "definition": null,
         "about": "http://vocab.aodn.org.au/def/parameter_classes/category/51",
+        "broader": null,
         "narrower": [
           {
             "label": "Concentration of nitrate {NO3} per unit volume of the water body",
             "definition": "Concentration of nitrate per unit volume of the water column. Nitrate may be expressed in terms of mass or quantity of substance.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/374"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/374",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of nitrate {NO3} per unit mass of the water body",
             "definition": "Concentration (moles or mass) of nitrogen as nitrate per unit mass of the water column",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/375"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/375",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of silicate {SiO4} per unit volume of the water body",
             "definition": "Concentration of silicate per unit volume of the water column. Silicate may be expressed in terms of mass or quantity of substance.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/376"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/376",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of ammonium {NH4} per unit volume of the water body",
             "definition": "Concentration of ammonium per unit volume of the water column. Ammonium may be expressed in terms of mass or quantity of substance.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/377"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/377",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of silicate {SiO4} per unit mass of the water body",
             "definition": "Concentration (moles or mass) of silicon as silicate per unit mass of the water column",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/378"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/378",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of phosphate {PO4} per unit volume of the water body",
             "definition": "Concentration of phosphate per unit volume of the water column. Phosphate may be expressed in terms of mass or quantity of substance",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/379"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/379",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of phosphate {PO4} per unit mass of the water body",
             "definition": "Concentration of phosphate dissolved per unit mass of the water column. Solute may be expressed in terms of mass, volume or quantity of substance",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/380"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/380",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of nitrate and nitrite {NO3 and NO2} per unit mass of the water body",
             "definition": "Concentration (moles or mass) of nitrogen as both nitrate and nitrite per unit mass of the water column.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/45"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/45",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of nitrate and nitrite {NO3 and NO2} per unit volume of the water body",
             "definition": "Concentration of nitrate and nitrite per unit volume of the water column. May be expressed in terms of mass or quantity of substance.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/46"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/46",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of total phosphorus per unit volume of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/47"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/47",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of total phosphorus per unit mass of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/48"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/48",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of nitrite {NO2} per unit mass of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/49"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/49",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of nitrite {NO2} per unit volume of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/50"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/50",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Concentration of phosphate (water soluble reactive) per unit volume of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/53"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/53",
+            "broader": null,
+            "narrower": null
           }
         ]
       }
@@ -1105,530 +1611,778 @@
     "narrower": [
       {
         "label": "Bathymetry",
+        "definition": null,
         "about": "http://vocab.aodn.org.au/def/parameter_classes/category/1",
+        "broader": null,
         "narrower": [
           {
             "label": "Sea-floor depth below surface of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/574"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/574",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Height above surface of the water body",
             "definition": "Surface references mean sea level, which means the time mean of sea surface elevation at a given location over an arbitrary period sufficient to eliminate the tidal signals.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/44"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/44",
+            "broader": null,
+            "narrower": null
           }
         ]
       },
       {
         "label": "Wave",
+        "definition": null,
         "about": "http://vocab.aodn.org.au/def/parameter_classes/category/2",
+        "broader": null,
         "narrower": [
           {
             "label": "Spectral significant height of waves on the water body",
             "definition": "Significant wave height approximated as four times the square root of the first moment of the wave power spectrum.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/2"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/2",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Period at the peak spectral energy of waves on the water body",
             "definition": "Period of the peak of the energy spectrum analysed by spectral method.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/3"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/3",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Direction at spectral maximum of waves on the water body",
             "definition": "Direction (related to true north) from which the peak period waves are coming from analysed by spectral method.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/4"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/4",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Significant height of waves on the water body",
             "definition": "The average height of the highest one third of the waves, where the height is defined as the vertical distance from a wave trough to the following wave crest.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/411"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/411",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Average height of waves on the water body",
             "definition": "The mean height of waves on the water body analysed by zero crossing method.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/412"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/412",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Root mean square height of waves on the water body",
             "definition": "The root mean square wave height analysed by zero crossing method.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/413"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/413",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Average height of the highest 1/10th of waves on the water body",
             "definition": "The mean of the highest ten per cent of trough to crest distances measured during the observation period.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/414"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/414",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Average zero crossing period of the highest 1/3rd of waves on the water body",
             "definition": "The average period of the highest 1/3 of waves measured during a recording burst",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/417"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/417",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Maximum height of waves on the water body",
             "definition": "The maximum vertical distance between a wave crest and the immediately preceding or following through during a specified observation period.",
-            "about": "http://vocab.nerc.ac.uk/collection/P01/current/GCMXZZ01"
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/GCMXZZ01",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Directional spreading of waves on the water body",
             "definition": "Sea surface wave mean directional spread analysed by spectral method.",
-            "about": "http://vocab.nerc.ac.uk/collection/P01/current/GSPRZZ01"
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/GSPRZZ01",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Period of swell waves on the water body",
             "definition": "Period between successive swell maxima.",
-            "about": "http://vocab.nerc.ac.uk/collection/P01/current/GSZZXXXX"
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/GSZZXXXX",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Average crest period of waves on the water body",
             "definition": "Sea surface wave mean crest period analysed by zero crossing method.",
-            "about": "http://vocab.nerc.ac.uk/collection/P01/current/GTCAZZ01"
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/GTCAZZ01",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Direction of waves on the water body",
             "definition": "Direction from which waves are coming relative to True North.",
-            "about": "http://vocab.nerc.ac.uk/collection/P01/current/GWDRZZ01"
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/GWDRZZ01",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Significant height of swell waves on the water body",
             "definition": "The average height of the highest one third of the swell waves, where the height is defined as the vertical distance from a wave trough to the following wave crest.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/28"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/28",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Period at spectral maximum of swell waves first component on the water body",
             "definition": "Period of the highest swell wave peak analysed by spectral method.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/29"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/29",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Direction at spectral maximum of swell waves first component on the water body",
             "definition": "Direction from which the most energetic waves are coming in the swell wave component of a sea.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/30"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/30",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Significant height of wind sea waves on the water body",
             "definition": "The average height of the highest one third of the wind sea waves, where the height is defined as the vertical distance from a wave trough to the following wave crest.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/31"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/31",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Period at spectral maximum of wind sea waves on the water body",
             "definition": "Period of the highest wind sea wave peak analysed by spectral method.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/32"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/32",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Direction at spectral maximum of wind sea waves on the water body",
             "definition": "Direction (related to true north) from which the peak period wind sea waves are coming from analysed by spectral method.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/33"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/33",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Maximum zero crossing period of waves on the water body",
             "definition": "The maximum period of the waves analysed by zero crossing method.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/34"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/34",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Average height of the highest 1/3rd of waves on the water body",
             "definition": "The mean of the highest third of waves on the water body analysed by zero crossing method.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/35"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/35",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Average zero crossing period of waves on the water body",
             "definition": "The period of the significant wave analysed by zero crossing method.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/36"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/36",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Average zero crossing period of the highest 1/10th waves on the water body",
             "definition": "The average period of the highest tenth of waves measured during a recording burst.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/37"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/37",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Variance spectral density of waves on the water body",
             "definition": "Fourier Analysis on directional sea level elevation, also named 'Directional Spectral density' or 'Directional Power spectral density'.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/38"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/38",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Directional variance spectral density of waves on the water body",
             "definition": "Sea surface wave directional variance spectral density is the variance of the amplitude of the waves within given ranges of direction and wave frequency.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/39"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/39",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Period at second highest energy spectrum peak of waves on the water body",
             "definition": "Period of the second highest peak of the energy spectrum analysed by spectral method.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/40"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/40",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Zeroth spectral moment of waves on the water body",
             "definition": "The variance spectral density of the zeroth frequency moment.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/41"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/41",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Direction of wind sea waves on the water body",
             "definition": "Direction from which wind sea waves are coming relative to True North.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/42"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/42",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Spectral directional spread of wave peak on the water body",
             "definition": "Sea surface wave peak directional spread analysed by spectral method.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/61"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/61",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Period of the highest wave on the water body",
             "definition": "Period corresponding to the wave with maximum height in the record analysed by zero crossing method.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/60"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/60",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Mean period at spectral second frequency moment of waves on the water body",
             "definition": "The square root of ratio of the zeroth and second-order moment of the non-directional wave spectrum analysed by spectral method.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/62"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/62",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Mean period at spectral first frequency moment of waves on the water body",
             "definition": "The square root of ratio of the zeroth and first-order moment of the non-directional wave spectrum analysed by spectral method.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/63"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/63",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Average direction at spectral maximum of waves on the water body",
             "definition": "Average direction (related to true north) from which the peak period waves are coming from analysed by spectral method.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/64"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/64",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Direction at spectral maximum of swell waves on the water body",
             "definition": "Direction (related to true north) towards which the peak period swell waves are heading, analysed by spectral method.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/65"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/65",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Wavelength at spectral maximum of swell waves on the water body",
             "definition": "The wavelength of the peak period swell waves analysed by spectral method. The wavelength is the horizontal distance between repeated features on the waveform such as crests, troughs or upward passes through the mean level.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/66"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/66",
+            "broader": null,
+            "narrower": null
           }
         ]
       },
       {
         "label": "Density",
+        "definition": null,
         "about": "http://vocab.aodn.org.au/def/parameter_classes/category/23",
+        "broader": null,
         "narrower": [
           {
             "label": "Density of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/401"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/401",
+            "broader": null,
+            "narrower": null
           }
         ]
       },
       {
         "label": "Water pressure",
+        "definition": null,
         "about": "http://vocab.aodn.org.au/def/parameter_classes/category/25",
+        "broader": null,
         "narrower": [
           {
             "label": "Pressure (measured variable) in the water body exerted by overlying sea water and any medium above it",
             "definition": "The force per unit area exerted by the overlying sea water, sea ice, air and any other medium that may be present on a sensor located in the water column.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/565"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/565",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Pressure (measured variable) in the water body exerted by overlying sea water only",
             "definition": "The force per unit area exerted by the overlying sea water on a sensor located in the water column. Excludes the pressure due to sea ice, air and any other medium that may be present.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/566"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/566",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Pressure (measured variable) exerted by the atmosphere",
             "definition": "Measurement as a phenomenon (as opposed to a co-ordinate) of the force per unit area exerted by the atmosphere determined in-situ at a known altitude.",
-            "about": "http://vocab.nerc.ac.uk/collection/P01/current/CAPHZZ01"
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/CAPHZZ01",
+            "broader": null,
+            "narrower": null
           }
         ]
       },
       {
         "label": "Turbidity",
+        "definition": null,
         "about": "http://vocab.aodn.org.au/def/parameter_classes/category/28",
+        "broader": null,
         "narrower": [
           {
             "label": "Turbidity of the water body",
             "definition": "Estimate of suspended sediment concentration based on the proportion of a light transmission in the water column that is reflected back to a co-located receiver.",
-            "about": "http://vocab.nerc.ac.uk/collection/P01/current/TURBXXXX"
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/TURBXXXX",
+            "broader": null,
+            "narrower": null
           }
         ]
       },
       {
         "label": "Current",
+        "definition": null,
         "about": "http://vocab.aodn.org.au/def/parameter_classes/category/3",
+        "broader": null,
         "narrower": [
           {
             "label": "Current speed in the water body",
             "definition": "The speed of Eulerian flow in the water column",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/383"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/383",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Eastward geostrophic current velocity in the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/640"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/640",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Northward geostrophic current velocity in the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/641"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/641",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Current direction in the water body",
             "definition": "The direction towards which Eulerian current in the water column is flowing.",
-            "about": "http://vocab.nerc.ac.uk/collection/P01/current/LCDAZZ01"
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/LCDAZZ01",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Eastward current velocity in the water body",
             "definition": "Speed of Eulerian current flow towards due east.",
-            "about": "http://vocab.nerc.ac.uk/collection/P01/current/LCEWZZ01"
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/LCEWZZ01",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Northward current velocity in the water body",
             "definition": "Speed of Eulerian current flow towards true north",
-            "about": "http://vocab.nerc.ac.uk/collection/P01/current/LCNSZZ01"
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/LCNSZZ01",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Upward current velocity in the water body",
-            "about": "http://vocab.nerc.ac.uk/collection/P01/current/LRZAZZZZ"
+            "definition": null,
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/LRZAZZZZ",
+            "broader": null,
+            "narrower": null
           }
         ]
       },
       {
         "label": "Air-Sea Fluxes",
+        "definition": null,
         "about": "http://vocab.aodn.org.au/def/parameter_classes/category/30",
+        "broader": null,
         "narrower": [
           {
             "label": "Net shortwave heat flux",
             "definition": "The net shortwave heat flux is the difference between the downwelling radiation from the sun as modified by the gases and clouds of the atmosphere and the radiation returned from the sea surface, which is either reflected by the surface or backscattered from within the water column.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/10"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/10",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Net heat flux",
             "definition": "Net surface heat flux across the air-sea interface.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/11"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/11",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Net mass flux",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/12"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/12",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Downwelling vector irradiance as photons (PAR wavelengths) in the atmosphere",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/572"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/572",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Downwelling vector irradiance as energy (solar (300-3000nm) wavelengths) in the atmosphere",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/576"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/576",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Sensible heat flux",
             "definition": "Heat exchange due to difference in temperature between air and water.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/6"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/6",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Downwelling vector irradiance as energy in the atmosphere",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/651"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/651",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Latent heat flux",
             "definition": "Heat loss due to evaporation",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/7"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/7",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Sensible heat flux due to precipitation",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/8"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/8",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Net longwave heat flux",
             "definition": "The net longwave heat flux is the net flux of the greybody emissions from the sea surface, cloud layers and the gases of the atmosphere.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/9"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/9",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Downwelling vector irradiance as energy (longwave) in the atmosphere",
-            "about": "http://vocab.nerc.ac.uk/collection/P01/current/LWRDZZ01"
+            "definition": null,
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/LWRDZZ01",
+            "broader": null,
+            "narrower": null
           }
         ]
       },
       {
         "label": "Optical properties",
+        "definition": null,
         "about": "http://vocab.aodn.org.au/def/parameter_classes/category/45",
+        "broader": null,
         "narrower": [
           {
             "label": "Light absorption coefficient of dissolved organic matter",
             "definition": "The proportion of the incident light that is absorbed by the dissolved component of a sample from any body of fresh or salt water.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/890"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/890",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Light absorption coefficient of phytoplankton",
             "definition": "The proportion of the incident light that is absorbed by the algal (phytoplankton) component of a sample from any body of fresh or salt water.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/891"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/891",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Light absorption coefficient of nonalgal particles",
             "definition": "The proportion of the incident light that is absorbed by the detrital or non-algal component of a sample from any body of fresh or salt water.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/892"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/892",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Light extinction coefficient (490nm wavelength) in the water body",
             "definition": "Light extinction coefficient (490nm wavelength) in the water body by radiometer and computation from variation of light intensity with depth.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/5"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/5",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Downwelling vector irradiance as photons (PAR wavelengths) in the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/573"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/573",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Colored Dissolved Organic Matter",
             "definition": "The amount of colored organic compounds (sometimes called yellow substance or gelbstoff) dissolved in a specified amount of water from any body of fresh or salt water",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/629"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/629",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Water-leaving radiance from the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/646"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/646",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Water-leaving radiance from the water body corrected for viewing angle dependance",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/647"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/647",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Normalised water-leaving radiance from the water body determined from Lw",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/648"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/648",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Normalised water-leaving radiance from the water body determined from Lw_Q",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/649"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/649",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Downwelling vector irradiance as energy in the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/650"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/650",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Sky radiance as energy in the atmosphere",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/652"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/652",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Upwelling radiance as energy in the atmosphere",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/653"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/653",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Secchi depth",
             "definition": "Estimate of the transparency of the surface water based upon the distance below the ship at which a standard black and white disk becomes visible.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/729"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/729",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Total absorption coefficient in the water body",
             "definition": "Inherent optical property of natural waters. Describes the intensity loss of a light beam through a unit volume of water due to absorption.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/59"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/59",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Total attenuation coefficient in the water body",
             "definition": "Inherent optical property of natural waters. Describes the intensity loss of a light beam through a unit volume of water due to scattering and absorption.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/58"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/58",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Total backscattering coefficient in the water body",
             "definition": "Inherent optical property of natural waters. Describes the reflection of light from a unit volume of water back to the incident direction. Integral of the volume scattering function in the backward direction from 90 to 180 degrees.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/54"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/54",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Particle backscattering coefficient in the water body",
             "definition": "Inherent optical property of natural waters. Describes the reflection of light by particles from a unit volume of water back to the incident direction. Integral of the particle volume scattering function in the backward direction from 90 to 180 degrees.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/55"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/55",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Total volume scattering function in the water body",
             "definition": "Inherent optical property of natural waters. Describes the angular dependence of scattered light from an incident light beam.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/56"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/56",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Particle volume scattering function in the water body",
             "definition": "Inherent optical property of natural waters. Describes the angular dependence of scattered light by particles from an incident light beam.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/57"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/57",
+            "broader": null,
+            "narrower": null
           }
         ]
       },
       {
         "label": "Backscattering",
-        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/47"
+        "definition": null,
+        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/47",
+        "broader": null,
+        "narrower": null
       },
       {
         "label": "Temperature",
+        "definition": null,
         "about": "http://vocab.aodn.org.au/def/parameter_classes/category/49",
+        "broader": null,
         "narrower": [
           {
             "label": "Temperature anomaly of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/590"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/590",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Ocean heat content",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/631"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/631",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Skin temperature of the water body",
             "definition": "Skin temperature of the water body measure by Advanced Very High Resolution Radiometer (AVHRR)",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/97"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/97",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Temperature of the water body",
             "definition": "The degree of hotness of the water column expressed against a standard scale.  Includes both IPTS-68 and ITS-90 scales.",
-            "about": "http://vocab.nerc.ac.uk/collection/P01/current/TEMPPR01"
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/TEMPPR01",
+            "broader": null,
+            "narrower": null
           }
         ]
       },
       {
         "label": "Acoustics",
+        "definition": null,
         "about": "http://vocab.aodn.org.au/def/parameter_classes/category/5",
+        "broader": null,
         "narrower": [
           {
             "label": "Acoustic signal return amplitude from the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/399"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/399",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Sound recorded in the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/597"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/597",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Volume backscattering coefficient",
             "definition": "Echosounder provides two basic measurements: (1) the time delay between transmission of a sound pulse and reception of a return echo from an acoustic target (for example fish), and (2) the intensity of the returning echo. The intensity of returning echo from the fish is dependent on the intensity of sound transmitted by the echosounder, the loss of intensity as the sound wave travels through water (both to the fish and back to the echosounder), and the backscattering cross-section (or target strength) of the fish. Backscattering cross-section determines what proportion of incident sound intensity is reflected from the fish, back to the echosounder. The derived parameter ‘volume backscattering coefficient’ is the summation of backscattering cross-section from all acoustic targets present within the sampling volume scaled to 1 m3.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/728"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/728",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Sound velocity in the water body",
             "definition": "The rate at which sound travels through the water column",
-            "about": "http://vocab.nerc.ac.uk/collection/P01/current/SVELXXXX"
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/SVELXXXX",
+            "broader": null,
+            "narrower": null
           }
         ]
       },
       {
         "label": "Salinity",
+        "definition": null,
         "about": "http://vocab.aodn.org.au/def/parameter_classes/category/50",
+        "broader": null,
         "narrower": [
           {
             "label": "Practical salinity anomaly of the water body",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/591"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/591",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Specific electrical conductivity of the water body",
             "definition": "Conductance is a temperature corrected value, and approximates what the AC (Actual Conductivity) of a solution would be at 25 degrees Celsisus.",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/730"
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/730",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Electrical conductivity of the water body",
-            "about": "http://vocab.nerc.ac.uk/collection/P01/current/CNDCZZ01"
+            "definition": null,
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/CNDCZZ01",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Practical salinity of the water body",
             "definition": "The quantity of dissolved ions (predominantly salt in seawater) expressed on a scale (PSS-78) based on the conductivity ratio of a seawater sample to a standard KCl solution.",
-            "about": "http://vocab.nerc.ac.uk/collection/P01/current/PSLTZZ01"
+            "about": "http://vocab.nerc.ac.uk/collection/P01/current/PSLTZZ01",
+            "broader": null,
+            "narrower": null
           }
         ]
       },
       {
         "label": "Sea surface height",
+        "definition": null,
         "about": "http://vocab.aodn.org.au/def/parameter_classes/category/57",
+        "broader": null,
         "narrower": [
           {
             "label": "Sea surface height anomaly",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/642"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/642",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Sea surface height above geoid",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/643"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/643",
+            "broader": null,
+            "narrower": null
           },
           {
             "label": "Sea surface height above reference datum",
-            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/43"
+            "definition": null,
+            "about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/43",
+            "broader": null,
+            "narrower": null
           }
         ]
       },
       {
         "label": "Depth",
-        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/58"
+        "definition": null,
+        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/58",
+        "broader": null,
+        "narrower": null
       }
     ]
   },
@@ -1639,7 +2393,10 @@
     "broader": [
       {
         "label": "Physical-Water",
-        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/56"
+        "definition": null,
+        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/56",
+        "broader": null,
+        "narrower": null
       }
     ],
     "narrower": []
@@ -1651,7 +2408,10 @@
     "broader": [
       {
         "label": "Physical-Water",
-        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/56"
+        "definition": null,
+        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/56",
+        "broader": null,
+        "narrower": null
       }
     ],
     "narrower": []
@@ -1663,7 +2423,10 @@
     "broader": [
       {
         "label": "Physical-Atmosphere",
-        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/53"
+        "definition": null,
+        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/53",
+        "broader": null,
+        "narrower": null
       }
     ],
     "narrower": []
@@ -1675,7 +2438,10 @@
     "broader": [
       {
         "label": "Physical-Atmosphere",
-        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/53"
+        "definition": null,
+        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/53",
+        "broader": null,
+        "narrower": null
       }
     ],
     "narrower": []
@@ -1687,7 +2453,10 @@
     "broader": [
       {
         "label": "Physical-Atmosphere",
-        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/53"
+        "definition": null,
+        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/53",
+        "broader": null,
+        "narrower": null
       }
     ],
     "narrower": []
@@ -1699,7 +2468,10 @@
     "broader": [
       {
         "label": "Physical-Atmosphere",
-        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/53"
+        "definition": null,
+        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/53",
+        "broader": null,
+        "narrower": null
       }
     ],
     "narrower": []
@@ -1711,7 +2483,10 @@
     "broader": [
       {
         "label": "Physical-Water",
-        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/56"
+        "definition": null,
+        "about": "http://vocab.aodn.org.au/def/parameter_classes/category/56",
+        "broader": null,
+        "narrower": null
       }
     ],
     "narrower": []
