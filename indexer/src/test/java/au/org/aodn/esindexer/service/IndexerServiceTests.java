@@ -137,6 +137,7 @@ public class IndexerServiceTests extends BaseTestClass {
         Hit<ObjectNode> objectNodeHit = indexerService.getDocumentByUUID("2852a776-cbfc-4bc8-a126-f3c036814892");
 
         String test = objectNodeHit.source().toPrettyString();
+        logger.info(test);
         assertEquals("Stac equals", indexerObjectMapper.readTree(expected), indexerObjectMapper.readTree(test));
 
         deleteRecord("2852a776-cbfc-4bc8-a126-f3c036814892");

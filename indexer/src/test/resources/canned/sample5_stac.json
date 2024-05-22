@@ -6,7 +6,7 @@
     "temporal" : [ [ "2010-01-21T01:00:00Z", "2017-03-26T13:00:00Z" ], [ "2010-01-21T01:00:00Z", "2017-03-26T13:00:00Z" ] ]
   },
   "summaries" : {
-    "score" : 90,
+    "score" : 85,
     "status" : "completed",
     "scope" : {
       "code" : "series",
@@ -59,15 +59,10 @@
     "type" : "text/html",
     "title" : "Ocean Radar page on IMOS website"
   }, {
-    "href" : "http://localhost:8080/geonetwork/images/logos/dbee258b-8730-4072-96d4-2818a69a4afd.png",
-    "rel" : "icon",
-    "type" : "image/png",
-    "title" : "Suggest icon for dataset 1"
-  }, {
     "href" : "https://catalogue-imos.aodn.org.au/geonetwork/images/logos/dbee258b-8730-4072-96d4-2818a69a4afd.png",
     "rel" : "icon",
     "type" : "image/png",
-    "title" : "Suggest icon for dataset 2"
+    "title" : "Suggest icon for dataset"
   } ],
   "license" : "Creative Commons Attribution 4.0 International License",
   "providers" : [ {
@@ -122,6 +117,6 @@
     "title" : "IMOS - ACORN - Bonney Coast HF ocean radar site (South Australia, Australia)"
   },
   "type" : "Collection",
-  "stac_extensions" : [ "https://stac-extensions.github.io/scientific/v1.0.0/schema.json", "https://stac-extensions.github.io/contacts/v0.1.1/schema.json", "https://stac-extensions.github.io/projection/v1.1.0/schema.json", "https://stac-extensions.github.io/language/v1.0.0/schema.json", "https://stac-extensions.github.io/themes/v1.0.0/schema.json" ],
-  "stac_version" : "1.0.0"
+  "stac_version" : "1.0.0",
+  "stac_extensions" : [ "https://stac-extensions.github.io/scientific/v1.0.0/schema.json", "https://stac-extensions.github.io/contacts/v0.1.1/schema.json", "https://stac-extensions.github.io/projection/v1.1.0/schema.json", "https://stac-extensions.github.io/language/v1.0.0/schema.json", "https://stac-extensions.github.io/themes/v1.0.0/schema.json" ]
 }
