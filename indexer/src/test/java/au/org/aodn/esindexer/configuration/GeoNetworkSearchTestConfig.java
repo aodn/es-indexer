@@ -2,10 +2,11 @@ package au.org.aodn.esindexer.configuration;
 
 import au.org.aodn.esindexer.BaseTestClass;
 import au.org.aodn.esindexer.service.GeoNetworkServiceImpl;
+import au.org.aodn.esindexer.utils.UrlUtils;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpEntity;
+import org.springframework.http.*;
 import org.apache.http.HttpHeaders;
 import org.apache.http.HttpHost;
 import org.apache.http.message.BasicHeader;
@@ -16,9 +17,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import org.testcontainers.containers.DockerComposeContainer;
 import org.testcontainers.containers.wait.strategy.Wait;
@@ -28,6 +26,7 @@ import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.time.Duration;
+import java.util.HashMap;
 import java.util.Map;
 
 import static org.mockito.ArgumentMatchers.eq;
@@ -125,5 +124,25 @@ public class GeoNetworkSearchTestConfig {
                         anyMap());
 
         return impl;
+    }
+    /**
+     * Hardcode the result here for testing, please add more if you need to return different result
+     * @return
+     */
+    @Bean
+    public UrlUtils createUrlUtils() {
+        UrlUtils urlUtils = Mockito.mock(UrlUtils.class);
+
+        final Map<String, Boolean> status = new HashMap<>();
+        status.put("https://catalogue-imos.aodn.org.au/geonetwork/images/logos/dbee258b-8730-4072-96d4-2818a69a4afd.png", Boolean.TRUE);
+
+        doAnswer(answer -> {
+            String url = answer.getArgument(0);
+            return status.getOrDefault(url, Boolean.FALSE);
+        })
+                .when(urlUtils)
+                .checkUrlExists(anyString());
+
+        return urlUtils;
     }
 }

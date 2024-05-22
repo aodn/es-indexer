@@ -3,6 +3,7 @@ package au.org.aodn.esindexer.service;
 import au.org.aodn.esindexer.exception.MappingValueException;
 import au.org.aodn.esindexer.utils.GeometryUtils;
 import au.org.aodn.esindexer.configuration.AppConstants;
+import au.org.aodn.esindexer.utils.UrlUtils;
 import au.org.aodn.stac.model.*;
 import au.org.aodn.esindexer.utils.BBoxUtils;
 
@@ -25,7 +26,6 @@ import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -68,6 +68,9 @@ public abstract class StacCollectionMapperService {
 
     @Autowired
     private GeoNetworkService geoNetworkService;
+
+    @Autowired
+    protected UrlUtils urlUtils;
 
     @Named("mapUUID")
     String mapUUID(MDMetadataType source) {
@@ -434,18 +437,19 @@ public abstract class StacCollectionMapperService {
             Map<String, Object> additionalInfo = optAdditionalInfo.get();
             if(additionalInfo.containsKey(SUGGEST_LOGOS)) {
                 if(additionalInfo.get(SUGGEST_LOGOS) instanceof List) {
-                    final AtomicInteger index = new AtomicInteger(1);
                     ((List<?>) additionalInfo.get(SUGGEST_LOGOS))
                             .stream()
                             .map(p -> (p instanceof String) ? (String) p : null)
                             .filter(Objects::nonNull)
-                            .forEach(i -> {
+                            .filter(i -> urlUtils.checkUrlExists(i))
+                            .findFirst()        // We only pick the first reachable one
+                            .ifPresent(i -> {
                                 LinkModel linkModel = LinkModel.builder().build();
                                 linkModel.setHref(i);
                                 // Geonetwork always return png logo
                                 linkModel.setType("image/png");
                                 linkModel.setRel("icon");
-                                linkModel.setTitle("Suggest icon for dataset " + index.getAndIncrement());
+                                linkModel.setTitle("Suggest icon for dataset");
                                 results.add(linkModel);
                             });
                 }

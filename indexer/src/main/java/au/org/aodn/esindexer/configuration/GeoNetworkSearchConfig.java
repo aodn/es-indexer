@@ -1,6 +1,7 @@
 package au.org.aodn.esindexer.configuration;
 
 import au.org.aodn.esindexer.service.GeoNetworkServiceImpl;
+import au.org.aodn.esindexer.utils.UrlUtils;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.json.jackson.JacksonJsonpMapper;
 import co.elastic.clients.transport.rest_client.RestClientTransport;
@@ -51,5 +52,11 @@ public class GeoNetworkSearchConfig {
             RestTemplate indexerRestTemplate) {
 
         return new GeoNetworkServiceImpl(server, indexName, gn4ElasticsearchClient, indexerRestTemplate);
+    }
+
+    @Bean
+    @ConditionalOnMissingBean(UrlUtils.class)
+    public UrlUtils createUrlUtils() {
+        return new UrlUtils();
     }
 }
