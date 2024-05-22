@@ -1,0 +1,95 @@
+{
+  "children": null,
+  "parent": null,
+  "siblings": null,
+  "associated": null,
+  "services": null,
+  "datasets": null,
+  "fcats": null,
+  "hasfeaturecats": null,
+  "sources": null,
+  "hassources": null,
+  "related": null,
+  "onlines": [
+    {
+      "id": "https://www.marine.csiro.au/data/trawler/survey_details.cfm?survey=IN2024_V01",
+      "url": {
+        "eng": "https://www.marine.csiro.au/data/trawler/survey_details.cfm?survey=IN2024_V01"
+      },
+      "type": "onlinesrc",
+      "title": {
+        "eng": "MNF Data Trawler"
+      },
+      "protocol": "WWW:DOWNLOAD-1.0-http--csiro-oa-app",
+      "description": {
+        "eng": "Link to processed data and survey information (plans, summaries, etc.) via MNF Data Trawler"
+      },
+      "function": "",
+      "mimeType": "",
+      "applicationProfile": ""
+    },
+    {
+      "id": "https://mnf.csiro.au/",
+      "url": {
+        "eng": "https://mnf.csiro.au/"
+      },
+      "type": "onlinesrc",
+      "title": {
+        "eng": "Marine National Facility"
+      },
+      "protocol": "WWW:LINK-1.0-http--link",
+      "description": {
+        "eng": "Link to the Marine National Facility Webpage"
+      },
+      "function": "",
+      "mimeType": "",
+      "applicationProfile": ""
+    },
+    {
+      "id": "https://doi.org/10.25919/rdrt-bd71",
+      "url": {
+        "eng": "https://doi.org/10.25919/rdrt-bd71"
+      },
+      "type": "onlinesrc",
+      "title": {
+        "eng": "Data Access Portal (DOI)"
+      },
+      "protocol": "WWW:DOWNLOAD-1.0-http--csiro-dap",
+      "description": {
+        "eng": "Link to this record at the CSIRO Data Access Portal"
+      },
+      "function": "",
+      "mimeType": "",
+      "applicationProfile": ""
+    },
+    {
+      "id": "http://www.marine.csiro.au/data/underway/?survey=IN2024_V01",
+      "url": {
+        "eng": "http://www.marine.csiro.au/data/underway/?survey=IN2024_V01"
+      },
+      "type": "onlinesrc",
+      "title": {
+        "eng": "Underway Visualisation Tool"
+      },
+      "protocol": "WWW:DOWNLOAD-1.0-http--csiro-oa-app",
+      "description": {
+        "eng": "Link to visualisation tool for Near Real-Time Underway Data (NRUD)"
+      },
+      "function": "",
+      "mimeType": "",
+      "applicationProfile": ""
+    }
+  ],
+  "thumbnails": [
+    {
+      "id": "https://www.marine.csiro.au/data/trawler/survey_mapfile.cfm?survey=IN2024_V01&data_type=uwy",
+      "url": {
+        "eng": "https://www.marine.csiro.au/data/trawler/survey_mapfile.cfm?survey=IN2024_V01&data_type=uwy"
+      },
+      "type": "thumbnail",
+      "title": {
+        "eng": "Voyage track"
+      }
+    }
+  ]
+}
