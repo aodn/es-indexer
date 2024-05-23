@@ -16,14 +16,20 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.util.*;
 
+@Scope(proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class GeoNetworkServiceImpl implements GeoNetworkService {
 
     public static final String SUGGEST_LOGOS = "suggest_logos";
@@ -32,6 +38,10 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
 
     @Autowired
     protected UrlUtils urlUtils;
+
+    @Lazy
+    @Autowired
+    protected GeoNetworkServiceImpl self;
 
     protected static final Logger logger = LogManager.getLogger(GeoNetworkServiceImpl.class);
 
@@ -126,7 +136,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
      */
     @Override
     public Optional<LinkModel> getThumbnail(String uuid) {
-        Optional<Map<String, ?>> optRelated = getRecordRelated(uuid);
+        Optional<Map<String, ?>> optRelated = self.getRecordRelated(uuid);
         if(optRelated.isPresent()) {
             Map<String, ?> node = optRelated.get();
             if(node.containsKey(THUMB_NAILS) && node.get(THUMB_NAILS) instanceof List<?> thumbnails) {
@@ -306,12 +316,21 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
      *         }
      *     ]
      * }
+     *
+     * The need of retryable is because the geonetwork elastic instance is too small, often it memory usage is
+     * 75%, it will throw BadRequest exception if we push it too hard, so we need to retry on bad request
      */
+    @Retryable(
+            retryFor = HttpClientErrorException.BadRequest.class,
+            maxAttempts = 10,
+            backoff = @Backoff(delay = 1500L)
+    )
     protected Optional<Map<String, ?>> getRecordRelated(String uuid) {
         try {
             Map<String, Object> params = new HashMap<>();
             params.put(UUID, uuid);
 
+            logger.debug("Get related record for {}", uuid);
             ResponseEntity<Map<String, ?>> responseEntity = indexerRestTemplate.exchange(
                     getGeoNetworkRelatedEndpoint(),
                     HttpMethod.GET,
@@ -415,7 +434,15 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
 
         return true;
     }
-
+    /**
+     * The need of retryable is because the geonetwork elastic instance is too small, often it memory usage is
+     * 75%, it will throw BadRequest exception if we push it too hard, so we need to retry on bad request
+     */
+    @Retryable(
+            retryFor = HttpClientErrorException.BadRequest.class,
+            maxAttempts = 10,
+            backoff = @Backoff(delay = 1500L)
+    )
     @Override
     public Iterable<String> getAllMetadataRecords() {
 
@@ -461,7 +488,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
             }
         }
         catch(IOException e) {
-            throw new RuntimeException("Failed to fetch data from the API");
+            throw new RuntimeException("Failed to fetch data from GeoNetwork Elastic API, too busy?");
         }
     }
 

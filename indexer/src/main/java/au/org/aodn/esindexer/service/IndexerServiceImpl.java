@@ -224,7 +224,6 @@ public class IndexerServiceImpl implements IndexerService {
     }
 
     public ResponseEntity<String> indexAllMetadataRecordsFromGeoNetwork(boolean confirm) throws IOException {
-        BulkRequest.Builder bulkRequest = new BulkRequest.Builder();
         if (!confirm) {
             throw new IndexAllRequestNotConfirmedException("Please confirm that you want to index all metadata records from GeoNetwork");
         }
@@ -234,15 +233,28 @@ public class IndexerServiceImpl implements IndexerService {
 
         logger.info("Indexing all metadata records from GeoNetwork");
 
+        BulkRequest.Builder bulkRequest = new BulkRequest.Builder();
+        List<BulkResponse> results = new ArrayList<>();
+
+        long dataSize = 0;
         for (String metadataRecord : geoNetworkResourceService.getAllMetadataRecords()) {
             if(metadataRecord != null) {
                 try {
                     // get mapped metadata values from GeoNetwork to STAC collection schema
                     final StacCollectionModel mappedMetadataValues = this.getMappedMetadataValues(metadataRecord);
+                    int size = indexerObjectMapper.writeValueAsBytes(mappedMetadataValues).length;
 
-                    // convert mapped values to binary data
-                    logger.debug("Ingested json is {}", indexerObjectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(mappedMetadataValues));
-
+                    // We need to split the batch into smaller size to avoid data too large error in ElasticSearch,
+                    // the limit is 10mb, so to make check before document add and push batch if size is too big
+                    //
+                    // dataSize = 0 is init case, just in case we have a very big doc that exceed the limit
+                    // and we have not add it to the bulkRequest
+                    if(dataSize + size > 100000 && dataSize != 0) {
+                        logger.info("Execute batch as bulk request is big enough {}", dataSize + size);
+                        results.add(executeBulk(bulkRequest));
+                        dataSize = 0;
+                        bulkRequest = new BulkRequest.Builder();
+                    }
                     // send bulk request to Elasticsearch
                     bulkRequest.operations(op -> op
                             .index(idx -> idx
@@ -251,6 +263,7 @@ public class IndexerServiceImpl implements IndexerService {
                                     .document(mappedMetadataValues)
                             )
                     );
+                    dataSize += size;
 
                 } catch (FactoryException | JAXBException | TransformException e) {
                 /* it will reach here if cannot extract values of all the keys in GeoNetwork metadata JSON
@@ -261,6 +274,16 @@ public class IndexerServiceImpl implements IndexerService {
             }
         }
 
+        // In case there are residual
+        results.add(executeBulk(bulkRequest));
+
+        // TODO now processing for record_suggestions index
+        logger.info("Finished execute bulk indexing records to index: {}",indexName);
+
+        return ResponseEntity.status(HttpStatus.OK).body(results.toString());
+    }
+
+    protected BulkResponse executeBulk(BulkRequest.Builder bulkRequest) throws IOException {
         BulkResponse result = portalElasticsearchClient.bulk(bulkRequest.build());
 
         // Flush after insert, otherwise you need to wait for next auto-refresh. It is
@@ -291,12 +314,7 @@ public class IndexerServiceImpl implements IndexerService {
                     }
                 }
             }
-        } else {
-            logger.info("Finished bulk indexing records to index: " + indexName);
         }
-
-        // TODO now processing for record_suggestions index
-
-        return ResponseEntity.status(HttpStatus.OK).body(result.toString());
+        return result;
     }
 }

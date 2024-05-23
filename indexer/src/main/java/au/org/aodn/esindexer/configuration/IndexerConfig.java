@@ -4,8 +4,10 @@ import au.org.aodn.esindexer.utils.VocabsUtils;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.retry.annotation.EnableRetry;
 
 @Configuration
+@EnableRetry
 public class IndexerConfig {
     /**
      * We need to create component here because we do not want to run test with real http connection

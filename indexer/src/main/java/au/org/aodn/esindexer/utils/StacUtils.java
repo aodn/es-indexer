@@ -45,44 +45,44 @@ public class StacUtils {
      * @return
      */
     public static List<List<BigDecimal>> createStacBBox(List<Polygon> polygons) {
-        Envelope envelope = new Envelope();
-        try {
-            for(Polygon polygon : polygons) {
-                // Add polygon one by one to extend the overall bounding box area, this is requirement
-                // of STAC to have an overall bounding box of all smaller area as the first bbox in the list.
-                if (polygon != null) {
-                    envelope.expandToInclude(polygon.getEnvelopeInternal());
-                }
-            }
-
-            if (!polygons.isEmpty()) {
-                // If it didn't contain polygon, then the envelope is just the initial empty object and thus invalid.
-                List<List<BigDecimal>> result = new ArrayList<>();
-                result.add(List.of(
-                        BigDecimal.valueOf(envelope.getMinX()).setScale(scale, RoundingMode.HALF_UP),
-                        BigDecimal.valueOf(envelope.getMinY()).setScale(scale, RoundingMode.HALF_UP),
-                        BigDecimal.valueOf(envelope.getMaxX()).setScale(scale, RoundingMode.HALF_UP),
-                        BigDecimal.valueOf(envelope.getMaxY()).setScale(scale, RoundingMode.HALF_UP)));
-
-                for (Polygon p : polygons) {
-                    List<BigDecimal> points = new ArrayList<>();
-                    for (Coordinate c : p.getCoordinates()) {
-                        points.addAll(List.of(
-                            BigDecimal.valueOf(c.getX()).setScale(scale, RoundingMode.HALF_UP),
-                                BigDecimal.valueOf(c.getY()).setScale(scale, RoundingMode.HALF_UP)
-                        ));
+        if(polygons != null) {
+            Envelope envelope = new Envelope();
+            try {
+                for (Polygon polygon : polygons) {
+                    // Add polygon one by one to extend the overall bounding box area, this is requirement
+                    // of STAC to have an overall bounding box of all smaller area as the first bbox in the list.
+                    if (polygon != null) {
+                        envelope.expandToInclude(polygon.getEnvelopeInternal());
                     }
-                    result.add(points);
                 }
-                return result;
+
+                if (!polygons.isEmpty()) {
+                    // If it didn't contain polygon, then the envelope is just the initial empty object and thus invalid.
+                    List<List<BigDecimal>> result = new ArrayList<>();
+                    result.add(List.of(
+                            BigDecimal.valueOf(envelope.getMinX()).setScale(scale, RoundingMode.HALF_UP),
+                            BigDecimal.valueOf(envelope.getMinY()).setScale(scale, RoundingMode.HALF_UP),
+                            BigDecimal.valueOf(envelope.getMaxX()).setScale(scale, RoundingMode.HALF_UP),
+                            BigDecimal.valueOf(envelope.getMaxY()).setScale(scale, RoundingMode.HALF_UP)));
+
+                    for (Polygon p : polygons) {
+                        List<BigDecimal> points = new ArrayList<>();
+                        for (Coordinate c : p.getCoordinates()) {
+                            points.addAll(List.of(
+                                    BigDecimal.valueOf(c.getX()).setScale(scale, RoundingMode.HALF_UP),
+                                    BigDecimal.valueOf(c.getY()).setScale(scale, RoundingMode.HALF_UP)
+                            ));
+                        }
+                        result.add(points);
+                    }
+                    return result;
+                } else {
+                    logger.warn("No applicable BBOX calculation found");
+                    return new ArrayList<>();
+                }
+            } catch (Exception e) {
+                logger.error("Error processing", e);
             }
-            else {
-                logger.warn("No applicable BBOX calculation found");
-                return new ArrayList<>();
-            }
-        }
-        catch(Exception e) {
-            logger.error("Error processing", e);
         }
         return new ArrayList<>();
     }
