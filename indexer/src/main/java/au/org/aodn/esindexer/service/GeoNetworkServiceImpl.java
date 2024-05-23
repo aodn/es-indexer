@@ -201,7 +201,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
             }
         }
         catch(HttpClientErrorException clientErrorException) {
-            logger.warn("Fail to call API on additional info, please check api exist?", clientErrorException);
+            logger.warn("Fail to call API on additional info, please check api exist?");
             return Optional.empty();
         }
         return Optional.empty();

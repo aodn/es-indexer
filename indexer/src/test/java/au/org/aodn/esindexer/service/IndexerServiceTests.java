@@ -185,6 +185,30 @@ public class IndexerServiceTests extends BaseTestClass {
             Hit<ObjectNode> objectNodeHit = indexerService.getDocumentByUUID(uuid);
 
             String test = objectNodeHit.source().toPrettyString();
+            assertEquals("Stac equals " + uuid, indexerObjectMapper.readTree(expected), indexerObjectMapper.readTree(test));
+        }
+        finally {
+            deleteRecord(uuid);
+        }
+    }
+    /**
+     * This test is use to make sure if the geonetwork return an empty thumbnails [] array, we are still ok,
+     * in the related/5905b3eb-aad0-4f9c-a03e-a02fb3488082.json, the thumbnails: [] is empty
+     * @throws IOException
+     */
+    @Disabled("Bug in code where bounding box not right")
+    @Test
+    public void verifyThumbnailLinkNullAddedOnIndex() throws IOException {
+        String uuid = "5905b3eb-aad0-4f9c-a03e-a02fb3488082";
+        try {
+            String expected = readResourceFile("classpath:canned/sample7_stac.json");
+
+            insertMetadataRecords(uuid, "classpath:canned/sample7.xml");
+
+            indexerService.indexAllMetadataRecordsFromGeoNetwork(true);
+            Hit<ObjectNode> objectNodeHit = indexerService.getDocumentByUUID(uuid);
+
+            String test = objectNodeHit.source().toPrettyString();
             logger.info(test);
             assertEquals("Stac equals " + uuid, indexerObjectMapper.readTree(expected), indexerObjectMapper.readTree(test));
         }
