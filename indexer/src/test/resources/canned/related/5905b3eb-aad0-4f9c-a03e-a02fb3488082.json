@@ -1,0 +1,31 @@
+{
+  "children": null,
+  "parent": [
+    {
+      "id": "48de2e3c-52a9-42f0-84ac-eb13baab0b07",
+      "url": {
+        "eng": "https://geonetwork-edge.edge.aodn.org.au/geonetwork/srv/api/records/48de2e3c-52a9-42f0-84ac-eb13baab0b07"
+      },
+      "type": null,
+      "title": {
+        "eng": "EcoRRAP Benthic Data 2021-2023"
+      },
+      "description": {
+        "eng": "This dataset contains benthic data from generated from imagery collected by divers conducting photogrammetric monitoring at EcoRRAP sites (see SOP #14: Reef monitoring sampling methods | AIMS). These images used are the underlying images of the EcoRRAP 3D models and are used here to assess benthic community composition within EcoRRAP plots. \n\n\nA subset of images were extracted for this dataset by using a python script that filtered for image position within 3D models, to enable the best spatial stratification, as well as for aspect to maximise extraction of images facing the benthos. A 1000-pixel bounding box was applied to the edges of the image to remove areas of distortion (original image size was 8256x5504 pixels). Images were extracted for 352 plots in 2021, and 336 plots in 2022, and 327 plots in 2023 due to field imaging constraints. \n\n\nTwelve images per plot with 50 points per image were analysed in ReefCloud. Images from a subset of plots were manually annotated in ReefCloud to train an automated image analysis model and the remaining plots were analysed using the automated model. Images were annotated using the EcoRRAP Community Composition Label Set. \n\n\nThe ReefCloud ML model was trained with a goal of achieving 80% accuracy for identification of benthos. Training proceeded as an iterative process with model diagnostics assessed after each round of training. Once performance targets were reached across course taxonomic classes, targeted annotation was undertaken to improve the model performance for specific classes."
+      },
+      "mdType": null,
+      "origin": "portal"
+    }
+  ],
+  "siblings": null,
+  "associated": null,
+  "services": null,
+  "datasets": null,
+  "fcats": null,
+  "hasfeaturecats": null,
+  "sources": null,
+  "hassources": null,
+  "related": null,
+  "onlines": [],
+  "thumbnails": []
+}

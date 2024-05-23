@@ -1,5 +1,7 @@
 package au.org.aodn.esindexer.service;
 
+import au.org.aodn.stac.model.LinkModel;
+import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.http.ResponseEntity;
 
 import java.io.IOException;
@@ -16,7 +18,8 @@ public interface GeoNetworkService {
     String searchRecordBy(String uuid);
     String findGroupById(String uuid) throws IOException;
 
-    Optional<Map<String, Object>> getRecordExtraInfo(String uuid);
+    Optional<LinkModel> getThumbnail(String uuid);
+    Optional<LinkModel> getLogo(String uuid);
     /**
      * Return Iterable of records, noted that the item inside can be null, so please check null on each item
      * @return

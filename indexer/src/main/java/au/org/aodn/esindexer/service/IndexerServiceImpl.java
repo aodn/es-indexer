@@ -238,7 +238,7 @@ public class IndexerServiceImpl implements IndexerService {
             if(metadataRecord != null) {
                 try {
                     // get mapped metadata values from GeoNetwork to STAC collection schema
-                    StacCollectionModel mappedMetadataValues = this.getMappedMetadataValues(metadataRecord);
+                    final StacCollectionModel mappedMetadataValues = this.getMappedMetadataValues(metadataRecord);
 
                     // convert mapped values to binary data
                     logger.debug("Ingested json is {}", indexerObjectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(mappedMetadataValues));
@@ -246,6 +246,7 @@ public class IndexerServiceImpl implements IndexerService {
                     // send bulk request to Elasticsearch
                     bulkRequest.operations(op -> op
                             .index(idx -> idx
+                                    .id(mappedMetadataValues.getUuid())
                                     .index(indexName)
                                     .document(mappedMetadataValues)
                             )
@@ -267,11 +268,27 @@ public class IndexerServiceImpl implements IndexerService {
         portalElasticsearchClient.indices().refresh();
 
         // Log errors, if any
-        if (result.errors()) {
-            logger.error("Bulk had errors");
+        if (!result.items().isEmpty()) {
+            logger.error("Bulk load have errors? {}", result.errors());
             for (BulkResponseItem item: result.items()) {
                 if (item.error() != null) {
-                    logger.error("{} {}", item.error().reason(), item.error().causedBy());
+                    try {
+                        logger.error("UUID {} {} {} {}",
+                                item.id(),
+                                item.error().reason(),
+                                item.error().causedBy(),
+                                indexerObjectMapper
+                                        .writerWithDefaultPrettyPrinter()
+                                        .writeValueAsString(
+                                                this.getMappedMetadataValues(
+                                                        geoNetworkResourceService.searchRecordBy(item.id())
+                                                )
+                                        )
+                        );
+                    }
+                    catch (FactoryException | TransformException | JAXBException e) {
+                        logger.warn("Parse error on display stac record");
+                    }
                 }
             }
         } else {

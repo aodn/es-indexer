@@ -9,6 +9,7 @@ import au.org.aodn.esindexer.utils.BBoxUtils;
 
 import au.org.aodn.esindexer.utils.TemporalUtils;
 import au.org.aodn.metadata.iso19115_3_2018.*;
+import com.fasterxml.jackson.databind.JsonNode;
 import jakarta.xml.bind.JAXBElement;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -38,7 +39,6 @@ import java.util.stream.Collectors;
 public abstract class StacCollectionMapperService {
 
     public static final String REAL_TIME = "real-time";
-    public static final String SUGGEST_LOGOS = "suggest_logos";
 
     @Mapping(target="uuid", source = "source", qualifiedByName = "mapUUID")
     @Mapping(target="title", source = "source", qualifiedByName = "mapTitle" )
@@ -68,9 +68,6 @@ public abstract class StacCollectionMapperService {
 
     @Autowired
     private GeoNetworkService geoNetworkService;
-
-    @Autowired
-    protected UrlUtils urlUtils;
 
     @Named("mapUUID")
     String mapUUID(MDMetadataType source) {
@@ -431,30 +428,13 @@ public abstract class StacCollectionMapperService {
         }
 
         // Now add links for logos
-        Optional<Map<String, Object>> optAdditionalInfo = geoNetworkService.getRecordExtraInfo(this.mapUUID(source));
-        if(optAdditionalInfo.isPresent()) {
-            // We iterate logos link and add it to STAC
-            Map<String, Object> additionalInfo = optAdditionalInfo.get();
-            if(additionalInfo.containsKey(SUGGEST_LOGOS)) {
-                if(additionalInfo.get(SUGGEST_LOGOS) instanceof List) {
-                    ((List<?>) additionalInfo.get(SUGGEST_LOGOS))
-                            .stream()
-                            .map(p -> (p instanceof String) ? (String) p : null)
-                            .filter(Objects::nonNull)
-                            .filter(i -> urlUtils.checkUrlExists(i))
-                            .findFirst()        // We only pick the first reachable one
-                            .ifPresent(i -> {
-                                LinkModel linkModel = LinkModel.builder().build();
-                                linkModel.setHref(i);
-                                // Geonetwork always return png logo
-                                linkModel.setType("image/png");
-                                linkModel.setRel("icon");
-                                linkModel.setTitle("Suggest icon for dataset");
-                                results.add(linkModel);
-                            });
-                }
-            }
-        }
+        geoNetworkService.getLogo(this.mapUUID(source))
+                .ifPresent(results::add);
+
+        // Thumbnail link
+        geoNetworkService.getThumbnail(this.mapUUID(source))
+                .ifPresent(results::add);
+
 
         return results;
     }

@@ -4,6 +4,8 @@ import au.org.aodn.esindexer.BaseTestClass;
 import au.org.aodn.esindexer.service.GeoNetworkServiceImpl;
 import au.org.aodn.esindexer.utils.UrlUtils;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.JsonNode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
@@ -86,6 +88,7 @@ public class GeoNetworkSearchTestConfig {
         GeoNetworkServiceImpl impl = new GeoNetworkServiceImpl(server, indexName, gn4ElasticsearchClient, template);
 
         final ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
 
         // Spy the object and only create fake return on geonetwork extension api we created, this
         // is because the image we use for testing is a generic geonetwork image without any customization
@@ -93,7 +96,7 @@ public class GeoNetworkSearchTestConfig {
             if (answer.getArgument(4) instanceof Map<?, ?>) {
                 Map<String, Object> param = answer.getArgument(4);
 
-                log.debug("Request mock info for record uuid {}", param.get(GeoNetworkServiceImpl.UUID));
+                log.debug("Request mock record info for record uuid {}", param.get(GeoNetworkServiceImpl.UUID));
                 if(param.containsKey(GeoNetworkServiceImpl.UUID)) {
                     try {
                         String json = BaseTestClass.readResourceFile(
@@ -104,23 +107,55 @@ public class GeoNetworkSearchTestConfig {
                         );
 
                         return ResponseEntity.ok(
-                                objectMapper.readValue(json, new TypeReference<Map<String, Object>>() {
-                                })
+                                objectMapper.readValue(json, new TypeReference<Map<String, Object>>() {})
                         );
                     }
                     catch(FileNotFoundException fileNotFoundException) {
-                        return ResponseEntity.notFound().build();
+                        return ResponseEntity.notFound().<Map<String, Object>>build();
                     }
                 }
             }
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.notFound().<Map<String, Object>>build();
         })
                 .when(template)
                 .exchange(
                         argThat(s -> s.contains("/geonetwork/srv/api/aodn/records/") && s.endsWith("/info")),
                         eq(HttpMethod.GET),
                         any(HttpEntity.class),
-                        any(ParameterizedTypeReference.class),
+                        isA(ParameterizedTypeReference.class),
+                        anyMap());
+
+        doAnswer((answer) -> {
+            if (answer.getArgument(4) instanceof Map<?, ?>) {
+                Map<String, Object> param = answer.getArgument(4);
+
+                log.debug("Request mock related info for record uuid {}", param.get(GeoNetworkServiceImpl.UUID));
+                if(param.containsKey(GeoNetworkServiceImpl.UUID)) {
+                    try {
+                        String json = BaseTestClass.readResourceFile(
+                                String.format(
+                                        "classpath:canned/related/%s.json",
+                                        param.get(GeoNetworkServiceImpl.UUID)
+                                )
+                        );
+
+                        return ResponseEntity.ok(
+                                objectMapper.readValue(json, Map.class)
+                        );
+                    }
+                    catch(FileNotFoundException fileNotFoundException) {
+                        return ResponseEntity.notFound().<Map<?,?>>build();
+                    }
+                }
+            }
+            return ResponseEntity.notFound().<Map<?,?>>build();
+        })
+                .when(template)
+                .exchange(
+                        argThat(a -> a.contains("/geonetwork/srv/api/records/") && a.endsWith("/related")),
+                        eq(HttpMethod.GET),
+                        any(HttpEntity.class),
+                        eq(Map.class),
                         anyMap());
 
         return impl;
