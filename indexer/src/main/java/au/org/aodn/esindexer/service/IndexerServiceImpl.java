@@ -223,7 +223,7 @@ public class IndexerServiceImpl implements IndexerService {
         }
     }
 
-    public ResponseEntity<String> indexAllMetadataRecordsFromGeoNetwork(boolean confirm) throws IOException {
+    public ResponseEntity<String> indexAllMetadataRecordsFromGeoNetwork(boolean confirm, Callback callback) throws IOException {
         if (!confirm) {
             throw new IndexAllRequestNotConfirmedException("Please confirm that you want to index all metadata records from GeoNetwork");
         }
@@ -251,7 +251,13 @@ public class IndexerServiceImpl implements IndexerService {
                     // and we have not add it to the bulkRequest
                     if(dataSize + size > 100000 && dataSize != 0) {
                         logger.info("Execute batch as bulk request is big enough {}", dataSize + size);
-                        results.add(executeBulk(bulkRequest));
+                        BulkResponse temp = executeBulk(bulkRequest);
+                        results.add(temp);
+
+                        if(callback != null) {
+                            callback.onProgress(temp);
+                        }
+
                         dataSize = 0;
                         bulkRequest = new BulkRequest.Builder();
                     }
@@ -275,7 +281,12 @@ public class IndexerServiceImpl implements IndexerService {
         }
 
         // In case there are residual
-        results.add(executeBulk(bulkRequest));
+        BulkResponse temp = executeBulk(bulkRequest);
+        results.add(temp);
+
+        if(callback != null) {
+            callback.onComplete(temp);
+        }
 
         // TODO now processing for record_suggestions index
         logger.info("Finished execute bulk indexing records to index: {}",indexName);
