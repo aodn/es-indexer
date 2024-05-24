@@ -10,8 +10,12 @@ import org.springframework.http.ResponseEntity;
 import java.io.IOException;
 
 public interface IndexerService {
+    interface Callback {
+        void onProgress(Object update);
+        void onComplete(Object result);
+    }
     ResponseEntity<String> indexMetadata(String metadataValues) throws IOException, FactoryException, TransformException, JAXBException;
     ResponseEntity<String> deleteDocumentByUUID(String uuid) throws IOException;
-    ResponseEntity<String> indexAllMetadataRecordsFromGeoNetwork(boolean confirm) throws IOException;
+    ResponseEntity<String> indexAllMetadataRecordsFromGeoNetwork(boolean confirm, Callback callback) throws IOException;
     Hit<ObjectNode> getDocumentByUUID(String uuid) throws IOException;
 }

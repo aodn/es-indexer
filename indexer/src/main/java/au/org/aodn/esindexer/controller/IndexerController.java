@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import java.io.IOException;
 
@@ -56,7 +57,47 @@ public class IndexerController {
     @PostMapping(path="/all", consumes = "application/json", produces = "application/json")
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Index all metadata records from GeoNetwork")
     public ResponseEntity<String> indexAllMetadataRecords(@RequestParam(value = "confirm", defaultValue = "false") Boolean confirm) throws IOException {
-        return indexerService.indexAllMetadataRecordsFromGeoNetwork(confirm);
+        return indexerService.indexAllMetadataRecordsFromGeoNetwork(confirm, null);
+    }
+
+    @PostMapping(path="/async/all", consumes = "application/json", produces = "application/json")
+    @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Index all metadata records from GeoNetwork")
+    public SseEmitter indexAllMetadataRecordsAsync(@RequestParam(value = "confirm", defaultValue = "false") Boolean confirm) {
+        final SseEmitter emitter = new SseEmitter(0L); // 0L means no timeout;
+
+        IndexerService.Callback callback = new IndexerService.Callback() {
+            @Override
+            public void onProgress(Object update) {
+                try {
+                    emitter.send(update.toString());
+                }
+                catch (IOException e) {
+                    emitter.completeWithError(e);
+                }
+            }
+
+            @Override
+            public void onComplete(Object result) {
+                try {
+                    emitter.send(result.toString());
+                    emitter.complete();
+                }
+                catch (IOException e) {
+                    emitter.completeWithError(e);
+                }
+            }
+        };
+
+        new Thread(() -> {
+            try {
+                indexerService.indexAllMetadataRecordsFromGeoNetwork(confirm, callback);
+            }
+            catch(IOException e) {
+                emitter.completeWithError(e);
+            }
+        }).start();
+
+        return emitter;
     }
 
     @PostMapping(path="/{uuid}", produces = "application/json")
