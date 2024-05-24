@@ -334,19 +334,22 @@ public abstract class StacCollectionMapperService {
     protected String mapThemesTitle(MDKeywordsPropertyType descriptiveKeyword, String uuid) {
         AbstractCitationPropertyType abstractCitationPropertyType = descriptiveKeyword.getMDKeywords().getThesaurusName();
         if (abstractCitationPropertyType != null) {
-            CICitationType2 thesaurusNameType2 = (CICitationType2) abstractCitationPropertyType.getAbstractCitation().getValue();
-            CharacterStringPropertyType titleString = thesaurusNameType2.getTitle();
-            if (titleString != null && titleString.getCharacterString().getValue() instanceof  AnchorType value) {
-                if (value.getValue() != null) {
-                    return value.getValue();
-                } else {
-                    return "";
+            if(abstractCitationPropertyType.getAbstractCitation() != null
+                    && abstractCitationPropertyType.getAbstractCitation().getValue() instanceof CICitationType2 thesaurusNameType2) {
+
+                CharacterStringPropertyType titleString = thesaurusNameType2.getTitle();
+                if (titleString != null
+                        && titleString.getCharacterString() != null
+                        && titleString.getCharacterString().getValue() instanceof AnchorType value) {
+                    return (value.getValue() != null ? value.getValue() : "");
+                } else if (titleString != null
+                        && titleString.getCharacterString() != null
+                        && titleString.getCharacterString().getValue() instanceof String value) {
+                    return value;
                 }
-            } else if (titleString != null && titleString.getCharacterString().getValue() instanceof String value) {
-                return value;
             }
         }
-        logger.debug("Unable to find themes' title for metadata record: " + uuid);
+        logger.debug("Unable to find themes' title for metadata record: {}", uuid);
         return "";
     }
 
@@ -361,7 +364,8 @@ public abstract class StacCollectionMapperService {
                 } else {
                     return "";
                 }
-            } else if (titleString != null && titleString.getCharacterString().getValue() instanceof String value) {
+            }
+            else if (titleString != null && titleString.getCharacterString().getValue() instanceof String value) {
                 return thesaurusNameType2.getAlternateTitle().stream().map(CharacterStringPropertyType::getCharacterString).map(JAXBElement::getValue).map(Object::toString).collect(Collectors.joining(", "));
             }
         }

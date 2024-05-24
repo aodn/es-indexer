@@ -8,6 +8,8 @@ elasticsearch:
     elasticVersion: "8.11.1"
   index:
     name: sample-portal-records
+  query:
+    pageSize: 5
 
 logging:
   level:
