@@ -1,6 +1,6 @@
-package au.org.aodn.ardcvocabs.service;
+package au.org.aodn.researchvocabs.service;
 
-import au.org.aodn.ardcvocabs.model.CategoryVocabModel;
+import au.org.aodn.researchvocabs.model.CategoryVocabModel;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.junit.jupiter.api.Test;

@@ -1,6 +1,6 @@
-package au.org.aodn.ardcvocabs.configuration;
+package au.org.aodn.researchvocabs.configuration;
 
-import au.org.aodn.ardcvocabs.service.ArdcVocabsService;
+import au.org.aodn.researchvocabs.service.ArdcVocabsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;

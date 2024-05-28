@@ -1,4 +1,4 @@
-package au.org.aodn.ardcvocabs.model;
+package au.org.aodn.researchvocabs.model;
 
 import lombok.*;
 

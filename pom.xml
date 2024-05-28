@@ -21,7 +21,7 @@
         <module>geonetwork</module>
         <module>stacmodel</module>
         <module>indexer</module>
-        <module>ardcvocabs</module>
+        <module>researchvocabs</module>
     </modules>
 
     <repositories>

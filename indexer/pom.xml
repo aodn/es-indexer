@@ -208,7 +208,7 @@
         </dependency>
         <dependency>
             <groupId>au.org.aodn</groupId>
-            <artifactId>ardcvocabs</artifactId>
+            <artifactId>researchvocabs</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>
