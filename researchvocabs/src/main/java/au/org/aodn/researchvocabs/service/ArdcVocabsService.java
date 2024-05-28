@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.TextNode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
@@ -13,11 +14,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.BiFunction;
 import java.util.function.Function;
+import static au.org.aodn.researchvocabs.utils.ResearchVocabsUtils.isNodeValid;
 
 
 @Slf4j
+@Service
 public class ArdcVocabsService {
     @Autowired
     protected RestTemplate ardcVocabRestTemplate;
@@ -30,8 +32,6 @@ public class ArdcVocabsService {
     protected Function<JsonNode, String> label = (node) -> node.get("prefLabel").get("_value").asText();
     protected Function<JsonNode, String> about = (node) -> node.has("_about") ? node.get("_about").asText() : null;
     protected Function<JsonNode, String> definition = (node) -> node.has("definition") ? node.get("definition").asText() : null;
-
-    protected BiFunction<JsonNode, String, Boolean> isNodeValid = (node, item) -> node != null && !node.isEmpty() && node.has(item) && !node.get(item).isEmpty();
 
     /**
      * We want to get the list of leaf node for the API, from there we need to query individual resources to get the broadMatch value
