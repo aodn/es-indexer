@@ -24,30 +24,30 @@
     } ]
   },
   "contacts" : [ {
-    "emails" : [ "info@aodn.org.au" ],
-    "addresses" : [ {
-      "deliveryPoint" : [ "University of Tasmania", "Private Bag 110" ],
-      "country" : "Australia",
-      "city" : "Hobart",
-      "postalCode" : "7001",
-      "administrativeArea" : "Tasmania"
-    } ],
     "roles" : "pointOfContact",
     "organization" : "Integrated Marine Observing System (IMOS)",
     "name" : "",
+    "position" : "Data Officer",
+    "emails" : [ "info@aodn.org.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "University of Tasmania", "Private Bag 110" ],
+      "city" : "Hobart",
+      "country" : "Australia",
+      "postalCode" : "7001",
+      "administrativeArea" : "Tasmania"
+    } ],
     "phones" : [ {
-      "roles" : "voice",
+      "roles" : [ "voice" ],
       "value" : "61 3 6226 7488"
     }, {
-      "roles" : "facsimile",
+      "roles" : [ "facsimile" ],
       "value" : "61 3 6226 2107"
     } ],
     "links" : [ {
       "href" : "http://imos.org.au/aodn.html",
-      "title" : "Website of the Australian Ocean Data Network (AODN)",
-      "type" : "WWW:LINK-1.0-http--link"
-    } ],
-    "position" : "Data Officer"
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : "Website of the Australian Ocean Data Network (AODN)"
+    } ]
   } ],
   "languages" : [ {
     "code" : "eng",

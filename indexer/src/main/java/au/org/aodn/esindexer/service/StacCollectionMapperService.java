@@ -3,13 +3,12 @@ package au.org.aodn.esindexer.service;
 import au.org.aodn.esindexer.exception.MappingValueException;
 import au.org.aodn.esindexer.utils.GeometryUtils;
 import au.org.aodn.esindexer.configuration.AppConstants;
-import au.org.aodn.esindexer.utils.UrlUtils;
+import au.org.aodn.esindexer.utils.MapperUtils;
 import au.org.aodn.stac.model.*;
 import au.org.aodn.esindexer.utils.BBoxUtils;
 
 import au.org.aodn.esindexer.utils.TemporalUtils;
 import au.org.aodn.metadata.iso19115_3_2018.*;
-import com.fasterxml.jackson.databind.JsonNode;
 import jakarta.xml.bind.JAXBElement;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -27,7 +26,6 @@ import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -90,7 +88,7 @@ public abstract class StacCollectionMapperService {
 
     List<String[]> createExtentTemporal(MDMetadataType source) {
 
-        List<MDDataIdentificationType> items = findMDDataIdentificationType(source);
+        List<MDDataIdentificationType> items = MapperUtils.findMDDataIdentificationType(source);
         if (items.isEmpty()) {
             logger.warn("Unable to find extent temporal information for metadata record: " + this.mapUUID(source));
             return null;
@@ -181,7 +179,7 @@ public abstract class StacCollectionMapperService {
      */
     @Named("mapDescription")
     String mapDescription(MDMetadataType source) {
-        List<MDDataIdentificationType> items = findMDDataIdentificationType(source);
+        List<MDDataIdentificationType> items = MapperUtils.findMDDataIdentificationType(source);
 
         if(!items.isEmpty()) {
             // Need to assert only 1 block contains our target
@@ -221,7 +219,7 @@ public abstract class StacCollectionMapperService {
 
     @Named("mapSummaries.status")
     String createSummariesStatus(MDMetadataType source) {
-        List<MDDataIdentificationType> items = findMDDataIdentificationType(source);
+        List<MDDataIdentificationType> items = MapperUtils.findMDDataIdentificationType(source);
         if (!items.isEmpty()) {
             List<String> temp = new ArrayList<>();
             for (MDDataIdentificationType i : items) {
@@ -239,7 +237,7 @@ public abstract class StacCollectionMapperService {
 
     @Named("mapSummaries.scope")
     Map<String, String> createSummariesScope(MDMetadataType source) {
-        List<MDMetadataScopeType> items = findMDMetadataScopePropertyType(source);
+        List<MDMetadataScopeType> items = MapperUtils.findMDMetadataScopePropertyType(source);
         if (!items.isEmpty()) {
             for (MDMetadataScopeType i : items) {
 
@@ -263,7 +261,7 @@ public abstract class StacCollectionMapperService {
      */
     @Named("mapTitle")
     String mapTitle(MDMetadataType source) {
-        List<MDDataIdentificationType> items = findMDDataIdentificationType(source);
+        List<MDDataIdentificationType> items = MapperUtils.findMDDataIdentificationType(source);
         if(!items.isEmpty()) {
             // Need to assert only 1 block contains our target
             for(MDDataIdentificationType i : items) {
@@ -389,7 +387,7 @@ public abstract class StacCollectionMapperService {
     @Named("mapThemes")
     List<ThemesModel> mapThemes(MDMetadataType source) {
         List<ThemesModel> results = new ArrayList<>();
-        List<MDDataIdentificationType> items = findMDDataIdentificationType(source);
+        List<MDDataIdentificationType> items = MapperUtils.findMDDataIdentificationType(source);
         if (!items.isEmpty()) {
             for (MDDataIdentificationType i : items) {
                 i.getDescriptiveKeywords().forEach(descriptiveKeyword -> {
@@ -411,7 +409,7 @@ public abstract class StacCollectionMapperService {
     List<LinkModel> mapLinks(MDMetadataType source) {
         final List<LinkModel> results = new ArrayList<>();
 
-        List<MDDistributionType> items = findMDDistributionType(source);
+        List<MDDistributionType> items = MapperUtils.findMDDistributionType(source);
         if (!items.isEmpty()) {
             for (MDDistributionType i : items) {
                 i.getTransferOptions().forEach(transferOption -> transferOption.getMDDigitalTransferOptions().getOnLine().forEach(link -> {
@@ -482,7 +480,7 @@ public abstract class StacCollectionMapperService {
 
     @Named("mapLicense")
     String mapLicense(MDMetadataType source) {
-        List<MDDataIdentificationType> items = findMDDataIdentificationType(source);
+        List<MDDataIdentificationType> items = MapperUtils.findMDDataIdentificationType(source);
         List<String> potentialKeys = Arrays.asList("license", "creative commons");
         List<String> licenses = new ArrayList<>();
         if (!items.isEmpty()) {
@@ -519,81 +517,112 @@ public abstract class StacCollectionMapperService {
             return "";
         }
     }
-
+    /**
+     * A sample of contact block will be like this, you can have individual block and organization block together
+     *
+     * @param source
+     * @return
+     */
     @Named("mapContacts")
     List<ContactsModel> mapContacts(MDMetadataType source) {
         List<ContactsModel> results = new ArrayList<>();
-        List<MDDataIdentificationType> items = findMDDataIdentificationType(source);
+        List<MDDataIdentificationType> items = MapperUtils.findMDDataIdentificationType(source);
         if (!items.isEmpty()) {
             for (MDDataIdentificationType item : items) {
                 item.getPointOfContact().forEach(poc -> {
                     if (poc.getAbstractResponsibility() != null) {
 
                         AbstractResponsibilityType responsibilityType = poc.getAbstractResponsibility().getValue();
-                        if (responsibilityType instanceof CIResponsibilityType2 ciResponsibility) {
-                            ContactsModel contactsModel = ContactsModel.builder().build();
-                            contactsModel.setRoles(mapContactsRole(ciResponsibility));
+                        if (responsibilityType instanceof final CIResponsibilityType2 ciResponsibility) {
 
                             if (ciResponsibility.getParty().isEmpty()) {
                                 logger.warn("Unable to find contact info for metadata record: " + this.mapUUID(source));
                             }
                             else {
                                 ciResponsibility.getParty().forEach(party -> {
-                                    contactsModel.setOrganization(mapContactsOrganization(party));
-                                    try {
 
-                                        AtomicReference<String> name = new AtomicReference<>("");
-                                        AtomicReference<String> position = new AtomicReference<>("");
-                                        List<Map<String, Object>> addresses = new ArrayList<>();
-                                        List<String> emailAddresses = new ArrayList<>();
-                                        List<Map<String, String>> phones = new ArrayList<>();
-                                        List<Map<String, String>> onlineResources = new ArrayList<>();
+                                    if(party.getAbstractCIParty() != null
+                                            && party.getAbstractCIParty().getValue() != null
+                                            && party.getAbstractCIParty().getValue() instanceof CIOrganisationType2 organisation) {
 
+                                        // Extract organizational level contact
+                                        Optional<MapperUtils.Contacts> org = MapperUtils.mapContactInfo(organisation.getContactInfo());
 
-                                        CIOrganisationType2 organisation = (CIOrganisationType2) party.getAbstractCIParty().getValue();
-                                        AtomicReference<List<CIContactPropertyType2>> contactInfoList = new AtomicReference<>();
+                                        // We have individual contact?
+                                        if(organisation.getIndividual() != null && !organisation.getIndividual().isEmpty()) {
+                                            results.addAll(organisation
+                                                    .getIndividual()
+                                                    .stream()
+                                                    .map(individual -> {
+                                                        ContactsModel invContactsModel = ContactsModel.builder().build();
+                                                        invContactsModel.setName(MapperUtils.mapContactsName(individual));
+                                                        invContactsModel.setPosition(MapperUtils.mapContactsPosition(individual));
+                                                        invContactsModel.setRoles(MapperUtils.mapContactsRole(ciResponsibility));
+                                                        invContactsModel.setOrganization(organisation.getName().getCharacterString().getValue().toString());
 
-                                        if (organisation.getIndividual().isEmpty()) {
-                                            contactInfoList.set(organisation.getContactInfo());
+                                                        Optional<MapperUtils.Contacts> inv = MapperUtils.mapContactInfo(individual.getCIIndividual().getContactInfo());
+                                                        MapperUtils.Contacts i = org.orElse(null);
+
+                                                        // Address
+                                                        if(inv.isPresent() && !inv.get().getAddresses().isEmpty()) {
+                                                            invContactsModel.setAddresses(inv.get().getAddresses());
+                                                        }
+                                                        else {
+                                                            invContactsModel.setAddresses(i != null ? i.getAddresses() : null);
+                                                        }
+                                                        // Email
+                                                        if(inv.isPresent() && !inv.get().getEmails().isEmpty()) {
+                                                            invContactsModel.setEmails(inv.get().getEmails());
+                                                        }
+                                                        else {
+                                                            invContactsModel.setEmails(i != null ? i.getEmails() : null);
+                                                        }
+                                                        // Phone
+                                                        if(inv.isPresent() && !inv.get().getPhones().isEmpty()) {
+                                                            invContactsModel.setPhones(inv.get().getPhones());
+                                                        }
+                                                        else {
+                                                            invContactsModel.setPhones(i != null ? i.getPhones() : null);
+                                                        }
+                                                        // Online Resources
+                                                        // Phone
+                                                        if(inv.isPresent() && !inv.get().getOnlineResources().isEmpty()) {
+                                                            invContactsModel.setLinks(inv.get().getOnlineResources());
+                                                        }
+                                                        else {
+                                                            invContactsModel.setLinks(i != null ? i.getOnlineResources() : null);
+                                                        }
+
+                                                        return invContactsModel;
+                                                    })
+                                                    .toList());
                                         }
                                         else {
-                                            organisation.getIndividual().forEach(individual -> {
-                                                name.set(mapContactsName(individual));
-                                                position.set(mapContactsPosition(individual));
-                                                contactInfoList.set(individual.getCIIndividual().getContactInfo());
-                                            });
+                                            ContactsModel orgContactsModel = ContactsModel.builder().build();
+                                            orgContactsModel.setRoles(MapperUtils.mapContactsRole(ciResponsibility));
+                                            orgContactsModel.setOrganization(MapperUtils.mapContactsOrganization(party));
+                                            orgContactsModel.setOrganization(organisation.getName().getCharacterString().getValue().toString());
+
+                                            if(org.isPresent() && !org.get().getAddresses().isEmpty()) {
+                                                orgContactsModel.setAddresses(org.get().getAddresses());
+                                            }
+
+                                            if(org.isPresent() && !org.get().getEmails().isEmpty()) {
+                                                orgContactsModel.setEmails(org.get().getEmails());
+                                            }
+
+                                            if(org.isPresent() && !org.get().getPhones().isEmpty()) {
+                                                orgContactsModel.setPhones(org.get().getPhones());
+                                            }
+
+                                            if(org.isPresent() && !org.get().getOnlineResources().isEmpty()) {
+                                                orgContactsModel.setLinks(org.get().getOnlineResources());
+                                            }
+
+                                            results.add(orgContactsModel);
                                         }
-
-                                        contactInfoList.get().forEach(contactInfo -> contactInfo.getCIContact().getAddress().forEach(address -> {
-                                            // addresses
-                                            addresses.add(mapContactsAddress(address));
-                                            // emails
-                                            address.getCIAddress().getElectronicMailAddress().forEach(electronicMailAddress -> {
-                                                emailAddresses.add(mapContactsEmail(electronicMailAddress));
-                                            });
-                                            // phones
-                                            contactInfo.getCIContact().getPhone().forEach(phone -> {
-                                                phones.add(mapContactsPhone(phone));
-                                            });
-                                            // online resources
-                                            contactInfo.getCIContact().getOnlineResource().forEach(onlineResource -> {
-                                                onlineResources.add(mapContactsOnlineResource(onlineResource));
-                                            });
-                                        }));
-
-                                        contactsModel.setName(name.get());
-                                        contactsModel.setPosition(position.get());
-                                        contactsModel.setAddresses(addresses);
-                                        contactsModel.setEmails(emailAddresses);
-                                        contactsModel.setPhones(phones);
-                                        contactsModel.setLinks(onlineResources);
-
-                                    }
-                                    catch (Exception e) {
-                                        logger.warn("Unable to find contact info for metadata record: {}", mapUUID(source));
                                     }
                                 });
-                                results.add(contactsModel);
                             }
                         }
                     }
@@ -606,101 +635,16 @@ public abstract class StacCollectionMapperService {
         return results;
     }
 
-    protected String mapContactsRole(CIResponsibilityType2 ciResponsibility) {
-        CodeListValueType roleCode = ciResponsibility.getRole().getCIRoleCode();
-        return roleCode != null ?
-                roleCode.getCodeListValue() : "";
-    }
-
-    protected String mapContactsOrganization(AbstractCIPartyPropertyType2 party) {
-        String organisationString = "";
-        if (party.getAbstractCIParty() != null) {
-            if (party.getAbstractCIParty().getValue().getName().getCharacterString() != null) {
-                organisationString = party.getAbstractCIParty().getValue().getName().getCharacterString().getValue().toString();
-            }
-        }
-        return organisationString;
-    }
-
-    protected String mapContactsName(CIIndividualPropertyType2 individual) {
-        CharacterStringPropertyType nameString = individual.getCIIndividual().getName();
-        return nameString != null ?
-                individual.getCIIndividual().getName().getCharacterString().getValue().toString() : "";
-    }
-
-    protected String mapContactsPosition(CIIndividualPropertyType2 individual) {
-        CharacterStringPropertyType positionString = individual.getCIIndividual().getPositionName();
-        return positionString != null ?
-                individual.getCIIndividual().getPositionName().getCharacterString().getValue().toString() : "";
-    }
-
-    protected Map<String, Object> mapContactsAddress(CIAddressPropertyType2 address) {
-        Map<String, Object> addressItem = new HashMap<>();
-        List<String> deliveryPoints = new ArrayList<>();
-
-        address.getCIAddress().getDeliveryPoint().forEach(deliveryPoint -> {
-            String deliveryPointString = deliveryPoint.getCharacterString().getValue().toString();
-            deliveryPoints.add(deliveryPointString != null ? deliveryPointString : "");
-        });
-        addressItem.put("deliveryPoint", deliveryPoints);
-
-        CharacterStringPropertyType cityString = address.getCIAddress().getCity();
-        addressItem.put("city", cityString != null ? cityString.getCharacterString().getValue().toString() : "");
-
-        CharacterStringPropertyType administrativeAreaString = address.getCIAddress().getAdministrativeArea();
-        addressItem.put("administrativeArea", administrativeAreaString != null ? administrativeAreaString.getCharacterString().getValue().toString() : "");
-
-        CharacterStringPropertyType postalCodeString = address.getCIAddress().getPostalCode();
-        addressItem.put("postalCode", postalCodeString != null ? postalCodeString.getCharacterString().getValue().toString() : "");
-
-        CharacterStringPropertyType countryString = address.getCIAddress().getCountry();
-        addressItem.put("country", countryString != null ? countryString.getCharacterString().getValue().toString() : "");
-
-        return addressItem;
-    }
-
-    protected String mapContactsEmail(CharacterStringPropertyType electronicMailAddress) {
-        return electronicMailAddress != null ?
-            electronicMailAddress.getCharacterString().getValue().toString() : "";
-    }
-
-    protected Map<String, String> mapContactsPhone(CITelephonePropertyType2 phone) {
-        Map<String, String> phoneItem = new HashMap<>();
-
-        CharacterStringPropertyType phoneString = phone.getCITelephone().getNumber();
-        phoneItem.put("value", phoneString != null ? phoneString.getCharacterString().getValue().toString() : "");
-
-        CodeListValueType phoneCode = phone.getCITelephone().getNumberType().getCITelephoneTypeCode();
-        phoneItem.put("roles", phoneCode != null ? phoneCode.getCodeListValue() : "");
-
-        return phoneItem;
-    }
-
-    protected Map<String, String> mapContactsOnlineResource(CIOnlineResourcePropertyType2 onlineResource) {
-        Map<String, String> onlineResourceItem = new HashMap<>();
-
-        CharacterStringPropertyType linkString = onlineResource.getCIOnlineResource().getLinkage();
-        onlineResourceItem.put("href", linkString != null ? linkString.getCharacterString().getValue().toString() : "");
-
-        CharacterStringPropertyType resourceNameString = onlineResource.getCIOnlineResource().getName();
-        onlineResourceItem.put("title", resourceNameString != null ? resourceNameString.getCharacterString().getValue().toString() : "");
-
-        CharacterStringPropertyType linkTypeString = onlineResource.getCIOnlineResource().getProtocol();
-        onlineResourceItem.put("type", linkTypeString != null ? linkTypeString.getCharacterString().getValue().toString() : "");
-
-        return onlineResourceItem;
-    }
-
     @Named("mapLanguages")
     protected List<LanguageModel> mapLanguages(MDMetadataType source) {
         List<LanguageModel> results = new ArrayList<>();
-        List<MDDataIdentificationType> items = findMDDataIdentificationType(source);
+        List<MDDataIdentificationType> items = MapperUtils.findMDDataIdentificationType(source);
         if (!items.isEmpty()) {
             for (MDDataIdentificationType i : items) {
 
                 LanguageModel languageModel = LanguageModel.builder().build();
 
-                String langCode = mapLanguagesCode(i) != null ? mapLanguagesCode(i) : "";
+                String langCode = MapperUtils.mapLanguagesCode(i) != null ? MapperUtils.mapLanguagesCode(i) : "";
                 languageModel.setCode(langCode);
 
                 // all metadata records are in English anyway
@@ -720,22 +664,12 @@ public abstract class StacCollectionMapperService {
         return results;
     }
 
-    protected String mapLanguagesCode(MDDataIdentificationType i) {
-        try {
-            return i.getDefaultLocale().getPTLocale().getValue().getLanguage().getLanguageCode().getCodeListValue();
-        }
-        catch (NullPointerException e) {
-            return null;
-        }
-    }
-
-
     protected <R> R createGeometryItems(
             MDMetadataType source,
             Function<List<Object>, R> exBoundingPolygonTypeHandler,
             Function<List<Object>, R> exGeographicBoundingBoxTypeHandler) {
 
-        List<MDDataIdentificationType> items = findMDDataIdentificationType(source);
+        List<MDDataIdentificationType> items = MapperUtils.findMDDataIdentificationType(source);
         if(!items.isEmpty()) {
             // Need to assert only 1 block contains our target
             for(MDDataIdentificationType i : items) {
@@ -783,34 +717,5 @@ public abstract class StacCollectionMapperService {
             }
         }
         return null;
-    }
-
-    protected List<MDDataIdentificationType> findMDDataIdentificationType(MDMetadataType source) {
-        // Read the raw XML to understand the structure.
-        return source.getIdentificationInfo()
-                .stream()
-                .filter(f -> f.getAbstractResourceDescription() != null)
-                .filter(f -> f.getAbstractResourceDescription().getValue() != null)
-                .filter(f -> f.getAbstractResourceDescription().getValue() instanceof MDDataIdentificationType)
-                .map(f -> (MDDataIdentificationType)f.getAbstractResourceDescription().getValue())
-                .collect(Collectors.toList());
-    }
-
-    protected List<MDMetadataScopeType> findMDMetadataScopePropertyType(MDMetadataType source) {
-        return source.getMetadataScope()
-                .stream()
-                .map(MDMetadataScopePropertyType::getMDMetadataScope)
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList());
-    }
-
-    protected List<MDDistributionType> findMDDistributionType(MDMetadataType source) {
-        return source.getDistributionInfo()
-                .stream()
-                .filter(f -> f.getAbstractDistribution() != null)
-                .filter(f -> f.getAbstractDistribution().getValue() != null)
-                .filter(f -> f.getAbstractDistribution().getValue() instanceof MDDistributionType)
-                .map(f -> (MDDistributionType)f.getAbstractDistribution().getValue())
-                .collect(Collectors.toList());
     }
 }
