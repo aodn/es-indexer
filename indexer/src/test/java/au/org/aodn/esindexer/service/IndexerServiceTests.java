@@ -2,6 +2,7 @@ package au.org.aodn.esindexer.service;
 
 import au.org.aodn.esindexer.BaseTestClass;
 import au.org.aodn.esindexer.configuration.GeoNetworkSearchTestConfig;
+import au.org.aodn.stac.model.StacCollectionModel;
 import co.elastic.clients.elasticsearch.core.search.Hit;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -9,6 +10,7 @@ import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.testcontainers.shaded.org.checkerframework.checker.units.qual.A;
 
@@ -140,7 +142,6 @@ public class IndexerServiceTests extends BaseTestClass {
             Hit<ObjectNode> objectNodeHit = indexerService.getDocumentByUUID(uuid);
 
             String test = objectNodeHit.source().toPrettyString();
-
             assertEquals("Stac equals " + uuid, indexerObjectMapper.readTree(expected), indexerObjectMapper.readTree(test));
         }
         finally {
@@ -148,7 +149,10 @@ public class IndexerServiceTests extends BaseTestClass {
         }
     }
     /**
-     * Some dataset can provide links to logos, this test is use to verify the logo links added correctly to the
+     * Some dataset can provide links to logos, this test is use to verify the logo links added correctly to the STAC,
+     * this function is better test with docker image as it need to invoke some additional function where we need to
+     * verify it works too.
+     *
      * @throws IOException - If file not found
      */
     @Test
@@ -185,6 +189,7 @@ public class IndexerServiceTests extends BaseTestClass {
             Hit<ObjectNode> objectNodeHit = indexerService.getDocumentByUUID(uuid);
 
             String test = objectNodeHit.source().toPrettyString();
+            logger.info(test);
             assertEquals("Stac equals " + uuid, indexerObjectMapper.readTree(expected), indexerObjectMapper.readTree(test));
         }
         finally {

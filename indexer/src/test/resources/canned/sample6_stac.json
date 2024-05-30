@@ -24,20 +24,35 @@
     "discovery_categories" : [ "ocean biota", "bathymetry", "density", "water pressure", "current", "temperature", "salinity" ]
   },
   "contacts" : [ {
-    "emails" : [ "data-requests-hf@csiro.au" ],
-    "addresses" : [ {
-      "deliveryPoint" : [ ],
-      "country" : "",
-      "city" : "",
-      "postalCode" : "",
-      "administrativeArea" : ""
-    } ],
     "roles" : "custodian",
     "organization" : "CSIRO Oceans & Atmosphere - Hobart",
     "name" : "data-requests-hf@csiro.au,",
-    "phones" : [ ],
-    "links" : [ ],
-    "position" : "Data Requests - Information & Data Centre"
+    "position" : "Data Requests - Information & Data Centre",
+    "emails" : [ ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "GPO Box 1538" ],
+      "city" : "Hobart",
+      "country" : "Australia",
+      "postalCode" : "7001",
+      "administrativeArea" : "TAS"
+    }, {
+      "deliveryPoint" : [ "Castray Esplanade" ],
+      "city" : "Hobart",
+      "country" : "Australia",
+      "postalCode" : "7000",
+      "administrativeArea" : "TAS"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "+61 3 6232 5222"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : "+61 3 6232 5000"
+    } ],
+    "links" : [ {
+      "href" : "http://www.csiro.au/en/Research/OandA",
+      "type" : "WWW:LINK-1.0-http--link"
+    } ]
   } ],
   "languages" : [ {
     "code" : "eng",

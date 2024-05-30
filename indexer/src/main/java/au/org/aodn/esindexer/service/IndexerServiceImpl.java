@@ -34,34 +34,40 @@ import java.util.*;
 @Service
 public class IndexerServiceImpl implements IndexerService {
 
-    @Autowired
-    GeoNetworkService geoNetworkResourceService;
-
-    @Autowired
-    ElasticsearchClient portalElasticsearchClient;
-
-    @Autowired
-    ElasticSearchIndexService elasticSearchIndexService;
-
-    @Value("${elasticsearch.index.name}")
-    private String indexName;
-
-    @Autowired
-    ObjectMapper indexerObjectMapper;
-
-    @Autowired
+    protected String indexName;
+    protected GeoNetworkService geoNetworkResourceService;
+    protected ElasticsearchClient portalElasticsearchClient;
+    protected ElasticSearchIndexService elasticSearchIndexService;
+    protected ObjectMapper indexerObjectMapper;
     protected StacCollectionMapperService stacCollectionMapperService;
-
-    @Autowired
-    JaxbUtils<MDMetadataType> jaxbUtils;
-
-    @Autowired
-    RankingService rankingService;
-
-    @Autowired
-    AodnDiscoveryParameterVocabService aodnDiscoveryParameterVocabService;
+    protected JaxbUtils<MDMetadataType> jaxbUtils;
+    protected RankingService rankingService;
+    protected AodnDiscoveryParameterVocabService aodnDiscoveryParameterVocabService;
 
     private static final Logger logger = LogManager.getLogger(IndexerServiceImpl.class);
+
+    @Autowired
+    public IndexerServiceImpl(
+            @Value("${elasticsearch.index.name}") String indexName,
+            ObjectMapper indexerObjectMapper,
+            JaxbUtils<MDMetadataType> jaxbUtils,
+            RankingService rankingService,
+            GeoNetworkService geoNetworkResourceService,
+            ElasticsearchClient portalElasticsearchClient,
+            ElasticSearchIndexService elasticSearchIndexService,
+            StacCollectionMapperService stacCollectionMapperService,
+            AodnDiscoveryParameterVocabService aodnDiscoveryParameterVocabService
+    ) {
+        this.indexName = indexName;
+        this.indexerObjectMapper = indexerObjectMapper;
+        this.jaxbUtils = jaxbUtils;
+        this.rankingService = rankingService;
+        this.geoNetworkResourceService = geoNetworkResourceService;
+        this.portalElasticsearchClient = portalElasticsearchClient;
+        this.elasticSearchIndexService = elasticSearchIndexService;
+        this.stacCollectionMapperService = stacCollectionMapperService;
+        this.aodnDiscoveryParameterVocabService = aodnDiscoveryParameterVocabService;
+    }
 
     public Hit<ObjectNode> getDocumentByUUID(String uuid) throws IOException {
         try {
@@ -175,7 +181,7 @@ public class IndexerServiceImpl implements IndexerService {
             if (this.isMetadataPublished(uuid)) {
                 try(InputStream is = new ByteArrayInputStream(indexerObjectMapper.writeValueAsBytes(mappedMetadataValues))) {
                     logger.info("Ingesting a new metadata with UUID: " + uuid + " to index: " + indexName);
-                    logger.info("{}", mappedMetadataValues);
+                    logger.debug("{}", mappedMetadataValues);
                     req = IndexRequest.of(b -> b
                             .index(indexName)
                             .withJson(is));
