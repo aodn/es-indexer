@@ -666,8 +666,8 @@ public abstract class StacCollectionMapperService {
 
     protected <R> R createGeometryItems(
             MDMetadataType source,
-            Function<List<Object>, R> exBoundingPolygonTypeHandler,
-            Function<List<Object>, R> exGeographicBoundingBoxTypeHandler) {
+            Function<List<AbstractEXGeographicExtentType>, R> exBoundingPolygonTypeHandler,
+            Function<List<AbstractEXGeographicExtentType>, R> exGeographicBoundingBoxTypeHandler) {
 
         List<MDDataIdentificationType> items = MapperUtils.findMDDataIdentificationType(source);
         if(!items.isEmpty()) {
@@ -686,7 +686,7 @@ public abstract class StacCollectionMapperService {
                 for(EXExtentType e : ext) {
                     try {
                         // TODO: pay attention here
-                        List<Object> rawInput = e.getGeographicElement()
+                        List<AbstractEXGeographicExtentType> rawInput = e.getGeographicElement()
                                 .stream()
                                 .map(AbstractEXGeographicExtentPropertyType::getAbstractEXGeographicExtent)
                                 .filter(m -> m != null && (m.getValue() instanceof EXBoundingPolygonType || m.getValue() instanceof EXGeographicBoundingBoxType))
@@ -696,7 +696,7 @@ public abstract class StacCollectionMapperService {
                                             return exBoundingPolygonType;
                                         }
                                     } else if (m.getValue() instanceof EXGeographicBoundingBoxType) {
-                                        return (EXGeographicBoundingBoxType) m.getValue();
+                                        return m.getValue();
                                     }
                                     return null; // Handle other cases or return appropriate default value
                                 })

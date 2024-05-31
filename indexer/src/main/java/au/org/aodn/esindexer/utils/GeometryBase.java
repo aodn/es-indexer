@@ -43,7 +43,7 @@ public class GeometryBase {
         return boundingBox;
     }
 
-    public static List<Polygon> findPolygonsFromEXBoundingPolygonType(String rawCRS, List<Object> rawInput) {
+    public static List<Polygon> findPolygonsFromEXBoundingPolygonType(String rawCRS, List<AbstractEXGeographicExtentType> rawInput) {
         List<Polygon> polygons = new ArrayList<>();
 
         if(COORDINATE_SYSTEM_CRS84.equals(rawCRS)) {
@@ -116,7 +116,7 @@ public class GeometryBase {
         return polygons;
     }
 
-    public static List<Polygon> findPolygonsFromEXGeographicBoundingBoxType(String rawCRS, List<Object> rawInput) {
+    public static List<Polygon> findPolygonsFromEXGeographicBoundingBoxType(String rawCRS, List<AbstractEXGeographicExtentType> rawInput) {
         List<Polygon> polygons = new ArrayList<>();
 
         if(COORDINATE_SYSTEM_CRS84.equals(rawCRS)) {

@@ -1,5 +1,6 @@
 package au.org.aodn.esindexer.utils;
 
+import au.org.aodn.metadata.iso19115_3_2018.AbstractEXGeographicExtentType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -49,7 +50,7 @@ public class GeometryUtils {
         return null;
     }
 
-    public static Map createGeometryFromEXGeographicBoundingBoxType(List<Object> rawInput) {
+    public static Map createGeometryFromEXGeographicBoundingBoxType(List<AbstractEXGeographicExtentType> rawInput) {
         // The return polygon is in EPSG:4326, so we can call createGeoJson directly
         //TODO: avoid hardcode CRS, get it from document
         List<Polygon> polygons = GeometryBase.findPolygonsFromEXGeographicBoundingBoxType(GeometryBase.COORDINATE_SYSTEM_CRS84, rawInput);
@@ -60,7 +61,7 @@ public class GeometryUtils {
         return null;
     }
 
-    public static Map createGeometryFromFromEXBoundingPolygonType(List<Object> rawInput) {
+    public static Map createGeometryFromFromEXBoundingPolygonType(List<AbstractEXGeographicExtentType> rawInput) {
         // The return polygon is in EPSG:4326, so we can call createGeoJson directly
         //TODO: avoid hardcode CRS, get it from document
         List<Polygon> polygons = GeometryBase.findPolygonsFromEXBoundingPolygonType(GeometryBase.COORDINATE_SYSTEM_CRS84, rawInput);
