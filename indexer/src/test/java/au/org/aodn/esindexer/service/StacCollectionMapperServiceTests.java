@@ -150,6 +150,22 @@ public class StacCollectionMapperServiceTests {
         // and now we can use it to compare expected result.
         Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
         String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
+        log.info(out);
+        assertEquals("Stac equals", objectMapper.readTree(expected), objectMapper.readTree(out.strip()));
+    }
+
+    @Test
+    public void verifySummaryGeoCorrect1() throws IOException, JAXBException {
+        // We only index one record, the
+        String xml = readResourceFile("classpath:canned/sample9.xml");
+        String expected = readResourceFile("classpath:canned/sample9_stac.json");
+        indexerService.indexMetadata(xml);
+
+        // We use a mock to pretend insert value into Elastic, there we store what is being send to elastic
+        // and now we can use it to compare expected result.
+        Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
+        String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
+
         assertEquals("Stac equals", objectMapper.readTree(expected), objectMapper.readTree(out.strip()));
     }
 }

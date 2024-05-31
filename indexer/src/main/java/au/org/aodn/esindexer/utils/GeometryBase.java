@@ -7,10 +7,7 @@ import org.locationtech.jts.geom.*;
 import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.operation.TransformException;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class GeometryBase {
 
@@ -42,8 +39,36 @@ public class GeometryBase {
 
         return boundingBox;
     }
+    /**
+     * Ths function is use to extract a list of list of polygon from the XML, the coor can be store in box type of geometry type and hence
+     * we need to use a if state to correctly locate the coordinate based on type.
+     *
+     * The EXBoundingPolygonType should return a box while the EXGeographicBoundingBoxType will be a polygon, in either case
+     * this can fit into a polygon
+     *
+     * @param rawCRS
+     * @param rawInput - A list of list of AbstractEXGeographicExtentType, AbstractEXGeographicExtentType is a base type, and can be a bbox or geometry
+     * @return
+     */
+    public static List<List<Polygon>> findPolygonsFrom(final String rawCRS, List<List<AbstractEXGeographicExtentType>> rawInput) {
+        return rawInput
+                .stream()
+                .map(r -> {
+                    if(!r.isEmpty() && r.get(0) instanceof EXBoundingPolygonType) {
+                        return findPolygonsFromEXBoundingPolygonType(rawCRS, r);
+                    }
+                    else if(!r.isEmpty() && r.get(0) instanceof EXGeographicBoundingBoxType) {
+                        return findPolygonsFromEXGeographicBoundingBoxType(rawCRS, r);
+                    }
+                    // Some type not support so return null
+                    return null;
+                })
+                .filter(Objects::nonNull)
+                .filter(i -> !i.isEmpty())
+                .toList();
+    }
 
-    public static List<Polygon> findPolygonsFromEXBoundingPolygonType(String rawCRS, List<AbstractEXGeographicExtentType> rawInput) {
+    protected static List<Polygon> findPolygonsFromEXBoundingPolygonType(String rawCRS, List<AbstractEXGeographicExtentType> rawInput) {
         List<Polygon> polygons = new ArrayList<>();
 
         if(COORDINATE_SYSTEM_CRS84.equals(rawCRS)) {
@@ -116,7 +141,7 @@ public class GeometryBase {
         return polygons;
     }
 
-    public static List<Polygon> findPolygonsFromEXGeographicBoundingBoxType(String rawCRS, List<AbstractEXGeographicExtentType> rawInput) {
+    protected static List<Polygon> findPolygonsFromEXGeographicBoundingBoxType(String rawCRS, List<AbstractEXGeographicExtentType> rawInput) {
         List<Polygon> polygons = new ArrayList<>();
 
         if(COORDINATE_SYSTEM_CRS84.equals(rawCRS)) {

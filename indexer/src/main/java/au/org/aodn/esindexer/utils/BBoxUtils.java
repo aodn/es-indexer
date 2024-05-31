@@ -12,15 +12,9 @@ public class BBoxUtils {
 
     protected static Logger logger = LogManager.getLogger(BBoxUtils.class);
 
-    public static List<List<BigDecimal>> createBBoxFromEXBoundingPolygonType(List<AbstractEXGeographicExtentType> rawInput) {
+    public static List<List<BigDecimal>> createBBoxFrom(List<List<AbstractEXGeographicExtentType>> rawInput) {
         //TODO: avoid hardcode CRS, get it from document
-        List<Polygon> polygons = GeometryBase.findPolygonsFromEXBoundingPolygonType(GeometryBase.COORDINATE_SYSTEM_CRS84, rawInput);
-        return StacUtils.createStacBBox(polygons);
-    }
-
-    public static List<List<BigDecimal>> createBBoxFromEXGeographicBoundingBoxType(List<AbstractEXGeographicExtentType> rawInput) {
-        //TODO: avoid hardcode CRS, get it from document
-        List<Polygon> polygons = GeometryBase.findPolygonsFromEXGeographicBoundingBoxType(GeometryBase.COORDINATE_SYSTEM_CRS84, rawInput);
+        List<List<Polygon>> polygons = GeometryBase.findPolygonsFrom(GeometryBase.COORDINATE_SYSTEM_CRS84, rawInput);
         return StacUtils.createStacBBox(polygons);
     }
 }
