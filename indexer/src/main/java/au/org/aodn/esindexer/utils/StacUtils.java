@@ -74,9 +74,10 @@ public class StacUtils {
                         BigDecimal.valueOf(overallBoundingBox.getMaxY()).setScale(scale, RoundingMode.HALF_UP)));
 
                 for (List<Polygon> polygons : listOfPolygons) {
-                    final Envelope individualEnvelope = new Envelope();
 
                     if (!polygons.isEmpty()) {
+                        final Envelope individualEnvelope = new Envelope();
+
                         for (Polygon p : polygons) {
                             if (p != null) {
                                 individualEnvelope.expandToInclude(p.getEnvelopeInternal());
