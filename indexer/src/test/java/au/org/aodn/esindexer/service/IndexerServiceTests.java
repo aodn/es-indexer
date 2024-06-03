@@ -2,7 +2,6 @@ package au.org.aodn.esindexer.service;
 
 import au.org.aodn.esindexer.BaseTestClass;
 import au.org.aodn.esindexer.configuration.GeoNetworkSearchTestConfig;
-import au.org.aodn.stac.model.StacCollectionModel;
 import co.elastic.clients.elasticsearch.core.search.Hit;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -10,13 +9,10 @@ import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
-import org.testcontainers.shaded.org.checkerframework.checker.units.qual.A;
 
 import java.io.IOException;
-
-import static org.junit.Assert.*;
+import java.util.Objects;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
@@ -61,9 +57,9 @@ public class IndexerServiceTests extends BaseTestClass {
             insertMetadataRecords(uuid1, "classpath:canned/sample1.xml");
             insertMetadataRecords(uuid2, "classpath:canned/sample2.xml");
 
-            assertTrue(uuid1 + " published", indexerService.isMetadataPublished(uuid1));
-            assertTrue(uuid2 + " published", indexerService.isMetadataPublished(uuid2));
-            assertFalse("Not exist and not published", indexerService.isMetadataPublished("not-exist"));
+            Assertions.assertTrue(indexerService.isMetadataPublished(uuid1), uuid1 + " published");
+            Assertions.assertTrue(indexerService.isMetadataPublished(uuid2), uuid2 + " published");
+            Assertions.assertFalse(indexerService.isMetadataPublished("not-exist"), "Not exist and not published");
         }
         finally {
             deleteRecord(uuid1);
@@ -72,14 +68,14 @@ public class IndexerServiceTests extends BaseTestClass {
     }
     /**
      * Read the function implementation on why need to insert 1 docs
-     * @throws IOException
+     * @throws IOException Not expected to throws
      */
     @Test
     public void verifyGeoNetworkInstanceReinstalled() throws IOException {
         String uuid = "9e5c3031-a026-48b3-a153-a70c2e2b78b9";
         try {
             insertMetadataRecords(uuid, "classpath:canned/sample1.xml");
-            assertTrue("New installed", indexerService.isGeoNetworkInstanceReinstalled(1));
+            Assertions.assertTrue(indexerService.isGeoNetworkInstanceReinstalled(1), "New installed");
         }
         finally {
             deleteRecord(uuid);
@@ -100,7 +96,7 @@ public class IndexerServiceTests extends BaseTestClass {
             // ErrorCause: {"type":"illegal_argument_exception","reason":"Polygon self-intersection at lat=57.0 lon=-66.0"}
             //
             // So it will not insert correctly and result in 1 doc only
-            assertEquals("Doc count correct", 1L, elasticSearchIndexService.getDocumentsCount(INDEX_NAME));
+            Assertions.assertEquals(1L, elasticSearchIndexService.getDocumentsCount(INDEX_NAME), "Doc count correct");
         }
         finally {
             deleteRecord(uuid2);
@@ -117,11 +113,11 @@ public class IndexerServiceTests extends BaseTestClass {
             insertMetadataRecords(uuid2, "classpath:canned/sample3.xml");
 
             indexerService.indexAllMetadataRecordsFromGeoNetwork(true, null);
-            assertEquals("Doc count correct", 2L, elasticSearchIndexService.getDocumentsCount(INDEX_NAME));
+            Assertions.assertEquals(2L, elasticSearchIndexService.getDocumentsCount(INDEX_NAME), "Doc count correct");
 
             // Only 2 doc in elastic, if we delete it then should be zero
             indexerService.deleteDocumentByUUID(uuid1);
-            assertEquals("Doc count correct", 1L, elasticSearchIndexService.getDocumentsCount(INDEX_NAME));
+            Assertions.assertEquals(1L, elasticSearchIndexService.getDocumentsCount(INDEX_NAME), "Doc count correct");
 
         }
         finally {
@@ -141,8 +137,8 @@ public class IndexerServiceTests extends BaseTestClass {
             indexerService.indexAllMetadataRecordsFromGeoNetwork(true, null);
             Hit<ObjectNode> objectNodeHit = indexerService.getDocumentByUUID(uuid);
 
-            String test = objectNodeHit.source().toPrettyString();
-            assertEquals("Stac equals " + uuid, indexerObjectMapper.readTree(expected), indexerObjectMapper.readTree(test));
+            String test = Objects.requireNonNull(objectNodeHit.source()).toPrettyString();
+            Assertions.assertEquals(indexerObjectMapper.readTree(expected), indexerObjectMapper.readTree(test), "Stac equals " + uuid);
         }
         finally {
             deleteRecord(uuid);
@@ -166,8 +162,8 @@ public class IndexerServiceTests extends BaseTestClass {
             indexerService.indexAllMetadataRecordsFromGeoNetwork(true, null);
             Hit<ObjectNode> objectNodeHit = indexerService.getDocumentByUUID(uuid);
 
-            String test = objectNodeHit.source().toPrettyString();
-            assertEquals("Stac equals " + uuid, indexerObjectMapper.readTree(expected), indexerObjectMapper.readTree(test));
+            String test = Objects.requireNonNull(objectNodeHit.source()).toPrettyString();
+            Assertions.assertEquals(indexerObjectMapper.readTree(expected), indexerObjectMapper.readTree(test), "Stac equals " + uuid);
         }
         finally {
             deleteRecord(uuid);
@@ -188,9 +184,8 @@ public class IndexerServiceTests extends BaseTestClass {
             indexerService.indexAllMetadataRecordsFromGeoNetwork(true, null);
             Hit<ObjectNode> objectNodeHit = indexerService.getDocumentByUUID(uuid);
 
-            String test = objectNodeHit.source().toPrettyString();
-            logger.info(test);
-            assertEquals("Stac equals " + uuid, indexerObjectMapper.readTree(expected), indexerObjectMapper.readTree(test));
+            String test = Objects.requireNonNull(objectNodeHit.source()).toPrettyString();
+            Assertions.assertEquals(indexerObjectMapper.readTree(expected), indexerObjectMapper.readTree(test), "Stac equals " + uuid);
         }
         finally {
             deleteRecord(uuid);
@@ -201,7 +196,6 @@ public class IndexerServiceTests extends BaseTestClass {
      * in the related/5905b3eb-aad0-4f9c-a03e-a02fb3488082.json, the thumbnails: [] is empty
      * @throws IOException
      */
-    @Disabled("Bug in code where bounding box not right")
     @Test
     public void verifyThumbnailLinkNullAddedOnIndex() throws IOException {
         String uuid = "5905b3eb-aad0-4f9c-a03e-a02fb3488082";
@@ -213,9 +207,9 @@ public class IndexerServiceTests extends BaseTestClass {
             indexerService.indexAllMetadataRecordsFromGeoNetwork(true, null);
             Hit<ObjectNode> objectNodeHit = indexerService.getDocumentByUUID(uuid);
 
-            String test = objectNodeHit.source().toPrettyString();
+            String test = Objects.requireNonNull(objectNodeHit.source()).toPrettyString();
             logger.info(test);
-            assertEquals("Stac equals " + uuid, indexerObjectMapper.readTree(expected), indexerObjectMapper.readTree(test));
+            Assertions.assertEquals(indexerObjectMapper.readTree(expected), indexerObjectMapper.readTree(test), "Stac equals " + uuid);
         }
         finally {
             deleteRecord(uuid);

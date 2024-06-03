@@ -15,8 +15,11 @@
     "dataset_group" : "sample",
     "dataset_provider" : "IMOS",
     "proj:geometry" : {
-      "coordinates" : [ [ [ [ 95.5, -44.5 ], [ 169.5, -44.5 ], [ 169.5, -0.5 ], [ 95.5, -0.5 ], [ 95.5, -44.5 ] ] ] ],
-      "type" : "MultiPolygon"
+      "geometries" : [ {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 95.5, -44.5 ], [ 169.5, -44.5 ], [ 169.5, -0.5 ], [ 95.5, -0.5 ], [ 95.5, -44.5 ] ] ]
+      } ],
+      "type" : "GeometryCollection"
     },
     "temporal" : [ {
       "start" : "1870-07-16T14:10:44Z",
