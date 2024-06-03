@@ -15,7 +15,16 @@
     "dataset_group" : null,
     "dataset_provider" : null,
     "update_frequency" : null,
-    "proj:geometry" : null,
+    "proj:geometry" : {
+      "geometries" : [ {
+        "type" : "Point",
+        "coordinates" : [ 146.8621, -19.1041 ]
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.85, -19.1683 ]
+      } ],
+      "type" : "GeometryCollection"
+    },
     "temporal" : [ {
       "start" : "2018-10-28T13:00:00Z",
       "end" : "2019-11-19T13:00:00Z"

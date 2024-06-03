@@ -71,7 +71,13 @@ public abstract class StacCollectionMapperService {
     String mapUUID(MDMetadataType source) {
         return source.getMetadataIdentifier().getMDIdentifier().getCode().getCharacterString().getValue().toString();
     }
-
+    /**
+     * According to the spec, the bbox must be an of length 2*n where n is number of dimension, so a 2D map, the
+     * dimension is 4 and therefore it must be a box.
+     *
+     * @param source
+     * @return The list<BigDecimal> must be of size 4 due to 2D map.
+     */
     @Named("mapExtentBbox")
     List<List<BigDecimal>> mapExtentBbox(MDMetadataType source) {
         return createGeometryItems(

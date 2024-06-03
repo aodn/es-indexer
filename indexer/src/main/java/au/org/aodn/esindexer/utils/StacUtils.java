@@ -5,6 +5,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.Envelope;
+import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.geom.Polygon;
 
 import java.math.BigDecimal;
@@ -46,7 +47,7 @@ public class StacUtils {
      * @param listOfPolygons - Assume to be EPSG:4326 as this is what GeoJson use
      * @return
      */
-    public static List<List<BigDecimal>> createStacBBox(List<List<Polygon>> listOfPolygons) {
+    public static List<List<BigDecimal>> createStacBBox(List<List<Geometry>> listOfPolygons) {
         List<List<BigDecimal>> result = new ArrayList<>();
 
         if(listOfPolygons != null) {
@@ -54,7 +55,7 @@ public class StacUtils {
             final AtomicBoolean hasBoundingBoxUpdate = new AtomicBoolean(false);
             listOfPolygons
                     .forEach(polygons -> {
-                        for (Polygon polygon : polygons) {
+                        for (Geometry polygon : polygons) {
                             // Add polygon one by one to expand the overall bounding box area, this is requirement
                             // of STAC to have an overall bounding box of all smaller area as the first bbox in the list.
                             if (polygon != null) {
@@ -73,12 +74,12 @@ public class StacUtils {
                         BigDecimal.valueOf(overallBoundingBox.getMaxX()).setScale(scale, RoundingMode.HALF_UP),
                         BigDecimal.valueOf(overallBoundingBox.getMaxY()).setScale(scale, RoundingMode.HALF_UP)));
 
-                for (List<Polygon> polygons : listOfPolygons) {
+                for (List<Geometry> polygons : listOfPolygons) {
 
                     if (!polygons.isEmpty()) {
                         final Envelope individualEnvelope = new Envelope();
 
-                        for (Polygon p : polygons) {
+                        for (Geometry p : polygons) {
                             if (p != null) {
                                 individualEnvelope.expandToInclude(p.getEnvelopeInternal());
                             }

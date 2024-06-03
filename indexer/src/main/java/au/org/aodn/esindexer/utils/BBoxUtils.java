@@ -14,7 +14,7 @@ public class BBoxUtils {
 
     public static List<List<BigDecimal>> createBBoxFrom(List<List<AbstractEXGeographicExtentType>> rawInput) {
         //TODO: avoid hardcode CRS, get it from document
-        List<List<Polygon>> polygons = GeometryBase.findPolygonsFrom(GeometryBase.COORDINATE_SYSTEM_CRS84, rawInput);
+        List<List<Geometry>> polygons = GeometryBase.findPolygonsFrom(GeometryBase.COORDINATE_SYSTEM_CRS84, rawInput);
         return StacUtils.createStacBBox(polygons);
     }
 }

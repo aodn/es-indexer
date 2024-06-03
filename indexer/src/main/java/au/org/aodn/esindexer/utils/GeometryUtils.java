@@ -28,54 +28,31 @@ public class GeometryUtils {
                 p3.x * (p1.y - p2.y);
         return area == 0;
     }
-
-    protected static boolean hasAtLeastThreeNonCollinearPoints(MultiPolygon multiPolygon) {
-        // Extract coordinates
-        Coordinate[] coordinates = multiPolygon.getCoordinates();
-
-        // Check all triplets of points
-        for (int i = 0; i < coordinates.length - 2; i++) {
-            for (int j = i + 1; j < coordinates.length - 1; j++) {
-                for (int k = j + 1; k < coordinates.length; k++) {
-                    if (!areCollinear(coordinates[i], coordinates[j], coordinates[k])) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
     /**
      *
      * @param polygons - Assume to be EPSG:4326, as GeoJson always use this encoding.
      * @return
      */
-    protected static Map<?,?> createGeoJson(List<List<Polygon>> polygons) {
+    protected static Map<?,?> createGeoJson(List<List<Geometry>> polygons) {
 
         if(!polygons.isEmpty()) {
 
             // Convert list<list<polygon>> to list<polygon>
-            List<Polygon> reduced = polygons.stream().flatMap(List::stream).toList();
-            MultiPolygon multiPolygon = new MultiPolygon(reduced.toArray(new Polygon[0]), factory);
+            List<Geometry> reduced = polygons.stream().flatMap(List::stream).toList();
+            GeometryCollection collection = new GeometryCollection(reduced.toArray(new Geometry[0]), factory);
 
-            // Some bad data just create a line which will cause elastic polygon failed
-            if(hasAtLeastThreeNonCollinearPoints(multiPolygon)) {
-                try (StringWriter writer = new StringWriter()) {
+            try (StringWriter writer = new StringWriter()) {
 
-                    GeometryJSON geometryJson = new GeometryJSON();
-                    geometryJson.write(multiPolygon, writer);
+                GeometryJSON geometryJson = new GeometryJSON();
+                geometryJson.write(collection, writer);
 
-                    Map<?, ?> values = objectMapper.readValue(writer.toString(), HashMap.class);
+                Map<?, ?> values = objectMapper.readValue(writer.toString(), HashMap.class);
 
-                    logger.debug("Created geometry {}", values);
-                    return values;
-                } catch (IOException e) {
-                    logger.error("Error create geometry", e);
-                    return null;
-                }
-            }
-            else {
-                logger.warn("Polygon invalid, less than 3 non collinear points, this cannot store in Elastic Search");
+                logger.debug("Created geometry {}", values);
+                return values;
+            } catch (IOException e) {
+                logger.error("Error create geometry", e);
+                return null;
             }
         }
         return null;
@@ -84,7 +61,7 @@ public class GeometryUtils {
     public static Map<?,?> createGeometryFrom(List<List<AbstractEXGeographicExtentType>> rawInput) {
         // The return polygon is in EPSG:4326, so we can call createGeoJson directly
         //TODO: avoid hardcode CRS, get it from document
-        List<List<Polygon>> polygons = GeometryBase.findPolygonsFrom(GeometryBase.COORDINATE_SYSTEM_CRS84, rawInput);
+        List<List<Geometry>> polygons = GeometryBase.findPolygonsFrom(GeometryBase.COORDINATE_SYSTEM_CRS84, rawInput);
         return (polygons != null && !polygons.isEmpty()) ? createGeoJson(polygons) : null;
     }
 }

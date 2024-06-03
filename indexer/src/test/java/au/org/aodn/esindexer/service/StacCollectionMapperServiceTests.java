@@ -150,7 +150,6 @@ public class StacCollectionMapperServiceTests {
         // and now we can use it to compare expected result.
         Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
         String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
-        log.info(out);
         assertEquals("Stac equals", objectMapper.readTree(expected), objectMapper.readTree(out.strip()));
     }
 
@@ -165,7 +164,7 @@ public class StacCollectionMapperServiceTests {
         // and now we can use it to compare expected result.
         Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
         String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
-
+        log.info(out);
         assertEquals("Stac equals", objectMapper.readTree(expected), objectMapper.readTree(out.strip()));
     }
 }

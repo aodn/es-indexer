@@ -16,8 +16,11 @@
     "dataset_provider" : null,
     "update_frequency" : null,
     "proj:geometry" : {
-      "coordinates" : [ [ [ [ 120.55, -14.68 ], [ 133.45, -14.68 ], [ 133.45, -10.8 ], [ 120.55, -10.8 ], [ 120.55, -14.68 ] ] ] ],
-      "type" : "MultiPolygon"
+      "geometries" : [ {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 120.55, -14.68 ], [ 133.45, -14.68 ], [ 133.45, -10.8 ], [ 120.55, -10.8 ], [ 120.55, -14.68 ] ] ]
+      } ],
+      "type" : "GeometryCollection"
     },
     "temporal" : [ {
       "start" : "2019-10-18T13:00:00Z",
