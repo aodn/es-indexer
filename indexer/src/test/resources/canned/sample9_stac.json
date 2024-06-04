@@ -1,0 +1,118 @@
+{
+  "title" : "Heat-evolved microalgal symbionts increase thermal bleaching tolerance of coral juveniles without a trade-off against growth",
+  "description" : "This study was designed to test the effect of heat-evolved macroalgal symbionts against bleaching tolerance in juvenile corals in response to a simulated heatwave.\n\n\n                    Juveniles of the coral Acropora tenuis were infected with either wildtype (WT10) or heat-evolved (SS1 or SS8) strains of the Symbiodiniaceae species Cladocopium C1acro (formerly Cladocopium goreaui 2&ndash;4).\n\n\n                    The juveniles were maintained at ambient conditions (27&deg;C) for 10 months at which time their size was measured. Growth, survival, and metabolism data were collected following a simulated heatwave (31&deg;C for 41 days).\n\n\n                    Photographs and PSII maximum quantum yields (Fv/Fm) were collected throughout the heat stress period, stable isotope incubation and cell counts were carried out on day 39, and respirometry on days 40-41. Symbiodiniaceae cell densities per juvenile were quantified to assess bleaching.\n\n\n                    Statistical analyses were run in R and respirometry data was analysed using the respR package.\n\n\n                    Full methods and technical details are found in the paper https://ssrn.com/abstract=3981099",
+  "extent" : {
+    "bbox" : [ [ 146.85, -19.168333, 146.862133, -19.10415 ], [ 146.862133, -19.10415, 146.862133, -19.10415 ], [ 146.85, -19.168333, 146.85, -19.168333 ] ],
+    "temporal" : [ [ "2018-10-28T13:00:00Z", "2019-11-19T13:00:00Z" ], [ "2018-10-28T13:00:00Z", "2019-11-19T13:00:00Z" ] ]
+  },
+  "summaries" : {
+    "score" : 1,
+    "status" : "completed",
+    "scope" : {
+      "code" : "dataset",
+      "name" : ""
+    },
+    "dataset_group" : null,
+    "dataset_provider" : null,
+    "update_frequency" : null,
+    "proj:geometry" : {
+      "geometries" : [ {
+        "type" : "Point",
+        "coordinates" : [ 146.8621, -19.1041 ]
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.85, -19.1683 ]
+      } ],
+      "type" : "GeometryCollection"
+    },
+    "temporal" : [ {
+      "start" : "2018-10-28T13:00:00Z",
+      "end" : "2019-11-19T13:00:00Z"
+    } ],
+    "discovery_categories" : null
+  },
+  "contacts" : [ {
+    "roles" : "principalInvestigator",
+    "organization" : "Australian Institute of Marine Science (AIMS)",
+    "name" : "Quigley, KM",
+    "position" : "",
+    "emails" : [ "reception@aims.gov.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],
+      "city" : "TOWNSVILLE",
+      "country" : "Australia",
+      "postalCode" : "4810",
+      "administrativeArea" : "Queensland"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "+61 7 4753 4444"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : ""
+    } ],
+    "links" : [ {
+      "href" : "https://www.aims.gov.au",
+      "rel" : null,
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : "AIMS Web Site"
+    } ]
+  }, {
+    "roles" : "pointOfContact",
+    "organization" : "Australian Institute of Marine Science (AIMS)",
+    "name" : "AIMS Data Centre",
+    "position" : "",
+    "emails" : [ "adc@aims.gov.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],
+      "city" : "TOWNSVILLE",
+      "country" : "Australia",
+      "postalCode" : "4810",
+      "administrativeArea" : "Queensland"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "+61 7 4753 4444"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : ""
+    } ],
+    "links" : [ {
+      "href" : "https://www.aims.gov.au",
+      "rel" : null,
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : "AIMS Web Site"
+    } ]
+  } ],
+  "languages" : [ {
+    "code" : "eng",
+    "name" : "English"
+  } ],
+  "links" : [ {
+    "href" : "https://doi.org/10.1007/s00338-023-02426-z",
+    "rel" : "self",
+    "type" : "",
+    "title" : "Quigley, K.M., Alvarez-Roa, C., Raina, JB. et al. Heat-evolved microalgal symbionts increase thermal bleaching tolerance of coral juveniles without a trade-off against growth. Coral Reefs 42, 1227–1232 (2023). https://doi.org/10.1007/s00338-023-02426-z"
+  }, {
+    "href" : "https://doi.org/10.1111/2041-210X.13162",
+    "rel" : "self",
+    "type" : "",
+    "title" : "Harianto, J, Carey, N, Byrne, M. respR—An R package for the manipulation and analysis of respirometry data. Methods Ecol Evol. 2019; 10: 912– 920. https://doi.org/10.1111/2041-210X.13162"
+  } ],
+  "license" : "Creative Commons Attribution 3.0 Australia License",
+  "providers" : [ {
+    "name" : "Australian Institute of Marine Science (AIMS)",
+    "description" : null,
+    "roles" : [ "pointOfContact" ],
+    "url" : null
+  } ],
+  "themes" : [ ],
+  "id" : "1e13ab6e-e546-44f2-a007-061c2815268a",
+  "record_suggest" : {
+    "title" : "Heat-evolved microalgal symbionts increase thermal bleaching tolerance of coral juveniles without a trade-off against growth",
+    "description" : null
+  },
+  "type" : "Collection",
+  "stac_version" : "1.0.0",
+  "stac_extensions" : [ "https://stac-extensions.github.io/scientific/v1.0.0/schema.json", "https://stac-extensions.github.io/contacts/v0.1.1/schema.json", "https://stac-extensions.github.io/projection/v1.1.0/schema.json", "https://stac-extensions.github.io/language/v1.0.0/schema.json", "https://stac-extensions.github.io/themes/v1.0.0/schema.json" ]
+}

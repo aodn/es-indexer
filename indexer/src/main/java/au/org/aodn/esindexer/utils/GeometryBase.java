@@ -1,16 +1,16 @@
 package au.org.aodn.esindexer.utils;
 
 import au.org.aodn.metadata.iso19115_3_2018.*;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.locationtech.jts.geom.*;
 import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.operation.TransformException;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class GeometryBase {
 
@@ -42,9 +42,37 @@ public class GeometryBase {
 
         return boundingBox;
     }
+    /**
+     * Ths function is use to extract a list of list of polygon from the XML, the coor can be store in box type of geometry type and hence
+     * we need to use a if state to correctly locate the coordinate based on type.
+     *
+     * The EXBoundingPolygonType should return a box while the EXGeographicBoundingBoxType will be a polygon, in either case
+     * this can fit into a polygon
+     *
+     * @param rawCRS
+     * @param rawInput - A list of list of AbstractEXGeographicExtentType, AbstractEXGeographicExtentType is a base type, and can be a bbox or geometry
+     * @return
+     */
+    public static List<List<Geometry>> findPolygonsFrom(final String rawCRS, List<List<AbstractEXGeographicExtentType>> rawInput) {
+        return rawInput
+                .stream()
+                .map(r -> {
+                    if(!r.isEmpty() && r.get(0) instanceof EXBoundingPolygonType) {
+                        return findPolygonsFromEXBoundingPolygonType(rawCRS, r);
+                    }
+                    else if(!r.isEmpty() && r.get(0) instanceof EXGeographicBoundingBoxType) {
+                        return findPolygonsFromEXGeographicBoundingBoxType(rawCRS, r);
+                    }
+                    // Some type not support so return null
+                    return null;
+                })
+                .filter(Objects::nonNull)
+                .filter(i -> !i.isEmpty())
+                .toList();
+    }
 
-    public static List<Polygon> findPolygonsFromEXBoundingPolygonType(String rawCRS, List<Object> rawInput) {
-        List<Polygon> polygons = new ArrayList<>();
+    protected static List<Geometry> findPolygonsFromEXBoundingPolygonType(String rawCRS, List<AbstractEXGeographicExtentType> rawInput) {
+        List<Geometry> polygons = new ArrayList<>();
 
         if(COORDINATE_SYSTEM_CRS84.equals(rawCRS)) {
             List<List<GMObjectPropertyType>> input = rawInput.stream()
@@ -76,7 +104,7 @@ public class GeometryBase {
                                             }
 
                                             // We need to store it so that we can create the multi-array as told by spec
-                                            Polygon polygon = geoJsonFactory.createPolygon(items.toArray(new Coordinate[items.size()]));
+                                            Polygon polygon = geoJsonFactory.createPolygon(items.toArray(new Coordinate[0]));
                                             polygons.add(polygon);
                                             logger.debug("2D Polygon added {}", polygon);
                                         }
@@ -98,7 +126,7 @@ public class GeometryBase {
                                     }
 
                                     // We need to store it so that we can create the multi-array as told by spec
-                                    Polygon polygon = geoJsonFactory.createPolygon(items.toArray(new Coordinate[items.size()]));
+                                    Polygon polygon = geoJsonFactory.createPolygon(items.toArray(new Coordinate[0]));
                                     polygons.add(polygon);
 
                                     logger.debug("2D Polygon added {}", polygon);
@@ -115,9 +143,32 @@ public class GeometryBase {
         }
         return polygons;
     }
-
-    public static List<Polygon> findPolygonsFromEXGeographicBoundingBoxType(String rawCRS, List<Object> rawInput) {
-        List<Polygon> polygons = new ArrayList<>();
+    /**
+     * This function look into the EXGeographicBoundingBox amd extract the coordinate, this block will be like this
+     * <gex:EX_GeographicBoundingBox>
+     *   <gex:westBoundLongitude>
+     *     <gco:Decimal>146.862133</gco:Decimal>
+     *   </gex:westBoundLongitude>
+     *   <gex:eastBoundLongitude>
+     *     <gco:Decimal>146.862133</gco:Decimal>
+     *   </gex:eastBoundLongitude>
+     *   <gex:southBoundLatitude>
+     *     <gco:Decimal>-19.10415</gco:Decimal>
+     *   </gex:southBoundLatitude>
+     *   <gex:northBoundLatitude>
+     *     <gco:Decimal>-19.10415</gco:Decimal>
+     *   </gex:northBoundLatitude>
+     * </gex:EX_GeographicBoundingBox>
+     *
+     * with North, East, South, West only, but people may not necessary create a box are but can set coordinate to
+     * Points or Line, so our return type needs to be Geometry
+     *
+     * @param rawCRS
+     * @param rawInput
+     * @return - List of Geometry, where it can be Point, Line or Box aka (Polygon)
+     */
+    protected static List<Geometry> findPolygonsFromEXGeographicBoundingBoxType(String rawCRS, List<AbstractEXGeographicExtentType> rawInput) {
+        final List<Geometry> geometries = new ArrayList<>();
 
         if(COORDINATE_SYSTEM_CRS84.equals(rawCRS)) {
             List<EXGeographicBoundingBoxType> input = rawInput.stream()
@@ -125,20 +176,20 @@ public class GeometryBase {
                     .map(m -> (EXGeographicBoundingBoxType) m)
                     .toList();
 
+            // Noted that some user do not create a box in this section but a Point!! This isn't correct but
+            // the geonetwork allow this, so we need to deal with it.
             for (EXGeographicBoundingBoxType bbt : input) {
                 if (bbt.getWestBoundLongitude().getDecimal() == null || bbt.getEastBoundLongitude().getDecimal() == null || bbt.getNorthBoundLatitude().getDecimal() == null || bbt.getSouthBoundLatitude().getDecimal() == null) {
                     logger.warn("Invalid BBOX found for findPolygonsFromEXGeographicBoundingBoxType using CRS {}", rawCRS);
                 } else {
                     logger.debug("BBOX found for findPolygonsFromEXGeographicBoundingBoxType using CRS {}", rawCRS);
-                    Coordinate[] coordinates = getCoordinates(bbt);
-                    Polygon polygon = geoJsonFactory.createPolygon(coordinates);
-                    polygons.add(polygon);
+                    getCoordinates(bbt).ifPresent(geometries::add);
                 }
             }
         }
 
-        if(!polygons.isEmpty()) {
-            return polygons;
+        if(!geometries.isEmpty()) {
+            return geometries;
         }
         else {
             logger.warn("No applicable BBOX calculation found for findPolygonsFromEXGeographicBoundingBoxType using CRS {}", rawCRS);
@@ -146,18 +197,71 @@ public class GeometryBase {
         }
     }
 
-    protected static Coordinate[] getCoordinates(EXGeographicBoundingBoxType bbt) {
+    protected static Optional<Geometry> getCoordinates(EXGeographicBoundingBoxType bbt) {
+
         double east = bbt.getEastBoundLongitude().getDecimal().doubleValue();
         double west = bbt.getWestBoundLongitude().getDecimal().doubleValue();
         double north = bbt.getNorthBoundLatitude().getDecimal().doubleValue();
         double south = bbt.getSouthBoundLatitude().getDecimal().doubleValue();
+
         // Define the coordinates for the bounding box
-        return new Coordinate[]{
+        Coordinate[] coordinates = new Coordinate[]{
                 new Coordinate(west, south),
                 new Coordinate(east, south),
                 new Coordinate(east, north),
-                new Coordinate(west, north),
-                new Coordinate(west, south)  // Closing the ring
+                new Coordinate(west, north)
         };
+
+        if(verifyPoint(coordinates)) {
+            // This is a point as all 4 point same
+             return Optional.of(geoJsonFactory.createPoint(coordinates[0]));
+        }
+        else {
+            coordinates = ArrayUtils.add(coordinates, new Coordinate(west, south));  // Closing the ring
+            if(verifyPolygon(coordinates)) {
+                return Optional.of(geoJsonFactory.createPolygon(coordinates));
+            }
+            else {
+                logger.warn("Unknown shape, not point or polygon {}", coordinates);
+                return Optional.empty();
+            }
+        }
+    }
+
+    protected static boolean verifyPoint(Coordinate[] coordinates) {
+
+        // Groups the coordinates by their values and counts the occurrences of each coordinate.
+        Map<Coordinate, Long> coordinateCountMap = Arrays.stream(coordinates)
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
+        // Filters out the coordinates that occur more than once.
+        long total = coordinateCountMap.values().stream()
+                .filter(count -> count > 1)
+                .reduce(0L, Long::sum);
+
+        if(total != coordinates.length) {
+            // Some points not the same
+            return false;
+        }
+        Point point = geoJsonFactory.createPoint(coordinates[0]);
+
+        // A point's dimension should be 0
+        return point.getDimension() == 0;
+    }
+
+    protected static boolean verifyPolygon(Coordinate[] coordinates) {
+        if (coordinates.length < 4) {
+            return false; // At least three distinct points plus a closing point are needed to form a polygon
+        }
+
+        // The first and last coordinates must be the same to close the polygon
+        if (!coordinates[0].equals2D(coordinates[coordinates.length - 1])) {
+            return false;
+        }
+
+        Polygon polygon = geoJsonFactory.createPolygon(coordinates);
+
+        // A polygon's dimension should be 2
+        return polygon.getDimension() == 2;
     }
 }

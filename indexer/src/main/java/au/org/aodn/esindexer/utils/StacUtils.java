@@ -5,12 +5,15 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.Envelope;
+import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.geom.Polygon;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 /*
 According to spec https://github.com/radiantearth/stac-spec/blob/master/collection-spec/collection-spec.md
 
@@ -41,49 +44,61 @@ public class StacUtils {
 
     /**
      *
-     * @param polygons - Assume to be EPSG:4326 as this is what GeoJson use
+     * @param listOfPolygons - Assume to be EPSG:4326 as this is what GeoJson use
      * @return
      */
-    public static List<List<BigDecimal>> createStacBBox(List<Polygon> polygons) {
-        if(polygons != null) {
-            Envelope envelope = new Envelope();
-            try {
-                for (Polygon polygon : polygons) {
-                    // Add polygon one by one to extend the overall bounding box area, this is requirement
-                    // of STAC to have an overall bounding box of all smaller area as the first bbox in the list.
-                    if (polygon != null) {
-                        envelope.expandToInclude(polygon.getEnvelopeInternal());
-                    }
-                }
+    public static List<List<BigDecimal>> createStacBBox(List<List<Geometry>> listOfPolygons) {
+        List<List<BigDecimal>> result = new ArrayList<>();
 
-                if (!polygons.isEmpty()) {
-                    // If it didn't contain polygon, then the envelope is just the initial empty object and thus invalid.
-                    List<List<BigDecimal>> result = new ArrayList<>();
-                    result.add(List.of(
-                            BigDecimal.valueOf(envelope.getMinX()).setScale(scale, RoundingMode.HALF_UP),
-                            BigDecimal.valueOf(envelope.getMinY()).setScale(scale, RoundingMode.HALF_UP),
-                            BigDecimal.valueOf(envelope.getMaxX()).setScale(scale, RoundingMode.HALF_UP),
-                            BigDecimal.valueOf(envelope.getMaxY()).setScale(scale, RoundingMode.HALF_UP)));
-
-                    for (Polygon p : polygons) {
-                        List<BigDecimal> points = new ArrayList<>();
-                        for (Coordinate c : p.getCoordinates()) {
-                            points.addAll(List.of(
-                                    BigDecimal.valueOf(c.getX()).setScale(scale, RoundingMode.HALF_UP),
-                                    BigDecimal.valueOf(c.getY()).setScale(scale, RoundingMode.HALF_UP)
-                            ));
+        if(listOfPolygons != null) {
+            final Envelope overallBoundingBox = new Envelope();
+            final AtomicBoolean hasBoundingBoxUpdate = new AtomicBoolean(false);
+            listOfPolygons
+                    .forEach(polygons -> {
+                        for (Geometry polygon : polygons) {
+                            // Add polygon one by one to expand the overall bounding box area, this is requirement
+                            // of STAC to have an overall bounding box of all smaller area as the first bbox in the list.
+                            if (polygon != null && polygon.getEnvelopeInternal() != null) {
+                                overallBoundingBox.expandToInclude(polygon.getEnvelopeInternal());
+                                hasBoundingBoxUpdate.set(true);
+                            }
                         }
-                        result.add(points);
+                    });
+
+            // Now write the first box to the head of list only if we have at least on polygon exist, if no polygon
+            // exist then we can skip the reset of operation
+            if(hasBoundingBoxUpdate.get()) {
+                result.add(List.of(
+                        BigDecimal.valueOf(overallBoundingBox.getMinX()).setScale(scale, RoundingMode.HALF_UP),
+                        BigDecimal.valueOf(overallBoundingBox.getMinY()).setScale(scale, RoundingMode.HALF_UP),
+                        BigDecimal.valueOf(overallBoundingBox.getMaxX()).setScale(scale, RoundingMode.HALF_UP),
+                        BigDecimal.valueOf(overallBoundingBox.getMaxY()).setScale(scale, RoundingMode.HALF_UP)));
+
+                for (List<Geometry> polygons : listOfPolygons) {
+
+                    if (!polygons.isEmpty()) {
+                        final Envelope individualEnvelope = new Envelope();
+
+                        for (Geometry p : polygons) {
+                            if (p != null && p.getEnvelopeInternal() != null) {
+                                individualEnvelope.expandToInclude(p.getEnvelopeInternal());
+                            }
+                        }
+                        result.add(List.of(
+                                BigDecimal.valueOf(individualEnvelope.getMinX()).setScale(scale, RoundingMode.HALF_UP),
+                                BigDecimal.valueOf(individualEnvelope.getMinY()).setScale(scale, RoundingMode.HALF_UP),
+                                BigDecimal.valueOf(individualEnvelope.getMaxX()).setScale(scale, RoundingMode.HALF_UP),
+                                BigDecimal.valueOf(individualEnvelope.getMaxY()).setScale(scale, RoundingMode.HALF_UP)));
+
                     }
-                    return result;
-                } else {
-                    logger.warn("No applicable BBOX calculation found");
-                    return new ArrayList<>();
                 }
-            } catch (Exception e) {
-                logger.error("Error processing", e);
             }
         }
-        return new ArrayList<>();
+
+        if(result.isEmpty()) {
+            logger.warn("No applicable BBOX calculation found");
+        }
+
+        return result;
     }
 }

@@ -71,13 +71,18 @@ public abstract class StacCollectionMapperService {
     String mapUUID(MDMetadataType source) {
         return source.getMetadataIdentifier().getMDIdentifier().getCode().getCharacterString().getValue().toString();
     }
-
+    /**
+     * According to the spec, the bbox must be an of length 2*n where n is number of dimension, so a 2D map, the
+     * dimension is 4 and therefore it must be a box.
+     *
+     * @param source
+     * @return The list<BigDecimal> must be of size 4 due to 2D map.
+     */
     @Named("mapExtentBbox")
     List<List<BigDecimal>> mapExtentBbox(MDMetadataType source) {
         return createGeometryItems(
                 source,
-                BBoxUtils::createBBoxFromEXBoundingPolygonType,
-                BBoxUtils::createBBoxFromEXGeographicBoundingBoxType
+                BBoxUtils::createBBoxFrom
         );
     }
 
@@ -209,11 +214,10 @@ public abstract class StacCollectionMapperService {
     }
 
     @Named("mapSummaries.geometry")
-    Map mapSummariesGeometry(MDMetadataType source) {
+    Map<?,?> mapSummariesGeometry(MDMetadataType source) {
         return createGeometryItems(
                 source,
-                GeometryUtils::createGeometryFromFromEXBoundingPolygonType,
-                GeometryUtils::createGeometryFromEXGeographicBoundingBoxType
+                GeometryUtils::createGeometryFrom
         );
     }
 
@@ -666,55 +670,53 @@ public abstract class StacCollectionMapperService {
 
     protected <R> R createGeometryItems(
             MDMetadataType source,
-            Function<List<Object>, R> exBoundingPolygonTypeHandler,
-            Function<List<Object>, R> exGeographicBoundingBoxTypeHandler) {
+            Function<List<List<AbstractEXGeographicExtentType>>, R> handler) {
 
         List<MDDataIdentificationType> items = MapperUtils.findMDDataIdentificationType(source);
         if(!items.isEmpty()) {
-            // Need to assert only 1 block contains our target
-            for(MDDataIdentificationType i : items) {
-                // We only concern geographicElement here
-                List<EXExtentType> ext = i.getExtent()
-                        .stream()
-                        .filter(f -> f.getAbstractExtent() != null)
-                        .filter(f -> f.getAbstractExtent().getValue() != null)
-                        .filter(f -> f.getAbstractExtent().getValue() instanceof EXExtentType)
-                        .map(f -> (EXExtentType)f.getAbstractExtent().getValue())
-                        .filter(f -> f.getGeographicElement() != null)
-                        .toList();
-
-                for(EXExtentType e : ext) {
-                    try {
-                        // TODO: pay attention here
-                        List<Object> rawInput = e.getGeographicElement()
-                                .stream()
-                                .map(AbstractEXGeographicExtentPropertyType::getAbstractEXGeographicExtent)
-                                .filter(m -> m != null && (m.getValue() instanceof EXBoundingPolygonType || m.getValue() instanceof EXGeographicBoundingBoxType))
-                                .map(m -> {
-                                    if (m.getValue() instanceof EXBoundingPolygonType exBoundingPolygonType) {
-                                        if (!exBoundingPolygonType.getPolygon().isEmpty() && exBoundingPolygonType.getPolygon().get(0).getAbstractGeometry() != null) {
-                                            return exBoundingPolygonType;
-                                        }
-                                    } else if (m.getValue() instanceof EXGeographicBoundingBoxType) {
-                                        return (EXGeographicBoundingBoxType) m.getValue();
-                                    }
-                                    return null; // Handle other cases or return appropriate default value
-                                })
-                                .filter(Objects::nonNull) // Filter out null values if any
-                                .collect(Collectors.toList());
-
-                        if (!rawInput.isEmpty() && rawInput.get(0) instanceof EXBoundingPolygonType) {
-                            return exBoundingPolygonTypeHandler.apply(rawInput);
-                        }
-                        else if (!rawInput.isEmpty() && rawInput.get(0) instanceof EXGeographicBoundingBoxType) {
-                            return exGeographicBoundingBoxTypeHandler.apply(rawInput);
-                        }
-                    }
-                    catch (MappingValueException ex) {
-                        logger.warn(ex.getMessage() + " for metadata record: " + this.mapUUID(source));
-                    }
-                }
+            if(items.size() > 1) {
+                logger.warn("!! More than 1 block of MDDataIdentificationType, data will be missed !!");
             }
+            // Assume only 1 block of <mri:MD_DataIdentification>
+            // We only concern geographicElement here
+            List<EXExtentType> ext = items.get(0)
+                    .getExtent()
+                    .stream()
+                    .filter(f -> f.getAbstractExtent() != null)
+                    .filter(f -> f.getAbstractExtent().getValue() != null)
+                    .filter(f -> f.getAbstractExtent().getValue() instanceof EXExtentType)
+                    .map(f -> (EXExtentType) f.getAbstractExtent().getValue())
+                    .filter(f -> f.getGeographicElement() != null)
+                    .toList();
+
+            // We want to get a list of item where each item contains multiple, (aka list) of
+            // (EXGeographicBoundingBoxType or EXBoundingPolygonType)
+            List<List<AbstractEXGeographicExtentType>> rawInput = ext.stream()
+                    .map(EXExtentType::getGeographicElement)
+                    .map(l ->
+                            /*
+                                l = List<AbstractEXGeographicExtentPropertyType>
+                                For each AbstractEXGeographicExtentPropertyType, we get the tag that store the
+                                coordinate, it is either a EXBoundingPolygonType or EXGeographicBoundingBoxType
+                             */
+                            l.stream()
+                                    .map(AbstractEXGeographicExtentPropertyType::getAbstractEXGeographicExtent)
+                                    .filter(m -> m != null && (m.getValue() instanceof EXBoundingPolygonType || m.getValue() instanceof EXGeographicBoundingBoxType))
+                                    .map(m -> {
+                                        if (m.getValue() instanceof EXBoundingPolygonType exBoundingPolygonType) {
+                                            if (!exBoundingPolygonType.getPolygon().isEmpty() && exBoundingPolygonType.getPolygon().get(0).getAbstractGeometry() != null) {
+                                                return exBoundingPolygonType;
+                                            }
+                                        } else if (m.getValue() instanceof EXGeographicBoundingBoxType) {
+                                            return m.getValue();
+                                        }
+                                        return null; // Handle other cases or return appropriate default value
+                                    })
+                                    .filter(Objects::nonNull) // Filter out null values if any
+                                    .toList()
+                    )
+                    .toList();
+            return handler.apply(rawInput);
         }
         return null;
     }

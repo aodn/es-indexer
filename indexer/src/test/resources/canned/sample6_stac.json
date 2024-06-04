@@ -2,7 +2,7 @@
   "title" : "RV Investigator Voyage IN2024_V01 End of Voyage (EOV) Archive",
   "description" : "This record describes the End of Voyage (EOV) data archive from the Marine National Facility (MNF) RV Investigator voyage IN2024_V01, titled \"Multidisciplinary Investigations of the Southern Ocean (MISO): linking physics, biogeochemistry, plankton, aerosols, clouds, and climate.\" The voyage took place between January 02, 2024 and March 05, 2024 (AEST), departing from Hobart and returning to Fremantle.\n\n                    For further information please refer to the voyage documentation links.\n\n                    Instruments used and data collected include:\n                    Regular measurements:\n                    Lowered ADCP (LADCP), Acoustic Doppler Current Profiler (ADCP; 75, 150 KHz ), Greenhouse Gas Analysers (Picarro), Cloud Condensation Nuclei counter (CCN), Condensation Particle Counters (CPC), Disdrometer, Radon sensor, Scanning Mobility Particle Sizers (SMPS), CTD, Hydrochemistry, Triaxus, Fisheries Echosounder (EK80), Multibeam Echosounder (EM710, EM122), Sub-bottom Profiler (SBP120), GPS Positioning System, Doppler Velocity Log, Thermosalinographs (TSG), Fluorometer, Oxygen Optode, pCO2, Multiangle Absorption Photometer (MAAP), Ozone Sensor, Nephelometer, Atmospheric Temperature, Humidity, Pressure, Wind and Rain sensors, Photosynthetically Active Radiation (PAR) sensor, Precision Infrared Radiometer (PIR), Precision Spectral Pyranometer (PSP), Starboard and Portside Radiometers, Air Sampler, Ultra Short BaseLine Underwater Positioning System (USBL), Weather Radar, Expendable Bathythermographs (XBTs).\n\n                    Voyage-specific measurements:\n                    Black Carbon sensor (Aethalometer), Mobility particle size spectrometer (MPSS), Bongo Net, Chemical Ionisation Mass Spectrometer (CIMS), Cloud Radar (BASTA), Fast Repetition Rate Chlorophyll-a Fluorometer (FRRf), Mini Micro-Pulse LIDAR (miniMPL), Micro Rain Radar (MRR), Neutral Cluster Air Ion Spectrometer (NAIS), Proton-Transfer-Reaction Mass Spectrometry (PTR-MS), Radiosondes, Cloud and Aerosol Backscatter Lidar (RMAN), Stabilised Platform, Mercury Analyser (Tekran), Time of Flight Aerosol Chemical Speciation Monitor (ToF-ACSM), Water Vapor Radiometer (WVR), Aerosol mass spectrometer (AMS), Core Argo floats, Biogeochemical (BGC) Argo floats, Near-surface Drifters, In situ pumps (ISPs), Ice Nucleating Particles (INPs), Ozone Sensor, Trace Metal Aerosol Sampling, Trace Metal CTD Rosette and Bottles, Organic Sulfur Sequential Chemical Analysis Robot (OSSCAR), Omics data and various biological data.\n\n                    The archive for the IN2024_V01 EOV raw data is curated by the CSIRO National Collections and Marine Infrastructure (NCMI) Information and Data Centre (IDC) in Hobart, with a permanent archive at the CSIRO Data Access Portal (https://data.csiro.au/), providing access to voyage participants and processors of the data collected on the voyage.\n\n                    All voyage documentation is available electronically to MNF support via the local network. Applications to access voyage documentation by non-CSIRO participants can be made via data-requests-hf@csiro.au.\n\n                    All processed data from this voyage are made publicly available through the MNF Data Trawler (in the related links).",
   "extent" : {
-    "bbox" : [ [ 113.2462, -67.0026, 151.4171, -31.9323 ], [ 113.2462, -67.0026, 151.4171, -67.0026, 151.4171, -31.9323, 113.2462, -31.9323, 113.2462, -67.0026 ] ],
+    "bbox" : [ [ 113.2462, -67.0026, 151.4171, -31.9323 ], [ 113.2462, -67.0026, 151.4171, -31.9323 ] ],
     "temporal" : [ [ "2024-01-01T13:00:00Z", "2024-03-04T13:00:00Z" ], [ "2024-01-01T13:00:00Z", "2024-03-04T13:00:00Z" ] ]
   },
   "summaries" : {
@@ -14,8 +14,11 @@
     },
     "dataset_group" : "sample",
     "proj:geometry" : {
-      "coordinates" : [ [ [ [ 113.2462, -67.0026 ], [ 151.4171, -67.0026 ], [ 151.4171, -31.9323 ], [ 113.2462, -31.9323 ], [ 113.2462, -67.0026 ] ] ] ],
-      "type" : "MultiPolygon"
+      "geometries" : [ {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 113.2462, -67.0026 ], [ 151.4171, -67.0026 ], [ 151.4171, -31.9323 ], [ 113.2462, -31.9323 ], [ 113.2462, -67.0026 ] ] ]
+      } ],
+      "type" : "GeometryCollection"
     },
     "temporal" : [ {
       "start" : "2024-01-01T13:00:00Z",
