@@ -21,13 +21,6 @@ public class GeometryUtils {
 
     protected static ObjectMapper objectMapper = new ObjectMapper();
 
-    protected static boolean areCollinear(Coordinate p1, Coordinate p2, Coordinate p3) {
-        // Use the area of the triangle method to check collinearity
-        double area = p1.x * (p2.y - p3.y) +
-                p2.x * (p3.y - p1.y) +
-                p3.x * (p1.y - p2.y);
-        return area == 0;
-    }
     /**
      *
      * @param polygons - Assume to be EPSG:4326, as GeoJson always use this encoding.
