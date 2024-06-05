@@ -203,7 +203,7 @@
         </dependency>
         <dependency>
             <groupId>au.org.aodn</groupId>
-            <artifactId>geonetwork</artifactId>
+            <artifactId>geonetwork-api</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>

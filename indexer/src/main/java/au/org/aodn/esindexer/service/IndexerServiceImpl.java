@@ -255,7 +255,7 @@ public class IndexerServiceImpl implements IndexerService {
                     //
                     // dataSize = 0 is init case, just in case we have a very big doc that exceed the limit
                     // and we have not add it to the bulkRequest
-                    if(dataSize + size > 100000 && dataSize != 0) {
+                    if(dataSize + size > 500000 && dataSize != 0) {
                         logger.info("Execute batch as bulk request is big enough {}", dataSize + size);
                         BulkResponse temp = executeBulk(bulkRequest);
                         results.add(temp);
