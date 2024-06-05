@@ -67,10 +67,10 @@ docker-compose -f docker-compose-dev.yaml up [-d: in daemon mode | --build: to s
 | Bulk index Async                        | `/api/v1/indexer/index//async/all      | All         |
 | Swagger UI:                             | `/swagger-ui/index.html`               | All         |
 
-> The 'async/all' endpoints use SSE (Server Side Events) to avoid gateway timeout, you should use 
+> The 'async/all' endpoints use SSE (Server Side Events) to avoid gateway timeout, you should use
 > postman version 10.2 or above (there is a bug with SSE for previous version), or use the web based
 > postman (pref), once you issue the call, you should see event come back in the body at regular time.
-> 
+>
 > The call header should contains
 > * X-API-Key  (Check with dev)
 > * Accept = text/event-stream
