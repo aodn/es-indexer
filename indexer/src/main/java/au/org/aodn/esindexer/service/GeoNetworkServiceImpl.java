@@ -28,6 +28,7 @@ import org.springframework.http.*;
 import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Retryable;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
@@ -343,7 +344,16 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
             throw new MetadataNotFoundException("Unable to find metadata record with UUID: " + uuid + " in GeoNetwork");
         }
     }
-
+    /**
+     * If geonetwork for some reason reboot, it is cloud env anyway, we keep retry evey 10 seconds
+     * @param uuid
+     * @return
+     */
+    @Retryable(
+            retryFor = HttpServerErrorException.ServiceUnavailable.class,
+            maxAttempts = 50,
+            backoff = @Backoff(delay = 10000L)
+    )
     protected String findFormatterId(String uuid) {
         try {
             Map<String, Object> params = new HashMap<>();

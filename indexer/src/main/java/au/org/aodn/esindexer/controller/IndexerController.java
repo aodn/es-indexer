@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.xml.bind.JAXBException;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.opengis.referencing.FactoryException;
@@ -17,12 +18,13 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import java.io.IOException;
+import java.time.LocalTime;
 
 @RestController
 @RequestMapping(value = "/api/v1/indexer/index")
 @Tag(name="Indexer", description = "The Indexer API")
+@Slf4j
 public class IndexerController {
-    private static final Logger logger = LogManager.getLogger(IndexerController.class);
 
     @Autowired
     IndexerService indexerService;
@@ -41,7 +43,7 @@ public class IndexerController {
     @GetMapping(path="/records/{uuid}", produces = "application/json")
     @Operation(description = "Get a document from GeoNetwork by UUID directly - JSON format response")
     public ResponseEntity<String> getMetadataRecordFromGeoNetworkByUUID(@PathVariable("uuid") String uuid) {
-        logger.info("getting a document from geonetwork by UUID: {}", uuid);
+        log.info("getting a document from geonetwork by UUID: {}", uuid);
         String response =  geonetworkResourceService.searchRecordBy(uuid);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
@@ -49,7 +51,7 @@ public class IndexerController {
     @GetMapping(path="/{uuid}", produces = "application/json")
     @Operation(description = "Get a document from portal index by UUID")
     public ResponseEntity<ObjectNode> getDocumentByUUID(@PathVariable("uuid") String uuid) throws IOException {
-        logger.info("getting a document form portal by UUID: {}", uuid);
+        log.info("getting a document form portal by UUID: {}", uuid);
         ObjectNode response =  indexerService.getDocumentByUUID(uuid).source();
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
@@ -59,8 +61,17 @@ public class IndexerController {
     public ResponseEntity<String> indexAllMetadataRecords(@RequestParam(value = "confirm", defaultValue = "false") Boolean confirm) throws IOException {
         return indexerService.indexAllMetadataRecordsFromGeoNetwork(confirm, null);
     }
-
-    @PostMapping(path="/async/all", consumes = "application/json", produces = "application/json")
+    /**
+     * Emit result to FE so it will not result in gateway time-out. You need to run it with postman or whatever tools
+     * support server side event, the content type needs to be text/event-stream in order to work
+     *
+     * Noted: There is a bug in postman desktop, so either you run postman using web-browser with agent directly
+     * or you need to have version 10.2 or above in order to get the emitted result
+     *
+     * @param confirm
+     * @return
+     */
+    @PostMapping(path="/async/all")
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Index all metadata records from GeoNetwork")
     public SseEmitter indexAllMetadataRecordsAsync(@RequestParam(value = "confirm", defaultValue = "false") Boolean confirm) {
         final SseEmitter emitter = new SseEmitter(0L); // 0L means no timeout;
@@ -69,7 +80,13 @@ public class IndexerController {
             @Override
             public void onProgress(Object update) {
                 try {
-                    emitter.send(update.toString());
+                    log.info("Send update to client");
+                    SseEmitter.SseEventBuilder event = SseEmitter.event()
+                            .data(update.toString())
+                            .id(String.valueOf(update.hashCode()))
+                            .name("Indexer update event");
+
+                    emitter.send(event);
                 }
                 catch (IOException e) {
                     emitter.completeWithError(e);
@@ -79,7 +96,13 @@ public class IndexerController {
             @Override
             public void onComplete(Object result) {
                 try {
-                    emitter.send(result.toString());
+                    log.info("Flush and complete update to client");
+                    SseEmitter.SseEventBuilder event = SseEmitter.event()
+                            .data(result.toString())
+                            .id(String.valueOf(result.hashCode()))
+                            .name("Indexer update event");
+
+                    emitter.send(result);
                     emitter.complete();
                 }
                 catch (IOException e) {
