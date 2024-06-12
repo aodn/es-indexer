@@ -10,9 +10,16 @@ import org.locationtech.jts.geom.Polygon;
 import java.math.BigDecimal;
 import java.util.Optional;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+
+
+import org.locationtech.jts.geom.*;
 
 public class GeometryBaseTest {
+
+    private static final GeometryFactory factory = new GeometryFactory();
 
     @Test
     public void verifyGetCoordinatesPoint() {
@@ -31,7 +38,7 @@ public class GeometryBaseTest {
         boundingBoxType.setNorthBoundLatitude(b);
 
         Optional<Geometry> point = GeometryBase.getCoordinates(boundingBoxType);
-        assertTrue("We found a point", point.get() instanceof Point);
+        assertTrue(point.get() instanceof Point, "We found a point");
     }
 
     @Test
@@ -55,6 +62,81 @@ public class GeometryBaseTest {
         boundingBoxType.setNorthBoundLatitude(n);
 
         Optional<Geometry> point = GeometryBase.getCoordinates(boundingBoxType);
-        assertTrue("We found a polygon", point.get() instanceof Polygon);
+        assertTrue(point.get() instanceof Polygon, "We found a polygon");
+    }
+
+    @Test
+    public void testIsCounterClockwise() {
+        Coordinate[] ccwCoords = new Coordinate[] {
+                new Coordinate(0, 0),
+                new Coordinate(1, 0),
+                new Coordinate(1, 1),
+                new Coordinate(0, 1),
+                new Coordinate(0, 0)
+        };
+
+        Coordinate[] cwCoords = new Coordinate[] {
+                new Coordinate(0, 0),
+                new Coordinate(0, 1),
+                new Coordinate(1, 1),
+                new Coordinate(1, 0),
+                new Coordinate(0, 0)
+        };
+
+        assertTrue(GeometryUtils.isCounterClockwise(ccwCoords));
+        assertFalse(GeometryUtils.isCounterClockwise(cwCoords));
+    }
+
+    @Test
+    public void testReverseCoordinates() {
+        Coordinate[] coords = new Coordinate[] {
+                new Coordinate(0, 0),
+                new Coordinate(1, 0),
+                new Coordinate(1, 1),
+                new Coordinate(0, 1),
+                new Coordinate(0, 0)
+        };
+
+        Coordinate[] expectedReversedCoords = new Coordinate[] {
+                new Coordinate(0, 0),
+                new Coordinate(0, 1),
+                new Coordinate(1, 1),
+                new Coordinate(1, 0),
+                new Coordinate(0, 0)
+        };
+
+        Coordinate[] reversedCoords = GeometryUtils.reverseCoordinates(coords);
+        assertArrayEquals(expectedReversedCoords, reversedCoords);
+    }
+
+    @Test
+    public void testEnsureCounterClockwise() {
+        // A clockwise polygon
+        Coordinate[] cwCoords = new Coordinate[] {
+                new Coordinate(0, 0),
+                new Coordinate(0, 1),
+                new Coordinate(1, 1),
+                new Coordinate(1, 0),
+                new Coordinate(0, 0)
+        };
+        LinearRing cwRing = factory.createLinearRing(cwCoords);
+        Polygon cwPolygon = factory.createPolygon(cwRing);
+
+        Polygon ccwPolygon = GeometryUtils.ensureCounterClockwise(cwPolygon, factory);
+        assertTrue(GeometryUtils.isCounterClockwise(ccwPolygon.getExteriorRing().getCoordinates()));
+
+        // A counterclockwise polygon should remain unchanged
+        Coordinate[] ccwCoords = new Coordinate[] {
+                new Coordinate(0, 0),
+                new Coordinate(1, 0),
+                new Coordinate(1, 1),
+                new Coordinate(0, 1),
+                new Coordinate(0, 0)
+        };
+        LinearRing ccwRing = factory.createLinearRing(ccwCoords);
+        Polygon originalCcwPolygon = factory.createPolygon(ccwRing);
+
+        Polygon ensuredCcwPolygon = GeometryUtils.ensureCounterClockwise(originalCcwPolygon, factory);
+        assertTrue(GeometryUtils.isCounterClockwise(ensuredCcwPolygon.getExteriorRing().getCoordinates()));
     }
 }
