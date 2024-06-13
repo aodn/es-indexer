@@ -43,6 +43,7 @@ public abstract class StacCollectionMapperService {
     @Mapping(target="description", source = "source", qualifiedByName = "mapDescription")
     @Mapping(target="summaries.status", source = "source", qualifiedByName = "mapSummaries.status")
     @Mapping(target="summaries.scope", source = "source", qualifiedByName = "mapSummaries.scope")
+    @Mapping(target="summaries.credits", source = "source", qualifiedByName = "mapSummaries.credits")
     @Mapping(target="summaries.geometry", source = "source", qualifiedByName = "mapSummaries.geometry")
     @Mapping(target="summaries.temporal", source = "source", qualifiedByName = "mapSummaries.temporal")
     @Mapping(target="summaries.updateFrequency", source = "source", qualifiedByName = "mapSummaries.updateFrequency")
@@ -281,6 +282,30 @@ public abstract class StacCollectionMapperService {
             }
         }
         return "";
+    }
+    /**
+     * Map the field credits, it is under
+     * <mri:MD_DataIdentification>
+     *     <mri:credit>XXXXXX</mri:credit>
+     *     <mri:credit>YYYYYY</mri:credit>
+     * </mri:MD_DataIdentification>
+     * @param source
+     * @return
+     */
+    @Named("mapSummaries.credits")
+    List<String> mapSummariesCredits(MDMetadataType source) {
+        List<MDDataIdentificationType> items = MapperUtils.findMDDataIdentificationType(source);
+        return items
+                .stream()
+                .map(AbstractMDIdentificationType::getCredit)
+                .flatMap(Collection::stream)
+                .map(CharacterStringPropertyType::getCharacterString)
+                .filter(Objects::nonNull)
+                .map(JAXBElement::getValue)
+                .filter(Objects::nonNull)
+                .map(Object::toString)
+                .filter(Objects::nonNull)
+                .toList();
     }
     /**
      * TODO: Very simple logic here, a dataset is flag as real-time if title contains the word
