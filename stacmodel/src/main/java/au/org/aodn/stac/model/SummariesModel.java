@@ -13,6 +13,7 @@ public class SummariesModel {
 
     protected Integer score;
     protected String status;
+    protected List<String> credits;
     protected Map<String, String> scope;
 
     /**
