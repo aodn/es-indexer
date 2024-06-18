@@ -89,7 +89,7 @@
   },
   "contacts": [
     {
-      "roles": "custodian",
+      "roles": ["custodian"],
       "organization": "CSIRO Oceans & Atmosphere - Hobart",
       "name": "data-requests-hf@csiro.au,",
       "position": "Data Requests - Information & Data Centre",

@@ -90,7 +90,7 @@
   },
   "contacts": [
     {
-      "roles": "principalInvestigator",
+      "roles": ["principalInvestigator"],
       "organization": "CSIRO Oceans and Atmosphere - Hobart",
       "name": "Lenton, Andrew",
       "position": "",
@@ -112,7 +112,7 @@
       "links": []
     },
     {
-      "roles": "pointOfContact",
+      "roles": ["pointOfContact"],
       "organization": "Integrated Marine Observing System (IMOS)",
       "name": "",
       "position": "Data Officer",

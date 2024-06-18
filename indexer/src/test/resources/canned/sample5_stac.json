@@ -81,7 +81,7 @@
   },
   "contacts": [
     {
-      "roles": "pointOfContact",
+      "roles": ["pointOfContact"],
       "organization": "Integrated Marine Observing System (IMOS)",
       "name": "",
       "position": "Data Officer",
