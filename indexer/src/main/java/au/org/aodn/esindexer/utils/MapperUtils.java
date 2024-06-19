@@ -32,10 +32,15 @@ public class MapperUtils {
     }
 
     public static List<String> mapContactsRole(CIResponsibilityType2 ciResponsibility) {
-        CodeListValueType roleCode = ciResponsibility.getRole().getCIRoleCode();
-        return Collections.singletonList(
-                roleCode != null ?
-                roleCode.getCodeListValue() : "");
+        if (
+                ciResponsibility == null
+                || ciResponsibility.getRole() == null
+                || ciResponsibility.getRole().getCIRoleCode() == null
+                || ciResponsibility.getRole().getCIRoleCode().getCodeListValue() == null
+        ) {
+            return Collections.emptyList();
+        }
+        return Collections.singletonList(ciResponsibility.getRole().getCIRoleCode().getCodeListValue());
     }
 
     public static String mapContactsOrganization(AbstractCIPartyPropertyType2 party) {
