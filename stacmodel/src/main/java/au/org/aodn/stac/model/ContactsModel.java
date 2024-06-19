@@ -5,12 +5,11 @@ import lombok.Data;
 
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Map;
 
 @Data
 @Builder
 public class ContactsModel {
-    protected String roles;
+    protected List<String> roles;
     protected String organization;
     protected String name;
     protected String position;

@@ -31,10 +31,16 @@ public class MapperUtils {
         protected LinkedHashSet<LinkModel> onlineResources = new LinkedHashSet<>();
     }
 
-    public static String mapContactsRole(CIResponsibilityType2 ciResponsibility) {
-        CodeListValueType roleCode = ciResponsibility.getRole().getCIRoleCode();
-        return roleCode != null ?
-                roleCode.getCodeListValue() : "";
+    public static List<String> mapContactsRole(CIResponsibilityType2 ciResponsibility) {
+        if (
+                ciResponsibility == null
+                || ciResponsibility.getRole() == null
+                || ciResponsibility.getRole().getCIRoleCode() == null
+                || ciResponsibility.getRole().getCIRoleCode().getCodeListValue() == null
+        ) {
+            return Collections.emptyList();
+        }
+        return Collections.singletonList(ciResponsibility.getRole().getCIRoleCode().getCodeListValue());
     }
 
     public static String mapContactsOrganization(AbstractCIPartyPropertyType2 party) {

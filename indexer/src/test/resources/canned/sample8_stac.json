@@ -82,7 +82,7 @@
   },
   "contacts": [
     {
-      "roles": "pointOfContact",
+      "roles": ["pointOfContact"],
       "organization": "CSIRO Oceans & Atmosphere - Hobart",
       "name": "CSIRO O&A, Information & Data Centre",
       "position": "Data Requests",

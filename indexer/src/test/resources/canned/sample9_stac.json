@@ -79,7 +79,7 @@
   },
   "contacts": [
     {
-      "roles": "principalInvestigator",
+      "roles": ["principalInvestigator"],
       "organization": "Australian Institute of Marine Science (AIMS)",
       "name": "Quigley, KM",
       "position": "",
@@ -121,7 +121,7 @@
       ]
     },
     {
-      "roles": "pointOfContact",
+      "roles": ["pointOfContact"],
       "organization": "Australian Institute of Marine Science (AIMS)",
       "name": "AIMS Data Centre",
       "position": "",
