@@ -77,19 +77,18 @@ public class StacUtils {
                 for (List<Geometry> polygons : listOfPolygons) {
 
                     if (!polygons.isEmpty()) {
-                        final Envelope individualEnvelope = new Envelope();
-
                         for (Geometry p : polygons) {
+                            final Envelope individualEnvelope = new Envelope();
+
                             if (p != null && p.getEnvelopeInternal() != null) {
                                 individualEnvelope.expandToInclude(p.getEnvelopeInternal());
                             }
+                            result.add(List.of(
+                                    BigDecimal.valueOf(individualEnvelope.getMinX()).setScale(scale, RoundingMode.HALF_UP),
+                                    BigDecimal.valueOf(individualEnvelope.getMinY()).setScale(scale, RoundingMode.HALF_UP),
+                                    BigDecimal.valueOf(individualEnvelope.getMaxX()).setScale(scale, RoundingMode.HALF_UP),
+                                    BigDecimal.valueOf(individualEnvelope.getMaxY()).setScale(scale, RoundingMode.HALF_UP)));
                         }
-                        result.add(List.of(
-                                BigDecimal.valueOf(individualEnvelope.getMinX()).setScale(scale, RoundingMode.HALF_UP),
-                                BigDecimal.valueOf(individualEnvelope.getMinY()).setScale(scale, RoundingMode.HALF_UP),
-                                BigDecimal.valueOf(individualEnvelope.getMaxX()).setScale(scale, RoundingMode.HALF_UP),
-                                BigDecimal.valueOf(individualEnvelope.getMaxY()).setScale(scale, RoundingMode.HALF_UP)));
-
                     }
                 }
             }

@@ -1,6 +1,5 @@
 package au.org.aodn.esindexer.service;
 
-import au.org.aodn.esindexer.exception.MappingValueException;
 import au.org.aodn.esindexer.utils.GeometryUtils;
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.utils.MapperUtils;
@@ -450,7 +449,7 @@ public abstract class StacCollectionMapperService {
                             }
                             linkModel.setHref(ciOnlineResource.getLinkage().getCharacterString().getValue().toString());
                             linkModel.setRel(AppConstants.RECOMMENDED_LINK_REL_TYPE);
-                            linkModel.setTitle(ciOnlineResource.getName() != null ? ciOnlineResource.getName().getCharacterString().getValue().toString() : null);
+                            linkModel.setTitle(getOnlineResourceName(ciOnlineResource));
                             results.add(linkModel);
                         }
                     }
@@ -726,7 +725,8 @@ public abstract class StacCollectionMapperService {
                              */
                             l.stream()
                                     .map(AbstractEXGeographicExtentPropertyType::getAbstractEXGeographicExtent)
-                                    .filter(m -> m != null && (m.getValue() instanceof EXBoundingPolygonType || m.getValue() instanceof EXGeographicBoundingBoxType))
+                                    .filter(Objects::nonNull)
+                                    .filter(m -> (m.getValue() instanceof EXBoundingPolygonType || m.getValue() instanceof EXGeographicBoundingBoxType))
                                     .map(m -> {
                                         if (m.getValue() instanceof EXBoundingPolygonType exBoundingPolygonType) {
                                             if (!exBoundingPolygonType.getPolygon().isEmpty() && exBoundingPolygonType.getPolygon().get(0).getAbstractGeometry() != null) {
@@ -744,5 +744,23 @@ public abstract class StacCollectionMapperService {
             return handler.apply(rawInput);
         }
         return null;
+    }
+    /**
+     * Special handle for MimeFileType object.
+     * @param onlineResource
+     * @return
+     */
+    protected String getOnlineResourceName(CIOnlineResourceType2 onlineResource) {
+        if(onlineResource.getName() != null && onlineResource.getName().getCharacterString() != null) {
+            if(onlineResource.getName().getCharacterString().getValue() instanceof MimeFileTypeType mt) {
+                return mt.getValue();
+            }
+            else {
+                return onlineResource.getName().getCharacterString().getValue().toString();
+            }
+        }
+        else {
+            return null;
+        }
     }
 }
