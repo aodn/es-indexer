@@ -2,6 +2,7 @@ package au.org.aodn.esindexer.utils;
 
 import au.org.aodn.metadata.iso19115_3_2018.*;
 import au.org.aodn.stac.model.ContactsAddressModel;
+import au.org.aodn.stac.model.ContactsModel;
 import au.org.aodn.stac.model.ContactsPhoneModel;
 import au.org.aodn.stac.model.LinkModel;
 import lombok.Builder;
@@ -210,6 +211,17 @@ public class MapperUtils {
                 .map(f -> (MDDistributionType)f.getAbstractDistribution().getValue())
                 .collect(Collectors.toList());
     }
+
+    public static List<AbstractResponsibilityPropertyType> findMDContact(MDMetadataType source) {
+        return source.getContact()
+                .stream()
+                .filter(f -> f.getAbstractResponsibility() != null)
+                .filter(f -> f.getAbstractResponsibility().getValue() != null)
+                .filter(f -> f.getAbstractResponsibility().getValue() instanceof CIResponsibilityType2)
+                .collect(Collectors.toList());
+    }
+
+
     /**
      * Look into the CIContact XML and extract related info and return as a Contract object. Please modify this function
      * if more fields need to be returned.
@@ -409,5 +421,91 @@ public class MapperUtils {
             return Optional.of(c);
         }
     }
+
+    public static List<ContactsModel> mapContactsFromOrg(CIResponsibilityType2 ciResponsibility, CIOrganisationType2 organisation) {
+
+        Optional<MapperUtils.Contacts> org = MapperUtils.mapContactInfo(organisation.getContactInfo());
+        return new ArrayList<>(organisation
+                .getIndividual()
+                .stream()
+                .map(individual -> {
+                    ContactsModel invContactsModel = ContactsModel.builder().build();
+                    invContactsModel.setName(MapperUtils.mapContactsName(individual));
+                    invContactsModel.setPosition(MapperUtils.mapContactsPosition(individual));
+                    invContactsModel.setRoles(MapperUtils.mapContactsRole(ciResponsibility));
+                    invContactsModel.setOrganization(organisation.getName().getCharacterString().getValue().toString());
+
+                    Optional<MapperUtils.Contacts> inv = MapperUtils.mapContactInfo(individual.getCIIndividual().getContactInfo());
+                    MapperUtils.Contacts i = org.orElse(null);
+
+                    // Address
+                    if (inv.isPresent() && !inv.get().getAddresses().isEmpty()) {
+                        invContactsModel.setAddresses(inv.get().getAddresses());
+                    } else {
+                        invContactsModel.setAddresses(i != null ? i.getAddresses() : null);
+                    }
+                    // Email
+                    if (inv.isPresent() && !inv.get().getEmails().isEmpty()) {
+                        invContactsModel.setEmails(inv.get().getEmails());
+                    } else {
+                        invContactsModel.setEmails(i != null ? i.getEmails() : null);
+                    }
+                    // Phone
+                    if (inv.isPresent() && !inv.get().getPhones().isEmpty()) {
+                        invContactsModel.setPhones(inv.get().getPhones());
+                    } else {
+                        invContactsModel.setPhones(i != null ? i.getPhones() : null);
+                    }
+                    // Online Resources
+                    // Phone
+                    if (inv.isPresent() && !inv.get().getOnlineResources().isEmpty()) {
+                        invContactsModel.setLinks(inv.get().getOnlineResources());
+                    } else {
+                        invContactsModel.setLinks(i != null ? i.getOnlineResources() : null);
+                    }
+
+                    return invContactsModel;
+                })
+                .toList());
+    }
+
+    public static List<ContactsModel> mapOrgContacts(CIResponsibilityType2 ciResponsibility, AbstractCIPartyPropertyType2 party) {
+        List<ContactsModel> results = new ArrayList<>();
+        if(party.getAbstractCIParty() != null
+                && party.getAbstractCIParty().getValue() != null
+                && party.getAbstractCIParty().getValue() instanceof CIOrganisationType2 organisation) {
+            Optional<MapperUtils.Contacts> org = MapperUtils.mapContactInfo(organisation.getContactInfo());
+
+            if(organisation.getIndividual() != null && !organisation.getIndividual().isEmpty()) {
+                results.addAll(mapContactsFromOrg(ciResponsibility, organisation));
+            } else {
+                ContactsModel orgContactsModel = ContactsModel.builder().build();
+                orgContactsModel.setRoles(MapperUtils.mapContactsRole(ciResponsibility));
+                orgContactsModel.setOrganization(MapperUtils.mapContactsOrganization(party));
+                orgContactsModel.setOrganization(organisation.getName().getCharacterString().getValue().toString());
+
+                if(org.isPresent() && !org.get().getAddresses().isEmpty()) {
+                    orgContactsModel.setAddresses(org.get().getAddresses());
+                }
+
+                if(org.isPresent() && !org.get().getEmails().isEmpty()) {
+                    orgContactsModel.setEmails(org.get().getEmails());
+                }
+
+                if(org.isPresent() && !org.get().getPhones().isEmpty()) {
+                    orgContactsModel.setPhones(org.get().getPhones());
+                }
+
+                if(org.isPresent() && !org.get().getOnlineResources().isEmpty()) {
+                    orgContactsModel.setLinks(org.get().getOnlineResources());
+                }
+
+                results.add(orgContactsModel);
+            }
+
+        }
+        return results;
+    }
+
 
 }
