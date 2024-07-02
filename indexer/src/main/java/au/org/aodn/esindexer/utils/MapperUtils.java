@@ -34,7 +34,6 @@ public class MapperUtils {
         protected LinkedHashSet<LinkModel> onlineResources = new LinkedHashSet<>();
     }
 
-
     public static List<String> mapContactsRole(CIResponsibilityType2 ciResponsibility) {
         var contactsRole = getNullIfNullPointer(() -> ciResponsibility.getRole().getCIRoleCode().getCodeListValue());
         return contactsRole == null ? Collections.emptyList() : Collections.singletonList(contactsRole);
@@ -89,7 +88,6 @@ public class MapperUtils {
             addressItem.setCountry(country);
         }
 
-
         return addressItem;
     }
 
@@ -103,7 +101,6 @@ public class MapperUtils {
 
     public static LinkModel mapContactsOnlineResource(CIOnlineResourcePropertyType2 onlineResource) {
         LinkModel onlineResourceItem = LinkModel.builder().build();
-
 
         onlineResourceItem.setHref(getNullIfNullPointer(() ->
                 onlineResource.getCIOnlineResource().getLinkage().getCharacterString().getValue().toString()));
@@ -367,7 +364,6 @@ public class MapperUtils {
                                             .filter(Objects::nonNull)
                                             .toList());
                         }
-
                     });
                 }
 
@@ -389,7 +385,7 @@ public class MapperUtils {
     public static List<ContactsModel> mapContactsFromOrg(CIResponsibilityType2 ciResponsibility, CIOrganisationType2 organisation) {
 
         Optional<Contacts> org = mapContactInfo(organisation.getContactInfo());
-        if (getNullIfNullPointer(() -> organisation.getIndividual()) == null) {
+        if (getNullIfNullPointer(organisation::getIndividual) == null) {
             return Collections.emptyList();
         }
         return new ArrayList<>(organisation
@@ -460,10 +456,8 @@ public class MapperUtils {
                         orgContactsModel.setLinks(o.getOnlineResources());
                     }
                 });
-
                 results.add(orgContactsModel);
             }
-
         }
         return results;
     }
