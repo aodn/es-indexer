@@ -154,6 +154,17 @@ public class StacCollectionMapperServiceTests {
     }
 
     @Test
+    public void verifyMetadataContactCorrect() throws IOException {
+        String xml = readResourceFile("classpath:canned/sample10.xml");
+        String expected = readResourceFile("classpath:canned/sample10_stac.json");
+        indexerService.indexMetadata(xml);
+
+        Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
+        String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
+        assertEquals("Stac equals", objectMapper.readTree(expected), objectMapper.readTree(out.strip()));
+    }
+
+    @Test
     public void verifySummaryGeoCorrect1() throws IOException, JAXBException {
         // We only index one record, the
         String xml = readResourceFile("classpath:canned/sample9.xml");

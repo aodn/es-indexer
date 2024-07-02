@@ -89,7 +89,10 @@
   },
   "contacts": [
     {
-      "roles": ["custodian"],
+      "roles": [
+        "custodian",
+        "about"
+      ],
       "organization": "CSIRO Oceans & Atmosphere - Hobart",
       "name": "data-requests-hf@csiro.au,",
       "position": "Data Requests - Information & Data Centre",
@@ -134,6 +137,82 @@
           "type": "WWW:LINK-1.0-http--link"
         }
       ]
+    },
+    {
+      "roles": [
+        "processor",
+        "metadata"
+      ],
+      "organization": "CSIRO/Oceans and Atmosphere",
+      "name": "Data Officer (AR), Hobart",
+      "position": "",
+      "emails": [],
+      "addresses": [],
+      "phones": [],
+      "links": []
+    },
+    {
+      "roles": [
+        "pointOfContact",
+        "metadata"
+      ],
+      "organization": "CSIRO Oceans & Atmosphere - Hobart",
+      "name": "CSIRO O&A, Information & Data Centre",
+      "position": "Data Requests",
+      "emails": [],
+      "addresses": [
+        {
+          "deliveryPoint": [
+            "GPO Box 1538"
+          ],
+          "city": "Hobart",
+          "country": "Australia",
+          "postalCode": "7001",
+          "administrativeArea": "TAS"
+        },
+        {
+          "deliveryPoint": [
+            "Castray Esplanade"
+          ],
+          "city": "Hobart",
+          "country": "Australia",
+          "postalCode": "7000",
+          "administrativeArea": "TAS"
+        }
+      ],
+      "phones": [
+        {
+          "roles": [
+            "voice"
+          ],
+          "value": "+61 3 6232 5222"
+        },
+        {
+          "roles": [
+            "facsimile"
+          ],
+          "value": "+61 3 6232 5000"
+        }
+      ],
+      "links": [
+        {
+          "href": "http://www.csiro.au/en/Research/OandA",
+          "type": "WWW:LINK-1.0-http--link"
+        }
+      ]
+    },
+    {
+      "roles": [
+        "originator",
+        "metadata"
+      ],
+      "organization": "CSIRO",
+      "name": "Roubicek, Andres",
+      "position": "",
+      "emails": [],
+      "addresses": [],
+      "phones": [],
+      "links": []
     }
   ],
   "languages": [

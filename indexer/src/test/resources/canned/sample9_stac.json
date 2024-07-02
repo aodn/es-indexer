@@ -79,7 +79,10 @@
   },
   "contacts": [
     {
-      "roles": ["principalInvestigator"],
+      "roles": [
+        "principalInvestigator",
+        "about"
+      ],
       "organization": "Australian Institute of Marine Science (AIMS)",
       "name": "Quigley, KM",
       "position": "",
@@ -121,7 +124,10 @@
       ]
     },
     {
-      "roles": ["pointOfContact"],
+      "roles": [
+        "pointOfContact",
+        "about"
+      ],
       "organization": "Australian Institute of Marine Science (AIMS)",
       "name": "AIMS Data Centre",
       "position": "",
@@ -159,6 +165,51 @@
           "rel": null,
           "type": "WWW:LINK-1.0-http--link",
           "title": "AIMS Web Site"
+        }
+      ]
+    },
+    {
+      "roles": [
+        "pointOfContact",
+        "metadata"
+      ],
+      "organization": "Australian Institute of Marine Science (AIMS)",
+      "name": "",
+      "position": "AIMS Data Centre",
+      "emails": [
+        "adc@aims.gov.au"
+      ],
+      "addresses": [
+        {
+          "deliveryPoint": [
+            "PRIVATE MAIL BAG 3"
+          ],
+          "city": "TOWNSVILLE MAIL CENTRE",
+          "country": "Australia",
+          "postalCode": "4810",
+          "administrativeArea": "Queensland"
+        }
+      ],
+      "phones": [
+        {
+          "roles": [
+            "voice"
+          ],
+          "value": "+61 7 4753 4444"
+        },
+        {
+          "roles": [
+            "facsimile"
+          ],
+          "value": "+61 7 4772 5852"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://www.aims.gov.au/adc",
+          "rel": null,
+          "type": "WWW:LINK-1.0-http--link",
+          "title": null
         }
       ]
     }
