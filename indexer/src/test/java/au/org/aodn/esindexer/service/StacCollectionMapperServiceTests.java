@@ -159,8 +159,6 @@ public class StacCollectionMapperServiceTests {
         String expected = readResourceFile("classpath:canned/sample10_stac.json");
         indexerService.indexMetadata(xml);
 
-        // We use a mock to pretend insert value into Elastic, there we store what is being send to elastic
-        // and now we can use it to compare expected result.
         Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
         String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
         assertEquals("Stac equals", objectMapper.readTree(expected), objectMapper.readTree(out.strip()));

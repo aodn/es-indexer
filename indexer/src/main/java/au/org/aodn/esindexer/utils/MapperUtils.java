@@ -424,7 +424,7 @@ public class MapperUtils {
 
     public static List<ContactsModel> mapContactsFromOrg(CIResponsibilityType2 ciResponsibility, CIOrganisationType2 organisation) {
 
-        Optional<MapperUtils.Contacts> org = MapperUtils.mapContactInfo(organisation.getContactInfo());
+        Optional<Contacts> org = MapperUtils.mapContactInfo(organisation.getContactInfo());
         return new ArrayList<>(organisation
                 .getIndividual()
                 .stream()
@@ -435,8 +435,8 @@ public class MapperUtils {
                     invContactsModel.setRoles(MapperUtils.mapContactsRole(ciResponsibility));
                     invContactsModel.setOrganization(organisation.getName().getCharacterString().getValue().toString());
 
-                    Optional<MapperUtils.Contacts> inv = MapperUtils.mapContactInfo(individual.getCIIndividual().getContactInfo());
-                    MapperUtils.Contacts i = org.orElse(null);
+                    Optional<Contacts> inv = MapperUtils.mapContactInfo(individual.getCIIndividual().getContactInfo());
+                    Contacts i = org.orElse(null);
 
                     // Address
                     if (inv.isPresent() && !inv.get().getAddresses().isEmpty()) {
@@ -507,5 +507,15 @@ public class MapperUtils {
         return results;
     }
 
-
+    public static List<ContactsModel> addRoleToContacts(List<ContactsModel> contacts, String role) {
+        contacts.forEach(contact -> {
+            var roles = new ArrayList<String>();
+            if (contact.getRoles() != null) {
+                roles.addAll(contact.getRoles());
+            }
+            roles.add(role);
+            contact.setRoles(roles);
+        });
+        return contacts;
+    }
 }

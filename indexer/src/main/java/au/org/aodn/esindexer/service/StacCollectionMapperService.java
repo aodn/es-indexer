@@ -572,15 +572,9 @@ public abstract class StacCollectionMapperService {
                             else {
                                 ciResponsibility.getParty().forEach(party -> {
 
-                                    // to tag about contacts
-                                   var mappedContacts = MapperUtils.mapOrgContacts(ciResponsibility, party);
-                                   mappedContacts.forEach(contact -> {
-                                       var roles = contact.getRoles();
-                                       var newRoles = new ArrayList<String>(roles);
-                                       newRoles.add("about");
-                                       contact.setRoles(newRoles);
-                                   });
-                                    results.addAll(mappedContacts);
+                                    // to tag data contacts (on the "about" panel)
+                                    var mappedContacts = MapperUtils.mapOrgContacts(ciResponsibility, party);
+                                    results.addAll(MapperUtils.addRoleToContacts(mappedContacts, "about"));
                                 });
                             }
                         }
@@ -604,16 +598,10 @@ public abstract class StacCollectionMapperService {
                     continue;
                 }
                 for (var party : ciResponsibility.getParty()) {
-                    var mappedMetadataContacts = MapperUtils.mapOrgContacts(ciResponsibility, party);
 
-                    // to tag metadata contacts
-                    mappedMetadataContacts.forEach(contact -> {
-                        var roles = contact.getRoles();
-                        var newRoles = new ArrayList<String>(roles);
-                        newRoles.add("metadata");
-                        contact.setRoles(newRoles);
-                    });
-                    results.addAll(mappedMetadataContacts);
+                    // to tag metadata contacts (on the "metadata" panel)
+                    var mappedContacts = MapperUtils.mapOrgContacts(ciResponsibility, party);
+                    results.addAll(MapperUtils.addRoleToContacts(mappedContacts, "metadata"));
                 }
             }
         }
@@ -621,6 +609,7 @@ public abstract class StacCollectionMapperService {
 
         return results;
     }
+
 
 
 
@@ -650,8 +639,6 @@ public abstract class StacCollectionMapperService {
                 results.add(languageModel);
             }
         }
-
-
 
         return results;
     }
