@@ -94,40 +94,25 @@ public class MapperUtils {
     }
 
     public static String mapContactsEmail(CharacterStringPropertyType electronicMailAddress) {
-
-        if (electronicMailAddress != null
-                && electronicMailAddress.getCharacterString() != null
-                && electronicMailAddress.getCharacterString().getValue() != null
-                && !"".equalsIgnoreCase(electronicMailAddress.getCharacterString().getValue().toString())) {
-            return electronicMailAddress.getCharacterString().getValue().toString();
-        } else {
+        var email = getNullIfNullPointer(() -> electronicMailAddress.getCharacterString().getValue().toString());
+        if (email == null || email.trim().isEmpty()) {
             return null;
         }
+        return email;
     }
 
     public static LinkModel mapContactsOnlineResource(CIOnlineResourcePropertyType2 onlineResource) {
         LinkModel onlineResourceItem = LinkModel.builder().build();
 
-        CharacterStringPropertyType linkString = onlineResource.getCIOnlineResource().getLinkage();
-        if (linkString != null
-                && linkString.getCharacterString() != null
-                && linkString.getCharacterString().getValue() != null) {
-            onlineResourceItem.setHref(linkString.getCharacterString().getValue().toString());
-        }
 
-        CharacterStringPropertyType resourceNameString = onlineResource.getCIOnlineResource().getName();
-        if (resourceNameString != null
-                && resourceNameString.getCharacterString() != null
-                && resourceNameString.getCharacterString().getValue() != null) {
-            onlineResourceItem.setTitle(resourceNameString.getCharacterString().getValue().toString());
-        }
+        onlineResourceItem.setHref(getNullIfNullPointer(() ->
+                onlineResource.getCIOnlineResource().getLinkage().getCharacterString().getValue().toString()));
 
-        CharacterStringPropertyType linkTypeString = onlineResource.getCIOnlineResource().getProtocol();
-        if (linkTypeString != null
-                && linkTypeString.getCharacterString() != null
-                && linkTypeString.getCharacterString().getValue() != null) {
-            onlineResourceItem.setType(linkTypeString.getCharacterString().getValue().toString());
-        }
+        onlineResourceItem.setTitle(getNullIfNullPointer(() ->
+                onlineResource.getCIOnlineResource().getName().getCharacterString().getValue().toString()));
+
+        onlineResourceItem.setType(getNullIfNullPointer(() ->
+                onlineResource.getCIOnlineResource().getProtocol().getCharacterString().getValue().toString()));
 
         return onlineResourceItem;
     }
@@ -135,17 +120,14 @@ public class MapperUtils {
     public static ContactsPhoneModel mapContactsPhone(CITelephonePropertyType2 phone) {
         ContactsPhoneModel phoneItem = ContactsPhoneModel.builder().build();
 
-        CharacterStringPropertyType phoneString = phone.getCITelephone().getNumber();
-        if (phoneString != null
-                && phoneString.getCharacterString() != null
-                && phoneString.getCharacterString().getValue() != null) {
-
-            phoneItem.setValue(phoneString.getCharacterString().getValue().toString());
+        String phoneStr = getNullIfNullPointer(() -> phone.getCITelephone().getNumber().getCharacterString().getValue().toString());
+        if (phoneStr != null) {
+            phoneItem.setValue(phoneStr);
         }
 
-        CodeListValueType phoneCode = phone.getCITelephone().getNumberType().getCITelephoneTypeCode();
-        if (phoneCode != null && phoneCode.getCodeListValue() != null && !phoneCode.getCodeListValue().isEmpty()) {
-            phoneItem.setRoles(List.of(phoneCode.getCodeListValue()));
+        var roleStr = getNullIfNullPointer(() -> phone.getCITelephone().getNumberType().getCITelephoneTypeCode().getCodeListValue());
+        if (roleStr != null && !roleStr.isEmpty()) {
+            phoneItem.setRoles(List.of(roleStr));
         }
 
         return phoneItem;
@@ -369,11 +351,13 @@ public class MapperUtils {
                 var addresses = getNullIfNullPointer(() -> contact.getCIContact().getAddress());
                 if (addresses != null) {
                     addresses.forEach(address -> {
+
                         ContactsAddressModel addressModel = mapContactsAddress(address);
                         if (addressModel.isEmpty()) {
                             return;
                         }
                         contacts.getAddresses().add(addressModel);
+
                         var electronicMailAddress = getNullIfNullPointer(() -> address.getCIAddress().getElectronicMailAddress());
                         if (electronicMailAddress != null) {
                             contacts.getEmails().addAll(
@@ -383,6 +367,7 @@ public class MapperUtils {
                                             .filter(Objects::nonNull)
                                             .toList());
                         }
+
                     });
                 }
 
