@@ -8,8 +8,10 @@ import au.org.aodn.stac.model.LinkModel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.security.core.parameters.P;
 
 import java.util.*;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class MapperUtils {
@@ -32,38 +34,25 @@ public class MapperUtils {
         protected LinkedHashSet<LinkModel> onlineResources = new LinkedHashSet<>();
     }
 
+
     public static List<String> mapContactsRole(CIResponsibilityType2 ciResponsibility) {
-        if (
-                ciResponsibility == null
-                || ciResponsibility.getRole() == null
-                || ciResponsibility.getRole().getCIRoleCode() == null
-                || ciResponsibility.getRole().getCIRoleCode().getCodeListValue() == null
-        ) {
-            return Collections.emptyList();
-        }
-        return Collections.singletonList(ciResponsibility.getRole().getCIRoleCode().getCodeListValue());
+        var contactsRole = getNullIfNullPointer(() -> ciResponsibility.getRole().getCIRoleCode().getCodeListValue());
+        return contactsRole == null ? Collections.emptyList() : Collections.singletonList(contactsRole);
     }
 
     public static String mapContactsOrganization(AbstractCIPartyPropertyType2 party) {
-        String organisationString = "";
-        if (party.getAbstractCIParty() != null) {
-            if (party.getAbstractCIParty().getValue().getName().getCharacterString() != null) {
-                organisationString = party.getAbstractCIParty().getValue().getName().getCharacterString().getValue().toString();
-            }
-        }
-        return organisationString;
+        var orgString = getNullIfNullPointer(() -> party.getAbstractCIParty().getValue().getName().getCharacterString().getValue().toString());
+        return orgString == null? "" : orgString;
     }
 
     public static String mapContactsName(CIIndividualPropertyType2 individual) {
-        CharacterStringPropertyType nameString = individual.getCIIndividual().getName();
-        return nameString != null ?
-                individual.getCIIndividual().getName().getCharacterString().getValue().toString() : "";
+        var name = getNullIfNullPointer(() -> individual.getCIIndividual().getName().getCharacterString().getValue().toString());
+        return name == null ? "" : name;
     }
 
     public static String mapContactsPosition(CIIndividualPropertyType2 individual) {
-        CharacterStringPropertyType positionString = individual.getCIIndividual().getPositionName();
-        return positionString != null ?
-                individual.getCIIndividual().getPositionName().getCharacterString().getValue().toString() : "";
+        var position = getNullIfNullPointer(() -> individual.getCIIndividual().getPositionName().getCharacterString().getValue().toString());
+        return position == null ? "" : position;
     }
     /**
      * Attribute will not be there if it is empty, this align with what Elastic handle null or empty field.
@@ -79,34 +68,29 @@ public class MapperUtils {
             deliveryPoints.add(deliveryPointString != null ? deliveryPointString : "");
         });
 
-        if(!deliveryPoints.isEmpty()) {
+        if (!deliveryPoints.isEmpty()) {
             addressItem.setDeliveryPoint(deliveryPoints);
         }
 
-        CharacterStringPropertyType cityString = address.getCIAddress().getCity();
-        if(cityString != null
-                && cityString.getCharacterString() != null
-                && cityString.getCharacterString().getValue() != null) {
-
-            addressItem.setCity(cityString.getCharacterString().getValue().toString());
-        }
+        String city = getNullIfNullPointer(() -> address.getCIAddress().getCity().getCharacterString().getValue().toString());
+        addressItem.setCity(city == null ? "" : city);
 
         CharacterStringPropertyType administrativeAreaString = address.getCIAddress().getAdministrativeArea();
-        if(administrativeAreaString != null
+        if (administrativeAreaString != null
                 && administrativeAreaString.getCharacterString() != null
                 && administrativeAreaString.getCharacterString().getValue() != null) {
             addressItem.setAdministrativeArea(administrativeAreaString.getCharacterString().getValue().toString());
         }
 
         CharacterStringPropertyType postalCodeString = address.getCIAddress().getPostalCode();
-        if(postalCodeString != null
+        if (postalCodeString != null
                 && postalCodeString.getCharacterString() != null
                 && postalCodeString.getCharacterString().getValue() != null) {
             addressItem.setPostalCode(postalCodeString.getCharacterString().getValue().toString());
         }
 
         CharacterStringPropertyType countryString = address.getCIAddress().getCountry();
-        if(countryString != null
+        if (countryString != null
                 && countryString.getCharacterString() != null
                 && countryString.getCharacterString().getValue() != null) {
             addressItem.setCountry(countryString.getCharacterString().getValue().toString());
@@ -117,13 +101,12 @@ public class MapperUtils {
 
     public static String mapContactsEmail(CharacterStringPropertyType electronicMailAddress) {
 
-        if(electronicMailAddress != null
+        if (electronicMailAddress != null
                 && electronicMailAddress.getCharacterString() != null
                 && electronicMailAddress.getCharacterString().getValue() != null
                 && !"".equalsIgnoreCase(electronicMailAddress.getCharacterString().getValue().toString())) {
             return electronicMailAddress.getCharacterString().getValue().toString();
-        }
-        else {
+        } else {
             return null;
         }
     }
@@ -132,21 +115,21 @@ public class MapperUtils {
         LinkModel onlineResourceItem = LinkModel.builder().build();
 
         CharacterStringPropertyType linkString = onlineResource.getCIOnlineResource().getLinkage();
-        if(linkString != null
+        if (linkString != null
                 && linkString.getCharacterString() != null
                 && linkString.getCharacterString().getValue() != null) {
             onlineResourceItem.setHref(linkString.getCharacterString().getValue().toString());
         }
 
         CharacterStringPropertyType resourceNameString = onlineResource.getCIOnlineResource().getName();
-        if(resourceNameString != null
+        if (resourceNameString != null
                 && resourceNameString.getCharacterString() != null
                 && resourceNameString.getCharacterString().getValue() != null) {
             onlineResourceItem.setTitle(resourceNameString.getCharacterString().getValue().toString());
         }
 
         CharacterStringPropertyType linkTypeString = onlineResource.getCIOnlineResource().getProtocol();
-        if(linkTypeString != null
+        if (linkTypeString != null
                 && linkTypeString.getCharacterString() != null
                 && linkTypeString.getCharacterString().getValue() != null) {
             onlineResourceItem.setType(linkTypeString.getCharacterString().getValue().toString());
@@ -159,7 +142,7 @@ public class MapperUtils {
         ContactsPhoneModel phoneItem = ContactsPhoneModel.builder().build();
 
         CharacterStringPropertyType phoneString = phone.getCITelephone().getNumber();
-        if(phoneString != null
+        if (phoneString != null
                 && phoneString.getCharacterString() != null
                 && phoneString.getCharacterString().getValue() != null) {
 
@@ -167,7 +150,7 @@ public class MapperUtils {
         }
 
         CodeListValueType phoneCode = phone.getCITelephone().getNumberType().getCITelephoneTypeCode();
-        if(phoneCode != null && phoneCode.getCodeListValue() != null && !phoneCode.getCodeListValue().isEmpty()) {
+        if (phoneCode != null && phoneCode.getCodeListValue() != null && !phoneCode.getCodeListValue().isEmpty()) {
             phoneItem.setRoles(List.of(phoneCode.getCodeListValue()));
         }
 
@@ -177,8 +160,7 @@ public class MapperUtils {
     public static String mapLanguagesCode(MDDataIdentificationType i) {
         try {
             return i.getDefaultLocale().getPTLocale().getValue().getLanguage().getLanguageCode().getCodeListValue();
-        }
-        catch (NullPointerException e) {
+        } catch (NullPointerException e) {
             return null;
         }
     }
@@ -190,7 +172,7 @@ public class MapperUtils {
                 .filter(f -> f.getAbstractResourceDescription() != null)
                 .filter(f -> f.getAbstractResourceDescription().getValue() != null)
                 .filter(f -> f.getAbstractResourceDescription().getValue() instanceof MDDataIdentificationType)
-                .map(f -> (MDDataIdentificationType)f.getAbstractResourceDescription().getValue())
+                .map(f -> (MDDataIdentificationType) f.getAbstractResourceDescription().getValue())
                 .collect(Collectors.toList());
     }
 
@@ -208,7 +190,7 @@ public class MapperUtils {
                 .filter(f -> f.getAbstractDistribution() != null)
                 .filter(f -> f.getAbstractDistribution().getValue() != null)
                 .filter(f -> f.getAbstractDistribution().getValue() instanceof MDDistributionType)
-                .map(f -> (MDDistributionType)f.getAbstractDistribution().getValue())
+                .map(f -> (MDDistributionType) f.getAbstractDistribution().getValue())
                 .collect(Collectors.toList());
     }
 
@@ -225,258 +207,255 @@ public class MapperUtils {
     /**
      * Look into the CIContact XML and extract related info and return as a Contract object. Please modify this function
      * if more fields need to be returned.
-     *   <mdb:contact>
-     *     <cit:CI_Responsibility>
-     *       <cit:role>
-     *         <cit:CI_RoleCode codeList="http://schemas.aodn.org.au/mcp-3.0/codelists.xml#CI_RoleCode" codeListValue="pointOfContact">pointOfContact</cit:CI_RoleCode>
-     *       </cit:role>
-     *       <cit:party>
-     *         <cit:CI_Organisation xsi:schemaLocation="http://standards.iso.org/iso/19115/-3/mds/2.0 http://standards.iso.org/iso/19115/-3/mds/2.0/mds.xsd">
-     *           <cit:name>
-     *             <gco:CharacterString xsi:schemaLocation="http://standards.iso.org/iso/19115/-3/mds/2.0 http://standards.iso.org/iso/19115/-3/mds/2.0/mds.xsd">CSIRO Oceans &amp; Atmosphere - Hobart</gco:CharacterString>
-     *           </cit:name>
-     *           <cit:contactInfo>
-     *             <cit:CI_Contact xsi:schemaLocation="http://standards.iso.org/iso/19115/-3/mds/2.0 http://standards.iso.org/iso/19115/-3/mds/2.0/mds.xsd">
-     *               <cit:phone>
-     *                 <cit:CI_Telephone>
-     *                   <cit:number>
-     *                     <gco:CharacterString>+61 3 6232 5222</gco:CharacterString>
-     *                   </cit:number>
-     *                   <cit:numberType>
-     *                     <cit:CI_TelephoneTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelist/cat/codelists.xml#CI_RoleCode" codeListValue="voice" />
-     *                   </cit:numberType>
-     *                 </cit:CI_Telephone>
-     *               </cit:phone>
-     *               <cit:phone>
-     *                 <cit:CI_Telephone>
-     *                   <cit:number>
-     *                     <gco:CharacterString>+61 3 6232 5000</gco:CharacterString>
-     *                   </cit:number>
-     *                   <cit:numberType>
-     *                     <cit:CI_TelephoneTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelist/cat/codelists.xml#CI_RoleCode" codeListValue="facsimile" />
-     *                   </cit:numberType>
-     *                 </cit:CI_Telephone>
-     *               </cit:phone>
-     *               <cit:address>
-     *                 <cit:CI_Address>
-     *                   <cit:deliveryPoint>
-     *                     <gco:CharacterString>GPO Box 1538</gco:CharacterString>
-     *                   </cit:deliveryPoint>
-     *                   <cit:city>
-     *                     <gco:CharacterString>Hobart</gco:CharacterString>
-     *                   </cit:city>
-     *                   <cit:administrativeArea>
-     *                     <gco:CharacterString>TAS</gco:CharacterString>
-     *                   </cit:administrativeArea>
-     *                   <cit:postalCode>
-     *                     <gco:CharacterString>7001</gco:CharacterString>
-     *                   </cit:postalCode>
-     *                   <cit:country>
-     *                     <gco:CharacterString>Australia</gco:CharacterString>
-     *                   </cit:country>
-     *                   <cit:electronicMailAddress gco:nilReason="missing">
-     *                     <gco:CharacterString />
-     *                   </cit:electronicMailAddress>
-     *                 </cit:CI_Address>
-     *               </cit:address>
-     *               <cit:onlineResource>
-     *                 <cit:CI_OnlineResource>
-     *                   <cit:linkage>
-     *                     <gco:CharacterString>http://www.csiro.au/en/Research/OandA</gco:CharacterString>
-     *                   </cit:linkage>
-     *                   <cit:protocol>
-     *                     <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
-     *                   </cit:protocol>
-     *                   <cit:description>
-     *                     <gco:CharacterString>Web address for organisation CSIRO Oceans &amp; Atmosphere - Hobart</gco:CharacterString>
-     *                   </cit:description>
-     *                 </cit:CI_OnlineResource>
-     *               </cit:onlineResource>
-     *             </cit:CI_Contact>
-     *           </cit:contactInfo>
-     *           <cit:contactInfo>
-     *             <cit:CI_Contact xsi:schemaLocation="http://standards.iso.org/iso/19115/-3/mds/2.0 http://standards.iso.org/iso/19115/-3/mds/2.0/mds.xsd">
-     *               <cit:phone>
-     *                 <cit:CI_Telephone>
-     *                   <cit:number>
-     *                     <gco:CharacterString>+61 3 6232 5222</gco:CharacterString>
-     *                   </cit:number>
-     *                   <cit:numberType>
-     *                     <cit:CI_TelephoneTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelist/cat/codelists.xml#CI_RoleCode" codeListValue="voice" />
-     *                   </cit:numberType>
-     *                 </cit:CI_Telephone>
-     *               </cit:phone>
-     *               <cit:phone>
-     *                 <cit:CI_Telephone>
-     *                   <cit:number>
-     *                     <gco:CharacterString>+61 3 6232 5000</gco:CharacterString>
-     *                   </cit:number>
-     *                   <cit:numberType>
-     *                     <cit:CI_TelephoneTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelist/cat/codelists.xml#CI_RoleCode" codeListValue="facsimile" />
-     *                   </cit:numberType>
-     *                 </cit:CI_Telephone>
-     *               </cit:phone>
-     *               <cit:address>
-     *                 <cit:CI_Address>
-     *                   <cit:deliveryPoint>
-     *                     <gco:CharacterString>Castray Esplanade</gco:CharacterString>
-     *                   </cit:deliveryPoint>
-     *                   <cit:city>
-     *                     <gco:CharacterString>Hobart</gco:CharacterString>
-     *                   </cit:city>
-     *                   <cit:administrativeArea>
-     *                     <gco:CharacterString>TAS</gco:CharacterString>
-     *                   </cit:administrativeArea>
-     *                   <cit:postalCode>
-     *                     <gco:CharacterString>7000</gco:CharacterString>
-     *                   </cit:postalCode>
-     *                   <cit:country>
-     *                     <gco:CharacterString>Australia</gco:CharacterString>
-     *                   </cit:country>
-     *                   <cit:electronicMailAddress gco:nilReason="missing">
-     *                     <gco:CharacterString />
-     *                   </cit:electronicMailAddress>
-     *                 </cit:CI_Address>
-     *               </cit:address>
-     *               <cit:onlineResource>
-     *                 <cit:CI_OnlineResource>
-     *                   <cit:linkage>
-     *                     <gco:CharacterString>http://www.csiro.au/en/Research/OandA</gco:CharacterString>
-     *                   </cit:linkage>
-     *                   <cit:protocol>
-     *                     <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
-     *                   </cit:protocol>
-     *                   <cit:description>
-     *                     <gco:CharacterString>Web address for organisation CSIRO Oceans &amp; Atmosphere - Hobart</gco:CharacterString>
-     *                   </cit:description>
-     *                 </cit:CI_OnlineResource>
-     *               </cit:onlineResource>
-     *             </cit:CI_Contact>
-     *           </cit:contactInfo>
-     *           <cit:individual>
-     *             <cit:CI_Individual>
-     *               <cit:name>
-     *                 <gco:CharacterString>CSIRO O&amp;A, Information &amp; Data Centre</gco:CharacterString>
-     *               </cit:name>
-     *               <cit:contactInfo>
-     *                 <cit:CI_Contact>
-     *                   <cit:address>
-     *                     <cit:CI_Address>
-     *                       <cit:electronicMailAddress>
-     *                         <gco:CharacterString>data-requests-hf@csiro.au</gco:CharacterString>
-     *                       </cit:electronicMailAddress>
-     *                     </cit:CI_Address>
-     *                   </cit:address>
-     *                 </cit:CI_Contact>
-     *               </cit:contactInfo>
-     *               <cit:positionName>
-     *                 <gco:CharacterString>Data Requests</gco:CharacterString>
-     *               </cit:positionName>
-     *             </cit:CI_Individual>
-     *           </cit:individual>
-     *         </cit:CI_Organisation>
-     *       </cit:party>
-     *     </cit:CI_Responsibility>
-     *   </mdb:contact>
+     * <mdb:contact>
+     * <cit:CI_Responsibility>
+     * <cit:role>
+     * <cit:CI_RoleCode codeList="http://schemas.aodn.org.au/mcp-3.0/codelists.xml#CI_RoleCode" codeListValue="pointOfContact">pointOfContact</cit:CI_RoleCode>
+     * </cit:role>
+     * <cit:party>
+     * <cit:CI_Organisation xsi:schemaLocation="http://standards.iso.org/iso/19115/-3/mds/2.0 http://standards.iso.org/iso/19115/-3/mds/2.0/mds.xsd">
+     * <cit:name>
+     * <gco:CharacterString xsi:schemaLocation="http://standards.iso.org/iso/19115/-3/mds/2.0 http://standards.iso.org/iso/19115/-3/mds/2.0/mds.xsd">CSIRO Oceans &amp; Atmosphere - Hobart</gco:CharacterString>
+     * </cit:name>
+     * <cit:contactInfo>
+     * <cit:CI_Contact xsi:schemaLocation="http://standards.iso.org/iso/19115/-3/mds/2.0 http://standards.iso.org/iso/19115/-3/mds/2.0/mds.xsd">
+     * <cit:phone>
+     * <cit:CI_Telephone>
+     * <cit:number>
+     * <gco:CharacterString>+61 3 6232 5222</gco:CharacterString>
+     * </cit:number>
+     * <cit:numberType>
+     * <cit:CI_TelephoneTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelist/cat/codelists.xml#CI_RoleCode" codeListValue="voice" />
+     * </cit:numberType>
+     * </cit:CI_Telephone>
+     * </cit:phone>
+     * <cit:phone>
+     * <cit:CI_Telephone>
+     * <cit:number>
+     * <gco:CharacterString>+61 3 6232 5000</gco:CharacterString>
+     * </cit:number>
+     * <cit:numberType>
+     * <cit:CI_TelephoneTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelist/cat/codelists.xml#CI_RoleCode" codeListValue="facsimile" />
+     * </cit:numberType>
+     * </cit:CI_Telephone>
+     * </cit:phone>
+     * <cit:address>
+     * <cit:CI_Address>
+     * <cit:deliveryPoint>
+     * <gco:CharacterString>GPO Box 1538</gco:CharacterString>
+     * </cit:deliveryPoint>
+     * <cit:city>
+     * <gco:CharacterString>Hobart</gco:CharacterString>
+     * </cit:city>
+     * <cit:administrativeArea>
+     * <gco:CharacterString>TAS</gco:CharacterString>
+     * </cit:administrativeArea>
+     * <cit:postalCode>
+     * <gco:CharacterString>7001</gco:CharacterString>
+     * </cit:postalCode>
+     * <cit:country>
+     * <gco:CharacterString>Australia</gco:CharacterString>
+     * </cit:country>
+     * <cit:electronicMailAddress gco:nilReason="missing">
+     * <gco:CharacterString />
+     * </cit:electronicMailAddress>
+     * </cit:CI_Address>
+     * </cit:address>
+     * <cit:onlineResource>
+     * <cit:CI_OnlineResource>
+     * <cit:linkage>
+     * <gco:CharacterString>http://www.csiro.au/en/Research/OandA</gco:CharacterString>
+     * </cit:linkage>
+     * <cit:protocol>
+     * <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
+     * </cit:protocol>
+     * <cit:description>
+     * <gco:CharacterString>Web address for organisation CSIRO Oceans &amp; Atmosphere - Hobart</gco:CharacterString>
+     * </cit:description>
+     * </cit:CI_OnlineResource>
+     * </cit:onlineResource>
+     * </cit:CI_Contact>
+     * </cit:contactInfo>
+     * <cit:contactInfo>
+     * <cit:CI_Contact xsi:schemaLocation="http://standards.iso.org/iso/19115/-3/mds/2.0 http://standards.iso.org/iso/19115/-3/mds/2.0/mds.xsd">
+     * <cit:phone>
+     * <cit:CI_Telephone>
+     * <cit:number>
+     * <gco:CharacterString>+61 3 6232 5222</gco:CharacterString>
+     * </cit:number>
+     * <cit:numberType>
+     * <cit:CI_TelephoneTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelist/cat/codelists.xml#CI_RoleCode" codeListValue="voice" />
+     * </cit:numberType>
+     * </cit:CI_Telephone>
+     * </cit:phone>
+     * <cit:phone>
+     * <cit:CI_Telephone>
+     * <cit:number>
+     * <gco:CharacterString>+61 3 6232 5000</gco:CharacterString>
+     * </cit:number>
+     * <cit:numberType>
+     * <cit:CI_TelephoneTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelist/cat/codelists.xml#CI_RoleCode" codeListValue="facsimile" />
+     * </cit:numberType>
+     * </cit:CI_Telephone>
+     * </cit:phone>
+     * <cit:address>
+     * <cit:CI_Address>
+     * <cit:deliveryPoint>
+     * <gco:CharacterString>Castray Esplanade</gco:CharacterString>
+     * </cit:deliveryPoint>
+     * <cit:city>
+     * <gco:CharacterString>Hobart</gco:CharacterString>
+     * </cit:city>
+     * <cit:administrativeArea>
+     * <gco:CharacterString>TAS</gco:CharacterString>
+     * </cit:administrativeArea>
+     * <cit:postalCode>
+     * <gco:CharacterString>7000</gco:CharacterString>
+     * </cit:postalCode>
+     * <cit:country>
+     * <gco:CharacterString>Australia</gco:CharacterString>
+     * </cit:country>
+     * <cit:electronicMailAddress gco:nilReason="missing">
+     * <gco:CharacterString />
+     * </cit:electronicMailAddress>
+     * </cit:CI_Address>
+     * </cit:address>
+     * <cit:onlineResource>
+     * <cit:CI_OnlineResource>
+     * <cit:linkage>
+     * <gco:CharacterString>http://www.csiro.au/en/Research/OandA</gco:CharacterString>
+     * </cit:linkage>
+     * <cit:protocol>
+     * <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
+     * </cit:protocol>
+     * <cit:description>
+     * <gco:CharacterString>Web address for organisation CSIRO Oceans &amp; Atmosphere - Hobart</gco:CharacterString>
+     * </cit:description>
+     * </cit:CI_OnlineResource>
+     * </cit:onlineResource>
+     * </cit:CI_Contact>
+     * </cit:contactInfo>
+     * <cit:individual>
+     * <cit:CI_Individual>
+     * <cit:name>
+     * <gco:CharacterString>CSIRO O&amp;A, Information &amp; Data Centre</gco:CharacterString>
+     * </cit:name>
+     * <cit:contactInfo>
+     * <cit:CI_Contact>
+     * <cit:address>
+     * <cit:CI_Address>
+     * <cit:electronicMailAddress>
+     * <gco:CharacterString>data-requests-hf@csiro.au</gco:CharacterString>
+     * </cit:electronicMailAddress>
+     * </cit:CI_Address>
+     * </cit:address>
+     * </cit:CI_Contact>
+     * </cit:contactInfo>
+     * <cit:positionName>
+     * <gco:CharacterString>Data Requests</gco:CharacterString>
+     * </cit:positionName>
+     * </cit:CI_Individual>
+     * </cit:individual>
+     * </cit:CI_Organisation>
+     * </cit:party>
+     * </cit:CI_Responsibility>
+     * </mdb:contact>
      *
-     * @param contacts The CIContactPropertyType2, it will appear in organization or individual contact
+     * @param contactsProperty The CIContactPropertyType2, it will appear in organization or individual contact
      * @return A temp object to hold the contact info
      */
-    public static Optional<Contacts> mapContactInfo(List<CIContactPropertyType2> contacts) {
-        if(contacts == null) {
+    public static Optional<Contacts> mapContactInfo(List<CIContactPropertyType2> contactsProperty) {
+        if (contactsProperty == null) {
             return Optional.empty();
-        }
-        else {
-            Contacts c = Contacts.builder().build();
-            contacts.forEach(contact -> {
-                // Add all address of organization
-                if (contact.getCIContact() != null && contact.getCIContact().getAddress() != null) {
-                    contact.getCIContact().getAddress().forEach(v -> {
-                        ContactsAddressModel address = MapperUtils.mapContactsAddress(v);
-                        if(!address.isEmpty()) {
-                            c.getAddresses().add(address);
+        } else {
+            Contacts contacts = Contacts.builder().build();
+            contactsProperty.forEach(contact -> {
 
-                            if (v.getCIAddress() != null && v.getCIAddress().getElectronicMailAddress() != null) {
-                                c.getEmails().addAll(
-                                        v.getCIAddress()
-                                                .getElectronicMailAddress()
-                                                .stream()
-                                                .map(MapperUtils::mapContactsEmail)
-                                                .filter(Objects::nonNull)
-                                                .toList());
-                            }
+                // Add all address of organization
+                var addresses = getNullIfNullPointer(() -> contact.getCIContact().getAddress());
+                if (addresses != null) {
+                    addresses.forEach(address -> {
+                        ContactsAddressModel addressModel = mapContactsAddress(address);
+                        if (addressModel.isEmpty()) {
+                            return;
+                        }
+                        contacts.getAddresses().add(addressModel);
+                        var electronicMailAddress = getNullIfNullPointer(() -> address.getCIAddress().getElectronicMailAddress());
+                        if (electronicMailAddress != null) {
+                            contacts.getEmails().addAll(
+                                    electronicMailAddress
+                                            .stream()
+                                            .map(MapperUtils::mapContactsEmail)
+                                            .filter(Objects::nonNull)
+                                            .toList());
                         }
                     });
                 }
+
                 // Add phone number of organization
-                if (contact.getCIContact() != null && contact.getCIContact().getPhone() != null) {
-                    c.getPhones().addAll(contact.getCIContact().getPhone().stream().map(MapperUtils::mapContactsPhone).toList());
+                var phone = getNullIfNullPointer(() -> contact.getCIContact().getPhone());
+                if (phone != null) {
+                    contacts.getPhones().addAll(phone.stream().map(MapperUtils::mapContactsPhone).toList());
                 }
                 // Online resources
-                if (contact.getCIContact().getOnlineResource() != null) {
-                    c.getOnlineResources().addAll(contact.getCIContact().getOnlineResource().stream().map(MapperUtils::mapContactsOnlineResource).toList());
+                var onlineResource = getNullIfNullPointer(() -> contact.getCIContact().getOnlineResource());
+                if (onlineResource != null) {
+                    contacts.getOnlineResources().addAll(onlineResource.stream().map(MapperUtils::mapContactsOnlineResource).toList());
                 }
             });
-
-            return Optional.of(c);
+            return Optional.of(contacts);
         }
     }
 
     public static List<ContactsModel> mapContactsFromOrg(CIResponsibilityType2 ciResponsibility, CIOrganisationType2 organisation) {
 
-        Optional<Contacts> org = MapperUtils.mapContactInfo(organisation.getContactInfo());
+        Optional<Contacts> org = mapContactInfo(organisation.getContactInfo());
+        if (getNullIfNullPointer(() -> organisation.getIndividual()) == null) {
+            return Collections.emptyList();
+        }
         return new ArrayList<>(organisation
                 .getIndividual()
                 .stream()
                 .map(individual -> {
-                    ContactsModel invContactsModel = ContactsModel.builder().build();
-                    invContactsModel.setName(MapperUtils.mapContactsName(individual));
-                    invContactsModel.setPosition(MapperUtils.mapContactsPosition(individual));
-                    invContactsModel.setRoles(MapperUtils.mapContactsRole(ciResponsibility));
-                    invContactsModel.setOrganization(organisation.getName().getCharacterString().getValue().toString());
+                    ContactsModel contactsModel = ContactsModel.builder().build();
+                    contactsModel.setName(mapContactsName(individual));
+                    contactsModel.setPosition(mapContactsPosition(individual));
+                    contactsModel.setRoles(mapContactsRole(ciResponsibility));
+                    var orgName = getNullIfNullPointer(() -> organisation.getName().getCharacterString().getValue().toString());
+                    contactsModel.setOrganization(orgName == null ? "" : orgName);
 
-                    Optional<Contacts> inv = MapperUtils.mapContactInfo(individual.getCIIndividual().getContactInfo());
-                    Contacts i = org.orElse(null);
+                    Optional<Contacts> individualContacts = mapContactInfo(individual.getCIIndividual().getContactInfo());
+                    Contacts orgContacts = org.orElse(null);
 
                     // Address
-                    if (inv.isPresent() && !inv.get().getAddresses().isEmpty()) {
-                        invContactsModel.setAddresses(inv.get().getAddresses());
-                    } else {
-                        invContactsModel.setAddresses(i != null ? i.getAddresses() : null);
-                    }
-                    // Email
-                    if (inv.isPresent() && !inv.get().getEmails().isEmpty()) {
-                        invContactsModel.setEmails(inv.get().getEmails());
-                    } else {
-                        invContactsModel.setEmails(i != null ? i.getEmails() : null);
-                    }
-                    // Phone
-                    if (inv.isPresent() && !inv.get().getPhones().isEmpty()) {
-                        invContactsModel.setPhones(inv.get().getPhones());
-                    } else {
-                        invContactsModel.setPhones(i != null ? i.getPhones() : null);
-                    }
-                    // Online Resources
-                    // Phone
-                    if (inv.isPresent() && !inv.get().getOnlineResources().isEmpty()) {
-                        invContactsModel.setLinks(inv.get().getOnlineResources());
-                    } else {
-                        invContactsModel.setLinks(i != null ? i.getOnlineResources() : null);
-                    }
+                    contactsModel.setAddresses(individualContacts.map(Contacts::getAddresses)
+                            .orElse(orgContacts != null ? orgContacts.getAddresses() : null));
 
-                    return invContactsModel;
+                    // Email
+                    contactsModel.setEmails(individualContacts.map(Contacts::getEmails)
+                            .orElse(orgContacts != null ? orgContacts.getEmails() : null));
+
+                    // Phone
+                    contactsModel.setPhones(individualContacts.map(Contacts::getPhones)
+                            .orElse(orgContacts != null ? orgContacts.getPhones() : null));
+
+                    // Online Resources
+                    contactsModel.setLinks(individualContacts.map(Contacts::getOnlineResources)
+                            .orElse(orgContacts != null ? orgContacts.getOnlineResources() : null));
+
+                    return contactsModel;
                 })
                 .toList());
     }
 
     public static List<ContactsModel> mapOrgContacts(CIResponsibilityType2 ciResponsibility, AbstractCIPartyPropertyType2 party) {
         List<ContactsModel> results = new ArrayList<>();
-        if(party.getAbstractCIParty() != null
+        if (party.getAbstractCIParty() != null
                 && party.getAbstractCIParty().getValue() != null
                 && party.getAbstractCIParty().getValue() instanceof CIOrganisationType2 organisation) {
-            Optional<MapperUtils.Contacts> org = MapperUtils.mapContactInfo(organisation.getContactInfo());
+            Optional<Contacts> org = mapContactInfo(organisation.getContactInfo());
 
-            if(organisation.getIndividual() != null && !organisation.getIndividual().isEmpty()) {
+            if (organisation.getIndividual() != null && !organisation.getIndividual().isEmpty()) {
                 results.addAll(mapContactsFromOrg(ciResponsibility, organisation));
             } else {
                 ContactsModel orgContactsModel = ContactsModel.builder().build();
@@ -484,21 +463,20 @@ public class MapperUtils {
                 orgContactsModel.setOrganization(MapperUtils.mapContactsOrganization(party));
                 orgContactsModel.setOrganization(organisation.getName().getCharacterString().getValue().toString());
 
-                if(org.isPresent() && !org.get().getAddresses().isEmpty()) {
-                    orgContactsModel.setAddresses(org.get().getAddresses());
-                }
-
-                if(org.isPresent() && !org.get().getEmails().isEmpty()) {
-                    orgContactsModel.setEmails(org.get().getEmails());
-                }
-
-                if(org.isPresent() && !org.get().getPhones().isEmpty()) {
-                    orgContactsModel.setPhones(org.get().getPhones());
-                }
-
-                if(org.isPresent() && !org.get().getOnlineResources().isEmpty()) {
-                    orgContactsModel.setLinks(org.get().getOnlineResources());
-                }
+                org.ifPresent(o -> {
+                    if (!o.getAddresses().isEmpty()) {
+                        orgContactsModel.setAddresses(o.getAddresses());
+                    }
+                    if (!o.getEmails().isEmpty()) {
+                        orgContactsModel.setEmails(o.getEmails());
+                    }
+                    if (!o.getPhones().isEmpty()) {
+                        orgContactsModel.setPhones(o.getPhones());
+                    }
+                    if (!o.getOnlineResources().isEmpty()) {
+                        orgContactsModel.setLinks(o.getOnlineResources());
+                    }
+                });
 
                 results.add(orgContactsModel);
             }
@@ -517,5 +495,26 @@ public class MapperUtils {
             contact.setRoles(roles);
         });
         return contacts;
+    }
+
+    /**
+     * This function is used to get rid of too much null checking.
+     * ignore NullPointerException when calling a function that may throw NullPointerException.
+     * Example:
+     * For getting a deep value like this:
+     * <code>phoneCode = phone.getCITelephone().getNumberType().getCITelephoneTypeCode();</code>
+     * every getter needs to check null.
+     * If any of the getter is null, this method will return null without throwing NullPointerException.
+     *
+     * @param supplier The function that may throw NullPointerException
+     * @param <T>      The type of the return value
+     * @return null if any of the getter is null
+     */
+    public static <T> T getNullIfNullPointer(Supplier<T> supplier) {
+        try {
+            return supplier.get();
+        } catch (NullPointerException ignored) {
+            return null;
+        }
     }
 }
