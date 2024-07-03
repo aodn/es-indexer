@@ -554,9 +554,12 @@ public abstract class StacCollectionMapperService {
     @Named("mapContacts")
     List<ContactsModel> mapContacts(MDMetadataType source) {
         List<ContactsModel> results = new ArrayList<>();
-        List<MDDataIdentificationType> items = MapperUtils.findMDDataIdentificationType(source);
-        if (!items.isEmpty()) {
-            for (MDDataIdentificationType item : items) {
+
+        // get about contacts
+        List<MDDataIdentificationType> dataIdentificationTypeItems = MapperUtils.findMDDataIdentificationType(source);
+        if (!dataIdentificationTypeItems.isEmpty()) {
+
+            for (MDDataIdentificationType item : dataIdentificationTypeItems) {
                 item.getPointOfContact().forEach(poc -> {
                     if (poc.getAbstractResponsibility() != null) {
 
@@ -569,87 +572,9 @@ public abstract class StacCollectionMapperService {
                             else {
                                 ciResponsibility.getParty().forEach(party -> {
 
-                                    if(party.getAbstractCIParty() != null
-                                            && party.getAbstractCIParty().getValue() != null
-                                            && party.getAbstractCIParty().getValue() instanceof CIOrganisationType2 organisation) {
-
-                                        // Extract organizational level contact
-                                        Optional<MapperUtils.Contacts> org = MapperUtils.mapContactInfo(organisation.getContactInfo());
-
-                                        // We have individual contact?
-                                        if(organisation.getIndividual() != null && !organisation.getIndividual().isEmpty()) {
-                                            results.addAll(organisation
-                                                    .getIndividual()
-                                                    .stream()
-                                                    .map(individual -> {
-                                                        ContactsModel invContactsModel = ContactsModel.builder().build();
-                                                        invContactsModel.setName(MapperUtils.mapContactsName(individual));
-                                                        invContactsModel.setPosition(MapperUtils.mapContactsPosition(individual));
-                                                        invContactsModel.setRoles(MapperUtils.mapContactsRole(ciResponsibility));
-                                                        invContactsModel.setOrganization(organisation.getName().getCharacterString().getValue().toString());
-
-                                                        Optional<MapperUtils.Contacts> inv = MapperUtils.mapContactInfo(individual.getCIIndividual().getContactInfo());
-                                                        MapperUtils.Contacts i = org.orElse(null);
-
-                                                        // Address
-                                                        if(inv.isPresent() && !inv.get().getAddresses().isEmpty()) {
-                                                            invContactsModel.setAddresses(inv.get().getAddresses());
-                                                        }
-                                                        else {
-                                                            invContactsModel.setAddresses(i != null ? i.getAddresses() : null);
-                                                        }
-                                                        // Email
-                                                        if(inv.isPresent() && !inv.get().getEmails().isEmpty()) {
-                                                            invContactsModel.setEmails(inv.get().getEmails());
-                                                        }
-                                                        else {
-                                                            invContactsModel.setEmails(i != null ? i.getEmails() : null);
-                                                        }
-                                                        // Phone
-                                                        if(inv.isPresent() && !inv.get().getPhones().isEmpty()) {
-                                                            invContactsModel.setPhones(inv.get().getPhones());
-                                                        }
-                                                        else {
-                                                            invContactsModel.setPhones(i != null ? i.getPhones() : null);
-                                                        }
-                                                        // Online Resources
-                                                        // Phone
-                                                        if(inv.isPresent() && !inv.get().getOnlineResources().isEmpty()) {
-                                                            invContactsModel.setLinks(inv.get().getOnlineResources());
-                                                        }
-                                                        else {
-                                                            invContactsModel.setLinks(i != null ? i.getOnlineResources() : null);
-                                                        }
-
-                                                        return invContactsModel;
-                                                    })
-                                                    .toList());
-                                        }
-                                        else {
-                                            ContactsModel orgContactsModel = ContactsModel.builder().build();
-                                            orgContactsModel.setRoles(MapperUtils.mapContactsRole(ciResponsibility));
-                                            orgContactsModel.setOrganization(MapperUtils.mapContactsOrganization(party));
-                                            orgContactsModel.setOrganization(organisation.getName().getCharacterString().getValue().toString());
-
-                                            if(org.isPresent() && !org.get().getAddresses().isEmpty()) {
-                                                orgContactsModel.setAddresses(org.get().getAddresses());
-                                            }
-
-                                            if(org.isPresent() && !org.get().getEmails().isEmpty()) {
-                                                orgContactsModel.setEmails(org.get().getEmails());
-                                            }
-
-                                            if(org.isPresent() && !org.get().getPhones().isEmpty()) {
-                                                orgContactsModel.setPhones(org.get().getPhones());
-                                            }
-
-                                            if(org.isPresent() && !org.get().getOnlineResources().isEmpty()) {
-                                                orgContactsModel.setLinks(org.get().getOnlineResources());
-                                            }
-
-                                            results.add(orgContactsModel);
-                                        }
-                                    }
+                                    // to tag data contacts (on the "about" panel)
+                                    var mappedContacts = MapperUtils.mapOrgContacts(ciResponsibility, party);
+                                    results.addAll(MapperUtils.addRoleToContacts(mappedContacts, "about"));
                                 });
                             }
                         }
@@ -660,6 +585,28 @@ public abstract class StacCollectionMapperService {
                 });
             }
         }
+
+        // get metadata contact
+        var mdContacts = MapperUtils.findMDContact(source);
+        if (!mdContacts.isEmpty()) {
+            for (var mdContact : mdContacts) {
+                var responsibilityValue = mdContact.getAbstractResponsibility().getValue();
+                if (
+                        !(responsibilityValue instanceof final CIResponsibilityType2 ciResponsibility)
+                                || ciResponsibility.getParty() == null) {
+                    continue;
+                }
+
+                for (var party : ciResponsibility.getParty()) {
+
+                    // to tag metadata contacts (on the "metadata" panel)
+                    var mappedContacts = MapperUtils.mapOrgContacts(ciResponsibility, party);
+                    results.addAll(MapperUtils.addRoleToContacts(mappedContacts, "metadata"));
+                }
+            }
+        }
+        // TODO: (will do in future PR) get citation contacts
+
         return results;
     }
 
@@ -689,6 +636,7 @@ public abstract class StacCollectionMapperService {
                 results.add(languageModel);
             }
         }
+
         return results;
     }
 
