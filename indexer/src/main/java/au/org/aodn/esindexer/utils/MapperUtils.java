@@ -8,7 +8,6 @@ import au.org.aodn.stac.model.LinkModel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.security.core.parameters.P;
 
 import java.util.*;
 import java.util.function.Supplier;
@@ -35,22 +34,22 @@ public class MapperUtils {
     }
 
     public static List<String> mapContactsRole(CIResponsibilityType2 ciResponsibility) {
-        var contactsRole = getNullIfNullPointer(() -> ciResponsibility.getRole().getCIRoleCode().getCodeListValue());
+        var contactsRole = safeGet(() -> ciResponsibility.getRole().getCIRoleCode().getCodeListValue());
         return contactsRole == null ? Collections.emptyList() : Collections.singletonList(contactsRole);
     }
 
     public static String mapContactsOrganization(AbstractCIPartyPropertyType2 party) {
-        var orgString = getNullIfNullPointer(() -> party.getAbstractCIParty().getValue().getName().getCharacterString().getValue().toString());
+        var orgString = safeGet(() -> party.getAbstractCIParty().getValue().getName().getCharacterString().getValue().toString());
         return orgString == null? "" : orgString;
     }
 
     public static String mapContactsName(CIIndividualPropertyType2 individual) {
-        var name = getNullIfNullPointer(() -> individual.getCIIndividual().getName().getCharacterString().getValue().toString());
+        var name = safeGet(() -> individual.getCIIndividual().getName().getCharacterString().getValue().toString());
         return name == null ? "" : name;
     }
 
     public static String mapContactsPosition(CIIndividualPropertyType2 individual) {
-        var position = getNullIfNullPointer(() -> individual.getCIIndividual().getPositionName().getCharacterString().getValue().toString());
+        var position = safeGet(() -> individual.getCIIndividual().getPositionName().getCharacterString().getValue().toString());
         return position == null ? "" : position;
     }
     /**
@@ -71,19 +70,19 @@ public class MapperUtils {
             addressItem.setDeliveryPoint(deliveryPoints);
         }
 
-        var city = getNullIfNullPointer(() -> address.getCIAddress().getCity().getCharacterString().getValue().toString());
+        var city = safeGet(() -> address.getCIAddress().getCity().getCharacterString().getValue().toString());
         if (city != null) {
             addressItem.setCity(city);
         }
-        var administrativeArea = getNullIfNullPointer(() -> address.getCIAddress().getAdministrativeArea().getCharacterString().getValue().toString());
+        var administrativeArea = safeGet(() -> address.getCIAddress().getAdministrativeArea().getCharacterString().getValue().toString());
         if (administrativeArea != null) {
             addressItem.setAdministrativeArea(administrativeArea);
         }
-        var postalCode = getNullIfNullPointer(() -> address.getCIAddress().getPostalCode().getCharacterString().getValue().toString());
+        var postalCode = safeGet(() -> address.getCIAddress().getPostalCode().getCharacterString().getValue().toString());
         if (postalCode != null) {
             addressItem.setPostalCode(postalCode);
         }
-        var country = getNullIfNullPointer(() -> address.getCIAddress().getCountry().getCharacterString().getValue().toString());
+        var country = safeGet(() -> address.getCIAddress().getCountry().getCharacterString().getValue().toString());
         if (country != null) {
             addressItem.setCountry(country);
         }
@@ -92,23 +91,34 @@ public class MapperUtils {
     }
 
     public static String mapContactsEmail(CharacterStringPropertyType electronicMailAddress) {
-        var email = getNullIfNullPointer(() -> electronicMailAddress.getCharacterString().getValue().toString());
+        var email = safeGet(() -> electronicMailAddress.getCharacterString().getValue().toString());
+
         if (email == null || email.trim().isEmpty()) {
             return null;
         }
         return email;
     }
 
+    public static String mapContactsEmail2(CharacterStringPropertyType electronicMailAddress) {
+        var email = safeGet(() -> electronicMailAddress.getCharacterString().getValue().toString());
+
+
+        if (email != null && !email.trim().isEmpty()) {
+            return email;
+        }
+        return null;
+    }
+
     public static LinkModel mapContactsOnlineResource(CIOnlineResourcePropertyType2 onlineResource) {
         LinkModel onlineResourceItem = LinkModel.builder().build();
 
-        onlineResourceItem.setHref(getNullIfNullPointer(() ->
+        onlineResourceItem.setHref(safeGet(() ->
                 onlineResource.getCIOnlineResource().getLinkage().getCharacterString().getValue().toString()));
 
-        onlineResourceItem.setTitle(getNullIfNullPointer(() ->
+        onlineResourceItem.setTitle(safeGet(() ->
                 onlineResource.getCIOnlineResource().getName().getCharacterString().getValue().toString()));
 
-        onlineResourceItem.setType(getNullIfNullPointer(() ->
+        onlineResourceItem.setType(safeGet(() ->
                 onlineResource.getCIOnlineResource().getProtocol().getCharacterString().getValue().toString()));
 
         return onlineResourceItem;
@@ -117,12 +127,12 @@ public class MapperUtils {
     public static ContactsPhoneModel mapContactsPhone(CITelephonePropertyType2 phone) {
         ContactsPhoneModel phoneItem = ContactsPhoneModel.builder().build();
 
-        String phoneStr = getNullIfNullPointer(() -> phone.getCITelephone().getNumber().getCharacterString().getValue().toString());
+        String phoneStr = safeGet(() -> phone.getCITelephone().getNumber().getCharacterString().getValue().toString());
         if (phoneStr != null) {
             phoneItem.setValue(phoneStr);
         }
 
-        var roleStr = getNullIfNullPointer(() -> phone.getCITelephone().getNumberType().getCITelephoneTypeCode().getCodeListValue());
+        var roleStr = safeGet(() -> phone.getCITelephone().getNumberType().getCITelephoneTypeCode().getCodeListValue());
         if (roleStr != null && !roleStr.isEmpty()) {
             phoneItem.setRoles(List.of(roleStr));
         }
@@ -345,7 +355,7 @@ public class MapperUtils {
             contactsProperty.forEach(contact -> {
 
                 // Add all address of organization
-                var addresses = getNullIfNullPointer(() -> contact.getCIContact().getAddress());
+                var addresses = safeGet(() -> contact.getCIContact().getAddress());
                 if (addresses != null) {
                     addresses.forEach(address -> {
 
@@ -355,7 +365,7 @@ public class MapperUtils {
                         }
                         contacts.getAddresses().add(addressModel);
 
-                        var electronicMailAddress = getNullIfNullPointer(() -> address.getCIAddress().getElectronicMailAddress());
+                        var electronicMailAddress = safeGet(() -> address.getCIAddress().getElectronicMailAddress());
                         if (electronicMailAddress != null) {
                             contacts.getEmails().addAll(
                                     electronicMailAddress
@@ -368,12 +378,12 @@ public class MapperUtils {
                 }
 
                 // Add phone number of organization
-                var phone = getNullIfNullPointer(() -> contact.getCIContact().getPhone());
+                var phone = safeGet(() -> contact.getCIContact().getPhone());
                 if (phone != null) {
                     contacts.getPhones().addAll(phone.stream().map(MapperUtils::mapContactsPhone).toList());
                 }
                 // Online resources
-                var onlineResource = getNullIfNullPointer(() -> contact.getCIContact().getOnlineResource());
+                var onlineResource = safeGet(() -> contact.getCIContact().getOnlineResource());
                 if (onlineResource != null) {
                     contacts.getOnlineResources().addAll(onlineResource.stream().map(MapperUtils::mapContactsOnlineResource).toList());
                 }
@@ -385,7 +395,7 @@ public class MapperUtils {
     public static List<ContactsModel> mapContactsFromOrg(CIResponsibilityType2 ciResponsibility, CIOrganisationType2 organisation) {
 
         Optional<Contacts> org = mapContactInfo(organisation.getContactInfo());
-        if (getNullIfNullPointer(organisation::getIndividual) == null) {
+        if (safeGet(organisation::getIndividual) == null) {
             return Collections.emptyList();
         }
         return new ArrayList<>(organisation
@@ -396,7 +406,7 @@ public class MapperUtils {
                     contactsModel.setName(mapContactsName(individual));
                     contactsModel.setPosition(mapContactsPosition(individual));
                     contactsModel.setRoles(mapContactsRole(ciResponsibility));
-                    var orgName = getNullIfNullPointer(() -> organisation.getName().getCharacterString().getValue().toString());
+                    var orgName = safeGet(() -> organisation.getName().getCharacterString().getValue().toString());
                     contactsModel.setOrganization(orgName == null ? "" : orgName);
 
                     Optional<Contacts> individualContacts = mapContactInfo(individual.getCIIndividual().getContactInfo());
@@ -476,18 +486,15 @@ public class MapperUtils {
 
     /**
      * This function is used to get rid of too much null checking.
-     * ignore NullPointerException when calling a function that may throw NullPointerException.
      * Example:
      * For getting a deep value like this:
      * <code>phoneCode = phone.getCITelephone().getNumberType().getCITelephoneTypeCode();</code>
      * every getter needs to check null.
-     * If any of the getter is null, this method will return null without throwing NullPointerException.
-     *
      * @param supplier The function that may throw NullPointerException
      * @param <T>      The type of the return value
      * @return null if any of the getter is null
      */
-    public static <T> T getNullIfNullPointer(Supplier<T> supplier) {
+    public static <T> T safeGet(Supplier<T> supplier) {
         try {
             return supplier.get();
         } catch (NullPointerException ignored) {

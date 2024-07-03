@@ -591,12 +591,12 @@ public abstract class StacCollectionMapperService {
         if (!mdContacts.isEmpty()) {
             for (var mdContact : mdContacts) {
                 var responsibilityValue = mdContact.getAbstractResponsibility().getValue();
-                if (!(responsibilityValue instanceof final CIResponsibilityType2 ciResponsibility)) {
+                if (
+                        !(responsibilityValue instanceof final CIResponsibilityType2 ciResponsibility)
+                                || ciResponsibility.getParty() == null) {
                     continue;
                 }
-                if (ciResponsibility.getParty() == null) {
-                    continue;
-                }
+
                 for (var party : ciResponsibility.getParty()) {
 
                     // to tag metadata contacts (on the "metadata" panel)
@@ -609,9 +609,6 @@ public abstract class StacCollectionMapperService {
 
         return results;
     }
-
-
-
 
     @Named("mapLanguages")
     protected List<LanguageModel> mapLanguages(MDMetadataType source) {
