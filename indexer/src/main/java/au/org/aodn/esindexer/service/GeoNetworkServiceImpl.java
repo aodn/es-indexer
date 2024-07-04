@@ -13,7 +13,6 @@ import co.elastic.clients.elasticsearch._types.query_dsl.MatchAllQuery;
 
 import co.elastic.clients.elasticsearch.core.SearchRequest;
 import co.elastic.clients.elasticsearch.core.SearchResponse;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.logging.log4j.LogManager;
@@ -49,7 +48,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
     @Autowired
     protected GeoNetworkServiceImpl self;
 
-    @Value("${elasticsearch.query.pageSize:1500}")
+    @Value("${elasticsearch.query.pageSize:500}")
     protected int ES_PAGE_SIZE;
 
     protected static final Logger logger = LogManager.getLogger(GeoNetworkServiceImpl.class);
@@ -448,11 +447,11 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
     )
     @Override
     public Iterable<String> getAllMetadataRecords() {
-
+        SearchRequest req = createSearchAllUUID(null);
         try {
             final AtomicReference<String> lastUUID = new AtomicReference<>(null);
             final AtomicReference<SearchResponse<ObjectNode>> response =
-                    new AtomicReference<>(gn4ElasticClient.search(createSearchAllUUID(null), ObjectNode.class));
+                    new AtomicReference<>(gn4ElasticClient.search(req, ObjectNode.class));
 
             if(response.get().hits() != null
                     && response.get().hits().hits() != null
@@ -527,7 +526,10 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
             }
         }
         catch(IOException e) {
-            throw new RuntimeException("Failed to fetch data from GeoNetwork Elastic API, too busy?");
+            throw new RuntimeException(
+                    String.format("Failed to fetch data from GeoNetwork Elastic API, too busy? Query is %s", req.toString()),
+                    e
+            );
         }
     }
 

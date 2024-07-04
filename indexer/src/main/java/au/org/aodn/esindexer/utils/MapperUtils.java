@@ -59,15 +59,20 @@ public class MapperUtils {
      */
     public static ContactsAddressModel mapContactsAddress(CIAddressPropertyType2 address) {
         ContactsAddressModel addressItem = ContactsAddressModel.builder().build();
-        List<String> deliveryPoints = new ArrayList<>();
 
-        address.getCIAddress().getDeliveryPoint().forEach(deliveryPoint -> {
-            String deliveryPointString = deliveryPoint.getCharacterString().getValue().toString();
-            deliveryPoints.add(deliveryPointString != null ? deliveryPointString : "");
-        });
+        List<au.org.aodn.metadata.iso19115_3_2018.CharacterStringPropertyType> v = safeGet(() -> address.getCIAddress().getDeliveryPoint());
 
-        if (!deliveryPoints.isEmpty()) {
-            addressItem.setDeliveryPoint(deliveryPoints);
+        if(v != null) {
+            List<String> deliveryPoints = new ArrayList<>();
+
+            v.forEach(deliveryPoint -> {
+                String deliveryPointString = deliveryPoint.getCharacterString().getValue().toString();
+                deliveryPoints.add(deliveryPointString != null ? deliveryPointString : "");
+            });
+
+            if (!deliveryPoints.isEmpty()) {
+                addressItem.setDeliveryPoint(deliveryPoints);
+            }
         }
 
         var city = safeGet(() -> address.getCIAddress().getCity().getCharacterString().getValue().toString());

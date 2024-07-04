@@ -1,14 +1,23 @@
-version: '3.9'
-
 # start a test instance of gn4 and elastic search 7 that required by gn4, it is better to debug this by
 # first start this compose locally and make sure it works before you run it with the autotest. That makes
 # your debug easier.
 services:
+  setup:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.3
+    user: "1000"
+    command: >
+      bash -c '
+        until curl http://elastic:9200 | grep -q "missing authentication credentials"; do echo "Waiting es-container up... "; sleep 2; done;
+        echo "Setting kibana_system password";
+        until curl -s -u "elastic:changeme" -H "Content-Type: application/json" http://elastic:9200/_security/user/kibana_system/_password -d "{\"password\":\"password\"}" | grep -q "^{}"; do sleep 10; done;
+        echo "All done";
+      '
+
   elastic:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.12
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.3
     environment:
-      - ES_JAVA_OPTS=-Xms4g -Xmx4g
-      - ELASTIC_PASSWORD=password
+      - ES_JAVA_OPTS=-Xms1g -Xmx2g
+      - ELASTIC_PASSWORD=changeme
       - xpack.security.enabled=true
       - discovery.type=single-node
     healthcheck:
@@ -22,10 +31,10 @@ services:
       retries: 120
 
   kibana:
-    image: docker.elastic.co/kibana/kibana:7.17.12
+    image: docker.elastic.co/kibana/kibana:8.11.3
     environment:
       - ELASTICSEARCH_HOSTS=http://elastic:9200
-      - ELASTICSEARCH_USERNAME=elastic
+      - ELASTICSEARCH_USERNAME=kibana_system
       - ELASTICSEARCH_PASSWORD=password
       - ENTERPRISESEARCH_HOST=http://enterprise-search:3002
     depends_on:
@@ -42,18 +51,20 @@ services:
       retries: 120
 
   geonetwork:
-    image: geonetwork:4.2.5
-    restart: always
+    image: geonetwork:4.4.5
     # https://github.com/docker/compose/issues/8154
     depends_on:
       kibana:
         condition: service_healthy
     environment:
-      ES_PROTOCOL: ${ES_PROTOCOL:-http}
-      ES_HOST: ${ES_HOST:-elastic}
-      ES_PORT: ${ES_PORT:-9200}
-      ES_USERNAME: ${ES_USERNAME:-elastic}
-      ES_PASSWORD: ${ES_PASSWORD:-password}
+      GN_CONFIG_PROPERTIES: >-
+        -Des.protocol=${ES_PROTOCOL:-http}
+        -Des.host=${ES_HOST:-elastic}
+        -Des.port=${ES_PORT:-9200}
+        -Des.url=${ES_PROTOCOL:-http}://${ES_HOST:-elastic}:${ES_PORT:-9200}
+        -Des.username=${ES_USERNAME:-elastic}
+        -Des.password=${ES_PASSWORD:-changeme}
+
       KB_URL: ${KB_URL:-http://kibana:5601}
     # If you want to debug this yml, you can uncomment the port mapping
     # however port is of no use when running in testcontainer
