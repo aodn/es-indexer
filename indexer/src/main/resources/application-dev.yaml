@@ -8,8 +8,7 @@ elasticsearch:
   apiKey: sample-api-key
 
 geonetwork:
-  # host: https://geonetwork-edge.edge.aodn.org.au
-  host: http://localhost:8080
+  host: https://geonetwork-edge.edge.aodn.org.au
   search:
     api:
       index: "records"
