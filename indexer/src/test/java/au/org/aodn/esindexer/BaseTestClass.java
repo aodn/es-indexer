@@ -23,6 +23,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.*;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
 
@@ -187,31 +189,51 @@ public class BaseTestClass {
         }
     }
 
-    public String deleteRecord(String uuid) {
+    public void deleteRecord(String... uuids) {
+        CountDownLatch latch = new CountDownLatch(1);
 
-        logger.info("Deleting GN doc {}", uuid);
-        HttpEntity<String> requestEntity = getRequestEntity(null);
+        try {
+            HttpEntity<String> requestEntity = getRequestEntity(null);
 
-        ResponseEntity<String> r = testRestTemplate
-                .exchange(
-                        getRecordUrl(uuid),
-                        HttpMethod.DELETE,
-                        requestEntity,
-                        String.class
-                );
-        logger.info("{}", r.getStatusCode());
+            // Index the item so that query yield the right result before delete
+            ResponseEntity<Void> t = testRestTemplate
+                    .exchange(
+                            getIndexUrl(),
+                            HttpMethod.PUT,
+                            requestEntity,
+                            Void.class
+                    );
+            assertEquals("Trigger index OK", HttpStatus.OK, t.getStatusCode());
+            // Cannot execute too fast, give it some wait time
+            latch.await(2, TimeUnit.SECONDS);
 
-        // Index the item so that query yield the right result
-        ResponseEntity<Void> t = testRestTemplate
-                .exchange(
-                        getIndexUrl(),
-                        HttpMethod.PUT,
-                        requestEntity,
-                        Void.class
-                );
-        assertEquals("Trigger index OK", HttpStatus.OK, t.getStatusCode());
+            for(String uuid: uuids) {
+                logger.info("Deleting GN doc {}", uuid);
+                ResponseEntity<String> r = testRestTemplate
+                        .exchange(
+                                getRecordUrl(uuid),
+                                HttpMethod.DELETE,
+                                requestEntity,
+                                String.class
+                        );
+                logger.info("{}", r.getStatusCode());
+            }
 
-        return r.getBody();
+            // Index the item so that query yield the right result after delete
+            t = testRestTemplate
+                    .exchange(
+                            getIndexUrl(),
+                            HttpMethod.PUT,
+                            requestEntity,
+                            Void.class
+                    );
+            assertEquals("Trigger index OK", HttpStatus.OK, t.getStatusCode());
+            // Cannot execute too fast, give it some wait time
+            latch.await(2, TimeUnit.SECONDS);
+        }
+        catch(InterruptedException ire) {
+            // OK to ignore
+        }
     }
 
     public static String readResourceFile(String path) throws IOException {
