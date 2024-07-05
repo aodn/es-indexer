@@ -103,6 +103,12 @@
               },
               "end" : {
                 "type": "date"
+              },
+              "creation" : {
+                "type": "date"
+              },
+              "revision" : {
+                "type": "date"
               }
             }
           }
