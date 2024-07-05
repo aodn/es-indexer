@@ -114,8 +114,7 @@ public class GeoNetworkServiceTests extends BaseTestClass {
 
         }
         finally {
-            deleteRecord("830f9a83-ae6b-4260-a82a-24c4851f7119");
-            deleteRecord("9e5c3031-a026-48b3-a153-a70c2e2b78b9");
+            deleteRecord("830f9a83-ae6b-4260-a82a-24c4851f7119", "9e5c3031-a026-48b3-a153-a70c2e2b78b9");
         }
     }
 
@@ -172,8 +171,7 @@ public class GeoNetworkServiceTests extends BaseTestClass {
 
         }
         finally {
-            deleteRecord("830f9a83-ae6b-4260-a82a-24c4851f7119");
-            deleteRecord("9e5c3031-a026-48b3-a153-a70c2e2b78b9");
+            deleteRecord("830f9a83-ae6b-4260-a82a-24c4851f7119", "9e5c3031-a026-48b3-a153-a70c2e2b78b9");
         }
     }
 
@@ -196,8 +194,7 @@ public class GeoNetworkServiceTests extends BaseTestClass {
             assertEquals("Count matches", 2, count);
         }
         finally {
-            deleteRecord("830f9a83-ae6b-4260-a82a-24c4851f7119");
-            deleteRecord("9e5c3031-a026-48b3-a153-a70c2e2b78b9");
+            deleteRecord("830f9a83-ae6b-4260-a82a-24c4851f7119", "9e5c3031-a026-48b3-a153-a70c2e2b78b9");
         }
     }
     /**
@@ -243,13 +240,7 @@ public class GeoNetworkServiceTests extends BaseTestClass {
             assertEquals(UUID6, UUID6, xml.get(6).getMetadataIdentifier().getMDIdentifier().getCode().getCharacterString().getValue());
         }
         finally {
-            deleteRecord(UUID1);
-            deleteRecord(UUID2);
-            deleteRecord(UUID3);
-            deleteRecord(UUID4);
-            deleteRecord(UUID5);
-            deleteRecord(UUID6);
-            deleteRecord(UUID7);
+            deleteRecord(UUID1, UUID2, UUID3, UUID4, UUID5, UUID6, UUID7);
         }
     }
 }
