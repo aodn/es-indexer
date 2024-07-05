@@ -28,13 +28,16 @@ public class GeoNetworkSearchConfig {
     public ElasticsearchClient createGN4ElasticsearchClient(@Qualifier("gn4ElasticRestClient") RestClient restClient) throws NoSuchFieldException, IllegalAccessException {
 
         RestClientTransport c = new RestClientTransport(restClient, new JacksonJsonpMapper());
-        // Fix due to elastic search api update
-        // Need a hack to work around an issue with geonetwork, geonetwork exposed the ElasticSearch api via endpoint _search
-        // however this is a proxy to the underlying api and unfortunately the proxy do not populate all the header back, namely the
-        // "X-Elastic-Product", which is need in the elastic client api check. This will cause the fail check in the
-        // ElasticTransportBase.checkProductHeader.
-        //
-        // To workaround it you need to set the endpointsMsssingProductHeader with value "es/search"
+        /*
+         TODO: You may need to revisit this setup when elastic-java-client upgrade
+         Fix due to elastic search api update
+         Need a hack to work around an issue with geonetwork, geonetwork exposed the ElasticSearch api via endpoint _search
+         however this is a proxy to the underlying api and unfortunately the proxy do not populate all the header back, namely the
+         "X-Elastic-Product", which is need in the elastic client api check. This will cause the fail check in the
+         ElasticTransportBase.checkProductHeader.
+
+         To workaround it you need to set the endpointsMsssingProductHeader with value "es/search"
+        */
         Field endpointsMissingProductHeader = ElasticsearchTransportBase.class.getDeclaredField("endpointsMissingProductHeader");
 
         endpointsMissingProductHeader.setAccessible(true);
@@ -42,7 +45,7 @@ public class GeoNetworkSearchConfig {
         v.add("es/search");
 
         // Create the API client, the transport options is needed because the header from the default elastic client
-        // call is application/vdn.elasticsearch.... which is not something the geonetwork wants. So override it here
+        // call is application/vnd.elasticsearch.... which is not something the geonetwork wants. So override it here
         // otherwise the function call will always fail due to header value.
         return new ElasticsearchClient(c)
                 .withTransportOptions(

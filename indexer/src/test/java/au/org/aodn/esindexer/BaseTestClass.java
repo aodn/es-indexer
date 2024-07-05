@@ -196,38 +196,38 @@ public class BaseTestClass {
             HttpEntity<String> requestEntity = getRequestEntity(null);
 
             // Index the item so that query yield the right result before delete
-            ResponseEntity<Void> t = testRestTemplate
+            ResponseEntity<Void> trigger = testRestTemplate
                     .exchange(
                             getIndexUrl(),
                             HttpMethod.PUT,
                             requestEntity,
                             Void.class
                     );
-            assertEquals("Trigger index OK", HttpStatus.OK, t.getStatusCode());
+            assertEquals("Trigger index OK", HttpStatus.OK, trigger.getStatusCode());
             // Cannot execute too fast, give it some wait time
             latch.await(2, TimeUnit.SECONDS);
 
             for(String uuid: uuids) {
                 logger.info("Deleting GN doc {}", uuid);
-                ResponseEntity<String> r = testRestTemplate
+                ResponseEntity<String> response = testRestTemplate
                         .exchange(
                                 getRecordUrl(uuid),
                                 HttpMethod.DELETE,
                                 requestEntity,
                                 String.class
                         );
-                logger.info("{}", r.getStatusCode());
+                logger.info("{}", response.getStatusCode());
             }
 
             // Index the item so that query yield the right result after delete
-            t = testRestTemplate
+            trigger = testRestTemplate
                     .exchange(
                             getIndexUrl(),
                             HttpMethod.PUT,
                             requestEntity,
                             Void.class
                     );
-            assertEquals("Trigger index OK", HttpStatus.OK, t.getStatusCode());
+            assertEquals("Trigger index OK", HttpStatus.OK, trigger.getStatusCode());
             // Cannot execute too fast, give it some wait time
             latch.await(2, TimeUnit.SECONDS);
         }
