@@ -2,6 +2,7 @@ package au.org.aodn.esindexer.controller;
 
 import au.org.aodn.esindexer.service.IndexerService;
 import au.org.aodn.esindexer.service.GeoNetworkService;
+import co.elastic.clients.elasticsearch.core.BulkResponse;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import java.io.IOException;
 import java.time.LocalTime;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/v1/indexer/index")
@@ -59,7 +61,8 @@ public class IndexerController {
     @PostMapping(path="/all", consumes = "application/json", produces = "application/json")
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Index all metadata records from GeoNetwork")
     public ResponseEntity<String> indexAllMetadataRecords(@RequestParam(value = "confirm", defaultValue = "false") Boolean confirm) throws IOException {
-        return indexerService.indexAllMetadataRecordsFromGeoNetwork(confirm, null);
+        List<BulkResponse> responses = indexerService.indexAllMetadataRecordsFromGeoNetwork(confirm, null);
+        return ResponseEntity.ok(responses.toString());
     }
     /**
      * Emit result to FE so it will not result in gateway time-out. You need to run it with postman or whatever tools
@@ -102,7 +105,7 @@ public class IndexerController {
                             .id(String.valueOf(result.hashCode()))
                             .name("Indexer update event");
 
-                    emitter.send(result);
+                    emitter.send(event);
                     emitter.complete();
                 }
                 catch (IOException e) {

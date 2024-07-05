@@ -230,7 +230,7 @@ public class IndexerServiceImpl implements IndexerService {
         }
     }
 
-    public ResponseEntity<String> indexAllMetadataRecordsFromGeoNetwork(boolean confirm, Callback callback) throws IOException {
+    public List<BulkResponse> indexAllMetadataRecordsFromGeoNetwork(boolean confirm, Callback callback) throws IOException {
         if (!confirm) {
             throw new IndexAllRequestNotConfirmedException("Please confirm that you want to index all metadata records from GeoNetwork");
         }
@@ -304,7 +304,7 @@ public class IndexerServiceImpl implements IndexerService {
         // TODO now processing for record_suggestions index
         logger.info("Finished execute bulk indexing records to index: {}",indexName);
 
-        return ResponseEntity.status(HttpStatus.OK).body(results.toString());
+        return results;
     }
 
     protected BulkResponse executeBulk(BulkRequest.Builder bulkRequest) throws IOException {
