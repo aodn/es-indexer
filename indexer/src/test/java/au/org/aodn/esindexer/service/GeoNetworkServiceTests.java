@@ -213,7 +213,7 @@ public class GeoNetworkServiceTests extends BaseTestClass {
 
         try {
 
-            assertEquals("Page size need to be small to work for this test", 5, pageSize);
+            assertEquals("Page size need to be small to work for this test", 4, pageSize);
 
             insertMetadataRecords(UUID1, "classpath:canned/sample1.xml");
             insertMetadataRecords(UUID2, "classpath:canned/sample2.xml");
@@ -231,13 +231,13 @@ public class GeoNetworkServiceTests extends BaseTestClass {
             }
 
             // A list of ordered UUID
-            assertEquals(UUID3, UUID3, xml.get(0).getMetadataIdentifier().getMDIdentifier().getCode().getCharacterString().getValue());
-            assertEquals(UUID5, UUID5, xml.get(1).getMetadataIdentifier().getMDIdentifier().getCode().getCharacterString().getValue());
-            assertEquals(UUID7, UUID7, xml.get(2).getMetadataIdentifier().getMDIdentifier().getCode().getCharacterString().getValue());
-            assertEquals(UUID4, UUID4, xml.get(3).getMetadataIdentifier().getMDIdentifier().getCode().getCharacterString().getValue());
-            assertEquals(UUID2, UUID2, xml.get(4).getMetadataIdentifier().getMDIdentifier().getCode().getCharacterString().getValue());
-            assertEquals(UUID1, UUID1, xml.get(5).getMetadataIdentifier().getMDIdentifier().getCode().getCharacterString().getValue());
-            assertEquals(UUID6, UUID6, xml.get(6).getMetadataIdentifier().getMDIdentifier().getCode().getCharacterString().getValue());
+            Assertions.assertEquals(UUID3, xml.get(0).getMetadataIdentifier().getMDIdentifier().getCode().getCharacterString().getValue(), UUID3);
+            Assertions.assertEquals(UUID5, xml.get(1).getMetadataIdentifier().getMDIdentifier().getCode().getCharacterString().getValue(), UUID5);
+            Assertions.assertEquals(UUID7, xml.get(2).getMetadataIdentifier().getMDIdentifier().getCode().getCharacterString().getValue(), UUID7);
+            Assertions.assertEquals(UUID4, xml.get(3).getMetadataIdentifier().getMDIdentifier().getCode().getCharacterString().getValue(), UUID4);
+            Assertions.assertEquals(UUID2, xml.get(4).getMetadataIdentifier().getMDIdentifier().getCode().getCharacterString().getValue(), UUID2);
+            Assertions.assertEquals(UUID1, xml.get(5).getMetadataIdentifier().getMDIdentifier().getCode().getCharacterString().getValue(), UUID1);
+            Assertions.assertEquals(UUID6, xml.get(6).getMetadataIdentifier().getMDIdentifier().getCode().getCharacterString().getValue(), UUID6);
         }
         finally {
             deleteRecord(UUID1, UUID2, UUID3, UUID4, UUID5, UUID6, UUID7);
