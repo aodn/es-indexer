@@ -193,10 +193,10 @@ public abstract class StacCollectionMapperService {
             var revisionDate = dateMap.get("revision");
             var creationDate = dateMap.get("creation");
             if (revisionDate != null) {
-                temporal.put("revision", revisionDate);
+                temporal.put("revision", convertDateToZonedDateTime(revisionDate));
             }
             if (creationDate != null) {
-                temporal.put("creation", creationDate);
+                temporal.put("creation", convertDateToZonedDateTime(creationDate));
             }
         }
 
