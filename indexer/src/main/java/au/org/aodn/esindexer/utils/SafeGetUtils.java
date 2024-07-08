@@ -8,7 +8,7 @@ public class SafeGetUtils {
     public static <T> Optional<T> safeGet(Supplier<T> supplier) {
         try {
             return Optional.of(supplier.get());
-        } catch (NullPointerException ignored) {
+        } catch (NullPointerException | IndexOutOfBoundsException ignored) {
             return Optional.empty();
         }
     }
