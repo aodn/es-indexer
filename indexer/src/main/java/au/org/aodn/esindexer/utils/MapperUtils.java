@@ -173,7 +173,6 @@ public class MapperUtils {
     }
 
     public static List<AbstractTypedDatePropertyType> findMDDateInfo(MDMetadataType source) {
-        // TODO: add filters if needed
         return source.getDateInfo();
     }
 
