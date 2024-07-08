@@ -1,5 +1,6 @@
 package au.org.aodn.esindexer.service;
 
+import co.elastic.clients.elasticsearch.core.BulkResponse;
 import co.elastic.clients.elasticsearch.core.search.Hit;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import jakarta.xml.bind.JAXBException;
@@ -8,6 +9,7 @@ import org.opengis.referencing.operation.TransformException;
 import org.springframework.http.ResponseEntity;
 
 import java.io.IOException;
+import java.util.List;
 
 public interface IndexerService {
     interface Callback {
@@ -16,6 +18,6 @@ public interface IndexerService {
     }
     ResponseEntity<String> indexMetadata(String metadataValues) throws IOException, FactoryException, TransformException, JAXBException;
     ResponseEntity<String> deleteDocumentByUUID(String uuid) throws IOException;
-    ResponseEntity<String> indexAllMetadataRecordsFromGeoNetwork(boolean confirm, Callback callback) throws IOException;
+    List<BulkResponse> indexAllMetadataRecordsFromGeoNetwork(boolean confirm, Callback callback) throws IOException;
     Hit<ObjectNode> getDocumentByUUID(String uuid) throws IOException;
 }

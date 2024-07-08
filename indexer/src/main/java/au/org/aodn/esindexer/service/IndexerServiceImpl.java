@@ -25,6 +25,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.util.unit.DataSize;
+import org.springframework.util.unit.DataUnit;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -71,15 +74,12 @@ public class IndexerServiceImpl implements IndexerService {
 
     public Hit<ObjectNode> getDocumentByUUID(String uuid) throws IOException {
         try {
-            SearchResponse<ObjectNode> response = portalElasticsearchClient.search(s -> s
-                .index(indexName)
-                .query(q -> q
-                    .match(t -> t
-                        .field("id")
-                        .query(uuid)
-                    )
-                ), ObjectNode.class
-            );
+            SearchResponse<ObjectNode> response = portalElasticsearchClient
+                    .search(s -> s
+                            .index(indexName)
+                            .query(q -> q.ids(ids -> ids.values(uuid))),
+                        ObjectNode.class
+                    );
             TotalHits total = Objects.requireNonNull(response.hits().total());
             if (total.value() > 0) {
                 boolean isExactResult = total.relation() == TotalHitsRelation.Eq && Objects.equals(uuid, Objects.requireNonNull(Objects.requireNonNull(response.hits().hits().get(0).source()).get("id").asText()));
@@ -168,26 +168,27 @@ public class IndexerServiceImpl implements IndexerService {
                 if (this.isGeoNetworkInstanceReinstalled(portalIndexDocumentsCount)) {
                     logger.info("GeoNetwork instance has been reinstalled, recreating portal index: " + indexName);
                     elasticSearchIndexService.createIndexFromMappingJSONFile(AppConstants.PORTAL_RECORDS_MAPPING_JSON_FILE, indexName);
-                } else {
-                    // delete the existing document if found first
-                    this.deleteDocumentByUUID(uuid);
                 }
-            } catch (IndexNotFoundException e) {
-                logger.info("Index: " + indexName + " not found, creating index");
+            }
+            catch (IndexNotFoundException e) {
+                logger.info("Index: {} not found, creating index", indexName);
                 elasticSearchIndexService.createIndexFromMappingJSONFile(AppConstants.PORTAL_RECORDS_MAPPING_JSON_FILE, indexName);
             }
 
             // index the metadata if it is published
             if (this.isMetadataPublished(uuid)) {
                 try(InputStream is = new ByteArrayInputStream(indexerObjectMapper.writeValueAsBytes(mappedMetadataValues))) {
-                    logger.info("Ingesting a new metadata with UUID: " + uuid + " to index: " + indexName);
+                    logger.info("Ingesting a new metadata with UUID: {} to index: {}", uuid, indexName);
                     logger.debug("{}", mappedMetadataValues);
+
+                    // With the id in place, it will always update the same doc given the same id
                     req = IndexRequest.of(b -> b
+                            .id(uuid)
                             .index(indexName)
                             .withJson(is));
 
                     IndexResponse response = portalElasticsearchClient.index(req);
-                    logger.info("Metadata with UUID: " + uuid + " indexed with version: " + response.version());
+                    logger.info("Metadata with UUID: {} indexed with version: {}", uuid, response.version());
                     return ResponseEntity.status(HttpStatus.OK).body(response.toString());
                 }
                 catch (ElasticsearchException e) {
@@ -196,7 +197,7 @@ public class IndexerServiceImpl implements IndexerService {
                     throw new IndexingRecordException(fullError);
                 }
             } else {
-                logger.info("Metadata with UUID: " + uuid + " is not published yet, skip indexing");
+                logger.info("Metadata with UUID: {} is not published yet, skip indexing", uuid);
                 return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
             }
         } catch (IOException | FactoryException | TransformException | JAXBException e) {
@@ -207,7 +208,7 @@ public class IndexerServiceImpl implements IndexerService {
 
 
     public ResponseEntity<String> deleteDocumentByUUID(String uuid) throws IOException {
-        logger.info("Deleting document with UUID: " + uuid + " from index: " + indexName);
+        logger.info("Deleting document with UUID: {} from index: {}", uuid, indexName);
         try {
             Hit<ObjectNode> doc = this.getDocumentByUUID(uuid);
             DeleteResponse response = portalElasticsearchClient.delete(b -> b
@@ -215,7 +216,7 @@ public class IndexerServiceImpl implements IndexerService {
                     .id(doc.id())
             );
 
-            logger.info("Document with UUID: " + uuid + " deleted from index: " + indexName);
+            logger.info("Document with UUID: {} deleted from index: {}", uuid, indexName);
 
             // Flush after insert, otherwise you need to wait for next auto-refresh. It is
             // especially a problem with autotest, where assert happens very fast.
@@ -224,12 +225,12 @@ public class IndexerServiceImpl implements IndexerService {
             return ResponseEntity.status(HttpStatus.OK).body(response.toString());
         }
         catch (DocumentNotFoundException e) {
-            logger.info("Document with UUID: " + uuid + " not found in index: " + indexName + ", skip deleting");
+            logger.info("Document with UUID: {} not found in index: {}, skip deleting", uuid, indexName);
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
         }
     }
 
-    public ResponseEntity<String> indexAllMetadataRecordsFromGeoNetwork(boolean confirm, Callback callback) throws IOException {
+    public List<BulkResponse> indexAllMetadataRecordsFromGeoNetwork(boolean confirm, Callback callback) throws IOException {
         if (!confirm) {
             throw new IndexAllRequestNotConfirmedException("Please confirm that you want to index all metadata records from GeoNetwork");
         }
@@ -254,13 +255,15 @@ public class IndexerServiceImpl implements IndexerService {
                     // the limit is 10mb, so to make check before document add and push batch if size is too big
                     //
                     // dataSize = 0 is init case, just in case we have a very big doc that exceed the limit
-                    // and we have not add it to the bulkRequest
-                    if(dataSize + size > 500000 && dataSize != 0) {
-                        logger.info("Execute batch as bulk request is big enough {}", dataSize + size);
+                    // and we have not add it to the bulkRequest, hardcode to 5M which should be safe,
+                    // usually it is 5M - 15M
+                    //
+                    if(dataSize + size > 5242880 && dataSize != 0) {
                         BulkResponse temp = executeBulk(bulkRequest);
                         results.add(temp);
 
                         if(callback != null) {
+                            callback.onProgress(String.format("Execute batch as bulk request is big enough %s", dataSize + size));
                             callback.onProgress(temp);
                         }
 
@@ -277,11 +280,15 @@ public class IndexerServiceImpl implements IndexerService {
                     );
                     dataSize += size;
 
+                    if(callback != null) {
+                        callback.onProgress(String.format("Current batch size %s byte", dataSize));
+                    }
+
                 } catch (FactoryException | JAXBException | TransformException e) {
                 /* it will reach here if cannot extract values of all the keys in GeoNetwork metadata JSON
                 or ID is not found, which is fatal.
                 * */
-                    logger.error("Error extracting values from GeoNetwork metadata JSON: " + metadataRecord);
+                    logger.error("Error extracting values from GeoNetwork metadata JSON: {}", metadataRecord);
                 }
             }
         }
@@ -297,7 +304,7 @@ public class IndexerServiceImpl implements IndexerService {
         // TODO now processing for record_suggestions index
         logger.info("Finished execute bulk indexing records to index: {}",indexName);
 
-        return ResponseEntity.status(HttpStatus.OK).body(results.toString());
+        return results;
     }
 
     protected BulkResponse executeBulk(BulkRequest.Builder bulkRequest) throws IOException {

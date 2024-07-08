@@ -514,8 +514,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
                     private String getUUID(int index) {
                         if(response.get().hits().hits().get(index).source() != null
                             && response.get().hits().hits().get(index).source().has(UUID)) {
-
-                            return response.get().hits().hits().get(index++).source().get(UUID).asText();
+                            return response.get().hits().hits().get(index).source().get(UUID).asText();
                         }
                         return null;
                     }

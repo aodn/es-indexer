@@ -9,7 +9,7 @@ elasticsearch:
   index:
     name: sample-portal-records
   query:
-    pageSize: 5
+    pageSize: 4
 
 logging:
   level:

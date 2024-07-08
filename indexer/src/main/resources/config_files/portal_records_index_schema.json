@@ -24,6 +24,11 @@
     "properties": {
       "id": {
         "type": "text",
+        "fields" : {
+          "keyword": {
+            "type": "keyword"
+          }
+        },
         "analyzer": "keyword"
       },
       "stac_version": { "type": "text" },
