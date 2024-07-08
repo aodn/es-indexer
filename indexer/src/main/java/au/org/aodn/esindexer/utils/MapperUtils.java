@@ -12,7 +12,7 @@ import lombok.Setter;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static au.org.aodn.esindexer.utils.GetterUtils.safeGet;
+import static au.org.aodn.esindexer.utils.CommonUtils.safeGet;
 
 public class MapperUtils {
 

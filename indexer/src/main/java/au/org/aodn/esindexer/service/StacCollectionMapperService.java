@@ -25,7 +25,7 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import static au.org.aodn.esindexer.utils.GetterUtils.safeGet;
+import static au.org.aodn.esindexer.utils.CommonUtils.safeGet;
 
 /**
  * This class transform the XML from GeoNetwork to STAC format and store it into Elastic-Search
