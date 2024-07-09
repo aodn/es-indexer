@@ -75,7 +75,9 @@
     "temporal": [
       {
         "start": "2019-10-18T13:00:00Z",
-        "end": "2019-12-16T13:00:00Z"
+        "end": "2019-12-16T13:00:00Z",
+        "creation": "2015-10-05T13:00:00Z",
+        "revision": "2022-03-03T13:18:20Z"
       }
     ],
     "discovery_categories": null

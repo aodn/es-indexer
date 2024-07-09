@@ -10,8 +10,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.*;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
+
+import static au.org.aodn.esindexer.utils.CommonUtils.safeGet;
 
 public class MapperUtils {
 
@@ -169,6 +170,10 @@ public class MapperUtils {
                 .filter(f -> f.getAbstractResponsibility().getValue() != null)
                 .filter(f -> f.getAbstractResponsibility().getValue() instanceof CIResponsibilityType2)
                 .collect(Collectors.toList());
+    }
+
+    public static List<AbstractTypedDatePropertyType> findMDDateInfo(MDMetadataType source) {
+        return source.getDateInfo();
     }
 
 
@@ -473,21 +478,5 @@ public class MapperUtils {
         return contacts;
     }
 
-    /**
-     * This function is used to get rid of too much null checking.
-     * Example:
-     * For getting a deep value like this:
-     * <code>phoneCode = phone.getCITelephone().getNumberType().getCITelephoneTypeCode();</code>
-     * every getter needs to check null.
-     * @param supplier The function that may throw NullPointerException
-     * @param <T>      The type of the return value
-     * @return null if any of the getter is null
-     */
-    public static <T> Optional<T> safeGet(Supplier<T> supplier) {
-        try {
-            return Optional.of(supplier.get());
-        } catch (NullPointerException ignored) {
-            return Optional.empty();
-        }
-    }
+
 }

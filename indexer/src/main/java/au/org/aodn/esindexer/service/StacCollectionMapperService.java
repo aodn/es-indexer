@@ -1,12 +1,9 @@
 package au.org.aodn.esindexer.service;
 
-import au.org.aodn.esindexer.utils.GeometryUtils;
+import au.org.aodn.esindexer.utils.*;
 import au.org.aodn.esindexer.configuration.AppConstants;
-import au.org.aodn.esindexer.utils.MapperUtils;
 import au.org.aodn.stac.model.*;
-import au.org.aodn.esindexer.utils.BBoxUtils;
 
-import au.org.aodn.esindexer.utils.TemporalUtils;
 import au.org.aodn.metadata.iso19115_3_2018.*;
 import jakarta.xml.bind.JAXBElement;
 import org.apache.logging.log4j.LogManager;
@@ -27,6 +24,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+
+import static au.org.aodn.esindexer.utils.CommonUtils.safeGet;
 
 /**
  * This class transform the XML from GeoNetwork to STAC format and store it into Elastic-Search
@@ -100,57 +99,36 @@ public abstract class StacCollectionMapperService {
         }
 
         List<String[]> result = new ArrayList<>();
-        for (MDDataIdentificationType i : items) {
-            i.getExtent().forEach(extent -> {
-                if (extent.getAbstractExtent().getValue() instanceof EXExtentType exExtentType) {
-
-                    exExtentType.getTemporalElement().forEach(temporalElement -> {
-
-                        String[] temporalPair = new String[2];
-                        temporalPair[0] = null;
-                        temporalPair[1] = null;
-
-                        if (temporalElement.getEXTemporalExtent() != null) {
-                            EXTemporalExtentType exTemporalExtent = temporalElement.getEXTemporalExtent().getValue();
-                            if (exTemporalExtent != null) {
-                                AbstractTimePrimitiveType abstractTimePrimitive = exTemporalExtent.getExtent().getAbstractTimePrimitive().getValue();
-                                if (abstractTimePrimitive instanceof TimePeriodType timePeriodType) {
-
-
-                                    if (timePeriodType.getBegin() != null) {
-                                        if (timePeriodType.getBegin().getTimeInstant() != null) {
-                                            if (timePeriodType.getBegin().getTimeInstant().getTimePosition() != null) {
-                                                if (!timePeriodType.getBegin().getTimeInstant().getTimePosition().getValue().isEmpty()) {
-                                                    temporalPair[0] = convertDateToZonedDateTime(timePeriodType.getBegin().getTimeInstant().getTimePosition().getValue().get(0));
-                                                }
-                                            }
-                                        }
-                                    } else {
-                                        if (!timePeriodType.getBeginPosition().getValue().isEmpty()) {
-                                            temporalPair[0] = convertDateToZonedDateTime(timePeriodType.getBeginPosition().getValue().get(0));
-                                        }
-                                    }
-
-                                    if (timePeriodType.getEnd() != null) {
-                                        if (timePeriodType.getEnd().getTimeInstant() != null) {
-                                            if (timePeriodType.getEnd().getTimeInstant().getTimePosition() != null) {
-                                                if (!timePeriodType.getEnd().getTimeInstant().getTimePosition().getValue().isEmpty()) {
-                                                    temporalPair[1] = convertDateToZonedDateTime(timePeriodType.getEnd().getTimeInstant().getTimePosition().getValue().get(0));
-                                                }
-                                            }
-                                        }
-                                    } else {
-                                        if (timePeriodType.getEndPosition() != null && !timePeriodType.getEndPosition().getValue().isEmpty()) {
-                                            temporalPair[1] = convertDateToZonedDateTime(timePeriodType.getEndPosition().getValue().get(0));
-                                        }
-                                    }
-                                }
-
-                                result.add(temporalPair);
-                            }
-                        }
-                    });
+        for (MDDataIdentificationType item : items) {
+            item.getExtent().forEach(extent -> {
+                if (!(extent.getAbstractExtent().getValue() instanceof EXExtentType exExtentType)) {
+                    return;
                 }
+
+                exExtentType.getTemporalElement().forEach(temporalElement -> {
+                    String[] temporalPair = new String[2];
+                    temporalPair[0] = null;
+                    temporalPair[1] = null;
+                    var abstractTimePrimitive = safeGet(() ->
+                            temporalElement.getEXTemporalExtent().getValue().getExtent().getAbstractTimePrimitive().getValue())
+                            .orElse(null);
+                    if (abstractTimePrimitive instanceof TimePeriodType timePeriodType) {
+
+                        var pair0 = safeGet(() -> timePeriodType.getBegin().getTimeInstant().getTimePosition().getValue().get(0));
+                        if (pair0.isEmpty()) {
+                            pair0 = safeGet(() -> timePeriodType.getBeginPosition().getValue().get(0));
+                        }
+                        pair0.ifPresent(pair -> temporalPair[0] = convertDateToZonedDateTime(pair));
+
+                        var pair1 = safeGet(() -> timePeriodType.getEnd().getTimeInstant().getTimePosition().getValue().get(0));
+                        if (pair1.isEmpty()) {
+                            pair1 = safeGet(() -> timePeriodType.getEndPosition().getValue().get(0));
+                        }
+                        pair1.ifPresent(pair -> temporalPair[1] = convertDateToZonedDateTime(pair));
+                    }
+
+                    result.add(temporalPair);
+                });
             });
         }
         return result;
@@ -200,17 +178,52 @@ public abstract class StacCollectionMapperService {
     List<Map<String,String>> mapSummariesTemporal(MDMetadataType source) {
         List<Map<String,String>> result = new ArrayList<>();
         List<String[]> temp = createExtentTemporal(source);
-
+        Map<String, String> temporal = new HashMap<>();
         if (temp != null) {
             for (String[] t : temp) {
-                Map<String, String> temporal = new HashMap<>();
                 temporal.put("start", t[0]);
                 temporal.put("end", t[1]);
-                result.add(temporal);
             }
+        }
+
+        //get metadata temporal info
+        var dateSources = MapperUtils.findMDDateInfo(source);
+        HashMap<String, String> dateMap = getMetadataDateInfoFrom(dateSources);
+        if (!dateMap.isEmpty()) {
+            var revisionDate = dateMap.get("revision");
+            var creationDate = dateMap.get("creation");
+            if (revisionDate != null) {
+                temporal.put("revision", convertDateToZonedDateTime(revisionDate));
+            }
+            if (creationDate != null) {
+                temporal.put("creation", convertDateToZonedDateTime(creationDate));
+            }
+        }
+
+        if (!temporal.isEmpty()) {
+            result.add(temporal);
+        }
+        if (!result.isEmpty()) {
             return result;
         }
+
         return null;
+    }
+
+    private HashMap<String, String> getMetadataDateInfoFrom(List<AbstractTypedDatePropertyType> dateSources) {
+        var dateMap = new HashMap<String, String>();
+        dateSources.forEach(dateSource -> {
+            var typeValue = safeGet(() -> dateSource.getAbstractTypedDate().getValue()).orElse(null);
+            if (!(typeValue instanceof CIDateType2 ciDateType2) ) {
+                return;
+            }
+            var type = safeGet(() -> ciDateType2.getDateType().getCIDateTypeCode().getCodeListValue());
+            var date = safeGet(() -> ciDateType2.getDate().getDateTime());
+            if (type.isPresent() && date.isPresent()) {
+                dateMap.put(type.get(), date.get().toString());
+            }
+        });
+        return dateMap;
     }
 
     @Named("mapSummaries.geometry")

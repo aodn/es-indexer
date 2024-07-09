@@ -16,6 +16,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import jakarta.xml.bind.JAXBException;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -150,7 +151,7 @@ public class StacCollectionMapperServiceTests {
         // and now we can use it to compare expected result.
         Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
         String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
-        assertEquals("Stac equals", objectMapper.readTree(expected), objectMapper.readTree(out.strip()));
+        Assertions.assertEquals(objectMapper.readTree(expected), objectMapper.readTree(out.strip()), "Stac equals");
     }
 
     @Test
@@ -161,7 +162,7 @@ public class StacCollectionMapperServiceTests {
 
         Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
         String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
-        assertEquals("Stac equals", objectMapper.readTree(expected), objectMapper.readTree(out.strip()));
+        Assertions.assertEquals(objectMapper.readTree(expected), objectMapper.readTree(out.strip()), "Stac equals");
     }
 
     @Test
@@ -176,7 +177,7 @@ public class StacCollectionMapperServiceTests {
         Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
         String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
         log.info(out);
-        assertEquals("Stac equals", objectMapper.readTree(expected), objectMapper.readTree(out.strip()));
+        Assertions.assertEquals(objectMapper.readTree(expected), objectMapper.readTree(out.strip()), "Stac equals");
     }
 
     @Test
@@ -191,6 +192,6 @@ public class StacCollectionMapperServiceTests {
         Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
         String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
         log.info(out);
-        assertEquals("Stac equals", objectMapper.readTree(expected), objectMapper.readTree(out.strip()));
+        Assertions.assertEquals(objectMapper.readTree(expected), objectMapper.readTree(out.strip()), "Stac equals");
     }
 }
