@@ -205,25 +205,22 @@ public abstract class StacCollectionMapperService {
                     if (otherConstraints == null) {
                         continue;
                     }
-                    otherConstraints.forEach(constraint -> {
-                        safeGet(() -> constraint.getCharacterString().getValue().toString()).ifPresent(cons -> {
-                            if(isSuggestedCitation(cons)){
-                                citationFactory.setSuggestedCitation(cons);
-                            }
-                            else {
-                                citationFactory.addOtherConstraint(cons);
-                            }
-                        });
-                    });
+                    otherConstraints.forEach(constraint -> safeGet(() -> constraint.getCharacterString().getValue().toString()).ifPresent(cons -> {
+                        if(isSuggestedCitation(cons)){
+                            citationFactory.setSuggestedCitation(cons);
+                        }
+                        else {
+                            citationFactory.addOtherConstraint(cons);
+                        }
+                    }));
                 }
                 else if (abstractConstraints instanceof  MDConstraintsType constraints) {
                     var useLimitations = safeGet(constraints::getUseLimitation).orElse(null);
                     if (useLimitations == null) {
                         continue;
                     }
-                    useLimitations.forEach(limitation -> {
-                        safeGet(() -> limitation.getCharacterString().getValue().toString()).ifPresent(citationFactory::addUseLimitation);
-                    });
+                    useLimitations.forEach(limitation -> safeGet(() ->
+                            limitation.getCharacterString().getValue().toString()).ifPresent(citationFactory::addUseLimitation));
                 }
             }
         }
