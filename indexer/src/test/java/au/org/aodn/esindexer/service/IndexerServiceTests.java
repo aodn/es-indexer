@@ -138,7 +138,7 @@ public class IndexerServiceTests extends BaseTestClass {
             Hit<ObjectNode> objectNodeHit = indexerService.getDocumentByUUID(uuid);
 
             String test = Objects.requireNonNull(objectNodeHit.source()).toPrettyString();
-            Assertions.assertEquals(indexerObjectMapper.readTree(expected), indexerObjectMapper.readTree(test), "Stac equals " + uuid);
+            Assertions.assertEquals(indexerObjectMapper.readTree(expected), indexerObjectMapper.readTree(test), "Stac not equals for sample 4. Uuid:" + uuid);
         }
         finally {
             deleteRecord(uuid);
@@ -163,7 +163,7 @@ public class IndexerServiceTests extends BaseTestClass {
             Hit<ObjectNode> objectNodeHit = indexerService.getDocumentByUUID(uuid);
 
             String test = Objects.requireNonNull(objectNodeHit.source()).toPrettyString();
-            Assertions.assertEquals(indexerObjectMapper.readTree(expected), indexerObjectMapper.readTree(test), "Stac equals " + uuid);
+            Assertions.assertEquals(indexerObjectMapper.readTree(expected), indexerObjectMapper.readTree(test), "Stac not equals for sample 5. Uuid: " + uuid);
         }
         finally {
             deleteRecord(uuid);
@@ -185,7 +185,7 @@ public class IndexerServiceTests extends BaseTestClass {
             Hit<ObjectNode> objectNodeHit = indexerService.getDocumentByUUID(uuid);
 
             String test = Objects.requireNonNull(objectNodeHit.source()).toPrettyString();
-            Assertions.assertEquals(indexerObjectMapper.readTree(expected), indexerObjectMapper.readTree(test), "Stac equals " + uuid);
+            Assertions.assertEquals(indexerObjectMapper.readTree(expected), indexerObjectMapper.readTree(test), "Stac not equals for sample 6. Uuid: " + uuid);
         }
         finally {
             deleteRecord(uuid);
@@ -209,7 +209,7 @@ public class IndexerServiceTests extends BaseTestClass {
 
             String test = Objects.requireNonNull(objectNodeHit.source()).toPrettyString();
             logger.info(test);
-            Assertions.assertEquals(indexerObjectMapper.readTree(expected), indexerObjectMapper.readTree(test), "Stac equals " + uuid);
+            Assertions.assertEquals(indexerObjectMapper.readTree(expected), indexerObjectMapper.readTree(test), "Stac not equals for sample 7. Uuid: " + uuid);
         }
         finally {
             deleteRecord(uuid);

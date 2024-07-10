@@ -151,7 +151,7 @@ public class StacCollectionMapperServiceTests {
         // and now we can use it to compare expected result.
         Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
         String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
-        Assertions.assertEquals(objectMapper.readTree(expected), objectMapper.readTree(out.strip()), "Stac equals");
+        Assertions.assertEquals(objectMapper.readTree(expected), objectMapper.readTree(out.strip()), "Stac not equals for sample 8");
     }
 
     @Test
@@ -162,7 +162,7 @@ public class StacCollectionMapperServiceTests {
 
         Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
         String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
-        Assertions.assertEquals(objectMapper.readTree(expected), objectMapper.readTree(out.strip()), "Stac equals");
+        Assertions.assertEquals(objectMapper.readTree(expected), objectMapper.readTree(out.strip()), "Stac not equals for sample 10");
     }
 
     @Test
@@ -177,7 +177,7 @@ public class StacCollectionMapperServiceTests {
         Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
         String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
         log.info(out);
-        Assertions.assertEquals(objectMapper.readTree(expected), objectMapper.readTree(out.strip()), "Stac equals");
+        Assertions.assertEquals(objectMapper.readTree(expected), objectMapper.readTree(out.strip()), "Stac not equals for sample 9");
     }
 
     @Test
@@ -192,6 +192,6 @@ public class StacCollectionMapperServiceTests {
         Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
         String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
         log.info(out);
-        Assertions.assertEquals(objectMapper.readTree(expected), objectMapper.readTree(out.strip()), "Stac equals");
+        Assertions.assertEquals(objectMapper.readTree(expected), objectMapper.readTree(out.strip()), "Stac not equals for sample 10");
     }
 }

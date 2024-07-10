@@ -618,7 +618,37 @@ public abstract class StacCollectionMapperService {
                 }
             }
         }
-        // TODO: (will do in future PR) get citation contacts
+
+        // get citation contacts (cited responsible parties)
+        if (!dataIdentificationTypeItems.isEmpty()) {
+            for (var item : dataIdentificationTypeItems) {
+                var citationType = safeGet(() -> item.getCitation().getAbstractCitation().getValue());
+                if (citationType.isEmpty()) {
+                    continue;
+                }
+                if (!(citationType.get() instanceof  CICitationType2 ciCitationType2)) {
+                    continue;
+                }
+                var ciResponsProperties = safeGet(ciCitationType2::getCitedResponsibleParty);
+                if (ciResponsProperties.isEmpty() || ciResponsProperties.get().isEmpty()) {
+                    continue;
+                }
+
+                for (var property : ciResponsProperties.get()) {
+                    var ciResponsibility = property.getCIResponsibility();
+
+                    if (ciResponsibility.getParty().isEmpty()) {
+                        logger.warn("Unable to find citation contact info for metadata record: " + this.mapUUID(source));
+                    }
+                    else {
+                        ciResponsibility.getParty().forEach(party -> {
+                            var mappedContacts = MapperUtils.mapOrgContacts(ciResponsibility, party);
+                            results.addAll(MapperUtils.addRoleToContacts(mappedContacts, "citation"));
+                        });
+                    }
+                }
+            }
+        }
 
         return results;
     }

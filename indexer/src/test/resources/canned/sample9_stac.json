@@ -214,6 +214,96 @@
           "title": null
         }
       ]
+    },
+    {
+      "roles": [
+        "publisher",
+        "citation"
+      ],
+      "organization": "Australian Institute of Marine Science (AIMS)",
+      "name": "",
+      "position": "",
+      "emails": [
+        "reception@aims.gov.au"
+      ],
+      "addresses": [
+        {
+          "deliveryPoint": [
+            "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE"
+          ],
+          "city": "TOWNSVILLE",
+          "country": "Australia",
+          "postalCode": "4810",
+          "administrativeArea": "Queensland"
+        }
+      ],
+      "phones": [
+        {
+          "roles": [
+            "voice"
+          ],
+          "value": "+61 7 4753 4444"
+        },
+        {
+          "roles": [
+            "facsimile"
+          ],
+          "value": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://www.aims.gov.au",
+          "rel": null,
+          "type": "WWW:LINK-1.0-http--link",
+          "title": "AIMS Web Site"
+        }
+      ]
+    },
+    {
+      "roles": [
+        "owner",
+        "citation"
+      ],
+      "organization": "Australian Institute of Marine Science (AIMS)",
+      "name": "",
+      "position": "",
+      "emails": [
+        "reception@aims.gov.au"
+      ],
+      "addresses": [
+        {
+          "deliveryPoint": [
+            "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE"
+          ],
+          "city": "TOWNSVILLE",
+          "country": "Australia",
+          "postalCode": "4810",
+          "administrativeArea": "Queensland"
+        }
+      ],
+      "phones": [
+        {
+          "roles": [
+            "voice"
+          ],
+          "value": "+61 7 4753 4444"
+        },
+        {
+          "roles": [
+            "facsimile"
+          ],
+          "value": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://www.aims.gov.au",
+          "rel": null,
+          "type": "WWW:LINK-1.0-http--link",
+          "title": "AIMS Web Site"
+        }
+      ]
     }
   ],
   "languages": [

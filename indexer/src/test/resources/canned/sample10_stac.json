@@ -1006,6 +1006,44 @@
           "title": "Website of the Australian Ocean Data Network (AODN)"
         }
       ]
+    },
+    {
+      "roles": [
+        "resourceProvider",
+        "citation"
+      ],
+      "organization": "Integrated Marine Observing System (IMOS)",
+      "name": null,
+      "position": null,
+      "emails": [
+        "imos@imos.org.au"
+      ],
+      "addresses": [
+        {
+          "deliveryPoint": [
+            "Private Bag 110"
+          ],
+          "city": "Hobart",
+          "country": "Australia",
+          "postalCode": "7001",
+          "administrativeArea": "Tasmania"
+        }
+      ],
+      "phones": [
+        {
+          "roles": [
+            "voice"
+          ],
+          "value": "61 3 6226 7549"
+        },
+        {
+          "roles": [
+            "facsimile"
+          ],
+          "value": "61 3 6226 2107"
+        }
+      ],
+      "links": null
     }
   ],
   "languages": [
