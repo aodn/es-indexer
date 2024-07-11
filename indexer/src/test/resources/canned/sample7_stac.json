@@ -432,6 +432,7 @@
   "record_suggest": {
     "title": "RapidBenthos"
   },
+  "sci:citation": "{\"suggestedCitation\":null,\"useLimitations\":null,\"otherConstraints\":[\"The data was collected under contract between AIMS and another party(s). Specific agreements for access and use of the data shall be negotiated separately. Contact the AIMS Data Centre (adc@aims.gov.au) for further information\"]}",
   "type": "Collection",
   "stac_version": "1.0.0",
   "stac_extensions": [
