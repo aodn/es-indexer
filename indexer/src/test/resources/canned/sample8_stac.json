@@ -771,6 +771,7 @@
     "title": "RV Investigator Voyage IN2019_V06 End of Voyage (EOV) Archive",
     "description": null
   },
+  "sci:citation": "{\"suggestedCitation\":null,\"useLimitations\":null,\"otherConstraints\":[\"Access to the raw (not quality-controlled) voyage data is intended for the collectors and processors of the data obtained in the MNF RV Investigator voyage. Quality-controlled data products will be made available under the MNF CCBY  licence.\"]}",
   "type": "Collection",
   "stac_version": "1.0.0",
   "stac_extensions": [

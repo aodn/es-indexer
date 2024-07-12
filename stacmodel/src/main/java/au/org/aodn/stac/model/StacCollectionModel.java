@@ -24,6 +24,8 @@ public class StacCollectionModel {
     protected List<LinkModel> links;
     protected String license;
     protected List<ProviderModel> providers;
+    @JsonProperty("sci:citation")
+    protected String citation;
     /**
      * Do not use keywords and use theme instead, read here
      * protected List<String> keywords

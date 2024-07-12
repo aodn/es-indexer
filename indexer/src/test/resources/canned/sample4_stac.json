@@ -603,6 +603,7 @@
   "record_suggest": {
     "title": "Ocean acidification historical reconstruction"
   },
+  "sci:citation": "{\"suggestedCitation\":null,\"useLimitations\":null,\"otherConstraints\":[\"The citation in a list of references is: citation name/s (year metadata published), metadata title. File identifier and Data accessed at (add http link).\"]}",
   "type": "Collection",
   "stac_version": "1.0.0",
   "stac_extensions": [

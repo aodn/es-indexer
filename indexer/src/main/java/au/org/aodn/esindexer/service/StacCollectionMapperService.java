@@ -23,6 +23,8 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.function.Function;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import static au.org.aodn.esindexer.utils.CommonUtils.safeGet;
@@ -55,6 +57,7 @@ public abstract class StacCollectionMapperService {
     @Mapping(target="links", source = "source", qualifiedByName = "mapLinks")
     @Mapping(target="license", source = "source", qualifiedByName = "mapLicense")
     @Mapping(target="providers", source = "source", qualifiedByName = "mapProviders")
+    @Mapping(target="citation", source="source", qualifiedByName = "mapCitation")
     public abstract StacCollectionModel mapToSTACCollection(MDMetadataType source);
 
 
@@ -172,6 +175,69 @@ public abstract class StacCollectionMapperService {
             }
         }
         return "";
+    }
+
+
+
+    @Named("mapCitation")
+    String mapCitation(MDMetadataType source) {
+
+        List<MDDataIdentificationType> items = MapperUtils.findMDDataIdentificationType(source);
+        var citationFactory = Citation.builder().build();
+        if(items.isEmpty()) {
+            return citationFactory.toJsonString();
+        }
+        for(MDDataIdentificationType item : items) {
+            var resourceConstraints = safeGet(item::getResourceConstraints);
+            if (resourceConstraints.isEmpty()) {
+                continue;
+            }
+            for (var resourceConstraint : resourceConstraints.get()) {
+                var abstractConstraints = safeGet(() -> resourceConstraint.getAbstractConstraints().getValue()).orElse(null);
+                if (abstractConstraints == null) {
+                    continue;
+                }
+
+                if (abstractConstraints instanceof MDLegalConstraintsType legalConstraints) {
+                    var otherConstraints = safeGet(legalConstraints::getOtherConstraints).orElse(null);
+                    if (otherConstraints == null) {
+                        continue;
+                    }
+                    otherConstraints.forEach(constraint -> safeGet(() -> constraint.getCharacterString().getValue().toString()).ifPresent(cons -> {
+                        if(isSuggestedCitation(cons)){
+                            citationFactory.setSuggestedCitation(cons);
+                        }
+                        else {
+                            citationFactory.addOtherConstraint(cons);
+                        }
+                    }));
+                }
+                else if (abstractConstraints instanceof  MDConstraintsType constraints) {
+                    var useLimitations = safeGet(constraints::getUseLimitation).orElse(null);
+                    if (useLimitations == null) {
+                        continue;
+                    }
+                    useLimitations.forEach(limitation -> safeGet(() ->
+                            limitation.getCharacterString().getValue().toString()).ifPresent(citationFactory::addUseLimitation));
+                }
+            }
+        }
+        return citationFactory.toJsonString();
+    }
+
+    /**
+     * Because suggested citation and other constraints are in the same block, we need to tell whether
+     * a constraint is a suggested citation or not. Current method is finding a pattern like [xxxx-xxxx-xxxx]
+     * It is not an accurate way. Still need TODO a better implementation
+     * Corresponding ticket has raised here: <a href="https://github.com/aodn/backlog/issues/5737">ticket 5737</a>
+     * @param cons the constraint
+     * @return true if the constraint is like a suggested citation
+     */
+    private static boolean isSuggestedCitation(String cons) {
+        String regex = "\\[[^]]+]";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(cons);
+        return matcher.find();
     }
 
     @Named("mapSummaries.temporal")
