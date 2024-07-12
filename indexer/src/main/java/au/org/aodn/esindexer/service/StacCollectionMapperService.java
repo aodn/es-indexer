@@ -187,13 +187,11 @@ public abstract class StacCollectionMapperService {
         if(items.isEmpty()) {
             return citationFactory.toJsonString();
         }
-        // Need to assert only 1 block contains our target
         for(MDDataIdentificationType item : items) {
             var resourceConstraints = safeGet(item::getResourceConstraints);
             if (resourceConstraints.isEmpty()) {
                 continue;
             }
-            var a = resourceConstraints.get();
             for (var resourceConstraint : resourceConstraints.get()) {
                 var abstractConstraints = safeGet(() -> resourceConstraint.getAbstractConstraints().getValue()).orElse(null);
                 if (abstractConstraints == null) {
@@ -230,6 +228,8 @@ public abstract class StacCollectionMapperService {
     /**
      * Because suggested citation and other constraints are in the same block, we need to tell whether
      * a constraint is a suggested citation or not. Current method is finding a pattern like [xxxx-xxxx-xxxx]
+     * It is not an accurate way. Still need TODO a better implementation
+     * Corresponding ticket has raised here: <a href="https://github.com/aodn/backlog/issues/5737">ticket 5737</a>
      * @param cons the constraint
      * @return true if the constraint is like a suggested citation
      */
