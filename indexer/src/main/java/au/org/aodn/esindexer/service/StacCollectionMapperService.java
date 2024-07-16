@@ -58,6 +58,7 @@ public abstract class StacCollectionMapperService {
     @Mapping(target="license", source = "source", qualifiedByName = "mapLicense")
     @Mapping(target="providers", source = "source", qualifiedByName = "mapProviders")
     @Mapping(target="citation", source="source", qualifiedByName = "mapCitation")
+    @Mapping(target="summaries.statement", source="source", qualifiedByName = "mapSummaries.statement")
     public abstract StacCollectionModel mapToSTACCollection(MDMetadataType source);
 
 
@@ -224,6 +225,27 @@ public abstract class StacCollectionMapperService {
         }
         return citationFactory.toJsonString();
     }
+
+    @Named("mapSummaries.statement")
+    String mapSummariesStatement(MDMetadataType source) {
+        var lineages = MapperUtils.findMDResourceLineage(source);
+        if (lineages.isEmpty()) {
+            return null;
+        }
+        for (var lineage : lineages) {
+            var abstractLiLineage = lineage.getAbstractLineageInformation().getValue();
+            if (!(abstractLiLineage instanceof LILineageType liLineage)) {
+                continue;
+            }
+            var statement = safeGet(() -> liLineage.getStatement().getCharacterString().getValue().toString());
+            if (statement.isEmpty()) {
+                continue;
+            }
+            return statement.get();
+        }
+        return null;
+    }
+
 
     /**
      * Because suggested citation and other constraints are in the same block, we need to tell whether

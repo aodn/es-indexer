@@ -38,6 +38,7 @@
       "code": "dataset",
       "name": ""
     },
+    "statement": "Original field data. The raw EOV data archive was transferred to the CSIRO NCMI Information and Data Centre in Hobart.\n\n                    A manifest file for the final archive was generated (IN2024_V01_manifest_1.0_rawVoyage_cs.txt, 26/03/2024). Stored Volume: 5,797 folders, 300,137 files, 4,831,910,814,429 bytes.\n\n                    Available paper documents are scanned to 400 dpi PDF and stored at the IDC record storage system. ELOG files are generated as csv-formatted files and archived.",
     "dataset_group": "sample",
     "proj:geometry": {
       "geometries": [
