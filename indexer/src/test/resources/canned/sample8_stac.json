@@ -37,6 +37,7 @@
       "code": "observed",
       "name": ""
     },
+    "statement": "Original field data. The raw EOV data archive was transferred to the NCMI IDC in Hobart.\n\n                    A manifest file for the final archive was generated (in2019_v06_manifest_1.0_rawVoyage_cs.txt).\n\n                    Available paper documents are scanned to 400 dpi PDF and stored at the IDC record storage system. ELOG files are generated as csv-formatted files and archived.",
     "dataset_group": null,
     "dataset_provider": null,
     "update_frequency": null,
