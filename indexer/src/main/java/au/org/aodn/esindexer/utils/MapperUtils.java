@@ -153,6 +153,18 @@ public class MapperUtils {
                 .collect(Collectors.toList());
     }
 
+    public static List<AbstractLineageInformationPropertyType> findMDResourceLineage(MDMetadataType source) {
+        var lineages =  source.getResourceLineage();
+        if (lineages == null) {
+            return Collections.emptyList();
+        }
+        return lineages
+                .stream()
+                .filter(f -> f.getAbstractLineageInformation() != null)
+                .filter(f -> f.getAbstractLineageInformation().getValue() != null)
+                .collect(Collectors.toList());
+    }
+
     public static List<MDDistributionType> findMDDistributionType(MDMetadataType source) {
         return source.getDistributionInfo()
                 .stream()

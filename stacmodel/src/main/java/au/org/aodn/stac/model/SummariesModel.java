@@ -15,6 +15,7 @@ public class SummariesModel {
     protected String status;
     protected List<String> credits;
     protected Map<String, String> scope;
+    protected String statement;
 
     /**
      * Group info as setup in geonetwork

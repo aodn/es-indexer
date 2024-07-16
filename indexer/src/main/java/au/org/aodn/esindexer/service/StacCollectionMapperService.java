@@ -58,6 +58,7 @@ public abstract class StacCollectionMapperService {
     @Mapping(target="license", source = "source", qualifiedByName = "mapLicense")
     @Mapping(target="providers", source = "source", qualifiedByName = "mapProviders")
     @Mapping(target="citation", source="source", qualifiedByName = "mapCitation")
+    @Mapping(target="summaries.statement", source="source", qualifiedByName = "mapSummaries.statement")
     public abstract StacCollectionModel mapToSTACCollection(MDMetadataType source);
 
 
@@ -183,9 +184,9 @@ public abstract class StacCollectionMapperService {
     String mapCitation(MDMetadataType source) {
 
         List<MDDataIdentificationType> items = MapperUtils.findMDDataIdentificationType(source);
-        var citation = Citation.builder().build();
+        var citationFactory = Citation.builder().build();
         if(items.isEmpty()) {
-            return citation.toJsonString();
+            return citationFactory.toJsonString();
         }
         for(MDDataIdentificationType item : items) {
             var resourceConstraints = safeGet(item::getResourceConstraints);
@@ -205,10 +206,10 @@ public abstract class StacCollectionMapperService {
                     }
                     otherConstraints.forEach(constraint -> safeGet(() -> constraint.getCharacterString().getValue().toString()).ifPresent(cons -> {
                         if(isSuggestedCitation(cons)){
-                            citation.setSuggestedCitation(cons);
+                            citationFactory.setSuggestedCitation(cons);
                         }
                         else {
-                            citation.addOtherConstraint(cons);
+                            citationFactory.addOtherConstraint(cons);
                         }
                     }));
                 }
@@ -218,12 +219,33 @@ public abstract class StacCollectionMapperService {
                         continue;
                     }
                     useLimitations.forEach(limitation -> safeGet(() ->
-                            limitation.getCharacterString().getValue().toString()).ifPresent(citation::addUseLimitation));
+                            limitation.getCharacterString().getValue().toString()).ifPresent(citationFactory::addUseLimitation));
                 }
             }
         }
-        return citation.toJsonString();
+        return citationFactory.toJsonString();
     }
+
+    @Named("mapSummaries.statement")
+    String mapSummariesStatement(MDMetadataType source) {
+        var lineages = MapperUtils.findMDResourceLineage(source);
+        if (lineages.isEmpty()) {
+            return null;
+        }
+        for (var lineage : lineages) {
+            var abstractLiLineage = lineage.getAbstractLineageInformation().getValue();
+            if (!(abstractLiLineage instanceof LILineageType liLineage)) {
+                continue;
+            }
+            var statement = safeGet(() -> liLineage.getStatement().getCharacterString().getValue().toString());
+            if (statement.isEmpty()) {
+                continue;
+            }
+            return statement.get();
+        }
+        return null;
+    }
+
 
     /**
      * Because suggested citation and other constraints are in the same block, we need to tell whether
