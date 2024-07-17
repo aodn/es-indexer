@@ -255,7 +255,7 @@
       "type": "image"
     }
   ],
-  "license": "Attribution 4.0",
+  "license": "{\"title\":\"Attribution 4.0\",\"url\":\"https://creativecommons.org/licenses/by/4.0/\",\"licenseGraphic\":\"https://i.creativecommons.org/l/by/4.0/88x31.png\"}",
   "providers": [
     {
       "name": "CSIRO/Oceans and Atmosphere",

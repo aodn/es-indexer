@@ -5,6 +5,7 @@ import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.stac.model.*;
 
 import au.org.aodn.metadata.iso19115_3_2018.*;
+import au.org.aodn.stac.util.JsonUtil;
 import jakarta.xml.bind.JAXBElement;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -184,9 +185,9 @@ public abstract class StacCollectionMapperService {
     String mapCitation(MDMetadataType source) {
 
         List<MDDataIdentificationType> items = MapperUtils.findMDDataIdentificationType(source);
-        var citationFactory = Citation.builder().build();
+        var citation = Citation.builder().build();
         if(items.isEmpty()) {
-            return citationFactory.toJsonString();
+            return JsonUtil.toJsonString(citation);
         }
         for(MDDataIdentificationType item : items) {
             var resourceConstraints = safeGet(item::getResourceConstraints);
@@ -206,10 +207,10 @@ public abstract class StacCollectionMapperService {
                     }
                     otherConstraints.forEach(constraint -> safeGet(() -> constraint.getCharacterString().getValue().toString()).ifPresent(cons -> {
                         if(isSuggestedCitation(cons)){
-                            citationFactory.setSuggestedCitation(cons);
+                            citation.setSuggestedCitation(cons);
                         }
                         else {
-                            citationFactory.addOtherConstraint(cons);
+                            citation.addOtherConstraint(cons);
                         }
                     }));
                 }
@@ -219,11 +220,11 @@ public abstract class StacCollectionMapperService {
                         continue;
                     }
                     useLimitations.forEach(limitation -> safeGet(() ->
-                            limitation.getCharacterString().getValue().toString()).ifPresent(citationFactory::addUseLimitation));
+                            limitation.getCharacterString().getValue().toString()).ifPresent(citation::addUseLimitation));
                 }
             }
         }
-        return citationFactory.toJsonString();
+        return JsonUtil.toJsonString(citation);
     }
 
     @Named("mapSummaries.statement")
@@ -610,8 +611,8 @@ public abstract class StacCollectionMapperService {
     @Named("mapLicense")
     String mapLicense(MDMetadataType source) {
         List<MDDataIdentificationType> items = MapperUtils.findMDDataIdentificationType(source);
-        List<String> potentialKeys = Arrays.asList("license", "creative commons");
         List<String> licenses = new ArrayList<>();
+        List<String> potentialKeys = Arrays.asList("license", "creative commons");
         if (!items.isEmpty()) {
             for (MDDataIdentificationType i : items) {
                 i.getResourceConstraints().forEach(resourceConstraint -> {
@@ -619,7 +620,8 @@ public abstract class StacCollectionMapperService {
                         legalConstraintsType.getOtherConstraints().forEach(otherConstraints -> {
                             for (String potentialKey : potentialKeys) {
                                 if (otherConstraints.getCharacterString() != null && otherConstraints.getCharacterString().getValue().toString().toLowerCase().contains(potentialKey)) {
-                                    licenses.add(otherConstraints.getCharacterString().getValue().toString());
+                                    var license = License.builder().title(otherConstraints.getCharacterString().getValue().toString()).build();
+                                    licenses.add(JsonUtil.toJsonString(license));
                                 }
                             }
                         });
@@ -629,7 +631,22 @@ public abstract class StacCollectionMapperService {
                                 legalConstraintsType.getReference().forEach(reference -> {
                                     if (reference.getAbstractCitation().getValue() instanceof CICitationType2 ciCitationType2) {
                                         if (ciCitationType2.getTitle() != null) {
-                                            licenses.add(ciCitationType2.getTitle().getCharacterString().getValue().toString());
+                                            var license = License.builder().title(ciCitationType2.getTitle().getCharacterString().getValue().toString()).build();
+
+                                            // set license url
+                                            safeGet(
+                                                    () -> ciCitationType2.getOnlineResource().get(0).getCIOnlineResource().getLinkage().getCharacterString().getValue().toString()
+                                            ).ifPresent(license::setUrl);
+
+                                            // set license graphic
+                                            safeGet(
+                                                    () -> legalConstraintsType.getGraphic().get(0).getMDBrowseGraphic().getLinkage().get(0).getAbstractOnlineResource().getValue()
+                                            ).ifPresent( abstractOnlineResource -> {
+                                                if (abstractOnlineResource instanceof CIOnlineResourceType2 ciOnlineResourceType2) {
+                                                    safeGet(() -> ciOnlineResourceType2.getLinkage().getCharacterString().getValue().toString()).ifPresent(license::setLicenseGraphic);
+                                                }
+                                            });
+                                            licenses.add(JsonUtil.toJsonString(license));
                                         }
                                     }
                                 });

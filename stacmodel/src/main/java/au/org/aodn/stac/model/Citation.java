@@ -30,13 +30,4 @@ public class Citation {
         }
         this.otherConstraints.add(otherConstraint);
     }
-
-    public String toJsonString() {
-        ObjectMapper mapper = new ObjectMapper();
-        try{
-            return mapper.writeValueAsString(this);
-        }catch (JsonProcessingException ignored){
-            return null;
-        }
-    }
 }
