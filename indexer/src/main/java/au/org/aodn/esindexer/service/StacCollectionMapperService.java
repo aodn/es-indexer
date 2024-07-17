@@ -185,9 +185,9 @@ public abstract class StacCollectionMapperService {
     String mapCitation(MDMetadataType source) {
 
         List<MDDataIdentificationType> items = MapperUtils.findMDDataIdentificationType(source);
-        var citationFactory = Citation.builder().build();
+        var citation = Citation.builder().build();
         if(items.isEmpty()) {
-            return citationFactory.toJsonString();
+            return JsonUtil.toJsonString(citation);
         }
         for(MDDataIdentificationType item : items) {
             var resourceConstraints = safeGet(item::getResourceConstraints);
@@ -207,10 +207,10 @@ public abstract class StacCollectionMapperService {
                     }
                     otherConstraints.forEach(constraint -> safeGet(() -> constraint.getCharacterString().getValue().toString()).ifPresent(cons -> {
                         if(isSuggestedCitation(cons)){
-                            citationFactory.setSuggestedCitation(cons);
+                            citation.setSuggestedCitation(cons);
                         }
                         else {
-                            citationFactory.addOtherConstraint(cons);
+                            citation.addOtherConstraint(cons);
                         }
                     }));
                 }
@@ -220,11 +220,11 @@ public abstract class StacCollectionMapperService {
                         continue;
                     }
                     useLimitations.forEach(limitation -> safeGet(() ->
-                            limitation.getCharacterString().getValue().toString()).ifPresent(citationFactory::addUseLimitation));
+                            limitation.getCharacterString().getValue().toString()).ifPresent(citation::addUseLimitation));
                 }
             }
         }
-        return citationFactory.toJsonString();
+        return JsonUtil.toJsonString(citation);
     }
 
     @Named("mapSummaries.statement")
