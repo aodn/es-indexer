@@ -1091,7 +1091,7 @@
       "title": "ncUrlList help documentation"
     }
   ],
-  "license": "Creative Commons Attribution 4.0 International License",
+  "license": "{\"title\":\"Creative Commons Attribution 4.0 International License\",\"url\":\"http://creativecommons.org/licenses/by/4.0/\",\"licenseGraphic\":\"https://licensebuttons.net/l/by/4.0/88x31.png\"}",
   "providers": [
     {
       "name": "Integrated Marine Observing System (IMOS)",

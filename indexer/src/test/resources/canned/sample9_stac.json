@@ -327,7 +327,7 @@
       "title": "Harianto, J, Carey, N, Byrne, M. respR—An R package for the manipulation and analysis of respirometry data. Methods Ecol Evol. 2019; 10: 912– 920. https://doi.org/10.1111/2041-210X.13162"
     }
   ],
-  "license": "Creative Commons Attribution 3.0 Australia License",
+  "license": "{\"title\":\"Creative Commons Attribution 3.0 Australia License\",\"url\":\"http://creativecommons.org/licenses/by/3.0/au/\",\"licenseGraphic\":\"http://i.creativecommons.org/l/by/3.0/au/88x31.png\"}",
   "providers": [
     {
       "name": "Australian Institute of Marine Science (AIMS)",
