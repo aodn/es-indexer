@@ -567,6 +567,19 @@ public abstract class StacCollectionMapperService {
         geoNetworkService.getThumbnail(this.mapUUID(source))
                 .ifPresent(results::add);
 
+        // full metadata link
+        var metadataSource = MapperUtils.findMetadataLinkage(source);
+        safeGet(() -> (
+                (CIOnlineResourceType2)(metadataSource.get(0).getAbstractOnlineResource().getValue())
+        ).getLinkage().getCharacterString().getValue().toString()).ifPresent(url -> {
+            LinkModel linkModel = LinkModel.builder()
+                    .href(url)
+                    .rel("self")
+                    .type("text/html")
+                    .title("Full metadata link")
+                    .build();
+            results.add(linkModel);
+        });
 
         return results;
     }

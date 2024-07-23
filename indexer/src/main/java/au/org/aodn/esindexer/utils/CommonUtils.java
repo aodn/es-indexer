@@ -8,7 +8,10 @@ public class CommonUtils {
     public static <T> Optional<T> safeGet(Supplier<T> supplier) {
         try {
             return Optional.of(supplier.get());
-        } catch (NullPointerException | IndexOutOfBoundsException ignored) {
+        } catch (
+                NullPointerException
+                | IndexOutOfBoundsException
+                | ClassCastException ignored) {
             return Optional.empty();
         }
     }

@@ -165,6 +165,10 @@ public class MapperUtils {
                 .collect(Collectors.toList());
     }
 
+    public static List<AbstractOnlineResourcePropertyType> findMetadataLinkage(MDMetadataType source) {
+        return source.getMetadataLinkage();
+    }
+
     public static List<MDDistributionType> findMDDistributionType(MDMetadataType source) {
         return source.getDistributionInfo()
                 .stream()
