@@ -38,6 +38,8 @@
       "name": ""
     },
     "statement": "Original field data. The raw EOV data archive was transferred to the NCMI IDC in Hobart.\n\n                    A manifest file for the final archive was generated (in2019_v06_manifest_1.0_rawVoyage_cs.txt).\n\n                    Available paper documents are scanned to 400 dpi PDF and stored at the IDC record storage system. ELOG files are generated as csv-formatted files and archived.",
+    "creation": "2015-10-06T00:00:00",
+    "revision": "2022-03-04T00:18:20",
     "dataset_group": null,
     "dataset_provider": null,
     "update_frequency": null,
@@ -76,9 +78,7 @@
     "temporal": [
       {
         "start": "2019-10-18T13:00:00Z",
-        "end": "2019-12-16T13:00:00Z",
-        "creation": "2015-10-05T13:00:00Z",
-        "revision": "2022-03-03T13:18:20Z"
+        "end": "2019-12-16T13:00:00Z"
       }
     ],
     "discovery_categories": null
