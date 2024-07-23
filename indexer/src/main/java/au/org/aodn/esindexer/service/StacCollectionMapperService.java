@@ -60,6 +60,8 @@ public abstract class StacCollectionMapperService {
     @Mapping(target="providers", source = "source", qualifiedByName = "mapProviders")
     @Mapping(target="citation", source="source", qualifiedByName = "mapCitation")
     @Mapping(target="summaries.statement", source="source", qualifiedByName = "mapSummaries.statement")
+    @Mapping(target="summaries.creation", source = "source", qualifiedByName = "mapSummaries.creation")
+    @Mapping(target="summaries.revision", source = "source", qualifiedByName = "mapSummaries.revision")
     public abstract StacCollectionModel mapToSTACCollection(MDMetadataType source);
 
 
@@ -275,20 +277,6 @@ public abstract class StacCollectionMapperService {
             }
         }
 
-        //get metadata temporal info
-        var dateSources = MapperUtils.findMDDateInfo(source);
-        HashMap<String, String> dateMap = getMetadataDateInfoFrom(dateSources);
-        if (!dateMap.isEmpty()) {
-            var revisionDate = dateMap.get("revision");
-            var creationDate = dateMap.get("creation");
-            if (revisionDate != null) {
-                temporal.put("revision", convertDateToZonedDateTime(revisionDate));
-            }
-            if (creationDate != null) {
-                temporal.put("creation", convertDateToZonedDateTime(creationDate));
-            }
-        }
-
         if (!temporal.isEmpty()) {
             result.add(temporal);
         }
@@ -296,6 +284,26 @@ public abstract class StacCollectionMapperService {
             return result;
         }
 
+        return null;
+    }
+
+    @Named("mapSummaries.creation")
+    String mapSummariesCreation(MDMetadataType source) {
+        var dateSources = MapperUtils.findMDDateInfo(source);
+        HashMap<String, String> dateMap = getMetadataDateInfoFrom(dateSources);
+        if (!dateMap.isEmpty()) {
+            return dateMap.get("creation");
+        }
+        return null;
+    }
+
+    @Named("mapSummaries.revision")
+    String mapSummariesRevision(MDMetadataType source) {
+        var dateSources = MapperUtils.findMDDateInfo(source);
+        HashMap<String, String> dateMap = getMetadataDateInfoFrom(dateSources);
+        if (!dateMap.isEmpty()) {
+            return dateMap.get("revision");
+        }
         return null;
     }
 
