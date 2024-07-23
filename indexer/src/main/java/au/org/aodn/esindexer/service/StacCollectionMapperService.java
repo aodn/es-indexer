@@ -617,16 +617,7 @@ public abstract class StacCollectionMapperService {
             for (MDDataIdentificationType i : items) {
                 i.getResourceConstraints().forEach(resourceConstraint -> {
                     if (resourceConstraint.getAbstractConstraints().getValue() instanceof MDLegalConstraintsType legalConstraintsType) {
-                        legalConstraintsType.getOtherConstraints().forEach(otherConstraints -> {
-                            for (String potentialKey : potentialKeys) {
-                                if (otherConstraints.getCharacterString() != null && otherConstraints.getCharacterString().getValue().toString().toLowerCase().contains(potentialKey)) {
-                                    var license = License.builder().title(otherConstraints.getCharacterString().getValue().toString()).build();
-                                    licenses.add(JsonUtil.toJsonString(license));
-                                }
-                            }
-                        });
-                        // try finding in different location if above didn't add any values to licenses array
-                        if (licenses.isEmpty()) {
+
                             if (!legalConstraintsType.getReference().isEmpty() || legalConstraintsType.getReference() != null) {
                                 legalConstraintsType.getReference().forEach(reference -> {
                                     if (reference.getAbstractCitation().getValue() instanceof CICitationType2 ciCitationType2) {
@@ -651,6 +642,16 @@ public abstract class StacCollectionMapperService {
                                     }
                                 });
                             }
+                        // try finding in different location if above didn't add any values to licenses array
+                        if (licenses.isEmpty()) {
+                            legalConstraintsType.getOtherConstraints().forEach(otherConstraints -> {
+                                for (String potentialKey : potentialKeys) {
+                                    if (otherConstraints.getCharacterString() != null && otherConstraints.getCharacterString().getValue().toString().toLowerCase().contains(potentialKey)) {
+                                        var license = License.builder().title(otherConstraints.getCharacterString().getValue().toString()).build();
+                                        licenses.add(JsonUtil.toJsonString(license));
+                                    }
+                                }
+                            });
                         }
                     }
                 });
