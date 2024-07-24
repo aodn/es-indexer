@@ -1,5 +1,6 @@
 package au.org.aodn.esindexer.service;
 
+import au.org.aodn.esindexer.model.GeoNetworkField;
 import au.org.aodn.esindexer.utils.*;
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.stac.model.*;
@@ -28,6 +29,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import static au.org.aodn.esindexer.model.GeoNetworkField.*;
 import static au.org.aodn.esindexer.utils.CommonUtils.safeGet;
 
 /**
@@ -60,6 +62,8 @@ public abstract class StacCollectionMapperService {
     @Mapping(target="providers", source = "source", qualifiedByName = "mapProviders")
     @Mapping(target="citation", source="source", qualifiedByName = "mapCitation")
     @Mapping(target="summaries.statement", source="source", qualifiedByName = "mapSummaries.statement")
+    @Mapping(target="summaries.creation", source = "source", qualifiedByName = "mapSummaries.creation")
+    @Mapping(target="summaries.revision", source = "source", qualifiedByName = "mapSummaries.revision")
     public abstract StacCollectionModel mapToSTACCollection(MDMetadataType source);
 
 
@@ -275,20 +279,6 @@ public abstract class StacCollectionMapperService {
             }
         }
 
-        //get metadata temporal info
-        var dateSources = MapperUtils.findMDDateInfo(source);
-        HashMap<String, String> dateMap = getMetadataDateInfoFrom(dateSources);
-        if (!dateMap.isEmpty()) {
-            var revisionDate = dateMap.get("revision");
-            var creationDate = dateMap.get("creation");
-            if (revisionDate != null) {
-                temporal.put("revision", convertDateToZonedDateTime(revisionDate));
-            }
-            if (creationDate != null) {
-                temporal.put("creation", convertDateToZonedDateTime(creationDate));
-            }
-        }
-
         if (!temporal.isEmpty()) {
             result.add(temporal);
         }
@@ -299,8 +289,22 @@ public abstract class StacCollectionMapperService {
         return null;
     }
 
-    private HashMap<String, String> getMetadataDateInfoFrom(List<AbstractTypedDatePropertyType> dateSources) {
-        var dateMap = new HashMap<String, String>();
+    @Named("mapSummaries.creation")
+    String mapSummariesCreation(MDMetadataType source) {
+        var dateSources = MapperUtils.findMDDateInfo(source);
+        var dateMap = getMetadataDateInfoFrom(dateSources);
+        return safeGet(() -> dateMap.get(creation)).orElse(null);
+    }
+
+    @Named("mapSummaries.revision")
+    String mapSummariesRevision(MDMetadataType source) {
+        var dateSources = MapperUtils.findMDDateInfo(source);
+        var dateMap = getMetadataDateInfoFrom(dateSources);
+        return safeGet(() -> dateMap.get(revision)).orElse(null);
+    }
+
+    private HashMap<GeoNetworkField, String> getMetadataDateInfoFrom(List<AbstractTypedDatePropertyType> dateSources) {
+        var dateMap = new HashMap<GeoNetworkField, String>();
         dateSources.forEach(dateSource -> {
             var typeValue = safeGet(() -> dateSource.getAbstractTypedDate().getValue()).orElse(null);
             if (!(typeValue instanceof CIDateType2 ciDateType2) ) {
@@ -309,7 +313,7 @@ public abstract class StacCollectionMapperService {
             var type = safeGet(() -> ciDateType2.getDateType().getCIDateTypeCode().getCodeListValue());
             var date = safeGet(() -> ciDateType2.getDate().getDateTime());
             if (type.isPresent() && date.isPresent()) {
-                dateMap.put(type.get(), date.get().toString());
+                dateMap.put(GeoNetworkField.valueOf(type.get()), date.get().toString());
             }
         });
         return dateMap;
