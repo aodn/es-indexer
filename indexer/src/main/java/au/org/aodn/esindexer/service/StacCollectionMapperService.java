@@ -1,5 +1,6 @@
 package au.org.aodn.esindexer.service;
 
+import au.org.aodn.esindexer.model.GeoNetworkField;
 import au.org.aodn.esindexer.utils.*;
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.stac.model.*;
@@ -28,6 +29,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import static au.org.aodn.esindexer.model.GeoNetworkField.*;
 import static au.org.aodn.esindexer.utils.CommonUtils.safeGet;
 
 /**
@@ -290,25 +292,19 @@ public abstract class StacCollectionMapperService {
     @Named("mapSummaries.creation")
     String mapSummariesCreation(MDMetadataType source) {
         var dateSources = MapperUtils.findMDDateInfo(source);
-        HashMap<String, String> dateMap = getMetadataDateInfoFrom(dateSources);
-        if (!dateMap.isEmpty()) {
-            return dateMap.get("creation");
-        }
-        return null;
+        var dateMap = getMetadataDateInfoFrom(dateSources);
+        return safeGet(() -> dateMap.get(creation)).orElse(null);
     }
 
     @Named("mapSummaries.revision")
     String mapSummariesRevision(MDMetadataType source) {
         var dateSources = MapperUtils.findMDDateInfo(source);
-        HashMap<String, String> dateMap = getMetadataDateInfoFrom(dateSources);
-        if (!dateMap.isEmpty()) {
-            return dateMap.get("revision");
-        }
-        return null;
+        var dateMap = getMetadataDateInfoFrom(dateSources);
+        return safeGet(() -> dateMap.get(revision)).orElse(null);
     }
 
-    private HashMap<String, String> getMetadataDateInfoFrom(List<AbstractTypedDatePropertyType> dateSources) {
-        var dateMap = new HashMap<String, String>();
+    private HashMap<GeoNetworkField, String> getMetadataDateInfoFrom(List<AbstractTypedDatePropertyType> dateSources) {
+        var dateMap = new HashMap<GeoNetworkField, String>();
         dateSources.forEach(dateSource -> {
             var typeValue = safeGet(() -> dateSource.getAbstractTypedDate().getValue()).orElse(null);
             if (!(typeValue instanceof CIDateType2 ciDateType2) ) {
@@ -317,7 +313,7 @@ public abstract class StacCollectionMapperService {
             var type = safeGet(() -> ciDateType2.getDateType().getCIDateTypeCode().getCodeListValue());
             var date = safeGet(() -> ciDateType2.getDate().getDateTime());
             if (type.isPresent() && date.isPresent()) {
-                dateMap.put(type.get(), date.get().toString());
+                dateMap.put(GeoNetworkField.valueOf(type.get()), date.get().toString());
             }
         });
         return dateMap;
