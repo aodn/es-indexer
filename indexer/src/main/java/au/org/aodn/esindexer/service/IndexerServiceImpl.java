@@ -1,11 +1,11 @@
 package au.org.aodn.esindexer.service;
 
-import au.org.aodn.stac.model.StacCollectionModel;
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.exception.*;
 import au.org.aodn.esindexer.utils.JaxbUtils;
-import au.org.aodn.metadata.iso19115_3_2018.*;
+import au.org.aodn.metadata.iso19115_3_2018.MDMetadataType;
 import au.org.aodn.stac.model.RecordSuggest;
+import au.org.aodn.stac.model.StacCollectionModel;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.ElasticsearchException;
 import co.elastic.clients.elasticsearch.core.*;
@@ -23,16 +23,16 @@ import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.operation.TransformException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.util.unit.DataSize;
-import org.springframework.util.unit.DataUnit;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 @Service
 public class IndexerServiceImpl implements IndexerService {
@@ -169,15 +169,14 @@ public class IndexerServiceImpl implements IndexerService {
                     logger.info("GeoNetwork instance has been reinstalled, recreating portal index: " + indexName);
                     elasticSearchIndexService.createIndexFromMappingJSONFile(AppConstants.PORTAL_RECORDS_MAPPING_JSON_FILE, indexName);
                 }
-            }
-            catch (IndexNotFoundException e) {
+            } catch (IndexNotFoundException e) {
                 logger.info("Index: {} not found, creating index", indexName);
                 elasticSearchIndexService.createIndexFromMappingJSONFile(AppConstants.PORTAL_RECORDS_MAPPING_JSON_FILE, indexName);
             }
 
             // index the metadata if it is published
             if (this.isMetadataPublished(uuid)) {
-                try(InputStream is = new ByteArrayInputStream(indexerObjectMapper.writeValueAsBytes(mappedMetadataValues))) {
+                try (InputStream is = new ByteArrayInputStream(indexerObjectMapper.writeValueAsBytes(mappedMetadataValues))) {
                     logger.info("Ingesting a new metadata with UUID: {} to index: {}", uuid, indexName);
                     logger.debug("{}", mappedMetadataValues);
 
@@ -190,8 +189,7 @@ public class IndexerServiceImpl implements IndexerService {
                     IndexResponse response = portalElasticsearchClient.index(req);
                     logger.info("Metadata with UUID: {} indexed with version: {}", uuid, response.version());
                     return ResponseEntity.status(HttpStatus.OK).body(response.toString());
-                }
-                catch (ElasticsearchException e) {
+                } catch (ElasticsearchException e) {
                     String fullError = String.format("%s -> %s", e.getMessage(), e.error().causedBy());
                     logger.error(fullError);
                     throw new IndexingRecordException(fullError);

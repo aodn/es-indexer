@@ -82,13 +82,9 @@
       "These data are from the National Mooring Network, part of the Australia’s Integrated Marine Observing System (IMOS) is enabled by the National Collaborative Research Infrastructure Strategy (NCRIS). It is operated by a consortium of institutions as an unincorporated joint venture, with the University of Tasmania as Lead Agent.",
       "Operation of the National Reference Station (NRS) sampling and analyses is provided by the IMOS NRS Biogeochemical (BGC) project and is distributed between several operators and is coordinated nationally. Nutrient analyses (2009- ) performed by Val Latham (CMAR - Hobart) and Peter Hughes (CMAR - Floreat) Salinity and oxygen analyses (2009- ) performed by Val Latham (CMAR - Hobart) Carbon and Alkalinity analyses (2009- ) performed by Kate Berry (CMAR - Hobart)"
     ],
-    "scope": null,
     "statement": "Sampling is conducted monthly (Esperance and Ningaloo 3 monthly) off small vessels. Depths sampled range from surface to 105 metres depending on the site and depths are usually sampled at 10 metre intervals. The nutrient analyses is performed at CMAR Hobart and Floreat laboratories. Full details are documented in the “IMOS National Reference Stations Biogeochemical Operations Manual”. Data is archived in the ORABN1:PLANKTON_NRS_ENV database at CMAR Dutton Park. Data is also exported to IMOS and made available via the AODN portal.",
-    "creation": null,
-    "revision": null,
-    "dataset_group": null,
-    "dataset_provider": null,
-    "update_frequency": null,
+    "creation": "2020-07-14T18:03:00",
+    "revision": "2022-10-31T21:17:33",
     "proj:geometry": {
       "geometries": [
         {
@@ -340,12 +336,9 @@
     "temporal": [
       {
         "start": "2008-09-28T14:00:00Z",
-        "end": null,
-        "creation": "2020-07-14T08:03:00Z",
-        "revision": "2022-10-31T10:17:33Z"
+        "end": null
       }
-    ],
-    "discovery_categories": null
+    ]
   },
   "contacts": [
     {
@@ -387,7 +380,6 @@
       "links": [
         {
           "href": "http://www.cmar.csiro.au/",
-          "rel": null,
           "type": "WWW:LINK-1.0-http--link",
           "title": "Contact Web Address."
         }
@@ -419,7 +411,6 @@
       "links": [
         {
           "href": "http://www.marine.csiro.au/datacentre/",
-          "rel": null,
           "type": "WWW:LINK-1.0-http--link",
           "title": "CSIRO - CMAR Data Centre homepage"
         }
@@ -465,7 +456,6 @@
       "links": [
         {
           "href": "http://www.imos.org.au",
-          "rel": null,
           "type": "WWW:LINK-1.0-http--link",
           "title": "Website of the Integrated Marine Observing System (IMOS)"
         }
@@ -514,7 +504,6 @@
   "providers": [
     {
       "name": "CSIRO Marine Data Centre",
-      "description": null,
       "roles": [
         "distributor"
       ],
@@ -730,8 +719,7 @@
   ],
   "id": "fa93c66e-0e56-7e1d-e043-08114f8c1b76",
   "record_suggest": {
-    "title": "IMOS National Reference Station (NRS) - Salinity, Carbon, Alkalinity, Oxygen and Nutrients (Silicate, Ammonium, Nitrite/Nitrate, Phosphate)",
-    "description": null
+    "title": "IMOS National Reference Station (NRS) - Salinity, Carbon, Alkalinity, Oxygen and Nutrients (Silicate, Ammonium, Nitrite/Nitrate, Phosphate)"
   },
   "sci:citation": "{\"suggestedCitation\":\"This material is released under the Creative Commons Attribution 4.0 International licence. The citation in a list of references is: \\\"IMOS [year-of-data-download], [Title], [data-access-URL], accessed [date-of-access].\\\" Any users of IMOS data are required to clearly acknowledge the source of the material derived from IMOS in the format: \\\"Data was sourced from Australia’s Integrated Marine Observing System (IMOS) – IMOS is enabled by the National Collaborative Research Infrastructure strategy (NCRIS).\\\"\",\"useLimitations\":null,\"otherConstraints\":null}",
   "type": "Collection",

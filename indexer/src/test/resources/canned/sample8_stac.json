@@ -40,9 +40,6 @@
     "statement": "Original field data. The raw EOV data archive was transferred to the NCMI IDC in Hobart.\n\n                    A manifest file for the final archive was generated (in2019_v06_manifest_1.0_rawVoyage_cs.txt).\n\n                    Available paper documents are scanned to 400 dpi PDF and stored at the IDC record storage system. ELOG files are generated as csv-formatted files and archived.",
     "creation": "2015-10-06T00:00:00",
     "revision": "2022-03-04T00:18:20",
-    "dataset_group": null,
-    "dataset_provider": null,
-    "update_frequency": null,
     "proj:geometry": {
       "geometries": [
         {
@@ -80,8 +77,7 @@
         "start": "2019-10-18T13:00:00Z",
         "end": "2019-12-16T13:00:00Z"
       }
-    ],
-    "discovery_categories": null
+    ]
   },
   "contacts": [
     {
@@ -130,9 +126,7 @@
       "links": [
         {
           "href": "http://www.csiro.au/en/Research/OandA",
-          "rel": null,
-          "type": "WWW:LINK-1.0-http--link",
-          "title": null
+          "type": "WWW:LINK-1.0-http--link"
         }
       ]
     },
@@ -195,9 +189,7 @@
       "links": [
         {
           "href": "http://www.csiro.au/en/Research/OandA",
-          "rel": null,
-          "type": "WWW:LINK-1.0-http--link",
-          "title": null
+          "type": "WWW:LINK-1.0-http--link"
         }
       ]
     },
@@ -257,27 +249,21 @@
   "providers": [
     {
       "name": "CSIRO/Oceans and Atmosphere",
-      "description": null,
       "roles": [
         "processor"
-      ],
-      "url": null
+      ]
     },
     {
       "name": "CSIRO Oceans & Atmosphere - Hobart",
-      "description": null,
       "roles": [
         "pointOfContact"
-      ],
-      "url": null
+      ]
     },
     {
       "name": "CSIRO",
-      "description": null,
       "roles": [
         "originator"
-      ],
-      "url": null
+      ]
     }
   ],
   "themes": [
@@ -769,8 +755,7 @@
   ],
   "id": "1880cd63-d0f9-42e0-b073-7082527945f2",
   "record_suggest": {
-    "title": "RV Investigator Voyage IN2019_V06 End of Voyage (EOV) Archive",
-    "description": null
+    "title": "RV Investigator Voyage IN2019_V06 End of Voyage (EOV) Archive"
   },
   "sci:citation": "{\"suggestedCitation\":null,\"useLimitations\":null,\"otherConstraints\":[\"Access to the raw (not quality-controlled) voyage data is intended for the collectors and processors of the data obtained in the MNF RV Investigator voyage. Quality-controlled data products will be made available under the MNF CCBY  licence.\"]}",
   "type": "Collection",
@@ -783,3 +768,4 @@
     "https://stac-extensions.github.io/themes/v1.0.0/schema.json"
   ]
 }
+

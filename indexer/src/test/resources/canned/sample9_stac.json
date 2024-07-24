@@ -50,9 +50,6 @@
     "statement": "",
     "creation": "2022-02-08T00:00:00",
     "revision": "2024-03-15T00:00:00",
-    "dataset_group": null,
-    "dataset_provider": null,
-    "update_frequency": null,
     "proj:geometry": {
       "geometries": [
         {
@@ -77,8 +74,7 @@
         "start": "2018-10-28T13:00:00Z",
         "end": "2019-11-19T13:00:00Z"
       }
-    ],
-    "discovery_categories": null
+    ]
   },
   "contacts": [
     {
@@ -120,7 +116,6 @@
       "links": [
         {
           "href": "https://www.aims.gov.au",
-          "rel": null,
           "type": "WWW:LINK-1.0-http--link",
           "title": "AIMS Web Site"
         }
@@ -165,7 +160,6 @@
       "links": [
         {
           "href": "https://www.aims.gov.au",
-          "rel": null,
           "type": "WWW:LINK-1.0-http--link",
           "title": "AIMS Web Site"
         }
@@ -210,9 +204,7 @@
       "links": [
         {
           "href": "https://www.aims.gov.au/adc",
-          "rel": null,
-          "type": "WWW:LINK-1.0-http--link",
-          "title": null
+          "type": "WWW:LINK-1.0-http--link"
         }
       ]
     },
@@ -255,7 +247,6 @@
       "links": [
         {
           "href": "https://www.aims.gov.au",
-          "rel": null,
           "type": "WWW:LINK-1.0-http--link",
           "title": "AIMS Web Site"
         }
@@ -300,7 +291,6 @@
       "links": [
         {
           "href": "https://www.aims.gov.au",
-          "rel": null,
           "type": "WWW:LINK-1.0-http--link",
           "title": "AIMS Web Site"
         }
@@ -331,18 +321,15 @@
   "providers": [
     {
       "name": "Australian Institute of Marine Science (AIMS)",
-      "description": null,
       "roles": [
         "pointOfContact"
-      ],
-      "url": null
+      ]
     }
   ],
   "themes": [],
   "id": "1e13ab6e-e546-44f2-a007-061c2815268a",
   "record_suggest": {
-    "title": "Heat-evolved microalgal symbionts increase thermal bleaching tolerance of coral juveniles without a trade-off against growth",
-    "description": null
+    "title": "Heat-evolved microalgal symbionts increase thermal bleaching tolerance of coral juveniles without a trade-off against growth"
   },
   "sci:citation": "{\"suggestedCitation\":\"Attribution: Format for citation of metadata sourced from Australian Institute of Marine Science (AIMS) in a list of reference is as follows: \\\"Australian Institute of Marine Science (AIMS). (2022). Heat-evolved microalgal symbionts increase thermal bleaching tolerance of coral juveniles without a trade-off against growth. https://apps.aims.gov.au/metadata/view/1e13ab6e-e546-44f2-a007-061c2815268a, accessed[date-of-access]\\\".\",\"useLimitations\":null,\"otherConstraints\":[\"Use Limitation: All AIMS data, products and services are provided \\\"as is\\\" and AIMS does not warrant their fitness for a particular purpose or non-infringement. While AIMS has made every reasonable effort to ensure high quality of the data, products and services, to the extent permitted by law the data, products and services are provided without any warranties of any kind, either expressed or implied, including without limitation any implied warranties of title, merchantability, and fitness for a particular purpose or non-infringement. AIMS make no representation or warranty that the data, products and services are accurate, complete, reliable or current. To the extent permitted by law, AIMS exclude all liability to any person arising directly or indirectly from the use of the data, products and services.\",\"\"]}",
   "type": "Collection",
