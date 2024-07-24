@@ -166,6 +166,38 @@ public class StacCollectionMapperServiceTests {
     }
 
     @Test
+    public void verifyLicenseCorrect() throws IOException {
+
+        // if license is in citation block, it should be extracted and added to the collection
+        String xml1 = readResourceFile("classpath:canned/sample10.xml");
+        String expected1 = readResourceFile("classpath:canned/sample10_stac.json");
+        indexerService.indexMetadata(xml1);
+
+        Map<?,?> content1 = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
+        String out1 = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content1);
+        Assertions.assertEquals(objectMapper.readTree(expected1), objectMapper.readTree(out1.strip()), "Stac not equals for sample 10");
+
+        // if license is not in citation block, it should try to find it in "other constraints"
+        String xml2 = readResourceFile("classpath:canned/sample11.xml");
+        String expected2 = readResourceFile("classpath:canned/sample11_stac.json");
+        indexerService.indexMetadata(xml2);
+
+        Map<?,?> content2 = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
+        String out2 = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content2);
+        Assertions.assertEquals(objectMapper.readTree(expected2), objectMapper.readTree(out2.strip()), "Stac not equals for sample 11");
+
+        // if both blocks all don't have license, it should return empty string
+        String xml3 = readResourceFile("classpath:canned/sample7.xml");
+        String expected3 = readResourceFile("classpath:canned/sample7_stac.json");
+        indexerService.indexMetadata(xml3);
+
+        Map<?,?> content3 = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
+        String out3 = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content3);
+        Assertions.assertEquals(objectMapper.readTree(expected3), objectMapper.readTree(out3.strip()), "Stac not equals for sample 7");
+
+    }
+
+    @Test
     public void verifySummaryGeoCorrect1() throws IOException, JAXBException {
         // We only index one record, the
         String xml = readResourceFile("classpath:canned/sample9.xml");

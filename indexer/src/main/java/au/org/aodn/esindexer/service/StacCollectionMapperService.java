@@ -695,8 +695,8 @@ public abstract class StacCollectionMapperService {
             if (!(onlineResource.get() instanceof  CIOnlineResourceType2 ciOnlineResource)) {
                 return;
             }
-            safeGet(() -> ((CIOnlineResourceType2) onlineResource.get())
-                    .getLinkage().getCharacterString().getValue().toString())
+            safeGet(() -> ciOnlineResource.getLinkage().getCharacterString()
+                    .getValue().toString())
                     .ifPresent(license::setLicenseGraphic);
 
             licenses.add(JsonUtil.toJsonString(license));
