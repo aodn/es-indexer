@@ -42,6 +42,8 @@
       "name": ""
     },
     "statement": "This dataset was created using both observed and modelled data.\n\n                    A full description of the dataset is available from: \"Historical reconstruction of ocean acidification in the Australian region. Lenton et al. 2016, Biogeosciences  13, 1753-1765,http://www.biogeosciences.net/13/1753/2016",
+    "creation": "2019-01-08T15:59:50",
+    "revision": "2019-01-08T15:59:50",
     "dataset_group": "sample",
     "dataset_provider": "IMOS",
     "proj:geometry": {
@@ -79,9 +81,7 @@
     "temporal": [
       {
         "start": "1870-07-16T14:10:44Z",
-        "end": "2013-06-16T14:00:00Z",
-        "creation": "2019-01-08T04:59:50Z",
-        "revision": "2019-01-08T04:59:50Z"
+        "end": "2013-06-16T14:00:00Z"
       }
     ],
     "discovery_categories": [
