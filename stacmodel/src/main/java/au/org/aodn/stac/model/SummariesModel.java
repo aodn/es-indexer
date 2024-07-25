@@ -1,5 +1,6 @@
 package au.org.aodn.stac.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Data;
@@ -9,6 +10,7 @@ import java.util.Map;
 
 @Data
 @Builder
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class SummariesModel {
 
     protected Integer score;
@@ -16,6 +18,8 @@ public class SummariesModel {
     protected List<String> credits;
     protected Map<String, String> scope;
     protected String statement;
+    protected String creation;
+    protected String revision;
 
     /**
      * Group info as setup in geonetwork

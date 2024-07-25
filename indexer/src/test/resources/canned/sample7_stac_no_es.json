@@ -88,7 +88,7 @@
     ]
   },
   "summaries": {
-    "score": 60,
+    "score": 1,
     "status": "completed",
     "credits": [
       "This data was collected by the 'Field integrated testing project' of EcoRRAP. We thank all team members, students, and volunteers for their efforts.",
@@ -101,7 +101,6 @@
     "statement": "",
     "creation": "2024-05-10T00:00:00",
     "revision": "2024-05-16T00:00:00",
-    "dataset_group": "sample",
     "proj:geometry": {
       "geometries": [
         {

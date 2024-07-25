@@ -1,5 +1,6 @@
 package au.org.aodn.esindexer.service;
 
+import au.org.aodn.esindexer.model.GeoNetworkField;
 import au.org.aodn.esindexer.utils.*;
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.stac.model.*;
@@ -28,6 +29,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import static au.org.aodn.esindexer.model.GeoNetworkField.*;
 import static au.org.aodn.esindexer.utils.CommonUtils.safeGet;
 
 /**
@@ -60,6 +62,8 @@ public abstract class StacCollectionMapperService {
     @Mapping(target="providers", source = "source", qualifiedByName = "mapProviders")
     @Mapping(target="citation", source="source", qualifiedByName = "mapCitation")
     @Mapping(target="summaries.statement", source="source", qualifiedByName = "mapSummaries.statement")
+    @Mapping(target="summaries.creation", source = "source", qualifiedByName = "mapSummaries.creation")
+    @Mapping(target="summaries.revision", source = "source", qualifiedByName = "mapSummaries.revision")
     public abstract StacCollectionModel mapToSTACCollection(MDMetadataType source);
 
 
@@ -275,20 +279,6 @@ public abstract class StacCollectionMapperService {
             }
         }
 
-        //get metadata temporal info
-        var dateSources = MapperUtils.findMDDateInfo(source);
-        HashMap<String, String> dateMap = getMetadataDateInfoFrom(dateSources);
-        if (!dateMap.isEmpty()) {
-            var revisionDate = dateMap.get("revision");
-            var creationDate = dateMap.get("creation");
-            if (revisionDate != null) {
-                temporal.put("revision", convertDateToZonedDateTime(revisionDate));
-            }
-            if (creationDate != null) {
-                temporal.put("creation", convertDateToZonedDateTime(creationDate));
-            }
-        }
-
         if (!temporal.isEmpty()) {
             result.add(temporal);
         }
@@ -299,8 +289,22 @@ public abstract class StacCollectionMapperService {
         return null;
     }
 
-    private HashMap<String, String> getMetadataDateInfoFrom(List<AbstractTypedDatePropertyType> dateSources) {
-        var dateMap = new HashMap<String, String>();
+    @Named("mapSummaries.creation")
+    String mapSummariesCreation(MDMetadataType source) {
+        var dateSources = MapperUtils.findMDDateInfo(source);
+        var dateMap = getMetadataDateInfoFrom(dateSources);
+        return safeGet(() -> dateMap.get(creation)).orElse(null);
+    }
+
+    @Named("mapSummaries.revision")
+    String mapSummariesRevision(MDMetadataType source) {
+        var dateSources = MapperUtils.findMDDateInfo(source);
+        var dateMap = getMetadataDateInfoFrom(dateSources);
+        return safeGet(() -> dateMap.get(revision)).orElse(null);
+    }
+
+    private HashMap<GeoNetworkField, String> getMetadataDateInfoFrom(List<AbstractTypedDatePropertyType> dateSources) {
+        var dateMap = new HashMap<GeoNetworkField, String>();
         dateSources.forEach(dateSource -> {
             var typeValue = safeGet(() -> dateSource.getAbstractTypedDate().getValue()).orElse(null);
             if (!(typeValue instanceof CIDateType2 ciDateType2) ) {
@@ -309,7 +313,7 @@ public abstract class StacCollectionMapperService {
             var type = safeGet(() -> ciDateType2.getDateType().getCIDateTypeCode().getCodeListValue());
             var date = safeGet(() -> ciDateType2.getDate().getDateTime());
             if (type.isPresent() && date.isPresent()) {
-                dateMap.put(type.get(), date.get().toString());
+                dateMap.put(GeoNetworkField.valueOf(type.get()), date.get().toString());
             }
         });
         return dateMap;
@@ -631,40 +635,30 @@ public abstract class StacCollectionMapperService {
             for (MDDataIdentificationType i : items) {
                 i.getResourceConstraints().forEach(resourceConstraint -> {
                     if (resourceConstraint.getAbstractConstraints().getValue() instanceof MDLegalConstraintsType legalConstraintsType) {
-                        legalConstraintsType.getOtherConstraints().forEach(otherConstraints -> {
-                            for (String potentialKey : potentialKeys) {
-                                if (otherConstraints.getCharacterString() != null && otherConstraints.getCharacterString().getValue().toString().toLowerCase().contains(potentialKey)) {
-                                    var license = License.builder().title(otherConstraints.getCharacterString().getValue().toString()).build();
-                                    licenses.add(JsonUtil.toJsonString(license));
-                                }
-                            }
-                        });
-                        // try finding in different location if above didn't add any values to licenses array
+
+                        // try to find licence in citation block first
+                        var licencesInCitation = findLicenseInCitationBlock(legalConstraintsType);
+                        if (!licencesInCitation.isEmpty()) {
+                            licenses.addAll(licencesInCitation);
+                        }
+
+                        // Some organizations didn't put license in the citation block, so now try finding in different location
+                        // (other constraints)if above didn't add any values to licenses array
                         if (licenses.isEmpty()) {
-                            if (!legalConstraintsType.getReference().isEmpty() || legalConstraintsType.getReference() != null) {
-                                legalConstraintsType.getReference().forEach(reference -> {
-                                    if (reference.getAbstractCitation().getValue() instanceof CICitationType2 ciCitationType2) {
-                                        if (ciCitationType2.getTitle() != null) {
-                                            var license = License.builder().title(ciCitationType2.getTitle().getCharacterString().getValue().toString()).build();
-
-                                            // set license url
-                                            safeGet(
-                                                    () -> ciCitationType2.getOnlineResource().get(0).getCIOnlineResource().getLinkage().getCharacterString().getValue().toString()
-                                            ).ifPresent(license::setUrl);
-
-                                            // set license graphic
-                                            safeGet(
-                                                    () -> legalConstraintsType.getGraphic().get(0).getMDBrowseGraphic().getLinkage().get(0).getAbstractOnlineResource().getValue()
-                                            ).ifPresent( abstractOnlineResource -> {
-                                                if (abstractOnlineResource instanceof CIOnlineResourceType2 ciOnlineResourceType2) {
-                                                    safeGet(() -> ciOnlineResourceType2.getLinkage().getCharacterString().getValue().toString()).ifPresent(license::setLicenseGraphic);
-                                                }
-                                            });
+                            safeGet(legalConstraintsType::getOtherConstraints).ifPresent( otherConstraints -> {
+                                otherConstraints.forEach( otherConstraint -> {
+                                    var licenseTitle = safeGet(() -> otherConstraint.getCharacterString().getValue().toString());
+                                    if (licenseTitle.isEmpty()) {
+                                        return;
+                                    }
+                                    for (var potentialKey : potentialKeys) {
+                                        if (licenseTitle.get().toLowerCase().contains(potentialKey)) {
+                                            var license = License.builder().title(licenseTitle.get()).build();
                                             licenses.add(JsonUtil.toJsonString(license));
                                         }
                                     }
                                 });
-                            }
+                            });
                         }
                     }
                 });
@@ -677,6 +671,53 @@ public abstract class StacCollectionMapperService {
             return "";
         }
     }
+
+    private static List<String> findLicenseInCitationBlock(MDLegalConstraintsType legalConstraintsType) {
+        List<String> licenses = new ArrayList<>();
+        if (safeGet(legalConstraintsType::getReference).isEmpty()) {
+            return licenses;
+        }
+        legalConstraintsType.getReference().forEach(reference -> {
+            if (!(reference.getAbstractCitation().getValue() instanceof CICitationType2 ciCitationType2)) {
+                return;
+            }
+            if (ciCitationType2.getTitle() == null) {
+                return;
+            }
+            var licenceTitle = safeGet(() -> ciCitationType2.getTitle()
+                    .getCharacterString().getValue().toString());
+            if (licenceTitle.isEmpty()) {
+                return;
+            }
+
+            var license = License.builder().title(licenceTitle.get()).build();
+
+            // set license url
+            safeGet(() -> ciCitationType2.getOnlineResource().get(0).getCIOnlineResource()
+                            .getLinkage().getCharacterString()
+                            .getValue().toString()
+            ).ifPresent(license::setUrl);
+
+            // set license graphic
+            var onlineResource = safeGet(() -> legalConstraintsType.getGraphic().get(0)
+                            .getMDBrowseGraphic().getLinkage().get(0)
+                            .getAbstractOnlineResource().getValue()
+            );
+            if (onlineResource.isEmpty()) {
+                return;
+            }
+            if (!(onlineResource.get() instanceof  CIOnlineResourceType2 ciOnlineResource)) {
+                return;
+            }
+            safeGet(() -> ciOnlineResource.getLinkage().getCharacterString()
+                    .getValue().toString())
+                    .ifPresent(license::setLicenseGraphic);
+
+            licenses.add(JsonUtil.toJsonString(license));
+        });
+        return licenses;
+    }
+
     /**
      * A sample of contact block will be like this, you can have individual block and organization block together
      *
