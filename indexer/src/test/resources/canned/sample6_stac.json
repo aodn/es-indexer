@@ -28,7 +28,7 @@
     ]
   },
   "summaries": {
-    "score": 95,
+    "score": 100,
     "status": "completed",
     "credits": [
       "Data collected on the Marine National Facility (MNF) RV Investigator voyage IN2024_V01.",
@@ -253,6 +253,12 @@
       "href": "https://www.marine.csiro.au/data/trawler/survey_mapfile.cfm?survey=IN2024_V01&data_type=uwy",
       "rel": "thumbnail",
       "type": "image"
+    },
+    {
+      "href": "http://140.79.20.100:8080/geonetwork/srv/eng/catalog.search#/metadata/ff887cf9-18bb-464e-8bad-5dc6e0ad946b",
+      "rel": "self",
+      "type": "text/html",
+      "title": "Full metadata link"
     }
   ],
   "license": "{\"title\":\"Attribution 4.0\",\"url\":\"https://creativecommons.org/licenses/by/4.0/\",\"licenseGraphic\":\"https://i.creativecommons.org/l/by/4.0/88x31.png\"}",
