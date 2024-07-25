@@ -88,7 +88,7 @@
     ]
   },
   "summaries": {
-    "score": 60,
+    "score": 70,
     "status": "completed",
     "credits": [
       "This data was collected by the 'Field integrated testing project' of EcoRRAP. We thank all team members, students, and volunteers for their efforts.",
@@ -418,7 +418,14 @@
       "name": "English"
     }
   ],
-  "links": [],
+  "links": [
+    {
+      "href": "https://apps.aims.gov.au/metadata/view/5905b3eb-aad0-4f9c-a03e-a02fb3488082",
+      "rel": "self",
+      "type": "text/html",
+      "title": "Full metadata link"
+    }
+  ],
   "license": "",
   "providers": [
     {

@@ -243,6 +243,12 @@
       "rel": "self",
       "type": "text/html",
       "title": "Marine National Facility"
+    },
+    {
+      "href": "https://marlin.csiro.au/geonetwork/srv/eng/catalog.search#/metadata/1880cd63-d0f9-42e0-b073-7082527945f2",
+      "rel": "self",
+      "type": "text/html",
+      "title": "Full metadata link"
     }
   ],
   "license": "{\"title\":\"Attribution 4.0\",\"url\":\"https://creativecommons.org/licenses/by/4.0/\",\"licenseGraphic\":\"https://i.creativecommons.org/l/by/4.0/88x31.png\"}",

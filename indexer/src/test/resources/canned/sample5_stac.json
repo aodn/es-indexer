@@ -28,7 +28,7 @@
     ]
   },
   "summaries": {
-    "score": 85,
+    "score": 90,
     "status": "completed",
     "credits": [
       "Australia’s Integrated Marine Observing System (IMOS) is enabled by the National Collaborative Research Infrastructure Strategy (NCRIS). It is operated by a consortium of institutions as an unincorporated joint venture, with the University of Tasmania as Lead Agent.",
@@ -233,6 +233,12 @@
       "rel": "icon",
       "type": "image/png",
       "title": "Suggest icon for dataset"
+    },
+    {
+      "href": "https://catalogue-imos.aodn.org.au:443/geonetwork/srv/api/records/2852a776-cbfc-4bc8-a126-f3c036814892",
+      "rel": "self",
+      "type": "text/html",
+      "title": "Full metadata link"
     }
   ],
   "license": "{\"title\":\"Creative Commons Attribution 4.0 International License\",\"url\":\"http://creativecommons.org/licenses/by/4.0/\",\"licenseGraphic\":\"https://licensebuttons.net/l/by/4.0/88x31.png\"}",
