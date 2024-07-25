@@ -572,9 +572,10 @@ public abstract class StacCollectionMapperService {
                 .ifPresent(results::add);
 
         // full metadata link
-        var metadataSource = MapperUtils.findMetadataLinkage(source);
-        safeGet(() ->
-                ( (CIOnlineResourceType2) (metadataSource.get(0).getAbstractOnlineResource().getValue()))
+        var metadataSource = source.getMetadataLinkage();
+        safeGet(() -> ((CIOnlineResourceType2) (metadataSource.get(0)
+                .getAbstractOnlineResource()
+                .getValue()))
                 .getLinkage().getCharacterString().getValue().toString()
         ).ifPresent(url -> {
             LinkModel linkModel = LinkModel.builder()
