@@ -1,6 +1,8 @@
 package au.org.aodn.esindexer.service;
 
 import au.org.aodn.esindexer.model.GeoNetworkField;
+import au.org.aodn.esindexer.model.MediaType;
+import au.org.aodn.esindexer.model.RelationType;
 import au.org.aodn.esindexer.utils.*;
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.stac.model.*;
@@ -580,14 +582,91 @@ public abstract class StacCollectionMapperService {
         ).ifPresent(url -> {
             LinkModel linkModel = LinkModel.builder()
                     .href(url)
-                    .rel("self")
-                    .type("text/html")
+                    .rel(RelationType.SELF.getValue())
+                    .type(MediaType.TEXT_HTML.getValue())
                     .title("Full metadata link")
                     .build();
             results.add(linkModel);
         });
 
+        // add license links
+        var licenseLinks = getLicenseLinks(source);
+        results.addAll(licenseLinks);
+
         return results;
+    }
+
+    private List<LinkModel> getLicenseLinks(MDMetadataType source) {
+        List<LinkModel> links = new ArrayList<>();
+        var dataIdentifications = MapperUtils.findMDDataIdentificationType(source);
+        for (var dataIdentification : dataIdentifications) {
+            if (dataIdentification.getResourceConstraints().isEmpty()) {
+                continue;
+            }
+            for (var resourceConstraint : dataIdentification.getResourceConstraints()) {
+                var legalConstraints = safeGet(() -> (MDLegalConstraintsType) resourceConstraint.getAbstractConstraints().getValue());
+                if (legalConstraints.isEmpty()) {
+                    continue;
+                }
+
+                // license graphic
+                var graphic = getLicenseGraphic(legalConstraints.get());
+                if (graphic != null) {
+                    links.add(graphic);
+                }
+
+                // license url
+                var url = getLicenseUrl(legalConstraints.get());
+                if (url != null) {
+                    links.add(url);
+                }
+            }
+        }
+        return links;
+    }
+
+    private LinkModel getLicenseGraphic(MDLegalConstraintsType legalConstraints) {
+        var ciOnlineResource = safeGet(() -> {
+            var onlineResource = legalConstraints.getGraphic().get(0)
+                    .getMDBrowseGraphic().getLinkage().get(0)
+                    .getAbstractOnlineResource().getValue();
+            return (CIOnlineResourceType2) onlineResource;
+        });
+        if (ciOnlineResource.isEmpty()) {
+            return null;
+        }
+
+        var graphic = safeGet(() -> ciOnlineResource.get().getLinkage()
+                .getCharacterString().getValue().toString());
+
+        return graphic.map(graphicUrl -> LinkModel.builder()
+                .href(graphicUrl)
+                .rel(RelationType.LICENSE.getValue())
+                .type(MediaType.IMAGE_PNG.getValue())
+                .build()).orElse(null);
+    }
+
+    private LinkModel getLicenseUrl(MDLegalConstraintsType legalConstraints) {
+        var references = safeGet(legalConstraints::getReference);
+        if (references.isEmpty()) {
+            return null;
+        }
+        for (var reference : references.get()) {
+
+            var url = safeGet(() -> {
+                var ciCitation = (CICitationType2) reference.getAbstractCitation().getValue();
+                return ciCitation.getOnlineResource().get(0)
+                        .getCIOnlineResource().getLinkage().getCharacterString().getValue().toString();
+            });
+            if (url.isPresent()) {
+                return LinkModel.builder()
+                        .href(url.get())
+                        .rel(RelationType.LICENSE.getValue())
+                        .type(MediaType.TEXT_HTML.getValue())
+                        .build();
+            }
+        }
+        return null;
     }
 
     // TODO: need to handle exception
@@ -654,8 +733,7 @@ public abstract class StacCollectionMapperService {
                                     }
                                     for (var potentialKey : potentialKeys) {
                                         if (licenseTitle.get().toLowerCase().contains(potentialKey)) {
-                                            var license = License.builder().title(licenseTitle.get()).build();
-                                            licenses.add(JsonUtil.toJsonString(license));
+                                            licenses.add(licenseTitle.get());
                                         }
                                     }
                                 });
@@ -673,48 +751,21 @@ public abstract class StacCollectionMapperService {
         }
     }
 
-    private static List<String> findLicenseInCitationBlock(MDLegalConstraintsType legalConstraintsType) {
+    private List<String> findLicenseInCitationBlock(MDLegalConstraintsType legalConstraintsType) {
         List<String> licenses = new ArrayList<>();
         if (safeGet(legalConstraintsType::getReference).isEmpty()) {
             return licenses;
         }
         legalConstraintsType.getReference().forEach(reference -> {
-            if (!(reference.getAbstractCitation().getValue() instanceof CICitationType2 ciCitationType2)) {
-                return;
-            }
-            if (ciCitationType2.getTitle() == null) {
-                return;
-            }
-            var licenceTitle = safeGet(() -> ciCitationType2.getTitle()
-                    .getCharacterString().getValue().toString());
-            if (licenceTitle.isEmpty()) {
-                return;
-            }
 
-            var license = License.builder().title(licenceTitle.get()).build();
-
-            // set license url
-            safeGet(() -> ciCitationType2.getOnlineResource().get(0).getCIOnlineResource()
-                            .getLinkage().getCharacterString()
-                            .getValue().toString()
-            ).ifPresent(license::setUrl);
-
-            // set license graphic
-            var onlineResource = safeGet(() -> legalConstraintsType.getGraphic().get(0)
-                            .getMDBrowseGraphic().getLinkage().get(0)
-                            .getAbstractOnlineResource().getValue()
-            );
-            if (onlineResource.isEmpty()) {
+            var title = safeGet(() -> {
+                var ciCitation = (CICitationType2) reference.getAbstractCitation().getValue();
+                return ciCitation.getTitle().getCharacterString().getValue().toString();
+            });
+            if (title.isEmpty()) {
                 return;
             }
-            if (!(onlineResource.get() instanceof  CIOnlineResourceType2 ciOnlineResource)) {
-                return;
-            }
-            safeGet(() -> ciOnlineResource.getLinkage().getCharacterString()
-                    .getValue().toString())
-                    .ifPresent(license::setLicenseGraphic);
-
-            licenses.add(JsonUtil.toJsonString(license));
+            licenses.add(title.get());
         });
         return licenses;
     }

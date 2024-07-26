@@ -436,9 +436,19 @@
       "rel": "self",
       "type": "text/html",
       "title": "Full metadata link"
+    },
+    {
+      "href": "https://licensebuttons.net/l/by/4.0/88x31.png",
+      "rel": "license",
+      "type": "image/png"
+    },
+    {
+      "href": "http://creativecommons.org/licenses/by/4.0/",
+      "rel": "license",
+      "type": "text/html"
     }
   ],
-  "license": "{\"title\":\"Creative Commons Attribution 4.0 International License\",\"url\":\"http://creativecommons.org/licenses/by/4.0/\",\"licenseGraphic\":\"https://licensebuttons.net/l/by/4.0/88x31.png\"}",
+  "license": "Creative Commons Attribution 4.0 International License",
   "providers": [
     {
       "name": "Integrated Marine Observing System (IMOS)",
