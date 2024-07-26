@@ -59,8 +59,7 @@
       "record_suggest": {
         "type": "nested",
         "properties": {
-          "title": { "type": "search_as_you_type", "analyzer": "custom_analyser" },
-          "description": { "type": "search_as_you_type", "analyzer": "custom_analyser" }
+          "abstract_phrases": { "type": "search_as_you_type", "analyzer": "custom_analyser" }
         }
       },
       "discovery_categories" : { "type":  "keyword" },

@@ -82,6 +82,7 @@ public class StacCollectionMapperServiceTests {
     public void createIndexerService() throws IOException {
         indexerService = new IndexerServiceImpl(
                 "any-works",
+                "shingle_analyser",
                 objectMapper,
                 jaxbUtils,
                 rankingService,

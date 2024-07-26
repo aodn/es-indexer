@@ -37,6 +37,9 @@ elasticsearch:
     name: portal_records
     categories:
       name: discovery_category
+  analyser:
+    tokens:
+      name: shingle_analyser
 
 geonetwork:
   host: http://localhost:8080
