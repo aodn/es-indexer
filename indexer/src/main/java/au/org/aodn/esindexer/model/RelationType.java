@@ -5,9 +5,6 @@ import lombok.Getter;
 @Getter
 public enum RelationType {
     SELF("self"),
-    ROOT("root"),
-    PARENT("parent"),
-    CHILD("child"),
     LICENSE("license"),
     ;
 
