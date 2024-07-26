@@ -127,8 +127,8 @@ public class IndexerServiceImpl implements IndexerService {
 
         for (AnalyzeToken token : response.tokens()) {
             // tweak as needed
-            String cleanedToken = token.token().replace("_", "").replace("  ", " ").trim();
-            if (cleanedToken.split("\\s+").length > 1) {
+            String cleanedToken = token.token().replace("_", "").trim();
+            if (cleanedToken.split("\\s+").length > 2) {
                 results.add(cleanedToken);
             }
         }
