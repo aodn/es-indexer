@@ -127,8 +127,8 @@ public class IndexerServiceImpl implements IndexerService {
 
         for (AnalyzeToken token : response.tokens()) {
             // tweak as needed
-            String cleanedToken = token.token().replace("_", "").trim();
-            if (cleanedToken.split("\\s+").length > 2) {
+            String cleanedToken = token.token().replace("_", "").replaceAll("\\s{2,}", " ").trim();
+            if (cleanedToken.split("\\s+").length > 0) { // change to 1 for at least 2 words, 2 for at least 3 words
                 results.add(cleanedToken);
             }
         }
