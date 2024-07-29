@@ -24,6 +24,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
@@ -82,6 +83,7 @@ public class StacCollectionMapperServiceTests {
     public void createIndexerService() throws IOException {
         indexerService = new IndexerServiceImpl(
                 "any-works",
+                "shingle_analyser",
                 objectMapper,
                 jaxbUtils,
                 rankingService,
@@ -91,10 +93,14 @@ public class StacCollectionMapperServiceTests {
                 service,
                 aodnDiscoveryParameterVocabService
         );
+        indexerService = spy(indexerService);
 
         // Number is 0, pretend fresh elastic instance
         when(elasticSearchIndexService.getDocumentsCount(anyString()))
                 .thenReturn(0L);
+
+        // Mock the protected method to return an empty string list
+        doReturn(Collections.emptyList()).when(indexerService).extractTokensFromDescription(anyString());
 
         doNothing()
                 .when(elasticSearchIndexService)
@@ -191,7 +197,6 @@ public class StacCollectionMapperServiceTests {
         Map<?,?> content3 = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
         String out3 = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content3);
         Assertions.assertEquals(objectMapper.readTree(expected3), objectMapper.readTree(out3.strip()), "Stac not equals for sample 7");
-
     }
 
     @Test

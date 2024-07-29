@@ -13,6 +13,9 @@ import co.elastic.clients.elasticsearch.core.bulk.BulkResponseItem;
 import co.elastic.clients.elasticsearch.core.search.Hit;
 import co.elastic.clients.elasticsearch.core.search.TotalHits;
 import co.elastic.clients.elasticsearch.core.search.TotalHitsRelation;
+import co.elastic.clients.elasticsearch.indices.AnalyzeRequest;
+import co.elastic.clients.elasticsearch.indices.AnalyzeResponse;
+import co.elastic.clients.elasticsearch.indices.analyze.AnalyzeToken;
 import co.elastic.clients.json.JsonData;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -30,14 +33,13 @@ import org.springframework.stereotype.Service;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Service
 public class IndexerServiceImpl implements IndexerService {
 
     protected String indexName;
+    protected String tokensAnalyserName;
     protected GeoNetworkService geoNetworkResourceService;
     protected ElasticsearchClient portalElasticsearchClient;
     protected ElasticSearchIndexService elasticSearchIndexService;
@@ -52,6 +54,7 @@ public class IndexerServiceImpl implements IndexerService {
     @Autowired
     public IndexerServiceImpl(
             @Value("${elasticsearch.index.name}") String indexName,
+            @Value("${elasticsearch.analyser.tokens.name}") String tokensAnalyserName,
             ObjectMapper indexerObjectMapper,
             JaxbUtils<MDMetadataType> jaxbUtils,
             RankingService rankingService,
@@ -62,6 +65,7 @@ public class IndexerServiceImpl implements IndexerService {
             AodnDiscoveryParameterVocabService aodnDiscoveryParameterVocabService
     ) {
         this.indexName = indexName;
+        this.tokensAnalyserName = tokensAnalyserName;
         this.indexerObjectMapper = indexerObjectMapper;
         this.jaxbUtils = jaxbUtils;
         this.rankingService = rankingService;
@@ -115,6 +119,23 @@ public class IndexerServiceImpl implements IndexerService {
         }
     }
 
+    protected List<String> extractTokensFromDescription(String description) throws IOException {
+        Set<String> results = new HashSet<>();
+
+        AnalyzeRequest request = AnalyzeRequest.of(ar -> ar.index(indexName).analyzer(tokensAnalyserName).text(description));
+        AnalyzeResponse response = portalElasticsearchClient.indices().analyze(request);
+
+        for (AnalyzeToken token : response.tokens()) {
+            // tweak as needed
+            String cleanedToken = token.token().replace("_", "").replaceAll("\\s{2,}", " ").trim();
+            if (cleanedToken.split("\\s+").length > 0) { // change to 1 for at least 2 words, 2 for at least 3 words
+                results.add(cleanedToken);
+            }
+        }
+
+        return new ArrayList<>(results);
+    }
+
     protected StacCollectionModel getMappedMetadataValues(String metadataValues) throws IOException, FactoryException, TransformException, JAXBException {
         MDMetadataType metadataType = jaxbUtils.unmarshal(metadataValues);
 
@@ -139,13 +160,10 @@ public class IndexerServiceImpl implements IndexerService {
             stacCollectionModel.getSummaries().setDiscoveryCategories(aodnDiscoveryCategories);
         }
 
-
         // categories suggest using a different index
-
         // extendable for other aspects of the records data. eg. title, description, etc. something that are unique to the record and currently using "text" type
         RecordSuggest recordSuggest = RecordSuggest.builder()
-                .title(stacCollectionModel.getTitle())
-                .description(null) // purely for demonstrating the extendability, manage extra suggest field in RecordSuggest class, and the index JSON schema
+                .abstractPhrases(this.extractTokensFromDescription(stacCollectionModel.getDescription()))
                 .build();
         stacCollectionModel.setRecordSuggest(recordSuggest);
 

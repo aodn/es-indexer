@@ -1,740 +1,323 @@
 {
-  "title": "IMOS National Reference Station (NRS) - Salinity, Carbon, Alkalinity, Oxygen and Nutrients (Silicate, Ammonium, Nitrite/Nitrate, Phosphate)",
-  "description": "These data sets include Salinity, Carbon, Alkalinity, Oxygen and Nutrients (Silicate, Ammonium, Nitrite/Nitrate, Phosphate) analysed from samples collected as part of the Integrated Marine Observing Systems (IMOS) National Mooring Network -National Reference Station (NRS) field sampling. Nine Sites are included in the IMOS NRS field sampling stations. Maria Island (TAS), Kangaroo Island (SA), Esperance (WA), Rottnest Island (WA), Ningaloo (WA), Darwin (NT), Yongala (QLD), North Stradbroke Island (QLD) and Port Hacking 100 (NSW). Sampling at these sites is conducted by several members of IMOS NRS Biogeochemical project. Sampling at the sites began between 29/9/2008 and 8/11/2010 and is currently ongoing for 7 sites. Sampling ceased at Ningaloo and Esperance (WA) sites in Aug/Sept 2013. Sampling is conducted monthly (Esperance and Ningaloo were 3 monthly) off small vessels. Details including information on station locations, depths sampled, sample regime, sample types collected, and analyses can be found in the “IMOS National Reference Stations Biogeochemical Operations Manual” (see link below to latest version, plus link to previous versions and supplementary documentation). Historical data collected as part of CSIRO Coastal Monitoring program is available for three of the National Reference Station sites: Maria Island Coastal Station Data 1944-2008, Port Hacking 100m Coastal Station Data 1953-2010 and Rottnest Island Coastal Station Data 1951-2009. Additional information for this dataset may be available via the original MarLIN metadata entry: https://marlin.csiro.au/geonetwork/srv/eng/catalog.search#/metadata/fa93c66e-0e56-7e1d-e043-08114f8c1b76. The links to the metadata and access for these data is provided below. Data storage and access is planned to be interoperable with other national and international programs through the IMOS Infrastructure. Station metadata can be found through this resource. **This dataset has been superseded by the \"IMOS - Combined Biogeochemical parameters (reference stations)\" collection that is available at https://catalogue-imos.aodn.org.au/geonetwork/srv/api/records/b442c3e8-3d30-48ad-b144-680afd848167 (this collection was removed from the AODN Portal in February 2022).**",
-  "extent": {
-    "bbox": [
-      [
-        113.0,
-        -43.0,
-        154.0,
-        -12.0
-      ],
-      [
-        115.0,
-        -33.0,
-        116.0,
-        -31.0
-      ],
-      [
-        130.0,
-        -13.0,
-        131.0,
-        -12.0
-      ],
-      [
-        147.0,
-        -20.0,
-        148.0,
-        -19.0
-      ],
-      [
-        113.0,
-        -22.0,
-        114.0,
-        -21.0
-      ],
-      [
-        153.0,
-        -28.0,
-        154.0,
-        -27.0
-      ],
-      [
-        136.0,
-        -36.0,
-        137.0,
-        -35.0
-      ],
-      [
-        121.0,
-        -34.0,
-        122.0,
-        -33.0
-      ],
-      [
-        151.0,
-        -35.0,
-        152.0,
-        -34.0
-      ],
-      [
-        148.0,
-        -43.0,
-        149.0,
-        -42.0
-      ]
-    ],
-    "temporal": [
-      [
-        "2008-09-28T14:00:00Z",
-        null
-      ],
-      [
-        "2008-09-28T14:00:00Z",
-        null
-      ]
-    ]
+  "title" : "IMOS National Reference Station (NRS) - Salinity, Carbon, Alkalinity, Oxygen and Nutrients (Silicate, Ammonium, Nitrite/Nitrate, Phosphate)",
+  "description" : "These data sets include Salinity, Carbon, Alkalinity, Oxygen and Nutrients (Silicate, Ammonium, Nitrite/Nitrate, Phosphate) analysed from samples collected as part of the Integrated Marine Observing Systems (IMOS) National Mooring Network -National Reference Station (NRS) field sampling. Nine Sites are included in the IMOS NRS field sampling stations. Maria Island (TAS), Kangaroo Island (SA), Esperance (WA), Rottnest Island (WA), Ningaloo (WA), Darwin (NT), Yongala (QLD), North Stradbroke Island (QLD) and Port Hacking 100 (NSW). Sampling at these sites is conducted by several members of IMOS NRS Biogeochemical project. Sampling at the sites began between 29/9/2008 and 8/11/2010 and is currently ongoing for 7 sites. Sampling ceased at Ningaloo and Esperance (WA) sites in Aug/Sept 2013. Sampling is conducted monthly (Esperance and Ningaloo were 3 monthly) off small vessels. Details including information on station locations, depths sampled, sample regime, sample types collected, and analyses can be found in the “IMOS National Reference Stations Biogeochemical Operations Manual” (see link below to latest version, plus link to previous versions and supplementary documentation). Historical data collected as part of CSIRO Coastal Monitoring program is available for three of the National Reference Station sites: Maria Island Coastal Station Data 1944-2008, Port Hacking 100m Coastal Station Data 1953-2010 and Rottnest Island Coastal Station Data 1951-2009. Additional information for this dataset may be available via the original MarLIN metadata entry: https://marlin.csiro.au/geonetwork/srv/eng/catalog.search#/metadata/fa93c66e-0e56-7e1d-e043-08114f8c1b76. The links to the metadata and access for these data is provided below. Data storage and access is planned to be interoperable with other national and international programs through the IMOS Infrastructure. Station metadata can be found through this resource. **This dataset has been superseded by the \"IMOS - Combined Biogeochemical parameters (reference stations)\" collection that is available at https://catalogue-imos.aodn.org.au/geonetwork/srv/api/records/b442c3e8-3d30-48ad-b144-680afd848167 (this collection was removed from the AODN Portal in February 2022).**",
+  "extent" : {
+    "bbox" : [ [ 113.0, -43.0, 154.0, -12.0 ], [ 115.0, -33.0, 116.0, -31.0 ], [ 130.0, -13.0, 131.0, -12.0 ], [ 147.0, -20.0, 148.0, -19.0 ], [ 113.0, -22.0, 114.0, -21.0 ], [ 153.0, -28.0, 154.0, -27.0 ], [ 136.0, -36.0, 137.0, -35.0 ], [ 121.0, -34.0, 122.0, -33.0 ], [ 151.0, -35.0, 152.0, -34.0 ], [ 148.0, -43.0, 149.0, -42.0 ] ],
+    "temporal" : [ [ "2008-09-28T14:00:00Z", null ], [ "2008-09-28T14:00:00Z", null ] ]
   },
-  "summaries": {
-    "score": 1,
-    "status": "onGoing",
-    "credits": [
-      "These data are from the National Mooring Network, part of the Australia’s Integrated Marine Observing System (IMOS) is enabled by the National Collaborative Research Infrastructure Strategy (NCRIS). It is operated by a consortium of institutions as an unincorporated joint venture, with the University of Tasmania as Lead Agent.",
-      "Operation of the National Reference Station (NRS) sampling and analyses is provided by the IMOS NRS Biogeochemical (BGC) project and is distributed between several operators and is coordinated nationally. Nutrient analyses (2009- ) performed by Val Latham (CMAR - Hobart) and Peter Hughes (CMAR - Floreat) Salinity and oxygen analyses (2009- ) performed by Val Latham (CMAR - Hobart) Carbon and Alkalinity analyses (2009- ) performed by Kate Berry (CMAR - Hobart)"
-    ],
-    "statement": "Sampling is conducted monthly (Esperance and Ningaloo 3 monthly) off small vessels. Depths sampled range from surface to 105 metres depending on the site and depths are usually sampled at 10 metre intervals. The nutrient analyses is performed at CMAR Hobart and Floreat laboratories. Full details are documented in the “IMOS National Reference Stations Biogeochemical Operations Manual”. Data is archived in the ORABN1:PLANKTON_NRS_ENV database at CMAR Dutton Park. Data is also exported to IMOS and made available via the AODN portal.",
-    "creation": "2020-07-14T18:03:00",
-    "revision": "2022-10-31T21:17:33",
-    "proj:geometry": {
-      "geometries": [
-        {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [
-                115,
-                -33
-              ],
-              [
-                116,
-                -33
-              ],
-              [
-                116,
-                -31
-              ],
-              [
-                115,
-                -31
-              ],
-              [
-                115,
-                -33
-              ]
-            ]
-          ]
-        },
-        {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [
-                130,
-                -13
-              ],
-              [
-                131,
-                -13
-              ],
-              [
-                131,
-                -12
-              ],
-              [
-                130,
-                -12
-              ],
-              [
-                130,
-                -13
-              ]
-            ]
-          ]
-        },
-        {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [
-                147,
-                -20
-              ],
-              [
-                148,
-                -20
-              ],
-              [
-                148,
-                -19
-              ],
-              [
-                147,
-                -19
-              ],
-              [
-                147,
-                -20
-              ]
-            ]
-          ]
-        },
-        {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [
-                113,
-                -22
-              ],
-              [
-                114,
-                -22
-              ],
-              [
-                114,
-                -21
-              ],
-              [
-                113,
-                -21
-              ],
-              [
-                113,
-                -22
-              ]
-            ]
-          ]
-        },
-        {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [
-                153,
-                -28
-              ],
-              [
-                154,
-                -28
-              ],
-              [
-                154,
-                -27
-              ],
-              [
-                153,
-                -27
-              ],
-              [
-                153,
-                -28
-              ]
-            ]
-          ]
-        },
-        {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [
-                136,
-                -36
-              ],
-              [
-                137,
-                -36
-              ],
-              [
-                137,
-                -35
-              ],
-              [
-                136,
-                -35
-              ],
-              [
-                136,
-                -36
-              ]
-            ]
-          ]
-        },
-        {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [
-                121,
-                -34
-              ],
-              [
-                122,
-                -34
-              ],
-              [
-                122,
-                -33
-              ],
-              [
-                121,
-                -33
-              ],
-              [
-                121,
-                -34
-              ]
-            ]
-          ]
-        },
-        {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [
-                151,
-                -35
-              ],
-              [
-                152,
-                -35
-              ],
-              [
-                152,
-                -34
-              ],
-              [
-                151,
-                -34
-              ],
-              [
-                151,
-                -35
-              ]
-            ]
-          ]
-        },
-        {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [
-                148,
-                -43
-              ],
-              [
-                149,
-                -43
-              ],
-              [
-                149,
-                -42
-              ],
-              [
-                148,
-                -42
-              ],
-              [
-                148,
-                -43
-              ]
-            ]
-          ]
-        }
-      ],
-      "type": "GeometryCollection"
+  "summaries" : {
+    "score" : 1,
+    "status" : "onGoing",
+    "credits" : [ "These data are from the National Mooring Network, part of the Australia’s Integrated Marine Observing System (IMOS) is enabled by the National Collaborative Research Infrastructure Strategy (NCRIS). It is operated by a consortium of institutions as an unincorporated joint venture, with the University of Tasmania as Lead Agent.", "Operation of the National Reference Station (NRS) sampling and analyses is provided by the IMOS NRS Biogeochemical (BGC) project and is distributed between several operators and is coordinated nationally. Nutrient analyses (2009- ) performed by Val Latham (CMAR - Hobart) and Peter Hughes (CMAR - Floreat) Salinity and oxygen analyses (2009- ) performed by Val Latham (CMAR - Hobart) Carbon and Alkalinity analyses (2009- ) performed by Kate Berry (CMAR - Hobart)" ],
+    "statement" : "Sampling is conducted monthly (Esperance and Ningaloo 3 monthly) off small vessels. Depths sampled range from surface to 105 metres depending on the site and depths are usually sampled at 10 metre intervals. The nutrient analyses is performed at CMAR Hobart and Floreat laboratories. Full details are documented in the “IMOS National Reference Stations Biogeochemical Operations Manual”. Data is archived in the ORABN1:PLANKTON_NRS_ENV database at CMAR Dutton Park. Data is also exported to IMOS and made available via the AODN portal.",
+    "creation" : "2020-07-14T18:03:00",
+    "revision" : "2022-10-31T21:17:33",
+    "proj:geometry" : {
+      "geometries" : [ {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 115, -33 ], [ 116, -33 ], [ 116, -31 ], [ 115, -31 ], [ 115, -33 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 130, -13 ], [ 131, -13 ], [ 131, -12 ], [ 130, -12 ], [ 130, -13 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 147, -20 ], [ 148, -20 ], [ 148, -19 ], [ 147, -19 ], [ 147, -20 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 113, -22 ], [ 114, -22 ], [ 114, -21 ], [ 113, -21 ], [ 113, -22 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 153, -28 ], [ 154, -28 ], [ 154, -27 ], [ 153, -27 ], [ 153, -28 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 136, -36 ], [ 137, -36 ], [ 137, -35 ], [ 136, -35 ], [ 136, -36 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 121, -34 ], [ 122, -34 ], [ 122, -33 ], [ 121, -33 ], [ 121, -34 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 151, -35 ], [ 152, -35 ], [ 152, -34 ], [ 151, -34 ], [ 151, -35 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 148, -43 ], [ 149, -43 ], [ 149, -42 ], [ 148, -42 ], [ 148, -43 ] ] ]
+      } ],
+      "type" : "GeometryCollection"
     },
-    "temporal": [
-      {
-        "start": "2008-09-28T14:00:00Z",
-        "end": null
-      }
-    ]
+    "temporal" : [ {
+      "start" : "2008-09-28T14:00:00Z",
+      "end" : null
+    } ]
   },
-  "contacts": [
-    {
-      "roles": [
-        "pointOfContact",
-        "about"
-      ],
-      "organization": "CSIRO Oceans and Atmosphere - Hobart",
-      "name": "Ms Val Latham",
-      "position": "Technical Services Officer CMAR",
-      "emails": [
-        "Val.Latham@csiro.au"
-      ],
-      "addresses": [
-        {
-          "deliveryPoint": [
-            "GPO Box 1538"
-          ],
-          "city": "Hobart",
-          "country": "Australia",
-          "postalCode": "7001",
-          "administrativeArea": "TAS"
-        }
-      ],
-      "phones": [
-        {
-          "roles": [
-            "voice"
-          ],
-          "value": "+61 3 6232 5272"
-        },
-        {
-          "roles": [
-            "facsimile"
-          ],
-          "value": "+61 3 6232 5000"
-        }
-      ],
-      "links": [
-        {
-          "href": "http://www.cmar.csiro.au/",
-          "type": "WWW:LINK-1.0-http--link",
-          "title": "Contact Web Address."
-        }
-      ]
-    },
-    {
-      "roles": [
-        "distributor",
-        "metadata"
-      ],
-      "organization": "CSIRO Marine Data Centre",
-      "name": "",
-      "position": "Data Manager",
-      "emails": [
-        "data.requests@marine.csiro.au"
-      ],
-      "addresses": [
-        {
-          "deliveryPoint": [
-            ""
-          ],
-          "city": "",
-          "country": "",
-          "postalCode": "",
-          "administrativeArea": ""
-        }
-      ],
-      "phones": [],
-      "links": [
-        {
-          "href": "http://www.marine.csiro.au/datacentre/",
-          "type": "WWW:LINK-1.0-http--link",
-          "title": "CSIRO - CMAR Data Centre homepage"
-        }
-      ]
-    },
-    {
-      "roles": [
-        "resourceProvider",
-        "citation"
-      ],
-      "organization": "Integrated Marine Observing System (IMOS)",
-      "name": null,
-      "position": null,
-      "emails": [
-        "imos@imos.org.au"
-      ],
-      "addresses": [
-        {
-          "deliveryPoint": [
-            "University of Tasmania",
-            "Private Bag 110"
-          ],
-          "city": "Hobart",
-          "country": "Australia",
-          "postalCode": "7001",
-          "administrativeArea": "Tasmania"
-        }
-      ],
-      "phones": [
-        {
-          "roles": [
-            "voice"
-          ],
-          "value": "61 3 6226 7549"
-        },
-        {
-          "roles": [
-            "facsimile"
-          ],
-          "value": "61 3 6226 2107"
-        }
-      ],
-      "links": [
-        {
-          "href": "http://www.imos.org.au",
-          "type": "WWW:LINK-1.0-http--link",
-          "title": "Website of the Integrated Marine Observing System (IMOS)"
-        }
-      ]
-    }
-  ],
-  "languages": [
-    {
-      "code": "eng",
-      "name": "English"
-    }
-  ],
-  "links": [
-    {
-      "href": "https://catalogue-imos.aodn.org.au:443/geonetwork/srv/api/records/6c981d98-d7fb-4120-9ebe-347ef1188ae0",
-      "rel": "self",
-      "type": "text/html",
-      "title": "ANMN National Reference Station (NRS) Sub-Facility metadata record"
-    },
-    {
-      "href": "http://imos.org.au/nationalmooringnetwork.html",
-      "rel": "self",
-      "type": "text/html",
-      "title": "Australian National Mooring Network"
-    },
-    {
-      "href": "https://publications.csiro.au/rpr/pub?pid=procite:f67a7186-7528-4efd-91c2-27f730665446",
-      "rel": "self",
-      "type": "text/html",
-      "title": "CSIRO ePublish - Lynch et al (2008)"
-    },
-    {
-      "href": "http://content.aodn.org.au/Documents/IMOS/Facilities/national_mooring/IMOS_NRS_BGCManual_LATEST.pdf",
-      "rel": "self",
-      "type": "text/html",
-      "title": "IMOS_NRS_BGC_Operations_Handbook_ver2.2 (IMOS portal)"
-    },
-    {
-      "href": "http://content.aodn.org.au/?prefix=Documents/IMOS/Facilities/national_mooring/",
-      "rel": "self",
-      "type": "text/html",
-      "title": "IMOS NRS BGC Manual - Previous Versions plus Supplementary documentation"
-    },
-    {
-      "href": "https://catalogue-imos.aodn.org.au:443/geonetwork/srv/api/records/fa93c66e-0e56-7e1d-e043-08114f8c1b76",
-      "rel": "self",
-      "type": "text/html",
-      "title": "Full metadata link"
-    }
-  ],
-  "license": "This material is released under the Creative Commons Attribution 4.0 International licence. The citation in a list of references is: \"IMOS [year-of-data-download], [Title], [data-access-URL], accessed [date-of-access].\" Any users of IMOS data are required to clearly acknowledge the source of the material derived from IMOS in the format: \"Data was sourced from Australia’s Integrated Marine Observing System (IMOS) – IMOS is enabled by the National Collaborative Research Infrastructure strategy (NCRIS).\"",
-  "providers": [
-    {
-      "name": "CSIRO Marine Data Centre",
-      "roles": [
-        "distributor"
-      ],
-      "url": "http://www.marine.csiro.au/datacentre/"
-    }
-  ],
-  "themes": [
-    {
-      "concepts": [
-        {
-          "id": "Oceans | Ocean Chemistry | Nitrate",
-          "url": null
-        },
-        {
-          "id": "Oceans | Ocean Chemistry | Nitrite",
-          "url": null
-        },
-        {
-          "id": "Oceans | Ocean Chemistry | Nutrients",
-          "url": null
-        },
-        {
-          "id": "Oceans | Ocean Chemistry | Oxygen",
-          "url": null
-        },
-        {
-          "id": "Oceans | Ocean Chemistry | Phosphate",
-          "url": null
-        },
-        {
-          "id": "Oceans | Ocean Chemistry | Silicate",
-          "url": null
-        }
-      ],
-      "scheme": "theme",
-      "description": "GCMD",
-      "title": "Olsen, L.M., G. Major, K. Shein, J. Scialdone, R. Vogel, S. Leicester, H. Weir, S. Ritz, T. Stevens, M. Meaux, C.Solomon, R. Bilodeau, M. Holland, T. Northcutt, R. A. Restrepo, 2007. NASA/Global Change Master Directory (GCMD) Earth Science Keywords. Version 6.0.0.0.0"
-    },
-    {
-      "concepts": [
-        {
-          "id": "Global / Oceans | Indian Ocean",
-          "url": null
-        },
-        {
-          "id": "Marine Features (Australia) | Great Australian Bight, SA/WA",
-          "url": null
-        },
-        {
-          "id": "Regional Seas | Tasman Sea",
-          "url": null
-        },
-        {
-          "id": "Regional Seas | Timor Sea",
-          "url": null
-        },
-        {
-          "id": "Regional Seas | Coral Sea",
-          "url": null
-        },
-        {
-          "id": "Global / Oceans | Pacific Ocean",
-          "url": null
-        }
-      ],
-      "scheme": "place",
-      "description": "",
-      "title": "AODN Geographic Extents Vocabulary"
-    },
-    {
-      "concepts": [
-        {
-          "id": "States, Territories (Australia) | Western Australia",
-          "url": null
-        },
-        {
-          "id": "Countries | Australia",
-          "url": null
-        },
-        {
-          "id": "States, Territories (Australia) | Victoria",
-          "url": null
-        },
-        {
-          "id": "States, Territories (Australia) | Tasmania",
-          "url": null
-        },
-        {
-          "id": "States, Territories (Australia) | South Australia",
-          "url": null
-        },
-        {
-          "id": "Marine Features (Australia) | Kangaroo Island, SA",
-          "url": null
-        },
-        {
-          "id": "States, Territories (Australia) | Northern Territory",
-          "url": null
-        },
-        {
-          "id": "States, Territories (Australia) | New South Wales",
-          "url": null
-        },
-        {
-          "id": "Marine Features (Australia) | North Stradbroke Island, QLD",
-          "url": null
-        },
-        {
-          "id": "States, Territories (Australia) | Queensland",
-          "url": null
-        },
-        {
-          "id": "Marine Features (Australia) | Maria Island, TAS",
-          "url": null
-        },
-        {
-          "id": "Marine Features (Australia) | Port Hacking, NSW",
-          "url": null
-        },
-        {
-          "id": "Coastal Cities / Towns (Australia) | Esperance, WA",
-          "url": null
-        },
-        {
-          "id": "Marine Features (Australia) | Ningaloo Marine Park, WA",
-          "url": null
-        },
-        {
-          "id": "Marine Features (Australia) | Rottnest Island, WA",
-          "url": null
-        },
-        {
-          "id": "Coastal Cities / Towns (Australia) | Darwin, NT",
-          "url": null
-        }
-      ],
-      "scheme": "place",
-      "description": "",
-      "title": "AODN Geographic Extents Vocabulary"
-    },
-    {
-      "concepts": [
-        {
-          "id": "small boat",
-          "url": "http://vocab.aodn.org.au/def/platform/entity/823"
-        }
-      ],
-      "scheme": "theme",
-      "description": "",
-      "title": "AODN Platform Vocabulary"
-    },
-    {
-      "concepts": [
-        {
-          "id": "Practical salinity of the water body",
-          "url": "http://vocab.nerc.ac.uk/collection/P01/current/PSLTZZ01"
-        },
-        {
-          "id": "Concentration of silicate {SiO4} per unit volume of the water body",
-          "url": "http://vocab.aodn.org.au/def/discovery_parameter/entity/376"
-        },
-        {
-          "id": "Concentration of nitrate {NO3} per unit volume of the water body",
-          "url": "http://vocab.aodn.org.au/def/discovery_parameter/entity/374"
-        },
-        {
-          "id": "Concentration of phosphate {PO4} per unit volume of the water body",
-          "url": "http://vocab.aodn.org.au/def/discovery_parameter/entity/379"
-        },
-        {
-          "id": "Concentration of ammonium {NH4} per unit volume of the water body",
-          "url": "http://vocab.aodn.org.au/def/discovery_parameter/entity/377"
-        },
-        {
-          "id": "Total alkalinity per unit mass of the water body",
-          "url": "http://vocab.nerc.ac.uk/collection/P01/current/MDMAP014"
-        },
-        {
-          "id": "Concentration of oxygen {O2} per unit volume of the water body",
-          "url": "http://vocab.aodn.org.au/def/discovery_parameter/entity/372"
-        },
-        {
-          "id": "Concentration of carbon (total inorganic) per unit mass of the water body",
-          "url": "http://vocab.aodn.org.au/def/discovery_parameter/entity/1"
-        }
-      ],
-      "scheme": "theme",
-      "description": "",
-      "title": "AODN Discovery Parameter Vocabulary"
-    },
-    {
-      "concepts": [
-        {
-          "id": "discrete water samplers",
-          "url": "http://vocab.nerc.ac.uk/collection/L05/current/30"
-        }
-      ],
-      "scheme": "theme",
-      "description": "",
-      "title": "AODN Instrument Vocabulary"
-    },
-    {
-      "concepts": [
-        {
-          "id": "National Reference Stations Sub-Facility, Integrated Marine Observing System (IMOS)",
-          "url": "http://vocab.aodn.org.au/def/organisation/entity/501"
-        }
-      ],
-      "scheme": "discipline",
-      "description": "",
-      "title": "AODN Organisation Vocabulary"
-    }
-  ],
-  "id": "fa93c66e-0e56-7e1d-e043-08114f8c1b76",
-  "record_suggest": {
-    "title": "IMOS National Reference Station (NRS) - Salinity, Carbon, Alkalinity, Oxygen and Nutrients (Silicate, Ammonium, Nitrite/Nitrate, Phosphate)"
+  "contacts" : [ {
+    "roles" : [ "pointOfContact", "about" ],
+    "organization" : "CSIRO Oceans and Atmosphere - Hobart",
+    "name" : "Ms Val Latham",
+    "position" : "Technical Services Officer CMAR",
+    "emails" : [ "Val.Latham@csiro.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "GPO Box 1538" ],
+      "city" : "Hobart",
+      "country" : "Australia",
+      "postalCode" : "7001",
+      "administrativeArea" : "TAS"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "+61 3 6232 5272"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : "+61 3 6232 5000"
+    } ],
+    "links" : [ {
+      "href" : "http://www.cmar.csiro.au/",
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : "Contact Web Address."
+    } ]
+  }, {
+    "roles" : [ "distributor", "metadata" ],
+    "organization" : "CSIRO Marine Data Centre",
+    "name" : "",
+    "position" : "Data Manager",
+    "emails" : [ "data.requests@marine.csiro.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "" ],
+      "city" : "",
+      "country" : "",
+      "postalCode" : "",
+      "administrativeArea" : ""
+    } ],
+    "phones" : [ ],
+    "links" : [ {
+      "href" : "http://www.marine.csiro.au/datacentre/",
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : "CSIRO - CMAR Data Centre homepage"
+    } ]
+  }, {
+    "roles" : [ "resourceProvider", "citation" ],
+    "organization" : "Integrated Marine Observing System (IMOS)",
+    "name" : null,
+    "position" : null,
+    "emails" : [ "imos@imos.org.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "University of Tasmania", "Private Bag 110" ],
+      "city" : "Hobart",
+      "country" : "Australia",
+      "postalCode" : "7001",
+      "administrativeArea" : "Tasmania"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "61 3 6226 7549"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : "61 3 6226 2107"
+    } ],
+    "links" : [ {
+      "href" : "http://www.imos.org.au",
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : "Website of the Integrated Marine Observing System (IMOS)"
+    } ]
+  } ],
+  "languages" : [ {
+    "code" : "eng",
+    "name" : "English"
+  } ],
+  "links" : [ {
+    "href" : "https://catalogue-imos.aodn.org.au:443/geonetwork/srv/api/records/6c981d98-d7fb-4120-9ebe-347ef1188ae0",
+    "rel" : "self",
+    "type" : "text/html",
+    "title" : "ANMN National Reference Station (NRS) Sub-Facility metadata record"
+  }, {
+    "href" : "http://imos.org.au/nationalmooringnetwork.html",
+    "rel" : "self",
+    "type" : "text/html",
+    "title" : "Australian National Mooring Network"
+  }, {
+    "href" : "https://publications.csiro.au/rpr/pub?pid=procite:f67a7186-7528-4efd-91c2-27f730665446",
+    "rel" : "self",
+    "type" : "text/html",
+    "title" : "CSIRO ePublish - Lynch et al (2008)"
+  }, {
+    "href" : "http://content.aodn.org.au/Documents/IMOS/Facilities/national_mooring/IMOS_NRS_BGCManual_LATEST.pdf",
+    "rel" : "self",
+    "type" : "text/html",
+    "title" : "IMOS_NRS_BGC_Operations_Handbook_ver2.2 (IMOS portal)"
+  }, {
+    "href" : "http://content.aodn.org.au/?prefix=Documents/IMOS/Facilities/national_mooring/",
+    "rel" : "self",
+    "type" : "text/html",
+    "title" : "IMOS NRS BGC Manual - Previous Versions plus Supplementary documentation"
+  }, {
+    "href" : "https://catalogue-imos.aodn.org.au:443/geonetwork/srv/api/records/fa93c66e-0e56-7e1d-e043-08114f8c1b76",
+    "rel" : "self",
+    "type" : "text/html",
+    "title" : "Full metadata link"
+  } ],
+  "license" : "This material is released under the Creative Commons Attribution 4.0 International licence. The citation in a list of references is: \"IMOS [year-of-data-download], [Title], [data-access-URL], accessed [date-of-access].\" Any users of IMOS data are required to clearly acknowledge the source of the material derived from IMOS in the format: \"Data was sourced from Australia’s Integrated Marine Observing System (IMOS) – IMOS is enabled by the National Collaborative Research Infrastructure strategy (NCRIS).\"",
+  "providers" : [ {
+    "name" : "CSIRO Marine Data Centre",
+    "roles" : [ "distributor" ],
+    "url" : "http://www.marine.csiro.au/datacentre/"
+  } ],
+  "themes" : [ {
+    "concepts" : [ {
+      "id" : "Oceans | Ocean Chemistry | Nitrate",
+      "url" : null
+    }, {
+      "id" : "Oceans | Ocean Chemistry | Nitrite",
+      "url" : null
+    }, {
+      "id" : "Oceans | Ocean Chemistry | Nutrients",
+      "url" : null
+    }, {
+      "id" : "Oceans | Ocean Chemistry | Oxygen",
+      "url" : null
+    }, {
+      "id" : "Oceans | Ocean Chemistry | Phosphate",
+      "url" : null
+    }, {
+      "id" : "Oceans | Ocean Chemistry | Silicate",
+      "url" : null
+    } ],
+    "scheme" : "theme",
+    "description" : "GCMD",
+    "title" : "Olsen, L.M., G. Major, K. Shein, J. Scialdone, R. Vogel, S. Leicester, H. Weir, S. Ritz, T. Stevens, M. Meaux, C.Solomon, R. Bilodeau, M. Holland, T. Northcutt, R. A. Restrepo, 2007. NASA/Global Change Master Directory (GCMD) Earth Science Keywords. Version 6.0.0.0.0"
+  }, {
+    "concepts" : [ {
+      "id" : "Global / Oceans | Indian Ocean",
+      "url" : null
+    }, {
+      "id" : "Marine Features (Australia) | Great Australian Bight, SA/WA",
+      "url" : null
+    }, {
+      "id" : "Regional Seas | Tasman Sea",
+      "url" : null
+    }, {
+      "id" : "Regional Seas | Timor Sea",
+      "url" : null
+    }, {
+      "id" : "Regional Seas | Coral Sea",
+      "url" : null
+    }, {
+      "id" : "Global / Oceans | Pacific Ocean",
+      "url" : null
+    } ],
+    "scheme" : "place",
+    "description" : "",
+    "title" : "AODN Geographic Extents Vocabulary"
+  }, {
+    "concepts" : [ {
+      "id" : "States, Territories (Australia) | Western Australia",
+      "url" : null
+    }, {
+      "id" : "Countries | Australia",
+      "url" : null
+    }, {
+      "id" : "States, Territories (Australia) | Victoria",
+      "url" : null
+    }, {
+      "id" : "States, Territories (Australia) | Tasmania",
+      "url" : null
+    }, {
+      "id" : "States, Territories (Australia) | South Australia",
+      "url" : null
+    }, {
+      "id" : "Marine Features (Australia) | Kangaroo Island, SA",
+      "url" : null
+    }, {
+      "id" : "States, Territories (Australia) | Northern Territory",
+      "url" : null
+    }, {
+      "id" : "States, Territories (Australia) | New South Wales",
+      "url" : null
+    }, {
+      "id" : "Marine Features (Australia) | North Stradbroke Island, QLD",
+      "url" : null
+    }, {
+      "id" : "States, Territories (Australia) | Queensland",
+      "url" : null
+    }, {
+      "id" : "Marine Features (Australia) | Maria Island, TAS",
+      "url" : null
+    }, {
+      "id" : "Marine Features (Australia) | Port Hacking, NSW",
+      "url" : null
+    }, {
+      "id" : "Coastal Cities / Towns (Australia) | Esperance, WA",
+      "url" : null
+    }, {
+      "id" : "Marine Features (Australia) | Ningaloo Marine Park, WA",
+      "url" : null
+    }, {
+      "id" : "Marine Features (Australia) | Rottnest Island, WA",
+      "url" : null
+    }, {
+      "id" : "Coastal Cities / Towns (Australia) | Darwin, NT",
+      "url" : null
+    } ],
+    "scheme" : "place",
+    "description" : "",
+    "title" : "AODN Geographic Extents Vocabulary"
+  }, {
+    "concepts" : [ {
+      "id" : "small boat",
+      "url" : "http://vocab.aodn.org.au/def/platform/entity/823"
+    } ],
+    "scheme" : "theme",
+    "description" : "",
+    "title" : "AODN Platform Vocabulary"
+  }, {
+    "concepts" : [ {
+      "id" : "Practical salinity of the water body",
+      "url" : "http://vocab.nerc.ac.uk/collection/P01/current/PSLTZZ01"
+    }, {
+      "id" : "Concentration of silicate {SiO4} per unit volume of the water body",
+      "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/376"
+    }, {
+      "id" : "Concentration of nitrate {NO3} per unit volume of the water body",
+      "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/374"
+    }, {
+      "id" : "Concentration of phosphate {PO4} per unit volume of the water body",
+      "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/379"
+    }, {
+      "id" : "Concentration of ammonium {NH4} per unit volume of the water body",
+      "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/377"
+    }, {
+      "id" : "Total alkalinity per unit mass of the water body",
+      "url" : "http://vocab.nerc.ac.uk/collection/P01/current/MDMAP014"
+    }, {
+      "id" : "Concentration of oxygen {O2} per unit volume of the water body",
+      "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/372"
+    }, {
+      "id" : "Concentration of carbon (total inorganic) per unit mass of the water body",
+      "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/1"
+    } ],
+    "scheme" : "theme",
+    "description" : "",
+    "title" : "AODN Discovery Parameter Vocabulary"
+  }, {
+    "concepts" : [ {
+      "id" : "discrete water samplers",
+      "url" : "http://vocab.nerc.ac.uk/collection/L05/current/30"
+    } ],
+    "scheme" : "theme",
+    "description" : "",
+    "title" : "AODN Instrument Vocabulary"
+  }, {
+    "concepts" : [ {
+      "id" : "National Reference Stations Sub-Facility, Integrated Marine Observing System (IMOS)",
+      "url" : "http://vocab.aodn.org.au/def/organisation/entity/501"
+    } ],
+    "scheme" : "discipline",
+    "description" : "",
+    "title" : "AODN Organisation Vocabulary"
+  } ],
+  "id" : "fa93c66e-0e56-7e1d-e043-08114f8c1b76",
+  "record_suggest" : {
+    "abstract_phrases" : [ ]
   },
-  "sci:citation": "{\"suggestedCitation\":\"This material is released under the Creative Commons Attribution 4.0 International licence. The citation in a list of references is: \\\"IMOS [year-of-data-download], [Title], [data-access-URL], accessed [date-of-access].\\\" Any users of IMOS data are required to clearly acknowledge the source of the material derived from IMOS in the format: \\\"Data was sourced from Australia’s Integrated Marine Observing System (IMOS) – IMOS is enabled by the National Collaborative Research Infrastructure strategy (NCRIS).\\\"\",\"useLimitations\":null,\"otherConstraints\":null}",
-  "type": "Collection",
-  "stac_version": "1.0.0",
-  "stac_extensions": [
-    "https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/contacts/v0.1.1/schema.json",
-    "https://stac-extensions.github.io/projection/v1.1.0/schema.json",
-    "https://stac-extensions.github.io/language/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/themes/v1.0.0/schema.json"
-  ]
+  "sci:citation" : "{\"suggestedCitation\":\"This material is released under the Creative Commons Attribution 4.0 International licence. The citation in a list of references is: \\\"IMOS [year-of-data-download], [Title], [data-access-URL], accessed [date-of-access].\\\" Any users of IMOS data are required to clearly acknowledge the source of the material derived from IMOS in the format: \\\"Data was sourced from Australia’s Integrated Marine Observing System (IMOS) – IMOS is enabled by the National Collaborative Research Infrastructure strategy (NCRIS).\\\"\",\"useLimitations\":null,\"otherConstraints\":null}",
+  "type" : "Collection",
+  "stac_version" : "1.0.0",
+  "stac_extensions" : [ "https://stac-extensions.github.io/scientific/v1.0.0/schema.json", "https://stac-extensions.github.io/contacts/v0.1.1/schema.json", "https://stac-extensions.github.io/projection/v1.1.0/schema.json", "https://stac-extensions.github.io/language/v1.0.0/schema.json", "https://stac-extensions.github.io/themes/v1.0.0/schema.json" ]
 }
