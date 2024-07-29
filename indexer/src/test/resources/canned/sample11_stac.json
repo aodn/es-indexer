@@ -147,8 +147,13 @@
     "rel" : "self",
     "type" : "text/html",
     "title" : "IMOS NRS BGC Manual - Previous Versions plus Supplementary documentation"
+  }, {
+    "href" : "https://catalogue-imos.aodn.org.au:443/geonetwork/srv/api/records/fa93c66e-0e56-7e1d-e043-08114f8c1b76",
+    "rel" : "self",
+    "type" : "text/html",
+    "title" : "Full metadata link"
   } ],
-  "license" : "{\"title\":\"This material is released under the Creative Commons Attribution 4.0 International licence. The citation in a list of references is: \\\"IMOS [year-of-data-download], [Title], [data-access-URL], accessed [date-of-access].\\\" Any users of IMOS data are required to clearly acknowledge the source of the material derived from IMOS in the format: \\\"Data was sourced from Australia’s Integrated Marine Observing System (IMOS) – IMOS is enabled by the National Collaborative Research Infrastructure strategy (NCRIS).\\\"\",\"url\":null,\"licenseGraphic\":null}",
+  "license" : "This material is released under the Creative Commons Attribution 4.0 International licence. The citation in a list of references is: \"IMOS [year-of-data-download], [Title], [data-access-URL], accessed [date-of-access].\" Any users of IMOS data are required to clearly acknowledge the source of the material derived from IMOS in the format: \"Data was sourced from Australia’s Integrated Marine Observing System (IMOS) – IMOS is enabled by the National Collaborative Research Infrastructure strategy (NCRIS).\"",
   "providers" : [ {
     "name" : "CSIRO Marine Data Centre",
     "roles" : [ "distributor" ],

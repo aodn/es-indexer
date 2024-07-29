@@ -187,7 +187,12 @@
     "code" : "eng",
     "name" : "English"
   } ],
-  "links" : [ ],
+  "links" : [ {
+    "href" : "https://apps.aims.gov.au/metadata/view/5905b3eb-aad0-4f9c-a03e-a02fb3488082",
+    "rel" : "self",
+    "type" : "text/html",
+    "title" : "Full metadata link"
+  } ],
   "license" : "",
   "providers" : [ {
     "name" : "Australian Institute of Marine Science (AIMS)",
