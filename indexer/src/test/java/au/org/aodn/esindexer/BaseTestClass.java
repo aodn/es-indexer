@@ -9,7 +9,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.*;
@@ -22,10 +21,13 @@ import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
 
+import static au.org.aodn.esindexer.utils.CommonUtils.persevere;
 import static org.junit.Assert.assertEquals;
 
 public class BaseTestClass {
@@ -83,7 +85,7 @@ public class BaseTestClass {
         headers.add(HttpHeaders.USER_AGENT, "TestRestTemplate");
         headers.add(HttpHeaders.ACCEPT_ENCODING, "gzip, deflate, br");
 
-        if(xsrfToken != null) {
+        if (xsrfToken != null) {
             // This is very important and is needed to login geonetwork4, the logic is first you need to
             // do a REST call, it will come back with the XSRF-TOKEN, and subsequence call require
             // the following to be set in order to authenticate correctly
@@ -94,7 +96,7 @@ public class BaseTestClass {
         // This is use for test container only, so it is ok to hardcode
         headers.setBasicAuth("admin", "admin");
 
-        if(oh.isPresent()) {
+        if (oh.isPresent()) {
             oh.get()
                     .entrySet()
                     .stream()
@@ -147,12 +149,13 @@ public class BaseTestClass {
         logger.info("Geonetwork url on docker is {}", host);
         return host;
     }
+
     /**
      * Must call to get the XSRF token
      */
     @PostConstruct
     public void login() {
-        if(xsrfToken == null) {
+        if (xsrfToken == null) {
             HttpEntity<String> requestEntity = getRequestEntity(Optional.empty(), MediaType.APPLICATION_JSON, null);
 
             ResponseEntity<String> responseEntity = testRestTemplate
@@ -192,48 +195,55 @@ public class BaseTestClass {
     public void deleteRecord(String... uuids) {
         CountDownLatch latch = new CountDownLatch(1);
 
-        try {
-            HttpEntity<String> requestEntity = getRequestEntity(null);
 
-            // Index the item so that query yield the right result before delete
-            ResponseEntity<Void> trigger = testRestTemplate
-                    .exchange(
-                            getIndexUrl(),
-                            HttpMethod.PUT,
-                            requestEntity,
-                            Void.class
-                    );
-            assertEquals("Trigger index OK", HttpStatus.OK, trigger.getStatusCode());
-            // Cannot execute too fast, give it some wait time
-            latch.await(2, TimeUnit.SECONDS);
+        HttpEntity<String> requestEntity = getRequestEntity(null);
 
-            for(String uuid: uuids) {
-                logger.info("Deleting GN doc {}", uuid);
-                ResponseEntity<String> response = testRestTemplate
-                        .exchange(
-                                getRecordUrl(uuid),
-                                HttpMethod.DELETE,
-                                requestEntity,
-                                String.class
-                        );
-                logger.info("{}", response.getStatusCode());
-            }
+        // retry the request if the server is not ready yet (sometimes will return 403 and can be resolved by retrying )
+        persevere(() -> triggerIndexer(requestEntity));
 
-            // Index the item so that query yield the right result after delete
-            trigger = testRestTemplate
-                    .exchange(
-                            getIndexUrl(),
-                            HttpMethod.PUT,
-                            requestEntity,
-                            Void.class
-                    );
-            assertEquals("Trigger index OK", HttpStatus.OK, trigger.getStatusCode());
-            // Cannot execute too fast, give it some wait time
-            latch.await(2, TimeUnit.SECONDS);
+        for (String uuid : uuids) {
+
+            // retry the request if the server is not ready yet (sometimes will return BAD_REQUEST because
+            // of the concurrency issue in elastic search, and can be resolved by retrying )
+            persevere(() -> delete(uuid, requestEntity));
         }
-        catch(InterruptedException ire) {
-            // OK to ignore
+
+    }
+
+
+    private boolean triggerIndexer(HttpEntity<String> requestEntity) {
+
+        // Index the item so that query yield the right result before delete
+        ResponseEntity<Void> trigger = testRestTemplate
+                .exchange(
+                        getIndexUrl(),
+                        HttpMethod.PUT,
+                        requestEntity,
+                        Void.class
+                );
+        if (trigger.getStatusCode().is2xxSuccessful()) {
+            logger.info("Triggered indexer successfully");
+            return true;
         }
+        logger.error("Serverr not ready yet. Will retry. Status code: {}", trigger.getStatusCode());
+        return false;
+    }
+
+    private boolean delete(String uuid, HttpEntity<String> requestEntity) {
+        logger.info("Deleting GN doc {}", uuid);
+        ResponseEntity<String> response = testRestTemplate
+                .exchange(
+                        getRecordUrl(uuid),
+                        HttpMethod.DELETE,
+                        requestEntity,
+                        String.class
+                );
+        if (response.getStatusCode().is2xxSuccessful()) {
+            logger.info("Deleted GN doc {}", uuid);
+            return true;
+        }
+        logger.error("failed to delete. Will retry. Message: {}", response.getBody());
+        return false;
     }
 
     public static String readResourceFile(String path) throws IOException {

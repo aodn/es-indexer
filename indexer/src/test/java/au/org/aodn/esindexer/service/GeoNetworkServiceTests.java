@@ -5,6 +5,8 @@ import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.configuration.GeoNetworkSearchTestConfig;
 
 import au.org.aodn.esindexer.exception.MetadataNotFoundException;
+import au.org.aodn.esindexer.model.AssociateRecordFactory;
+import au.org.aodn.esindexer.model.RelationType;
 import au.org.aodn.esindexer.utils.JaxbUtils;
 import au.org.aodn.metadata.iso19115_3_2018.MDMetadataType;
 import jakarta.xml.bind.JAXBException;
@@ -191,12 +193,61 @@ public class GeoNetworkServiceTests extends BaseTestClass {
                 }
             }
 
-            assertEquals("Count matches", 2, count);
+            Assertions.assertEquals(2, count, "Count matches");
         }
         finally {
             deleteRecord("830f9a83-ae6b-4260-a82a-24c4851f7119", "9e5c3031-a026-48b3-a153-a70c2e2b78b9");
         }
     }
+
+    @Test
+    public void verifyAssociatedRecords() {
+
+        var targetRecordId = "4637bd9b-8fba-4a10-bf23-26a511e17042";
+        var parentId = "a35d02d7-3bd2-40f8-b982-a0e30b64dc40";
+        var siblingId = "0ede6b3d-8635-472f-b91c-56a758b4e091";
+        var childId = "06b09398-d3d0-47dc-a54a-a745319fbece";
+
+        try {
+            insertMetadataRecords(targetRecordId, "classpath:canned/associated/targetRecord.xml");
+            insertMetadataRecords(parentId, "classpath:canned/associated/parent.xml");
+            insertMetadataRecords(siblingId, "classpath:canned/associated/sibling.xml");
+            insertMetadataRecords(childId, "classpath:canned/associated/child.xml");
+
+            var associatedRecords = geoNetworkService.getAssociatedRecords(targetRecordId);
+            var records = AssociateRecordFactory.buildAssociatedRecords(associatedRecords);
+            var builtParentId = records
+                    .stream()
+                    .filter(x -> x.getRel().equals(RelationType.PARENT.getValue()))
+                    .map(x -> x.getHref().replace("uuid:", ""))
+                    .findFirst()
+                    .orElse(null);
+
+            var builtSiblingId = records
+                    .stream()
+                    .filter(x -> x.getRel().equals(RelationType.SIBLING.getValue()))
+                    .map(x -> x.getHref().replace("uuid:", ""))
+                    .findFirst()
+                    .orElse(null);
+
+            var builtChildId = records
+                    .stream()
+                    .filter(x -> x.getRel().equals(RelationType.CHILD.getValue()))
+                    .map(x -> x.getHref().replace("uuid:", ""))
+                    .findFirst()
+                    .orElse(null);
+
+            Assertions.assertEquals(parentId, builtParentId, "Wrong parent id");
+            Assertions.assertEquals(siblingId, builtSiblingId, "Wrong sibling1 id");
+            Assertions.assertEquals(childId, builtChildId, "Wrong child1 id");
+
+        } catch (Exception e) {
+            Assertions.fail(e.getMessage());
+        } finally {
+            deleteRecord(targetRecordId, parentId, siblingId, childId);
+        }
+    }
+
     /**
      * We set a very small page size in test, please refer to
      * @throws IOException
@@ -213,7 +264,7 @@ public class GeoNetworkServiceTests extends BaseTestClass {
 
         try {
 
-            assertEquals("Page size need to be small to work for this test", 4, pageSize);
+            Assertions.assertEquals(4, pageSize, "Page size need to be small to work for this test");
 
             insertMetadataRecords(UUID1, "classpath:canned/sample1.xml");
             insertMetadataRecords(UUID2, "classpath:canned/sample2.xml");
