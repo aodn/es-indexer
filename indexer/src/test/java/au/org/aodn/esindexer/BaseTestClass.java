@@ -225,7 +225,7 @@ public class BaseTestClass {
             logger.info("Triggered indexer successfully");
             return true;
         }
-        logger.error("Serverr not ready yet. Will retry. Status code: {}", trigger.getStatusCode());
+        logger.warn("Serverr not ready yet. Will retry. Status code: {}", trigger.getStatusCode());
         return false;
     }
 
@@ -242,7 +242,7 @@ public class BaseTestClass {
             logger.info("Deleted GN doc {}", uuid);
             return true;
         }
-        logger.error("failed to delete. Will retry. Message: {}", response.getBody());
+        logger.warn("failed to delete. Will retry. Message: {}", response.getBody());
         return false;
     }
 

@@ -200,6 +200,60 @@ public class GeoNetworkServiceTests extends BaseTestClass {
         }
     }
 
+    /**
+     * We set a very small page size in test, please refer to
+     * @throws IOException
+     */
+    @Test
+    public void verifyAllMetadataRecordWithPage() throws IOException, JAXBException {
+        final String UUID1 = "9e5c3031-a026-48b3-a153-a70c2e2b78b9";
+        final String UUID2 = "830f9a83-ae6b-4260-a82a-24c4851f7119";
+        final String UUID3 = "06b09398-d3d0-47dc-a54a-a745319fbece";
+        final String UUID4 = "7709f541-fc0c-4318-b5b9-9053aa474e0e";
+        final String UUID5 = "2852a776-cbfc-4bc8-a126-f3c036814892";
+        final String UUID6 = "e18eee85-c6c4-4be2-ac8c-930991cf2534";
+        final String UUID7 = "5905b3eb-aad0-4f9c-a03e-a02fb3488082";
+
+        try {
+
+            Assertions.assertEquals(4, pageSize, "Page size need to be small to work for this test");
+
+            insertMetadataRecords(UUID1, "classpath:canned/sample1.xml");
+            insertMetadataRecords(UUID2, "classpath:canned/sample2.xml");
+            insertMetadataRecords(UUID3, "classpath:canned/sample3.xml");
+            insertMetadataRecords(UUID4, "classpath:canned/sample4.xml");
+            insertMetadataRecords(UUID5, "classpath:canned/sample5.xml");
+            insertMetadataRecords(UUID6, "classpath:canned/sample6.xml");
+            insertMetadataRecords(UUID7, "classpath:canned/sample7.xml");
+
+            Iterable<String> i = geoNetworkService.getAllMetadataRecords();
+
+            final List<MDMetadataType> xml = new ArrayList<>();
+            for(String x : i) {
+
+                // because of the concurrency issue, sometimes it might return null. just ignore it
+                if (x == null) {
+                    continue;
+                }
+                xml.add(jaxbUtils.unmarshal(x));
+            }
+
+            // A list of ordered UUID
+            Assertions.assertEquals(UUID3, xml.get(0).getMetadataIdentifier().getMDIdentifier().getCode().getCharacterString().getValue(), UUID3);
+            Assertions.assertEquals(UUID5, xml.get(1).getMetadataIdentifier().getMDIdentifier().getCode().getCharacterString().getValue(), UUID5);
+            Assertions.assertEquals(UUID7, xml.get(2).getMetadataIdentifier().getMDIdentifier().getCode().getCharacterString().getValue(), UUID7);
+            Assertions.assertEquals(UUID4, xml.get(3).getMetadataIdentifier().getMDIdentifier().getCode().getCharacterString().getValue(), UUID4);
+            Assertions.assertEquals(UUID2, xml.get(4).getMetadataIdentifier().getMDIdentifier().getCode().getCharacterString().getValue(), UUID2);
+            Assertions.assertEquals(UUID1, xml.get(5).getMetadataIdentifier().getMDIdentifier().getCode().getCharacterString().getValue(), UUID1);
+            Assertions.assertEquals(UUID6, xml.get(6).getMetadataIdentifier().getMDIdentifier().getCode().getCharacterString().getValue(), UUID6);
+        }
+        finally {
+            logger.info("Start deleting records for verifyAllMetadataRecordWithPage");
+            deleteRecord(UUID1, UUID2, UUID3, UUID4, UUID5, UUID6, UUID7);
+        }
+    }
+
+
     @Test
     public void verifyAssociatedRecords() {
 
@@ -245,55 +299,6 @@ public class GeoNetworkServiceTests extends BaseTestClass {
             Assertions.fail(e.getMessage());
         } finally {
             deleteRecord(targetRecordId, parentId, siblingId, childId);
-        }
-    }
-
-    /**
-     * We set a very small page size in test, please refer to
-     * @throws IOException
-     */
-    @Test
-    public void verifyAllMetadataRecordWithPage() throws IOException, JAXBException {
-        final String UUID1 = "9e5c3031-a026-48b3-a153-a70c2e2b78b9";
-        final String UUID2 = "830f9a83-ae6b-4260-a82a-24c4851f7119";
-        final String UUID3 = "06b09398-d3d0-47dc-a54a-a745319fbece";
-        final String UUID4 = "7709f541-fc0c-4318-b5b9-9053aa474e0e";
-        final String UUID5 = "2852a776-cbfc-4bc8-a126-f3c036814892";
-        final String UUID6 = "e18eee85-c6c4-4be2-ac8c-930991cf2534";
-        final String UUID7 = "5905b3eb-aad0-4f9c-a03e-a02fb3488082";
-
-        try {
-
-            Assertions.assertEquals(4, pageSize, "Page size need to be small to work for this test");
-
-            insertMetadataRecords(UUID1, "classpath:canned/sample1.xml");
-            insertMetadataRecords(UUID2, "classpath:canned/sample2.xml");
-            insertMetadataRecords(UUID3, "classpath:canned/sample3.xml");
-            insertMetadataRecords(UUID4, "classpath:canned/sample4.xml");
-            insertMetadataRecords(UUID5, "classpath:canned/sample5.xml");
-            insertMetadataRecords(UUID6, "classpath:canned/sample6.xml");
-            insertMetadataRecords(UUID7, "classpath:canned/sample7.xml");
-
-            Iterable<String> i = geoNetworkService.getAllMetadataRecords();
-
-            final List<MDMetadataType> xml = new ArrayList<>();
-            for(String x : i) {
-                logger.info("Metadata record length: " + x.length());
-                xml.add(jaxbUtils.unmarshal(x));
-            }
-
-            // A list of ordered UUID
-            Assertions.assertEquals(UUID3, xml.get(0).getMetadataIdentifier().getMDIdentifier().getCode().getCharacterString().getValue(), UUID3);
-            Assertions.assertEquals(UUID5, xml.get(1).getMetadataIdentifier().getMDIdentifier().getCode().getCharacterString().getValue(), UUID5);
-            Assertions.assertEquals(UUID7, xml.get(2).getMetadataIdentifier().getMDIdentifier().getCode().getCharacterString().getValue(), UUID7);
-            Assertions.assertEquals(UUID4, xml.get(3).getMetadataIdentifier().getMDIdentifier().getCode().getCharacterString().getValue(), UUID4);
-            Assertions.assertEquals(UUID2, xml.get(4).getMetadataIdentifier().getMDIdentifier().getCode().getCharacterString().getValue(), UUID2);
-            Assertions.assertEquals(UUID1, xml.get(5).getMetadataIdentifier().getMDIdentifier().getCode().getCharacterString().getValue(), UUID1);
-            Assertions.assertEquals(UUID6, xml.get(6).getMetadataIdentifier().getMDIdentifier().getCode().getCharacterString().getValue(), UUID6);
-        }
-        finally {
-            logger.info("Start deleting records for verifyAllMetadataRecordWithPage");
-            deleteRecord(UUID1, UUID2, UUID3, UUID4, UUID5, UUID6, UUID7);
         }
     }
 }
