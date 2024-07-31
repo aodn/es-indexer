@@ -253,7 +253,7 @@ public class GeoNetworkServiceTests extends BaseTestClass {
      * @throws IOException
      */
     @Test
-    public void verfiyAllMetadataRecordWithPage() throws IOException, JAXBException {
+    public void verifyAllMetadataRecordWithPage() throws IOException, JAXBException {
         final String UUID1 = "9e5c3031-a026-48b3-a153-a70c2e2b78b9";
         final String UUID2 = "830f9a83-ae6b-4260-a82a-24c4851f7119";
         final String UUID3 = "06b09398-d3d0-47dc-a54a-a745319fbece";
@@ -276,8 +276,10 @@ public class GeoNetworkServiceTests extends BaseTestClass {
 
             Iterable<String> i = geoNetworkService.getAllMetadataRecords();
 
+            logger.info("Metadata records count: " + i.spliterator().getExactSizeIfKnown());
             final List<MDMetadataType> xml = new ArrayList<>();
             for(String x : i) {
+                logger.info("Metadata record: " + x);
                 xml.add(jaxbUtils.unmarshal(x));
             }
 
