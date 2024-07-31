@@ -276,10 +276,9 @@ public class GeoNetworkServiceTests extends BaseTestClass {
 
             Iterable<String> i = geoNetworkService.getAllMetadataRecords();
 
-            logger.info("Metadata records count: " + i.spliterator().getExactSizeIfKnown());
             final List<MDMetadataType> xml = new ArrayList<>();
             for(String x : i) {
-                logger.info("Metadata record: " + x);
+                logger.info("Metadata record length: " + x.length());
                 xml.add(jaxbUtils.unmarshal(x));
             }
 
@@ -293,6 +292,7 @@ public class GeoNetworkServiceTests extends BaseTestClass {
             Assertions.assertEquals(UUID6, xml.get(6).getMetadataIdentifier().getMDIdentifier().getCode().getCharacterString().getValue(), UUID6);
         }
         finally {
+            logger.info("Start deleting records for verifyAllMetadataRecordWithPage");
             deleteRecord(UUID1, UUID2, UUID3, UUID4, UUID5, UUID6, UUID7);
         }
     }
