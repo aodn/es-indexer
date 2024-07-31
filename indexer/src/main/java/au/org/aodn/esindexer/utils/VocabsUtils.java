@@ -22,8 +22,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
-
+import java.util.stream.Collectors;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -66,11 +65,19 @@ public class VocabsUtils {
             try {
                 // convert categoryVocabModel values to binary data
                 log.debug("Ingested json is {}", indexerObjectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(categoryVocabModel));
+
+                // Convert categoryVocabModel's labels to lowercase
+                CategoryVocabModel lowerCaseCategoryVocabModel = CategoryVocabModel.builder()
+                    .label(categoryVocabModel.getLabel().toLowerCase())
+                    .broader(categoryVocabModel.getBroader().stream().peek(item -> item.setLabel(item.getLabel().toLowerCase())).collect(Collectors.toList()))
+                    .narrower(categoryVocabModel.getNarrower().stream().peek(item -> item.setLabel(item.getLabel().toLowerCase())).collect(Collectors.toList()))
+                    .build();
+
                 // send bulk request to Elasticsearch
                 bulkRequest.operations(op -> op
                     .index(idx -> idx
                         .index(categoriesIndexName)
-                        .document(categoryVocabModel)
+                        .document(lowerCaseCategoryVocabModel)
                     )
                 );
             } catch (JsonProcessingException e) {
