@@ -71,8 +71,8 @@ public class GeoNetworkServiceTests extends BaseTestClass {
 
             logger.debug("Get count in verifyInsertMetadataWorks");
 
-            assertFalse("Compare false", geoNetworkService.isMetadataRecordsCountLessThan(1));
-            assertTrue("Compare true", geoNetworkService.isMetadataRecordsCountLessThan(2));
+            Assertions.assertFalse(geoNetworkService.isMetadataRecordsCountLessThan(1), "Compare false");
+            Assertions.assertTrue(geoNetworkService.isMetadataRecordsCountLessThan(2), "Compare true");
 
             Iterable<String> i = geoNetworkService.getAllMetadataRecords();
 
@@ -85,7 +85,7 @@ public class GeoNetworkServiceTests extends BaseTestClass {
                             .ignoreComments()
                             .build();
 
-                    assertFalse("XML equals", d.hasDifferences());
+                    Assertions.assertFalse(d.hasDifferences(), "XML equals");
                 }
             }
         }
@@ -95,24 +95,24 @@ public class GeoNetworkServiceTests extends BaseTestClass {
     }
 
     @Test
-    public void verifyFindFormatterId() throws IOException, InterruptedException {
+    public void verifyFindFormatterId() throws IOException {
 
         try {
             insertMetadataRecords("9e5c3031-a026-48b3-a153-a70c2e2b78b9", "classpath:canned/sample1.xml");
-            assertEquals("Format is correct",
-                    AppConstants.FORMAT_XML,
-                    geoNetworkService.findFormatterId("9e5c3031-a026-48b3-a153-a70c2e2b78b9"));
+            Assertions.assertEquals(AppConstants.FORMAT_XML,
+                    geoNetworkService.findFormatterId("9e5c3031-a026-48b3-a153-a70c2e2b78b9"),
+                    "Format is correct");
 
             insertMetadataRecords("830f9a83-ae6b-4260-a82a-24c4851f7119", "classpath:canned/sample2.xml");
-            assertEquals("Format is correct",
-                    AppConstants.FORMAT_ISO19115_3_2018,
-                    geoNetworkService.findFormatterId("830f9a83-ae6b-4260-a82a-24c4851f7119"));
+            Assertions.assertEquals(AppConstants.FORMAT_ISO19115_3_2018,
+                    geoNetworkService.findFormatterId("830f9a83-ae6b-4260-a82a-24c4851f7119"),
+                    "Format is correct");
 
             Exception exception = assertThrows(MetadataNotFoundException.class, () -> {
                 geoNetworkService.findFormatterId("NOT_FOUND");
             });
 
-            assertTrue("Unable to find metadata record with UUID: NOT_FOUND in GeoNetwork".contains(exception.getMessage()));
+            Assertions.assertTrue("Unable to find metadata record with UUID: NOT_FOUND in GeoNetwork".contains(exception.getMessage()));
 
         }
         finally {
@@ -127,7 +127,7 @@ public class GeoNetworkServiceTests extends BaseTestClass {
             insertMetadataRecords("9e5c3031-a026-48b3-a153-a70c2e2b78b9", "classpath:canned/sample1.xml");
             String group = geoNetworkService.findGroupById("9e5c3031-a026-48b3-a153-a70c2e2b78b9");
 
-            assertEquals("Default group equals", "sample", group);
+            Assertions.assertEquals("sample", group, "Default group equals");
 
         }
         finally {
@@ -150,7 +150,7 @@ public class GeoNetworkServiceTests extends BaseTestClass {
                     .normalizeWhitespace()
                     .build();
 
-            assertFalse("XML equals for 9e5c3031-a026-48b3-a153-a70c2e2b78b9", d.hasDifferences());
+            Assertions.assertFalse(d.hasDifferences(), "XML equals for 9e5c3031-a026-48b3-a153-a70c2e2b78b9");
 
             insertMetadataRecords("830f9a83-ae6b-4260-a82a-24c4851f7119", "classpath:canned/sample2.xml");
             xml = geoNetworkService.searchRecordBy("830f9a83-ae6b-4260-a82a-24c4851f7119");
@@ -169,7 +169,7 @@ public class GeoNetworkServiceTests extends BaseTestClass {
                     .normalizeWhitespace()
                     .build();
 
-            assertFalse("XML transformed for 830f9a83-ae6b-4260-a82a-24c4851f7119", d.hasDifferences());
+            Assertions.assertFalse(d.hasDifferences(), "XML transformed for 830f9a83-ae6b-4260-a82a-24c4851f7119");
 
         }
         finally {
@@ -178,7 +178,7 @@ public class GeoNetworkServiceTests extends BaseTestClass {
     }
 
     @Test
-    public void verifyAllMetadataRecords() throws IOException, InterruptedException  {
+    public void verifyAllMetadataRecords() throws IOException  {
         try {
             insertMetadataRecords("9e5c3031-a026-48b3-a153-a70c2e2b78b9", "classpath:canned/sample1.xml");
             insertMetadataRecords("830f9a83-ae6b-4260-a82a-24c4851f7119", "classpath:canned/sample2.xml");
@@ -248,7 +248,6 @@ public class GeoNetworkServiceTests extends BaseTestClass {
             Assertions.assertEquals(UUID6, xml.get(6).getMetadataIdentifier().getMDIdentifier().getCode().getCharacterString().getValue(), UUID6);
         }
         finally {
-            logger.info("Start deleting records for verifyAllMetadataRecordWithPage");
             deleteRecord(UUID1, UUID2, UUID3, UUID4, UUID5, UUID6, UUID7);
         }
     }

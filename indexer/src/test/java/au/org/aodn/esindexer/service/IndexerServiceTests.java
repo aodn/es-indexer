@@ -156,7 +156,7 @@ public class IndexerServiceTests extends BaseTestClass {
         var siblingId = "0ede6b3d-8635-472f-b91c-56a758b4e091";
         var childId = "06b09398-d3d0-47dc-a54a-a745319fbece";
 
-        String expected = readResourceFile("classpath:canned/associated/targetRecord.json");
+        String expectedJson = readResourceFile("classpath:canned/associated/targetRecord.json");
 
         try {
             insertMetadataRecords(targetRecordId, "classpath:canned/associated/targetRecord.xml");
@@ -166,8 +166,8 @@ public class IndexerServiceTests extends BaseTestClass {
 
             indexerService.indexAllMetadataRecordsFromGeoNetwork(true, null);
             var targetResult = indexerService.getDocumentByUUID(targetRecordId);
-            String test = Objects.requireNonNull(targetResult.source()).toPrettyString();
-            Assertions.assertEquals(indexerObjectMapper.readTree(expected), indexerObjectMapper.readTree(test));
+            String resultJson = Objects.requireNonNull(targetResult.source()).toPrettyString();
+            Assertions.assertEquals(indexerObjectMapper.readTree(expectedJson), indexerObjectMapper.readTree(resultJson));
         } finally {
             deleteRecord(targetRecordId, parentId, siblingId, childId);
         }
