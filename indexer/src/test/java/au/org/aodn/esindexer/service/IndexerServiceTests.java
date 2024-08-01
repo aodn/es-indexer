@@ -156,10 +156,10 @@ public class IndexerServiceTests extends BaseTestClass {
         var siblingId = "0ede6b3d-8635-472f-b91c-56a758b4e091";
         var childId = "06b09398-d3d0-47dc-a54a-a745319fbece";
 
-        String expectedJson = readResourceFile("classpath:canned/associated/targetRecord.json");
+        String expectedJson = readResourceFile("classpath:canned/associated/self.json");
 
         try {
-            insertMetadataRecords(targetRecordId, "classpath:canned/associated/targetRecord.xml");
+            insertMetadataRecords(targetRecordId, "classpath:canned/associated/self.xml");
             insertMetadataRecords(parentId, "classpath:canned/associated/parent.xml");
             insertMetadataRecords(siblingId, "classpath:canned/associated/sibling.xml");
             insertMetadataRecords(childId, "classpath:canned/associated/child.xml");

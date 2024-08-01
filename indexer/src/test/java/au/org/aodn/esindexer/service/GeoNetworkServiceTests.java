@@ -262,7 +262,7 @@ public class GeoNetworkServiceTests extends BaseTestClass {
         var childId = "06b09398-d3d0-47dc-a54a-a745319fbece";
 
         try {
-            insertMetadataRecords(targetRecordId, "classpath:canned/associated/targetRecord.xml");
+            insertMetadataRecords(targetRecordId, "classpath:canned/associated/self.xml");
             insertMetadataRecords(parentId, "classpath:canned/associated/parent.xml");
             insertMetadataRecords(siblingId, "classpath:canned/associated/sibling.xml");
             insertMetadataRecords(childId, "classpath:canned/associated/child.xml");
