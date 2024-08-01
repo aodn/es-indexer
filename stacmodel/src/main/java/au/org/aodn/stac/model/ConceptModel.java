@@ -22,7 +22,7 @@ public class ConceptModel {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ConceptModel that = (ConceptModel) o;
-        return Objects.equals(id, that.id) &&
+        return Objects.equals(id.toLowerCase(), that.id.toLowerCase()) &&
                 Objects.equals(url, that.url);
     }
     @Override
