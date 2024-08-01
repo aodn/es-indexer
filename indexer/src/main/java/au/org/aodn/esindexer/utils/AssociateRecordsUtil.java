@@ -43,10 +43,10 @@ public class AssociateRecordsUtil {
 
 
     @SuppressWarnings("unchecked")
-    private static LinkModel buildLink(Map<String, Object> recordMap, RelationType relationType) {
+    private static LinkModel buildLink(Map<String, Object> recordData, RelationType relationType) {
 
         return safeGet(() -> {
-            var record = (Map<String, Object>)recordMap.get("_source");
+            var record = (Map<String, Object>)recordData.get("_source");
             var href = "uuid:" + record.get("uuid").toString();
             var titleObject = (LinkedHashMap<String, String>) record.get("resourceTitleObject");
             var title = titleObject.get("default");
