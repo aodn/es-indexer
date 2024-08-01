@@ -5,7 +5,7 @@ import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.configuration.GeoNetworkSearchTestConfig;
 
 import au.org.aodn.esindexer.exception.MetadataNotFoundException;
-import au.org.aodn.esindexer.model.AssociateRecordFactory;
+import au.org.aodn.esindexer.utils.AssociateRecordsUtil;
 import au.org.aodn.esindexer.model.RelationType;
 import au.org.aodn.esindexer.utils.JaxbUtils;
 import au.org.aodn.metadata.iso19115_3_2018.MDMetadataType;
@@ -268,7 +268,7 @@ public class GeoNetworkServiceTests extends BaseTestClass {
             insertMetadataRecords(childId, "classpath:canned/associated/child.xml");
 
             var associatedRecords = geoNetworkService.getAssociatedRecords(targetRecordId);
-            var records = AssociateRecordFactory.buildAssociatedRecords(associatedRecords);
+            var records = AssociateRecordsUtil.generateAssociatedRecords(associatedRecords);
             var builtParentId = records
                     .stream()
                     .filter(x -> x.getRel().equals(RelationType.PARENT.getValue()))

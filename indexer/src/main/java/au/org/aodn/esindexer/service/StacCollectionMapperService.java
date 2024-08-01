@@ -1,6 +1,6 @@
 package au.org.aodn.esindexer.service;
 
-import au.org.aodn.esindexer.model.AssociateRecordFactory;
+import au.org.aodn.esindexer.utils.AssociateRecordsUtil;
 import au.org.aodn.esindexer.model.GeoNetworkField;
 import au.org.aodn.esindexer.model.MediaType;
 import au.org.aodn.esindexer.model.RelationType;
@@ -603,7 +603,7 @@ public abstract class StacCollectionMapperService {
 
     private List<LinkModel> getAssociatedRecords(MDMetadataType source) {
         var geoNetworkAssociatedRecords = geoNetworkService.getAssociatedRecords(mapUUID(source));
-        return AssociateRecordFactory.buildAssociatedRecords(geoNetworkAssociatedRecords);
+        return AssociateRecordsUtil.generateAssociatedRecords(geoNetworkAssociatedRecords);
     }
 
 
