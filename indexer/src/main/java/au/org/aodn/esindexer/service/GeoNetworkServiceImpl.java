@@ -343,6 +343,44 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
             throw new MetadataNotFoundException("Unable to find metadata record with UUID: " + uuid + " in GeoNetwork");
         }
     }
+
+    /**
+     * This function is to get the associated record(parent, children, and siblings) of a metadata record
+     * @param uuid - UUID of record
+     * @return
+     */
+    @Retryable(
+            retryFor = HttpClientErrorException.BadRequest.class,
+            maxAttempts = 10,
+            backoff = @Backoff(delay = 1500L)
+    )
+    protected Optional<Map<String, ?>> getRecordAssociated(String uuid) {
+        try {
+            Map<String, Object> params = new HashMap<>();
+            params.put(UUID, uuid);
+
+            logger.debug("Get associated record for {}", uuid);
+            ResponseEntity<Map<String, ?>> responseEntity = indexerRestTemplate.exchange(
+                    getGeoNetworkAssociatedEndpoint(),
+                    HttpMethod.GET,
+                    defaultRequestEntity,
+                    new ParameterizedTypeReference<>() {},
+                    params
+            );
+
+            if (responseEntity.getStatusCode().is2xxSuccessful()) {
+                return Optional.ofNullable(responseEntity.getBody());
+            }
+            else {
+                return Optional.empty();
+            }
+        }
+        catch (HttpClientErrorException.NotFound e) {
+            throw new MetadataNotFoundException("Unable to find metadata record with UUID: " + uuid + " in GeoNetwork");
+        }
+    }
+
+
     /**
      * If geonetwork for some reason reboot, it is cloud env anyway, we keep retry evey 10 seconds
      * @param uuid
@@ -544,8 +582,17 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
     @Override
     public void setServer(String s) { server = s; }
 
+    @Override
+    public Map<String, ?> getAssociatedRecords(String uuid) {
+        return self.getRecordAssociated(uuid).orElse(Collections.emptyMap());
+    }
+
     protected String getGeoNetworkRelatedEndpoint() {
         return getServer() + "/geonetwork/srv/api/records/{uuid}/related";
+    }
+
+    protected String getGeoNetworkAssociatedEndpoint() {
+        return getServer() + "/geonetwork/srv/api/records/{uuid}/associated";
     }
 
     protected String getGeoNetworkRecordsEndpoint() {
