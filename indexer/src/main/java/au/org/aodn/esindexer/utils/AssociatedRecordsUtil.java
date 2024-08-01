@@ -9,7 +9,7 @@ import java.util.*;
 
 import static au.org.aodn.esindexer.utils.CommonUtils.safeGet;
 
-public class AssociateRecordsUtil {
+public class AssociatedRecordsUtil {
 
     private record TitleWithAbstract(String recordTitle, String recordAbstract) {}
 
@@ -18,9 +18,9 @@ public class AssociateRecordsUtil {
         if (data == null || data.isEmpty()) {
             return records;
         }
-        var parentsRecord = getParentRecord(data);
-        if (!parentsRecord.isEmpty()) {
-            var parentLink = buildLink(parentsRecord, RelationType.PARENT);
+        var parentRecord = getParentRecord(data);
+        if (!parentRecord.isEmpty()) {
+            var parentLink = buildLink(parentRecord, RelationType.PARENT);
             if (parentLink != null) {
                 records.add(parentLink);
             }
