@@ -41,7 +41,6 @@ public class AssociatedRecordsUtil {
         return records;
     }
 
-
     @SuppressWarnings("unchecked")
     private static LinkModel buildLink(Map<String, Object> recordData, RelationType relationType) {
 

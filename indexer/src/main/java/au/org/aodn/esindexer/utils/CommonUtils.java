@@ -22,8 +22,6 @@ public class CommonUtils {
         persevere(10, 1, action);
     }
 
-
-
     public static void persevere(int maxRetries, int delaySecond, BooleanSupplier action) {
 
         for (int i = 0; i < maxRetries; i++) {

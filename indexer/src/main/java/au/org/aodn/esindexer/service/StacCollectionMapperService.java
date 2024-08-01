@@ -606,8 +606,6 @@ public abstract class StacCollectionMapperService {
         return AssociatedRecordsUtil.generateAssociatedRecords(associatedRecordsData);
     }
 
-
-
     private List<LinkModel> getLicenseLinks(MDMetadataType source) {
         List<LinkModel> links = new ArrayList<>();
         var dataIdentifications = MapperUtils.findMDDataIdentificationType(source);

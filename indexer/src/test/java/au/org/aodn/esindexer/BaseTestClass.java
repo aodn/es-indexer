@@ -195,7 +195,6 @@ public class BaseTestClass {
     public void deleteRecord(String... uuids) {
         CountDownLatch latch = new CountDownLatch(1);
 
-
         HttpEntity<String> requestEntity = getRequestEntity(null);
 
         // retry the request if the server is not ready yet (sometimes will return 403 and can be resolved by retrying )
@@ -207,9 +206,7 @@ public class BaseTestClass {
             // of the concurrency issue in elastic search, and can be resolved by retrying )
             persevere(() -> delete(uuid, requestEntity));
         }
-
     }
-
 
     private boolean triggerIndexer(HttpEntity<String> requestEntity) {
 
