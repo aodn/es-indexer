@@ -11,7 +11,7 @@ import static au.org.aodn.esindexer.utils.CommonUtils.safeGet;
 
 public class AssociatedRecordsUtil {
 
-    private record TitleWithAbstract(String recordTitle, String recordAbstract) {}
+    private record TitleWithAbstract(String title, String recordAbstract) {}
 
     public static List<LinkModel> generateAssociatedRecords(Map<String, ?> data) {
         var records = new ArrayList<LinkModel>();
