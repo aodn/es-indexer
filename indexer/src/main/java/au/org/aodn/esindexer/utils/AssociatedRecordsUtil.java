@@ -63,7 +63,7 @@ public class AssociatedRecordsUtil {
     }
 
     @SuppressWarnings("unchecked")
-    private static List<Map<String, Object>> getRecords(Map<String, ?> associatedRecordMap, String key) {
+    private static List<Map<String, Object>> getRecordsByRelationKey(Map<String, ?> associatedRecordMap, String key) {
         try {
             return (List<Map<String, Object>>) associatedRecordMap.get(key);
         } catch (ClassCastException e) {
@@ -73,7 +73,7 @@ public class AssociatedRecordsUtil {
 
     // should only have 1 parent
     private static Map<String, Object> getParentRecord(Map<String, ?> associatedRecordMap) {
-        var records = getRecords(associatedRecordMap, "parent");
+        var records = getRecordsByRelationKey(associatedRecordMap, "parent");
         if (!records.isEmpty()) {
             return records.get(0);
         }
@@ -81,10 +81,10 @@ public class AssociatedRecordsUtil {
     }
 
     private static List<Map<String, Object>> getSiblingRecords(Map<String, ?> associatedRecordMap) {
-        return getRecords(associatedRecordMap, "brothersAndSisters");
+        return getRecordsByRelationKey(associatedRecordMap, "brothersAndSisters");
     }
 
     private static List<Map<String, Object>> getChildRecords(Map<String, ?> associatedRecordMap) {
-        return getRecords(associatedRecordMap, "children");
+        return getRecordsByRelationKey(associatedRecordMap, "children");
     }
 }
