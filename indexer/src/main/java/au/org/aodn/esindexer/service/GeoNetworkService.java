@@ -1,8 +1,6 @@
 package au.org.aodn.esindexer.service;
 
 import au.org.aodn.stac.model.LinkModel;
-import com.fasterxml.jackson.databind.JsonNode;
-import org.springframework.http.ResponseEntity;
 
 import java.io.IOException;
 import java.util.Map;
@@ -39,4 +37,6 @@ public interface GeoNetworkService {
      * @return
      */
     boolean isMetadataRecordsCountLessThan(int c);
+
+    Map<String, ?> getAssociatedRecords(String uuid);
 }
