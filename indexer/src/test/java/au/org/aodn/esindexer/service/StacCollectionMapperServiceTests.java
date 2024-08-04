@@ -235,6 +235,7 @@ public class StacCollectionMapperServiceTests {
 
         Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
         String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
+        log.info(out);
         Assertions.assertEquals(objectMapper.readTree(expected), objectMapper.readTree(out.strip()), "Stac not equals for sample_multiple_temporal1_stac");
     }
 
