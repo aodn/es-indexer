@@ -289,10 +289,7 @@ public abstract class StacCollectionMapperService {
             // due to a elastic query will fail if the nested path summaries.temporal do not exist for example
             // if your query is having nested { path "summaries.temporal" } and you want to check if end exist,
             // this query will failed and result in strange result if summaries.temporal do not event exist.
-            Map<String, String> temporal = new HashMap<>();
-            temporal.put("start", null);
-            temporal.put("end", null);
-            result.add(temporal);
+            result.add(new HashMap<>());
         }
 
         return result;
