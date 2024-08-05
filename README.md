@@ -30,27 +30,25 @@ GEONETWORK_HOST=http://localhost:8080
 
 ### Maven build
 
-```console
-mvn clean install
-or
-mvn clean install [-DskipTests]
-
-# If you do not use skipTest, then autotest will run where it will create a docker geonetwork instance, inject the
-sample data and then run the indexer. You can treat this as kind of integration testing.
+```bash
+$ mvn clean install # [-DskipTests]
 ```
 
+If you do not use `-DskipTests`, then autotest will run where it will create a docker geonetwork instance, inject the
+sample data and then run the indexer. You can treat this as kind of integration testing.
+
 This project container 3 submodules:
-* geonetwork - This is used to compile JAXB lib to handle XML return from GEONetowrk, it is iso19115 standard
-* stacmodel - A group of java class that create the STAC json which store in elastic search, so if app needs to read
-STAC from elastic, use this lib
-* indexer - The main app that do the transformation.
+* **geonetwork** - This is used to compile JAXB lib to handle XML return from GEONetowrk, it is iso19115 standard
+* **stacmodel** - A group of java class that create the STAC json which store in elastic search, so if app needs to read
+  STAC from elastic, use this lib
+* **indexer** - The main app that do the transformation.
 
 ### Docker
 
-```console
-# Start a local instance of indexer
+Start a local instance of indexer
 
-docker-compose -f docker-compose-dev.yaml up [-d: in daemon mode | --build: to see the console logs]
+```bash
+$ docker-compose -f docker-compose-dev.yaml up # [-d: in daemon mode | --build: to see the console logs]
 ```
 
 ### Endpoints:
