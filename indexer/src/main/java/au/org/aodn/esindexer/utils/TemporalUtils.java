@@ -47,9 +47,9 @@ public class TemporalUtils {
             List<String[]> f = new ArrayList<>();
 
             f.add(new String[]{
-                            min == null ? null : min.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME),
-                            max == null ? null : max.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)
-                    }
+                    min == null ? null : min.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME),
+                    max == null || Instant.EPOCH.atZone(ZoneOffset.UTC).equals(max) ? null : max.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)
+                }
             );
 
             f.addAll(temporals);

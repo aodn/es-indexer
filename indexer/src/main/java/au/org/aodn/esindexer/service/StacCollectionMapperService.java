@@ -47,14 +47,6 @@ public abstract class StacCollectionMapperService {
     @Mapping(target="uuid", source = "source", qualifiedByName = "mapUUID")
     @Mapping(target="title", source = "source", qualifiedByName = "mapTitle" )
     @Mapping(target="description", source = "source", qualifiedByName = "mapDescription")
-    @Mapping(target="summaries.status", source = "source", qualifiedByName = "mapSummaries.status")
-    @Mapping(target="summaries.scope", source = "source", qualifiedByName = "mapSummaries.scope")
-    @Mapping(target="summaries.credits", source = "source", qualifiedByName = "mapSummaries.credits")
-    @Mapping(target="summaries.geometry", source = "source", qualifiedByName = "mapSummaries.geometry")
-    @Mapping(target="summaries.temporal", source = "source", qualifiedByName = "mapSummaries.temporal")
-    @Mapping(target="summaries.updateFrequency", source = "source", qualifiedByName = "mapSummaries.updateFrequency")
-    @Mapping(target="summaries.datasetProvider", source = "source", qualifiedByName = "mapSummaries.datasetProvider")
-    @Mapping(target="summaries.datasetGroup", source = "source", qualifiedByName = "mapSummaries.datasetGroup")
     @Mapping(target="extent.bbox", source = "source", qualifiedByName = "mapExtentBbox")
     @Mapping(target="extent.temporal", source = "source", qualifiedByName = "mapExtentTemporal")
     @Mapping(target="contacts", source = "source", qualifiedByName = "mapContacts")
@@ -64,6 +56,14 @@ public abstract class StacCollectionMapperService {
     @Mapping(target="license", source = "source", qualifiedByName = "mapLicense")
     @Mapping(target="providers", source = "source", qualifiedByName = "mapProviders")
     @Mapping(target="citation", source="source", qualifiedByName = "mapCitation")
+    @Mapping(target="summaries.status", source = "source", qualifiedByName = "mapSummaries.status")
+    @Mapping(target="summaries.scope", source = "source", qualifiedByName = "mapSummaries.scope")
+    @Mapping(target="summaries.credits", source = "source", qualifiedByName = "mapSummaries.credits")
+    @Mapping(target="summaries.geometry", source = "source", qualifiedByName = "mapSummaries.geometry")
+    @Mapping(target="summaries.temporal", source = "source", qualifiedByName = "mapSummaries.temporal")
+    @Mapping(target="summaries.updateFrequency", source = "source", qualifiedByName = "mapSummaries.updateFrequency")
+    @Mapping(target="summaries.datasetProvider", source = "source", qualifiedByName = "mapSummaries.datasetProvider")
+    @Mapping(target="summaries.datasetGroup", source = "source", qualifiedByName = "mapSummaries.datasetGroup")
     @Mapping(target="summaries.statement", source="source", qualifiedByName = "mapSummaries.statement")
     @Mapping(target="summaries.creation", source = "source", qualifiedByName = "mapSummaries.creation")
     @Mapping(target="summaries.revision", source = "source", qualifiedByName = "mapSummaries.revision")
@@ -274,22 +274,25 @@ public abstract class StacCollectionMapperService {
     List<Map<String,String>> mapSummariesTemporal(MDMetadataType source) {
         List<Map<String,String>> result = new ArrayList<>();
         List<String[]> temp = createExtentTemporal(source);
-        Map<String, String> temporal = new HashMap<>();
+
         if (temp != null) {
             for (String[] t : temp) {
+                Map<String, String> temporal = new HashMap<>();
                 temporal.put("start", t[0]);
                 temporal.put("end", t[1]);
+
+                result.add(temporal);
             }
         }
-
-        if (!temporal.isEmpty()) {
-            result.add(temporal);
+        else {
+            // It is extreme important to return a structure of summaries.temporal:{start: null, end: null}
+            // due to a elastic query will fail if the nested path summaries.temporal do not exist for example
+            // if your query is having nested { path "summaries.temporal" } and you want to check if end exist,
+            // this query will failed and result in strange result if summaries.temporal do not event exist.
+            result.add(new HashMap<>());
         }
-        if (!result.isEmpty()) {
-            return result;
-        }
 
-        return null;
+        return result;
     }
 
     @Named("mapSummaries.creation")
