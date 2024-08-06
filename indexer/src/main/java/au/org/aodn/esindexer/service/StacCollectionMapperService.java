@@ -213,20 +213,19 @@ public abstract class StacCollectionMapperService {
                         continue;
                     }
                     otherConstraints.forEach(constraint -> safeGet(() -> constraint.getCharacterString().getValue().toString()).ifPresent(cons -> {
-                        if(isSuggestedCitation(cons)){
+                        if (isSuggestedCitation(cons)) {
                             citation.setSuggestedCitation(cons);
-                        }
-                        else {
+                        } else {
                             citation.addOtherConstraint(cons);
                         }
                     }));
                 }
-                else if (abstractConstraints instanceof  MDConstraintsType constraints) {
-                    var useLimitations = safeGet(constraints::getUseLimitation).orElse(null);
-                    if (useLimitations == null) {
+                else if (abstractConstraints instanceof MDConstraintsType constraints) {
+                    var useLimitations = safeGet(constraints::getUseLimitation);
+                    if (useLimitations.isEmpty()) {
                         continue;
                     }
-                    useLimitations.forEach(limitation -> safeGet(() ->
+                    useLimitations.get().forEach(limitation -> safeGet(() ->
                             limitation.getCharacterString().getValue().toString()).ifPresent(citation::addUseLimitation));
                 }
             }
@@ -256,18 +255,25 @@ public abstract class StacCollectionMapperService {
 
 
     /**
-     * Because suggested citation and other constraints are in the same block, we need to tell whether
-     * a constraint is a suggested citation or not. Current method is finding a pattern like [xxxx-xxxx-xxxx]
-     * It is not an accurate way. Still need TODO a better implementation
-     * Corresponding ticket has raised here: <a href="https://github.com/aodn/backlog/issues/5737">ticket 5737</a>
-     * @param cons the constraint
+     * Because suggested citation and other constraints are in the same block,
+     * we need to tell whether a constraint is a suggested citation or not.
+     * According to previous discussion, if a suggested citation is too strange
+     * (not all organizations follow the same format),
+     * don't worry about it. Just show it in "other constraint" part.
+     * @param constraint the constraint
      * @return true if the constraint is like a suggested citation
      */
-    private static boolean isSuggestedCitation(String cons) {
+    private static boolean isSuggestedCitation(String constraint) {
         String regex = "\\[[^]]+]";
         Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(cons);
-        return matcher.find();
+        Matcher matcher = pattern.matcher(constraint);
+        if (constraint.toLowerCase().contains("citation") && matcher.find()) {
+            return true;
+        }
+        if (constraint.toLowerCase().contains("cite as")) {
+            return true;
+        }
+        return false;
     }
 
     @Named("mapSummaries.temporal")
