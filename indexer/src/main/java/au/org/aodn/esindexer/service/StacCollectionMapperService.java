@@ -530,16 +530,19 @@ public abstract class StacCollectionMapperService {
     }
 
     protected String mapThemesScheme(MDKeywordsPropertyType descriptiveKeyword, String uuid) {
-        AbstractCitationPropertyType abstractCitationPropertyType = descriptiveKeyword.getMDKeywords().getThesaurusName();
-        if (abstractCitationPropertyType != null) {
-            if (descriptiveKeyword.getMDKeywords().getType() != null) {
-                return descriptiveKeyword.getMDKeywords().getType().getMDKeywordTypeCode().getCodeListValue();
-            } else {
-                return "";
-            }
+        var abstractCitationProperty = safeGet(() -> descriptiveKeyword
+                .getMDKeywords()
+                .getThesaurusName()).orElse(null);
+        if (abstractCitationProperty == null) {
+            logger.debug("Unable to find themes' scheme for metadata record: {}", uuid);
+            return "";
         }
-        logger.debug("Unable to find themes' scheme for metadata record: " + uuid);
-        return "";
+        return safeGet(() -> descriptiveKeyword
+                .getMDKeywords()
+                .getType()
+                .getMDKeywordTypeCode()
+                .getCodeListValue())
+                .orElse("");
     }
 
     @Named("mapThemes")
