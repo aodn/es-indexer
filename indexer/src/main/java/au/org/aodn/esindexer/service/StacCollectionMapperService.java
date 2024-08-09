@@ -498,23 +498,35 @@ public abstract class StacCollectionMapperService {
     }
 
     protected String mapThemesDescription(MDKeywordsPropertyType descriptiveKeyword, String uuid) {
-        AbstractCitationPropertyType abstractCitationPropertyType = descriptiveKeyword.getMDKeywords().getThesaurusName();
-        if (abstractCitationPropertyType != null) {
-            CICitationType2 thesaurusNameType2 = (CICitationType2) abstractCitationPropertyType.getAbstractCitation().getValue();
-            CharacterStringPropertyType titleString = thesaurusNameType2.getTitle();
-            if (titleString != null && titleString.getCharacterString().getValue() instanceof  AnchorType value) {
-                if (value.getTitleAttribute() != null) {
-                    return value.getTitleAttribute();
-                } else {
-                    return "";
+
+        var description = safeGet(()->{
+            var  desc = "";
+            var abstractCitation = descriptiveKeyword
+                    .getMDKeywords()
+                    .getThesaurusName()
+                    .getAbstractCitation()
+                    .getValue();
+            var thesaurusName = (CICitationType2) abstractCitation;
+            var value = thesaurusName.getTitle().getCharacterString().getValue();
+            if (value instanceof AnchorType anchor) {
+                desc = anchor.getTitleAttribute();
             }
+            else if (value instanceof String) {
+                desc = thesaurusName
+                        .getAlternateTitle()
+                        .stream()
+                        .map(CharacterStringPropertyType::getCharacterString)
+                        .map(JAXBElement::getValue)
+                        .map(Object::toString)
+                        .collect(Collectors.joining(", "));
             }
-            else if (titleString != null && titleString.getCharacterString().getValue() instanceof String value) {
-                return thesaurusNameType2.getAlternateTitle().stream().map(CharacterStringPropertyType::getCharacterString).map(JAXBElement::getValue).map(Object::toString).collect(Collectors.joining(", "));
+            return desc;
+        }).orElse("");
+
+        if (description.isEmpty()) {
+            logger.debug("Unable to find themes' description for metadata record: {}", uuid);
         }
-        }
-        logger.debug("Unable to find themes' description for metadata record: " + uuid);
-        return "";
+        return description;
     }
 
     protected String mapThemesScheme(MDKeywordsPropertyType descriptiveKeyword, String uuid) {
