@@ -461,16 +461,17 @@ public abstract class StacCollectionMapperService {
     protected List<ConceptModel> mapThemesConcepts(MDKeywordsPropertyType descriptiveKeyword) {
         List<ConceptModel> concepts = new ArrayList<>();
         descriptiveKeyword.getMDKeywords().getKeyword().forEach(keyword -> {
-            if (keyword != null) {
-                ConceptModel conceptModel = ConceptModel.builder().build();
-                if (keyword.getCharacterString().getValue() instanceof AnchorType value) {
-                    conceptModel.setId(value.getValue());
-                    conceptModel.setUrl(value.getHref());
-                } else {
-                    conceptModel.setId(keyword.getCharacterString().getValue().toString());
-                }
-                concepts.add(conceptModel);
+            if (keyword == null) {
+                return;
             }
+            ConceptModel conceptModel = ConceptModel.builder().build();
+            if (keyword.getCharacterString().getValue() instanceof AnchorType value) {
+                conceptModel.setId(value.getValue());
+                conceptModel.setUrl(value.getHref());
+            } else {
+                conceptModel.setId(keyword.getCharacterString().getValue().toString());
+            }
+            concepts.add(conceptModel);
         });
         return concepts;
     }
