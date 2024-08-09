@@ -33,6 +33,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import static au.org.aodn.esindexer.model.GeoNetworkField.*;
+import static au.org.aodn.esindexer.utils.CommonUtils.safeExecute;
 import static au.org.aodn.esindexer.utils.CommonUtils.safeGet;
 
 /**
@@ -461,73 +462,88 @@ public abstract class StacCollectionMapperService {
     protected List<ConceptModel> mapThemesConcepts(MDKeywordsPropertyType descriptiveKeyword) {
         List<ConceptModel> concepts = new ArrayList<>();
         descriptiveKeyword.getMDKeywords().getKeyword().forEach(keyword -> {
-            if (keyword != null) {
-                ConceptModel conceptModel = ConceptModel.builder().build();
-                if (keyword.getCharacterString().getValue() instanceof AnchorType value) {
-                    conceptModel.setId(value.getValue());
-                    conceptModel.setUrl(value.getHref());
-                } else {
-                    conceptModel.setId(keyword.getCharacterString().getValue().toString());
-                }
-                concepts.add(conceptModel);
+            if (keyword == null) {
+                return;
             }
+            ConceptModel conceptModel = ConceptModel.builder().build();
+            if (keyword.getCharacterString().getValue() instanceof AnchorType value) {
+                conceptModel.setId(value.getValue());
+                conceptModel.setUrl(value.getHref());
+            } else {
+                conceptModel.setId(keyword.getCharacterString().getValue().toString());
+            }
+            concepts.add(conceptModel);
         });
         return concepts;
     }
 
     protected String mapThemesTitle(MDKeywordsPropertyType descriptiveKeyword, String uuid) {
-        AbstractCitationPropertyType abstractCitationPropertyType = descriptiveKeyword.getMDKeywords().getThesaurusName();
-        if (abstractCitationPropertyType != null) {
-            if(abstractCitationPropertyType.getAbstractCitation() != null
-                    && abstractCitationPropertyType.getAbstractCitation().getValue() instanceof CICitationType2 thesaurusNameType2) {
 
-                CharacterStringPropertyType titleString = thesaurusNameType2.getTitle();
-                if (titleString != null
-                        && titleString.getCharacterString() != null
-                        && titleString.getCharacterString().getValue() instanceof AnchorType value) {
-                    return (value.getValue() != null ? value.getValue() : "");
-                } else if (titleString != null
-                        && titleString.getCharacterString() != null
-                        && titleString.getCharacterString().getValue() instanceof String value) {
-                    return value;
-                }
+        return safeGet(() -> {
+            var thesaurusName = (CICitationType2) descriptiveKeyword
+                    .getMDKeywords()
+                    .getThesaurusName()
+                    .getAbstractCitation()
+                    .getValue();
+            var value = thesaurusName.getTitle().getCharacterString().getValue();
+
+            if (value instanceof AnchorType anchor) {
+                return anchor.getValue();
             }
-        }
-        logger.debug("Unable to find themes' title for metadata record: {}", uuid);
-        return "";
+            if (value instanceof String stringValue) {
+                return stringValue;
+            }
+            logger.debug("Unable to find themes' title for metadata record: {}", uuid);
+            return "";
+        }).orElse("");
     }
 
     protected String mapThemesDescription(MDKeywordsPropertyType descriptiveKeyword, String uuid) {
-        AbstractCitationPropertyType abstractCitationPropertyType = descriptiveKeyword.getMDKeywords().getThesaurusName();
-        if (abstractCitationPropertyType != null) {
-            CICitationType2 thesaurusNameType2 = (CICitationType2) abstractCitationPropertyType.getAbstractCitation().getValue();
-            CharacterStringPropertyType titleString = thesaurusNameType2.getTitle();
-            if (titleString != null && titleString.getCharacterString().getValue() instanceof  AnchorType value) {
-                if (value.getTitleAttribute() != null) {
-                    return value.getTitleAttribute();
-                } else {
-                    return "";
-                }
+
+        var description = safeGet(()->{
+            var  desc = "";
+            var abstractCitation = descriptiveKeyword
+                    .getMDKeywords()
+                    .getThesaurusName()
+                    .getAbstractCitation()
+                    .getValue();
+            var thesaurusName = (CICitationType2) abstractCitation;
+            var value = thesaurusName.getTitle().getCharacterString().getValue();
+            if (value instanceof AnchorType anchor) {
+                desc = anchor.getTitleAttribute();
             }
-            else if (titleString != null && titleString.getCharacterString().getValue() instanceof String value) {
-                return thesaurusNameType2.getAlternateTitle().stream().map(CharacterStringPropertyType::getCharacterString).map(JAXBElement::getValue).map(Object::toString).collect(Collectors.joining(", "));
+            else if (value instanceof String) {
+                desc = thesaurusName
+                        .getAlternateTitle()
+                        .stream()
+                        .map(CharacterStringPropertyType::getCharacterString)
+                        .map(JAXBElement::getValue)
+                        .map(Object::toString)
+                        .collect(Collectors.joining(", "));
             }
+            return desc;
+        }).orElse("");
+
+        if (description.isEmpty()) {
+            logger.debug("Unable to find themes' description for metadata record: {}", uuid);
         }
-        logger.debug("Unable to find themes' description for metadata record: " + uuid);
-        return "";
+        return description;
     }
 
     protected String mapThemesScheme(MDKeywordsPropertyType descriptiveKeyword, String uuid) {
-        AbstractCitationPropertyType abstractCitationPropertyType = descriptiveKeyword.getMDKeywords().getThesaurusName();
-        if (abstractCitationPropertyType != null) {
-            if (descriptiveKeyword.getMDKeywords().getType() != null) {
-                return descriptiveKeyword.getMDKeywords().getType().getMDKeywordTypeCode().getCodeListValue();
-            } else {
-                return "";
-            }
+        var abstractCitationProperty = safeGet(() -> descriptiveKeyword
+                .getMDKeywords()
+                .getThesaurusName()).orElse(null);
+        if (abstractCitationProperty == null) {
+            logger.debug("Unable to find themes' scheme for metadata record: {}", uuid);
+            return "";
         }
-        logger.debug("Unable to find themes' scheme for metadata record: " + uuid);
-        return "";
+        return safeGet(() -> descriptiveKeyword
+                .getMDKeywords()
+                .getType()
+                .getMDKeywordTypeCode()
+                .getCodeListValue())
+                .orElse("");
     }
 
     @Named("mapThemes")
@@ -553,27 +569,8 @@ public abstract class StacCollectionMapperService {
 
     @Named("mapLinks")
     List<LinkModel> mapLinks(MDMetadataType source) {
-        final List<LinkModel> results = new ArrayList<>();
 
-        List<MDDistributionType> items = MapperUtils.findMDDistributionType(source);
-        if (!items.isEmpty()) {
-            for (MDDistributionType i : items) {
-                i.getTransferOptions().forEach(transferOption -> transferOption.getMDDigitalTransferOptions().getOnLine().forEach(link -> {
-                    if (link.getAbstractOnlineResource() != null && link.getAbstractOnlineResource().getValue() instanceof CIOnlineResourceType2 ciOnlineResource) {
-                        if (ciOnlineResource.getLinkage().getCharacterString() != null && !ciOnlineResource.getLinkage().getCharacterString().getValue().toString().isEmpty()) {
-                            LinkModel linkModel = LinkModel.builder().build();
-                            if (ciOnlineResource.getProtocol() != null) {
-                                linkModel.setType(Objects.equals(ciOnlineResource.getProtocol().getCharacterString().getValue().toString(), "WWW:LINK-1.0-http--link") ? "text/html" : "");
-                            }
-                            linkModel.setHref(ciOnlineResource.getLinkage().getCharacterString().getValue().toString());
-                            linkModel.setRel(AppConstants.RECOMMENDED_LINK_REL_TYPE);
-                            linkModel.setTitle(getOnlineResourceName(ciOnlineResource));
-                            results.add(linkModel);
-                        }
-                    }
-                }));
-            }
-        }
+        final List<LinkModel> results = new ArrayList<>(getOnlineLinks(source));
 
         // Now add links for logos
         geoNetworkService.getLogo(this.mapUUID(source))
@@ -607,6 +604,40 @@ public abstract class StacCollectionMapperService {
         var associatedRecords = getAssociatedRecords(source);
         results.addAll(associatedRecords);
 
+        return results;
+    }
+
+    private List<LinkModel> getOnlineLinks(MDMetadataType source) {
+        final List<LinkModel> results = new ArrayList<>();
+        List<MDDistributionType> items = MapperUtils.findMDDistributionType(source);
+
+        var allOnline = safeGet(() ->
+            items.stream()
+                    .map(MDDistributionType::getTransferOptions)
+                    .flatMap(Collection::stream)
+                    .map(option -> option.getMDDigitalTransferOptions().getOnLine())
+                    .flatMap(Collection::stream)
+                    .toList()
+        );
+        if (allOnline.isEmpty() || allOnline.get().isEmpty()) {
+            logger.warn("Unable to find online links for metadata record: " + this.mapUUID(source));
+            return results;
+        }
+
+        for (var link : allOnline.get()) {
+            safeExecute(() -> {
+                var onlineResource = (CIOnlineResourceType2) link.getAbstractOnlineResource().getValue();
+                var type = Objects.equals(onlineResource.getProtocol().getCharacterString().getValue().toString(), "WWW:LINK-1.0-http--link") ? "text/html" : "";
+                var href = onlineResource.getLinkage().getCharacterString().getValue().toString();
+                var title = getOnlineResourceName(onlineResource);
+                results.add(LinkModel.builder()
+                        .href(href)
+                        .rel(AppConstants.RECOMMENDED_LINK_REL_TYPE)
+                        .type(type)
+                        .title(title)
+                        .build());
+            });
+        }
         return results;
     }
 
@@ -692,34 +723,31 @@ public abstract class StacCollectionMapperService {
     @Named("mapProviders")
     List<ProviderModel> mapProviders(MDMetadataType source) {
         List<ProviderModel> results = new ArrayList<>();
+
         source.getContact().forEach(item -> {
-            if (item.getAbstractResponsibility() != null) {
-                if(item.getAbstractResponsibility().getValue() instanceof CIResponsibilityType2 ciResponsibility) {
-                    ciResponsibility.getParty().forEach(party -> {
-                        try
-                        {
-                            ProviderModel providerModel = ProviderModel.builder().build();
-                            providerModel.setRoles(Collections.singletonList(ciResponsibility.getRole().getCIRoleCode().getCodeListValue()));
-                            CIOrganisationType2 organisationType2 = (CIOrganisationType2) party.getAbstractCIParty().getValue();
-                            providerModel.setName(organisationType2.getName() != null ? organisationType2.getName().getCharacterString().getValue().toString() : "");
-                            organisationType2.getIndividual().forEach(individual -> individual.getCIIndividual().getContactInfo().forEach(contactInfo -> {
-                                contactInfo.getCIContact().getOnlineResource().forEach(onlineResource -> {
-                                    providerModel.setUrl(onlineResource.getCIOnlineResource().getLinkage().getCharacterString().getValue().toString());
-                                });
-                            }));
-                            results.add(providerModel);
-                        }
-                        catch (ClassCastException e) {
-                            logger.error("Unable to cast getAbstractCIParty().getValue() to CIOrganisationType2 for metadata record: {}", mapUUID(source));
-                        }
-                    });
-                }
-                else {
-                    logger.warn("getContact().getAbstractResponsibility() in mapProviders is not of type CIResponsibilityType2 for UUID {}", mapUUID(source));
-                }
+            var ciRes = safeGet(() -> (CIResponsibilityType2) item.getAbstractResponsibility().getValue()).orElse(null);
+            if (ciRes == null) {
+                logger.warn("Unable to find CIResponsibility for metadata record: {}",  this.mapUUID(source));
+                return;
             }
-            else {
-                logger.warn("Null value fround for getContact().getAbstractResponsibility() in mapProviders transform for UUID {}", mapUUID(source));
+            var parties = safeGet(ciRes::getParty);
+            if (parties.isEmpty()) {
+                logger.warn("Unable to find contact parties for metadata record: {}",  this.mapUUID(source));
+                return;
+            }
+            for (var party : parties.get()) {
+                safeExecute(() -> {
+                    ProviderModel providerModel = ProviderModel.builder().build();
+                    providerModel.setRoles(Collections.singletonList(ciRes.getRole().getCIRoleCode().getCodeListValue()));
+                    CIOrganisationType2 organisationType2 = (CIOrganisationType2) party.getAbstractCIParty().getValue();
+                    providerModel.setName(organisationType2.getName() != null ? organisationType2.getName().getCharacterString().getValue().toString() : "");
+                    organisationType2.getIndividual().forEach(individual -> individual.getCIIndividual().getContactInfo().forEach(contactInfo -> {
+                        contactInfo.getCIContact().getOnlineResource().forEach(onlineResource -> {
+                            providerModel.setUrl(onlineResource.getCIOnlineResource().getLinkage().getCharacterString().getValue().toString());
+                        });
+                    }));
+                    results.add(providerModel);
+                });
             }
         });
         return results;
