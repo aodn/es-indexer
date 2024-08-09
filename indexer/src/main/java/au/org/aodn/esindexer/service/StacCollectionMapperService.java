@@ -723,34 +723,31 @@ public abstract class StacCollectionMapperService {
     @Named("mapProviders")
     List<ProviderModel> mapProviders(MDMetadataType source) {
         List<ProviderModel> results = new ArrayList<>();
+
         source.getContact().forEach(item -> {
-            if (item.getAbstractResponsibility() != null) {
-                if(item.getAbstractResponsibility().getValue() instanceof CIResponsibilityType2 ciResponsibility) {
-                    ciResponsibility.getParty().forEach(party -> {
-                        try
-                        {
-                            ProviderModel providerModel = ProviderModel.builder().build();
-                            providerModel.setRoles(Collections.singletonList(ciResponsibility.getRole().getCIRoleCode().getCodeListValue()));
-                            CIOrganisationType2 organisationType2 = (CIOrganisationType2) party.getAbstractCIParty().getValue();
-                            providerModel.setName(organisationType2.getName() != null ? organisationType2.getName().getCharacterString().getValue().toString() : "");
-                            organisationType2.getIndividual().forEach(individual -> individual.getCIIndividual().getContactInfo().forEach(contactInfo -> {
-                                contactInfo.getCIContact().getOnlineResource().forEach(onlineResource -> {
-                                    providerModel.setUrl(onlineResource.getCIOnlineResource().getLinkage().getCharacterString().getValue().toString());
-                                });
-                            }));
-                            results.add(providerModel);
-                        }
-                        catch (ClassCastException e) {
-                            logger.error("Unable to cast getAbstractCIParty().getValue() to CIOrganisationType2 for metadata record: {}", mapUUID(source));
-                        }
-                    });
-                }
-                else {
-                    logger.warn("getContact().getAbstractResponsibility() in mapProviders is not of type CIResponsibilityType2 for UUID {}", mapUUID(source));
-                }
+            var ciRes = safeGet(() -> (CIResponsibilityType2) item.getAbstractResponsibility().getValue()).orElse(null);
+            if (ciRes == null) {
+                logger.warn("Unable to find CIResponsibility for metadata record: {}",  this.mapUUID(source));
+                return;
             }
-            else {
-                logger.warn("Null value fround for getContact().getAbstractResponsibility() in mapProviders transform for UUID {}", mapUUID(source));
+            var parties = safeGet(ciRes::getParty);
+            if (parties.isEmpty()) {
+                logger.warn("Unable to find contact parties for metadata record: {}",  this.mapUUID(source));
+                return;
+            }
+            for (var party : parties.get()) {
+                safeExecute(() -> {
+                    ProviderModel providerModel = ProviderModel.builder().build();
+                    providerModel.setRoles(Collections.singletonList(ciRes.getRole().getCIRoleCode().getCodeListValue()));
+                    CIOrganisationType2 organisationType2 = (CIOrganisationType2) party.getAbstractCIParty().getValue();
+                    providerModel.setName(organisationType2.getName() != null ? organisationType2.getName().getCharacterString().getValue().toString() : "");
+                    organisationType2.getIndividual().forEach(individual -> individual.getCIIndividual().getContactInfo().forEach(contactInfo -> {
+                        contactInfo.getCIContact().getOnlineResource().forEach(onlineResource -> {
+                            providerModel.setUrl(onlineResource.getCIOnlineResource().getLinkage().getCharacterString().getValue().toString());
+                        });
+                    }));
+                    results.add(providerModel);
+                });
             }
         });
         return results;
