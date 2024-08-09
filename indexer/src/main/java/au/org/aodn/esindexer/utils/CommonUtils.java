@@ -6,6 +6,7 @@ import java.util.function.Supplier;
 
 public class CommonUtils {
 
+
     public static <T> Optional<T> safeGet(Supplier<T> supplier) {
         try {
             return Optional.of(supplier.get());
@@ -16,6 +17,20 @@ public class CommonUtils {
             return Optional.empty();
         }
     }
+
+    /** this method is used to execute a runnable and ignore exceptions
+     * @param runnable the runnable function to be executed
+     */
+    public static void safeExecute(Runnable runnable) {
+        try{
+            runnable.run();
+        } catch (
+                NullPointerException
+                | IndexOutOfBoundsException
+                | ClassCastException ignored) {
+        }
+    }
+
 
     // alternative function for @Retryable annotation when the class is not a spring bean
     public static void persevere(BooleanSupplier action) {
