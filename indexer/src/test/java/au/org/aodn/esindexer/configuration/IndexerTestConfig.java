@@ -1,7 +1,7 @@
 package au.org.aodn.esindexer.configuration;
 
-import au.org.aodn.ardcvocabs.model.CategoryVocabModel;
-import au.org.aodn.ardcvocabs.service.ArdcVocabsService;
+import au.org.aodn.researchvocabs.model.CategoryVocabModel;
+import au.org.aodn.researchvocabs.service.ArdcVocabsService;
 import au.org.aodn.esindexer.BaseTestClass;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;

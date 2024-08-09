@@ -7,7 +7,9 @@ import au.org.aodn.esindexer.exception.DocumentNotFoundException;
 import au.org.aodn.esindexer.service.ElasticSearchIndexService;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.ElasticsearchException;
-import co.elastic.clients.elasticsearch.core.*;
+import co.elastic.clients.elasticsearch.core.BulkRequest;
+import co.elastic.clients.elasticsearch.core.BulkResponse;
+import co.elastic.clients.elasticsearch.core.SearchResponse;
 import co.elastic.clients.elasticsearch.core.bulk.BulkResponseItem;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -22,7 +24,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.scheduling.annotation.Scheduled;
-import java.util.stream.Collectors;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +33,7 @@ import java.util.List;
 @Slf4j
 // create and inject a stub proxy to self due to the circular reference http://bit.ly/4aFvYtt
 @Scope(proxyMode = ScopedProxyMode.TARGET_CLASS)
-public class VocabsUtils {
+public class GCMDKeywordsUtils {
     @Value(AppConstants.AODN_DISCOVERY_PARAMETER_VOCAB_API)
     protected String vocabApi;
 
@@ -41,7 +43,7 @@ public class VocabsUtils {
     // self-injection to avoid self-invocation problems when calling the cachable method within the same bean
     @Lazy
     @Autowired
-    VocabsUtils self;
+    GCMDKeywordsUtils self;
 
     @Autowired
     ElasticSearchIndexService elasticSearchIndexService;
@@ -65,19 +67,11 @@ public class VocabsUtils {
             try {
                 // convert categoryVocabModel values to binary data
                 log.debug("Ingested json is {}", indexerObjectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(categoryVocabModel));
-
-                // Convert categoryVocabModel's labels to lowercase
-                CategoryVocabModel lowerCaseCategoryVocabModel = CategoryVocabModel.builder()
-                    .label(categoryVocabModel.getLabel().toLowerCase())
-                    .broader(categoryVocabModel.getBroader().stream().peek(item -> item.setLabel(item.getLabel().toLowerCase())).collect(Collectors.toList()))
-                    .narrower(categoryVocabModel.getNarrower().stream().peek(item -> item.setLabel(item.getLabel().toLowerCase())).collect(Collectors.toList()))
-                    .build();
-
                 // send bulk request to Elasticsearch
                 bulkRequest.operations(op -> op
                     .index(idx -> idx
                         .index(categoriesIndexName)
-                        .document(lowerCaseCategoryVocabModel)
+                        .document(categoryVocabModel)
                     )
                 );
             } catch (JsonProcessingException e) {
