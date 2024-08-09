@@ -33,6 +33,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import static au.org.aodn.esindexer.model.GeoNetworkField.*;
+import static au.org.aodn.esindexer.utils.CommonUtils.safeExecute;
 import static au.org.aodn.esindexer.utils.CommonUtils.safeGet;
 
 /**
@@ -568,27 +569,8 @@ public abstract class StacCollectionMapperService {
 
     @Named("mapLinks")
     List<LinkModel> mapLinks(MDMetadataType source) {
-        final List<LinkModel> results = new ArrayList<>();
 
-        List<MDDistributionType> items = MapperUtils.findMDDistributionType(source);
-        if (!items.isEmpty()) {
-            for (MDDistributionType i : items) {
-                i.getTransferOptions().forEach(transferOption -> transferOption.getMDDigitalTransferOptions().getOnLine().forEach(link -> {
-                    if (link.getAbstractOnlineResource() != null && link.getAbstractOnlineResource().getValue() instanceof CIOnlineResourceType2 ciOnlineResource) {
-                        if (ciOnlineResource.getLinkage().getCharacterString() != null && !ciOnlineResource.getLinkage().getCharacterString().getValue().toString().isEmpty()) {
-                            LinkModel linkModel = LinkModel.builder().build();
-                            if (ciOnlineResource.getProtocol() != null) {
-                                linkModel.setType(Objects.equals(ciOnlineResource.getProtocol().getCharacterString().getValue().toString(), "WWW:LINK-1.0-http--link") ? "text/html" : "");
-                            }
-                            linkModel.setHref(ciOnlineResource.getLinkage().getCharacterString().getValue().toString());
-                            linkModel.setRel(AppConstants.RECOMMENDED_LINK_REL_TYPE);
-                            linkModel.setTitle(getOnlineResourceName(ciOnlineResource));
-                            results.add(linkModel);
-                        }
-                    }
-                }));
-            }
-        }
+        final List<LinkModel> results = new ArrayList<>(getOnlineLinks(source));
 
         // Now add links for logos
         geoNetworkService.getLogo(this.mapUUID(source))
@@ -622,6 +604,40 @@ public abstract class StacCollectionMapperService {
         var associatedRecords = getAssociatedRecords(source);
         results.addAll(associatedRecords);
 
+        return results;
+    }
+
+    private List<LinkModel> getOnlineLinks(MDMetadataType source) {
+        final List<LinkModel> results = new ArrayList<>();
+        List<MDDistributionType> items = MapperUtils.findMDDistributionType(source);
+
+        var allOnline = safeGet(() ->
+            items.stream()
+                    .map(MDDistributionType::getTransferOptions)
+                    .flatMap(Collection::stream)
+                    .map(option -> option.getMDDigitalTransferOptions().getOnLine())
+                    .flatMap(Collection::stream)
+                    .toList()
+        );
+        if (allOnline.isEmpty() || allOnline.get().isEmpty()) {
+            logger.warn("Unable to find online links for metadata record: " + this.mapUUID(source));
+            return results;
+        }
+
+        for (var link : allOnline.get()) {
+            safeExecute(() -> {
+                var onlineResource = (CIOnlineResourceType2) link.getAbstractOnlineResource().getValue();
+                var type = Objects.equals(onlineResource.getProtocol().getCharacterString().getValue().toString(), "WWW:LINK-1.0-http--link") ? "text/html" : "";
+                var href = onlineResource.getLinkage().getCharacterString().getValue().toString();
+                var title = getOnlineResourceName(onlineResource);
+                results.add(LinkModel.builder()
+                        .href(href)
+                        .rel(AppConstants.RECOMMENDED_LINK_REL_TYPE)
+                        .type(type)
+                        .title(title)
+                        .build());
+            });
+        }
         return results;
     }
 
