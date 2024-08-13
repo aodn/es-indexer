@@ -178,7 +178,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
                                 linkModel.setHref(i);
                                 // Geonetwork always return png logo
                                 linkModel.setType("image/png");
-                                linkModel.setRel("icon");
+                                linkModel.setRel(RelationType.ICON.getValue());
                                 linkModel.setTitle("Suggest icon for dataset");
                                 return linkModel;
                             });
