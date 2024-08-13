@@ -227,36 +227,36 @@
   "links": [
     {
       "href": "https://www.marine.csiro.au/data/trawler/survey_details.cfm?survey=IN2024_V01",
-      "rel": "self",
+      "rel": "related",
       "type": "",
       "title": "MNF Data Trawler"
     },
     {
       "href": "https://mnf.csiro.au/",
-      "rel": "self",
+      "rel": "related",
       "type": "text/html",
       "title": "Marine National Facility"
     },
     {
       "href": "https://doi.org/10.25919/rdrt-bd71",
-      "rel": "self",
+      "rel": "related",
       "type": "",
       "title": "Data Access Portal (DOI)"
     },
     {
       "href": "http://www.marine.csiro.au/data/underway/?survey=IN2024_V01",
-      "rel": "self",
+      "rel": "related",
       "type": "",
       "title": "Underway Visualisation Tool"
     },
     {
       "href": "https://www.marine.csiro.au/data/trawler/survey_mapfile.cfm?survey=IN2024_V01&data_type=uwy",
-      "rel": "thumbnail",
+      "rel": "preview",
       "type": "image"
     },
     {
       "href": "http://140.79.20.100:8080/geonetwork/srv/eng/catalog.search#/metadata/ff887cf9-18bb-464e-8bad-5dc6e0ad946b",
-      "rel": "self",
+      "rel": "describedby",
       "type": "text/html",
       "title": "Full metadata link"
     },
