@@ -167,7 +167,7 @@ public class IndexerServiceTests extends BaseTestClass {
             indexerService.indexAllMetadataRecordsFromGeoNetwork(true, null);
             var targetResult = indexerService.getDocumentByUUID(targetRecordId);
             String resultJson = Objects.requireNonNull(targetResult.source()).toPrettyString();
-            Assertions.assertEquals(indexerObjectMapper.readTree(expectedJson), indexerObjectMapper.readTree(resultJson));
+            Assertions.assertEquals(indexerObjectMapper.readTree(expectedJson), indexerObjectMapper.readTree(resultJson), "stac not equals for associated/self.json");
         } finally {
             deleteRecord(targetRecordId, parentId, siblingId, childId);
         }
