@@ -299,12 +299,12 @@
   "links": [
     {
       "href": "https://catalogue-imos.aodn.org.au:443/geonetwork/srv/api/records/4637bd9b-8fba-4a10-bf23-26a511e17042/attachments/seal_tag_pic_s.png",
-      "rel": "thumbnail",
+      "rel": "preview",
       "type": "image"
     },
     {
       "href": "https://catalogue-imos.aodn.org.au:443/geonetwork/srv/api/records/4637bd9b-8fba-4a10-bf23-26a511e17042",
-      "rel": "self",
+      "rel": "describedby",
       "type": "text/html",
       "title": "Full metadata link"
     },
