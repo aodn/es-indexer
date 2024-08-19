@@ -9,6 +9,10 @@ public enum RelationType {
     SIBLING("sibling"),
     CHILD("child"),
     LICENSE("license"),
+    RELATED("related"),
+    DESCRIBEDBY("describedby"),
+    ICON("icon"),
+    PREVIEW("preview"),
     ;
 
     private final String value;

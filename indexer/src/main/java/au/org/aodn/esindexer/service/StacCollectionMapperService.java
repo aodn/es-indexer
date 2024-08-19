@@ -555,6 +555,7 @@ public abstract class StacCollectionMapperService {
     List<LinkModel> mapLinks(MDMetadataType source) {
         final List<LinkModel> results = new ArrayList<>();
 
+        // distribution links
         List<MDDistributionType> items = MapperUtils.findMDDistributionType(source);
         if (!items.isEmpty()) {
             for (MDDistributionType i : items) {
@@ -566,7 +567,7 @@ public abstract class StacCollectionMapperService {
                                 linkModel.setType(Objects.equals(ciOnlineResource.getProtocol().getCharacterString().getValue().toString(), "WWW:LINK-1.0-http--link") ? "text/html" : "");
                             }
                             linkModel.setHref(ciOnlineResource.getLinkage().getCharacterString().getValue().toString());
-                            linkModel.setRel(AppConstants.RECOMMENDED_LINK_REL_TYPE);
+                            linkModel.setRel(RelationType.RELATED.getValue());
                             linkModel.setTitle(getOnlineResourceName(ciOnlineResource));
                             results.add(linkModel);
                         }
@@ -592,7 +593,7 @@ public abstract class StacCollectionMapperService {
         ).ifPresent(url -> {
             LinkModel linkModel = LinkModel.builder()
                     .href(url)
-                    .rel(RelationType.SELF.getValue())
+                    .rel(RelationType.DESCRIBEDBY.getValue())
                     .type(MediaType.TEXT_HTML.getValue())
                     .title("Full metadata link")
                     .build();

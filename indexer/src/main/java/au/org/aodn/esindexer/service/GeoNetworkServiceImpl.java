@@ -1,6 +1,7 @@
 package au.org.aodn.esindexer.service;
 
 import au.org.aodn.esindexer.exception.MetadataNotFoundException;
+import au.org.aodn.esindexer.model.RelationType;
 import au.org.aodn.esindexer.utils.StringUtil;
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.utils.UrlUtils;
@@ -142,7 +143,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
                                 .map(i -> {
                                     LinkModel linkModel = LinkModel.builder().build();
                                     linkModel.setType("image");
-                                    linkModel.setRel("thumbnail");
+                                    linkModel.setRel(RelationType.PREVIEW.getValue());
                                     linkModel.setHref(i.getValue().toString());
                                     return linkModel;
                                 });
@@ -177,7 +178,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
                                 linkModel.setHref(i);
                                 // Geonetwork always return png logo
                                 linkModel.setType("image/png");
-                                linkModel.setRel("icon");
+                                linkModel.setRel(RelationType.ICON.getValue());
                                 linkModel.setTitle("Suggest icon for dataset");
                                 return linkModel;
                             });
