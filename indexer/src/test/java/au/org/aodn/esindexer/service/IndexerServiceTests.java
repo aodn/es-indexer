@@ -2,6 +2,7 @@ package au.org.aodn.esindexer.service;
 
 import au.org.aodn.esindexer.BaseTestClass;
 import au.org.aodn.esindexer.configuration.GeoNetworkSearchTestConfig;
+import au.org.aodn.esindexer.utils.StringUtils;
 import co.elastic.clients.elasticsearch.core.search.Hit;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -191,8 +192,8 @@ public class IndexerServiceTests extends BaseTestClass {
             indexerService.indexAllMetadataRecordsFromGeoNetwork(true, null);
             Hit<ObjectNode> objectNodeHit = indexerService.getDocumentByUUID(uuid);
 
-            String test = Objects.requireNonNull(objectNodeHit.source()).toPrettyString();
-            Assertions.assertEquals(indexerObjectMapper.readTree(expected), indexerObjectMapper.readTree(test), "Stac not equals for sample 5. Uuid: " + uuid);
+            String test = String.valueOf(Objects.requireNonNull(objectNodeHit.source()));
+            Assertions.assertEquals(indexerObjectMapper.readTree(expected).toPrettyString(), indexerObjectMapper.readTree(test).toPrettyString(), "Stac not equals for sample 5. Uuid: " + uuid);
         }
         finally {
             deleteRecord(uuid);
