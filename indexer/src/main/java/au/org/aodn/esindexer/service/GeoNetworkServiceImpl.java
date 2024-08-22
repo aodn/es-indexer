@@ -2,7 +2,7 @@ package au.org.aodn.esindexer.service;
 
 import au.org.aodn.esindexer.exception.MetadataNotFoundException;
 import au.org.aodn.esindexer.model.RelationType;
-import au.org.aodn.esindexer.utils.StringUtil;
+import au.org.aodn.esindexer.utils.StringUtils;
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.utils.UrlUtils;
 import au.org.aodn.stac.model.LinkModel;
@@ -440,7 +440,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
                     params);
 
             if (responseEntity.getStatusCode().is2xxSuccessful()) {
-                return StringUtil.encodeUTF8(Objects.requireNonNull(responseEntity.getBody()));
+                return StringUtils.encodeUTF8(Objects.requireNonNull(responseEntity.getBody()));
             }
             else {
                 throw new RuntimeException("Failed to fetch data from the API");

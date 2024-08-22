@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <mdb:MD_Metadata xmlns:mdb="http://standards.iso.org/iso/19115/-3/mdb/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cat="http://standards.iso.org/iso/19115/-3/cat/1.0" xmlns:gfc="http://standards.iso.org/iso/19110/gfc/1.1" xmlns:cit="http://standards.iso.org/iso/19115/-3/cit/2.0" xmlns:gcx="http://standards.iso.org/iso/19115/-3/gcx/1.0" xmlns:gex="http://standards.iso.org/iso/19115/-3/gex/1.0" xmlns:lan="http://standards.iso.org/iso/19115/-3/lan/1.0" xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.1" xmlns:mas="http://standards.iso.org/iso/19115/-3/mas/1.0" xmlns:mcc="http://standards.iso.org/iso/19115/-3/mcc/1.0" xmlns:mco="http://standards.iso.org/iso/19115/-3/mco/1.0" xmlns:mda="http://standards.iso.org/iso/19115/-3/mda/1.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/2.0" xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/2.0" xmlns:mex="http://standards.iso.org/iso/19115/-3/mex/1.0" xmlns:mmi="http://standards.iso.org/iso/19115/-3/mmi/1.0" xmlns:mpc="http://standards.iso.org/iso/19115/-3/mpc/1.0" xmlns:mrc="http://standards.iso.org/iso/19115/-3/mrc/2.0" xmlns:mrd="http://standards.iso.org/iso/19115/-3/mrd/1.0" xmlns:mri="http://standards.iso.org/iso/19115/-3/mri/1.0" xmlns:mrl="http://standards.iso.org/iso/19115/-3/mrl/2.0" xmlns:mrs="http://standards.iso.org/iso/19115/-3/mrs/1.0" xmlns:msr="http://standards.iso.org/iso/19115/-3/msr/2.0" xmlns:mdq="http://standards.iso.org/iso/19157/-2/mdq/1.0" xmlns:mac="http://standards.iso.org/iso/19115/-3/mac/2.0" xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://standards.iso.org/iso/19115/-3/cat/1.0 http://standards.iso.org/iso/19115/-3/cat/1.0/cat.xsd http://standards.iso.org/iso/19115/-3/cit/2.0 http://standards.iso.org/iso/19115/-3/cit/2.0/cit.xsd http://standards.iso.org/iso/19115/-3/gcx/1.0 http://standards.iso.org/iso/19115/-3/gcx/1.0/gcx.xsd http://standards.iso.org/iso/19115/-3/gex/1.0 http://standards.iso.org/iso/19115/-3/gex/1.0/gex.xsd http://standards.iso.org/iso/19115/-3/lan/1.0 http://standards.iso.org/iso/19115/-3/lan/1.0/lan.xsd http://standards.iso.org/iso/19115/-3/srv/2.0 http://standards.iso.org/iso/19115/-3/srv/2.0/srv.xsd http://standards.iso.org/iso/19115/-3/mas/1.0 http://standards.iso.org/iso/19115/-3/mas/1.0/mas.xsd http://standards.iso.org/iso/19115/-3/mcc/1.0 http://standards.iso.org/iso/19115/-3/mcc/1.0/mcc.xsd http://standards.iso.org/iso/19115/-3/mco/1.0 http://standards.iso.org/iso/19115/-3/mco/1.0/mco.xsd http://standards.iso.org/iso/19115/-3/mda/2.0 http://standards.iso.org/iso/19115/-3/mda/2.0/mda.xsd http://standards.iso.org/iso/19115/-3/mdb/2.0 http://standards.iso.org/iso/19115/-3/mdb/2.0/mdb.xsd http://standards.iso.org/iso/19115/-3/mds/2.0 http://standards.iso.org/iso/19115/-3/mds/2.0/mds.xsd http://standards.iso.org/iso/19115/-3/mdt/2.0 http://standards.iso.org/iso/19115/-3/mdt/2.0/mdt.xsd http://standards.iso.org/iso/19115/-3/mex/1.0 http://standards.iso.org/iso/19115/-3/mex/1.0/mex.xsd http://standards.iso.org/iso/19115/-3/mmi/1.0 http://standards.iso.org/iso/19115/-3/mmi/1.0/mmi.xsd http://standards.iso.org/iso/19115/-3/mpc/1.0 http://standards.iso.org/iso/19115/-3/mpc/1.0/mpc.xsd http://standards.iso.org/iso/19115/-3/mrc/2.0 http://standards.iso.org/iso/19115/-3/mrc/2.0/mrc.xsd http://standards.iso.org/iso/19115/-3/mrd/1.0 http://standards.iso.org/iso/19115/-3/mrd/1.0/mrd.xsd http://standards.iso.org/iso/19115/-3/mri/1.0 http://standards.iso.org/iso/19115/-3/mri/1.0/mri.xsd http://standards.iso.org/iso/19115/-3/mrl/2.0 http://standards.iso.org/iso/19115/-3/mrl/2.0/mrl.xsd http://standards.iso.org/iso/19115/-3/mrs/1.0 http://standards.iso.org/iso/19115/-3/mrs/1.0/mrs.xsd http://standards.iso.org/iso/19115/-3/msr/2.0 http://standards.iso.org/iso/19115/-3/msr/2.0/msr.xsd http://standards.iso.org/iso/19157/-2/mdq/1.0 http://standards.iso.org/iso/19157/-2/mdq/1.0/mdq.xsd http://standards.iso.org/iso/19115/-3/mac/2.0 http://standards.iso.org/iso/19115/-3/mac/2.0/mac.xsd http://standards.iso.org/iso/19115/-3/gco/1.0 http://standards.iso.org/iso/19115/-3/gco/1.0/gco.xsd http://standards.iso.org/iso/19115/-3/gmw/1.0 http://standards.iso.org/iso/19115/-3/gmw/1.0/gmw.xsd http://www.opengis.net/gml/3.2 http://schemas.opengis.net/gml/3.2.1/gml.xsd http://www.w3.org/1999/xlink http://www.w3.org/1999/xlink.xsd">
     <mdb:metadataIdentifier>
         <mcc:MD_Identifier>
@@ -13,18 +12,18 @@
     <mdb:defaultLocale xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0" xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0">
         <lan:PT_Locale id="EN">
             <lan:language>
-                <lan:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="eng" />
+                <lan:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="eng"/>
             </lan:language>
             <lan:characterEncoding>
-                <lan:MD_CharacterSetCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_CharacterSetCode" codeListValue="utf8" />
+                <lan:MD_CharacterSetCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_CharacterSetCode" codeListValue="utf8"/>
             </lan:characterEncoding>
         </lan:PT_Locale>
     </mdb:defaultLocale>
-    <mdb:parentMetadata xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0" xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0" uuidref="b594fbd9-5436-4a0e-aaa2-a9db25e20697" />
+    <mdb:parentMetadata xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0" xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0" uuidref="b594fbd9-5436-4a0e-aaa2-a9db25e20697"/>
     <mdb:metadataScope xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0" xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0">
         <mdb:MD_MetadataScope>
             <mdb:resourceScope>
-                <mcc:MD_ScopeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ScopeCode" codeListValue="series" />
+                <mcc:MD_ScopeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ScopeCode" codeListValue="series"/>
             </mdb:resourceScope>
             <mdb:name>
                 <gco:CharacterString>IMOS Site level record</gco:CharacterString>
@@ -34,7 +33,7 @@
     <mdb:contact xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0" xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0">
         <cit:CI_Responsibility>
             <cit:role>
-                <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="distributor" />
+                <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="distributor"/>
             </cit:role>
             <cit:party>
                 <cit:CI_Organisation>
@@ -51,7 +50,7 @@
                                                 <gco:CharacterString>61 3 6226 7488</gco:CharacterString>
                                             </cit:number>
                                             <cit:numberType>
-                                                <cit:CI_TelephoneTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_TelephoneTypeCode" codeListValue="voice" />
+                                                <cit:CI_TelephoneTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_TelephoneTypeCode" codeListValue="voice"/>
                                             </cit:numberType>
                                         </cit:CI_Telephone>
                                     </cit:phone>
@@ -61,7 +60,7 @@
                                                 <gco:CharacterString>61 3 6226 2107</gco:CharacterString>
                                             </cit:number>
                                             <cit:numberType>
-                                                <cit:CI_TelephoneTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_TelephoneTypeCode" codeListValue="facsimile" />
+                                                <cit:CI_TelephoneTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_TelephoneTypeCode" codeListValue="facsimile"/>
                                             </cit:numberType>
                                         </cit:CI_Telephone>
                                     </cit:phone>
@@ -120,7 +119,7 @@
                 <gco:DateTime>2020-07-13T15:06:31</gco:DateTime>
             </cit:date>
             <cit:dateType>
-                <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode" codeListValue="creation" />
+                <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode" codeListValue="creation"/>
             </cit:dateType>
         </cit:CI_Date>
     </mdb:dateInfo>
@@ -130,7 +129,7 @@
                 <gco:DateTime>2022-05-13T03:40:21</gco:DateTime>
             </cit:date>
             <cit:dateType>
-                <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode" codeListValue="revision" />
+                <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode" codeListValue="revision"/>
             </cit:dateType>
         </cit:CI_Date>
     </mdb:dateInfo>
@@ -167,14 +166,14 @@
                                 <gco:DateTime>2009-04-27T16:19:00</gco:DateTime>
                             </cit:date>
                             <cit:dateType>
-                                <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode" codeListValue="creation" />
+                                <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode" codeListValue="creation"/>
                             </cit:dateType>
                         </cit:CI_Date>
                     </cit:date>
                     <cit:citedResponsibleParty>
                         <cit:CI_Responsibility>
                             <cit:role>
-                                <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="resourceProvider" />
+                                <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="resourceProvider"/>
                             </cit:role>
                             <cit:party>
                                 <cit:CI_Organisation>
@@ -189,7 +188,7 @@
                                                         <gco:CharacterString>61 3 6226 7549</gco:CharacterString>
                                                     </cit:number>
                                                     <cit:numberType>
-                                                        <cit:CI_TelephoneTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_TelephoneTypeCode" codeListValue="voice" />
+                                                        <cit:CI_TelephoneTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_TelephoneTypeCode" codeListValue="voice"/>
                                                     </cit:numberType>
                                                 </cit:CI_Telephone>
                                             </cit:phone>
@@ -199,7 +198,7 @@
                                                         <gco:CharacterString>61 3 6226 2107</gco:CharacterString>
                                                     </cit:number>
                                                     <cit:numberType>
-                                                        <cit:CI_TelephoneTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_TelephoneTypeCode" codeListValue="facsimile" />
+                                                        <cit:CI_TelephoneTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_TelephoneTypeCode" codeListValue="facsimile"/>
                                                     </cit:numberType>
                                                 </cit:CI_Telephone>
                                             </cit:phone>
@@ -263,14 +262,7 @@
                 </cit:CI_Citation>
             </mri:citation>
             <mri:abstract>
-                <gco:CharacterString>The Bonney Coast (BONC) HF ocean radar system covers an area of the Bonney Coast, South Australia, which has a recurring annual upwelling feature near to the coast that significantly changes the ecosystem from one of warm water originating in Western Australia, to one dominated by cold upwelling water from off the continental shelf.  The dynamics of this area and the relationship between ocean circulation, chemistry and sediments control the larval species and the higher marine species and ecosystems in which they forage.
-
-                    The data from this site provide linking observations between the Southern Ocean and NSW through processes that occur on weekly to El Nino time scales.
-
-                    The BONC HF ocean radar system consists of two SeaSonde crossed loop direction finding stations located at Nora Creina (37.329 S 139.850 E) and Blackfellows Cave (37.940 S 140.457 E).  These radars operate at a frequency of 5.211 MHz, with a bandwidth of 50 KHz, a maximum range of 200 Km
-                    and a range resolution of 3 Km.  Within the HF radar coverage area surface currents are measured.
-
-                    This site was decommissioned in March 2017.</gco:CharacterString>
+                <gco:CharacterString>The Bonney Coast (BONC) HF ocean radar system covers an area of the Bonney Coast, South Australia, which has a recurring annual upwelling feature near to the coast that significantly changes the ecosystem from one of warm water originating in Western Australia, to one dominated by cold upwelling water from off the continental shelf. The dynamics of this area and the relationship between ocean circulation, chemistry and sediments control the larval species and the higher marine species and ecosystems in which they forage. The data from this site provide linking observations between the Southern Ocean and NSW through processes that occur on weekly to El Nino time scales. The BONC HF ocean radar system consists of two SeaSonde crossed loop direction finding stations located at Nora Creina (37.329 S 139.850 E) and Blackfellows Cave (37.940 S 140.457 E). These radars operate at a frequency of 5.211 MHz, with a bandwidth of 50 KHz, a maximum range of 200 Km and a range resolution of 3 Km. Within the HF radar coverage area surface currents are measured. This site was decommissioned in March 2017.</gco:CharacterString>
             </mri:abstract>
             <mri:credit>
                 <gco:CharacterString>Australia’s Integrated Marine Observing System (IMOS) is enabled by the National Collaborative Research Infrastructure Strategy (NCRIS). It is operated by a consortium of institutions as an unincorporated joint venture, with the University of Tasmania as Lead Agent.</gco:CharacterString>
@@ -279,12 +271,12 @@
                 <gco:CharacterString>The University of Western Australia (UWA)</gco:CharacterString>
             </mri:credit>
             <mri:status>
-                <mcc:MD_ProgressCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ProgressCode" codeListValue="completed" />
+                <mcc:MD_ProgressCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ProgressCode" codeListValue="completed"/>
             </mri:status>
             <mri:pointOfContact>
                 <cit:CI_Responsibility>
                     <cit:role>
-                        <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="pointOfContact" />
+                        <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="pointOfContact"/>
                     </cit:role>
                     <cit:party>
                         <cit:CI_Organisation>
@@ -301,7 +293,7 @@
                                                         <gco:CharacterString>61 3 6226 7488</gco:CharacterString>
                                                     </cit:number>
                                                     <cit:numberType>
-                                                        <cit:CI_TelephoneTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_TelephoneTypeCode" codeListValue="voice" />
+                                                        <cit:CI_TelephoneTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_TelephoneTypeCode" codeListValue="voice"/>
                                                     </cit:numberType>
                                                 </cit:CI_Telephone>
                                             </cit:phone>
@@ -311,7 +303,7 @@
                                                         <gco:CharacterString>61 3 6226 2107</gco:CharacterString>
                                                     </cit:number>
                                                     <cit:numberType>
-                                                        <cit:CI_TelephoneTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_TelephoneTypeCode" codeListValue="facsimile" />
+                                                        <cit:CI_TelephoneTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_TelephoneTypeCode" codeListValue="facsimile"/>
                                                     </cit:numberType>
                                                 </cit:CI_Telephone>
                                             </cit:phone>
@@ -365,7 +357,7 @@
                 </cit:CI_Responsibility>
             </mri:pointOfContact>
             <mri:spatialRepresentationType>
-                <mcc:MD_SpatialRepresentationTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_SpatialRepresentationTypeCode" codeListValue="grid" />
+                <mcc:MD_SpatialRepresentationTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_SpatialRepresentationTypeCode" codeListValue="grid"/>
             </mri:spatialRepresentationType>
             <mri:spatialResolution>
                 <mri:MD_Resolution>
@@ -380,7 +372,7 @@
             <mri:extent>
                 <gex:EX_Extent>
                     <gex:description>
-                        <gco:CharacterString>Data are available on a geographic grid within the area that corresponds to the union of the regions of coverage of the Nora Creina and Blackfellow Cave radar stations.  This is an irregular polygon within which is located a geographic grid with a nominal grid spacing of 4 Km.</gco:CharacterString>
+                        <gco:CharacterString>Data are available on a geographic grid within the area that corresponds to the union of the regions of coverage of the Nora Creina and Blackfellow Cave radar stations. This is an irregular polygon within which is located a geographic grid with a nominal grid spacing of 4 Km.</gco:CharacterString>
                     </gex:description>
                     <gex:geographicElement>
                         <gex:EX_GeographicBoundingBox>
@@ -424,7 +416,7 @@
                             <gex:maximumValue>
                                 <gco:Real>0</gco:Real>
                             </gex:maximumValue>
-                            <gex:verticalCRS gco:nilReason="missing" />
+                            <gex:verticalCRS gco:nilReason="missing"/>
                         </gex:EX_VerticalExtent>
                     </gex:verticalElement>
                 </gex:EX_Extent>
@@ -450,7 +442,7 @@
                         <gco:CharacterString>Radiance Or Imagery | Radio Wave | Radio Wave</gco:CharacterString>
                     </mri:keyword>
                     <mri:type>
-                        <mri:MD_KeywordTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_KeywordTypeCode" codeListValue="theme" />
+                        <mri:MD_KeywordTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_KeywordTypeCode" codeListValue="theme"/>
                     </mri:type>
                     <mri:thesaurusName>
                         <cit:CI_Citation>
@@ -465,13 +457,13 @@
                                     <cit:date>
                                         <gco:DateTime>2006-01-01T00:00:00</gco:DateTime>
                                     </cit:date>
-                                    <cit:dateType gco:nilReason="missing" />
+                                    <cit:dateType gco:nilReason="missing"/>
                                 </cit:CI_Date>
                             </cit:date>
                             <cit:citedResponsibleParty>
                                 <cit:CI_Responsibility>
                                     <cit:role>
-                                        <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="owner" />
+                                        <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="owner"/>
                                     </cit:role>
                                     <cit:party>
                                         <cit:CI_Organisation>
@@ -504,7 +496,7 @@
                         <gco:CharacterString>Physical Oceanography</gco:CharacterString>
                     </mri:keyword>
                     <mri:type>
-                        <mri:MD_KeywordTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_KeywordTypeCode" codeListValue="theme" />
+                        <mri:MD_KeywordTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_KeywordTypeCode" codeListValue="theme"/>
                     </mri:type>
                     <mri:thesaurusName>
                         <cit:CI_Citation>
@@ -519,13 +511,13 @@
                                     <cit:date>
                                         <gco:DateTime>2008-10-30T00:00:00</gco:DateTime>
                                     </cit:date>
-                                    <cit:dateType gco:nilReason="missing" />
+                                    <cit:dateType gco:nilReason="missing"/>
                                 </cit:CI_Date>
                             </cit:date>
                             <cit:citedResponsibleParty>
                                 <cit:CI_Responsibility>
                                     <cit:role>
-                                        <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="owner" />
+                                        <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="owner"/>
                                     </cit:role>
                                     <cit:party>
                                         <cit:CI_Organisation>
@@ -549,7 +541,7 @@
                         <gco:CharacterString>States, Territories (Australia) | South Australia</gco:CharacterString>
                     </mri:keyword>
                     <mri:type>
-                        <mri:MD_KeywordTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_KeywordTypeCode" codeListValue="theme" />
+                        <mri:MD_KeywordTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_KeywordTypeCode" codeListValue="theme"/>
                     </mri:type>
                     <mri:thesaurusName>
                         <cit:CI_Citation>
@@ -564,13 +556,13 @@
                                     <cit:date>
                                         <gco:DateTime>2008-10-30T00:00:00</gco:DateTime>
                                     </cit:date>
-                                    <cit:dateType gco:nilReason="missing" />
+                                    <cit:dateType gco:nilReason="missing"/>
                                 </cit:CI_Date>
                             </cit:date>
                             <cit:citedResponsibleParty>
                                 <cit:CI_Responsibility>
                                     <cit:role>
-                                        <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="owner" />
+                                        <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="owner"/>
                                     </cit:role>
                                     <cit:party>
                                         <cit:CI_Organisation>
@@ -596,7 +588,7 @@
                 <mco:MD_LegalConstraints>
                     <mco:graphic>
                         <mcc:MD_BrowseGraphic>
-                            <mcc:fileName gco:nilReason="inapplicable" />
+                            <mcc:fileName gco:nilReason="inapplicable"/>
                             <mcc:linkage>
                                 <cit:CI_OnlineResource>
                                     <cit:linkage>
@@ -620,19 +612,19 @@
                             <cit:citedResponsibleParty>
                                 <cit:CI_Responsibility>
                                     <cit:role>
-                                        <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="" />
+                                        <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue=""/>
                                     </cit:role>
                                     <cit:party>
                                         <cit:CI_Organisation>
                                             <cit:name gco:nilReason="missing">
-                                                <gco:CharacterString />
+                                                <gco:CharacterString/>
                                             </cit:name>
                                             <cit:contactInfo>
                                                 <cit:CI_Contact>
                                                     <cit:address>
                                                         <cit:CI_Address>
                                                             <cit:electronicMailAddress gco:nilReason="missing">
-                                                                <gco:CharacterString />
+                                                                <gco:CharacterString/>
                                                             </cit:electronicMailAddress>
                                                         </cit:CI_Address>
                                                     </cit:address>
@@ -645,10 +637,10 @@
                                                                 <gco:CharacterString>WWW:LINK-1.0-http--related</gco:CharacterString>
                                                             </cit:protocol>
                                                             <cit:name gco:nilReason="missing">
-                                                                <gco:CharacterString />
+                                                                <gco:CharacterString/>
                                                             </cit:name>
                                                             <cit:description gco:nilReason="missing">
-                                                                <gco:CharacterString />
+                                                                <gco:CharacterString/>
                                                             </cit:description>
                                                         </cit:CI_OnlineResource>
                                                     </cit:onlineResource>
@@ -684,10 +676,10 @@
             <mri:defaultLocale>
                 <lan:PT_Locale>
                     <lan:language>
-                        <lan:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="eng" />
+                        <lan:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="eng"/>
                     </lan:language>
                     <lan:characterEncoding>
-                        <lan:MD_CharacterSetCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_CharacterSetCode" codeListValue="utf8" />
+                        <lan:MD_CharacterSetCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_CharacterSetCode" codeListValue="utf8"/>
                     </lan:characterEncoding>
                 </lan:PT_Locale>
             </mri:defaultLocale>
@@ -700,12 +692,12 @@
                     <mrd:formatSpecificationCitation>
                         <cit:CI_Citation>
                             <cit:title gco:nilReason="missing">
-                                <gco:CharacterString />
+                                <gco:CharacterString/>
                             </cit:title>
-                            <cit:alternateTitle />
-                            <cit:date gco:nilReason="unknown" />
+                            <cit:alternateTitle/>
+                            <cit:date gco:nilReason="unknown"/>
                             <cit:edition gco:nilReason="missing">
-                                <gco:CharacterString />
+                                <gco:CharacterString/>
                             </cit:edition>
                         </cit:CI_Citation>
                     </mrd:formatSpecificationCitation>
@@ -730,4 +722,33 @@
             </mrd:transferOptions>
         </mrd:MD_Distribution>
     </mdb:distributionInfo>
+    <geonet:info xmlns:geonet="http://www.fao.org/geonetwork">
+        <id>18970</id>
+        <schema>iso19115-3.2018</schema>
+        <createDate>2022-05-12T17:40:21Z</createDate>
+        <changeDate>2022-05-12T17:40:21Z</changeDate>
+        <isTemplate>n</isTemplate>
+        <title/>
+        <source>d53ae40c-0378-49be-bf93-baa3a10e980f</source>
+        <uuid>2852a776-cbfc-4bc8-a126-f3c036814892</uuid>
+        <isHarvested>y</isHarvested>
+        <popularity>2</popularity>
+        <rating>0</rating>
+        <displayOrder>0</displayOrder>
+        <harvestInfo>
+            <type>csw</type>
+        </harvestInfo>
+        <isPublishedToAll>true</isPublishedToAll>
+        <view>true</view>
+        <notify>false</notify>
+        <download>true</download>
+        <dynamic>true</dynamic>
+        <featured>false</featured>
+        <ownerId>1</ownerId>
+        <ownername>admin</ownername>
+        <groupOwnerName>IMOS</groupOwnerName>
+        <valid>-1</valid>
+        <baseUrl>https://geonetwork-edge.edge.aodn.org.au/geonetwork</baseUrl>
+        <locService>/srv/en</locService>
+    </geonet:info>
 </mdb:MD_Metadata>
