@@ -57,6 +57,7 @@ public class DeliveryModeUtils {
      */
     public static DeliveryMode getDeliveryMode(final MDMetadataType source) {
         String status = SummariesUtils.getStatus(source);
+
         if(status != null) {
             status = status.toLowerCase();
 

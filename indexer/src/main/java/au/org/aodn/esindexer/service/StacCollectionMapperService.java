@@ -369,10 +369,8 @@ public abstract class StacCollectionMapperService {
                 .toList();
     }
     /**
-     * TODO: Very simple logic here, a dataset is flag as real-time if title contains the word
-     *
-     * @param source
-     * @return
+     * @param source - The xml document
+     * @return The delivery mode based on the logic
      */
     @Named("mapSummaries.updateFrequency")
     String mapUpdateFrequency(MDMetadataType source) {

@@ -17,6 +17,7 @@
     "creation" : "2024-03-28T05:59:17",
     "revision" : "2024-05-20T00:55:10",
     "dataset_group" : "sample",
+    "update_frequency" : "completed",
     "proj:geometry" : {
       "geometries" : [ {
         "type" : "Polygon",

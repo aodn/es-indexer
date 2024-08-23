@@ -18,6 +18,7 @@
     "revision" : "2022-05-13T04:48:51",
     "dataset_group" : "sample",
     "dataset_provider" : "IMOS",
+    "update_frequency" : "real-time",
     "proj:geometry" : {
       "geometries" : [ {
         "type" : "Polygon",
