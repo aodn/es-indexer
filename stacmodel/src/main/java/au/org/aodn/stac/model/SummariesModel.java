@@ -48,8 +48,8 @@ public class SummariesModel {
     protected List<Map<String, String>> temporal;
 
     /**
-     * Discovery categories
+     * Discovery Parameter Vocabs
      */
-    @JsonProperty("discovery_categories")
-    protected List<String> discoveryCategories;
+    @JsonProperty("parameter_vocabs")
+    protected List<String> parameterVocabs;
 }

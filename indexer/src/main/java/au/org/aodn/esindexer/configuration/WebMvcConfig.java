@@ -27,7 +27,7 @@ public class WebMvcConfig {
 
     @Bean
     public ConcurrentMapCacheManager cacheManager() {
-        return new ConcurrentMapCacheManager(AppConstants.AODN_DISCOVERY_CATEGORIES_CACHE);
+        return new ConcurrentMapCacheManager(AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS_CACHE);
     }
 
     @PostConstruct

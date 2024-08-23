@@ -47,7 +47,7 @@ public class IndexerServiceImpl implements IndexerService {
     protected StacCollectionMapperService stacCollectionMapperService;
     protected JaxbUtils<MDMetadataType> jaxbUtils;
     protected RankingService rankingService;
-    protected AodnDiscoveryParameterVocabService aodnDiscoveryParameterVocabService;
+    protected ArdcVocabsService ardcVocabsService;
 
     private static final Logger logger = LogManager.getLogger(IndexerServiceImpl.class);
 
@@ -62,7 +62,7 @@ public class IndexerServiceImpl implements IndexerService {
             ElasticsearchClient portalElasticsearchClient,
             ElasticSearchIndexService elasticSearchIndexService,
             StacCollectionMapperService stacCollectionMapperService,
-            AodnDiscoveryParameterVocabService aodnDiscoveryParameterVocabService
+            ArdcVocabsService ardcVocabsService
     ) {
         this.indexName = indexName;
         this.tokensAnalyserName = tokensAnalyserName;
@@ -73,7 +73,7 @@ public class IndexerServiceImpl implements IndexerService {
         this.portalElasticsearchClient = portalElasticsearchClient;
         this.elasticSearchIndexService = elasticSearchIndexService;
         this.stacCollectionMapperService = stacCollectionMapperService;
-        this.aodnDiscoveryParameterVocabService = aodnDiscoveryParameterVocabService;
+        this.ardcVocabsService = ardcVocabsService;
     }
 
     public Hit<ObjectNode> getDocumentByUUID(String uuid) throws IOException {
@@ -155,9 +155,9 @@ public class IndexerServiceImpl implements IndexerService {
 
         stacCollectionModel.getSummaries().setScore(score);
 
-        List<String> aodnDiscoveryCategories = aodnDiscoveryParameterVocabService.getAodnDiscoveryCategories(stacCollectionModel.getThemes());
-        if (!aodnDiscoveryCategories.isEmpty()) {
-            stacCollectionModel.getSummaries().setDiscoveryCategories(aodnDiscoveryCategories);
+        List<String> aodnDiscoveryParameters = ardcVocabsService.getDiscoveryParameters(stacCollectionModel.getThemes());
+        if (!aodnDiscoveryParameters.isEmpty()) {
+            stacCollectionModel.getSummaries().setParameterVocabs(aodnDiscoveryParameters);
         }
 
         // categories suggest using a different index

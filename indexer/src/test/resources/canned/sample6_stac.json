@@ -80,7 +80,7 @@
         "end": "2024-03-04T13:00:00Z"
       }
     ],
-    "discovery_categories": [
+    "parameter_vocabs": [
       "ocean biota",
       "bathymetry",
       "density",

@@ -1,6 +1,7 @@
 package au.org.aodn.esindexer.utils;
 
-import au.org.aodn.ardcvocabs.model.CategoryVocabModel;
+import au.org.aodn.ardcvocabs.model.ArdcVocabModel;
+import au.org.aodn.ardcvocabs.model.ParameterVocabModel;
 import au.org.aodn.ardcvocabs.service.ArdcVocabsService;
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.exception.DocumentNotFoundException;
@@ -22,17 +23,20 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.scheduling.annotation.Scheduled;
+
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.StreamSupport;
 
 
 @Slf4j
 // create and inject a stub proxy to self due to the circular reference http://bit.ly/4aFvYtt
 @Scope(proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class VocabsUtils {
-    @Value(AppConstants.AODN_DISCOVERY_PARAMETER_VOCAB_API)
+    @Value(AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS_API)
     protected String vocabApi;
 
     @Autowired
@@ -49,41 +53,48 @@ public class VocabsUtils {
     @Autowired
     ElasticsearchClient portalElasticsearchClient;
 
-    @Value("${elasticsearch.index.categories.name}")
-    String categoriesIndexName;
+    @Value("${elasticsearch.index.vocabs_index.name}")
+    String vocabsIndexName;
 
     @Autowired
     ObjectMapper indexerObjectMapper;
 
 
-    protected void indexingDiscoveryCategoriesIndex(List<CategoryVocabModel> categoryVocabModels) throws IOException {
+    // indexArdcVocabs's input parameters are extendable (e.g platformVocabs, organisationVocabs etc.), currently just parameterVocabs.
+    protected void indexArdcVocabs(List<ParameterVocabModel> parameterVocabs) throws IOException {
         BulkRequest.Builder bulkRequest = new BulkRequest.Builder();
+
+        List<ParameterVocabModel> lowerCaseParameterVocabs = new ArrayList<>();
+
         // recreate index from mapping JSON file
-        elasticSearchIndexService.createIndexFromMappingJSONFile(AppConstants.AODN_DISCOVERY_PARAMETER_VOCABULARIES_MAPPING_JSON_FILE, categoriesIndexName);
-        log.info("Indexing all categoryVocabModel to {}", categoriesIndexName);
-        for (CategoryVocabModel categoryVocabModel : categoryVocabModels) {
-            try {
-                // convert categoryVocabModel values to binary data
-                log.debug("Ingested json is {}", indexerObjectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(categoryVocabModel));
-
-                // Convert categoryVocabModel's labels to lowercase
-                CategoryVocabModel lowerCaseCategoryVocabModel = CategoryVocabModel.builder()
-                    .label(categoryVocabModel.getLabel().toLowerCase())
-                    .broader(categoryVocabModel.getBroader().stream().peek(item -> item.setLabel(item.getLabel().toLowerCase())).collect(Collectors.toList()))
-                    .narrower(categoryVocabModel.getNarrower().stream().peek(item -> item.setLabel(item.getLabel().toLowerCase())).collect(Collectors.toList()))
+        elasticSearchIndexService.createIndexFromMappingJSONFile(AppConstants.VOCABS_INDEX_MAPPING_SCHEMA_FILE, vocabsIndexName);
+        log.info("Indexing all parameterVocabModel to {}", vocabsIndexName);
+        for (ParameterVocabModel parameterVocab : parameterVocabs) {
+            ParameterVocabModel lowerCaseParameterVocab = ParameterVocabModel.builder()
+                    .label(parameterVocab.getLabel().toLowerCase())
+                    .broader(parameterVocab.getBroader().stream().peek(item -> item.setLabel(item.getLabel().toLowerCase())).collect(Collectors.toList()))
+                    .narrower(parameterVocab.getNarrower().stream().peek(item -> item.setLabel(item.getLabel().toLowerCase())).collect(Collectors.toList()))
                     .build();
+            lowerCaseParameterVocabs.add(lowerCaseParameterVocab);
+        }
 
-                // send bulk request to Elasticsearch
-                bulkRequest.operations(op -> op
-                    .index(idx -> idx
-                        .index(categoriesIndexName)
-                        .document(lowerCaseCategoryVocabModel)
-                    )
-                );
-            } catch (JsonProcessingException e) {
-                log.error("Failed to ingest categoryVocabModel to {}", categoriesIndexName);
-                throw new RuntimeException(e);
-            }
+        try {
+            ArdcVocabModel ardcVocabModel = ArdcVocabModel.builder()
+                    .parameterVocabModels(lowerCaseParameterVocabs).build();
+
+            // convert parameterVocab values to binary data
+            log.debug("Ingested json is {}", indexerObjectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(ardcVocabModel));
+
+            // send bulk request to Elasticsearch
+            bulkRequest.operations(op -> op
+                .index(idx -> idx
+                    .index(vocabsIndexName)
+                    .document(ardcVocabModel)
+                )
+            );
+        } catch (JsonProcessingException e) {
+            log.error("Failed to ingest ardcVocabModel to {}", vocabsIndexName);
+            throw new RuntimeException(e);
         }
 
         BulkResponse result = portalElasticsearchClient.bulk(bulkRequest.build());
@@ -101,53 +112,60 @@ public class VocabsUtils {
                 }
             }
         } else {
-            log.info("Finished bulk indexing categoryVocabModel items to index: " + categoriesIndexName);
+            log.info("Finished bulk indexing ardcVocabModel items to index: " + vocabsIndexName);
         }
-        log.info("Total documents in index: " + categoriesIndexName + " is " + elasticSearchIndexService.getDocumentsCount(categoriesIndexName));
-    }
-    /*
-    fetch vocabularies from ARDC and index to discovery categories index once the bean is created
-     */
-    @PostConstruct
-    public void refreshDiscoveryCategoriesIndex() throws IOException {
-        log.info("Fetching AODN Discovery Parameter Vocabularies from ARDC");
-        List<CategoryVocabModel> categoryVocabModels = ardcVocabsService.getParameterCategory(vocabApi);
-        indexingDiscoveryCategoriesIndex(categoryVocabModels);
+        log.info("Total documents in index: " + vocabsIndexName + " is " + elasticSearchIndexService.getDocumentsCount(vocabsIndexName));
     }
 
-    @Cacheable(AppConstants.AODN_DISCOVERY_CATEGORIES_CACHE)
-    public List<JsonNode> getDiscoveryCategories() throws IOException {
-        List<JsonNode> categories = new ArrayList<>();
-        log.info("Fetching AODN Discovery Parameter Vocabularies from {}", categoriesIndexName);
+    /*
+    fetch vocabularies from ARDC and index to discovery parameter vocabs index once the bean is created
+     */
+    @PostConstruct
+    public void refreshVocabsIndex() throws IOException {
+        log.info("Fetching vocabularies from ARDC");
+        List<ParameterVocabModel> parameterVocabs = ardcVocabsService.getParameterVocab(vocabApi);
+        indexArdcVocabs(parameterVocabs);
+    }
+
+    @Cacheable(AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS_CACHE)
+    public List<JsonNode> getParameterVocabs() throws IOException {
+        return this.getVocabsByKey("parameter_vocabs");
+    }
+
+    protected List<JsonNode> getVocabsByKey(String key) throws IOException {
+        List<JsonNode> vocabs = new ArrayList<>();
+        log.info("Fetching {} vocabularies from {}", key, vocabsIndexName);
         try {
-            double totalHits = elasticSearchIndexService.getDocumentsCount(categoriesIndexName);
+            double totalHits = elasticSearchIndexService.getDocumentsCount(vocabsIndexName);
             if (totalHits == 0) {
-                throw new DocumentNotFoundException("No documents found in " + categoriesIndexName);
+                throw new DocumentNotFoundException("No documents found in " + vocabsIndexName);
             } else {
                 SearchResponse<JsonNode> response = portalElasticsearchClient.search(s -> s
-                    .index(categoriesIndexName)
+                    .index(vocabsIndexName)
                     .size((int) totalHits), JsonNode.class
                 );
-                response.hits().hits().forEach(hit -> {
-                    categories.add(hit.source());
-                });
+                response.hits().hits().stream()
+                        .map(hit -> Objects.requireNonNull(hit.source()).get(key))
+                        .filter(Objects::nonNull)
+                        .flatMap(vocabArray -> StreamSupport.stream(vocabArray.spliterator(), false)) // process all elements as if they were in a single list.
+                        .forEach(vocabs::add);
             }
         } catch (ElasticsearchException | IOException e) {
-            throw new IOException("Failed to get documents from " + categoriesIndexName + " | " + e.getMessage());
+            throw new IOException("Failed to get documents from " + vocabsIndexName + " | " + e.getMessage());
         }
-        return categories;
+        return vocabs;
     }
 
     // TODO: A smarter refresh and check if the values are diff before evict cache
     @Scheduled(cron = "0 0 0 * * *")
     public void refreshCache() throws IOException {
-        log.info("Refreshing AODN Discovery Parameter Vocabularies cache");
+        log.info("Refreshing ARDC vocabularies cache");
         self.clearCache();
-        self.refreshDiscoveryCategoriesIndex();
-        self.getDiscoveryCategories();
+        self.refreshVocabsIndex();
+        self.getParameterVocabs();
     }
 
-    @CacheEvict(value = AppConstants.AODN_DISCOVERY_CATEGORIES_CACHE, allEntries = true)
+    @CacheEvict(value = AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS_CACHE, allEntries = true)
     public void clearCache() {
         // Intentionally empty; the annotation does the job
     }

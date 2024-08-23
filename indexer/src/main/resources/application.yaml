@@ -35,8 +35,8 @@ management:
 elasticsearch:
   index:
     name: portal_records
-    categories:
-      name: discovery_category
+    vocabs_index:
+      name: vocabs_index
   analyser:
     tokens:
       name: shingle_analyser
