@@ -1,6 +1,6 @@
 package au.org.aodn.esindexer.utils;
 
-import au.org.aodn.esindexer.service.AodnDiscoveryParameterVocabService;
+import au.org.aodn.esindexer.service.ArdcVocabsService;
 import au.org.aodn.stac.model.ConceptModel;
 import au.org.aodn.stac.model.ThemesModel;
 import org.junit.jupiter.api.*;
@@ -22,10 +22,10 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class VocabUtilsTest {
     @Autowired
-    AodnDiscoveryParameterVocabService aodnDiscoveryParameterVocabService;
+    ArdcVocabsService ardcVocabsService;
 
     @Test
-    void testGetAodnDiscoveryCategories() throws IOException {
+    void testGetDiscoveryParameterVocabs() throws IOException {
         // Prepare themes
         List<ThemesModel> themes = List.of(
                 new ThemesModel(Arrays.asList(
@@ -40,14 +40,14 @@ public class VocabUtilsTest {
         );
 
         // Perform the test
-        List<String> categories = aodnDiscoveryParameterVocabService.getAodnDiscoveryCategories(themes);
+        List<String> parameterVocabs = ardcVocabsService.getDiscoveryParameters(themes);
 
         // Assertions
-        assertNotNull(categories);
-        assertTrue(categories.contains("alkalinity"));
-        assertTrue(categories.contains("temperature"));
-        assertTrue(categories.contains("salinity"));
-        assertTrue(categories.contains("carbon"));
-        assertEquals(4, categories.size());
+        assertNotNull(parameterVocabs);
+        assertTrue(parameterVocabs.contains("alkalinity"));
+        assertTrue(parameterVocabs.contains("temperature"));
+        assertTrue(parameterVocabs.contains("salinity"));
+        assertTrue(parameterVocabs.contains("carbon"));
+        assertEquals(4, parameterVocabs.size());
     }
 }

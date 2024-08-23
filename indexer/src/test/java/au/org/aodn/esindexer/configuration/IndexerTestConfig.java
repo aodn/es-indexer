@@ -1,11 +1,9 @@
 package au.org.aodn.esindexer.configuration;
 
-import au.org.aodn.ardcvocabs.model.CategoryVocabModel;
+import au.org.aodn.ardcvocabs.model.ParameterVocabModel;
 import au.org.aodn.ardcvocabs.service.ArdcVocabsService;
 import au.org.aodn.esindexer.BaseTestClass;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.testcontainers.shaded.com.fasterxml.jackson.core.type.TypeReference;
@@ -26,14 +24,13 @@ public class IndexerTestConfig {
      */
     @Bean
     public ArdcVocabsService createArdcVocabsService() throws IOException {
-
         String json = BaseTestClass.readResourceFile("classpath:canned/aodn_discovery_parameter_vocab.json");
-        List<CategoryVocabModel> categoryVocabModels = (new ObjectMapper())
-                .readValue(json, new TypeReference<List<CategoryVocabModel>>() {});
+        List<ParameterVocabModel> parameterVocabs = (new ObjectMapper())
+                .readValue(json, new TypeReference<List<ParameterVocabModel>>() {});
 
         ArdcVocabsService service = Mockito.mock(ArdcVocabsService.class);
-        when(service.getParameterCategory(anyString()))
-                .thenReturn(categoryVocabModels);
+        when(service.getParameterVocab(anyString()))
+                .thenReturn(parameterVocabs);
 
         return service;
     }

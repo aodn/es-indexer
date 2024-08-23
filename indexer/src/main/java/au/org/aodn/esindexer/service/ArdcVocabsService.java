@@ -14,7 +14,7 @@ import java.util.List;
 
 
 @Service
-public class AodnDiscoveryParameterVocabService {
+public class ArdcVocabsService {
     @Autowired
     VocabsUtils cacheArdcVocabsUtils;
 
@@ -45,10 +45,10 @@ public class AodnDiscoveryParameterVocabService {
     this method for analysing the AODN discovery parameter vocabularies of a record aka bottom-level vocabs (found in the themes section)
     and returning the second-level vocabularies that match (1 level up from the bottom-level vocabularies)
      */
-    public List<String> getAodnDiscoveryCategories(List<ThemesModel> themes) throws IOException {
+    public List<String> getDiscoveryParameters(List<ThemesModel> themes) throws IOException {
         List<String> results = new ArrayList<>();
         // Iterate over the top-level vocabularies
-        for (JsonNode topLevelVocab : cacheArdcVocabsUtils.getDiscoveryCategories()) {
+        for (JsonNode topLevelVocab : cacheArdcVocabsUtils.getParameterVocabs()) {
             if (topLevelVocab.has("narrower") && !topLevelVocab.get("narrower").isEmpty()) {
                 for (JsonNode secondLevelVocab : topLevelVocab.get("narrower")) {
                     String secondLevelVocabLabel = secondLevelVocab.get("label").asText();

@@ -54,7 +54,7 @@ public class StacCollectionMapperServiceTests {
     protected ElasticSearchIndexService elasticSearchIndexService;
 
     @MockBean
-    protected AodnDiscoveryParameterVocabService aodnDiscoveryParameterVocabService;
+    protected ArdcVocabsService ardcVocabsService;
 
     @MockBean
     protected RankingService rankingService;
@@ -75,7 +75,7 @@ public class StacCollectionMapperServiceTests {
                 geoNetworkResourceService,
                 portalElasticsearchClient,
                 elasticSearchIndexService,
-                aodnDiscoveryParameterVocabService
+                ardcVocabsService
         );
     }
 
@@ -91,7 +91,7 @@ public class StacCollectionMapperServiceTests {
                 portalElasticsearchClient,
                 elasticSearchIndexService,
                 service,
-                aodnDiscoveryParameterVocabService
+                ardcVocabsService
         );
         indexerService = spy(indexerService);
 

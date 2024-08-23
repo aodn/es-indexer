@@ -12,11 +12,10 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CategoryVocabModel {
-
+public class ParameterVocabModel {
     protected String label;
     protected String definition;
     protected String about;
-    protected List<CategoryVocabModel> broader;
-    protected List<CategoryVocabModel> narrower;
+    protected List<ParameterVocabModel> broader;
+    protected List<ParameterVocabModel> narrower;
 }
