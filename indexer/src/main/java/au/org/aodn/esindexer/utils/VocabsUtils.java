@@ -60,7 +60,7 @@ public class VocabsUtils {
 
     // indexArdcVocabs's input parameters are extendable (e.g platformVocabs, organisationVocabs etc.), currently just parameterVocabs.
     protected void indexAllVocabs(List<ParameterVocabModel> parameterVocabs) throws IOException {
-        List<ArdcVocabModel> allVocabs = new ArrayList<>();
+        List<ArdcVocabModel> vocabs = new ArrayList<>();
 
         for (ParameterVocabModel parameterVocab : parameterVocabs) {
             ParameterVocabModel lowerCaseParameterVocab = ParameterVocabModel.builder()
@@ -68,22 +68,22 @@ public class VocabsUtils {
                     .broader(parameterVocab.getBroader().stream().peek(item -> item.setLabel(item.getLabel().toLowerCase())).collect(Collectors.toList()))
                     .narrower(parameterVocab.getNarrower().stream().peek(item -> item.setLabel(item.getLabel().toLowerCase())).collect(Collectors.toList()))
                     .build();
-            ArdcVocabModel aVocab = ArdcVocabModel.builder().parameterVocabModel(lowerCaseParameterVocab).build();
-            allVocabs.add(aVocab);
+            ArdcVocabModel vocab = ArdcVocabModel.builder().parameterVocabModel(lowerCaseParameterVocab).build();
+            vocabs.add(vocab);
         }
 
         // recreate index from mapping JSON file
         elasticSearchIndexService.createIndexFromMappingJSONFile(AppConstants.VOCABS_INDEX_MAPPING_SCHEMA_FILE, vocabsIndexName);
         log.info("Indexing all vocabs to {}", vocabsIndexName);
 
-        bulkIndexVocabs(allVocabs);
+        bulkIndexVocabs(vocabs);
     }
 
-    protected void bulkIndexVocabs(List<ArdcVocabModel> allVocabs) throws IOException {
+    protected void bulkIndexVocabs(List<ArdcVocabModel> vocabs) throws IOException {
         // count portal index documents, or create index if not found from defined mapping JSON file
         BulkRequest.Builder bulkRequest = new BulkRequest.Builder();
 
-        for (ArdcVocabModel vocab : allVocabs) {
+        for (ArdcVocabModel vocab : vocabs) {
             try {
                 // convert vocab values to binary data
                 log.debug("Ingested json is {}", indexerObjectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(vocab));
@@ -132,10 +132,10 @@ public class VocabsUtils {
 
     @Cacheable(AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS_CACHE)
     public List<JsonNode> getParameterVocabs() throws IOException {
-        return this.getVocabsByKey("parameter_vocabs");
+        return this.groupVocabsByKey("parameter_vocab");
     }
 
-    protected List<JsonNode> getVocabsByKey(String key) throws IOException {
+    protected List<JsonNode> groupVocabsByKey(String key) throws IOException {
         List<JsonNode> vocabs = new ArrayList<>();
         log.info("Fetching {} vocabularies from {}", key, vocabsIndexName);
         try {
@@ -149,8 +149,6 @@ public class VocabsUtils {
                 );
                 response.hits().hits().stream()
                         .map(hit -> Objects.requireNonNull(hit.source()).get(key))
-                        .filter(Objects::nonNull)
-                        .flatMap(vocabArray -> StreamSupport.stream(vocabArray.spliterator(), false)) // process all elements as if they were in a single list.
                         .forEach(vocabs::add);
             }
         } catch (ElasticsearchException | IOException e) {
