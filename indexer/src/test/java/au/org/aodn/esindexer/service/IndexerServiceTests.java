@@ -144,7 +144,7 @@ public class IndexerServiceTests extends BaseTestClass {
 
             String expected = indexerObjectMapper.readTree(expectedData).toPrettyString();
             String actual = indexerObjectMapper.readTree(test).toPrettyString();
-            
+
             Assertions.assertEquals(expected, actual, "Stac not equals for sample 4. Uuid:" + uuid);
         }
         finally {
