@@ -3,7 +3,7 @@ package au.org.aodn.esindexer.service;
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.exception.*;
 import au.org.aodn.esindexer.utils.JaxbUtils;
-import au.org.aodn.esindexer.utils.StringUtils;
+import au.org.aodn.esindexer.utils.StringUtil;
 import au.org.aodn.metadata.iso19115_3_2018.MDMetadataType;
 import au.org.aodn.stac.model.RecordSuggest;
 import au.org.aodn.stac.model.StacCollectionModel;
@@ -35,7 +35,6 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
-import java.util.regex.Pattern;
 
 @Service
 public class IndexerServiceImpl implements IndexerService {
@@ -130,12 +129,12 @@ public class IndexerServiceImpl implements IndexerService {
         for (AnalyzeToken token : response.tokens()) {
             // tweak as needed
             String cleanedToken = token.token().replace("_", "").replaceAll("\\s{2,}", " ").trim();
-            if (cleanedToken.split("\\s+").length > 0) { // change to 1 for at least 2 words, 2 for at least 3 words
+            if (!cleanedToken.isEmpty() && cleanedToken.split("\\s+").length > 0) { // change to 1 for at least 2 words, 2 for at least 3 words
                 results.add(cleanedToken);
             }
         }
 
-        return StringUtils.filterStrings(new ArrayList<>(results));
+        return new ArrayList<>(results);
     }
 
     protected StacCollectionModel getMappedMetadataValues(String metadataValues) throws IOException, FactoryException, TransformException, JAXBException {
