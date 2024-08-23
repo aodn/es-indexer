@@ -42,8 +42,6 @@ import static au.org.aodn.esindexer.utils.CommonUtils.safeGet;
 @Mapper(componentModel = "spring")
 public abstract class StacCollectionMapperService {
 
-    public static final String REAL_TIME = "real-time";
-
     @Mapping(target="uuid", source = "source", qualifiedByName = "mapUUID")
     @Mapping(target="title", source = "source", qualifiedByName = "mapTitle" )
     @Mapping(target="description", source = "source", qualifiedByName = "mapDescription")
@@ -80,7 +78,7 @@ public abstract class StacCollectionMapperService {
 
     @Named("mapUUID")
     String mapUUID(MDMetadataType source) {
-        return source.getMetadataIdentifier().getMDIdentifier().getCode().getCharacterString().getValue().toString();
+        return CommonUtils.getUUID(source);
     }
     /**
      * According to the spec, the bbox must be an of length 2*n where n is number of dimension, so a 2D map, the
@@ -174,19 +172,8 @@ public abstract class StacCollectionMapperService {
      */
     @Named("mapDescription")
     String mapDescription(MDMetadataType source) {
-        List<MDDataIdentificationType> items = MapperUtils.findMDDataIdentificationType(source);
-
-        if(!items.isEmpty()) {
-            // Need to assert only 1 block contains our target
-            for(MDDataIdentificationType i : items) {
-                // TODO: Null or empty check
-                return i.getAbstract().getCharacterString().getValue().toString();
-            }
-        }
-        return "";
+        return CommonUtils.getDescription(source);
     }
-
-
 
     @Named("mapCitation")
     String mapCitation(MDMetadataType source) {
@@ -235,22 +222,7 @@ public abstract class StacCollectionMapperService {
 
     @Named("mapSummaries.statement")
     String mapSummariesStatement(MDMetadataType source) {
-        var lineages = MapperUtils.findMDResourceLineage(source);
-        if (lineages.isEmpty()) {
-            return null;
-        }
-        for (var lineage : lineages) {
-            var abstractLiLineage = lineage.getAbstractLineageInformation().getValue();
-            if (!(abstractLiLineage instanceof LILineageType liLineage)) {
-                continue;
-            }
-            var statement = safeGet(() -> liLineage.getStatement().getCharacterString().getValue().toString());
-            if (statement.isEmpty()) {
-                continue;
-            }
-            return statement.get();
-        }
-        return null;
+        return SummariesUtils.getStatement(source);
     }
 
 
@@ -341,20 +313,7 @@ public abstract class StacCollectionMapperService {
 
     @Named("mapSummaries.status")
     String createSummariesStatus(MDMetadataType source) {
-        List<MDDataIdentificationType> items = MapperUtils.findMDDataIdentificationType(source);
-        if (!items.isEmpty()) {
-            List<String> temp = new ArrayList<>();
-            for (MDDataIdentificationType i : items) {
-                // status
-                // mdb:identificationInfo/mri:MD_DataIdentification/mri:status/mcc:MD_ProgressCode/@codeListValue
-                for (MDProgressCodePropertyType s : i.getStatus()) {
-                    temp.add(s.getMDProgressCode().getCodeListValue());
-                }
-            }
-            return String.join(" | ", temp);
-        }
-        logger.warn("Unable to find status metadata record: " + this.mapUUID(source));
-        return null;
+        return SummariesUtils.getStatus(source);
     }
 
     @Named("mapSummaries.scope")
@@ -383,22 +342,7 @@ public abstract class StacCollectionMapperService {
      */
     @Named("mapTitle")
     String mapTitle(MDMetadataType source) {
-        List<MDDataIdentificationType> items = MapperUtils.findMDDataIdentificationType(source);
-        if(!items.isEmpty()) {
-            // Need to assert only 1 block contains our target
-            for(MDDataIdentificationType i : items) {
-                // TODO: Null or empty check
-                AbstractCitationType ac = i.getCitation().getAbstractCitation().getValue();
-                if(ac instanceof CICitationType2 type2) {
-                    return type2.getTitle().getCharacterString().getValue().toString();
-                }
-                else if(ac instanceof CICitationType type1) {
-                    // Backward compatible
-                    return type1.getTitle().getCharacterString().getValue().toString();
-                }
-            }
-        }
-        return "";
+        return CommonUtils.getTitle(source);
     }
     /**
      * Map the field credits, it is under
@@ -432,8 +376,7 @@ public abstract class StacCollectionMapperService {
      */
     @Named("mapSummaries.updateFrequency")
     String mapUpdateFrequency(MDMetadataType source) {
-        String t = mapTitle(source);
-        return t.toLowerCase().contains(REAL_TIME) ? REAL_TIME : null;
+        return DeliveryModeUtils.getDeliveryMode(source).toString();
     }
     /**
      * TODO: Very simple logic here, if provider name contains IMOS

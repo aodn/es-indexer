@@ -1,5 +1,8 @@
 package au.org.aodn.esindexer.utils;
 
+import au.org.aodn.metadata.iso19115_3_2018.*;
+
+import java.util.List;
 import java.util.Optional;
 import java.util.function.BooleanSupplier;
 import java.util.function.Supplier;
@@ -35,5 +38,47 @@ public class CommonUtils {
                 Thread.currentThread().interrupt();
             }
         }
+    }
+
+    public static String getUUID(MDMetadataType source) {
+        return source
+                .getMetadataIdentifier()
+                .getMDIdentifier()
+                .getCode()
+                .getCharacterString()
+                .getValue()
+                .toString();
+    }
+
+    public static String getTitle(MDMetadataType source) {
+        List<MDDataIdentificationType> items = MapperUtils.findMDDataIdentificationType(source);
+        if(!items.isEmpty()) {
+            // Need to assert only 1 block contains our target
+            for(MDDataIdentificationType i : items) {
+                // TODO: Null or empty check
+                AbstractCitationType ac = i.getCitation().getAbstractCitation().getValue();
+                if(ac instanceof CICitationType2 type2) {
+                    return type2.getTitle().getCharacterString().getValue().toString();
+                }
+                else if(ac instanceof CICitationType type1) {
+                    // Backward compatible
+                    return type1.getTitle().getCharacterString().getValue().toString();
+                }
+            }
+        }
+        return "";
+    }
+
+    public static String getDescription(MDMetadataType source) {
+        List<MDDataIdentificationType> items = MapperUtils.findMDDataIdentificationType(source);
+
+        if(!items.isEmpty()) {
+            // Need to assert only 1 block contains our target
+            for(MDDataIdentificationType i : items) {
+                // TODO: Null or empty check
+                return i.getAbstract().getCharacterString().getValue().toString();
+            }
+        }
+        return "";
     }
 }
