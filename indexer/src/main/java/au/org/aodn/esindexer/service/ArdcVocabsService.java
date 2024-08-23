@@ -31,7 +31,7 @@ public class ArdcVocabsService {
                  */
                 if (thisConcept.equals(thatConcept)) {
                     /* thisConcept is the extracted from the themes of the record...theme.getConcepts()
-                    thatConcept is the object created by iterating over the discovery_categories cache...ConceptModel thatConcept = ConceptModel.builder()
+                    thatConcept is the object created by iterating over the parameter_vocabs cache...ConceptModel thatConcept = ConceptModel.builder()
                     using overriding equals method to compare the two objects, this is not checking instanceof ConceptModel class
                      */
                     return true;
