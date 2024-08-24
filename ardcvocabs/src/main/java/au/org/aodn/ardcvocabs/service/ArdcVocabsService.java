@@ -1,6 +1,8 @@
 package au.org.aodn.ardcvocabs.service;
 
+import au.org.aodn.ardcvocabs.model.OrganisationVocabModel;
 import au.org.aodn.ardcvocabs.model.ParameterVocabModel;
+import au.org.aodn.ardcvocabs.model.PlatformVocabModel;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.TextNode;
@@ -22,7 +24,10 @@ public class ArdcVocabsService {
     @Autowired
     protected RestTemplate ardcVocabRestTemplate;
 
-    protected static String path = "/aodn-parameter-category-vocabulary/version-2-1/concept.json";
+    protected static String parameterVocabApiPath = "/aodn-parameter-category-vocabulary/version-2-1/concept.json";
+    protected static String platformVocabApiPath = "/aodn-platform-vocabulary/version-6-1/concept.json";
+    protected static String organisationVocabApiPath = "/aodn-organisation-vocabulary/version-2-5/concept.json";
+
     protected static String leafPath = "/aodn-discovery-parameter-vocabulary/version-1-6/concept.json";
 
     protected static String details = "/aodn-discovery-parameter-vocabulary/version-1-6/resource.json?uri=%s";
@@ -131,11 +136,11 @@ public class ArdcVocabsService {
         return null;
     }
 
-    public List<ParameterVocabModel> getParameterVocab(String vocabApiBase) {
+    public List<ParameterVocabModel> getParameterVocabs(String vocabApiBase) {
         Map<String, List<ParameterVocabModel>> leaves = getLeafNodeOfParameterVocab(vocabApiBase);
         List<ParameterVocabModel> result = new ArrayList<>();
 
-        String url = String.format(vocabApiBase + path);
+        String url = String.format(vocabApiBase + parameterVocabApiPath);
 
         while (url != null) {
             try {
@@ -203,5 +208,19 @@ public class ArdcVocabsService {
         }
 
         return result;
+    }
+
+    // TODO: getPlatformVocabs
+    public List<PlatformVocabModel> getPlatformVocabs(String vocabApiBase) {
+        String url = String.format(vocabApiBase + platformVocabApiPath);
+        List<PlatformVocabModel> results = new ArrayList<>();
+        return results;
+    }
+
+    // TODO: getOrganisationVocabs
+    public List<OrganisationVocabModel> getOrganisationVocabs(String vocabApiBase) {
+        String url = String.format(vocabApiBase + organisationVocabApiPath);
+        List<OrganisationVocabModel> results = new ArrayList<>();
+        return results;
     }
 }

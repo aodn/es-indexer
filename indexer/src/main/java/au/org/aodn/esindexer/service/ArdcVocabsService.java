@@ -45,7 +45,7 @@ public class ArdcVocabsService {
     this method for analysing the AODN discovery parameter vocabularies of a record aka bottom-level vocabs (found in the themes section)
     and returning the second-level vocabularies that match (1 level up from the bottom-level vocabularies)
      */
-    public List<String> getDiscoveryParameters(List<ThemesModel> themes) throws IOException {
+    public List<String> getParameterVocabs(List<ThemesModel> themes) throws IOException {
         List<String> results = new ArrayList<>();
         // Iterate over the top-level vocabularies
         for (JsonNode topLevelVocab : cacheArdcVocabsUtils.getParameterVocabs()) {
@@ -68,6 +68,24 @@ public class ArdcVocabsService {
                     }
                 }
             }
+        }
+        return results;
+    }
+
+    // TODO: getPlatformVocabs
+    public List<String> getPlatformVocabs() throws IOException {
+        List<String> results = new ArrayList<>();
+        for (JsonNode vocab : cacheArdcVocabsUtils.getPlatformVocabs()) {
+            results.add("sample platform vocab");
+        }
+        return results;
+    }
+
+    // TODO: getOrganisationVocabs
+    public List<String> getOrganisationVocabs() throws IOException {
+        List<String> results = new ArrayList<>();
+        for (JsonNode vocab : cacheArdcVocabsUtils.getOrganisationVocabs()) {
+            results.add("sample organisation vocab");
         }
         return results;
     }

@@ -169,9 +169,19 @@ public class IndexerServiceImpl implements IndexerService {
 
         stacCollectionModel.getSummaries().setScore(score);
 
-        List<String> aodnDiscoveryParameters = ardcVocabsService.getDiscoveryParameters(stacCollectionModel.getThemes());
-        if (!aodnDiscoveryParameters.isEmpty()) {
-            stacCollectionModel.getSummaries().setParameterVocabs(aodnDiscoveryParameters);
+        List<String> parameterVocabs = ardcVocabsService.getParameterVocabs(stacCollectionModel.getThemes());
+        if (!parameterVocabs.isEmpty()) {
+            stacCollectionModel.getSummaries().setParameterVocabs(parameterVocabs);
+        }
+
+        List<String> platformVocabs = ardcVocabsService.getPlatformVocabs();
+        if (!platformVocabs.isEmpty()) {
+            stacCollectionModel.getSummaries().setPlatformVocabs(platformVocabs);
+        }
+
+        List<String> organisationVocabs = ardcVocabsService.getOrganisationVocabs();
+        if (!organisationVocabs.isEmpty()) {
+            stacCollectionModel.getSummaries().setOrganisationVocabs(organisationVocabs);
         }
 
         // categories suggest using a different index

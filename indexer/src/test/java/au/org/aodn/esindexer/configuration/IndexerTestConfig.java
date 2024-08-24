@@ -29,7 +29,7 @@ public class IndexerTestConfig {
                 .readValue(json, new TypeReference<List<ParameterVocabModel>>() {});
 
         ArdcVocabsService service = Mockito.mock(ArdcVocabsService.class);
-        when(service.getParameterVocab(anyString()))
+        when(service.getParameterVocabs(anyString()))
                 .thenReturn(parameterVocabs);
 
         return service;
