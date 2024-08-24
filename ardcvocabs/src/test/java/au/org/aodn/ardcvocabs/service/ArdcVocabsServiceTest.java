@@ -33,7 +33,7 @@ public class ArdcVocabsServiceTest {
     ObjectMapper objectMapper = new ObjectMapper();
 
     @Test
-    public void verifyGetParameterVocab() throws IOException {
+    public void verifyGetParameterVocabs() throws IOException {
         // Create expect result
         Mockito.when(mockRestTemplate.<ObjectNode>getForObject(endsWith("/aodn-parameter-category-vocabulary/version-2-1/concept.json"), any(), any(Object[].class)))
                 .thenReturn((ObjectNode)objectMapper.readTree(ResourceUtils.getFile("classpath:databag/vocab0.json")));
@@ -53,7 +53,7 @@ public class ArdcVocabsServiceTest {
         Mockito.when(mockRestTemplate.<ObjectNode>getForObject(endsWith("/aodn-discovery-parameter-vocabulary/version-1-6/resource.json?uri=http://vocab.aodn.org.au/def/discovery_parameter/entity/390"), any(), any(Object[].class)))
                 .thenReturn((ObjectNode)objectMapper.readTree(ResourceUtils.getFile("classpath:databag/vocab_entity_390.json")));
 
-        List<ParameterVocabModel> parameterVocabModelList = ardcVocabsService.getParameterVocab("");
+        List<ParameterVocabModel> parameterVocabModelList = ardcVocabsService.getParameterVocabs("");
         assertEquals("Total equals", 33, parameterVocabModelList.size());
 
 

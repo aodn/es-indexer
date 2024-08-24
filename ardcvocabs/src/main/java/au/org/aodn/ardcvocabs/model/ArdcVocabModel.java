@@ -11,7 +11,12 @@ import java.util.List;
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ArdcVocabModel {
-    // properties are extendable (e.g platformVocabs, organisationVocabs etc.), currently just parameterVocabs.
     @JsonProperty("parameter_vocab")
     ParameterVocabModel parameterVocabModel;
+
+    @JsonProperty("platform_vocab")
+    PlatformVocabModel platformVocabModel;
+
+    @JsonProperty("organisation_vocab")
+    OrganisationVocabModel organisationVocabModel;
 }

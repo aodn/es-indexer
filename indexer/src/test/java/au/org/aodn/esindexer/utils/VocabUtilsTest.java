@@ -40,7 +40,7 @@ public class VocabUtilsTest {
         );
 
         // Perform the test
-        List<String> parameterVocabs = ardcVocabsService.getDiscoveryParameters(themes);
+        List<String> parameterVocabs = ardcVocabsService.getParameterVocabs(themes);
 
         // Assertions
         assertNotNull(parameterVocabs);

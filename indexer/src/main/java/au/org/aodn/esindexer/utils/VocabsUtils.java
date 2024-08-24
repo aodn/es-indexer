@@ -1,7 +1,9 @@
 package au.org.aodn.esindexer.utils;
 
 import au.org.aodn.ardcvocabs.model.ArdcVocabModel;
+import au.org.aodn.ardcvocabs.model.OrganisationVocabModel;
 import au.org.aodn.ardcvocabs.model.ParameterVocabModel;
+import au.org.aodn.ardcvocabs.model.PlatformVocabModel;
 import au.org.aodn.ardcvocabs.service.ArdcVocabsService;
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.exception.DocumentNotFoundException;
@@ -27,15 +29,14 @@ import org.springframework.scheduling.annotation.Scheduled;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.io.IOException;
-import java.util.stream.StreamSupport;
 
 
 @Slf4j
 // create and inject a stub proxy to self due to the circular reference http://bit.ly/4aFvYtt
 @Scope(proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class VocabsUtils {
-    @Value(AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS_API)
-    protected String vocabApi;
+    @Value(AppConstants.ARDC_VOCAB_API_BASE)
+    protected String vocabApiBase;
 
     @Autowired
     ArdcVocabsService ardcVocabsService;
@@ -51,17 +52,19 @@ public class VocabsUtils {
     @Autowired
     ElasticsearchClient portalElasticsearchClient;
 
-    @Value("${elasticsearch.index.vocabs_index.name}")
+    @Value("${elasticsearch.vocabs_index.name}")
     String vocabsIndexName;
 
     @Autowired
     ObjectMapper indexerObjectMapper;
 
+    protected void indexAllVocabs(List<ParameterVocabModel> parameterVocabs,
+                                  List<PlatformVocabModel> platformVocabs,
+                                  List<OrganisationVocabModel> organisationVocabs) throws IOException {
 
-    // indexArdcVocabs's input parameters are extendable (e.g platformVocabs, organisationVocabs etc.), currently just parameterVocabs.
-    protected void indexAllVocabs(List<ParameterVocabModel> parameterVocabs) throws IOException {
         List<ArdcVocabModel> vocabs = new ArrayList<>();
 
+        // parameter vocabs
         for (ParameterVocabModel parameterVocab : parameterVocabs) {
             ParameterVocabModel lowerCaseParameterVocab = ParameterVocabModel.builder()
                     .label(parameterVocab.getLabel().toLowerCase())
@@ -69,6 +72,18 @@ public class VocabsUtils {
                     .narrower(parameterVocab.getNarrower().stream().peek(item -> item.setLabel(item.getLabel().toLowerCase())).collect(Collectors.toList()))
                     .build();
             ArdcVocabModel vocab = ArdcVocabModel.builder().parameterVocabModel(lowerCaseParameterVocab).build();
+            vocabs.add(vocab);
+        }
+
+        // platform vocabs
+        for (PlatformVocabModel platformVocab : platformVocabs) {
+            ArdcVocabModel vocab = ArdcVocabModel.builder().platformVocabModel(platformVocab).build();
+            vocabs.add(vocab);
+        }
+
+        // organisation vocabs
+        for (OrganisationVocabModel organisationVocab : organisationVocabs) {
+            ArdcVocabModel vocab = ArdcVocabModel.builder().organisationVocabModel(organisationVocab).build();
             vocabs.add(vocab);
         }
 
@@ -126,13 +141,25 @@ public class VocabsUtils {
     @PostConstruct
     public void refreshVocabsIndex() throws IOException {
         log.info("Fetching vocabularies from ARDC");
-        List<ParameterVocabModel> parameterVocabs = ardcVocabsService.getParameterVocab(vocabApi);
-        indexAllVocabs(parameterVocabs);
+        List<ParameterVocabModel> parameterVocabs = ardcVocabsService.getParameterVocabs(vocabApiBase);
+        List<PlatformVocabModel> platformVocabs = ardcVocabsService.getPlatformVocabs(vocabApiBase);
+        List<OrganisationVocabModel> organisationVocabs = ardcVocabsService.getOrganisationVocabs(vocabApiBase);
+        indexAllVocabs(parameterVocabs, platformVocabs, organisationVocabs);
     }
 
     @Cacheable(AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS_CACHE)
     public List<JsonNode> getParameterVocabs() throws IOException {
         return this.groupVocabsByKey("parameter_vocab");
+    }
+
+    @Cacheable(AppConstants.AODN_PLATFORM_VOCABS_CACHE)
+    public List<JsonNode> getPlatformVocabs() throws IOException {
+        return this.groupVocabsByKey("platform_vocab");
+    }
+
+    @Cacheable(AppConstants.AODN_ORGANISATION_VOCABS_CACHE)
+    public List<JsonNode> getOrganisationVocabs() throws IOException {
+        return this.groupVocabsByKey("organisation_vocab");
     }
 
     protected List<JsonNode> groupVocabsByKey(String key) throws IOException {
@@ -161,13 +188,27 @@ public class VocabsUtils {
     @Scheduled(cron = "0 0 0 * * *")
     public void refreshCache() throws IOException {
         log.info("Refreshing ARDC vocabularies cache");
-        self.clearCache();
+        self.clearParameterVocabsCache();
+        // self.clearPlatformVocabsCache();
+       // self.clearOrganisationVocabsCache();
         self.refreshVocabsIndex();
         self.getParameterVocabs();
+        // self.getPlatformVocabs();
+        // self.getOrganisationVocabs();
     }
 
     @CacheEvict(value = AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS_CACHE, allEntries = true)
-    public void clearCache() {
+    public void clearParameterVocabsCache() {
+        // Intentionally empty; the annotation does the job
+    }
+
+    @CacheEvict(value = AppConstants.AODN_PLATFORM_VOCABS_CACHE, allEntries = true)
+    public void clearPlatformVocabsCache() {
+        // Intentionally empty; the annotation does the job
+    }
+
+    @CacheEvict(value = AppConstants.AODN_ORGANISATION_VOCABS_CACHE, allEntries = true)
+    public void clearOrganisationVocabsCache() {
         // Intentionally empty; the annotation does the job
     }
 }
