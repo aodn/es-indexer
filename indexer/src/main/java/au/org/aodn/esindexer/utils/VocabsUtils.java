@@ -152,15 +152,15 @@ public class VocabsUtils {
         return this.groupVocabsByKey("parameter_vocab");
     }
 
-    @Cacheable(AppConstants.AODN_PLATFORM_VOCABS_CACHE)
-    public List<JsonNode> getPlatformVocabs() throws IOException {
-        return this.groupVocabsByKey("platform_vocab");
-    }
-
-    @Cacheable(AppConstants.AODN_ORGANISATION_VOCABS_CACHE)
-    public List<JsonNode> getOrganisationVocabs() throws IOException {
-        return this.groupVocabsByKey("organisation_vocab");
-    }
+//    @Cacheable(AppConstants.AODN_PLATFORM_VOCABS_CACHE)
+//    public List<JsonNode> getPlatformVocabs() throws IOException {
+//        return this.groupVocabsByKey("platform_vocab");
+//    }
+//
+//    @Cacheable(AppConstants.AODN_ORGANISATION_VOCABS_CACHE)
+//    public List<JsonNode> getOrganisationVocabs() throws IOException {
+//        return this.groupVocabsByKey("organisation_vocab");
+//    }
 
     protected List<JsonNode> groupVocabsByKey(String key) throws IOException {
         List<JsonNode> vocabs = new ArrayList<>();
@@ -202,13 +202,13 @@ public class VocabsUtils {
         // Intentionally empty; the annotation does the job
     }
 
-    @CacheEvict(value = AppConstants.AODN_PLATFORM_VOCABS_CACHE, allEntries = true)
-    public void clearPlatformVocabsCache() {
-        // Intentionally empty; the annotation does the job
-    }
-
-    @CacheEvict(value = AppConstants.AODN_ORGANISATION_VOCABS_CACHE, allEntries = true)
-    public void clearOrganisationVocabsCache() {
-        // Intentionally empty; the annotation does the job
-    }
+//    @CacheEvict(value = AppConstants.AODN_PLATFORM_VOCABS_CACHE, allEntries = true)
+//    public void clearPlatformVocabsCache() {
+//        // Intentionally empty; the annotation does the job
+//    }
+//
+//    @CacheEvict(value = AppConstants.AODN_ORGANISATION_VOCABS_CACHE, allEntries = true)
+//    public void clearOrganisationVocabsCache() {
+//        // Intentionally empty; the annotation does the job
+//    }
 }

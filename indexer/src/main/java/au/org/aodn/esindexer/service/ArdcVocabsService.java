@@ -75,18 +75,18 @@ public class ArdcVocabsService {
     // TODO: getPlatformVocabs
     public List<String> getPlatformVocabs() throws IOException {
         List<String> results = new ArrayList<>();
-        for (JsonNode vocab : cacheArdcVocabsUtils.getPlatformVocabs()) {
-            results.add("sample platform vocab");
-        }
+//        for (JsonNode vocab : cacheArdcVocabsUtils.getPlatformVocabs()) {
+//            results.add("sample platform vocab");
+//        }
         return results;
     }
 
     // TODO: getOrganisationVocabs
     public List<String> getOrganisationVocabs() throws IOException {
         List<String> results = new ArrayList<>();
-        for (JsonNode vocab : cacheArdcVocabsUtils.getOrganisationVocabs()) {
-            results.add("sample organisation vocab");
-        }
+//        for (JsonNode vocab : cacheArdcVocabsUtils.getOrganisationVocabs()) {
+//            results.add("sample organisation vocab");
+//        }
         return results;
     }
 }
