@@ -287,4 +287,37 @@ public class StacCollectionMapperServiceTests {
                 "Stac not equals for keywords_null"
         );
     }
+
+    @Test
+    public void verifyNullAbstractResponsibility() throws IOException {
+        String xml = readResourceFile("classpath:canned/abstract_resposibilty_null.xml");
+        String expected = readResourceFile("classpath:canned/abstract_resposibilty_null_stac.json");
+        indexerService.indexMetadata(xml);
+
+        Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
+        String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
+        Assertions.assertEquals(
+                objectMapper.readTree(expected),
+                objectMapper.readTree(out.strip()),
+                "Stac not equals for keywords_null"
+        );
+    }
+    /**
+     * TODO: Havier
+     * @throws IOException
+     */
+    @Test
+    public void verifyAbstractCIParty1() throws IOException {
+        String xml = readResourceFile("classpath:canned/sample12.xml");
+        String expected = readResourceFile("classpath:canned/abstract_resposibilty_null_stac.json");
+        indexerService.indexMetadata(xml);
+
+        Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
+        String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
+        Assertions.assertEquals(
+                objectMapper.readTree(expected),
+                objectMapper.readTree(out.strip()),
+                "Stac not equals for keywords_null"
+        );
+    }
 }

@@ -703,37 +703,40 @@ public abstract class StacCollectionMapperService {
     // TODO: need to handle exception
     @Named("mapProviders")
     List<ProviderModel> mapProviders(MDMetadataType source) {
-        List<ProviderModel> results = new ArrayList<>();
-        source.getContact().forEach(item -> {
-            if (item.getAbstractResponsibility() != null) {
-                if(item.getAbstractResponsibility().getValue() instanceof CIResponsibilityType2 ciResponsibility) {
-                    ciResponsibility.getParty().forEach(party -> {
-                        try
-                        {
-                            ProviderModel providerModel = ProviderModel.builder().build();
-                            providerModel.setRoles(Collections.singletonList(ciResponsibility.getRole().getCIRoleCode().getCodeListValue()));
-                            CIOrganisationType2 organisationType2 = (CIOrganisationType2) party.getAbstractCIParty().getValue();
-                            providerModel.setName(organisationType2.getName() != null ? organisationType2.getName().getCharacterString().getValue().toString() : "");
-                            organisationType2.getIndividual().forEach(individual -> individual.getCIIndividual().getContactInfo().forEach(contactInfo -> {
-                                contactInfo.getCIContact().getOnlineResource().forEach(onlineResource -> {
-                                    providerModel.setUrl(onlineResource.getCIOnlineResource().getLinkage().getCharacterString().getValue().toString());
-                                });
-                            }));
-                            results.add(providerModel);
-                        }
-                        catch (ClassCastException e) {
-                            logger.error("Unable to cast getAbstractCIParty().getValue() to CIOrganisationType2 for metadata record: {}", mapUUID(source));
-                        }
-                    });
-                }
-                else {
-                    logger.warn("getContact().getAbstractResponsibility() in mapProviders is not of type CIResponsibilityType2 for UUID {}", mapUUID(source));
-                }
-            }
-            else {
-                logger.warn("Null value fround for getContact().getAbstractResponsibility() in mapProviders transform for UUID {}", mapUUID(source));
-            }
-        });
+        final List<ProviderModel> results = new ArrayList<>();
+        safeGet(source::getContact)
+                .ifPresent(c -> c
+                        .stream()
+                        .filter(Objects::nonNull)
+                        .forEach(item -> {
+                            if(item.getAbstractResponsibility().getValue() instanceof CIResponsibilityType2 ciResponsibility) {
+                                safeGet(ciResponsibility::getParty)
+                                        .ifPresent(p -> p.forEach(party -> {
+                                            if(party.getAbstractCIParty().getValue() instanceof CIOrganisationType2 organisationType2) {
+                                                ProviderModel providerModel = ProviderModel.builder().build();
+                                                providerModel.setRoles(Collections.singletonList(ciResponsibility.getRole().getCIRoleCode().getCodeListValue()));
+                                                providerModel.setName(organisationType2.getName() != null ? organisationType2.getName().getCharacterString().getValue().toString() : "");
+
+                                                organisationType2.getIndividual().forEach(individual -> individual.getCIIndividual().getContactInfo().forEach(contactInfo -> {
+                                                    contactInfo.getCIContact().getOnlineResource().forEach(onlineResource -> {
+                                                        providerModel.setUrl(onlineResource.getCIOnlineResource().getLinkage().getCharacterString().getValue().toString());
+                                                    });
+                                                }));
+                                                results.add(providerModel);
+                                            }
+                                            else if(party.getAbstractCIParty().getValue() instanceof CIIndividualType2 individualType2) {
+                                                // TODO: https://geonetwork-edge.edge.aodn.org.au/geonetwork/srv/eng/catalog.search#/metadata/201112060/formatters/xsl-view?root=div&view=advanced
+                                                logger.info(individualType2.getName().getCharacterString().getValue());
+                                            }
+                                            else {
+                                                logger.error("Unable to cast getAbstractCIParty().getValue() to CIOrganisationType2 or CIIndividualType2 for metadata record: {}", mapUUID(source));
+                                            }
+                                        }));
+                            }
+                            else {
+                                logger.warn("getContact().getAbstractResponsibility() in mapProviders is not of type CIResponsibilityType2 for UUID {}", mapUUID(source));
+                            }
+                        }));
         return results;
     }
 
