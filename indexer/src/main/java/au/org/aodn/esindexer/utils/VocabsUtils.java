@@ -24,11 +24,9 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.scheduling.annotation.Scheduled;
 
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.StreamSupport;
 
 
@@ -61,40 +59,45 @@ public class VocabsUtils {
 
 
     // indexArdcVocabs's input parameters are extendable (e.g platformVocabs, organisationVocabs etc.), currently just parameterVocabs.
-    protected void indexArdcVocabs(List<ParameterVocabModel> parameterVocabs) throws IOException {
-        BulkRequest.Builder bulkRequest = new BulkRequest.Builder();
+    protected void indexAllVocabs(List<ParameterVocabModel> parameterVocabs) throws IOException {
+        List<ArdcVocabModel> vocabs = new ArrayList<>();
 
-        List<ParameterVocabModel> lowerCaseParameterVocabs = new ArrayList<>();
-
-        // recreate index from mapping JSON file
-        elasticSearchIndexService.createIndexFromMappingJSONFile(AppConstants.VOCABS_INDEX_MAPPING_SCHEMA_FILE, vocabsIndexName);
-        log.info("Indexing all parameterVocabModel to {}", vocabsIndexName);
         for (ParameterVocabModel parameterVocab : parameterVocabs) {
             ParameterVocabModel lowerCaseParameterVocab = ParameterVocabModel.builder()
                     .label(parameterVocab.getLabel().toLowerCase())
                     .broader(parameterVocab.getBroader().stream().peek(item -> item.setLabel(item.getLabel().toLowerCase())).collect(Collectors.toList()))
                     .narrower(parameterVocab.getNarrower().stream().peek(item -> item.setLabel(item.getLabel().toLowerCase())).collect(Collectors.toList()))
                     .build();
-            lowerCaseParameterVocabs.add(lowerCaseParameterVocab);
+            ArdcVocabModel vocab = ArdcVocabModel.builder().parameterVocabModel(lowerCaseParameterVocab).build();
+            vocabs.add(vocab);
         }
 
-        try {
-            ArdcVocabModel ardcVocabModel = ArdcVocabModel.builder()
-                    .parameterVocabModels(lowerCaseParameterVocabs).build();
+        // recreate index from mapping JSON file
+        elasticSearchIndexService.createIndexFromMappingJSONFile(AppConstants.VOCABS_INDEX_MAPPING_SCHEMA_FILE, vocabsIndexName);
+        log.info("Indexing all vocabs to {}", vocabsIndexName);
 
-            // convert parameterVocab values to binary data
-            log.debug("Ingested json is {}", indexerObjectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(ardcVocabModel));
+        bulkIndexVocabs(vocabs);
+    }
 
-            // send bulk request to Elasticsearch
-            bulkRequest.operations(op -> op
-                .index(idx -> idx
-                    .index(vocabsIndexName)
-                    .document(ardcVocabModel)
-                )
-            );
-        } catch (JsonProcessingException e) {
-            log.error("Failed to ingest ardcVocabModel to {}", vocabsIndexName);
-            throw new RuntimeException(e);
+    protected void bulkIndexVocabs(List<ArdcVocabModel> vocabs) throws IOException {
+        // count portal index documents, or create index if not found from defined mapping JSON file
+        BulkRequest.Builder bulkRequest = new BulkRequest.Builder();
+
+        for (ArdcVocabModel vocab : vocabs) {
+            try {
+                // convert vocab values to binary data
+                log.debug("Ingested json is {}", indexerObjectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(vocab));
+                // send bulk request to Elasticsearch
+                bulkRequest.operations(op -> op
+                        .index(idx -> idx
+                                .index(vocabsIndexName)
+                                .document(vocab)
+                        )
+                );
+            } catch (JsonProcessingException e) {
+                log.error("Failed to ingest parameterVocabs to {}", vocabsIndexName);
+                throw new RuntimeException(e);
+            }
         }
 
         BulkResponse result = portalElasticsearchClient.bulk(bulkRequest.build());
@@ -112,9 +115,9 @@ public class VocabsUtils {
                 }
             }
         } else {
-            log.info("Finished bulk indexing ardcVocabModel items to index: " + vocabsIndexName);
+            log.info("Finished bulk indexing items to index: {}", vocabsIndexName);
         }
-        log.info("Total documents in index: " + vocabsIndexName + " is " + elasticSearchIndexService.getDocumentsCount(vocabsIndexName));
+        log.info("Total documents in index: {} is {}", vocabsIndexName, elasticSearchIndexService.getDocumentsCount(vocabsIndexName));
     }
 
     /*
@@ -124,15 +127,15 @@ public class VocabsUtils {
     public void refreshVocabsIndex() throws IOException {
         log.info("Fetching vocabularies from ARDC");
         List<ParameterVocabModel> parameterVocabs = ardcVocabsService.getParameterVocab(vocabApi);
-        indexArdcVocabs(parameterVocabs);
+        indexAllVocabs(parameterVocabs);
     }
 
     @Cacheable(AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS_CACHE)
     public List<JsonNode> getParameterVocabs() throws IOException {
-        return this.getVocabsByKey("parameter_vocabs");
+        return this.groupVocabsByKey("parameter_vocab");
     }
 
-    protected List<JsonNode> getVocabsByKey(String key) throws IOException {
+    protected List<JsonNode> groupVocabsByKey(String key) throws IOException {
         List<JsonNode> vocabs = new ArrayList<>();
         log.info("Fetching {} vocabularies from {}", key, vocabsIndexName);
         try {
@@ -146,8 +149,6 @@ public class VocabsUtils {
                 );
                 response.hits().hits().stream()
                         .map(hit -> Objects.requireNonNull(hit.source()).get(key))
-                        .filter(Objects::nonNull)
-                        .flatMap(vocabArray -> StreamSupport.stream(vocabArray.spliterator(), false)) // process all elements as if they were in a single list.
                         .forEach(vocabs::add);
             }
         } catch (ElasticsearchException | IOException e) {
