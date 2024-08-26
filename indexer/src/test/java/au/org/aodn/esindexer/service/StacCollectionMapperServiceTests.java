@@ -272,4 +272,19 @@ public class StacCollectionMapperServiceTests {
                 "Stac not equals for sample_multiple_temporal_null_stac"
         );
     }
+
+    @Test
+    public void verifyNullKeywords() throws IOException {
+        String xml = readResourceFile("classpath:canned/keywords_null.xml");
+        String expected = readResourceFile("classpath:canned/keywords_null_stac.json");
+        indexerService.indexMetadata(xml);
+
+        Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
+        String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
+        Assertions.assertEquals(
+                objectMapper.readTree(expected),
+                objectMapper.readTree(out.strip()),
+                "Stac not equals for keywords_null"
+        );
+    }
 }

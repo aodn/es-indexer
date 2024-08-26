@@ -8,6 +8,8 @@ import co.elastic.clients.transport.ElasticsearchTransportBase;
 import co.elastic.clients.transport.rest_client.RestClientTransport;
 import org.apache.http.HttpHeaders;
 import org.apache.http.HttpHost;
+import org.apache.http.client.config.CookieSpecs;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.message.BasicHeader;
 import org.elasticsearch.client.RestClient;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -66,6 +68,15 @@ public class GeoNetworkSearchConfig {
                         new BasicHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE),
                         new BasicHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
                 })
+                // Avoid issue 2024-08-25 07:17:25.862 WARN org.apache.http.client.protocol.ResponseProcessCookies -
+                // Invalid cookie header: "Set-Cookie: AWSALB=R21FGZ5zfcmfEoTzPXcvYYgIVrPX5I7qmbzhltwyuGTQLQ5jrn9uvU8
+                // spUPEFELYK1yZQLtfaQoLBu/tE451zrEaTlD5L6kaSnPvkR+OrhljaMAyG2cHhuiwtRxS;
+                // Expires=Sun, 01 Sep 2024 07:17:25 GMT; Path=/".
+                // Invalid 'expires' attribute: Sun, 01 Sep 2024 07:17:25 GMT
+                .setHttpClientConfigCallback(httpClientBuilder -> httpClientBuilder
+                        .setDefaultRequestConfig(RequestConfig.custom()
+                                .setCookieSpec(CookieSpecs.STANDARD)
+                                .build()))
                 .build();
     }
 
