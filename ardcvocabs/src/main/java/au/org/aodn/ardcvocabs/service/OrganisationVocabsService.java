@@ -1,8 +1,6 @@
 package au.org.aodn.ardcvocabs.service;
 
 import au.org.aodn.ardcvocabs.model.OrganisationVocabModel;
-import au.org.aodn.ardcvocabs.model.ParameterVocabModel;
-import au.org.aodn.ardcvocabs.model.PlatformVocabModel;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.TextNode;
@@ -20,12 +18,10 @@ import java.util.function.Function;
 
 
 @Slf4j
-public class ArdcVocabsService {
+public class OrganisationVocabsService {
     @Autowired
     protected RestTemplate ardcVocabRestTemplate;
 
-    protected static String parameterVocabApiPath = "/aodn-parameter-category-vocabulary/version-2-1/concept.json";
-    protected static String platformVocabApiPath = "/aodn-platform-vocabulary/version-6-1/concept.json";
     protected static String organisationVocabApiPath = "/aodn-organisation-vocabulary/version-2-5/concept.json";
 
     protected static String leafPath = "/aodn-discovery-parameter-vocabulary/version-1-6/concept.json";
@@ -48,8 +44,8 @@ public class ArdcVocabsService {
      * @param vocabApiBase
      * @return
      */
-    protected Map<String, List<ParameterVocabModel>> getLeafNodeOfParameterVocab(String vocabApiBase) {
-        Map<String, List<ParameterVocabModel>> result = new HashMap<>();
+    protected Map<String, List<OrganisationVocabModel>> getLeafNodeOfParameterVocab(String vocabApiBase) {
+        Map<String, List<OrganisationVocabModel>> result = new HashMap<>();
         String url = String.format(vocabApiBase + leafPath);
 
         while (url != null) {
@@ -70,7 +66,7 @@ public class ArdcVocabsService {
                             if(isNodeValid.apply(d, "result") && isNodeValid.apply(d.get("result"), "primaryTopic")) {
                                 JsonNode target = d.get("result").get("primaryTopic");
 
-                                ParameterVocabModel model = ParameterVocabModel
+                                OrganisationVocabModel model = OrganisationVocabModel
                                         .builder()
                                         .label(label.apply(target))
                                         .definition(definition.apply(target))
@@ -108,17 +104,17 @@ public class ArdcVocabsService {
         return result;
     }
 
-    protected ParameterVocabModel buildParameterVocabModel(JsonNode currentNode, JsonNode outerNode) {
+    protected OrganisationVocabModel buildOrganisationVocabModel(JsonNode currentNode, JsonNode outerNode) {
         if (currentNode instanceof ObjectNode objectNode) {
             if (objectNode.has("prefLabel") && objectNode.has("_about")) {
-                return ParameterVocabModel.builder()
+                return OrganisationVocabModel.builder()
                         .about(about.apply(currentNode))
                         .label(label.apply(currentNode))
                         .build();
             }
         } else if (currentNode instanceof TextNode textNode) {
             if (textNode.asText().contains("parameter_classes")) {
-                return ParameterVocabModel.builder()
+                return OrganisationVocabModel.builder()
                         .about(textNode.asText())
                         .label(this.findLabelByAbout(outerNode, textNode.asText()))
                         .build();
@@ -136,11 +132,11 @@ public class ArdcVocabsService {
         return null;
     }
 
-    public List<ParameterVocabModel> getParameterVocabs(String vocabApiBase) {
-        Map<String, List<ParameterVocabModel>> leaves = getLeafNodeOfParameterVocab(vocabApiBase);
-        List<ParameterVocabModel> result = new ArrayList<>();
+    public List<OrganisationVocabModel> getOrganisationVocabs(String vocabApiBase) {
+        Map<String, List<OrganisationVocabModel>> leaves = getLeafNodeOfParameterVocab(vocabApiBase);
+        List<OrganisationVocabModel> results = new ArrayList<>();
 
-        String url = String.format(vocabApiBase + parameterVocabApiPath);
+        String url = String.format(vocabApiBase + organisationVocabApiPath);
 
         while (url != null) {
             try {
@@ -153,21 +149,21 @@ public class ArdcVocabsService {
 
                     if (!node.isEmpty() && node.has("items") && !node.get("items").isEmpty()) {
                         for (JsonNode j : node.get("items")) {
-                            List<ParameterVocabModel> broader = new ArrayList<>();
-                            List<ParameterVocabModel> narrower = new ArrayList<>();
+                            List<OrganisationVocabModel> broader = new ArrayList<>();
+                            List<OrganisationVocabModel> narrower = new ArrayList<>();
 
 
                             log.debug("Processing label {}", label.apply(j));
 
                             if (j.has("broader")) {
                                 for (JsonNode b : j.get("broader")) {
-                                    broader.add(this.buildParameterVocabModel(b, node));
+                                    broader.add(this.buildOrganisationVocabModel(b, node));
                                 }
                             }
 
                             if (j.has("narrower")) {
                                 for (JsonNode b : j.get("narrower")) {
-                                    ParameterVocabModel c = this.buildParameterVocabModel(b, node);
+                                    OrganisationVocabModel c = this.buildOrganisationVocabModel(b, node);
                                     // The record comes from ardc have two levels only, so the second level for sure
                                     // is empty, but the third level info comes form another link (aka the leaves)
                                     // and therefore we can attach it to the second level to for the third.
@@ -178,7 +174,7 @@ public class ArdcVocabsService {
                                 }
                             }
 
-                            ParameterVocabModel model = ParameterVocabModel
+                            OrganisationVocabModel model = OrganisationVocabModel
                                     .builder()
                                     .label(label.apply(j))
                                     .definition(definition.apply(j))
@@ -187,7 +183,7 @@ public class ArdcVocabsService {
                                     .narrower(narrower)
                                     .build();
 
-                            result.add(model);
+                            results.add(model);
                         }
                     }
 
@@ -207,20 +203,6 @@ public class ArdcVocabsService {
             }
         }
 
-        return result;
-    }
-
-    // TODO: getPlatformVocabs
-    public List<PlatformVocabModel> getPlatformVocabs(String vocabApiBase) {
-        String url = String.format(vocabApiBase + platformVocabApiPath);
-        List<PlatformVocabModel> results = new ArrayList<>();
-        return results;
-    }
-
-    // TODO: getOrganisationVocabs
-    public List<OrganisationVocabModel> getOrganisationVocabs(String vocabApiBase) {
-        String url = String.format(vocabApiBase + organisationVocabApiPath);
-        List<OrganisationVocabModel> results = new ArrayList<>();
         return results;
     }
 }

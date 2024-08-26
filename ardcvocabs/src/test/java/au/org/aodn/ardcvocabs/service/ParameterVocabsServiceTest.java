@@ -22,13 +22,13 @@ import static org.springframework.test.util.AssertionErrors.assertEquals;
 import static org.springframework.test.util.AssertionErrors.assertTrue;
 
 @ExtendWith(MockitoExtension.class)
-public class ArdcVocabsServiceTest {
+public class ParameterVocabsServiceTest {
 
     @Mock
     RestTemplate mockRestTemplate;
 
     @InjectMocks
-    protected ArdcVocabsService ardcVocabsService;
+    protected ParameterVocabsService parameterVocabsService;
 
     ObjectMapper objectMapper = new ObjectMapper();
 
@@ -53,7 +53,7 @@ public class ArdcVocabsServiceTest {
         Mockito.when(mockRestTemplate.<ObjectNode>getForObject(endsWith("/aodn-discovery-parameter-vocabulary/version-1-6/resource.json?uri=http://vocab.aodn.org.au/def/discovery_parameter/entity/390"), any(), any(Object[].class)))
                 .thenReturn((ObjectNode)objectMapper.readTree(ResourceUtils.getFile("classpath:databag/vocab_entity_390.json")));
 
-        List<ParameterVocabModel> parameterVocabModelList = ardcVocabsService.getParameterVocabs("");
+        List<ParameterVocabModel> parameterVocabModelList = parameterVocabsService.getParameterVocabs("");
         assertEquals("Total equals", 33, parameterVocabModelList.size());
 
 
