@@ -401,7 +401,7 @@ public abstract class StacCollectionMapperService {
     }
 
     protected List<ConceptModel> mapThemesConcepts(MDKeywordsPropertyType descriptiveKeyword) {
-        List<ConceptModel> concepts = new ArrayList<>();
+        final List<ConceptModel> concepts = new ArrayList<>();
         safeGet(() -> descriptiveKeyword.getMDKeywords().getKeyword())
                 .ifPresent(p -> p.forEach(keyword -> {
                     if (keyword != null) {
@@ -644,37 +644,35 @@ public abstract class StacCollectionMapperService {
     // TODO: need to handle exception
     @Named("mapProviders")
     List<ProviderModel> mapProviders(MDMetadataType source) {
-        List<ProviderModel> results = new ArrayList<>();
-        source.getContact().forEach(item -> {
-            if (item.getAbstractResponsibility() != null) {
-                if(item.getAbstractResponsibility().getValue() instanceof CIResponsibilityType2 ciResponsibility) {
-                    ciResponsibility.getParty().forEach(party -> {
-                        try
-                        {
-                            ProviderModel providerModel = ProviderModel.builder().build();
-                            providerModel.setRoles(Collections.singletonList(ciResponsibility.getRole().getCIRoleCode().getCodeListValue()));
-                            CIOrganisationType2 organisationType2 = (CIOrganisationType2) party.getAbstractCIParty().getValue();
-                            providerModel.setName(organisationType2.getName() != null ? organisationType2.getName().getCharacterString().getValue().toString() : "");
-                            organisationType2.getIndividual().forEach(individual -> individual.getCIIndividual().getContactInfo().forEach(contactInfo -> {
-                                contactInfo.getCIContact().getOnlineResource().forEach(onlineResource -> {
-                                    providerModel.setUrl(onlineResource.getCIOnlineResource().getLinkage().getCharacterString().getValue().toString());
-                                });
-                            }));
-                            results.add(providerModel);
-                        }
-                        catch (ClassCastException e) {
-                            logger.error("Unable to cast getAbstractCIParty().getValue() to CIOrganisationType2 for metadata record: {}", mapUUID(source));
-                        }
-                    });
+        final List<ProviderModel> results = new ArrayList<>();
+        safeGet(source::getContact)
+            .ifPresent(contract -> contract.forEach(item -> {
+                if (item.getAbstractResponsibility() != null) {
+                    if (item.getAbstractResponsibility().getValue() instanceof CIResponsibilityType2 ciResponsibility) {
+                        ciResponsibility.getParty().forEach(party -> {
+                            try {
+                                ProviderModel providerModel = ProviderModel.builder().build();
+                                providerModel.setRoles(Collections.singletonList(ciResponsibility.getRole().getCIRoleCode().getCodeListValue()));
+                                CIOrganisationType2 organisationType2 = (CIOrganisationType2) party.getAbstractCIParty().getValue();
+                                providerModel.setName(organisationType2.getName() != null ? organisationType2.getName().getCharacterString().getValue().toString() : "");
+                                organisationType2.getIndividual().forEach(individual -> individual.getCIIndividual().getContactInfo().forEach(contactInfo -> {
+                                    contactInfo.getCIContact().getOnlineResource().forEach(onlineResource -> {
+                                        providerModel.setUrl(onlineResource.getCIOnlineResource().getLinkage().getCharacterString().getValue().toString());
+                                    });
+                                }));
+                                results.add(providerModel);
+                            } catch (ClassCastException e) {
+                                logger.error("Unable to cast getAbstractCIParty().getValue() to CIOrganisationType2 for metadata record: {}", mapUUID(source));
+                            }
+                        });
+                    } else {
+                        logger.warn("getContact().getAbstractResponsibility() in mapProviders is not of type CIResponsibilityType2 for UUID {}", mapUUID(source));
+                    }
+                } else {
+                    logger.warn("Null value fround for getContact().getAbstractResponsibility() in mapProviders transform for UUID {}", mapUUID(source));
                 }
-                else {
-                    logger.warn("getContact().getAbstractResponsibility() in mapProviders is not of type CIResponsibilityType2 for UUID {}", mapUUID(source));
-                }
-            }
-            else {
-                logger.warn("Null value fround for getContact().getAbstractResponsibility() in mapProviders transform for UUID {}", mapUUID(source));
-            }
-        });
+            }));
+
         return results;
     }
 
@@ -725,20 +723,19 @@ public abstract class StacCollectionMapperService {
 
     private List<String> findLicenseInCitationBlock(MDLegalConstraintsType legalConstraintsType) {
         List<String> licenses = new ArrayList<>();
-        if (safeGet(legalConstraintsType::getReference).isEmpty()) {
-            return licenses;
-        }
-        legalConstraintsType.getReference().forEach(reference -> {
-
-            var title = safeGet(() -> {
-                var ciCitation = (CICitationType2) reference.getAbstractCitation().getValue();
-                return ciCitation.getTitle().getCharacterString().getValue().toString();
-            });
-            if (title.isEmpty()) {
-                return;
-            }
-            licenses.add(title.get());
-        });
+        safeGet(legalConstraintsType::getReference)
+                .ifPresent(i -> {
+                    i.forEach(reference -> {
+                        var title = safeGet(() -> {
+                            var ciCitation = (CICitationType2) reference.getAbstractCitation().getValue();
+                            return ciCitation.getTitle().getCharacterString().getValue().toString();
+                        });
+                        if (title.isEmpty()) {
+                            return;
+                        }
+                        licenses.add(title.get());
+                    });
+                });
         return licenses;
     }
 
