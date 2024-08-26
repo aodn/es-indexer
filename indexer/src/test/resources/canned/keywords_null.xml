@@ -1,0 +1,725 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdb:MD_Metadata xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xmlns:cat="http://standards.iso.org/iso/19115/-3/cat/1.0"
+                 xmlns:gfc="http://standards.iso.org/iso/19110/gfc/1.1"
+                 xmlns:cit="http://standards.iso.org/iso/19115/-3/cit/2.0"
+                 xmlns:gcx="http://standards.iso.org/iso/19115/-3/gcx/1.0"
+                 xmlns:gex="http://standards.iso.org/iso/19115/-3/gex/1.0"
+                 xmlns:lan="http://standards.iso.org/iso/19115/-3/lan/1.0"
+                 xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0"
+                 xmlns:mas="http://standards.iso.org/iso/19115/-3/mas/1.0"
+                 xmlns:mcc="http://standards.iso.org/iso/19115/-3/mcc/1.0"
+                 xmlns:mco="http://standards.iso.org/iso/19115/-3/mco/1.0"
+                 xmlns:mda="http://standards.iso.org/iso/19115/-3/mda/1.0"
+                 xmlns:mdb="http://standards.iso.org/iso/19115/-3/mdb/2.0"
+                 xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/2.0"
+                 xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/2.0"
+                 xmlns:mex="http://standards.iso.org/iso/19115/-3/mex/1.0"
+                 xmlns:mmi="http://standards.iso.org/iso/19115/-3/mmi/1.0"
+                 xmlns:mpc="http://standards.iso.org/iso/19115/-3/mpc/1.0"
+                 xmlns:mrc="http://standards.iso.org/iso/19115/-3/mrc/2.0"
+                 xmlns:mrd="http://standards.iso.org/iso/19115/-3/mrd/1.0"
+                 xmlns:mri="http://standards.iso.org/iso/19115/-3/mri/1.0"
+                 xmlns:mrl="http://standards.iso.org/iso/19115/-3/mrl/2.0"
+                 xmlns:mrs="http://standards.iso.org/iso/19115/-3/mrs/1.0"
+                 xmlns:msr="http://standards.iso.org/iso/19115/-3/msr/2.0"
+                 xmlns:mdq="http://standards.iso.org/iso/19157/-2/mdq/1.0"
+                 xmlns:dqm="http://standards.iso.org/iso/19157/-2/dqm/1.0"
+                 xmlns:mac="http://standards.iso.org/iso/19115/-3/mac/2.0"
+                 xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0"
+                 xmlns:gml="http://www.opengis.net/gml/3.2"
+                 xmlns:xlink="http://www.w3.org/1999/xlink">
+    <mdb:metadataIdentifier>
+        <mcc:MD_Identifier>
+            <mcc:code>
+                <gco:CharacterString>15e4afbb-5f76-4053-a0d6-a7cf60059f5a</gco:CharacterString>
+            </mcc:code>
+        </mcc:MD_Identifier>
+    </mdb:metadataIdentifier>
+    <mdb:defaultLocale>
+        <lan:PT_Locale>
+            <lan:language>
+                <lan:LanguageCode codeList="https://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#LanguageCode"
+                                  codeListValue="eng">eng</lan:LanguageCode>
+            </lan:language>
+            <lan:characterEncoding>
+                <lan:MD_CharacterSetCode codeList="https://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_CharacterSetCode"
+                                         codeListValue="utf8">utf8</lan:MD_CharacterSetCode>
+            </lan:characterEncoding>
+        </lan:PT_Locale>
+    </mdb:defaultLocale>
+    <mdb:parentMetadata uuidref="d150240e-3cb7-437f-90ca-b9fafe700a19"/>
+    <mdb:metadataScope>
+        <mdb:MD_MetadataScope>
+            <mdb:resourceScope>
+                <mcc:MD_ScopeCode codeList="https://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ScopeCode"
+                                  codeListValue="dataset">dataset</mcc:MD_ScopeCode>
+            </mdb:resourceScope>
+            <mdb:name>
+                <gco:CharacterString>Predicted seabed gravel, mud and sand content in the Timor Sea region in the Australian continental EEZ 2018</gco:CharacterString>
+            </mdb:name>
+        </mdb:MD_MetadataScope>
+    </mdb:metadataScope>
+    <mdb:contact>
+        <cit:CI_Responsibility>
+            <cit:role>
+                <cit:CI_RoleCode codeList="https://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode"
+                                 codeListValue="pointOfContact">pointOfContact</cit:CI_RoleCode>
+            </cit:role>
+            <cit:party>
+                <cit:CI_Individual>
+                    <cit:name>
+                        <gco:CharacterString>Li, J.</gco:CharacterString>
+                    </cit:name>
+                </cit:CI_Individual>
+            </cit:party>
+        </cit:CI_Responsibility>
+        <cit:CI_Responsibility>
+            <cit:role>
+                <cit:CI_RoleCode codeList="https://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode"
+                                 codeListValue="pointOfContact">pointOfContact</cit:CI_RoleCode>
+            </cit:role>
+            <cit:party>
+                <cit:CI_Organisation>
+                    <cit:name>
+                        <gco:CharacterString>Commonwealth of Australia (Geoscience Australia)</gco:CharacterString>
+                    </cit:name>
+                    <cit:contactInfo>
+                        <cit:CI_Contact>
+                            <cit:phone>
+                                <cit:CI_Telephone>
+                                    <cit:number>
+                                        <gco:CharacterString>1800 800 173</gco:CharacterString>
+                                    </cit:number>
+                                    <cit:numberType>
+                                        <cit:CI_TelephoneTypeCode codeList="https://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_TelephoneTypeCode"
+                                                                  codeListValue="voice">voice</cit:CI_TelephoneTypeCode>
+                                    </cit:numberType>
+                                </cit:CI_Telephone>
+                            </cit:phone>
+                            <cit:phone>
+                                <cit:CI_Telephone>
+                                    <cit:number>
+                                        <gco:CharacterString>02 6249 9960</gco:CharacterString>
+                                    </cit:number>
+                                    <cit:numberType>
+                                        <cit:CI_TelephoneTypeCode codeList="https://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_TelephoneTypeCode"
+                                                                  codeListValue="facsimile">facsimile</cit:CI_TelephoneTypeCode>
+                                    </cit:numberType>
+                                </cit:CI_Telephone>
+                            </cit:phone>
+                            <cit:address>
+                                <cit:CI_Address>
+                                    <cit:deliveryPoint>
+                                        <gco:CharacterString>Cnr Jerrabomberra Ave and Hindmarsh Dr GPO Box 378</gco:CharacterString>
+                                    </cit:deliveryPoint>
+                                    <cit:city>
+                                        <gco:CharacterString>Canberra</gco:CharacterString>
+                                    </cit:city>
+                                    <cit:administrativeArea>
+                                        <gco:CharacterString>ACT</gco:CharacterString>
+                                    </cit:administrativeArea>
+                                    <cit:postalCode>
+                                        <gco:CharacterString>2601</gco:CharacterString>
+                                    </cit:postalCode>
+                                    <cit:country>
+                                        <gco:CharacterString>Australia</gco:CharacterString>
+                                    </cit:country>
+                                    <cit:electronicMailAddress>
+                                        <gco:CharacterString>clientservices@ga.gov.au</gco:CharacterString>
+                                    </cit:electronicMailAddress>
+                                </cit:CI_Address>
+                            </cit:address>
+                        </cit:CI_Contact>
+                    </cit:contactInfo>
+                </cit:CI_Organisation>
+            </cit:party>
+        </cit:CI_Responsibility>
+    </mdb:contact>
+    <mdb:dateInfo>
+        <cit:CI_Date>
+            <cit:date>
+                <gco:DateTime>2018-09-28T01:24:46</gco:DateTime>
+            </cit:date>
+            <cit:dateType>
+                <cit:CI_DateTypeCode codeList="https://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode"
+                                     codeListValue="revision">revision</cit:CI_DateTypeCode>
+            </cit:dateType>
+        </cit:CI_Date>
+    </mdb:dateInfo>
+    <mdb:metadataStandard>
+        <cit:CI_Citation>
+            <cit:title>
+                <gco:CharacterString>AU/NZS ISO 19115-1:2014</gco:CharacterString>
+            </cit:title>
+            <cit:edition>
+                <gco:CharacterString/>
+                <gco:CharacterString/>
+                <gco:CharacterString/>
+            </cit:edition>
+        </cit:CI_Citation>
+    </mdb:metadataStandard>
+    <mdb:metadataStandard>
+        <cit:CI_Citation>
+            <cit:title>
+                <gco:CharacterString>ISO 19115-1:2014</gco:CharacterString>
+            </cit:title>
+            <cit:edition>
+                <gco:CharacterString/>
+                <gco:CharacterString/>
+                <gco:CharacterString/>
+            </cit:edition>
+        </cit:CI_Citation>
+    </mdb:metadataStandard>
+    <mdb:metadataStandard>
+        <cit:CI_Citation>
+            <cit:title>
+                <gco:CharacterString>ISO 19115-3</gco:CharacterString>
+            </cit:title>
+            <cit:edition>
+                <gco:CharacterString/>
+                <gco:CharacterString/>
+                <gco:CharacterString/>
+            </cit:edition>
+        </cit:CI_Citation>
+    </mdb:metadataStandard>
+    <mdb:identificationInfo>
+        <mri:MD_DataIdentification>
+            <mri:citation>
+                <cit:CI_Citation>
+                    <cit:title>
+                        <gco:CharacterString>Predicted seabed gravel, mud and sand content in the Timor Sea region in the Australian continental EEZ 2018</gco:CharacterString>
+                    </cit:title>
+                    <cit:date>
+                        <cit:CI_Date>
+                            <cit:date>
+                                <gco:DateTime>2019-03-16T00:00:00</gco:DateTime>
+                            </cit:date>
+                            <cit:dateType>
+                                <cit:CI_DateTypeCode codeList="https://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode"
+                                                     codeListValue="creation">creation</cit:CI_DateTypeCode>
+                            </cit:dateType>
+                        </cit:CI_Date>
+                    </cit:date>
+                    <cit:date>
+                        <cit:CI_Date>
+                            <cit:date>
+                                <gco:DateTime>2019-03-16T04:32:32</gco:DateTime>
+                            </cit:date>
+                            <cit:dateType>
+                                <cit:CI_DateTypeCode codeList="https://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode"
+                                                     codeListValue="publication">publication</cit:CI_DateTypeCode>
+                            </cit:dateType>
+                        </cit:CI_Date>
+                    </cit:date>
+                    <cit:date>
+                        <cit:CI_Date>
+                            <cit:date>
+                                <gco:DateTime>2019-04-09T01:08:51</gco:DateTime>
+                            </cit:date>
+                            <cit:dateType>
+                                <cit:CI_DateTypeCode codeList="https://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode"
+                                                     codeListValue="revision">revision</cit:CI_DateTypeCode>
+                            </cit:dateType>
+                        </cit:CI_Date>
+                    </cit:date>
+                    <cit:date>
+                        <cit:CI_Date>
+                            <cit:date>
+                                <gco:DateTime>2019-05-20T05:09:04</gco:DateTime>
+                            </cit:date>
+                            <cit:dateType>
+                                <cit:CI_DateTypeCode codeList="https://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode"
+                                                     codeListValue="revision">revision</cit:CI_DateTypeCode>
+                            </cit:dateType>
+                        </cit:CI_Date>
+                    </cit:date>
+                    <cit:identifier>
+                        <mcc:MD_Identifier>
+                            <mcc:code>
+                                <gco:CharacterString>http://pid.geoscience.gov.au/dataset/ga/123300</gco:CharacterString>
+                            </mcc:code>
+                            <mcc:codeSpace>
+                                <gco:CharacterString>Geoscience Australia Persistent Identifier</gco:CharacterString>
+                            </mcc:codeSpace>
+                        </mcc:MD_Identifier>
+                    </cit:identifier>
+                    <cit:citedResponsibleParty>
+                        <cit:CI_Responsibility>
+                            <cit:role>
+                                <cit:CI_RoleCode codeList="https://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode"
+                                                 codeListValue="author">author</cit:CI_RoleCode>
+                            </cit:role>
+                            <cit:party>
+                                <cit:CI_Individual>
+                                    <cit:name>
+                                        <gco:CharacterString>Li, J.</gco:CharacterString>
+                                    </cit:name>
+                                </cit:CI_Individual>
+                            </cit:party>
+                        </cit:CI_Responsibility>
+                    </cit:citedResponsibleParty>
+                    <cit:series>
+                        <cit:CI_Series>
+                            <cit:name gco:nilReason="missing">
+                                <gco:CharacterString/>
+                            </cit:name>
+                            <cit:issueIdentification gco:nilReason="missing">
+                                <gco:CharacterString/>
+                            </cit:issueIdentification>
+                        </cit:CI_Series>
+                    </cit:series>
+                </cit:CI_Citation>
+            </mri:citation>
+            <mri:abstract>
+                <gco:CharacterString>This dataset provides the spatially continuous data of seabed gravel (sediment fraction &gt;2000 µm), mud  (sediment fraction &lt; 63 µm) and sand content (sediment fraction 63-2000 µm) expressed as a weight percentage ranging from 0 to 100%, presented in 10 m resolution raster grids format and ascii text file.&lt;/p&gt;
+
+                    The dataset covers the eight areas in the Timor Sea region in the Australian continental EEZ.&lt;/p&gt;
+
+                    This dataset supersedes previous predictions of sediment gravel, mud and sand content for the basin with demonstrated improvements in accuracy. Accuracy of predictions varies with sediment types, with a VEcv = 71% for mud, VEcv = 72% sand and VEcv = 42% for gravel. Artefacts occur in this dataset as a result of noises associated predictive variables (e.g., horizontal and vertical lines resulted from predictive variables derived from backscatter data are the most apparent ones). To obtain the most accurate interpretation of sediment distribution in these areas, it is recommended that noises with backscatter data should be reduced and predictions updated.&lt;/p&gt;
+
+                    This research is supported by the National Environmental Science Program (NESP) Marine Biodiversity Hub through Project D1.</gco:CharacterString>
+            </mri:abstract>
+            <mri:purpose gco:nilReason="missing">
+                <gco:CharacterString/>
+            </mri:purpose>
+            <mri:pointOfContact>
+                <cit:CI_Responsibility>
+                    <cit:role>
+                        <cit:CI_RoleCode codeList="https://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode"
+                                         codeListValue="pointOfContact">pointOfContact</cit:CI_RoleCode>
+                    </cit:role>
+                    <cit:party>
+                        <cit:CI_Individual>
+                            <cit:name>
+                                <gco:CharacterString>Li, J.</gco:CharacterString>
+                            </cit:name>
+                        </cit:CI_Individual>
+                    </cit:party>
+                </cit:CI_Responsibility>
+            </mri:pointOfContact>
+            <mri:pointOfContact>
+                <cit:CI_Responsibility>
+                    <cit:role>
+                        <cit:CI_RoleCode codeList="https://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode"
+                                         codeListValue="resourceProvider">resourceProvider</cit:CI_RoleCode>
+                    </cit:role>
+                    <cit:party>
+                        <cit:CI_Organisation>
+                            <cit:name>
+                                <gco:CharacterString>Environmental Geoscience Division</gco:CharacterString>
+                            </cit:name>
+                        </cit:CI_Organisation>
+                    </cit:party>
+                </cit:CI_Responsibility>
+            </mri:pointOfContact>
+            <mri:pointOfContact>
+                <cit:CI_Responsibility>
+                    <cit:role>
+                        <cit:CI_RoleCode codeList="https://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode"
+                                         codeListValue="pointOfContact">pointOfContact</cit:CI_RoleCode>
+                    </cit:role>
+                    <cit:party>
+                        <cit:CI_Organisation>
+                            <cit:name>
+                                <gco:CharacterString>Commonwealth of Australia (Geoscience Australia)</gco:CharacterString>
+                            </cit:name>
+                            <cit:contactInfo>
+                                <cit:CI_Contact>
+                                    <cit:phone>
+                                        <cit:CI_Telephone>
+                                            <cit:number>
+                                                <gco:CharacterString>1800 800 173</gco:CharacterString>
+                                            </cit:number>
+                                            <cit:numberType>
+                                                <cit:CI_TelephoneTypeCode codeList="https://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_TelephoneTypeCode"
+                                                                          codeListValue="voice">voice</cit:CI_TelephoneTypeCode>
+                                            </cit:numberType>
+                                        </cit:CI_Telephone>
+                                    </cit:phone>
+                                    <cit:phone>
+                                        <cit:CI_Telephone>
+                                            <cit:number>
+                                                <gco:CharacterString>02 6249 9960</gco:CharacterString>
+                                            </cit:number>
+                                            <cit:numberType>
+                                                <cit:CI_TelephoneTypeCode codeList="https://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_TelephoneTypeCode"
+                                                                          codeListValue="facsimile">facsimile</cit:CI_TelephoneTypeCode>
+                                            </cit:numberType>
+                                        </cit:CI_Telephone>
+                                    </cit:phone>
+                                    <cit:address>
+                                        <cit:CI_Address>
+                                            <cit:deliveryPoint>
+                                                <gco:CharacterString>Cnr Jerrabomberra Ave and Hindmarsh Dr GPO Box 378</gco:CharacterString>
+                                            </cit:deliveryPoint>
+                                            <cit:city>
+                                                <gco:CharacterString>Canberra</gco:CharacterString>
+                                            </cit:city>
+                                            <cit:administrativeArea>
+                                                <gco:CharacterString>ACT</gco:CharacterString>
+                                            </cit:administrativeArea>
+                                            <cit:postalCode>
+                                                <gco:CharacterString>2601</gco:CharacterString>
+                                            </cit:postalCode>
+                                            <cit:country>
+                                                <gco:CharacterString>Australia</gco:CharacterString>
+                                            </cit:country>
+                                            <cit:electronicMailAddress>
+                                                <gco:CharacterString>clientservices@ga.gov.au</gco:CharacterString>
+                                            </cit:electronicMailAddress>
+                                        </cit:CI_Address>
+                                    </cit:address>
+                                </cit:CI_Contact>
+                            </cit:contactInfo>
+                        </cit:CI_Organisation>
+                    </cit:party>
+                </cit:CI_Responsibility>
+            </mri:pointOfContact>
+            <mri:spatialResolution>
+                <mri:MD_Resolution>
+                    <mri:levelOfDetail gco:nilReason="missing">
+                        <gco:CharacterString/>
+                    </mri:levelOfDetail>
+                </mri:MD_Resolution>
+            </mri:spatialResolution>
+            <mri:topicCategory>
+                <mri:MD_TopicCategoryCode>geoscientificInformation</mri:MD_TopicCategoryCode>
+            </mri:topicCategory>
+            <mri:topicCategory/>
+            <mri:extent>
+                <gex:EX_Extent>
+                    <gex:temporalElement>
+                        <gex:EX_TemporalExtent>
+                            <gex:extent>
+                                <TimePeriod xmlns="http://www.opengis.net/gml/3.2" gml:id="A1234">
+                                    <beginPosition>2018-09-14</beginPosition>
+                                    <endPosition/>
+                                </TimePeriod>
+                            </gex:extent>
+                        </gex:EX_TemporalExtent>
+                    </gex:temporalElement>
+                </gex:EX_Extent>
+            </mri:extent>
+            <mri:extent>
+                <gex:EX_Extent>
+                    <gex:geographicElement>
+                        <gex:EX_GeographicBoundingBox>
+                            <gex:westBoundLongitude>
+                                <gco:Decimal>126.91</gco:Decimal>
+                            </gex:westBoundLongitude>
+                            <gex:eastBoundLongitude>
+                                <gco:Decimal>130.08</gco:Decimal>
+                            </gex:eastBoundLongitude>
+                            <gex:southBoundLatitude>
+                                <gco:Decimal>-12.42</gco:Decimal>
+                            </gex:southBoundLatitude>
+                            <gex:northBoundLatitude>
+                                <gco:Decimal>-10.28</gco:Decimal>
+                            </gex:northBoundLatitude>
+                        </gex:EX_GeographicBoundingBox>
+                    </gex:geographicElement>
+                </gex:EX_Extent>
+            </mri:extent>
+            <mri:resourceMaintenance>
+                <mmi:MD_MaintenanceInformation>
+                    <mmi:maintenanceAndUpdateFrequency>
+                        <mmi:MD_MaintenanceFrequencyCode codeListValue="asNeeded"
+                                                         codeList="codeListLocation#MD_MaintenanceFrequencyCode"/>
+                    </mmi:maintenanceAndUpdateFrequency>
+                </mmi:MD_MaintenanceInformation>
+            </mri:resourceMaintenance>
+            <mri:resourceFormat>
+                <mrd:MD_Format>
+                    <mrd:formatSpecificationCitation>
+                        <cit:CI_Citation>
+                            <cit:title>
+                                <gco:CharacterString>Product data repository: Various Formats</gco:CharacterString>
+                            </cit:title>
+                            <cit:date gco:nilReason="unknown"/>
+                            <cit:edition gco:nilReason="unknown"/>
+                        </cit:CI_Citation>
+                    </mrd:formatSpecificationCitation>
+                </mrd:MD_Format>
+            </mri:resourceFormat>
+            <mri:descriptiveKeywords>
+                <mri:MD_Keywords>
+                    <mri:keyword>
+                        <gco:CharacterString>Seabed sediments</gco:CharacterString>
+                    </mri:keyword>
+                    <mri:type>
+                        <mri:MD_KeywordTypeCode codeList="codeListLocation#MD_KeywordTypeCode" codeListValue="featureType"/>
+                    </mri:type>
+                </mri:MD_Keywords>
+            </mri:descriptiveKeywords>
+            <mri:descriptiveKeywords xlink:href="local://eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&amp;amp;id=http://gcmdservices.gsfc.nasa.gov/kms/concept/ce4b2c6e-3d69-4cf1-8416-c36e5f9b1b2c,http://gcmdservices.gsfc.nasa.gov/kms/concept/91697b7d-8f2b-4954-850e-61d5f61c867d&amp;amp;multiple=true"
+                                     xlink:show="replace"/>
+            <mri:descriptiveKeywords>
+                <mri:MD_Keywords>
+                    <mri:keyword>
+                        <gco:CharacterString>Marine Geoscience</gco:CharacterString>
+                    </mri:keyword>
+                    <mri:type>
+                        <mri:MD_KeywordTypeCode codeList="codeListLocation#MD_KeywordTypeCode" codeListValue="theme"/>
+                    </mri:type>
+                    <mri:thesaurusName>
+                        <cit:CI_Citation>
+                            <cit:title>
+                                <gco:CharacterString>theme.ANZRC Fields of Research.rdf</gco:CharacterString>
+                            </cit:title>
+                            <cit:date>
+                                <cit:CI_Date>
+                                    <cit:date>
+                                        <gco:Date>2019-08-05</gco:Date>
+                                    </cit:date>
+                                    <cit:dateType>
+                                        <cit:CI_DateTypeCode codeList="https://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode"
+                                                             codeListValue="publication">publication</cit:CI_DateTypeCode>
+                                    </cit:dateType>
+                                </cit:CI_Date>
+                            </cit:date>
+                            <cit:identifier>
+                                <mcc:MD_Identifier>
+                                    <mcc:code>
+                                        <gcx:Anchor xlink:href="https://ecat.ga.gov.au/geonetwork/srv/eng/thesaurus.download?ref=external.theme.ANZRC Fields of Research">geonetwork.thesaurus.external.theme.ANZRC Fields of Research</gcx:Anchor>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </cit:identifier>
+                        </cit:CI_Citation>
+                    </mri:thesaurusName>
+                </mri:MD_Keywords>
+            </mri:descriptiveKeywords>
+            <mri:descriptiveKeywords>
+                <mri:MD_Keywords>
+                    <mri:keyword>
+                        <gco:CharacterString>National Environmental Science Program</gco:CharacterString>
+                    </mri:keyword>
+                    <mri:type>
+                        <mri:MD_KeywordTypeCode codeList="codeListLocation#MD_KeywordTypeCode" codeListValue=""/>
+                    </mri:type>
+                </mri:MD_Keywords>
+            </mri:descriptiveKeywords>
+            <mri:descriptiveKeywords>
+                <mri:MD_Keywords>
+                    <mri:keyword>
+                        <gco:CharacterString>Marine Biodiversity Hub</gco:CharacterString>
+                    </mri:keyword>
+                    <mri:type>
+                        <mri:MD_KeywordTypeCode codeList="codeListLocation#MD_KeywordTypeCode" codeListValue=""/>
+                    </mri:type>
+                </mri:MD_Keywords>
+            </mri:descriptiveKeywords>
+            <mri:descriptiveKeywords>
+                <mri:MD_Keywords>
+                    <mri:keyword>
+                        <gco:CharacterString>Published_External</gco:CharacterString>
+                    </mri:keyword>
+                </mri:MD_Keywords>
+            </mri:descriptiveKeywords>
+            <mri:resourceConstraints>
+                <mco:MD_LegalConstraints uuid="urn:ga-licences:232">
+                    <mco:reference>
+                        <cit:CI_Citation>
+                            <cit:title>
+                                <gco:CharacterString>Creative Commons Attribution 4.0 International Licence</gco:CharacterString>
+                            </cit:title>
+                            <mco:alternateTitle>
+                                <gco:CharacterString>CC-BY</gco:CharacterString>
+                            </mco:alternateTitle>
+                            <cit:date gco:nilReason="missing"/>
+                            <mco:edition>
+                                <gco:CharacterString>4.0</gco:CharacterString>
+                            </mco:edition>
+                        </cit:CI_Citation>
+                    </mco:reference>
+                    <mco:accessConstraints>
+                        <mco:MD_RestrictionCode codeList="codeListLocation#MD_RestrictionCode" codeListValue="license"/>
+                    </mco:accessConstraints>
+                    <mco:useConstraints>
+                        <mco:MD_RestrictionCode codeList="codeListLocation#MD_RestrictionCode" codeListValue="license"/>
+                    </mco:useConstraints>
+                </mco:MD_LegalConstraints>
+            </mri:resourceConstraints>
+            <mri:resourceConstraints>
+                <mco:MD_SecurityConstraints>
+                    <mco:reference>
+                        <cit:CI_Citation>
+                            <cit:title>
+                                <gco:CharacterString>Australian Government Security ClassificationSystem</gco:CharacterString>
+                            </cit:title>
+                            <cit:date gco:nilReason="missing"/>
+                            <cit:editionDate>
+                                <gco:DateTime>2018-11-01T00:00:00</gco:DateTime>
+                            </cit:editionDate>
+                        </cit:CI_Citation>
+                    </mco:reference>
+                    <mco:classification>
+                        <mco:MD_ClassificationCode codeList="codeListLocation#MD_ClassificationCode" codeListValue="unclassified"/>
+                    </mco:classification>
+                </mco:MD_SecurityConstraints>
+            </mri:resourceConstraints>
+            <mri:defaultLocale>
+                <lan:PT_Locale>
+                    <lan:language>
+                        <lan:LanguageCode codeList="https://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#LanguageCode"
+                                          codeListValue="eng">eng</lan:LanguageCode>
+                    </lan:language>
+                    <lan:characterEncoding>
+                        <lan:MD_CharacterSetCode codeList="https://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_CharacterSetCode"
+                                                 codeListValue="utf8">utf8</lan:MD_CharacterSetCode>
+                    </lan:characterEncoding>
+                </lan:PT_Locale>
+            </mri:defaultLocale>
+        </mri:MD_DataIdentification>
+    </mdb:identificationInfo>
+    <mdb:distributionInfo>
+        <mrd:MD_Distribution>
+            <mrd:distributor>
+                <mrd:MD_Distributor>
+                    <mrd:distributorContact>
+                        <cit:CI_Responsibility>
+                            <cit:role>
+                                <cit:CI_RoleCode codeList="https://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode"
+                                                 codeListValue="distributor">distributor</cit:CI_RoleCode>
+                            </cit:role>
+                            <cit:party>
+                                <cit:CI_Organisation>
+                                    <cit:name>
+                                        <gco:CharacterString>Commonwealth of Australia (Geoscience Australia)</gco:CharacterString>
+                                    </cit:name>
+                                    <cit:contactInfo>
+                                        <cit:CI_Contact>
+                                            <cit:phone>
+                                                <cit:CI_Telephone>
+                                                    <cit:number>
+                                                        <gco:CharacterString>1800 800 173</gco:CharacterString>
+                                                    </cit:number>
+                                                    <cit:numberType>
+                                                        <cit:CI_TelephoneTypeCode codeList="https://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_TelephoneTypeCode"
+                                                                                  codeListValue="voice">voice</cit:CI_TelephoneTypeCode>
+                                                    </cit:numberType>
+                                                </cit:CI_Telephone>
+                                            </cit:phone>
+                                            <cit:phone>
+                                                <cit:CI_Telephone>
+                                                    <cit:number>
+                                                        <gco:CharacterString>+61 2 6249 9960</gco:CharacterString>
+                                                    </cit:number>
+                                                    <cit:numberType>
+                                                        <cit:CI_TelephoneTypeCode codeList="https://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_TelephoneTypeCode"
+                                                                                  codeListValue="facsimile">facsimile</cit:CI_TelephoneTypeCode>
+                                                    </cit:numberType>
+                                                </cit:CI_Telephone>
+                                            </cit:phone>
+                                            <cit:address>
+                                                <cit:CI_Address>
+                                                    <cit:deliveryPoint>
+                                                        <gco:CharacterString>Cnr Jerrabomberra Ave and Hindmarsh Dr GPO Box 378</gco:CharacterString>
+                                                    </cit:deliveryPoint>
+                                                    <cit:city>
+                                                        <gco:CharacterString>Canberra</gco:CharacterString>
+                                                    </cit:city>
+                                                    <cit:administrativeArea>
+                                                        <gco:CharacterString>ACT</gco:CharacterString>
+                                                    </cit:administrativeArea>
+                                                    <cit:postalCode>
+                                                        <gco:CharacterString>2601</gco:CharacterString>
+                                                    </cit:postalCode>
+                                                    <cit:country>
+                                                        <gco:CharacterString>Australia</gco:CharacterString>
+                                                    </cit:country>
+                                                    <cit:electronicMailAddress>
+                                                        <gco:CharacterString>clientservices@ga.gov.au</gco:CharacterString>
+                                                    </cit:electronicMailAddress>
+                                                </cit:CI_Address>
+                                            </cit:address>
+                                        </cit:CI_Contact>
+                                    </cit:contactInfo>
+                                </cit:CI_Organisation>
+                            </cit:party>
+                        </cit:CI_Responsibility>
+                    </mrd:distributorContact>
+                    <mrd:distributorTransferOptions>
+                        <mrd:MD_DigitalTransferOptions>
+                            <mrd:onLine>
+                                <cit:CI_OnlineResource>
+                                    <cit:linkage>
+                                        <gco:CharacterString>https://d28rz98at9flks.cloudfront.net/123300/Data_package.zip</gco:CharacterString>
+                                    </cit:linkage>
+                                    <cit:protocol>
+                                        <gco:CharacterString xsi:type="gco:CodeType"
+                                                             codeSpace="http://pid.geoscience.gov.au/def/schema/ga/ISO19115-3-2016/codelist/ga_profile_codelists.xml#gapCI_ProtocolTypeCode">WWW:LINK-1.0-http--link</gco:CharacterString>
+                                    </cit:protocol>
+                                    <cit:name>
+                                        <gco:CharacterString>Download the data package</gco:CharacterString>
+                                    </cit:name>
+                                    <cit:description>
+                                        <gco:CharacterString>Download the data package</gco:CharacterString>
+                                    </cit:description>
+                                    <cit:function>
+                                        <cit:CI_OnLineFunctionCode codeList="codeListLocation#CI_OnLineFunctionCode" codeListValue=""/>
+                                    </cit:function>
+                                </cit:CI_OnlineResource>
+                            </mrd:onLine>
+                        </mrd:MD_DigitalTransferOptions>
+                    </mrd:distributorTransferOptions>
+                    <mrd:distributorTransferOptions>
+                        <mrd:MD_DigitalTransferOptions>
+                            <mrd:onLine>
+                                <cit:CI_OnlineResource>
+                                    <cit:linkage>
+                                        <gco:CharacterString>https://d28rz98at9flks.cloudfront.net/123300/Metadata.docx</gco:CharacterString>
+                                    </cit:linkage>
+                                    <cit:protocol>
+                                        <gco:CharacterString xsi:type="gco:CodeType"
+                                                             codeSpace="http://pid.geoscience.gov.au/def/schema/ga/ISO19115-3-2016/codelist/ga_profile_codelists.xml#gapCI_ProtocolTypeCode">WWW:LINK-1.0-http--link</gco:CharacterString>
+                                    </cit:protocol>
+                                    <cit:name>
+                                        <gco:CharacterString>Download the Metadata</gco:CharacterString>
+                                    </cit:name>
+                                    <cit:description>
+                                        <gco:CharacterString>Download the Metadata</gco:CharacterString>
+                                    </cit:description>
+                                    <cit:function>
+                                        <cit:CI_OnLineFunctionCode codeList="codeListLocation#CI_OnLineFunctionCode" codeListValue=""/>
+                                    </cit:function>
+                                </cit:CI_OnlineResource>
+                            </mrd:onLine>
+                            <mrd:distributionFormat>
+                                <mrd:MD_Format>
+                                    <mrd:formatSpecificationCitation>
+                                        <cit:CI_Citation>
+                                            <cit:title>
+                                                <gco:CharacterString>docx</gco:CharacterString>
+                                            </cit:title>
+                                            <cit:date gco:nilReason="unknown"/>
+                                            <cit:edition gco:nilReason="unknown"/>
+                                        </cit:CI_Citation>
+                                    </mrd:formatSpecificationCitation>
+                                </mrd:MD_Format>
+                            </mrd:distributionFormat>
+                        </mrd:MD_DigitalTransferOptions>
+                    </mrd:distributorTransferOptions>
+                </mrd:MD_Distributor>
+            </mrd:distributor>
+        </mrd:MD_Distribution>
+    </mdb:distributionInfo>
+    <mdb:metadataConstraints>
+        <mco:MD_SecurityConstraints>
+            <mco:reference>
+                <cit:CI_Citation>
+                    <cit:title>
+                        <gco:CharacterString>Australian Government Security ClassificationSystem</gco:CharacterString>
+                    </cit:title>
+                    <cit:date gco:nilReason="missing"/>
+                    <cit:editionDate>
+                        <gco:DateTime>2018-11-01T00:00:00</gco:DateTime>
+                    </cit:editionDate>
+                </cit:CI_Citation>
+            </mco:reference>
+            <mco:classification>
+                <mco:MD_ClassificationCode codeList="codeListLocation#MD_ClassificationCode" codeListValue="unclassified"/>
+            </mco:classification>
+        </mco:MD_SecurityConstraints>
+    </mdb:metadataConstraints>
+</mdb:MD_Metadata>

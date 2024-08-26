@@ -130,13 +130,13 @@ public abstract class StacCollectionMapperService {
                         if (pair0.isEmpty()) {
                             pair0 = safeGet(() -> timePeriodType.getBeginPosition().getValue().get(0));
                         }
-                        pair0.ifPresent(pair -> temporalPair[0] = convertDateToZonedDateTime(pair));
+                        pair0.ifPresent(pair -> temporalPair[0] = convertDateToZonedDateTime(this.mapUUID(source), pair));
 
                         var pair1 = safeGet(() -> timePeriodType.getEnd().getTimeInstant().getTimePosition().getValue().get(0));
                         if (pair1.isEmpty()) {
                             pair1 = safeGet(() -> timePeriodType.getEndPosition().getValue().get(0));
                         }
-                        pair1.ifPresent(pair -> temporalPair[1] = convertDateToZonedDateTime(pair));
+                        pair1.ifPresent(pair -> temporalPair[1] = convertDateToZonedDateTime(this.mapUUID(source), pair));
                     }
 
                     result.add(temporalPair);
@@ -146,23 +146,24 @@ public abstract class StacCollectionMapperService {
         return result;
     }
 
-    private String convertDateToZonedDateTime(String inputDateString) {
-        try {
-            String inputDateTimeString = inputDateString;
-            if (!inputDateString.contains("T")) {
-                inputDateTimeString += "T00:00:00";
-            }
+    private String convertDateToZonedDateTime(String uuid, String inputDateString) {
 
+        String inputDateTimeString = inputDateString;
+        if (!inputDateString.contains("T")) {
+            inputDateTimeString += "T00:00:00";
+        }
+
+        try {
             ZonedDateTime zonedDateTime = ZonedDateTime.parse(inputDateTimeString, TemporalUtils.TIME_FORMATTER.withZone(ZoneId.of(timeZoneId)));
 
             // Convert to UTC
             ZonedDateTime utcZonedDateTime = zonedDateTime.withZoneSameInstant(ZoneOffset.UTC);
-
             DateTimeFormatter outputFormatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME;
 
             return utcZonedDateTime.format(outputFormatter);
-        } catch (Exception e) {
-            logger.warn("Unable to convert date to ISO_OFFSET_DATE_TIME: " + inputDateString);
+        }
+        catch (Exception e) {
+            logger.warn("Unable to convert date to ISO_OFFSET_DATE_TIME: {} for record {}", inputDateString, uuid);
             return null;
         }
     }
@@ -460,74 +461,84 @@ public abstract class StacCollectionMapperService {
 
     protected List<ConceptModel> mapThemesConcepts(MDKeywordsPropertyType descriptiveKeyword) {
         List<ConceptModel> concepts = new ArrayList<>();
-        descriptiveKeyword.getMDKeywords().getKeyword().forEach(keyword -> {
-            if (keyword != null) {
-                ConceptModel conceptModel = ConceptModel.builder().build();
-                if (keyword.getCharacterString().getValue() instanceof AnchorType value) {
-                    conceptModel.setId(value.getValue());
-                    conceptModel.setUrl(value.getHref());
-                } else {
-                    conceptModel.setId(keyword.getCharacterString().getValue().toString());
+        safeGet(() -> descriptiveKeyword.getMDKeywords().getKeyword())
+                .ifPresent(p -> p.forEach(keyword -> {
+                    if (keyword != null) {
+                        ConceptModel conceptModel = ConceptModel.builder().build();
+                        if (keyword.getCharacterString().getValue() instanceof AnchorType value) {
+                            conceptModel.setId(value.getValue());
+                            conceptModel.setUrl(value.getHref());
+                        } else {
+                            conceptModel.setId(keyword.getCharacterString().getValue().toString());
+                        }
+                        concepts.add(conceptModel);
+                    }
                 }
-                concepts.add(conceptModel);
-            }
-        });
+        ));
         return concepts;
     }
 
     protected String mapThemesTitle(MDKeywordsPropertyType descriptiveKeyword, String uuid) {
-        AbstractCitationPropertyType abstractCitationPropertyType = descriptiveKeyword.getMDKeywords().getThesaurusName();
-        if (abstractCitationPropertyType != null) {
-            if(abstractCitationPropertyType.getAbstractCitation() != null
-                    && abstractCitationPropertyType.getAbstractCitation().getValue() instanceof CICitationType2 thesaurusNameType2) {
-
-                CharacterStringPropertyType titleString = thesaurusNameType2.getTitle();
-                if (titleString != null
-                        && titleString.getCharacterString() != null
-                        && titleString.getCharacterString().getValue() instanceof AnchorType value) {
-                    return (value.getValue() != null ? value.getValue() : "");
-                } else if (titleString != null
-                        && titleString.getCharacterString() != null
-                        && titleString.getCharacterString().getValue() instanceof String value) {
-                    return value;
-                }
-            }
-        }
-        logger.debug("Unable to find themes' title for metadata record: {}", uuid);
-        return "";
+        return safeGet(() -> descriptiveKeyword.getMDKeywords().getThesaurusName().getAbstractCitation())
+                .map(citation -> {
+                    if(citation.getValue() instanceof CICitationType2 thesaurusNameType2) {
+                        CharacterStringPropertyType titleString = thesaurusNameType2.getTitle();
+                        if (titleString != null
+                                && titleString.getCharacterString() != null
+                                && titleString.getCharacterString().getValue() instanceof AnchorType value) {
+                            return (value.getValue() != null ? value.getValue() : "");
+                        }
+                        else if (titleString != null
+                                && titleString.getCharacterString() != null
+                                && titleString.getCharacterString().getValue() instanceof String value) {
+                            return value;
+                        }
+                    }
+                    return "";
+                })
+                .orElseGet(() -> {
+                    logger.debug("Unable to find themes' title for metadata record: {}", uuid);
+                    return "";
+                });
     }
 
     protected String mapThemesDescription(MDKeywordsPropertyType descriptiveKeyword, String uuid) {
-        AbstractCitationPropertyType abstractCitationPropertyType = descriptiveKeyword.getMDKeywords().getThesaurusName();
-        if (abstractCitationPropertyType != null) {
-            CICitationType2 thesaurusNameType2 = (CICitationType2) abstractCitationPropertyType.getAbstractCitation().getValue();
-            CharacterStringPropertyType titleString = thesaurusNameType2.getTitle();
-            if (titleString != null && titleString.getCharacterString().getValue() instanceof  AnchorType value) {
-                if (value.getTitleAttribute() != null) {
-                    return value.getTitleAttribute();
-                } else {
+        return safeGet(() -> descriptiveKeyword.getMDKeywords().getThesaurusName())
+                .map(abstractCitationPropertyType -> {
+                    if(abstractCitationPropertyType.getAbstractCitation().getValue() instanceof CICitationType2 thesaurusNameType2) {
+                        CharacterStringPropertyType titleString = thesaurusNameType2.getTitle();
+                        if (titleString != null && titleString.getCharacterString().getValue() instanceof AnchorType value) {
+                            if (value.getTitleAttribute() != null) {
+                                return value.getTitleAttribute();
+                            } else {
+                                return "";
+                            }
+                        } else if (titleString != null && titleString.getCharacterString().getValue() instanceof String value) {
+                            return thesaurusNameType2.getAlternateTitle().stream().map(CharacterStringPropertyType::getCharacterString).map(JAXBElement::getValue).map(Object::toString).collect(Collectors.joining(", "));
+                        }
+                    }
                     return "";
-                }
-            }
-            else if (titleString != null && titleString.getCharacterString().getValue() instanceof String value) {
-                return thesaurusNameType2.getAlternateTitle().stream().map(CharacterStringPropertyType::getCharacterString).map(JAXBElement::getValue).map(Object::toString).collect(Collectors.joining(", "));
-            }
-        }
-        logger.debug("Unable to find themes' description for metadata record: " + uuid);
-        return "";
+                })
+                .orElseGet(() -> {
+                    logger.debug("Unable to find themes' description for metadata record: {}", uuid);
+                    return "";
+                });
+
     }
 
     protected String mapThemesScheme(MDKeywordsPropertyType descriptiveKeyword, String uuid) {
-        AbstractCitationPropertyType abstractCitationPropertyType = descriptiveKeyword.getMDKeywords().getThesaurusName();
-        if (abstractCitationPropertyType != null) {
-            if (descriptiveKeyword.getMDKeywords().getType() != null) {
-                return descriptiveKeyword.getMDKeywords().getType().getMDKeywordTypeCode().getCodeListValue();
-            } else {
-                return "";
-            }
-        }
-        logger.debug("Unable to find themes' scheme for metadata record: " + uuid);
-        return "";
+        return safeGet(() -> descriptiveKeyword.getMDKeywords().getThesaurusName())
+                .map(abstractCitationPropertyType -> {
+                    if (descriptiveKeyword.getMDKeywords().getType() != null) {
+                        return descriptiveKeyword.getMDKeywords().getType().getMDKeywordTypeCode().getCodeListValue();
+                    } else {
+                        return "";
+                    }
+                })
+                .orElseGet(() -> {
+                    logger.debug("Unable to find themes' scheme for metadata record: " + uuid);
+                    return "";
+                });
     }
 
     @Named("mapThemes")
