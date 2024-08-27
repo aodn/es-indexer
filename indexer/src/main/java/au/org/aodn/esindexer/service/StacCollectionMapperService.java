@@ -42,6 +42,8 @@ import static au.org.aodn.esindexer.utils.CommonUtils.safeGet;
 @Mapper(componentModel = "spring")
 public abstract class StacCollectionMapperService {
 
+    public static final String REAL_TIME = "real-time";
+
     @Mapping(target="uuid", source = "source", qualifiedByName = "mapUUID")
     @Mapping(target="title", source = "source", qualifiedByName = "mapTitle" )
     @Mapping(target="description", source = "source", qualifiedByName = "mapDescription")
@@ -338,8 +340,8 @@ public abstract class StacCollectionMapperService {
     }
     /**
      * Custom mapping for title field, name convention is start with map then the field name
-     * @param source
-     * @return
+     * @param source - The parsed XML document
+     * @return - The title
      */
     @Named("mapTitle")
     String mapTitle(MDMetadataType source) {
@@ -646,33 +648,45 @@ public abstract class StacCollectionMapperService {
     List<ProviderModel> mapProviders(MDMetadataType source) {
         final List<ProviderModel> results = new ArrayList<>();
         safeGet(source::getContact)
-            .ifPresent(contract -> contract.forEach(item -> {
-                if (item.getAbstractResponsibility() != null) {
-                    if (item.getAbstractResponsibility().getValue() instanceof CIResponsibilityType2 ciResponsibility) {
-                        ciResponsibility.getParty().forEach(party -> {
-                            try {
-                                ProviderModel providerModel = ProviderModel.builder().build();
-                                providerModel.setRoles(Collections.singletonList(ciResponsibility.getRole().getCIRoleCode().getCodeListValue()));
-                                CIOrganisationType2 organisationType2 = (CIOrganisationType2) party.getAbstractCIParty().getValue();
-                                providerModel.setName(organisationType2.getName() != null ? organisationType2.getName().getCharacterString().getValue().toString() : "");
-                                organisationType2.getIndividual().forEach(individual -> individual.getCIIndividual().getContactInfo().forEach(contactInfo -> {
-                                    contactInfo.getCIContact().getOnlineResource().forEach(onlineResource -> {
-                                        providerModel.setUrl(onlineResource.getCIOnlineResource().getLinkage().getCharacterString().getValue().toString());
-                                    });
-                                }));
-                                results.add(providerModel);
-                            } catch (ClassCastException e) {
-                                logger.error("Unable to cast getAbstractCIParty().getValue() to CIOrganisationType2 for metadata record: {}", mapUUID(source));
-                            }
-                        });
-                    } else {
-                        logger.warn("getContact().getAbstractResponsibility() in mapProviders is not of type CIResponsibilityType2 for UUID {}", mapUUID(source));
-                    }
-                } else {
-                    logger.warn("Null value fround for getContact().getAbstractResponsibility() in mapProviders transform for UUID {}", mapUUID(source));
-                }
-            }));
+                .ifPresent(c -> c
+                        .stream()
+                        .filter(Objects::nonNull)
+                        .filter(item -> item.getAbstractResponsibility() != null)
+                        .forEach(item -> {
+                            if(item.getAbstractResponsibility().getValue() instanceof CIResponsibilityType2 ciResponsibility) {
+                                safeGet(ciResponsibility::getParty)
+                                        .ifPresent(p -> p.forEach(party -> {
+                                            if(party.getAbstractCIParty().getValue() instanceof CIOrganisationType2 organisationType2) {
+                                                ProviderModel providerModel = ProviderModel.builder().build();
+                                                providerModel.setRoles(Collections.singletonList(ciResponsibility.getRole().getCIRoleCode().getCodeListValue()));
+                                                providerModel.setName(organisationType2.getName() != null ? organisationType2.getName().getCharacterString().getValue().toString() : "");
 
+                                                organisationType2.getIndividual().forEach(individual -> individual.getCIIndividual().getContactInfo().forEach(contactInfo -> {
+                                                    contactInfo.getCIContact().getOnlineResource().forEach(onlineResource -> {
+                                                        providerModel.setUrl(onlineResource.getCIOnlineResource().getLinkage().getCharacterString().getValue().toString());
+                                                    });
+                                                }));
+                                                results.add(providerModel);
+                                            }
+                                            else if(party.getAbstractCIParty().getValue() instanceof CIIndividualType2 individualType2) {
+
+                                                // a special example for this block:: https://geonetwork-edge.edge.aodn.org.au/geonetwork/srv/eng/catalog.search#/metadata/201112060/formatters/xsl-view?root=div&view=advanced
+                                                ProviderModel providerModel = ProviderModel.builder().build();
+                                                safeGet(() -> ciResponsibility.getRole().getCIRoleCode().getCodeListValue())
+                                                        .ifPresent(role -> providerModel.setRoles(Collections.singletonList(role)));
+                                                safeGet(() -> individualType2.getName().getCharacterString().getValue().toString())
+                                                        .ifPresent(providerModel::setName);
+                                                results.add(providerModel);
+                                            }
+                                            else {
+                                                logger.error("Unable to cast getAbstractCIParty().getValue() to CIOrganisationType2 or CIIndividualType2 for metadata record: {}", mapUUID(source));
+                                            }
+                                        }));
+                            }
+                            else {
+                                logger.warn("getContact().getAbstractResponsibility() in mapProviders is not of type CIResponsibilityType2 for UUID {}", mapUUID(source));
+                            }
+                        }));
         return results;
     }
 
