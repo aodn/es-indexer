@@ -33,6 +33,7 @@
     "credits": [],
     "statement": "Processing Comments:\n                    The drop keels were completely raised to the maintenance position so the thermosalinograph (TSG) wasn’t recording during the transit as the water intake is on the port keel, therefore there is no salinity or water temperature data.\n                    All Aerosol and Air-Chemistry inlet tubes were covered for protection during the dry-docking. Appendix 1 indicates which parameters were not recorded on this transit.",
     "revision": "2018-01-17T16:09:59",
+    "update_frequency": "completed",
     "proj:geometry": {
       "geometries": [
         {
@@ -365,12 +366,12 @@
   },
   "sci:citation": "{\"suggestedCitation\":null,\"useLimitations\":null,\"otherConstraints\":[\"Data is made available under a Creative Commons Attribution 4.0 International Licence, please see link. Data is supplied 'as is' without any warranty or guarantee except as required by law to be given to you. The data may not be free of error, comprehensive, current or appropriate for your particular purpose. You accept all risk and responsibility for its use. ATTRIBUTION STATEMENT: The dataset [Insert-dataset-name-here] downloaded on [Insert-DD-Mmm-YYYY-here] was collected on voyage [Insert-voyage-name-here] by the Marine National Facility.\"]}",
   "type": "Collection",
+  "stac_version": "1.0.0",
   "stac_extensions": [
     "https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
     "https://stac-extensions.github.io/contacts/v0.1.1/schema.json",
     "https://stac-extensions.github.io/projection/v1.1.0/schema.json",
     "https://stac-extensions.github.io/language/v1.0.0/schema.json",
     "https://stac-extensions.github.io/themes/v1.0.0/schema.json"
-  ],
-  "stac_version": "1.0.0"
+  ]
 }

@@ -29,7 +29,6 @@ public class SummariesUtils {
             }
             return String.join(" | ", temp);
         }
-
         logger.warn("Unable to find status metadata record: {}", CommonUtils.getUUID(source));
         return null;
     }
