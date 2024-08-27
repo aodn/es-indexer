@@ -299,7 +299,7 @@ public class StacCollectionMapperServiceTests {
         Assertions.assertEquals(
                 objectMapper.readTree(expected),
                 objectMapper.readTree(out.strip()),
-                "Stac not equals for keywords_null"
+                "Stac not equals for keywords_null of sample12"
         );
     }
     /**

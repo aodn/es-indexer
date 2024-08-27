@@ -735,8 +735,14 @@ public abstract class StacCollectionMapperService {
                                                 results.add(providerModel);
                                             }
                                             else if(party.getAbstractCIParty().getValue() instanceof CIIndividualType2 individualType2) {
-                                                // TODO: https://geonetwork-edge.edge.aodn.org.au/geonetwork/srv/eng/catalog.search#/metadata/201112060/formatters/xsl-view?root=div&view=advanced
-                                                logger.warn("getAbstractCIParty() is not map at the moment {}", individualType2.getName().getCharacterString().getValue());
+
+                                                // a special example for this block:: https://geonetwork-edge.edge.aodn.org.au/geonetwork/srv/eng/catalog.search#/metadata/201112060/formatters/xsl-view?root=div&view=advanced
+                                                ProviderModel providerModel = ProviderModel.builder().build();
+                                                safeGet(() -> ciResponsibility.getRole().getCIRoleCode().getCodeListValue())
+                                                        .ifPresent(role -> providerModel.setRoles(Collections.singletonList(role)));
+                                                safeGet(() -> individualType2.getName().getCharacterString().getValue().toString())
+                                                        .ifPresent(providerModel::setName);
+                                                results.add(providerModel);
                                             }
                                             else {
                                                 logger.error("Unable to cast getAbstractCIParty().getValue() to CIOrganisationType2 or CIIndividualType2 for metadata record: {}", mapUUID(source));
