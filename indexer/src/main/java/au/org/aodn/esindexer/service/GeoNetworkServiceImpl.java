@@ -55,7 +55,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
     // Use for debug only if run the indexer locally and hit an issue, you do
     // not want to start from the start, by setting this env value, it will start from the UUID
     // that follows.
-    @Value("${elasticsearch.query.startingUUID}")
+    @Value("${elasticsearch.query.startingUUID:#{null}}")
     protected String startingUUID;
 
     protected static final Logger logger = LogManager.getLogger(GeoNetworkServiceImpl.class);
