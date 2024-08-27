@@ -54,6 +54,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
 
     protected static final Logger logger = LogManager.getLogger(GeoNetworkServiceImpl.class);
 
+    protected FIFOCache<String, Map<String, ?>> cache = new FIFOCache<>(5);
     protected RestTemplate indexerRestTemplate;
     protected ElasticsearchClient gn4ElasticClient;
     protected String indexName;
@@ -214,7 +215,8 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
      * Call the geonetwork API to get the related info given a uuid, in the related record, you will find the link
      * to the thumbnail
      * @param uuid - UUID of record
-     * @return - A Json structure like this
+     * @return - A Json structure like this, but we limited the types of return so only children,
+     * siblings thumbnails etc, check endpoint call
      * {
      *     "children": null,
      *     "parent": null,
@@ -227,90 +229,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
      *     "sources": null,
      *     "hassources": null,
      *     "related": null,
-     *     "onlines": [
-     *         {
-     *             "id": "https://www.marine.csiro.au/data/trawler/survey_details.cfm?survey=IN2024_V01",
-     *             "url": {
-     *                 "eng": "https://www.marine.csiro.au/data/trawler/survey_details.cfm?survey=IN2024_V01"
-     *             },
-     *             "type": "onlinesrc",
-     *             "title": {
-     *                 "eng": "MNF Data Trawler"
-     *             },
-     *             "protocol": "WWW:DOWNLOAD-1.0-http--csiro-oa-app",
-     *             "description": {
-     *                 "eng": "Link to processed data and survey information (plans, summaries, etc.) via MNF Data Trawler"
-     *             },
-     *             "function": "",
-     *             "mimeType": "",
-     *             "applicationProfile": ""
-     *         },
-     *         {
-     *             "id": "https://mnf.csiro.au/",
-     *             "url": {
-     *                 "eng": "https://mnf.csiro.au/"
-     *             },
-     *             "type": "onlinesrc",
-     *             "title": {
-     *                 "eng": "Marine National Facility"
-     *             },
-     *             "protocol": "WWW:LINK-1.0-http--link",
-     *             "description": {
-     *                 "eng": "Link to the Marine National Facility Webpage"
-     *             },
-     *             "function": "",
-     *             "mimeType": "",
-     *             "applicationProfile": ""
-     *         },
-     *         {
-     *             "id": "https://doi.org/10.25919/rdrt-bd71",
-     *             "url": {
-     *                 "eng": "https://doi.org/10.25919/rdrt-bd71"
-     *             },
-     *             "type": "onlinesrc",
-     *             "title": {
-     *                 "eng": "Data Access Portal (DOI)"
-     *             },
-     *             "protocol": "WWW:DOWNLOAD-1.0-http--csiro-dap",
-     *             "description": {
-     *                 "eng": "Link to this record at the CSIRO Data Access Portal"
-     *             },
-     *             "function": "",
-     *             "mimeType": "",
-     *             "applicationProfile": ""
-     *         },
-     *         {
-     *             "id": "http://www.marine.csiro.au/data/underway/?survey=IN2024_V01",
-     *             "url": {
-     *                 "eng": "http://www.marine.csiro.au/data/underway/?survey=IN2024_V01"
-     *             },
-     *             "type": "onlinesrc",
-     *             "title": {
-     *                 "eng": "Underway Visualisation Tool"
-     *             },
-     *             "protocol": "WWW:DOWNLOAD-1.0-http--csiro-oa-app",
-     *             "description": {
-     *                 "eng": "Link to visualisation tool for Near Real-Time Underway Data (NRUD)"
-     *             },
-     *             "function": "",
-     *             "mimeType": "",
-     *             "applicationProfile": ""
-     *         }
-     *     ],
-     *     "thumbnails": [
-     *         {
-     *             "id": "https://www.marine.csiro.au/data/trawler/survey_mapfile.cfm?survey=IN2024_V01&data_type=uwy",
-     *             "url": {
-     *                 "eng": "https://www.marine.csiro.au/data/trawler/survey_mapfile.cfm?survey=IN2024_V01&data_type=uwy"
-     *             },
-     *             "type": "thumbnail",
-     *             "title": {
-     *                 "eng": "Voyage track"
-     *             }
-     *         }
-     *     ]
      * }
-     *
      * The need of retryable is because the geonetwork elastic instance is too small, often it memory usage is
      * 75%, it will throw BadRequest exception if we push it too hard, so we need to retry on bad request
      */
@@ -320,68 +239,42 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
             backoff = @Backoff(delay = 1500L)
     )
     protected Optional<Map<String, ?>> getRecordRelated(String uuid) {
-        try {
-            Map<String, Object> params = new HashMap<>();
-            params.put(UUID, uuid);
+        Map<String, ?> value = cache.get(uuid);
+        if(value == null) {
+            try {
+                Map<String, Object> params = new HashMap<>();
+                params.put(UUID, uuid);
 
-            logger.debug("Get related record for {}", uuid);
-            ResponseEntity<Map<String, ?>> responseEntity = indexerRestTemplate.exchange(
-                    getGeoNetworkRelatedEndpoint(),
-                    HttpMethod.GET,
-                    defaultRequestEntity,
-                    new ParameterizedTypeReference<>() {},
-                    params
-            );
+                logger.debug("Get related record for {}", uuid);
+                ResponseEntity<Map<String, Map<String, ?>>> responseEntity = indexerRestTemplate.exchange(
+                        getGeoNetworkRelatedEndpoint(),
+                        HttpMethod.GET,
+                        defaultRequestEntity,
+                        new ParameterizedTypeReference<>() {
+                        },
+                        params
+                );
 
-            if (responseEntity.getStatusCode().is2xxSuccessful()) {
-                return Optional.ofNullable(responseEntity.getBody());
-            }
-            else {
-                return Optional.empty();
-            }
-        }
-        catch (HttpClientErrorException.NotFound e) {
-            throw new MetadataNotFoundException("Unable to find metadata record with UUID: " + uuid + " in GeoNetwork");
-        }
-    }
-
-    /**
-     * This function is to get the associated record(parent, children, and siblings) of a metadata record
-     * @param uuid - UUID of record
-     * @return
-     */
-    @Retryable(
-            retryFor = HttpClientErrorException.BadRequest.class,
-            maxAttempts = 10,
-            backoff = @Backoff(delay = 1500L)
-    )
-    protected Optional<Map<String, ?>> getRecordAssociated(String uuid) {
-        try {
-            Map<String, Object> params = new HashMap<>();
-            params.put(UUID, uuid);
-
-            logger.debug("Get associated record for {}", uuid);
-            ResponseEntity<Map<String, ?>> responseEntity = indexerRestTemplate.exchange(
-                    getGeoNetworkAssociatedEndpoint(),
-                    HttpMethod.GET,
-                    defaultRequestEntity,
-                    new ParameterizedTypeReference<>() {},
-                    params
-            );
-
-            if (responseEntity.getStatusCode().is2xxSuccessful()) {
-                return Optional.ofNullable(responseEntity.getBody());
-            }
-            else {
-                return Optional.empty();
+                if (responseEntity.getStatusCode().is2xxSuccessful()) {
+                    if(responseEntity.getBody() != null) {
+                        // cache the result as same record will be called multiple times
+                        // during single record creation
+                        responseEntity
+                                .getBody()
+                                .forEach((key, value1) -> cache.put(key, value1));
+                    }
+                    return Optional.ofNullable(cache.get(uuid));
+                } else {
+                    return Optional.empty();
+                }
+            } catch (HttpClientErrorException.NotFound e) {
+                throw new MetadataNotFoundException("Unable to find metadata record with UUID: " + uuid + " in GeoNetwork");
             }
         }
-        catch (HttpClientErrorException.NotFound e) {
-            throw new MetadataNotFoundException("Unable to find metadata record with UUID: " + uuid + " in GeoNetwork");
+        else {
+            return Optional.of(value);
         }
     }
-
-
     /**
      * If geonetwork for some reason reboot, it is cloud env anyway, we keep retry evey 10 seconds
      * @param uuid
@@ -585,15 +478,11 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
 
     @Override
     public Map<String, ?> getAssociatedRecords(String uuid) {
-        return self.getRecordAssociated(uuid).orElse(Collections.emptyMap());
+        return self.getRecordRelated(uuid).orElse(Collections.emptyMap());
     }
 
     protected String getGeoNetworkRelatedEndpoint() {
-        return getServer() + "/geonetwork/srv/api/records/{uuid}/related";
-    }
-
-    protected String getGeoNetworkAssociatedEndpoint() {
-        return getServer() + "/geonetwork/srv/api/records/{uuid}/associated";
+        return getServer() + "/geonetwork/srv/api/related?type=parent&type=thumbnails&type=onlines&type=brothersAndSisters&type=children&type=associated&uuid={uuid}";
     }
 
     protected String getGeoNetworkRecordsEndpoint() {

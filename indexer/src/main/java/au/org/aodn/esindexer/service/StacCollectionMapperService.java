@@ -167,7 +167,6 @@ public abstract class StacCollectionMapperService {
             return null;
         }
     }
-
     /**
      * Custom mapping for description field, name convention is start with map then the field name
      * @param source
@@ -180,14 +179,13 @@ public abstract class StacCollectionMapperService {
         if(!items.isEmpty()) {
             // Need to assert only 1 block contains our target
             for(MDDataIdentificationType i : items) {
-                // TODO: Null or empty check
-                return i.getAbstract().getCharacterString().getValue().toString();
+                return safeGet(() -> i.getAbstract().getCharacterString().getValue())
+                        .map(Object::toString)
+                        .orElse("");
             }
         }
         return "";
     }
-
-
 
     @Named("mapCitation")
     String mapCitation(MDMetadataType source) {
@@ -379,25 +377,37 @@ public abstract class StacCollectionMapperService {
     }
     /**
      * Custom mapping for title field, name convention is start with map then the field name
-     * @param source
-     * @return
+     * @param source - The parsed XML document
+     * @return - The title
      */
     @Named("mapTitle")
     String mapTitle(MDMetadataType source) {
         List<MDDataIdentificationType> items = MapperUtils.findMDDataIdentificationType(source);
         if(!items.isEmpty()) {
             // Need to assert only 1 block contains our target
-            for(MDDataIdentificationType i : items) {
-                // TODO: Null or empty check
-                AbstractCitationType ac = i.getCitation().getAbstractCitation().getValue();
-                if(ac instanceof CICitationType2 type2) {
-                    return type2.getTitle().getCharacterString().getValue().toString();
-                }
-                else if(ac instanceof CICitationType type1) {
-                    // Backward compatible
-                    return type1.getTitle().getCharacterString().getValue().toString();
-                }
-            }
+            return items.stream()
+                    .map(item -> safeGet(() -> item.getCitation().getAbstractCitation().getValue()))
+                    // If valid
+                    .filter(Optional::isPresent)
+                    .map(Optional::get)
+                    .map(ac -> {
+                        // Try to find the title from these places
+                        if(ac instanceof CICitationType2 type2) {
+                            return type2.getTitle().getCharacterString().getValue().toString();
+                        }
+                        else if(ac instanceof CICitationType type1) {
+                            // Backward compatible
+                            return type1.getTitle().getCharacterString().getValue().toString();
+                        }
+                        else {
+                            return "";
+                        }
+                    })
+                    // If blank that means not found in map and need to filter out
+                    .filter(s -> !s.isBlank())
+                    // Just need to find the first valid one
+                    .findFirst()
+                    .orElse("");
         }
         return "";
     }
@@ -703,37 +713,40 @@ public abstract class StacCollectionMapperService {
     // TODO: need to handle exception
     @Named("mapProviders")
     List<ProviderModel> mapProviders(MDMetadataType source) {
-        List<ProviderModel> results = new ArrayList<>();
-        source.getContact().forEach(item -> {
-            if (item.getAbstractResponsibility() != null) {
-                if(item.getAbstractResponsibility().getValue() instanceof CIResponsibilityType2 ciResponsibility) {
-                    ciResponsibility.getParty().forEach(party -> {
-                        try
-                        {
-                            ProviderModel providerModel = ProviderModel.builder().build();
-                            providerModel.setRoles(Collections.singletonList(ciResponsibility.getRole().getCIRoleCode().getCodeListValue()));
-                            CIOrganisationType2 organisationType2 = (CIOrganisationType2) party.getAbstractCIParty().getValue();
-                            providerModel.setName(organisationType2.getName() != null ? organisationType2.getName().getCharacterString().getValue().toString() : "");
-                            organisationType2.getIndividual().forEach(individual -> individual.getCIIndividual().getContactInfo().forEach(contactInfo -> {
-                                contactInfo.getCIContact().getOnlineResource().forEach(onlineResource -> {
-                                    providerModel.setUrl(onlineResource.getCIOnlineResource().getLinkage().getCharacterString().getValue().toString());
-                                });
-                            }));
-                            results.add(providerModel);
-                        }
-                        catch (ClassCastException e) {
-                            logger.error("Unable to cast getAbstractCIParty().getValue() to CIOrganisationType2 for metadata record: {}", mapUUID(source));
-                        }
-                    });
-                }
-                else {
-                    logger.warn("getContact().getAbstractResponsibility() in mapProviders is not of type CIResponsibilityType2 for UUID {}", mapUUID(source));
-                }
-            }
-            else {
-                logger.warn("Null value fround for getContact().getAbstractResponsibility() in mapProviders transform for UUID {}", mapUUID(source));
-            }
-        });
+        final List<ProviderModel> results = new ArrayList<>();
+        safeGet(source::getContact)
+                .ifPresent(c -> c
+                        .stream()
+                        .filter(Objects::nonNull)
+                        .forEach(item -> {
+                            if(item.getAbstractResponsibility().getValue() instanceof CIResponsibilityType2 ciResponsibility) {
+                                safeGet(ciResponsibility::getParty)
+                                        .ifPresent(p -> p.forEach(party -> {
+                                            if(party.getAbstractCIParty().getValue() instanceof CIOrganisationType2 organisationType2) {
+                                                ProviderModel providerModel = ProviderModel.builder().build();
+                                                providerModel.setRoles(Collections.singletonList(ciResponsibility.getRole().getCIRoleCode().getCodeListValue()));
+                                                providerModel.setName(organisationType2.getName() != null ? organisationType2.getName().getCharacterString().getValue().toString() : "");
+
+                                                organisationType2.getIndividual().forEach(individual -> individual.getCIIndividual().getContactInfo().forEach(contactInfo -> {
+                                                    contactInfo.getCIContact().getOnlineResource().forEach(onlineResource -> {
+                                                        providerModel.setUrl(onlineResource.getCIOnlineResource().getLinkage().getCharacterString().getValue().toString());
+                                                    });
+                                                }));
+                                                results.add(providerModel);
+                                            }
+                                            else if(party.getAbstractCIParty().getValue() instanceof CIIndividualType2 individualType2) {
+                                                // TODO: https://geonetwork-edge.edge.aodn.org.au/geonetwork/srv/eng/catalog.search#/metadata/201112060/formatters/xsl-view?root=div&view=advanced
+                                                logger.warn("getAbstractCIParty() is not map at the moment {}", individualType2.getName().getCharacterString().getValue());
+                                            }
+                                            else {
+                                                logger.error("Unable to cast getAbstractCIParty().getValue() to CIOrganisationType2 or CIIndividualType2 for metadata record: {}", mapUUID(source));
+                                            }
+                                        }));
+                            }
+                            else {
+                                logger.warn("getContact().getAbstractResponsibility() in mapProviders is not of type CIResponsibilityType2 for UUID {}", mapUUID(source));
+                            }
+                        }));
         return results;
     }
 
@@ -913,7 +926,7 @@ public abstract class StacCollectionMapperService {
                     case "eng" -> languageModel.setName("English");
                     case "fra" -> languageModel.setName("French");
                     default -> {
-                        logger.warn("Making assumption...unable to find language name for metadata record: " + this.mapUUID(source));
+                        logger.warn("Unable to find language for metadata record: {}, default to eng", this.mapUUID(source));
                         languageModel.setCode("eng");
                         languageModel.setName("English");
                     }
