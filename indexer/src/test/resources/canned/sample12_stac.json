@@ -273,6 +273,12 @@
   "license": "Attribution 4.0 International (CC BY 4.0)",
   "providers": [
     {
+      "name": "CONNELL, DAVE J.",
+      "roles": [
+        "author"
+      ]
+    },
+    {
       "name": "Australian Antarctic Division",
       "roles": [
         "sponsor"
