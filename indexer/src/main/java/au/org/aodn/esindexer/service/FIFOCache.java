@@ -1,0 +1,31 @@
+package au.org.aodn.esindexer.service;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
+/**
+ * A simple FIFO cache to store a few records to improve querying speed
+ * @param <K>
+ * @param <V>
+ */
+public class FIFOCache<K, V> {
+
+    private final Map<K, V> cache;
+
+    public FIFOCache(int maxSize) {
+        this.cache = new LinkedHashMap<>(maxSize + 1, 1.0f, false) {
+            @Override
+            protected boolean removeEldestEntry(Map.Entry<K, V> eldest) {
+                return size() > maxSize;
+            }
+        };
+    }
+
+    public V get(K key) {
+        return cache.get(key);
+    }
+
+    public void put(K key, V value) {
+        cache.put(key, value);
+    }
+}
+

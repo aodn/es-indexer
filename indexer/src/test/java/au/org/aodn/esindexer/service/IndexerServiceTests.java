@@ -264,7 +264,6 @@ public class IndexerServiceTests extends BaseTestClass {
             deleteRecord(uuid);
         }
     }
-
     /**
      * Verify extracted phrases from abstract (extractTokensFromDescription method)
      * @throws IOException - If file not found

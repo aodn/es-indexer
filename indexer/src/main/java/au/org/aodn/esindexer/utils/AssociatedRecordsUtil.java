@@ -42,15 +42,14 @@ public class AssociatedRecordsUtil {
     }
 
     @SuppressWarnings("unchecked")
-    private static LinkModel buildLink(Map<String, Object> recordData, RelationType relationType) {
+    private static LinkModel buildLink(Map<String, Object> record, RelationType relationType) {
 
         return safeGet(() -> {
-            var record = (Map<String, Object>)recordData.get("_source");
-            var href = "uuid:" + record.get("uuid").toString();
-            var titleObject = (LinkedHashMap<String, String>) record.get("resourceTitleObject");
-            var title = titleObject.get("default");
-            var abstractObject = (LinkedHashMap<String, String>) record.get("resourceAbstractObject");
-            var abstractText = abstractObject.get("default");
+            var href = "uuid:" + record.get("id").toString();
+            var titleObject = (LinkedHashMap<String, String>) record.get("title");
+            var title = titleObject.get("eng");
+            var abstractObject = (LinkedHashMap<String, String>) record.get("description");
+            var abstractText = abstractObject.get("eng");
             var titleWithAbstract = new TitleWithAbstract(title, abstractText);
             return LinkModel.builder()
                     .href(href)
@@ -64,7 +63,10 @@ public class AssociatedRecordsUtil {
     @SuppressWarnings("unchecked")
     private static List<Map<String, Object>> getRecordsByRelationKey(Map<String, ?> associatedRecordMap, String key) {
         try {
-            return (List<Map<String, Object>>) associatedRecordMap.get(key);
+            return associatedRecordMap.containsKey(key) && associatedRecordMap.get(key) != null ?
+                    (List<Map<String, Object>>) associatedRecordMap.get(key) :
+                    Collections.emptyList();
+
         } catch (ClassCastException e) {
             return Collections.emptyList();
         }
@@ -80,7 +82,7 @@ public class AssociatedRecordsUtil {
     }
 
     private static List<Map<String, Object>> getSiblingRecords(Map<String, ?> associatedRecordMap) {
-        return getRecordsByRelationKey(associatedRecordMap, "brothersAndSisters");
+        return getRecordsByRelationKey(associatedRecordMap, "siblings");
     }
 
     private static List<Map<String, Object>> getChildRecords(Map<String, ?> associatedRecordMap) {

@@ -377,27 +377,37 @@ public abstract class StacCollectionMapperService {
     }
     /**
      * Custom mapping for title field, name convention is start with map then the field name
-     * @param source
-     * @return
+     * @param source - The parsed XML document
+     * @return - The title
      */
     @Named("mapTitle")
     String mapTitle(MDMetadataType source) {
         List<MDDataIdentificationType> items = MapperUtils.findMDDataIdentificationType(source);
         if(!items.isEmpty()) {
             // Need to assert only 1 block contains our target
-            for(MDDataIdentificationType i : items) {
-                safeGet(() -> i.getCitation().getAbstractCitation().getValue())
-                        .map(ac -> {
-                            if(ac instanceof CICitationType2 type2) {
-                                return type2.getTitle().getCharacterString().getValue().toString();
-                            }
-                            else if(ac instanceof CICitationType type1) {
-                                // Backward compatible
-                                return type1.getTitle().getCharacterString().getValue().toString();
-                            }
+            return items.stream()
+                    .map(item -> safeGet(() -> item.getCitation().getAbstractCitation().getValue()))
+                    // If valid
+                    .filter(Optional::isPresent)
+                    .map(Optional::get)
+                    .map(ac -> {
+                        // Try to find the title from these places
+                        if(ac instanceof CICitationType2 type2) {
+                            return type2.getTitle().getCharacterString().getValue().toString();
+                        }
+                        else if(ac instanceof CICitationType type1) {
+                            // Backward compatible
+                            return type1.getTitle().getCharacterString().getValue().toString();
+                        }
+                        else {
                             return "";
-                        });
-            }
+                        }
+                    })
+                    // If blank that means not found in map and need to filter out
+                    .filter(s -> !s.isBlank())
+                    // Just need to find the first valid one
+                    .findFirst()
+                    .orElse("");
         }
         return "";
     }
