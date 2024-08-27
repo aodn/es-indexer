@@ -28,4 +28,3 @@ public class FIFOCache<K, V> {
         cache.put(key, value);
     }
 }
-
