@@ -736,7 +736,7 @@ public abstract class StacCollectionMapperService {
                                             }
                                             else if(party.getAbstractCIParty().getValue() instanceof CIIndividualType2 individualType2) {
                                                 // TODO: https://geonetwork-edge.edge.aodn.org.au/geonetwork/srv/eng/catalog.search#/metadata/201112060/formatters/xsl-view?root=div&view=advanced
-                                                logger.info(individualType2.getName().getCharacterString().getValue());
+                                                logger.warn("getAbstractCIParty() is not map at the moment {}", individualType2.getName().getCharacterString().getValue());
                                             }
                                             else {
                                                 logger.error("Unable to cast getAbstractCIParty().getValue() to CIOrganisationType2 or CIIndividualType2 for metadata record: {}", mapUUID(source));
