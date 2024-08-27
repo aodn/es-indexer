@@ -718,6 +718,7 @@ public abstract class StacCollectionMapperService {
                 .ifPresent(c -> c
                         .stream()
                         .filter(Objects::nonNull)
+                        .filter(item -> item.getAbstractResponsibility() != null)
                         .forEach(item -> {
                             if(item.getAbstractResponsibility().getValue() instanceof CIResponsibilityType2 ciResponsibility) {
                                 safeGet(ciResponsibility::getParty)
