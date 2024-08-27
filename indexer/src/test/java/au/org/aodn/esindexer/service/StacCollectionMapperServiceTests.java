@@ -309,7 +309,7 @@ public class StacCollectionMapperServiceTests {
     @Test
     public void verifyAbstractCIParty1() throws IOException {
         String xml = readResourceFile("classpath:canned/sample12.xml");
-        String expected = readResourceFile("classpath:canned/abstract_resposibilty_null_stac.json");
+        String expected = readResourceFile("classpath:canned/sample12_stac.json");
         indexerService.indexMetadata(xml);
 
         Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);

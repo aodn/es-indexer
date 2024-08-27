@@ -167,7 +167,6 @@ public abstract class StacCollectionMapperService {
             return null;
         }
     }
-
     /**
      * Custom mapping for description field, name convention is start with map then the field name
      * @param source
@@ -180,14 +179,13 @@ public abstract class StacCollectionMapperService {
         if(!items.isEmpty()) {
             // Need to assert only 1 block contains our target
             for(MDDataIdentificationType i : items) {
-                // TODO: Null or empty check
-                return i.getAbstract().getCharacterString().getValue().toString();
+                return safeGet(() -> i.getAbstract().getCharacterString().getValue())
+                        .map(Object::toString)
+                        .orElse("");
             }
         }
         return "";
     }
-
-
 
     @Named("mapCitation")
     String mapCitation(MDMetadataType source) {
@@ -388,15 +386,17 @@ public abstract class StacCollectionMapperService {
         if(!items.isEmpty()) {
             // Need to assert only 1 block contains our target
             for(MDDataIdentificationType i : items) {
-                // TODO: Null or empty check
-                AbstractCitationType ac = i.getCitation().getAbstractCitation().getValue();
-                if(ac instanceof CICitationType2 type2) {
-                    return type2.getTitle().getCharacterString().getValue().toString();
-                }
-                else if(ac instanceof CICitationType type1) {
-                    // Backward compatible
-                    return type1.getTitle().getCharacterString().getValue().toString();
-                }
+                safeGet(() -> i.getCitation().getAbstractCitation().getValue())
+                        .map(ac -> {
+                            if(ac instanceof CICitationType2 type2) {
+                                return type2.getTitle().getCharacterString().getValue().toString();
+                            }
+                            else if(ac instanceof CICitationType type1) {
+                                // Backward compatible
+                                return type1.getTitle().getCharacterString().getValue().toString();
+                            }
+                            return "";
+                        });
             }
         }
         return "";
@@ -916,7 +916,7 @@ public abstract class StacCollectionMapperService {
                     case "eng" -> languageModel.setName("English");
                     case "fra" -> languageModel.setName("French");
                     default -> {
-                        logger.warn("Making assumption...unable to find language name for metadata record: " + this.mapUUID(source));
+                        logger.warn("Unable to find language for metadata record: {}, default to eng", this.mapUUID(source));
                         languageModel.setCode("eng");
                         languageModel.setName("English");
                     }
