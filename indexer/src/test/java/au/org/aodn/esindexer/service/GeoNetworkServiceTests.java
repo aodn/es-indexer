@@ -9,9 +9,13 @@ import au.org.aodn.esindexer.utils.AssociatedRecordsUtil;
 import au.org.aodn.esindexer.model.RelationType;
 import au.org.aodn.esindexer.utils.JaxbUtils;
 import au.org.aodn.metadata.iso19115_3_2018.MDMetadataType;
+import co.elastic.clients.elasticsearch.ElasticsearchClient;
+import co.elastic.clients.elasticsearch.core.SearchRequest;
 import jakarta.xml.bind.JAXBException;
 import org.junit.jupiter.api.*;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -26,6 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
+import static org.mockito.ArgumentMatchers.any;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
@@ -35,6 +40,10 @@ public class GeoNetworkServiceTests extends BaseTestClass {
     // Must use the impl to access protected method for testing
     @Autowired
     protected GeoNetworkServiceImpl geoNetworkService;
+
+    @Autowired
+    @Qualifier("gn4ElasticsearchClient")
+    protected ElasticsearchClient gn4ElasticsearchClient;
 
     @Value("${elasticsearch.index.name}")
     protected String INDEX_NAME;
@@ -298,6 +307,58 @@ public class GeoNetworkServiceTests extends BaseTestClass {
             Assertions.fail(e.getMessage());
         } finally {
             deleteRecord(targetRecordId, parentId, siblingId, childId);
+        }
+    }
+    /**
+     * Verify we set the retry correctly, this is done by spy gn4ElasticClient where it return IOException on first call.
+     * Need to restore to original object after test
+     */
+    @Test
+    public void verifyRetryOnGeonetworkBusyWorks() throws IOException, JAXBException {
+        final String UUID1 = "9e5c3031-a026-48b3-a153-a70c2e2b78b9";
+        final String UUID2 = "830f9a83-ae6b-4260-a82a-24c4851f7119";
+        final String UUID3 = "06b09398-d3d0-47dc-a54a-a745319fbece";
+        final String UUID4 = "7709f541-fc0c-4318-b5b9-9053aa474e0e";
+        final String UUID5 = "2852a776-cbfc-4bc8-a126-f3c036814892";
+        final String UUID6 = "e18eee85-c6c4-4be2-ac8c-930991cf2534";
+        final String UUID7 = "5905b3eb-aad0-4f9c-a03e-a02fb3488082";
+
+        try {
+            insertMetadataRecords(UUID1, "classpath:canned/sample1.xml");
+            insertMetadataRecords(UUID2, "classpath:canned/sample2.xml");
+            insertMetadataRecords(UUID3, "classpath:canned/sample3.xml");
+            insertMetadataRecords(UUID4, "classpath:canned/sample4.xml");
+            insertMetadataRecords(UUID5, "classpath:canned/sample5.xml");
+            insertMetadataRecords(UUID6, "classpath:canned/sample6.xml");
+            insertMetadataRecords(UUID7, "classpath:canned/sample7.xml");
+
+            ElasticsearchClient spyClient = Mockito.spy(gn4ElasticsearchClient);
+            // Throw IOException alternatively so we can test retry logic works
+            Mockito
+                    .doThrow(new IOException())
+                    .doCallRealMethod()
+                    .doThrow(new IOException())
+                    .doCallRealMethod()
+                    .doThrow(new IOException())
+                    .doCallRealMethod()
+                    .when(spyClient)
+                    .search(any(SearchRequest.class), any());
+
+            geoNetworkService.setGn4ElasticClient(spyClient);
+
+            // Should not flow exception and retry correctly given some call throw IOException
+            Iterable<String> i = geoNetworkService.getAllMetadataRecords();
+
+            // It should handle retry internally and without throwing exception
+            for(String x : i) {
+                if (x == null) {
+                    // because of the concurrency issue, sometimes it might return null. just ignore it
+                    continue;
+                }
+            }
+        }
+        finally {
+            geoNetworkService.setGn4ElasticClient(gn4ElasticsearchClient);
         }
     }
 }

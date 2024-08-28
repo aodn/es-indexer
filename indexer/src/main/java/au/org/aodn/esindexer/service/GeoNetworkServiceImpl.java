@@ -18,6 +18,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.elasticsearch.client.ResponseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
@@ -27,6 +28,7 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Retryable;
+import org.springframework.retry.support.RetryTemplate;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -379,7 +381,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
      * 75%, it will throw BadRequest exception if we push it too hard, so we need to retry on bad request
      */
     @Retryable(
-            retryFor = HttpClientErrorException.BadRequest.class,
+            retryFor = {HttpClientErrorException.BadRequest.class, RuntimeException.class},
             maxAttempts = 10,
             backoff = @Backoff(delay = 1500L)
     )
@@ -401,6 +403,16 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
                     // int is enough because we paged query
                     private int index = 0;
 
+                    // This instance is not a bean and therefore @Retry will not work so we
+                    // need to use another approach in this case.
+                    private final RetryTemplate retryTemplate = RetryTemplate
+                            .builder()
+                            .maxAttempts(10)
+                            .exponentialBackoff(1500, 2, 10000)
+                            .retryOn(List.of(ResponseException.class, IOException.class))
+                            .traversingCauses()
+                            .build();
+
                     @Override
                     public boolean hasNext() {
                         // If we hit the end, that means we have iterated to end of page.
@@ -410,7 +422,11 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
                         else {
                             // Check if we have next page
                             try {
-                                response.set(gn4ElasticClient.search(createSearchAllUUID(lastUUID.get()), ObjectNode.class));
+                                response.set(
+                                        retryTemplate.execute(context ->
+                                                gn4ElasticClient.search(createSearchAllUUID(lastUUID.get()), ObjectNode.class)
+                                        )
+                                );
                                 // Reset counter from start
                                 index = 0;
                                 return index < response.get().hits().hits().size();
@@ -464,8 +480,8 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
         }
         catch(IOException e) {
             throw new RuntimeException(
-                    String.format("Failed to fetch data from GeoNetwork Elastic API, too busy? Query is %s", req.toString()),
-                    e
+                    String.format("Failed to fetch data from GeoNetwork Elastic API, too busy? Keep retry a few times - Query is %s", req.toString()),
+                    e.getCause()
             );
         }
     }
@@ -485,6 +501,13 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
     @Override
     public Map<String, ?> getAssociatedRecords(String uuid) {
         return self.getRecordRelated(uuid).orElse(Collections.emptyMap());
+    }
+    /**
+     * This is use in test only and therefore it is a protected member.
+     * @return - Elastic client
+     */
+    protected void setGn4ElasticClient(ElasticsearchClient client) {
+        this.gn4ElasticClient = client;
     }
 
     protected String getGeoNetworkRelatedEndpoint() {
