@@ -60,25 +60,28 @@ public class VocabsUtils {
     @Autowired
     ObjectMapper indexerObjectMapper;
 
-    protected void indexAllVocabs(List<VocabModel> parameterVocabs,
+    protected VocabModel toLowerCaseVocabModel(VocabModel vocabModel) {
+        return VocabModel.builder()
+                .label(vocabModel.getLabel().toLowerCase())
+                .broader(vocabModel.getBroader().stream().peek(item -> item.setLabel(item.getLabel().toLowerCase())).collect(Collectors.toList()))
+                .narrower(vocabModel.getNarrower().stream().peek(item -> item.setLabel(item.getLabel().toLowerCase())).collect(Collectors.toList()))
+                .build();
+    }
+
+    private void indexAllVocabs(List<VocabModel> parameterVocabs,
                                   List<VocabModel> platformVocabs) throws IOException {
 
         List<VocabDto> vocabDtos = new ArrayList<>();
 
         // parameter vocabs
         for (VocabModel parameterVocab : parameterVocabs) {
-            VocabModel lowerCaseParameterVocab = VocabModel.builder()
-                    .label(parameterVocab.getLabel().toLowerCase())
-                    .broader(parameterVocab.getBroader().stream().peek(item -> item.setLabel(item.getLabel().toLowerCase())).collect(Collectors.toList()))
-                    .narrower(parameterVocab.getNarrower().stream().peek(item -> item.setLabel(item.getLabel().toLowerCase())).collect(Collectors.toList()))
-                    .build();
-            VocabDto vocabDto = VocabDto.builder().parameterVocabModel(lowerCaseParameterVocab).build();
+            VocabDto vocabDto = VocabDto.builder().parameterVocabModel(toLowerCaseVocabModel(parameterVocab)).build();
             vocabDtos.add(vocabDto);
         }
 
         // platform vocabs
         for (VocabModel platformVocab : platformVocabs) {
-            VocabDto vocabDto = VocabDto.builder().platformVocabModel(platformVocab).build();
+            VocabDto vocabDto = VocabDto.builder().platformVocabModel(toLowerCaseVocabModel(platformVocab)).build();
             vocabDtos.add(vocabDto);
         }
 
@@ -89,7 +92,7 @@ public class VocabsUtils {
         bulkIndexVocabs(vocabDtos);
     }
 
-    protected void bulkIndexVocabs(List<VocabDto> vocabs) throws IOException {
+    private void bulkIndexVocabs(List<VocabDto> vocabs) throws IOException {
         // count portal index documents, or create index if not found from defined mapping JSON file
         BulkRequest.Builder bulkRequest = new BulkRequest.Builder();
 
