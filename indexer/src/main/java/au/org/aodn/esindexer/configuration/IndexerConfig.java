@@ -9,7 +9,7 @@ import org.springframework.retry.annotation.EnableRetry;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
-import java.util.concurrent.Executor;
+import java.util.concurrent.*;
 
 @Configuration
 @EnableRetry
@@ -26,22 +26,26 @@ public class IndexerConfig {
     public VocabsUtils createVocabsUtils() {
         return new VocabsUtils();
     }
+
     /**
      * This executor is used to limit the number of concurrent call to index metadata so not to flood the
      * geonetwork. This is useful because the geonetwork do not care about re-index call it invoke, hence
      * the elastic of geonetwork may be flooded by its re-index call.
-     * @return - An async task executor
+     *
+     * @return - An async task executor with blocking queue to stop too many request.
      */
     @Bean(name = "asyncIndexMetadata")
     public Executor taskExecutor(
-            @Value("${app.indexing.pool.core:5}") Integer coreSize,
-            @Value("${app.indexing.pool.max:10}") Integer coreMax) {
-        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-        executor.setCorePoolSize(coreSize);     // Number of concurrent threads
-        executor.setMaxPoolSize(coreMax);       // Max number of concurrent threads
-        executor.setQueueCapacity(5000);        // Size of the queue
-        executor.setThreadNamePrefix("Async-");
-        executor.initialize();
-        return executor;
+            @Value("${app.indexing.pool.core:3}") Integer coreSize,
+            @Value("${app.indexing.pool.max:6}") Integer coreMax) {
+
+        return new ThreadPoolExecutor(
+                coreSize,
+                coreMax,
+                0L,
+                TimeUnit.SECONDS,
+                new ArrayBlockingQueue<>(100),
+                new ThreadPoolExecutor.CallerRunsPolicy() // Rejection policy
+        );
     }
 }
