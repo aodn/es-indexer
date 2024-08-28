@@ -359,6 +359,7 @@ public class GeoNetworkServiceTests extends BaseTestClass {
         }
         finally {
             geoNetworkService.setGn4ElasticClient(gn4ElasticsearchClient);
+            deleteRecord(UUID1, UUID2, UUID3, UUID4, UUID5, UUID6, UUID7);
         }
     }
 }
