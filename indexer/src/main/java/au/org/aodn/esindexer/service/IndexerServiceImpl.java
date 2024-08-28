@@ -101,7 +101,8 @@ public class IndexerServiceImpl implements IndexerService {
         }
     }
 
-    protected boolean isGeoNetworkInstanceReinstalled(long portalIndexDocumentsCount) {
+    @Override
+    public boolean isGeoNetworkInstanceReinstalled(long portalIndexDocumentsCount) {
         /**
          * compare if GeoNetwork has 1 only metadata (the recently added one which triggered the indexer)
          * and the portal index has more than 0 documents (the most recent metadata yet indexed to portal index at this point)
@@ -109,7 +110,8 @@ public class IndexerServiceImpl implements IndexerService {
         return geoNetworkResourceService.isMetadataRecordsCountLessThan(2) && portalIndexDocumentsCount > 0;
     }
 
-    protected boolean isMetadataPublished(String uuid) {
+    @Override
+    public boolean isMetadataPublished(String uuid) {
         /* read for the published status from GN Elasticsearch index, the flag is not part of the XML body */
         try {
             geoNetworkResourceService.searchRecordBy(uuid);
