@@ -865,7 +865,7 @@ public abstract class StacCollectionMapperService {
                     case "eng" -> languageModel.setName("English");
                     case "fra" -> languageModel.setName("French");
                     default -> {
-                        logger.warn("Making assumption...unable to find language name for metadata record: " + this.mapUUID(source));
+                        logger.warn("Unable to find language for metadata record: {}, default to eng", this.mapUUID(source));
                         languageModel.setCode("eng");
                         languageModel.setName("English");
                     }
