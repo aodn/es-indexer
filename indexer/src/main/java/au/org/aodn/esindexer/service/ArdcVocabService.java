@@ -14,9 +14,9 @@ import java.util.List;
 
 
 @Service
-public class ArdcVocabsService {
+public class ArdcVocabService {
     @Autowired
-    VocabsUtils cacheArdcVocabsUtils;
+    VocabsUtils vocabsUtils;
 
     @Autowired
     ElasticsearchClient portalElasticsearchClient;
@@ -45,10 +45,10 @@ public class ArdcVocabsService {
     this method for analysing the AODN discovery parameter vocabularies of a record aka bottom-level vocabs (found in the themes section)
     and returning the second-level vocabularies that match (1 level up from the bottom-level vocabularies)
      */
-    public List<String> getParameterVocabs(List<ThemesModel> themes) throws IOException {
+    public List<String> getParameterVocabsByThemes(List<ThemesModel> themes) throws IOException {
         List<String> results = new ArrayList<>();
         // Iterate over the top-level vocabularies
-        for (JsonNode topLevelVocab : cacheArdcVocabsUtils.getParameterVocabs()) {
+        for (JsonNode topLevelVocab : vocabsUtils.getParameterVocabs()) {
             if (topLevelVocab.has("narrower") && !topLevelVocab.get("narrower").isEmpty()) {
                 for (JsonNode secondLevelVocab : topLevelVocab.get("narrower")) {
                     String secondLevelVocabLabel = secondLevelVocab.get("label").asText();
@@ -72,21 +72,15 @@ public class ArdcVocabsService {
         return results;
     }
 
-    // TODO: getPlatformVocabs
-    public List<String> getPlatformVocabs() throws IOException {
-        List<String> results = new ArrayList<>();
-//        for (JsonNode vocab : cacheArdcVocabsUtils.getPlatformVocabs()) {
-//            results.add("sample platform vocab");
-//        }
-        return results;
+    // used by debugging/development api endpoint
+    public List<JsonNode> getParameterVocabs() throws IOException {
+        return vocabsUtils.getParameterVocabs();
     }
 
-    // TODO: getOrganisationVocabs
-    public List<String> getOrganisationVocabs() throws IOException {
-        List<String> results = new ArrayList<>();
-//        for (JsonNode vocab : cacheArdcVocabsUtils.getOrganisationVocabs()) {
-//            results.add("sample organisation vocab");
-//        }
-        return results;
+    // used by debugging/development api endpoint
+    public List<JsonNode> getPlatformVocabs() throws IOException {
+        return vocabsUtils.getPlatformVocabs();
     }
+
+    // TODO:
 }

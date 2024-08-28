@@ -55,7 +55,7 @@ public class IndexerServiceImpl implements IndexerService {
     protected StacCollectionMapperService stacCollectionMapperService;
     protected JaxbUtils<MDMetadataType> jaxbUtils;
     protected RankingService rankingService;
-    protected ArdcVocabsService ardcVocabsService;
+    protected ArdcVocabService ardcVocabService;
 
     protected static final long DEFAULT_BACKOFF_TIME = 3000L;
 
@@ -74,7 +74,7 @@ public class IndexerServiceImpl implements IndexerService {
             ElasticsearchClient portalElasticsearchClient,
             ElasticSearchIndexService elasticSearchIndexService,
             StacCollectionMapperService stacCollectionMapperService,
-            ArdcVocabsService ardcVocabsService
+            ArdcVocabService ardcVocabService
     ) {
         this.indexName = indexName;
         this.tokensAnalyserName = tokensAnalyserName;
@@ -85,7 +85,7 @@ public class IndexerServiceImpl implements IndexerService {
         this.portalElasticsearchClient = portalElasticsearchClient;
         this.elasticSearchIndexService = elasticSearchIndexService;
         this.stacCollectionMapperService = stacCollectionMapperService;
-        this.ardcVocabsService = ardcVocabsService;
+        this.ardcVocabService = ardcVocabService;
     }
 
     public Hit<ObjectNode> getDocumentByUUID(String uuid) throws IOException {
@@ -169,20 +169,22 @@ public class IndexerServiceImpl implements IndexerService {
 
         stacCollectionModel.getSummaries().setScore(score);
 
-        List<String> parameterVocabs = ardcVocabsService.getParameterVocabs(stacCollectionModel.getThemes());
+        List<String> parameterVocabs = ardcVocabService.getParameterVocabsByThemes(stacCollectionModel.getThemes());
         if (!parameterVocabs.isEmpty()) {
             stacCollectionModel.getSummaries().setParameterVocabs(parameterVocabs);
         }
 
-        List<String> platformVocabs = ardcVocabsService.getPlatformVocabs();
-        if (!platformVocabs.isEmpty()) {
-            stacCollectionModel.getSummaries().setPlatformVocabs(platformVocabs);
-        }
+        // TODO
 
-        List<String> organisationVocabs = ardcVocabsService.getOrganisationVocabs();
-        if (!organisationVocabs.isEmpty()) {
-            stacCollectionModel.getSummaries().setOrganisationVocabs(organisationVocabs);
-        }
+//        List<String> platformVocabs = ardcVocabService.getPlatformVocabs();
+//        if (!platformVocabs.isEmpty()) {
+//            stacCollectionModel.getSummaries().setPlatformVocabs(platformVocabs);
+//        }
+//
+//        List<String> organisationVocabs = ardcVocabService.getOrganisationVocabs();
+//        if (!organisationVocabs.isEmpty()) {
+//            stacCollectionModel.getSummaries().setOrganisationVocabs(organisationVocabs);
+//        }
 
         // categories suggest using a different index
         // extendable for other aspects of the records data. eg. title, description, etc. something that are unique to the record and currently using "text" type
