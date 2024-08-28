@@ -27,7 +27,7 @@ public class IndexerServiceTests extends BaseTestClass {
     protected GeoNetworkServiceImpl geoNetworkService;
 
     @Autowired
-    protected IndexerServiceImpl indexerService;
+    protected IndexerService indexerService;
 
     @Autowired
     protected ObjectMapper indexerObjectMapper;
@@ -60,9 +60,14 @@ public class IndexerServiceTests extends BaseTestClass {
             insertMetadataRecords(uuid1, "classpath:canned/sample1.xml");
             insertMetadataRecords(uuid2, "classpath:canned/sample2.xml");
 
-            Assertions.assertTrue(indexerService.isMetadataPublished(uuid1), uuid1 + " published");
-            Assertions.assertTrue(indexerService.isMetadataPublished(uuid2), uuid2 + " published");
-            Assertions.assertFalse(indexerService.isMetadataPublished("not-exist"), "Not exist and not published");
+            if(indexerService instanceof IndexerServiceImpl impl) {
+                Assertions.assertTrue(impl.isMetadataPublished(uuid1), uuid1 + " published");
+                Assertions.assertTrue(impl.isMetadataPublished(uuid2), uuid2 + " published");
+                Assertions.assertFalse(impl.isMetadataPublished("not-exist"), "Not exist and not published");
+            }
+            else {
+                Assertions.fail("IndexerServiceImpl expected");
+            }
         }
         finally {
             deleteRecord(uuid1);
@@ -77,8 +82,13 @@ public class IndexerServiceTests extends BaseTestClass {
     public void verifyGeoNetworkInstanceReinstalled() throws IOException {
         String uuid = "9e5c3031-a026-48b3-a153-a70c2e2b78b9";
         try {
-            insertMetadataRecords(uuid, "classpath:canned/sample1.xml");
-            Assertions.assertTrue(indexerService.isGeoNetworkInstanceReinstalled(1), "New installed");
+            if(indexerService instanceof IndexerServiceImpl impl) {
+                insertMetadataRecords(uuid, "classpath:canned/sample1.xml");
+                Assertions.assertTrue(impl.isGeoNetworkInstanceReinstalled(1), "New installed");
+            }
+            else {
+                Assertions.fail("IndexerServiceImpl expected");
+            }
         }
         finally {
             deleteRecord(uuid);

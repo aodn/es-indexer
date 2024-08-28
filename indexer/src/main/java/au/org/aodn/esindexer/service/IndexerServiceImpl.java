@@ -3,7 +3,6 @@ package au.org.aodn.esindexer.service;
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.exception.*;
 import au.org.aodn.esindexer.utils.JaxbUtils;
-import au.org.aodn.esindexer.utils.StringUtil;
 import au.org.aodn.metadata.iso19115_3_2018.MDMetadataType;
 import au.org.aodn.stac.model.RecordSuggest;
 import au.org.aodn.stac.model.StacCollectionModel;
@@ -29,6 +28,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayInputStream;
@@ -170,7 +170,13 @@ public class IndexerServiceImpl implements IndexerService {
 
         return stacCollectionModel;
     }
-
+    /**
+     * Use to index a particular UUID, the async is used to limit the number of same function call to avoid flooding
+     * the system.
+     * @param metadataValues - The XML of the metadata
+     * @return - The STAC doc in string format.
+     */
+    @Async("asyncIndexMetadata")
     public ResponseEntity<String> indexMetadata(String metadataValues) {
         try {
             StacCollectionModel mappedMetadataValues = this.getMappedMetadataValues(metadataValues);
