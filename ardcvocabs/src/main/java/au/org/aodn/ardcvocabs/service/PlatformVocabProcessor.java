@@ -42,7 +42,7 @@ public class PlatformVocabProcessor extends VocabProcessorBase {
 
                                     VocabModel vocab = VocabModel
                                             .builder()
-                                            .label(label.apply(target))
+                                            .label(label.apply(target).toLowerCase())
                                             .definition(definition.apply(target))
                                             .about(about.apply(target))
                                             .build();
@@ -119,7 +119,7 @@ public class PlatformVocabProcessor extends VocabProcessorBase {
 
                             VocabModel vocab = VocabModel
                                     .builder()
-                                    .label(label.apply(j))
+                                    .label(label.apply(j).toLowerCase())
                                     .definition(definition.apply(j))
                                     .about(about.apply(j))
                                     .narrower(narrower)
