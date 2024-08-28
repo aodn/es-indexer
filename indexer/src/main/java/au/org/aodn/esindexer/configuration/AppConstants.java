@@ -13,5 +13,4 @@ public interface AppConstants {
     String ARDC_VOCAB_API_BASE = "https://vocabs.ardc.edu.au/repository/api/lda/aodn";
     String AODN_DISCOVERY_PARAMETER_VOCABS_CACHE = "parameter_vocabs";
     String AODN_PLATFORM_VOCABS_CACHE = "platform_vocabs";
-    String AODN_ORGANISATION_VOCABS_CACHE = "organisation_vocabs";
 }

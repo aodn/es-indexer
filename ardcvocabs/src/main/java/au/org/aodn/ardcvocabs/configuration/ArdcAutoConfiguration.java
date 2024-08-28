@@ -1,8 +1,6 @@
 package au.org.aodn.ardcvocabs.configuration;
 
-import au.org.aodn.ardcvocabs.service.OrganisationVocabsService;
-import au.org.aodn.ardcvocabs.service.ParameterVocabsService;
-import au.org.aodn.ardcvocabs.service.PlatformVocabsService;
+import au.org.aodn.ardcvocabs.service.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -11,26 +9,20 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 
 @Slf4j
 @AutoConfiguration  // More expressive vs @Configuration
-@ConditionalOnMissingBean(ParameterVocabsService.class)
+@ConditionalOnMissingBean({ParameterVocabProcessor.class, PlatformVocabProcessor.class})
 public class ArdcAutoConfiguration {
-
     @Bean
-    public ParameterVocabsService createParameterVocabsService() {
-        log.info("Create ParameterVocabsService");
-        return new ParameterVocabsService();
+    public ParameterVocabProcessor createParameterVocabProcessor() {
+        log.info("Create ParameterVocabProcessor bean");
+        return new ParameterVocabProcessor();
     }
 
     @Bean
-    public PlatformVocabsService createPlatformVocabsService() {
-        log.info("Create PlatformVocabsService");
-        return new PlatformVocabsService();
+    public PlatformVocabProcessor createPlatformVocabProcessor() {
+        log.info("Create PlatformVocabProcessor bean");
+        return new PlatformVocabProcessor();
     }
 
-    @Bean
-    public OrganisationVocabsService createOrganisationVocabsService() {
-        log.info("Create OrganisationVocabsService");
-        return new OrganisationVocabsService();
-    }
     /**
      * In case the one who use this lib have not created it.
      * @return RestTemplate

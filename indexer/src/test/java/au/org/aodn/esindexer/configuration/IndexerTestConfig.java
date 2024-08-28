@@ -1,7 +1,7 @@
 package au.org.aodn.esindexer.configuration;
 
-import au.org.aodn.ardcvocabs.model.ParameterVocabModel;
-import au.org.aodn.ardcvocabs.service.ParameterVocabsService;
+import au.org.aodn.ardcvocabs.model.VocabModel;
+import au.org.aodn.ardcvocabs.service.ParameterVocabProcessor;
 import au.org.aodn.esindexer.BaseTestClass;
 import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
@@ -23,12 +23,12 @@ public class IndexerTestConfig {
      * @return Mock object of VocabsUtils
      */
     @Bean
-    public ParameterVocabsService createArdcVocabsService() throws IOException {
+    public ParameterVocabProcessor createParameterVocabProcessor() throws IOException {
         String json = BaseTestClass.readResourceFile("classpath:canned/aodn_discovery_parameter_vocab.json");
-        List<ParameterVocabModel> parameterVocabs = (new ObjectMapper())
-                .readValue(json, new TypeReference<List<ParameterVocabModel>>() {});
+        List<VocabModel> parameterVocabs = (new ObjectMapper())
+                .readValue(json, new TypeReference<List<VocabModel>>() {});
 
-        ParameterVocabsService service = Mockito.mock(ParameterVocabsService.class);
+        ParameterVocabProcessor service = Mockito.mock(ParameterVocabProcessor.class);
         when(service.getParameterVocabs(anyString()))
                 .thenReturn(parameterVocabs);
 
