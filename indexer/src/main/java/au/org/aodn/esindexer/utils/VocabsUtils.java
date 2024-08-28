@@ -11,6 +11,7 @@ import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.ElasticsearchException;
 import co.elastic.clients.elasticsearch.core.*;
 import co.elastic.clients.elasticsearch.core.bulk.BulkResponseItem;
+import co.elastic.clients.elasticsearch.core.search.Hit;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -125,7 +126,7 @@ public class VocabsUtils {
     }
 
     /*
-    fetch vocabularies from ARDC and index to discovery parameter vocabs index once the bean is created
+    fetch vocabularies from ARDC and index to the vocabs index once the bean is created
      */
     @PostConstruct
     public void refreshVocabsIndex() throws IOException {
@@ -150,7 +151,7 @@ public class VocabsUtils {
         List<JsonNode> vocabs = new ArrayList<>();
         log.info("Fetching {} vocabularies from {}", key, vocabsIndexName);
         try {
-            double totalHits = elasticSearchIndexService.getDocumentsCount(vocabsIndexName);
+            long totalHits = elasticSearchIndexService.getDocumentsCount(vocabsIndexName);
             if (totalHits == 0) {
                 throw new DocumentNotFoundException("No documents found in " + vocabsIndexName);
             } else {
@@ -159,7 +160,9 @@ public class VocabsUtils {
                     .size((int) totalHits), JsonNode.class
                 );
                 response.hits().hits().stream()
-                        .map(hit -> Objects.requireNonNull(hit.source()).get(key))
+                        .map(Hit::source)
+                        .map(hitSource -> hitSource != null ? hitSource.get(key) : null)
+                        .filter(Objects::nonNull)
                         .forEach(vocabs::add);
             }
         } catch (ElasticsearchException | IOException e) {

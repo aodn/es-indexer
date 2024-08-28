@@ -1,6 +1,6 @@
 package au.org.aodn.esindexer.utils;
 
-import au.org.aodn.esindexer.service.ArdcVocabsService;
+import au.org.aodn.esindexer.service.ArdcVocabService;
 import au.org.aodn.stac.model.ConceptModel;
 import au.org.aodn.stac.model.ThemesModel;
 import org.junit.jupiter.api.*;
@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class VocabUtilsTest {
     @Autowired
-    ArdcVocabsService ardcVocabsService;
+    ArdcVocabService ardcVocabService;
 
     @Test
     void testGetDiscoveryParameterVocabs() throws IOException {
@@ -40,7 +40,7 @@ public class VocabUtilsTest {
         );
 
         // Perform the test
-        List<String> parameterVocabs = ardcVocabsService.getParameterVocabs(themes);
+        List<String> parameterVocabs = ardcVocabService.getParameterVocabsByThemes(themes);
 
         // Assertions
         assertNotNull(parameterVocabs);
