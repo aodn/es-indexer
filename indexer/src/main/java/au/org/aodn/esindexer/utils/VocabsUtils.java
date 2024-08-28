@@ -7,6 +7,8 @@ import au.org.aodn.ardcvocabs.service.PlatformVocabProcessor;
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.exception.DocumentNotFoundException;
 import au.org.aodn.esindexer.service.ElasticSearchIndexService;
+import au.org.aodn.stac.model.ConceptModel;
+import au.org.aodn.stac.model.ThemesModel;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.ElasticsearchException;
 import co.elastic.clients.elasticsearch.core.*;
@@ -190,5 +192,25 @@ public class VocabsUtils {
     @CacheEvict(value = AppConstants.AODN_PLATFORM_VOCABS_CACHE, allEntries = true)
     public void clearPlatformVocabsCache() {
         // Intentionally empty; the annotation does the job
+    }
+
+    public static boolean themesMatchConcept(List<ThemesModel> themes, ConceptModel thatConcept) {
+        for (ThemesModel theme : themes) {
+            for (ConceptModel thisConcept : theme.getConcepts()) {
+                /*
+                comparing by combined values (id and url) of the concept object
+                this will prevent cases where bottom-level vocabs are the same in text, but their parent vocabs are different
+                e.g "car -> parts" vs "bike -> parts" ("parts" is the same but different parent)
+                 */
+                if (thisConcept.equals(thatConcept)) {
+                    /* thisConcept is the extracted from the themes of the record...theme.getConcepts()
+                    thatConcept is the object created by iterating over the parameter_vocabs cache...ConceptModel thatConcept = ConceptModel.builder()
+                    using overriding equals method to compare the two objects, this is not checking instanceof ConceptModel class
+                     */
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
