@@ -27,7 +27,7 @@ public class IndexerServiceTests extends BaseTestClass {
     protected GeoNetworkServiceImpl geoNetworkService;
 
     @Autowired
-    protected IndexerServiceImpl indexerService;
+    protected IndexerService indexerService;
 
     @Autowired
     protected ObjectMapper indexerObjectMapper;

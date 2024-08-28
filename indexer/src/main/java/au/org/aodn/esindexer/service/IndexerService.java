@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.List;
 
 public interface IndexerService {
+    // Event call back to notify caller, this avoid gateway timeout as we have message back to browser
     interface Callback {
         void onProgress(Object update);
         void onComplete(Object result);
@@ -20,4 +21,6 @@ public interface IndexerService {
     ResponseEntity<String> deleteDocumentByUUID(String uuid) throws IOException;
     List<BulkResponse> indexAllMetadataRecordsFromGeoNetwork(boolean confirm, Callback callback) throws IOException;
     Hit<ObjectNode> getDocumentByUUID(String uuid) throws IOException;
+    boolean isMetadataPublished(String uuid);
+    boolean isGeoNetworkInstanceReinstalled(long portalIndexDocumentsCount);
 }

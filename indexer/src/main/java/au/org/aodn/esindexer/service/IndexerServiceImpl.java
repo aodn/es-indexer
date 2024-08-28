@@ -3,7 +3,6 @@ package au.org.aodn.esindexer.service;
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.exception.*;
 import au.org.aodn.esindexer.utils.JaxbUtils;
-import au.org.aodn.esindexer.utils.StringUtil;
 import au.org.aodn.metadata.iso19115_3_2018.MDMetadataType;
 import au.org.aodn.stac.model.RecordSuggest;
 import au.org.aodn.stac.model.StacCollectionModel;
@@ -29,6 +28,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayInputStream;
@@ -101,7 +101,8 @@ public class IndexerServiceImpl implements IndexerService {
         }
     }
 
-    protected boolean isGeoNetworkInstanceReinstalled(long portalIndexDocumentsCount) {
+    @Override
+    public boolean isGeoNetworkInstanceReinstalled(long portalIndexDocumentsCount) {
         /**
          * compare if GeoNetwork has 1 only metadata (the recently added one which triggered the indexer)
          * and the portal index has more than 0 documents (the most recent metadata yet indexed to portal index at this point)
@@ -109,7 +110,8 @@ public class IndexerServiceImpl implements IndexerService {
         return geoNetworkResourceService.isMetadataRecordsCountLessThan(2) && portalIndexDocumentsCount > 0;
     }
 
-    protected boolean isMetadataPublished(String uuid) {
+    @Override
+    public boolean isMetadataPublished(String uuid) {
         /* read for the published status from GN Elasticsearch index, the flag is not part of the XML body */
         try {
             geoNetworkResourceService.searchRecordBy(uuid);
@@ -170,7 +172,13 @@ public class IndexerServiceImpl implements IndexerService {
 
         return stacCollectionModel;
     }
-
+    /**
+     * Use to index a particular UUID, the async is used to limit the number of same function call to avoid flooding
+     * the system.
+     * @param metadataValues - The XML of the metadata
+     * @return - The STAC doc in string format.
+     */
+    @Async("asyncIndexMetadata")
     public ResponseEntity<String> indexMetadata(String metadataValues) {
         try {
             StacCollectionModel mappedMetadataValues = this.getMappedMetadataValues(metadataValues);
