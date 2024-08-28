@@ -26,7 +26,7 @@ public class DeliveryModeUtils {
     protected static Optional<DeliveryMode> scanRealTimeOrDelayed(String text) {
         if (text != null) {
             text = text.toLowerCase();
-            if(text.contains("real time") || text.contains("realtime")) {
+            if(text.contains("real time") || text.contains("realtime") || text.contains("real-time")) {
                 return Optional.of(DeliveryMode.real_time);
             }
             else if(text.contains("delayed")) {
