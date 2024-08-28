@@ -80,7 +80,7 @@ public abstract class StacCollectionMapperService {
 
     @Named("mapUUID")
     String mapUUID(MDMetadataType source) {
-        return source.getMetadataIdentifier().getMDIdentifier().getCode().getCharacterString().getValue().toString();
+        return CommonUtils.getUUID(source);
     }
     /**
      * According to the spec, the bbox must be an of length 2*n where n is number of dimension, so a 2D map, the
@@ -167,6 +167,7 @@ public abstract class StacCollectionMapperService {
             return null;
         }
     }
+
     /**
      * Custom mapping for description field, name convention is start with map then the field name
      * @param source
@@ -174,17 +175,7 @@ public abstract class StacCollectionMapperService {
      */
     @Named("mapDescription")
     String mapDescription(MDMetadataType source) {
-        List<MDDataIdentificationType> items = MapperUtils.findMDDataIdentificationType(source);
-
-        if(!items.isEmpty()) {
-            // Need to assert only 1 block contains our target
-            for(MDDataIdentificationType i : items) {
-                return safeGet(() -> i.getAbstract().getCharacterString().getValue())
-                        .map(Object::toString)
-                        .orElse("");
-            }
-        }
-        return "";
+        return CommonUtils.getDescription(source);
     }
 
     @Named("mapCitation")
@@ -234,22 +225,7 @@ public abstract class StacCollectionMapperService {
 
     @Named("mapSummaries.statement")
     String mapSummariesStatement(MDMetadataType source) {
-        var lineages = MapperUtils.findMDResourceLineage(source);
-        if (lineages.isEmpty()) {
-            return null;
-        }
-        for (var lineage : lineages) {
-            var abstractLiLineage = lineage.getAbstractLineageInformation().getValue();
-            if (!(abstractLiLineage instanceof LILineageType liLineage)) {
-                continue;
-            }
-            var statement = safeGet(() -> liLineage.getStatement().getCharacterString().getValue().toString());
-            if (statement.isEmpty()) {
-                continue;
-            }
-            return statement.get();
-        }
-        return null;
+        return SummariesUtils.getStatement(source);
     }
 
 
@@ -340,20 +316,7 @@ public abstract class StacCollectionMapperService {
 
     @Named("mapSummaries.status")
     String createSummariesStatus(MDMetadataType source) {
-        List<MDDataIdentificationType> items = MapperUtils.findMDDataIdentificationType(source);
-        if (!items.isEmpty()) {
-            List<String> temp = new ArrayList<>();
-            for (MDDataIdentificationType i : items) {
-                // status
-                // mdb:identificationInfo/mri:MD_DataIdentification/mri:status/mcc:MD_ProgressCode/@codeListValue
-                for (MDProgressCodePropertyType s : i.getStatus()) {
-                    temp.add(s.getMDProgressCode().getCodeListValue());
-                }
-            }
-            return String.join(" | ", temp);
-        }
-        logger.warn("Unable to find status metadata record: " + this.mapUUID(source));
-        return null;
+        return SummariesUtils.getStatus(source);
     }
 
     @Named("mapSummaries.scope")
@@ -382,34 +345,7 @@ public abstract class StacCollectionMapperService {
      */
     @Named("mapTitle")
     String mapTitle(MDMetadataType source) {
-        List<MDDataIdentificationType> items = MapperUtils.findMDDataIdentificationType(source);
-        if(!items.isEmpty()) {
-            // Need to assert only 1 block contains our target
-            return items.stream()
-                    .map(item -> safeGet(() -> item.getCitation().getAbstractCitation().getValue()))
-                    // If valid
-                    .filter(Optional::isPresent)
-                    .map(Optional::get)
-                    .map(ac -> {
-                        // Try to find the title from these places
-                        if(ac instanceof CICitationType2 type2) {
-                            return type2.getTitle().getCharacterString().getValue().toString();
-                        }
-                        else if(ac instanceof CICitationType type1) {
-                            // Backward compatible
-                            return type1.getTitle().getCharacterString().getValue().toString();
-                        }
-                        else {
-                            return "";
-                        }
-                    })
-                    // If blank that means not found in map and need to filter out
-                    .filter(s -> !s.isBlank())
-                    // Just need to find the first valid one
-                    .findFirst()
-                    .orElse("");
-        }
-        return "";
+        return CommonUtils.getTitle(source);
     }
     /**
      * Map the field credits, it is under
@@ -436,15 +372,12 @@ public abstract class StacCollectionMapperService {
                 .toList();
     }
     /**
-     * TODO: Very simple logic here, a dataset is flag as real-time if title contains the word
-     *
-     * @param source
-     * @return
+     * @param source - The xml document
+     * @return The delivery mode based on the logic
      */
     @Named("mapSummaries.updateFrequency")
     String mapUpdateFrequency(MDMetadataType source) {
-        String t = mapTitle(source);
-        return t.toLowerCase().contains(REAL_TIME) ? REAL_TIME : null;
+        return DeliveryModeUtils.getDeliveryMode(source).toString();
     }
     /**
      * TODO: Very simple logic here, if provider name contains IMOS
@@ -470,7 +403,7 @@ public abstract class StacCollectionMapperService {
     }
 
     protected List<ConceptModel> mapThemesConcepts(MDKeywordsPropertyType descriptiveKeyword) {
-        List<ConceptModel> concepts = new ArrayList<>();
+        final List<ConceptModel> concepts = new ArrayList<>();
         safeGet(() -> descriptiveKeyword.getMDKeywords().getKeyword())
                 .ifPresent(p -> p.forEach(keyword -> {
                     if (keyword != null) {
@@ -804,20 +737,19 @@ public abstract class StacCollectionMapperService {
 
     private List<String> findLicenseInCitationBlock(MDLegalConstraintsType legalConstraintsType) {
         List<String> licenses = new ArrayList<>();
-        if (safeGet(legalConstraintsType::getReference).isEmpty()) {
-            return licenses;
-        }
-        legalConstraintsType.getReference().forEach(reference -> {
-
-            var title = safeGet(() -> {
-                var ciCitation = (CICitationType2) reference.getAbstractCitation().getValue();
-                return ciCitation.getTitle().getCharacterString().getValue().toString();
-            });
-            if (title.isEmpty()) {
-                return;
-            }
-            licenses.add(title.get());
-        });
+        safeGet(legalConstraintsType::getReference)
+                .ifPresent(i -> {
+                    i.forEach(reference -> {
+                        var title = safeGet(() -> {
+                            var ciCitation = (CICitationType2) reference.getAbstractCitation().getValue();
+                            return ciCitation.getTitle().getCharacterString().getValue().toString();
+                        });
+                        if (title.isEmpty()) {
+                            return;
+                        }
+                        licenses.add(title.get());
+                    });
+                });
         return licenses;
     }
 

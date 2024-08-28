@@ -37,6 +37,7 @@
     },
     "statement": "See the Marine Science Support Data Quality and Programmer's Reports at the Related URL section.\n\n                    Where data for a particular sensor do not exist for a particular time, the last known value is used unless the sensor has been disabled or has encountered an error. For example, some sensors only record data every minute, but the resolution for the underway dataset is 10 seconds, so the same value will be used 6 times a minute. No averages are taken for sensors that capture data at a rate other than every 10 seconds. Instead, each record will be a snapshot of each sensor at that time.\n\n                    The data have been acquired at 0.1 Hz. There will be the occasional invalid value such as temperatures being out of range.\n\n                    This dataset has not been checked. Please verify the data before use.",
     "creation": "2011-12-12T00:00:00",
+    "update_frequency": "completed",
     "proj:geometry": {
       "geometries": [
         {

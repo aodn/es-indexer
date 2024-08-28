@@ -85,6 +85,7 @@
     "statement": "Sampling is conducted monthly (Esperance and Ningaloo 3 monthly) off small vessels. Depths sampled range from surface to 105 metres depending on the site and depths are usually sampled at 10 metre intervals. The nutrient analyses is performed at CMAR Hobart and Floreat laboratories. Full details are documented in the “IMOS National Reference Stations Biogeochemical Operations Manual”. Data is archived in the ORABN1:PLANKTON_NRS_ENV database at CMAR Dutton Park. Data is also exported to IMOS and made available via the AODN portal.",
     "creation": "2020-07-14T18:03:00",
     "revision": "2022-10-31T21:17:33",
+    "update_frequency": "other",
     "proj:geometry": {
       "geometries": [
         {

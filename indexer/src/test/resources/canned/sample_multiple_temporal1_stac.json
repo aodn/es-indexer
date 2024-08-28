@@ -141,6 +141,7 @@
     "statement": "",
     "creation": "2009-11-17T00:00:00",
     "revision": "2024-08-02T04:43:08.277909Z",
+    "update_frequency":"other",
     "proj:geometry": {
       "geometries": [
         {

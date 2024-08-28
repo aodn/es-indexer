@@ -36,6 +36,7 @@
       "name": "Predicted seabed gravel, mud and sand content in the Timor Sea region in the Australian continental EEZ 2018"
     },
     "revision": "2018-09-28T01:24:46",
+    "update_frequency": "other",
     "proj:geometry": {
       "geometries": [
         {

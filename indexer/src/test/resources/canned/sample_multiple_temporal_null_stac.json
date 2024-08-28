@@ -37,6 +37,7 @@
     "creation": "2017-07-13T11:23:44",
     "revision": "2017-07-13T11:23:44",
     "dataset_provider": "IMOS",
+    "update_frequency":"other",
     "proj:geometry": {
       "geometries": [
         {
