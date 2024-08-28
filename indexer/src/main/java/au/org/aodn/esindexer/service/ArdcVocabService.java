@@ -21,31 +21,11 @@ public class ArdcVocabService {
     @Autowired
     ElasticsearchClient portalElasticsearchClient;
 
-    protected boolean themesMatchConcept(List<ThemesModel> themes, ConceptModel thatConcept) {
-        for (ThemesModel theme : themes) {
-            for (ConceptModel thisConcept : theme.getConcepts()) {
-                /*
-                comparing by combined values (id and url) of the concept object
-                this will prevent cases where bottom-level vocabs are the same in text, but their parent vocabs are different
-                e.g "car -> parts" vs "bike -> parts" ("parts" is the same but different parent)
-                 */
-                if (thisConcept.equals(thatConcept)) {
-                    /* thisConcept is the extracted from the themes of the record...theme.getConcepts()
-                    thatConcept is the object created by iterating over the parameter_vocabs cache...ConceptModel thatConcept = ConceptModel.builder()
-                    using overriding equals method to compare the two objects, this is not checking instanceof ConceptModel class
-                     */
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
     /*
-    this method for analysing the AODN discovery parameter vocabularies of a record aka bottom-level vocabs (found in the themes section)
+    this method for analysing the vocabularies of a record aka bottom-level vocabs (found in the themes section)
     and returning the second-level vocabularies that match (1 level up from the bottom-level vocabularies)
      */
-    public List<String> getParameterVocabsByThemes(List<ThemesModel> themes) throws IOException {
+    public List<String> getVocabLabelsByThemes(List<ThemesModel> themes) throws IOException {
         List<String> results = new ArrayList<>();
         // Iterate over the top-level vocabularies
         for (JsonNode topLevelVocab : vocabsUtils.getParameterVocabs()) {
@@ -60,7 +40,7 @@ public class ArdcVocabService {
                                     .url(bottomLevelVocab.get("about").asText())
                                     .build();
                             // Compare with themes' concepts
-                            if (themesMatchConcept(themes, bottomConcept)) {
+                            if (VocabsUtils.themesMatchConcept(themes, bottomConcept)) {
                                 results.add(secondLevelVocabLabel.toLowerCase());
                                 break; // To avoid duplicates because under the same second-level vocab there can be multiple bottom-level vocabs that pass the condition
                             }
@@ -81,6 +61,4 @@ public class ArdcVocabService {
     public List<JsonNode> getPlatformVocabs() throws IOException {
         return vocabsUtils.getPlatformVocabs();
     }
-
-    // TODO:
 }

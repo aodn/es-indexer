@@ -169,7 +169,7 @@ public class IndexerServiceImpl implements IndexerService {
 
         stacCollectionModel.getSummaries().setScore(score);
 
-        List<String> parameterVocabs = ardcVocabService.getParameterVocabsByThemes(stacCollectionModel.getThemes());
+        List<String> parameterVocabs = ardcVocabService.getVocabLabelsByThemes(stacCollectionModel.getThemes());
         if (!parameterVocabs.isEmpty()) {
             stacCollectionModel.getSummaries().setParameterVocabs(parameterVocabs);
         }
