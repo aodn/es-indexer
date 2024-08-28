@@ -26,7 +26,6 @@ import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import java.util.*;
-import java.util.stream.Collectors;
 import java.io.IOException;
 
 
@@ -60,14 +59,6 @@ public class VocabsUtils {
     @Autowired
     ObjectMapper indexerObjectMapper;
 
-    protected VocabModel toLowerCaseVocabModel(VocabModel vocabModel) {
-        return VocabModel.builder()
-                .label(vocabModel.getLabel().toLowerCase())
-                .broader(vocabModel.getBroader().stream().peek(item -> item.setLabel(item.getLabel().toLowerCase())).collect(Collectors.toList()))
-                .narrower(vocabModel.getNarrower().stream().peek(item -> item.setLabel(item.getLabel().toLowerCase())).collect(Collectors.toList()))
-                .build();
-    }
-
     private void indexAllVocabs(List<VocabModel> parameterVocabs,
                                   List<VocabModel> platformVocabs) throws IOException {
 
@@ -75,13 +66,13 @@ public class VocabsUtils {
 
         // parameter vocabs
         for (VocabModel parameterVocab : parameterVocabs) {
-            VocabDto vocabDto = VocabDto.builder().parameterVocabModel(toLowerCaseVocabModel(parameterVocab)).build();
+            VocabDto vocabDto = VocabDto.builder().parameterVocabModel(parameterVocab).build();
             vocabDtos.add(vocabDto);
         }
 
         // platform vocabs
         for (VocabModel platformVocab : platformVocabs) {
-            VocabDto vocabDto = VocabDto.builder().platformVocabModel(toLowerCaseVocabModel(platformVocab)).build();
+            VocabDto vocabDto = VocabDto.builder().platformVocabModel(platformVocab).build();
             vocabDtos.add(vocabDto);
         }
 
