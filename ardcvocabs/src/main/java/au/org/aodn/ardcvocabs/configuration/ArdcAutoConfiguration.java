@@ -29,7 +29,7 @@ public class ArdcAutoConfiguration {
      */
     @Bean
     @ConditionalOnMissingBean(RestTemplate.class)
-    public RestTemplate ardcVocabRestTemplate() {
+    public RestTemplate vocabRestTemplate() {
         return new RestTemplate();
     }
 }
