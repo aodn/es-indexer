@@ -29,12 +29,15 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Future;
 
 @Service
 public class IndexerServiceImpl implements IndexerService {
@@ -179,7 +182,7 @@ public class IndexerServiceImpl implements IndexerService {
      * @return - The STAC doc in string format.
      */
     @Async("asyncIndexMetadata")
-    public ResponseEntity<String> indexMetadata(String metadataValues) {
+    public CompletableFuture<ResponseEntity<String>> indexMetadata(String metadataValues) {
         try {
             StacCollectionModel mappedMetadataValues = this.getMappedMetadataValues(metadataValues);
             IndexRequest<JsonData> req;
@@ -215,7 +218,7 @@ public class IndexerServiceImpl implements IndexerService {
 
                     IndexResponse response = portalElasticsearchClient.index(req);
                     logger.info("Metadata with UUID: {} indexed with version: {}", uuid, response.version());
-                    return ResponseEntity.status(HttpStatus.OK).body(response.toString());
+                    return CompletableFuture.completedFuture(ResponseEntity.status(HttpStatus.OK).body(response.toString()));
                 } catch (ElasticsearchException e) {
                     String fullError = String.format("%s -> %s", e.getMessage(), e.error().causedBy());
                     logger.error(fullError);
@@ -223,7 +226,7 @@ public class IndexerServiceImpl implements IndexerService {
                 }
             } else {
                 logger.info("Metadata with UUID: {} is not published yet, skip indexing", uuid);
-                return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+                return CompletableFuture.completedFuture(ResponseEntity.status(HttpStatus.NO_CONTENT).body(null));
             }
         } catch (IOException | FactoryException | TransformException | JAXBException e) {
             logger.error(e.getMessage());

@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 public interface IndexerService {
     // Event call back to notify caller, this avoid gateway timeout as we have message back to browser
@@ -17,7 +18,7 @@ public interface IndexerService {
         void onProgress(Object update);
         void onComplete(Object result);
     }
-    ResponseEntity<String> indexMetadata(String metadataValues) throws IOException, FactoryException, TransformException, JAXBException;
+    CompletableFuture<ResponseEntity<String>> indexMetadata(String metadataValues) throws IOException, FactoryException, TransformException, JAXBException;
     ResponseEntity<String> deleteDocumentByUUID(String uuid) throws IOException;
     List<BulkResponse> indexAllMetadataRecordsFromGeoNetwork(boolean confirm, Callback callback) throws IOException;
     Hit<ObjectNode> getDocumentByUUID(String uuid) throws IOException;
