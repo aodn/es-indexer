@@ -42,7 +42,7 @@
         },
         "non_standard_pattern_filter": {
           "type": "pattern_replace",
-          "pattern": ".*[^a-zA-Z0-9- ].*",
+          "pattern": ".*[^a-zA-Z- ].*",
           "replacement": ""
         },
         "remove_numbers": {
