@@ -1,7 +1,6 @@
 package au.org.aodn.esindexer.configuration;
 
-import au.org.aodn.esindexer.utils.VocabsUtils;
-import org.springframework.beans.factory.annotation.Value;
+import au.org.aodn.esindexer.utils.VocabsIndexUtils;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,6 +9,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import java.util.concurrent.*;
+import org.springframework.beans.factory.annotation.Value;
 
 @Configuration
 @EnableRetry
@@ -22,9 +22,9 @@ public class IndexerConfig {
      * @return A bean of VocabsUtils
      */
     @Bean
-    @ConditionalOnMissingBean(VocabsUtils.class)
-    public VocabsUtils createVocabsUtils() {
-        return new VocabsUtils();
+    @ConditionalOnMissingBean(VocabsIndexUtils.class)
+    public VocabsIndexUtils createVocabsUtils() {
+        return new VocabsIndexUtils();
     }
     /**
      * This executor is used to limit the number of concurrent call to index metadata so not to flood the
