@@ -1,5 +1,7 @@
 package au.org.aodn.esindexer.service;
 
+import au.org.aodn.ardcvocabs.model.VocabDto;
+import au.org.aodn.ardcvocabs.model.VocabModel;
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.exception.*;
 import au.org.aodn.esindexer.utils.JaxbUtils;
@@ -17,6 +19,7 @@ import co.elastic.clients.elasticsearch.indices.AnalyzeRequest;
 import co.elastic.clients.elasticsearch.indices.AnalyzeResponse;
 import co.elastic.clients.elasticsearch.indices.analyze.AnalyzeToken;
 import co.elastic.clients.json.JsonData;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import jakarta.xml.bind.JAXBException;
@@ -44,6 +47,7 @@ import java.util.concurrent.CompletableFuture;
 
 @Slf4j
 @Service
+@Slf4j
 public class IndexerServiceImpl implements IndexerService {
 
     protected String indexName;
@@ -55,7 +59,7 @@ public class IndexerServiceImpl implements IndexerService {
     protected StacCollectionMapperService stacCollectionMapperService;
     protected JaxbUtils<MDMetadataType> jaxbUtils;
     protected RankingService rankingService;
-    protected ArdcVocabService ardcVocabService;
+    protected VocabService vocabService;
 
     protected static final long DEFAULT_BACKOFF_TIME = 3000L;
 
@@ -74,7 +78,7 @@ public class IndexerServiceImpl implements IndexerService {
             ElasticsearchClient portalElasticsearchClient,
             ElasticSearchIndexService elasticSearchIndexService,
             StacCollectionMapperService stacCollectionMapperService,
-            ArdcVocabService ardcVocabService
+            VocabService vocabService
     ) {
         this.indexName = indexName;
         this.tokensAnalyserName = tokensAnalyserName;
@@ -85,7 +89,7 @@ public class IndexerServiceImpl implements IndexerService {
         this.portalElasticsearchClient = portalElasticsearchClient;
         this.elasticSearchIndexService = elasticSearchIndexService;
         this.stacCollectionMapperService = stacCollectionMapperService;
-        this.ardcVocabService = ardcVocabService;
+        this.vocabService = vocabService;
     }
 
     public Hit<ObjectNode> getDocumentByUUID(String uuid) throws IOException {
@@ -170,19 +174,19 @@ public class IndexerServiceImpl implements IndexerService {
         stacCollectionModel.getSummaries().setScore(score);
 
         // parameter vocabs
-        List<String> processedParameterVocabs = ardcVocabService.getVocabLabelsByThemes(stacCollectionModel.getThemes(), AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS_KEY);
+        List<String> processedParameterVocabs = vocabService.getVocabLabelsByThemes(stacCollectionModel.getThemes(), AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS_KEY);
         if (!processedParameterVocabs.isEmpty()) {
             stacCollectionModel.getSummaries().setParameterVocabs(processedParameterVocabs);
         }
 
         // platform vocabs
-        List<String> processedPlatformVocabs = ardcVocabService.getVocabLabelsByThemes(stacCollectionModel.getThemes(), AppConstants.AODN_PLATFORM_VOCABS_KEY);
+        List<String> processedPlatformVocabs = vocabService.getVocabLabelsByThemes(stacCollectionModel.getThemes(), AppConstants.AODN_PLATFORM_VOCABS_KEY);
         if (!processedPlatformVocabs.isEmpty()) {
             stacCollectionModel.getSummaries().setPlatformVocabs(processedPlatformVocabs);
         }
 
         // organisation vocabs
-        List<String> processedOrganisationVocabs = ardcVocabService.getVocabLabelsByThemes(stacCollectionModel.getThemes(), AppConstants.AODN_ORGANISATION_VOCABS_KEY);
+        List<String> processedOrganisationVocabs = vocabService.getVocabLabelsByThemes(stacCollectionModel.getThemes(), AppConstants.AODN_ORGANISATION_VOCABS_KEY);
         if (!processedOrganisationVocabs.isEmpty()) {
             stacCollectionModel.getSummaries().setPlatformVocabs(processedOrganisationVocabs);
         }

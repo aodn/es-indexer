@@ -1,7 +1,7 @@
 package au.org.aodn.esindexer.utils;
 
 import au.org.aodn.esindexer.configuration.AppConstants;
-import au.org.aodn.esindexer.service.ArdcVocabService;
+import au.org.aodn.esindexer.service.VocabService;
 import au.org.aodn.stac.model.ConceptModel;
 import au.org.aodn.stac.model.ThemesModel;
 import org.junit.jupiter.api.*;
@@ -12,7 +12,6 @@ import org.springframework.test.context.ActiveProfiles;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -24,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class VocabUtilsTest {
     @Autowired
-    ArdcVocabService ardcVocabService;
+    VocabService vocabService;
 
     @Test
     void testGetDiscoveryParameterVocabs() throws IOException {
@@ -42,7 +41,7 @@ public class VocabUtilsTest {
         );
 
         // Perform the test
-        List<String> parameterVocabs = ardcVocabService.getVocabLabelsByThemes(themes, AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS_KEY);
+        List<String> parameterVocabs = vocabService.getVocabLabelsByThemes(themes, AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS_KEY);
 
         // Assertions
         assertNotNull(parameterVocabs);
@@ -69,7 +68,7 @@ public class VocabUtilsTest {
         );
 
         // Perform the test
-        List<String> platformVocabs = ardcVocabService.getVocabLabelsByThemes(themes, AppConstants.AODN_PLATFORM_VOCABS_KEY);
+        List<String> platformVocabs = vocabService.getVocabLabelsByThemes(themes, AppConstants.AODN_PLATFORM_VOCABS_KEY);
 
         // Assertions
         assertNotNull(platformVocabs);
@@ -96,7 +95,7 @@ public class VocabUtilsTest {
         );
 
         // Perform the test
-        List<String> organisationVocabs = ardcVocabService.getVocabLabelsByThemes(themes, AppConstants.AODN_ORGANISATION_VOCABS_KEY);
+        List<String> organisationVocabs = vocabService.getVocabLabelsByThemes(themes, AppConstants.AODN_ORGANISATION_VOCABS_KEY);
 
         // Assertions
         assertNotNull(organisationVocabs);
