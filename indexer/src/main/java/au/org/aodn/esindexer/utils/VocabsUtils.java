@@ -127,16 +127,22 @@ public class VocabsUtils {
         log.info("Total documents in index: {} is {}", vocabsIndexName, elasticSearchIndexService.getDocumentsCount(vocabsIndexName));
     }
 
+
+    private void populateVocabsData() throws IOException {
+        log.info("Populating parameter vocabs from ARDC to {}", vocabsIndexName);
+        List<VocabModel> parameterVocabs = parameterVocabProcessor.getParameterVocabs(vocabApiBase);
+        log.info("Populating platform vocabs from ARDC to {}", vocabsIndexName);
+        List<VocabModel> platformVocabs = platformVocabsProcessor.getPlatformVocabs(vocabApiBase);
+        indexAllVocabs(parameterVocabs, platformVocabs);
+    }
+
     /*
     fetch vocabularies from ARDC and index to the vocabs index once the bean is created
      */
     @PostConstruct
-    public void refreshVocabsIndex() throws IOException {
-        log.info("Fetching parameterVocabs from ARDC");
-        List<VocabModel> parameterVocabs = parameterVocabProcessor.getParameterVocabs(vocabApiBase);
-        log.info("Fetching platformVocabs from ARDC");
-        List<VocabModel> platformVocabs = platformVocabsProcessor.getPlatformVocabs(vocabApiBase);
-        indexAllVocabs(parameterVocabs, platformVocabs);
+    public void init() throws IOException {
+        log.info("Initialising {}", vocabsIndexName);
+        this.populateVocabsData();
     }
 
     @Cacheable(AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS_KEY)
@@ -175,11 +181,11 @@ public class VocabsUtils {
 
     // TODO: A smarter refresh and check if the values are diff before evict cache
     @Scheduled(cron = "0 0 0 * * *")
-    public void refreshCache() throws IOException {
-        log.info("Refreshing ARDC vocabularies cache");
+    public void scheduledRefreshVocabsData() throws IOException {
+        log.info("Refreshing ARDC vocabularies data");
         self.clearParameterVocabsCache();
         self.clearPlatformVocabsCache();
-        self.refreshVocabsIndex();
+        self.populateVocabsData();
         self.getParameterVocabs();
         self.getPlatformVocabs();
     }
