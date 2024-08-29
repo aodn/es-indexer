@@ -228,19 +228,30 @@ public class BaseTestClass {
 
     private boolean delete(String uuid, HttpEntity<String> requestEntity) {
         logger.info("Deleting GN doc {}", uuid);
-        ResponseEntity<String> response = testRestTemplate
-                .exchange(
-                        getRecordUrl(uuid),
-                        HttpMethod.DELETE,
-                        requestEntity,
-                        String.class
-                );
-        if (response.getStatusCode().is2xxSuccessful()) {
-            logger.info("Deleted GN doc {}", uuid);
-            return true;
+        try {
+            // Delete by query basically does a search for the objects to delete and
+            // then deletes them with version conflict checking. Without a _refresh
+            // in between, the search done by _delete_by_query might return the
+            // old version of the document, leading to a version conflict when
+            // the delete is attempted.
+            client.indices().refresh();
+            ResponseEntity<String> response = testRestTemplate
+                    .exchange(
+                            getRecordUrl(uuid),
+                            HttpMethod.DELETE,
+                            requestEntity,
+                            String.class
+                    );
+            if (response.getStatusCode().is2xxSuccessful()) {
+                logger.info("Deleted GN doc {}", uuid);
+                return true;
+            }
+            logger.warn("failed to delete. Will retry. Message: {}", response.getBody());
+            return false;
         }
-        logger.warn("failed to delete. Will retry. Message: {}", response.getBody());
-        return false;
+        catch(Exception e) {
+            return false;
+        }
     }
 
     public static String readResourceFile(String path) throws IOException {
