@@ -12,8 +12,10 @@ import co.elastic.clients.elasticsearch._types.FieldValue;
 import co.elastic.clients.elasticsearch._types.SortOrder;
 import co.elastic.clients.elasticsearch._types.query_dsl.MatchAllQuery;
 
+import co.elastic.clients.elasticsearch.core.CountRequest;
 import co.elastic.clients.elasticsearch.core.SearchRequest;
 import co.elastic.clients.elasticsearch.core.SearchResponse;
+import co.elastic.clients.elasticsearch.core.search.TotalHits;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.logging.log4j.LogManager;
@@ -351,30 +353,42 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
             throw new MetadataNotFoundException("Unable to find metadata record with UUID: " + uuid + " in GeoNetwork");
         }
     }
+    /**
+     * Need to use _search instead of the _count function because the geonetwork query to _count not work, but we
+     * can achieve the same behavior by using _search with size = 0, this is much efficient then query all record
+     *
+     * @return - The total number of record found
+     * @throws IOException - If query failed
+     */
+    @Override
+    public Long getAllMetadataCounts() throws IOException {
+        // Set size = 0 will return total count, elastic behavior :)
+        SearchRequest request = SearchRequest.of(r -> r.size(0).index(indexName));
+
+        SearchResponse<ObjectNode> response = gn4ElasticClient.search(request, ObjectNode.class);
+        TotalHits total = response.hits().total();
+
+        if(total != null) {
+            return total.value();
+        }
+        else {
+            throw new RuntimeException("Fail to get count because total hit is null");
+        }
+    }
 
     @Override
     public boolean isMetadataRecordsCountLessThan(int c) {
-
         if(c < 1) {
             throw new IllegalArgumentException("Compare value less then 1 do not make sense");
         }
 
-        int count = 0;
-        Iterable<String> i = this.getAllMetadataRecords();
-
-        for(String s : i) {
-            if(s != null) {
-                // Null if elastic outsync with geonetwork, that is value deleted in
-                // geonetwork but elastic have not re-index.
-                count++;
-            }
-
-            if(count >= c) {
-                return false;
-            }
+        try {
+            Long count = this.getAllMetadataCounts();
+            return (count < c);
         }
-
-        return true;
+        catch (IOException ioe) {
+            throw new RuntimeException("Error getting total count, cannot proceed", ioe);
+        }
     }
     /**
      * The need of retryable is because the geonetwork elastic instance is too small, often it memory usage is

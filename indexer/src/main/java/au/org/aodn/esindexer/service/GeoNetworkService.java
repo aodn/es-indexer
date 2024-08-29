@@ -37,6 +37,11 @@ public interface GeoNetworkService {
      * @return
      */
     boolean isMetadataRecordsCountLessThan(int c);
+    /**
+     * Ge the count of the docs
+     * @return The total number of records
+     */
+    Long getAllMetadataCounts() throws IOException;
 
     Map<String, ?> getAssociatedRecords(String uuid);
 }
