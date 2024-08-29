@@ -2,8 +2,7 @@ package au.org.aodn.esindexer.utils;
 
 import au.org.aodn.ardcvocabs.model.VocabDto;
 import au.org.aodn.ardcvocabs.model.VocabModel;
-import au.org.aodn.ardcvocabs.service.ParameterVocabProcessor;
-import au.org.aodn.ardcvocabs.service.PlatformVocabProcessor;
+import au.org.aodn.ardcvocabs.service.VocabProcessor;
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.exception.DocumentNotFoundException;
 import au.org.aodn.esindexer.service.ElasticSearchIndexService;
@@ -40,10 +39,7 @@ public class VocabsUtils {
     protected String vocabApiBase;
 
     @Autowired
-    ParameterVocabProcessor parameterVocabProcessor;
-
-    @Autowired
-    PlatformVocabProcessor platformVocabsProcessor;
+    VocabProcessor vocabProcessor;
 
     // self-injection to avoid self-invocation problems when calling the cachable method within the same bean
     @Lazy
@@ -63,7 +59,8 @@ public class VocabsUtils {
     ObjectMapper indexerObjectMapper;
 
     private void indexAllVocabs(List<VocabModel> parameterVocabs,
-                                  List<VocabModel> platformVocabs) throws IOException {
+                                List<VocabModel> platformVocabs,
+                                List<VocabModel> organisationVocabs) throws IOException {
 
         List<VocabDto> vocabDtos = new ArrayList<>();
 
@@ -76,6 +73,12 @@ public class VocabsUtils {
         // platform vocabs
         for (VocabModel platformVocab : platformVocabs) {
             VocabDto vocabDto = VocabDto.builder().platformVocabModel(platformVocab).build();
+            vocabDtos.add(vocabDto);
+        }
+
+        // organisation vocabs
+        for (VocabModel organisationVocab : organisationVocabs) {
+            VocabDto vocabDto = VocabDto.builder().organisationVocabModel(organisationVocab).build();
             vocabDtos.add(vocabDto);
         }
 
@@ -129,11 +132,14 @@ public class VocabsUtils {
 
 
     private void populateVocabsData() throws IOException {
-        log.info("Populating parameter vocabs from ARDC to {}", vocabsIndexName);
-        List<VocabModel> parameterVocabs = parameterVocabProcessor.getParameterVocabs(vocabApiBase);
-        log.info("Populating platform vocabs from ARDC to {}", vocabsIndexName);
-        List<VocabModel> platformVocabs = platformVocabsProcessor.getPlatformVocabs(vocabApiBase);
-        indexAllVocabs(parameterVocabs, platformVocabs);
+        log.info("Fetching parameter vocabs from ARDC");
+        List<VocabModel> parameterVocabs = vocabProcessor.getParameterVocabs(vocabApiBase);
+        log.info("Fetching platform vocabs from ARDC");
+        List<VocabModel> platformVocabs = vocabProcessor.getPlatformVocabs(vocabApiBase);
+        log.info("Fetching organisation vocabs from ARDC");
+        List<VocabModel> organisationVocabs = vocabProcessor.getOrganisationVocabs(vocabApiBase);
+        log.info("Indexing fetched vocabs to {}", vocabsIndexName);
+        indexAllVocabs(parameterVocabs, platformVocabs, organisationVocabs);
     }
 
     /*
@@ -153,6 +159,11 @@ public class VocabsUtils {
     @Cacheable(AppConstants.AODN_PLATFORM_VOCABS_KEY)
     public List<JsonNode> getPlatformVocabs() throws IOException {
         return this.groupVocabsByKey("platform_vocab");
+    }
+
+    @Cacheable(AppConstants.AODN_ORGANISATION_VOCABS_KEY)
+    public List<JsonNode> getOrganisationVocabs() throws IOException {
+        return this.groupVocabsByKey("organisation_vocab");
     }
 
     protected List<JsonNode> groupVocabsByKey(String key) throws IOException {
@@ -183,11 +194,16 @@ public class VocabsUtils {
     @Scheduled(cron = "0 0 0 * * *")
     public void scheduledRefreshVocabsData() throws IOException {
         log.info("Refreshing ARDC vocabularies data");
+        // clear existing caches
         self.clearParameterVocabsCache();
         self.clearPlatformVocabsCache();
+        self.clearOrganisationVocabsCache();
+        // populate latest vocabs
         self.populateVocabsData();
+        // update the caches
         self.getParameterVocabs();
         self.getPlatformVocabs();
+        self.getOrganisationVocabs();
     }
 
     @CacheEvict(value = AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS_KEY, allEntries = true)
@@ -197,6 +213,11 @@ public class VocabsUtils {
 
     @CacheEvict(value = AppConstants.AODN_PLATFORM_VOCABS_KEY, allEntries = true)
     public void clearPlatformVocabsCache() {
+        // Intentionally empty; the annotation does the job
+    }
+
+    @CacheEvict(value = AppConstants.AODN_ORGANISATION_VOCABS_KEY, allEntries = true)
+    public void clearOrganisationVocabsCache() {
         // Intentionally empty; the annotation does the job
     }
 

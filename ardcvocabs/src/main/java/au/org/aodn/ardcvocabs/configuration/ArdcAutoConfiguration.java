@@ -9,18 +9,12 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 
 @Slf4j
 @AutoConfiguration  // More expressive vs @Configuration
-@ConditionalOnMissingBean({ParameterVocabProcessor.class, PlatformVocabProcessor.class})
 public class ArdcAutoConfiguration {
     @Bean
-    public ParameterVocabProcessor createParameterVocabProcessor() {
-        log.info("Create ParameterVocabProcessor bean");
-        return new ParameterVocabProcessor();
-    }
-
-    @Bean
-    public PlatformVocabProcessor createPlatformVocabProcessor() {
-        log.info("Create PlatformVocabProcessor bean");
-        return new PlatformVocabProcessor();
+    @ConditionalOnMissingBean(VocabProcessorImpl.class)
+    public VocabProcessorImpl createVocabProcessor() {
+        log.info("Create VocabProcessor bean");
+        return new VocabProcessorImpl();
     }
 
     /**

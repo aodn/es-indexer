@@ -28,7 +28,7 @@ public class ParameterVocabProcessorTest {
     RestTemplate mockRestTemplate;
 
     @InjectMocks
-    protected ParameterVocabProcessor parameterVocabProcessor;
+    protected VocabProcessorImpl vocabProcessor;
 
     ObjectMapper objectMapper = new ObjectMapper();
 
@@ -53,7 +53,7 @@ public class ParameterVocabProcessorTest {
         Mockito.when(mockRestTemplate.<ObjectNode>getForObject(endsWith("/aodn-discovery-parameter-vocabulary/version-1-6/resource.json?uri=http://vocab.aodn.org.au/def/discovery_parameter/entity/390"), any(), any(Object[].class)))
                 .thenReturn((ObjectNode)objectMapper.readTree(ResourceUtils.getFile("classpath:databag/parameter_vocabs/vocab_entity_390.json")));
 
-        List<VocabModel> VocabModelList = parameterVocabProcessor.getParameterVocabs("");
+        List<VocabModel> VocabModelList = vocabProcessor.getParameterVocabs("");
         assertEquals("Total equals", 33, VocabModelList.size());
 
 

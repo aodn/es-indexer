@@ -52,4 +52,58 @@ public class VocabUtilsTest {
         assertTrue(parameterVocabs.contains("carbon"));
         assertEquals(4, parameterVocabs.size());
     }
+
+    @Test
+    void testGetPlatformVocabs() throws IOException {
+        // Prepare themes
+        List<ThemesModel> themes = List.of(
+                new ThemesModel(Arrays.asList(
+                        new ConceptModel("Temperature of the water body", "http://vocab.nerc.ac.uk/collection/P01/current/TEMPPR01"),
+                        new ConceptModel("Practical salinity of the water body", "http://vocab.nerc.ac.uk/collection/P01/current/PSLTZZ01"),
+                        new ConceptModel("Concentration of carbon (total inorganic) per unit mass of the water body", "http://vocab.aodn.org.au/def/discovery_parameter/entity/1"),
+                        new ConceptModel("Total alkalinity per unit mass of the water body", "http://vocab.nerc.ac.uk/collection/P01/current/MDMAP014"),
+                        new ConceptModel("Saturation state of aragonite in the water body", "http://vocab.aodn.org.au/def/discovery_parameter/entity/24"),
+                        new ConceptModel("Saturation state of aragonite in the water body", "http://vocab.aodn.org.au/def/discovery_parameter/entity/24"),
+                        new ConceptModel("pH (total scale) of the water body", "http://vocab.aodn.org.au/def/discovery_parameter/entity/27")
+                ), "theme", null, "AODN Discovery Parameter Vocabulary")
+        );
+
+        // Perform the test
+        List<String> platformVocabs = ardcVocabService.getVocabLabelsByThemes(themes, AppConstants.AODN_PLATFORM_VOCABS_KEY);
+
+        // Assertions
+        assertNotNull(platformVocabs);
+        assertTrue(platformVocabs.contains("alkalinity"));
+        assertTrue(platformVocabs.contains("temperature"));
+        assertTrue(platformVocabs.contains("salinity"));
+        assertTrue(platformVocabs.contains("carbon"));
+        assertEquals(4, platformVocabs.size());
+    }
+
+    @Test
+    void testOrganisationVocabs() throws IOException {
+        // Prepare themes
+        List<ThemesModel> themes = List.of(
+                new ThemesModel(Arrays.asList(
+                        new ConceptModel("Temperature of the water body", "http://vocab.nerc.ac.uk/collection/P01/current/TEMPPR01"),
+                        new ConceptModel("Practical salinity of the water body", "http://vocab.nerc.ac.uk/collection/P01/current/PSLTZZ01"),
+                        new ConceptModel("Concentration of carbon (total inorganic) per unit mass of the water body", "http://vocab.aodn.org.au/def/discovery_parameter/entity/1"),
+                        new ConceptModel("Total alkalinity per unit mass of the water body", "http://vocab.nerc.ac.uk/collection/P01/current/MDMAP014"),
+                        new ConceptModel("Saturation state of aragonite in the water body", "http://vocab.aodn.org.au/def/discovery_parameter/entity/24"),
+                        new ConceptModel("Saturation state of aragonite in the water body", "http://vocab.aodn.org.au/def/discovery_parameter/entity/24"),
+                        new ConceptModel("pH (total scale) of the water body", "http://vocab.aodn.org.au/def/discovery_parameter/entity/27")
+                ), "theme", null, "AODN Discovery Parameter Vocabulary")
+        );
+
+        // Perform the test
+        List<String> organisationVocabs = ardcVocabService.getVocabLabelsByThemes(themes, AppConstants.AODN_ORGANISATION_VOCABS_KEY);
+
+        // Assertions
+        assertNotNull(organisationVocabs);
+        assertTrue(organisationVocabs.contains("alkalinity"));
+        assertTrue(organisationVocabs.contains("temperature"));
+        assertTrue(organisationVocabs.contains("salinity"));
+        assertTrue(organisationVocabs.contains("carbon"));
+        assertEquals(4, organisationVocabs.size());
+    }
 }

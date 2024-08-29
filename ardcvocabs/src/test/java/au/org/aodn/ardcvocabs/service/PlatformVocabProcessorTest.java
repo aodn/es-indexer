@@ -26,7 +26,7 @@ public class PlatformVocabProcessorTest {
     RestTemplate mockRestTemplate;
 
     @InjectMocks
-    protected PlatformVocabProcessor platformVocabProcessor;
+    protected VocabProcessorImpl vocabProcessor;
 
     ObjectMapper objectMapper = new ObjectMapper();
 
@@ -45,7 +45,7 @@ public class PlatformVocabProcessorTest {
         Mockito.when(mockRestTemplate.<ObjectNode>getForObject(endsWith("/aodn-platform-vocabulary/version-6-1/resource.json?uri=http://vocab.aodn.org.au/def/platform/entity/116"), any(), any(Object[].class)))
                 .thenReturn((ObjectNode)objectMapper.readTree(ResourceUtils.getFile("classpath:databag/platform_vocabs/vocab_entity_116.json")));
 
-        List<VocabModel> platformVocabs = platformVocabProcessor.getPlatformVocabs("");
+        List<VocabModel> platformVocabs = vocabProcessor.getPlatformVocabs("");
         assertEquals("Total equals", 10, platformVocabs.size());
     }
 }

@@ -28,7 +28,8 @@ public class WebMvcConfig {
     public ConcurrentMapCacheManager cacheManager() {
         return new ConcurrentMapCacheManager(
                 AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS_KEY,
-                AppConstants.AODN_PLATFORM_VOCABS_KEY
+                AppConstants.AODN_PLATFORM_VOCABS_KEY,
+                AppConstants.AODN_ORGANISATION_VOCABS_KEY
         );
     }
 
