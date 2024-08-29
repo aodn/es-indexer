@@ -139,12 +139,12 @@ public class VocabsUtils {
         indexAllVocabs(parameterVocabs, platformVocabs);
     }
 
-    @Cacheable(AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS_CACHE)
+    @Cacheable(AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS_KEY)
     public List<JsonNode> getParameterVocabs() throws IOException {
         return this.groupVocabsByKey("parameter_vocab");
     }
 
-    @Cacheable(AppConstants.AODN_PLATFORM_VOCABS_CACHE)
+    @Cacheable(AppConstants.AODN_PLATFORM_VOCABS_KEY)
     public List<JsonNode> getPlatformVocabs() throws IOException {
         return this.groupVocabsByKey("platform_vocab");
     }
@@ -184,12 +184,12 @@ public class VocabsUtils {
         self.getPlatformVocabs();
     }
 
-    @CacheEvict(value = AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS_CACHE, allEntries = true)
+    @CacheEvict(value = AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS_KEY, allEntries = true)
     public void clearParameterVocabsCache() {
         // Intentionally empty; the annotation does the job
     }
 
-    @CacheEvict(value = AppConstants.AODN_PLATFORM_VOCABS_CACHE, allEntries = true)
+    @CacheEvict(value = AppConstants.AODN_PLATFORM_VOCABS_KEY, allEntries = true)
     public void clearPlatformVocabsCache() {
         // Intentionally empty; the annotation does the job
     }
