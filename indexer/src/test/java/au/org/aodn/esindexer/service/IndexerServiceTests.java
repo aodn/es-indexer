@@ -65,8 +65,7 @@ public class IndexerServiceTests extends BaseTestClass {
             Assertions.assertFalse(indexerService.isMetadataPublished("not-exist"), "Not exist and not published");
         }
         finally {
-            deleteRecord(uuid1);
-            deleteRecord(uuid2);
+            deleteRecord(uuid1,uuid2);
         }
     }
     /**
@@ -102,8 +101,7 @@ public class IndexerServiceTests extends BaseTestClass {
             Assertions.assertEquals(1L, elasticSearchIndexService.getDocumentsCount(INDEX_NAME), "Doc count correct");
         }
         finally {
-            deleteRecord(uuid2);
-            deleteRecord(uuid1);
+            deleteRecord(uuid2,uuid1);
         }
     }
 
@@ -124,8 +122,7 @@ public class IndexerServiceTests extends BaseTestClass {
 
         }
         finally {
-            deleteRecord(uuid1);
-            deleteRecord(uuid2);
+            deleteRecord(uuid1, uuid2);
         }
     }
 
