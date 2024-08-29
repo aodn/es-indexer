@@ -169,14 +169,22 @@ public class IndexerServiceImpl implements IndexerService {
 
         stacCollectionModel.getSummaries().setScore(score);
 
+        // parameter vocabs
         List<String> processedParameterVocabs = ardcVocabService.getVocabLabelsByThemes(stacCollectionModel.getThemes(), AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS_KEY);
         if (!processedParameterVocabs.isEmpty()) {
             stacCollectionModel.getSummaries().setParameterVocabs(processedParameterVocabs);
         }
 
+        // platform vocabs
         List<String> processedPlatformVocabs = ardcVocabService.getVocabLabelsByThemes(stacCollectionModel.getThemes(), AppConstants.AODN_PLATFORM_VOCABS_KEY);
         if (!processedPlatformVocabs.isEmpty()) {
             stacCollectionModel.getSummaries().setPlatformVocabs(processedPlatformVocabs);
+        }
+
+        // organisation vocabs
+        List<String> processedOrganisationVocabs = ardcVocabService.getVocabLabelsByThemes(stacCollectionModel.getThemes(), AppConstants.AODN_ORGANISATION_VOCABS_KEY);
+        if (!processedOrganisationVocabs.isEmpty()) {
+            stacCollectionModel.getSummaries().setPlatformVocabs(processedOrganisationVocabs);
         }
 
         // categories suggest using a different index

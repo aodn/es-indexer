@@ -32,6 +32,7 @@ public class ArdcVocabService {
         List<JsonNode> vocabs = switch (vocabType) {
             case AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS_KEY -> vocabsUtils.getParameterVocabs();
             case AppConstants.AODN_PLATFORM_VOCABS_KEY -> vocabsUtils.getPlatformVocabs();
+            case AppConstants.AODN_ORGANISATION_VOCABS_KEY -> vocabsUtils.getOrganisationVocabs();
             default -> new ArrayList<>();
         };
 
@@ -72,5 +73,10 @@ public class ArdcVocabService {
     // used by debugging/development api endpoint
     public List<JsonNode> getPlatformVocabs() throws IOException {
         return vocabsUtils.getPlatformVocabs();
+    }
+
+    // used by debugging/development api endpoint
+    public List<JsonNode> getOrganisationVocabs() throws IOException {
+        return vocabsUtils.getOrganisationVocabs();
     }
 }

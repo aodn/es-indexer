@@ -37,4 +37,11 @@ public class IndexerExtController {
     public ResponseEntity<List<JsonNode>> getPlatformVocabs() throws IOException {
         return ResponseEntity.ok(ardcVocabService.getPlatformVocabs());
     }
+
+    // this endpoint for debugging/development purposes
+    @GetMapping(path="/organisation/vocabs")
+    @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Get organisation vocabs from Elastic search")
+    public ResponseEntity<List<JsonNode>> getOrganisationVocabs() throws IOException {
+        return ResponseEntity.ok(ardcVocabService.getOrganisationVocabs());
+    }
 }
