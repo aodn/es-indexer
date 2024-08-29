@@ -1,5 +1,6 @@
 package au.org.aodn.esindexer.utils;
 
+import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.service.ArdcVocabService;
 import au.org.aodn.stac.model.ConceptModel;
 import au.org.aodn.stac.model.ThemesModel;
@@ -11,6 +12,7 @@ import org.springframework.test.context.ActiveProfiles;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -40,7 +42,7 @@ public class VocabUtilsTest {
         );
 
         // Perform the test
-        List<String> parameterVocabs = ardcVocabService.getVocabLabelsByThemes(themes);
+        List<String> parameterVocabs = ardcVocabService.getVocabLabelsByThemes(themes, AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS_KEY);
 
         // Assertions
         assertNotNull(parameterVocabs);

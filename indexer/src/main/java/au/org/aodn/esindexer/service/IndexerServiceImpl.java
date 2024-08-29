@@ -169,22 +169,15 @@ public class IndexerServiceImpl implements IndexerService {
 
         stacCollectionModel.getSummaries().setScore(score);
 
-        List<String> parameterVocabs = ardcVocabService.getVocabLabelsByThemes(stacCollectionModel.getThemes());
-        if (!parameterVocabs.isEmpty()) {
-            stacCollectionModel.getSummaries().setParameterVocabs(parameterVocabs);
+        List<String> processedParameterVocabs = ardcVocabService.getVocabLabelsByThemes(stacCollectionModel.getThemes(), AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS_KEY);
+        if (!processedParameterVocabs.isEmpty()) {
+            stacCollectionModel.getSummaries().setParameterVocabs(processedParameterVocabs);
         }
 
-        // TODO
-
-//        List<String> platformVocabs = ardcVocabService.getPlatformVocabs();
-//        if (!platformVocabs.isEmpty()) {
-//            stacCollectionModel.getSummaries().setPlatformVocabs(platformVocabs);
-//        }
-//
-//        List<String> organisationVocabs = ardcVocabService.getOrganisationVocabs();
-//        if (!organisationVocabs.isEmpty()) {
-//            stacCollectionModel.getSummaries().setOrganisationVocabs(organisationVocabs);
-//        }
+        List<String> processedPlatformVocabs = ardcVocabService.getVocabLabelsByThemes(stacCollectionModel.getThemes(), AppConstants.AODN_PLATFORM_VOCABS_KEY);
+        if (!processedPlatformVocabs.isEmpty()) {
+            stacCollectionModel.getSummaries().setPlatformVocabs(processedPlatformVocabs);
+        }
 
         // categories suggest using a different index
         // extendable for other aspects of the records data. eg. title, description, etc. something that are unique to the record and currently using "text" type
