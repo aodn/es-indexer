@@ -1,5 +1,6 @@
 package au.org.aodn.esindexer.controller;
 
+import au.org.aodn.ardcvocabs.configuration.VocabApiPaths;
 import au.org.aodn.ardcvocabs.model.VocabModel;
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.service.VocabService;
@@ -34,41 +35,41 @@ public class IndexerExtController {
     @GetMapping(path="/parameter/vocabs")
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Get parameter vocabs from Elastic search")
     public ResponseEntity<List<JsonNode>> getParameterVocab() throws IOException {
-        return ResponseEntity.ok(vocabService.getParameterVocabsFromEs());
+        return ResponseEntity.ok(vocabService.getParameterVocabs());
     }
 
     // this endpoint for debugging/development purposes
     @GetMapping(path="/platform/vocabs")
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Get platform vocabs from Elastic search")
     public ResponseEntity<List<JsonNode>> getPlatformVocabs() throws IOException {
-        return ResponseEntity.ok(vocabService.getPlatformVocabsFromEs());
+        return ResponseEntity.ok(vocabService.getPlatformVocabs());
     }
 
     // this endpoint for debugging/development purposes
     @GetMapping(path="/organisation/vocabs")
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Get organisation vocabs from Elastic search")
     public ResponseEntity<List<JsonNode>> getOrganisationVocabs() throws IOException {
-        return ResponseEntity.ok(vocabService.getOrganisationVocabsFromEs());
+        return ResponseEntity.ok(vocabService.getOrganisationVocabs());
     }
 
     // this endpoint for debugging/development purposes
     @GetMapping(path="/ardc/parameter/vocabs")
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Get parameter vocabs from ARDC directly")
     public ResponseEntity<List<VocabModel>> getParameterVocabsFromArdc() {
-        return ResponseEntity.ok(vocabService.getParameterVocabsFromArdc(vocabApiBase));
+        return ResponseEntity.ok(vocabService.getVocabTreeFromArdcByType(vocabApiBase, VocabApiPaths.PARAMETER_VOCAB));
     }
 
     // this endpoint for debugging/development purposes
     @GetMapping(path="/ardc/platform/vocabs")
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Get platform vocabs from ARDC directly")
     public ResponseEntity<List<VocabModel>> getPlatformVocabsFromArdc() {
-        return ResponseEntity.ok(vocabService.getPlatformVocabsFromArdc(vocabApiBase));
+        return ResponseEntity.ok(vocabService.getVocabTreeFromArdcByType(vocabApiBase, VocabApiPaths.PLATFORM_VOCAB));
     }
 
     // this endpoint for debugging/development purposes
     @GetMapping(path="/ardc/organisation/vocabs")
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Get organisation vocabs from ARDC directly")
     public ResponseEntity<List<VocabModel>> getOrganisationVocabsFromArdc() {
-        return ResponseEntity.ok(vocabService.getOrganisationVocabsFromArdc(vocabApiBase));
+        return ResponseEntity.ok(vocabService.getVocabTreeFromArdcByType(vocabApiBase, VocabApiPaths.ORGANISATION_VOCAB));
     }
 }

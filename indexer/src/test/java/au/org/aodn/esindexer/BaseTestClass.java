@@ -1,12 +1,17 @@
 package au.org.aodn.esindexer;
 
+import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.configuration.GeoNetworkSearchTestConfig;
+import au.org.aodn.esindexer.service.VocabService;
+import au.org.aodn.esindexer.service.VocabServiceImpl;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.ElasticsearchException;
 import co.elastic.clients.elasticsearch._types.query_dsl.QueryBuilders;
 import co.elastic.clients.transport.rest_client.RestClientTransport;
+import com.fasterxml.jackson.databind.JsonNode;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -16,6 +21,8 @@ import org.springframework.util.ResourceUtils;
 import org.springframework.web.client.RestClientException;
 import org.testcontainers.containers.DockerComposeContainer;
 import org.testcontainers.elasticsearch.ElasticsearchContainer;
+import org.testcontainers.shaded.com.fasterxml.jackson.core.type.TypeReference;
+import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.annotation.PostConstruct;
 import java.io.File;
@@ -29,6 +36,7 @@ import java.util.concurrent.CountDownLatch;
 
 import static au.org.aodn.esindexer.utils.CommonUtils.persevere;
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
 
 public class BaseTestClass {
 
@@ -66,6 +74,23 @@ public class BaseTestClass {
         catch(ElasticsearchException e) {
             // It is ok to ignore exception if the index is not found
         }
+    }
+
+    protected VocabService mockVocabServiceWithData() throws IOException {
+        String parameterVocabJson = BaseTestClass.readResourceFile("classpath:canned/aodn_discovery_parameter_vocabs.json");
+        List<JsonNode> parameterVocabs = new ObjectMapper().readValue(parameterVocabJson, new TypeReference<List<JsonNode>>() {});
+
+        String platformVocabsJson = BaseTestClass.readResourceFile("classpath:canned/aodn_platform_vocabs.json");
+        List<JsonNode> platformVocabs = new ObjectMapper().readValue(platformVocabsJson, new TypeReference<List<JsonNode>>() {});
+
+        String organisationVocabJson = BaseTestClass.readResourceFile("classpath:canned/aodn_organisation_vocabs.json");
+        List<JsonNode> organisationVocabs = (new ObjectMapper()).readValue(organisationVocabJson, new TypeReference<List<JsonNode>>() {});
+
+        VocabService service = Mockito.mock(VocabServiceImpl.class);
+        when(service.getParameterVocabs()).thenReturn(parameterVocabs);
+        when(service.getPlatformVocabs()).thenReturn(platformVocabs);
+        when(service.getOrganisationVocabs()).thenReturn(organisationVocabs);
+        return service;
     }
 
     protected HttpEntity<String> getRequestEntity(String body) {

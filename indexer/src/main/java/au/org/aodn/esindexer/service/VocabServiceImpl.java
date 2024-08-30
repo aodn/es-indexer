@@ -173,7 +173,7 @@ public class VocabServiceImpl implements VocabService {
         return results;
     }
 
-    protected List<VocabModel> getVocabTreeByType(String vocabApiBase, VocabApiPaths vocabApiPaths) {
+    public List<VocabModel> getVocabTreeFromArdcByType(String vocabApiBase, VocabApiPaths vocabApiPaths) {
         Map<String, List<VocabModel>> vocabLeafNodes = getVocabLeafNodes(vocabApiBase, vocabApiPaths);
         String url = String.format(vocabApiBase + vocabApiPaths.getVocabCategoryApiPath());
         List<VocabModel> vocabCategoryNodes = new ArrayList<>();
@@ -279,13 +279,13 @@ public class VocabServiceImpl implements VocabService {
     this method for analysing the vocabularies of a record aka bottom-level vocabs (found in the themes section)
     and returning the second-level vocabularies that match (1 level up from the bottom-level vocabularies)
      */
-    public List<String> getVocabLabelsByThemes(List<ThemesModel> themes, String vocabType) throws IOException {
+    public List<String> extractVocabLabelsFromThemes(List<ThemesModel> themes, String vocabType) throws IOException {
         List<String> results = new ArrayList<>();
         // Iterate over the top-level vocabularies
         List<JsonNode> vocabs = switch (vocabType) {
-            case AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS_KEY -> self.getParameterVocabsFromEs();
-            case AppConstants.AODN_PLATFORM_VOCABS_KEY -> self.getPlatformVocabsFromEs();
-            case AppConstants.AODN_ORGANISATION_VOCABS_KEY -> self.getOrganisationVocabsFromEs();
+            case AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS -> self.getParameterVocabs();
+            case AppConstants.AODN_PLATFORM_VOCABS -> self.getPlatformVocabs();
+            case AppConstants.AODN_ORGANISATION_VOCABS -> self.getOrganisationVocabs();
             default -> new ArrayList<>();
         };
 
@@ -305,7 +305,7 @@ public class VocabServiceImpl implements VocabService {
 
                                     // Compare with themes' concepts
                                     if (themesMatchConcept(themes, bottomConcept)) {
-                                        results.add(secondLevelVocabLabel);
+                                        results.add(secondLevelVocabLabel.toLowerCase());
                                         break; // To avoid duplicates because under the same second-level vocab there can be multiple bottom-level vocabs that pass the condition
                                     }
                                 }
@@ -318,19 +318,7 @@ public class VocabServiceImpl implements VocabService {
         return results;
     }
 
-    public List<VocabModel> getParameterVocabsFromArdc(String vocabApiBase) {
-        return getVocabTreeByType(vocabApiBase, VocabApiPaths.PARAMETER_VOCAB);
-    }
-
-    public List<VocabModel> getPlatformVocabsFromArdc(String vocabApiBase) {
-        return getVocabTreeByType(vocabApiBase, VocabApiPaths.PLATFORM_VOCAB);
-    }
-
-    public List<VocabModel> getOrganisationVocabsFromArdc(String vocabApiBase) {
-        return getVocabTreeByType(vocabApiBase, VocabApiPaths.ORGANISATION_VOCAB);
-    }
-
-    protected List<JsonNode> groupVocabsByKey(String key) throws IOException {
+    protected List<JsonNode> groupVocabsFromEsByKey(String key) throws IOException {
         List<JsonNode> vocabs = new ArrayList<>();
         log.info("Fetching {} vocabularies from {}", key, vocabsIndexName);
         try {
@@ -354,33 +342,33 @@ public class VocabServiceImpl implements VocabService {
         return vocabs;
     }
 
-    @Cacheable(AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS_KEY)
-    public List<JsonNode> getParameterVocabsFromEs() throws IOException {
-        return groupVocabsByKey("parameter_vocab");
+    @Cacheable(value = AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS)
+    public List<JsonNode> getParameterVocabs() throws IOException {
+        return groupVocabsFromEsByKey("parameter_vocab");
     }
 
-    @Cacheable(AppConstants.AODN_PLATFORM_VOCABS_KEY)
-    public List<JsonNode> getPlatformVocabsFromEs() throws IOException {
-        return groupVocabsByKey("platform_vocab");
+    @Cacheable(value = AppConstants.AODN_PLATFORM_VOCABS)
+    public List<JsonNode> getPlatformVocabs() throws IOException {
+        return groupVocabsFromEsByKey("platform_vocab");
     }
 
-    @Cacheable(AppConstants.AODN_ORGANISATION_VOCABS_KEY)
-    public List<JsonNode> getOrganisationVocabsFromEs() throws IOException {
-        return groupVocabsByKey("organisation_vocab");
+    @Cacheable(value = AppConstants.AODN_ORGANISATION_VOCABS)
+    public List<JsonNode> getOrganisationVocabs() throws IOException {
+        return groupVocabsFromEsByKey("organisation_vocab");
     }
 
-    @CacheEvict(value = AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS_KEY, allEntries = true)
-    public void clearParameterVocabsCache() {
+    @CacheEvict(value = AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS, allEntries = true)
+    public void clearParameterVocabCache() {
         // Intentionally empty; the annotation does the job
     }
 
-    @CacheEvict(value = AppConstants.AODN_PLATFORM_VOCABS_KEY, allEntries = true)
-    public void clearPlatformVocabsCache() {
+    @CacheEvict(value = AppConstants.AODN_PLATFORM_VOCABS, allEntries = true)
+    public void clearPlatformVocabCache() {
         // Intentionally empty; the annotation does the job
     }
 
-    @CacheEvict(value = AppConstants.AODN_ORGANISATION_VOCABS_KEY, allEntries = true)
-    public void clearOrganisationVocabsCache() {
+    @CacheEvict(value = AppConstants.AODN_ORGANISATION_VOCABS, allEntries = true)
+    public void clearOrganisationVocabCache() {
         // Intentionally empty; the annotation does the job
     }
 
@@ -458,11 +446,11 @@ public class VocabServiceImpl implements VocabService {
 
     public void populateVocabsData() throws IOException {
         log.info("Fetching parameter vocabs from ARDC");
-        List<VocabModel> parameterVocabs = getParameterVocabsFromArdc(vocabApiBase);
+        List<VocabModel> parameterVocabs = getVocabTreeFromArdcByType(vocabApiBase, VocabApiPaths.PARAMETER_VOCAB);
         log.info("Fetching platform vocabs from ARDC");
-        List<VocabModel> platformVocabs = getPlatformVocabsFromArdc(vocabApiBase);
+        List<VocabModel> platformVocabs = getVocabTreeFromArdcByType(vocabApiBase, VocabApiPaths.PLATFORM_VOCAB);
         log.info("Fetching organisation vocabs from ARDC");
-        List<VocabModel> organisationVocabs = getOrganisationVocabsFromArdc(vocabApiBase);
+        List<VocabModel> organisationVocabs = getVocabTreeFromArdcByType(vocabApiBase, VocabApiPaths.ORGANISATION_VOCAB);
         log.info("Indexing fetched vocabs to {}", vocabsIndexName);
         indexAllVocabs(parameterVocabs, platformVocabs, organisationVocabs);
     }
