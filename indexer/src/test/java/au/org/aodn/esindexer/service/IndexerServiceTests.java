@@ -2,12 +2,14 @@ package au.org.aodn.esindexer.service;
 
 import au.org.aodn.esindexer.BaseTestClass;
 import au.org.aodn.esindexer.configuration.GeoNetworkSearchTestConfig;
+import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch.core.search.Hit;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -27,6 +29,9 @@ public class IndexerServiceTests extends BaseTestClass {
 
     @Autowired
     protected GeoNetworkServiceImpl geoNetworkService;
+
+    @Qualifier("gn4ElasticsearchClient")
+    ElasticsearchClient gn4ElasticsearchClient;
 
     @Autowired
     protected IndexerService indexerService;
@@ -71,6 +76,7 @@ public class IndexerServiceTests extends BaseTestClass {
                         }
                         else {
                             countDownLatch.await(5, TimeUnit.SECONDS);
+                            gn4ElasticsearchClient.indices().refresh();
                         }
                     } catch (Exception e) {
                         throw new RuntimeException(e);
