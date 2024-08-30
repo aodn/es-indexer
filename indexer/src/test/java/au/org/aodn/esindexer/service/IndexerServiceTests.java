@@ -75,8 +75,8 @@ public class IndexerServiceTests extends BaseTestClass {
                             countDownLatch.countDown();
                         }
                         else {
-                            countDownLatch.await(5, TimeUnit.SECONDS);
                             gn4ElasticsearchClient.indices().refresh();
+                            countDownLatch.await(5, TimeUnit.SECONDS);
                         }
                     } catch (Exception e) {
                         throw new RuntimeException(e);
