@@ -1,7 +1,5 @@
 package au.org.aodn.esindexer.service;
 
-import au.org.aodn.ardcvocabs.model.VocabDto;
-import au.org.aodn.ardcvocabs.model.VocabModel;
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.exception.*;
 import au.org.aodn.esindexer.utils.JaxbUtils;
@@ -19,7 +17,6 @@ import co.elastic.clients.elasticsearch.indices.AnalyzeRequest;
 import co.elastic.clients.elasticsearch.indices.AnalyzeResponse;
 import co.elastic.clients.elasticsearch.indices.analyze.AnalyzeToken;
 import co.elastic.clients.json.JsonData;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import jakarta.xml.bind.JAXBException;
@@ -174,19 +171,19 @@ public class IndexerServiceImpl implements IndexerService {
         stacCollectionModel.getSummaries().setScore(score);
 
         // parameter vocabs
-        List<String> processedParameterVocabs = vocabService.getVocabLabelsByThemes(stacCollectionModel.getThemes(), AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS_KEY);
+        List<String> processedParameterVocabs = vocabService.extractVocabLabelsFromThemes(stacCollectionModel.getThemes(), AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS);
         if (!processedParameterVocabs.isEmpty()) {
             stacCollectionModel.getSummaries().setParameterVocabs(processedParameterVocabs);
         }
 
         // platform vocabs
-        List<String> processedPlatformVocabs = vocabService.getVocabLabelsByThemes(stacCollectionModel.getThemes(), AppConstants.AODN_PLATFORM_VOCABS_KEY);
+        List<String> processedPlatformVocabs = vocabService.extractVocabLabelsFromThemes(stacCollectionModel.getThemes(), AppConstants.AODN_PLATFORM_VOCABS);
         if (!processedPlatformVocabs.isEmpty()) {
             stacCollectionModel.getSummaries().setPlatformVocabs(processedPlatformVocabs);
         }
 
         // organisation vocabs
-        List<String> processedOrganisationVocabs = vocabService.getVocabLabelsByThemes(stacCollectionModel.getThemes(), AppConstants.AODN_ORGANISATION_VOCABS_KEY);
+        List<String> processedOrganisationVocabs = vocabService.extractVocabLabelsFromThemes(stacCollectionModel.getThemes(), AppConstants.AODN_ORGANISATION_VOCABS);
         if (!processedOrganisationVocabs.isEmpty()) {
             stacCollectionModel.getSummaries().setPlatformVocabs(processedOrganisationVocabs);
         }

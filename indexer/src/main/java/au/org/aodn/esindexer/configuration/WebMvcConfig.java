@@ -27,9 +27,9 @@ public class WebMvcConfig {
     @Bean
     public ConcurrentMapCacheManager cacheManager() {
         return new ConcurrentMapCacheManager(
-                AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS_KEY,
-                AppConstants.AODN_PLATFORM_VOCABS_KEY,
-                AppConstants.AODN_ORGANISATION_VOCABS_KEY
+                AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS,
+                AppConstants.AODN_PLATFORM_VOCABS,
+                AppConstants.AODN_ORGANISATION_VOCABS
         );
     }
 

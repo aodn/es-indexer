@@ -28,14 +28,14 @@ public class VocabsIndexUtils {
     public void scheduledRefreshVocabsData() throws IOException {
         log.info("Refreshing ARDC vocabularies data");
         // clear existing caches
-        vocabService.clearParameterVocabsCache();
-        vocabService.clearPlatformVocabsCache();
-        vocabService.clearOrganisationVocabsCache();
+        vocabService.clearParameterVocabCache();
+        vocabService.clearPlatformVocabCache();
+        vocabService.clearOrganisationVocabCache();
         // populate latest vocabs
         vocabService.populateVocabsData();
         // update the caches
-        vocabService.getParameterVocabsFromEs();
-        vocabService.getPlatformVocabsFromEs();
-        vocabService.getOrganisationVocabsFromEs();
+        vocabService.getParameterVocabs();
+        vocabService.getPlatformVocabs();
+        vocabService.getOrganisationVocabs();
     }
 }

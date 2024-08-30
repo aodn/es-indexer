@@ -1,5 +1,6 @@
 package au.org.aodn.esindexer.service;
 
+import au.org.aodn.esindexer.BaseTestClass;
 import au.org.aodn.esindexer.utils.JaxbUtils;
 import au.org.aodn.metadata.iso19115_3_2018.MDMetadataType;
 import au.org.aodn.stac.model.StacCollectionModel;
@@ -20,6 +21,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
@@ -39,7 +41,7 @@ import static org.mockito.Mockito.*;
  */
 @Slf4j
 @SpringBootTest(classes = {StacCollectionMapperServiceImpl.class})
-public class StacCollectionMapperServiceTests {
+public class StacCollectionMapperServiceTests extends BaseTestClass {
 
     protected ObjectMapper objectMapper = new ObjectMapper();
     protected JaxbUtils<MDMetadataType> jaxbUtils = new JaxbUtils<>(MDMetadataType.class);
@@ -53,8 +55,7 @@ public class StacCollectionMapperServiceTests {
     @MockBean
     protected ElasticSearchIndexService elasticSearchIndexService;
 
-    @MockBean
-    protected VocabService vocabService;
+    protected VocabService vocabServiceImpl;
 
     @MockBean
     protected RankingService rankingService;
@@ -74,13 +75,14 @@ public class StacCollectionMapperServiceTests {
         Mockito.reset(
                 geoNetworkResourceService,
                 portalElasticsearchClient,
-                elasticSearchIndexService,
-                vocabService
+                elasticSearchIndexService
         );
     }
 
     @BeforeEach
     public void createIndexerService() throws IOException {
+        vocabServiceImpl = mockVocabServiceWithData();
+
         indexerService = new IndexerServiceImpl(
                 "any-works",
                 "shingle_analyser",
@@ -91,7 +93,7 @@ public class StacCollectionMapperServiceTests {
                 portalElasticsearchClient,
                 elasticSearchIndexService,
                 service,
-                vocabService
+                vocabServiceImpl
         );
         indexerService = spy(indexerService);
 
