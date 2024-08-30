@@ -66,28 +66,6 @@ public class IndexerServiceTests extends BaseTestClass {
     public void verifyGeoNetworkInstanceReinstalled() throws Exception {
         String uuid = "9e5c3031-a026-48b3-a153-a70c2e2b78b9";
         try {
-            // Due to elastic update, we need to wait a bit to make sure the count is zero before insert
-            final CountDownLatch countDownLatch = new CountDownLatch(1);
-            Thread thread = new Thread(() -> {
-                for(int i = 0; i < 10; i++) {
-                    try {
-                        if(geoNetworkService.getAllMetadataCounts() == 0) {
-                            countDownLatch.countDown();
-                        }
-                        else {
-                            gn4ElasticsearchClient.indices().refresh();
-                            countDownLatch.await(5, TimeUnit.SECONDS);
-                        }
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-                countDownLatch.countDown();
-            });
-
-            thread.start();
-            countDownLatch.await();
-
             insertMetadataRecords(uuid, "classpath:canned/sample1.xml");
             Assertions.assertTrue(indexerService.isGeoNetworkInstanceReinstalled(1), "New installed");
         }
