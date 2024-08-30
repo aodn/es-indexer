@@ -303,7 +303,6 @@ public class StacCollectionMapperServiceTests {
         );
     }
     /**
-     * TODO: Havier -
      * @throws IOException
      */
     @Test
@@ -333,6 +332,21 @@ public class StacCollectionMapperServiceTests {
                 objectMapper.readTree(expected),
                 objectMapper.readTree(out.strip()),
                 "Stac not equals for sample13"
+        );
+    }
+
+    @Test
+    public void verifyTitleFreeThemes() throws IOException {
+        String xml = readResourceFile("classpath:canned/sample14.xml");
+        String expected = readResourceFile("classpath:canned/sample14_stac.json");
+        indexerService.indexMetadata(xml);
+
+        Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
+        String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
+        Assertions.assertEquals(
+                objectMapper.readTree(expected),
+                objectMapper.readTree(out.strip()),
+                "Stac not equals for sample14"
         );
     }
 }
