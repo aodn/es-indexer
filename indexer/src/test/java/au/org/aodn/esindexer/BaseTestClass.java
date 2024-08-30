@@ -202,9 +202,6 @@ public class BaseTestClass {
             // of the concurrency issue in elastic search, and can be resolved by retrying )
             persevere(() -> delete(uuid, requestEntity));
         }
-
-        // retry the request if the server is not ready yet (sometimes will return 403 and can be resolved by retrying )
-        persevere(() -> triggerIndexer(requestEntity));
     }
 
     private boolean triggerIndexer(HttpEntity<String> requestEntity) {
@@ -241,7 +238,8 @@ public class BaseTestClass {
                             requestEntity,
                             String.class
                     );
-            if (response.getStatusCode().is2xxSuccessful()) {
+            if (response.getStatusCode().is2xxSuccessful() ||
+                    response.getStatusCode() == HttpStatus.NOT_FOUND) {
                 logger.info("Deleted GN doc {}", uuid);
                 return true;
             }
@@ -288,15 +286,8 @@ public class BaseTestClass {
         assertEquals("Published OK", HttpStatus.NO_CONTENT, responseEntity.getStatusCode());
 
         // Index the item so that query yield the right result
-        responseEntity = testRestTemplate
-                .exchange(
-                        getIndexUrl(),
-                        HttpMethod.PUT,
-                        requestEntity,
-                        String.class
-                );
+        persevere(() -> triggerIndexer(getRequestEntity(null)));
 
-        assertEquals("Trigger index OK", HttpStatus.OK, responseEntity.getStatusCode());
         return content;
     }
 }
