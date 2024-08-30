@@ -189,13 +189,13 @@ public class IndexerServiceImpl implements IndexerService {
 
             // count portal index documents, or create index if not found from defined mapping JSON file
             try {
-                portalIndexDocumentsCount = elasticSearchIndexService.getDocumentsCount(indexName);
-
+                elasticSearchIndexService.getDocumentsCount(indexName);
+                // TODO: Very expensive operation for isGeoNetworkInstanceResinstalled check, really need?
                 // check if GeoNetwork instance has been reinstalled
-                if (this.isGeoNetworkInstanceReinstalled(portalIndexDocumentsCount)) {
-                    logger.info("GeoNetwork instance has been reinstalled, recreating portal index: {}", indexName);
-                    elasticSearchIndexService.createIndexFromMappingJSONFile(AppConstants.PORTAL_RECORDS_MAPPING_JSON_FILE, indexName);
-                }
+//                if (this.isGeoNetworkInstanceReinstalled(portalIndexDocumentsCount)) {
+//                    logger.info("GeoNetwork instance has been reinstalled, recreating portal index: {}", indexName);
+//                    elasticSearchIndexService.createIndexFromMappingJSONFile(AppConstants.PORTAL_RECORDS_MAPPING_JSON_FILE, indexName);
+//                }
             } catch (IndexNotFoundException e) {
                 logger.info("Index: {} not found, creating index", indexName);
                 elasticSearchIndexService.createIndexFromMappingJSONFile(AppConstants.PORTAL_RECORDS_MAPPING_JSON_FILE, indexName);
