@@ -46,6 +46,8 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
     public static final String THUMB_NAILS = "thumbnails";
     public static final String URL = "url";
 
+    protected static final Logger logger = LogManager.getLogger(GeoNetworkServiceImpl.class);
+
     @Autowired
     protected UrlUtils urlUtils;
 
@@ -55,16 +57,13 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
 
     @Value("${elasticsearch.query.pageSize:500}")
     protected int ES_PAGE_SIZE;
-
     // Use for debug only if run the indexer locally and hit an issue, you do
     // not want to start from the start, by setting this env value, it will start from the UUID
     // that follows.
     @Value("${elasticsearch.query.startingUUID:#{null}}")
     protected String startingUUID;
 
-    protected static final Logger logger = LogManager.getLogger(GeoNetworkServiceImpl.class);
-
-    protected FIFOCache<String, Map<String, ?>> cache = new FIFOCache<>(5);
+    protected FIFOCache<String, Map<String, ?>> cache;
     protected RestTemplate indexerRestTemplate;
     protected ElasticsearchClient gn4ElasticClient;
     protected String indexName;
@@ -88,10 +87,12 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
             String server,
             String indexName,
             ElasticsearchClient gn4ElasticClient,
-            RestTemplate indexerRestTemplate) {
+            RestTemplate indexerRestTemplate,
+            FIFOCache<String, Map<String, ?>> cache) {
 
         this.gn4ElasticClient = gn4ElasticClient;
         this.indexerRestTemplate = indexerRestTemplate;
+        this.cache = cache;
 
         setIndexName(indexName);
         setServer(server);
