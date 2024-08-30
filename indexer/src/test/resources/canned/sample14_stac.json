@@ -1,0 +1,423 @@
+{
+  "title": "IMOS - ANFOG - Slocum glider deployment along the coast of New South Wales (September-October 2010)",
+  "description": "The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider along the coast of New South Wales. The Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf. The variables available in this dataset are: Temperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.",
+  "extent": {
+    "bbox": [
+      [
+        151.801,
+        -33.3906,
+        152.5583,
+        -32.7189
+      ],
+      [
+        151.801,
+        -33.3906,
+        152.5583,
+        -32.7189
+      ]
+    ],
+    "temporal": [
+      [
+        "2010-09-20T15:14:00Z",
+        "2010-10-13T07:59:00Z"
+      ],
+      [
+        "2010-09-20T15:14:00Z",
+        "2010-10-13T07:59:00Z"
+      ]
+    ]
+  },
+  "summaries": {
+    "score": 1,
+    "status": "completed",
+    "credits": [
+      "Australia’s Integrated Marine Observing System (IMOS) is enabled by the National Collaborative Research Infrastructure Strategy (NCRIS). It is operated by a consortium of institutions as an unincorporated joint venture, with the University of Tasmania as Lead Agent.",
+      "The University of Western Australia (UWA)"
+    ],
+    "scope": {
+      "code": "dataset",
+      "name": "IMOS Dataset level record"
+    },
+    "statement": "The data has undergone the following quality control tests: 1) Impossible date test, which checks if time values are within a timeframe possible for the ANFOG fleet; 2) Impossible location test, which requires that the observation latitude and longitude from the float be sensible; 3) Range test, which applies a gross filter on observed values for the measured scientific parameters, that accommodates all of the expected extremes encountered in the oceans around Australia; 4) Deepest pressure test, which requires that the profile has pressures/depths that are not higher than vehicle safe depth range plus 10%. (If there is a region of incorrect pressures, all corresponding measurements are also flagged as bad data.) 5) Spike test, which considers that the difference between sequential measurements where one measurement is quite different than adjacent ones, is a spike in both size and gradient. The test does not consider the differences in depth, but assumes a sampling that adequately reproduces the temperature and salinity changes with depth. The algorithm is used on temperature and salinity profiles only. 6) Gradient test, which is failed when the difference between vertically adjacent measurements is too steep. The test does not consider the differences in depth, but assumes a sampling that adequately reproduces the temperature and salinity changes with depth. The algorithm is used on temperature and salinity profiles only. The results of the above mentioned tests are listed using an IMOS standard set of IODE flags, which the user should refer to when using the data. Only items flagged as 1: Good data or 8: Interpolated data should be used. Each parameter's quality flagging is found in its corresponding quality control parameter (e.g. for the parameter PSAL, the quality flags are found in PSAL_quality_control). For further information, please refer to IMOS NETCDF USER'S MANUAL version 1.2 and AUSTRALIAN NATIONAL FACILITY FOR OCEAN GLIDERS (ANFOG) DATA MANAGEMENT USER'S MANUAL version 1.2 .",
+    "creation": "2017-09-01T14:02:28",
+    "revision": "2017-09-01T14:02:28",
+    "dataset_provider": "IMOS",
+    "update_frequency": "completed",
+    "proj:geometry": {
+      "geometries": [
+        {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                151.801,
+                -33.3906
+              ],
+              [
+                152.5583,
+                -33.3906
+              ],
+              [
+                152.5583,
+                -32.7189
+              ],
+              [
+                151.801,
+                -32.7189
+              ],
+              [
+                151.801,
+                -33.3906
+              ]
+            ]
+          ]
+        }
+      ],
+      "type": "GeometryCollection"
+    },
+    "temporal": [
+      {
+        "start": "2010-09-20T15:14:00Z",
+        "end": "2010-10-13T07:59:00Z"
+      }
+    ]
+  },
+  "contacts": [
+    {
+      "roles": [
+        "pointOfContact",
+        "about"
+      ],
+      "organization": "School of Civil, Environmental and Mining Engineering (CEME), The University of Western Australia (UWA)",
+      "name": "Pattiaratchi, Charitha, Professor",
+      "position": "",
+      "emails": [
+        "chari.pattiaratchi@uwa.edu.au"
+      ],
+      "addresses": [
+        {
+          "deliveryPoint": [
+            "MO51, 35 Stirling highway"
+          ],
+          "city": "Crawley",
+          "country": "Australia",
+          "postalCode": "6009",
+          "administrativeArea": "Western Australia"
+        }
+      ],
+      "phones": [
+        {
+          "roles": [
+            "voice"
+          ],
+          "value": "61 8 6488 3525"
+        },
+        {
+          "roles": [
+            "facsimile"
+          ],
+          "value": "61 8 6488 1015"
+        }
+      ],
+      "links": []
+    },
+    {
+      "roles": [
+        "distributor",
+        "metadata"
+      ],
+      "organization": "Integrated Marine Observing System (IMOS)",
+      "name": "",
+      "position": "Data Officer",
+      "emails": [
+        "info@aodn.org.au"
+      ],
+      "addresses": [
+        {
+          "deliveryPoint": [
+            "University of Tasmania",
+            "Private Bag 110"
+          ],
+          "city": "Hobart",
+          "country": "Australia",
+          "postalCode": "7001",
+          "administrativeArea": "Tasmania"
+        }
+      ],
+      "phones": [
+        {
+          "roles": [
+            "voice"
+          ],
+          "value": "61 3 6226 7488"
+        },
+        {
+          "roles": [
+            "facsimile"
+          ],
+          "value": "61 3 6226 2107"
+        }
+      ],
+      "links": [
+        {
+          "href": "http://imos.org.au/aodn.html",
+          "type": "WWW:LINK-1.0-http--link",
+          "title": "Website of the Australian Ocean Data Network (AODN)"
+        }
+      ]
+    },
+    {
+      "roles": [
+        "resourceProvider",
+        "citation"
+      ],
+      "organization": "Integrated Marine Observing System (IMOS)",
+      "name": null,
+      "position": null,
+      "emails": [
+        "imos@imos.org.au"
+      ],
+      "addresses": [
+        {
+          "deliveryPoint": [
+            "Private Bag 110"
+          ],
+          "city": "Hobart",
+          "country": "Australia",
+          "postalCode": "7001",
+          "administrativeArea": "Tasmania"
+        }
+      ],
+      "phones": [
+        {
+          "roles": [
+            "voice"
+          ],
+          "value": "61 3 6226 7549"
+        },
+        {
+          "roles": [
+            "facsimile"
+          ],
+          "value": "61 3 6226 2107"
+        }
+      ],
+      "links": [
+        {
+          "href": "http://www.imos.org.au/html",
+          "type": "WWW:LINK-1.0-http--link",
+          "title": "Website of the Integrated Marine Observing System (IMOS)"
+        }
+      ]
+    }
+  ],
+  "languages": [
+    {
+      "code": "eng",
+      "name": "English"
+    }
+  ],
+  "links": [
+    {
+      "href": "http://thredds.aodn.org.au/thredds/dodsC/IMOS/ANFOG/slocum_glider/NSW20100921/IMOS_ANFOG_BCEOPSTUV_20100921T011446Z_SL106_FV01_timeseries_END-20101006T073015Z.nc.html",
+      "rel": "related",
+      "type": "text/html",
+      "title": "Data available via the IMOS OPeNDAP server"
+    },
+    {
+      "href": "http://thredds.aodn.org.au/thredds/fileServer/IMOS/ANFOG/slocum_glider/NSW20100921/IMOS_ANFOG_BCEOPSTUV_20100921T011446Z_SL106_FV01_timeseries_END-20101006T073015Z.nc",
+      "rel": "related",
+      "type": "",
+      "title": "Download data from the IMOS THREDDS server"
+    },
+    {
+      "href": "https://s3-ap-southeast-2.amazonaws.com/content.aodn.org.au/Documents/IMOS/Facilities/Ocean_glider/glider_data_management.pdf",
+      "rel": "related",
+      "type": "text/html",
+      "title": "Link to the ANFOG data management document"
+    },
+    {
+      "href": "http://data.aodn.org.au/?prefix=IMOS/ANFOG/slocum_glider/NSW20100921/",
+      "rel": "related",
+      "type": "text/html",
+      "title": "Summary plots of each variable measured during the deployment (JPEG files)"
+    },
+    {
+      "href": "https://catalogue-imos.aodn.org.au:443/geonetwork/srv/api/records/236e4480-d188-4818-8258-7bdb0fd5e0aa",
+      "rel": "describedby",
+      "type": "text/html",
+      "title": "Full metadata link"
+    },
+    {
+      "href": "https://licensebuttons.net/l/by/4.0/88x31.png",
+      "rel": "license",
+      "type": "image/png"
+    },
+    {
+      "href": "http://creativecommons.org/licenses/by/4.0/",
+      "rel": "license",
+      "type": "text/html"
+    }
+  ],
+  "license": "Creative Commons Attribution 4.0 International License",
+  "providers": [
+    {
+      "name": "Integrated Marine Observing System (IMOS)",
+      "roles": [
+        "distributor"
+      ],
+      "url": "http://imos.org.au/aodn.html"
+    }
+  ],
+  "themes": [
+    {
+      "concepts": [
+        {
+          "id": "Coloured Dissolved Organic Matter (CDOM)",
+          "url": null
+        },
+        {
+          "id": "IMOS Facility | ANFOG | Australian National Facility for Ocean Gliders",
+          "url": null
+        },
+        {
+          "id": "Glider",
+          "url": null
+        },
+        {
+          "id": "Slocum Glider",
+          "url": null
+        },
+        {
+          "id": "IMOS Node | Bluewater and Climate",
+          "url": null
+        }
+      ],
+      "scheme": "theme",
+      "description": "IMOS",
+      "title": "IMOS Keywords Thesaurus"
+    },
+    {
+      "concepts": [
+        {
+          "id": "Oceans | Ocean Chemistry | Chlorophyll",
+          "url": null
+        },
+        {
+          "id": "Oceans | Ocean Chemistry | Suspended Solids",
+          "url": null
+        },
+        {
+          "id": "Oceans | Ocean Temperature | Water Temperature",
+          "url": null
+        },
+        {
+          "id": "Oceans | Ocean Optics | Turbidity",
+          "url": null
+        },
+        {
+          "id": "Oceans | Salinity/density | Conductivity",
+          "url": null
+        },
+        {
+          "id": "Oceans | Ocean Optics | Fluorescence",
+          "url": null
+        },
+        {
+          "id": "Oceans | Ocean Chemistry | Oxygen",
+          "url": null
+        },
+        {
+          "id": "Oceans | Ocean Circulation | Ocean Currents",
+          "url": null
+        }
+      ],
+      "scheme": "theme",
+      "description": "GCMD",
+      "title": "NASA/Global Change Master Directory Earth Science Keywords Version 5.3.8"
+    },
+    {
+      "concepts": [
+        {
+          "id": "CTD (Conductivity-Temperature-Depth Profilers)",
+          "url": null
+        },
+        {
+          "id": "Fluorometers",
+          "url": null
+        }
+      ],
+      "scheme": "theme",
+      "description": "MCP",
+      "title": "Marine Community Profile of ISO19115 v1.4 Collection Methods Vocabulary (Annex C.1.3)"
+    },
+    {
+      "concepts": [
+        {
+          "id": "Countries | Australia",
+          "url": null
+        },
+        {
+          "id": "States, Territories (Australia) | New South Wales",
+          "url": null
+        }
+      ],
+      "scheme": "place",
+      "description": "MCP",
+      "title": "Marine Community Profile of ISO19115 v1.4 Geographic Extent Vocabulary (Annex C.1.2)"
+    },
+    {
+      "concepts": [
+        {
+          "id": "sea_water_temperature",
+          "url": null
+        },
+        {
+          "id": "sea_water_salinity",
+          "url": null
+        },
+        {
+          "id": "sea_water_pressure",
+          "url": null
+        },
+        {
+          "id": "mass_concentration_of_oxygen_in_sea_water",
+          "url": null
+        },
+        {
+          "id": "sea_water_electrical_conductivity",
+          "url": null
+        },
+        {
+          "id": "concentration_of_coloured_dissolved_organic_matter",
+          "url": null
+        },
+        {
+          "id": "volumetric_backscatter_coefficient",
+          "url": null
+        },
+        {
+          "id": "fluorescence_in_sea_water",
+          "url": null
+        }
+      ],
+      "scheme": "",
+      "description": "",
+      "title": "Keywords (Theme)"
+    }
+  ],
+  "id": "236e4480-d188-4818-8258-7bdb0fd5e0aa",
+  "record_suggest": {
+    "abstract_phrases": []
+  },
+  "sci:citation": "{\"suggestedCitation\":\"The citation in a list of references is: \\\"IMOS [year-of-data-download], [Title], [data-access-URL], accessed [date-of-access].\\\"\",\"useLimitations\":[\"Data, products and services from IMOS are provided \\\"as is\\\" without any warranty as to fitness for a particular purpose.\"],\"otherConstraints\":[\"Any users of IMOS data are required to clearly acknowledge the source of the material derived from IMOS in the format: \\\"Data was sourced from Australia’s Integrated Marine Observing System (IMOS) – IMOS is enabled by the National Collaborative Research Infrastructure strategy (NCRIS).\\\" If relevant, also credit other organisations involved in collection of this particular datastream (as listed in 'credit' in the metadata record).\"]}",
+  "type": "Collection",
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/contacts/v0.1.1/schema.json",
+    "https://stac-extensions.github.io/projection/v1.1.0/schema.json",
+    "https://stac-extensions.github.io/language/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/themes/v1.0.0/schema.json"
+  ]
+}

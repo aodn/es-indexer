@@ -3,6 +3,8 @@ package au.org.aodn.esindexer.utils;
 import au.org.aodn.esindexer.utils.StringUtil;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
@@ -33,5 +35,17 @@ public class StringUtilTest {
         // convert it back to UTF-8
         String result = StringUtil.encodeUTF8(manuallyEncoded);
         assertEquals(original, result);
+    }
+
+    @Test
+    public void testCapitalizeFirstLetter() {
+        assertEquals("Hello", StringUtil.capitalizeFirstLetter("hello"));
+
+        // if string is null, just return null and no exception
+        assertNull(StringUtil.capitalizeFirstLetter(null));
+
+        // if string is empty, just return empty string and no exception
+        assertEquals("", StringUtil.capitalizeFirstLetter(""));
+
     }
 }

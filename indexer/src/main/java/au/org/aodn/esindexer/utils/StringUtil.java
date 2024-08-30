@@ -7,4 +7,11 @@ public class StringUtil {
     public static String encodeUTF8(String input) {
         return new String(input.getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
     }
+
+    public static String capitalizeFirstLetter(String string) {
+        if (string == null || string.isEmpty()) {
+            return string;
+        }
+        return string.substring(0, 1).toUpperCase() + string.substring(1);
+    }
 }

@@ -34,6 +34,7 @@ import java.util.stream.Collectors;
 
 import static au.org.aodn.esindexer.model.GeoNetworkField.*;
 import static au.org.aodn.esindexer.utils.CommonUtils.safeGet;
+import static au.org.aodn.esindexer.utils.StringUtil.capitalizeFirstLetter;
 
 /**
  * This class transform the XML from GeoNetwork to STAC format and store it into Elastic-Search
@@ -440,6 +441,18 @@ public abstract class StacCollectionMapperService {
                     return "";
                 })
                 .orElseGet(() -> {
+                    // If no thesaurusName, try to use type as title
+                    // make sure it is really not a thesaurusName
+                    if (safeGet(() -> descriptiveKeyword.getMDKeywords().getThesaurusName()).isEmpty()) {
+                        var type = safeGet(() -> descriptiveKeyword.getMDKeywords().getType().getMDKeywordTypeCode().getCodeListValue());
+                        if (type.isPresent()) {
+                            if (type.get().isEmpty()) {
+                                return "Keywords";
+                            }
+                            return String.format("Keywords (%s)", capitalizeFirstLetter(type.get()));
+                        }
+
+                    }
                     logger.debug("Unable to find themes' title for metadata record: {}", uuid);
                     return "";
                 });
