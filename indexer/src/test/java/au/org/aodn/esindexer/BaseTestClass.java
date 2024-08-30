@@ -51,9 +51,6 @@ public class BaseTestClass {
     protected ElasticsearchClient client;
 
     @Autowired
-    protected ElasticsearchContainer container;
-
-    @Autowired
     protected DockerComposeContainer dockerComposeContainer;
 
     protected void clearElasticIndex(String indexName) throws IOException {
@@ -109,11 +106,11 @@ public class BaseTestClass {
 
     }
 
-    protected String getIndexUrl() {
-        return String.format("http://%s:%s/geonetwork/srv/api/site/index?reset=false&asynchronous=false",
+    protected String getIndexUrl(boolean reset) {
+        return String.format("http://%s:%s/geonetwork/srv/api/site/index?reset=%s&asynchronous=false",
                 dockerComposeContainer.getServiceHost(GeoNetworkSearchTestConfig.GN_NAME, GeoNetworkSearchTestConfig.GN_PORT),
-                dockerComposeContainer.getServicePort(GeoNetworkSearchTestConfig.GN_NAME, GeoNetworkSearchTestConfig.GN_PORT));
-
+                dockerComposeContainer.getServicePort(GeoNetworkSearchTestConfig.GN_NAME, GeoNetworkSearchTestConfig.GN_PORT),
+                reset ? "true" : "false");
     }
 
     protected String isIndexUrl() {
@@ -202,17 +199,18 @@ public class BaseTestClass {
             // of the concurrency issue in elastic search, and can be resolved by retrying )
             persevere(() -> delete(uuid, requestEntity));
         }
-
-        // retry the request if the server is not ready yet (sometimes will return 403 and can be resolved by retrying )
-        persevere(() -> triggerIndexer(requestEntity));
     }
 
-    private boolean triggerIndexer(HttpEntity<String> requestEntity) {
+    protected boolean triggerIndexer(HttpEntity<String> requestEntity) {
+        return triggerIndexer(requestEntity, false);
+    }
+
+    protected boolean triggerIndexer(HttpEntity<String> requestEntity, boolean reset) {
 
         // Index the item so that query yield the right result before delete
         ResponseEntity<Void> trigger = testRestTemplate
                 .exchange(
-                        getIndexUrl(),
+                        getIndexUrl(reset),
                         HttpMethod.PUT,
                         requestEntity,
                         Void.class
@@ -241,7 +239,8 @@ public class BaseTestClass {
                             requestEntity,
                             String.class
                     );
-            if (response.getStatusCode().is2xxSuccessful()) {
+            if (response.getStatusCode().is2xxSuccessful() ||
+                    response.getStatusCode() == HttpStatus.NOT_FOUND) {
                 logger.info("Deleted GN doc {}", uuid);
                 return true;
             }
@@ -288,15 +287,8 @@ public class BaseTestClass {
         assertEquals("Published OK", HttpStatus.NO_CONTENT, responseEntity.getStatusCode());
 
         // Index the item so that query yield the right result
-        responseEntity = testRestTemplate
-                .exchange(
-                        getIndexUrl(),
-                        HttpMethod.PUT,
-                        requestEntity,
-                        String.class
-                );
+        persevere(() -> triggerIndexer(getRequestEntity(null)));
 
-        assertEquals("Trigger index OK", HttpStatus.OK, responseEntity.getStatusCode());
         return content;
     }
 }
