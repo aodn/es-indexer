@@ -16,6 +16,8 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
@@ -56,13 +58,31 @@ public class IndexerServiceTests extends BaseTestClass {
      * @throws IOException Not expected to throws
      */
     @Test
-    public void verifyGeoNetworkInstanceReinstalled() throws IOException {
+    public void verifyGeoNetworkInstanceReinstalled() throws Exception {
         String uuid = "9e5c3031-a026-48b3-a153-a70c2e2b78b9";
         try {
+            // Due to elastic update, we need to wait a bit to make sure the count is zero before insert
+            final CountDownLatch countDownLatch = new CountDownLatch(1);
+            Thread thread = new Thread(() -> {
+                for(int i = 0; i < 10; i++) {
+                    try {
+                        if(geoNetworkService.getAllMetadataCounts() == 0) {
+                            countDownLatch.countDown();
+                        }
+                        else {
+                            countDownLatch.await(5, TimeUnit.SECONDS);
+                        }
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                countDownLatch.countDown();
+            });
+
+            thread.start();
+            countDownLatch.await();
+
             insertMetadataRecords(uuid, "classpath:canned/sample1.xml");
-            logger.info("Records in geonetwork {}", geoNetworkService.getAllMetadataCounts());
-            var i = geoNetworkService.getAllMetadataRecords();
-            i.forEach(c -> logger.info("Records {}", c));
             Assertions.assertTrue(indexerService.isGeoNetworkInstanceReinstalled(1), "New installed");
         }
         finally {

@@ -104,8 +104,8 @@ public class IndexerServiceImpl implements IndexerService {
 
     @Override
     public boolean isGeoNetworkInstanceReinstalled(long portalIndexDocumentsCount) {
-        /**
-         * compare if GeoNetwork has 1 only metadata (the recently added one which triggered the indexer)
+        /*
+         * compare if GeoNetwork has only one metadata (the recently added one which triggered the indexer)
          * and the portal index has more than 0 documents (the most recent metadata yet indexed to portal index at this point)
          */
         return geoNetworkResourceService.isMetadataRecordsCountLessThan(2) && portalIndexDocumentsCount > 0;
