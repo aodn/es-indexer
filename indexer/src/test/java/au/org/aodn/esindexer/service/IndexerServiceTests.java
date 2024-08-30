@@ -51,6 +51,21 @@ public class IndexerServiceTests extends BaseTestClass {
     public void clear() throws IOException {
         clearElasticIndex(INDEX_NAME);
     }
+    /**
+     * Read the function implementation on why need to insert 1 docs
+     * @throws IOException Not expected to throws
+     */
+    @Test
+    public void verifyGeoNetworkInstanceReinstalled() throws IOException {
+        String uuid = "9e5c3031-a026-48b3-a153-a70c2e2b78b9";
+        try {
+            insertMetadataRecords(uuid, "classpath:canned/sample1.xml");
+            Assertions.assertTrue(indexerService.isGeoNetworkInstanceReinstalled(1), "New installed");
+        }
+        finally {
+            deleteRecord(uuid);
+        }
+    }
 
     @Test
     public void verifyIsMetadataPublished() throws IOException {
@@ -66,21 +81,6 @@ public class IndexerServiceTests extends BaseTestClass {
         }
         finally {
             deleteRecord(uuid1,uuid2);
-        }
-    }
-    /**
-     * Read the function implementation on why need to insert 1 docs
-     * @throws IOException Not expected to throws
-     */
-    @Test
-    public void verifyGeoNetworkInstanceReinstalled() throws IOException {
-        String uuid = "9e5c3031-a026-48b3-a153-a70c2e2b78b9";
-        try {
-            insertMetadataRecords(uuid, "classpath:canned/sample1.xml");
-            Assertions.assertTrue(indexerService.isGeoNetworkInstanceReinstalled(1), "New installed");
-        }
-        finally {
-            deleteRecord(uuid);
         }
     }
 
