@@ -370,6 +370,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
         TotalHits total = response.hits().total();
 
         if(total != null) {
+            logger.debug("Document count is {}", total.value());
             return total.value();
         }
         else {
