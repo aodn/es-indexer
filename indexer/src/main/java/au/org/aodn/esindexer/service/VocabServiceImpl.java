@@ -18,7 +18,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.fasterxml.jackson.databind.node.TextNode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -65,7 +64,7 @@ public class VocabServiceImpl implements VocabService {
     @Autowired
     VocabService self;
 
-    protected Function<JsonNode, String> label = (node) -> node.get("prefLabel").get("_value").asText();
+    protected Function<JsonNode, String> label = (node) -> node.has("prefLabel") ? node.get("prefLabel").get("_value").asText() : null;
     protected Function<JsonNode, String> about = (node) -> node.has("_about") ? node.get("_about").asText() : null;
     protected Function<JsonNode, String> definition = (node) -> node.has("definition") ? node.get("definition").asText() : null;
     protected BiFunction<JsonNode, String, Boolean> isNodeValid = (node, item) -> node != null && !node.isEmpty() && node.has(item) && !node.get(item).isEmpty();
@@ -185,52 +184,63 @@ public class VocabServiceImpl implements VocabService {
 
                 if (r != null && !r.isEmpty()) {
                     JsonNode node = r.get("result");
-
                     if (!node.isEmpty() && node.has("items") && !node.get("items").isEmpty()) {
                         for (JsonNode j : node.get("items")) {
-                            // process internal nodes of vocab category
-                            Map<String, List<VocabModel>> internalVocabCategoryNodes = new HashMap<>();
-                            if (j.has("narrower") && !j.get("narrower").isEmpty()) {
-                                j.get("narrower").forEach(currentNode -> {
-                                    VocabModel internalVocabCategoryNode = buildVocabModel(currentNode, vocabApiBase, vocabApiPaths);
-                                    if (internalVocabCategoryNode != null) {
-                                        internalVocabCategoryNodes.computeIfAbsent(about.apply(currentNode), k -> new ArrayList<>()).add(internalVocabCategoryNode);
-                                    }
-                                });
-                            }
+                            String labelValue = label.apply(j);
+                            String definitionValue = definition.apply(j);
+                            String aboutValue = about.apply(j);
 
-                            // process root nodes of vocab category
-                            if (!j.has("broader")) {
-                                String labelValue = label.apply(j);
-                                String definitionValue = definition.apply(j);
-                                String aboutValue = about.apply(j);
+                            if (aboutValue != null && !aboutValue.isEmpty() && labelValue != null && !labelValue.isEmpty()) {
 
                                 log.debug("Processing label {}", labelValue);
-
-                                VocabModel rootVocabCategoryNode = VocabModel.builder()
+                                VocabModel vocabCategoryNode = VocabModel.builder()
                                         .label(labelValue)
                                         .definition(definitionValue)
                                         .about(aboutValue)
                                         .build();
 
-                                List<VocabModel> leafNodes = vocabLeafNodes.getOrDefault(aboutValue, Collections.emptyList());
-                                List<VocabModel> internalNodes = internalVocabCategoryNodes.getOrDefault(aboutValue, Collections.emptyList());
-
-                                if (!leafNodes.isEmpty()) {
-                                    rootVocabCategoryNode.setNarrower(leafNodes);
-                                } else if (!internalNodes.isEmpty()) {
-                                    rootVocabCategoryNode.setNarrower(internalNodes);
+                                // process internal nodes of vocab category
+                                Map<String, List<VocabModel>> internalVocabCategoryNodes = new HashMap<>();
+                                if (j.has("narrower") && !j.get("narrower").isEmpty()) {
+                                    j.get("narrower").forEach(currentNode -> {
+                                        VocabModel internalNode = buildVocabModel(currentNode, vocabApiBase, vocabApiPaths);
+                                        if (internalNode != null) {
+                                            List<VocabModel> leafNodes = vocabLeafNodes.getOrDefault(internalNode.getAbout(), Collections.emptyList());
+                                            if (!leafNodes.isEmpty()) {
+                                                internalNode.setNarrower(leafNodes);
+                                            }
+                                            // vocabCategoryNode.getAbout() as key because vocabCategoryNode is an upper level node of narrowerNode
+                                            internalVocabCategoryNodes.computeIfAbsent(vocabCategoryNode.getAbout(), k -> new ArrayList<>()).add(internalNode);
+                                        }
+                                    });
                                 }
 
-                                vocabCategoryNodes.add(rootVocabCategoryNode);
+                                // process root nodes of vocab category
+                                if (!j.has("broader")) {
+                                    List<VocabModel> leafNodes = vocabLeafNodes.getOrDefault(aboutValue, Collections.emptyList());
+                                    List<VocabModel> internalNodes = internalVocabCategoryNodes.getOrDefault(aboutValue, Collections.emptyList());
+
+                                    List<VocabModel> allNarrowerNodes = new ArrayList<>();
+                                    if (!leafNodes.isEmpty()) {
+                                        allNarrowerNodes.addAll(leafNodes);
+                                    }
+                                    if (!internalNodes.isEmpty()) {
+                                        allNarrowerNodes.addAll(internalNodes);
+                                    }
+                                    if (!allNarrowerNodes.isEmpty()) {
+                                        vocabCategoryNode.setNarrower(allNarrowerNodes);
+                                    }
+
+                                    // the final returning results will just be root nodes
+                                    vocabCategoryNodes.add(vocabCategoryNode);
+                                }
                             }
                         }
                     }
 
                     if (!node.isEmpty() && node.has("next")) {
                         url = node.get("next").asText();
-                    }
-                    else {
+                    } else {
                         url = null;
                     }
                 }
@@ -449,13 +459,10 @@ public class VocabServiceImpl implements VocabService {
     public void populateVocabsData() throws IOException {
         log.info("Fetching parameter vocabs from ARDC");
         List<VocabModel> parameterVocabs = getParameterVocabsFromArdc(vocabApiBase);
-//        List<VocabModel> parameterVocabs = new ArrayList<>();
         log.info("Fetching platform vocabs from ARDC");
         List<VocabModel> platformVocabs = getPlatformVocabsFromArdc(vocabApiBase);
-//        List<VocabModel> platformVocabs = new ArrayList<>();
         log.info("Fetching organisation vocabs from ARDC");
         List<VocabModel> organisationVocabs = getOrganisationVocabsFromArdc(vocabApiBase);
-//        List<VocabModel> organisationVocabs = new ArrayList<>();
         log.info("Indexing fetched vocabs to {}", vocabsIndexName);
         indexAllVocabs(parameterVocabs, platformVocabs, organisationVocabs);
     }
