@@ -60,6 +60,7 @@ public class IndexerServiceTests extends BaseTestClass {
         String uuid = "9e5c3031-a026-48b3-a153-a70c2e2b78b9";
         try {
             insertMetadataRecords(uuid, "classpath:canned/sample1.xml");
+            logger.info("Records in geonetwork {}", geoNetworkService.getAllMetadataCounts());
             Assertions.assertTrue(indexerService.isGeoNetworkInstanceReinstalled(1), "New installed");
         }
         finally {
