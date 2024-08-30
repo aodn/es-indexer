@@ -96,12 +96,8 @@ public class BaseTestClass {
         // This is use for test container only, so it is ok to hardcode
         headers.setBasicAuth("admin", "admin");
 
-        if (oh.isPresent()) {
-            oh.get()
-                    .entrySet()
-                    .stream()
-                    .forEach(i -> headers.add(i.getKey(), i.getValue()));
-        }
+        oh.ifPresent(stringStringMap -> stringStringMap
+                .forEach(headers::add));
 
         return body == null ? new HttpEntity<>(headers) : new HttpEntity<>(body, headers);
     }
@@ -206,6 +202,9 @@ public class BaseTestClass {
             // of the concurrency issue in elastic search, and can be resolved by retrying )
             persevere(() -> delete(uuid, requestEntity));
         }
+
+        // retry the request if the server is not ready yet (sometimes will return 403 and can be resolved by retrying )
+        persevere(() -> triggerIndexer(requestEntity));
     }
 
     private boolean triggerIndexer(HttpEntity<String> requestEntity) {
@@ -228,19 +227,30 @@ public class BaseTestClass {
 
     private boolean delete(String uuid, HttpEntity<String> requestEntity) {
         logger.info("Deleting GN doc {}", uuid);
-        ResponseEntity<String> response = testRestTemplate
-                .exchange(
-                        getRecordUrl(uuid),
-                        HttpMethod.DELETE,
-                        requestEntity,
-                        String.class
-                );
-        if (response.getStatusCode().is2xxSuccessful()) {
-            logger.info("Deleted GN doc {}", uuid);
-            return true;
+        try {
+            // Delete by query basically does a search for the objects to delete and
+            // then deletes them with version conflict checking. Without a _refresh
+            // in between, the search done by _delete_by_query might return the
+            // old version of the document, leading to a version conflict when
+            // the delete is attempted.
+
+            ResponseEntity<String> response = testRestTemplate
+                    .exchange(
+                            getRecordUrl(uuid),
+                            HttpMethod.DELETE,
+                            requestEntity,
+                            String.class
+                    );
+            if (response.getStatusCode().is2xxSuccessful()) {
+                logger.info("Deleted GN doc {}", uuid);
+                return true;
+            }
+            logger.warn("Failed to delete. Will retry. Message: {}", response.getBody());
+            return false;
         }
-        logger.warn("failed to delete. Will retry. Message: {}", response.getBody());
-        return false;
+        catch(Exception e) {
+            return false;
+        }
     }
 
     public static String readResourceFile(String path) throws IOException {

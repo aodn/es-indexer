@@ -26,26 +26,30 @@ public class IndexerConfig {
     public VocabsUtils createVocabsUtils() {
         return new VocabsUtils();
     }
-
     /**
      * This executor is used to limit the number of concurrent call to index metadata so not to flood the
      * geonetwork. This is useful because the geonetwork do not care about re-index call it invoke, hence
      * the elastic of geonetwork may be flooded by its re-index call.
      *
-     * @return - An async task executor with blocking queue to stop too many request.
+     * A small thread size is require to not overload the geonetwork.
+     *
+     * @return - An async task executor with blocking queue to stop too many request. This is a limited queue
+     * and will throw error if new task cannot be added. It is up to the client to implement retry of the
+     * same task. Indexer will not help you to queue it.
      */
     @Bean(name = "asyncIndexMetadata")
     public Executor taskExecutor(
-            @Value("${app.indexing.pool.core:3}") Integer coreSize,
-            @Value("${app.indexing.pool.max:6}") Integer coreMax) {
+            @Value("${app.indexing.pool.core:2}") Integer coreSize,
+            @Value("${app.indexing.pool.max:3}") Integer coreMax,
+            @Value("${app.indexing.pool.capacity:10}") Integer maxCapacity) {
 
-        return new ThreadPoolExecutor(
-                coreSize,
-                coreMax,
-                0L,
-                TimeUnit.SECONDS,
-                new ArrayBlockingQueue<>(100),
-                new ThreadPoolExecutor.CallerRunsPolicy() // Rejection policy
-        );
+        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+        executor.setCorePoolSize(coreSize);         // Number of concurrent threads
+        executor.setMaxPoolSize(coreMax);           // Max number of concurrent threads
+        executor.setQueueCapacity(maxCapacity);     // Size of the queue
+        executor.setThreadNamePrefix("Async-");
+        executor.initialize();
+
+        return executor;
     }
 }

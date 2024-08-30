@@ -1,6 +1,7 @@
 package au.org.aodn.esindexer.configuration;
 
 import au.org.aodn.esindexer.BaseTestClass;
+import au.org.aodn.esindexer.service.FIFOCache;
 import au.org.aodn.esindexer.service.GeoNetworkServiceImpl;
 import au.org.aodn.esindexer.utils.UrlUtils;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
@@ -82,10 +83,17 @@ public class GeoNetworkSearchTestConfig {
     public GeoNetworkServiceImpl createGeoNetworkServiceImpl(
             @Value("${geonetwork.host}") String server,
             @Value("${geonetwork.search.api.index}") String indexName,
-            @Qualifier("gn4ElasticsearchClient") ElasticsearchClient gn4ElasticsearchClient) {
+            @Qualifier("gn4ElasticsearchClient") ElasticsearchClient gn4ElasticsearchClient,
+            FIFOCache<String, Map<String, ?>> cache) {
 
         RestTemplate template = Mockito.spy(new RestTemplate());
-        GeoNetworkServiceImpl impl = new GeoNetworkServiceImpl(server, indexName, gn4ElasticsearchClient, template);
+        GeoNetworkServiceImpl impl = new GeoNetworkServiceImpl(
+                server,
+                indexName,
+                gn4ElasticsearchClient,
+                template,
+                cache
+        );
 
         final ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);

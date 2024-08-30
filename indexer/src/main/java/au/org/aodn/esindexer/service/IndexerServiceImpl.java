@@ -29,7 +29,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayInputStream;
@@ -37,7 +36,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Future;
 
 @Service
 public class IndexerServiceImpl implements IndexerService {
@@ -185,7 +183,6 @@ public class IndexerServiceImpl implements IndexerService {
     public CompletableFuture<ResponseEntity<String>> indexMetadata(String metadataValues) {
         try {
             StacCollectionModel mappedMetadataValues = this.getMappedMetadataValues(metadataValues);
-            IndexRequest<JsonData> req;
 
             String uuid = mappedMetadataValues.getUuid();
             long portalIndexDocumentsCount;
@@ -196,7 +193,7 @@ public class IndexerServiceImpl implements IndexerService {
 
                 // check if GeoNetwork instance has been reinstalled
                 if (this.isGeoNetworkInstanceReinstalled(portalIndexDocumentsCount)) {
-                    logger.info("GeoNetwork instance has been reinstalled, recreating portal index: " + indexName);
+                    logger.info("GeoNetwork instance has been reinstalled, recreating portal index: {}", indexName);
                     elasticSearchIndexService.createIndexFromMappingJSONFile(AppConstants.PORTAL_RECORDS_MAPPING_JSON_FILE, indexName);
                 }
             } catch (IndexNotFoundException e) {
@@ -206,6 +203,8 @@ public class IndexerServiceImpl implements IndexerService {
 
             // index the metadata if it is published
             if (this.isMetadataPublished(uuid)) {
+                IndexRequest<JsonData> req;
+
                 try (InputStream is = new ByteArrayInputStream(indexerObjectMapper.writeValueAsBytes(mappedMetadataValues))) {
                     logger.info("Ingesting a new metadata with UUID: {} to index: {}", uuid, indexName);
                     logger.debug("{}", mappedMetadataValues);
