@@ -21,6 +21,8 @@ import java.util.Objects;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
+import static au.org.aodn.esindexer.utils.CommonUtils.persevere;
+
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -66,6 +68,7 @@ public class IndexerServiceTests extends BaseTestClass {
     public void verifyGeoNetworkInstanceReinstalled() throws Exception {
         String uuid = "9e5c3031-a026-48b3-a153-a70c2e2b78b9";
         try {
+            persevere(() -> triggerIndexer(getRequestEntity(null), true));
             insertMetadataRecords(uuid, "classpath:canned/sample1.xml");
             Assertions.assertTrue(indexerService.isGeoNetworkInstanceReinstalled(1), "New installed");
         }

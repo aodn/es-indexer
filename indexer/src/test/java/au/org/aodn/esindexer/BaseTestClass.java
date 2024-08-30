@@ -51,9 +51,6 @@ public class BaseTestClass {
     protected ElasticsearchClient client;
 
     @Autowired
-    protected ElasticsearchContainer container;
-
-    @Autowired
     protected DockerComposeContainer dockerComposeContainer;
 
     protected void clearElasticIndex(String indexName) throws IOException {
@@ -109,11 +106,11 @@ public class BaseTestClass {
 
     }
 
-    protected String getIndexUrl() {
-        return String.format("http://%s:%s/geonetwork/srv/api/site/index?reset=false&asynchronous=false",
+    protected String getIndexUrl(boolean reset) {
+        return String.format("http://%s:%s/geonetwork/srv/api/site/index?reset=%s&asynchronous=false",
                 dockerComposeContainer.getServiceHost(GeoNetworkSearchTestConfig.GN_NAME, GeoNetworkSearchTestConfig.GN_PORT),
-                dockerComposeContainer.getServicePort(GeoNetworkSearchTestConfig.GN_NAME, GeoNetworkSearchTestConfig.GN_PORT));
-
+                dockerComposeContainer.getServicePort(GeoNetworkSearchTestConfig.GN_NAME, GeoNetworkSearchTestConfig.GN_PORT),
+                reset ? "true" : "false");
     }
 
     protected String isIndexUrl() {
@@ -204,12 +201,16 @@ public class BaseTestClass {
         }
     }
 
-    private boolean triggerIndexer(HttpEntity<String> requestEntity) {
+    protected boolean triggerIndexer(HttpEntity<String> requestEntity) {
+        return triggerIndexer(requestEntity, false);
+    }
+
+    protected boolean triggerIndexer(HttpEntity<String> requestEntity, boolean reset) {
 
         // Index the item so that query yield the right result before delete
         ResponseEntity<Void> trigger = testRestTemplate
                 .exchange(
-                        getIndexUrl(),
+                        getIndexUrl(reset),
                         HttpMethod.PUT,
                         requestEntity,
                         Void.class
