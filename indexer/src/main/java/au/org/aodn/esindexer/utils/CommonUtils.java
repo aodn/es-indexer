@@ -22,7 +22,7 @@ public class CommonUtils {
 
     // alternative function for @Retryable annotation when the class is not a spring bean
     public static void persevere(BooleanSupplier action) {
-        persevere(10, 1, action);
+        persevere(10, 2, action);
     }
 
     public static void persevere(int maxRetries, int delaySecond, BooleanSupplier action) {

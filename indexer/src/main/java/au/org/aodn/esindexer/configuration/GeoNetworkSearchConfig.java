@@ -1,5 +1,6 @@
 package au.org.aodn.esindexer.configuration;
 
+import au.org.aodn.esindexer.service.FIFOCache;
 import au.org.aodn.esindexer.service.GeoNetworkServiceImpl;
 import au.org.aodn.esindexer.utils.UrlUtils;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
@@ -21,6 +22,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.client.RestTemplate;
 
 import java.lang.reflect.Field;
+import java.util.Map;
 import java.util.Set;
 
 @Configuration
@@ -86,14 +88,30 @@ public class GeoNetworkSearchConfig {
             @Value("${geonetwork.host}") String server,
             @Value("${geonetwork.search.api.index}") String indexName,
             @Qualifier("gn4ElasticsearchClient") ElasticsearchClient gn4ElasticsearchClient,
-            RestTemplate indexerRestTemplate) {
+            RestTemplate indexerRestTemplate,
+            FIFOCache<String, Map<String, ?>> cache) {
 
-        return new GeoNetworkServiceImpl(server, indexName, gn4ElasticsearchClient, indexerRestTemplate);
+        return new GeoNetworkServiceImpl(
+                server,
+                indexName,
+                gn4ElasticsearchClient,
+                indexerRestTemplate,
+                cache
+        );
     }
 
     @Bean
     @ConditionalOnMissingBean(UrlUtils.class)
     public UrlUtils createUrlUtils() {
         return new UrlUtils();
+    }
+    /**
+     * This cache is use to reduce load to query geonetwork
+     * @return - A first in first out cache
+     */
+    @Bean
+    public FIFOCache<String, Map<String, ?>> createFIFOCache(
+            @Value("${geonetwork.search.fifoCacheSize:50}") int cacheSize) {
+        return new FIFOCache<>(cacheSize);
     }
 }

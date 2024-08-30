@@ -55,12 +55,13 @@ public class GeoNetworkServiceTests extends BaseTestClass {
     JaxbUtils<MDMetadataType> jaxbUtils;
 
     @BeforeAll
-    public void setup() {
+    public void setup() throws IOException {
         // Update the server for geonetwork RESTful URL
         geoNetworkService.setServer(String.format("http://%s:%s",
                 dockerComposeContainer.getServiceHost(GeoNetworkSearchTestConfig.GN_NAME, GeoNetworkSearchTestConfig.GN_PORT),
                 dockerComposeContainer.getServicePort(GeoNetworkSearchTestConfig.GN_NAME, GeoNetworkSearchTestConfig.GN_PORT))
         );
+        clearElasticIndex(INDEX_NAME);
     }
 
     @AfterEach
