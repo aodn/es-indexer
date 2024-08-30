@@ -61,6 +61,8 @@ public class IndexerServiceTests extends BaseTestClass {
         try {
             insertMetadataRecords(uuid, "classpath:canned/sample1.xml");
             logger.info("Records in geonetwork {}", geoNetworkService.getAllMetadataCounts());
+            var i = geoNetworkService.getAllMetadataRecords();
+            i.forEach(c -> logger.info("Records {}", c));
             Assertions.assertTrue(indexerService.isGeoNetworkInstanceReinstalled(1), "New installed");
         }
         finally {
