@@ -1,9 +1,13 @@
 package au.org.aodn.esindexer.service;
 
+import au.org.aodn.ardcvocabs.configuration.VocabApiPaths;
+import au.org.aodn.ardcvocabs.model.VocabModel;
 import au.org.aodn.esindexer.BaseTestClass;
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.stac.model.ConceptModel;
 import au.org.aodn.stac.model.ThemesModel;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,6 +16,7 @@ import org.springframework.test.context.ActiveProfiles;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -24,15 +29,12 @@ import static org.junit.jupiter.api.Assertions.*;
 public class VocabServiceTest extends BaseTestClass {
 
     @Autowired
-    VocabService vocabServiceImpl;
+    VocabService vocabService;
 
-//    @BeforeEach
-//    public void setup() throws IOException {
-//        vocabServiceImpl = mockVocabServiceWithData();
-//    }
+    protected ObjectMapper objectMapper = new ObjectMapper();
 
     @Test
-    void testGetDiscoveryParameterVocabs() throws IOException {
+    void testExtractParameterVocabLabelsFromThemes() throws IOException {
         // Prepare themes
         List<ThemesModel> themes = List.of(
                 new ThemesModel(Arrays.asList(
@@ -47,7 +49,7 @@ public class VocabServiceTest extends BaseTestClass {
         );
 
         // Perform the test
-        List<String> parameterVocabs = vocabServiceImpl.extractVocabLabelsFromThemes(themes, AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS);
+        List<String> parameterVocabs = vocabService.extractVocabLabelsFromThemes(themes, AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS);
 
         // Assertions
         assertNotNull(parameterVocabs);
@@ -59,7 +61,7 @@ public class VocabServiceTest extends BaseTestClass {
     }
 
     @Test
-    void testGetPlatformVocabs() throws IOException {
+    void testExtractPlatformVocabLabelsFromThemes() throws IOException {
         // Prepare themes
         List<ThemesModel> themes = List.of(
                 new ThemesModel(Arrays.asList(
@@ -74,7 +76,7 @@ public class VocabServiceTest extends BaseTestClass {
         );
 
         // Perform the test
-        List<String> platformVocabs = vocabServiceImpl.extractVocabLabelsFromThemes(themes, AppConstants.AODN_PLATFORM_VOCABS);
+        List<String> platformVocabs = vocabService.extractVocabLabelsFromThemes(themes, AppConstants.AODN_PLATFORM_VOCABS);
 
         // Assertions
         assertNotNull(platformVocabs);
@@ -87,7 +89,7 @@ public class VocabServiceTest extends BaseTestClass {
     }
 
     @Test
-    void testOrganisationVocabs() throws IOException {
+    void testExtractPOrganisationVocabLabelsFromThemes() throws IOException {
         // Prepare themes
         List<ThemesModel> themes = List.of(
                 new ThemesModel(Arrays.asList(
@@ -99,7 +101,7 @@ public class VocabServiceTest extends BaseTestClass {
         );
 
         // Perform the test
-        List<String> organisationVocabs = vocabServiceImpl.extractVocabLabelsFromThemes(themes, AppConstants.AODN_ORGANISATION_VOCABS);
+        List<String> organisationVocabs = vocabService.extractVocabLabelsFromThemes(themes, AppConstants.AODN_ORGANISATION_VOCABS);
 
         // Assertions
         assertNotNull(organisationVocabs);
@@ -108,5 +110,45 @@ public class VocabServiceTest extends BaseTestClass {
         assertTrue(organisationVocabs.stream().anyMatch(vocab -> vocab.equalsIgnoreCase("Department of Agriculture, Water and the Environment (DAWE), Australian Government")));
         assertTrue(organisationVocabs.stream().anyMatch(vocab -> vocab.equalsIgnoreCase("Department of the Environment (DoE), Australian Government")));
         assertEquals(4, organisationVocabs.size());
+    }
+
+    @Test
+    void testProcessParameterVocabs() throws IOException {
+        // read from ARDC
+        List<VocabModel> parameterVocabsFromArdc = vocabService.getVocabTreeFromArdcByType(AppConstants.ARDC_VOCAB_API_BASE, VocabApiPaths.PARAMETER_VOCAB);
+
+        // verify the contents randomly
+        assertNotNull(parameterVocabsFromArdc);
+
+        assertTrue(parameterVocabsFromArdc.stream().anyMatch(rootNode -> rootNode.getLabel().equalsIgnoreCase("Physical-Atmosphere")
+                && rootNode.getNarrower() != null && !rootNode.getNarrower().isEmpty()
+                && rootNode.getNarrower().stream().anyMatch(internalNode -> internalNode.getLabel().equalsIgnoreCase("Air pressure")
+                && internalNode.getNarrower() != null && !internalNode.getNarrower().isEmpty()
+                && internalNode.getNarrower().stream().anyMatch(leafNode -> leafNode.getLabel().equalsIgnoreCase("Pressure (measured variable) exerted by the atmosphere")))));
+
+        assertTrue(parameterVocabsFromArdc.stream().anyMatch(rootNode -> rootNode.getLabel().equalsIgnoreCase("Chemical")
+                && rootNode.getNarrower() != null && !rootNode.getNarrower().isEmpty()
+                && rootNode.getNarrower().stream().anyMatch(internalNode -> internalNode.getLabel().equalsIgnoreCase("Alkalinity")
+                && internalNode.getNarrower() != null && !internalNode.getNarrower().isEmpty()
+                && internalNode.getNarrower().stream().anyMatch(leafNode -> leafNode.getLabel().equalsIgnoreCase("Concentration of carbonate ions per unit mass of the water body")))));
+
+        assertTrue(parameterVocabsFromArdc.stream().anyMatch(rootNode -> rootNode.getLabel().equalsIgnoreCase("Biological")
+                && rootNode.getNarrower() != null && !rootNode.getNarrower().isEmpty()
+                && rootNode.getNarrower().stream().anyMatch(internalNode -> internalNode.getLabel().equalsIgnoreCase("Ocean Biota")
+                && internalNode.getNarrower() != null && !internalNode.getNarrower().isEmpty()
+                && internalNode.getNarrower().stream().anyMatch(leafNode -> leafNode.getLabel().equalsIgnoreCase("Mean unit biovolume")))));
+
+        assertTrue(parameterVocabsFromArdc.stream().anyMatch(rootNode -> rootNode.getLabel().equalsIgnoreCase("Physical-Water")
+                && rootNode.getNarrower() != null && !rootNode.getNarrower().isEmpty()
+                && rootNode.getNarrower().stream().anyMatch(internalNode -> internalNode.getLabel().equalsIgnoreCase("Wave")
+                && internalNode.getNarrower() != null && !internalNode.getNarrower().isEmpty()
+                && internalNode.getNarrower().stream().anyMatch(leafNode -> leafNode.getLabel().equalsIgnoreCase("Direction at spectral maximum of waves on the water body")))));
+
+
+        // read from Elastic search
+        List<JsonNode> parameterVocabsFromEs = vocabService.getParameterVocabs();
+        assertNotNull(parameterVocabsFromEs);
+        assertEquals(parameterVocabsFromEs.size(), parameterVocabsFromArdc.size());
+        assertEquals(objectMapper.valueToTree(parameterVocabsFromEs).toPrettyString(), objectMapper.valueToTree(parameterVocabsFromArdc).toPrettyString());
     }
 }

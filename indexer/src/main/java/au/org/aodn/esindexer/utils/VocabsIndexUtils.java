@@ -15,8 +15,11 @@ public class VocabsIndexUtils {
     @Value("${elasticsearch.vocabs_index.name}")
     String vocabsIndexName;
 
+    protected VocabService vocabService;
     @Autowired
-    VocabService vocabService;
+    public void setVocabService(VocabService vocabService) {
+        this.vocabService = vocabService;
+    }
 
     @PostConstruct
     public void init() throws IOException {

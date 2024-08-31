@@ -44,20 +44,32 @@ public class VocabServiceImpl implements VocabService {
     @Value(AppConstants.ARDC_VOCAB_API_BASE)
     protected String vocabApiBase;
 
-    @Autowired
     protected RestTemplate indexerRestTemplate;
-
     @Autowired
+    public void setIndexerRestTemplate(RestTemplate indexerRestTemplate) {
+        this.indexerRestTemplate = indexerRestTemplate;
+    }
+
     protected ElasticsearchClient portalElasticsearchClient;
-
     @Autowired
-    ElasticSearchIndexService elasticSearchIndexService;
+    public void setElasticsearchClient(ElasticsearchClient portalElasticsearchClient) {
+        this.portalElasticsearchClient = portalElasticsearchClient;
+    }
+
+    protected ElasticSearchIndexService elasticSearchIndexService;
+    @Autowired
+    public void setElasticSearchIndexService(ElasticSearchIndexService elasticSearchIndexService) {
+        this.elasticSearchIndexService = elasticSearchIndexService;
+    }
 
     @Value("${elasticsearch.vocabs_index.name}")
-    String vocabsIndexName;
+    protected String vocabsIndexName;
 
+    protected ObjectMapper indexerObjectMapper;
     @Autowired
-    ObjectMapper indexerObjectMapper;
+    public void setIndexerObjectMapper(ObjectMapper indexerObjectMapper) {
+        this.indexerObjectMapper = indexerObjectMapper;
+    }
 
     // self-injection to avoid self-invocation problems when calling the cachable method within the same bean
     @Lazy

@@ -41,9 +41,6 @@ elasticsearch:
     tokens:
       name: shingle_analyser
 
-vocabs:
-  apiBase:
-
 geonetwork:
   host: http://localhost:8080
   search:
