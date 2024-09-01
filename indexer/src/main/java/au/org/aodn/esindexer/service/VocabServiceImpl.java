@@ -18,6 +18,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.databind.node.TextNode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -32,6 +33,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
@@ -81,19 +83,44 @@ public class VocabServiceImpl implements VocabService {
     protected Function<JsonNode, String> definition = (node) -> node.has("definition") ? node.get("definition").asText() : null;
     protected BiFunction<JsonNode, String, Boolean> isNodeValid = (node, item) -> node != null && !node.isEmpty() && node.has(item) && !node.get(item).isEmpty();
 
-    protected VocabModel buildVocabByResourceUri(String vocabUri, String vocabApiBase, String resourceDetailsApi) {
+    private VocabModel buildVocabByResourceUri(String vocabUri, String vocabApiBase, VocabApiPaths vocabApiPaths) {
+        String resourceDetailsApi = vocabUri.contains("_classes")
+                ? vocabApiPaths.getVocabCategoryDetailsApiPath()
+                : vocabApiPaths.getVocabDetailsApiPath();
+
         String detailsUrl = String.format(vocabApiBase + resourceDetailsApi, vocabUri);
+
         try {
             log.debug("Query api -> {}", detailsUrl);
             ObjectNode detailsObj = indexerRestTemplate.getForObject(detailsUrl, ObjectNode.class);
             if(isNodeValid.apply(detailsObj, "result") && isNodeValid.apply(detailsObj.get("result"), "primaryTopic")) {
                 JsonNode target = detailsObj.get("result").get("primaryTopic");
-                return VocabModel
+
+                VocabModel vocab = VocabModel
                         .builder()
                         .label(label.apply(target))
                         .definition(definition.apply(target))
                         .about(vocabUri)
                         .build();
+
+                List<VocabModel> narrowerNodes = new ArrayList<>();
+                if (isNodeValid.apply(target, "narrower")) {
+                    for (JsonNode j : target.get("narrower")) {
+                        if (!about.apply(j).isEmpty()) {
+                            // recursive call
+                            VocabModel narrowerNode = buildVocabByResourceUri(about.apply(j), vocabApiBase, vocabApiPaths);
+                            if (narrowerNode != null) {
+                                narrowerNodes.add(narrowerNode);
+                            }
+                        }
+                    }
+                }
+
+                if (!narrowerNodes.isEmpty()) {
+                    vocab.setNarrower(narrowerNodes);
+                }
+
+                return vocab;
             }
         } catch(Exception e) {
             log.error("Item not found in resource {}", detailsUrl);
@@ -101,21 +128,31 @@ public class VocabServiceImpl implements VocabService {
         return null;
     }
 
-    protected VocabModel buildVocabModel(JsonNode currentNode, String vocabApiBase, VocabApiPaths vocabApiPaths) {
-        String resourceUri = currentNode instanceof ObjectNode objectNode && objectNode.has("_about")
-                ? about.apply(currentNode)
-                : currentNode.asText();
+    protected <T> VocabModel buildVocabModel(T currentNode, String vocabApiBase, VocabApiPaths vocabApiPaths) {
+        String resourceUri = null;
 
-        String apiPath = resourceUri.contains("_classes")
-                ? vocabApiPaths.getVocabCategoryDetailsApiPath()
-                : vocabApiPaths.getVocabDetailsApiPath();
+        if (currentNode instanceof ObjectNode objectNode) {
+            resourceUri = objectNode.has("_about") ? about.apply(objectNode) : objectNode.asText();
+        } else if (currentNode instanceof TextNode textNode) {
+            resourceUri = textNode.asText();
+        } else if (currentNode instanceof VocabModel vocabNode) {
+            String about = vocabNode.getAbout();
+            if (about != null && !about.isEmpty()) {
+                resourceUri = about;
+            }
+        }
 
-        return buildVocabByResourceUri(resourceUri, vocabApiBase, apiPath);
+        if (resourceUri == null) {
+            throw new IllegalArgumentException("Unsupported node type: " + currentNode.getClass().getName());
+        }
+
+        return buildVocabByResourceUri(resourceUri, vocabApiBase, vocabApiPaths);
     }
 
     protected Map<String, List<VocabModel>> getVocabLeafNodes(String vocabApiBase, VocabApiPaths vocabApiPaths) {
         Map<String, List<VocabModel>> results = new HashMap<>();
         String url = String.format(vocabApiBase + vocabApiPaths.getVocabApiPath());
+
         while (url != null && !url.isEmpty()) {
             log.debug("Query api -> {}", url);
             try {
@@ -159,6 +196,27 @@ public class VocabServiceImpl implements VocabService {
                                             results.computeIfAbsent(bm.asText(), k -> new ArrayList<>()).add(vocab);
                                         }
                                     }
+
+                                    if (!target.has("broadMatch") && target.has("relatedMatch") && !target.get("relatedMatch").isEmpty()) {
+                                        // when the conditions above are true, a vocab doesn't have root node (top-level), it is headless, and it becomes a head node (root node)
+                                        // sample: http://vocab.aodn.org.au/def/organisation/entity/133
+                                        // each of the vocab's narrower nodes (leaf nodes) now becomes currentInternalNode (second-level)
+                                        // they are all, basically jump 1 level up in the tree structure.
+                                        if (vocab.getNarrower() != null && !vocab.getNarrower().isEmpty()) {
+                                            List<VocabModel> completedInternalNodes = new ArrayList<>();
+                                            vocab.getNarrower().forEach(currentInternalNode -> {
+                                                // rebuild currentInternalNode (no linked leaf nodes) to completedInternalNode (with linked leaf nodes)
+                                                VocabModel completedInternalNode = buildVocabModel(currentInternalNode, vocabApiBase, vocabApiPaths);
+                                                if (completedInternalNode != null) {
+                                                    // each internal node now will have linked narrower nodes (if available)
+                                                    completedInternalNodes.add(completedInternalNode);
+                                                }
+                                            });
+                                            // update the vocab with completed internal nodes ad their associating leaf nodes.
+                                            vocab.setNarrower(completedInternalNodes);
+                                        }
+                                        results.computeIfAbsent("headlessNodes", k -> new ArrayList<>()).add(vocab);
+                                    }
                                 }
                             }
                             catch(Exception e) {
@@ -182,6 +240,7 @@ public class VocabServiceImpl implements VocabService {
                 url = null;
             }
         }
+
         return results;
     }
 
@@ -264,6 +323,12 @@ public class VocabServiceImpl implements VocabService {
                 url = null;
             }
         }
+
+        List<VocabModel> headlessNodes = vocabLeafNodes.getOrDefault("headlessNodes", Collections.emptyList());
+        if (!headlessNodes.isEmpty()) {
+            vocabCategoryNodes.addAll(headlessNodes);
+        }
+
         return vocabCategoryNodes;
     }
 
@@ -306,7 +371,7 @@ public class VocabServiceImpl implements VocabService {
                 if (topLevelVocab != null && topLevelVocab.has("narrower") && !topLevelVocab.get("narrower").isEmpty()) {
                     for (JsonNode secondLevelVocab : topLevelVocab.get("narrower")) {
                         if (secondLevelVocab != null && secondLevelVocab.has("label") && secondLevelVocab.has("narrower") && !secondLevelVocab.get("narrower").isEmpty()) {
-                            String secondLevelVocabLabel = secondLevelVocab.get("label").asText();
+                            String secondLevelVocabLabel = secondLevelVocab.get("label").asText().toLowerCase();
                             for (JsonNode bottomLevelVocab : secondLevelVocab.get("narrower")) {
                                 if (bottomLevelVocab != null && bottomLevelVocab.has("label") && bottomLevelVocab.has("about")) {
                                     // map the original values to a ConceptModel object for doing comparison
@@ -316,9 +381,9 @@ public class VocabServiceImpl implements VocabService {
                                             .build();
 
                                     // Compare with themes' concepts
-                                    if (themesMatchConcept(themes, bottomConcept)) {
-                                        results.add(secondLevelVocabLabel.toLowerCase());
-                                        break; // To avoid duplicates because under the same second-level vocab there can be multiple bottom-level vocabs that pass the condition
+                                    if (themesMatchConcept(themes, bottomConcept) && !results.contains(secondLevelVocabLabel)) {
+                                        results.add(secondLevelVocabLabel);
+                                        break;
                                     }
                                 }
                             }
