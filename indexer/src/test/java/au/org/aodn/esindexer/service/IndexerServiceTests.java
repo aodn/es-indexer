@@ -7,7 +7,10 @@ import co.elastic.clients.elasticsearch.core.search.Hit;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.json.JSONException;
 import org.junit.jupiter.api.*;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -133,6 +136,30 @@ public class IndexerServiceTests extends BaseTestClass {
         }
         finally {
             deleteRecord(uuid1, uuid2);
+        }
+    }
+
+    @Test
+    public void verifyExtractedVocabsFromRecordThemes() throws IOException {
+        String uuid = "7709f541-fc0c-4318-b5b9-9053aa474e0e";
+        try {
+            String expectedData = readResourceFile("classpath:canned/sample12_stac.json");
+
+            insertMetadataRecords(uuid, "classpath:canned/sample12.xml");
+
+            indexerService.indexAllMetadataRecordsFromGeoNetwork(true, null);
+            Hit<ObjectNode> objectNodeHit = indexerService.getDocumentByUUID(uuid);
+
+            String test = String.valueOf(Objects.requireNonNull(objectNodeHit.source()));
+
+            String expected = indexerObjectMapper.readTree(expectedData).toPrettyString();
+            String actual = indexerObjectMapper.readTree(test).toPrettyString();
+
+            JSONAssert.assertEquals(expected, actual, JSONCompareMode.LENIENT);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        } finally {
+            deleteRecord(uuid);
         }
     }
 

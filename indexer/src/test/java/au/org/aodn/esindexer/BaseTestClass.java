@@ -1,18 +1,12 @@
 package au.org.aodn.esindexer;
 
-import au.org.aodn.ardcvocabs.configuration.VocabApiPaths;
-import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.configuration.GeoNetworkSearchTestConfig;
-import au.org.aodn.esindexer.service.VocabService;
-import au.org.aodn.esindexer.service.VocabServiceImpl;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.ElasticsearchException;
 import co.elastic.clients.elasticsearch._types.query_dsl.QueryBuilders;
 import co.elastic.clients.transport.rest_client.RestClientTransport;
-import com.fasterxml.jackson.databind.JsonNode;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -22,8 +16,6 @@ import org.springframework.util.ResourceUtils;
 import org.springframework.web.client.RestClientException;
 import org.testcontainers.containers.DockerComposeContainer;
 import org.testcontainers.elasticsearch.ElasticsearchContainer;
-import org.testcontainers.shaded.com.fasterxml.jackson.core.type.TypeReference;
-import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.annotation.PostConstruct;
 import java.io.File;
@@ -37,8 +29,6 @@ import java.util.concurrent.CountDownLatch;
 
 import static au.org.aodn.esindexer.utils.CommonUtils.persevere;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
 
 public class BaseTestClass {
 
