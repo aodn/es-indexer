@@ -8,6 +8,7 @@ import au.org.aodn.stac.model.ConceptModel;
 import au.org.aodn.stac.model.ThemesModel;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.JSONException;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,7 +17,9 @@ import org.springframework.test.context.ActiveProfiles;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
+
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -31,7 +34,8 @@ public class VocabServiceTest extends BaseTestClass {
     @Autowired
     VocabService vocabService;
 
-    protected ObjectMapper objectMapper = new ObjectMapper();
+    @Autowired
+    protected ObjectMapper indexerObjectMapper;
 
     @Test
     void testExtractParameterVocabLabelsFromThemes() throws IOException {
@@ -113,7 +117,7 @@ public class VocabServiceTest extends BaseTestClass {
     }
 
     @Test
-    void testProcessParameterVocabs() throws IOException {
+    void testProcessParameterVocabs() throws IOException, JSONException {
         // read from ARDC
         List<VocabModel> parameterVocabsFromArdc = vocabService.getVocabTreeFromArdcByType(AppConstants.ARDC_VOCAB_API_BASE, VocabApiPaths.PARAMETER_VOCAB);
 
@@ -149,11 +153,18 @@ public class VocabServiceTest extends BaseTestClass {
         List<JsonNode> parameterVocabsFromEs = vocabService.getParameterVocabs();
         assertNotNull(parameterVocabsFromEs);
         assertEquals(parameterVocabsFromEs.size(), parameterVocabsFromArdc.size());
-        assertEquals(objectMapper.valueToTree(parameterVocabsFromEs).toPrettyString(), objectMapper.valueToTree(parameterVocabsFromArdc).toPrettyString());
+
+        JSONAssert.assertEquals(indexerObjectMapper.valueToTree(parameterVocabsFromEs).toPrettyString(), indexerObjectMapper.valueToTree(parameterVocabsFromArdc).toPrettyString(), JSONCompareMode.LENIENT);
+
+        // even more tests
+        String cannedData = readResourceFile("classpath:canned/aodn_discovery_parameter_vocabs.json");
+        // This will assert that all fields in cannedData are present in actual data,
+        // but ignores any extra fields in actual data (scenario: source from ARDC is updated with more vocabs added)
+        JSONAssert.assertEquals(cannedData, indexerObjectMapper.valueToTree(parameterVocabsFromEs).toPrettyString(), JSONCompareMode.LENIENT);
     }
 
     @Test
-    void testProcessPlatformVocabs() throws IOException {
+    void testProcessPlatformVocabs() throws IOException, JSONException {
         // read from ARDC
         List<VocabModel> platformVocabsFromArdc = vocabService.getVocabTreeFromArdcByType(AppConstants.ARDC_VOCAB_API_BASE, VocabApiPaths.PLATFORM_VOCAB);
 
@@ -187,11 +198,18 @@ public class VocabServiceTest extends BaseTestClass {
         List<JsonNode> platformVocabsFromEs = vocabService.getPlatformVocabs();
         assertNotNull(platformVocabsFromEs);
         assertEquals(platformVocabsFromEs.size(), platformVocabsFromArdc.size());
-        assertEquals(objectMapper.valueToTree(platformVocabsFromEs).toPrettyString(), objectMapper.valueToTree(platformVocabsFromArdc).toPrettyString());
+
+        JSONAssert.assertEquals(indexerObjectMapper.valueToTree(platformVocabsFromEs).toPrettyString(), indexerObjectMapper.valueToTree(platformVocabsFromArdc).toPrettyString(), JSONCompareMode.LENIENT);
+
+        // even more tests
+        String cannedData = readResourceFile("classpath:canned/aodn_platform_vocabs.json");
+        // This will assert that all fields in cannedData are present in actual data,
+        // but ignores any extra fields in actual data (scenario: source from ARDC is updated with more vocabs added)
+        JSONAssert.assertEquals(cannedData, indexerObjectMapper.valueToTree(platformVocabsFromEs).toPrettyString(), JSONCompareMode.LENIENT);
     }
 
     @Test
-    void testProcessOrganisationVocabs() throws IOException {
+    void testProcessOrganisationVocabs() throws IOException, JSONException {
         // read from ARDC
         List<VocabModel> organisationVocabsFromArdc = vocabService.getVocabTreeFromArdcByType(AppConstants.ARDC_VOCAB_API_BASE, VocabApiPaths.ORGANISATION_VOCAB);
 
@@ -235,10 +253,17 @@ public class VocabServiceTest extends BaseTestClass {
         assertTrue(organisationVocabsFromArdc.stream().anyMatch(rootNode -> rootNode.getLabel().equalsIgnoreCase("Integrated Marine Observing System (IMOS)") && rootNode.getAbout().equals("http://vocab.aodn.org.au/def/organisation_classes/category/26")
                         && rootNode.getNarrower() == null));
 
-                // read from Elastic search
+        // read from Elastic search
         List<JsonNode> organisationVocabsFromEs = vocabService.getOrganisationVocabs();
         assertNotNull(organisationVocabsFromEs);
         assertEquals(organisationVocabsFromEs.size(), organisationVocabsFromArdc.size());
-        assertEquals(objectMapper.valueToTree(organisationVocabsFromEs).toPrettyString(), objectMapper.valueToTree(organisationVocabsFromArdc).toPrettyString());
+
+        JSONAssert.assertEquals(indexerObjectMapper.valueToTree(organisationVocabsFromEs).toPrettyString(), indexerObjectMapper.valueToTree(organisationVocabsFromArdc).toPrettyString(), JSONCompareMode.LENIENT);
+
+        // even more tests
+        String cannedData = readResourceFile("classpath:canned/aodn_organisation_vocabs.json");
+        // This will assert that all fields in cannedData are present in actual data,
+        // but ignores any extra fields in actual data (scenario: source from ARDC is updated with more vocabs added)
+        JSONAssert.assertEquals(cannedData, indexerObjectMapper.valueToTree(organisationVocabsFromEs).toPrettyString(), JSONCompareMode.LENIENT);
     }
 }
