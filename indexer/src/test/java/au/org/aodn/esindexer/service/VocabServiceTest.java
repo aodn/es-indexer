@@ -151,4 +151,94 @@ public class VocabServiceTest extends BaseTestClass {
         assertEquals(parameterVocabsFromEs.size(), parameterVocabsFromArdc.size());
         assertEquals(objectMapper.valueToTree(parameterVocabsFromEs).toPrettyString(), objectMapper.valueToTree(parameterVocabsFromArdc).toPrettyString());
     }
+
+    @Test
+    void testProcessPlatformVocabs() throws IOException {
+        // read from ARDC
+        List<VocabModel> platformVocabsFromArdc = vocabService.getVocabTreeFromArdcByType(AppConstants.ARDC_VOCAB_API_BASE, VocabApiPaths.PLATFORM_VOCAB);
+
+        // verify the contents randomly
+        assertNotNull(platformVocabsFromArdc);
+
+        assertTrue(platformVocabsFromArdc.stream().anyMatch(rootNode -> rootNode.getLabel().equalsIgnoreCase("Fixed station")
+                && rootNode.getNarrower() != null && !rootNode.getNarrower().isEmpty()
+                && rootNode.getNarrower().stream().anyMatch(internalNode -> internalNode.getLabel().equalsIgnoreCase("fixed benthic node")
+                && internalNode.getNarrower() == null)));
+
+        assertTrue(platformVocabsFromArdc.stream().anyMatch(rootNode -> rootNode.getLabel().equalsIgnoreCase("Float")
+                && rootNode.getNarrower() != null && !rootNode.getNarrower().isEmpty()
+                && rootNode.getNarrower().stream().anyMatch(internalNode -> internalNode.getLabel().equalsIgnoreCase("drifting subsurface profiling float")
+                && internalNode.getNarrower() != null && !internalNode.getNarrower().isEmpty()
+                && internalNode.getNarrower().stream().anyMatch(leafNode -> leafNode.getLabel().equalsIgnoreCase("NINJA Argo Float with SBE")))));
+
+        assertTrue(platformVocabsFromArdc.stream().anyMatch(rootNode -> rootNode.getLabel().equalsIgnoreCase("Vessel")
+                && rootNode.getNarrower() != null && !rootNode.getNarrower().isEmpty()
+                && rootNode.getNarrower().stream().anyMatch(internalNode -> internalNode.getLabel().equalsIgnoreCase("small boat")
+                && internalNode.getNarrower() != null && !internalNode.getNarrower().isEmpty()
+                && internalNode.getNarrower().stream().anyMatch(leafNode -> leafNode.getLabel().equalsIgnoreCase("Kinetic Energy")))));
+
+        assertTrue(platformVocabsFromArdc.stream().anyMatch(rootNode -> rootNode.getLabel().equalsIgnoreCase("Mooring and buoy")
+                && rootNode.getNarrower() != null && !rootNode.getNarrower().isEmpty()
+                && rootNode.getNarrower().stream().anyMatch(internalNode -> internalNode.getLabel().equalsIgnoreCase("moored surface buoy")
+                && internalNode.getNarrower() != null && !internalNode.getNarrower().isEmpty()
+                && internalNode.getNarrower().stream().anyMatch(leafNode -> leafNode.getLabel().equalsIgnoreCase("Lizard Island Sensor Float 1")))));
+
+        // read from Elastic search
+        List<JsonNode> platformVocabsFromEs = vocabService.getPlatformVocabs();
+        assertNotNull(platformVocabsFromEs);
+        assertEquals(platformVocabsFromEs.size(), platformVocabsFromArdc.size());
+        assertEquals(objectMapper.valueToTree(platformVocabsFromEs).toPrettyString(), objectMapper.valueToTree(platformVocabsFromArdc).toPrettyString());
+    }
+
+    @Test
+    void testProcessOrganisationVocabs() throws IOException {
+        // read from ARDC
+        List<VocabModel> organisationVocabsFromArdc = vocabService.getVocabTreeFromArdcByType(AppConstants.ARDC_VOCAB_API_BASE, VocabApiPaths.ORGANISATION_VOCAB);
+
+        // verify the contents randomly
+        assertNotNull(organisationVocabsFromArdc);
+
+        assertTrue(organisationVocabsFromArdc.stream().anyMatch(rootNode -> rootNode.getLabel().equalsIgnoreCase("State and Territory Government Departments and Agencies")
+                && rootNode.getNarrower() != null && !rootNode.getNarrower().isEmpty()
+                && rootNode.getNarrower().stream().anyMatch(internalNode -> internalNode.getLabel().equalsIgnoreCase("Victorian Government")
+                && internalNode.getNarrower() != null && !internalNode.getNarrower().isEmpty()
+                && internalNode.getNarrower().stream().anyMatch(leafNode -> leafNode.getLabel().equalsIgnoreCase("Victorian Institute of Marine Sciences (VIMS)")))));
+
+        assertTrue(organisationVocabsFromArdc.stream().anyMatch(rootNode -> rootNode.getLabel().equalsIgnoreCase("Industry")
+                && rootNode.getNarrower() != null && !rootNode.getNarrower().isEmpty()
+                && rootNode.getNarrower().stream().anyMatch(internalNode -> internalNode.getLabel().equalsIgnoreCase("EOMAP Australia Pty Ltd")
+                && internalNode.getNarrower() == null)));
+
+        assertTrue(organisationVocabsFromArdc.stream().anyMatch(rootNode -> rootNode.getLabel().equalsIgnoreCase("Local Government")
+                && rootNode.getNarrower() != null && !rootNode.getNarrower().isEmpty()
+                && rootNode.getNarrower().stream().anyMatch(internalNode -> internalNode.getLabel().equalsIgnoreCase("New South Wales Councils")
+                && internalNode.getNarrower() != null && !internalNode.getNarrower().isEmpty()
+                && internalNode.getNarrower().stream().anyMatch(leafNode -> leafNode.getLabel().equalsIgnoreCase("Hornsby Shire Council")))));
+
+        assertTrue(organisationVocabsFromArdc.stream().anyMatch(rootNode -> rootNode.getLabel().equalsIgnoreCase("Australian Universities")
+                && rootNode.getNarrower() != null && !rootNode.getNarrower().isEmpty()
+                && rootNode.getNarrower().stream().anyMatch(internalNode -> internalNode.getLabel().equalsIgnoreCase("Curtin University")
+                && internalNode.getNarrower() != null && !internalNode.getNarrower().isEmpty()
+                && internalNode.getNarrower().stream().anyMatch(leafNode -> leafNode.getLabel().equalsIgnoreCase("Centre for Marine Science and Technology (CMST), Curtin University")))));
+
+        // case vocab doesn't have broadMatch node, it became a root node
+        assertTrue(organisationVocabsFromArdc.stream().anyMatch(rootNode -> rootNode.getLabel().equalsIgnoreCase("Integrated Marine Observing System (IMOS)") && rootNode.getAbout().equals("http://vocab.aodn.org.au/def/organisation/entity/133")
+                && rootNode.getNarrower() != null && !rootNode.getNarrower().isEmpty()
+                && rootNode.getNarrower().stream().anyMatch(internalNode -> internalNode.getLabel().equalsIgnoreCase("National Mooring Network Facility, Integrated Marine Observing System (IMOS)")
+                && internalNode.getNarrower() != null && !internalNode.getNarrower().isEmpty()
+                && internalNode.getNarrower().stream().anyMatch(leafNode -> leafNode.getLabel().equalsIgnoreCase("New South Wales Moorings Sub-Facility, Integrated Marine Observing System (IMOS)")))));
+
+        // to further confirm the vocab service accuracy, this IMOS root node doesn't have much information
+        // notice the url has "organisation_classes/category"
+        // http://vocab.aodn.org.au/def/organisation/entity/133 is related to but not directly sit ABOVE http://vocab.aodn.org.au/def/organisation_classes/category/26
+        // https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-category-vocabulary/version-2-5/resource.json?uri=http://vocab.aodn.org.au/def/organisation_classes/category/26
+        assertTrue(organisationVocabsFromArdc.stream().anyMatch(rootNode -> rootNode.getLabel().equalsIgnoreCase("Integrated Marine Observing System (IMOS)") && rootNode.getAbout().equals("http://vocab.aodn.org.au/def/organisation_classes/category/26")
+                        && rootNode.getNarrower() == null));
+
+                // read from Elastic search
+        List<JsonNode> organisationVocabsFromEs = vocabService.getOrganisationVocabs();
+        assertNotNull(organisationVocabsFromEs);
+        assertEquals(organisationVocabsFromEs.size(), organisationVocabsFromArdc.size());
+        assertEquals(objectMapper.valueToTree(organisationVocabsFromEs).toPrettyString(), objectMapper.valueToTree(organisationVocabsFromArdc).toPrettyString());
+    }
 }

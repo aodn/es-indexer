@@ -185,7 +185,7 @@ public class IndexerServiceImpl implements IndexerService {
         // organisation vocabs
         List<String> processedOrganisationVocabs = vocabService.extractVocabLabelsFromThemes(stacCollectionModel.getThemes(), AppConstants.AODN_ORGANISATION_VOCABS);
         if (!processedOrganisationVocabs.isEmpty()) {
-            stacCollectionModel.getSummaries().setPlatformVocabs(processedOrganisationVocabs);
+            stacCollectionModel.getSummaries().setOrganisationVocabs(processedOrganisationVocabs);
         }
 
         // categories suggest using a different index
