@@ -44,7 +44,6 @@ import java.util.concurrent.CompletableFuture;
 
 @Slf4j
 @Service
-@Slf4j
 public class IndexerServiceImpl implements IndexerService {
 
     protected String indexName;
