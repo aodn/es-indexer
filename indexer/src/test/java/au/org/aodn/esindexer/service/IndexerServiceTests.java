@@ -141,7 +141,7 @@ public class IndexerServiceTests extends BaseTestClass {
 
     @Test
     public void verifyExtractedVocabsFromRecordThemes() throws IOException {
-        String uuid = "7709f541-fc0c-4318-b5b9-9053aa474e0e";
+        String uuid = "07818819-2e5c-4a12-9395-0082b57b2fe8";
         try {
             String expectedData = readResourceFile("classpath:canned/sample12_stac.json");
 
