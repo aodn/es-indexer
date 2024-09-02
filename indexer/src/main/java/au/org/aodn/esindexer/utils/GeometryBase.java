@@ -12,6 +12,8 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import static au.org.aodn.esindexer.utils.CommonUtils.safeGet;
+
 public class GeometryBase {
 
     protected static Logger logger = LogManager.getLogger(GeometryBase.class);
@@ -106,7 +108,7 @@ public class GeometryBase {
                                             // We need to store it so that we can create the multi-array as told by spec
                                             Polygon polygon = geoJsonFactory.createPolygon(items.toArray(new Coordinate[0]));
                                             polygons.add(polygon);
-                                            logger.debug("2D Polygon added {}", polygon);
+                                            logger.debug("MultiSurfaceType 2D Polygon added {}", polygon);
                                         }
                                     }
                                 }
@@ -116,21 +118,26 @@ public class GeometryBase {
                             // Set the coor system for the factory
                             // CoordinateReferenceSystem system = CRS.decode(mst.getSrsName().trim(), true);
                             if (plt.getExterior() != null && plt.getExterior().getAbstractRing().getValue() instanceof LinearRingType linearRingType) {
-                                // TODO: Handle 2D now, can be 3D
-                                if (linearRingType.getPosList() != null &&  linearRingType.getPosList().getSrsDimension().doubleValue() == 2.0) {
-                                    List<Double> v = linearRingType.getPosList().getValue();
-                                    List<Coordinate> items = new ArrayList<>();
+                                safeGet(linearRingType::getPosList)
+                                        .ifPresent(pos -> {
+                                            // Assume 2D if not present
+                                            Double dimension = safeGet(() -> pos.getSrsDimension().doubleValue()).orElse(2.0);
+                                            // TODO: Handle 2D now, can be 3D
+                                            if (dimension == 2.0) {
+                                                List<Double> v = linearRingType.getPosList().getValue();
+                                                List<Coordinate> items = new ArrayList<>();
 
-                                    for (int z = 0; z < v.size(); z += 2) {
-                                        items.add(new Coordinate(v.get(z), v.get(z + 1)));
-                                    }
+                                                for (int z = 0; z < v.size(); z += 2) {
+                                                    items.add(new Coordinate(v.get(z), v.get(z + 1)));
+                                                }
 
-                                    // We need to store it so that we can create the multi-array as told by spec
-                                    Polygon polygon = geoJsonFactory.createPolygon(items.toArray(new Coordinate[0]));
-                                    polygons.add(polygon);
+                                                // We need to store it so that we can create the multi-array as told by spec
+                                                Polygon polygon = geoJsonFactory.createPolygon(items.toArray(new Coordinate[0]));
+                                                polygons.add(polygon);
 
-                                    logger.debug("2D Polygon added {}", polygon);
-                                }
+                                                logger.debug("PolygonType 2D Polygon added {}", polygon);
+                                            }
+                                        });
                             }
                         }
 

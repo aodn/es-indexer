@@ -349,4 +349,19 @@ public class StacCollectionMapperServiceTests {
                 "Stac not equals for sample14"
         );
     }
+
+    @Test
+    public void verifyWorks() throws IOException {
+        String xml = readResourceFile("classpath:canned/sample15.xml");
+        String expected = readResourceFile("classpath:canned/sample15_stac.json");
+        indexerService.indexMetadata(xml);
+
+        Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
+        String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
+        Assertions.assertEquals(
+                objectMapper.readTree(expected),
+                objectMapper.readTree(out.strip()),
+                "Stac not equals for sample15"
+        );
+    }
 }
