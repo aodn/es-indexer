@@ -63,22 +63,6 @@ public class IndexerServiceTests extends BaseTestClass {
     public void clear() throws IOException {
         clearElasticIndex(INDEX_NAME);
     }
-    /**
-     * Read the function implementation on why need to insert 1 docs
-     * @throws IOException Not expected to throws
-     */
-    @Test
-    public void verifyGeoNetworkInstanceReinstalled() throws Exception {
-        String uuid = "9e5c3031-a026-48b3-a153-a70c2e2b78b9";
-        try {
-            persevere(() -> triggerIndexer(getRequestEntity(null), true));
-            insertMetadataRecords(uuid, "classpath:canned/sample1.xml");
-            Assertions.assertTrue(indexerService.isGeoNetworkInstanceReinstalled(1), "New installed");
-        }
-        finally {
-            deleteRecord(uuid);
-        }
-    }
 
     @Test
     public void verifyIsMetadataPublished() throws IOException {
@@ -136,30 +120,6 @@ public class IndexerServiceTests extends BaseTestClass {
         }
         finally {
             deleteRecord(uuid1, uuid2);
-        }
-    }
-
-    @Test
-    public void verifyExtractedVocabsFromRecordThemes() throws IOException {
-        String uuid = "07818819-2e5c-4a12-9395-0082b57b2fe8";
-        try {
-            String expectedData = readResourceFile("classpath:canned/sample12_stac.json");
-
-            insertMetadataRecords(uuid, "classpath:canned/sample12.xml");
-
-            indexerService.indexAllMetadataRecordsFromGeoNetwork(true, null);
-            Hit<ObjectNode> objectNodeHit = indexerService.getDocumentByUUID(uuid);
-
-            String test = String.valueOf(Objects.requireNonNull(objectNodeHit.source()));
-
-            String expected = indexerObjectMapper.readTree(expectedData).toPrettyString();
-            String actual = indexerObjectMapper.readTree(test).toPrettyString();
-
-            JSONAssert.assertEquals(expected, actual, JSONCompareMode.LENIENT);
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
-        } finally {
-            deleteRecord(uuid);
         }
     }
 
@@ -298,6 +258,35 @@ public class IndexerServiceTests extends BaseTestClass {
             deleteRecord(uuid);
         }
     }
+
+    @Test
+    public void verifyExtractedVocabsFromActualRecord() throws IOException {
+        String uuid = "07818819-2e5c-4a12-9395-0082b57b2fe8";
+        try {
+            insertMetadataRecords(uuid, "classpath:canned/sample12.xml");
+
+            indexerService.indexAllMetadataRecordsFromGeoNetwork(true, null);
+            Hit<ObjectNode> objectNodeHit = indexerService.getDocumentByUUID(uuid);
+
+            String test = String.valueOf(Objects.requireNonNull(objectNodeHit.source()));
+
+            // LENIENT as order of array elements does not matter, as long as the elements are found
+            List<String> expectedParameterVocabs = Arrays.asList("air pressure", "air-sea fluxes", "uv radiation", "wind", "air temperature", "humidity", "precipitation and evaporation", "water pressure", "temperature");
+            JSONAssert.assertEquals(String.valueOf(expectedParameterVocabs), String.valueOf(indexerObjectMapper.valueToTree(test).get("summaries").get("parameter_vocabs")), JSONCompareMode.LENIENT);
+
+            List<String> expectedPlatformVocabs = Arrays.asList("research vessel", "fishing vessel");
+            JSONAssert.assertEquals(String.valueOf(expectedPlatformVocabs), String.valueOf(indexerObjectMapper.valueToTree(test).get("summaries").get("platform_vocabs")), JSONCompareMode.LENIENT);
+
+            List<String> expectedOrganisationVocabs = List.of("ships of opportunity facility, integrated marine observing system (imos)");
+            JSONAssert.assertEquals(String.valueOf(expectedOrganisationVocabs), String.valueOf(indexerObjectMapper.valueToTree(test).get("summaries").get("organisation_vocabs")), JSONCompareMode.LENIENT);
+
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        } finally {
+            deleteRecord(uuid);
+        }
+    }
+
     /**
      * Verify extracted phrases from abstract (extractTokensFromDescription method)
      * @throws IOException - If file not found

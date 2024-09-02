@@ -15,8 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
@@ -33,6 +32,9 @@ public class VocabServiceTest extends BaseTestClass {
 
     @Autowired
     VocabService vocabService;
+
+    @Autowired
+    protected IndexerServiceImpl indexerService;
 
     @Autowired
     protected ObjectMapper indexerObjectMapper;
