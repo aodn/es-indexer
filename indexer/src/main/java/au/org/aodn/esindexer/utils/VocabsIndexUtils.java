@@ -15,6 +15,9 @@ public class VocabsIndexUtils {
     @Value("${elasticsearch.vocabs_index.name}")
     String vocabsIndexName;
 
+    @Value("${app.initialiseVocabsIndex:true}")
+    private boolean initialiseVocabsIndex;
+
     protected VocabService vocabService;
     @Autowired
     public void setVocabService(VocabService vocabService) {
@@ -23,8 +26,10 @@ public class VocabsIndexUtils {
 
     @PostConstruct
     public void init() throws IOException {
-        log.info("Initialising {}", vocabsIndexName);
-        vocabService.populateVocabsData();
+        if (initialiseVocabsIndex) {
+            log.info("Initialising {}", vocabsIndexName);
+            vocabService.populateVocabsData();
+        }
     }
 
     @Scheduled(cron = "0 0 0 * * *")
