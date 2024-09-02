@@ -1,46 +1,48 @@
 {
-  "title": "RV Investigator Voyage IN2019_V06 End of Voyage (EOV) Archive",
-  "description": "This record describes the End of Voyage (EOV) archive from the Marine National Facility (MNF) RV Investigator research voyage IN2019_V06, titled \"Tropical observations of atmospheric convection, biogenic emissions, ocean mixing, and processes generating intraseasonal SST variability.\" The voyage took place from Darwin (NT) to Darwin between October 19 and December 17, 2019 (AEST).\n\n                    For further information please refer to the voyage documentation links below.\n\n                    Instruments used and data collected include:\n                    Regular measurements:\n                    Acoustic Doppler Current Profiler (ADCP; 75, 150 KHz ), Lowered ADCP (LADCP), Disdrometer, Fisheries echosounder (EK60), Multibeam Echosounder (EM710, EM122), Sub-bottom Profiler (SBP120), Gravimeter, GPS Positioning System, Doppler Velocity Log, Atmospheric Temperature, Humidity, Pressure, Wind and Rain sensors, Photosynthetically Active Radiation (PAR) sensor, Precision Infrared Radiometer (PIR), Precision Spectral Pyranometer (PSP), Nephelometer, pCO2, Condensation Particle Counters (CPC), Cloud Condensation Nuclei counter (CCN), Multiangle Absorption Photometer (MAAP), Starboard and Portside Radiometers, Ozone sensors, Weather Radar, Greenhouse Gas Analysers (Aerodyne, Picarro), Infrared Sea Surface Temperature Autonomous Radiometer (ISAR), Fluorometer, Oxygen optode, Thermosalinographs (TSG), CTD, Hydrochemistry, Expendable Bathythermographs (XBTs).\n\n                    Voyage-specific measurements:\n                    AIRBOX (TSI 3772 Condensation Particle Counter (3772CPC), Black Carbon sensor (Aethalometer), Aerosol mass spectrometer (AMS), Chemical Ionisation Mass Spectrometer (CIMS), Cloud Radar (BASTA), Weather Station, Multi-AXis Differential Optical Absorption Spectrometer (MAX-DOAS), mini Micro-Pulse LIDAR (miniMPL), Neutral Cluster Air Ion Spectrometer (NAIS), Radon sensor, Cloud and Aerosol Backscatter Lidar (RMAN), Scanning Mobility Particle Sizers (SMPS), Sonic Anemometer, Greenhouse Gas Analyser (Fourier Transform Infrared (FTIR) spectrometer - Spectronus), Mercury Analyser (Tekran), Gas Chromatograph - Electron Capture Detector (uDirac), Volatility-Hygroscopicity Tandem Differential Mobility Analyser (VH-TDMA)), Radiosondes, Wave-powered Profiler (Wirewalker), Sea State cameras, Triaxus, ECO Triplet, Sound Velocity Profile (SVP).\n\n                    The archive for the IN2019_V06 EOV raw data is curated by the CSIRO NCMI Information and Data Centre (IDC) in Hobart, with a permanent archive at the CSIRO Data Access Portal (DAP, https://data.csiro.au/dap/), providing access to participants and processors of the data collected in the voyage.\n\n                    All voyage documentation is available electronically to MNF support via the local network. Access to voyage documentation for non-CSIRO participants can be made via NCMI_DataLibrarians@csiro.au.",
+  "title": "RV Investigator Voyage IN2024_V01 End of Voyage (EOV) Archive",
+  "description": "This record describes the End of Voyage (EOV) data archive from the Marine National Facility (MNF) RV Investigator voyage IN2024_V01, titled \"Multidisciplinary Investigations of the Southern Ocean (MISO): linking physics, biogeochemistry, plankton, aerosols, clouds, and climate.\" The voyage took place between January 02, 2024 and March 05, 2024 (AEST), departing from Hobart and returning to Fremantle.\n\n                    For further information please refer to the voyage documentation links.\n\n                    Instruments used and data collected include:\n                    Regular measurements:\n                    Lowered ADCP (LADCP), Acoustic Doppler Current Profiler (ADCP; 75, 150 KHz ), Greenhouse Gas Analysers (Picarro), Cloud Condensation Nuclei counter (CCN), Condensation Particle Counters (CPC), Disdrometer, Radon sensor, Scanning Mobility Particle Sizers (SMPS), CTD, Hydrochemistry, Triaxus, Fisheries Echosounder (EK80), Multibeam Echosounder (EM710, EM122), Sub-bottom Profiler (SBP120), GPS Positioning System, Doppler Velocity Log, Thermosalinographs (TSG), Fluorometer, Oxygen Optode, pCO2, Multiangle Absorption Photometer (MAAP), Ozone Sensor, Nephelometer, Atmospheric Temperature, Humidity, Pressure, Wind and Rain sensors, Photosynthetically Active Radiation (PAR) sensor, Precision Infrared Radiometer (PIR), Precision Spectral Pyranometer (PSP), Starboard and Portside Radiometers, Air Sampler, Ultra Short BaseLine Underwater Positioning System (USBL), Weather Radar, Expendable Bathythermographs (XBTs).\n\n                    Voyage-specific measurements:\n                    Black Carbon sensor (Aethalometer), Mobility particle size spectrometer (MPSS), Bongo Net, Chemical Ionisation Mass Spectrometer (CIMS), Cloud Radar (BASTA), Fast Repetition Rate Chlorophyll-a Fluorometer (FRRf), Mini Micro-Pulse LIDAR (miniMPL), Micro Rain Radar (MRR), Neutral Cluster Air Ion Spectrometer (NAIS), Proton-Transfer-Reaction Mass Spectrometry (PTR-MS), Radiosondes, Cloud and Aerosol Backscatter Lidar (RMAN), Stabilised Platform, Mercury Analyser (Tekran), Time of Flight Aerosol Chemical Speciation Monitor (ToF-ACSM), Water Vapor Radiometer (WVR), Aerosol mass spectrometer (AMS), Core Argo floats, Biogeochemical (BGC) Argo floats, Near-surface Drifters, In situ pumps (ISPs), Ice Nucleating Particles (INPs), Ozone Sensor, Trace Metal Aerosol Sampling, Trace Metal CTD Rosette and Bottles, Organic Sulfur Sequential Chemical Analysis Robot (OSSCAR), Omics data and various biological data.\n\n                    The archive for the IN2024_V01 EOV raw data is curated by the CSIRO National Collections and Marine Infrastructure (NCMI) Information and Data Centre (IDC) in Hobart, with a permanent archive at the CSIRO Data Access Portal (https://data.csiro.au/), providing access to voyage participants and processors of the data collected on the voyage.\n\n                    All voyage documentation is available electronically to MNF support via the local network. Applications to access voyage documentation by non-CSIRO participants can be made via data-requests-hf@csiro.au.\n\n                    All processed data from this voyage are made publicly available through the MNF Data Trawler (in the related links).",
   "extent": {
     "bbox": [
       [
-        120.55,
-        -14.68,
-        133.45,
-        -10.8
+        113.2462,
+        -67.0026,
+        151.4171,
+        -31.9323
       ],
       [
-        120.55,
-        -14.68,
-        133.45,
-        -10.8
+        113.2462,
+        -67.0026,
+        151.4171,
+        -31.9323
       ]
     ],
     "temporal": [
       [
-        "2019-10-18T13:00:00Z",
-        "2019-12-16T13:00:00Z"
+        "2024-01-01T13:00:00Z",
+        "2024-03-04T13:00:00Z"
       ],
       [
-        "2019-10-18T13:00:00Z",
-        "2019-12-16T13:00:00Z"
+        "2024-01-01T13:00:00Z",
+        "2024-03-04T13:00:00Z"
       ]
     ]
   },
   "summaries": {
-    "score": 1,
+    "score": 100,
     "status": "completed",
     "credits": [
-      "This data was collected on the Marine National Facility (MNF) RV Investigator voyage IN2019_V06."
+      "Data collected on the Marine National Facility (MNF) RV Investigator voyage IN2024_V01.",
+      "The MNF must be acknowledged in all outputs derived from Data and/or Samples collected by, or with support from, the MNF. Acknowledge the MNF in outputs with the statement:\n\n                    “We acknowledge the use of the CSIRO Marine National Facility (https://ror.org/01mae9353 ) in undertaking this research.”\n\n                    Acknowledgment and citations should be in all forms of publication including presentations (where the acknowledgement should be on the closing slide), journals, books, reports and related research outputs."
     ],
     "scope": {
-      "code": "observed",
+      "code": "dataset",
       "name": ""
     },
-    "statement": "Original field data. The raw EOV data archive was transferred to the NCMI IDC in Hobart.\n\n                    A manifest file for the final archive was generated (in2019_v06_manifest_1.0_rawVoyage_cs.txt).\n\n                    Available paper documents are scanned to 400 dpi PDF and stored at the IDC record storage system. ELOG files are generated as csv-formatted files and archived.",
-    "creation": "2015-10-06T00:00:00",
-    "revision": "2022-03-04T00:18:20",
-    "update_frequency":"completed",
+    "statement": "Original field data. The raw EOV data archive was transferred to the CSIRO NCMI Information and Data Centre in Hobart.\n\n                    A manifest file for the final archive was generated (IN2024_V01_manifest_1.0_rawVoyage_cs.txt, 26/03/2024). Stored Volume: 5,797 folders, 300,137 files, 4,831,910,814,429 bytes.\n\n                    Available paper documents are scanned to 400 dpi PDF and stored at the IDC record storage system. ELOG files are generated as csv-formatted files and archived.",
+    "creation": "2024-03-28T05:59:17",
+    "revision": "2024-05-20T00:55:10",
+    "dataset_group": "sample",
+    "update_frequency": "completed",
     "proj:geometry": {
       "geometries": [
         {
@@ -48,24 +50,24 @@
           "coordinates": [
             [
               [
-                120.55,
-                -14.68
+                113.2462,
+                -67.0026
               ],
               [
-                133.45,
-                -14.68
+                151.4171,
+                -67.0026
               ],
               [
-                133.45,
-                -10.8
+                151.4171,
+                -31.9323
               ],
               [
-                120.55,
-                -10.8
+                113.2462,
+                -31.9323
               ],
               [
-                120.55,
-                -14.68
+                113.2462,
+                -67.0026
               ]
             ]
           ]
@@ -75,20 +77,32 @@
     },
     "temporal": [
       {
-        "start": "2019-10-18T13:00:00Z",
-        "end": "2019-12-16T13:00:00Z"
+        "start": "2024-01-01T13:00:00Z",
+        "end": "2024-03-04T13:00:00Z"
       }
+    ],
+    "parameter_vocabs": [
+      "ocean biota",
+      "bathymetry",
+      "density",
+      "water pressure",
+      "current",
+      "temperature",
+      "salinity"
+    ],
+    "platform_vocabs": [
+      "research vessel"
     ]
   },
   "contacts": [
     {
       "roles": [
-        "pointOfContact",
+        "custodian",
         "about"
       ],
       "organization": "CSIRO Oceans & Atmosphere - Hobart",
-      "name": "CSIRO O&A, Information & Data Centre",
-      "position": "Data Requests",
+      "name": "data-requests-hf@csiro.au,",
+      "position": "Data Requests - Information & Data Centre",
       "emails": [],
       "addresses": [
         {
@@ -216,28 +230,10 @@
   ],
   "links": [
     {
-      "href": "https://www.marine.csiro.au/data/trawler/survey_details.cfm?survey=IN2019_V06",
+      "href": "https://www.marine.csiro.au/data/trawler/survey_details.cfm?survey=IN2024_V01",
       "rel": "related",
       "type": "",
-      "title": "Investigator Survey"
-    },
-    {
-      "href": "https://www.marine.csiro.au/data/underway/?survey=in2019_v06",
-      "rel": "related",
-      "type": "",
-      "title": "Underway Visualisation Tool"
-    },
-    {
-      "href": "https://doi.org/10.25919/fxwd-kw74",
-      "rel": "related",
-      "type": "",
-      "title": "Data Access Portal (DOI)"
-    },
-    {
-      "href": "https://ws.data.csiro.au/licences/1061",
-      "rel": "related",
-      "type": "text/html",
-      "title": "Data Licensing"
+      "title": "MNF Data Trawler"
     },
     {
       "href": "https://mnf.csiro.au/",
@@ -246,7 +242,24 @@
       "title": "Marine National Facility"
     },
     {
-      "href": "https://marlin.csiro.au/geonetwork/srv/eng/catalog.search#/metadata/1880cd63-d0f9-42e0-b073-7082527945f2",
+      "href": "https://doi.org/10.25919/rdrt-bd71",
+      "rel": "related",
+      "type": "",
+      "title": "Data Access Portal (DOI)"
+    },
+    {
+      "href": "http://www.marine.csiro.au/data/underway/?survey=IN2024_V01",
+      "rel": "related",
+      "type": "",
+      "title": "Underway Visualisation Tool"
+    },
+    {
+      "href": "https://www.marine.csiro.au/data/trawler/survey_mapfile.cfm?survey=IN2024_V01&data_type=uwy",
+      "rel": "preview",
+      "type": "image"
+    },
+    {
+      "href": "http://140.79.20.100:8080/geonetwork/srv/eng/catalog.search#/metadata/ff887cf9-18bb-464e-8bad-5dc6e0ad946b",
       "rel": "describedby",
       "type": "text/html",
       "title": "Full metadata link"
@@ -287,16 +300,68 @@
     {
       "concepts": [
         {
-          "id": "Earth Science | Oceans | Salinity/Density | Salinity",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/7e95b5fc-1d58-431a-af36-948b29fa870d"
-        },
-        {
           "id": "Earth Science | Atmosphere | Aerosols",
           "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/2e5a401b-1507-4f57-82b8-36557c13b154"
         },
         {
+          "id": "Earth Science | Atmosphere | Atmospheric Pressure | Surface Pressure",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/b54de5cd-4475-4c7b-acbc-4eb529b9396e"
+        },
+        {
+          "id": "Earth Science | Atmosphere | Atmospheric Radiation",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/4ad0c52d-6449-48ff-8678-adc6b2cebcb7"
+        },
+        {
+          "id": "Earth Science | Atmosphere | Aerosols | Cloud Condensation Nuclei",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/27478148-b4b6-4c89-8829-08d2ee7bfe10"
+        },
+        {
+          "id": "Earth Science | Atmosphere | Precipitation | Rain",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/09a57dc7-3911-4a65-9f12-b819652b8671"
+        },
+        {
+          "id": "Earth Science | Oceans | Ocean Chemistry | Carbon Dioxide",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/26afa886-4866-4536-be3a-6f9db9aacd97"
+        },
+        {
+          "id": "Earth Science | Atmosphere | Aerosols | Particulate Matter",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/548a3f85-bf22-473b-b641-45c32d9c6a0c"
+        },
+        {
+          "id": "Earth Science | Atmosphere | Clouds",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/162e2243-3266-4999-b352-d8a1a9dc82ac"
+        },
+        {
+          "id": "Earth Science | Oceans | Salinity/Density | Salinity",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/7e95b5fc-1d58-431a-af36-948b29fa870d"
+        },
+        {
+          "id": "Earth Science | Atmosphere | Atmospheric Chemistry | Carbon And Hydrocarbon Compounds | Carbon Dioxide",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/c3b81888-8a39-4b3f-8033-4c077797bcba"
+        },
+        {
+          "id": "Earth Science | Atmosphere | Atmospheric Pressure | Atmospheric Pressure Measurements",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/9efbc088-ba8c-4c9c-a458-ad6ad63f4188"
+        },
+        {
+          "id": "Earth Science | Atmosphere | Atmospheric Winds | Surface Winds",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/10685919-bc01-43e7-901a-b62ac44627f3"
+        },
+        {
           "id": "Earth Science | Oceans | Ocean Temperature | Sea Surface Temperature",
           "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/bd24a9a9-7d52-4c29-b2a0-6cefd216ae78"
+        },
+        {
+          "id": "Earth Science | Atmosphere | Atmospheric Winds | Surface Winds | Wind Speed/Wind Direction",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/a92f49f3-e2ee-4ef4-b064-39311ffb95d3"
+        },
+        {
+          "id": "Earth Science | Atmosphere | Atmospheric Chemistry | Trace Elements/Trace Metals",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/2d36c283-2fe3-4a08-aeb3-6a8146e79bb3"
+        },
+        {
+          "id": "Earth Science | Oceans | Aquatic Sciences | Fisheries",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/fa57b0a0-9723-4195-bdd1-4f26aefa0e07"
         },
         {
           "id": "Earth Science | Atmosphere | Aerosols | Aerosol Particle Properties",
@@ -307,92 +372,44 @@
           "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/510c5f78-e19e-4ce4-b59a-8937aeb84631"
         },
         {
-          "id": "Earth Science | Atmosphere | Atmospheric Pressure | Surface Pressure",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/b54de5cd-4475-4c7b-acbc-4eb529b9396e"
-        },
-        {
-          "id": "Earth Science | Oceans | Bathymetry/Seafloor Topography | Seafloor Topography",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/b6b51058-1111-4498-a9ac-e1515270fb27"
-        },
-        {
-          "id": "Earth Science | Atmosphere | Atmospheric Chemistry | Carbon And Hydrocarbon Compounds | Carbon Dioxide",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/c3b81888-8a39-4b3f-8033-4c077797bcba"
-        },
-        {
-          "id": "Earth Science | Atmosphere | Atmospheric Temperature | Surface Air Temperature",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/5a7bb095-4d12-4232-bc75-b8e82197cb92"
-        },
-        {
-          "id": "Earth Science | Atmosphere | Aerosols | Cloud Condensation Nuclei",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/27478148-b4b6-4c89-8829-08d2ee7bfe10"
-        },
-        {
-          "id": "Earth Science | Atmosphere | Atmospheric Pressure | Atmospheric Pressure Measurements",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/9efbc088-ba8c-4c9c-a458-ad6ad63f4188"
-        },
-        {
-          "id": "Earth Science | Atmosphere | Atmospheric Radiation",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/4ad0c52d-6449-48ff-8678-adc6b2cebcb7"
-        },
-        {
-          "id": "Earth Science | Solid Earth | Gravity/Gravitational Field",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/221386f6-ef9b-4990-82b3-f990b0fe39fa"
-        },
-        {
-          "id": "Earth Science | Atmosphere | Atmospheric Winds | Surface Winds",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/10685919-bc01-43e7-901a-b62ac44627f3"
-        },
-        {
-          "id": "Earth Science | Atmosphere | Atmospheric Winds | Surface Winds | Wind Speed/Wind Direction",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/a92f49f3-e2ee-4ef4-b064-39311ffb95d3"
+          "id": "Earth Science | Oceans | Ocean Chemistry | Oxygen",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/90aa8838-79bd-4b28-b518-8217e863c385"
         },
         {
           "id": "Earth Science | Oceans | Ocean Chemistry | Nutrients",
           "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/8dd7c9f0-51d0-4037-b1d0-a2517c1770ad"
         },
         {
-          "id": "Earth Science | Atmosphere | Clouds",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/162e2243-3266-4999-b352-d8a1a9dc82ac"
-        },
-        {
           "id": "Earth Science | Oceans | Ocean Waves | Sea State",
           "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/11aca777-8a01-42ce-b076-b3059c3d8cae"
         },
         {
-          "id": "Earth Science | Oceans | Ocean Chemistry | Carbon Dioxide",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/26afa886-4866-4536-be3a-6f9db9aacd97"
+          "id": "Earth Science | Oceans | Ocean Chemistry | Chlorophyll",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/7989eae1-8ea3-4039-af0c-9130de145449"
         },
         {
           "id": "Earth Science Services | Data Analysis And Visualization | Global Positioning Systems",
           "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/f082ad51-4ce4-4ffe-be50-6753c4f997ae"
         },
         {
+          "id": "Earth Science | Oceans | Ocean Chemistry | Trace Elements",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/6c320188-da7b-4d52-8e99-57d7ac401841"
+        },
+        {
           "id": "Earth Science | Oceans | Ocean Optics | Photosynthetically Active Radiation",
           "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/b7410899-350a-4443-9430-c7fe1fa3a499"
-        },
-        {
-          "id": "Earth Science | Oceans | Ocean Chemistry | Oxygen",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/90aa8838-79bd-4b28-b518-8217e863c385"
-        },
-        {
-          "id": "Earth Science | Atmosphere | Precipitation | Rain",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/09a57dc7-3911-4a65-9f12-b819652b8671"
-        },
-        {
-          "id": "Earth Science | Agriculture | Agricultural Aquatic Sciences | Fisheries",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/c7112a64-be39-414a-9125-f63ab44ecb5b"
         },
         {
           "id": "Earth Science | Atmosphere | Atmospheric Chemistry | Oxygen Compounds | Ozone",
           "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/dd316647-9043-40c3-9329-f22f9215fefa"
         },
         {
-          "id": "Earth Science | Atmosphere | Aerosols | Particulate Matter",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/548a3f85-bf22-473b-b641-45c32d9c6a0c"
-        },
-        {
           "id": "Earth Science | Atmosphere | Atmospheric Radiation | Solar Radiation",
           "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/a0f3474e-9a54-4a82-97c4-43864b48df4c"
+        },
+        {
+          "id": "Earth Science | Oceans | Bathymetry/Seafloor Topography | Seafloor Topography",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/b6b51058-1111-4498-a9ac-e1515270fb27"
         }
       ],
       "scheme": "theme",
@@ -402,8 +419,8 @@
     {
       "concepts": [
         {
-          "id": "Research Voyage: IN2019_V06",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.survey.urn:marlin.csiro.au:surveyregister&id=urn:marlin.csiro.au:surveyregister:concept:2228"
+          "id": "Research Voyage: IN2024_V01",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.survey.urn:marlin.csiro.au:surveyregister&id=urn:marlin.csiro.au:surveyregister:concept:2315"
         }
       ],
       "scheme": "survey",
@@ -424,12 +441,8 @@
     {
       "concepts": [
         {
-          "id": "Tropical observations of atmospheric convection, biogenic emissions, ocean mixing, and processes generating intraseasonal SST variability",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.project.urn:marlin.csiro.au:projectregister&id=urn:marlin.csiro.au:projectregister:concept:2485"
-        },
-        {
-          "id": "RBR Argo CTD testing",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.project.urn:marlin.csiro.au:projectregister&id=urn:marlin.csiro.au:projectregister:concept:2486"
+          "id": "Multidisciplinary Investigations of the Southern Ocean (MISO): linking physics, biogeochemistry, plankton, aerosols, clouds, and climate",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.project.urn:marlin.csiro.au:projectregister&id=urn:marlin.csiro.au:projectregister:concept:2609"
         }
       ],
       "scheme": "project",
@@ -439,16 +452,28 @@
     {
       "concepts": [
         {
-          "id": "Coastal Waters (Australia) | Northern Territory Coast, NT",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.place.urn:aodn.org.au:geographicextents&id=urn:aodn.org.au:geographicextents:concept:1003"
-        },
-        {
-          "id": "Regional Seas | Timor Sea",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.place.urn:aodn.org.au:geographicextents&id=urn:aodn.org.au:geographicextents:concept:24"
+          "id": "Marine Planning Regions (Australia) | Australian Antarctic",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.place.urn:aodn.org.au:geographicextents&id=urn:aodn.org.au:geographicextents:concept:50"
         },
         {
           "id": "Global / Oceans | East Indian Ocean",
           "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.place.urn:aodn.org.au:geographicextents&id=urn:aodn.org.au:geographicextents:concept:1020"
+        },
+        {
+          "id": "Coastal Waters (Australia) | Tasmania Coast, TAS",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.place.urn:aodn.org.au:geographicextents&id=urn:aodn.org.au:geographicextents:concept:1010"
+        },
+        {
+          "id": "Coastal Waters (Australia) | West Australia Coast South, WA",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.place.urn:aodn.org.au:geographicextents&id=urn:aodn.org.au:geographicextents:concept:1017"
+        },
+        {
+          "id": "Marine Features (Australia) | Derwent Estuary, TAS",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.place.urn:aodn.org.au:geographicextents&id=urn:aodn.org.au:geographicextents:concept:69"
+        },
+        {
+          "id": "Global / Oceans | Southern Ocean",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.place.urn:aodn.org.au:geographicextents&id=urn:aodn.org.au:geographicextents:concept:6"
         }
       ],
       "scheme": "place",
@@ -458,32 +483,20 @@
     {
       "concepts": [
         {
-          "id": "Vessel Data: Multibeam Echosounder",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.discipline.urn:marlin.csiro.au:keywords:standardDataType&id=urn:marlin.csiro.au:keywords:standardDataType:concept:3521"
-        },
-        {
-          "id": "Vessel Data: ADCP",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.discipline.urn:marlin.csiro.au:keywords:standardDataType&id=urn:marlin.csiro.au:keywords:standardDataType:concept:3510"
-        },
-        {
-          "id": "Vessel Data: XBT",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.discipline.urn:marlin.csiro.au:keywords:standardDataType&id=urn:marlin.csiro.au:keywords:standardDataType:concept:3515"
-        },
-        {
-          "id": "Vessel Data: undulating CTD",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.discipline.urn:marlin.csiro.au:keywords:standardDataType&id=urn:marlin.csiro.au:keywords:standardDataType:concept:3522"
+          "id": "Vessel Data: Dissolved Oxygen",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.discipline.urn:marlin.csiro.au:keywords:standardDataType&id=urn:marlin.csiro.au:keywords:standardDataType:concept:3512"
         },
         {
           "id": "Vessel/Station Data: Hydrology",
           "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.discipline.urn:marlin.csiro.au:keywords:standardDataType&id=urn:marlin.csiro.au:keywords:standardDataType:concept:3513"
         },
         {
-          "id": "Vessel Data: Dissolved Oxygen",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.discipline.urn:marlin.csiro.au:keywords:standardDataType&id=urn:marlin.csiro.au:keywords:standardDataType:concept:3512"
+          "id": "Vessel Data: undulating CTD",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.discipline.urn:marlin.csiro.au:keywords:standardDataType&id=urn:marlin.csiro.au:keywords:standardDataType:concept:3522"
         },
         {
-          "id": "Vessel Data: Underway",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.discipline.urn:marlin.csiro.au:keywords:standardDataType&id=urn:marlin.csiro.au:keywords:standardDataType:concept:3514"
+          "id": "Vessel Data: Multibeam Echosounder",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.discipline.urn:marlin.csiro.au:keywords:standardDataType&id=urn:marlin.csiro.au:keywords:standardDataType:concept:3521"
         },
         {
           "id": "Vessel Data: Acoustics (Fisheries)",
@@ -492,6 +505,18 @@
         {
           "id": "Vessel Data: CTD",
           "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.discipline.urn:marlin.csiro.au:keywords:standardDataType&id=urn:marlin.csiro.au:keywords:standardDataType:concept:3511"
+        },
+        {
+          "id": "Vessel Data: Underway",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.discipline.urn:marlin.csiro.au:keywords:standardDataType&id=urn:marlin.csiro.au:keywords:standardDataType:concept:3514"
+        },
+        {
+          "id": "Vessel Data: ADCP",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.discipline.urn:marlin.csiro.au:keywords:standardDataType&id=urn:marlin.csiro.au:keywords:standardDataType:concept:3510"
+        },
+        {
+          "id": "Vessel Data: XBT",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.discipline.urn:marlin.csiro.au:keywords:standardDataType&id=urn:marlin.csiro.au:keywords:standardDataType:concept:3515"
         }
       ],
       "scheme": "discipline",
@@ -501,16 +526,32 @@
     {
       "concepts": [
         {
-          "id": "ADCP (Acoustic Doppler Current Profiler)",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:2"
+          "id": "Radon Detector",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:172"
+        },
+        {
+          "id": "CTDs (Conductivity-Temperature-Depth Profilers)",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:33"
+        },
+        {
+          "id": "CO2 Analysers",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:17"
+        },
+        {
+          "id": "Fluorometers",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:47"
+        },
+        {
+          "id": "GPS (Global Positioning System)",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:167"
         },
         {
           "id": "LADCP (Lowered Acoustic Doppler Current Profiler)",
           "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:139"
         },
         {
-          "id": "CCN (Cloud Condensation Nuclei Counter)",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:127"
+          "id": "ADCP (Acoustic Doppler Current Profiler)",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:2"
         },
         {
           "id": "Greenhouse gas analyser - Aerodyne",
@@ -521,112 +562,104 @@
           "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:126"
         },
         {
-          "id": "SMPS (Scanning Mobility Particle Sizers)",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:128"
-        },
-        {
-          "id": "Greenhouse gas analyser - Picarro",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:177"
-        },
-        {
-          "id": "Radon Detector",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:172"
-        },
-        {
-          "id": "CTDs (Conductivity-Temperature-Depth Profilers)",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:33"
-        },
-        {
-          "id": "Gravity meters",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:168"
-        },
-        {
           "id": "Disdrometer (Rain Droplet Particle Sizer)",
           "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:160"
-        },
-        {
-          "id": "Sub-bottom Profiler - SBP120",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:164"
-        },
-        {
-          "id": "Fisheries echosounder EK60",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:141"
-        },
-        {
-          "id": "Multibeam Echosounder - EM122",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:144"
-        },
-        {
-          "id": "CO2 Analysers",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:17"
-        },
-        {
-          "id": "Multibeam Echosounder - EM710",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:142"
-        },
-        {
-          "id": "Fluorometers",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:47"
-        },
-        {
-          "id": "Undulating CTD - Triaxus",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:174"
-        },
-        {
-          "id": "MAAP (Multiangle Absorption Photometer)",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:180"
-        },
-        {
-          "id": "GPS (Global Positioning System)",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:167"
-        },
-        {
-          "id": "Thermosalinographs",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:101"
-        },
-        {
-          "id": "Air sampling systems",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:179"
-        },
-        {
-          "id": "Weather Radars",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:162"
-        },
-        {
-          "id": "Radiometer",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:171"
         },
         {
           "id": "XBTs (Expendable Bathythermographs)",
           "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:21"
         },
         {
+          "id": "SMPS (Scanning Mobility Particle Sizers)",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:128"
+        },
+        {
+          "id": "Undulating CTD - Triaxus",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:174"
+        },
+        {
+          "id": "Multibeam Echosounder - EM710",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:142"
+        },
+        {
+          "id": "Multibeam Echosounder - EM122",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:144"
+        },
+        {
+          "id": "Air sampling systems",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:179"
+        },
+        {
+          "id": "Sub-bottom Profiler - SBP120",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:164"
+        },
+        {
+          "id": "CCN (Cloud Condensation Nuclei Counter)",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:127"
+        },
+        {
           "id": "Meteorological Instruments",
           "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:61"
+        },
+        {
+          "id": "Radiometer",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:171"
+        },
+        {
+          "id": "MAAP (Multiangle Absorption Photometer)",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:180"
+        },
+        {
+          "id": "SUNA (Submersible Ultraviolet Nitrate Analyser)",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:135"
+        },
+        {
+          "id": "Thermosalinographs",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:101"
         },
         {
           "id": "Ozone monitor",
           "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:178"
         },
         {
+          "id": "Gas Chromatographs",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:48"
+        },
+        {
+          "id": "Greenhouse gas analyser - Picarro",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:177"
+        },
+        {
+          "id": "Fisheries echosounder - EK80",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:196"
+        },
+        {
+          "id": "Weather Radars",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:162"
+        },
+        {
           "id": "Nephelometers",
           "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:125"
+        },
+        {
+          "id": "Profiling Float - Argo",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:150"
         },
         {
           "id": "Cloud Radars",
           "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:161"
         },
         {
-          "id": "Mass Spectrometers",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:59"
+          "id": "Plankton Nets/Drop Nets",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:75"
         },
         {
-          "id": "DMA (Differential Mobility Analyser)",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:132"
+          "id": "Cloud lidar",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:200"
         },
         {
-          "id": "LIDAR Altimeter",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:56"
+          "id": "SVP (Surface Velocity Program) Drifters",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:163"
         }
       ],
       "scheme": "equipment",
@@ -646,6 +679,22 @@
     },
     {
       "concepts": [
+        {
+          "id": "Practical salinity of the water body",
+          "url": "http://vocab.nerc.ac.uk/collection/P01/current/PSLTZZ01"
+        },
+        {
+          "id": "Temperature of the water body",
+          "url": "http://vocab.nerc.ac.uk/collection/P01/current/TEMPPR01"
+        },
+        {
+          "id": "Pressure (measured variable) in the water body exerted by overlying sea water and any medium above it",
+          "url": "http://vocab.aodn.org.au/def/discovery_parameter/entity/565"
+        },
+        {
+          "id": "Pressure (measured variable) in the water body exerted by overlying sea water only",
+          "url": "http://vocab.aodn.org.au/def/discovery_parameter/entity/566"
+        },
         {
           "id": "Current direction in the water body",
           "url": "http://vocab.nerc.ac.uk/collection/P01/current/LCDAZZ01"
@@ -667,24 +716,16 @@
           "url": "http://vocab.nerc.ac.uk/collection/P01/current/LRZAZZZZ"
         },
         {
-          "id": "Practical salinity of the water body",
-          "url": "http://vocab.nerc.ac.uk/collection/P01/current/PSLTZZ01"
+          "id": "Sea-floor depth below surface of the water body",
+          "url": "http://vocab.aodn.org.au/def/discovery_parameter/entity/574"
         },
         {
-          "id": "Temperature of the water body",
-          "url": "http://vocab.nerc.ac.uk/collection/P01/current/TEMPPR01"
+          "id": "Sea-floor surface hardness",
+          "url": "N/A"
         },
         {
-          "id": "Pressure (measured variable) in the water body exerted by overlying sea water and any medium above it",
-          "url": "http://vocab.aodn.org.au/def/discovery_parameter/entity/565"
-        },
-        {
-          "id": "Pressure (measured variable) in the water body exerted by overlying sea water only",
-          "url": "http://vocab.aodn.org.au/def/discovery_parameter/entity/566"
-        },
-        {
-          "id": "Gravity",
-          "url": "http://vocab.ndg.nerc.ac.uk/term/P011/667/GRAVFLDX"
+          "id": "Density of the water body",
+          "url": "http://vocab.aodn.org.au/def/discovery_parameter/entity/401"
         },
         {
           "id": "Sub-bottom structure",
@@ -697,18 +738,6 @@
         {
           "id": "Biovolume",
           "url": "http://vocab.aodn.org.au/def/discovery_parameter/entity/22"
-        },
-        {
-          "id": "Sea-floor depth below surface of the water body",
-          "url": "http://vocab.aodn.org.au/def/discovery_parameter/entity/574"
-        },
-        {
-          "id": "Sea-floor surface hardness",
-          "url": "N/A"
-        },
-        {
-          "id": "Density of the water body",
-          "url": "http://vocab.aodn.org.au/def/discovery_parameter/entity/401"
         }
       ],
       "scheme": "",
@@ -729,40 +758,36 @@
     {
       "concepts": [
         {
-          "id": "current profilers",
-          "url": "http://vocab.nerc.ac.uk/collection/L05/current/115"
+          "id": "CTD",
+          "url": "http://vocab.nerc.ac.uk/collection/L05/current/130"
         },
         {
           "id": "lowered current profilers",
           "url": "http://vocab.nerc.ac.uk/collection/L05/current/116/"
         },
         {
-          "id": "CTD",
-          "url": "http://vocab.nerc.ac.uk/collection/L05/current/130"
+          "id": "current profilers",
+          "url": "http://vocab.nerc.ac.uk/collection/L05/current/115"
         },
         {
-          "id": "gravimeters",
-          "url": "http://vocab.nerc.ac.uk/collection/L05/current/158/"
-        },
-        {
-          "id": "2000 Hz top-bandwidth sub-bottom penetrator and mud profiler systems",
-          "url": "http://vocab.nerc.ac.uk/collection/L05/current/367/"
-        },
-        {
-          "id": "Fish-finder echosounders",
-          "url": "http://vocab.nerc.ac.uk/collection/L05/current/FFES"
+          "id": "bathythermographs",
+          "url": "http://vocab.nerc.ac.uk/collection/L05/current/132"
         },
         {
           "id": "multi-beam echosounders",
           "url": "http://vocab.nerc.ac.uk/collection/L05/current/157"
         },
         {
+          "id": "2000 Hz top-bandwidth sub-bottom penetrator and mud profiler systems",
+          "url": "http://vocab.nerc.ac.uk/collection/L05/current/367/"
+        },
+        {
           "id": "thermosalinographs",
           "url": "http://vocab.nerc.ac.uk/collection/L05/current/133"
         },
         {
-          "id": "bathythermographs",
-          "url": "http://vocab.nerc.ac.uk/collection/L05/current/132"
+          "id": "Fish-finder echosounders",
+          "url": "http://vocab.nerc.ac.uk/collection/L05/current/FFES"
         }
       ],
       "scheme": "",
@@ -770,11 +795,974 @@
       "title": ""
     }
   ],
-  "id": "1880cd63-d0f9-42e0-b073-7082527945f2",
+  "id": "e18eee85-c6c4-4be2-ac8c-930991cf2534",
   "record_suggest": {
-    "abstract_phrases": []
+    "abstract_phrases": [
+      "minimpl",
+      "platform mercury analyser",
+      "sensor scanning mobility",
+      "ion",
+      "robot osscar",
+      "nucleating",
+      "ccn",
+      "aerosol chemical speciation",
+      "via",
+      "carbon sensor aethalometer mobility",
+      "basta",
+      "infrared radiometer pir",
+      "electronically",
+      "sulfur",
+      "biogeochemistry plankton aerosols clouds",
+      "eov raw data",
+      "specific measurements",
+      "spectrometer mpss bongo net",
+      "near",
+      "marine infrastructure ncmi",
+      "csiro data access",
+      "disdrometer radon sensor",
+      "chemical analysis robot",
+      "ladcp",
+      "counters",
+      "publicly available",
+      "multiangle absorption photometer maap",
+      "hydrochemistry triaxus fisheries echosounder",
+      "neutral",
+      "raw",
+      "analysis",
+      "tekran time",
+      "frrf",
+      "mnf support via",
+      "available electronically",
+      "expendable",
+      "size",
+      "near surface",
+      "mnf rv investigator",
+      "sequential chemical",
+      "sizers",
+      "wind",
+      "southern",
+      "biogeochemistry plankton aerosols",
+      "flight",
+      "centre idc",
+      "rosette",
+      "providing",
+      "fremantle",
+      "cluster air ion spectrometer",
+      "condensation nuclei",
+      "smps ctd hydrochemistry",
+      "sensor precision infrared",
+      "radar basta fast repetition",
+      "flight aerosol",
+      "aest departing from",
+      "smps ctd hydrochemistry triaxus",
+      "mass spectrometry ptr ms",
+      "particle",
+      "nais proton",
+      "access voyage documentation",
+      "csiro",
+      "mnf support",
+      "place between",
+      "various biological",
+      "frrf mini",
+      "basta fast",
+      "archive from",
+      "aethalometer mobility particle",
+      "sulfur sequential chemical analysis",
+      "black carbon sensor",
+      "velocity log",
+      "fast",
+      "transfer reaction",
+      "analyser tekran",
+      "biogeochemical bgc",
+      "information",
+      "voyage took place between",
+      "disdrometer radon sensor scanning",
+      "voyage participants",
+      "aerosol mass spectrometer ams",
+      "place between january",
+      "pyranometer psp",
+      "photometer maap ozone sensor",
+      "radar basta",
+      "repetition",
+      "pir precision",
+      "data archive",
+      "isps",
+      "profiler adcp",
+      "par",
+      "cims",
+      "lidar minimpl micro rain",
+      "radiometers air sampler",
+      "air ion spectrometer nais",
+      "gps",
+      "bottles organic",
+      "gas analysers picarro cloud",
+      "analyser",
+      "bottles organic sulfur sequential",
+      "data collected",
+      "lowered adcp ladcp",
+      "flight aerosol chemical speciation",
+      "counter ccn condensation",
+      "aerosols clouds",
+      "usbl weather radar expendable",
+      "eov data",
+      "biogeochemistry plankton",
+      "precision infrared radiometer",
+      "specific measurements black carbon",
+      "acsm water vapor",
+      "isps ice",
+      "multiangle absorption photometer",
+      "sensor scanning",
+      "end",
+      "particle sizers smps",
+      "system doppler velocity log",
+      "smps ctd",
+      "made via",
+      "underwater positioning system usbl",
+      "tsg fluorometer oxygen optode",
+      "nuclei counter ccn condensation",
+      "spectrometer ams core argo",
+      "ionisation mass spectrometer cims",
+      "aerosol sampling",
+      "mercury analyser tekran time",
+      "argo",
+      "micro",
+      "measurements black",
+      "eov data archive",
+      "weather radar",
+      "stabilised platform mercury analyser",
+      "sensors photosynthetically active",
+      "permanent archive",
+      "eov",
+      "ultra",
+      "particle sizers",
+      "acoustic doppler current",
+      "velocity log thermosalinographs",
+      "particles inps ozone sensor",
+      "metal aerosol",
+      "cims cloud radar",
+      "radiometer wvr aerosol",
+      "include regular",
+      "log thermosalinographs tsg",
+      "photometer maap ozone",
+      "bongo net chemical ionisation",
+      "fluorometer oxygen",
+      "chemical ionisation mass",
+      "lidar rman stabilised platform",
+      "marine national",
+      "system",
+      "mass spectrometer cims",
+      "condensation particle counters cpc",
+      "cims cloud radar basta",
+      "spectrometer",
+      "tof",
+      "air",
+      "absorption photometer",
+      "ionisation mass",
+      "local",
+      "doppler velocity",
+      "core argo",
+      "mercury analyser tekran",
+      "ctd hydrochemistry triaxus",
+      "micro pulse lidar",
+      "expendable bathythermographs xbts",
+      "fluorometer frrf mini",
+      "usbl weather radar",
+      "mnf rv",
+      "vapor",
+      "aethalometer mobility particle size",
+      "ptr ms radiosondes cloud",
+      "gas analysers",
+      "pumps",
+      "data requests",
+      "precision spectral pyranometer",
+      "spectrometer cims cloud radar",
+      "analysers picarro cloud condensation",
+      "curated",
+      "information please",
+      "osscar omics",
+      "particles inps",
+      "spectrometer ams core",
+      "ocean miso linking",
+      "precision",
+      "bathythermographs",
+      "links instruments",
+      "voyage all voyage documentation",
+      "collected include regular measurements",
+      "pumps isps",
+      "osscar",
+      "from hobart",
+      "cpc",
+      "radiometer pir",
+      "rain radar mrr",
+      "pir",
+      "links",
+      "maap ozone sensor nephelometer",
+      "net",
+      "data access portal",
+      "particle sizers smps ctd",
+      "disdrometer radon",
+      "all",
+      "took",
+      "organic sulfur sequential",
+      "aest",
+      "acoustic",
+      "ams core argo floats",
+      "marine infrastructure ncmi information",
+      "ptr ms",
+      "chemical analysis",
+      "mpss bongo",
+      "robot osscar omics data",
+      "chemical speciation",
+      "sensor",
+      "gps positioning system doppler",
+      "particles inps ozone",
+      "bgc argo floats",
+      "aerosols",
+      "ams",
+      "titled multidisciplinary",
+      "thermosalinographs tsg fluorometer oxygen",
+      "tsg",
+      "backscatter lidar rman stabilised",
+      "minimpl micro rain",
+      "metal aerosol sampling",
+      "organic sulfur",
+      "maap ozone",
+      "acsm",
+      "nephelometer atmospheric temperature",
+      "ultra short baseline underwater",
+      "floats biogeochemical bgc argo",
+      "atmospheric temperature humidity pressure",
+      "non csiro",
+      "cloud condensation nuclei",
+      "neutral cluster air ion",
+      "mpss bongo net",
+      "fluorometer frrf mini micro",
+      "regular measurements",
+      "radiometer pir precision spectral",
+      "facility mnf",
+      "biogeochemical bgc argo floats",
+      "marine national facility",
+      "specific",
+      "cloud condensation nuclei counter",
+      "adcp ladcp",
+      "cluster air",
+      "portside radiometers",
+      "bathythermographs xbts voyage",
+      "cluster",
+      "local network",
+      "inps ozone",
+      "adcp ladcp acoustic doppler",
+      "cpc disdrometer radon sensor",
+      "rain sensors photosynthetically",
+      "trawler",
+      "ozone sensor trace metal",
+      "csiro participants can",
+      "oxygen optode",
+      "cloud radar basta fast",
+      "ctd",
+      "national facility mnf",
+      "system doppler velocity",
+      "voyage documentation",
+      "greenhouse gas analysers picarro",
+      "processed data from",
+      "made publicly available through",
+      "ncmi",
+      "micro rain",
+      "ctd rosette",
+      "absorption",
+      "documentation links instruments",
+      "sampling",
+      "raw data",
+      "biogeochemical bgc argo",
+      "tsg fluorometer",
+      "rate chlorophyll",
+      "ultra short",
+      "nais",
+      "reaction mass spectrometry ptr",
+      "ccn condensation particle",
+      "wvr aerosol",
+      "measurements black carbon sensor",
+      "sensor nephelometer atmospheric temperature",
+      "particle counters",
+      "mobility",
+      "rain radar mrr neutral",
+      "requests hf",
+      "expendable bathythermographs xbts voyage",
+      "scanning",
+      "marine",
+      "aerosol backscatter lidar",
+      "physics biogeochemistry",
+      "aerosol backscatter lidar rman",
+      "hydrochemistry",
+      "platform mercury analyser tekran",
+      "southern ocean",
+      "black",
+      "infrastructure ncmi information",
+      "collected include",
+      "describes",
+      "fast repetition rate",
+      "bgc argo floats near",
+      "facility mnf rv",
+      "data access portal https",
+      "tekran",
+      "southern ocean miso",
+      "rain radar",
+      "through",
+      "precision infrared",
+      "plankton aerosols clouds",
+      "spectrometer ams",
+      "trace metal ctd rosette",
+      "mini micro pulse",
+      "flight aerosol chemical",
+      "regular measurements lowered",
+      "mass spectrometer ams",
+      "positioning system",
+      "radiometers",
+      "aerosol",
+      "portal https",
+      "cims cloud",
+      "pulse lidar minimpl micro",
+      "ice nucleating particles inps",
+      "radiation par sensor precision",
+      "spectrometer cims cloud",
+      "mrr neutral",
+      "rman stabilised platform",
+      "marine infrastructure",
+      "spectrometry",
+      "counter ccn",
+      "radon",
+      "related links",
+      "linking physics biogeochemistry",
+      "sub bottom",
+      "water vapor radiometer",
+      "rv investigator",
+      "ctd hydrochemistry",
+      "trace metal aerosol sampling",
+      "nephelometer atmospheric",
+      "psp",
+      "non",
+      "system usbl weather",
+      "ozone",
+      "ams core",
+      "xbts",
+      "non csiro participants",
+      "mobility particle sizers smps",
+      "bongo net",
+      "condensation",
+      "record describes",
+      "speciation monitor",
+      "ladcp acoustic doppler",
+      "analysers",
+      "frrf mini micro",
+      "voyage specific",
+      "acsm water vapor radiometer",
+      "csiro national collections",
+      "radon sensor scanning",
+      "ptr",
+      "refer",
+      "carbon sensor aethalometer",
+      "infrastructure",
+      "all voyage documentation",
+      "short",
+      "infrared radiometer pir precision",
+      "time",
+      "analysis robot osscar omics",
+      "titled",
+      "fisheries echosounder",
+      "doppler velocity log thermosalinographs",
+      "applications",
+      "particle size",
+      "par sensor",
+      "robot osscar omics",
+      "core argo floats",
+      "eov data archive from",
+      "gps positioning system",
+      "underwater positioning system",
+      "collected",
+      "radon sensor",
+      "regular measurements lowered adcp",
+      "multiangle absorption",
+      "lidar rman",
+      "repetition rate",
+      "pulse lidar minimpl",
+      "instruments",
+      "situ pumps isps ice",
+      "collections",
+      "carbon",
+      "baseline underwater",
+      "mass spectrometer ams core",
+      "omics data",
+      "biogeochemical",
+      "micro pulse lidar minimpl",
+      "cloud condensation",
+      "local network applications",
+      "sizers smps",
+      "ptr ms radiosondes",
+      "picarro",
+      "sensor precision infrared radiometer",
+      "log",
+      "portside radiometers air",
+      "csiro participants",
+      "physics biogeochemistry plankton aerosols",
+      "bottles",
+      "sampler ultra short",
+      "bathythermographs xbts",
+      "miso linking",
+      "wvr aerosol mass",
+      "measurements lowered adcp ladcp",
+      "sampling trace",
+      "spectrometer nais",
+      "spectral pyranometer",
+      "physics",
+      "usbl",
+      "radiometer wvr aerosol mass",
+      "active radiation par",
+      "data archive from",
+      "mpss bongo net chemical",
+      "analyser tekran time",
+      "centre",
+      "climate",
+      "radiometers air",
+      "reaction mass spectrometry",
+      "vapor radiometer wvr",
+      "network applications",
+      "counters cpc disdrometer",
+      "sensor aethalometer mobility particle",
+      "publicly available through",
+      "january",
+      "permanent",
+      "sensors photosynthetically active radiation",
+      "fluorometer oxygen optode",
+      "facility",
+      "wvr aerosol mass spectrometer",
+      "mass spectrometer",
+      "vapor radiometer wvr aerosol",
+      "sensor nephelometer",
+      "scanning mobility particle",
+      "transfer reaction mass spectrometry",
+      "argo floats near surface",
+      "ozone sensor trace",
+      "sizers smps ctd",
+      "non csiro participants can",
+      "used",
+      "monitor tof",
+      "precision spectral pyranometer psp",
+      "floats near",
+      "cloud",
+      "mini micro pulse lidar",
+      "tof acsm water",
+      "micro rain radar",
+      "doppler velocity log",
+      "rain",
+      "analysis robot osscar",
+      "archive",
+      "fluorometer frrf",
+      "log thermosalinographs tsg fluorometer",
+      "water",
+      "spectrometer nais proton",
+      "voyage",
+      "transfer",
+      "khz greenhouse gas analysers",
+      "frrf mini micro pulse",
+      "chemical speciation monitor tof",
+      "khz greenhouse",
+      "radar mrr",
+      "usbl weather",
+      "floats near surface drifters",
+      "investigations",
+      "spectrometer nais proton transfer",
+      "floats biogeochemical",
+      "via data",
+      "basta fast repetition rate",
+      "radiation par sensor",
+      "proton transfer reaction",
+      "doppler",
+      "greenhouse gas analysers",
+      "sensors photosynthetically",
+      "neutral cluster air",
+      "documentation links",
+      "via data requests",
+      "situ pumps isps",
+      "photosynthetically active radiation",
+      "velocity",
+      "starboard",
+      "bongo",
+      "aerosol backscatter",
+      "radiometers air sampler ultra",
+      "various",
+      "further",
+      "size spectrometer",
+      "adcp",
+      "humidity pressure",
+      "bongo net chemical",
+      "temperature humidity pressure wind",
+      "robot",
+      "voyage eov data",
+      "access portal https",
+      "record",
+      "voyage eov",
+      "voyage took",
+      "particle counters cpc",
+      "humidity",
+      "acoustic doppler",
+      "air ion spectrometer",
+      "cluster air ion",
+      "departing",
+      "radar mrr neutral",
+      "osscar omics data",
+      "spectral pyranometer psp",
+      "documentation",
+      "active",
+      "sensor aethalometer",
+      "chemical ionisation",
+      "radar expendable bathythermographs",
+      "sulfur sequential",
+      "mobility particle",
+      "size spectrometer mpss bongo",
+      "chemical",
+      "nucleating particles inps ozone",
+      "argo floats",
+      "doppler current profiler adcp",
+      "absorption photometer maap",
+      "ozone sensor",
+      "linking physics biogeochemistry plankton",
+      "data trawler",
+      "lowered adcp ladcp acoustic",
+      "current profiler adcp",
+      "infrared radiometer",
+      "precision infrared radiometer pir",
+      "national collections",
+      "infrastructure ncmi",
+      "spectrometer mpss bongo",
+      "situ pumps",
+      "vapor radiometer",
+      "spectrometry ptr ms radiosondes",
+      "rman stabilised platform mercury",
+      "national",
+      "mnf rv investigator voyage",
+      "rman stabilised",
+      "tsg fluorometer oxygen",
+      "ozone sensor nephelometer",
+      "condensation nuclei counter ccn",
+      "baseline underwater positioning",
+      "csiro data access portal",
+      "mini",
+      "biological data",
+      "national facility mnf rv",
+      "nais proton transfer",
+      "march",
+      "made publicly",
+      "isps ice nucleating",
+      "returning",
+      "xbts voyage specific measurements",
+      "marine national facility mnf",
+      "underwater positioning",
+      "multibeam",
+      "precision spectral",
+      "lowered adcp",
+      "links instruments used",
+      "pyranometer psp starboard",
+      "picarro cloud",
+      "plankton aerosols",
+      "tof acsm water vapor",
+      "national facility",
+      "gps positioning",
+      "stabilised platform",
+      "air ion",
+      "all processed",
+      "weather radar expendable bathythermographs",
+      "mercury analyser",
+      "triaxus fisheries echosounder",
+      "ccn condensation",
+      "particle size spectrometer mpss",
+      "aerosol sampling trace metal",
+      "publicly",
+      "air sampler ultra short",
+      "measurements lowered adcp",
+      "weather radar expendable",
+      "sampler ultra",
+      "condensation particle counters",
+      "analysers picarro cloud",
+      "absorption photometer maap ozone",
+      "data from",
+      "mnf data trawler",
+      "echosounder",
+      "cpc disdrometer radon",
+      "bgc",
+      "aerosol mass",
+      "multibeam echosounder",
+      "voyage specific measurements",
+      "voyage all voyage",
+      "miso",
+      "floats near surface",
+      "greenhouse gas",
+      "reaction mass",
+      "related",
+      "rate",
+      "adcp ladcp acoustic",
+      "plankton",
+      "further information please",
+      "thermosalinographs",
+      "further information",
+      "chlorophyll",
+      "mass spectrometry ptr",
+      "mini micro",
+      "data centre",
+      "proton transfer",
+      "monitor",
+      "counter",
+      "spectrometer cims",
+      "sensor trace metal aerosol",
+      "maap",
+      "scanning mobility particle sizers",
+      "radiometer",
+      "air sampler ultra",
+      "inps ozone sensor trace",
+      "radiosondes cloud",
+      "hf",
+      "between january",
+      "titled multidisciplinary investigations",
+      "data collected include regular",
+      "ms radiosondes cloud",
+      "sizers smps ctd hydrochemistry",
+      "aerosol mass spectrometer",
+      "ultra short baseline",
+      "backscatter lidar rman",
+      "https",
+      "portal",
+      "facility mnf rv investigator",
+      "monitor tof acsm water",
+      "active radiation par sensor",
+      "ms radiosondes",
+      "surface",
+      "made",
+      "ionisation mass spectrometer",
+      "metal",
+      "backscatter",
+      "aest departing",
+      "velocity log thermosalinographs tsg",
+      "via data requests hf",
+      "biological",
+      "csiro national",
+      "water vapor radiometer wvr",
+      "ozone sensor nephelometer atmospheric",
+      "temperature humidity",
+      "sensor aethalometer mobility",
+      "bgc argo",
+      "available through",
+      "nuclei counter",
+      "net chemical ionisation",
+      "analysis robot",
+      "radiometer pir precision",
+      "disdrometer",
+      "picarro cloud condensation",
+      "radar mrr neutral cluster",
+      "made publicly available",
+      "pyranometer",
+      "biogeochemistry",
+      "condensation nuclei counter",
+      "gas analysers picarro",
+      "radar",
+      "wvr",
+      "acoustic doppler current profiler",
+      "neutral cluster",
+      "spectrometry ptr",
+      "departing from",
+      "investigator voyage",
+      "repetition rate chlorophyll",
+      "sensor trace metal",
+      "include regular measurements",
+      "pumps isps ice",
+      "spectral",
+      "aerosol chemical speciation monitor",
+      "made via data",
+      "log thermosalinographs",
+      "mrr neutral cluster air",
+      "cpc disdrometer",
+      "short baseline underwater",
+      "pulse lidar",
+      "triaxus",
+      "positioning system doppler velocity",
+      "core argo floats biogeochemical",
+      "spectrometry ptr ms",
+      "trace metal ctd",
+      "trace metal",
+      "oxygen",
+      "chemical speciation monitor",
+      "scanning mobility",
+      "floats",
+      "nucleating particles",
+      "ms",
+      "greenhouse",
+      "pressure",
+      "spectrometer mpss",
+      "support via",
+      "multiangle",
+      "size spectrometer mpss",
+      "isps ice nucleating particles",
+      "metal ctd",
+      "radiometer wvr",
+      "collected include regular",
+      "omics",
+      "surface drifters",
+      "instruments used",
+      "ams core argo",
+      "net chemical",
+      "air sampler",
+      "psp starboard",
+      "xbts voyage",
+      "ion spectrometer nais",
+      "ionisation",
+      "mnf data",
+      "hydrochemistry triaxus",
+      "investigator",
+      "positioning",
+      "ocean miso",
+      "mass spectrometry",
+      "inps",
+      "sampling trace metal",
+      "eov raw",
+      "sub bottom profiler",
+      "aest departing from hobart",
+      "smps",
+      "carbon sensor",
+      "processed",
+      "sensors",
+      "radon sensor scanning mobility",
+      "radiation",
+      "condensation particle",
+      "pulse",
+      "linking physics",
+      "information please refer",
+      "infrared",
+      "lidar minimpl micro",
+      "lidar minimpl",
+      "triaxus fisheries",
+      "sensor nephelometer atmospheric",
+      "rain sensors",
+      "maap ozone sensor",
+      "particles",
+      "voyage documentation links instruments",
+      "khz greenhouse gas",
+      "proton",
+      "processed data",
+      "portside",
+      "pir precision spectral pyranometer",
+      "lowered",
+      "counters cpc disdrometer radon",
+      "pressure wind",
+      "inps ozone sensor",
+      "micro pulse",
+      "took place between january",
+      "underwater",
+      "aethalometer mobility",
+      "radar expendable bathythermographs xbts",
+      "acsm water",
+      "sub",
+      "thermosalinographs tsg",
+      "atmospheric temperature humidity",
+      "access",
+      "rv",
+      "photosynthetically active",
+      "metal ctd rosette",
+      "sequential chemical analysis",
+      "current",
+      "measurements black carbon",
+      "positioning system usbl",
+      "optode",
+      "analysers picarro",
+      "temperature",
+      "photosynthetically active radiation par",
+      "measurements lowered",
+      "sensor scanning mobility particle",
+      "measurements",
+      "participants",
+      "drifters",
+      "reaction",
+      "stabilised",
+      "tof acsm",
+      "xbts voyage specific",
+      "counters cpc",
+      "bottles organic sulfur",
+      "micro rain radar mrr",
+      "bottom profiler",
+      "access voyage",
+      "trace metal aerosol",
+      "argo floats biogeochemical",
+      "nucleating particles inps",
+      "mobility particle size spectrometer",
+      "radiation par",
+      "available",
+      "ice",
+      "ion spectrometer nais proton",
+      "chemical analysis robot osscar",
+      "all processed data",
+      "basta fast repetition",
+      "photometer maap",
+      "hydrochemistry triaxus fisheries",
+      "chemical ionisation mass spectrometer",
+      "ncmi information",
+      "temperature humidity pressure",
+      "speciation monitor tof acsm",
+      "sulfur sequential chemical",
+      "voyage took place",
+      "idc",
+      "please",
+      "nais proton transfer reaction",
+      "proton transfer reaction mass",
+      "ocean",
+      "pumps isps ice nucleating",
+      "monitor tof acsm",
+      "khz",
+      "bathythermographs xbts voyage specific",
+      "support",
+      "data centre idc",
+      "miso linking physics",
+      "ccn condensation particle counters",
+      "ocean miso linking physics",
+      "sequential",
+      "mass",
+      "nuclei counter ccn",
+      "took place between",
+      "gas",
+      "radiosondes",
+      "lidar",
+      "transfer reaction mass",
+      "sensor precision",
+      "mass spectrometer cims cloud",
+      "organic",
+      "metal aerosol sampling trace",
+      "par sensor precision",
+      "mnf",
+      "par sensor precision infrared",
+      "lidar rman stabilised",
+      "organic sulfur sequential chemical",
+      "photometer",
+      "doppler current",
+      "ice nucleating",
+      "sensor trace",
+      "rain sensors photosynthetically active",
+      "cloud radar basta",
+      "near surface drifters",
+      "data access",
+      "fisheries",
+      "backscatter lidar",
+      "active radiation",
+      "ladcp acoustic",
+      "sampler ultra short baseline",
+      "made via data requests",
+      "all processed data from",
+      "photosynthetically",
+      "humidity pressure wind",
+      "minimpl micro",
+      "processors",
+      "specific measurements black",
+      "weather",
+      "between",
+      "further information please refer",
+      "various biological data",
+      "net chemical ionisation mass",
+      "linking",
+      "voyage eov data archive",
+      "ice nucleating particles",
+      "baseline",
+      "nephelometer atmospheric temperature humidity",
+      "sampler",
+      "speciation",
+      "physics biogeochemistry plankton",
+      "black carbon sensor aethalometer",
+      "baseline underwater positioning system",
+      "nuclei",
+      "access portal",
+      "requests",
+      "speciation monitor tof",
+      "ion spectrometer",
+      "aethalometer",
+      "all voyage",
+      "doppler current profiler",
+      "place",
+      "cloud radar",
+      "participants can",
+      "regular",
+      "include",
+      "situ",
+      "stabilised platform mercury",
+      "multidisciplinary investigations",
+      "voyage documentation links",
+      "mrr",
+      "mpss",
+      "ladcp acoustic doppler current",
+      "data requests hf",
+      "minimpl micro rain radar",
+      "counter ccn condensation particle",
+      "data",
+      "atmospheric temperature",
+      "departing from hobart",
+      "system doppler",
+      "black carbon",
+      "particle size spectrometer",
+      "hobart",
+      "particle counters cpc disdrometer",
+      "radar expendable",
+      "fast repetition rate chlorophyll",
+      "current profiler",
+      "argo floats near",
+      "aerosol chemical",
+      "short baseline",
+      "mobility particle size",
+      "from",
+      "miso linking physics biogeochemistry",
+      "rman",
+      "multidisciplinary",
+      "positioning system usbl weather",
+      "include regular measurements lowered",
+      "bottom",
+      "fluorometer",
+      "thermosalinographs tsg fluorometer",
+      "profiler",
+      "picarro cloud condensation nuclei",
+      "system usbl weather radar",
+      "documentation links instruments used",
+      "sampling trace metal ctd",
+      "system usbl",
+      "core",
+      "voyage all",
+      "water vapor",
+      "floats biogeochemical bgc",
+      "short baseline underwater positioning",
+      "aerosol sampling trace",
+      "expendable bathythermographs",
+      "mercury",
+      "rv investigator voyage",
+      "clouds",
+      "platform",
+      "network",
+      "ctd hydrochemistry triaxus fisheries",
+      "fast repetition",
+      "can",
+      "portside radiometers air sampler",
+      "trace",
+      "atmospheric",
+      "argo floats biogeochemical bgc",
+      "positioning system doppler",
+      "data collected include",
+      "mobility particle sizers",
+      "mrr neutral cluster",
+      "nephelometer",
+      "voyage specific measurements black",
+      "please refer",
+      "radar basta fast",
+      "platform mercury",
+      "southern ocean miso linking",
+      "sequential chemical analysis robot",
+      "providing access",
+      "took place",
+      "csiro data",
+      "pir precision spectral",
+      "spectral pyranometer psp starboard"
+    ]
   },
-  "sci:citation": "{\"suggestedCitation\":null,\"useLimitations\":null,\"otherConstraints\":[\"Access to the raw (not quality-controlled) voyage data is intended for the collectors and processors of the data obtained in the MNF RV Investigator voyage. Quality-controlled data products will be made available under the MNF CCBY  licence.\"]}",
+  "sci:citation": "{\"suggestedCitation\":null,\"useLimitations\":null,\"otherConstraints\":[\"Access to the raw (not quality-controlled) voyage data is intended for the collectors and processors of the data obtained in the MNF RV Investigator voyage. Quality-controlled data products will be made available under a CCBY  licence.\"]}",
   "type": "Collection",
   "stac_version": "1.0.0",
   "stac_extensions": [

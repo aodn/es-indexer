@@ -1,18 +1,18 @@
 {
   "title": "Aurora Australis Voyage 6 2011/12 Track and Underway Data",
-  "description": "On every voyage of the Aurora Australis, approximately 50 onboard sensors collect data on average every 10 seconds.  These data are known as the underway datasets.  The type of data collected include water and air temperature, wind speeds, ship speed and location, humidity, fluorescence, salinity and so on.  For the full list of available data types, see the website.\n\n                    These data are broadcast \"live\" (every 30 minutes) back to Australia and are available via the Australian Oceanographic Data Centre's portal (see the provided link).  Once the ship returns to port, the data are then transferred to Australian Antarctic Division servers where they are then made available via the Marine Science Data Search system (see the provided URL).\n\n                    This dataset contains the underway data collected during Voyage 6 of the Aurora Australis Voyage in the 2011/12 season.\n\n                    Purpose of voyage: Macquarie Island resupply\n\n                    Underway (meteorological) data are available online via the Australian Antarctic Division Data Centre web page (or via the Related URL section).",
+  "description": "On every voyage of the Aurora Australis, approximately 50 onboard sensors collect data on average every 10 seconds.  These data are known as the underway datasets.  The type of data collected include water and air temperature, wind speeds, ship speed and location, humidity, fluorescence, salinity and so on.  For the full list of available data types, see the website.\n\n          These data are broadcast \"live\" (every 30 minutes) back to Australia and are available via the Australian Oceanographic Data Centre's portal (see the provided link).  Once the ship returns to port, the data are then transferred to Australian Antarctic Division servers where they are then made available via the Marine Science Data Search system (see the provided URL).\n\n          This dataset contains the underway data collected during Voyage 6 of the Aurora Australis Voyage in the 2011/12 season.\n\n          Purpose of voyage: Macquarie Island resupply\n\n          Underway (meteorological) data are available online via the Australian Antarctic Division Data Centre web page (or via the Related URL section).",
   "extent": {
     "bbox": [
       [
-        147.0,
-        -54.0,
-        159.0,
+        147,
+        -54,
+        159,
         -42.4
       ],
       [
-        147.0,
-        -54.0,
-        159.0,
+        147,
+        -54,
+        159,
         -42.4
       ]
     ],
@@ -35,7 +35,7 @@
       "code": "dataset",
       "name": ""
     },
-    "statement": "See the Marine Science Support Data Quality and Programmer's Reports at the Related URL section.\n\n                    Where data for a particular sensor do not exist for a particular time, the last known value is used unless the sensor has been disabled or has encountered an error. For example, some sensors only record data every minute, but the resolution for the underway dataset is 10 seconds, so the same value will be used 6 times a minute. No averages are taken for sensors that capture data at a rate other than every 10 seconds. Instead, each record will be a snapshot of each sensor at that time.\n\n                    The data have been acquired at 0.1 Hz. There will be the occasional invalid value such as temperatures being out of range.\n\n                    This dataset has not been checked. Please verify the data before use.",
+    "statement": "See the Marine Science Support Data Quality and Programmer's Reports at the Related URL section.\n\n          Where data for a particular sensor do not exist for a particular time, the last known value is used unless the sensor has been disabled or has encountered an error. For example, some sensors only record data every minute, but the resolution for the underway dataset is 10 seconds, so the same value will be used 6 times a minute. No averages are taken for sensors that capture data at a rate other than every 10 seconds. Instead, each record will be a snapshot of each sensor at that time.\n\n          The data have been acquired at 0.1 Hz. There will be the occasional invalid value such as temperatures being out of range.\n\n          This dataset has not been checked. Please verify the data before use.",
     "creation": "2011-12-12T00:00:00",
     "update_frequency": "completed",
     "proj:geometry": {
@@ -404,7 +404,7 @@
   "record_suggest": {
     "abstract_phrases": []
   },
-  "sci:citation": "{\"suggestedCitation\":null,\"useLimitations\":[\"This metadata record is publicly available.\"],\"otherConstraints\":[\"Data are available online via the Australian Antarctic Division Data Centre web page, and also via the Australian Ocean Data Network Web Portal.  A \\\"supplementary\\\" dataset is also available for download from the provided URL.  It contains raw data collected directly from the ship, which has not been quality checked.\",\"This data set conforms to the CCBY Attribution License\\n                            (http://creativecommons.org/licenses/by/4.0/).\\n\\n                            Please follow instructions listed in the citation reference provided at http://data.aad.gov.au/aadc/metadata/citation.cfm?entry_id=201112060 when using these data.\"]}",
+  "sci:citation": "{\"suggestedCitation\":null,\"useLimitations\":[\"This metadata record is publicly available.\"],\"otherConstraints\":[\"Data are available online via the Australian Antarctic Division Data Centre web page, and also via the Australian Ocean Data Network Web Portal.  A \\\"supplementary\\\" dataset is also available for download from the provided URL.  It contains raw data collected directly from the ship, which has not been quality checked.\",\"This data set conforms to the CCBY Attribution License\\n              (http://creativecommons.org/licenses/by/4.0/).\\n\\n              Please follow instructions listed in the citation reference provided at http://data.aad.gov.au/aadc/metadata/citation.cfm?entry_id=201112060 when using these data.\"]}",
   "type": "Collection",
   "stac_version": "1.0.0",
   "stac_extensions": [
