@@ -1,5 +1,6 @@
 package au.org.aodn.esindexer.service;
 
+import co.elastic.clients.elasticsearch.core.BulkRequest;
 import co.elastic.clients.elasticsearch.core.BulkResponse;
 import co.elastic.clients.elasticsearch.core.search.Hit;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -24,4 +25,5 @@ public interface IndexerService {
     Hit<ObjectNode> getDocumentByUUID(String uuid) throws IOException;
     boolean isMetadataPublished(String uuid);
     boolean isGeoNetworkInstanceReinstalled(long portalIndexDocumentsCount);
+    BulkResponse executeBulk(BulkRequest.Builder bulkRequest, Callback callback) throws IOException;
 }

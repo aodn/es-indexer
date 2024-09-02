@@ -12,7 +12,6 @@ import co.elastic.clients.elasticsearch._types.FieldValue;
 import co.elastic.clients.elasticsearch._types.SortOrder;
 import co.elastic.clients.elasticsearch._types.query_dsl.MatchAllQuery;
 
-import co.elastic.clients.elasticsearch.core.CountRequest;
 import co.elastic.clients.elasticsearch.core.SearchRequest;
 import co.elastic.clients.elasticsearch.core.SearchResponse;
 import co.elastic.clients.elasticsearch.core.search.TotalHits;
@@ -46,6 +45,8 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
     public static final String THUMB_NAILS = "thumbnails";
     public static final String URL = "url";
 
+    protected static final long DEFAULT_BACKOFF_TIME = 3000L;
+
     protected static final Logger logger = LogManager.getLogger(GeoNetworkServiceImpl.class);
 
     @Autowired
@@ -55,7 +56,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
     @Autowired
     protected GeoNetworkServiceImpl self;
 
-    @Value("${elasticsearch.query.pageSize:500}")
+    @Value("${elasticsearch.query.pageSize:100}")
     protected int ES_PAGE_SIZE;
     // Use for debug only if run the indexer locally and hit an issue, you do
     // not want to start from the start, by setting this env value, it will start from the UUID
@@ -98,7 +99,14 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
         setServer(server);
     }
 
-    public String findGroupById(String uuid) throws IOException {
+    /**
+     *
+     * @param uuid
+     * @return
+     * @throws IOException
+     * @throws HttpServerErrorException.ServiceUnavailable
+     */
+    public String findGroupById(String uuid) throws IOException, HttpServerErrorException.ServiceUnavailable {
         SearchRequest request = new SearchRequest.Builder()
                 .index(indexName)
                 .query(q -> q.bool(b -> b.filter(f -> f.matchPhrase(p -> p.field(UUID).query(uuid)))))
@@ -173,7 +181,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
      */
     @Override
     public Optional<LinkModel> getLogo(String uuid) {
-        Optional<Map<String, Object>> optAdditionalInfo = getRecordExtraInfo(uuid);
+        Optional<Map<String, Object>> optAdditionalInfo = self.getRecordExtraInfo(uuid);
         if(optAdditionalInfo.isPresent()) {
             // We iterate logos link and add it to STAC
             Map<String, Object> additionalInfo = optAdditionalInfo.get();
@@ -200,6 +208,11 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
         return Optional.empty();
     }
 
+    @Retryable(
+            retryFor = {HttpClientErrorException.BadRequest.class, HttpServerErrorException.ServiceUnavailable.class},
+            maxAttempts = 10,
+            backoff = @Backoff(delay = DEFAULT_BACKOFF_TIME, multiplier = 2.0)
+    )
     protected Optional<Map<String, Object>> getRecordExtraInfo(String uuid) {
         Map<String, Object> params = new HashMap<>();
         params.put(UUID, uuid);
@@ -245,9 +258,9 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
      * 75%, it will throw BadRequest exception if we push it too hard, so we need to retry on bad request
      */
     @Retryable(
-            retryFor = HttpClientErrorException.BadRequest.class,
+            retryFor = {HttpClientErrorException.BadRequest.class, HttpServerErrorException.ServiceUnavailable.class},
             maxAttempts = 10,
-            backoff = @Backoff(delay = 1500L)
+            backoff = @Backoff(delay = DEFAULT_BACKOFF_TIME, multiplier = 2.0)
     )
     protected Optional<Map<String, ?>> getRecordRelated(String uuid) {
         Map<String, ?> value = cache.get(uuid);
@@ -293,8 +306,8 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
      */
     @Retryable(
             retryFor = HttpServerErrorException.ServiceUnavailable.class,
-            maxAttempts = 50,
-            backoff = @Backoff(delay = 10000L)
+            maxAttempts = 10,
+            backoff = @Backoff(delay = DEFAULT_BACKOFF_TIME, multiplier = 2.0)
     )
     protected String findFormatterId(String uuid) {
         try {
@@ -326,15 +339,20 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
             throw new MetadataNotFoundException("Unable to find metadata record with UUID: " + uuid + " in GeoNetwork");
         }
     }
-
-    public String searchRecordBy(String uuid) {
+    /**
+     * Search a record in geonetwork
+     * @param uuid - UUID of the record
+     * @return - The XML give UUID
+     * @throws HttpServerErrorException.ServiceUnavailable - We are running in cloud and instance may be restarted
+     */
+    public String searchRecordBy(String uuid) throws HttpServerErrorException.ServiceUnavailable {
         try {
             HttpEntity<String> requestEntity = getRequestEntity(null);
 
             Map<String, Object> params = new HashMap<>();
             params.put("indexName", getIndexName());
             params.put(UUID, uuid);
-            params.put("formatterId", this.findFormatterId(uuid));
+            params.put("formatterId", self.findFormatterId(uuid));
 
             ResponseEntity<String> responseEntity = indexerRestTemplate.exchange(
                     getGeoNetworkRecordsEndpoint() + "/formatters/{formatterId}",

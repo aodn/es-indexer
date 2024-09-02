@@ -5,7 +5,6 @@ import au.org.aodn.esindexer.model.GeoNetworkField;
 import au.org.aodn.esindexer.model.MediaType;
 import au.org.aodn.esindexer.model.RelationType;
 import au.org.aodn.esindexer.utils.*;
-import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.stac.model.*;
 
 import au.org.aodn.metadata.iso19115_3_2018.*;
@@ -270,7 +269,7 @@ public abstract class StacCollectionMapperService {
             // It is extreme important to return a structure of summaries.temporal:{start: null, end: null}
             // due to a elastic query will fail if the nested path summaries.temporal do not exist for example
             // if your query is having nested { path "summaries.temporal" } and you want to check if end exist,
-            // this query will failed and result in strange result if summaries.temporal do not event exist.
+            // this query failed and result in strange result if summaries.temporal do not event exist.
             result.add(new HashMap<>());
         }
 
@@ -788,7 +787,7 @@ public abstract class StacCollectionMapperService {
                         if (responsibilityType instanceof final CIResponsibilityType2 ciResponsibility) {
 
                             if (ciResponsibility.getParty().isEmpty()) {
-                                logger.warn("Unable to find contact info for metadata record: " + this.mapUUID(source));
+                                logger.warn("Unable to find contact info for metadata record: {}", this.mapUUID(source));
                             }
                             else {
                                 ciResponsibility.getParty().forEach(party -> {
@@ -843,17 +842,18 @@ public abstract class StacCollectionMapperService {
                 }
 
                 for (var property : ciResponsProperties.get()) {
-                    var ciResponsibility = property.getCIResponsibility();
-
-                    if (ciResponsibility.getParty().isEmpty()) {
-                        logger.warn("Unable to find citation contact info for metadata record: " + this.mapUUID(source));
-                    }
-                    else {
-                        ciResponsibility.getParty().forEach(party -> {
-                            var mappedContacts = MapperUtils.mapOrgContacts(ciResponsibility, party);
-                            results.addAll(MapperUtils.addRoleToContacts(mappedContacts, "citation"));
-                        });
-                    }
+                    final var ciResponsibility = property.getCIResponsibility();
+                    safeGet(() -> property.getCIResponsibility().getParty())
+                            .ifPresent(parties -> {
+                                if (parties.isEmpty()) {
+                                    logger.warn("Unable to find citation contact info for metadata record: {}", this.mapUUID(source));
+                                } else {
+                                    parties.forEach(party -> {
+                                        var mappedContacts = MapperUtils.mapOrgContacts(ciResponsibility, party);
+                                        results.addAll(MapperUtils.addRoleToContacts(mappedContacts, "citation"));
+                                    });
+                                }
+                            });
                 }
             }
         }
