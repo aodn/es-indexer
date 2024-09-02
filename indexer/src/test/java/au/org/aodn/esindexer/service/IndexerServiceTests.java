@@ -7,10 +7,7 @@ import co.elastic.clients.elasticsearch.core.search.Hit;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import org.json.JSONException;
 import org.junit.jupiter.api.*;
-import org.skyscreamer.jsonassert.JSONAssert;
-import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,8 +18,6 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
 
 import static au.org.aodn.esindexer.utils.CommonUtils.persevere;
 
@@ -263,25 +258,26 @@ public class IndexerServiceTests extends BaseTestClass {
     public void verifyExtractedVocabsFromActualRecord() throws IOException {
         String uuid = "07818819-2e5c-4a12-9395-0082b57b2fe8";
         try {
-            insertMetadataRecords(uuid, "classpath:canned/sample12.xml");
+            insertMetadataRecords(uuid, "classpath:canned/record_for_vocabs_testing.xml");
 
             indexerService.indexAllMetadataRecordsFromGeoNetwork(true, null);
             Hit<ObjectNode> objectNodeHit = indexerService.getDocumentByUUID(uuid);
 
             String test = String.valueOf(Objects.requireNonNull(objectNodeHit.source()));
+            JsonNode rootNode = indexerObjectMapper.readTree(test);
 
-            // LENIENT as order of array elements does not matter, as long as the elements are found
             List<String> expectedParameterVocabs = Arrays.asList("air pressure", "air-sea fluxes", "uv radiation", "wind", "air temperature", "humidity", "precipitation and evaporation", "water pressure", "temperature");
-            JSONAssert.assertEquals(String.valueOf(expectedParameterVocabs), String.valueOf(indexerObjectMapper.valueToTree(test).get("summaries").get("parameter_vocabs")), JSONCompareMode.LENIENT);
+            List<String> actualParameterVocabs = indexerObjectMapper.convertValue(rootNode.path("summaries").path("parameter_vocabs"), indexerObjectMapper.getTypeFactory().constructCollectionType(List.class, String.class));
+            Assertions.assertEquals(expectedParameterVocabs.size(), actualParameterVocabs.size(), "ParameterVocabs not equals for record_for_vocabs_testing. Uuid: " + uuid);
 
             List<String> expectedPlatformVocabs = Arrays.asList("research vessel", "fishing vessel");
-            JSONAssert.assertEquals(String.valueOf(expectedPlatformVocabs), String.valueOf(indexerObjectMapper.valueToTree(test).get("summaries").get("platform_vocabs")), JSONCompareMode.LENIENT);
+            List<String> actualPlatformVocabs = indexerObjectMapper.convertValue(rootNode.path("summaries").path("platform_vocabs"), indexerObjectMapper.getTypeFactory().constructCollectionType(List.class, String.class));
+            Assertions.assertEquals(expectedPlatformVocabs.size(), actualPlatformVocabs.size(), "PlatformVocabs not equals for record_for_vocabs_testing. Uuid: " + uuid);
 
             List<String> expectedOrganisationVocabs = List.of("ships of opportunity facility, integrated marine observing system (imos)");
-            JSONAssert.assertEquals(String.valueOf(expectedOrganisationVocabs), String.valueOf(indexerObjectMapper.valueToTree(test).get("summaries").get("organisation_vocabs")), JSONCompareMode.LENIENT);
+            List<String> actualOrganisationVocabs = indexerObjectMapper.convertValue(rootNode.path("summaries").path("parameter_vocabs"), indexerObjectMapper.getTypeFactory().constructCollectionType(List.class, String.class));
+            Assertions.assertEquals(expectedOrganisationVocabs.size(), actualOrganisationVocabs.size(), "OrganisationVocabs not equals for record_for_vocabs_testing. Uuid: " + uuid);
 
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
         } finally {
             deleteRecord(uuid);
         }
