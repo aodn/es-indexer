@@ -349,9 +349,14 @@ public class StacCollectionMapperServiceTests {
                 "Stac not equals for sample14"
         );
     }
-
+    /**
+     * During polygon construction, there are times that the XML do not provide the proper dimension, 2D or 3D.
+     * We assume it is 2D by default and here is the test case for that.
+     *
+     * @throws IOException - Do not expect to throw
+     */
     @Test
-    public void verifyWorks() throws IOException {
+    public void verifyPolygonMissingDimensionAttributeWorks() throws IOException {
         String xml = readResourceFile("classpath:canned/sample15.xml");
         String expected = readResourceFile("classpath:canned/sample15_stac.json");
         indexerService.indexMetadata(xml);
