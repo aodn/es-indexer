@@ -1,6 +1,7 @@
 # Client calling the Indexer API must provide this token in the Authorization header
 # diff core / max value should not impact the run, this is just to verify this is correct
 app:
+  initialiseVocabsIndex: true
   indexing:
     pool:
       core: 2
