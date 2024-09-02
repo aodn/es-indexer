@@ -15,6 +15,7 @@ app:
   http:
     auth-token-header-name: X-API-Key
     authToken: ${INDEXER_APIKEY:sample-auth-token}
+  initialiseVocabsIndex: true
 
 management:
   info:

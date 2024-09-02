@@ -256,9 +256,9 @@ public class IndexerServiceTests extends BaseTestClass {
 
     @Test
     public void verifyExtractedVocabsFromActualRecord() throws IOException {
-        String uuid = "07818819-2e5c-4a12-9395-0082b57b2fe8";
+        String uuid = "fa93c66e-0e56-7e1d-e043-08114f8c1b76";
         try {
-            insertMetadataRecords(uuid, "classpath:canned/record_for_vocabs_testing.xml");
+            insertMetadataRecords(uuid, "classpath:canned/sample11.xml");
 
             indexerService.indexAllMetadataRecordsFromGeoNetwork(true, null);
             Hit<ObjectNode> objectNodeHit = indexerService.getDocumentByUUID(uuid);
@@ -266,18 +266,17 @@ public class IndexerServiceTests extends BaseTestClass {
             String test = String.valueOf(Objects.requireNonNull(objectNodeHit.source()));
             JsonNode rootNode = indexerObjectMapper.readTree(test);
 
-            List<String> expectedParameterVocabs = Arrays.asList("air pressure", "air-sea fluxes", "uv radiation", "wind", "air temperature", "humidity", "precipitation and evaporation", "water pressure", "temperature");
+            List<String> expectedParameterVocabs = Arrays.asList("oxygen", "alkalinity", "nutrient", "carbon", "salinity" );
             List<String> actualParameterVocabs = indexerObjectMapper.convertValue(rootNode.path("summaries").path("parameter_vocabs"), indexerObjectMapper.getTypeFactory().constructCollectionType(List.class, String.class));
-            Assertions.assertEquals(expectedParameterVocabs.size(), actualParameterVocabs.size(), "ParameterVocabs not equals for record_for_vocabs_testing. Uuid: " + uuid);
+            Assertions.assertEquals(expectedParameterVocabs.size(), actualParameterVocabs.size(), "ParameterVocabs not equals for sample11.");
 
-            List<String> expectedPlatformVocabs = Arrays.asList("research vessel", "fishing vessel");
+            List<String> expectedPlatformVocabs = List.of("small boat");
             List<String> actualPlatformVocabs = indexerObjectMapper.convertValue(rootNode.path("summaries").path("platform_vocabs"), indexerObjectMapper.getTypeFactory().constructCollectionType(List.class, String.class));
-            Assertions.assertEquals(expectedPlatformVocabs.size(), actualPlatformVocabs.size(), "PlatformVocabs not equals for record_for_vocabs_testing. Uuid: " + uuid);
+            Assertions.assertEquals(expectedPlatformVocabs.size(), actualPlatformVocabs.size(), "PlatformVocabs not equals for sample11.");
 
-            List<String> expectedOrganisationVocabs = List.of("ships of opportunity facility, integrated marine observing system (imos)");
+            List<String> expectedOrganisationVocabs = List.of("national mooring network facility, integrated marine observing system (imos)");
             List<String> actualOrganisationVocabs = indexerObjectMapper.convertValue(rootNode.path("summaries").path("parameter_vocabs"), indexerObjectMapper.getTypeFactory().constructCollectionType(List.class, String.class));
-            Assertions.assertEquals(expectedOrganisationVocabs.size(), actualOrganisationVocabs.size(), "OrganisationVocabs not equals for record_for_vocabs_testing. Uuid: " + uuid);
-
+            Assertions.assertEquals(expectedOrganisationVocabs.size(), actualOrganisationVocabs.size(), "OrganisationVocabs not equals for sample11.");
         } finally {
             deleteRecord(uuid);
         }

@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -81,5 +82,13 @@ public class IndexerExtController {
     public ResponseEntity<List<JsonNode>> getOrganisationVocabsFromArdc() {
         List<VocabModel> vocabs = vocabService.getVocabTreeFromArdcByType(vocabApiBase, VocabApiPaths.ORGANISATION_VOCAB);
         return ResponseEntity.ok(indexerObjectMapper.valueToTree(vocabs));
+    }
+
+    // this endpoint for debugging/development purposes
+    @GetMapping(path="/vocabs/populate")
+    @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Populate data to the vocabs index")
+    public ResponseEntity<String> populateDataToVocabsIndex() throws IOException {
+        vocabService.populateVocabsData();
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Populated data to the vocabs index");
     }
 }
