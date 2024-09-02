@@ -302,13 +302,13 @@ public class IndexerServiceImpl implements IndexerService {
                     if(callback != null) {
                         callback.onProgress(
                                 String.format(
-                                        "Adding uuid %s to batch, current batch size is %s",
+                                        "Add uuid %s to batch, current batch size is %s",
                                         mappedMetadataValues.getUuid(),
                                         dataSize)
                         );
                     }
 
-                } catch (FactoryException | JAXBException | TransformException e) {
+                } catch (FactoryException | JAXBException | TransformException | NullPointerException e) {
                     /*
                      * it will reach here if cannot extract values of all the keys in GeoNetwork metadata JSON
                      * or ID is not found, which is fatal.
@@ -317,7 +317,7 @@ public class IndexerServiceImpl implements IndexerService {
                     if(callback != null) {
                         callback.onProgress(
                                 String.format(
-                                        "Skip %s due to transform error -> %s",
+                                        "WARNING - Skip %s due to transform error -> %s",
                                         metadataRecord,
                                         e.getMessage()
                                 ));
