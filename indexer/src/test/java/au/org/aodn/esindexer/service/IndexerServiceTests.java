@@ -7,7 +7,10 @@ import co.elastic.clients.elasticsearch.core.search.Hit;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.json.JSONException;
 import org.junit.jupiter.api.*;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -134,9 +137,10 @@ public class IndexerServiceTests extends BaseTestClass {
             String expected = indexerObjectMapper.readTree(expectedData).toPrettyString();
             String actual = indexerObjectMapper.readTree(test).toPrettyString();
 
-            Assertions.assertEquals(expected, actual, "Stac not equals for sample 4. Uuid:" + uuid);
-        }
-        finally {
+            JSONAssert.assertEquals(expected, actual, JSONCompareMode.STRICT);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        } finally {
             deleteRecord(uuid);
         }
     }
@@ -164,7 +168,9 @@ public class IndexerServiceTests extends BaseTestClass {
             String expected = indexerObjectMapper.readTree(expectedData).toPrettyString();
             String actual = indexerObjectMapper.readTree(resultJson).toPrettyString();
 
-            Assertions.assertEquals(expected, actual, "stac not equals for associated/self.json");
+            JSONAssert.assertEquals(expected, actual, JSONCompareMode.STRICT);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
         } finally {
             deleteRecord(targetRecordId, parentId, siblingId, childId);
         }
@@ -193,9 +199,10 @@ public class IndexerServiceTests extends BaseTestClass {
             String expected = indexerObjectMapper.readTree(expectedData).toPrettyString();
             String actual = indexerObjectMapper.readTree(test).toPrettyString();
 
-            Assertions.assertEquals(expected, actual, "Stac not equals for sample 5. Uuid: " + uuid);
-        }
-        finally {
+            JSONAssert.assertEquals(expected, actual, JSONCompareMode.STRICT);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        } finally {
             deleteRecord(uuid);
         }
     }
@@ -219,9 +226,10 @@ public class IndexerServiceTests extends BaseTestClass {
             String expected = indexerObjectMapper.readTree(expectedData).toPrettyString();
             String actual = indexerObjectMapper.readTree(test).toPrettyString();
 
-            Assertions.assertEquals(expected, actual, "Stac not equals for sample 6. Uuid: " + uuid);
-        }
-        finally {
+            JSONAssert.assertEquals(expected, actual, JSONCompareMode.STRICT);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        } finally {
             deleteRecord(uuid);
         }
     }
@@ -247,9 +255,10 @@ public class IndexerServiceTests extends BaseTestClass {
             String expected = indexerObjectMapper.readTree(expectedData).toPrettyString();
             String actual = indexerObjectMapper.readTree(test).toPrettyString();
 
-            Assertions.assertEquals(expected, actual, "Stac not equals for sample 7. Uuid: " + uuid);
-        }
-        finally {
+            JSONAssert.assertEquals(expected, actual, JSONCompareMode.STRICT);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        } finally {
             deleteRecord(uuid);
         }
     }
