@@ -1,0 +1,1483 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdb:MD_Metadata xmlns:mdb="http://standards.iso.org/iso/19115/-3/mdb/2.0" xmlns:mdq="http://standards.iso.org/iso/19157/-2/mdq/1.0" xmlns:mex="http://standards.iso.org/iso/19115/-3/mex/1.0" xmlns:mrl="http://standards.iso.org/iso/19115/-3/mrl/2.0" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:mmi="http://standards.iso.org/iso/19115/-3/mmi/1.0" xmlns:mrc="http://standards.iso.org/iso/19115/-3/mrc/2.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0" xmlns:mas="http://standards.iso.org/iso/19115/-3/mas/1.0" xmlns:mrd="http://standards.iso.org/iso/19115/-3/mrd/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mda="http://standards.iso.org/iso/19115/-3/mda/1.0" xmlns:mri="http://standards.iso.org/iso/19115/-3/mri/1.0" xmlns:mrs="http://standards.iso.org/iso/19115/-3/mrs/1.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:cit="http://standards.iso.org/iso/19115/-3/cit/2.0" xmlns:cat="http://standards.iso.org/iso/19115/-3/cat/1.0" xmlns:mcc="http://standards.iso.org/iso/19115/-3/mcc/1.0" xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0" xmlns:msr="http://standards.iso.org/iso/19115/-3/msr/2.0" xmlns:gex="http://standards.iso.org/iso/19115/-3/gex/1.0" xmlns:lan="http://standards.iso.org/iso/19115/-3/lan/1.0" xmlns:gcx="http://standards.iso.org/iso/19115/-3/gcx/1.0" xmlns:mco="http://standards.iso.org/iso/19115/-3/mco/1.0" xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0" xmlns:mpc="http://standards.iso.org/iso/19115/-3/mpc/1.0" xmlns:mac="http://standards.iso.org/iso/19115/-3/mac/2.0" xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0" xsi:schemaLocation="http://standards.iso.org/iso/19115/-3/cat/1.0 http://standards.iso.org/iso/19115/-3/cat/1.0/cat.xsd http://standards.iso.org/iso/19115/-3/cit/2.0 http://standards.iso.org/iso/19115/-3/cit/2.0/cit.xsd http://standards.iso.org/iso/19115/-3/gcx/1.0 http://standards.iso.org/iso/19115/-3/gcx/1.0/gcx.xsd http://standards.iso.org/iso/19115/-3/gex/1.0 http://standards.iso.org/iso/19115/-3/gex/1.0/gex.xsd http://standards.iso.org/iso/19115/-3/lan/1.0 http://standards.iso.org/iso/19115/-3/lan/1.0/lan.xsd http://standards.iso.org/iso/19115/-3/srv/2.0 http://standards.iso.org/iso/19115/-3/srv/2.0/srv.xsd http://standards.iso.org/iso/19115/-3/mas/1.0 http://standards.iso.org/iso/19115/-3/mas/1.0/mas.xsd http://standards.iso.org/iso/19115/-3/mcc/1.0 http://standards.iso.org/iso/19115/-3/mcc/1.0/mcc.xsd http://standards.iso.org/iso/19115/-3/mco/1.0 http://standards.iso.org/iso/19115/-3/mco/1.0/mco.xsd http://standards.iso.org/iso/19115/-3/mda/2.0 http://standards.iso.org/iso/19115/-3/mda/2.0/mda.xsd http://standards.iso.org/iso/19115/-3/mdb/2.0 http://standards.iso.org/iso/19115/-3/mdb/2.0/mdb.xsd http://standards.iso.org/iso/19115/-3/mds/2.0 http://standards.iso.org/iso/19115/-3/mds/2.0/mds.xsd http://standards.iso.org/iso/19115/-3/mdt/2.0 http://standards.iso.org/iso/19115/-3/mdt/2.0/mdt.xsd http://standards.iso.org/iso/19115/-3/mex/1.0 http://standards.iso.org/iso/19115/-3/mex/1.0/mex.xsd http://standards.iso.org/iso/19115/-3/mmi/1.0 http://standards.iso.org/iso/19115/-3/mmi/1.0/mmi.xsd http://standards.iso.org/iso/19115/-3/mpc/1.0 http://standards.iso.org/iso/19115/-3/mpc/1.0/mpc.xsd http://standards.iso.org/iso/19115/-3/mrc/2.0 http://standards.iso.org/iso/19115/-3/mrc/2.0/mrc.xsd http://standards.iso.org/iso/19115/-3/mrd/1.0 http://standards.iso.org/iso/19115/-3/mrd/1.0/mrd.xsd http://standards.iso.org/iso/19115/-3/mri/1.0 http://standards.iso.org/iso/19115/-3/mri/1.0/mri.xsd http://standards.iso.org/iso/19115/-3/mrl/2.0 http://standards.iso.org/iso/19115/-3/mrl/2.0/mrl.xsd http://standards.iso.org/iso/19115/-3/mrs/1.0 http://standards.iso.org/iso/19115/-3/mrs/1.0/mrs.xsd http://standards.iso.org/iso/19115/-3/msr/2.0 http://standards.iso.org/iso/19115/-3/msr/2.0/msr.xsd http://standards.iso.org/iso/19157/-2/mdq/1.0 http://standards.iso.org/iso/19157/-2/mdq/1.0/mdq.xsd http://standards.iso.org/iso/19115/-3/mac/2.0 http://standards.iso.org/iso/19115/-3/mac/2.0/mac.xsd http://standards.iso.org/iso/19115/-3/gco/1.0 http://standards.iso.org/iso/19115/-3/gco/1.0/gco.xsd http://standards.iso.org/iso/19115/-3/gmw/1.0 http://standards.iso.org/iso/19115/-3/gmw/1.0/gmw.xsd http://www.opengis.net/gml/3.2 http://schemas.opengis.net/gml/3.2.1/gml.xsd http://www.w3.org/1999/xlink http://www.w3.org/1999/xlink.xsd">
+    <mdb:metadataIdentifier>
+        <mcc:MD_Identifier>
+            <mcc:code>
+                <gco:CharacterString>77998615-bbab-4270-bcb1-96c46f56f85a</gco:CharacterString>
+            </mcc:code>
+        </mcc:MD_Identifier>
+    </mdb:metadataIdentifier>
+    <mdb:defaultLocale>
+        <lan:PT_Locale>
+            <lan:language>
+                <lan:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="eng" />
+            </lan:language>
+            <lan:characterEncoding>
+                <lan:MD_CharacterSetCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_CharacterSetCode" codeListValue="utf8" />
+            </lan:characterEncoding>
+        </lan:PT_Locale>
+    </mdb:defaultLocale>
+    <mdb:parentMetadata uuidref="4739e4b0-4dba-4ec5-b658-02c09f27ab9a" />
+    <mdb:metadataScope>
+        <mdb:MD_MetadataScope>
+            <mdb:resourceScope>
+                <mcc:MD_ScopeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ScopeCode" codeListValue="dataset" />
+            </mdb:resourceScope>
+            <mdb:name gco:nilReason="missing">
+                <gco:CharacterString />
+            </mdb:name>
+        </mdb:MD_MetadataScope>
+    </mdb:metadataScope>
+    <mdb:contact>
+        <cit:CI_Responsibility>
+            <cit:role>
+                <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="pointOfContact" />
+            </cit:role>
+            <cit:party>
+                <cit:CI_Organisation>
+                    <cit:name>
+                        <gco:CharacterString>Institute for Marine and Antarctic Studies (IMAS), University of Tasmania (UTAS)</gco:CharacterString>
+                    </cit:name>
+                    <cit:individual>
+                        <cit:CI_Individual>
+                            <cit:name>
+                                <gco:CharacterString>IMAS Data Manager</gco:CharacterString>
+                            </cit:name>
+                            <cit:contactInfo>
+                                <cit:CI_Contact>
+                                    <cit:address>
+                                        <cit:CI_Address>
+                                            <cit:electronicMailAddress>
+                                                <gco:CharacterString>IMAS.DataManager@utas.edu.au</gco:CharacterString>
+                                            </cit:electronicMailAddress>
+                                        </cit:CI_Address>
+                                    </cit:address>
+                                </cit:CI_Contact>
+                            </cit:contactInfo>
+                        </cit:CI_Individual>
+                    </cit:individual>
+                </cit:CI_Organisation>
+            </cit:party>
+        </cit:CI_Responsibility>
+    </mdb:contact>
+    <mdb:dateInfo>
+        <cit:CI_Date>
+            <cit:date>
+                <gco:DateTime>2020-09-23T10:52:41</gco:DateTime>
+            </cit:date>
+            <cit:dateType>
+                <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode" codeListValue="creation" />
+            </cit:dateType>
+        </cit:CI_Date>
+    </mdb:dateInfo>
+    <mdb:dateInfo>
+        <cit:CI_Date>
+            <cit:date>
+                <gco:DateTime>2020-09-23T10:52:41</gco:DateTime>
+            </cit:date>
+            <cit:dateType>
+                <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode" codeListValue="revision" />
+            </cit:dateType>
+        </cit:CI_Date>
+    </mdb:dateInfo>
+    <mdb:metadataStandard>
+        <cit:CI_Citation>
+            <cit:title>
+                <gco:CharacterString>ISO 19115-3:2018</gco:CharacterString>
+            </cit:title>
+        </cit:CI_Citation>
+    </mdb:metadataStandard>
+    <mdb:metadataLinkage>
+        <cit:CI_OnlineResource>
+            <cit:linkage>
+                <gco:CharacterString>https://metadata.imas.utas.edu.au/geonetwork/srv/eng/catalog.search#/metadata/77998615-bbab-4270-bcb1-96c46f56f85a</gco:CharacterString>
+            </cit:linkage>
+            <cit:protocol>
+                <gco:CharacterString>WWW:LINK-1.0-http--metadata-URL</gco:CharacterString>
+            </cit:protocol>
+            <cit:description>
+                <gco:CharacterString>Point of truth URL of this metadata record</gco:CharacterString>
+            </cit:description>
+        </cit:CI_OnlineResource>
+    </mdb:metadataLinkage>
+    <mdb:identificationInfo>
+        <mri:MD_DataIdentification>
+            <mri:citation>
+                <cit:CI_Citation>
+                    <cit:title>
+                        <gco:CharacterString>Collation of spatial seagrass data from 1984 - 2014 for the Great Barrier Reef World Heritage Area</gco:CharacterString>
+                    </cit:title>
+                    <cit:date>
+                        <cit:CI_Date>
+                            <cit:date>
+                                <gco:Date>2017-01-12</gco:Date>
+                            </cit:date>
+                            <cit:dateType>
+                                <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                            </cit:dateType>
+                        </cit:CI_Date>
+                    </cit:date>
+                    <cit:citedResponsibleParty>
+                        <cit:CI_Responsibility>
+                            <cit:role>
+                                <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="principalInvestigator" />
+                            </cit:role>
+                            <cit:party>
+                                <cit:CI_Organisation>
+                                    <cit:name>
+                                        <gco:CharacterString>Centre for Tropical Waters and Aquatic Research (TropWATER), James Cook University (JCU)</gco:CharacterString>
+                                    </cit:name>
+                                    <cit:individual>
+                                        <cit:CI_Individual>
+                                            <cit:name>
+                                                <gco:CharacterString>Coles, Rob, Dr</gco:CharacterString>
+                                            </cit:name>
+                                            <cit:contactInfo>
+                                                <cit:CI_Contact>
+                                                    <cit:phone>
+                                                        <cit:CI_Telephone>
+                                                            <cit:number>
+                                                                <gco:CharacterString>+61 7 4232 2011</gco:CharacterString>
+                                                            </cit:number>
+                                                            <cit:numberType>
+                                                                <cit:CI_TelephoneTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_TelephoneTypeCode" codeListValue="voice" />
+                                                            </cit:numberType>
+                                                        </cit:CI_Telephone>
+                                                    </cit:phone>
+                                                    <cit:address>
+                                                        <cit:CI_Address>
+                                                            <cit:deliveryPoint>
+                                                                <gco:CharacterString>James Cook University (JCU)</gco:CharacterString>
+                                                            </cit:deliveryPoint>
+                                                            <cit:city>
+                                                                <gco:CharacterString>Cairns</gco:CharacterString>
+                                                            </cit:city>
+                                                            <cit:administrativeArea>
+                                                                <gco:CharacterString>Queensland</gco:CharacterString>
+                                                            </cit:administrativeArea>
+                                                            <cit:postalCode>
+                                                                <gco:CharacterString>4878</gco:CharacterString>
+                                                            </cit:postalCode>
+                                                            <cit:country>
+                                                                <gco:CharacterString>Australia</gco:CharacterString>
+                                                            </cit:country>
+                                                            <cit:electronicMailAddress>
+                                                                <gco:CharacterString>rob.coles@jcu.edu.au</gco:CharacterString>
+                                                            </cit:electronicMailAddress>
+                                                        </cit:CI_Address>
+                                                    </cit:address>
+                                                    <cit:onlineResource>
+                                                        <cit:CI_OnlineResource>
+                                                            <cit:linkage>
+                                                                <gco:CharacterString>https://research.jcu.edu.au/portfolio/rob.coles</gco:CharacterString>
+                                                            </cit:linkage>
+                                                            <cit:protocol>
+                                                                <gco:CharacterString>WWW:LINK-1.0-http--related</gco:CharacterString>
+                                                            </cit:protocol>
+                                                            <cit:name>
+                                                                <gco:CharacterString>JCU Profile web page</gco:CharacterString>
+                                                            </cit:name>
+                                                            <cit:description gco:nilReason="missing">
+                                                                <gco:CharacterString />
+                                                            </cit:description>
+                                                        </cit:CI_OnlineResource>
+                                                    </cit:onlineResource>
+                                                </cit:CI_Contact>
+                                            </cit:contactInfo>
+                                            <cit:positionName>
+                                                <gco:CharacterString>Principal Research Scientist</gco:CharacterString>
+                                            </cit:positionName>
+                                        </cit:CI_Individual>
+                                    </cit:individual>
+                                </cit:CI_Organisation>
+                            </cit:party>
+                        </cit:CI_Responsibility>
+                    </cit:citedResponsibleParty>
+                    <cit:citedResponsibleParty>
+                        <cit:CI_Responsibility>
+                            <cit:role>
+                                <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="collaborator" />
+                            </cit:role>
+                            <cit:party>
+                                <cit:CI_Organisation>
+                                    <cit:name>
+                                        <gco:CharacterString>Centre for Tropical Waters and Aquatic Research (TropWATER), James Cook University (JCU)</gco:CharacterString>
+                                    </cit:name>
+                                    <cit:individual>
+                                        <cit:CI_Individual>
+                                            <cit:name>
+                                                <gco:CharacterString>Carter, Alex, Dr</gco:CharacterString>
+                                            </cit:name>
+                                            <cit:contactInfo>
+                                                <cit:CI_Contact>
+                                                    <cit:phone>
+                                                        <cit:CI_Telephone>
+                                                            <cit:number>
+                                                                <gco:CharacterString>+61 7 4232 2015</gco:CharacterString>
+                                                            </cit:number>
+                                                            <cit:numberType>
+                                                                <cit:CI_TelephoneTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_TelephoneTypeCode" codeListValue="voice" />
+                                                            </cit:numberType>
+                                                        </cit:CI_Telephone>
+                                                    </cit:phone>
+                                                    <cit:address>
+                                                        <cit:CI_Address>
+                                                            <cit:deliveryPoint>
+                                                                <gco:CharacterString>James Cook University (JCU)</gco:CharacterString>
+                                                            </cit:deliveryPoint>
+                                                            <cit:city>
+                                                                <gco:CharacterString>Cairns</gco:CharacterString>
+                                                            </cit:city>
+                                                            <cit:administrativeArea>
+                                                                <gco:CharacterString>Queensland</gco:CharacterString>
+                                                            </cit:administrativeArea>
+                                                            <cit:postalCode>
+                                                                <gco:CharacterString>4878</gco:CharacterString>
+                                                            </cit:postalCode>
+                                                            <cit:country>
+                                                                <gco:CharacterString>Australia</gco:CharacterString>
+                                                            </cit:country>
+                                                            <cit:electronicMailAddress>
+                                                                <gco:CharacterString>alexandra.carter@jcu.edu.au</gco:CharacterString>
+                                                            </cit:electronicMailAddress>
+                                                        </cit:CI_Address>
+                                                    </cit:address>
+                                                    <cit:onlineResource>
+                                                        <cit:CI_OnlineResource>
+                                                            <cit:linkage>
+                                                                <gco:CharacterString>https://research.jcu.edu.au/portfolio/alexandra.carter/</gco:CharacterString>
+                                                            </cit:linkage>
+                                                            <cit:protocol>
+                                                                <gco:CharacterString>WWW:LINK-1.0-http--related</gco:CharacterString>
+                                                            </cit:protocol>
+                                                            <cit:name>
+                                                                <gco:CharacterString>JCU Profile web page</gco:CharacterString>
+                                                            </cit:name>
+                                                            <cit:description gco:nilReason="missing">
+                                                                <gco:CharacterString />
+                                                            </cit:description>
+                                                        </cit:CI_OnlineResource>
+                                                    </cit:onlineResource>
+                                                </cit:CI_Contact>
+                                            </cit:contactInfo>
+                                            <cit:positionName>
+                                                <gco:CharacterString>Senior Research Officer</gco:CharacterString>
+                                            </cit:positionName>
+                                        </cit:CI_Individual>
+                                    </cit:individual>
+                                </cit:CI_Organisation>
+                            </cit:party>
+                        </cit:CI_Responsibility>
+                    </cit:citedResponsibleParty>
+                    <cit:citedResponsibleParty>
+                        <cit:CI_Responsibility>
+                            <cit:role>
+                                <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="collaborator" />
+                            </cit:role>
+                            <cit:party>
+                                <cit:CI_Organisation>
+                                    <cit:name>
+                                        <gco:CharacterString>Centre for Tropical Waters and Aquatic Research (TropWATER), James Cook University (JCU)</gco:CharacterString>
+                                    </cit:name>
+                                    <cit:individual>
+                                        <cit:CI_Individual>
+                                            <cit:name>
+                                                <gco:CharacterString>McKenna, Skye</gco:CharacterString>
+                                            </cit:name>
+                                            <cit:contactInfo>
+                                                <cit:CI_Contact>
+                                                    <cit:phone>
+                                                        <cit:CI_Telephone>
+                                                            <cit:number>
+                                                                <gco:CharacterString>+61 7 4232 2023</gco:CharacterString>
+                                                            </cit:number>
+                                                            <cit:numberType>
+                                                                <cit:CI_TelephoneTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_TelephoneTypeCode" codeListValue="voice" />
+                                                            </cit:numberType>
+                                                        </cit:CI_Telephone>
+                                                    </cit:phone>
+                                                    <cit:address>
+                                                        <cit:CI_Address>
+                                                            <cit:deliveryPoint>
+                                                                <gco:CharacterString>James Cook University (JCU)</gco:CharacterString>
+                                                            </cit:deliveryPoint>
+                                                            <cit:city>
+                                                                <gco:CharacterString>Cairns</gco:CharacterString>
+                                                            </cit:city>
+                                                            <cit:administrativeArea>
+                                                                <gco:CharacterString>Queensland</gco:CharacterString>
+                                                            </cit:administrativeArea>
+                                                            <cit:postalCode>
+                                                                <gco:CharacterString>4878</gco:CharacterString>
+                                                            </cit:postalCode>
+                                                            <cit:country>
+                                                                <gco:CharacterString>Australia</gco:CharacterString>
+                                                            </cit:country>
+                                                            <cit:electronicMailAddress>
+                                                                <gco:CharacterString>skye.mckenna@jcu.edu.au</gco:CharacterString>
+                                                            </cit:electronicMailAddress>
+                                                        </cit:CI_Address>
+                                                    </cit:address>
+                                                    <cit:onlineResource>
+                                                        <cit:CI_OnlineResource>
+                                                            <cit:linkage>
+                                                                <gco:CharacterString>https://research.jcu.edu.au/portfolio/skye.mckenna/</gco:CharacterString>
+                                                            </cit:linkage>
+                                                            <cit:protocol>
+                                                                <gco:CharacterString>WWW:LINK-1.0-http--related</gco:CharacterString>
+                                                            </cit:protocol>
+                                                            <cit:name>
+                                                                <gco:CharacterString>JCU Profile web page</gco:CharacterString>
+                                                            </cit:name>
+                                                            <cit:description gco:nilReason="missing">
+                                                                <gco:CharacterString />
+                                                            </cit:description>
+                                                        </cit:CI_OnlineResource>
+                                                    </cit:onlineResource>
+                                                </cit:CI_Contact>
+                                            </cit:contactInfo>
+                                            <cit:positionName>
+                                                <gco:CharacterString>Senior Research Officer</gco:CharacterString>
+                                            </cit:positionName>
+                                        </cit:CI_Individual>
+                                    </cit:individual>
+                                </cit:CI_Organisation>
+                            </cit:party>
+                        </cit:CI_Responsibility>
+                    </cit:citedResponsibleParty>
+                    <cit:citedResponsibleParty>
+                        <cit:CI_Responsibility>
+                            <cit:role>
+                                <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="collaborator" />
+                            </cit:role>
+                            <cit:party>
+                                <cit:CI_Organisation>
+                                    <cit:name>
+                                        <gco:CharacterString>Centre for Tropical Waters and Aquatic Research (TropWATER), James Cook University (JCU)</gco:CharacterString>
+                                    </cit:name>
+                                    <cit:individual>
+                                        <cit:CI_Individual>
+                                            <cit:name>
+                                                <gco:CharacterString>Rasheed, Michael, Dr</gco:CharacterString>
+                                            </cit:name>
+                                            <cit:contactInfo>
+                                                <cit:CI_Contact>
+                                                    <cit:phone>
+                                                        <cit:CI_Telephone>
+                                                            <cit:number>
+                                                                <gco:CharacterString>+61 7 4232 2011</gco:CharacterString>
+                                                            </cit:number>
+                                                            <cit:numberType>
+                                                                <cit:CI_TelephoneTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_TelephoneTypeCode" codeListValue="voice" />
+                                                            </cit:numberType>
+                                                        </cit:CI_Telephone>
+                                                    </cit:phone>
+                                                    <cit:address>
+                                                        <cit:CI_Address>
+                                                            <cit:deliveryPoint>
+                                                                <gco:CharacterString>James Cook University (JCU)</gco:CharacterString>
+                                                            </cit:deliveryPoint>
+                                                            <cit:city>
+                                                                <gco:CharacterString>Cairns</gco:CharacterString>
+                                                            </cit:city>
+                                                            <cit:administrativeArea>
+                                                                <gco:CharacterString>Queensland</gco:CharacterString>
+                                                            </cit:administrativeArea>
+                                                            <cit:postalCode>
+                                                                <gco:CharacterString>4878</gco:CharacterString>
+                                                            </cit:postalCode>
+                                                            <cit:country>
+                                                                <gco:CharacterString>Australia</gco:CharacterString>
+                                                            </cit:country>
+                                                            <cit:electronicMailAddress>
+                                                                <gco:CharacterString>michael.rasheed@jcu.edu.au</gco:CharacterString>
+                                                            </cit:electronicMailAddress>
+                                                        </cit:CI_Address>
+                                                    </cit:address>
+                                                    <cit:onlineResource>
+                                                        <cit:CI_OnlineResource>
+                                                            <cit:linkage>
+                                                                <gco:CharacterString>https://research.jcu.edu.au/portfolio/michael.rasheed/</gco:CharacterString>
+                                                            </cit:linkage>
+                                                            <cit:protocol>
+                                                                <gco:CharacterString>WWW:LINK-1.0-http--related</gco:CharacterString>
+                                                            </cit:protocol>
+                                                            <cit:name>
+                                                                <gco:CharacterString>JCU Profile web page</gco:CharacterString>
+                                                            </cit:name>
+                                                            <cit:description gco:nilReason="missing">
+                                                                <gco:CharacterString />
+                                                            </cit:description>
+                                                        </cit:CI_OnlineResource>
+                                                    </cit:onlineResource>
+                                                </cit:CI_Contact>
+                                            </cit:contactInfo>
+                                            <cit:positionName>
+                                                <gco:CharacterString>Principal Research Scientist</gco:CharacterString>
+                                            </cit:positionName>
+                                        </cit:CI_Individual>
+                                    </cit:individual>
+                                </cit:CI_Organisation>
+                            </cit:party>
+                        </cit:CI_Responsibility>
+                    </cit:citedResponsibleParty>
+                    <cit:citedResponsibleParty>
+                        <cit:CI_Responsibility>
+                            <cit:role>
+                                <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="collaborator" />
+                            </cit:role>
+                            <cit:party>
+                                <cit:CI_Organisation>
+                                    <cit:name>
+                                        <gco:CharacterString>Centre for Tropical Waters and Aquatic Research (TropWATER), James Cook University (JCU)</gco:CharacterString>
+                                    </cit:name>
+                                    <cit:individual>
+                                        <cit:CI_Individual>
+                                            <cit:name>
+                                                <gco:CharacterString>McKenzie, Len</gco:CharacterString>
+                                            </cit:name>
+                                            <cit:contactInfo>
+                                                <cit:CI_Contact>
+                                                    <cit:phone>
+                                                        <cit:CI_Telephone>
+                                                            <cit:number>
+                                                                <gco:CharacterString>+61 7 4232 2012</gco:CharacterString>
+                                                            </cit:number>
+                                                            <cit:numberType>
+                                                                <cit:CI_TelephoneTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_TelephoneTypeCode" codeListValue="voice" />
+                                                            </cit:numberType>
+                                                        </cit:CI_Telephone>
+                                                    </cit:phone>
+                                                    <cit:address>
+                                                        <cit:CI_Address>
+                                                            <cit:deliveryPoint>
+                                                                <gco:CharacterString>James Cook University (JCU)</gco:CharacterString>
+                                                            </cit:deliveryPoint>
+                                                            <cit:city>
+                                                                <gco:CharacterString>Cairns</gco:CharacterString>
+                                                            </cit:city>
+                                                            <cit:administrativeArea>
+                                                                <gco:CharacterString>Queensland</gco:CharacterString>
+                                                            </cit:administrativeArea>
+                                                            <cit:postalCode>
+                                                                <gco:CharacterString>4878</gco:CharacterString>
+                                                            </cit:postalCode>
+                                                            <cit:country>
+                                                                <gco:CharacterString>Australia</gco:CharacterString>
+                                                            </cit:country>
+                                                            <cit:electronicMailAddress>
+                                                                <gco:CharacterString>len.mckenzie@jcu.edu.au</gco:CharacterString>
+                                                            </cit:electronicMailAddress>
+                                                        </cit:CI_Address>
+                                                    </cit:address>
+                                                    <cit:onlineResource>
+                                                        <cit:CI_OnlineResource>
+                                                            <cit:linkage>
+                                                                <gco:CharacterString>https://research.jcu.edu.au/portfolio/len.mckenzie/</gco:CharacterString>
+                                                            </cit:linkage>
+                                                            <cit:protocol>
+                                                                <gco:CharacterString>WWW:LINK-1.0-http--related</gco:CharacterString>
+                                                            </cit:protocol>
+                                                            <cit:name>
+                                                                <gco:CharacterString>JCU Profile web page</gco:CharacterString>
+                                                            </cit:name>
+                                                            <cit:description gco:nilReason="missing">
+                                                                <gco:CharacterString />
+                                                            </cit:description>
+                                                        </cit:CI_OnlineResource>
+                                                    </cit:onlineResource>
+                                                </cit:CI_Contact>
+                                            </cit:contactInfo>
+                                            <cit:positionName>
+                                                <gco:CharacterString>Principal Research Officer</gco:CharacterString>
+                                            </cit:positionName>
+                                        </cit:CI_Individual>
+                                    </cit:individual>
+                                </cit:CI_Organisation>
+                            </cit:party>
+                        </cit:CI_Responsibility>
+                    </cit:citedResponsibleParty>
+                </cit:CI_Citation>
+            </mri:citation>
+            <mri:abstract>
+                <gco:CharacterString>This dataset summarises 30 years of seagrass data collection (1984-2014) within the Great Barrier Reef World Heritage Area. The Meadow data describes seagrass at 1,169 individual or composite meadows. The data includes information on species, meadow type and age and reliability of the data. Data represented in this dataset has been collected by the TropWATER Seagrass Group and CSIRO in a GIS database.
+
+                    In making this data publicly available for management, the authors from the TropWATER Seagrass Group request being contacted and involved in decision making processes that incorporate this data, to ensure its limitations are fully understood. The site and meadow GIS available on eAtlas should be considered a “living” document that will be updated and modified as new data become available.
+
+                    Additional 'point' site data, and alternative download formats are available from eAtlas. https://eatlas.org.au/geonetwork/srv/eng/catalog.search#/metadata/77998615-bbab-4270-bcb1-96c46f56f85a
+
+                    A later version (2020) of this dataset including 35 years of data has been published under "Seagrass mapping synthesis: A resource for coastal management in the Great Barrier Reef (NESP TWQ Project 3.2.1 and 5.4, TropWATER, James Cook University)." https://eatlas.org.au/data/uuid/5011393e-0db7-46ce-a8ee-f331fcf83a88
+
+
+                    Data Dictionary:
+
+                    Seagrass meadow data:
+
+                    - NRM_REGION: The NRM region in which the survey occurred.
+                    - SURVEY_DAT: Survey month and year, or a list of survey dates for meadows repeatedly sampled.
+                    - METHOD: Sampling and mapping methods – GPS/aerial photography, helicopter, walking, boat with camera, diver, grab and/or sled.
+                    - PERSISTENC: Meadows were classed according to four categories: Stable, Variable, Highly variable ephemeral, or Unknown.
+                    - MEADOW_LOC: Meadows were classed according to three categories, although some meadows cover a range of these locations: Intertidal, Shallow subtidal, or Deep subtidal.
+                    - DENSITY: Meadow density categories (light, dense, variable among years, unknown) were determined by the consistency of mean above-ground biomass of the dominant species among all years sampled.
+                    - DOMINANT_S: Dominant species and species present.
+                    - SPP_PRESEN: All species present.
+                    - MEAN_BIOMA: Mean meadow biomass in g DW m-2 (+ standard error if available), or the minimum and maximum biomass recorded for meadows sampled more than once.
+                    - AREA_HA: Meadow area in hectares (+ reliability estimate if available), or the minimum and maximum area recorded for meadows sampled more than once.
+                    - HECTARES: Total extent of meadow (HA)
+                    - PERCENT_CO: Meadow percent cover - this value represents mean seagrass percent cover, or the range of percent cover (if &gt;1 number in the data cell). Meadow percent cover was most commonly calculated in pre-1990s surveys and recorded as “n/a” if not available.
+                    - CUSTODIAN: Data custodians
+                    - COMMENTS
+
+                    Meadow Persistence:
+                    - Stable: enduring meadow form; seagrass presence, biomass and area expected to be stable over time and seagrass meadow expected to be a permanent feature apart from extreme events or sustained long term impacts;
+                    - Variable: meadow presence, biomass and area expected to fluctuate within and among years, but generally some seagrass expected to be present apart from extreme events or sustained long term impacts;
+                    - Highly variable ephemeral: meadow not persistent over time; at some time periods seagrass will be present and at other times absent. Ephemeral meadows that have a naturally extreme level of variation in area and biomass within and among years;
+                    - Unknown: undetermined persistence as meadow sampled only once.
+
+                    Meadow Location:
+                    - Intertidal - all sites surveyed by helicopter or walking within a meadow and/or comments in field books identified an intertidal meadow,
+                    - Shallow subtidal - meadows where free divers SCUBA, sled collection, or cameras were used to sample and water depth was generally &lt;10 m;
+                    - Deep subtidal - for this project meadows &gt;10 m deep were included as deep subtidal.</gco:CharacterString>
+            </mri:abstract>
+            <mri:pointOfContact>
+                <cit:CI_Responsibility>
+                    <cit:role>
+                        <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="pointOfContact" />
+                    </cit:role>
+                    <cit:party>
+                        <cit:CI_Organisation>
+                            <cit:name>
+                                <gco:CharacterString>Centre for Tropical Waters and Aquatic Research (TropWATER), James Cook University (JCU)</gco:CharacterString>
+                            </cit:name>
+                            <cit:individual>
+                                <cit:CI_Individual>
+                                    <cit:name>
+                                        <gco:CharacterString>Carter, Alex, Dr</gco:CharacterString>
+                                    </cit:name>
+                                    <cit:contactInfo>
+                                        <cit:CI_Contact>
+                                            <cit:phone>
+                                                <cit:CI_Telephone>
+                                                    <cit:number>
+                                                        <gco:CharacterString>+61 7 4232 2015</gco:CharacterString>
+                                                    </cit:number>
+                                                    <cit:numberType>
+                                                        <cit:CI_TelephoneTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_TelephoneTypeCode" codeListValue="voice" />
+                                                    </cit:numberType>
+                                                </cit:CI_Telephone>
+                                            </cit:phone>
+                                            <cit:address>
+                                                <cit:CI_Address>
+                                                    <cit:deliveryPoint>
+                                                        <gco:CharacterString>James Cook University (JCU)</gco:CharacterString>
+                                                    </cit:deliveryPoint>
+                                                    <cit:city>
+                                                        <gco:CharacterString>Cairns</gco:CharacterString>
+                                                    </cit:city>
+                                                    <cit:administrativeArea>
+                                                        <gco:CharacterString>Queensland</gco:CharacterString>
+                                                    </cit:administrativeArea>
+                                                    <cit:postalCode>
+                                                        <gco:CharacterString>4878</gco:CharacterString>
+                                                    </cit:postalCode>
+                                                    <cit:country>
+                                                        <gco:CharacterString>Australia</gco:CharacterString>
+                                                    </cit:country>
+                                                    <cit:electronicMailAddress>
+                                                        <gco:CharacterString>alexandra.carter@jcu.edu.au</gco:CharacterString>
+                                                    </cit:electronicMailAddress>
+                                                </cit:CI_Address>
+                                            </cit:address>
+                                            <cit:onlineResource>
+                                                <cit:CI_OnlineResource>
+                                                    <cit:linkage>
+                                                        <gco:CharacterString>http://eatlas.org.au</gco:CharacterString>
+                                                    </cit:linkage>
+                                                    <cit:protocol>
+                                                        <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
+                                                    </cit:protocol>
+                                                    <cit:name>
+                                                        <gco:CharacterString>eAtlas portal</gco:CharacterString>
+                                                    </cit:name>
+                                                    <cit:description gco:nilReason="missing">
+                                                        <gco:CharacterString />
+                                                    </cit:description>
+                                                </cit:CI_OnlineResource>
+                                            </cit:onlineResource>
+                                        </cit:CI_Contact>
+                                    </cit:contactInfo>
+                                </cit:CI_Individual>
+                            </cit:individual>
+                        </cit:CI_Organisation>
+                    </cit:party>
+                </cit:CI_Responsibility>
+            </mri:pointOfContact>
+            <mri:spatialRepresentationType>
+                <mcc:MD_SpatialRepresentationTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_SpatialRepresentationTypeCode" codeListValue="vector" />
+            </mri:spatialRepresentationType>
+            <mri:topicCategory>
+                <mri:MD_TopicCategoryCode>biota</mri:MD_TopicCategoryCode>
+            </mri:topicCategory>
+            <mri:topicCategory />
+            <mri:extent>
+                <gex:EX_Extent>
+                    <gex:description>
+                        <gco:CharacterString>Great Barrier Reef, Australia</gco:CharacterString>
+                    </gex:description>
+                    <gex:geographicElement>
+                        <gex:EX_BoundingPolygon>
+                            <gex:polygon>
+                                <gml:Polygon>
+                                    <gml:exterior>
+                                        <gml:LinearRing>
+                                            <gml:posList>151.083984375 -24.521484375 153.80859375 -24.521484375 153.45703125 -20.830078125 147.12890625 -17.490234375 145.810546875 -13.798828125 144.4921875 -12.832031250000002 144.228515625 -9.84375 142.119140625 -9.931640625 142.3828125 -11.77734375 143.61328125000003 -14.765625 144.755859375 -14.94140625 146.337890625 -19.599609375 148.447265625 -21.005859375000004 151.083984375 -24.521484375</gml:posList>
+                                        </gml:LinearRing>
+                                    </gml:exterior>
+                                </gml:Polygon>
+                            </gex:polygon>
+                        </gex:EX_BoundingPolygon>
+                    </gex:geographicElement>
+                    <gex:temporalElement>
+                        <gex:EX_TemporalExtent>
+                            <gex:extent>
+                                <gml:TimePeriod gml:id="N10315">
+                                    <gml:begin>
+                                        <gml:TimeInstant gml:id="N1031B">
+                                            <gml:timePosition>1984-11-01T00:00:00</gml:timePosition>
+                                        </gml:TimeInstant>
+                                    </gml:begin>
+                                    <gml:end>
+                                        <gml:TimeInstant gml:id="N10326">
+                                            <gml:timePosition>2014-12-31T00:00:00</gml:timePosition>
+                                        </gml:TimeInstant>
+                                    </gml:end>
+                                </gml:TimePeriod>
+                            </gex:extent>
+                        </gex:EX_TemporalExtent>
+                    </gex:temporalElement>
+                </gex:EX_Extent>
+            </mri:extent>
+            <mri:descriptiveKeywords>
+                <mri:MD_Keywords>
+                    <mri:keyword>
+                        <gco:CharacterString>marine</gco:CharacterString>
+                    </mri:keyword>
+                    <mri:type>
+                        <mri:MD_KeywordTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_KeywordTypeCode" codeListValue="theme" />
+                    </mri:type>
+                </mri:MD_Keywords>
+            </mri:descriptiveKeywords>
+            <mri:descriptiveKeywords>
+                <mri:MD_Keywords>
+                    <mri:type>
+                        <mri:MD_KeywordTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_KeywordTypeCode" codeListValue="theme" />
+                    </mri:type>
+                    <mri:thesaurusName>
+                        <cit:CI_Citation>
+                            <cit:title>
+                                <gco:CharacterString>Global Change Master Directory (GCMD) Earth Science Keywords Version 8.0</gco:CharacterString>
+                            </cit:title>
+                            <cit:alternateTitle>
+                                <gco:CharacterString>NASA Global Change Master Directory (GCMD) Earth Science Keywords</gco:CharacterString>
+                            </cit:alternateTitle>
+                            <cit:date>
+                                <cit:CI_Date>
+                                    <cit:date>
+                                        <gco:DateTime>2014-10-20T00:00:00</gco:DateTime>
+                                    </cit:date>
+                                    <cit:dateType>
+                                        <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode" codeListValue="revision" />
+                                    </cit:dateType>
+                                </cit:CI_Date>
+                            </cit:date>
+                            <cit:date>
+                                <cit:CI_Date>
+                                    <cit:date>
+                                        <gco:DateTime>2013-01-01T00:00:00</gco:DateTime>
+                                    </cit:date>
+                                    <cit:dateType>
+                                        <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode" codeListValue="creation" />
+                                    </cit:dateType>
+                                </cit:CI_Date>
+                            </cit:date>
+                            <cit:identifier>
+                                <mcc:MD_Identifier>
+                                    <mcc:code>
+                                        <gcx:Anchor xlink:href="https://metadata.imas.utas.edu.au/geonetwork/srv/eng/thesaurus.download?ref=external.theme.sciencekeywords">geonetwork.thesaurus.external.theme.sciencekeywords</gcx:Anchor>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </cit:identifier>
+                            <cit:citedResponsibleParty>
+                                <cit:CI_Responsibility>
+                                    <cit:role>
+                                        <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="owner" />
+                                    </cit:role>
+                                    <cit:party>
+                                        <cit:CI_Organisation>
+                                            <cit:name>
+                                                <gco:CharacterString>NASA</gco:CharacterString>
+                                            </cit:name>
+                                            <cit:contactInfo>
+                                                <cit:CI_Contact>
+                                                    <cit:onlineResource>
+                                                        <cit:CI_OnlineResource>
+                                                            <cit:linkage>
+                                                                <gco:CharacterString>http://gcmd.gsfc.nasa.gov/Resources/valids</gco:CharacterString>
+                                                            </cit:linkage>
+                                                            <cit:protocol>
+                                                                <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
+                                                            </cit:protocol>
+                                                        </cit:CI_OnlineResource>
+                                                    </cit:onlineResource>
+                                                </cit:CI_Contact>
+                                            </cit:contactInfo>
+                                            <cit:individual>
+                                                <cit:CI_Individual>
+                                                    <cit:name>
+                                                        <gco:CharacterString>Olsen, L.M., G. Major, K. Shein, J. Scialdone, S. Ritz, T. Stevens, M. Morahan, A. Aleman, R. Vogel, S. Leicester, H. Weir, M. Meaux, S. Grebas, C.Solomon, M. Holland, T. Northcutt, R. A. Restrepo, R. Bilodeau</gco:CharacterString>
+                                                    </cit:name>
+                                                </cit:CI_Individual>
+                                            </cit:individual>
+                                        </cit:CI_Organisation>
+                                    </cit:party>
+                                </cit:CI_Responsibility>
+                            </cit:citedResponsibleParty>
+                        </cit:CI_Citation>
+                    </mri:thesaurusName>
+                    <mri:keyword>
+                        <gcx:Anchor xlink:href="http://gcmdservices.gsfc.nasa.gov/kms/concept/09a78997-581b-4d1b-ae71-b2b3f96ef719">EARTH SCIENCE | BIOSPHERE | AQUATIC ECOSYSTEMS | BENTHIC HABITAT</gcx:Anchor>
+                    </mri:keyword>
+                    <mri:keyword>
+                        <gcx:Anchor xlink:href="http://gcmdservices.gsfc.nasa.gov/kms/concept/f6350232-b1c7-458c-bc43-bda357ebb6db">EARTH SCIENCE | BIOSPHERE | AQUATIC ECOSYSTEMS | MARINE HABITAT</gcx:Anchor>
+                    </mri:keyword>
+                    <mri:keyword>
+                        <gcx:Anchor xlink:href="http://gcmdservices.gsfc.nasa.gov/kms/concept/e36c5faa-c772-4bb0-aeca-b361e160ce9d">EARTH SCIENCE | BIOLOGICAL CLASSIFICATION | PLANTS | ANGIOSPERMS (FLOWERING PLANTS) | MONOCOTS | SEAGRASS</gcx:Anchor>
+                    </mri:keyword>
+                </mri:MD_Keywords>
+            </mri:descriptiveKeywords>
+            <mri:descriptiveKeywords>
+                <mri:MD_Keywords>
+                    <mri:keyword>
+                        <gcx:Anchor xlink:href="http://purl.org/au-research/vocabulary/anzsrc-for/2008/059999">Environmental Sciences not elsewhere classified</gcx:Anchor>
+                    </mri:keyword>
+                    <mri:keyword>
+                        <gcx:Anchor xlink:href="http://purl.org/au-research/vocabulary/anzsrc-for/2008/050205">Environmental Management</gcx:Anchor>
+                    </mri:keyword>
+                    <mri:keyword>
+                        <gcx:Anchor xlink:href="http://purl.org/au-research/vocabulary/anzsrc-for/2008/060205">Marine and Estuarine Ecology (incl. Marine Ichthyology)</gcx:Anchor>
+                    </mri:keyword>
+                    <mri:type>
+                        <mri:MD_KeywordTypeCode codeList="http://standards.iso.org/iso/19115/-3/resources/codeList.xml#MD_KeywordTypeCode" codeListValue="theme" />
+                    </mri:type>
+                    <mri:thesaurusName>
+                        <cit:CI_Citation>
+                            <cit:title>
+                                <gcx:Anchor xlink:href="http://purl.org/au-research/vocabulary/anzsrc-for/2008/">Australian and New Zealand Standard Research Classification (ANZSRC): Fields of Research</gcx:Anchor>
+                            </cit:title>
+                            <cit:date>
+                                <cit:CI_Date>
+                                    <cit:date>
+                                        <gco:Date>2021-07-12</gco:Date>
+                                    </cit:date>
+                                    <cit:dateType>
+                                        <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                                    </cit:dateType>
+                                </cit:CI_Date>
+                            </cit:date>
+                            <cit:identifier>
+                                <mcc:MD_Identifier>
+                                    <mcc:code>
+                                        <gcx:Anchor xlink:href="https://metadata.imas.utas.edu.au/geonetwork/srv/eng/thesaurus.download?ref=external.theme.ANZSRC_FOR_Codes">geonetwork.thesaurus.external.theme.ANZSRC_FOR_Codes</gcx:Anchor>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </cit:identifier>
+                        </cit:CI_Citation>
+                    </mri:thesaurusName>
+                </mri:MD_Keywords>
+            </mri:descriptiveKeywords>
+            <mri:descriptiveKeywords>
+                <mri:MD_Keywords>
+                    <mri:keyword>
+                        <gcx:Anchor xlink:href="http://vocab.aodn.org.au/def/discovery_parameter/entity/489">Biotic taxonomic identification</gcx:Anchor>
+                    </mri:keyword>
+                    <mri:keyword>
+                        <gcx:Anchor xlink:href="http://vocab.aodn.org.au/def/discovery_parameter/entity/488">Abundance of biota</gcx:Anchor>
+                    </mri:keyword>
+                    <mri:type>
+                        <mri:MD_KeywordTypeCode codeList="http://standards.iso.org/iso/19115/-3/resources/codeList.xml#MD_KeywordTypeCode" codeListValue="theme" />
+                    </mri:type>
+                    <mri:thesaurusName>
+                        <cit:CI_Citation>
+                            <cit:title>
+                                <gcx:Anchor xlink:href="http://vocab.aodn.org.au/def/discovery_parameter/1">AODN Discovery Parameter Vocabulary</gcx:Anchor>
+                            </cit:title>
+                            <cit:date>
+                                <cit:CI_Date>
+                                    <cit:date>
+                                        <gco:Date>2021-07-21</gco:Date>
+                                    </cit:date>
+                                    <cit:dateType>
+                                        <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                                    </cit:dateType>
+                                </cit:CI_Date>
+                            </cit:date>
+                            <cit:identifier>
+                                <mcc:MD_Identifier>
+                                    <mcc:code>
+                                        <gcx:Anchor xlink:href="https://metadata.imas.utas.edu.au/geonetwork/srv/eng/thesaurus.download?ref=external.theme.aodn_aodn-discovery-parameter-vocabulary">geonetwork.thesaurus.external.theme.aodn_aodn-discovery-parameter-vocabulary</gcx:Anchor>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </cit:identifier>
+                        </cit:CI_Citation>
+                    </mri:thesaurusName>
+                </mri:MD_Keywords>
+            </mri:descriptiveKeywords>
+            <mri:descriptiveKeywords>
+                <mri:MD_Keywords>
+                    <mri:keyword>
+                        <gco:CharacterString>Benthic habitat</gco:CharacterString>
+                    </mri:keyword>
+                    <mri:type>
+                        <mri:MD_KeywordTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_KeywordTypeCode" codeListValue="theme" />
+                    </mri:type>
+                </mri:MD_Keywords>
+            </mri:descriptiveKeywords>
+            <mri:resourceSpecificUsage>
+                <mri:MD_Usage>
+                    <mri:specificUsage>
+                        <gco:CharacterString>Data supplied for use by the Seamap Australia Project.</gco:CharacterString>
+                    </mri:specificUsage>
+                    <mri:userContactInfo>
+                        <cit:CI_Responsibility>
+                            <cit:role gco:nilReason="missing" />
+                            <cit:party>
+                                <cit:CI_Organisation>
+                                    <cit:name gco:nilReason="missing">
+                                        <gco:CharacterString />
+                                    </cit:name>
+                                    <cit:individual>
+                                        <cit:CI_Individual>
+                                            <cit:name gco:nilReason="missing">
+                                                <gco:CharacterString />
+                                            </cit:name>
+                                            <cit:positionName gco:nilReason="missing">
+                                                <gco:CharacterString />
+                                            </cit:positionName>
+                                        </cit:CI_Individual>
+                                    </cit:individual>
+                                </cit:CI_Organisation>
+                            </cit:party>
+                        </cit:CI_Responsibility>
+                    </mri:userContactInfo>
+                </mri:MD_Usage>
+            </mri:resourceSpecificUsage>
+            <mri:resourceConstraints>
+                <mco:MD_SecurityConstraints>
+                    <mco:classification>
+                        <mco:MD_ClassificationCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ClassificationCode" codeListValue="unclassified" />
+                    </mco:classification>
+                </mco:MD_SecurityConstraints>
+            </mri:resourceConstraints>
+            <mri:resourceConstraints>
+                <mco:MD_LegalConstraints>
+                    <mco:graphic>
+                        <mcc:MD_BrowseGraphic>
+                            <mcc:fileName gco:nilReason="inapplicable" />
+                            <mcc:linkage>
+                                <cit:CI_OnlineResource>
+                                    <cit:linkage>
+                                        <gco:CharacterString>http://i.creativecommons.org/l/by/4.0/88x31.png</gco:CharacterString>
+                                    </cit:linkage>
+                                    <cit:protocol>
+                                        <gco:CharacterString>WWW:LINK-1.0-http--related</gco:CharacterString>
+                                    </cit:protocol>
+                                    <cit:description>
+                                        <gco:CharacterString>License Graphic</gco:CharacterString>
+                                    </cit:description>
+                                </cit:CI_OnlineResource>
+                            </mcc:linkage>
+                        </mcc:MD_BrowseGraphic>
+                    </mco:graphic>
+                    <mco:reference>
+                        <cit:CI_Citation>
+                            <cit:title>
+                                <gco:CharacterString>Creative Commons Attribution 4.0 International License</gco:CharacterString>
+                            </cit:title>
+                            <cit:citedResponsibleParty>
+                                <cit:CI_Responsibility>
+                                    <cit:role>
+                                        <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="" />
+                                    </cit:role>
+                                    <cit:party>
+                                        <cit:CI_Organisation>
+                                            <cit:name gco:nilReason="missing">
+                                                <gco:CharacterString />
+                                            </cit:name>
+                                            <cit:contactInfo>
+                                                <cit:CI_Contact>
+                                                    <cit:address>
+                                                        <cit:CI_Address>
+                                                            <cit:electronicMailAddress gco:nilReason="missing">
+                                                                <gco:CharacterString />
+                                                            </cit:electronicMailAddress>
+                                                        </cit:CI_Address>
+                                                    </cit:address>
+                                                    <cit:onlineResource>
+                                                        <cit:CI_OnlineResource>
+                                                            <cit:linkage>
+                                                                <gco:CharacterString>http://creativecommons.org/international/</gco:CharacterString>
+                                                            </cit:linkage>
+                                                            <cit:protocol>
+                                                                <gco:CharacterString>WWW:LINK-1.0-http--related</gco:CharacterString>
+                                                            </cit:protocol>
+                                                            <cit:name gco:nilReason="missing">
+                                                                <gco:CharacterString />
+                                                            </cit:name>
+                                                            <cit:description gco:nilReason="missing">
+                                                                <gco:CharacterString />
+                                                            </cit:description>
+                                                        </cit:CI_OnlineResource>
+                                                    </cit:onlineResource>
+                                                </cit:CI_Contact>
+                                            </cit:contactInfo>
+                                        </cit:CI_Organisation>
+                                    </cit:party>
+                                </cit:CI_Responsibility>
+                            </cit:citedResponsibleParty>
+                            <cit:onlineResource>
+                                <cit:CI_OnlineResource>
+                                    <cit:linkage>
+                                        <gco:CharacterString>http://creativecommons.org/licenses/by/4.0/</gco:CharacterString>
+                                    </cit:linkage>
+                                    <cit:protocol>
+                                        <gco:CharacterString>WWW:LINK-1.0-http--related</gco:CharacterString>
+                                    </cit:protocol>
+                                    <cit:description>
+                                        <gco:CharacterString>License Text</gco:CharacterString>
+                                    </cit:description>
+                                </cit:CI_OnlineResource>
+                            </cit:onlineResource>
+                        </cit:CI_Citation>
+                    </mco:reference>
+                    <mco:otherConstraints>
+                        <gco:CharacterString>Cite data as: Coles R, Carter A, McKenna S, Rasheed M, McKenzie L (2014). Collation of spatial seagrass data from 1984 - 2014 for the Great Barrier Reef World Heritage Area. James Cook University. Data accessed at http://metadata.imas.utas.edu.au/geonetwork/srv/en/metadata.show?uuid=77998615-bbab-4270-bcb1-96c46f56f85a on (access date).</gco:CharacterString>
+                    </mco:otherConstraints>
+                    <mco:otherConstraints>
+                        <gco:CharacterString>This dataset is hosted by the Institute for Marine and Antarctic Studies (IMAS), University of Tasmania, on behalf of James Cook University (JCU) for the purposes of the Seamap Australia collaborative project (testing a national marine benthic habitat classification scheme).</gco:CharacterString>
+                    </mco:otherConstraints>
+                </mco:MD_LegalConstraints>
+            </mri:resourceConstraints>
+            <mri:resourceConstraints>
+                <mco:MD_LegalConstraints>
+                    <mco:useLimitation>
+                        <gco:CharacterString>TropWATER gives no warranty in relation to the data (including accuracy, reliability, completeness, currency or suitability) and accepts no liability (including without limitation, liability in negligence) for any loss, damage or costs (including consequential damage) relating to any use of the data. TropWATER reserves the right to update, modify or correct the data at any time. The limitations of some older data included need to be understood and recognised. The TropWATER Seagrass Group would appreciate the opportunity to review documents providing research, management, legislative or compliance advice based on this data.</gco:CharacterString>
+                    </mco:useLimitation>
+                </mco:MD_LegalConstraints>
+            </mri:resourceConstraints>
+            <mri:defaultLocale>
+                <lan:PT_Locale>
+                    <lan:language>
+                        <lan:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="eng" />
+                    </lan:language>
+                    <lan:characterEncoding>
+                        <lan:MD_CharacterSetCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_CharacterSetCode" codeListValue="utf8" />
+                    </lan:characterEncoding>
+                </lan:PT_Locale>
+            </mri:defaultLocale>
+            <mri:supplementalInformation>
+                <gco:CharacterString>Birch, W. R. and Birch, M. 1984. Succession and pattern of tropical intertidal seagrasses in Cockle Bay, Queensland, Australia: a decade of observations. Aquatic Botany, 19: 343-367
+                    Coles, R., McKenzie, L., De'ath, G., Roelofs, A. and Long, W. L. 2009. Spatial distribution of deepwater seagrass in the inter-reef lagoon of the Great Barrier Reef World Heritage Area. Marine Ecology Progress Series, 392: 57-68
+                    Coles, R. G., Lee Long, W. J., Watson, R. A. and Derbyshire, K. J. 1993. Distribution of seagrasses, and their fish and penaeid prawn communities, in Cairns Harbour, a tropical estuary, Northern Queensland, Australia. Marine and Freshwater Research, 44: 193-210
+                    Coles, R. G., McKenzie, L. J., Rasheed, M. A., Mellors, J. E., Taylor, H., Dew, K., McKenna, S., L., S. T., B., C. A. and A., G. 2007. Status and Trends of Seagrass Habitats in the Great Barrier Reef World Heritage Area. Report to the Marine and Tropical Sciences Research Facility. Reef and Rainforest Research Centre Limited, Cairns, pp.
+                    Fourqurean, J. W., Duarte, C. M., Kennedy, H., Marba, N., Holmer, M., Mateo, M. A., Apostolaki, E. T., Kendrick, G. A., Krause-Jensen, D., McGlathery, K. J. and Serrano, O. 2012. Seagrass ecosystems as a globally significant carbon stock. Nature Geoscience, 5: 505-509
+                    Grech, A., Chartrand-Miller, K., Erftemeijer, P., Fonseca, M., McKenzie, L., Rasheed, M., Taylor, H. and Coles, R. 2012. A comparison of threats, vulnerabilities and management approaches in global seagrass bioregions. Environmental Research Letters, 7: 024006
+                    Grech, A. and Coles, R. G. 2011. Interactions between a Trawl Fishery and Spatial Closures for Biodiversity Conservation in the Great Barrier Reef World Heritage Area, Australia. PLoS ONE, 6.6: e21094
+                    Kenworthy, W. J., Wyllie-Echeverria, S., Coles, R. G., Pergent, G. and Pergent-Martini, C. 2006. Seagrass conservation biology: an interdisciplinary science for protection of the seagrass biome. Page 595-623. In A. W. D. Larkum, R. J. Orth and C. M. Duarte (eds), Seagrasses: Biology, Ecology and Conservation. Springer, The Netherlands
+                    Kuo, J. and McComb, A. J. 1989. Seagrass taxonomy, structure and development. Page 6-73. In A. W. D. Larkum, A. J. McComb and S. A. Shepherd (eds), Biology of seagrasses: a treatise on the biology of seagrasses with special reference to the Australian Region. Elsevier, New York
+                    Lavery, P. S., Mateo, M. A., Serrano, O. and Rozaimi, M. 2013. Variability in the carbon storage of seagrass habitats and its implications for global estimates of blue carbon ecosystem service. PLoS ONE, 8: e73748
+                    Marsh, H., O'Shea, T. J. and Reynolds III, J. E. 2011. Ecology and conservation of the sirenia: dugongs and manatees. Cambridge University Press,
+                    McKenzie, L., Collier, C. and Waycott, M. 2014a. Reef Rescue Marine Monitoring Program: Inshore seagrass, annual report for the sampling period 1st July 2011 – 31st May 2012. TropWATER, James Cook University, pp.
+                    McKenzie, L. J., Yoshida, R. L., Grech, A. and Coles, R. G. 2014b. Composite of coastal seagrass meadows in Queensland, Australia - November 1984 to June 2010. PANGAEA.
+                    Mellors, J. E. 1991. An evaluation of a rapid visual technique for estimating seagrass biomass. Aquatic Botany, 42: 67-73
+                    Pendleton, L., Donato, D. C., Murray, B. C., Crooks, S., Jenkins, W. A., Sifleet, S., Craft, C., Fourqurean, J. W., Kauffman, J. B., Marba, N., Megonigal, P., Pidgeon, E., Herr, D., Gordon, D. and Baldera, A. 2012. Estimating Global "Blue Carbon" Emissions from Conversion and Degradation of Vegetated Coastal Ecosystems. PLoS One, 7:
+                    Pitcher, C. R., Doherty, P., Arnold, P., Hooper, J., Gribble, N., Bartlett, C., Browne, M., Campbell, N., Cannard, T., Cappo, M., Carini, G., Chalmers, S., Cheers, S., Chetwynd, D., Colefax, A., Coles, R., Cook, S., Davie, P., De'ath, G., Devereux, D., Done, B., Donovan, T., Ehrke, B., Ellis, N., Ericson, G., Fellegara, I., Forcey, K., Furey, M., Gledhill, D., Good, N., Gordon, S., Haywood, M., Hendriks, P., Jacobsen, I., Johnson, J., Jones, M., Kinninmoth, S., Kistle, S., Last, P., Leite, A., Marks, S., McLeod, I., Oczkowicz, S., Robinson, M., Rose, C., Seabright, D., Sheils, J., Sherlock, M., Skelton, P., Smith, D., Smith, G., Speare, P., Stowar, M., Strickland, C., Van der Geest, C., Venables, W., Walsh, C., Wassenberg, T., Welna, A. and Yearsley, G. 2007. Seabed Biodiversity on the Continental Shelf of the Great Barrier Reef World Heritage Area. AIMS/CSIRO/QM/QDPI CRC Reef Research Task Final
+                    Report. 320 pp.
+                    Rasheed, M. A., McKenna, S. A., Carter, A. B. and Coles, R. G. 2014. Contrasting recovery of shallow and deep water seagrass communities following climate associated losses in tropical north Queensland, Australia. Marine pollution bulletin, 83: 491-499
+                    Watson, R. A., Coles, R. G. and Lee Long, W. J. 1993. Simulation estimates of annual yield and landed value for commercial penaeid prawns from a tropical seagrass habitat, northern Queensland, Australia. Marine and Freshwater Research, 44: 211-220</gco:CharacterString>
+            </mri:supplementalInformation>
+        </mri:MD_DataIdentification>
+    </mdb:identificationInfo>
+    <mdb:contentInfo>
+        <mrc:MD_CoverageDescription>
+            <mrc:attributeDescription gco:nilReason="inapplicable" />
+            <mrc:attributeGroup>
+                <mrc:MD_AttributeGroup>
+                    <mrc:contentType>
+                        <mrc:MD_CoverageContentTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_CoverageContentTypeCode" codeListValue="physicalMeasurement" />
+                    </mrc:contentType>
+                    <mrc:attribute>
+                        <mrc:MD_SampleDimension>
+                            <mrc:description>
+                                <gco:CharacterString>The NRM region in which the survey occurred.</gco:CharacterString>
+                            </mrc:description>
+                            <mrc:name>
+                                <mcc:MD_Identifier>
+                                    <mcc:code>
+                                        <gco:CharacterString>NRM_REGION</gco:CharacterString>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </mrc:name>
+                            <mrc:units>
+                                <gml:BaseUnit gml:id="d20e465">
+                                    <gml:identifier codeSpace="unknown" />
+                                    <gml:name />
+                                    <gml:unitsSystem />
+                                </gml:BaseUnit>
+                            </mrc:units>
+                        </mrc:MD_SampleDimension>
+                    </mrc:attribute>
+                    <mrc:attribute>
+                        <mrc:MD_SampleDimension>
+                            <mrc:description>
+                                <gco:CharacterString>Survey month and year, or a list of survey dates for meadows repeatedly sampled.</gco:CharacterString>
+                            </mrc:description>
+                            <mrc:name>
+                                <mcc:MD_Identifier>
+                                    <mcc:code>
+                                        <gco:CharacterString>SURVEY_DAT</gco:CharacterString>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </mrc:name>
+                            <mrc:units>
+                                <gml:BaseUnit gml:id="d20e476">
+                                    <gml:identifier codeSpace="unknown" />
+                                    <gml:name />
+                                    <gml:unitsSystem />
+                                </gml:BaseUnit>
+                            </mrc:units>
+                        </mrc:MD_SampleDimension>
+                    </mrc:attribute>
+                    <mrc:attribute>
+                        <mrc:MD_SampleDimension>
+                            <mrc:description>
+                                <gco:CharacterString>Sampling and mapping methods – GPS/aerial photography, helicopter, walking, boat with camera, diver, grab and/or sled.</gco:CharacterString>
+                            </mrc:description>
+                            <mrc:name>
+                                <mcc:MD_Identifier>
+                                    <mcc:code>
+                                        <gco:CharacterString>METHOD</gco:CharacterString>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </mrc:name>
+                            <mrc:units>
+                                <gml:BaseUnit gml:id="d20e487">
+                                    <gml:identifier codeSpace="unknown" />
+                                    <gml:name />
+                                    <gml:unitsSystem />
+                                </gml:BaseUnit>
+                            </mrc:units>
+                        </mrc:MD_SampleDimension>
+                    </mrc:attribute>
+                    <mrc:attribute>
+                        <mrc:MD_SampleDimension>
+                            <mrc:description>
+                                <gco:CharacterString>Meadows were classed according to four categories: Stable, Variable, Highly variable ephemeral, or Unknown.</gco:CharacterString>
+                            </mrc:description>
+                            <mrc:name>
+                                <mcc:MD_Identifier>
+                                    <mcc:code>
+                                        <gco:CharacterString>PERSISTENC</gco:CharacterString>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </mrc:name>
+                            <mrc:units>
+                                <gml:BaseUnit gml:id="d20e498">
+                                    <gml:identifier codeSpace="unknown" />
+                                    <gml:name />
+                                    <gml:unitsSystem />
+                                </gml:BaseUnit>
+                            </mrc:units>
+                        </mrc:MD_SampleDimension>
+                    </mrc:attribute>
+                    <mrc:attribute>
+                        <mrc:MD_SampleDimension>
+                            <mrc:description>
+                                <gco:CharacterString>Meadows were classed according to three categories, although some meadows cover a range of these locations: Intertidal, Shallow subtidal, or Deep subtidal.</gco:CharacterString>
+                            </mrc:description>
+                            <mrc:name>
+                                <mcc:MD_Identifier>
+                                    <mcc:code>
+                                        <gco:CharacterString>MEADOW_LOC</gco:CharacterString>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </mrc:name>
+                            <mrc:units>
+                                <gml:BaseUnit gml:id="d20e509">
+                                    <gml:identifier codeSpace="unknown" />
+                                    <gml:name />
+                                    <gml:unitsSystem />
+                                </gml:BaseUnit>
+                            </mrc:units>
+                        </mrc:MD_SampleDimension>
+                    </mrc:attribute>
+                    <mrc:attribute>
+                        <mrc:MD_SampleDimension>
+                            <mrc:description>
+                                <gco:CharacterString>Meadow density categories (light, dense, variable among years, unknown) were determined by the consistency of mean above-ground biomass of the dominant species among all years sampled.</gco:CharacterString>
+                            </mrc:description>
+                            <mrc:name>
+                                <mcc:MD_Identifier>
+                                    <mcc:code>
+                                        <gco:CharacterString>DENSITY</gco:CharacterString>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </mrc:name>
+                            <mrc:units>
+                                <gml:BaseUnit gml:id="d20e520">
+                                    <gml:identifier codeSpace="unknown" />
+                                    <gml:name />
+                                    <gml:unitsSystem />
+                                </gml:BaseUnit>
+                            </mrc:units>
+                        </mrc:MD_SampleDimension>
+                    </mrc:attribute>
+                    <mrc:attribute>
+                        <mrc:MD_SampleDimension>
+                            <mrc:description>
+                                <gco:CharacterString>Dominant species and species present.</gco:CharacterString>
+                            </mrc:description>
+                            <mrc:name>
+                                <mcc:MD_Identifier>
+                                    <mcc:code>
+                                        <gco:CharacterString>DOMINANT_S</gco:CharacterString>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </mrc:name>
+                            <mrc:name>
+                                <mcc:MD_Identifier>
+                                    <mcc:code>
+                                        <gcx:Anchor xlink:href="http://vocab.aodn.org.au/def/discovery_parameter/entity/489">Biotic taxonomic identification</gcx:Anchor>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </mrc:name>
+                            <mrc:units>
+                                <gml:BaseUnit gml:id="d20e531">
+                                    <gml:identifier codeSpace="unknown" />
+                                    <gml:name />
+                                    <gml:unitsSystem />
+                                </gml:BaseUnit>
+                            </mrc:units>
+                        </mrc:MD_SampleDimension>
+                    </mrc:attribute>
+                    <mrc:attribute>
+                        <mrc:MD_SampleDimension>
+                            <mrc:description>
+                                <gco:CharacterString>Mean meadow biomass in g DW m-2 (+ standard error if available), or the minimum and maximum biomass recorded for meadows sampled more than once.</gco:CharacterString>
+                            </mrc:description>
+                            <mrc:name>
+                                <mcc:MD_Identifier>
+                                    <mcc:code>
+                                        <gco:CharacterString>MEAN_BIOMA</gco:CharacterString>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </mrc:name>
+                            <mrc:units>
+                                <gml:BaseUnit gml:id="d20e553">
+                                    <gml:identifier codeSpace="unknown" />
+                                    <gml:name>Grams dry weight per square metre</gml:name>
+                                    <gml:unitsSystem />
+                                </gml:BaseUnit>
+                            </mrc:units>
+                        </mrc:MD_SampleDimension>
+                    </mrc:attribute>
+                    <mrc:attribute>
+                        <mrc:MD_SampleDimension>
+                            <mrc:description>
+                                <gco:CharacterString>Meadow area in hectares (+ reliability estimate if available), or the minimum and maximum area recorded for meadows sampled more than once.</gco:CharacterString>
+                            </mrc:description>
+                            <mrc:name>
+                                <mcc:MD_Identifier>
+                                    <mcc:code>
+                                        <gco:CharacterString>AREA_HA</gco:CharacterString>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </mrc:name>
+                            <mrc:units>
+                                <gml:BaseUnit gml:id="d20e571">
+                                    <gml:identifier codeSpace="unknown" />
+                                    <gml:name>Hectares</gml:name>
+                                    <gml:unitsSystem />
+                                </gml:BaseUnit>
+                            </mrc:units>
+                        </mrc:MD_SampleDimension>
+                    </mrc:attribute>
+                    <mrc:attribute>
+                        <mrc:MD_SampleDimension>
+                            <mrc:description>
+                                <gco:CharacterString>Total extent of meadow (HA)</gco:CharacterString>
+                            </mrc:description>
+                            <mrc:name>
+                                <mcc:MD_Identifier>
+                                    <mcc:code>
+                                        <gco:CharacterString>HECTARES</gco:CharacterString>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </mrc:name>
+                            <mrc:units>
+                                <gml:BaseUnit gml:id="d20e589">
+                                    <gml:identifier codeSpace="unknown" />
+                                    <gml:name>Hectares</gml:name>
+                                    <gml:unitsSystem />
+                                </gml:BaseUnit>
+                            </mrc:units>
+                        </mrc:MD_SampleDimension>
+                    </mrc:attribute>
+                    <mrc:attribute>
+                        <mrc:MD_SampleDimension>
+                            <mrc:description>
+                                <gco:CharacterString>Meadow percent cover - this value represents mean seagrass percent cover, or the range of percent cover (if &gt;1 number in the data cell). Meadow percent cover was most commonly calculated in pre-1990s surveys and recorded as “n/a” if not available.</gco:CharacterString>
+                            </mrc:description>
+                            <mrc:name>
+                                <mcc:MD_Identifier>
+                                    <mcc:code>
+                                        <gco:CharacterString>PERCENT_CO</gco:CharacterString>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </mrc:name>
+                            <mrc:name>
+                                <mcc:MD_Identifier>
+                                    <mcc:code>
+                                        <gcx:Anchor xlink:href="http://vocab.aodn.org.au/def/discovery_parameter/entity/488">Abundance of biota</gcx:Anchor>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </mrc:name>
+                            <mrc:units>
+                                <gml:BaseUnit gml:id="d20e607">
+                                    <gml:identifier codeSpace="unknown">http://vocab.nerc.ac.uk/collection/P06/current/UPCT</gml:identifier>
+                                    <gml:name>Percent</gml:name>
+                                    <gml:unitsSystem />
+                                </gml:BaseUnit>
+                            </mrc:units>
+                        </mrc:MD_SampleDimension>
+                    </mrc:attribute>
+                    <mrc:attribute>
+                        <mrc:MD_SampleDimension>
+                            <mrc:description>
+                                <gco:CharacterString>Data custodians</gco:CharacterString>
+                            </mrc:description>
+                            <mrc:name>
+                                <mcc:MD_Identifier>
+                                    <mcc:code>
+                                        <gco:CharacterString>CUSTODIAN</gco:CharacterString>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </mrc:name>
+                            <mrc:units>
+                                <gml:BaseUnit gml:id="d20e641">
+                                    <gml:identifier codeSpace="unknown" />
+                                    <gml:name />
+                                    <gml:unitsSystem />
+                                </gml:BaseUnit>
+                            </mrc:units>
+                        </mrc:MD_SampleDimension>
+                    </mrc:attribute>
+                    <mrc:attribute>
+                        <mrc:MD_SampleDimension>
+                            <mrc:description>
+                                <gco:CharacterString>Appended to original data for styling purposes for the Seamap Australia Project.</gco:CharacterString>
+                            </mrc:description>
+                            <mrc:name>
+                                <mcc:MD_Identifier>
+                                    <mcc:code>
+                                        <gco:CharacterString>Benthic habitat</gco:CharacterString>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </mrc:name>
+                            <mrc:name>
+                                <mcc:MD_Identifier>
+                                    <mcc:code>
+                                        <gco:CharacterString>SM_HAB_CLS</gco:CharacterString>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </mrc:name>
+                            <mrc:units>
+                                <gml:BaseUnit gml:id="d20e652">
+                                    <gml:identifier codeSpace="unknown" />
+                                    <gml:name />
+                                    <gml:unitsSystem />
+                                </gml:BaseUnit>
+                            </mrc:units>
+                        </mrc:MD_SampleDimension>
+                    </mrc:attribute>
+                </mrc:MD_AttributeGroup>
+            </mrc:attributeGroup>
+        </mrc:MD_CoverageDescription>
+    </mdb:contentInfo>
+    <mdb:distributionInfo>
+        <mrd:MD_Distribution>
+            <mrd:distributionFormat>
+                <mrd:MD_Format>
+                    <mrd:formatSpecificationCitation>
+                        <cit:CI_Citation>
+                            <cit:title>
+                                <gco:CharacterString>ESRI Shapefile</gco:CharacterString>
+                            </cit:title>
+                            <cit:alternateTitle />
+                            <cit:date gco:nilReason="unknown" />
+                            <cit:edition>
+                                <gco:CharacterString>-</gco:CharacterString>
+                            </cit:edition>
+                        </cit:CI_Citation>
+                    </mrd:formatSpecificationCitation>
+                </mrd:MD_Format>
+            </mrd:distributionFormat>
+            <mrd:transferOptions>
+                <mrd:MD_DigitalTransferOptions>
+                    <mrd:onLine>
+                        <cit:CI_OnlineResource>
+                            <cit:linkage>
+                                <gco:CharacterString>https://geoserver.imas.utas.edu.au/geoserver/seamap/wfs?version=1.0.0&amp;request=GetFeature&amp;typeName=SeamapAus_QLD_GBRWHA_seagrass&amp;outputFormat=SHAPE-ZIP</gco:CharacterString>
+                            </cit:linkage>
+                            <cit:protocol>
+                                <gco:CharacterString>OGC:WFS-1.0.0-http-get-feature--shapefile</gco:CharacterString>
+                            </cit:protocol>
+                            <cit:name>
+                                <gco:CharacterString>SHAPE-ZIP</gco:CharacterString>
+                            </cit:name>
+                            <cit:description>
+                                <gco:CharacterString>DATA ACCESS - This OGC WFS service returns the data (GBRWHA seagrass) in Shapefile format.</gco:CharacterString>
+                            </cit:description>
+                        </cit:CI_OnlineResource>
+                    </mrd:onLine>
+                    <mrd:onLine>
+                        <cit:CI_OnlineResource>
+                            <cit:linkage>
+                                <gco:CharacterString>https://geoserver.imas.utas.edu.au/geoserver/seamap/wms</gco:CharacterString>
+                            </cit:linkage>
+                            <cit:protocol>
+                                <gco:CharacterString>OGC:WMS-1.3.0-http-get-map</gco:CharacterString>
+                            </cit:protocol>
+                            <cit:name>
+                                <gco:CharacterString>seamap:SeamapAus_QLD_GBRWHA_seagrass</gco:CharacterString>
+                            </cit:name>
+                            <cit:description>
+                                <gco:CharacterString>MAP - GBRWHA seagrass</gco:CharacterString>
+                            </cit:description>
+                        </cit:CI_OnlineResource>
+                    </mrd:onLine>
+                    <mrd:onLine>
+                        <cit:CI_OnlineResource>
+                            <cit:linkage>
+                                <gco:CharacterString>http://nesptropical.edu.au/wp-content/uploads/2016/03/NESP-TWQ-3.1-FINAL-REPORT.pdf</gco:CharacterString>
+                            </cit:linkage>
+                            <cit:protocol>
+                                <gco:CharacterString>WWW:LINK-1.0-http--publication</gco:CharacterString>
+                            </cit:protocol>
+                            <cit:name>
+                                <gco:CharacterString>REPORT - Project Final Report [PDF]</gco:CharacterString>
+                            </cit:name>
+                        </cit:CI_OnlineResource>
+                    </mrd:onLine>
+                    <mrd:onLine>
+                        <cit:CI_OnlineResource>
+                            <cit:linkage>
+                                <gco:CharacterString>http://eatlas.org.au/nesp-twq-1/gbr-seagrass-mapping-3-1</gco:CharacterString>
+                            </cit:linkage>
+                            <cit:protocol>
+                                <gco:CharacterString>WWW:LINK-1.0-http--related</gco:CharacterString>
+                            </cit:protocol>
+                            <cit:name>
+                                <gco:CharacterString>WEBSITE - Project website</gco:CharacterString>
+                            </cit:name>
+                        </cit:CI_OnlineResource>
+                    </mrd:onLine>
+                    <mrd:onLine>
+                        <cit:CI_OnlineResource>
+                            <cit:linkage>
+                                <gco:CharacterString>https://eatlas.org.au/geonetwork/srv/eng/catalog.search#/metadata/77998615-bbab-4270-bcb1-96c46f56f85a</gco:CharacterString>
+                            </cit:linkage>
+                            <cit:protocol>
+                                <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
+                            </cit:protocol>
+                            <cit:name>
+                                <gco:CharacterString>Original metadata record [eAtlas catalogue]</gco:CharacterString>
+                            </cit:name>
+                        </cit:CI_OnlineResource>
+                    </mrd:onLine>
+                </mrd:MD_DigitalTransferOptions>
+            </mrd:transferOptions>
+        </mrd:MD_Distribution>
+    </mdb:distributionInfo>
+    <mdb:dataQualityInfo>
+        <mdq:DQ_DataQuality>
+            <mdq:scope>
+                <mcc:MD_Scope>
+                    <mcc:level>
+                        <mcc:MD_ScopeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ScopeCode" codeListValue="dataset" />
+                    </mcc:level>
+                </mcc:MD_Scope>
+            </mdq:scope>
+            <mdq:report>
+                <mdq:DQ_AbsoluteExternalPositionalAccuracy>
+                    <mdq:measure>
+                        <mdq:DQ_MeasureReference>
+                            <mdq:nameOfMeasure>
+                                <gco:CharacterString>Spatial limits</gco:CharacterString>
+                            </mdq:nameOfMeasure>
+                            <mdq:measureDescription>
+                                <gco:CharacterString>Seagrass data north and south of the GBRWHA were excluded from the layers but are available on request. Data were included when sites and meadows extended west of the GBRWHA boundary into coastal and estuarine water immediately adjacent. In shallow coastal waters seagrass meadows have been mapped and estimates of meadow boundaries are provided in the meadow GIS layer. For deeper water seagrass information is provided as data points in the site layer. Modelled distributions are available (Coles et al 2009; Pitcher et al 2007) but not included here.</gco:CharacterString>
+                            </mdq:measureDescription>
+                        </mdq:DQ_MeasureReference>
+                    </mdq:measure>
+                </mdq:DQ_AbsoluteExternalPositionalAccuracy>
+            </mdq:report>
+            <mdq:report>
+                <mdq:DQ_TemporalValidity>
+                    <mdq:measure>
+                        <mdq:DQ_MeasureReference>
+                            <mdq:nameOfMeasure>
+                                <gco:CharacterString>Data limitations</gco:CharacterString>
+                            </mdq:nameOfMeasure>
+                            <mdq:measureDescription>
+                                <gco:CharacterString>Data included extends back to the mid-1980s. Large parts of the coast have not been mapped for seagrass presence since that time. Technology and methods for mapping and position fixing have improved dramatically in 30 years. Early data included here has been re-checked and re-entered on several occasions and previously included in other spatial platforms (see McKenzie et al 2014). The layers included in this report represent the most reliable interpretation of that early data.</gco:CharacterString>
+                            </mdq:measureDescription>
+                        </mdq:DQ_MeasureReference>
+                    </mdq:measure>
+                </mdq:DQ_TemporalValidity>
+            </mdq:report>
+            <mdq:report>
+                <mdq:DQ_ThematicClassificationCorrectness>
+                    <mdq:measure>
+                        <mdq:DQ_MeasureReference>
+                            <mdq:nameOfMeasure>
+                                <gco:CharacterString>Taxonomy</gco:CharacterString>
+                            </mdq:nameOfMeasure>
+                            <mdq:measureDescription>
+                                <gco:CharacterString>Seagrass taxonomy has changed through time, with species such as Halophila ovata no longer recognised and some doubts expressed about other species whose morphology is relatively plastic. Field surveys have at times grouped species that are difficult to distinguish outside a laboratory. To address these issues we have amalgamated some species into complexes: Halophila ovata, Halophila minor, Halophila colesi/australis and Halophila ovalis are included as Halophila. ovalis. Halodule pinifolia is grouped with Halodule. uninervis. Data collected in winter may underestimate the extent of ephemeral species such as Halophila decipiens and Halophila tricostata. This is important if this composite is used to compare annual changes. Zostera muelleri subsp. capricorni has been abbreviated to Zostera capricorni throughout.</gco:CharacterString>
+                            </mdq:measureDescription>
+                        </mdq:DQ_MeasureReference>
+                    </mdq:measure>
+                </mdq:DQ_ThematicClassificationCorrectness>
+            </mdq:report>
+        </mdq:DQ_DataQuality>
+    </mdb:dataQualityInfo>
+    <mdb:resourceLineage>
+        <mrl:LI_Lineage>
+            <mrl:statement>
+                <gco:CharacterString>The sampling methods used to study, describe and monitors seagrass meadows were developed by the TropWATER Seagrass Group and tailored to the location and habitat surveyed; these are described in detail in the relevant publications (https://research.jcu.edu.au/tropwater). Methods for data sets collected by CSIRO are reported in Pitcher et al (2007).
+                    1. Location – Latitudes and longitudes are from converted RADAR fix or GPS. Depth is depth below mean sea level (dbMSL) in metres.
+                    2. Seagrass metrics – Visual estimation methods prior to 1990 were mostly percent cover estimates matched to standard photographs. Data limitations for these early surveys are specific to each survey and advice from the TropWATER data custodians should be sought for assistance with interpretation. For recent surveys (post-1990) above-ground biomass was determined using a “visual estimates of biomass” technique (Mellors 1991) using trained observers. A linear regression was calculated for the relationship between the observer ranks and the harvested values. This regression was used to calculate above-ground biomass for all estimated ranks made from the survey sites. Biomass ranks were converted into above-ground biomass estimates in grams dry weight per square metre (g DW m-2) for each site. Observers estimated biomass data using video transects, grabs, free diving, helicopter and walking:
+                    * Video transect: Commonly used for subtidal meadows at each transect site. A CCTV camera was lowered to the bottom and towed at drift speed (less than one knot). Footage was observed on a TV monitor and digitally recorded. The recording was paused at random times and frames selected. From this frame, an observer estimated a rank of seagrass biomass and a species composition. On completion of the video analysis, the video observer ranked five additional quadrats that had been previously videoed for calibration. The camera sled included a small collecting net to obtain a specimen for identification.
+                    * van Veen grab: Commonly used for subtidal meadows. A sample of seagrass was collected using a van Veen grab (grab area 0.0625 m2) to identify species present at each site. Species identified from the grab sample were used to inform species composition assessments made from the recorded video transects (Kuo and McComb 1989), or to record presence/absence where visibility was too poor for video transects.
+                    * Free diving, helicopter and walking: At each site seagrass above-ground biomass and species composition were estimated from 0.25 m2 quadrats placed randomly. Seagrass percent cover was recorded at each site. The “visual estimates of biomass” technique when applied to free diving/helicopter/walking surveys involves ranking while referring to a series of quadrat photographs of similar seagrass habitats for which the above-ground biomass has been previously measured. The relative proportion of the above-ground biomass (percentage) of each seagrass species within each survey quadrat was also recorded. Field biomass ranks were converted into above-ground biomass estimates in grams dry weight per square metre (g DW m-2).</gco:CharacterString>
+            </mrl:statement>
+            <mrl:scope>
+                <mcc:MD_Scope>
+                    <mcc:level>
+                        <mcc:MD_ScopeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ScopeCode" codeListValue="dataset" />
+                    </mcc:level>
+                </mcc:MD_Scope>
+            </mrl:scope>
+        </mrl:LI_Lineage>
+    </mdb:resourceLineage>
+</mdb:MD_Metadata>
