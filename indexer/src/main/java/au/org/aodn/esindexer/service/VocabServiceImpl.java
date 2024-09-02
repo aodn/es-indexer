@@ -364,13 +364,12 @@ public class VocabServiceImpl implements VocabService {
         };
 
         if (!vocabs.isEmpty() && !themes.isEmpty()) {
-            themes.stream().filter(Objects::nonNull).forEach(theme -> {
-                vocabs.stream().filter(Objects::nonNull).forEach(topLevelVocab -> {
-                    if (topLevelVocab.has("narrower") && !topLevelVocab.get("narrower").isEmpty()) {
-                        for (JsonNode secondLevelVocab : topLevelVocab.get("narrower")) {
-                            if (secondLevelVocab != null && secondLevelVocab.has("label") && secondLevelVocab.has("about")) {
-                                String secondLevelVocabLabel = secondLevelVocab.get("label").asText().toLowerCase();
-
+            vocabs.stream().filter(Objects::nonNull).forEach(topLevelVocab -> {
+                if (topLevelVocab.has("narrower") && !topLevelVocab.get("narrower").isEmpty()) {
+                    for (JsonNode secondLevelVocab : topLevelVocab.get("narrower")) {
+                        if (secondLevelVocab != null && secondLevelVocab.has("label") && secondLevelVocab.has("about")) {
+                            String secondLevelVocabLabel = secondLevelVocab.get("label").asText().toLowerCase();
+                            themes.stream().filter(Objects::nonNull).forEach(theme -> {
                                 ConceptModel secondLevelVocabAsConcept = ConceptModel.builder()
                                         .id(secondLevelVocab.get("label").asText())
                                         .url(secondLevelVocab.get("about").asText())
@@ -379,7 +378,6 @@ public class VocabServiceImpl implements VocabService {
                                 // if the record's theme is already second-level vocab, no need to further check
                                 if (themeMatchConcept(theme, secondLevelVocabAsConcept) && !results.contains(secondLevelVocabLabel)) {
                                     results.add(secondLevelVocabLabel);
-                                    break;
                                 }
 
                                 // if the record's theme is leaf-node (bottom-level vocab)
@@ -401,10 +399,10 @@ public class VocabServiceImpl implements VocabService {
                                         }
                                     }
                                 }
-                            }
+                            });
                         }
                     }
-                });
+                }
             });
         }
         return results;

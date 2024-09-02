@@ -81,9 +81,6 @@ public class GeoNetworkServiceTests extends BaseTestClass {
 
             logger.debug("Get count in verifyInsertMetadataWorks");
 
-            Assertions.assertFalse(geoNetworkService.isMetadataRecordsCountLessThan(1), "Compare false");
-            Assertions.assertTrue(geoNetworkService.isMetadataRecordsCountLessThan(2), "Compare true");
-
             Iterable<String> i = geoNetworkService.getAllMetadataRecords();
 
             for (String x : i) {

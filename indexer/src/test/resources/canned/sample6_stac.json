@@ -29,7 +29,8 @@
       "start" : "2024-01-01T13:00:00Z",
       "end" : "2024-03-04T13:00:00Z"
     } ],
-    "parameter_vocabs" : [ "ocean biota", "bathymetry", "density", "water pressure", "current", "temperature", "salinity" ]
+    "parameter_vocabs" : [ "ocean biota", "bathymetry", "density", "water pressure", "current", "temperature", "salinity" ],
+    "platform_vocabs" : [ "research vessel" ]
   },
   "contacts" : [ {
     "roles" : [ "custodian", "about" ],

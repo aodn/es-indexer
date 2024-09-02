@@ -17,6 +17,8 @@ import org.springframework.test.context.ActiveProfiles;
 import java.io.IOException;
 import java.util.*;
 
+// JSONAssert is a useful dependency for comparing JSON values, replacing the traditional string-to-string approach when dealing with JSON.
+// More details: https://www.baeldung.com/jsonassert#overview, https://github.com/skyscreamer/JSONassert
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -60,7 +62,8 @@ public class VocabServiceTest extends BaseTestClass {
         assertTrue(parameterVocabs.stream().anyMatch(vocab -> vocab.equalsIgnoreCase("temperature")));
         assertTrue(parameterVocabs.stream().anyMatch(vocab -> vocab.equalsIgnoreCase("salinity")));
         assertTrue(parameterVocabs.stream().anyMatch(vocab -> vocab.equalsIgnoreCase("carbon")));
-        assertEquals(4, parameterVocabs.size());
+        assertTrue(parameterVocabs.stream().anyMatch(vocab -> vocab.equalsIgnoreCase("pH (total scale) of the water body")));
+        assertEquals(5, parameterVocabs.size());
     }
 
     @Test

@@ -10,15 +10,18 @@ import co.elastic.clients.elasticsearch.core.SearchResponse;
 import co.elastic.clients.elasticsearch.core.search.HitsMetadata;
 import co.elastic.clients.elasticsearch.core.search.TotalHits;
 import co.elastic.clients.json.JsonData;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import jakarta.xml.bind.JAXBException;
 import lombok.extern.slf4j.Slf4j;
+import org.json.JSONException;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -145,7 +148,7 @@ public class StacCollectionMapperServiceTests {
     }
 
     @Test
-    public void verifyPointOfContactCorrect() throws IOException, JAXBException {
+    public void verifyPointOfContactCorrect() throws IOException, JAXBException, JSONException {
         // We only index one record, the
         String xml = readResourceFile("classpath:canned/sample8.xml");
         String expected = readResourceFile("classpath:canned/sample8_stac.json");
@@ -155,22 +158,22 @@ public class StacCollectionMapperServiceTests {
         // and now we can use it to compare expected result.
         Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
         String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
-        Assertions.assertEquals(objectMapper.readTree(expected), objectMapper.readTree(out.strip()), "Stac not equals for sample 8");
+        JSONAssert.assertEquals(objectMapper.readTree(expected).toPrettyString(), objectMapper.readTree(out.strip()).toPrettyString(), JSONCompareMode.STRICT);
     }
 
     @Test
-    public void verifyMetadataContactCorrect() throws IOException {
+    public void verifyMetadataContactCorrect() throws IOException, JSONException {
         String xml = readResourceFile("classpath:canned/sample10.xml");
         String expected = readResourceFile("classpath:canned/sample10_stac.json");
         indexerService.indexMetadata(xml);
 
         Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
         String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
-        Assertions.assertEquals(objectMapper.readTree(expected), objectMapper.readTree(out.strip()), "Stac not equals for sample 10");
+        JSONAssert.assertEquals(objectMapper.readTree(expected).toPrettyString(), objectMapper.readTree(out.strip()).toPrettyString(), JSONCompareMode.STRICT);
     }
 
     @Test
-    public void verifyLicenseCorrect() throws IOException {
+    public void verifyLicenseCorrect() throws IOException, JSONException {
 
         // if license is in citation block, it should be extracted and added to the collection
         String xml1 = readResourceFile("classpath:canned/sample10.xml");
@@ -178,7 +181,8 @@ public class StacCollectionMapperServiceTests {
         indexerService.indexMetadata(xml1);
         Map<?,?> content1 = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
         String out1 = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content1);
-        Assertions.assertEquals(objectMapper.readTree(expected1), objectMapper.readTree(out1.strip()), "Stac not equals for sample 10");
+        JSONAssert.assertEquals(objectMapper.readTree(expected1).toPrettyString(),
+                objectMapper.readTree(out1.strip()).toPrettyString(), JSONCompareMode.STRICT);
 
         // if license is not in citation block, it should try to find it in "other constraints"
         String xml2 = readResourceFile("classpath:canned/sample11.xml");
@@ -186,7 +190,8 @@ public class StacCollectionMapperServiceTests {
         indexerService.indexMetadata(xml2);
         Map<?,?> content2 = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
         String out2 = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content2);
-        Assertions.assertEquals(objectMapper.readTree(expected2), objectMapper.readTree(out2.strip()), "Stac not equals for sample 11");
+        JSONAssert.assertEquals(objectMapper.readTree(expected2).toPrettyString(),
+                objectMapper.readTree(out2.strip()).toPrettyString(), JSONCompareMode.STRICT);
 
         // if both blocks all don't have license, it should return empty string
         String xml3 = readResourceFile("classpath:canned/sample7.xml");
@@ -196,11 +201,13 @@ public class StacCollectionMapperServiceTests {
         var a = lastRequest.get().document().toString();
         Map<?,?> content3 = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
         String out3 = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content3);
-        Assertions.assertEquals(objectMapper.readTree(expected3), objectMapper.readTree(out3.strip()), "Stac not equals for sample 7");
+        JSONAssert.assertEquals(objectMapper.readTree(expected3).toPrettyString(),
+                objectMapper.readTree(out3.strip()).toPrettyString(),
+                JSONCompareMode.STRICT);
     }
 
     @Test
-    public void verifySummaryGeoCorrect1() throws IOException, JAXBException {
+    public void verifySummaryGeoCorrect1() throws IOException, JAXBException, JSONException {
         // We only index one record, the
         String xml = readResourceFile("classpath:canned/sample9.xml");
         String expected = readResourceFile("classpath:canned/sample9_stac.json");
@@ -210,11 +217,13 @@ public class StacCollectionMapperServiceTests {
         // and now we can use it to compare expected result.
         Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
         String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
-        Assertions.assertEquals(objectMapper.readTree(expected), objectMapper.readTree(out.strip()), "Stac not equals for sample 9");
+        JSONAssert.assertEquals(objectMapper.readTree(expected).toPrettyString(),
+                objectMapper.readTree(out.strip()).toPrettyString(),
+                JSONCompareMode.STRICT);
     }
 
     @Test
-    public void verifySummaryGeoCorrect2() throws IOException {
+    public void verifySummaryGeoCorrect2() throws IOException, JSONException {
         // We only index one record, the
         String xml = readResourceFile("classpath:canned/sample10.xml");
         String expected = readResourceFile("classpath:canned/sample10_stac.json");
@@ -224,11 +233,13 @@ public class StacCollectionMapperServiceTests {
         // and now we can use it to compare expected result.
         Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
         String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
-        Assertions.assertEquals(objectMapper.readTree(expected), objectMapper.readTree(out.strip()), "Stac not equals for sample 10");
+        JSONAssert.assertEquals(objectMapper.readTree(expected).toPrettyString(),
+                objectMapper.readTree(out.strip()).toPrettyString(),
+                JSONCompareMode.STRICT);
     }
 
     @Test
-    public void verifyMultipleTemporal1Extents() throws IOException {
+    public void verifyMultipleTemporal1Extents() throws IOException, JSONException {
         String xml = readResourceFile("classpath:canned/sample_multiple_temporal1.xml");
         String expected = readResourceFile("classpath:canned/sample_multiple_temporal1_stac.json");
         indexerService.indexMetadata(xml);
@@ -236,117 +247,117 @@ public class StacCollectionMapperServiceTests {
         Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
         String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
         log.info(out);
-        Assertions.assertEquals(
-                objectMapper.readTree(expected),
-                objectMapper.readTree(out.strip()),
-                "Stac not equals for sample_multiple_temporal1_stac"
+        JSONAssert.assertEquals(
+                objectMapper.readTree(expected).toPrettyString(),
+                objectMapper.readTree(out.strip()).toPrettyString(),
+                JSONCompareMode.STRICT
         );
     }
 
     @Test
-    public void verifyMultipleTemporal2Extents() throws IOException {
+    public void verifyMultipleTemporal2Extents() throws IOException, JSONException {
         String xml = readResourceFile("classpath:canned/sample_multiple_temporal2.xml");
         String expected = readResourceFile("classpath:canned/sample_multiple_temporal2_stac.json");
         indexerService.indexMetadata(xml);
 
         Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
         String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
-        Assertions.assertEquals(
-                objectMapper.readTree(expected),
-                objectMapper.readTree(out.strip()),
-                "Stac not equals for sample_multiple_temporal2_stac"
+        JSONAssert.assertEquals(
+                objectMapper.readTree(expected).toPrettyString(),
+                objectMapper.readTree(out.strip()).toPrettyString(),
+                JSONCompareMode.STRICT
         );
     }
 
     @Test
-    public void verifyMultipleTemporalExtentsNull() throws IOException {
+    public void verifyMultipleTemporalExtentsNull() throws IOException, JSONException {
         String xml = readResourceFile("classpath:canned/sample_multiple_temporal_null.xml");
         String expected = readResourceFile("classpath:canned/sample_multiple_temporal_null_stac.json");
         indexerService.indexMetadata(xml);
 
         Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
         String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
-        Assertions.assertEquals(
-                objectMapper.readTree(expected),
-                objectMapper.readTree(out.strip()),
-                "Stac not equals for sample_multiple_temporal_null_stac"
+        JSONAssert.assertEquals(
+                objectMapper.readTree(expected).toPrettyString(),
+                objectMapper.readTree(out.strip()).toPrettyString(),
+                JSONCompareMode.STRICT
         );
     }
 
     @Test
-    public void verifyNullKeywords() throws IOException {
+    public void verifyNullKeywords() throws IOException, JSONException {
         String xml = readResourceFile("classpath:canned/keywords_null.xml");
         String expected = readResourceFile("classpath:canned/keywords_null_stac.json");
         indexerService.indexMetadata(xml);
 
         Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
         String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
-        Assertions.assertEquals(
-                objectMapper.readTree(expected),
-                objectMapper.readTree(out.strip()),
-                "Stac not equals for keywords_null"
+        JSONAssert.assertEquals(
+                objectMapper.readTree(expected).toPrettyString(),
+                objectMapper.readTree(out.strip()).toPrettyString(),
+                JSONCompareMode.STRICT
         );
     }
 
     @Test
-    public void verifyNullAbstractResponsibility() throws IOException {
+    public void verifyNullAbstractResponsibility() throws IOException, JSONException {
         String xml = readResourceFile("classpath:canned/abstract_resposibilty_null.xml");
         String expected = readResourceFile("classpath:canned/abstract_resposibilty_null_stac.json");
         indexerService.indexMetadata(xml);
 
         Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
         String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
-        Assertions.assertEquals(
-                objectMapper.readTree(expected),
-                objectMapper.readTree(out.strip()),
-                "Stac not equals for keywords_null of sample12"
+        JSONAssert.assertEquals(
+                objectMapper.readTree(expected).toPrettyString(),
+                objectMapper.readTree(out.strip()).toPrettyString(),
+                JSONCompareMode.STRICT
         );
     }
     /**
      * @throws IOException
      */
     @Test
-    public void verifyAbstractCIParty1() throws IOException {
+    public void verifyAbstractCIParty1() throws IOException, JSONException {
         String xml = readResourceFile("classpath:canned/sample12.xml");
         String expected = readResourceFile("classpath:canned/sample12_stac.json");
         indexerService.indexMetadata(xml);
 
         Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
         String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
-        Assertions.assertEquals(
-                objectMapper.readTree(expected),
-                objectMapper.readTree(out.strip()),
-                "Stac not equals for sample12"
+        JSONAssert.assertEquals(
+                objectMapper.readTree(expected).toPrettyString(),
+                objectMapper.readTree(out.strip()).toPrettyString(),
+                JSONCompareMode.STRICT
         );
     }
 
     @Test
-    public void verifyAbstractResponsibilityNullWorks() throws IOException {
+    public void verifyAbstractResponsibilityNullWorks() throws IOException, JSONException {
         String xml = readResourceFile("classpath:canned/sample13.xml");
         String expected = readResourceFile("classpath:canned/sample13_stac.json");
         indexerService.indexMetadata(xml);
 
         Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
         String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
-        Assertions.assertEquals(
-                objectMapper.readTree(expected),
-                objectMapper.readTree(out.strip()),
-                "Stac not equals for sample13"
+        JSONAssert.assertEquals(
+                objectMapper.readTree(expected).toPrettyString(),
+                objectMapper.readTree(out.strip()).toPrettyString(),
+                JSONCompareMode.STRICT
         );
     }
 
     @Test
-    public void verifyTitleFreeThemes() throws IOException {
+    public void verifyTitleFreeThemes() throws IOException, JSONException {
         String xml = readResourceFile("classpath:canned/sample14.xml");
         String expected = readResourceFile("classpath:canned/sample14_stac.json");
         indexerService.indexMetadata(xml);
 
         Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
         String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
-        Assertions.assertEquals(
-                objectMapper.readTree(expected),
-                objectMapper.readTree(out.strip()),
-                "Stac not equals for sample14"
+        JSONAssert.assertEquals(
+                objectMapper.readTree(expected).toPrettyString(),
+                objectMapper.readTree(out.strip()).toPrettyString(),
+                JSONCompareMode.STRICT
         );
     }
     /**

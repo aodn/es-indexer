@@ -22,8 +22,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-import static au.org.aodn.esindexer.utils.CommonUtils.persevere;
-
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
