@@ -34,9 +34,6 @@ public class VocabServiceTest extends BaseTestClass {
     VocabService vocabService;
 
     @Autowired
-    protected IndexerServiceImpl indexerService;
-
-    @Autowired
     protected ObjectMapper indexerObjectMapper;
 
     @Test
