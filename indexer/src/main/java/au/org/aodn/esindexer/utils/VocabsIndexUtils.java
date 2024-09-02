@@ -26,6 +26,8 @@ public class VocabsIndexUtils {
 
     @PostConstruct
     public void init() throws IOException {
+        // this could take a few minutes to complete, in development, you can skip it with -Dapp.initialiseVocabsIndex=false
+        // you can call /api/v1/indexer/ext/vocabs/populate endpoint to manually refresh the vocabs index, without waiting for the scheduled task
         if (initialiseVocabsIndex) {
             log.info("Initialising {}", vocabsIndexName);
             vocabService.populateVocabsData();

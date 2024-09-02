@@ -33,7 +33,6 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
@@ -332,21 +331,19 @@ public class VocabServiceImpl implements VocabService {
         return vocabCategoryNodes;
     }
 
-    protected boolean themesMatchConcept(List<ThemesModel> themes, ConceptModel thatConcept) {
-        for (ThemesModel theme : themes) {
-            for (ConceptModel thisConcept : theme.getConcepts()) {
+    protected boolean themeMatchConcept(ThemesModel theme, ConceptModel thatConcept) {
+        for (ConceptModel thisConcept : theme.getConcepts()) {
                 /*
                 comparing by combined values (id and url) of the concept object
                 this will prevent cases where bottom-level vocabs are the same in text, but their parent vocabs are different
                 e.g "car -> parts" vs "bike -> parts" ("parts" is the same but different parent)
                  */
-                if (thisConcept.equals(thatConcept)) {
+            if (thisConcept.equals(thatConcept)) {
                     /* thisConcept is the extracted from the themes of the record...theme.getConcepts()
                     thatConcept is the object created by iterating over the parameter_vocabs cache...ConceptModel thatConcept = ConceptModel.builder()
                     using overriding equals method to compare the two objects, this is not checking instanceof ConceptModel class
                      */
-                    return true;
-                }
+                return true;
             }
         }
         return false;
@@ -366,31 +363,49 @@ public class VocabServiceImpl implements VocabService {
             default -> new ArrayList<>();
         };
 
-        if (!vocabs.isEmpty()) {
-            for (JsonNode topLevelVocab : vocabs) {
-                if (topLevelVocab != null && topLevelVocab.has("narrower") && !topLevelVocab.get("narrower").isEmpty()) {
-                    for (JsonNode secondLevelVocab : topLevelVocab.get("narrower")) {
-                        if (secondLevelVocab != null && secondLevelVocab.has("label") && secondLevelVocab.has("narrower") && !secondLevelVocab.get("narrower").isEmpty()) {
-                            String secondLevelVocabLabel = secondLevelVocab.get("label").asText().toLowerCase();
-                            for (JsonNode bottomLevelVocab : secondLevelVocab.get("narrower")) {
-                                if (bottomLevelVocab != null && bottomLevelVocab.has("label") && bottomLevelVocab.has("about")) {
-                                    // map the original values to a ConceptModel object for doing comparison
-                                    ConceptModel bottomConcept = ConceptModel.builder()
-                                            .id(bottomLevelVocab.get("label").asText())
-                                            .url(bottomLevelVocab.get("about").asText())
-                                            .build();
+        if (!vocabs.isEmpty() && !themes.isEmpty()) {
+            themes.stream().filter(Objects::nonNull).forEach(theme -> {
+                vocabs.stream().filter(Objects::nonNull).forEach(topLevelVocab -> {
+                    if (topLevelVocab.has("narrower") && !topLevelVocab.get("narrower").isEmpty()) {
+                        for (JsonNode secondLevelVocab : topLevelVocab.get("narrower")) {
+                            if (secondLevelVocab != null && secondLevelVocab.has("label") && secondLevelVocab.has("about")) {
+                                String secondLevelVocabLabel = secondLevelVocab.get("label").asText().toLowerCase();
 
-                                    // Compare with themes' concepts
-                                    if (themesMatchConcept(themes, bottomConcept) && !results.contains(secondLevelVocabLabel)) {
-                                        results.add(secondLevelVocabLabel);
-                                        break;
+                                ConceptModel secondLevelVocabAsConcept = ConceptModel.builder()
+                                        .id(secondLevelVocab.get("label").asText())
+                                        .url(secondLevelVocab.get("about").asText())
+                                        .build();
+
+                                // if the record's theme is already second-level vocab, no need to further check
+                                if (themeMatchConcept(theme, secondLevelVocabAsConcept) && !results.contains(secondLevelVocabLabel)) {
+                                    results.add(secondLevelVocabLabel);
+                                    break;
+                                }
+
+                                // if the record's theme is leaf-node (bottom-level vocab)
+                                if (secondLevelVocab.has("narrower") && !secondLevelVocab.get("narrower").isEmpty()) {
+                                    for (JsonNode bottomLevelVocab : secondLevelVocab.get("narrower")) {
+                                        if (bottomLevelVocab != null && bottomLevelVocab.has("label") && bottomLevelVocab.has("about")) {
+                                            // map the original values to a ConceptModel object for doing comparison
+                                            ConceptModel leafVocabAsConcept = ConceptModel.builder()
+                                                    .id(bottomLevelVocab.get("label").asText())
+                                                    .url(bottomLevelVocab.get("about").asText())
+                                                    .build();
+
+                                            // Compare with themes' concepts
+                                            if (themeMatchConcept(theme, leafVocabAsConcept) && !results.contains(secondLevelVocabLabel)) {
+                                                results.add(secondLevelVocabLabel);
+                                                // just checking 1 leaf-node of each second-level vocab is enough, because we only care second-level vocabs.
+                                                break;
+                                            }
+                                        }
                                     }
                                 }
                             }
                         }
                     }
-                }
-            }
+                });
+            });
         }
         return results;
     }

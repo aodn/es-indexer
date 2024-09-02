@@ -23,6 +23,3 @@ management:
     web:
       exposure:
         include: "health,info,env,beans,logfile"
-
-app:
-  initialiseVocabsIndex: true
