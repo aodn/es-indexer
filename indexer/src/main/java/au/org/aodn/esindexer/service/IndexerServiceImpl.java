@@ -269,6 +269,7 @@ public class IndexerServiceImpl implements IndexerService {
         List<BulkResponse> results = new ArrayList<>();
 
         long dataSize = 0;
+        long total = 0;
         for (String metadataRecord : geoNetworkResourceService.getAllMetadataRecords(beginWithUuid)) {
             if(metadataRecord != null) {
                 try {
@@ -302,13 +303,15 @@ public class IndexerServiceImpl implements IndexerService {
                             )
                     );
                     dataSize += size;
+                    total++;
 
                     if(callback != null) {
                         callback.onProgress(
                                 String.format(
-                                        "Add uuid %s to batch, current batch size is %s",
+                                        "Add uuid %s to batch, batch size is %s, total is %s",
                                         mappedMetadataValues.getUuid(),
-                                        dataSize)
+                                        dataSize,
+                                        total)
                         );
                     }
 

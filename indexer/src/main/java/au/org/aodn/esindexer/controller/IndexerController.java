@@ -81,7 +81,7 @@ public class IndexerController {
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Index all metadata records from GeoNetwork")
     public SseEmitter indexAllMetadataRecordsAsync(
             @RequestParam(value = "confirm", defaultValue = "false") Boolean confirm,
-            @RequestParam(value = "beginWith", required=false) String beginWithUuid) {
+            @RequestParam(value = "beginWithUuid", required=false) String beginWithUuid) {
 
         final SseEmitter emitter = new SseEmitter(0L); // 0L means no timeout;
 
@@ -89,7 +89,7 @@ public class IndexerController {
             @Override
             public void onProgress(Object update) {
                 try {
-                    log.info("Send update to client");
+                    log.info("Send update with content - {}", update.toString());
                     SseEmitter.SseEventBuilder event = SseEmitter.event()
                             .data(update.toString())
                             .id(String.valueOf(update.hashCode()))
@@ -98,6 +98,8 @@ public class IndexerController {
                     emitter.send(event);
                 }
                 catch (IOException e) {
+                    // In case of fail, try close the stream, if it cannot be closed. (likely stream terminated
+                    // already, the load error out and we need to result from a particular uuid.
                     emitter.completeWithError(e);
                 }
             }
