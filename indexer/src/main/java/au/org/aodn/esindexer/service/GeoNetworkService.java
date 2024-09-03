@@ -22,7 +22,7 @@ public interface GeoNetworkService {
      * Return Iterable of records, noted that the item inside can be null, so please check null on each item
      * @return
      */
-    Iterable<String> getAllMetadataRecords();
+    Iterable<String> getAllMetadataRecords(String beginWithUuid);
     /**
      * This function can avoid elastic outsync and achieve what we need here as the only use case is
      * check if there is only 1 document in elastic.

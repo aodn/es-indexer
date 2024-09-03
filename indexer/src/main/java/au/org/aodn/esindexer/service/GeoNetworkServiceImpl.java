@@ -58,11 +58,6 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
 
     @Value("${elasticsearch.query.pageSize:100}")
     protected int ES_PAGE_SIZE;
-    // Use for debug only if run the indexer locally and hit an issue, you do
-    // not want to start from the start, by setting this env value, it will start from the UUID
-    // that follows.
-    @Value("${elasticsearch.query.startingUUID:#{null}}")
-    protected String startingUUID;
 
     protected FIFOCache<String, Map<String, ?>> cache;
     protected RestTemplate indexerRestTemplate;
@@ -420,8 +415,8 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
             backoff = @Backoff(delay = 1500L)
     )
     @Override
-    public Iterable<String> getAllMetadataRecords() {
-        SearchRequest req = createSearchAllUUID(startingUUID);
+    public Iterable<String> getAllMetadataRecords(String beginWithUUid) {
+        SearchRequest req = createSearchAllUUID(beginWithUUid);
         try {
             final AtomicReference<String> lastUUID = new AtomicReference<>(null);
             final AtomicReference<SearchResponse<ObjectNode>> response =
