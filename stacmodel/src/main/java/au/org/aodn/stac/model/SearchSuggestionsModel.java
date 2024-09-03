@@ -10,7 +10,16 @@ import java.util.List;
 @Data
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class RecordSuggest {
+public class SearchSuggestionsModel {
     @JsonProperty("abstract_phrases")
     private List<String> abstractPhrases;
+
+    @JsonProperty("parameter_vocabs")
+    private List<String> parameterVocabs;
+
+    @JsonProperty("platform_vocabs")
+    private List<String> platformVocabs;
+
+    @JsonProperty("organisation_vocabs")
+    private List<String> organisationVocabs;
 }

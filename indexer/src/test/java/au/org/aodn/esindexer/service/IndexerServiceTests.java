@@ -7,7 +7,10 @@ import co.elastic.clients.elasticsearch.core.search.Hit;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.json.JSONException;
 import org.junit.jupiter.api.*;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,8 +21,6 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-
-import static au.org.aodn.esindexer.utils.CommonUtils.persevere;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
@@ -134,9 +135,10 @@ public class IndexerServiceTests extends BaseTestClass {
             String expected = indexerObjectMapper.readTree(expectedData).toPrettyString();
             String actual = indexerObjectMapper.readTree(test).toPrettyString();
 
-            Assertions.assertEquals(expected, actual, "Stac not equals for sample 4. Uuid:" + uuid);
-        }
-        finally {
+            JSONAssert.assertEquals(expected, actual, JSONCompareMode.STRICT);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        } finally {
             deleteRecord(uuid);
         }
     }
@@ -164,7 +166,9 @@ public class IndexerServiceTests extends BaseTestClass {
             String expected = indexerObjectMapper.readTree(expectedData).toPrettyString();
             String actual = indexerObjectMapper.readTree(resultJson).toPrettyString();
 
-            Assertions.assertEquals(expected, actual, "stac not equals for associated/self.json");
+            JSONAssert.assertEquals(expected, actual, JSONCompareMode.STRICT);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
         } finally {
             deleteRecord(targetRecordId, parentId, siblingId, childId);
         }
@@ -193,9 +197,10 @@ public class IndexerServiceTests extends BaseTestClass {
             String expected = indexerObjectMapper.readTree(expectedData).toPrettyString();
             String actual = indexerObjectMapper.readTree(test).toPrettyString();
 
-            Assertions.assertEquals(expected, actual, "Stac not equals for sample 5. Uuid: " + uuid);
-        }
-        finally {
+            JSONAssert.assertEquals(expected, actual, JSONCompareMode.STRICT);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        } finally {
             deleteRecord(uuid);
         }
     }
@@ -219,9 +224,10 @@ public class IndexerServiceTests extends BaseTestClass {
             String expected = indexerObjectMapper.readTree(expectedData).toPrettyString();
             String actual = indexerObjectMapper.readTree(test).toPrettyString();
 
-            Assertions.assertEquals(expected, actual, "Stac not equals for sample 6. Uuid: " + uuid);
-        }
-        finally {
+            JSONAssert.assertEquals(expected, actual, JSONCompareMode.STRICT);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        } finally {
             deleteRecord(uuid);
         }
     }
@@ -247,9 +253,10 @@ public class IndexerServiceTests extends BaseTestClass {
             String expected = indexerObjectMapper.readTree(expectedData).toPrettyString();
             String actual = indexerObjectMapper.readTree(test).toPrettyString();
 
-            Assertions.assertEquals(expected, actual, "Stac not equals for sample 7. Uuid: " + uuid);
-        }
-        finally {
+            JSONAssert.assertEquals(expected, actual, JSONCompareMode.STRICT);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        } finally {
             deleteRecord(uuid);
         }
     }
@@ -260,22 +267,22 @@ public class IndexerServiceTests extends BaseTestClass {
         try {
             insertMetadataRecords(uuid, "classpath:canned/sample11.xml");
 
-            indexerService.indexAllMetadataRecordsFromGeoNetwork(true, null);
+            indexerService.indexAllMetadataRecordsFromGeoNetwork(null,true, null);
             Hit<ObjectNode> objectNodeHit = indexerService.getDocumentByUUID(uuid);
 
             String test = String.valueOf(Objects.requireNonNull(objectNodeHit.source()));
             JsonNode rootNode = indexerObjectMapper.readTree(test);
 
             List<String> expectedParameterVocabs = Arrays.asList("oxygen", "alkalinity", "nutrient", "carbon", "salinity" );
-            List<String> actualParameterVocabs = indexerObjectMapper.convertValue(rootNode.path("summaries").path("parameter_vocabs"), indexerObjectMapper.getTypeFactory().constructCollectionType(List.class, String.class));
+            List<String> actualParameterVocabs = indexerObjectMapper.convertValue(rootNode.path("search_suggestions").path("parameter_vocabs"), indexerObjectMapper.getTypeFactory().constructCollectionType(List.class, String.class));
             Assertions.assertEquals(expectedParameterVocabs.size(), actualParameterVocabs.size(), "ParameterVocabs not equals for sample11.");
 
             List<String> expectedPlatformVocabs = List.of("small boat");
-            List<String> actualPlatformVocabs = indexerObjectMapper.convertValue(rootNode.path("summaries").path("platform_vocabs"), indexerObjectMapper.getTypeFactory().constructCollectionType(List.class, String.class));
+            List<String> actualPlatformVocabs = indexerObjectMapper.convertValue(rootNode.path("search_suggestions").path("platform_vocabs"), indexerObjectMapper.getTypeFactory().constructCollectionType(List.class, String.class));
             Assertions.assertEquals(expectedPlatformVocabs.size(), actualPlatformVocabs.size(), "PlatformVocabs not equals for sample11.");
 
             List<String> expectedOrganisationVocabs = List.of("national mooring network facility, integrated marine observing system (imos)");
-            List<String> actualOrganisationVocabs = indexerObjectMapper.convertValue(rootNode.path("summaries").path("parameter_vocabs"), indexerObjectMapper.getTypeFactory().constructCollectionType(List.class, String.class));
+            List<String> actualOrganisationVocabs = indexerObjectMapper.convertValue(rootNode.path("search_suggestions").path("organisation_vocabs"), indexerObjectMapper.getTypeFactory().constructCollectionType(List.class, String.class));
             Assertions.assertEquals(expectedOrganisationVocabs.size(), actualOrganisationVocabs.size(), "OrganisationVocabs not equals for sample11.");
         } finally {
             deleteRecord(uuid);
@@ -301,7 +308,7 @@ public class IndexerServiceTests extends BaseTestClass {
 
             // Parse the JSON string into a JsonNode
             JsonNode rootNode = indexerObjectMapper.readTree(test);
-            JsonNode abstractPhrasesNode = rootNode.path("record_suggest").path("abstract_phrases");
+            JsonNode abstractPhrasesNode = rootNode.path("search_suggestions").path("abstract_phrases");
             List<String> actual = indexerObjectMapper.convertValue(abstractPhrasesNode, indexerObjectMapper.getTypeFactory().constructCollectionType(List.class, String.class));
 
             logger.info(test);

@@ -247,7 +247,7 @@
     }
   ],
   "id": "15e4afbb-5f76-4053-a0d6-a7cf60059f5a",
-  "record_suggest": {
+  "search_suggestions": {
     "abstract_phrases": []
   },
   "sci:citation": "{\"suggestedCitation\":null,\"useLimitations\":null,\"otherConstraints\":null}",

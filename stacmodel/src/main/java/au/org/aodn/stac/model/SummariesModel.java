@@ -46,22 +46,4 @@ public class SummariesModel {
      */
     @JsonProperty("temporal")
     protected List<Map<String, String>> temporal;
-
-    /**
-     * Discovery Parameter Vocabs
-     */
-    @JsonProperty("parameter_vocabs")
-    protected List<String> parameterVocabs;
-
-    /**
-     * ARDC platform vocabs
-     */
-    @JsonProperty("platform_vocabs")
-    protected List<String> platformVocabs;
-
-    /**
-     * ARDC organisation vocabs
-     */
-    @JsonProperty("organisation_vocabs")
-    protected List<String> organisationVocabs;
 }

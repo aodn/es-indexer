@@ -88,6 +88,11 @@ public class IndexerExtController {
     @GetMapping(path="/vocabs/populate")
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Populate data to the vocabs index")
     public ResponseEntity<String> populateDataToVocabsIndex() throws IOException {
+        // clear existing caches
+        vocabService.clearParameterVocabCache();
+        vocabService.clearPlatformVocabCache();
+        vocabService.clearOrganisationVocabCache();
+        // populate new data
         vocabService.populateVocabsData();
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Populated data to the vocabs index");
     }

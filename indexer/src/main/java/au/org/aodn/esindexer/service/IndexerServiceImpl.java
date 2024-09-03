@@ -4,7 +4,7 @@ import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.exception.*;
 import au.org.aodn.esindexer.utils.JaxbUtils;
 import au.org.aodn.metadata.iso19115_3_2018.MDMetadataType;
-import au.org.aodn.stac.model.RecordSuggest;
+import au.org.aodn.stac.model.SearchSuggestionsModel;
 import au.org.aodn.stac.model.StacCollectionModel;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.ElasticsearchException;
@@ -44,7 +44,6 @@ import java.util.concurrent.CompletableFuture;
 
 @Slf4j
 @Service
-@Slf4j
 public class IndexerServiceImpl implements IndexerService {
 
     protected String indexName;
@@ -172,36 +171,24 @@ public class IndexerServiceImpl implements IndexerService {
 
         // parameter vocabs
         List<String> processedParameterVocabs = vocabService.extractVocabLabelsFromThemes(stacCollectionModel.getThemes(), AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS);
-        if (!processedParameterVocabs.isEmpty()) {
-            stacCollectionModel.getSummaries().setParameterVocabs(processedParameterVocabs);
-        }
 
-        /*
-        NOTE: The following implementation for platform and organization vocabularies is just a placeholder, not the final version.
-        It follows the same logic as what we intended for the parameter vocabulary, where we extract the list of second-level vocabularies that a record belongs to from its bottom-level vocabularies.
+        // NOTE: The following implementation for platform and organization vocabularies is just a placeholder, not the final version.
+        // It follows the same logic as what we intended for the parameter vocabulary, where we extract the list of second-level vocabularies that a record belongs to from its bottom-level vocabularies.
         // TODO: Adjust if necessary, or remove the above comments after making a final decision.
-        --------------BEGIN--------------
-        */
         // platform vocabs
         List<String> processedPlatformVocabs = vocabService.extractVocabLabelsFromThemes(stacCollectionModel.getThemes(), AppConstants.AODN_PLATFORM_VOCABS);
-        if (!processedPlatformVocabs.isEmpty()) {
-            stacCollectionModel.getSummaries().setPlatformVocabs(processedPlatformVocabs);
-        }
         // organisation vocabs
         List<String> processedOrganisationVocabs = vocabService.extractVocabLabelsFromThemes(stacCollectionModel.getThemes(), AppConstants.AODN_ORGANISATION_VOCABS);
-        if (!processedOrganisationVocabs.isEmpty()) {
-            stacCollectionModel.getSummaries().setOrganisationVocabs(processedOrganisationVocabs);
-        }
-        /*
-        --------------END--------------
-         */
 
         // categories suggest using a different index
         // extendable for other aspects of the records data. eg. title, description, etc. something that are unique to the record and currently using "text" type
-        RecordSuggest recordSuggest = RecordSuggest.builder()
+        SearchSuggestionsModel searchSuggestionsModel = SearchSuggestionsModel.builder()
                 .abstractPhrases(this.extractTokensFromDescription(stacCollectionModel.getDescription()))
+                .parameterVocabs(!processedParameterVocabs.isEmpty() ? processedParameterVocabs : null)
+                .platformVocabs(!processedPlatformVocabs.isEmpty() ? processedPlatformVocabs : null)
+                .organisationVocabs(!processedOrganisationVocabs.isEmpty() ? processedOrganisationVocabs : null)
                 .build();
-        stacCollectionModel.setRecordSuggest(recordSuggest);
+        stacCollectionModel.setSearchSuggestionsModel(searchSuggestionsModel);
 
         return stacCollectionModel;
     }
