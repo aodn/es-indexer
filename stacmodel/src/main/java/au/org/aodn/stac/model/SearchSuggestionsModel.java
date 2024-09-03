@@ -14,12 +14,13 @@ public class SearchSuggestionsModel {
     @JsonProperty("abstract_phrases")
     private List<String> abstractPhrases;
 
-    @JsonProperty("parameter_vocabs")
+    //sayt stands for search_as_you_type
+    @JsonProperty("parameter_vocabs_sayt")
     private List<String> parameterVocabs;
 
-    @JsonProperty("platform_vocabs")
+    @JsonProperty("platform_vocabs_sayt")
     private List<String> platformVocabs;
 
-    @JsonProperty("organisation_vocabs")
+    @JsonProperty("organisation_vocabs_sayt")
     private List<String> organisationVocabs;
 }

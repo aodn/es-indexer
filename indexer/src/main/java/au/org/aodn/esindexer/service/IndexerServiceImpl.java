@@ -171,17 +171,25 @@ public class IndexerServiceImpl implements IndexerService {
 
         // parameter vocabs
         List<String> processedParameterVocabs = vocabService.extractVocabLabelsFromThemes(stacCollectionModel.getThemes(), AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS);
+        if (!processedParameterVocabs.isEmpty()) {
+            stacCollectionModel.getSummaries().setParameterVocabs(processedParameterVocabs);
+        }
 
         // NOTE: The following implementation for platform and organization vocabularies is just a placeholder, not the final version.
         // It follows the same logic as what we intended for the parameter vocabulary, where we extract the list of second-level vocabularies that a record belongs to from its bottom-level vocabularies.
         // TODO: Adjust if necessary, or remove the above comments after making a final decision.
         // platform vocabs
         List<String> processedPlatformVocabs = vocabService.extractVocabLabelsFromThemes(stacCollectionModel.getThemes(), AppConstants.AODN_PLATFORM_VOCABS);
+        if (!processedPlatformVocabs.isEmpty()) {
+            stacCollectionModel.getSummaries().setPlatformVocabs(processedPlatformVocabs);
+        }
         // organisation vocabs
         List<String> processedOrganisationVocabs = vocabService.extractVocabLabelsFromThemes(stacCollectionModel.getThemes(), AppConstants.AODN_ORGANISATION_VOCABS);
+        if (!processedOrganisationVocabs.isEmpty()) {
+            stacCollectionModel.getSummaries().setOrganisationVocabs(processedOrganisationVocabs);
+        }
 
-        // categories suggest using a different index
-        // extendable for other aspects of the records data. eg. title, description, etc. something that are unique to the record and currently using "text" type
+        // search_as_you_type enabled fields can be extended
         SearchSuggestionsModel searchSuggestionsModel = SearchSuggestionsModel.builder()
                 .abstractPhrases(this.extractTokensFromDescription(stacCollectionModel.getDescription()))
                 .parameterVocabs(!processedParameterVocabs.isEmpty() ? processedParameterVocabs : null)

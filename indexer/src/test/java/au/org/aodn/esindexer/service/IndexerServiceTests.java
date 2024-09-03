@@ -274,15 +274,15 @@ public class IndexerServiceTests extends BaseTestClass {
             JsonNode rootNode = indexerObjectMapper.readTree(test);
 
             List<String> expectedParameterVocabs = Arrays.asList("oxygen", "alkalinity", "nutrient", "carbon", "salinity" );
-            List<String> actualParameterVocabs = indexerObjectMapper.convertValue(rootNode.path("search_suggestions").path("parameter_vocabs"), indexerObjectMapper.getTypeFactory().constructCollectionType(List.class, String.class));
+            List<String> actualParameterVocabs = indexerObjectMapper.convertValue(rootNode.path("search_suggestions").path("parameter_vocabs_sayt"), indexerObjectMapper.getTypeFactory().constructCollectionType(List.class, String.class));
             Assertions.assertEquals(expectedParameterVocabs.size(), actualParameterVocabs.size(), "ParameterVocabs not equals for sample11.");
 
             List<String> expectedPlatformVocabs = List.of("small boat");
-            List<String> actualPlatformVocabs = indexerObjectMapper.convertValue(rootNode.path("search_suggestions").path("platform_vocabs"), indexerObjectMapper.getTypeFactory().constructCollectionType(List.class, String.class));
+            List<String> actualPlatformVocabs = indexerObjectMapper.convertValue(rootNode.path("search_suggestions").path("platform_vocabs_sayt"), indexerObjectMapper.getTypeFactory().constructCollectionType(List.class, String.class));
             Assertions.assertEquals(expectedPlatformVocabs.size(), actualPlatformVocabs.size(), "PlatformVocabs not equals for sample11.");
 
             List<String> expectedOrganisationVocabs = List.of("national mooring network facility, integrated marine observing system (imos)");
-            List<String> actualOrganisationVocabs = indexerObjectMapper.convertValue(rootNode.path("search_suggestions").path("organisation_vocabs"), indexerObjectMapper.getTypeFactory().constructCollectionType(List.class, String.class));
+            List<String> actualOrganisationVocabs = indexerObjectMapper.convertValue(rootNode.path("search_suggestions").path("organisation_vocabs_sayt"), indexerObjectMapper.getTypeFactory().constructCollectionType(List.class, String.class));
             Assertions.assertEquals(expectedOrganisationVocabs.size(), actualOrganisationVocabs.size(), "OrganisationVocabs not equals for sample11.");
         } finally {
             deleteRecord(uuid);
