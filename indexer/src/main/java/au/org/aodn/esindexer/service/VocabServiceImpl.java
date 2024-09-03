@@ -36,6 +36,8 @@ import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
+import static au.org.aodn.esindexer.utils.CommonUtils.safeGet;
+
 @Slf4j
 @Service
 // create and inject a stub proxy to self due to the circular reference http://bit.ly/4aFvYtt
@@ -135,9 +137,8 @@ public class VocabServiceImpl implements VocabService {
         } else if (currentNode instanceof TextNode textNode) {
             resourceUri = textNode.asText();
         } else if (currentNode instanceof VocabModel vocabNode) {
-            String about = vocabNode.getAbout();
-            if (about != null && !about.isEmpty()) {
-                resourceUri = about;
+            if (vocabNode.getAbout() != null && !vocabNode.getAbout().isEmpty()) {
+                resourceUri = vocabNode.getAbout();
             }
         }
 
