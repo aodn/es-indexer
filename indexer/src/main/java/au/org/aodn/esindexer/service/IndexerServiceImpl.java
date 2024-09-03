@@ -272,21 +272,26 @@ public class IndexerServiceImpl implements IndexerService {
         }
     }
 
-    public List<BulkResponse> indexAllMetadataRecordsFromGeoNetwork(boolean confirm, Callback callback) throws IOException {
+    public List<BulkResponse> indexAllMetadataRecordsFromGeoNetwork(String beginWithUuid, boolean confirm, Callback callback) throws IOException {
         if (!confirm) {
             throw new IndexAllRequestNotConfirmedException("Please confirm that you want to index all metadata records from GeoNetwork");
         }
 
-        // recreate index from mapping JSON file
-        elasticSearchIndexService.createIndexFromMappingJSONFile(AppConstants.PORTAL_RECORDS_MAPPING_JSON_FILE, indexName);
-
-        log.info("Indexing all metadata records from GeoNetwork");
+        if(beginWithUuid == null) {
+            log.info("Indexing all metadata records from GeoNetwork");
+            // recreate index from mapping JSON file
+            elasticSearchIndexService.createIndexFromMappingJSONFile(AppConstants.PORTAL_RECORDS_MAPPING_JSON_FILE, indexName);
+        }
+        else {
+            log.info("Resume indexing records from GeoNetwork at {}", beginWithUuid);
+        }
 
         BulkRequest.Builder bulkRequest = new BulkRequest.Builder();
         List<BulkResponse> results = new ArrayList<>();
 
         long dataSize = 0;
-        for (String metadataRecord : geoNetworkResourceService.getAllMetadataRecords()) {
+        long total = 0;
+        for (String metadataRecord : geoNetworkResourceService.getAllMetadataRecords(beginWithUuid)) {
             if(metadataRecord != null) {
                 try {
                     // get mapped metadata values from GeoNetwork to STAC collection schema
@@ -319,13 +324,15 @@ public class IndexerServiceImpl implements IndexerService {
                             )
                     );
                     dataSize += size;
+                    total++;
 
                     if(callback != null) {
                         callback.onProgress(
                                 String.format(
-                                        "Add uuid %s to batch, current batch size is %s",
+                                        "Add uuid %s to batch, batch size is %s, total is %s",
                                         mappedMetadataValues.getUuid(),
-                                        dataSize)
+                                        dataSize,
+                                        total)
                         );
                     }
 

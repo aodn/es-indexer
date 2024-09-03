@@ -85,7 +85,7 @@ public class IndexerServiceTests extends BaseTestClass {
             insertMetadataRecords(uuid1, "classpath:canned/sample2.xml");
             insertMetadataRecords(uuid2, "classpath:canned/sample1.xml");
 
-            indexerService.indexAllMetadataRecordsFromGeoNetwork(true, null);
+            indexerService.indexAllMetadataRecordsFromGeoNetwork(null, true, null);
 
             // The sample1 geometry have error [1:9695] failed to parse field [summaries.proj:geometry] of type [geo_shape]
             // ErrorCause: {"type":"illegal_argument_exception","reason":"Polygon self-intersection at lat=57.0 lon=-66.0"}
@@ -106,7 +106,7 @@ public class IndexerServiceTests extends BaseTestClass {
             insertMetadataRecords(uuid1, "classpath:canned/sample2.xml");
             insertMetadataRecords(uuid2, "classpath:canned/sample3.xml");
 
-            indexerService.indexAllMetadataRecordsFromGeoNetwork(true, null);
+            indexerService.indexAllMetadataRecordsFromGeoNetwork(null, true, null);
             Assertions.assertEquals(2L, elasticSearchIndexService.getDocumentsCount(INDEX_NAME), "Doc count correct");
 
             // Only 2 doc in elastic, if we delete it then should be zero
@@ -127,7 +127,7 @@ public class IndexerServiceTests extends BaseTestClass {
 
             insertMetadataRecords(uuid, "classpath:canned/sample4.xml");
 
-            indexerService.indexAllMetadataRecordsFromGeoNetwork(true, null);
+            indexerService.indexAllMetadataRecordsFromGeoNetwork(null, true, null);
             Hit<ObjectNode> objectNodeHit = indexerService.getDocumentByUUID(uuid);
 
             String test = String.valueOf(Objects.requireNonNull(objectNodeHit.source()));
@@ -159,7 +159,7 @@ public class IndexerServiceTests extends BaseTestClass {
             insertMetadataRecords(siblingId, "classpath:canned/associated/sibling.xml");
             insertMetadataRecords(childId, "classpath:canned/associated/child.xml");
 
-            indexerService.indexAllMetadataRecordsFromGeoNetwork(true, null);
+            indexerService.indexAllMetadataRecordsFromGeoNetwork(null, true, null);
             var targetResult = indexerService.getDocumentByUUID(targetRecordId);
             String resultJson = String.valueOf(Objects.requireNonNull(targetResult.source()));
 
@@ -189,7 +189,7 @@ public class IndexerServiceTests extends BaseTestClass {
 
             insertMetadataRecords(uuid, "classpath:canned/sample5.xml");
 
-            indexerService.indexAllMetadataRecordsFromGeoNetwork(true, null);
+            indexerService.indexAllMetadataRecordsFromGeoNetwork(null,true, null);
             Hit<ObjectNode> objectNodeHit = indexerService.getDocumentByUUID(uuid);
 
             String test = String.valueOf(Objects.requireNonNull(objectNodeHit.source()));
@@ -216,7 +216,7 @@ public class IndexerServiceTests extends BaseTestClass {
 
             insertMetadataRecords(uuid, "classpath:canned/sample6.xml");
 
-            indexerService.indexAllMetadataRecordsFromGeoNetwork(true, null);
+            indexerService.indexAllMetadataRecordsFromGeoNetwork(null, true, null);
             Hit<ObjectNode> objectNodeHit = indexerService.getDocumentByUUID(uuid);
 
             String test = String.valueOf(Objects.requireNonNull(objectNodeHit.source()));
@@ -244,7 +244,7 @@ public class IndexerServiceTests extends BaseTestClass {
 
             insertMetadataRecords(uuid, "classpath:canned/sample7.xml");
 
-            indexerService.indexAllMetadataRecordsFromGeoNetwork(true, null);
+            indexerService.indexAllMetadataRecordsFromGeoNetwork(null,true, null);
             Hit<ObjectNode> objectNodeHit = indexerService.getDocumentByUUID(uuid);
 
             String test = String.valueOf(Objects.requireNonNull(objectNodeHit.source()));
@@ -301,7 +301,7 @@ public class IndexerServiceTests extends BaseTestClass {
 
             insertMetadataRecords(uuid, "classpath:canned/sample7.xml");
 
-            indexerService.indexAllMetadataRecordsFromGeoNetwork(true, null);
+            indexerService.indexAllMetadataRecordsFromGeoNetwork(null,true, null);
             Hit<ObjectNode> objectNodeHit = indexerService.getDocumentByUUID(uuid);
 
             String test = Objects.requireNonNull(objectNodeHit.source()).toPrettyString();

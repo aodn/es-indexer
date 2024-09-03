@@ -48,11 +48,22 @@ public class IndexerController {
         ObjectNode response =  indexerService.getDocumentByUUID(uuid).source();
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
-
+    /**
+     * A synchronized load operation, useful for local run but likely fail in cloud due to gateway time out. No response
+     * come back unlike everything done. Please use async load with postman if you want feedback constantly.
+     *
+     * @param confirm - Must set to true to begin load
+     * @param beginWithUuid - You want to start load with particular uuid, it is useful for resume previous incomplete reload
+     * @return A string contains all ingested record status
+     * @throws IOException - Any failure during reload, it is the called to handle the error
+     */
     @PostMapping(path="/all", consumes = "application/json", produces = "application/json")
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Index all metadata records from GeoNetwork")
-    public ResponseEntity<String> indexAllMetadataRecords(@RequestParam(value = "confirm", defaultValue = "false") Boolean confirm) throws IOException {
-        List<BulkResponse> responses = indexerService.indexAllMetadataRecordsFromGeoNetwork(confirm, null);
+    public ResponseEntity<String> indexAllMetadataRecords(
+            @RequestParam(value = "confirm", defaultValue = "false") Boolean confirm,
+            @RequestParam(value = "beginWithUuid", required=false) String beginWithUuid) throws IOException {
+
+        List<BulkResponse> responses = indexerService.indexAllMetadataRecordsFromGeoNetwork(beginWithUuid, confirm, null);
         return ResponseEntity.ok(responses.toString());
     }
     /**
@@ -62,19 +73,23 @@ public class IndexerController {
      * Noted: There is a bug in postman desktop, so either you run postman using web-browser with agent directly
      * or you need to have version 10.2 or above in order to get the emitted result
      *
-     * @param confirm
-     * @return
+     * @param confirm - Must set to true to begin load
+     * @param beginWithUuid - You want to start load with particular uuid, it is useful for resume previous incomplete reload
+     * @return The SSeEmitter for status update, you can use it to tell which record is being ingested and ingest status.
      */
     @PostMapping(path="/async/all")
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Index all metadata records from GeoNetwork")
-    public SseEmitter indexAllMetadataRecordsAsync(@RequestParam(value = "confirm", defaultValue = "false") Boolean confirm) {
+    public SseEmitter indexAllMetadataRecordsAsync(
+            @RequestParam(value = "confirm", defaultValue = "false") Boolean confirm,
+            @RequestParam(value = "beginWithUuid", required=false) String beginWithUuid) {
+
         final SseEmitter emitter = new SseEmitter(0L); // 0L means no timeout;
 
         IndexerService.Callback callback = new IndexerService.Callback() {
             @Override
             public void onProgress(Object update) {
                 try {
-                    log.info("Send update to client");
+                    log.info("Send update with content - {}", update.toString());
                     SseEmitter.SseEventBuilder event = SseEmitter.event()
                             .data(update.toString())
                             .id(String.valueOf(update.hashCode()))
@@ -83,6 +98,8 @@ public class IndexerController {
                     emitter.send(event);
                 }
                 catch (IOException e) {
+                    // In case of fail, try close the stream, if it cannot be closed. (likely stream terminated
+                    // already, the load error out and we need to result from a particular uuid.
                     emitter.completeWithError(e);
                 }
             }
@@ -107,7 +124,7 @@ public class IndexerController {
 
         new Thread(() -> {
             try {
-                indexerService.indexAllMetadataRecordsFromGeoNetwork(confirm, callback);
+                indexerService.indexAllMetadataRecordsFromGeoNetwork(beginWithUuid, confirm, callback);
             }
             catch(IOException e) {
                 emitter.completeWithError(e);

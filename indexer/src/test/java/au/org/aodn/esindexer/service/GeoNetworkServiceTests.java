@@ -62,6 +62,7 @@ public class GeoNetworkServiceTests extends BaseTestClass {
                 dockerComposeContainer.getServicePort(GeoNetworkSearchTestConfig.GN_NAME, GeoNetworkSearchTestConfig.GN_PORT))
         );
         clearElasticIndex(INDEX_NAME);
+        triggerIndexer(getRequestEntity(null), true);
     }
 
     @AfterEach
@@ -71,7 +72,7 @@ public class GeoNetworkServiceTests extends BaseTestClass {
     /**
      * We need to make sure this works before you can do any meaningful transformation
      *
-     * @throws IOException
+     * @throws IOException - Not expect to throw
      */
     @Test
     @Order(1)
@@ -81,7 +82,10 @@ public class GeoNetworkServiceTests extends BaseTestClass {
 
             logger.debug("Get count in verifyInsertMetadataWorks");
 
-            Iterable<String> i = geoNetworkService.getAllMetadataRecords();
+            Assertions.assertFalse(geoNetworkService.isMetadataRecordsCountLessThan(1), "Compare false");
+            Assertions.assertTrue(geoNetworkService.isMetadataRecordsCountLessThan(2), "Compare true");
+
+            Iterable<String> i = geoNetworkService.getAllMetadataRecords(null);
 
             for (String x : i) {
                 if (x != null) {
