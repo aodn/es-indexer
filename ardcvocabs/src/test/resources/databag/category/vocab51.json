@@ -1,0 +1,62 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-parameter-category-vocabulary/version-2-1/resource.json?uri=http://vocab.aodn.org.au/def/parameter_classes/category/51",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-parameter-category-vocabulary/version-2-1/resource.json?uri=http://vocab.aodn.org.au/def/parameter_classes/category/51",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-parameter-category-vocabulary/version-2-1/resource.json?_metadata=all&uri=http://vocab.aodn.org.au/def/parameter_classes/category/51",
+    "primaryTopic": {
+      "_about": "http://vocab.aodn.org.au/def/parameter_classes/category/51",
+      "broader": [
+        {
+          "_about": "http://vocab.aodn.org.au/def/parameter_classes/category/54",
+          "narrower": [
+            "http://vocab.aodn.org.au/def/parameter_classes/category/51"
+          ]
+        },
+        {
+          "_about": "http://vocab.aodn.org.au/def/parameter_classes/category/55",
+          "narrower": [
+            "http://vocab.aodn.org.au/def/parameter_classes/category/51"
+          ]
+        }
+      ],
+      "contributor": "http://editor.vocabs.ands.org.au/user/eMII_Atkins.Natalia",
+      "creator": "http://editor.vocabs.ands.org.au/user/Sebastien-Mancini",
+      "dcPublisher": "eMarine Information Infrastructure (eMII)",
+      "dcSource": "Australian Ocean Data Network parameter category register",
+      "dctermsCreated": "2014-06-01T00:00:00Z",
+      "dctermsModified": "2020-10-13T03:05:11Z",
+      "definition": "This category contains vocabulary terms describing nutrient parameters",
+      "inScheme": "http://vocab.aodn.org.au/def/parameter_classes/1",
+      "narrowMatch": [
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/374",
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/375",
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/376",
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/377",
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/378",
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/379",
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/380",
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/45",
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/46",
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/47",
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/48",
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/49",
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/50",
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/53"
+      ],
+      "prefLabel": {
+        "_value": "Nutrient",
+        "_lang": "en"
+      },
+      "type": [
+        "http://www.w3.org/2000/01/rdf-schema#Resource",
+        "http://www.w3.org/2004/02/skos/core#Concept"
+      ]
+    },
+    "type": [
+      "http://purl.org/linked-data/api/vocab#ItemEndpoint",
+      "http://purl.org/linked-data/api/vocab#Page"
+    ]
+  }
+}

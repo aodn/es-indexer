@@ -6,5 +6,5 @@ import au.org.aodn.ardcvocabs.model.VocabModel;
 import java.util.List;
 
 public interface ArdcVocabService {
-    List<VocabModel> getVocabTreeFromArdcByType(String vocabApiBase, VocabApiPaths vocabApiPaths);
+    List<VocabModel> getVocabTreeFromArdcByType(VocabApiPaths vocabApiPaths);
 }

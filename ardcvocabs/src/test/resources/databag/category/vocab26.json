@@ -1,0 +1,82 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-parameter-category-vocabulary/version-2-1/resource.json?uri=http://vocab.aodn.org.au/def/parameter_classes/category/26",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-parameter-category-vocabulary/version-2-1/resource.json?uri=http://vocab.aodn.org.au/def/parameter_classes/category/26",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-parameter-category-vocabulary/version-2-1/resource.json?_metadata=all&uri=http://vocab.aodn.org.au/def/parameter_classes/category/26",
+    "primaryTopic": {
+      "_about": "http://vocab.aodn.org.au/def/parameter_classes/category/26",
+      "broader": [
+        {
+          "_about": "http://vocab.aodn.org.au/def/parameter_classes/category/55",
+          "narrower": [
+            "http://vocab.aodn.org.au/def/parameter_classes/category/26"
+          ]
+        }
+      ],
+      "contributor": "http://editor.vocabs.ands.org.au/user/eMII_Atkins.Natalia",
+      "creator": "http://editor.vocabs.ands.org.au/user/Sebastien-Mancini",
+      "dcPublisher": "eMarine Information Infrastructure (eMII)",
+      "dcSource": "Australian Ocean Data Network parameter category register",
+      "dctermsCreated": "2014-06-01T00:00:00Z",
+      "dctermsModified": "2020-10-13T05:50:01Z",
+      "definition": "This category contains vocabulary terms describing pigments concentration parameters",
+      "inScheme": "http://vocab.aodn.org.au/def/parameter_classes/1",
+      "narrowMatch": [
+        "http://vocab.aodn.org.au/def/discovery_parameter/890",
+        "http://vocab.aodn.org.au/def/discovery_parameter/891",
+        "http://vocab.aodn.org.au/def/discovery_parameter/892",
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/16",
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/17",
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/18",
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/19",
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/20",
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/21",
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/478",
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/51",
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/658",
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/659",
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/660",
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/734",
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/735",
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/736",
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/737",
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/738",
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/739",
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/740",
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/741",
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/742",
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/743",
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/744",
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/747",
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/748",
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/749",
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/751",
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/755",
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/756",
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/762",
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/763",
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/764",
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/765",
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/766",
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/767",
+        "http://vocab.nerc.ac.uk/collection/P01/current/ALLOXXPX",
+        "http://vocab.nerc.ac.uk/collection/P01/current/FUCXZZZZ",
+        "http://vocab.nerc.ac.uk/collection/P01/current/PERDXXXX"
+      ],
+      "prefLabel": {
+        "_value": "Other Pigment",
+        "_lang": "en"
+      },
+      "type": [
+        "http://www.w3.org/2000/01/rdf-schema#Resource",
+        "http://www.w3.org/2004/02/skos/core#Concept"
+      ]
+    },
+    "type": [
+      "http://purl.org/linked-data/api/vocab#ItemEndpoint",
+      "http://purl.org/linked-data/api/vocab#Page"
+    ]
+  }
+}

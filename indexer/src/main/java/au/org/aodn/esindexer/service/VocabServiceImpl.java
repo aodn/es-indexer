@@ -39,9 +39,6 @@ import java.util.*;
 @Scope(proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class VocabServiceImpl implements VocabService {
 
-    @Value(AppConstants.ARDC_VOCAB_API_BASE)
-    protected String vocabApiBase;
-
     @Value("${elasticsearch.vocabs_index.name}")
     protected String vocabsIndexName;
 
@@ -275,17 +272,17 @@ public class VocabServiceImpl implements VocabService {
 
         Callable<List<VocabModel>> parameterVocabs = () -> {
             log.info("Fetching parameter vocabs from ARDC");
-            return ardcVocabService.getVocabTreeFromArdcByType(vocabApiBase, VocabApiPaths.PARAMETER_VOCAB);
+            return ardcVocabService.getVocabTreeFromArdcByType(VocabApiPaths.PARAMETER_VOCAB);
         };
 
         Callable<List<VocabModel>> platformVocabs = () -> {
             log.info("Fetching platform vocabs from ARDC");
-            return ardcVocabService.getVocabTreeFromArdcByType(vocabApiBase, VocabApiPaths.PLATFORM_VOCAB);
+            return ardcVocabService.getVocabTreeFromArdcByType(VocabApiPaths.PLATFORM_VOCAB);
         };
 
         Callable<List<VocabModel>> organisationVocabs = () -> {
             log.info("Fetching organisation vocabs from ARDC");
-            return ardcVocabService.getVocabTreeFromArdcByType(vocabApiBase, VocabApiPaths.ORGANISATION_VOCAB);
+            return ardcVocabService.getVocabTreeFromArdcByType(VocabApiPaths.ORGANISATION_VOCAB);
         };
         // Make it execute with threads the same time to speed up the load.
         ExecutorService executorService = Executors.newFixedThreadPool(3);

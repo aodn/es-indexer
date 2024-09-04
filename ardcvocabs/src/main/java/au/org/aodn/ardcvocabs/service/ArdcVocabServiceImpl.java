@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.TextNode;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
@@ -16,15 +17,18 @@ import java.util.function.Function;
 @Slf4j
 public class ArdcVocabServiceImpl implements ArdcVocabService {
 
-    protected RestTemplate indexerRestTemplate;
+    @Value("${ardcvocabs.baseUrl:https://vocabs.ardc.edu.au/repository/api/lda/aodn}")
+    protected String vocabApiBase;
+
+    protected RestTemplate restTemplate;
 
     protected Function<JsonNode, String> label = (node) -> node.has("prefLabel") ? node.get("prefLabel").get("_value").asText() : null;
     protected Function<JsonNode, String> about = (node) -> node.has("_about") ? node.get("_about").asText() : null;
     protected Function<JsonNode, String> definition = (node) -> node.has("definition") ? node.get("definition").asText() : null;
     protected BiFunction<JsonNode, String, Boolean> isNodeValid = (node, item) -> node != null && !node.isEmpty() && node.has(item) && !node.get(item).isEmpty();
 
-    public ArdcVocabServiceImpl(RestTemplate indexerRestTemplate) {
-        this.indexerRestTemplate = indexerRestTemplate;
+    public ArdcVocabServiceImpl(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
     }
 
     protected VocabModel buildVocabByResourceUri(String vocabUri, String vocabApiBase, VocabApiPaths vocabApiPaths) {
@@ -36,7 +40,7 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
 
         try {
             log.debug("Query api -> {}", detailsUrl);
-            ObjectNode detailsObj = indexerRestTemplate.getForObject(detailsUrl, ObjectNode.class);
+            ObjectNode detailsObj = restTemplate.getForObject(detailsUrl, ObjectNode.class);
             if(isNodeValid.apply(detailsObj, "result") && isNodeValid.apply(detailsObj.get("result"), "primaryTopic")) {
                 JsonNode target = detailsObj.get("result").get("primaryTopic");
 
@@ -100,7 +104,7 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
         while (url != null && !url.isEmpty()) {
             log.debug("Query api -> {}", url);
             try {
-                ObjectNode r = indexerRestTemplate.getForObject(url, ObjectNode.class);
+                ObjectNode r = restTemplate.getForObject(url, ObjectNode.class);
                 if (r != null && !r.isEmpty()) {
                     JsonNode node = r.get("result");
 
@@ -110,7 +114,7 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
                             String dl = String.format(vocabApiBase + vocabApiPaths.getVocabDetailsApiPath(), about.apply(j));
                             try {
                                 log.debug("Query api -> {}", dl);
-                                ObjectNode d = indexerRestTemplate.getForObject(dl, ObjectNode.class);
+                                ObjectNode d = restTemplate.getForObject(dl, ObjectNode.class);
 
                                 if(isNodeValid.apply(d, "result") && isNodeValid.apply(d.get("result"), "primaryTopic")) {
                                     JsonNode target = d.get("result").get("primaryTopic");
@@ -189,14 +193,14 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
     }
 
     @Override
-    public List<VocabModel> getVocabTreeFromArdcByType(String vocabApiBase, VocabApiPaths vocabApiPaths) {
+    public List<VocabModel> getVocabTreeFromArdcByType(VocabApiPaths vocabApiPaths) {
         Map<String, List<VocabModel>> vocabLeafNodes = getVocabLeafNodes(vocabApiBase, vocabApiPaths);
         String url = String.format(vocabApiBase + vocabApiPaths.getVocabCategoryApiPath());
         List<VocabModel> vocabCategoryNodes = new ArrayList<>();
         while (url != null && !url.isEmpty()) {
             log.debug("Query api -> {}", url);
             try {
-                ObjectNode r = indexerRestTemplate.getForObject(url, ObjectNode.class);
+                ObjectNode r = restTemplate.getForObject(url, ObjectNode.class);
 
                 if (r != null && !r.isEmpty()) {
                     JsonNode node = r.get("result");

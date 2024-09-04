@@ -1,0 +1,46 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-parameter-category-vocabulary/version-2-1/resource.json?uri=http://vocab.aodn.org.au/def/parameter_classes/category/5",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-parameter-category-vocabulary/version-2-1/resource.json?uri=http://vocab.aodn.org.au/def/parameter_classes/category/5",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-parameter-category-vocabulary/version-2-1/resource.json?_metadata=all&uri=http://vocab.aodn.org.au/def/parameter_classes/category/5",
+    "primaryTopic": {
+      "_about": "http://vocab.aodn.org.au/def/parameter_classes/category/5",
+      "broader": [
+        {
+          "_about": "http://vocab.aodn.org.au/def/parameter_classes/category/56",
+          "narrower": [
+            "http://vocab.aodn.org.au/def/parameter_classes/category/5"
+          ]
+        }
+      ],
+      "contributor": "http://editor.vocabs.ands.org.au/user/eMII_Atkins.Natalia",
+      "creator": "http://editor.vocabs.ands.org.au/user/Sebastien-Mancini",
+      "dcPublisher": "eMarine Information Infrastructure (eMII)",
+      "dcSource": "Australian Ocean Data Network parameter category register",
+      "dctermsCreated": "2014-06-01T00:00:00Z",
+      "dctermsModified": "2020-12-08T05:22:23Z",
+      "definition": "This category contains vocabulary terms describing acoustics parameters",
+      "inScheme": "http://vocab.aodn.org.au/def/parameter_classes/1",
+      "narrowMatch": [
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/399",
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/597",
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/728",
+        "http://vocab.nerc.ac.uk/collection/P01/current/SVELXXXX"
+      ],
+      "prefLabel": {
+        "_value": "Acoustics",
+        "_lang": "en"
+      },
+      "type": [
+        "http://www.w3.org/2000/01/rdf-schema#Resource",
+        "http://www.w3.org/2004/02/skos/core#Concept"
+      ]
+    },
+    "type": [
+      "http://purl.org/linked-data/api/vocab#ItemEndpoint",
+      "http://purl.org/linked-data/api/vocab#Page"
+    ]
+  }
+}

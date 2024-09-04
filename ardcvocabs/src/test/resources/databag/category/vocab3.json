@@ -1,0 +1,49 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-parameter-category-vocabulary/version-2-1/resource.json?uri=http://vocab.aodn.org.au/def/parameter_classes/category/3",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-parameter-category-vocabulary/version-2-1/resource.json?uri=http://vocab.aodn.org.au/def/parameter_classes/category/3",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-parameter-category-vocabulary/version-2-1/resource.json?_metadata=all&uri=http://vocab.aodn.org.au/def/parameter_classes/category/3",
+    "primaryTopic": {
+      "_about": "http://vocab.aodn.org.au/def/parameter_classes/category/3",
+      "broader": [
+        {
+          "_about": "http://vocab.aodn.org.au/def/parameter_classes/category/56",
+          "narrower": [
+            "http://vocab.aodn.org.au/def/parameter_classes/category/3"
+          ]
+        }
+      ],
+      "contributor": "http://editor.vocabs.ands.org.au/user/eMII_Atkins.Natalia_Admin",
+      "creator": "http://editor.vocabs.ands.org.au/user/Sebastien-Mancini",
+      "dcPublisher": "eMarine Information Infrastructure (eMII)",
+      "dcSource": "Australian Ocean Data Network parameter category register",
+      "dctermsCreated": "2014-06-01T00:00:00Z",
+      "dctermsModified": "2018-03-14T22:42:28Z",
+      "definition": "This category contains vocabulary terms describing currents parameters",
+      "inScheme": "http://vocab.aodn.org.au/def/parameter_classes/1",
+      "narrowMatch": [
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/383",
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/640",
+        "http://vocab.aodn.org.au/def/discovery_parameter/entity/641",
+        "http://vocab.nerc.ac.uk/collection/P01/current/LCDAZZ01",
+        "http://vocab.nerc.ac.uk/collection/P01/current/LCEWZZ01",
+        "http://vocab.nerc.ac.uk/collection/P01/current/LCNSZZ01",
+        "http://vocab.nerc.ac.uk/collection/P01/current/LRZAZZZZ"
+      ],
+      "prefLabel": {
+        "_value": "Current",
+        "_lang": "en"
+      },
+      "type": [
+        "http://www.w3.org/2000/01/rdf-schema#Resource",
+        "http://www.w3.org/2004/02/skos/core#Concept"
+      ]
+    },
+    "type": [
+      "http://purl.org/linked-data/api/vocab#ItemEndpoint",
+      "http://purl.org/linked-data/api/vocab#Page"
+    ]
+  }
+}
