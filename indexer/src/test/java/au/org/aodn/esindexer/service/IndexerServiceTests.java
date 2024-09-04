@@ -7,7 +7,10 @@ import co.elastic.clients.elasticsearch.core.search.Hit;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.json.JSONException;
 import org.junit.jupiter.api.*;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -298,6 +301,46 @@ public class IndexerServiceTests extends BaseTestClass {
         }
         finally {
             deleteRecord(uuid);
+        }
+    }
+
+    @Test
+    public void verifyHistoricalTroublesomeRecords() throws IOException, JSONException {
+
+        // records with below UUIDs having troubles in the past with Null Pointer exception and could not be ingested
+        // https://github.com/aodn/backlog/issues/5877
+        // This test makes sure they are successfully ingested
+        List<String> uuids = Arrays.asList(
+                "1fcd76a5-dc94-4197-bb87-6f5999167566",
+                "1fea8fe8-7fd2-702f-e053-08114f8c8ec6",
+                "1fec6e01-67e7-42fc-8ffb-5797e71b5572",
+                "1ff35792-9059-40ae-9a1f-ed7d11349608",
+                "1ffbc4bf-66f1-4cd4-893e-1719c60082c2",
+                "1fff161f-bc06-5ec1-e053-08114f8c50c7",
+                "216bc160-2534-11dd-813e-00188b4c0af8",
+                "217f7b5f-2799-4724-a393-e193506a1481",
+                "21800bbf-8aab-49fe-93fa-f1b4271641dd",
+                "2389afd5-b3e5-43c5-9a63-22354c732830"
+        );
+
+        for (String uuid : uuids) {
+            try {
+                String expectedData = readResourceFile("classpath:canned/" + uuid + ".json");
+                insertMetadataRecords(uuid, "classpath:canned/" + uuid + ".xml");
+
+                indexerService.indexAllMetadataRecordsFromGeoNetwork(null,true, null);
+                Hit<ObjectNode> objectNodeHit = indexerService.getDocumentByUUID(uuid);
+
+                String test = String.valueOf(Objects.requireNonNull(objectNodeHit.source()));
+                logger.info(test);
+
+                String expected = indexerObjectMapper.readTree(expectedData).toPrettyString();
+                String actual = indexerObjectMapper.readTree(test).toPrettyString();
+
+                JSONAssert.assertEquals(expected, actual, JSONCompareMode.STRICT);
+            } finally {
+                deleteRecord(uuid);
+            }
         }
     }
 }

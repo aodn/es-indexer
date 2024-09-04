@@ -1,0 +1,277 @@
+{
+  "title": "CMAR Midwater Fish Earbones (Otoliths), 1998",
+  "description": "Earbones from midwater fish, all were collected in 1998, west of Tasmania. - Lampanyctus australis, 15 pairs. - Vinciguerria, 10 pairs. - Protomyctophum normani, 15 pairs. - Hygophum hanseni, 15 pairs. - Lampichthys proceros, 13 pairs. - Maurolicus australis, 14 pairs. - Diaphus danae, 12 pairs",
+  "extent": {
+    "bbox": [
+      [
+        143.5,
+        -45.0,
+        146.5,
+        -39.0
+      ],
+      [
+        143.5,
+        -45.0,
+        146.5,
+        -39.0
+      ]
+    ],
+    "temporal": [
+      [
+        null,
+        null
+      ],
+      [
+        null,
+        null
+      ]
+    ]
+  },
+  "summaries": {
+    "score": 85,
+    "status": "",
+    "credits": [],
+    "statement": "Fish earbones (Otoliths) collected from waters west of Tasmania in 1998.",
+    "revision": "2011-08-22T15:32:56",
+    "dataset_group": "csiro oceans and atmosphere",
+    "update_frequency": "other",
+    "proj:geometry": {
+      "geometries": [
+        {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                143.5,
+                -45
+              ],
+              [
+                146.5,
+                -45
+              ],
+              [
+                146.5,
+                -39
+              ],
+              [
+                143.5,
+                -39
+              ],
+              [
+                143.5,
+                -45
+              ]
+            ]
+          ]
+        }
+      ],
+      "type": "GeometryCollection"
+    },
+    "temporal": [
+      {
+        "start": null,
+        "end": null
+      }
+    ]
+  },
+  "contacts": [
+    {
+      "roles": [
+        "pointOfContact",
+        "about"
+      ],
+      "organization": "CSIRO Oceans & Atmosphere - Hobart",
+      "name": "Lewis, Mark",
+      "position": "Senior Technical Officer (Natl Collections & Marine Infrastructure)",
+      "emails": [],
+      "addresses": [],
+      "phones": [],
+      "links": []
+    },
+    {
+      "roles": [
+        "pointOfContact",
+        "metadata"
+      ],
+      "organization": "CSIRO Oceans & Atmosphere - Hobart",
+      "name": "CSIRO O&A, Information & Data Centre",
+      "position": "Data Requests",
+      "emails": [],
+      "addresses": [],
+      "phones": [],
+      "links": []
+    }
+  ],
+  "languages": [
+    {
+      "code": "eng",
+      "name": "English"
+    }
+  ],
+  "links": [
+    {
+      "href": "https://geonetwork-edge.edge.aodn.org.au:443/geonetwork/images/logos/c953222f-bb17-4ddf-bdaa-5bf86d04d72a.png",
+      "rel": "icon",
+      "type": "image/png",
+      "title": "Suggest icon for dataset"
+    }
+  ],
+  "license": "",
+  "providers": [
+    {
+      "name": "CSIRO Oceans & Atmosphere - Hobart",
+      "roles": [
+        "pointOfContact"
+      ]
+    }
+  ],
+  "themes": [
+    {
+      "concepts": [
+        {
+          "id": "Earth Science | Biological Classification | Animals/Vertebrates | Fish",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/ea855d4c-f132-44f9-b31c-447e1101684d"
+        }
+      ],
+      "scheme": "theme",
+      "description": "Olsen, L.M., G. Major, K. Shein, J. Scialdone, S. Ritz, T. Stevens, M. Morahan, A. Aleman, R. Vogel, S. Leicester, H. Weir, M. Meaux, S. Grebas, C.Solomon, M. Holland, T. Northcutt, R. A. Restrepo, R. Bilodeau, 2013. NASA/Global Change Master Directory (GCMD) Earth Science Keywords. Version 8.0.0.0.0",
+      "title": "GCMD Keywords"
+    },
+    {
+      "concepts": [
+        {
+          "id": "Coastal Waters (Australia) | Tasmania Coast West, TAS",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.place.urn:aodn.org.au:geographicextents&id=urn:aodn.org.au:geographicextents:concept:1013"
+        }
+      ],
+      "scheme": "place",
+      "description": "AODN GEN",
+      "title": "AODN Geographic Extent Names"
+    },
+    {
+      "concepts": [
+        {
+          "id": "CMAR Otolith Collections",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.project.urn:marlin.csiro.au:projectregister&id=urn:marlin.csiro.au:projectregister:concept:2386"
+        }
+      ],
+      "scheme": "project",
+      "description": "MarLIN Project Register",
+      "title": "CSIRO Project List"
+    },
+    {
+      "concepts": [
+        {
+          "id": "Diaphus danae",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.taxon.urn:lsid:marinespecies.org:taxname&id=urn:lsid:marinespecies.org:taxname:272666"
+        },
+        {
+          "id": "Hygophum hanseni",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.taxon.urn:lsid:marinespecies.org:taxname&id=urn:lsid:marinespecies.org:taxname:217701"
+        },
+        {
+          "id": "Lampanyctus australis",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.taxon.urn:lsid:marinespecies.org:taxname&id=urn:lsid:marinespecies.org:taxname:217708"
+        },
+        {
+          "id": "Lampichthys procerus",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.taxon.urn:lsid:marinespecies.org:taxname&id=urn:lsid:marinespecies.org:taxname:217709"
+        },
+        {
+          "id": "Maurolicus australis",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.taxon.urn:lsid:marinespecies.org:taxname&id=urn:lsid:marinespecies.org:taxname:274968"
+        },
+        {
+          "id": "Protomyctophum normani",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.taxon.urn:lsid:marinespecies.org:taxname&id=urn:lsid:marinespecies.org:taxname:234727"
+        },
+        {
+          "id": "Vinciguerria attenuata",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.taxon.urn:lsid:marinespecies.org:taxname&id=urn:lsid:marinespecies.org:taxname:127302"
+        },
+        {
+          "id": "Vinciguerria nimbaria",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.taxon.urn:lsid:marinespecies.org:taxname&id=urn:lsid:marinespecies.org:taxname:127303"
+        },
+        {
+          "id": "Vinciguerria poweriae",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.taxon.urn:lsid:marinespecies.org:taxname&id=urn:lsid:marinespecies.org:taxname:127304"
+        }
+      ],
+      "scheme": "taxon",
+      "description": "World Register of Marine Species (WoRMS) Taxonomic Names",
+      "title": "WoRMS - World Register of Marine Species"
+    }
+  ],
+  "id": "217f7b5f-2799-4724-a393-e193506a1481",
+  "search_suggestions": {
+    "abstract_phrases": [
+      "lampichthys",
+      "fish all were",
+      "from midwater fish",
+      "hygophum hanseni",
+      "from midwater fish all",
+      "collected",
+      "pairs",
+      "tasmania lampanyctus australis",
+      "tasmania lampanyctus",
+      "pairs maurolicus australis",
+      "all were",
+      "west",
+      "from",
+      "pairs diaphus danae",
+      "all",
+      "tasmania",
+      "protomyctophum",
+      "diaphus danae",
+      "hygophum",
+      "earbones from midwater",
+      "earbones",
+      "all were collected",
+      "vinciguerria",
+      "proceros",
+      "earbones from midwater fish",
+      "diaphus",
+      "were",
+      "maurolicus",
+      "earbones from",
+      "australis",
+      "fish all were collected",
+      "pairs protomyctophum",
+      "midwater fish all",
+      "pairs vinciguerria",
+      "pairs lampichthys",
+      "lampichthys proceros",
+      "danae",
+      "lampanyctus",
+      "protomyctophum normani",
+      "midwater",
+      "pairs diaphus",
+      "midwater fish all were",
+      "midwater fish",
+      "normani",
+      "hanseni",
+      "pairs protomyctophum normani",
+      "fish all",
+      "lampanyctus australis",
+      "pairs maurolicus",
+      "fish",
+      "pairs lampichthys proceros",
+      "were collected",
+      "pairs hygophum hanseni",
+      "maurolicus australis",
+      "pairs hygophum",
+      "from midwater"
+    ]
+  },
+  "sci:citation": "{\"suggestedCitation\":null,\"useLimitations\":null,\"otherConstraints\":[\"No Restrictions\"]}",
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/contacts/v0.1.1/schema.json",
+    "https://stac-extensions.github.io/projection/v1.1.0/schema.json",
+    "https://stac-extensions.github.io/language/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/themes/v1.0.0/schema.json"
+  ],
+  "type": "Collection"
+}

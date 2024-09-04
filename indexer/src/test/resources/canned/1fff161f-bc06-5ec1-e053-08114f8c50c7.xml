@@ -1,0 +1,925 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:gmx="http://www.isotc211.org/2005/gmx" xmlns:gts="http://www.isotc211.org/2005/gts" xmlns:gsr="http://www.isotc211.org/2005/gsr" xmlns:gmi="http://www.isotc211.org/2005/gmi" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://www.isotc211.org/2005/gmd http://www.isotc211.org/2005/gmd/gmd.xsd http://www.isotc211.org/2005/gmx http://www.isotc211.org/2005/gmx/gmx.xsd http://www.isotc211.org/2005/srv http://schemas.opengis.net/iso/19139/20060504/srv/srv.xsd">
+  <gmd:fileIdentifier>
+    <gco:CharacterString>1fff161f-bc06-5ec1-e053-08114f8c50c7</gco:CharacterString>
+  </gmd:fileIdentifier>
+  <gmd:language>
+    <gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="eng" />
+  </gmd:language>
+  <gmd:characterSet>
+    <gmd:MD_CharacterSetCode codeListValue="utf8" codeList="http://www.isotc211.org/namespace/resources/codeList.xml#MD_CharacterSetCode" />
+  </gmd:characterSet>
+  <gmd:contact>
+    <gmd:CI_ResponsibleParty>
+      <gmd:individualName>
+        <gco:CharacterString>CSIRO O&amp;A, Information &amp; Data Centre</gco:CharacterString>
+      </gmd:individualName>
+      <gmd:organisationName>
+        <gco:CharacterString>CSIRO Oceans &amp; Atmosphere - Hobart</gco:CharacterString>
+      </gmd:organisationName>
+      <gmd:positionName>
+        <gco:CharacterString>Data Requests</gco:CharacterString>
+      </gmd:positionName>
+      <gmd:contactInfo>
+        <gmd:CI_Contact>
+          <gmd:address>
+            <gmd:CI_Address>
+              <gmd:electronicMailAddress>
+                <gco:CharacterString>data-requests-hf@csiro.au</gco:CharacterString>
+              </gmd:electronicMailAddress>
+            </gmd:CI_Address>
+          </gmd:address>
+        </gmd:CI_Contact>
+      </gmd:contactInfo>
+      <gmd:role>
+        <gmd:CI_RoleCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_RoleCode" codeListValue="pointOfContact">pointOfContact</gmd:CI_RoleCode>
+      </gmd:role>
+    </gmd:CI_ResponsibleParty>
+  </gmd:contact>
+  <gmd:dateStamp>
+    <gco:DateTime>2015-11-24T10:32:45</gco:DateTime>
+  </gmd:dateStamp>
+  <gmd:metadataStandardName>
+    <gco:CharacterString>ISO 19115-3:2018</gco:CharacterString>
+  </gmd:metadataStandardName>
+  <gmd:metadataStandardVersion>
+    <gco:CharacterString />
+  </gmd:metadataStandardVersion>
+  <gmd:identificationInfo>
+    <gmd:MD_DataIdentification>
+      <gmd:citation>
+        <gmd:CI_Citation>
+          <gmd:title>
+            <gco:CharacterString>Hinchinbrook Channel (Lucinda Jetty Coastal Observatory) November 2010, HPLC Pigment and Ocean Colour Data</gco:CharacterString>
+          </gmd:title>
+          <gmd:alternateTitle>
+            <gco:CharacterString>Hinchinbrook_Nov2010_HPLC_OC</gco:CharacterString>
+          </gmd:alternateTitle>
+          <gmd:date>
+            <gmd:CI_Date>
+              <gmd:date />
+            </gmd:CI_Date>
+          </gmd:date>
+          <gmd:identifier xlink:title="Marlin Record Number">
+            <gmd:MD_Identifier>
+              <gmd:code>
+                <gco:CharacterString>Marlin Record Number: 14623</gco:CharacterString>
+              </gmd:code>
+            </gmd:MD_Identifier>
+          </gmd:identifier>
+          <gmd:identifier xlink:title="Anzlic Identifier">
+            <gmd:MD_Identifier>
+              <gmd:code>
+                <gco:CharacterString>Anzlic Identifier: ANZCW0306014623</gco:CharacterString>
+              </gmd:code>
+            </gmd:MD_Identifier>
+          </gmd:identifier>
+        </gmd:CI_Citation>
+      </gmd:citation>
+      <gmd:abstract>
+        <gco:CharacterString>This record contains data collected from a total of 18 stations in the Hinchinbrook Chanel on an unknown vessel. The samples were collected from November 15th to 18th, 2010 as part of the Lucinda Jetty Coastal Observatory. The data can be used for Ocean Colour sensor validation. Parameters measured include the absorption coefficients of the particulate and dissolved components of the water column and the phytoplankton pigment concentration and composition.</gco:CharacterString>
+      </gmd:abstract>
+      <gmd:credit />
+      <gmd:status>
+        <gmd:MD_ProgressCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#MD_ProgressCode" codeListValue="completed">completed</gmd:MD_ProgressCode>
+      </gmd:status>
+      <gmd:pointOfContact>
+        <gmd:CI_ResponsibleParty>
+          <gmd:individualName>
+            <gco:CharacterString>Clementson, Lesley</gco:CharacterString>
+          </gmd:individualName>
+          <gmd:organisationName>
+            <gco:CharacterString>CSIRO Oceans &amp; Atmosphere - Hobart</gco:CharacterString>
+          </gmd:organisationName>
+          <gmd:positionName>
+            <gco:CharacterString>Principal Experimental Scientist (Oceans &amp; Atmosphere)</gco:CharacterString>
+          </gmd:positionName>
+          <gmd:contactInfo>
+            <gmd:CI_Contact>
+              <gmd:address>
+                <gmd:CI_Address>
+                  <gmd:electronicMailAddress>
+                    <gco:CharacterString>Lesley.Clementson@csiro.au</gco:CharacterString>
+                  </gmd:electronicMailAddress>
+                </gmd:CI_Address>
+              </gmd:address>
+            </gmd:CI_Contact>
+          </gmd:contactInfo>
+          <gmd:role>
+            <gmd:CI_RoleCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_RoleCode" codeListValue="pointOfContact">pointOfContact</gmd:CI_RoleCode>
+          </gmd:role>
+        </gmd:CI_ResponsibleParty>
+      </gmd:pointOfContact>
+      <gmd:resourceMaintenance>
+        <gmd:MD_MaintenanceInformation>
+          <gmd:maintenanceAndUpdateFrequency>
+            <gmd:MD_MaintenanceFrequencyCode codeList="http://schemas.aodn.org.au/mcp-2.0/schema/resources/Codelist/gmxCodelists.xml#MD_MaintenanceFrequencyCode" codeListValue="notPlanned">notPlanned</gmd:MD_MaintenanceFrequencyCode>
+          </gmd:maintenanceAndUpdateFrequency>
+        </gmd:MD_MaintenanceInformation>
+      </gmd:resourceMaintenance>
+      <gmd:descriptiveKeywords>
+        <gmd:MD_Keywords>
+          <gmd:keyword>
+            <gmx:Anchor xlink:href="https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&amp;id=http://gcmdservices.gsfc.nasa.gov/kms/concept/7989eae1-8ea3-4039-af0c-9130de145449">Earth Science | Oceans | Ocean Chemistry | Chlorophyll</gmx:Anchor>
+          </gmd:keyword>
+          <gmd:keyword>
+            <gmx:Anchor xlink:href="https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&amp;id=http://gcmdservices.gsfc.nasa.gov/kms/concept/ed925b43-db83-4cbb-8347-3dc0081bb8f4">Earth Science | Oceans | Ocean Chemistry | Pigments</gmx:Anchor>
+          </gmd:keyword>
+          <gmd:keyword>
+            <gmx:Anchor xlink:href="https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&amp;id=http://gcmdservices.gsfc.nasa.gov/kms/concept/78f5a84f-1b5b-44a9-97e7-4a1996cd2e36">Earth Science | Oceans | Ocean Optics | Ocean Color</gmx:Anchor>
+          </gmd:keyword>
+          <gmd:keyword>
+            <gmx:Anchor xlink:href="https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&amp;id=http://gcmdservices.gsfc.nasa.gov/kms/concept/de21632f-b614-4375-8f09-d14ab00d852b">Earth Science | Terrestrial Hydrosphere | Water Quality/Water Chemistry | Chlorophyll</gmx:Anchor>
+          </gmd:keyword>
+          <gmd:type>
+            <gmd:MD_KeywordTypeCode codeList="http://schemas.aodn.org.au/mcp-2.0/schema/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="theme">theme</gmd:MD_KeywordTypeCode>
+          </gmd:type>
+          <gmd:thesaurusName>
+            <gmd:CI_Citation>
+              <gmd:title>
+                <gco:CharacterString>GCMD Keywords</gco:CharacterString>
+              </gmd:title>
+              <gmd:alternateTitle>
+                <gco:CharacterString>Olsen, L.M., G. Major, K. Shein, J. Scialdone, S. Ritz, T. Stevens, M. Morahan, A. Aleman, R. Vogel, S. Leicester, H. Weir, M. Meaux, S. Grebas, C.Solomon, M. Holland, T. Northcutt, R. A. Restrepo, R. Bilodeau, 2013. NASA/Global Change Master Directory (GCMD) Earth Science Keywords. Version 8.0.0.0.0</gco:CharacterString>
+              </gmd:alternateTitle>
+              <gmd:date>
+                <gmd:CI_Date>
+                  <gmd:date>
+                    <gco:DateTime>2013-01-01T00:00:00</gco:DateTime>
+                  </gmd:date>
+                  <gmd:dateType>
+                    <gmd:CI_DateTypeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_DateTypeCode" codeListValue="revision">revision</gmd:CI_DateTypeCode>
+                  </gmd:dateType>
+                </gmd:CI_Date>
+              </gmd:date>
+              <gmd:identifier>
+                <gmd:MD_Identifier>
+                  <gmd:code>
+                    <gmx:Anchor xlink:href="https://marlin.csiro.au/geonetwork/srv/eng/?uuid=external.theme.gcmd_keywords">geonetwork.thesaurus.external.theme.gcmd_keywords</gmx:Anchor>
+                  </gmd:code>
+                </gmd:MD_Identifier>
+              </gmd:identifier>
+            </gmd:CI_Citation>
+          </gmd:thesaurusName>
+        </gmd:MD_Keywords>
+      </gmd:descriptiveKeywords>
+      <gmd:descriptiveKeywords>
+        <gmd:MD_Keywords>
+          <gmd:keyword>
+            <gmx:Anchor xlink:href="https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&amp;id=urn:marlin.csiro.au:Equipment:concept:33">CTDs (Conductivity-Temperature-Depth Profilers)</gmx:Anchor>
+          </gmd:keyword>
+          <gmd:keyword>
+            <gmx:Anchor xlink:href="https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&amp;id=urn:marlin.csiro.au:Equipment:concept:47">Fluorometers</gmx:Anchor>
+          </gmd:keyword>
+          <gmd:keyword>
+            <gmx:Anchor xlink:href="https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&amp;id=urn:marlin.csiro.au:Equipment:concept:54">HPLC (High Performance Liquid Chromatography)</gmx:Anchor>
+          </gmd:keyword>
+          <gmd:keyword>
+            <gmx:Anchor xlink:href="https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&amp;id=urn:marlin.csiro.au:Equipment:concept">Niskin Bottles</gmx:Anchor>
+          </gmd:keyword>
+          <gmd:keyword>
+            <gmx:Anchor xlink:href="https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&amp;id=urn:marlin.csiro.au:Equipment:concept:97">Spectrophotometers</gmx:Anchor>
+          </gmd:keyword>
+          <gmd:type>
+            <gmd:MD_KeywordTypeCode codeList="http://schemas.aodn.org.au/mcp-2.0/schema/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="equipment">equipment</gmd:MD_KeywordTypeCode>
+          </gmd:type>
+          <gmd:thesaurusName>
+            <gmd:CI_Citation>
+              <gmd:title>
+                <gco:CharacterString>CSIRO Equipment</gco:CharacterString>
+              </gmd:title>
+              <gmd:date>
+                <gmd:CI_Date>
+                  <gmd:date>
+                    <gco:DateTime>2016-05-10T00:00:00</gco:DateTime>
+                  </gmd:date>
+                  <gmd:dateType>
+                    <gmd:CI_DateTypeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication">publication</gmd:CI_DateTypeCode>
+                  </gmd:dateType>
+                </gmd:CI_Date>
+              </gmd:date>
+              <gmd:identifier>
+                <gmd:MD_Identifier>
+                  <gmd:code>
+                    <gmx:Anchor xlink:href="https://marlin.csiro.au/geonetwork/srv/eng/?uuid=urn:marlin.csiro.au:Equipment">geonetwork.thesaurus.register.equipment.urn:marlin.csiro.au:Equipment</gmx:Anchor>
+                  </gmd:code>
+                </gmd:MD_Identifier>
+              </gmd:identifier>
+            </gmd:CI_Citation>
+          </gmd:thesaurusName>
+        </gmd:MD_Keywords>
+      </gmd:descriptiveKeywords>
+      <gmd:descriptiveKeywords>
+        <gmd:MD_Keywords>
+          <gmd:keyword>
+            <gmx:Anchor xlink:href="https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.place.urn:aodn.org.au:geographicextents&amp;id=urn:aodn.org.au:geographicextents:concept:1006">Marine Features (Australia) | Great Barrier Reef, QLD</gmx:Anchor>
+          </gmd:keyword>
+          <gmd:type>
+            <gmd:MD_KeywordTypeCode codeList="http://schemas.aodn.org.au/mcp-2.0/schema/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="place">place</gmd:MD_KeywordTypeCode>
+          </gmd:type>
+          <gmd:thesaurusName>
+            <gmd:CI_Citation>
+              <gmd:title>
+                <gco:CharacterString>AODN Geographic Extent Names</gco:CharacterString>
+              </gmd:title>
+              <gmd:alternateTitle>
+                <gco:CharacterString>AODN GEN</gco:CharacterString>
+              </gmd:alternateTitle>
+              <gmd:date>
+                <gmd:CI_Date>
+                  <gmd:date>
+                    <gco:DateTime>2016-05-10T00:00:00</gco:DateTime>
+                  </gmd:date>
+                  <gmd:dateType>
+                    <gmd:CI_DateTypeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication">publication</gmd:CI_DateTypeCode>
+                  </gmd:dateType>
+                </gmd:CI_Date>
+              </gmd:date>
+              <gmd:identifier>
+                <gmd:MD_Identifier>
+                  <gmd:code>
+                    <gmx:Anchor xlink:href="https://marlin.csiro.au/geonetwork/srv/eng/?uuid=urn:aodn.org.au:geographicextents">geonetwork.thesaurus.register.place.urn:aodn.org.au:geographicextents</gmx:Anchor>
+                  </gmd:code>
+                </gmd:MD_Identifier>
+              </gmd:identifier>
+            </gmd:CI_Citation>
+          </gmd:thesaurusName>
+        </gmd:MD_Keywords>
+      </gmd:descriptiveKeywords>
+      <gmd:descriptiveKeywords>
+        <gmd:MD_Keywords>
+          <gmd:keyword>
+            <gmx:Anchor xlink:href="https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.project.urn:marlin.csiro.au:projectregister&amp;id=urn:marlin.csiro.au:projectregister:concept:2433">Lucinda Jetty Coastal Observatory</gmx:Anchor>
+          </gmd:keyword>
+          <gmd:type>
+            <gmd:MD_KeywordTypeCode codeList="http://schemas.aodn.org.au/mcp-2.0/schema/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="project">project</gmd:MD_KeywordTypeCode>
+          </gmd:type>
+          <gmd:thesaurusName>
+            <gmd:CI_Citation>
+              <gmd:title>
+                <gco:CharacterString>CSIRO Project List</gco:CharacterString>
+              </gmd:title>
+              <gmd:alternateTitle>
+                <gco:CharacterString>MarLIN Project Register</gco:CharacterString>
+              </gmd:alternateTitle>
+              <gmd:date>
+                <gmd:CI_Date>
+                  <gmd:date>
+                    <gco:DateTime>2016-05-10T00:00:00</gco:DateTime>
+                  </gmd:date>
+                  <gmd:dateType>
+                    <gmd:CI_DateTypeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication">publication</gmd:CI_DateTypeCode>
+                  </gmd:dateType>
+                </gmd:CI_Date>
+              </gmd:date>
+              <gmd:identifier>
+                <gmd:MD_Identifier>
+                  <gmd:code>
+                    <gmx:Anchor xlink:href="https://marlin.csiro.au/geonetwork/srv/en/?uuid=urn:marlin.csiro.au:projectregister">geonetwork.thesaurus.register.project.urn:marlin.csiro.au:projectregister</gmx:Anchor>
+                  </gmd:code>
+                </gmd:MD_Identifier>
+              </gmd:identifier>
+            </gmd:CI_Citation>
+          </gmd:thesaurusName>
+        </gmd:MD_Keywords>
+      </gmd:descriptiveKeywords>
+      <gmd:descriptiveKeywords>
+        <gmd:MD_Keywords>
+          <gmd:keyword>
+            <gmx:Anchor xlink:href="http://vocab.nerc.ac.uk/collection/P01/current/PSLTZZ01">Practical salinity of the water body</gmx:Anchor>
+          </gmd:keyword>
+          <gmd:keyword>
+            <gmx:Anchor xlink:href="http://vocab.nerc.ac.uk/collection/P01/current/TEMPPR01">Temperature of the water body</gmx:Anchor>
+          </gmd:keyword>
+          <gmd:keyword>
+            <gmx:Anchor xlink:href="http://vocab.aodn.org.au/def/discovery_parameter/entity/565">Pressure (measured variable) in the water body exerted by overlying sea water and any medium above it</gmx:Anchor>
+          </gmd:keyword>
+          <gmd:keyword>
+            <gmx:Anchor xlink:href="http://vocab.aodn.org.au/def/discovery_parameter/entity/566">Pressure (measured variable) in the water body exerted by overlying sea water only</gmx:Anchor>
+          </gmd:keyword>
+          <gmd:type>
+            <gmd:MD_KeywordTypeCode codeList="http://schemas.aodn.org.au/mcp-3.0/schema/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="dataParameter">dataParameter</gmd:MD_KeywordTypeCode>
+          </gmd:type>
+        </gmd:MD_Keywords>
+      </gmd:descriptiveKeywords>
+      <gmd:descriptiveKeywords>
+        <gmd:MD_Keywords>
+          <gmd:keyword>
+            <gmx:Anchor xlink:href="http://vocab.nerc.ac.uk/collection/L05/current/130">CTD</gmx:Anchor>
+          </gmd:keyword>
+          <gmd:type>
+            <gmd:MD_KeywordTypeCode codeList="http://schemas.aodn.org.au/mcp-3.0/schema/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="instrument">instrument</gmd:MD_KeywordTypeCode>
+          </gmd:type>
+        </gmd:MD_Keywords>
+      </gmd:descriptiveKeywords>
+      <gmd:descriptiveKeywords>
+        <gmd:MD_Keywords>
+          <gmd:keyword>
+            <gmx:Anchor xlink:href="http://vocab.nerc.ac.uk/collection/L06/current/31">research vessel</gmx:Anchor>
+          </gmd:keyword>
+          <gmd:type>
+            <gmd:MD_KeywordTypeCode codeList="http://schemas.aodn.org.au/mcp-3.0/schema/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="platform">platform</gmd:MD_KeywordTypeCode>
+          </gmd:type>
+        </gmd:MD_Keywords>
+      </gmd:descriptiveKeywords>
+      <gmd:resourceConstraints>
+        <gmd:MD_LegalConstraints>
+          <gmd:otherConstraints>
+            <gco:CharacterString>Data is made available under a Creative Commons Attribution 4.0 International Licence, please see link. Data is supplied 'as is' without any warranty or guarantee except as required by law to be given to you. The data may not be free of error, comprehensive, current or appropriate for your particular purpose. You accept all risk and responsibility for its use. ATTRIBUTION STATEMENT: The dataset [Insert-dataset-name-here] downloaded on [Insert-DD-Mmm-YYYY-here] was provided by CSIRO.</gco:CharacterString>
+          </gmd:otherConstraints>
+        </gmd:MD_LegalConstraints>
+      </gmd:resourceConstraints>
+      <gmd:spatialResolution>
+        <gmd:MD_Resolution>
+          <gmd:equivalentScale>
+            <gmd:MD_RepresentativeFraction>
+              <gmd:denominator gco:nilReason="inapplicable" />
+            </gmd:MD_RepresentativeFraction>
+          </gmd:equivalentScale>
+        </gmd:MD_Resolution>
+      </gmd:spatialResolution>
+      <gmd:language>
+        <gmd:LanguageCode codeList="http://schemas.aodn.org.au/mcp-3.0/schema/resources/Codelist/gmxCodelists.xml#LanguageCode" codeListValue="eng">eng</gmd:LanguageCode>
+      </gmd:language>
+      <gmd:characterSet>
+        <gmd:MD_CharacterSetCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#MD_CharacterSetCode" codeListValue="utf8">utf8</gmd:MD_CharacterSetCode>
+      </gmd:characterSet>
+      <gmd:topicCategory>
+        <gmd:MD_TopicCategoryCode>oceans</gmd:MD_TopicCategoryCode>
+      </gmd:topicCategory>
+      <gmd:extent>
+        <gmd:EX_Extent>
+          <gmd:geographicElement>
+            <gmd:EX_GeographicBoundingBox>
+              <gmd:westBoundLongitude>
+                <gco:Decimal>146.1131</gco:Decimal>
+              </gmd:westBoundLongitude>
+              <gmd:eastBoundLongitude>
+                <gco:Decimal>146.2878</gco:Decimal>
+              </gmd:eastBoundLongitude>
+              <gmd:southBoundLatitude>
+                <gco:Decimal>-18.4917</gco:Decimal>
+              </gmd:southBoundLatitude>
+              <gmd:northBoundLatitude>
+                <gco:Decimal>-18.3024</gco:Decimal>
+              </gmd:northBoundLatitude>
+            </gmd:EX_GeographicBoundingBox>
+          </gmd:geographicElement>
+          <gmd:temporalElement>
+            <gmd:EX_TemporalExtent>
+              <gmd:extent>
+                <gml:TimePeriod gml:id="tp1">
+                  <gml:beginPosition>2010-11-15</gml:beginPosition>
+                  <gml:endPosition>2010-11-18</gml:endPosition>
+                </gml:TimePeriod>
+              </gmd:extent>
+            </gmd:EX_TemporalExtent>
+          </gmd:temporalElement>
+          <gmd:verticalElement>
+            <gmd:EX_VerticalExtent>
+              <gmd:minimumValue>
+                <gco:Real>0</gco:Real>
+              </gmd:minimumValue>
+              <gmd:maximumValue>
+                <gco:Real>0</gco:Real>
+              </gmd:maximumValue>
+              <gmd:verticalCRS gco:nilReason="missing" />
+            </gmd:EX_VerticalExtent>
+          </gmd:verticalElement>
+        </gmd:EX_Extent>
+      </gmd:extent>
+      <gmd:supplementalInformation>
+        <gco:CharacterString>ATTRIBUTE STATEMENT:
+Abbreviation (Name in full) - units are mg m-3		
+Chl c3 (Chlorophyll c3)		
+Chlide a (Chlorophyllide a)		
+Chl c1+c2 (Chlorophyll c1+c2)		
+Phide a (Phaeophorbide a)		
+Perid (Peridinin)		
+But-fuco (19- butanoyloxyfucoxanthin)		
+Fuco (Fucoxanthin)		
+Neox (Neoxanthin)		
+Pras (Prasinoxanthin		
+Violax (Violaxanthin)		
+Hex-fuco (19-hexanoyloxyfucoxanthin)		
+Astax (Astaxanthin)		
+Diadino (Diadinoxanthin)		
+Antherax (Antheraxanthin)		
+Allo (Alloxanthin)		
+Diato (Diatoxanthin)		
+Zea (Zeaxanthin)		
+Lut (Lutein)		
+Canthax (Canthaxanthin)		
+Gyro-diester (Gyroxanthin diester)		
+Chl b (Chlorophyll b)		
+Chl b + DV chl b (Chlorophyll b + divinyl chlorophyll b (these two forms of chlorophyll b co-elute))		
+chl a allomer (Chlorophyll a allomer)		
+Chl a (Chlorophyll a)		
+Chl a + DV chl a (Chlorophyll a + divinyl chlorophyll a (these two forms of chlorophyll a co-elute))		
+Chl a ep (Chlorophyll a epimer)		
+Phytin b (Phaeophytin b)		
+Phytin a (Phaeophytin a)		
+Be-car (B,e - carotene)		
+BB-car (B,B - carotene)		
+TSS or TSM (total suspended solids or total suspended matter)		
+ap (absorption coefficient of particulate matter - m-1)		
+ad (absorption coefficient ofmom-algal or detrital matter - m-1)		
+aCDOM (absorption coefficient of CDOM - m-1)</gco:CharacterString>
+      </gmd:supplementalInformation>
+    </gmd:MD_DataIdentification>
+  </gmd:identificationInfo>
+  <gmd:contentInfo>
+    <gmd:MD_CoverageDescription>
+      <gmd:attributeDescription gco:nilReason="inapplicable" />
+      <gmd:attributeGroup>
+        <gmd:MD_AttributeGroup>
+          <gmd:contentType>
+            <gmd:MD_CoverageContentTypeCode codeList="http://schemas.aodn.org.au/mcp-3.0/schema/resources/Codelist/gmxCodelists.xml#MD_CoverageContentTypeCode" codeListValue="physicalMeasurement" />
+          </gmd:contentType>
+          <gmd:attribute>
+            <gmd:MD_SampleDimension>
+              <gmd:name>
+                <gmd:MD_Identifier>
+                  <gmd:code>
+                    <gmx:Anchor xlink:href="http://vocab.nerc.ac.uk/collection/P01/current/PSLTZZ01">Practical salinity of the water body</gmx:Anchor>
+                  </gmd:code>
+                </gmd:MD_Identifier>
+              </gmd:name>
+              <gmd:units>
+                <gml:BaseUnit gml:id="d25e297">
+                  <gml:identifier codeSpace="http://vocab.aodn.org.au/def/unitsofmeasure/entity/481">http://vocab.aodn.org.au/def/unitsofmeasure/entity/481</gml:identifier>
+                  <gml:name>Practical Salinity Unit</gml:name>
+                  <gml:unitsSystem />
+                </gml:BaseUnit>
+              </gmd:units>
+              <gmd:otherProperty>
+                <gco:Record xsi:type="mac:MI_AcquisitionInformation_PropertyType">
+                  <gmd:MI_AcquisitionInformation>
+                    <gmd:scope>
+                      <gmd:MD_Scope>
+                        <gmd:level>
+                          <gmd:MD_ScopeCode codeList="codeListLocation#MD_ScopeCode" codeListValue="collectionHardware" />
+                        </gmd:level>
+                      </gmd:MD_Scope>
+                    </gmd:scope>
+                    <gmd:platform>
+                      <gmd:MI_Platform>
+                        <gmd:identifier>
+                          <gmd:MD_Identifier>
+                            <gmd:code>
+                              <gmx:Anchor xlink:href="http://vocab.nerc.ac.uk/collection/L06/current/31">research vessel</gmx:Anchor>
+                            </gmd:code>
+                          </gmd:MD_Identifier>
+                        </gmd:identifier>
+                        <gmd:description>
+                          <gco:CharacterString>Platform used to capture data</gco:CharacterString>
+                        </gmd:description>
+                        <gmd:instrument>
+                          <gmd:MI_Instrument>
+                            <gmd:identifier>
+                              <gmd:MD_Identifier>
+                                <gmd:code>
+                                  <gmx:Anchor xlink:href="http://vocab.nerc.ac.uk/collection/L05/current/130">CTD</gmx:Anchor>
+                                </gmd:code>
+                              </gmd:MD_Identifier>
+                            </gmd:identifier>
+                            <gmd:type gco:nilReason="notApplicable" />
+                          </gmd:MI_Instrument>
+                        </gmd:instrument>
+                      </gmd:MI_Platform>
+                    </gmd:platform>
+                  </gmd:MI_AcquisitionInformation>
+                </gco:Record>
+              </gmd:otherProperty>
+            </gmd:MD_SampleDimension>
+          </gmd:attribute>
+          <gmd:attribute>
+            <gmd:MD_SampleDimension>
+              <gmd:name>
+                <gmd:MD_Identifier>
+                  <gmd:code>
+                    <gmx:Anchor xlink:href="http://vocab.nerc.ac.uk/collection/P01/current/TEMPPR01">Temperature of the water body</gmx:Anchor>
+                  </gmd:code>
+                </gmd:MD_Identifier>
+              </gmd:name>
+              <gmd:units>
+                <gml:BaseUnit gml:id="d25e383">
+                  <gml:identifier codeSpace="http://vocab.nerc.ac.uk/collection/P06/current/UPAA">http://vocab.nerc.ac.uk/collection/P06/current/UPAA</gml:identifier>
+                  <gml:name>Degrees Celsius</gml:name>
+                  <gml:unitsSystem />
+                </gml:BaseUnit>
+              </gmd:units>
+              <gmd:otherProperty>
+                <gco:Record xsi:type="mac:MI_AcquisitionInformation_PropertyType">
+                  <gmd:MI_AcquisitionInformation>
+                    <gmd:scope>
+                      <gmd:MD_Scope>
+                        <gmd:level>
+                          <gmd:MD_ScopeCode codeList="codeListLocation#MD_ScopeCode" codeListValue="collectionHardware" />
+                        </gmd:level>
+                      </gmd:MD_Scope>
+                    </gmd:scope>
+                    <gmd:platform>
+                      <gmd:MI_Platform>
+                        <gmd:identifier>
+                          <gmd:MD_Identifier>
+                            <gmd:code>
+                              <gmx:Anchor xlink:href="http://vocab.nerc.ac.uk/collection/L06/current/31">research vessel</gmx:Anchor>
+                            </gmd:code>
+                          </gmd:MD_Identifier>
+                        </gmd:identifier>
+                        <gmd:description>
+                          <gco:CharacterString>Platform used to capture data</gco:CharacterString>
+                        </gmd:description>
+                        <gmd:instrument>
+                          <gmd:MI_Instrument>
+                            <gmd:identifier>
+                              <gmd:MD_Identifier>
+                                <gmd:code>
+                                  <gmx:Anchor xlink:href="http://vocab.nerc.ac.uk/collection/L05/current/130">CTD</gmx:Anchor>
+                                </gmd:code>
+                              </gmd:MD_Identifier>
+                            </gmd:identifier>
+                            <gmd:type gco:nilReason="notApplicable" />
+                          </gmd:MI_Instrument>
+                        </gmd:instrument>
+                      </gmd:MI_Platform>
+                    </gmd:platform>
+                  </gmd:MI_AcquisitionInformation>
+                </gco:Record>
+              </gmd:otherProperty>
+            </gmd:MD_SampleDimension>
+          </gmd:attribute>
+          <gmd:attribute>
+            <gmd:MD_SampleDimension>
+              <gmd:name>
+                <gmd:MD_Identifier>
+                  <gmd:code>
+                    <gmx:Anchor xlink:href="http://vocab.aodn.org.au/def/discovery_parameter/entity/565">Pressure (measured variable) in the water body exerted by overlying sea water and any medium above it</gmx:Anchor>
+                  </gmd:code>
+                </gmd:MD_Identifier>
+              </gmd:name>
+              <gmd:units>
+                <gml:BaseUnit gml:id="d25e469">
+                  <gml:identifier codeSpace="http://vocab.nerc.ac.uk/collection/P06/current/UPDB">http://vocab.nerc.ac.uk/collection/P06/current/UPDB</gml:identifier>
+                  <gml:name>Decibars</gml:name>
+                  <gml:unitsSystem />
+                </gml:BaseUnit>
+              </gmd:units>
+              <gmd:otherProperty>
+                <gco:Record xsi:type="mac:MI_AcquisitionInformation_PropertyType">
+                  <gmd:MI_AcquisitionInformation>
+                    <gmd:scope>
+                      <gmd:MD_Scope>
+                        <gmd:level>
+                          <gmd:MD_ScopeCode codeList="codeListLocation#MD_ScopeCode" codeListValue="collectionHardware" />
+                        </gmd:level>
+                      </gmd:MD_Scope>
+                    </gmd:scope>
+                    <gmd:platform>
+                      <gmd:MI_Platform>
+                        <gmd:identifier>
+                          <gmd:MD_Identifier>
+                            <gmd:code>
+                              <gmx:Anchor xlink:href="http://vocab.nerc.ac.uk/collection/L06/current/31">research vessel</gmx:Anchor>
+                            </gmd:code>
+                          </gmd:MD_Identifier>
+                        </gmd:identifier>
+                        <gmd:description>
+                          <gco:CharacterString>Platform used to capture data</gco:CharacterString>
+                        </gmd:description>
+                        <gmd:instrument>
+                          <gmd:MI_Instrument>
+                            <gmd:identifier>
+                              <gmd:MD_Identifier>
+                                <gmd:code>
+                                  <gmx:Anchor xlink:href="http://vocab.nerc.ac.uk/collection/L05/current/130">CTD</gmx:Anchor>
+                                </gmd:code>
+                              </gmd:MD_Identifier>
+                            </gmd:identifier>
+                            <gmd:type gco:nilReason="notApplicable" />
+                          </gmd:MI_Instrument>
+                        </gmd:instrument>
+                      </gmd:MI_Platform>
+                    </gmd:platform>
+                  </gmd:MI_AcquisitionInformation>
+                </gco:Record>
+              </gmd:otherProperty>
+            </gmd:MD_SampleDimension>
+          </gmd:attribute>
+          <gmd:attribute>
+            <gmd:MD_SampleDimension>
+              <gmd:name>
+                <gmd:MD_Identifier>
+                  <gmd:code>
+                    <gmx:Anchor xlink:href="http://vocab.aodn.org.au/def/discovery_parameter/entity/566">Pressure (measured variable) in the water body exerted by overlying sea water only</gmx:Anchor>
+                  </gmd:code>
+                </gmd:MD_Identifier>
+              </gmd:name>
+              <gmd:units>
+                <gml:BaseUnit gml:id="d25e555">
+                  <gml:identifier codeSpace="http://vocab.nerc.ac.uk/collection/P06/current/UPDB">http://vocab.nerc.ac.uk/collection/P06/current/UPDB</gml:identifier>
+                  <gml:name>Decibars</gml:name>
+                  <gml:unitsSystem />
+                </gml:BaseUnit>
+              </gmd:units>
+              <gmd:otherProperty>
+                <gco:Record xsi:type="mac:MI_AcquisitionInformation_PropertyType">
+                  <gmd:MI_AcquisitionInformation>
+                    <gmd:scope>
+                      <gmd:MD_Scope>
+                        <gmd:level>
+                          <gmd:MD_ScopeCode codeList="codeListLocation#MD_ScopeCode" codeListValue="collectionHardware" />
+                        </gmd:level>
+                      </gmd:MD_Scope>
+                    </gmd:scope>
+                    <gmd:platform>
+                      <gmd:MI_Platform>
+                        <gmd:identifier>
+                          <gmd:MD_Identifier>
+                            <gmd:code>
+                              <gmx:Anchor xlink:href="http://vocab.nerc.ac.uk/collection/L06/current/31">research vessel</gmx:Anchor>
+                            </gmd:code>
+                          </gmd:MD_Identifier>
+                        </gmd:identifier>
+                        <gmd:description>
+                          <gco:CharacterString>Platform used to capture data</gco:CharacterString>
+                        </gmd:description>
+                        <gmd:instrument>
+                          <gmd:MI_Instrument>
+                            <gmd:identifier>
+                              <gmd:MD_Identifier>
+                                <gmd:code>
+                                  <gmx:Anchor xlink:href="http://vocab.nerc.ac.uk/collection/L05/current/130">CTD</gmx:Anchor>
+                                </gmd:code>
+                              </gmd:MD_Identifier>
+                            </gmd:identifier>
+                            <gmd:type gco:nilReason="notApplicable" />
+                          </gmd:MI_Instrument>
+                        </gmd:instrument>
+                      </gmd:MI_Platform>
+                    </gmd:platform>
+                  </gmd:MI_AcquisitionInformation>
+                </gco:Record>
+              </gmd:otherProperty>
+            </gmd:MD_SampleDimension>
+          </gmd:attribute>
+        </gmd:MD_AttributeGroup>
+      </gmd:attributeGroup>
+    </gmd:MD_CoverageDescription>
+  </gmd:contentInfo>
+  <gmd:distributionInfo>
+    <gmd:MD_Distribution>
+      <gmd:distributionFormat>
+        <gmd:MD_Format>
+          <gmd:name>
+            <gco:CharacterString>DIGITAL - Spreadsheets - MS Excel</gco:CharacterString>
+          </gmd:name>
+          <gmd:version gco:nilReason="unknown" />
+        </gmd:MD_Format>
+      </gmd:distributionFormat>
+      <gmd:distributionFormat>
+        <gmd:MD_Format>
+          <gmd:name>
+            <gco:CharacterString>DIGITAL - Spreadsheets - other</gco:CharacterString>
+          </gmd:name>
+          <gmd:version gco:nilReason="unknown" />
+        </gmd:MD_Format>
+      </gmd:distributionFormat>
+      <gmd:distributionFormat>
+        <gmd:MD_Format>
+          <gmd:name>
+            <gco:CharacterString>DIGITAL - Text Documents - ASCII</gco:CharacterString>
+          </gmd:name>
+          <gmd:version gco:nilReason="unknown" />
+        </gmd:MD_Format>
+      </gmd:distributionFormat>
+      <gmd:distributionFormat>
+        <gmd:MD_Format>
+          <gmd:name>
+            <gco:CharacterString>DIGITAL - netCDF</gco:CharacterString>
+          </gmd:name>
+          <gmd:version gco:nilReason="unknown" />
+        </gmd:MD_Format>
+      </gmd:distributionFormat>
+      <gmd:transferOptions>
+        <gmd:MD_DigitalTransferOptions>
+          <gmd:onLine>
+            <gmd:CI_OnlineResource>
+              <gmd:linkage>
+                <gmd:URL>https://aesop.csiro.au/</gmd:URL>
+              </gmd:linkage>
+              <gmd:protocol>
+                <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
+              </gmd:protocol>
+              <gmd:name>
+                <gco:CharacterString>Data Link</gco:CharacterString>
+              </gmd:name>
+              <gmd:description>
+                <gco:CharacterString>Access all data - Australian-waters Earth Observation Phytoplankton-type Products (AEsOP)</gco:CharacterString>
+              </gmd:description>
+            </gmd:CI_OnlineResource>
+          </gmd:onLine>
+        </gmd:MD_DigitalTransferOptions>
+      </gmd:transferOptions>
+      <gmd:transferOptions>
+        <gmd:MD_DigitalTransferOptions>
+          <gmd:onLine>
+            <gmd:CI_OnlineResource>
+              <gmd:linkage>
+                <gmd:URL>https://portal.aodn.org.au/</gmd:URL>
+              </gmd:linkage>
+              <gmd:protocol>
+                <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
+              </gmd:protocol>
+              <gmd:name>
+                <gco:CharacterString>Data Link</gco:CharacterString>
+              </gmd:name>
+              <gmd:description>
+                <gco:CharacterString>Data also available via IMOS and AODN portal</gco:CharacterString>
+              </gmd:description>
+            </gmd:CI_OnlineResource>
+          </gmd:onLine>
+        </gmd:MD_DigitalTransferOptions>
+      </gmd:transferOptions>
+      <gmd:transferOptions>
+        <gmd:MD_DigitalTransferOptions>
+          <gmd:onLine>
+            <gmd:CI_OnlineResource>
+              <gmd:linkage>
+                <gmd:URL>https://imos.org.au/facilities/srs/oceancolour</gmd:URL>
+              </gmd:linkage>
+              <gmd:protocol>
+                <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
+              </gmd:protocol>
+              <gmd:name>
+                <gco:CharacterString>Documentation Link</gco:CharacterString>
+              </gmd:name>
+              <gmd:description>
+                <gco:CharacterString>IMOS Lucinda Jetty Coastal Observatory (LJCO ) Page</gco:CharacterString>
+              </gmd:description>
+            </gmd:CI_OnlineResource>
+          </gmd:onLine>
+        </gmd:MD_DigitalTransferOptions>
+      </gmd:transferOptions>
+      <gmd:transferOptions>
+        <gmd:MD_DigitalTransferOptions>
+          <gmd:onLine>
+            <gmd:CI_OnlineResource>
+              <gmd:linkage>
+                <gmd:URL>https://earth.esa.int/documents/700255/1793811/Dekker_CSIRO_MVT-Oct11.pdf/02891024-6972-48a4-b13f-e22069f7d471</gmd:URL>
+              </gmd:linkage>
+              <gmd:protocol>
+                <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
+              </gmd:protocol>
+              <gmd:name>
+                <gco:CharacterString>Documentation Link</gco:CharacterString>
+              </gmd:name>
+              <gmd:description>
+                <gco:CharacterString>Overview coastal - ocean colour cal - val Australia</gco:CharacterString>
+              </gmd:description>
+            </gmd:CI_OnlineResource>
+          </gmd:onLine>
+        </gmd:MD_DigitalTransferOptions>
+      </gmd:transferOptions>
+      <gmd:transferOptions>
+        <gmd:MD_DigitalTransferOptions>
+          <gmd:onLine>
+            <gmd:CI_OnlineResource>
+              <gmd:linkage>
+                <gmd:URL>https://creativecommons.org/licenses/by/4.0/</gmd:URL>
+              </gmd:linkage>
+              <gmd:protocol>
+                <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
+              </gmd:protocol>
+              <gmd:name>
+                <gco:CharacterString>Documentation Link</gco:CharacterString>
+              </gmd:name>
+              <gmd:description>
+                <gco:CharacterString>This work is licensed under a Creative Commons Attribution 4.0 International License</gco:CharacterString>
+              </gmd:description>
+            </gmd:CI_OnlineResource>
+          </gmd:onLine>
+        </gmd:MD_DigitalTransferOptions>
+      </gmd:transferOptions>
+      <gmd:transferOptions>
+        <gmd:MD_DigitalTransferOptions>
+          <gmd:onLine>
+            <gmd:CI_OnlineResource>
+              <gmd:linkage gco:nilReason="missing" />
+              <gmd:name>
+                <gco:CharacterString>Stored Data Location</gco:CharacterString>
+              </gmd:name>
+              <gmd:description>
+                <gco:CharacterString>c/o CSIRO O&amp;A Information and Data Centre (IDC)</gco:CharacterString>
+              </gmd:description>
+            </gmd:CI_OnlineResource>
+          </gmd:onLine>
+        </gmd:MD_DigitalTransferOptions>
+      </gmd:transferOptions>
+      <gmd:transferOptions>
+        <gmd:MD_DigitalTransferOptions />
+      </gmd:transferOptions>
+    </gmd:MD_Distribution>
+  </gmd:distributionInfo>
+  <gmd:dataQualityInfo>
+    <gmd:DQ_DataQuality>
+      <gmd:scope>
+        <gmd:DQ_Scope>
+          <gmd:level>
+            <gmd:MD_ScopeCode codeList="http://schemas.aodn.org.au/mcp-2.0/schema/resources/Codelist/gmxCodelists.xml#MD_ScopeCode" codeListValue="dataset">dataset</gmd:MD_ScopeCode>
+          </gmd:level>
+        </gmd:DQ_Scope>
+      </gmd:scope>
+      <gmd:report>
+        <gmd:DQ_AbsoluteExternalPositionalAccuracy>
+          <gmd:evaluationProcedure />
+          <gmd:dateTime />
+          <gmd:result>
+            <gmd:DQ_ConformanceResult>
+              <gmd:specification>
+                <gmd:CI_Citation>
+                  <gmd:title gco:nilReason="inapplicable" />
+                  <gmd:date>
+                    <gmd:CI_Date>
+                      <gmd:date />
+                      <gmd:dateType>
+                        <gmd:CI_DateTypeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication">publication</gmd:CI_DateTypeCode>
+                      </gmd:dateType>
+                    </gmd:CI_Date>
+                  </gmd:date>
+                </gmd:CI_Citation>
+              </gmd:specification>
+              <gmd:explanation>
+                <gco:CharacterString>Position defined by onboard GPS</gco:CharacterString>
+              </gmd:explanation>
+              <gmd:pass gco:nilReason="inapplicable" />
+            </gmd:DQ_ConformanceResult>
+          </gmd:result>
+        </gmd:DQ_AbsoluteExternalPositionalAccuracy>
+      </gmd:report>
+      <gmd:report>
+        <gmd:DQ_NonQuantitativeAttributeCorrectness>
+          <gmd:evaluationProcedure />
+          <gmd:dateTime />
+          <gmd:result>
+            <gmd:DQ_ConformanceResult>
+              <gmd:specification>
+                <gmd:CI_Citation>
+                  <gmd:title gco:nilReason="inapplicable" />
+                  <gmd:date>
+                    <gmd:CI_Date>
+                      <gmd:date />
+                      <gmd:dateType>
+                        <gmd:CI_DateTypeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication">publication</gmd:CI_DateTypeCode>
+                      </gmd:dateType>
+                    </gmd:CI_Date>
+                  </gmd:date>
+                </gmd:CI_Citation>
+              </gmd:specification>
+              <gmd:explanation>
+                <gco:CharacterString>For pigment analyses, b,e-carotene and b,b-carotene were not resolved.</gco:CharacterString>
+              </gmd:explanation>
+              <gmd:pass gco:nilReason="inapplicable" />
+            </gmd:DQ_ConformanceResult>
+          </gmd:result>
+        </gmd:DQ_NonQuantitativeAttributeCorrectness>
+      </gmd:report>
+      <gmd:report>
+        <gmd:DQ_CompletenessOmission>
+          <gmd:evaluationProcedure />
+          <gmd:dateTime />
+          <gmd:result>
+            <gmd:DQ_ConformanceResult>
+              <gmd:specification>
+                <gmd:CI_Citation>
+                  <gmd:title gco:nilReason="inapplicable" />
+                  <gmd:date>
+                    <gmd:CI_Date>
+                      <gmd:date />
+                      <gmd:dateType>
+                        <gmd:CI_DateTypeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication">publication</gmd:CI_DateTypeCode>
+                      </gmd:dateType>
+                    </gmd:CI_Date>
+                  </gmd:date>
+                </gmd:CI_Citation>
+              </gmd:specification>
+              <gmd:explanation>
+                <gco:CharacterString>The dataset is complete</gco:CharacterString>
+              </gmd:explanation>
+              <gmd:pass gco:nilReason="inapplicable" />
+            </gmd:DQ_ConformanceResult>
+          </gmd:result>
+        </gmd:DQ_CompletenessOmission>
+      </gmd:report>
+      <gmd:lineage>
+        <gmd:LI_Lineage>
+          <gmd:statement>
+            <gco:CharacterString>Water samples were taken on-board the vessel and stored under cool and dark conditions until filtering took place. Samples were analysed and QC procedures were carried out in the Ocean Colour Laboratory at CMAR, Hobart. Pigment analysis; approximately 2 litres of sample water was filtered through a 47 mm glass fibre filter (Whatman GF/F) and then stored in liquid nitrogen until analysis. To extract the pigments, the filters were cut into small pieces and covered with 100% acetone (3 mls) in a 10 ml centrifuge tube. The samples were vortexed for about 30 seconds and then sonicated for 15 minutes in the dark. The samples were then kept in the dark at 4 °C for approximately 15 hours. After this time 200 µL water was added to the acetone such that the extract mixture was 90:10 acetone:water (vol:vol) and sonicated once more for 15 minutes. The extracts were centrifuged to remove the filter paper and then filtered through a 0.2 µm membrane filter (Whatman, anatope) prior to analysis by HPLC using a Waters Alliance high performance liquid chromatography system, comprising a 2695XE separations module with column heater and refrigerated autosampler and a 2996 photo-diode array detector. Immediately prior to injection the sample extract was mixed with a buffer solution	(90:10 28 mM tetrabutyl ammonium acetate, pH 6.5 : methanol) within the sample loop. Pigments were separated using a Zorbax Eclipse XDB-C8 stainless steel 150 mm x 4.6 mm ID column with 3.5 µm particle size (Agilent Technologies) with gradient elution as described in Van Heukelem and Thomas (2001). The separated pigments were detected at 436 nm and identified against standard spectra using Waters Empower software. Concentrations of chlorophyll a, chlorophyll b, b,b-carotene and b,e-carotene in sample chromatograms were determined from standards (Sigma, USA or DHI, Denmark). Spectral absorption; approximately 2 litres of sample water was filtered through a 25 mm glass fibre filter (Whatman GF/F) and the filter then stored flat in liquid nitrogen until analysis. Optical density spectra for total particulate matter were obtained using a Cinta 404 UV/VIS dual beam spectrophotometer equipped with an integrating sphere.</gco:CharacterString>
+          </gmd:statement>
+        </gmd:LI_Lineage>
+      </gmd:lineage>
+    </gmd:DQ_DataQuality>
+  </gmd:dataQualityInfo>
+</gmd:MD_Metadata>
+

@@ -1,0 +1,413 @@
+{
+  "title": "Sprightly Voyage SP 6B/81 HYD Data",
+  "description": "This dataset contains the processed Hydrology or \"Bottle Data\" (HYD) data collected on Sprightly cruise SP 6B/81. The cruise took place in the Tasman Sea off the coast of New South Wales in June 1981. This dataset has been processed together with one hydrology station from SP 6A/81 as and is archived as G98106 Station Nos. 155 - 182 within the CSIRO Marine and Atmospheric Research Data Centre in Hobart.",
+  "extent": {
+    "bbox": [
+      [
+        136.37,
+        -39.8,
+        143.52,
+        -36.17
+      ],
+      [
+        136.37,
+        -39.8,
+        143.52,
+        -36.17
+      ]
+    ],
+    "temporal": [
+      [
+        "1981-06-14T14:00:00Z",
+        "1981-06-20T14:00:00Z"
+      ],
+      [
+        "1981-06-14T14:00:00Z",
+        "1981-06-20T14:00:00Z"
+      ]
+    ]
+  },
+  "summaries": {
+    "score": 95,
+    "status": "completed",
+    "credits": [],
+    "statement": "Data source: original field data  Data processing and quality control: according to then current CSIRO Hydrology data processing procedures.",
+    "revision": "2004-05-14T15:50:22",
+    "dataset_group": "csiro oceans and atmosphere",
+    "update_frequency": "completed",
+    "proj:geometry": {
+      "geometries": [
+        {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                136.37,
+                -39.8
+              ],
+              [
+                143.52,
+                -39.8
+              ],
+              [
+                143.52,
+                -36.17
+              ],
+              [
+                136.37,
+                -36.17
+              ],
+              [
+                136.37,
+                -39.8
+              ]
+            ]
+          ]
+        }
+      ],
+      "type": "GeometryCollection"
+    },
+    "temporal": [
+      {
+        "start": "1981-06-14T14:00:00Z",
+        "end": "1981-06-20T14:00:00Z"
+      }
+    ],
+    "parameter_vocabs": [
+      "temperature",
+      "salinity"
+    ],
+    "platform_vocabs": [
+      "research vessel"
+    ]
+  },
+  "contacts": [
+    {
+      "roles": [
+        "pointOfContact",
+        "about"
+      ],
+      "organization": "CSIRO Oceans & Atmosphere - Hobart",
+      "name": "CSIRO O&A, Information & Data Centre",
+      "position": "Data Requests",
+      "emails": [],
+      "addresses": [],
+      "phones": [],
+      "links": []
+    },
+    {
+      "roles": [
+        "pointOfContact",
+        "metadata"
+      ],
+      "organization": "CSIRO Oceans & Atmosphere - Hobart",
+      "name": "CSIRO O&A, Information & Data Centre",
+      "position": "Data Requests",
+      "emails": [],
+      "addresses": [],
+      "phones": [],
+      "links": []
+    }
+  ],
+  "languages": [
+    {
+      "code": "eng",
+      "name": "English"
+    }
+  ],
+  "links": [
+    {
+      "href": "https://www.cmar.csiro.au/geoserver/wms?&CQL_FILTER=SURVEY_NAME%20%3D%20%27SP198106%27",
+      "rel": "related",
+      "type": "",
+      "title": "mnf:HYDROLOGY_HEADER_AODN_VIEW"
+    },
+    {
+      "href": "https://www.marine.csiro.au/data/trawler/dataset.cfm?survey=SP198106&data_type=hydro",
+      "rel": "related",
+      "type": "",
+      "title": "Data Link"
+    },
+    {
+      "href": "https://creativecommons.org/licenses/by/4.0/",
+      "rel": "related",
+      "type": "text/html",
+      "title": "Documentation Link"
+    },
+    {
+      "href": "https://geonetwork-edge.edge.aodn.org.au:443/geonetwork/images/logos/c953222f-bb17-4ddf-bdaa-5bf86d04d72a.png",
+      "rel": "icon",
+      "type": "image/png",
+      "title": "Suggest icon for dataset"
+    },
+    {
+      "href": "https://www.cmar.csiro.au/data/trawler/dataset_mapfile.cfm?survey=SP198106&data_type=hydro&img_type=tn",
+      "rel": "preview",
+      "type": "image"
+    }
+  ],
+  "license": "Data is made available under a Creative Commons Attribution 4.0 International Licence, please see link. Data is supplied 'as is' without any warranty or guarantee except as required by law to be given to you. The data may not be free of error, comprehensive, current or appropriate for your particular purpose. You accept all risk and responsibility for its use. ATTRIBUTION STATEMENT: The dataset [Insert-dataset-name-here] downloaded on [Insert-DD-Mmm-YYYY-here] was provided by CSIRO.",
+  "providers": [
+    {
+      "name": "CSIRO Oceans & Atmosphere - Hobart",
+      "roles": [
+        "pointOfContact"
+      ]
+    }
+  ],
+  "themes": [
+    {
+      "concepts": [
+        {
+          "id": "Earth Science | Oceans | Ocean Chemistry | Nitrate",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/4fde380a-38c5-4d46-bc80-4f2515a43983"
+        },
+        {
+          "id": "Earth Science | Oceans | Ocean Chemistry | Nitrite",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/941410da-0b7f-4ec6-a718-212194ced13f"
+        },
+        {
+          "id": "Earth Science | Oceans | Ocean Chemistry | Oxygen",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/90aa8838-79bd-4b28-b518-8217e863c385"
+        },
+        {
+          "id": "Earth Science | Oceans | Ocean Chemistry | Phosphate",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/0b513d8c-bfd3-44ee-976e-42757b8375a2"
+        },
+        {
+          "id": "Earth Science | Oceans | Ocean Chemistry | Silicate",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/c91c8879-1b29-48e3-b4cd-a238af66cdaf"
+        },
+        {
+          "id": "Earth Science | Oceans | Ocean Temperature | Water Temperature",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/46206e8c-8def-406f-9e62-da4e74633a58"
+        },
+        {
+          "id": "Earth Science | Oceans | Salinity/Density | Salinity",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/7e95b5fc-1d58-431a-af36-948b29fa870d"
+        }
+      ],
+      "scheme": "theme",
+      "description": "Olsen, L.M., G. Major, K. Shein, J. Scialdone, S. Ritz, T. Stevens, M. Morahan, A. Aleman, R. Vogel, S. Leicester, H. Weir, M. Meaux, S. Grebas, C.Solomon, M. Holland, T. Northcutt, R. A. Restrepo, R. Bilodeau, 2013. NASA/Global Change Master Directory (GCMD) Earth Science Keywords. Version 8.0.0.0.0",
+      "title": "GCMD Keywords"
+    },
+    {
+      "concepts": [
+        {
+          "id": "Niskin Bottles",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept"
+        },
+        {
+          "id": "Thermosalinographs",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:101"
+        }
+      ],
+      "scheme": "equipment",
+      "description": "",
+      "title": "CSIRO Equipment"
+    },
+    {
+      "concepts": [
+        {
+          "id": "Coastal Waters (Australia) | South Australia Coast, SA",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.place.urn:aodn.org.au:geographicextents&id=urn:aodn.org.au:geographicextents:concept:1009"
+        },
+        {
+          "id": "Coastal Waters (Australia) | Victoria Coast, VIC",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.place.urn:aodn.org.au:geographicextents&id=urn:aodn.org.au:geographicextents:concept:1014"
+        }
+      ],
+      "scheme": "place",
+      "description": "AODN GEN",
+      "title": "AODN Geographic Extent Names"
+    },
+    {
+      "concepts": [
+        {
+          "id": "Research Voyage: SP 06B/81",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.survey.urn:marlin.csiro.au:surveyregister&id=urn:marlin.csiro.au:surveyregister:concept:527"
+        }
+      ],
+      "scheme": "survey",
+      "description": "MarLIN Survey Register",
+      "title": "CSIRO Survey List"
+    },
+    {
+      "concepts": [
+        {
+          "id": "Unknown (no details available)",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.project.urn:marlin.csiro.au:projectregister&id=urn:marlin.csiro.au:projectregister:concept:500"
+        }
+      ],
+      "scheme": "project",
+      "description": "MarLIN Project Register",
+      "title": "CSIRO Project List"
+    },
+    {
+      "concepts": [
+        {
+          "id": "Vessel/Station Data: Hydrology",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.discipline.urn:marlin.csiro.au:keywords:standardDataType&id=urn:marlin.csiro.au:keywords:standardDataType:concept:3513"
+        }
+      ],
+      "scheme": "discipline",
+      "description": "MarLIN Standard Datatypes Thesaurus",
+      "title": "CSIRO Standard Data Types"
+    },
+    {
+      "concepts": [
+        {
+          "id": "Ship: Sprightly",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.dataSource.urn:marlin.csiro.au:sourceregister&id=urn:marlin.csiro.au:sourceregister:concept:9"
+        }
+      ],
+      "scheme": "dataSource",
+      "description": "MarLIN Source Register",
+      "title": "CSIRO Source List"
+    },
+    {
+      "concepts": [
+        {
+          "id": "Practical salinity of the water body",
+          "url": "http://vocab.nerc.ac.uk/collection/P01/current/PSLTZZ01"
+        },
+        {
+          "id": "Temperature of the water body",
+          "url": "http://vocab.nerc.ac.uk/collection/P01/current/TEMPPR01"
+        }
+      ],
+      "scheme": "",
+      "description": "",
+      "title": "Keywords (DataParameter)"
+    },
+    {
+      "concepts": [
+        {
+          "id": "thermosalinographs",
+          "url": "http://vocab.nerc.ac.uk/collection/L05/current/133"
+        }
+      ],
+      "scheme": "",
+      "description": "",
+      "title": "Keywords (Instrument)"
+    },
+    {
+      "concepts": [
+        {
+          "id": "research vessel",
+          "url": "http://vocab.nerc.ac.uk/collection/L06/current/31"
+        }
+      ],
+      "scheme": "",
+      "description": "",
+      "title": "Keywords (Platform)"
+    }
+  ],
+  "id": "1ffbc4bf-66f1-4cd4-893e-1719c60082c2",
+  "search_suggestions": {
+    "abstract_phrases": [
+      "from sp",
+      "bottle data hyd",
+      "been",
+      "data",
+      "cruise took",
+      "has been processed together",
+      "dataset contains",
+      "collected",
+      "tasman",
+      "hobart",
+      "bottle data hyd data",
+      "station from",
+      "data hyd data",
+      "research",
+      "tasman sea off",
+      "atmospheric research data",
+      "station nos",
+      "has been",
+      "data hyd data collected",
+      "from",
+      "has",
+      "dataset has been",
+      "bottle data",
+      "took",
+      "new",
+      "hydrology",
+      "new south",
+      "wales",
+      "tasman sea",
+      "cruise sp",
+      "atmospheric research data centre",
+      "coast",
+      "contains",
+      "data collected",
+      "sea off",
+      "cruise",
+      "been processed",
+      "south wales",
+      "dataset has",
+      "research data",
+      "south",
+      "been processed together",
+      "hydrology station from",
+      "bottle",
+      "sea",
+      "marine",
+      "archived",
+      "atmospheric research",
+      "csiro marine",
+      "nos",
+      "processed together",
+      "atmospheric",
+      "hyd data",
+      "has been processed",
+      "station",
+      "place",
+      "new south wales",
+      "cruise took place",
+      "sp",
+      "together",
+      "station from sp",
+      "csiro",
+      "one hydrology station",
+      "hydrology station from sp",
+      "sprightly cruise sp",
+      "one hydrology",
+      "within",
+      "one",
+      "data centre",
+      "centre",
+      "one hydrology station from",
+      "off",
+      "processed hydrology",
+      "processed",
+      "hyd",
+      "research data centre",
+      "june",
+      "data hyd",
+      "hyd data collected",
+      "took place",
+      "hydrology station",
+      "sprightly cruise",
+      "dataset has been processed",
+      "dataset",
+      "sprightly"
+    ],
+    "parameter_vocabs_sayt": [
+      "temperature",
+      "salinity"
+    ],
+    "platform_vocabs_sayt": [
+      "research vessel"
+    ]
+  },
+  "sci:citation": "{\"suggestedCitation\":null,\"useLimitations\":null,\"otherConstraints\":[\"Data is made available under a Creative Commons Attribution 4.0 International Licence, please see link. Data is supplied 'as is' without any warranty or guarantee except as required by law to be given to you. The data may not be free of error, comprehensive, current or appropriate for your particular purpose. You accept all risk and responsibility for its use. ATTRIBUTION STATEMENT: The dataset [Insert-dataset-name-here] downloaded on [Insert-DD-Mmm-YYYY-here] was provided by CSIRO.\"]}",
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/contacts/v0.1.1/schema.json",
+    "https://stac-extensions.github.io/projection/v1.1.0/schema.json",
+    "https://stac-extensions.github.io/language/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/themes/v1.0.0/schema.json"
+  ],
+  "type": "Collection"
+}

@@ -1,0 +1,424 @@
+{
+  "title": "Guide to the marine zooplankton of south eastern Australia",
+  "description": "The Guide to the Marine Zooplankton of south eastern Australia, is an interactive tool providing a comprehensive, fully illustrated means of identification for the major zooplankton located in south eastern Australia. \n\nThis new identification guide to local marine zooplankton is available online at:\n\nhttp://www.imas.utas.edu.au/zooplankton\n\nThis is the result of collaboration between the Marine Research Laboratories and School of Zoology, University of Tasmania, and the Australian Antarctic Division.\n\nPlease note that the full contents of the site will be available on (Free) CD-Rom",
+  "extent": {
+    "bbox": [
+      [
+        142.03125,
+        -45.9140968323,
+        155.0390625,
+        -20.4258155823
+      ],
+      [
+        142.03125,
+        -45.9140968323,
+        155.0390625,
+        -20.4258155823
+      ]
+    ],
+    "temporal": [
+      [
+        "2002-12-31T13:00:00Z",
+        null
+      ],
+      [
+        "2002-12-31T13:00:00Z",
+        null
+      ]
+    ]
+  },
+  "summaries": {
+    "score": 85,
+    "status": "onGoing",
+    "credits": [],
+    "scope": {
+      "code": "document",
+      "name": ""
+    },
+    "statement": "Samples\n\nThe majority of samples were collected within coastal waters of eastern Tasmania, Australia. Care was taken to ensure that collection did not stress the zooplankton (distorting their structure/appearance). Samples were processed and images taken as soon as possible, to capture the natural appearance and colouration of the zooplankton. As zooplankton are often preserved prior to sorting and identification, we have also photographed and represented preserved specimens of some taxa for comparison. Where a preserved animal is photographed, this is stated in the caption. Additionally, as the preference for zooplankton sorting under a microscope varies, in some cases specimens are represented both on light and dark backgrounds.",
+    "creation": "2020-08-17T20:41:27",
+    "revision": "2020-08-17T20:41:27",
+    "dataset_group": "imas",
+    "update_frequency": "other",
+    "proj:geometry": {
+      "geometries": [
+        {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                142.0313,
+                -45.9141
+              ],
+              [
+                155.0391,
+                -45.9141
+              ],
+              [
+                155.0391,
+                -20.4258
+              ],
+              [
+                142.0313,
+                -20.4258
+              ],
+              [
+                142.0313,
+                -45.9141
+              ]
+            ]
+          ]
+        }
+      ],
+      "type": "GeometryCollection"
+    },
+    "temporal": [
+      {
+        "start": "2002-12-31T13:00:00Z",
+        "end": null
+      }
+    ]
+  },
+  "contacts": [
+    {
+      "roles": [
+        "author",
+        "about"
+      ],
+      "organization": "Institute for Marine and Antarctic Studies (IMAS), University of Tasmania (UTAS)",
+      "name": "Swadling, Kerrie, Dr",
+      "position": "Research Fellow",
+      "emails": [
+        "k.swadling@utas.edu.au"
+      ],
+      "addresses": [
+        {
+          "delivery_point": [
+            "IMAS - Taroona",
+            "Private Bag 49"
+          ],
+          "city": "Hobart",
+          "country": "Australia",
+          "postal_code": "7001",
+          "administrative_area": "Tasmania"
+        }
+      ],
+      "phones": [
+        {
+          "roles": [
+            "voice"
+          ],
+          "value": "61 3 6227 7218"
+        },
+        {
+          "roles": [
+            "facsimile"
+          ],
+          "value": "61 3 6227 8035"
+        }
+      ],
+      "links": []
+    },
+    {
+      "roles": [
+        "pointOfContact",
+        "about"
+      ],
+      "organization": "Institute for Marine and Antarctic Studies (IMAS), University of Tasmania (UTAS)",
+      "name": "Slotwinski, Anita",
+      "position": "",
+      "emails": [
+        "australianzooplankton@gmail.com"
+      ],
+      "addresses": [
+        {
+          "delivery_point": [
+            "IMAS - Taroona",
+            "Private Bag 49"
+          ],
+          "city": "Hobart",
+          "country": "Australia",
+          "postal_code": "7001",
+          "administrative_area": "Tasmania"
+        }
+      ],
+      "phones": [],
+      "links": []
+    },
+    {
+      "roles": [
+        "pointOfContact",
+        "metadata"
+      ],
+      "organization": "Institute for Marine and Antarctic Studies (IMAS), University of Tasmania (UTAS)",
+      "name": "",
+      "position": "IMAS Data Manager",
+      "emails": [],
+      "addresses": [],
+      "phones": [],
+      "links": []
+    },
+    {
+      "roles": [
+        "author",
+        "citation"
+      ],
+      "organization": "Tasmanian Aquaculture and Fisheries Institute (TAFI)",
+      "name": "Swadling, Kerrie, Dr",
+      "position": "Research Fellow",
+      "emails": [
+        "k.swadling@utas.edu.au"
+      ],
+      "addresses": [
+        {
+          "delivery_point": [
+            "University of Tasmania, Private Bag 49"
+          ],
+          "city": "Hobart",
+          "country": "Australia",
+          "postal_code": "7001",
+          "administrative_area": "Tasmania"
+        }
+      ],
+      "phones": [
+        {
+          "roles": [
+            "voice"
+          ],
+          "value": "61 3 6227 7218"
+        },
+        {
+          "roles": [
+            "facsimile"
+          ],
+          "value": "61 3 6227 8035"
+        }
+      ],
+      "links": []
+    },
+    {
+      "roles": [
+        "author",
+        "citation"
+      ],
+      "organization": "Tasmanian Aquaculture and Fisheries Institute (TAFI)",
+      "name": "Slotwinski, Anita",
+      "position": "",
+      "emails": [],
+      "addresses": [],
+      "phones": [],
+      "links": []
+    },
+    {
+      "roles": [
+        "author",
+        "citation"
+      ],
+      "organization": "School of Zoology, University of Tasmania (UTAS)",
+      "name": "Ritz, David, Assoc/Prof",
+      "position": "",
+      "emails": [],
+      "addresses": [],
+      "phones": [],
+      "links": []
+    },
+    {
+      "roles": [
+        "author",
+        "citation"
+      ],
+      "organization": "Tasmanian Aquaculture and Fisheries Institute (TAFI)",
+      "name": "Gibson, John, Dr",
+      "position": "",
+      "emails": [],
+      "addresses": [],
+      "phones": [],
+      "links": []
+    },
+    {
+      "roles": [
+        "author",
+        "citation"
+      ],
+      "organization": "Australian Antarctic Division (AAD)",
+      "name": "Hosie, Graham, Dr",
+      "position": "",
+      "emails": [],
+      "addresses": [],
+      "phones": [],
+      "links": []
+    }
+  ],
+  "languages": [
+    {
+      "code": "eng",
+      "name": "English"
+    }
+  ],
+  "links": [
+    {
+      "href": "http://www.imas.utas.edu.au/zooplankton",
+      "rel": "related",
+      "type": "text/html",
+      "title": "Online resource: Guide to marine zooplankton of SE Australia"
+    },
+    {
+      "href": "https://geonetwork-edge.edge.aodn.org.au:443/geonetwork/images/logos/1bb8f09c-99d6-431f-b902-4d3e4cef02df.png",
+      "rel": "icon",
+      "type": "image/png",
+      "title": "Suggest icon for dataset"
+    },
+    {
+      "href": "https://metadata.imas.utas.edu.au/geonetwork/srv/api/records/216bc160-2534-11dd-813e-00188b4c0af8/attachments/noctiluca_c_full_s.png",
+      "rel": "preview",
+      "type": "image"
+    },
+    {
+      "href": "https://metadata.imas.utas.edu.au/geonetwork/srv/eng/catalog.search#/metadata/216bc160-2534-11dd-813e-00188b4c0af8",
+      "rel": "describedby",
+      "type": "text/html",
+      "title": "Full metadata link"
+    }
+  ],
+  "license": "",
+  "providers": [
+    {
+      "name": "Institute for Marine and Antarctic Studies (IMAS), University of Tasmania (UTAS)",
+      "roles": [
+        "pointOfContact"
+      ]
+    }
+  ],
+  "themes": [
+    {
+      "concepts": [
+        {
+          "id": "Biosphere | Zoology | Zooplankton",
+          "url": null
+        },
+        {
+          "id": "Oceans | Marine Biology | Marine Invertebrates",
+          "url": null
+        }
+      ],
+      "scheme": "theme",
+      "description": "",
+      "title": "Global Change Master Directory Earth Science keywords v.5.3.8"
+    },
+    {
+      "concepts": [
+        {
+          "id": "Freshwater Ecology",
+          "url": "http://purl.org/au-research/vocabulary/anzsrc-for/2008/060204"
+        },
+        {
+          "id": "Palaeoecology",
+          "url": "http://purl.org/au-research/vocabulary/anzsrc-for/2008/060206"
+        },
+        {
+          "id": "Marine and Estuarine Ecology (incl. Marine Ichthyology)",
+          "url": "http://purl.org/au-research/vocabulary/anzsrc-for/2008/060205"
+        }
+      ],
+      "scheme": "discipline",
+      "description": "",
+      "title": "Australian and New Zealand Standard Research Classification (ANZSRC): Fields of Research"
+    }
+  ],
+  "id": "216bc160-2534-11dd-813e-00188b4c0af8",
+  "search_suggestions": {
+    "abstract_phrases": [
+      "fully illustrated",
+      "new identification",
+      "division please",
+      "antarctic division please note",
+      "available online",
+      "interactive",
+      "available",
+      "zoology university",
+      "research",
+      "division",
+      "cd rom",
+      "full contents",
+      "identification",
+      "major",
+      "free cd",
+      "school",
+      "major zooplankton located",
+      "australian antarctic division please",
+      "guide",
+      "fully",
+      "between",
+      "marine zooplankton",
+      "new",
+      "eastern",
+      "tasmania",
+      "identification guide",
+      "south eastern australia",
+      "research laboratories",
+      "australian antarctic",
+      "australia",
+      "please",
+      "comprehensive fully illustrated",
+      "tool",
+      "illustrated",
+      "major zooplankton",
+      "marine research",
+      "contents",
+      "australian antarctic division",
+      "free cd rom",
+      "laboratories",
+      "division please note",
+      "new identification guide",
+      "http",
+      "marine research laboratories",
+      "full",
+      "comprehensive fully illustrated means",
+      "note",
+      "providing",
+      "south",
+      "university",
+      "antarctic division please",
+      "australian",
+      "tool providing",
+      "comprehensive fully",
+      "marine",
+      "local",
+      "interactive tool",
+      "result",
+      "rom",
+      "local marine",
+      "free",
+      "antarctic",
+      "fully illustrated means",
+      "eastern australia",
+      "means",
+      "cd",
+      "zooplankton",
+      "antarctic division",
+      "collaboration between",
+      "please note",
+      "site",
+      "collaboration",
+      "local marine zooplankton",
+      "zooplankton located",
+      "south eastern",
+      "illustrated means",
+      "located",
+      "online",
+      "interactive tool providing",
+      "comprehensive",
+      "zoology"
+    ]
+  },
+  "sci:citation": "{\"suggestedCitation\":null,\"useLimitations\":[\"These photographs can be reproduced for further educational purposes, but only if the graphical content is not altered, and the photographer and this website are fully acknowledged. All information and data (including graphics) provided by the University and its staff on this site are, unless otherwise noted, copyright by the University of Tasmania, Australia. Unlimited distribution of University copyright material is permitted, but only if textual and graphic content is not altered and the source is acknowledged. The copyright in other material found on this server may be owned by other people, and you should get permission from them before distributing their material.\"],\"otherConstraints\":[\"To reference: Swadling, K.M., Slotwinski, A.S., Ritz, D.A., Gibson, J.A.E., and Hosie, G.W. 2008 Guide to the marine zooplankton of south eastern Australia. Version 1.0 June 2008 http://www.imas.utas.edu.au/zooplankton\"]}",
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/contacts/v0.1.1/schema.json",
+    "https://stac-extensions.github.io/projection/v1.1.0/schema.json",
+    "https://stac-extensions.github.io/language/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/themes/v1.0.0/schema.json"
+  ],
+  "type": "Collection"
+}

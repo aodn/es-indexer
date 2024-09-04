@@ -1,0 +1,629 @@
+{
+  "title": "RV Investigator Voyage IN2017_V05 EM710 Multibeam Echosounder Data",
+  "description": "This record describes multibeam echosounder data collected on RV Investigator voyage IN2017_V05, Long-term recovery of trawled marine communities 25 years after the world?s largest adaptive management experiment, which departed Broome on the 11 October 2017 and returned to Henderson on the 10 November 2017.\n\nThe Kongsberg EM710 multibeam echosounder was used to acquire seafloor bathymetry and backscatter information and watercolumn backscatter around the Northwest Shelf.\n\nThe EM710 provides a 0.5� by 1� transmit and receive angular resolution respectively. The echosounder's nominal frequency range is from 70 to 100 kHz.\n\nData are stored in *.all raw format for bathymetry and backscatter and *.wcd format for watercolumn backscatter at CSIRO. There are 1436 files totalling 177GB of raw *.all data and 483 water column *.wcd files totalling 438 GB of data in this dataset.\n\nSound velocity profiles were applied to this data during data acquisition. Bathymetry data contained in *.all format is corrected for motion and position.\n\nTide corrections were applied to the processed data using GPS tides in CARIS 10.3. Processed data had outliers removed. Processed line data are available in *.gsf and ascii format, and processed bathymetry and backscatter grids in geotiff format.\n\nAdditional information regarding this dataset, including further information on processing streams, is contained in the GSM data acquisition and processing report. Additional data products may be available on request.",
+  "extent": {
+    "bbox": [
+      [
+        111.0,
+        -32.0,
+        123.0,
+        -15.0
+      ],
+      [
+        111.0,
+        -32.0,
+        123.0,
+        -15.0
+      ]
+    ],
+    "temporal": [
+      [
+        "2017-10-10T21:00:00Z",
+        "2017-11-09T20:40:00Z"
+      ],
+      [
+        "2017-10-10T21:00:00Z",
+        "2017-11-09T20:40:00Z"
+      ]
+    ]
+  },
+  "summaries": {
+    "score": 100,
+    "status": "completed",
+    "credits": [],
+    "scope": {
+      "code": "dataset",
+      "name": ""
+    },
+    "statement": "Original field data. Processed data are SV corrected, GPS tide corrected and edited using CARIS version 10.3.",
+    "revision": "2018-06-18T09:24:34",
+    "dataset_group": "csiro oceans and atmosphere",
+    "update_frequency": "completed",
+    "proj:geometry": {
+      "geometries": [
+        {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                111,
+                -32
+              ],
+              [
+                123,
+                -32
+              ],
+              [
+                123,
+                -15
+              ],
+              [
+                111,
+                -15
+              ],
+              [
+                111,
+                -32
+              ]
+            ]
+          ]
+        }
+      ],
+      "type": "GeometryCollection"
+    },
+    "temporal": [
+      {
+        "start": "2017-10-10T21:00:00Z",
+        "end": "2017-11-09T20:40:00Z"
+      }
+    ],
+    "parameter_vocabs": [
+      "bathymetry",
+      "density"
+    ],
+    "platform_vocabs": [
+      "research vessel"
+    ]
+  },
+  "contacts": [
+    {
+      "roles": [
+        "pointOfContact",
+        "about"
+      ],
+      "organization": "CSIRO Oceans & Atmosphere - Hobart",
+      "name": "CSIRO O&A, Information & Data Centre",
+      "position": "Data Requests",
+      "emails": [],
+      "addresses": [],
+      "phones": [],
+      "links": []
+    },
+    {
+      "roles": [
+        "processor",
+        "metadata"
+      ],
+      "organization": "CSIRO/Oceans and Atmosphere",
+      "name": "Data Officer (DW), Hobart",
+      "position": "",
+      "emails": [],
+      "addresses": [],
+      "phones": [],
+      "links": []
+    },
+    {
+      "roles": [
+        "originator",
+        "metadata"
+      ],
+      "organization": "CSIRO",
+      "name": "Nau, Amy",
+      "position": "",
+      "emails": [],
+      "addresses": [],
+      "phones": [],
+      "links": []
+    },
+    {
+      "roles": [
+        "originator",
+        "metadata"
+      ],
+      "organization": "CSIRO Oceans & Atmosphere - Hobart",
+      "name": "Heaney, Bernadette",
+      "position": "Technical Officer (Natl Collections & Marine Infrastructure)",
+      "emails": [],
+      "addresses": [],
+      "phones": [],
+      "links": []
+    },
+    {
+      "roles": [
+        "pointOfContact",
+        "metadata"
+      ],
+      "organization": "CSIRO Oceans & Atmosphere - Hobart",
+      "name": "CSIRO O&A, Information & Data Centre",
+      "position": "Data Requests",
+      "emails": [],
+      "addresses": [],
+      "phones": [],
+      "links": []
+    }
+  ],
+  "languages": [
+    {
+      "code": "eng",
+      "name": "English"
+    }
+  ],
+  "links": [
+    {
+      "href": "https://www.marine.csiro.au/data/gsm/gsm_extract.cfm?survey=IN2017_V05&instrument=EM710",
+      "rel": "related",
+      "type": "text/html",
+      "title": "Geophysical Survey and Mapping website information for this data set"
+    },
+    {
+      "href": "https://www.marine.csiro.au/data/trawler/survey_list.cfm?source_id=309",
+      "rel": "related",
+      "type": "text/html",
+      "title": "RV Investigator survey information"
+    },
+    {
+      "href": "https://mnf.csiro.au/",
+      "rel": "related",
+      "type": "text/html",
+      "title": "MNF home page"
+    },
+    {
+      "href": "https://www.marine.csiro.au/data/gsm/get_report.cfm?survey=in2017_v05",
+      "rel": "related",
+      "type": "text/html",
+      "title": "Geophysical Survey and Mapping data acquisition and processing report"
+    },
+    {
+      "href": "https://geonetwork-edge.edge.aodn.org.au:443/geonetwork/images/logos/c953222f-bb17-4ddf-bdaa-5bf86d04d72a.png",
+      "rel": "icon",
+      "type": "image/png",
+      "title": "Suggest icon for dataset"
+    },
+    {
+      "href": "https://www.cmar.csiro.au/data/trawler/dataset_mapfile.cfm?survey=IN2017_V05&data_type=uwy",
+      "rel": "preview",
+      "type": "image"
+    }
+  ],
+  "license": "Attribution 4.0",
+  "providers": [
+    {
+      "name": "CSIRO/Oceans and Atmosphere",
+      "roles": [
+        "processor"
+      ]
+    },
+    {
+      "name": "CSIRO",
+      "roles": [
+        "originator"
+      ]
+    },
+    {
+      "name": "CSIRO Oceans & Atmosphere - Hobart",
+      "roles": [
+        "originator"
+      ]
+    },
+    {
+      "name": "CSIRO Oceans & Atmosphere - Hobart",
+      "roles": [
+        "pointOfContact"
+      ]
+    }
+  ],
+  "themes": [
+    {
+      "concepts": [
+        {
+          "id": "Ship: Investigator (RV)",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.dataSource.urn:marlin.csiro.au:sourceregister&id=urn:marlin.csiro.au:sourceregister:concept:309"
+        }
+      ],
+      "scheme": "dataSource",
+      "description": "",
+      "title": "CSIRO Source List"
+    },
+    {
+      "concepts": [
+        {
+          "id": "Marine National Facility",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.discipline.urn:marlin.csiro.au:keywords:cmarAOI&id=urn:marlin.csiro.au:keywords:cmarAOI:concept:3208"
+        }
+      ],
+      "scheme": "discipline",
+      "description": "",
+      "title": "CSIRO Areas Of Interest"
+    },
+    {
+      "concepts": [
+        {
+          "id": "Research Voyage: IN2017_V05",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.survey.urn:marlin.csiro.au:surveyregister&id=urn:marlin.csiro.au:surveyregister:concept:2189"
+        }
+      ],
+      "scheme": "survey",
+      "description": "",
+      "title": "CSIRO Survey List"
+    },
+    {
+      "concepts": [
+        {
+          "id": "Earth Science | Oceans | Bathymetry/Seafloor Topography",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/c16bda61-353b-4668-af2f-bbb98785b6fa"
+        }
+      ],
+      "scheme": "theme",
+      "description": "",
+      "title": "GCMD Keywords"
+    },
+    {
+      "concepts": [
+        {
+          "id": "Coastal Cities / Towns (Australia) | Broome, WA",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.place.urn:aodn.org.au:geographicextents&id=urn:aodn.org.au:geographicextents:concept:105"
+        }
+      ],
+      "scheme": "place",
+      "description": "",
+      "title": "AODN Geographic Extent Names"
+    },
+    {
+      "concepts": [
+        {
+          "id": "Multibeam Echosounder - EM710",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:142"
+        }
+      ],
+      "scheme": "equipment",
+      "description": "",
+      "title": "CSIRO Equipment"
+    },
+    {
+      "concepts": [
+        {
+          "id": "Sea-floor depth below surface of the water body",
+          "url": "http://vocab.aodn.org.au/def/discovery_parameter/entity/574"
+        },
+        {
+          "id": "Sea-floor surface hardness",
+          "url": "N/A"
+        },
+        {
+          "id": "Density of the water body",
+          "url": "http://vocab.aodn.org.au/def/discovery_parameter/entity/401"
+        }
+      ],
+      "scheme": "",
+      "description": "",
+      "title": "Keywords (DataParameter)"
+    },
+    {
+      "concepts": [
+        {
+          "id": "multi-beam echosounders",
+          "url": "http://vocab.nerc.ac.uk/collection/L05/current/157"
+        }
+      ],
+      "scheme": "",
+      "description": "",
+      "title": "Keywords (Instrument)"
+    },
+    {
+      "concepts": [
+        {
+          "id": "research vessel",
+          "url": "http://vocab.nerc.ac.uk/collection/L06/current/31"
+        }
+      ],
+      "scheme": "",
+      "description": "",
+      "title": "Keywords (Platform)"
+    }
+  ],
+  "id": "1ff35792-9059-40ae-9a1f-ed7d11349608",
+  "search_suggestions": {
+    "abstract_phrases": [
+      "processed data using gps",
+      "additional data products may",
+      "velocity profiles were applied",
+      "resolution",
+      "grids",
+      "acquisition bathymetry",
+      "record",
+      "trawled marine",
+      "removed processed line data",
+      "processed data had",
+      "world s largest adaptive",
+      "additional information",
+      "processed data",
+      "gps tides",
+      "using",
+      "raw",
+      "had outliers removed processed",
+      "s largest",
+      "report additional data",
+      "marine communities",
+      "had outliers",
+      "describes multibeam echosounder data",
+      "dataset including further information",
+      "sound velocity profiles",
+      "echosounder data collected",
+      "processing",
+      "data using gps tides",
+      "receive angular",
+      "trawled",
+      "using gps tides",
+      "water column wcd files",
+      "receive angular resolution",
+      "including further information",
+      "using gps",
+      "rv",
+      "northwest",
+      "wcd format",
+      "largest adaptive management experiment",
+      "acquire",
+      "long",
+      "marine",
+      "tide corrections were",
+      "adaptive",
+      "nominal",
+      "position tide",
+      "term",
+      "after",
+      "management experiment which departed",
+      "acquisition",
+      "csiro",
+      "caris",
+      "receive",
+      "nominal frequency range",
+      "data during data",
+      "column",
+      "data had outliers removed",
+      "outliers removed processed",
+      "tide corrections",
+      "experiment which departed",
+      "describes",
+      "echosounder data",
+      "column wcd files",
+      "during data acquisition",
+      "s largest adaptive management",
+      "information",
+      "returned",
+      "multibeam",
+      "broome",
+      "dataset",
+      "processing streams",
+      "november",
+      "available",
+      "had",
+      "bathymetry data contained",
+      "sound velocity profiles were",
+      "frequency",
+      "trawled marine communities",
+      "sound velocity",
+      "totalling",
+      "departed broome",
+      "processing report additional data",
+      "which",
+      "processed line",
+      "nominal frequency",
+      "all raw",
+      "resolution respectively",
+      "processed line data",
+      "gps",
+      "regarding",
+      "shelf",
+      "water column",
+      "data collected",
+      "data products",
+      "term recovery",
+      "bathymetry",
+      "echosounder",
+      "khz",
+      "corrections were",
+      "information regarding",
+      "were applied",
+      "describes multibeam echosounder",
+      "experiment which departed broome",
+      "multibeam echosounder",
+      "applied",
+      "additional",
+      "adaptive management",
+      "henderson",
+      "rv investigator",
+      "water column wcd",
+      "northwest shelf",
+      "acquire seafloor bathymetry",
+      "acquisition bathymetry data",
+      "provides",
+      "record describes",
+      "world s largest",
+      "during data acquisition bathymetry",
+      "gb",
+      "ascii",
+      "kongsberg",
+      "processing report additional",
+      "further information",
+      "departed",
+      "tide corrections were applied",
+      "transmit",
+      "outliers removed processed line",
+      "position tide corrections",
+      "watercolumn backscatter",
+      "backscatter around",
+      "dataset sound velocity",
+      "position tide corrections were",
+      "management",
+      "format additional information regarding",
+      "s largest adaptive",
+      "gsf",
+      "raw all",
+      "format additional information",
+      "gsm",
+      "adaptive management experiment which",
+      "receive angular resolution respectively",
+      "bathymetry data",
+      "removed processed",
+      "collected",
+      "during",
+      "years",
+      "profiles were",
+      "experiment",
+      "gsm data acquisition",
+      "wcd",
+      "acquisition bathymetry data contained",
+      "dataset including",
+      "record describes multibeam echosounder",
+      "line data",
+      "column wcd",
+      "streams",
+      "backscatter",
+      "largest adaptive management",
+      "backscatter information",
+      "angular",
+      "record describes multibeam",
+      "report additional",
+      "geotiff format additional",
+      "which departed broome",
+      "additional data products",
+      "range",
+      "column wcd files totalling",
+      "geotiff format",
+      "respectively",
+      "wcd files totalling",
+      "which departed",
+      "velocity profiles were",
+      "dataset including further",
+      "seafloor",
+      "products",
+      "frequency range",
+      "acquire seafloor",
+      "world",
+      "wcd files",
+      "angular resolution respectively",
+      "management experiment which",
+      "data acquisition",
+      "format additional",
+      "processed bathymetry",
+      "data contained",
+      "may",
+      "data during data acquisition",
+      "outliers removed",
+      "angular resolution",
+      "corrected",
+      "profiles were applied",
+      "adaptive management experiment",
+      "during data",
+      "removed",
+      "stored",
+      "report",
+      "all data",
+      "long term recovery",
+      "corrections were applied",
+      "additional data",
+      "investigator voyage",
+      "processing report",
+      "communities",
+      "tide",
+      "experiment which",
+      "all raw format",
+      "data",
+      "sound",
+      "data acquisition bathymetry",
+      "velocity profiles",
+      "used",
+      "geotiff",
+      "world s",
+      "all format",
+      "processed data using",
+      "dataset sound velocity profiles",
+      "data had outliers",
+      "dataset sound",
+      "additional information regarding",
+      "from",
+      "raw format",
+      "files totalling",
+      "including further",
+      "data had",
+      "gsm data",
+      "all",
+      "ascii format",
+      "including",
+      "format",
+      "profiles",
+      "data using",
+      "water",
+      "voyage",
+      "watercolumn backscatter around",
+      "corrections",
+      "were",
+      "backscatter grids",
+      "files",
+      "october",
+      "long term",
+      "position",
+      "data products may",
+      "multibeam echosounder data",
+      "largest",
+      "request",
+      "products may",
+      "years after",
+      "removed processed line",
+      "line",
+      "rv investigator voyage",
+      "recovery",
+      "outliers",
+      "largest adaptive",
+      "around",
+      "report additional data products",
+      "investigator",
+      "processed data had outliers",
+      "data acquisition bathymetry data",
+      "multibeam echosounder data collected",
+      "raw all data",
+      "motion",
+      "had outliers removed",
+      "data during",
+      "khz data",
+      "velocity",
+      "watercolumn",
+      "tides",
+      "describes multibeam",
+      "processed",
+      "data using gps",
+      "contained",
+      "seafloor bathymetry",
+      "management experiment",
+      "further",
+      "geotiff format additional information"
+    ],
+    "parameter_vocabs_sayt": [
+      "bathymetry",
+      "density"
+    ],
+    "platform_vocabs_sayt": [
+      "research vessel"
+    ]
+  },
+  "sci:citation": "{\"suggestedCitation\":null,\"useLimitations\":null,\"otherConstraints\":[\"Data is made available under a Creative Commons Attribution 4.0 International Licence, please see link. Data is supplied 'as is' without any warranty or guarantee except as required by law to be given to you. The data may not be free of error, comprehensive, current or appropriate for your particular purpose. You accept all risk and responsibility for its use. ATTRIBUTION STATEMENT: The dataset [Insert-dataset-name-here] downloaded on [Insert-DD-Mmm-YYYY-here] was collected on voyage [Insert-voyage-name-here] by the Marine National Facility.\"]}",
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/contacts/v0.1.1/schema.json",
+    "https://stac-extensions.github.io/projection/v1.1.0/schema.json",
+    "https://stac-extensions.github.io/language/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/themes/v1.0.0/schema.json"
+  ],
+  "type": "Collection"
+}
