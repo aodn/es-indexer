@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 
 
 @Slf4j
@@ -25,7 +26,7 @@ public class VocabsIndexUtils {
     }
 
     @PostConstruct
-    public void init() throws IOException {
+    public void init() throws IOException, InterruptedException, ExecutionException {
         // this could take a few minutes to complete, in development, you can skip it with -Dapp.initialiseVocabsIndex=false
         // you can call /api/v1/indexer/ext/vocabs/populate endpoint to manually refresh the vocabs index, without waiting for the scheduled task
         if (initialiseVocabsIndex) {
@@ -35,7 +36,7 @@ public class VocabsIndexUtils {
     }
 
     @Scheduled(cron = "0 0 0 * * *")
-    public void scheduledRefreshVocabsData() throws IOException {
+    public void scheduledRefreshVocabsData() throws IOException, ExecutionException, InterruptedException {
         log.info("Refreshing ARDC vocabularies data");
         // clear existing caches
         vocabService.clearParameterVocabCache();

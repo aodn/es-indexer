@@ -267,7 +267,7 @@ public class IndexerServiceTests extends BaseTestClass {
         try {
             insertMetadataRecords(uuid, "classpath:canned/sample11.xml");
 
-            indexerService.indexAllMetadataRecordsFromGeoNetwork(true, null);
+            indexerService.indexAllMetadataRecordsFromGeoNetwork(null, true, null);
             Hit<ObjectNode> objectNodeHit = indexerService.getDocumentByUUID(uuid);
 
             String test = String.valueOf(Objects.requireNonNull(objectNodeHit.source()));

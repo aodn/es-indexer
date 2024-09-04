@@ -1,7 +1,8 @@
 package au.org.aodn.esindexer.controller;
 
-import au.org.aodn.ardcvocabs.configuration.VocabApiPaths;
+import au.org.aodn.ardcvocabs.model.VocabApiPaths;
 import au.org.aodn.ardcvocabs.model.VocabModel;
+import au.org.aodn.ardcvocabs.service.ArdcVocabService;
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.service.VocabService;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -18,17 +19,16 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 @RestController
 @RequestMapping(value = "/api/v1/indexer/ext/")
 @Tag(name="Indexer Extras", description = "The Indexer API - Ext endpoints")
 @Slf4j
 public class IndexerExtController {
-    VocabService vocabService;
-    @Autowired
-    public void setArdcVocabService(VocabService vocabService) {
-        this.vocabService = vocabService;
-    }
+
+    protected VocabService vocabService;
+    protected ArdcVocabService ardcVocabService;
 
     @Value(AppConstants.ARDC_VOCAB_API_BASE)
     protected String vocabApiBase;
@@ -37,6 +37,12 @@ public class IndexerExtController {
     @Autowired
     public void setIndexerObjectMapper(ObjectMapper indexerObjectMapper) {
         this.indexerObjectMapper = indexerObjectMapper;
+    }
+
+    @Autowired
+    public IndexerExtController(ArdcVocabService ardcVocabService, VocabService vocabService) {
+        this.vocabService = vocabService;
+        this.ardcVocabService = ardcVocabService;
     }
 
     // this endpoint for debugging/development purposes
@@ -64,7 +70,7 @@ public class IndexerExtController {
     @GetMapping(path="/ardc/parameter/vocabs")
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Get parameter vocabs from ARDC directly")
     public ResponseEntity<List<JsonNode>> getParameterVocabsFromArdc() {
-        List<VocabModel> vocabs = vocabService.getVocabTreeFromArdcByType(vocabApiBase, VocabApiPaths.PARAMETER_VOCAB);
+        List<VocabModel> vocabs = ardcVocabService.getVocabTreeFromArdcByType(vocabApiBase, VocabApiPaths.PARAMETER_VOCAB);
         return ResponseEntity.ok(indexerObjectMapper.valueToTree(vocabs));
     }
 
@@ -72,7 +78,7 @@ public class IndexerExtController {
     @GetMapping(path="/ardc/platform/vocabs")
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Get platform vocabs from ARDC directly")
     public ResponseEntity<List<JsonNode>> getPlatformVocabsFromArdc() {
-        List<VocabModel> vocabs = vocabService.getVocabTreeFromArdcByType(vocabApiBase, VocabApiPaths.PLATFORM_VOCAB);
+        List<VocabModel> vocabs = ardcVocabService.getVocabTreeFromArdcByType(vocabApiBase, VocabApiPaths.PLATFORM_VOCAB);
         return ResponseEntity.ok(indexerObjectMapper.valueToTree(vocabs));
     }
 
@@ -80,14 +86,14 @@ public class IndexerExtController {
     @GetMapping(path="/ardc/organisation/vocabs")
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Get organisation vocabs from ARDC directly")
     public ResponseEntity<List<JsonNode>> getOrganisationVocabsFromArdc() {
-        List<VocabModel> vocabs = vocabService.getVocabTreeFromArdcByType(vocabApiBase, VocabApiPaths.ORGANISATION_VOCAB);
+        List<VocabModel> vocabs = ardcVocabService.getVocabTreeFromArdcByType(vocabApiBase, VocabApiPaths.ORGANISATION_VOCAB);
         return ResponseEntity.ok(indexerObjectMapper.valueToTree(vocabs));
     }
 
     // this endpoint for debugging/development purposes
     @GetMapping(path="/vocabs/populate")
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Populate data to the vocabs index")
-    public ResponseEntity<String> populateDataToVocabsIndex() throws IOException {
+    public ResponseEntity<String> populateDataToVocabsIndex() throws IOException, ExecutionException, InterruptedException {
         // clear existing caches
         vocabService.clearParameterVocabCache();
         vocabService.clearPlatformVocabCache();

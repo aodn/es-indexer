@@ -194,7 +194,7 @@ public class GeoNetworkServiceTests extends BaseTestClass {
             insertMetadataRecords("9e5c3031-a026-48b3-a153-a70c2e2b78b9", "classpath:canned/sample1.xml");
             insertMetadataRecords("830f9a83-ae6b-4260-a82a-24c4851f7119", "classpath:canned/sample2.xml");
 
-            Iterable<String> i = geoNetworkService.getAllMetadataRecords();
+            Iterable<String> i = geoNetworkService.getAllMetadataRecords(null);
 
             // The content verified above, just make sure it returned the correct number
             int count = 0;
@@ -237,7 +237,7 @@ public class GeoNetworkServiceTests extends BaseTestClass {
             insertMetadataRecords(UUID6, "classpath:canned/sample6.xml");
             insertMetadataRecords(UUID7, "classpath:canned/sample7.xml");
 
-            Iterable<String> i = geoNetworkService.getAllMetadataRecords();
+            Iterable<String> i = geoNetworkService.getAllMetadataRecords(null);
 
             final List<MDMetadataType> xml = new ArrayList<>();
             for(String x : i) {
@@ -349,7 +349,7 @@ public class GeoNetworkServiceTests extends BaseTestClass {
             geoNetworkService.setGn4ElasticClient(spyClient);
 
             // Should not flow exception and retry correctly given some call throw IOException
-            Iterable<String> i = geoNetworkService.getAllMetadataRecords();
+            Iterable<String> i = geoNetworkService.getAllMetadataRecords(null);
 
             // It should handle retry internally and without throwing exception
             for(String x : i) {

@@ -1,7 +1,8 @@
 package au.org.aodn.esindexer.service;
 
-import au.org.aodn.ardcvocabs.configuration.VocabApiPaths;
+import au.org.aodn.ardcvocabs.model.VocabApiPaths;
 import au.org.aodn.ardcvocabs.model.VocabModel;
+import au.org.aodn.ardcvocabs.service.ArdcVocabService;
 import au.org.aodn.esindexer.BaseTestClass;
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.stac.model.ConceptModel;
@@ -34,6 +35,9 @@ public class VocabServiceTest extends BaseTestClass {
 
     @Autowired
     VocabService vocabService;
+
+    @Autowired
+    ArdcVocabService ardcVocabService;
 
     @Autowired
     protected ObjectMapper indexerObjectMapper;
@@ -121,7 +125,7 @@ public class VocabServiceTest extends BaseTestClass {
     @Test
     void testProcessParameterVocabs() throws IOException, JSONException {
         // read from ARDC
-        List<VocabModel> parameterVocabsFromArdc = vocabService.getVocabTreeFromArdcByType(AppConstants.ARDC_VOCAB_API_BASE, VocabApiPaths.PARAMETER_VOCAB);
+        List<VocabModel> parameterVocabsFromArdc = ardcVocabService.getVocabTreeFromArdcByType(AppConstants.ARDC_VOCAB_API_BASE, VocabApiPaths.PARAMETER_VOCAB);
 
         // verify the contents randomly
         assertNotNull(parameterVocabsFromArdc);
@@ -168,7 +172,7 @@ public class VocabServiceTest extends BaseTestClass {
     @Test
     void testProcessPlatformVocabs() throws IOException, JSONException {
         // read from ARDC
-        List<VocabModel> platformVocabsFromArdc = vocabService.getVocabTreeFromArdcByType(AppConstants.ARDC_VOCAB_API_BASE, VocabApiPaths.PLATFORM_VOCAB);
+        List<VocabModel> platformVocabsFromArdc = ardcVocabService.getVocabTreeFromArdcByType(AppConstants.ARDC_VOCAB_API_BASE, VocabApiPaths.PLATFORM_VOCAB);
 
         // verify the contents randomly
         assertNotNull(platformVocabsFromArdc);
@@ -213,7 +217,7 @@ public class VocabServiceTest extends BaseTestClass {
     @Test
     void testProcessOrganisationVocabs() throws IOException, JSONException {
         // read from ARDC
-        List<VocabModel> organisationVocabsFromArdc = vocabService.getVocabTreeFromArdcByType(AppConstants.ARDC_VOCAB_API_BASE, VocabApiPaths.ORGANISATION_VOCAB);
+        List<VocabModel> organisationVocabsFromArdc = ardcVocabService.getVocabTreeFromArdcByType(AppConstants.ARDC_VOCAB_API_BASE, VocabApiPaths.ORGANISATION_VOCAB);
 
         // verify the contents randomly
         assertNotNull(organisationVocabsFromArdc);

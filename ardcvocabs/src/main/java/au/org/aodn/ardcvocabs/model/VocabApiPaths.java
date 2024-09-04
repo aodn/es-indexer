@@ -1,4 +1,4 @@
-package au.org.aodn.ardcvocabs.configuration;
+package au.org.aodn.ardcvocabs.model;
 
 import lombok.Getter;
 

@@ -1,18 +1,16 @@
 package au.org.aodn.esindexer.service;
 
-import au.org.aodn.ardcvocabs.configuration.VocabApiPaths;
-import au.org.aodn.ardcvocabs.model.VocabModel;
 import au.org.aodn.stac.model.ThemesModel;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public interface VocabService {
-    List<VocabModel> getVocabTreeFromArdcByType(String vocabApiBase, VocabApiPaths vocabApiPaths);
     List<String> extractVocabLabelsFromThemes(List<ThemesModel> themes, String vocabType) throws IOException;
 
-    void populateVocabsData() throws IOException;
+    void populateVocabsData() throws IOException, InterruptedException, ExecutionException;
     void clearParameterVocabCache();
     void clearPlatformVocabCache();
     void clearOrganisationVocabCache();
