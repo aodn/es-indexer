@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:gmx="http://www.isotc211.org/2005/gmx" xmlns:gts="http://www.isotc211.org/2005/gts" xmlns:gsr="http://www.isotc211.org/2005/gsr" xmlns:gmi="http://www.isotc211.org/2005/gmi" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://www.isotc211.org/2005/gmd http://www.isotc211.org/2005/gmd/gmd.xsd http://www.isotc211.org/2005/gmx http://www.isotc211.org/2005/gmx/gmx.xsd http://www.isotc211.org/2005/srv http://schemas.opengis.net/iso/19139/20060504/srv/srv.xsd">
+<gmd:MD_Metadata
+        xmlns:gmd="http://www.isotc211.org/2005/gmd"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:gco="http://www.isotc211.org/2005/gco"
+        xmlns:srv="http://www.isotc211.org/2005/srv"
+        xmlns:gmx="http://www.isotc211.org/2005/gmx"
+        xmlns:gts="http://www.isotc211.org/2005/gts"
+        xmlns:gsr="http://www.isotc211.org/2005/gsr"
+        xmlns:gmi="http://www.isotc211.org/2005/gmi"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://www.isotc211.org/2005/gmd http://www.isotc211.org/2005/gmd/gmd.xsd http://www.isotc211.org/2005/gmx http://www.isotc211.org/2005/gmx/gmx.xsd http://www.isotc211.org/2005/srv http://schemas.opengis.net/iso/19139/20060504/srv/srv.xsd">
   <gmd:fileIdentifier>
     <gco:CharacterString>1fea8fe8-7fd2-702f-e053-08114f8c8ec6</gco:CharacterString>
   </gmd:fileIdentifier>
@@ -79,9 +89,9 @@
       <gmd:abstract>
         <gco:CharacterString>The O&amp;A Underway data set includes data collected during the voyages of Australia's Marine National Facility and CSIRO marine research vessels.  Underway data typically consists of voyage track point data that has been interpolated into a standard time interval.
 
-The subset extracted for MARVL contains data on the continental shelf as defined by the 200 metre depth contour from the 2012 Bathymetric dataset merged (spatial union) with the Exclusive Economic Zone (EEZ) in the Australian Maritime Boundary dataset (http://www.ga.gov.au/metadata-gateway/metadata/record/gcat_63565) available from Geosciences Australia (GA).  This subset of the data contains 7,179,357 position records from 206 voyages and includes air/water temperature, pressure and salinity (derived) and spans from 1995 to the present.
+          The subset extracted for MARVL contains data on the continental shelf as defined by the 200 metre depth contour from the 2012 Bathymetric dataset merged (spatial union) with the Exclusive Economic Zone (EEZ) in the Australian Maritime Boundary dataset (http://www.ga.gov.au/metadata-gateway/metadata/record/gcat_63565) available from Geosciences Australia (GA).  This subset of the data contains 7,179,357 position records from 206 voyages and includes air/water temperature, pressure and salinity (derived) and spans from 1995 to the present.
 
-The full data set is held in the O&amp;A Information &amp; Datacentre Data Warehouse, which currently holds over 28,457,501 position records from 313 voyages collected since 1986.  This data includes air pressure, air and sea surface temperature, water depth, humidity, fluorescence, pyranometer, wind, par, ship heading and speed, rain, radiometer and salinity (derived). Individual metadata records have been created for each research voyage.</gco:CharacterString>
+          The full data set is held in the O&amp;A Information &amp; Datacentre Data Warehouse, which currently holds over 28,457,501 position records from 313 voyages collected since 1986.  This data includes air pressure, air and sea surface temperature, water depth, humidity, fluorescence, pyranometer, wind, par, ship heading and speed, rain, radiometer and salinity (derived). Individual metadata records have been created for each research voyage.</gco:CharacterString>
       </gmd:abstract>
       <gmd:credit />
       <gmd:status>

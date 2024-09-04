@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:gmx="http://www.isotc211.org/2005/gmx" xmlns:gts="http://www.isotc211.org/2005/gts" xmlns:gsr="http://www.isotc211.org/2005/gsr" xmlns:gmi="http://www.isotc211.org/2005/gmi" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://www.isotc211.org/2005/gmd http://www.isotc211.org/2005/gmd/gmd.xsd http://www.isotc211.org/2005/gmx http://www.isotc211.org/2005/gmx/gmx.xsd http://www.isotc211.org/2005/srv http://schemas.opengis.net/iso/19139/20060504/srv/srv.xsd">
+<gmd:MD_Metadata
+        xmlns:gmd="http://www.isotc211.org/2005/gmd"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:gco="http://www.isotc211.org/2005/gco"
+        xmlns:srv="http://www.isotc211.org/2005/srv"
+        xmlns:gmx="http://www.isotc211.org/2005/gmx"
+        xmlns:gts="http://www.isotc211.org/2005/gts"
+        xmlns:gsr="http://www.isotc211.org/2005/gsr"
+        xmlns:gmi="http://www.isotc211.org/2005/gmi"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://www.isotc211.org/2005/gmd http://www.isotc211.org/2005/gmd/gmd.xsd http://www.isotc211.org/2005/gmx http://www.isotc211.org/2005/gmx/gmx.xsd http://www.isotc211.org/2005/srv http://schemas.opengis.net/iso/19139/20060504/srv/srv.xsd">
   <gmd:fileIdentifier>
     <gco:CharacterString>21800bbf-8aab-49fe-93fa-f1b4271641dd</gco:CharacterString>
   </gmd:fileIdentifier>
@@ -87,12 +97,12 @@
       <gmd:abstract>
         <gco:CharacterString>Fish and shark assemblage data are being obtained from the analysis of Stereo-BRUV footage captured in September 2015. Data is comprised of raw camera output stream files (.MTS and .MP4) for 45 Stereo-BRUV drops in deep water from 20-55m in a transect offshore of Bessieres Island, Western Australia. Files are less than 1.9GB and total approximately 1TB. Videos are structured within Stereo-BRUV drops (identified with an OpCode i.e. NCB1-NCB272) with a left and right camera folder within each drop. Videos are lodged with the iVEC Data Store - https://data.ivec.org
 
-The Pilbara Marine Conservation Partnership (PMCP) was an initiative designed to enhance the net conservation benefits of the globally-significant coral reef ecosystems of the Pilbara (Western Australia) by providing an assessment of the condition and trajectory of key ecological values. These assessments were designed to inform and complement existing governance and management arrangements and the PMCP is intended to provide ongoing advice and assessment for conservation efforts in the region, providing lasting benefits.
+          The Pilbara Marine Conservation Partnership (PMCP) was an initiative designed to enhance the net conservation benefits of the globally-significant coral reef ecosystems of the Pilbara (Western Australia) by providing an assessment of the condition and trajectory of key ecological values. These assessments were designed to inform and complement existing governance and management arrangements and the PMCP is intended to provide ongoing advice and assessment for conservation efforts in the region, providing lasting benefits.
 
-The PMCP concept is based on three core ecological components, namely:
-Coral Reef Health - concentrating mainly on habitat forming primary producers.  
-Fish and Sharks - their community structure, interactions and impacts on lower trophic levels.  
-Environmental Pressures - physical and anthropogenic factors that influence the condition of reefs and associated biota.</gco:CharacterString>
+          The PMCP concept is based on three core ecological components, namely:
+          Coral Reef Health - concentrating mainly on habitat forming primary producers.
+          Fish and Sharks - their community structure, interactions and impacts on lower trophic levels.
+          Environmental Pressures - physical and anthropogenic factors that influence the condition of reefs and associated biota.</gco:CharacterString>
       </gmd:abstract>
       <gmd:credit />
       <gmd:status>
@@ -403,7 +413,7 @@ Environmental Pressures - physical and anthropogenic factors that influence the 
           <gmd:statement>
             <gco:CharacterString>All data sets collated as part of the Pilbara Marine Conservation Partnership (PMCP) are stored within iVEC using data storage from Research Data Storage Infrastructure (RDSI).
 
-Please refer to the published literature for a detailed descripton of project methodology.</gco:CharacterString>
+              Please refer to the published literature for a detailed descripton of project methodology.</gco:CharacterString>
           </gmd:statement>
         </gmd:LI_Lineage>
       </gmd:lineage>

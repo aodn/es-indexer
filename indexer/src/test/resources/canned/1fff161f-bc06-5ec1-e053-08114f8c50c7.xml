@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:gmx="http://www.isotc211.org/2005/gmx" xmlns:gts="http://www.isotc211.org/2005/gts" xmlns:gsr="http://www.isotc211.org/2005/gsr" xmlns:gmi="http://www.isotc211.org/2005/gmi" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://www.isotc211.org/2005/gmd http://www.isotc211.org/2005/gmd/gmd.xsd http://www.isotc211.org/2005/gmx http://www.isotc211.org/2005/gmx/gmx.xsd http://www.isotc211.org/2005/srv http://schemas.opengis.net/iso/19139/20060504/srv/srv.xsd">
+<gmd:MD_Metadata
+        xmlns:gmd="http://www.isotc211.org/2005/gmd"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:gco="http://www.isotc211.org/2005/gco"
+        xmlns:srv="http://www.isotc211.org/2005/srv"
+        xmlns:gmx="http://www.isotc211.org/2005/gmx"
+        xmlns:gts="http://www.isotc211.org/2005/gts"
+        xmlns:gsr="http://www.isotc211.org/2005/gsr"
+        xmlns:gmi="http://www.isotc211.org/2005/gmi"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://www.isotc211.org/2005/gmd http://www.isotc211.org/2005/gmd/gmd.xsd http://www.isotc211.org/2005/gmx http://www.isotc211.org/2005/gmx/gmx.xsd http://www.isotc211.org/2005/srv http://schemas.opengis.net/iso/19139/20060504/srv/srv.xsd">
   <gmd:fileIdentifier>
     <gco:CharacterString>1fff161f-bc06-5ec1-e053-08114f8c50c7</gco:CharacterString>
   </gmd:fileIdentifier>
@@ -390,41 +400,41 @@
       </gmd:extent>
       <gmd:supplementalInformation>
         <gco:CharacterString>ATTRIBUTE STATEMENT:
-Abbreviation (Name in full) - units are mg m-3		
-Chl c3 (Chlorophyll c3)		
-Chlide a (Chlorophyllide a)		
-Chl c1+c2 (Chlorophyll c1+c2)		
-Phide a (Phaeophorbide a)		
-Perid (Peridinin)		
-But-fuco (19- butanoyloxyfucoxanthin)		
-Fuco (Fucoxanthin)		
-Neox (Neoxanthin)		
-Pras (Prasinoxanthin		
-Violax (Violaxanthin)		
-Hex-fuco (19-hexanoyloxyfucoxanthin)		
-Astax (Astaxanthin)		
-Diadino (Diadinoxanthin)		
-Antherax (Antheraxanthin)		
-Allo (Alloxanthin)		
-Diato (Diatoxanthin)		
-Zea (Zeaxanthin)		
-Lut (Lutein)		
-Canthax (Canthaxanthin)		
-Gyro-diester (Gyroxanthin diester)		
-Chl b (Chlorophyll b)		
-Chl b + DV chl b (Chlorophyll b + divinyl chlorophyll b (these two forms of chlorophyll b co-elute))		
-chl a allomer (Chlorophyll a allomer)		
-Chl a (Chlorophyll a)		
-Chl a + DV chl a (Chlorophyll a + divinyl chlorophyll a (these two forms of chlorophyll a co-elute))		
-Chl a ep (Chlorophyll a epimer)		
-Phytin b (Phaeophytin b)		
-Phytin a (Phaeophytin a)		
-Be-car (B,e - carotene)		
-BB-car (B,B - carotene)		
-TSS or TSM (total suspended solids or total suspended matter)		
-ap (absorption coefficient of particulate matter - m-1)		
-ad (absorption coefficient ofmom-algal or detrital matter - m-1)		
-aCDOM (absorption coefficient of CDOM - m-1)</gco:CharacterString>
+          Abbreviation (Name in full) - units are mg m-3
+          Chl c3 (Chlorophyll c3)
+          Chlide a (Chlorophyllide a)
+          Chl c1+c2 (Chlorophyll c1+c2)
+          Phide a (Phaeophorbide a)
+          Perid (Peridinin)
+          But-fuco (19- butanoyloxyfucoxanthin)
+          Fuco (Fucoxanthin)
+          Neox (Neoxanthin)
+          Pras (Prasinoxanthin
+          Violax (Violaxanthin)
+          Hex-fuco (19-hexanoyloxyfucoxanthin)
+          Astax (Astaxanthin)
+          Diadino (Diadinoxanthin)
+          Antherax (Antheraxanthin)
+          Allo (Alloxanthin)
+          Diato (Diatoxanthin)
+          Zea (Zeaxanthin)
+          Lut (Lutein)
+          Canthax (Canthaxanthin)
+          Gyro-diester (Gyroxanthin diester)
+          Chl b (Chlorophyll b)
+          Chl b + DV chl b (Chlorophyll b + divinyl chlorophyll b (these two forms of chlorophyll b co-elute))
+          chl a allomer (Chlorophyll a allomer)
+          Chl a (Chlorophyll a)
+          Chl a + DV chl a (Chlorophyll a + divinyl chlorophyll a (these two forms of chlorophyll a co-elute))
+          Chl a ep (Chlorophyll a epimer)
+          Phytin b (Phaeophytin b)
+          Phytin a (Phaeophytin a)
+          Be-car (B,e - carotene)
+          BB-car (B,B - carotene)
+          TSS or TSM (total suspended solids or total suspended matter)
+          ap (absorption coefficient of particulate matter - m-1)
+          ad (absorption coefficient ofmom-algal or detrital matter - m-1)
+          aCDOM (absorption coefficient of CDOM - m-1)</gco:CharacterString>
       </gmd:supplementalInformation>
     </gmd:MD_DataIdentification>
   </gmd:identificationInfo>
