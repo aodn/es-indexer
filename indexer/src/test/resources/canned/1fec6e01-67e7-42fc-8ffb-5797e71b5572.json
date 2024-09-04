@@ -1,412 +1,159 @@
 {
-  "title": "H.M.A.S. Diamantina Voyage Dm 4/68 Hydrology Data",
-  "description": "This dataset contains the processed Hydrology (HYD) data collected on Diamantina voyage Dm 4/68. The voyage took place in the Coral Sea during May 1968. This dataset has been processed and is archived within the CSIRO Marine and Atmospheric Research Data Centre in Hobart. Additional information regarding this dataset is contained in the cruise report for this voyage and/or the data processing report (as available). Diamantina on-voyage hydrology data are typically obtained from water samples collected in Nansen bottles at various depths. Parameters measured normally comprise temperature, salinity, dissolved oxygen and inorganic phosphate.",
-  "extent": {
-    "bbox": [
-      [
-        149.0,
-        -20.0,
-        163.0,
-        -11.0
-      ],
-      [
-        149.0,
-        -20.0,
-        163.0,
-        -11.0
-      ]
-    ],
-    "temporal": [
-      [
-        "1968-05-03T14:00:00Z",
-        null
-      ],
-      [
-        "1968-05-03T14:00:00Z",
-        "1968-05-30T14:00:00Z"
-      ]
-    ]
+  "title" : "H.M.A.S. Diamantina Voyage Dm 4/68 Hydrology Data",
+  "description" : "This dataset contains the processed Hydrology (HYD) data collected on Diamantina voyage Dm 4/68. The voyage took place in the Coral Sea during May 1968. This dataset has been processed and is archived within the CSIRO Marine and Atmospheric Research Data Centre in Hobart. Additional information regarding this dataset is contained in the cruise report for this voyage and/or the data processing report (as available). Diamantina on-voyage hydrology data are typically obtained from water samples collected in Nansen bottles at various depths. Parameters measured normally comprise temperature, salinity, dissolved oxygen and inorganic phosphate.",
+  "extent" : {
+    "bbox" : [ [ 149.0, -20.0, 163.0, -11.0 ], [ 149.0, -20.0, 163.0, -11.0 ] ],
+    "temporal" : [ [ "1968-05-03T14:00:00Z", null ], [ "1968-05-03T14:00:00Z", "1968-05-30T14:00:00Z" ] ]
   },
-  "summaries": {
-    "score": 95,
-    "status": "completed",
-    "credits": [
-      "Refer to processing report"
-    ],
-    "statement": "Data source: original field data  Data processing and quality control: according to current then current CSIRO standard methodology. For full details, refer to documentation. Copies of this dataset are also available from World Data Centre A, U.S.A.",
-    "revision": "2002-01-16T11:52:25",
-    "dataset_group": "csiro oceans and atmosphere",
-    "update_frequency": "completed",
-    "proj:geometry": {
-      "geometries": [
-        {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [
-                149,
-                -20
-              ],
-              [
-                163,
-                -20
-              ],
-              [
-                163,
-                -11
-              ],
-              [
-                149,
-                -11
-              ],
-              [
-                149,
-                -20
-              ]
-            ]
-          ]
-        }
-      ],
-      "type": "GeometryCollection"
+  "summaries" : {
+    "score" : 95,
+    "status" : "completed",
+    "credits" : [ "Refer to processing report" ],
+    "statement" : "Data source: original field data  Data processing and quality control: according to current then current CSIRO standard methodology. For full details, refer to documentation. Copies of this dataset are also available from World Data Centre A, U.S.A.",
+    "revision" : "2002-01-16T11:52:25",
+    "dataset_group" : "sample",
+    "update_frequency" : "completed",
+    "proj:geometry" : {
+      "geometries" : [ {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 149, -20 ], [ 163, -20 ], [ 163, -11 ], [ 149, -11 ], [ 149, -20 ] ] ]
+      } ],
+      "type" : "GeometryCollection"
     },
-    "temporal": [
-      {
-        "start": "1968-05-03T14:00:00Z",
-        "end": "1968-05-30T14:00:00Z"
-      }
-    ]
+    "temporal" : [ {
+      "start" : "1968-05-03T14:00:00Z",
+      "end" : "1968-05-30T14:00:00Z"
+    } ]
   },
-  "contacts": [
-    {
-      "roles": [
-        "pointOfContact",
-        "about"
-      ],
-      "organization": "CSIRO Oceans & Atmosphere - Hobart",
-      "name": "CSIRO O&A, Information & Data Centre",
-      "position": "Data Requests",
-      "emails": [],
-      "addresses": [],
-      "phones": [],
-      "links": []
-    },
-    {
-      "roles": [
-        "pointOfContact",
-        "metadata"
-      ],
-      "organization": "CSIRO Oceans & Atmosphere - Hobart",
-      "name": "CSIRO O&A, Information & Data Centre",
-      "position": "Data Requests",
-      "emails": [],
-      "addresses": [],
-      "phones": [],
-      "links": []
-    }
-  ],
-  "languages": [
-    {
-      "code": "eng",
-      "name": "English"
-    }
-  ],
-  "links": [
-    {
-      "href": "https://www.cmar.csiro.au/geoserver/wms?&CQL_FILTER=SURVEY_NAME%20%3D%20%27DM196804%27",
-      "rel": "related",
-      "type": "",
-      "title": "mnf:HYDROLOGY_HEADER_AODN_VIEW"
-    },
-    {
-      "href": "https://www.marine.csiro.au/data/trawler/dataset.cfm?survey=DM196804&data_type=hydro",
-      "rel": "related",
-      "type": "",
-      "title": "Data Link"
-    },
-    {
-      "href": "https://creativecommons.org/licenses/by/4.0/",
-      "rel": "related",
-      "type": "text/html",
-      "title": "Documentation Link"
-    },
-    {
-      "href": "https://geonetwork-edge.edge.aodn.org.au:443/geonetwork/images/logos/c953222f-bb17-4ddf-bdaa-5bf86d04d72a.png",
-      "rel": "icon",
-      "type": "image/png",
-      "title": "Suggest icon for dataset"
-    },
-    {
-      "href": "https://www.cmar.csiro.au/data/trawler/dataset_mapfile.cfm?survey=DM196804&data_type=hydro&img_type=tn",
-      "rel": "preview",
-      "type": "image"
-    }
-  ],
-  "license": "Data is made available under a Creative Commons Attribution 4.0 International Licence, please see link. Data is supplied 'as is' without any warranty or guarantee except as required by law to be given to you. The data may not be free of error, comprehensive, current or appropriate for your particular purpose. You accept all risk and responsibility for its use. ATTRIBUTION STATEMENT: The dataset [Insert-dataset-name-here] downloaded on [Insert-DD-Mmm-YYYY-here] was provided by CSIRO.",
-  "providers": [
-    {
-      "name": "CSIRO Oceans & Atmosphere - Hobart",
-      "roles": [
-        "pointOfContact"
-      ]
-    }
-  ],
-  "themes": [
-    {
-      "concepts": [
-        {
-          "id": "Earth Science | Oceans | Ocean Chemistry | Oxygen",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/90aa8838-79bd-4b28-b518-8217e863c385"
-        },
-        {
-          "id": "Earth Science | Oceans | Ocean Chemistry | Phosphate",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/0b513d8c-bfd3-44ee-976e-42757b8375a2"
-        },
-        {
-          "id": "Earth Science | Oceans | Ocean Pressure | Water Pressure",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/dd025312-0d27-44e0-ae05-7cfcc1aa17f0"
-        },
-        {
-          "id": "Earth Science | Oceans | Ocean Temperature | Water Temperature",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/46206e8c-8def-406f-9e62-da4e74633a58"
-        },
-        {
-          "id": "Earth Science | Oceans | Salinity/Density | Salinity",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/7e95b5fc-1d58-431a-af36-948b29fa870d"
-        }
-      ],
-      "scheme": "theme",
-      "description": "Olsen, L.M., G. Major, K. Shein, J. Scialdone, S. Ritz, T. Stevens, M. Morahan, A. Aleman, R. Vogel, S. Leicester, H. Weir, M. Meaux, S. Grebas, C.Solomon, M. Holland, T. Northcutt, R. A. Restrepo, R. Bilodeau, 2013. NASA/Global Change Master Directory (GCMD) Earth Science Keywords. Version 8.0.0.0.0",
-      "title": "GCMD Keywords"
-    },
-    {
-      "concepts": [
-        {
-          "id": "Nansen Bottles",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:72"
-        },
-        {
-          "id": "Nutrient Analysers",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:18"
-        },
-        {
-          "id": "Thermometers",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:100"
-        }
-      ],
-      "scheme": "equipment",
-      "description": "",
-      "title": "CSIRO Equipment"
-    },
-    {
-      "concepts": [
-        {
-          "id": "Regional Seas | Coral Sea",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.place.urn:aodn.org.au:geographicextents&id=urn:aodn.org.au:geographicextents:concept:13"
-        }
-      ],
-      "scheme": "place",
-      "description": "AODN GEN",
-      "title": "AODN Geographic Extent Names"
-    },
-    {
-      "concepts": [
-        {
-          "id": "Research Voyage: DM 4/68",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.survey.urn:marlin.csiro.au:surveyregister&id=urn:marlin.csiro.au:surveyregister:concept:369"
-        }
-      ],
-      "scheme": "survey",
-      "description": "MarLIN Survey Register",
-      "title": "CSIRO Survey List"
-    },
-    {
-      "concepts": [
-        {
-          "id": "\"Gascoyne\" oceanographic surveys, Eastern Australia/Tasman Sea/Pacific Ocean, 1960-1965",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.project.urn:marlin.csiro.au:projectregister&id=urn:marlin.csiro.au:projectregister:concept:31"
-        }
-      ],
-      "scheme": "project",
-      "description": "MarLIN Project Register",
-      "title": "CSIRO Project List"
-    },
-    {
-      "concepts": [
-        {
-          "id": "Vessel/Station Data: Hydrology",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.discipline.urn:marlin.csiro.au:keywords:standardDataType&id=urn:marlin.csiro.au:keywords:standardDataType:concept:3513"
-        }
-      ],
-      "scheme": "discipline",
-      "description": "MarLIN Standard Datatypes Thesaurus",
-      "title": "CSIRO Standard Data Types"
-    },
-    {
-      "concepts": [
-        {
-          "id": "Ship: Diamantina",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.dataSource.urn:marlin.csiro.au:sourceregister&id=urn:marlin.csiro.au:sourceregister:concept:4"
-        }
-      ],
-      "scheme": "dataSource",
-      "description": "MarLIN Source Register",
-      "title": "CSIRO Source List"
-    }
-  ],
-  "id": "1fec6e01-67e7-42fc-8ffb-5797e71b5572",
-  "search_suggestions": {
-    "abstract_phrases": [
-      "measured",
-      "been",
-      "data processing report",
-      "collected",
-      "during",
-      "atmospheric research data",
-      "depths parameters measured normally",
-      "has been",
-      "obtained from water",
-      "voyage took",
-      "hobart additional information",
-      "dissolved",
-      "during may",
-      "additional information",
-      "typically obtained from water",
-      "nansen bottles",
-      "voyage hydrology data",
-      "comprise",
-      "comprise temperature",
-      "sea during may",
-      "samples",
-      "inorganic",
-      "atmospheric research data centre",
-      "various depths parameters",
-      "contains",
-      "salinity dissolved",
-      "hobart additional information regarding",
-      "processing",
-      "obtained",
-      "parameters measured normally comprise",
-      "measured normally comprise",
-      "from water samples collected",
-      "dataset has",
-      "bottles",
-      "processed hydrology hyd",
-      "sea",
-      "marine",
-      "processed hydrology hyd data",
-      "hydrology hyd",
-      "coral sea during may",
-      "archived",
-      "sea during",
-      "comprise temperature salinity dissolved",
-      "temperature",
-      "archived within",
-      "voyage hydrology",
-      "place",
-      "coral sea during",
-      "csiro",
-      "nansen",
-      "samples collected",
-      "may",
-      "within",
-      "hobart additional",
-      "data processing",
-      "centre",
-      "processed hydrology",
-      "comprise temperature salinity",
-      "hyd",
-      "voyage dm",
-      "hyd data collected",
-      "report",
-      "depths",
-      "information",
-      "parameters measured",
-      "dataset has been processed",
-      "processing report",
-      "dataset",
-      "dissolved oxygen",
-      "data",
-      "temperature salinity dissolved oxygen",
-      "available",
-      "dm",
-      "dataset contains",
-      "hobart",
-      "depths parameters measured",
-      "measured normally comprise temperature",
-      "research",
-      "typically obtained from",
-      "temperature salinity dissolved",
-      "diamantina voyage",
-      "coral",
-      "temperature salinity",
-      "water samples",
-      "additional information regarding",
-      "obtained from water samples",
-      "from",
-      "has",
-      "from water",
-      "oxygen",
-      "dataset has been",
-      "hydrology hyd data collected",
-      "took",
-      "depths parameters",
-      "diamantina",
-      "hydrology",
-      "typically",
-      "measured normally",
-      "voyage took place",
-      "water",
-      "regarding",
-      "voyage",
-      "parameters measured normally",
-      "hydrology hyd data",
-      "data collected",
-      "cruise",
-      "been processed",
-      "water samples collected",
-      "normally comprise",
-      "information regarding",
-      "parameters",
-      "normally comprise temperature",
-      "obtained from",
-      "research data",
-      "additional",
-      "available diamantina",
-      "coral sea",
-      "from water samples",
-      "cruise report",
-      "atmospheric research",
-      "csiro marine",
-      "atmospheric",
-      "normally comprise temperature salinity",
-      "hyd data",
-      "has been processed",
-      "diamantina voyage dm",
-      "salinity dissolved oxygen",
-      "various depths",
-      "inorganic phosphate",
-      "salinity",
-      "typically obtained",
-      "phosphate",
-      "data centre",
-      "various depths parameters measured",
-      "hydrology data",
-      "processed",
-      "research data centre",
-      "contained",
-      "took place",
-      "various",
-      "normally"
-    ]
+  "contacts" : [ {
+    "roles" : [ "pointOfContact", "about" ],
+    "organization" : "CSIRO Oceans & Atmosphere - Hobart",
+    "name" : "CSIRO O&A, Information & Data Centre",
+    "position" : "Data Requests",
+    "emails" : [ ],
+    "addresses" : [ ],
+    "phones" : [ ],
+    "links" : [ ]
+  }, {
+    "roles" : [ "pointOfContact", "metadata" ],
+    "organization" : "CSIRO Oceans & Atmosphere - Hobart",
+    "name" : "CSIRO O&A, Information & Data Centre",
+    "position" : "Data Requests",
+    "emails" : [ ],
+    "addresses" : [ ],
+    "phones" : [ ],
+    "links" : [ ]
+  } ],
+  "languages" : [ {
+    "code" : "eng",
+    "name" : "English"
+  } ],
+  "links" : [ {
+    "href" : "https://www.cmar.csiro.au/geoserver/wms?&CQL_FILTER=SURVEY_NAME%20%3D%20%27DM196804%27",
+    "rel" : "related",
+    "type" : "",
+    "title" : "mnf:HYDROLOGY_HEADER_AODN_VIEW"
+  }, {
+    "href" : "https://www.marine.csiro.au/data/trawler/dataset.cfm?survey=DM196804&data_type=hydro",
+    "rel" : "related",
+    "type" : "",
+    "title" : "Data Link"
+  }, {
+    "href" : "https://creativecommons.org/licenses/by/4.0/",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "Documentation Link"
+  }, {
+    "href" : "https://www.cmar.csiro.au/data/trawler/dataset_mapfile.cfm?survey=DM196804&data_type=hydro&img_type=tn",
+    "rel" : "preview",
+    "type" : "image"
+  } ],
+  "license" : "Data is made available under a Creative Commons Attribution 4.0 International Licence, please see link. Data is supplied 'as is' without any warranty or guarantee except as required by law to be given to you. The data may not be free of error, comprehensive, current or appropriate for your particular purpose. You accept all risk and responsibility for its use. ATTRIBUTION STATEMENT: The dataset [Insert-dataset-name-here] downloaded on [Insert-DD-Mmm-YYYY-here] was provided by CSIRO.",
+  "providers" : [ {
+    "name" : "CSIRO Oceans & Atmosphere - Hobart",
+    "roles" : [ "pointOfContact" ]
+  } ],
+  "themes" : [ {
+    "concepts" : [ {
+      "id" : "Earth Science | Oceans | Ocean Chemistry | Oxygen",
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/90aa8838-79bd-4b28-b518-8217e863c385"
+    }, {
+      "id" : "Earth Science | Oceans | Ocean Chemistry | Phosphate",
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/0b513d8c-bfd3-44ee-976e-42757b8375a2"
+    }, {
+      "id" : "Earth Science | Oceans | Ocean Pressure | Water Pressure",
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/dd025312-0d27-44e0-ae05-7cfcc1aa17f0"
+    }, {
+      "id" : "Earth Science | Oceans | Ocean Temperature | Water Temperature",
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/46206e8c-8def-406f-9e62-da4e74633a58"
+    }, {
+      "id" : "Earth Science | Oceans | Salinity/Density | Salinity",
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/7e95b5fc-1d58-431a-af36-948b29fa870d"
+    } ],
+    "scheme" : "theme",
+    "description" : "Olsen, L.M., G. Major, K. Shein, J. Scialdone, S. Ritz, T. Stevens, M. Morahan, A. Aleman, R. Vogel, S. Leicester, H. Weir, M. Meaux, S. Grebas, C.Solomon, M. Holland, T. Northcutt, R. A. Restrepo, R. Bilodeau, 2013. NASA/Global Change Master Directory (GCMD) Earth Science Keywords. Version 8.0.0.0.0",
+    "title" : "GCMD Keywords"
+  }, {
+    "concepts" : [ {
+      "id" : "Nansen Bottles",
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:72"
+    }, {
+      "id" : "Nutrient Analysers",
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:18"
+    }, {
+      "id" : "Thermometers",
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:100"
+    } ],
+    "scheme" : "equipment",
+    "description" : "",
+    "title" : "CSIRO Equipment"
+  }, {
+    "concepts" : [ {
+      "id" : "Regional Seas | Coral Sea",
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.place.urn:aodn.org.au:geographicextents&id=urn:aodn.org.au:geographicextents:concept:13"
+    } ],
+    "scheme" : "place",
+    "description" : "AODN GEN",
+    "title" : "AODN Geographic Extent Names"
+  }, {
+    "concepts" : [ {
+      "id" : "Research Voyage: DM 4/68",
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.survey.urn:marlin.csiro.au:surveyregister&id=urn:marlin.csiro.au:surveyregister:concept:369"
+    } ],
+    "scheme" : "survey",
+    "description" : "MarLIN Survey Register",
+    "title" : "CSIRO Survey List"
+  }, {
+    "concepts" : [ {
+      "id" : "\"Gascoyne\" oceanographic surveys, Eastern Australia/Tasman Sea/Pacific Ocean, 1960-1965",
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.project.urn:marlin.csiro.au:projectregister&id=urn:marlin.csiro.au:projectregister:concept:31"
+    } ],
+    "scheme" : "project",
+    "description" : "MarLIN Project Register",
+    "title" : "CSIRO Project List"
+  }, {
+    "concepts" : [ {
+      "id" : "Vessel/Station Data: Hydrology",
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.discipline.urn:marlin.csiro.au:keywords:standardDataType&id=urn:marlin.csiro.au:keywords:standardDataType:concept:3513"
+    } ],
+    "scheme" : "discipline",
+    "description" : "MarLIN Standard Datatypes Thesaurus",
+    "title" : "CSIRO Standard Data Types"
+  }, {
+    "concepts" : [ {
+      "id" : "Ship: Diamantina",
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.dataSource.urn:marlin.csiro.au:sourceregister&id=urn:marlin.csiro.au:sourceregister:concept:4"
+    } ],
+    "scheme" : "dataSource",
+    "description" : "MarLIN Source Register",
+    "title" : "CSIRO Source List"
+  } ],
+  "id" : "1fec6e01-67e7-42fc-8ffb-5797e71b5572",
+  "record_suggest" : {
+    "abstract_phrases" : [ "measured", "been", "data processing report", "collected", "during", "atmospheric research data", "depths parameters measured normally", "has been", "obtained from water", "voyage took", "hobart additional information", "dissolved", "during may", "additional information", "typically obtained from water", "nansen bottles", "voyage hydrology data", "comprise", "comprise temperature", "sea during may", "samples", "inorganic", "atmospheric research data centre", "various depths parameters", "contains", "salinity dissolved", "hobart additional information regarding", "processing", "obtained", "parameters measured normally comprise", "measured normally comprise", "from water samples collected", "dataset has", "bottles", "processed hydrology hyd", "sea", "marine", "processed hydrology hyd data", "hydrology hyd", "coral sea during may", "archived", "sea during", "comprise temperature salinity dissolved", "temperature", "archived within", "voyage hydrology", "place", "coral sea during", "csiro", "nansen", "samples collected", "may", "within", "hobart additional", "data processing", "centre", "processed hydrology", "comprise temperature salinity", "hyd", "voyage dm", "hyd data collected", "report", "depths", "information", "parameters measured", "dataset has been processed", "processing report", "dataset", "dissolved oxygen", "data", "temperature salinity dissolved oxygen", "available", "dm", "dataset contains", "hobart", "depths parameters measured", "measured normally comprise temperature", "research", "typically obtained from", "temperature salinity dissolved", "diamantina voyage", "coral", "temperature salinity", "water samples", "additional information regarding", "obtained from water samples", "from", "has", "from water", "oxygen", "dataset has been", "hydrology hyd data collected", "took", "depths parameters", "diamantina", "hydrology", "typically", "measured normally", "voyage took place", "water", "regarding", "voyage", "parameters measured normally", "hydrology hyd data", "data collected", "cruise", "been processed", "water samples collected", "normally comprise", "information regarding", "parameters", "normally comprise temperature", "obtained from", "research data", "additional", "available diamantina", "coral sea", "from water samples", "cruise report", "atmospheric research", "csiro marine", "atmospheric", "normally comprise temperature salinity", "hyd data", "has been processed", "diamantina voyage dm", "salinity dissolved oxygen", "various depths", "inorganic phosphate", "salinity", "typically obtained", "phosphate", "data centre", "various depths parameters measured", "hydrology data", "processed", "research data centre", "contained", "took place", "various", "normally" ]
   },
-  "sci:citation": "{\"suggestedCitation\":null,\"useLimitations\":null,\"otherConstraints\":[\"Data is made available under a Creative Commons Attribution 4.0 International Licence, please see link. Data is supplied 'as is' without any warranty or guarantee except as required by law to be given to you. The data may not be free of error, comprehensive, current or appropriate for your particular purpose. You accept all risk and responsibility for its use. ATTRIBUTION STATEMENT: The dataset [Insert-dataset-name-here] downloaded on [Insert-DD-Mmm-YYYY-here] was provided by CSIRO.\"]}",
-  "stac_version": "1.0.0",
-  "stac_extensions": [
-    "https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/contacts/v0.1.1/schema.json",
-    "https://stac-extensions.github.io/projection/v1.1.0/schema.json",
-    "https://stac-extensions.github.io/language/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/themes/v1.0.0/schema.json"
-  ],
-  "type": "Collection"
+  "sci:citation" : "{\"suggestedCitation\":null,\"useLimitations\":null,\"otherConstraints\":[\"Data is made available under a Creative Commons Attribution 4.0 International Licence, please see link. Data is supplied 'as is' without any warranty or guarantee except as required by law to be given to you. The data may not be free of error, comprehensive, current or appropriate for your particular purpose. You accept all risk and responsibility for its use. ATTRIBUTION STATEMENT: The dataset [Insert-dataset-name-here] downloaded on [Insert-DD-Mmm-YYYY-here] was provided by CSIRO.\"]}",
+  "type" : "Collection",
+  "stac_version" : "1.0.0",
+  "stac_extensions" : [ "https://stac-extensions.github.io/scientific/v1.0.0/schema.json", "https://stac-extensions.github.io/contacts/v0.1.1/schema.json", "https://stac-extensions.github.io/projection/v1.1.0/schema.json", "https://stac-extensions.github.io/language/v1.0.0/schema.json", "https://stac-extensions.github.io/themes/v1.0.0/schema.json" ]
 }

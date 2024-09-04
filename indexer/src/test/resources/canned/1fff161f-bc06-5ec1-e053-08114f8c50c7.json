@@ -1,394 +1,178 @@
 {
-  "title": "Hinchinbrook Channel (Lucinda Jetty Coastal Observatory) November 2010, HPLC Pigment and Ocean Colour Data",
-  "description": "This record contains data collected from a total of 18 stations in the Hinchinbrook Chanel on an unknown vessel. The samples were collected from November 15th to 18th, 2010 as part of the Lucinda Jetty Coastal Observatory. The data can be used for Ocean Colour sensor validation. Parameters measured include the absorption coefficients of the particulate and dissolved components of the water column and the phytoplankton pigment concentration and composition.",
-  "extent": {
-    "bbox": [
-      [
-        146.1131,
-        -18.4917,
-        146.2878,
-        -18.3024
-      ],
-      [
-        146.1131,
-        -18.4917,
-        146.2878,
-        -18.3024
-      ]
-    ],
-    "temporal": [
-      [
-        "2010-11-14T13:00:00Z",
-        "2010-11-17T13:00:00Z"
-      ],
-      [
-        "2010-11-14T13:00:00Z",
-        "2010-11-17T13:00:00Z"
-      ]
-    ]
+  "title" : "Hinchinbrook Channel (Lucinda Jetty Coastal Observatory) November 2010, HPLC Pigment and Ocean Colour Data",
+  "description" : "This record contains data collected from a total of 18 stations in the Hinchinbrook Chanel on an unknown vessel. The samples were collected from November 15th to 18th, 2010 as part of the Lucinda Jetty Coastal Observatory. The data can be used for Ocean Colour sensor validation. Parameters measured include the absorption coefficients of the particulate and dissolved components of the water column and the phytoplankton pigment concentration and composition.",
+  "extent" : {
+    "bbox" : [ [ 146.1131, -18.4917, 146.2878, -18.3024 ], [ 146.1131, -18.4917, 146.2878, -18.3024 ] ],
+    "temporal" : [ [ "2010-11-14T13:00:00Z", "2010-11-17T13:00:00Z" ], [ "2010-11-14T13:00:00Z", "2010-11-17T13:00:00Z" ] ]
   },
-  "summaries": {
-    "score": 100,
-    "status": "completed",
-    "credits": [],
-    "statement": "Water samples were taken on-board the vessel and stored under cool and dark conditions until filtering took place. Samples were analysed and QC procedures were carried out in the Ocean Colour Laboratory at CMAR, Hobart. Pigment analysis; approximately 2 litres of sample water was filtered through a 47 mm glass fibre filter (Whatman GF/F) and then stored in liquid nitrogen until analysis. To extract the pigments, the filters were cut into small pieces and covered with 100% acetone (3 mls) in a 10 ml centrifuge tube. The samples were vortexed for about 30 seconds and then sonicated for 15 minutes in the dark. The samples were then kept in the dark at 4 �C for approximately 15 hours. After this time 200 �L water was added to the acetone such that the extract mixture was 90:10 acetone:water (vol:vol) and sonicated once more for 15 minutes. The extracts were centrifuged to remove the filter paper and then filtered through a 0.2 �m membrane filter (Whatman, anatope) prior to analysis by HPLC using a Waters Alliance high performance liquid chromatography system, comprising a 2695XE separations module with column heater and refrigerated autosampler and a 2996 photo-diode array detector. Immediately prior to injection the sample extract was mixed with a buffer solution\t(90:10 28 mM tetrabutyl ammonium acetate, pH 6.5 : methanol) within the sample loop. Pigments were separated using a Zorbax Eclipse XDB-C8 stainless steel 150 mm x 4.6 mm ID column with 3.5 �m particle size (Agilent Technologies) with gradient elution as described in Van Heukelem and Thomas (2001). The separated pigments were detected at 436 nm and identified against standard spectra using Waters Empower software. Concentrations of chlorophyll a, chlorophyll b, b,b-carotene and b,e-carotene in sample chromatograms were determined from standards (Sigma, USA or DHI, Denmark). Spectral absorption; approximately 2 litres of sample water was filtered through a 25 mm glass fibre filter (Whatman GF/F) and the filter then stored flat in liquid nitrogen until analysis. Optical density spectra for total particulate matter were obtained using a Cinta 404 UV/VIS dual beam spectrophotometer equipped with an integrating sphere.",
-    "revision": "2015-11-24T10:32:45",
-    "dataset_group": "csiro oceans and atmosphere",
-    "update_frequency": "completed",
-    "proj:geometry": {
-      "geometries": [
-        {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [
-                146.1131,
-                -18.4917
-              ],
-              [
-                146.2878,
-                -18.4917
-              ],
-              [
-                146.2878,
-                -18.3024
-              ],
-              [
-                146.1131,
-                -18.3024
-              ],
-              [
-                146.1131,
-                -18.4917
-              ]
-            ]
-          ]
-        }
-      ],
-      "type": "GeometryCollection"
+  "summaries" : {
+    "score" : 95,
+    "status" : "completed",
+    "credits" : [ ],
+    "statement" : "Water samples were taken on-board the vessel and stored under cool and dark conditions until filtering took place. Samples were analysed and QC procedures were carried out in the Ocean Colour Laboratory at CMAR, Hobart. Pigment analysis; approximately 2 litres of sample water was filtered through a 47 mm glass fibre filter (Whatman GF/F) and then stored in liquid nitrogen until analysis. To extract the pigments, the filters were cut into small pieces and covered with 100% acetone (3 mls) in a 10 ml centrifuge tube. The samples were vortexed for about 30 seconds and then sonicated for 15 minutes in the dark. The samples were then kept in the dark at 4 �C for approximately 15 hours. After this time 200 �L water was added to the acetone such that the extract mixture was 90:10 acetone:water (vol:vol) and sonicated once more for 15 minutes. The extracts were centrifuged to remove the filter paper and then filtered through a 0.2 �m membrane filter (Whatman, anatope) prior to analysis by HPLC using a Waters Alliance high performance liquid chromatography system, comprising a 2695XE separations module with column heater and refrigerated autosampler and a 2996 photo-diode array detector. Immediately prior to injection the sample extract was mixed with a buffer solution\t(90:10 28 mM tetrabutyl ammonium acetate, pH 6.5 : methanol) within the sample loop. Pigments were separated using a Zorbax Eclipse XDB-C8 stainless steel 150 mm x 4.6 mm ID column with 3.5 �m particle size (Agilent Technologies) with gradient elution as described in Van Heukelem and Thomas (2001). The separated pigments were detected at 436 nm and identified against standard spectra using Waters Empower software. Concentrations of chlorophyll a, chlorophyll b, b,b-carotene and b,e-carotene in sample chromatograms were determined from standards (Sigma, USA or DHI, Denmark). Spectral absorption; approximately 2 litres of sample water was filtered through a 25 mm glass fibre filter (Whatman GF/F) and the filter then stored flat in liquid nitrogen until analysis. Optical density spectra for total particulate matter were obtained using a Cinta 404 UV/VIS dual beam spectrophotometer equipped with an integrating sphere.",
+    "revision" : "2015-11-24T10:32:45",
+    "dataset_group" : "sample",
+    "update_frequency" : "completed",
+    "proj:geometry" : {
+      "geometries" : [ {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 146.1131, -18.4917 ], [ 146.2878, -18.4917 ], [ 146.2878, -18.3024 ], [ 146.1131, -18.3024 ], [ 146.1131, -18.4917 ] ] ]
+      } ],
+      "type" : "GeometryCollection"
     },
-    "temporal": [
-      {
-        "start": "2010-11-14T13:00:00Z",
-        "end": "2010-11-17T13:00:00Z"
-      }
-    ],
-    "parameter_vocabs": [
-      "water pressure",
-      "temperature",
-      "salinity"
-    ],
-    "platform_vocabs": [
-      "research vessel"
-    ]
+    "temporal" : [ {
+      "start" : "2010-11-14T13:00:00Z",
+      "end" : "2010-11-17T13:00:00Z"
+    } ],
+    "parameter_vocabs" : [ "water pressure", "temperature", "salinity" ]
   },
-  "contacts": [
-    {
-      "roles": [
-        "pointOfContact",
-        "about"
-      ],
-      "organization": "CSIRO Oceans & Atmosphere - Hobart",
-      "name": "Clementson, Lesley",
-      "position": "Principal Experimental Scientist (Oceans & Atmosphere)",
-      "emails": [],
-      "addresses": [],
-      "phones": [],
-      "links": []
-    },
-    {
-      "roles": [
-        "pointOfContact",
-        "metadata"
-      ],
-      "organization": "CSIRO Oceans & Atmosphere - Hobart",
-      "name": "CSIRO O&A, Information & Data Centre",
-      "position": "Data Requests",
-      "emails": [],
-      "addresses": [],
-      "phones": [],
-      "links": []
-    }
-  ],
-  "languages": [
-    {
-      "code": "eng",
-      "name": "English"
-    }
-  ],
-  "links": [
-    {
-      "href": "https://aesop.csiro.au/",
-      "rel": "related",
-      "type": "text/html",
-      "title": "Data Link"
-    },
-    {
-      "href": "https://portal.aodn.org.au/",
-      "rel": "related",
-      "type": "text/html",
-      "title": "Data Link"
-    },
-    {
-      "href": "https://imos.org.au/facilities/srs/oceancolour",
-      "rel": "related",
-      "type": "text/html",
-      "title": "Documentation Link"
-    },
-    {
-      "href": "https://earth.esa.int/documents/700255/1793811/Dekker_CSIRO_MVT-Oct11.pdf/02891024-6972-48a4-b13f-e22069f7d471",
-      "rel": "related",
-      "type": "text/html",
-      "title": "Documentation Link"
-    },
-    {
-      "href": "https://creativecommons.org/licenses/by/4.0/",
-      "rel": "related",
-      "type": "text/html",
-      "title": "Documentation Link"
-    },
-    {
-      "href": "https://geonetwork-edge.edge.aodn.org.au:443/geonetwork/images/logos/c953222f-bb17-4ddf-bdaa-5bf86d04d72a.png",
-      "rel": "icon",
-      "type": "image/png",
-      "title": "Suggest icon for dataset"
-    }
-  ],
-  "license": "Data is made available under a Creative Commons Attribution 4.0 International Licence, please see link. Data is supplied 'as is' without any warranty or guarantee except as required by law to be given to you. The data may not be free of error, comprehensive, current or appropriate for your particular purpose. You accept all risk and responsibility for its use. ATTRIBUTION STATEMENT: The dataset [Insert-dataset-name-here] downloaded on [Insert-DD-Mmm-YYYY-here] was provided by CSIRO.",
-  "providers": [
-    {
-      "name": "CSIRO Oceans & Atmosphere - Hobart",
-      "roles": [
-        "pointOfContact"
-      ]
-    }
-  ],
-  "themes": [
-    {
-      "concepts": [
-        {
-          "id": "Earth Science | Oceans | Ocean Chemistry | Chlorophyll",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/7989eae1-8ea3-4039-af0c-9130de145449"
-        },
-        {
-          "id": "Earth Science | Oceans | Ocean Chemistry | Pigments",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/ed925b43-db83-4cbb-8347-3dc0081bb8f4"
-        },
-        {
-          "id": "Earth Science | Oceans | Ocean Optics | Ocean Color",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/78f5a84f-1b5b-44a9-97e7-4a1996cd2e36"
-        },
-        {
-          "id": "Earth Science | Terrestrial Hydrosphere | Water Quality/Water Chemistry | Chlorophyll",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/de21632f-b614-4375-8f09-d14ab00d852b"
-        }
-      ],
-      "scheme": "theme",
-      "description": "Olsen, L.M., G. Major, K. Shein, J. Scialdone, S. Ritz, T. Stevens, M. Morahan, A. Aleman, R. Vogel, S. Leicester, H. Weir, M. Meaux, S. Grebas, C.Solomon, M. Holland, T. Northcutt, R. A. Restrepo, R. Bilodeau, 2013. NASA/Global Change Master Directory (GCMD) Earth Science Keywords. Version 8.0.0.0.0",
-      "title": "GCMD Keywords"
-    },
-    {
-      "concepts": [
-        {
-          "id": "CTDs (Conductivity-Temperature-Depth Profilers)",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:33"
-        },
-        {
-          "id": "Fluorometers",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:47"
-        },
-        {
-          "id": "HPLC (High Performance Liquid Chromatography)",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:54"
-        },
-        {
-          "id": "Niskin Bottles",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept"
-        },
-        {
-          "id": "Spectrophotometers",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:97"
-        }
-      ],
-      "scheme": "equipment",
-      "description": "",
-      "title": "CSIRO Equipment"
-    },
-    {
-      "concepts": [
-        {
-          "id": "Marine Features (Australia) | Great Barrier Reef, QLD",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.place.urn:aodn.org.au:geographicextents&id=urn:aodn.org.au:geographicextents:concept:1006"
-        }
-      ],
-      "scheme": "place",
-      "description": "AODN GEN",
-      "title": "AODN Geographic Extent Names"
-    },
-    {
-      "concepts": [
-        {
-          "id": "Lucinda Jetty Coastal Observatory",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.project.urn:marlin.csiro.au:projectregister&id=urn:marlin.csiro.au:projectregister:concept:2433"
-        }
-      ],
-      "scheme": "project",
-      "description": "MarLIN Project Register",
-      "title": "CSIRO Project List"
-    },
-    {
-      "concepts": [
-        {
-          "id": "Practical salinity of the water body",
-          "url": "http://vocab.nerc.ac.uk/collection/P01/current/PSLTZZ01"
-        },
-        {
-          "id": "Temperature of the water body",
-          "url": "http://vocab.nerc.ac.uk/collection/P01/current/TEMPPR01"
-        },
-        {
-          "id": "Pressure (measured variable) in the water body exerted by overlying sea water and any medium above it",
-          "url": "http://vocab.aodn.org.au/def/discovery_parameter/entity/565"
-        },
-        {
-          "id": "Pressure (measured variable) in the water body exerted by overlying sea water only",
-          "url": "http://vocab.aodn.org.au/def/discovery_parameter/entity/566"
-        }
-      ],
-      "scheme": "",
-      "description": "",
-      "title": "Keywords (DataParameter)"
-    },
-    {
-      "concepts": [
-        {
-          "id": "CTD",
-          "url": "http://vocab.nerc.ac.uk/collection/L05/current/130"
-        }
-      ],
-      "scheme": "",
-      "description": "",
-      "title": "Keywords (Instrument)"
-    },
-    {
-      "concepts": [
-        {
-          "id": "research vessel",
-          "url": "http://vocab.nerc.ac.uk/collection/L06/current/31"
-        }
-      ],
-      "scheme": "",
-      "description": "",
-      "title": "Keywords (Platform)"
-    }
-  ],
-  "id": "1fff161f-bc06-5ec1-e053-08114f8c50c7",
-  "search_suggestions": {
-    "abstract_phrases": [
-      "november",
-      "measured",
-      "phytoplankton pigment",
-      "colour sensor validation parameters",
-      "jetty coastal observatory",
-      "ocean colour sensor",
-      "data",
-      "ocean colour",
-      "record contains data collected",
-      "collected",
-      "lucinda jetty coastal observatory",
-      "used",
-      "particulate",
-      "samples were",
-      "were collected from november",
-      "parameters measured include",
-      "record",
-      "vessel",
-      "from november",
-      "phytoplankton",
-      "from",
-      "sensor validation parameters",
-      "contains data collected",
-      "dissolved",
-      "validation",
-      "record contains data",
-      "hinchinbrook chanel",
-      "record contains",
-      "sensor validation parameters measured",
-      "absorption",
-      "contains data collected from",
-      "pigment",
-      "stations",
-      "water",
-      "chanel",
-      "samples",
-      "contains data",
-      "data collected from",
-      "lucinda",
-      "water column",
-      "contains",
-      "sensor validation",
-      "data collected",
-      "ocean",
-      "were",
-      "sensor",
-      "parameters",
-      "coastal",
-      "dissolved components",
-      "jetty coastal",
-      "components",
-      "collected from",
-      "part",
-      "unknown vessel",
-      "phytoplankton pigment concentration",
-      "unknown",
-      "observatory",
-      "data can",
-      "can",
-      "validation parameters",
-      "total",
-      "colour sensor validation",
-      "colour sensor",
-      "validation parameters measured",
-      "composition",
-      "lucinda jetty",
-      "ocean colour sensor validation",
-      "absorption coefficients",
-      "jetty",
-      "collected from november",
-      "include",
-      "samples were collected from",
-      "were collected from",
-      "column",
-      "concentration",
-      "pigment concentration",
-      "samples were collected",
-      "hinchinbrook",
-      "lucinda jetty coastal",
-      "colour",
-      "measured include",
-      "were collected",
-      "coefficients",
-      "parameters measured",
-      "validation parameters measured include",
-      "coastal observatory"
-    ],
-    "parameter_vocabs_sayt": [
-      "water pressure",
-      "temperature",
-      "salinity"
-    ],
-    "platform_vocabs_sayt": [
-      "research vessel"
-    ]
+  "contacts" : [ {
+    "roles" : [ "pointOfContact", "about" ],
+    "organization" : "CSIRO Oceans & Atmosphere - Hobart",
+    "name" : "Clementson, Lesley",
+    "position" : "Principal Experimental Scientist (Oceans & Atmosphere)",
+    "emails" : [ ],
+    "addresses" : [ ],
+    "phones" : [ ],
+    "links" : [ ]
+  }, {
+    "roles" : [ "pointOfContact", "metadata" ],
+    "organization" : "CSIRO Oceans & Atmosphere - Hobart",
+    "name" : "CSIRO O&A, Information & Data Centre",
+    "position" : "Data Requests",
+    "emails" : [ ],
+    "addresses" : [ ],
+    "phones" : [ ],
+    "links" : [ ]
+  } ],
+  "languages" : [ {
+    "code" : "eng",
+    "name" : "English"
+  } ],
+  "links" : [ {
+    "href" : "https://aesop.csiro.au/",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "Data Link"
+  }, {
+    "href" : "https://portal.aodn.org.au/",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "Data Link"
+  }, {
+    "href" : "https://imos.org.au/facilities/srs/oceancolour",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "Documentation Link"
+  }, {
+    "href" : "https://earth.esa.int/documents/700255/1793811/Dekker_CSIRO_MVT-Oct11.pdf/02891024-6972-48a4-b13f-e22069f7d471",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "Documentation Link"
+  }, {
+    "href" : "https://creativecommons.org/licenses/by/4.0/",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "Documentation Link"
+  } ],
+  "license" : "Data is made available under a Creative Commons Attribution 4.0 International Licence, please see link. Data is supplied 'as is' without any warranty or guarantee except as required by law to be given to you. The data may not be free of error, comprehensive, current or appropriate for your particular purpose. You accept all risk and responsibility for its use. ATTRIBUTION STATEMENT: The dataset [Insert-dataset-name-here] downloaded on [Insert-DD-Mmm-YYYY-here] was provided by CSIRO.",
+  "providers" : [ {
+    "name" : "CSIRO Oceans & Atmosphere - Hobart",
+    "roles" : [ "pointOfContact" ]
+  } ],
+  "themes" : [ {
+    "concepts" : [ {
+      "id" : "Earth Science | Oceans | Ocean Chemistry | Chlorophyll",
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/7989eae1-8ea3-4039-af0c-9130de145449"
+    }, {
+      "id" : "Earth Science | Oceans | Ocean Chemistry | Pigments",
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/ed925b43-db83-4cbb-8347-3dc0081bb8f4"
+    }, {
+      "id" : "Earth Science | Oceans | Ocean Optics | Ocean Color",
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/78f5a84f-1b5b-44a9-97e7-4a1996cd2e36"
+    }, {
+      "id" : "Earth Science | Terrestrial Hydrosphere | Water Quality/Water Chemistry | Chlorophyll",
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/de21632f-b614-4375-8f09-d14ab00d852b"
+    } ],
+    "scheme" : "theme",
+    "description" : "Olsen, L.M., G. Major, K. Shein, J. Scialdone, S. Ritz, T. Stevens, M. Morahan, A. Aleman, R. Vogel, S. Leicester, H. Weir, M. Meaux, S. Grebas, C.Solomon, M. Holland, T. Northcutt, R. A. Restrepo, R. Bilodeau, 2013. NASA/Global Change Master Directory (GCMD) Earth Science Keywords. Version 8.0.0.0.0",
+    "title" : "GCMD Keywords"
+  }, {
+    "concepts" : [ {
+      "id" : "CTDs (Conductivity-Temperature-Depth Profilers)",
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:33"
+    }, {
+      "id" : "Fluorometers",
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:47"
+    }, {
+      "id" : "HPLC (High Performance Liquid Chromatography)",
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:54"
+    }, {
+      "id" : "Niskin Bottles",
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept"
+    }, {
+      "id" : "Spectrophotometers",
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:97"
+    } ],
+    "scheme" : "equipment",
+    "description" : "",
+    "title" : "CSIRO Equipment"
+  }, {
+    "concepts" : [ {
+      "id" : "Marine Features (Australia) | Great Barrier Reef, QLD",
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.place.urn:aodn.org.au:geographicextents&id=urn:aodn.org.au:geographicextents:concept:1006"
+    } ],
+    "scheme" : "place",
+    "description" : "AODN GEN",
+    "title" : "AODN Geographic Extent Names"
+  }, {
+    "concepts" : [ {
+      "id" : "Lucinda Jetty Coastal Observatory",
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.project.urn:marlin.csiro.au:projectregister&id=urn:marlin.csiro.au:projectregister:concept:2433"
+    } ],
+    "scheme" : "project",
+    "description" : "MarLIN Project Register",
+    "title" : "CSIRO Project List"
+  }, {
+    "concepts" : [ {
+      "id" : "Practical salinity of the water body",
+      "url" : "http://vocab.nerc.ac.uk/collection/P01/current/PSLTZZ01"
+    }, {
+      "id" : "Temperature of the water body",
+      "url" : "http://vocab.nerc.ac.uk/collection/P01/current/TEMPPR01"
+    }, {
+      "id" : "Pressure (measured variable) in the water body exerted by overlying sea water and any medium above it",
+      "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/565"
+    }, {
+      "id" : "Pressure (measured variable) in the water body exerted by overlying sea water only",
+      "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/566"
+    } ],
+    "scheme" : "",
+    "description" : "",
+    "title" : "Keywords (DataParameter)"
+  }, {
+    "concepts" : [ {
+      "id" : "CTD",
+      "url" : "http://vocab.nerc.ac.uk/collection/L05/current/130"
+    } ],
+    "scheme" : "",
+    "description" : "",
+    "title" : "Keywords (Instrument)"
+  }, {
+    "concepts" : [ {
+      "id" : "research vessel",
+      "url" : "http://vocab.nerc.ac.uk/collection/L06/current/31"
+    } ],
+    "scheme" : "",
+    "description" : "",
+    "title" : "Keywords (Platform)"
+  } ],
+  "id" : "1fff161f-bc06-5ec1-e053-08114f8c50c7",
+  "record_suggest" : {
+    "abstract_phrases" : [ "november", "measured", "phytoplankton pigment", "colour sensor validation parameters", "jetty coastal observatory", "ocean colour sensor", "data", "ocean colour", "record contains data collected", "collected", "lucinda jetty coastal observatory", "used", "particulate", "samples were", "were collected from november", "parameters measured include", "record", "vessel", "from november", "phytoplankton", "from", "sensor validation parameters", "contains data collected", "dissolved", "validation", "record contains data", "hinchinbrook chanel", "record contains", "sensor validation parameters measured", "absorption", "contains data collected from", "pigment", "stations", "water", "chanel", "samples", "contains data", "data collected from", "lucinda", "water column", "contains", "sensor validation", "data collected", "ocean", "were", "sensor", "parameters", "coastal", "dissolved components", "jetty coastal", "components", "collected from", "part", "unknown vessel", "phytoplankton pigment concentration", "unknown", "observatory", "data can", "can", "validation parameters", "total", "colour sensor validation", "colour sensor", "validation parameters measured", "composition", "lucinda jetty", "ocean colour sensor validation", "absorption coefficients", "jetty", "collected from november", "include", "samples were collected from", "were collected from", "column", "concentration", "pigment concentration", "samples were collected", "hinchinbrook", "lucinda jetty coastal", "colour", "measured include", "were collected", "coefficients", "parameters measured", "validation parameters measured include", "coastal observatory" ]
   },
-  "sci:citation": "{\"suggestedCitation\":null,\"useLimitations\":null,\"otherConstraints\":[\"Data is made available under a Creative Commons Attribution 4.0 International Licence, please see link. Data is supplied 'as is' without any warranty or guarantee except as required by law to be given to you. The data may not be free of error, comprehensive, current or appropriate for your particular purpose. You accept all risk and responsibility for its use. ATTRIBUTION STATEMENT: The dataset [Insert-dataset-name-here] downloaded on [Insert-DD-Mmm-YYYY-here] was provided by CSIRO.\"]}",
-  "stac_version": "1.0.0",
-  "stac_extensions": [
-    "https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/contacts/v0.1.1/schema.json",
-    "https://stac-extensions.github.io/projection/v1.1.0/schema.json",
-    "https://stac-extensions.github.io/language/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/themes/v1.0.0/schema.json"
-  ],
-  "type": "Collection"
+  "sci:citation" : "{\"suggestedCitation\":null,\"useLimitations\":null,\"otherConstraints\":[\"Data is made available under a Creative Commons Attribution 4.0 International Licence, please see link. Data is supplied 'as is' without any warranty or guarantee except as required by law to be given to you. The data may not be free of error, comprehensive, current or appropriate for your particular purpose. You accept all risk and responsibility for its use. ATTRIBUTION STATEMENT: The dataset [Insert-dataset-name-here] downloaded on [Insert-DD-Mmm-YYYY-here] was provided by CSIRO.\"]}",
+  "type" : "Collection",
+  "stac_version" : "1.0.0",
+  "stac_extensions" : [ "https://stac-extensions.github.io/scientific/v1.0.0/schema.json", "https://stac-extensions.github.io/contacts/v0.1.1/schema.json", "https://stac-extensions.github.io/projection/v1.1.0/schema.json", "https://stac-extensions.github.io/language/v1.0.0/schema.json", "https://stac-extensions.github.io/themes/v1.0.0/schema.json" ]
 }

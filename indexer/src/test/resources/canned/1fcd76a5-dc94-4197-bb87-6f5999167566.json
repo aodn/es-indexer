@@ -1,598 +1,201 @@
 {
-  "title": "Bacterial community structure in the soft coral, Alcyonium antarcticum from Antarctica",
-  "description": "The structure and composition of microbial communities inhabiting the soft coral Alcyonium antarcticum were investigated across 3 differentially contaminated sites within McMurdo Sound, Antarctica - McMurdo Station (MM), Scott Base (SB) and Cape Armitage (CA).Samples from all sites were subjected to culture-based analysis, denaturing gradient gel electrophoresis (DGGE), 16S rRNA gene clone-library analysis, and (FISH).Phylogenetic groups included Gamma-, Alpha- and Beta- proteobacteria; Bacteroidetes; Firmicutes; Actinomycetales; Planctomycetes; and Chlorobi and bacteria from the functional group of sulfate-reducing bacteria.\n To investigate the structure and composition of microbial communities inhabiting the soft coral Alcyonium antarcticum.To examine any variation within and between Alcyonium antarcticum bacterial communities from 3 differentially contaminated sites within McMurdo Sound, Antarctica .\n This was the first investigation of microbial communities associated with Antarctic soft corals.Accession numbers assigned to sequencing products: Culture1-Culture10 (DG312224, DG312225, DG312226, DG312227, DG312228, DG312229, DG312230, DG312231, DG312232, DG312233); OTU1-OTU15 (DG312234, DG312235, DG312236, DG312237, DG312238, DG312239, DG312240, DG312241, DG312242, DG312243, DG312244, DG312245, DG312246, DG312247, DG312248); DGGE Band1-Band11, (DG312249, DG312250, DG312251, DG312252, DG312253, DG312254, DG312255, DG312256, DG312257, DG312258) and Band14-Band16 (DG312259, DG312260, DG312261).",
-  "extent": {
-    "bbox": [
-      [
-        166.652,
-        -77.863,
-        166.75,
-        -77.855
-      ],
-      [
-        166.6732,
-        -77.863,
-        166.6732,
-        -77.863
-      ],
-      [
-        166.75,
-        -77.855,
-        166.75,
-        -77.855
-      ],
-      [
-        166.652,
-        -77.857,
-        166.652,
-        -77.857
-      ]
-    ],
-    "temporal": [
-      [
-        "2001-09-30T14:00:00Z",
-        "2002-10-30T13:00:00Z"
-      ],
-      [
-        "2001-09-30T14:00:00Z",
-        "2002-10-30T13:00:00Z"
-      ]
-    ]
+  "title" : "Bacterial community structure in the soft coral, Alcyonium antarcticum from Antarctica",
+  "description" : "The structure and composition of microbial communities inhabiting the soft coral Alcyonium antarcticum were investigated across 3 differentially contaminated sites within McMurdo Sound, Antarctica - McMurdo Station (MM), Scott Base (SB) and Cape Armitage (CA).Samples from all sites were subjected to culture-based analysis, denaturing gradient gel electrophoresis (DGGE), 16S rRNA gene clone-library analysis, and (FISH).Phylogenetic groups included Gamma-, Alpha- and Beta- proteobacteria; Bacteroidetes; Firmicutes; Actinomycetales; Planctomycetes; and Chlorobi and bacteria from the functional group of sulfate-reducing bacteria.\n To investigate the structure and composition of microbial communities inhabiting the soft coral Alcyonium antarcticum.To examine any variation within and between Alcyonium antarcticum bacterial communities from 3 differentially contaminated sites within McMurdo Sound, Antarctica .\n This was the first investigation of microbial communities associated with Antarctic soft corals.Accession numbers assigned to sequencing products: Culture1-Culture10 (DG312224, DG312225, DG312226, DG312227, DG312228, DG312229, DG312230, DG312231, DG312232, DG312233); OTU1-OTU15 (DG312234, DG312235, DG312236, DG312237, DG312238, DG312239, DG312240, DG312241, DG312242, DG312243, DG312244, DG312245, DG312246, DG312247, DG312248); DGGE Band1-Band11, (DG312249, DG312250, DG312251, DG312252, DG312253, DG312254, DG312255, DG312256, DG312257, DG312258) and Band14-Band16 (DG312259, DG312260, DG312261).",
+  "extent" : {
+    "bbox" : [ [ 166.652, -77.863, 166.75, -77.855 ], [ 166.6732, -77.863, 166.6732, -77.863 ], [ 166.75, -77.855, 166.75, -77.855 ], [ 166.652, -77.857, 166.652, -77.857 ] ],
+    "temporal" : [ [ "2001-09-30T14:00:00Z", "2002-10-30T13:00:00Z" ], [ "2001-09-30T14:00:00Z", "2002-10-30T13:00:00Z" ] ]
   },
-  "summaries": {
-    "score": 75,
-    "status": "completed",
-    "credits": [
-      "Webster, Nicole S, Dr (Principal Investigator)"
-    ],
-    "scope": {
-      "code": "dataset",
-      "name": ""
+  "summaries" : {
+    "score" : 75,
+    "status" : "completed",
+    "credits" : [ "Webster, Nicole S, Dr (Principal Investigator)" ],
+    "scope" : {
+      "code" : "dataset",
+      "name" : ""
     },
-    "statement": "",
-    "creation": "2009-11-11T00:00:00",
-    "revision": "2017-11-20T00:00:00",
-    "dataset_group": "aims",
-    "update_frequency": "completed",
-    "proj:geometry": {
-      "geometries": [
-        {
-          "type": "Point",
-          "coordinates": [
-            166.6732,
-            -77.863
-          ]
-        },
-        {
-          "type": "Point",
-          "coordinates": [
-            166.75,
-            -77.855
-          ]
-        },
-        {
-          "type": "Point",
-          "coordinates": [
-            166.652,
-            -77.857
-          ]
-        }
-      ],
-      "type": "GeometryCollection"
+    "statement" : "",
+    "creation" : "2009-11-11T00:00:00",
+    "revision" : "2017-11-20T00:00:00",
+    "dataset_group" : "sample",
+    "update_frequency" : "completed",
+    "proj:geometry" : {
+      "geometries" : [ {
+        "type" : "Point",
+        "coordinates" : [ 166.6732, -77.863 ]
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 166.75, -77.855 ]
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 166.652, -77.857 ]
+      } ],
+      "type" : "GeometryCollection"
     },
-    "temporal": [
-      {
-        "start": "2001-09-30T14:00:00Z",
-        "end": "2002-10-30T13:00:00Z"
-      }
-    ]
+    "temporal" : [ {
+      "start" : "2001-09-30T14:00:00Z",
+      "end" : "2002-10-30T13:00:00Z"
+    } ]
   },
-  "contacts": [
-    {
-      "roles": [
-        "principalInvestigator",
-        "about"
-      ],
-      "organization": "Australian Institute of Marine Science (AIMS)",
-      "name": "Webster, Nicole S, Dr",
-      "position": "",
-      "emails": [
-        "adc@aims.gov.au"
-      ],
-      "addresses": [
-        {
-          "delivery_point": [
-            "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE"
-          ],
-          "city": "TOWNSVILLE",
-          "country": "Australia",
-          "postal_code": "4810",
-          "administrative_area": "Queensland"
-        }
-      ],
-      "phones": [
-        {
-          "roles": [
-            "voice"
-          ],
-          "value": "+61 7 4753 4444"
-        },
-        {
-          "roles": [
-            "facsimile"
-          ],
-          "value": ""
-        }
-      ],
-      "links": [
-        {
-          "href": "https://www.aims.gov.au",
-          "type": "WWW:LINK-1.0-http--link",
-          "title": "AIMS Web Site"
-        }
-      ]
-    },
-    {
-      "roles": [
-        "pointOfContact",
-        "about"
-      ],
-      "organization": "Australian Institute of Marine Science (AIMS)",
-      "name": "Data Manager, AIMS Data Centre",
-      "position": "",
-      "emails": [
-        "adc@aims.gov.au"
-      ],
-      "addresses": [
-        {
-          "delivery_point": [
-            "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE"
-          ],
-          "city": "TOWNSVILLE",
-          "country": "Australia",
-          "postal_code": "4810",
-          "administrative_area": "Queensland"
-        }
-      ],
-      "phones": [
-        {
-          "roles": [
-            "voice"
-          ],
-          "value": "+61 7 4753 4444"
-        },
-        {
-          "roles": [
-            "facsimile"
-          ],
-          "value": ""
-        }
-      ],
-      "links": [
-        {
-          "href": "https://www.aims.gov.au",
-          "type": "WWW:LINK-1.0-http--link",
-          "title": "AIMS Web Site"
-        }
-      ]
-    },
-    {
-      "roles": [
-        "pointOfContact",
-        "metadata"
-      ],
-      "organization": "Australian Institute of Marine Science (AIMS)",
-      "name": "",
-      "position": "AIMS Data Centre",
-      "emails": [
-        "adc@aims.gov.au"
-      ],
-      "addresses": [
-        {
-          "delivery_point": [
-            "PRIVATE MAIL BAG 3"
-          ],
-          "city": "TOWNSVILLE MAIL CENTRE",
-          "country": "Australia",
-          "postal_code": "4810",
-          "administrative_area": "Queensland"
-        }
-      ],
-      "phones": [
-        {
-          "roles": [
-            "voice"
-          ],
-          "value": "+61 7 4753 4444"
-        },
-        {
-          "roles": [
-            "facsimile"
-          ],
-          "value": "+61 7 4772 5852"
-        }
-      ],
-      "links": [
-        {
-          "href": "https://www.aims.gov.au/adc",
-          "type": "WWW:LINK-1.0-http--link"
-        }
-      ]
-    },
-    {
-      "roles": [
-        "publisher",
-        "citation"
-      ],
-      "organization": "Australian Institute of Marine Science (AIMS)",
-      "name": "",
-      "position": "",
-      "emails": [
-        "reception@aims.gov.au"
-      ],
-      "addresses": [
-        {
-          "delivery_point": [
-            "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE"
-          ],
-          "city": "TOWNSVILLE",
-          "country": "Australia",
-          "postal_code": "4810",
-          "administrative_area": "Queensland"
-        }
-      ],
-      "phones": [
-        {
-          "roles": [
-            "voice"
-          ],
-          "value": "+61 7 4753 4444"
-        },
-        {
-          "roles": [
-            "facsimile"
-          ],
-          "value": ""
-        }
-      ],
-      "links": [
-        {
-          "href": "https://www.aims.gov.au",
-          "type": "WWW:LINK-1.0-http--link",
-          "title": "AIMS Web Site"
-        }
-      ]
-    },
-    {
-      "roles": [
-        "owner",
-        "citation"
-      ],
-      "organization": "Australian Institute of Marine Science (AIMS)",
-      "name": "",
-      "position": "",
-      "emails": [
-        "adc@aims.gov.au"
-      ],
-      "addresses": [
-        {
-          "delivery_point": [
-            "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE"
-          ],
-          "city": "TOWNSVILLE",
-          "country": "Australia",
-          "postal_code": "4810",
-          "administrative_area": "Queensland"
-        }
-      ],
-      "phones": [
-        {
-          "roles": [
-            "voice"
-          ],
-          "value": "+61 7 4753 4444"
-        },
-        {
-          "roles": [
-            "facsimile"
-          ],
-          "value": ""
-        }
-      ],
-      "links": [
-        {
-          "href": "https://www.aims.gov.au",
-          "type": "WWW:LINK-1.0-http--link",
-          "title": "AIMS Web Site"
-        }
-      ]
-    }
-  ],
-  "languages": [
-    {
-      "code": "eng",
-      "name": "English"
-    }
-  ],
-  "links": [
-    {
-      "href": "articleId=7268",
-      "rel": "related",
-      "type": "",
-      "title": "Bacterial community structure associated with the Antarctic soft coral, Alcyonium antarcticum: Webster NS and Bourne DG (2007) Bacterial community structure associated with the Antarctic soft coral, Alcyonium antarcticum. FEMS Microbiology Ecology 59: 81-94."
-    },
-    {
-      "href": "https://geonetwork-edge.edge.aodn.org.au:443/geonetwork/images/logos/81465e5f-731c-4f72-9b4e-68f2f5e52f41.png",
-      "rel": "icon",
-      "type": "image/png",
-      "title": "Suggest icon for dataset"
-    },
-    {
-      "href": "https://apps.aims.gov.au/metadata/view/1fcd76a5-dc94-4197-bb87-6f5999167566",
-      "rel": "describedby",
-      "type": "text/html",
-      "title": "Full metadata link"
-    },
-    {
-      "href": "http://i.creativecommons.org/l/by-nc/3.0/au/88x31.png",
-      "rel": "license",
-      "type": "image/png"
-    },
-    {
-      "href": "http://creativecommons.org/licenses/by-nc/3.0/au/",
-      "rel": "license",
-      "type": "text/html"
-    }
-  ],
-  "license": "Creative Commons Attribution-NonCommercial 3.0 Australia License",
-  "providers": [
-    {
-      "name": "Australian Institute of Marine Science (AIMS)",
-      "roles": [
-        "pointOfContact"
-      ]
-    }
-  ],
-  "themes": [],
-  "id": "1fcd76a5-dc94-4197-bb87-6f5999167566",
-  "search_suggestions": {
-    "abstract_phrases": [
-      "based analysis denaturing",
-      "coral alcyonium",
-      "rrna gene",
-      "phylogenetic",
-      "examine any variation within",
-      "analysis denaturing",
-      "microbial communities",
-      "bacteroidetes",
-      "sequencing",
-      "ca samples from",
-      "phylogenetic groups included",
-      "sulfate reducing bacteria",
-      "differentially contaminated sites within",
-      "investigated",
-      "sites within mcmurdo",
-      "soft",
-      "sites within",
-      "based",
-      "denaturing gradient gel electrophoresis",
-      "bacteria from",
-      "antarcticum bacterial",
-      "antarcticum were investigated",
-      "phylogenetic groups included gamma",
-      "mcmurdo station mm",
-      "station mm",
-      "analysis",
-      "differentially",
-      "were investigated",
-      "microbial communities inhabiting",
-      "contaminated",
-      "assigned",
-      "gene clone library",
-      "fish phylogenetic",
-      "functional",
-      "examine",
-      "station mm scott",
-      "alcyonium antarcticum",
-      "soft coral",
-      "sb",
-      "reducing bacteria",
-      "alcyonium antarcticum were investigated",
-      "based analysis denaturing gradient",
-      "composition",
-      "mm scott",
-      "within mcmurdo sound",
-      "scott",
-      "ca",
-      "mcmurdo station",
-      "bacteroidetes firmicutes actinomycetales",
-      "communities inhabiting",
-      "analysis denaturing gradient gel",
-      "proteobacteria",
-      "armitage ca samples",
-      "gradient",
-      "fish phylogenetic groups",
-      "rrna gene clone library",
-      "fish",
-      "associated",
-      "mcmurdo sound",
-      "culture based analysis",
-      "gamma",
-      "differentially contaminated",
-      "any variation",
-      "sulfate",
-      "sites within mcmurdo sound",
-      "library analysis",
-      "numbers",
-      "sites",
-      "clone library analysis",
-      "phylogenetic groups",
-      "were investigated across",
-      "dgge",
-      "cape armitage ca",
-      "between alcyonium antarcticum bacterial",
-      "proteobacteria bacteroidetes",
-      "gel electrophoresis",
-      "gamma alpha",
-      "mcmurdo station mm scott",
-      "mm scott base",
-      "cape armitage",
-      "ca samples from all",
-      "sulfate reducing",
-      "sequencing products",
-      "mm scott base sb",
-      "antarcticum were investigated across",
-      "bacterial communities from",
-      "contaminated sites within",
-      "coral alcyonium antarcticum",
-      "electrophoresis",
-      "sound antarctica",
-      "rrna gene clone",
-      "mcmurdo",
-      "bacterial",
-      "alpha",
-      "sound antarctica mcmurdo",
-      "denaturing gradient",
-      "sites were subjected",
-      "beta proteobacteria",
-      "antarctica mcmurdo station",
-      "antarcticum",
-      "gene clone",
-      "all sites were subjected",
-      "station mm scott base",
-      "clone",
-      "functional group",
-      "reducing",
-      "cape",
-      "base",
-      "firmicutes actinomycetales planctomycetes",
-      "proteobacteria bacteroidetes firmicutes actinomycetales",
-      "all sites were",
-      "variation",
-      "investigated across",
-      "groups included gamma alpha",
-      "soft coral alcyonium antarcticum",
-      "gene clone library analysis",
-      "firmicutes",
-      "numbers assigned",
-      "mcmurdo sound antarctica",
-      "antarctica mcmurdo",
-      "between",
-      "any variation within",
-      "cape armitage ca samples",
-      "analysis denaturing gradient",
-      "gene",
-      "alcyonium antarcticum bacterial",
-      "microbial",
-      "from all sites were",
-      "firmicutes actinomycetales",
-      "variation within",
-      "samples",
-      "antarcticum bacterial communities",
-      "sites were",
-      "gel electrophoresis dgge",
-      "between alcyonium",
-      "actinomycetales planctomycetes",
-      "contaminated sites within mcmurdo",
-      "scott base",
-      "planctomycetes",
-      "antarctica mcmurdo station mm",
-      "gel",
-      "products",
-      "coral alcyonium antarcticum were",
-      "across",
-      "within mcmurdo",
-      "microbial communities associated",
-      "library",
-      "were subjected",
-      "sound antarctica mcmurdo station",
-      "antarctic",
-      "communities from",
-      "denaturing",
-      "inhabiting",
-      "within",
-      "differentially contaminated sites",
-      "gradient gel",
-      "groups included gamma",
-      "included gamma alpha",
-      "based analysis",
-      "electrophoresis dgge",
-      "culture",
-      "within mcmurdo sound antarctica",
-      "antarcticum bacterial communities from",
-      "bacteroidetes firmicutes actinomycetales planctomycetes",
-      "first",
-      "communities",
-      "antarctic soft",
-      "alcyonium",
-      "examine any variation",
-      "bacteria",
-      "sound",
-      "beta proteobacteria bacteroidetes firmicutes",
-      "groups included",
-      "from all",
-      "examine any",
-      "coral",
-      "first investigation",
-      "communities associated",
-      "from",
-      "clone library",
-      "contaminated sites",
-      "group",
-      "mm",
-      "all",
-      "subjected",
-      "culture based analysis denaturing",
-      "fish phylogenetic groups included",
-      "antarctica",
-      "from all sites",
-      "bacterial communities",
-      "bacteroidetes firmicutes",
-      "samples from all sites",
-      "were",
-      "gradient gel electrophoresis dgge",
-      "samples from all",
-      "included gamma",
-      "mcmurdo sound antarctica mcmurdo",
-      "proteobacteria bacteroidetes firmicutes",
-      "rrna",
-      "beta proteobacteria bacteroidetes",
-      "alcyonium antarcticum bacterial communities",
-      "investigate",
-      "armitage",
-      "samples from",
-      "base sb",
-      "chlorobi",
-      "station",
-      "antarcticum were",
-      "denaturing gradient gel",
-      "between alcyonium antarcticum",
-      "included",
-      "beta",
-      "soft coral alcyonium",
-      "all sites",
-      "actinomycetales",
-      "ca samples",
-      "groups",
-      "armitage ca",
-      "any",
-      "structure",
-      "scott base sb",
-      "gradient gel electrophoresis",
-      "culture based",
-      "alcyonium antarcticum were",
-      "investigation",
-      "armitage ca samples from"
-    ]
+  "contacts" : [ {
+    "roles" : [ "principalInvestigator", "about" ],
+    "organization" : "Australian Institute of Marine Science (AIMS)",
+    "name" : "Webster, Nicole S, Dr",
+    "position" : "",
+    "emails" : [ "adc@aims.gov.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],
+      "city" : "TOWNSVILLE",
+      "country" : "Australia",
+      "postalCode" : "4810",
+      "administrativeArea" : "Queensland"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "+61 7 4753 4444"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : ""
+    } ],
+    "links" : [ {
+      "href" : "https://www.aims.gov.au",
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : "AIMS Web Site"
+    } ]
+  }, {
+    "roles" : [ "pointOfContact", "about" ],
+    "organization" : "Australian Institute of Marine Science (AIMS)",
+    "name" : "Data Manager, AIMS Data Centre",
+    "position" : "",
+    "emails" : [ "adc@aims.gov.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],
+      "city" : "TOWNSVILLE",
+      "country" : "Australia",
+      "postalCode" : "4810",
+      "administrativeArea" : "Queensland"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "+61 7 4753 4444"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : ""
+    } ],
+    "links" : [ {
+      "href" : "https://www.aims.gov.au",
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : "AIMS Web Site"
+    } ]
+  }, {
+    "roles" : [ "pointOfContact", "metadata" ],
+    "organization" : "Australian Institute of Marine Science (AIMS)",
+    "name" : "",
+    "position" : "AIMS Data Centre",
+    "emails" : [ "adc@aims.gov.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "PRIVATE MAIL BAG 3" ],
+      "city" : "TOWNSVILLE MAIL CENTRE",
+      "country" : "Australia",
+      "postalCode" : "4810",
+      "administrativeArea" : "Queensland"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "+61 7 4753 4444"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : "+61 7 4772 5852"
+    } ],
+    "links" : [ {
+      "href" : "https://www.aims.gov.au/adc",
+      "type" : "WWW:LINK-1.0-http--link"
+    } ]
+  }, {
+    "roles" : [ "publisher", "citation" ],
+    "organization" : "Australian Institute of Marine Science (AIMS)",
+    "name" : "",
+    "position" : "",
+    "emails" : [ "reception@aims.gov.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],
+      "city" : "TOWNSVILLE",
+      "country" : "Australia",
+      "postalCode" : "4810",
+      "administrativeArea" : "Queensland"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "+61 7 4753 4444"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : ""
+    } ],
+    "links" : [ {
+      "href" : "https://www.aims.gov.au",
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : "AIMS Web Site"
+    } ]
+  }, {
+    "roles" : [ "owner", "citation" ],
+    "organization" : "Australian Institute of Marine Science (AIMS)",
+    "name" : "",
+    "position" : "",
+    "emails" : [ "adc@aims.gov.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],
+      "city" : "TOWNSVILLE",
+      "country" : "Australia",
+      "postalCode" : "4810",
+      "administrativeArea" : "Queensland"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "+61 7 4753 4444"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : ""
+    } ],
+    "links" : [ {
+      "href" : "https://www.aims.gov.au",
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : "AIMS Web Site"
+    } ]
+  } ],
+  "languages" : [ {
+    "code" : "eng",
+    "name" : "English"
+  } ],
+  "links" : [ {
+    "href" : "articleId=7268",
+    "rel" : "related",
+    "type" : "",
+    "title" : "Bacterial community structure associated with the Antarctic soft coral, Alcyonium antarcticum: Webster NS and Bourne DG (2007) Bacterial community structure associated with the Antarctic soft coral, Alcyonium antarcticum. FEMS Microbiology Ecology 59: 81-94."
+  }, {
+    "href" : "https://apps.aims.gov.au/metadata/view/1fcd76a5-dc94-4197-bb87-6f5999167566",
+    "rel" : "describedby",
+    "type" : "text/html",
+    "title" : "Full metadata link"
+  }, {
+    "href" : "http://i.creativecommons.org/l/by-nc/3.0/au/88x31.png",
+    "rel" : "license",
+    "type" : "image/png"
+  }, {
+    "href" : "http://creativecommons.org/licenses/by-nc/3.0/au/",
+    "rel" : "license",
+    "type" : "text/html"
+  } ],
+  "license" : "Creative Commons Attribution-NonCommercial 3.0 Australia License",
+  "providers" : [ {
+    "name" : "Australian Institute of Marine Science (AIMS)",
+    "roles" : [ "pointOfContact" ]
+  } ],
+  "themes" : [ ],
+  "id" : "1fcd76a5-dc94-4197-bb87-6f5999167566",
+  "record_suggest" : {
+    "abstract_phrases" : [ "based analysis denaturing", "coral alcyonium", "rrna gene", "phylogenetic", "examine any variation within", "analysis denaturing", "microbial communities", "bacteroidetes", "sequencing", "ca samples from", "phylogenetic groups included", "sulfate reducing bacteria", "differentially contaminated sites within", "investigated", "sites within mcmurdo", "soft", "sites within", "based", "denaturing gradient gel electrophoresis", "bacteria from", "antarcticum bacterial", "antarcticum were investigated", "phylogenetic groups included gamma", "mcmurdo station mm", "station mm", "analysis", "differentially", "were investigated", "microbial communities inhabiting", "contaminated", "assigned", "gene clone library", "fish phylogenetic", "functional", "examine", "station mm scott", "alcyonium antarcticum", "soft coral", "sb", "reducing bacteria", "alcyonium antarcticum were investigated", "based analysis denaturing gradient", "composition", "mm scott", "within mcmurdo sound", "scott", "ca", "mcmurdo station", "bacteroidetes firmicutes actinomycetales", "communities inhabiting", "analysis denaturing gradient gel", "proteobacteria", "armitage ca samples", "gradient", "fish phylogenetic groups", "rrna gene clone library", "fish", "associated", "mcmurdo sound", "culture based analysis", "gamma", "differentially contaminated", "any variation", "sulfate", "sites within mcmurdo sound", "library analysis", "numbers", "sites", "clone library analysis", "phylogenetic groups", "were investigated across", "dgge", "cape armitage ca", "between alcyonium antarcticum bacterial", "proteobacteria bacteroidetes", "gel electrophoresis", "gamma alpha", "mcmurdo station mm scott", "mm scott base", "cape armitage", "ca samples from all", "sulfate reducing", "sequencing products", "mm scott base sb", "antarcticum were investigated across", "bacterial communities from", "contaminated sites within", "coral alcyonium antarcticum", "electrophoresis", "sound antarctica", "rrna gene clone", "mcmurdo", "bacterial", "alpha", "sound antarctica mcmurdo", "denaturing gradient", "sites were subjected", "beta proteobacteria", "antarctica mcmurdo station", "antarcticum", "gene clone", "all sites were subjected", "station mm scott base", "clone", "functional group", "reducing", "cape", "base", "firmicutes actinomycetales planctomycetes", "proteobacteria bacteroidetes firmicutes actinomycetales", "all sites were", "variation", "investigated across", "groups included gamma alpha", "soft coral alcyonium antarcticum", "gene clone library analysis", "firmicutes", "numbers assigned", "mcmurdo sound antarctica", "antarctica mcmurdo", "between", "any variation within", "cape armitage ca samples", "analysis denaturing gradient", "gene", "alcyonium antarcticum bacterial", "microbial", "from all sites were", "firmicutes actinomycetales", "variation within", "samples", "antarcticum bacterial communities", "sites were", "gel electrophoresis dgge", "between alcyonium", "actinomycetales planctomycetes", "contaminated sites within mcmurdo", "scott base", "planctomycetes", "antarctica mcmurdo station mm", "gel", "products", "coral alcyonium antarcticum were", "across", "within mcmurdo", "microbial communities associated", "library", "were subjected", "sound antarctica mcmurdo station", "antarctic", "communities from", "denaturing", "inhabiting", "within", "differentially contaminated sites", "gradient gel", "groups included gamma", "included gamma alpha", "based analysis", "electrophoresis dgge", "culture", "within mcmurdo sound antarctica", "antarcticum bacterial communities from", "bacteroidetes firmicutes actinomycetales planctomycetes", "first", "communities", "antarctic soft", "alcyonium", "examine any variation", "bacteria", "sound", "beta proteobacteria bacteroidetes firmicutes", "groups included", "from all", "examine any", "coral", "first investigation", "communities associated", "from", "clone library", "contaminated sites", "group", "mm", "all", "subjected", "culture based analysis denaturing", "fish phylogenetic groups included", "antarctica", "from all sites", "bacterial communities", "bacteroidetes firmicutes", "samples from all sites", "were", "gradient gel electrophoresis dgge", "samples from all", "included gamma", "mcmurdo sound antarctica mcmurdo", "proteobacteria bacteroidetes firmicutes", "rrna", "beta proteobacteria bacteroidetes", "alcyonium antarcticum bacterial communities", "investigate", "armitage", "samples from", "base sb", "chlorobi", "station", "antarcticum were", "denaturing gradient gel", "between alcyonium antarcticum", "included", "beta", "soft coral alcyonium", "all sites", "actinomycetales", "ca samples", "groups", "armitage ca", "any", "structure", "scott base sb", "gradient gel electrophoresis", "culture based", "alcyonium antarcticum were", "investigation", "armitage ca samples from" ]
   },
-  "sci:citation": "{\"suggestedCitation\":\"Attribution: Format for citation of metadata sourced from Australian Institute of Marine Science (AIMS) in a list of reference is as follows: \\\"Australian Institute of Marine Science (AIMS). (2009). Bacterial community structure in the soft coral, Alcyonium antarcticum from Antarctica. https://apps.aims.gov.au/metadata/view/1fcd76a5-dc94-4197-bb87-6f5999167566, accessed[date-of-access]\\\".\",\"useLimitations\":null,\"otherConstraints\":[\"Use Limitation: All AIMS data, products and services are provided \\\"as is\\\" and AIMS does not warrant their fitness for a particular purpose or non-infringement. While AIMS has made every reasonable effort to ensure high quality of the data, products and services, to the extent permitted by law the data, products and services are provided without any warranties of any kind, either expressed or implied, including without limitation any implied warranties of title, merchantability, and fitness for a particular purpose or non-infringement. AIMS make no representation or warranty that the data, products and services are accurate, complete, reliable or current. To the extent permitted by law, AIMS exclude all liability to any person arising directly or indirectly from the use of the data, products and services.\",\"Resource Usage:Use of the AIMS data is for not-for-profit applications only. All other users shall seek permission for use by contacting AIMS. Acknowledgements as prescribed must be clearly set out in the user's formal communications or publications.Access Constraint: intellectualPropertyRightsUse Constraint: intellectualPropertyRightsSecurity classification code: unclassifiedMetadata Usage:Access Constraint: intellectualPropertyRightsUse Constraint: intellectualPropertyRightsSecurity classification code: unclassified\",\"\"]}",
-  "stac_version": "1.0.0",
-  "stac_extensions": [
-    "https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/contacts/v0.1.1/schema.json",
-    "https://stac-extensions.github.io/projection/v1.1.0/schema.json",
-    "https://stac-extensions.github.io/language/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/themes/v1.0.0/schema.json"
-  ],
-  "type": "Collection"
+  "sci:citation" : "{\"suggestedCitation\":\"Attribution: Format for citation of metadata sourced from Australian Institute of Marine Science (AIMS) in a list of reference is as follows: \\\"Australian Institute of Marine Science (AIMS). (2009). Bacterial community structure in the soft coral, Alcyonium antarcticum from Antarctica. https://apps.aims.gov.au/metadata/view/1fcd76a5-dc94-4197-bb87-6f5999167566, accessed[date-of-access]\\\".\",\"useLimitations\":null,\"otherConstraints\":[\"Use Limitation: All AIMS data, products and services are provided \\\"as is\\\" and AIMS does not warrant their fitness for a particular purpose or non-infringement. While AIMS has made every reasonable effort to ensure high quality of the data, products and services, to the extent permitted by law the data, products and services are provided without any warranties of any kind, either expressed or implied, including without limitation any implied warranties of title, merchantability, and fitness for a particular purpose or non-infringement. AIMS make no representation or warranty that the data, products and services are accurate, complete, reliable or current. To the extent permitted by law, AIMS exclude all liability to any person arising directly or indirectly from the use of the data, products and services.\",\"Resource Usage:Use of the AIMS data is for not-for-profit applications only. All other users shall seek permission for use by contacting AIMS. Acknowledgements as prescribed must be clearly set out in the user's formal communications or publications.Access Constraint: intellectualPropertyRightsUse Constraint: intellectualPropertyRightsSecurity classification code: unclassifiedMetadata Usage:Access Constraint: intellectualPropertyRightsUse Constraint: intellectualPropertyRightsSecurity classification code: unclassified\",\"\"]}",
+  "type" : "Collection",
+  "stac_version" : "1.0.0",
+  "stac_extensions" : [ "https://stac-extensions.github.io/scientific/v1.0.0/schema.json", "https://stac-extensions.github.io/contacts/v0.1.1/schema.json", "https://stac-extensions.github.io/projection/v1.1.0/schema.json", "https://stac-extensions.github.io/language/v1.0.0/schema.json", "https://stac-extensions.github.io/themes/v1.0.0/schema.json" ]
 }

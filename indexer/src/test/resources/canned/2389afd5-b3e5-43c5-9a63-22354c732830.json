@@ -1,476 +1,175 @@
 {
-  "title": "Albany Coastal Station Data 1944-1983",
-  "description": "This dataset contains oceanographic data collected at a 50m coastal station off Albany, Western Australia (lat. 35 deg. 05 min. S, long. 118 deg. 03 min. E) between January 1952 and June 1983. The stations were set up under the CSIRO coastal monitoring programme in the 1950s and were sampled approximately monthly for temperature, salinity, dissolved oxygen, phosphate and nitrate. Data from 1952 onwards are stored on-line as part of the CMR hydrology archive in Hobart. Additional copies of the data are deposited with the NODC data archive (World Data Centre-A) in the U.S.A., and details of relevant data files can be viewed via their website by requesting the file inventory for this coastal station which is NODC platform code \"09B7\". Station details, plus printed versions of the data from 1944, have been published in CSIRO's \"Oceanographical Station List\" series.",
-  "extent": {
-    "bbox": [
-      [
-        118.0,
-        -35.5,
-        118.5,
-        -35.0
-      ],
-      [
-        118.0,
-        -35.5,
-        118.5,
-        -35.0
-      ]
-    ],
-    "temporal": [
-      [
-        "1944-03-17T13:00:00Z",
-        "1983-06-21T14:00:00Z"
-      ],
-      [
-        "1944-03-17T13:00:00Z",
-        "1983-06-21T14:00:00Z"
-      ]
-    ]
+  "title" : "Albany Coastal Station Data 1944-1983",
+  "description" : "This dataset contains oceanographic data collected at a 50m coastal station off Albany, Western Australia (lat. 35 deg. 05 min. S, long. 118 deg. 03 min. E) between January 1952 and June 1983. The stations were set up under the CSIRO coastal monitoring programme in the 1950s and were sampled approximately monthly for temperature, salinity, dissolved oxygen, phosphate and nitrate. Data from 1952 onwards are stored on-line as part of the CMR hydrology archive in Hobart. Additional copies of the data are deposited with the NODC data archive (World Data Centre-A) in the U.S.A., and details of relevant data files can be viewed via their website by requesting the file inventory for this coastal station which is NODC platform code \"09B7\". Station details, plus printed versions of the data from 1944, have been published in CSIRO's \"Oceanographical Station List\" series.",
+  "extent" : {
+    "bbox" : [ [ 118.0, -35.5, 118.5, -35.0 ], [ 118.0, -35.5, 118.5, -35.0 ] ],
+    "temporal" : [ [ "1944-03-17T13:00:00Z", "1983-06-21T14:00:00Z" ], [ "1944-03-17T13:00:00Z", "1983-06-21T14:00:00Z" ] ]
   },
-  "summaries": {
-    "score": 100,
-    "status": "completed",
-    "credits": [],
-    "statement": "Data source is from research vessels of CSIRO. Analytical methods are given in the documentation.",
-    "revision": "2016-07-07T16:23:44",
-    "dataset_group": "csiro oceans and atmosphere",
-    "update_frequency": "completed",
-    "proj:geometry": {
-      "geometries": [
-        {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [
-                118,
-                -35.5
-              ],
-              [
-                118.5,
-                -35.5
-              ],
-              [
-                118.5,
-                -35
-              ],
-              [
-                118,
-                -35
-              ],
-              [
-                118,
-                -35.5
-              ]
-            ]
-          ]
-        }
-      ],
-      "type": "GeometryCollection"
+  "summaries" : {
+    "score" : 100,
+    "status" : "completed",
+    "credits" : [ ],
+    "statement" : "Data source is from research vessels of CSIRO. Analytical methods are given in the documentation.",
+    "revision" : "2016-07-07T16:23:44",
+    "dataset_group" : "sample",
+    "update_frequency" : "completed",
+    "proj:geometry" : {
+      "geometries" : [ {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 118, -35.5 ], [ 118.5, -35.5 ], [ 118.5, -35 ], [ 118, -35 ], [ 118, -35.5 ] ] ]
+      } ],
+      "type" : "GeometryCollection"
     },
-    "temporal": [
-      {
-        "start": "1944-03-17T13:00:00Z",
-        "end": "1983-06-21T14:00:00Z"
-      }
-    ]
+    "temporal" : [ {
+      "start" : "1944-03-17T13:00:00Z",
+      "end" : "1983-06-21T14:00:00Z"
+    } ]
   },
-  "contacts": [
-    {
-      "roles": [
-        "pointOfContact",
-        "about"
-      ],
-      "organization": "CSIRO Oceans & Atmosphere - Hobart",
-      "name": "CSIRO O&A, Information & Data Centre",
-      "position": "Data Requests",
-      "emails": [],
-      "addresses": [],
-      "phones": [],
-      "links": []
-    },
-    {
-      "roles": [
-        "pointOfContact",
-        "metadata"
-      ],
-      "organization": "CSIRO Oceans & Atmosphere - Hobart",
-      "name": "CSIRO O&A, Information & Data Centre",
-      "position": "Data Requests",
-      "emails": [],
-      "addresses": [],
-      "phones": [],
-      "links": []
-    }
-  ],
-  "languages": [
-    {
-      "code": "eng",
-      "name": "English"
-    }
-  ],
-  "links": [
-    {
-      "href": "https://www.cmar.csiro.au/geoserver/wms?&CQL_FILTER=SURVEY_NAME%20%3D%20%27CS-ALB-ALL%27",
-      "rel": "related",
-      "type": "",
-      "title": "mnf:HYDROLOGY_HEADER_AODN_VIEW"
-    },
-    {
-      "href": "https://www.marine.csiro.au/data/trawler/dataset.cfm?survey=CS-ALB-ALL&data_type=hydro",
-      "rel": "related",
-      "type": "",
-      "title": "Data Link"
-    },
-    {
-      "href": "https://publications.csiro.au/rpr/advancedSearchResults?subQueries%5b0%5d.field=Series+Title&subQueries%5b0%5d.textSubQuery=Oceanographical+Station+List&filterCriteria.toDate=2017-12-31&filterCriteria.fromDate=1919",
-      "rel": "related",
-      "type": "text/html",
-      "title": "Documentation Link"
-    },
-    {
-      "href": "https://www.nodc.noaa.gov/",
-      "rel": "related",
-      "type": "text/html",
-      "title": "Documentation Link"
-    },
-    {
-      "href": "https://creativecommons.org/licenses/by/4.0/",
-      "rel": "related",
-      "type": "text/html",
-      "title": "Documentation Link"
-    },
-    {
-      "href": "https://geonetwork-edge.edge.aodn.org.au:443/geonetwork/images/logos/c953222f-bb17-4ddf-bdaa-5bf86d04d72a.png",
-      "rel": "icon",
-      "type": "image/png",
-      "title": "Suggest icon for dataset"
-    },
-    {
-      "href": "https://www.cmar.csiro.au/data/trawler/dataset_mapfile.cfm?survey=CS-ALB-ALL&data_type=hydro&img_type=tn",
-      "rel": "preview",
-      "type": "image"
-    }
-  ],
-  "license": "Data is made available under a Creative Commons Attribution 4.0 International Licence, please see link. Data is supplied 'as is' without any warranty or guarantee except as required by law to be given to you. The data may not be free of error, comprehensive, current or appropriate for your particular purpose. You accept all risk and responsibility for its use. ATTRIBUTION STATEMENT: The dataset [Insert-dataset-name-here] downloaded on [Insert-DD-Mmm-YYYY-here] was provided by CSIRO.",
-  "providers": [
-    {
-      "name": "CSIRO Oceans & Atmosphere - Hobart",
-      "roles": [
-        "pointOfContact"
-      ]
-    }
-  ],
-  "themes": [
-    {
-      "concepts": [
-        {
-          "id": "Earth Science | Oceans | Coastal Processes | Rocky Coasts",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/488f4df2-712e-4fac-98d1-46ab134b84ee"
-        },
-        {
-          "id": "Earth Science | Oceans | Ocean Chemistry | Nitrate",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/4fde380a-38c5-4d46-bc80-4f2515a43983"
-        },
-        {
-          "id": "Earth Science | Oceans | Ocean Chemistry | Oxygen",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/90aa8838-79bd-4b28-b518-8217e863c385"
-        },
-        {
-          "id": "Earth Science | Oceans | Ocean Chemistry | Phosphate",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/0b513d8c-bfd3-44ee-976e-42757b8375a2"
-        },
-        {
-          "id": "Earth Science | Oceans | Ocean Pressure | Water Pressure",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/dd025312-0d27-44e0-ae05-7cfcc1aa17f0"
-        },
-        {
-          "id": "Earth Science | Oceans | Ocean Temperature | Water Temperature",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/46206e8c-8def-406f-9e62-da4e74633a58"
-        },
-        {
-          "id": "Earth Science | Oceans | Salinity/Density | Salinity",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/7e95b5fc-1d58-431a-af36-948b29fa870d"
-        }
-      ],
-      "scheme": "theme",
-      "description": "Olsen, L.M., G. Major, K. Shein, J. Scialdone, S. Ritz, T. Stevens, M. Morahan, A. Aleman, R. Vogel, S. Leicester, H. Weir, M. Meaux, S. Grebas, C.Solomon, M. Holland, T. Northcutt, R. A. Restrepo, R. Bilodeau, 2013. NASA/Global Change Master Directory (GCMD) Earth Science Keywords. Version 8.0.0.0.0",
-      "title": "GCMD Keywords"
-    },
-    {
-      "concepts": [
-        {
-          "id": "Autoanalysers",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:15"
-        },
-        {
-          "id": "Nutrient Analysers",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:18"
-        },
-        {
-          "id": "Thermometers",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:100"
-        }
-      ],
-      "scheme": "equipment",
-      "description": "",
-      "title": "CSIRO Equipment"
-    },
-    {
-      "concepts": [
-        {
-          "id": "Coastal Waters (Australia) | West Australia Coast South, WA",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.place.urn:aodn.org.au:geographicextents&id=urn:aodn.org.au:geographicextents:concept:1017"
-        }
-      ],
-      "scheme": "place",
-      "description": "AODN GEN",
-      "title": "AODN Geographic Extent Names"
-    },
-    {
-      "concepts": [
-        {
-          "id": "Time Series: Albany - all data",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.survey.urn:marlin.csiro.au:surveyregister&id=urn:marlin.csiro.au:surveyregister:concept:1043"
-        }
-      ],
-      "scheme": "survey",
-      "description": "MarLIN Survey Register",
-      "title": "CSIRO Survey List"
-    },
-    {
-      "concepts": [
-        {
-          "id": "Coastal Monitoring Programme 1942-",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.project.urn:marlin.csiro.au:projectregister&id=urn:marlin.csiro.au:projectregister:concept:201"
-        }
-      ],
-      "scheme": "project",
-      "description": "MarLIN Project Register",
-      "title": "CSIRO Project List"
-    },
-    {
-      "concepts": [
-        {
-          "id": "Vessel/Station Data: Hydrology",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.discipline.urn:marlin.csiro.au:keywords:standardDataType&id=urn:marlin.csiro.au:keywords:standardDataType:concept:3513"
-        }
-      ],
-      "scheme": "discipline",
-      "description": "MarLIN Standard Datatypes Thesaurus",
-      "title": "CSIRO Standard Data Types"
-    },
-    {
-      "concepts": [
-        {
-          "id": "Coastal Station: Albany",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.dataSource.urn:marlin.csiro.au:sourceregister&id=urn:marlin.csiro.au:sourceregister:concept:29"
-        }
-      ],
-      "scheme": "dataSource",
-      "description": "MarLIN Source Register",
-      "title": "CSIRO Source List"
-    }
-  ],
-  "id": "2389afd5-b3e5-43c5-9a63-22354c732830",
-  "search_suggestions": {
-    "abstract_phrases": [
-      "between january",
-      "additional copies",
-      "been",
-      "e between january",
-      "deg",
-      "collected",
-      "oceanographic data",
-      "via",
-      "nodc data",
-      "list series",
-      "station off albany",
-      "min s",
-      "station list",
-      "station details",
-      "set up",
-      "oceanographical",
-      "dissolved",
-      "between",
-      "nitrate data from",
-      "nitrate data",
-      "min e",
-      "australia",
-      "stations",
-      "monitoring",
-      "nodc platform code",
-      "contains oceanographic data",
-      "printed",
-      "contains",
-      "salinity dissolved",
-      "nodc",
-      "versions",
-      "oceanographical station",
-      "s long",
-      "relevant data files can",
-      "details plus",
-      "dataset contains oceanographic",
-      "viewed via",
-      "dataset contains oceanographic data",
-      "cmr",
-      "long",
-      "oceanographical station list series",
-      "western australia",
-      "salinity dissolved oxygen phosphate",
-      "coastal station off albany",
-      "albany",
-      "min",
-      "world",
-      "file",
-      "world data centre",
-      "contains oceanographic",
-      "viewed",
-      "temperature",
-      "have",
-      "off albany western australia",
-      "western australia lat",
-      "programme",
-      "oceanographic data collected",
-      "csiro",
-      "were sampled approximately monthly",
-      "printed versions",
-      "albany western australia lat",
-      "stations were",
-      "website",
-      "set",
-      "plus printed",
-      "station off albany western",
-      "hobart additional",
-      "centre",
-      "stations were set up",
-      "dissolved oxygen phosphate",
-      "have been",
-      "off",
-      "station off",
-      "june",
-      "january",
-      "station which",
-      "station details plus",
-      "e between",
-      "series",
-      "stored",
-      "coastal monitoring programme",
-      "under",
-      "dataset",
-      "coastal monitoring",
-      "dissolved oxygen",
-      "data",
-      "nodc data archive",
-      "min s long",
-      "deposited",
-      "off albany",
-      "temperature salinity dissolved oxygen",
-      "archive world data centre",
-      "coastal station",
-      "were set up under",
-      "dataset contains",
-      "hobart",
-      "data archive world data",
-      "hydrology archive",
-      "nodc data archive world",
-      "details plus printed",
-      "off albany western",
-      "temperature salinity dissolved",
-      "copies",
-      "were sampled",
-      "csiro coastal monitoring programme",
-      "temperature salinity",
-      "cmr hydrology archive",
-      "sampled approximately",
-      "from",
-      "details",
-      "up",
-      "cmr hydrology",
-      "relevant data files",
-      "data archive",
-      "oxygen",
-      "been published",
-      "lat",
-      "have been published",
-      "which",
-      "archive world",
-      "station list series",
-      "hydrology",
-      "coastal station which",
-      "australia lat",
-      "min e between",
-      "archive",
-      "data files can",
-      "published",
-      "list",
-      "hobart additional copies",
-      "set up under",
-      "plus",
-      "relevant",
-      "plus printed versions",
-      "albany western australia",
-      "data collected",
-      "world data",
-      "were",
-      "monthly",
-      "data from",
-      "files",
-      "oxygen phosphate",
-      "western",
-      "csiro coastal monitoring",
-      "onwards",
-      "coastal",
-      "file inventory",
-      "code",
-      "requesting",
-      "oceanographic",
-      "line",
-      "part",
-      "additional",
-      "albany western",
-      "nodc platform",
-      "approximately monthly",
-      "contains oceanographic data collected",
-      "nitrate",
-      "stations were set",
-      "inventory",
-      "data files",
-      "coastal station off",
-      "platform",
-      "min e between january",
-      "can",
-      "station",
-      "salinity dissolved oxygen",
-      "files can",
-      "data archive world",
-      "csiro coastal",
-      "archive world data",
-      "station details plus printed",
-      "sampled",
-      "relevant data",
-      "salinity",
-      "sampled approximately monthly",
-      "phosphate",
-      "platform code",
-      "data centre",
-      "details plus printed versions",
-      "were set",
-      "monitoring programme",
-      "oceanographical station list",
-      "up under",
-      "were sampled approximately",
-      "approximately",
-      "were set up"
-    ]
+  "contacts" : [ {
+    "roles" : [ "pointOfContact", "about" ],
+    "organization" : "CSIRO Oceans & Atmosphere - Hobart",
+    "name" : "CSIRO O&A, Information & Data Centre",
+    "position" : "Data Requests",
+    "emails" : [ ],
+    "addresses" : [ ],
+    "phones" : [ ],
+    "links" : [ ]
+  }, {
+    "roles" : [ "pointOfContact", "metadata" ],
+    "organization" : "CSIRO Oceans & Atmosphere - Hobart",
+    "name" : "CSIRO O&A, Information & Data Centre",
+    "position" : "Data Requests",
+    "emails" : [ ],
+    "addresses" : [ ],
+    "phones" : [ ],
+    "links" : [ ]
+  } ],
+  "languages" : [ {
+    "code" : "eng",
+    "name" : "English"
+  } ],
+  "links" : [ {
+    "href" : "https://www.cmar.csiro.au/geoserver/wms?&CQL_FILTER=SURVEY_NAME%20%3D%20%27CS-ALB-ALL%27",
+    "rel" : "related",
+    "type" : "",
+    "title" : "mnf:HYDROLOGY_HEADER_AODN_VIEW"
+  }, {
+    "href" : "https://www.marine.csiro.au/data/trawler/dataset.cfm?survey=CS-ALB-ALL&data_type=hydro",
+    "rel" : "related",
+    "type" : "",
+    "title" : "Data Link"
+  }, {
+    "href" : "https://publications.csiro.au/rpr/advancedSearchResults?subQueries%5b0%5d.field=Series+Title&subQueries%5b0%5d.textSubQuery=Oceanographical+Station+List&filterCriteria.toDate=2017-12-31&filterCriteria.fromDate=1919",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "Documentation Link"
+  }, {
+    "href" : "https://www.nodc.noaa.gov/",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "Documentation Link"
+  }, {
+    "href" : "https://creativecommons.org/licenses/by/4.0/",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "Documentation Link"
+  }, {
+    "href" : "https://www.cmar.csiro.au/data/trawler/dataset_mapfile.cfm?survey=CS-ALB-ALL&data_type=hydro&img_type=tn",
+    "rel" : "preview",
+    "type" : "image"
+  } ],
+  "license" : "Data is made available under a Creative Commons Attribution 4.0 International Licence, please see link. Data is supplied 'as is' without any warranty or guarantee except as required by law to be given to you. The data may not be free of error, comprehensive, current or appropriate for your particular purpose. You accept all risk and responsibility for its use. ATTRIBUTION STATEMENT: The dataset [Insert-dataset-name-here] downloaded on [Insert-DD-Mmm-YYYY-here] was provided by CSIRO.",
+  "providers" : [ {
+    "name" : "CSIRO Oceans & Atmosphere - Hobart",
+    "roles" : [ "pointOfContact" ]
+  } ],
+  "themes" : [ {
+    "concepts" : [ {
+      "id" : "Earth Science | Oceans | Coastal Processes | Rocky Coasts",
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/488f4df2-712e-4fac-98d1-46ab134b84ee"
+    }, {
+      "id" : "Earth Science | Oceans | Ocean Chemistry | Nitrate",
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/4fde380a-38c5-4d46-bc80-4f2515a43983"
+    }, {
+      "id" : "Earth Science | Oceans | Ocean Chemistry | Oxygen",
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/90aa8838-79bd-4b28-b518-8217e863c385"
+    }, {
+      "id" : "Earth Science | Oceans | Ocean Chemistry | Phosphate",
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/0b513d8c-bfd3-44ee-976e-42757b8375a2"
+    }, {
+      "id" : "Earth Science | Oceans | Ocean Pressure | Water Pressure",
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/dd025312-0d27-44e0-ae05-7cfcc1aa17f0"
+    }, {
+      "id" : "Earth Science | Oceans | Ocean Temperature | Water Temperature",
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/46206e8c-8def-406f-9e62-da4e74633a58"
+    }, {
+      "id" : "Earth Science | Oceans | Salinity/Density | Salinity",
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/7e95b5fc-1d58-431a-af36-948b29fa870d"
+    } ],
+    "scheme" : "theme",
+    "description" : "Olsen, L.M., G. Major, K. Shein, J. Scialdone, S. Ritz, T. Stevens, M. Morahan, A. Aleman, R. Vogel, S. Leicester, H. Weir, M. Meaux, S. Grebas, C.Solomon, M. Holland, T. Northcutt, R. A. Restrepo, R. Bilodeau, 2013. NASA/Global Change Master Directory (GCMD) Earth Science Keywords. Version 8.0.0.0.0",
+    "title" : "GCMD Keywords"
+  }, {
+    "concepts" : [ {
+      "id" : "Autoanalysers",
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:15"
+    }, {
+      "id" : "Nutrient Analysers",
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:18"
+    }, {
+      "id" : "Thermometers",
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:Equipment&id=urn:marlin.csiro.au:Equipment:concept:100"
+    } ],
+    "scheme" : "equipment",
+    "description" : "",
+    "title" : "CSIRO Equipment"
+  }, {
+    "concepts" : [ {
+      "id" : "Coastal Waters (Australia) | West Australia Coast South, WA",
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.place.urn:aodn.org.au:geographicextents&id=urn:aodn.org.au:geographicextents:concept:1017"
+    } ],
+    "scheme" : "place",
+    "description" : "AODN GEN",
+    "title" : "AODN Geographic Extent Names"
+  }, {
+    "concepts" : [ {
+      "id" : "Time Series: Albany - all data",
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.survey.urn:marlin.csiro.au:surveyregister&id=urn:marlin.csiro.au:surveyregister:concept:1043"
+    } ],
+    "scheme" : "survey",
+    "description" : "MarLIN Survey Register",
+    "title" : "CSIRO Survey List"
+  }, {
+    "concepts" : [ {
+      "id" : "Coastal Monitoring Programme 1942-",
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.project.urn:marlin.csiro.au:projectregister&id=urn:marlin.csiro.au:projectregister:concept:201"
+    } ],
+    "scheme" : "project",
+    "description" : "MarLIN Project Register",
+    "title" : "CSIRO Project List"
+  }, {
+    "concepts" : [ {
+      "id" : "Vessel/Station Data: Hydrology",
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.discipline.urn:marlin.csiro.au:keywords:standardDataType&id=urn:marlin.csiro.au:keywords:standardDataType:concept:3513"
+    } ],
+    "scheme" : "discipline",
+    "description" : "MarLIN Standard Datatypes Thesaurus",
+    "title" : "CSIRO Standard Data Types"
+  }, {
+    "concepts" : [ {
+      "id" : "Coastal Station: Albany",
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.dataSource.urn:marlin.csiro.au:sourceregister&id=urn:marlin.csiro.au:sourceregister:concept:29"
+    } ],
+    "scheme" : "dataSource",
+    "description" : "MarLIN Source Register",
+    "title" : "CSIRO Source List"
+  } ],
+  "id" : "2389afd5-b3e5-43c5-9a63-22354c732830",
+  "record_suggest" : {
+    "abstract_phrases" : [ "between january", "additional copies", "been", "e between january", "deg", "collected", "oceanographic data", "via", "nodc data", "list series", "station off albany", "min s", "station list", "station details", "set up", "oceanographical", "dissolved", "between", "nitrate data from", "nitrate data", "min e", "australia", "stations", "monitoring", "nodc platform code", "contains oceanographic data", "printed", "contains", "salinity dissolved", "nodc", "versions", "oceanographical station", "s long", "relevant data files can", "details plus", "dataset contains oceanographic", "viewed via", "dataset contains oceanographic data", "cmr", "long", "oceanographical station list series", "western australia", "salinity dissolved oxygen phosphate", "coastal station off albany", "albany", "min", "world", "file", "world data centre", "contains oceanographic", "viewed", "temperature", "have", "off albany western australia", "western australia lat", "programme", "oceanographic data collected", "csiro", "were sampled approximately monthly", "printed versions", "albany western australia lat", "stations were", "website", "set", "plus printed", "station off albany western", "hobart additional", "centre", "stations were set up", "dissolved oxygen phosphate", "have been", "off", "station off", "june", "january", "station which", "station details plus", "e between", "series", "stored", "coastal monitoring programme", "under", "dataset", "coastal monitoring", "dissolved oxygen", "data", "nodc data archive", "min s long", "deposited", "off albany", "temperature salinity dissolved oxygen", "archive world data centre", "coastal station", "were set up under", "dataset contains", "hobart", "data archive world data", "hydrology archive", "nodc data archive world", "details plus printed", "off albany western", "temperature salinity dissolved", "copies", "were sampled", "csiro coastal monitoring programme", "temperature salinity", "cmr hydrology archive", "sampled approximately", "from", "details", "up", "cmr hydrology", "relevant data files", "data archive", "oxygen", "been published", "lat", "have been published", "which", "archive world", "station list series", "hydrology", "coastal station which", "australia lat", "min e between", "archive", "data files can", "published", "list", "hobart additional copies", "set up under", "plus", "relevant", "plus printed versions", "albany western australia", "data collected", "world data", "were", "monthly", "data from", "files", "oxygen phosphate", "western", "csiro coastal monitoring", "onwards", "coastal", "file inventory", "code", "requesting", "oceanographic", "line", "part", "additional", "albany western", "nodc platform", "approximately monthly", "contains oceanographic data collected", "nitrate", "stations were set", "inventory", "data files", "coastal station off", "platform", "min e between january", "can", "station", "salinity dissolved oxygen", "files can", "data archive world", "csiro coastal", "archive world data", "station details plus printed", "sampled", "relevant data", "salinity", "sampled approximately monthly", "phosphate", "platform code", "data centre", "details plus printed versions", "were set", "monitoring programme", "oceanographical station list", "up under", "were sampled approximately", "approximately", "were set up" ]
   },
-  "sci:citation": "{\"suggestedCitation\":null,\"useLimitations\":null,\"otherConstraints\":[\"Data is made available under a Creative Commons Attribution 4.0 International Licence, please see link. Data is supplied 'as is' without any warranty or guarantee except as required by law to be given to you. The data may not be free of error, comprehensive, current or appropriate for your particular purpose. You accept all risk and responsibility for its use. ATTRIBUTION STATEMENT: The dataset [Insert-dataset-name-here] downloaded on [Insert-DD-Mmm-YYYY-here] was provided by CSIRO.\"]}",
-  "stac_version": "1.0.0",
-  "stac_extensions": [
-    "https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/contacts/v0.1.1/schema.json",
-    "https://stac-extensions.github.io/projection/v1.1.0/schema.json",
-    "https://stac-extensions.github.io/language/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/themes/v1.0.0/schema.json"
-  ],
-  "type": "Collection"
+  "sci:citation" : "{\"suggestedCitation\":null,\"useLimitations\":null,\"otherConstraints\":[\"Data is made available under a Creative Commons Attribution 4.0 International Licence, please see link. Data is supplied 'as is' without any warranty or guarantee except as required by law to be given to you. The data may not be free of error, comprehensive, current or appropriate for your particular purpose. You accept all risk and responsibility for its use. ATTRIBUTION STATEMENT: The dataset [Insert-dataset-name-here] downloaded on [Insert-DD-Mmm-YYYY-here] was provided by CSIRO.\"]}",
+  "type" : "Collection",
+  "stac_version" : "1.0.0",
+  "stac_extensions" : [ "https://stac-extensions.github.io/scientific/v1.0.0/schema.json", "https://stac-extensions.github.io/contacts/v0.1.1/schema.json", "https://stac-extensions.github.io/projection/v1.1.0/schema.json", "https://stac-extensions.github.io/language/v1.0.0/schema.json", "https://stac-extensions.github.io/themes/v1.0.0/schema.json" ]
 }
