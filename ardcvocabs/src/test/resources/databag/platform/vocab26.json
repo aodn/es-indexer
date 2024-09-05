@@ -1,0 +1,214 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=26",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=26&_metadata=all",
+    "first": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=0",
+    "isPartOf": {
+      "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+      "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+      "hasPart": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=26",
+      "type": "http://purl.org/linked-data/api/vocab#ListEndpoint"
+    },
+    "items": [
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/344",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/41",
+            "prefLabel": {
+              "_value": "moored surface buoy",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-06-14T00:00:00Z",
+        "dctermsModified": "2018-09-13T05:40:13Z",
+        "definition": "A round 1.4m yellow buoy has been deployed in the Heron Island lagoon as part of the sensor network infrastructure at Heron Island in the southern Great Barrier Reef off Gladstone, Australia. The buoy is configured as a sensor-float with a Campbell Scientific logger, a spread-spectrum radio for communicating with the on-reef wireless network, a GPS and initially a surface mounted (30cm under the water surface) thermistor. The float is moored in the lagoon of Heron Island in around 3m of water and will be used to monitor the flow of water through the lagoon. It will be fitted with surface salinity and bottom depth and temperature in late 2008. The unit will be serviced every six months and will be used in the future for attaching new sets of sensors. The buoy is re-locatable and the GPS data should be used to find the current location. This buoy was decommissioned in 2016.",
+        "prefLabel": {
+          "_value": "Heron Island Sensor Float 2",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/345",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/41",
+            "prefLabel": {
+              "_value": "moored surface buoy",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-06-14T00:00:00Z",
+        "dctermsModified": "2018-09-13T05:41:34Z",
+        "definition": "A round 1.4m yellow buoy has been deployed in the Heron Island lagoon as part of the sensor network infrastructure at Heron Island in the southern Great Barrier Reef off Gladstone, Australia. The buoy is configured as a sensor-float with a Campbell Scientific logger, a spread-spectrum radio for communicating with the on-reef wireless network, a GPS and initially a surface mounted (30cm under the water surface) thermistor. The float is moored in the lagoon of Heron Island in around 3m of water and will be used to monitor the flow of water through the lagoon. It will be fitted with surface salinity and bottom depth and temperature in late 2008. The unit will be serviced every six months and will be used in the future for attaching new sets of sensors. The buoy is re-locatable and the GPS data should be used to find the current location. This buoy was decommissioned in 2017.",
+        "prefLabel": {
+          "_value": "Heron Island Sensor Float 3",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/346",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/41",
+            "prefLabel": {
+              "_value": "moored surface buoy",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-06-14T00:00:00Z",
+        "dctermsModified": "2018-09-13T05:42:51Z",
+        "definition": "A round 1.4m yellow buoy has been deployed in the Heron Island lagoon as part of the sensor network infrastructure at Heron Island in the southern Great Barrier Reef off Gladstone, Australia. The buoy is configured as a sensor-float with a Campbell Scientific logger, a spread-spectrum radio for communicating with the on-reef wireless network, a GPS and initially a surface mounted (30cm under the water surface) thermistor. The float is moored in the lagoon of Heron Island in around 3m of water and will be used to monitor the flow of water through the lagoon. It will be fitted with surface salinity and bottom depth and temperature in late 2008.  The unit will be serviced every six months and will be used in the future for attaching new sets of sensors. The buoy is re-locatable and the GPS data should be used to find the current location. This buoy was decommissioned in 2015.",
+        "prefLabel": {
+          "_value": "Heron Island Sensor Float 4",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/347",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/41",
+            "prefLabel": {
+              "_value": "moored surface buoy",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-06-14T00:00:00Z",
+        "dctermsModified": "2018-09-13T05:43:55Z",
+        "definition": "A round 1.4m yellow buoy has been deployed in the Heron Island lagoon as part of the sensor network infrastructure at Heron Island in the southern Great Barrier Reef off Gladstone, Australia. The buoy is configured as a sensor-float with a Campbell Scientific logger, a spread-spectrum radio for communicating with the on-reef wireless network, a GPS and initially a surface mounted (30cm under the water surface) thermistor. The float is moored in the lagoon of Heron Island in around 3m of water and will be used to monitor the flow of water through the lagoon. It will be fitted with surface salinity and bottom depth and temperature in late 2008. The unit will be serviced every six months and will be used in the future for attaching new sets of sensors. The buoy is re-locatable and the GPS data should be used to find the current location. This buoy was decommissioned in 2017.",
+        "prefLabel": {
+          "_value": "Heron Island Sensor Float 5",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/35",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2017-06-26T23:56:26Z",
+        "dctermsModified": "2023-07-05T00:03:41Z",
+        "definition": "The East Australian Current 3200m Mooring is operated by CSIRO Oceans and Atmosphere, and collects data in the East Australian Current. This mooring forms part of the second deployment of the EAC array, and was reconfigured to incorporate parts of the continental shelf. The array that this mooring was part of was decommissioned in July 2022.",
+        "prefLabel": {
+          "_value": "East Australian Current 3200m Mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/36",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2017-06-26T23:57:20Z",
+        "dctermsModified": "2023-07-05T00:04:10Z",
+        "definition": "The East Australian Current 4200m Mooring is operated by CSIRO Oceans and Atmosphere, and collects data in the East Australian Current. This mooring forms part of the second deployment of the EAC array, and was reconfigured to incorporate parts of the continental shelf. The array that this mooring was part of was decommissioned in July 2022.",
+        "prefLabel": {
+          "_value": "East Australian Current 4200m Mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/37",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2017-06-26T23:58:28Z",
+        "dctermsModified": "2023-07-05T00:55:45Z",
+        "definition": "The East Australian Current 4700m Mooring is operated by CSIRO Oceans and Atmosphere, and collects data in the East Australian Current. This mooring forms part of the second deployment of the EAC array, and was reconfigured to incorporate parts of the continental shelf. The array that this mooring was part of was decommissioned in July 2022.",
+        "prefLabel": {
+          "_value": "East Australian Current 4700m Mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/38",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2017-06-26T23:59:33Z",
+        "dctermsModified": "2023-07-05T00:57:09Z",
+        "definition": "The East Australian Current 4800m Mooring is operated by CSIRO Oceans and Atmosphere, and collects data in the East Australian Current. This mooring forms part of the second deployment of the EAC array, and was reconfigured to incorporate parts of the continental shelf. The array that this mooring was part of was decommissioned in July 2022.",
+        "prefLabel": {
+          "_value": "East Australian Current 4800m Mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/4",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/31",
+            "prefLabel": {
+              "_value": "research vessel",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2015-07-07T03:31:18Z",
+        "dctermsModified": "2017-04-13T03:52:33Z",
+        "definition": "Research vessel owned by NIWA, currently flying the flag of New Zealand (July 2015).",
+        "prefLabel": {
+          "_value": "Kaharoa",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/453",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-07-24T00:00:00Z",
+        "dctermsModified": "2017-04-13T05:58:41Z",
+        "definition": "General Cargo ship vessel, which is currently flying the flag of Panama (July 2013).",
+        "prefLabel": {
+          "_value": "Tropical Islander",
+          "_lang": "en"
+        }
+      }
+    ],
+    "itemsPerPage": 10,
+    "next": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=27",
+    "page": 26,
+    "prev": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=25",
+    "startIndex": 261,
+    "type": "http://purl.org/linked-data/api/vocab#Page"
+  }
+}

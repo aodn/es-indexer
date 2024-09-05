@@ -1,0 +1,214 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=31",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=31&_metadata=all",
+    "first": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=0",
+    "isPartOf": {
+      "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+      "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+      "hasPart": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=31",
+      "type": "http://purl.org/linked-data/api/vocab#ListEndpoint"
+    },
+    "items": [
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/863",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/65",
+            "prefLabel": {
+              "_value": "orbiting satellite",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2015-09-03T00:00:00Z",
+        "dctermsModified": "2019-02-15T03:46:29Z",
+        "definition": "This satellite was the 4th flight unit of the NOAA 4th generation programme, and 1st of the ATN series. It operated between March 1983 and December 1985 at an altitutde of 820km, in a sunsynchronous orbit. Instrumentation: Argos Data Collection System , Advanced Very High Resolution Radiometer, High-resolution Infra Red Sounder / 2, Microwave Sounding Unit, Search and Rescue Satellite-Aided Tracking System, Stratospheric Sounding Unit, SEM / Medium energy proton detector and SEM / Total Energy Detector.",
+        "prefLabel": {
+          "_value": "NOAA-8",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/864",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/65",
+            "prefLabel": {
+              "_value": "orbiting satellite",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2015-09-03T00:00:00Z",
+        "dctermsModified": "2019-02-15T03:46:36Z",
+        "definition": "This satellite was the 5th flight unit of the NOAA 4th generation programme, and 2nd of the ATN series. It operated between December 1984 and February 1998 at an altitutde of 850km, in a sunsynchronous orbit. Instrumentation: Argos Data Collection System, Advanced Very High Resolution Radiometer / 2, Earth Radiation Budget Experiment, High-resolution Infra Red Sounder / 2, Microwave Sounding Unit, Search and Rescue Satellite-Aided Tracking System, Solar Backscatter Ultraviolet / 2, Stratospheric Sounding Unit, SEM / Medium energy proton detector and SEM / Total Energy Detector",
+        "prefLabel": {
+          "_value": "NOAA-9",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/865",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/65",
+            "prefLabel": {
+              "_value": "orbiting satellite",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2015-09-03T00:00:00Z",
+        "dctermsModified": "2019-02-15T03:45:25Z",
+        "definition": "This satellite was the 6th flight unit of the NOAA 4th generation programme, and 3rd of the ATN series. It operated between September 1986 and August 2001 at an altitutde of 810km, in a sunsynchronous orbit. Instrumentation: Argos Data Collection System, Advanced Very High Resolution Radiometer, Earth Radiation Budget Experiment, High-resolution Infra Red Sounder / 2, Microwave Sounding Unit, Search and Rescue Satellite-Aided Tracking System, Solar Backscatter Ultraviolet / 2, Stratospheric Sounding Unit, SEM / Medium energy proton detector and SEM / Total Energy Detector",
+        "prefLabel": {
+          "_value": "NOAA-10",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/866",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/65",
+            "prefLabel": {
+              "_value": "orbiting satellite",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2015-09-03T00:00:00Z",
+        "dctermsModified": "2019-02-15T03:45:33Z",
+        "definition": "This satellite was the 7th flight unit of the NOAA 4th generation programme, and 4th of the ATN series. It operated between September 1988 and June 2004 at an altitutde of 843km, in a sunsynchronous orbit. Instrumentation: Argos Data Collection System, Advanced Very High Resolution Radiometer / 2, High-resolution Infra Red Sounder / 2, Microwave Sounding Unit, Search and Rescue Satellite-Aided Tracking System, Solar Backscatter Ultraviolet / 2, Stratospheric Sounding Unit, SEM / Medium energy proton detector and SEM / Total Energy Detector",
+        "prefLabel": {
+          "_value": "NOAA-11",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/867",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/65",
+            "prefLabel": {
+              "_value": "orbiting satellite",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2015-09-03T00:00:00Z",
+        "dctermsModified": "2019-02-15T03:45:40Z",
+        "definition": "This satellite was the 8th flight unit of the NOAA 4th generation programme, and 5th of the ATN series. It operated between May 1991 and August 2007 at an altitutde of 804km, in a sunsynchronous orbit. Instrumentation: Argos Data Collection System, Advanced Very High Resolution Radiometer / 2, High-resolution Infra Red Sounder / 2, Microwave Sounding Unit, Stratospheric Sounding Unit, SEM / Medium energy proton detector and SEM / Total Energy Detector",
+        "prefLabel": {
+          "_value": "NOAA-12",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/868",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/65",
+            "prefLabel": {
+              "_value": "orbiting satellite",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2015-09-03T00:00:00Z",
+        "dctermsModified": "2019-02-15T03:45:46Z",
+        "definition": "This satellite was the 9th flight unit of the NOAA 4th generation programme, and 6th of the ATN series. It operated between 09 August 1993 and 21 August 1993 at an altitutde of 820km, in a sunsynchronous orbit. Instrumentation: Argos Data Collection System, Advanced Very High Resolution Radiometer / 2, High-resolution Infra Red Sounder / 2, Microwave Sounding Unit, Search and Rescue Satellite-Aided Tracking System, Solar Backscatter Ultraviolet / 2, Stratospheric Sounding Unit, SEM / Medium energy proton detector and SEM / Total Energy Detector",
+        "prefLabel": {
+          "_value": "NOAA-13",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/869",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/65",
+            "prefLabel": {
+              "_value": "orbiting satellite",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2015-09-03T00:00:00Z",
+        "dctermsModified": "2019-02-15T03:45:53Z",
+        "definition": "This satellite was the 10th (last) flight unit of the NOAA 4th generation programme, and 7th of the ATN series. It operated between December 1994 and May 2007 at an altitutde of 844km, in a sunsynchronous orbit. Instrumentation: Argos Data Collection System, Advanced Very High Resolution Radiometer / 2, High-resolution Infra Red Sounder / 2, Microwave Sounding Unit, Search and Rescue Satellite-Aided Tracking System, Solar Backscatter Ultraviolet / 2, Stratospheric Sounding Unit, SEM / Medium energy proton detector and SEM / Total Energy Detector",
+        "prefLabel": {
+          "_value": "NOAA-14",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/870",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/65",
+            "prefLabel": {
+              "_value": "orbiting satellite",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2015-09-03T00:00:00Z",
+        "dctermsModified": "2020-10-15T04:56:37Z",
+        "definition": "This satellite was the 1st flight of the NOAA 5th generation programme. It operated between May 1998 and 2018, at an altitude of 807km, in a sunsynchronous orbit. Instrumentation: Advanced Microwave Sounding Unit - A, Advanced Microwave Sounding Unit - B, Advanced Very High Resolution Radiometer / 3, High-resolution Infra Red Sounder / 3, Search and Rescue Satellite-Aided Tracking System, Data Collection System / 2 (also called Argos-2), SEM / Medium energy proton detector and SEM / Total Energy Detector.",
+        "prefLabel": {
+          "_value": "NOAA-15",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/871",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/65",
+            "prefLabel": {
+              "_value": "orbiting satellite",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2015-09-03T00:00:00Z",
+        "dctermsModified": "2019-02-15T03:46:05Z",
+        "definition": "This satellite was the 2nd flight of the NOAA 5th generation programme. It operated between September 2000 and June 2014, at an altitude of 849km, in a sunsynchronous orbit. Instrumentation: Advanced Microwave Sounding Unit - A, Advanced Microwave Sounding Unit - B, Advanced Very High Resolution Radiometer / 3, High-resolution Infra Red Sounder / 3, Search and Rescue Satellite-Aided Tracking System, Solar Backscatter Ultraviolet / 2, Data Collection System / 2 (also called Argos-2), SEM / Medium energy proton detector and SEM / Total Energy Detector",
+        "prefLabel": {
+          "_value": "NOAA-16",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/872",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/65",
+            "prefLabel": {
+              "_value": "orbiting satellite",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2015-09-03T00:00:00Z",
+        "dctermsModified": "2019-02-15T03:46:11Z",
+        "definition": "This satellite was the 3rd flight of the NOAA 5th generation programme. It operated between June 2002 and April 2013, at an altitude of 810km, in a sunsynchronous orbit. Instrumentation: Advanced Microwave Sounding Unit - A, Advanced Microwave Sounding Unit - B, Advanced Very High Resolution Radiometer / 3, High-resolution Infra Red Sounder / 3, Search and Rescue Satellite-Aided Tracking System, Solar Backscatter Ultraviolet / 2, Data Collection System / 2 (also called Argos-2), SEM / Medium energy proton detector and SEM / Total Energy Detector",
+        "prefLabel": {
+          "_value": "NOAA-17",
+          "_lang": "en"
+        }
+      }
+    ],
+    "itemsPerPage": 10,
+    "next": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=32",
+    "page": 31,
+    "prev": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=30",
+    "startIndex": 311,
+    "type": "http://purl.org/linked-data/api/vocab#Page"
+  }
+}

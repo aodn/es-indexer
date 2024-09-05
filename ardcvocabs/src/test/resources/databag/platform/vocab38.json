@@ -1,0 +1,491 @@
+{ "format" : "linked-data-api", "version" : "0.2", "result" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=38", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json", "extendedMetadataVersion" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=38&_metadata=all", "first" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=0", "isPartOf" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json", "hasPart" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=38", "type" : "http://purl.org/linked-data/api/vocab#ListEndpoint"}
+    , "items" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/17", "dctermsCreated" : "2013-04-08T00:00:00Z", "dctermsModified" : "2017-02-07T03:52:42Z", "definition" : "A fixed man-made structure permanently linked to land with access to water at all states of the tide to which instrumentation may be attached (e.g. pier)", "prefLabel" : {"_value" : "coastal structure", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/23", "dctermsCreated" : "2015-05-10T00:00:00Z", "dctermsModified" : "2017-02-07T03:52:38Z", "definition" : "A vehicle towed by rigid cable through the water column at fixed or varying depth with no propulsion and no human operator (e.g. Towfish Scanfish UOR SeaSoar)", "prefLabel" : {"_value" : "towed unmanned submersible", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/25", "dctermsCreated" : "2013-04-08T00:00:00Z", "dctermsModified" : "2017-02-07T03:52:38Z", "definition" : "A free-roving platform operating in the water column with propulsion but no human operator on board (e.g. Autosub Glider).", "narrower" : [{"_about" : "http://vocab.aodn.org.au/def/platform/entity/39", "prefLabel" : {"_value" : "Iver", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/59", "prefLabel" : {"_value" : "Nimbus", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/74", "prefLabel" : {"_value" : "Sirius", "_lang" : "en"}
+      }
+      ], "prefLabel" : {"_value" : "unmanned autonomous underwater vehicle", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/26", "dctermsCreated" : "2013-04-08T00:00:00Z", "dctermsModified" : "2017-02-07T03:52:38Z", "definition" : "An unmanned platform lowered and raised vertically by a cable from the mothership.  Includes any type of profiling sensor mounting such as CTD frames profiling radiometers and instrumented nets.", "prefLabel" : {"_value" : "lowered unmanned submersible", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/27", "dctermsCreated" : "2014-01-20T00:00:00Z", "dctermsModified" : "2017-02-07T03:52:38Z", "definition" : "Platforms with buoyancy-based propulsion that are capable of operations of variable depths which are not constrained to be near the sea surface.", "narrower" : [{"_about" : "http://vocab.aodn.org.au/def/platform/entity/293", "prefLabel" : {"_value" : "Slocum Glider", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/294", "prefLabel" : {"_value" : "Seaglider UW", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/295", "prefLabel" : {"_value" : "1KA Seaglider", "_lang" : "en"}
+      }
+      ], "prefLabel" : {"_value" : "sub-surface gliders", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/30", "dctermsCreated" : "2013-04-08T00:00:00Z", "dctermsModified" : "2017-02-07T03:52:39Z", "definition" : "A large platform operating on the surface of the water column. Objective definitions for guidelines: >50m length (EU) >100 foot length (USA) >300 GRT weight (SOLAS). Subjective definition: a ship is a vessel big enough to carry a boat.", "prefLabel" : {"_value" : "ship", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/31", "dctermsCreated" : "2013-04-08T00:00:00Z", "dctermsModified" : "2021-04-21T02:13:55Z", "definition" : "A platform of any size operating on the surface of the water column in unpredictable locations that is specifically equipped manned and operated for scientific usually oceanographic research.", "narrower" : [{"_about" : "http://vocab.aodn.org.au/def/platform/entity/10", "prefLabel" : {"_value" : "Lady Basten", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/109", "prefLabel" : {"_value" : "Linnaeus", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/11", "prefLabel" : {"_value" : "James Kirby", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/111", "prefLabel" : {"_value" : "Tangaroa", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/118", "prefLabel" : {"_value" : "Hespérides", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/12", "prefLabel" : {"_value" : "Marion Dufresne", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/13", "prefLabel" : {"_value" : "Melville", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/14", "prefLabel" : {"_value" : "Mirai", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/17", "prefLabel" : {"_value" : "Glaucus", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/18", "prefLabel" : {"_value" : "Bombora", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/19", "prefLabel" : {"_value" : "Yolla", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/273", "prefLabel" : {"_value" : "Franklin", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/357", "prefLabel" : {"_value" : "Kaharoa II", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/4", "prefLabel" : {"_value" : "Kaharoa", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/62", "prefLabel" : {"_value" : "Everest", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/70", "prefLabel" : {"_value" : "Nuyina", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/71", "prefLabel" : {"_value" : "Cape Ferguson", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/72", "prefLabel" : {"_value" : "Solander", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/894", "prefLabel" : {"_value" : "Ramform Sovereign", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/895", "prefLabel" : {"_value" : "Falkor", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.nerc.ac.uk/collection/C17/current/06AQ", "prefLabel" : {"_value" : "Polarstern", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.nerc.ac.uk/collection/C17/current/096U", "prefLabel" : {"_value" : "Investigator", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.nerc.ac.uk/collection/C17/current/09AR", "prefLabel" : {"_value" : "Aurora Australis", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.nerc.ac.uk/collection/C17/current/09SS", "prefLabel" : {"_value" : "Southern Surveyor", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.nerc.ac.uk/collection/C17/current/334A", "prefLabel" : {"_value" : "Okeanos Explorer", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.nerc.ac.uk/collection/C17/current/33OC", "prefLabel" : {"_value" : "Oscar Elton Sette", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.nerc.ac.uk/collection/C17/current/353L", "prefLabel" : {"_value" : "L'Astrolabe {FHZI}", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.nerc.ac.uk/collection/C17/current/35O7", "prefLabel" : {"_value" : "L'Astrolabe {FASB}", "_lang" : "en"}
+      }
+      ], "prefLabel" : {"_value" : "research vessel", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "dctermsCreated" : "2013-04-08T00:00:00Z", "dctermsModified" : "2017-02-07T03:52:39Z", "definition" : "A platform for purpose of commerce of any size operating on the surface of the water column in unpredictable locations that regularly collects scientific (oceanographic and meteorological) data (e.g. an instrumented cargo vessel).", "narrower" : [{"_about" : "http://vocab.aodn.org.au/def/platform/entity/1", "prefLabel" : {"_value" : "OOCL Panama", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/101", "prefLabel" : {"_value" : "Stadacona", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/102", "prefLabel" : {"_value" : "Wana Bhum", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/103", "prefLabel" : {"_value" : "Iron Yandi", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/104", "prefLabel" : {"_value" : "Pacific Sun", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/105", "prefLabel" : {"_value" : "Portland", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/106", "prefLabel" : {"_value" : "Pacific Celebes", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/110", "prefLabel" : {"_value" : "Xutra Bhum", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/119", "prefLabel" : {"_value" : "ANL Windarra", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/16", "prefLabel" : {"_value" : "Capitaine Quiros", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/199", "prefLabel" : {"_value" : "Joana Bonita", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/200", "prefLabel" : {"_value" : "M-Sagar", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/201", "prefLabel" : {"_value" : "Medontario", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/202", "prefLabel" : {"_value" : "Forum Samoa II", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/203", "prefLabel" : {"_value" : "Montreal Senator", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/204", "prefLabel" : {"_value" : "Swan River Bridge", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/205", "prefLabel" : {"_value" : "Australia Star", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/206", "prefLabel" : {"_value" : "Tower Bridge", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/207", "prefLabel" : {"_value" : "Anro Asia", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/208", "prefLabel" : {"_value" : "New Zealand Star", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/209", "prefLabel" : {"_value" : "Capitaine Tasman", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/210", "prefLabel" : {"_value" : "Fua Kavenga", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/211", "prefLabel" : {"_value" : "Southern Moana", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/212", "prefLabel" : {"_value" : "Nedlloyd Nelson", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/213", "prefLabel" : {"_value" : "MSC Hobart", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/214", "prefLabel" : {"_value" : "CMA CGM Charcot", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/215", "prefLabel" : {"_value" : "CMA CGM Mimosa", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/216", "prefLabel" : {"_value" : "CMA CGM Melbourne", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/217", "prefLabel" : {"_value" : "Passat Spring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/218", "prefLabel" : {"_value" : "CMA CGM Auckland", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/219", "prefLabel" : {"_value" : "Ital Ottima", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/220", "prefLabel" : {"_value" : "Buxlink", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/221", "prefLabel" : {"_value" : "AS Cypria", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/222", "prefLabel" : {"_value" : "MSC Federica", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/223", "prefLabel" : {"_value" : "Brisbane Star", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/224", "prefLabel" : {"_value" : "P&O Nedlloyd Adelaide", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/225", "prefLabel" : {"_value" : "CMA CGM Utrillo", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/226", "prefLabel" : {"_value" : "Stadt Weimar", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/227", "prefLabel" : {"_value" : "Canberra Express", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/228", "prefLabel" : {"_value" : "Wellington Express {DFCX2}", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/229", "prefLabel" : {"_value" : "Adelaide Express", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/23", "prefLabel" : {"_value" : "Northwest Sanderling", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/230", "prefLabel" : {"_value" : "Contship Action", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/231", "prefLabel" : {"_value" : "P&O Nedlloyd Encounter", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/232", "prefLabel" : {"_value" : "Bay Bridge", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/233", "prefLabel" : {"_value" : "P&O Nedlloyd Otago", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/234", "prefLabel" : {"_value" : "Pacific Triangle", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/235", "prefLabel" : {"_value" : "P&O Nedlloyd Salerno", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/236", "prefLabel" : {"_value" : "MSC New Plymouth", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/237", "prefLabel" : {"_value" : "Dalian", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/238", "prefLabel" : {"_value" : "Melbourne Star", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/239", "prefLabel" : {"_value" : "Encounter Bay", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/24", "prefLabel" : {"_value" : "Tonsberg", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/240", "prefLabel" : {"_value" : "Flinders Bay", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/241", "prefLabel" : {"_value" : "Botany Bay", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/242", "prefLabel" : {"_value" : "Discovery Bay", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/243", "prefLabel" : {"_value" : "America Star", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/244", "prefLabel" : {"_value" : "MSC Didem", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/245", "prefLabel" : {"_value" : "Safmarine Meru", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/246", "prefLabel" : {"_value" : "Wellington Express {MWSD3}", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/247", "prefLabel" : {"_value" : "Polar Star", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/248", "prefLabel" : {"_value" : "SA Sederberg", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/249", "prefLabel" : {"_value" : "Maersk Constantia", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/25", "prefLabel" : {"_value" : "ANL Waratah", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/250", "prefLabel" : {"_value" : "Lowlands Prosperity", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/251", "prefLabel" : {"_value" : "Pacific Endeavour {VRUK8}", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/252", "prefLabel" : {"_value" : "Contship Ambition", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/253", "prefLabel" : {"_value" : "Bartok", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/254", "prefLabel" : {"_value" : "P&O Nedlloyd Jakarta", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/255", "prefLabel" : {"_value" : "P&O Nedlloyd Sydney", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/256", "prefLabel" : {"_value" : "Nedlloyd Raleigh Bay", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/257", "prefLabel" : {"_value" : "P&O Nedlloyd Brisbane", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/258", "prefLabel" : {"_value" : "Maersk Aberdeen", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/26", "prefLabel" : {"_value" : "ANL Whyalla", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/260", "prefLabel" : {"_value" : "Meridian", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/261", "prefLabel" : {"_value" : "ANL Progress", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/262", "prefLabel" : {"_value" : "Ranginui", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/263", "prefLabel" : {"_value" : "Baltrum Trader", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/264", "prefLabel" : {"_value" : "Florence", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/265", "prefLabel" : {"_value" : "Vega Gotland", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/266", "prefLabel" : {"_value" : "Rangitata", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/267", "prefLabel" : {"_value" : "Karin Knorr", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/268", "prefLabel" : {"_value" : "Iron Dampier", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/269", "prefLabel" : {"_value" : "Anro Australia", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/27", "prefLabel" : {"_value" : "Island Chief", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/270", "prefLabel" : {"_value" : "Iron Newcastle", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/271", "prefLabel" : {"_value" : "Iron Kembla", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/272", "prefLabel" : {"_value" : "Iron Pacific", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/274", "prefLabel" : {"_value" : "Australian Progress", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/275", "prefLabel" : {"_value" : "Iron Flinders", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/276", "prefLabel" : {"_value" : "MH Green", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/277", "prefLabel" : {"_value" : "Australian Enterprise", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/278", "prefLabel" : {"_value" : "Contship Borealis", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/279", "prefLabel" : {"_value" : "Contship Australis", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/28", "prefLabel" : {"_value" : "Kweichow", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/280", "prefLabel" : {"_value" : "Coral Chief", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/281", "prefLabel" : {"_value" : "Papuan Chief", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/282", "prefLabel" : {"_value" : "Kokopo Chief", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/283", "prefLabel" : {"_value" : "P&O Nedlloyd Napier", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/284", "prefLabel" : {"_value" : "P&O Nedlloyd Wellington", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/285", "prefLabel" : {"_value" : "TMM Tabasco", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/286", "prefLabel" : {"_value" : "Ionikos", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/287", "prefLabel" : {"_value" : "Canmar Dynasty", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/288", "prefLabel" : {"_value" : "Sydney Express", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/289", "prefLabel" : {"_value" : "Nimos", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/29", "prefLabel" : {"_value" : "Philadelphia", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/290", "prefLabel" : {"_value" : "Contship Aurora", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/291", "prefLabel" : {"_value" : "Act 6", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/292", "prefLabel" : {"_value" : "Progress C", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/3", "prefLabel" : {"_value" : "RTM Wakmatha", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/30", "prefLabel" : {"_value" : "Portugal", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/31", "prefLabel" : {"_value" : "Salome", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/349", "prefLabel" : {"_value" : "Pacific Endeavour {D5SO2}", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/350", "prefLabel" : {"_value" : "Rusalka", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/351", "prefLabel" : {"_value" : "Maersk Gairloch {9V6221}", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/352", "prefLabel" : {"_value" : "Asia Endeavour", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/353", "prefLabel" : {"_value" : "Melanesian Chief", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/354", "prefLabel" : {"_value" : "Arkadia", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/358", "prefLabel" : {"_value" : "Coral Adventurer", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/359", "prefLabel" : {"_value" : "Coral Geographer", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/41", "prefLabel" : {"_value" : "ANL Elaroo", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/43", "prefLabel" : {"_value" : "HMB Endeavour", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/44", "prefLabel" : {"_value" : "Highland Chief {VROJ8}", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/45", "prefLabel" : {"_value" : "Hansa Freyburg", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/453", "prefLabel" : {"_value" : "Tropical Islander", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/454", "prefLabel" : {"_value" : "CMA CGM Onyx", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/455", "prefLabel" : {"_value" : "Cap Reinga", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/456", "prefLabel" : {"_value" : "CSCL Longkou", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/457", "prefLabel" : {"_value" : "CMA CGM Lavender", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/458", "prefLabel" : {"_value" : "ANL Benalla", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/459", "prefLabel" : {"_value" : "JPO Scorpius", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/46", "prefLabel" : {"_value" : "Seatrade Orange", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/460", "prefLabel" : {"_value" : "Maersk Fuji", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/461", "prefLabel" : {"_value" : "Merkur Sky", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/462", "prefLabel" : {"_value" : "Icebird", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/463", "prefLabel" : {"_value" : "Hoegh Seoul", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/464", "prefLabel" : {"_value" : "Hoegh St. Petersburg", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/465", "prefLabel" : {"_value" : "Conti Harmony", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/466", "prefLabel" : {"_value" : "Schelde Trader", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/467", "prefLabel" : {"_value" : "Maersk Fukuoka", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/468", "prefLabel" : {"_value" : "Isar Trader", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/469", "prefLabel" : {"_value" : "Sofrana Surville", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/47", "prefLabel" : {"_value" : "Montpellier", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/470", "prefLabel" : {"_value" : "BC San Francisco", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/471", "prefLabel" : {"_value" : "CMA CGM Jade", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/472", "prefLabel" : {"_value" : "Santos Express", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/473", "prefLabel" : {"_value" : "Manila Express", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/474", "prefLabel" : {"_value" : "Pacific Gas", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/475", "prefLabel" : {"_value" : "Mississauga Express", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/58", "prefLabel" : {"_value" : "Seatrade Red", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/60", "prefLabel" : {"_value" : "Szechuen", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/62", "prefLabel" : {"_value" : "Everest", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/63", "prefLabel" : {"_value" : "Akademik Shokalskiy", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/64", "prefLabel" : {"_value" : "Hansa Offenburg", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/75", "prefLabel" : {"_value" : "CMA CGM Abu Dhabi", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/76", "prefLabel" : {"_value" : "Nordpacific", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/81", "prefLabel" : {"_value" : "Vanuatu Chief", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/82", "prefLabel" : {"_value" : "Seatrade Blue", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/83", "prefLabel" : {"_value" : "Safeen Prime", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/84", "prefLabel" : {"_value" : "Samoa Chief", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/85", "prefLabel" : {"_value" : "Mariner", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/86", "prefLabel" : {"_value" : "Tasman Chief", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/87", "prefLabel" : {"_value" : "Seatrade White", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/88", "prefLabel" : {"_value" : "Mia Schulte", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/890", "prefLabel" : {"_value" : "Maersk Jalan", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/891", "prefLabel" : {"_value" : "Patricia Schulte", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/892", "prefLabel" : {"_value" : "Siangtan", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/908", "prefLabel" : {"_value" : "Capitaine Fearn", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/909", "prefLabel" : {"_value" : "Shengking", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/910", "prefLabel" : {"_value" : "Chenan", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/912", "prefLabel" : {"_value" : "Southern Lily", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/913", "prefLabel" : {"_value" : "ANL Yarrunga", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/914", "prefLabel" : {"_value" : "Shearwater", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/915", "prefLabel" : {"_value" : "Act 10", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/916", "prefLabel" : {"_value" : "Southern Queen", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/917", "prefLabel" : {"_value" : "Maersk Auckland", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/918", "prefLabel" : {"_value" : "E.R. Wilhelmshaven", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/919", "prefLabel" : {"_value" : "Maersk Phuket", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/920", "prefLabel" : {"_value" : "Southland Star", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/921", "prefLabel" : {"_value" : "California Star", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/922", "prefLabel" : {"_value" : "Vishva Nandin", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/923", "prefLabel" : {"_value" : "Vishva Prafulla", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/924", "prefLabel" : {"_value" : "Bhavabhuti", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/925", "prefLabel" : {"_value" : "Vishva Parijet", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/926", "prefLabel" : {"_value" : "CMA CGM Orchid", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/927", "prefLabel" : {"_value" : "OOCL Houston", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/928", "prefLabel" : {"_value" : "Swan", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/97", "prefLabel" : {"_value" : "Mathilde Schulte", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/99", "prefLabel" : {"_value" : "Highland Chief {VROB}", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.nerc.ac.uk/collection/C17/current/0970", "prefLabel" : {"_value" : "Northwest Sandpiper", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.nerc.ac.uk/collection/C17/current/09ZK", "prefLabel" : {"_value" : "Goliath", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.nerc.ac.uk/collection/C17/current/26JM", "prefLabel" : {"_value" : "Josephine Maersk", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.nerc.ac.uk/collection/C17/current/747M", "prefLabel" : {"_value" : "Maersk Gairloch {VQGQ4}", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.nerc.ac.uk/collection/C17/current/HK8L", "prefLabel" : {"_value" : "OOCL Texas", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.nerc.ac.uk/collection/C17/current/HKC2", "prefLabel" : {"_value" : "OOCL Le Havre", "_lang" : "en"}
+      }
+      ], "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/33", "dctermsCreated" : "2015-05-10T00:00:00Z", "dctermsModified" : "2017-02-07T03:52:39Z", "definition" : "A small self-propelled platform operating on the surface of the water column that may be easily removed from the water (e.g. shore-based RIBs ships' boats).", "prefLabel" : {"_value" : "self-propelled small boat", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/35", "dctermsCreated" : "2013-04-08T00:00:00Z", "dctermsModified" : "2017-02-07T03:52:38Z", "definition" : "A platform repeatedly following a predictable fixed track on the surface of the water column that collects scientific (oceanographic and meteorological) data (e.g. an instrumented ferry).", "narrower" : [{"_about" : "http://vocab.aodn.org.au/def/platform/entity/100", "prefLabel" : {"_value" : "Spirit of Tasmania 2", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/107", "prefLabel" : {"_value" : "Sea Flyte", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/108", "prefLabel" : {"_value" : "Fantasea Wonder", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/73", "prefLabel" : {"_value" : "Spirit of Tasmania 1", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/77", "prefLabel" : {"_value" : "Harbour Master", "_lang" : "en"}
+      }
+      ], "prefLabel" : {"_value" : "vessel of opportunity on fixed route", "_lang" : "en"}
+    }
+    ], "itemsPerPage" : 10, "next" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=39", "page" : 38, "prev" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=37", "startIndex" : 381, "type" : "http://purl.org/linked-data/api/vocab#Page"}
+}

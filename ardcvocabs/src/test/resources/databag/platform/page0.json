@@ -1,0 +1,122 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-category-vocabulary/version-1-2/concept.json",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-category-vocabulary/version-1-2/concept.json",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-category-vocabulary/version-1-2/concept.json?_metadata=all",
+    "first": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-category-vocabulary/version-1-2/concept.json?_page=0",
+    "hasPart": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-category-vocabulary/version-1-2/concept.json",
+    "isPartOf": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-category-vocabulary/version-1-2/concept.json",
+    "items": [
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform_classes/2",
+        "dctermsCreated": "2017-07-03T06:25:19Z",
+        "dctermsModified": "2018-03-14T22:44:22Z",
+        "definition": "This category contains vocabulary terms describing aircraft type of platform",
+        "prefLabel": {
+          "_value": "Aircraft",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform_classes/category/35",
+        "dctermsCreated": "2014-06-01T00:00:00Z",
+        "dctermsModified": "2020-01-01T23:10:43Z",
+        "definition": "This category contains vocabulary terms describing AUV type of platforms",
+        "prefLabel": {
+          "_value": "AUV",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform_classes/category/36",
+        "dctermsCreated": "2014-06-01T00:00:00Z",
+        "dctermsModified": "2018-03-14T22:44:22Z",
+        "definition": "This category contains vocabulary terms describing fixed stations type of platform",
+        "prefLabel": {
+          "_value": "Fixed station",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform_classes/category/37",
+        "dctermsCreated": "2014-06-01T00:00:00Z",
+        "dctermsModified": "2018-03-14T22:44:22Z",
+        "definition": "This category contains vocabulary terms describing profiling float type of platform",
+        "prefLabel": {
+          "_value": "Float",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform_classes/category/39",
+        "dctermsCreated": "2014-06-01T00:00:00Z",
+        "dctermsModified": "2018-03-14T22:44:22Z",
+        "definition": "This category contains vocabulary terms describing ship type of platform",
+        "prefLabel": {
+          "_value": "Vessel",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform_classes/category/40",
+        "dctermsCreated": "2014-06-01T00:00:00Z",
+        "dctermsModified": "2018-03-14T22:44:22Z",
+        "definition": "This category contains vocabulary terms describing animal type of platform",
+        "prefLabel": {
+          "_value": "Biological platform",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform_classes/category/41",
+        "dctermsCreated": "2014-06-01T00:00:00Z",
+        "dctermsModified": "2018-03-14T22:44:22Z",
+        "definition": "This category contains vocabulary terms describing satellite type of platform",
+        "prefLabel": {
+          "_value": "Satellite",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform_classes/category/42",
+        "dctermsCreated": "2014-06-01T00:00:00Z",
+        "dctermsModified": "2018-03-14T22:44:22Z",
+        "definition": "This category contains vocabulary terms describing radar type of platform",
+        "prefLabel": {
+          "_value": "Radar",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform_classes/category/43",
+        "dctermsCreated": "2014-06-01T00:00:00Z",
+        "dctermsModified": "2018-03-14T22:44:22Z",
+        "definition": "This category contains vocabulary terms describing glider type of platform",
+        "prefLabel": {
+          "_value": "Glider",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform_classes/category/44",
+        "dctermsCreated": "2014-06-01T00:00:00Z",
+        "dctermsModified": "2018-03-14T22:44:22Z",
+        "definition": "This category contains vocabulary terms describing mooring type of platform",
+        "prefLabel": {
+          "_value": "Mooring and buoy",
+          "_lang": "en"
+        }
+      }
+    ],
+    "itemsPerPage": 10,
+    "next": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-category-vocabulary/version-1-2/concept.json?_page=1",
+    "page": 0,
+    "startIndex": 1,
+    "type": [
+      "http://purl.org/linked-data/api/vocab#ListEndpoint",
+      "http://purl.org/linked-data/api/vocab#Page"
+    ]
+  }
+}

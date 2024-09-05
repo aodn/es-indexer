@@ -1,0 +1,214 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=28",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=28&_metadata=all",
+    "first": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=0",
+    "isPartOf": {
+      "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+      "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+      "hasPart": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=28",
+      "type": "http://purl.org/linked-data/api/vocab#ListEndpoint"
+    },
+    "items": [
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/464",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-07-24T00:00:00Z",
+        "dctermsModified": "2017-04-13T05:34:23Z",
+        "definition": "Vehicles carrier vessel, which is currently flying the flag of Norway (July, 2013).",
+        "prefLabel": {
+          "_value": "Hoegh St. Petersburg",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/465",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-07-24T00:00:00Z",
+        "dctermsModified": "2017-04-13T05:26:52Z",
+        "definition": "Container ship vessel, which is currently flying the flag of Cyprus (July 2013). It was disposed of in approximately 2014.",
+        "prefLabel": {
+          "_value": "Conti Harmony",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/466",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-07-24T00:00:00Z",
+        "dctermsModified": "2017-04-13T05:54:19Z",
+        "definition": "Container ship vessel, which is currently flying the flag of Netherlands (July 2013).",
+        "prefLabel": {
+          "_value": "Schelde Trader",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/467",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-07-24T00:00:00Z",
+        "dctermsModified": "2017-04-13T05:41:00Z",
+        "definition": "Container ship vessel. It was called the Maersk Fukuoka from 2005 until December 2010. It is now called the Georgia (Marshall Islands, September 2011).",
+        "prefLabel": {
+          "_value": "Maersk Fukuoka",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/468",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-07-24T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:40Z",
+        "definition": "Container ship vessel. It was called the Isar Trader from December 2010 until August 2012. It is now called the Georgia (Marshall Islands, September 2011).",
+        "prefLabel": {
+          "_value": "Isar Trader",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/469",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-07-24T00:00:00Z",
+        "dctermsModified": "2017-04-13T05:55:27Z",
+        "definition": "Container ship vessel, which is currently flying the flag of Antigua and Barbuda (July 2013).",
+        "prefLabel": {
+          "_value": "Sofrana Surville",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/470",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-07-24T00:00:00Z",
+        "dctermsModified": "2017-04-13T04:37:47Z",
+        "definition": "Container ship vessel, which is currently flying the flag of Antigua and Barbuda (June 2013).",
+        "prefLabel": {
+          "_value": "BC San Francisco",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/471",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-07-24T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:33Z",
+        "definition": "Container ship vessel, which is currently flying the flag of Marshall Islands (July 2013).",
+        "prefLabel": {
+          "_value": "CMA CGM Jade",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/472",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-07-24T00:00:00Z",
+        "dctermsModified": "2017-04-13T05:53:55Z",
+        "definition": "Container ship vessel, which is currently flying the flag of Hong Kong (July 2013).",
+        "prefLabel": {
+          "_value": "Santos Express",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/473",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-07-24T00:00:00Z",
+        "dctermsModified": "2017-04-13T05:41:58Z",
+        "definition": "Container ship vessel, which is currently flying the flag of Hong Kong (July 2013).",
+        "prefLabel": {
+          "_value": "Manila Express",
+          "_lang": "en"
+        }
+      }
+    ],
+    "itemsPerPage": 10,
+    "next": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=29",
+    "page": 28,
+    "prev": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=27",
+    "startIndex": 281,
+    "type": "http://purl.org/linked-data/api/vocab#Page"
+  }
+}

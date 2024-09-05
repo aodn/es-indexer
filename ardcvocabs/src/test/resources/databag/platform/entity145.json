@@ -1,0 +1,15 @@
+{ "format" : "linked-data-api", "version" : "0.2", "result" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/resource.json?uri=http://vocab.aodn.org.au/def/platform/entity/145", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/resource.json?uri=http://vocab.aodn.org.au/def/platform/entity/145", "extendedMetadataVersion" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/resource.json?_metadata=all&uri=http://vocab.aodn.org.au/def/platform/entity/145", "primaryTopic" : {"_about" : "http://vocab.aodn.org.au/def/platform/entity/145", "altLabel" : [{"_value" : "NRSKAI-SubSurface", "_lang" : "en"}
+      ], "box" : "-35.836 136.448 -35.836 136.448", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/43", "narrower" : ["http://vocab.aodn.org.au/def/platform/entity/145"]}
+      ], "contributor" : "http://editor.vocabs.ands.org.au/user/eMII_Atkins.Natalia_Admin", "creator" : "http://editor.vocabs.ands.org.au/user/Sebastien-Mancini", "dcPublisher" : "eMarine Information Infrastructure (eMII)", "dcSource" : "Australian Ocean Data Network platform register", "dctermsCreated" : "2013-05-15T00:00:00Z", "dctermsModified" : "2023-01-25T01:28:43Z", "definition" : "Sub-surface mooring located at the Kangaroo Island National Reference Station. This mooring is operated by SARDI (South Australian Research and Development Institute).", "inScheme" : {"_about" : "http://vocab.aodn.org.au/def/platform/1", "hasConcept" : "http://vocab.aodn.org.au/def/platform/entity/145"}
+      , "prefLabel" : {"_value" : "Kangaroo Island National Reference Station Sub-surface Mooring", "_lang" : "en"}
+      , "related" : [{"_about" : "http://vocab.aodn.org.au/def/platform/entity/141", "related" : ["http://vocab.aodn.org.au/def/platform/entity/145"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/142", "related" : ["http://vocab.aodn.org.au/def/platform/entity/145"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/146", "related" : ["http://vocab.aodn.org.au/def/platform/entity/145"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/147", "related" : ["http://vocab.aodn.org.au/def/platform/entity/145"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/149", "related" : ["http://vocab.aodn.org.au/def/platform/entity/145"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/150", "related" : ["http://vocab.aodn.org.au/def/platform/entity/145"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/66", "related" : ["http://vocab.aodn.org.au/def/platform/entity/145"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/68", "related" : ["http://vocab.aodn.org.au/def/platform/entity/145"]}
+      ], "scopeNote" : "nominal depth:110m", "type" : ["http://www.w3.org/2000/01/rdf-schema#Resource", "http://www.w3.org/2004/02/skos/core#Concept"]}
+    , "type" : ["http://purl.org/linked-data/api/vocab#ItemEndpoint", "http://purl.org/linked-data/api/vocab#Page"]}
+}

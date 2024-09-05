@@ -1,0 +1,214 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=14",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=14&_metadata=all",
+    "first": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=0",
+    "isPartOf": {
+      "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+      "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+      "hasPart": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=14",
+      "type": "http://purl.org/linked-data/api/vocab#ListEndpoint"
+    },
+    "items": [
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/230",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-28T00:00:00Z",
+        "dctermsModified": "2020-10-15T04:46:52Z",
+        "definition": "Container ship vessel, managed by Contship Containerlines, and was sold in 2003. It was disposed of in approximately 2012.",
+        "prefLabel": {
+          "_value": "Contship Action",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/231",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-28T00:00:00Z",
+        "dctermsModified": "2017-04-19T05:39:30Z",
+        "definition": "Container ship vessel. It was called the P&O Nedlloyd Encounter from April 2002 until Jan 2006.  The ship's callsign was ELZZ4 from 2003 until October 2004. It is now called the Santa Rebecca (Germany, January 2008).",
+        "prefLabel": {
+          "_value": "P&O Nedlloyd Encounter",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/232",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-28T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:33Z",
+        "definition": "Container ship vessel, which is currently flying the flag of Liberia (May 2013). It was disposed of in approximately 2009.",
+        "prefLabel": {
+          "_value": "Bay Bridge",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/233",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-28T00:00:00Z",
+        "dctermsModified": "2017-04-13T05:48:58Z",
+        "definition": "Container ship vessel. It was called the P&O Nedlloyd Otago from Aug 1999 until July 2000. It is now called the Provider (Liberia, March 2006). It was disposed of in approximately 2009.",
+        "prefLabel": {
+          "_value": "P&O Nedlloyd Otago",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/234",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-28T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:33Z",
+        "definition": "Bulk Carrier vessel, which is currently flying the flag of Liberia (May 2013).",
+        "prefLabel": {
+          "_value": "Pacific Triangle",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/235",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-31T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:33Z",
+        "definition": "Container ship vessel. It was called the P&O Nedlloyd Salerno from July 2000 until June 2002. It is now called the Isolde (Liberia, Feb 2008).",
+        "prefLabel": {
+          "_value": "P&O Nedlloyd Salerno",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/236",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-31T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:33Z",
+        "definition": "Container ship vessel. It was called the MSC New Plymouth from January 2002 until January 2004. It is now called the Hansa Aelesund (Liberia, May 2013).",
+        "prefLabel": {
+          "_value": "MSC New Plymouth",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/238",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-29T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:33Z",
+        "definition": "Container ship vessel, which is currently flying the flag of UK (June 2011). It was disposed of in 2003.",
+        "prefLabel": {
+          "_value": "Melbourne Star",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/239",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-29T00:00:00Z",
+        "dctermsModified": "2019-03-27T21:46:55Z",
+        "definition": "Container ship vessel, which was flying the flag of UK. It was disposed of in 1999.",
+        "prefLabel": {
+          "_value": "Encounter Bay",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/24",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2017-06-16T02:18:54Z",
+        "dctermsModified": "2020-10-15T04:47:17Z",
+        "definition": "Vehicle carrier vessel, currently flying the flag of Malta (February 2017).",
+        "prefLabel": {
+          "_value": "Tonsberg",
+          "_lang": "en"
+        }
+      }
+    ],
+    "itemsPerPage": 10,
+    "next": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=15",
+    "page": 14,
+    "prev": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=13",
+    "startIndex": 141,
+    "type": "http://purl.org/linked-data/api/vocab#Page"
+  }
+}

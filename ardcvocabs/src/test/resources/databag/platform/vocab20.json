@@ -1,0 +1,214 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=20",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=20&_metadata=all",
+    "first": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=0",
+    "isPartOf": {
+      "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+      "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+      "hasPart": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=20",
+      "type": "http://purl.org/linked-data/api/vocab#ListEndpoint"
+    },
+    "items": [
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/29",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2017-06-16T03:38:33Z",
+        "dctermsModified": "2017-06-16T03:40:46Z",
+        "definition": "Container ship vessel, which is currently flying the flag of Liberia (August 2015).",
+        "prefLabel": {
+          "_value": "Philadelphia",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/290",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-30T00:00:00Z",
+        "dctermsModified": "2017-04-13T05:29:18Z",
+        "definition": "Container ship vessel. It was called the Contship Aurora from 2002 until 2005. It is currently called the Liverpool Express (Germany, May 2013).",
+        "prefLabel": {
+          "_value": "Contship Aurora",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/291",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-31T00:00:00Z",
+        "dctermsModified": "2017-04-13T04:07:43Z",
+        "definition": "Container ship vessel. It was called the Act 6 from 1972 until January 1992. It was disposed of in 2003.",
+        "prefLabel": {
+          "_value": "Act 6",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/293",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/27",
+            "prefLabel": {
+              "_value": "sub-surface gliders",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-06-04T00:00:00Z",
+        "dctermsModified": "2020-10-15T04:49:13Z",
+        "definition": "The Slocum glider is 1.8 m long, 21.3 cm in diameter and weighs 52 kg.  Manufactured by Webb Research Corporation, the glider is designed to operate in coastal waters of up to 200 m deep where high maneuverability is needed.  Moving at an average forward velocity of 25 - 40 cm/s the glider travels in a sawtooth pattern through the water navigating its way to a series of pre-programmed waypoints using GPS and altimeter measurements.  Operating on C cell alkaline batteries, typical deployments can range up to 500 km with a duration of approximately 30 days.",
+        "prefLabel": {
+          "_value": "Slocum Glider",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/294",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/27",
+            "prefLabel": {
+              "_value": "sub-surface gliders",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-06-04T00:00:00Z",
+        "dctermsModified": "2020-10-15T04:49:25Z",
+        "definition": "These Seagliders are 1.8m long, 30cm in diameter and weigh 52kg. Manufactured by the Seaglider Fabrication Center at the University of Washington, the gliders are designed to operate in the open ocean in depth up to 1000m.  Moving at an average forward velocity of 25 cm/s, Seagliders travel more slowly, alternately diving and climbing along slanting glide paths.  The gliders obtain GPS navigation fixes when they surface, which they use to glide through a sequence of programmed targets.  As they are deployed in the open ocean, Seagliders have a very large range sufficient to transit entire ocean basins and can be deployed for periods of up to 6 months.",
+        "prefLabel": {
+          "_value": "Seaglider UW",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/295",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/27",
+            "prefLabel": {
+              "_value": "sub-surface gliders",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-06-04T00:00:00Z",
+        "dctermsModified": "2020-10-15T04:49:40Z",
+        "definition": "These Seagliders are 1.8-2m long, 30cm in diameter and weigh 52kg. Manufactured by iROBOT, they are designed to operate in the open ocean in depth up to 1000m.  Moving at an average forward velocity of 25 cm/s, Seagliders travel more slowly, alternately diving and climbing along slanting glide paths.  The gliders obtain GPS navigation fixes when they surface, which they use to glide through a sequence of programmed targets.  As they are deployed in the open ocean, Seagliders have a very large range sufficient to transit entire ocean basins and can be deployed for periods of up to 6 months.",
+        "prefLabel": {
+          "_value": "1KA Seaglider",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/296",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/46",
+            "prefLabel": {
+              "_value": "drifting subsurface profiling float",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-06-07T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:34Z",
+        "definition": "Navigating European Marine Observer (NEMO) Argo floats are manufactured by Optimare Sensorsystems AG. They are 2m (not including antenna) long, and weigh 30kg. Their maximum operational depth is 2000m, with a life time of 5 years / 150 profiles.",
+        "prefLabel": {
+          "_value": "NEMO Argo Float",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/297",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/46",
+            "prefLabel": {
+              "_value": "drifting subsurface profiling float",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-06-07T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:34Z",
+        "definition": "New profilINg float of JApan (NINJA) Argo floats are manufactured by the Tsurumi Seiki Co. (TSK). They are approx. 2420mm long, and weigh approx 32kg. Their maximum operational depth is 2000m. This float has a SBE conductivity sensor.",
+        "prefLabel": {
+          "_value": "NINJA Argo Float with SBE",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/298",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/46",
+            "prefLabel": {
+              "_value": "drifting subsurface profiling float",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-06-07T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:34Z",
+        "definition": "Navis Argo floats are manufactured by Sea-Bird Electronics Inc. They are 159cm long, and weigh about 17kg. Their maximum operational depth is 2000m, with a life time of 300 CTD profiles. This float uses an alternative to the usual Systeme Argos location and data transmission system, and uses positions from the Global Positioning System (GPS) and data communication using the Iridium satellites. As of 2010, 250 floats have been deployed with Iridium antennas.",
+        "prefLabel": {
+          "_value": "NAVIS Argo Float with Iridium antenna",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/299",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/46",
+            "prefLabel": {
+              "_value": "drifting subsurface profiling float",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-06-07T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:34Z",
+        "definition": "Arvor Argo floats were originally manufactured by Kannad. The scientific instrumentation division for deep-sea oceanography was purchased by NKE Instrumentation on January 1st, 2009. They are 120cm long, and weight about 20kg. Their maximum operational depth is 2100m, with a life time of 4 years / 150+ cycles.",
+        "prefLabel": {
+          "_value": "ARVOR Argo Float",
+          "_lang": "en"
+        }
+      }
+    ],
+    "itemsPerPage": 10,
+    "next": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=21",
+    "page": 20,
+    "prev": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=19",
+    "startIndex": 201,
+    "type": "http://purl.org/linked-data/api/vocab#Page"
+  }
+}

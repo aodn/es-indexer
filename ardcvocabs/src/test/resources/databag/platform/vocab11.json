@@ -1,0 +1,214 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=11",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=11&_metadata=all",
+    "first": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=0",
+    "isPartOf": {
+      "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+      "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+      "hasPart": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=11",
+      "type": "http://purl.org/linked-data/api/vocab#ListEndpoint"
+    },
+    "items": [
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/203",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-27T00:00:00Z",
+        "dctermsModified": "2020-10-15T04:45:35Z",
+        "definition": "Container ship vessel. It was called the Montreal Senator between June 1998 and January 2006, it is now called the Strait Mas (Indonesia, January 2009). It was disposed of in 2016.",
+        "prefLabel": {
+          "_value": "Montreal Senator",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/204",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-27T00:00:00Z",
+        "dctermsModified": "2017-04-13T05:57:54Z",
+        "definition": "Container ship vessel, which is currently flying the flag of Singapore (May 2013).",
+        "prefLabel": {
+          "_value": "Swan River Bridge",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/205",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-27T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:42Z",
+        "definition": "Container ship vessel. It was called the Australia Star from 1978 until Feb 1989, and March 1992 until May 1994. It was disposed of in 2001 (Sea Express).",
+        "prefLabel": {
+          "_value": "Australia Star",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/206",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-27T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:43Z",
+        "definition": "Container ship vessel, which is currently flying the flag of Singapore (May 2013). It was disposed of in approximately 2010.",
+        "prefLabel": {
+          "_value": "Tower Bridge",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/207",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-27T00:00:00Z",
+        "dctermsModified": "2017-04-13T04:09:01Z",
+        "definition": "Container ship vessel, which flew the flag of Singapore. It was disposed of in 1997.",
+        "prefLabel": {
+          "_value": "Anro Asia",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/208",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-27T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:43Z",
+        "definition": "Container ship vessel, which flew the flag of Singapore. It was disposed of in 1998.",
+        "prefLabel": {
+          "_value": "New Zealand Star",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/209",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-27T00:00:00Z",
+        "dctermsModified": "2019-03-27T21:43:07Z",
+        "definition": "General Cargo ship vessel. It was called the Capitaine Tasman from March 2002 until April 2010. This ship's callsign was P3CV9 in 2002. It is now called Ual Coburg (Cyprus, August 2009).",
+        "prefLabel": {
+          "_value": "Capitaine Tasman",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/21",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2017-06-15T02:52:46Z",
+        "dctermsModified": "2023-01-25T02:28:07Z",
+        "definition": "The Camden 50m mooring (platform code CAM050) was deployed in 2014 for a short time in the Kimberley region replacing the former Kimberley and Pilbara arrays. It was decommissioned in 2015.",
+        "prefLabel": {
+          "_value": "Camden Sound 50m Mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/210",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-31T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:42Z",
+        "definition": "Ro-ro cargo ship vessel. It was called the Fua Kavenga from 1979 until May 2002. It is now called the Ocean Glory (Comoros, May 2013). It was disposed of in approximately 2011.",
+        "prefLabel": {
+          "_value": "Fua Kavenga",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/211",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-28T00:00:00Z",
+        "dctermsModified": "2017-04-13T05:55:53Z",
+        "definition": "General Cargo ship vessel. It was called the Southern Moana from Dec 2001 until may 2011. It is now called the Red Rock (Indonesia, October 2010).",
+        "prefLabel": {
+          "_value": "Southern Moana",
+          "_lang": "en"
+        }
+      }
+    ],
+    "itemsPerPage": 10,
+    "next": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=12",
+    "page": 11,
+    "prev": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=10",
+    "startIndex": 111,
+    "type": "http://purl.org/linked-data/api/vocab#Page"
+  }
+}

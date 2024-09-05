@@ -1,0 +1,43 @@
+{ "format" : "linked-data-api", "version" : "0.2", "result" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=47", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json", "extendedMetadataVersion" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=47&_metadata=all", "first" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=0", "isPartOf" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json", "hasPart" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=47", "type" : "http://purl.org/linked-data/api/vocab#ListEndpoint"}
+    , "items" : [{"_about" : "http://vocab.aodn.org.au/def/platform/entity/93", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/65", "prefLabel" : {"_value" : "orbiting satellite", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2023-03-30T02:56:48Z", "dctermsModified" : "2023-03-30T02:59:15Z", "definition" : "This satellite was the 2nd flight of the EPS programme.It operated from September 2012, at an altitude of 827km, in a sunsychronous orbit. Instrumentation: Advanced Data Collection System, Advanced Microwave Sounding Unit, Advanced Scatterometer, Advanced Very High Resolution Radiometer, Global Ozone Monitoring Experiment, GNSS Receiver for Atmospheric Sounding, High-resolution Infra Red Sounder, Infrared Atmospheric Sounding Interferometer, Microwave Humidity Sounding, Search & Rescue Satellite-Aided Tracking System, SEM / Total Energy Detector, SEM / Medium energy proton detector.", "prefLabel" : {"_value" : "MetOpB", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/94", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/65", "prefLabel" : {"_value" : "orbiting satellite", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2023-03-30T02:58:04Z", "dctermsModified" : "2023-03-30T02:59:15Z", "definition" : "This satellite was the 3rd flight of the EPS programme.It operated from November 2018, at an altitude of 817km, in a sunsychronous orbit. Instrumentation: Advanced Data Collection System, Advanced Microwave Sounding Unit, Advanced Scatterometer, Advanced Very High Resolution Radiometer, Global Ozone Monitoring Experiment, GNSS Receiver for Atmospheric Sounding, Infrared Atmospheric Sounding Interferometer, Microwave Humidity Sounding, SEM / Total Energy Detector, SEM / Medium energy proton detector.", "prefLabel" : {"_value" : "MetOpC", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/95", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/64", "prefLabel" : {"_value" : "geostationary orbiting satellite", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2023-03-30T02:59:51Z", "dctermsModified" : "2023-03-30T03:01:51Z", "definition" : "This satellite was the 1st flight of the Himawari 3rd generation programme. It operated from October 2014, and was replaced by Himawari-9 as the primary satellite in December 2022, it operated at an altitude of 35786km, in a geostationary orbit. Instrumentation: Advanced Himawari Imager, Data Collection Service, Space Environment Data Acquisition monitor.", "prefLabel" : {"_value" : "Himawari-8", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/96", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/64", "prefLabel" : {"_value" : "geostationary orbiting satellite", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2023-03-30T03:00:56Z", "dctermsModified" : "2023-03-30T03:01:51Z", "definition" : "This satellite was the 2nd flight of the Himawari 3rd generation programme. It operated from Novermber 2016, it operated at an altitude of 35786km, in a geostationary orbit. Instrumentation: Advanced Himawari Imager, Data Collection Service, Space Environment Data Acquisition monitor.", "prefLabel" : {"_value" : "Himawari-9", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/97", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2023-07-04T04:22:32Z", "dctermsModified" : "2023-07-04T04:26:09Z", "definition" : "Container ship vessel, which is currently flying the flag of Singapore (July, 2023).", "prefLabel" : {"_value" : "Mathilde Schulte", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/98", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/platform/entity/823", "prefLabel" : {"_value" : "small boat", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2023-08-23T03:52:22Z", "dctermsModified" : "2023-08-23T03:54:12Z", "definition" : "Sailing vessel, which is currently flying the flag of Australia (August, 2023)", "prefLabel" : {"_value" : "Kinetic Energy", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.nerc.ac.uk/collection/C17/current/747M", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2023-10-17T00:00:00Z", "dctermsModified" : "2024-03-04T04:00:55Z", "definition" : "Container ship vessel, which is currently flying the flag of Singapore.", "prefLabel" : {"_value" : "Maersk Gairloch {VQGQ4}", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/237", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2023-10-16T23:58:34Z", "dctermsModified" : "2023-10-17T00:11:43Z", "definition" : "Container ship vessel, which is currently flying the flag of Malta (September, 2023).", "prefLabel" : {"_value" : "Dalian", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/251", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2023-10-17T00:01:40Z", "dctermsModified" : "2024-03-04T03:35:57Z", "definition" : "Container ship vessel, which is currently flying the flag of Hong Kong (September, 2023).", "prefLabel" : {"_value" : "Pacific Endeavour {VRUK8}", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/276", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2023-10-17T00:03:36Z", "dctermsModified" : "2023-10-17T00:12:14Z", "definition" : "Container ship vessel, which is currently flying the flag of Singapore (October, 2023).", "prefLabel" : {"_value" : "MH Green", "_lang" : "en"}
+    }
+    ], "itemsPerPage" : 10, "next" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=48", "page" : 47, "prev" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=46", "startIndex" : 471, "type" : "http://purl.org/linked-data/api/vocab#Page"}
+}

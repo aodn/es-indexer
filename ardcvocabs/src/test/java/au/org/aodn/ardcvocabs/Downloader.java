@@ -20,7 +20,7 @@ public class Downloader {
     private static final String URL_REGEX = "https://[^ ]+";
     private static final String CATEGORY_REGEX = "category/(\\d+)";
     private static final String ENTITY_REGEX = "entity/(\\d+)";
-    private static final String NERC_URL_REGEX = "http://vocab\\.nerc\\.ac\\.uk/collection/P01/current/([A-Z0-9]+)";
+    private static final String NERC_URL_REGEX = "http://vocab\\.nerc\\.ac\\.uk/collection/.*/current/([A-Z0-9]+)";
 
     public static void main(String[] args) {
         try {

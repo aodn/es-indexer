@@ -1,0 +1,43 @@
+{ "format" : "linked-data-api", "version" : "0.2", "result" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=48", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json", "extendedMetadataVersion" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=48&_metadata=all", "first" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=0", "isPartOf" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json", "hasPart" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=48", "type" : "http://purl.org/linked-data/api/vocab#ListEndpoint"}
+    , "items" : [{"_about" : "http://vocab.aodn.org.au/def/platform/entity/286", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2023-10-17T00:05:35Z", "dctermsModified" : "2023-10-17T00:12:28Z", "definition" : "Container ship vessel, which is currently flying the flag of Liberia (October, 2023).", "prefLabel" : {"_value" : "Ionikos", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/292", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2023-10-17T00:07:16Z", "dctermsModified" : "2023-10-17T00:12:41Z", "definition" : "Container ship vessel, which is currently flying the flag of Panama (October, 2023).", "prefLabel" : {"_value" : "Progress C", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/354", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2024-03-04T04:16:37Z", "dctermsModified" : "2024-03-04T04:17:36Z", "definition" : "Container ship vessel, which is currently flying the flag of Liberia (February, 2024).", "prefLabel" : {"_value" : "Arkadia", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/348", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/36", "prefLabel" : {"_value" : "fishing vessel", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2024-03-04T03:30:59Z", "dctermsModified" : "2024-03-04T03:34:46Z", "definition" : "Fishing vessel, which is currently flying the flag of Australia (February, 2024)", "prefLabel" : {"_value" : "Elena Rose", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/349", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2024-03-04T03:36:36Z", "dctermsModified" : "2024-03-04T03:38:11Z", "definition" : "General cargo vessel, which is currently flying the flag of Liberia (February, 2024)", "prefLabel" : {"_value" : "Pacific Endeavour {D5SO2}", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/350", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2024-03-04T03:39:47Z", "dctermsModified" : "2024-03-04T03:40:51Z", "definition" : "Sailing vessel, which is currently flying the flag of Australia (February, 2024)", "prefLabel" : {"_value" : "Rusalka", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.nerc.ac.uk/collection/C17/current/06AQ", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/31", "prefLabel" : {"_value" : "research vessel", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2024-03-04T00:00:00Z", "definition" : "Research vessel operated by the Alfred Wegener Institute for Polar and Marine Research. Currently flying the flag of Germany (February, 2024).", "prefLabel" : {"_value" : "Polarstern", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/351", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2024-03-04T03:56:18Z", "dctermsModified" : "2024-03-04T04:00:42Z", "definition" : "Container ship vessel, which is currently flying the flag of Singapore.", "prefLabel" : {"_value" : "Maersk Gairloch {9V6221}", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/352", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2024-03-04T04:10:32Z", "dctermsModified" : "2024-03-04T04:11:55Z", "definition" : "Gas tanker vessel, which is currently flying the flag of Singapore (February, 2024).", "prefLabel" : {"_value" : "Asia Endeavour", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/353", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2024-03-04T04:12:44Z", "dctermsModified" : "2024-03-04T04:16:10Z", "definition" : "Container ship vessel, which is currently flying the flag of Liberia (February, 2024).", "prefLabel" : {"_value" : "Melanesian Chief", "_lang" : "en"}
+    }
+    ], "itemsPerPage" : 10, "next" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=49", "page" : 48, "prev" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=47", "startIndex" : 481, "type" : "http://purl.org/linked-data/api/vocab#Page"}
+}

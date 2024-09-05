@@ -1,0 +1,214 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=8",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=8&_metadata=all",
+    "first": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=0",
+    "isPartOf": {
+      "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+      "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+      "hasPart": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=8",
+      "type": "http://purl.org/linked-data/api/vocab#ListEndpoint"
+    },
+    "items": [
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/172",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-21T00:00:00Z",
+        "dctermsModified": "2023-01-25T03:40:52Z",
+        "definition": "The Two Rocks 150m Shelf Mooring is operated by CSIRO and collects data in the Two Rocks region. This mooring was decommissioned in October 2013.",
+        "prefLabel": {
+          "_value": "Two Rocks 150m Shelf Mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/173",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-21T00:00:00Z",
+        "dctermsModified": "2023-01-25T03:41:25Z",
+        "definition": "The Two Rocks 200m Shelf Mooring is operated by CSIRO and collects data in the Two Rocks region.",
+        "prefLabel": {
+          "_value": "Two Rocks 200m Shelf Mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/174",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-21T00:00:00Z",
+        "dctermsModified": "2023-01-25T03:42:33Z",
+        "definition": "The Two Rocks 500m Shelf Mooring is operated by CSIRO and collects data in the Two Rocks region.",
+        "prefLabel": {
+          "_value": "Two Rocks 500m Shelf Mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/175",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-21T00:00:00Z",
+        "dctermsModified": "2023-01-25T03:24:57Z",
+        "definition": "The South-East Queensland 200m Mooring is operated by CSIRO and collects data as part of the East Australian Current (EAC) array. This mooring was decommissioned in June 2013.",
+        "prefLabel": {
+          "_value": "South-East Queensland 200m Mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/176",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-21T00:00:00Z",
+        "dctermsModified": "2023-01-25T03:25:52Z",
+        "definition": "The South-East Queensland 400m Mooring is operated by CSIRO and collects data as part of the East Australian Current (EAC) array. This mooring was decommissioned in June 2013.",
+        "prefLabel": {
+          "_value": "South-East Queensland 400m Mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/177",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-21T00:00:00Z",
+        "dctermsModified": "2023-01-25T03:10:48Z",
+        "definition": "The Ocean Reference Station Sydney Mooring is operated by Sydney Water and collects data in the Sydney region.",
+        "prefLabel": {
+          "_value": "Ocean Reference Station Sydney Mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/178",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/43",
+            "prefLabel": {
+              "_value": "subsurface mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-21T00:00:00Z",
+        "dctermsModified": "2023-01-25T01:31:03Z",
+        "definition": "The Perth Canyon, WA Passive Acoustic Observatory, is a series of moorings operated by Curtin University which collect data in the Perth Canyon region. This observatory was decommissioned in October 2017.",
+        "prefLabel": {
+          "_value": "Perth Canyon, WA Passive Acoustic Observatory",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/179",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/43",
+            "prefLabel": {
+              "_value": "subsurface mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-21T00:00:00Z",
+        "dctermsModified": "2023-01-25T01:32:11Z",
+        "definition": "The Portland, VIC Passive Acoustic Observatory, is a series of moorings operated by Curtin University which collect data in the Portland region. This observatory was decommissioned early in 2018.",
+        "prefLabel": {
+          "_value": "Portland, VIC Passive Acoustic Observatory",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/18",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/31",
+            "prefLabel": {
+              "_value": "research vessel",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2017-02-20T23:11:37Z",
+        "dctermsModified": "2020-10-15T02:53:12Z",
+        "definition": "Research vessel which is operated by the Office of Environment and Heritage (OEH), NSW.",
+        "prefLabel": {
+          "_value": "Bombora",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/180",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/43",
+            "prefLabel": {
+              "_value": "subsurface mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-21T00:00:00Z",
+        "dctermsModified": "2023-01-25T01:34:05Z",
+        "definition": "The Tuncurry, NSW Passive Acoustic Observatory, is a series of moorings operated by Curtin University which collect data in the Tuncurry/Forster region. This observatory was decommissioned in early 2018.",
+        "prefLabel": {
+          "_value": "Tuncurry, NSW Passive Acoustic Observatory",
+          "_lang": "en"
+        }
+      }
+    ],
+    "itemsPerPage": 10,
+    "next": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=9",
+    "page": 8,
+    "prev": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=7",
+    "startIndex": 81,
+    "type": "http://purl.org/linked-data/api/vocab#Page"
+  }
+}

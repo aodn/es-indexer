@@ -1,0 +1,15 @@
+{ "format" : "linked-data-api", "version" : "0.2", "result" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/resource.json?uri=http://vocab.aodn.org.au/def/platform/entity/177", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/resource.json?uri=http://vocab.aodn.org.au/def/platform/entity/177", "extendedMetadataVersion" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/resource.json?_metadata=all&uri=http://vocab.aodn.org.au/def/platform/entity/177", "primaryTopic" : {"_about" : "http://vocab.aodn.org.au/def/platform/entity/177", "altLabel" : [{"_value" : "ORS065", "_lang" : "en"}
+      ], "box" : "-33.8975 151.3153 -33.8975 151.3153", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/48", "narrower" : ["http://vocab.aodn.org.au/def/platform/entity/177"]}
+      ], "contributor" : "http://editor.vocabs.ands.org.au/user/eMII_Atkins.Natalia_Admin", "creator" : "http://editor.vocabs.ands.org.au/user/Sebastien-Mancini", "dcPublisher" : "eMarine Information Infrastructure (eMII)", "dcSource" : "Australian Ocean Data Network platform register", "dctermsCreated" : "2013-05-21T00:00:00Z", "dctermsModified" : "2023-01-25T03:10:48Z", "definition" : "The Ocean Reference Station Sydney Mooring is operated by Sydney Water and collects data in the Sydney region.", "inScheme" : {"_about" : "http://vocab.aodn.org.au/def/platform/1", "hasConcept" : "http://vocab.aodn.org.au/def/platform/entity/177"}
+      , "prefLabel" : {"_value" : "Ocean Reference Station Sydney Mooring", "_lang" : "en"}
+      , "related" : [{"_about" : "http://vocab.aodn.org.au/def/platform/entity/120", "related" : ["http://vocab.aodn.org.au/def/platform/entity/177"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/121", "related" : ["http://vocab.aodn.org.au/def/platform/entity/177"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/122", "related" : ["http://vocab.aodn.org.au/def/platform/entity/177"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/123", "related" : ["http://vocab.aodn.org.au/def/platform/entity/177"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/165", "related" : ["http://vocab.aodn.org.au/def/platform/entity/177"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/166", "related" : ["http://vocab.aodn.org.au/def/platform/entity/177"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/20", "related" : ["http://vocab.aodn.org.au/def/platform/entity/177"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/40", "related" : ["http://vocab.aodn.org.au/def/platform/entity/177"]}
+      ], "scopeNote" : "nominal depth:65m", "type" : ["http://www.w3.org/2000/01/rdf-schema#Resource", "http://www.w3.org/2004/02/skos/core#Concept"]}
+    , "type" : ["http://purl.org/linked-data/api/vocab#ItemEndpoint", "http://purl.org/linked-data/api/vocab#Page"]}
+}

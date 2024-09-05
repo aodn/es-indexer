@@ -1,0 +1,33 @@
+{ "format" : "linked-data-api", "version" : "0.2", "result" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=41", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json", "extendedMetadataVersion" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=41&_metadata=all", "first" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=0", "isPartOf" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json", "hasPart" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=41", "type" : "http://purl.org/linked-data/api/vocab#ListEndpoint"}
+    , "items" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/73", "dctermsCreated" : "2013-04-08T00:00:00Z", "dctermsModified" : "2017-02-07T03:52:45Z", "definition" : "A bird that is unable to fly with the ability to exist within the water column (e.g. penguin).", "prefLabel" : {"_value" : "flightless bird", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/74", "dctermsCreated" : "2014-01-16T00:00:00Z", "dctermsModified" : "2017-02-07T03:52:45Z", "definition" : "A flighted bird that is able to exist on the water column surface and dive into the water column (e.g. cormorants auks ducks and gulls).", "prefLabel" : {"_value" : "seabird and duck", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/75", "dctermsCreated" : "2017-06-27T00:00:00Z", "dctermsModified" : "2017-07-03T05:46:45Z", "definition" : "A mammal that exists within the water column but needing to regularly surface to breathe (i.e. dolphins and whales).", "prefLabel" : {"_value" : "cetacean", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/76", "dctermsCreated" : "2017-06-27T00:00:00Z", "dctermsModified" : "2017-07-03T05:46:49Z", "definition" : "A free-swimming creature that exists totally within the water column.", "prefLabel" : {"_value" : "fish", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/77", "dctermsCreated" : "2013-04-08T00:00:00Z", "dctermsModified" : "2017-02-07T03:52:46Z", "definition" : "A mammal that exists both on land and within the water column. Includes seals sealions sea-otters and walruses.", "prefLabel" : {"_value" : "land-sea mammals", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/39", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/25", "prefLabel" : {"_value" : "unmanned autonomous underwater vehicle", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2017-10-04T05:48:02Z", "dctermsModified" : "2020-10-15T05:01:56Z", "definition" : "The IMOS AUV facility operates a small ocean going AUV called Iver from Ocean Server. Managed by the University of Sydney's Australian Centre for Field Robotics (ACFR), this vehicle is able to be launched from the shore or a small boat, and is used in the support of marine habitat assessment as well as in the surveying of archaeological sites in coastal environments.", "prefLabel" : {"_value" : "Iver", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/40", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/48", "prefLabel" : {"_value" : "mooring", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2017-12-13T02:40:52Z", "dctermsModified" : "2023-01-25T02:32:19Z", "definition" : "The Coffs Harbour 50m Mooring is operated by SIMS (Sydney Institute of Marine Science) and collects data in the Coffs Harbour region.", "prefLabel" : {"_value" : "Coffs Harbour 50m Mooring", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.nerc.ac.uk/collection/C17/current/35O7", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/31", "prefLabel" : {"_value" : "research vessel", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2017-12-11T00:00:00Z", "dctermsModified" : "2019-12-17T15:58:37Z", "definition" : "The Astrolabe is a research vessel which is an icebreaker (Class IB5 of the Polar Code), built in 2017 as part of a partnership between the French Southern and Antarctic Territories (TAAF), the French Polar Institute Paul-Emile Victor (IPEV) and the Ministry of Defense (National Navy (MN)). The partnership is made through the creation of a public interest grouping between the TAAF and the MN and an agreement between the MN and the IPEV.", "prefLabel" : {"_value" : "L'Astrolabe {FASB}", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.nerc.ac.uk/collection/C17/current/26JM", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2018-02-20T00:00:00Z", "dctermsModified" : "2019-12-17T15:58:37Z", "definition" : "Container ship vessel, which is currently flying the flag of Denmark (September 2016).", "prefLabel" : {"_value" : "Josephine Maersk", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/16", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2018-09-07T06:48:35Z", "dctermsModified" : "2020-10-15T05:04:54Z", "definition" : "Cargo ship vessel. It was called the Forum Samoa II from 2001 until June 2010. It was then shortly called the Opal Harmony, then Southern Moana, then Capitaine Fearn. It currently flies the flag of Singapore (2018).", "prefLabel" : {"_value" : "Capitaine Quiros", "_lang" : "en"}
+    }
+    ], "itemsPerPage" : 10, "next" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=42", "page" : 41, "prev" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=40", "startIndex" : 411, "type" : "http://purl.org/linked-data/api/vocab#Page"}
+}

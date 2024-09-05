@@ -1,0 +1,20 @@
+{ "format" : "linked-data-api", "version" : "0.2", "result" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/resource.json?uri=http://vocab.aodn.org.au/def/platform/entity/68", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/resource.json?uri=http://vocab.aodn.org.au/def/platform/entity/68", "extendedMetadataVersion" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/resource.json?_metadata=all&uri=http://vocab.aodn.org.au/def/platform/entity/68", "primaryTopic" : {"_about" : "http://vocab.aodn.org.au/def/platform/entity/68", "altLabel" : [{"_value" : "NRSMAI-Surface", "_lang" : "en"}
+      ], "box" : "-42.597 148.233 -42.597 148.233", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/48", "narrower" : ["http://vocab.aodn.org.au/def/platform/entity/68"]}
+      ], "contributor" : "http://editor.vocabs.ands.org.au/user/eMII_Atkins.Natalia_Admin", "creator" : "http://editor.vocabs.ands.org.au/user/Sebastien-Mancini", "dcPublisher" : "eMarine Information Infrastructure (eMII)", "dcSource" : "Australian Ocean Data Network platform register", "dctermsCreated" : "2013-04-10T00:00:00Z", "dctermsModified" : "2023-01-25T03:07:22Z", "definition" : "Surface mooring located at the Maria Island National Reference Station. This mooring is operated by CSIRO.", "inScheme" : {"_about" : "http://vocab.aodn.org.au/def/platform/1", "hasConcept" : "http://vocab.aodn.org.au/def/platform/entity/68"}
+      , "prefLabel" : {"_value" : "Maria Island National Reference Station surface mooring", "_lang" : "en"}
+      , "related" : [{"_about" : "http://vocab.aodn.org.au/def/platform/entity/141", "related" : ["http://vocab.aodn.org.au/def/platform/entity/68"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/142", "related" : ["http://vocab.aodn.org.au/def/platform/entity/68"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/143", "related" : ["http://vocab.aodn.org.au/def/platform/entity/68"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/145", "related" : ["http://vocab.aodn.org.au/def/platform/entity/68"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/146", "related" : ["http://vocab.aodn.org.au/def/platform/entity/68"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/147", "related" : ["http://vocab.aodn.org.au/def/platform/entity/68"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/148", "related" : ["http://vocab.aodn.org.au/def/platform/entity/68"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/149", "related" : ["http://vocab.aodn.org.au/def/platform/entity/68"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/150", "related" : ["http://vocab.aodn.org.au/def/platform/entity/68"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/151", "related" : ["http://vocab.aodn.org.au/def/platform/entity/68"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/152", "related" : ["http://vocab.aodn.org.au/def/platform/entity/68"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/66", "related" : ["http://vocab.aodn.org.au/def/platform/entity/68"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/67", "related" : ["http://vocab.aodn.org.au/def/platform/entity/68"]}
+      ], "scopeNote" : "nominal depth:90m", "type" : ["http://www.w3.org/2000/01/rdf-schema#Resource", "http://www.w3.org/2004/02/skos/core#Concept"]}
+    , "type" : ["http://purl.org/linked-data/api/vocab#ItemEndpoint", "http://purl.org/linked-data/api/vocab#Page"]}
+}

@@ -1,0 +1,214 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=25",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=25&_metadata=all",
+    "first": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=0",
+    "isPartOf": {
+      "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+      "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+      "hasPart": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=25",
+      "type": "http://purl.org/linked-data/api/vocab#ListEndpoint"
+    },
+    "items": [
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/335",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/16",
+            "prefLabel": {
+              "_value": "offshore structure",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-06-14T00:00:00Z",
+        "dctermsModified": "2020-08-06T03:34:45Z",
+        "definition": "A 6m steel pole. The pole is solar powered and routes data from the Sensor Floats and other Sensor Relay Poles back to the Base Station located on Heron Island. The system uses the Campbell Scientific CR1000 loggers and RF411 Spread-Spectrum radios to process and route the data. The poles also can support a range of sensors, this pole also has a simple bottom mounted thermistor using the MEA thermistors. The unit will be serviced every six months and will be used in the future for attaching new sets of sensors. The pole was decommissioned in 2018.",
+        "prefLabel": {
+          "_value": "Heron Island Relay Pole 1",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/336",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/16",
+            "prefLabel": {
+              "_value": "offshore structure",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-06-14T00:00:00Z",
+        "dctermsModified": "2022-11-07T04:20:31Z",
+        "definition": "A 6m steel pole. The pole is solar powered and routes data from the Sensor Floats and other Sensor Relay Poles back to the Base Station located on Heron Island. The system uses the Campbell Scientific CR1000 loggers and RF411 Spread-Spectrum radios to process and route the data. The poles also can support a range of sensors, this pole also has a simple bottom mounted thermistor using the MEA thermistors. The unit will be serviced every six months and will be used in the future for attaching new sets of sensors. The pole was decommissioned in September 2021.",
+        "prefLabel": {
+          "_value": "Heron Island Relay Pole 2",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/337",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/16",
+            "prefLabel": {
+              "_value": "offshore structure",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-06-14T00:00:00Z",
+        "dctermsModified": "2022-11-07T04:18:11Z",
+        "definition": "A 6m steel pole.  The pole is solar powered and routes data from the Sensor Floats and other Sensor Relay Poles back to the Base Station located on Heron Island. The system uses the Campbell Scientific CR1000 loggers and RF411 Spread-Spectrum radios to process and route the data. The poles also can support a range of sensors, this pole also has a simple bottom mounted thermistor using the MEA thermistors. The unit will be serviced every six months and will be used in the future for attaching new sets of sensors. The pole was decommissioned in September 2021.",
+        "prefLabel": {
+          "_value": "Heron Island Relay Pole 3",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/338",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/16",
+            "prefLabel": {
+              "_value": "offshore structure",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-06-14T00:00:00Z",
+        "dctermsModified": "2020-08-06T03:42:53Z",
+        "definition": "A 6m steel pole. The pole is solar powered and routes data from the Sensor Floats and other Sensor Relay Poles back to the Base Station located on Heron Island. The system uses the Campbell Scientific CR1000 loggers and RF411 Spread-Spectrum radios to process and route the data. The poles also can support a range of sensors, this pole also has a simple bottom mounted thermistor using the MEA thermistors. The unit will be serviced every six months and will be used in the future for attaching new sets of sensors. The pole was decommissioned in 2019.",
+        "prefLabel": {
+          "_value": "Heron Island Relay Pole 4",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/339",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/16",
+            "prefLabel": {
+              "_value": "offshore structure",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-06-14T00:00:00Z",
+        "dctermsModified": "2022-11-07T04:17:41Z",
+        "definition": "A 6m steel pole. The pole is solar powered and routes data from the Sensor Floats and other Sensor Relay Poles back to the Base Station located on Heron Island. The system uses the Campbell Scientific CR1000 loggers and RF411 Spread-Spectrum radios to process and route the data. The poles also can support a range of sensors, this pole also has a simple bottom mounted thermistor using the MEA thermistors as well as a Vaisala WXT520 weather station. The unit will be serviced every six months and will be used in the future for attaching new sets of sensors. The weather station provides measurement of air temperature (Deg. C.), humidity as relative percent, barometric pressure (milliBars or hPa), rainfall amount, intensity and duration, hail amount, intensity and duration (not common on coral reefs!) and wind speed and direction. The wind speed and direction and processed into scalar and vector (directional) based readings and presented as 10 and 30 minute averages to give mean values and maximum values. From these you can get the average wind conditions at either 10 minute or 30 minute periods as well as the gust or maximum wind conditions. The weather station is connected via an SDI-12 interface to a Campbell Scientific CR1000 logger which uses a RF411 radio to transmit the data, every 10 minutes, to the base station on Heron Island and then a Telstra nextG link is used to send the data back to AIMS. The pole was decommissioned in September 2021.",
+        "prefLabel": {
+          "_value": "Heron Island Relay Pole 5",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/34",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2017-06-26T23:55:17Z",
+        "dctermsModified": "2023-07-05T00:55:08Z",
+        "definition": "The East Australian Current 2000m Mooring is operated by CSIRO Oceans and Atmosphere, and collects data in the East Australian Current. This mooring forms part of the second deployment of the EAC array, and was reconfigured to incorporate parts of the continental shelf. The array that this mooring was part of was decommissioned in July 2022.",
+        "prefLabel": {
+          "_value": "East Australian Current 2000m Mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/340",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/16",
+            "prefLabel": {
+              "_value": "offshore structure",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-06-14T00:00:00Z",
+        "dctermsModified": "2020-08-06T03:36:17Z",
+        "definition": "A 6m steel pole. The pole is solar powered and routes data from the Sensor Floats and other Sensor Relay Poles back to the Base Station located on Heron Island. The system uses the Campbell Scientific CR1000 loggers and RF411 Spread-Spectrum radios to process and route the data. The poles also can support a range of sensors, this pole also has a simple bottom mounted thermistor using the MEA thermistors. The unit will be serviced every six months and will be used in the future for attaching new sets of sensors. The pole was decommissioned in 2019.",
+        "prefLabel": {
+          "_value": "Heron Island Relay Pole 6",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/341",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/16",
+            "prefLabel": {
+              "_value": "offshore structure",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-06-14T00:00:00Z",
+        "dctermsModified": "2022-11-07T04:17:05Z",
+        "definition": "A 6m steel pole. This pole was to be installed in April 2013, in the Wistari Channel. The pole was decommissioned in September 2021.",
+        "prefLabel": {
+          "_value": "Heron Island Relay Pole 7",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/342",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/16",
+            "prefLabel": {
+              "_value": "offshore structure",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-06-14T00:00:00Z",
+        "dctermsModified": "2022-11-07T03:23:57Z",
+        "definition": "A 6m steel pole. The pole is solar powered and routes data from the Sensor Floats and other Sensor Relay Poles back to the Base Station located on Heron Island. The system uses the Campbell Scientific CR1000 loggers and RF411 Spread-Spectrum radios to process and route the data. The poles also can support a range of sensors. The unit will be serviced every six months and will be used in the future for attaching new sets of sensors. The pole was decommissioned in September 2021.",
+        "prefLabel": {
+          "_value": "Heron Island Relay Pole 8",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/343",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/41",
+            "prefLabel": {
+              "_value": "moored surface buoy",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-06-14T00:00:00Z",
+        "dctermsModified": "2022-11-07T04:23:19Z",
+        "definition": "A round 1.4m yellow buoy has been deployed in the Heron Island lagoon as part of the sensor network infrastructure at Heron Island in the southern Great Barrier Reef off Gladstone, Australia. The buoy is configured as a sensor-float with a Campbell Scientific logger, a spread-spectrum radio for communicating with the on-reef wireless network, a GPS and initially a surface mounted (30cm under the water surface) thermistor. The float is moored in the lagoon of Heron Island in around 3m of water and will be used to monitor the flow of water through the lagoon. It will be fitted with surface salinity and bottom depth and temperature in late 2008. The unit will be serviced every six months and will be used in the future for attaching new sets of sensors. The buoy is re-locatable and the GPS data should be used to find the current location. This float was decommissioned in September 2021.",
+        "prefLabel": {
+          "_value": "Heron Island Sensor Float 1",
+          "_lang": "en"
+        }
+      }
+    ],
+    "itemsPerPage": 10,
+    "next": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=26",
+    "page": 25,
+    "prev": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=24",
+    "startIndex": 251,
+    "type": "http://purl.org/linked-data/api/vocab#Page"
+  }
+}
