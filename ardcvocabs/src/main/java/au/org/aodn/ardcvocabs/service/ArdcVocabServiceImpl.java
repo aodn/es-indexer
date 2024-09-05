@@ -201,8 +201,8 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
         String url = String.format(vocabApiBase + vocabApiPaths.getVocabCategoryApiPath());
         List<VocabModel> vocabCategoryNodes = new ArrayList<>();
         while (url != null && !url.isEmpty()) {
-            log.debug("Query api -> {}", url);
             try {
+                log.debug("Query api -> {}", url);
                 ObjectNode r = restTemplate.getForObject(url, ObjectNode.class);
 
                 if (r != null && !r.isEmpty()) {

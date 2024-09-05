@@ -6,6 +6,7 @@ import au.org.aodn.ardcvocabs.model.VocabModel;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -41,6 +42,7 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
                 { "/aodn-parameter-category-vocabulary/version-2-1/concept.json?_page=1", "/category/page1.json" },
                 { "/aodn-parameter-category-vocabulary/version-2-1/concept.json?_page=2", "/category/page2.json" },
                 { "/aodn-parameter-category-vocabulary/version-2-1/concept.json?_page=3", "/category/page3.json" },
+                { "/aodn-parameter-category-vocabulary/version-2-1/concept.json?_page=4", "/category/page4.json" },
                 { "/aodn/aodn-parameter-category-vocabulary/version-2-1/resource.json?uri=http://vocab.aodn.org.au/def/parameter_classes/category/1", "/category/vocab1.json" },
                 { "/aodn/aodn-parameter-category-vocabulary/version-2-1/resource.json?uri=http://vocab.aodn.org.au/def/parameter_classes/category/2", "/category/vocab2.json" },
                 { "/aodn/aodn-parameter-category-vocabulary/version-2-1/resource.json?uri=http://vocab.aodn.org.au/def/parameter_classes/category/3", "/category/vocab3.json" },
@@ -309,7 +311,7 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
                 { "/aodn-discovery-parameter-vocabulary/version-1-6/resource.json?uri=http://vocab.nerc.ac.uk/collection/P01/current/TURBXXXX", "/platform/nercTURBXXXX.json"},
                 { "/aodn-discovery-parameter-vocabulary/version-1-6/resource.json?uri=http://vocab.nerc.ac.uk/collection/P01/current/XCO2DRAT", "/platform/nercXCO2DRAT.json"},
                 { "/aodn-discovery-parameter-vocabulary/version-1-6/resource.json?uri=http://vocab.nerc.ac.uk/collection/P01/current/XCO2WBDY", "/platform/nercXCO2WBDY.json"},
-                { "aodn-platform-vocabulary/version-6-1/concept.json", "/platform/concept0.json"}
+                { "/aodn-platform-vocabulary/version-6-1/concept.json", "/platform/concept0.json"}
         }).collect(Collectors.toMap(data -> data[0], data -> data[1]));
 
         // Create expect result
@@ -321,6 +323,8 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
 
     @BeforeEach
     public void init() {
+        // If you want real download for testing, uncomment below and do not use mock
+        //this.ardcVocabService = new ArdcVocabServiceImpl(new RestTemplate());
         this.ardcVocabService = new ArdcVocabServiceImpl(mockRestTemplate);
         this.ardcVocabService.vocabApiBase = "https://vocabs.ardc.edu.au/repository/api/lda/aodn";
     }
@@ -376,7 +380,8 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
 
         assertTrue("Find target Visibility", visibility.isPresent());
 
-        Optional<VocabModel> horizontalVisibilityInTheAtmosphere = visibility.get().getNarrower()
+        Optional<VocabModel> horizontalVisibilityInTheAtmosphere = visibility.get()
+                .getNarrower()
                 .stream()
                 .filter(p -> p.getLabel().equals("Horizontal visibility in the atmosphere"))
                 .findFirst();
@@ -390,6 +395,30 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
 
         assertTrue("Find target Physical-Water", pw.isPresent());
         assertEquals(14, pw.get().getNarrower().size(), "Have narrower equals");
+
+        Assertions.assertTrue(parameterVocabModelList.stream().anyMatch(rootNode -> rootNode.getLabel().equalsIgnoreCase("Physical-Atmosphere")
+                && rootNode.getNarrower() != null && !rootNode.getNarrower().isEmpty()
+                && rootNode.getNarrower().stream().anyMatch(internalNode -> internalNode.getLabel().equalsIgnoreCase("Air pressure")
+                && internalNode.getNarrower() != null && !internalNode.getNarrower().isEmpty()
+                && internalNode.getNarrower().stream().anyMatch(leafNode -> leafNode.getLabel().equalsIgnoreCase("Pressure (measured variable) exerted by the atmosphere")))));
+
+        Assertions.assertTrue(parameterVocabModelList.stream().anyMatch(rootNode -> rootNode.getLabel().equalsIgnoreCase("Chemical")
+                && rootNode.getNarrower() != null && !rootNode.getNarrower().isEmpty()
+                && rootNode.getNarrower().stream().anyMatch(internalNode -> internalNode.getLabel().equalsIgnoreCase("Alkalinity")
+                && internalNode.getNarrower() != null && !internalNode.getNarrower().isEmpty()
+                && internalNode.getNarrower().stream().anyMatch(leafNode -> leafNode.getLabel().equalsIgnoreCase("Concentration of carbonate ions per unit mass of the water body")))));
+
+        Assertions.assertTrue(parameterVocabModelList.stream().anyMatch(rootNode -> rootNode.getLabel().equalsIgnoreCase("Biological")
+                && rootNode.getNarrower() != null && !rootNode.getNarrower().isEmpty()
+                && rootNode.getNarrower().stream().anyMatch(internalNode -> internalNode.getLabel().equalsIgnoreCase("Ocean Biota")
+                && internalNode.getNarrower() != null && !internalNode.getNarrower().isEmpty()
+                && internalNode.getNarrower().stream().anyMatch(leafNode -> leafNode.getLabel().equalsIgnoreCase("Mean unit biovolume")))));
+
+        Assertions.assertTrue(parameterVocabModelList.stream().anyMatch(rootNode -> rootNode.getLabel().equalsIgnoreCase("Physical-Water")
+                && rootNode.getNarrower() != null && !rootNode.getNarrower().isEmpty()
+                && rootNode.getNarrower().stream().anyMatch(internalNode -> internalNode.getLabel().equalsIgnoreCase("Wave")
+                && internalNode.getNarrower() != null && !internalNode.getNarrower().isEmpty()
+                && internalNode.getNarrower().stream().anyMatch(leafNode -> leafNode.getLabel().equalsIgnoreCase("Direction at spectral maximum of waves on the water body")))));
 
     }
 

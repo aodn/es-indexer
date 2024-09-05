@@ -18,6 +18,7 @@ import java.util.regex.Pattern;
 public class Downloader {
     private static final String LOG_FILE = "/tmp/logfile.txt";  // Change this to your log file path
     private static final String URL_REGEX = "https://[^ ]+";
+    private static final String CATEGORY_REGEX = "category/(\\d+)";
     private static final String ENTITY_REGEX = "entity/(\\d+)";
     private static final String NERC_URL_REGEX = "http://vocab\\.nerc\\.ac\\.uk/collection/P01/current/([A-Z0-9]+)";
 
@@ -62,6 +63,13 @@ public class Downloader {
     private static String extractEntityNumber(String line) {
         // Use a regex to find the ARDC entity number in the line
         Pattern pattern = Pattern.compile(ENTITY_REGEX);
+        Matcher matcher = pattern.matcher(line);
+        return matcher.find() ? matcher.group(1) : null;
+    }
+
+    private static String extractCategoryNumber(String line) {
+        // Use a regex to find the ARDC entity number in the line
+        Pattern pattern = Pattern.compile(CATEGORY_REGEX);
         Matcher matcher = pattern.matcher(line);
         return matcher.find() ? matcher.group(1) : null;
     }

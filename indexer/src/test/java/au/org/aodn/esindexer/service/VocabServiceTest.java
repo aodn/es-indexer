@@ -131,40 +131,16 @@ public class VocabServiceTest extends BaseTestClass {
         // read from ARDC
         List<VocabModel> parameterVocabsFromArdc = ardcVocabService.getVocabTreeFromArdcByType(VocabApiPaths.PARAMETER_VOCAB);
 
-        // verify the contents randomly
-        assertNotNull(parameterVocabsFromArdc);
-
-        assertTrue(parameterVocabsFromArdc.stream().anyMatch(rootNode -> rootNode.getLabel().equalsIgnoreCase("Physical-Atmosphere")
-                && rootNode.getNarrower() != null && !rootNode.getNarrower().isEmpty()
-                && rootNode.getNarrower().stream().anyMatch(internalNode -> internalNode.getLabel().equalsIgnoreCase("Air pressure")
-                && internalNode.getNarrower() != null && !internalNode.getNarrower().isEmpty()
-                && internalNode.getNarrower().stream().anyMatch(leafNode -> leafNode.getLabel().equalsIgnoreCase("Pressure (measured variable) exerted by the atmosphere")))));
-
-        assertTrue(parameterVocabsFromArdc.stream().anyMatch(rootNode -> rootNode.getLabel().equalsIgnoreCase("Chemical")
-                && rootNode.getNarrower() != null && !rootNode.getNarrower().isEmpty()
-                && rootNode.getNarrower().stream().anyMatch(internalNode -> internalNode.getLabel().equalsIgnoreCase("Alkalinity")
-                && internalNode.getNarrower() != null && !internalNode.getNarrower().isEmpty()
-                && internalNode.getNarrower().stream().anyMatch(leafNode -> leafNode.getLabel().equalsIgnoreCase("Concentration of carbonate ions per unit mass of the water body")))));
-
-        assertTrue(parameterVocabsFromArdc.stream().anyMatch(rootNode -> rootNode.getLabel().equalsIgnoreCase("Biological")
-                && rootNode.getNarrower() != null && !rootNode.getNarrower().isEmpty()
-                && rootNode.getNarrower().stream().anyMatch(internalNode -> internalNode.getLabel().equalsIgnoreCase("Ocean Biota")
-                && internalNode.getNarrower() != null && !internalNode.getNarrower().isEmpty()
-                && internalNode.getNarrower().stream().anyMatch(leafNode -> leafNode.getLabel().equalsIgnoreCase("Mean unit biovolume")))));
-
-        assertTrue(parameterVocabsFromArdc.stream().anyMatch(rootNode -> rootNode.getLabel().equalsIgnoreCase("Physical-Water")
-                && rootNode.getNarrower() != null && !rootNode.getNarrower().isEmpty()
-                && rootNode.getNarrower().stream().anyMatch(internalNode -> internalNode.getLabel().equalsIgnoreCase("Wave")
-                && internalNode.getNarrower() != null && !internalNode.getNarrower().isEmpty()
-                && internalNode.getNarrower().stream().anyMatch(leafNode -> leafNode.getLabel().equalsIgnoreCase("Direction at spectral maximum of waves on the water body")))));
-
-
         // read from Elastic search
         List<JsonNode> parameterVocabsFromEs = vocabService.getParameterVocabs();
         assertNotNull(parameterVocabsFromEs);
         assertEquals(parameterVocabsFromEs.size(), parameterVocabsFromArdc.size());
 
-        JSONAssert.assertEquals(indexerObjectMapper.valueToTree(parameterVocabsFromEs).toPrettyString(), indexerObjectMapper.valueToTree(parameterVocabsFromArdc).toPrettyString(), JSONCompareMode.LENIENT);
+        JSONAssert.assertEquals(
+                indexerObjectMapper.valueToTree(parameterVocabsFromEs).toPrettyString(),
+                indexerObjectMapper.valueToTree(parameterVocabsFromArdc).toPrettyString(),
+                JSONCompareMode.LENIENT
+        );
 
         // even more tests
         String cannedData = readResourceFile("classpath:canned/aodn_discovery_parameter_vocabs.json");
