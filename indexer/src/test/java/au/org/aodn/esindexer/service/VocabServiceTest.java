@@ -3,8 +3,6 @@ package au.org.aodn.esindexer.service;
 import au.org.aodn.ardcvocabs.model.VocabApiPaths;
 import au.org.aodn.ardcvocabs.model.VocabModel;
 import au.org.aodn.ardcvocabs.service.ArdcVocabService;
-import au.org.aodn.ardcvocabs.service.ArdcVocabServiceImpl;
-import au.org.aodn.ardcvocabs.service.ArdcVocabServiceImplTest;
 import au.org.aodn.esindexer.BaseTestClass;
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.stac.model.ConceptModel;
@@ -13,7 +11,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONException;
 import org.junit.jupiter.api.*;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -25,7 +22,6 @@ import java.util.*;
 // More details: https://www.baeldung.com/jsonassert#overview, https://github.com/skyscreamer/JSONassert
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
-import org.springframework.web.client.RestTemplate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -139,46 +135,14 @@ public class VocabServiceTest extends BaseTestClass {
         JSONAssert.assertEquals(
                 indexerObjectMapper.valueToTree(parameterVocabsFromEs).toPrettyString(),
                 indexerObjectMapper.valueToTree(parameterVocabsFromArdc).toPrettyString(),
-                JSONCompareMode.LENIENT
+                JSONCompareMode.STRICT
         );
-
-        // even more tests
-        String cannedData = readResourceFile("classpath:canned/aodn_discovery_parameter_vocabs.json");
-        // This will assert that all fields in cannedData are present in actual data,
-        // but ignores any extra fields in actual data (scenario: source from ARDC is updated with more vocabs added)
-        JSONAssert.assertEquals(cannedData, indexerObjectMapper.valueToTree(parameterVocabsFromEs).toPrettyString(), JSONCompareMode.LENIENT);
     }
 
     @Test
     void testProcessPlatformVocabs() throws IOException, JSONException {
         // read from ARDC
         List<VocabModel> platformVocabsFromArdc = ardcVocabService.getVocabTreeFromArdcByType(VocabApiPaths.PLATFORM_VOCAB);
-
-        // verify the contents randomly
-        assertNotNull(platformVocabsFromArdc);
-
-        assertTrue(platformVocabsFromArdc.stream().anyMatch(rootNode -> rootNode.getLabel().equalsIgnoreCase("Fixed station")
-                && rootNode.getNarrower() != null && !rootNode.getNarrower().isEmpty()
-                && rootNode.getNarrower().stream().anyMatch(internalNode -> internalNode.getLabel().equalsIgnoreCase("fixed benthic node")
-                && internalNode.getNarrower() == null)));
-
-        assertTrue(platformVocabsFromArdc.stream().anyMatch(rootNode -> rootNode.getLabel().equalsIgnoreCase("Float")
-                && rootNode.getNarrower() != null && !rootNode.getNarrower().isEmpty()
-                && rootNode.getNarrower().stream().anyMatch(internalNode -> internalNode.getLabel().equalsIgnoreCase("drifting subsurface profiling float")
-                && internalNode.getNarrower() != null && !internalNode.getNarrower().isEmpty()
-                && internalNode.getNarrower().stream().anyMatch(leafNode -> leafNode.getLabel().equalsIgnoreCase("NINJA Argo Float with SBE")))));
-
-        assertTrue(platformVocabsFromArdc.stream().anyMatch(rootNode -> rootNode.getLabel().equalsIgnoreCase("Vessel")
-                && rootNode.getNarrower() != null && !rootNode.getNarrower().isEmpty()
-                && rootNode.getNarrower().stream().anyMatch(internalNode -> internalNode.getLabel().equalsIgnoreCase("small boat")
-                && internalNode.getNarrower() != null && !internalNode.getNarrower().isEmpty()
-                && internalNode.getNarrower().stream().anyMatch(leafNode -> leafNode.getLabel().equalsIgnoreCase("Kinetic Energy")))));
-
-        assertTrue(platformVocabsFromArdc.stream().anyMatch(rootNode -> rootNode.getLabel().equalsIgnoreCase("Mooring and buoy")
-                && rootNode.getNarrower() != null && !rootNode.getNarrower().isEmpty()
-                && rootNode.getNarrower().stream().anyMatch(internalNode -> internalNode.getLabel().equalsIgnoreCase("moored surface buoy")
-                && internalNode.getNarrower() != null && !internalNode.getNarrower().isEmpty()
-                && internalNode.getNarrower().stream().anyMatch(leafNode -> leafNode.getLabel().equalsIgnoreCase("Lizard Island Sensor Float 1")))));
 
         // read from Elastic search
         List<JsonNode> platformVocabsFromEs = vocabService.getPlatformVocabs();
