@@ -1,0 +1,61 @@
+{ "format" : "linked-data-api", "version" : "0.2", "result" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=3", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-organisation-vocabulary/version-2-5/concept.json", "extendedMetadataVersion" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=3&_metadata=all", "first" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=0", "isPartOf" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-organisation-vocabulary/version-2-5/concept.json", "hasPart" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=3", "type" : "http://purl.org/linked-data/api/vocab#ListEndpoint"}
+    , "items" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/126", "dctermsCreated" : "2015-04-27T10:38:15Z", "dctermsModified" : "2018-05-08T03:00:25Z", "definition" : "URS is a leading provider of engineering, construction, and technical services for public agencies and private sector companies around the world.", "prefLabel" : {"_value" : "URS Australia", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/490", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/210", "prefLabel" : {"_value" : "The University of New South Wales (UNSW)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2017-08-29T04:11:48Z", "dctermsModified" : "2022-05-03T04:20:10Z", "definition" : "The Evolution & Ecology Research Centre was established in 2007, to provide a cohesive and cooperative environment for the University's effort in evolution and ecology research and research training. It draws together staff and students from  the School of Biological, Earth and Environmental Sciences, the School of Biotechnology and Biomolecular Sciences, School of Mathematics and Statistics, School of Economics and Humanities & Languages at UNSW in Sydney.", "prefLabel" : {"_value" : "Evolution and Ecology Research Centre (E&ERC), The University of New South Wales (UNSW)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/127", "dctermsCreated" : "2015-04-27T10:38:15Z", "dctermsModified" : "2018-05-07T04:48:36Z", "definition" : "The Victorian Institute of Marine Sciences (VIMS) was established by the Victorian Institute of Marine Sciences Act 1974 as a body corporate, its objects including: 'to provide facilities for and foster, carry on and support scientific research and technological development in all branches of learning concerning or touching upon marine sciences, including but without limiting the generality of that expression, the sea, the sea-bed, sea shores, and the resources and inhabitants thereof and mankind's relationship with the use of the sea'. VIMS began operations in 1978. In July 1996 the Victorian Institute of Marine Sciences, along with two other marine and freshwater groups, became a part of the Marine and Freshwater Resources Institute (MAFRI). In 1998 the decision was made to repeal the Victorian Institute of Marine Sciences Act 1974 and to include the Institute as part of the Fisheries Division of the Department of Natural Resources and Environment. In 2002 it was handed over to the newly formed Department of Primary Industries. This Department is now known as the Department of Environment, Land, Water and Planning (DELWP), as of 2014 .(Courtesy of Encyclopedia of Australian Science)", "prefLabel" : {"_value" : "Victorian Institute of Marine Sciences (VIMS)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/128", "dctermsCreated" : "2015-04-27T10:38:15Z", "dctermsModified" : "2018-05-07T04:48:45Z", "definition" : "Established by the WA Government in 1981, WALIS is responsible for coordinating across-government access and delivery of spatial information (marine, coastal and terrestrial). WALIS drives innovative partnerships and works with business, academia and the community to make it easier to find, use and improve location information for WA. WALIS provides a Data Discovery and Access service using the Shared Location Information Platform (SLIP).", "prefLabel" : {"_value" : "Western Australian Land Information System (WALIS)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/129", "dctermsCreated" : "2015-04-27T10:38:15Z", "dctermsModified" : "2018-05-07T04:48:56Z", "definition" : "The Western Australian Marine Science Institution (WAMSI) is an Australian marine research organisation, and is a collaboration between State, Federal, industry and academic entities.", "prefLabel" : {"_value" : "Western Australian Marine Science Institution (WAMSI)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/13", "dctermsCreated" : "2015-04-27T10:38:15Z", "dctermsModified" : "2020-12-17T05:33:23Z", "definition" : "The department consolidates the Australian Government\u2019s efforts to drive economic growth, productivity and competitiveness by bringing together industry, energy, resources, science and skills.", "narrower" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/14", "prefLabel" : {"_value" : "Australian Institute of Marine Science (AIMS), Department of Industry and Science, Australian Government", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/15", "prefLabel" : {"_value" : "Commonwealth Scientific and Industrial Research Organisation (CSIRO)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/20", "prefLabel" : {"_value" : "Geoscience Australia (GA), Department of Industry and Science, Australian Government", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/21", "prefLabel" : {"_value" : "Bureau of Mineral Resources, Geology and Geophysics (BMR)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/22", "prefLabel" : {"_value" : "Australian Geological Survey Organisation (AGSO)", "_lang" : "en"}
+      }
+      ], "prefLabel" : {"_value" : "Department of Industry and Science, Australian Government", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/130", "dctermsCreated" : "2015-04-27T10:38:15Z", "dctermsModified" : "2018-05-07T04:49:09Z", "definition" : "The Western Australian Museum is the state\u2019s premier cultural organisation, housing WA\u2019s scientific and cultural collection. It has six main sites: one in Perth, two in Fremantle (Maritime and Shipwreck Galleries), and one each in Albany, Geraldton, and Kalgoorlie-Boulder.", "prefLabel" : {"_value" : "Western Australian Museum (WAM)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/131", "dctermsCreated" : "2015-04-27T10:38:15Z", "dctermsModified" : "2018-05-08T03:00:33Z", "definition" : "Woodside is Australia\u2019s largest independent oil and gas company.", "prefLabel" : {"_value" : "Woodside Energy Ltd", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/132", "dctermsCreated" : "2015-04-27T10:38:15Z", "dctermsModified" : "2018-05-08T03:00:39Z", "definition" : "Yara produces fertilisers and crop nutrition programs.", "prefLabel" : {"_value" : "Yara Pilbara Holdings Ltd (YPHL)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/133", "dctermsCreated" : "2015-04-27T10:38:15Z", "dctermsModified" : "2018-07-10T04:46:33Z", "definition" : "IMOS routinely operates a wide range of observing equipment throughout Australia\u2019s coastal and open oceans, making all of its data accessible to the marine and climate science community, other stakeholders and users, and international collaborators. IMOS is designed to be a fully-integrated, national system, observing at ocean-basin and regional scales, and covering physical, chemical and biological variables. IMOS is a national collaborative research infrastructure, supported by Australian Government. It is led by University of Tasmania in partnership with the Australian marine and climate science community.", "narrower" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/134", "prefLabel" : {"_value" : "eMarine Information Infrastructure (eMII), Integrated Marine Observing Sytem (IMOS)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/34", "prefLabel" : {"_value" : "Australian Ocean Data Network (AODN)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/467", "prefLabel" : {"_value" : "Argo Floats Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/468", "prefLabel" : {"_value" : "Animal Tracking Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/469", "prefLabel" : {"_value" : "Ocean Radar Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/470", "prefLabel" : {"_value" : "Ocean Gliders Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/471", "prefLabel" : {"_value" : "Wireless Sensor Networks Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/472", "prefLabel" : {"_value" : "Deep Water Moorings Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/477", "prefLabel" : {"_value" : "National Mooring Network Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/507", "prefLabel" : {"_value" : "Autonomous Underwater Vehicles Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/514", "prefLabel" : {"_value" : "Ships of Opportunity Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/520", "prefLabel" : {"_value" : "Satellite Remote Sensing Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/596", "prefLabel" : {"_value" : "Marine Microbiome Initiative Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      ], "prefLabel" : {"_value" : "Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+    }
+    ], "itemsPerPage" : 10, "next" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=4", "page" : 3, "prev" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=2", "startIndex" : 31, "type" : "http://purl.org/linked-data/api/vocab#Page"}
+}

@@ -35,13 +35,13 @@ public class Downloader {
         try {
             // Try to extract both formats of URLs
             String ardcUrl = extractUrl(line);
-            String entityNumber = extractEntityNumber(line);
+            String entityNumber = extractCategoryNumber(line);
             String nercUrl = extractUrl(line);
             String nercCode = extractNercCode(line);
 
             if (ardcUrl != null && entityNumber != null) {
                 System.out.println("Downloading ARDC entity " + entityNumber + " from URL: " + ardcUrl);
-                downloadAndSaveResource(ardcUrl, "/tmp/entity" + entityNumber + ".json");
+                downloadAndSaveResource(ardcUrl, "/tmp/category" + entityNumber + ".json");
             } else if (nercUrl != null && nercCode != null) {
                 // Save as nerc[code].json (e.g., nercCHLTMASS.json)
                 String fileName = "/tmp/nerc" + nercCode + ".json";

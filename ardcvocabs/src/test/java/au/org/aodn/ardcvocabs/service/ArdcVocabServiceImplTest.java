@@ -137,6 +137,47 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
         return  template;
     }
 
+    public static RestTemplate setupOrganizationMockRestTemplate(RestTemplate template) throws IOException {
+        final ObjectMapper objectMapper = new ObjectMapper();
+
+        Mockito.doAnswer(f -> {
+            String url = f.getArgument(0);
+            if(url.contains("/aodn-organisation-category-vocabulary/version-2-5/concept.json")) {
+                if(url.contains("_page")) {
+                    String page = url.split("=")[1];
+                    return objectMapper.readValue(readResourceFile("/databag/organization/page" + page + ".json"), ObjectNode.class);
+                }
+                else {
+                    return objectMapper.readValue(readResourceFile("/databag/organization/page0.json"), ObjectNode.class);
+                }
+            }
+            else if(url.contains("/aodn-organisation-vocabulary/version-2-5/concept.json")) {
+                if(url.contains("_page")) {
+                    String page = url.split("=")[1];
+                    return objectMapper.readValue(readResourceFile("/databag/organization/vocab" + page + ".json"), ObjectNode.class);
+                }
+                else {
+                    return objectMapper.readValue(readResourceFile("/databag/organization/vocab0.json"), ObjectNode.class);
+                }
+            }
+            else if(url.contains("/aodn-organisation-vocabulary/version-2-5/resource.json?uri=http://vocab.aodn.org.au/def/organisation/entity/")) {
+                String[] token = url.split("/");
+                return objectMapper.readValue(readResourceFile("/databag/organization/entity" + token[token.length - 1] + ".json"), ObjectNode.class);
+            }
+            else if(url.contains("/aodn-organisation-category-vocabulary/version-2-5/resource.json?uri=http://vocab.aodn.org.au/def/organisation_classes/category/")) {
+                String[] token = url.split("/");
+                return objectMapper.readValue(readResourceFile("/databag/organization/category" + token[token.length - 1] + ".json"), ObjectNode.class);
+            }
+            else {
+                throw new FileNotFoundException(url);
+            }
+        })
+        .when(template)
+        .getForObject(anyString(), eq(ObjectNode.class));
+
+        return  template;
+    }
+
     @BeforeEach
     public void init() {
         // If you want real download for testing, uncomment below and do not use mock
@@ -280,6 +321,63 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
         JSONAssert.assertEquals(
                 expectedJson,
                 mapper.valueToTree(platformVocabsFromArdc).toPrettyString(),
+                JSONCompareMode.STRICT
+        );
+    }
+
+    @Test
+    public void verifyOrganization() throws IOException, JSONException {
+        mockRestTemplate = setupOrganizationMockRestTemplate(mockRestTemplate);
+
+        List<VocabModel> organisationVocabsFromArdc = ardcVocabService.getVocabTreeFromArdcByType(VocabApiPaths.ORGANISATION_VOCAB);
+
+        // verify the contents randomly
+        assertNotNull(organisationVocabsFromArdc);
+
+        var i = organisationVocabsFromArdc.stream().filter(rootNode -> rootNode.getLabel().equalsIgnoreCase("State and Territory Government Departments and Agencies")).findFirst();
+
+        Assertions.assertTrue(organisationVocabsFromArdc.stream().anyMatch(rootNode -> rootNode.getLabel().equalsIgnoreCase("State and Territory Government Departments and Agencies")
+                && rootNode.getNarrower() != null && !rootNode.getNarrower().isEmpty()
+                && rootNode.getNarrower().stream().anyMatch(internalNode -> internalNode.getLabel().equalsIgnoreCase("Victorian Government")
+                && internalNode.getNarrower() != null && !internalNode.getNarrower().isEmpty()
+                && internalNode.getNarrower().stream().anyMatch(leafNode -> leafNode.getLabel().equalsIgnoreCase("Victorian Institute of Marine Sciences (VIMS)")))));
+
+        Assertions.assertTrue(organisationVocabsFromArdc.stream().anyMatch(rootNode -> rootNode.getLabel().equalsIgnoreCase("Industry")
+                && rootNode.getNarrower() != null && !rootNode.getNarrower().isEmpty()
+                && rootNode.getNarrower().stream().anyMatch(internalNode -> internalNode.getLabel().equalsIgnoreCase("EOMAP Australia Pty Ltd")
+                && internalNode.getNarrower() == null)));
+
+        Assertions.assertTrue(organisationVocabsFromArdc.stream().anyMatch(rootNode -> rootNode.getLabel().equalsIgnoreCase("Local Government")
+                && rootNode.getNarrower() != null && !rootNode.getNarrower().isEmpty()
+                && rootNode.getNarrower().stream().anyMatch(internalNode -> internalNode.getLabel().equalsIgnoreCase("New South Wales Councils")
+                && internalNode.getNarrower() != null && !internalNode.getNarrower().isEmpty()
+                && internalNode.getNarrower().stream().anyMatch(leafNode -> leafNode.getLabel().equalsIgnoreCase("Hornsby Shire Council")))));
+
+        Assertions.assertTrue(organisationVocabsFromArdc.stream().anyMatch(rootNode -> rootNode.getLabel().equalsIgnoreCase("Australian Universities")
+                && rootNode.getNarrower() != null && !rootNode.getNarrower().isEmpty()
+                && rootNode.getNarrower().stream().anyMatch(internalNode -> internalNode.getLabel().equalsIgnoreCase("Curtin University")
+                && internalNode.getNarrower() != null && !internalNode.getNarrower().isEmpty()
+                && internalNode.getNarrower().stream().anyMatch(leafNode -> leafNode.getLabel().equalsIgnoreCase("Centre for Marine Science and Technology (CMST), Curtin University")))));
+
+        // case vocab doesn't have broadMatch node, it became a root node
+        Assertions.assertTrue(organisationVocabsFromArdc.stream().anyMatch(rootNode -> rootNode.getLabel().equalsIgnoreCase("Integrated Marine Observing System (IMOS)") && rootNode.getAbout().equals("http://vocab.aodn.org.au/def/organisation/entity/133")
+                && rootNode.getNarrower() != null && !rootNode.getNarrower().isEmpty()
+                && rootNode.getNarrower().stream().anyMatch(internalNode -> internalNode.getLabel().equalsIgnoreCase("National Mooring Network Facility, Integrated Marine Observing System (IMOS)")
+                && internalNode.getNarrower() != null && !internalNode.getNarrower().isEmpty()
+                && internalNode.getNarrower().stream().anyMatch(leafNode -> leafNode.getLabel().equalsIgnoreCase("New South Wales Moorings Sub-Facility, Integrated Marine Observing System (IMOS)")))));
+
+        // to further confirm the vocab service accuracy, this IMOS root node doesn't have much information
+        // notice the url has "organisation_classes/category"
+        // http://vocab.aodn.org.au/def/organisation/entity/133 is related to but not directly sit ABOVE http://vocab.aodn.org.au/def/organisation_classes/category/26
+        // https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-category-vocabulary/version-2-5/resource.json?uri=http://vocab.aodn.org.au/def/organisation_classes/category/26
+        Assertions.assertTrue(organisationVocabsFromArdc.stream().anyMatch(rootNode -> rootNode.getLabel().equalsIgnoreCase("Integrated Marine Observing System (IMOS)") && rootNode.getAbout().equals("http://vocab.aodn.org.au/def/organisation_classes/category/26")
+                && rootNode.getNarrower() == null));
+
+
+        final String expectedJson = readResourceFile("/databag/aodn_organisation_vocabs.json");
+        JSONAssert.assertEquals(
+                expectedJson,
+                mapper.valueToTree(organisationVocabsFromArdc).toPrettyString(),
                 JSONCompareMode.STRICT
         );
     }

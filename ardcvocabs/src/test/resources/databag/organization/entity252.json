@@ -1,0 +1,23 @@
+{ "format" : "linked-data-api", "version" : "0.2", "result" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/resource.json?uri=http://vocab.aodn.org.au/def/organisation/entity/252", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/resource.json?uri=http://vocab.aodn.org.au/def/organisation/entity/252", "extendedMetadataVersion" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/resource.json?_metadata=all&uri=http://vocab.aodn.org.au/def/organisation/entity/252", "primaryTopic" : {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/252", "broadMatch" : ["http://vocab.aodn.org.au/def/organisation_classes/category/3"], "contributor" : "http://editor.vocabs.ands.org.au/user/eMII_Atkins.Natalia_Admin", "creator" : "http://editor.vocabs.ands.org.au/user/Natalia-Atkins", "dcPublisher" : "eMarine Information Infrastructure (eMII)", "dcSource" : "Australian Ocean Data Network Organisation Register", "dctermsCreated" : "2015-07-13T10:38:15Z", "dctermsModified" : "2018-03-14T22:33:27Z", "definition" : "The University of Tasmania is an Australian university, which was founded in 1890. The University has three main campuses around Tasmania: Sandy Bay, Newnham and the Cradle Coast campuses, and numerous smaller campuses - mostly scattered around Hobart, but also including sites at Darlinghurst and Rozelle in Sydney.", "exactMatch" : ["http://seadatanet.maris2.nl/v_edmo/print.asp?n_code=4324"], "hiddenLabel" : [{"_value" : "UTAS", "_lang" : "en"}
+      ], "inScheme" : {"_about" : "http://vocab.aodn.org.au/def/organisation/1", "hasTopConcept" : ["http://vocab.aodn.org.au/def/organisation/entity/252"]}
+      , "narrower" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/253", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/252"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/254", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/252"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/255", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/252"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/256", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/252"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/257", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/252"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/258", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/252"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/259", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/252"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/260", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/252"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/261", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/252"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/29", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/252"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/405", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/252"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/546", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/252"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/557", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/252"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/558", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/252"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/617", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/252"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/662", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/252"]}
+      ], "prefLabel" : {"_value" : "University of Tasmania (UTAS)", "_lang" : "en"}
+      , "topConceptOf" : {"_about" : "http://vocab.aodn.org.au/def/organisation/1", "hasTopConcept" : ["http://vocab.aodn.org.au/def/organisation/entity/252"]}
+      , "type" : ["http://www.w3.org/2000/01/rdf-schema#Resource", "http://www.w3.org/2004/02/skos/core#Concept"]}
+    , "type" : ["http://purl.org/linked-data/api/vocab#ItemEndpoint", "http://purl.org/linked-data/api/vocab#Page"]}
+}

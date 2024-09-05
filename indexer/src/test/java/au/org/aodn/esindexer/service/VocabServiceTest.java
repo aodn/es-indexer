@@ -149,13 +149,10 @@ public class VocabServiceTest extends BaseTestClass {
         assertNotNull(platformVocabsFromEs);
         assertEquals(platformVocabsFromEs.size(), platformVocabsFromArdc.size());
 
-        JSONAssert.assertEquals(indexerObjectMapper.valueToTree(platformVocabsFromEs).toPrettyString(), indexerObjectMapper.valueToTree(platformVocabsFromArdc).toPrettyString(), JSONCompareMode.LENIENT);
-
-        // even more tests
-        String cannedData = readResourceFile("classpath:canned/aodn_platform_vocabs.json");
-        // This will assert that all fields in cannedData are present in actual data,
-        // but ignores any extra fields in actual data (scenario: source from ARDC is updated with more vocabs added)
-        JSONAssert.assertEquals(cannedData, indexerObjectMapper.valueToTree(platformVocabsFromEs).toPrettyString(), JSONCompareMode.LENIENT);
+        JSONAssert.assertEquals(
+                indexerObjectMapper.valueToTree(platformVocabsFromEs).toPrettyString(),
+                indexerObjectMapper.valueToTree(platformVocabsFromArdc).toPrettyString(),
+                JSONCompareMode.STRICT);
     }
 
     @Test
@@ -163,57 +160,15 @@ public class VocabServiceTest extends BaseTestClass {
         // read from ARDC
         List<VocabModel> organisationVocabsFromArdc = ardcVocabService.getVocabTreeFromArdcByType(VocabApiPaths.ORGANISATION_VOCAB);
 
-        // verify the contents randomly
-        assertNotNull(organisationVocabsFromArdc);
-
-        assertTrue(organisationVocabsFromArdc.stream().anyMatch(rootNode -> rootNode.getLabel().equalsIgnoreCase("State and Territory Government Departments and Agencies")
-                && rootNode.getNarrower() != null && !rootNode.getNarrower().isEmpty()
-                && rootNode.getNarrower().stream().anyMatch(internalNode -> internalNode.getLabel().equalsIgnoreCase("Victorian Government")
-                && internalNode.getNarrower() != null && !internalNode.getNarrower().isEmpty()
-                && internalNode.getNarrower().stream().anyMatch(leafNode -> leafNode.getLabel().equalsIgnoreCase("Victorian Institute of Marine Sciences (VIMS)")))));
-
-        assertTrue(organisationVocabsFromArdc.stream().anyMatch(rootNode -> rootNode.getLabel().equalsIgnoreCase("Industry")
-                && rootNode.getNarrower() != null && !rootNode.getNarrower().isEmpty()
-                && rootNode.getNarrower().stream().anyMatch(internalNode -> internalNode.getLabel().equalsIgnoreCase("EOMAP Australia Pty Ltd")
-                && internalNode.getNarrower() == null)));
-
-        assertTrue(organisationVocabsFromArdc.stream().anyMatch(rootNode -> rootNode.getLabel().equalsIgnoreCase("Local Government")
-                && rootNode.getNarrower() != null && !rootNode.getNarrower().isEmpty()
-                && rootNode.getNarrower().stream().anyMatch(internalNode -> internalNode.getLabel().equalsIgnoreCase("New South Wales Councils")
-                && internalNode.getNarrower() != null && !internalNode.getNarrower().isEmpty()
-                && internalNode.getNarrower().stream().anyMatch(leafNode -> leafNode.getLabel().equalsIgnoreCase("Hornsby Shire Council")))));
-
-        assertTrue(organisationVocabsFromArdc.stream().anyMatch(rootNode -> rootNode.getLabel().equalsIgnoreCase("Australian Universities")
-                && rootNode.getNarrower() != null && !rootNode.getNarrower().isEmpty()
-                && rootNode.getNarrower().stream().anyMatch(internalNode -> internalNode.getLabel().equalsIgnoreCase("Curtin University")
-                && internalNode.getNarrower() != null && !internalNode.getNarrower().isEmpty()
-                && internalNode.getNarrower().stream().anyMatch(leafNode -> leafNode.getLabel().equalsIgnoreCase("Centre for Marine Science and Technology (CMST), Curtin University")))));
-
-        // case vocab doesn't have broadMatch node, it became a root node
-        assertTrue(organisationVocabsFromArdc.stream().anyMatch(rootNode -> rootNode.getLabel().equalsIgnoreCase("Integrated Marine Observing System (IMOS)") && rootNode.getAbout().equals("http://vocab.aodn.org.au/def/organisation/entity/133")
-                && rootNode.getNarrower() != null && !rootNode.getNarrower().isEmpty()
-                && rootNode.getNarrower().stream().anyMatch(internalNode -> internalNode.getLabel().equalsIgnoreCase("National Mooring Network Facility, Integrated Marine Observing System (IMOS)")
-                && internalNode.getNarrower() != null && !internalNode.getNarrower().isEmpty()
-                && internalNode.getNarrower().stream().anyMatch(leafNode -> leafNode.getLabel().equalsIgnoreCase("New South Wales Moorings Sub-Facility, Integrated Marine Observing System (IMOS)")))));
-
-        // to further confirm the vocab service accuracy, this IMOS root node doesn't have much information
-        // notice the url has "organisation_classes/category"
-        // http://vocab.aodn.org.au/def/organisation/entity/133 is related to but not directly sit ABOVE http://vocab.aodn.org.au/def/organisation_classes/category/26
-        // https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-category-vocabulary/version-2-5/resource.json?uri=http://vocab.aodn.org.au/def/organisation_classes/category/26
-        assertTrue(organisationVocabsFromArdc.stream().anyMatch(rootNode -> rootNode.getLabel().equalsIgnoreCase("Integrated Marine Observing System (IMOS)") && rootNode.getAbout().equals("http://vocab.aodn.org.au/def/organisation_classes/category/26")
-                        && rootNode.getNarrower() == null));
-
         // read from Elastic search
         List<JsonNode> organisationVocabsFromEs = vocabService.getOrganisationVocabs();
         assertNotNull(organisationVocabsFromEs);
         assertEquals(organisationVocabsFromEs.size(), organisationVocabsFromArdc.size());
 
-        JSONAssert.assertEquals(indexerObjectMapper.valueToTree(organisationVocabsFromEs).toPrettyString(), indexerObjectMapper.valueToTree(organisationVocabsFromArdc).toPrettyString(), JSONCompareMode.LENIENT);
-
-        // even more tests
-        String cannedData = readResourceFile("classpath:canned/aodn_organisation_vocabs.json");
-        // This will assert that all fields in cannedData are present in actual data,
-        // but ignores any extra fields in actual data (scenario: source from ARDC is updated with more vocabs added)
-        JSONAssert.assertEquals(cannedData, indexerObjectMapper.valueToTree(organisationVocabsFromEs).toPrettyString(), JSONCompareMode.LENIENT);
+        JSONAssert.assertEquals(
+                indexerObjectMapper.valueToTree(organisationVocabsFromEs).toPrettyString(),
+                indexerObjectMapper.valueToTree(organisationVocabsFromArdc).toPrettyString(),
+                JSONCompareMode.STRICT
+        );
     }
 }

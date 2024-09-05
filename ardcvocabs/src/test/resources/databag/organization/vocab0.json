@@ -1,0 +1,168 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=0",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-organisation-vocabulary/version-2-5/concept.json",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=0&_metadata=all",
+    "first": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=0",
+    "isPartOf": {
+      "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json",
+      "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-organisation-vocabulary/version-2-5/concept.json",
+      "hasPart": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=0",
+      "type": "http://purl.org/linked-data/api/vocab#ListEndpoint"
+    },
+    "items": [
+      {
+        "_about": "http://vocab.aodn.org.au/def/organisation/entity/1",
+        "dctermsCreated": "2015-04-27T10:38:15Z",
+        "dctermsModified": "2018-08-24T01:46:08Z",
+        "definition": "The primary role of Defence is to defend Australia against armed attack. Australia's defence policy is founded on the principle of self-reliance in the direct defence of Australia, but with a capacity to do more where there are shared interests with partners and allies.",
+        "narrower": [
+          {
+            "_about": "http://vocab.aodn.org.au/def/organisation/entity/2",
+            "prefLabel": {
+              "_value": "Defence Science and Technology Organisation (DSTO), Department of Defence (DoD), Australian Government",
+              "_lang": "en"
+            }
+          },
+          {
+            "_about": "http://vocab.aodn.org.au/def/organisation/entity/4",
+            "prefLabel": {
+              "_value": "Australian Defence Force Academy (ADFA), Department of Defence (DoD), Australian Government",
+              "_lang": "en"
+            }
+          },
+          {
+            "_about": "http://vocab.aodn.org.au/def/organisation/entity/406",
+            "prefLabel": {
+              "_value": "Defence Science and Technology Group (DST Group), Department of Defence (DoD), Australian Government",
+              "_lang": "en"
+            }
+          },
+          {
+            "_about": "http://vocab.aodn.org.au/def/organisation/entity/5",
+            "prefLabel": {
+              "_value": "Royal Australian Navy (RAN), Department of Defence (DoD), Australian Government",
+              "_lang": "en"
+            }
+          },
+          {
+            "_about": "http://vocab.aodn.org.au/def/organisation/entity/580",
+            "prefLabel": {
+              "_value": "Australian Hydrographic Office (AHO), Department of Defence (DoD), Australian Government",
+              "_lang": "en"
+            }
+          }
+        ],
+        "prefLabel": {
+          "_value": "Department of Defence (DoD), Australian Government",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/organisation/entity/10",
+        "broader": [
+          {
+            "_about": "http://vocab.aodn.org.au/def/organisation/entity/9",
+            "prefLabel": {
+              "_value": "Australian Antarctic Division (AAD), Department of the Environment (DoE), Australian Government",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2015-04-27T10:38:15Z",
+        "dctermsModified": "2021-08-12T07:17:27Z",
+        "definition": "The Australian Antarctic Data Centre (AADC) was established in 1996 to provide long-term management of Australia's Antarctic data, thereby improving the value and impact of our scientific activities. The Data Centre is committed to the free and open exchange of scientific data, consistent with the Antarctic Treaty's position that \"to the greatest extent feasible and practicable scientific observations and results from Antarctica shall be exchanged and made freely available\". As Australia's Antarctic Mapping agency, the AADC supports the logistical operations of the Australian Antarctic Program. The AADC also incorporates a group of quantitative research scientists who value-add to the AADC's holdings and provide analytical research capability to the Antarctic Program.",
+        "prefLabel": {
+          "_value": "Australian Antarctic Data Centre (AADC), Australian Antarctic Division (AAD), Department of the Environment (DoE), Australian Government",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/organisation/entity/100",
+        "dctermsCreated": "2015-04-27T10:38:15Z",
+        "dctermsModified": "2018-05-08T02:50:33Z",
+        "definition": "Murphy Oil Corporation is an independent exploration and production company with a strong portfolio of global offshore and onshore assets delivering oil-weighted growth. Murphy produces oil and /or natural gas in the United States, Canada, and Malaysia and conducts exploration activities worldwide.",
+        "prefLabel": {
+          "_value": "Murphy Australia Oil Pty Ltd",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/organisation/entity/101",
+        "dctermsCreated": "2015-04-27T10:38:15Z",
+        "dctermsModified": "2018-05-08T02:50:42Z",
+        "definition": "Myriax Software specializes in the design, development and sales of Echoview, an advanced water column data processing software solution.",
+        "prefLabel": {
+          "_value": "Myriax",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/organisation/entity/102",
+        "dctermsCreated": "2015-04-27T10:38:15Z",
+        "dctermsModified": "2018-05-07T04:47:38Z",
+        "definition": "Museum Victoria is the state museum for the state of Victoria. It is Australia's largest public museum organisation. Museum Victoria\u2019s origins date back to 1854, with the founding of the National Museum of Victoria and the establishment, in 1870, of the Industrial and Technological Museum of Victoria (later known as the Science Museum of Victoria). By proclamation of the Museums Act 1983 (Vic.), these two institutions were amalgamated to form what is known today as Museum Victoria, governed by the Museums Board of Victoria. In 1996, Museum Victoria took over custodianship of the World Heritage listed Royal Exhibition Building.",
+        "prefLabel": {
+          "_value": "Museum Victoria",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/organisation/entity/103",
+        "dctermsCreated": "2015-04-27T10:38:15Z",
+        "dctermsModified": "2018-05-08T02:50:51Z",
+        "definition": "NGIS Australia commenced operations in 1993 from Perth, Western Australia. It is a provider of location-based technology solutions.",
+        "prefLabel": {
+          "_value": "NGIS Australia",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/organisation/entity/104",
+        "dctermsCreated": "2015-04-27T10:38:15Z",
+        "dctermsModified": "2018-05-08T02:51:05Z",
+        "definition": "Ocean Vision Environmental Research is a specialised marine consultancy that provides products and services for the monitoring of marine and estuarine environments.",
+        "prefLabel": {
+          "_value": "Ocean Vision Environmental Research Pty Ltd",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/organisation/entity/105",
+        "dctermsCreated": "2015-04-27T10:38:15Z",
+        "dctermsModified": "2018-05-09T04:59:35Z",
+        "definition": "Oceanwise was first initiated in 1998 by a group of dedicated young scientists to promote awareness of the Ningaloo environment. To achieve this goal, the group aimed to conduct original research and management initiatives in conjunction with the Department of Conservation and Environment, WA Universities and other public and private bodies.",
+        "prefLabel": {
+          "_value": "Oceanwise Expeditions",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/organisation/entity/106",
+        "dctermsCreated": "2015-04-27T10:38:15Z",
+        "dctermsModified": "2018-05-08T02:53:49Z",
+        "definition": "BMT Oceanica provides marine and coastal environmental consulting services.",
+        "prefLabel": {
+          "_value": "BMT Oceanica",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/organisation/entity/107",
+        "dctermsCreated": "2015-04-27T10:38:15Z",
+        "dctermsModified": "2018-05-08T02:54:01Z",
+        "prefLabel": {
+          "_value": "Oceanographic Field Services Pty Ltd",
+          "_lang": "en"
+        }
+      }
+    ],
+    "itemsPerPage": 10,
+    "next": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=1",
+    "page": 0,
+    "startIndex": 1,
+    "type": "http://purl.org/linked-data/api/vocab#Page"
+  }
+}

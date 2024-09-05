@@ -7,16 +7,18 @@ import java.net.URL;
 public class PageDownloader {
 
     // private static final String BASE_URL = "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=";
-    private static final String BASE_URL = "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-category-vocabulary/version-1-2/concept.json?_page=";
-    private static final int MAX_PAGES = 10;  // Set the maximum number of pages you expect (adjust as needed)
+    //private static final String BASE_URL = "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-category-vocabulary/version-1-2/concept.json?_page=";
+    // private static final String BASE_URL = "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-category-vocabulary/version-2-5/concept.json?_page=";
+    private static final String BASE_URL = "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=";
+    private static final int MAX_PAGES = 100;  // Set the maximum number of pages you expect (adjust as needed)
     private static final String OUTPUT_DIR = "/tmp";  // Change to the directory where you want to save files
 
     public static void main(String[] args) {
 
         // Start downloading each page
-        for (int i = 1; i <= MAX_PAGES; i++) {
+        for (int i = 51; i <= MAX_PAGES; i++) {
             String pageUrl = BASE_URL + i;
-            String fileName = "page" + i + ".json";
+            String fileName = "vocab" + i + ".json";
             try {
                 System.out.println("Downloading page " + i + " from " + pageUrl);
                 boolean success = downloadAndSaveResource(pageUrl, OUTPUT_DIR + File.separator + fileName);

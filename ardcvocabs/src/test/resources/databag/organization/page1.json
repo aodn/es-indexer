@@ -1,0 +1,175 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-category-vocabulary/version-2-5/concept.json?_page=1",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-organisation-category-vocabulary/version-2-5/concept.json",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-category-vocabulary/version-2-5/concept.json?_page=1&_metadata=all",
+    "first": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-category-vocabulary/version-2-5/concept.json?_page=0",
+    "isPartOf": {
+      "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-category-vocabulary/version-2-5/concept.json",
+      "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-organisation-category-vocabulary/version-2-5/concept.json",
+      "hasPart": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-category-vocabulary/version-2-5/concept.json?_page=1",
+      "type": "http://purl.org/linked-data/api/vocab#ListEndpoint"
+    },
+    "items": [
+      {
+        "_about": "http://vocab.aodn.org.au/def/organisation_classes/category/15",
+        "broader": [
+          {
+            "_about": "http://vocab.aodn.org.au/def/organisation_classes/category/9",
+            "prefLabel": {
+              "_value": "State and Territory Government Departments and Agencies",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2018-05-07T04:29:49Z",
+        "dctermsModified": "2023-11-10T05:37:48Z",
+        "definition": "Is the Australian state democratic administrative authority of South Australia.",
+        "prefLabel": {
+          "_value": "South Australian Government",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/organisation_classes/category/16",
+        "broader": [
+          {
+            "_about": "http://vocab.aodn.org.au/def/organisation_classes/category/9",
+            "prefLabel": {
+              "_value": "State and Territory Government Departments and Agencies",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2018-05-07T04:30:06Z",
+        "dctermsModified": "2018-05-07T05:55:02Z",
+        "definition": "Is the executive authority of the state of Tasmania, Australia.",
+        "prefLabel": {
+          "_value": "Tasmanian Government",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/organisation_classes/category/17",
+        "dctermsCreated": "2018-05-08T02:46:41Z",
+        "dctermsModified": "2023-11-10T04:41:35Z",
+        "definition": "Industry category",
+        "prefLabel": {
+          "_value": "Industry",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/organisation_classes/category/18",
+        "dctermsCreated": "2018-05-09T05:13:08Z",
+        "dctermsModified": "2018-05-09T05:17:04Z",
+        "definition": "Local Government Category",
+        "narrower": [
+          "http://vocab.aodn.org.au/def/organisation_classes/category/19",
+          "http://vocab.aodn.org.au/def/organisation_classes/category/20",
+          "http://vocab.aodn.org.au/def/organisation_classes/category/21",
+          "http://vocab.aodn.org.au/def/organisation_classes/category/22",
+          "http://vocab.aodn.org.au/def/organisation_classes/category/23",
+          "http://vocab.aodn.org.au/def/organisation_classes/category/24",
+          {
+            "_about": "http://vocab.aodn.org.au/def/organisation_classes/category/25",
+            "prefLabel": {
+              "_value": "Northern Territory Councils",
+              "_lang": "en"
+            }
+          }
+        ],
+        "prefLabel": {
+          "_value": "Local Government",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/organisation_classes/category/19",
+        "broader": [
+          "http://vocab.aodn.org.au/def/organisation_classes/category/18"
+        ],
+        "dctermsCreated": "2018-05-09T05:17:26Z",
+        "dctermsModified": "2018-05-09T05:17:48Z",
+        "definition": "Queensland Councils category",
+        "prefLabel": {
+          "_value": "Queensland Councils",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/organisation_classes/category/20",
+        "broader": [
+          "http://vocab.aodn.org.au/def/organisation_classes/category/18"
+        ],
+        "dctermsCreated": "2018-05-09T05:18:17Z",
+        "dctermsModified": "2018-05-09T05:24:43Z",
+        "definition": "New South Wales Councils category",
+        "prefLabel": {
+          "_value": "New South Wales Councils",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/organisation_classes/category/21",
+        "broader": [
+          "http://vocab.aodn.org.au/def/organisation_classes/category/18"
+        ],
+        "dctermsCreated": "2018-05-09T05:18:52Z",
+        "dctermsModified": "2018-05-09T05:19:04Z",
+        "definition": "Victorian Councils category",
+        "prefLabel": {
+          "_value": "Victorian Councils",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/organisation_classes/category/22",
+        "broader": [
+          "http://vocab.aodn.org.au/def/organisation_classes/category/18"
+        ],
+        "dctermsCreated": "2018-05-09T05:19:31Z",
+        "dctermsModified": "2018-05-09T05:25:08Z",
+        "definition": "Tasmanian Councils category",
+        "prefLabel": {
+          "_value": "Tasmanian Councils",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/organisation_classes/category/23",
+        "broader": [
+          "http://vocab.aodn.org.au/def/organisation_classes/category/18"
+        ],
+        "dctermsCreated": "2018-05-09T05:19:56Z",
+        "dctermsModified": "2018-05-09T05:20:14Z",
+        "definition": "South Australian Councils category",
+        "prefLabel": {
+          "_value": "South Australian Councils",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/organisation_classes/category/24",
+        "broader": [
+          "http://vocab.aodn.org.au/def/organisation_classes/category/18"
+        ],
+        "dctermsCreated": "2018-05-09T05:21:01Z",
+        "dctermsModified": "2018-05-09T05:21:13Z",
+        "definition": "Western Australian Councils category",
+        "prefLabel": {
+          "_value": "Western Australian Councils",
+          "_lang": "en"
+        }
+      }
+    ],
+    "itemsPerPage": 10,
+    "next": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-category-vocabulary/version-2-5/concept.json?_page=2",
+    "page": 1,
+    "prev": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-category-vocabulary/version-2-5/concept.json?_page=0",
+    "startIndex": 11,
+    "type": "http://purl.org/linked-data/api/vocab#Page"
+  }
+}
