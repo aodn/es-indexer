@@ -2,9 +2,9 @@
   "format": "linked-data-api",
   "version": "0.2",
   "result": {
-    "_about": "http://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/resource.json?uri=http://vocab.aodn.org.au/def/discovery_parameter/entity/390",
-    "definition": "http://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/resource.json?uri=http://vocab.aodn.org.au/def/discovery_parameter/entity/390",
-    "extendedMetadataVersion": "http://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/resource.json?_metadata=all&uri=http://vocab.aodn.org.au/def/discovery_parameter/entity/390",
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/resource.json?uri=http://vocab.aodn.org.au/def/discovery_parameter/entity/390",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/resource.json?uri=http://vocab.aodn.org.au/def/discovery_parameter/entity/390",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/resource.json?_metadata=all&uri=http://vocab.aodn.org.au/def/discovery_parameter/entity/390",
     "primaryTopic": {
       "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/390",
       "broadMatch": [

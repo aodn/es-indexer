@@ -1,0 +1,50 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/resource.json?uri=http://vocab.aodn.org.au/def/discovery_parameter/entity/14",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/resource.json?uri=http://vocab.aodn.org.au/def/discovery_parameter/entity/14",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/resource.json?_metadata=all&uri=http://vocab.aodn.org.au/def/discovery_parameter/entity/14",
+    "primaryTopic": {
+      "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/14",
+      "broadMatch": [
+        "http://vocab.aodn.org.au/def/parameter_classes/category/19"
+      ],
+      "contributor": "http://editor.vocabs.ands.org.au/user/eMII_Atkins.Natalia_Admin",
+      "creator": "http://editor.vocabs.ands.org.au/user/eMII_Mancini.Sebastien",
+      "dctermsCreated": "2015-08-07T00:57:51Z",
+      "dctermsModified": "2018-02-23T00:23:31Z",
+      "definition": "The amount (mass or moles) of the following pigments (chlorophyll-c1, chlorophyll-c2, chlorophyll-c1c2, chlorophyll-c3) in a known volume of any water body.",
+      "hiddenLabel": [
+        {
+          "_value": "TOT_CPHL_c",
+          "_lang": "en"
+        }
+      ],
+      "inScheme": {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/1",
+        "hasTopConcept": [
+          "http://vocab.aodn.org.au/def/discovery_parameter/entity/14"
+        ]
+      },
+      "prefLabel": {
+        "_value": "Concentration of total chlorophyll-c per unit volume of the water body",
+        "_lang": "en"
+      },
+      "topConceptOf": {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/1",
+        "hasTopConcept": [
+          "http://vocab.aodn.org.au/def/discovery_parameter/entity/14"
+        ]
+      },
+      "type": [
+        "http://www.w3.org/2000/01/rdf-schema#Resource",
+        "http://www.w3.org/2004/02/skos/core#Concept"
+      ]
+    },
+    "type": [
+      "http://purl.org/linked-data/api/vocab#ItemEndpoint",
+      "http://purl.org/linked-data/api/vocab#Page"
+    ]
+  }
+}

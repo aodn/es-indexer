@@ -30,9 +30,6 @@ public class IndexerExtController {
     protected VocabService vocabService;
     protected ArdcVocabService ardcVocabService;
 
-    @Value(AppConstants.ARDC_VOCAB_API_BASE)
-    protected String vocabApiBase;
-
     protected ObjectMapper indexerObjectMapper;
     @Autowired
     public void setIndexerObjectMapper(ObjectMapper indexerObjectMapper) {
@@ -70,7 +67,7 @@ public class IndexerExtController {
     @GetMapping(path="/ardc/parameter/vocabs")
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Get parameter vocabs from ARDC directly")
     public ResponseEntity<List<JsonNode>> getParameterVocabsFromArdc() {
-        List<VocabModel> vocabs = ardcVocabService.getVocabTreeFromArdcByType(vocabApiBase, VocabApiPaths.PARAMETER_VOCAB);
+        List<VocabModel> vocabs = ardcVocabService.getVocabTreeFromArdcByType(VocabApiPaths.PARAMETER_VOCAB);
         return ResponseEntity.ok(indexerObjectMapper.valueToTree(vocabs));
     }
 
@@ -78,7 +75,7 @@ public class IndexerExtController {
     @GetMapping(path="/ardc/platform/vocabs")
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Get platform vocabs from ARDC directly")
     public ResponseEntity<List<JsonNode>> getPlatformVocabsFromArdc() {
-        List<VocabModel> vocabs = ardcVocabService.getVocabTreeFromArdcByType(vocabApiBase, VocabApiPaths.PLATFORM_VOCAB);
+        List<VocabModel> vocabs = ardcVocabService.getVocabTreeFromArdcByType(VocabApiPaths.PLATFORM_VOCAB);
         return ResponseEntity.ok(indexerObjectMapper.valueToTree(vocabs));
     }
 
@@ -86,7 +83,7 @@ public class IndexerExtController {
     @GetMapping(path="/ardc/organisation/vocabs")
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Get organisation vocabs from ARDC directly")
     public ResponseEntity<List<JsonNode>> getOrganisationVocabsFromArdc() {
-        List<VocabModel> vocabs = ardcVocabService.getVocabTreeFromArdcByType(vocabApiBase, VocabApiPaths.ORGANISATION_VOCAB);
+        List<VocabModel> vocabs = ardcVocabService.getVocabTreeFromArdcByType(VocabApiPaths.ORGANISATION_VOCAB);
         return ResponseEntity.ok(indexerObjectMapper.valueToTree(vocabs));
     }
 

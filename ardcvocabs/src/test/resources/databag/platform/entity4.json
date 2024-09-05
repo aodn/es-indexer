@@ -1,0 +1,53 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/resource.json?uri=http://vocab.aodn.org.au/def/discovery_parameter/entity/4",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/resource.json?uri=http://vocab.aodn.org.au/def/discovery_parameter/entity/4",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/resource.json?_metadata=all&uri=http://vocab.aodn.org.au/def/discovery_parameter/entity/4",
+    "primaryTopic": {
+      "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/4",
+      "broadMatch": [
+        "http://vocab.aodn.org.au/def/parameter_classes/category/2"
+      ],
+      "contributor": "http://editor.vocabs.ands.org.au/user/eMII_Atkins.Natalia_Admin",
+      "creator": "http://editor.vocabs.ands.org.au/user/eMII_Mancini.Sebastien",
+      "dctermsCreated": "2015-08-06T06:47:24Z",
+      "dctermsModified": "2023-06-27T01:36:04Z",
+      "definition": "Direction (related to true north) from which the peak period waves are coming from analysed by spectral method.",
+      "hiddenLabel": [
+        {
+          "_value": "WPDI",
+          "_lang": "en"
+        }
+      ],
+      "inScheme": {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/1",
+        "hasTopConcept": [
+          "http://vocab.aodn.org.au/def/discovery_parameter/entity/4"
+        ]
+      },
+      "prefLabel": {
+        "_value": "Direction at spectral maximum of waves on the water body",
+        "_lang": "en"
+      },
+      "relatedMatch": [
+        "http://vocab.nerc.ac.uk/collection/P07/current/I8P5MQ0F/"
+      ],
+      "topConceptOf": {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/1",
+        "hasTopConcept": [
+          "http://vocab.aodn.org.au/def/discovery_parameter/entity/4"
+        ]
+      },
+      "type": [
+        "http://www.w3.org/2000/01/rdf-schema#Resource",
+        "http://www.w3.org/2004/02/skos/core#Concept"
+      ]
+    },
+    "type": [
+      "http://purl.org/linked-data/api/vocab#ItemEndpoint",
+      "http://purl.org/linked-data/api/vocab#Page"
+    ]
+  }
+}

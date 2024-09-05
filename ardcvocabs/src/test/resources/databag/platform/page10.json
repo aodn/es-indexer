@@ -1,0 +1,114 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=10",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=10&_metadata=all",
+    "first": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=0",
+    "isPartOf": {
+      "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+      "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+      "hasPart": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=10",
+      "type": "http://purl.org/linked-data/api/vocab#ListEndpoint"
+    },
+    "items": [
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/738",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:23:55Z",
+        "prefLabel": {
+          "_value": "Concentration of dinoxanthin per unit volume of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/739",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:23:56Z",
+        "prefLabel": {
+          "_value": "Concentration of diatoxanthin per unit volume of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/740",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:23:56Z",
+        "prefLabel": {
+          "_value": "Concentration of zeaxanthin per unit volume of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/741",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:23:56Z",
+        "prefLabel": {
+          "_value": "Concentration of lycopene per unit volume of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/742",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:23:57Z",
+        "prefLabel": {
+          "_value": "Concentration of diadinoxanthin per unit volume of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/743",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:23:57Z",
+        "prefLabel": {
+          "_value": "Concentration of gyroxanthin diester per unit volume of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/744",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:23:58Z",
+        "prefLabel": {
+          "_value": "Concentration of diadinochrome per unit volume of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/745",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2020-10-13T05:48:05Z",
+        "prefLabel": {
+          "_value": "Concentration of chlorophyll-b per unit volume of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/746",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2020-10-13T05:50:01Z",
+        "prefLabel": {
+          "_value": "Concentration of divinyl chlorophyll-b per unit volume of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/747",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:23:58Z",
+        "prefLabel": {
+          "_value": "Concentration of 19-hexanoyloxyfucoxanthin per unit volume of the water body",
+          "_lang": "en"
+        }
+      }
+    ],
+    "itemsPerPage": 10,
+    "next": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=11",
+    "page": 10,
+    "prev": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=9",
+    "startIndex": 101,
+    "type": "http://purl.org/linked-data/api/vocab#Page"
+  }
+}

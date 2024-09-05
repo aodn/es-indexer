@@ -1,0 +1,116 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=6",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=6&_metadata=all",
+    "first": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=0",
+    "isPartOf": {
+      "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+      "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+      "hasPart": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=6",
+      "type": "http://purl.org/linked-data/api/vocab#ListEndpoint"
+    },
+    "items": [
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/573",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:23:45Z",
+        "prefLabel": {
+          "_value": "Downwelling vector irradiance as photons (PAR wavelengths) in the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/574",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-12-11T04:39:47Z",
+        "prefLabel": {
+          "_value": "Sea-floor depth below surface of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/576",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-10-24T02:33:47Z",
+        "prefLabel": {
+          "_value": "Downwelling vector irradiance as energy (solar (300-3000nm) wavelengths) in the atmosphere",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/590",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:23:46Z",
+        "prefLabel": {
+          "_value": "Temperature anomaly of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/591",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:23:46Z",
+        "prefLabel": {
+          "_value": "Practical salinity anomaly of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/596",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:23:46Z",
+        "prefLabel": {
+          "_value": "Detection of acoustic tag",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/597",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:23:47Z",
+        "prefLabel": {
+          "_value": "Sound recorded in the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/6",
+        "dctermsCreated": "2015-08-07T00:39:35Z",
+        "dctermsModified": "2018-10-24T03:03:58Z",
+        "definition": "Heat exchange due to difference in temperature between air and water.",
+        "prefLabel": {
+          "_value": "Sensible heat flux",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/629",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:23:47Z",
+        "definition": "The amount of colored organic compounds (sometimes called yellow substance or gelbstoff) dissolved in a specified amount of water from any body of fresh or salt water",
+        "prefLabel": {
+          "_value": "Colored Dissolved Organic Matter",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/631",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:23:48Z",
+        "prefLabel": {
+          "_value": "Ocean heat content",
+          "_lang": "en"
+        }
+      }
+    ],
+    "itemsPerPage": 10,
+    "next": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=7",
+    "page": 6,
+    "prev": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=5",
+    "startIndex": 61,
+    "type": "http://purl.org/linked-data/api/vocab#Page"
+  }
+}

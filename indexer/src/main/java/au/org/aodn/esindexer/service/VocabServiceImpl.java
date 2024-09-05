@@ -52,19 +52,6 @@ public class VocabServiceImpl implements VocabService {
     protected ObjectMapper indexerObjectMapper;
     protected ArdcVocabService ardcVocabService;
 
-    @Autowired
-    public VocabServiceImpl(
-            ArdcVocabService ardcVocabService,
-            ObjectMapper indexerObjectMapper,
-            ElasticsearchClient portalElasticsearchClient,
-            ElasticSearchIndexService elasticSearchIndexService) {
-
-        this.indexerObjectMapper = indexerObjectMapper;
-        this.ardcVocabService = ardcVocabService;
-        this.portalElasticsearchClient = portalElasticsearchClient;
-        this.elasticSearchIndexService = elasticSearchIndexService;
-    }
-
     protected boolean themeMatchConcept(ThemesModel theme, ConceptModel thatConcept) {
         for (ConceptModel thisConcept : theme.getConcepts()) {
                 /*
@@ -83,6 +70,18 @@ public class VocabServiceImpl implements VocabService {
         return false;
     }
 
+    @Autowired
+    public VocabServiceImpl(
+            ArdcVocabService ardcVocabService,
+            ObjectMapper indexerObjectMapper,
+            ElasticsearchClient portalElasticsearchClient,
+            ElasticSearchIndexService elasticSearchIndexService) {
+
+        this.indexerObjectMapper = indexerObjectMapper;
+        this.ardcVocabService = ardcVocabService;
+        this.portalElasticsearchClient = portalElasticsearchClient;
+        this.elasticSearchIndexService = elasticSearchIndexService;
+    }
     /*
     this method for analysing the vocabularies of a record aka bottom-level vocabs (found in the themes section)
     and returning the second-level vocabularies that match (1 level up from the bottom-level vocabularies)

@@ -1,0 +1,121 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=20",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=20&_metadata=all",
+    "first": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=0",
+    "isPartOf": {
+      "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+      "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+      "hasPart": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=20",
+      "type": "http://purl.org/linked-data/api/vocab#ListEndpoint"
+    },
+    "items": [
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/50",
+        "dctermsCreated": "2018-10-31T04:39:27Z",
+        "dctermsModified": "2018-10-31T04:42:45Z",
+        "prefLabel": {
+          "_value": "Concentration of nitrite {NO2} per unit volume of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/51",
+        "dctermsCreated": "2018-10-31T05:02:16Z",
+        "dctermsModified": "2018-10-31T05:08:44Z",
+        "prefLabel": {
+          "_value": "Concentration of phycoerythrin per unit volume of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/52",
+        "dctermsCreated": "2018-10-31T22:56:08Z",
+        "dctermsModified": "2018-10-31T22:58:56Z",
+        "definition": "The amount (mass or moles) of the following pigments (divinyl chlorophyll-b and chlorophyll-b) in a known volume of any water body.",
+        "prefLabel": {
+          "_value": "Concentration of total chlorophyll-b per unit volume of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/53",
+        "dctermsCreated": "2018-12-11T05:00:25Z",
+        "dctermsModified": "2018-12-11T05:05:25Z",
+        "prefLabel": {
+          "_value": "Concentration of phosphate (water soluble reactive) per unit volume of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/59",
+        "dctermsCreated": "2021-07-20T05:56:22Z",
+        "dctermsModified": "2021-07-20T05:59:26Z",
+        "definition": "Inherent optical property of natural waters. Describes the intensity loss of a light beam through a unit volume of water due to absorption.",
+        "prefLabel": {
+          "_value": "Total absorption coefficient in the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/58",
+        "dctermsCreated": "2021-07-20T05:55:33Z",
+        "dctermsModified": "2021-07-20T05:59:14Z",
+        "definition": "Inherent optical property of natural waters. Describes the intensity loss of a light beam through a unit volume of water due to scattering and absorption.",
+        "prefLabel": {
+          "_value": "Total attenuation coefficient in the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/54",
+        "dctermsCreated": "2021-07-20T05:50:11Z",
+        "dctermsModified": "2021-07-20T05:58:22Z",
+        "definition": "Inherent optical property of natural waters. Describes the reflection of light from a unit volume of water back to the incident direction. Integral of the volume scattering function in the backward direction from 90 to 180 degrees.",
+        "prefLabel": {
+          "_value": "Total backscattering coefficient in the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/55",
+        "dctermsCreated": "2021-07-20T05:52:11Z",
+        "dctermsModified": "2021-07-20T05:58:41Z",
+        "definition": "Inherent optical property of natural waters. Describes the reflection of light by particles from a unit volume of water back to the incident direction. Integral of the particle volume scattering function in the backward direction from 90 to 180 degrees.",
+        "prefLabel": {
+          "_value": "Particle backscattering coefficient in the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/56",
+        "dctermsCreated": "2021-07-20T05:53:33Z",
+        "dctermsModified": "2021-07-20T05:58:51Z",
+        "definition": "Inherent optical property of natural waters. Describes the angular dependence of scattered light from an incident light beam.",
+        "prefLabel": {
+          "_value": "Total volume scattering function in the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/57",
+        "dctermsCreated": "2021-07-20T05:54:31Z",
+        "dctermsModified": "2023-08-10T03:11:03Z",
+        "definition": "Inherent optical property of natural waters. Describes the angular dependence of scattered light by particles from an incident light beam.",
+        "prefLabel": {
+          "_value": "Particle volume scattering function in the water body",
+          "_lang": "en"
+        }
+      }
+    ],
+    "itemsPerPage": 10,
+    "next": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=21",
+    "page": 20,
+    "prev": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=19",
+    "startIndex": 201,
+    "type": "http://purl.org/linked-data/api/vocab#Page"
+  }
+}

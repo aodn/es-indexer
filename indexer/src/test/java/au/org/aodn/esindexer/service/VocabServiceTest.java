@@ -3,6 +3,8 @@ package au.org.aodn.esindexer.service;
 import au.org.aodn.ardcvocabs.model.VocabApiPaths;
 import au.org.aodn.ardcvocabs.model.VocabModel;
 import au.org.aodn.ardcvocabs.service.ArdcVocabService;
+import au.org.aodn.ardcvocabs.service.ArdcVocabServiceImpl;
+import au.org.aodn.ardcvocabs.service.ArdcVocabServiceImplTest;
 import au.org.aodn.esindexer.BaseTestClass;
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.stac.model.ConceptModel;
@@ -11,6 +13,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONException;
 import org.junit.jupiter.api.*;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -22,6 +25,7 @@ import java.util.*;
 // More details: https://www.baeldung.com/jsonassert#overview, https://github.com/skyscreamer/JSONassert
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
+import org.springframework.web.client.RestTemplate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -125,7 +129,7 @@ public class VocabServiceTest extends BaseTestClass {
     @Test
     void testProcessParameterVocabs() throws IOException, JSONException {
         // read from ARDC
-        List<VocabModel> parameterVocabsFromArdc = ardcVocabService.getVocabTreeFromArdcByType(AppConstants.ARDC_VOCAB_API_BASE, VocabApiPaths.PARAMETER_VOCAB);
+        List<VocabModel> parameterVocabsFromArdc = ardcVocabService.getVocabTreeFromArdcByType(VocabApiPaths.PARAMETER_VOCAB);
 
         // verify the contents randomly
         assertNotNull(parameterVocabsFromArdc);
@@ -172,7 +176,7 @@ public class VocabServiceTest extends BaseTestClass {
     @Test
     void testProcessPlatformVocabs() throws IOException, JSONException {
         // read from ARDC
-        List<VocabModel> platformVocabsFromArdc = ardcVocabService.getVocabTreeFromArdcByType(AppConstants.ARDC_VOCAB_API_BASE, VocabApiPaths.PLATFORM_VOCAB);
+        List<VocabModel> platformVocabsFromArdc = ardcVocabService.getVocabTreeFromArdcByType(VocabApiPaths.PLATFORM_VOCAB);
 
         // verify the contents randomly
         assertNotNull(platformVocabsFromArdc);
@@ -217,7 +221,7 @@ public class VocabServiceTest extends BaseTestClass {
     @Test
     void testProcessOrganisationVocabs() throws IOException, JSONException {
         // read from ARDC
-        List<VocabModel> organisationVocabsFromArdc = ardcVocabService.getVocabTreeFromArdcByType(AppConstants.ARDC_VOCAB_API_BASE, VocabApiPaths.ORGANISATION_VOCAB);
+        List<VocabModel> organisationVocabsFromArdc = ardcVocabService.getVocabTreeFromArdcByType(VocabApiPaths.ORGANISATION_VOCAB);
 
         // verify the contents randomly
         assertNotNull(organisationVocabsFromArdc);

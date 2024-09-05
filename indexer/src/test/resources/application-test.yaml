@@ -21,5 +21,6 @@ elasticsearch:
 
 logging:
   level:
+    au.org.aodn.ardcvocabs.service: DEBUG
     org.hibernate.SQL: DEBUG
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE

@@ -1,0 +1,114 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=8",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=8&_metadata=all",
+    "first": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=0",
+    "isPartOf": {
+      "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+      "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+      "hasPart": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=8",
+      "type": "http://purl.org/linked-data/api/vocab#ListEndpoint"
+    },
+    "items": [
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/649",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:23:51Z",
+        "prefLabel": {
+          "_value": "Normalised water-leaving radiance from the water body determined from Lw_Q",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/650",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:23:51Z",
+        "prefLabel": {
+          "_value": "Downwelling vector irradiance as energy in the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/651",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2020-09-08T04:26:20Z",
+        "prefLabel": {
+          "_value": "Downwelling vector irradiance as energy in the atmosphere",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/652",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:23:52Z",
+        "prefLabel": {
+          "_value": "Sky radiance as energy in the atmosphere",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/653",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:23:52Z",
+        "prefLabel": {
+          "_value": "Upwelling radiance as energy in the atmosphere",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/654",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-10-24T02:48:55Z",
+        "prefLabel": {
+          "_value": "Concentration of suspended particulate material per unit volume of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/655",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:23:53Z",
+        "prefLabel": {
+          "_value": "Concentration of suspended particulate material (organic) per unit volume of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/656",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:23:53Z",
+        "prefLabel": {
+          "_value": "Concentration of suspended particulate material (inorganic) per unit volume of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/658",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:23:53Z",
+        "prefLabel": {
+          "_value": "Concentration of antheraxanthin per unit volume of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/659",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:23:53Z",
+        "prefLabel": {
+          "_value": "Concentration of canthaxanthin per unit volume of the water body",
+          "_lang": "en"
+        }
+      }
+    ],
+    "itemsPerPage": 10,
+    "next": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=9",
+    "page": 8,
+    "prev": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=7",
+    "startIndex": 81,
+    "type": "http://purl.org/linked-data/api/vocab#Page"
+  }
+}

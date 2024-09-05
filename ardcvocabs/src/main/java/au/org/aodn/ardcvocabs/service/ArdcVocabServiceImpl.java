@@ -5,7 +5,8 @@ import au.org.aodn.ardcvocabs.model.VocabModel;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.TextNode;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
@@ -14,8 +15,9 @@ import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-@Slf4j
 public class ArdcVocabServiceImpl implements ArdcVocabService {
+
+    protected Logger log = LoggerFactory.getLogger(ArdcVocabServiceImpl.class);
 
     @Value("${ardcvocabs.baseUrl:https://vocabs.ardc.edu.au/repository/api/lda/aodn}")
     protected String vocabApiBase;
@@ -102,9 +104,10 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
         String url = String.format(vocabApiBase + vocabApiPaths.getVocabApiPath());
 
         while (url != null && !url.isEmpty()) {
-            log.debug("Query api -> {}", url);
             try {
+                log.debug("getVocabLeafNodes -> {}", url);
                 ObjectNode r = restTemplate.getForObject(url, ObjectNode.class);
+
                 if (r != null && !r.isEmpty()) {
                     JsonNode node = r.get("result");
 
@@ -113,7 +116,7 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
                             // Now we need to construct link to detail resources
                             String dl = String.format(vocabApiBase + vocabApiPaths.getVocabDetailsApiPath(), about.apply(j));
                             try {
-                                log.debug("Query api -> {}", dl);
+                                log.debug("getVocabLeafNodes -> {}", dl);
                                 ObjectNode d = restTemplate.getForObject(dl, ObjectNode.class);
 
                                 if(isNodeValid.apply(d, "result") && isNodeValid.apply(d.get("result"), "primaryTopic")) {

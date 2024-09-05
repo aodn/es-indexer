@@ -1,0 +1,121 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=4",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=4&_metadata=all",
+    "first": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=0",
+    "isPartOf": {
+      "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+      "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+      "hasPart": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=4",
+      "type": "http://purl.org/linked-data/api/vocab#ListEndpoint"
+    },
+    "items": [
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/405",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:23:39Z",
+        "prefLabel": {
+          "_value": "Precipitation duration (liquid water equivalent) in the atmosphere",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/406",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-10-24T02:36:52Z",
+        "prefLabel": {
+          "_value": "Wind stress on the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/407",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:23:40Z",
+        "prefLabel": {
+          "_value": "Phytoplankton Colour Index",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/411",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2023-06-27T01:53:57Z",
+        "definition": "The average height of the highest one third of the waves, where the height is defined as the vertical distance from a wave trough to the following wave crest.",
+        "prefLabel": {
+          "_value": "Significant height of waves on the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/412",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2023-06-27T01:30:21Z",
+        "definition": "The mean height of waves on the water body analysed by zero crossing method.",
+        "prefLabel": {
+          "_value": "Average height of waves on the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/413",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2023-06-27T01:52:22Z",
+        "definition": "The root mean square wave height analysed by zero crossing method.",
+        "prefLabel": {
+          "_value": "Root mean square height of waves on the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/414",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2023-06-27T01:23:06Z",
+        "definition": "The mean of the highest ten per cent of trough to crest distances measured during the observation period.",
+        "prefLabel": {
+          "_value": "Average height of the highest 1/10th of waves on the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/417",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2021-04-21T06:12:28Z",
+        "definition": "The average period of the highest 1/3 of waves measured during a recording burst",
+        "prefLabel": {
+          "_value": "Average zero crossing period of the highest 1/3rd of waves on the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/422",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:23:41Z",
+        "definition": "The partial pressure of carbon dioxide in air",
+        "prefLabel": {
+          "_value": "Partial pressure of carbon dioxide in the atmosphere",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/425",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:23:41Z",
+        "definition": "The partial pressure of carbon dioxide in air in equilibrium with a water sample",
+        "prefLabel": {
+          "_value": "Partial pressure of carbon dioxide in the water body",
+          "_lang": "en"
+        }
+      }
+    ],
+    "itemsPerPage": 10,
+    "next": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=5",
+    "page": 4,
+    "prev": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=3",
+    "startIndex": 41,
+    "type": "http://purl.org/linked-data/api/vocab#Page"
+  }
+}

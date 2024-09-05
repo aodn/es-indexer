@@ -1,0 +1,119 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=3",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=3&_metadata=all",
+    "first": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=0",
+    "isPartOf": {
+      "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+      "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+      "hasPart": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=3",
+      "type": "http://purl.org/linked-data/api/vocab#ListEndpoint"
+    },
+    "items": [
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/380",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-12-11T05:05:02Z",
+        "definition": "Concentration of phosphate dissolved per unit mass of the water column. Solute may be expressed in terms of mass, volume or quantity of substance",
+        "prefLabel": {
+          "_value": "Concentration of phosphate {PO4} per unit mass of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/383",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-10-24T02:43:52Z",
+        "definition": "The speed of Eulerian flow in the water column",
+        "prefLabel": {
+          "_value": "Current speed in the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/386",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-10-24T02:32:29Z",
+        "prefLabel": {
+          "_value": "Thickness of precipitation amount (liquid water equivalent) in the atmosphere",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/390",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-10-24T02:34:33Z",
+        "prefLabel": {
+          "_value": "Horizontal visibility in the atmosphere",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/395",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-10-24T02:42:31Z",
+        "definition": "Maximum speed of the wind (distance moved per unit time by a parcel of air) parallel to the ground during a gust event (generally regarded as an increase over sustained speed of more than 5m/s lasting less than 20 seconds).",
+        "prefLabel": {
+          "_value": "Wind speed of gust in the atmosphere",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/396",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-10-24T02:37:23Z",
+        "prefLabel": {
+          "_value": "Wind to direction in the atmosphere",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/397",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:23:38Z",
+        "definition": "Visual observation using WMO code table 4677 or 4501",
+        "prefLabel": {
+          "_value": "Present weather in the atmosphere",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/399",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:23:38Z",
+        "prefLabel": {
+          "_value": "Acoustic signal return amplitude from the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/4",
+        "dctermsCreated": "2015-08-06T06:47:24Z",
+        "dctermsModified": "2023-06-27T01:36:04Z",
+        "definition": "Direction (related to true north) from which the peak period waves are coming from analysed by spectral method.",
+        "prefLabel": {
+          "_value": "Direction at spectral maximum of waves on the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/401",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-10-24T03:02:52Z",
+        "prefLabel": {
+          "_value": "Density of the water body",
+          "_lang": "en"
+        }
+      }
+    ],
+    "itemsPerPage": 10,
+    "next": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=4",
+    "page": 3,
+    "prev": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=2",
+    "startIndex": 31,
+    "type": "http://purl.org/linked-data/api/vocab#Page"
+  }
+}
