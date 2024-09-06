@@ -4,6 +4,10 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+/**
+ * A utility tools to download json from ARDC, it is not mean to be generic and likely one off so please
+ * make changes if you need to reuse it
+ */
 public class PageDownloader {
 
     // private static final String BASE_URL = "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=";
