@@ -1,0 +1,841 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdb:MD_Metadata xmlns:mdb="http://standards.iso.org/iso/19115/-3/mdb/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cat="http://standards.iso.org/iso/19115/-3/cat/1.0" xmlns:gfc="http://standards.iso.org/iso/19110/gfc/1.1" xmlns:cit="http://standards.iso.org/iso/19115/-3/cit/2.0" xmlns:gcx="http://standards.iso.org/iso/19115/-3/gcx/1.0" xmlns:gex="http://standards.iso.org/iso/19115/-3/gex/1.0" xmlns:lan="http://standards.iso.org/iso/19115/-3/lan/1.0" xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.1" xmlns:mas="http://standards.iso.org/iso/19115/-3/mas/1.0" xmlns:mcc="http://standards.iso.org/iso/19115/-3/mcc/1.0" xmlns:mco="http://standards.iso.org/iso/19115/-3/mco/1.0" xmlns:mda="http://standards.iso.org/iso/19115/-3/mda/1.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/2.0" xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/2.0" xmlns:mex="http://standards.iso.org/iso/19115/-3/mex/1.0" xmlns:mmi="http://standards.iso.org/iso/19115/-3/mmi/1.0" xmlns:mpc="http://standards.iso.org/iso/19115/-3/mpc/1.0" xmlns:mrc="http://standards.iso.org/iso/19115/-3/mrc/2.0" xmlns:mrd="http://standards.iso.org/iso/19115/-3/mrd/1.0" xmlns:mri="http://standards.iso.org/iso/19115/-3/mri/1.0" xmlns:mrl="http://standards.iso.org/iso/19115/-3/mrl/2.0" xmlns:mrs="http://standards.iso.org/iso/19115/-3/mrs/1.0" xmlns:msr="http://standards.iso.org/iso/19115/-3/msr/2.0" xmlns:mdq="http://standards.iso.org/iso/19157/-2/mdq/1.0" xmlns:mac="http://standards.iso.org/iso/19115/-3/mac/2.0" xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://standards.iso.org/iso/19115/-3/cat/1.0 http://standards.iso.org/iso/19115/-3/cat/1.0/cat.xsd http://standards.iso.org/iso/19115/-3/cit/2.0 http://standards.iso.org/iso/19115/-3/cit/2.0/cit.xsd http://standards.iso.org/iso/19115/-3/gcx/1.0 http://standards.iso.org/iso/19115/-3/gcx/1.0/gcx.xsd http://standards.iso.org/iso/19115/-3/gex/1.0 http://standards.iso.org/iso/19115/-3/gex/1.0/gex.xsd http://standards.iso.org/iso/19115/-3/lan/1.0 http://standards.iso.org/iso/19115/-3/lan/1.0/lan.xsd http://standards.iso.org/iso/19115/-3/srv/2.0 http://standards.iso.org/iso/19115/-3/srv/2.0/srv.xsd http://standards.iso.org/iso/19115/-3/mas/1.0 http://standards.iso.org/iso/19115/-3/mas/1.0/mas.xsd http://standards.iso.org/iso/19115/-3/mcc/1.0 http://standards.iso.org/iso/19115/-3/mcc/1.0/mcc.xsd http://standards.iso.org/iso/19115/-3/mco/1.0 http://standards.iso.org/iso/19115/-3/mco/1.0/mco.xsd http://standards.iso.org/iso/19115/-3/mda/2.0 http://standards.iso.org/iso/19115/-3/mda/2.0/mda.xsd http://standards.iso.org/iso/19115/-3/mdb/2.0 http://standards.iso.org/iso/19115/-3/mdb/2.0/mdb.xsd http://standards.iso.org/iso/19115/-3/mds/2.0 http://standards.iso.org/iso/19115/-3/mds/2.0/mds.xsd http://standards.iso.org/iso/19115/-3/mdt/2.0 http://standards.iso.org/iso/19115/-3/mdt/2.0/mdt.xsd http://standards.iso.org/iso/19115/-3/mex/1.0 http://standards.iso.org/iso/19115/-3/mex/1.0/mex.xsd http://standards.iso.org/iso/19115/-3/mmi/1.0 http://standards.iso.org/iso/19115/-3/mmi/1.0/mmi.xsd http://standards.iso.org/iso/19115/-3/mpc/1.0 http://standards.iso.org/iso/19115/-3/mpc/1.0/mpc.xsd http://standards.iso.org/iso/19115/-3/mrc/2.0 http://standards.iso.org/iso/19115/-3/mrc/2.0/mrc.xsd http://standards.iso.org/iso/19115/-3/mrd/1.0 http://standards.iso.org/iso/19115/-3/mrd/1.0/mrd.xsd http://standards.iso.org/iso/19115/-3/mri/1.0 http://standards.iso.org/iso/19115/-3/mri/1.0/mri.xsd http://standards.iso.org/iso/19115/-3/mrl/2.0 http://standards.iso.org/iso/19115/-3/mrl/2.0/mrl.xsd http://standards.iso.org/iso/19115/-3/mrs/1.0 http://standards.iso.org/iso/19115/-3/mrs/1.0/mrs.xsd http://standards.iso.org/iso/19115/-3/msr/2.0 http://standards.iso.org/iso/19115/-3/msr/2.0/msr.xsd http://standards.iso.org/iso/19157/-2/mdq/1.0 http://standards.iso.org/iso/19157/-2/mdq/1.0/mdq.xsd http://standards.iso.org/iso/19115/-3/mac/2.0 http://standards.iso.org/iso/19115/-3/mac/2.0/mac.xsd http://standards.iso.org/iso/19115/-3/gco/1.0 http://standards.iso.org/iso/19115/-3/gco/1.0/gco.xsd http://standards.iso.org/iso/19115/-3/gmw/1.0 http://standards.iso.org/iso/19115/-3/gmw/1.0/gmw.xsd http://www.opengis.net/gml/3.2 http://schemas.opengis.net/gml/3.2.1/gml.xsd http://www.w3.org/1999/xlink http://www.w3.org/1999/xlink.xsd">
+    <mdb:metadataIdentifier>
+        <mcc:MD_Identifier>
+            <mcc:code>
+                <gco:CharacterString>451eb5a7-7a45-44bf-bcf6-1b5139abd006</gco:CharacterString>
+            </mcc:code>
+            <mcc:codeSpace>
+                <gco:CharacterString>urn:uuid</gco:CharacterString>
+            </mcc:codeSpace>
+        </mcc:MD_Identifier>
+    </mdb:metadataIdentifier>
+    <mdb:defaultLocale xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0" xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0">
+        <lan:PT_Locale id="EN">
+            <lan:language>
+                <lan:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="eng" />
+            </lan:language>
+            <lan:characterEncoding>
+                <lan:MD_CharacterSetCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_CharacterSetCode" codeListValue="utf8" />
+            </lan:characterEncoding>
+        </lan:PT_Locale>
+    </mdb:defaultLocale>
+    <mdb:metadataScope xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0" xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0">
+        <mdb:MD_MetadataScope>
+            <mdb:resourceScope>
+                <mcc:MD_ScopeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ScopeCode" codeListValue="dataset" />
+            </mdb:resourceScope>
+            <mdb:name>
+                <gco:CharacterString>IMAS Dataset level record</gco:CharacterString>
+            </mdb:name>
+        </mdb:MD_MetadataScope>
+    </mdb:metadataScope>
+    <mdb:contact xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0" xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0">
+        <!-- HARD-CODED CONTENT - TO EDIT: Content of this section is set by template. IMAS is defined here as the 'distributor' contact for all metadata created using this template-->
+        <cit:CI_Responsibility>
+            <cit:role>
+                <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="distributor" />
+            </cit:role>
+            <cit:party>
+                <cit:CI_Organisation>
+                    <cit:name>
+                        <gco:CharacterString>IMAS Data Manager</gco:CharacterString>
+                    </cit:name>
+                    <cit:individual>
+                        <cit:CI_Individual>
+                            <cit:contactInfo>
+                                <cit:CI_Contact>
+                                    <cit:address>
+                                        <cit:CI_Address>
+                                            <cit:deliveryPoint>
+                                                <gco:CharacterString>Institute for Marine and Antarctic Studies</gco:CharacterString>
+                                            </cit:deliveryPoint>
+                                            <cit:deliveryPoint>
+                                                <gco:CharacterString>Private Bag 129</gco:CharacterString>
+                                            </cit:deliveryPoint>
+                                            <cit:city>
+                                                <gco:CharacterString>Hobart</gco:CharacterString>
+                                            </cit:city>
+                                            <cit:administrativeArea>
+                                                <gco:CharacterString>Tasmania</gco:CharacterString>
+                                            </cit:administrativeArea>
+                                            <cit:postalCode>
+                                                <gco:CharacterString>7001</gco:CharacterString>
+                                            </cit:postalCode>
+                                            <cit:country>
+                                                <gco:CharacterString>Australia</gco:CharacterString>
+                                            </cit:country>
+                                            <cit:electronicMailAddress>
+                                                <gco:CharacterString>IMAS.DataManager@utas.edu.au</gco:CharacterString>
+                                            </cit:electronicMailAddress>
+                                        </cit:CI_Address>
+                                    </cit:address>
+                                    <cit:onlineResource>
+                                        <cit:CI_OnlineResource>
+                                            <cit:linkage>
+                                                <gco:CharacterString>https://imas.utas.edu.au</gco:CharacterString>
+                                            </cit:linkage>
+                                            <cit:protocol>
+                                                <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
+                                            </cit:protocol>
+                                            <cit:name>
+                                                <gco:CharacterString>Institute for Marine and Antarctic Studies (IMAS) website</gco:CharacterString>
+                                            </cit:name>
+                                        </cit:CI_OnlineResource>
+                                    </cit:onlineResource>
+                                </cit:CI_Contact>
+                            </cit:contactInfo>
+                            <cit:positionName>
+                                <gco:CharacterString>Data Officer</gco:CharacterString>
+                            </cit:positionName>
+                        </cit:CI_Individual>
+                    </cit:individual>
+                </cit:CI_Organisation>
+            </cit:party>
+        </cit:CI_Responsibility>
+    </mdb:contact>
+    <mdb:dateInfo xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0" xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0">
+        <!-- ID2 -->
+        <!-- Date when metadata record was *created*. This is automatically generated by the tool when the user first creates their record (note that date of *creation* and date of *revision* will be different, if a user has not submitted a record on the same day as creation). This is user-editable, if they choose.-->
+        <cit:CI_Date>
+            <cit:date>
+                <gco:DateTime>2023-03-09T00:00:00</gco:DateTime>
+            </cit:date>
+            <cit:dateType>
+                <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode" codeListValue="creation" />
+            </cit:dateType>
+        </cit:CI_Date>
+    </mdb:dateInfo>
+    <mdb:dateInfo>
+        <cit:CI_Date>
+            <cit:date>
+                <gco:DateTime>2023-10-30T11:46:38</gco:DateTime>
+            </cit:date>
+            <cit:dateType>
+                <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode" codeListValue="revision" />
+            </cit:dateType>
+        </cit:CI_Date>
+    </mdb:dateInfo>
+    <mdb:metadataStandard xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0" xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0">
+        <!-- Details of the metadata standard applied in this XML file. These details are set in the XML. -->
+        <cit:CI_Citation>
+            <cit:title>
+                <gco:CharacterString>ISO 19115-3:2018</gco:CharacterString>
+            </cit:title>
+        </cit:CI_Citation>
+    </mdb:metadataStandard>
+    <mdb:metadataLinkage xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0" xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0">
+        <!-- Details for Point-of-Truth URLs. The catalogue URL is extracted from the "site contents" entry, and the UUID is generated by this tool. -->
+        <cit:CI_OnlineResource>
+            <cit:linkage>
+                <gco:CharacterString>https://metadata.imas.utas.edu.au/geonetwork/srv/eng/catalog.search#/metadata/451eb5a7-7a45-44bf-bcf6-1b5139abd006</gco:CharacterString>
+            </cit:linkage>
+            <cit:protocol>
+                <gco:CharacterString>WWW:LINK-1.0-http--metadata-URL</gco:CharacterString>
+            </cit:protocol>
+            <cit:description>
+                <gco:CharacterString>Point of truth URL of this metadata record</gco:CharacterString>
+            </cit:description>
+        </cit:CI_OnlineResource>
+    </mdb:metadataLinkage>
+    <mdb:identificationInfo xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0" xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0">
+        <mri:MD_DataIdentification>
+            <mri:citation>
+                <cit:CI_Citation>
+                    <cit:title>
+                        <gco:CharacterString>Central Kerguelen Plateau SC Cruise 26 dredge details</gco:CharacterString>
+                    </cit:title>
+                    <cit:date>
+                        <cit:CI_Date>
+                            <cit:date>
+                                <gco:Date>2023-04-21</gco:Date>
+                            </cit:date>
+                            <cit:dateType>
+                                <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                            </cit:dateType>
+                        </cit:CI_Date>
+                    </cit:date>
+                    <cit:identifier>
+                        <mcc:MD_Identifier>
+                            <mcc:authority>
+                                <cit:CI_Citation>
+                                    <cit:title>
+                                        <gco:CharacterString>Information and documentation - Digital object identifier system</gco:CharacterString>
+                                    </cit:title>
+                                    <cit:date>
+                                        <cit:CI_Date>
+                                            <cit:date>
+                                                <gco:Date>2023-04-21</gco:Date>
+                                            </cit:date>
+                                            <cit:dateType>
+                                                <cit:CI_DateTypeCode codeListValue="publication" codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode" />
+                                            </cit:dateType>
+                                        </cit:CI_Date>
+                                    </cit:date>
+                                    <cit:identifier>
+                                        <mcc:MD_Identifier>
+                                            <mcc:code>
+                                                <gco:CharacterString>ISO 26324:2012</gco:CharacterString>
+                                            </mcc:code>
+                                        </mcc:MD_Identifier>
+                                    </cit:identifier>
+                                </cit:CI_Citation>
+                            </mcc:authority>
+                            <mcc:code>
+                                <gco:CharacterString>doi:10.25959/ysv9-qw58</gco:CharacterString>
+                            </mcc:code>
+                        </mcc:MD_Identifier>
+                    </cit:identifier>
+                    <cit:identifier>
+                        <mcc:MD_Identifier>
+                            <mcc:code>
+                                <gco:CharacterString>https://doi.org/10.25959/ysv9-qw58</gco:CharacterString>
+                            </mcc:code>
+                        </mcc:MD_Identifier>
+                    </cit:identifier>
+                    <cit:citedResponsibleParty>
+                        <cit:CI_Responsibility>
+                            <cit:role>
+                                <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="resourceProvider" />
+                            </cit:role>
+                            <cit:party>
+                                <cit:CI_Organisation>
+                                    <cit:name>
+                                        <gco:CharacterString>Institute for Marine and Antarctic Studies (IMAS)</gco:CharacterString>
+                                    </cit:name>
+                                    <cit:contactInfo>
+                                        <cit:CI_Contact>
+                                            <cit:address>
+                                                <cit:CI_Address>
+                                                    <cit:deliveryPoint>
+                                                        <gco:CharacterString>Private Bag 129</gco:CharacterString>
+                                                    </cit:deliveryPoint>
+                                                    <cit:city>
+                                                        <gco:CharacterString>Hobart</gco:CharacterString>
+                                                    </cit:city>
+                                                    <cit:administrativeArea>
+                                                        <gco:CharacterString>Tasmania</gco:CharacterString>
+                                                    </cit:administrativeArea>
+                                                    <cit:postalCode>
+                                                        <gco:CharacterString>7001</gco:CharacterString>
+                                                    </cit:postalCode>
+                                                    <cit:country>
+                                                        <gco:CharacterString>Australia</gco:CharacterString>
+                                                    </cit:country>
+                                                    <cit:electronicMailAddress>
+                                                        <gco:CharacterString>IMAS.DataManager@utas.edu.au</gco:CharacterString>
+                                                    </cit:electronicMailAddress>
+                                                </cit:CI_Address>
+                                            </cit:address>
+                                        </cit:CI_Contact>
+                                    </cit:contactInfo>
+                                </cit:CI_Organisation>
+                            </cit:party>
+                        </cit:CI_Responsibility>
+                    </cit:citedResponsibleParty>
+                    <cit:citedResponsibleParty>
+                        <!--  At least one citedResponsibleParty must be entered by the user -->
+                        <cit:CI_Responsibility>
+                            <cit:role>
+                                <!-- Who9 -->
+                                <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="principalInvestigator" />
+                            </cit:role>
+                            <cit:party>
+                                <cit:CI_Organisation>
+                                    <cit:name>
+                                        <gco:CharacterString>Institute for Marine and Antarctic Studies (IMAS), University of Tasmania (UTAS)</gco:CharacterString>
+                                    </cit:name>
+                                    <cit:individual>
+                                        <cit:CI_Individual>
+                                            <cit:name>
+                                                <gco:CharacterString>Asimus, Jeremy</gco:CharacterString>
+                                            </cit:name>
+                                            <cit:contactInfo>
+                                                <cit:CI_Contact>
+                                                    <cit:address>
+                                                        <cit:CI_Address>
+                                                            <cit:deliveryPoint>
+                                                                <gco:CharacterString>Private Bag 129</gco:CharacterString>
+                                                            </cit:deliveryPoint>
+                                                            <cit:city>
+                                                                <gco:CharacterString>Hobart</gco:CharacterString>
+                                                            </cit:city>
+                                                            <cit:administrativeArea>
+                                                                <gco:CharacterString>TAS</gco:CharacterString>
+                                                            </cit:administrativeArea>
+                                                            <cit:postalCode>
+                                                                <gco:CharacterString>7001</gco:CharacterString>
+                                                            </cit:postalCode>
+                                                            <cit:country>
+                                                                <gco:CharacterString>Australia</gco:CharacterString>
+                                                            </cit:country>
+                                                            <cit:electronicMailAddress>
+                                                                <gco:CharacterString>jeremy.asimus@utas.edu.au</gco:CharacterString>
+                                                            </cit:electronicMailAddress>
+                                                        </cit:CI_Address>
+                                                    </cit:address>
+                                                    <cit:onlineResource>
+                                                        <!--  ORCID URL is collected from user-entered field. cit:name and cit:protocol are retained from template -->
+                                                        <cit:CI_OnlineResource>
+                                                            <cit:linkage>
+                                                                <gco:CharacterString>https://orcid.org/0000-0002-6495-5813</gco:CharacterString>
+                                                            </cit:linkage>
+                                                            <cit:protocol>
+                                                                <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
+                                                            </cit:protocol>
+                                                            <cit:name>
+                                                                <gco:CharacterString>ORCID ID</gco:CharacterString>
+                                                            </cit:name>
+                                                        </cit:CI_OnlineResource>
+                                                    </cit:onlineResource>
+                                                </cit:CI_Contact>
+                                            </cit:contactInfo>
+                                        </cit:CI_Individual>
+                                    </cit:individual>
+                                </cit:CI_Organisation>
+                            </cit:party>
+                        </cit:CI_Responsibility>
+                    </cit:citedResponsibleParty>
+                    <cit:citedResponsibleParty>
+                        <!--  At least one citedResponsibleParty must be entered by the user -->
+                        <cit:CI_Responsibility>
+                            <cit:role>
+                                <!-- Who9 -->
+                                <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="coAuthor" />
+                            </cit:role>
+                            <cit:party>
+                                <cit:CI_Organisation>
+                                    <cit:name>
+                                        <gco:CharacterString>Institute for Marine and Antarctic Studies (IMAS), University of Tasmania (UTAS)</gco:CharacterString>
+                                    </cit:name>
+                                    <cit:individual>
+                                        <cit:CI_Individual>
+                                            <cit:name>
+                                                <gco:CharacterString>Halpin, Jacqueline</gco:CharacterString>
+                                            </cit:name>
+                                            <cit:contactInfo>
+                                                <cit:CI_Contact>
+                                                    <cit:address>
+                                                        <cit:CI_Address>
+                                                            <cit:deliveryPoint>
+                                                                <gco:CharacterString>Private Bag 129</gco:CharacterString>
+                                                            </cit:deliveryPoint>
+                                                            <cit:city>
+                                                                <gco:CharacterString>Hobart</gco:CharacterString>
+                                                            </cit:city>
+                                                            <cit:administrativeArea>
+                                                                <gco:CharacterString>TAS</gco:CharacterString>
+                                                            </cit:administrativeArea>
+                                                            <cit:postalCode>
+                                                                <gco:CharacterString>7001</gco:CharacterString>
+                                                            </cit:postalCode>
+                                                            <cit:country>
+                                                                <gco:CharacterString>Australia</gco:CharacterString>
+                                                            </cit:country>
+                                                            <cit:electronicMailAddress>
+                                                                <gco:CharacterString>jacqueline.halpin@utas.edu.au</gco:CharacterString>
+                                                            </cit:electronicMailAddress>
+                                                        </cit:CI_Address>
+                                                    </cit:address>
+                                                    <cit:onlineResource>
+                                                        <!--  ORCID URL is collected from user-entered field. cit:name and cit:protocol are retained from template -->
+                                                        <cit:CI_OnlineResource>
+                                                            <cit:linkage>
+                                                                <gco:CharacterString>https://orcid.org/0000-0002-4992-8681</gco:CharacterString>
+                                                            </cit:linkage>
+                                                            <cit:protocol>
+                                                                <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
+                                                            </cit:protocol>
+                                                            <cit:name>
+                                                                <gco:CharacterString>ORCID ID</gco:CharacterString>
+                                                            </cit:name>
+                                                        </cit:CI_OnlineResource>
+                                                    </cit:onlineResource>
+                                                </cit:CI_Contact>
+                                            </cit:contactInfo>
+                                        </cit:CI_Individual>
+                                    </cit:individual>
+                                </cit:CI_Organisation>
+                            </cit:party>
+                        </cit:CI_Responsibility>
+                    </cit:citedResponsibleParty>
+                </cit:CI_Citation>
+            </mri:citation>
+            <mri:abstract>
+                <gco:CharacterString>This data record contains findings from bottom trawl dredging by the FV Southern Champion voyage SC26 (April to May 2003). The petrographic, geochemical and geochronological data provided here was organised by Prof. Pat Quilty and Dr. Trevor Falloon. Further research is underway to characterise dredged granites and gneisses as part of a PhD project facilitated by the Institute for Marine and Antarctic Studies (IMAS), University of Tasmania. The metadata record will be updated to reflect further publications related to this dataset.</gco:CharacterString>
+            </mri:abstract>
+            <mri:status>
+                <!-- ID4 -->
+                <!--  The user must select from a subset of ISO status codes. -->
+                <mcc:MD_ProgressCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ProgressCode" codeListValue="completed" />
+            </mri:status>
+            <mri:pointOfContact>
+                <!--  At least one pointOfContact must be entered by the user. -->
+                <cit:CI_Responsibility>
+                    <cit:role>
+                        <!-- Who1 -->
+                        <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="author" />
+                    </cit:role>
+                    <cit:party>
+                        <cit:CI_Organisation>
+                            <cit:name>
+                                <gco:CharacterString>Institute for Marine and Antarctic Studies (IMAS), University of Tasmania (UTAS)</gco:CharacterString>
+                            </cit:name>
+                            <cit:individual>
+                                <cit:CI_Individual>
+                                    <cit:name>
+                                        <gco:CharacterString>Asimus, Jeremy</gco:CharacterString>
+                                    </cit:name>
+                                    <cit:contactInfo>
+                                        <cit:CI_Contact>
+                                            <cit:address>
+                                                <cit:CI_Address>
+                                                    <cit:city>
+                                                        <gco:CharacterString>Hobart</gco:CharacterString>
+                                                    </cit:city>
+                                                    <cit:administrativeArea>
+                                                        <gco:CharacterString>TAS</gco:CharacterString>
+                                                    </cit:administrativeArea>
+                                                    <cit:postalCode>
+                                                        <gco:CharacterString>7001</gco:CharacterString>
+                                                    </cit:postalCode>
+                                                    <cit:country>
+                                                        <gco:CharacterString>Australia</gco:CharacterString>
+                                                    </cit:country>
+                                                    <cit:electronicMailAddress>
+                                                        <gco:CharacterString>jeremy.asimus@utas.edu.au</gco:CharacterString>
+                                                    </cit:electronicMailAddress>
+                                                </cit:CI_Address>
+                                            </cit:address>
+                                            <cit:onlineResource>
+                                                <!--  ORCID URL is collected from user-entered field. cit:name and cit:protocol are retained from template -->
+                                                <cit:CI_OnlineResource>
+                                                    <cit:linkage>
+                                                        <gco:CharacterString>https://orcid.org/0000-0002-6495-5813</gco:CharacterString>
+                                                    </cit:linkage>
+                                                    <cit:protocol>
+                                                        <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
+                                                    </cit:protocol>
+                                                    <cit:name>
+                                                        <gco:CharacterString>ORCID ID</gco:CharacterString>
+                                                    </cit:name>
+                                                </cit:CI_OnlineResource>
+                                            </cit:onlineResource>
+                                        </cit:CI_Contact>
+                                    </cit:contactInfo>
+                                </cit:CI_Individual>
+                            </cit:individual>
+                        </cit:CI_Organisation>
+                    </cit:party>
+                </cit:CI_Responsibility>
+            </mri:pointOfContact>
+            <mri:topicCategory>
+                <mri:MD_TopicCategoryCode>geoscientificInformation</mri:MD_TopicCategoryCode>
+            </mri:topicCategory>
+            <mri:extent>
+                <gex:EX_Extent>
+                    <gex:geographicElement>
+                        <gex:EX_BoundingPolygon>
+                            <gex:polygon>
+                                <gml:MultiSurface srsName="EPSG:3857">
+                                    <gml:surfaceMember>
+                                        <gml:Polygon srsName="EPSG:3857">
+                                            <gml:exterior>
+                                                <gml:LinearRing srsName="EPSG:3857">
+                                                    <gml:posList srsDimension="2">8023075.054272446 -6895159.661151615 8019984.884328696 -6895649.095988664 8016894.714384946 -6895159.661151615 8014107.031805771 -6893739.265932414 8011894.714384946 -6891526.948511588 8010474.319165745 -6888739.265932414 8009984.884328696 -6885649.095988664 8010474.319165745 -6882558.926044914 8011894.714384946 -6879771.243465739 8012034.009024692 -6879631.948825994 8010928.873382085 -6877462.998003804 8010886.877594966 -6877197.847039275 8010469.092819165 -6879835.636300295 8009048.697599964 -6882623.318879469 8006836.380179139 -6884835.636300295 8004048.697599964 -6886256.031519496 8000958.527656214 -6886745.466356545 7997868.357712464 -6886256.031519496 7995080.67513329 -6884835.636300295 7992868.357712464 -6882623.318879469 7991447.962493263 -6879835.636300295 7990958.527656214 -6876745.466356545 7991447.962493263 -6873655.296412795 7992868.357712464 -6870867.61383362 7995080.67513329 -6868655.296412795 7997868.357712464 -6867234.901193594 8000958.527656214 -6866745.466356545 8002510.824556147 -6866991.326032259 8002960.253537199 -6864153.743122401 8004380.648756401 -6861366.060543226 8006592.966177226 -6859153.743122401 8009380.648756401 -6857733.3479031995 8012470.818700151 -6857243.913066151 8015560.9886439005 -6857733.3479031995 8018348.671223075 -6859153.743122401 8019512.198354713 -6860317.270254038 8021690.728742223 -6859207.253579105 8024780.898685973 -6858717.818742056 8027871.068629723 -6859207.253579105 8030658.751208898 -6860627.6487983065 8032871.068629723 -6862839.966219132 8034291.463848924 -6865627.6487983065 8034780.898685973 -6868717.818742056 8034291.463848924 -6871807.988685806 8032871.068629723 -6874595.671264981 8030658.751208898 -6876807.988685806 8030000.636544427 -6877143.314856039 8029950.003707987 -6877462.998003804 8028529.608488786 -6880250.680582979 8028390.31384904 -6880389.9752227245 8029495.449491647 -6882558.926044914 8029984.884328696 -6885649.095988664 8029495.449491647 -6888739.265932414 8028075.054272446 -6891526.948511588 8025862.7368516205 -6893739.265932414 8023075.054272446 -6895159.661151615</gml:posList>
+                                                </gml:LinearRing>
+                                            </gml:exterior>
+                                        </gml:Polygon>
+                                    </gml:surfaceMember>
+                                    <gml:surfaceMember>
+                                        <gml:Polygon srsName="EPSG:3857">
+                                            <gml:exterior>
+                                                <gml:LinearRing srsName="EPSG:3857">
+                                                    <gml:posList srsDimension="2">8087649.635185713 -6880933.779268017 8084559.465241963 -6881423.214105066 8081469.295298213 -6880933.779268017 8078681.6127190385 -6879513.384048816 8076469.295298213 -6877301.06662799 8075048.900079012 -6874513.384048816 8074559.465241963 -6871423.214105066 8075048.900079012 -6868333.044161316 8076469.295298213 -6865545.361582141 8078681.6127190385 -6863333.044161316 8080097.636124703 -6862611.54419905 8079854.191802653 -6862133.757815087 8079364.756965604 -6859043.587871337 8079854.191802653 -6855953.417927587 8081274.587021854 -6853165.735348413 8083486.904442679 -6850953.417927587 8086274.587021854 -6849533.022708386 8089364.756965604 -6849043.587871337 8092454.926909354 -6849533.022708386 8095242.609488528 -6850953.417927587 8097136.773046284 -6852847.581485343 8098149.720485106 -6852687.146372167 8101239.890428856 -6853176.581209216 8104027.573008031 -6854596.9764284175 8106239.890428856 -6856809.293849243 8107660.285648057 -6859596.9764284175 8108149.720485106 -6862687.146372167 8107660.285648057 -6865777.316315917 8106239.890428856 -6868564.998895092 8104027.573008031 -6870777.316315917 8101239.890428856 -6872197.7115351185 8098149.720485106 -6872687.146372167 8095059.550541356 -6872197.7115351185 8094483.30077644 -6871904.097614628 8094070.030404914 -6874513.384048816 8092649.635185713 -6877301.06662799 8090437.317764888 -6879513.384048816 8087649.635185713 -6880933.779268017</gml:posList>
+                                                </gml:LinearRing>
+                                            </gml:exterior>
+                                        </gml:Polygon>
+                                    </gml:surfaceMember>
+                                    <gml:surfaceMember>
+                                        <gml:Polygon srsName="EPSG:3857">
+                                            <gml:exterior>
+                                                <gml:LinearRing srsName="EPSG:3857">
+                                                    <gml:posList srsDimension="2">7950661.725511421 -6818696.7987552155 7947571.555567672 -6819186.233592264 7944481.385623922 -6818696.7987552155 7941693.703044747 -6817276.403536014 7939481.385623922 -6815064.086115189 7938060.99040472 -6812276.403536014 7937571.555567672 -6809186.233592264 7938060.99040472 -6806096.063648514 7938785.38302727 -6804674.363077387 7937996.054406157 -6803125.218433293 7937506.619569108 -6800035.048489543 7937996.054406157 -6796944.878545793 7939416.449625358 -6794157.195966618 7941628.767046183 -6791944.878545793 7944416.449625358 -6790524.483326592 7947506.619569108 -6790035.048489543 7950596.789512858 -6790524.483326592 7953384.472092032 -6791944.878545793 7955596.789512858 -6794157.195966618 7957017.184732059 -6796944.878545793 7957506.619569108 -6800035.048489543 7957017.184732059 -6803125.218433293 7956292.792109509 -6804546.91900442 7957082.120730623 -6806096.063648514 7957571.555567672 -6809186.233592264 7957082.120730623 -6812276.403536014 7955661.725511421 -6815064.086115189 7953449.408090596 -6817276.403536014 7950661.725511421 -6818696.7987552155</gml:posList>
+                                                </gml:LinearRing>
+                                            </gml:exterior>
+                                        </gml:Polygon>
+                                    </gml:surfaceMember>
+                                    <gml:surfaceMember>
+                                        <gml:Polygon srsName="EPSG:3857">
+                                            <gml:exterior>
+                                                <gml:LinearRing srsName="EPSG:3857">
+                                                    <gml:posList srsDimension="2">8116249.468066415 -6898708.639944922 8113159.298122665 -6899198.074781971 8110069.128178915 -6898708.639944922 8107281.44559974 -6897288.244725721 8105069.128178915 -6895075.927304896 8103648.732959714 -6892288.244725721 8103159.298122665 -6889198.074781971 8103475.592730518 -6887201.069222551 8101803.7568200445 -6885529.233312077 8100383.361600843 -6882741.550732902 8099893.926763794 -6879651.380789152 8100383.361600843 -6876561.210845402 8101803.7568200445 -6873773.528266228 8104016.07424087 -6871561.210845402 8106803.7568200445 -6870140.815626201 8109893.926763794 -6869651.380789152 8112984.096707544 -6870140.815626201 8115771.779286719 -6871561.210845402 8117984.096707544 -6873773.528266228 8119404.4919267455 -6876561.210845402 8119893.926763794 -6879651.380789152 8119577.632155941 -6881648.386348573 8121249.468066415 -6883320.2222590465 8122669.863285616 -6886107.904838221 8123159.298122665 -6889198.074781971 8122669.863285616 -6892288.244725721 8121249.468066415 -6895075.927304896 8119037.150645589 -6897288.244725721 8116249.468066415 -6898708.639944922</gml:posList>
+                                                </gml:LinearRing>
+                                            </gml:exterior>
+                                        </gml:Polygon>
+                                    </gml:surfaceMember>
+                                    <gml:surfaceMember>
+                                        <gml:Polygon srsName="EPSG:3857">
+                                            <gml:exterior>
+                                                <gml:LinearRing srsName="EPSG:3857">
+                                                    <gml:posList srsDimension="2">8587631.851830533 -6793288.970904106 8584541.681886783 -6793778.405741155 8581451.511943033 -6793288.970904106 8578663.829363858 -6791868.575684905 8576451.511943033 -6789656.25826408 8575031.116723832 -6786868.575684905 8574541.681886783 -6783778.405741155 8575031.116723832 -6780688.235797405 8576451.511943033 -6777900.553218231 8578663.829363858 -6775688.235797405 8581451.511943033 -6774267.840578204 8584541.681886783 -6773778.405741155 8587631.851830533 -6774267.840578204 8590419.534409707 -6775688.235797405 8592631.851830533 -6777900.553218231 8594052.247049734 -6780688.235797405 8594541.681886783 -6783778.405741155 8594052.247049734 -6786868.575684905 8592631.851830533 -6789656.25826408 8590419.534409707 -6791868.575684905 8587631.851830533 -6793288.970904106</gml:posList>
+                                                </gml:LinearRing>
+                                            </gml:exterior>
+                                        </gml:Polygon>
+                                    </gml:surfaceMember>
+                                    <gml:surfaceMember>
+                                        <gml:Polygon srsName="EPSG:3857">
+                                            <gml:exterior>
+                                                <gml:LinearRing srsName="EPSG:3857">
+                                                    <gml:posList srsDimension="2">8465486.540557614 -6776584.653917757 8462396.370613864 -6777074.088754806 8459306.200670114 -6776584.653917757 8456518.51809094 -6775164.258698556 8454306.200670114 -6772951.94127773 8452885.805450913 -6770164.258698556 8452396.370613864 -6767074.088754806 8452885.805450913 -6763983.918811056 8454306.200670114 -6761196.236231881 8456518.51809094 -6758983.918811056 8459306.200670114 -6757563.523591855 8462396.370613864 -6757074.088754806 8465486.540557614 -6757563.523591855 8468274.223136788 -6758983.918811056 8470486.540557614 -6761196.236231881 8471906.935776815 -6763983.918811056 8472396.370613864 -6767074.088754806 8471906.935776815 -6770164.258698556 8470486.540557614 -6772951.94127773 8468274.223136788 -6775164.258698556 8465486.540557614 -6776584.653917757</gml:posList>
+                                                </gml:LinearRing>
+                                            </gml:exterior>
+                                        </gml:Polygon>
+                                    </gml:surfaceMember>
+                                    <gml:surfaceMember>
+                                        <gml:Polygon srsName="EPSG:3857">
+                                            <gml:exterior>
+                                                <gml:LinearRing srsName="EPSG:3857">
+                                                    <gml:posList srsDimension="2">8515849.333888402 -6774844.098351078 8512759.163944652 -6775333.533188127 8509668.994000902 -6774844.098351078 8506881.311421728 -6773423.703131877 8504668.994000902 -6771211.3857110515 8503248.598781701 -6768423.703131877 8502759.163944652 -6765333.533188127 8502906.623796796 -6764402.508323302 8500763.534456775 -6762259.41898328 8499343.139237573 -6759471.736404105 8498853.704400524 -6756381.566460355 8499343.139237573 -6753291.396516605 8500763.534456775 -6750503.713937431 8502975.8518776 -6748291.396516605 8505763.534456775 -6746871.001297404 8508853.704400524 -6746381.566460355 8511943.874344274 -6746871.001297404 8514731.556923449 -6748291.396516605 8516943.874344274 -6750503.713937431 8518364.269563476 -6753291.396516605 8518853.704400524 -6756381.566460355 8518706.24454838 -6757312.591325181 8520849.333888402 -6759455.680665202 8522269.729107603 -6762243.363244377 8522759.163944652 -6765333.533188127 8522269.729107603 -6768423.703131877 8520849.333888402 -6771211.3857110515 8518637.016467577 -6773423.703131877 8515849.333888402 -6774844.098351078</gml:posList>
+                                                </gml:LinearRing>
+                                            </gml:exterior>
+                                        </gml:Polygon>
+                                    </gml:surfaceMember>
+                                    <gml:surfaceMember>
+                                        <gml:Polygon srsName="EPSG:3857">
+                                            <gml:exterior>
+                                                <gml:LinearRing srsName="EPSG:3857">
+                                                    <gml:posList srsDimension="2">8404807.087747876 -6773998.358455168 8401716.917804126 -6773508.923618119 8398929.235224951 -6772088.528398918 8396716.917804126 -6769876.210978093 8395296.522584924 -6767088.528398918 8394807.087747876 -6763998.358455168 8395296.522584924 -6760908.188511418 8396716.917804126 -6758120.505932244 8398929.235224951 -6755908.188511418 8401716.917804126 -6754487.793292217 8404807.087747876 -6753998.358455168 8407897.257691626 -6754487.793292217 8410684.9402708 -6755908.188511418 8412897.257691626 -6758120.505932244 8414317.652910827 -6760908.188511418 8414807.087747876 -6763998.358455168 8414317.652910827 -6767088.528398918 8412897.257691626 -6769876.210978093 8410684.9402708 -6772088.528398918 8407897.257691626 -6773508.923618119 8404807.087747876 -6773998.358455168</gml:posList>
+                                                </gml:LinearRing>
+                                            </gml:exterior>
+                                        </gml:Polygon>
+                                    </gml:surfaceMember>
+                                </gml:MultiSurface>
+                            </gex:polygon>
+                        </gex:EX_BoundingPolygon>
+                    </gex:geographicElement>
+                    <gex:temporalElement>
+                        <gex:EX_TemporalExtent>
+                            <gex:extent>
+                                <gml:TimePeriod gml:id="d5137372e782a1052958">
+                                    <gml:beginPosition>2003-04-01</gml:beginPosition>
+                                    <gml:endPosition>2013-03-01</gml:endPosition>
+                                </gml:TimePeriod>
+                            </gex:extent>
+                        </gex:EX_TemporalExtent>
+                    </gex:temporalElement>
+                </gex:EX_Extent>
+            </mri:extent>
+            <mri:resourceMaintenance>
+                <!-- ID5 -->
+                <!--  The user must select how frequently the data will be updated, from a list defined by ISO -->
+                <mmi:MD_MaintenanceInformation>
+                    <mmi:maintenanceAndUpdateFrequency>
+                        <mmi:MD_MaintenanceFrequencyCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_MaintenanceFrequencyCode" codeListValue="notPlanned" />
+                    </mmi:maintenanceAndUpdateFrequency>
+                </mmi:MD_MaintenanceInformation>
+            </mri:resourceMaintenance>
+            <mri:descriptiveKeywords>
+                <mri:MD_Keywords>
+                    <mri:keyword>
+                        <gcx:Anchor xlink:href="https://gcmd.earthdata.nasa.gov/kms/concept/e8d97ffd-2fd2-4989-88a7-9772fc9b7cd8">EARTH SCIENCE | SOLID EARTH | ROCKS/MINERALS/CRYSTALS | IGNEOUS ROCKS</gcx:Anchor>
+                    </mri:keyword>
+                    <mri:keyword>
+                        <gcx:Anchor xlink:href="https://gcmd.earthdata.nasa.gov/kms/concept/53e3eeca-265b-42d8-ad64-bfcc2acdad26">EARTH SCIENCE | SOLID EARTH | ROCKS/MINERALS/CRYSTALS | IGNEOUS ROCKS | IGNEOUS ROCK AGE DETERMINATIONS</gcx:Anchor>
+                    </mri:keyword>
+                    <mri:keyword>
+                        <gcx:Anchor xlink:href="https://gcmd.earthdata.nasa.gov/kms/concept/984d4966-070d-4f8c-85e7-83bb0fd804a8">EARTH SCIENCE | SOLID EARTH | ROCKS/MINERALS/CRYSTALS | IGNEOUS ROCKS | IGNEOUS ROCK FORMATION</gcx:Anchor>
+                    </mri:keyword>
+                    <mri:keyword>
+                        <gcx:Anchor xlink:href="https://gcmd.earthdata.nasa.gov/kms/concept/d220bbb1-410e-4b77-9663-78cb68c6b134">EARTH SCIENCE | SOLID EARTH | ROCKS/MINERALS/CRYSTALS | METAMORPHIC ROCKS</gcx:Anchor>
+                    </mri:keyword>
+                    <mri:keyword>
+                        <gcx:Anchor xlink:href="https://gcmd.earthdata.nasa.gov/kms/concept/02a53a61-4fd2-4294-9dcc-071f701bc263">EARTH SCIENCE | SOLID EARTH | ROCKS/MINERALS/CRYSTALS | METAMORPHIC ROCKS | METAMORPHIC ROCK AGE DETERMINATIONS</gcx:Anchor>
+                    </mri:keyword>
+                    <mri:keyword>
+                        <gcx:Anchor xlink:href="https://gcmd.earthdata.nasa.gov/kms/concept/a243624b-a9c8-4c53-84d1-bb0fe2a71ef6">EARTH SCIENCE | SOLID EARTH | ROCKS/MINERALS/CRYSTALS | METAMORPHIC ROCKS | METAMORPHIC ROCK FORMATION</gcx:Anchor>
+                    </mri:keyword>
+                    <mri:keyword>
+                        <gcx:Anchor xlink:href="https://gcmd.earthdata.nasa.gov/kms/concept/73e02157-9df9-415f-93fc-cb457989ddb1">EARTH SCIENCE | OCEANS | BATHYMETRY/SEAFLOOR TOPOGRAPHY | OCEAN PLATEAUS/RIDGES</gcx:Anchor>
+                    </mri:keyword>
+                    <mri:type>
+                        <mri:MD_KeywordTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_KeywordTypeCode" codeListValue="theme" />
+                    </mri:type>
+                    <mri:thesaurusName>
+                        <cit:CI_Citation>
+                            <cit:title>
+                                <gco:CharacterString>Global Change Master Directory Earth Science Keywords, Version 8.5</gco:CharacterString>
+                            </cit:title>
+                            <cit:alternateTitle>
+                                <gco:CharacterString>GCMD</gco:CharacterString>
+                            </cit:alternateTitle>
+                            <cit:date>
+                                <cit:CI_Date>
+                                    <cit:date>
+                                        <gco:Date>2017-04-21</gco:Date>
+                                    </cit:date>
+                                    <cit:dateType>
+                                        <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode" codeListValue="revision" />
+                                    </cit:dateType>
+                                </cit:CI_Date>
+                            </cit:date>
+                            <cit:edition>
+                                <gco:CharacterString>8.5</gco:CharacterString>
+                            </cit:edition>
+                            <cit:identifier>
+                                <mcc:MD_Identifier>
+                                    <mcc:code>
+                                        <gcx:Anchor xlink:href="https://metadata.imas.utas.edu.au/geonetwork/srv/eng/thesaurus.download?ref=external.theme.sciencekeywords">geonetwork.thesaurus.external.theme.sciencekeywords</gcx:Anchor>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </cit:identifier>
+                            <cit:citedResponsibleParty>
+                                <cit:CI_Responsibility>
+                                    <cit:role>
+                                        <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="owner" />
+                                    </cit:role>
+                                    <cit:party>
+                                        <cit:CI_Organisation>
+                                            <cit:name>
+                                                <gco:CharacterString>Global Change Data Center, Science and Exploration Directorate, Goddard Space Flight Center (GSFC) National Aeronautics and Space Administration (NASA)</gco:CharacterString>
+                                            </cit:name>
+                                        </cit:CI_Organisation>
+                                    </cit:party>
+                                </cit:CI_Responsibility>
+                            </cit:citedResponsibleParty>
+                        </cit:CI_Citation>
+                    </mri:thesaurusName>
+                </mri:MD_Keywords>
+            </mri:descriptiveKeywords>
+            <mri:descriptiveKeywords>
+                <mri:MD_Keywords>
+                    <mri:keyword>
+                        <gcx:Anchor xlink:href="http://vocab.aodn.org.au/def/geographicextents/entity/46">Offshore Islands (Australia) | Offshore Islands (Australia) | Heard &amp; McDonald Islands</gcx:Anchor>
+                    </mri:keyword>
+                    <mri:type>
+                        <mri:MD_KeywordTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_KeywordTypeCode" codeListValue="place" />
+                    </mri:type>
+                    <mri:thesaurusName>
+                        <cit:CI_Citation>
+                            <cit:title>
+                                <gcx:Anchor xlink:href="http://vocab.aodn.org.au/def/geographicextents/1">AODN Geographic Extents Vocabulary</gcx:Anchor>
+                            </cit:title>
+                            <cit:date>
+                                <cit:CI_Date>
+                                    <cit:date>
+                                        <gco:Date>2021-09-02</gco:Date>
+                                    </cit:date>
+                                    <cit:dateType>
+                                        <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                                    </cit:dateType>
+                                </cit:CI_Date>
+                            </cit:date>
+                            <cit:identifier>
+                                <mcc:MD_Identifier>
+                                    <mcc:code>
+                                        <gcx:Anchor xlink:href="https://metadata.imas.utas.edu.au/geonetwork/srv/api/registries/vocabularies/external.place.aodn_aodn-geographic-extents-vocabulary">geonetwork.thesaurus.external.place.aodn_aodn-geographic-extents-vocabulary</gcx:Anchor>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </cit:identifier>
+                        </cit:CI_Citation>
+                    </mri:thesaurusName>
+                </mri:MD_Keywords>
+            </mri:descriptiveKeywords>
+            <mri:resourceConstraints>
+                <mco:MD_Constraints>
+                    <mco:useLimitation>
+                        <gco:CharacterString>Data, products and services from IMAS are provided "as is" without any warranty as to fitness for a particular purpose.</gco:CharacterString>
+                    </mco:useLimitation>
+                </mco:MD_Constraints>
+            </mri:resourceConstraints>
+            <mri:resourceConstraints>
+                <mco:MD_LegalConstraints>
+                    <mco:otherConstraints>
+                        <gco:CharacterString>This dataset is the intellectual property of the University of Tasmania (UTAS) through the Institute for Marine and Antarctic Studies (IMAS).</gco:CharacterString>
+                    </mco:otherConstraints>
+                </mco:MD_LegalConstraints>
+            </mri:resourceConstraints>
+            <mri:resourceConstraints>
+                <mco:MD_LegalConstraints>
+                    <mco:graphic>
+                        <mcc:MD_BrowseGraphic>
+                            <mcc:fileName gco:nilReason="inapplicable" />
+                            <mcc:linkage>
+                                <cit:CI_OnlineResource>
+                                    <cit:linkage>
+                                        <gco:CharacterString>https://licensebuttons.net/l/by/4.0/88x31.png</gco:CharacterString>
+                                    </cit:linkage>
+                                    <cit:protocol>
+                                        <gco:CharacterString>WWW:LINK-1.0-http--related</gco:CharacterString>
+                                    </cit:protocol>
+                                    <cit:description>
+                                        <gco:CharacterString>License Graphic</gco:CharacterString>
+                                    </cit:description>
+                                </cit:CI_OnlineResource>
+                            </mcc:linkage>
+                        </mcc:MD_BrowseGraphic>
+                    </mco:graphic>
+                    <mco:reference>
+                        <!-- About5 -->
+                        <cit:CI_Citation>
+                            <cit:title>
+                                <gco:CharacterString>Creative Commons Attribution 4.0 International License</gco:CharacterString>
+                            </cit:title>
+                            <cit:alternateTitle>
+                                <gco:CharacterString>CC-BY</gco:CharacterString>
+                            </cit:alternateTitle>
+                            <cit:edition>
+                                <gco:CharacterString>4.0</gco:CharacterString>
+                            </cit:edition>
+                            <cit:citedResponsibleParty>
+                                <cit:CI_Responsibility>
+                                    <cit:party>
+                                        <cit:CI_Organisation>
+                                            <cit:contactInfo>
+                                                <cit:CI_Contact>
+                                                    <cit:onlineResource>
+                                                        <cit:CI_OnlineResource>
+                                                            <cit:linkage>
+                                                                <gco:CharacterString>http://creativecommons.org/international/</gco:CharacterString>
+                                                            </cit:linkage>
+                                                            <cit:protocol>
+                                                                <gco:CharacterString>WWW:LINK-1.0-http--related</gco:CharacterString>
+                                                            </cit:protocol>
+                                                        </cit:CI_OnlineResource>
+                                                    </cit:onlineResource>
+                                                </cit:CI_Contact>
+                                            </cit:contactInfo>
+                                        </cit:CI_Organisation>
+                                    </cit:party>
+                                </cit:CI_Responsibility>
+                            </cit:citedResponsibleParty>
+                            <cit:onlineResource>
+                                <cit:CI_OnlineResource>
+                                    <cit:linkage>
+                                        <gco:CharacterString>https://creativecommons.org/licenses/by/4.0/</gco:CharacterString>
+                                    </cit:linkage>
+                                    <cit:protocol>
+                                        <gco:CharacterString>WWW:LINK-1.0-http--related</gco:CharacterString>
+                                    </cit:protocol>
+                                    <cit:description>
+                                        <gco:CharacterString>License Text</gco:CharacterString>
+                                    </cit:description>
+                                </cit:CI_OnlineResource>
+                            </cit:onlineResource>
+                        </cit:CI_Citation>
+                    </mco:reference>
+                    <mco:otherConstraints>
+                        <gco:CharacterString>Cite data as: Asimus, J., &amp; Halpin, J. (2023). Central Kerguelen Plateau SC Cruise 26 dredge details [Data set]. Institute for Marine and Antarctic Studies (IMAS), University of Tasmania (UTAS). https://doi.org/10.25959/YSV9-QW58</gco:CharacterString>
+                    </mco:otherConstraints>
+                </mco:MD_LegalConstraints>
+            </mri:resourceConstraints>
+            <mri:defaultLocale>
+                <lan:PT_Locale>
+                    <lan:language>
+                        <lan:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="eng" />
+                    </lan:language>
+                    <lan:characterEncoding>
+                        <lan:MD_CharacterSetCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_CharacterSetCode" codeListValue="utf8" />
+                    </lan:characterEncoding>
+                </lan:PT_Locale>
+            </mri:defaultLocale>
+            <mri:supplementalInformation />
+        </mri:MD_DataIdentification>
+    </mdb:identificationInfo>
+    <mdb:contentInfo xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0" xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0">
+        <mrc:MD_CoverageDescription>
+            <mrc:attributeDescription gco:nilReason="inapplicable" />
+            <mrc:attributeGroup>
+                <mrc:MD_AttributeGroup>
+                    <mrc:contentType>
+                        <mrc:MD_CoverageContentTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_CoverageContentTypeCode" codeListValue="physicalMeasurement" />
+                    </mrc:contentType>
+                </mrc:MD_AttributeGroup>
+            </mrc:attributeGroup>
+        </mrc:MD_CoverageDescription>
+    </mdb:contentInfo>
+    <mdb:distributionInfo xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0" xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0">
+        <mrd:MD_Distribution>
+            <mrd:distributionFormat>
+                <!-- Info on distribution format of data, from user input-->
+                <mrd:MD_Format>
+                    <mrd:formatSpecificationCitation>
+                        <cit:CI_Citation>
+                            <cit:title>
+                                <gco:CharacterString>Word documents, excel spreadsheets, csv files, .jpg files</gco:CharacterString>
+                            </cit:title>
+                        </cit:CI_Citation>
+                    </mrd:formatSpecificationCitation>
+                </mrd:MD_Format>
+            </mrd:distributionFormat>
+            <mrd:transferOptions>
+                <mrd:MD_DigitalTransferOptions>
+                    <mrd:onLine>
+                        <cit:CI_OnlineResource>
+                            <cit:linkage>
+                                <gco:CharacterString>https://data.imas.utas.edu.au/attachments/451eb5a7-7a45-44bf-bcf6-1b5139abd006/ASIMUS2023__alldata_Central_Kerguelen_Plateau_dredge.zip</gco:CharacterString>
+                            </cit:linkage>
+                            <cit:protocol>
+                                <gco:CharacterString>WWW:LINK-1.0-http--downloaddata</gco:CharacterString>
+                            </cit:protocol>
+                            <cit:name>
+                                <gco:CharacterString>DATA ACCESS - complete data package [direct download 195MB .zip]</gco:CharacterString>
+                            </cit:name>
+                            <cit:description gco:nilReason="missing">
+                                <gco:CharacterString />
+                            </cit:description>
+                            <cit:function>
+                                <cit:CI_OnLineFunctionCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_OnLineFunctionCode" codeListValue="" />
+                            </cit:function>
+                        </cit:CI_OnlineResource>
+                    </mrd:onLine>
+                    <mrd:onLine>
+                        <cit:CI_OnlineResource>
+                            <cit:linkage>
+                                <gco:CharacterString>https://data.imas.utas.edu.au/attachments/451eb5a7-7a45-44bf-bcf6-1b5139abd006/</gco:CharacterString>
+                            </cit:linkage>
+                            <cit:protocol>
+                                <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
+                            </cit:protocol>
+                            <cit:name>
+                                <gco:CharacterString>DATA ACCESS - explore &amp; download all available files in web browser</gco:CharacterString>
+                            </cit:name>
+                            <cit:description gco:nilReason="missing">
+                                <gco:CharacterString />
+                            </cit:description>
+                            <cit:function>
+                                <cit:CI_OnLineFunctionCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_OnLineFunctionCode" codeListValue="" />
+                            </cit:function>
+                        </cit:CI_OnlineResource>
+                    </mrd:onLine>
+                </mrd:MD_DigitalTransferOptions>
+            </mrd:transferOptions>
+        </mrd:MD_Distribution>
+    </mdb:distributionInfo>
+    <mdb:resourceLineage>
+        <mrl:LI_Lineage>
+            <mrl:statement>
+                <gco:CharacterString>Please refer to attached documents for methods of specific analytical techniques.</gco:CharacterString>
+            </mrl:statement>
+            <mrl:scope>
+                <mcc:MD_Scope>
+                    <mcc:level>
+                        <mcc:MD_ScopeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ScopeCode" codeListValue="dataset" />
+                    </mcc:level>
+                </mcc:MD_Scope>
+            </mrl:scope>
+        </mrl:LI_Lineage>
+    </mdb:resourceLineage>
+    <mdb:acquisitionInformation xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0" xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0">
+        <mac:MI_AcquisitionInformation>
+            <mac:scope>
+                <mcc:MD_Scope>
+                    <mcc:level>
+                        <mcc:MD_ScopeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ScopeCode" codeListValue="dataset" />
+                    </mcc:level>
+                </mcc:MD_Scope>
+            </mac:scope>
+        </mac:MI_AcquisitionInformation>
+    </mdb:acquisitionInformation>
+</mdb:MD_Metadata>
+

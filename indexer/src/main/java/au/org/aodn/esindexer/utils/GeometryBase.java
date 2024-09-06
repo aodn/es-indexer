@@ -4,8 +4,12 @@ import au.org.aodn.metadata.iso19115_3_2018.*;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.geotools.geometry.jts.JTS;
+import org.geotools.referencing.CRS;
 import org.locationtech.jts.geom.*;
 import org.opengis.referencing.FactoryException;
+import org.opengis.referencing.crs.CoordinateReferenceSystem;
+import org.opengis.referencing.operation.MathTransform;
 import org.opengis.referencing.operation.TransformException;
 
 import java.util.*;
@@ -16,12 +20,18 @@ import static au.org.aodn.esindexer.utils.CommonUtils.safeGet;
 
 public class GeometryBase {
 
-    protected static Logger logger = LogManager.getLogger(GeometryBase.class);
-
-    protected static Map<String, Integer> codeToSID = new HashMap<>();
-
     public static final String COORDINATE_SYSTEM_CRS84 = "CRS:84";
-    public static final String COORDINATE_SYSTEM_WGS84 = "WGS:84";  // Same as EPSG:4326
+    protected static Logger logger = LogManager.getLogger(GeometryBase.class);
+    protected static final CoordinateReferenceSystem CRS84;  // WGS84 (CRS84)
+
+    static {
+        try {
+            CRS84 = CRS.decode(COORDINATE_SYSTEM_CRS84);  // WGS84 (CRS84)
+        }
+        catch (FactoryException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     // Must hardcode 4326 as all GeoJson use WGS84 which is EPSG 4326
     protected static GeometryFactory geoJsonFactory = new GeometryFactory(new PrecisionModel(), 4326);
@@ -77,7 +87,8 @@ public class GeometryBase {
         List<Geometry> polygons = new ArrayList<>();
 
         if(COORDINATE_SYSTEM_CRS84.equals(rawCRS)) {
-            List<List<GMObjectPropertyType>> input = rawInput.stream()
+            List<List<GMObjectPropertyType>> input = rawInput
+                    .stream()
                     .filter(f -> f instanceof EXBoundingPolygonType)
                     .map(m -> (EXBoundingPolygonType) m)
                     .map(EXBoundingPolygonType::getPolygon)
@@ -95,22 +106,52 @@ public class GeometryBase {
                                 // TODO: Only process Polygon for now.
                                 if (j.getAbstractSurface().getValue() instanceof PolygonType polygonType) {
                                     // TODO: Only process LinearRingType for now
-                                    if (polygonType.getExterior() != null && polygonType.getExterior().getAbstractRing().getValue() instanceof LinearRingType linearRingType) {
-                                        // TODO: Handle 2D now, can be 3D
-                                        if (linearRingType.getPosList().getSrsDimension().doubleValue() == 2.0) {
-                                            List<Double> v = linearRingType.getPosList().getValue();
-                                            List<Coordinate> items = new ArrayList<>();
+                                    safeGet(() -> polygonType.getExterior().getAbstractRing().getValue())
+                                            .filter(value -> value instanceof LinearRingType)
+                                            .map(value -> (LinearRingType)value)
+                                            .ifPresent(linearRingType -> {
+                                                // TODO: Handle 2D now, can be 3D
+                                                // Assume missing dimension aka null means 2D
+                                                Double dimension = safeGet(() -> linearRingType.getPosList().getSrsDimension().doubleValue()).orElse(2.0);
+                                                if (dimension == 2.0) {
 
-                                            for (int z = 0; z < v.size(); z += 2) {
-                                                items.add(new Coordinate(v.get(z), v.get(z + 1)));
-                                            }
+                                                    List<Double> v = linearRingType.getPosList().getValue();
+                                                    List<Coordinate> items = new ArrayList<>();
 
-                                            // We need to store it so that we can create the multi-array as told by spec
-                                            Polygon polygon = geoJsonFactory.createPolygon(items.toArray(new Coordinate[0]));
-                                            polygons.add(polygon);
-                                            logger.debug("MultiSurfaceType 2D Polygon added {}", polygon);
-                                        }
-                                    }
+                                                    String projection = polygonType.getSrsName();
+                                                    MathTransform transform = null;
+                                                    if(projection != null && !projection.isBlank()) {
+                                                        try {
+                                                            transform = CRS.findMathTransform(CRS.decode(projection), CRS84);
+                                                        }
+                                                        catch (FactoryException e) {
+                                                            // Default is WGS84 (CRS84), so do nothing need to transform
+                                                        }
+                                                    }
+
+                                                    // Create the MathTransform object for transforming between source and target CRS
+                                                    for (int z = 0; z < v.size(); z += 2) {
+                                                        Coordinate coordinate = new Coordinate(v.get(z), v.get(z + 1));
+                                                        if(transform != null) {
+                                                            try {
+                                                                // try transform to the correct coordinate
+                                                                items.add(JTS.transform(coordinate, null, transform));
+                                                            }
+                                                            catch (TransformException e) {
+                                                                items.add(coordinate);
+                                                            }
+                                                        }
+                                                        else {
+                                                            items.add(coordinate);
+                                                        }
+                                                    }
+
+                                                    // We need to store it so that we can create the multi-array as told by spec
+                                                    Polygon polygon = geoJsonFactory.createPolygon(items.toArray(new Coordinate[0]));
+                                                    polygons.add(polygon);
+                                                    logger.debug("MultiSurfaceType 2D Polygon added {}", polygon);
+                                                }
+                                            });
                                 }
                             }
                         } else if (type instanceof PolygonType plt) {
@@ -127,8 +168,32 @@ public class GeometryBase {
                                                 List<Double> v = linearRingType.getPosList().getValue();
                                                 List<Coordinate> items = new ArrayList<>();
 
+                                                String projection = pos.getSrsName();
+                                                MathTransform transform = null;
+                                                if(projection != null && !projection.isBlank()) {
+                                                    try {
+                                                        transform = CRS.findMathTransform(CRS.decode(projection), CRS84);
+                                                    }
+                                                    catch (FactoryException e) {
+                                                        // Default is WGS84 (CRS84), so do nothing need to transform
+                                                    }
+                                                }
+
+                                                // Create the MathTransform object for transforming between source and target CRS
                                                 for (int z = 0; z < v.size(); z += 2) {
-                                                    items.add(new Coordinate(v.get(z), v.get(z + 1)));
+                                                    Coordinate coordinate = new Coordinate(v.get(z), v.get(z + 1));
+                                                    if(transform != null) {
+                                                        try {
+                                                            // try transform to the correct coordinate
+                                                            items.add(JTS.transform(coordinate, null, transform));
+                                                        }
+                                                        catch (TransformException e) {
+                                                            items.add(coordinate);
+                                                        }
+                                                    }
+                                                    else {
+                                                        items.add(coordinate);
+                                                    }
                                                 }
 
                                                 // We need to store it so that we can create the multi-array as told by spec

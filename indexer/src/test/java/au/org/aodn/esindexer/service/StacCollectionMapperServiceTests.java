@@ -369,4 +369,23 @@ public class StacCollectionMapperServiceTests {
                 "Stac not equals for sample15"
         );
     }
+    /**
+     * Metadata have geometry which result in a point and not a polygon
+     *
+     * @throws IOException - Do not expect to throw
+     */
+    @Test
+    public void verifyHandleProjectionGeometry() throws IOException {
+        String xml = readResourceFile("classpath:canned/sample_incorrect_projection.xml");
+        String expected = readResourceFile("classpath:canned/sample_incorrect_projection_stac.json");
+        indexerService.indexMetadata(xml);
+
+        Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
+        String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
+        Assertions.assertEquals(
+                objectMapper.readTree(expected),
+                objectMapper.readTree(out.strip()),
+                "Stac not equals for sample15"
+        );
+    }
 }
