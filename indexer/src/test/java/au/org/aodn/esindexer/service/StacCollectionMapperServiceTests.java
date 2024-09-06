@@ -17,6 +17,7 @@ import jakarta.xml.bind.JAXBException;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONException;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -370,6 +371,25 @@ public class StacCollectionMapperServiceTests {
     public void verifyPolygonMissingDimensionAttributeWorks() throws IOException, JSONException {
         String xml = readResourceFile("classpath:canned/sample15.xml");
         String expected = readResourceFile("classpath:canned/sample15_stac.json");
+        indexerService.indexMetadata(xml);
+
+        Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
+        String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
+        JSONAssert.assertEquals(
+                objectMapper.readTree(expected).toPrettyString(),
+                objectMapper.readTree(out.strip()).toPrettyString(),
+                JSONCompareMode.STRICT
+        );
+    }
+    /**
+     * Metadata have geometry which result in a point and not a polygon
+     *
+     * @throws IOException - Do not expect to throw
+     */
+    @Test
+    public void verifyHandleProjectionGeometry() throws IOException, JSONException {
+        String xml = readResourceFile("classpath:canned/sample_incorrect_projection.xml");
+        String expected = readResourceFile("classpath:canned/sample_incorrect_projection_stac.json");
         indexerService.indexMetadata(xml);
 
         Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
