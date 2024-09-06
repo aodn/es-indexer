@@ -17,6 +17,7 @@ import jakarta.xml.bind.JAXBException;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONException;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -386,17 +387,17 @@ public class StacCollectionMapperServiceTests {
      * @throws IOException - Do not expect to throw
      */
     @Test
-    public void verifyHandleProjectionGeometry() throws IOException {
+    public void verifyHandleProjectionGeometry() throws IOException, JSONException {
         String xml = readResourceFile("classpath:canned/sample_incorrect_projection.xml");
         String expected = readResourceFile("classpath:canned/sample_incorrect_projection_stac.json");
         indexerService.indexMetadata(xml);
 
         Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
         String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
-        Assertions.assertEquals(
-                objectMapper.readTree(expected),
-                objectMapper.readTree(out.strip()),
-                "Stac not equals for sample15"
+        JSONAssert.assertEquals(
+                objectMapper.readTree(expected).toPrettyString(),
+                objectMapper.readTree(out.strip()).toPrettyString(),
+                JSONCompareMode.STRICT
         );
     }
 }
