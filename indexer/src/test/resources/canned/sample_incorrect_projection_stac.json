@@ -1370,7 +1370,7 @@
     }
   ],
   "id": "451eb5a7-7a45-44bf-bcf6-1b5139abd006",
-  "record_suggest": {
+  "search_suggestions": {
     "abstract_phrases": []
   },
   "sci:citation": "{\"suggestedCitation\":null,\"useLimitations\":[\"Data, products and services from IMAS are provided \\\"as is\\\" without any warranty as to fitness for a particular purpose.\"],\"otherConstraints\":[\"This dataset is the intellectual property of the University of Tasmania (UTAS) through the Institute for Marine and Antarctic Studies (IMAS).\",\"Cite data as: Asimus, J., & Halpin, J. (2023). Central Kerguelen Plateau SC Cruise 26 dredge details [Data set]. Institute for Marine and Antarctic Studies (IMAS), University of Tasmania (UTAS). https://doi.org/10.25959/YSV9-QW58\"]}",

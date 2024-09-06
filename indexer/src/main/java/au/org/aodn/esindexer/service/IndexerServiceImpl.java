@@ -4,7 +4,6 @@ import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.exception.*;
 import au.org.aodn.esindexer.utils.JaxbUtils;
 import au.org.aodn.metadata.iso19115_3_2018.MDMetadataType;
-import au.org.aodn.stac.model.RecordSuggest;
 import au.org.aodn.stac.model.StacCollectionModel;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.ElasticsearchException;
@@ -21,8 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import jakarta.xml.bind.JAXBException;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import au.org.aodn.stac.model.SearchSuggestionsModel;
 import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.operation.TransformException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -189,21 +187,21 @@ public class IndexerServiceImpl implements IndexerService {
         if (!processedPlatformVocabs.isEmpty()) {
             stacCollectionModel.getSummaries().setPlatformVocabs(processedPlatformVocabs);
         }
+
         // organisation vocabs
         List<String> processedOrganisationVocabs = vocabService.extractVocabLabelsFromThemes(stacCollectionModel.getThemes(), AppConstants.AODN_ORGANISATION_VOCABS);
         if (!processedOrganisationVocabs.isEmpty()) {
             stacCollectionModel.getSummaries().setOrganisationVocabs(processedOrganisationVocabs);
         }
-        /*
-        --------------END--------------
-         */
 
-        // categories suggest using a different index
-        // extendable for other aspects of the records data. eg. title, description, etc. something that are unique to the record and currently using "text" type
-        RecordSuggest recordSuggest = RecordSuggest.builder()
+        // search_as_you_type enabled fields can be extended
+        SearchSuggestionsModel searchSuggestionsModel = SearchSuggestionsModel.builder()
                 .abstractPhrases(this.extractTokensFromDescription(stacCollectionModel.getDescription()))
+                .parameterVocabs(!processedParameterVocabs.isEmpty() ? processedParameterVocabs : null)
+                .platformVocabs(!processedPlatformVocabs.isEmpty() ? processedPlatformVocabs : null)
+                .organisationVocabs(!processedOrganisationVocabs.isEmpty() ? processedOrganisationVocabs : null)
                 .build();
-        stacCollectionModel.setRecordSuggest(recordSuggest);
+        stacCollectionModel.setSearchSuggestionsModel(searchSuggestionsModel);
 
         return stacCollectionModel;
     }

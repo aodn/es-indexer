@@ -159,7 +159,11 @@ public class StacCollectionMapperServiceTests {
         // and now we can use it to compare expected result.
         Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
         String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
-        JSONAssert.assertEquals(objectMapper.readTree(expected).toPrettyString(), objectMapper.readTree(out.strip()).toPrettyString(), JSONCompareMode.STRICT);
+        JSONAssert.assertEquals(
+                objectMapper.readTree(expected).toPrettyString(),
+                objectMapper.readTree(out.strip()).toPrettyString(),
+                JSONCompareMode.STRICT
+        );
     }
 
     @Test
