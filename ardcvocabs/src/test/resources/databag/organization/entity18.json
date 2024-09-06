@@ -1,0 +1,14 @@
+{ "format" : "linked-data-api", "version" : "0.2", "result" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/resource.json?uri=http://vocab.aodn.org.au/def/organisation/entity/18", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/resource.json?uri=http://vocab.aodn.org.au/def/organisation/entity/18", "extendedMetadataVersion" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/resource.json?_metadata=all&uri=http://vocab.aodn.org.au/def/organisation/entity/18", "primaryTopic" : {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/18", "altLabel" : [{"_value" : "CSIRO Oceans & Atmosphere - Hobart", "_lang" : "en"}
+      , {"_value" : "CSIRO Oceans and Atmosphere - Aspendale", "_lang" : "en"}
+      , {"_value" : "CSIRO Oceans and Atmosphere - Black Mountain", "_lang" : "en"}
+      , {"_value" : "CSIRO Oceans and Atmosphere - Dutton Park", "_lang" : "en"}
+      , {"_value" : "CSIRO Oceans and Atmosphere - Floreat", "_lang" : "en"}
+      , {"_value" : "CSIRO Oceans and Atmosphere - Hobart", "_lang" : "en"}
+      , {"_value" : "CSIRO Oceans and Atmosphere - IOMRC Crawley", "_lang" : "en"}
+      , {"_value" : "CSIRO Oceans and Atmosphere - St Lucia", "_lang" : "en"}
+      ], "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/15", "narrower" : ["http://vocab.aodn.org.au/def/organisation/entity/18"]}
+      ], "contributor" : "http://editor.vocabs.ands.org.au/user/eMII_Atkins.Natalia", "creator" : "http://editor.vocabs.ands.org.au/user/Natalia-Atkins", "dcPublisher" : "eMarine Information Infrastructure (eMII)", "dcSource" : "Australian Ocean Data Network Organisation Register", "dctermsCreated" : "2015-04-27T10:38:15Z", "dctermsModified" : "2021-02-10T03:50:56Z", "definition" : "Oceans and Atmosphere provides research to help plan for and respond to weather and climate related natural hazards and ensure sustainable coastal development and growth of marine industries.", "displayLabel" : "CSIRO Oceans and Atmosphere", "exactMatch" : ["http://seadatanet.maris2.nl/v_edmo/print.asp?n_code=1484"], "inScheme" : "http://vocab.aodn.org.au/def/organisation/1", "narrower" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/19", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/18"]}
+      ], "prefLabel" : {"_value" : "CSIRO Oceans and Atmosphere", "_lang" : "en"}
+      , "replaces" : "CSIRO Marine and Atmospheric Research (CMAR)", "scopeNote" : "Replaces http://vocab.aodn.org.au/def/organisation/entity/17", "type" : ["http://www.w3.org/2000/01/rdf-schema#Resource", "http://www.w3.org/2004/02/skos/core#Concept"]}
+    , "type" : ["http://purl.org/linked-data/api/vocab#ItemEndpoint", "http://purl.org/linked-data/api/vocab#Page"]}
+}

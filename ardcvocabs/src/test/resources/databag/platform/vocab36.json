@@ -1,0 +1,43 @@
+{ "format" : "linked-data-api", "version" : "0.2", "result" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=36", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json", "extendedMetadataVersion" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=36&_metadata=all", "first" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=0", "isPartOf" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json", "hasPart" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=36", "type" : "http://purl.org/linked-data/api/vocab#ListEndpoint"}
+    , "items" : [{"_about" : "http://vocab.aodn.org.au/def/platform/entity/922", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2016-07-26T00:00:00Z", "dctermsModified" : "2017-04-13T05:59:12Z", "definition" : "General cargo ship vessel, which flew the flag of India. It was disposed of in 1999.", "prefLabel" : {"_value" : "Vishva Nandin", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/923", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2016-07-26T00:00:00Z", "dctermsModified" : "2017-04-13T05:59:30Z", "definition" : "General cargo ship vessel, which flew the flag of India, and was last known as the Asha Manan. It was disposed of in 2009.", "prefLabel" : {"_value" : "Vishva Prafulla", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/924", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2016-07-26T00:00:00Z", "dctermsModified" : "2017-04-13T04:50:23Z", "definition" : "General cargo ship vessel, which flew the flag of India. It was disposed of in 2001.", "prefLabel" : {"_value" : "Bhavabhuti", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/925", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2016-07-26T00:00:00Z", "dctermsModified" : "2017-04-03T00:22:43Z", "definition" : "General cargo ship vessel, which flew the flag of India. It was disposed of in 2000.", "prefLabel" : {"_value" : "Vishva Parijet", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/926", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2016-07-26T00:00:00Z", "dctermsModified" : "2017-04-13T05:17:57Z", "definition" : "Container ship vessel, which flew the flag of Liberia. It is now known as the As Cypria (January, 2011).", "prefLabel" : {"_value" : "CMA CGM Orchid", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/927", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2016-09-01T00:00:00Z", "dctermsModified" : "2017-04-13T05:47:04Z", "definition" : "Container ship vessel, which is currently flying the flag of Hong Kong (April, 2016).", "prefLabel" : {"_value" : "OOCL Houston", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/928", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2016-09-07T00:00:00Z", "dctermsModified" : "2019-03-27T22:19:19Z", "definition" : "Reefer ship vessel. It was called the Swan from April 1999 until September 2007. It is now called the Pavlovsk.", "prefLabel" : {"_value" : "Swan", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/933", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/36", "prefLabel" : {"_value" : "fishing vessel", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2016-10-13T00:00:00Z", "dctermsModified" : "2017-04-02T23:31:55Z", "definition" : "Fishing vessel, currently flying the Australian flag (August 2016).", "prefLabel" : {"_value" : "Antarctic Chieftain", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/934", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/36", "prefLabel" : {"_value" : "fishing vessel", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2016-10-13T00:00:00Z", "dctermsModified" : "2017-04-02T23:32:56Z", "definition" : "Fishing vessel, currently flying the Australian flag (September 2016).", "prefLabel" : {"_value" : "Corinthian Bay", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/935", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/36", "prefLabel" : {"_value" : "fishing vessel", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2016-10-13T00:00:00Z", "dctermsModified" : "2017-04-02T23:32:32Z", "definition" : "Fishing vessel, currently flying the Australian flag (August 2016).", "prefLabel" : {"_value" : "Atlas Cove", "_lang" : "en"}
+    }
+    ], "itemsPerPage" : 10, "next" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=37", "page" : 36, "prev" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=35", "startIndex" : 361, "type" : "http://purl.org/linked-data/api/vocab#Page"}
+}

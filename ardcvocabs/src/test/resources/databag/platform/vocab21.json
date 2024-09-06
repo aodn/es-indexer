@@ -1,0 +1,214 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=21",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=21&_metadata=all",
+    "first": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=0",
+    "isPartOf": {
+      "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+      "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+      "hasPart": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=21",
+      "type": "http://purl.org/linked-data/api/vocab#ListEndpoint"
+    },
+    "items": [
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/3",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2015-07-07T03:26:45Z",
+        "dctermsModified": "2017-04-13T05:52:37Z",
+        "definition": "Bulk Carrier vessel, which is currently flying the flag of Singapore (October 2014). This ship previously flew the UK flag, with a corresponding callsign of MVTW4.",
+        "prefLabel": {
+          "_value": "RTM Wakmatha",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/30",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2017-06-16T03:39:39Z",
+        "dctermsModified": "2017-06-16T03:40:54Z",
+        "definition": "Container ship vessel, which is currently flying the flag of Liberia (December 2015).",
+        "prefLabel": {
+          "_value": "Portugal",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/300",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/46",
+            "prefLabel": {
+              "_value": "drifting subsurface profiling float",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-06-07T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:36Z",
+        "definition": "SOLO Argo floats are manufactured by Scripps Institution of Oceanography, UC San Diego. They are 26 inches long, and weigh 18.6kg. Their maximum operational depth is 2300m, with a life time of 8.5 years / 300 profiles.",
+        "prefLabel": {
+          "_value": "SOLO Argo Float",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/301",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/46",
+            "prefLabel": {
+              "_value": "drifting subsurface profiling float",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-06-07T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:36Z",
+        "definition": "SOLO Argo floats are manufactured by Scripps Institution of Oceanography, UC San Diego. They are 26 inches long, and weigh 18.6kg. Their maximum operational depth is 2300m, with a life time of 8.5 years / 300 profiles. This float uses an alternative to the usual Systeme Argos location and data transmission system, and uses positions from the Global Positioning System (GPS) and data communication using the Iridium satellites. As of 2010, 250 floats have been deployed with Iridium antennas.",
+        "prefLabel": {
+          "_value": "SOLO Argo Float with Iridium antenna",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/302",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/46",
+            "prefLabel": {
+              "_value": "drifting subsurface profiling float",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-06-07T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:36Z",
+        "definition": "MRV Systems has licensed the intellectual property from Scripps Institution of Oceanography, UC San Diego to manufacture SOLO-II floats. They are 26 inches long, and weigh 18.6kg. Their maximum operational depth is 2300m, with a life time of 8.5 years / 300 profiles.",
+        "prefLabel": {
+          "_value": "SOLO-II Argo Float with Iridium antenna",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/303",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/46",
+            "prefLabel": {
+              "_value": "drifting subsurface profiling float",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-06-07T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:36Z",
+        "definition": "Profiling Autonomous Lagrangian Circulation Explorer (PALACE) R1 Argo floats were manufactured by Webb Research Corporation. They have been replaced by the APEX model.",
+        "prefLabel": {
+          "_value": "PALACE R1 Argo Float",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/304",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/46",
+            "prefLabel": {
+              "_value": "drifting subsurface profiling float",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-06-07T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:36Z",
+        "definition": "Autonomous Profiling EXplorer (APEX) Argo floats are manufactured by Teledyne Webb Research. The are 130 cm (not including antenna) long, and weigh 26kg. Their maximum operational depth is 2000m, with a life time of 4 years / 150 profiles.",
+        "prefLabel": {
+          "_value": "APEX Argo Float",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/305",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/46",
+            "prefLabel": {
+              "_value": "drifting subsurface profiling float",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-06-07T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:36Z",
+        "definition": "Autonomous Profiling EXplorer (APEX) Argo floats are manufactured by Teledyne Webb Research. The are 130 cm (not including antenna) long, and weigh 26kg. Their maximum operational depth is 2000m, with a life time of 4 years / 150 profiles. This float uses an alternative to the usual Systeme Argos location and data transmission system, and uses positions from the Global Positioning System (GPS) and data communication using the Iridium satellites. As of 2010, 250 floats have been deployed with Iridium antennas.",
+        "prefLabel": {
+          "_value": "APEX Argo Float with Iridium antenna",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/306",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/46",
+            "prefLabel": {
+              "_value": "drifting subsurface profiling float",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-06-07T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:36Z",
+        "definition": "Autonomous Profiling EXplorer (APEX) Argo floats are manufactured by Teledyne Webb Research. The are 130 cm (not including antenna) long, and weigh 26kg. Their maximum operational depth is 2000m, with a life time of 4 years / 150 profiles. This float uses an APF8 controller board.",
+        "prefLabel": {
+          "_value": "APEX Argo Float with APF8 controller board",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/307",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/46",
+            "prefLabel": {
+              "_value": "drifting subsurface profiling float",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-07-04T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:36Z",
+        "definition": "Martec and MetOcean Data Systems Ltd. merged in 2001, with Martec creating PROVOR floats for the French and European markets, and MetOcean will manufacture PROVOR floats for the markets in North America and outside of Europe. PROVOR CTS3 has been designed by IFREMER and MARTEC in industrial partnership. and are manufactured by NKE Instrumentation. The scientific instrumentation division for deep-sea oceanography of Kannad was purchased by NKE Instrumentation on January 1st, 2009. They are 170cm long, and weight about 34kg. Their maximum operational depth is 2000m, with a life time of 4/4.5 years / 170 cycles.",
+        "prefLabel": {
+          "_value": "PROVOR Argo Float",
+          "_lang": "en"
+        }
+      }
+    ],
+    "itemsPerPage": 10,
+    "next": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=22",
+    "page": 21,
+    "prev": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=20",
+    "startIndex": 211,
+    "type": "http://purl.org/linked-data/api/vocab#Page"
+  }
+}

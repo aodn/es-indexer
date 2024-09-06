@@ -1,0 +1,15 @@
+{ "format" : "linked-data-api", "version" : "0.2", "result" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/resource.json?uri=http://vocab.aodn.org.au/def/platform/entity/65", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/resource.json?uri=http://vocab.aodn.org.au/def/platform/entity/65", "extendedMetadataVersion" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/resource.json?_metadata=all&uri=http://vocab.aodn.org.au/def/platform/entity/65", "primaryTopic" : {"_about" : "http://vocab.aodn.org.au/def/platform/entity/65", "altLabel" : [{"_value" : "GBRHIN", "_lang" : "en"}
+      ], "box" : "-23.383335 151.9833913 -23.383335 151.9833913", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/48", "narrower" : ["http://vocab.aodn.org.au/def/platform/entity/65"]}
+      ], "contributor" : "http://editor.vocabs.ands.org.au/user/eMII_Atkins.Natalia_Admin", "dcPublisher" : "eMarine Information Infrastructure (eMII)", "dcSource" : "Australian Ocean Data Network platform register", "dctermsCreated" : "2013-04-10T00:00:00Z", "dctermsModified" : "2023-01-25T02:51:48Z", "definition" : "The Heron Island North Mooring is operated by AIMS (Australian Institute of Marine Science) and collect data in Great Barrier Reef region. This mooring was decommissioned in March 2013.", "inScheme" : {"_about" : "http://vocab.aodn.org.au/def/platform/1", "hasConcept" : "http://vocab.aodn.org.au/def/platform/entity/65"}
+      , "prefLabel" : {"_value" : "Heron Island North mooring", "_lang" : "en"}
+      , "related" : [{"_about" : "http://vocab.aodn.org.au/def/platform/entity/124", "related" : ["http://vocab.aodn.org.au/def/platform/entity/65"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/125", "related" : ["http://vocab.aodn.org.au/def/platform/entity/65"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/126", "related" : ["http://vocab.aodn.org.au/def/platform/entity/65"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/127", "related" : ["http://vocab.aodn.org.au/def/platform/entity/65"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/128", "related" : ["http://vocab.aodn.org.au/def/platform/entity/65"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/129", "related" : ["http://vocab.aodn.org.au/def/platform/entity/65"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/130", "related" : ["http://vocab.aodn.org.au/def/platform/entity/65"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/131", "related" : ["http://vocab.aodn.org.au/def/platform/entity/65"]}
+      ], "scopeNote" : "nominal depth:46m", "type" : ["http://www.w3.org/2000/01/rdf-schema#Resource", "http://www.w3.org/2004/02/skos/core#Concept"], "valid" : "2007-09-12/2013-03-16"}
+    , "type" : ["http://purl.org/linked-data/api/vocab#ItemEndpoint", "http://purl.org/linked-data/api/vocab#Page"]}
+}

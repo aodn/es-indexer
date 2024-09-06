@@ -1,0 +1,124 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=15",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=15&_metadata=all",
+    "first": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=0",
+    "isPartOf": {
+      "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+      "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+      "hasPart": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=15",
+      "type": "http://purl.org/linked-data/api/vocab#ListEndpoint"
+    },
+    "items": [
+      {
+        "_about": "http://vocab.nerc.ac.uk/collection/P01/current/ESSAZZ01",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-10-24T01:12:04Z",
+        "definition": "Sustained speed of the wind (distance moved per unit time by a parcel of air) parallel to the ground at a given place and time",
+        "prefLabel": {
+          "_value": "Wind speed in the atmosphere",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.nerc.ac.uk/collection/P01/current/EWDAZZ01",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-10-24T01:11:40Z",
+        "definition": "Direction relative to true north from which the wind is blowing",
+        "prefLabel": {
+          "_value": "Wind from direction in the atmosphere",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.nerc.ac.uk/collection/P01/current/FCO2WTAT",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:24:08Z",
+        "definition": "The fugacity (effective partial pressure allowing for non-ideal gas) of carbon dioxide in the atmosphere assuming a humidity of 100 per cent.",
+        "prefLabel": {
+          "_value": "Fugacity of carbon dioxide (at 100% humidity) in the atmosphere",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.nerc.ac.uk/collection/P01/current/FCO2XXXX",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:24:09Z",
+        "definition": "Fugacity (partial pressure corrected for non-ideality of gases) of carbon dioxide in air that is in equilibrium with a seawater sample",
+        "prefLabel": {
+          "_value": "Fugacity of carbon dioxide (at 100% humidity) in the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.nerc.ac.uk/collection/P01/current/FLUOZZZZ",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:24:09Z",
+        "definition": "The amount of radiation generated in the water column in response to higher energy radiation transmission expressed relative to an unspecified baseline",
+        "prefLabel": {
+          "_value": "Fluorescence of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.nerc.ac.uk/collection/P01/current/FUCXZZZZ",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:24:09Z",
+        "definition": "Concentration of the carotenoid pigment fucoxanthin per unit volume of a water body.  The pigment is contained in suspended particles of unspecified size",
+        "prefLabel": {
+          "_value": "Concentration of fucoxanthin per unit volume of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.nerc.ac.uk/collection/P01/current/GCMXZZ01",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2021-04-21T06:15:51Z",
+        "definition": "The maximum vertical distance between a wave crest and the immediately preceding or following through during a specified observation period.",
+        "prefLabel": {
+          "_value": "Maximum height of waves on the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.nerc.ac.uk/collection/P01/current/GSPRZZ01",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2023-06-27T01:45:51Z",
+        "definition": "Sea surface wave mean directional spread analysed by spectral method.",
+        "prefLabel": {
+          "_value": "Directional spreading of waves on the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.nerc.ac.uk/collection/P01/current/GSZZXXXX",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2023-06-27T01:51:37Z",
+        "definition": "Period between successive swell maxima.",
+        "prefLabel": {
+          "_value": "Period of swell waves on the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.nerc.ac.uk/collection/P01/current/GTCAZZ01",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2023-06-27T01:22:33Z",
+        "definition": "Sea surface wave mean crest period analysed by zero crossing method.",
+        "prefLabel": {
+          "_value": "Average crest period of waves on the water body",
+          "_lang": "en"
+        }
+      }
+    ],
+    "itemsPerPage": 10,
+    "next": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=16",
+    "page": 15,
+    "prev": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=14",
+    "startIndex": 151,
+    "type": "http://purl.org/linked-data/api/vocab#Page"
+  }
+}

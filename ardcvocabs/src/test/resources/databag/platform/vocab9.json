@@ -1,0 +1,214 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=9",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=9&_metadata=all",
+    "first": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=0",
+    "isPartOf": {
+      "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+      "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+      "hasPart": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=9",
+      "type": "http://purl.org/linked-data/api/vocab#ListEndpoint"
+    },
+    "items": [
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/181",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-23T00:00:00Z",
+        "dctermsModified": "2023-01-25T03:26:32Z",
+        "definition": "The Southern ocean Flux Station Mooring is operated by the Australian Bureau of Meteorology (BOM), which collect data in the Sub-Antarctic Zone.",
+        "prefLabel": {
+          "_value": "Southern ocean Flux Station mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/187",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-23T00:00:00Z",
+        "dctermsModified": "2023-01-25T03:27:33Z",
+        "definition": "The Sub-Antarctic Zone Sediment Trap Mooring is operated by CSIRO, which collect data in the Sub-Antarctic Zone.",
+        "prefLabel": {
+          "_value": "Sub-Antarctic Zone Sediment Trap Mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/188",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-23T00:00:00Z",
+        "dctermsModified": "2023-01-25T02:35:39Z",
+        "definition": "The East Australian Current 1 Mooring is operated by CSIRO, and collects data in the East Australian Current. The array that this mooring was part of was decommissioned in August 2013, and a newly configured array (with new moorings) was redeployed in May 2015.",
+        "prefLabel": {
+          "_value": "East Australian Current 1 Mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/189",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-23T00:00:00Z",
+        "dctermsModified": "2023-01-25T02:36:45Z",
+        "definition": "The East Australian Current 2 Mooring is operated by CSIRO, and collects data in the East Australian Current. The array that this mooring was part of was decommissioned in August 2013, and a newly configured array (with new moorings) was redeployed in May 2015.",
+        "prefLabel": {
+          "_value": "East Australian Current 2 Mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/19",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/31",
+            "prefLabel": {
+              "_value": "research vessel",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2017-03-27T00:50:06Z",
+        "dctermsModified": "2020-10-15T02:54:30Z",
+        "definition": "Research vessel, which is operated by Deakin University.",
+        "prefLabel": {
+          "_value": "Yolla",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/190",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-23T00:00:00Z",
+        "dctermsModified": "2023-01-25T02:38:32Z",
+        "definition": "The East Australian Current 3 Mooring is operated by CSIRO, and collects data in the East Australian Current. The array that this mooring was part of was decommissioned in August 2013, and a newly configured array (with new moorings) was redeployed in May 2015.",
+        "prefLabel": {
+          "_value": "East Australian Current 3 Mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/191",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-23T00:00:00Z",
+        "dctermsModified": "2023-01-25T02:40:48Z",
+        "definition": "The East Australian Current 4 Mooring is operated by CSIRO, and collects data in the East Australian Current. The array that this mooring was part of was decommissioned in August 2013, and a newly configured array (with new moorings) was redeployed in May 2015.",
+        "prefLabel": {
+          "_value": "East Australian Current 4 Mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/192",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-23T00:00:00Z",
+        "dctermsModified": "2023-01-25T02:42:00Z",
+        "definition": "The East Australian Current 5 Mooring is operated by CSIRO, and collects data in the East Australian Current. The array that this mooring was part of was decommissioned in August 2013, and a newly configured array (with new moorings) was redeployed in May 2015.",
+        "prefLabel": {
+          "_value": "East Australian Current 5 Mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/193",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-23T00:00:00Z",
+        "dctermsModified": "2023-01-25T03:11:21Z",
+        "definition": "The Ombai Mooring is operated by CSIRO, and collects data in the Indonesian Throughflow. This mooring was decommissioned in October 2015.",
+        "prefLabel": {
+          "_value": "Ombai Mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/194",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-23T00:00:00Z",
+        "dctermsModified": "2023-01-25T03:29:08Z",
+        "definition": "The Timor North Mooring is operated by CSIRO, and collects data in the Indonesian Throughflow. This mooring was decommissioned in April 2014.",
+        "prefLabel": {
+          "_value": "Timor North Mooring",
+          "_lang": "en"
+        }
+      }
+    ],
+    "itemsPerPage": 10,
+    "next": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=10",
+    "page": 9,
+    "prev": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=8",
+    "startIndex": 91,
+    "type": "http://purl.org/linked-data/api/vocab#Page"
+  }
+}

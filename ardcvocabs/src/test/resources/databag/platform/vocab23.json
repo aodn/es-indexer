@@ -1,0 +1,214 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=23",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=23&_metadata=all",
+    "first": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=0",
+    "isPartOf": {
+      "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+      "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+      "hasPart": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=23",
+      "type": "http://purl.org/linked-data/api/vocab#ListEndpoint"
+    },
+    "items": [
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/317",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/16",
+            "prefLabel": {
+              "_value": "offshore structure",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-06-13T00:00:00Z",
+        "dctermsModified": "2019-01-15T00:12:23Z",
+        "definition": "A 6m steel self supporting pole was erected on the northern side of Orpehus Island in the channel between Pelorus Island and Orpheus Island. The pole is set up as per RP1 with two MEA thermistors located at 50m and 100m from the pole and an SBE39 located 100m from the pole and an SBE37 located 200m from the pole in the deeper water. This pole was decommissioned in July 2018.",
+        "prefLabel": {
+          "_value": "Orpheus Island Relay Pole 2",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/318",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/16",
+            "prefLabel": {
+              "_value": "offshore structure",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-06-13T00:00:00Z",
+        "dctermsModified": "2020-10-15T05:08:02Z",
+        "definition": "A 6m steel self supporting pole was erected on the north/west side of Orpehus Island in the channel between Pelorus Island and Orpheus Island but positioned to face more towards the ocean and just on teh entrance to the channel. RP3 on the seaward side of Orpheus Island is set up the same as RP1 and RP2 although as of early 2010 only the two MEA thermistors at 50 and 100m are installed, the SBE37 and SBE39 wil be instaled later in 2010. A vaisala WTX520 weather station is installed on this pole. This pole was decommissioned in July 2018.",
+        "prefLabel": {
+          "_value": "Orpheus Island Relay Pole 3",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/319",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/41",
+            "prefLabel": {
+              "_value": "moored surface buoy",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-06-13T00:00:00Z",
+        "dctermsModified": "2022-11-07T04:23:39Z",
+        "definition": "A round 1.4m yellow buoy has been deployed in Little Pioneer Bay, Orpheus Island, just off the research station in the central part of the Great Barrier Reef. The buoy is configured as a sensor-float with a Campbell Scientific logger, a spread-spectrum radio for communicating with the base station (located near the Research Station) a surface mounted (60cm under the water surface) thermistor and an inductive modem to support a range of inductive sensors, initially this will be a SeaBird SBE39 measuring temperature and pressure (depth). The float is moored at the entrance to Little Pioneer Bay, just deep of the reef front and will be used to measure the water entering the bay with particular interest in warm water pushing up into the bay. The data will support work being done in the bay by James Cook University researchers. This float was decommissioned in June 2022.",
+        "prefLabel": {
+          "_value": "Orpheus Island Sensor Float 1",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/32",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2017-06-26T23:19:01Z",
+        "dctermsModified": "2023-01-25T03:23:21Z",
+        "definition": "The Pulse mooring is operated by CSIRO, and measures biogeochemical properties of the Southern Ocean. It was first deployed in October 2008. This mooring was decommissioned in April 2016.",
+        "prefLabel": {
+          "_value": "Pulse Mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/320",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/41",
+            "prefLabel": {
+              "_value": "moored surface buoy",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-06-13T00:00:00Z",
+        "dctermsModified": "2022-11-07T04:23:58Z",
+        "definition": "A round 1.4m yellow buoy has been deployed in Little Pioneer Bay, Orpheus Island, just off the research station in the central part of the Great Barrier Reef. The buoy is configured as a sensor-float with a Campbell Scientific logger, a spread-spectrum radio for communicating with the base station (located near the Research Station) a surface mounted (60cm under the water surface) thermistor and an inductive modem to support a range of inductive sensors, initialy this will be a SeaBird SBE39 measuring temperature and pressure (depth). The float is moored at the entrance to Little Pioneer Bay, just deep of the reef front and will be used to measure the water entering the bay with particular interest in warm water pushing up into the bay. The data will support work being done in the bay by James Cook University researchers. This float was decommissioned in June 2022.",
+        "prefLabel": {
+          "_value": "Orpheus Island Sensor Float 2",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/321",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/41",
+            "prefLabel": {
+              "_value": "moored surface buoy",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-06-13T00:00:00Z",
+        "dctermsModified": "2018-04-05T06:37:02Z",
+        "definition": "The infrastructure consists of a single 1300 mm buoy located off the north (front) of the reef. The buoy has an Inductive Modem (IM) line that extends from the buoy to the bottom and then along the bottom for around 50 m and then rises to flotation located 9 m below the surface. Instruments are located on this riser to give a profile through the water column. The station is designed to measure temperature of the water column at the front of the reef and in particular to detect upwelling and other events where warmer bottom water is pushed across the shelf onto the reefs. This not only indicates processes operating across the shelf but also conditions when coral bleaching may be more common. The buoy was decommissioned in July 2017.",
+        "prefLabel": {
+          "_value": "Rib Reef Sensor Float 1",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/322",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/14",
+            "prefLabel": {
+              "_value": "land/onshore structure",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-06-14T00:00:00Z",
+        "dctermsModified": "2018-09-13T05:46:56Z",
+        "definition": "The infrastructure consists of a base station mounted on the existing reef communications tower and a single buoy which carries the actual sensors.",
+        "prefLabel": {
+          "_value": "Myrmidon Reef Base Station",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/323",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/41",
+            "prefLabel": {
+              "_value": "moored surface buoy",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-06-14T00:00:00Z",
+        "dctermsModified": "2018-09-13T05:46:56Z",
+        "definition": "In February 2011 Cyclone 'Yasi' damaged the existing AIMS weather station and so this buoy was deployed with both AIMS weather station sensors and sensors for the IMOS funded GBROOS project. In December 2011, a replacement buoy was deployed with the above water sensors being the existing AIMS weather station units and the in-water sensors being provided under the IMOS funded GBROOS project. This resulted in a data gap between the cyclone in February 2011 and the buoy being deployed in December 2011. It is antcipated that the AIMS weather station will be restored in late 2012 in which case the above water sensors will transition back to the AIMS tower with the in-water sensors remaining as part of the IMOS funded work. This buoy was decommissioned in 2015.",
+        "prefLabel": {
+          "_value": "Myrmidon Reef Sensor Float 1",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/324",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/14",
+            "prefLabel": {
+              "_value": "land/onshore structure",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-06-14T00:00:00Z",
+        "dctermsModified": "2018-09-13T05:36:20Z",
+        "definition": "The infrastructure consists of a base station mounted on the existing reef communications tower, using the Telstra nextG service, and 5 buoys which carry the actual sensors. The Davies Reef Base Station performs two functions. The first is to act as a collection point for the sensor network platforms deployed within the reef and to in turn send the data back to the AIMS Data Centre. The second is as a platform for sensors with current sensors including two underwater PAR sensors and a still camera. The base station is co-located with the AIMS Automatic Weather Station (vaisala WXT520) on the Davies Reef Tower in order to optimise the use of power and communications infrastructure.",
+        "prefLabel": {
+          "_value": "Davies Reef Base Station",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/325",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/41",
+            "prefLabel": {
+              "_value": "moored surface buoy",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-06-14T00:00:00Z",
+        "dctermsModified": "2020-10-15T05:05:50Z",
+        "definition": "A round 1.4m yellow buoy has been deployed in the Davies Reef lagoon as part of the sensor network infrastructure at Davies Reef in the central Great Barrier Reef off Townsville, Australia. The buoy is configured as a sensor-float with a Campbell Scientific logger, a spread-spectrum radio for communicating with the on-reef wireless network, a SeaBird Inductive modem and initially a surface mounted (30cm under the water surface) thermistor and bottom mounted SeaBird SBE39 (temperature and pressure). This buoy was decommissioned in March 2018.",
+        "prefLabel": {
+          "_value": "Davies Reef Sensor Float 1",
+          "_lang": "en"
+        }
+      }
+    ],
+    "itemsPerPage": 10,
+    "next": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=24",
+    "page": 23,
+    "prev": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=22",
+    "startIndex": 231,
+    "type": "http://purl.org/linked-data/api/vocab#Page"
+  }
+}

@@ -29,7 +29,8 @@ public class StacCollectionModel {
     @JsonProperty("sci:citation")
     protected String citation;
     /**
-     * Do not use keywords and use theme instead, read here
+     * Do not use keywords and use themes instead because the GN's records using controlled vocabularies
+     * use keywords field type only for uncontrolled keywords/tags
      * protected List<String> keywords
      */
     protected List<ThemesModel> themes;

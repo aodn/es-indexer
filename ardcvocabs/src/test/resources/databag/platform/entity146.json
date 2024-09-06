@@ -1,0 +1,20 @@
+{ "format" : "linked-data-api", "version" : "0.2", "result" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/resource.json?uri=http://vocab.aodn.org.au/def/platform/entity/146", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/resource.json?uri=http://vocab.aodn.org.au/def/platform/entity/146", "extendedMetadataVersion" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/resource.json?_metadata=all&uri=http://vocab.aodn.org.au/def/platform/entity/146", "primaryTopic" : {"_about" : "http://vocab.aodn.org.au/def/platform/entity/146", "altLabel" : [{"_value" : "NRSNIN", "_lang" : "en"}
+      ], "box" : "-21.868 113.934 -21.868 113.934", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/48", "narrower" : ["http://vocab.aodn.org.au/def/platform/entity/146"]}
+      ], "contributor" : "http://editor.vocabs.ands.org.au/user/eMII_Atkins.Natalia_Admin", "creator" : "http://editor.vocabs.ands.org.au/user/Sebastien-Mancini", "dcPublisher" : "eMarine Information Infrastructure (eMII)", "dcSource" : "Australian Ocean Data Network platform register", "dctermsCreated" : "2013-05-15T00:00:00Z", "dctermsModified" : "2023-01-25T03:09:10Z", "definition" : "The Ningaloo Reef National Reference Station Mooring is operated by AIMS (Australian Institute of Marine Science) and collects data from coastal ocean waters around Nigaloo Reef. This mooring was decommissioned in August 2014.", "inScheme" : {"_about" : "http://vocab.aodn.org.au/def/platform/1", "hasConcept" : "http://vocab.aodn.org.au/def/platform/entity/146"}
+      , "prefLabel" : {"_value" : "Ningaloo Reef National Reference Station Mooring", "_lang" : "en"}
+      , "related" : [{"_about" : "http://vocab.aodn.org.au/def/platform/entity/141", "related" : ["http://vocab.aodn.org.au/def/platform/entity/146"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/142", "related" : ["http://vocab.aodn.org.au/def/platform/entity/146"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/143", "related" : ["http://vocab.aodn.org.au/def/platform/entity/146"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/145", "related" : ["http://vocab.aodn.org.au/def/platform/entity/146"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/147", "related" : ["http://vocab.aodn.org.au/def/platform/entity/146"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/148", "related" : ["http://vocab.aodn.org.au/def/platform/entity/146"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/149", "related" : ["http://vocab.aodn.org.au/def/platform/entity/146"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/150", "related" : ["http://vocab.aodn.org.au/def/platform/entity/146"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/151", "related" : ["http://vocab.aodn.org.au/def/platform/entity/146"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/152", "related" : ["http://vocab.aodn.org.au/def/platform/entity/146"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/66", "related" : ["http://vocab.aodn.org.au/def/platform/entity/146"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/67", "related" : ["http://vocab.aodn.org.au/def/platform/entity/146"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/68", "related" : ["http://vocab.aodn.org.au/def/platform/entity/146"]}
+      ], "scopeNote" : "nominal depth:55m", "type" : ["http://www.w3.org/2000/01/rdf-schema#Resource", "http://www.w3.org/2004/02/skos/core#Concept"], "valid" : "2010-08-02/2014-08-13"}
+    , "type" : ["http://purl.org/linked-data/api/vocab#ItemEndpoint", "http://purl.org/linked-data/api/vocab#Page"]}
+}

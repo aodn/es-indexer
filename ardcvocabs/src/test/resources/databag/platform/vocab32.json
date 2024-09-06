@@ -1,0 +1,214 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=32",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=32&_metadata=all",
+    "first": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=0",
+    "isPartOf": {
+      "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+      "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+      "hasPart": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=32",
+      "type": "http://purl.org/linked-data/api/vocab#ListEndpoint"
+    },
+    "items": [
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/873",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/65",
+            "prefLabel": {
+              "_value": "orbiting satellite",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2015-08-07T00:00:00Z",
+        "dctermsModified": "2020-10-15T05:10:13Z",
+        "definition": "This satellite was the 4th flight of the NOAA 5th generation programme. It operated between May 2005 and 2018, at an altitude of 854km, in a sunsynchronous orbit. Instrumentation: Advanced Microwave Sounding Unit - A, Advanced Very High Resolution Radiometer / 3, High-resolution Infra Red Sounder / 4, Microwave Humidity Sounding, Search and Rescue Satellite-Aided Tracking System, Solar Backscatter Ultraviolet / 2, Data Collection System / 2 (also called Argos-2), SEM / Medium energy proton detector and SEM / Total Energy Detector.",
+        "prefLabel": {
+          "_value": "NOAA-18",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/874",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/65",
+            "prefLabel": {
+              "_value": "orbiting satellite",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2015-08-07T00:00:00Z",
+        "dctermsModified": "2020-10-15T04:57:29Z",
+        "definition": "This satellite was the 5th (last) flight of the NOAA 5th generation programme. It operated between February 2009 and 2018, at an altitude of 870km, in a sunsynchronous orbit. Instrumentation: Advanced Data Collection System (also called Argos-3), Advanced Microwave Sounding Unit - A, Advanced Very High Resolution Radiometer / 3, High-resolution Infra Red Sounder / 4, Microwave Humidity Sounding, Search and Rescue Satellite-Aided Tracking System, Solar Backscatter Ultraviolet / 2, SEM / Medium energy proton detector and SEM / Total Energy Detector.",
+        "prefLabel": {
+          "_value": "NOAA-19",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/879",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/65",
+            "prefLabel": {
+              "_value": "orbiting satellite",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2015-08-07T00:00:00Z",
+        "dctermsModified": "2020-10-15T04:58:00Z",
+        "definition": "This satellite was the 2nd flight of the NASA EOS programme. It operated between May 2002 and 2018, at an altitude of 705km, in a sunsynchronous orbit. Instrumentation: Atmospheric Infra-Red Sounder, Advanced Microwave Scanning Radiometer for EOS, Advanced Microwave Sounding Unit - A, Clouds and the Earth\u2019s Radiant Energy System, Humidity Sounder for Brazil and Moderate-resolution Imaging Spectro-radiometer.",
+        "prefLabel": {
+          "_value": "Aqua",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/881",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/65",
+            "prefLabel": {
+              "_value": "orbiting satellite",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2015-09-04T00:00:00Z",
+        "dctermsModified": "2017-04-02T23:54:52Z",
+        "definition": "This satellite was the only flight of the OrbView-2/SeaStar (former name) programme. It operated between August 1997 and December 2010, at an altitude of 705km, in a sunsynchronous orbit. Instrumentation: Sea-viewing Wide Field-of-view Sensor (SeaWiFS).",
+        "prefLabel": {
+          "_value": "OrbView-2",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/882",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/65",
+            "prefLabel": {
+              "_value": "orbiting satellite",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2015-09-04T00:00:00Z",
+        "dctermsModified": "2017-04-02T23:55:09Z",
+        "definition": "This satellite was the 4th flight of the Satélite de Aplicaciones Cientificas (SAC) Aquarius Mission programme. It operated between June 2011 and June 2015, at an altitude of 661km, in a sunsynchronous orbit. Instrumentation: Aquarius.",
+        "prefLabel": {
+          "_value": "SAC-D",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/883",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/65",
+            "prefLabel": {
+              "_value": "orbiting satellite",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2015-09-04T00:00:00Z",
+        "dctermsModified": "2017-04-02T23:55:25Z",
+        "definition": "This satellite was the only flight of the TOPEX-Poseidon programme. It operated between August 1992 and October 2005, at an altitude of 1336km, in a drifting orbit. Instrumentation: Doppler Orbitography and Radiopositioning Integrated by Satellite, GPS Demonstration Receiver, Laser Retroreflector Array, Single-frequency Solid-state Altimeter, TOPEX Microwave Radiometer, NASA Radar Altimeter.",
+        "prefLabel": {
+          "_value": "TOPEX-Poseidon",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/884",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/65",
+            "prefLabel": {
+              "_value": "orbiting satellite",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2015-09-04T00:00:00Z",
+        "dctermsModified": "2021-01-22T04:55:31Z",
+        "definition": "This satellite was the 1st flight of the JASON series. It operated between December 2001 and July 2013, at an altitude of 1324km, in a drifting orbit. Instrumentation: Doppler Orbitography and Radiopositioning Integrated by Satellite, JASON Microwave Radiometer, Laser Retroreflector Array, Poseidon 2, Turbo Rogue Space Receiver.",
+        "prefLabel": {
+          "_value": "JASON-1",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/885",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/65",
+            "prefLabel": {
+              "_value": "orbiting satellite",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2015-09-04T00:00:00Z",
+        "dctermsModified": "2021-01-22T04:55:48Z",
+        "definition": "This satellite was the 2nd flight of the JASON series, also called the Ocean Surface Topography Mission (OSTM). It operated between June 2008 and October 2019, at an altitude of 1336km, in a drifting orbit. Instrumentation: Advanced Microwave Radiometer, Doppler Orbitography and Radiopositioning Integrated by Satellite, Laser Retroreflector Array, Poseidon 3, Turbo Rogue Space Receiver.",
+        "prefLabel": {
+          "_value": "JASON-2",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/886",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/65",
+            "prefLabel": {
+              "_value": "orbiting satellite",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2015-09-04T00:00:00Z",
+        "dctermsModified": "2018-09-14T06:41:48Z",
+        "definition": "This satellite will be the 3rd flight of the JASON series, also called the Ocean Surface Topography Mission (OSTM). It is planned to be operational between 2016 and 2021, at an altitude of 1336km, in a drifting orbit. Instrumentation: Advanced Microwave Radiometer, Doppler Orbitography and Radiopositioning Integrated by Satellite, Laser Retroreflector Array, Poseidon 3B, Turbo Rogue Space Receiver.",
+        "prefLabel": {
+          "_value": "JASON-3",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/887",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/65",
+            "prefLabel": {
+              "_value": "orbiting satellite",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2015-09-04T00:00:00Z",
+        "dctermsModified": "2017-04-02T23:50:43Z",
+        "definition": "This satellite was the 2nd (last) flight of the GEOSat programme. It operated between February 1998 and October 2008 at an altitude of 784km, in a drifting orbit. Instrumentation: GEOSat Follow-On Radar Altimeter, Laser Retroreflector Array, Turbo Rogue Space Receiver and Water Vapor Radiometer.",
+        "prefLabel": {
+          "_value": "GFO",
+          "_lang": "en"
+        }
+      }
+    ],
+    "itemsPerPage": 10,
+    "next": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=33",
+    "page": 32,
+    "prev": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=31",
+    "startIndex": 321,
+    "type": "http://purl.org/linked-data/api/vocab#Page"
+  }
+}

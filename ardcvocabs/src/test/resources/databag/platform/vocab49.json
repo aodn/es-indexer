@@ -1,0 +1,27 @@
+{ "format" : "linked-data-api", "version" : "0.2", "result" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=49", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json", "extendedMetadataVersion" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=49&_metadata=all", "first" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=0", "isPartOf" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json", "hasPart" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=49", "type" : "http://purl.org/linked-data/api/vocab#ListEndpoint"}
+    , "items" : [{"_about" : "http://vocab.aodn.org.au/def/platform/entity/356", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/36", "prefLabel" : {"_value" : "fishing vessel", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2024-03-13T04:16:12Z", "dctermsModified" : "2024-03-13T04:17:55Z", "definition" : "Fishing vessel which was known as the Paerangi until 2008. It is now known as the Jawhart Al Wusta.", "prefLabel" : {"_value" : "Paerangi", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/355", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/36", "prefLabel" : {"_value" : "fishing vessel", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2024-03-13T04:13:51Z", "dctermsModified" : "2024-03-13T04:15:57Z", "definition" : "Fishing vessel, which was flying the flag of New Zealand (December, 2011).", "prefLabel" : {"_value" : "Amaltal Enterprise", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/357", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/31", "prefLabel" : {"_value" : "research vessel", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2024-07-24T06:58:40Z", "dctermsModified" : "2024-07-24T07:02:05Z", "definition" : "Research vessel owned by NIWA, which is flying the flag of New Zealand.", "prefLabel" : {"_value" : "Kaharoa II", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/358", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2024-07-24T07:00:38Z", "dctermsModified" : "2024-07-24T07:03:03Z", "definition" : "Passenger ship vessel, which is currently flying the flag of Australia (February, 2023).", "prefLabel" : {"_value" : "Coral Adventurer", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/359", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2024-07-24T07:03:32Z", "dctermsModified" : "2024-07-24T07:04:31Z", "definition" : "Passenger ship vessel, which is currently flying the flag of Australia (February, 2024).", "prefLabel" : {"_value" : "Coral Geographer", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.nerc.ac.uk/collection/C17/current/09ZK", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2024-07-24T00:00:00Z", "definition" : "Bulk carrier vessel, which is currently flying the flag of Australia.", "prefLabel" : {"_value" : "Goliath", "_lang" : "en"}
+    }
+    ], "itemsPerPage" : 10, "page" : 49, "prev" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=48", "startIndex" : 491, "type" : "http://purl.org/linked-data/api/vocab#Page"}
+}

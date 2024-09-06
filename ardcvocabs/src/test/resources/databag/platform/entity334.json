@@ -1,0 +1,20 @@
+{ "format" : "linked-data-api", "version" : "0.2", "result" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/resource.json?uri=http://vocab.aodn.org.au/def/platform/entity/334", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/resource.json?uri=http://vocab.aodn.org.au/def/platform/entity/334", "extendedMetadataVersion" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/resource.json?_metadata=all&uri=http://vocab.aodn.org.au/def/platform/entity/334", "primaryTopic" : {"_about" : "http://vocab.aodn.org.au/def/platform/entity/334", "altLabel" : [{"_value" : "Heron_Island", "_lang" : "en"}
+      ], "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/14", "narrower" : ["http://vocab.aodn.org.au/def/platform/entity/334"]}
+      ], "contributor" : "http://editor.vocabs.ands.org.au/user/eMII_Atkins.Natalia", "creator" : "http://editor.vocabs.ands.org.au/user/Sebastien-Mancini", "dcPublisher" : "eMarine Information Infrastructure (eMII)", "dcSource" : "Australian Ocean Data Network platform register", "dctermsCreated" : "2013-06-14T00:00:00Z", "dctermsModified" : "2018-09-14T06:30:08Z", "definition" : "The infrastructure consists of a base station mounted on the existing telecommunications tower, eight sensor poles that create the on-reef network and five sensor floats on which the sensors are attached. One of the poles (RP5) also has a weather station mounted on it.", "inScheme" : {"_about" : "http://vocab.aodn.org.au/def/platform/1", "hasConcept" : "http://vocab.aodn.org.au/def/platform/entity/334"}
+      , "prefLabel" : {"_value" : "Heron Island Base Station", "_lang" : "en"}
+      , "related" : [{"_about" : "http://vocab.aodn.org.au/def/platform/entity/335", "related" : ["http://vocab.aodn.org.au/def/platform/entity/334"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/336", "related" : ["http://vocab.aodn.org.au/def/platform/entity/334"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/337", "related" : ["http://vocab.aodn.org.au/def/platform/entity/334"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/338", "related" : ["http://vocab.aodn.org.au/def/platform/entity/334"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/339", "related" : ["http://vocab.aodn.org.au/def/platform/entity/334"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/340", "related" : ["http://vocab.aodn.org.au/def/platform/entity/334"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/341", "related" : ["http://vocab.aodn.org.au/def/platform/entity/334"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/342", "related" : ["http://vocab.aodn.org.au/def/platform/entity/334"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/343", "related" : ["http://vocab.aodn.org.au/def/platform/entity/334"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/344", "related" : ["http://vocab.aodn.org.au/def/platform/entity/334"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/345", "related" : ["http://vocab.aodn.org.au/def/platform/entity/334"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/346", "related" : ["http://vocab.aodn.org.au/def/platform/entity/334"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/347", "related" : ["http://vocab.aodn.org.au/def/platform/entity/334"]}
+      ], "type" : ["http://www.w3.org/2000/01/rdf-schema#Resource", "http://www.w3.org/2004/02/skos/core#Concept"]}
+    , "type" : ["http://purl.org/linked-data/api/vocab#ItemEndpoint", "http://purl.org/linked-data/api/vocab#Page"]}
+}

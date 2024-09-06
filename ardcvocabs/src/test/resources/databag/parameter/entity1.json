@@ -1,0 +1,50 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/resource.json?uri=http://vocab.aodn.org.au/def/discovery_parameter/entity/1",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/resource.json?uri=http://vocab.aodn.org.au/def/discovery_parameter/entity/1",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/resource.json?_metadata=all&uri=http://vocab.aodn.org.au/def/discovery_parameter/entity/1",
+    "primaryTopic": {
+      "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/1",
+      "broadMatch": [
+        "http://vocab.aodn.org.au/def/parameter_classes/category/52"
+      ],
+      "contributor": "http://editor.vocabs.ands.org.au/user/eMII_Atkins.Natalia_Admin",
+      "creator": "http://editor.vocabs.ands.org.au/user/Sebastien_Mancini",
+      "dctermsCreated": "2015-06-30T06:05:19Z",
+      "dctermsModified": "2018-02-23T00:23:30Z",
+      "definition": "Concentration of dissolved inorganic carbon per unit mass of the water column. Solute may be expressed in terms of mass or quantity of substance.",
+      "hiddenLabel": [
+        {
+          "_value": "TCO2",
+          "_lang": "en"
+        }
+      ],
+      "inScheme": {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/1",
+        "hasTopConcept": [
+          "http://vocab.aodn.org.au/def/discovery_parameter/entity/1"
+        ]
+      },
+      "prefLabel": {
+        "_value": "Concentration of carbon (total inorganic) per unit mass of the water body",
+        "_lang": "en"
+      },
+      "topConceptOf": {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/1",
+        "hasTopConcept": [
+          "http://vocab.aodn.org.au/def/discovery_parameter/entity/1"
+        ]
+      },
+      "type": [
+        "http://www.w3.org/2000/01/rdf-schema#Resource",
+        "http://www.w3.org/2004/02/skos/core#Concept"
+      ]
+    },
+    "type": [
+      "http://purl.org/linked-data/api/vocab#ItemEndpoint",
+      "http://purl.org/linked-data/api/vocab#Page"
+    ]
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=18",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=18&_metadata=all",
+    "first": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=0",
+    "isPartOf": {
+      "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+      "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+      "hasPart": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=18",
+      "type": "http://purl.org/linked-data/api/vocab#ListEndpoint"
+    },
+    "items": [
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/30",
+        "dctermsCreated": "2018-02-22T05:33:48Z",
+        "dctermsModified": "2023-06-27T23:32:27Z",
+        "definition": "Direction from which the most energetic waves are coming in the swell wave component of a sea.",
+        "prefLabel": {
+          "_value": "Direction at spectral maximum of swell waves first component on the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/31",
+        "dctermsCreated": "2018-02-22T05:37:48Z",
+        "dctermsModified": "2023-06-27T01:55:02Z",
+        "definition": "The average height of the highest one third of the wind sea waves, where the height is defined as the vertical distance from a wave trough to the following wave crest.",
+        "prefLabel": {
+          "_value": "Significant height of wind sea waves on the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/32",
+        "dctermsCreated": "2018-02-22T05:39:09Z",
+        "dctermsModified": "2023-06-27T01:49:47Z",
+        "definition": "Period of the highest wind sea wave peak analysed by spectral method.",
+        "prefLabel": {
+          "_value": "Period at spectral maximum of wind sea waves on the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/33",
+        "dctermsCreated": "2018-02-22T05:40:25Z",
+        "dctermsModified": "2023-06-27T01:43:06Z",
+        "definition": "Direction (related to true north) from which the peak period wind sea waves are coming from analysed by spectral method.",
+        "prefLabel": {
+          "_value": "Direction at spectral maximum of wind sea waves on the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/34",
+        "dctermsCreated": "2018-02-22T05:43:05Z",
+        "dctermsModified": "2023-06-27T01:47:30Z",
+        "definition": "The maximum period of the waves analysed by zero crossing method.",
+        "prefLabel": {
+          "_value": "Maximum zero crossing period of waves on the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/35",
+        "dctermsCreated": "2018-02-22T05:45:57Z",
+        "dctermsModified": "2023-06-27T01:29:49Z",
+        "definition": "The mean of the highest third of waves on the water body analysed by zero crossing method.",
+        "prefLabel": {
+          "_value": "Average height of the highest 1/3rd of waves on the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/36",
+        "dctermsCreated": "2018-02-22T05:47:23Z",
+        "dctermsModified": "2023-06-27T01:32:36Z",
+        "definition": "The period of the significant wave analysed by zero crossing method.",
+        "prefLabel": {
+          "_value": "Average zero crossing period of waves on the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/37",
+        "dctermsCreated": "2018-02-22T05:50:07Z",
+        "dctermsModified": "2023-06-27T01:31:30Z",
+        "definition": "The average period of the highest tenth of waves measured during a recording burst.",
+        "prefLabel": {
+          "_value": "Average zero crossing period of the highest 1/10th waves on the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/38",
+        "dctermsCreated": "2018-02-22T05:51:05Z",
+        "dctermsModified": "2023-07-26T23:52:46Z",
+        "definition": "Fourier Analysis on directional sea level elevation, also named 'Directional Spectral density' or 'Directional Power spectral density'.",
+        "prefLabel": {
+          "_value": "Variance spectral density of waves on the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/39",
+        "dctermsCreated": "2018-02-22T05:52:22Z",
+        "dctermsModified": "2023-07-28T04:14:02Z",
+        "definition": "Sea surface wave directional variance spectral density is the variance of the amplitude of the waves within given ranges of direction and wave frequency.",
+        "prefLabel": {
+          "_value": "Directional variance spectral density of waves on the water body",
+          "_lang": "en"
+        }
+      }
+    ],
+    "itemsPerPage": 10,
+    "next": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=19",
+    "page": 18,
+    "prev": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=17",
+    "startIndex": 181,
+    "type": "http://purl.org/linked-data/api/vocab#Page"
+  }
+}

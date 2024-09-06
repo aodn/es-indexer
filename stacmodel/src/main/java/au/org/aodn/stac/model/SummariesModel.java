@@ -52,4 +52,16 @@ public class SummariesModel {
      */
     @JsonProperty("parameter_vocabs")
     protected List<String> parameterVocabs;
+
+    /**
+     * ARDC platform vocabs
+     */
+    @JsonProperty("platform_vocabs")
+    protected List<String> platformVocabs;
+
+    /**
+     * ARDC organisation vocabs
+     */
+    @JsonProperty("organisation_vocabs")
+    protected List<String> organisationVocabs;
 }

@@ -1,0 +1,43 @@
+{ "format" : "linked-data-api", "version" : "0.2", "result" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=33", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json", "extendedMetadataVersion" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=33&_metadata=all", "first" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=0", "isPartOf" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json", "hasPart" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=33", "type" : "http://purl.org/linked-data/api/vocab#ListEndpoint"}
+    , "items" : [{"_about" : "http://vocab.aodn.org.au/def/platform/entity/890", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2016-02-24T00:00:00Z", "dctermsModified" : "2017-04-13T05:41:20Z", "definition" : "Cargo ship vessel, which is currently flying the flag of Singapore (February 2016).", "prefLabel" : {"_value" : "Maersk Jalan", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/891", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2016-02-24T00:00:00Z", "dctermsModified" : "2017-04-13T05:51:41Z", "definition" : "Container ship vessel, which is currently flying the flag of Cyprus (February 2016).", "prefLabel" : {"_value" : "Patricia Schulte", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/892", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2016-02-24T00:00:00Z", "dctermsModified" : "2017-04-13T05:55:07Z", "definition" : "Cargo ship vessel, which is currently flying the flag of Singapore (February 2016).", "prefLabel" : {"_value" : "Siangtan", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/894", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/31", "prefLabel" : {"_value" : "research vessel", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2016-03-30T00:00:00Z", "dctermsModified" : "2017-04-03T00:01:56Z", "definition" : "Research/survey vessel, currently flying the flag of Singapore (March 2016).", "prefLabel" : {"_value" : "Ramform Sovereign", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/895", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/31", "prefLabel" : {"_value" : "research vessel", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2016-03-30T00:00:00Z", "dctermsModified" : "2017-04-13T03:49:51Z", "definition" : "Research/survey vessel, operating for the Schmidt Ocean Institute, currently flying the flag of the Cayman Islands (March 2016).", "prefLabel" : {"_value" : "Falkor", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/896", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/36", "prefLabel" : {"_value" : "fishing vessel", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2016-03-30T00:00:00Z", "dctermsModified" : "2017-04-02T23:33:59Z", "definition" : "Fishing vessel, currently flying the Australian flag (March 2016)", "prefLabel" : {"_value" : "Isla Eden", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/897", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/36", "prefLabel" : {"_value" : "fishing vessel", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2016-03-30T00:00:00Z", "dctermsModified" : "2017-04-02T23:34:53Z", "definition" : "Fishing vessel, currently flying the Australian flag (March 2016)", "prefLabel" : {"_value" : "Saxon Onward", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/898", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/48", "prefLabel" : {"_value" : "mooring", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2016-04-15T00:00:00Z", "dctermsModified" : "2023-01-25T03:44:24Z", "definition" : "Acidification mooring located adjacent to the Heron Island reef slope in the Wistari channel on the Great Barrier Reef. This mooring is operated by AIMS (Australian Institute of Marine Science).", "prefLabel" : {"_value" : "Wistari Channel acidification Mooring", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/899", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/48", "prefLabel" : {"_value" : "mooring", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2016-04-15T00:00:00Z", "dctermsModified" : "2023-01-25T03:44:56Z", "definition" : "Acidification mooring co-located with the Yongala National Reference Station (NRSYON) in Queensland. This mooring is operated by AIMS (Australian Institute of Marine Science). This mooring was decommissioned in August 2014.", "prefLabel" : {"_value" : "Yongala National Reference Station Acidification Mooring", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/9", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/36", "prefLabel" : {"_value" : "fishing vessel", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2017-01-05T05:38:26Z", "dctermsModified" : "2017-04-02T23:35:07Z", "definition" : "Fishing vessel, currently flying the Australian flag (January 2017)", "prefLabel" : {"_value" : "Sniper", "_lang" : "en"}
+    }
+    ], "itemsPerPage" : 10, "next" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=34", "page" : 33, "prev" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=32", "startIndex" : 331, "type" : "http://purl.org/linked-data/api/vocab#Page"}
+}

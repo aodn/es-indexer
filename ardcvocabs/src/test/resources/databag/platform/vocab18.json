@@ -1,0 +1,214 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=18",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=18&_metadata=all",
+    "first": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=0",
+    "isPartOf": {
+      "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+      "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+      "hasPart": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=18",
+      "type": "http://purl.org/linked-data/api/vocab#ListEndpoint"
+    },
+    "items": [
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/27",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2017-06-16T02:23:54Z",
+        "dctermsModified": "2017-06-16T02:25:45Z",
+        "definition": "Container ship vessel, which is currently flying the flag of Hong Kong (December 2016)",
+        "prefLabel": {
+          "_value": "Island Chief",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/270",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-06-03T00:00:00Z",
+        "dctermsModified": "2020-10-15T04:48:07Z",
+        "definition": "Bulk carrier ship vessel. It was called the Iron Newcastle from 1985 until June 1999. It is now called the Camriz (Panama, Aug 2007). It was disposed of in approximately 2010.",
+        "prefLabel": {
+          "_value": "Iron Newcastle",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/271",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-06-03T00:00:00Z",
+        "dctermsModified": "2017-04-13T05:35:53Z",
+        "definition": "Bulk carrier ship vessel. It was called the Iron Kembla from 1986 until May 2005. It was then called the Merit Land (Panama). It was disposed of in approximately 2011.",
+        "prefLabel": {
+          "_value": "Iron Kembla",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/272",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-06-03T00:00:00Z",
+        "dctermsModified": "2017-04-13T05:36:09Z",
+        "definition": "Bulk carrier ship vessel. It was called the Iron Pacific from 1986 until 1998. It was then called the Berge Pacific (Norway). It was disposed of in approximately 2011.",
+        "prefLabel": {
+          "_value": "Iron Pacific",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/273",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/31",
+            "prefLabel": {
+              "_value": "research vessel",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-30T00:00:00Z",
+        "dctermsModified": "2017-04-13T03:50:24Z",
+        "definition": "Research ship vessel, which was flying the flag of Australia. It was decommissioned in 2002.",
+        "prefLabel": {
+          "_value": "Franklin",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/274",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-06-03T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:36Z",
+        "definition": "Bulk carrier ship vessel. It was called the Australian Progress from 1977 until March 1991. It was then called Treasure Sea (Panama). It was disposed of in 1992.",
+        "prefLabel": {
+          "_value": "Australian Progress",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/275",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-06-03T00:00:00Z",
+        "dctermsModified": "2020-10-15T04:48:27Z",
+        "definition": "General cargo ship vessel. It was called the Iron Flinders from February 1991 until May 1999. It is now called the India Express (Panama, January 2008). It was disposed of in approximately 2013.",
+        "prefLabel": {
+          "_value": "Iron Flinders",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/277",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-06-03T00:00:00Z",
+        "dctermsModified": "2017-04-13T04:09:23Z",
+        "definition": "Container ship vessel. It was called the Australian Enterprise from January 1997 until 2001. It was most recently called the ANL Explorer. It was disposed of in approximately 2009.",
+        "prefLabel": {
+          "_value": "Australian Enterprise",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/278",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-30T00:00:00Z",
+        "dctermsModified": "2017-04-13T05:30:11Z",
+        "definition": "Container ship vessel. It was called the Contship Borealis from 2002 until Aug 2005. It is now called the Glasgow Express (Germany, January 2008).",
+        "prefLabel": {
+          "_value": "Contship Borealis",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/279",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-30T00:00:00Z",
+        "dctermsModified": "2017-04-13T05:29:39Z",
+        "definition": "Container ship vessel. It was called the Contship Australis from 2002 until July 2005. It is now called the Dublin Express (Germany, October 2010).",
+        "prefLabel": {
+          "_value": "Contship Australis",
+          "_lang": "en"
+        }
+      }
+    ],
+    "itemsPerPage": 10,
+    "next": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=19",
+    "page": 18,
+    "prev": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=17",
+    "startIndex": 181,
+    "type": "http://purl.org/linked-data/api/vocab#Page"
+  }
+}

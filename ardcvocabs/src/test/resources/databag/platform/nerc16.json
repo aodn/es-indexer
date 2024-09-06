@@ -1,0 +1,22 @@
+{ "format" : "linked-data-api", "version" : "0.2", "result" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/resource.json?uri=http://vocab.nerc.ac.uk/collection/L06/current/16", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/resource.json?uri=http://vocab.nerc.ac.uk/collection/L06/current/16", "extendedMetadataVersion" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/resource.json?_metadata=all&uri=http://vocab.nerc.ac.uk/collection/L06/current/16", "primaryTopic" : {"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/16", "broadMatch" : ["http://vocab.aodn.org.au/def/platform_classes/category/36"], "contributor" : "http://editor.vocabs.ands.org.au/user/eMII_Finney.Kim_Admin", "dcPublisher" : "British Oceanographic Data Centre (BODC)", "dcSource" : "(L061) SeaVoX Platform Categories", "dctermsCreated" : "2013-07-01T00:00:00Z", "dctermsModified" : "2017-02-07T03:52:42Z", "definition" : "A fixed (for the duration of the measurements) man-made structure away from the coast to which instrumentation may be attached (e.g. oil rig gas rig or jack-up barge)", "inScheme" : {"_about" : "http://vocab.aodn.org.au/def/platform/1", "hasConcept" : "http://vocab.nerc.ac.uk/collection/L06/current/16", "hasTopConcept" : ["http://vocab.nerc.ac.uk/collection/L06/current/16"]}
+      , "narrower" : [{"_about" : "http://vocab.aodn.org.au/def/platform/entity/309", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/16"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/310", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/16"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/316", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/16"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/317", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/16"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/318", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/16"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/331", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/16"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/332", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/16"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/333", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/16"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/335", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/16"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/336", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/16"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/337", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/16"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/338", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/16"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/339", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/16"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/340", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/16"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/341", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/16"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/342", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/16"]}
+      ], "prefLabel" : {"_value" : "offshore structure", "_lang" : "en"}
+      , "topConceptOf" : {"_about" : "http://vocab.aodn.org.au/def/platform/1", "hasConcept" : "http://vocab.nerc.ac.uk/collection/L06/current/16", "hasTopConcept" : ["http://vocab.nerc.ac.uk/collection/L06/current/16"]}
+      , "type" : ["http://www.w3.org/2000/01/rdf-schema#Resource", "http://www.w3.org/2004/02/skos/core#Concept"]}
+    , "type" : ["http://purl.org/linked-data/api/vocab#ItemEndpoint", "http://purl.org/linked-data/api/vocab#Page"]}
+}

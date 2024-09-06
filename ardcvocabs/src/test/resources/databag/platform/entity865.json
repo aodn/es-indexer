@@ -1,0 +1,19 @@
+{ "format" : "linked-data-api", "version" : "0.2", "result" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/resource.json?uri=http://vocab.aodn.org.au/def/platform/entity/865", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/resource.json?uri=http://vocab.aodn.org.au/def/platform/entity/865", "extendedMetadataVersion" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/resource.json?_metadata=all&uri=http://vocab.aodn.org.au/def/platform/entity/865", "primaryTopic" : {"_about" : "http://vocab.aodn.org.au/def/platform/entity/865", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/65", "narrower" : ["http://vocab.aodn.org.au/def/platform/entity/865"]}
+      ], "contributor" : "http://editor.vocabs.ands.org.au/user/eMII_Atkins.Natalia", "dcPublisher" : "eMarine Information Infrastructure (eMII)", "dcSource" : "Australian Ocean Data Network Platform Register", "dctermsCreated" : "2015-09-03T00:00:00Z", "dctermsModified" : "2019-02-15T03:45:25Z", "definition" : "This satellite was the 6th flight unit of the NOAA 4th generation programme, and 3rd of the ATN series. It operated between September 1986 and August 2001 at an altitutde of 810km, in a sunsynchronous orbit. Instrumentation: Argos Data Collection System, Advanced Very High Resolution Radiometer, Earth Radiation Budget Experiment, High-resolution Infra Red Sounder / 2, Microwave Sounding Unit, Search and Rescue Satellite-Aided Tracking System, Solar Backscatter Ultraviolet / 2, Stratospheric Sounding Unit, SEM / Medium energy proton detector and SEM / Total Energy Detector", "hiddenLabel" : [{"_value" : "NOAA 4th Generation - Polar Operational Environmental Satellites (POES) - NOAA-10", "_lang" : "en"}
+      , {"_value" : "National Oceanic and Atmospheric Administration", "_lang" : "en"}
+      ], "inScheme" : {"_about" : "http://vocab.aodn.org.au/def/platform/1", "hasConcept" : "http://vocab.aodn.org.au/def/platform/entity/865"}
+      , "prefLabel" : {"_value" : "NOAA-10", "_lang" : "en"}
+      , "related" : [{"_about" : "http://vocab.aodn.org.au/def/platform/entity/863", "related" : ["http://vocab.aodn.org.au/def/platform/entity/865"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/864", "related" : ["http://vocab.aodn.org.au/def/platform/entity/865"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/866", "related" : ["http://vocab.aodn.org.au/def/platform/entity/865"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/867", "related" : ["http://vocab.aodn.org.au/def/platform/entity/865"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/868", "related" : ["http://vocab.aodn.org.au/def/platform/entity/865"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/869", "related" : ["http://vocab.aodn.org.au/def/platform/entity/865"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/870", "related" : ["http://vocab.aodn.org.au/def/platform/entity/865"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/871", "related" : ["http://vocab.aodn.org.au/def/platform/entity/865"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/872", "related" : ["http://vocab.aodn.org.au/def/platform/entity/865"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/873", "related" : ["http://vocab.aodn.org.au/def/platform/entity/865"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/874", "related" : ["http://vocab.aodn.org.au/def/platform/entity/865"]}
+      ], "type" : ["http://www.w3.org/2000/01/rdf-schema#Resource", "http://www.w3.org/2004/02/skos/core#Concept"], "valid" : "1986-09-17/2001-08-30"}
+    , "type" : ["http://purl.org/linked-data/api/vocab#ItemEndpoint", "http://purl.org/linked-data/api/vocab#Page"]}
+}

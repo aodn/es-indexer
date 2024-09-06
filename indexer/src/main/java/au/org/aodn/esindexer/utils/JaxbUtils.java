@@ -10,13 +10,14 @@ import java.io.StringReader;
 
 public class JaxbUtils<T> {
 
-    protected Unmarshaller jaxbUnmarshaller;
+    protected final Unmarshaller jaxbUnmarshaller;
 
     public JaxbUtils(Class<T> clazz) throws JAXBException {
         JAXBContext jaxbContext = JAXBContext.newInstance(clazz);
         jaxbUnmarshaller = jaxbContext.createUnmarshaller();
     }
 
+    @SuppressWarnings("unchecked")
     public T unmarshal(String input) throws JAXBException {
         Source source = new StreamSource(new StringReader(input));
         synchronized (jaxbUnmarshaller) {

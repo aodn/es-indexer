@@ -1,0 +1,3 @@
+logging:
+  level:
+    au.org.aodn.ardcvocabs.service: DEBUG

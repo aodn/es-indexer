@@ -1,0 +1,81 @@
+{ "format" : "linked-data-api", "version" : "0.2", "result" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=11", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-organisation-vocabulary/version-2-5/concept.json", "extendedMetadataVersion" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=11&_metadata=all", "first" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=0", "isPartOf" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-organisation-vocabulary/version-2-5/concept.json", "hasPart" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=11", "type" : "http://purl.org/linked-data/api/vocab#ListEndpoint"}
+    , "items" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/228", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/224", "prefLabel" : {"_value" : "The University of Sydney (USYD)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2015-07-10T10:38:15Z", "dctermsModified" : "2018-08-24T06:04:16Z", "definition" : "The Discipline of Anatomy and Histology is an education and research institution. Anatomy and Histology maintains a large catalogue of specimens for education and research. Research tools include a high-resolution transmission electron microscope and confocal microscope and excellent specimen preparation facilities.", "prefLabel" : {"_value" : "Discipline of Anatomy and Histology, The University of Sydney (USYD)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/229", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/224", "prefLabel" : {"_value" : "The University of Sydney (USYD)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2015-07-10T10:38:15Z", "dctermsModified" : "2018-08-24T06:04:56Z", "definition" : "The School of Aerospace, Mechanical and Mechatronic Engineering at the University of Sydney, has research areas including Biomaterials and Biomechanics, Combustion, Design Optimisation, Energy Production, Field Robotics, Fluid Dynamics, Materials and Manufacturing, Navigation and Control, Rheology, Smart Structures, Thermofluids and UAV Flight Systems.", "narrower" : ["http://vocab.aodn.org.au/def/organisation/entity/230"], "prefLabel" : {"_value" : "School of Aerospace, Mechanical and Mechatronic Engineering, The University of Sydney (USYD)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/23", "dctermsCreated" : "2015-04-27T10:38:15Z", "dctermsModified" : "2018-08-24T03:16:53Z", "definition" : "The Department of the Environment, Water, Heritage and the Arts was an Australian Government department that existed between December 2007 and September 2010. (Courtesy of Wikipedia)", "prefLabel" : {"_value" : "Department of the Environment, Water, Heritage and the Arts (DEWHA), Australian Government", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/230", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/229"], "dctermsCreated" : "2015-07-10T10:38:15Z", "dctermsModified" : "2018-08-24T06:05:07Z", "definition" : "The Australian Centre for Field Robotics (ACFR) is based in the School of Aerospace, Mechanical and Mechatronic Engineering at The University of Sydney, and is dedicated to the research, development, application and dissemination of autonomous and intelligent robots and systems for operation in outdoor environments.", "prefLabel" : {"_value" : "Australian Centre for Field Robotics (ACFR), School of Aerospace, Mechanical and Mechatronic Engineering, The University of Sydney (USYD)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/231", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/224", "prefLabel" : {"_value" : "The University of Sydney (USYD)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2015-07-10T10:38:15Z", "dctermsModified" : "2018-08-24T06:05:22Z", "definition" : "The School of Biological Sciences study areas encompass: molecular biology; genetics; cell biology; physiology; behaviour; biodiversity; ecology and evolution of Australian plants and animals; and student-learning in biology.", "prefLabel" : {"_value" : "School of Biological Sciences, The University of Sydney (USYD)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/232", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/224", "prefLabel" : {"_value" : "The University of Sydney (USYD)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2015-07-10T10:38:15Z", "dctermsModified" : "2018-08-24T06:04:39Z", "definition" : "The Ocean Technology Group carries out research into aspects of ocean engineering, and is a member of The University of Sydney Institute of Marine Science.", "prefLabel" : {"_value" : "Ocean Technology Group (OTG), The University of Sydney (USYD)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/233", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/224", "prefLabel" : {"_value" : "The University of Sydney (USYD)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2015-07-10T10:38:15Z", "dctermsModified" : "2018-08-24T06:04:04Z", "definition" : "The Department of Geography merged with the Department of Geology and Geophysics in 1998, to form the current School of Geosciences.", "prefLabel" : {"_value" : "Department of Geography, The University of Sydney (USYD)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/234", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/224", "prefLabel" : {"_value" : "The University of Sydney (USYD)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2015-07-10T10:38:15Z", "dctermsModified" : "2018-08-24T06:04:28Z", "definition" : "Marine Science at the University of Sydney dates back to the 1880's. The Marine Studies Centre and the Ocean Science Institute were established in 1970, and these were replaced by the University of Sydney Institute of Marine Science (USIMS) in 2002.", "prefLabel" : {"_value" : "Ocean Science Institute, The University of Sydney (USYD)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/235", "dctermsCreated" : "2015-07-09T10:38:15Z", "dctermsModified" : "2018-03-14T22:33:25Z", "definition" : "The University of Western Australia (UWA) has its main campus in Perth, Australia, and was established in 1911. The university has smaller centres at Claremont and Albany.", "narrower" : ["http://vocab.aodn.org.au/def/organisation/entity/236", {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/237", "prefLabel" : {"_value" : "School of Civil, Environmental and Mining Engineering (CEME), The University of Western Australia (UWA)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/238", "prefLabel" : {"_value" : "Centre for Water Research (CWR), The University of Western Australia (UWA)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/239", "prefLabel" : {"_value" : "Department of Botany, The University of Western Australia (UWA)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/240", "prefLabel" : {"_value" : "School of Plant Biology (SPB), The University of Western Australia (UWA)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/241", "prefLabel" : {"_value" : "UWA Oceans Institute (OI), The University of Western Australia (UWA)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/242", "prefLabel" : {"_value" : "Department of Zoology, The University of Western Australia (UWA)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/243", "prefLabel" : {"_value" : "School of Animal Biology (SAB), The University of Western Australia (UWA)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/244", "prefLabel" : {"_value" : "School of Earth and Environment (SEE), The University of Western Australia (UWA)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/245", "prefLabel" : {"_value" : "Centre of Excellence in Natural Resource Management (CENRM), The University of Western Australia (UWA)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/246", "prefLabel" : {"_value" : "Harry Perkins Institute of Medical Research", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/247", "prefLabel" : {"_value" : "Centre for Marine Futures, The University of Western Australia (UWA)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/248", "prefLabel" : {"_value" : "Department of Geography, The University of Western Australia (UWA)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/249", "prefLabel" : {"_value" : "School of Pathology and Laboratory Medicine, The University of Western Australia (UWA)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/250", "prefLabel" : {"_value" : "School of Agricultural and Resource Economics, The University of Western Australia (UWA)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/251", "prefLabel" : {"_value" : "School of Social Sciences, The University of Western Australia (UWA)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/541", "prefLabel" : {"_value" : "School of Biological Sciences (SBS), The University of Western Australia (UWA)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/542", "prefLabel" : {"_value" : "Oceans Graduate School (OGS), The University of Western Australia (UWA)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/556", "prefLabel" : {"_value" : "Centre for Microscopy, Characterisation and Analysis (CMCA), The University of Western Australia (UWA)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/561", "prefLabel" : {"_value" : "School of Engineering, The University of Western Australia (UWA)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/562", "prefLabel" : {"_value" : "School of Earth Sciences (SES), The University of Western Australia (UWA)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/563", "prefLabel" : {"_value" : "UWA School of Agriculture and Environment, The University of Western Australia (UWA)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/564", "prefLabel" : {"_value" : "Medical School, The University of Western Australia (UWA)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/565", "prefLabel" : {"_value" : "School of Biomedical Sciences, The University of Western Australia (UWA)", "_lang" : "en"}
+      }
+      ], "prefLabel" : {"_value" : "The University of Western Australia (UWA)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/236", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/235"], "dctermsCreated" : "2015-07-10T10:38:15Z", "dctermsModified" : "2018-08-24T06:08:29Z", "definition" : "", "prefLabel" : {"_value" : "School of Environmental Systems Engineering, The University of Western Australia (UWA)", "_lang" : "en"}
+    }
+    ], "itemsPerPage" : 10, "next" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=12", "page" : 11, "prev" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=10", "startIndex" : 111, "type" : "http://purl.org/linked-data/api/vocab#Page"}
+}

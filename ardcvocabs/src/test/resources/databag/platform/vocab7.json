@@ -1,0 +1,214 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=7",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=7&_metadata=all",
+    "first": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=0",
+    "isPartOf": {
+      "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+      "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+      "hasPart": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=7",
+      "type": "http://purl.org/linked-data/api/vocab#ListEndpoint"
+    },
+    "items": [
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/163",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-15T00:00:00Z",
+        "dctermsModified": "2023-01-25T02:34:51Z",
+        "definition": "The Deep Slope Mooring (M7) is operated by SARDI (South Australian Research and Development Institute), and was a South Australian regional mooring. This mooring was decommissioned in March 2014.",
+        "prefLabel": {
+          "_value": "Deep-Slope Mooring (M7)",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/164",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-15T00:00:00Z",
+        "dctermsModified": "2023-01-25T03:27:02Z",
+        "definition": "The Spencer Gulf Mooring (M8) is operated by SARDI (South Australian Research and Development Institute), and is one of five South Australian regional moorings.",
+        "prefLabel": {
+          "_value": "Spencer Gulf Mouth Mooring (M8)",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/165",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-15T00:00:00Z",
+        "dctermsModified": "2023-01-25T03:28:05Z",
+        "definition": "The Sydney 100m Mooring is operated by SIMS (Sydney Institute of Marine Science) and collects data in the Sydney region.",
+        "prefLabel": {
+          "_value": "Sydney 100m Mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/166",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-15T00:00:00Z",
+        "dctermsModified": "2023-01-25T03:28:37Z",
+        "definition": "The Sydney 140m Mooring is operated by SIMS (Sydney Institute of Marine Science) and collects data in the Sydney region.",
+        "prefLabel": {
+          "_value": "Sydney 140m Mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/167",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-21T00:00:00Z",
+        "dctermsModified": "2023-01-25T02:28:43Z",
+        "definition": "The Canyon 200m Head Mooring is operated by CSIRO and collects data in the Perth Canyon region.",
+        "prefLabel": {
+          "_value": "Canyon 200m Head Mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/168",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-21T00:00:00Z",
+        "dctermsModified": "2023-01-25T02:29:13Z",
+        "definition": "The Canyon 500m North Mooring is operated by CSIRO and collects data in the Perth Canyon region. This mooring was decommissioned in July 2010.",
+        "prefLabel": {
+          "_value": "Canyon 500m North Mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/169",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-21T00:00:00Z",
+        "dctermsModified": "2023-01-25T02:29:43Z",
+        "definition": "The Canyon 500m South Mooring is operated by CSIRO and collects data in the Perth Canyon region. This mooring was decommissioned in March 2014.",
+        "prefLabel": {
+          "_value": "Canyon 500m South Mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/17",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/31",
+            "prefLabel": {
+              "_value": "research vessel",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2017-02-20T23:09:01Z",
+        "dctermsModified": "2017-04-02T23:59:43Z",
+        "definition": "Research vessel, which was operated by the Department of Environment, Climate Change and Water (DECCW), NSW.",
+        "prefLabel": {
+          "_value": "Glaucus",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/170",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-21T00:00:00Z",
+        "dctermsModified": "2023-01-25T03:43:14Z",
+        "definition": "The Two Rocks 50m Shelf Mooring is operated by CSIRO and collects data in the Two Rocks region. This mooring was decommissioned in May 2013.",
+        "prefLabel": {
+          "_value": "Two Rocks 50m Shelf Mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/171",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-21T00:00:00Z",
+        "dctermsModified": "2023-01-25T03:40:16Z",
+        "definition": "The Two Rocks 100m Shelf Mooring is operated by CSIRO and collects data in the Two Rocks region.",
+        "prefLabel": {
+          "_value": "Two Rocks 100m Shelf Mooring",
+          "_lang": "en"
+        }
+      }
+    ],
+    "itemsPerPage": 10,
+    "next": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=8",
+    "page": 7,
+    "prev": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=6",
+    "startIndex": 71,
+    "type": "http://purl.org/linked-data/api/vocab#Page"
+  }
+}

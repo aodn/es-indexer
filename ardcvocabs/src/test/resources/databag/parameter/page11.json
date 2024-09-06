@@ -1,0 +1,114 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=11",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=11&_metadata=all",
+    "first": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=0",
+    "isPartOf": {
+      "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+      "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+      "hasPart": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=11",
+      "type": "http://purl.org/linked-data/api/vocab#ListEndpoint"
+    },
+    "items": [
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/748",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:23:59Z",
+        "prefLabel": {
+          "_value": "Concentration of pheophytin-a per unit volume of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/749",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:23:59Z",
+        "prefLabel": {
+          "_value": "Concentration of pheophytin-b per unit volume of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/750",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2020-10-13T05:47:19Z",
+        "prefLabel": {
+          "_value": "Concentration of chlorophyll-a per unit volume of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/751",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:24:00Z",
+        "prefLabel": {
+          "_value": "Concentration of pyropheophytin-a per unit volume of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/752",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2020-10-13T05:47:30Z",
+        "prefLabel": {
+          "_value": "Concentration of chlorophyll-a plus divinyl chlorophyll-a per unit volume of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/753",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2020-10-13T05:48:12Z",
+        "prefLabel": {
+          "_value": "Concentration of chlorophyll-b plus divinyl chlorophyll-b per unit volume of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/754",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2020-10-13T05:49:55Z",
+        "prefLabel": {
+          "_value": "Concentration of divinyl chlorophyll-a per unit volume of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/755",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:24:01Z",
+        "prefLabel": {
+          "_value": "Concentration of pyropheophorbide-a per unit volume of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/756",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:24:01Z",
+        "prefLabel": {
+          "_value": "Concentration of pheophorbide-a per unit volume of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/757",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2020-10-13T05:48:39Z",
+        "prefLabel": {
+          "_value": "Concentration of chlorophyllide-a per unit volume of the water body",
+          "_lang": "en"
+        }
+      }
+    ],
+    "itemsPerPage": 10,
+    "next": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=12",
+    "page": 11,
+    "prev": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=10",
+    "startIndex": 111,
+    "type": "http://purl.org/linked-data/api/vocab#Page"
+  }
+}

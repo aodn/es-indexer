@@ -1,0 +1,214 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=5",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=5&_metadata=all",
+    "first": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=0",
+    "isPartOf": {
+      "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+      "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+      "hasPart": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=5",
+      "type": "http://purl.org/linked-data/api/vocab#ListEndpoint"
+    },
+    "items": [
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/144",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-15T00:00:00Z",
+        "dctermsModified": "2023-01-25T02:54:32Z",
+        "definition": "Acidification mooring located at the Kangaroo Island National Reference Station. This mooring is operated by SARDI (South Australian Research and Development Institute).",
+        "prefLabel": {
+          "_value": "Kangaroo Island National Reference Station Acidification Mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/145",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/43",
+            "prefLabel": {
+              "_value": "subsurface mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-15T00:00:00Z",
+        "dctermsModified": "2023-01-25T01:28:43Z",
+        "definition": "Sub-surface mooring located at the Kangaroo Island National Reference Station. This mooring is operated by SARDI (South Australian Research and Development Institute).",
+        "prefLabel": {
+          "_value": "Kangaroo Island National Reference Station Sub-surface Mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/146",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-15T00:00:00Z",
+        "dctermsModified": "2023-01-25T03:09:10Z",
+        "definition": "The Ningaloo Reef National Reference Station Mooring is operated by AIMS (Australian Institute of Marine Science) and collects data from coastal ocean waters around Nigaloo Reef. This mooring was decommissioned in August 2014.",
+        "prefLabel": {
+          "_value": "Ningaloo Reef National Reference Station Mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/147",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-15T00:00:00Z",
+        "dctermsModified": "2023-01-25T03:09:41Z",
+        "definition": "ADCP mooring located at the North Stradbroke Island National Reference Station. This mooring is operated by CSIRO.",
+        "prefLabel": {
+          "_value": "North Stradbroke Island National Reference Station ADCP Mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/148",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/43",
+            "prefLabel": {
+              "_value": "subsurface mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-15T00:00:00Z",
+        "dctermsModified": "2023-01-25T01:30:30Z",
+        "definition": "Sub-surface mooring located at the North Stradbroke Island National Reference Station. This mooring is operated by CSIRO.",
+        "prefLabel": {
+          "_value": "North Stradbroke Island National Reference Station Sub-surface Mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/149",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-15T00:00:00Z",
+        "dctermsModified": "2023-01-25T03:10:17Z",
+        "definition": "Surface mooring located at the North Stradbroke Island National Reference Station. This mooring is operated by CSIRO.",
+        "prefLabel": {
+          "_value": "North Stradbroke Island National Reference Station Surface Mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/15",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/36",
+            "prefLabel": {
+              "_value": "fishing vessel",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2017-01-19T06:04:46Z",
+        "dctermsModified": "2017-04-02T23:34:30Z",
+        "definition": "Trawler fishing vessel, currently flying the flag of New Zealand.",
+        "prefLabel": {
+          "_value": "San Tongariro",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/150",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-15T00:00:00Z",
+        "dctermsModified": "2023-01-25T03:23:58Z",
+        "definition": "ADCP mooring located at the Rottnest Island National Reference Station. This mooring is operated by CSIRO.",
+        "prefLabel": {
+          "_value": "Rottnest Island National Reference Station ADCP Mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/151",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/43",
+            "prefLabel": {
+              "_value": "subsurface mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-15T00:00:00Z",
+        "dctermsModified": "2023-01-25T01:32:50Z",
+        "definition": "Sub-surface mooring located at the Rottnest Island National Reference Station. This mooring is operated by CSIRO.",
+        "prefLabel": {
+          "_value": "Rottnest Island National Reference Station Sub-surface Mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/152",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-15T00:00:00Z",
+        "dctermsModified": "2023-01-25T03:45:28Z",
+        "definition": "The Yongala National Reference Station Mooring is operated by AIMS (Australian Institute of Marine Science) and collects data near the Yongala Wreck, out from Cape Bowling Green in the central Great Barrier Reef.",
+        "prefLabel": {
+          "_value": "Yongala National Reference Station Mooring",
+          "_lang": "en"
+        }
+      }
+    ],
+    "itemsPerPage": 10,
+    "next": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=6",
+    "page": 5,
+    "prev": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=4",
+    "startIndex": 51,
+    "type": "http://purl.org/linked-data/api/vocab#Page"
+  }
+}

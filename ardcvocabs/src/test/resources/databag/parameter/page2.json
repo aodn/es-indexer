@@ -1,0 +1,124 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=2",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=2&_metadata=all",
+    "first": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=0",
+    "isPartOf": {
+      "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+      "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+      "hasPart": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=2",
+      "type": "http://purl.org/linked-data/api/vocab#ListEndpoint"
+    },
+    "items": [
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/23",
+        "dctermsCreated": "2015-11-04T03:34:59Z",
+        "dctermsModified": "2018-02-23T00:23:34Z",
+        "definition": "The average volume of individual organisms (cells or colonies).",
+        "prefLabel": {
+          "_value": "Mean unit biovolume",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/3",
+        "dctermsCreated": "2015-08-06T06:45:48Z",
+        "dctermsModified": "2023-06-27T01:51:01Z",
+        "definition": "Period of the peak of the energy spectrum analysed by spectral method.",
+        "prefLabel": {
+          "_value": "Period at the peak spectral energy of waves on the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/372",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-10-24T05:54:15Z",
+        "definition": "Concentration of dissolved oxygen per unit volume of the water column. Oxygen may be expressed in terms of mass, volume or quantity of substance.",
+        "prefLabel": {
+          "_value": "Concentration of oxygen {O2} per unit volume of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/373",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-10-24T02:47:42Z",
+        "definition": "Concentration of dissolved oxygen per unit mass of the water column. Oxygen may be expressed in terms of mass, volume or quantity of substance.",
+        "prefLabel": {
+          "_value": "Concentration of oxygen {O2} per unit mass of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/374",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-10-26T01:12:41Z",
+        "definition": "Concentration of nitrate per unit volume of the water column. Nitrate may be expressed in terms of mass or quantity of substance.",
+        "prefLabel": {
+          "_value": "Concentration of nitrate {NO3} per unit volume of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/375",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-10-26T01:16:11Z",
+        "definition": "Concentration (moles or mass) of nitrogen as nitrate per unit mass of the water column",
+        "prefLabel": {
+          "_value": "Concentration of nitrate {NO3} per unit mass of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/376",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-10-26T01:13:52Z",
+        "definition": "Concentration of silicate per unit volume of the water column. Silicate may be expressed in terms of mass or quantity of substance.",
+        "prefLabel": {
+          "_value": "Concentration of silicate {SiO4} per unit volume of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/377",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-10-26T01:14:56Z",
+        "definition": "Concentration of ammonium per unit volume of the water column. Ammonium may be expressed in terms of mass or quantity of substance.",
+        "prefLabel": {
+          "_value": "Concentration of ammonium {NH4} per unit volume of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/378",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-10-26T01:20:05Z",
+        "definition": "Concentration (moles or mass) of silicon as silicate per unit mass of the water column",
+        "prefLabel": {
+          "_value": "Concentration of silicate {SiO4} per unit mass of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/379",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-10-26T01:18:12Z",
+        "definition": "Concentration of phosphate per unit volume of the water column. Phosphate may be expressed in terms of mass or quantity of substance",
+        "prefLabel": {
+          "_value": "Concentration of phosphate {PO4} per unit volume of the water body",
+          "_lang": "en"
+        }
+      }
+    ],
+    "itemsPerPage": 10,
+    "next": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=3",
+    "page": 2,
+    "prev": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=1",
+    "startIndex": 21,
+    "type": "http://purl.org/linked-data/api/vocab#Page"
+  }
+}

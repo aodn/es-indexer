@@ -1,0 +1,53 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/resource.json?uri=http://vocab.aodn.org.au/def/discovery_parameter/entity/11",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/resource.json?uri=http://vocab.aodn.org.au/def/discovery_parameter/entity/11",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/resource.json?_metadata=all&uri=http://vocab.aodn.org.au/def/discovery_parameter/entity/11",
+    "primaryTopic": {
+      "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/11",
+      "broadMatch": [
+        "http://vocab.aodn.org.au/def/parameter_classes/category/30"
+      ],
+      "contributor": "http://editor.vocabs.ands.org.au/user/eMII_Atkins.Natalia",
+      "creator": "http://editor.vocabs.ands.org.au/user/eMII_Mancini.Sebastien",
+      "dctermsCreated": "2015-08-07T00:51:43Z",
+      "dctermsModified": "2018-10-24T03:53:32Z",
+      "definition": "Net surface heat flux across the air-sea interface.",
+      "hiddenLabel": [
+        {
+          "_value": "HEAT_NET",
+          "_lang": "en"
+        }
+      ],
+      "inScheme": {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/1",
+        "hasTopConcept": [
+          "http://vocab.aodn.org.au/def/discovery_parameter/entity/11"
+        ]
+      },
+      "prefLabel": {
+        "_value": "Net heat flux",
+        "_lang": "en"
+      },
+      "relatedMatch": [
+        "http://vocab.nerc.ac.uk/collection/P07/current/CFSN0076/"
+      ],
+      "topConceptOf": {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/1",
+        "hasTopConcept": [
+          "http://vocab.aodn.org.au/def/discovery_parameter/entity/11"
+        ]
+      },
+      "type": [
+        "http://www.w3.org/2000/01/rdf-schema#Resource",
+        "http://www.w3.org/2004/02/skos/core#Concept"
+      ]
+    },
+    "type": [
+      "http://purl.org/linked-data/api/vocab#ItemEndpoint",
+      "http://purl.org/linked-data/api/vocab#Page"
+    ]
+  }
+}

@@ -1,0 +1,31 @@
+{ "format" : "linked-data-api", "version" : "0.2", "result" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/resource.json?uri=http://vocab.aodn.org.au/def/organisation/entity/235", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/resource.json?uri=http://vocab.aodn.org.au/def/organisation/entity/235", "extendedMetadataVersion" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/resource.json?_metadata=all&uri=http://vocab.aodn.org.au/def/organisation/entity/235", "primaryTopic" : {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/235", "broadMatch" : ["http://vocab.aodn.org.au/def/organisation_classes/category/3"], "contributor" : "http://editor.vocabs.ands.org.au/user/eMII_Atkins.Natalia_Admin", "creator" : "http://editor.vocabs.ands.org.au/user/Natalia-Atkins", "dcPublisher" : "eMarine Information Infrastructure (eMII)", "dcSource" : "Australian Ocean Data Network Organisation Register", "dctermsCreated" : "2015-07-09T10:38:15Z", "dctermsModified" : "2018-03-14T22:33:25Z", "definition" : "The University of Western Australia (UWA) has its main campus in Perth, Australia, and was established in 1911. The university has smaller centres at Claremont and Albany.", "exactMatch" : ["http://seadatanet.maris2.nl/v_edmo/print.asp?n_code=4308"], "hiddenLabel" : [{"_value" : "UWA", "_lang" : "en"}
+      ], "inScheme" : {"_about" : "http://vocab.aodn.org.au/def/organisation/1", "hasTopConcept" : ["http://vocab.aodn.org.au/def/organisation/entity/235"]}
+      , "narrower" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/236", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/235"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/237", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/235"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/238", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/235"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/239", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/235"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/240", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/235"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/241", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/235"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/242", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/235"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/243", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/235"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/244", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/235"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/245", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/235"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/246", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/235"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/247", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/235"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/248", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/235"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/249", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/235"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/250", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/235"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/251", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/235"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/541", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/235"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/542", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/235"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/556", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/235"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/561", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/235"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/562", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/235"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/563", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/235"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/564", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/235"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/565", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/235"]}
+      ], "prefLabel" : {"_value" : "The University of Western Australia (UWA)", "_lang" : "en"}
+      , "topConceptOf" : {"_about" : "http://vocab.aodn.org.au/def/organisation/1", "hasTopConcept" : ["http://vocab.aodn.org.au/def/organisation/entity/235"]}
+      , "type" : ["http://www.w3.org/2000/01/rdf-schema#Resource", "http://www.w3.org/2004/02/skos/core#Concept"]}
+    , "type" : ["http://purl.org/linked-data/api/vocab#ItemEndpoint", "http://purl.org/linked-data/api/vocab#Page"]}
+}

@@ -1,0 +1,121 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=13",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=13&_metadata=all",
+    "first": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=0",
+    "isPartOf": {
+      "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+      "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+      "hasPart": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=13",
+      "type": "http://purl.org/linked-data/api/vocab#ListEndpoint"
+    },
+    "items": [
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/77",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-10-24T02:39:23Z",
+        "definition": "Measurement as a phenomenon (as opposed to a co-ordinate) of the force per unit area exerted by the atmosphere determined in-situ at a known altitude and converted to the value at sea level assuming an isothermal layer.",
+        "prefLabel": {
+          "_value": "Pressure (measured variable) exerted by the atmosphere and correction to sea level",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/8",
+        "dctermsCreated": "2015-08-07T00:47:55Z",
+        "dctermsModified": "2018-02-23T00:24:04Z",
+        "prefLabel": {
+          "_value": "Sensible heat flux due to precipitation",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/84",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-10-26T01:07:12Z",
+        "prefLabel": {
+          "_value": "Saturation of oxygen {O2} in the water body [dissolved phase]",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/9",
+        "dctermsCreated": "2015-08-07T00:49:17Z",
+        "dctermsModified": "2018-10-24T03:04:59Z",
+        "definition": "The net longwave heat flux is the net flux of the greybody emissions from the sea surface, cloud layers and the gases of the atmosphere.",
+        "prefLabel": {
+          "_value": "Net longwave heat flux",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/94",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-10-24T02:33:09Z",
+        "prefLabel": {
+          "_value": "Precipitation rate (liquid water equivalent) in the atmosphere",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/97",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-10-26T01:26:08Z",
+        "definition": "Skin temperature of the water body measure by Advanced Very High Resolution Radiometer (AVHRR)",
+        "prefLabel": {
+          "_value": "Skin temperature of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.nerc.ac.uk/collection/P01/current/ALLOXXPX",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:24:05Z",
+        "definition": "Concentration of the carotenoid pigment alloxanthin per unit volume of a water body.  The pigment is contained in suspended particles of unspecified size",
+        "prefLabel": {
+          "_value": "Concentration of alloxanthin per unit volume of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.nerc.ac.uk/collection/P01/current/CAPHZZ01",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-10-24T01:12:56Z",
+        "definition": "Measurement as a phenomenon (as opposed to a co-ordinate) of the force per unit area exerted by the atmosphere determined in-situ at a known altitude.",
+        "prefLabel": {
+          "_value": "Pressure (measured variable) exerted by the atmosphere",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.nerc.ac.uk/collection/P01/current/CDEWZZ01",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-10-24T01:10:19Z",
+        "definition": "The temperature to which air must cool to become saturated with water vapour",
+        "prefLabel": {
+          "_value": "Dew point temperature of the atmosphere",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.nerc.ac.uk/collection/P01/current/CHLTMASS",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:24:06Z",
+        "definition": "The mass of all types of chlorophyll per unit mass of the water column held in particles of any size",
+        "prefLabel": {
+          "_value": "Concentration of chlorophyll per unit mass of the water body",
+          "_lang": "en"
+        }
+      }
+    ],
+    "itemsPerPage": 10,
+    "next": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=14",
+    "page": 13,
+    "prev": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=12",
+    "startIndex": 131,
+    "type": "http://purl.org/linked-data/api/vocab#Page"
+  }
+}

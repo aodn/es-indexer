@@ -1,0 +1,22 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-parameter-category-vocabulary/version-2-1/concept.json?_page=4",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-parameter-category-vocabulary/version-2-1/concept.json",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-parameter-category-vocabulary/version-2-1/concept.json?_page=4&_metadata=all",
+    "first": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-parameter-category-vocabulary/version-2-1/concept.json?_page=0",
+    "isPartOf": {
+      "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-parameter-category-vocabulary/version-2-1/concept.json",
+      "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-parameter-category-vocabulary/version-2-1/concept.json",
+      "hasPart": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-parameter-category-vocabulary/version-2-1/concept.json?_page=4",
+      "type": "http://purl.org/linked-data/api/vocab#ListEndpoint"
+    },
+    "items": [],
+    "itemsPerPage": 10,
+    "page": 4,
+    "prev": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-parameter-category-vocabulary/version-2-1/concept.json?_page=3",
+    "startIndex": 41,
+    "type": "http://purl.org/linked-data/api/vocab#Page"
+  }
+}

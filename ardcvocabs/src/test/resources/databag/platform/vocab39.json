@@ -1,0 +1,163 @@
+{ "format" : "linked-data-api", "version" : "0.2", "result" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=39", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json", "extendedMetadataVersion" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=39&_metadata=all", "first" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=0", "isPartOf" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json", "hasPart" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=39", "type" : "http://purl.org/linked-data/api/vocab#ListEndpoint"}
+    , "items" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/36", "dctermsCreated" : "2013-04-08T00:00:00Z", "dctermsModified" : "2017-02-07T03:52:38Z", "definition" : "A platform operating on the surface of the water column whose primary purpose is the commercial harevsting of fish or shellfish but may be engaged in scientific activities such as fish stock surveys or mooring deployments and recoveries.", "narrower" : [{"_about" : "http://vocab.aodn.org.au/def/platform/entity/111", "prefLabel" : {"_value" : "Tangaroa", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/112", "prefLabel" : {"_value" : "Santo Rocco", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/113", "prefLabel" : {"_value" : "Austral Leader II", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/114", "prefLabel" : {"_value" : "Janas", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/115", "prefLabel" : {"_value" : "Will Watch", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/116", "prefLabel" : {"_value" : "Southern Champion", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/117", "prefLabel" : {"_value" : "Rehua", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/15", "prefLabel" : {"_value" : "San Tongariro", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/348", "prefLabel" : {"_value" : "Elena Rose", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/355", "prefLabel" : {"_value" : "Amaltal Enterprise", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/356", "prefLabel" : {"_value" : "Paerangi", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/48", "prefLabel" : {"_value" : "Tokatu", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/6", "prefLabel" : {"_value" : "Geelong Star", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/61", "prefLabel" : {"_value" : "Antarctic Aurora", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/7", "prefLabel" : {"_value" : "Empress Pearl", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/78", "prefLabel" : {"_value" : "Amaltal Explorer", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/79", "prefLabel" : {"_value" : "Amaltal Columbia", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/8", "prefLabel" : {"_value" : "Antarctic Discovery", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/80", "prefLabel" : {"_value" : "Cape Arkona", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/896", "prefLabel" : {"_value" : "Isla Eden", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/897", "prefLabel" : {"_value" : "Saxon Onward", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/9", "prefLabel" : {"_value" : "Sniper", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/933", "prefLabel" : {"_value" : "Antarctic Chieftain", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/934", "prefLabel" : {"_value" : "Corinthian Bay", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/935", "prefLabel" : {"_value" : "Atlas Cove", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.nerc.ac.uk/collection/C17/current/33OA", "prefLabel" : {"_value" : "Oscar Dyson", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.nerc.ac.uk/collection/C17/current/33UD", "prefLabel" : {"_value" : "Reuben Lasker", "_lang" : "en"}
+      }
+      ], "prefLabel" : {"_value" : "fishing vessel", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/37", "dctermsCreated" : "2014-02-21T00:00:00Z", "dctermsModified" : "2017-02-07T03:52:38Z", "definition" : "A small self-propelled platform operating on the surface of the water column in unpredictable locations that is smaller than a ship but too large to easily remove from the water.", "prefLabel" : {"_value" : "self-propelled boat", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/38", "dctermsCreated" : "2015-05-10T00:00:00Z", "dctermsModified" : "2017-02-07T03:52:38Z", "definition" : "A platform operating on the surface of the water column that is manually propelled and may not be easily removed from the water (e.g. trireme).", "prefLabel" : {"_value" : "man-powered boat", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/39", "dctermsCreated" : "2015-08-06T00:00:00Z", "dctermsModified" : "2017-02-07T03:52:39Z", "definition" : "A platform operating on the surface of the water column in unpredictable locations that is primarily equipped manned and operated for military purposes.  Includes surface warships of all sizes and logistic support vessels.", "prefLabel" : {"_value" : "naval vessel", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/3A", "dctermsCreated" : "2015-05-10T00:00:00Z", "dctermsModified" : "2017-02-07T03:52:38Z", "definition" : "A platform operating on the surface of the water column that is manually propelled and may be easily removed from the water (e.g. rowing boat canoe).", "prefLabel" : {"_value" : "man-powered small boat", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/41", "dctermsCreated" : "2013-04-08T00:00:00Z", "dctermsModified" : "2017-02-07T03:52:36Z", "definition" : "An unmanned instrumented platform operating on the surface of the water column loosely tethered to the seafloor to maintain a fixed position (e.g. ODAS buoy)", "narrower" : [{"_about" : "http://vocab.aodn.org.au/def/platform/entity/311", "prefLabel" : {"_value" : "Lizard Island Sensor Float 1", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/312", "prefLabel" : {"_value" : "Lizard Island Sensor Float 2", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/313", "prefLabel" : {"_value" : "Lizard Island Sensor Float 3", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/314", "prefLabel" : {"_value" : "Lizard Island Sensor Float 4", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/319", "prefLabel" : {"_value" : "Orpheus Island Sensor Float 1", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/320", "prefLabel" : {"_value" : "Orpheus Island Sensor Float 2", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/321", "prefLabel" : {"_value" : "Rib Reef Sensor Float 1", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/323", "prefLabel" : {"_value" : "Myrmidon Reef Sensor Float 1", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/325", "prefLabel" : {"_value" : "Davies Reef Sensor Float 1", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/326", "prefLabel" : {"_value" : "Davies Reef Sensor Float 2", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/327", "prefLabel" : {"_value" : "Davies Reef Sensor Float 3", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/328", "prefLabel" : {"_value" : "Davies Reef Sensor Float 4", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/329", "prefLabel" : {"_value" : "Davies Reef Sensor Float 5", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/343", "prefLabel" : {"_value" : "Heron Island Sensor Float 1", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/344", "prefLabel" : {"_value" : "Heron Island Sensor Float 2", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/345", "prefLabel" : {"_value" : "Heron Island Sensor Float 3", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/346", "prefLabel" : {"_value" : "Heron Island Sensor Float 4", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/347", "prefLabel" : {"_value" : "Heron Island Sensor Float 5", "_lang" : "en"}
+      }
+      ], "prefLabel" : {"_value" : "moored surface buoy", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/42", "dctermsCreated" : "2014-02-26T00:00:00Z", "dctermsModified" : "2017-02-07T03:52:36Z", "definition" : "An unmanned instrumented platform operating on the surface of the water column often attached to a drogue to track currents rather than winds (e.g. Argos buoy).", "prefLabel" : {"_value" : "drifting surface float", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/43", "dctermsCreated" : "2013-04-08T00:00:00Z", "dctermsModified" : "2017-02-07T03:52:37Z", "definition" : "A collection of oceanographic instruments attached to wires suspended between anchors on the seabed and buoyant spheres in the water column.", "narrower" : [{"_about" : "http://vocab.aodn.org.au/def/platform/entity/143", "prefLabel" : {"_value" : "Esperance National Reference Station Sub-surface Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/145", "prefLabel" : {"_value" : "Kangaroo Island National Reference Station Sub-surface Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/148", "prefLabel" : {"_value" : "North Stradbroke Island National Reference Station Sub-surface Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/151", "prefLabel" : {"_value" : "Rottnest Island National Reference Station Sub-surface Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/178", "prefLabel" : {"_value" : "Perth Canyon, WA Passive Acoustic Observatory", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/179", "prefLabel" : {"_value" : "Portland, VIC Passive Acoustic Observatory", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/180", "prefLabel" : {"_value" : "Tuncurry, NSW Passive Acoustic Observatory", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/5", "prefLabel" : {"_value" : "Kangaroo Island, SA Passive Acoustic Observatory", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/560", "prefLabel" : {"_value" : "Bass Strait Calibration site Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/561", "prefLabel" : {"_value" : "Storm Bay Calibration site Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/67", "prefLabel" : {"_value" : "Maria Island National Reference Station sub-surface mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/904", "prefLabel" : {"_value" : "Kimberley, WA Passive Acoustic Observatory", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/905", "prefLabel" : {"_value" : "Pilbara, WA Passive Acoustic Observatory", "_lang" : "en"}
+      }
+      ], "prefLabel" : {"_value" : "subsurface mooring", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/45", "dctermsCreated" : "2015-05-10T00:00:00Z", "dctermsModified" : "2017-02-07T03:52:37Z", "definition" : "A platform that periodically makes an automated vertical traverse of the water column at a predetermined fixed location. (e.g. YSI vertical profiler HOMER CTD)", "prefLabel" : {"_value" : "fixed subsurface vertical profiler", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/46", "dctermsCreated" : "2013-04-08T00:00:00Z", "dctermsModified" : "2017-02-07T03:52:36Z", "definition" : "An unmanned instrumented platform drifting freely in the water column that periodically makes vertical traverses through the water column (e.g. Argo float)", "narrower" : [{"_about" : "http://vocab.aodn.org.au/def/platform/entity/296", "prefLabel" : {"_value" : "NEMO Argo Float", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/297", "prefLabel" : {"_value" : "NINJA Argo Float with SBE", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/298", "prefLabel" : {"_value" : "NAVIS Argo Float with Iridium antenna", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/299", "prefLabel" : {"_value" : "ARVOR Argo Float", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/300", "prefLabel" : {"_value" : "SOLO Argo Float", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/301", "prefLabel" : {"_value" : "SOLO Argo Float with Iridium antenna", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/302", "prefLabel" : {"_value" : "SOLO-II Argo Float with Iridium antenna", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/303", "prefLabel" : {"_value" : "PALACE R1 Argo Float", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/304", "prefLabel" : {"_value" : "APEX Argo Float", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/305", "prefLabel" : {"_value" : "APEX Argo Float with Iridium antenna", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/306", "prefLabel" : {"_value" : "APEX Argo Float with APF8 controller board", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/307", "prefLabel" : {"_value" : "PROVOR Argo Float", "_lang" : "en"}
+      }
+      ], "prefLabel" : {"_value" : "drifting subsurface profiling float", "_lang" : "en"}
+    }
+    ], "itemsPerPage" : 10, "next" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=40", "page" : 39, "prev" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=38", "startIndex" : 391, "type" : "http://purl.org/linked-data/api/vocab#Page"}
+}

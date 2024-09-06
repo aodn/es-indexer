@@ -1,0 +1,120 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=17",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=17&_metadata=all",
+    "first": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=0",
+    "isPartOf": {
+      "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+      "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+      "hasPart": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=17",
+      "type": "http://purl.org/linked-data/api/vocab#ListEndpoint"
+    },
+    "items": [
+      {
+        "_about": "http://vocab.nerc.ac.uk/collection/P01/current/TEMPPR01",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-10-24T01:15:18Z",
+        "definition": "The degree of hotness of the water column expressed against a standard scale.  Includes both IPTS-68 and ITS-90 scales.",
+        "prefLabel": {
+          "_value": "Temperature of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.nerc.ac.uk/collection/P01/current/TURBXXXX",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:24:13Z",
+        "definition": "Estimate of suspended sediment concentration based on the proportion of a light transmission in the water column that is reflected back to a co-located receiver.",
+        "prefLabel": {
+          "_value": "Turbidity of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.nerc.ac.uk/collection/P01/current/XCO2DRAT",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-10-24T02:27:41Z",
+        "definition": "The proportion as a ratio of quantity of matter of CO2 in a sample of atmosphere expressed on a dry air basis",
+        "prefLabel": {
+          "_value": "Mole fraction of carbon dioxide (dry air) in the atmosphere",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.nerc.ac.uk/collection/P01/current/XCO2WBDY",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:24:14Z",
+        "definition": "The proportion as a ratio of quantity of matter of CO2 in a sample of air equilibrated with seawater expressed on a dry air basis",
+        "prefLabel": {
+          "_value": "Mole fraction of carbon dioxide (dry air) in the equilibrated marine sample",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/24",
+        "dctermsCreated": "2018-02-14T05:26:29Z",
+        "dctermsModified": "2021-07-20T04:39:51Z",
+        "prefLabel": {
+          "_value": "Saturation state of aragonite in the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/25",
+        "dctermsCreated": "2018-02-21T05:21:09Z",
+        "dctermsModified": "2021-07-20T04:40:55Z",
+        "prefLabel": {
+          "_value": "Saturation state of calcite in the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/26",
+        "dctermsCreated": "2018-02-21T05:25:18Z",
+        "dctermsModified": "2018-02-26T22:39:19Z",
+        "prefLabel": {
+          "_value": "Concentration of carbonate ions per unit mass of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/27",
+        "dctermsCreated": "2018-02-21T05:34:43Z",
+        "dctermsModified": "2021-07-20T04:36:58Z",
+        "prefLabel": {
+          "_value": "pH (total scale) of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/28",
+        "dctermsCreated": "2018-02-22T05:30:23Z",
+        "dctermsModified": "2023-06-27T01:52:53Z",
+        "definition": "The average height of the highest one third of the swell waves, where the height is defined as the vertical distance from a wave trough to the following wave crest.",
+        "prefLabel": {
+          "_value": "Significant height of swell waves on the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/29",
+        "dctermsCreated": "2018-02-22T05:32:18Z",
+        "dctermsModified": "2023-06-27T01:49:02Z",
+        "definition": "Period of the highest swell wave peak analysed by spectral method.",
+        "prefLabel": {
+          "_value": "Period at spectral maximum of swell waves first component on the water body",
+          "_lang": "en"
+        }
+      }
+    ],
+    "itemsPerPage": 10,
+    "next": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=18",
+    "page": 17,
+    "prev": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=16",
+    "startIndex": 171,
+    "type": "http://purl.org/linked-data/api/vocab#Page"
+  }
+}

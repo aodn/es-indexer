@@ -1,0 +1,43 @@
+{ "format" : "linked-data-api", "version" : "0.2", "result" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=46", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-organisation-vocabulary/version-2-5/concept.json", "extendedMetadataVersion" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=46&_metadata=all", "first" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=0", "isPartOf" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-organisation-vocabulary/version-2-5/concept.json", "hasPart" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=46", "type" : "http://purl.org/linked-data/api/vocab#ListEndpoint"}
+    , "items" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/494", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/384", "prefLabel" : {"_value" : "National Oceanic and Atmospheric Administration (NOAA)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2017-08-29T06:41:22Z", "dctermsModified" : "2020-12-17T05:54:54Z", "definition" : "NWS Headquarters is responsible for managing the functions of the entire NWS. Headquarters coordinates programs directly related to weather warnings and forecasting to ensure the compatibility and effectiveness of weather services and ensures climate, water, and weather warnings, forecasts, and data products are provided to government, industry, and the general public. The NWS Headquarters also ensures funding is available to support field needs, manages information technology resources, and ensures a coordinated NOAA program of weather-related activities across NOAA line offices.", "prefLabel" : {"_value" : "National Weather Service (NWS), National Oceanic and Atmospheric Administration (NOAA)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/495", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/384", "prefLabel" : {"_value" : "National Oceanic and Atmospheric Administration (NOAA)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2017-08-30T04:29:39Z", "dctermsModified" : "2020-12-17T05:55:16Z", "definition" : "ESRL was formed to pursue a broad and comprehensive understanding of the Earth system. This system comprises many physical, chemical and biological processes that need to be dynamically integrated to better predict their behavior over scales from local to global and periods of minutes to millennia. At ESRL we are working toward a greater stewardship of the Earth through a number of themes aimed at understanding the Earth system processes and changes.", "prefLabel" : {"_value" : "Earth System Research Laboratory (ESRL), National Oceanic and Atmospheric Administration (NOAA)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/496", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/468", "prefLabel" : {"_value" : "Animal Tracking Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2017-09-08T05:40:13Z", "dctermsModified" : "2018-11-15T00:34:22Z", "prefLabel" : {"_value" : "Acoustic Telemetry Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/497", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/468", "prefLabel" : {"_value" : "Animal Tracking Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2017-09-08T05:42:35Z", "dctermsModified" : "2018-11-15T00:34:35Z", "prefLabel" : {"_value" : "Animal Tagging Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/498", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/472", "prefLabel" : {"_value" : "Deep Water Moorings Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2017-09-08T05:48:22Z", "dctermsModified" : "2018-11-15T00:35:33Z", "prefLabel" : {"_value" : "Deep Water Arrays Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/499", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/472", "prefLabel" : {"_value" : "Deep Water Moorings Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2017-09-08T05:53:24Z", "dctermsModified" : "2018-11-15T00:35:46Z", "prefLabel" : {"_value" : "Southern Ocean Time Series Observatory Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/500", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/477", "prefLabel" : {"_value" : "National Mooring Network Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2017-09-08T06:02:29Z", "dctermsModified" : "2018-11-15T00:36:27Z", "prefLabel" : {"_value" : "Acidification Moorings Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/501", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/477", "prefLabel" : {"_value" : "National Mooring Network Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2017-09-08T06:06:23Z", "dctermsModified" : "2020-12-17T06:10:24Z", "prefLabel" : {"_value" : "National Reference Stations Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/502", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/477", "prefLabel" : {"_value" : "National Mooring Network Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2017-09-08T06:24:54Z", "dctermsModified" : "2018-11-15T00:37:00Z", "prefLabel" : {"_value" : "New South Wales Moorings Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/503", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/477", "prefLabel" : {"_value" : "National Mooring Network Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2017-09-08T06:31:39Z", "dctermsModified" : "2018-11-15T00:37:11Z", "prefLabel" : {"_value" : "Queensland and Northern Australia Moorings Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+    }
+    ], "itemsPerPage" : 10, "next" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=47", "page" : 46, "prev" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=45", "startIndex" : 461, "type" : "http://purl.org/linked-data/api/vocab#Page"}
+}

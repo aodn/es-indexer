@@ -1,0 +1,214 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=15",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=15&_metadata=all",
+    "first": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=0",
+    "isPartOf": {
+      "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+      "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+      "hasPart": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=15",
+      "type": "http://purl.org/linked-data/api/vocab#ListEndpoint"
+    },
+    "items": [
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/240",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-29T00:00:00Z",
+        "dctermsModified": "2017-04-13T05:31:57Z",
+        "definition": "Container ship vessel, which was flying the flag of UK. It was disposed of in 1996.",
+        "prefLabel": {
+          "_value": "Flinders Bay",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/241",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-29T00:00:00Z",
+        "dctermsModified": "2017-04-13T04:51:16Z",
+        "definition": "Container ship vessel, which was flying the flag of UK. It was disposed of in 1999.",
+        "prefLabel": {
+          "_value": "Botany Bay",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/242",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-31T00:00:00Z",
+        "dctermsModified": "2017-04-13T05:30:39Z",
+        "definition": "Container ship vessel, which was flying the flag of Saint Vincent & Grenadines. It was disposed of in 1998.",
+        "prefLabel": {
+          "_value": "Discovery Bay",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/243",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-29T00:00:00Z",
+        "dctermsModified": "2017-04-13T04:08:12Z",
+        "definition": "Container ship vessel, which was flying the flag of UK. It was disposed of in 2003.",
+        "prefLabel": {
+          "_value": "America Star",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/244",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-29T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:32Z",
+        "definition": "Container ship vessel, which is currently flying the flag of Panama (May 2013).",
+        "prefLabel": {
+          "_value": "MSC Didem",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/245",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-29T00:00:00Z",
+        "dctermsModified": "2017-04-19T05:41:25Z",
+        "definition": "Container ship vessel, which is currently flying the flag of Singapore (April 2012). It was disposed of in 2016.",
+        "prefLabel": {
+          "_value": "Safmarine Meru",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/246",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-31T00:00:00Z",
+        "dctermsModified": "2024-03-04T03:01:10Z",
+        "definition": "Container ship vessel. It was called the Wellington Express from 1996 until August 2002. It is now caled the Troy Y (Moldova, August 2012).",
+        "prefLabel": {
+          "_value": "Wellington Express {MWSD3}",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/247",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-29T00:00:00Z",
+        "dctermsModified": "2017-04-13T05:51:59Z",
+        "definition": "Icebreaker vessel, which is currently flying the flag of the US (May 2013).",
+        "prefLabel": {
+          "_value": "Polar Star",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/248",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-29T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:32Z",
+        "definition": "Container ship vessel, which was flying the flag of Belgium (2003). It was disposed of in approximately 2008.",
+        "prefLabel": {
+          "_value": "SA Sederberg",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/249",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-29T00:00:00Z",
+        "dctermsModified": "2019-03-27T22:03:03Z",
+        "definition": "Container ship vessel. It was called the Maersk Constantia from May 2001 until June 2008. It was disposed of in 2008.",
+        "prefLabel": {
+          "_value": "Maersk Constantia",
+          "_lang": "en"
+        }
+      }
+    ],
+    "itemsPerPage": 10,
+    "next": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=16",
+    "page": 15,
+    "prev": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=14",
+    "startIndex": 151,
+    "type": "http://purl.org/linked-data/api/vocab#Page"
+  }
+}

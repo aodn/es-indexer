@@ -1,0 +1,221 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=1",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=1&_metadata=all",
+    "first": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=0",
+    "isPartOf": {
+      "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+      "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+      "hasPart": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=1",
+      "type": "http://purl.org/linked-data/api/vocab#ListEndpoint"
+    },
+    "items": [
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/108",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/35",
+            "prefLabel": {
+              "_value": "vessel of opportunity on fixed route",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-06-04T00:00:00Z",
+        "dctermsModified": "2019-03-27T21:34:08Z",
+        "definition": "Passenger ship vessel, which is currently flying the flag of Australia (June, 2012).",
+        "prefLabel": {
+          "_value": "Fantasea Wonder",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/109",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/31",
+            "prefLabel": {
+              "_value": "research vessel",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-07-01T00:00:00Z",
+        "dctermsModified": "2019-03-27T21:25:14Z",
+        "definition": "RV Linnaeus is a small CSIRO research vessel collecting underway bulk SST from its occasional trips within 200 nm from Hillarys Boat Harbour, WA.",
+        "prefLabel": {
+          "_value": "Linnaeus",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/11",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/31",
+            "prefLabel": {
+              "_value": "research vessel",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2017-01-05T05:58:46Z",
+        "dctermsModified": "2017-04-03T00:00:07Z",
+        "definition": "Research vessel which is operated by James Cook University (JCU)",
+        "prefLabel": {
+          "_value": "James Kirby",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/110",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-15T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:33Z",
+        "definition": "Container ship vessel, which is currently flying the flag of Thailand (May 2013)",
+        "prefLabel": {
+          "_value": "Xutra Bhum",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/111",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/31",
+            "prefLabel": {
+              "_value": "research vessel",
+              "_lang": "en"
+            }
+          },
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/36",
+            "prefLabel": {
+              "_value": "fishing vessel",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-15T00:00:00Z",
+        "dctermsModified": "2019-06-03T01:51:01Z",
+        "definition": "Fishing support vessel, which is currently flying the flag of New Zealand (May 2013)",
+        "prefLabel": {
+          "_value": "Tangaroa",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/112",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/36",
+            "prefLabel": {
+              "_value": "fishing vessel",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-15T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:33Z",
+        "definition": "Trawler fishing vessel operated by Australian Wild Tuna, which is currently flying the Australian flag (May 2012)",
+        "prefLabel": {
+          "_value": "Santo Rocco",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/113",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/36",
+            "prefLabel": {
+              "_value": "fishing vessel",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-15T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:33Z",
+        "definition": "Trawler fishing vessel, currently flying the Australian flag (May 2013)",
+        "prefLabel": {
+          "_value": "Austral Leader II",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/114",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/36",
+            "prefLabel": {
+              "_value": "fishing vessel",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-15T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:33Z",
+        "definition": "Fishing vessel, currently flying the New Zealand flag (May 2013)",
+        "prefLabel": {
+          "_value": "Janas",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/115",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/36",
+            "prefLabel": {
+              "_value": "fishing vessel",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-15T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:33Z",
+        "definition": "Trawler fishing vessel, currently flying the New Zealand flag (May 2012)",
+        "prefLabel": {
+          "_value": "Will Watch",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/116",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/36",
+            "prefLabel": {
+              "_value": "fishing vessel",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-15T00:00:00Z",
+        "dctermsModified": "2017-04-13T04:04:29Z",
+        "definition": "Trawler fishing vessel, currently flying the Australian flag (May 2013). It was decommissioned in 2015.",
+        "prefLabel": {
+          "_value": "Southern Champion",
+          "_lang": "en"
+        }
+      }
+    ],
+    "itemsPerPage": 10,
+    "next": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=2",
+    "page": 1,
+    "prev": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=0",
+    "startIndex": 11,
+    "type": "http://purl.org/linked-data/api/vocab#Page"
+  }
+}

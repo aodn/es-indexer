@@ -1,0 +1,214 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=27",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=27&_metadata=all",
+    "first": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=0",
+    "isPartOf": {
+      "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+      "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+      "hasPart": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=27",
+      "type": "http://purl.org/linked-data/api/vocab#ListEndpoint"
+    },
+    "items": [
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/454",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-07-24T00:00:00Z",
+        "dctermsModified": "2017-04-13T05:17:17Z",
+        "definition": "Container ship vessel, which is currently flying the flag of Singapore (July 2013).",
+        "prefLabel": {
+          "_value": "CMA CGM Onyx",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/455",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-07-24T00:00:00Z",
+        "dctermsModified": "2017-04-13T05:25:30Z",
+        "definition": "Container ship vessel. It was called the Cap Reinga from August 2007 until September 2010. It is now called the Jupiter (Liberia, November 2012).",
+        "prefLabel": {
+          "_value": "Cap Reinga",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/456",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-07-24T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:41Z",
+        "definition": "Container ship vessel. It was called the CSCL Longkou from May 2001 until Augus 2007. It is now called the Jupiter (Liberia, November 2012).",
+        "prefLabel": {
+          "_value": "CSCL Longkou",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/457",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-07-24T00:00:00Z",
+        "dctermsModified": "2023-07-04T04:41:58Z",
+        "definition": "Container ship vessel. It was called the CMA CGM Lavender until November 2016. It is now called the Montpellier (Liberia, July 2013).",
+        "prefLabel": {
+          "_value": "CMA CGM Lavender",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/458",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-07-24T00:00:00Z",
+        "dctermsModified": "2017-04-13T04:07:23Z",
+        "definition": "Container ship vessel, which is currently flying the flag of Liberia (July 2013).",
+        "prefLabel": {
+          "_value": "ANL Benalla",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/459",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-07-24T00:00:00Z",
+        "dctermsModified": "2017-04-13T05:37:16Z",
+        "definition": "Container ship vessel, which is currently flying the flag of Liberia (July 2013).",
+        "prefLabel": {
+          "_value": "JPO Scorpius",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/460",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-07-24T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:40Z",
+        "definition": "Container ship vessel. It was called the Maersk Fuji from July 2005 unitl June 2010. It is now called the Spyros (Marshall Islands, February 2012).",
+        "prefLabel": {
+          "_value": "Maersk Fuji",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/461",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-07-24T00:00:00Z",
+        "dctermsModified": "2020-10-15T04:55:18Z",
+        "definition": "Container ship vessel. It was called the Merkur Sky from 1997 to April 1998, December 1998 to 1999, May 2001 to March 2002, November 2002 to June 2003, August 2005 to July 2007 and April 2011 to September 2012. It is now called the M Sky (Saint Kitts & Nevis, June 2012). It was disposed of in approximately 2012.",
+        "prefLabel": {
+          "_value": "Merkur Sky",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/462",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-07-24T00:00:00Z",
+        "dctermsModified": "2017-04-13T05:34:43Z",
+        "definition": "Cargo ship vessel. It was called the Icebird from 1984 until December 1994. It is now called the Almog (Honduras, November 2012).",
+        "prefLabel": {
+          "_value": "Icebird",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/463",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-07-24T00:00:00Z",
+        "dctermsModified": "2019-03-27T21:49:32Z",
+        "definition": "Vehicles carrier vessel, which is currently flying the flag of Norway (July, 2013).",
+        "prefLabel": {
+          "_value": "Hoegh Seoul",
+          "_lang": "en"
+        }
+      }
+    ],
+    "itemsPerPage": 10,
+    "next": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=28",
+    "page": 27,
+    "prev": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=26",
+    "startIndex": 271,
+    "type": "http://purl.org/linked-data/api/vocab#Page"
+  }
+}
