@@ -21,10 +21,7 @@ import org.springframework.web.client.RestTemplate;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -91,7 +88,11 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
             }
         })
         .when(template)
-        .getForObject(anyString(), eq(ObjectNode.class));
+        .getForObject(
+                argThat(s -> s.contains("/aodn-discovery-parameter-vocabulary/version-1-6/") || s.contains("/aodn-parameter-category-vocabulary/version-2-1/")),
+                eq(ObjectNode.class),
+                any(Object[].class)     // It is important to have this any otherwise it will match getForObject(URI, Class<T>)
+        );
 
         return  template;
     }
@@ -132,7 +133,11 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
             }
         })
         .when(template)
-        .getForObject(anyString(), eq(ObjectNode.class));
+        .getForObject(
+                argThat(s -> s!= null && (s.contains("/aodn-platform-vocabulary/version-6-1/") || s.contains("/aodn-platform-category-vocabulary/version-1-2/"))),
+                eq(ObjectNode.class),
+                any(Object[].class)     // It is important to have this any otherwise it will match getForObject(URI, Class<T>)
+        );
 
         return  template;
     }
@@ -173,7 +178,11 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
             }
         })
         .when(template)
-        .getForObject(anyString(), eq(ObjectNode.class));
+        .getForObject(
+                argThat(s -> s.contains("/aodn-organisation-category-vocabulary/version-2-5/") || s.contains("/aodn-organisation-vocabulary/version-2-5/")),
+                eq(ObjectNode.class),
+                any(Object[].class)     // It is important to have this any otherwise it will match getForObject(URI, Class<T>)
+        );
 
         return  template;
     }
