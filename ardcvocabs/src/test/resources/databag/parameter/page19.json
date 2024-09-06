@@ -1,0 +1,120 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=19",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=19&_metadata=all",
+    "first": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=0",
+    "isPartOf": {
+      "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+      "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+      "hasPart": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=19",
+      "type": "http://purl.org/linked-data/api/vocab#ListEndpoint"
+    },
+    "items": [
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/40",
+        "dctermsCreated": "2018-02-22T05:52:54Z",
+        "dctermsModified": "2023-03-22T03:02:09Z",
+        "definition": "Period of the second highest peak of the energy spectrum analysed by spectral method.",
+        "prefLabel": {
+          "_value": "Period at second highest energy spectrum peak of waves on the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/41",
+        "dctermsCreated": "2018-02-22T05:54:12Z",
+        "dctermsModified": "2023-06-27T02:57:01Z",
+        "definition": "The variance spectral density of the zeroth frequency moment.",
+        "prefLabel": {
+          "_value": "Zeroth spectral moment of waves on the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/42",
+        "dctermsCreated": "2018-02-22T05:55:15Z",
+        "dctermsModified": "2023-06-27T01:45:07Z",
+        "definition": "Direction from which wind sea waves are coming relative to True North.",
+        "prefLabel": {
+          "_value": "Direction of wind sea waves on the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/43",
+        "dctermsCreated": "2018-10-30T00:46:00Z",
+        "dctermsModified": "2018-10-30T00:49:29Z",
+        "prefLabel": {
+          "_value": "Sea surface height above reference datum",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/44",
+        "dctermsCreated": "2018-10-31T03:42:40Z",
+        "dctermsModified": "2018-12-11T04:39:56Z",
+        "definition": "Surface references mean sea level, which means the time mean of sea surface elevation at a given location over an arbitrary period sufficient to eliminate the tidal signals.",
+        "prefLabel": {
+          "_value": "Height above surface of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/45",
+        "dctermsCreated": "2018-10-31T03:49:00Z",
+        "dctermsModified": "2018-10-31T03:54:50Z",
+        "definition": "Concentration (moles or mass) of nitrogen as both nitrate and nitrite per unit mass of the water column.",
+        "prefLabel": {
+          "_value": "Concentration of nitrate and nitrite {NO3 and NO2} per unit mass of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/46",
+        "dctermsCreated": "2018-10-31T03:49:18Z",
+        "dctermsModified": "2018-10-31T03:55:05Z",
+        "definition": "Concentration of nitrate and nitrite per unit volume of the water column. May be expressed in terms of mass or quantity of substance.",
+        "prefLabel": {
+          "_value": "Concentration of nitrate and nitrite {NO3 and NO2} per unit volume of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/47",
+        "dctermsCreated": "2018-10-31T04:35:57Z",
+        "dctermsModified": "2018-10-31T04:43:11Z",
+        "prefLabel": {
+          "_value": "Concentration of total phosphorus per unit volume of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/48",
+        "dctermsCreated": "2018-10-31T04:36:15Z",
+        "dctermsModified": "2018-10-31T04:43:05Z",
+        "prefLabel": {
+          "_value": "Concentration of total phosphorus per unit mass of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/49",
+        "dctermsCreated": "2018-10-31T04:39:12Z",
+        "dctermsModified": "2018-10-31T04:42:31Z",
+        "prefLabel": {
+          "_value": "Concentration of nitrite {NO2} per unit mass of the water body",
+          "_lang": "en"
+        }
+      }
+    ],
+    "itemsPerPage": 10,
+    "next": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=20",
+    "page": 19,
+    "prev": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=18",
+    "startIndex": 191,
+    "type": "http://purl.org/linked-data/api/vocab#Page"
+  }
+}

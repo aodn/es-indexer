@@ -1,0 +1,122 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=16",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=16&_metadata=all",
+    "first": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=0",
+    "isPartOf": {
+      "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+      "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+      "hasPart": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=16",
+      "type": "http://purl.org/linked-data/api/vocab#ListEndpoint"
+    },
+    "items": [
+      {
+        "_about": "http://vocab.nerc.ac.uk/collection/P01/current/GWDRZZ01",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2021-04-21T06:14:53Z",
+        "definition": "Direction from which waves are coming relative to True North.",
+        "prefLabel": {
+          "_value": "Direction of waves on the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.nerc.ac.uk/collection/P01/current/LCDAZZ01",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-10-24T02:43:05Z",
+        "definition": "The direction towards which Eulerian current in the water column is flowing.",
+        "prefLabel": {
+          "_value": "Current direction in the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.nerc.ac.uk/collection/P01/current/LCEWZZ01",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-10-24T02:38:10Z",
+        "definition": "Speed of Eulerian current flow towards due east.",
+        "prefLabel": {
+          "_value": "Eastward current velocity in the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.nerc.ac.uk/collection/P01/current/LCNSZZ01",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-10-24T02:38:46Z",
+        "definition": "Speed of Eulerian current flow towards true north",
+        "prefLabel": {
+          "_value": "Northward current velocity in the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.nerc.ac.uk/collection/P01/current/LRZAZZZZ",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-10-26T01:29:07Z",
+        "prefLabel": {
+          "_value": "Upward current velocity in the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.nerc.ac.uk/collection/P01/current/LWRDZZ01",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-10-24T02:31:50Z",
+        "prefLabel": {
+          "_value": "Downwelling vector irradiance as energy (longwave) in the atmosphere",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.nerc.ac.uk/collection/P01/current/MDMAP014",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-10-26T01:31:41Z",
+        "definition": "Concentration (moles or mass) of acid-neutralising bases per unit mass of the water column",
+        "prefLabel": {
+          "_value": "Total alkalinity per unit mass of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.nerc.ac.uk/collection/P01/current/PERDXXXX",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:24:12Z",
+        "definition": "Concentration of the carotenoid pigment peridinin per unit volume of a water body.  The pigment is contained in suspended particles of unspecified size",
+        "prefLabel": {
+          "_value": "Concentration of peridinin per unit volume of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.nerc.ac.uk/collection/P01/current/PSLTZZ01",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-10-24T01:14:39Z",
+        "definition": "The quantity of dissolved ions (predominantly salt in seawater) expressed on a scale (PSS-78) based on the conductivity ratio of a seawater sample to a standard KCl solution.",
+        "prefLabel": {
+          "_value": "Practical salinity of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.nerc.ac.uk/collection/P01/current/SVELXXXX",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-10-26T01:28:00Z",
+        "definition": "The rate at which sound travels through the water column",
+        "prefLabel": {
+          "_value": "Sound velocity in the water body",
+          "_lang": "en"
+        }
+      }
+    ],
+    "itemsPerPage": 10,
+    "next": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=17",
+    "page": 16,
+    "prev": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=15",
+    "startIndex": 161,
+    "type": "http://purl.org/linked-data/api/vocab#Page"
+  }
+}

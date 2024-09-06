@@ -1,0 +1,45 @@
+{ "format" : "linked-data-api", "version" : "0.2", "result" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=14", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-organisation-vocabulary/version-2-5/concept.json", "extendedMetadataVersion" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=14&_metadata=all", "first" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=0", "isPartOf" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-organisation-vocabulary/version-2-5/concept.json", "hasPart" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=14", "type" : "http://purl.org/linked-data/api/vocab#ListEndpoint"}
+    , "items" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/255", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/252", "prefLabel" : {"_value" : "University of Tasmania (UTAS)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2015-07-13T10:38:15Z", "dctermsModified" : "2020-12-17T05:59:16Z", "definition" : "The School of Land and Food was formed in 2014. It brings together the disciplines of geography, spatial science, agricultural science and food systems.", "prefLabel" : {"_value" : "School of Land and Food (SLAF), University of Tasmania (UTAS)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/256", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/252", "prefLabel" : {"_value" : "University of Tasmania (UTAS)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2015-07-13T10:38:15Z", "dctermsModified" : "2018-08-27T05:46:12Z", "definition" : "This school became part of the School of Biological Sciences (SBS), in 2014.", "prefLabel" : {"_value" : "School of Zoology, University of Tasmania (UTAS)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/257", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/252", "prefLabel" : {"_value" : "University of Tasmania (UTAS)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2015-07-13T10:38:15Z", "dctermsModified" : "2018-08-27T05:46:01Z", "definition" : "This school became part of the School of Biological Sciences (SBS), in 2014.", "prefLabel" : {"_value" : "School of Plant Science, University of Tasmania (UTAS)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/258", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/252", "prefLabel" : {"_value" : "University of Tasmania (UTAS)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2015-07-13T10:38:15Z", "dctermsModified" : "2018-09-03T03:55:06Z", "definition" : "The school of Biological Sciences was formed in 2014, bringing together the former schools of Zoology and Plant Science.", "prefLabel" : {"_value" : "School of Biological Sciences (SBS), University of Tasmania (UTAS)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/259", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/252", "prefLabel" : {"_value" : "University of Tasmania (UTAS)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2015-07-13T10:38:15Z", "dctermsModified" : "2018-03-14T22:33:28Z", "definition" : "The institute was established, in 1998,  as a centre of excellence in applied marine research to support the development and sustainable management of Tasmania's living marine resources. It was a joint venture between the University of Tasmania and the Tasmanian Government, utilising the expertise and facilities of the Department of Primary Industries and Water. It became part of the Institute for Marine and Antarctic Studies in 2010.", "prefLabel" : {"_value" : "Tasmanian Aquaculture and Fisheries Institute (TAFI)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/26", "dctermsCreated" : "2015-04-27T10:38:15Z", "dctermsModified" : "2018-08-24T01:27:51Z", "definition" : "The Australian Fisheries Management Authority (AFMA) is the Australian Government agency responsible for the efficient management and sustainable use of Commonwealth fish resources on behalf of the Australian community.", "prefLabel" : {"_value" : "Australian Fisheries Management Authority (AFMA), Australian Government", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/260", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/252", "prefLabel" : {"_value" : "University of Tasmania (UTAS)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2015-07-13T10:38:15Z", "dctermsModified" : "2018-08-27T05:44:20Z", "definition" : "The Institute for Marine and Antarctic Studies (IMAS) was established in 2009. It was created by the University of Tasmania (UTAS) Council to bring together the many strands of marine and Antarctic research currently being pursued in and around Hobart, to encourage the development of strengthened research links and exploit new research opportunities. IMAS brought together staff and students from the Tasmanian Aquaculture and Fisheries Institute (TAFI) , the Institute for Antarctic and Southern Ocean Studies (IASOS), and marine and Antarctic scientists from the academic Schools of UTAS.", "prefLabel" : {"_value" : "Institute for Marine and Antarctic Studies (IMAS), University of Tasmania (UTAS)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/261", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/252", "prefLabel" : {"_value" : "University of Tasmania (UTAS)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2015-07-13T10:38:15Z", "dctermsModified" : "2018-08-27T05:44:44Z", "definition" : "The School of Aquaculture was conducted within the Australian Maritime College at the University of Tasmania, and in 2014 was incorporated into Institute for Marine and Antarctic Studies (IMAS) Launceston.", "prefLabel" : {"_value" : "School of Aquaculture, University of Tasmania (UTAS)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/262", "dctermsCreated" : "2015-07-13T10:38:15Z", "dctermsModified" : "2018-03-14T22:33:29Z", "definition" : "The University was originally founded in Rockhampton in 1967 and was known as the Queensland Institute of Technology (Capricornia), achieving full university status in 1992. Its main campus is in North Rockhampton, Queensland. Along with locations in regional Queensland (Bundaberg, Emerald, Gladstone, and Mackay), CQUniversity has also expanded its presence throughout Australia with campuses in Adelaide, Brisbane, Melbourne, Noosa and Sydney, Study Centres in Biloela and Yeppoon, a Cairns Distance Education Study Centre, a delivery site in Edithvale, Victoria, and Partner Study Hubs in Cannonvale, Queensland and Geraldton, Western Australia.", "prefLabel" : {"_value" : "Central Queensland University (CQU)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/263", "dctermsCreated" : "2015-07-13T10:38:15Z", "dctermsModified" : "2018-08-28T05:50:15Z", "definition" : "Charles Darwin University was 'created' in 2003, from the merger of the Northern Territory University and the Alice Spring's Centralian College. CDU teaches students at four campuses and four training centres across Australia.", "narrower" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/265", "prefLabel" : {"_value" : "Research Institute for the Environment and Livelihoods (RIEL), Charles Darwin University (CDU)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/266", "prefLabel" : {"_value" : "School of Environmental and Life Sciences (SELS), Charles Darwin University (CDU)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/267", "prefLabel" : {"_value" : "School of Environment, Charles Darwin University (CDU)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/547", "prefLabel" : {"_value" : "Institute of Advanced Studies, Charles Darwin University (CDU)", "_lang" : "en"}
+      }
+      ], "prefLabel" : {"_value" : "Charles Darwin University (CDU)", "_lang" : "en"}
+    }
+    ], "itemsPerPage" : 10, "next" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=15", "page" : 14, "prev" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=13", "startIndex" : 141, "type" : "http://purl.org/linked-data/api/vocab#Page"}
+}

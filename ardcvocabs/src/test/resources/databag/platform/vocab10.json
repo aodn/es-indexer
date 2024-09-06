@@ -1,0 +1,214 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=10",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=10&_metadata=all",
+    "first": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=0",
+    "isPartOf": {
+      "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+      "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+      "hasPart": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=10",
+      "type": "http://purl.org/linked-data/api/vocab#ListEndpoint"
+    },
+    "items": [
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/195",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-23T00:00:00Z",
+        "dctermsModified": "2023-01-25T03:29:39Z",
+        "definition": "The Timor Sill Mooring is operated by CSIRO, and collects data in the Indonesian Throughflow. This mooring was decommissioned in October 2015.",
+        "prefLabel": {
+          "_value": "Timor Sill Mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/196",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-23T00:00:00Z",
+        "dctermsModified": "2023-01-25T03:21:09Z",
+        "definition": "The Polynya1 mooring is operated by CSIRO, and collects data near the Adelie Land coast, in the Southern Ocean. This mooring was decommissioned in January 2015.",
+        "prefLabel": {
+          "_value": "Polynya1 Mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/197",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-23T00:00:00Z",
+        "dctermsModified": "2023-01-25T03:21:41Z",
+        "definition": "The Polynya2 mooring is operated by CSIRO, and collects data near the Adelie Land coast, in the Southern Ocean. This mooring was decommissioned in January 2015.",
+        "prefLabel": {
+          "_value": "Polynya2 Mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/198",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-23T00:00:00Z",
+        "dctermsModified": "2023-01-25T03:22:11Z",
+        "definition": "The Polynya3 mooring is operated by CSIRO, and collects data near the Adelie Land coast, in the Southern Ocean. The mooring is trapped in sea ice, and considered irretrievable in 2015.",
+        "prefLabel": {
+          "_value": "Polynya3 Mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/199",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-27T00:00:00Z",
+        "dctermsModified": "2017-04-13T05:37:34Z",
+        "definition": "General Cargo ship vessel. It was called the Joana Bonita from 1988 until April 2002. It is now called the Xuan De Men (Panama, June 2010). It was disposed of in approximately 2010.",
+        "prefLabel": {
+          "_value": "Joana Bonita",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/2",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2015-07-07T03:18:13Z",
+        "dctermsModified": "2023-01-25T02:25:21Z",
+        "definition": "The Beagle Gulf Mooring is operated by AIMS (Australian Institute of Marine Science) and collects data which complements the National Reference Station in Darwin Harbour. This mooring was decommissioned in July 2017.",
+        "prefLabel": {
+          "_value": "Beagle Gulf Mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/20",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2017-06-15T02:48:05Z",
+        "dctermsModified": "2023-01-25T02:24:13Z",
+        "definition": "It is one of two moorings deployed near Narooma, southern NSW, to capture the variability of the shelf waters, poleward of the East Australian Current (EAC) separation point. This mooring replaces the former 90m mooring, and was enabled through co-investment from Bega Valley Shire Council.",
+        "prefLabel": {
+          "_value": "Bateman's Marine Park 70m Mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/200",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-27T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:42Z",
+        "definition": "Container ship vessel. It was called the d M-Sagar between Aug 2010 and Aug 2012, and is now called the Meratus Gorontalo (Indonesia, Feb 2013).",
+        "prefLabel": {
+          "_value": "M-Sagar",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/201",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-27T00:00:00Z",
+        "dctermsModified": "2017-04-13T05:43:16Z",
+        "definition": "Container ship vessel, which is currently flying the flag of Cyprus (May 2013).",
+        "prefLabel": {
+          "_value": "Medontario",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/202",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-27T00:00:00Z",
+        "dctermsModified": "2018-09-07T06:51:37Z",
+        "definition": "General Cargo ship vessel. It was called the Forum Samoa II from 2001 until June 2010. It was then shortly called the Opal Harmony, then Southern Moana, and is now known as Capitaine Fearn (July, 2015).",
+        "prefLabel": {
+          "_value": "Forum Samoa II",
+          "_lang": "en"
+        }
+      }
+    ],
+    "itemsPerPage": 10,
+    "next": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=11",
+    "page": 10,
+    "prev": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=9",
+    "startIndex": 101,
+    "type": "http://purl.org/linked-data/api/vocab#Page"
+  }
+}

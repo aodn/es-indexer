@@ -1,0 +1,214 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=17",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=17&_metadata=all",
+    "first": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=0",
+    "isPartOf": {
+      "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+      "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+      "hasPart": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=17",
+      "type": "http://purl.org/linked-data/api/vocab#ListEndpoint"
+    },
+    "items": [
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/260",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-30T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:31Z",
+        "definition": "Training Ship vessel, which was flying the flag of USSR. It was disposed of in 1984.",
+        "prefLabel": {
+          "_value": "Meridian",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/261",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-31T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:31Z",
+        "definition": "Containter ship vessel. It was called the ANL Progress from July 2003 until May 2005. It is now called the Meratus Batam (Indonesia, May 2013).",
+        "prefLabel": {
+          "_value": "ANL Progress",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/262",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-31T00:00:00Z",
+        "dctermsModified": "2017-04-13T05:52:54Z",
+        "definition": "General Cargo ship vessel. It was called the Ranginui from August 1994 until November 1999. It is now called the Aylin (Turkey, May 2013).",
+        "prefLabel": {
+          "_value": "Ranginui",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/263",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-30T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:31Z",
+        "definition": "Container ship vessel. It was called the Baltrum Trader (which callsign V2AP6) from Jan 2000 until May 2007. It is again called the Baltrum Trader (callsign A8ZP9), flying the flag of Liberia (April, 2007).",
+        "prefLabel": {
+          "_value": "Baltrum Trader",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/264",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-30T00:00:00Z",
+        "dctermsModified": "2017-04-13T05:32:24Z",
+        "definition": "Container ship vessel. It was called the Florence from Oct 2005 until May 2012. It is now called the Damai Sejahtera li (Indonesia, Oct 2010).",
+        "prefLabel": {
+          "_value": "Florence",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/265",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-30T00:00:00Z",
+        "dctermsModified": "2017-04-13T05:58:55Z",
+        "definition": "Container ship vessel, which is currently flying the flag of Antigua & Barbuda (May 2013).",
+        "prefLabel": {
+          "_value": "Vega Gotland",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/266",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-31T00:00:00Z",
+        "dctermsModified": "2017-04-13T05:53:10Z",
+        "definition": "Cargo ship vessel. It was called the Rangitata from February 1992 until August 1998. It is now called the Emma (Antigua & Barbuda, May 2013).",
+        "prefLabel": {
+          "_value": "Rangitata",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/267",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-31T00:00:00Z",
+        "dctermsModified": "2017-04-13T05:37:52Z",
+        "definition": "General Cargo ship vessel. It was called the Karin from October 1990 until 1998. It is now called the Melody li (Panama, May 2013). It was disposed of in approximately 2009.",
+        "prefLabel": {
+          "_value": "Karin Knorr",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/268",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-06-03T00:00:00Z",
+        "dctermsModified": "2017-04-13T05:35:18Z",
+        "definition": "Cargo ship vessel. It was called the Iron Dampier from May 1992 until April 1998. The ship's callsign was VNGZ from 1992 until September 1996. It was disposed of in 2009.",
+        "prefLabel": {
+          "_value": "Iron Dampier",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/269",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-30T00:00:00Z",
+        "dctermsModified": "2019-03-27T21:39:03Z",
+        "definition": "Ro-ro Cargo ship vessel. It was called the Anro Australia from 1977 until June 1997. It was then called the Kevat (Saint Vincent & Grenadines). It was disposed of in 1997.",
+        "prefLabel": {
+          "_value": "Anro Australia",
+          "_lang": "en"
+        }
+      }
+    ],
+    "itemsPerPage": 10,
+    "next": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=18",
+    "page": 17,
+    "prev": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=16",
+    "startIndex": 171,
+    "type": "http://purl.org/linked-data/api/vocab#Page"
+  }
+}

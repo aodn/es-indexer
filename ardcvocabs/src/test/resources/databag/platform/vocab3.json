@@ -1,0 +1,214 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=3",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=3&_metadata=all",
+    "first": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=0",
+    "isPartOf": {
+      "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+      "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+      "hasPart": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=3",
+      "type": "http://purl.org/linked-data/api/vocab#ListEndpoint"
+    },
+    "items": [
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/126",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-15T00:00:00Z",
+        "dctermsModified": "2023-01-25T02:52:19Z",
+        "definition": "The Heron Island South Mooring is operated by AIMS (Australian Institute of Marine Science) and collects data in the Great Barrier Reef region.",
+        "prefLabel": {
+          "_value": "Heron Island South Mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/127",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-15T00:00:00Z",
+        "dctermsModified": "2023-01-25T03:04:19Z",
+        "definition": "The Lizard Shelf Mooring is operated by AIMS (Australian Institute of Marine Science) and collects data in the Great Barrier Reef region. This mooring was decommissioned in May 2014.",
+        "prefLabel": {
+          "_value": "Lizard Shelf Mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/128",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-15T00:00:00Z",
+        "dctermsModified": "2023-01-25T03:04:50Z",
+        "definition": "The Lizard Slope Mooring is operated by AIMS (Australian Institute of Marine Science) and collects data in the Great Barrier Reef region. This mooring was decommissioned in May 2014.",
+        "prefLabel": {
+          "_value": "Lizard Slope Mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/129",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-15T00:00:00Z",
+        "dctermsModified": "2023-01-25T03:08:41Z",
+        "definition": "The Myrmidon Mooring is operated by AIMS (Australian Institute of Marine Science) and collects data in the Great Barrier Reef region.",
+        "prefLabel": {
+          "_value": "Myrmidon Mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/13",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/31",
+            "prefLabel": {
+              "_value": "research vessel",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2017-01-05T06:01:55Z",
+        "dctermsModified": "2017-04-13T03:59:45Z",
+        "definition": "Research vessel, which was operated by Scripps Oceanography.",
+        "prefLabel": {
+          "_value": "Melville",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/130",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-15T00:00:00Z",
+        "dctermsModified": "2023-01-25T03:11:52Z",
+        "definition": "The One Tree East Mooring is operated by AIMS (Australian Institute of Marine Science) and collects data in the Great Barrier Reef region.",
+        "prefLabel": {
+          "_value": "One Tree East Mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/131",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-15T00:00:00Z",
+        "dctermsModified": "2023-01-25T03:18:58Z",
+        "definition": "The Palm Passage Mooring is operated by AIMS (Australian Institute of Marine Science) and collects data in the Great Barrier Reef region.",
+        "prefLabel": {
+          "_value": "Palm Passage Mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/132",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-15T00:00:00Z",
+        "dctermsModified": "2023-01-25T02:48:34Z",
+        "definition": "The Flat Top Banks Shelf Mooring is operated by AIMS (Australian Institute of Marine Science) and collects data as part of the Indonesian Thoughflow array. It was decommissioned in 2019.",
+        "prefLabel": {
+          "_value": "Flat Top Banks Shelf Mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/133",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-15T00:00:00Z",
+        "dctermsModified": "2023-01-25T02:54:02Z",
+        "definition": "The Joseph Bonaparte Gulf Shelf Mooring is operated by AIMS (Australian Institute of Marine Science) and collects data as part of the Indonesian Thoughflow array. It was decommissioned in 2019.",
+        "prefLabel": {
+          "_value": "Joseph Bonaparte Gulf Shelf Mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/134",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-15T00:00:00Z",
+        "dctermsModified": "2023-01-25T03:05:50Z",
+        "definition": "The Margaret Harries Banks Shelf Mooring is operated by AIMS (Australian Institute of Marine Science) and collects data as part of the Indonesian Thoughflow array. It was decommissioned in 2019.",
+        "prefLabel": {
+          "_value": "Margaret Harries Banks Shelf Mooring",
+          "_lang": "en"
+        }
+      }
+    ],
+    "itemsPerPage": 10,
+    "next": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=4",
+    "page": 3,
+    "prev": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=2",
+    "startIndex": 31,
+    "type": "http://purl.org/linked-data/api/vocab#Page"
+  }
+}

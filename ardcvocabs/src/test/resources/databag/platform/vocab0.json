@@ -1,0 +1,212 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_metadata=all",
+    "first": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=0",
+    "hasPart": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+    "isPartOf": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+    "items": [
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/1",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2015-05-12T01:56:12Z",
+        "dctermsModified": "2017-02-07T03:52:33Z",
+        "definition": "Container ship vessel, which is currently flying the flag of Hong Kong January 2015.",
+        "prefLabel": {
+          "_value": "OOCL Panama",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/10",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/31",
+            "prefLabel": {
+              "_value": "research vessel",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2017-01-05T05:40:47Z",
+        "dctermsModified": "2017-04-03T00:00:40Z",
+        "definition": "Research vessel, which was operated by the Australian Institute of Marine Science (AIMS). It was replaced by the Cape Solander at AIMS. It is now known as the Ocean Hunter III.",
+        "prefLabel": {
+          "_value": "Lady Basten",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/100",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/35",
+            "prefLabel": {
+              "_value": "vessel of opportunity on fixed route",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-15T00:00:00Z",
+        "dctermsModified": "2019-03-27T21:34:55Z",
+        "definition": "Passenger/Ro-Ro Cargo ship vessel, which is currently flying the flag of Australia (May 2013)",
+        "prefLabel": {
+          "_value": "Spirit of Tasmania 2",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/101",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-15T00:00:00Z",
+        "dctermsModified": "2019-03-27T22:17:37Z",
+        "definition": "General Cargo ship vessel, which is currently flying the flag of Bahamas (May 2013)",
+        "prefLabel": {
+          "_value": "Stadacona",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/102",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-15T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:39Z",
+        "definition": "Container ship vessel, which is currently flying the flag of Thailand (May 2013)",
+        "prefLabel": {
+          "_value": "Wana Bhum",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/103",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-15T00:00:00Z",
+        "dctermsModified": "2020-10-15T02:49:26Z",
+        "definition": "Bulk Carrier vessel, which was flying the flag of Australia. It was renamed the Star Yandi (call sign: C6ZY9) after July 2012. It was disposed of in approximately 2015.",
+        "prefLabel": {
+          "_value": "Iron Yandi",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/104",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-15T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:39Z",
+        "definition": "Passenger (Cruise) ship Vessel, which was flying the flag of Malta. It was renamed the Henna after July 2012.",
+        "prefLabel": {
+          "_value": "Pacific Sun",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/105",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-15T00:00:00Z",
+        "dctermsModified": "2017-04-13T05:52:18Z",
+        "definition": "General Cargo ship vessel, which is currently flying the flag of Australia (May 2013). It was disposed of in 2016.",
+        "prefLabel": {
+          "_value": "Portland",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/106",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-15T00:00:00Z",
+        "dctermsModified": "2017-04-13T05:49:53Z",
+        "definition": "General Cargo ship vessel, which is currently flying the flag of Hong Kong (May 2013). It was disposed of in approximately 2012.",
+        "prefLabel": {
+          "_value": "Pacific Celebes",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/107",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/35",
+            "prefLabel": {
+              "_value": "vessel of opportunity on fixed route",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-06-04T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:40Z",
+        "definition": "Passenger ship vessel, which is currently flying the flag of Australia (February, 2009).",
+        "prefLabel": {
+          "_value": "Sea Flyte",
+          "_lang": "en"
+        }
+      }
+    ],
+    "itemsPerPage": 10,
+    "next": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=1",
+    "page": 0,
+    "startIndex": 1,
+    "type": [
+      "http://purl.org/linked-data/api/vocab#ListEndpoint",
+      "http://purl.org/linked-data/api/vocab#Page"
+    ]
+  }
+}

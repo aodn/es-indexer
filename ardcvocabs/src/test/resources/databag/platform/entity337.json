@@ -1,0 +1,20 @@
+{ "format" : "linked-data-api", "version" : "0.2", "result" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/resource.json?uri=http://vocab.aodn.org.au/def/platform/entity/337", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/resource.json?uri=http://vocab.aodn.org.au/def/platform/entity/337", "extendedMetadataVersion" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/resource.json?_metadata=all&uri=http://vocab.aodn.org.au/def/platform/entity/337", "primaryTopic" : {"_about" : "http://vocab.aodn.org.au/def/platform/entity/337", "altLabel" : [{"_value" : "HIRP3", "_lang" : "en"}
+      ], "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/16", "narrower" : ["http://vocab.aodn.org.au/def/platform/entity/337"]}
+      ], "contributor" : "http://editor.vocabs.ands.org.au/user/eMII_Atkins.Natalia", "creator" : "http://editor.vocabs.ands.org.au/user/Sebastien-Mancini", "dcPublisher" : "eMarine Information Infrastructure (eMII)", "dcSource" : "Australian Ocean Data Network platform register", "dctermsCreated" : "2013-06-14T00:00:00Z", "dctermsModified" : "2022-11-07T04:18:11Z", "definition" : "A 6m steel pole.  The pole is solar powered and routes data from the Sensor Floats and other Sensor Relay Poles back to the Base Station located on Heron Island. The system uses the Campbell Scientific CR1000 loggers and RF411 Spread-Spectrum radios to process and route the data. The poles also can support a range of sensors, this pole also has a simple bottom mounted thermistor using the MEA thermistors. The unit will be serviced every six months and will be used in the future for attaching new sets of sensors. The pole was decommissioned in September 2021.", "inScheme" : {"_about" : "http://vocab.aodn.org.au/def/platform/1", "hasConcept" : "http://vocab.aodn.org.au/def/platform/entity/337"}
+      , "prefLabel" : {"_value" : "Heron Island Relay Pole 3", "_lang" : "en"}
+      , "related" : [{"_about" : "http://vocab.aodn.org.au/def/platform/entity/334", "related" : ["http://vocab.aodn.org.au/def/platform/entity/337"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/335", "related" : ["http://vocab.aodn.org.au/def/platform/entity/337"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/336", "related" : ["http://vocab.aodn.org.au/def/platform/entity/337"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/338", "related" : ["http://vocab.aodn.org.au/def/platform/entity/337"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/339", "related" : ["http://vocab.aodn.org.au/def/platform/entity/337"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/340", "related" : ["http://vocab.aodn.org.au/def/platform/entity/337"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/341", "related" : ["http://vocab.aodn.org.au/def/platform/entity/337"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/342", "related" : ["http://vocab.aodn.org.au/def/platform/entity/337"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/343", "related" : ["http://vocab.aodn.org.au/def/platform/entity/337"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/344", "related" : ["http://vocab.aodn.org.au/def/platform/entity/337"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/345", "related" : ["http://vocab.aodn.org.au/def/platform/entity/337"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/346", "related" : ["http://vocab.aodn.org.au/def/platform/entity/337"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/347", "related" : ["http://vocab.aodn.org.au/def/platform/entity/337"]}
+      ], "type" : ["http://www.w3.org/2000/01/rdf-schema#Resource", "http://www.w3.org/2004/02/skos/core#Concept"], "valid" : "2008-12-02/2019-06-27"}
+    , "type" : ["http://purl.org/linked-data/api/vocab#ItemEndpoint", "http://purl.org/linked-data/api/vocab#Page"]}
+}

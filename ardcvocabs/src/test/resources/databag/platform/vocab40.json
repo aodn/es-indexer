@@ -1,0 +1,279 @@
+{ "format" : "linked-data-api", "version" : "0.2", "result" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=40", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json", "extendedMetadataVersion" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=40&_metadata=all", "first" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=0", "isPartOf" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json", "hasPart" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=40", "type" : "http://purl.org/linked-data/api/vocab#ListEndpoint"}
+    , "items" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/48", "dctermsCreated" : "2013-04-08T00:00:00Z", "dctermsModified" : "2020-05-20T02:37:45Z", "definition" : "A tethered collection of oceanographic instruments at a fixed location that may include seafloor mid-water and surface components.", "narrower" : [{"_about" : "http://vocab.aodn.org.au/def/platform/entity/120", "prefLabel" : {"_value" : "Bateman's Marine Park 90m Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/121", "prefLabel" : {"_value" : "Bateman's Marine Park 120m Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/122", "prefLabel" : {"_value" : "Coffs Harbour 70m Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/123", "prefLabel" : {"_value" : "Coffs Harbour 100m Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/124", "prefLabel" : {"_value" : "Capricorn Channel Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/125", "prefLabel" : {"_value" : "Elusive Reef Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/126", "prefLabel" : {"_value" : "Heron Island South Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/127", "prefLabel" : {"_value" : "Lizard Shelf Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/128", "prefLabel" : {"_value" : "Lizard Slope Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/129", "prefLabel" : {"_value" : "Myrmidon Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/130", "prefLabel" : {"_value" : "One Tree East Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/131", "prefLabel" : {"_value" : "Palm Passage Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/132", "prefLabel" : {"_value" : "Flat Top Banks Shelf Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/133", "prefLabel" : {"_value" : "Joseph Bonaparte Gulf Shelf Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/134", "prefLabel" : {"_value" : "Margaret Harries Banks Shelf Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/135", "prefLabel" : {"_value" : "Timor South Shelf Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/136", "prefLabel" : {"_value" : "Jervis Bay Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/137", "prefLabel" : {"_value" : "Kimberley 50m Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/138", "prefLabel" : {"_value" : "Kimberley 100m Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/139", "prefLabel" : {"_value" : "Kimberley 200m Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/140", "prefLabel" : {"_value" : "Kimberley 400m Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/141", "prefLabel" : {"_value" : "Darwin National Reference Station Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/142", "prefLabel" : {"_value" : "Esperance National Reference Station ADCP Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/144", "prefLabel" : {"_value" : "Kangaroo Island National Reference Station Acidification Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/146", "prefLabel" : {"_value" : "Ningaloo Reef National Reference Station Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/147", "prefLabel" : {"_value" : "North Stradbroke Island National Reference Station ADCP Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/149", "prefLabel" : {"_value" : "North Stradbroke Island National Reference Station Surface Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/150", "prefLabel" : {"_value" : "Rottnest Island National Reference Station ADCP Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/152", "prefLabel" : {"_value" : "Yongala National Reference Station Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/153", "prefLabel" : {"_value" : "Port Hacking 100m Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/154", "prefLabel" : {"_value" : "Pilbara 50m Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/155", "prefLabel" : {"_value" : "Pilbara 100m Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/156", "prefLabel" : {"_value" : "Pilbara 200m Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/157", "prefLabel" : {"_value" : "Deep Slope Mooring (M1)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/158", "prefLabel" : {"_value" : "Cabbage Patch Mooring (M2)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/159", "prefLabel" : {"_value" : "Mid-Slope Mooring (M3)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/160", "prefLabel" : {"_value" : "Canyon Mooring (M4)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/161", "prefLabel" : {"_value" : "Coffin Bay Mooring (M5)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/162", "prefLabel" : {"_value" : "Investigator Strait Mooring (M6)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/163", "prefLabel" : {"_value" : "Deep-Slope Mooring (M7)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/164", "prefLabel" : {"_value" : "Spencer Gulf Mouth Mooring (M8)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/165", "prefLabel" : {"_value" : "Sydney 100m Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/166", "prefLabel" : {"_value" : "Sydney 140m Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/167", "prefLabel" : {"_value" : "Canyon 200m Head Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/168", "prefLabel" : {"_value" : "Canyon 500m North Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/169", "prefLabel" : {"_value" : "Canyon 500m South Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/170", "prefLabel" : {"_value" : "Two Rocks 50m Shelf Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/171", "prefLabel" : {"_value" : "Two Rocks 100m Shelf Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/172", "prefLabel" : {"_value" : "Two Rocks 150m Shelf Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/173", "prefLabel" : {"_value" : "Two Rocks 200m Shelf Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/174", "prefLabel" : {"_value" : "Two Rocks 500m Shelf Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/175", "prefLabel" : {"_value" : "South-East Queensland 200m Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/176", "prefLabel" : {"_value" : "South-East Queensland 400m Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/177", "prefLabel" : {"_value" : "Ocean Reference Station Sydney Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/181", "prefLabel" : {"_value" : "Southern ocean Flux Station mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/187", "prefLabel" : {"_value" : "Sub-Antarctic Zone Sediment Trap Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/188", "prefLabel" : {"_value" : "East Australian Current 1 Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/189", "prefLabel" : {"_value" : "East Australian Current 2 Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/190", "prefLabel" : {"_value" : "East Australian Current 3 Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/191", "prefLabel" : {"_value" : "East Australian Current 4 Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/192", "prefLabel" : {"_value" : "East Australian Current 5 Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/193", "prefLabel" : {"_value" : "Ombai Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/194", "prefLabel" : {"_value" : "Timor North Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/195", "prefLabel" : {"_value" : "Timor Sill Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/196", "prefLabel" : {"_value" : "Polynya1 Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/197", "prefLabel" : {"_value" : "Polynya2 Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/198", "prefLabel" : {"_value" : "Polynya3 Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/2", "prefLabel" : {"_value" : "Beagle Gulf Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/20", "prefLabel" : {"_value" : "Bateman's Marine Park 70m Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/21", "prefLabel" : {"_value" : "Camden Sound 50m Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/22", "prefLabel" : {"_value" : "Camden Sound 100m Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/32", "prefLabel" : {"_value" : "Pulse Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/33", "prefLabel" : {"_value" : "East Australian Current 500m Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/34", "prefLabel" : {"_value" : "East Australian Current 2000m Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/35", "prefLabel" : {"_value" : "East Australian Current 3200m Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/36", "prefLabel" : {"_value" : "East Australian Current 4200m Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/37", "prefLabel" : {"_value" : "East Australian Current 4700m Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/38", "prefLabel" : {"_value" : "East Australian Current 4800m Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/40", "prefLabel" : {"_value" : "Coffs Harbour 50m Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/51", "prefLabel" : {"_value" : "Bonney Coast Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/52", "prefLabel" : {"_value" : "Lynedoch Shoal Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/53", "prefLabel" : {"_value" : "Browse Island Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/54", "prefLabel" : {"_value" : "Rowley Shoals Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/55", "prefLabel" : {"_value" : "Barrow Island Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/56", "prefLabel" : {"_value" : "Upper Spencer Gulf Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/57", "prefLabel" : {"_value" : "Gulf St Vincent Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/65", "prefLabel" : {"_value" : "Heron Island North mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/66", "prefLabel" : {"_value" : "Maria Island National Reference Station ADCP mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/68", "prefLabel" : {"_value" : "Maria Island National Reference Station surface mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/69", "prefLabel" : {"_value" : "Maria Island National Reference Station Acidification Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/89", "prefLabel" : {"_value" : "Animal Tracking Facility Seal Rocks Line (SRL2) Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/898", "prefLabel" : {"_value" : "Wistari Channel acidification Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/899", "prefLabel" : {"_value" : "Yongala National Reference Station Acidification Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/90", "prefLabel" : {"_value" : "Animal Tracking Facility Seal Rocks Line (SRL5) Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/900", "prefLabel" : {"_value" : "TOTTEN1 Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/901", "prefLabel" : {"_value" : "TOTTEN2 Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/902", "prefLabel" : {"_value" : "TOTTEN3 Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/903", "prefLabel" : {"_value" : "Two Rocks 44m Mooring", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/911", "prefLabel" : {"_value" : "FluxPulse Mooring", "_lang" : "en"}
+      }
+      ], "prefLabel" : {"_value" : "mooring", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/61", "dctermsCreated" : "2017-06-27T00:00:00Z", "dctermsModified" : "2017-07-03T06:28:26Z", "definition" : "A fixed-wing self-propelled aircraft that is equipped manned and operated for atmospheric meteorological or oceanographic research.", "prefLabel" : {"_value" : "research aeroplane", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/62", "dctermsCreated" : "2017-06-27T00:00:00Z", "dctermsModified" : "2017-07-03T06:28:17Z", "definition" : "A fixed-wing self-propelled aircraft.", "prefLabel" : {"_value" : "aeroplane", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/64", "dctermsCreated" : "2013-04-08T00:00:00Z", "dctermsModified" : "2017-02-07T03:52:45Z", "definition" : "A vehicle operating beyond the Earth's atmosphere without human occupants that orbits the Earth at the same rate as the Earth's rotation keeping it over a fixed location on the Earth's surface..", "narrower" : [{"_about" : "http://vocab.aodn.org.au/def/platform/entity/95", "prefLabel" : {"_value" : "Himawari-8", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/96", "prefLabel" : {"_value" : "Himawari-9", "_lang" : "en"}
+      }
+      ], "prefLabel" : {"_value" : "geostationary orbiting satellite", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/65", "dctermsCreated" : "2013-04-08T00:00:00Z", "dctermsModified" : "2017-02-07T03:52:45Z", "definition" : "A vehicle operating beyond the Earth's atmosphere without human occupants that orbits the Earth at a different rate to the Earth's rotation so it moves over the Earth's surface..", "narrower" : [{"_about" : "http://vocab.aodn.org.au/def/platform/entity/42", "prefLabel" : {"_value" : "SNPP", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/49", "prefLabel" : {"_value" : "Sentinel-1A", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/50", "prefLabel" : {"_value" : "Sentinel-1B", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/863", "prefLabel" : {"_value" : "NOAA-8", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/864", "prefLabel" : {"_value" : "NOAA-9", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/865", "prefLabel" : {"_value" : "NOAA-10", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/866", "prefLabel" : {"_value" : "NOAA-11", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/867", "prefLabel" : {"_value" : "NOAA-12", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/868", "prefLabel" : {"_value" : "NOAA-13", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/869", "prefLabel" : {"_value" : "NOAA-14", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/870", "prefLabel" : {"_value" : "NOAA-15", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/871", "prefLabel" : {"_value" : "NOAA-16", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/872", "prefLabel" : {"_value" : "NOAA-17", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/873", "prefLabel" : {"_value" : "NOAA-18", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/874", "prefLabel" : {"_value" : "NOAA-19", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/879", "prefLabel" : {"_value" : "Aqua", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/881", "prefLabel" : {"_value" : "OrbView-2", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/882", "prefLabel" : {"_value" : "SAC-D", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/883", "prefLabel" : {"_value" : "TOPEX-Poseidon", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/884", "prefLabel" : {"_value" : "JASON-1", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/885", "prefLabel" : {"_value" : "JASON-2", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/886", "prefLabel" : {"_value" : "JASON-3", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/887", "prefLabel" : {"_value" : "GFO", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/91", "prefLabel" : {"_value" : "NOAA-20", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/92", "prefLabel" : {"_value" : "MetOpA", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/93", "prefLabel" : {"_value" : "MetOpB", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/94", "prefLabel" : {"_value" : "MetOpC", "_lang" : "en"}
+      }
+      ], "prefLabel" : {"_value" : "orbiting satellite", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/67", "dctermsCreated" : "2017-06-27T00:00:00Z", "dctermsModified" : "2017-07-03T06:28:30Z", "definition" : "An aircraft without wings that obtains its lift from the rotation of overhead blades.", "prefLabel" : {"_value" : "helicopter", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/6A", "dctermsCreated" : "2017-06-27T00:00:00Z", "dctermsModified" : "2017-07-03T06:28:37Z", "definition" : "A fixed-wing aircraft with no propulsion.", "prefLabel" : {"_value" : "glider", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/70", "dctermsCreated" : "2014-01-22T00:00:00Z", "dctermsModified" : "2017-02-07T03:52:45Z", "definition" : "A living creature carrying instruments or collecting samples", "prefLabel" : {"_value" : "organism", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/71", "dctermsCreated" : "2017-06-27T00:00:00Z", "dctermsModified" : "2017-07-03T05:46:35Z", "definition" : "A human being without specialised equipment operating on land or the surface of the water column.", "prefLabel" : {"_value" : "human", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/72", "dctermsCreated" : "2015-05-10T00:00:00Z", "dctermsModified" : "2017-02-07T03:52:45Z", "definition" : "A human being with self-contained equipment or surface-connected suit enabling operation within the water column.", "prefLabel" : {"_value" : "diver", "_lang" : "en"}
+    }
+    ], "itemsPerPage" : 10, "next" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=41", "page" : 40, "prev" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=39", "startIndex" : 401, "type" : "http://purl.org/linked-data/api/vocab#Page"}
+}

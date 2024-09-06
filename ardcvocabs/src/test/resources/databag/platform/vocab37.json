@@ -1,0 +1,79 @@
+{ "format" : "linked-data-api", "version" : "0.2", "result" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=37", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json", "extendedMetadataVersion" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=37&_metadata=all", "first" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=0", "isPartOf" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json", "hasPart" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=37", "type" : "http://purl.org/linked-data/api/vocab#ListEndpoint"}
+    , "items" : [{"_about" : "http://vocab.aodn.org.au/def/platform/entity/99", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2013-05-14T00:00:00Z", "dctermsModified" : "2019-10-16T04:12:30Z", "definition" : "Container ship vessel, which is currently flying the flag of Hong Kong (May 2013)", "prefLabel" : {"_value" : "Highland Chief {VROB}", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.nerc.ac.uk/collection/C17/current/096U", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/31", "prefLabel" : {"_value" : "research vessel", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2016-03-30T00:00:00Z", "dctermsModified" : "2017-02-07T03:52:45Z", "definition" : "CSIRO Marine National Facility research vessel. Length 94m.", "prefLabel" : {"_value" : "Investigator", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.nerc.ac.uk/collection/C17/current/09AR", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/31", "prefLabel" : {"_value" : "research vessel", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2013-04-11T00:00:00Z", "dctermsModified" : "2017-02-07T03:52:38Z", "definition" : "Research vessel owned by P and O Polar, length 94.91m.  Active as at Mar 2013.", "prefLabel" : {"_value" : "Aurora Australis", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.nerc.ac.uk/collection/C17/current/09SS", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/31", "prefLabel" : {"_value" : "research vessel", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2013-04-08T00:00:00Z", "dctermsModified" : "2017-02-07T03:52:30Z", "definition" : "Was a CSIRO Marine National Facility research vessel. Built 1972 as Ranger Callisto (Norway), then became the UK registered Kurd (1 Jan 1982), then renamed Kurdeen (2 Jan 1982). Renamed Southern Surveyor 31 Dec 1982 and registered in Australia from 15 Nov 1988. Renamed Jupiter in July 2014 (St Kitts and Nevis).  Length 66.16m.", "prefLabel" : {"_value" : "Southern Surveyor", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.nerc.ac.uk/collection/C17/current/33OC", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/31", "prefLabel" : {"_value" : "research vessel", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2015-07-07T00:00:00Z", "dctermsModified" : "2017-02-07T03:52:34Z", "definition" : "\"IMO\": \"8835097\",\n  \"title\": \"NOAA Ship\",\n  \"country\": \"United States\",\n  \"platformclass\": \"research vessel\",\n  \"callsign\": \"WTEE\",\n  \"pennant\": \"R 335\",\n  \"commissioned\": \"2003-01-23\",\n  \"previous_name\": \"Adventurous\",\n  \"length\": \"68\",\n  \"built\": \"1988-08\",\n  \"notes\": \"US NODC WOD code 9315.\"", "prefLabel" : {"_value" : "Oscar Elton Sette", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.nerc.ac.uk/collection/C17/current/353L", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/31", "prefLabel" : {"_value" : "research vessel", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2013-04-08T00:00:00Z", "dctermsModified" : "2017-12-11T02:51:26Z", "definition" : "Research vessel built 1986 as the Canadian vessel Fort Resolution, re-registered in France and renamed Austral Fish 12 May 1988, renamed L'Astrolabe 18 May 1989. Re-registered in French Southern Territories between 20 Jun 1995 - 11 Oct 2006, then re-registered in France. Owned by Bourbon Offshore Surf. Commissioned by TAAF and Institut Polaire Francais Paul-Emile Victor. It was decommissioned in 2017.", "prefLabel" : {"_value" : "L'Astrolabe {FHZI}", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/11", "dctermsCreated" : "2013-04-08T00:00:00Z", "dctermsModified" : "2017-02-07T03:52:42Z", "definition" : "A collection of oceanographic instruments mounted at a fixed position on the seabed (e.g. POL Monitoring Platform seabed ADCP)", "prefLabel" : {"_value" : "fixed benthic node", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/12", "dctermsCreated" : "2015-05-10T00:00:00Z", "dctermsModified" : "2017-02-07T03:52:42Z", "definition" : "An instrumented platform that is propelled on wheels or tracks on the seabed (e.g benthic crawler).", "prefLabel" : {"_value" : "sea bed vehicle", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/14", "dctermsCreated" : "2013-04-08T00:00:00Z", "dctermsModified" : "2017-02-07T03:52:42Z", "definition" : "A fixed man-made structure on land to which instrumentation may be attached (e.g. meteorological tower)", "narrower" : [{"_about" : "http://vocab.aodn.org.au/def/platform/entity/308", "prefLabel" : {"_value" : "Lizard Island Base Station", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/315", "prefLabel" : {"_value" : "Orpheus Island Base Station", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/322", "prefLabel" : {"_value" : "Myrmidon Reef Base Station", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/324", "prefLabel" : {"_value" : "Davies Reef Base Station", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/330", "prefLabel" : {"_value" : "One Tree Island Base Station", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/334", "prefLabel" : {"_value" : "Heron Island Base Station", "_lang" : "en"}
+      }
+      ], "prefLabel" : {"_value" : "land/onshore structure", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/16", "dctermsCreated" : "2013-07-01T00:00:00Z", "dctermsModified" : "2017-02-07T03:52:42Z", "definition" : "A fixed (for the duration of the measurements) man-made structure away from the coast to which instrumentation may be attached (e.g. oil rig gas rig or jack-up barge)", "narrower" : [{"_about" : "http://vocab.aodn.org.au/def/platform/entity/309", "prefLabel" : {"_value" : "Lizard Island Relay Pole 1", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/310", "prefLabel" : {"_value" : "Lizard Island Relay Pole 2", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/316", "prefLabel" : {"_value" : "Orpheus Island Relay Pole 1", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/317", "prefLabel" : {"_value" : "Orpheus Island Relay Pole 2", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/318", "prefLabel" : {"_value" : "Orpheus Island Relay Pole 3", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/331", "prefLabel" : {"_value" : "One Tree Island Relay Pole 1", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/332", "prefLabel" : {"_value" : "One Tree Island Relay Pole 2", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/333", "prefLabel" : {"_value" : "One Tree Island Relay Pole 3", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/335", "prefLabel" : {"_value" : "Heron Island Relay Pole 1", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/336", "prefLabel" : {"_value" : "Heron Island Relay Pole 2", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/337", "prefLabel" : {"_value" : "Heron Island Relay Pole 3", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/338", "prefLabel" : {"_value" : "Heron Island Relay Pole 4", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/339", "prefLabel" : {"_value" : "Heron Island Relay Pole 5", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/340", "prefLabel" : {"_value" : "Heron Island Relay Pole 6", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/341", "prefLabel" : {"_value" : "Heron Island Relay Pole 7", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/342", "prefLabel" : {"_value" : "Heron Island Relay Pole 8", "_lang" : "en"}
+      }
+      ], "prefLabel" : {"_value" : "offshore structure", "_lang" : "en"}
+    }
+    ], "itemsPerPage" : 10, "next" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=38", "page" : 37, "prev" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=36", "startIndex" : 371, "type" : "http://purl.org/linked-data/api/vocab#Page"}
+}

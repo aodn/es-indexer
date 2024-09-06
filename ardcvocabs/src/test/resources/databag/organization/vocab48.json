@@ -1,0 +1,51 @@
+{ "format" : "linked-data-api", "version" : "0.2", "result" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=48", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-organisation-vocabulary/version-2-5/concept.json", "extendedMetadataVersion" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=48&_metadata=all", "first" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=0", "isPartOf" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-organisation-vocabulary/version-2-5/concept.json", "hasPart" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=48", "type" : "http://purl.org/linked-data/api/vocab#ListEndpoint"}
+    , "items" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/514", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/133", "prefLabel" : {"_value" : "Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2017-09-15T03:04:10Z", "dctermsModified" : "2018-11-15T00:39:45Z", "narrower" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/473", "prefLabel" : {"_value" : "Australian Plankton Survey Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/474", "prefLabel" : {"_value" : "Sea Surface Temperature Sensors for Australian Vessels Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/475", "prefLabel" : {"_value" : "Research Vessels Real-Time Air-Sea Fluxes Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/476", "prefLabel" : {"_value" : "Sensors on Temperate Merchant Vessels Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      , "http://vocab.aodn.org.au/def/organisation/entity/515", "http://vocab.aodn.org.au/def/organisation/entity/516", "http://vocab.aodn.org.au/def/organisation/entity/517", "http://vocab.aodn.org.au/def/organisation/entity/518", {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/585", "prefLabel" : {"_value" : "Southern Ocean Plankton Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      ], "prefLabel" : {"_value" : "Ships of Opportunity Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/515", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/514"], "dctermsCreated" : "2017-09-15T03:26:20Z", "dctermsModified" : "2018-11-15T00:40:12Z", "prefLabel" : {"_value" : "Bio-Acoustic Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/516", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/514"], "dctermsCreated" : "2017-09-15T03:32:04Z", "dctermsModified" : "2018-11-15T00:40:22Z", "prefLabel" : {"_value" : "Biogeochemical Sensors Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/517", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/514"], "dctermsCreated" : "2017-09-15T03:35:26Z", "dctermsModified" : "2018-11-15T00:40:34Z", "prefLabel" : {"_value" : "Expendable Bathythermograph Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/518", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/514"], "dctermsCreated" : "2017-09-15T04:11:59Z", "dctermsModified" : "2018-11-15T00:41:22Z", "prefLabel" : {"_value" : "Sensors on Tropical Research Vessels Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/519", "dctermsCreated" : "2017-09-28T05:19:15Z", "dctermsModified" : "2018-05-09T06:58:42Z", "definition" : "CRCSI is an international research and development centre set up in 2003 under the Australian Government Business Cooperative Research Centres Programme. They conduct user-driven research in spatial information that address issues of national importance. They also perform commissioned research projects for key clients. Their partners, from both Australia and New Zealand, include federal and state government agencies, universities and over 50 companies.", "prefLabel" : {"_value" : "Cooperative Research Centre for Spatial Information (CRCSI)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/520", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/133", "prefLabel" : {"_value" : "Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2017-09-28T05:29:50Z", "dctermsModified" : "2018-11-15T00:38:13Z", "narrower" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/508", "prefLabel" : {"_value" : "Ocean Colour Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/509", "prefLabel" : {"_value" : "Satellite Altimetry Calibration and Validation Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/510", "prefLabel" : {"_value" : "Sea Surface Temperature Products Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/511", "prefLabel" : {"_value" : "Remote Sensing Collections Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/512", "prefLabel" : {"_value" : "Ground Stations Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/513", "prefLabel" : {"_value" : "Surface Waves Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      ], "prefLabel" : {"_value" : "Satellite Remote Sensing Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/521", "dctermsCreated" : "2017-11-22T23:44:58Z", "dctermsModified" : "2018-05-08T03:47:39Z", "definition" : "DAL Science and Engineering  provided marine and coastal environmental consulting servies. It became known as Oceanica Consulting, and is now part of BMT Oceanica.", "prefLabel" : {"_value" : "DAL Science and Engineering (DALSE)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/522", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/210", "prefLabel" : {"_value" : "The University of New South Wales (UNSW)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2017-11-27T05:18:43Z", "dctermsModified" : "2022-05-03T04:24:40Z", "definition" : "The UNSW Australia School of Civil and Environmental Engineering was founded in 1949, and provides a centre for engineering studies and research.", "narrower" : ["http://vocab.aodn.org.au/def/organisation/entity/523"], "prefLabel" : {"_value" : "School of Civil and Environmental Engineering, The University of New South Wales (UNSW)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/523", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/522"], "dctermsCreated" : "2017-11-27T05:21:09Z", "dctermsModified" : "2022-05-03T04:25:56Z", "definition" : "The Water Research Laboratory (WRL) - is a world-leading academic research and consulting laboratory that endeavours to tackle the most challenging and pressing water-engineering problems faced by the world today relating to water and the environment. It is based on four hectares on Sydney's Northern Beaches.", "prefLabel" : {"_value" : "Water Research Laboratory (WRL), School of Civil and Environmental Engineering, The University of New South Wales (UNSW)", "_lang" : "en"}
+    }
+    ], "itemsPerPage" : 10, "next" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=49", "page" : 48, "prev" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=47", "startIndex" : 481, "type" : "http://purl.org/linked-data/api/vocab#Page"}
+}

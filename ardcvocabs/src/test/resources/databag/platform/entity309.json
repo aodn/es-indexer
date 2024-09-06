@@ -1,0 +1,13 @@
+{ "format" : "linked-data-api", "version" : "0.2", "result" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/resource.json?uri=http://vocab.aodn.org.au/def/platform/entity/309", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/resource.json?uri=http://vocab.aodn.org.au/def/platform/entity/309", "extendedMetadataVersion" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/resource.json?_metadata=all&uri=http://vocab.aodn.org.au/def/platform/entity/309", "primaryTopic" : {"_about" : "http://vocab.aodn.org.au/def/platform/entity/309", "altLabel" : [{"_value" : "LIZRP1", "_lang" : "en"}
+      ], "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/16", "narrower" : ["http://vocab.aodn.org.au/def/platform/entity/309"]}
+      ], "contributor" : "http://editor.vocabs.ands.org.au/user/eMII_Atkins.Natalia", "creator" : "http://editor.vocabs.ands.org.au/user/Sebastien-Mancini", "dcPublisher" : "eMarine Information Infrastructure (eMII)", "dcSource" : "Australian Ocean Data Network platform register", "dctermsCreated" : "2013-06-13T00:00:00Z", "dctermsModified" : "2022-11-07T04:22:47Z", "definition" : "A 6m galvanized pole has been deployed in the western part of the lagoon. It has no sensors attached to it. The pole was decommissioned in April 2022.", "inScheme" : {"_about" : "http://vocab.aodn.org.au/def/platform/1", "hasConcept" : "http://vocab.aodn.org.au/def/platform/entity/309"}
+      , "prefLabel" : {"_value" : "Lizard Island Relay Pole 1", "_lang" : "en"}
+      , "related" : [{"_about" : "http://vocab.aodn.org.au/def/platform/entity/308", "related" : ["http://vocab.aodn.org.au/def/platform/entity/309"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/310", "related" : ["http://vocab.aodn.org.au/def/platform/entity/309"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/311", "related" : ["http://vocab.aodn.org.au/def/platform/entity/309"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/312", "related" : ["http://vocab.aodn.org.au/def/platform/entity/309"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/313", "related" : ["http://vocab.aodn.org.au/def/platform/entity/309"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/314", "related" : ["http://vocab.aodn.org.au/def/platform/entity/309"]}
+      ], "type" : ["http://www.w3.org/2000/01/rdf-schema#Resource", "http://www.w3.org/2004/02/skos/core#Concept"]}
+    , "type" : ["http://purl.org/linked-data/api/vocab#ItemEndpoint", "http://purl.org/linked-data/api/vocab#Page"]}
+}

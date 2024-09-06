@@ -1,0 +1,214 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=19",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=19&_metadata=all",
+    "first": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=0",
+    "isPartOf": {
+      "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+      "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+      "hasPart": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=19",
+      "type": "http://purl.org/linked-data/api/vocab#ListEndpoint"
+    },
+    "items": [
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/28",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2017-06-16T03:37:03Z",
+        "dctermsModified": "2017-06-16T03:38:03Z",
+        "definition": "Cargo ship vessel, which is currently flying the flag of Hong Kong (November 2015).",
+        "prefLabel": {
+          "_value": "Kweichow",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/280",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-30T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:35Z",
+        "definition": "Container ship vessel, which is currently flying the flag of Hong Kong (May 2013).",
+        "prefLabel": {
+          "_value": "Coral Chief",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/281",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-30T00:00:00Z",
+        "dctermsModified": "2017-04-13T05:51:00Z",
+        "definition": "Container ship vessel, which is currently flying the flag of Hong Kong (May 2013).",
+        "prefLabel": {
+          "_value": "Papuan Chief",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/282",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-30T00:00:00Z",
+        "dctermsModified": "2017-06-16T02:25:45Z",
+        "definition": "Container ship vessel, which is currently flying the flag of Hong Kong (May 2013).",
+        "prefLabel": {
+          "_value": "Kokopo Chief",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/283",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-30T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:35Z",
+        "definition": "Container ship vessel, which was flying the flag of Hong Kong. It was called the P&O Nedlloyd Napier from Aug 1998. It was disposed of in approximately 2000.",
+        "prefLabel": {
+          "_value": "P&O Nedlloyd Napier",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/284",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-30T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:35Z",
+        "definition": "Container ship vessel. It was called the P&O Nedlloyd Wellington from June 2004 until Nov 2005. It is now called the Cs Star (UK, September 2011).",
+        "prefLabel": {
+          "_value": "P&O Nedlloyd Wellington",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/285",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-30T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:35Z",
+        "definition": "Container ship vessel. It was called the Tmm Tabasco from 2000 until August 2005. It is now called the Wellington Express {DFCX2} (Germany, May 2013)",
+        "prefLabel": {
+          "_value": "TMM Tabasco",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/287",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-30T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:35Z",
+        "definition": "Container ship vessel. It was called the Canmar Dynasty from May 2003 until July 2005. It is now called the Sydney Express (UK, Feb 2012).",
+        "prefLabel": {
+          "_value": "Canmar Dynasty",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/288",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-30T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:35Z",
+        "definition": "Container ship vessel, which is currently flying the flag of the UK (Feb, 2012).",
+        "prefLabel": {
+          "_value": "Sydney Express",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/289",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-06-03T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:35Z",
+        "definition": "Container ship vessel. It was called the Nimos from 1977 until December 1990. It was disposed of in approximately 2011.",
+        "prefLabel": {
+          "_value": "Nimos",
+          "_lang": "en"
+        }
+      }
+    ],
+    "itemsPerPage": 10,
+    "next": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=20",
+    "page": 19,
+    "prev": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=18",
+    "startIndex": 191,
+    "type": "http://purl.org/linked-data/api/vocab#Page"
+  }
+}

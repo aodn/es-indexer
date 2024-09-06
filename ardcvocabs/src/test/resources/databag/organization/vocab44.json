@@ -1,0 +1,63 @@
+{ "format" : "linked-data-api", "version" : "0.2", "result" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=44", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-organisation-vocabulary/version-2-5/concept.json", "extendedMetadataVersion" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=44&_metadata=all", "first" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=0", "isPartOf" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-organisation-vocabulary/version-2-5/concept.json", "hasPart" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=44", "type" : "http://purl.org/linked-data/api/vocab#ListEndpoint"}
+    , "items" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/473", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/514", "prefLabel" : {"_value" : "Ships of Opportunity Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2017-05-03T02:46:40Z", "dctermsModified" : "2018-11-15T00:39:58Z", "prefLabel" : {"_value" : "Australian Plankton Survey Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/474", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/514", "prefLabel" : {"_value" : "Ships of Opportunity Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2017-05-03T04:11:06Z", "dctermsModified" : "2018-11-15T00:40:59Z", "prefLabel" : {"_value" : "Sea Surface Temperature Sensors for Australian Vessels Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/475", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/514", "prefLabel" : {"_value" : "Ships of Opportunity Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2017-05-03T04:16:21Z", "dctermsModified" : "2020-12-17T05:43:51Z", "prefLabel" : {"_value" : "Research Vessels Real-Time Air-Sea Fluxes Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/476", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/514", "prefLabel" : {"_value" : "Ships of Opportunity Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2017-05-03T04:30:04Z", "dctermsModified" : "2018-11-15T00:41:11Z", "prefLabel" : {"_value" : "Sensors on Temperate Merchant Vessels Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/477", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/133", "prefLabel" : {"_value" : "Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2017-05-03T04:36:58Z", "dctermsModified" : "2018-11-15T00:36:16Z", "narrower" : ["http://vocab.aodn.org.au/def/organisation/entity/478", {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/500", "prefLabel" : {"_value" : "Acidification Moorings Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/501", "prefLabel" : {"_value" : "National Reference Stations Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/502", "prefLabel" : {"_value" : "New South Wales Moorings Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/503", "prefLabel" : {"_value" : "Queensland and Northern Australia Moorings Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/504", "prefLabel" : {"_value" : "Southern Australia Moorings Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/505", "prefLabel" : {"_value" : "Western Australia Moorings Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/590", "prefLabel" : {"_value" : "Wave Buoys Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/591", "prefLabel" : {"_value" : "Larval Fish Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/592", "prefLabel" : {"_value" : "Victoria Moorings Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/593", "prefLabel" : {"_value" : "Microbial Coastal Sampling Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/594", "prefLabel" : {"_value" : "Water Sampling Database Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/595", "prefLabel" : {"_value" : "Deep Water Waves Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      ], "prefLabel" : {"_value" : "National Mooring Network Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/478", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/477"], "dctermsCreated" : "2017-05-03T04:58:41Z", "dctermsModified" : "2018-11-15T00:36:39Z", "prefLabel" : {"_value" : "Acoustic Observatories Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/479", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/217", "prefLabel" : {"_value" : "The University of Queensland (UQ)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2017-07-06T03:41:31Z", "dctermsModified" : "2020-12-17T05:44:23Z", "definition" : "The Research Computing Centre (RCC), established in 2011, provides coordinated management and support of The University of Queensland\u2019s sustained and substantial investment in eResearch.", "prefLabel" : {"_value" : "Research Computing Centre (RCC), The University of Queensland (UQ)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/480", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/217", "prefLabel" : {"_value" : "The University of Queensland (UQ)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2017-07-06T03:45:47Z", "dctermsModified" : "2018-08-24T06:01:47Z", "definition" : "The School of Earth and Environmental Sciences delivers practical solutions to the complex issues that affect our physical environment and how we interact with it. The school was formed in 2017 and consolidated two former schools - the School of Earth Sciences, and the School of Geography, Planning and Environmental Management.", "narrower" : ["http://vocab.aodn.org.au/def/organisation/entity/482"], "prefLabel" : {"_value" : "School of Earth and Environmental Sciences, The University of Queensland (UQ)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/481", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/550", "prefLabel" : {"_value" : "School of Geography, Planning and Environmental Management, The University of Queensland (UQ)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2017-07-06T03:49:59Z", "dctermsModified" : "2018-08-28T23:53:10Z", "definition" : "The Remote Sensing Research Centre uses earth observation data, also called remotely sensed data, collected from ground, submarine, airborne and satellite sensors, along with field data and various processing algorithms and programming codes, to measure, map and monitor biophysical properties in terrestrial, atmospheric and aquatic environments. The information we produce is developed in association with scientists and managers to better understand and manage the earth\u2019s environments and resources.", "prefLabel" : {"_value" : "Remote Sensing Research Centre (RSRC), School of Geography, Planning and Environmental Management, The University of Queensland (UQ)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/482", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/480"], "dctermsCreated" : "2017-07-06T03:58:42Z", "dctermsModified" : "2018-08-24T06:02:24Z", "definition" : "The Remote Sensing Research Centre uses earth observation data, also called remotely sensed data, collected from ground, submarine, airborne and satellite sensors, along with field data and various processing algorithms and programming codes, to measure, map and monitor biophysical properties in terrestrial, atmospheric and aquatic environments. The information we produce is developed in association with scientists and managers to better understand and manage the earth\u2019s environments and resources.", "prefLabel" : {"_value" : "Remote Sensing Research Centre (RSRC), School of Earth and Environmental Sciences, The University of Queensland (UQ)", "_lang" : "en"}
+    }
+    ], "itemsPerPage" : 10, "next" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=45", "page" : 44, "prev" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=43", "startIndex" : 441, "type" : "http://purl.org/linked-data/api/vocab#Page"}
+}

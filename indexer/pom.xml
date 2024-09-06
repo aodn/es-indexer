@@ -213,8 +213,23 @@
         </dependency>
         <dependency>
             <groupId>au.org.aodn</groupId>
+            <artifactId>ardcvocabs</artifactId>
+            <version>${project.parent.version}</version>
+            <classifier>tests</classifier>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>au.org.aodn</groupId>
             <artifactId>stacmodel</artifactId>
             <version>${project.parent.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.skyscreamer/jsonassert -->
+        <dependency>
+            <groupId>org.skyscreamer</groupId>
+            <artifactId>jsonassert</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
     <build>

@@ -1,0 +1,43 @@
+{ "format" : "linked-data-api", "version" : "0.2", "result" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=35", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json", "extendedMetadataVersion" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=35&_metadata=all", "first" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=0", "isPartOf" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json", "hasPart" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=35", "type" : "http://purl.org/linked-data/api/vocab#ListEndpoint"}
+    , "items" : [{"_about" : "http://vocab.aodn.org.au/def/platform/entity/912", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2016-05-12T00:00:00Z", "dctermsModified" : "2017-04-03T00:20:33Z", "definition" : "Container ship vessel. It was called the Southern Lily in 2011, and is now known as the Southern Trader, which is currently flying the flag of Singapore (Jan, 2015)", "prefLabel" : {"_value" : "Southern Lily", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/913", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2016-05-12T00:00:00Z", "dctermsModified" : "2017-04-03T00:08:25Z", "definition" : "Container ship vessel, which was called the ANL Yarrunga until October 2009. It is now called the Karin Rambow, and is currently flying the flag of Antigua and Barbados (May, 2016)", "prefLabel" : {"_value" : "ANL Yarrunga", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/914", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2016-07-08T00:00:00Z", "dctermsModified" : "2017-04-13T05:54:33Z", "definition" : "Bulk Carrier vessel, which flew the flag of Panama (September 2010). It was disposed of in ??.", "prefLabel" : {"_value" : "Shearwater", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/915", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2016-07-08T00:00:00Z", "dctermsModified" : "2017-04-03T00:08:47Z", "definition" : "Container ship vessel, which was called the Act 10 from 1990 until 1991. It's final name was P and O Nedlloyd Luanda. It was disposed of in 2002.", "prefLabel" : {"_value" : "Act 10", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/916", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2016-07-08T00:00:00Z", "dctermsModified" : "2017-04-03T00:20:54Z", "definition" : "General Cargo ship vessel. It was called the Southern Queen from Oct-Dec 2001. It is now called the Red Rock (Indonesia, October 2010).", "prefLabel" : {"_value" : "Southern Queen", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/917", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2016-07-08T00:00:00Z", "dctermsModified" : "2017-04-03T00:15:25Z", "definition" : "Container ship vessel, which was known as the Maersk Auckland from February 2003 until July 2007. It was disposed of in 2013.", "prefLabel" : {"_value" : "Maersk Auckland", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/918", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2016-07-08T00:00:00Z", "dctermsModified" : "2017-04-03T00:12:48Z", "definition" : "Container ship vessel, which is currently flying the flag of Liberia (May, 2013).", "prefLabel" : {"_value" : "E.R. Wilhelmshaven", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/919", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2016-07-08T00:00:00Z", "dctermsModified" : "2017-04-13T05:41:39Z", "definition" : "Container ship vessel, which is currently flying the flag of Singapore (July, 2016).", "prefLabel" : {"_value" : "Maersk Phuket", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/920", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2016-07-08T00:00:00Z", "dctermsModified" : "2017-04-13T05:56:19Z", "definition" : "Reefer vessel, which flew the flag of Britain. It was disposed of in 1993.", "prefLabel" : {"_value" : "Southland Star", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/921", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2016-07-08T00:00:00Z", "dctermsModified" : "2017-04-13T05:24:15Z", "definition" : "Container ship vessel, which was known as the Caifornia Star from 1989 until 1996. It's final name was the Golden Gate. It was disposed of in 2009.", "prefLabel" : {"_value" : "California Star", "_lang" : "en"}
+    }
+    ], "itemsPerPage" : 10, "next" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=36", "page" : 35, "prev" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=34", "startIndex" : 351, "type" : "http://purl.org/linked-data/api/vocab#Page"}
+}

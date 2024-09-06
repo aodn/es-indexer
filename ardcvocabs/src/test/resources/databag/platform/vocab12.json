@@ -1,0 +1,214 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=12",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=12&_metadata=all",
+    "first": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=0",
+    "isPartOf": {
+      "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+      "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+      "hasPart": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=12",
+      "type": "http://purl.org/linked-data/api/vocab#ListEndpoint"
+    },
+    "items": [
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/212",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-28T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:41Z",
+        "definition": "Container ship vessel. It was called the P&O Nedlloyd Nelson from July 2002 until May 2004. It is now called the Hansa Nordburg (Liberia, January 2008).",
+        "prefLabel": {
+          "_value": "Nedlloyd Nelson",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/213",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-28T00:00:00Z",
+        "dctermsModified": "2017-04-13T05:39:21Z",
+        "definition": "Container ship vessel. This ship was also called the MSC Hobart from Oct 2004 until May 2007. It has been named as such again from July 2007, and is currently flying the flag of Liberia (May 2013).",
+        "prefLabel": {
+          "_value": "MSC Hobart",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/214",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-28T00:00:00Z",
+        "dctermsModified": "2017-04-19T04:57:52Z",
+        "definition": "Container ship vessel. It was called the CMA CGA Charcot from Nov 2007 until Aug 2011. It is now called the Euro Max (Liberia, October 2012).",
+        "prefLabel": {
+          "_value": "CMA CGM Charcot",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/215",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-28T00:00:00Z",
+        "dctermsModified": "2017-04-19T04:58:25Z",
+        "definition": "Container ship vessel, which is currently flying the flag of Liberia (May 2013).",
+        "prefLabel": {
+          "_value": "CMA CGM Mimosa",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/216",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-28T00:00:00Z",
+        "dctermsModified": "2017-04-13T05:16:46Z",
+        "definition": "Container ship vessel. It was called the CMA CGM Melbourne from 2006 until Aug 2008. It is now called the Westertal (Liberia, March 2008).",
+        "prefLabel": {
+          "_value": "CMA CGM Melbourne",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/217",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-28T00:00:00Z",
+        "dctermsModified": "2017-04-13T05:51:23Z",
+        "definition": "Container ship vessel, which is currently flying the flag of Liberia (May 2013).",
+        "prefLabel": {
+          "_value": "Passat Spring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/218",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-28T00:00:00Z",
+        "dctermsModified": "2017-04-19T05:06:09Z",
+        "definition": "Container ship vessel, which is currently flying the flag of Liberia (May 2013).",
+        "prefLabel": {
+          "_value": "CMA CGM Auckland",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/219",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-28T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:42Z",
+        "definition": "Container ship vessel, which is currently flying the flag of Liberia (May 2013).",
+        "prefLabel": {
+          "_value": "Ital Ottima",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/22",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2017-06-15T02:56:39Z",
+        "dctermsModified": "2023-01-25T02:27:33Z",
+        "definition": "The Camden 100m mooring (platform code CAM100) was deployed in 2014 for a short time in the Kimberley region replacing the former Kimberley and Pilbara arrays. It was decommissioned in 2015.",
+        "prefLabel": {
+          "_value": "Camden Sound 100m Mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/220",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-28T00:00:00Z",
+        "dctermsModified": "2017-04-13T04:52:01Z",
+        "definition": "Container ship vessel, which is currently flying the flag of Liberia (May 2013).",
+        "prefLabel": {
+          "_value": "Buxlink",
+          "_lang": "en"
+        }
+      }
+    ],
+    "itemsPerPage": 10,
+    "next": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=13",
+    "page": 12,
+    "prev": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=11",
+    "startIndex": 121,
+    "type": "http://purl.org/linked-data/api/vocab#Page"
+  }
+}

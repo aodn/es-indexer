@@ -1,0 +1,53 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/resource.json?uri=http://vocab.aodn.org.au/def/discovery_parameter/entity/10",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/resource.json?uri=http://vocab.aodn.org.au/def/discovery_parameter/entity/10",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/resource.json?_metadata=all&uri=http://vocab.aodn.org.au/def/discovery_parameter/entity/10",
+    "primaryTopic": {
+      "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/10",
+      "broadMatch": [
+        "http://vocab.aodn.org.au/def/parameter_classes/category/30"
+      ],
+      "contributor": "http://editor.vocabs.ands.org.au/user/eMII_Atkins.Natalia",
+      "creator": "http://editor.vocabs.ands.org.au/user/eMII_Mancini.Sebastien",
+      "dctermsCreated": "2015-08-07T00:50:23Z",
+      "dctermsModified": "2018-10-24T03:05:28Z",
+      "definition": "The net shortwave heat flux is the difference between the downwelling radiation from the sun as modified by the gases and clouds of the atmosphere and the radiation returned from the sea surface, which is either reflected by the surface or backscattered from within the water column.",
+      "hiddenLabel": [
+        {
+          "_value": "SW_NET",
+          "_lang": "en"
+        }
+      ],
+      "inScheme": {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/1",
+        "hasTopConcept": [
+          "http://vocab.aodn.org.au/def/discovery_parameter/entity/10"
+        ]
+      },
+      "prefLabel": {
+        "_value": "Net shortwave heat flux",
+        "_lang": "en"
+      },
+      "relatedMatch": [
+        "http://vocab.nerc.ac.uk/collection/P07/current/CFSN0241/"
+      ],
+      "topConceptOf": {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/1",
+        "hasTopConcept": [
+          "http://vocab.aodn.org.au/def/discovery_parameter/entity/10"
+        ]
+      },
+      "type": [
+        "http://www.w3.org/2000/01/rdf-schema#Resource",
+        "http://www.w3.org/2004/02/skos/core#Concept"
+      ]
+    },
+    "type": [
+      "http://purl.org/linked-data/api/vocab#ItemEndpoint",
+      "http://purl.org/linked-data/api/vocab#Page"
+    ]
+  }
+}

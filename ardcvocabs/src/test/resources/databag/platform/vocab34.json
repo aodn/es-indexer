@@ -1,0 +1,43 @@
+{ "format" : "linked-data-api", "version" : "0.2", "result" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=34", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json", "extendedMetadataVersion" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=34&_metadata=all", "first" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=0", "isPartOf" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json", "hasPart" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=34", "type" : "http://purl.org/linked-data/api/vocab#ListEndpoint"}
+    , "items" : [{"_about" : "http://vocab.aodn.org.au/def/platform/entity/900", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/48", "prefLabel" : {"_value" : "mooring", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2016-04-15T00:00:00Z", "dctermsModified" : "2023-01-25T03:30:40Z", "definition" : "Mooring 1 in the 2014-2015 Dalton/Totten mooring array, which was operated by CSIRO, and collects data adjacent to the Totten Glacier. This mooring was decommissioned in January 2015.", "prefLabel" : {"_value" : "TOTTEN1 Mooring", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/901", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/48", "prefLabel" : {"_value" : "mooring", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2016-04-15T00:00:00Z", "dctermsModified" : "2023-01-25T03:31:17Z", "definition" : "Mooring 2 in the 2014-2015 Dalton/Totten mooring array, which was operated by CSIRO, and collects data adjacent to the Totten Glacier. This mooring was decommissioned in January 2015.", "prefLabel" : {"_value" : "TOTTEN2 Mooring", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/902", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/48", "prefLabel" : {"_value" : "mooring", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2016-04-15T00:00:00Z", "dctermsModified" : "2023-01-25T03:39:43Z", "definition" : "Mooring 3 in the 2014-2015 Dalton/Totten mooring array, which was operated by CSIRO, and collects data adjacent to the Totten Glacier. This mooring was decommissioned in January 2015.", "prefLabel" : {"_value" : "TOTTEN3 Mooring", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/903", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/48", "prefLabel" : {"_value" : "mooring", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2016-04-15T00:00:00Z", "dctermsModified" : "2023-01-25T03:42:00Z", "definition" : "The Two Rocks 44m Shelf Mooring is operated by CSIRO and collects data in the Two Rocks region.", "prefLabel" : {"_value" : "Two Rocks 44m Mooring", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/904", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/43", "prefLabel" : {"_value" : "subsurface mooring", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2016-04-15T00:00:00Z", "dctermsModified" : "2023-01-25T01:29:13Z", "definition" : "The Kimberley, WA Passive Acoustic Observatory, is a series of moorings operated by Curtin University which collect data in the Kimberley region. This observatory was decommissioned in May 2015.", "prefLabel" : {"_value" : "Kimberley, WA Passive Acoustic Observatory", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/905", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/43", "prefLabel" : {"_value" : "subsurface mooring", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2016-04-15T00:00:00Z", "dctermsModified" : "2023-01-25T01:31:38Z", "definition" : "The Pilbara, WA Passive Acoustic Observatory, is a series of moorings operated by Curtin University which collect data in the Pilbara region. This mooring was decommissioned in June 2015.", "prefLabel" : {"_value" : "Pilbara, WA Passive Acoustic Observatory", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/908", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2016-05-03T00:00:00Z", "dctermsModified" : "2018-09-07T06:51:30Z", "definition" : "General Cargo ship vessel. It was called the Forum Samoa II from 2001 until June 2010. It was then shortly called the Opal Harmony, then Southern Moana, and is now known as Capitaine Fearn, and flies the flag of Samoa (July, 2015).", "prefLabel" : {"_value" : "Capitaine Fearn", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/909", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2016-05-03T00:00:00Z", "dctermsModified" : "2017-04-13T05:54:51Z", "definition" : "Container ship vessel, which is currently flying the flag of Singapore (February 2016)", "prefLabel" : {"_value" : "Shengking", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/910", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2016-05-03T00:00:00Z", "dctermsModified" : "2017-04-13T05:26:26Z", "definition" : "General Cargo ship vessel. It was called the Chenan from December 1999 to February 2005, and again from January 2012, and is currently flying the flag of Hong Kong (Feb 2016)", "prefLabel" : {"_value" : "Chenan", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/911", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/48", "prefLabel" : {"_value" : "mooring", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2016-05-11T00:00:00Z", "dctermsModified" : "2023-01-25T02:49:09Z", "definition" : "The FluxPulse mooring is operated by CSIRO, and measures biogeochemical properties of the Southern Ocean. It combines the instrumentation from previous separate deployments of the Pulse and SOFS mooring. It had one deployment in April 2016 and was replaced by a SOFS mooring.", "prefLabel" : {"_value" : "FluxPulse Mooring", "_lang" : "en"}
+    }
+    ], "itemsPerPage" : 10, "next" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=35", "page" : 34, "prev" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=33", "startIndex" : 341, "type" : "http://purl.org/linked-data/api/vocab#Page"}
+}

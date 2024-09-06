@@ -1,0 +1,118 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=9",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=9&_metadata=all",
+    "first": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=0",
+    "isPartOf": {
+      "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+      "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+      "hasPart": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=9",
+      "type": "http://purl.org/linked-data/api/vocab#ListEndpoint"
+    },
+    "items": [
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/660",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:23:53Z",
+        "prefLabel": {
+          "_value": "Concentration of lutein per unit volume of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/7",
+        "dctermsCreated": "2015-08-07T00:46:10Z",
+        "dctermsModified": "2018-10-24T03:04:28Z",
+        "definition": "Heat loss due to evaporation",
+        "prefLabel": {
+          "_value": "Latent heat flux",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/728",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2022-10-20T22:35:24Z",
+        "definition": "Echosounder provides two basic measurements: (1) the time delay between transmission of a sound pulse and reception of a return echo from an acoustic target (for example fish), and (2) the intensity of the returning echo. The intensity of returning echo from the fish is dependent on the intensity of sound transmitted by the echosounder, the loss of intensity as the sound wave travels through water (both to the fish and back to the echosounder), and the backscattering cross-section (or target strength) of the fish. Backscattering cross-section determines what proportion of incident sound intensity is reflected from the fish, back to the echosounder. The derived parameter \u2018volume backscattering coefficient\u2019 is the summation of backscattering cross-section from all acoustic targets present within the sampling volume scaled to 1 m3.",
+        "prefLabel": {
+          "_value": "Volume backscattering coefficient",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/729",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:23:54Z",
+        "definition": "Estimate of the transparency of the surface water based upon the distance below the ship at which a standard black and white disk becomes visible.",
+        "prefLabel": {
+          "_value": "Secchi depth",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/730",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:23:54Z",
+        "definition": "Conductance is a temperature corrected value, and approximates what the AC (Actual Conductivity) of a solution would be at 25 degrees Celsisus.",
+        "prefLabel": {
+          "_value": "Specific electrical conductivity of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/733",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:23:55Z",
+        "prefLabel": {
+          "_value": "Downwelling vector irradiance as energy (ultra-violet wavelengths) in the atmosphere",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/734",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:23:55Z",
+        "prefLabel": {
+          "_value": "Concentration of neoxanthin per unit volume of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/735",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:23:55Z",
+        "prefLabel": {
+          "_value": "Concentration of prasinoxanthin per unit volume of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/736",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:23:55Z",
+        "prefLabel": {
+          "_value": "Concentration of violaxanthin per unit volume of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/737",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:23:55Z",
+        "prefLabel": {
+          "_value": "Concentration of astaxanthin per unit volume of the water body",
+          "_lang": "en"
+        }
+      }
+    ],
+    "itemsPerPage": 10,
+    "next": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=10",
+    "page": 9,
+    "prev": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=8",
+    "startIndex": 91,
+    "type": "http://purl.org/linked-data/api/vocab#Page"
+  }
+}

@@ -28,6 +28,8 @@ import org.opengis.referencing.operation.TransformException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.retry.annotation.Backoff;
@@ -44,6 +46,7 @@ import java.util.concurrent.CompletableFuture;
 
 @Slf4j
 @Service
+@Scope(proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class IndexerServiceImpl implements IndexerService {
 
     protected String indexName;
@@ -55,7 +58,7 @@ public class IndexerServiceImpl implements IndexerService {
     protected StacCollectionMapperService stacCollectionMapperService;
     protected JaxbUtils<MDMetadataType> jaxbUtils;
     protected RankingService rankingService;
-    protected ArdcVocabsService ardcVocabsService;
+    protected VocabService vocabService;
 
     protected static final long DEFAULT_BACKOFF_TIME = 3000L;
 
@@ -74,7 +77,7 @@ public class IndexerServiceImpl implements IndexerService {
             ElasticsearchClient portalElasticsearchClient,
             ElasticSearchIndexService elasticSearchIndexService,
             StacCollectionMapperService stacCollectionMapperService,
-            ArdcVocabsService ardcVocabsService
+            VocabService vocabService
     ) {
         this.indexName = indexName;
         this.tokensAnalyserName = tokensAnalyserName;
@@ -85,7 +88,7 @@ public class IndexerServiceImpl implements IndexerService {
         this.portalElasticsearchClient = portalElasticsearchClient;
         this.elasticSearchIndexService = elasticSearchIndexService;
         this.stacCollectionMapperService = stacCollectionMapperService;
-        this.ardcVocabsService = ardcVocabsService;
+        this.vocabService = vocabService;
     }
 
     public Hit<ObjectNode> getDocumentByUUID(String uuid) throws IOException {
@@ -169,10 +172,31 @@ public class IndexerServiceImpl implements IndexerService {
 
         stacCollectionModel.getSummaries().setScore(score);
 
-        List<String> aodnDiscoveryParameters = ardcVocabsService.getDiscoveryParameters(stacCollectionModel.getThemes());
-        if (!aodnDiscoveryParameters.isEmpty()) {
-            stacCollectionModel.getSummaries().setParameterVocabs(aodnDiscoveryParameters);
+        // parameter vocabs
+        List<String> processedParameterVocabs = vocabService.extractVocabLabelsFromThemes(stacCollectionModel.getThemes(), AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS);
+        if (!processedParameterVocabs.isEmpty()) {
+            stacCollectionModel.getSummaries().setParameterVocabs(processedParameterVocabs);
         }
+
+        /*
+        NOTE: The following implementation for platform and organization vocabularies is just a placeholder, not the final version.
+        It follows the same logic as what we intended for the parameter vocabulary, where we extract the list of second-level vocabularies that a record belongs to from its bottom-level vocabularies.
+        // TODO: Adjust if necessary, or remove the above comments after making a final decision.
+        --------------BEGIN--------------
+        */
+        // platform vocabs
+        List<String> processedPlatformVocabs = vocabService.extractVocabLabelsFromThemes(stacCollectionModel.getThemes(), AppConstants.AODN_PLATFORM_VOCABS);
+        if (!processedPlatformVocabs.isEmpty()) {
+            stacCollectionModel.getSummaries().setPlatformVocabs(processedPlatformVocabs);
+        }
+        // organisation vocabs
+        List<String> processedOrganisationVocabs = vocabService.extractVocabLabelsFromThemes(stacCollectionModel.getThemes(), AppConstants.AODN_ORGANISATION_VOCABS);
+        if (!processedOrganisationVocabs.isEmpty()) {
+            stacCollectionModel.getSummaries().setOrganisationVocabs(processedOrganisationVocabs);
+        }
+        /*
+        --------------END--------------
+         */
 
         // categories suggest using a different index
         // extendable for other aspects of the records data. eg. title, description, etc. something that are unique to the record and currently using "text" type

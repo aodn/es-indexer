@@ -1,0 +1,41 @@
+{ "format" : "linked-data-api", "version" : "0.2", "result" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=5", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-organisation-vocabulary/version-2-5/concept.json", "extendedMetadataVersion" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=5&_metadata=all", "first" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=0", "isPartOf" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-organisation-vocabulary/version-2-5/concept.json", "hasPart" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=5", "type" : "http://purl.org/linked-data/api/vocab#ListEndpoint"}
+    , "items" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/174", "dctermsCreated" : "2015-06-24T10:38:15Z", "dctermsModified" : "2018-05-08T03:04:50Z", "definition" : "Seashore Engineering Pty Ltd delivers high quality coastal and maritime engineering services.", "prefLabel" : {"_value" : "Seashore Engineering Pty Ltd", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/175", "dctermsCreated" : "2015-06-24T10:38:15Z", "dctermsModified" : "2018-05-08T03:05:07Z", "definition" : "Eni is an integrated energy company, which is headquartered in Rome.", "prefLabel" : {"_value" : "Eni Australia Ltd", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/176", "dctermsCreated" : "2015-06-24T10:38:15Z", "dctermsModified" : "2018-05-09T05:00:11Z", "definition" : "Ningaloo Marine Interactions have been operating tours out of Coral Bay since 2011.", "prefLabel" : {"_value" : "Ningaloo Marine Interactions", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/177", "dctermsCreated" : "2015-06-24T10:38:15Z", "dctermsModified" : "2018-08-24T04:02:29Z", "definition" : "Landgate's Satellite Remote Sensing Services (SRSS) is a dedicated remote sensing facility. They provide a full range of remote sensing services \u2013 from direct acquisition of satellite data, to processing of data and then delivering that data to government and business via our products and services.", "prefLabel" : {"_value" : "Landgate's Satellite Remote Sensing Services (SRSS), Western Australian Government", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/178", "dctermsCreated" : "2015-07-08T10:38:15Z", "dctermsModified" : "2018-08-29T04:50:19Z", "definition" : "Curtin University is based in Bentley, Perth, Western Australia. It was previously known as the Curtin University of Technology from 1987 until 2010. It also has campuses in Sydney, Malaysia and Singapore.", "narrower" : ["http://vocab.aodn.org.au/def/organisation/entity/179", "http://vocab.aodn.org.au/def/organisation/entity/182", {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/183", "prefLabel" : {"_value" : "Department of Applied Geology, Curtin University", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/185", "prefLabel" : {"_value" : "Department of Spatial Sciences, Curtin University", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/186", "prefLabel" : {"_value" : "Centre for Marine Science and Technology (CMST), Curtin University", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/187", "prefLabel" : {"_value" : "Remote Sensing and Satellite Research Group (RSSRG), Curtin University", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/188", "prefLabel" : {"_value" : "School of Public Health (SoPH), Curtin University", "_lang" : "en"}
+      }
+      ], "prefLabel" : {"_value" : "Curtin University", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/179", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/178"], "dctermsCreated" : "2015-07-08T10:38:15Z", "dctermsModified" : "2018-08-24T01:37:05Z", "definition" : "Muresk Institute is an education and training facility situated in the Wheatbelt (approximately 100km east of Perth). The Institute boasts modern education and training, conference and specialised research facilities. In 2012 the responsibility for Muresk\u2019s operation was transferred from Curtin University to the State Government.", "prefLabel" : {"_value" : "Muresk Institute, Curtin University", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/18", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/15", "prefLabel" : {"_value" : "Commonwealth Scientific and Industrial Research Organisation (CSIRO)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2015-04-27T10:38:15Z", "dctermsModified" : "2021-02-10T03:50:56Z", "definition" : "Oceans and Atmosphere provides research to help plan for and respond to weather and climate related natural hazards and ensure sustainable coastal development and growth of marine industries.", "narrower" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/19", "prefLabel" : {"_value" : "Information and Data Centre, CSIRO Oceans and Atmosphere", "_lang" : "en"}
+      }
+      ], "prefLabel" : {"_value" : "CSIRO Oceans and Atmosphere", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/180", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/552", "prefLabel" : {"_value" : "Curtin University of Technology", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2015-07-08T10:38:15Z", "dctermsModified" : "2018-08-29T04:51:49Z", "definition" : "The School of Environmental Biology, existed between approximately 1995 and 2003. It changed its name to the Department of Environmental Biology.", "prefLabel" : {"_value" : "School of Environmental Biology, Curtin University of Technology", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/181", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/552", "prefLabel" : {"_value" : "Curtin University of Technology", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2015-07-08T10:38:15Z", "dctermsModified" : "2018-08-29T04:51:37Z", "definition" : "The Department of Environmental Biology, existed between approximately 2005 and 2009. It is now known as the Department of Environment and Agriculture.", "prefLabel" : {"_value" : "Department of Environmental Biology, Curtin University of Technology", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/182", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/178"], "dctermsCreated" : "2015-07-08T10:38:15Z", "dctermsModified" : "2018-08-24T01:36:38Z", "definition" : "The Department of Environment and Agriculture caters for students who are interested in agriculture, biology, conserving biodiversity and the environment, or management of the coastal zone.", "prefLabel" : {"_value" : "Department of Environment and Agriculture, Curtin University", "_lang" : "en"}
+    }
+    ], "itemsPerPage" : 10, "next" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=6", "page" : 5, "prev" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=4", "startIndex" : 51, "type" : "http://purl.org/linked-data/api/vocab#Page"}
+}

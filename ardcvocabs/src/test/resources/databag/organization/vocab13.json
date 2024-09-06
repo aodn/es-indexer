@@ -1,0 +1,65 @@
+{ "format" : "linked-data-api", "version" : "0.2", "result" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=13", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-organisation-vocabulary/version-2-5/concept.json", "extendedMetadataVersion" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=13&_metadata=all", "first" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=0", "isPartOf" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-organisation-vocabulary/version-2-5/concept.json", "hasPart" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=13", "type" : "http://purl.org/linked-data/api/vocab#ListEndpoint"}
+    , "items" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/246", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/235", "prefLabel" : {"_value" : "The University of Western Australia (UWA)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2015-07-10T10:38:15Z", "dctermsModified" : "2018-03-14T22:33:26Z", "definition" : "The Harry Perkins Institute of Medical Research was established in 1998 as the Western Australian Institute for Medical Research (WAIMR) with the vision of creating a multi-site Institute that would enhance collaboration between Western Australian medical researchers. The University of Western Australia, Royal Perth Hospital and Sir Charles Gairdner Hospital were our founding partners and in July 2003, Fremantle Hospital also became a partner. In October 2013, WAIMR changed its name to the Harry Perkins Institute of Medical Research to honour our inaugural Chairman, Harry Perkins AO.", "prefLabel" : {"_value" : "Harry Perkins Institute of Medical Research", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/247", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/235", "prefLabel" : {"_value" : "The University of Western Australia (UWA)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2015-07-10T10:38:15Z", "dctermsModified" : "2018-08-24T06:06:15Z", "definition" : "The Centre for Marine Futures applies innovative science to a wide range of marine environmental challenges.", "prefLabel" : {"_value" : "Centre for Marine Futures, The University of Western Australia (UWA)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/248", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/235", "prefLabel" : {"_value" : "The University of Western Australia (UWA)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2015-07-10T10:38:15Z", "dctermsModified" : "2018-08-24T06:06:58Z", "definition" : "This former department is now part of the School of Earth and Environment.", "prefLabel" : {"_value" : "Department of Geography, The University of Western Australia (UWA)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/249", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/235", "prefLabel" : {"_value" : "The University of Western Australia (UWA)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2015-07-10T10:38:15Z", "dctermsModified" : "2019-01-16T06:18:38Z", "definition" : "This school was formed in January 2008, adding to the University's reputation for excellence in both medical teaching and research. Located at Queen Elizabeth II Medical Centre and Royal Perth Hospital, we give students hospital-based learning, while staff and postgraduates can access to major research facilities.", "prefLabel" : {"_value" : "School of Pathology and Laboratory Medicine, The University of Western Australia (UWA)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/25", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/24", "prefLabel" : {"_value" : "Department of Agriculture, Australian Government", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2015-04-27T10:38:15Z", "dctermsModified" : "2021-08-11T01:40:37Z", "definition" : "The Australian Bureau of Agricultural and Resource Economics and Sciences is a research organisation within the Australian Government Department of Agriculture. ABARES was formed following the merger of the Australian Bureau of Agricultural and Resource Economics (ABARE) and the Bureau of Rural Sciences (RBS) in 2010.", "prefLabel" : {"_value" : "Australian Bureau of Agriculture and Resource Economics and Sciences (ABARES), Department of Agriculture, Australian Government", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/250", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/235", "prefLabel" : {"_value" : "The University of Western Australia (UWA)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2015-07-10T10:38:15Z", "dctermsModified" : "2019-01-16T06:09:45Z", "definition" : "The school focuses on the interaction of people with natural resources, with expertise in natural resource management, bioeconomic modelling, agricultural risk management and policy analysis.", "prefLabel" : {"_value" : "School of Agricultural and Resource Economics, The University of Western Australia (UWA)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/251", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/235", "prefLabel" : {"_value" : "The University of Western Australia (UWA)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2015-07-10T10:38:15Z", "dctermsModified" : "2018-08-24T06:09:06Z", "definition" : "The school offers a learning and research environment spanning social and cultural studies in Australia, Europe and Asia.", "prefLabel" : {"_value" : "School of Social Sciences, The University of Western Australia (UWA)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/252", "dctermsCreated" : "2015-07-13T10:38:15Z", "dctermsModified" : "2018-03-14T22:33:27Z", "definition" : "The University of Tasmania is an Australian university, which was founded in 1890. The University has three main campuses around Tasmania: Sandy Bay, Newnham and the Cradle Coast campuses, and numerous smaller campuses - mostly scattered around Hobart, but also including sites at Darlinghurst and Rozelle in Sydney.", "narrower" : ["http://vocab.aodn.org.au/def/organisation/entity/253", "http://vocab.aodn.org.au/def/organisation/entity/254", {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/255", "prefLabel" : {"_value" : "School of Land and Food (SLAF), University of Tasmania (UTAS)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/256", "prefLabel" : {"_value" : "School of Zoology, University of Tasmania (UTAS)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/257", "prefLabel" : {"_value" : "School of Plant Science, University of Tasmania (UTAS)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/258", "prefLabel" : {"_value" : "School of Biological Sciences (SBS), University of Tasmania (UTAS)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/259", "prefLabel" : {"_value" : "Tasmanian Aquaculture and Fisheries Institute (TAFI)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/260", "prefLabel" : {"_value" : "Institute for Marine and Antarctic Studies (IMAS), University of Tasmania (UTAS)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/261", "prefLabel" : {"_value" : "School of Aquaculture, University of Tasmania (UTAS)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/29", "prefLabel" : {"_value" : "Antarctic Climate and Ecosystems Cooperative Research Centre (ACE CRC)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/405", "prefLabel" : {"_value" : "Tasmanian Partnership for Advanced Computing (TPAC)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/546", "prefLabel" : {"_value" : "Tasmanian Institute of Agriculture (TIA), University of Tasmania (UTAS)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/557", "prefLabel" : {"_value" : "School of Natural Sciences, University of Tasmania (UTAS)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/558", "prefLabel" : {"_value" : "School of Technology, Environments and Design, University of Tasmania (UTAS)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/617", "prefLabel" : {"_value" : "Australian Maritime College (AMC), University of Tasmania (UTAS)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/662", "prefLabel" : {"_value" : "School of Geography, Planning and Spatial Sciences (GPSS), University of Tasmania (UTAS)", "_lang" : "en"}
+      }
+      ], "prefLabel" : {"_value" : "University of Tasmania (UTAS)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/253", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/252"], "dctermsCreated" : "2015-07-13T10:38:15Z", "dctermsModified" : "2018-08-27T05:44:32Z", "definition" : "This school became part of the School of Land and Food (SLAF), in 2014.", "prefLabel" : {"_value" : "School of Agricultural Science, University of Tasmania (UTAS)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/254", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/252"], "dctermsCreated" : "2015-07-13T10:38:15Z", "dctermsModified" : "2023-11-08T04:20:31Z", "definition" : "This school became part of the School of Land and Food (SLAF), in 2014.", "prefLabel" : {"_value" : "School of Geography and Environmental Studies, University of Tasmania (UTAS)", "_lang" : "en"}
+    }
+    ], "itemsPerPage" : 10, "next" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=14", "page" : 13, "prev" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=12", "startIndex" : 131, "type" : "http://purl.org/linked-data/api/vocab#Page"}
+}

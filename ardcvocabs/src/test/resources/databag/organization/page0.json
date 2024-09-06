@@ -1,0 +1,158 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-category-vocabulary/version-2-5/concept.json",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-organisation-category-vocabulary/version-2-5/concept.json",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-category-vocabulary/version-2-5/concept.json?_metadata=all",
+    "first": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-category-vocabulary/version-2-5/concept.json?_page=0",
+    "hasPart": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-category-vocabulary/version-2-5/concept.json",
+    "isPartOf": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-category-vocabulary/version-2-5/concept.json",
+    "items": [
+      {
+        "_about": "http://vocab.aodn.org.au/def/organisation_classes/category/3",
+        "dctermsCreated": "2015-04-27T10:38:15Z",
+        "dctermsModified": "2023-11-08T04:23:18Z",
+        "definition": "Australian University category",
+        "prefLabel": {
+          "_value": "Australian Universities",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/organisation_classes/category/4",
+        "dctermsCreated": "2015-04-27T10:38:15Z",
+        "dctermsModified": "2023-01-03T05:27:45Z",
+        "definition": "International category",
+        "prefLabel": {
+          "_value": "International",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/organisation_classes/category/6",
+        "dctermsCreated": "2015-05-12T00:56:50Z",
+        "dctermsModified": "2023-11-08T04:46:31Z",
+        "definition": "Non Government organisation category",
+        "prefLabel": {
+          "_value": "Non Government",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/organisation_classes/category/8",
+        "dctermsCreated": "2018-05-07T04:04:14Z",
+        "dctermsModified": "2021-08-11T01:15:53Z",
+        "definition": "Commonwealth Departments and Agencies Category",
+        "prefLabel": {
+          "_value": "Commonwealth Departments and Agencies",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/organisation_classes/category/9",
+        "dctermsCreated": "2018-05-07T04:20:39Z",
+        "dctermsModified": "2023-01-16T05:41:51Z",
+        "definition": "State and Territory Government Departments and Agencies Category",
+        "narrower": [
+          "http://vocab.aodn.org.au/def/organisation_classes/category/10",
+          "http://vocab.aodn.org.au/def/organisation_classes/category/11",
+          "http://vocab.aodn.org.au/def/organisation_classes/category/12",
+          "http://vocab.aodn.org.au/def/organisation_classes/category/13",
+          "http://vocab.aodn.org.au/def/organisation_classes/category/14",
+          {
+            "_about": "http://vocab.aodn.org.au/def/organisation_classes/category/15",
+            "prefLabel": {
+              "_value": "South Australian Government",
+              "_lang": "en"
+            }
+          },
+          {
+            "_about": "http://vocab.aodn.org.au/def/organisation_classes/category/16",
+            "prefLabel": {
+              "_value": "Tasmanian Government",
+              "_lang": "en"
+            }
+          }
+        ],
+        "prefLabel": {
+          "_value": "State and Territory Government Departments and Agencies",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/organisation_classes/category/10",
+        "broader": [
+          "http://vocab.aodn.org.au/def/organisation_classes/category/9"
+        ],
+        "dctermsCreated": "2018-05-07T04:28:26Z",
+        "dctermsModified": "2023-11-08T04:32:56Z",
+        "definition": "Is the Australian territorial democratic administrative authority of the Northern Territory.",
+        "prefLabel": {
+          "_value": "Northern Territory Government",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/organisation_classes/category/11",
+        "broader": [
+          "http://vocab.aodn.org.au/def/organisation_classes/category/9"
+        ],
+        "dctermsCreated": "2018-05-07T04:28:40Z",
+        "dctermsModified": "2021-05-03T01:38:15Z",
+        "definition": "Is the executive administrative authority of the Australian state of Victoria.",
+        "prefLabel": {
+          "_value": "Victorian Government",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/organisation_classes/category/12",
+        "broader": [
+          "http://vocab.aodn.org.au/def/organisation_classes/category/9"
+        ],
+        "dctermsCreated": "2018-05-07T04:28:58Z",
+        "dctermsModified": "2018-05-07T05:56:51Z",
+        "definition": "Is the Australian state democratic administrative authority of Queensland.",
+        "prefLabel": {
+          "_value": "Queensland Government",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/organisation_classes/category/13",
+        "broader": [
+          "http://vocab.aodn.org.au/def/organisation_classes/category/9"
+        ],
+        "dctermsCreated": "2018-05-07T04:29:15Z",
+        "dctermsModified": "2023-01-16T06:13:13Z",
+        "definition": "Is the Australian state democratic administrative authority of New South Wales.",
+        "prefLabel": {
+          "_value": "New South Wales Government",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/organisation_classes/category/14",
+        "broader": [
+          "http://vocab.aodn.org.au/def/organisation_classes/category/9"
+        ],
+        "dctermsCreated": "2018-05-07T04:29:34Z",
+        "dctermsModified": "2023-01-16T05:42:10Z",
+        "definition": "Is the Australian state democratic administrative authority of Western Australia.",
+        "prefLabel": {
+          "_value": "Western Australian Government",
+          "_lang": "en"
+        }
+      }
+    ],
+    "itemsPerPage": 10,
+    "next": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-category-vocabulary/version-2-5/concept.json?_page=1",
+    "page": 0,
+    "startIndex": 1,
+    "type": [
+      "http://purl.org/linked-data/api/vocab#ListEndpoint",
+      "http://purl.org/linked-data/api/vocab#Page"
+    ]
+  }
+}

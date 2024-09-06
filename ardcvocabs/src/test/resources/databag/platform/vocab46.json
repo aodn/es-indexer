@@ -1,0 +1,43 @@
+{ "format" : "linked-data-api", "version" : "0.2", "result" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=46", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json", "extendedMetadataVersion" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=46&_metadata=all", "first" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=0", "isPartOf" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json", "hasPart" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=46", "type" : "http://purl.org/linked-data/api/vocab#ListEndpoint"}
+    , "items" : [{"_about" : "http://vocab.aodn.org.au/def/platform/entity/82", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2022-07-15T06:45:32Z", "dctermsModified" : "2022-07-15T06:53:45Z", "definition" : "Container ship vessel, which is currently flying the flag of Liberia (July, 2022)", "prefLabel" : {"_value" : "Seatrade Blue", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/84", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2022-07-15T06:49:31Z", "dctermsModified" : "2022-07-15T06:54:04Z", "definition" : "Container ship vessel, which is currently flying the flag of Singapore (July, 2022)", "prefLabel" : {"_value" : "Samoa Chief", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/86", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2022-10-18T03:48:55Z", "dctermsModified" : "2022-10-18T03:49:57Z", "definition" : "Cargo ship vessel, which is currently flying the flag of Liberia (October, 2022).", "prefLabel" : {"_value" : "Tasman Chief", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/85", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2022-10-18T03:28:18Z", "dctermsModified" : "2022-10-18T03:31:28Z", "definition" : "Container ship vessel, which is currently flying the flag of Singapore (October, 2022).", "prefLabel" : {"_value" : "Mariner", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/87", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2023-02-21T04:44:37Z", "dctermsModified" : "2023-02-21T04:47:17Z", "definition" : "Container ship vessel, which is currently flying the flag of Liberia (February, 2023).", "prefLabel" : {"_value" : "Seatrade White", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/88", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2023-03-30T02:42:59Z", "dctermsModified" : "2023-03-30T02:44:47Z", "definition" : "Container ship vessel, which is currently flying the flag of Singapore (March, 2023)", "prefLabel" : {"_value" : "Mia Schulte", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/89", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/48", "prefLabel" : {"_value" : "mooring", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2023-03-30T02:45:35Z", "dctermsModified" : "2023-03-30T02:48:16Z", "definition" : "The Animal Tracking Facility Seal Rocks Line (SRL2) Mooring is operated by SIMS (Sydney Institute of Marine Science) and collects data in the mid north coast region of New South Wales.", "prefLabel" : {"_value" : "Animal Tracking Facility Seal Rocks Line (SRL2) Mooring", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/90", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/48", "prefLabel" : {"_value" : "mooring", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2023-03-30T02:48:33Z", "dctermsModified" : "2023-03-30T02:50:32Z", "definition" : "The Animal Tracking Facility Seal Rocks Line (SRL5) Mooring is operated by SIMS (Sydney Institute of Marine Science) and collects data in the mid north coast region of New South Wales.", "prefLabel" : {"_value" : "Animal Tracking Facility Seal Rocks Line (SRL5) Mooring", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/91", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/65", "prefLabel" : {"_value" : "orbiting satellite", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2023-03-30T02:51:44Z", "dctermsModified" : "2023-03-30T02:54:24Z", "definition" : "This satellite was the 1st flight of the JPSS programme, re-named NOAA-20 after the launch. It operated from November 2017, at an altitude of 834km, in a sunsynchronous orbit. Instrumentation: Advanced Technology Microwave Sounder, Clouds and the Earth\u2019s Radiant Energy System, Cross-track Infrared Sounder, Ozone Mapping and Profiler Suite, and Visible/Infrared Imager Radiometer Suite.", "prefLabel" : {"_value" : "NOAA-20", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/92", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/65", "prefLabel" : {"_value" : "orbiting satellite", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2023-03-30T02:54:58Z", "dctermsModified" : "2023-03-30T02:59:07Z", "definition" : "This satellite was the 1st flight of the EPS programme.It operated from October 2006 until November 2021, at an altitude of 827km, in a sunsychronous orbit. Instrumentation: Advanced Data Collection System, Advanced Microwave Sounding Unit, Advanced Scatterometer, Advanced Very High Resolution Radiometer, Global Ozone Monitoring Experiment, GNSS Receiver for Atmospheric Sounding, High-resolution Infra Red Sounder, Infrared Atmospheric Sounding Interferometer, Microwave Humidity Sounding, Search & Rescue Satellite-Aided Tracking System, SEM / Total Energy Detector, SEM / Medium energy proton detector.", "prefLabel" : {"_value" : "MetOpA", "_lang" : "en"}
+    }
+    ], "itemsPerPage" : 10, "next" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=47", "page" : 46, "prev" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=45", "startIndex" : 461, "type" : "http://purl.org/linked-data/api/vocab#Page"}
+}

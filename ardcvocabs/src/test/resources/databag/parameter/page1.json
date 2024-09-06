@@ -1,0 +1,124 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=1",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=1&_metadata=all",
+    "first": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=0",
+    "isPartOf": {
+      "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+      "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+      "hasPart": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=1",
+      "type": "http://purl.org/linked-data/api/vocab#ListEndpoint"
+    },
+    "items": [
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/14",
+        "dctermsCreated": "2015-08-07T00:57:51Z",
+        "dctermsModified": "2018-02-23T00:23:31Z",
+        "definition": "The amount (mass or moles) of the following pigments (chlorophyll-c1, chlorophyll-c2, chlorophyll-c1c2, chlorophyll-c3) in a known volume of any water body.",
+        "prefLabel": {
+          "_value": "Concentration of total chlorophyll-c per unit volume of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/15",
+        "dctermsCreated": "2015-08-07T00:58:56Z",
+        "dctermsModified": "2018-02-23T00:23:32Z",
+        "definition": "The amount (mass or moles) of total chlorophyll-a (divinyl chlorophyll-a, chlorophyll-a, chlorophyllide-a, chlorophyll-a allomers and chlorophyll-a prime) plus total chlorophyll-b (divinyl chlorophyll-b, chlorophyll-b) plus total chlorophyll-c (chlorophyll-c1, chlorophyll-c2, chlorophyll-c1c2, chlorophyll-c3) in a known volume of any water body.",
+        "prefLabel": {
+          "_value": "Concentration of total chlorophyll-a plus chlorophyll-b plus chlorophyll-c per unit volume of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/16",
+        "dctermsCreated": "2015-08-07T01:00:17Z",
+        "dctermsModified": "2018-02-23T00:23:32Z",
+        "definition": "The amount (mass or moles) of the following pigments (alloxanthin, diadinoxanthin, diatoxanthin, Zeaxanthin, alpha carotene, beta carotene) in a known volume of any water body.",
+        "prefLabel": {
+          "_value": "Concentration of photoprotective carotenoids per unit volume of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/17",
+        "dctermsCreated": "2015-08-07T01:01:14Z",
+        "dctermsModified": "2018-02-23T00:23:32Z",
+        "definition": "The amount (mass or moles) of the following pigments (19-butanoyloxyfucoxanthin, fucoxanthin, 19-hexanoyloxyfucoxanthin, peridinin) in a known volume of any water body",
+        "prefLabel": {
+          "_value": "Concentration of photosynthetic carotenoids per unit volume of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/18",
+        "dctermsCreated": "2015-08-07T01:02:16Z",
+        "dctermsModified": "2020-10-13T05:59:50Z",
+        "definition": "The amount (mass or moles) of photosynthetic carotenoids (19-butanoyloxyfucoxanthin, fucoxanthin, 19-hexanoyloxyfucoxanthin, peridinin) plus total chlorophyll-a pigments (divinyl chlorophyll-a, chlorophyll-a, chlorophyllide-a, chlorophyll-a allomers and chlorophyll-a prime) plus total chlorophyll-b pigments (divinyl chlorophyll-b, chlorophyll-b) plus total chlorophyll-c pigments (chlorophyll-c1, chlorophyll-c2, chlorophyll-c1c2, chlorophyll-c3) in a known volume of any water body.",
+        "prefLabel": {
+          "_value": "Concentration of photosynthetic pigments per unit volume of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/19",
+        "dctermsCreated": "2015-08-07T01:03:43Z",
+        "dctermsModified": "2020-10-13T06:00:07Z",
+        "definition": "The amount (mass or moles) of photosynthetic carotenoids (19-butanoyloxyfucoxanthin, fucoxanthin, 19-hexanoyloxyfucoxanthin, peridinin) plus photoprotective carotenoids (alloxanthin, diadinoxanthin, diatoxanthin, Zeaxanthin, alpha carotene, beta carotene) plus total chlorophyll-b pigments (divinyl chlorophyll-b, chlorophyll-b) plus total chlorophyll-c pigments (chlorophyll-c1, chlorophyll-c2, chlorophyll-c1c2, chlorophyll-c3) in a known volume of any water body.",
+        "prefLabel": {
+          "_value": "Concentration of total accessory pigments per unit volume of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/2",
+        "dctermsCreated": "2015-08-06T06:43:53Z",
+        "dctermsModified": "2021-04-21T06:09:54Z",
+        "definition": "Significant wave height approximated as four times the square root of the first moment of the wave power spectrum.",
+        "prefLabel": {
+          "_value": "Spectral significant height of waves on the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/20",
+        "dctermsCreated": "2015-08-07T01:05:01Z",
+        "dctermsModified": "2018-02-23T00:23:33Z",
+        "definition": "The amount (mass or moles) of all pigments in a known volume of any water body",
+        "prefLabel": {
+          "_value": "Concentration of total pigment per unit volume of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/21",
+        "dctermsCreated": "2015-08-07T01:06:00Z",
+        "dctermsModified": "2020-10-13T06:00:26Z",
+        "definition": "The amount (mass or moles) of photosynthetic carotenoids (19-butanoyloxyfucoxanthin, fucoxanthin, 19-hexanoyloxyfucoxanthin, peridinin) plus total chlorophyll-b pigments (divinyl chlorophyll-b, chlorophyll-b) plus alloxanthin and zeaxanthin in a known volume of any water body.",
+        "prefLabel": {
+          "_value": "Concentration of total diagnostic pigments per unit volume of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/22",
+        "dctermsCreated": "2015-11-04T03:32:45Z",
+        "dctermsModified": "2018-02-23T00:23:34Z",
+        "definition": "The volume of a biological object described elsewhere in the metadata (e.g.: single-species populations, all species within a phytoplankton sample \u2026) occurring in a given volume of water.",
+        "prefLabel": {
+          "_value": "Biovolume",
+          "_lang": "en"
+        }
+      }
+    ],
+    "itemsPerPage": 10,
+    "next": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=2",
+    "page": 1,
+    "prev": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=0",
+    "startIndex": 11,
+    "type": "http://purl.org/linked-data/api/vocab#Page"
+  }
+}

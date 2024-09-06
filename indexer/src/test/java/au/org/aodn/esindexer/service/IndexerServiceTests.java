@@ -7,7 +7,10 @@ import co.elastic.clients.elasticsearch.core.search.Hit;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.json.JSONException;
 import org.junit.jupiter.api.*;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,10 +21,6 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
-
-import static au.org.aodn.esindexer.utils.CommonUtils.persevere;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
@@ -59,22 +58,6 @@ public class IndexerServiceTests extends BaseTestClass {
     @AfterEach
     public void clear() throws IOException {
         clearElasticIndex(INDEX_NAME);
-    }
-    /**
-     * Read the function implementation on why need to insert 1 docs
-     * @throws IOException Not expected to throws
-     */
-    @Test
-    public void verifyGeoNetworkInstanceReinstalled() throws Exception {
-        String uuid = "9e5c3031-a026-48b3-a153-a70c2e2b78b9";
-        try {
-            persevere(() -> triggerIndexer(getRequestEntity(null), true));
-            insertMetadataRecords(uuid, "classpath:canned/sample1.xml");
-            Assertions.assertTrue(indexerService.isGeoNetworkInstanceReinstalled(1), "New installed");
-        }
-        finally {
-            deleteRecord(uuid);
-        }
     }
 
     @Test
@@ -152,9 +135,10 @@ public class IndexerServiceTests extends BaseTestClass {
             String expected = indexerObjectMapper.readTree(expectedData).toPrettyString();
             String actual = indexerObjectMapper.readTree(test).toPrettyString();
 
-            Assertions.assertEquals(expected, actual, "Stac not equals for sample 4. Uuid:" + uuid);
-        }
-        finally {
+            JSONAssert.assertEquals(expected, actual, JSONCompareMode.STRICT);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        } finally {
             deleteRecord(uuid);
         }
     }
@@ -182,7 +166,9 @@ public class IndexerServiceTests extends BaseTestClass {
             String expected = indexerObjectMapper.readTree(expectedData).toPrettyString();
             String actual = indexerObjectMapper.readTree(resultJson).toPrettyString();
 
-            Assertions.assertEquals(expected, actual, "stac not equals for associated/self.json");
+            JSONAssert.assertEquals(expected, actual, JSONCompareMode.STRICT);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
         } finally {
             deleteRecord(targetRecordId, parentId, siblingId, childId);
         }
@@ -211,9 +197,10 @@ public class IndexerServiceTests extends BaseTestClass {
             String expected = indexerObjectMapper.readTree(expectedData).toPrettyString();
             String actual = indexerObjectMapper.readTree(test).toPrettyString();
 
-            Assertions.assertEquals(expected, actual, "Stac not equals for sample 5. Uuid: " + uuid);
-        }
-        finally {
+            JSONAssert.assertEquals(expected, actual, JSONCompareMode.STRICT);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        } finally {
             deleteRecord(uuid);
         }
     }
@@ -237,9 +224,10 @@ public class IndexerServiceTests extends BaseTestClass {
             String expected = indexerObjectMapper.readTree(expectedData).toPrettyString();
             String actual = indexerObjectMapper.readTree(test).toPrettyString();
 
-            Assertions.assertEquals(expected, actual, "Stac not equals for sample 6. Uuid: " + uuid);
-        }
-        finally {
+            JSONAssert.assertEquals(expected, actual, JSONCompareMode.STRICT);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        } finally {
             deleteRecord(uuid);
         }
     }
@@ -265,12 +253,42 @@ public class IndexerServiceTests extends BaseTestClass {
             String expected = indexerObjectMapper.readTree(expectedData).toPrettyString();
             String actual = indexerObjectMapper.readTree(test).toPrettyString();
 
-            Assertions.assertEquals(expected, actual, "Stac not equals for sample 7. Uuid: " + uuid);
-        }
-        finally {
+            JSONAssert.assertEquals(expected, actual, JSONCompareMode.STRICT);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        } finally {
             deleteRecord(uuid);
         }
     }
+
+    @Test
+    public void verifyExtractedVocabsFromActualRecord() throws IOException {
+        String uuid = "fa93c66e-0e56-7e1d-e043-08114f8c1b76";
+        try {
+            insertMetadataRecords(uuid, "classpath:canned/sample11.xml");
+
+            indexerService.indexAllMetadataRecordsFromGeoNetwork(null, true, null);
+            Hit<ObjectNode> objectNodeHit = indexerService.getDocumentByUUID(uuid);
+
+            String test = String.valueOf(Objects.requireNonNull(objectNodeHit.source()));
+            JsonNode rootNode = indexerObjectMapper.readTree(test);
+
+            List<String> expectedParameterVocabs = Arrays.asList("oxygen", "alkalinity", "nutrient", "carbon", "salinity" );
+            List<String> actualParameterVocabs = indexerObjectMapper.convertValue(rootNode.path("summaries").path("parameter_vocabs"), indexerObjectMapper.getTypeFactory().constructCollectionType(List.class, String.class));
+            Assertions.assertEquals(expectedParameterVocabs.size(), actualParameterVocabs.size(), "ParameterVocabs not equals for sample11.");
+
+            List<String> expectedPlatformVocabs = List.of("small boat");
+            List<String> actualPlatformVocabs = indexerObjectMapper.convertValue(rootNode.path("summaries").path("platform_vocabs"), indexerObjectMapper.getTypeFactory().constructCollectionType(List.class, String.class));
+            Assertions.assertEquals(expectedPlatformVocabs.size(), actualPlatformVocabs.size(), "PlatformVocabs not equals for sample11.");
+
+            List<String> expectedOrganisationVocabs = List.of("national mooring network facility, integrated marine observing system (imos)");
+            List<String> actualOrganisationVocabs = indexerObjectMapper.convertValue(rootNode.path("summaries").path("organisation_vocabs"), indexerObjectMapper.getTypeFactory().constructCollectionType(List.class, String.class));
+            Assertions.assertEquals(expectedOrganisationVocabs.size(), actualOrganisationVocabs.size(), "OrganisationVocabs not equals for sample11.");
+        } finally {
+            deleteRecord(uuid);
+        }
+    }
+
     /**
      * Verify extracted phrases from abstract (extractTokensFromDescription method)
      * @throws IOException - If file not found

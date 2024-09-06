@@ -1,0 +1,43 @@
+{ "format" : "linked-data-api", "version" : "0.2", "result" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=45", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json", "extendedMetadataVersion" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=45&_metadata=all", "first" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=0", "isPartOf" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json", "hasPart" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=45", "type" : "http://purl.org/linked-data/api/vocab#ListEndpoint"}
+    , "items" : [{"_about" : "http://vocab.aodn.org.au/def/platform/entity/63", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2021-10-12T03:13:53Z", "dctermsModified" : "2021-10-12T03:27:31Z", "definition" : "Passenger ship vessel, which is currently flying the flag of Russia (November, 2020).", "prefLabel" : {"_value" : "Akademik Shokalskiy", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/70", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/31", "prefLabel" : {"_value" : "research vessel", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2021-10-12T03:20:23Z", "dctermsModified" : "2021-10-12T03:27:13Z", "definition" : "Research and supply vessel owned by the Australian Government, which is currently flying the flag of Australia.", "prefLabel" : {"_value" : "Nuyina", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/77", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/35", "prefLabel" : {"_value" : "vessel of opportunity on fixed route", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2021-12-16T05:53:59Z", "dctermsModified" : "2021-12-16T05:54:52Z", "definition" : "Passenger ship vessel, which is currently flying the flag of Australia.", "prefLabel" : {"_value" : "Harbour Master", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/75", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2021-12-16T05:48:38Z", "dctermsModified" : "2021-12-16T05:50:52Z", "definition" : "Container ship vessel, which is currently flying the flag of Malta (December, 2021)", "prefLabel" : {"_value" : "CMA CGM Abu Dhabi", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/76", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2021-12-16T05:51:46Z", "dctermsModified" : "2021-12-16T05:53:11Z", "definition" : "Container ship vessel, which is currently flying the flag of Cyprus (December, 2021)", "prefLabel" : {"_value" : "Nordpacific", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/80", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/36", "prefLabel" : {"_value" : "fishing vessel", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2022-02-02T02:49:40Z", "dctermsModified" : "2022-02-02T02:50:35Z", "definition" : "Fishing vessel, which is currently flying the flag of Australia (February, 2022).", "prefLabel" : {"_value" : "Cape Arkona", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/78", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/36", "prefLabel" : {"_value" : "fishing vessel", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2022-02-02T02:44:32Z", "dctermsModified" : "2022-02-02T02:47:58Z", "definition" : "Trawler fishing vessel, which is currently flying the flag of New Zealand (February, 2022).", "prefLabel" : {"_value" : "Amaltal Explorer", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/79", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/36", "prefLabel" : {"_value" : "fishing vessel", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2022-02-02T02:48:11Z", "dctermsModified" : "2022-02-02T02:49:26Z", "definition" : "Factory trawler fishing vessel, which is currently flying the flag of New Zealand (January, 2022).", "prefLabel" : {"_value" : "Amaltal Columbia", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/81", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2022-02-02T22:15:27Z", "dctermsModified" : "2022-02-02T22:24:54Z", "definition" : "Container ship vessel, which is currently flying the flag of Singapore (February, 2022). It was called the Szechuen until 2021.", "prefLabel" : {"_value" : "Vanuatu Chief", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/83", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2022-07-15T06:47:22Z", "dctermsModified" : "2022-07-15T06:54:27Z", "definition" : "Container ship vessel, which is currently flying the flag of the Marshall Island (July, 2022)", "prefLabel" : {"_value" : "Safeen Prime", "_lang" : "en"}
+    }
+    ], "itemsPerPage" : 10, "next" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=46", "page" : 45, "prev" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=44", "startIndex" : 451, "type" : "http://purl.org/linked-data/api/vocab#Page"}
+}

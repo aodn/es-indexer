@@ -1,0 +1,121 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=5",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=5&_metadata=all",
+    "first": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=0",
+    "isPartOf": {
+      "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+      "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+      "hasPart": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=5",
+      "type": "http://purl.org/linked-data/api/vocab#ListEndpoint"
+    },
+    "items": [
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/427",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-10-30T04:43:44Z",
+        "definition": "The difference in the CO2 fugacity (effective partial pressure allowing for non-ideal gas) between air in equilibrium with seawater and the atmosphere",
+        "prefLabel": {
+          "_value": "Fugacity anomaly (water - air) of carbon dioxide in the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/478",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:23:41Z",
+        "definition": "The amount (mass or moles) of the specified pigment determined by HPLC assay of a sample collected by dissolution in acteone of the residue collected by GF/F filtration of a known volume of any water body. The quoted value either results from a single determination or the average of replicate determinations",
+        "prefLabel": {
+          "_value": "Concentration of echinenone per unit mass of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/488",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:23:43Z",
+        "definition": "The relative representation of flora and fauna in a particular sample or region.",
+        "prefLabel": {
+          "_value": "Abundance of biota",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/489",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:23:43Z",
+        "definition": "The identification of the biotic elements to the relevant scientific classification group (taxa), e.g. genus or species.",
+        "prefLabel": {
+          "_value": "Biotic taxonomic identification",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/5",
+        "dctermsCreated": "2015-08-07T00:33:07Z",
+        "dctermsModified": "2018-02-23T00:23:43Z",
+        "definition": "Light extinction coefficient (490nm wavelength) in the water body by radiometer and computation from variation of light intensity with depth.",
+        "prefLabel": {
+          "_value": "Light extinction coefficient (490nm wavelength) in the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/565",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-10-24T02:21:47Z",
+        "definition": "The force per unit area exerted by the overlying sea water, sea ice, air and any other medium that may be present on a sensor located in the water column.",
+        "prefLabel": {
+          "_value": "Pressure (measured variable) in the water body exerted by overlying sea water and any medium above it",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/566",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-10-24T02:22:10Z",
+        "definition": "The force per unit area exerted by the overlying sea water on a sensor located in the water column. Excludes the pressure due to sea ice, air and any other medium that may be present.",
+        "prefLabel": {
+          "_value": "Pressure (measured variable) in the water body exerted by overlying sea water only",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/570",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:23:44Z",
+        "prefLabel": {
+          "_value": "Dry weight biomass per unit volume of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/571",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:23:44Z",
+        "prefLabel": {
+          "_value": "Wet weight biomass per unit volume of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/572",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2020-09-08T04:24:32Z",
+        "prefLabel": {
+          "_value": "Downwelling vector irradiance as photons (PAR wavelengths) in the atmosphere",
+          "_lang": "en"
+        }
+      }
+    ],
+    "itemsPerPage": 10,
+    "next": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=6",
+    "page": 5,
+    "prev": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=4",
+    "startIndex": 51,
+    "type": "http://purl.org/linked-data/api/vocab#Page"
+  }
+}

@@ -1,6 +1,7 @@
 # Client calling the Indexer API must provide this token in the Authorization header
 # diff core / max value should not impact the run, this is just to verify this is correct
 app:
+  initialiseVocabsIndex: true
   indexing:
     pool:
       core: 2
@@ -13,10 +14,13 @@ elasticsearch:
     elasticVersion: "8.11.3"
   index:
     name: sample-portal-records
+  vocabs_index:
+    name: test-vocabs-index
   query:
     pageSize: 4
 
 logging:
   level:
+    au.org.aodn.ardcvocabs.service: DEBUG
     org.hibernate.SQL: DEBUG
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE

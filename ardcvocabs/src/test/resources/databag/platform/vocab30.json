@@ -1,0 +1,196 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=30",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=30&_metadata=all",
+    "first": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=0",
+    "isPartOf": {
+      "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+      "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+      "hasPart": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=30",
+      "type": "http://purl.org/linked-data/api/vocab#ListEndpoint"
+    },
+    "items": [
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/69",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-04-10T00:00:00Z",
+        "dctermsModified": "2023-01-25T03:06:23Z",
+        "definition": "Acidification mooring located at the Maria Island National Reference Station. This mooring is operated by CSIRO.",
+        "prefLabel": {
+          "_value": "Maria Island National Reference Station Acidification Mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/7",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/36",
+            "prefLabel": {
+              "_value": "fishing vessel",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2017-01-04T01:55:41Z",
+        "dctermsModified": "2017-04-02T23:33:13Z",
+        "definition": "Trawler fishing vessel, currently flying the Australian flag (January, 2017)",
+        "prefLabel": {
+          "_value": "Empress Pearl",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/71",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/31",
+            "prefLabel": {
+              "_value": "research vessel",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-04-11T00:00:00Z",
+        "dctermsModified": "2017-04-13T03:49:06Z",
+        "definition": "Research vessel owned by the Australian Institute of Marine Science (AIMS). Active as Mar 2013.",
+        "prefLabel": {
+          "_value": "Cape Ferguson",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/72",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/31",
+            "prefLabel": {
+              "_value": "research vessel",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-04-11T00:00:00Z",
+        "dctermsModified": "2017-04-13T04:00:32Z",
+        "definition": "Research vessel owned by the Australian Institute of Marine Science (AIMS). Active as Mar 2013.",
+        "prefLabel": {
+          "_value": "Solander",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/726",
+        "dctermsCreated": "2014-06-19T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:45Z",
+        "definition": "",
+        "prefLabel": {
+          "_value": "WERA beam forming HF radar",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/727",
+        "dctermsCreated": "2014-06-19T00:00:00Z",
+        "dctermsModified": "2017-12-19T04:00:54Z",
+        "definition": "",
+        "prefLabel": {
+          "_value": "SeaSonde direction finding HF radar",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/73",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/35",
+            "prefLabel": {
+              "_value": "vessel of opportunity on fixed route",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2103-04-11T00:00:00Z",
+        "dctermsModified": "2018-09-17T04:56:51Z",
+        "definition": "Spirit of Tasmania 1 is owned by the TT-Line Company. It was built in 1998 by Kvaerner Masa-Yards in Finland as Superfast IV on the Patras-Ancona route. Since 2002, It is operating on the Melbourne (Victoria) - Devonport (Tasmania) route across Bass Strait",
+        "prefLabel": {
+          "_value": "Spirit of Tasmania 1",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/74",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/25",
+            "prefLabel": {
+              "_value": "unmanned autonomous underwater vehicle",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-04-11T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:38Z",
+        "definition": "The IMOS AUV facility owns and operates the ocean going AUV called Sirius. Managed by the University of Sydney's Australian Centre for Field Robotics (ACFR), this vehicle is a modified version of a mid-size robotic vehicle called Seabed built at the Woods Hole Oceanographic Institution",
+        "prefLabel": {
+          "_value": "Sirius",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/8",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/36",
+            "prefLabel": {
+              "_value": "fishing vessel",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2017-01-04T01:57:47Z",
+        "dctermsModified": "2017-04-02T23:32:14Z",
+        "definition": "Fishing vessel, currently flying the Australian flag (January 2017)",
+        "prefLabel": {
+          "_value": "Antarctic Discovery",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/823",
+        "dctermsCreated": "2015-04-14T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:43Z",
+        "definition": "A small self-propelled platform operating on the surface of the water column in unpredictable locations that is smaller than a ship but too large to easily remove from the water.",
+        "narrower": [
+          {
+            "_about": "http://vocab.aodn.org.au/def/platform/entity/98",
+            "prefLabel": {
+              "_value": "Kinetic Energy",
+              "_lang": "en"
+            }
+          }
+        ],
+        "prefLabel": {
+          "_value": "small boat",
+          "_lang": "en"
+        }
+      }
+    ],
+    "itemsPerPage": 10,
+    "next": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=31",
+    "page": 30,
+    "prev": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=29",
+    "startIndex": 301,
+    "type": "http://purl.org/linked-data/api/vocab#Page"
+  }
+}

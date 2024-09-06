@@ -1,0 +1,24 @@
+{ "format" : "linked-data-api", "version" : "0.2", "result" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/resource.json?uri=http://vocab.nerc.ac.uk/collection/L06/current/41", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/resource.json?uri=http://vocab.nerc.ac.uk/collection/L06/current/41", "extendedMetadataVersion" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/resource.json?_metadata=all&uri=http://vocab.nerc.ac.uk/collection/L06/current/41", "primaryTopic" : {"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/41", "broadMatch" : ["http://vocab.aodn.org.au/def/platform_classes/category/44"], "contributor" : "http://editor.vocabs.ands.org.au/user/eMII_Finney.Kim_Admin", "dcPublisher" : "British Oceanographic Data Centre (BODC)", "dcSource" : "(L061) SeaVoX Platform Categories", "dctermsCreated" : "2013-04-08T00:00:00Z", "dctermsModified" : "2017-02-07T03:52:36Z", "definition" : "An unmanned instrumented platform operating on the surface of the water column loosely tethered to the seafloor to maintain a fixed position (e.g. ODAS buoy)", "inScheme" : {"_about" : "http://vocab.aodn.org.au/def/platform/1", "hasConcept" : "http://vocab.nerc.ac.uk/collection/L06/current/41", "hasTopConcept" : ["http://vocab.nerc.ac.uk/collection/L06/current/41"]}
+      , "narrower" : [{"_about" : "http://vocab.aodn.org.au/def/platform/entity/311", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/41"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/312", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/41"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/313", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/41"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/314", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/41"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/319", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/41"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/320", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/41"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/321", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/41"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/323", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/41"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/325", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/41"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/326", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/41"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/327", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/41"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/328", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/41"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/329", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/41"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/343", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/41"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/344", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/41"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/345", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/41"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/346", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/41"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/347", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/41"]}
+      ], "prefLabel" : {"_value" : "moored surface buoy", "_lang" : "en"}
+      , "topConceptOf" : {"_about" : "http://vocab.aodn.org.au/def/platform/1", "hasConcept" : "http://vocab.nerc.ac.uk/collection/L06/current/41", "hasTopConcept" : ["http://vocab.nerc.ac.uk/collection/L06/current/41"]}
+      , "type" : ["http://www.w3.org/2000/01/rdf-schema#Resource", "http://www.w3.org/2004/02/skos/core#Concept"]}
+    , "type" : ["http://purl.org/linked-data/api/vocab#ItemEndpoint", "http://purl.org/linked-data/api/vocab#Page"]}
+}

@@ -1,0 +1,41 @@
+{ "format" : "linked-data-api", "version" : "0.2", "result" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=55", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-organisation-vocabulary/version-2-5/concept.json", "extendedMetadataVersion" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=55&_metadata=all", "first" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=0", "isPartOf" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-organisation-vocabulary/version-2-5/concept.json", "hasPart" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=55", "type" : "http://purl.org/linked-data/api/vocab#ListEndpoint"}
+    , "items" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/583", "dctermsCreated" : "2020-01-02T03:16:10Z", "dctermsModified" : "2020-12-17T06:13:15Z", "definition" : "The University of Costa Rica (Spanish: Universidad de Costa Rica, abbreviated UCR) is a public university in the Republic of Costa Rica, in Central America. Its main campus, Ciudad Universitaria Rodrigo Facio, is located in San Pedro Montes de Oca, in the province of San José. It is the oldest and largest institution of higher learning in Costa Rica, originally established as the Universidad de Santo Tomás in 1843. (Courtesy of Wikipedia)", "prefLabel" : {"_value" : "University of Costa Rica (UCR)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/585", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/514", "prefLabel" : {"_value" : "Ships of Opportunity Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2020-01-02T04:44:18Z", "dctermsModified" : "2020-01-02T04:45:16Z", "prefLabel" : {"_value" : "Southern Ocean Plankton Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/584", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/467", "prefLabel" : {"_value" : "Argo Floats Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2020-01-02T04:40:26Z", "dctermsModified" : "2020-12-17T06:13:46Z", "prefLabel" : {"_value" : "Biogeochemical Argo Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/586", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/470", "prefLabel" : {"_value" : "Ocean Gliders Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2020-01-02T04:50:35Z", "dctermsModified" : "2020-12-17T06:14:30Z", "prefLabel" : {"_value" : "Event based sampling Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/587", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/507", "prefLabel" : {"_value" : "Autonomous Underwater Vehicles Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2020-01-02T04:55:18Z", "dctermsModified" : "2020-12-17T06:15:32Z", "prefLabel" : {"_value" : "National Reef Monitoring Network Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/588", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/507", "prefLabel" : {"_value" : "Autonomous Underwater Vehicles Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2020-01-02T04:57:18Z", "dctermsModified" : "2020-12-17T06:35:05Z", "prefLabel" : {"_value" : "Autonomous Underwater Vehicles Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/589", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/507", "prefLabel" : {"_value" : "Autonomous Underwater Vehicles Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2020-01-02T04:58:43Z", "dctermsModified" : "2022-12-22T02:58:10Z", "prefLabel" : {"_value" : "Marine Imagery Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/590", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/477", "prefLabel" : {"_value" : "National Mooring Network Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2020-01-02T05:08:19Z", "dctermsModified" : "2020-12-17T06:17:02Z", "prefLabel" : {"_value" : "Wave Buoys Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/591", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/477", "prefLabel" : {"_value" : "National Mooring Network Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2020-01-02T05:09:51Z", "dctermsModified" : "2020-12-17T06:17:20Z", "prefLabel" : {"_value" : "Larval Fish Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/592", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/477", "prefLabel" : {"_value" : "National Mooring Network Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2020-01-02T05:11:03Z", "dctermsModified" : "2020-12-17T06:17:57Z", "prefLabel" : {"_value" : "Victoria Moorings Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+    }
+    ], "itemsPerPage" : 10, "next" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=56", "page" : 55, "prev" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=54", "startIndex" : 551, "type" : "http://purl.org/linked-data/api/vocab#Page"}
+}

@@ -1,0 +1,214 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=29",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=29&_metadata=all",
+    "first": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=0",
+    "isPartOf": {
+      "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+      "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+      "hasPart": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=29",
+      "type": "http://purl.org/linked-data/api/vocab#ListEndpoint"
+    },
+    "items": [
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/474",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-07-24T00:00:00Z",
+        "dctermsModified": "2017-04-13T05:50:13Z",
+        "definition": "LPG Tanker vessel, which is currently flying the flag of Vanuatu (October 2012).",
+        "prefLabel": {
+          "_value": "Pacific Gas",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/475",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-07-24T00:00:00Z",
+        "dctermsModified": "2017-04-13T05:45:18Z",
+        "definition": "Container ship vessel, which is currently flying the flag of Bermuda (July 2013).",
+        "prefLabel": {
+          "_value": "Mississauga Express",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/5",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/43",
+            "prefLabel": {
+              "_value": "subsurface mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2016-11-09T01:47:35Z",
+        "dctermsModified": "2023-01-25T01:28:09Z",
+        "definition": "The Kangaroo Island, SA Passive Acoustic Observatory, is a series of moorings operated by SARDI (South Australian Research and Development Institute) which collect data west of Kangaroo Island. This observatory was decommissioned in November 2017.",
+        "prefLabel": {
+          "_value": "Kangaroo Island, SA Passive Acoustic Observatory",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/560",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/43",
+            "prefLabel": {
+              "_value": "subsurface mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-10-31T00:00:00Z",
+        "dctermsModified": "2023-02-21T04:57:37Z",
+        "definition": "This calibration site mooring is located in Bass Strait. This is used for the calibration of the TOPEX/Poseidon (T/P) and Jason-1 satellite altimeters. This location lies on the descending (N -> S) pass 088 of the satellite altimeter, and thus shares similar satellite orbit characteristics to the Storm Bay mooring. The use of these two sites allows detailed investigation into the accuracy of the altimeter over two different wave climates. The average significant wave height at Storm Bay is approximately double that observed at the comparatively sheltered Bass Strait location. This mooring is operated by CSIRO.",
+        "prefLabel": {
+          "_value": "Bass Strait Calibration site Mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/561",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/43",
+            "prefLabel": {
+              "_value": "subsurface mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-10-31T00:00:00Z",
+        "dctermsModified": "2023-01-25T01:33:22Z",
+        "definition": "This calibration site mooring is located in Storm Bay. This is used for the calibration of the TOPEX/Poseidon (T/P) and Jason-1 satellite altimeters. This location lies on the descending (N -> S) pass 088 of the satellite altimeter, and thus shares similar satellite orbit characteristics to the Bass Strait mooring. The use of these two sites allows detailed investigation into the accuracy of the altimeter over two different wave climates. The average significant wave height at Storm Bay is approximately double that observed at the comparatively sheltered Bass Strait location. This mooring is operated by CSIRO. This mooring was decommissioned in September 2016.",
+        "prefLabel": {
+          "_value": "Storm Bay Calibration site Mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/6",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/36",
+            "prefLabel": {
+              "_value": "fishing vessel",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2017-01-04T01:52:07Z",
+        "dctermsModified": "2017-04-02T23:33:31Z",
+        "definition": "Fishing vessel, currently flying the Netherlands flag (January 2017)",
+        "prefLabel": {
+          "_value": "Geelong Star",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/65",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-04-10T00:00:00Z",
+        "dctermsModified": "2023-01-25T02:51:48Z",
+        "definition": "The Heron Island North Mooring is operated by AIMS (Australian Institute of Marine Science) and collect data in Great Barrier Reef region. This mooring was decommissioned in March 2013.",
+        "prefLabel": {
+          "_value": "Heron Island North mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/66",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-04-10T00:00:00Z",
+        "dctermsModified": "2023-01-25T03:06:50Z",
+        "definition": "ADCP mooring located at the Maria Island National Reference Station. This mooring is operated by CSIRO.",
+        "prefLabel": {
+          "_value": "Maria Island National Reference Station ADCP mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/67",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/43",
+            "prefLabel": {
+              "_value": "subsurface mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-04-10T00:00:00Z",
+        "dctermsModified": "2023-01-25T01:29:51Z",
+        "definition": "Sub-surface mooring located at the Maria Island National Reference Station. This mooring is operated by CSIRO.",
+        "prefLabel": {
+          "_value": "Maria Island National Reference Station sub-surface mooring",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/68",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/48",
+            "prefLabel": {
+              "_value": "mooring",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-04-10T00:00:00Z",
+        "dctermsModified": "2023-01-25T03:07:22Z",
+        "definition": "Surface mooring located at the Maria Island National Reference Station. This mooring is operated by CSIRO.",
+        "prefLabel": {
+          "_value": "Maria Island National Reference Station surface mooring",
+          "_lang": "en"
+        }
+      }
+    ],
+    "itemsPerPage": 10,
+    "next": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=30",
+    "page": 29,
+    "prev": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=28",
+    "startIndex": 291,
+    "type": "http://purl.org/linked-data/api/vocab#Page"
+  }
+}

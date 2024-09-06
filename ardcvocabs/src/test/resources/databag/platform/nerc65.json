@@ -1,0 +1,33 @@
+{ "format" : "linked-data-api", "version" : "0.2", "result" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/resource.json?uri=http://vocab.nerc.ac.uk/collection/L06/current/65", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/resource.json?uri=http://vocab.nerc.ac.uk/collection/L06/current/65", "extendedMetadataVersion" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/resource.json?_metadata=all&uri=http://vocab.nerc.ac.uk/collection/L06/current/65", "primaryTopic" : {"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/65", "broadMatch" : ["http://vocab.aodn.org.au/def/platform_classes/category/41"], "contributor" : "http://editor.vocabs.ands.org.au/user/eMII_Finney.Kim_Admin", "dcPublisher" : "British Oceanographic Data Centre (BODC)", "dcSource" : "(L061) SeaVoX Platform Categories", "dctermsCreated" : "2013-04-08T00:00:00Z", "dctermsModified" : "2017-02-07T03:52:45Z", "definition" : "A vehicle operating beyond the Earth's atmosphere without human occupants that orbits the Earth at a different rate to the Earth's rotation so it moves over the Earth's surface..", "inScheme" : {"_about" : "http://vocab.aodn.org.au/def/platform/1", "hasConcept" : "http://vocab.nerc.ac.uk/collection/L06/current/65", "hasTopConcept" : ["http://vocab.nerc.ac.uk/collection/L06/current/65"]}
+      , "narrower" : [{"_about" : "http://vocab.aodn.org.au/def/platform/entity/42", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/65"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/49", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/65"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/50", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/65"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/863", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/65"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/864", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/65"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/865", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/65"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/866", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/65"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/867", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/65"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/868", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/65"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/869", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/65"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/870", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/65"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/871", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/65"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/872", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/65"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/873", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/65"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/874", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/65"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/879", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/65"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/881", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/65"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/882", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/65"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/883", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/65"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/884", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/65"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/885", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/65"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/886", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/65"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/887", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/65"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/91", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/65"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/92", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/65"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/93", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/65"]}
+      , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/94", "broader" : ["http://vocab.nerc.ac.uk/collection/L06/current/65"]}
+      ], "prefLabel" : {"_value" : "orbiting satellite", "_lang" : "en"}
+      , "topConceptOf" : {"_about" : "http://vocab.aodn.org.au/def/platform/1", "hasConcept" : "http://vocab.nerc.ac.uk/collection/L06/current/65", "hasTopConcept" : ["http://vocab.nerc.ac.uk/collection/L06/current/65"]}
+      , "type" : ["http://www.w3.org/2000/01/rdf-schema#Resource", "http://www.w3.org/2004/02/skos/core#Concept"]}
+    , "type" : ["http://purl.org/linked-data/api/vocab#ItemEndpoint", "http://purl.org/linked-data/api/vocab#Page"]}
+}

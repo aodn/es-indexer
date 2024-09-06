@@ -1,0 +1,41 @@
+{ "format" : "linked-data-api", "version" : "0.2", "result" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=43", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json", "extendedMetadataVersion" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=43&_metadata=all", "first" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=0", "isPartOf" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json", "hasPart" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=43", "type" : "http://purl.org/linked-data/api/vocab#ListEndpoint"}
+    , "items" : [{"_about" : "http://vocab.aodn.org.au/def/platform/entity/45", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2019-10-16T04:13:11Z", "dctermsModified" : "2020-10-15T05:15:04Z", "definition" : "Container ship vessel, which is currently flying the flag of Liberia (October, 2019).", "prefLabel" : {"_value" : "Hansa Freyburg", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/47", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2019-10-16T04:17:14Z", "dctermsModified" : "2023-07-04T04:39:20Z", "definition" : "Container ship vessel, which is currently flying the flag of Liberia (October, 2019).", "prefLabel" : {"_value" : "Montpellier", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/48", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/36", "prefLabel" : {"_value" : "fishing vessel", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2019-11-13T00:36:07Z", "dctermsModified" : "2019-11-13T00:39:57Z", "definition" : "Trawler fishing vessel, currently flying the New Zealand flag (November 2019)", "prefLabel" : {"_value" : "Tokatu", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/22", "dctermsCreated" : "2020-01-02T00:00:00Z", "dctermsModified" : "2020-01-01T23:10:43Z", "definition" : "A platform operating in the water column attached to a mothership by an umbilical with limited propulsion and no human operator on board (e.g. ROV).", "prefLabel" : {"_value" : "propelled unmanned submersible", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/49", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/65", "prefLabel" : {"_value" : "orbiting satellite", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2020-01-01T23:25:31Z", "dctermsModified" : "2020-01-01T23:28:46Z", "definition" : "This satellite was the 1st flight of the Sentinel-1 programme, providing SAR observation. It operated between April 2014 and is operational until 2021, at an altitude of 693km, in a sunsynchronous orbit. Instrumentation: Synthetic Aperture Radar (C-band).", "prefLabel" : {"_value" : "Sentinel-1A", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/50", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/65", "prefLabel" : {"_value" : "orbiting satellite", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2020-01-01T23:27:29Z", "dctermsModified" : "2020-01-01T23:29:01Z", "definition" : "This satellite was the 2nd flight of the Sentinel-1 programme, providing SAR observation. It operated between April 2016 and is operational until 2023, at an altitude of 693km, in a sunsynchronous orbit. Instrumentation: Synthetic Aperture Radar (C-band).", "prefLabel" : {"_value" : "Sentinel-1B", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.nerc.ac.uk/collection/C17/current/HKC2", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/32", "prefLabel" : {"_value" : "vessel of opportunity", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2020-01-20T00:00:00Z", "definition" : "Container ship vessel, which is currently flying the flag of Hong Kong.", "prefLabel" : {"_value" : "OOCL Le Havre", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/51", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/48", "prefLabel" : {"_value" : "mooring", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2020-05-20T01:43:34Z", "dctermsModified" : "2023-01-25T02:25:55Z", "definition" : "The Bonney Coast Mooring is operated by SARDI (South Australian Research and Development Institute), and collects data off the Victorian coast.", "prefLabel" : {"_value" : "Bonney Coast Mooring", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/52", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/48", "prefLabel" : {"_value" : "mooring", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2020-05-20T01:48:32Z", "dctermsModified" : "2023-01-25T03:05:19Z", "definition" : "The Lynedoch Shoal Mooring is operated by the Australian Institute of Marine Science (AIMS), and collects data on the North West Shelf, WA.", "prefLabel" : {"_value" : "Lynedoch Shoal Mooring", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/platform/entity/53", "broader" : [{"_about" : "http://vocab.nerc.ac.uk/collection/L06/current/48", "prefLabel" : {"_value" : "mooring", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2020-05-20T01:54:53Z", "dctermsModified" : "2023-01-25T02:26:27Z", "definition" : "The Browse Island Mooring is operated by the Australian Institute of Marine Science (AIMS), and collects data on the North West Shelf, WA.", "prefLabel" : {"_value" : "Browse Island Mooring", "_lang" : "en"}
+    }
+    ], "itemsPerPage" : 10, "next" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=44", "page" : 43, "prev" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=42", "startIndex" : 431, "type" : "http://purl.org/linked-data/api/vocab#Page"}
+}

@@ -1,0 +1,119 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=14",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=14&_metadata=all",
+    "first": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=0",
+    "isPartOf": {
+      "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+      "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+      "hasPart": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=14",
+      "type": "http://purl.org/linked-data/api/vocab#ListEndpoint"
+    },
+    "items": [
+      {
+        "_about": "http://vocab.nerc.ac.uk/collection/P01/current/CHLTVOLU",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-10-24T02:20:38Z",
+        "definition": "The mass of all types of chlorophyll per unit volume of the water column held in particles of any size",
+        "prefLabel": {
+          "_value": "Concentration of chlorophyll per unit volume of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.nerc.ac.uk/collection/P01/current/CHUMSS01",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-10-26T01:27:30Z",
+        "prefLabel": {
+          "_value": "Specific humidity of the atmosphere",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.nerc.ac.uk/collection/P01/current/CNDCZZ01",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-10-24T01:07:55Z",
+        "prefLabel": {
+          "_value": "Electrical conductivity of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.nerc.ac.uk/collection/P01/current/CRELZZ01",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-10-24T01:17:39Z",
+        "definition": "The ratio of the amount of water vapour in the air compared to the maximum amount of water vapour that can theoretically be held at the air's temperature",
+        "prefLabel": {
+          "_value": "Relative humidity of the atmosphere",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.nerc.ac.uk/collection/P01/current/CTMPZZ01",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-10-24T01:06:37Z",
+        "definition": "The degree of hotness of the atmosphere expressed against a standard scale.  Includes both IPTS-68 and ITS-90 scales.",
+        "prefLabel": {
+          "_value": "Temperature of the atmosphere",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.nerc.ac.uk/collection/P01/current/CWETZZ01",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-10-24T01:13:27Z",
+        "prefLabel": {
+          "_value": "Wet bulb temperature of the atmosphere",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.nerc.ac.uk/collection/P01/current/ERWDZZ01",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:24:07Z",
+        "prefLabel": {
+          "_value": "Wind direction (relative to moving platform) in the atmosphere",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.nerc.ac.uk/collection/P01/current/ERWSZZ01",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:24:07Z",
+        "prefLabel": {
+          "_value": "Wind speed (relative to moving platform) in the atmosphere",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.nerc.ac.uk/collection/P01/current/ESEWZZXX",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-10-26T01:06:08Z",
+        "definition": "The component of the wind blowing towards true east. The value could result from any kind of measurement or prediction.",
+        "prefLabel": {
+          "_value": "Eastward wind velocity in the atmosphere",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.nerc.ac.uk/collection/P01/current/ESNSZZXX",
+        "dctermsCreated": "2015-05-11T00:00:00Z",
+        "dctermsModified": "2018-10-26T01:24:12Z",
+        "definition": "The component of the wind blowing towards true north. The value could result from any kind of measurement or prediction.",
+        "prefLabel": {
+          "_value": "Northward wind velocity in the atmosphere",
+          "_lang": "en"
+        }
+      }
+    ],
+    "itemsPerPage": 10,
+    "next": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=15",
+    "page": 14,
+    "prev": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-6/concept.json?_page=13",
+    "startIndex": 141,
+    "type": "http://purl.org/linked-data/api/vocab#Page"
+  }
+}

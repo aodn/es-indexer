@@ -1,0 +1,49 @@
+{ "format" : "linked-data-api", "version" : "0.2", "result" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=47", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-organisation-vocabulary/version-2-5/concept.json", "extendedMetadataVersion" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=47&_metadata=all", "first" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=0", "isPartOf" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-organisation-vocabulary/version-2-5/concept.json", "hasPart" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=47", "type" : "http://purl.org/linked-data/api/vocab#ListEndpoint"}
+    , "items" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/504", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/477", "prefLabel" : {"_value" : "National Mooring Network Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2017-09-08T06:35:14Z", "dctermsModified" : "2018-11-15T00:37:22Z", "prefLabel" : {"_value" : "Southern Australia Moorings Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/505", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/477", "prefLabel" : {"_value" : "National Mooring Network Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2017-09-08T06:40:04Z", "dctermsModified" : "2020-12-17T05:56:07Z", "prefLabel" : {"_value" : "Western Australia Moorings Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/506", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/34", "prefLabel" : {"_value" : "Australian Ocean Data Network (AODN)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2017-09-08T06:45:01Z", "dctermsModified" : "2018-03-14T22:33:12Z", "prefLabel" : {"_value" : "IMOS OceanCurrent", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/507", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/133", "prefLabel" : {"_value" : "Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2017-09-11T06:57:49Z", "dctermsModified" : "2020-12-17T06:32:56Z", "narrower" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/587", "prefLabel" : {"_value" : "National Reef Monitoring Network Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/588", "prefLabel" : {"_value" : "Autonomous Underwater Vehicles Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/589", "prefLabel" : {"_value" : "Marine Imagery Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      ], "prefLabel" : {"_value" : "Autonomous Underwater Vehicles Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/508", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/520", "prefLabel" : {"_value" : "Satellite Remote Sensing Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2017-09-11T07:06:44Z", "dctermsModified" : "2018-11-15T00:38:37Z", "prefLabel" : {"_value" : "Ocean Colour Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/509", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/520", "prefLabel" : {"_value" : "Satellite Remote Sensing Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2017-09-11T07:13:14Z", "dctermsModified" : "2018-11-15T00:39:02Z", "prefLabel" : {"_value" : "Satellite Altimetry Calibration and Validation Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/510", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/520", "prefLabel" : {"_value" : "Satellite Remote Sensing Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2017-09-11T07:17:25Z", "dctermsModified" : "2018-11-15T00:44:03Z", "prefLabel" : {"_value" : "Sea Surface Temperature Products Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/511", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/520", "prefLabel" : {"_value" : "Satellite Remote Sensing Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2017-09-11T07:23:28Z", "dctermsModified" : "2018-11-15T00:38:50Z", "prefLabel" : {"_value" : "Remote Sensing Collections Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/512", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/520", "prefLabel" : {"_value" : "Satellite Remote Sensing Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2017-09-11T07:24:43Z", "dctermsModified" : "2018-11-15T00:38:26Z", "prefLabel" : {"_value" : "Ground Stations Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/513", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/520", "prefLabel" : {"_value" : "Satellite Remote Sensing Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2017-09-11T07:25:55Z", "dctermsModified" : "2018-11-15T00:39:28Z", "prefLabel" : {"_value" : "Surface Waves Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+    }
+    ], "itemsPerPage" : 10, "next" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=48", "page" : 47, "prev" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=46", "startIndex" : 471, "type" : "http://purl.org/linked-data/api/vocab#Page"}
+}

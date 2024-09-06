@@ -1,0 +1,41 @@
+{ "format" : "linked-data-api", "version" : "0.2", "result" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=56", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-organisation-vocabulary/version-2-5/concept.json", "extendedMetadataVersion" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=56&_metadata=all", "first" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=0", "isPartOf" : {"_about" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json", "definition" : "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-organisation-vocabulary/version-2-5/concept.json", "hasPart" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=56", "type" : "http://purl.org/linked-data/api/vocab#ListEndpoint"}
+    , "items" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/593", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/477", "prefLabel" : {"_value" : "National Mooring Network Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2020-01-02T05:12:15Z", "dctermsModified" : "2020-12-17T06:18:29Z", "prefLabel" : {"_value" : "Microbial Coastal Sampling Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/594", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/477", "prefLabel" : {"_value" : "National Mooring Network Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2020-01-02T05:16:46Z", "dctermsModified" : "2020-12-17T06:18:46Z", "prefLabel" : {"_value" : "Water Sampling Database Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/595", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/477", "prefLabel" : {"_value" : "National Mooring Network Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2020-01-02T05:19:26Z", "dctermsModified" : "2020-12-17T06:19:26Z", "prefLabel" : {"_value" : "Deep Water Waves Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/596", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/133", "prefLabel" : {"_value" : "Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2020-01-02T05:24:00Z", "dctermsModified" : "2020-12-17T06:19:42Z", "narrower" : ["http://vocab.aodn.org.au/def/organisation/entity/597", "http://vocab.aodn.org.au/def/organisation/entity/598", {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/599", "prefLabel" : {"_value" : "Microbial Genomic Database Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+      }
+      ], "prefLabel" : {"_value" : "Marine Microbiome Initiative Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/597", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/596"], "dctermsCreated" : "2020-01-02T05:25:30Z", "dctermsModified" : "2020-12-17T06:20:00Z", "prefLabel" : {"_value" : "Sample Processing Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/598", "broader" : ["http://vocab.aodn.org.au/def/organisation/entity/596"], "dctermsCreated" : "2020-01-02T05:27:01Z", "dctermsModified" : "2020-01-02T05:28:22Z", "prefLabel" : {"_value" : "Bioinformatics Sub-Facility, Integrated Marine Observing System (IMOS)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/602", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/217", "prefLabel" : {"_value" : "The University of Queensland (UQ)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2020-01-03T05:37:55Z", "dctermsModified" : "2020-12-17T06:24:09Z", "definition" : "The school of Chemistry and Molecular Biosciences teaches across the disciplines of chemistry, biochemistry, microbiology and parasitology.", "prefLabel" : {"_value" : "School of Chemistry and Molecular Biosciences (SCMB), The University of Queensland (UQ)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/600", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/287", "prefLabel" : {"_value" : "Macquarie University", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2020-01-03T05:13:19Z", "dctermsModified" : "2020-01-03T05:17:32Z", "definition" : "The Department of Molecular Sciences (MolSci@MQ) is a research intensive department of academics and students who study and teach chemistry and molecular cell sciences.", "prefLabel" : {"_value" : "Department of Molecular Sciences, Macquarie University", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/601", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/214", "prefLabel" : {"_value" : "School of Biological, Earth and Environmental Sciences (BEES), The University of New South Wales (UNSW)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2020-01-03T05:16:46Z", "dctermsModified" : "2022-05-03T04:22:54Z", "definition" : "The CMSI focuses on researching fundamental knowledge on the functions, processes, interactions and changes in the marine environment and use this to develop innovative solutions for management, conservation and economic developments. It's expertise and experience cover a multidisciplinary mix of ecological and biological sciences, physical and biological oceanography, environmental impact assessment, as well as coastal geomorphology and engineering.", "prefLabel" : {"_value" : "Centre for Marine Science and Innovation (CMSI), School of Biological, Earth and Environmental Sciences (BEES), The University of New South Wales (UNSW)", "_lang" : "en"}
+    }
+    , {"_about" : "http://vocab.aodn.org.au/def/organisation/entity/603", "broader" : [{"_about" : "http://vocab.aodn.org.au/def/organisation/entity/279", "prefLabel" : {"_value" : "James Cook University (JCU)", "_lang" : "en"}
+      }
+      ], "dctermsCreated" : "2020-01-06T22:25:35Z", "dctermsModified" : "2020-12-17T06:33:32Z", "definition" : "As part of the Division of Tropical Environments and Societies, the College of Science and Engineering promotes, supports and administers quality teaching, hands-on experiences, industry placements and research at JCU in the areas of Marine Biology & Aquaculture, Zoology and Ecology, Geoscience, Environmental Management, Information Technology, Physical Sciences, and Engineering. It incorporates the former colleges of Science, Technology and Engineering; and Marine and Environmental Sciences.", "prefLabel" : {"_value" : "College of Science and Engineering (CSE), James Cook University (JCU)", "_lang" : "en"}
+    }
+    ], "itemsPerPage" : 10, "next" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=57", "page" : 56, "prev" : "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-organisation-vocabulary/version-2-5/concept.json?_page=55", "startIndex" : 561, "type" : "http://purl.org/linked-data/api/vocab#Page"}
+}

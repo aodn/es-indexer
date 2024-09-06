@@ -1,0 +1,214 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=16",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=16&_metadata=all",
+    "first": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=0",
+    "isPartOf": {
+      "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+      "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+      "hasPart": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=16",
+      "type": "http://purl.org/linked-data/api/vocab#ListEndpoint"
+    },
+    "items": [
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/25",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2017-06-16T02:21:09Z",
+        "dctermsModified": "2019-03-27T21:37:58Z",
+        "definition": "Container ship vessel, currently flying the flag of Liberia (March 2017).",
+        "prefLabel": {
+          "_value": "ANL Waratah",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/250",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-29T00:00:00Z",
+        "dctermsModified": "2017-04-13T05:38:20Z",
+        "definition": "Bulk Carrier vessel. It was called the Lowlands Prosperity from Aug 2004 until Jan 2012. It is now called the John Oldendorff (Liberia, September 2011).",
+        "prefLabel": {
+          "_value": "Lowlands Prosperity",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/252",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-29T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:32Z",
+        "definition": "Container ship vessel. It was called the CONTSHIP Ambition from 1996 until Dec 2002. It is now called the Pisti (Panama, April 2008).",
+        "prefLabel": {
+          "_value": "Contship Ambition",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/253",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-31T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:32Z",
+        "definition": "General cargo ship vessel. It was called the Bartok from 1990 until 1995. It is now called the Crown Pearl (Panama, April 2010). It was disposed of in approximately 2012.",
+        "prefLabel": {
+          "_value": "Bartok",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/254",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-30T00:00:00Z",
+        "dctermsModified": "2017-04-13T05:48:28Z",
+        "definition": "Container ship vessel. It was called the P&O Nedlloyd Jakarta from 1998 until Feb 2006. It is now called the Maersk Penang (Netherlands, November 2010).",
+        "prefLabel": {
+          "_value": "P&O Nedlloyd Jakarta",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/255",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-30T00:00:00Z",
+        "dctermsModified": "2017-04-13T05:49:20Z",
+        "definition": "Container ship vessel. It was called the P&O Nedlloyd Sydney from 1998 until Feb 2006. It is now called the Maersk Pembroke (Netherlands, January 2011).",
+        "prefLabel": {
+          "_value": "P&O Nedlloyd Sydney",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/256",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-30T00:00:00Z",
+        "dctermsModified": "2017-04-13T05:46:01Z",
+        "definition": "Container ship vessel. It was called the Raleigh Bay from Aug 1994 to Oct 1996. It is now called the Jupiter (Tuvalu, December 2008). It was disposed of in approximately 2012.",
+        "prefLabel": {
+          "_value": "Nedlloyd Raleigh Bay",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/257",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-30T00:00:00Z",
+        "dctermsModified": "2020-10-15T04:47:45Z",
+        "definition": "Container ship vessel. It was called the P&O Nedlloyd Brisbane from Jan 1997 to Jan 2006. It is now called the Jupiter (Tuvalu, December 2008). It was disposed of in approximately 2012.",
+        "prefLabel": {
+          "_value": "P&O Nedlloyd Brisbane",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/258",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2013-05-31T00:00:00Z",
+        "dctermsModified": "2017-02-07T03:52:31Z",
+        "definition": "Containter ship vessel, which is flying the flag of Hong Kong (May, 2013).",
+        "prefLabel": {
+          "_value": "Maersk Aberdeen",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/platform/entity/26",
+        "broader": [
+          {
+            "_about": "http://vocab.nerc.ac.uk/collection/L06/current/32",
+            "prefLabel": {
+              "_value": "vessel of opportunity",
+              "_lang": "en"
+            }
+          }
+        ],
+        "dctermsCreated": "2017-06-16T02:22:27Z",
+        "dctermsModified": "2017-06-16T02:23:33Z",
+        "definition": "Container ship vessel which was known as the ANL Whyalla from 2009 until 2015. It is now known as the SCT Vietnam.",
+        "prefLabel": {
+          "_value": "ANL Whyalla",
+          "_lang": "en"
+        }
+      }
+    ],
+    "itemsPerPage": 10,
+    "next": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=17",
+    "page": 16,
+    "prev": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json?_page=15",
+    "startIndex": 161,
+    "type": "http://purl.org/linked-data/api/vocab#Page"
+  }
+}
