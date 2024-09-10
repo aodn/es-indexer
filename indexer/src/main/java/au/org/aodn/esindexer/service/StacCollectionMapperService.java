@@ -459,21 +459,30 @@ public abstract class StacCollectionMapperService {
 
     protected String mapThemesDescription(MDKeywordsPropertyType descriptiveKeyword, String uuid) {
         return safeGet(() -> descriptiveKeyword.getMDKeywords().getThesaurusName())
-                .map(abstractCitationPropertyType -> {
-                    if(abstractCitationPropertyType.getAbstractCitation().getValue() instanceof CICitationType2 thesaurusNameType2) {
-                        CharacterStringPropertyType titleString = thesaurusNameType2.getTitle();
-                        if (titleString != null && titleString.getCharacterString().getValue() instanceof AnchorType value) {
-                            if (value.getTitleAttribute() != null) {
-                                return value.getTitleAttribute();
-                            } else {
+                .map(abstractCitationPropertyType ->
+                    safeGet(() -> abstractCitationPropertyType.getAbstractCitation().getValue())
+                            .map(v -> (CICitationType2)v)
+                            .map(thesaurusNameType2 -> {
+                                CharacterStringPropertyType titleString = thesaurusNameType2.getTitle();
+                                if (titleString != null && titleString.getCharacterString().getValue() instanceof AnchorType value) {
+                                    if (value.getTitleAttribute() != null) {
+                                        return value.getTitleAttribute();
+                                    } else {
+                                        return "";
+                                    }
+                                }
+                                else if (titleString != null && titleString.getCharacterString().getValue() instanceof String value) {
+                                    return thesaurusNameType2.getAlternateTitle().stream().map(CharacterStringPropertyType::getCharacterString).map(JAXBElement::getValue).map(Object::toString).collect(Collectors.joining(", "));
+                                }
+                                else {
+                                    return "";
+                                }
+                            })
+                            .orElseGet(() -> {
+                                logger.debug("Unable to find abstract citation for metadata record: {}", uuid);
                                 return "";
-                            }
-                        } else if (titleString != null && titleString.getCharacterString().getValue() instanceof String value) {
-                            return thesaurusNameType2.getAlternateTitle().stream().map(CharacterStringPropertyType::getCharacterString).map(JAXBElement::getValue).map(Object::toString).collect(Collectors.joining(", "));
-                        }
-                    }
-                    return "";
-                })
+                            })
+                )
                 .orElseGet(() -> {
                     logger.debug("Unable to find themes' description for metadata record: {}", uuid);
                     return "";
