@@ -12,13 +12,15 @@ import java.util.Set;
 public class GcmdKeywordUtils {
 
     private String getLastWord(String keyword) {
+        String result;
         if (keyword.contains("|")) {
-            return keyword.substring(keyword.lastIndexOf("|") + 1).strip();
+            result = keyword.substring(keyword.lastIndexOf("|") + 1).strip();
         } else if (keyword.contains(">")) {
-            return keyword.substring(keyword.lastIndexOf(">") + 1).strip();
+            result = keyword.substring(keyword.lastIndexOf(">") + 1).strip();
         } else {
-            return keyword.strip();
+            result = keyword.strip();
         }
+        return result;
     }
 
     public List<String> extractGcmdKeywordLastWords(StacCollectionModel stacCollectionModel) {
@@ -27,10 +29,16 @@ public class GcmdKeywordUtils {
         for (ThemesModel themesModel : themes) {
             if ((themesModel.getTitle().toLowerCase().contains("gcmd") || themesModel.getTitle().toLowerCase().contains("global change master directory")) && !themesModel.getTitle().toLowerCase().contains("palaeo temporal coverage")) {
                 for (ConceptModel conceptModel : themesModel.getConcepts()) {
-                    keywords.add(getLastWord(conceptModel.getId().replace("\"", "")));
+                    if (conceptModel.getId() != null && !conceptModel.getId().isEmpty()) {
+                        keywords.add(getLastWord(conceptModel.getId().replace("\"", "")).toUpperCase());
+                    }
                 }
             }
         }
         return new ArrayList<>(keywords);
+    }
+
+    protected String getParameterVocabByGcmdKeywordLastWord(String gcmdKeywordLastWord) {
+        return gcmdKeywordLastWord;
     }
 }
