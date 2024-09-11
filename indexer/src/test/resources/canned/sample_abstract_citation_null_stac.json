@@ -3,7 +3,7 @@
   "description" : "This record describes the Underway (UWY) data collected from the Marine National Facility (MNF) RV Investigator research voyage in2017_v01, titled \"Interactions of the Totten Glacier with the Southern Ocean through multiple glacial cycles.\" The voyage took place from Hobart (TAS) to Hobart between the 14th January and 5th March, 2017.\n\n                    Standard Underway data is continuously recorded, it consists of:\n                    (1) NAV: Navigation data: (dual GPS) Latitude, Longitude, Speed, Heading, course over ground, Gyros, and Doppler Log.\n                    (2) TSG:  Thermosalinograph: Water Salinity, flow-rate, Temperature, Fluorescence, and pCO2.\n                    (3) MET: Atmospheric (port and starboard): Humidity, Wind speed and direction (vane and ultrasonic), Radiometer, Pyranometer, PAR, Air temperature, Air pressure, Rain, Ozone and Trace gases.\n\n                    Data are recorded at 5 second intervals. Near  real-time data is available via the link below. This dataset will be processed and archived within the  CSIRO Oceans & Atmosphere Data Centre in Hobart. Data is available in 5sec intervals in NetCDF, 10 sec and 5 min intervals in ascii format. Additional information regarding this dataset is contained in the cruise report for this voyage and/or the data processing report.",
   "extent" : {
     "bbox" : [ [ 113.7, -65.7, 147.5, -42.8 ], [ 113.7, -65.7, 147.5, -42.8 ] ],
-    "temporal" : [ [ "2017-01-13T13:00:00Z", "2016-03-03T13:00:00Z" ], [ "2017-01-13T13:00:00Z", "2016-03-03T13:00:00Z" ] ]
+    "temporal" : [ [ "2017-01-13T13:00:00Z", "2016-03-04T12:59:59Z" ], [ "2017-01-13T13:00:00Z", "2016-03-04T12:59:59Z" ] ]
   },
   "summaries" : {
     "score" : 1,
@@ -21,7 +21,7 @@
     },
     "temporal" : [ {
       "start" : "2017-01-13T13:00:00Z",
-      "end" : "2016-03-03T13:00:00Z"
+      "end" : "2016-03-04T12:59:59Z"
     } ]
   },
   "contacts" : [ {

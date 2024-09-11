@@ -3,7 +3,7 @@
   "description" : "This record describes the End of Voyage (EOV) archive from the Marine National Facility (MNF) RV Investigator research voyage IN2019_V06, titled \"Tropical observations of atmospheric convection, biogenic emissions, ocean mixing, and processes generating intraseasonal SST variability.\" The voyage took place from Darwin (NT) to Darwin between October 19 and December 17, 2019 (AEST).\n\n                    For further information please refer to the voyage documentation links below.\n\n                    Instruments used and data collected include:\n                    Regular measurements:\n                    Acoustic Doppler Current Profiler (ADCP; 75, 150 KHz ), Lowered ADCP (LADCP), Disdrometer, Fisheries echosounder (EK60), Multibeam Echosounder (EM710, EM122), Sub-bottom Profiler (SBP120), Gravimeter, GPS Positioning System, Doppler Velocity Log, Atmospheric Temperature, Humidity, Pressure, Wind and Rain sensors, Photosynthetically Active Radiation (PAR) sensor, Precision Infrared Radiometer (PIR), Precision Spectral Pyranometer (PSP), Nephelometer, pCO2, Condensation Particle Counters (CPC), Cloud Condensation Nuclei counter (CCN), Multiangle Absorption Photometer (MAAP), Starboard and Portside Radiometers, Ozone sensors, Weather Radar, Greenhouse Gas Analysers (Aerodyne, Picarro), Infrared Sea Surface Temperature Autonomous Radiometer (ISAR), Fluorometer, Oxygen optode, Thermosalinographs (TSG), CTD, Hydrochemistry, Expendable Bathythermographs (XBTs).\n\n                    Voyage-specific measurements:\n                    AIRBOX (TSI 3772 Condensation Particle Counter (3772CPC), Black Carbon sensor (Aethalometer), Aerosol mass spectrometer (AMS), Chemical Ionisation Mass Spectrometer (CIMS), Cloud Radar (BASTA), Weather Station, Multi-AXis Differential Optical Absorption Spectrometer (MAX-DOAS), mini Micro-Pulse LIDAR (miniMPL), Neutral Cluster Air Ion Spectrometer (NAIS), Radon sensor, Cloud and Aerosol Backscatter Lidar (RMAN), Scanning Mobility Particle Sizers (SMPS), Sonic Anemometer, Greenhouse Gas Analyser (Fourier Transform Infrared (FTIR) spectrometer - Spectronus), Mercury Analyser (Tekran), Gas Chromatograph - Electron Capture Detector (uDirac), Volatility-Hygroscopicity Tandem Differential Mobility Analyser (VH-TDMA)), Radiosondes, Wave-powered Profiler (Wirewalker), Sea State cameras, Triaxus, ECO Triplet, Sound Velocity Profile (SVP).\n\n                    The archive for the IN2019_V06 EOV raw data is curated by the CSIRO NCMI Information and Data Centre (IDC) in Hobart, with a permanent archive at the CSIRO Data Access Portal (DAP, https://data.csiro.au/dap/), providing access to participants and processors of the data collected in the voyage.\n\n                    All voyage documentation is available electronically to MNF support via the local network. Access to voyage documentation for non-CSIRO participants can be made via NCMI_DataLibrarians@csiro.au.",
   "extent" : {
     "bbox" : [ [ 120.55, -14.68, 133.45, -10.8 ], [ 120.55, -14.68, 133.45, -10.8 ] ],
-    "temporal" : [ [ "2019-10-18T13:00:00Z", "2019-12-16T13:00:00Z" ], [ "2019-10-18T13:00:00Z", "2019-12-16T13:00:00Z" ] ]
+    "temporal" : [ [ "2019-10-18T13:00:00Z", "2019-12-17T12:59:59Z" ], [ "2019-10-18T13:00:00Z", "2019-12-17T12:59:59Z" ] ]
   },
   "summaries" : {
     "score" : 1,
@@ -26,7 +26,7 @@
     },
     "temporal" : [ {
       "start" : "2019-10-18T13:00:00Z",
-      "end" : "2019-12-16T13:00:00Z"
+      "end" : "2019-12-17T12:59:59Z"
     } ]
   },
   "contacts" : [ {
