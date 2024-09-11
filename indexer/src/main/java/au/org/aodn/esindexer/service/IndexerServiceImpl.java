@@ -2,6 +2,7 @@ package au.org.aodn.esindexer.service;
 
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.exception.*;
+import au.org.aodn.esindexer.utils.GcmdKeywordUtils;
 import au.org.aodn.esindexer.utils.JaxbUtils;
 import au.org.aodn.metadata.iso19115_3_2018.MDMetadataType;
 import au.org.aodn.stac.model.StacCollectionModel;
@@ -41,6 +42,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Slf4j
 @Service
@@ -171,9 +174,11 @@ public class IndexerServiceImpl implements IndexerService {
         stacCollectionModel.getSummaries().setScore(score);
 
         // parameter vocabs
+        List<String> mappedParameterVocabsFromGcmdKeywords = GcmdKeywordUtils.getMappedParameterVocabsFromGcmdKeywords(stacCollectionModel.getThemes());
         List<String> processedParameterVocabs = vocabService.extractVocabLabelsFromThemes(stacCollectionModel.getThemes(), AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS);
+
         if (!processedParameterVocabs.isEmpty()) {
-            stacCollectionModel.getSummaries().setParameterVocabs(processedParameterVocabs);
+            stacCollectionModel.getSummaries().setParameterVocabs(Stream.concat(mappedParameterVocabsFromGcmdKeywords.stream(), processedParameterVocabs.stream()).distinct().collect(Collectors.toList()));
         }
 
         /*
