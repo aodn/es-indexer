@@ -50,8 +50,10 @@ public class GcmdKeywordUtils {
 
         List<String> gcmdKeywordLastWords = extractGcmdKeywordLastWords(themes);
 
-        for (String gcmdKeywordLastWord : gcmdKeywordLastWords) {
-            results.add(getParameterVocabByGcmdKeywordLastWord(gcmdKeywordLastWord));
+        if (!gcmdKeywordLastWords.isEmpty()) {
+            for (String gcmdKeywordLastWord : gcmdKeywordLastWords) {
+                results.add(getParameterVocabByGcmdKeywordLastWord(gcmdKeywordLastWord));
+            }
         }
 
         return new ArrayList<>(results);
