@@ -92,6 +92,12 @@ public class IndexerServiceImpl implements IndexerService {
         this.vocabService = vocabService;
     }
 
+    protected GcmdKeywordUtils gcmdKeywordUtils;
+    @Autowired
+    public void setGcmdKeywordUtils(GcmdKeywordUtils gcmdKeywordUtils) {
+        this.gcmdKeywordUtils = gcmdKeywordUtils;
+    }
+
     public Hit<ObjectNode> getDocumentByUUID(String uuid) throws IOException {
         try {
             SearchResponse<ObjectNode> response = portalElasticsearchClient
@@ -174,7 +180,7 @@ public class IndexerServiceImpl implements IndexerService {
         stacCollectionModel.getSummaries().setScore(score);
 
         // parameter vocabs
-        List<String> mappedParameterVocabsFromGcmdKeywords = GcmdKeywordUtils.getMappedParameterVocabsFromGcmdKeywords(stacCollectionModel.getThemes());
+        List<String> mappedParameterVocabsFromGcmdKeywords = gcmdKeywordUtils.getMappedParameterVocabsFromGcmdKeywords(stacCollectionModel.getThemes());
         List<String> processedParameterVocabs = vocabService.extractVocabLabelsFromThemes(stacCollectionModel.getThemes(), AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS);
 
         if (!processedParameterVocabs.isEmpty()) {

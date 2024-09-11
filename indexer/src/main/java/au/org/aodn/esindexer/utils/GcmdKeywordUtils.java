@@ -2,15 +2,23 @@ package au.org.aodn.esindexer.utils;
 
 import au.org.aodn.stac.model.ConceptModel;
 import au.org.aodn.stac.model.ThemesModel;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+import org.springframework.util.ResourceUtils;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import javax.annotation.PostConstruct;
+import java.io.*;
+import java.nio.file.Files;
+import java.util.*;
 
+
+@Slf4j
+@Component
 public class GcmdKeywordUtils {
 
-    private static String getLastWord(String keyword) {
+    protected Map<String, String> gcmdMapping;
+
+    private String getLastWord(String keyword) {
         String result;
         if (keyword.contains("|")) {
             result = keyword.substring(keyword.lastIndexOf("|") + 1).strip();
@@ -22,7 +30,38 @@ public class GcmdKeywordUtils {
         return result;
     }
 
-    protected static List<String> extractGcmdKeywordLastWords(List<ThemesModel> themes) {
+
+    private static String readResourceFile(String path) throws IOException {
+        File f = ResourceUtils.getFile(path);
+        return new String(Files.readAllBytes(f.toPath()));
+    }
+
+    // Load the CSV file into a HashMap
+    @PostConstruct
+    protected void loadCsvToMap(String path) {
+        try {
+            // Read the file as a single String
+            String fileContent = readResourceFile(path);
+
+            // Split the content into lines
+            String[] lines = fileContent.split("\\r?\\n");
+
+            // Process each line
+            for (String line : lines) {
+                // Split the line into key and value based on comma
+                String[] parts = line.split(",");
+                if (parts.length >= 2) {
+                    String key = parts[0].trim();
+                    String value = parts[1].trim();
+                    gcmdMapping.put(key, value);
+                }
+            }
+        } catch (IOException e) {
+            log.error(e.getMessage());
+        }
+    }
+
+    protected List<String> extractGcmdKeywordLastWords(List<ThemesModel> themes) {
         Set<String> keywords = new HashSet<>();
         for (ThemesModel themesModel : themes) {
             if ((themesModel.getTitle().toLowerCase().contains("gcmd") || themesModel.getTitle().toLowerCase().contains("global change master directory")) && !themesModel.getTitle().toLowerCase().contains("palaeo temporal coverage")) {
@@ -36,16 +75,11 @@ public class GcmdKeywordUtils {
         return new ArrayList<>(keywords);
     }
 
-    protected static String getParameterVocabByGcmdKeywordLastWord(String gcmdKeywordLastWord) {
-        String result;
-
-        // TODO: implement the mapping schema here
-        result = gcmdKeywordLastWord;
-
-        return gcmdKeywordLastWord;
+    protected String getParameterVocabByGcmdKeywordLastWord(String gcmdKeywordLastWord) {
+        return gcmdMapping.getOrDefault(gcmdKeywordLastWord, "");
     }
 
-    public static List<String> getMappedParameterVocabsFromGcmdKeywords(List<ThemesModel> themes) {
+    public List<String> getMappedParameterVocabsFromGcmdKeywords(List<ThemesModel> themes) {
         Set<String> results = new HashSet<>();
 
         List<String> gcmdKeywordLastWords = extractGcmdKeywordLastWords(themes);
