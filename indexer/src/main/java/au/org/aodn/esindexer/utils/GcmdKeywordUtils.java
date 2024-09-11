@@ -23,7 +23,7 @@ public class GcmdKeywordUtils {
         return result;
     }
 
-    public List<String> extractGcmdKeywordLastWords(StacCollectionModel stacCollectionModel) {
+    protected List<String> extractGcmdKeywordLastWords(StacCollectionModel stacCollectionModel) {
         Set<String> keywords = new HashSet<>();
         List<ThemesModel> themes = stacCollectionModel.getThemes();
         for (ThemesModel themesModel : themes) {
@@ -39,6 +39,23 @@ public class GcmdKeywordUtils {
     }
 
     protected String getParameterVocabByGcmdKeywordLastWord(String gcmdKeywordLastWord) {
+        String result;
+
+        // TODO: implement the mapping schema here
+        result = gcmdKeywordLastWord;
+
         return gcmdKeywordLastWord;
+    }
+
+    public List<String> getMappedParameterVocabsFromGcmdKeywords(StacCollectionModel stacCollectionModel) {
+        Set<String> results = new HashSet<>();
+
+        List<String> gcmdKeywordLastWords = extractGcmdKeywordLastWords(stacCollectionModel);
+
+        for (String gcmdKeywordLastWord : gcmdKeywordLastWords) {
+            results.add(getParameterVocabByGcmdKeywordLastWord(gcmdKeywordLastWord));
+        }
+
+        return new ArrayList<>(results);
     }
 }
