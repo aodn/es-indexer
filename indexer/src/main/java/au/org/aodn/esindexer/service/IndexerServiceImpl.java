@@ -60,7 +60,8 @@ public class IndexerServiceImpl implements IndexerService {
     protected JaxbUtils<MDMetadataType> jaxbUtils;
     protected RankingService rankingService;
     protected VocabService vocabService;
-
+    protected GcmdKeywordUtils gcmdKeywordUtils;
+    
     protected static final long DEFAULT_BACKOFF_TIME = 3000L;
 
     @Lazy
@@ -78,7 +79,8 @@ public class IndexerServiceImpl implements IndexerService {
             ElasticsearchClient portalElasticsearchClient,
             ElasticSearchIndexService elasticSearchIndexService,
             StacCollectionMapperService stacCollectionMapperService,
-            VocabService vocabService
+            VocabService vocabService,
+            GcmdKeywordUtils gcmdKeywordUtils
     ) {
         this.indexName = indexName;
         this.tokensAnalyserName = tokensAnalyserName;
@@ -90,11 +92,6 @@ public class IndexerServiceImpl implements IndexerService {
         this.elasticSearchIndexService = elasticSearchIndexService;
         this.stacCollectionMapperService = stacCollectionMapperService;
         this.vocabService = vocabService;
-    }
-
-    protected GcmdKeywordUtils gcmdKeywordUtils;
-    @Autowired
-    public void setGcmdKeywordUtils(GcmdKeywordUtils gcmdKeywordUtils) {
         this.gcmdKeywordUtils = gcmdKeywordUtils;
     }
 

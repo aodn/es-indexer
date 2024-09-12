@@ -16,7 +16,12 @@ import java.util.*;
 @Component
 public class GcmdKeywordUtils {
 
-    protected Map<String, String> gcmdMapping;
+    protected Map<String, String> gcmdMapping = new HashMap<>();
+
+    @PostConstruct
+    public void init() {
+        loadCsvToMap("classpath:config_files/gcmd-mapping.csv");
+    }
 
     private String getLastWord(String keyword) {
         String result;
@@ -37,8 +42,7 @@ public class GcmdKeywordUtils {
     }
 
     // Load the CSV file into a HashMap
-    @PostConstruct
-    protected void loadCsvToMap(String path) {
+    private void loadCsvToMap(String path) {
         try {
             // Read the file as a single String
             String fileContent = readResourceFile(path);
@@ -86,7 +90,10 @@ public class GcmdKeywordUtils {
 
         if (!gcmdKeywordLastWords.isEmpty()) {
             for (String gcmdKeywordLastWord : gcmdKeywordLastWords) {
-                results.add(getParameterVocabByGcmdKeywordLastWord(gcmdKeywordLastWord));
+                String mappedParameterVocab = getParameterVocabByGcmdKeywordLastWord(gcmdKeywordLastWord);
+                if (!mappedParameterVocab.isEmpty()) {
+                    results.add(mappedParameterVocab);
+                }
             }
         }
 
