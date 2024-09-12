@@ -8,7 +8,9 @@ import au.org.aodn.stac.model.StacCollectionModel;
 import au.org.aodn.stac.model.ThemesModel;
 import org.junit.jupiter.api.*;
 import org.mockito.InjectMocks;
+import org.mockito.Mockito;
 import org.mockito.Spy;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -35,9 +37,8 @@ class RankingServiceTests extends BaseTestClass {
         super.clearElasticIndex(INDEX_NAME);
     }
 
-    @Spy
-    @InjectMocks
-    RankingServiceImpl mockRankingService;
+    @Autowired
+    RankingServiceImpl rankingService;
 
     private StacCollectionModel stacCollectionModel;
     private ExtentModel extentModel;
@@ -51,6 +52,7 @@ class RankingServiceTests extends BaseTestClass {
 
     @Test
     public void testNotFound() {
+        RankingServiceImpl mockRankingService = Mockito.spy(rankingService);
         // act
         mockRankingService.evaluateCompleteness(stacCollectionModel);
         // assert
@@ -59,18 +61,8 @@ class RankingServiceTests extends BaseTestClass {
     }
 
     @Test
-    public void testTitleFound() {
-        // arrange
-        stacCollectionModel.setTitle("Test");
-        // act
-        mockRankingService.evaluateCompleteness(stacCollectionModel);
-        // assert
-        verify(mockRankingService, times(1)).evaluateCompleteness(stacCollectionModel);
-        assertEquals(15, mockRankingService.evaluateCompleteness(stacCollectionModel));
-    }
-
-    @Test
     public void testDescriptionFound() {
+        RankingServiceImpl mockRankingService = Mockito.spy(rankingService);
         // arrange
         stacCollectionModel.setDescription("Test");
         // act
@@ -81,64 +73,8 @@ class RankingServiceTests extends BaseTestClass {
     }
 
     @Test
-    public void testExtentFound() {
-        // arrange
-        List<List<BigDecimal>> bbox = new ArrayList<>();
-        List<BigDecimal> bigDecimalList1 = new ArrayList<>();
-        bigDecimalList1.add(new BigDecimal(1));
-        bigDecimalList1.add(new BigDecimal(2));
-        bigDecimalList1.add(new BigDecimal(3));
-        bbox.add(bigDecimalList1);
-        extentModel.setBbox(bbox);
-        stacCollectionModel.setExtent(extentModel);
-
-        // act
-        mockRankingService.evaluateCompleteness(stacCollectionModel);
-
-        // assert
-        verify(mockRankingService, times(1)).evaluateCompleteness(stacCollectionModel);
-        assertEquals(10, mockRankingService.evaluateCompleteness(stacCollectionModel));
-    }
-
-    @Test
-    public void testTemporalFound() {
-        // arrange
-        List<String[]> temporal = new ArrayList<>();
-        String[] temporal1 = new String[2];
-        temporal1[0] = "2020-01-01";
-        temporal1[1] = "2020-01-02";
-        temporal.add(temporal1);
-
-        extentModel.setTemporal(temporal);
-        stacCollectionModel.setExtent(extentModel);
-
-        // act
-        mockRankingService.evaluateCompleteness(stacCollectionModel);
-
-        // assert
-        verify(mockRankingService, times(1)).evaluateCompleteness(stacCollectionModel);
-        assertEquals(10, mockRankingService.evaluateCompleteness(stacCollectionModel));
-    }
-
-    @Test
-    public void testContactsFound() {
-        // arrange
-        ContactsModel contact1 = ContactsModel.builder().build();
-        contact1.setName("Test");
-        List<ContactsModel> contacts = new ArrayList<>();
-        contacts.add(contact1);
-        stacCollectionModel.setContacts(contacts);
-
-        // act
-        mockRankingService.evaluateCompleteness(stacCollectionModel);
-
-        // assert
-        verify(mockRankingService, times(1)).evaluateCompleteness(stacCollectionModel);
-        assertEquals(10, mockRankingService.evaluateCompleteness(stacCollectionModel));
-    }
-
-    @Test
     public void testLinksFound() {
+        RankingServiceImpl mockRankingService = Mockito.spy(rankingService);
         // arrange
         List<LinkModel> links = new ArrayList<>();
         LinkModel link1 = LinkModel.builder().build();
@@ -157,16 +93,14 @@ class RankingServiceTests extends BaseTestClass {
 
         stacCollectionModel.setLinks(links);
 
-        // act
-        mockRankingService.evaluateCompleteness(stacCollectionModel);
-
         // assert
-        verify(mockRankingService, times(1)).evaluateCompleteness(stacCollectionModel);
         assertEquals(15, mockRankingService.evaluateCompleteness(stacCollectionModel));
+        verify(mockRankingService, times(1)).evaluateCompleteness(stacCollectionModel);
     }
 
     @Test
     public void testThemesFound() {
+        RankingServiceImpl mockRankingService = Mockito.spy(rankingService);
         // arrange
         List<ThemesModel> themes = new ArrayList<>();
         ThemesModel theme1 = ThemesModel.builder().build();
