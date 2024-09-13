@@ -206,7 +206,8 @@ public class StacCollectionMapperServiceTests {
         var a = lastRequest.get().document().toString();
         Map<?,?> content3 = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
         String out3 = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content3);
-        JSONAssert.assertEquals(objectMapper.readTree(expected3).toPrettyString(),
+        JSONAssert.assertEquals(
+                objectMapper.readTree(expected3).toPrettyString(),
                 objectMapper.readTree(out3.strip()).toPrettyString(),
                 JSONCompareMode.STRICT);
     }
@@ -422,4 +423,25 @@ public class StacCollectionMapperServiceTests {
                 objectMapper.readTree(out.strip()).toPrettyString(),
                 JSONCompareMode.STRICT
         );
-    }}
+    }
+    /**
+     * The date field contains year only or year-month only. We need to handle this case.
+     *
+     * @throws IOException - Do not expect to throw
+     */
+    @Test
+    public void verifyMalformDateTimeWorks() throws IOException, JSONException {
+        String xml = readResourceFile("classpath:canned/sample_malform_date.xml");
+        String expected = readResourceFile("classpath:canned/sample_malform_date_stac.json");
+        indexerService.indexMetadata(xml);
+
+        Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
+        String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
+        log.info(out);
+        JSONAssert.assertEquals(
+                objectMapper.readTree(expected).toPrettyString(),
+                objectMapper.readTree(out.strip()).toPrettyString(),
+                JSONCompareMode.STRICT
+        );
+    }
+}

@@ -3,7 +3,7 @@
   "description" : "The Bonney Coast (BONC) HF ocean radar system covers an area of the Bonney Coast, South Australia, which has a recurring annual upwelling feature near to the coast that significantly changes the ecosystem from one of warm water originating in Western Australia, to one dominated by cold upwelling water from off the continental shelf. The dynamics of this area and the relationship between ocean circulation, chemistry and sediments control the larval species and the higher marine species and ecosystems in which they forage. The data from this site provide linking observations between the Southern Ocean and NSW through processes that occur on weekly to El Nino time scales. The BONC HF ocean radar system consists of two SeaSonde crossed loop direction finding stations located at Nora Creina (37.329 S 139.850 E) and Blackfellows Cave (37.940 S 140.457 E). These radars operate at a frequency of 5.211 MHz, with a bandwidth of 50 KHz, a maximum range of 200 Km and a range resolution of 3 Km. Within the HF radar coverage area surface currents are measured. This site was decommissioned in March 2017.",
   "extent" : {
     "bbox" : [ [ 138.2, -39.4, 140.8, -37.0 ], [ 138.2, -39.4, 140.8, -37.0 ] ],
-    "temporal" : [ [ "2010-01-21T01:00:00Z", "2017-03-26T13:00:00Z" ], [ "2010-01-21T01:00:00Z", "2017-03-26T13:00:00Z" ] ]
+    "temporal" : [ [ "2010-01-21T01:00:00Z", "2017-03-27T12:59:59Z" ], [ "2010-01-21T01:00:00Z", "2017-03-27T12:59:59Z" ] ]
   },
   "summaries" : {
     "score" : 90,
@@ -27,7 +27,7 @@
     },
     "temporal" : [ {
       "start" : "2010-01-21T01:00:00Z",
-      "end" : "2017-03-26T13:00:00Z"
+      "end" : "2017-03-27T12:59:59Z"
     } ]
   },
   "contacts" : [ {

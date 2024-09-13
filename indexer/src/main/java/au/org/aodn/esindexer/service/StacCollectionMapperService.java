@@ -21,9 +21,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.time.ZoneId;
-import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.function.Function;
@@ -130,13 +128,13 @@ public abstract class StacCollectionMapperService {
                         if (pair0.isEmpty()) {
                             pair0 = safeGet(() -> timePeriodType.getBeginPosition().getValue().get(0));
                         }
-                        pair0.ifPresent(pair -> temporalPair[0] = convertDateToZonedDateTime(this.mapUUID(source), pair));
+                        pair0.ifPresent(pair -> temporalPair[0] = convertDateToZonedDateTime(this.mapUUID(source), pair, true));
 
                         var pair1 = safeGet(() -> timePeriodType.getEnd().getTimeInstant().getTimePosition().getValue().get(0));
                         if (pair1.isEmpty()) {
                             pair1 = safeGet(() -> timePeriodType.getEndPosition().getValue().get(0));
                         }
-                        pair1.ifPresent(pair -> temporalPair[1] = convertDateToZonedDateTime(this.mapUUID(source), pair));
+                        pair1.ifPresent(pair -> temporalPair[1] = convertDateToZonedDateTime(this.mapUUID(source), pair, false));
                     }
 
                     result.add(temporalPair);
@@ -145,25 +143,65 @@ public abstract class StacCollectionMapperService {
         }
         return result;
     }
-
-    private String convertDateToZonedDateTime(String uuid, String inputDateString) {
-
-        String inputDateTimeString = inputDateString;
-        if (!inputDateString.contains("T")) {
-            inputDateTimeString += "T00:00:00";
-        }
-
+    /**
+     * If the date missing month / day / time then we will add it back by making it cover a range that is as wide as
+     * possible. So for example if only year then it will be first date of year and end date of that year.
+     *
+     * @param uuid - The uuid of the record
+     * @param dateStr - The date value in the XML
+     * @param isStartDate - Is it processing start date?
+     * @return - Well format date time string
+     */
+    private String convertDateToZonedDateTime(String uuid, String dateStr, boolean isStartDate) {
+        ZonedDateTime utcZonedDateTime = null;
+        String convertedDateTime = null;
         try {
-            ZonedDateTime zonedDateTime = ZonedDateTime.parse(inputDateTimeString, TemporalUtils.TIME_FORMATTER.withZone(ZoneId.of(timeZoneId)));
+            // Case 1: Date and Time (e.g., "2024-09-10T10:15:30")
+            if (dateStr.matches("\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}")) {
+                // Do nothing
+                convertedDateTime = dateStr;
+                ZonedDateTime zt = ZonedDateTime.parse(convertedDateTime, TemporalUtils.TIME_FORMATTER.withZone(ZoneId.of(timeZoneId)));
+                utcZonedDateTime = zt.withZoneSameInstant(ZoneOffset.UTC);
+            }
+            // Case 2: Full Date (e.g., "2024-09-10"), depends on it is start or end, try to cover the full range
+            else if (dateStr.matches("\\d{4}-\\d{2}-\\d{2}")) {
+                convertedDateTime = isStartDate ? dateStr + "T00:00:00" : dateStr + "T23:59:59";
+                ZonedDateTime zt = ZonedDateTime.parse(convertedDateTime, TemporalUtils.TIME_FORMATTER.withZone(ZoneId.of(timeZoneId)));
+                utcZonedDateTime = zt.withZoneSameInstant(ZoneOffset.UTC);
+            }
+            // Case 3: Year and Month (e.g., "2024-09"), depends on it is start or end, try to cover the full range
+            else if (dateStr.matches("\\d{4}-\\d{2}")) {
+                YearMonth yearMonth = YearMonth.parse(dateStr);
+                LocalDateTime ld = isStartDate ?
+                        yearMonth.atDay(1).atTime(0, 0, 0) :
+                        yearMonth.atEndOfMonth().atTime(23, 59, 59);
+
+                ZonedDateTime zt =  ld.atZone(ZoneId.of(timeZoneId));
+                utcZonedDateTime = zt.withZoneSameInstant(ZoneOffset.UTC);
+            }
+            // Case 4: Year only (e.g., "2024"), depends on it is start or end, try to cover the full range
+            else if (dateStr.matches("\\d{4}")) {
+                YearMonth yearMonth = isStartDate ? YearMonth.parse(dateStr + "-01") : YearMonth.parse(dateStr + "-12");
+                LocalDateTime ld = isStartDate ?
+                        yearMonth.atDay(1).atTime(0, 0, 0) :
+                        yearMonth.atEndOfMonth().atTime(23, 59, 59);
+
+                ZonedDateTime zt =  ld.atZone(ZoneId.of(timeZoneId));
+                utcZonedDateTime = zt.withZoneSameInstant(ZoneOffset.UTC);
+            }
+
 
             // Convert to UTC
-            ZonedDateTime utcZonedDateTime = zonedDateTime.withZoneSameInstant(ZoneOffset.UTC);
-            DateTimeFormatter outputFormatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME;
-
-            return utcZonedDateTime.format(outputFormatter);
+            if(utcZonedDateTime != null) {
+                return utcZonedDateTime.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME);
+            }
+            else {
+                logger.warn("Unable to convert date to ISO_OFFSET_DATE_TIME: {} for record {}", dateStr, uuid);
+                return null;
+            }
         }
         catch (Exception e) {
-            logger.warn("Unable to convert date to ISO_OFFSET_DATE_TIME: {} for record {}", inputDateString, uuid);
+            logger.warn("Unable to convert date to ISO_OFFSET_DATE_TIME: {} for record {}", dateStr, uuid);
             return null;
         }
     }
