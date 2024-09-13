@@ -545,9 +545,8 @@ public abstract class StacCollectionMapperService {
                             safeGet(() -> ciOnlineResource.getProtocol().getCharacterString().getValue().toString())
                                     .ifPresent(protocol -> {
 
-                                        // only supplementary links are related (need to be displayed
-                                        // in the link panel)
-                                        if (LinkUtils.isSupplementaryLink(protocol)) {
+                                        // WMS or WFS links shouldn't be displayed  in the link panel)
+                                        if (!LinkUtils.isWmsOrWfs(protocol)) {
                                             linkModel.setRel(RelationType.RELATED.getValue());
                                         }
                                     });

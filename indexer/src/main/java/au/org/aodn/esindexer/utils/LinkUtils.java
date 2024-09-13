@@ -41,8 +41,8 @@ public class LinkUtils {
             "WWW:LINK-1.0-http--metadata-URL"
     );
 
-    public static boolean isSupplementaryLink (String protocol) {
-        return SUPPLEMENTARY.contains(protocol);
+    public static boolean isWmsOrWfs (String protocol) {
+        return WMS.contains(protocol) || WFS.contains(protocol);
     }
 
 }
