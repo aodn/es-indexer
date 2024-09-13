@@ -53,11 +53,9 @@ class RankingServiceTests extends BaseTestClass {
     @Test
     public void testNotFound() {
         RankingServiceImpl mockRankingService = Mockito.spy(rankingService);
-        // act
-        mockRankingService.evaluateCompleteness(stacCollectionModel);
         // assert
-        verify(mockRankingService, times(1)).evaluateCompleteness(stacCollectionModel);
         assertEquals(0, mockRankingService.evaluateCompleteness(stacCollectionModel));
+        verify(mockRankingService, times(1)).evaluateCompleteness(stacCollectionModel);
     }
 
     @Test
@@ -65,11 +63,9 @@ class RankingServiceTests extends BaseTestClass {
         RankingServiceImpl mockRankingService = Mockito.spy(rankingService);
         // arrange
         stacCollectionModel.setDescription("Test");
-        // act
-        mockRankingService.evaluateCompleteness(stacCollectionModel);
         // assert
-        verify(mockRankingService, times(1)).evaluateCompleteness(stacCollectionModel);
         assertEquals(15, mockRankingService.evaluateCompleteness(stacCollectionModel));
+        verify(mockRankingService, times(1)).evaluateCompleteness(stacCollectionModel);
     }
 
     @Test
@@ -113,11 +109,8 @@ class RankingServiceTests extends BaseTestClass {
 
         stacCollectionModel.setThemes(themes);
 
-        // act
-        mockRankingService.evaluateCompleteness(stacCollectionModel);
-
         // assert
-        verify(mockRankingService, times(1)).evaluateCompleteness(stacCollectionModel);
         assertEquals(10, mockRankingService.evaluateCompleteness(stacCollectionModel));
+        verify(mockRankingService, times(1)).evaluateCompleteness(stacCollectionModel);
     }
 }

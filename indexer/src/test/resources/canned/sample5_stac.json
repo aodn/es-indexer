@@ -6,7 +6,7 @@
     "temporal" : [ [ "2010-01-21T01:00:00Z", "2017-03-27T12:59:59Z" ], [ "2010-01-21T01:00:00Z", "2017-03-27T12:59:59Z" ] ]
   },
   "summaries" : {
-    "score" : 90,
+    "score" : 110,
     "status" : "completed",
     "credits" : [ "Australia’s Integrated Marine Observing System (IMOS) is enabled by the National Collaborative Research Infrastructure Strategy (NCRIS). It is operated by a consortium of institutions as an unincorporated joint venture, with the University of Tasmania as Lead Agent.", "The University of Western Australia (UWA)" ],
     "scope" : {
