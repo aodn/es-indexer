@@ -542,7 +542,16 @@ public abstract class StacCollectionMapperService {
                                 linkModel.setType(Objects.equals(ciOnlineResource.getProtocol().getCharacterString().getValue().toString(), "WWW:LINK-1.0-http--link") ? "text/html" : "");
                             }
                             linkModel.setHref(ciOnlineResource.getLinkage().getCharacterString().getValue().toString());
-                            linkModel.setRel(RelationType.RELATED.getValue());
+                            safeGet(() -> ciOnlineResource.getProtocol().getCharacterString().getValue().toString())
+                                    .ifPresent(protocol -> {
+
+                                        // only supplementary links are related (need to be displayed
+                                        // in the link panel)
+                                        if (LinkUtils.isSupplementaryLink(protocol)) {
+                                            linkModel.setRel(RelationType.RELATED.getValue());
+                                        }
+                                    });
+
                             linkModel.setTitle(getOnlineResourceName(ciOnlineResource));
                             results.add(linkModel);
                         }
