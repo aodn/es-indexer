@@ -372,7 +372,7 @@
     },
     {
       "href": "https://geoserver.imas.utas.edu.au/geoserver/seamap/wms",
-      "rel": "related",
+      "rel": "",
       "type": "",
       "title": "seamap:SeamapAus_QLD_GBRWHA_seagrass"
     },

@@ -206,37 +206,37 @@
     "title" : "NetCDF files via THREDDS catalog"
   }, {
     "href" : "http://geoserver-123.aodn.org.au/geoserver/ncwms",
-    "rel" : "related",
+    "rel" : "",
     "type" : "",
     "title" : "csiro_oa_reconstruction_url/SST"
   }, {
     "href" : "http://geoserver-123.aodn.org.au/geoserver/ncwms",
-    "rel" : "related",
+    "rel" : "",
     "type" : "",
     "title" : "csiro_oa_reconstruction_url/SSS"
   }, {
     "href" : "http://geoserver-123.aodn.org.au/geoserver/ncwms",
-    "rel" : "related",
+    "rel" : "",
     "type" : "",
     "title" : "csiro_oa_reconstruction_url/ALK"
   }, {
     "href" : "http://geoserver-123.aodn.org.au/geoserver/ncwms",
-    "rel" : "related",
+    "rel" : "",
     "type" : "",
     "title" : "csiro_oa_reconstruction_url/DIC"
   }, {
     "href" : "http://geoserver-123.aodn.org.au/geoserver/ncwms",
-    "rel" : "related",
+    "rel" : "",
     "type" : "",
     "title" : "csiro_oa_reconstruction_url/OMEGA_A"
   }, {
     "href" : "http://geoserver-123.aodn.org.au/geoserver/ncwms",
-    "rel" : "related",
+    "rel" : "",
     "type" : "",
     "title" : "csiro_oa_reconstruction_url/OMEGA_C"
   }, {
     "href" : "http://geoserver-123.aodn.org.au/geoserver/ncwms",
-    "rel" : "related",
+    "rel" : "",
     "type" : "",
     "title" : "csiro_oa_reconstruction_url/pH_T"
   }, {
