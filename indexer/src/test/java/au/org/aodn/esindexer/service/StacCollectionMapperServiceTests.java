@@ -159,7 +159,11 @@ public class StacCollectionMapperServiceTests {
         // and now we can use it to compare expected result.
         Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
         String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
-        JSONAssert.assertEquals(objectMapper.readTree(expected).toPrettyString(), objectMapper.readTree(out.strip()).toPrettyString(), JSONCompareMode.STRICT);
+        JSONAssert.assertEquals(
+                objectMapper.readTree(expected).toPrettyString(),
+                objectMapper.readTree(out.strip()).toPrettyString(),
+                JSONCompareMode.STRICT
+        );
     }
 
     @Test
@@ -400,4 +404,22 @@ public class StacCollectionMapperServiceTests {
                 JSONCompareMode.STRICT
         );
     }
-}
+    /**
+     * Metadata have geometry which result in a point and not a polygon
+     *
+     * @throws IOException - Do not expect to throw
+     */
+    @Test
+    public void verifyAbstractCitationNullWorks() throws IOException, JSONException {
+        String xml = readResourceFile("classpath:canned/sample_abstract_citation_null.xml");
+        String expected = readResourceFile("classpath:canned/sample_abstract_citation_null_stac.json");
+        indexerService.indexMetadata(xml);
+
+        Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
+        String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
+        JSONAssert.assertEquals(
+                objectMapper.readTree(expected).toPrettyString(),
+                objectMapper.readTree(out.strip()).toPrettyString(),
+                JSONCompareMode.STRICT
+        );
+    }}

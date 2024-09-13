@@ -308,7 +308,7 @@ public class IndexerServiceTests extends BaseTestClass {
 
             // Parse the JSON string into a JsonNode
             JsonNode rootNode = indexerObjectMapper.readTree(test);
-            JsonNode abstractPhrasesNode = rootNode.path("record_suggest").path("abstract_phrases");
+            JsonNode abstractPhrasesNode = rootNode.path("search_suggestions").path("abstract_phrases");
             List<String> actual = indexerObjectMapper.convertValue(abstractPhrasesNode, indexerObjectMapper.getTypeFactory().constructCollectionType(List.class, String.class));
 
             logger.info(test);

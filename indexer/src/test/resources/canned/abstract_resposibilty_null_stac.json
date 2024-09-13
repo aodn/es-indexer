@@ -169,7 +169,7 @@
     }
   ],
   "id": "5fec8c73-58a1-4a4b-9e47-cfcd9e3fd3ea",
-  "record_suggest": {
+  "search_suggestions": {
     "abstract_phrases": []
   },
   "sci:citation": "{\"suggestedCitation\":null,\"useLimitations\":null,\"otherConstraints\":[\"No Restrictions\"]}",

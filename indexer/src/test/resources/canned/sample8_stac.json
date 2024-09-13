@@ -525,7 +525,7 @@
     "title" : ""
   } ],
   "id" : "1880cd63-d0f9-42e0-b073-7082527945f2",
-  "record_suggest" : {
+  "search_suggestions" : {
     "abstract_phrases" : [ ]
   },
   "sci:citation" : "{\"suggestedCitation\":null,\"useLimitations\":null,\"otherConstraints\":[\"Access to the raw (not quality-controlled) voyage data is intended for the collectors and processors of the data obtained in the MNF RV Investigator voyage. Quality-controlled data products will be made available under the MNF CCBY  licence.\"]}",
