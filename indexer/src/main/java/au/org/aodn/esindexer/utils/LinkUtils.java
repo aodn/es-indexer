@@ -20,6 +20,7 @@ public class LinkUtils {
 
     private final static List<String> WFS = Arrays.asList(
             "OGC:WFS-1.0.0-http-get-capabilities",
+            "OGC:WFS-1.0.0-http-get-feature--shapefile",
             "OGC:WFS"
     );
 
