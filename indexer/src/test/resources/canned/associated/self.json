@@ -6,7 +6,7 @@
     "temporal" : [ [ "2007-04-03T06:00:00Z", null ], [ "2007-04-03T06:00:00Z", null ] ]
   },
   "summaries" : {
-    "score" : 115,
+    "score" : 79,
     "status" : "onGoing",
     "credits" : [ "Australia’s Integrated Marine Observing System (IMOS) is enabled by the National Collaborative Research Infrastructure Strategy (NCRIS). It is operated by a consortium of institutions as an unincorporated joint venture, with the University of Tasmania as Lead Agent.", "Sydney Institute of Marine Science (SIMS)", "French National Center for Scientific Research (CNRS)", "Macquarie University", "University of Tasmania (UTAS)", "Australian Antarctic Division (AAD)", "National Institute of Water and Atmosphere (NIWA)", "CSIRO Oceans and Atmosphere", "Stockholm University (SU)", "Shanghai Ocean University", "Hokkaido University" ],
     "scope" : {

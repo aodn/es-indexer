@@ -16,7 +16,7 @@ public class RankingServiceImpl implements RankingService {
     @Value("${app.ranking.license.weight:10}")
     protected int licenseWeigth;
 
-    @Value("${app.ranking.description.weight:0.05F}")
+    @Value("${app.ranking.description.weight:0.01F}")
     protected float descriptionWeigth;
 
     @Value("${app.ranking.lineage.weight:10}")

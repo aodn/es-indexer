@@ -6,7 +6,7 @@
     "temporal" : [ [ "1870-07-16T14:10:44Z", "2013-06-17T13:59:59Z" ], [ "1870-07-16T14:10:44Z", "2013-06-17T13:59:59Z" ] ]
   },
   "summaries" : {
-    "score" : 84,
+    "score" : 72,
     "status" : "completed",
     "credits" : [ "Australian Climate Change Science Program", "CSIRO carbon cluster", "JSPS KAKENHI Grant no.  26220102", "Integrated Marine Observing System (IMOS) for providing data from their Australian National Reference Stations (NRS)", "Kate Berry and Kristina Patterson for their analysis of the observed carbon data" ],
     "scope" : {
