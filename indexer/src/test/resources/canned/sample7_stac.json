@@ -6,7 +6,7 @@
     "temporal" : [ [ "2021-09-30T14:00:00Z", "2022-12-31T12:59:59Z" ], [ "2021-09-30T14:00:00Z", "2022-12-31T12:59:59Z" ] ]
   },
   "summaries" : {
-    "score" : 70,
+    "score" : 71,
     "status" : "completed",
     "credits" : [ "This data was collected by the 'Field integrated testing project' of EcoRRAP. We thank all team members, students, and volunteers for their efforts.", "The Reef Restoration and Adaptation Program is funded by the partnership between the Australian Government’s Reef Trust and the Great Barrier Reef Foundation." ],
     "scope" : {

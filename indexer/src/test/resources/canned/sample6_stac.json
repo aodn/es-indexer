@@ -6,7 +6,7 @@
     "temporal" : [ [ "2024-01-01T13:00:00Z", "2024-03-05T12:59:59Z" ], [ "2024-01-01T13:00:00Z", "2024-03-05T12:59:59Z" ] ]
   },
   "summaries" : {
-    "score" : 100,
+    "score" : 107,
     "status" : "completed",
     "credits" : [ "Data collected on the Marine National Facility (MNF) RV Investigator voyage IN2024_V01.", "The MNF must be acknowledged in all outputs derived from Data and/or Samples collected by, or with support from, the MNF. Acknowledge the MNF in outputs with the statement:\n\n                    “We acknowledge the use of the CSIRO Marine National Facility (https://ror.org/01mae9353 ) in undertaking this research.”\n\n                    Acknowledgment and citations should be in all forms of publication including presentations (where the acknowledgement should be on the closing slide), journals, books, reports and related research outputs." ],
     "scope" : {

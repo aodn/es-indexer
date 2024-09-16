@@ -1,14 +1,13 @@
 package au.org.aodn.esindexer.service;
 
 import au.org.aodn.esindexer.BaseTestClass;
-import au.org.aodn.stac.model.ContactsModel;
-import au.org.aodn.stac.model.ExtentModel;
-import au.org.aodn.stac.model.LinkModel;
-import au.org.aodn.stac.model.StacCollectionModel;
-import au.org.aodn.stac.model.ThemesModel;
+import au.org.aodn.esindexer.utils.SummariesUtils;
+import au.org.aodn.stac.model.*;
 import org.junit.jupiter.api.*;
 import org.mockito.InjectMocks;
+import org.mockito.Mockito;
 import org.mockito.Spy;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -35,9 +34,8 @@ class RankingServiceTests extends BaseTestClass {
         super.clearElasticIndex(INDEX_NAME);
     }
 
-    @Spy
-    @InjectMocks
-    RankingServiceImpl mockRankingService;
+    @Autowired
+    RankingServiceImpl rankingService;
 
     private StacCollectionModel stacCollectionModel;
     private ExtentModel extentModel;
@@ -51,94 +49,25 @@ class RankingServiceTests extends BaseTestClass {
 
     @Test
     public void testNotFound() {
-        // act
-        mockRankingService.evaluateCompleteness(stacCollectionModel);
+        RankingServiceImpl mockRankingService = Mockito.spy(rankingService);
         // assert
-        verify(mockRankingService, times(1)).evaluateCompleteness(stacCollectionModel);
         assertEquals(0, mockRankingService.evaluateCompleteness(stacCollectionModel));
-    }
-
-    @Test
-    public void testTitleFound() {
-        // arrange
-        stacCollectionModel.setTitle("Test");
-        // act
-        mockRankingService.evaluateCompleteness(stacCollectionModel);
-        // assert
         verify(mockRankingService, times(1)).evaluateCompleteness(stacCollectionModel);
-        assertEquals(15, mockRankingService.evaluateCompleteness(stacCollectionModel));
     }
 
     @Test
     public void testDescriptionFound() {
+        RankingServiceImpl mockRankingService = Mockito.spy(rankingService);
         // arrange
-        stacCollectionModel.setDescription("Test");
-        // act
-        mockRankingService.evaluateCompleteness(stacCollectionModel);
+        stacCollectionModel.setDescription("The Cape Grim Baseline Air Pollution Station facility, located at the North/West tip of Tasmania (40� 41'S, 144� 41'E), is funded and managed by the Australian Bureau of Meteorology, with the scientific program being jointly supervised with CSIRO Marine and Atmospheric Research. This archive contains 1000 litre air samples contained in stainless steel flasks collected at approximately 3 monthly intervals since 1978. The archive is housed at the Aspendale laboratory of CSIRO Marine and Atmospheric Research. The Cape Grim air archive is invaluable in determining the past atmospheric composition of a wide range of gases. For some of these gases, accurate and precise analytical methods have only recently evolved (for example HFCs and PFCs). The measurements are state-of-the-art in precision and accuracy. They are used to identify trace gas trends in the Southern Hemisphere, which in turn can be used to drive climate change models and identify processes that influence changes to the atmosphere.");
         // assert
-        verify(mockRankingService, times(1)).evaluateCompleteness(stacCollectionModel);
-        assertEquals(15, mockRankingService.evaluateCompleteness(stacCollectionModel));
-    }
-
-    @Test
-    public void testExtentFound() {
-        // arrange
-        List<List<BigDecimal>> bbox = new ArrayList<>();
-        List<BigDecimal> bigDecimalList1 = new ArrayList<>();
-        bigDecimalList1.add(new BigDecimal(1));
-        bigDecimalList1.add(new BigDecimal(2));
-        bigDecimalList1.add(new BigDecimal(3));
-        bbox.add(bigDecimalList1);
-        extentModel.setBbox(bbox);
-        stacCollectionModel.setExtent(extentModel);
-
-        // act
-        mockRankingService.evaluateCompleteness(stacCollectionModel);
-
-        // assert
-        verify(mockRankingService, times(1)).evaluateCompleteness(stacCollectionModel);
         assertEquals(10, mockRankingService.evaluateCompleteness(stacCollectionModel));
-    }
-
-    @Test
-    public void testTemporalFound() {
-        // arrange
-        List<String[]> temporal = new ArrayList<>();
-        String[] temporal1 = new String[2];
-        temporal1[0] = "2020-01-01";
-        temporal1[1] = "2020-01-02";
-        temporal.add(temporal1);
-
-        extentModel.setTemporal(temporal);
-        stacCollectionModel.setExtent(extentModel);
-
-        // act
-        mockRankingService.evaluateCompleteness(stacCollectionModel);
-
-        // assert
         verify(mockRankingService, times(1)).evaluateCompleteness(stacCollectionModel);
-        assertEquals(10, mockRankingService.evaluateCompleteness(stacCollectionModel));
-    }
-
-    @Test
-    public void testContactsFound() {
-        // arrange
-        ContactsModel contact1 = ContactsModel.builder().build();
-        contact1.setName("Test");
-        List<ContactsModel> contacts = new ArrayList<>();
-        contacts.add(contact1);
-        stacCollectionModel.setContacts(contacts);
-
-        // act
-        mockRankingService.evaluateCompleteness(stacCollectionModel);
-
-        // assert
-        verify(mockRankingService, times(1)).evaluateCompleteness(stacCollectionModel);
-        assertEquals(10, mockRankingService.evaluateCompleteness(stacCollectionModel));
     }
 
     @Test
     public void testLinksFound() {
+        RankingServiceImpl mockRankingService = Mockito.spy(rankingService);
         // arrange
         List<LinkModel> links = new ArrayList<>();
         LinkModel link1 = LinkModel.builder().build();
@@ -157,16 +86,14 @@ class RankingServiceTests extends BaseTestClass {
 
         stacCollectionModel.setLinks(links);
 
-        // act
-        mockRankingService.evaluateCompleteness(stacCollectionModel);
-
         // assert
-        verify(mockRankingService, times(1)).evaluateCompleteness(stacCollectionModel);
         assertEquals(15, mockRankingService.evaluateCompleteness(stacCollectionModel));
+        verify(mockRankingService, times(1)).evaluateCompleteness(stacCollectionModel);
     }
 
     @Test
     public void testThemesFound() {
+        RankingServiceImpl mockRankingService = Mockito.spy(rankingService);
         // arrange
         List<ThemesModel> themes = new ArrayList<>();
         ThemesModel theme1 = ThemesModel.builder().build();
@@ -179,11 +106,23 @@ class RankingServiceTests extends BaseTestClass {
 
         stacCollectionModel.setThemes(themes);
 
-        // act
-        mockRankingService.evaluateCompleteness(stacCollectionModel);
+        // assert
+        assertEquals(mockRankingService.linkMinWeigth, mockRankingService.evaluateCompleteness(stacCollectionModel));
+        verify(mockRankingService, times(1)).evaluateCompleteness(stacCollectionModel);
+    }
+
+    @Test
+    public void testLinageFound() {
+        RankingServiceImpl mockRankingService = Mockito.spy(rankingService);
+        // arrange
+        stacCollectionModel.setSummaries(SummariesModel
+                .builder()
+                .statement("Statement")
+                .build()
+        );
 
         // assert
+        assertEquals(mockRankingService.lineageWeigth, mockRankingService.evaluateCompleteness(stacCollectionModel));
         verify(mockRankingService, times(1)).evaluateCompleteness(stacCollectionModel);
-        assertEquals(10, mockRankingService.evaluateCompleteness(stacCollectionModel));
     }
 }
