@@ -82,7 +82,7 @@ public class RankingServiceImpl implements RankingService {
             log.debug("License found");
             total += licenseWeigth;
         }
-        // Constraint
+        // Constraint (citation)
         if (stacCollectionModel.getCitation() != null) {
             log.debug("Citation found");
             total += citationWeigth;
