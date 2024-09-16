@@ -10,7 +10,7 @@ import java.util.List;
 @SuppressWarnings("unused")
 public class LinkUtils {
 
-    // protocols
+    // protocols as reference
     private final static List<String> WMS = Arrays.asList(
             "OGC:WMS-1.1.1-http-get-map",
             "OGC:WMS-1.3.0-http-get-map",
@@ -42,7 +42,10 @@ public class LinkUtils {
     );
 
     public static boolean isWmsOrWfs (String protocol) {
-        return WMS.contains(protocol) || WFS.contains(protocol);
+        return protocol.contains("OGC:WMS")
+                || protocol.contains("OGC:WFS")
+                || protocol.contains("IMOS:NCWMS")
+                ;
     }
 
 }
