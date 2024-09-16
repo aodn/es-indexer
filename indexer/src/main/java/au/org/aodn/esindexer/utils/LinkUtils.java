@@ -43,10 +43,17 @@ public class LinkUtils {
     );
 
     public static boolean isWmsOrWfs (String protocol) {
+        return isWms(protocol) || isWfs(protocol);
+    }
+
+    public static boolean isWms(String protocol) {
         return protocol.startsWith("OGC:WMS")
-                || protocol.startsWith("OGC:WFS")
                 || protocol.startsWith("IMOS:NCWMS")
                 ;
+    }
+
+    public static boolean isWfs(String protocol) {
+        return protocol.startsWith("OGC:WFS");
     }
 
 }

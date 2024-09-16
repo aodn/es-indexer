@@ -48,11 +48,12 @@ public class StacCollectionModel {
     @JsonProperty("stac_extensions")
     public String[] getStacExtension() {
         return new String[] {
-            "https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
-            "https://stac-extensions.github.io/contacts/v0.1.1/schema.json",
-            "https://stac-extensions.github.io/projection/v1.1.0/schema.json",
-            "https://stac-extensions.github.io/language/v1.0.0/schema.json",
-            "https://stac-extensions.github.io/themes/v1.0.0/schema.json"
+                "https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
+                "https://stac-extensions.github.io/contacts/v0.1.1/schema.json",
+                "https://stac-extensions.github.io/projection/v1.1.0/schema.json",
+                "https://stac-extensions.github.io/language/v1.0.0/schema.json",
+                "https://stac-extensions.github.io/themes/v1.0.0/schema.json",
+                "https://stac-extensions.github.io/web-map-links/v1.2.0/schema.json"
         };
     }
 }
