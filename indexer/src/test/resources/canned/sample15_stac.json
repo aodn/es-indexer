@@ -366,13 +366,13 @@
   "links": [
     {
       "href": "https://geoserver.imas.utas.edu.au/geoserver/seamap/wfs?version=1.0.0&request=GetFeature&typeName=SeamapAus_QLD_GBRWHA_seagrass&outputFormat=SHAPE-ZIP",
-      "rel": "related",
+      "rel": "",
       "type": "",
       "title": "SHAPE-ZIP"
     },
     {
       "href": "https://geoserver.imas.utas.edu.au/geoserver/seamap/wms",
-      "rel": "related",
+      "rel": "",
       "type": "",
       "title": "seamap:SeamapAus_QLD_GBRWHA_seagrass"
     },

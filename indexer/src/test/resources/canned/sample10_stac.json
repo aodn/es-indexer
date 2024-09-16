@@ -1068,7 +1068,7 @@
     },
     {
       "href": "http://geoserver-123.aodn.org.au/geoserver/wms",
-      "rel": "related",
+      "rel": "",
       "type": "",
       "title": "imos:anmn_velocity_timeseries_map"
     },

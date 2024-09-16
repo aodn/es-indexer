@@ -506,7 +506,7 @@
     },
     {
       "href": "https://geoserver.apps.aims.gov.au/aims/ows",
-      "rel": "related",
+      "rel": "",
       "type": "",
       "title": "aims:weather_data"
     },
@@ -518,7 +518,7 @@
     },
     {
       "href": "https://geoserver.apps.aims.gov.au/aims/wms",
-      "rel": "related",
+      "rel": "",
       "type": "",
       "title": "aims:weather_deployment"
     },

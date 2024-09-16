@@ -580,7 +580,18 @@ public abstract class StacCollectionMapperService {
                                 linkModel.setType(Objects.equals(ciOnlineResource.getProtocol().getCharacterString().getValue().toString(), "WWW:LINK-1.0-http--link") ? "text/html" : "");
                             }
                             linkModel.setHref(ciOnlineResource.getLinkage().getCharacterString().getValue().toString());
-                            linkModel.setRel(RelationType.RELATED.getValue());
+
+                            // an empty string by default
+                            linkModel.setRel("");
+
+                            // WMS or WFS links shouldn't be displayed  in the link panel)
+                            safeGet(() -> ciOnlineResource.getProtocol().getCharacterString().getValue().toString())
+                                    .ifPresent(protocol -> {
+                                        if (!LinkUtils.isWmsOrWfs(protocol)) {
+                                            linkModel.setRel(RelationType.RELATED.getValue());
+                                        }
+                                    });
+
                             linkModel.setTitle(getOnlineResourceName(ciOnlineResource));
                             results.add(linkModel);
                         }
