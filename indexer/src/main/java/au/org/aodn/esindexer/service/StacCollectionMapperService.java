@@ -584,10 +584,16 @@ public abstract class StacCollectionMapperService {
                             // an empty string by default
                             linkModel.setRel("");
 
-                            // WMS or WFS links shouldn't be displayed  in the link panel)
+                            // differentiate WMS, WFS and others
                             safeGet(() -> ciOnlineResource.getProtocol().getCharacterString().getValue().toString())
                                     .ifPresent(protocol -> {
-                                        if (!LinkUtils.isWmsOrWfs(protocol)) {
+                                        if (LinkUtils.isWms(protocol)) {
+                                            linkModel.setRel(RelationType.WMS.getValue());
+                                        }
+                                        else if (LinkUtils.isWfs(protocol)) {
+                                            linkModel.setRel(RelationType.WFS.getValue());
+                                        }
+                                        else {
                                             linkModel.setRel(RelationType.RELATED.getValue());
                                         }
                                     });
