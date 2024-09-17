@@ -91,7 +91,7 @@ public class GcmdKeywordUtils {
         if (!gcmdKeywordLastWords.isEmpty()) {
             for (String gcmdKeywordLastWord : gcmdKeywordLastWords) {
                 String mappedParameterVocab = getParameterVocabByGcmdKeywordLastWord(gcmdKeywordLastWord);
-                if (!mappedParameterVocab.isEmpty()) {
+                if (!mappedParameterVocab.isEmpty() && !mappedParameterVocab.equalsIgnoreCase("uncategorised")) {
                     results.add(mappedParameterVocab.toLowerCase());
                 }
             }
