@@ -61,7 +61,6 @@ public class IndexerServiceImpl implements IndexerService {
     protected RankingService rankingService;
     protected VocabService vocabService;
     protected GcmdKeywordUtils gcmdKeywordUtils;
-    
     protected static final long DEFAULT_BACKOFF_TIME = 3000L;
 
     @Lazy
