@@ -92,7 +92,7 @@ public class GcmdKeywordUtils {
             for (String gcmdKeywordLastWord : gcmdKeywordLastWords) {
                 String mappedParameterVocab = getParameterVocabByGcmdKeywordLastWord(gcmdKeywordLastWord);
                 if (!mappedParameterVocab.isEmpty()) {
-                    results.add(mappedParameterVocab);
+                    results.add(mappedParameterVocab.toLowerCase());
                 }
             }
         }

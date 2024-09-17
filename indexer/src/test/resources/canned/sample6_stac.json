@@ -29,7 +29,7 @@
       "start" : "2024-01-01T13:00:00Z",
       "end" : "2024-03-05T12:59:59Z"
     } ],
-    "parameter_vocabs" : [ "ocean biota", "bathymetry", "density", "water pressure", "current", "temperature", "salinity" ],
+    "parameter_vocabs" : [ "salinity", "nutrient", "chlorophyll", "air temperature", "precipitation and evaporation", "wave", "air-sea fluxes", "current", "uncategorised", "chemical", "air pressure", "carbon", "physical-atmosphere", "bathymetry", "temperature", "wind", "ocean biota", "density", "water pressure" ],
     "platform_vocabs" : [ "research vessel" ]
   },
   "contacts" : [ {

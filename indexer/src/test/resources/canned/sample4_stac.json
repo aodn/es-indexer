@@ -30,7 +30,7 @@
       "start" : "1870-07-16T14:10:44Z",
       "end" : "2013-06-17T13:59:59Z"
     } ],
-    "parameter_vocabs" : [ "ph (total scale) of the water body", "alkalinity", "carbon", "temperature", "salinity" ]
+    "parameter_vocabs" : [ "salinity", "chemical", "carbon", "temperature", "ph (total scale) of the water body", "alkalinity" ]
   },
   "contacts" : [ {
     "roles" : [ "principalInvestigator", "about" ],
