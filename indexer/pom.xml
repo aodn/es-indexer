@@ -145,6 +145,10 @@
             <groupId>org.geotools</groupId>
             <artifactId>gt-referencing</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-shapefile</artifactId>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/org.geotools/gt-epsg-hsql -->
         <dependency>
             <groupId>org.geotools</groupId>

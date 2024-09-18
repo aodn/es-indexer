@@ -153,6 +153,11 @@
                 <artifactId>gt-referencing</artifactId>
                 <version>${org.geotools.version}</version> <!-- Use the latest version available -->
             </dependency>
+            <dependency>
+                <groupId>org.geotools</groupId>
+                <artifactId>gt-shapefile</artifactId>
+                <version>22.2</version> <!-- Use the latest version available -->
+            </dependency>
             <!-- https://mvnrepository.com/artifact/org.geotools/gt-epsg-hsql -->
             <dependency>
                 <groupId>org.geotools</groupId>
