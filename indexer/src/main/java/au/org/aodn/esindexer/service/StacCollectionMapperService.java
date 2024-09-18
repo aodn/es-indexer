@@ -54,6 +54,7 @@ public abstract class StacCollectionMapperService {
     @Mapping(target="license", source = "source", qualifiedByName = "mapLicense")
     @Mapping(target="providers", source = "source", qualifiedByName = "mapProviders")
     @Mapping(target="citation", source="source", qualifiedByName = "mapCitation")
+    @Mapping(target="summaries.centroid", source = "source", qualifiedByName = "mapSummaries.centroid")
     @Mapping(target="summaries.status", source = "source", qualifiedByName = "mapSummaries.status")
     @Mapping(target="summaries.scope", source = "source", qualifiedByName = "mapSummaries.scope")
     @Mapping(target="summaries.credits", source = "source", qualifiedByName = "mapSummaries.credits")
@@ -66,7 +67,6 @@ public abstract class StacCollectionMapperService {
     @Mapping(target="summaries.creation", source = "source", qualifiedByName = "mapSummaries.creation")
     @Mapping(target="summaries.revision", source = "source", qualifiedByName = "mapSummaries.revision")
     public abstract StacCollectionModel mapToSTACCollection(MDMetadataType source);
-
 
     private static final Logger logger = LogManager.getLogger(StacCollectionMapperService.class);
 
@@ -342,6 +342,14 @@ public abstract class StacCollectionMapperService {
             }
         });
         return dateMap;
+    }
+
+    @Named("mapSummaries.centroid")
+    List<List<BigDecimal>> mapGeometryCentroid(MDMetadataType source) {
+        return createGeometryItems(
+                source,
+                GeometryUtils::createCentroidFrom
+        );
     }
 
     @Named("mapSummaries.geometry")

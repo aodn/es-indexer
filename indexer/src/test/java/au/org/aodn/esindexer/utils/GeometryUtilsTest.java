@@ -21,7 +21,7 @@ public class GeometryUtilsTest {
                 new Coordinate(121.65, -33.86)
         });
 
-        List<List<Geometry>> output = GeometryUtils.removeLandAreaFromGeometry(List.of(List.of(polygon)));
+        List<List<Geometry>> output = GeometryUtils.removeLandAreaFromGeometryAndGridded(List.of(List.of(polygon)));
 
         log.info(output.toString());
     }

@@ -15,6 +15,7 @@ import org.opengis.feature.simple.SimpleFeature;
 import org.springframework.core.io.ClassPathResource;
 
 import java.io.*;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.util.*;
 
@@ -193,8 +194,12 @@ public class GeometryUtils {
         }
         return reversed;
     }
-
-    // Method to create grid polygons (grid cells) over the bounding box (envelope)
+    /**
+     * Create a grid based on the area of the spatial extents. Once we have the grid, we can union the area
+     * @param envelope - An envelope that cover the area of the spatial extents
+     * @param cellSize - How big each cell will be
+     * @return - List of polygon that store the grid
+     */
     protected static List<Polygon> createGridPolygons(Envelope envelope, double cellSize) {
         List<Polygon> gridPolygons = new ArrayList<>();
         GeometryFactory geometryFactory = new GeometryFactory();
@@ -221,7 +226,11 @@ public class GeometryUtils {
 
         return gridPolygons;
     }
-
+    /**
+     * Special function to convert a MuliplePolygon to List<Geometry>
+     * @param multipolygon - A multipolygon
+     * @return - List of polygon the represent the incoming Multiple Polygon
+     */
     protected static List<Geometry> convertToListGeometry(Geometry multipolygon) {
         // The geometry is expected to be multipolygon
         // The above map will result in a multi-polygon, we need to flatten
@@ -261,25 +270,65 @@ public class GeometryUtils {
 
         return intersectedPolygons;
     }
-
-    protected static List<List<Geometry>> removeLandAreaFromGeometry(List<List<Geometry>> geoList) {
+    /**
+     * The geometry from geonetwork can be pretty bad that it cover area of sea and land, this function is use
+     * to remove the land part and then break down the large area to smaller area so that we can calculate a meaningful
+     * centroid point.
+     * @param geoList - The polygon after parsing Goenetwork XML
+     * @return - Polygons with land area removed and split into grid aka list of polygon. Geometry is the base class for Polygon
+     */
+    protected static List<List<Geometry>> removeLandAreaFromGeometryAndGridded(List<List<Geometry>> geoList) {
+        // Do not flatten the array in geometries level, otherwise the map will not display the grid boundary
         return geoList.stream()
                 .map(geometries ->
-                    geometries.stream()
-                            .map(geometry -> geometry.difference(landGeometry))
-                            .map(GeometryUtils::convertToListGeometry)
-                            .flatMap(Collection::stream)
-                            .map(GeometryUtils::breakLargeGeometryToGrid)
-                            .flatMap(Collection::stream)
-                            .toList()
+                        geometries.stream()
+                                .map(geometry -> geometry.difference(landGeometry))
+                                .map(GeometryUtils::convertToListGeometry)
+                                .flatMap(Collection::stream)
+                                .map(GeometryUtils::breakLargeGeometryToGrid)
+                                .flatMap(Collection::stream)
+                                .toList()
                 )
                 .toList();
+    }
+    /**
+     * Create a centroid point for the polygon, this will help to speed up the map processing as there is no need
+     * to calculate large amount of data.
+     * @param polygons - The polygon that describe the spatial extents.
+     * @return - The points that represent the centroid or use interior point if centroid is outside of the polygon.
+     */
+    protected static List<List<BigDecimal>> createCentroid(List<List<Geometry>> polygons) {
+        return polygons.stream()
+                .flatMap(Collection::stream)
+                // Make sure the point will not fall out of the shape, for example a U shape will make
+                // centroid fall out of the U, so we check if the centroid is out of the shape? if yes then use
+                // interior point
+                .map(geometry -> geometry.contains(geometry.getCentroid()) ? geometry.getCentroid() : geometry.getInteriorPoint())
+                .map(point -> {
+                    Coordinate coordinate = point.getCoordinate();
+                    List<BigDecimal> coordinates = new ArrayList<>();
+
+                    coordinates.add(BigDecimal.valueOf(coordinate.getX()));  // Longitude (or X coordinate)
+                    coordinates.add(BigDecimal.valueOf(coordinate.getY()));  // Latitude (or Y coordinate)
+
+                    return coordinates;
+                })
+                .toList();
+    }
+
+    public static List<List<BigDecimal>> createCentroidFrom(List<List<AbstractEXGeographicExtentType>> rawInput) {
+        // The return polygon is in EPSG:4326, so we can call createGeoJson directly
+        //TODO: avoid hardcode CRS, get it from document
+        List<List<Geometry>> polygons = removeLandAreaFromGeometryAndGridded(
+                GeometryBase.findPolygonsFrom(GeometryBase.COORDINATE_SYSTEM_CRS84, rawInput)
+        );
+        return (polygons != null && !polygons.isEmpty()) ? createCentroid(polygons) : null;
     }
 
     public static Map<?, ?> createGeometryFrom(List<List<AbstractEXGeographicExtentType>> rawInput) {
         // The return polygon is in EPSG:4326, so we can call createGeoJson directly
         //TODO: avoid hardcode CRS, get it from document
-        List<List<Geometry>> polygons = removeLandAreaFromGeometry(
+        List<List<Geometry>> polygons = removeLandAreaFromGeometryAndGridded(
                 GeometryBase.findPolygonsFrom(GeometryBase.COORDINATE_SYSTEM_CRS84, rawInput)
         );
         return (polygons != null && !polygons.isEmpty()) ? createGeoJson(polygons) : null;
