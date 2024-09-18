@@ -2,6 +2,7 @@ package au.org.aodn.esindexer.service;
 
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.exception.*;
+import au.org.aodn.esindexer.utils.GcmdKeywordUtils;
 import au.org.aodn.esindexer.utils.JaxbUtils;
 import au.org.aodn.metadata.iso19115_3_2018.MDMetadataType;
 import au.org.aodn.stac.model.StacCollectionModel;
@@ -41,6 +42,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Slf4j
 @Service
@@ -57,7 +60,7 @@ public class IndexerServiceImpl implements IndexerService {
     protected JaxbUtils<MDMetadataType> jaxbUtils;
     protected RankingService rankingService;
     protected VocabService vocabService;
-
+    protected GcmdKeywordUtils gcmdKeywordUtils;
     protected static final long DEFAULT_BACKOFF_TIME = 3000L;
 
     @Lazy
@@ -75,7 +78,8 @@ public class IndexerServiceImpl implements IndexerService {
             ElasticsearchClient portalElasticsearchClient,
             ElasticSearchIndexService elasticSearchIndexService,
             StacCollectionMapperService stacCollectionMapperService,
-            VocabService vocabService
+            VocabService vocabService,
+            GcmdKeywordUtils gcmdKeywordUtils
     ) {
         this.indexName = indexName;
         this.tokensAnalyserName = tokensAnalyserName;
@@ -87,6 +91,7 @@ public class IndexerServiceImpl implements IndexerService {
         this.elasticSearchIndexService = elasticSearchIndexService;
         this.stacCollectionMapperService = stacCollectionMapperService;
         this.vocabService = vocabService;
+        this.gcmdKeywordUtils = gcmdKeywordUtils;
     }
 
     public Hit<ObjectNode> getDocumentByUUID(String uuid) throws IOException {
@@ -171,9 +176,11 @@ public class IndexerServiceImpl implements IndexerService {
         stacCollectionModel.getSummaries().setScore(score);
 
         // parameter vocabs
+        List<String> mappedParameterVocabsFromGcmdKeywords = gcmdKeywordUtils.getMappedParameterVocabsFromGcmdKeywords(stacCollectionModel.getThemes());
         List<String> processedParameterVocabs = vocabService.extractVocabLabelsFromThemes(stacCollectionModel.getThemes(), AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS);
+
         if (!processedParameterVocabs.isEmpty()) {
-            stacCollectionModel.getSummaries().setParameterVocabs(processedParameterVocabs);
+            stacCollectionModel.getSummaries().setParameterVocabs(Stream.concat(mappedParameterVocabsFromGcmdKeywords.stream(), processedParameterVocabs.stream()).distinct().collect(Collectors.toList()));
         }
 
         /*
