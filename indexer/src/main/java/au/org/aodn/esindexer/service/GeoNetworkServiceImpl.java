@@ -504,6 +504,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
                 };
             }
             else {
+                logger.warn("Query return empty: {}", response.toString());
                 throw new MetadataNotFoundException("Unable to find any metadata records in GeoNetwork");
             }
         }

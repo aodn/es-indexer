@@ -292,80 +292,92 @@ public class IndexerServiceImpl implements IndexerService {
 
         long dataSize = 0;
         long total = 0;
-        for (String metadataRecord : geoNetworkResourceService.getAllMetadataRecords(beginWithUuid)) {
-            if(metadataRecord != null) {
-                try {
-                    // get mapped metadata values from GeoNetwork to STAC collection schema
-                    final StacCollectionModel mappedMetadataValues = this.getMappedMetadataValues(metadataRecord);
-                    int size = indexerObjectMapper.writeValueAsBytes(mappedMetadataValues).length;
 
-                    // We need to split the batch into smaller size to avoid data too large error in ElasticSearch,
-                    // the limit is 10mb, so to make check before document add and push batch if size is too big
-                    //
-                    // dataSize = 0 is init case, just in case we have a very big doc that exceed the limit
-                    // and we have not add it to the bulkRequest, hardcode to 5M which should be safe,
-                    // usually it is 5M - 15M
-                    //
-                    if(dataSize + size > 5242880 && dataSize != 0) {
-                        if(callback != null) {
-                            callback.onProgress(String.format("Execute batch as bulk request is big enough %s", dataSize + size));
+        try {
+            for (String metadataRecord : geoNetworkResourceService.getAllMetadataRecords(beginWithUuid)) {
+                if (metadataRecord != null) {
+                    try {
+                        // get mapped metadata values from GeoNetwork to STAC collection schema
+                        final StacCollectionModel mappedMetadataValues = this.getMappedMetadataValues(metadataRecord);
+                        int size = indexerObjectMapper.writeValueAsBytes(mappedMetadataValues).length;
+
+                        // We need to split the batch into smaller size to avoid data too large error in ElasticSearch,
+                        // the limit is 10mb, so to make check before document add and push batch if size is too big
+                        //
+                        // dataSize = 0 is init case, just in case we have a very big doc that exceed the limit
+                        // and we have not add it to the bulkRequest, hardcode to 5M which should be safe,
+                        // usually it is 5M - 15M
+                        //
+                        if (dataSize + size > 5242880 && dataSize != 0) {
+                            if (callback != null) {
+                                callback.onProgress(String.format("Execute batch as bulk request is big enough %s", dataSize + size));
+                            }
+
+                            results.add(self.executeBulk(bulkRequest, callback));
+
+                            dataSize = 0;
+                            bulkRequest = new BulkRequest.Builder();
+                        }
+                        // Add item to  bulk request to Elasticsearch
+                        bulkRequest.operations(op -> op
+                                .index(idx -> idx
+                                        .id(mappedMetadataValues.getUuid())
+                                        .index(indexName)
+                                        .document(mappedMetadataValues)
+                                )
+                        );
+                        dataSize += size;
+                        total++;
+
+                        if (callback != null) {
+                            callback.onProgress(
+                                    String.format(
+                                            "Add uuid %s to batch, batch size is %s, total is %s",
+                                            mappedMetadataValues.getUuid(),
+                                            dataSize,
+                                            total)
+                            );
                         }
 
-                        results.add(self.executeBulk(bulkRequest, callback));
-
-                        dataSize = 0;
-                        bulkRequest = new BulkRequest.Builder();
-                    }
-                    // Add item to  bulk request to Elasticsearch
-                    bulkRequest.operations(op -> op
-                            .index(idx -> idx
-                                    .id(mappedMetadataValues.getUuid())
-                                    .index(indexName)
-                                    .document(mappedMetadataValues)
-                            )
-                    );
-                    dataSize += size;
-                    total++;
-
-                    if(callback != null) {
-                        callback.onProgress(
-                                String.format(
-                                        "Add uuid %s to batch, batch size is %s, total is %s",
-                                        mappedMetadataValues.getUuid(),
-                                        dataSize,
-                                        total)
-                        );
-                    }
-
-                } catch (FactoryException | JAXBException | TransformException | NullPointerException e) {
-                    /*
-                     * it will reach here if cannot extract values of all the keys in GeoNetwork metadata JSON
-                     * or ID is not found, which is fatal.
-                     */
-                    log.error("Error extracting values from GeoNetwork metadata JSON: {}", metadataRecord);
-                    if(callback != null) {
-                        callback.onProgress(
-                                String.format(
-                                        "WARNING - Skip %s due to transform error -> %s",
-                                        metadataRecord,
-                                        e.getMessage()
-                                ));
+                    } catch (FactoryException | JAXBException | TransformException | NullPointerException e) {
+                        /*
+                         * it will reach here if cannot extract values of all the keys in GeoNetwork metadata JSON
+                         * or ID is not found, which is fatal.
+                         */
+                        log.error("Error extracting values from GeoNetwork metadata JSON: {}", metadataRecord);
+                        if (callback != null) {
+                            callback.onProgress(
+                                    String.format(
+                                            "WARNING - Skip %s due to transform error -> %s",
+                                            metadataRecord,
+                                            e.getMessage()
+                                    ));
+                        }
                     }
                 }
             }
+            // In case there are residual
+            BulkResponse temp = self.executeBulk(bulkRequest, callback);
+            results.add(temp);
+
+            if(callback != null) {
+                callback.onComplete(temp);
+            }
+
+            // TODO now processing for record_suggestions index
+            log.info("Finished execute bulk indexing records to index: {}",indexName);
         }
+        catch(Exception e) {
+            log.error("Failed", e);
 
-        // In case there are residual
-        BulkResponse temp = self.executeBulk(bulkRequest, callback);
-        results.add(temp);
-
-        if(callback != null) {
-            callback.onComplete(temp);
+            if (callback != null) {
+                callback.onComplete(
+                        String.format(
+                                "WARNING - Cannot process due to error -> %s, need to run 'Delete index and reindex in geonetwork?'",
+                                e.getMessage()
+                        ));
+            }
         }
-
-        // TODO now processing for record_suggestions index
-        log.info("Finished execute bulk indexing records to index: {}",indexName);
-
         return results;
     }
     /**

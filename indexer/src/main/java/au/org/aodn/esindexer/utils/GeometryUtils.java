@@ -10,12 +10,15 @@ import org.geotools.data.simple.SimpleFeatureCollection;
 import org.geotools.data.simple.SimpleFeatureIterator;
 import org.geotools.data.simple.SimpleFeatureSource;
 import org.geotools.geojson.geom.GeometryJSON;
+import org.geotools.geometry.iso.util.algorithm2D.CGAlgorithms;
 import org.locationtech.jts.geom.*;
+import org.locationtech.jts.simplify.DouglasPeuckerSimplifier;
 import org.opengis.feature.simple.SimpleFeature;
 import org.springframework.core.io.ClassPathResource;
 
 import java.io.*;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.net.URL;
 import java.util.*;
 
@@ -25,6 +28,8 @@ public class GeometryUtils {
     protected static GeometryFactory factory = new GeometryFactory(new PrecisionModel(), 4326);
     protected static ObjectMapper objectMapper = new ObjectMapper();
     protected static Geometry landGeometry;
+
+    protected static int SCALE = 3;
 
     // Load a coastline shape file so that we can get a spatial extents that cover sea only
     static {
@@ -77,11 +82,14 @@ public class GeometryUtils {
                     SimpleFeature feature = iterator.next();
                     Geometry landFeatureGeometry = (Geometry) feature.getDefaultGeometry();
 
+                    // This will reduce the points of the shape file for faster processing
+                    Geometry simplifiedGeometry = DouglasPeuckerSimplifier.simplify(landFeatureGeometry, 0.05); // Adjust tolerance
+
                     // Union the land geometries (since land shapefile may contain multiple features)
                     if (land == null) {
-                        land = landFeatureGeometry;
+                        land = simplifiedGeometry;
                     } else {
-                        land = land.union(landFeatureGeometry);
+                        land = land.union(simplifiedGeometry);
                     }
                 }
             }
@@ -113,6 +121,7 @@ public class GeometryUtils {
                         return geometry;
                     })
                     .toList();
+
             GeometryCollection collection = new GeometryCollection(orientedPolygons.toArray(new Geometry[0]), factory);
             try (StringWriter writer = new StringWriter()) {
 
@@ -121,7 +130,12 @@ public class GeometryUtils {
 
                 Map<?, ?> values = objectMapper.readValue(writer.toString(), HashMap.class);
 
-                logger.debug("Created geometry {}", values);
+                if(values == null)  {
+                    logger.warn("Convert geometry to JSON result in null, {}", writer.toString());
+                }
+                else {
+                    logger.debug("Created geometry {}", values);
+                }
                 return values;
             } catch (IOException e) {
                 logger.error("Error create geometry", e);
@@ -213,6 +227,8 @@ public class GeometryUtils {
         for (double x = minX; x < maxX; x += cellSize) {
             for (double y = minY; y < maxY; y += cellSize) {
                 // Create a polygon for each grid cell
+                x = BigDecimal.valueOf(x).setScale(SCALE, RoundingMode.HALF_UP).doubleValue();
+                y = BigDecimal.valueOf(y).setScale(SCALE, RoundingMode.HALF_UP).doubleValue();
                 Polygon gridCell = geometryFactory.createPolygon(new Coordinate[]{
                         new Coordinate(x, y),
                         new Coordinate(x + cellSize, y),
@@ -247,6 +263,37 @@ public class GeometryUtils {
 
     }
     /**
+     * This method checks if a geometry contains at least three non-collinear points.
+     */
+    protected static boolean hasNonCollinearPoints(Geometry geometry) {
+        // Check if the geometry is a Polygon
+        if (geometry instanceof Polygon polygon) {
+            Coordinate[] coordinates = polygon.getExteriorRing().getCoordinates();
+            // Map it to correct type
+            List<org.geotools.geometry.iso.topograph2D.Coordinate> coordinates2D = Arrays.stream(coordinates)
+                    .map(coordinate -> new org.geotools.geometry.iso.topograph2D.Coordinate(
+                            BigDecimal.valueOf(coordinate.getX()).setScale(SCALE, RoundingMode.HALF_UP).doubleValue(),
+                            BigDecimal.valueOf(coordinate.getY()).setScale(SCALE, RoundingMode.HALF_UP).doubleValue(),
+                            Double.isNaN(coordinate.getZ()) ? coordinate.getZ() : BigDecimal.valueOf(coordinate.getZ()).setScale(SCALE, RoundingMode.HALF_UP).doubleValue())
+                    )
+                    .toList();
+
+            // Check for non-collinear points using CGAlgorithms
+            for (int i = 0; i < coordinates2D.size() - 2; i++) {
+                if (CGAlgorithms.orientationIndex(
+                        coordinates2D.get(i),
+                        coordinates2D.get(i + 1),
+                        coordinates2D.get(i + 2)) != 0) {
+
+                    logger.debug("Coordinates {} do have three non-collinear", Arrays.stream(coordinates).toList());
+                    return true; // Found three non-collinear points
+                }
+            }
+        }
+        logger.debug("Coordinates {} do not have three non-collinear", geometry);
+        return false; // All points are collinear
+    }
+    /**
      * Some geometry polygon cover the whole australia which is very big, it would be easier to process by UI
      * if we break it down in to grid of polygon. The grid size is hardcode here to 100.0, you can adjust it
      * but need to re-compile the code.
@@ -257,13 +304,14 @@ public class GeometryUtils {
         // Get the bounding box (extent) of the large polygon
         Envelope envelope = large.getEnvelopeInternal();
 
-        // Hard code cell size, we can adjust the break grid size by alter this value 100.0
-        List<Polygon> gridPolygons = createGridPolygons(envelope, 100.0);
+        // Hard code cell size, we can adjust the break grid size. 10.0 result in 3x3 grid
+        // cover Australia
+        List<Polygon> gridPolygons = createGridPolygons(envelope, 10.0);
 
         List<Geometry> intersectedPolygons = new ArrayList<>();
         for (Polygon gridPolygon : gridPolygons) {
             Geometry intersection = gridPolygon.intersection(large);
-            if (!intersection.isEmpty()) {
+            if (!intersection.isEmpty() && hasNonCollinearPoints(intersection)) {
                 intersectedPolygons.add(intersection);
             }
         }
@@ -291,28 +339,82 @@ public class GeometryUtils {
                 )
                 .toList();
     }
+
+    protected static Coordinate calculateGeometryCentroid(Geometry geometry) {
+        if(geometry instanceof GeometryCollection gc) {
+            return calculateCollectionCentroid(gc);
+        }
+        else if(geometry instanceof Polygon pl) {
+            return calculatePolygonCentroid(pl).getCoordinate();
+        }
+        else if(geometry instanceof LineString) {
+            return geometry.getCentroid().getCoordinate();
+        }
+        else if(geometry instanceof Point p) {
+            return p.getCoordinate();
+        }
+        else {
+            logger.info("Skip geometry centroid for {}", geometry.getGeometryType());
+            return null;
+        }
+    }
+
+    protected static Point calculatePolygonCentroid(Geometry geometry) {
+        // Make sure the point will not fall out of the shape, for example a U shape will make
+        // centroid fall out of the U, so we check if the centroid is out of the shape? if yes then use
+        // interior point
+        return geometry.contains(geometry.getCentroid()) ?
+                geometry.getCentroid() :
+                geometry.getInteriorPoint();
+    }
+
+    protected static Coordinate calculateCollectionCentroid(GeometryCollection geometryCollection) {
+        // Initialize variables to sum the x and y coordinates of centroids
+        double totalX = 0;
+        double totalY = 0;
+        double totalAreaOrLength = 0;
+
+        // Loop through each geometry in the collection
+        for (int i = 0; i < geometryCollection.getNumGeometries(); i++) {
+            Geometry geometry = geometryCollection.getGeometryN(i);
+
+            // Make sure the point will not fall out of the shape, for example a U shape will make
+            // centroid fall out of the U, so we check if the centroid is out of the shape? if yes then use
+            // interior point
+            Point centroid = calculatePolygonCentroid(geometry);
+
+            // Determine weight based on area (for polygons) or length (for lines)
+            double weight = geometry.getArea(); // Use area for polygons
+            if (weight == 0) {
+                weight = geometry.getLength(); // Use length for lines/points if area is zero
+            }
+
+            // Sum up the weighted coordinates
+            totalX += centroid.getX() * weight;
+            totalY += centroid.getY() * weight;
+            totalAreaOrLength += weight;
+        }
+
+        // Calculate the average centroid by dividing by the total area or length
+        double averageX = totalX / totalAreaOrLength;
+        double averageY = totalY / totalAreaOrLength;
+
+        // Create and return the centroid point
+        return new Coordinate(averageX, averageY);
+    }
     /**
      * Create a centroid point for the polygon, this will help to speed up the map processing as there is no need
      * to calculate large amount of data.
-     * @param polygons - The polygon that describe the spatial extents.
+     * @param geometries - The polygon that describe the spatial extents.
      * @return - The points that represent the centroid or use interior point if centroid is outside of the polygon.
      */
-    protected static List<List<BigDecimal>> createCentroid(List<List<Geometry>> polygons) {
-        return polygons.stream()
+    protected static List<List<BigDecimal>> createCentroid(List<List<Geometry>> geometries) {
+        // Flatten the map and extract all polygon, some of the income geometry is GeometryCollection
+        return geometries.stream()
                 .flatMap(Collection::stream)
-                // Make sure the point will not fall out of the shape, for example a U shape will make
-                // centroid fall out of the U, so we check if the centroid is out of the shape? if yes then use
-                // interior point
-                .map(geometry -> geometry.contains(geometry.getCentroid()) ? geometry.getCentroid() : geometry.getInteriorPoint())
-                .map(point -> {
-                    Coordinate coordinate = point.getCoordinate();
-                    List<BigDecimal> coordinates = new ArrayList<>();
-
-                    coordinates.add(BigDecimal.valueOf(coordinate.getX()));  // Longitude (or X coordinate)
-                    coordinates.add(BigDecimal.valueOf(coordinate.getY()));  // Latitude (or Y coordinate)
-
-                    return coordinates;
-                })
+                .map(GeometryUtils::calculateGeometryCentroid)
+                .filter(Objects::nonNull)
+                .map(coordinate -> List.of(BigDecimal.valueOf(coordinate.getX()), BigDecimal.valueOf(coordinate.getY())))
                 .toList();
     }
 
