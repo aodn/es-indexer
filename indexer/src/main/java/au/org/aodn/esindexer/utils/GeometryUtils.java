@@ -463,9 +463,11 @@ public class GeometryUtils {
      */
     public static Map<?, ?> createGeometryFrom(List<List<AbstractEXGeographicExtentType>> rawInput) {
         // The return polygon is in EPSG:4326, so we can call createGeoJson directly
-        //TODO: avoid hardcode CRS, get it from document
-        // List<List<Geometry>> polygonNoLand = GeometryBase.findPolygonsFrom(GeometryBase.COORDINATE_SYSTEM_CRS84, rawInput);
-        List<List<Geometry>> polygonNoLand = splitAreaToGrid(createGeometryWithoutLand(rawInput));
+        // TODO: avoid hardcode CRS, get it from document
+        // This line will cause the spatial extents to break into grid, it may help to debug but will make production
+        // slow and sometimes cause polygon break.
+        // List<List<Geometry>> polygonNoLand = splitAreaToGrid(createGeometryWithoutLand(rawInput));
+        List<List<Geometry>> polygonNoLand = GeometryBase.findPolygonsFrom(GeometryBase.COORDINATE_SYSTEM_CRS84, rawInput);
         return (polygonNoLand != null && !polygonNoLand.isEmpty()) ? createGeoJson(polygonNoLand) : null;
     }
 }
