@@ -89,7 +89,7 @@ public abstract class StacCollectionMapperService {
      */
     @Named("mapExtentBbox")
     List<List<BigDecimal>> mapExtentBbox(MDMetadataType source) {
-        return createGeometryItems(
+        return GeometryUtils.createGeometryItems(
                 source,
                 BBoxUtils::createBBoxFrom
         );
@@ -346,7 +346,7 @@ public abstract class StacCollectionMapperService {
 
     @Named("mapSummaries.centroid")
     List<List<BigDecimal>> mapGeometryCentroid(MDMetadataType source) {
-        return createGeometryItems(
+        return GeometryUtils.createGeometryItems(
                 source,
                 GeometryUtils::createCentroidFrom
         );
@@ -354,7 +354,7 @@ public abstract class StacCollectionMapperService {
 
     @Named("mapSummaries.geometry")
     Map<?,?> mapSummariesGeometry(MDMetadataType source) {
-        return createGeometryItems(
+        return GeometryUtils.createGeometryItems(
                 source,
                 GeometryUtils::createGeometryFrom
         );
@@ -946,59 +946,6 @@ public abstract class StacCollectionMapperService {
         return results;
     }
 
-    protected <R> R createGeometryItems(
-            MDMetadataType source,
-            Function<List<List<AbstractEXGeographicExtentType>>, R> handler) {
-
-        List<MDDataIdentificationType> items = MapperUtils.findMDDataIdentificationType(source);
-        if(!items.isEmpty()) {
-            if(items.size() > 1) {
-                logger.warn("!! More than 1 block of MDDataIdentificationType, data will be missed !!");
-            }
-            // Assume only 1 block of <mri:MD_DataIdentification>
-            // We only concern geographicElement here
-            List<EXExtentType> ext = items.get(0)
-                    .getExtent()
-                    .stream()
-                    .filter(f -> f.getAbstractExtent() != null)
-                    .filter(f -> f.getAbstractExtent().getValue() != null)
-                    .filter(f -> f.getAbstractExtent().getValue() instanceof EXExtentType)
-                    .map(f -> (EXExtentType) f.getAbstractExtent().getValue())
-                    .filter(f -> f.getGeographicElement() != null)
-                    .toList();
-
-            // We want to get a list of item where each item contains multiple, (aka list) of
-            // (EXGeographicBoundingBoxType or EXBoundingPolygonType)
-            List<List<AbstractEXGeographicExtentType>> rawInput = ext.stream()
-                    .map(EXExtentType::getGeographicElement)
-                    .map(l ->
-                            /*
-                                l = List<AbstractEXGeographicExtentPropertyType>
-                                For each AbstractEXGeographicExtentPropertyType, we get the tag that store the
-                                coordinate, it is either a EXBoundingPolygonType or EXGeographicBoundingBoxType
-                             */
-                            l.stream()
-                                    .map(AbstractEXGeographicExtentPropertyType::getAbstractEXGeographicExtent)
-                                    .filter(Objects::nonNull)
-                                    .filter(m -> (m.getValue() instanceof EXBoundingPolygonType || m.getValue() instanceof EXGeographicBoundingBoxType))
-                                    .map(m -> {
-                                        if (m.getValue() instanceof EXBoundingPolygonType exBoundingPolygonType) {
-                                            if (!exBoundingPolygonType.getPolygon().isEmpty() && exBoundingPolygonType.getPolygon().get(0).getAbstractGeometry() != null) {
-                                                return exBoundingPolygonType;
-                                            }
-                                        } else if (m.getValue() instanceof EXGeographicBoundingBoxType) {
-                                            return m.getValue();
-                                        }
-                                        return null; // Handle other cases or return appropriate default value
-                                    })
-                                    .filter(Objects::nonNull) // Filter out null values if any
-                                    .toList()
-                    )
-                    .toList();
-            return handler.apply(rawInput);
-        }
-        return null;
-    }
     /**
      * Special handle for MimeFileType object.
      * @param onlineResource

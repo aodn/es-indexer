@@ -1,6 +1,6 @@
 package au.org.aodn.esindexer.utils;
 
-import au.org.aodn.metadata.iso19115_3_2018.AbstractEXGeographicExtentType;
+import au.org.aodn.metadata.iso19115_3_2018.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -10,7 +10,6 @@ import org.geotools.data.simple.SimpleFeatureCollection;
 import org.geotools.data.simple.SimpleFeatureIterator;
 import org.geotools.data.simple.SimpleFeatureSource;
 import org.geotools.geojson.geom.GeometryJSON;
-import org.geotools.geometry.iso.util.algorithm2D.CGAlgorithms;
 import org.locationtech.jts.geom.*;
 import org.locationtech.jts.simplify.DouglasPeuckerSimplifier;
 import org.opengis.feature.simple.SimpleFeature;
@@ -18,9 +17,9 @@ import org.springframework.core.io.ClassPathResource;
 
 import java.io.*;
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.net.URL;
 import java.util.*;
+import java.util.function.Function;
 
 public class GeometryUtils {
 
@@ -29,7 +28,7 @@ public class GeometryUtils {
     protected static ObjectMapper objectMapper = new ObjectMapper();
     protected static Geometry landGeometry;
 
-    protected static int SCALE = 3;
+    protected static int SCALE = 10;
 
     // Load a coastline shape file so that we can get a spatial extents that cover sea only
     static {
@@ -83,7 +82,8 @@ public class GeometryUtils {
                     Geometry landFeatureGeometry = (Geometry) feature.getDefaultGeometry();
 
                     // This will reduce the points of the shape file for faster processing
-                    Geometry simplifiedGeometry = DouglasPeuckerSimplifier.simplify(landFeatureGeometry, 0.05); // Adjust tolerance
+                    Geometry simplifiedGeometry = DouglasPeuckerSimplifier
+                            .simplify(landFeatureGeometry, 0.03); // Adjust tolerance
 
                     // Union the land geometries (since land shapefile may contain multiple features)
                     if (land == null) {
@@ -110,16 +110,21 @@ public class GeometryUtils {
             List<Geometry> reduced = polygons.stream().flatMap(List::stream).toList();
             List<Geometry> orientedPolygons = reduced.stream()
                     .map(geometry -> {
-                        if (geometry instanceof Polygon) {
+                        if (geometry instanceof Polygon polygon) {
                             // Ensure all polygons follow the right-hand rule
                             // The right-hand rule is a convention used to maintain consistency in the orientation of vertices for polygons.
                             // For a polygon, adhering to the right-hand rule means that its vertices are ordered counterclockwise for the exterior ring
                             // and clockwise for any interior rings (holes).
                             // Standard: https://www.rfc-editor.org/rfc/rfc7946#section-3.1.6
-                            return GeometryUtils.ensureCounterClockwise((Polygon) geometry, factory);
+                            return GeometryUtils.ensureCounterClockwise(polygon, factory);
+                        }
+                        else if(geometry instanceof Point point) {
+                            // Filter out empty point to avoid GeoJson create error
+                            return point.isEmpty() ? null : point;
                         }
                         return geometry;
                     })
+                    .filter(Objects::nonNull)
                     .toList();
 
             GeometryCollection collection = new GeometryCollection(orientedPolygons.toArray(new Geometry[0]), factory);
@@ -137,8 +142,8 @@ public class GeometryUtils {
                     logger.debug("Created geometry {}", values);
                 }
                 return values;
-            } catch (IOException e) {
-                logger.error("Error create geometry", e);
+            } catch (IOException | StringIndexOutOfBoundsException e) {
+                logger.error("Error create geometry {} ",collection, e);
                 return null;
             }
         }
@@ -227,8 +232,6 @@ public class GeometryUtils {
         for (double x = minX; x < maxX; x += cellSize) {
             for (double y = minY; y < maxY; y += cellSize) {
                 // Create a polygon for each grid cell
-                x = BigDecimal.valueOf(x).setScale(SCALE, RoundingMode.HALF_UP).doubleValue();
-                y = BigDecimal.valueOf(y).setScale(SCALE, RoundingMode.HALF_UP).doubleValue();
                 Polygon gridCell = geometryFactory.createPolygon(new Coordinate[]{
                         new Coordinate(x, y),
                         new Coordinate(x + cellSize, y),
@@ -263,37 +266,6 @@ public class GeometryUtils {
 
     }
     /**
-     * This method checks if a geometry contains at least three non-collinear points.
-     */
-    protected static boolean hasNonCollinearPoints(Geometry geometry) {
-        // Check if the geometry is a Polygon
-        if (geometry instanceof Polygon polygon) {
-            Coordinate[] coordinates = polygon.getExteriorRing().getCoordinates();
-            // Map it to correct type
-            List<org.geotools.geometry.iso.topograph2D.Coordinate> coordinates2D = Arrays.stream(coordinates)
-                    .map(coordinate -> new org.geotools.geometry.iso.topograph2D.Coordinate(
-                            BigDecimal.valueOf(coordinate.getX()).setScale(SCALE, RoundingMode.HALF_UP).doubleValue(),
-                            BigDecimal.valueOf(coordinate.getY()).setScale(SCALE, RoundingMode.HALF_UP).doubleValue(),
-                            Double.isNaN(coordinate.getZ()) ? coordinate.getZ() : BigDecimal.valueOf(coordinate.getZ()).setScale(SCALE, RoundingMode.HALF_UP).doubleValue())
-                    )
-                    .toList();
-
-            // Check for non-collinear points using CGAlgorithms
-            for (int i = 0; i < coordinates2D.size() - 2; i++) {
-                if (CGAlgorithms.orientationIndex(
-                        coordinates2D.get(i),
-                        coordinates2D.get(i + 1),
-                        coordinates2D.get(i + 2)) != 0) {
-
-                    logger.debug("Coordinates {} do have three non-collinear", Arrays.stream(coordinates).toList());
-                    return true; // Found three non-collinear points
-                }
-            }
-        }
-        logger.debug("Coordinates {} do not have three non-collinear", geometry);
-        return false; // All points are collinear
-    }
-    /**
      * Some geometry polygon cover the whole australia which is very big, it would be easier to process by UI
      * if we break it down in to grid of polygon. The grid size is hardcode here to 100.0, you can adjust it
      * but need to re-compile the code.
@@ -311,47 +283,51 @@ public class GeometryUtils {
         List<Geometry> intersectedPolygons = new ArrayList<>();
         for (Polygon gridPolygon : gridPolygons) {
             Geometry intersection = gridPolygon.intersection(large);
-            if (!intersection.isEmpty() && hasNonCollinearPoints(intersection)) {
+            if (!intersection.isEmpty()) {
                 intersectedPolygons.add(intersection);
             }
         }
 
         return intersectedPolygons;
     }
+
+    protected static List<List<Geometry>> splitAreaToGrid(List<List<Geometry>> geoList) {
+        return geoList.stream()
+                .flatMap(Collection::stream)
+                .map(GeometryUtils::breakLargeGeometryToGrid)
+                .toList();
+    }
     /**
      * The geometry from geonetwork can be pretty bad that it cover area of sea and land, this function is use
-     * to remove the land part and then break down the large area to smaller area so that we can calculate a meaningful
-     * centroid point.
+     * to remove the land part
      * @param geoList - The polygon after parsing Goenetwork XML
      * @return - Polygons with land area removed and split into grid aka list of polygon. Geometry is the base class for Polygon
      */
-    protected static List<List<Geometry>> removeLandAreaFromGeometryAndGridded(List<List<Geometry>> geoList) {
+    protected static List<List<Geometry>> removeLandAreaFromGeometry(List<List<Geometry>> geoList) {
         // Do not flatten the array in geometries level, otherwise the map will not display the grid boundary
         return geoList.stream()
                 .map(geometries ->
-                        geometries.stream()
-                                .map(geometry -> geometry.difference(landGeometry))
-                                .map(GeometryUtils::convertToListGeometry)
-                                .flatMap(Collection::stream)
-                                .map(GeometryUtils::breakLargeGeometryToGrid)
-                                .flatMap(Collection::stream)
-                                .toList()
+                    geometries.stream()
+                            .map(geometry -> geometry.difference(landGeometry))
+                            .map(GeometryUtils::convertToListGeometry)
+                            .flatMap(Collection::stream)
+                            .toList()
                 )
                 .toList();
     }
 
-    protected static Coordinate calculateGeometryCentroid(Geometry geometry) {
+    protected static List<Coordinate> calculateGeometryCentroid(Geometry geometry) {
         if(geometry instanceof GeometryCollection gc) {
             return calculateCollectionCentroid(gc);
         }
         else if(geometry instanceof Polygon pl) {
-            return calculatePolygonCentroid(pl).getCoordinate();
+            return List.of(calculatePolygonCentroid(pl).getCoordinate());
         }
         else if(geometry instanceof LineString) {
-            return geometry.getCentroid().getCoordinate();
+            return List.of(geometry.getCentroid().getCoordinate());
         }
         else if(geometry instanceof Point p) {
-            return p.getCoordinate();
+            return List.of(p.getCoordinate());
         }
         else {
             logger.info("Skip geometry centroid for {}", geometry.getGeometryType());
@@ -368,12 +344,8 @@ public class GeometryUtils {
                 geometry.getInteriorPoint();
     }
 
-    protected static Coordinate calculateCollectionCentroid(GeometryCollection geometryCollection) {
-        // Initialize variables to sum the x and y coordinates of centroids
-        double totalX = 0;
-        double totalY = 0;
-        double totalAreaOrLength = 0;
-
+    protected static List<Coordinate> calculateCollectionCentroid(GeometryCollection geometryCollection) {
+        List<Coordinate> coordinates = new ArrayList<>();
         // Loop through each geometry in the collection
         for (int i = 0; i < geometryCollection.getNumGeometries(); i++) {
             Geometry geometry = geometryCollection.getGeometryN(i);
@@ -382,25 +354,10 @@ public class GeometryUtils {
             // centroid fall out of the U, so we check if the centroid is out of the shape? if yes then use
             // interior point
             Point centroid = calculatePolygonCentroid(geometry);
-
-            // Determine weight based on area (for polygons) or length (for lines)
-            double weight = geometry.getArea(); // Use area for polygons
-            if (weight == 0) {
-                weight = geometry.getLength(); // Use length for lines/points if area is zero
-            }
-
-            // Sum up the weighted coordinates
-            totalX += centroid.getX() * weight;
-            totalY += centroid.getY() * weight;
-            totalAreaOrLength += weight;
+            coordinates.add(new Coordinate(centroid.getX(), centroid.getY()));
         }
-
-        // Calculate the average centroid by dividing by the total area or length
-        double averageX = totalX / totalAreaOrLength;
-        double averageY = totalY / totalAreaOrLength;
-
         // Create and return the centroid point
-        return new Coordinate(averageX, averageY);
+        return coordinates;
     }
     /**
      * Create a centroid point for the polygon, this will help to speed up the map processing as there is no need
@@ -414,25 +371,101 @@ public class GeometryUtils {
                 .flatMap(Collection::stream)
                 .map(GeometryUtils::calculateGeometryCentroid)
                 .filter(Objects::nonNull)
+                .flatMap(Collection::stream)
                 .map(coordinate -> List.of(BigDecimal.valueOf(coordinate.getX()), BigDecimal.valueOf(coordinate.getY())))
                 .toList();
     }
+    /**
+     * Function to locate the geometry field in source and pass it to the handler for processing
+     * @param source - A parsed XML from geonetwork
+     * @param handler - The handler to create the item you needed give source
+     * @return - The target item
+     * @param <R> - Type that align with the handler return type
+     */
+    public static <R> R createGeometryItems(
+            MDMetadataType source,
+            Function<List<List<AbstractEXGeographicExtentType>>, R> handler) {
 
-    public static List<List<BigDecimal>> createCentroidFrom(List<List<AbstractEXGeographicExtentType>> rawInput) {
-        // The return polygon is in EPSG:4326, so we can call createGeoJson directly
-        //TODO: avoid hardcode CRS, get it from document
-        List<List<Geometry>> polygons = removeLandAreaFromGeometryAndGridded(
-                GeometryBase.findPolygonsFrom(GeometryBase.COORDINATE_SYSTEM_CRS84, rawInput)
-        );
-        return (polygons != null && !polygons.isEmpty()) ? createCentroid(polygons) : null;
+        List<MDDataIdentificationType> items = MapperUtils.findMDDataIdentificationType(source);
+        if(!items.isEmpty()) {
+            if(items.size() > 1) {
+                logger.warn("!! More than 1 block of MDDataIdentificationType, data will be missed !!");
+            }
+            // Assume only 1 block of <mri:MD_DataIdentification>
+            // We only concern geographicElement here
+            List<EXExtentType> ext = items.get(0)
+                    .getExtent()
+                    .stream()
+                    .filter(f -> f.getAbstractExtent() != null)
+                    .filter(f -> f.getAbstractExtent().getValue() != null)
+                    .filter(f -> f.getAbstractExtent().getValue() instanceof EXExtentType)
+                    .map(f -> (EXExtentType) f.getAbstractExtent().getValue())
+                    .filter(f -> f.getGeographicElement() != null)
+                    .toList();
+
+            // We want to get a list of item where each item contains multiple, (aka list) of
+            // (EXGeographicBoundingBoxType or EXBoundingPolygonType)
+            List<List<AbstractEXGeographicExtentType>> rawInput = ext.stream()
+                    .map(EXExtentType::getGeographicElement)
+                    .map(l ->
+                            /*
+                                l = List<AbstractEXGeographicExtentPropertyType>
+                                For each AbstractEXGeographicExtentPropertyType, we get the tag that store the
+                                coordinate, it is either a EXBoundingPolygonType or EXGeographicBoundingBoxType
+                             */
+                            l.stream()
+                                    .map(AbstractEXGeographicExtentPropertyType::getAbstractEXGeographicExtent)
+                                    .filter(Objects::nonNull)
+                                    .filter(m -> (m.getValue() instanceof EXBoundingPolygonType || m.getValue() instanceof EXGeographicBoundingBoxType))
+                                    .map(m -> {
+                                        if (m.getValue() instanceof EXBoundingPolygonType exBoundingPolygonType) {
+                                            if (!exBoundingPolygonType.getPolygon().isEmpty() && exBoundingPolygonType.getPolygon().get(0).getAbstractGeometry() != null) {
+                                                return exBoundingPolygonType;
+                                            }
+                                        } else if (m.getValue() instanceof EXGeographicBoundingBoxType) {
+                                            return m.getValue();
+                                        }
+                                        return null; // Handle other cases or return appropriate default value
+                                    })
+                                    .filter(Objects::nonNull) // Filter out null values if any
+                                    .toList()
+                    )
+                    .toList();
+            return handler.apply(rawInput);
+        }
+        return null;
     }
 
+    protected static List<List<Geometry>> createGeometryWithoutLand(List<List<AbstractEXGeographicExtentType>> rawInput) {
+        return removeLandAreaFromGeometry(
+                GeometryBase.findPolygonsFrom(GeometryBase.COORDINATE_SYSTEM_CRS84, rawInput)
+        );
+    }
+    /**
+     * A preprocessed centroid point based on spatial extents area. In order not to have a point that fall into the
+     * land, we remove the area contain land area. Then we spit it into grid, in each grid we calculate the centroid.
+     * Multiple point will be created for the map to process, this is needed because when map drag, some spatial extents
+     * that across multiple region should have a point that represent it.
+     * @param rawInput - The parsed XML block that contains the spatial extents area
+     * @return - Centroid point which will not appear on land.
+     */
+    public static List<List<BigDecimal>> createCentroidFrom(List<List<AbstractEXGeographicExtentType>> rawInput) {
+        //TODO: avoid hardcode CRS, get it from document
+        List<List<Geometry>> grid = splitAreaToGrid(createGeometryWithoutLand(rawInput));
+        return (grid != null && !grid.isEmpty()) ? createCentroid(grid) : null;
+    }
+    /**
+     * Create the spatial extents area given the XML info, it will not remove land area for speed reason. Otherwise,
+     * too many polygon created plus this is not what the metadata provides. Also, it may create non-collinear
+     * or self-intersecting polygon.
+     * @param rawInput - The parsed XML block that contains the spatial extents area
+     * @return
+     */
     public static Map<?, ?> createGeometryFrom(List<List<AbstractEXGeographicExtentType>> rawInput) {
         // The return polygon is in EPSG:4326, so we can call createGeoJson directly
         //TODO: avoid hardcode CRS, get it from document
-        List<List<Geometry>> polygons = removeLandAreaFromGeometryAndGridded(
-                GeometryBase.findPolygonsFrom(GeometryBase.COORDINATE_SYSTEM_CRS84, rawInput)
-        );
-        return (polygons != null && !polygons.isEmpty()) ? createGeoJson(polygons) : null;
+        // List<List<Geometry>> polygonNoLand = GeometryBase.findPolygonsFrom(GeometryBase.COORDINATE_SYSTEM_CRS84, rawInput);
+        List<List<Geometry>> polygonNoLand = splitAreaToGrid(createGeometryWithoutLand(rawInput));
+        return (polygonNoLand != null && !polygonNoLand.isEmpty()) ? createGeoJson(polygonNoLand) : null;
     }
 }

@@ -28,9 +28,9 @@ public class ElasticSearchIndexService {
         try {
             BooleanResponse response = portalElasticsearchClient.indices().exists(b -> b.index(indexName));
             if (response.value()) {
-                log.info("Deleting index: " + indexName);
+                log.info("Deleting index: {}", indexName);
                 portalElasticsearchClient.indices().delete(b -> b.index(indexName));
-                log.info("Index: " + indexName + " deleted");
+                log.info("Index: {} deleted", indexName);
             }
         } catch (ElasticsearchException | IOException e) {
             throw new DeleteIndexException("Failed to delete index: " + indexName + " | " + e.getMessage());
