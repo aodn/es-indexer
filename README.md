@@ -51,6 +51,14 @@ Start a local instance of indexer
 $ docker-compose -f docker-compose-dev.yaml up # [-d: in daemon mode | --build: to see the console logs]
 ```
 
+### Notes on calculation - Centroid
+We pre-calculate the centroid point of each spatial extents using the following method
+1. Use the shape file contains the land only area, adjust it to reduce the line complexity
+2. Remove the land from the spatial extents
+3. Then cut the spatial extents into grid and may result in multiple polygon
+4. In each grid, calculate the centroid, if it is outside of the polygon (aka a U shape), use internal point.
+5. Store the point in the centroid attribute.
+
 ### Endpoints:
 
 | Description                             | Endpoints                              | Environment |
