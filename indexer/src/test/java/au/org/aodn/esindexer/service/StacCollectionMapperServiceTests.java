@@ -202,8 +202,6 @@ public class StacCollectionMapperServiceTests {
         String xml3 = readResourceFile("classpath:canned/sample7.xml");
         String expected3 = readResourceFile("classpath:canned/sample7_stac_no_es.json");
         indexerService.indexMetadata(xml3);
-        var b = lastRequest.get().document();
-        var a = lastRequest.get().document().toString();
         Map<?,?> content3 = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
         String out3 = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content3);
         JSONAssert.assertEquals(
@@ -223,6 +221,7 @@ public class StacCollectionMapperServiceTests {
         // and now we can use it to compare expected result.
         Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
         String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
+        log.info(out);
         JSONAssert.assertEquals(objectMapper.readTree(expected).toPrettyString(),
                 objectMapper.readTree(out.strip()).toPrettyString(),
                 JSONCompareMode.STRICT);
@@ -313,6 +312,7 @@ public class StacCollectionMapperServiceTests {
 
         Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
         String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
+        log.info(out);
         JSONAssert.assertEquals(
                 objectMapper.readTree(expected).toPrettyString(),
                 objectMapper.readTree(out.strip()).toPrettyString(),
@@ -330,6 +330,7 @@ public class StacCollectionMapperServiceTests {
 
         Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
         String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
+
         JSONAssert.assertEquals(
                 objectMapper.readTree(expected).toPrettyString(),
                 objectMapper.readTree(out.strip()).toPrettyString(),

@@ -28,7 +28,8 @@
     "temporal" : [ {
       "start" : "2010-01-21T01:00:00Z",
       "end" : "2017-03-27T12:59:59Z"
-    } ]
+    } ],
+    "centroid" : [ [ 139.37701522004807, -38.30843369726482 ] ]
   },
   "contacts" : [ {
     "roles" : [ "pointOfContact", "about" ],

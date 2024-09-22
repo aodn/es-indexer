@@ -237,7 +237,7 @@ public class IndexerServiceTests extends BaseTestClass {
      * @throws IOException
      */
     @Test
-    public void verifyThumbnailLinkNullAddedOnIndex() throws IOException {
+    public void verifyThumbnailLinkNullAdbbdedOnIndex() throws IOException {
         String uuid = "5905b3eb-aad0-4f9c-a03e-a02fb3488082";
         try {
             String expectedData = readResourceFile("classpath:canned/sample7_stac.json");
@@ -248,8 +248,6 @@ public class IndexerServiceTests extends BaseTestClass {
             Hit<ObjectNode> objectNodeHit = indexerService.getDocumentByUUID(uuid);
 
             String test = String.valueOf(Objects.requireNonNull(objectNodeHit.source()));
-            logger.info(test);
-
             String expected = indexerObjectMapper.readTree(expectedData).toPrettyString();
             String actual = indexerObjectMapper.readTree(test).toPrettyString();
 

@@ -58,7 +58,8 @@
     "temporal" : [ {
       "start" : "2021-09-30T14:00:00Z",
       "end" : "2022-12-31T12:59:59Z"
-    } ]
+    } ],
+    "centroid" : [ ]
   },
   "contacts" : [ {
     "roles" : [ "principalInvestigator", "about" ],
