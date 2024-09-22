@@ -1,210 +1,357 @@
 {
-  "title" : "Seaglider : a platform of the IMOS ANFOG facility",
-  "description" : "The Australian National Facility for Ocean Gliders (ANFOG) manages five Sea gliders to monitor the boundary currents surroundings Australia.\n\n                    Seagliders are autonomous underwater vehicles (AUV) which harvest their propulsion from the ocean itself. By changing its buoyancy via an inflatable oil-filled bladder, the Seaglider is able to descend and ascend. This momentum is converted to forward motion by its wings. Pitch adjustments are made by moving an internal mass (battery pack) forward or backward, and steering is done by rolling the battery packs. Moving at an average horizontal velocity of 25 - 40 cm s-1, the glider navigates its way to a series of waypoints using GPS, internal dead reckoning and altimeter measurements. Because the gliders are programmed to provide data and vehicle technical parameters through satellite communication when it is at the surface and glider pilots at the ANFOG control centre (at the University of Western Australia) can continuously trim the Seaglider for optimal flight, change the voyage route, and examine the scientific data during the mission.\n\n                    Sea gliders, built at the University of Washington, are designed to operate most efficiently in the open ocean up to 1000m water depth. Sea gliders have a maximum endurance time of up to 6 months and are used to gather long term environmental records.\n\n                    Sea gliders are equipped with a Seabird CTD (SBE 41), WETLabs ECO Triplet (measuring chlorophyll-a, CDOM and 660nm Backscatter) and a Seabird oxygen sensor (SBE 43).",
-  "extent" : {
-    "bbox" : [ [ 112.0, -44.0, 154.0, -9.0 ], [ 112.0, -44.0, 154.0, -9.0 ] ],
-    "temporal" : [ [ null, null ] ]
+  "title": "Seaglider : a platform of the IMOS ANFOG facility",
+  "description": "The Australian National Facility for Ocean Gliders (ANFOG) manages five Sea gliders to monitor the boundary currents surroundings Australia.\n\n                    Seagliders are autonomous underwater vehicles (AUV) which harvest their propulsion from the ocean itself. By changing its buoyancy via an inflatable oil-filled bladder, the Seaglider is able to descend and ascend. This momentum is converted to forward motion by its wings. Pitch adjustments are made by moving an internal mass (battery pack) forward or backward, and steering is done by rolling the battery packs. Moving at an average horizontal velocity of 25 - 40 cm s-1, the glider navigates its way to a series of waypoints using GPS, internal dead reckoning and altimeter measurements. Because the gliders are programmed to provide data and vehicle technical parameters through satellite communication when it is at the surface and glider pilots at the ANFOG control centre (at the University of Western Australia) can continuously trim the Seaglider for optimal flight, change the voyage route, and examine the scientific data during the mission.\n\n                    Sea gliders, built at the University of Washington, are designed to operate most efficiently in the open ocean up to 1000m water depth. Sea gliders have a maximum endurance time of up to 6 months and are used to gather long term environmental records.\n\n                    Sea gliders are equipped with a Seabird CTD (SBE 41), WETLabs ECO Triplet (measuring chlorophyll-a, CDOM and 660nm Backscatter) and a Seabird oxygen sensor (SBE 43).",
+  "extent": {
+    "bbox": [
+      [
+        112.0,
+        -44.0,
+        154.0,
+        -9.0
+      ],
+      [
+        112.0,
+        -44.0,
+        154.0,
+        -9.0
+      ]
+    ],
+    "temporal": [
+      [
+        null,
+        null
+      ]
+    ]
   },
-  "summaries" : {
-    "score" : 1,
-    "status" : "",
-    "credits" : [ "Australia’s Integrated Marine Observing System (IMOS) is enabled by the National Collaborative Research Infrastructure Strategy (NCRIS). It is operated by a consortium of institutions as an unincorporated joint venture, with the University of Tasmania as Lead Agent.", "The University of Western Australia (UWA)" ],
-    "scope" : {
-      "code" : "collectionHardware",
-      "name" : "IMOS Platform level record"
+  "summaries": {
+    "score": 1,
+    "status": "",
+    "credits": [
+      "Australia’s Integrated Marine Observing System (IMOS) is enabled by the National Collaborative Research Infrastructure Strategy (NCRIS). It is operated by a consortium of institutions as an unincorporated joint venture, with the University of Tasmania as Lead Agent.",
+      "The University of Western Australia (UWA)"
+    ],
+    "scope": {
+      "code": "collectionHardware",
+      "name": "IMOS Platform level record"
     },
-    "creation" : "2017-07-13T11:23:44",
-    "revision" : "2017-07-13T11:23:44",
-    "dataset_provider" : "IMOS",
-    "update_frequency" : "other",
-    "proj:geometry" : {
-      "geometries" : [ {
-        "type" : "Polygon",
-        "coordinates" : [ [ [ 112, -44 ], [ 154, -44 ], [ 154, -9 ], [ 112, -9 ], [ 112, -44 ] ] ]
-      } ],
-      "type" : "GeometryCollection"
+    "creation": "2017-07-13T11:23:44",
+    "revision": "2017-07-13T11:23:44",
+    "dataset_provider": "IMOS",
+    "update_frequency":"other",
+    "proj:geometry": {
+      "geometries": [
+        {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                112,
+                -44
+              ],
+              [
+                154,
+                -44
+              ],
+              [
+                154,
+                -9
+              ],
+              [
+                112,
+                -9
+              ],
+              [
+                112,
+                -44
+              ]
+            ]
+          ]
+        }
+      ],
+      "type": "GeometryCollection"
     },
     "temporal" : [ ],
     "centroid" : [ [ 116.98864675370345, -39.16449548072042 ], [ 113.43271764986251, -29.81003497000959 ], [ 121.1335093924365, -33.934773499510804 ], [ 116.40419537058249, -17.738779238923012 ], [ 116.94354720170081, -11.534347676726366 ], [ 127.00017431393434, -39.000182823413326 ], [ 122.0376360891444, -33.928238500012576 ], [ 122.76064153461681, -33.946556704469806 ], [ 128.49601762149308, -32.99448792880649 ], [ 129.65213358146755, -14.011750519999982 ], [ 128.70757025760446, -14.458817313263806 ], [ 126.6048834963958, -14.071096540720184 ], [ 126.26932273556417, -14.092050898822666 ], [ 126.12371321966761, -14.005918271999972 ], [ 126.07996788107748, -14.008359677999977 ], [ 126.02337702412927, -14.009499000999975 ], [ 123.46147457145952, -15.336623536723142 ], [ 126.7504167940264, -11.437091048029584 ], [ 136.54131562097223, -39.51094838477509 ], [ 133.24191721584526, -33.13466739387659 ], [ 137.4711121512753, -33.52235109884194 ], [ 139.02062004546252, -15.41378879219159 ], [ 137.60967211834003, -11.154339668325017 ], [ 132.29728456696645, -11.852414617962246 ], [ 147.66106446666996, -40.436308658333296 ], [ 151.19008727690297, -33.986387021999974 ], [ 151.70849437031276, -33.53724667235752 ], [ 151.90559173577907, -24.102342097466128 ], [ 151.58202042152863, -24.03347430791399 ], [ 149.19858123333023, -17.64625031472488 ], [ 147.2632825930675, -11.554683256378954 ], [ 142.01359867372227, -12.044964083185999 ], [ 142.0027704646667, -12.715161325863827 ], [ 153.0, -39.0 ], [ 153.77039104850004, -28.933811130999914 ], [ 153.0, -19.0 ], [ 152.99961858033822, -11.519991788043514 ], [ 148.78826452644952, -9.035309200344546 ] ]
   },
-  "contacts" : [ {
-    "roles" : [ "pointOfContact", "about" ],
-    "organization" : "School of Civil, Environmental and Mining Engineering (CEME), The University of Western Australia (UWA)",
-    "name" : "Pattiaratchi, Charitha, Professor",
-    "position" : "",
-    "emails" : [ "chari.pattiaratchi@uwa.edu.au" ],
-    "addresses" : [ {
-      "deliveryPoint" : [ "MO51, 35 Stirling Highway" ],
-      "city" : "Crawley",
-      "country" : "Australia",
-      "postalCode" : "6009",
-      "administrativeArea" : "Western Australia"
-    } ],
-    "phones" : [ {
-      "roles" : [ "voice" ],
-      "value" : "61 8 6488 3525"
-    }, {
-      "roles" : [ "facsimile" ],
-      "value" : "61 8 6488 1015"
-    } ],
-    "links" : [ ]
-  }, {
-    "roles" : [ "distributor", "metadata" ],
-    "organization" : "Integrated Marine Observing System (IMOS)",
-    "name" : "",
-    "position" : "Data Officer",
-    "emails" : [ "info@aodn.org.au" ],
-    "addresses" : [ {
-      "deliveryPoint" : [ "University of Tasmania", "Private Bag 110" ],
-      "city" : "Hobart",
-      "country" : "Australia",
-      "postalCode" : "7001",
-      "administrativeArea" : "Tasmania"
-    } ],
-    "phones" : [ {
-      "roles" : [ "voice" ],
-      "value" : "61 3 6226 7488"
-    }, {
-      "roles" : [ "facsimile" ],
-      "value" : "61 3 6226 2107"
-    } ],
-    "links" : [ {
-      "href" : "http://imos.org.au/aodn.html",
-      "type" : "WWW:LINK-1.0-http--link",
-      "title" : "Website of the Australian Ocean Data Network (AODN)"
-    } ]
-  }, {
-    "roles" : [ "resourceProvider", "citation" ],
-    "organization" : "Integrated Marine Observing System (IMOS)",
-    "name" : null,
-    "position" : null,
-    "emails" : [ "imos@imos.org.au" ],
-    "addresses" : [ {
-      "deliveryPoint" : [ "Private bag 110" ],
-      "city" : "Hobart",
-      "country" : "Australia",
-      "postalCode" : "7001",
-      "administrativeArea" : "Tasmania"
-    } ],
-    "phones" : [ {
-      "roles" : [ "voice" ],
-      "value" : "61 3 6226 7549"
-    }, {
-      "roles" : [ "facsimile" ],
-      "value" : "61 3 6226 2107"
-    } ],
-    "links" : [ {
-      "href" : "http://www.imos.org.au/html",
-      "type" : "WWW:LINK-1.0-http--link",
-      "title" : "Website of the Integrated Marine Observing System (IMOS)"
-    } ]
-  } ],
-  "languages" : [ {
-    "code" : "eng",
-    "name" : "English"
-  } ],
-  "links" : [ {
-    "href" : "https://catalogue-imos.aodn.org.au:443/geonetwork/srv/api/records/0d9c8283-6aca-4c21-8495-deed7f316c75",
-    "rel" : "describedby",
-    "type" : "text/html",
-    "title" : "Full metadata link"
-  }, {
-    "href" : "https://licensebuttons.net/l/by/4.0/88x31.png",
-    "rel" : "license",
-    "type" : "image/png"
-  }, {
-    "href" : "http://creativecommons.org/licenses/by/4.0/",
-    "rel" : "license",
-    "type" : "text/html"
-  } ],
-  "license" : "Creative Commons Attribution 4.0 International License",
-  "providers" : [ {
-    "name" : "Integrated Marine Observing System (IMOS)",
-    "roles" : [ "distributor" ],
-    "url" : "http://imos.org.au/aodn.html"
-  } ],
-  "themes" : [ {
-    "concepts" : [ {
-      "id" : "Coloured Dissolved Organic Matter (CDOM)",
-      "url" : null
-    }, {
-      "id" : "IMOS Facility | ANFOG | Australian National Facility for Ocean Gliders",
-      "url" : null
-    }, {
-      "id" : "IMOS Node | WAIMOS | Western Australia Integrated Marine Observing System",
-      "url" : null
-    }, {
-      "id" : "IMOS Node | Bluewater and Climate",
-      "url" : null
-    }, {
-      "id" : "IMOS Node | NSW-IMOS | New South Wales Integrated Marine Observing System",
-      "url" : null
-    }, {
-      "id" : "IMOS Node | SA-IMOS | Southern Australian Integrated Marine Observing System",
-      "url" : null
-    }, {
-      "id" : "Seaglider",
-      "url" : null
-    }, {
-      "id" : "Glider",
-      "url" : null
-    } ],
-    "scheme" : "theme",
-    "description" : "IMOS",
-    "title" : "IMOS Keywords Thesaurus"
-  }, {
-    "concepts" : [ {
-      "id" : "Oceans | Ocean Chemistry | Chlorophyll",
-      "url" : null
-    }, {
-      "id" : "Oceans | Ocean Chemistry | Suspended Solids",
-      "url" : null
-    }, {
-      "id" : "Oceans | Ocean Chemistry | Oxygen",
-      "url" : null
-    }, {
-      "id" : "Oceans | Ocean Temperature | Water Temperature",
-      "url" : null
-    }, {
-      "id" : "Oceans | Ocean Optics | Fluorescence",
-      "url" : null
-    }, {
-      "id" : "Oceans | Ocean Optics | Turbidity",
-      "url" : null
-    }, {
-      "id" : "Oceans | Salinity/density | Conductivity",
-      "url" : null
-    }, {
-      "id" : "Oceans | Salinity/density | Salinity",
-      "url" : null
-    }, {
-      "id" : "Oceans | Ocean Circulation | Ocean Currents",
-      "url" : null
-    }, {
-      "id" : "Oceans | Ocean Chemistry | Organic Matter",
-      "url" : null
-    } ],
-    "scheme" : "",
-    "description" : "GCMD",
-    "title" : "NASA/Global Change Master Directory Earth Science Keywords Version 5.3.8"
-  }, {
-    "concepts" : [ {
-      "id" : "CTD (Conductivity-Temperature-Depth Profilers)",
-      "url" : null
-    }, {
-      "id" : "Fluorometers",
-      "url" : null
-    } ],
-    "scheme" : "theme",
-    "description" : "MCP",
-    "title" : "Marine Community Profile of ISO19115 v1.4 Collection Methods Vocabulary (Annex C.1.3)"
-  } ],
-  "id" : "0d9c8283-6aca-4c21-8495-deed7f316c75",
-  "search_suggestions" : {
-    "abstract_phrases" : [ ]
+  "contacts": [
+    {
+      "roles": [
+        "pointOfContact",
+        "about"
+      ],
+      "organization": "School of Civil, Environmental and Mining Engineering (CEME), The University of Western Australia (UWA)",
+      "name": "Pattiaratchi, Charitha, Professor",
+      "position": "",
+      "emails": [
+        "chari.pattiaratchi@uwa.edu.au"
+      ],
+      "addresses": [
+        {
+          "deliveryPoint": [
+            "MO51, 35 Stirling Highway"
+          ],
+          "city": "Crawley",
+          "country": "Australia",
+          "postalCode": "6009",
+          "administrativeArea": "Western Australia"
+        }
+      ],
+      "phones": [
+        {
+          "roles": [
+            "voice"
+          ],
+          "value": "61 8 6488 3525"
+        },
+        {
+          "roles": [
+            "facsimile"
+          ],
+          "value": "61 8 6488 1015"
+        }
+      ],
+      "links": []
+    },
+    {
+      "roles": [
+        "distributor",
+        "metadata"
+      ],
+      "organization": "Integrated Marine Observing System (IMOS)",
+      "name": "",
+      "position": "Data Officer",
+      "emails": [
+        "info@aodn.org.au"
+      ],
+      "addresses": [
+        {
+          "deliveryPoint": [
+            "University of Tasmania",
+            "Private Bag 110"
+          ],
+          "city": "Hobart",
+          "country": "Australia",
+          "postalCode": "7001",
+          "administrativeArea": "Tasmania"
+        }
+      ],
+      "phones": [
+        {
+          "roles": [
+            "voice"
+          ],
+          "value": "61 3 6226 7488"
+        },
+        {
+          "roles": [
+            "facsimile"
+          ],
+          "value": "61 3 6226 2107"
+        }
+      ],
+      "links": [
+        {
+          "href": "http://imos.org.au/aodn.html",
+          "type": "WWW:LINK-1.0-http--link",
+          "title": "Website of the Australian Ocean Data Network (AODN)"
+        }
+      ]
+    },
+    {
+      "roles": [
+        "resourceProvider",
+        "citation"
+      ],
+      "organization": "Integrated Marine Observing System (IMOS)",
+      "name": null,
+      "position": null,
+      "emails": [
+        "imos@imos.org.au"
+      ],
+      "addresses": [
+        {
+          "deliveryPoint": [
+            "Private bag 110"
+          ],
+          "city": "Hobart",
+          "country": "Australia",
+          "postalCode": "7001",
+          "administrativeArea": "Tasmania"
+        }
+      ],
+      "phones": [
+        {
+          "roles": [
+            "voice"
+          ],
+          "value": "61 3 6226 7549"
+        },
+        {
+          "roles": [
+            "facsimile"
+          ],
+          "value": "61 3 6226 2107"
+        }
+      ],
+      "links": [
+        {
+          "href": "http://www.imos.org.au/html",
+          "type": "WWW:LINK-1.0-http--link",
+          "title": "Website of the Integrated Marine Observing System (IMOS)"
+        }
+      ]
+    }
+  ],
+  "languages": [
+    {
+      "code": "eng",
+      "name": "English"
+    }
+  ],
+  "links": [
+    {
+      "href": "https://catalogue-imos.aodn.org.au:443/geonetwork/srv/api/records/0d9c8283-6aca-4c21-8495-deed7f316c75",
+      "rel": "describedby",
+      "type": "text/html",
+      "title": "Full metadata link"
+    },
+    {
+      "href": "https://licensebuttons.net/l/by/4.0/88x31.png",
+      "rel": "license",
+      "type": "image/png"
+    },
+    {
+      "href": "http://creativecommons.org/licenses/by/4.0/",
+      "rel": "license",
+      "type": "text/html"
+    }
+  ],
+  "license": "Creative Commons Attribution 4.0 International License",
+  "providers": [
+    {
+      "name": "Integrated Marine Observing System (IMOS)",
+      "roles": [
+        "distributor"
+      ],
+      "url": "http://imos.org.au/aodn.html"
+    }
+  ],
+  "themes": [
+    {
+      "concepts": [
+        {
+          "id": "Coloured Dissolved Organic Matter (CDOM)",
+          "url": null
+        },
+        {
+          "id": "IMOS Facility | ANFOG | Australian National Facility for Ocean Gliders",
+          "url": null
+        },
+        {
+          "id": "IMOS Node | WAIMOS | Western Australia Integrated Marine Observing System",
+          "url": null
+        },
+        {
+          "id": "IMOS Node | Bluewater and Climate",
+          "url": null
+        },
+        {
+          "id": "IMOS Node | NSW-IMOS | New South Wales Integrated Marine Observing System",
+          "url": null
+        },
+        {
+          "id": "IMOS Node | SA-IMOS | Southern Australian Integrated Marine Observing System",
+          "url": null
+        },
+        {
+          "id": "Seaglider",
+          "url": null
+        },
+        {
+          "id": "Glider",
+          "url": null
+        }
+      ],
+      "scheme": "theme",
+      "description": "IMOS",
+      "title": "IMOS Keywords Thesaurus"
+    },
+    {
+      "concepts": [
+        {
+          "id": "Oceans | Ocean Chemistry | Chlorophyll",
+          "url": null
+        },
+        {
+          "id": "Oceans | Ocean Chemistry | Suspended Solids",
+          "url": null
+        },
+        {
+          "id": "Oceans | Ocean Chemistry | Oxygen",
+          "url": null
+        },
+        {
+          "id": "Oceans | Ocean Temperature | Water Temperature",
+          "url": null
+        },
+        {
+          "id": "Oceans | Ocean Optics | Fluorescence",
+          "url": null
+        },
+        {
+          "id": "Oceans | Ocean Optics | Turbidity",
+          "url": null
+        },
+        {
+          "id": "Oceans | Salinity/density | Conductivity",
+          "url": null
+        },
+        {
+          "id": "Oceans | Salinity/density | Salinity",
+          "url": null
+        },
+        {
+          "id": "Oceans | Ocean Circulation | Ocean Currents",
+          "url": null
+        },
+        {
+          "id": "Oceans | Ocean Chemistry | Organic Matter",
+          "url": null
+        }
+      ],
+      "scheme": "",
+      "description": "GCMD",
+      "title": "NASA/Global Change Master Directory Earth Science Keywords Version 5.3.8"
+    },
+    {
+      "concepts": [
+        {
+          "id": "CTD (Conductivity-Temperature-Depth Profilers)",
+          "url": null
+        },
+        {
+          "id": "Fluorometers",
+          "url": null
+        }
+      ],
+      "scheme": "theme",
+      "description": "MCP",
+      "title": "Marine Community Profile of ISO19115 v1.4 Collection Methods Vocabulary (Annex C.1.3)"
+    }
+  ],
+  "id": "0d9c8283-6aca-4c21-8495-deed7f316c75",
+  "search_suggestions": {
+    "abstract_phrases": []
   },
-  "sci:citation" : "{\"suggestedCitation\":\"The citation in a list of references is: \\\"IMOS [year-of-data-download], [Title], [data-access-URL], accessed [date-of-access].\\\"\",\"useLimitations\":[\"Data, products and services from IMOS are provided \\\"as is\\\" without any warranty as to fitness for a particular purpose.\"],\"otherConstraints\":[\"Any users of IMOS data are required to clearly acknowledge the source of the material derived from IMOS in the format: \\\"Data was sourced from Australia’s Integrated Marine Observing System (IMOS) – IMOS is enabled by the National Collaborative Research Infrastructure strategy (NCRIS).\\\" If relevant, also credit other organisations involved in collection of this particular datastream (as listed in 'credit' in the metadata record).\"]}",
-  "type" : "Collection",
-  "stac_version" : "1.0.0",
-  "stac_extensions" : [ "https://stac-extensions.github.io/scientific/v1.0.0/schema.json", "https://stac-extensions.github.io/contacts/v0.1.1/schema.json", "https://stac-extensions.github.io/projection/v1.1.0/schema.json", "https://stac-extensions.github.io/language/v1.0.0/schema.json", "https://stac-extensions.github.io/themes/v1.0.0/schema.json" ]
+  "sci:citation": "{\"suggestedCitation\":\"The citation in a list of references is: \\\"IMOS [year-of-data-download], [Title], [data-access-URL], accessed [date-of-access].\\\"\",\"useLimitations\":[\"Data, products and services from IMOS are provided \\\"as is\\\" without any warranty as to fitness for a particular purpose.\"],\"otherConstraints\":[\"Any users of IMOS data are required to clearly acknowledge the source of the material derived from IMOS in the format: \\\"Data was sourced from Australia’s Integrated Marine Observing System (IMOS) – IMOS is enabled by the National Collaborative Research Infrastructure strategy (NCRIS).\\\" If relevant, also credit other organisations involved in collection of this particular datastream (as listed in 'credit' in the metadata record).\"]}",
+  "type": "Collection",
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/contacts/v0.1.1/schema.json",
+    "https://stac-extensions.github.io/projection/v1.1.0/schema.json",
+    "https://stac-extensions.github.io/language/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/themes/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/web-map-links/v1.2.0/schema.json"
+  ]
 }

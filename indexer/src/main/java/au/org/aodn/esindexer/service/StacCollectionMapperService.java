@@ -588,7 +588,24 @@ public abstract class StacCollectionMapperService {
                                 linkModel.setType(Objects.equals(ciOnlineResource.getProtocol().getCharacterString().getValue().toString(), "WWW:LINK-1.0-http--link") ? "text/html" : "");
                             }
                             linkModel.setHref(ciOnlineResource.getLinkage().getCharacterString().getValue().toString());
-                            linkModel.setRel(RelationType.RELATED.getValue());
+
+                            // an empty string by default
+                            linkModel.setRel("");
+
+                            // differentiate WMS, WFS and others
+                            safeGet(() -> ciOnlineResource.getProtocol().getCharacterString().getValue().toString())
+                                    .ifPresent(protocol -> {
+                                        if (LinkUtils.isWms(protocol)) {
+                                            linkModel.setRel(RelationType.WMS.getValue());
+                                        }
+                                        else if (LinkUtils.isWfs(protocol)) {
+                                            linkModel.setRel(RelationType.WFS.getValue());
+                                        }
+                                        else {
+                                            linkModel.setRel(RelationType.RELATED.getValue());
+                                        }
+                                    });
+
                             linkModel.setTitle(getOnlineResourceName(ciOnlineResource));
                             results.add(linkModel);
                         }

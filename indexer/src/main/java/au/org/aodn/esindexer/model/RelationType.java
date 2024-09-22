@@ -13,6 +13,8 @@ public enum RelationType {
     DESCRIBEDBY("describedby"),
     ICON("icon"),
     PREVIEW("preview"),
+    WFS("wfs"),
+    WMS("wms"),
     ;
 
     private final String value;

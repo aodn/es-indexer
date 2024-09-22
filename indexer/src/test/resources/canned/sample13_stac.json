@@ -1,23 +1,70 @@
 {
-  "title" : "RV Investigator Voyage IN2016_T03 Underway UWY Data",
-  "description" : "This record describes the Underway (UWY) data collected from the Marine National Facility (MNF) RV Investigator  Voyage IN2016_T03 titled: \"Transit Brisbane to Sydney.\"  The voyage took place between November 18 and November 21, 2016 departing from Brisbane (QLD) and arriving in Sydney (NSW).\n\n                    Standard Underway data is continuously recorded, consisting of:\n\n                    (1) NAV: Navigation data: (dual GPS) Latitude, Longitude, Speed, Heading, course over ground, Gyros, and Doppler Log.\n\n                    (2) TSG: Thermosalinograph: Water Salinity, flow-rate, Temperature, Fluorescence, and pCO2.\n\n                    (3) MET: Atmospheric (port and starboard): Humidity, Wind speed and direction (vane and ultrasonic), Radiometer, Pyranometer, PAR, Air temperature, Air pressure, Rain, Ozone and Trace gases.\n\n                    Data are recorded at 5 second intervals. Near real-time data is available via the link below. This dataset will be processed and archived within the CSIRO Oceans & Atmosphere Data Centre in Hobart. Data is available in 5sec intervals in NetCDF, 10 sec and 5 min intervals in ascii format. Additional information regarding this dataset is contained in the cruise report for this voyage and/or the data processing report.",
-  "extent" : {
-    "bbox" : [ [ 151.0, -34.0, 153.0, -26.0 ], [ 151.0, -34.0, 153.0, -26.0 ] ],
-    "temporal" : [ [ "2016-11-17T13:00:00Z", "2016-11-20T12:59:59Z" ], [ "2016-11-17T13:00:00Z", "2016-11-20T12:59:59Z" ] ]
+  "title": "RV Investigator Voyage IN2016_T03 Underway UWY Data",
+  "description": "This record describes the Underway (UWY) data collected from the Marine National Facility (MNF) RV Investigator  Voyage IN2016_T03 titled: \"Transit Brisbane to Sydney.\"  The voyage took place between November 18 and November 21, 2016 departing from Brisbane (QLD) and arriving in Sydney (NSW).\n\n                    Standard Underway data is continuously recorded, consisting of:\n\n                    (1) NAV: Navigation data: (dual GPS) Latitude, Longitude, Speed, Heading, course over ground, Gyros, and Doppler Log.\n\n                    (2) TSG: Thermosalinograph: Water Salinity, flow-rate, Temperature, Fluorescence, and pCO2.\n\n                    (3) MET: Atmospheric (port and starboard): Humidity, Wind speed and direction (vane and ultrasonic), Radiometer, Pyranometer, PAR, Air temperature, Air pressure, Rain, Ozone and Trace gases.\n\n                    Data are recorded at 5 second intervals. Near real-time data is available via the link below. This dataset will be processed and archived within the CSIRO Oceans & Atmosphere Data Centre in Hobart. Data is available in 5sec intervals in NetCDF, 10 sec and 5 min intervals in ascii format. Additional information regarding this dataset is contained in the cruise report for this voyage and/or the data processing report.",
+  "extent": {
+    "bbox": [
+      [
+        151.0,
+        -34.0,
+        153.0,
+        -26.0
+      ],
+      [
+        151.0,
+        -34.0,
+        153.0,
+        -26.0
+      ]
+    ],
+    "temporal": [
+      [
+        "2016-11-17T13:00:00Z",
+        "2016-11-20T12:59:59Z"
+      ],
+      [
+        "2016-11-17T13:00:00Z",
+        "2016-11-20T12:59:59Z"
+      ]
+    ]
   },
-  "summaries" : {
-    "score" : 1,
-    "status" : "completed",
-    "credits" : [ ],
-    "statement" : "Processing Comments:\n                    The drop keels were completely raised to the maintenance position so the thermosalinograph (TSG) wasn’t recording during the transit as the water intake is on the port keel, therefore there is no salinity or water temperature data.\n                    All Aerosol and Air-Chemistry inlet tubes were covered for protection during the dry-docking. Appendix 1 indicates which parameters were not recorded on this transit.",
-    "revision" : "2018-01-17T16:09:59",
-    "update_frequency" : "completed",
-    "proj:geometry" : {
-      "geometries" : [ {
-        "type" : "Polygon",
-        "coordinates" : [ [ [ 151, -34 ], [ 153, -34 ], [ 153, -26 ], [ 151, -26 ], [ 151, -34 ] ] ]
-      } ],
-      "type" : "GeometryCollection"
+  "summaries": {
+    "score": 1,
+    "status": "completed",
+    "credits": [],
+    "statement": "Processing Comments:\n                    The drop keels were completely raised to the maintenance position so the thermosalinograph (TSG) wasn’t recording during the transit as the water intake is on the port keel, therefore there is no salinity or water temperature data.\n                    All Aerosol and Air-Chemistry inlet tubes were covered for protection during the dry-docking. Appendix 1 indicates which parameters were not recorded on this transit.",
+    "revision": "2018-01-17T16:09:59",
+    "update_frequency": "completed",
+    "proj:geometry": {
+      "geometries": [
+        {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                151,
+                -34
+              ],
+              [
+                153,
+                -34
+              ],
+              [
+                153,
+                -26
+              ],
+              [
+                151,
+                -26
+              ],
+              [
+                151,
+                -34
+              ]
+            ]
+          ]
+        }
+      ],
+      "type": "GeometryCollection"
     },
     "temporal" : [ {
       "start" : "2016-11-17T13:00:00Z",
@@ -25,223 +72,306 @@
     } ],
     "centroid" : [ [ 151.19008727690297, -33.986387021999974 ], [ 152.3598275201544, -33.158921798959184 ], [ 152.99593212166667, -30.740857413163468 ] ]
   },
-  "contacts" : [ {
-    "roles" : [ "processor", "metadata" ],
-    "organization" : "CSIRO",
-    "name" : "Dirita, Vito",
-    "position" : "",
-    "emails" : [ ],
-    "addresses" : [ ],
-    "phones" : [ ],
-    "links" : [ ]
-  }, {
-    "roles" : [ "pointOfContact", "metadata" ],
-    "organization" : "CSIRO Oceans & Atmosphere - Hobart",
-    "name" : "CSIRO O&A, Information & Data Centre",
-    "position" : "Data Requests",
-    "emails" : [ ],
-    "addresses" : [ ],
-    "phones" : [ ],
-    "links" : [ ]
-  } ],
-  "languages" : [ {
-    "code" : "eng",
-    "name" : "English"
-  } ],
-  "links" : [ {
-    "href" : "https://www.marine.csiro.au/data/trawler/dataset.cfm?survey=IN2016_T03&data_type=uwy",
-    "rel" : "related",
-    "type" : "",
-    "title" : "Data Access Via Data Trawler"
-  }, {
-    "href" : "https://creativecommons.org/licenses/by/4.0/",
-    "rel" : "related",
-    "type" : "text/html",
-    "title" : "License / Attribution"
-  }, {
-    "href" : "https://www.marine.csiro.au/data/reporting/get_file.cfm?eov_pub_id=1484",
-    "rel" : "related",
-    "type" : "",
-    "title" : "Download: processing report (pdf): in2016_t03_UWY_ProcessingReport.pdf"
-  }, {
-    "href" : "https://www.marine.csiro.au/data/trawler/download.cfm?file_id=3494",
-    "rel" : "related",
-    "type" : "",
-    "title" : "Download: 10-second (csv data): in2016_t03uwy10sec_csv.zip"
-  }, {
-    "href" : "https://www.marine.csiro.au/data/trawler/download.cfm?file_id=3495",
-    "rel" : "related",
-    "type" : "",
-    "title" : "Download: 5-minute (csv data): in2016_t03uwy5min_csv.zip"
-  }, {
-    "href" : "https://www.marine.csiro.au/data/trawler/download.cfm?file_id=3496",
-    "rel" : "related",
-    "type" : "",
-    "title" : "Download: 5-second (netcdf data): in2016_t03uwy_nc.zip"
-  }, {
-    "href" : "https://www.marine.csiro.au/data/trawler/survey_list.cfm?source_id=309",
-    "rel" : "related",
-    "type" : "text/html",
-    "title" : "RV Investigator Survey Information"
-  }, {
-    "href" : "https://www.marine.csiro.au/data/underway/?survey=in2016_t03",
-    "rel" : "related",
-    "type" : "text/html",
-    "title" : "Visualisation tool for Underway Data"
-  }, {
-    "href" : "https://mnf.csiro.au/",
-    "rel" : "related",
-    "type" : "text/html",
-    "title" : "MNF Home page"
-  } ],
-  "license" : "Attribution 4.0",
-  "providers" : [ {
-    "name" : "CSIRO",
-    "roles" : [ "processor" ]
-  }, {
-    "name" : "CSIRO Oceans & Atmosphere - Hobart",
-    "roles" : [ "pointOfContact" ]
-  } ],
-  "themes" : [ {
-    "concepts" : [ {
-      "id" : "Earth Science | Atmosphere | Atmospheric Water Vapor | Humidity",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/427e5121-a142-41cb-a8e9-a70b7f98eb6a"
-    }, {
-      "id" : "Earth Science | Oceans | Salinity/Density | Salinity",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/7e95b5fc-1d58-431a-af36-948b29fa870d"
-    }, {
-      "id" : "Earth Science | Atmosphere | Atmospheric Winds | Surface Winds",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/10685919-bc01-43e7-901a-b62ac44627f3"
-    }, {
-      "id" : "Earth Science | Atmosphere | Atmospheric Radiation | Solar Radiation",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/a0f3474e-9a54-4a82-97c4-43864b48df4c"
-    }, {
-      "id" : "Earth Science | Atmosphere | Atmospheric Temperature | Air Temperature",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/f634ab55-de40-4d0b-93bc-691bf5408ccb"
-    }, {
-      "id" : "Earth Science | Atmosphere | Atmospheric Pressure | Atmospheric Pressure Measurements",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/9efbc088-ba8c-4c9c-a458-ad6ad63f4188"
-    }, {
-      "id" : "Earth Science | Oceans | Ocean Circulation | Ocean Currents",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/510c5f78-e19e-4ce4-b59a-8937aeb84631"
-    }, {
-      "id" : "Earth Science | Oceans | Ocean Optics | Fluorescence",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/a60ae1b6-abfc-4905-8c09-772da7bb1a10"
-    }, {
-      "id" : "Earth Science | Oceans | Ocean Temperature | Sea Surface Temperature",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/bd24a9a9-7d52-4c29-b2a0-6cefd216ae78"
-    }, {
-      "id" : "Earth Science | Oceans | Ocean Chemistry | Carbon Dioxide",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/26afa886-4866-4536-be3a-6f9db9aacd97"
-    }, {
-      "id" : "Earth Science | Atmosphere | Air Quality | Tropospheric Ozone",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/426aee98-764c-4c21-ab65-1e9d4bd6b0d0"
-    }, {
-      "id" : "Earth Science | Atmosphere | Atmospheric Chemistry | Trace Gases/Trace Species",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/4dd22dc9-1db4-4187-a2b7-f5b76d666055"
-    }, {
-      "id" : "Earth Science | Atmosphere | Atmospheric Winds | Surface Winds | Wind Speed/Wind Direction",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/a92f49f3-e2ee-4ef4-b064-39311ffb95d3"
-    }, {
-      "id" : "Earth Science | Biosphere | Vegetation | Photosynthetically Active Radiation",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/db69ecb1-0738-4d82-943f-ae92093f500d"
-    }, {
-      "id" : "Earth Science | Atmosphere | Precipitation | Rain",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/09a57dc7-3911-4a65-9f12-b819652b8671"
-    }, {
-      "id" : "Earth Science | Oceans | Ocean Chemistry | Oxygen",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/90aa8838-79bd-4b28-b518-8217e863c385"
-    }, {
-      "id" : "Earth Science Services | Data Analysis And Visualization | Global Positioning Systems",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/f082ad51-4ce4-4ffe-be50-6753c4f997ae"
-    }, {
-      "id" : "Earth Science | Spectral/Engineering | Radar | Doppler Velocity",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/5d6377ee-def2-4457-b780-6bcb202d7e3e"
-    }, {
-      "id" : "Earth Science | Terrestrial Hydrosphere | Surface Water | Water Depth",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/42aa1fa1-56a9-4e96-8063-077bd7ba88d8"
-    } ],
-    "scheme" : "theme",
-    "description" : "",
-    "title" : "GCMD Keywords"
-  }, {
-    "concepts" : [ {
-      "id" : "Global / Oceans | Southern Ocean",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.place.mcp_regions&id=http://bluenet3.antcrc.utas.edu.au/mcp/geographic_extent_names#6"
-    }, {
-      "id" : "Regional Seas | Tasman Sea",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.place.mcp_regions&id=http://bluenet3.antcrc.utas.edu.au/mcp/geographic_extent_names#23"
-    }, {
-      "id" : "Global / Oceans | Pacific Ocean",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.place.mcp_regions&id=http://bluenet3.antcrc.utas.edu.au/mcp/geographic_extent_names#5"
-    } ],
-    "scheme" : "place",
-    "description" : "",
-    "title" : "MCP Geographic Extent Names"
-  }, {
-    "concepts" : [ {
-      "id" : "Marine National Facility",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.discipline.urn:marlin.csiro.au:keywords:cmarAOI&id=urn:marlin.csiro.au:keywords:cmarAOI:concept:3208"
-    } ],
-    "scheme" : "discipline",
-    "description" : "",
-    "title" : "CSIRO Areas Of Interest"
-  }, {
-    "concepts" : [ {
-      "id" : "Research Transit: IN2016_T03",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.survey.urn:marlin.csiro.au:surveyregister&id=urn:marlin.csiro.au:surveyregister:concept:2179"
-    } ],
-    "scheme" : "survey",
-    "description" : "",
-    "title" : "CSIRO Survey List"
-  }, {
-    "concepts" : [ {
-      "id" : "Vessel Data: Underway",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.discipline.urn:marlin.csiro.au:keywords:standardDataType&id=urn:marlin.csiro.au:keywords:standardDataType:concept:3514"
-    } ],
-    "scheme" : "discipline",
-    "description" : "",
-    "title" : "CSIRO Standard Data Types"
-  }, {
-    "concepts" : [ {
-      "id" : "Ship: Investigator (RV)",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.dataSource.urn:marlin.csiro.au:sourceregister&id=urn:marlin.csiro.au:sourceregister:concept:309"
-    } ],
-    "scheme" : "dataSource",
-    "description" : "",
-    "title" : "CSIRO Source List"
-  }, {
-    "concepts" : [ {
-      "id" : "Meteorological Instruments",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:keywords:equipment&id=urn:marlin.csiro.au:keywords:equipment:concept:2261"
-    }, {
-      "id" : "Thermosalinographs",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:keywords:equipment&id=urn:marlin.csiro.au:keywords:equipment:concept:2302"
-    }, {
-      "id" : "Altimeters",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:keywords:equipment&id=urn:marlin.csiro.au:keywords:equipment:concept:2206"
-    } ],
-    "scheme" : "equipment",
-    "description" : "",
-    "title" : "CSIRO Equipment"
-  }, {
-    "concepts" : [ {
-      "id" : "Coastal Waters (Australia) | Tasmania Coast East and Southeast, TAS",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.place.urn:aodn.org.au:geographicextents&id=urn:aodn.org.au:geographicextents:concept:1011"
-    }, {
-      "id" : "Coastal Waters (Australia)",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.place.urn:aodn.org.au:geographicextents&id=urn:aodn.org.au:geographicextents:concept:10002"
-    } ],
-    "scheme" : "place",
-    "description" : "",
-    "title" : "AODN Geographic Extent Names"
-  } ],
-  "id" : "27d1a942-9b21-4b4a-bede-39b00e387a75",
-  "search_suggestions" : {
-    "abstract_phrases" : [ ]
+  "contacts": [
+    {
+      "roles": [
+        "processor",
+        "metadata"
+      ],
+      "organization": "CSIRO",
+      "name": "Dirita, Vito",
+      "position": "",
+      "emails": [],
+      "addresses": [],
+      "phones": [],
+      "links": []
+    },
+    {
+      "roles": [
+        "pointOfContact",
+        "metadata"
+      ],
+      "organization": "CSIRO Oceans & Atmosphere - Hobart",
+      "name": "CSIRO O&A, Information & Data Centre",
+      "position": "Data Requests",
+      "emails": [],
+      "addresses": [],
+      "phones": [],
+      "links": []
+    }
+  ],
+  "languages": [
+    {
+      "code": "eng",
+      "name": "English"
+    }
+  ],
+  "links": [
+    {
+      "href": "https://www.marine.csiro.au/data/trawler/dataset.cfm?survey=IN2016_T03&data_type=uwy",
+      "rel": "related",
+      "type": "",
+      "title": "Data Access Via Data Trawler"
+    },
+    {
+      "href": "https://creativecommons.org/licenses/by/4.0/",
+      "rel": "related",
+      "type": "text/html",
+      "title": "License / Attribution"
+    },
+    {
+      "href": "https://www.marine.csiro.au/data/reporting/get_file.cfm?eov_pub_id=1484",
+      "rel": "related",
+      "type": "",
+      "title": "Download: processing report (pdf): in2016_t03_UWY_ProcessingReport.pdf"
+    },
+    {
+      "href": "https://www.marine.csiro.au/data/trawler/download.cfm?file_id=3494",
+      "rel": "related",
+      "type": "",
+      "title": "Download: 10-second (csv data): in2016_t03uwy10sec_csv.zip"
+    },
+    {
+      "href": "https://www.marine.csiro.au/data/trawler/download.cfm?file_id=3495",
+      "rel": "related",
+      "type": "",
+      "title": "Download: 5-minute (csv data): in2016_t03uwy5min_csv.zip"
+    },
+    {
+      "href": "https://www.marine.csiro.au/data/trawler/download.cfm?file_id=3496",
+      "rel": "related",
+      "type": "",
+      "title": "Download: 5-second (netcdf data): in2016_t03uwy_nc.zip"
+    },
+    {
+      "href": "https://www.marine.csiro.au/data/trawler/survey_list.cfm?source_id=309",
+      "rel": "related",
+      "type": "text/html",
+      "title": "RV Investigator Survey Information"
+    },
+    {
+      "href": "https://www.marine.csiro.au/data/underway/?survey=in2016_t03",
+      "rel": "related",
+      "type": "text/html",
+      "title": "Visualisation tool for Underway Data"
+    },
+    {
+      "href": "https://mnf.csiro.au/",
+      "rel": "related",
+      "type": "text/html",
+      "title": "MNF Home page"
+    }
+  ],
+  "license": "Attribution 4.0",
+  "providers": [
+    {
+      "name": "CSIRO",
+      "roles": [
+        "processor"
+      ]
+    },
+    {
+      "name": "CSIRO Oceans & Atmosphere - Hobart",
+      "roles": [
+        "pointOfContact"
+      ]
+    }
+  ],
+  "themes": [
+    {
+      "concepts": [
+        {
+          "id": "Earth Science | Atmosphere | Atmospheric Water Vapor | Humidity",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/427e5121-a142-41cb-a8e9-a70b7f98eb6a"
+        },
+        {
+          "id": "Earth Science | Oceans | Salinity/Density | Salinity",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/7e95b5fc-1d58-431a-af36-948b29fa870d"
+        },
+        {
+          "id": "Earth Science | Atmosphere | Atmospheric Winds | Surface Winds",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/10685919-bc01-43e7-901a-b62ac44627f3"
+        },
+        {
+          "id": "Earth Science | Atmosphere | Atmospheric Radiation | Solar Radiation",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/a0f3474e-9a54-4a82-97c4-43864b48df4c"
+        },
+        {
+          "id": "Earth Science | Atmosphere | Atmospheric Temperature | Air Temperature",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/f634ab55-de40-4d0b-93bc-691bf5408ccb"
+        },
+        {
+          "id": "Earth Science | Atmosphere | Atmospheric Pressure | Atmospheric Pressure Measurements",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/9efbc088-ba8c-4c9c-a458-ad6ad63f4188"
+        },
+        {
+          "id": "Earth Science | Oceans | Ocean Circulation | Ocean Currents",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/510c5f78-e19e-4ce4-b59a-8937aeb84631"
+        },
+        {
+          "id": "Earth Science | Oceans | Ocean Optics | Fluorescence",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/a60ae1b6-abfc-4905-8c09-772da7bb1a10"
+        },
+        {
+          "id": "Earth Science | Oceans | Ocean Temperature | Sea Surface Temperature",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/bd24a9a9-7d52-4c29-b2a0-6cefd216ae78"
+        },
+        {
+          "id": "Earth Science | Oceans | Ocean Chemistry | Carbon Dioxide",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/26afa886-4866-4536-be3a-6f9db9aacd97"
+        },
+        {
+          "id": "Earth Science | Atmosphere | Air Quality | Tropospheric Ozone",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/426aee98-764c-4c21-ab65-1e9d4bd6b0d0"
+        },
+        {
+          "id": "Earth Science | Atmosphere | Atmospheric Chemistry | Trace Gases/Trace Species",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/4dd22dc9-1db4-4187-a2b7-f5b76d666055"
+        },
+        {
+          "id": "Earth Science | Atmosphere | Atmospheric Winds | Surface Winds | Wind Speed/Wind Direction",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/a92f49f3-e2ee-4ef4-b064-39311ffb95d3"
+        },
+        {
+          "id": "Earth Science | Biosphere | Vegetation | Photosynthetically Active Radiation",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/db69ecb1-0738-4d82-943f-ae92093f500d"
+        },
+        {
+          "id": "Earth Science | Atmosphere | Precipitation | Rain",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/09a57dc7-3911-4a65-9f12-b819652b8671"
+        },
+        {
+          "id": "Earth Science | Oceans | Ocean Chemistry | Oxygen",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/90aa8838-79bd-4b28-b518-8217e863c385"
+        },
+        {
+          "id": "Earth Science Services | Data Analysis And Visualization | Global Positioning Systems",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/f082ad51-4ce4-4ffe-be50-6753c4f997ae"
+        },
+        {
+          "id": "Earth Science | Spectral/Engineering | Radar | Doppler Velocity",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/5d6377ee-def2-4457-b780-6bcb202d7e3e"
+        },
+        {
+          "id": "Earth Science | Terrestrial Hydrosphere | Surface Water | Water Depth",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/42aa1fa1-56a9-4e96-8063-077bd7ba88d8"
+        }
+      ],
+      "scheme": "theme",
+      "description": "",
+      "title": "GCMD Keywords"
+    },
+    {
+      "concepts": [
+        {
+          "id": "Global / Oceans | Southern Ocean",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.place.mcp_regions&id=http://bluenet3.antcrc.utas.edu.au/mcp/geographic_extent_names#6"
+        },
+        {
+          "id": "Regional Seas | Tasman Sea",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.place.mcp_regions&id=http://bluenet3.antcrc.utas.edu.au/mcp/geographic_extent_names#23"
+        },
+        {
+          "id": "Global / Oceans | Pacific Ocean",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.place.mcp_regions&id=http://bluenet3.antcrc.utas.edu.au/mcp/geographic_extent_names#5"
+        }
+      ],
+      "scheme": "place",
+      "description": "",
+      "title": "MCP Geographic Extent Names"
+    },
+    {
+      "concepts": [
+        {
+          "id": "Marine National Facility",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.discipline.urn:marlin.csiro.au:keywords:cmarAOI&id=urn:marlin.csiro.au:keywords:cmarAOI:concept:3208"
+        }
+      ],
+      "scheme": "discipline",
+      "description": "",
+      "title": "CSIRO Areas Of Interest"
+    },
+    {
+      "concepts": [
+        {
+          "id": "Research Transit: IN2016_T03",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.survey.urn:marlin.csiro.au:surveyregister&id=urn:marlin.csiro.au:surveyregister:concept:2179"
+        }
+      ],
+      "scheme": "survey",
+      "description": "",
+      "title": "CSIRO Survey List"
+    },
+    {
+      "concepts": [
+        {
+          "id": "Vessel Data: Underway",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.discipline.urn:marlin.csiro.au:keywords:standardDataType&id=urn:marlin.csiro.au:keywords:standardDataType:concept:3514"
+        }
+      ],
+      "scheme": "discipline",
+      "description": "",
+      "title": "CSIRO Standard Data Types"
+    },
+    {
+      "concepts": [
+        {
+          "id": "Ship: Investigator (RV)",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.dataSource.urn:marlin.csiro.au:sourceregister&id=urn:marlin.csiro.au:sourceregister:concept:309"
+        }
+      ],
+      "scheme": "dataSource",
+      "description": "",
+      "title": "CSIRO Source List"
+    },
+    {
+      "concepts": [
+        {
+          "id": "Meteorological Instruments",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:keywords:equipment&id=urn:marlin.csiro.au:keywords:equipment:concept:2261"
+        },
+        {
+          "id": "Thermosalinographs",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:keywords:equipment&id=urn:marlin.csiro.au:keywords:equipment:concept:2302"
+        },
+        {
+          "id": "Altimeters",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:keywords:equipment&id=urn:marlin.csiro.au:keywords:equipment:concept:2206"
+        }
+      ],
+      "scheme": "equipment",
+      "description": "",
+      "title": "CSIRO Equipment"
+    },
+    {
+      "concepts": [
+        {
+          "id": "Coastal Waters (Australia) | Tasmania Coast East and Southeast, TAS",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.place.urn:aodn.org.au:geographicextents&id=urn:aodn.org.au:geographicextents:concept:1011"
+        },
+        {
+          "id": "Coastal Waters (Australia)",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.place.urn:aodn.org.au:geographicextents&id=urn:aodn.org.au:geographicextents:concept:10002"
+        }
+      ],
+      "scheme": "place",
+      "description": "",
+      "title": "AODN Geographic Extent Names"
+    }
+  ],
+  "id": "27d1a942-9b21-4b4a-bede-39b00e387a75",
+  "search_suggestions": {
+    "abstract_phrases": []
   },
-  "sci:citation" : "{\"suggestedCitation\":null,\"useLimitations\":null,\"otherConstraints\":[\"Data is made available under a Creative Commons Attribution 4.0 International Licence, please see link. Data is supplied 'as is' without any warranty or guarantee except as required by law to be given to you. The data may not be free of error, comprehensive, current or appropriate for your particular purpose. You accept all risk and responsibility for its use. ATTRIBUTION STATEMENT: The dataset [Insert-dataset-name-here] downloaded on [Insert-DD-Mmm-YYYY-here] was collected on voyage [Insert-voyage-name-here] by the Marine National Facility.\"]}",
-  "type" : "Collection",
-  "stac_version" : "1.0.0",
-  "stac_extensions" : [ "https://stac-extensions.github.io/scientific/v1.0.0/schema.json", "https://stac-extensions.github.io/contacts/v0.1.1/schema.json", "https://stac-extensions.github.io/projection/v1.1.0/schema.json", "https://stac-extensions.github.io/language/v1.0.0/schema.json", "https://stac-extensions.github.io/themes/v1.0.0/schema.json" ]
+  "sci:citation": "{\"suggestedCitation\":null,\"useLimitations\":null,\"otherConstraints\":[\"Data is made available under a Creative Commons Attribution 4.0 International Licence, please see link. Data is supplied 'as is' without any warranty or guarantee except as required by law to be given to you. The data may not be free of error, comprehensive, current or appropriate for your particular purpose. You accept all risk and responsibility for its use. ATTRIBUTION STATEMENT: The dataset [Insert-dataset-name-here] downloaded on [Insert-DD-Mmm-YYYY-here] was collected on voyage [Insert-voyage-name-here] by the Marine National Facility.\"]}",
+  "type": "Collection",
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/contacts/v0.1.1/schema.json",
+    "https://stac-extensions.github.io/projection/v1.1.0/schema.json",
+    "https://stac-extensions.github.io/language/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/themes/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/web-map-links/v1.2.0/schema.json"
+  ]
 }

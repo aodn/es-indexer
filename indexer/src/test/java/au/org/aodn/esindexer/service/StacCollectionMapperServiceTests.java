@@ -1,5 +1,6 @@
 package au.org.aodn.esindexer.service;
 
+import au.org.aodn.esindexer.utils.GcmdKeywordUtils;
 import au.org.aodn.esindexer.utils.JaxbUtils;
 import au.org.aodn.metadata.iso19115_3_2018.MDMetadataType;
 import au.org.aodn.stac.model.StacCollectionModel;
@@ -63,6 +64,9 @@ public class StacCollectionMapperServiceTests {
     @MockBean
     protected RankingService rankingService;
 
+    @MockBean
+    protected GcmdKeywordUtils gcmdKeywordUtils;
+
     @Autowired
     protected StacCollectionMapperService service;
 
@@ -95,7 +99,8 @@ public class StacCollectionMapperServiceTests {
                 portalElasticsearchClient,
                 elasticSearchIndexService,
                 service,
-                vocabsService
+                vocabsService,
+                gcmdKeywordUtils
         );
         indexerService = spy(indexerService);
 

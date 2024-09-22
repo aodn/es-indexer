@@ -1,28 +1,111 @@
 {
-  "title" : "Collation of spatial seagrass data from 1984 - 2014 for the Great Barrier Reef World Heritage Area",
-  "description" : "This dataset summarises 30 years of seagrass data collection (1984-2014) within the Great Barrier Reef World Heritage Area. The Meadow data describes seagrass at 1,169 individual or composite meadows. The data includes information on species, meadow type and age and reliability of the data. Data represented in this dataset has been collected by the TropWATER Seagrass Group and CSIRO in a GIS database.\n\n                    In making this data publicly available for management, the authors from the TropWATER Seagrass Group request being contacted and involved in decision making processes that incorporate this data, to ensure its limitations are fully understood. The site and meadow GIS available on eAtlas should be considered a “living” document that will be updated and modified as new data become available.\n\n                    Additional 'point' site data, and alternative download formats are available from eAtlas. https://eatlas.org.au/geonetwork/srv/eng/catalog.search#/metadata/77998615-bbab-4270-bcb1-96c46f56f85a\n\n                    A later version (2020) of this dataset including 35 years of data has been published under \"Seagrass mapping synthesis: A resource for coastal management in the Great Barrier Reef (NESP TWQ Project 3.2.1 and 5.4, TropWATER, James Cook University).\" https://eatlas.org.au/data/uuid/5011393e-0db7-46ce-a8ee-f331fcf83a88\n\n\n                    Data Dictionary:\n\n                    Seagrass meadow data:\n\n                    - NRM_REGION: The NRM region in which the survey occurred.\n                    - SURVEY_DAT: Survey month and year, or a list of survey dates for meadows repeatedly sampled.\n                    - METHOD: Sampling and mapping methods – GPS/aerial photography, helicopter, walking, boat with camera, diver, grab and/or sled.\n                    - PERSISTENC: Meadows were classed according to four categories: Stable, Variable, Highly variable ephemeral, or Unknown.\n                    - MEADOW_LOC: Meadows were classed according to three categories, although some meadows cover a range of these locations: Intertidal, Shallow subtidal, or Deep subtidal.\n                    - DENSITY: Meadow density categories (light, dense, variable among years, unknown) were determined by the consistency of mean above-ground biomass of the dominant species among all years sampled.\n                    - DOMINANT_S: Dominant species and species present.\n                    - SPP_PRESEN: All species present.\n                    - MEAN_BIOMA: Mean meadow biomass in g DW m-2 (+ standard error if available), or the minimum and maximum biomass recorded for meadows sampled more than once.\n                    - AREA_HA: Meadow area in hectares (+ reliability estimate if available), or the minimum and maximum area recorded for meadows sampled more than once.\n                    - HECTARES: Total extent of meadow (HA)\n                    - PERCENT_CO: Meadow percent cover - this value represents mean seagrass percent cover, or the range of percent cover (if >1 number in the data cell). Meadow percent cover was most commonly calculated in pre-1990s surveys and recorded as “n/a” if not available.\n                    - CUSTODIAN: Data custodians\n                    - COMMENTS\n\n                    Meadow Persistence:\n                    - Stable: enduring meadow form; seagrass presence, biomass and area expected to be stable over time and seagrass meadow expected to be a permanent feature apart from extreme events or sustained long term impacts;\n                    - Variable: meadow presence, biomass and area expected to fluctuate within and among years, but generally some seagrass expected to be present apart from extreme events or sustained long term impacts;\n                    - Highly variable ephemeral: meadow not persistent over time; at some time periods seagrass will be present and at other times absent. Ephemeral meadows that have a naturally extreme level of variation in area and biomass within and among years;\n                    - Unknown: undetermined persistence as meadow sampled only once.\n\n                    Meadow Location:\n                    - Intertidal - all sites surveyed by helicopter or walking within a meadow and/or comments in field books identified an intertidal meadow,\n                    - Shallow subtidal - meadows where free divers SCUBA, sled collection, or cameras were used to sample and water depth was generally <10 m;\n                    - Deep subtidal - for this project meadows >10 m deep were included as deep subtidal.",
-  "extent" : {
-    "bbox" : [ [ 142.119140625, -24.521484375, 153.80859375, -9.84375 ], [ 142.119140625, -24.521484375, 153.80859375, -9.84375 ] ],
-    "temporal" : [ [ "1984-10-31T13:00:00Z", "2014-12-30T13:00:00Z" ], [ "1984-10-31T13:00:00Z", "2014-12-30T13:00:00Z" ] ]
+  "title": "Collation of spatial seagrass data from 1984 - 2014 for the Great Barrier Reef World Heritage Area",
+  "description": "This dataset summarises 30 years of seagrass data collection (1984-2014) within the Great Barrier Reef World Heritage Area. The Meadow data describes seagrass at 1,169 individual or composite meadows. The data includes information on species, meadow type and age and reliability of the data. Data represented in this dataset has been collected by the TropWATER Seagrass Group and CSIRO in a GIS database.\n\n                    In making this data publicly available for management, the authors from the TropWATER Seagrass Group request being contacted and involved in decision making processes that incorporate this data, to ensure its limitations are fully understood. The site and meadow GIS available on eAtlas should be considered a “living” document that will be updated and modified as new data become available.\n\n                    Additional 'point' site data, and alternative download formats are available from eAtlas. https://eatlas.org.au/geonetwork/srv/eng/catalog.search#/metadata/77998615-bbab-4270-bcb1-96c46f56f85a\n\n                    A later version (2020) of this dataset including 35 years of data has been published under \"Seagrass mapping synthesis: A resource for coastal management in the Great Barrier Reef (NESP TWQ Project 3.2.1 and 5.4, TropWATER, James Cook University).\" https://eatlas.org.au/data/uuid/5011393e-0db7-46ce-a8ee-f331fcf83a88\n\n\n                    Data Dictionary:\n\n                    Seagrass meadow data:\n\n                    - NRM_REGION: The NRM region in which the survey occurred.\n                    - SURVEY_DAT: Survey month and year, or a list of survey dates for meadows repeatedly sampled.\n                    - METHOD: Sampling and mapping methods – GPS/aerial photography, helicopter, walking, boat with camera, diver, grab and/or sled.\n                    - PERSISTENC: Meadows were classed according to four categories: Stable, Variable, Highly variable ephemeral, or Unknown.\n                    - MEADOW_LOC: Meadows were classed according to three categories, although some meadows cover a range of these locations: Intertidal, Shallow subtidal, or Deep subtidal.\n                    - DENSITY: Meadow density categories (light, dense, variable among years, unknown) were determined by the consistency of mean above-ground biomass of the dominant species among all years sampled.\n                    - DOMINANT_S: Dominant species and species present.\n                    - SPP_PRESEN: All species present.\n                    - MEAN_BIOMA: Mean meadow biomass in g DW m-2 (+ standard error if available), or the minimum and maximum biomass recorded for meadows sampled more than once.\n                    - AREA_HA: Meadow area in hectares (+ reliability estimate if available), or the minimum and maximum area recorded for meadows sampled more than once.\n                    - HECTARES: Total extent of meadow (HA)\n                    - PERCENT_CO: Meadow percent cover - this value represents mean seagrass percent cover, or the range of percent cover (if >1 number in the data cell). Meadow percent cover was most commonly calculated in pre-1990s surveys and recorded as “n/a” if not available.\n                    - CUSTODIAN: Data custodians\n                    - COMMENTS\n\n                    Meadow Persistence:\n                    - Stable: enduring meadow form; seagrass presence, biomass and area expected to be stable over time and seagrass meadow expected to be a permanent feature apart from extreme events or sustained long term impacts;\n                    - Variable: meadow presence, biomass and area expected to fluctuate within and among years, but generally some seagrass expected to be present apart from extreme events or sustained long term impacts;\n                    - Highly variable ephemeral: meadow not persistent over time; at some time periods seagrass will be present and at other times absent. Ephemeral meadows that have a naturally extreme level of variation in area and biomass within and among years;\n                    - Unknown: undetermined persistence as meadow sampled only once.\n\n                    Meadow Location:\n                    - Intertidal - all sites surveyed by helicopter or walking within a meadow and/or comments in field books identified an intertidal meadow,\n                    - Shallow subtidal - meadows where free divers SCUBA, sled collection, or cameras were used to sample and water depth was generally <10 m;\n                    - Deep subtidal - for this project meadows >10 m deep were included as deep subtidal.",
+  "extent": {
+    "bbox": [
+      [
+        142.119140625,
+        -24.521484375,
+        153.80859375,
+        -9.84375
+      ],
+      [
+        142.119140625,
+        -24.521484375,
+        153.80859375,
+        -9.84375
+      ]
+    ],
+    "temporal": [
+      [
+        "1984-10-31T13:00:00Z",
+        "2014-12-30T13:00:00Z"
+      ],
+      [
+        "1984-10-31T13:00:00Z",
+        "2014-12-30T13:00:00Z"
+      ]
+    ]
   },
-  "summaries" : {
-    "score" : 1,
-    "status" : "",
-    "credits" : [ ],
-    "scope" : {
-      "code" : "dataset",
-      "name" : ""
+  "summaries": {
+    "score": 1,
+    "status": "",
+    "credits": [],
+    "scope": {
+      "code": "dataset",
+      "name": ""
     },
-    "statement" : "The sampling methods used to study, describe and monitors seagrass meadows were developed by the TropWATER Seagrass Group and tailored to the location and habitat surveyed; these are described in detail in the relevant publications (https://research.jcu.edu.au/tropwater). Methods for data sets collected by CSIRO are reported in Pitcher et al (2007).\n                    1. Location – Latitudes and longitudes are from converted RADAR fix or GPS. Depth is depth below mean sea level (dbMSL) in metres.\n                    2. Seagrass metrics – Visual estimation methods prior to 1990 were mostly percent cover estimates matched to standard photographs. Data limitations for these early surveys are specific to each survey and advice from the TropWATER data custodians should be sought for assistance with interpretation. For recent surveys (post-1990) above-ground biomass was determined using a “visual estimates of biomass” technique (Mellors 1991) using trained observers. A linear regression was calculated for the relationship between the observer ranks and the harvested values. This regression was used to calculate above-ground biomass for all estimated ranks made from the survey sites. Biomass ranks were converted into above-ground biomass estimates in grams dry weight per square metre (g DW m-2) for each site. Observers estimated biomass data using video transects, grabs, free diving, helicopter and walking:\n                    * Video transect: Commonly used for subtidal meadows at each transect site. A CCTV camera was lowered to the bottom and towed at drift speed (less than one knot). Footage was observed on a TV monitor and digitally recorded. The recording was paused at random times and frames selected. From this frame, an observer estimated a rank of seagrass biomass and a species composition. On completion of the video analysis, the video observer ranked five additional quadrats that had been previously videoed for calibration. The camera sled included a small collecting net to obtain a specimen for identification.\n                    * van Veen grab: Commonly used for subtidal meadows. A sample of seagrass was collected using a van Veen grab (grab area 0.0625 m2) to identify species present at each site. Species identified from the grab sample were used to inform species composition assessments made from the recorded video transects (Kuo and McComb 1989), or to record presence/absence where visibility was too poor for video transects.\n                    * Free diving, helicopter and walking: At each site seagrass above-ground biomass and species composition were estimated from 0.25 m2 quadrats placed randomly. Seagrass percent cover was recorded at each site. The “visual estimates of biomass” technique when applied to free diving/helicopter/walking surveys involves ranking while referring to a series of quadrat photographs of similar seagrass habitats for which the above-ground biomass has been previously measured. The relative proportion of the above-ground biomass (percentage) of each seagrass species within each survey quadrat was also recorded. Field biomass ranks were converted into above-ground biomass estimates in grams dry weight per square metre (g DW m-2).",
-    "creation" : "2020-09-23T10:52:41",
-    "revision" : "2020-09-23T10:52:41",
-    "update_frequency" : "other",
-    "proj:geometry" : {
-      "geometries" : [ {
-        "type" : "Polygon",
-        "coordinates" : [ [ [ 151.084, -24.5215 ], [ 153.8086, -24.5215 ], [ 153.457, -20.8301 ], [ 147.1289, -17.4902 ], [ 145.8105, -13.7988 ], [ 144.4922, -12.832 ], [ 144.2285, -9.8437 ], [ 142.1191, -9.9316 ], [ 142.3828, -11.7773 ], [ 143.6133, -14.7656 ], [ 144.7559, -14.9414 ], [ 146.3379, -19.5996 ], [ 148.4473, -21.0059 ], [ 151.084, -24.5215 ] ] ]
-      } ],
-      "type" : "GeometryCollection"
+    "statement": "The sampling methods used to study, describe and monitors seagrass meadows were developed by the TropWATER Seagrass Group and tailored to the location and habitat surveyed; these are described in detail in the relevant publications (https://research.jcu.edu.au/tropwater). Methods for data sets collected by CSIRO are reported in Pitcher et al (2007).\n                    1. Location – Latitudes and longitudes are from converted RADAR fix or GPS. Depth is depth below mean sea level (dbMSL) in metres.\n                    2. Seagrass metrics – Visual estimation methods prior to 1990 were mostly percent cover estimates matched to standard photographs. Data limitations for these early surveys are specific to each survey and advice from the TropWATER data custodians should be sought for assistance with interpretation. For recent surveys (post-1990) above-ground biomass was determined using a “visual estimates of biomass” technique (Mellors 1991) using trained observers. A linear regression was calculated for the relationship between the observer ranks and the harvested values. This regression was used to calculate above-ground biomass for all estimated ranks made from the survey sites. Biomass ranks were converted into above-ground biomass estimates in grams dry weight per square metre (g DW m-2) for each site. Observers estimated biomass data using video transects, grabs, free diving, helicopter and walking:\n                    * Video transect: Commonly used for subtidal meadows at each transect site. A CCTV camera was lowered to the bottom and towed at drift speed (less than one knot). Footage was observed on a TV monitor and digitally recorded. The recording was paused at random times and frames selected. From this frame, an observer estimated a rank of seagrass biomass and a species composition. On completion of the video analysis, the video observer ranked five additional quadrats that had been previously videoed for calibration. The camera sled included a small collecting net to obtain a specimen for identification.\n                    * van Veen grab: Commonly used for subtidal meadows. A sample of seagrass was collected using a van Veen grab (grab area 0.0625 m2) to identify species present at each site. Species identified from the grab sample were used to inform species composition assessments made from the recorded video transects (Kuo and McComb 1989), or to record presence/absence where visibility was too poor for video transects.\n                    * Free diving, helicopter and walking: At each site seagrass above-ground biomass and species composition were estimated from 0.25 m2 quadrats placed randomly. Seagrass percent cover was recorded at each site. The “visual estimates of biomass” technique when applied to free diving/helicopter/walking surveys involves ranking while referring to a series of quadrat photographs of similar seagrass habitats for which the above-ground biomass has been previously measured. The relative proportion of the above-ground biomass (percentage) of each seagrass species within each survey quadrat was also recorded. Field biomass ranks were converted into above-ground biomass estimates in grams dry weight per square metre (g DW m-2).",
+    "creation": "2020-09-23T10:52:41",
+    "revision": "2020-09-23T10:52:41",
+    "update_frequency": "other",
+    "proj:geometry": {
+      "geometries": [
+        {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                151.084,
+                -24.5215
+              ],
+              [
+                153.8086,
+                -24.5215
+              ],
+              [
+                153.457,
+                -20.8301
+              ],
+              [
+                147.1289,
+                -17.4902
+              ],
+              [
+                145.8105,
+                -13.7988
+              ],
+              [
+                144.4922,
+                -12.832
+              ],
+              [
+                144.2285,
+                -9.8437
+              ],
+              [
+                142.1191,
+                -9.9316
+              ],
+              [
+                142.3828,
+                -11.7773
+              ],
+              [
+                143.6133,
+                -14.7656
+              ],
+              [
+                144.7559,
+                -14.9414
+              ],
+              [
+                146.3379,
+                -19.5996
+              ],
+              [
+                148.4473,
+                -21.0059
+              ],
+              [
+                151.084,
+                -24.5215
+              ]
+            ]
+          ]
+        }
+      ],
+      "type": "GeometryCollection"
     },
     "temporal" : [ {
       "start" : "1984-10-31T13:00:00Z",
@@ -30,258 +113,402 @@
     } ],
     "centroid" : [ [ 149.08512878777435, -19.658495253948193 ], [ 143.94129025152088, -12.180009467512367 ], [ 152.85488226547932, -22.579447099533397 ] ]
   },
-  "contacts" : [ {
-    "roles" : [ "pointOfContact", "about" ],
-    "organization" : "Centre for Tropical Waters and Aquatic Research (TropWATER), James Cook University (JCU)",
-    "name" : "Carter, Alex, Dr",
-    "position" : "",
-    "emails" : [ "alexandra.carter@jcu.edu.au" ],
-    "addresses" : [ {
-      "deliveryPoint" : [ "James Cook University (JCU)" ],
-      "city" : "Cairns",
-      "country" : "Australia",
-      "postalCode" : "4878",
-      "administrativeArea" : "Queensland"
-    } ],
-    "phones" : [ {
-      "roles" : [ "voice" ],
-      "value" : "+61 7 4232 2015"
-    } ],
-    "links" : [ {
-      "href" : "http://eatlas.org.au",
-      "type" : "WWW:LINK-1.0-http--link",
-      "title" : "eAtlas portal"
-    } ]
-  }, {
-    "roles" : [ "pointOfContact", "metadata" ],
-    "organization" : "Institute for Marine and Antarctic Studies (IMAS), University of Tasmania (UTAS)",
-    "name" : "IMAS Data Manager",
-    "position" : "",
-    "emails" : [ ],
-    "addresses" : [ ],
-    "phones" : [ ],
-    "links" : [ ]
-  }, {
-    "roles" : [ "principalInvestigator", "citation" ],
-    "organization" : "Centre for Tropical Waters and Aquatic Research (TropWATER), James Cook University (JCU)",
-    "name" : "Coles, Rob, Dr",
-    "position" : "Principal Research Scientist",
-    "emails" : [ "rob.coles@jcu.edu.au" ],
-    "addresses" : [ {
-      "deliveryPoint" : [ "James Cook University (JCU)" ],
-      "city" : "Cairns",
-      "country" : "Australia",
-      "postalCode" : "4878",
-      "administrativeArea" : "Queensland"
-    } ],
-    "phones" : [ {
-      "roles" : [ "voice" ],
-      "value" : "+61 7 4232 2011"
-    } ],
-    "links" : [ {
-      "href" : "https://research.jcu.edu.au/portfolio/rob.coles",
-      "type" : "WWW:LINK-1.0-http--related",
-      "title" : "JCU Profile web page"
-    } ]
-  }, {
-    "roles" : [ "collaborator", "citation" ],
-    "organization" : "Centre for Tropical Waters and Aquatic Research (TropWATER), James Cook University (JCU)",
-    "name" : "Carter, Alex, Dr",
-    "position" : "Senior Research Officer",
-    "emails" : [ "alexandra.carter@jcu.edu.au" ],
-    "addresses" : [ {
-      "deliveryPoint" : [ "James Cook University (JCU)" ],
-      "city" : "Cairns",
-      "country" : "Australia",
-      "postalCode" : "4878",
-      "administrativeArea" : "Queensland"
-    } ],
-    "phones" : [ {
-      "roles" : [ "voice" ],
-      "value" : "+61 7 4232 2015"
-    } ],
-    "links" : [ {
-      "href" : "https://research.jcu.edu.au/portfolio/alexandra.carter/",
-      "type" : "WWW:LINK-1.0-http--related",
-      "title" : "JCU Profile web page"
-    } ]
-  }, {
-    "roles" : [ "collaborator", "citation" ],
-    "organization" : "Centre for Tropical Waters and Aquatic Research (TropWATER), James Cook University (JCU)",
-    "name" : "McKenna, Skye",
-    "position" : "Senior Research Officer",
-    "emails" : [ "skye.mckenna@jcu.edu.au" ],
-    "addresses" : [ {
-      "deliveryPoint" : [ "James Cook University (JCU)" ],
-      "city" : "Cairns",
-      "country" : "Australia",
-      "postalCode" : "4878",
-      "administrativeArea" : "Queensland"
-    } ],
-    "phones" : [ {
-      "roles" : [ "voice" ],
-      "value" : "+61 7 4232 2023"
-    } ],
-    "links" : [ {
-      "href" : "https://research.jcu.edu.au/portfolio/skye.mckenna/",
-      "type" : "WWW:LINK-1.0-http--related",
-      "title" : "JCU Profile web page"
-    } ]
-  }, {
-    "roles" : [ "collaborator", "citation" ],
-    "organization" : "Centre for Tropical Waters and Aquatic Research (TropWATER), James Cook University (JCU)",
-    "name" : "Rasheed, Michael, Dr",
-    "position" : "Principal Research Scientist",
-    "emails" : [ "michael.rasheed@jcu.edu.au" ],
-    "addresses" : [ {
-      "deliveryPoint" : [ "James Cook University (JCU)" ],
-      "city" : "Cairns",
-      "country" : "Australia",
-      "postalCode" : "4878",
-      "administrativeArea" : "Queensland"
-    } ],
-    "phones" : [ {
-      "roles" : [ "voice" ],
-      "value" : "+61 7 4232 2011"
-    } ],
-    "links" : [ {
-      "href" : "https://research.jcu.edu.au/portfolio/michael.rasheed/",
-      "type" : "WWW:LINK-1.0-http--related",
-      "title" : "JCU Profile web page"
-    } ]
-  }, {
-    "roles" : [ "collaborator", "citation" ],
-    "organization" : "Centre for Tropical Waters and Aquatic Research (TropWATER), James Cook University (JCU)",
-    "name" : "McKenzie, Len",
-    "position" : "Principal Research Officer",
-    "emails" : [ "len.mckenzie@jcu.edu.au" ],
-    "addresses" : [ {
-      "deliveryPoint" : [ "James Cook University (JCU)" ],
-      "city" : "Cairns",
-      "country" : "Australia",
-      "postalCode" : "4878",
-      "administrativeArea" : "Queensland"
-    } ],
-    "phones" : [ {
-      "roles" : [ "voice" ],
-      "value" : "+61 7 4232 2012"
-    } ],
-    "links" : [ {
-      "href" : "https://research.jcu.edu.au/portfolio/len.mckenzie/",
-      "type" : "WWW:LINK-1.0-http--related",
-      "title" : "JCU Profile web page"
-    } ]
-  } ],
-  "languages" : [ {
-    "code" : "eng",
-    "name" : "English"
-  } ],
-  "links" : [ {
-    "href" : "https://geoserver.imas.utas.edu.au/geoserver/seamap/wfs?version=1.0.0&request=GetFeature&typeName=SeamapAus_QLD_GBRWHA_seagrass&outputFormat=SHAPE-ZIP",
-    "rel" : "related",
-    "type" : "",
-    "title" : "SHAPE-ZIP"
-  }, {
-    "href" : "https://geoserver.imas.utas.edu.au/geoserver/seamap/wms",
-    "rel" : "related",
-    "type" : "",
-    "title" : "seamap:SeamapAus_QLD_GBRWHA_seagrass"
-  }, {
-    "href" : "http://nesptropical.edu.au/wp-content/uploads/2016/03/NESP-TWQ-3.1-FINAL-REPORT.pdf",
-    "rel" : "related",
-    "type" : "",
-    "title" : "REPORT - Project Final Report [PDF]"
-  }, {
-    "href" : "http://eatlas.org.au/nesp-twq-1/gbr-seagrass-mapping-3-1",
-    "rel" : "related",
-    "type" : "",
-    "title" : "WEBSITE - Project website"
-  }, {
-    "href" : "https://eatlas.org.au/geonetwork/srv/eng/catalog.search#/metadata/77998615-bbab-4270-bcb1-96c46f56f85a",
-    "rel" : "related",
-    "type" : "text/html",
-    "title" : "Original metadata record [eAtlas catalogue]"
-  }, {
-    "href" : "https://metadata.imas.utas.edu.au/geonetwork/srv/eng/catalog.search#/metadata/77998615-bbab-4270-bcb1-96c46f56f85a",
-    "rel" : "describedby",
-    "type" : "text/html",
-    "title" : "Full metadata link"
-  }, {
-    "href" : "http://i.creativecommons.org/l/by/4.0/88x31.png",
-    "rel" : "license",
-    "type" : "image/png"
-  }, {
-    "href" : "http://creativecommons.org/licenses/by/4.0/",
-    "rel" : "license",
-    "type" : "text/html"
-  } ],
-  "license" : "Creative Commons Attribution 4.0 International License",
-  "providers" : [ {
-    "name" : "Institute for Marine and Antarctic Studies (IMAS), University of Tasmania (UTAS)",
-    "roles" : [ "pointOfContact" ]
-  } ],
-  "themes" : [ {
-    "concepts" : [ {
-      "id" : "marine",
-      "url" : null
-    } ],
-    "scheme" : "",
-    "description" : "",
-    "title" : "Keywords (Theme)"
-  }, {
-    "concepts" : [ {
-      "id" : "EARTH SCIENCE | BIOSPHERE | AQUATIC ECOSYSTEMS | BENTHIC HABITAT",
-      "url" : "http://gcmdservices.gsfc.nasa.gov/kms/concept/09a78997-581b-4d1b-ae71-b2b3f96ef719"
-    }, {
-      "id" : "EARTH SCIENCE | BIOSPHERE | AQUATIC ECOSYSTEMS | MARINE HABITAT",
-      "url" : "http://gcmdservices.gsfc.nasa.gov/kms/concept/f6350232-b1c7-458c-bc43-bda357ebb6db"
-    }, {
-      "id" : "EARTH SCIENCE | BIOLOGICAL CLASSIFICATION | PLANTS | ANGIOSPERMS (FLOWERING PLANTS) | MONOCOTS | SEAGRASS",
-      "url" : "http://gcmdservices.gsfc.nasa.gov/kms/concept/e36c5faa-c772-4bb0-aeca-b361e160ce9d"
-    } ],
-    "scheme" : "theme",
-    "description" : "NASA Global Change Master Directory (GCMD) Earth Science Keywords",
-    "title" : "Global Change Master Directory (GCMD) Earth Science Keywords Version 8.0"
-  }, {
-    "concepts" : [ {
-      "id" : "Environmental Sciences not elsewhere classified",
-      "url" : "http://purl.org/au-research/vocabulary/anzsrc-for/2008/059999"
-    }, {
-      "id" : "Environmental Management",
-      "url" : "http://purl.org/au-research/vocabulary/anzsrc-for/2008/050205"
-    }, {
-      "id" : "Marine and Estuarine Ecology (incl. Marine Ichthyology)",
-      "url" : "http://purl.org/au-research/vocabulary/anzsrc-for/2008/060205"
-    } ],
-    "scheme" : "theme",
-    "description" : "",
-    "title" : "Australian and New Zealand Standard Research Classification (ANZSRC): Fields of Research"
-  }, {
-    "concepts" : [ {
-      "id" : "Biotic taxonomic identification",
-      "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/489"
-    }, {
-      "id" : "Abundance of biota",
-      "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/488"
-    } ],
-    "scheme" : "theme",
-    "description" : "",
-    "title" : "AODN Discovery Parameter Vocabulary"
-  }, {
-    "concepts" : [ {
-      "id" : "Benthic habitat",
-      "url" : null
-    } ],
-    "scheme" : "",
-    "description" : "",
-    "title" : "Keywords (Theme)"
-  } ],
-  "id" : "77998615-bbab-4270-bcb1-96c46f56f85a",
-  "search_suggestions" : {
-    "abstract_phrases" : [ ]
+  "contacts": [
+    {
+      "roles": [
+        "pointOfContact",
+        "about"
+      ],
+      "organization": "Centre for Tropical Waters and Aquatic Research (TropWATER), James Cook University (JCU)",
+      "name": "Carter, Alex, Dr",
+      "position": "",
+      "emails": [
+        "alexandra.carter@jcu.edu.au"
+      ],
+      "addresses": [
+        {
+          "deliveryPoint": [
+            "James Cook University (JCU)"
+          ],
+          "city": "Cairns",
+          "country": "Australia",
+          "postalCode": "4878",
+          "administrativeArea": "Queensland"
+        }
+      ],
+      "phones": [
+        {
+          "roles": [
+            "voice"
+          ],
+          "value": "+61 7 4232 2015"
+        }
+      ],
+      "links": [
+        {
+          "href": "http://eatlas.org.au",
+          "type": "WWW:LINK-1.0-http--link",
+          "title": "eAtlas portal"
+        }
+      ]
+    },
+    {
+      "roles": [
+        "pointOfContact",
+        "metadata"
+      ],
+      "organization": "Institute for Marine and Antarctic Studies (IMAS), University of Tasmania (UTAS)",
+      "name": "IMAS Data Manager",
+      "position": "",
+      "emails": [],
+      "addresses": [],
+      "phones": [],
+      "links": []
+    },
+    {
+      "roles": [
+        "principalInvestigator",
+        "citation"
+      ],
+      "organization": "Centre for Tropical Waters and Aquatic Research (TropWATER), James Cook University (JCU)",
+      "name": "Coles, Rob, Dr",
+      "position": "Principal Research Scientist",
+      "emails": [
+        "rob.coles@jcu.edu.au"
+      ],
+      "addresses": [
+        {
+          "deliveryPoint": [
+            "James Cook University (JCU)"
+          ],
+          "city": "Cairns",
+          "country": "Australia",
+          "postalCode": "4878",
+          "administrativeArea": "Queensland"
+        }
+      ],
+      "phones": [
+        {
+          "roles": [
+            "voice"
+          ],
+          "value": "+61 7 4232 2011"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://research.jcu.edu.au/portfolio/rob.coles",
+          "type": "WWW:LINK-1.0-http--related",
+          "title": "JCU Profile web page"
+        }
+      ]
+    },
+    {
+      "roles": [
+        "collaborator",
+        "citation"
+      ],
+      "organization": "Centre for Tropical Waters and Aquatic Research (TropWATER), James Cook University (JCU)",
+      "name": "Carter, Alex, Dr",
+      "position": "Senior Research Officer",
+      "emails": [
+        "alexandra.carter@jcu.edu.au"
+      ],
+      "addresses": [
+        {
+          "deliveryPoint": [
+            "James Cook University (JCU)"
+          ],
+          "city": "Cairns",
+          "country": "Australia",
+          "postalCode": "4878",
+          "administrativeArea": "Queensland"
+        }
+      ],
+      "phones": [
+        {
+          "roles": [
+            "voice"
+          ],
+          "value": "+61 7 4232 2015"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://research.jcu.edu.au/portfolio/alexandra.carter/",
+          "type": "WWW:LINK-1.0-http--related",
+          "title": "JCU Profile web page"
+        }
+      ]
+    },
+    {
+      "roles": [
+        "collaborator",
+        "citation"
+      ],
+      "organization": "Centre for Tropical Waters and Aquatic Research (TropWATER), James Cook University (JCU)",
+      "name": "McKenna, Skye",
+      "position": "Senior Research Officer",
+      "emails": [
+        "skye.mckenna@jcu.edu.au"
+      ],
+      "addresses": [
+        {
+          "deliveryPoint": [
+            "James Cook University (JCU)"
+          ],
+          "city": "Cairns",
+          "country": "Australia",
+          "postalCode": "4878",
+          "administrativeArea": "Queensland"
+        }
+      ],
+      "phones": [
+        {
+          "roles": [
+            "voice"
+          ],
+          "value": "+61 7 4232 2023"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://research.jcu.edu.au/portfolio/skye.mckenna/",
+          "type": "WWW:LINK-1.0-http--related",
+          "title": "JCU Profile web page"
+        }
+      ]
+    },
+    {
+      "roles": [
+        "collaborator",
+        "citation"
+      ],
+      "organization": "Centre for Tropical Waters and Aquatic Research (TropWATER), James Cook University (JCU)",
+      "name": "Rasheed, Michael, Dr",
+      "position": "Principal Research Scientist",
+      "emails": [
+        "michael.rasheed@jcu.edu.au"
+      ],
+      "addresses": [
+        {
+          "deliveryPoint": [
+            "James Cook University (JCU)"
+          ],
+          "city": "Cairns",
+          "country": "Australia",
+          "postalCode": "4878",
+          "administrativeArea": "Queensland"
+        }
+      ],
+      "phones": [
+        {
+          "roles": [
+            "voice"
+          ],
+          "value": "+61 7 4232 2011"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://research.jcu.edu.au/portfolio/michael.rasheed/",
+          "type": "WWW:LINK-1.0-http--related",
+          "title": "JCU Profile web page"
+        }
+      ]
+    },
+    {
+      "roles": [
+        "collaborator",
+        "citation"
+      ],
+      "organization": "Centre for Tropical Waters and Aquatic Research (TropWATER), James Cook University (JCU)",
+      "name": "McKenzie, Len",
+      "position": "Principal Research Officer",
+      "emails": [
+        "len.mckenzie@jcu.edu.au"
+      ],
+      "addresses": [
+        {
+          "deliveryPoint": [
+            "James Cook University (JCU)"
+          ],
+          "city": "Cairns",
+          "country": "Australia",
+          "postalCode": "4878",
+          "administrativeArea": "Queensland"
+        }
+      ],
+      "phones": [
+        {
+          "roles": [
+            "voice"
+          ],
+          "value": "+61 7 4232 2012"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://research.jcu.edu.au/portfolio/len.mckenzie/",
+          "type": "WWW:LINK-1.0-http--related",
+          "title": "JCU Profile web page"
+        }
+      ]
+    }
+  ],
+  "languages": [
+    {
+      "code": "eng",
+      "name": "English"
+    }
+  ],
+  "links": [
+    {
+      "href": "https://geoserver.imas.utas.edu.au/geoserver/seamap/wfs?version=1.0.0&request=GetFeature&typeName=SeamapAus_QLD_GBRWHA_seagrass&outputFormat=SHAPE-ZIP",
+      "rel": "wfs",
+      "type": "",
+      "title": "SHAPE-ZIP"
+    },
+    {
+      "href": "https://geoserver.imas.utas.edu.au/geoserver/seamap/wms",
+      "rel": "wms",
+      "type": "",
+      "title": "seamap:SeamapAus_QLD_GBRWHA_seagrass"
+    },
+    {
+      "href": "http://nesptropical.edu.au/wp-content/uploads/2016/03/NESP-TWQ-3.1-FINAL-REPORT.pdf",
+      "rel": "related",
+      "type": "",
+      "title": "REPORT - Project Final Report [PDF]"
+    },
+    {
+      "href": "http://eatlas.org.au/nesp-twq-1/gbr-seagrass-mapping-3-1",
+      "rel": "related",
+      "type": "",
+      "title": "WEBSITE - Project website"
+    },
+    {
+      "href": "https://eatlas.org.au/geonetwork/srv/eng/catalog.search#/metadata/77998615-bbab-4270-bcb1-96c46f56f85a",
+      "rel": "related",
+      "type": "text/html",
+      "title": "Original metadata record [eAtlas catalogue]"
+    },
+    {
+      "href": "https://metadata.imas.utas.edu.au/geonetwork/srv/eng/catalog.search#/metadata/77998615-bbab-4270-bcb1-96c46f56f85a",
+      "rel": "describedby",
+      "type": "text/html",
+      "title": "Full metadata link"
+    },
+    {
+      "href": "http://i.creativecommons.org/l/by/4.0/88x31.png",
+      "rel": "license",
+      "type": "image/png"
+    },
+    {
+      "href": "http://creativecommons.org/licenses/by/4.0/",
+      "rel": "license",
+      "type": "text/html"
+    }
+  ],
+  "license": "Creative Commons Attribution 4.0 International License",
+  "providers": [
+    {
+      "name": "Institute for Marine and Antarctic Studies (IMAS), University of Tasmania (UTAS)",
+      "roles": [
+        "pointOfContact"
+      ]
+    }
+  ],
+  "themes": [
+    {
+      "concepts": [
+        {
+          "id": "marine",
+          "url": null
+        }
+      ],
+      "scheme": "",
+      "description": "",
+      "title": "Keywords (Theme)"
+    },
+    {
+      "concepts": [
+        {
+          "id": "EARTH SCIENCE | BIOSPHERE | AQUATIC ECOSYSTEMS | BENTHIC HABITAT",
+          "url": "http://gcmdservices.gsfc.nasa.gov/kms/concept/09a78997-581b-4d1b-ae71-b2b3f96ef719"
+        },
+        {
+          "id": "EARTH SCIENCE | BIOSPHERE | AQUATIC ECOSYSTEMS | MARINE HABITAT",
+          "url": "http://gcmdservices.gsfc.nasa.gov/kms/concept/f6350232-b1c7-458c-bc43-bda357ebb6db"
+        },
+        {
+          "id": "EARTH SCIENCE | BIOLOGICAL CLASSIFICATION | PLANTS | ANGIOSPERMS (FLOWERING PLANTS) | MONOCOTS | SEAGRASS",
+          "url": "http://gcmdservices.gsfc.nasa.gov/kms/concept/e36c5faa-c772-4bb0-aeca-b361e160ce9d"
+        }
+      ],
+      "scheme": "theme",
+      "description": "NASA Global Change Master Directory (GCMD) Earth Science Keywords",
+      "title": "Global Change Master Directory (GCMD) Earth Science Keywords Version 8.0"
+    },
+    {
+      "concepts": [
+        {
+          "id": "Environmental Sciences not elsewhere classified",
+          "url": "http://purl.org/au-research/vocabulary/anzsrc-for/2008/059999"
+        },
+        {
+          "id": "Environmental Management",
+          "url": "http://purl.org/au-research/vocabulary/anzsrc-for/2008/050205"
+        },
+        {
+          "id": "Marine and Estuarine Ecology (incl. Marine Ichthyology)",
+          "url": "http://purl.org/au-research/vocabulary/anzsrc-for/2008/060205"
+        }
+      ],
+      "scheme": "theme",
+      "description": "",
+      "title": "Australian and New Zealand Standard Research Classification (ANZSRC): Fields of Research"
+    },
+    {
+      "concepts": [
+        {
+          "id": "Biotic taxonomic identification",
+          "url": "http://vocab.aodn.org.au/def/discovery_parameter/entity/489"
+        },
+        {
+          "id": "Abundance of biota",
+          "url": "http://vocab.aodn.org.au/def/discovery_parameter/entity/488"
+        }
+      ],
+      "scheme": "theme",
+      "description": "",
+      "title": "AODN Discovery Parameter Vocabulary"
+    },
+    {
+      "concepts": [
+        {
+          "id": "Benthic habitat",
+          "url": null
+        }
+      ],
+      "scheme": "",
+      "description": "",
+      "title": "Keywords (Theme)"
+    }
+  ],
+  "id": "77998615-bbab-4270-bcb1-96c46f56f85a",
+  "search_suggestions": {
+    "abstract_phrases": []
   },
-  "sci:citation" : "{\"suggestedCitation\":null,\"useLimitations\":null,\"otherConstraints\":[\"Cite data as: Coles R, Carter A, McKenna S, Rasheed M, McKenzie L (2014). Collation of spatial seagrass data from 1984 - 2014 for the Great Barrier Reef World Heritage Area. James Cook University. Data accessed at http://metadata.imas.utas.edu.au/geonetwork/srv/en/metadata.show?uuid=77998615-bbab-4270-bcb1-96c46f56f85a on (access date).\",\"This dataset is hosted by the Institute for Marine and Antarctic Studies (IMAS), University of Tasmania, on behalf of James Cook University (JCU) for the purposes of the Seamap Australia collaborative project (testing a national marine benthic habitat classification scheme).\"]}",
-  "type" : "Collection",
-  "stac_version" : "1.0.0",
-  "stac_extensions" : [ "https://stac-extensions.github.io/scientific/v1.0.0/schema.json", "https://stac-extensions.github.io/contacts/v0.1.1/schema.json", "https://stac-extensions.github.io/projection/v1.1.0/schema.json", "https://stac-extensions.github.io/language/v1.0.0/schema.json", "https://stac-extensions.github.io/themes/v1.0.0/schema.json" ]
+  "sci:citation": "{\"suggestedCitation\":null,\"useLimitations\":null,\"otherConstraints\":[\"Cite data as: Coles R, Carter A, McKenna S, Rasheed M, McKenzie L (2014). Collation of spatial seagrass data from 1984 - 2014 for the Great Barrier Reef World Heritage Area. James Cook University. Data accessed at http://metadata.imas.utas.edu.au/geonetwork/srv/en/metadata.show?uuid=77998615-bbab-4270-bcb1-96c46f56f85a on (access date).\",\"This dataset is hosted by the Institute for Marine and Antarctic Studies (IMAS), University of Tasmania, on behalf of James Cook University (JCU) for the purposes of the Seamap Australia collaborative project (testing a national marine benthic habitat classification scheme).\"]}",
+  "type": "Collection",
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/contacts/v0.1.1/schema.json",
+    "https://stac-extensions.github.io/projection/v1.1.0/schema.json",
+    "https://stac-extensions.github.io/language/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/themes/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/web-map-links/v1.2.0/schema.json"
+  ]
 }
