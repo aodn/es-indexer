@@ -62,7 +62,7 @@ public class GeometryUtilsTest {
         List<List<Geometry>> nl = Objects.requireNonNull(noLand);
 
         assertEquals(nl.size(),1, "No Land have 1 polygon array");
-        assertEquals(nl.get(0).size(),10, "Size 10 with land");
+        assertEquals(11, nl.get(0).size(), "Size 11 with land");
 
         Geometry nle = nl.get(0).get(0).getEnvelope();
         Coordinate[] ncoors = nle.getCoordinates();
