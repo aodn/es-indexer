@@ -2,6 +2,10 @@
 # diff core / max value should not impact the run, this is just to verify this is correct
 app:
   initialiseVocabsIndex: true
+  geometry:
+    # This value will affect the size of grid to divide a spatial extents which is used to calculate the
+    # centroid point in the summaries, test case needs to change if you change this value
+    gridLandSize: 10.0
   indexing:
     pool:
       core: 2

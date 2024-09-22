@@ -1,5 +1,6 @@
 package au.org.aodn.esindexer.configuration;
 
+import au.org.aodn.esindexer.utils.GeometryUtils;
 import au.org.aodn.esindexer.utils.VocabsIndexUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -12,10 +13,19 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import java.util.concurrent.*;
 import org.springframework.beans.factory.annotation.Value;
 
+import javax.annotation.PostConstruct;
+
 @Configuration
 @EnableRetry
 @EnableAsync
 public class IndexerConfig {
+    @Value("${app.geometry.gridLandSize:10.0}")
+    protected double cellSize;
+
+    @PostConstruct
+    public void init() {
+        GeometryUtils.setCellSize(cellSize);
+    }
     /**
      * We need to create component here because we do not want to run test with real http connection
      * that depends on remote site. The test config need to create an instance of bean for testing

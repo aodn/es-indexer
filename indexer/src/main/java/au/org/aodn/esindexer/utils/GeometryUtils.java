@@ -2,6 +2,8 @@ package au.org.aodn.esindexer.utils;
 
 import au.org.aodn.metadata.iso19115_3_2018.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.Getter;
+import lombok.Setter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.geotools.data.shapefile.ShapefileDataStore;
@@ -28,7 +30,9 @@ public class GeometryUtils {
     protected static ObjectMapper objectMapper = new ObjectMapper();
     protected static Geometry landGeometry;
 
-    protected static int SCALE = 10;
+    @Getter
+    @Setter
+    protected static double cellSize = 10.0;
 
     // Load a coastline shape file so that we can get a spatial extents that cover sea only
     static {
@@ -278,7 +282,7 @@ public class GeometryUtils {
 
         // Hard code cell size, we can adjust the break grid size. 10.0 result in 3x3 grid
         // cover Australia
-        List<Polygon> gridPolygons = createGridPolygons(envelope, 10.0);
+        List<Polygon> gridPolygons = createGridPolygons(envelope, getCellSize());
 
         List<Geometry> intersectedPolygons = new ArrayList<>();
         for (Polygon gridPolygon : gridPolygons) {
