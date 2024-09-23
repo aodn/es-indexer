@@ -347,10 +347,15 @@ public class GeometryUtils {
         // Try simplified the polygon to reduce the number of centroid.
         Geometry geometry = geometryCollection.union();
 
-        if(geometry instanceof GeometryCollection c) {
+        try {
+            Point centroid = calculatePolygonCentroid(geometry);
+            return List.of(new Coordinate(centroid.getX(), centroid.getY()));
+        }
+        catch(Exception e) {
+            // That means it cannot be simplified to a polygon that able to calculate centroid,
+            // we need to calculate it one by one
             List<Coordinate> coordinates = new ArrayList<>();
-            // That means it cannot be simplified, we need centroid of each polygon
-            for (int i = 0; i < c.getNumGeometries(); i++) {
+            for (int i = 0; i < geometryCollection.getNumGeometries(); i++) {
                 geometry = geometryCollection.getGeometryN(i);
 
                 // Make sure the point will not fall out of the shape, for example a U shape will make
@@ -360,10 +365,6 @@ public class GeometryUtils {
                 coordinates.add(new Coordinate(centroid.getX(), centroid.getY()));
             }
             return coordinates;
-        }
-        else {
-            Point centroid = calculatePolygonCentroid(geometry);
-            return List.of(new Coordinate(centroid.getX(), centroid.getY()));
         }
     }
     /**
