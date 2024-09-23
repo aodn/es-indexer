@@ -287,6 +287,7 @@ public class StacCollectionMapperServiceTests {
 
         Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
         String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
+        log.info(out);
         JSONAssert.assertEquals(
                 objectMapper.readTree(expected).toPrettyString(),
                 objectMapper.readTree(out.strip()).toPrettyString(),

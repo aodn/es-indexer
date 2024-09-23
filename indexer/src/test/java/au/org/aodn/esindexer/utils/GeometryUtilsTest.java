@@ -2,19 +2,26 @@ package au.org.aodn.esindexer.utils;
 
 import au.org.aodn.metadata.iso19115_3_2018.MDMetadataType;
 import jakarta.xml.bind.JAXBException;
+import org.geotools.feature.FeatureCollection;
+import org.geotools.feature.FeatureIterator;
+import org.geotools.geojson.feature.FeatureJSON;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.locationtech.jts.geom.*;
+import org.opengis.feature.simple.SimpleFeature;
+import org.opengis.feature.simple.SimpleFeatureType;
+import org.opengis.feature.type.FeatureType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.io.StringReader;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 import static au.org.aodn.esindexer.BaseTestClass.readResourceFile;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class GeometryUtilsTest {
     protected Logger logger = LoggerFactory.getLogger(GeometryUtilsTest.class);
@@ -79,5 +86,47 @@ public class GeometryUtilsTest {
 
         assertEquals(126.0, ncoors[3].getX(), 0.01);
         assertEquals(-35.9999, ncoors[3].getY(), 0.01);
+    }
+    /**
+     * Given a irregular geojson, with hole the centroid point is still inside the polygon
+     * @throws IOException
+     */
+    @Test
+    public void verifyCentroidCorrect() throws IOException {
+        // You can paste the geojson on geojson.io to see what it looks like
+        String geojson = readResourceFile("classpath:canned/irregular.geojson");
+        FeatureJSON json = new FeatureJSON();
+
+        // Read the GeoJSON file
+        StringReader reader = new StringReader(geojson);
+        FeatureCollection<SimpleFeatureType, SimpleFeature> feature = json.readFeatureCollection(reader);
+
+        List<Coordinate> point = GeometryUtils.calculateCollectionCentroid(convertToGeometryCollection(feature));
+        assertEquals(1, point.size(), "One item");
+        assertEquals(2.805438932281021, point.get(0).getX(),"X");
+        assertEquals( 2.0556251797475227, point.get(0).getY(), "Y");
+    }
+
+    protected GeometryCollection convertToGeometryCollection(
+            FeatureCollection<SimpleFeatureType, SimpleFeature> featureCollection) {
+        // Create a GeometryFactory
+        GeometryFactory geometryFactory = new GeometryFactory();
+
+        // List to hold the geometries extracted from the FeatureCollection
+        List<Geometry> geometries = new ArrayList<>();
+
+        // Iterate through the FeatureCollection and extract geometries
+        try(FeatureIterator<SimpleFeature> features = featureCollection.features()) {
+            while(features.hasNext()) {
+                Geometry geometry = (Geometry)(features.next()).getDefaultGeometry();
+                geometries.add(geometry);
+            }
+        }
+
+        // Convert the list of geometries to an array
+        Geometry[] geometryArray = geometries.toArray(new Geometry[0]);
+
+        // Create and return a GeometryCollection from the array of geometries
+        return geometryFactory.createGeometryCollection(geometryArray);
     }
 }

@@ -344,19 +344,27 @@ public class GeometryUtils {
     }
 
     protected static List<Coordinate> calculateCollectionCentroid(GeometryCollection geometryCollection) {
-        List<Coordinate> coordinates = new ArrayList<>();
-        // Loop through each geometry in the collection
-        for (int i = 0; i < geometryCollection.getNumGeometries(); i++) {
-            Geometry geometry = geometryCollection.getGeometryN(i);
+        // Try simplified the polygon to reduce the number of centroid.
+        Geometry geometry = geometryCollection.union();
 
-            // Make sure the point will not fall out of the shape, for example a U shape will make
-            // centroid fall out of the U, so we check if the centroid is out of the shape? if yes then use
-            // interior point
-            Point centroid = calculatePolygonCentroid(geometry);
-            coordinates.add(new Coordinate(centroid.getX(), centroid.getY()));
+        if(geometry instanceof GeometryCollection c) {
+            List<Coordinate> coordinates = new ArrayList<>();
+            // That means it cannot be simplified, we need centroid of each polygon
+            for (int i = 0; i < c.getNumGeometries(); i++) {
+                geometry = geometryCollection.getGeometryN(i);
+
+                // Make sure the point will not fall out of the shape, for example a U shape will make
+                // centroid fall out of the U, so we check if the centroid is out of the shape? if yes then use
+                // interior point
+                Point centroid = calculatePolygonCentroid(geometry);
+                coordinates.add(new Coordinate(centroid.getX(), centroid.getY()));
+            }
+            return coordinates;
         }
-        // Create and return the centroid point
-        return coordinates;
+        else {
+            Point centroid = calculatePolygonCentroid(geometry);
+            return List.of(new Coordinate(centroid.getX(), centroid.getY()));
+        }
     }
     /**
      * Create a centroid point for the polygon, this will help to speed up the map processing as there is no need
