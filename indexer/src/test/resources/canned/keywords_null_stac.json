@@ -69,12 +69,11 @@
       ],
       "type": "GeometryCollection"
     },
-    "temporal": [
-      {
-        "start": "2018-09-13T14:00:00Z",
-        "end": null
-      }
-    ]
+    "temporal" : [ {
+      "start" : "2018-09-13T14:00:00Z",
+      "end" : null
+    } ],
+    "centroid" : [ [ 128.494, -11.35 ] ]
   },
   "contacts": [
     {

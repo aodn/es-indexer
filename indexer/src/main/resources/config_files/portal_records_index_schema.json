@@ -133,6 +133,7 @@
           "score": { "type": "long" },
           "status": { "type": "text" },
           "credits": { "type": "text" },
+          "centroid" : { "type": "double" },
           "scope" : {
             "type": "nested",
             "properties" : {

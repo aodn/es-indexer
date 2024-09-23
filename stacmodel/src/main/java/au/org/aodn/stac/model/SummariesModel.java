@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -40,7 +41,7 @@ public class SummariesModel {
      * Use to generate the vector tile, the STAC format is not optimized and hard to work with for Elastic search
      */
     @JsonProperty("proj:geometry")
-    protected Map geometry;
+    protected Map<?, ?> geometry;
     /**
      * Use for effective search on temporal.
      */
@@ -64,4 +65,7 @@ public class SummariesModel {
      */
     @JsonProperty("organisation_vocabs")
     protected List<String> organisationVocabs;
+
+    @JsonProperty("centroid")
+    protected List<List<BigDecimal>> centroid;
 }

@@ -16,6 +16,8 @@ app:
     auth-token-header-name: X-API-Key
     authToken: ${INDEXER_APIKEY:sample-auth-token}
   initialiseVocabsIndex: true
+  geometry:
+    gridLandSize: 10.0
 
 management:
   info:

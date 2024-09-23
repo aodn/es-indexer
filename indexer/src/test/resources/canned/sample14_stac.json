@@ -75,12 +75,11 @@
       ],
       "type": "GeometryCollection"
     },
-    "temporal": [
-      {
-        "start": "2010-09-20T15:14:00Z",
-        "end": "2010-10-13T07:59:00Z"
-      }
-    ]
+    "temporal" : [ {
+      "start" : "2010-09-20T15:14:00Z",
+      "end" : "2010-10-13T07:59:00Z"
+    } ],
+    "centroid" : [ [ 152.197, -33.076 ] ]
   },
   "contacts": [
     {
