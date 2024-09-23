@@ -463,7 +463,6 @@ public class GeometryUtils {
      * @return - Centroid point which will not appear on land.
      */
     public static List<List<BigDecimal>> createCentroidFrom(List<List<AbstractEXGeographicExtentType>> rawInput) {
-        //TODO: avoid hardcode CRS, get it from document
         List<List<Geometry>> grid = splitAreaToGrid(createGeometryWithoutLand(rawInput));
         return (grid != null && !grid.isEmpty()) ? createCentroid(grid) : null;
     }
@@ -476,7 +475,7 @@ public class GeometryUtils {
      */
     public static Map<?, ?> createGeometryFrom(List<List<AbstractEXGeographicExtentType>> rawInput) {
         // The return polygon is in EPSG:4326, so we can call createGeoJson directly
-        // TODO: avoid hardcode CRS, get it from document
+
         // This line will cause the spatial extents to break into grid, it may help to debug but will make production
         // slow and sometimes cause polygon break.
         // List<List<Geometry>> polygonNoLand = splitAreaToGrid(createGeometryWithoutLand(rawInput));
