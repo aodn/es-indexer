@@ -13,12 +13,14 @@ import org.geotools.data.simple.SimpleFeatureIterator;
 import org.geotools.data.simple.SimpleFeatureSource;
 import org.geotools.geojson.geom.GeometryJSON;
 import org.locationtech.jts.geom.*;
+import org.locationtech.jts.operation.union.UnaryUnionOp;
 import org.locationtech.jts.simplify.DouglasPeuckerSimplifier;
 import org.opengis.feature.simple.SimpleFeature;
 import org.springframework.core.io.ClassPathResource;
 
 import java.io.*;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.net.URL;
 import java.util.*;
 import java.util.function.Function;
@@ -32,16 +34,55 @@ public class GeometryUtils {
 
     @Getter
     @Setter
+    protected static int centroidScale = 3;
+
+    @Getter
+    @Setter
     protected static double cellSize = 10.0;
 
     // Load a coastline shape file so that we can get a spatial extents that cover sea only
     static {
-        String tempDir = System.getProperty("java.io.tmpdir");
-        ClassPathResource resource1 = new ClassPathResource("land/ne_10m_land.shp");
-        ClassPathResource resource2 = new ClassPathResource("land/ne_10m_land.shx");
+        try {
+            // shp file depends on shx, so need to have shx appear in temp folder.
+            saveResourceToTemp("land/ne_10m_land.shx", "shapefile.shx");
+            File tempFile = saveResourceToTemp("land/ne_10m_land.shp", "shapefile.shp");
 
-        try(InputStream input = resource2.getInputStream()) {
-            File tempFile = new File(tempDir, "shapefile.shx");
+            // Load the shapefile from the temporary file using ShapefileDataStore
+            URL tempFileUrl = tempFile.toURI().toURL();
+            ShapefileDataStoreFactory dataStoreFactory = new ShapefileDataStoreFactory();
+            ShapefileDataStore dataStore = (ShapefileDataStore) dataStoreFactory.createDataStore(tempFileUrl);
+            SimpleFeatureSource featureSource = dataStore.getFeatureSource();
+
+            // Step 3: Extract the land geometry from the shapefile
+            SimpleFeatureCollection featureCollection = featureSource.getFeatures();
+            List<Geometry> geometries = new ArrayList<>();
+
+            try (SimpleFeatureIterator iterator = featureCollection.features()) {
+                while (iterator.hasNext()) {
+                    SimpleFeature feature = iterator.next();
+                    Geometry landFeatureGeometry = (Geometry) feature.getDefaultGeometry();
+
+                    // This will reduce the points of the shape file for faster processing
+                    Geometry simplifiedGeometry = DouglasPeuckerSimplifier
+                            .simplify(landFeatureGeometry, 0.03); // Adjust tolerance
+
+                    geometries.add(simplifiedGeometry);
+                }
+            }
+            // Faster to use union list rather than union by geometry one by one.
+            landGeometry = UnaryUnionOp.union(geometries);
+        }
+        catch(IOException ioe) {
+            throw new RuntimeException(ioe);
+        }
+    }
+
+    protected static File saveResourceToTemp(String resourceName, String filename) {
+        String tempDir = System.getProperty("java.io.tmpdir");
+        ClassPathResource resource = new ClassPathResource(resourceName);
+
+        File tempFile = new File(tempDir, filename);
+        try(InputStream input = resource.getInputStream()) {
             tempFile.deleteOnExit();  // Ensure the file is deleted when the JVM exits
 
             // Write the InputStream to the temporary file
@@ -55,53 +96,7 @@ public class GeometryUtils {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-        try(InputStream input = resource1.getInputStream()) {
-            // Create a temporary file to store the shapefile, because ShapefileDataStoreFactory do not support
-            // input stream.
-            File tempFile = new File(tempDir, "shapefile.shp");
-            tempFile.deleteOnExit();  // Ensure the file is deleted when the JVM exits
-
-            // Write the InputStream to the temporary file
-            try (FileOutputStream outputStream = new FileOutputStream(tempFile)) {
-                byte[] buffer = new byte[1024];
-                int bytesRead;
-                while ((bytesRead = input.read(buffer)) != -1) {
-                    outputStream.write(buffer, 0, bytesRead);
-                }
-            }
-
-            // Load the shapefile from the temporary file using ShapefileDataStore
-            URL tempFileUrl = tempFile.toURI().toURL();
-            ShapefileDataStoreFactory dataStoreFactory = new ShapefileDataStoreFactory();
-            ShapefileDataStore dataStore = (ShapefileDataStore) dataStoreFactory.createDataStore(tempFileUrl);
-            SimpleFeatureSource featureSource = dataStore.getFeatureSource();
-
-            // Step 3: Extract the land geometry from the shapefile
-            Geometry land = null;
-            SimpleFeatureCollection featureCollection = featureSource.getFeatures();
-            try (SimpleFeatureIterator iterator = featureCollection.features()) {
-                while (iterator.hasNext()) {
-                    SimpleFeature feature = iterator.next();
-                    Geometry landFeatureGeometry = (Geometry) feature.getDefaultGeometry();
-
-                    // This will reduce the points of the shape file for faster processing
-                    Geometry simplifiedGeometry = DouglasPeuckerSimplifier
-                            .simplify(landFeatureGeometry, 0.03); // Adjust tolerance
-
-                    // Union the land geometries (since land shapefile may contain multiple features)
-                    if (land == null) {
-                        land = simplifiedGeometry;
-                    } else {
-                        land = land.union(simplifiedGeometry);
-                    }
-                }
-            }
-            landGeometry = land;
-        }
-        catch(IOException ioe) {
-            throw new RuntimeException(ioe);
-        }
+        return tempFile;
     }
     /**
      * @param polygons - Assume to be EPSG:4326, as GeoJson always use this encoding.
@@ -376,7 +371,12 @@ public class GeometryUtils {
                 .map(GeometryUtils::calculateGeometryCentroid)
                 .filter(Objects::nonNull)
                 .flatMap(Collection::stream)
-                .map(coordinate -> List.of(BigDecimal.valueOf(coordinate.getX()), BigDecimal.valueOf(coordinate.getY())))
+                .map(coordinate -> List.of(
+                        // We do not need super high precision for centroid, this help to speed up the transfer
+                        // on large area
+                        BigDecimal.valueOf(coordinate.getX()).setScale(getCentroidScale(), RoundingMode.HALF_UP),
+                        BigDecimal.valueOf(coordinate.getY()).setScale(getCentroidScale(), RoundingMode.HALF_UP))
+                )
                 .toList();
     }
     /**

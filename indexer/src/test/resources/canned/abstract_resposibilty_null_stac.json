@@ -27,25 +27,59 @@
       ]
     ]
   },
-  "summaries" : {
-    "score" : 1,
-    "status" : "planned",
-    "credits" : [ "Brian Hatfield" ],
-    "statement" : "Application developed by CMAR staff",
-    "revision" : "2006-07-19T09:56:50",
-    "update_frequency" : "other",
-    "proj:geometry" : {
-      "geometries" : [ {
-        "type" : "Polygon",
-        "coordinates" : [ [ [ 114, -24 ], [ 122, -24 ], [ 122, -17 ], [ 114, -17 ], [ 114, -24 ] ] ]
-      } ],
-      "type" : "GeometryCollection"
+  "summaries": {
+    "score": 1,
+    "status": "planned",
+    "credits": [
+      "Brian Hatfield"
+    ],
+    "statement": "Application developed by CMAR staff",
+    "revision": "2006-07-19T09:56:50",
+    "update_frequency": "other",
+    "proj:geometry": {
+      "geometries": [
+        {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                114,
+                -24
+              ],
+              [
+                122,
+                -24
+              ],
+              [
+                122,
+                -17
+              ],
+              [
+                114,
+                -17
+              ],
+              [
+                114,
+                -24
+              ]
+            ]
+          ]
+        }
+      ],
+      "type": "GeometryCollection"
     },
-    "temporal" : [ {
-      "start" : null,
-      "end" : null
-    } ],
-    "centroid" : [ [ 117.41603386692273, -18.868625430404293 ] ]
+    "temporal": [
+      {
+        "start": null,
+        "end": null
+      }
+    ],
+    "centroid": [
+      [
+        117.416,
+        -18.869
+      ]
+    ]
   },
   "contacts": [
     {
