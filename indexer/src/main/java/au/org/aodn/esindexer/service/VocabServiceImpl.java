@@ -196,8 +196,8 @@ public class VocabServiceImpl implements VocabService {
     }
 
     protected void indexAllVocabs(List<VocabModel> parameterVocabs,
-                                List<VocabModel> platformVocabs,
-                                List<VocabModel> organisationVocabs) throws IOException {
+                                  List<VocabModel> platformVocabs,
+                                  List<VocabModel> organisationVocabs) throws IOException {
 
         List<VocabDto> vocabDtos = new ArrayList<>();
 
@@ -267,31 +267,43 @@ public class VocabServiceImpl implements VocabService {
         log.info("Total documents in index: {} is {}", vocabsIndexName, elasticSearchIndexService.getDocumentsCount(vocabsIndexName));
     }
 
-    public void populateVocabsData() throws IOException, InterruptedException, ExecutionException {
+    public void populateVocabsData() {
+        log.info("Starting async vocab fetching process...");
 
-        Callable<List<VocabModel>> parameterVocabs = () -> {
-            log.info("Fetching parameter vocabs from ARDC");
-            return ardcVocabService.getVocabTreeFromArdcByType(VocabApiPaths.PARAMETER_VOCAB);
-        };
-
-        Callable<List<VocabModel>> platformVocabs = () -> {
-            log.info("Fetching platform vocabs from ARDC");
-            return ardcVocabService.getVocabTreeFromArdcByType(VocabApiPaths.PLATFORM_VOCAB);
-        };
-
-        Callable<List<VocabModel>> organisationVocabs = () -> {
-            log.info("Fetching organisation vocabs from ARDC");
-            return ardcVocabService.getVocabTreeFromArdcByType(VocabApiPaths.ORGANISATION_VOCAB);
-        };
-        // Make it execute with threads the same time to speed up the load.
         ExecutorService executorService = Executors.newFixedThreadPool(3);
 
-        List<Callable<List<VocabModel>>> tasks = List.of(parameterVocabs, platformVocabs, organisationVocabs);
-        List<Future<List<VocabModel>>> completed = executorService.invokeAll(tasks);
+        List<Callable<List<VocabModel>>> tasks = List.of(
+                createVocabFetchTask(VocabApiPaths.PARAMETER_VOCAB, "parameter"),
+                createVocabFetchTask(VocabApiPaths.PLATFORM_VOCAB, "platform"),
+                createVocabFetchTask(VocabApiPaths.ORGANISATION_VOCAB, "organisation")
+        );
 
-        log.info("Indexing fetched vocabs to {}", vocabsIndexName);
-        indexAllVocabs(completed.get(0).get(), completed.get(1).get(), completed.get(2).get());
+        // Run asynchronously so the app can continue starting
+        CompletableFuture.runAsync(() -> {
+            try {
+                List<Future<List<VocabModel>>> completed = executorService.invokeAll(tasks);
+                log.info("Indexing fetched vocabs to {}", vocabsIndexName);
+                indexAllVocabs(completed.get(0).get(), completed.get(1).get(), completed.get(2).get());
+            } catch (Exception e) {
+                log.error("Error processing vocabs data", e);
+            } finally {
+                executorService.shutdown();
+            }
+        });
 
-        executorService.shutdown();
+        log.info("Vocab fetching process started in the background.");
     }
+
+    private Callable<List<VocabModel>> createVocabFetchTask(VocabApiPaths vocabType, String vocabName) {
+        return () -> {
+            try {
+                log.info("Fetching {} vocabs from ARDC", vocabName);
+                return ardcVocabService.getVocabTreeFromArdcByType(vocabType);
+            } catch (Exception e) {
+                log.error("Error fetching {} vocabs", vocabName, e);
+                return Collections.emptyList();
+            }
+        };
+    }
+
 }
