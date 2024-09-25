@@ -26,6 +26,7 @@ public class IndexerConfig {
     @PostConstruct
     public void init() {
         GeometryUtils.setCellSize(cellSize);
+        GeometryUtils.setExecutorService(Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors()));
     }
 
     @PreDestroy

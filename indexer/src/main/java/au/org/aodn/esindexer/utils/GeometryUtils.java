@@ -34,7 +34,8 @@ public class GeometryUtils {
     protected static Geometry landGeometry;
     // Create an ExecutorService with a fixed thread pool size
     @Getter
-    protected static ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+    @Setter
+    protected static ExecutorService executorService;
 
     @Getter
     @Setter
