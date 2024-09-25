@@ -14,6 +14,7 @@ import java.util.concurrent.*;
 import org.springframework.beans.factory.annotation.Value;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 
 @Configuration
 @EnableRetry
@@ -25,6 +26,13 @@ public class IndexerConfig {
     @PostConstruct
     public void init() {
         GeometryUtils.setCellSize(cellSize);
+        GeometryUtils.setExecutorService(Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors()));
+    }
+
+    @PreDestroy
+    public void cleanUp() {
+        // Clean up resources
+        GeometryUtils.getExecutorService().shutdown();
     }
     /**
      * We need to create component here because we do not want to run test with real http connection

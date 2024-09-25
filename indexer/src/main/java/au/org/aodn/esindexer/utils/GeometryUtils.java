@@ -23,6 +23,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.net.URL;
 import java.util.*;
+import java.util.concurrent.*;
 import java.util.function.Function;
 
 public class GeometryUtils {
@@ -31,6 +32,10 @@ public class GeometryUtils {
     protected static GeometryFactory factory = new GeometryFactory(new PrecisionModel(), 4326);
     protected static ObjectMapper objectMapper = new ObjectMapper();
     protected static Geometry landGeometry;
+    // Create an ExecutorService with a fixed thread pool size
+    @Getter
+    @Setter
+    protected static ExecutorService executorService;
 
     @Getter
     @Setter
@@ -271,7 +276,8 @@ public class GeometryUtils {
      * @param large - A Polygon to break into grid
      * @return - A polygon the break into grid.
      */
-    protected static List<Geometry> breakLargeGeometryToGrid(Geometry large) {
+    protected static List<Geometry> breakLargeGeometryToGrid(final Geometry large) {
+        logger.debug("Start break down large geometry");
         // Get the bounding box (extent) of the large polygon
         Envelope envelope = large.getEnvelopeInternal();
 
@@ -279,14 +285,36 @@ public class GeometryUtils {
         // cover Australia
         List<Polygon> gridPolygons = createGridPolygons(envelope, getCellSize());
 
-        List<Geometry> intersectedPolygons = new ArrayList<>();
+        // List to store Future objects representing the results of the tasks
+        List<Future<Geometry>> futureResults = new ArrayList<>();
+
+        // Submit tasks to executor for each gridPolygon
         for (Polygon gridPolygon : gridPolygons) {
-            Geometry intersection = gridPolygon.intersection(large);
-            if (!intersection.isEmpty()) {
-                intersectedPolygons.add(intersection);
+            Callable<Geometry> task = () -> {
+                Geometry intersection = gridPolygon.intersection(large);
+                return !intersection.isEmpty() ? intersection : null;
+            };
+            Future<Geometry> future = executorService.submit(task);
+            futureResults.add(future);
+        }
+
+        // List to store the intersected polygons
+        final List<Geometry> intersectedPolygons = new ArrayList<>();
+
+        // Collect the results from the futures
+        for (Future<Geometry> future : futureResults) {
+            try {
+                // This blocks until the result is available
+                Geometry result = future.get();
+                if (result != null) {
+                    intersectedPolygons.add(result);
+                }
+            } catch (InterruptedException | ExecutionException e) {
+                // Nothing to report
             }
         }
 
+        logger.debug("End break down large geometry");
         return intersectedPolygons;
     }
 
