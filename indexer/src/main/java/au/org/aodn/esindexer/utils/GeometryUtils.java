@@ -32,6 +32,9 @@ public class GeometryUtils {
     protected static GeometryFactory factory = new GeometryFactory(new PrecisionModel(), 4326);
     protected static ObjectMapper objectMapper = new ObjectMapper();
     protected static Geometry landGeometry;
+    // Create an ExecutorService with a fixed thread pool size
+    @Getter
+    protected static ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 
     @Getter
     @Setter
@@ -281,9 +284,6 @@ public class GeometryUtils {
         // cover Australia
         List<Polygon> gridPolygons = createGridPolygons(envelope, getCellSize());
 
-        // Create an ExecutorService with a fixed thread pool size
-        ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
-
         // List to store Future objects representing the results of the tasks
         List<Future<Geometry>> futureResults = new ArrayList<>();
 
@@ -312,9 +312,6 @@ public class GeometryUtils {
                 // Nothing to report
             }
         }
-
-        // Shutdown the ExecutorService after all tasks are completed
-        executorService.shutdown();
 
         logger.debug("End break down large geometry");
         return intersectedPolygons;
