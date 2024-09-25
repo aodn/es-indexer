@@ -22,6 +22,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import jakarta.xml.bind.JAXBException;
 import lombok.extern.slf4j.Slf4j;
 import au.org.aodn.stac.model.SearchSuggestionsModel;
+import org.locationtech.jts.geom.Geometry;
 import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.operation.TransformException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
-import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -280,7 +281,9 @@ public class IndexerServiceImpl implements IndexerService {
         }
     }
 
-    public List<BulkResponse> indexAllMetadataRecordsFromGeoNetwork(String beginWithUuid, boolean confirm, Callback callback) throws IOException {
+    public List<BulkResponse> indexAllMetadataRecordsFromGeoNetwork(
+            String beginWithUuid, boolean confirm, final Callback callback) throws IOException {
+
         if (!confirm) {
             throw new IndexAllRequestNotConfirmedException("Please confirm that you want to index all metadata records from GeoNetwork");
         }
@@ -299,13 +302,56 @@ public class IndexerServiceImpl implements IndexerService {
 
         long dataSize = 0;
         long total = 0;
+        // We need to keep sending messages to client to avoid timeout on long processing
+        ExecutorService executor = Executors.newFixedThreadPool(2);
 
         try {
             for (String metadataRecord : geoNetworkResourceService.getAllMetadataRecords(beginWithUuid)) {
                 if (metadataRecord != null) {
-                    try {
-                        // get mapped metadata values from GeoNetwork to STAC collection schema
-                        final StacCollectionModel mappedMetadataValues = this.getMappedMetadataValues(metadataRecord);
+                    // get mapped metadata values from GeoNetwork to STAC collection schema
+                    final CountDownLatch countDown = new CountDownLatch(1);
+                    Callable<StacCollectionModel> task = () ->  {
+                        try {
+                            return this.getMappedMetadataValues(metadataRecord);
+                        }
+                        catch (FactoryException | JAXBException | TransformException | NullPointerException e) {
+                            /*
+                             * it will reach here if cannot extract values of all the keys in GeoNetwork metadata JSON
+                             * or ID is not found, which is fatal.
+                             */
+                            log.error("Error extracting values from GeoNetwork metadata JSON: {}", metadataRecord);
+                            if (callback != null) {
+                                callback.onProgress(
+                                        String.format(
+                                                "WARNING - Skip %s due to transform error -> %s",
+                                                metadataRecord,
+                                                e.getMessage()
+                                        ));
+                            }
+                        }
+                        finally {
+                            countDown.countDown();
+                        }
+                        return null;
+                    };
+
+                    Callable<Void> msg = () -> {
+                        // Make sure gateway not timeout on long processing
+                        while(countDown.getCount() != 0) {
+                            if (callback != null) {
+                                callback.onProgress("Processing.... ");
+                            }
+                            countDown.await(30, TimeUnit.SECONDS);
+                        }
+                        return null;
+                    };
+                    // Submit a task to keep sending client message to avoid timeout
+                    executor.submit(msg);
+                    Future<StacCollectionModel> value = executor.submit(task);
+
+                    final StacCollectionModel mappedMetadataValues = value.get();
+
+                    if(mappedMetadataValues != null) {
                         int size = indexerObjectMapper.writeValueAsBytes(mappedMetadataValues).length;
 
                         // We need to split the batch into smaller size to avoid data too large error in ElasticSearch,
@@ -345,21 +391,6 @@ public class IndexerServiceImpl implements IndexerService {
                                             total)
                             );
                         }
-
-                    } catch (FactoryException | JAXBException | TransformException | NullPointerException e) {
-                        /*
-                         * it will reach here if cannot extract values of all the keys in GeoNetwork metadata JSON
-                         * or ID is not found, which is fatal.
-                         */
-                        log.error("Error extracting values from GeoNetwork metadata JSON: {}", metadataRecord);
-                        if (callback != null) {
-                            callback.onProgress(
-                                    String.format(
-                                            "WARNING - Skip %s due to transform error -> %s",
-                                            metadataRecord,
-                                            e.getMessage()
-                                    ));
-                        }
                     }
                 }
             }
@@ -384,6 +415,9 @@ public class IndexerServiceImpl implements IndexerService {
                                 e.getMessage()
                         ));
             }
+        }
+        finally {
+            executor.shutdown();
         }
         return results;
     }
