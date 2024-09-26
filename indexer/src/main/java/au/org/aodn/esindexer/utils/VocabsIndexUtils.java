@@ -5,7 +5,6 @@ import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Profile;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import java.io.IOException;
@@ -13,7 +12,6 @@ import java.util.concurrent.CompletableFuture;
 
 
 @Slf4j
-@Profile("!test") // exclude this class when using 'test' profile
 public class VocabsIndexUtils {
     @Value("${elasticsearch.vocabs_index.name}")
     String vocabsIndexName;

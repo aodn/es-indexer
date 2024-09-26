@@ -291,14 +291,8 @@ public class VocabServiceImpl implements VocabService {
 
     private Callable<List<VocabModel>> createVocabFetchTask(VocabApiPaths vocabType, String vocabName) {
         return () -> {
-            try {
-                log.info("Fetching {} vocabs from ARDC", vocabName);
-                return ardcVocabService.getVocabTreeFromArdcByType(vocabType);
-            } catch (Exception e) {
-                log.error("Error fetching {} vocabs", vocabName, e);
-                return Collections.emptyList();
-            }
+            log.info("Fetching {} vocabs from ARDC", vocabName);
+            return ardcVocabService.getVocabTreeFromArdcByType(vocabType);
         };
     }
-
 }

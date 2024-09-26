@@ -53,9 +53,6 @@ public class BaseTestClass {
     @Autowired
     protected DockerComposeContainer dockerComposeContainer;
 
-    @Autowired
-    VocabServiceImpl vocabService;
-
     protected void clearElasticIndex(String indexName) throws IOException {
         logger.debug("Clear elastic index");
         try {
@@ -186,11 +183,6 @@ public class BaseTestClass {
 
             }
         }
-    }
-
-    @PostConstruct
-    public void populateVocabsIndexData() {
-        vocabService.populateVocabsData();
     }
 
     public void deleteRecord(String... uuids) {
