@@ -1,6 +1,8 @@
 package au.org.aodn.esindexer;
 
+import au.org.aodn.ardcvocabs.service.ArdcVocabService;
 import au.org.aodn.esindexer.configuration.GeoNetworkSearchTestConfig;
+import au.org.aodn.esindexer.service.VocabServiceImpl;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.ElasticsearchException;
 import co.elastic.clients.elasticsearch._types.query_dsl.QueryBuilders;
@@ -15,7 +17,6 @@ import org.springframework.http.*;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.client.RestClientException;
 import org.testcontainers.containers.DockerComposeContainer;
-import org.testcontainers.elasticsearch.ElasticsearchContainer;
 
 import javax.annotation.PostConstruct;
 import java.io.File;
@@ -25,7 +26,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.concurrent.CountDownLatch;
 
 import static au.org.aodn.esindexer.utils.CommonUtils.persevere;
 import static org.junit.Assert.assertEquals;
@@ -52,6 +52,9 @@ public class BaseTestClass {
 
     @Autowired
     protected DockerComposeContainer dockerComposeContainer;
+
+    @Autowired
+    VocabServiceImpl vocabService;
 
     protected void clearElasticIndex(String indexName) throws IOException {
         logger.debug("Clear elastic index");
@@ -183,6 +186,11 @@ public class BaseTestClass {
 
             }
         }
+    }
+
+    @PostConstruct
+    public void populateVocabsIndexData() {
+        vocabService.populateVocabsData();
     }
 
     public void deleteRecord(String... uuids) {

@@ -16,7 +16,7 @@ geonetwork:
 
 logging:
   level:
-    au.org.aodn.esindexer: DEBUG
+    au.org.aodn.indexer: DEBUG
     au.org.aodn.ardcvocabs: DEBUG
 
 management:

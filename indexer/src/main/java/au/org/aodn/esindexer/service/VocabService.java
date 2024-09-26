@@ -10,7 +10,7 @@ import java.util.concurrent.ExecutionException;
 public interface VocabService {
     List<String> extractVocabLabelsFromThemes(List<ThemesModel> themes, String vocabType) throws IOException;
 
-    void populateVocabsData() throws IOException, InterruptedException, ExecutionException;
+    void populateVocabsData();
     void clearParameterVocabCache();
     void clearPlatformVocabCache();
     void clearOrganisationVocabCache();

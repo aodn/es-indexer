@@ -268,30 +268,25 @@ public class VocabServiceImpl implements VocabService {
     }
 
     public void populateVocabsData() {
-        log.info("Starting async vocab fetching process...");
-
         ExecutorService executorService = Executors.newFixedThreadPool(3);
-
-        List<Callable<List<VocabModel>>> tasks = List.of(
+        List<Callable<List<VocabModel>>> vocabTasks = List.of(
                 createVocabFetchTask(VocabApiPaths.PARAMETER_VOCAB, "parameter"),
                 createVocabFetchTask(VocabApiPaths.PLATFORM_VOCAB, "platform"),
                 createVocabFetchTask(VocabApiPaths.ORGANISATION_VOCAB, "organisation")
         );
+        processVocabTasks(executorService, vocabTasks);
+    }
 
-        // Run asynchronously so the app can continue starting
-        CompletableFuture.runAsync(() -> {
-            try {
-                List<Future<List<VocabModel>>> completed = executorService.invokeAll(tasks);
-                log.info("Indexing fetched vocabs to {}", vocabsIndexName);
-                indexAllVocabs(completed.get(0).get(), completed.get(1).get(), completed.get(2).get());
-            } catch (Exception e) {
-                log.error("Error processing vocabs data", e);
-            } finally {
-                executorService.shutdown();
-            }
-        });
-
-        log.info("Vocab fetching process started in the background.");
+    private void processVocabTasks(ExecutorService executorService, List<Callable<List<VocabModel>>> tasks) {
+        try {
+            List<Future<List<VocabModel>>> completed = executorService.invokeAll(tasks);
+            log.info("Indexing fetched vocabs to {}", vocabsIndexName);
+            indexAllVocabs(completed.get(0).get(), completed.get(1).get(), completed.get(2).get());
+        } catch (Exception e) {
+            log.error("Error processing vocabs data", e);
+        } finally {
+            executorService.shutdown();
+        }
     }
 
     private Callable<List<VocabModel>> createVocabFetchTask(VocabApiPaths vocabType, String vocabName) {
