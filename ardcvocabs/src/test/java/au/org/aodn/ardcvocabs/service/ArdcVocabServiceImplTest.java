@@ -14,8 +14,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.stubbing.Answer;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
+import org.springframework.retry.RetryCallback;
+import org.springframework.retry.RetryContext;
 import org.springframework.retry.support.RetryTemplate;
 import org.springframework.web.client.RestTemplate;
 
@@ -27,6 +30,8 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.util.AssertionErrors.assertTrue;
 
 @ExtendWith(MockitoExtension.class)
@@ -197,6 +202,13 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
         //this.ardcVocabService = new ArdcVocabServiceImpl(new RestTemplate());
         this.ardcVocabService = new ArdcVocabServiceImpl(mockRestTemplate, mockRetryTemplate);
         this.ardcVocabService.vocabApiBase = "https://vocabs.ardc.edu.au/repository/api/lda/aodn";
+
+        // Mock the RetryTemplate to execute the provided retry logic
+        when(mockRetryTemplate.execute(any()))
+                .thenAnswer(invocation -> {
+                    RetryCallback<?, ?> retryCallback = invocation.getArgument(0);
+                    return retryCallback.doWithRetry(mock(RetryContext.class));
+                });
     }
 
     @AfterEach void clear() {
