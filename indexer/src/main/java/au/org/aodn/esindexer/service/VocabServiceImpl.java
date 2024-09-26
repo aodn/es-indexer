@@ -227,66 +227,99 @@ public class VocabServiceImpl implements VocabService {
     }
 
     protected void bulkIndexVocabs(List<VocabDto> vocabs) throws IOException {
-        // count portal index documents, or create index if not found from defined mapping JSON file
-        BulkRequest.Builder bulkRequest = new BulkRequest.Builder();
+        if (!vocabs.isEmpty()) {
+            BulkRequest.Builder bulkRequest = new BulkRequest.Builder();
 
-        for (VocabDto vocab : vocabs) {
-            try {
-                // convert vocab values to binary data
-                log.debug("Ingested json is {}", indexerObjectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(vocab));
-                // send bulk request to Elasticsearch
-                bulkRequest.operations(op -> op
-                        .index(idx -> idx
-                                .index(vocabsIndexName)
-                                .document(vocab)
-                        )
-                );
-            } catch (JsonProcessingException e) {
-                log.error("Failed to ingest parameterVocabs to {}", vocabsIndexName);
-                throw new RuntimeException(e);
-            }
-        }
-
-        BulkResponse result = portalElasticsearchClient.bulk(bulkRequest.build());
-
-        // Flush after insert, otherwise you need to wait for next auto-refresh. It is
-        // especially a problem with autotest, where assert happens very fast.
-        portalElasticsearchClient.indices().refresh();
-
-        // Log errors, if any
-        if (result.errors()) {
-            log.error("Bulk had errors");
-            for (BulkResponseItem item: result.items()) {
-                if (item.error() != null) {
-                    log.error("{} {}", item.error().reason(), item.error().causedBy());
+            for (VocabDto vocab : vocabs) {
+                try {
+                    // convert vocab values to binary data
+                    log.debug("Ingested json is {}", indexerObjectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(vocab));
+                    // send bulk request to Elasticsearch
+                    bulkRequest.operations(op -> op
+                            .index(idx -> idx
+                                    .index(vocabsIndexName)
+                                    .document(vocab)
+                            )
+                    );
+                } catch (JsonProcessingException e) {
+                    log.error("Failed to ingest parameterVocabs to {}", vocabsIndexName);
+                    throw new RuntimeException(e);
                 }
             }
+
+            BulkResponse result = portalElasticsearchClient.bulk(bulkRequest.build());
+
+            // Flush after insert, otherwise you need to wait for next auto-refresh. It is
+            // especially a problem with autotest, where assert happens very fast.
+            portalElasticsearchClient.indices().refresh();
+
+            // Log errors, if any
+            if (result.errors()) {
+                log.error("Bulk had errors");
+                for (BulkResponseItem item: result.items()) {
+                    if (item.error() != null) {
+                        log.error("{} {}", item.error().reason(), item.error().causedBy());
+                    }
+                }
+            } else {
+                log.info("Finished bulk indexing items to index: {}", vocabsIndexName);
+            }
+            log.info("Total documents in index: {} is {}", vocabsIndexName, elasticSearchIndexService.getDocumentsCount(vocabsIndexName));
         } else {
-            log.info("Finished bulk indexing items to index: {}", vocabsIndexName);
+            log.error("No vocabs to be indexed, nothing to index");
         }
-        log.info("Total documents in index: {} is {}", vocabsIndexName, elasticSearchIndexService.getDocumentsCount(vocabsIndexName));
     }
 
-    public void populateVocabsData() {
+    public void populateVocabsData() throws IOException {
+        log.info("Starting fetching vocabs data process synchronously...");
+
+        List<VocabModel> parameterVocabs = ardcVocabService.getVocabTreeFromArdcByType(VocabApiPaths.PARAMETER_VOCAB);
+        List<VocabModel> platformVocabs = ardcVocabService.getVocabTreeFromArdcByType(VocabApiPaths.PLATFORM_VOCAB);
+        List<VocabModel> organisationVocabs = ardcVocabService.getVocabTreeFromArdcByType(VocabApiPaths.ORGANISATION_VOCAB);
+
+        indexAllVocabs(parameterVocabs, platformVocabs, organisationVocabs);
+    }
+
+    public void populateVocabsDataAsync() {
+        log.info("Starting async vocabs data fetching process...");
+
         ExecutorService executorService = Executors.newFixedThreadPool(3);
         List<Callable<List<VocabModel>>> vocabTasks = List.of(
                 createVocabFetchTask(VocabApiPaths.PARAMETER_VOCAB, "parameter"),
                 createVocabFetchTask(VocabApiPaths.PLATFORM_VOCAB, "platform"),
                 createVocabFetchTask(VocabApiPaths.ORGANISATION_VOCAB, "organisation")
         );
-        processVocabTasks(executorService, vocabTasks);
-    }
 
-    private void processVocabTasks(ExecutorService executorService, List<Callable<List<VocabModel>>> tasks) {
-        try {
-            List<Future<List<VocabModel>>> completed = executorService.invokeAll(tasks);
-            log.info("Indexing fetched vocabs to {}", vocabsIndexName);
-            indexAllVocabs(completed.get(0).get(), completed.get(1).get(), completed.get(2).get());
-        } catch (Exception e) {
-            log.error("Error processing vocabs data", e);
-        } finally {
-            executorService.shutdown();
-        }
+        CompletableFuture.runAsync(() -> {
+            try {
+                // Invoke all tasks and wait for completion
+                List<Future<List<VocabModel>>> completedFutures = executorService.invokeAll(vocabTasks);
+
+                // Ensure all tasks are completed and check for exceptions
+                List<List<VocabModel>> allResults = new ArrayList<>();
+                for (Future<List<VocabModel>> future : completedFutures) {
+                    try {
+                        allResults.add(future.get());  // Blocks until the task is completed and retrieves the result
+                    } catch (Exception taskException) {
+                        log.error("Task failed with an exception", taskException);
+                        // Handle failure for this particular task
+                        allResults.add(Collections.emptyList()); // add empty result for failed task
+                    }
+                }
+
+                // Call indexAllVocabs only after all tasks are completed
+                log.info("Indexing fetched vocabs to {}", vocabsIndexName);
+                indexAllVocabs(allResults.get(0), allResults.get(1), allResults.get(2));
+
+            } catch (InterruptedException | IOException e) {
+                Thread.currentThread().interrupt();  // Restore interrupt status
+                log.error("Thread was interrupted while processing vocab tasks", e);
+            } finally {
+                executorService.shutdown();
+            }
+        });
+
+        log.info("Vocabs data fetching process started in the background.");
     }
 
     private Callable<List<VocabModel>> createVocabFetchTask(VocabApiPaths vocabType, String vocabName) {

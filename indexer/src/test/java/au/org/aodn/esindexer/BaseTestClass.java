@@ -1,8 +1,6 @@
 package au.org.aodn.esindexer;
 
-import au.org.aodn.ardcvocabs.service.ArdcVocabService;
 import au.org.aodn.esindexer.configuration.GeoNetworkSearchTestConfig;
-import au.org.aodn.esindexer.service.VocabServiceImpl;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.ElasticsearchException;
 import co.elastic.clients.elasticsearch._types.query_dsl.QueryBuilders;

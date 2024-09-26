@@ -5,6 +5,7 @@ import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import java.io.IOException;
@@ -25,30 +26,45 @@ public class VocabsIndexUtils {
         this.vocabService = vocabService;
     }
 
+    @Autowired
+    private Environment environment;
+
     @PostConstruct
-    public void init() {
-        // this could take a few minutes to complete, in development, you can skip it with -Dapp.initialiseVocabsIndex=false
-        // you can call /api/v1/indexer/ext/vocabs/populate endpoint to manually refresh the vocabs index, without waiting for the scheduled task
+    public void init() throws IOException {
+        // Check if the initialiseVocabsIndex flag is enabled
         if (initialiseVocabsIndex) {
-            log.info("Initialising {}", vocabsIndexName);
-            // non-blocking async method for populating vocabs index data when starting the app
-            log.info("Starting async vocabs data fetching process...");
-            CompletableFuture.runAsync(() -> {
+            if (isTestProfileActive()) {
+                log.info("Initialising {} synchronously for test profile", vocabsIndexName);
                 vocabService.populateVocabsData();
-            });
-            log.info("Vocabs data fetching process started in the background.");
+            } else {
+                log.info("Initialising {} asynchronously", vocabsIndexName);
+                vocabService.populateVocabsDataAsync();
+            }
         }
+    }
+
+    private boolean isTestProfileActive() {
+        String[] activeProfiles = environment.getActiveProfiles();
+        for (String profile : activeProfiles) {
+            if ("test".equalsIgnoreCase(profile)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Scheduled(cron = "0 0 0 * * *")
     public void scheduledRefreshVocabsData() throws IOException {
         log.info("Refreshing ARDC vocabularies data");
+
+        // call synchronous populating method, otherwise existing vocab caches will be emptied while new data hasn't been fully processed yet.
+        vocabService.populateVocabsData();
+
         // clear existing caches
         vocabService.clearParameterVocabCache();
         vocabService.clearPlatformVocabCache();
         vocabService.clearOrganisationVocabCache();
-        // populate latest vocabs
-        vocabService.populateVocabsData();
+
         // update the caches
         vocabService.getParameterVocabs();
         vocabService.getPlatformVocabs();
