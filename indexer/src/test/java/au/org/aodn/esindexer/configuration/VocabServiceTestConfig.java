@@ -6,6 +6,7 @@ import au.org.aodn.ardcvocabs.service.ArdcVocabServiceImplTest;
 import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.retry.support.RetryTemplate;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
@@ -20,11 +21,12 @@ public class VocabServiceTestConfig {
     public ArdcVocabService createMockArdcVocabService() throws IOException {
 
         RestTemplate template = Mockito.mock(RestTemplate.class);
+        RetryTemplate retryTemplate = Mockito.mock(RetryTemplate.class);
 
         ArdcVocabServiceImplTest.setupPlatformMockRestTemplate(template);
         ArdcVocabServiceImplTest.setupParameterVocabMockRestTemplate(template);
         ArdcVocabServiceImplTest.setupOrganizationMockRestTemplate(template);
 
-        return new ArdcVocabServiceImpl(template);
+        return new ArdcVocabServiceImpl(template, retryTemplate);
     }
 }

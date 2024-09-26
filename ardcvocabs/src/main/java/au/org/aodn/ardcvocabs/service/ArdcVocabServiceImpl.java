@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.node.TextNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.retry.support.RetryTemplate;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
@@ -23,14 +24,16 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
     protected String vocabApiBase;
 
     protected RestTemplate restTemplate;
+    protected RetryTemplate retryTemplate;
 
     protected Function<JsonNode, String> label = (node) -> node.has("prefLabel") ? node.get("prefLabel").get("_value").asText() : null;
     protected Function<JsonNode, String> about = (node) -> node.has("_about") ? node.get("_about").asText() : null;
     protected Function<JsonNode, String> definition = (node) -> node.has("definition") ? node.get("definition").asText() : null;
     protected BiFunction<JsonNode, String, Boolean> isNodeValid = (node, item) -> node != null && !node.isEmpty() && node.has(item) && !node.get(item).isEmpty();
 
-    public ArdcVocabServiceImpl(RestTemplate restTemplate) {
+    public ArdcVocabServiceImpl(RestTemplate restTemplate, RetryTemplate retryTemplate) {
         this.restTemplate = restTemplate;
+        this.retryTemplate = retryTemplate;
     }
 
     protected VocabModel buildVocabByResourceUri(String vocabUri, String vocabApiBase, VocabApiPaths vocabApiPaths) {
@@ -42,7 +45,7 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
 
         try {
             log.debug("Query api -> {}", detailsUrl);
-            ObjectNode detailsObj = restTemplate.getForObject(detailsUrl, ObjectNode.class);
+            ObjectNode detailsObj = retryTemplate.execute(context -> restTemplate.getForObject(detailsUrl, ObjectNode.class));
             if(isNodeValid.apply(detailsObj, "result") && isNodeValid.apply(detailsObj.get("result"), "primaryTopic")) {
                 JsonNode target = detailsObj.get("result").get("primaryTopic");
 
@@ -106,7 +109,8 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
         while (url != null && !url.isEmpty()) {
             try {
                 log.debug("getVocabLeafNodes -> {}", url);
-                ObjectNode r = restTemplate.getForObject(url, ObjectNode.class);
+                String finalUrl = url;
+                ObjectNode r = retryTemplate.execute(context -> restTemplate.getForObject(finalUrl, ObjectNode.class));
 
                 if (r != null && !r.isEmpty()) {
                     JsonNode node = r.get("result");
@@ -117,8 +121,7 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
                             String dl = String.format(vocabApiBase + vocabApiPaths.getVocabDetailsApiPath(), about.apply(j));
                             try {
                                 log.debug("getVocabLeafNodes -> {}", dl);
-                                ObjectNode d = restTemplate.getForObject(dl, ObjectNode.class);
-
+                                ObjectNode d = retryTemplate.execute(context -> restTemplate.getForObject(dl, ObjectNode.class));
                                 if(isNodeValid.apply(d, "result") && isNodeValid.apply(d.get("result"), "primaryTopic")) {
                                     JsonNode target = d.get("result").get("primaryTopic");
 
@@ -203,8 +206,8 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
         while (url != null && !url.isEmpty()) {
             try {
                 log.debug("Query api -> {}", url);
-                ObjectNode r = restTemplate.getForObject(url, ObjectNode.class);
-
+                String finalUrl = url;
+                ObjectNode r = retryTemplate.execute(context -> restTemplate.getForObject(finalUrl, ObjectNode.class));
                 if (r != null && !r.isEmpty()) {
                     JsonNode node = r.get("result");
                     if (!node.isEmpty() && node.has("items") && !node.get("items").isEmpty()) {

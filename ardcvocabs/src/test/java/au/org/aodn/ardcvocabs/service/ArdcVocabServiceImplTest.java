@@ -16,6 +16,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
+import org.springframework.retry.support.RetryTemplate;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.FileNotFoundException;
@@ -36,6 +37,9 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
 
     @Mock
     RestTemplate mockRestTemplate;
+
+    @Mock
+    RetryTemplate mockRetryTemplate;
 
     /**
      * Check the url and return the canned file content
@@ -191,12 +195,13 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
     public void init() {
         // If you want real download for testing, uncomment below and do not use mock
         //this.ardcVocabService = new ArdcVocabServiceImpl(new RestTemplate());
-        this.ardcVocabService = new ArdcVocabServiceImpl(mockRestTemplate);
+        this.ardcVocabService = new ArdcVocabServiceImpl(mockRestTemplate, mockRetryTemplate);
         this.ardcVocabService.vocabApiBase = "https://vocabs.ardc.edu.au/repository/api/lda/aodn";
     }
 
     @AfterEach void clear() {
         Mockito.reset(mockRestTemplate);
+        Mockito.reset(mockRetryTemplate);
     }
 
     @Test
