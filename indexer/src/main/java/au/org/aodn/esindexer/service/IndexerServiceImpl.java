@@ -494,7 +494,7 @@ public class IndexerServiceImpl implements IndexerService {
                 .toList();
 
         return errors.isEmpty() ?
-                BulkResponse.of(f -> f.errors(false)) :
-                BulkResponse.of(f -> f.items(errors).errors(true));
+                BulkResponse.of(f -> f.items(new ArrayList<>()).errors(false).took(in.took())) :
+                BulkResponse.of(f -> f.items(errors).errors(true).took(in.took()));
     }
 }
