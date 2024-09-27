@@ -366,7 +366,7 @@ public class IndexerServiceImpl implements IndexerService {
                                 callback.onProgress(String.format("Execute batch as bulk request is big enough %s", dataSize + size));
                             }
 
-                            results.add(self.executeBulk(bulkRequest, callback));
+                            results.add(reduceResponse(self.executeBulk(bulkRequest, callback)));
 
                             dataSize = 0;
                             bulkRequest = new BulkRequest.Builder();
@@ -394,8 +394,8 @@ public class IndexerServiceImpl implements IndexerService {
                     }
                 }
             }
-            // In case there are residual
-            BulkResponse temp = self.executeBulk(bulkRequest, callback);
+            // In case there are residual, just report error
+            BulkResponse temp = reduceResponse(self.executeBulk(bulkRequest, callback));
             results.add(temp);
 
             if(callback != null) {
@@ -449,7 +449,7 @@ public class IndexerServiceImpl implements IndexerService {
 
             // Report status if success
             if(callback != null) {
-                callback.onProgress(result);
+                callback.onProgress(reduceResponse(result));
             }
 
             // Log errors, if any
@@ -485,5 +485,16 @@ public class IndexerServiceImpl implements IndexerService {
             }
             throw e;
         }
+    }
+
+    protected BulkResponse reduceResponse(BulkResponse in) {
+        List<BulkResponseItem> errors = in.items()
+                .stream()
+                .filter(p -> p.status() != HttpStatus.CREATED.value())
+                .toList();
+
+        return errors.isEmpty() ?
+                BulkResponse.of(f -> f.items(new ArrayList<>()).errors(false).took(in.took())) :
+                BulkResponse.of(f -> f.items(errors).errors(true).took(in.took()));
     }
 }
