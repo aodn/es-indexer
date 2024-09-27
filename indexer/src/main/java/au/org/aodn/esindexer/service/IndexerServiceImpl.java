@@ -449,7 +449,7 @@ public class IndexerServiceImpl implements IndexerService {
 
             // Report status if success
             if(callback != null) {
-                callback.onProgress(result);
+                callback.onProgress(reduceResponse(result));
             }
 
             // Log errors, if any
