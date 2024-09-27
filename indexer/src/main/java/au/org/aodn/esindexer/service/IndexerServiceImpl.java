@@ -366,15 +366,7 @@ public class IndexerServiceImpl implements IndexerService {
                                 callback.onProgress(String.format("Execute batch as bulk request is big enough %s", dataSize + size));
                             }
 
-                            BulkResponse response = self.executeBulk(bulkRequest, callback);
-                            List<BulkResponseItem> errors = response.items()
-                                    .stream()
-                                    .filter(p -> p.status() != HttpStatus.CREATED.value())
-                                    .toList();
-
-                            response.items().clear();
-                            response.items().addAll(errors);
-                            results.add(response);
+                            results.add(reduceResponse(self.executeBulk(bulkRequest, callback)));
 
                             dataSize = 0;
                             bulkRequest = new BulkRequest.Builder();
@@ -403,13 +395,8 @@ public class IndexerServiceImpl implements IndexerService {
                 }
             }
             // In case there are residual, just report error
-            BulkResponse temp = self.executeBulk(bulkRequest, callback);
-            List<BulkResponseItem> errors = temp.items()
-                    .stream()
-                    .filter(p -> p.status() != HttpStatus.CREATED.value())
-                    .toList();
-            temp.items().clear();
-            temp.items().addAll(errors);
+            BulkResponse temp = reduceResponse(self.executeBulk(bulkRequest, callback));
+            results.add(temp);
 
             if(callback != null) {
                 callback.onComplete(temp);
@@ -498,5 +485,16 @@ public class IndexerServiceImpl implements IndexerService {
             }
             throw e;
         }
+    }
+
+    protected BulkResponse reduceResponse(BulkResponse in) {
+        List<BulkResponseItem> errors = in.items()
+                .stream()
+                .filter(p -> p.status() != HttpStatus.CREATED.value())
+                .toList();
+
+        return errors.isEmpty() ?
+                BulkResponse.of(f -> f.errors(false)) :
+                BulkResponse.of(f -> f.items(errors).errors(true));
     }
 }
