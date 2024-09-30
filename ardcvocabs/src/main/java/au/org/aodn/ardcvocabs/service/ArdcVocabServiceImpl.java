@@ -31,9 +31,9 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
     protected Function<JsonNode, String> definition = (node) -> node.has("definition") ? node.get("definition").asText() : null;
     protected BiFunction<JsonNode, String, Boolean> isNodeValid = (node, item) -> node != null && !node.isEmpty() && node.has(item) && !node.get(item).isEmpty();
 
-    public ArdcVocabServiceImpl(RestTemplate restTemplate) {
+    public ArdcVocabServiceImpl(RestTemplate restTemplate, RetryTemplate retryTemplate) {
         this.restTemplate = restTemplate;
-        this.retryTemplate = new RetryTemplate();
+        this.retryTemplate = retryTemplate;
     }
 
     protected VocabModel buildVocabByResourceUri(String vocabUri, String vocabApiBase, VocabApiPaths vocabApiPaths) {

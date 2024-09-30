@@ -26,6 +26,6 @@ public class VocabServiceTestConfig {
         ArdcVocabServiceImplTest.setupParameterVocabMockRestTemplate(template);
         ArdcVocabServiceImplTest.setupOrganizationMockRestTemplate(template);
 
-        return new ArdcVocabServiceImpl(template);
+        return new ArdcVocabServiceImpl(template, new RetryTemplate());
     }
 }

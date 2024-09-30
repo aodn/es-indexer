@@ -197,7 +197,7 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
     public void init() {
         // If you want real download for testing, uncomment below and do not use mock
         //this.ardcVocabService = new ArdcVocabServiceImpl(new RestTemplate());
-        this.ardcVocabService = new ArdcVocabServiceImpl(mockRestTemplate);
+        this.ardcVocabService = new ArdcVocabServiceImpl(mockRestTemplate, new RetryTemplate());
         this.ardcVocabService.vocabApiBase = "https://vocabs.ardc.edu.au/repository/api/lda/aodn";
     }
 
