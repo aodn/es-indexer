@@ -1,6 +1,8 @@
 package au.org.aodn.esindexer;
 
 import au.org.aodn.esindexer.configuration.GeoNetworkSearchTestConfig;
+import au.org.aodn.esindexer.service.VocabServiceImpl;
+import au.org.aodn.esindexer.utils.VocabsIndexUtils;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.ElasticsearchException;
 import co.elastic.clients.elasticsearch._types.query_dsl.QueryBuilders;
@@ -15,7 +17,6 @@ import org.springframework.http.*;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.client.RestClientException;
 import org.testcontainers.containers.DockerComposeContainer;
-import org.testcontainers.elasticsearch.ElasticsearchContainer;
 
 import javax.annotation.PostConstruct;
 import java.io.File;
@@ -25,7 +26,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.concurrent.CountDownLatch;
 
 import static au.org.aodn.esindexer.utils.CommonUtils.persevere;
 import static org.junit.Assert.assertEquals;
@@ -53,6 +53,9 @@ public class BaseTestClass {
     @Autowired
     protected DockerComposeContainer dockerComposeContainer;
 
+    @Autowired
+    protected VocabServiceImpl vocabService;
+
     protected void clearElasticIndex(String indexName) throws IOException {
         logger.debug("Clear elastic index");
         try {
@@ -66,6 +69,11 @@ public class BaseTestClass {
         catch(ElasticsearchException e) {
             // It is ok to ignore exception if the index is not found
         }
+    }
+
+    @PostConstruct
+    public void init() throws IOException {
+        vocabService.populateVocabsData();
     }
 
     protected HttpEntity<String> getRequestEntity(String body) {

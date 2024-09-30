@@ -125,7 +125,6 @@ public class VocabServiceTest extends BaseTestClass {
     @Test
     void testProcessParameterVocabs() throws IOException, JSONException {
         // read from ARDC
-
         List<VocabModel> parameterVocabsFromArdc = ardcVocabService.getVocabTreeFromArdcByType(VocabApiPaths.PARAMETER_VOCAB);
 
         // read from Elastic search

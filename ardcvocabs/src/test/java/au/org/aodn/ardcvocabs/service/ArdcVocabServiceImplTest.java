@@ -14,8 +14,12 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.stubbing.Answer;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
+import org.springframework.retry.RetryCallback;
+import org.springframework.retry.RetryContext;
+import org.springframework.retry.support.RetryTemplate;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.FileNotFoundException;
@@ -26,6 +30,8 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.util.AssertionErrors.assertTrue;
 
 @ExtendWith(MockitoExtension.class)
@@ -191,7 +197,7 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
     public void init() {
         // If you want real download for testing, uncomment below and do not use mock
         //this.ardcVocabService = new ArdcVocabServiceImpl(new RestTemplate());
-        this.ardcVocabService = new ArdcVocabServiceImpl(mockRestTemplate);
+        this.ardcVocabService = new ArdcVocabServiceImpl(mockRestTemplate, new RetryTemplate());
         this.ardcVocabService.vocabApiBase = "https://vocabs.ardc.edu.au/repository/api/lda/aodn";
     }
 
