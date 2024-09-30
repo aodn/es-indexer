@@ -9,7 +9,6 @@ import org.springframework.core.env.Environment;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import java.io.IOException;
-import java.util.concurrent.CompletableFuture;
 
 
 @Slf4j
@@ -26,31 +25,13 @@ public class VocabsIndexUtils {
         this.vocabService = vocabService;
     }
 
-    @Autowired
-    private Environment environment;
-
     @PostConstruct
     public void init() throws IOException {
         // Check if the initialiseVocabsIndex flag is enabled
         if (initialiseVocabsIndex) {
-            if (isTestProfileActive()) {
-                log.info("Initialising {} synchronously for test profile", vocabsIndexName);
-                vocabService.populateVocabsData();
-            } else {
-                log.info("Initialising {} asynchronously", vocabsIndexName);
-                vocabService.populateVocabsDataAsync();
-            }
+            log.info("Initialising {} asynchronously", vocabsIndexName);
+            vocabService.populateVocabsDataAsync();
         }
-    }
-
-    private boolean isTestProfileActive() {
-        String[] activeProfiles = environment.getActiveProfiles();
-        for (String profile : activeProfiles) {
-            if ("test".equalsIgnoreCase(profile)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     @Scheduled(cron = "0 0 0 * * *")

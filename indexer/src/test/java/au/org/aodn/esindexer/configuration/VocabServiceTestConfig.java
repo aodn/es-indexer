@@ -21,7 +21,7 @@ public class VocabServiceTestConfig {
     public ArdcVocabService createMockArdcVocabService() throws IOException {
 
         RestTemplate template = Mockito.mock(RestTemplate.class);
-        RetryTemplate retryTemplate = Mockito.mock(RetryTemplate.class);
+        RetryTemplate retryTemplate = new RetryTemplate();
 
         ArdcVocabServiceImplTest.setupPlatformMockRestTemplate(template);
         ArdcVocabServiceImplTest.setupParameterVocabMockRestTemplate(template);

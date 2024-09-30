@@ -43,9 +43,6 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
     @Mock
     RestTemplate mockRestTemplate;
 
-    @Mock
-    RetryTemplate mockRetryTemplate;
-
     /**
      * Check the url and return the canned file content
      * @param template
@@ -200,20 +197,12 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
     public void init() {
         // If you want real download for testing, uncomment below and do not use mock
         //this.ardcVocabService = new ArdcVocabServiceImpl(new RestTemplate());
-        this.ardcVocabService = new ArdcVocabServiceImpl(mockRestTemplate, mockRetryTemplate);
+        this.ardcVocabService = new ArdcVocabServiceImpl(mockRestTemplate);
         this.ardcVocabService.vocabApiBase = "https://vocabs.ardc.edu.au/repository/api/lda/aodn";
-
-        // Mock the RetryTemplate to execute the provided retry logic
-        when(mockRetryTemplate.execute(any()))
-                .thenAnswer(invocation -> {
-                    RetryCallback<?, ?> retryCallback = invocation.getArgument(0);
-                    return retryCallback.doWithRetry(mock(RetryContext.class));
-                });
     }
 
     @AfterEach void clear() {
         Mockito.reset(mockRestTemplate);
-        Mockito.reset(mockRetryTemplate);
     }
 
     @Test

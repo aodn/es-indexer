@@ -19,9 +19,9 @@ import org.springframework.web.client.RestTemplate;
 public class ArdcAutoConfiguration {
 
     @Bean
-    public ArdcVocabService createArdcVocabsService(RestTemplate restTemplate, RetryTemplate retryTemplate) {
+    public ArdcVocabService createArdcVocabsService(RestTemplate restTemplate) {
         log.info("Create ArdcVocabsService");
-        return new ArdcVocabServiceImpl(restTemplate, retryTemplate);
+        return new ArdcVocabServiceImpl(restTemplate);
     }
 
     @Bean
