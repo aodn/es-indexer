@@ -1,6 +1,8 @@
 package au.org.aodn.esindexer;
 
 import au.org.aodn.esindexer.configuration.GeoNetworkSearchTestConfig;
+import au.org.aodn.esindexer.service.VocabServiceImpl;
+import au.org.aodn.esindexer.utils.VocabsIndexUtils;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.ElasticsearchException;
 import co.elastic.clients.elasticsearch._types.query_dsl.QueryBuilders;
@@ -51,6 +53,9 @@ public class BaseTestClass {
     @Autowired
     protected DockerComposeContainer dockerComposeContainer;
 
+    @Autowired
+    protected VocabServiceImpl vocabService;
+
     protected void clearElasticIndex(String indexName) throws IOException {
         logger.debug("Clear elastic index");
         try {
@@ -64,6 +69,11 @@ public class BaseTestClass {
         catch(ElasticsearchException e) {
             // It is ok to ignore exception if the index is not found
         }
+    }
+
+    @PostConstruct
+    public void init() throws IOException {
+        vocabService.populateVocabsData();
     }
 
     protected HttpEntity<String> getRequestEntity(String body) {

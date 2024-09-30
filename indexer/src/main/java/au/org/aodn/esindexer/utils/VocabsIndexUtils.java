@@ -5,7 +5,7 @@ import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.env.Environment;
+import org.springframework.context.annotation.Profile;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import java.io.IOException;
@@ -26,6 +26,7 @@ public class VocabsIndexUtils {
     }
 
     @PostConstruct
+    @Profile("!test")
     public void init() throws IOException {
         // Check if the initialiseVocabsIndex flag is enabled
         if (initialiseVocabsIndex) {
