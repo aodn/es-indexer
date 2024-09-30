@@ -26,7 +26,6 @@ public class VocabsIndexUtils {
     }
 
     @PostConstruct
-    @Profile("!test")
     public void init() throws IOException {
         // Check if the initialiseVocabsIndex flag is enabled
         if (initialiseVocabsIndex) {
