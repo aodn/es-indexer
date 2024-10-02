@@ -26,11 +26,17 @@ public class IndexerConfig {
     @Value("${app.geometry.enableGridSpatialExtents:false}")
     protected boolean girdSpatialExtents;
 
+    @Value("${app.geometry.coastalPrecision:0.04}")
+    protected double coastalPrecision;
+
     @PostConstruct
     public void init() {
         GeometryUtils.setGridSize(gridSize);
         GeometryUtils.setGridSpatialExtents(girdSpatialExtents);
+        GeometryUtils.setCoastalPrecision(coastalPrecision);
         GeometryUtils.setExecutorService(Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors()));
+
+        GeometryUtils.init();
     }
 
     @PreDestroy

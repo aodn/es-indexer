@@ -49,8 +49,12 @@ public class GeometryUtils {
     @Setter
     protected static double gridSize = 10.0;
 
+    @Getter
+    @Setter
+    protected static double coastalPrecision = 0.03;
+
     // Load a coastline shape file so that we can get a spatial extents that cover sea only
-    static {
+    public static void init() {
         try {
             // shp file depends on shx, so need to have shx appear in temp folder.
             saveResourceToTemp("land/ne_10m_land.shx", "shapefile.shx");
@@ -73,7 +77,7 @@ public class GeometryUtils {
 
                     // This will reduce the points of the shape file for faster processing
                     Geometry simplifiedGeometry = DouglasPeuckerSimplifier
-                            .simplify(landFeatureGeometry, 0.03); // Adjust tolerance
+                            .simplify(landFeatureGeometry, getCoastalPrecision()); // Adjust tolerance
 
                     geometries.add(simplifiedGeometry);
                 }
