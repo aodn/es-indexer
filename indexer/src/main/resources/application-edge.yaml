@@ -4,6 +4,10 @@ spring:
     git:
       location: "classpath:git.properties"
 
+app:
+  geometry:
+    enableGridSpatialExtents: true
+
 management:
   endpoints:
     web:

@@ -39,11 +39,15 @@ public class GeometryUtils {
 
     @Getter
     @Setter
+    protected static boolean gridSpatialExtents;
+
+    @Getter
+    @Setter
     protected static int centroidScale = 3;
 
     @Getter
     @Setter
-    protected static double cellSize = 10.0;
+    protected static double gridSize = 10.0;
 
     // Load a coastline shape file so that we can get a spatial extents that cover sea only
     static {
@@ -283,7 +287,7 @@ public class GeometryUtils {
 
         // Hard code cell size, we can adjust the break grid size. 10.0 result in 3x3 grid
         // cover Australia
-        List<Polygon> gridPolygons = createGridPolygons(envelope, getCellSize());
+        List<Polygon> gridPolygons = createGridPolygons(envelope, getGridSize());
 
         // List to store Future objects representing the results of the tasks
         List<Future<Geometry>> futureResults = new ArrayList<>();
@@ -507,7 +511,11 @@ public class GeometryUtils {
         // This line will cause the spatial extents to break into grid, it may help to debug but will make production
         // slow and sometimes cause polygon break.
         // List<List<Geometry>> polygonNoLand = splitAreaToGrid(createGeometryWithoutLand(rawInput));
-        List<List<Geometry>> polygonNoLand = GeometryBase.findPolygonsFrom(GeometryBase.COORDINATE_SYSTEM_CRS84, rawInput);
-        return (polygonNoLand != null && !polygonNoLand.isEmpty()) ? createGeoJson(polygonNoLand) : null;
+        List<List<Geometry>> polygon = GeometryBase.findPolygonsFrom(GeometryBase.COORDINATE_SYSTEM_CRS84, rawInput);
+
+        // This is helpful when debug, it help to visualize the grid size on say edge env.
+        polygon = isGridSpatialExtents() ? splitAreaToGrid(polygon) : polygon;
+
+        return (polygon != null && !polygon.isEmpty()) ? createGeoJson(polygon) : null;
     }
 }

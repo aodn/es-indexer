@@ -21,11 +21,15 @@ import javax.annotation.PreDestroy;
 @EnableAsync
 public class IndexerConfig {
     @Value("${app.geometry.gridLandSize:10.0}")
-    protected double cellSize;
+    protected double gridSize;
+
+    @Value("${app.geometry.enableGridSpatialExtents:false}")
+    protected boolean girdSpatialExtents;
 
     @PostConstruct
     public void init() {
-        GeometryUtils.setCellSize(cellSize);
+        GeometryUtils.setGridSize(gridSize);
+        GeometryUtils.setGridSpatialExtents(girdSpatialExtents);
         GeometryUtils.setExecutorService(Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors()));
     }
 
