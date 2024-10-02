@@ -1,6 +1,10 @@
 server:
   port: 8081
 
+app:
+  geometry:
+    enableGridSpatialExtents: true
+
 elasticsearch:
   index:
     name: dev_portal_records
