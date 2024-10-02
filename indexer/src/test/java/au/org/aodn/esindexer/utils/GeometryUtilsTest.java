@@ -5,12 +5,11 @@ import jakarta.xml.bind.JAXBException;
 import org.geotools.feature.FeatureCollection;
 import org.geotools.feature.FeatureIterator;
 import org.geotools.geojson.feature.FeatureJSON;
-import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.locationtech.jts.geom.*;
 import org.opengis.feature.simple.SimpleFeature;
 import org.opengis.feature.simple.SimpleFeatureType;
-import org.opengis.feature.type.FeatureType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,6 +18,7 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.Executors;
 
 import static au.org.aodn.esindexer.BaseTestClass.readResourceFile;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -29,6 +29,16 @@ public class GeometryUtilsTest {
 
     public GeometryUtilsTest() throws JAXBException {
         jaxb = new JaxbUtils<>(MDMetadataType .class);
+    }
+
+    @BeforeEach
+    public void init() {
+        GeometryUtils.setCoastalPrecision(0.03);
+        GeometryUtils.setGridSize(10.0);
+        GeometryUtils.setGridSpatialExtents(false);
+        GeometryUtils.setExecutorService(Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors()));
+
+        GeometryUtils.init();
     }
 
     @Test
