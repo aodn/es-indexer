@@ -90,7 +90,8 @@ public class RankingServiceImpl implements RankingService {
         // Abstract
         if (stacCollectionModel.getDescription() != null && !stacCollectionModel.getDescription().isBlank()) {
             log.debug("Description found");
-            total += (int) (stacCollectionModel.getDescription().length() * descriptionWeigth);
+            int w = (int) (stacCollectionModel.getDescription().length() * descriptionWeigth);
+            total += Math.min(w, 25);
         }
         // Links
         if (stacCollectionModel.getLinks() != null && !stacCollectionModel.getLinks().isEmpty()) {
