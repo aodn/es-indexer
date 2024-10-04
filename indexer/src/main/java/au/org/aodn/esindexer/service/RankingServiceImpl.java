@@ -42,7 +42,7 @@ public class RankingServiceImpl implements RankingService {
 
     public Integer evaluateCompleteness(StacCollectionModel stacCollectionModel) {
         int total = 0;
-
+        int count = 0;
        /*
         * The implementation of this method can be adjusted
         * https://github.com/aodn/backlog/issues/5233
@@ -71,27 +71,32 @@ public class RankingServiceImpl implements RankingService {
             } else {
                 total += themeMaxWeigth;
             }
+            count++;
         }
         // Lineage
         if (stacCollectionModel.getSummaries() != null && stacCollectionModel.getSummaries().getStatement() != null) {
             log.debug("Lineage found");
             total += lineageWeigth;
+            count++;
         }
         // License
         if (stacCollectionModel.getLicense() != null) {
             log.debug("License found");
             total += licenseWeigth;
+            count++;
         }
         // Constraint (citation)
         if (stacCollectionModel.getCitation() != null) {
             log.debug("Citation found");
             total += citationWeigth;
+            count++;
         }
         // Abstract
         if (stacCollectionModel.getDescription() != null && !stacCollectionModel.getDescription().isBlank()) {
             log.debug("Description found");
             int w = (int) (stacCollectionModel.getDescription().length() * descriptionWeigth);
             total += Math.min(w, 25);
+            count++;
         }
         // Links
         if (stacCollectionModel.getLinks() != null && !stacCollectionModel.getLinks().isEmpty()) {
@@ -105,8 +110,9 @@ public class RankingServiceImpl implements RankingService {
             else {
                 total += linkMaxWeigth;
             }
+            count++;
         }
-
-        return total;
+        // The more field exist, the higher the mark
+        return total + count;
     }
 }
