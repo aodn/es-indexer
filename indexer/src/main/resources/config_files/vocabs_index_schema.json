@@ -7,6 +7,15 @@
           "label": {
             "type": "text"
           },
+          "display_label": {
+            "type": "text"
+          },
+          "hidden_labels": {
+            "type": "text"
+          },
+          "alt_labels": {
+            "type": "text"
+          },
           "definition": {
             "type": "text"
           },
@@ -19,6 +28,15 @@
               "label": {
                 "type": "text"
               },
+              "display_label": {
+                "type": "text"
+              },
+              "hidden_labels": {
+                "type": "text"
+              },
+              "alt_labels": {
+                "type": "text"
+              },
               "about": {
                 "type": "keyword"
               },
@@ -26,6 +44,15 @@
                 "type": "nested",
                 "properties": {
                   "label": {
+                    "type": "text"
+                  },
+                  "display_label": {
+                    "type": "text"
+                  },
+                  "hidden_labels": {
+                    "type": "text"
+                  },
+                  "alt_labels": {
                     "type": "text"
                   },
                   "about": {
@@ -42,6 +69,15 @@
           "label": {
             "type": "text"
           },
+          "display_label": {
+            "type": "text"
+          },
+          "hidden_labels": {
+            "type": "text"
+          },
+          "alt_labels": {
+            "type": "text"
+          },
           "definition": {
             "type": "text"
           },
@@ -54,6 +90,15 @@
               "label": {
                 "type": "text"
               },
+              "display_label": {
+                "type": "text"
+              },
+              "hidden_labels": {
+                "type": "text"
+              },
+              "alt_labels": {
+                "type": "text"
+              },
               "about": {
                 "type": "keyword"
               },
@@ -61,6 +106,15 @@
                 "type": "nested",
                 "properties": {
                   "label": {
+                    "type": "text"
+                  },
+                  "display_label": {
+                    "type": "text"
+                  },
+                  "hidden_labels": {
+                    "type": "text"
+                  },
+                  "alt_labels": {
                     "type": "text"
                   },
                   "about": {
@@ -77,6 +131,15 @@
           "label": {
             "type": "text"
           },
+          "display_label": {
+            "type": "text"
+          },
+          "hidden_labels": {
+            "type": "text"
+          },
+          "alt_labels": {
+            "type": "text"
+          },
           "definition": {
             "type": "text"
           },
@@ -89,6 +152,15 @@
               "label": {
                 "type": "text"
               },
+              "display_label": {
+                "type": "text"
+              },
+              "hidden_labels": {
+                "type": "text"
+              },
+              "alt_labels": {
+                "type": "text"
+              },
               "about": {
                 "type": "keyword"
               },
@@ -96,6 +168,15 @@
                 "type": "nested",
                 "properties": {
                   "label": {
+                    "type": "text"
+                  },
+                  "display_label": {
+                    "type": "text"
+                  },
+                  "hidden_labels": {
+                    "type": "text"
+                  },
+                  "alt_labels": {
                     "type": "text"
                   },
                   "about": {
