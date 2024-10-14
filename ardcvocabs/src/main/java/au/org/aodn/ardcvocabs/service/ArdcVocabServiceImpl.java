@@ -28,7 +28,7 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
     protected RestTemplate restTemplate;
     protected RetryTemplate retryTemplate;
 
-    protected Function<JsonNode, String> extractLabel(String key) {
+    protected Function<JsonNode, String> extractValueField(String key) {
         return (node) -> {
             JsonNode labelNode = node.get(key);
             if (labelNode != null) {
@@ -43,7 +43,7 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
             return null;
         };
     }
-    protected Function<JsonNode, List<String>> extractLabels(String key) {
+    protected Function<JsonNode, List<String>> extractMultipleValueFields(String key) {
         return (node) -> {
             JsonNode labelNode = node.get(key);
             if (labelNode != null && labelNode.isArray()) {
@@ -57,13 +57,13 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
     }
 
     // Reusing the utility methods for specific labels
-    protected Function<JsonNode, String> label = extractLabel("prefLabel");
-    protected Function<JsonNode, String> displayLabel = extractLabel("displayLabel");
-    protected Function<JsonNode, List<String>> hiddenLabels = extractLabels("hiddenLabel");
-    protected Function<JsonNode, List<String>> altLabels = extractLabels("altLabel");
-
-    protected Function<JsonNode, String> about = (node) -> node.has("_about") ? node.get("_about").asText() : null;
-    protected Function<JsonNode, String> definition = (node) -> node.has("definition") ? node.get("definition").asText() : null;
+    protected Function<JsonNode, String> label = extractValueField("prefLabel");
+    protected Function<JsonNode, String> displayLabel = extractValueField("displayLabel");
+    protected Function<JsonNode, List<String>> hiddenLabels = extractMultipleValueFields("hiddenLabel");
+    protected Function<JsonNode, List<String>> altLabels = extractMultipleValueFields("altLabel");
+    protected Function<JsonNode, String> about = extractValueField("_about");
+    protected Function<JsonNode, String> definition = extractValueField("definition");
+    protected Function<JsonNode, Boolean> isLatestLabel = (node) -> !(node.has("isReplacedBy") || (node.has("scopeNote") && extractValueField("scopeNote").apply(node).contains("no longer exists")));
     protected BiFunction<JsonNode, String, Boolean> isNodeValid = (node, item) -> node != null && !node.isEmpty() && node.has(item) && !node.get(item).isEmpty();
 
     public ArdcVocabServiceImpl(RestTemplate restTemplate, RetryTemplate retryTemplate) {
@@ -89,17 +89,11 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
                         .label(label.apply(target))
                         .definition(definition.apply(target))
                         .about(vocabUri)
+                        .displayLabel(displayLabel.apply(target))
+                        .hiddenLabels(hiddenLabels.apply(target))
+                        .altLabels(altLabels.apply(target))
+                        .isLatestLabel(isLatestLabel.apply(target))
                         .build();
-
-                if (displayLabel.apply(target) != null && !displayLabel.apply(target).isEmpty()) {
-                    vocab.setDisplayLabel(displayLabel.apply(target));
-                }
-                if (hiddenLabels.apply(target) != null && !hiddenLabels.apply(target).isEmpty()) {
-                    vocab.setHiddenLabels(hiddenLabels.apply(target));
-                }
-                if (altLabels.apply(target) != null && !altLabels.apply(target).isEmpty()) {
-                    vocab.setAltLabels(altLabels.apply(target));
-                }
 
                 List<VocabModel> narrowerNodes = new ArrayList<>();
                 if (isNodeValid.apply(target, "narrower")) {
@@ -175,6 +169,10 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
                                             .label(label.apply(target))
                                             .definition(definition.apply(target))
                                             .about(about.apply(target))
+                                            .displayLabel(displayLabel.apply(target))
+                                            .hiddenLabels(hiddenLabels.apply(target))
+                                            .altLabels(altLabels.apply(target))
+                                            .isLatestLabel(isLatestLabel.apply(target))
                                             .build();
 
                                     List<VocabModel> vocabNarrower = new ArrayList<>();

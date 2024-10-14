@@ -20,6 +20,8 @@ public class VocabModel {
     protected List<String> hiddenLabels;
     @JsonProperty("alt_labels")
     protected List<String> altLabels;
+    @JsonProperty("is_latest_label")
+    protected Boolean isLatestLabel;
     protected String definition;
     protected String about;
     protected List<VocabModel> broader;

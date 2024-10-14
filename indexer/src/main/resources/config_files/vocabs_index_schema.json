@@ -16,6 +16,9 @@
           "alt_labels": {
             "type": "text"
           },
+          "is_latest_label": {
+            "type": "boolean"
+          },
           "definition": {
             "type": "text"
           },
@@ -37,6 +40,9 @@
               "alt_labels": {
                 "type": "text"
               },
+              "is_latest_label": {
+                "type": "boolean"
+              },
               "about": {
                 "type": "keyword"
               },
@@ -54,6 +60,9 @@
                   },
                   "alt_labels": {
                     "type": "text"
+                  },
+                  "is_latest_label": {
+                    "type": "boolean"
                   },
                   "about": {
                     "type": "keyword"
@@ -78,6 +87,9 @@
           "alt_labels": {
             "type": "text"
           },
+          "is_latest_label": {
+            "type": "boolean"
+          },
           "definition": {
             "type": "text"
           },
@@ -99,6 +111,9 @@
               "alt_labels": {
                 "type": "text"
               },
+              "is_latest_label": {
+                "type": "boolean"
+              },
               "about": {
                 "type": "keyword"
               },
@@ -116,6 +131,9 @@
                   },
                   "alt_labels": {
                     "type": "text"
+                  },
+                  "is_latest_label": {
+                    "type": "boolean"
                   },
                   "about": {
                     "type": "keyword"
@@ -140,6 +158,9 @@
           "alt_labels": {
             "type": "text"
           },
+          "is_latest_label": {
+            "type": "boolean"
+          },
           "definition": {
             "type": "text"
           },
@@ -161,6 +182,9 @@
               "alt_labels": {
                 "type": "text"
               },
+              "is_latest_label": {
+                "type": "boolean"
+              },
               "about": {
                 "type": "keyword"
               },
@@ -178,6 +202,9 @@
                   },
                   "alt_labels": {
                     "type": "text"
+                  },
+                  "is_latest_label": {
+                    "type": "boolean"
                   },
                   "about": {
                     "type": "keyword"
