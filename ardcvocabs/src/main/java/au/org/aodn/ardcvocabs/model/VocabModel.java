@@ -13,8 +13,12 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class VocabModel {
     protected String label;
+    protected String displayLabel;
+    protected List<String> hiddenLabels;
+    protected List<String> altLabels;
     protected String definition;
     protected String about;
     protected List<VocabModel> broader;
     protected List<VocabModel> narrower;
+    protected String version;
 }

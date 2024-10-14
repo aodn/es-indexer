@@ -15,6 +15,8 @@ import org.springframework.web.client.RestTemplate;
 import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.stream.StreamSupport;
+import java.util.stream.Collectors;
 
 public class ArdcVocabServiceImpl implements ArdcVocabService {
 
@@ -26,7 +28,40 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
     protected RestTemplate restTemplate;
     protected RetryTemplate retryTemplate;
 
-    protected Function<JsonNode, String> label = (node) -> node.has("prefLabel") ? node.get("prefLabel").get("_value").asText() : null;
+    protected Function<JsonNode, String> extractLabel(String key) {
+        return (node) -> {
+            JsonNode labelNode = node.get(key);
+            if (labelNode != null) {
+                if (labelNode.has("_value")) {
+                    return labelNode.get("_value").asText();
+                }
+                if (labelNode instanceof TextNode) {
+                    return labelNode.asText();
+                }
+                return null;
+            }
+            return null;
+        };
+    }
+    protected Function<JsonNode, List<String>> extractLabels(String key) {
+        return (node) -> {
+            JsonNode labelNode = node.get(key);
+            if (labelNode != null && labelNode.isArray()) {
+                return StreamSupport.stream(labelNode.spliterator(), false)
+                        .filter(Objects::nonNull)
+                        .map(i -> i.get("_value").asText())
+                        .collect(Collectors.toList());
+            }
+            return null;
+        };
+    }
+
+    // Reusing the utility methods for specific labels
+    protected Function<JsonNode, String> label = extractLabel("prefLabel");
+    protected Function<JsonNode, String> displayLabel = extractLabel("displayLabel");
+    protected Function<JsonNode, List<String>> hiddenLabels = extractLabels("hiddenLabel");
+    protected Function<JsonNode, List<String>> altLabels = extractLabels("altLabel");
+
     protected Function<JsonNode, String> about = (node) -> node.has("_about") ? node.get("_about").asText() : null;
     protected Function<JsonNode, String> definition = (node) -> node.has("definition") ? node.get("definition").asText() : null;
     protected BiFunction<JsonNode, String, Boolean> isNodeValid = (node, item) -> node != null && !node.isEmpty() && node.has(item) && !node.get(item).isEmpty();
@@ -55,6 +90,16 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
                         .definition(definition.apply(target))
                         .about(vocabUri)
                         .build();
+
+                if (displayLabel.apply(target) != null && !displayLabel.apply(target).isEmpty()) {
+                    vocab.setDisplayLabel(displayLabel.apply(target));
+                }
+                if (hiddenLabels.apply(target) != null && !hiddenLabels.apply(target).isEmpty()) {
+                    vocab.setHiddenLabels(hiddenLabels.apply(target));
+                }
+                if (altLabels.apply(target) != null && !altLabels.apply(target).isEmpty()) {
+                    vocab.setAltLabels(altLabels.apply(target));
+                }
 
                 List<VocabModel> narrowerNodes = new ArrayList<>();
                 if (isNodeValid.apply(target, "narrower")) {
