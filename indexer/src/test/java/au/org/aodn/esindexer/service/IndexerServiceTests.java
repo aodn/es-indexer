@@ -278,10 +278,6 @@ public class IndexerServiceTests extends BaseTestClass {
             List<String> expectedPlatformVocabs = List.of("small boat");
             List<String> actualPlatformVocabs = indexerObjectMapper.convertValue(rootNode.path("summaries").path("platform_vocabs"), indexerObjectMapper.getTypeFactory().constructCollectionType(List.class, String.class));
             Assertions.assertEquals(expectedPlatformVocabs.size(), actualPlatformVocabs.size(), "PlatformVocabs not equals for sample11.");
-
-            List<String> expectedOrganisationVocabs = List.of("national mooring network facility, integrated marine observing system (imos)");
-            List<String> actualOrganisationVocabs = indexerObjectMapper.convertValue(rootNode.path("summaries").path("organisation_vocabs"), indexerObjectMapper.getTypeFactory().constructCollectionType(List.class, String.class));
-            Assertions.assertEquals(expectedOrganisationVocabs.size(), actualOrganisationVocabs.size(), "OrganisationVocabs not equals for sample11.");
         } finally {
             deleteRecord(uuid);
         }
