@@ -25,6 +25,7 @@ import au.org.aodn.stac.model.SearchSuggestionsModel;
 import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.operation.TransformException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
@@ -162,17 +163,7 @@ public class IndexerServiceImpl implements IndexerService {
         StacCollectionModel stacCollectionModel = stacCollectionMapperService.mapToSTACCollection(metadataType);
 
         // evaluate completeness
-        Integer completeness = rankingService.evaluateCompleteness(stacCollectionModel);
-        // TODO: in future, evaluate other aspects of the data such as relevance, quality, etc using NLP
-
-        /* expand score with other aspect of the data such as relevance, quality, etc.
-        * can maintain 100 points as the maximum score by dividing the score by the number of aspects (round up/down to the nearest integer)
-        * given max score is 100 for each aspect
-        * e.g completeness = 80, relevance = 90, quality = 100
-        * final score = (80 + 90 + 100) / 3 = 90
-        */
-        Integer score = completeness;
-
+        Integer score = rankingService.evaluateCompleteness(stacCollectionModel);
         stacCollectionModel.getSummaries().setScore(score);
 
         // parameter vocabs
@@ -335,7 +326,7 @@ public class IndexerServiceImpl implements IndexerService {
                     };
 
                     Callable<Void> msg = () -> {
-                        // Make sure gateway not timeout on long processing
+                        // Make sure gateway not timeout on long processing, will keep sending message to client
                         while(countDown.getCount() != 0) {
                             if (callback != null) {
                                 callback.onProgress("Processing.... ");
@@ -485,7 +476,11 @@ public class IndexerServiceImpl implements IndexerService {
             throw e;
         }
     }
-
+    /**
+     * Filter response so that we send the needed info to client only.
+     * @param in - BulkResponse from the batch operation
+     * @return - Response to client
+     */
     protected BulkResponse reduceResponse(BulkResponse in) {
         List<BulkResponseItem> errors = in.items()
                 .stream()

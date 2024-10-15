@@ -453,4 +453,24 @@ public class StacCollectionMapperServiceTests {
                 JSONCompareMode.STRICT
         );
     }
+    /**
+     * The polygon is wrong in this sample, it is like NaN -15.79454501341779 NaN -15.695062408029159 NaN -15.65013459790775 NaN -15.42610850933827 NaN,
+     * the system should not crash.
+     * @throws IOException - Do not expect to throw
+     */
+    @Test
+    public void verifyPointsOfLinearRingWorks() throws IOException, JSONException {
+        String xml = readResourceFile("classpath:canned/sample_malformed_linear_ring.xml");
+        String expected = readResourceFile("classpath:canned/sample_malformed_linear_ring.json");
+        indexerService.indexMetadata(xml);
+
+        Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
+        String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
+        log.info(out);
+        JSONAssert.assertEquals(
+                objectMapper.readTree(expected).toPrettyString(),
+                objectMapper.readTree(out.strip()).toPrettyString(),
+                JSONCompareMode.STRICT
+        );
+    }
 }
