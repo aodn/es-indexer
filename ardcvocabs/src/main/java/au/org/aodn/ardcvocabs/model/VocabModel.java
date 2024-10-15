@@ -22,6 +22,8 @@ public class VocabModel {
     protected List<String> altLabels;
     @JsonProperty("is_latest_label")
     protected Boolean isLatestLabel;
+    @JsonProperty("replaced_by")
+    protected String replacedBy;
     protected String definition;
     protected String about;
     protected List<VocabModel> broader;

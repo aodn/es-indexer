@@ -122,7 +122,8 @@
             "hidden_labels": [
               "School of Earth Sciences"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/193"
           },
           {
             "label": "School of the Environment, Flinders University",
@@ -143,7 +144,8 @@
               "School of Chemistry, Physics and Earth Sciences (SoCPES)",
               "SoCPES"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/192"
           },
           {
             "label": "School of Biological Sciences, Flinders University",
@@ -172,7 +174,8 @@
               "DEMS",
               "Department of Earth and Marine Sciences (DEMS)"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/196"
           },
           {
             "label": "Research School of Earth Sciences (RSES), The Australian National University (ANU)",
@@ -193,7 +196,8 @@
             "hidden_labels": [
               "Department of Geology"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/195"
           },
           {
             "label": "School of Botany and Zoology (BoZo), The Australian National University (ANU)",
@@ -204,7 +208,8 @@
               "BoZo",
               "School of Botany and Zoology (BoZo)"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/200"
           },
           {
             "label": "Research School of Biological  Sciences (RSBS), The Australian National University (ANU)",
@@ -215,7 +220,8 @@
               "RSBS",
               "Research School of Biological Sciences (RSBS)"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/200"
           },
           {
             "label": "Research School of Biology (RSB), The Australian National University (ANU)",
@@ -269,7 +275,8 @@
               "CRES",
               "Centre for Resource and Environmental Studies (CRES)"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/207"
           },
           {
             "label": "Asia Pacific School of Economics and Government (APSEG), The Australian National University (ANU)",
@@ -280,7 +287,8 @@
               "APSEG",
               "Asia Pacific School of Economics and Government (APSEG)"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/206"
           },
           {
             "label": "Crawford School of Public Policy (CSPP), The Australian National University (ANU)",
@@ -616,7 +624,8 @@
                   "RSRC",
                   "Remote Sensing Research Centre (RSRC)"
                 ],
-                "is_latest_label": false
+                "is_latest_label": false,
+                "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/482"
               },
               {
                 "label": "Centre for Remote Sensing and Spatial Information Science (CRSSIS), School of Geography, Planning and Environmental Management, The University of Queensland (UQ)",
@@ -627,7 +636,8 @@
                   "CRSSIS",
                   "Centre for Remote Sensing and Spatial Information Science (CRSSIS)"
                 ],
-                "is_latest_label": false
+                "is_latest_label": false,
+                "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/481"
               }
             ],
             "display_label": "School of Geography, Planning and Environmental Management",
@@ -783,7 +793,8 @@
             "hidden_labels": [
               "Department of Geography"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/225"
           },
           {
             "label": "Ocean Science Institute, The University of Sydney (USYD)",
@@ -793,7 +804,8 @@
             "hidden_labels": [
               "Ocean Science Institute"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/227"
           }
         ],
         "hidden_labels": [
@@ -814,7 +826,8 @@
             "hidden_labels": [
               "School of Environmental Systems Engineering"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/237"
           },
           {
             "label": "School of Civil, Environmental and Mining Engineering (CEME), The University of Western Australia (UWA)",
@@ -825,7 +838,8 @@
               "CEME",
               "School of Civil, Environmental and Mining Engineering (CEME)"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/561"
           },
           {
             "label": "Centre for Water Research (CWR), The University of Western Australia (UWA)",
@@ -846,7 +860,8 @@
             "hidden_labels": [
               "Department of Botany"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/240"
           },
           {
             "label": "School of Plant Biology (SPB), The University of Western Australia (UWA)",
@@ -857,7 +872,8 @@
               "SPB",
               "School of Plant Biology (SPB)"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/541"
           },
           {
             "label": "UWA Oceans Institute (OI), The University of Western Australia (UWA)",
@@ -878,7 +894,8 @@
             "hidden_labels": [
               "Department of Zoology"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/243"
           },
           {
             "label": "School of Animal Biology (SAB), The University of Western Australia (UWA)",
@@ -889,7 +906,8 @@
               "SAB",
               "School of Animal Biology (SAB)"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/541"
           },
           {
             "label": "School of Earth and Environment (SEE), The University of Western Australia (UWA)",
@@ -900,7 +918,8 @@
               "SEE",
               "School of Earth and Environment (SEE)"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/562"
           },
           {
             "label": "Centre of Excellence in Natural Resource Management (CENRM), The University of Western Australia (UWA)",
@@ -937,7 +956,8 @@
             "hidden_labels": [
               "Department of Geography"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/244"
           },
           {
             "label": "School of Pathology and Laboratory Medicine, The University of Western Australia (UWA)",
@@ -947,7 +967,8 @@
             "hidden_labels": [
               "School of Pathology and Laboratory Medicine"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/564"
           },
           {
             "label": "School of Agricultural and Resource Economics, The University of Western Australia (UWA)",
@@ -957,7 +978,8 @@
             "hidden_labels": [
               "School of Agricultural and Resource Economics"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/563"
           },
           {
             "label": "School of Social Sciences, The University of Western Australia (UWA)",
@@ -1072,7 +1094,8 @@
             "hidden_labels": [
               "School of Agricultural Science"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/255"
           },
           {
             "label": "School of Geography and Environmental Studies, University of Tasmania (UTAS)",
@@ -1082,7 +1105,8 @@
             "hidden_labels": [
               "School of Geography and Environmental Studies"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/255"
           },
           {
             "label": "School of Land and Food (SLAF), University of Tasmania (UTAS)",
@@ -1093,7 +1117,8 @@
               "SLAF",
               "School of Land and Food (SLAF)"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/546"
           },
           {
             "label": "School of Zoology, University of Tasmania (UTAS)",
@@ -1103,7 +1128,8 @@
             "hidden_labels": [
               "School of Zoology"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/258"
           },
           {
             "label": "School of Plant Science, University of Tasmania (UTAS)",
@@ -1113,7 +1139,8 @@
             "hidden_labels": [
               "School of Plant Science"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/258"
           },
           {
             "label": "School of Biological Sciences (SBS), University of Tasmania (UTAS)",
@@ -1124,7 +1151,8 @@
               "SBS",
               "School of Biological Sciences (SBS)"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/557"
           },
           {
             "label": "Tasmanian Aquaculture and Fisheries Institute (TAFI)",
@@ -1133,7 +1161,8 @@
             "hidden_labels": [
               "TAFI"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/260"
           },
           {
             "label": "Institute for Marine and Antarctic Studies (IMAS), University of Tasmania (UTAS)",
@@ -1154,7 +1183,8 @@
             "hidden_labels": [
               "School of Aquaculture"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/260"
           },
           {
             "label": "Antarctic Climate and Ecosystems Cooperative Research Centre (ACE CRC)",
@@ -1203,7 +1233,8 @@
             "hidden_labels": [
               "School of Technology, Environments and Design"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/662"
           },
           {
             "label": "Australian Maritime College (AMC), University of Tasmania (UTAS)",
@@ -1266,7 +1297,8 @@
               "SELS",
               "School of Environmental and Life Sciences (SELS)"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/267"
           },
           {
             "label": "School of Environment, Charles Darwin University (CDU)",
@@ -1294,7 +1326,8 @@
                 "alt_labels": [
                   "School for Environmental Research, Charles Darwin University (CDU)"
                 ],
-                "is_latest_label": false
+                "is_latest_label": false,
+                "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/265"
               }
             ],
             "display_label": "Institute of Advanced Studies",
@@ -1354,7 +1387,8 @@
             "hidden_labels": [
               "School of Ecology and Environment"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/273"
           },
           {
             "label": "School of Life and Environmental Sciences (LES), Deakin University",
@@ -1455,7 +1489,8 @@
             "alt_labels": [
               "Environmental Futures Research Institute (EFRI), Griffith University (GU)"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/548"
           },
           {
             "label": "Environmental Futures Research Institute (EFRI), Griffith University (GU)",
@@ -1487,7 +1522,8 @@
             "hidden_labels": [
               "School of Tropical Environment Studies and Geography"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/281"
           },
           {
             "label": "College of Marine And Environmental Sciences (CMES), James Cook University (JCU)",
@@ -1498,7 +1534,8 @@
               "CMES",
               "College of Marine And Environmental Sciences (CMES)"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/603"
           },
           {
             "label": "Centre for Tropical Waters and Aquatic Research (TropWATER), James Cook University (JCU)",
@@ -1519,7 +1556,8 @@
             "hidden_labels": [
               "School of Mathematics, Physics and Information Technology"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/284"
           },
           {
             "label": "College of Science, Technology and Engineering (CSTE), James Cook University (JCU)",
@@ -1530,7 +1568,8 @@
               "CSTE",
               "College of Science, Technology and Engineering (CSTE)"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/603"
           },
           {
             "label": "College of Business, Law and Governance, James Cook University (JCU)",
@@ -1680,7 +1719,8 @@
             "hidden_labels": [
               "School of Biological and Environmental Sciences"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/296"
           },
           {
             "label": "School of Biological Sciences, Murdoch University",
@@ -1690,7 +1730,8 @@
             "hidden_labels": [
               "School of Biological Sciences"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/298"
           },
           {
             "label": "School of Environmental Science, Murdoch University",
@@ -1700,7 +1741,8 @@
             "hidden_labels": [
               "School of Environmental Science"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/299"
           },
           {
             "label": "School of Biological Sciences and Biotechnology (BSB), Murdoch University",
@@ -1711,7 +1753,8 @@
               "BSB",
               "School of Biological Sciences and Biotechnology (BSB)"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/299"
           },
           {
             "label": "School of Veterinary and Life Sciences (VLS), Murdoch University",
@@ -1782,7 +1825,8 @@
         "hidden_labels": [
           "NTU"
         ],
-        "is_latest_label": false
+        "is_latest_label": false,
+        "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/263"
       },
       {
         "label": "The University of Adelaide",
@@ -1837,7 +1881,8 @@
             "hidden_labels": [
               "School of Botany"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/312"
           },
           {
             "label": "Department of Zoology, The University of Melbourne",
@@ -1847,7 +1892,8 @@
             "hidden_labels": [
               "Department of Zoology"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/312"
           },
           {
             "label": "School of BioSciences, The University of Melbourne",
@@ -1877,7 +1923,8 @@
             "hidden_labels": [
               "Department of Civil and Environmental Engineering"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/313"
           },
           {
             "label": "School of Anthropology, Geography and Environmental Studies (SAGES), The University of Melbourne",
@@ -1942,7 +1989,8 @@
             "hidden_labels": [
               "School of Environmental Biology"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/181"
           },
           {
             "label": "Department of Environmental Biology, Curtin University of Technology",
@@ -1952,7 +2000,8 @@
             "hidden_labels": [
               "Department of Environmental Biology"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/182"
           },
           {
             "label": "School of Surveying and Land Information, Curtin University of Technology",
@@ -1962,7 +2011,8 @@
             "hidden_labels": [
               "School of Surveying and Land Information"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/185"
           },
           {
             "label": "Department of Applied Geology, Curtin University of Technology",
@@ -1972,10 +2022,12 @@
             "hidden_labels": [
               "Department of Applied Geology"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/183"
           }
         ],
-        "is_latest_label": false
+        "is_latest_label": false,
+        "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/178"
       },
       {
         "label": "Queensland University of Technology (QUT)",
@@ -2768,7 +2820,8 @@
         "hidden_labels": [
           "Ministry of Fisheries"
         ],
-        "is_latest_label": false
+        "is_latest_label": false,
+        "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/402"
       },
       {
         "label": "Pacific Fisheries Management Inc",
@@ -3263,7 +3316,8 @@
               "IFM-GEOMAR",
               "Leibniz Institute of Marine Sciences"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/382"
           }
         ],
         "hidden_labels": [
@@ -3697,7 +3751,8 @@
                 "alt_labels": [
                   "Maritime Division, Defence Science and Technology Organisation (DSTO)"
                 ],
-                "is_latest_label": false
+                "is_latest_label": false,
+                "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/407"
               }
             ],
             "display_label": "Defence Science and Technology Organisation (DSTO)",
@@ -3705,7 +3760,8 @@
               "DSTO",
               "Defence Science and Technology Organisation (DSTO)"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/406"
           },
           {
             "label": "Australian Defence Force Academy (ADFA), Department of Defence (DoD), Australian Government",
@@ -3821,7 +3877,8 @@
             "alt_labels": [
               "Australian Institute of Marine Science (AIMS)"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/462"
           },
           {
             "label": "Commonwealth Scientific and Industrial Research Organisation (CSIRO)",
@@ -3841,7 +3898,8 @@
                 "hidden_labels": [
                   "CMAR"
                 ],
-                "is_latest_label": false
+                "is_latest_label": false,
+                "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/18"
               },
               {
                 "label": "CSIRO Oceans and Atmosphere",
@@ -3853,7 +3911,8 @@
                     "definition": "The Data Centre is a central assembly and management point for much of the vessel-collected (ship) data collected over the past 25+ years, plus related datasets such as those collected via moored instrument arrays (moorings) in the Australasian region. We also administer and maintain a range of data management systems and tools which include a central \"Data Warehouse\", accessed via a custom Data Trawler application; \"MarLIN\" (Marine Laboratories Information Network), the Divisional data directory (metadatabase), which contains descriptions of many of the Division's datasets (not just those held by the Data Centre); \"CAAB\" (Codes for Australian Aquatic Biota), a master species database which provides names and codes for some 25,000 marine species which occur in Australian waters; and the \"C-squares\" Concise Spatial Query and Representation System, used within data Centre applications and also accessible as a data indexing system and web mapping service to external users. The Data Centre also curates marine datasets collected by the (former) Franklin and (current) Southern Surveyor National Facility research vessels, which are integrated with our Divisional holdings for the purpose of data description, curation, access, and dissemination. The Oceans & Atmosphere organisation was known initially as \"CSIRO Oceans & Atmosphere Flagship\", however in 2015 \"Flagship\" was removed from the name.",
                     "about": "http://vocab.aodn.org.au/def/organisation/entity/19",
                     "display_label": "Information and Data Centre",
-                    "is_latest_label": false
+                    "is_latest_label": false,
+                    "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/623"
                   }
                 ],
                 "display_label": "CSIRO Oceans and Atmosphere",
@@ -3896,7 +3955,8 @@
             "alt_labels": [
               "Commonwealth of Australia (Geoscience Australia)"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/461"
           },
           {
             "label": "Bureau of Mineral Resources, Geology and Geophysics (BMR)",
@@ -3905,7 +3965,8 @@
             "hidden_labels": [
               "BMR"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/22"
           },
           {
             "label": "Australian Geological Survey Organisation (AGSO)",
@@ -3914,14 +3975,16 @@
             "hidden_labels": [
               "AGSO"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/20"
           }
         ],
         "display_label": "Department of Industry and Science",
         "hidden_labels": [
           "Department of Industry and Science"
         ],
-        "is_latest_label": false
+        "is_latest_label": false,
+        "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/460"
       },
       {
         "label": "Bureau of Rural Sciences (BRS), Australian Government",
@@ -3943,7 +4006,8 @@
           "DEWHA",
           "Department of the Environment, Water, Heritage and the Arts (DEWHA)"
         ],
-        "is_latest_label": false
+        "is_latest_label": false,
+        "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/8"
       },
       {
         "label": "Department of Agriculture, Australian Government",
@@ -3959,14 +4023,16 @@
               "ABARES",
               "Australian Bureau of Agriculture and Resource Economics and Sciences (ABARES)"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/459"
           }
         ],
         "display_label": "Department of Agriculture",
         "hidden_labels": [
           "Department of Agriculture"
         ],
-        "is_latest_label": false
+        "is_latest_label": false,
+        "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/450"
       },
       {
         "label": "Australian Fisheries Management Authority (AFMA), Australian Government",
@@ -4027,7 +4093,8 @@
             "alt_labels": [
               "Bureau of Meteorology (BOM)"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/466"
           },
           {
             "label": "Australian Antarctic Division (AAD), Department of the Environment (DoE), Australian Government",
@@ -4045,7 +4112,8 @@
                 "alt_labels": [
                   "Australian Antarctic Data Centre (AADC), Australian Antarctic Division (AAD)"
                 ],
-                "is_latest_label": false
+                "is_latest_label": false,
+                "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/465"
               }
             ],
             "display_label": "Australian Antarctic Division (AAD)",
@@ -4063,7 +4131,8 @@
           "Department of the Environment (DoE)",
           "DoE"
         ],
-        "is_latest_label": false
+        "is_latest_label": false,
+        "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/463"
       },
       {
         "label": "Department of Agriculture and Water Resources (DAWR), Australian Government",
@@ -4079,7 +4148,8 @@
               "ABARES",
               "Australian Bureau of Agriculture and Resource Economics and Sciences (ABARES)"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/636"
           }
         ],
         "display_label": "Department of Agriculture and Water Resources (DAWR)",
@@ -4087,7 +4157,8 @@
           "DAWR",
           "Department of Agriculture and Water Resources (DAWR)"
         ],
-        "is_latest_label": false
+        "is_latest_label": false,
+        "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/634"
       },
       {
         "label": "Department of Industry, Innovation and Science, Australian Government",
@@ -4112,7 +4183,8 @@
                 "hidden_labels": [
                   "CMAR"
                 ],
-                "is_latest_label": false
+                "is_latest_label": false,
+                "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/18"
               },
               {
                 "label": "CSIRO Oceans and Atmosphere",
@@ -4124,7 +4196,8 @@
                     "definition": "The Data Centre is a central assembly and management point for much of the vessel-collected (ship) data collected over the past 25+ years, plus related datasets such as those collected via moored instrument arrays (moorings) in the Australasian region. We also administer and maintain a range of data management systems and tools which include a central \"Data Warehouse\", accessed via a custom Data Trawler application; \"MarLIN\" (Marine Laboratories Information Network), the Divisional data directory (metadatabase), which contains descriptions of many of the Division's datasets (not just those held by the Data Centre); \"CAAB\" (Codes for Australian Aquatic Biota), a master species database which provides names and codes for some 25,000 marine species which occur in Australian waters; and the \"C-squares\" Concise Spatial Query and Representation System, used within data Centre applications and also accessible as a data indexing system and web mapping service to external users. The Data Centre also curates marine datasets collected by the (former) Franklin and (current) Southern Surveyor National Facility research vessels, which are integrated with our Divisional holdings for the purpose of data description, curation, access, and dissemination. The Oceans & Atmosphere organisation was known initially as \"CSIRO Oceans & Atmosphere Flagship\", however in 2015 \"Flagship\" was removed from the name.",
                     "about": "http://vocab.aodn.org.au/def/organisation/entity/19",
                     "display_label": "Information and Data Centre",
-                    "is_latest_label": false
+                    "is_latest_label": false,
+                    "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/623"
                   }
                 ],
                 "display_label": "CSIRO Oceans and Atmosphere",
@@ -4164,7 +4237,8 @@
             "alt_labels": [
               "Commonwealth of Australia (Geoscience Australia)"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/641"
           },
           {
             "label": "Australian Institute of Marine Science (AIMS), Department of Industry, Innovation and Science, Australian Government",
@@ -4174,14 +4248,16 @@
             "alt_labels": [
               "Australian Institute of Marine Science (AIMS)"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/642"
           }
         ],
         "display_label": "Department of Industry, Innovation and Science",
         "hidden_labels": [
           "Department of Industry, Innovation and Science"
         ],
-        "is_latest_label": false
+        "is_latest_label": false,
+        "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/635"
       },
       {
         "label": "Department of the Environment and Energy, Australian Government",
@@ -4204,7 +4280,8 @@
                 "alt_labels": [
                   "Australian Antarctic Data Centre (AADC), Australian Antarctic Division (AAD)"
                 ],
-                "is_latest_label": false
+                "is_latest_label": false,
+                "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/640"
               }
             ],
             "display_label": "Australian Antarctic Division (AAD)",
@@ -4214,7 +4291,8 @@
             "alt_labels": [
               "Australian Antarctic Division (AAD)"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/639"
           },
           {
             "label": "Bureau of Meteorology (BOM), Department of the Environment and Energy, Australian Government",
@@ -4239,7 +4317,8 @@
             "alt_labels": [
               "Australian Bureau of Meteorology"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/638"
           },
           {
             "label": "Parks Australia, Department of the Environment and Energy, Australian Government",
@@ -4249,14 +4328,16 @@
             "alt_labels": [
               "Parks Australia"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/637"
           }
         ],
         "display_label": "Department of the Environment and Energy",
         "hidden_labels": [
           "Department of the Environment and Energy"
         ],
-        "is_latest_label": false
+        "is_latest_label": false,
+        "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/634"
       },
       {
         "label": "Cooperative Research Centre for Spatial Information (CRCSI)",
@@ -4326,7 +4407,8 @@
                 "hidden_labels": [
                   "CMAR"
                 ],
-                "is_latest_label": false
+                "is_latest_label": false,
+                "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/18"
               },
               {
                 "label": "CSIRO Oceans and Atmosphere",
@@ -4338,7 +4420,8 @@
                     "definition": "The Data Centre is a central assembly and management point for much of the vessel-collected (ship) data collected over the past 25+ years, plus related datasets such as those collected via moored instrument arrays (moorings) in the Australasian region. We also administer and maintain a range of data management systems and tools which include a central \"Data Warehouse\", accessed via a custom Data Trawler application; \"MarLIN\" (Marine Laboratories Information Network), the Divisional data directory (metadatabase), which contains descriptions of many of the Division's datasets (not just those held by the Data Centre); \"CAAB\" (Codes for Australian Aquatic Biota), a master species database which provides names and codes for some 25,000 marine species which occur in Australian waters; and the \"C-squares\" Concise Spatial Query and Representation System, used within data Centre applications and also accessible as a data indexing system and web mapping service to external users. The Data Centre also curates marine datasets collected by the (former) Franklin and (current) Southern Surveyor National Facility research vessels, which are integrated with our Divisional holdings for the purpose of data description, curation, access, and dissemination. The Oceans & Atmosphere organisation was known initially as \"CSIRO Oceans & Atmosphere Flagship\", however in 2015 \"Flagship\" was removed from the name.",
                     "about": "http://vocab.aodn.org.au/def/organisation/entity/19",
                     "display_label": "Information and Data Centre",
-                    "is_latest_label": false
+                    "is_latest_label": false,
+                    "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/623"
                   }
                 ],
                 "display_label": "CSIRO Oceans and Atmosphere",
@@ -4507,7 +4590,8 @@
               "DENR",
               "Department of Environment and Natural Resources (DENR)"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/664"
           },
           {
             "label": "Department of Industry, Tourism and Trade (DITT), Northern Territory Government",
@@ -4552,7 +4636,8 @@
             "hidden_labels": [
               "VIMS"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/54"
           },
           {
             "label": "Department of Environment, Land, Water and Planning (DELWP), Victorian Government",
@@ -4586,7 +4671,8 @@
               "DPI",
               "Department of Primary Industries (DPI)"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/54"
           },
           {
             "label": "Gippsland Water",
@@ -4629,7 +4715,8 @@
               "DSITI",
               "Department of Science, Information Technology and Innovation (DSITI)"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/535"
           },
           {
             "label": "Department of Environment and Heritage Protection, Queensland Government",
@@ -4639,7 +4726,8 @@
             "hidden_labels": [
               "Department of Environment and Heritage Protection"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/535"
           },
           {
             "label": "Department of Agriculture and Fisheries, Queensland Government",
@@ -4659,7 +4747,8 @@
             "hidden_labels": [
               "Department of National Parks, Sport and Racing (NPSR)"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/535"
           },
           {
             "label": "Environmental Protection Agency (EPA), Queensland Government",
@@ -4671,7 +4760,8 @@
               "EPA Qld",
               "Environmental Protection Agency (EPA)"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/58"
           },
           {
             "label": "Department of Environment and Science (DES), Queensland Government",
@@ -4718,7 +4808,8 @@
               "DECC",
               "Department of Environment and Climate Change (DECC)"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/345"
           },
           {
             "label": "Office of Environment and Heritage (OEH), New South Wales Government",
@@ -4729,7 +4820,8 @@
               "OEH",
               "Office of Environment and Heritage (OEH)"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/614"
           },
           {
             "label": "Food Authority, New South Wales Government",
@@ -4765,7 +4857,8 @@
             "hidden_labels": [
               "Land and Property Information"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/607"
           },
           {
             "label": "Department of Primary Industries (DPI), New South Wales Government",
@@ -4776,7 +4869,8 @@
               "DPI",
               "Department of Primary Industries (DPI)"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/614"
           },
           {
             "label": "Manly Hydraulics Laboratory (MHL)",
@@ -4805,7 +4899,8 @@
               "DPIE",
               "Department of Planning, Industry and Environment (DPIE)"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/661"
           },
           {
             "label": "Department of Regional NSW, New South Wales Government",
@@ -4883,7 +4978,8 @@
               "Department of Fisheries (DoF)",
               "DoF"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/536"
           },
           {
             "label": "Department of Water (DoW), Western Australian Government",
@@ -4905,7 +5001,8 @@
               "DEC",
               "Department of Environment and Conservation (DEC)"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/66"
           },
           {
             "label": "Department of Parks and Wildlife (DPaW), Western Australian Government",
@@ -4916,7 +5013,8 @@
               "DPaW",
               "Department of Parks and Wildlife (DPaW)"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/625"
           },
           {
             "label": "Department of Environment Regulation (DER), Western Australian Government",
@@ -4932,7 +5030,8 @@
                   "CSMC",
                   "Cockburn Sound Management Council (CSMC)"
                 ],
-                "is_latest_label": false
+                "is_latest_label": false,
+                "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/538"
               }
             ],
             "display_label": "Department of Environment Regulation (DER)",
@@ -4950,7 +5049,8 @@
             "hidden_labels": [
               "Department of Planning and Infrastructure"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/70"
           },
           {
             "label": "Department of Planning (DoP), Western Australian Government",
@@ -4961,7 +5061,8 @@
               "Department of Planning (DoP)",
               "DoP"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/626"
           },
           {
             "label": "Department of Transport (DoT), Western Australian Government",
@@ -4999,7 +5100,8 @@
               "DOIR",
               "Department of Industry and Resources (DOIR)"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/75"
           },
           {
             "label": "Department of Mines and Petroleum (DMP), Western Australian Government",
@@ -5010,7 +5112,8 @@
               "DMP",
               "Department of Mines and Petroleum (DMP)"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/627"
           },
           {
             "label": "Environmental Protection Authority (EPA), Western Australian Government",
@@ -5044,7 +5147,8 @@
               "DAFWA",
               "Department of Agriculture and Food (DAFWA)"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/536"
           },
           {
             "label": "Department of Aboriginal Affairs (DAA), Western Australian Government",
@@ -5055,7 +5159,8 @@
               "DAA",
               "Department of Aboriginal Affairs (DAA)"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/628"
           },
           {
             "label": "Department of Local Government and Communities (DLGC), Western Australian Government",
@@ -5066,7 +5171,8 @@
               "DLGC",
               "Department of Local Government and Communities (DLGC)"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/628."
           },
           {
             "label": "Department of Primary Industries and Regional Development  (DPIRD), Western Australian Government",
@@ -5217,7 +5323,8 @@
               "DEWNR",
               "Department of Environment, Water and Natural Resources (DEWNR)"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/668"
           },
           {
             "label": "Environment Protection Authority (EPA), South Australian Government",
@@ -5246,7 +5353,8 @@
             "hidden_labels": [
               "Department of Primary Industries and Fisheries"
             ],
-            "is_latest_label": false
+            "is_latest_label": false,
+            "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/56"
           },
           {
             "label": "Department of Primary Industries, Parks, Water and Environment (DPIPWE), Tasmanian Government",
@@ -5556,7 +5664,8 @@
         "hidden_labels": [
           "DAL"
         ],
-        "is_latest_label": false
+        "is_latest_label": false,
+        "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/521"
       },
       {
         "label": "Dcafe",
@@ -5658,7 +5767,8 @@
         "hidden_labels": [
           "DALSE"
         ],
-        "is_latest_label": false
+        "is_latest_label": false,
+        "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/106"
       },
       {
         "label": "Australian Marine Ecology Pty Ltd",
@@ -5832,7 +5942,8 @@
         "alt_labels": [
           "Marine information"
         ],
-        "is_latest_label": false
+        "is_latest_label": false,
+        "replaced_by": "http://vocab.aodn.org.au/def/organisation/entity/34"
       },
       {
         "label": "Australian Ocean Data Network (AODN)",
