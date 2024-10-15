@@ -88,58 +88,53 @@ public class VocabServiceImpl implements VocabService {
      */
     public List<String> extractVocabLabelsFromThemes(List<ThemesModel> themes, String vocabType) throws IOException {
         List<String> results = new ArrayList<>();
-        if (vocabType.equals(AppConstants.AODN_ORGANISATION_VOCABS)) {
-            // TODO: the logics for mapping record's organisation vocabs are heavily customised for a manual approach, AI now or later?
-            return results;
-        } else {
-            // Iterate over the top-level vocabularies
-            List<JsonNode> vocabs = switch (vocabType) {
-                case AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS -> self.getParameterVocabs();
-                case AppConstants.AODN_PLATFORM_VOCABS -> self.getPlatformVocabs();
-                default -> new ArrayList<>();
-            };
-            if (!vocabs.isEmpty() && !themes.isEmpty()) {
-                vocabs.stream().filter(Objects::nonNull).forEach(topLevelVocab -> {
-                    if (topLevelVocab.has("narrower") && !topLevelVocab.get("narrower").isEmpty()) {
-                        for (JsonNode secondLevelVocab : topLevelVocab.get("narrower")) {
-                            if (secondLevelVocab != null && secondLevelVocab.has("label") && secondLevelVocab.has("about")) {
-                                String secondLevelVocabLabel = secondLevelVocab.get("label").asText().toLowerCase();
-                                themes.stream().filter(Objects::nonNull).forEach(theme -> {
-                                    ConceptModel secondLevelVocabAsConcept = ConceptModel.builder()
-                                            .id(secondLevelVocab.get("label").asText())
-                                            .url(secondLevelVocab.get("about").asText())
-                                            .build();
+        // Iterate over the top-level vocabularies
+        List<JsonNode> vocabs = switch (vocabType) {
+            case AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS -> self.getParameterVocabs();
+            case AppConstants.AODN_PLATFORM_VOCABS -> self.getPlatformVocabs();
+            default -> new ArrayList<>();
+        };
+        if (!vocabs.isEmpty() && !themes.isEmpty()) {
+            vocabs.stream().filter(Objects::nonNull).forEach(topLevelVocab -> {
+                if (topLevelVocab.has("narrower") && !topLevelVocab.get("narrower").isEmpty()) {
+                    for (JsonNode secondLevelVocab : topLevelVocab.get("narrower")) {
+                        if (secondLevelVocab != null && secondLevelVocab.has("label") && secondLevelVocab.has("about")) {
+                            String secondLevelVocabLabel = secondLevelVocab.get("label").asText().toLowerCase();
+                            themes.stream().filter(Objects::nonNull).forEach(theme -> {
+                                ConceptModel secondLevelVocabAsConcept = ConceptModel.builder()
+                                        .id(secondLevelVocab.get("label").asText())
+                                        .url(secondLevelVocab.get("about").asText())
+                                        .build();
 
-                                    // if the record's theme is already second-level vocab, no need to further check
-                                    if (themeMatchConcept(theme, secondLevelVocabAsConcept) && !results.contains(secondLevelVocabLabel)) {
-                                        results.add(secondLevelVocabLabel);
-                                    }
+                                // if the record's theme is already second-level vocab, no need to further check
+                                if (themeMatchConcept(theme, secondLevelVocabAsConcept) && !results.contains(secondLevelVocabLabel)) {
+                                    results.add(secondLevelVocabLabel);
+                                }
 
-                                    // if the record's theme is leaf-node (bottom-level vocab)
-                                    if (secondLevelVocab.has("narrower") && !secondLevelVocab.get("narrower").isEmpty()) {
-                                        for (JsonNode bottomLevelVocab : secondLevelVocab.get("narrower")) {
-                                            if (bottomLevelVocab != null && bottomLevelVocab.has("label") && bottomLevelVocab.has("about")) {
-                                                // map the original values to a ConceptModel object for doing comparison
-                                                ConceptModel leafVocabAsConcept = ConceptModel.builder()
-                                                        .id(bottomLevelVocab.get("label").asText())
-                                                        .url(bottomLevelVocab.get("about").asText())
-                                                        .build();
+                                // if the record's theme is leaf-node (bottom-level vocab)
+                                if (secondLevelVocab.has("narrower") && !secondLevelVocab.get("narrower").isEmpty()) {
+                                    for (JsonNode bottomLevelVocab : secondLevelVocab.get("narrower")) {
+                                        if (bottomLevelVocab != null && bottomLevelVocab.has("label") && bottomLevelVocab.has("about")) {
+                                            // map the original values to a ConceptModel object for doing comparison
+                                            ConceptModel leafVocabAsConcept = ConceptModel.builder()
+                                                    .id(bottomLevelVocab.get("label").asText())
+                                                    .url(bottomLevelVocab.get("about").asText())
+                                                    .build();
 
-                                                // Compare with themes' concepts
-                                                if (themeMatchConcept(theme, leafVocabAsConcept) && !results.contains(secondLevelVocabLabel)) {
-                                                    results.add(secondLevelVocabLabel);
-                                                    // just checking 1 leaf-node of each second-level vocab is enough, because we only care second-level vocabs.
-                                                    break;
-                                                }
+                                            // Compare with themes' concepts
+                                            if (themeMatchConcept(theme, leafVocabAsConcept) && !results.contains(secondLevelVocabLabel)) {
+                                                results.add(secondLevelVocabLabel);
+                                                // just checking 1 leaf-node of each second-level vocab is enough, because we only care second-level vocabs.
+                                                break;
                                             }
                                         }
                                     }
-                                });
-                            }
+                                }
+                            });
                         }
                     }
-                });
-            }
+                }
+            });
         }
         return results;
     }
