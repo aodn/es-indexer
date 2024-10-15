@@ -127,11 +127,21 @@ public class VocabServiceImpl implements VocabService {
                                             if (themeMatchConcept(theme, leafVocabAsConcept) && !results.contains(secondLevelVocabLabel)) {
                                                 if (vocabType.equals(AppConstants.AODN_ORGANISATION_VOCABS)) {
                                                     // TODO: the logics for mapping record's organisation vocabs are heavily customised for a manual approach, AI now or later?
+                                                    if (secondLevelVocab.get("is_latest_label").asBoolean()) {
+                                                        if (!secondLevelVocab.has("replaced_by")) {
+                                                            if (secondLevelVocab.has("display_label")) {
+                                                                results.add(secondLevelVocab.get("display_label").asText().toLowerCase());
+                                                            } else {
+                                                                results.add(secondLevelVocabLabel);
+                                                            }
+                                                            break;
+                                                        }
+                                                        // TODO: more if blocks
+                                                    }
                                                 } else {
                                                     results.add(secondLevelVocabLabel);
+                                                    break;
                                                 }
-                                                // just checking 1 leaf-node of each second-level vocab is enough, because we only care second-level vocabs.
-                                                break;
                                             }
                                         }
                                     }
