@@ -329,6 +329,15 @@ public class StacCollectionMapperServiceTests {
 
         verify(expected);
     }
+
+    @Test
+    public void verifyCiRoleCodeNullWorks() throws IOException, JSONException {
+        String xml = readResourceFile("classpath:canned/sample17.xml");
+        String expected = readResourceFile("classpath:canned/sample17.json");
+        indexerService.indexMetadata(xml);
+
+        verify(expected);
+    }
     /**
      * Metadata have geometry which result in a point and not a polygon
      *

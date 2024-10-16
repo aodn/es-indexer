@@ -1,0 +1,94 @@
+{
+  "title" : "NT Alligator Rivers Region Aerial Survey Raw Bird Count",
+  "description" : "Quantitative waterbird surveys over seasonal wetlands of the Alligator Rivers Region (ARR) of the NT, provided by the Supervising Scientist Division (SSD) of the Commonwealth Department of the Environment, Water, Heritage and the Arts (DEWHA). Systematic aerial survey, conducted monthly from June 1981 to August 1984.  Environmental information on dominant cover types is also included (Wet Plain, Dry Plain, Wet Melaleuca, Dry Melaleuca, Open Water, Dry Woodland, Mud).",
+  "extent" : {
+    "bbox" : [ ],
+    "temporal" : [ [ null, null ] ]
+  },
+  "summaries" : {
+    "score" : 1,
+    "status" : "",
+    "credits" : [ ],
+    "scope" : {
+      "code" : "dataset",
+      "name" : ""
+    },
+    "statement" : "",
+    "creation" : "2015-02-02T15:39:42",
+    "revision" : "2018-11-14T15:23:41",
+    "update_frequency" : "other",
+    "temporal" : [ ]
+  },
+  "contacts" : [ {
+    "roles" : [ "about" ],
+    "organization" : "CSIRO",
+    "name" : "Chris Moeseneder",
+    "position" : "",
+    "emails" : [ "chris.moeseneder@csiro.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "" ],
+      "city" : "",
+      "country" : "",
+      "postalCode" : "",
+      "administrativeArea" : ""
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : ""
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : ""
+    } ],
+    "links" : [ ]
+  }, {
+    "roles" : [ "metadata" ],
+    "organization" : "CSIRO",
+    "name" : "Chris Moeseneder",
+    "position" : "",
+    "emails" : [ "chris.moeseneder@csiro.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "" ],
+      "city" : "",
+      "country" : "",
+      "postalCode" : "",
+      "administrativeArea" : ""
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : ""
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : ""
+    } ],
+    "links" : [ ]
+  } ],
+  "languages" : [ {
+    "code" : "eng",
+    "name" : "English"
+  } ],
+  "links" : [ {
+    "href" : "http://data.aodn.org.au/TERN/ACEF/Ecology/ARRAerialSurveyRaw3.csv",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "Download data"
+  }, {
+    "href" : "https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/0bef875d-5f77-4b31-bd56-de73fafc2b2e",
+    "rel" : "describedby",
+    "type" : "text/html",
+    "title" : "Full metadata link"
+  } ],
+  "license" : "",
+  "providers" : [ {
+    "name" : "CSIRO",
+    "roles" : [ null ]
+  } ],
+  "themes" : [ ],
+  "id" : "0bef875d-5f77-4b31-bd56-de73fafc2b2e",
+  "search_suggestions" : {
+    "abstract_phrases" : [ ]
+  },
+  "sci:citation" : "{\"suggestedCitation\":null,\"useLimitations\":null,\"otherConstraints\":null}",
+  "type" : "Collection",
+  "stac_version" : "1.0.0",
+  "stac_extensions" : [ "https://stac-extensions.github.io/scientific/v1.0.0/schema.json", "https://stac-extensions.github.io/contacts/v0.1.1/schema.json", "https://stac-extensions.github.io/projection/v1.1.0/schema.json", "https://stac-extensions.github.io/language/v1.0.0/schema.json", "https://stac-extensions.github.io/themes/v1.0.0/schema.json", "https://stac-extensions.github.io/web-map-links/v1.2.0/schema.json" ]
+}

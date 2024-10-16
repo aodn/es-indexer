@@ -744,7 +744,11 @@ public abstract class StacCollectionMapperService {
                                         .ifPresent(p -> p.forEach(party -> {
                                             if(party.getAbstractCIParty().getValue() instanceof CIOrganisationType2 organisationType2) {
                                                 ProviderModel providerModel = ProviderModel.builder().build();
-                                                providerModel.setRoles(Collections.singletonList(ciResponsibility.getRole().getCIRoleCode().getCodeListValue()));
+                                                providerModel.setRoles(Collections.singletonList(
+                                                        ciResponsibility.getRole().getCIRoleCode() != null ?
+                                                        ciResponsibility.getRole().getCIRoleCode().getCodeListValue() :
+                                                        null
+                                                ));
                                                 providerModel.setName(organisationType2.getName() != null ? organisationType2.getName().getCharacterString().getValue().toString() : "");
 
                                                 organisationType2.getIndividual().forEach(individual -> individual.getCIIndividual().getContactInfo().forEach(contactInfo -> {
