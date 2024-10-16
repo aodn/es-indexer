@@ -343,6 +343,7 @@ public class GeometryUtils {
         return geoList.stream()
                 .map(geometries ->
                     geometries.stream()
+                            .filter(Objects::nonNull)
                             .map(geometry -> geometry.difference(landGeometry))
                             .map(GeometryUtils::convertToListGeometry)
                             .flatMap(Collection::stream)

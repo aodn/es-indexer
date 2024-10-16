@@ -84,7 +84,7 @@ public class GeometryBase {
     }
 
     protected static List<Geometry> findPolygonsFromEXBoundingPolygonType(String rawCRS, List<AbstractEXGeographicExtentType> rawInput) {
-        List<Geometry> polygons = new ArrayList<>();
+        final List<Geometry> polygons = new ArrayList<>();
 
         if(COORDINATE_SYSTEM_CRS84.equals(rawCRS)) {
             List<List<GMObjectPropertyType>> input = rawInput
@@ -145,11 +145,15 @@ public class GeometryBase {
                                                             items.add(coordinate);
                                                         }
                                                     }
-
-                                                    // We need to store it so that we can create the multi-array as told by spec
-                                                    Polygon polygon = geoJsonFactory.createPolygon(items.toArray(new Coordinate[0]));
-                                                    polygons.add(polygon);
-                                                    logger.debug("MultiSurfaceType 2D Polygon added {}", polygon);
+                                                    try {
+                                                        // We need to store it so that we can create the multi-array as told by spec
+                                                        Polygon polygon = geoJsonFactory.createPolygon(items.toArray(new Coordinate[0]));
+                                                        polygons.add(polygon);
+                                                        logger.debug("MultiSurfaceType 2D Polygon added {}", polygon);
+                                                    }
+                                                    catch(IllegalArgumentException iae) {
+                                                        logger.warn("Invalid geometry point for polygon", iae);
+                                                    }
                                                 }
                                             });
                                 }
@@ -195,12 +199,16 @@ public class GeometryBase {
                                                         items.add(coordinate);
                                                     }
                                                 }
+                                                try {
+                                                    // We need to store it so that we can create the multi-array as told by spec
+                                                    Polygon polygon = geoJsonFactory.createPolygon(items.toArray(new Coordinate[0]));
+                                                    polygons.add(polygon);
 
-                                                // We need to store it so that we can create the multi-array as told by spec
-                                                Polygon polygon = geoJsonFactory.createPolygon(items.toArray(new Coordinate[0]));
-                                                polygons.add(polygon);
-
-                                                logger.debug("PolygonType 2D Polygon added {}", polygon);
+                                                    logger.debug("LinearRingType added {}", polygon);
+                                                }
+                                                catch(IllegalArgumentException iae) {
+                                                    logger.warn("Invalid LinearRingType", iae);
+                                                }
                                             }
                                         });
                             }
