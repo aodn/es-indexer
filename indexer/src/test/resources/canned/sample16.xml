@@ -1,0 +1,1282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdb:MD_Metadata xmlns:mdb="http://standards.iso.org/iso/19115/-3/mdb/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cat="http://standards.iso.org/iso/19115/-3/cat/1.0" xmlns:cit="http://standards.iso.org/iso/19115/-3/cit/2.0" xmlns:gcx="http://standards.iso.org/iso/19115/-3/gcx/1.0" xmlns:gex="http://standards.iso.org/iso/19115/-3/gex/1.0" xmlns:lan="http://standards.iso.org/iso/19115/-3/lan/1.0" xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0" xmlns:mas="http://standards.iso.org/iso/19115/-3/mas/1.0" xmlns:mcc="http://standards.iso.org/iso/19115/-3/mcc/1.0" xmlns:mco="http://standards.iso.org/iso/19115/-3/mco/1.0" xmlns:mda="http://standards.iso.org/iso/19115/-3/mda/1.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0" xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0" xmlns:mex="http://standards.iso.org/iso/19115/-3/mex/1.0" xmlns:mmi="http://standards.iso.org/iso/19115/-3/mmi/1.0" xmlns:mpc="http://standards.iso.org/iso/19115/-3/mpc/1.0" xmlns:mrc="http://standards.iso.org/iso/19115/-3/mrc/2.0" xmlns:mrd="http://standards.iso.org/iso/19115/-3/mrd/1.0" xmlns:mri="http://standards.iso.org/iso/19115/-3/mri/1.0" xmlns:mrl="http://standards.iso.org/iso/19115/-3/mrl/2.0" xmlns:mrs="http://standards.iso.org/iso/19115/-3/mrs/1.0" xmlns:msr="http://standards.iso.org/iso/19115/-3/msr/2.0" xmlns:mdq="http://standards.iso.org/iso/19157/-2/mdq/1.0" xmlns:mac="http://standards.iso.org/iso/19115/-3/mac/2.0" xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://standards.iso.org/iso/19115/-3/cat/1.0 http://standards.iso.org/iso/19115/-3/cat/1.0/cat.xsd http://standards.iso.org/iso/19115/-3/cit/2.0 http://standards.iso.org/iso/19115/-3/cit/2.0/cit.xsd http://standards.iso.org/iso/19115/-3/gcx/1.0 http://standards.iso.org/iso/19115/-3/gcx/1.0/gcx.xsd http://standards.iso.org/iso/19115/-3/gex/1.0 http://standards.iso.org/iso/19115/-3/gex/1.0/gex.xsd http://standards.iso.org/iso/19115/-3/lan/1.0 http://standards.iso.org/iso/19115/-3/lan/1.0/lan.xsd http://standards.iso.org/iso/19115/-3/srv/2.0 http://standards.iso.org/iso/19115/-3/srv/2.0/srv.xsd http://standards.iso.org/iso/19115/-3/mas/1.0 http://standards.iso.org/iso/19115/-3/mas/1.0/mas.xsd http://standards.iso.org/iso/19115/-3/mcc/1.0 http://standards.iso.org/iso/19115/-3/mcc/1.0/mcc.xsd http://standards.iso.org/iso/19115/-3/mco/1.0 http://standards.iso.org/iso/19115/-3/mco/1.0/mco.xsd http://standards.iso.org/iso/19115/-3/mda/2.0 http://standards.iso.org/iso/19115/-3/mda/2.0/mda.xsd http://standards.iso.org/iso/19115/-3/mdb/2.0 http://standards.iso.org/iso/19115/-3/mdb/2.0/mdb.xsd http://standards.iso.org/iso/19115/-3/mds/2.0 http://standards.iso.org/iso/19115/-3/mds/2.0/mds.xsd http://standards.iso.org/iso/19115/-3/mdt/2.0 http://standards.iso.org/iso/19115/-3/mdt/2.0/mdt.xsd http://standards.iso.org/iso/19115/-3/mex/1.0 http://standards.iso.org/iso/19115/-3/mex/1.0/mex.xsd http://standards.iso.org/iso/19115/-3/mmi/1.0 http://standards.iso.org/iso/19115/-3/mmi/1.0/mmi.xsd http://standards.iso.org/iso/19115/-3/mpc/1.0 http://standards.iso.org/iso/19115/-3/mpc/1.0/mpc.xsd http://standards.iso.org/iso/19115/-3/mrc/2.0 http://standards.iso.org/iso/19115/-3/mrc/2.0/mrc.xsd http://standards.iso.org/iso/19115/-3/mrd/1.0 http://standards.iso.org/iso/19115/-3/mrd/1.0/mrd.xsd http://standards.iso.org/iso/19115/-3/mri/1.0 http://standards.iso.org/iso/19115/-3/mri/1.0/mri.xsd http://standards.iso.org/iso/19115/-3/mrl/2.0 http://standards.iso.org/iso/19115/-3/mrl/2.0/mrl.xsd http://standards.iso.org/iso/19115/-3/mrs/1.0 http://standards.iso.org/iso/19115/-3/mrs/1.0/mrs.xsd http://standards.iso.org/iso/19115/-3/msr/2.0 http://standards.iso.org/iso/19115/-3/msr/2.0/msr.xsd http://standards.iso.org/iso/19157/-2/mdq/1.0 http://standards.iso.org/iso/19157/-2/mdq/1.0/mdq.xsd http://standards.iso.org/iso/19115/-3/mac/2.0 http://standards.iso.org/iso/19115/-3/mac/2.0/mac.xsd http://standards.iso.org/iso/19115/-3/gco/1.0 http://standards.iso.org/iso/19115/-3/gco/1.0/gco.xsd http://standards.iso.org/iso/19115/-3/gmw/1.0 http://standards.iso.org/iso/19115/-3/gmw/1.0/gmw.xsd http://www.opengis.net/gml/3.2 http://schemas.opengis.net/gml/3.2.1/gml.xsd http://www.w3.org/1999/xlink http://www.w3.org/1999/xlink.xsd">
+    <mdb:metadataIdentifier>
+        <mcc:MD_Identifier>
+            <mcc:code>
+                <gco:CharacterString>05818c50-14c2-11dd-bdaa-00188b4c0af8</gco:CharacterString>
+            </mcc:code>
+        </mcc:MD_Identifier>
+    </mdb:metadataIdentifier>
+    <mdb:defaultLocale>
+        <lan:PT_Locale>
+            <lan:language>
+                <lan:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="eng" />
+            </lan:language>
+            <lan:characterEncoding>
+                <lan:MD_CharacterSetCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_CharacterSetCode" codeListValue="utf8" />
+            </lan:characterEncoding>
+        </lan:PT_Locale>
+    </mdb:defaultLocale>
+    <mdb:parentMetadata uuidref="13391430-2ae8-11dd-a735-00188b4c0af8" />
+    <mdb:metadataScope>
+        <mdb:MD_MetadataScope>
+            <mdb:resourceScope>
+                <mcc:MD_ScopeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ScopeCode" codeListValue="dataset" />
+            </mdb:resourceScope>
+            <mdb:name>
+                <gco:CharacterString />
+            </mdb:name>
+        </mdb:MD_MetadataScope>
+    </mdb:metadataScope>
+    <mdb:contact>
+        <cit:CI_Responsibility>
+            <cit:role>
+                <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="processor" />
+            </cit:role>
+            <cit:party>
+                <cit:CI_Individual>
+                    <cit:contactInfo>
+                        <cit:CI_Contact>
+                            <cit:address>
+                                <cit:CI_Address>
+                                    <cit:electronicMailAddress>
+                                        <gco:CharacterString>info@bluenet.org.au</gco:CharacterString>
+                                    </cit:electronicMailAddress>
+                                </cit:CI_Address>
+                            </cit:address>
+                        </cit:CI_Contact>
+                    </cit:contactInfo>
+                    <cit:positionName>
+                        <gco:CharacterString>BlueNet Data Facilitator</gco:CharacterString>
+                    </cit:positionName>
+                </cit:CI_Individual>
+            </cit:party>
+        </cit:CI_Responsibility>
+    </mdb:contact>
+    <mdb:contact>
+        <cit:CI_Responsibility>
+            <cit:role>
+                <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="pointOfContact" />
+            </cit:role>
+            <cit:party>
+                <cit:CI_Organisation>
+                    <cit:name>
+                        <gco:CharacterString>Australian Defence Force Academy (ADFA)</gco:CharacterString>
+                    </cit:name>
+                    <cit:individual>
+                        <cit:CI_Individual>
+                            <cit:name>
+                                <gco:CharacterString>Robertson, Robin, Dr</gco:CharacterString>
+                            </cit:name>
+                            <cit:contactInfo>
+                                <cit:CI_Contact>
+                                    <cit:address>
+                                        <cit:CI_Address>
+                                            <cit:electronicMailAddress>
+                                                <gco:CharacterString>r.robertson@adfa.edu.au</gco:CharacterString>
+                                            </cit:electronicMailAddress>
+                                        </cit:CI_Address>
+                                    </cit:address>
+                                </cit:CI_Contact>
+                            </cit:contactInfo>
+                        </cit:CI_Individual>
+                    </cit:individual>
+                </cit:CI_Organisation>
+            </cit:party>
+        </cit:CI_Responsibility>
+    </mdb:contact>
+    <mdb:dateInfo>
+        <cit:CI_Date>
+            <cit:date>
+                <gco:DateTime>2008-04-10T16:04:00</gco:DateTime>
+            </cit:date>
+            <cit:dateType>
+                <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode" codeListValue="creation" />
+            </cit:dateType>
+        </cit:CI_Date>
+    </mdb:dateInfo>
+    <mdb:dateInfo>
+        <cit:CI_Date>
+            <cit:date>
+                <gco:DateTime>2015-01-06T16:40:03</gco:DateTime>
+            </cit:date>
+            <cit:dateType>
+                <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode" codeListValue="revision" />
+            </cit:dateType>
+        </cit:CI_Date>
+    </mdb:dateInfo>
+    <mdb:metadataStandard>
+        <cit:CI_Citation>
+            <cit:title>
+                <gco:CharacterString>ISO 19115-3:2018</gco:CharacterString>
+            </cit:title>
+        </cit:CI_Citation>
+    </mdb:metadataStandard>
+    <mdb:metadataLinkage>
+        <cit:CI_OnlineResource>
+            <cit:linkage>
+                <gco:CharacterString>https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/05818c50-14c2-11dd-bdaa-00188b4c0af8</gco:CharacterString>
+            </cit:linkage>
+            <cit:protocol>
+                <gco:CharacterString>WWW:LINK-1.0-http--metadata-URL</gco:CharacterString>
+            </cit:protocol>
+            <cit:description>
+                <gco:CharacterString>Point of truth URL of this metadata record</gco:CharacterString>
+            </cit:description>
+        </cit:CI_OnlineResource>
+    </mdb:metadataLinkage>
+    <mdb:identificationInfo>
+        <mri:MD_DataIdentification>
+            <mri:citation>
+                <cit:CI_Citation>
+                    <cit:title>
+                        <gco:CharacterString>Temperature - Salinity distributions / CTD data within Jervis Bay and out across the shelf: 1989</gco:CharacterString>
+                    </cit:title>
+                    <cit:date>
+                        <cit:CI_Date>
+                            <cit:date>
+                                <gco:DateTime>2008-04-10T11:33:00</gco:DateTime>
+                            </cit:date>
+                            <cit:dateType>
+                                <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                            </cit:dateType>
+                        </cit:CI_Date>
+                    </cit:date>
+                    <cit:citedResponsibleParty>
+                        <cit:CI_Responsibility>
+                            <cit:role>
+                                <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="principalInvestigator" />
+                            </cit:role>
+                            <cit:party>
+                                <cit:CI_Organisation>
+                                    <cit:name>
+                                        <gco:CharacterString>Australian Defence Force Academy (ADFA)</gco:CharacterString>
+                                    </cit:name>
+                                    <cit:individual>
+                                        <cit:CI_Individual>
+                                            <cit:name>
+                                                <gco:CharacterString>Holloway, Peter</gco:CharacterString>
+                                            </cit:name>
+                                            <cit:contactInfo>
+                                                <cit:CI_Contact>
+                                                    <cit:onlineResource>
+                                                        <cit:CI_OnlineResource>
+                                                            <cit:linkage>
+                                                                <gco:CharacterString>http://www.marine.csiro.au/~cra171/holloway/MFR54pp585-6.pdf</gco:CharacterString>
+                                                            </cit:linkage>
+                                                            <cit:protocol>
+                                                                <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
+                                                            </cit:protocol>
+                                                        </cit:CI_OnlineResource>
+                                                    </cit:onlineResource>
+                                                </cit:CI_Contact>
+                                            </cit:contactInfo>
+                                        </cit:CI_Individual>
+                                    </cit:individual>
+                                </cit:CI_Organisation>
+                            </cit:party>
+                        </cit:CI_Responsibility>
+                    </cit:citedResponsibleParty>
+                    <cit:citedResponsibleParty>
+                        <cit:CI_Responsibility>
+                            <cit:role>
+                                <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="collaborator" />
+                            </cit:role>
+                            <cit:party>
+                                <cit:CI_Organisation>
+                                    <cit:name>
+                                        <gco:CharacterString>Australian Defence Force Academy (ADFA)</gco:CharacterString>
+                                    </cit:name>
+                                    <cit:individual>
+                                        <cit:CI_Individual>
+                                            <cit:name>
+                                                <gco:CharacterString>Symonds, Graham</gco:CharacterString>
+                                            </cit:name>
+                                            <cit:contactInfo>
+                                                <cit:CI_Contact>
+                                                    <cit:address>
+                                                        <cit:CI_Address>
+                                                            <cit:electronicMailAddress>
+                                                                <gco:CharacterString>Graham.Symonds@csiro.au</gco:CharacterString>
+                                                            </cit:electronicMailAddress>
+                                                        </cit:CI_Address>
+                                                    </cit:address>
+                                                </cit:CI_Contact>
+                                            </cit:contactInfo>
+                                        </cit:CI_Individual>
+                                    </cit:individual>
+                                </cit:CI_Organisation>
+                            </cit:party>
+                        </cit:CI_Responsibility>
+                    </cit:citedResponsibleParty>
+                    <cit:citedResponsibleParty>
+                        <cit:CI_Responsibility>
+                            <cit:role>
+                                <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="collaborator" />
+                            </cit:role>
+                            <cit:party>
+                                <cit:CI_Organisation>
+                                    <cit:name>
+                                        <gco:CharacterString>Australian Defence Force Academy (ADFA)</gco:CharacterString>
+                                    </cit:name>
+                                    <cit:individual>
+                                        <cit:CI_Individual>
+                                            <cit:name>
+                                                <gco:CharacterString>Nunes-Vaz, Rick</gco:CharacterString>
+                                            </cit:name>
+                                            <cit:contactInfo>
+                                                <cit:CI_Contact>
+                                                    <cit:address>
+                                                        <cit:CI_Address>
+                                                            <cit:electronicMailAddress>
+                                                                <gco:CharacterString>Rick.Nunes-Vaz@dsto.defence.gov.au</gco:CharacterString>
+                                                            </cit:electronicMailAddress>
+                                                        </cit:CI_Address>
+                                                    </cit:address>
+                                                </cit:CI_Contact>
+                                            </cit:contactInfo>
+                                        </cit:CI_Individual>
+                                    </cit:individual>
+                                </cit:CI_Organisation>
+                            </cit:party>
+                        </cit:CI_Responsibility>
+                    </cit:citedResponsibleParty>
+                    <cit:citedResponsibleParty>
+                        <cit:CI_Responsibility>
+                            <cit:role>
+                                <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="collaborator" />
+                            </cit:role>
+                            <cit:party>
+                                <cit:CI_Organisation>
+                                    <cit:name>
+                                        <gco:CharacterString>Australian Defence Force Academy (ADFA)</gco:CharacterString>
+                                    </cit:name>
+                                    <cit:individual>
+                                        <cit:CI_Individual>
+                                            <cit:name>
+                                                <gco:CharacterString>Jeffrey, Marcus</gco:CharacterString>
+                                            </cit:name>
+                                        </cit:CI_Individual>
+                                    </cit:individual>
+                                </cit:CI_Organisation>
+                            </cit:party>
+                        </cit:CI_Responsibility>
+                    </cit:citedResponsibleParty>
+                </cit:CI_Citation>
+            </mri:citation>
+            <mri:abstract>
+                <gco:CharacterString>This dataset is a component of the 'Jervis Bay Baseline Studies' project conducted by the Department of Defence, CSIRO and the Australian Defence Force Academy.
+
+                    Approximately once per month between 1988-1991, temperature-salinity surveys were conducted within Jervis Bay and out across the continental shelf. Measurements were made using a Neil Brown 'Smart' CTD. On each day of sampling, ~10 stations were chosen across the shelf, with the CTD recorder measuring salinity, temperature and sigma-T through the water column.
+
+                    This record describes CTD data collected in 1989. For each day of sampling three resources are provided: 1) A text document providing details of sampling locations, as well as a CTD summary collected from each of the stations every 4-10 metres down the water column, 2) A map showing the location of each sampling station and, 3) An excel file providing the raw CTD data collected.
+
+                    This is one of nine child records that relate to the parent, 13391430-2ae8-11dd-a735-00188b4c0af8. A pdf outlining the structure and hierarchy of all metadata records relating to this project is available to download through this record. Also available is a pdf of a published working paper documenting this experiment and the results.</gco:CharacterString>
+            </mri:abstract>
+            <mri:purpose>
+                <gco:CharacterString>To monitor the monthly variability of stratification within Jervis Bay and adjacent shelf</gco:CharacterString>
+            </mri:purpose>
+            <mri:credit>
+                <gco:CharacterString>Funded by The Department of Defence</gco:CharacterString>
+            </mri:credit>
+            <mri:credit>
+                <gco:CharacterString>Funded by CSIRO Division of Fisheries Research</gco:CharacterString>
+            </mri:credit>
+            <mri:status>
+                <mcc:MD_ProgressCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ProgressCode" codeListValue="completed" />
+            </mri:status>
+            <mri:pointOfContact>
+                <cit:CI_Responsibility>
+                    <cit:role>
+                        <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="pointOfContact" />
+                    </cit:role>
+                    <cit:party>
+                        <cit:CI_Organisation>
+                            <cit:name>
+                                <gco:CharacterString>Australian Defence Force Academy (ADFA)</gco:CharacterString>
+                            </cit:name>
+                            <cit:individual>
+                                <cit:CI_Individual>
+                                    <cit:name>
+                                        <gco:CharacterString>Robertson, Robin, Dr</gco:CharacterString>
+                                    </cit:name>
+                                    <cit:contactInfo>
+                                        <cit:CI_Contact>
+                                            <cit:phone>
+                                                <cit:CI_Telephone>
+                                                    <cit:number>
+                                                        <gco:CharacterString>61 2 6268 8289</gco:CharacterString>
+                                                    </cit:number>
+                                                    <cit:numberType>
+                                                        <cit:CI_TelephoneTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_TelephoneTypeCode" codeListValue="voice" />
+                                                    </cit:numberType>
+                                                </cit:CI_Telephone>
+                                            </cit:phone>
+                                            <cit:phone>
+                                                <cit:CI_Telephone>
+                                                    <cit:number>
+                                                        <gco:CharacterString>61 2 6268 8017</gco:CharacterString>
+                                                    </cit:number>
+                                                    <cit:numberType>
+                                                        <cit:CI_TelephoneTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_TelephoneTypeCode" codeListValue="facsimile" />
+                                                    </cit:numberType>
+                                                </cit:CI_Telephone>
+                                            </cit:phone>
+                                            <cit:address>
+                                                <cit:CI_Address>
+                                                    <cit:deliveryPoint>
+                                                        <gco:CharacterString>School of Physical, Environmental and Mathematical Science, Australian Defence Force Academy</gco:CharacterString>
+                                                    </cit:deliveryPoint>
+                                                    <cit:city>
+                                                        <gco:CharacterString>Canberra</gco:CharacterString>
+                                                    </cit:city>
+                                                    <cit:administrativeArea>
+                                                        <gco:CharacterString>ACT</gco:CharacterString>
+                                                    </cit:administrativeArea>
+                                                    <cit:postalCode>
+                                                        <gco:CharacterString>2600</gco:CharacterString>
+                                                    </cit:postalCode>
+                                                    <cit:country>
+                                                        <gco:CharacterString>Australia</gco:CharacterString>
+                                                    </cit:country>
+                                                    <cit:electronicMailAddress>
+                                                        <gco:CharacterString>r.robertson@adfa.edu.au</gco:CharacterString>
+                                                    </cit:electronicMailAddress>
+                                                </cit:CI_Address>
+                                            </cit:address>
+                                            <cit:onlineResource>
+                                                <cit:CI_OnlineResource>
+                                                    <cit:linkage>
+                                                        <gco:CharacterString>http://www.pems.adfa.edu.au/~s3162789/</gco:CharacterString>
+                                                    </cit:linkage>
+                                                    <cit:protocol>
+                                                        <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
+                                                    </cit:protocol>
+                                                </cit:CI_OnlineResource>
+                                            </cit:onlineResource>
+                                        </cit:CI_Contact>
+                                    </cit:contactInfo>
+                                </cit:CI_Individual>
+                            </cit:individual>
+                        </cit:CI_Organisation>
+                    </cit:party>
+                </cit:CI_Responsibility>
+            </mri:pointOfContact>
+            <mri:topicCategory>
+                <mri:MD_TopicCategoryCode>climatologyMeteorologyAtmosphere</mri:MD_TopicCategoryCode>
+            </mri:topicCategory>
+            <mri:topicCategory>
+                <mri:MD_TopicCategoryCode>environment</mri:MD_TopicCategoryCode>
+            </mri:topicCategory>
+            <mri:topicCategory>
+                <mri:MD_TopicCategoryCode>oceans</mri:MD_TopicCategoryCode>
+            </mri:topicCategory>
+            <mri:extent>
+                <gex:EX_Extent>
+                    <gex:geographicElement>
+                        <gex:EX_GeographicBoundingBox>
+                            <gex:westBoundLongitude>
+                                <gco:Decimal>150.5</gco:Decimal>
+                            </gex:westBoundLongitude>
+                            <gex:eastBoundLongitude>
+                                <gco:Decimal>151.5</gco:Decimal>
+                            </gex:eastBoundLongitude>
+                            <gex:southBoundLatitude>
+                                <gco:Decimal>-35.5</gco:Decimal>
+                            </gex:southBoundLatitude>
+                            <gex:northBoundLatitude>
+                                <gco:Decimal>-34.5</gco:Decimal>
+                            </gex:northBoundLatitude>
+                        </gex:EX_GeographicBoundingBox>
+                    </gex:geographicElement>
+                    <gex:geographicElement>
+                        <gex:EX_GeographicDescription>
+                            <gex:geographicIdentifier>
+                                <mcc:MD_Identifier>
+                                    <mcc:authority>
+                                        <cit:CI_Citation>
+                                            <cit:title>
+                                                <gco:CharacterString>Marine Community Profile v1.2 Geographic extent names</gco:CharacterString>
+                                            </cit:title>
+                                            <cit:date>
+                                                <cit:CI_Date>
+                                                    <cit:date>
+                                                        <gco:DateTime>2006-10-13T15:25:00</gco:DateTime>
+                                                    </cit:date>
+                                                    <cit:dateType>
+                                                        <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode" codeListValue="revision" />
+                                                    </cit:dateType>
+                                                </cit:CI_Date>
+                                            </cit:date>
+                                            <cit:citedResponsibleParty>
+                                                <cit:CI_Responsibility>
+                                                    <cit:role>
+                                                        <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="owner" />
+                                                    </cit:role>
+                                                    <cit:party>
+                                                        <cit:CI_Organisation>
+                                                            <cit:name>
+                                                                <gco:CharacterString>Australian Ocean Data Centre Joint Facility</gco:CharacterString>
+                                                            </cit:name>
+                                                            <cit:contactInfo>
+                                                                <cit:CI_Contact>
+                                                                    <cit:onlineResource>
+                                                                        <cit:CI_OnlineResource>
+                                                                            <cit:linkage>
+                                                                                <gco:CharacterString>http://www.aodc.gov.au/</gco:CharacterString>
+                                                                            </cit:linkage>
+                                                                            <cit:protocol>
+                                                                                <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
+                                                                            </cit:protocol>
+                                                                        </cit:CI_OnlineResource>
+                                                                    </cit:onlineResource>
+                                                                </cit:CI_Contact>
+                                                            </cit:contactInfo>
+                                                        </cit:CI_Organisation>
+                                                    </cit:party>
+                                                </cit:CI_Responsibility>
+                                            </cit:citedResponsibleParty>
+                                        </cit:CI_Citation>
+                                    </mcc:authority>
+                                    <mcc:code>
+                                        <gco:CharacterString>Jervis Bay, ACT</gco:CharacterString>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </gex:geographicIdentifier>
+                        </gex:EX_GeographicDescription>
+                    </gex:geographicElement>
+                    <gex:temporalElement>
+                        <gex:EX_TemporalExtent>
+                            <gex:extent>
+                                <gml:TimePeriod gml:id="d908e1538">
+                                    <gml:beginPosition>1989-01-12</gml:beginPosition>
+                                    <gml:endPosition>1989-11-15</gml:endPosition>
+                                </gml:TimePeriod>
+                            </gex:extent>
+                        </gex:EX_TemporalExtent>
+                    </gex:temporalElement>
+                    <gex:verticalElement>
+                        <gex:EX_VerticalExtent>
+                            <gex:minimumValue>
+                                <gco:Real>0</gco:Real>
+                            </gex:minimumValue>
+                            <gex:maximumValue>
+                                <gco:Real>185</gco:Real>
+                            </gex:maximumValue>
+                            <gex:verticalCRS />
+                        </gex:EX_VerticalExtent>
+                    </gex:verticalElement>
+                </gex:EX_Extent>
+            </mri:extent>
+            <mri:resourceMaintenance>
+                <mmi:MD_MaintenanceInformation>
+                    <mmi:maintenanceAndUpdateFrequency>
+                        <mmi:MD_MaintenanceFrequencyCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_MaintenanceFrequencyCode" codeListValue="notPlanned" />
+                    </mmi:maintenanceAndUpdateFrequency>
+                </mmi:MD_MaintenanceInformation>
+            </mri:resourceMaintenance>
+            <mri:graphicOverview>
+                <mcc:MD_BrowseGraphic>
+                    <mcc:fileName>
+                        <gco:CharacterString>https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/05818c50-14c2-11dd-bdaa-00188b4c0af8/attachments/1989_01_12_CTD_s.png</gco:CharacterString>
+                    </mcc:fileName>
+                    <mcc:fileDescription>
+                        <gco:CharacterString>thumbnail</gco:CharacterString>
+                    </mcc:fileDescription>
+                    <mcc:fileType>
+                        <gco:CharacterString>png</gco:CharacterString>
+                    </mcc:fileType>
+                </mcc:MD_BrowseGraphic>
+            </mri:graphicOverview>
+            <mri:graphicOverview>
+                <mcc:MD_BrowseGraphic>
+                    <mcc:fileName>
+                        <gco:CharacterString>https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/05818c50-14c2-11dd-bdaa-00188b4c0af8/attachments/1989_01_12_CTD.png</gco:CharacterString>
+                    </mcc:fileName>
+                    <mcc:fileDescription>
+                        <gco:CharacterString>large_thumbnail</gco:CharacterString>
+                    </mcc:fileDescription>
+                    <mcc:fileType>
+                        <gco:CharacterString>png</gco:CharacterString>
+                    </mcc:fileType>
+                </mcc:MD_BrowseGraphic>
+            </mri:graphicOverview>
+            <mri:resourceFormat>
+                <mrd:MD_Format>
+                    <mrd:formatSpecificationCitation>
+                        <cit:CI_Citation>
+                            <cit:title>
+                                <gco:CharacterString>Microsoft Word</gco:CharacterString>
+                            </cit:title>
+                            <cit:alternateTitle />
+                            <cit:date gco:nilReason="unknown" />
+                            <cit:edition>
+                                <gco:CharacterString>2003</gco:CharacterString>
+                            </cit:edition>
+                        </cit:CI_Citation>
+                    </mrd:formatSpecificationCitation>
+                </mrd:MD_Format>
+            </mri:resourceFormat>
+            <mri:resourceFormat>
+                <mrd:MD_Format>
+                    <mrd:formatSpecificationCitation>
+                        <cit:CI_Citation>
+                            <cit:title>
+                                <gco:CharacterString>Microsoft Excel</gco:CharacterString>
+                            </cit:title>
+                            <cit:alternateTitle />
+                            <cit:date gco:nilReason="unknown" />
+                            <cit:edition>
+                                <gco:CharacterString>2003</gco:CharacterString>
+                            </cit:edition>
+                        </cit:CI_Citation>
+                    </mrd:formatSpecificationCitation>
+                </mrd:MD_Format>
+            </mri:resourceFormat>
+            <mri:resourceFormat>
+                <mrd:MD_Format>
+                    <mrd:formatSpecificationCitation>
+                        <cit:CI_Citation>
+                            <cit:title>
+                                <gco:CharacterString>Windows Photo Gallery</gco:CharacterString>
+                            </cit:title>
+                            <cit:alternateTitle />
+                            <cit:date gco:nilReason="unknown" />
+                            <cit:edition>
+                                <gco:CharacterString>2007</gco:CharacterString>
+                            </cit:edition>
+                        </cit:CI_Citation>
+                    </mrd:formatSpecificationCitation>
+                </mrd:MD_Format>
+            </mri:resourceFormat>
+            <mri:resourceFormat>
+                <mrd:MD_Format>
+                    <mrd:formatSpecificationCitation>
+                        <cit:CI_Citation>
+                            <cit:title>
+                                <gco:CharacterString>Adobe Reader</gco:CharacterString>
+                            </cit:title>
+                            <cit:alternateTitle />
+                            <cit:date gco:nilReason="unknown" />
+                            <cit:edition>
+                                <gco:CharacterString>8.1.3</gco:CharacterString>
+                            </cit:edition>
+                        </cit:CI_Citation>
+                    </mrd:formatSpecificationCitation>
+                </mrd:MD_Format>
+            </mri:resourceFormat>
+            <mri:descriptiveKeywords>
+                <mri:MD_Keywords>
+                    <mri:keyword>
+                        <gco:CharacterString>Oceans | Salinity/density | Conductivity</gco:CharacterString>
+                    </mri:keyword>
+                    <mri:keyword>
+                        <gco:CharacterString>Oceans | Salinity/density | Salinity</gco:CharacterString>
+                    </mri:keyword>
+                    <mri:keyword>
+                        <gco:CharacterString>Oceans | Ocean Circulation | Wind-driven Circulation</gco:CharacterString>
+                    </mri:keyword>
+                    <mri:keyword>
+                        <gco:CharacterString>Oceans | Ocean Temperature | Water Temperature</gco:CharacterString>
+                    </mri:keyword>
+                    <mri:type>
+                        <mri:MD_KeywordTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_KeywordTypeCode" codeListValue="discipline" />
+                    </mri:type>
+                    <mri:thesaurusName>
+                        <cit:CI_Citation>
+                            <cit:title>
+                                <gco:CharacterString>Global Change Master Directory Earth Science Keywords v.5.3.8</gco:CharacterString>
+                            </cit:title>
+                            <cit:date>
+                                <cit:CI_Date>
+                                    <cit:date>
+                                        <gco:DateTime>2007-04-17T10:31:00</gco:DateTime>
+                                    </cit:date>
+                                    <cit:dateType>
+                                        <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode" codeListValue="revision" />
+                                    </cit:dateType>
+                                </cit:CI_Date>
+                            </cit:date>
+                            <cit:citedResponsibleParty>
+                                <cit:CI_Responsibility>
+                                    <cit:role>
+                                        <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="owner" />
+                                    </cit:role>
+                                    <cit:party>
+                                        <cit:CI_Organisation>
+                                            <cit:name>
+                                                <gco:CharacterString>NASA</gco:CharacterString>
+                                            </cit:name>
+                                            <cit:contactInfo>
+                                                <cit:CI_Contact>
+                                                    <cit:onlineResource>
+                                                        <cit:CI_OnlineResource>
+                                                            <cit:linkage>
+                                                                <gco:CharacterString>http://gcmd.gsfc.nasa.gov/Resources/valids/</gco:CharacterString>
+                                                            </cit:linkage>
+                                                            <cit:protocol>
+                                                                <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
+                                                            </cit:protocol>
+                                                        </cit:CI_OnlineResource>
+                                                    </cit:onlineResource>
+                                                </cit:CI_Contact>
+                                            </cit:contactInfo>
+                                        </cit:CI_Organisation>
+                                    </cit:party>
+                                </cit:CI_Responsibility>
+                            </cit:citedResponsibleParty>
+                        </cit:CI_Citation>
+                    </mri:thesaurusName>
+                </mri:MD_Keywords>
+            </mri:descriptiveKeywords>
+            <mri:descriptiveKeywords>
+                <mri:MD_Keywords>
+                    <mri:keyword>
+                        <gco:CharacterString>station_name</gco:CharacterString>
+                    </mri:keyword>
+                    <mri:keyword>
+                        <gco:CharacterString>time</gco:CharacterString>
+                    </mri:keyword>
+                    <mri:keyword>
+                        <gco:CharacterString>date</gco:CharacterString>
+                    </mri:keyword>
+                    <mri:keyword>
+                        <gco:CharacterString>depth</gco:CharacterString>
+                    </mri:keyword>
+                    <mri:keyword>
+                        <gco:CharacterString>latitude</gco:CharacterString>
+                    </mri:keyword>
+                    <mri:keyword>
+                        <gco:CharacterString>longitude</gco:CharacterString>
+                    </mri:keyword>
+                    <mri:keyword>
+                        <gco:CharacterString>distance</gco:CharacterString>
+                    </mri:keyword>
+                    <mri:keyword>
+                        <gco:CharacterString>bearing</gco:CharacterString>
+                    </mri:keyword>
+                    <mri:keyword>
+                        <gco:CharacterString>sea_water_temperature</gco:CharacterString>
+                    </mri:keyword>
+                    <mri:keyword>
+                        <gco:CharacterString>sea_water_salinity</gco:CharacterString>
+                    </mri:keyword>
+                    <mri:keyword>
+                        <gco:CharacterString>sea_water_density</gco:CharacterString>
+                    </mri:keyword>
+                    <mri:type>
+                        <mri:MD_KeywordTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_KeywordTypeCode" codeListValue="theme" />
+                    </mri:type>
+                </mri:MD_Keywords>
+            </mri:descriptiveKeywords>
+            <mri:resourceConstraints>
+                <mco:MD_LegalConstraints>
+                    <mco:accessConstraints>
+                        <mco:MD_RestrictionCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_RestrictionCode" codeListValue="copyright" />
+                    </mco:accessConstraints>
+                    <mco:useConstraints>
+                        <mco:MD_RestrictionCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_RestrictionCode" codeListValue="copyright" />
+                    </mco:useConstraints>
+                    <mco:otherConstraints>
+                        <gco:CharacterString>© Commonwealth of Australia 2008. The Commonwealth gives no warranty regarding the data's accuracy, completeness, currency or suitability for any particular purpose. All data provided through this record are subject to a licence setting out the conditions under which the data may be used, and the rights and responsibilities of the data receiver. The licence may be viewed at: http://www.osdm.gov.au/OSDM/Policies+and+Guidelines/Spatial+Data+Access+and+Pricing/OSDM+Licence+Internet+-+no+registration/default.aspx.</gco:CharacterString>
+                    </mco:otherConstraints>
+                </mco:MD_LegalConstraints>
+            </mri:resourceConstraints>
+            <mri:resourceConstraints>
+                <mco:MD_Constraints>
+                    <mco:useLimitation>
+                        <gco:CharacterString>Every effort has been made to archive the project data and details as accurately as possible. It should be recognised however, that due to the passing away of the principal investigator in 2002, this archival was undertaken by a data facilitator not involved with the original data collection.</gco:CharacterString>
+                    </mco:useLimitation>
+                </mco:MD_Constraints>
+            </mri:resourceConstraints>
+            <mri:associatedResource>
+                <mri:MD_AssociatedResource>
+                    <mri:name>
+                        <cit:CI_Citation>
+                            <cit:title>
+                                <gco:CharacterString>Parent record: Temperature salinity (CTD) profiles conducted within Jervis Bay and out across the shelf</gco:CharacterString>
+                            </cit:title>
+                            <cit:date>
+                                <cit:CI_Date>
+                                    <cit:date>
+                                        <gco:DateTime>2008-04-17T00:00:00</gco:DateTime>
+                                    </cit:date>
+                                    <cit:dateType>
+                                        <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                                    </cit:dateType>
+                                </cit:CI_Date>
+                            </cit:date>
+                            <cit:citedResponsibleParty>
+                                <cit:CI_Responsibility>
+                                    <cit:role>
+                                        <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="processor" />
+                                    </cit:role>
+                                    <cit:party>
+                                        <cit:CI_Individual>
+                                            <cit:contactInfo>
+                                                <cit:CI_Contact>
+                                                    <cit:address>
+                                                        <cit:CI_Address>
+                                                            <cit:electronicMailAddress>
+                                                                <gco:CharacterString>info@bluenet.org.au</gco:CharacterString>
+                                                            </cit:electronicMailAddress>
+                                                        </cit:CI_Address>
+                                                    </cit:address>
+                                                </cit:CI_Contact>
+                                            </cit:contactInfo>
+                                            <cit:positionName>
+                                                <gco:CharacterString>BlueNet Data Facilitator</gco:CharacterString>
+                                            </cit:positionName>
+                                        </cit:CI_Individual>
+                                    </cit:party>
+                                </cit:CI_Responsibility>
+                            </cit:citedResponsibleParty>
+                        </cit:CI_Citation>
+                    </mri:name>
+                    <mri:associationType gco:nilReason="missing" />
+                </mri:MD_AssociatedResource>
+            </mri:associatedResource>
+            <mri:defaultLocale>
+                <lan:PT_Locale>
+                    <lan:language>
+                        <lan:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="eng" />
+                    </lan:language>
+                    <lan:characterEncoding>
+                        <lan:MD_CharacterSetCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_CharacterSetCode" codeListValue="utf8" />
+                    </lan:characterEncoding>
+                </lan:PT_Locale>
+            </mri:defaultLocale>
+            <mri:supplementalInformation>
+                <gco:CharacterString>[Holloway, P.E., Symonds, G. Nunes-Vaz, R. &amp; M. Jeffrey. 1991: Oceanographic Measurements in Jervis Bay: April 1989 to April 1990: Working Paper 1991/1, Department of Geography and Oceanography, University College, Australian Defence Force Academy, Canberra, 48pp]
+                    [Holloway, P.E., Symonds, G. Nunes-Vaz, R., Jeffrey, M. &amp; J.Mathias. 1989: Oceanographic Measurements in Jervis Bay: December 1988 to January 1989: Working Paper 1989/2, Department of Geography and Oceanography, University College, Australian Defence Force Academy, Canberra, 44pp]
+                    [Holloway, P.E., Symonds, G. Nunes-Vaz, R. &amp; M. Jeffrey. 1991: Oceanographic Measurements in Jervis Bay: July to October 1990: Working Paper 1991/2, Department of Geography and Oceanography, University College, Australian Defence Force Academy, Canberra, 29pp]
+                    [Holloway, P.E., Symonds, G. &amp; R. Nunes-Vaz. 1992: Temperature and salinity measurements in the Jervis Bay region May 1990 to December 1991: Working Paper 1992/1, Department of Geography and Oceanography, University College, Australian Defence Force Academy, Canberra, 64pp]
+                    [Holloway, P.E., Symonds, G., Nunes-Vaz, R. &amp; M. Jeffrey. 1990: Temperature and salinity measurements in Jervis Bay and on the adjacent shelf February 1988 to April 1990: Working Paper 1990/1, Department of Geography and Oceanography, University College, Australian Defence Force Academy, Canberra, 65pp]
+                    [Holloway, P.E., Symonds, G. &amp; R. Nunes-Vaz. 1992: Acoustic doppler current profiler measurements in Jervis Bay December 1990 to January 1991 and July 1991 to September 1991: Working Paper 1992/2, Department of Geography and Oceanography, University College, Australian Defence Force Academy, Canberra, 42pp]
+                    [Holloway, P.E., Symonds, G. &amp; R. Nunes-Vaz. 1992: Observations of circulation and exchange processes in Jervis Bay, New South Wales: Australian Journal of Marine and Freshwater Research, 43 (6), 1487-1515]
+                    [Craig, P.D. &amp; P.E. Holloway. 1992: The influence of coastally trapped waves on the circulation in Jervis Bay, New South Wales: in. Dynamics and Exchanges in Estuaries and the Coastal Zone, ed. D. Prantle, Coastal and Estuarine Studies, 40, Springer-Verlag, New York, pp. 9-33]</gco:CharacterString>
+            </mri:supplementalInformation>
+        </mri:MD_DataIdentification>
+    </mdb:identificationInfo>
+    <mdb:contentInfo>
+        <mrc:MD_CoverageDescription>
+            <mrc:attributeDescription gco:nilReason="inapplicable" />
+            <mrc:attributeGroup>
+                <mrc:MD_AttributeGroup>
+                    <mrc:contentType>
+                        <mrc:MD_CoverageContentTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_CoverageContentTypeCode" codeListValue="physicalMeasurement" />
+                    </mrc:contentType>
+                    <mrc:attribute>
+                        <mrc:MD_SampleDimension>
+                            <mrc:description gco:nilReason="missing">
+                                <gco:CharacterString />
+                            </mrc:description>
+                            <mrc:name>
+                                <mcc:MD_Identifier>
+                                    <mcc:code>
+                                        <gco:CharacterString>station_name</gco:CharacterString>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </mrc:name>
+                            <mrc:units>
+                                <gml:BaseUnit gml:id="d20e370">
+                                    <gml:identifier codeSpace="unknown" />
+                                    <gml:name>no units</gml:name>
+                                    <gml:unitsSystem />
+                                </gml:BaseUnit>
+                            </mrc:units>
+                        </mrc:MD_SampleDimension>
+                    </mrc:attribute>
+                    <mrc:attribute>
+                        <mrc:MD_SampleDimension>
+                            <mrc:description>
+                                <gco:CharacterString>Australian Eastern Standard Time (AEST)</gco:CharacterString>
+                            </mrc:description>
+                            <mrc:name>
+                                <mcc:MD_Identifier>
+                                    <mcc:code>
+                                        <gco:CharacterString>time</gco:CharacterString>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </mrc:name>
+                            <mrc:units>
+                                <gml:BaseUnit gml:id="d20e391">
+                                    <gml:identifier codeSpace="unknown" />
+                                    <gml:name>no units</gml:name>
+                                    <gml:unitsSystem />
+                                </gml:BaseUnit>
+                            </mrc:units>
+                        </mrc:MD_SampleDimension>
+                    </mrc:attribute>
+                    <mrc:attribute>
+                        <mrc:MD_SampleDimension>
+                            <mrc:description gco:nilReason="missing">
+                                <gco:CharacterString />
+                            </mrc:description>
+                            <mrc:name>
+                                <mcc:MD_Identifier>
+                                    <mcc:code>
+                                        <gco:CharacterString>date</gco:CharacterString>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </mrc:name>
+                            <mrc:units>
+                                <gml:BaseUnit gml:id="d20e412">
+                                    <gml:identifier codeSpace="unknown" />
+                                    <gml:name>no units</gml:name>
+                                    <gml:unitsSystem />
+                                </gml:BaseUnit>
+                            </mrc:units>
+                        </mrc:MD_SampleDimension>
+                    </mrc:attribute>
+                    <mrc:attribute>
+                        <mrc:MD_SampleDimension>
+                            <mrc:description>
+                                <gco:CharacterString>Water depth</gco:CharacterString>
+                            </mrc:description>
+                            <mrc:name>
+                                <mcc:MD_Identifier>
+                                    <mcc:code>
+                                        <gco:CharacterString>depth</gco:CharacterString>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </mrc:name>
+                            <mrc:units>
+                                <gml:BaseUnit gml:id="d20e433">
+                                    <gml:identifier codeSpace="unknown" />
+                                    <gml:name>Metres</gml:name>
+                                    <gml:unitsSystem />
+                                </gml:BaseUnit>
+                            </mrc:units>
+                        </mrc:MD_SampleDimension>
+                    </mrc:attribute>
+                    <mrc:attribute>
+                        <mrc:MD_SampleDimension>
+                            <mrc:description>
+                                <gco:CharacterString>Station coordinates</gco:CharacterString>
+                            </mrc:description>
+                            <mrc:name>
+                                <mcc:MD_Identifier>
+                                    <mcc:code>
+                                        <gco:CharacterString>latitude</gco:CharacterString>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </mrc:name>
+                            <mrc:name>
+                                <mcc:MD_Identifier>
+                                    <mcc:code>
+                                        <gco:CharacterString>longitude</gco:CharacterString>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </mrc:name>
+                            <mrc:units>
+                                <gml:BaseUnit gml:id="d20e455">
+                                    <gml:identifier codeSpace="unknown" />
+                                    <gml:name>Degrees</gml:name>
+                                    <gml:unitsSystem />
+                                </gml:BaseUnit>
+                            </mrc:units>
+                        </mrc:MD_SampleDimension>
+                    </mrc:attribute>
+                    <mrc:attribute>
+                        <mrc:MD_SampleDimension>
+                            <mrc:description>
+                                <gco:CharacterString>Distance from Plantation Pt.</gco:CharacterString>
+                            </mrc:description>
+                            <mrc:name>
+                                <mcc:MD_Identifier>
+                                    <mcc:code>
+                                        <gco:CharacterString>distance</gco:CharacterString>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </mrc:name>
+                            <mrc:units>
+                                <gml:BaseUnit gml:id="d20e484">
+                                    <gml:identifier codeSpace="unknown" />
+                                    <gml:name>Kilometres and Nautical miles</gml:name>
+                                    <gml:unitsSystem />
+                                </gml:BaseUnit>
+                            </mrc:units>
+                        </mrc:MD_SampleDimension>
+                    </mrc:attribute>
+                    <mrc:attribute>
+                        <mrc:MD_SampleDimension>
+                            <mrc:description>
+                                <gco:CharacterString>Bearing to either Pt. Perpendicular or Plantation Pt.</gco:CharacterString>
+                            </mrc:description>
+                            <mrc:name>
+                                <mcc:MD_Identifier>
+                                    <mcc:code>
+                                        <gco:CharacterString>bearing</gco:CharacterString>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </mrc:name>
+                            <mrc:units>
+                                <gml:BaseUnit gml:id="d20e528">
+                                    <gml:identifier codeSpace="unknown" />
+                                    <gml:name>Degrees true</gml:name>
+                                    <gml:unitsSystem />
+                                </gml:BaseUnit>
+                            </mrc:units>
+                        </mrc:MD_SampleDimension>
+                    </mrc:attribute>
+                    <mrc:attribute>
+                        <mrc:MD_SampleDimension>
+                            <mrc:description gco:nilReason="missing">
+                                <gco:CharacterString />
+                            </mrc:description>
+                            <mrc:name>
+                                <mcc:MD_Identifier>
+                                    <mcc:code>
+                                        <gco:CharacterString>sea_water_temperature</gco:CharacterString>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </mrc:name>
+                            <mrc:units>
+                                <gml:BaseUnit gml:id="d20e550">
+                                    <gml:identifier codeSpace="unknown" />
+                                    <gml:name>Degrees Celsius</gml:name>
+                                    <gml:unitsSystem />
+                                </gml:BaseUnit>
+                            </mrc:units>
+                        </mrc:MD_SampleDimension>
+                    </mrc:attribute>
+                    <mrc:attribute>
+                        <mrc:MD_SampleDimension>
+                            <mrc:description gco:nilReason="missing">
+                                <gco:CharacterString />
+                            </mrc:description>
+                            <mrc:name>
+                                <mcc:MD_Identifier>
+                                    <mcc:code>
+                                        <gco:CharacterString>sea_water_salinity</gco:CharacterString>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </mrc:name>
+                            <mrc:units>
+                                <gml:BaseUnit gml:id="d20e572">
+                                    <gml:identifier codeSpace="unknown" />
+                                    <gml:name>Practical Salinity Units</gml:name>
+                                    <gml:unitsSystem />
+                                </gml:BaseUnit>
+                            </mrc:units>
+                        </mrc:MD_SampleDimension>
+                    </mrc:attribute>
+                    <mrc:attribute>
+                        <mrc:MD_SampleDimension>
+                            <mrc:description gco:nilReason="missing">
+                                <gco:CharacterString />
+                            </mrc:description>
+                            <mrc:name>
+                                <mcc:MD_Identifier>
+                                    <mcc:code>
+                                        <gco:CharacterString>sea_water_density</gco:CharacterString>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </mrc:name>
+                            <mrc:name>
+                                <mcc:MD_Identifier>
+                                    <mcc:code>
+                                        <gco:CharacterString>sigma T</gco:CharacterString>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </mrc:name>
+                            <mrc:units>
+                                <gml:BaseUnit gml:id="d20e594">
+                                    <gml:identifier codeSpace="unknown" />
+                                    <gml:name>no units</gml:name>
+                                    <gml:unitsSystem />
+                                </gml:BaseUnit>
+                            </mrc:units>
+                        </mrc:MD_SampleDimension>
+                    </mrc:attribute>
+                </mrc:MD_AttributeGroup>
+            </mrc:attributeGroup>
+        </mrc:MD_CoverageDescription>
+    </mdb:contentInfo>
+    <mdb:distributionInfo>
+        <mrd:MD_Distribution>
+            <mrd:distributionFormat>
+                <mrd:MD_Format>
+                    <mrd:formatSpecificationCitation>
+                        <cit:CI_Citation>
+                            <cit:title>
+                                <gco:CharacterString>Microsoft Word</gco:CharacterString>
+                            </cit:title>
+                            <cit:alternateTitle />
+                            <cit:date gco:nilReason="unknown" />
+                            <cit:edition>
+                                <gco:CharacterString>2003</gco:CharacterString>
+                            </cit:edition>
+                        </cit:CI_Citation>
+                    </mrd:formatSpecificationCitation>
+                </mrd:MD_Format>
+            </mrd:distributionFormat>
+            <mrd:distributionFormat>
+                <mrd:MD_Format>
+                    <mrd:formatSpecificationCitation>
+                        <cit:CI_Citation>
+                            <cit:title>
+                                <gco:CharacterString>Microsoft Excel</gco:CharacterString>
+                            </cit:title>
+                            <cit:alternateTitle />
+                            <cit:date gco:nilReason="unknown" />
+                            <cit:edition>
+                                <gco:CharacterString>2003</gco:CharacterString>
+                            </cit:edition>
+                        </cit:CI_Citation>
+                    </mrd:formatSpecificationCitation>
+                </mrd:MD_Format>
+            </mrd:distributionFormat>
+            <mrd:distributionFormat>
+                <mrd:MD_Format>
+                    <mrd:formatSpecificationCitation>
+                        <cit:CI_Citation>
+                            <cit:title>
+                                <gco:CharacterString>Windows Photo Gallery</gco:CharacterString>
+                            </cit:title>
+                            <cit:alternateTitle />
+                            <cit:date gco:nilReason="unknown" />
+                            <cit:edition>
+                                <gco:CharacterString>2007</gco:CharacterString>
+                            </cit:edition>
+                        </cit:CI_Citation>
+                    </mrd:formatSpecificationCitation>
+                </mrd:MD_Format>
+            </mrd:distributionFormat>
+            <mrd:distributionFormat>
+                <mrd:MD_Format>
+                    <mrd:formatSpecificationCitation>
+                        <cit:CI_Citation>
+                            <cit:title>
+                                <gco:CharacterString>Adobe Reader</gco:CharacterString>
+                            </cit:title>
+                            <cit:alternateTitle />
+                            <cit:date gco:nilReason="unknown" />
+                            <cit:edition>
+                                <gco:CharacterString>8.1.3</gco:CharacterString>
+                            </cit:edition>
+                        </cit:CI_Citation>
+                    </mrd:formatSpecificationCitation>
+                </mrd:MD_Format>
+            </mrd:distributionFormat>
+            <mrd:transferOptions>
+                <mrd:MD_DigitalTransferOptions>
+                    <mrd:onLine>
+                        <cit:CI_OnlineResource>
+                            <cit:linkage>
+                                <gco:CharacterString>https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/05818c50-14c2-11dd-bdaa-00188b4c0af8/attachments/1989_01_12.zip</gco:CharacterString>
+                            </cit:linkage>
+                            <cit:protocol>
+                                <gco:CharacterString>WWW:DOWNLOAD-1.0-http--downloaddata</gco:CharacterString>
+                            </cit:protocol>
+                            <cit:name>
+                                <gcx:MimeFileType type="application/x-compressed">1989_01_12.zip</gcx:MimeFileType>
+                            </cit:name>
+                            <cit:description>
+                                <gco:CharacterString>Zipped folder (.jpg of station locations / .doc with station coordinates / .xls provides raw CTD data): 12/01/89</gco:CharacterString>
+                            </cit:description>
+                        </cit:CI_OnlineResource>
+                    </mrd:onLine>
+                    <mrd:onLine>
+                        <cit:CI_OnlineResource>
+                            <cit:linkage>
+                                <gco:CharacterString>https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/05818c50-14c2-11dd-bdaa-00188b4c0af8/attachments/1989_02_09.zip</gco:CharacterString>
+                            </cit:linkage>
+                            <cit:protocol>
+                                <gco:CharacterString>WWW:DOWNLOAD-1.0-http--downloaddata</gco:CharacterString>
+                            </cit:protocol>
+                            <cit:name>
+                                <gcx:MimeFileType type="application/x-compressed">1989_02_09.zip</gcx:MimeFileType>
+                            </cit:name>
+                            <cit:description>
+                                <gco:CharacterString>Zipped folder (.jpg of station locations / .doc with station coordinates / .xls provides raw CTD data): 09/02/89</gco:CharacterString>
+                            </cit:description>
+                        </cit:CI_OnlineResource>
+                    </mrd:onLine>
+                    <mrd:onLine>
+                        <cit:CI_OnlineResource>
+                            <cit:linkage>
+                                <gco:CharacterString>https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/05818c50-14c2-11dd-bdaa-00188b4c0af8/attachments/1989_04_13.zip</gco:CharacterString>
+                            </cit:linkage>
+                            <cit:protocol>
+                                <gco:CharacterString>WWW:DOWNLOAD-1.0-http--downloaddata</gco:CharacterString>
+                            </cit:protocol>
+                            <cit:name>
+                                <gcx:MimeFileType type="application/x-compressed">1989_04_13.zip</gcx:MimeFileType>
+                            </cit:name>
+                            <cit:description>
+                                <gco:CharacterString>Zipped folder (.jpg of station locations / .doc with station coordinates / .xls provides raw CTD data): 13/04/89</gco:CharacterString>
+                            </cit:description>
+                        </cit:CI_OnlineResource>
+                    </mrd:onLine>
+                    <mrd:onLine>
+                        <cit:CI_OnlineResource>
+                            <cit:linkage>
+                                <gco:CharacterString>https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/05818c50-14c2-11dd-bdaa-00188b4c0af8/attachments/1989_05_09.zip</gco:CharacterString>
+                            </cit:linkage>
+                            <cit:protocol>
+                                <gco:CharacterString>WWW:DOWNLOAD-1.0-http--downloaddata</gco:CharacterString>
+                            </cit:protocol>
+                            <cit:name>
+                                <gcx:MimeFileType type="application/x-compressed">1989_05_09.zip</gcx:MimeFileType>
+                            </cit:name>
+                            <cit:description>
+                                <gco:CharacterString>Zipped folder (.jpg of station locations / .doc with station coordinates / .xls provides raw CTD data): 09/05/89</gco:CharacterString>
+                            </cit:description>
+                        </cit:CI_OnlineResource>
+                    </mrd:onLine>
+                    <mrd:onLine>
+                        <cit:CI_OnlineResource>
+                            <cit:linkage>
+                                <gco:CharacterString>https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/05818c50-14c2-11dd-bdaa-00188b4c0af8/attachments/1989_07_12.zip</gco:CharacterString>
+                            </cit:linkage>
+                            <cit:protocol>
+                                <gco:CharacterString>WWW:DOWNLOAD-1.0-http--downloaddata</gco:CharacterString>
+                            </cit:protocol>
+                            <cit:name>
+                                <gcx:MimeFileType type="application/x-compressed">1989_07_12.zip</gcx:MimeFileType>
+                            </cit:name>
+                            <cit:description>
+                                <gco:CharacterString>Zipped folder (.jpg of station locations / .doc with station coordinates / .xls provides raw CTD data): 12/07/89</gco:CharacterString>
+                            </cit:description>
+                        </cit:CI_OnlineResource>
+                    </mrd:onLine>
+                    <mrd:onLine>
+                        <cit:CI_OnlineResource>
+                            <cit:linkage>
+                                <gco:CharacterString>https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/05818c50-14c2-11dd-bdaa-00188b4c0af8/attachments/1989_07_28.zip</gco:CharacterString>
+                            </cit:linkage>
+                            <cit:protocol>
+                                <gco:CharacterString>WWW:DOWNLOAD-1.0-http--downloaddata</gco:CharacterString>
+                            </cit:protocol>
+                            <cit:name>
+                                <gcx:MimeFileType type="application/x-compressed">1989_07_28.zip</gcx:MimeFileType>
+                            </cit:name>
+                            <cit:description>
+                                <gco:CharacterString>Zipped folder (.jpg of station locations / .doc with station coordinates / .xls provides raw CTD data): 28/07/89</gco:CharacterString>
+                            </cit:description>
+                        </cit:CI_OnlineResource>
+                    </mrd:onLine>
+                    <mrd:onLine>
+                        <cit:CI_OnlineResource>
+                            <cit:linkage>
+                                <gco:CharacterString>https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/05818c50-14c2-11dd-bdaa-00188b4c0af8/attachments/1989_08_29.zip</gco:CharacterString>
+                            </cit:linkage>
+                            <cit:protocol>
+                                <gco:CharacterString>WWW:DOWNLOAD-1.0-http--downloaddata</gco:CharacterString>
+                            </cit:protocol>
+                            <cit:name>
+                                <gcx:MimeFileType type="application/x-compressed">1989_08_29.zip</gcx:MimeFileType>
+                            </cit:name>
+                            <cit:description>
+                                <gco:CharacterString>Zipped folder (.jpg of station locations / .doc with station coordinates / .xls provides raw CTD data): 29/08/89</gco:CharacterString>
+                            </cit:description>
+                        </cit:CI_OnlineResource>
+                    </mrd:onLine>
+                    <mrd:onLine>
+                        <cit:CI_OnlineResource>
+                            <cit:linkage>
+                                <gco:CharacterString>https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/05818c50-14c2-11dd-bdaa-00188b4c0af8/attachments/1989_11_15.zip</gco:CharacterString>
+                            </cit:linkage>
+                            <cit:protocol>
+                                <gco:CharacterString>WWW:DOWNLOAD-1.0-http--downloaddata</gco:CharacterString>
+                            </cit:protocol>
+                            <cit:name>
+                                <gcx:MimeFileType type="application/x-compressed">1989_11_15.zip</gcx:MimeFileType>
+                            </cit:name>
+                            <cit:description>
+                                <gco:CharacterString>Zipped folder (.jpg of station locations / .doc with station coordinates / .xls provides raw CTD data): 15/11/89</gco:CharacterString>
+                            </cit:description>
+                        </cit:CI_OnlineResource>
+                    </mrd:onLine>
+                    <mrd:onLine>
+                        <cit:CI_OnlineResource>
+                            <cit:linkage>
+                                <gco:CharacterString>https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/05818c50-14c2-11dd-bdaa-00188b4c0af8/attachments/Hierarchy.pdf</gco:CharacterString>
+                            </cit:linkage>
+                            <cit:protocol>
+                                <gco:CharacterString>WWW:DOWNLOAD-1.0-http--downloadother</gco:CharacterString>
+                            </cit:protocol>
+                            <cit:name>
+                                <gcx:MimeFileType type="application/pdf">Hierarchy.pdf</gcx:MimeFileType>
+                            </cit:name>
+                            <cit:description>
+                                <gco:CharacterString>Hierarchy of metadata records relating to the 'Water Circulation of Jervis Bay' project</gco:CharacterString>
+                            </cit:description>
+                        </cit:CI_OnlineResource>
+                    </mrd:onLine>
+                    <mrd:onLine>
+                        <cit:CI_OnlineResource>
+                            <cit:linkage>
+                                <gco:CharacterString>https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/05818c50-14c2-11dd-bdaa-00188b4c0af8/attachments/Temperature_and_Salinity_-_February_1988_to_April_1990.PDF</gco:CharacterString>
+                            </cit:linkage>
+                            <cit:protocol>
+                                <gco:CharacterString>WWW:DOWNLOAD-1.0-http--downloadother</gco:CharacterString>
+                            </cit:protocol>
+                            <cit:name>
+                                <gcx:MimeFileType type="application/pdf">Temperature_and_Salinity_-_February_1988_to_April_1990.PDF</gcx:MimeFileType>
+                            </cit:name>
+                            <cit:description>
+                                <gco:CharacterString>WORKING PAPER 1990/1. Temperature and Salinity: Surveys in Jervis Bay and on the Adjacent Shelf: February 1988 to April 1990</gco:CharacterString>
+                            </cit:description>
+                        </cit:CI_OnlineResource>
+                    </mrd:onLine>
+                    <mrd:onLine>
+                        <cit:CI_OnlineResource>
+                            <cit:linkage>
+                                <gco:CharacterString>http://geoserver-123.aodn.org.au/geoserver/wms</gco:CharacterString>
+                            </cit:linkage>
+                            <cit:protocol>
+                                <gco:CharacterString>OGC:WMS-1.1.1-http-get-map</gco:CharacterString>
+                            </cit:protocol>
+                            <cit:name>
+                                <gco:CharacterString>aodn:JBoceanographic_data</gco:CharacterString>
+                            </cit:name>
+                            <cit:description>
+                                <gco:CharacterString>Jervis Bay Oceanographic Data</gco:CharacterString>
+                            </cit:description>
+                        </cit:CI_OnlineResource>
+                    </mrd:onLine>
+                </mrd:MD_DigitalTransferOptions>
+            </mrd:transferOptions>
+        </mrd:MD_Distribution>
+    </mdb:distributionInfo>
+    <mdb:resourceLineage>
+        <mrl:LI_Lineage>
+            <mrl:statement>
+                <gco:CharacterString>For each day of sampling three resources are provided: 1) A text document providing details of sampling locations, as well as a CTD summary collected from each of the stations every 4-10 metres down the water column, 2) A map showing the location of each sampling station and, 3) An excel file providing the raw CTD data collected.
+
+                    It should be noted that the location of stations were originally recorded as distance from Point Perpendicular or Plantation Point on a specified bearing. While processing this data I have used this information to generate lat/long coordinates for each of the stations.
+
+                    Parameters / Structure: Station name, time (AEST), date, water depth (metres), station coordinates (degrees, seconds, minutes), distance from Plantation Point (km and nm), distance from Pt Perpendicular (km and nm), bearing (T) to either Pt. Perpendicular or Plantation Pt., temperature (oC), salinity (PSU), sigma T (no units).  Google Earth image shows the location of sampling stations.</gco:CharacterString>
+            </mrl:statement>
+            <mrl:scope>
+                <mcc:MD_Scope>
+                    <mcc:level>
+                        <mcc:MD_ScopeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ScopeCode" codeListValue="dataset" />
+                    </mcc:level>
+                </mcc:MD_Scope>
+            </mrl:scope>
+        </mrl:LI_Lineage>
+    </mdb:resourceLineage>
+    <mdb:resourceLineage>
+        <mrl:LI_Lineage>
+            <mrl:statement>
+                <gco:CharacterString>Neil Brown 'Smart' CTD recorder</gco:CharacterString>
+            </mrl:statement>
+            <mrl:scope>
+                <mcc:MD_Scope>
+                    <mcc:level>
+                        <mcc:MD_ScopeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ScopeCode" codeListValue="collectionHardware" />
+                    </mcc:level>
+                    <mcc:levelDescription>
+                        <mcc:MD_ScopeDescription>
+                            <mcc:attributes uuidref="" />
+                        </mcc:MD_ScopeDescription>
+                    </mcc:levelDescription>
+                </mcc:MD_Scope>
+            </mrl:scope>
+        </mrl:LI_Lineage>
+    </mdb:resourceLineage>
+</mdb:MD_Metadata>

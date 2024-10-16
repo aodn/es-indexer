@@ -434,7 +434,9 @@ public abstract class StacCollectionMapperService {
     @Named("mapSummaries.datasetProvider")
     String mapDatasetOwner(MDMetadataType source) {
         List<ProviderModel> providers = mapProviders(source);
-        return providers.stream().anyMatch(p -> p.getName().contains("IMOS")) ? "IMOS" : null;
+        return providers.stream()
+                .filter(p -> p.getName() != null)
+                .anyMatch(p -> p.getName().contains("IMOS")) ? "IMOS" : null;
     }
 
     @Named("mapSummaries.datasetGroup")
