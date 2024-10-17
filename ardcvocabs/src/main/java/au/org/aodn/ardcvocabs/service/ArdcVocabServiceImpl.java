@@ -15,6 +15,10 @@ import org.springframework.web.client.RestTemplate;
 import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.stream.StreamSupport;
+import java.util.stream.Collectors;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ArdcVocabServiceImpl implements ArdcVocabService {
 
@@ -26,9 +30,59 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
     protected RestTemplate restTemplate;
     protected RetryTemplate retryTemplate;
 
-    protected Function<JsonNode, String> label = (node) -> node.has("prefLabel") ? node.get("prefLabel").get("_value").asText() : null;
-    protected Function<JsonNode, String> about = (node) -> node.has("_about") ? node.get("_about").asText() : null;
-    protected Function<JsonNode, String> definition = (node) -> node.has("definition") ? node.get("definition").asText() : null;
+    protected Function<JsonNode, String> extractSingleText(String key) {
+        return (node) -> {
+            JsonNode labelNode = node.get(key);
+            if (labelNode != null) {
+                if (labelNode.has("_value")) {
+                    return labelNode.get("_value").asText();
+                }
+                if (labelNode instanceof TextNode) {
+                    return labelNode.asText();
+                }
+            }
+            return null;
+        };
+    }
+    protected Function<JsonNode, List<String>> extractMultipleTexts(String key) {
+        return (node) -> {
+            JsonNode labelNode = node.get(key);
+            if (labelNode != null && labelNode.isArray()) {
+                return StreamSupport.stream(labelNode.spliterator(), false)
+                        .filter(Objects::nonNull)
+                        .map(i -> i.get("_value").asText())
+                        .collect(Collectors.toList());
+            }
+            return null;
+        };
+    }
+
+    // Reusing the utility methods for specific labels
+    protected Function<JsonNode, String> label = extractSingleText("prefLabel");
+    protected Function<JsonNode, String> displayLabel = extractSingleText("displayLabel");
+    protected Function<JsonNode, List<String>> hiddenLabels = extractMultipleTexts("hiddenLabel");
+    protected Function<JsonNode, List<String>> altLabels = extractMultipleTexts("altLabel");
+    protected Function<JsonNode, String> about = extractSingleText("_about");
+    protected Function<JsonNode, String> definition = extractSingleText("definition");
+    protected Function<JsonNode, Boolean> isLatestLabel = (node) -> !(node.has("isReplacedBy") || (node.has("scopeNote") && extractSingleText("scopeNote").apply(node).toLowerCase().contains("no longer exists")));
+    protected Function<JsonNode, Boolean> isReplacedBy = (node) -> node.has("isReplacedBy") && node.has("scopeNote") && extractSingleText("scopeNote").apply(node).toLowerCase().contains("replaced by");
+
+    private String extractReplacedVocabUri(String scopeNote) {
+        String regex = "Replaced by (https?://[\\w./-]+)";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(scopeNote);
+
+        if (matcher.find()) {
+            String result = matcher.group(1);
+            if (result.endsWith(".")) {
+                result = result.substring(0, result.length() - 1);
+            }
+            return result;
+        }
+
+        return null;
+    }
+
     protected BiFunction<JsonNode, String, Boolean> isNodeValid = (node, item) -> node != null && !node.isEmpty() && node.has(item) && !node.get(item).isEmpty();
 
     public ArdcVocabServiceImpl(RestTemplate restTemplate, RetryTemplate retryTemplate) {
@@ -54,7 +108,15 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
                         .label(label.apply(target))
                         .definition(definition.apply(target))
                         .about(vocabUri)
+                        .displayLabel(displayLabel.apply(target))
+                        .hiddenLabels(hiddenLabels.apply(target))
+                        .altLabels(altLabels.apply(target))
+                        .isLatestLabel(isLatestLabel.apply(target))
                         .build();
+
+                if (!vocab.getIsLatestLabel() && isReplacedBy.apply(target)) {
+                    vocab.setReplacedBy(extractReplacedVocabUri(extractSingleText("scopeNote").apply(target)));
+                }
 
                 List<VocabModel> narrowerNodes = new ArrayList<>();
                 if (isNodeValid.apply(target, "narrower")) {
@@ -130,7 +192,15 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
                                             .label(label.apply(target))
                                             .definition(definition.apply(target))
                                             .about(about.apply(target))
+                                            .displayLabel(displayLabel.apply(target))
+                                            .hiddenLabels(hiddenLabels.apply(target))
+                                            .altLabels(altLabels.apply(target))
+                                            .isLatestLabel(isLatestLabel.apply(target))
                                             .build();
+
+                                    if (!vocab.getIsLatestLabel() && isReplacedBy.apply(target)) {
+                                        vocab.setReplacedBy(extractReplacedVocabUri(extractSingleText("scopeNote").apply(target)));
+                                    }
 
                                     List<VocabModel> vocabNarrower = new ArrayList<>();
                                     if(target.has("narrower") && !target.get("narrower").isEmpty()) {
