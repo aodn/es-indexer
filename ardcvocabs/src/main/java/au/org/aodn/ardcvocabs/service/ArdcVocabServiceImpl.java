@@ -40,7 +40,6 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
                 if (labelNode instanceof TextNode) {
                     return labelNode.asText();
                 }
-                return null;
             }
             return null;
         };
