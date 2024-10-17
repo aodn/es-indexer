@@ -968,7 +968,6 @@ public abstract class StacCollectionMapperService {
 
         return results;
     }
-
     /**
      * Special handle for MimeFileType object.
      * @param onlineResource

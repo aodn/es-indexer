@@ -149,7 +149,7 @@ public class GeometryBase {
                                                         // We need to store it so that we can create the multi-array as told by spec
                                                         Polygon polygon = geoJsonFactory.createPolygon(items.toArray(new Coordinate[0]));
                                                         polygons.add(polygon);
-                                                        logger.debug("MultiSurfaceType 2D Polygon added {}", polygon);
+                                                        logger.debug("MultiSurfaceType 2D added (findPolygonsFromEXBoundingPolygonType) {}", polygon);
                                                     }
                                                     catch(IllegalArgumentException iae) {
                                                         logger.warn("Invalid geometry point for polygon", iae);

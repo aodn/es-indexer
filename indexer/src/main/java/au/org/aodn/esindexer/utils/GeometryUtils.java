@@ -12,6 +12,8 @@ import org.geotools.data.simple.SimpleFeatureCollection;
 import org.geotools.data.simple.SimpleFeatureIterator;
 import org.geotools.data.simple.SimpleFeatureSource;
 import org.geotools.geojson.geom.GeometryJSON;
+import org.locationtech.jts.algorithm.Area;
+import org.locationtech.jts.algorithm.Orientation;
 import org.locationtech.jts.geom.*;
 import org.locationtech.jts.operation.union.UnaryUnionOp;
 import org.locationtech.jts.simplify.DouglasPeuckerSimplifier;
@@ -27,6 +29,12 @@ import java.util.concurrent.*;
 import java.util.function.Function;
 
 public class GeometryUtils {
+
+    public enum PointOrientation {
+        CLOCKWISE,
+        COUNTER_CLOCKWISE,
+        FLAT
+    }
 
     protected static Logger logger = LogManager.getLogger(GeometryUtils.class);
     protected static GeometryFactory factory = new GeometryFactory(new PrecisionModel(), 4326);
@@ -141,8 +149,10 @@ public class GeometryUtils {
 
             GeometryCollection collection = new GeometryCollection(orientedPolygons.toArray(new Geometry[0]), factory);
             try (StringWriter writer = new StringWriter()) {
-
-                GeometryJSON geometryJson = new GeometryJSON();
+                // This must be hard code and cannot change, the geonetwork comes with some very long decimal coordinate
+                // if we do not preserve this, we will result polygon rejected by elastic due to not having 3 non-collinear
+                // points after rounding by the GeometryJson
+                GeometryJSON geometryJson = new GeometryJSON(15);
                 geometryJson.write(collection, writer);
 
                 Map<?, ?> values = objectMapper.readValue(writer.toString(), HashMap.class);
@@ -170,14 +180,19 @@ public class GeometryUtils {
      * @param coordinates Array of polygon coordinates.
      * @return True if vertices are ordered counterclockwise, False otherwise.
      */
-    protected static boolean isCounterClockwise(Coordinate[] coordinates) {
-        double sum = 0.0;
-        for (int i = 0, n = coordinates.length; i < n - 1; i++) {
-            Coordinate current = coordinates[i];
-            Coordinate next = coordinates[i + 1];
-            sum += (next.x - current.x) * (next.y + current.y);
+    protected static PointOrientation orientation(Coordinate[] coordinates) {
+        // Computes the signed area for a ring. The signed area is positive if the ring is oriented CW,
+        // negative if the ring is oriented CCW, and zero if the ring is degenerate or flat.
+        double orientation = Area.ofRingSigned(coordinates);
+        if(orientation > 0) {
+            return PointOrientation.CLOCKWISE;
         }
-        return sum < 0.0;
+        else if(orientation < 0) {
+            return PointOrientation.COUNTER_CLOCKWISE;
+        }
+        else {
+            return PointOrientation.FLAT;
+        }
     }
     /**
      * Ensures that a polygon's vertices are ordered counterclockwise.
@@ -192,21 +207,20 @@ public class GeometryUtils {
     protected static Polygon ensureCounterClockwise(Polygon polygon, GeometryFactory factory) {
         // Check and reorder exterior ring if necessary
         LinearRing shell = polygon.getExteriorRing();
-        if (!isCounterClockwise(shell.getCoordinates())) {
-            shell = factory.createLinearRing(reverseCoordinates(shell.getCoordinates()));
+        if (orientation(shell.getCoordinates()) == PointOrientation.CLOCKWISE) {
+            shell = shell.reverse();
         }
 
         // Check and reorder each interior ring (hole) if necessary
         LinearRing[] holes = new LinearRing[polygon.getNumInteriorRing()];
         for (int i = 0; i < holes.length; i++) {
             LinearRing hole = polygon.getInteriorRingN(i);
-            if (isCounterClockwise(hole.getCoordinates())) {
-                hole = factory.createLinearRing(reverseCoordinates(hole.getCoordinates()));
+            if (orientation(hole.getCoordinates()) == PointOrientation.COUNTER_CLOCKWISE) {
+                hole = hole.reverse();
             }
             holes[i] = hole;
         }
 
-        // Return a new polygon with the correctly ordered shell and holes
         return factory.createPolygon(shell, holes);
     }
     /**
@@ -218,12 +232,8 @@ public class GeometryUtils {
      * @return Array of coordinates in reversed order.
      */
     protected static Coordinate[] reverseCoordinates(Coordinate[] coords) {
-        int n = coords.length;
-        Coordinate[] reversed = new Coordinate[n];
-        for (int i = 0; i < n; i++) {
-            reversed[i] = coords[n - 1 - i];
-        }
-        return reversed;
+        CoordinateArrays.reverse(coords);
+        return coords;
     }
     /**
      * Create a grid based on the area of the spatial extents. Once we have the grid, we can union the area
@@ -285,7 +295,7 @@ public class GeometryUtils {
      * @return - A polygon the break into grid.
      */
     protected static List<Geometry> breakLargeGeometryToGrid(final Geometry large) {
-        logger.debug("Start break down large geometry");
+        logger.debug("Break down large geometry to grid {}", large);
         // Get the bounding box (extent) of the large polygon
         Envelope envelope = large.getEnvelopeInternal();
 
@@ -321,8 +331,6 @@ public class GeometryUtils {
                 // Nothing to report
             }
         }
-
-        logger.debug("End break down large geometry");
         return intersectedPolygons;
     }
 
