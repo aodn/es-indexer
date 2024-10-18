@@ -1,5 +1,7 @@
 package au.org.aodn.esindexer.controller;
 
+import au.org.aodn.esindexer.model.Dataset;
+import au.org.aodn.esindexer.service.DatasetAccessService;
 import au.org.aodn.esindexer.service.IndexerService;
 import au.org.aodn.esindexer.service.GeoNetworkService;
 import co.elastic.clients.elasticsearch.core.BulkResponse;
@@ -32,6 +34,9 @@ public class IndexerController {
 
     @Autowired
     GeoNetworkService geonetworkResourceService;
+
+    @Autowired
+    DatasetAccessService datasetAccessService;
 
     @GetMapping(path="/records/{uuid}", produces = "application/json")
     @Operation(description = "Get a document from GeoNetwork by UUID directly - JSON format response")
@@ -148,5 +153,14 @@ public class IndexerController {
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Delete a metadata record by UUID")
     public ResponseEntity<String> deleteDocumentByUUID(@PathVariable("uuid") String uuid) throws IOException {
         return indexerService.deleteDocumentByUUID(uuid);
+    }
+
+    @PostMapping(path="/{uuid}/dataset", produces = "application/json")
+    @Operation(security = {@SecurityRequirement(name = "X-API-Key") }, description = "Index a dataset by UUID")
+    public ResponseEntity<String> addDatasetByUUID(@PathVariable("uuid") String uuid) throws Exception {
+        Dataset dataset = datasetAccessService.getIndexingDatasetBy(uuid);
+        CompletableFuture<ResponseEntity> future = indexerService.indexDataset(dataset);
+//        return ResponseEntity.ok("Dataset indexed successfully");
+        return future.join();
     }
 }
