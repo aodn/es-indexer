@@ -485,7 +485,7 @@ public class IndexerServiceImpl implements IndexerService {
     protected BulkResponse reduceResponse(BulkResponse in) {
         List<BulkResponseItem> errors = in.items()
                 .stream()
-                .filter(p -> p.status() != HttpStatus.CREATED.value())
+                .filter(p -> p.status() != HttpStatus.CREATED.value() || p.status() != HttpStatus.OK.value())
                 .toList();
 
         return errors.isEmpty() ?
