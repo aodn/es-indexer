@@ -1,213 +1,967 @@
 {
-  "title" : "RapidBenthos",
-  "description" : "Link to 12 3D photogrammetric models and underlying images to replicate the method presented in the publication titled &ldquo;RapidBenthos &ndash; Automated segmentation and multi-view classification of coral reef communities from photogrammetric reconstruction&rdquo;. These sites were selected to assess the performance of RapidBenthos in different environmental conditions and reef habitats, as they ranged from high visibility offshore reefs to turbid inshore reefs, spanned depths from 5 to 15 meters, and included a range of intra-reefal environments (i.e., reef front, flank, back, and lagoon).\n\n\n                    All sites were imaged using a standardized diver-rig photogrammetry workflow described by Gordon et al. (2023). High-resolution benthic images (5686 x 3217 pixels) were captured using two Nikon D850 DSLR cameras with 20 mm Nikkor prime lens shooting at 0.5 second intervals (full camera settings described in (Gordon et al., 2023). Cameras were housed in Nauticam underwater housings with 8-inch dome ports and were mounted on an aluminium rig at a distance of 57 cm between lenses (60 % overlap between adjacent images, Figure 1c). Each site was imaged by a single diver on SCUBA over a period of 10-15 minutes to capture approximately 3,000 photos. Nadiral and oblique imagery was captured at an altitude of approximately 1.5 m using a &ldquo;lawn-mowing&rdquo; swim pattern consisting of 5 longitudinal passes and an additional 4-8 perpendicular passes. The swim pattern and speed used ensured a minimum overlap of 80 and 60 % between temporally and spatially adjacent photos, respectively (Figure 1d). Six GPCs were distributed across the depth gradient of the site prior imaging to scale resultant models in X, Y, and Z axes (details provided in(Gordon et al., 2023). Depth was also recorded for each GPC to incorporate bathymetric information into 3D model building.\n\n\n                    The RapidBenthos workflow was applyed to each plots, segmenting and calssifying benthic constituents on the orthomosaics. This method resulted in extracting community compostion and colony-level metrics (i.e., colony planar-area and colony frequency). The significance of this research lies in devlopping a workflow that automatically extract community composition information from close-range photogrammetry in any coral reefs environment. We eveluated that our method was 195 time faster than manual segmentation and classification allowing to sustainably scale 3D photogrammetry mointoring, both in replication and size of reefs surveyed compared to manual data extraction.\n\n\n                    Due to the large data files, the data can be accessed on request.",
-  "extent" : {
-    "bbox" : [ [ 142.9417419434, -23.8933715259, 152.3920440674, -9.7347748815 ], [ 142.9417419434, -9.998605505, 142.9417419434, -9.998605505 ], [ 143.396987915, -9.7347748815, 143.396987915, -9.7347748815 ], [ 143.396987915, -9.8470978307, 143.396987915, -9.8470978307 ], [ 145.4428482056, -14.6852319114, 145.4428482056, -14.6852319114 ], [ 146.227684021, -16.86303383, 146.227684021, -16.86303383 ], [ 146.4995956421, -18.5720601133, 146.4995956421, -18.5720601133 ], [ 146.5195083618, -18.643642707, 146.5195083618, -18.643642707 ], [ 147.6466369629, -18.778916369, 147.6466369629, -18.778916369 ], [ 150.9700870514, -23.1967007098, 150.9700870514, -23.1967007098 ], [ 151.9247817993, -23.4456087744, 151.9247817993, -23.4456087744 ], [ 152.3920440674, -23.8933715259, 152.3920440674, -23.8933715259 ] ],
-    "temporal" : [ [ "2021-09-30T14:00:00Z", "2022-12-31T12:59:59Z" ], [ "2021-09-30T14:00:00Z", "2022-12-31T12:59:59Z" ] ]
+  "title": "RapidBenthos",
+  "description": "Link to 12 3D photogrammetric models and underlying images to replicate the method presented in the publication titled &ldquo;RapidBenthos &ndash; Automated segmentation and multi-view classification of coral reef communities from photogrammetric reconstruction&rdquo;. These sites were selected to assess the performance of RapidBenthos in different environmental conditions and reef habitats, as they ranged from high visibility offshore reefs to turbid inshore reefs, spanned depths from 5 to 15 meters, and included a range of intra-reefal environments (i.e., reef front, flank, back, and lagoon).\n\n\n                    All sites were imaged using a standardized diver-rig photogrammetry workflow described by Gordon et al. (2023). High-resolution benthic images (5686 x 3217 pixels) were captured using two Nikon D850 DSLR cameras with 20 mm Nikkor prime lens shooting at 0.5 second intervals (full camera settings described in (Gordon et al., 2023). Cameras were housed in Nauticam underwater housings with 8-inch dome ports and were mounted on an aluminium rig at a distance of 57 cm between lenses (60 % overlap between adjacent images, Figure 1c). Each site was imaged by a single diver on SCUBA over a period of 10-15 minutes to capture approximately 3,000 photos. Nadiral and oblique imagery was captured at an altitude of approximately 1.5 m using a &ldquo;lawn-mowing&rdquo; swim pattern consisting of 5 longitudinal passes and an additional 4-8 perpendicular passes. The swim pattern and speed used ensured a minimum overlap of 80 and 60 % between temporally and spatially adjacent photos, respectively (Figure 1d). Six GPCs were distributed across the depth gradient of the site prior imaging to scale resultant models in X, Y, and Z axes (details provided in(Gordon et al., 2023). Depth was also recorded for each GPC to incorporate bathymetric information into 3D model building.\n\n\n                    The RapidBenthos workflow was applyed to each plots, segmenting and calssifying benthic constituents on the orthomosaics. This method resulted in extracting community compostion and colony-level metrics (i.e., colony planar-area and colony frequency). The significance of this research lies in devlopping a workflow that automatically extract community composition information from close-range photogrammetry in any coral reefs environment. We eveluated that our method was 195 time faster than manual segmentation and classification allowing to sustainably scale 3D photogrammetry mointoring, both in replication and size of reefs surveyed compared to manual data extraction.\n\n\n                    Due to the large data files, the data can be accessed on request.",
+  "extent": {
+    "bbox": [
+      [
+        142.9417419434,
+        -23.8933715259,
+        152.3920440674,
+        -9.7347748815
+      ],
+      [
+        142.9417419434,
+        -9.998605505,
+        142.9417419434,
+        -9.998605505
+      ],
+      [
+        143.396987915,
+        -9.7347748815,
+        143.396987915,
+        -9.7347748815
+      ],
+      [
+        143.396987915,
+        -9.8470978307,
+        143.396987915,
+        -9.8470978307
+      ],
+      [
+        145.4428482056,
+        -14.6852319114,
+        145.4428482056,
+        -14.6852319114
+      ],
+      [
+        146.227684021,
+        -16.86303383,
+        146.227684021,
+        -16.86303383
+      ],
+      [
+        146.4995956421,
+        -18.5720601133,
+        146.4995956421,
+        -18.5720601133
+      ],
+      [
+        146.5195083618,
+        -18.643642707,
+        146.5195083618,
+        -18.643642707
+      ],
+      [
+        147.6466369629,
+        -18.778916369,
+        147.6466369629,
+        -18.778916369
+      ],
+      [
+        150.9700870514,
+        -23.1967007098,
+        150.9700870514,
+        -23.1967007098
+      ],
+      [
+        151.9247817993,
+        -23.4456087744,
+        151.9247817993,
+        -23.4456087744
+      ],
+      [
+        152.3920440674,
+        -23.8933715259,
+        152.3920440674,
+        -23.8933715259
+      ]
+    ],
+    "temporal": [
+      [
+        "2021-09-30T14:00:00Z",
+        "2022-12-31T12:59:59Z"
+      ],
+      [
+        "2021-09-30T14:00:00Z",
+        "2022-12-31T12:59:59Z"
+      ]
+    ]
   },
-  "summaries" : {
-    "score" : 75,
-    "status" : "completed",
-    "credits" : [ "This data was collected by the 'Field integrated testing project' of EcoRRAP. We thank all team members, students, and volunteers for their efforts.", "The Reef Restoration and Adaptation Program is funded by the partnership between the Australian Government’s Reef Trust and the Great Barrier Reef Foundation." ],
-    "scope" : {
-      "code" : "dataset",
-      "name" : ""
+  "summaries": {
+    "score": 75,
+    "status": "completed",
+    "credits": [
+      "This data was collected by the 'Field integrated testing project' of EcoRRAP. We thank all team members, students, and volunteers for their efforts.",
+      "The Reef Restoration and Adaptation Program is funded by the partnership between the Australian Government’s Reef Trust and the Great Barrier Reef Foundation."
+    ],
+    "scope": {
+      "code": "dataset",
+      "name": ""
     },
-    "statement" : "",
-    "creation" : "2024-05-10T00:00:00",
-    "revision" : "2024-05-16T00:00:00",
-    "dataset_group" : "sample",
-    "update_frequency" : "completed",
-    "proj:geometry" : {
-      "geometries" : [ {
-        "type" : "Point",
-        "coordinates" : [ 142.9417, -9.9986 ]
-      }, {
-        "type" : "Point",
-        "coordinates" : [ 143.397, -9.7348 ]
-      }, {
-        "type" : "Point",
-        "coordinates" : [ 143.397, -9.8471 ]
-      }, {
-        "type" : "Point",
-        "coordinates" : [ 145.4428, -14.6852 ]
-      }, {
-        "type" : "Point",
-        "coordinates" : [ 146.2277, -16.863 ]
-      }, {
-        "type" : "Point",
-        "coordinates" : [ 146.4996, -18.5721 ]
-      }, {
-        "type" : "Point",
-        "coordinates" : [ 146.5195, -18.6436 ]
-      }, {
-        "type" : "Point",
-        "coordinates" : [ 147.6466, -18.7789 ]
-      }, {
-        "type" : "Point",
-        "coordinates" : [ 150.9701, -23.1967 ]
-      }, {
-        "type" : "Point",
-        "coordinates" : [ 151.9248, -23.4456 ]
-      }, {
-        "type" : "Point",
-        "coordinates" : [ 152.392, -23.8934 ]
-      } ],
-      "type" : "GeometryCollection"
+    "statement": "",
+    "creation": "2024-05-10T00:00:00",
+    "revision": "2024-05-16T00:00:00",
+    "dataset_group": "sample",
+    "update_frequency": "completed",
+    "proj:geometry": {
+      "geometries": [
+        {
+          "type": "Point",
+          "coordinates": [
+            142.9417419433594,
+            -9.998605505008365
+          ]
+        },
+        {
+          "type": "Point",
+          "coordinates": [
+            143.3969879150391,
+            -9.734774881537218
+          ]
+        },
+        {
+          "type": "Point",
+          "coordinates": [
+            143.3969879150391,
+            -9.847097830667153
+          ]
+        },
+        {
+          "type": "Point",
+          "coordinates": [
+            145.44284820556643,
+            -14.685231911438933
+          ]
+        },
+        {
+          "type": "Point",
+          "coordinates": [
+            146.22768402099612,
+            -16.863033829999537
+          ]
+        },
+        {
+          "type": "Point",
+          "coordinates": [
+            146.4995956420899,
+            -18.572060113333826
+          ]
+        },
+        {
+          "type": "Point",
+          "coordinates": [
+            146.51950836181643,
+            -18.643642706975996
+          ]
+        },
+        {
+          "type": "Point",
+          "coordinates": [
+            147.64663696289065,
+            -18.77891636903418
+          ]
+        },
+        {
+          "type": "Point",
+          "coordinates": [
+            150.97008705139163,
+            -23.196700709795724
+          ]
+        },
+        {
+          "type": "Point",
+          "coordinates": [
+            151.92478179931643,
+            -23.4456087744153
+          ]
+        },
+        {
+          "type": "Point",
+          "coordinates": [
+            152.3920440673828,
+            -23.893371525860456
+          ]
+        }
+      ],
+      "type": "GeometryCollection"
     },
-    "temporal" : [ {
-      "start" : "2021-09-30T14:00:00Z",
-      "end" : "2022-12-31T12:59:59Z"
-    } ],
-    "centroid" : [ ]
+    "temporal": [
+      {
+        "start": "2021-09-30T14:00:00Z",
+        "end": "2022-12-31T12:59:59Z"
+      }
+    ],
+    "centroid": []
   },
-  "contacts" : [ {
-    "roles" : [ "principalInvestigator", "about" ],
-    "organization" : "Australian Institute of Marine Science (AIMS)",
-    "name" : "Remmers T",
-    "position" : "",
-    "emails" : [ "reception@aims.gov.au" ],
-    "addresses" : [ {
-      "deliveryPoint" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],
-      "city" : "TOWNSVILLE",
-      "country" : "Australia",
-      "postalCode" : "4810",
-      "administrativeArea" : "Queensland"
-    } ],
-    "phones" : [ {
-      "roles" : [ "voice" ],
-      "value" : "+61 7 4753 4444"
-    }, {
-      "roles" : [ "facsimile" ],
-      "value" : ""
-    } ],
-    "links" : [ {
-      "href" : "https://www.aims.gov.au",
-      "type" : "WWW:LINK-1.0-http--link",
-      "title" : "AIMS Web Site"
-    } ]
-  }, {
-    "roles" : [ "pointOfContact", "about" ],
-    "organization" : "Australian Institute of Marine Science (AIMS)",
-    "name" : "AIMS Data Centre",
-    "position" : "",
-    "emails" : [ "adc@aims.gov.au" ],
-    "addresses" : [ {
-      "deliveryPoint" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],
-      "city" : "TOWNSVILLE",
-      "country" : "Australia",
-      "postalCode" : "4810",
-      "administrativeArea" : "Queensland"
-    } ],
-    "phones" : [ {
-      "roles" : [ "voice" ],
-      "value" : "+61 7 4753 4444"
-    }, {
-      "roles" : [ "facsimile" ],
-      "value" : ""
-    } ],
-    "links" : [ {
-      "href" : "https://www.aims.gov.au",
-      "type" : "WWW:LINK-1.0-http--link",
-      "title" : "AIMS Web Site"
-    } ]
-  }, {
-    "roles" : [ "pointOfContact", "metadata" ],
-    "organization" : "Australian Institute of Marine Science (AIMS)",
-    "name" : "",
-    "position" : "AIMS Data Centre",
-    "emails" : [ "adc@aims.gov.au" ],
-    "addresses" : [ {
-      "deliveryPoint" : [ "PRIVATE MAIL BAG 3" ],
-      "city" : "TOWNSVILLE MAIL CENTRE",
-      "country" : "Australia",
-      "postalCode" : "4810",
-      "administrativeArea" : "Queensland"
-    } ],
-    "phones" : [ {
-      "roles" : [ "voice" ],
-      "value" : "+61 7 4753 4444"
-    }, {
-      "roles" : [ "facsimile" ],
-      "value" : "+61 7 4772 5852"
-    } ],
-    "links" : [ {
-      "href" : "https://www.aims.gov.au/adc",
-      "type" : "WWW:LINK-1.0-http--link"
-    } ]
-  }, {
-    "roles" : [ "publisher", "citation" ],
-    "organization" : "Australian Institute of Marine Science (AIMS)",
-    "name" : "",
-    "position" : "",
-    "emails" : [ "reception@aims.gov.au" ],
-    "addresses" : [ {
-      "deliveryPoint" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],
-      "city" : "TOWNSVILLE",
-      "country" : "Australia",
-      "postalCode" : "4810",
-      "administrativeArea" : "Queensland"
-    } ],
-    "phones" : [ {
-      "roles" : [ "voice" ],
-      "value" : "+61 7 4753 4444"
-    }, {
-      "roles" : [ "facsimile" ],
-      "value" : ""
-    } ],
-    "links" : [ {
-      "href" : "https://www.aims.gov.au",
-      "type" : "WWW:LINK-1.0-http--link",
-      "title" : "AIMS Web Site"
-    } ]
-  }, {
-    "roles" : [ "owner", "citation" ],
-    "organization" : "Australian Institute of Marine Science (AIMS)",
-    "name" : "",
-    "position" : "",
-    "emails" : [ "reception@aims.gov.au" ],
-    "addresses" : [ {
-      "deliveryPoint" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],
-      "city" : "TOWNSVILLE",
-      "country" : "Australia",
-      "postalCode" : "4810",
-      "administrativeArea" : "Queensland"
-    } ],
-    "phones" : [ {
-      "roles" : [ "voice" ],
-      "value" : "+61 7 4753 4444"
-    }, {
-      "roles" : [ "facsimile" ],
-      "value" : ""
-    } ],
-    "links" : [ {
-      "href" : "https://www.aims.gov.au",
-      "type" : "WWW:LINK-1.0-http--link",
-      "title" : "AIMS Web Site"
-    } ]
-  } ],
-  "languages" : [ {
-    "code" : "eng",
-    "name" : "English"
-  } ],
-  "links" : [ {
-    "href" : "https://apps.aims.gov.au/metadata/view/5905b3eb-aad0-4f9c-a03e-a02fb3488082",
-    "rel" : "describedby",
-    "type" : "text/html",
-    "title" : "Full metadata link"
-  } ],
-  "license" : "",
-  "providers" : [ {
-    "name" : "Australian Institute of Marine Science (AIMS)",
-    "roles" : [ "pointOfContact" ]
-  } ],
-  "themes" : [ ],
-  "id" : "5905b3eb-aad0-4f9c-a03e-a02fb3488082",
-  "search_suggestions" : {
-    "abstract_phrases" : [ "community compostion", "any coral reefs environment", "diver rig", "shooting", "resolution", "ldquo lawn", "building", "gordon et", "were distributed", "community composition", "high visibility", "dome ports", "prime", "information from close range", "lenses", "planar", "community composition information", "al", "community", "calssifying", "ldquo lawn mowing", "information from close", "size", "publication titled", "applyed", "each gpc", "were selected", "metrics", "two nikon", "second intervals full camera", "manual", "composition", "segmentation", "m using", "were captured using two", "spatially adjacent photos", "reefs surveyed compared", "close", "compared", "z axes details", "replicate", "between adjacent images", "workflow described", "inch dome ports", "cm", "mounted", "spatially adjacent", "consisting", "were distributed across", "ldquo", "benthic images", "plots segmenting", "information", "data extraction due", "inch", "standardized diver", "reefs environment we eveluated", "communities from photogrammetric reconstruction", "captured using two nikon", "automatically extract community", "sites", "photogrammetry mointoring", "cameras were housed", "prior", "level metrics", "gpc", "we eveluated", "publication titled ldquo", "rig photogrammetry workflow", "mowing rdquo swim pattern", "rdquo swim", "scale resultant models", "area", "visibility", "underwater housings", "extracting community compostion", "prior imaging", "scuba over", "et", "reconstruction rdquo", "extraction due", "longitudinal", "planar area", "sustainably scale", "perpendicular", "additional", "provided", "back", "titled ldquo", "photogrammetric", "lens", "data can", "passes", "captured", "six gpcs", "standardized", "high resolution", "over", "colony planar", "lagoon all", "six", "nikkor prime lens", "recorded", "colony frequency", "significance", "environment", "approximately", "using two nikon", "single diver", "rig photogrammetry", "et al", "mowing", "reef front flank", "images figure", "from high", "all sites were", "colony level", "from photogrammetric reconstruction", "composition information from close", "accessed", "rig", "imagery", "axes details provided", "model", "second intervals", "period", "large", "all sites were imaged", "titled ldquo rapidbenthos", "distributed", "underlying", "z axes", "coral reefs environment we", "classification", "rdquo", "colony planar area", "pixels were captured", "any coral", "incorporate bathymetric information", "adjacent images", "titled ldquo rapidbenthos ndash", "flank back", "respectively", "distributed across", "diver", "captured using two", "housings", "standardized diver rig photogrammetry", "front flank back", "cameras", "spatially adjacent photos respectively", "time faster than manual", "coral reef communities", "reef communities from photogrammetric", "dslr cameras", "intervals full camera settings", "camera", "than manual", "used ensured", "nauticam", "were mounted", "speed used ensured", "swim pattern consisting", "eveluated", "pattern consisting", "coral reefs", "reefal", "aluminium", "coral reef", "communities", "nadiral", "environments", "automatically extract", "resolution benthic images", "publication titled ldquo rapidbenthos", "standardized diver rig", "photos", "spanned depths from", "second", "from close range photogrammetry", "photogrammetric reconstruction", "high", "turbid inshore reefs spanned", "extract community composition", "faster", "coral", "publication", "between temporally", "than", "benthic constituents", "different", "selected", "research lies", "all", "mm", "settings", "time faster", "workflow", "ranged from high visibility", "level", "scuba", "lawn mowing rdquo", "from high visibility", "each plots", "intervals", "manual data extraction due", "between lenses", "were", "details provided", "depths from", "overlap between adjacent images", "intervals full", "camera settings", "rapidbenthos ndash", "our method", "inshore reefs spanned depths", "each site", "speed used", "meters", "nikon", "sites were selected", "turbid", "calssifying benthic", "environmental conditions", "included", "visibility offshore", "all sites", "range photogrammetry", "adjacent images figure", "adjacent", "model building", "any", "surveyed", "plots", "spatially", "due", "were imaged using", "reconstruction", "were captured", "ldquo lawn mowing rdquo", "using two", "intra reefal", "colony level metrics", "different environmental conditions", "lagoon all sites", "photogrammetric reconstruction rdquo", "offshore reefs", "six gpcs were", "sites were imaged", "mm nikkor prime", "spanned", "full camera", "models", "reef", "reefs spanned depths from", "using", "environmental", "reefs spanned", "multi view", "photogrammetry workflow described", "cameras were", "each", "close range", "manual segmentation", "ranged from high", "underwater", "manual data", "conditions", "inch dome", "oblique imagery", "gpcs were distributed", "reefs environment", "close range photogrammetry", "automatically", "faster than", "ports", "two", "reef habitats", "were imaged", "mowing rdquo", "extracting community", "site prior", "photos respectively", "ldquo rapidbenthos", "front flank", "photogrammetric models", "pixels were", "gradient", "classification allowing", "information from", "gordon", "faster than manual segmentation", "lagoon", "single", "automated", "were captured using", "ndash automated segmentation", "calssifying benthic constituents", "depths", "faster than manual", "dslr", "axes details", "bathymetric information", "resulted", "depth gradient", "cm between lenses", "incorporate", "extract community", "ldquo rapidbenthos ndash automated", "research", "pixels were captured using", "housed", "frequency", "view", "reef communities", "aluminium rig", "cm between", "flank", "z axes details provided", "details", "extract community composition information", "swim pattern", "from close", "view classification", "reef front", "reefs", "high resolution benthic images", "imaging", "surveyed compared", "offshore", "resolution benthic", "overlap", "extract", "scale resultant", "composition information from", "incorporate bathymetric", "between adjacent", "swim", "lagoon all sites were", "full", "inshore", "photos respectively figure", "distance", "data files", "speed", "we", "nikkor prime", "community composition information from", "nikkor", "x y", "nikkor prime lens shooting", "ranged", "high visibility offshore reefs", "lies", "different environmental", "reefs environment we", "from photogrammetric", "figure", "nauticam underwater", "were housed", "inshore reefs spanned", "devlopping", "communities from photogrammetric", "composition information", "spanned depths", "ensured", "time", "titled", "also recorded", "automatically extract community composition", "oblique", "method resulted", "rapidbenthos ndash automated", "axes", "longitudinal passes", "extracting", "six gpcs were distributed", "multi", "capture approximately", "mowing rdquo swim", "camera settings described", "captured using", "full camera settings described", "adjacent photos", "settings described", "between", "overlap between adjacent", "resultant", "images", "method", "any coral reefs", "turbid inshore", "reef communities from", "gpcs", "extraction", "sites were", "imaged", "mointoring both", "ndash", "lawn", "between adjacent images figure", "rig photogrammetry workflow described", "habitats", "high resolution benthic", "reef front flank back", "prime lens shooting", "pattern", "range", "rapidbenthos", "dome", "lawn mowing rdquo swim", "our", "mointoring", "across", "resultant models", "reefs surveyed", "coral reef communities from", "benthic", "inshore reefs", "respectively figure", "communities from", "replication", "bathymetric", "gpcs were", "compostion", "full camera settings", "perpendicular passes", "photogrammetry mointoring both", "site", "depth", "large data", "assess", "multi view classification", "environment we eveluated", "ranged from", "intervals full camera", "from photogrammetric reconstruction rdquo", "minimum", "data", "mm nikkor", "overlap between", "manual data extraction", "photogrammetry workflow", "used", "minimum overlap", "temporally", "presented", "reefs spanned depths", "adjacent photos respectively figure", "from", "described", "diver rig photogrammetry", "turbid inshore reefs", "intra reefal environments", "rdquo swim pattern consisting", "intra", "each plots segmenting", "ndash automated", "minutes", "large data files", "capture", "site prior imaging", "sustainably", "imaged using", "both", "underlying images", "pixels", "prime lens", "high visibility offshore", "second intervals full", "than manual segmentation", "environment we", "files", "lawn mowing", "rdquo swim pattern", "from close range", "ldquo rapidbenthos ndash", "altitude", "request", "colony", "photogrammetry", "link", "diver rig photogrammetry workflow", "scale", "photos nadiral", "rapidbenthos ndash automated segmentation", "can", "data extraction", "gordon et al", "mm nikkor prime lens", "nauticam underwater housings", "lens shooting", "adjacent photos respectively", "from high visibility offshore", "rapidbenthos workflow", "method presented", "also", "coral reefs environment", "reefal environments", "allowing", "sites were imaged using", "performance", "segmenting", "orthomosaics", "time faster than", "front", "visibility offshore reefs", "constituents", "automated segmentation", "gpcs were distributed across" ]
+  "contacts": [
+    {
+      "roles": [
+        "principalInvestigator",
+        "about"
+      ],
+      "organization": "Australian Institute of Marine Science (AIMS)",
+      "name": "Remmers T",
+      "position": "",
+      "emails": [
+        "reception@aims.gov.au"
+      ],
+      "addresses": [
+        {
+          "deliveryPoint": [
+            "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE"
+          ],
+          "city": "TOWNSVILLE",
+          "country": "Australia",
+          "postalCode": "4810",
+          "administrativeArea": "Queensland"
+        }
+      ],
+      "phones": [
+        {
+          "roles": [
+            "voice"
+          ],
+          "value": "+61 7 4753 4444"
+        },
+        {
+          "roles": [
+            "facsimile"
+          ],
+          "value": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://www.aims.gov.au",
+          "type": "WWW:LINK-1.0-http--link",
+          "title": "AIMS Web Site"
+        }
+      ]
+    },
+    {
+      "roles": [
+        "pointOfContact",
+        "about"
+      ],
+      "organization": "Australian Institute of Marine Science (AIMS)",
+      "name": "AIMS Data Centre",
+      "position": "",
+      "emails": [
+        "adc@aims.gov.au"
+      ],
+      "addresses": [
+        {
+          "deliveryPoint": [
+            "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE"
+          ],
+          "city": "TOWNSVILLE",
+          "country": "Australia",
+          "postalCode": "4810",
+          "administrativeArea": "Queensland"
+        }
+      ],
+      "phones": [
+        {
+          "roles": [
+            "voice"
+          ],
+          "value": "+61 7 4753 4444"
+        },
+        {
+          "roles": [
+            "facsimile"
+          ],
+          "value": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://www.aims.gov.au",
+          "type": "WWW:LINK-1.0-http--link",
+          "title": "AIMS Web Site"
+        }
+      ]
+    },
+    {
+      "roles": [
+        "pointOfContact",
+        "metadata"
+      ],
+      "organization": "Australian Institute of Marine Science (AIMS)",
+      "name": "",
+      "position": "AIMS Data Centre",
+      "emails": [
+        "adc@aims.gov.au"
+      ],
+      "addresses": [
+        {
+          "deliveryPoint": [
+            "PRIVATE MAIL BAG 3"
+          ],
+          "city": "TOWNSVILLE MAIL CENTRE",
+          "country": "Australia",
+          "postalCode": "4810",
+          "administrativeArea": "Queensland"
+        }
+      ],
+      "phones": [
+        {
+          "roles": [
+            "voice"
+          ],
+          "value": "+61 7 4753 4444"
+        },
+        {
+          "roles": [
+            "facsimile"
+          ],
+          "value": "+61 7 4772 5852"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://www.aims.gov.au/adc",
+          "type": "WWW:LINK-1.0-http--link"
+        }
+      ]
+    },
+    {
+      "roles": [
+        "publisher",
+        "citation"
+      ],
+      "organization": "Australian Institute of Marine Science (AIMS)",
+      "name": "",
+      "position": "",
+      "emails": [
+        "reception@aims.gov.au"
+      ],
+      "addresses": [
+        {
+          "deliveryPoint": [
+            "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE"
+          ],
+          "city": "TOWNSVILLE",
+          "country": "Australia",
+          "postalCode": "4810",
+          "administrativeArea": "Queensland"
+        }
+      ],
+      "phones": [
+        {
+          "roles": [
+            "voice"
+          ],
+          "value": "+61 7 4753 4444"
+        },
+        {
+          "roles": [
+            "facsimile"
+          ],
+          "value": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://www.aims.gov.au",
+          "type": "WWW:LINK-1.0-http--link",
+          "title": "AIMS Web Site"
+        }
+      ]
+    },
+    {
+      "roles": [
+        "owner",
+        "citation"
+      ],
+      "organization": "Australian Institute of Marine Science (AIMS)",
+      "name": "",
+      "position": "",
+      "emails": [
+        "reception@aims.gov.au"
+      ],
+      "addresses": [
+        {
+          "deliveryPoint": [
+            "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE"
+          ],
+          "city": "TOWNSVILLE",
+          "country": "Australia",
+          "postalCode": "4810",
+          "administrativeArea": "Queensland"
+        }
+      ],
+      "phones": [
+        {
+          "roles": [
+            "voice"
+          ],
+          "value": "+61 7 4753 4444"
+        },
+        {
+          "roles": [
+            "facsimile"
+          ],
+          "value": ""
+        }
+      ],
+      "links": [
+        {
+          "href": "https://www.aims.gov.au",
+          "type": "WWW:LINK-1.0-http--link",
+          "title": "AIMS Web Site"
+        }
+      ]
+    }
+  ],
+  "languages": [
+    {
+      "code": "eng",
+      "name": "English"
+    }
+  ],
+  "links": [
+    {
+      "href": "https://apps.aims.gov.au/metadata/view/5905b3eb-aad0-4f9c-a03e-a02fb3488082",
+      "rel": "describedby",
+      "type": "text/html",
+      "title": "Full metadata link"
+    }
+  ],
+  "license": "",
+  "providers": [
+    {
+      "name": "Australian Institute of Marine Science (AIMS)",
+      "roles": [
+        "pointOfContact"
+      ]
+    }
+  ],
+  "themes": [],
+  "id": "5905b3eb-aad0-4f9c-a03e-a02fb3488082",
+  "search_suggestions": {
+    "abstract_phrases": [
+      "community compostion",
+      "any coral reefs environment",
+      "diver rig",
+      "shooting",
+      "resolution",
+      "ldquo lawn",
+      "building",
+      "gordon et",
+      "were distributed",
+      "community composition",
+      "high visibility",
+      "dome ports",
+      "prime",
+      "information from close range",
+      "lenses",
+      "planar",
+      "community composition information",
+      "al",
+      "community",
+      "calssifying",
+      "ldquo lawn mowing",
+      "information from close",
+      "size",
+      "publication titled",
+      "applyed",
+      "each gpc",
+      "were selected",
+      "metrics",
+      "two nikon",
+      "second intervals full camera",
+      "manual",
+      "composition",
+      "segmentation",
+      "m using",
+      "were captured using two",
+      "spatially adjacent photos",
+      "reefs surveyed compared",
+      "close",
+      "compared",
+      "z axes details",
+      "replicate",
+      "between adjacent images",
+      "workflow described",
+      "inch dome ports",
+      "cm",
+      "mounted",
+      "spatially adjacent",
+      "consisting",
+      "were distributed across",
+      "ldquo",
+      "benthic images",
+      "plots segmenting",
+      "information",
+      "data extraction due",
+      "inch",
+      "standardized diver",
+      "reefs environment we eveluated",
+      "communities from photogrammetric reconstruction",
+      "captured using two nikon",
+      "automatically extract community",
+      "sites",
+      "photogrammetry mointoring",
+      "cameras were housed",
+      "prior",
+      "level metrics",
+      "gpc",
+      "we eveluated",
+      "publication titled ldquo",
+      "rig photogrammetry workflow",
+      "mowing rdquo swim pattern",
+      "rdquo swim",
+      "scale resultant models",
+      "area",
+      "visibility",
+      "underwater housings",
+      "extracting community compostion",
+      "prior imaging",
+      "scuba over",
+      "et",
+      "reconstruction rdquo",
+      "extraction due",
+      "longitudinal",
+      "planar area",
+      "sustainably scale",
+      "perpendicular",
+      "additional",
+      "provided",
+      "back",
+      "titled ldquo",
+      "photogrammetric",
+      "lens",
+      "data can",
+      "passes",
+      "captured",
+      "six gpcs",
+      "standardized",
+      "high resolution",
+      "over",
+      "colony planar",
+      "lagoon all",
+      "six",
+      "nikkor prime lens",
+      "recorded",
+      "colony frequency",
+      "significance",
+      "environment",
+      "approximately",
+      "using two nikon",
+      "single diver",
+      "rig photogrammetry",
+      "et al",
+      "mowing",
+      "reef front flank",
+      "images figure",
+      "from high",
+      "all sites were",
+      "colony level",
+      "from photogrammetric reconstruction",
+      "composition information from close",
+      "accessed",
+      "rig",
+      "imagery",
+      "axes details provided",
+      "model",
+      "second intervals",
+      "period",
+      "large",
+      "all sites were imaged",
+      "titled ldquo rapidbenthos",
+      "distributed",
+      "underlying",
+      "z axes",
+      "coral reefs environment we",
+      "classification",
+      "rdquo",
+      "colony planar area",
+      "pixels were captured",
+      "any coral",
+      "incorporate bathymetric information",
+      "adjacent images",
+      "titled ldquo rapidbenthos ndash",
+      "flank back",
+      "respectively",
+      "distributed across",
+      "diver",
+      "captured using two",
+      "housings",
+      "standardized diver rig photogrammetry",
+      "front flank back",
+      "cameras",
+      "spatially adjacent photos respectively",
+      "time faster than manual",
+      "coral reef communities",
+      "reef communities from photogrammetric",
+      "dslr cameras",
+      "intervals full camera settings",
+      "camera",
+      "than manual",
+      "used ensured",
+      "nauticam",
+      "were mounted",
+      "speed used ensured",
+      "swim pattern consisting",
+      "eveluated",
+      "pattern consisting",
+      "coral reefs",
+      "reefal",
+      "aluminium",
+      "coral reef",
+      "communities",
+      "nadiral",
+      "environments",
+      "automatically extract",
+      "resolution benthic images",
+      "publication titled ldquo rapidbenthos",
+      "standardized diver rig",
+      "photos",
+      "spanned depths from",
+      "second",
+      "from close range photogrammetry",
+      "photogrammetric reconstruction",
+      "high",
+      "turbid inshore reefs spanned",
+      "extract community composition",
+      "faster",
+      "coral",
+      "publication",
+      "between temporally",
+      "than",
+      "benthic constituents",
+      "different",
+      "selected",
+      "research lies",
+      "all",
+      "mm",
+      "settings",
+      "time faster",
+      "workflow",
+      "ranged from high visibility",
+      "level",
+      "scuba",
+      "lawn mowing rdquo",
+      "from high visibility",
+      "each plots",
+      "intervals",
+      "manual data extraction due",
+      "between lenses",
+      "were",
+      "details provided",
+      "depths from",
+      "overlap between adjacent images",
+      "intervals full",
+      "camera settings",
+      "rapidbenthos ndash",
+      "our method",
+      "inshore reefs spanned depths",
+      "each site",
+      "speed used",
+      "meters",
+      "nikon",
+      "sites were selected",
+      "turbid",
+      "calssifying benthic",
+      "environmental conditions",
+      "included",
+      "visibility offshore",
+      "all sites",
+      "range photogrammetry",
+      "adjacent images figure",
+      "adjacent",
+      "model building",
+      "any",
+      "surveyed",
+      "plots",
+      "spatially",
+      "due",
+      "were imaged using",
+      "reconstruction",
+      "were captured",
+      "ldquo lawn mowing rdquo",
+      "using two",
+      "intra reefal",
+      "colony level metrics",
+      "different environmental conditions",
+      "lagoon all sites",
+      "photogrammetric reconstruction rdquo",
+      "offshore reefs",
+      "six gpcs were",
+      "sites were imaged",
+      "mm nikkor prime",
+      "spanned",
+      "full camera",
+      "models",
+      "reef",
+      "reefs spanned depths from",
+      "using",
+      "environmental",
+      "reefs spanned",
+      "multi view",
+      "photogrammetry workflow described",
+      "cameras were",
+      "each",
+      "close range",
+      "manual segmentation",
+      "ranged from high",
+      "underwater",
+      "manual data",
+      "conditions",
+      "inch dome",
+      "oblique imagery",
+      "gpcs were distributed",
+      "reefs environment",
+      "close range photogrammetry",
+      "automatically",
+      "faster than",
+      "ports",
+      "two",
+      "reef habitats",
+      "were imaged",
+      "mowing rdquo",
+      "extracting community",
+      "site prior",
+      "photos respectively",
+      "ldquo rapidbenthos",
+      "front flank",
+      "photogrammetric models",
+      "pixels were",
+      "gradient",
+      "classification allowing",
+      "information from",
+      "gordon",
+      "faster than manual segmentation",
+      "lagoon",
+      "single",
+      "automated",
+      "were captured using",
+      "ndash automated segmentation",
+      "calssifying benthic constituents",
+      "depths",
+      "faster than manual",
+      "dslr",
+      "axes details",
+      "bathymetric information",
+      "resulted",
+      "depth gradient",
+      "cm between lenses",
+      "incorporate",
+      "extract community",
+      "ldquo rapidbenthos ndash automated",
+      "research",
+      "pixels were captured using",
+      "housed",
+      "frequency",
+      "view",
+      "reef communities",
+      "aluminium rig",
+      "cm between",
+      "flank",
+      "z axes details provided",
+      "details",
+      "extract community composition information",
+      "swim pattern",
+      "from close",
+      "view classification",
+      "reef front",
+      "reefs",
+      "high resolution benthic images",
+      "imaging",
+      "surveyed compared",
+      "offshore",
+      "resolution benthic",
+      "overlap",
+      "extract",
+      "scale resultant",
+      "composition information from",
+      "incorporate bathymetric",
+      "between adjacent",
+      "swim",
+      "lagoon all sites were",
+      "full",
+      "inshore",
+      "photos respectively figure",
+      "distance",
+      "data files",
+      "speed",
+      "we",
+      "nikkor prime",
+      "community composition information from",
+      "nikkor",
+      "x y",
+      "nikkor prime lens shooting",
+      "ranged",
+      "high visibility offshore reefs",
+      "lies",
+      "different environmental",
+      "reefs environment we",
+      "from photogrammetric",
+      "figure",
+      "nauticam underwater",
+      "were housed",
+      "inshore reefs spanned",
+      "devlopping",
+      "communities from photogrammetric",
+      "composition information",
+      "spanned depths",
+      "ensured",
+      "time",
+      "titled",
+      "also recorded",
+      "automatically extract community composition",
+      "oblique",
+      "method resulted",
+      "rapidbenthos ndash automated",
+      "axes",
+      "longitudinal passes",
+      "extracting",
+      "six gpcs were distributed",
+      "multi",
+      "capture approximately",
+      "mowing rdquo swim",
+      "camera settings described",
+      "captured using",
+      "full camera settings described",
+      "adjacent photos",
+      "settings described",
+      "between",
+      "overlap between adjacent",
+      "resultant",
+      "images",
+      "method",
+      "any coral reefs",
+      "turbid inshore",
+      "reef communities from",
+      "gpcs",
+      "extraction",
+      "sites were",
+      "imaged",
+      "mointoring both",
+      "ndash",
+      "lawn",
+      "between adjacent images figure",
+      "rig photogrammetry workflow described",
+      "habitats",
+      "high resolution benthic",
+      "reef front flank back",
+      "prime lens shooting",
+      "pattern",
+      "range",
+      "rapidbenthos",
+      "dome",
+      "lawn mowing rdquo swim",
+      "our",
+      "mointoring",
+      "across",
+      "resultant models",
+      "reefs surveyed",
+      "coral reef communities from",
+      "benthic",
+      "inshore reefs",
+      "respectively figure",
+      "communities from",
+      "replication",
+      "bathymetric",
+      "gpcs were",
+      "compostion",
+      "full camera settings",
+      "perpendicular passes",
+      "photogrammetry mointoring both",
+      "site",
+      "depth",
+      "large data",
+      "assess",
+      "multi view classification",
+      "environment we eveluated",
+      "ranged from",
+      "intervals full camera",
+      "from photogrammetric reconstruction rdquo",
+      "minimum",
+      "data",
+      "mm nikkor",
+      "overlap between",
+      "manual data extraction",
+      "photogrammetry workflow",
+      "used",
+      "minimum overlap",
+      "temporally",
+      "presented",
+      "reefs spanned depths",
+      "adjacent photos respectively figure",
+      "from",
+      "described",
+      "diver rig photogrammetry",
+      "turbid inshore reefs",
+      "intra reefal environments",
+      "rdquo swim pattern consisting",
+      "intra",
+      "each plots segmenting",
+      "ndash automated",
+      "minutes",
+      "large data files",
+      "capture",
+      "site prior imaging",
+      "sustainably",
+      "imaged using",
+      "both",
+      "underlying images",
+      "pixels",
+      "prime lens",
+      "high visibility offshore",
+      "second intervals full",
+      "than manual segmentation",
+      "environment we",
+      "files",
+      "lawn mowing",
+      "rdquo swim pattern",
+      "from close range",
+      "ldquo rapidbenthos ndash",
+      "altitude",
+      "request",
+      "colony",
+      "photogrammetry",
+      "link",
+      "diver rig photogrammetry workflow",
+      "scale",
+      "photos nadiral",
+      "rapidbenthos ndash automated segmentation",
+      "can",
+      "data extraction",
+      "gordon et al",
+      "mm nikkor prime lens",
+      "nauticam underwater housings",
+      "lens shooting",
+      "adjacent photos respectively",
+      "from high visibility offshore",
+      "rapidbenthos workflow",
+      "method presented",
+      "also",
+      "coral reefs environment",
+      "reefal environments",
+      "allowing",
+      "sites were imaged using",
+      "performance",
+      "segmenting",
+      "orthomosaics",
+      "time faster than",
+      "front",
+      "visibility offshore reefs",
+      "constituents",
+      "automated segmentation",
+      "gpcs were distributed across"
+    ]
   },
-  "sci:citation" : "{\"suggestedCitation\":null,\"useLimitations\":null,\"otherConstraints\":[\"The data was collected under contract between AIMS and another party(s). Specific agreements for access and use of the data shall be negotiated separately. Contact the AIMS Data Centre (adc@aims.gov.au) for further information\"]}",
-  "type" : "Collection",
-  "stac_version" : "1.0.0",
-  "stac_extensions" : [ "https://stac-extensions.github.io/scientific/v1.0.0/schema.json", "https://stac-extensions.github.io/contacts/v0.1.1/schema.json", "https://stac-extensions.github.io/projection/v1.1.0/schema.json", "https://stac-extensions.github.io/language/v1.0.0/schema.json", "https://stac-extensions.github.io/themes/v1.0.0/schema.json", "https://stac-extensions.github.io/web-map-links/v1.2.0/schema.json" ]
+  "sci:citation": "{\"suggestedCitation\":null,\"useLimitations\":null,\"otherConstraints\":[\"The data was collected under contract between AIMS and another party(s). Specific agreements for access and use of the data shall be negotiated separately. Contact the AIMS Data Centre (adc@aims.gov.au) for further information\"]}",
+  "type": "Collection",
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/contacts/v0.1.1/schema.json",
+    "https://stac-extensions.github.io/projection/v1.1.0/schema.json",
+    "https://stac-extensions.github.io/language/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/themes/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/web-map-links/v1.2.0/schema.json"
+  ]
 }

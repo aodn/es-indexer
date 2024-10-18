@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdb:MD_Metadata xmlns:mdb="http://standards.iso.org/iso/19115/-3/mdb/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cat="http://standards.iso.org/iso/19115/-3/cat/1.0" xmlns:cit="http://standards.iso.org/iso/19115/-3/cit/2.0" xmlns:gcx="http://standards.iso.org/iso/19115/-3/gcx/1.0" xmlns:gex="http://standards.iso.org/iso/19115/-3/gex/1.0" xmlns:lan="http://standards.iso.org/iso/19115/-3/lan/1.0" xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0" xmlns:mas="http://standards.iso.org/iso/19115/-3/mas/1.0" xmlns:mcc="http://standards.iso.org/iso/19115/-3/mcc/1.0" xmlns:mco="http://standards.iso.org/iso/19115/-3/mco/1.0" xmlns:mda="http://standards.iso.org/iso/19115/-3/mda/1.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0" xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0" xmlns:mex="http://standards.iso.org/iso/19115/-3/mex/1.0" xmlns:mmi="http://standards.iso.org/iso/19115/-3/mmi/1.0" xmlns:mpc="http://standards.iso.org/iso/19115/-3/mpc/1.0" xmlns:mrc="http://standards.iso.org/iso/19115/-3/mrc/2.0" xmlns:mrd="http://standards.iso.org/iso/19115/-3/mrd/1.0" xmlns:mri="http://standards.iso.org/iso/19115/-3/mri/1.0" xmlns:mrl="http://standards.iso.org/iso/19115/-3/mrl/2.0" xmlns:mrs="http://standards.iso.org/iso/19115/-3/mrs/1.0" xmlns:msr="http://standards.iso.org/iso/19115/-3/msr/2.0" xmlns:mdq="http://standards.iso.org/iso/19157/-2/mdq/1.0" xmlns:mac="http://standards.iso.org/iso/19115/-3/mac/2.0" xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://standards.iso.org/iso/19115/-3/cat/1.0 http://standards.iso.org/iso/19115/-3/cat/1.0/cat.xsd http://standards.iso.org/iso/19115/-3/cit/2.0 http://standards.iso.org/iso/19115/-3/cit/2.0/cit.xsd http://standards.iso.org/iso/19115/-3/gcx/1.0 http://standards.iso.org/iso/19115/-3/gcx/1.0/gcx.xsd http://standards.iso.org/iso/19115/-3/gex/1.0 http://standards.iso.org/iso/19115/-3/gex/1.0/gex.xsd http://standards.iso.org/iso/19115/-3/lan/1.0 http://standards.iso.org/iso/19115/-3/lan/1.0/lan.xsd http://standards.iso.org/iso/19115/-3/srv/2.0 http://standards.iso.org/iso/19115/-3/srv/2.0/srv.xsd http://standards.iso.org/iso/19115/-3/mas/1.0 http://standards.iso.org/iso/19115/-3/mas/1.0/mas.xsd http://standards.iso.org/iso/19115/-3/mcc/1.0 http://standards.iso.org/iso/19115/-3/mcc/1.0/mcc.xsd http://standards.iso.org/iso/19115/-3/mco/1.0 http://standards.iso.org/iso/19115/-3/mco/1.0/mco.xsd http://standards.iso.org/iso/19115/-3/mda/2.0 http://standards.iso.org/iso/19115/-3/mda/2.0/mda.xsd http://standards.iso.org/iso/19115/-3/mdb/2.0 http://standards.iso.org/iso/19115/-3/mdb/2.0/mdb.xsd http://standards.iso.org/iso/19115/-3/mds/2.0 http://standards.iso.org/iso/19115/-3/mds/2.0/mds.xsd http://standards.iso.org/iso/19115/-3/mdt/2.0 http://standards.iso.org/iso/19115/-3/mdt/2.0/mdt.xsd http://standards.iso.org/iso/19115/-3/mex/1.0 http://standards.iso.org/iso/19115/-3/mex/1.0/mex.xsd http://standards.iso.org/iso/19115/-3/mmi/1.0 http://standards.iso.org/iso/19115/-3/mmi/1.0/mmi.xsd http://standards.iso.org/iso/19115/-3/mpc/1.0 http://standards.iso.org/iso/19115/-3/mpc/1.0/mpc.xsd http://standards.iso.org/iso/19115/-3/mrc/2.0 http://standards.iso.org/iso/19115/-3/mrc/2.0/mrc.xsd http://standards.iso.org/iso/19115/-3/mrd/1.0 http://standards.iso.org/iso/19115/-3/mrd/1.0/mrd.xsd http://standards.iso.org/iso/19115/-3/mri/1.0 http://standards.iso.org/iso/19115/-3/mri/1.0/mri.xsd http://standards.iso.org/iso/19115/-3/mrl/2.0 http://standards.iso.org/iso/19115/-3/mrl/2.0/mrl.xsd http://standards.iso.org/iso/19115/-3/mrs/1.0 http://standards.iso.org/iso/19115/-3/mrs/1.0/mrs.xsd http://standards.iso.org/iso/19115/-3/msr/2.0 http://standards.iso.org/iso/19115/-3/msr/2.0/msr.xsd http://standards.iso.org/iso/19157/-2/mdq/1.0 http://standards.iso.org/iso/19157/-2/mdq/1.0/mdq.xsd http://standards.iso.org/iso/19115/-3/mac/2.0 http://standards.iso.org/iso/19115/-3/mac/2.0/mac.xsd http://standards.iso.org/iso/19115/-3/gco/1.0 http://standards.iso.org/iso/19115/-3/gco/1.0/gco.xsd http://standards.iso.org/iso/19115/-3/gmw/1.0 http://standards.iso.org/iso/19115/-3/gmw/1.0/gmw.xsd http://www.opengis.net/gml/3.2 http://schemas.opengis.net/gml/3.2.1/gml.xsd http://www.w3.org/1999/xlink http://www.w3.org/1999/xlink.xsd">
+    <mdb:metadataIdentifier>
+        <mcc:MD_Identifier>
+            <mcc:code>
+                <gco:CharacterString>0bef875d-5f77-4b31-bd56-de73fafc2b2e</gco:CharacterString>
+            </mcc:code>
+        </mcc:MD_Identifier>
+    </mdb:metadataIdentifier>
+    <mdb:defaultLocale>
+        <lan:PT_Locale>
+            <lan:language>
+                <lan:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="eng" />
+            </lan:language>
+            <lan:characterEncoding>
+                <lan:MD_CharacterSetCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_CharacterSetCode" codeListValue="utf8" />
+            </lan:characterEncoding>
+        </lan:PT_Locale>
+    </mdb:defaultLocale>
+    <mdb:parentMetadata uuidref="" />
+    <mdb:metadataScope>
+        <mdb:MD_MetadataScope>
+            <mdb:resourceScope>
+                <mcc:MD_ScopeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ScopeCode" codeListValue="dataset" />
+            </mdb:resourceScope>
+            <mdb:name gco:nilReason="missing">
+                <gco:CharacterString />
+            </mdb:name>
+        </mdb:MD_MetadataScope>
+    </mdb:metadataScope>
+    <mdb:contact>
+        <cit:CI_Responsibility>
+            <cit:role gco:nilReason="missing" />
+            <cit:party>
+                <cit:CI_Organisation>
+                    <cit:name>
+                        <gco:CharacterString>CSIRO</gco:CharacterString>
+                    </cit:name>
+                    <cit:individual>
+                        <cit:CI_Individual>
+                            <cit:name>
+                                <gco:CharacterString>Chris Moeseneder</gco:CharacterString>
+                            </cit:name>
+                            <cit:contactInfo>
+                                <cit:CI_Contact>
+                                    <cit:phone>
+                                        <cit:CI_Telephone>
+                                            <cit:number gco:nilReason="missing">
+                                                <gco:CharacterString />
+                                            </cit:number>
+                                            <cit:numberType>
+                                                <cit:CI_TelephoneTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_TelephoneTypeCode" codeListValue="voice" />
+                                            </cit:numberType>
+                                        </cit:CI_Telephone>
+                                    </cit:phone>
+                                    <cit:phone>
+                                        <cit:CI_Telephone>
+                                            <cit:number gco:nilReason="missing">
+                                                <gco:CharacterString />
+                                            </cit:number>
+                                            <cit:numberType>
+                                                <cit:CI_TelephoneTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_TelephoneTypeCode" codeListValue="facsimile" />
+                                            </cit:numberType>
+                                        </cit:CI_Telephone>
+                                    </cit:phone>
+                                    <cit:address>
+                                        <cit:CI_Address>
+                                            <cit:deliveryPoint gco:nilReason="missing">
+                                                <gco:CharacterString />
+                                            </cit:deliveryPoint>
+                                            <cit:city gco:nilReason="missing">
+                                                <gco:CharacterString />
+                                            </cit:city>
+                                            <cit:administrativeArea gco:nilReason="missing">
+                                                <gco:CharacterString />
+                                            </cit:administrativeArea>
+                                            <cit:postalCode gco:nilReason="missing">
+                                                <gco:CharacterString />
+                                            </cit:postalCode>
+                                            <cit:country gco:nilReason="missing">
+                                                <gco:CharacterString />
+                                            </cit:country>
+                                            <cit:electronicMailAddress>
+                                                <gco:CharacterString>chris.moeseneder@csiro.au</gco:CharacterString>
+                                            </cit:electronicMailAddress>
+                                        </cit:CI_Address>
+                                    </cit:address>
+                                </cit:CI_Contact>
+                            </cit:contactInfo>
+                            <cit:positionName gco:nilReason="missing">
+                                <gco:CharacterString />
+                            </cit:positionName>
+                        </cit:CI_Individual>
+                    </cit:individual>
+                </cit:CI_Organisation>
+            </cit:party>
+        </cit:CI_Responsibility>
+    </mdb:contact>
+    <mdb:dateInfo>
+        <cit:CI_Date>
+            <cit:date>
+                <gco:DateTime>2015-02-02T15:39:42</gco:DateTime>
+            </cit:date>
+            <cit:dateType>
+                <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode" codeListValue="creation" />
+            </cit:dateType>
+        </cit:CI_Date>
+    </mdb:dateInfo>
+    <mdb:dateInfo>
+        <cit:CI_Date>
+            <cit:date>
+                <gco:DateTime>2018-11-14T15:23:41</gco:DateTime>
+            </cit:date>
+            <cit:dateType>
+                <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode" codeListValue="revision" />
+            </cit:dateType>
+        </cit:CI_Date>
+    </mdb:dateInfo>
+    <mdb:metadataStandard>
+        <cit:CI_Citation>
+            <cit:title>
+                <gco:CharacterString>ISO 19115-3:2018</gco:CharacterString>
+            </cit:title>
+        </cit:CI_Citation>
+    </mdb:metadataStandard>
+    <mdb:metadataLinkage>
+        <cit:CI_OnlineResource>
+            <cit:linkage>
+                <gco:CharacterString>https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/0bef875d-5f77-4b31-bd56-de73fafc2b2e</gco:CharacterString>
+            </cit:linkage>
+            <cit:protocol>
+                <gco:CharacterString>WWW:LINK-1.0-http--metadata-URL</gco:CharacterString>
+            </cit:protocol>
+            <cit:description>
+                <gco:CharacterString>Point of truth URL of this metadata record</gco:CharacterString>
+            </cit:description>
+        </cit:CI_OnlineResource>
+    </mdb:metadataLinkage>
+    <mdb:referenceSystemInfo>
+        <mrs:MD_ReferenceSystem>
+            <mrs:referenceSystemIdentifier>
+                <mcc:MD_Identifier>
+                    <mcc:code gco:nilReason="missing">
+                        <gco:CharacterString />
+                    </mcc:code>
+                    <mcc:codeSpace>
+                        <gco:CharacterString>EPSG</gco:CharacterString>
+                    </mcc:codeSpace>
+                </mcc:MD_Identifier>
+            </mrs:referenceSystemIdentifier>
+        </mrs:MD_ReferenceSystem>
+    </mdb:referenceSystemInfo>
+    <mdb:identificationInfo>
+        <mri:MD_DataIdentification>
+            <mri:citation>
+                <cit:CI_Citation>
+                    <cit:title>
+                        <gco:CharacterString>NT Alligator Rivers Region Aerial Survey Raw Bird Count</gco:CharacterString>
+                    </cit:title>
+                    <cit:date>
+                        <cit:CI_Date>
+                            <cit:date>
+                                <gco:DateTime>2015-02-01T00:00:00</gco:DateTime>
+                            </cit:date>
+                            <cit:dateType>
+                                <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode" codeListValue="creation" />
+                            </cit:dateType>
+                        </cit:CI_Date>
+                    </cit:date>
+                </cit:CI_Citation>
+            </mri:citation>
+            <mri:abstract>
+                <gco:CharacterString>Quantitative waterbird surveys over seasonal wetlands of the Alligator Rivers Region (ARR) of the NT, provided by the Supervising Scientist Division (SSD) of the Commonwealth Department of the Environment, Water, Heritage and the Arts (DEWHA). Systematic aerial survey, conducted monthly from June 1981 to August 1984.  Environmental information on dominant cover types is also included (Wet Plain, Dry Plain, Wet Melaleuca, Dry Melaleuca, Open Water, Dry Woodland, Mud).</gco:CharacterString>
+            </mri:abstract>
+            <mri:pointOfContact>
+                <cit:CI_Responsibility>
+                    <cit:role gco:nilReason="missing" />
+                    <cit:party>
+                        <cit:CI_Organisation>
+                            <cit:name>
+                                <gco:CharacterString>CSIRO</gco:CharacterString>
+                            </cit:name>
+                            <cit:individual>
+                                <cit:CI_Individual>
+                                    <cit:name>
+                                        <gco:CharacterString>Chris Moeseneder</gco:CharacterString>
+                                    </cit:name>
+                                    <cit:contactInfo>
+                                        <cit:CI_Contact>
+                                            <cit:phone>
+                                                <cit:CI_Telephone>
+                                                    <cit:number gco:nilReason="missing">
+                                                        <gco:CharacterString />
+                                                    </cit:number>
+                                                    <cit:numberType>
+                                                        <cit:CI_TelephoneTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_TelephoneTypeCode" codeListValue="voice" />
+                                                    </cit:numberType>
+                                                </cit:CI_Telephone>
+                                            </cit:phone>
+                                            <cit:phone>
+                                                <cit:CI_Telephone>
+                                                    <cit:number gco:nilReason="missing">
+                                                        <gco:CharacterString />
+                                                    </cit:number>
+                                                    <cit:numberType>
+                                                        <cit:CI_TelephoneTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_TelephoneTypeCode" codeListValue="facsimile" />
+                                                    </cit:numberType>
+                                                </cit:CI_Telephone>
+                                            </cit:phone>
+                                            <cit:address>
+                                                <cit:CI_Address>
+                                                    <cit:deliveryPoint gco:nilReason="missing">
+                                                        <gco:CharacterString />
+                                                    </cit:deliveryPoint>
+                                                    <cit:city gco:nilReason="missing">
+                                                        <gco:CharacterString />
+                                                    </cit:city>
+                                                    <cit:administrativeArea gco:nilReason="missing">
+                                                        <gco:CharacterString />
+                                                    </cit:administrativeArea>
+                                                    <cit:postalCode gco:nilReason="missing">
+                                                        <gco:CharacterString />
+                                                    </cit:postalCode>
+                                                    <cit:country gco:nilReason="missing">
+                                                        <gco:CharacterString />
+                                                    </cit:country>
+                                                    <cit:electronicMailAddress>
+                                                        <gco:CharacterString>chris.moeseneder@csiro.au</gco:CharacterString>
+                                                    </cit:electronicMailAddress>
+                                                </cit:CI_Address>
+                                            </cit:address>
+                                        </cit:CI_Contact>
+                                    </cit:contactInfo>
+                                    <cit:positionName gco:nilReason="missing">
+                                        <gco:CharacterString />
+                                    </cit:positionName>
+                                </cit:CI_Individual>
+                            </cit:individual>
+                        </cit:CI_Organisation>
+                    </cit:party>
+                </cit:CI_Responsibility>
+            </mri:pointOfContact>
+            <mri:spatialResolution>
+                <mri:MD_Resolution>
+                    <mri:equivalentScale>
+                        <mri:MD_RepresentativeFraction>
+                            <mri:denominator gco:nilReason="missing" />
+                        </mri:MD_RepresentativeFraction>
+                    </mri:equivalentScale>
+                </mri:MD_Resolution>
+            </mri:spatialResolution>
+            <mri:topicCategory>
+                <mri:MD_TopicCategoryCode>oceans</mri:MD_TopicCategoryCode>
+            </mri:topicCategory>
+            <gex:extent>
+                <gex:EX_Extent>
+                    <mri:EX_Extent gco:isoType="gmd:EX_Extent">
+                        <mri:geographicElement>
+                            <mri:EX_GeographicBoundingBox>
+                                <mri:westBoundLongitude>
+                                    <gco:Decimal>132.79106</gco:Decimal>
+                                </mri:westBoundLongitude>
+                                <mri:eastBoundLongitude>
+                                    <gco:Decimal>132.8853863</gco:Decimal>
+                                </mri:eastBoundLongitude>
+                                <mri:southBoundLatitude>
+                                    <gco:Decimal>-12.36396</gco:Decimal>
+                                </mri:southBoundLatitude>
+                                <mri:northBoundLatitude>
+                                    <gco:Decimal>-12.2553</gco:Decimal>
+                                </mri:northBoundLatitude>
+                            </mri:EX_GeographicBoundingBox>
+                        </mri:geographicElement>
+                        <mri:temporalElement>
+                            <gex:EX_TemporalExtent>
+                                <mri:extent>
+                                    <gml:TimePeriod gml:id="N10315">
+                                        <gml:begin>
+                                            <gml:TimeInstant gml:id="N1031B">
+                                                <gml:timePosition>15/06/1981</gml:timePosition>
+                                            </gml:TimeInstant>
+                                        </gml:begin>
+                                        <gml:end>
+                                            <gml:TimeInstant gml:id="N10326">
+                                                <gml:timePosition>15/08/1984</gml:timePosition>
+                                            </gml:TimeInstant>
+                                        </gml:end>
+                                    </gml:TimePeriod>
+                                </mri:extent>
+                            </gex:EX_TemporalExtent>
+                        </mri:temporalElement>
+                    </mri:EX_Extent>
+                </gex:EX_Extent>
+            </gex:extent>
+            <mri:defaultLocale>
+                <lan:PT_Locale>
+                    <lan:language>
+                        <lan:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="eng" />
+                    </lan:language>
+                    <lan:characterEncoding>
+                        <lan:MD_CharacterSetCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_CharacterSetCode" codeListValue="utf8" />
+                    </lan:characterEncoding>
+                </lan:PT_Locale>
+            </mri:defaultLocale>
+        </mri:MD_DataIdentification>
+    </mdb:identificationInfo>
+    <mdb:distributionInfo>
+        <mrd:MD_Distribution>
+            <mrd:distributionFormat>
+                <mrd:MD_Format>
+                    <mrd:formatSpecificationCitation>
+                        <cit:CI_Citation>
+                            <cit:title gco:nilReason="missing">
+                                <gco:CharacterString />
+                            </cit:title>
+                            <cit:alternateTitle />
+                            <cit:date gco:nilReason="unknown" />
+                            <cit:edition gco:nilReason="missing">
+                                <gco:CharacterString />
+                            </cit:edition>
+                        </cit:CI_Citation>
+                    </mrd:formatSpecificationCitation>
+                </mrd:MD_Format>
+            </mrd:distributionFormat>
+            <mrd:transferOptions>
+                <mrd:MD_DigitalTransferOptions>
+                    <mrd:onLine>
+                        <cit:CI_OnlineResource>
+                            <cit:linkage>
+                                <gco:CharacterString>http://data.aodn.org.au/TERN/ACEF/Ecology/ARRAerialSurveyRaw3.csv</gco:CharacterString>
+                            </cit:linkage>
+                            <cit:protocol>
+                                <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
+                            </cit:protocol>
+                            <cit:name>
+                                <gco:CharacterString>Download data</gco:CharacterString>
+                            </cit:name>
+                        </cit:CI_OnlineResource>
+                    </mrd:onLine>
+                </mrd:MD_DigitalTransferOptions>
+            </mrd:transferOptions>
+        </mrd:MD_Distribution>
+    </mdb:distributionInfo>
+    <mdb:resourceLineage>
+        <mrl:LI_Lineage>
+            <mrl:statement gco:nilReason="missing">
+                <gco:CharacterString />
+            </mrl:statement>
+            <mrl:scope>
+                <mcc:MD_Scope>
+                    <mcc:level>
+                        <mcc:MD_ScopeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ScopeCode" codeListValue="dataset" />
+                    </mcc:level>
+                </mcc:MD_Scope>
+            </mrl:scope>
+        </mrl:LI_Lineage>
+    </mdb:resourceLineage>
+</mdb:MD_Metadata>

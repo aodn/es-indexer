@@ -1,6 +1,7 @@
 package au.org.aodn.esindexer.service;
 
 import au.org.aodn.esindexer.utils.GcmdKeywordUtils;
+import au.org.aodn.esindexer.utils.GeometryUtils;
 import au.org.aodn.esindexer.utils.JaxbUtils;
 import au.org.aodn.metadata.iso19115_3_2018.MDMetadataType;
 import au.org.aodn.stac.model.StacCollectionModel;
@@ -11,6 +12,7 @@ import co.elastic.clients.elasticsearch.core.SearchResponse;
 import co.elastic.clients.elasticsearch.core.search.HitsMetadata;
 import co.elastic.clients.elasticsearch.core.search.TotalHits;
 import co.elastic.clients.json.JsonData;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -31,6 +33,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Map;
+import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 
@@ -74,7 +77,20 @@ public class StacCollectionMapperServiceTests {
 
     protected IndexerServiceImpl indexerService;
 
+    protected void verify(String expected) throws JsonProcessingException, JSONException {
+        Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
+        String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
+        log.info(out);
+        JSONAssert.assertEquals(
+                objectMapper.readTree(expected).toPrettyString(),
+                objectMapper.readTree(out.strip()).toPrettyString(),
+                JSONCompareMode.STRICT
+        );
+    }
+
     public StacCollectionMapperServiceTests() throws JAXBException {
+        GeometryUtils.setExecutorService(Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors()));
+        GeometryUtils.init();
     }
 
     @AfterEach
@@ -160,15 +176,7 @@ public class StacCollectionMapperServiceTests {
         String expected = readResourceFile("classpath:canned/sample8_stac.json");
         indexerService.indexMetadata(xml);
 
-        // We use a mock to pretend insert value into Elastic, there we store what is being send to elastic
-        // and now we can use it to compare expected result.
-        Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
-        String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
-        JSONAssert.assertEquals(
-                objectMapper.readTree(expected).toPrettyString(),
-                objectMapper.readTree(out.strip()).toPrettyString(),
-                JSONCompareMode.STRICT
-        );
+        verify(expected);
     }
 
     @Test
@@ -177,9 +185,7 @@ public class StacCollectionMapperServiceTests {
         String expected = readResourceFile("classpath:canned/sample10_stac.json");
         indexerService.indexMetadata(xml);
 
-        Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
-        String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
-        JSONAssert.assertEquals(objectMapper.readTree(expected).toPrettyString(), objectMapper.readTree(out.strip()).toPrettyString(), JSONCompareMode.STRICT);
+        verify(expected);
     }
 
     @Test
@@ -189,30 +195,22 @@ public class StacCollectionMapperServiceTests {
         String xml1 = readResourceFile("classpath:canned/sample10.xml");
         String expected1 = readResourceFile("classpath:canned/sample10_stac.json");
         indexerService.indexMetadata(xml1);
-        Map<?,?> content1 = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
-        String out1 = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content1);
-        JSONAssert.assertEquals(objectMapper.readTree(expected1).toPrettyString(),
-                objectMapper.readTree(out1.strip()).toPrettyString(), JSONCompareMode.STRICT);
+
+        verify(expected1);
 
         // if license is not in citation block, it should try to find it in "other constraints"
         String xml2 = readResourceFile("classpath:canned/sample11.xml");
         String expected2 = readResourceFile("classpath:canned/sample11_stac.json");
         indexerService.indexMetadata(xml2);
-        Map<?,?> content2 = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
-        String out2 = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content2);
-        JSONAssert.assertEquals(objectMapper.readTree(expected2).toPrettyString(),
-                objectMapper.readTree(out2.strip()).toPrettyString(), JSONCompareMode.STRICT);
+
+        verify(expected2);
 
         // if both blocks all don't have license, it should return empty string
         String xml3 = readResourceFile("classpath:canned/sample7.xml");
         String expected3 = readResourceFile("classpath:canned/sample7_stac_no_es.json");
         indexerService.indexMetadata(xml3);
-        Map<?,?> content3 = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
-        String out3 = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content3);
-        JSONAssert.assertEquals(
-                objectMapper.readTree(expected3).toPrettyString(),
-                objectMapper.readTree(out3.strip()).toPrettyString(),
-                JSONCompareMode.STRICT);
+
+        verify(expected3);
     }
 
     @Test
@@ -222,14 +220,7 @@ public class StacCollectionMapperServiceTests {
         String expected = readResourceFile("classpath:canned/sample9_stac.json");
         indexerService.indexMetadata(xml);
 
-        // We use a mock to pretend insert value into Elastic, there we store what is being send to elastic
-        // and now we can use it to compare expected result.
-        Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
-        String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
-        log.info(out);
-        JSONAssert.assertEquals(objectMapper.readTree(expected).toPrettyString(),
-                objectMapper.readTree(out.strip()).toPrettyString(),
-                JSONCompareMode.STRICT);
+        verify(expected);
     }
 
     @Test
@@ -239,13 +230,7 @@ public class StacCollectionMapperServiceTests {
         String expected = readResourceFile("classpath:canned/sample10_stac.json");
         indexerService.indexMetadata(xml);
 
-        // We use a mock to pretend insert value into Elastic, there we store what is being send to elastic
-        // and now we can use it to compare expected result.
-        Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
-        String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
-        JSONAssert.assertEquals(objectMapper.readTree(expected).toPrettyString(),
-                objectMapper.readTree(out.strip()).toPrettyString(),
-                JSONCompareMode.STRICT);
+        verify(expected);
     }
 
     @Test
@@ -254,14 +239,7 @@ public class StacCollectionMapperServiceTests {
         String expected = readResourceFile("classpath:canned/sample_multiple_temporal1_stac.json");
         indexerService.indexMetadata(xml);
 
-        Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
-        String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
-        log.info(out);
-        JSONAssert.assertEquals(
-                objectMapper.readTree(expected).toPrettyString(),
-                objectMapper.readTree(out.strip()).toPrettyString(),
-                JSONCompareMode.STRICT
-        );
+        verify(expected);
     }
 
     @Test
@@ -270,13 +248,7 @@ public class StacCollectionMapperServiceTests {
         String expected = readResourceFile("classpath:canned/sample_multiple_temporal2_stac.json");
         indexerService.indexMetadata(xml);
 
-        Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
-        String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
-        JSONAssert.assertEquals(
-                objectMapper.readTree(expected).toPrettyString(),
-                objectMapper.readTree(out.strip()).toPrettyString(),
-                JSONCompareMode.STRICT
-        );
+        verify(expected);
     }
 
     @Test
@@ -285,14 +257,7 @@ public class StacCollectionMapperServiceTests {
         String expected = readResourceFile("classpath:canned/sample_multiple_temporal_null_stac.json");
         indexerService.indexMetadata(xml);
 
-        Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
-        String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
-        log.info(out);
-        JSONAssert.assertEquals(
-                objectMapper.readTree(expected).toPrettyString(),
-                objectMapper.readTree(out.strip()).toPrettyString(),
-                JSONCompareMode.STRICT
-        );
+        verify(expected);
     }
 
     @Test
@@ -301,13 +266,7 @@ public class StacCollectionMapperServiceTests {
         String expected = readResourceFile("classpath:canned/keywords_null_stac.json");
         indexerService.indexMetadata(xml);
 
-        Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
-        String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
-        JSONAssert.assertEquals(
-                objectMapper.readTree(expected).toPrettyString(),
-                objectMapper.readTree(out.strip()).toPrettyString(),
-                JSONCompareMode.STRICT
-        );
+        verify(expected);
     }
 
     @Test
@@ -316,13 +275,7 @@ public class StacCollectionMapperServiceTests {
         String expected = readResourceFile("classpath:canned/abstract_resposibilty_null_stac.json");
         indexerService.indexMetadata(xml);
 
-        Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
-        String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
-        JSONAssert.assertEquals(
-                objectMapper.readTree(expected).toPrettyString(),
-                objectMapper.readTree(out.strip()).toPrettyString(),
-                JSONCompareMode.STRICT
-        );
+        verify(expected);
     }
     /**
      * @throws IOException
@@ -333,14 +286,7 @@ public class StacCollectionMapperServiceTests {
         String expected = readResourceFile("classpath:canned/sample12_stac.json");
         indexerService.indexMetadata(xml);
 
-        Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
-        String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
-        log.info(out);
-        JSONAssert.assertEquals(
-                objectMapper.readTree(expected).toPrettyString(),
-                objectMapper.readTree(out.strip()).toPrettyString(),
-                JSONCompareMode.STRICT
-        );
+        verify(expected);
     }
 
     @Test
@@ -349,14 +295,7 @@ public class StacCollectionMapperServiceTests {
         String expected = readResourceFile("classpath:canned/sample13_stac.json");
         indexerService.indexMetadata(xml);
 
-        Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
-        String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
-        log.info(out);
-        JSONAssert.assertEquals(
-                objectMapper.readTree(expected).toPrettyString(),
-                objectMapper.readTree(out.strip()).toPrettyString(),
-                JSONCompareMode.STRICT
-        );
+        verify(expected);
     }
 
     @Test
@@ -365,13 +304,7 @@ public class StacCollectionMapperServiceTests {
         String expected = readResourceFile("classpath:canned/sample14_stac.json");
         indexerService.indexMetadata(xml);
 
-        Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
-        String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
-        JSONAssert.assertEquals(
-                objectMapper.readTree(expected).toPrettyString(),
-                objectMapper.readTree(out.strip()).toPrettyString(),
-                JSONCompareMode.STRICT
-        );
+        verify(expected);
     }
     /**
      * During polygon construction, there are times that the XML do not provide the proper dimension, 2D or 3D.
@@ -385,13 +318,25 @@ public class StacCollectionMapperServiceTests {
         String expected = readResourceFile("classpath:canned/sample15_stac.json");
         indexerService.indexMetadata(xml);
 
-        Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
-        String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
-        JSONAssert.assertEquals(
-                objectMapper.readTree(expected).toPrettyString(),
-                objectMapper.readTree(out.strip()).toPrettyString(),
-                JSONCompareMode.STRICT
-        );
+        verify(expected);
+    }
+
+    @Test
+    public void verifyProviderNameNullWorks() throws IOException, JSONException {
+        String xml = readResourceFile("classpath:canned/sample16.xml");
+        String expected = readResourceFile("classpath:canned/sample16.json");
+        indexerService.indexMetadata(xml);
+
+        verify(expected);
+    }
+
+    @Test
+    public void verifyCiRoleCodeNullWorks() throws IOException, JSONException {
+        String xml = readResourceFile("classpath:canned/sample17.xml");
+        String expected = readResourceFile("classpath:canned/sample17.json");
+        indexerService.indexMetadata(xml);
+
+        verify(expected);
     }
     /**
      * Metadata have geometry which result in a point and not a polygon
@@ -404,14 +349,7 @@ public class StacCollectionMapperServiceTests {
         String expected = readResourceFile("classpath:canned/sample_incorrect_projection_stac.json");
         indexerService.indexMetadata(xml);
 
-        Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
-        String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
-        log.info(out);
-        JSONAssert.assertEquals(
-                objectMapper.readTree(expected).toPrettyString(),
-                objectMapper.readTree(out.strip()).toPrettyString(),
-                JSONCompareMode.STRICT
-        );
+        verify(expected);
     }
     /**
      * Metadata have geometry which result in a point and not a polygon
@@ -424,14 +362,7 @@ public class StacCollectionMapperServiceTests {
         String expected = readResourceFile("classpath:canned/sample_abstract_citation_null_stac.json");
         indexerService.indexMetadata(xml);
 
-        Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
-        String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
-        log.info(out);
-        JSONAssert.assertEquals(
-                objectMapper.readTree(expected).toPrettyString(),
-                objectMapper.readTree(out.strip()).toPrettyString(),
-                JSONCompareMode.STRICT
-        );
+        verify(expected);
     }
     /**
      * The date field contains year only or year-month only. We need to handle this case.
@@ -444,13 +375,28 @@ public class StacCollectionMapperServiceTests {
         String expected = readResourceFile("classpath:canned/sample_malform_date_stac.json");
         indexerService.indexMetadata(xml);
 
-        Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
-        String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
-        log.info(out);
-        JSONAssert.assertEquals(
-                objectMapper.readTree(expected).toPrettyString(),
-                objectMapper.readTree(out.strip()).toPrettyString(),
-                JSONCompareMode.STRICT
-        );
+        verify(expected);
+    }
+    /**
+     * Sample contains invalid polygon where only x coor is valid but y is NaN
+     *
+     * @throws IOException - Do not expect to throw
+     */
+    @Test
+    public void verifyMalformCoordinateWorks() throws IOException, JSONException {
+        String xml = readResourceFile("classpath:canned/sample_invalid_polygon.xml");
+        String expected = readResourceFile("classpath:canned/sample_invalid_polygon.json");
+        indexerService.indexMetadata(xml);
+
+        verify(expected);
+    }
+
+    @Test
+    public void verifyNonNodedIntersectionsWorks() throws IOException, JSONException {
+        String xml = readResourceFile("classpath:canned/sample_non_noded_intersections.xml");
+        String expected = readResourceFile("classpath:canned/sample_non_noded_intersections_stac.json");
+        indexerService.indexMetadata(xml);
+
+        verify(expected);
     }
 }
