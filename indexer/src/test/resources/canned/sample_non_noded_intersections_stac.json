@@ -1,0 +1,235 @@
+{
+  "title" : "Venomous Jellyfish Database (sting events and specimen samples – November 2018) (NESP TWQ 2.2.3, CSIRO)",
+  "description" : "This dataset contains records of sting events and specimen samples of jellyfish (Irukanji, Halo irukanji, Box jellyfish and Morbakka) from the Venomous Jellyfish Database. This dataset contains an extract of 1081 sting events (in CSV format) from along the north Queensland coast between December 1883 to March 2017. The full database contains approximately 3000 sting events from around Australia and includes records from sources that have not yet been cleared for release.\n\n                    This extract from the Venomous Jellyfish Database was made for eAtlas as part of the 2.2.3 NESP Irukandji forecasting system project. It contains jellyfish sting and specimen information. Data were compiled from numerous sources (noted in each record), including Lisa-ann Gershwin and media reports. These data will be used as part of the Irukandji forecasting model. The extract data file contains data that is publicly available.\n\n                    The sting data includes primary information such as date, time of day and locality of stings, as well as secondary details such as age and gender of the sting victim, where on the body they were stung, their activity at the time of the sting and their general medical condition.\n\n\n                    Limitations:\n                    This data shows the occurrence of reported jellyfish stings and specimens along the north Queensland coast. It does NOT provide a prediction of where jellyfish or jellyfish sting events may occur.\n\n                    These records represent a fraction of known sting events and specimen collections, with more being added to the list of publicly available data as permissions are granted.\n\n                    Historical data dates may be coarse, showing month and year that the sting occurred in. Some events have date only.\n\n\n                    Methods:\n                    This data set contains information on sting events and specimen collections that have occurred around Australia, which involved venomous jellyfish (Irukandji syndrome-producing species in the genera Carukia, Malo, Morbakka).\n\n                    These data were collected over numerous years by Lisa-ann Gershwin and others from various sources (primarily media). These data were entered into an excel spreadsheet, which formed the basis of the Venomous Jellyfish Database. This database was developed as part of the 2.2.3 NESP Irukandji forecasting system project.\n\n                    Some data have been standardised, e.g., location information and sting site on the body. Data available to the public have been approved by the data owners, or came from a public source (e.g. newspaper reports, media alerts).\n\n\n                    Format:\n\n                    This dataset consists of one Comma Separated Value (CSV) table containing information on jellyfish events along the north Queensland coast. eAtlas Note: The original database extract was provided as an Excel spreadsheet table. This was converted to a CSV file.\n\n\n                    Data Dictionary:\n\n                    CSIRO_ID: unique id\n                    EVENT_TYPE: type of event – sting or specimen\n                    STATE: state in which event occurred\n                    REGION: broader region of State the event occurred in\n                    LOCAL_GOV_AREA: local government area that the event occurred in – if known\n                    MAIN_LOCALITY: main locality that the event occurred in\n                    SITE_INFO: site details/comments\n                    YEAR: year event occurred\n                    MONTH: month event occurred\n                    DAY: day of the month the event occurred\n                    DATE_RANGE: date range event may have occurred in\n                    EVENT_TIME: time the event occurred HH24:MI. If time is unknown then NULL\n                    EXACT_DATE: if exact date unknown then N. Use with DATE_RANGE\n                    EXACT_TIME: if exact time unknown then N.\n                    TIME_REPORTED: time event reported e.g. early afternoon, morning\n                    EVENT_RECORDED: date event reported e.g. on weekend, in February, Jan-March\n                    EVENT_COMMENTS: comments about the event\n                    LAT: latitude in decimal degrees\n                    LON: longitude in decimal degrees\n                    LOCATION_ACCURACY: How accurate the location is, 0=within a few hundred metres, 1=within a few kilometres, 2=more than a few kilometres\n                    EVENT_OFFSHORE_ONSHORE: where the event occurred (if known) – beach, island, reef\n                    LOCATION_COMMENTS: comments relating to the location of the event\n                    WATER_DEPTH_M: depth of water, in metres, that the event occurred in (if known)\n                    AGE: number: age of patient if known\n                    SEX: gender of patient if known\n                    HOME: home state/county of patient\n                    HOSPITAL: hospital the patient was treated at (if known)\n                    RETRIEVAL: method by which the patient was transported to hospital (if known)\n                    STING_SITE_REPORTED: reported sting site on the body\n                    STING_SITE_BODY: standardised area on body that sting was reported – upper limb, lower limb etc.\n                    NUMBER_STINGS: number of stings recorded, if known\n                    VISIBLE_STING: the nature of visible sting marks, if reported\n                    PPE_WORN: was Personal Protective Equipment (PPE) worn?\n                    PATIENT_COMMENTS: comments about the patient\n                    TIME_TO_ONSET: delay between sting and onset of symptoms, if reported\n                    PATIENT_CONDITION: state the patient was in, e.g. distressed, calm, stable\n                    BLOOD_PRESSUREL: comments relating to blood pressure of the patient\n                    NAUSEA: did the patient experience nausea and/or vomiting?\n                    PAIN: location and/or intensity of pain experienced by the patient\n                    SWEATING: did the patient experience sweating?\n                    TREATMENT: what treatment the patient was given\n                    DISCHARGED: when the patient was discharged from hospital\n                    ONGOING_SYMPTOMS: what ongoing symptoms the patient is experiencing\n                    NEMATO_SAMPLES: were nematocyst samples taken?\n                    SPECIES_NAME: species name, if determined\n                    PATROL: was the sting on a patrolled beach\n                    CURATOR: where the data came from e.g. Gershwin = Lisa-ann Gershwin\n                    DATA_CODE: access constraint on data\n                    PUBLIC_REFERENCE: source of the information for event\n                    ENTERED_BY: who entered the data\n                    ENTERED_DATE: when the data was entered\n\n\n                    References:\n\n                    Gershwin, L. (2013). Stung! On Jellyfish Blooms and the Future of the Ocean. Chicago, University of Chicago Press.\n                    Gershwin, L., De Nardi, M., Winkel, K.D., and Fenner, P.J. (2010) Marine Stingers: Review of an Under-Recognized Global Coastal Management Issue. Journal of Coastal Management, 38:1, 22-41, DOI: 10.1080/08920750903345031\n\n                    Gershwin L, Condie SA, Mansbridge JV, Richardson AJ. 2014 Dangerous jellyfish blooms are predictable. Journal of the Royal Society. Interface 11: 20131168.http://dx.doi.org/10.1098/rsif.2013.1168\n\n                    Gershwin, L., Richardson, A.J., Winkel, K.D., Fenner, P.J., Lippmann, J., Hore, R., Avila-Soria, G., Brewer, D., Kloser, R.J., Steven, A. and Condie, S. (2013). Biology and ecology of Irukandji jellyfish (Cnidaria: Cubozoa). Advances in Marine Biology 66: 1-85.\n\n\n                    Data Location:\n\n                    This dataset is filed in the eAtlas enduring data repository at: data\\custodian\\2016-18-NESP-TWQ-2\\2.2.3_Jellyfish-early-warning\\AU_NESP-TWQ-2-2-3_CSIRO_Venomous-Jellyfish-DB",
+  "extent" : {
+    "bbox" : [ [ 139.0869140625, -28.0810546875, 153.9404296875, -9.9755859375 ], [ 139.0869140625, -28.0810546875, 153.9404296875, -9.9755859375 ] ],
+    "temporal" : [ [ "1883-11-30T14:10:44Z", "2017-03-15T13:00:00Z" ], [ "1883-11-30T14:10:44Z", "2017-03-15T13:00:00Z" ] ]
+  },
+  "summaries" : {
+    "score" : 1,
+    "status" : "",
+    "credits" : [ ],
+    "scope" : {
+      "code" : "dataset",
+      "name" : ""
+    },
+    "creation" : "2020-11-18T05:17:25",
+    "revision" : "2023-09-18T08:51:09",
+    "update_frequency" : "other",
+    "proj:geometry" : {
+      "geometries" : [ {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 153.9404296875, -28.081054687500007 ], [ 153.76464843750003, -24.8291015625 ], [ 151.2158203125, -22.368164062500018 ], [ 149.6337890625, -19.6435546875 ], [ 146.99707031250003, -18.061523437500018 ], [ 146.6455078125, -14.9853515625 ], [ 144.7998046875, -14.106445312500014 ], [ 142.8662109375, -9.9755859375 ], [ 141.9873046875, -10.942382812500014 ], [ 139.0869140625, -16.6552734375 ], [ 139.7900390625, -16.6552734375 ], [ 139.4384765625, -16.2158203125 ], [ 141.19628906250003, -12.172851562499986 ], [ 141.5478515625, -13.4033203125 ], [ 141.9873046875, -12.4365234375 ], [ 141.2841796875, -11.9091796875 ], [ 142.5146484375, -10.7666015625 ], [ 143.2177734375, -10.7666015625 ], [ 144.7119140625, -14.1943359375 ], [ 145.2392578125, -15.1611328125 ], [ 145.2392578125, -16.391601562500014 ], [ 145.8544921875, -17.0947265625 ], [ 146.2939453125, -19.0283203125 ], [ 149.0185546875, -20.3466796875 ], [ 149.1064453125, -21.2255859375 ], [ 149.5458984375, -22.456054687500018 ], [ 150.6005859375, -22.8076171875 ], [ 150.95214843749997, -23.7744140625 ], [ 152.8857421875, -25.356445312499982 ], [ 153.5009765625, -28.081054687500007 ], [ 153.9404296875, -28.081054687500007 ] ] ]
+      } ],
+      "type" : "GeometryCollection"
+    },
+    "temporal" : [ {
+      "start" : "1883-11-30T14:10:44Z",
+      "end" : "2017-03-15T13:00:00Z"
+    } ],
+    "centroid" : [ [ 139.524, -15.935 ], [ 139.6, -16.595 ], [ 139.402, -16.651 ], [ 141.531, -12.616 ], [ 149.179, -20.592 ], [ 145.617, -15.359 ], [ 153.009, -25.279 ], [ 146.144, -18.336 ] ]
+  },
+  "contacts" : [ {
+    "roles" : [ "pointOfContact", "about" ],
+    "organization" : "Oceans and Atmosphere, CSIRO",
+    "name" : "Condie, Scott, Dr",
+    "position" : "Principal Research Scientist",
+    "emails" : [ "scott.condie@csiro.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "GPO BOX 1538" ],
+      "city" : "Hobart",
+      "country" : "Australia",
+      "postalCode" : "",
+      "administrativeArea" : "Tasmania"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "+61 3 6232 5222"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : ""
+    } ],
+    "links" : [ {
+      "href" : "https://eatlas.org.au/node/7531",
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : "eAtlas portal"
+    } ]
+  }, {
+    "roles" : [ "pointOfContact", "metadata" ],
+    "organization" : "Australian Institute of Marine Science (AIMS)",
+    "name" : "eAtlas Data Manager",
+    "position" : "",
+    "emails" : [ "e-atlas@aims.gov.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],
+      "city" : "Townsville",
+      "country" : "Australia",
+      "postalCode" : "4810",
+      "administrativeArea" : "Queensland"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "+61 7 4753 4444"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : ""
+    } ],
+    "links" : [ {
+      "href" : "https://eatlas.org.au",
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : "eAtlas portal"
+    } ]
+  }, {
+    "roles" : [ "principalInvestigator", "citation" ],
+    "organization" : "Oceans and Atmosphere, CSIRO",
+    "name" : "Gershwin, Lisa-ann, Dr",
+    "position" : "Research Scientist",
+    "emails" : [ "lisa-ann.gershwin@csiro.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "+61 3 6232 5222" ],
+      "city" : "GPO BOX 1538",
+      "country" : "Australia",
+      "postalCode" : "Tasmania",
+      "administrativeArea" : "Hobart"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "+61 3 6232 5222"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : ""
+    } ],
+    "links" : [ ]
+  }, {
+    "roles" : [ "collaborator", "citation" ],
+    "organization" : "Oceans and Atmosphere, CSIRO",
+    "name" : "Thomas, Linda, Ms",
+    "position" : "Research Officer",
+    "emails" : [ "linda.thomas@csiro.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "GPO BOX 1538" ],
+      "city" : "Hobart",
+      "country" : "Australia",
+      "postalCode" : "",
+      "administrativeArea" : "Tasmania"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "+61 3 6232 5222"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : ""
+    } ],
+    "links" : [ ]
+  }, {
+    "roles" : [ "collaborator", "citation" ],
+    "organization" : "Oceans and Atmosphere, CSIRO",
+    "name" : "Condie, Scott, Dr",
+    "position" : "Principal Research Scientist",
+    "emails" : [ "scott.condie@csiro.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "GPO BOX 1538" ],
+      "city" : "Hobart",
+      "country" : "Australia",
+      "postalCode" : "",
+      "administrativeArea" : "Tasmania"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "+61 3 6232 5222"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : ""
+    } ],
+    "links" : [ ]
+  }, {
+    "roles" : [ "collaborator", "citation" ],
+    "organization" : "Oceans and Atmosphere, CSIRO",
+    "name" : "Richardson, Anthony, Prof",
+    "position" : "Principal Research Scientist",
+    "emails" : [ "anthony.richardson@csiro.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "" ],
+      "city" : "Dutton Park",
+      "country" : "Australia",
+      "postalCode" : "4067",
+      "administrativeArea" : "Brisbane"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "+61 7 3833 5656"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : ""
+    } ],
+    "links" : [ ]
+  } ],
+  "languages" : [ {
+    "code" : "eng",
+    "name" : "English"
+  } ],
+  "links" : [ {
+    "href" : "https://nesptropical.edu.au/index.php/round-2-projects/project-2-2-3/",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "NESP TWQ Project 2.2.3"
+  }, {
+    "href" : "https://maps.eatlas.org.au/index.html?intro=false&z=6&ll=146.23608,-18.99354&l0=ea_nesp2%3AAU_NESP-TWQ-2-2-3_CSIRO_Venomous-Jellyfish-DB_extract_20181130,ea_ea-be%3AWorld_Bright-Earth-e-Atlas-basemap,google_HYBRID,google_TERRAIN,google_SATELLITE,google_ROADMAP&v0=,,f,f,f,f",
+    "rel" : "related",
+    "type" : "",
+    "title" : "eAtlas Web Mapping Service (WMS) (AIMS)"
+  }, {
+    "href" : "https://eatlas.org.au/nesp-twq-2/jellyfish-early-warning-2-2-3",
+    "rel" : "related",
+    "type" : "",
+    "title" : "Project web site"
+  }, {
+    "href" : "https://nextcloud.eatlas.org.au/apps/sharealias/a/au-nesp-twq-2-2-3-venomous-jellyfish-db-20181130",
+    "rel" : "related",
+    "type" : "",
+    "title" : "Venomous Jellyfish Database extract Nov 2018 CSV + Metadata + Photo [Zip 1.355 MB]"
+  }, {
+    "href" : "https://maps.eatlas.org.au/index.html?intro=false&z=5&ll=146.93921,-18.03512&l0=ea_nesp2%3AAU_NESP-TWQ-2-2-3_CSIRO_Venomous-Jellyfish-DB_extract_20181130,ea_ea-be%3AWorld_Bright-Earth-e-Atlas-basemap,google_HYBRID,google_TERRAIN,google_SATELLITE,google_ROADMAP&v0=,,f,f,f,f",
+    "rel" : "related",
+    "type" : "",
+    "title" : "Interactive map of this dataset"
+  }, {
+    "href" : "https://maps.eatlas.org.au/maps/wms",
+    "rel" : "wms",
+    "type" : "",
+    "title" : "nesp2:AU_NESP-TWQ-2-2-3_CSIRO_Venomous-Jellyfish-DB_extract_20181130"
+  }, {
+    "href" : "https://eatlas.org.au/data/uuid/c5ce8cb6-04e5-4153-836d-df91878a3131",
+    "rel" : "related",
+    "type" : "",
+    "title" : "R code for analysis of Irukandji data of the GBR (NESP TWQ 2.2.3, CSIRO)"
+  }, {
+    "href" : "https://eatlas.org.au/data/uuid/16904861-53e6-4123-a7bb-781f2429629f",
+    "rel" : "describedby",
+    "type" : "text/html",
+    "title" : "Full metadata link"
+  }, {
+    "href" : "http://i.creativecommons.org/l/by/3.0/au/88x31.png",
+    "rel" : "license",
+    "type" : "image/png"
+  }, {
+    "href" : "",
+    "rel" : "license",
+    "type" : "text/html"
+  } ],
+  "license" : "Creative Commons Attribution 3.0 Australia License",
+  "providers" : [ {
+    "name" : "Australian Institute of Marine Science (AIMS)",
+    "roles" : [ "pointOfContact" ],
+    "url" : "https://eatlas.org.au"
+  } ],
+  "themes" : [ ],
+  "id" : "16904861-53e6-4123-a7bb-781f2429629f",
+  "search_suggestions" : {
+    "abstract_phrases" : [ ]
+  },
+  "sci:citation" : "{\"suggestedCitation\":null,\"useLimitations\":null,\"otherConstraints\":[\"This database is based on the \\\"Irukandji Sting Database\\\" assembled and curated by Dr Lisa-Ann Gershwin of the Australian Marine Stinger Advisory Services, and others, and enhanced by CSIRO.\\n                            Derivative products and copies of this work must display this acknowledgement:\\n                            \\\"Based on or contains data provided by Dr Lisa-ann Gershwin (Australian Marine Stinger Advisory Services) and CSIRO. In consideration of the state permitting use of this data you acknowledge and agree that the State gives no warranty in relation to the data (including accuracy, reliability, completeness, currency or suitability) and accepts no liability (including without limitation, liability in negligence) for any loss, damage or costs (including consequential damage) relating to any use of the data. Data must not be used for direct marketing or be used in breach of the privacy laws.\\\"\\n                            You must also include meta-data with the product(s) and include as a minimum the metadata provided with this supplied data.\"]}",
+  "type" : "Collection",
+  "stac_version" : "1.0.0",
+  "stac_extensions" : [ "https://stac-extensions.github.io/scientific/v1.0.0/schema.json", "https://stac-extensions.github.io/contacts/v0.1.1/schema.json", "https://stac-extensions.github.io/projection/v1.1.0/schema.json", "https://stac-extensions.github.io/language/v1.0.0/schema.json", "https://stac-extensions.github.io/themes/v1.0.0/schema.json", "https://stac-extensions.github.io/web-map-links/v1.2.0/schema.json" ]
+}

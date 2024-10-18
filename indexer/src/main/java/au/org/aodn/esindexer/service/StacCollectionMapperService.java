@@ -12,9 +12,7 @@ import au.org.aodn.stac.util.JsonUtil;
 import jakarta.xml.bind.JAXBElement;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Named;
+import org.mapstruct.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -39,11 +37,13 @@ import static au.org.aodn.esindexer.utils.StringUtil.capitalizeFirstLetter;
 @Service
 @Mapper(componentModel = "spring")
 public abstract class StacCollectionMapperService {
-
-    public static final String REAL_TIME = "real-time";
+    @BeforeMapping
+    void beforeMapping(MDMetadataType source) {
+        logger.info("Processing uuid: {}", CommonUtils.getUUID(source));
+    }
 
     @Mapping(target="uuid", source = "source", qualifiedByName = "mapUUID")
-    @Mapping(target="title", source = "source", qualifiedByName = "mapTitle" )
+    @Mapping(target="title", source = "source", qualifiedByName = "mapTitle")
     @Mapping(target="description", source = "source", qualifiedByName = "mapDescription")
     @Mapping(target="extent.bbox", source = "source", qualifiedByName = "mapExtentBbox")
     @Mapping(target="extent.temporal", source = "source", qualifiedByName = "mapExtentTemporal")
@@ -68,7 +68,7 @@ public abstract class StacCollectionMapperService {
     @Mapping(target="summaries.revision", source = "source", qualifiedByName = "mapSummaries.revision")
     public abstract StacCollectionModel mapToSTACCollection(MDMetadataType source);
 
-    private static final Logger logger = LogManager.getLogger(StacCollectionMapperService.class);
+    protected static final Logger logger = LogManager.getLogger(StacCollectionMapperService.class);
 
     @Value("${spring.jpa.properties.hibernate.jdbc.time_zone}")
     private String timeZoneId;
@@ -104,7 +104,7 @@ public abstract class StacCollectionMapperService {
 
         List<MDDataIdentificationType> items = MapperUtils.findMDDataIdentificationType(source);
         if (items.isEmpty()) {
-            logger.warn("Unable to find extent temporal information for metadata record: " + this.mapUUID(source));
+            logger.warn("Unable to find extent temporal information for metadata record: {}", CommonUtils.getUUID(source));
             return null;
         }
 
@@ -128,13 +128,13 @@ public abstract class StacCollectionMapperService {
                         if (pair0.isEmpty()) {
                             pair0 = safeGet(() -> timePeriodType.getBeginPosition().getValue().get(0));
                         }
-                        pair0.ifPresent(pair -> temporalPair[0] = convertDateToZonedDateTime(this.mapUUID(source), pair, true));
+                        pair0.ifPresent(pair -> temporalPair[0] = convertDateToZonedDateTime(CommonUtils.getUUID(source), pair, true));
 
                         var pair1 = safeGet(() -> timePeriodType.getEnd().getTimeInstant().getTimePosition().getValue().get(0));
                         if (pair1.isEmpty()) {
                             pair1 = safeGet(() -> timePeriodType.getEndPosition().getValue().get(0));
                         }
-                        pair1.ifPresent(pair -> temporalPair[1] = convertDateToZonedDateTime(this.mapUUID(source), pair, false));
+                        pair1.ifPresent(pair -> temporalPair[1] = convertDateToZonedDateTime(CommonUtils.getUUID(source), pair, false));
                     }
 
                     result.add(temporalPair);
@@ -381,7 +381,7 @@ public abstract class StacCollectionMapperService {
             }
         }
 
-        logger.warn("Unable to find scope metadata record: " + this.mapUUID(source));
+        logger.warn("Unable to find scope metadata record: {}", CommonUtils.getUUID(source));
         return null;
     }
     /**
@@ -442,7 +442,7 @@ public abstract class StacCollectionMapperService {
     @Named("mapSummaries.datasetGroup")
     String mapGeoNetworkGroup(MDMetadataType source) {
         try {
-            String group = geoNetworkService.findGroupById(mapUUID(source));
+            String group = geoNetworkService.findGroupById(CommonUtils.getUUID(source));
             return group != null ? group.toLowerCase() : null;
         }
         catch (IOException e) {
@@ -561,7 +561,7 @@ public abstract class StacCollectionMapperService {
             for (MDDataIdentificationType i : items) {
                 i.getDescriptiveKeywords().forEach(descriptiveKeyword -> {
                     ThemesModel themesModel = ThemesModel.builder().build();
-                    String uuid = this.mapUUID(source);
+                    String uuid = CommonUtils.getUUID(source);
 
                     themesModel.setConcepts(mapThemesConcepts(descriptiveKeyword));
                     themesModel.setTitle(mapThemesTitle(descriptiveKeyword, uuid));
@@ -617,11 +617,11 @@ public abstract class StacCollectionMapperService {
         }
 
         // Now add links for logos
-        geoNetworkService.getLogo(this.mapUUID(source))
+        geoNetworkService.getLogo(CommonUtils.getUUID(source))
                 .ifPresent(results::add);
 
         // Thumbnail link
-        geoNetworkService.getThumbnail(this.mapUUID(source))
+        geoNetworkService.getThumbnail(CommonUtils.getUUID(source))
                 .ifPresent(results::add);
 
         // full metadata link
@@ -652,7 +652,7 @@ public abstract class StacCollectionMapperService {
     }
 
     private List<LinkModel> getAssociatedRecords(MDMetadataType source) {
-        var associatedRecordsData = geoNetworkService.getAssociatedRecords(mapUUID(source));
+        var associatedRecordsData = geoNetworkService.getAssociatedRecords(CommonUtils.getUUID(source));
         return AssociatedRecordsUtil.generateAssociatedRecords(associatedRecordsData);
     }
 
@@ -769,12 +769,12 @@ public abstract class StacCollectionMapperService {
                                                 results.add(providerModel);
                                             }
                                             else {
-                                                logger.error("Unable to cast getAbstractCIParty().getValue() to CIOrganisationType2 or CIIndividualType2 for metadata record: {}", mapUUID(source));
+                                                logger.error("Unable to cast getAbstractCIParty().getValue() to CIOrganisationType2 or CIIndividualType2 for metadata record: {}", CommonUtils.getUUID(source));
                                             }
                                         }));
                             }
                             else {
-                                logger.warn("getContact().getAbstractResponsibility() in mapProviders is not of type CIResponsibilityType2 for UUID {}", mapUUID(source));
+                                logger.warn("getContact().getAbstractResponsibility() in mapProviders is not of type CIResponsibilityType2 for UUID {}", CommonUtils.getUUID(source));
                             }
                         }));
         return results;
@@ -820,7 +820,7 @@ public abstract class StacCollectionMapperService {
         if (!licenses.isEmpty()) {
             return String.join(" | ", licenses);
         } else {
-            logger.debug("Unable to find license information for metadata record: " + this.mapUUID(source));
+            logger.debug("Unable to find license information for metadata record: {}", CommonUtils.getUUID(source));
             return "";
         }
     }
@@ -865,7 +865,7 @@ public abstract class StacCollectionMapperService {
                         if (responsibilityType instanceof final CIResponsibilityType2 ciResponsibility) {
 
                             if (ciResponsibility.getParty().isEmpty()) {
-                                logger.warn("Unable to find contact info for metadata record: {}", this.mapUUID(source));
+                                logger.warn("Unable to find contact info for metadata record: {}", CommonUtils.getUUID(source));
                             }
                             else {
                                 ciResponsibility.getParty().forEach(party -> {
@@ -878,7 +878,7 @@ public abstract class StacCollectionMapperService {
                         }
                     }
                     else {
-                        logger.warn("getAbstractResponsibility() is null in mapContact for metadata record: {}", mapUUID(source));
+                        logger.warn("getAbstractResponsibility() is null in mapContact for metadata record: {}", CommonUtils.getUUID(source));
                     }
                 });
             }
@@ -924,7 +924,7 @@ public abstract class StacCollectionMapperService {
                     safeGet(() -> property.getCIResponsibility().getParty())
                             .ifPresent(parties -> {
                                 if (parties.isEmpty()) {
-                                    logger.warn("Unable to find citation contact info for metadata record: {}", this.mapUUID(source));
+                                    logger.warn("Unable to find citation contact info for metadata record: {}", CommonUtils.getUUID(source));
                                 } else {
                                     parties.forEach(party -> {
                                         var mappedContacts = MapperUtils.mapOrgContacts(ciResponsibility, party);
@@ -956,7 +956,7 @@ public abstract class StacCollectionMapperService {
                     case "eng" -> languageModel.setName("English");
                     case "fra" -> languageModel.setName("French");
                     default -> {
-                        logger.warn("Unable to find language for metadata record: {}, default to eng", this.mapUUID(source));
+                        logger.warn("Unable to find language for metadata record: {}, default to eng", CommonUtils.getUUID(source));
                         languageModel.setCode("eng");
                         languageModel.setName("English");
                     }

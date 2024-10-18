@@ -390,4 +390,13 @@ public class StacCollectionMapperServiceTests {
 
         verify(expected);
     }
+
+    @Test
+    public void verifyNonNodedIntersectionsWorks() throws IOException, JSONException {
+        String xml = readResourceFile("classpath:canned/sample_non_noded_intersections.xml");
+        String expected = readResourceFile("classpath:canned/sample_non_noded_intersections_stac.json");
+        indexerService.indexMetadata(xml);
+
+        verify(expected);
+    }
 }
