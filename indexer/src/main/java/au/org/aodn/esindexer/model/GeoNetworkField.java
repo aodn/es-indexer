@@ -6,5 +6,5 @@ import lombok.Getter;
 public enum GeoNetworkField {
     creation,
     revision,
-    ;
+    publication,
 }

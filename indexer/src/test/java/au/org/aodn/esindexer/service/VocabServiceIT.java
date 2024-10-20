@@ -31,7 +31,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @ActiveProfiles("test")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class VocabServiceTest extends BaseTestClass {
+public class VocabServiceIT extends BaseTestClass {
 
     @Autowired
     VocabService vocabService;
