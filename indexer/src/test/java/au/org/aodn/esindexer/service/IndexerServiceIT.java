@@ -3,6 +3,8 @@ package au.org.aodn.esindexer.service;
 import au.org.aodn.esindexer.BaseTestClass;
 import au.org.aodn.esindexer.configuration.GeoNetworkSearchTestConfig;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
+import co.elastic.clients.elasticsearch.core.BulkResponse;
+import co.elastic.clients.elasticsearch.core.bulk.BulkResponseItem;
 import co.elastic.clients.elasticsearch.core.search.Hit;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.io.IOException;
@@ -26,7 +29,7 @@ import java.util.Objects;
 @ActiveProfiles("test")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class IndexerServiceTests extends BaseTestClass {
+public class IndexerServiceIT extends BaseTestClass {
 
     @Autowired
     protected GeoNetworkServiceImpl geoNetworkService;
@@ -250,7 +253,7 @@ public class IndexerServiceTests extends BaseTestClass {
             String test = String.valueOf(Objects.requireNonNull(objectNodeHit.source()));
             String expected = indexerObjectMapper.readTree(expectedData).toPrettyString();
             String actual = indexerObjectMapper.readTree(test).toPrettyString();
-logger.info("{}", actual);
+
             JSONAssert.assertEquals(expected, actual, JSONCompareMode.STRICT);
         } catch (JSONException e) {
             throw new RuntimeException(e);

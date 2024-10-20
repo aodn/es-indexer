@@ -13,14 +13,12 @@ import co.elastic.clients.elasticsearch.core.search.HitsMetadata;
 import co.elastic.clients.elasticsearch.core.search.TotalHits;
 import co.elastic.clients.json.JsonData;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import jakarta.xml.bind.JAXBException;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONException;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -47,7 +45,7 @@ import static org.mockito.Mockito.*;
  */
 @Slf4j
 @SpringBootTest(classes = {StacCollectionMapperServiceImpl.class})
-public class StacCollectionMapperServiceTests {
+public class StacCollectionMapperServiceTest {
 
     protected ObjectMapper objectMapper = new ObjectMapper();
     protected JaxbUtils<MDMetadataType> jaxbUtils = new JaxbUtils<>(MDMetadataType.class);
@@ -88,7 +86,7 @@ public class StacCollectionMapperServiceTests {
         );
     }
 
-    public StacCollectionMapperServiceTests() throws JAXBException {
+    public StacCollectionMapperServiceTest() throws JAXBException {
         GeometryUtils.setExecutorService(Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors()));
         GeometryUtils.init();
     }
@@ -395,6 +393,19 @@ public class StacCollectionMapperServiceTests {
     public void verifyNonNodedIntersectionsWorks() throws IOException, JSONException {
         String xml = readResourceFile("classpath:canned/sample_non_noded_intersections.xml");
         String expected = readResourceFile("classpath:canned/sample_non_noded_intersections_stac.json");
+        indexerService.indexMetadata(xml);
+
+        verify(expected);
+    }
+    /**
+     * There is a missing enum publication, this case is check if we works after fix
+     * @throws IOException - Not expect to throw
+     * @throws JSONException - Not expect to throw
+     */
+    @Test
+    public void verifyNoMissingGeonetworkFieldEnum() throws IOException, JSONException {
+        String xml = readResourceFile("classpath:canned/sample_geoenum_publication.xml");
+        String expected = readResourceFile("classpath:canned/sample_geoenum_publication_stac.json");
         indexerService.indexMetadata(xml);
 
         verify(expected);
