@@ -40,13 +40,14 @@ public class ElasticSearchIndexService {
     public void createIndexFromMappingJSONFile(String indexMappingFile, String indexName) {
 
         // AppConstants.PORTAL_RECORDS_MAPPING_JSON_FILE
+        log.info("Reading index schema definition from JSON file: {}", indexMappingFile);
         ClassPathResource resource = new ClassPathResource("config_files/" + indexMappingFile);
 
         // delete the existing index if found first
         this.deleteIndexStore(indexName);
 
+        log.info("Creating index: {}", indexName);
         try (InputStream input = resource.getInputStream()) {
-            log.info("Creating index: " + indexName);
             CreateIndexRequest req = CreateIndexRequest.of(b -> b
                     .index(indexName)
                     .withJson(input)
@@ -55,6 +56,7 @@ public class ElasticSearchIndexService {
             log.info(response.toString());
         }
         catch (ElasticsearchException | IOException e) {
+            log.error("Failed to create index: {} | {}", indexName, e.getMessage());
             throw new CreateIndexException("Failed to elastic index from schema file: " + indexName + " | " + e.getMessage());
         }
     }
