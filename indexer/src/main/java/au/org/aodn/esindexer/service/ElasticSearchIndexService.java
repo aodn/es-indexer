@@ -11,14 +11,10 @@ import co.elastic.clients.transport.endpoints.BooleanResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.stream.Collectors;
 
 
 @Slf4j
@@ -41,27 +37,25 @@ public class ElasticSearchIndexService {
         }
     }
 
-    public void createIndexFromMappingJSONFile(String indexMappingFile, String indexName) throws IOException {
+    public void createIndexFromMappingJSONFile(String indexMappingFile, String indexName) {
 
         // AppConstants.PORTAL_RECORDS_MAPPING_JSON_FILE
         log.info("Reading index schema definition from JSON file: {}", indexMappingFile);
-
-        Resource resource = new ClassPathResource("config_files/" + indexMappingFile);
-        InputStream fStream = resource.getInputStream();
+        ClassPathResource resource = new ClassPathResource("config_files/" + indexMappingFile);
 
         // delete the existing index if found first
         this.deleteIndexStore(indexName);
 
         log.info("Creating index: {}", indexName);
-        try ( BufferedReader reader = new BufferedReader(
-                new InputStreamReader(fStream)) ) {
+        try (InputStream input = resource.getInputStream()) {
             CreateIndexRequest req = CreateIndexRequest.of(b -> b
                     .index(indexName)
-                    .withJson(reader)
+                    .withJson(input)
             );
             CreateIndexResponse response = portalElasticsearchClient.indices().create(req);
             log.info(response.toString());
-        } catch (ElasticsearchException | IOException e) {
+        }
+        catch (ElasticsearchException | IOException e) {
             log.error("Failed to create index: {} | {}", indexName, e.getMessage());
             throw new CreateIndexException("Failed to elastic index from schema file: " + indexName + " | " + e.getMessage());
         }
