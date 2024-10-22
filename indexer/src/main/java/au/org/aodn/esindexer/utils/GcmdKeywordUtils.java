@@ -3,6 +3,8 @@ package au.org.aodn.esindexer.utils;
 import au.org.aodn.stac.model.ConceptModel;
 import au.org.aodn.stac.model.ThemesModel;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ResourceUtils;
 
@@ -10,6 +12,7 @@ import javax.annotation.PostConstruct;
 import java.io.*;
 import java.nio.file.Files;
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 @Slf4j
@@ -20,7 +23,7 @@ public class GcmdKeywordUtils {
 
     @PostConstruct
     public void init() {
-        loadCsvToMap("classpath:config_files/gcmd-mapping.csv");
+        loadCsvToMap("config_files/gcmd-mapping.csv");
     }
 
     private String getLastWord(String keyword) {
@@ -37,13 +40,21 @@ public class GcmdKeywordUtils {
 
 
     private static String readResourceFile(String path) throws IOException {
-        File f = ResourceUtils.getFile(path);
-        return new String(Files.readAllBytes(f.toPath()));
+        Resource resource = new ClassPathResource(path);
+        InputStream fStream = resource.getInputStream();
+        try ( BufferedReader reader = new BufferedReader(
+                new InputStreamReader(fStream)) ) {
+            return reader.lines()
+                    .collect(Collectors.joining("\n"));
+        }
     }
 
     // Load the CSV file into a HashMap
     private void loadCsvToMap(String path) {
         try {
+
+            log.info("Loading GCMD mapping contents from CSV resource: {}", path);
+
             // Read the file as a single String
             String fileContent = readResourceFile(path);
 
@@ -60,12 +71,15 @@ public class GcmdKeywordUtils {
                     gcmdMapping.put(key, value);
                 }
             }
+
+            log.info("Successfully loaded GCMD mapping contents from CSV resource: {}", path);
         } catch (IOException e) {
-            log.error(e.getMessage());
+            log.error("Error while loading GCMD mapping contents from CSV resource: {}", path, e);
         }
     }
 
     protected List<String> extractGcmdKeywordLastWords(List<ThemesModel> themes) {
+        log.info("Extracting GCMD keywords from record's themes");
         Set<String> keywords = new HashSet<>();
         for (ThemesModel themesModel : themes) {
             if ((themesModel.getTitle().toLowerCase().contains("gcmd") || themesModel.getTitle().toLowerCase().contains("global change master directory")) && !themesModel.getTitle().toLowerCase().contains("palaeo temporal coverage")) {
@@ -85,6 +99,8 @@ public class GcmdKeywordUtils {
 
     public List<String> getMappedParameterVocabsFromGcmdKeywords(List<ThemesModel> themes) {
         Set<String> results = new HashSet<>();
+
+        log.info("Get parameter vocabs from record's GCMD keywords");
 
         List<String> gcmdKeywordLastWords = extractGcmdKeywordLastWords(themes);
 
