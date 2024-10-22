@@ -1,0 +1,27 @@
+{
+  "mappings": {
+    "properties": {
+      "uuid": {
+        "type": "keyword"
+      },
+      "year": {
+        "type": "integer"
+      },
+      "data": {
+        "type": "nested",
+        "properties": {
+          "time": {
+            "type": "date",
+            "format": "yyyy-MM-dd HH:mm:ss.SSSSSSSSS"
+          },
+          "longitude": {
+            "type": "float"
+          },
+          "latitude": {
+            "type": "float"
+          }
+        }
+      }
+    }
+  }
+}

@@ -2,6 +2,7 @@ package au.org.aodn.esindexer.configuration;
 
 public interface AppConstants {
     String PORTAL_RECORDS_MAPPING_JSON_FILE = "portal_records_index_schema.json";
+    String DTASET_INDEX_MAPPING_JSON_FILE = "dataset_index_schema.json";
 
     String FORMAT_XML = "xml";
     String FORMAT_ISO19115_3_2018 = "iso19115-3.2018";
