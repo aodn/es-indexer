@@ -13,8 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Objects;
 
 
 @Slf4j
@@ -37,20 +40,20 @@ public class ElasticSearchIndexService {
         }
     }
 
-    public void createIndexFromMappingJSONFile(String indexMappingFile, String indexName) {
-
-        // AppConstants.PORTAL_RECORDS_MAPPING_JSON_FILE
-        log.info("Reading index schema definition from JSON file: {}", indexMappingFile);
-        ClassPathResource resource = new ClassPathResource("config_files/" + indexMappingFile);
-
+    public void createIndexFromMappingJSONFile(String indexMappingFile, String indexName) throws IOException {
         // delete the existing index if found first
         this.deleteIndexStore(indexName);
 
-        log.info("Creating index: {}", indexName);
-        try (InputStream input = resource.getInputStream()) {
+        // AppConstants.PORTAL_RECORDS_MAPPING_JSON_FILE
+        log.info("Reading index schema definition from JSON file: {}", indexMappingFile);
+
+        // https://www.baeldung.com/java-classpath-resource-cannot-be-opened#resources
+        try (InputStream inputStream = getClass().getResourceAsStream("config_files/" + indexMappingFile);
+             BufferedReader reader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(inputStream)))) {
+            log.info("Creating index: {}", indexName);
             CreateIndexRequest req = CreateIndexRequest.of(b -> b
                     .index(indexName)
-                    .withJson(input)
+                    .withJson(reader)
             );
             CreateIndexResponse response = portalElasticsearchClient.indices().create(req);
             log.info(response.toString());
