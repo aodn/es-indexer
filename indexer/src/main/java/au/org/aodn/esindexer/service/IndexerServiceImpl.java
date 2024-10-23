@@ -52,6 +52,7 @@ import java.util.stream.Stream;
 public class IndexerServiceImpl implements IndexerService {
 
     protected String indexName;
+    protected String datasetIndexName;
     protected String tokensAnalyserName;
     protected GeoNetworkService geoNetworkResourceService;
     protected ElasticsearchClient portalElasticsearchClient;
@@ -71,6 +72,7 @@ public class IndexerServiceImpl implements IndexerService {
     @Autowired
     public IndexerServiceImpl(
             @Value("${elasticsearch.index.name}") String indexName,
+            @Value("${elasticsearch.dataset_index.name}") String datasetIndexName,
             @Value("${elasticsearch.analyser.tokens.name}") String tokensAnalyserName,
             ObjectMapper indexerObjectMapper,
             JaxbUtils<MDMetadataType> jaxbUtils,
@@ -83,6 +85,7 @@ public class IndexerServiceImpl implements IndexerService {
             GcmdKeywordUtils gcmdKeywordUtils
     ) {
         this.indexName = indexName;
+        this.datasetIndexName = datasetIndexName;
         this.tokensAnalyserName = tokensAnalyserName;
         this.indexerObjectMapper = indexerObjectMapper;
         this.jaxbUtils = jaxbUtils;
@@ -258,21 +261,17 @@ public class IndexerServiceImpl implements IndexerService {
     }
 
     @Override
-    public CompletableFuture<ResponseEntity> indexDataset(Dataset dataset) throws IOException{
+    public CompletableFuture<ResponseEntity<String>> indexDataset(Dataset dataset) {
         try {
 
-            // TODO: fake one. map later
-            var values = dataset;
-
-
             IndexRequest<JsonData> request;
-            try(InputStream inputStream = new ByteArrayInputStream(indexerObjectMapper.writeValueAsBytes(values))){
+            try(InputStream inputStream = new ByteArrayInputStream(indexerObjectMapper.writeValueAsBytes(dataset))){
                 log.info("Ingesting a new dataset with UUID: {} to index: {}", dataset.uuid(), indexName);
-                log.debug("{}", values);
+                log.debug("{}", dataset);
 
                 request = IndexRequest.of(builder -> builder
-                        .id(dataset.uuid())
-                        .index(indexName)
+                        .id(dataset.uuid() + dataset.yearMonth())
+                        .index(datasetIndexName)
                         .withJson(inputStream)
                 );
 

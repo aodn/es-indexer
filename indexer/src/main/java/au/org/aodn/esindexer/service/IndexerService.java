@@ -21,7 +21,7 @@ public interface IndexerService {
         void onComplete(Object result);
     }
     CompletableFuture<ResponseEntity<String>> indexMetadata(String metadataValues) throws IOException, FactoryException, TransformException, JAXBException;
-    CompletableFuture<ResponseEntity> indexDataset(Dataset dataset) throws IOException;
+    CompletableFuture<ResponseEntity<String>> indexDataset(Dataset dataset);
     ResponseEntity<String> deleteDocumentByUUID(String uuid) throws IOException;
     List<BulkResponse> indexAllMetadataRecordsFromGeoNetwork(String beginWithUuid, boolean confirm, Callback callback) throws IOException;
     Hit<ObjectNode> getDocumentByUUID(String uuid) throws IOException;
