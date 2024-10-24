@@ -2,23 +2,26 @@ package au.org.aodn.esindexer.controller;
 
 import au.org.aodn.esindexer.model.Dataset;
 import au.org.aodn.esindexer.service.DatasetAccessService;
-import au.org.aodn.esindexer.service.IndexerService;
 import au.org.aodn.esindexer.service.GeoNetworkService;
+import au.org.aodn.esindexer.service.IndexerService;
 import co.elastic.clients.elasticsearch.core.BulkResponse;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.xml.bind.JAXBException;
 import lombok.extern.slf4j.Slf4j;
 import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.operation.TransformException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -157,10 +160,64 @@ public class IndexerController {
 
     @PostMapping(path="/{uuid}/dataset", produces = "application/json")
     @Operation(security = {@SecurityRequirement(name = "X-API-Key") }, description = "Index a dataset by UUID")
-    public ResponseEntity<String> addDatasetByUUID(@PathVariable("uuid") String uuid) throws Exception {
-        Dataset dataset = datasetAccessService.getIndexingDatasetBy(uuid);
-        CompletableFuture<ResponseEntity> future = indexerService.indexDataset(dataset);
-//        return ResponseEntity.ok("Dataset indexed successfully");
-        return future.join();
+    public ResponseEntity<List<String>> addDatasetByUUID(@PathVariable("uuid") String uuid)  {
+
+        // For making sure the dataset entry is not too big, they will be split into smaller chunks by yearmonth
+        // By default, we assume the dataset started from 1970-01, and until now
+        LocalDate maxDate = LocalDate.now();
+        LocalDate startDate =  LocalDate.of(1970, 1, 1);
+        List<CompletableFuture<ResponseEntity<String>>> futures = new ArrayList<>();
+
+        try{
+            while (startDate.isBefore(maxDate)) {
+                // For speed optimizing, check whether data is existing in this year. If no data, skip to next year
+                var endDate = startDate.plusYears(1).minusDays(1);
+                var hasData = datasetAccessService.doesDataExist(uuid, startDate, endDate);
+                if (!hasData) {
+                    log.info("No data found for dataset {} from {} to {}", uuid, startDate, endDate);
+                    startDate = startDate.plusYears(1);
+                    continue;
+                }
+
+                futures.addAll(indexDatasetMonthly(uuid, startDate, endDate));
+                startDate = startDate.plusYears(1);
+            }
+
+            CompletableFuture<Void> allFutures = CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]));
+            allFutures.join();
+            List<String> results = new ArrayList<>();
+            for (CompletableFuture<ResponseEntity<String>> future : futures) {
+                results.add(future.join().getBody());
+            }
+
+            return ResponseEntity.ok(results);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(List.of(e.getMessage()));
+        }
     }
+
+    private List<CompletableFuture<ResponseEntity<String>>> indexDatasetMonthly(
+            String uuid,
+            LocalDate startDate,
+            LocalDate maxDate
+    ) throws InterruptedException, ExecutionException {
+        List<CompletableFuture<ResponseEntity<String>>> futures = new ArrayList<>();
+        var startDateToLoop = startDate;
+
+        while (startDateToLoop.isBefore(maxDate)) {
+            var endDate = startDateToLoop.plusMonths(1).minusDays(1);
+
+            Dataset dataset = datasetAccessService.getIndexingDatasetBy(uuid, startDateToLoop, endDate);
+            if (dataset != null && dataset.data() != null && !dataset.data().isEmpty()) {
+                CompletableFuture<ResponseEntity<String>> future = indexerService.indexDataset(dataset);
+                futures.add(future);
+                log.info("Indexing dataset {} from {} to {}", uuid, startDateToLoop, endDate);
+                future.get();
+            }
+            startDateToLoop = startDateToLoop.plusMonths(1);
+        }
+
+        return futures;
+    }
+
 }
