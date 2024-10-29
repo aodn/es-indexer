@@ -2,6 +2,7 @@ package au.org.aodn.esindexer.service;
 
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.exception.*;
+import au.org.aodn.esindexer.model.Dataset;
 import au.org.aodn.esindexer.utils.GcmdKeywordUtils;
 import au.org.aodn.esindexer.utils.JaxbUtils;
 import au.org.aodn.metadata.iso19115_3_2018.MDMetadataType;
@@ -51,6 +52,7 @@ import java.util.stream.Stream;
 public class IndexerServiceImpl implements IndexerService {
 
     protected String indexName;
+    protected String datasetIndexName;
     protected String tokensAnalyserName;
     protected GeoNetworkService geoNetworkResourceService;
     protected ElasticsearchClient portalElasticsearchClient;
@@ -70,6 +72,7 @@ public class IndexerServiceImpl implements IndexerService {
     @Autowired
     public IndexerServiceImpl(
             @Value("${elasticsearch.index.name}") String indexName,
+            @Value("${elasticsearch.dataset_index.name}") String datasetIndexName,
             @Value("${elasticsearch.analyser.tokens.name}") String tokensAnalyserName,
             ObjectMapper indexerObjectMapper,
             JaxbUtils<MDMetadataType> jaxbUtils,
@@ -82,6 +85,7 @@ public class IndexerServiceImpl implements IndexerService {
             GcmdKeywordUtils gcmdKeywordUtils
     ) {
         this.indexName = indexName;
+        this.datasetIndexName = datasetIndexName;
         this.tokensAnalyserName = tokensAnalyserName;
         this.indexerObjectMapper = indexerObjectMapper;
         this.jaxbUtils = jaxbUtils;
@@ -247,6 +251,36 @@ public class IndexerServiceImpl implements IndexerService {
                 return CompletableFuture.completedFuture(ResponseEntity.status(HttpStatus.NO_CONTENT).body(null));
             }
         } catch (IOException | FactoryException | TransformException | JAXBException e) {
+            log.error(e.getMessage());
+            throw new MappingValueException(e.getMessage());
+        }
+    }
+
+    @Override
+    public CompletableFuture<ResponseEntity<String>> indexDataset(Dataset dataset) {
+        try {
+
+            IndexRequest<JsonData> request;
+            try(InputStream inputStream = new ByteArrayInputStream(indexerObjectMapper.writeValueAsBytes(dataset))){
+                log.info("Ingesting a new dataset with UUID: {} to index: {}", dataset.uuid(), indexName);
+                log.debug("{}", dataset);
+
+                request = IndexRequest.of(builder -> builder
+                        .id(dataset.uuid() + dataset.yearMonth())
+                        .index(datasetIndexName)
+                        .withJson(inputStream)
+                );
+
+                IndexResponse response = portalElasticsearchClient.index(request);
+                log.info("Dataset with UUID: {} indexed with version: {}", dataset.uuid(), response.version());
+                return CompletableFuture.completedFuture(ResponseEntity.status(HttpStatus.OK).body(response.toString()));
+
+            } catch (Exception e) {
+                log.error(e.getMessage());
+                throw new IndexingRecordException(e.getMessage());
+            }
+
+        } catch(Exception e) {
             log.error(e.getMessage());
             throw new MappingValueException(e.getMessage());
         }

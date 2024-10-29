@@ -105,6 +105,7 @@ public class StacCollectionMapperServiceTest {
     public void createIndexerService() throws IOException {
         indexerService = new IndexerServiceImpl(
                 "any-works",
+                "any-works-dataset",
                 "shingle_analyser",
                 objectMapper,
                 jaxbUtils,
