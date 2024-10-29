@@ -8,8 +8,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class DatasetAccessConfig {
 
-    @Bean(name = "DatasetAccessService")
-    public DataAccessServiceImpl createDatasetAccessService(
+    @Bean(name = "DataAccessService")
+    public DataAccessServiceImpl createDataAccessService(
         @Value("${dataaccess.host:defaultForTesting}") String serverUrl
     ){
         return new DataAccessServiceImpl(serverUrl);
