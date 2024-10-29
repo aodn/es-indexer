@@ -25,6 +25,7 @@ logging:
   level:
     au.org.aodn.indexer: DEBUG
     au.org.aodn.ardcvocabs: DEBUG
+    au.org.aodn.esindexer.utils: DEBUG
 
 management:
   endpoints:

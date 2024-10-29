@@ -200,17 +200,13 @@ public class IndexerServiceImpl implements IndexerService {
         }
 
         // organisation vocabs
-        List<String> processedOrganisationVocabs = vocabService.extractVocabLabelsFromThemes(stacCollectionModel.getThemes(), AppConstants.AODN_ORGANISATION_VOCABS);
-        if (!processedOrganisationVocabs.isEmpty()) {
-            stacCollectionModel.getSummaries().setOrganisationVocabs(processedOrganisationVocabs);
-        }
+        // TODO: the logics for mapping record's organisation vocabs are heavily customised for a manual approach, AI now or later? need dedicated service's method
 
         // search_as_you_type enabled fields can be extended
         SearchSuggestionsModel searchSuggestionsModel = SearchSuggestionsModel.builder()
                 .abstractPhrases(this.extractTokensFromDescription(stacCollectionModel.getDescription()))
                 .parameterVocabs(!processedParameterVocabs.isEmpty() ? processedParameterVocabs : null)
                 .platformVocabs(!processedPlatformVocabs.isEmpty() ? processedPlatformVocabs : null)
-                .organisationVocabs(!processedOrganisationVocabs.isEmpty() ? processedOrganisationVocabs : null)
                 .build();
         stacCollectionModel.setSearchSuggestionsModel(searchSuggestionsModel);
 
@@ -520,10 +516,10 @@ public class IndexerServiceImpl implements IndexerService {
         }
     }
 
-    protected BulkResponse reduceResponse(BulkResponse in) {
+    protected static BulkResponse reduceResponse(BulkResponse in) {
         List<BulkResponseItem> errors = in.items()
                 .stream()
-                .filter(p -> p.status() != HttpStatus.CREATED.value())
+                .filter(p -> !(p.status() == HttpStatus.CREATED.value() || p.status() == HttpStatus.OK.value()))
                 .toList();
 
         return errors.isEmpty() ?

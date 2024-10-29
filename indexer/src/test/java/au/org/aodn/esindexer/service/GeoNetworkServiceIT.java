@@ -36,7 +36,7 @@ import static org.mockito.ArgumentMatchers.any;
 @ActiveProfiles("test")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class GeoNetworkServiceTests extends BaseTestClass {
+public class GeoNetworkServiceIT extends BaseTestClass {
     // Must use the impl to access protected method for testing
     @Autowired
     protected GeoNetworkServiceImpl geoNetworkService;

@@ -3,6 +3,8 @@ package au.org.aodn.esindexer.service;
 import au.org.aodn.esindexer.BaseTestClass;
 import au.org.aodn.esindexer.configuration.GeoNetworkSearchTestConfig;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
+import co.elastic.clients.elasticsearch.core.BulkResponse;
+import co.elastic.clients.elasticsearch.core.bulk.BulkResponseItem;
 import co.elastic.clients.elasticsearch.core.search.Hit;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.io.IOException;
@@ -26,7 +29,7 @@ import java.util.Objects;
 @ActiveProfiles("test")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class IndexerServiceTests extends BaseTestClass {
+public class IndexerServiceIT extends BaseTestClass {
 
     @Autowired
     protected GeoNetworkServiceImpl geoNetworkService;
@@ -278,10 +281,6 @@ public class IndexerServiceTests extends BaseTestClass {
             List<String> expectedPlatformVocabs = List.of("small boat");
             List<String> actualPlatformVocabs = indexerObjectMapper.convertValue(rootNode.path("summaries").path("platform_vocabs"), indexerObjectMapper.getTypeFactory().constructCollectionType(List.class, String.class));
             Assertions.assertEquals(expectedPlatformVocabs.size(), actualPlatformVocabs.size(), "PlatformVocabs not equals for sample11.");
-
-            List<String> expectedOrganisationVocabs = List.of("national mooring network facility, integrated marine observing system (imos)");
-            List<String> actualOrganisationVocabs = indexerObjectMapper.convertValue(rootNode.path("summaries").path("organisation_vocabs"), indexerObjectMapper.getTypeFactory().constructCollectionType(List.class, String.class));
-            Assertions.assertEquals(expectedOrganisationVocabs.size(), actualOrganisationVocabs.size(), "OrganisationVocabs not equals for sample11.");
         } finally {
             deleteRecord(uuid);
         }

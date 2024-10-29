@@ -1,12 +1,9 @@
 package au.org.aodn.esindexer.service;
 
 import au.org.aodn.esindexer.BaseTestClass;
-import au.org.aodn.esindexer.utils.SummariesUtils;
 import au.org.aodn.stac.model.*;
 import org.junit.jupiter.api.*;
-import org.mockito.InjectMocks;
 import org.mockito.Mockito;
-import org.mockito.Spy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,7 +13,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +20,7 @@ import java.util.List;
 @ActiveProfiles("test")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class RankingServiceTests extends BaseTestClass {
+class RankingServiceIT extends BaseTestClass {
 
     @Value("${elasticsearch.index.name}")
     protected String INDEX_NAME;

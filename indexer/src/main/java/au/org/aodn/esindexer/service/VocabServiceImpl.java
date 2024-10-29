@@ -92,10 +92,8 @@ public class VocabServiceImpl implements VocabService {
         List<JsonNode> vocabs = switch (vocabType) {
             case AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS -> self.getParameterVocabs();
             case AppConstants.AODN_PLATFORM_VOCABS -> self.getPlatformVocabs();
-            case AppConstants.AODN_ORGANISATION_VOCABS -> self.getOrganisationVocabs();
             default -> new ArrayList<>();
         };
-
         if (!vocabs.isEmpty() && !themes.isEmpty()) {
             vocabs.stream().filter(Objects::nonNull).forEach(topLevelVocab -> {
                 if (topLevelVocab.has("narrower") && !topLevelVocab.get("narrower").isEmpty()) {
