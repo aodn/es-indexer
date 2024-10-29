@@ -6,5 +6,5 @@ import java.util.List;
 public record Dataset(
         String uuid,
         YearMonth yearMonth,
-        List<DataRecord> data
+        List<Datum> data
 ) {}

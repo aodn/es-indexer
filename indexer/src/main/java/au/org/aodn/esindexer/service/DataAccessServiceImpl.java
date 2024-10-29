@@ -1,7 +1,7 @@
 package au.org.aodn.esindexer.service;
 
 import au.org.aodn.esindexer.exception.MetadataNotFoundException;
-import au.org.aodn.esindexer.model.DataRecord;
+import au.org.aodn.esindexer.model.Datum;
 import au.org.aodn.esindexer.model.Dataset;
 import org.springframework.http.*;
 import org.springframework.web.client.HttpClientErrorException;
@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class DatasetAccessServiceImpl implements DatasetAccessService {
+public class DataAccessServiceImpl implements DataAccessService {
 
     private String serverUrl;
 
@@ -29,7 +29,7 @@ public class DatasetAccessServiceImpl implements DatasetAccessService {
         this.serverUrl = url;
     }
 
-    public DatasetAccessServiceImpl(String serverUrl) {
+    public DataAccessServiceImpl(String serverUrl) {
        setServiceUrl(serverUrl);
     }
 
@@ -48,33 +48,33 @@ public class DatasetAccessServiceImpl implements DatasetAccessService {
             Map<String, Object> params = new HashMap<>();
             params.put("uuid", uuid);
 
-            String url = UriComponentsBuilder.fromHttpUrl(getDatasetAccessEndpoint() + "/data/{uuid}")
+            String url = UriComponentsBuilder.fromHttpUrl(getDataAccessEndpoint() + "/data/{uuid}")
                     .queryParam("is_to_index", "true")
                     .queryParam("start_date", startDate)
                     .queryParam("end_date", endDate)
                     .buildAndExpand(uuid)
                     .toUriString();
 
-            ResponseEntity<DataRecord[]> responseEntity = restTemplate.exchange(
+            ResponseEntity<Datum[]> responseEntity = restTemplate.exchange(
                     url,
                     HttpMethod.GET,
                     request,
-                    DataRecord[].class,
+                    Datum[].class,
                     params
             );
 
 
 
             if (responseEntity.getStatusCode().is2xxSuccessful()) {
-                List<DataRecord> records = new ArrayList<>();
+                List<Datum> data = new ArrayList<>();
                 if (responseEntity.getBody() != null) {
-                    records = List.of(responseEntity.getBody());
+                    data = List.of(responseEntity.getBody());
                 }
-                var recordsToIndex = summarizeRecords(records);
+                var dataToIndex = aggregateData(data);
                 return new Dataset(
                         uuid,
                         YearMonth.of(startDate.getYear(), startDate.getMonth()),
-                        recordsToIndex
+                        dataToIndex
                 );
             }
             throw new RuntimeException("Unable to retrieve dataset with UUID: " + uuid );
@@ -94,7 +94,7 @@ public class DatasetAccessServiceImpl implements DatasetAccessService {
             Map<String, Object> params = new HashMap<>();
             params.put("uuid", uuid);
 
-            String url = UriComponentsBuilder.fromHttpUrl(getDatasetAccessEndpoint() + "/data/{uuid}/has_data")
+            String url = UriComponentsBuilder.fromHttpUrl(getDataAccessEndpoint() + "/data/{uuid}/has_data")
                     .queryParam("start_date", startDate)
                     .queryParam("end_date", endDate)
                     .buildAndExpand(uuid)
@@ -118,24 +118,24 @@ public class DatasetAccessServiceImpl implements DatasetAccessService {
     }
 
     /**
-     * Summarize the records by counting the number if all the concerned fields are the same
-     * @param records the records to summarize
-     * @return the summarized records
+     * Summarize the data by counting the number if all the concerned fields are the same
+     * @param data the data to summarize
+     * @return the summarized data
      */
-    private List<DataRecord> summarizeRecords(List<DataRecord> records) {
-        var summarizedRecords = new ArrayList<DataRecord>();
-        for (var record: records) {
-            if (summarizedRecords.contains(record)) {
-                var existingRecord = summarizedRecords.get(summarizedRecords.indexOf(record));
-                existingRecord.incrementCount();
+    private List<Datum> aggregateData(List<Datum> data) {
+        var aggregatedData = new ArrayList<Datum>();
+        for (var datum: data) {
+            if (aggregatedData.contains(datum)) {
+                var existingDatum = aggregatedData.get(aggregatedData.indexOf(datum));
+                existingDatum.incrementCount();
             } else {
-                summarizedRecords.add(record);
+                aggregatedData.add(datum);
             }
         }
-        return summarizedRecords;
+        return aggregatedData;
     }
 
-    private String getDatasetAccessEndpoint() {
+    private String getDataAccessEndpoint() {
         return getServiceUrl() + "/api/v1/das/";
     }
 

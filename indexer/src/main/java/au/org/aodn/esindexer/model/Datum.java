@@ -5,10 +5,11 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 
-// TODO: if more fields are needed to be filtered, please add more columns here
+//  If more fields are needed to be filtered, please add more columns here
+//  and don't forget updating the override equals() method
 @Getter
 @Setter
-public class DataRecord{
+public class Datum {
 
 
     private final LocalDate time;
@@ -18,7 +19,7 @@ public class DataRecord{
 
     private long count = 1;
 
-    public DataRecord(LocalDate time, double longitude, double latitude, double depth) {
+    public Datum(LocalDate time, double longitude, double latitude, double depth) {
         this.time = time;
         this.longitude = longitude;
         this.latitude = latitude;
@@ -39,7 +40,7 @@ public class DataRecord{
         if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
-        DataRecord that = (DataRecord) obj;
+        Datum that = (Datum) obj;
         return Double.compare(that.longitude, longitude) == 0 &&
                 Double.compare(that.latitude, latitude) == 0 &&
                 Double.compare(that.depth, depth) == 0 &&

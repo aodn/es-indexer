@@ -1,7 +1,7 @@
 package au.org.aodn.esindexer.controller;
 
 import au.org.aodn.esindexer.model.Dataset;
-import au.org.aodn.esindexer.service.DatasetAccessService;
+import au.org.aodn.esindexer.service.DataAccessService;
 import au.org.aodn.esindexer.service.GeoNetworkService;
 import au.org.aodn.esindexer.service.IndexerService;
 import co.elastic.clients.elasticsearch.core.BulkResponse;
@@ -39,7 +39,7 @@ public class IndexerController {
     GeoNetworkService geonetworkResourceService;
 
     @Autowired
-    DatasetAccessService datasetAccessService;
+    DataAccessService dataAccessService;
 
     @GetMapping(path="/records/{uuid}", produces = "application/json")
     @Operation(description = "Get a document from GeoNetwork by UUID directly - JSON format response")
@@ -172,7 +172,7 @@ public class IndexerController {
             while (startDate.isBefore(maxDate)) {
                 // For speed optimizing, check whether data is existing in this year. If no data, skip to next year
                 var endDate = startDate.plusYears(1).minusDays(1);
-                var hasData = datasetAccessService.doesDataExist(uuid, startDate, endDate);
+                var hasData = dataAccessService.doesDataExist(uuid, startDate, endDate);
                 if (!hasData) {
                     log.info("No data found for dataset {} from {} to {}", uuid, startDate, endDate);
                     startDate = startDate.plusYears(1);
@@ -207,7 +207,7 @@ public class IndexerController {
         while (startDateToLoop.isBefore(maxDate)) {
             var endDate = startDateToLoop.plusMonths(1).minusDays(1);
 
-            Dataset dataset = datasetAccessService.getIndexingDatasetBy(uuid, startDateToLoop, endDate);
+            Dataset dataset = dataAccessService.getIndexingDatasetBy(uuid, startDateToLoop, endDate);
             if (dataset != null && dataset.data() != null && !dataset.data().isEmpty()) {
                 CompletableFuture<ResponseEntity<String>> future = indexerService.indexDataset(dataset);
                 futures.add(future);
