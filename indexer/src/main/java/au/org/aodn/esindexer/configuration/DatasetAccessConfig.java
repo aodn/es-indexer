@@ -10,7 +10,7 @@ public class DatasetAccessConfig {
 
     @Bean(name = "DatasetAccessService")
     public DataAccessServiceImpl createDatasetAccessService(
-        @Value("${dataaccess.host:defaulthost}") String serverUrl
+        @Value("${dataaccess.host:defaultForTesting}") String serverUrl
     ){
         return new DataAccessServiceImpl(serverUrl);
     }
