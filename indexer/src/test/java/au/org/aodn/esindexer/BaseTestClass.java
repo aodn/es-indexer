@@ -2,6 +2,7 @@ package au.org.aodn.esindexer;
 
 import au.org.aodn.esindexer.configuration.GeoNetworkSearchTestConfig;
 import au.org.aodn.esindexer.service.VocabServiceImpl;
+import au.org.aodn.esindexer.utils.CommonUtils;
 import au.org.aodn.esindexer.utils.VocabsIndexUtils;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.ElasticsearchException;
@@ -85,7 +86,7 @@ public class BaseTestClass {
         HttpHeaders headers = new HttpHeaders();
 
         headers.setAccept(List.of(MediaType.APPLICATION_JSON, MediaType.ALL, MediaType.TEXT_PLAIN));
-        headers.setContentType(contentType == null ? MediaType.parseMediaType("application/xml; charset=UTF-8") : contentType);
+        headers.setContentType(contentType == null ? CommonUtils.MEDIA_UTF8_XML : contentType);
         headers.setCacheControl(CacheControl.empty());
 
         headers.add(HttpHeaders.USER_AGENT, "TestRestTemplate");

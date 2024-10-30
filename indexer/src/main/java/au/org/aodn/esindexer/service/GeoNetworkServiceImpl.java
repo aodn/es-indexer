@@ -2,6 +2,7 @@ package au.org.aodn.esindexer.service;
 
 import au.org.aodn.esindexer.exception.MetadataNotFoundException;
 import au.org.aodn.esindexer.model.RelationType;
+import au.org.aodn.esindexer.utils.CommonUtils;
 import au.org.aodn.esindexer.utils.StringUtil;
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.utils.UrlUtils;
@@ -66,7 +67,6 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
     protected String indexName;
     protected String server;
     protected HttpEntity<String> defaultRequestEntity = getRequestEntity(MediaType.APPLICATION_JSON, null);
-    protected MediaType MEDIA_UTF8_XML = new MediaType("application", "xml", StandardCharsets.UTF_8);
 
     protected HttpEntity<String> getRequestEntity(String body) {
         return getRequestEntity(null, body);
@@ -74,8 +74,8 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
 
     protected HttpEntity<String> getRequestEntity(MediaType accept, String body) {
         HttpHeaders headers = new HttpHeaders();
-        headers.setAccept(Collections.singletonList(accept == null ? MEDIA_UTF8_XML : accept));
-        headers.setContentType(MEDIA_UTF8_XML);
+        headers.setAccept(Collections.singletonList(accept == null ? CommonUtils.MEDIA_UTF8_XML : accept));
+        headers.setContentType(CommonUtils.MEDIA_UTF8_XML);
 
         return body == null ? new HttpEntity<>(headers) : new HttpEntity<>(body, headers);
     }
