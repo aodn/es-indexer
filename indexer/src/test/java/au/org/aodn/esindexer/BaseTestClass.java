@@ -2,6 +2,7 @@ package au.org.aodn.esindexer;
 
 import au.org.aodn.esindexer.configuration.GeoNetworkSearchTestConfig;
 import au.org.aodn.esindexer.service.VocabServiceImpl;
+import au.org.aodn.esindexer.utils.CommonUtils;
 import au.org.aodn.esindexer.utils.VocabsIndexUtils;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.ElasticsearchException;
@@ -21,6 +22,7 @@ import org.testcontainers.containers.DockerComposeContainer;
 import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.List;
@@ -84,7 +86,7 @@ public class BaseTestClass {
         HttpHeaders headers = new HttpHeaders();
 
         headers.setAccept(List.of(MediaType.APPLICATION_JSON, MediaType.ALL, MediaType.TEXT_PLAIN));
-        headers.setContentType(contentType == null ? MediaType.APPLICATION_XML : contentType);
+        headers.setContentType(contentType == null ? CommonUtils.MEDIA_UTF8_XML : contentType);
         headers.setCacheControl(CacheControl.empty());
 
         headers.add(HttpHeaders.USER_AGENT, "TestRestTemplate");
@@ -260,21 +262,24 @@ public class BaseTestClass {
 
     public static String readResourceFile(String path) throws IOException {
         File f = ResourceUtils.getFile(path);
-        return new String(Files.readAllBytes(f.toPath()));
+        return Files.readString(f.toPath(), StandardCharsets.UTF_8);
     }
 
     public String insertMetadataRecords(String uuid, String path) throws RestClientException, IOException {
         String content = readResourceFile(path);
 
-        HttpEntity<String> requestEntity = getRequestEntity(Optional.empty(), null, content);
+        HttpEntity<String> requestEntity = getRequestEntity(
+                Optional.empty(),
+                null,
+                content
+        );
 
-        ResponseEntity<Map> r = testRestTemplate
-                .exchange(
-                        getGeoNetworkRecordsInsertUrl(),
-                        HttpMethod.PUT,
-                        requestEntity,
-                        Map.class
-                );
+        ResponseEntity<Map> r = testRestTemplate.exchange(
+                getGeoNetworkRecordsInsertUrl(),
+                HttpMethod.PUT,
+                requestEntity,
+                Map.class
+        );
 
         assertEquals("Insert record OK", HttpStatus.CREATED, r.getStatusCode());
 

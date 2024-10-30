@@ -2,6 +2,7 @@ package au.org.aodn.esindexer.service;
 
 import au.org.aodn.esindexer.exception.MetadataNotFoundException;
 import au.org.aodn.esindexer.model.RelationType;
+import au.org.aodn.esindexer.utils.CommonUtils;
 import au.org.aodn.esindexer.utils.StringUtil;
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.utils.UrlUtils;
@@ -35,6 +36,7 @@ import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -72,7 +74,9 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
 
     protected HttpEntity<String> getRequestEntity(MediaType accept, String body) {
         HttpHeaders headers = new HttpHeaders();
-        headers.setAccept(Collections.singletonList(accept == null ? MediaType.APPLICATION_XML : accept));
+        headers.setAccept(Collections.singletonList(accept == null ? CommonUtils.MEDIA_UTF8_XML : accept));
+        headers.setContentType(CommonUtils.MEDIA_UTF8_XML);
+
         return body == null ? new HttpEntity<>(headers) : new HttpEntity<>(body, headers);
     }
 
@@ -357,7 +361,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
                     params);
 
             if (responseEntity.getStatusCode().is2xxSuccessful()) {
-                return StringUtil.encodeUTF8(Objects.requireNonNull(responseEntity.getBody()));
+                return Objects.requireNonNull(responseEntity.getBody());
             }
             else {
                 throw new RuntimeException("Failed to fetch data from the API");

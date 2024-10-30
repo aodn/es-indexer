@@ -8,6 +8,7 @@ import au.org.aodn.esindexer.exception.MetadataNotFoundException;
 import au.org.aodn.esindexer.utils.AssociatedRecordsUtil;
 import au.org.aodn.esindexer.model.RelationType;
 import au.org.aodn.esindexer.utils.JaxbUtils;
+import au.org.aodn.esindexer.utils.StringUtil;
 import au.org.aodn.metadata.iso19115_3_2018.MDMetadataType;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch.core.SearchRequest;
