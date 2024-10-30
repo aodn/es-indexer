@@ -35,6 +35,7 @@ import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -73,6 +74,8 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
     protected HttpEntity<String> getRequestEntity(MediaType accept, String body) {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Collections.singletonList(accept == null ? MediaType.APPLICATION_XML : accept));
+        headers.setContentType(MediaType.parseMediaType("application/xml; charset=UTF-8"));
+
         return body == null ? new HttpEntity<>(headers) : new HttpEntity<>(body, headers);
     }
 
@@ -357,7 +360,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
                     params);
 
             if (responseEntity.getStatusCode().is2xxSuccessful()) {
-                return StringUtil.encodeUTF8(Objects.requireNonNull(responseEntity.getBody()));
+                return Objects.requireNonNull(responseEntity.getBody());
             }
             else {
                 throw new RuntimeException("Failed to fetch data from the API");

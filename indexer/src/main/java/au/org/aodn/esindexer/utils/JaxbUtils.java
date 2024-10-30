@@ -1,9 +1,7 @@
 package au.org.aodn.esindexer.utils;
 
-import jakarta.xml.bind.JAXBContext;
-import jakarta.xml.bind.JAXBElement;
-import jakarta.xml.bind.JAXBException;
-import jakarta.xml.bind.Unmarshaller;
+import jakarta.xml.bind.*;
+
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
 import java.io.StringReader;
@@ -19,9 +17,11 @@ public class JaxbUtils<T> {
 
     @SuppressWarnings("unchecked")
     public T unmarshal(String input) throws JAXBException {
-        Source source = new StreamSource(new StringReader(input));
-        synchronized (jaxbUnmarshaller) {
-            return ((JAXBElement<T>)jaxbUnmarshaller.unmarshal(source)).getValue();
+        try(StringReader reader = new StringReader(input)) {
+            Source source = new StreamSource(reader);
+            synchronized (jaxbUnmarshaller) {
+                return ((JAXBElement<T>) jaxbUnmarshaller.unmarshal(source)).getValue();
+            }
         }
     }
 }
