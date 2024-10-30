@@ -66,6 +66,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
     protected String indexName;
     protected String server;
     protected HttpEntity<String> defaultRequestEntity = getRequestEntity(MediaType.APPLICATION_JSON, null);
+    protected MediaType MEDIA_UTF8_XML = new MediaType("application", "xml", StandardCharsets.UTF_8);
 
     protected HttpEntity<String> getRequestEntity(String body) {
         return getRequestEntity(null, body);
@@ -73,8 +74,8 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
 
     protected HttpEntity<String> getRequestEntity(MediaType accept, String body) {
         HttpHeaders headers = new HttpHeaders();
-        headers.setAccept(Collections.singletonList(accept == null ? MediaType.APPLICATION_XML : accept));
-        headers.setContentType(MediaType.parseMediaType("application/xml; charset=UTF-8"));
+        headers.setAccept(Collections.singletonList(accept == null ? MEDIA_UTF8_XML : accept));
+        headers.setContentType(MEDIA_UTF8_XML);
 
         return body == null ? new HttpEntity<>(headers) : new HttpEntity<>(body, headers);
     }
