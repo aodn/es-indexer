@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdb:MD_Metadata xmlns:mdb="http://standards.iso.org/iso/19115/-3/mdb/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cat="http://standards.iso.org/iso/19115/-3/cat/1.0" xmlns:gfc="http://standards.iso.org/iso/19110/gfc/1.1" xmlns:cit="http://standards.iso.org/iso/19115/-3/cit/2.0" xmlns:gcx="http://standards.iso.org/iso/19115/-3/gcx/1.0" xmlns:gex="http://standards.iso.org/iso/19115/-3/gex/1.0" xmlns:lan="http://standards.iso.org/iso/19115/-3/lan/1.0" xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0" xmlns:mas="http://standards.iso.org/iso/19115/-3/mas/1.0" xmlns:mcc="http://standards.iso.org/iso/19115/-3/mcc/1.0" xmlns:mco="http://standards.iso.org/iso/19115/-3/mco/1.0" xmlns:mda="http://standards.iso.org/iso/19115/-3/mda/1.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/2.0" xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/2.0" xmlns:mex="http://standards.iso.org/iso/19115/-3/mex/1.0" xmlns:mmi="http://standards.iso.org/iso/19115/-3/mmi/1.0" xmlns:mpc="http://standards.iso.org/iso/19115/-3/mpc/1.0" xmlns:mrc="http://standards.iso.org/iso/19115/-3/mrc/2.0" xmlns:mrd="http://standards.iso.org/iso/19115/-3/mrd/1.0" xmlns:mri="http://standards.iso.org/iso/19115/-3/mri/1.0" xmlns:mrl="http://standards.iso.org/iso/19115/-3/mrl/2.0" xmlns:mrs="http://standards.iso.org/iso/19115/-3/mrs/1.0" xmlns:msr="http://standards.iso.org/iso/19115/-3/msr/2.0" xmlns:mdq="http://standards.iso.org/iso/19157/-2/mdq/1.0" xmlns:mac="http://standards.iso.org/iso/19115/-3/mac/2.0" xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://standards.iso.org/iso/19115/-3/cat/1.0 http://standards.iso.org/iso/19115/-3/cat/1.0/cat.xsd http://standards.iso.org/iso/19115/-3/cit/2.0 http://standards.iso.org/iso/19115/-3/cit/2.0/cit.xsd http://standards.iso.org/iso/19115/-3/gcx/1.0 http://standards.iso.org/iso/19115/-3/gcx/1.0/gcx.xsd http://standards.iso.org/iso/19115/-3/gex/1.0 http://standards.iso.org/iso/19115/-3/gex/1.0/gex.xsd http://standards.iso.org/iso/19115/-3/lan/1.0 http://standards.iso.org/iso/19115/-3/lan/1.0/lan.xsd http://standards.iso.org/iso/19115/-3/srv/2.0 http://standards.iso.org/iso/19115/-3/srv/2.0/srv.xsd http://standards.iso.org/iso/19115/-3/mas/1.0 http://standards.iso.org/iso/19115/-3/mas/1.0/mas.xsd http://standards.iso.org/iso/19115/-3/mcc/1.0 http://standards.iso.org/iso/19115/-3/mcc/1.0/mcc.xsd http://standards.iso.org/iso/19115/-3/mco/1.0 http://standards.iso.org/iso/19115/-3/mco/1.0/mco.xsd http://standards.iso.org/iso/19115/-3/mda/2.0 http://standards.iso.org/iso/19115/-3/mda/2.0/mda.xsd http://standards.iso.org/iso/19115/-3/mdb/2.0 http://standards.iso.org/iso/19115/-3/mdb/2.0/mdb.xsd http://standards.iso.org/iso/19115/-3/mds/2.0 http://standards.iso.org/iso/19115/-3/mds/2.0/mds.xsd http://standards.iso.org/iso/19115/-3/mdt/2.0 http://standards.iso.org/iso/19115/-3/mdt/2.0/mdt.xsd http://standards.iso.org/iso/19115/-3/mex/1.0 http://standards.iso.org/iso/19115/-3/mex/1.0/mex.xsd http://standards.iso.org/iso/19115/-3/mmi/1.0 http://standards.iso.org/iso/19115/-3/mmi/1.0/mmi.xsd http://standards.iso.org/iso/19115/-3/mpc/1.0 http://standards.iso.org/iso/19115/-3/mpc/1.0/mpc.xsd http://standards.iso.org/iso/19115/-3/mrc/2.0 http://standards.iso.org/iso/19115/-3/mrc/2.0/mrc.xsd http://standards.iso.org/iso/19115/-3/mrd/1.0 http://standards.iso.org/iso/19115/-3/mrd/1.0/mrd.xsd http://standards.iso.org/iso/19115/-3/mri/1.0 http://standards.iso.org/iso/19115/-3/mri/1.0/mri.xsd http://standards.iso.org/iso/19115/-3/mrl/2.0 http://standards.iso.org/iso/19115/-3/mrl/2.0/mrl.xsd http://standards.iso.org/iso/19115/-3/mrs/1.0 http://standards.iso.org/iso/19115/-3/mrs/1.0/mrs.xsd http://standards.iso.org/iso/19115/-3/msr/2.0 http://standards.iso.org/iso/19115/-3/msr/2.0/msr.xsd http://standards.iso.org/iso/19157/-2/mdq/1.0 http://standards.iso.org/iso/19157/-2/mdq/1.0/mdq.xsd http://standards.iso.org/iso/19115/-3/mac/2.0 http://standards.iso.org/iso/19115/-3/mac/2.0/mac.xsd http://standards.iso.org/iso/19115/-3/gco/1.0 http://standards.iso.org/iso/19115/-3/gco/1.0/gco.xsd http://standards.iso.org/iso/19115/-3/gmw/1.0 http://standards.iso.org/iso/19115/-3/gmw/1.0/gmw.xsd http://www.opengis.net/gml/3.2 http://schemas.opengis.net/gml/3.2.1/gml.xsd http://www.w3.org/1999/xlink http://www.w3.org/1999/xlink.xsd">
+<mdb:MD_Metadata xmlns:mdb="http://standards.iso.org/iso/19115/-3/mdb/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cat="http://standards.iso.org/iso/19115/-3/cat/1.0" xmlns:gfc="http://standards.iso.org/iso/19110/gfc/1.1" xmlns:cit="http://standards.iso.org/iso/19115/-3/cit/2.0" xmlns:gcx="http://standards.iso.org/iso/19115/-3/gcx/1.0" xmlns:gex="http://standards.iso.org/iso/19115/-3/gex/1.0" xmlns:lan="http://standards.iso.org/iso/19115/-3/lan/1.0" xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.1" xmlns:mas="http://standards.iso.org/iso/19115/-3/mas/1.0" xmlns:mcc="http://standards.iso.org/iso/19115/-3/mcc/1.0" xmlns:mco="http://standards.iso.org/iso/19115/-3/mco/1.0" xmlns:mda="http://standards.iso.org/iso/19115/-3/mda/1.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/2.0" xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/2.0" xmlns:mex="http://standards.iso.org/iso/19115/-3/mex/1.0" xmlns:mmi="http://standards.iso.org/iso/19115/-3/mmi/1.0" xmlns:mpc="http://standards.iso.org/iso/19115/-3/mpc/1.0" xmlns:mrc="http://standards.iso.org/iso/19115/-3/mrc/2.0" xmlns:mrd="http://standards.iso.org/iso/19115/-3/mrd/1.0" xmlns:mri="http://standards.iso.org/iso/19115/-3/mri/1.0" xmlns:mrl="http://standards.iso.org/iso/19115/-3/mrl/2.0" xmlns:mrs="http://standards.iso.org/iso/19115/-3/mrs/1.0" xmlns:msr="http://standards.iso.org/iso/19115/-3/msr/2.0" xmlns:mdq="http://standards.iso.org/iso/19157/-2/mdq/1.0" xmlns:mac="http://standards.iso.org/iso/19115/-3/mac/2.0" xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://standards.iso.org/iso/19115/-3/cat/1.0 http://standards.iso.org/iso/19115/-3/cat/1.0/cat.xsd http://standards.iso.org/iso/19115/-3/cit/2.0 http://standards.iso.org/iso/19115/-3/cit/2.0/cit.xsd http://standards.iso.org/iso/19115/-3/gcx/1.0 http://standards.iso.org/iso/19115/-3/gcx/1.0/gcx.xsd http://standards.iso.org/iso/19115/-3/gex/1.0 http://standards.iso.org/iso/19115/-3/gex/1.0/gex.xsd http://standards.iso.org/iso/19115/-3/lan/1.0 http://standards.iso.org/iso/19115/-3/lan/1.0/lan.xsd http://standards.iso.org/iso/19115/-3/srv/2.0 http://standards.iso.org/iso/19115/-3/srv/2.0/srv.xsd http://standards.iso.org/iso/19115/-3/mas/1.0 http://standards.iso.org/iso/19115/-3/mas/1.0/mas.xsd http://standards.iso.org/iso/19115/-3/mcc/1.0 http://standards.iso.org/iso/19115/-3/mcc/1.0/mcc.xsd http://standards.iso.org/iso/19115/-3/mco/1.0 http://standards.iso.org/iso/19115/-3/mco/1.0/mco.xsd http://standards.iso.org/iso/19115/-3/mda/2.0 http://standards.iso.org/iso/19115/-3/mda/2.0/mda.xsd http://standards.iso.org/iso/19115/-3/mdb/2.0 http://standards.iso.org/iso/19115/-3/mdb/2.0/mdb.xsd http://standards.iso.org/iso/19115/-3/mds/2.0 http://standards.iso.org/iso/19115/-3/mds/2.0/mds.xsd http://standards.iso.org/iso/19115/-3/mdt/2.0 http://standards.iso.org/iso/19115/-3/mdt/2.0/mdt.xsd http://standards.iso.org/iso/19115/-3/mex/1.0 http://standards.iso.org/iso/19115/-3/mex/1.0/mex.xsd http://standards.iso.org/iso/19115/-3/mmi/1.0 http://standards.iso.org/iso/19115/-3/mmi/1.0/mmi.xsd http://standards.iso.org/iso/19115/-3/mpc/1.0 http://standards.iso.org/iso/19115/-3/mpc/1.0/mpc.xsd http://standards.iso.org/iso/19115/-3/mrc/2.0 http://standards.iso.org/iso/19115/-3/mrc/2.0/mrc.xsd http://standards.iso.org/iso/19115/-3/mrd/1.0 http://standards.iso.org/iso/19115/-3/mrd/1.0/mrd.xsd http://standards.iso.org/iso/19115/-3/mri/1.0 http://standards.iso.org/iso/19115/-3/mri/1.0/mri.xsd http://standards.iso.org/iso/19115/-3/mrl/2.0 http://standards.iso.org/iso/19115/-3/mrl/2.0/mrl.xsd http://standards.iso.org/iso/19115/-3/mrs/1.0 http://standards.iso.org/iso/19115/-3/mrs/1.0/mrs.xsd http://standards.iso.org/iso/19115/-3/msr/2.0 http://standards.iso.org/iso/19115/-3/msr/2.0/msr.xsd http://standards.iso.org/iso/19157/-2/mdq/1.0 http://standards.iso.org/iso/19157/-2/mdq/1.0/mdq.xsd http://standards.iso.org/iso/19115/-3/mac/2.0 http://standards.iso.org/iso/19115/-3/mac/2.0/mac.xsd http://standards.iso.org/iso/19115/-3/gco/1.0 http://standards.iso.org/iso/19115/-3/gco/1.0/gco.xsd http://standards.iso.org/iso/19115/-3/gmw/1.0 http://standards.iso.org/iso/19115/-3/gmw/1.0/gmw.xsd http://www.opengis.net/gml/3.2 http://schemas.opengis.net/gml/3.2.1/gml.xsd http://www.w3.org/1999/xlink http://www.w3.org/1999/xlink.xsd">
     <mdb:metadataIdentifier>
         <mcc:MD_Identifier>
             <mcc:code>
@@ -10,7 +10,7 @@
             </mcc:codeSpace>
         </mcc:MD_Identifier>
     </mdb:metadataIdentifier>
-    <mdb:defaultLocale xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0">
+    <mdb:defaultLocale xmlns:geonet="http://www.fao.org/geonetwork" xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0" xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0">
         <lan:PT_Locale id="EN">
             <lan:language>
                 <lan:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="eng" />
@@ -20,8 +20,8 @@
             </lan:characterEncoding>
         </lan:PT_Locale>
     </mdb:defaultLocale>
-    <mdb:parentMetadata xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0" uuidref="d52d1e34-b8e2-45d4-a684-be05cd681ef1" />
-    <mdb:metadataScope xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0">
+    <mdb:parentMetadata xmlns:geonet="http://www.fao.org/geonetwork" xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0" xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0" uuidref="d52d1e34-b8e2-45d4-a684-be05cd681ef1" />
+    <mdb:metadataScope xmlns:geonet="http://www.fao.org/geonetwork" xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0" xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0">
         <mdb:MD_MetadataScope>
             <mdb:resourceScope>
                 <mcc:MD_ScopeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ScopeCode" codeListValue="collectionSession" />
@@ -31,7 +31,7 @@
             </mdb:name>
         </mdb:MD_MetadataScope>
     </mdb:metadataScope>
-    <mdb:contact xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0">
+    <mdb:contact xmlns:geonet="http://www.fao.org/geonetwork" xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0" xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0">
         <cit:CI_Responsibility>
             <cit:role>
                 <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="distributor" />
@@ -114,7 +114,7 @@
             </cit:party>
         </cit:CI_Responsibility>
     </mdb:contact>
-    <mdb:dateInfo xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0">
+    <mdb:dateInfo xmlns:geonet="http://www.fao.org/geonetwork" xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0" xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0">
         <cit:CI_Date>
             <cit:date>
                 <gco:DateTime>2020-04-06T10:43:39</gco:DateTime>
@@ -127,21 +127,21 @@
     <mdb:dateInfo>
         <cit:CI_Date>
             <cit:date>
-                <gco:DateTime>2022-01-21T03:51:59</gco:DateTime>
+                <gco:DateTime>2023-11-14T12:08:46.294Z</gco:DateTime>
             </cit:date>
             <cit:dateType>
                 <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode" codeListValue="revision" />
             </cit:dateType>
         </cit:CI_Date>
     </mdb:dateInfo>
-    <mdb:metadataStandard xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0">
+    <mdb:metadataStandard xmlns:geonet="http://www.fao.org/geonetwork" xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0" xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0">
         <cit:CI_Citation>
             <cit:title>
                 <gco:CharacterString>ISO 19115-3:2018</gco:CharacterString>
             </cit:title>
         </cit:CI_Citation>
     </mdb:metadataStandard>
-    <mdb:metadataLinkage xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0">
+    <mdb:metadataLinkage xmlns:geonet="http://www.fao.org/geonetwork" xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0" xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0">
         <cit:CI_OnlineResource>
             <cit:linkage>
                 <gco:CharacterString>https://catalogue-imos.aodn.org.au:443/geonetwork/srv/api/records/9e5c3031-a026-48b3-a153-a70c2e2b78b9</gco:CharacterString>
@@ -154,15 +154,15 @@
             </cit:description>
         </cit:CI_OnlineResource>
     </mdb:metadataLinkage>
-    <mdb:identificationInfo xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0">
+    <mdb:identificationInfo xmlns:geonet="http://www.fao.org/geonetwork" xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0" xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0">
         <mri:MD_DataIdentification>
             <mri:citation>
                 <cit:CI_Citation>
                     <cit:title>
-                        <gco:CharacterString>IMOS - SOOP Underway CO2 Measurements Research Group - Near real-time raw data</gco:CharacterString>
+                        <gco:CharacterString>IMOS - SOOP Underway CO2 Measurements Research Group - Near real-time raw data °</gco:CharacterString>
                     </cit:title>
                     <cit:alternateTitle>
-                        <gco:CharacterString>Ship underway ocean carbon data - real-time</gco:CharacterString>
+                        <gco:CharacterString>Ship underway ocean carbon data - real-time $</gco:CharacterString>
                     </cit:alternateTitle>
                     <cit:date>
                         <cit:CI_Date>
@@ -272,7 +272,7 @@
                 </cit:CI_Citation>
             </mri:citation>
             <mri:abstract>
-                <gco:CharacterString>The IMOS Ship of Opportunity Underway CO2 Measurements group is a research and data collection project working within the IMOS Ship of Opportunity Multi-Disciplinary Underway Network sub-facility. The CO2 group sample critical regions of the Southern Ocean and the Australian shelf waters have a major impact on CO2 uptake by the ocean. These are regions where biogeochemical cycling is predicted to be particularly sensitive to a changing climate. The data represented by this record are presented in real-time mode. The pCO2 Underway System measures variables such as mole fraction of CO2, sea surface salinity (SSS), and sea surface temperature (SST) using an automated system.
+                <gco:CharacterString>The IMOS Ship of Opportunity Underway CO2 Measurements group is a research and data collection project working within the IMOS Ship of Opportunity Multi-Disciplinary Underway Network sub-facility. The CO2 group sample critical regions of the Southern Ocean and the Australian shelf waters have a major impact on CO2 uptake by the ocean. These are regions where biogeochemical cycling is predicted to be particularly sensitive to a changing climate. The data represented by this record are presented in real-time mode. The pCO2 Underway System measures variables such as mole fraction of CO2, sea surface salinity (SSS), and sea surface temperature (SST) using an automated system.  &gt; °
 
                     The RV Aurora Australis provides data on surface ocean CO2 for the Southern Ocean, while the RV Investigator, covers shelf and offshore waters around Australia from the tropics to the sea-ice edge.</gco:CharacterString>
             </mri:abstract>
@@ -473,55 +473,55 @@
                     <gex:geographicElement>
                         <gex:EX_BoundingPolygon>
                             <gex:polygon>
-                                <gml:Polygon gml:id="w257aac21b1c43b1b1b1b1b1">
+                                <gml:Polygon srsName="EPSG:4326">
                                     <gml:exterior>
-                                        <gml:LinearRing>
-                                            <gml:posList srsDimension="2">57 -69 57 -66 57 -63 60 -63 63 -63 66 -63 69 -63 69 -60 72 -60 75 -60 78 -60 81 -60 84 -60 84 -57 87 -57 90 -57 93 -57 96 -57 96 -54 99 -54 99 -51 102 -51 102 -48 102 -45 102 -42 105 -42 105 -39 108 -39 108 -36 108 -33 105 -33 102 -33 102 -30 99 -30 99 -27 99 -24 102 -24 105 -24 108 -24 108 -27 111 -27 111 -24 111 -21 111 -18 114 -18 117 -18 117 -15 120 -15 120 -12 123 -12 126 -12 126 -9 123 -9 123 -6 126 -6 129 -6 129 -9 132 -9 135 -9 138 -9 141 -9 144 -9 147 -9 147 -12 147 -15 150 -15 153 -15 153 -12 156 -12 159 -12 159 -9 162 -9 165 -9 165 -12 165 -15 168 -15 171 -15 174 -15 177 -15 180 -15 180 -18 180 -21 177 -21 177 -24 174 -24 171 -24 171 -27 174 -27 177 -27 177 -30 180 -30 180 -33 180 -36 177 -36 177 -39 180 -39 180 -42 180 -45 177 -45 174 -45 174 -48 171 -48 171 -51 168 -51 168 -54 165 -54 165 -57 162 -57 162 -60 159 -60 156 -60 156 -63 156 -66 153 -66 150 -66 150 -69 147 -69 144 -69 141 -69 138 -69 138 -66 135 -66 132 -66 129 -66 126 -66 123 -66 120 -66 117 -66 114 -66 111 -66 111 -69 108 -69 108 -66 105 -66 102 -66 99 -66 96 -66 93 -66 90 -66 87 -66 84 -66 84 -69 81 -69 78 -69 75 -69 72 -69 69 -69 66 -69 63 -69 60 -69 57 -69</gml:posList>
+                                        <gml:LinearRing srsName="EPSG:4326">
+                                            <gml:posList srsDimension="2">-69 57 -66 57 -63 57 -63 60 -63 63 -63 66 -63 69 -60.00000000000001 69 -60.00000000000001 72 -60.00000000000001 75 -60.00000000000001 78 -60.00000000000001 80.99999999999999 -60.00000000000001 84 -57 84 -57 87 -57 90 -57 92.99999999999999 -57 96 -54 96 -54 99 -51 99 -51 101.99999999999999 -48 101.99999999999999 -45 101.99999999999999 -42.00000000000001 101.99999999999999 -42.00000000000001 105 -39 105 -39 108 -35.999999999999986 108 -33 108 -33 105 -33 101.99999999999999 -30.000000000000007 101.99999999999999 -30.000000000000007 99 -27 99 -24 99 -24 101.99999999999999 -24 105 -24 108 -27 108 -27 110.99999999999999 -24 110.99999999999999 -21.000000000000014 110.99999999999999 -18 110.99999999999999 -18 114 -18 116.99999999999999 -14.999999999999986 116.99999999999999 -14.999999999999986 120 -12 120 -12 123 -12 126 -9 126 -9 123 -6 123 -6 126 -6 129 -9 129 -9 132 -9 135 -9 138 -9 141 -9 144 -9 147 -12 147 -14.999999999999986 147 -14.999999999999986 150 -14.999999999999986 153 -12 153 -12 156 -12 159 -9 159 -9 161.99999999999997 -9 165 -12 165 -14.999999999999986 165 -14.999999999999986 168 -14.999999999999986 171 -14.999999999999986 174 -14.999999999999986 177 -14.999999999999986 180 -18 180 -21.000000000000014 180 -21.000000000000014 177 -24 177 -24 174 -24 171 -27 171 -27 174 -27 177 -30.000000000000007 177 -30.000000000000007 180 -33 180 -35.999999999999986 180 -35.999999999999986 177 -39 177 -39 180 -42.00000000000001 180 -45 180 -45 177 -45 174 -48 174 -48 171 -51 171 -51 168 -54 168 -54 165 -57 165 -57 161.99999999999997 -60.00000000000001 161.99999999999997 -60.00000000000001 159 -60.00000000000001 156 -63 156 -66 156 -66 153 -66 150 -69 150 -69 147 -69 144 -69 141 -69 138 -66 138 -66 135 -66 132 -66 129 -66 126 -66 123 -66 120 -66 116.99999999999999 -66 114 -66 110.99999999999999 -69 110.99999999999999 -69 108 -66 108 -66 105 -66 101.99999999999999 -66 99 -66 96 -66 92.99999999999999 -66 90 -66 87 -66 84 -69 84 -69 80.99999999999999 -69 78 -69 75 -69 72 -69 69 -69 66 -69 63 -69 60 -69 57</gml:posList>
                                         </gml:LinearRing>
                                     </gml:exterior>
                                     <gml:interior>
-                                        <gml:LinearRing>
-                                            <gml:posList srsDimension="2">108 -42 108 -45 105 -45 105 -48 105 -51 105 -54 108 -54 108 -51 111 -51 114 -51 114 -48 114 -45 114 -42 114 -39 114 -36 111 -36 111 -39 111 -42 108 -42</gml:posList>
+                                        <gml:LinearRing srsName="EPSG:4326">
+                                            <gml:posList srsDimension="2">-42.00000000000001 108 -45 108 -45 105 -48 105 -51 105 -54 105 -54 108 -51 108 -51 110.99999999999999 -51 114 -48 114 -45 114 -42.00000000000001 114 -39 114 -35.999999999999986 114 -35.999999999999986 110.99999999999999 -39 110.99999999999999 -42.00000000000001 110.99999999999999 -42.00000000000001 108</gml:posList>
                                         </gml:LinearRing>
                                     </gml:interior>
                                     <gml:interior>
-                                        <gml:LinearRing>
-                                            <gml:posList srsDimension="2">117 -42 117 -45 117 -48 117 -51 120 -51 120 -48 123 -48 126 -48 129 -48 129 -45 132 -45 132 -42 135 -42 135 -39 132 -39 132 -36 129 -36 126 -36 123 -36 120 -36 117 -36 117 -39 117 -42</gml:posList>
+                                        <gml:LinearRing srsName="EPSG:4326">
+                                            <gml:posList srsDimension="2">-42.00000000000001 116.99999999999999 -45 116.99999999999999 -48 116.99999999999999 -51 116.99999999999999 -51 120 -48 120 -48 123 -48 126 -48 129 -45 129 -45 132 -42.00000000000001 132 -42.00000000000001 135 -39 135 -39 132 -35.999999999999986 132 -35.999999999999986 129 -35.999999999999986 126 -35.999999999999986 123 -35.999999999999986 120 -35.999999999999986 116.99999999999999 -39 116.99999999999999 -42.00000000000001 116.99999999999999</gml:posList>
                                         </gml:LinearRing>
                                     </gml:interior>
                                     <gml:interior>
-                                        <gml:LinearRing>
-                                            <gml:posList srsDimension="2">162 -42 162 -45 162 -48 159 -48 159 -51 159 -54 162 -54 162 -51 165 -51 165 -48 168 -48 168 -45 171 -45 171 -42 171 -39 168 -39 168 -42 165 -42 162 -42</gml:posList>
+                                        <gml:LinearRing srsName="EPSG:4326">
+                                            <gml:posList srsDimension="2">-42.00000000000001 161.99999999999997 -45 161.99999999999997 -48 161.99999999999997 -48 159 -51 159 -54 159 -54 161.99999999999997 -51 161.99999999999997 -51 165 -48 165 -48 168 -45 168 -45 171 -42.00000000000001 171 -39 171 -39 168 -42.00000000000001 168 -42.00000000000001 165 -42.00000000000001 161.99999999999997</gml:posList>
                                         </gml:LinearRing>
                                     </gml:interior>
                                     <gml:interior>
-                                        <gml:LinearRing>
-                                            <gml:posList srsDimension="2">135 -54 135 -57 138 -57 138 -54 135 -54</gml:posList>
+                                        <gml:LinearRing srsName="EPSG:4326">
+                                            <gml:posList srsDimension="2">-54 135 -57 135 -57 138 -54 138 -54 135</gml:posList>
                                         </gml:LinearRing>
                                     </gml:interior>
                                     <gml:interior>
-                                        <gml:LinearRing>
-                                            <gml:posList srsDimension="2">114 -27 117 -27 117 -30 117 -33 120 -33 123 -33 126 -33 129 -33 132 -33 135 -33 138 -33 141 -33 141 -36 144 -36 144 -39 147 -39 147 -36 150 -36 150 -33 150 -30 153 -30 153 -27 150 -27 150 -24 147 -24 147 -21 144 -21 144 -18 144 -15 141 -15 141 -12 138 -12 135 -12 132 -12 132 -15 129 -15 126 -15 126 -18 123 -18 123 -21 120 -21 117 -21 117 -24 114 -24 114 -27</gml:posList>
+                                        <gml:LinearRing srsName="EPSG:4326">
+                                            <gml:posList srsDimension="2">-27 114 -27 116.99999999999999 -30.000000000000007 116.99999999999999 -33 116.99999999999999 -33 120 -33 123 -33 126 -33 129 -33 132 -33 135 -33 138 -33 141 -35.999999999999986 141 -35.999999999999986 144 -39 144 -39 147 -35.999999999999986 147 -35.999999999999986 150 -33 150 -30.000000000000007 150 -30.000000000000007 153 -27 153 -27 150 -24 150 -24 147 -21.000000000000014 147 -21.000000000000014 144 -18 144 -14.999999999999986 144 -14.999999999999986 141 -12 141 -12 138 -12 135 -12 132 -14.999999999999986 132 -14.999999999999986 129 -14.999999999999986 126 -18 126 -18 123 -21.000000000000014 123 -21.000000000000014 120 -21.000000000000014 116.99999999999999 -24 116.99999999999999 -24 114 -27 114</gml:posList>
                                         </gml:LinearRing>
                                     </gml:interior>
                                     <gml:interior>
-                                        <gml:LinearRing>
-                                            <gml:posList srsDimension="2">168 -33 165 -33 165 -36 168 -36 168 -33</gml:posList>
+                                        <gml:LinearRing srsName="EPSG:4326">
+                                            <gml:posList srsDimension="2">-33 168 -33 165 -35.999999999999986 165 -35.999999999999986 168 -33 168</gml:posList>
                                         </gml:LinearRing>
                                     </gml:interior>
                                     <gml:interior>
-                                        <gml:LinearRing>
-                                            <gml:posList srsDimension="2">159 -33 159 -36 162 -36 162 -33 159 -33</gml:posList>
+                                        <gml:LinearRing srsName="EPSG:4326">
+                                            <gml:posList srsDimension="2">-33 159 -35.999999999999986 159 -35.999999999999986 161.99999999999997 -33 161.99999999999997 -33 159</gml:posList>
                                         </gml:LinearRing>
                                     </gml:interior>
                                     <gml:interior>
-                                        <gml:LinearRing>
-                                            <gml:posList srsDimension="2">168 -18 165 -18 162 -18 162 -21 165 -21 168 -21 171 -21 171 -18 168 -18</gml:posList>
+                                        <gml:LinearRing srsName="EPSG:4326">
+                                            <gml:posList srsDimension="2">-18 168 -18 165 -18 161.99999999999997 -21.000000000000014 161.99999999999997 -21.000000000000014 165 -21.000000000000014 168 -21.000000000000014 171 -18 171 -18 168</gml:posList>
                                         </gml:LinearRing>
                                     </gml:interior>
                                     <gml:interior>
-                                        <gml:LinearRing>
-                                            <gml:posList srsDimension="2">153 -18 153 -21 156 -21 156 -18 153 -18</gml:posList>
+                                        <gml:LinearRing srsName="EPSG:4326">
+                                            <gml:posList srsDimension="2">-18 153 -21.000000000000014 153 -21.000000000000014 156 -18 156 -18 153</gml:posList>
                                         </gml:LinearRing>
                                     </gml:interior>
                                 </gml:Polygon>
@@ -531,20 +531,20 @@
                     <gex:geographicElement>
                         <gex:EX_BoundingPolygon>
                             <gex:polygon>
-                                <gml:Polygon gml:id="w257aac21b1c43b1b3b1b1b1">
+                                <gml:Polygon srsName="EPSG:4326">
                                     <gml:exterior>
-                                        <gml:LinearRing>
-                                            <gml:posList srsDimension="2">-168 -48 -168 -51 -171 -51 -174 -51 -174 -48 -177 -48 -180 -48 -180 -45 -180 -42 -177 -42 -177 -39 -174 -39 -174 -36 -177 -36 -180 -36 -180 -33 -180 -30 -177 -30 -174 -30 -171 -30 -171 -27 -171 -24 -174 -24 -177 -24 -177 -21 -180 -21 -180 -18 -180 -15 -180 -12 -177 -12 -174 -12 -171 -12 -171 -9 -171 -6 -171 -3 -171 0 -171 3 -168 3 -168 0 -168 -3 -168 -6 -168 -9 -168 -12 -168 -15 -168 -18 -168 -21 -168 -24 -168 -27 -168 -30 -168 -33 -168 -36 -168 -39 -171 -39 -171 -42 -171 -45 -168 -45 -168 -48</gml:posList>
+                                        <gml:LinearRing srsName="EPSG:4326">
+                                            <gml:posList srsDimension="2">-48 -168 -51 -168 -51 -171 -51 -174 -48 -174 -48 -177 -48 -180 -45 -180 -42.00000000000001 -180 -42.00000000000001 -177 -39 -177 -39 -174 -35.999999999999986 -174 -35.999999999999986 -177 -35.999999999999986 -180 -33 -180 -30.000000000000007 -180 -30.000000000000007 -177 -30.000000000000007 -174 -30.000000000000007 -171 -27 -171 -24 -171 -24 -174 -24 -177 -21.000000000000014 -177 -21.000000000000014 -180 -18 -180 -14.999999999999986 -180 -12 -180 -12 -177 -12 -174 -12 -171 -9 -171 -6 -171 -3 -171 0 -171 2.999999999999986 -171 2.999999999999986 -168 0 -168 -3 -168 -6 -168 -9 -168 -12 -168 -14.999999999999986 -168 -18 -168 -21.000000000000014 -168 -24 -168 -27 -168 -30.000000000000007 -168 -33 -168 -35.999999999999986 -168 -39 -168 -39 -171 -42.00000000000001 -171 -45 -171 -45 -168 -48 -168</gml:posList>
                                         </gml:LinearRing>
                                     </gml:exterior>
                                     <gml:interior>
-                                        <gml:LinearRing>
-                                            <gml:posList srsDimension="2">-174 -36 -171 -36 -171 -33 -174 -33 -174 -36</gml:posList>
+                                        <gml:LinearRing srsName="EPSG:4326">
+                                            <gml:posList srsDimension="2">-35.999999999999986 -174 -35.999999999999986 -171 -33 -171 -33 -174 -35.999999999999986 -174</gml:posList>
                                         </gml:LinearRing>
                                     </gml:interior>
                                     <gml:interior>
-                                        <gml:LinearRing>
-                                            <gml:posList srsDimension="2">-174 -18 -174 -21 -171 -21 -171 -18 -174 -18</gml:posList>
+                                        <gml:LinearRing srsName="EPSG:4326">
+                                            <gml:posList srsDimension="2">-18 -174 -21.000000000000014 -174 -21.000000000000014 -171 -18 -171 -18 -174</gml:posList>
                                         </gml:LinearRing>
                                     </gml:interior>
                                 </gml:Polygon>
@@ -1100,7 +1100,7 @@
             </mri:defaultLocale>
         </mri:MD_DataIdentification>
     </mdb:identificationInfo>
-    <mdb:contentInfo xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0">
+    <mdb:contentInfo xmlns:geonet="http://www.fao.org/geonetwork" xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0" xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0">
         <mrc:MD_CoverageDescription>
             <mrc:attributeDescription gco:nilReason="inapplicable" />
             <mrc:attributeGroup>
@@ -1253,7 +1253,7 @@
             </mrc:attributeGroup>
         </mrc:MD_CoverageDescription>
     </mdb:contentInfo>
-    <mdb:distributionInfo xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0">
+    <mdb:distributionInfo xmlns:geonet="http://www.fao.org/geonetwork" xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0" xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0">
         <mrd:MD_Distribution>
             <mrd:distributionFormat>
                 <mrd:MD_Format>
@@ -1422,7 +1422,7 @@
             </mrd:transferOptions>
         </mrd:MD_Distribution>
     </mdb:distributionInfo>
-    <mdb:acquisitionInformation xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0">
+    <mdb:acquisitionInformation xmlns:geonet="http://www.fao.org/geonetwork" xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0" xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0">
         <mac:MI_AcquisitionInformation>
             <mac:scope>
                 <mcc:MD_Scope>
