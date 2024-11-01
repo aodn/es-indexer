@@ -143,7 +143,7 @@ public class GeometryUtilsTest {
     @Test
     public void verifyCreateGirdPolygonWithValidCellSize() {
         Envelope envelope = new Envelope(0, 10, 0, 10);  // 10x10 envelope
-        double cellSize = 2.0; // Valid cell size
+        final double cellSize = 2.0; // Valid cell size
 
         List<Polygon> gridPolygons = GeometryUtils.createGridPolygons(envelope, cellSize);
 
@@ -158,6 +158,13 @@ public class GeometryUtilsTest {
             Assertions.assertNotNull(polygon, "Expected each grid cell to be a valid polygon");
             Assertions.assertTrue(polygon.getArea() <= (cellSize * cellSize), "Expected each cell to have an area <= cellSize^2");
         });
+
+        envelope = new Envelope(0, 25, 0, 10);  // 25 x 10 envelope
+        gridPolygons = GeometryUtils.createGridPolygons(envelope, 11);
+
+        // Check the number of cells created (should be 3 polygon event y is smaller than 11)
+        Assertions.assertEquals(3, gridPolygons.size(), "Expected 3 grid cells");
+
     }
 
     @Test
