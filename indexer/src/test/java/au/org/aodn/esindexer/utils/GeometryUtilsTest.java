@@ -164,7 +164,6 @@ public class GeometryUtilsTest {
 
         // Check the number of cells created (should be 3 polygon event y is smaller than 11)
         Assertions.assertEquals(3, gridPolygons.size(), "Expected 3 grid cells");
-
     }
 
     @Test
