@@ -91,6 +91,7 @@ public abstract class StacCollectionMapperService {
     List<List<BigDecimal>> mapExtentBbox(MDMetadataType source) {
         return GeometryUtils.createGeometryItems(
                 source,
+                null,
                 BBoxUtils::createBBoxFrom
         );
     }
@@ -343,11 +344,16 @@ public abstract class StacCollectionMapperService {
         });
         return dateMap;
     }
-
+    /**
+     * This is the default centroid if requester do not indicate a zoom level
+     * @param source
+     * @return
+     */
     @Named("mapSummaries.centroid")
     List<List<BigDecimal>> mapGeometryCentroid(MDMetadataType source) {
         return GeometryUtils.createGeometryItems(
                 source,
+                10,
                 GeometryUtils::createCentroidFrom
         );
     }
@@ -356,6 +362,7 @@ public abstract class StacCollectionMapperService {
     Map<?,?> mapSummariesGeometry(MDMetadataType source) {
         return GeometryUtils.createGeometryItems(
                 source,
+                10, // This is useful in testing/edge only.
                 GeometryUtils::createGeometryFrom
         );
     }
