@@ -20,8 +20,6 @@ import javax.annotation.PreDestroy;
 @EnableRetry
 @EnableAsync
 public class IndexerConfig {
-    @Value("${app.geometry.gridLandSize:10.0}")
-    protected double gridSize;
 
     @Value("${app.geometry.enableGridSpatialExtents:false}")
     protected boolean girdSpatialExtents;
@@ -31,11 +29,8 @@ public class IndexerConfig {
 
     @PostConstruct
     public void init() {
-        GeometryUtils.setGridSize(gridSize);
         GeometryUtils.setGridSpatialExtents(girdSpatialExtents);
         GeometryUtils.setCoastalPrecision(coastalPrecision);
-        GeometryUtils.setExecutorService(Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors()));
-
         GeometryUtils.init();
     }
 

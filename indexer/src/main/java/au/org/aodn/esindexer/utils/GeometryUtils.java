@@ -13,7 +13,6 @@ import org.geotools.data.simple.SimpleFeatureIterator;
 import org.geotools.data.simple.SimpleFeatureSource;
 import org.geotools.geojson.geom.GeometryJSON;
 import org.locationtech.jts.algorithm.Area;
-import org.locationtech.jts.algorithm.Orientation;
 import org.locationtech.jts.geom.*;
 import org.locationtech.jts.operation.union.UnaryUnionOp;
 import org.locationtech.jts.simplify.DouglasPeuckerSimplifier;
@@ -26,6 +25,7 @@ import java.math.RoundingMode;
 import java.net.URL;
 import java.util.*;
 import java.util.concurrent.*;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class GeometryUtils {
@@ -43,7 +43,7 @@ public class GeometryUtils {
     // Create an ExecutorService with a fixed thread pool size
     @Getter
     @Setter
-    protected static ExecutorService executorService;
+    protected static ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 
     @Getter
     @Setter
@@ -52,10 +52,6 @@ public class GeometryUtils {
     @Getter
     @Setter
     protected static int centroidScale = 3;
-
-    @Getter
-    @Setter
-    protected static double gridSize = 10.0;
 
     @Getter
     @Setter
@@ -243,28 +239,40 @@ public class GeometryUtils {
      */
     protected static List<Polygon> createGridPolygons(Envelope envelope, double cellSize) {
         List<Polygon> gridPolygons = new ArrayList<>();
-        GeometryFactory geometryFactory = new GeometryFactory();
 
         double minX = envelope.getMinX();
         double minY = envelope.getMinY();
         double maxX = envelope.getMaxX();
         double maxY = envelope.getMaxY();
 
-        // Loop to create grid cells
-        for (double x = minX; x < maxX; x += cellSize) {
-            for (double y = minY; y < maxY; y += cellSize) {
-                // Create a polygon for each grid cell
-                Polygon gridCell = geometryFactory.createPolygon(new Coordinate[]{
-                        new Coordinate(x, y),
-                        new Coordinate(x + cellSize, y),
-                        new Coordinate(x + cellSize, y + cellSize),
-                        new Coordinate(x, y + cellSize),
-                        new Coordinate(x, y)  // Closing the polygon
-                });
-                gridPolygons.add(gridCell);
+        // Check if the cellSize is too small on both side, that is we need to split even if the
+        // envelope have long width but short height etc
+        if (cellSize <= 0 || (cellSize > (maxX - minX) && cellSize > (maxY - minY))) {
+            Polygon itself = factory.createPolygon(new Coordinate[]{
+                    new Coordinate(minX, minY),
+                    new Coordinate(maxX, minY),
+                    new Coordinate(maxX, maxY),
+                    new Coordinate(minX, maxY),
+                    new Coordinate(minX, minY)  // Closing the polygon
+            });
+            gridPolygons.add(itself);
+        }
+        else {
+            // Loop to create grid cells
+            for (double x = minX; x < maxX; x += cellSize) {
+                for (double y = minY; y < maxY; y += cellSize) {
+                    // Create a polygon for each grid cell
+                    Polygon gridCell = factory.createPolygon(new Coordinate[]{
+                            new Coordinate(x, y),
+                            new Coordinate(x + cellSize, y),
+                            new Coordinate(x + cellSize, y + cellSize),
+                            new Coordinate(x, y + cellSize),
+                            new Coordinate(x, y)  // Closing the polygon
+                    });
+                    gridPolygons.add(gridCell);
+                }
             }
         }
-
         return gridPolygons;
     }
     /**
@@ -294,14 +302,14 @@ public class GeometryUtils {
      * @param large - A Polygon to break into grid
      * @return - A polygon the break into grid.
      */
-    protected static List<Geometry> breakLargeGeometryToGrid(final Geometry large) {
+    protected static List<Geometry> breakLargeGeometryToGrid(final Geometry large, int gridSize) {
         logger.debug("Break down large geometry to grid {}", large);
         // Get the bounding box (extent) of the large polygon
         Envelope envelope = large.getEnvelopeInternal();
 
         // Hard code cell size, we can adjust the break grid size. 10.0 result in 3x3 grid
         // cover Australia
-        List<Polygon> gridPolygons = createGridPolygons(envelope, getGridSize());
+        List<Polygon> gridPolygons = createGridPolygons(envelope, gridSize);
 
         // List to store Future objects representing the results of the tasks
         List<Future<Geometry>> futureResults = new ArrayList<>();
@@ -334,10 +342,10 @@ public class GeometryUtils {
         return intersectedPolygons;
     }
 
-    protected static List<List<Geometry>> splitAreaToGrid(List<List<Geometry>> geoList) {
+    protected static List<List<Geometry>> splitAreaToGrid(List<List<Geometry>> geoList, final int gridSize) {
         return geoList.stream()
                 .flatMap(Collection::stream)
-                .map(GeometryUtils::breakLargeGeometryToGrid)
+                .map(i -> GeometryUtils.breakLargeGeometryToGrid(i, gridSize))
                 .toList();
     }
     /**
@@ -445,7 +453,8 @@ public class GeometryUtils {
      */
     public static <R> R createGeometryItems(
             MDMetadataType source,
-            Function<List<List<AbstractEXGeographicExtentType>>, R> handler) {
+            Integer gridSize,
+            BiFunction<List<List<AbstractEXGeographicExtentType>>, Integer, R> handler) {
 
         List<MDDataIdentificationType> items = MapperUtils.findMDDataIdentificationType(source);
         if(!items.isEmpty()) {
@@ -492,7 +501,7 @@ public class GeometryUtils {
                                     .toList()
                     )
                     .toList();
-            return handler.apply(rawInput);
+            return handler.apply(rawInput, gridSize);
         }
         return null;
     }
@@ -510,8 +519,8 @@ public class GeometryUtils {
      * @param rawInput - The parsed XML block that contains the spatial extents area
      * @return - Centroid point which will not appear on land.
      */
-    public static List<List<BigDecimal>> createCentroidFrom(List<List<AbstractEXGeographicExtentType>> rawInput) {
-        List<List<Geometry>> grid = splitAreaToGrid(createGeometryWithoutLand(rawInput));
+    public static List<List<BigDecimal>> createCentroidFrom(List<List<AbstractEXGeographicExtentType>> rawInput, Integer gridSize) {
+        List<List<Geometry>> grid = splitAreaToGrid(createGeometryWithoutLand(rawInput), gridSize);
         return (grid != null && !grid.isEmpty()) ? createCentroid(grid) : null;
     }
     /**
@@ -521,7 +530,7 @@ public class GeometryUtils {
      * @param rawInput - The parsed XML block that contains the spatial extents area
      * @return
      */
-    public static Map<?, ?> createGeometryFrom(List<List<AbstractEXGeographicExtentType>> rawInput) {
+    public static Map<?, ?> createGeometryFrom(List<List<AbstractEXGeographicExtentType>> rawInput, Integer gridSize) {
         // The return polygon is in EPSG:4326, so we can call createGeoJson directly
 
         // This line will cause the spatial extents to break into grid, it may help to debug but will make production
@@ -530,7 +539,7 @@ public class GeometryUtils {
         List<List<Geometry>> polygon = GeometryBase.findPolygonsFrom(GeometryBase.COORDINATE_SYSTEM_CRS84, rawInput);
 
         // This is helpful when debug, it help to visualize the grid size on say edge env.
-        polygon = isGridSpatialExtents() ? splitAreaToGrid(polygon) : polygon;
+        polygon = isGridSpatialExtents() ? splitAreaToGrid(polygon, gridSize) : polygon;
 
         return (polygon != null && !polygon.isEmpty()) ? createGeoJson(polygon) : null;
     }
