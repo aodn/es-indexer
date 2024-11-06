@@ -63,6 +63,9 @@ public class StacCollectionMapperServiceTest {
     protected VocabService vocabsService;
 
     @MockBean
+    protected DataAccessService dataAccessService;
+
+    @MockBean
     protected RankingService rankingService;
 
     @MockBean
@@ -115,6 +118,7 @@ public class StacCollectionMapperServiceTest {
                 elasticSearchIndexService,
                 service,
                 vocabsService,
+                dataAccessService,
                 gcmdKeywordUtils
         );
         indexerService = spy(indexerService);
