@@ -2,10 +2,11 @@ package au.org.aodn.esindexer.service;
 
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.exception.*;
-import au.org.aodn.esindexer.model.Dataset;
+import au.org.aodn.esindexer.model.DatasetProvider;
 import au.org.aodn.esindexer.utils.GcmdKeywordUtils;
 import au.org.aodn.esindexer.utils.JaxbUtils;
 import au.org.aodn.metadata.iso19115_3_2018.MDMetadataType;
+import au.org.aodn.stac.model.SearchSuggestionsModel;
 import au.org.aodn.stac.model.StacCollectionModel;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.ElasticsearchException;
@@ -22,7 +23,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import jakarta.xml.bind.JAXBException;
 import lombok.extern.slf4j.Slf4j;
-import au.org.aodn.stac.model.SearchSuggestionsModel;
 import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.operation.TransformException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +41,7 @@ import org.springframework.web.client.HttpServerErrorException;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalDate;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.stream.Collectors;
@@ -62,6 +63,7 @@ public class IndexerServiceImpl implements IndexerService {
     protected JaxbUtils<MDMetadataType> jaxbUtils;
     protected RankingService rankingService;
     protected VocabService vocabService;
+    protected DataAccessService dataAccessService;
     protected GcmdKeywordUtils gcmdKeywordUtils;
     protected static final long DEFAULT_BACKOFF_TIME = 3000L;
 
@@ -82,6 +84,7 @@ public class IndexerServiceImpl implements IndexerService {
             ElasticSearchIndexService elasticSearchIndexService,
             StacCollectionMapperService stacCollectionMapperService,
             VocabService vocabService,
+            DataAccessService dataAccessService,
             GcmdKeywordUtils gcmdKeywordUtils
     ) {
         this.indexName = indexName;
@@ -95,6 +98,7 @@ public class IndexerServiceImpl implements IndexerService {
         this.elasticSearchIndexService = elasticSearchIndexService;
         this.stacCollectionMapperService = stacCollectionMapperService;
         this.vocabService = vocabService;
+        this.dataAccessService = dataAccessService;
         this.gcmdKeywordUtils = gcmdKeywordUtils;
     }
 
@@ -257,33 +261,45 @@ public class IndexerServiceImpl implements IndexerService {
     }
 
     @Override
-    public CompletableFuture<ResponseEntity<String>> indexDataset(Dataset dataset) {
+    public List<BulkResponse> indexDataset(String uuid, LocalDate startDate, LocalDate endDate) {
+
+        BulkRequest.Builder bulkRequest = new BulkRequest.Builder();
+        List<BulkResponse> responses = new ArrayList<>();
+
+
+
+        long dataSize = 0;
+        final long maxSize = 5242880; // is 5mb
+
+        var dataset = new DatasetProvider(uuid, startDate, endDate, dataAccessService);
         try {
+            for (var entry : dataset) {
+                if (entry == null) {
+                    continue;
+                }
+                log.info("add dataset into b with UUID: {} and yearMonth: {}", entry.uuid(), entry.yearMonth());
 
-            IndexRequest<JsonData> request;
-            try(InputStream inputStream = new ByteArrayInputStream(indexerObjectMapper.writeValueAsBytes(dataset))){
-                log.info("Ingesting a new dataset with UUID: {} to index: {}", dataset.uuid(), indexName);
-                log.debug("{}", dataset);
-
-                request = IndexRequest.of(builder -> builder
-                        .id(dataset.uuid() + dataset.yearMonth())
-                        .index(datasetIndexName)
-                        .withJson(inputStream)
-                );
-
-                IndexResponse response = portalElasticsearchClient.index(request);
-                log.info("Dataset with UUID: {} indexed with version: {}", dataset.uuid(), response.version());
-                return CompletableFuture.completedFuture(ResponseEntity.status(HttpStatus.OK).body(response.toString()));
-
-            } catch (Exception e) {
-                log.error(e.getMessage());
-                throw new IndexingRecordException(e.getMessage());
+                bulkRequest.operations(operation -> operation.index(
+                        indexReq -> indexReq
+                                .id(entry.uuid() + entry.yearMonth())
+                                .index(datasetIndexName)
+                                .document(entry)
+                ));
+                dataSize += indexerObjectMapper.writeValueAsBytes(entry).length;
+                if (dataSize > maxSize) {
+                    log.info("Execute bulk request as bulk request is big enough {}", dataSize);
+                    responses.add(reduceResponse(self.executeBulk(bulkRequest, null)));
+                    dataSize = 0;
+                    bulkRequest = new BulkRequest.Builder();
+                }
             }
-
-        } catch(Exception e) {
-            log.error(e.getMessage());
-            throw new MappingValueException(e.getMessage());
+            log.info("Finished execute bulk indexing records to index: {}", datasetIndexName);
+            responses.add(reduceResponse(self.executeBulk(bulkRequest, null)));
+        } catch (Exception e) {
+            log.error("Failed", e);
+            throw new RuntimeException("Exception thrown while indexing dataset with UUID: " + uuid + " | " + e.getMessage(), e);
         }
+        return responses;
     }
 
 
@@ -483,7 +499,11 @@ public class IndexerServiceImpl implements IndexerService {
 
             // Log errors, if any
             if (!result.items().isEmpty()) {
-                log.error("Bulk load have errors? {}", result.errors());
+                if (result.errors()) {
+                    log.error("Bulk load have errors? {}", true);
+                } else {
+                    log.info("Bulk load have errors? {}", false);
+                }
                 for (BulkResponseItem item : result.items()) {
                     if (item.error() != null) {
                         try {
