@@ -373,13 +373,17 @@ public class GeometryUtils {
     protected static List<List<Geometry>> removeLandAreaFromGeometry(List<List<Geometry>> geoList) {
         // Do not flatten the array in geometries level, otherwise the map will not display the grid boundary
         return geoList.stream()
-                .flatMap(Collection::stream)
-                .filter(Objects::nonNull)
-                // Try fixing it with buffer(0), which often fixes small topological errors
-                // it fixed the non-noded intersection issue
-                .map(geometry -> geometry.isValid() ? geometry : geometry.buffer(0))
-                .map(geometry -> geometry.difference(landGeometry))
-                .map(GeometryUtils::convertToListGeometry)
+                .map(geometries ->
+                        geometries.stream()
+                                .filter(Objects::nonNull)
+                                // Try fixing it with buffer(0), which often fixes small topological errors
+                                // it fixed the non-noded intersection issue
+                                .map(geometry -> geometry.isValid() ? geometry : geometry.buffer(0))
+                                .map(geometry -> geometry.difference(landGeometry))
+                                .map(GeometryUtils::convertToListGeometry)
+                                .flatMap(Collection::stream)
+                                .toList()
+                )
                 .toList();
     }
 
