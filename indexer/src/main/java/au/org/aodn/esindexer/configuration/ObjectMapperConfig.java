@@ -1,10 +1,7 @@
 package au.org.aodn.esindexer.configuration;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -24,7 +21,7 @@ public class ObjectMapperConfig {
         // objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd"));
 
         // Configure property naming strategy (e.g., to use snake_case)
-        objectMapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
+        objectMapper.setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
 
         // Register custom serializers/deserializers if needed
         // SimpleModule customModule = new SimpleModule();

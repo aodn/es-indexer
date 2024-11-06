@@ -14,6 +14,8 @@ import org.geotools.data.simple.SimpleFeatureSource;
 import org.geotools.geojson.geom.GeometryJSON;
 import org.locationtech.jts.algorithm.Area;
 import org.locationtech.jts.geom.*;
+import org.locationtech.jts.geom.prep.PreparedGeometry;
+import org.locationtech.jts.geom.prep.PreparedGeometryFactory;
 import org.locationtech.jts.operation.union.UnaryUnionOp;
 import org.locationtech.jts.simplify.DouglasPeuckerSimplifier;
 import org.opengis.feature.simple.SimpleFeature;
@@ -21,12 +23,12 @@ import org.springframework.core.io.ClassPathResource;
 
 import java.io.*;
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.net.URL;
+import java.time.Duration;
+import java.time.ZonedDateTime;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
 public class GeometryUtils {
 
@@ -43,7 +45,7 @@ public class GeometryUtils {
     // Create an ExecutorService with a fixed thread pool size
     @Getter
     @Setter
-    protected static ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+    protected static ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() - 1);
 
     @Getter
     @Setter
@@ -284,7 +286,7 @@ public class GeometryUtils {
         // The geometry is expected to be multipolygon
         // The above map will result in a multi-polygon, we need to flatten
         // it to List<Geometry> which is what the later processing expected.
-        List<Geometry> geo = new ArrayList<>();
+        List<Geometry> geo = new ArrayList<>(multipolygon.getNumGeometries());
 
         // Iterate over the geometries in the MultiPolygon
         for (int i = 0; i < multipolygon.getNumGeometries(); i++) {
@@ -302,30 +304,44 @@ public class GeometryUtils {
      * @param large - A Polygon to break into grid
      * @return - A polygon the break into grid.
      */
-    protected static List<Geometry> breakLargeGeometryToGrid(final Geometry large, int gridSize) {
+    protected static List<Geometry> breakLargeGeometryToGrid(final Geometry large, double gridSize) {
         logger.debug("Break down large geometry to grid {}", large);
         // Get the bounding box (extent) of the large polygon
         Envelope envelope = large.getEnvelopeInternal();
 
+        // Speed up intersects operation
+        PreparedGeometry pLarge = PreparedGeometryFactory.prepare(large);
+
         // Hard code cell size, we can adjust the break grid size. 10.0 result in 3x3 grid
         // cover Australia
-        List<Polygon> gridPolygons = createGridPolygons(envelope, gridSize);
+        List<Polygon> grids = createGridPolygons(envelope, gridSize);
 
         // List to store Future objects representing the results of the tasks
-        List<Future<Geometry>> futureResults = new ArrayList<>();
+        List<Future<Geometry>> futureResults = new ArrayList<>(grids.size());
 
         // Submit tasks to executor for each gridPolygon
-        for (Polygon gridPolygon : gridPolygons) {
+        for (Polygon grid : grids) {
             Callable<Geometry> task = () -> {
-                Geometry intersection = gridPolygon.intersection(large);
-                return !intersection.isEmpty() ? intersection : null;
+                if(pLarge.intersects(grid)) {
+                    if(pLarge.covers(grid)) {
+                        // grid intersects all with pLarge, so it is equals to grid
+                        // this avoid expensive intersection operation
+                        return grid;
+                    }
+                    else {
+                        return pLarge.getGeometry().intersection(grid);
+                    }
+                }
+                else {
+                    return null;
+                }
             };
             Future<Geometry> future = executorService.submit(task);
             futureResults.add(future);
         }
 
         // List to store the intersected polygons
-        final List<Geometry> intersectedPolygons = new ArrayList<>();
+        final List<Geometry> intersectedPolygons = new ArrayList<>(futureResults.size());
 
         // Collect the results from the futures
         for (Future<Geometry> future : futureResults) {
@@ -342,8 +358,8 @@ public class GeometryUtils {
         return intersectedPolygons;
     }
 
-    protected static List<List<Geometry>> splitAreaToGrid(List<List<Geometry>> geoList, final int gridSize) {
-        return geoList.stream()
+    protected static List<List<Geometry>> splitAreaToGrid(List<List<Geometry>> geoList, Double gridSize) {
+        return  geoList.parallelStream()
                 .flatMap(Collection::stream)
                 .map(i -> GeometryUtils.breakLargeGeometryToGrid(i, gridSize))
                 .toList();
@@ -357,32 +373,31 @@ public class GeometryUtils {
     protected static List<List<Geometry>> removeLandAreaFromGeometry(List<List<Geometry>> geoList) {
         // Do not flatten the array in geometries level, otherwise the map will not display the grid boundary
         return geoList.stream()
-                .map(geometries ->
-                    geometries.stream()
-                            .filter(Objects::nonNull)
-                            // Try fixing it with buffer(0), which often fixes small topological errors
-                            // it fixed the non-noded intersection issue
-                            .map(geometry -> geometry.isValid() ? geometry : geometry.buffer(0))
-                            .map(geometry -> geometry.difference(landGeometry))
-                            .map(GeometryUtils::convertToListGeometry)
-                            .flatMap(Collection::stream)
-                            .toList()
-                )
+                .flatMap(Collection::stream)
+                .filter(Objects::nonNull)
+                // Try fixing it with buffer(0), which often fixes small topological errors
+                // it fixed the non-noded intersection issue
+                .map(geometry -> geometry.isValid() ? geometry : geometry.buffer(0))
+                .map(geometry -> geometry.difference(landGeometry))
+                .map(GeometryUtils::convertToListGeometry)
                 .toList();
     }
 
-    protected static List<Coordinate> calculateGeometryCentroid(Geometry geometry) {
+    protected static List<Double[]> calculateGeometryCentroid(Geometry geometry) {
         if(geometry instanceof GeometryCollection gc) {
             return calculateCollectionCentroid(gc);
         }
         else if(geometry instanceof Polygon pl) {
-            return List.of(calculatePolygonCentroid(pl).getCoordinate());
+            Coordinate coordinate = calculatePolygonCentroid(pl).getCoordinate();
+            return new ArrayList<>(Collections.singleton(new Double[] {coordinate.getX(), coordinate.getY()}));
         }
         else if(geometry instanceof LineString) {
-            return List.of(geometry.getCentroid().getCoordinate());
+            Coordinate coordinate = geometry.getCentroid().getCoordinate();
+            return new ArrayList<>(Collections.singleton(new Double[] {coordinate.getX(), coordinate.getY()}));
         }
         else if(geometry instanceof Point p) {
-            return List.of(p.getCoordinate());
+            Coordinate coordinate = p.getCoordinate();
+            return new ArrayList<>(Collections.singleton(new Double[] {coordinate.getX(), coordinate.getY()}));
         }
         else {
             logger.info("Skip geometry centroid for {}", geometry.getGeometryType());
@@ -392,25 +407,22 @@ public class GeometryUtils {
 
     protected static Point calculatePolygonCentroid(Geometry geometry) {
         // Make sure the point will not fall out of the shape, for example a U shape will make
-        // centroid fall out of the U, so we check if the centroid is out of the shape? if yes then use
-        // interior point
-        return geometry.contains(geometry.getCentroid()) ?
-                geometry.getCentroid() :
-                geometry.getInteriorPoint();
+        // centroid fall out of the U, this function always make sure it is inside.
+        return geometry.getInteriorPoint();
     }
 
-    protected static List<Coordinate> calculateCollectionCentroid(GeometryCollection geometryCollection) {
+    protected static List<Double[]> calculateCollectionCentroid(GeometryCollection geometryCollection) {
         // Try simplified the polygon to reduce the number of centroid.
         Geometry geometry = geometryCollection.union();
 
         try {
             Point centroid = calculatePolygonCentroid(geometry);
-            return List.of(new Coordinate(centroid.getX(), centroid.getY()));
+            return new ArrayList<>(Collections.singleton(new Double[]{ centroid.getX(), centroid.getY()}));
         }
         catch(Exception e) {
             // That means it cannot be simplified to a polygon that able to calculate centroid,
             // we need to calculate it one by one
-            List<Coordinate> coordinates = new ArrayList<>();
+            List<Double[]> coordinates = new ArrayList<>();
             for (int i = 0; i < geometryCollection.getNumGeometries(); i++) {
                 geometry = geometryCollection.getGeometryN(i);
 
@@ -418,7 +430,7 @@ public class GeometryUtils {
                 // centroid fall out of the U, so we check if the centroid is out of the shape? if yes then use
                 // interior point
                 Point centroid = calculatePolygonCentroid(geometry);
-                coordinates.add(new Coordinate(centroid.getX(), centroid.getY()));
+                coordinates.add(new Double[]{centroid.getX(), centroid.getY()});
             }
             return coordinates;
         }
@@ -437,10 +449,8 @@ public class GeometryUtils {
                 .filter(Objects::nonNull)
                 .flatMap(Collection::stream)
                 .map(coordinate -> List.of(
-                        // We do not need super high precision for centroid, this help to speed up the transfer
-                        // on large area
-                        BigDecimal.valueOf(coordinate.getX()).setScale(getCentroidScale(), RoundingMode.HALF_UP),
-                        BigDecimal.valueOf(coordinate.getY()).setScale(getCentroidScale(), RoundingMode.HALF_UP))
+                        BigDecimal.valueOf(coordinate[0]),
+                        BigDecimal.valueOf(coordinate[1]))
                 )
                 .toList();
     }
@@ -451,10 +461,10 @@ public class GeometryUtils {
      * @return - The target item
      * @param <R> - Type that align with the handler return type
      */
-    public static <R> R createGeometryItems(
+    public static <R, P> R createGeometryItems(
             MDMetadataType source,
-            Integer gridSize,
-            BiFunction<List<List<AbstractEXGeographicExtentType>>, Integer, R> handler) {
+            BiFunction<List<List<AbstractEXGeographicExtentType>>, P, R> handler,
+            P param) {
 
         List<MDDataIdentificationType> items = MapperUtils.findMDDataIdentificationType(source);
         if(!items.isEmpty()) {
@@ -501,7 +511,7 @@ public class GeometryUtils {
                                     .toList()
                     )
                     .toList();
-            return handler.apply(rawInput, gridSize);
+            return handler.apply(rawInput, param);
         }
         return null;
     }
@@ -519,9 +529,20 @@ public class GeometryUtils {
      * @param rawInput - The parsed XML block that contains the spatial extents area
      * @return - Centroid point which will not appear on land.
      */
-    public static List<List<BigDecimal>> createCentroidFrom(List<List<AbstractEXGeographicExtentType>> rawInput, Integer gridSize) {
-        List<List<Geometry>> grid = splitAreaToGrid(createGeometryWithoutLand(rawInput), gridSize);
-        return (grid != null && !grid.isEmpty()) ? createCentroid(grid) : null;
+    public static Map<String, List<List<BigDecimal>>> createCentroidFrom(List<List<AbstractEXGeographicExtentType>> rawInput, Map<String, Double> params) {
+
+        // This is a heavy call
+        List<List<Geometry>> noland = createGeometryWithoutLand(rawInput);
+        // Need key ordered based on insert for test
+        Map<String, List<List<BigDecimal>>> result = new LinkedHashMap<>();
+        for(Map.Entry<String, Double> param : params.entrySet()) {
+            List<List<Geometry>> grid = splitAreaToGrid(noland, param.getValue());
+            if(grid != null && !grid.isEmpty()) {
+                result.put(param.getKey(), createCentroid(grid));
+            }
+        }
+
+        return result.isEmpty() ? null : result;
     }
     /**
      * Create the spatial extents area given the XML info, it will not remove land area for speed reason. Otherwise,
@@ -530,7 +551,7 @@ public class GeometryUtils {
      * @param rawInput - The parsed XML block that contains the spatial extents area
      * @return
      */
-    public static Map<?, ?> createGeometryFrom(List<List<AbstractEXGeographicExtentType>> rawInput, Integer gridSize) {
+    public static Map<?, ?> createGeometryFrom(List<List<AbstractEXGeographicExtentType>> rawInput, Double gridSize) {
         // The return polygon is in EPSG:4326, so we can call createGeoJson directly
 
         // This line will cause the spatial extents to break into grid, it may help to debug but will make production

@@ -46,8 +46,8 @@ public class GeometryUtilsTest {
         // Whole spatial extends
         List<List<Geometry>> withLand = GeometryUtils.createGeometryItems(
                 source,
-                null,
-                (rawInput, size) -> GeometryBase.findPolygonsFrom(GeometryBase.COORDINATE_SYSTEM_CRS84, rawInput)
+                (rawInput, size) -> GeometryBase.findPolygonsFrom(GeometryBase.COORDINATE_SYSTEM_CRS84, rawInput),
+                null
         );
 
         List<List<Geometry>> l = Objects.requireNonNull(withLand);
@@ -72,8 +72,8 @@ public class GeometryUtilsTest {
         // Strip the land away.
         List<List<Geometry>> noLand = GeometryUtils.createGeometryItems(
                 source,
-                null,
-                (rawInput, s) -> GeometryUtils.createGeometryWithoutLand(rawInput)
+                (rawInput, s) -> GeometryUtils.createGeometryWithoutLand(rawInput),
+                null
         );
 
         List<List<Geometry>> nl = Objects.requireNonNull(noLand);
@@ -111,10 +111,10 @@ public class GeometryUtilsTest {
         StringReader reader = new StringReader(geojson);
         FeatureCollection<SimpleFeatureType, SimpleFeature> feature = json.readFeatureCollection(reader);
 
-        List<Coordinate> point = GeometryUtils.calculateCollectionCentroid(convertToGeometryCollection(feature));
+        List<Double[]> point = GeometryUtils.calculateCollectionCentroid(convertToGeometryCollection(feature));
         assertEquals(1, point.size(), "One item");
-        assertEquals(2.805438932281021, point.get(0).getX(),"X");
-        assertEquals( 2.0556251797475227, point.get(0).getY(), "Y");
+        assertEquals(2.805438932281021, point.get(0)[0],"X");
+        assertEquals( 2.0556251797475227, point.get(0)[1], "Y");
     }
 
     protected GeometryCollection convertToGeometryCollection(

@@ -27,6 +27,7 @@ import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.testcontainers.shaded.org.apache.commons.io.FileUtils;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -373,7 +374,6 @@ public class StacCollectionMapperServiceTest {
         String xml = readResourceFile("classpath:canned/sample_malform_date.xml");
         String expected = readResourceFile("classpath:canned/sample_malform_date_stac.json");
         indexerService.indexMetadata(xml);
-
         verify(expected);
     }
     /**

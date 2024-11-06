@@ -91,8 +91,8 @@ public abstract class StacCollectionMapperService {
     List<List<BigDecimal>> mapExtentBbox(MDMetadataType source) {
         return GeometryUtils.createGeometryItems(
                 source,
-                null,
-                BBoxUtils::createBBoxFrom
+                BBoxUtils::createBBoxFrom,
+                null
         );
     }
 
@@ -345,16 +345,24 @@ public abstract class StacCollectionMapperService {
         return dateMap;
     }
     /**
-     * This is the default centroid if requester do not indicate a zoom level
-     * @param source
-     * @return
+     * For zoom level 1 = 360 deg, level 2 = 180, level3 = 90, we want one level lower to add more centroid
+     * for map drag mid-way of the tile
+     * @param source - The parsed XML
+     * @return - A list of centroid
      */
     @Named("mapSummaries.centroid")
-    List<List<BigDecimal>> mapGeometryCentroid(MDMetadataType source) {
+    Map<String, List<List<BigDecimal>>> mapGeometryCentroidZoomLevel(MDMetadataType source) {
+        // Need key ordered based on insert for test
+        Map<String, Double> param = new LinkedHashMap<>();
+        param.put("Z1_3", 90.0);
+        param.put("Z4_6", 11.25);
+        param.put("Z7_9", 1.40625);
+        param.put("Z10_12", 0.17578125);    // Max you can go else very big and slow in json
+
         return GeometryUtils.createGeometryItems(
                 source,
-                10,
-                GeometryUtils::createCentroidFrom
+                GeometryUtils::createCentroidFrom,
+                param
         );
     }
 
@@ -362,8 +370,8 @@ public abstract class StacCollectionMapperService {
     Map<?,?> mapSummariesGeometry(MDMetadataType source) {
         return GeometryUtils.createGeometryItems(
                 source,
-                10, // This is useful in testing/edge only.
-                GeometryUtils::createGeometryFrom
+                GeometryUtils::createGeometryFrom,
+                10.0 // This is useful in testing/edge only.
         );
     }
 

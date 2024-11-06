@@ -1,780 +1,330 @@
 {
-  "title": "IMOS National Reference Station (NRS) - Salinity, Carbon, Alkalinity, Oxygen and Nutrients (Silicate, Ammonium, Nitrite/Nitrate, Phosphate)",
-  "description": "These data sets include Salinity, Carbon, Alkalinity, Oxygen and Nutrients (Silicate, Ammonium, Nitrite/Nitrate, Phosphate) analysed from samples collected as part of the Integrated Marine Observing Systems (IMOS) National Mooring Network -National Reference Station (NRS) field sampling. Nine Sites are included in the IMOS NRS field sampling stations. Maria Island (TAS), Kangaroo Island (SA), Esperance (WA), Rottnest Island (WA), Ningaloo (WA), Darwin (NT), Yongala (QLD), North Stradbroke Island (QLD) and Port Hacking 100 (NSW). Sampling at these sites is conducted by several members of IMOS NRS Biogeochemical project. Sampling at the sites began between 29/9/2008 and 8/11/2010 and is currently ongoing for 7 sites. Sampling ceased at Ningaloo and Esperance (WA) sites in Aug/Sept 2013. Sampling is conducted monthly (Esperance and Ningaloo were 3 monthly) off small vessels. Details including information on station locations, depths sampled, sample regime, sample types collected, and analyses can be found in the “IMOS National Reference Stations Biogeochemical Operations Manual” (see link below to latest version, plus link to previous versions and supplementary documentation). Historical data collected as part of CSIRO Coastal Monitoring program is available for three of the National Reference Station sites: Maria Island Coastal Station Data 1944-2008, Port Hacking 100m Coastal Station Data 1953-2010 and Rottnest Island Coastal Station Data 1951-2009. Additional information for this dataset may be available via the original MarLIN metadata entry: https://marlin.csiro.au/geonetwork/srv/eng/catalog.search#/metadata/fa93c66e-0e56-7e1d-e043-08114f8c1b76. The links to the metadata and access for these data is provided below. Data storage and access is planned to be interoperable with other national and international programs through the IMOS Infrastructure. Station metadata can be found through this resource. **This dataset has been superseded by the \"IMOS - Combined Biogeochemical parameters (reference stations)\" collection that is available at https://catalogue-imos.aodn.org.au/geonetwork/srv/api/records/b442c3e8-3d30-48ad-b144-680afd848167 (this collection was removed from the AODN Portal in February 2022).**",
-  "extent": {
-    "bbox": [
-      [
-        113.0,
-        -43.0,
-        154.0,
-        -12.0
-      ],
-      [
-        115.0,
-        -33.0,
-        116.0,
-        -31.0
-      ],
-      [
-        130.0,
-        -13.0,
-        131.0,
-        -12.0
-      ],
-      [
-        147.0,
-        -20.0,
-        148.0,
-        -19.0
-      ],
-      [
-        113.0,
-        -22.0,
-        114.0,
-        -21.0
-      ],
-      [
-        153.0,
-        -28.0,
-        154.0,
-        -27.0
-      ],
-      [
-        136.0,
-        -36.0,
-        137.0,
-        -35.0
-      ],
-      [
-        121.0,
-        -34.0,
-        122.0,
-        -33.0
-      ],
-      [
-        151.0,
-        -35.0,
-        152.0,
-        -34.0
-      ],
-      [
-        148.0,
-        -43.0,
-        149.0,
-        -42.0
-      ]
-    ],
-    "temporal": [
-      [
-        "2008-09-28T14:00:00Z",
-        null
-      ],
-      [
-        "2008-09-28T14:00:00Z",
-        null
-      ]
-    ]
+  "title" : "IMOS National Reference Station (NRS) - Salinity, Carbon, Alkalinity, Oxygen and Nutrients (Silicate, Ammonium, Nitrite/Nitrate, Phosphate)",
+  "description" : "These data sets include Salinity, Carbon, Alkalinity, Oxygen and Nutrients (Silicate, Ammonium, Nitrite/Nitrate, Phosphate) analysed from samples collected as part of the Integrated Marine Observing Systems (IMOS) National Mooring Network -National Reference Station (NRS) field sampling. Nine Sites are included in the IMOS NRS field sampling stations. Maria Island (TAS), Kangaroo Island (SA), Esperance (WA), Rottnest Island (WA), Ningaloo (WA), Darwin (NT), Yongala (QLD), North Stradbroke Island (QLD) and Port Hacking 100 (NSW). Sampling at these sites is conducted by several members of IMOS NRS Biogeochemical project. Sampling at the sites began between 29/9/2008 and 8/11/2010 and is currently ongoing for 7 sites. Sampling ceased at Ningaloo and Esperance (WA) sites in Aug/Sept 2013. Sampling is conducted monthly (Esperance and Ningaloo were 3 monthly) off small vessels. Details including information on station locations, depths sampled, sample regime, sample types collected, and analyses can be found in the “IMOS National Reference Stations Biogeochemical Operations Manual” (see link below to latest version, plus link to previous versions and supplementary documentation). Historical data collected as part of CSIRO Coastal Monitoring program is available for three of the National Reference Station sites: Maria Island Coastal Station Data 1944-2008, Port Hacking 100m Coastal Station Data 1953-2010 and Rottnest Island Coastal Station Data 1951-2009. Additional information for this dataset may be available via the original MarLIN metadata entry: https://marlin.csiro.au/geonetwork/srv/eng/catalog.search#/metadata/fa93c66e-0e56-7e1d-e043-08114f8c1b76. The links to the metadata and access for these data is provided below. Data storage and access is planned to be interoperable with other national and international programs through the IMOS Infrastructure. Station metadata can be found through this resource. **This dataset has been superseded by the \"IMOS - Combined Biogeochemical parameters (reference stations)\" collection that is available at https://catalogue-imos.aodn.org.au/geonetwork/srv/api/records/b442c3e8-3d30-48ad-b144-680afd848167 (this collection was removed from the AODN Portal in February 2022).**",
+  "extent" : {
+    "bbox" : [ [ 113.0, -43.0, 154.0, -12.0 ], [ 115.0, -33.0, 116.0, -31.0 ], [ 130.0, -13.0, 131.0, -12.0 ], [ 147.0, -20.0, 148.0, -19.0 ], [ 113.0, -22.0, 114.0, -21.0 ], [ 153.0, -28.0, 154.0, -27.0 ], [ 136.0, -36.0, 137.0, -35.0 ], [ 121.0, -34.0, 122.0, -33.0 ], [ 151.0, -35.0, 152.0, -34.0 ], [ 148.0, -43.0, 149.0, -42.0 ] ],
+    "temporal" : [ [ "2008-09-28T14:00:00Z", null ], [ "2008-09-28T14:00:00Z", null ] ]
   },
-  "summaries": {
-    "score": 1,
-    "status": "onGoing",
-    "credits": [
-      "These data are from the National Mooring Network, part of the Australia’s Integrated Marine Observing System (IMOS) is enabled by the National Collaborative Research Infrastructure Strategy (NCRIS). It is operated by a consortium of institutions as an unincorporated joint venture, with the University of Tasmania as Lead Agent.",
-      "Operation of the National Reference Station (NRS) sampling and analyses is provided by the IMOS NRS Biogeochemical (BGC) project and is distributed between several operators and is coordinated nationally. Nutrient analyses (2009- ) performed by Val Latham (CMAR - Hobart) and Peter Hughes (CMAR - Floreat) Salinity and oxygen analyses (2009- ) performed by Val Latham (CMAR - Hobart) Carbon and Alkalinity analyses (2009- ) performed by Kate Berry (CMAR - Hobart)"
-    ],
-    "statement": "Sampling is conducted monthly (Esperance and Ningaloo 3 monthly) off small vessels. Depths sampled range from surface to 105 metres depending on the site and depths are usually sampled at 10 metre intervals. The nutrient analyses is performed at CMAR Hobart and Floreat laboratories. Full details are documented in the “IMOS National Reference Stations Biogeochemical Operations Manual”. Data is archived in the ORABN1:PLANKTON_NRS_ENV database at CMAR Dutton Park. Data is also exported to IMOS and made available via the AODN portal.",
-    "creation": "2020-07-14T18:03:00",
-    "revision": "2022-10-31T21:17:33",
-    "update_frequency": "other",
-    "proj:geometry": {
-      "geometries": [
-        {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [
-                115,
-                -33
-              ],
-              [
-                116,
-                -33
-              ],
-              [
-                116,
-                -31
-              ],
-              [
-                115,
-                -31
-              ],
-              [
-                115,
-                -33
-              ]
-            ]
-          ]
-        },
-        {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [
-                130,
-                -12.999999999999986
-              ],
-              [
-                131,
-                -12.999999999999986
-              ],
-              [
-                131,
-                -12
-              ],
-              [
-                130,
-                -12
-              ],
-              [
-                130,
-                -12.999999999999986
-              ]
-            ]
-          ]
-        },
-        {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [
-                147,
-                -20
-              ],
-              [
-                148,
-                -20
-              ],
-              [
-                148,
-                -19
-              ],
-              [
-                147,
-                -19
-              ],
-              [
-                147,
-                -20
-              ]
-            ]
-          ]
-        },
-        {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [
-                113,
-                -22
-              ],
-              [
-                114,
-                -22
-              ],
-              [
-                114,
-                -21.000000000000018
-              ],
-              [
-                113,
-                -21.000000000000018
-              ],
-              [
-                113,
-                -22
-              ]
-            ]
-          ]
-        },
-        {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [
-                153,
-                -28
-              ],
-              [
-                154,
-                -28
-              ],
-              [
-                154,
-                -27
-              ],
-              [
-                153,
-                -27
-              ],
-              [
-                153,
-                -28
-              ]
-            ]
-          ]
-        },
-        {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [
-                136,
-                -35.999999999999986
-              ],
-              [
-                137,
-                -35.999999999999986
-              ],
-              [
-                137,
-                -35.00000000000001
-              ],
-              [
-                136,
-                -35.00000000000001
-              ],
-              [
-                136,
-                -35.999999999999986
-              ]
-            ]
-          ]
-        },
-        {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [
-                121,
-                -34
-              ],
-              [
-                122,
-                -34
-              ],
-              [
-                122,
-                -33
-              ],
-              [
-                121,
-                -33
-              ],
-              [
-                121,
-                -34
-              ]
-            ]
-          ]
-        },
-        {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [
-                151,
-                -35.00000000000001
-              ],
-              [
-                152,
-                -35.00000000000001
-              ],
-              [
-                152,
-                -34
-              ],
-              [
-                151,
-                -34
-              ],
-              [
-                151,
-                -35.00000000000001
-              ]
-            ]
-          ]
-        },
-        {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [
-                148,
-                -42.999999999999986
-              ],
-              [
-                149,
-                -42.999999999999986
-              ],
-              [
-                149,
-                -42.00000000000001
-              ],
-              [
-                148,
-                -42.00000000000001
-              ],
-              [
-                148,
-                -42.999999999999986
-              ]
-            ]
-          ]
-        }
-      ],
-      "type": "GeometryCollection"
+  "summaries" : {
+    "score" : 1,
+    "status" : "onGoing",
+    "credits" : [ "These data are from the National Mooring Network, part of the Australia’s Integrated Marine Observing System (IMOS) is enabled by the National Collaborative Research Infrastructure Strategy (NCRIS). It is operated by a consortium of institutions as an unincorporated joint venture, with the University of Tasmania as Lead Agent.", "Operation of the National Reference Station (NRS) sampling and analyses is provided by the IMOS NRS Biogeochemical (BGC) project and is distributed between several operators and is coordinated nationally. Nutrient analyses (2009- ) performed by Val Latham (CMAR - Hobart) and Peter Hughes (CMAR - Floreat) Salinity and oxygen analyses (2009- ) performed by Val Latham (CMAR - Hobart) Carbon and Alkalinity analyses (2009- ) performed by Kate Berry (CMAR - Hobart)" ],
+    "statement" : "Sampling is conducted monthly (Esperance and Ningaloo 3 monthly) off small vessels. Depths sampled range from surface to 105 metres depending on the site and depths are usually sampled at 10 metre intervals. The nutrient analyses is performed at CMAR Hobart and Floreat laboratories. Full details are documented in the “IMOS National Reference Stations Biogeochemical Operations Manual”. Data is archived in the ORABN1:PLANKTON_NRS_ENV database at CMAR Dutton Park. Data is also exported to IMOS and made available via the AODN portal.",
+    "creation" : "2020-07-14T18:03:00",
+    "revision" : "2022-10-31T21:17:33",
+    "update_frequency" : "other",
+    "proj:geometry" : {
+      "geometries" : [ {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 115, -33 ], [ 116, -33 ], [ 116, -31 ], [ 115, -31 ], [ 115, -33 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 130, -12.999999999999986 ], [ 131, -12.999999999999986 ], [ 131, -12 ], [ 130, -12 ], [ 130, -12.999999999999986 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 147, -20 ], [ 148, -20 ], [ 148, -19 ], [ 147, -19 ], [ 147, -20 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 113, -22 ], [ 114, -22 ], [ 114, -21.000000000000018 ], [ 113, -21.000000000000018 ], [ 113, -22 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 153, -28 ], [ 154, -28 ], [ 154, -27 ], [ 153, -27 ], [ 153, -28 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 136, -35.999999999999986 ], [ 137, -35.999999999999986 ], [ 137, -35.00000000000001 ], [ 136, -35.00000000000001 ], [ 136, -35.999999999999986 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 121, -34 ], [ 122, -34 ], [ 122, -33 ], [ 121, -33 ], [ 121, -34 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 151, -35.00000000000001 ], [ 152, -35.00000000000001 ], [ 152, -34 ], [ 151, -34 ], [ 151, -35.00000000000001 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 148, -42.999999999999986 ], [ 149, -42.999999999999986 ], [ 149, -42.00000000000001 ], [ 148, -42.00000000000001 ], [ 148, -42.999999999999986 ] ] ]
+      } ],
+      "type" : "GeometryCollection"
     },
-    "temporal": [
-      {
-        "start": "2008-09-28T14:00:00Z",
-        "end": null
-      }
-    ],
-    "centroid": [
-      [
-        115.328,
-        -32.073
-      ],
-      [
-        130.409,
-        -12.374
-      ],
-      [
-        147.602,
-        -19.324
-      ],
-      [
-        113.498,
-        -21.498
-      ],
-      [
-        153.625,
-        -27.458
-      ],
-      [
-        136.446,
-        -35.46
-      ],
-      [
-        121.496,
-        -33.923
-      ],
-      [
-        151.512,
-        -34.512
-      ],
-      [
-        148.523,
-        -42.517
-      ]
-    ]
+    "temporal" : [ {
+      "start" : "2008-09-28T14:00:00Z",
+      "end" : null
+    } ],
+    "centroid" : {
+      "Z1_3" : [ [ 115.24081722089392, -32.000926248999946 ], [ 130.30383049194455, -12.480767510999925 ], [ 147.7586233174564, -19.475152276499927 ], [ 113.5, -21.446377619679385 ], [ 153.74526388526004, -27.606947523999935 ], [ 136.5, -35.47942424212599 ], [ 121.5, -33.94857467349996 ], [ 151.5, -34.61949676640537 ], [ 148.50849511261214, -42.434095961499935 ] ],
+      "Z4_6" : [ [ 115.24081722089392, -32.000926248999946 ], [ 130.30383049194455, -12.480767510999925 ], [ 147.7586233174564, -19.475152276499927 ], [ 113.5, -21.446377619679385 ], [ 153.74526388526004, -27.606947523999935 ], [ 136.5, -35.47942424212599 ], [ 121.5, -33.94857467349996 ], [ 151.5, -34.61949676640537 ], [ 148.50849511261214, -42.434095961499935 ] ],
+      "Z7_9" : [ [ 115.35238160850002, -32.30327727649993 ], [ 115.23646230258387, -31.296875 ], [ 130.30383049194455, -12.480767510999925 ], [ 147.7586233174564, -19.475152276499927 ], [ 113.5, -21.446377619679385 ], [ 153.74526388526004, -27.606947523999935 ], [ 136.5, -35.47942424212599 ], [ 121.5, -33.94857467349996 ], [ 151.5, -34.61949676640537 ], [ 148.50849511261214, -42.434095961499935 ] ],
+      "Z10_12" : [ [ 115.087890625, -32.912109375 ], [ 115.087890625, -32.736328125 ], [ 115.087890625, -32.560546875 ], [ 115.087890625, -32.384765625 ], [ 115.087890625, -32.208984375 ], [ 115.087890625, -32.033203125 ], [ 115.087890625, -31.857421875 ], [ 115.087890625, -31.681640625 ], [ 115.087890625, -31.505859375 ], [ 115.087890625, -31.330078125 ], [ 115.087890625, -31.154296875 ], [ 115.087890625, -31.033203125 ], [ 115.263671875, -32.912109375 ], [ 115.263671875, -32.736328125 ], [ 115.263671875, -32.560546875 ], [ 115.263671875, -32.384765625 ], [ 115.263671875, -32.208984375 ], [ 115.263671875, -32.033203125 ], [ 115.263671875, -31.857421875 ], [ 115.263671875, -31.681640625 ], [ 115.263671875, -31.505859375 ], [ 115.263671875, -31.330078125 ], [ 115.263671875, -31.154296875 ], [ 115.25523045839921, -31.032309437929534 ], [ 115.439453125, -32.912109375 ], [ 115.439453125, -32.736328125 ], [ 115.439453125, -32.560546875 ], [ 115.439453125, -32.384765625 ], [ 115.439453125, -32.208984375 ], [ 115.439453125, -32.07146384999996 ], [ 115.439453125, -31.857421875 ], [ 115.439453125, -31.681640625 ], [ 115.439453125, -31.505859375 ], [ 115.41870429668012, -31.321603433653777 ], [ 115.37499247585797, -31.154296875 ], [ 115.35179599167785, -31.065512562929534 ], [ 115.58951436661171, -32.912109375 ], [ 115.5723690565599, -32.74296757699997 ], [ 115.59648300261452, -32.56548211844057 ], [ 115.615234375, -32.387178746576936 ], [ 115.615234375, -32.19511187871937 ], [ 115.615234375, -32.065381740421614 ], [ 115.615234375, -31.857421875 ], [ 115.59646621918465, -31.665584929378014 ], [ 115.55473507086704, -31.505859375 ], [ 115.52955791418239, -31.409494058653777 ], [ 115.70971392865162, -32.77132807536593 ], [ 115.72251914100002, -32.56967538849992 ], [ 115.71584086239169, -32.402920376499964 ], [ 115.72473675175004, -32.22503020599993 ], [ 115.7234676911275, -32.033203125 ], [ 115.71601793963632, -31.858975063999964 ], [ 115.70731983668692, -31.753475554378014 ], [ 130.087890625, -12.878176868065985 ], [ 130.087890625, -12.736328124999986 ], [ 130.087890625, -12.560546874999986 ], [ 130.087890625, -12.384765624999986 ], [ 130.087890625, -12.208984374999986 ], [ 130.087890625, -12.060546874999993 ], [ 130.25032035524723, -12.865119269999973 ], [ 130.25855744799722, -12.757230240549958 ], [ 130.263671875, -12.560546874999986 ], [ 130.263671875, -12.384765624999986 ], [ 130.263671875, -12.208984374999986 ], [ 130.263671875, -12.060546874999993 ], [ 130.36515052221114, -12.660244595499954 ], [ 130.439453125, -12.534552863499947 ], [ 130.439453125, -12.384765624999986 ], [ 130.439453125, -12.208984374999986 ], [ 130.439453125, -12.060546874999993 ], [ 130.60349568544876, -12.674526821999955 ], [ 130.56077022847794, -12.527187954499958 ], [ 130.615234375, -12.348843227999957 ], [ 130.615234375, -12.208984374999986 ], [ 130.615234375, -12.060546874999993 ], [ 130.85533443666168, -12.561252536999916 ], [ 130.77746847350002, -12.37820614996031 ], [ 130.791015625, -12.208984374999986 ], [ 130.791015625, -12.060546874999993 ], [ 130.8952757657276, -12.558770920201336 ], [ 130.939453125, -12.314419399999956 ], [ 130.939453125, -12.250536424803308 ], [ 130.939453125, -12.060546874999993 ], [ 147.15009309673454, -19.390516859999934 ], [ 147.12462879551333, -19.282321872999944 ], [ 147.087890625, -19.098036390999937 ], [ 147.087890625, -19.009324998999972 ], [ 147.263671875, -19.390658939775616 ], [ 147.263671875, -19.282321872999944 ], [ 147.263671875, -19.106540622999944 ], [ 147.263671875, -19.009324998999972 ], [ 147.39384417754638, -19.395487929065197 ], [ 147.439453125, -19.249159437999936 ], [ 147.439453125, -19.106540622999944 ], [ 147.439453125, -19.009324998999972 ], [ 147.66796419404946, -19.774916273999935 ], [ 147.64168651774355, -19.616346937999936 ], [ 147.615234375, -19.430208040792543 ], [ 147.615234375, -19.282321872999944 ], [ 147.615234375, -19.106540622999944 ], [ 147.615234375, -19.009324998999972 ], [ 147.73696403244253, -19.775602163993234 ], [ 147.791015625, -19.618747653999947 ], [ 147.791015625, -19.458103122999944 ], [ 147.791015625, -19.282321872999944 ], [ 147.791015625, -19.106540622999944 ], [ 147.791015625, -19.009324998999972 ], [ 147.939453125, -19.765967043677815 ], [ 147.939453125, -19.633884372999944 ], [ 147.939453125, -19.458103122999944 ], [ 147.939453125, -19.282321872999944 ], [ 147.939453125, -19.106540622999944 ], [ 147.939453125, -19.009324998999972 ], [ 113.087890625, -21.912109375 ], [ 113.087890625, -21.736328125 ], [ 113.087890625, -21.560546875 ], [ 113.087890625, -21.384765625 ], [ 113.087890625, -21.208984375 ], [ 113.087890625, -21.060546875000007 ], [ 113.263671875, -21.912109375 ], [ 113.263671875, -21.736328125 ], [ 113.263671875, -21.560546875 ], [ 113.263671875, -21.384765625 ], [ 113.263671875, -21.208984375 ], [ 113.263671875, -21.060546875000007 ], [ 113.439453125, -21.912109375 ], [ 113.439453125, -21.736328125 ], [ 113.439453125, -21.560546875 ], [ 113.439453125, -21.384765625 ], [ 113.439453125, -21.208984375 ], [ 113.439453125, -21.060546875000007 ], [ 113.615234375, -21.912109375 ], [ 113.615234375, -21.736328125 ], [ 113.615234375, -21.560546875 ], [ 113.615234375, -21.384765625 ], [ 113.615234375, -21.208984375 ], [ 113.615234375, -21.060546875000007 ], [ 113.791015625, -21.912109375 ], [ 113.791015625, -21.736328125 ], [ 113.791015625, -21.560546875 ], [ 113.791015625, -21.384765625 ], [ 113.791015625, -21.208984375 ], [ 113.791015625, -21.060546875000007 ], [ 113.92197115571105, -21.946377619679378 ], [ 113.939453125, -21.736328125 ], [ 113.939453125, -21.560546875 ], [ 113.939453125, -21.384765625 ], [ 113.939453125, -21.208984375 ], [ 113.939453125, -21.060546875000007 ], [ 153.20252526150006, -27.40756759907795 ], [ 153.15419140326628, -27.246914516999965 ], [ 153.20545954003612, -27.038621873999972 ], [ 153.3717346733337, -27.717337285392794 ], [ 153.3305750424093, -27.560546875 ], [ 153.30193118600005, -27.374154058577986 ], [ 153.2971717079961, -27.172201116421228 ], [ 153.29460696725005, -27.05811152331128 ], [ 153.49228865402472, -27.88660364499995 ], [ 153.47771243600005, -27.75624398989276 ], [ 153.5351212801084, -27.560546875 ], [ 153.47771243600005, -27.36626555749993 ], [ 153.49660670929745, -27.208984375 ], [ 153.5042313600574, -27.085651758811306 ], [ 153.65349368600005, -27.912109375 ], [ 153.65349368600005, -27.736328125 ], [ 153.65349368600005, -27.560546875 ], [ 153.65349368600005, -27.384765625 ], [ 153.65349368600005, -27.208984375 ], [ 153.65349368600005, -27.060546875 ], [ 153.82927493600005, -27.912109375 ], [ 153.82927493600005, -27.736328125 ], [ 153.82927493600005, -27.560546875 ], [ 153.82927493600005, -27.384765625 ], [ 153.82927493600005, -27.208984375 ], [ 153.82927493600005, -27.060546875 ], [ 153.95858278050002, -27.912109375 ], [ 153.95858278050002, -27.736328125 ], [ 153.95858278050002, -27.560546875 ], [ 153.95858278050002, -27.384765625 ], [ 153.95858278050002, -27.208984375 ], [ 153.95858278050002, -27.060546875 ], [ 136.087890625, -35.912109374999986 ], [ 136.087890625, -35.736328124999986 ], [ 136.087890625, -35.560546874999986 ], [ 136.087890625, -35.384765624999986 ], [ 136.087890625, -35.208984374999986 ], [ 136.087890625, -35.08412393275781 ], [ 136.263671875, -35.912109374999986 ], [ 136.263671875, -35.736328124999986 ], [ 136.263671875, -35.560546874999986 ], [ 136.263671875, -35.384765624999986 ], [ 136.263671875, -35.208984374999986 ], [ 136.2733972349875, -35.06126305925778 ], [ 136.439453125, -35.912109374999986 ], [ 136.439453125, -35.736328124999986 ], [ 136.439453125, -35.560546874999986 ], [ 136.439453125, -35.384765624999986 ], [ 136.439453125, -35.208984374999986 ], [ 136.439453125, -35.060546875 ], [ 136.56099977250003, -35.94288502399991 ], [ 136.58891053075, -35.74503630732335 ], [ 136.615234375, -35.560546874999986 ], [ 136.615234375, -35.384765624999986 ], [ 136.615234375, -35.208984374999986 ], [ 136.615234375, -35.060546875 ], [ 136.791015625, -35.66969606093021 ], [ 136.791015625, -35.560546874999986 ], [ 136.791015625, -35.384765624999986 ], [ 136.78113058300002, -35.23015432354448 ], [ 136.791015625, -35.060546875 ], [ 136.9091796875, -35.67661984855624 ], [ 136.939453125, -35.560546874999986 ], [ 136.939453125, -35.384765624999986 ], [ 136.89472526012707, -35.162642475544516 ], [ 136.91500367875003, -35.063164971999925 ], [ 121.087890625, -33.93741764942419 ], [ 121.263671875, -33.93248167802043 ], [ 121.33519285958184, -33.819902006348116 ], [ 121.439453125, -33.912109375 ], [ 121.439453125, -33.821805644711475 ], [ 121.615234375, -33.9350926464997 ], [ 121.53406858333716, -33.821865688999964 ], [ 121.791015625, -33.94857467349996 ], [ 121.939453125, -33.933220047147785 ], [ 121.99900947010988, -33.823504655892904 ], [ 151.087890625, -34.91210937500001 ], [ 151.087890625, -34.73632812500001 ], [ 151.087890625, -34.56054687500001 ], [ 151.087890625, -34.38476562500001 ], [ 151.1265333071071, -34.18004364140537 ], [ 151.15564230175, -34.02213152864971 ], [ 151.263671875, -34.91210937500001 ], [ 151.263671875, -34.73632812500001 ], [ 151.263671875, -34.56054687500001 ], [ 151.263671875, -34.38476562500001 ], [ 151.263671875, -34.20898437500001 ], [ 151.263671875, -34.08668941211377 ], [ 151.439453125, -34.91210937500001 ], [ 151.439453125, -34.73632812500001 ], [ 151.439453125, -34.56054687500001 ], [ 151.439453125, -34.38476562500001 ], [ 151.439453125, -34.20898437500001 ], [ 151.439453125, -34.060546875 ], [ 151.615234375, -34.91210937500001 ], [ 151.615234375, -34.73632812500001 ], [ 151.615234375, -34.56054687500001 ], [ 151.615234375, -34.38476562500001 ], [ 151.615234375, -34.20898437500001 ], [ 151.615234375, -34.060546875 ], [ 151.791015625, -34.91210937500001 ], [ 151.791015625, -34.73632812500001 ], [ 151.791015625, -34.56054687500001 ], [ 151.791015625, -34.38476562500001 ], [ 151.791015625, -34.20898437500001 ], [ 151.791015625, -34.060546875 ], [ 151.939453125, -34.91210937500001 ], [ 151.939453125, -34.73632812500001 ], [ 151.939453125, -34.56054687500001 ], [ 151.939453125, -34.38476562500001 ], [ 151.939453125, -34.20898437500001 ], [ 151.939453125, -34.060546875 ], [ 148.08907329125, -42.91589780941167 ], [ 148.11831178425, -42.73385995849992 ], [ 148.087890625, -42.55973017639607 ], [ 148.098433240415, -42.40419974447234 ], [ 148.1083123955121, -42.196909250671084 ], [ 148.1315490982621, -42.11064335849996 ], [ 148.263671875, -42.912109374999986 ], [ 148.263671875, -42.736328124999986 ], [ 148.263671875, -42.56026617990142 ], [ 148.263671875, -42.41337773349996 ], [ 148.23441540341608, -42.17374092751494 ], [ 148.32803183721637, -42.02527551999995 ], [ 148.439453125, -42.912109374999986 ], [ 148.439453125, -42.736328124999986 ], [ 148.439453125, -42.560546874999986 ], [ 148.439453125, -42.384765624999986 ], [ 148.44262960625002, -42.21537386901491 ], [ 148.439453125, -42.049480597719295 ], [ 148.615234375, -42.912109374999986 ], [ 148.615234375, -42.736328124999986 ], [ 148.615234375, -42.560546874999986 ], [ 148.615234375, -42.384765624999986 ], [ 148.615234375, -42.208984374999986 ], [ 148.615234375, -42.060546875 ], [ 148.791015625, -42.912109374999986 ], [ 148.791015625, -42.736328124999986 ], [ 148.791015625, -42.560546874999986 ], [ 148.791015625, -42.384765624999986 ], [ 148.791015625, -42.208984374999986 ], [ 148.791015625, -42.060546875 ], [ 148.939453125, -42.912109374999986 ], [ 148.939453125, -42.736328124999986 ], [ 148.939453125, -42.560546874999986 ], [ 148.939453125, -42.384765624999986 ], [ 148.939453125, -42.208984374999986 ], [ 148.939453125, -42.060546875 ] ]
+    }
   },
-  "contacts": [
-    {
-      "roles": [
-        "pointOfContact",
-        "about"
-      ],
-      "organization": "CSIRO Oceans and Atmosphere - Hobart",
-      "name": "Ms Val Latham",
-      "position": "Technical Services Officer CMAR",
-      "emails": [
-        "Val.Latham@csiro.au"
-      ],
-      "addresses": [
-        {
-          "deliveryPoint": [
-            "GPO Box 1538"
-          ],
-          "city": "Hobart",
-          "country": "Australia",
-          "postalCode": "7001",
-          "administrativeArea": "TAS"
-        }
-      ],
-      "phones": [
-        {
-          "roles": [
-            "voice"
-          ],
-          "value": "+61 3 6232 5272"
-        },
-        {
-          "roles": [
-            "facsimile"
-          ],
-          "value": "+61 3 6232 5000"
-        }
-      ],
-      "links": [
-        {
-          "href": "http://www.cmar.csiro.au/",
-          "type": "WWW:LINK-1.0-http--link",
-          "title": "Contact Web Address."
-        }
-      ]
-    },
-    {
-      "roles": [
-        "distributor",
-        "metadata"
-      ],
-      "organization": "CSIRO Marine Data Centre",
-      "name": "",
-      "position": "Data Manager",
-      "emails": [
-        "data.requests@marine.csiro.au"
-      ],
-      "addresses": [
-        {
-          "deliveryPoint": [
-            ""
-          ],
-          "city": "",
-          "country": "",
-          "postalCode": "",
-          "administrativeArea": ""
-        }
-      ],
-      "phones": [],
-      "links": [
-        {
-          "href": "http://www.marine.csiro.au/datacentre/",
-          "type": "WWW:LINK-1.0-http--link",
-          "title": "CSIRO - CMAR Data Centre homepage"
-        }
-      ]
-    },
-    {
-      "roles": [
-        "resourceProvider",
-        "citation"
-      ],
-      "organization": "Integrated Marine Observing System (IMOS)",
-      "name": null,
-      "position": null,
-      "emails": [
-        "imos@imos.org.au"
-      ],
-      "addresses": [
-        {
-          "deliveryPoint": [
-            "University of Tasmania",
-            "Private Bag 110"
-          ],
-          "city": "Hobart",
-          "country": "Australia",
-          "postalCode": "7001",
-          "administrativeArea": "Tasmania"
-        }
-      ],
-      "phones": [
-        {
-          "roles": [
-            "voice"
-          ],
-          "value": "61 3 6226 7549"
-        },
-        {
-          "roles": [
-            "facsimile"
-          ],
-          "value": "61 3 6226 2107"
-        }
-      ],
-      "links": [
-        {
-          "href": "http://www.imos.org.au",
-          "type": "WWW:LINK-1.0-http--link",
-          "title": "Website of the Integrated Marine Observing System (IMOS)"
-        }
-      ]
-    }
-  ],
-  "languages": [
-    {
-      "code": "eng",
-      "name": "English"
-    }
-  ],
-  "links": [
-    {
-      "href": "https://catalogue-imos.aodn.org.au:443/geonetwork/srv/api/records/6c981d98-d7fb-4120-9ebe-347ef1188ae0",
-      "rel": "related",
-      "type": "text/html",
-      "title": "ANMN National Reference Station (NRS) Sub-Facility metadata record"
-    },
-    {
-      "href": "http://imos.org.au/nationalmooringnetwork.html",
-      "rel": "related",
-      "type": "text/html",
-      "title": "Australian National Mooring Network"
-    },
-    {
-      "href": "https://publications.csiro.au/rpr/pub?pid=procite:f67a7186-7528-4efd-91c2-27f730665446",
-      "rel": "related",
-      "type": "text/html",
-      "title": "CSIRO ePublish - Lynch et al (2008)"
-    },
-    {
-      "href": "http://content.aodn.org.au/Documents/IMOS/Facilities/national_mooring/IMOS_NRS_BGCManual_LATEST.pdf",
-      "rel": "related",
-      "type": "text/html",
-      "title": "IMOS_NRS_BGC_Operations_Handbook_ver2.2 (IMOS portal)"
-    },
-    {
-      "href": "http://content.aodn.org.au/?prefix=Documents/IMOS/Facilities/national_mooring/",
-      "rel": "related",
-      "type": "text/html",
-      "title": "IMOS NRS BGC Manual - Previous Versions plus Supplementary documentation"
-    },
-    {
-      "href": "https://catalogue-imos.aodn.org.au:443/geonetwork/srv/api/records/fa93c66e-0e56-7e1d-e043-08114f8c1b76",
-      "rel": "describedby",
-      "type": "text/html",
-      "title": "Full metadata link"
-    }
-  ],
-  "license": "This material is released under the Creative Commons Attribution 4.0 International licence. The citation in a list of references is: \"IMOS [year-of-data-download], [Title], [data-access-URL], accessed [date-of-access].\" Any users of IMOS data are required to clearly acknowledge the source of the material derived from IMOS in the format: \"Data was sourced from Australia’s Integrated Marine Observing System (IMOS) – IMOS is enabled by the National Collaborative Research Infrastructure strategy (NCRIS).\"",
-  "providers": [
-    {
-      "name": "CSIRO Marine Data Centre",
-      "roles": [
-        "distributor"
-      ],
-      "url": "http://www.marine.csiro.au/datacentre/"
-    }
-  ],
-  "themes": [
-    {
-      "concepts": [
-        {
-          "id": "Oceans | Ocean Chemistry | Nitrate",
-          "url": null
-        },
-        {
-          "id": "Oceans | Ocean Chemistry | Nitrite",
-          "url": null
-        },
-        {
-          "id": "Oceans | Ocean Chemistry | Nutrients",
-          "url": null
-        },
-        {
-          "id": "Oceans | Ocean Chemistry | Oxygen",
-          "url": null
-        },
-        {
-          "id": "Oceans | Ocean Chemistry | Phosphate",
-          "url": null
-        },
-        {
-          "id": "Oceans | Ocean Chemistry | Silicate",
-          "url": null
-        }
-      ],
-      "scheme": "theme",
-      "description": "GCMD",
-      "title": "Olsen, L.M., G. Major, K. Shein, J. Scialdone, R. Vogel, S. Leicester, H. Weir, S. Ritz, T. Stevens, M. Meaux, C.Solomon, R. Bilodeau, M. Holland, T. Northcutt, R. A. Restrepo, 2007. NASA/Global Change Master Directory (GCMD) Earth Science Keywords. Version 6.0.0.0.0"
-    },
-    {
-      "concepts": [
-        {
-          "id": "Global / Oceans | Indian Ocean",
-          "url": null
-        },
-        {
-          "id": "Marine Features (Australia) | Great Australian Bight, SA/WA",
-          "url": null
-        },
-        {
-          "id": "Regional Seas | Tasman Sea",
-          "url": null
-        },
-        {
-          "id": "Regional Seas | Timor Sea",
-          "url": null
-        },
-        {
-          "id": "Regional Seas | Coral Sea",
-          "url": null
-        },
-        {
-          "id": "Global / Oceans | Pacific Ocean",
-          "url": null
-        }
-      ],
-      "scheme": "place",
-      "description": "",
-      "title": "AODN Geographic Extents Vocabulary"
-    },
-    {
-      "concepts": [
-        {
-          "id": "States, Territories (Australia) | Western Australia",
-          "url": null
-        },
-        {
-          "id": "Countries | Australia",
-          "url": null
-        },
-        {
-          "id": "States, Territories (Australia) | Victoria",
-          "url": null
-        },
-        {
-          "id": "States, Territories (Australia) | Tasmania",
-          "url": null
-        },
-        {
-          "id": "States, Territories (Australia) | South Australia",
-          "url": null
-        },
-        {
-          "id": "Marine Features (Australia) | Kangaroo Island, SA",
-          "url": null
-        },
-        {
-          "id": "States, Territories (Australia) | Northern Territory",
-          "url": null
-        },
-        {
-          "id": "States, Territories (Australia) | New South Wales",
-          "url": null
-        },
-        {
-          "id": "Marine Features (Australia) | North Stradbroke Island, QLD",
-          "url": null
-        },
-        {
-          "id": "States, Territories (Australia) | Queensland",
-          "url": null
-        },
-        {
-          "id": "Marine Features (Australia) | Maria Island, TAS",
-          "url": null
-        },
-        {
-          "id": "Marine Features (Australia) | Port Hacking, NSW",
-          "url": null
-        },
-        {
-          "id": "Coastal Cities / Towns (Australia) | Esperance, WA",
-          "url": null
-        },
-        {
-          "id": "Marine Features (Australia) | Ningaloo Marine Park, WA",
-          "url": null
-        },
-        {
-          "id": "Marine Features (Australia) | Rottnest Island, WA",
-          "url": null
-        },
-        {
-          "id": "Coastal Cities / Towns (Australia) | Darwin, NT",
-          "url": null
-        }
-      ],
-      "scheme": "place",
-      "description": "",
-      "title": "AODN Geographic Extents Vocabulary"
-    },
-    {
-      "concepts": [
-        {
-          "id": "small boat",
-          "url": "http://vocab.aodn.org.au/def/platform/entity/823"
-        }
-      ],
-      "scheme": "theme",
-      "description": "",
-      "title": "AODN Platform Vocabulary"
-    },
-    {
-      "concepts": [
-        {
-          "id": "Practical salinity of the water body",
-          "url": "http://vocab.nerc.ac.uk/collection/P01/current/PSLTZZ01"
-        },
-        {
-          "id": "Concentration of silicate {SiO4} per unit volume of the water body",
-          "url": "http://vocab.aodn.org.au/def/discovery_parameter/entity/376"
-        },
-        {
-          "id": "Concentration of nitrate {NO3} per unit volume of the water body",
-          "url": "http://vocab.aodn.org.au/def/discovery_parameter/entity/374"
-        },
-        {
-          "id": "Concentration of phosphate {PO4} per unit volume of the water body",
-          "url": "http://vocab.aodn.org.au/def/discovery_parameter/entity/379"
-        },
-        {
-          "id": "Concentration of ammonium {NH4} per unit volume of the water body",
-          "url": "http://vocab.aodn.org.au/def/discovery_parameter/entity/377"
-        },
-        {
-          "id": "Total alkalinity per unit mass of the water body",
-          "url": "http://vocab.nerc.ac.uk/collection/P01/current/MDMAP014"
-        },
-        {
-          "id": "Concentration of oxygen {O2} per unit volume of the water body",
-          "url": "http://vocab.aodn.org.au/def/discovery_parameter/entity/372"
-        },
-        {
-          "id": "Concentration of carbon (total inorganic) per unit mass of the water body",
-          "url": "http://vocab.aodn.org.au/def/discovery_parameter/entity/1"
-        }
-      ],
-      "scheme": "theme",
-      "description": "",
-      "title": "AODN Discovery Parameter Vocabulary"
-    },
-    {
-      "concepts": [
-        {
-          "id": "discrete water samplers",
-          "url": "http://vocab.nerc.ac.uk/collection/L05/current/30"
-        }
-      ],
-      "scheme": "theme",
-      "description": "",
-      "title": "AODN Instrument Vocabulary"
-    },
-    {
-      "concepts": [
-        {
-          "id": "National Reference Stations Sub-Facility, Integrated Marine Observing System (IMOS)",
-          "url": "http://vocab.aodn.org.au/def/organisation/entity/501"
-        }
-      ],
-      "scheme": "discipline",
-      "description": "",
-      "title": "AODN Organisation Vocabulary"
-    }
-  ],
-  "id": "fa93c66e-0e56-7e1d-e043-08114f8c1b76",
-  "search_suggestions": {
-    "abstract_phrases": []
+  "contacts" : [ {
+    "roles" : [ "pointOfContact", "about" ],
+    "organization" : "CSIRO Oceans and Atmosphere - Hobart",
+    "name" : "Ms Val Latham",
+    "position" : "Technical Services Officer CMAR",
+    "emails" : [ "Val.Latham@csiro.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "GPO Box 1538" ],
+      "city" : "Hobart",
+      "country" : "Australia",
+      "postalCode" : "7001",
+      "administrativeArea" : "TAS"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "+61 3 6232 5272"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : "+61 3 6232 5000"
+    } ],
+    "links" : [ {
+      "href" : "http://www.cmar.csiro.au/",
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : "Contact Web Address."
+    } ]
+  }, {
+    "roles" : [ "distributor", "metadata" ],
+    "organization" : "CSIRO Marine Data Centre",
+    "name" : "",
+    "position" : "Data Manager",
+    "emails" : [ "data.requests@marine.csiro.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "" ],
+      "city" : "",
+      "country" : "",
+      "postalCode" : "",
+      "administrativeArea" : ""
+    } ],
+    "phones" : [ ],
+    "links" : [ {
+      "href" : "http://www.marine.csiro.au/datacentre/",
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : "CSIRO - CMAR Data Centre homepage"
+    } ]
+  }, {
+    "roles" : [ "resourceProvider", "citation" ],
+    "organization" : "Integrated Marine Observing System (IMOS)",
+    "name" : null,
+    "position" : null,
+    "emails" : [ "imos@imos.org.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "University of Tasmania", "Private Bag 110" ],
+      "city" : "Hobart",
+      "country" : "Australia",
+      "postalCode" : "7001",
+      "administrativeArea" : "Tasmania"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "61 3 6226 7549"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : "61 3 6226 2107"
+    } ],
+    "links" : [ {
+      "href" : "http://www.imos.org.au",
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : "Website of the Integrated Marine Observing System (IMOS)"
+    } ]
+  } ],
+  "languages" : [ {
+    "code" : "eng",
+    "name" : "English"
+  } ],
+  "links" : [ {
+    "href" : "https://catalogue-imos.aodn.org.au:443/geonetwork/srv/api/records/6c981d98-d7fb-4120-9ebe-347ef1188ae0",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "ANMN National Reference Station (NRS) Sub-Facility metadata record"
+  }, {
+    "href" : "http://imos.org.au/nationalmooringnetwork.html",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "Australian National Mooring Network"
+  }, {
+    "href" : "https://publications.csiro.au/rpr/pub?pid=procite:f67a7186-7528-4efd-91c2-27f730665446",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "CSIRO ePublish - Lynch et al (2008)"
+  }, {
+    "href" : "http://content.aodn.org.au/Documents/IMOS/Facilities/national_mooring/IMOS_NRS_BGCManual_LATEST.pdf",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "IMOS_NRS_BGC_Operations_Handbook_ver2.2 (IMOS portal)"
+  }, {
+    "href" : "http://content.aodn.org.au/?prefix=Documents/IMOS/Facilities/national_mooring/",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "IMOS NRS BGC Manual - Previous Versions plus Supplementary documentation"
+  }, {
+    "href" : "https://catalogue-imos.aodn.org.au:443/geonetwork/srv/api/records/fa93c66e-0e56-7e1d-e043-08114f8c1b76",
+    "rel" : "describedby",
+    "type" : "text/html",
+    "title" : "Full metadata link"
+  } ],
+  "license" : "This material is released under the Creative Commons Attribution 4.0 International licence. The citation in a list of references is: \"IMOS [year-of-data-download], [Title], [data-access-URL], accessed [date-of-access].\" Any users of IMOS data are required to clearly acknowledge the source of the material derived from IMOS in the format: \"Data was sourced from Australia’s Integrated Marine Observing System (IMOS) – IMOS is enabled by the National Collaborative Research Infrastructure strategy (NCRIS).\"",
+  "providers" : [ {
+    "name" : "CSIRO Marine Data Centre",
+    "roles" : [ "distributor" ],
+    "url" : "http://www.marine.csiro.au/datacentre/"
+  } ],
+  "themes" : [ {
+    "concepts" : [ {
+      "id" : "Oceans | Ocean Chemistry | Nitrate",
+      "url" : null
+    }, {
+      "id" : "Oceans | Ocean Chemistry | Nitrite",
+      "url" : null
+    }, {
+      "id" : "Oceans | Ocean Chemistry | Nutrients",
+      "url" : null
+    }, {
+      "id" : "Oceans | Ocean Chemistry | Oxygen",
+      "url" : null
+    }, {
+      "id" : "Oceans | Ocean Chemistry | Phosphate",
+      "url" : null
+    }, {
+      "id" : "Oceans | Ocean Chemistry | Silicate",
+      "url" : null
+    } ],
+    "scheme" : "theme",
+    "description" : "GCMD",
+    "title" : "Olsen, L.M., G. Major, K. Shein, J. Scialdone, R. Vogel, S. Leicester, H. Weir, S. Ritz, T. Stevens, M. Meaux, C.Solomon, R. Bilodeau, M. Holland, T. Northcutt, R. A. Restrepo, 2007. NASA/Global Change Master Directory (GCMD) Earth Science Keywords. Version 6.0.0.0.0"
+  }, {
+    "concepts" : [ {
+      "id" : "Global / Oceans | Indian Ocean",
+      "url" : null
+    }, {
+      "id" : "Marine Features (Australia) | Great Australian Bight, SA/WA",
+      "url" : null
+    }, {
+      "id" : "Regional Seas | Tasman Sea",
+      "url" : null
+    }, {
+      "id" : "Regional Seas | Timor Sea",
+      "url" : null
+    }, {
+      "id" : "Regional Seas | Coral Sea",
+      "url" : null
+    }, {
+      "id" : "Global / Oceans | Pacific Ocean",
+      "url" : null
+    } ],
+    "scheme" : "place",
+    "description" : "",
+    "title" : "AODN Geographic Extents Vocabulary"
+  }, {
+    "concepts" : [ {
+      "id" : "States, Territories (Australia) | Western Australia",
+      "url" : null
+    }, {
+      "id" : "Countries | Australia",
+      "url" : null
+    }, {
+      "id" : "States, Territories (Australia) | Victoria",
+      "url" : null
+    }, {
+      "id" : "States, Territories (Australia) | Tasmania",
+      "url" : null
+    }, {
+      "id" : "States, Territories (Australia) | South Australia",
+      "url" : null
+    }, {
+      "id" : "Marine Features (Australia) | Kangaroo Island, SA",
+      "url" : null
+    }, {
+      "id" : "States, Territories (Australia) | Northern Territory",
+      "url" : null
+    }, {
+      "id" : "States, Territories (Australia) | New South Wales",
+      "url" : null
+    }, {
+      "id" : "Marine Features (Australia) | North Stradbroke Island, QLD",
+      "url" : null
+    }, {
+      "id" : "States, Territories (Australia) | Queensland",
+      "url" : null
+    }, {
+      "id" : "Marine Features (Australia) | Maria Island, TAS",
+      "url" : null
+    }, {
+      "id" : "Marine Features (Australia) | Port Hacking, NSW",
+      "url" : null
+    }, {
+      "id" : "Coastal Cities / Towns (Australia) | Esperance, WA",
+      "url" : null
+    }, {
+      "id" : "Marine Features (Australia) | Ningaloo Marine Park, WA",
+      "url" : null
+    }, {
+      "id" : "Marine Features (Australia) | Rottnest Island, WA",
+      "url" : null
+    }, {
+      "id" : "Coastal Cities / Towns (Australia) | Darwin, NT",
+      "url" : null
+    } ],
+    "scheme" : "place",
+    "description" : "",
+    "title" : "AODN Geographic Extents Vocabulary"
+  }, {
+    "concepts" : [ {
+      "id" : "small boat",
+      "url" : "http://vocab.aodn.org.au/def/platform/entity/823"
+    } ],
+    "scheme" : "theme",
+    "description" : "",
+    "title" : "AODN Platform Vocabulary"
+  }, {
+    "concepts" : [ {
+      "id" : "Practical salinity of the water body",
+      "url" : "http://vocab.nerc.ac.uk/collection/P01/current/PSLTZZ01"
+    }, {
+      "id" : "Concentration of silicate {SiO4} per unit volume of the water body",
+      "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/376"
+    }, {
+      "id" : "Concentration of nitrate {NO3} per unit volume of the water body",
+      "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/374"
+    }, {
+      "id" : "Concentration of phosphate {PO4} per unit volume of the water body",
+      "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/379"
+    }, {
+      "id" : "Concentration of ammonium {NH4} per unit volume of the water body",
+      "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/377"
+    }, {
+      "id" : "Total alkalinity per unit mass of the water body",
+      "url" : "http://vocab.nerc.ac.uk/collection/P01/current/MDMAP014"
+    }, {
+      "id" : "Concentration of oxygen {O2} per unit volume of the water body",
+      "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/372"
+    }, {
+      "id" : "Concentration of carbon (total inorganic) per unit mass of the water body",
+      "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/1"
+    } ],
+    "scheme" : "theme",
+    "description" : "",
+    "title" : "AODN Discovery Parameter Vocabulary"
+  }, {
+    "concepts" : [ {
+      "id" : "discrete water samplers",
+      "url" : "http://vocab.nerc.ac.uk/collection/L05/current/30"
+    } ],
+    "scheme" : "theme",
+    "description" : "",
+    "title" : "AODN Instrument Vocabulary"
+  }, {
+    "concepts" : [ {
+      "id" : "National Reference Stations Sub-Facility, Integrated Marine Observing System (IMOS)",
+      "url" : "http://vocab.aodn.org.au/def/organisation/entity/501"
+    } ],
+    "scheme" : "discipline",
+    "description" : "",
+    "title" : "AODN Organisation Vocabulary"
+  } ],
+  "id" : "fa93c66e-0e56-7e1d-e043-08114f8c1b76",
+  "search_suggestions" : {
+    "abstract_phrases" : [ ]
   },
-  "sci:citation": "{\"suggestedCitation\":\"This material is released under the Creative Commons Attribution 4.0 International licence. The citation in a list of references is: \\\"IMOS [year-of-data-download], [Title], [data-access-URL], accessed [date-of-access].\\\" Any users of IMOS data are required to clearly acknowledge the source of the material derived from IMOS in the format: \\\"Data was sourced from Australia’s Integrated Marine Observing System (IMOS) – IMOS is enabled by the National Collaborative Research Infrastructure strategy (NCRIS).\\\"\",\"useLimitations\":null,\"otherConstraints\":null}",
-  "type": "Collection",
-  "stac_version": "1.0.0",
-  "stac_extensions": [
-    "https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/contacts/v0.1.1/schema.json",
-    "https://stac-extensions.github.io/projection/v1.1.0/schema.json",
-    "https://stac-extensions.github.io/language/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/themes/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/web-map-links/v1.2.0/schema.json"
-  ]
+  "sci:citation" : "{\"suggestedCitation\":\"This material is released under the Creative Commons Attribution 4.0 International licence. The citation in a list of references is: \\\"IMOS [year-of-data-download], [Title], [data-access-URL], accessed [date-of-access].\\\" Any users of IMOS data are required to clearly acknowledge the source of the material derived from IMOS in the format: \\\"Data was sourced from Australia’s Integrated Marine Observing System (IMOS) – IMOS is enabled by the National Collaborative Research Infrastructure strategy (NCRIS).\\\"\",\"useLimitations\":null,\"otherConstraints\":null}",
+  "type" : "Collection",
+  "stac_version" : "1.0.0",
+  "stac_extensions" : [ "https://stac-extensions.github.io/scientific/v1.0.0/schema.json", "https://stac-extensions.github.io/contacts/v0.1.1/schema.json", "https://stac-extensions.github.io/projection/v1.1.0/schema.json", "https://stac-extensions.github.io/language/v1.0.0/schema.json", "https://stac-extensions.github.io/themes/v1.0.0/schema.json", "https://stac-extensions.github.io/web-map-links/v1.2.0/schema.json" ]
 }

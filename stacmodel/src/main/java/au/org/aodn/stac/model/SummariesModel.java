@@ -67,5 +67,5 @@ public class SummariesModel {
     protected List<String> organisationVocabs;
 
     @JsonProperty("centroid")
-    protected List<List<BigDecimal>> centroid;
+    protected Map<String, List<List<BigDecimal>>> centroid;
 }
