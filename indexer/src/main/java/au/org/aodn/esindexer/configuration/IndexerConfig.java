@@ -29,7 +29,6 @@ public class IndexerConfig {
 
     @PostConstruct
     public void init() {
-        GeometryUtils.setGridSpatialExtents(girdSpatialExtents);
         GeometryUtils.setCoastalPrecision(coastalPrecision);
         GeometryUtils.init();
     }
@@ -37,7 +36,6 @@ public class IndexerConfig {
     @PreDestroy
     public void cleanUp() {
         // Clean up resources
-        GeometryUtils.getExecutorService().shutdown();
     }
     /**
      * We need to create component here because we do not want to run test with real http connection

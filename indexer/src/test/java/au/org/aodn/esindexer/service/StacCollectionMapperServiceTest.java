@@ -87,7 +87,6 @@ public class StacCollectionMapperServiceTest {
     }
 
     public StacCollectionMapperServiceTest() throws JAXBException {
-        GeometryUtils.setExecutorService(Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors()));
         GeometryUtils.init();
     }
 

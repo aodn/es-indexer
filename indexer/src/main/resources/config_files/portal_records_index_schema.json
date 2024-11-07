@@ -133,7 +133,6 @@
           "score": { "type": "long" },
           "status": { "type": "text" },
           "credits": { "type": "text" },
-          "centroid" : { "type": "double" },
           "scope" : {
             "type": "nested",
             "properties" : {
@@ -149,6 +148,9 @@
           "dataset_group": { "type": "text" },
           "creation" : { "type": "date" },
           "revision" : { "type": "date" },
+          "proj:geometry_noland": {
+            "type": "geo_shape"
+          },
           "proj:geometry": {
             "type": "geo_shape"
           },
