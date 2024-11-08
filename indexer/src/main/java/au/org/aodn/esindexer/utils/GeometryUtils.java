@@ -36,10 +36,11 @@ public class GeometryUtils {
     protected static GeometryFactory factory = new GeometryFactory(new PrecisionModel(), 4326);
     protected static ObjectMapper objectMapper = new ObjectMapper();
     protected static Geometry landGeometry;
+    protected static GeometryJSON geometryJson = new GeometryJSON(15);
 
     @Getter
     @Setter
-    protected static double coastalPrecision = 0.03;
+    protected static double coastalPrecision = 0.05;
 
     // Load a coastline shape file so that we can get a spatial extents that cover sea only
     public static void init() {
@@ -132,7 +133,6 @@ public class GeometryUtils {
                 // This must be hard code and cannot change, the geonetwork comes with some very long decimal coordinate
                 // if we do not preserve this, we will result polygon rejected by elastic due to not having 3 non-collinear
                 // points after rounding by the GeometryJson
-                GeometryJSON geometryJson = new GeometryJSON(15);
                 geometryJson.write(collection, writer);
 
                 Map<?, ?> values = objectMapper.readValue(writer.toString(), HashMap.class);
