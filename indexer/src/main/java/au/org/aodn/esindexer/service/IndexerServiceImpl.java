@@ -260,13 +260,12 @@ public class IndexerServiceImpl implements IndexerService {
         }
     }
 
+    // TODO: Refactor this method later since it uses similar logic as indexAllMetadataRecordsFromGeoNetwork
     @Override
     public List<BulkResponse> indexDataset(String uuid, LocalDate startDate, LocalDate endDate) {
 
         BulkRequest.Builder bulkRequest = new BulkRequest.Builder();
         List<BulkResponse> responses = new ArrayList<>();
-
-
 
         long dataSize = 0;
         final long maxSize = 5242880; // is 5mb
