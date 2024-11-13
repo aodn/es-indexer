@@ -3,6 +3,7 @@ package au.org.aodn.esindexer.service;
 import au.org.aodn.esindexer.exception.MetadataNotFoundException;
 import au.org.aodn.esindexer.model.Datum;
 import au.org.aodn.esindexer.model.TemporalExtent;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -32,7 +33,9 @@ public class DataAccessServiceImpl implements DataAccessService {
        setServiceUrl(serverUrl);
     }
 
-    private final RestTemplate restTemplate = new RestTemplate();
+    @Autowired
+    private RestTemplate restTemplate;
+
     @Override
     public Datum[] getIndexingDatasetBy(String uuid, LocalDate startDate, LocalDate endDate) {
 
