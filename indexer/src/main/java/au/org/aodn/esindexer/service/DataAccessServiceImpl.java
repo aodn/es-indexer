@@ -2,14 +2,14 @@ package au.org.aodn.esindexer.service;
 
 import au.org.aodn.esindexer.exception.MetadataNotFoundException;
 import au.org.aodn.esindexer.model.Datum;
-import au.org.aodn.esindexer.model.Dataset;
+import au.org.aodn.esindexer.model.TemporalExtent;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.time.LocalDate;
-import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -33,13 +33,15 @@ public class DataAccessServiceImpl implements DataAccessService {
        setServiceUrl(serverUrl);
     }
 
-    private final RestTemplate restTemplate = new RestTemplate();
-    @Override
-    public Dataset getIndexingDatasetBy(String uuid, LocalDate startDate, LocalDate endDate) {
+    @Autowired
+    private RestTemplate restTemplate;
 
-        // currently, we force to get data in the same month and year to simplify the logic
-        if (startDate.getMonth() != endDate.getMonth() || startDate.getYear() != endDate.getYear()) {
-            throw new IllegalArgumentException("Start date and end date must be in the same month and year");
+    @Override
+    public Datum[] getIndexingDatasetBy(String uuid, LocalDate startDate, LocalDate endDate) {
+
+        // currently, we force to get data in the same year to simplify the logic
+        if (startDate.getYear() != endDate.getYear()) {
+            throw new IllegalArgumentException("Start date and end date must be in the same year");
         }
 
         try {
@@ -63,19 +65,13 @@ public class DataAccessServiceImpl implements DataAccessService {
                     params
             );
 
-
-
             if (responseEntity.getStatusCode().is2xxSuccessful()) {
                 List<Datum> data = new ArrayList<>();
                 if (responseEntity.getBody() != null) {
                     data = List.of(responseEntity.getBody());
                 }
                 var dataToIndex = aggregateData(data);
-                return new Dataset(
-                        uuid,
-                        YearMonth.of(startDate.getYear(), startDate.getMonth()),
-                        dataToIndex
-                );
+                return dataToIndex.toArray(new Datum[0]);
             }
             throw new RuntimeException("Unable to retrieve dataset with UUID: " + uuid );
 
@@ -87,28 +83,26 @@ public class DataAccessServiceImpl implements DataAccessService {
     }
 
     @Override
-    public boolean doesDataExist(String uuid, LocalDate startDate, LocalDate endDate) {
+    public TemporalExtent getTemporalExtentOf(String uuid) {
         try {
             HttpEntity<String> request = getRequestEntity(null, null);
 
             Map<String, Object> params = new HashMap<>();
             params.put("uuid", uuid);
 
-            String url = UriComponentsBuilder.fromHttpUrl(getDataAccessEndpoint() + "/data/{uuid}/has_data")
-                    .queryParam("start_date", startDate)
-                    .queryParam("end_date", endDate)
+            String url = UriComponentsBuilder.fromHttpUrl(getDataAccessEndpoint() + "/data/{uuid}/temporal_extent")
                     .buildAndExpand(uuid)
                     .toUriString();
 
-            ResponseEntity<Boolean> responseEntity = restTemplate.exchange(
+            ResponseEntity<TemporalExtent> responseEntity = restTemplate.exchange(
                     url,
                     HttpMethod.GET,
                     request,
-                    Boolean.class,
+                    TemporalExtent.class,
                     params
             );
 
-            return Boolean.TRUE.equals(responseEntity.getBody());
+            return responseEntity.getBody();
 
         } catch (HttpClientErrorException.NotFound e) {
             throw new MetadataNotFoundException("Unable to find dataset with UUID: " + uuid + " in GeoNetwork");

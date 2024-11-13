@@ -1,6 +1,5 @@
 package au.org.aodn.esindexer.controller;
 
-import au.org.aodn.esindexer.model.Dataset;
 import au.org.aodn.esindexer.service.DataAccessService;
 import au.org.aodn.esindexer.service.GeoNetworkService;
 import au.org.aodn.esindexer.service.IndexerService;
@@ -20,7 +19,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -160,64 +158,20 @@ public class IndexerController {
 
     @PostMapping(path="/{uuid}/dataset", produces = "application/json")
     @Operation(security = {@SecurityRequirement(name = "X-API-Key") }, description = "Index a dataset by UUID")
-    public ResponseEntity<List<String>> addDatasetByUUID(@PathVariable("uuid") String uuid)  {
+    public ResponseEntity<List<String>> indexDatasetByUUID(@PathVariable("uuid") String uuid)  {
 
-        // For making sure the dataset entry is not too big, they will be split into smaller chunks by yearmonth
-        // By default, we assume the dataset started from 1970-01, and until now
-        LocalDate maxDate = LocalDate.now();
-        LocalDate startDate =  LocalDate.of(1970, 1, 1);
-        List<CompletableFuture<ResponseEntity<String>>> futures = new ArrayList<>();
+        var temporalExtents = dataAccessService.getTemporalExtentOf(uuid);
+        var startDate = temporalExtents.getStartDate();
+        var endDate = temporalExtents.getEndDate();
+        log.info("Indexing dataset with UUID: {} from {} to {}", uuid, startDate, endDate);
 
-        try{
-            while (startDate.isBefore(maxDate)) {
-                // For speed optimizing, check whether data is existing in this year. If no data, skip to next year
-                var endDate = startDate.plusYears(1).minusDays(1);
-                var hasData = dataAccessService.doesDataExist(uuid, startDate, endDate);
-                if (!hasData) {
-                    log.info("No data found for dataset {} from {} to {}", uuid, startDate, endDate);
-                    startDate = startDate.plusYears(1);
-                    continue;
-                }
+        var responses = indexerService.indexDataset(uuid, startDate, endDate);
 
-                futures.addAll(indexDatasetMonthly(uuid, startDate, endDate));
-                startDate = startDate.plusYears(1);
-            }
-
-            CompletableFuture<Void> allFutures = CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]));
-            allFutures.join();
-            List<String> results = new ArrayList<>();
-            for (CompletableFuture<ResponseEntity<String>> future : futures) {
-                results.add(future.join().getBody());
-            }
-
-            return ResponseEntity.ok(results);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(List.of(e.getMessage()));
-        }
-    }
-
-    private List<CompletableFuture<ResponseEntity<String>>> indexDatasetMonthly(
-            String uuid,
-            LocalDate startDate,
-            LocalDate maxDate
-    ) throws InterruptedException, ExecutionException {
-        List<CompletableFuture<ResponseEntity<String>>> futures = new ArrayList<>();
-        var startDateToLoop = startDate;
-
-        while (startDateToLoop.isBefore(maxDate)) {
-            var endDate = startDateToLoop.plusMonths(1).minusDays(1);
-
-            Dataset dataset = dataAccessService.getIndexingDatasetBy(uuid, startDateToLoop, endDate);
-            if (dataset != null && dataset.data() != null && !dataset.data().isEmpty()) {
-                CompletableFuture<ResponseEntity<String>> future = indexerService.indexDataset(dataset);
-                futures.add(future);
-                log.info("Indexing dataset {} from {} to {}", uuid, startDateToLoop, endDate);
-                future.get();
-            }
-            startDateToLoop = startDateToLoop.plusMonths(1);
+        List<String> result = new ArrayList<>();
+        for (BulkResponse response : responses) {
+            result.add(response.toString());
         }
 
-        return futures;
+        return ResponseEntity.ok(result);
     }
-
 }
