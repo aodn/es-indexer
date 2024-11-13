@@ -1,7 +1,6 @@
 package au.org.aodn.esindexer.model;
 
 import au.org.aodn.esindexer.service.DataAccessService;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.util.StopWatch;
 
 import java.time.LocalDate;
@@ -11,7 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class DatasetProvider implements Iterable<DatasetEsEntry> {
+public class DatasetProvider {
 
     private final String uuid;
     private YearMonth currentYearMonth;
@@ -25,41 +24,36 @@ public class DatasetProvider implements Iterable<DatasetEsEntry> {
         this.endYearMonth = YearMonth.from(endDate);
     }
 
-    @Override
-    public @NotNull Iterator<DatasetEsEntry> iterator() {
-        return new DatasetEsEntryIterator();
-    }
-
-    private class DatasetEsEntryIterator implements Iterator<DatasetEsEntry> {
-
-        @Override
-        public boolean hasNext() {
-            return !currentYearMonth.isAfter(endYearMonth);
-        }
-
-        @Override
-        public DatasetEsEntry next() {
-
-            // please keep it for a while since it benefits the performance optimisation
-            StopWatch timer = new StopWatch();
-            timer.start("Data querying");
-            if (!hasNext()) {
-                throw new NoSuchElementException();
+    public Iterable<DatasetEsEntry> getIterator() {
+        return () -> new Iterator<>() {
+            @Override
+            public boolean hasNext() {
+                return !currentYearMonth.isAfter(endYearMonth);
             }
 
-            List<Datum> data = Arrays.stream(dataAccessService.getIndexingDatasetBy(
-                    uuid,
-                    LocalDate.of(currentYearMonth.getYear(), currentYearMonth.getMonthValue(), 1),
-                    LocalDate.of(currentYearMonth.getYear(), currentYearMonth.getMonthValue(), currentYearMonth.lengthOfMonth())
-            )).toList();
-            currentYearMonth = currentYearMonth.plusMonths(1);
-            if (data.isEmpty()) {
-                return null;
-            }
+            @Override
+            public DatasetEsEntry next() {
+                // please keep it for a while since it benefits the performance optimisation
+                StopWatch timer = new StopWatch();
+                timer.start("Data querying");
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
 
-            timer.stop();
-            System.out.println(timer.prettyPrint());
-            return new DatasetEsEntry(uuid, currentYearMonth.toString(), data);
-        }
+                List<Datum> data = Arrays.stream(dataAccessService.getIndexingDatasetBy(
+                        uuid,
+                        LocalDate.of(currentYearMonth.getYear(), currentYearMonth.getMonthValue(), 1),
+                        LocalDate.of(currentYearMonth.getYear(), currentYearMonth.getMonthValue(), currentYearMonth.lengthOfMonth())
+                )).toList();
+                currentYearMonth = currentYearMonth.plusMonths(1);
+                if (data.isEmpty()) {
+                    return null;
+                }
+
+                timer.stop();
+                System.out.println(timer.prettyPrint());
+                return new DatasetEsEntry(uuid, currentYearMonth.toString(), data);
+            }
+        };
     }
 }

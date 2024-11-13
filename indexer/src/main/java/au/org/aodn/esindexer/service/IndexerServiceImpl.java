@@ -270,7 +270,7 @@ public class IndexerServiceImpl implements IndexerService {
         long dataSize = 0;
         final long maxSize = 5242880; // is 5mb
 
-        var dataset = new DatasetProvider(uuid, startDate, endDate, dataAccessService);
+        var dataset = new DatasetProvider(uuid, startDate, endDate, dataAccessService).getIterator();
         try {
             for (var entry : dataset) {
                 if (entry == null) {
