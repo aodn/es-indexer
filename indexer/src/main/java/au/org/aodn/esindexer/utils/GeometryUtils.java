@@ -36,6 +36,10 @@ public class GeometryUtils {
     protected static GeometryFactory factory = new GeometryFactory(new PrecisionModel(), 4326);
     protected static ObjectMapper objectMapper = new ObjectMapper();
     protected static Geometry landGeometry;
+
+    // This must be hard code and cannot change, the geonetwork comes with some very long decimal coordinate
+    // if we do not preserve this, we will result polygon rejected by elastic due to not having 3 non-collinear
+    // points after rounding by the GeometryJson
     protected static GeometryJSON geometryJson = new GeometryJSON(15);
 
     @Getter
@@ -111,28 +115,22 @@ public class GeometryUtils {
             List<Geometry> reduced = polygons.stream().flatMap(List::stream).toList();
             List<Geometry> orientedPolygons = reduced.stream()
                     .map(geometry -> {
+                        Geometry result = geometry;
                         if (geometry instanceof Polygon polygon) {
                             // Ensure all polygons follow the right-hand rule
                             // The right-hand rule is a convention used to maintain consistency in the orientation of vertices for polygons.
                             // For a polygon, adhering to the right-hand rule means that its vertices are ordered counterclockwise for the exterior ring
                             // and clockwise for any interior rings (holes).
                             // Standard: https://www.rfc-editor.org/rfc/rfc7946#section-3.1.6
-                            return GeometryUtils.ensureCounterClockwise(polygon, factory);
+                            result = GeometryUtils.ensureCounterClockwise(polygon, factory);
                         }
-                        else if(geometry instanceof Point point) {
-                            // Filter out empty point to avoid GeoJson create error
-                            return point.isEmpty() ? null : point;
-                        }
-                        return geometry;
+                        return result.isEmpty() ? null : result;
                     })
                     .filter(Objects::nonNull)
                     .toList();
 
             GeometryCollection collection = new GeometryCollection(orientedPolygons.toArray(new Geometry[0]), factory);
             try (StringWriter writer = new StringWriter()) {
-                // This must be hard code and cannot change, the geonetwork comes with some very long decimal coordinate
-                // if we do not preserve this, we will result polygon rejected by elastic due to not having 3 non-collinear
-                // points after rounding by the GeometryJson
                 geometryJson.write(collection, writer);
 
                 Map<?, ?> values = objectMapper.readValue(writer.toString(), HashMap.class);
