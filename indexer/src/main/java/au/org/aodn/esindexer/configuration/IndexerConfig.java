@@ -23,7 +23,7 @@ public class IndexerConfig {
     @Value("${app.geometry.enableGridSpatialExtents:false}")
     protected boolean girdSpatialExtents;
 
-    @Value("${app.geometry.coastalPrecision:0.1}")
+    @Value("${app.geometry.coastalPrecision:0.5}")
     protected double coastalPrecision;
 
     @PostConstruct
