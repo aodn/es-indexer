@@ -11,7 +11,6 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import java.util.concurrent.*;
-import org.springframework.beans.factory.annotation.Value;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -24,7 +23,7 @@ public class IndexerConfig {
     @Value("${app.geometry.enableGridSpatialExtents:false}")
     protected boolean girdSpatialExtents;
 
-    @Value("${app.geometry.coastalPrecision:0.04}")
+    @Value("${app.geometry.coastalPrecision:0.1}")
     protected double coastalPrecision;
 
     @PostConstruct
