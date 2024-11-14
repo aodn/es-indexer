@@ -1,192 +1,107 @@
 {
-  "title": "North West Shelf Joint Environmental Management Study:Visualisation Software - ViewNWS",
-  "description": "NWSJEMS study outputs are accessed using this application which is normally distributed on DVD with the accompanying datasets. ViewNWS is a user interface and dataset which was designed for the presentation of environmental, social and economic data, the very factors that depict the state of an ecosystem as it evolves in response to natural forcing and human use. There are several ViewNWS Management Strategy Evaluation (MSE) displays which include maps, digital images and time series data. The software is written in Visual Basic and uses ESRI Map Objects for the spatial component.",
-  "extent": {
-    "bbox": [
-      [
-        114.0,
-        -24.0,
-        122.0,
-        -17.0
-      ],
-      [
-        114.0,
-        -24.0,
-        122.0,
-        -17.0
-      ]
-    ],
-    "temporal": [
-      [
-        null,
-        null
-      ],
-      [
-        null,
-        null
-      ]
-    ]
+  "title" : "North West Shelf Joint Environmental Management Study:Visualisation Software - ViewNWS",
+  "description" : "NWSJEMS study outputs are accessed using this application which is normally distributed on DVD with the accompanying datasets. ViewNWS is a user interface and dataset which was designed for the presentation of environmental, social and economic data, the very factors that depict the state of an ecosystem as it evolves in response to natural forcing and human use. There are several ViewNWS Management Strategy Evaluation (MSE) displays which include maps, digital images and time series data. The software is written in Visual Basic and uses ESRI Map Objects for the spatial component.",
+  "extent" : {
+    "bbox" : [ [ 114.0, -24.0, 122.0, -17.0 ], [ 114.0, -24.0, 122.0, -17.0 ] ],
+    "temporal" : [ [ null, null ], [ null, null ] ]
   },
-  "summaries": {
-    "score": 1,
-    "status": "planned",
-    "credits": [
-      "Brian Hatfield"
-    ],
-    "statement": "Application developed by CMAR staff",
-    "revision": "2006-07-19T09:56:50",
-    "update_frequency": "other",
-    "proj:geometry": {
-      "geometries": [
-        {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [
-                114,
-                -24
-              ],
-              [
-                122,
-                -24
-              ],
-              [
-                122,
-                -17
-              ],
-              [
-                114,
-                -17
-              ],
-              [
-                114,
-                -24
-              ]
-            ]
-          ]
-        }
-      ],
-      "type": "GeometryCollection"
+  "summaries" : {
+    "score" : 1,
+    "status" : "planned",
+    "credits" : [ "Brian Hatfield" ],
+    "statement" : "Application developed by CMAR staff",
+    "revision" : "2006-07-19T09:56:50",
+    "update_frequency" : "other",
+    "proj:geometry" : {
+      "geometries" : [ {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 114, -24 ], [ 122, -24 ], [ 122, -17 ], [ 114, -17 ], [ 114, -24 ] ] ]
+      } ],
+      "type" : "GeometryCollection"
     },
-    "temporal": [
-      {
-        "start": null,
-        "end": null
-      }
-    ],
-    "centroid": [
-      [
-        117.416,
-        -18.869
-      ]
-    ]
+    "proj:geometry_noland" : {
+      "geometries" : [ {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 114, -21.905485970209153 ], [ 114.03581790500004, -21.837823174999922 ], [ 114.17603600400003, -21.822198174999922 ], [ 114.07748457100001, -22.175469658999926 ], [ 114.10971113400002, -22.33098723799992 ], [ 114.17139733200008, -22.317478122999944 ], [ 114.12240644600001, -22.504164320999905 ], [ 114.35694420700008, -22.486016533999926 ], [ 114.49561608200008, -22.00448984199994 ], [ 114.55030358200008, -22.04192473799992 ], [ 114.64673912900003, -21.843357028999947 ], [ 115.47852623800009, -21.501153252999927 ], [ 115.93669681100005, -21.05901458099993 ], [ 116.15154056100005, -20.96998463299991 ], [ 116.19629967500009, -20.846856377999927 ], [ 116.45150800900002, -20.814711195999905 ], [ 116.79086347700002, -20.53492603999996 ], [ 116.85547936300009, -20.712090752999927 ], [ 117.15406334700003, -20.596368096999925 ], [ 117.35377037900003, -20.727715752999927 ], [ 117.73633873800009, -20.658461195999905 ], [ 118.1508895190001, -20.356133721999925 ], [ 118.80567467500009, -20.28101978999996 ], [ 119.09546959700003, -19.966729424999922 ], [ 119.58985436300009, -20.065850518999923 ], [ 119.73438561300009, -19.96266041499996 ], [ 120.36850019600001, -19.867120049999922 ], [ 121.12826582100001, -19.520684502999927 ], [ 121.51937910200002, -19.06959400799991 ], [ 121.64258873800009, -18.810235283999926 ], [ 121.61329186300009, -18.712497653999947 ], [ 121.76905358200008, -18.657403252999927 ], [ 121.73161868600005, -18.58098723799992 ], [ 121.8110457690001, -18.462579033999926 ], [ 121.91032962300005, -18.464450778999947 ], [ 122, -18.39396444832736 ], [ 122, -17 ], [ 114, -17 ], [ 114, -21.905485970209153 ] ], [ [ 115.46452884200005, -20.730157158999926 ], [ 115.40805097700002, -20.85369231599992 ], [ 115.30697675900002, -20.870538018999923 ], [ 115.42896569100003, -20.669122002999927 ], [ 115.46452884200005, -20.730157158999926 ] ], [ [ 116.51630400900001, -20.58414077099991 ], [ 116.5561370480001, -20.617906366999932 ], [ 116.46726633200002, -20.605016917999933 ], [ 116.51630400900001, -20.58414077099991 ] ] ]
+      } ],
+      "type" : "GeometryCollection"
+    },
+    "temporal" : [ {
+      "start" : null,
+      "end" : null
+    } ]
   },
-  "contacts": [
-    {
-      "roles": [
-        "pointOfContact",
-        "metadata"
-      ],
-      "organization": "CSIRO Oceans & Atmosphere - Hobart",
-      "name": "CSIRO O&A, Information & Data Centre",
-      "position": "Data Requests",
-      "emails": [],
-      "addresses": [],
-      "phones": [],
-      "links": []
-    }
-  ],
-  "languages": [
-    {
-      "code": "eng",
-      "name": "English"
-    }
-  ],
-  "links": [],
-  "license": "",
-  "providers": [
-    {
-      "name": "CSIRO Oceans & Atmosphere - Hobart",
-      "roles": [
-        "pointOfContact"
-      ]
-    }
-  ],
-  "themes": [
-    {
-      "concepts": [
-        {
-          "id": "Earth Science | Biosphere | Aquatic Ecosystems | Benthic Habitat",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/09a78997-581b-4d1b-ae71-b2b3f96ef719"
-        },
-        {
-          "id": "Earth Science | Biosphere | Aquatic Ecosystems | Coastal Habitat",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/47be68db-d10d-43e7-b150-61cfd3f06126"
-        },
-        {
-          "id": "Earth Science | Biosphere | Aquatic Ecosystems | Demersal Habitat",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/af953f41-ab6c-4569-9762-c46ad07118da"
-        },
-        {
-          "id": "Earth Science | Biosphere | Aquatic Ecosystems | Pelagic Habitat",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/3d7ecc4f-e79e-40d1-8796-63059888bf5f"
-        },
-        {
-          "id": "Earth Science | Biosphere | Terrestrial Ecosystems | Beaches",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/a61d1705-a6b7-4df3-9f8e-57e26029629c"
-        }
-      ],
-      "scheme": "theme",
-      "description": "Olsen, L.M., G. Major, K. Shein, J. Scialdone, S. Ritz, T. Stevens, M. Morahan, A. Aleman, R. Vogel, S. Leicester, H. Weir, M. Meaux, S. Grebas, C.Solomon, M. Holland, T. Northcutt, R. A. Restrepo, R. Bilodeau, 2013. NASA/Global Change Master Directory (GCMD) Earth Science Keywords. Version 8.0.0.0.0",
-      "title": "GCMD Keywords"
-    },
-    {
-      "concepts": [
-        {
-          "id": "Marine Features (Australia) | Australian North West Shelf, WA",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.place.urn:aodn.org.au:geographicextents&id=urn:aodn.org.au:geographicextents:concept:65"
-        }
-      ],
-      "scheme": "place",
-      "description": "AODN GEN",
-      "title": "AODN Geographic Extent Names"
-    },
-    {
-      "concepts": [
-        {
-          "id": "North West Shelf - Joint Environmental Management Study - 02-03",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.project.urn:marlin.csiro.au:projectregister&id=urn:marlin.csiro.au:projectregister:concept:1708"
-        }
-      ],
-      "scheme": "project",
-      "description": "MarLIN Project Register",
-      "title": "CSIRO Project List"
-    },
-    {
-      "concepts": [
-        {
-          "id": "North West Shelf Joint Environmental Management Study",
-          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.project.urn:marlin.csiro.au:globalprojectregister&id=urn:marlin.csiro.au:globalprojectregister:concept:20"
-        }
-      ],
-      "scheme": "project",
-      "description": "MarLIN Global Project Codes Register",
-      "title": "CSIRO Global Project List"
-    }
-  ],
-  "id": "5fec8c73-58a1-4a4b-9e47-cfcd9e3fd3ea",
-  "search_suggestions": {
-    "abstract_phrases": []
+  "contacts" : [ {
+    "roles" : [ "pointOfContact", "metadata" ],
+    "organization" : "CSIRO Oceans & Atmosphere - Hobart",
+    "name" : "CSIRO O&A, Information & Data Centre",
+    "position" : "Data Requests",
+    "emails" : [ ],
+    "addresses" : [ ],
+    "phones" : [ ],
+    "links" : [ ]
+  } ],
+  "languages" : [ {
+    "code" : "eng",
+    "name" : "English"
+  } ],
+  "links" : [ ],
+  "license" : "",
+  "providers" : [ {
+    "name" : "CSIRO Oceans & Atmosphere - Hobart",
+    "roles" : [ "pointOfContact" ]
+  } ],
+  "themes" : [ {
+    "concepts" : [ {
+      "id" : "Earth Science | Biosphere | Aquatic Ecosystems | Benthic Habitat",
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/09a78997-581b-4d1b-ae71-b2b3f96ef719"
+    }, {
+      "id" : "Earth Science | Biosphere | Aquatic Ecosystems | Coastal Habitat",
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/47be68db-d10d-43e7-b150-61cfd3f06126"
+    }, {
+      "id" : "Earth Science | Biosphere | Aquatic Ecosystems | Demersal Habitat",
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/af953f41-ab6c-4569-9762-c46ad07118da"
+    }, {
+      "id" : "Earth Science | Biosphere | Aquatic Ecosystems | Pelagic Habitat",
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/3d7ecc4f-e79e-40d1-8796-63059888bf5f"
+    }, {
+      "id" : "Earth Science | Biosphere | Terrestrial Ecosystems | Beaches",
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/a61d1705-a6b7-4df3-9f8e-57e26029629c"
+    } ],
+    "scheme" : "theme",
+    "description" : "Olsen, L.M., G. Major, K. Shein, J. Scialdone, S. Ritz, T. Stevens, M. Morahan, A. Aleman, R. Vogel, S. Leicester, H. Weir, M. Meaux, S. Grebas, C.Solomon, M. Holland, T. Northcutt, R. A. Restrepo, R. Bilodeau, 2013. NASA/Global Change Master Directory (GCMD) Earth Science Keywords. Version 8.0.0.0.0",
+    "title" : "GCMD Keywords"
+  }, {
+    "concepts" : [ {
+      "id" : "Marine Features (Australia) | Australian North West Shelf, WA",
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.place.urn:aodn.org.au:geographicextents&id=urn:aodn.org.au:geographicextents:concept:65"
+    } ],
+    "scheme" : "place",
+    "description" : "AODN GEN",
+    "title" : "AODN Geographic Extent Names"
+  }, {
+    "concepts" : [ {
+      "id" : "North West Shelf - Joint Environmental Management Study - 02-03",
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.project.urn:marlin.csiro.au:projectregister&id=urn:marlin.csiro.au:projectregister:concept:1708"
+    } ],
+    "scheme" : "project",
+    "description" : "MarLIN Project Register",
+    "title" : "CSIRO Project List"
+  }, {
+    "concepts" : [ {
+      "id" : "North West Shelf Joint Environmental Management Study",
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.project.urn:marlin.csiro.au:globalprojectregister&id=urn:marlin.csiro.au:globalprojectregister:concept:20"
+    } ],
+    "scheme" : "project",
+    "description" : "MarLIN Global Project Codes Register",
+    "title" : "CSIRO Global Project List"
+  } ],
+  "id" : "5fec8c73-58a1-4a4b-9e47-cfcd9e3fd3ea",
+  "search_suggestions" : {
+    "abstract_phrases" : [ ]
   },
-  "sci:citation": "{\"suggestedCitation\":null,\"useLimitations\":null,\"otherConstraints\":[\"No Restrictions\"]}",
-  "type": "Collection",
-  "stac_version": "1.0.0",
-  "stac_extensions": [
-    "https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/contacts/v0.1.1/schema.json",
-    "https://stac-extensions.github.io/projection/v1.1.0/schema.json",
-    "https://stac-extensions.github.io/language/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/themes/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/web-map-links/v1.2.0/schema.json"
-  ]
+  "sci:citation" : "{\"suggestedCitation\":null,\"useLimitations\":null,\"otherConstraints\":[\"No Restrictions\"]}",
+  "type" : "Collection",
+  "stac_version" : "1.0.0",
+  "stac_extensions" : [ "https://stac-extensions.github.io/scientific/v1.0.0/schema.json", "https://stac-extensions.github.io/contacts/v0.1.1/schema.json", "https://stac-extensions.github.io/projection/v1.1.0/schema.json", "https://stac-extensions.github.io/language/v1.0.0/schema.json", "https://stac-extensions.github.io/themes/v1.0.0/schema.json", "https://stac-extensions.github.io/web-map-links/v1.2.0/schema.json" ]
 }

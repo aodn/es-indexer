@@ -11,7 +11,6 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import java.util.concurrent.*;
-import org.springframework.beans.factory.annotation.Value;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -24,12 +23,11 @@ public class IndexerConfig {
     @Value("${app.geometry.enableGridSpatialExtents:false}")
     protected boolean girdSpatialExtents;
 
-    @Value("${app.geometry.coastalPrecision:0.04}")
+    @Value("${app.geometry.coastalPrecision:0.5}")
     protected double coastalPrecision;
 
     @PostConstruct
     public void init() {
-        GeometryUtils.setGridSpatialExtents(girdSpatialExtents);
         GeometryUtils.setCoastalPrecision(coastalPrecision);
         GeometryUtils.init();
     }
@@ -37,7 +35,6 @@ public class IndexerConfig {
     @PreDestroy
     public void cleanUp() {
         // Clean up resources
-        GeometryUtils.getExecutorService().shutdown();
     }
     /**
      * We need to create component here because we do not want to run test with real http connection

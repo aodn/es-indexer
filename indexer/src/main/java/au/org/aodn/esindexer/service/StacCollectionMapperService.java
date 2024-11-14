@@ -54,11 +54,11 @@ public abstract class StacCollectionMapperService {
     @Mapping(target="license", source = "source", qualifiedByName = "mapLicense")
     @Mapping(target="providers", source = "source", qualifiedByName = "mapProviders")
     @Mapping(target="citation", source="source", qualifiedByName = "mapCitation")
-    @Mapping(target="summaries.centroid", source = "source", qualifiedByName = "mapSummaries.centroid")
     @Mapping(target="summaries.status", source = "source", qualifiedByName = "mapSummaries.status")
     @Mapping(target="summaries.scope", source = "source", qualifiedByName = "mapSummaries.scope")
     @Mapping(target="summaries.credits", source = "source", qualifiedByName = "mapSummaries.credits")
     @Mapping(target="summaries.geometry", source = "source", qualifiedByName = "mapSummaries.geometry")
+    @Mapping(target="summaries.geometryNoLand", source = "source", qualifiedByName = "mapSummaries.geometryNoland")
     @Mapping(target="summaries.temporal", source = "source", qualifiedByName = "mapSummaries.temporal")
     @Mapping(target="summaries.updateFrequency", source = "source", qualifiedByName = "mapSummaries.updateFrequency")
     @Mapping(target="summaries.datasetProvider", source = "source", qualifiedByName = "mapSummaries.datasetProvider")
@@ -91,8 +91,8 @@ public abstract class StacCollectionMapperService {
     List<List<BigDecimal>> mapExtentBbox(MDMetadataType source) {
         return GeometryUtils.createGeometryItems(
                 source,
-                null,
-                BBoxUtils::createBBoxFrom
+                BBoxUtils::createBBoxFrom,
+                null
         );
     }
 
@@ -345,16 +345,16 @@ public abstract class StacCollectionMapperService {
         return dateMap;
     }
     /**
-     * This is the default centroid if requester do not indicate a zoom level
-     * @param source
-     * @return
+     * The spatial extends
+     * @param source - The parsed XML
+     * @return - The spatial extents without land
      */
-    @Named("mapSummaries.centroid")
-    List<List<BigDecimal>> mapGeometryCentroid(MDMetadataType source) {
+    @Named("mapSummaries.geometryNoland")
+    Map<?,?> mapSummariesGeometryNoLand(MDMetadataType source) {
         return GeometryUtils.createGeometryItems(
                 source,
-                10,
-                GeometryUtils::createCentroidFrom
+                GeometryUtils::createGeometryNoLandFrom,
+                10
         );
     }
 
@@ -362,8 +362,8 @@ public abstract class StacCollectionMapperService {
     Map<?,?> mapSummariesGeometry(MDMetadataType source) {
         return GeometryUtils.createGeometryItems(
                 source,
-                10, // This is useful in testing/edge only.
-                GeometryUtils::createGeometryFrom
+                GeometryUtils::createGeometryFrom,
+                10  // This is useful in testing/edge only.
         );
     }
 

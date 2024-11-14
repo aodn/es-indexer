@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Data;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -43,6 +42,12 @@ public class SummariesModel {
     @JsonProperty("proj:geometry")
     protected Map<?, ?> geometry;
     /**
+     * A spatial extents with land area removed. OGCapi will use this to create centroid point, so point will
+     * not fall on land.
+     */
+    @JsonProperty("proj:geometry_noland")
+    protected Map<?, ?> geometryNoLand;
+    /**
      * Use for effective search on temporal.
      */
     @JsonProperty("temporal")
@@ -65,7 +70,4 @@ public class SummariesModel {
      */
     @JsonProperty("organisation_vocabs")
     protected List<String> organisationVocabs;
-
-    @JsonProperty("centroid")
-    protected List<List<BigDecimal>> centroid;
 }

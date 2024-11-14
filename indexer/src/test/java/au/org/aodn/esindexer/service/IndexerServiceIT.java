@@ -253,7 +253,7 @@ public class IndexerServiceIT extends BaseTestClass {
             String test = String.valueOf(Objects.requireNonNull(objectNodeHit.source()));
             String expected = indexerObjectMapper.readTree(expectedData).toPrettyString();
             String actual = indexerObjectMapper.readTree(test).toPrettyString();
-
+            logger.info(actual);
             JSONAssert.assertEquals(expected, actual, JSONCompareMode.STRICT);
         } catch (JSONException e) {
             throw new RuntimeException(e);
