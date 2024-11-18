@@ -1,5 +1,6 @@
 package au.org.aodn.esindexer.service;
 
+import au.org.aodn.ardcvocabs.model.VocabModel;
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.exception.*;
 import au.org.aodn.esindexer.model.DatasetProvider;
@@ -204,7 +205,11 @@ public class IndexerServiceImpl implements IndexerService {
         }
 
         // organisation vocabs
-        // TODO: the logics for mapping record's organisation vocabs are heavily customised for a manual approach, AI now or later? need dedicated service's method
+        // TODO: consider the case IMOS's records already have ARDC organisation vocabs
+        List<VocabModel> mappedOrganisationVocabs = vocabService.getMappedOrganisationVocabsFromContacts(stacCollectionModel.getContacts());
+        if (!mappedOrganisationVocabs.isEmpty()) {
+//            stacCollectionModel.getSummaries().setOrganisationVocabs(processedOrganisationVocabs);
+        }
 
         // search_as_you_type enabled fields can be extended
         SearchSuggestionsModel searchSuggestionsModel = SearchSuggestionsModel.builder()

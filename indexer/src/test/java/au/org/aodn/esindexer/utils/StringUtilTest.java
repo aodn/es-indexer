@@ -1,12 +1,10 @@
 package au.org.aodn.esindexer.utils;
 
-import au.org.aodn.esindexer.utils.StringUtil;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.nio.charset.StandardCharsets;
-import java.util.List;
 
 public class StringUtilTest {
     @Test

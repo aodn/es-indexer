@@ -1,15 +1,16 @@
 package au.org.aodn.esindexer.service;
 
+import au.org.aodn.ardcvocabs.model.VocabModel;
+import au.org.aodn.stac.model.ContactsModel;
 import au.org.aodn.stac.model.ThemesModel;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public interface VocabService {
     List<String> extractVocabLabelsFromThemes(List<ThemesModel> themes, String vocabType) throws IOException;
-
+    List<VocabModel> getMappedOrganisationVocabsFromContacts(List<ContactsModel> contacts) throws IOException;
     void populateVocabsData() throws IOException;
     void populateVocabsDataAsync();
     void clearParameterVocabCache();
