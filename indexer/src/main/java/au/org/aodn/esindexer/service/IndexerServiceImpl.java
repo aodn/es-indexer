@@ -48,6 +48,8 @@ import java.util.concurrent.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static au.org.aodn.esindexer.utils.CommonUtils.safeGet;
+
 @Slf4j
 @Service
 @Scope(proxyMode = ScopedProxyMode.TARGET_CLASS)
@@ -205,10 +207,31 @@ public class IndexerServiceImpl implements IndexerService {
         }
 
         // organisation vocabs
-        // TODO: consider the case IMOS's records already have ARDC organisation vocabs
-        List<VocabModel> mappedOrganisationVocabs = vocabService.getMappedOrganisationVocabsFromContacts(stacCollectionModel.getContacts());
-        if (!mappedOrganisationVocabs.isEmpty()) {
-//            stacCollectionModel.getSummaries().setOrganisationVocabs(processedOrganisationVocabs);
+        // this is for IMOS's records that already come with "organisation vocabs"
+        // TODO: should use low level (as-is) or looking up for upper level's organisation vocab? e.g AODN or IMOS?
+        List<String> organisationLabelsFromThemes = vocabService.extractVocabLabelsFromThemes(stacCollectionModel.getThemes(), AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS);
+        // manual mapping with custom logics
+        List<VocabModel> mappedOrganisationVocabsFromContacts = vocabService.getMappedOrganisationVocabsFromContacts(stacCollectionModel.getContacts());
+        List<String> mappedOrganisationLabels = new ArrayList<>();
+        if (!mappedOrganisationVocabsFromContacts.isEmpty()) {
+            for (VocabModel vocabModel : mappedOrganisationVocabsFromContacts) {
+                // Add labels for the current vocab model
+                mappedOrganisationLabels.addAll(extractOrderedLabels(vocabModel));
+
+                // TODO: should use low level (as-is) or looking up for upper level's organisation vocab? e.g AODN or IMOS?
+                // Check narrower labels and add them as well
+                if (safeGet(vocabModel::getNarrower).isPresent()) {
+                    for (VocabModel narrower : vocabModel.getNarrower()) {
+                        mappedOrganisationLabels.addAll(extractOrderedLabels(narrower));
+                    }
+                }
+            }
+
+            stacCollectionModel.getSummaries().setOrganisationVocabs(
+                Stream.concat(mappedOrganisationLabels.stream(), organisationLabelsFromThemes.stream())
+                    .distinct()
+                    .collect(Collectors.toList())
+            );
         }
 
         // search_as_you_type enabled fields can be extended
@@ -221,6 +244,22 @@ public class IndexerServiceImpl implements IndexerService {
 
         return stacCollectionModel;
     }
+
+    private List<String> extractOrderedLabels(VocabModel vocabModel) {
+        List<String> labels = new ArrayList<>();
+
+        // Priority: DisplayLabel > AltLabels > PrefLabel
+        if (safeGet(vocabModel::getDisplayLabel).isPresent()) {
+            labels.add(vocabModel.getDisplayLabel());
+        } else if (safeGet(vocabModel::getAltLabels).isPresent()) {
+            labels.addAll(vocabModel.getAltLabels());
+        } else if (safeGet(vocabModel::getLabel).isPresent()) {
+            labels.add(vocabModel.getLabel());
+        }
+
+        return labels;
+    }
+
     /**
      * Use to index a particular UUID, the async is used to limit the number of same function call to avoid flooding
      * the system.
