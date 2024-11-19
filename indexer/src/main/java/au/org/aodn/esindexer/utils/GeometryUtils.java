@@ -41,10 +41,10 @@ public class GeometryUtils {
     // if we do not preserve this, we will result polygon rejected by elastic due to not having 3 non-collinear
     // points after rounding by the GeometryJson
     protected static GeometryJSON geometryJson = new GeometryJSON(15);
-
+    // A value based on trial and error, this is a default value and user can override it with the yaml file
     @Getter
     @Setter
-    protected static double coastalPrecision = 0.05;
+    protected static double coastalPrecision = 0.1;
 
     // Load a coastline shape file so that we can get a spatial extents that cover sea only
     public static void init() {
@@ -68,7 +68,10 @@ public class GeometryUtils {
                     SimpleFeature feature = iterator.next();
                     Geometry landFeatureGeometry = (Geometry) feature.getDefaultGeometry();
 
-                    // This will reduce the points of the shape file for faster processing
+                    // This will reduce the points of the shape file for faster processing, this
+                    // simplification may cause polygon invalid and therefore need to use buffer(0.0) later
+                    // during processing to work around this issue. Another choice is TopologyPreservingSimplifier
+                    // but the polygon output is a bit complicated
                     Geometry simplifiedGeometry = DouglasPeuckerSimplifier
                             .simplify(landFeatureGeometry, getCoastalPrecision()); // Adjust tolerance
 
