@@ -41,7 +41,7 @@ public class GeometryUtils {
     // if we do not preserve this, we will result polygon rejected by elastic due to not having 3 non-collinear
     // points after rounding by the GeometryJson
     protected static GeometryJSON geometryJson = new GeometryJSON(15);
-
+    // A value based on trial and error, this is a default value and user can override it with the yaml file
     @Getter
     @Setter
     protected static double coastalPrecision = 0.1;

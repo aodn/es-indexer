@@ -19,6 +19,7 @@ import jakarta.xml.bind.JAXBException;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONException;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -77,6 +78,11 @@ public class StacCollectionMapperServiceTest {
     protected AtomicReference<IndexRequest<JsonData>> lastRequest = new AtomicReference<>();
 
     protected IndexerServiceImpl indexerService;
+
+    @BeforeAll
+    public static void preSetup() {
+        GeometryUtils.setCoastalPrecision(0.05);
+    }
 
     protected void verify(String expected) throws JsonProcessingException, JSONException {
         Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
