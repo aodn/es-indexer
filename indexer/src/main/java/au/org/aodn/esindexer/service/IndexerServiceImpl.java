@@ -191,6 +191,7 @@ public class IndexerServiceImpl implements IndexerService {
         List<String> processedParameterVocabs = vocabService.extractVocabLabelsFromThemes(stacCollectionModel.getThemes(), AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS);
 
         if (!processedParameterVocabs.isEmpty()) {
+            // TODO: do not concat if record already has AODN param vocabs
             stacCollectionModel.getSummaries().setParameterVocabs(Stream.concat(mappedParameterVocabsFromGcmdKeywords.stream(), processedParameterVocabs.stream()).distinct().collect(Collectors.toList()));
         }
 
@@ -208,8 +209,8 @@ public class IndexerServiceImpl implements IndexerService {
 
         // organisation vocabs
         // this is for IMOS's records that already come with "organisation vocabs"
-        // TODO: should use low level (as-is) or looking up for upper level's organisation vocab? e.g AODN or IMOS?
-        List<String> organisationLabelsFromThemes = vocabService.extractVocabLabelsFromThemes(stacCollectionModel.getThemes(), AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS);
+        // // if IMOS in cited responsible party , ignore and look at the keywords, if doesn't have keywords, indentify "specific" IMOS sub-facility e.g Ocean Gliders Facility, Integrated Marine Observing System (IMOS)
+        List<String> organisationLabelsFromThemes = new ArrayList<>();
         // manual mapping with custom logics
         List<VocabModel> mappedOrganisationVocabsFromContacts = vocabService.getMappedOrganisationVocabsFromContacts(stacCollectionModel.getContacts());
         List<String> mappedOrganisationLabels = new ArrayList<>();
@@ -219,6 +220,7 @@ public class IndexerServiceImpl implements IndexerService {
                 mappedOrganisationLabels.addAll(extractOrderedLabels(vocabModel));
 
                 // TODO: should use low level (as-is) or looking up for upper level's organisation vocab? e.g AODN or IMOS?
+                // TODO : in future, maybe hackaround with AAD
                 // Check narrower labels and add them as well
                 if (safeGet(vocabModel::getNarrower).isPresent()) {
                     for (VocabModel narrower : vocabModel.getNarrower()) {

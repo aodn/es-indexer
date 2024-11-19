@@ -142,6 +142,8 @@ public class VocabServiceImpl implements VocabService {
 
     public List<VocabModel> getMappedOrganisationVocabsFromContacts(List<ContactsModel> contacts) throws IOException {
         // the organisation information is found in either contact or citation of a record
+        // TODO: get the point of contact's org of "citation" section only <gmd:pointOfContact> -> <gmd:organisationName> | <gmd:citedResponsibleParty>
+        // if IMOS in cited responsible party , ignore and look at the keywords, if doesn't have keywords, indentify "specific" IMOS sub-facility e.g Ocean Gliders Facility, Integrated Marine Observing System (IMOS)
         Set<String> rolesToCheck = Set.of("metadata", "citation");
         List<String> contactOrgs = new ArrayList<>();
 
