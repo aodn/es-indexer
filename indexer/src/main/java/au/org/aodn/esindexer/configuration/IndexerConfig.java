@@ -26,9 +26,13 @@ public class IndexerConfig {
     @Value("${app.geometry.coastalPrecision:0.5}")
     protected double coastalPrecision;
 
+    @Value("${app.geometry.reducerPrecision:#{null}}")
+    protected Double reducerPrecision;
+
     @PostConstruct
     public void init() {
         GeometryUtils.setCoastalPrecision(coastalPrecision);
+        GeometryUtils.setReducerPrecision(reducerPrecision);
         GeometryUtils.init();
     }
 

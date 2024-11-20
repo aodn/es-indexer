@@ -8,6 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.geotools.data.shapefile.ShapefileDataStore;
 import org.geotools.data.shapefile.ShapefileDataStoreFactory;
+import org.locationtech.jts.precision.GeometryPrecisionReducer;
 import org.geotools.data.simple.SimpleFeatureCollection;
 import org.geotools.data.simple.SimpleFeatureIterator;
 import org.geotools.data.simple.SimpleFeatureSource;
@@ -45,6 +46,12 @@ public class GeometryUtils {
     @Getter
     @Setter
     protected static double coastalPrecision = 0.1;
+    // A value based on trial and error, to simplify the polygon to avoid complex geojson that takes time to transfer
+    // By default is set to null to disable it so test case do not need to change, but each env have this value set
+    // to reduce processing time.
+    @Getter
+    @Setter
+    protected static Double reducerPrecision = null;
 
     // Load a coastline shape file so that we can get a spatial extents that cover sea only
     public static void init() {
@@ -63,6 +70,12 @@ public class GeometryUtils {
             SimpleFeatureCollection featureCollection = featureSource.getFeatures();
             List<Geometry> geometries = new ArrayList<>();
 
+            GeometryPrecisionReducer reducer = null;
+            if(getReducerPrecision() != null) {
+                PrecisionModel pm = new PrecisionModel(getReducerPrecision()); // 1 / 1000 meters ~= 1km
+                reducer = new GeometryPrecisionReducer(pm);
+            }
+
             try (SimpleFeatureIterator iterator = featureCollection.features()) {
                 while (iterator.hasNext()) {
                     SimpleFeature feature = iterator.next();
@@ -75,7 +88,7 @@ public class GeometryUtils {
                     Geometry simplifiedGeometry = DouglasPeuckerSimplifier
                             .simplify(landFeatureGeometry, getCoastalPrecision()); // Adjust tolerance
 
-                    geometries.add(simplifiedGeometry);
+                    geometries.add(reducer != null ? reducer.reduce(simplifiedGeometry) : simplifiedGeometry);
                 }
             }
             // Faster to use union list rather than union by geometry one by one.
@@ -347,9 +360,10 @@ public class GeometryUtils {
     public static Map<?, ?> createGeometryFrom(List<List<AbstractEXGeographicExtentType>> rawInput, Integer gridSize) {
         // The return polygon is in EPSG:4326, so we can call createGeoJson directly
 
-        // This line will cause the spatial extents to break into grid, it may help to debug but will make production
-        // slow and sometimes cause polygon break.
-        // List<List<Geometry>> polygonNoLand = splitAreaToGrid(createGeometryWithoutLand(rawInput));
+        // Un-remark this line and remark the line above if you want to visualize the polygon on map, change this
+        // line will cause the spatial extends draw on map with land removed.
+        // List<List<Geometry>> polygon = createGeometryWithoutLand(rawInput);
+
         List<List<Geometry>> polygon = GeometryBase.findPolygonsFrom(GeometryBase.COORDINATE_SYSTEM_CRS84, rawInput);
         return (polygon != null && !polygon.isEmpty()) ? createGeoJson(polygon) : null;
     }

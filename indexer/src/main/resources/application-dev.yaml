@@ -4,6 +4,7 @@ server:
 app:
   geometry:
     enableGridSpatialExtents: true
+    reducerPrecision: 2.0
 
 elasticsearch:
   index:
