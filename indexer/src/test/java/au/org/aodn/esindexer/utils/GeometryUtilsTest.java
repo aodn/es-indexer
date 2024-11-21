@@ -26,11 +26,13 @@ public class GeometryUtilsTest {
     @BeforeEach
     public void init() {
         GeometryUtils.setCoastalPrecision(0.03);
-        GeometryUtils.init();
     }
 
     @Test
     public void verifyLandStrippedFromSpatialExtents() throws IOException, JAXBException {
+        GeometryUtils.setReducerPrecision(null);
+        GeometryUtils.init();
+
         String xml = readResourceFile("classpath:canned/sample_complex_area.xml");
         MDMetadataType source = jaxb.unmarshal(xml);
         // Whole spatial extends

@@ -55,8 +55,11 @@ public class GeometryUtils {
     protected static GeometryPrecisionReducer reducer = null;
 
     // Load a coastline shape file so that we can get a spatial extents that cover sea only
-    public static void init() {
+    public static synchronized void init() {
         try {
+            // Reset reducer
+            reducer = null;
+
             // shp file depends on shx, so need to have shx appear in temp folder.
             FileUtils.saveResourceToTemp("land/ne_10m_land.shx", "shapefile.shx");
             File tempFile = FileUtils.saveResourceToTemp("land/ne_10m_land.shp", "shapefile.shp");
