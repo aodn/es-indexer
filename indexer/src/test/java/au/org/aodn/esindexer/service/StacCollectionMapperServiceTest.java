@@ -19,6 +19,7 @@ import jakarta.xml.bind.JAXBException;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONException;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -78,6 +79,11 @@ public class StacCollectionMapperServiceTest {
 
     protected IndexerServiceImpl indexerService;
 
+    @BeforeAll
+    public static void preSetup() {
+        GeometryUtils.setCoastalPrecision(0.05);
+    }
+
     protected void verify(String expected) throws JsonProcessingException, JSONException {
         Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
         String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
@@ -90,7 +96,6 @@ public class StacCollectionMapperServiceTest {
     }
 
     public StacCollectionMapperServiceTest() throws JAXBException {
-        GeometryUtils.setExecutorService(Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors()));
         GeometryUtils.init();
     }
 
@@ -411,6 +416,19 @@ public class StacCollectionMapperServiceTest {
     public void verifyNoMissingGeonetworkFieldEnum() throws IOException, JSONException {
         String xml = readResourceFile("classpath:canned/sample_geoenum_publication.xml");
         String expected = readResourceFile("classpath:canned/sample_geoenum_publication_stac.json");
+        indexerService.indexMetadata(xml);
+
+        verify(expected);
+    }
+    /**
+     * Make sure we do not include empty polygon and cause the GeometryJson parse error
+     * @throws IOException - Not expect to throw
+     * @throws JSONException - Not expect to throw
+     */
+    @Test
+    public void verifyNoJsonStringError() throws IOException, JSONException {
+        String xml = readResourceFile("classpath:canned/sample18.xml");
+        String expected = readResourceFile("classpath:canned/sample18_stac.json");
         indexerService.indexMetadata(xml);
 
         verify(expected);

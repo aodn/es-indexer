@@ -31,6 +31,7 @@ public class ElasticSearchConfig {
         // Create the low-level client
         RestClient restClient = RestClient
                 .builder(HttpHost.create(serverUrl))
+                .setCompressionEnabled(true)
                 .setDefaultHeaders(new Header[]{
                         new BasicHeader("Authorization", "ApiKey " + apiKey)
                 })

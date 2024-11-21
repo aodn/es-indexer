@@ -1,263 +1,153 @@
 {
-  "title": "Predicted seabed gravel, mud and sand content in the Timor Sea region in the Australian continental EEZ 2018",
-  "description": "This dataset provides the spatially continuous data of seabed gravel (sediment fraction >2000 µm), mud  (sediment fraction < 63 µm) and sand content (sediment fraction 63-2000 µm) expressed as a weight percentage ranging from 0 to 100%, presented in 10 m resolution raster grids format and ascii text file.</p>\n\n                    The dataset covers the eight areas in the Timor Sea region in the Australian continental EEZ.</p>\n\n                    This dataset supersedes previous predictions of sediment gravel, mud and sand content for the basin with demonstrated improvements in accuracy. Accuracy of predictions varies with sediment types, with a VEcv = 71% for mud, VEcv = 72% sand and VEcv = 42% for gravel. Artefacts occur in this dataset as a result of noises associated predictive variables (e.g., horizontal and vertical lines resulted from predictive variables derived from backscatter data are the most apparent ones). To obtain the most accurate interpretation of sediment distribution in these areas, it is recommended that noises with backscatter data should be reduced and predictions updated.</p>\n\n                    This research is supported by the National Environmental Science Program (NESP) Marine Biodiversity Hub through Project D1.",
-  "extent": {
-    "bbox": [
-      [
-        126.91,
-        -12.42,
-        130.08,
-        -10.28
-      ],
-      [
-        126.91,
-        -12.42,
-        130.08,
-        -10.28
-      ]
-    ],
-    "temporal": [
-      [
-        "2018-09-13T14:00:00Z",
-        null
-      ],
-      [
-        "2018-09-13T14:00:00Z",
-        null
-      ]
-    ]
+  "title" : "Predicted seabed gravel, mud and sand content in the Timor Sea region in the Australian continental EEZ 2018",
+  "description" : "This dataset provides the spatially continuous data of seabed gravel (sediment fraction >2000 µm), mud  (sediment fraction < 63 µm) and sand content (sediment fraction 63-2000 µm) expressed as a weight percentage ranging from 0 to 100%, presented in 10 m resolution raster grids format and ascii text file.</p>\n\n                    The dataset covers the eight areas in the Timor Sea region in the Australian continental EEZ.</p>\n\n                    This dataset supersedes previous predictions of sediment gravel, mud and sand content for the basin with demonstrated improvements in accuracy. Accuracy of predictions varies with sediment types, with a VEcv = 71% for mud, VEcv = 72% sand and VEcv = 42% for gravel. Artefacts occur in this dataset as a result of noises associated predictive variables (e.g., horizontal and vertical lines resulted from predictive variables derived from backscatter data are the most apparent ones). To obtain the most accurate interpretation of sediment distribution in these areas, it is recommended that noises with backscatter data should be reduced and predictions updated.</p>\n\n                    This research is supported by the National Environmental Science Program (NESP) Marine Biodiversity Hub through Project D1.",
+  "extent" : {
+    "bbox" : [ [ 126.91, -12.42, 130.08, -10.28 ], [ 126.91, -12.42, 130.08, -10.28 ] ],
+    "temporal" : [ [ "2018-09-13T14:00:00Z", null ], [ "2018-09-13T14:00:00Z", null ] ]
   },
-  "summaries": {
-    "score": 1,
-    "status": "",
-    "credits": [],
-    "scope": {
-      "code": "dataset",
-      "name": "Predicted seabed gravel, mud and sand content in the Timor Sea region in the Australian continental EEZ 2018"
+  "summaries" : {
+    "score" : 1,
+    "status" : "",
+    "credits" : [ ],
+    "scope" : {
+      "code" : "dataset",
+      "name" : "Predicted seabed gravel, mud and sand content in the Timor Sea region in the Australian continental EEZ 2018"
     },
-    "revision": "2018-09-28T01:24:46",
-    "update_frequency": "other",
-    "proj:geometry": {
-      "geometries": [
-        {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [
-                126.91,
-                -12.42
-              ],
-              [
-                130.08,
-                -12.42
-              ],
-              [
-                130.08,
-                -10.28
-              ],
-              [
-                126.91,
-                -10.28
-              ],
-              [
-                126.91,
-                -12.42
-              ]
-            ]
-          ]
-        }
-      ],
-      "type": "GeometryCollection"
+    "revision" : "2018-09-28T01:24:46",
+    "update_frequency" : "other",
+    "proj:geometry" : {
+      "geometries" : [ {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 126.91, -12.42 ], [ 130.08, -12.42 ], [ 130.08, -10.28 ], [ 126.91, -10.28 ], [ 126.91, -12.42 ] ] ]
+      } ],
+      "type" : "GeometryCollection"
+    },
+    "proj:geometry_noland" : {
+      "geometries" : [ {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 130.08, -11.779891569905304 ], [ 130.0166121750001, -11.77703215899993 ], [ 130.07154381600003, -11.67115650799991 ], [ 130.08, -11.67155544164696 ], [ 130.08, -10.28 ], [ 126.91, -10.28 ], [ 126.91, -12.42 ], [ 130.08, -12.42 ], [ 130.08, -11.779891569905304 ] ] ]
+      } ],
+      "type" : "GeometryCollection"
     },
     "temporal" : [ {
       "start" : "2018-09-13T14:00:00Z",
       "end" : null
+    } ]
+  },
+  "contacts" : [ {
+    "roles" : [ "resourceProvider", "about" ],
+    "organization" : "Environmental Geoscience Division",
+    "name" : null,
+    "position" : null,
+    "emails" : null,
+    "addresses" : null,
+    "phones" : null,
+    "links" : null
+  }, {
+    "roles" : [ "pointOfContact", "about" ],
+    "organization" : "Commonwealth of Australia (Geoscience Australia)",
+    "name" : null,
+    "position" : null,
+    "emails" : [ "clientservices@ga.gov.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "Cnr Jerrabomberra Ave and Hindmarsh Dr GPO Box 378" ],
+      "city" : "Canberra",
+      "country" : "Australia",
+      "postalCode" : "2601",
+      "administrativeArea" : "ACT"
     } ],
-    "centroid" : [ [ 128.494, -11.35 ] ]
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "1800 800 173"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : "02 6249 9960"
+    } ],
+    "links" : null
+  }, {
+    "roles" : [ "pointOfContact", "metadata" ],
+    "organization" : "Commonwealth of Australia (Geoscience Australia)",
+    "name" : null,
+    "position" : null,
+    "emails" : [ "clientservices@ga.gov.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "Cnr Jerrabomberra Ave and Hindmarsh Dr GPO Box 378" ],
+      "city" : "Canberra",
+      "country" : "Australia",
+      "postalCode" : "2601",
+      "administrativeArea" : "ACT"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "1800 800 173"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : "02 6249 9960"
+    } ],
+    "links" : null
+  } ],
+  "languages" : [ {
+    "code" : "eng",
+    "name" : "English"
+  } ],
+  "links" : [ ],
+  "license" : "Creative Commons Attribution 4.0 International Licence",
+  "providers" : [ {
+    "name" : "Commonwealth of Australia (Geoscience Australia)",
+    "roles" : [ "pointOfContact" ]
+  } ],
+  "themes" : [ {
+    "concepts" : [ {
+      "id" : "Seabed sediments",
+      "url" : null
+    } ],
+    "scheme" : "",
+    "description" : "",
+    "title" : "Keywords (FeatureType)"
+  }, {
+    "concepts" : [ ],
+    "scheme" : "",
+    "description" : "",
+    "title" : ""
+  }, {
+    "concepts" : [ {
+      "id" : "Marine Geoscience",
+      "url" : null
+    } ],
+    "scheme" : "theme",
+    "description" : "",
+    "title" : "theme.ANZRC Fields of Research.rdf"
+  }, {
+    "concepts" : [ {
+      "id" : "National Environmental Science Program",
+      "url" : null
+    } ],
+    "scheme" : "",
+    "description" : "",
+    "title" : "Keywords"
+  }, {
+    "concepts" : [ {
+      "id" : "Marine Biodiversity Hub",
+      "url" : null
+    } ],
+    "scheme" : "",
+    "description" : "",
+    "title" : "Keywords"
+  }, {
+    "concepts" : [ {
+      "id" : "Published_External",
+      "url" : null
+    } ],
+    "scheme" : "",
+    "description" : "",
+    "title" : ""
+  } ],
+  "id" : "15e4afbb-5f76-4053-a0d6-a7cf60059f5a",
+  "search_suggestions" : {
+    "abstract_phrases" : [ ]
   },
-  "contacts": [
-    {
-      "roles": [
-        "resourceProvider",
-        "about"
-      ],
-      "organization": "Environmental Geoscience Division",
-      "name": null,
-      "position": null,
-      "emails": null,
-      "addresses": null,
-      "phones": null,
-      "links": null
-    },
-    {
-      "roles": [
-        "pointOfContact",
-        "about"
-      ],
-      "organization": "Commonwealth of Australia (Geoscience Australia)",
-      "name": null,
-      "position": null,
-      "emails": [
-        "clientservices@ga.gov.au"
-      ],
-      "addresses": [
-        {
-          "deliveryPoint": [
-            "Cnr Jerrabomberra Ave and Hindmarsh Dr GPO Box 378"
-          ],
-          "city": "Canberra",
-          "country": "Australia",
-          "postalCode": "2601",
-          "administrativeArea": "ACT"
-        }
-      ],
-      "phones": [
-        {
-          "roles": [
-            "voice"
-          ],
-          "value": "1800 800 173"
-        },
-        {
-          "roles": [
-            "facsimile"
-          ],
-          "value": "02 6249 9960"
-        }
-      ],
-      "links": null
-    },
-    {
-      "roles": [
-        "pointOfContact",
-        "metadata"
-      ],
-      "organization": "Commonwealth of Australia (Geoscience Australia)",
-      "name": null,
-      "position": null,
-      "emails": [
-        "clientservices@ga.gov.au"
-      ],
-      "addresses": [
-        {
-          "deliveryPoint": [
-            "Cnr Jerrabomberra Ave and Hindmarsh Dr GPO Box 378"
-          ],
-          "city": "Canberra",
-          "country": "Australia",
-          "postalCode": "2601",
-          "administrativeArea": "ACT"
-        }
-      ],
-      "phones": [
-        {
-          "roles": [
-            "voice"
-          ],
-          "value": "1800 800 173"
-        },
-        {
-          "roles": [
-            "facsimile"
-          ],
-          "value": "02 6249 9960"
-        }
-      ],
-      "links": null
-    }
-  ],
-  "languages": [
-    {
-      "code": "eng",
-      "name": "English"
-    }
-  ],
-  "links": [],
-  "license": "Creative Commons Attribution 4.0 International Licence",
-  "providers": [
-    {
-      "name": "Commonwealth of Australia (Geoscience Australia)",
-      "roles": [
-        "pointOfContact"
-      ]
-    }
-  ],
-  "themes": [
-    {
-      "concepts": [
-        {
-          "id": "Seabed sediments",
-          "url": null
-        }
-      ],
-      "scheme": "",
-      "description": "",
-      "title": "Keywords (FeatureType)"
-    },
-    {
-      "concepts": [],
-      "scheme": "",
-      "description": "",
-      "title": ""
-    },
-    {
-      "concepts": [
-        {
-          "id": "Marine Geoscience",
-          "url": null
-        }
-      ],
-      "scheme": "theme",
-      "description": "",
-      "title": "theme.ANZRC Fields of Research.rdf"
-    },
-    {
-      "concepts": [
-        {
-          "id": "National Environmental Science Program",
-          "url": null
-        }
-      ],
-      "scheme": "",
-      "description": "",
-      "title": "Keywords"
-    },
-    {
-      "concepts": [
-        {
-          "id": "Marine Biodiversity Hub",
-          "url": null
-        }
-      ],
-      "scheme": "",
-      "description": "",
-      "title": "Keywords"
-    },
-    {
-      "concepts": [
-        {
-          "id": "Published_External",
-          "url": null
-        }
-      ],
-      "scheme": "",
-      "description": "",
-      "title": ""
-    }
-  ],
-  "id": "15e4afbb-5f76-4053-a0d6-a7cf60059f5a",
-  "search_suggestions": {
-    "abstract_phrases": []
-  },
-  "sci:citation": "{\"suggestedCitation\":null,\"useLimitations\":null,\"otherConstraints\":null}",
-  "type": "Collection",
-  "stac_version": "1.0.0",
-  "stac_extensions": [
-    "https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/contacts/v0.1.1/schema.json",
-    "https://stac-extensions.github.io/projection/v1.1.0/schema.json",
-    "https://stac-extensions.github.io/language/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/themes/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/web-map-links/v1.2.0/schema.json"
-  ]
+  "sci:citation" : "{\"suggestedCitation\":null,\"useLimitations\":null,\"otherConstraints\":null}",
+  "type" : "Collection",
+  "stac_version" : "1.0.0",
+  "stac_extensions" : [ "https://stac-extensions.github.io/scientific/v1.0.0/schema.json", "https://stac-extensions.github.io/contacts/v0.1.1/schema.json", "https://stac-extensions.github.io/projection/v1.1.0/schema.json", "https://stac-extensions.github.io/language/v1.0.0/schema.json", "https://stac-extensions.github.io/themes/v1.0.0/schema.json", "https://stac-extensions.github.io/web-map-links/v1.2.0/schema.json" ]
 }
