@@ -18,7 +18,6 @@ import org.locationtech.jts.geom.*;
 import org.locationtech.jts.operation.union.UnaryUnionOp;
 import org.locationtech.jts.simplify.DouglasPeuckerSimplifier;
 import org.opengis.feature.simple.SimpleFeature;
-import org.springframework.core.io.ClassPathResource;
 
 import java.io.*;
 import java.net.URL;
@@ -57,8 +56,8 @@ public class GeometryUtils {
     public static void init() {
         try {
             // shp file depends on shx, so need to have shx appear in temp folder.
-            saveResourceToTemp("land/ne_10m_land.shx", "shapefile.shx");
-            File tempFile = saveResourceToTemp("land/ne_10m_land.shp", "shapefile.shp");
+            FileUtils.saveResourceToTemp("land/ne_10m_land.shx", "shapefile.shx");
+            File tempFile = FileUtils.saveResourceToTemp("land/ne_10m_land.shp", "shapefile.shp");
 
             // Load the shapefile from the temporary file using ShapefileDataStore
             URL tempFileUrl = tempFile.toURI().toURL();
@@ -97,28 +96,6 @@ public class GeometryUtils {
         catch(IOException ioe) {
             throw new RuntimeException(ioe);
         }
-    }
-
-    protected static File saveResourceToTemp(String resourceName, String filename) {
-        String tempDir = System.getProperty("java.io.tmpdir");
-        ClassPathResource resource = new ClassPathResource(resourceName);
-
-        File tempFile = new File(tempDir, filename);
-        try(InputStream input = resource.getInputStream()) {
-            tempFile.deleteOnExit();  // Ensure the file is deleted when the JVM exits
-
-            // Write the InputStream to the temporary file
-            try (FileOutputStream outputStream = new FileOutputStream(tempFile)) {
-                byte[] buffer = new byte[1024];
-                int bytesRead;
-                while ((bytesRead = input.read(buffer)) != -1) {
-                    outputStream.write(buffer, 0, bytesRead);
-                }
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return tempFile;
     }
     /**
      * @param polygons - Assume to be EPSG:4326, as GeoJson always use this encoding.
