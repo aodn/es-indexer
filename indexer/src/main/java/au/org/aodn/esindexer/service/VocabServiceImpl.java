@@ -140,13 +140,23 @@ public class VocabServiceImpl implements VocabService {
         return results;
     }
 
-    public List<VocabModel> getMappedOrganisationVocabsFromContacts(List<ContactsModel> contacts) throws IOException {
-        // the organisation information is found in either contact or citation of a record
-        // TODO: get the point of contact's org of "citation" section only <gmd:pointOfContact> -> <gmd:organisationName> | <gmd:citedResponsibleParty>
-        // if IMOS in cited responsible party , ignore and look at the keywords, if doesn't have keywords, indentify "specific" IMOS sub-facility e.g Ocean Gliders Facility, Integrated Marine Observing System (IMOS)
-        Set<String> rolesToCheck = Set.of("metadata", "citation");
-        List<String> contactOrgs = new ArrayList<>();
+    public List<String> extractOrganisationVocabLabelsFromThemes(List<ThemesModel> themes) {
+        List<String> results = new ArrayList<>();
+        themes.stream().filter(Objects::nonNull).forEach(theme -> {
+            if (theme.getTitle().toLowerCase().contains("aodn organisation vocabulary")) {
+                for (ConceptModel conceptModel : theme.getConcepts()) {
+                    if (conceptModel.getId() != null && !conceptModel.getId().isEmpty()) {
+                        results.add(conceptModel.getId());
+                    }
+                }
+            }
+        });
+        return results;
+    }
 
+    public List<VocabModel> getMappedOrganisationVocabsFromContacts(List<ContactsModel> contacts) throws IOException {
+        Set<String> rolesToCheck = Set.of("pointOfContact", "citation");
+        List<String> contactOrgs = new ArrayList<>();
         // target only contact's organisations of the 2 above roles
         for (ContactsModel contact : contacts) {
             if (contact.getRoles().stream().anyMatch(rolesToCheck::contains)) {
@@ -201,7 +211,7 @@ public class VocabServiceImpl implements VocabService {
         for (String label : labels) {
             if (label != null) {
                 for (String contactOrg : contactOrgs) {
-                    if (label.toLowerCase().contains(contactOrg.toLowerCase())) {
+                    if (label.equalsIgnoreCase(contactOrg)) {
                         return true;
                     }
                 }

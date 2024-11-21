@@ -10,13 +10,13 @@ import java.util.List;
 
 public interface VocabService {
     List<String> extractVocabLabelsFromThemes(List<ThemesModel> themes, String vocabType) throws IOException;
+    List<String> extractOrganisationVocabLabelsFromThemes(List<ThemesModel> themes) throws IOException;
     List<VocabModel> getMappedOrganisationVocabsFromContacts(List<ContactsModel> contacts) throws IOException;
     void populateVocabsData() throws IOException;
     void populateVocabsDataAsync();
     void clearParameterVocabCache();
     void clearPlatformVocabCache();
     void clearOrganisationVocabCache();
-
     List<JsonNode> getParameterVocabs() throws IOException;
     List<JsonNode> getPlatformVocabs() throws IOException;
     List<JsonNode> getOrganisationVocabs() throws IOException;

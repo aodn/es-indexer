@@ -208,33 +208,20 @@ public class IndexerServiceImpl implements IndexerService {
         }
 
         // organisation vocabs
-        // this is for IMOS's records that already come with "organisation vocabs"
-        // // if IMOS in cited responsible party , ignore and look at the keywords, if doesn't have keywords, indentify "specific" IMOS sub-facility e.g Ocean Gliders Facility, Integrated Marine Observing System (IMOS)
-        List<String> organisationLabelsFromThemes = new ArrayList<>();
-        // manual mapping with custom logics
-        List<VocabModel> mappedOrganisationVocabsFromContacts = vocabService.getMappedOrganisationVocabsFromContacts(stacCollectionModel.getContacts());
-        List<String> mappedOrganisationLabels = new ArrayList<>();
-        if (!mappedOrganisationVocabsFromContacts.isEmpty()) {
-            for (VocabModel vocabModel : mappedOrganisationVocabsFromContacts) {
-                // Add labels for the current vocab model
-                mappedOrganisationLabels.addAll(extractOrderedLabels(vocabModel));
-
-                // TODO: should use low level (as-is) or looking up for upper level's organisation vocab? e.g AODN or IMOS?
-                // TODO : in future, maybe hackaround with AAD
-                // Check narrower labels and add them as well
-                if (safeGet(vocabModel::getNarrower).isPresent()) {
-                    for (VocabModel narrower : vocabModel.getNarrower()) {
-                        mappedOrganisationLabels.addAll(extractOrderedLabels(narrower));
-                    }
+        Set<String> mappedOrganisationLabels = new HashSet<>();
+        List<String> organisationLabelsFromThemes = vocabService.extractOrganisationVocabLabelsFromThemes(stacCollectionModel.getThemes());
+        if (!organisationLabelsFromThemes.isEmpty()) {
+            mappedOrganisationLabels.addAll(organisationLabelsFromThemes);
+        } else {
+            // manual mapping with custom logics when the record doesn't have existing AODN Organisation Vocabs
+            List<VocabModel> mappedOrganisationVocabsFromContacts = vocabService.getMappedOrganisationVocabsFromContacts(stacCollectionModel.getContacts());
+            if (!mappedOrganisationVocabsFromContacts.isEmpty()) {
+                for (VocabModel vocabModel : mappedOrganisationVocabsFromContacts) {
+                    mappedOrganisationLabels.addAll(extractOrderedLabels(vocabModel));
                 }
             }
-
-            stacCollectionModel.getSummaries().setOrganisationVocabs(
-                Stream.concat(mappedOrganisationLabels.stream(), organisationLabelsFromThemes.stream())
-                    .distinct()
-                    .collect(Collectors.toList())
-            );
         }
+        stacCollectionModel.getSummaries().setOrganisationVocabs(new ArrayList<>(mappedOrganisationLabels));
 
         // search_as_you_type enabled fields can be extended
         SearchSuggestionsModel searchSuggestionsModel = SearchSuggestionsModel.builder()
