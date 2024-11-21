@@ -26,11 +26,13 @@ public class GeometryUtilsTest {
     @BeforeEach
     public void init() {
         GeometryUtils.setCoastalPrecision(0.03);
-        GeometryUtils.init();
     }
 
     @Test
     public void verifyLandStrippedFromSpatialExtents() throws IOException, JAXBException {
+        GeometryUtils.setReducerPrecision(null);
+        GeometryUtils.init();
+
         String xml = readResourceFile("classpath:canned/sample_complex_area.xml");
         MDMetadataType source = jaxb.unmarshal(xml);
         // Whole spatial extends
@@ -86,5 +88,52 @@ public class GeometryUtilsTest {
 
         assertEquals(126.0, ncoors[3].getX(), 0.01);
         assertEquals(-35.9999, ncoors[3].getY(), 0.01);
+    }
+    /**
+     * This test turn on the reducer to further reduce the complexity of the land area after
+     * DouglasPeuckerSimplifier simplifier, this further reduce the number of digit to get a smaller geojson
+     * which should improve transfer speed.
+     *
+     * @throws IOException - Not expect to throw
+     * @throws JAXBException - Not expect to throw
+     */
+    @Test
+    public void verifyLandStrippedFromSpatialExtentsWithReducerOn() throws IOException, JAXBException {
+        GeometryUtils.setReducerPrecision(4.0);
+        GeometryUtils.init();
+
+        String xml = readResourceFile("classpath:canned/sample_complex_area.xml");
+        MDMetadataType source = jaxb.unmarshal(xml);
+
+        // Strip the land away.
+        List<List<Geometry>> noLand = GeometryUtils.createGeometryItems(
+                source,
+                (rawInput, s) -> GeometryUtils.createGeometryWithoutLand(rawInput),
+                null
+        );
+
+        List<List<Geometry>> nl = Objects.requireNonNull(noLand);
+
+        assertEquals(nl.size(),1, "No Land have 1 polygon array");
+        assertEquals(16, nl.get(0).size(), "Size 16 with land");
+
+        Geometry nle = nl.get(0).get(0).getEnvelope();
+        Coordinate[] ncoors = nle.getCoordinates();
+
+        // The envelope of the two polygon should match given one is the original and the other just strip the land
+        assertEquals(118.0, ncoors[0].getX(), 0.00);
+        assertEquals(-36.0, ncoors[0].getY(), 0.00);
+
+        assertEquals(118.0, ncoors[1].getX(), 0.00);
+        assertEquals(-32.25, ncoors[1].getY(), 0.00);
+
+        assertEquals(126, ncoors[2].getX(), 0.00);
+        assertEquals(-32.25, ncoors[2].getY(), 0.00);
+
+        assertEquals(126.0, ncoors[3].getX(), 0.00);
+        assertEquals(-36.0, ncoors[3].getY(), 0.00);
+
+        assertEquals(118.0, ncoors[4].getX(), 0.00);
+        assertEquals(-36.0, ncoors[4].getY(), 0.00);
     }
 }

@@ -7,6 +7,7 @@ spring:
 app:
   geometry:
     enableGridSpatialExtents: true
+    reducerPrecision: 4.0
 
 management:
   endpoints:

@@ -8,6 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.geotools.data.shapefile.ShapefileDataStore;
 import org.geotools.data.shapefile.ShapefileDataStoreFactory;
+import org.locationtech.jts.precision.GeometryPrecisionReducer;
 import org.geotools.data.simple.SimpleFeatureCollection;
 import org.geotools.data.simple.SimpleFeatureIterator;
 import org.geotools.data.simple.SimpleFeatureSource;
@@ -17,7 +18,6 @@ import org.locationtech.jts.geom.*;
 import org.locationtech.jts.operation.union.UnaryUnionOp;
 import org.locationtech.jts.simplify.DouglasPeuckerSimplifier;
 import org.opengis.feature.simple.SimpleFeature;
-import org.springframework.core.io.ClassPathResource;
 
 import java.io.*;
 import java.net.URL;
@@ -45,13 +45,24 @@ public class GeometryUtils {
     @Getter
     @Setter
     protected static double coastalPrecision = 0.1;
+    // A value based on trial and error, to simplify the polygon to avoid complex geojson that takes time to transfer
+    // By default is set to null to disable it so test case do not need to change, but each env have this value set
+    // to reduce processing time.
+    @Getter
+    @Setter
+    protected static Double reducerPrecision = null;
+
+    protected static GeometryPrecisionReducer reducer = null;
 
     // Load a coastline shape file so that we can get a spatial extents that cover sea only
-    public static void init() {
+    public static synchronized void init() {
         try {
+            // Reset reducer
+            reducer = null;
+
             // shp file depends on shx, so need to have shx appear in temp folder.
-            saveResourceToTemp("land/ne_10m_land.shx", "shapefile.shx");
-            File tempFile = saveResourceToTemp("land/ne_10m_land.shp", "shapefile.shp");
+            FileUtils.saveResourceToTemp("land/ne_10m_land.shx", "shapefile.shx");
+            File tempFile = FileUtils.saveResourceToTemp("land/ne_10m_land.shp", "shapefile.shp");
 
             // Load the shapefile from the temporary file using ShapefileDataStore
             URL tempFileUrl = tempFile.toURI().toURL();
@@ -62,6 +73,11 @@ public class GeometryUtils {
             // Step 3: Extract the land geometry from the shapefile
             SimpleFeatureCollection featureCollection = featureSource.getFeatures();
             List<Geometry> geometries = new ArrayList<>();
+
+            if(getReducerPrecision() != null) {
+                PrecisionModel pm = new PrecisionModel(getReducerPrecision()); // 1 / 1000 meters ~= 1km
+                reducer = new GeometryPrecisionReducer(pm);
+            }
 
             try (SimpleFeatureIterator iterator = featureCollection.features()) {
                 while (iterator.hasNext()) {
@@ -75,7 +91,7 @@ public class GeometryUtils {
                     Geometry simplifiedGeometry = DouglasPeuckerSimplifier
                             .simplify(landFeatureGeometry, getCoastalPrecision()); // Adjust tolerance
 
-                    geometries.add(simplifiedGeometry);
+                    geometries.add(reducer != null ? reducer.reduce(simplifiedGeometry) : simplifiedGeometry);
                 }
             }
             // Faster to use union list rather than union by geometry one by one.
@@ -84,28 +100,6 @@ public class GeometryUtils {
         catch(IOException ioe) {
             throw new RuntimeException(ioe);
         }
-    }
-
-    protected static File saveResourceToTemp(String resourceName, String filename) {
-        String tempDir = System.getProperty("java.io.tmpdir");
-        ClassPathResource resource = new ClassPathResource(resourceName);
-
-        File tempFile = new File(tempDir, filename);
-        try(InputStream input = resource.getInputStream()) {
-            tempFile.deleteOnExit();  // Ensure the file is deleted when the JVM exits
-
-            // Write the InputStream to the temporary file
-            try (FileOutputStream outputStream = new FileOutputStream(tempFile)) {
-                byte[] buffer = new byte[1024];
-                int bytesRead;
-                while ((bytesRead = input.read(buffer)) != -1) {
-                    outputStream.write(buffer, 0, bytesRead);
-                }
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return tempFile;
     }
     /**
      * @param polygons - Assume to be EPSG:4326, as GeoJson always use this encoding.
@@ -252,6 +246,7 @@ public class GeometryUtils {
                             // it fixed the non-noded intersection issue
                             .map(geometry -> geometry.isValid() ? geometry : geometry.buffer(0))
                             .map(geometry -> geometry.difference(landGeometry))
+                            .map(geometry -> reducer != null ? reducer.reduce(geometry) : geometry)
                             .map(GeometryUtils::convertToListGeometry)
                             .flatMap(Collection::stream)
                             .toList()
@@ -347,9 +342,10 @@ public class GeometryUtils {
     public static Map<?, ?> createGeometryFrom(List<List<AbstractEXGeographicExtentType>> rawInput, Integer gridSize) {
         // The return polygon is in EPSG:4326, so we can call createGeoJson directly
 
-        // This line will cause the spatial extents to break into grid, it may help to debug but will make production
-        // slow and sometimes cause polygon break.
-        // List<List<Geometry>> polygonNoLand = splitAreaToGrid(createGeometryWithoutLand(rawInput));
+        // Un-remark this line and remark the line below if you want to visualize the polygon on map, change this
+        // line will cause the spatial extends draw on map with land removed.
+        // List<List<Geometry>> polygon = createGeometryWithoutLand(rawInput);
+
         List<List<Geometry>> polygon = GeometryBase.findPolygonsFrom(GeometryBase.COORDINATE_SYSTEM_CRS84, rawInput);
         return (polygon != null && !polygon.isEmpty()) ? createGeoJson(polygon) : null;
     }
