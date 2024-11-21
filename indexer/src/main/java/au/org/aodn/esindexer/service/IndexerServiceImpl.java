@@ -270,13 +270,17 @@ public class IndexerServiceImpl implements IndexerService {
         long dataSize = 0;
         final long maxSize = 5242880; // is 5mb
 
+        int requestCount = 0;
+        final long maxRequestCount = 200;
+
         var dataset = new DatasetProvider(uuid, startDate, endDate, dataAccessService).getIterator();
         try {
             for (var entry : dataset) {
                 if (entry == null) {
                     continue;
                 }
-                log.info("add dataset into b with UUID: {} and yearMonth: {}", entry.uuid(), entry.yearMonth());
+                log.info("index name: {}", datasetIndexName);
+                log.info("add dataset with UUID: {} and yearMonth: {}", entry.uuid(), entry.yearMonth());
 
                 bulkRequest.operations(operation -> operation.index(
                         indexReq -> indexReq
@@ -284,11 +288,16 @@ public class IndexerServiceImpl implements IndexerService {
                                 .index(datasetIndexName)
                                 .document(entry)
                 ));
+
                 dataSize += indexerObjectMapper.writeValueAsBytes(entry).length;
-                if (dataSize > maxSize) {
+                requestCount++;
+
+                log.info("Data size: {}. Max size: {}; request count: {}", dataSize, maxSize, requestCount);
+                if (dataSize > maxSize || requestCount > maxRequestCount) {
                     log.info("Execute bulk request as bulk request is big enough {}", dataSize);
                     responses.add(reduceResponse(self.executeBulk(bulkRequest, null)));
                     dataSize = 0;
+                    requestCount = 0;
                     bulkRequest = new BulkRequest.Builder();
                 }
             }
