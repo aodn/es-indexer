@@ -52,6 +52,8 @@ public class GeometryUtils {
     @Setter
     protected static Double reducerPrecision = null;
 
+    protected static GeometryPrecisionReducer reducer = null;
+
     // Load a coastline shape file so that we can get a spatial extents that cover sea only
     public static void init() {
         try {
@@ -69,7 +71,6 @@ public class GeometryUtils {
             SimpleFeatureCollection featureCollection = featureSource.getFeatures();
             List<Geometry> geometries = new ArrayList<>();
 
-            GeometryPrecisionReducer reducer = null;
             if(getReducerPrecision() != null) {
                 PrecisionModel pm = new PrecisionModel(getReducerPrecision()); // 1 / 1000 meters ~= 1km
                 reducer = new GeometryPrecisionReducer(pm);
@@ -242,6 +243,7 @@ public class GeometryUtils {
                             // it fixed the non-noded intersection issue
                             .map(geometry -> geometry.isValid() ? geometry : geometry.buffer(0))
                             .map(geometry -> geometry.difference(landGeometry))
+                            .map(geometry -> reducer != null ? reducer.reduce(geometry) : geometry)
                             .map(GeometryUtils::convertToListGeometry)
                             .flatMap(Collection::stream)
                             .toList()
@@ -337,7 +339,7 @@ public class GeometryUtils {
     public static Map<?, ?> createGeometryFrom(List<List<AbstractEXGeographicExtentType>> rawInput, Integer gridSize) {
         // The return polygon is in EPSG:4326, so we can call createGeoJson directly
 
-        // Un-remark this line and remark the line above if you want to visualize the polygon on map, change this
+        // Un-remark this line and remark the line below if you want to visualize the polygon on map, change this
         // line will cause the spatial extends draw on map with land removed.
         // List<List<Geometry>> polygon = createGeometryWithoutLand(rawInput);
 

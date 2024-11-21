@@ -1,6 +1,6 @@
 app:
   geometry:
-    reducerPrecision: 2.0
+    reducerPrecision: 4.0
 
 management:
   endpoints:
