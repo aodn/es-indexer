@@ -187,13 +187,21 @@ public class IndexerServiceImpl implements IndexerService {
         stacCollectionModel.getSummaries().setScore(score);
 
         // parameter vocabs
-        List<String> mappedParameterVocabsFromGcmdKeywords = gcmdKeywordUtils.getMappedParameterVocabsFromGcmdKeywords(stacCollectionModel.getThemes());
-        List<String> processedParameterVocabs = vocabService.extractVocabLabelsFromThemes(stacCollectionModel.getThemes(), AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS);
+        Set<String> mappedParameterLabels = new HashSet<>();
+        List<String> processedParameterVocabs = vocabService.extractVocabLabelsFromThemes(
+                stacCollectionModel.getThemes(), AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS
+        );
 
         if (!processedParameterVocabs.isEmpty()) {
-            // TODO: do not concat if record already has AODN param vocabs
-            stacCollectionModel.getSummaries().setParameterVocabs(Stream.concat(mappedParameterVocabsFromGcmdKeywords.stream(), processedParameterVocabs.stream()).distinct().collect(Collectors.toList()));
+            mappedParameterLabels.addAll(processedParameterVocabs);
+        } else {
+            // manual mapping with custom logic when the record doesn't have existing AODN Parameter Vocabs
+            List<String> mappedParameterVocabsFromGcmdKeywords = gcmdKeywordUtils.getMappedParameterVocabsFromGcmdKeywords(stacCollectionModel.getThemes());
+            if (!mappedParameterVocabsFromGcmdKeywords.isEmpty()) {
+                mappedParameterLabels.addAll(mappedParameterVocabsFromGcmdKeywords);
+            }
         }
+        stacCollectionModel.getSummaries().setParameterVocabs(new ArrayList<>(mappedParameterLabels));
 
         /*
         NOTE: The following implementation for platform and organization vocabularies is just a placeholder, not the final version.
