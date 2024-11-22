@@ -155,14 +155,28 @@ public class VocabServiceImpl implements VocabService {
     }
 
     public List<VocabModel> getMappedOrganisationVocabsFromContacts(List<ContactsModel> contacts) throws IOException {
-        Set<String> rolesToCheck = Set.of("pointOfContact", "citation");
         List<String> contactOrgs = new ArrayList<>();
-        // target only contact's organisations of the 2 above roles
+        String citationRole = "citation";
+        String pointOfContactRole = "pointOfContact";
+
+        // top priority to citation: cit:citedResponsibleParty>
         for (ContactsModel contact : contacts) {
-            if (contact.getRoles().stream().anyMatch(rolesToCheck::contains)) {
+            if (contact.getRoles().contains(citationRole)) {
                 String contactOrg = contact.getOrganization();
                 if (contactOrg != null) {
                     contactOrgs.add(contactOrg);
+                }
+            }
+        }
+
+        // second priority
+        if (contactOrgs.isEmpty()) {
+            for (ContactsModel contact : contacts) {
+                if (contact.getRoles().contains(pointOfContactRole)) {
+                    String contactOrg = contact.getOrganization();
+                    if (contactOrg != null) {
+                        contactOrgs.add(contactOrg);
+                    }
                 }
             }
         }
