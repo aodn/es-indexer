@@ -1,606 +1,214 @@
 {
-  "title": "Heat-evolved microalgal symbionts increase thermal bleaching tolerance of coral juveniles without a trade-off against growth",
-  "description": "This study was designed to test the effect of heat-evolved macroalgal symbionts against bleaching tolerance in juvenile corals in response to a simulated heatwave.\n\n\nJuveniles of the coral Acropora tenuis were infected with either wildtype (WT10) or heat-evolved (SS1 or SS8) strains of the Symbiodiniaceae species Cladocopium C1acro (formerly Cladocopium goreaui 2&ndash;4).\n\n\nThe juveniles were maintained at ambient conditions (27&deg;C) for 10 months at which time their size was measured. Growth, survival, and metabolism data were collected following a simulated heatwave (31&deg;C for 41 days).\n\n\nPhotographs and PSII maximum quantum yields (Fv/Fm) were collected throughout the heat stress period, stable isotope incubation and cell counts were carried out on day 39, and respirometry on days 40-41. Symbiodiniaceae cell densities per juvenile were quantified to assess bleaching.\n\n\nStatistical analyses were run in R and respirometry data was analysed using the respR package.\n\n\nFull methods and technical details are found in the paper https://ssrn.com/abstract=3981099",
-  "extent": {
-    "bbox": [
-      [
-        146.85,
-        -19.168333,
-        146.862133,
-        -19.10415
-      ],
-      [
-        146.862133,
-        -19.10415,
-        146.862133,
-        -19.10415
-      ],
-      [
-        146.85,
-        -19.168333,
-        146.85,
-        -19.168333
-      ]
-    ],
-    "temporal": [
-      [
-        "2018-10-28T13:00:00Z",
-        "2019-11-20T12:59:59Z"
-      ],
-      [
-        "2018-10-28T13:00:00Z",
-        "2019-11-20T12:59:59Z"
-      ]
-    ]
+  "title" : "Heat-evolved microalgal symbionts increase thermal bleaching tolerance of coral juveniles without a trade-off against growth",
+  "description" : "This study was designed to test the effect of heat-evolved macroalgal symbionts against bleaching tolerance in juvenile corals in response to a simulated heatwave.\n\n\n                    Juveniles of the coral Acropora tenuis were infected with either wildtype (WT10) or heat-evolved (SS1 or SS8) strains of the Symbiodiniaceae species Cladocopium C1acro (formerly Cladocopium goreaui 2&ndash;4).\n\n\n                    The juveniles were maintained at ambient conditions (27&deg;C) for 10 months at which time their size was measured. Growth, survival, and metabolism data were collected following a simulated heatwave (31&deg;C for 41 days).\n\n\n                    Photographs and PSII maximum quantum yields (Fv/Fm) were collected throughout the heat stress period, stable isotope incubation and cell counts were carried out on day 39, and respirometry on days 40-41. Symbiodiniaceae cell densities per juvenile were quantified to assess bleaching.\n\n\n                    Statistical analyses were run in R and respirometry data was analysed using the respR package.\n\n\n                    Full methods and technical details are found in the paper https://ssrn.com/abstract=3981099",
+  "extent" : {
+    "bbox" : [ [ 146.85, -19.168333, 146.862133, -19.10415 ], [ 146.862133, -19.10415, 146.862133, -19.10415 ], [ 146.85, -19.168333, 146.85, -19.168333 ] ],
+    "temporal" : [ [ "2018-10-28T13:00:00Z", "2019-11-20T12:59:59Z" ], [ "2018-10-28T13:00:00Z", "2019-11-20T12:59:59Z" ] ]
   },
-  "summaries": {
-    "score": 70,
-    "status": "completed",
-    "credits": [
-      "Quigley, KM. Australian Institute of Marine Science (AIMS)",
-      "Alvarez Roa, C. (AIMS)",
-      "Raina, JB. University of Technology, Sydney (UTS)",
-      "Pernice, M. (UTS)",
-      "van Oppen, MJH. (AIMS) and University of Melbourne"
-    ],
-    "scope": {
-      "code": "dataset",
-      "name": ""
+  "summaries" : {
+    "score" : 1,
+    "status" : "completed",
+    "credits" : [ "Quigley, KM. Australian Institute of Marine Science (AIMS)", "Alvarez Roa, C. (AIMS)", "Raina, JB. University of Technology, Sydney (UTS)", "Pernice, M. (UTS)", "van Oppen, MJH. (AIMS) and University of Melbourne" ],
+    "scope" : {
+      "code" : "dataset",
+      "name" : ""
     },
-    "statement": "",
-    "creation": "2022-02-08T00:00:00",
-    "revision": "2024-03-15T00:00:00",
-    "dataset_group": "aims",
-    "update_frequency": "completed",
-    "proj:geometry": {
-      "geometries": [
-        {
-          "type": "Point",
-          "coordinates": [
-            146.862133,
-            -19.10415
-          ]
-        },
-        {
-          "type": "Point",
-          "coordinates": [
-            146.85,
-            -19.168333
-          ]
-        }
-      ],
-      "type": "GeometryCollection"
+    "statement" : "",
+    "creation" : "2022-02-08T00:00:00",
+    "revision" : "2024-03-15T00:00:00",
+    "update_frequency" : "completed",
+    "proj:geometry" : {
+      "geometries" : [ {
+        "type" : "Point",
+        "coordinates" : [ 146.862133, -19.10415 ]
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.85, -19.168333 ]
+      } ],
+      "type" : "GeometryCollection"
     },
-    "proj:geometry_noland": {
-      "geometries": [
-        {
-          "type": "Point",
-          "coordinates": [
-            146.75,
-            -19
-          ]
-        },
-        {
-          "type": "Point",
-          "coordinates": [
-            146.75,
-            -19.25
-          ]
-        }
-      ],
-      "type": "GeometryCollection"
+    "proj:geometry_noland" : {
+      "geometries" : [ {
+        "type" : "Point",
+        "coordinates" : [ 146.862133, -19.10415 ]
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.85, -19.168333 ]
+      } ],
+      "type" : "GeometryCollection"
     },
-    "temporal": [
-      {
-        "start": "2018-10-28T13:00:00Z",
-        "end": "2019-11-20T12:59:59Z"
-      }
-    ]
+    "temporal" : [ {
+      "start" : "2018-10-28T13:00:00Z",
+      "end" : "2019-11-20T12:59:59Z"
+    } ],
+    "parameter_vocabs" : [ ],
+    "organisation_vocabs" : [ ]
   },
-  "contacts": [
-    {
-      "roles": [
-        "principalInvestigator",
-        "about"
-      ],
-      "organization": "Australian Institute of Marine Science (AIMS)",
-      "name": "Quigley, KM",
-      "position": "",
-      "emails": [
-        "reception@aims.gov.au"
-      ],
-      "addresses": [
-        {
-          "delivery_point": [
-            "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE"
-          ],
-          "city": "TOWNSVILLE",
-          "country": "Australia",
-          "postal_code": "4810",
-          "administrative_area": "Queensland"
-        }
-      ],
-      "phones": [
-        {
-          "roles": [
-            "voice"
-          ],
-          "value": "+61 7 4753 4444"
-        },
-        {
-          "roles": [
-            "facsimile"
-          ],
-          "value": ""
-        }
-      ],
-      "links": [
-        {
-          "href": "https://www.aims.gov.au",
-          "type": "WWW:LINK-1.0-http--link",
-          "title": "AIMS Web Site"
-        }
-      ]
-    },
-    {
-      "roles": [
-        "pointOfContact",
-        "about"
-      ],
-      "organization": "Australian Institute of Marine Science (AIMS)",
-      "name": "AIMS Data Centre",
-      "position": "",
-      "emails": [
-        "adc@aims.gov.au"
-      ],
-      "addresses": [
-        {
-          "delivery_point": [
-            "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE"
-          ],
-          "city": "TOWNSVILLE",
-          "country": "Australia",
-          "postal_code": "4810",
-          "administrative_area": "Queensland"
-        }
-      ],
-      "phones": [
-        {
-          "roles": [
-            "voice"
-          ],
-          "value": "+61 7 4753 4444"
-        },
-        {
-          "roles": [
-            "facsimile"
-          ],
-          "value": ""
-        }
-      ],
-      "links": [
-        {
-          "href": "https://www.aims.gov.au",
-          "type": "WWW:LINK-1.0-http--link",
-          "title": "AIMS Web Site"
-        }
-      ]
-    },
-    {
-      "roles": [
-        "pointOfContact",
-        "metadata"
-      ],
-      "organization": "Australian Institute of Marine Science (AIMS)",
-      "name": "",
-      "position": "AIMS Data Centre",
-      "emails": [
-        "adc@aims.gov.au"
-      ],
-      "addresses": [
-        {
-          "delivery_point": [
-            "PRIVATE MAIL BAG 3"
-          ],
-          "city": "TOWNSVILLE MAIL CENTRE",
-          "country": "Australia",
-          "postal_code": "4810",
-          "administrative_area": "Queensland"
-        }
-      ],
-      "phones": [
-        {
-          "roles": [
-            "voice"
-          ],
-          "value": "+61 7 4753 4444"
-        },
-        {
-          "roles": [
-            "facsimile"
-          ],
-          "value": "+61 7 4772 5852"
-        }
-      ],
-      "links": [
-        {
-          "href": "https://www.aims.gov.au/adc",
-          "type": "WWW:LINK-1.0-http--link"
-        }
-      ]
-    },
-    {
-      "roles": [
-        "publisher",
-        "citation"
-      ],
-      "organization": "Australian Institute of Marine Science (AIMS)",
-      "name": "",
-      "position": "",
-      "emails": [
-        "reception@aims.gov.au"
-      ],
-      "addresses": [
-        {
-          "delivery_point": [
-            "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE"
-          ],
-          "city": "TOWNSVILLE",
-          "country": "Australia",
-          "postal_code": "4810",
-          "administrative_area": "Queensland"
-        }
-      ],
-      "phones": [
-        {
-          "roles": [
-            "voice"
-          ],
-          "value": "+61 7 4753 4444"
-        },
-        {
-          "roles": [
-            "facsimile"
-          ],
-          "value": ""
-        }
-      ],
-      "links": [
-        {
-          "href": "https://www.aims.gov.au",
-          "type": "WWW:LINK-1.0-http--link",
-          "title": "AIMS Web Site"
-        }
-      ]
-    },
-    {
-      "roles": [
-        "owner",
-        "citation"
-      ],
-      "organization": "Australian Institute of Marine Science (AIMS)",
-      "name": "",
-      "position": "",
-      "emails": [
-        "reception@aims.gov.au"
-      ],
-      "addresses": [
-        {
-          "delivery_point": [
-            "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE"
-          ],
-          "city": "TOWNSVILLE",
-          "country": "Australia",
-          "postal_code": "4810",
-          "administrative_area": "Queensland"
-        }
-      ],
-      "phones": [
-        {
-          "roles": [
-            "voice"
-          ],
-          "value": "+61 7 4753 4444"
-        },
-        {
-          "roles": [
-            "facsimile"
-          ],
-          "value": ""
-        }
-      ],
-      "links": [
-        {
-          "href": "https://www.aims.gov.au",
-          "type": "WWW:LINK-1.0-http--link",
-          "title": "AIMS Web Site"
-        }
-      ]
-    }
-  ],
-  "languages": [
-    {
-      "code": "eng",
-      "name": "English"
-    }
-  ],
-  "links": [
-    {
-      "href": "https://doi.org/10.1007/s00338-023-02426-z",
-      "rel": "related",
-      "type": "",
-      "title": "Quigley, K.M., Alvarez-Roa, C., Raina, JB. et al. Heat-evolved microalgal symbionts increase thermal bleaching tolerance of coral juveniles without a trade-off against growth. Coral Reefs 42, 1227–1232 (2023). https://doi.org/10.1007/s00338-023-02426-z"
-    },
-    {
-      "href": "https://doi.org/10.1111/2041-210X.13162",
-      "rel": "related",
-      "type": "",
-      "title": "Harianto, J, Carey, N, Byrne, M. respR—An R package for the manipulation and analysis of respirometry data. Methods Ecol Evol. 2019; 10: 912– 920. https://doi.org/10.1111/2041-210X.13162"
-    },
-    {
-      "href": "https://geonetwork-edge.edge.aodn.org.au:443/geonetwork/images/logos/81465e5f-731c-4f72-9b4e-68f2f5e52f41.png",
-      "rel": "icon",
-      "type": "image/png",
-      "title": "Suggest icon for dataset"
-    },
-    {
-      "href": "https://apps.aims.gov.au/metadata/view/1e13ab6e-e546-44f2-a007-061c2815268a",
-      "rel": "describedby",
-      "type": "text/html",
-      "title": "Full metadata link"
-    },
-    {
-      "href": "http://i.creativecommons.org/l/by/3.0/au/88x31.png",
-      "rel": "license",
-      "type": "image/png"
-    },
-    {
-      "href": "http://creativecommons.org/licenses/by/3.0/au/",
-      "rel": "license",
-      "type": "text/html"
-    }
-  ],
-  "license": "Creative Commons Attribution 3.0 Australia License",
-  "providers": [
-    {
-      "name": "Australian Institute of Marine Science (AIMS)",
-      "roles": [
-        "pointOfContact"
-      ]
-    }
-  ],
-  "themes": [],
-  "id": "1e13ab6e-e546-44f2-a007-061c2815268a",
-  "search_suggestions": {
-    "abstract_phrases": [
-      "densities per juvenile",
-      "cell counts were carried",
-      "counts",
-      "counts were",
-      "evolved",
-      "deg",
-      "stress period stable isotope",
-      "macroalgal symbionts",
-      "acropora tenuis were",
-      "wildtype",
-      "respr package",
-      "yields fv",
-      "period stable isotope incubation",
-      "using",
-      "bleaching statistical",
-      "respr package full methods",
-      "symbiodiniaceae species cladocopium",
-      "coral acropora tenuis",
-      "size",
-      "collected following",
-      "photographs",
-      "heat stress period stable",
-      "maximum quantum yields fv",
-      "conditions",
-      "densities",
-      "were infected",
-      "statistical",
-      "cladocopium",
-      "carried out",
-      "psii maximum",
-      "ambient",
-      "strains",
-      "data were collected following",
-      "symbionts against bleaching",
-      "either wildtype",
-      "found",
-      "densities per juvenile were",
-      "psii",
-      "symbiodiniaceae cell densities per",
-      "against bleaching",
-      "assess bleaching statistical",
-      "analyses were",
-      "heat evolved macroalgal symbionts",
-      "days",
-      "maximum",
-      "growth survival",
-      "psii maximum quantum",
-      "coral acropora tenuis were",
-      "cell densities",
-      "heatwave",
-      "package full",
-      "period stable isotope",
-      "run",
-      "fm were",
-      "cell counts",
-      "analyses",
-      "heat stress",
-      "either",
-      "formerly cladocopium goreaui",
-      "tenuis",
-      "per juvenile",
-      "symbionts against bleaching tolerance",
-      "fv fm were collected",
-      "details",
-      "were carried out",
-      "which",
-      "analysed",
-      "respr package full",
-      "test",
-      "acropora tenuis were infected",
-      "per juvenile were",
-      "counts were carried out",
-      "metabolism data were collected",
-      "evolved macroalgal symbionts against",
-      "yields fv fm were",
-      "macroalgal",
-      "symbiodiniaceae species",
-      "juveniles were",
-      "juvenile were",
-      "full",
-      "symbionts against",
-      "technical",
-      "analyses were run",
-      "fm",
-      "coral acropora",
-      "simulated heatwave juveniles",
-      "package full methods",
-      "bleaching statistical analyses were",
-      "fv",
-      "maximum quantum",
-      "respr",
-      "data were",
-      "throughout",
-      "maximum quantum yields",
-      "statistical analyses were run",
-      "evolved macroalgal",
-      "days photographs",
-      "assess bleaching",
-      "heatwave juveniles",
-      "measured growth",
-      "yields",
-      "acropora",
-      "time",
-      "symbiodiniaceae cell densities",
-      "measured",
-      "collected",
-      "bleaching statistical analyses",
-      "were maintained",
-      "heat stress period",
-      "stress period",
-      "https",
-      "per",
-      "period",
-      "corals",
-      "psii maximum quantum yields",
-      "simulated",
-      "were collected throughout",
-      "quantum yields",
-      "fm were collected throughout",
-      "juveniles were maintained",
-      "fm were collected",
-      "evolved macroalgal symbionts",
-      "stable isotope",
-      "tenuis were",
-      "counts were carried",
-      "heat evolved macroalgal",
-      "which time",
-      "following",
-      "juvenile",
-      "goreaui",
-      "ndash",
-      "bleaching tolerance",
-      "fv fm were",
-      "study",
-      "stress period stable",
-      "against",
-      "methods",
-      "isotope",
-      "cell",
-      "densities per",
-      "collected throughout",
-      "out",
-      "juvenile were quantified",
-      "cell densities per",
-      "quantum yields fv",
-      "metabolism data",
-      "macroalgal symbionts against",
-      "infected",
-      "stress",
-      "full methods",
-      "analysed using",
-      "abstract",
-      "juveniles",
-      "assess",
-      "species",
-      "incubation",
-      "were quantified",
-      "deg c",
-      "per juvenile were quantified",
-      "simulated heatwave",
-      "macroalgal symbionts against bleaching",
-      "species cladocopium",
-      "data",
-      "symbionts",
-      "bleaching",
-      "yields fv fm",
-      "respirometry data",
-      "coral",
-      "ambient conditions",
-      "maintained",
-      "metabolism data were",
-      "stable isotope incubation",
-      "day",
-      "tolerance",
-      "symbiodiniaceae cell",
-      "acropora tenuis",
-      "months",
-      "isotope incubation",
-      "package",
-      "survival",
-      "symbiodiniaceae",
-      "data were collected",
-      "heat evolved",
-      "were",
-      "effect",
-      "measured growth survival",
-      "metabolism",
-      "technical details",
-      "formerly cladocopium",
-      "heat",
-      "juvenile corals",
-      "fv fm",
-      "were run",
-      "quantum",
-      "quantum yields fv fm",
-      "assess bleaching statistical analyses",
-      "paper",
-      "cell densities per juvenile",
-      "against bleaching tolerance",
-      "tenuis were infected",
-      "designed",
-      "carried",
-      "were collected following",
-      "cladocopium goreaui",
-      "period stable",
-      "paper https",
-      "respirometry",
-      "quantified",
-      "statistical analyses were",
-      "response",
-      "stable",
-      "were collected",
-      "were carried",
-      "statistical analyses",
-      "growth",
-      "formerly",
-      "cell counts were"
-    ]
+  "contacts" : [ {
+    "roles" : [ "principalInvestigator", "about" ],
+    "organization" : "Australian Institute of Marine Science (AIMS)",
+    "name" : "Quigley, KM",
+    "position" : "",
+    "emails" : [ "reception@aims.gov.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],
+      "city" : "TOWNSVILLE",
+      "country" : "Australia",
+      "postalCode" : "4810",
+      "administrativeArea" : "Queensland"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "+61 7 4753 4444"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : ""
+    } ],
+    "links" : [ {
+      "href" : "https://www.aims.gov.au",
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : "AIMS Web Site"
+    } ]
+  }, {
+    "roles" : [ "pointOfContact", "about" ],
+    "organization" : "Australian Institute of Marine Science (AIMS)",
+    "name" : "AIMS Data Centre",
+    "position" : "",
+    "emails" : [ "adc@aims.gov.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],
+      "city" : "TOWNSVILLE",
+      "country" : "Australia",
+      "postalCode" : "4810",
+      "administrativeArea" : "Queensland"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "+61 7 4753 4444"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : ""
+    } ],
+    "links" : [ {
+      "href" : "https://www.aims.gov.au",
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : "AIMS Web Site"
+    } ]
+  }, {
+    "roles" : [ "pointOfContact", "metadata" ],
+    "organization" : "Australian Institute of Marine Science (AIMS)",
+    "name" : "",
+    "position" : "AIMS Data Centre",
+    "emails" : [ "adc@aims.gov.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "PRIVATE MAIL BAG 3" ],
+      "city" : "TOWNSVILLE MAIL CENTRE",
+      "country" : "Australia",
+      "postalCode" : "4810",
+      "administrativeArea" : "Queensland"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "+61 7 4753 4444"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : "+61 7 4772 5852"
+    } ],
+    "links" : [ {
+      "href" : "https://www.aims.gov.au/adc",
+      "type" : "WWW:LINK-1.0-http--link"
+    } ]
+  }, {
+    "roles" : [ "publisher", "citation" ],
+    "organization" : "Australian Institute of Marine Science (AIMS)",
+    "name" : "",
+    "position" : "",
+    "emails" : [ "reception@aims.gov.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],
+      "city" : "TOWNSVILLE",
+      "country" : "Australia",
+      "postalCode" : "4810",
+      "administrativeArea" : "Queensland"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "+61 7 4753 4444"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : ""
+    } ],
+    "links" : [ {
+      "href" : "https://www.aims.gov.au",
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : "AIMS Web Site"
+    } ]
+  }, {
+    "roles" : [ "owner", "citation" ],
+    "organization" : "Australian Institute of Marine Science (AIMS)",
+    "name" : "",
+    "position" : "",
+    "emails" : [ "reception@aims.gov.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],
+      "city" : "TOWNSVILLE",
+      "country" : "Australia",
+      "postalCode" : "4810",
+      "administrativeArea" : "Queensland"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "+61 7 4753 4444"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : ""
+    } ],
+    "links" : [ {
+      "href" : "https://www.aims.gov.au",
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : "AIMS Web Site"
+    } ]
+  } ],
+  "languages" : [ {
+    "code" : "eng",
+    "name" : "English"
+  } ],
+  "links" : [ {
+    "href" : "https://doi.org/10.1007/s00338-023-02426-z",
+    "rel" : "related",
+    "type" : "",
+    "title" : "Quigley, K.M., Alvarez-Roa, C., Raina, JB. et al. Heat-evolved microalgal symbionts increase thermal bleaching tolerance of coral juveniles without a trade-off against growth. Coral Reefs 42, 1227–1232 (2023). https://doi.org/10.1007/s00338-023-02426-z"
+  }, {
+    "href" : "https://doi.org/10.1111/2041-210X.13162",
+    "rel" : "related",
+    "type" : "",
+    "title" : "Harianto, J, Carey, N, Byrne, M. respR—An R package for the manipulation and analysis of respirometry data. Methods Ecol Evol. 2019; 10: 912– 920. https://doi.org/10.1111/2041-210X.13162"
+  }, {
+    "href" : "https://apps.aims.gov.au/metadata/view/1e13ab6e-e546-44f2-a007-061c2815268a",
+    "rel" : "describedby",
+    "type" : "text/html",
+    "title" : "Full metadata link"
+  }, {
+    "href" : "http://i.creativecommons.org/l/by/3.0/au/88x31.png",
+    "rel" : "license",
+    "type" : "image/png"
+  }, {
+    "href" : "http://creativecommons.org/licenses/by/3.0/au/",
+    "rel" : "license",
+    "type" : "text/html"
+  } ],
+  "license" : "Creative Commons Attribution 3.0 Australia License",
+  "providers" : [ {
+    "name" : "Australian Institute of Marine Science (AIMS)",
+    "roles" : [ "pointOfContact" ]
+  } ],
+  "themes" : [ ],
+  "id" : "1e13ab6e-e546-44f2-a007-061c2815268a",
+  "search_suggestions" : {
+    "abstract_phrases" : [ ]
   },
-  "sci:citation": "{\"suggestedCitation\":\"Attribution: Format for citation of metadata sourced from Australian Institute of Marine Science (AIMS) in a list of reference is as follows: \\\"Australian Institute of Marine Science (AIMS). (2022). Heat-evolved microalgal symbionts increase thermal bleaching tolerance of coral juveniles without a trade-off against growth. https://apps.aims.gov.au/metadata/view/1e13ab6e-e546-44f2-a007-061c2815268a, accessed[date-of-access]\\\".\",\"useLimitations\":null,\"otherConstraints\":[\"Use Limitation: All AIMS data, products and services are provided \\\"as is\\\" and AIMS does not warrant their fitness for a particular purpose or non-infringement. While AIMS has made every reasonable effort to ensure high quality of the data, products and services, to the extent permitted by law the data, products and services are provided without any warranties of any kind, either expressed or implied, including without limitation any implied warranties of title, merchantability, and fitness for a particular purpose or non-infringement. AIMS make no representation or warranty that the data, products and services are accurate, complete, reliable or current. To the extent permitted by law, AIMS exclude all liability to any person arising directly or indirectly from the use of the data, products and services.\",\"\"]}",
-  "type": "Collection",
-  "stac_version": "1.0.0",
-  "stac_extensions": [
-    "https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/contacts/v0.1.1/schema.json",
-    "https://stac-extensions.github.io/projection/v1.1.0/schema.json",
-    "https://stac-extensions.github.io/language/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/themes/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/web-map-links/v1.2.0/schema.json"
-  ]
+  "sci:citation" : "{\"suggestedCitation\":\"Attribution: Format for citation of metadata sourced from Australian Institute of Marine Science (AIMS) in a list of reference is as follows: \\\"Australian Institute of Marine Science (AIMS). (2022). Heat-evolved microalgal symbionts increase thermal bleaching tolerance of coral juveniles without a trade-off against growth. https://apps.aims.gov.au/metadata/view/1e13ab6e-e546-44f2-a007-061c2815268a, accessed[date-of-access]\\\".\",\"useLimitations\":null,\"otherConstraints\":[\"Use Limitation: All AIMS data, products and services are provided \\\"as is\\\" and AIMS does not warrant their fitness for a particular purpose or non-infringement. While AIMS has made every reasonable effort to ensure high quality of the data, products and services, to the extent permitted by law the data, products and services are provided without any warranties of any kind, either expressed or implied, including without limitation any implied warranties of title, merchantability, and fitness for a particular purpose or non-infringement. AIMS make no representation or warranty that the data, products and services are accurate, complete, reliable or current. To the extent permitted by law, AIMS exclude all liability to any person arising directly or indirectly from the use of the data, products and services.\",\"\"]}",
+  "type" : "Collection",
+  "stac_version" : "1.0.0",
+  "stac_extensions" : [ "https://stac-extensions.github.io/scientific/v1.0.0/schema.json", "https://stac-extensions.github.io/contacts/v0.1.1/schema.json", "https://stac-extensions.github.io/projection/v1.1.0/schema.json", "https://stac-extensions.github.io/language/v1.0.0/schema.json", "https://stac-extensions.github.io/themes/v1.0.0/schema.json", "https://stac-extensions.github.io/web-map-links/v1.2.0/schema.json" ]
 }

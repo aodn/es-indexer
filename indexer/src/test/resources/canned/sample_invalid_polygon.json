@@ -1,254 +1,167 @@
 {
-  "title": "Natural Resource Management (NRM) areas flowing into the Great Barrier Reef Marine Park 2012 (NERP TE 13.1 eAtlas AIMS, source: Dept. Env.)",
-  "description": "This dataset corresponds to the Natural Resource Management (NRM) Regions corresponding to river catchments neighbouring the Great Barrier Reef Marine Park. The original aim of this dataset was to show river basins that flow into the Great Barrier Reef (GBR) Marine Park, grouping them by their NRM region. The NRM region boundaries already mostly correspond to a grouping of river basin boundaries and so this regrouping of river basins was unnecessary. The NRM regions did however need some adjustments as they extend out to sea and the Cape York NRM region covers river basins on the east and west coast of Cape York and thus contains river basins that do not flow into the GBR. For this reason the Cape York NRM region was split along the Great Dividing range to remove the western catchments so that only eastern catchments were kept. In addition to this the NRM region polygons were split into the mainland and sea areas to allow this dataset to be used for easy map creation. Because of these changes the polygons in this dataset do not correspond to the NRM boundaries, but are based on the NRM boundaries.\n\n                    Since 2006, NRM regions have been important in the delivery of Australian Government funding initiatives including Caring for our Country, the Natural Heritage Trust, the National Landcare Program, the Environmental Stewardship Program and the Working on Country Indigenous land and sea ranger program.\n\n                    The NRM regions included in this dataset: Burnett Mary, Fitzroy, Mackay Whitsunday, Burdekin, Wet Tropics and Cape York (eastern half). Since this dataset was only including catchments neighbouring the marine park it does not include the Torres Strait NRM region and only includes the eastern half of Cape York. The NRM regions were split into mainland and sea features using the Australian Coast 100k 2004 dataset.\n\n                    This dataset was created for the eAtlas and is not an authoritative source of the NRM boundaries. It should be used for research or display purposes only. It should be noted that from time to time the states and/or territories may revise their regional boundaries in accordance with local needs and therefore alterations to either the attribution or boundaries of the data may occur in the future.\n\n                    This dataset was derived from River Basins 1997 (Geoscience Australia), NRM Regions 2012 (Department of Environment) and Australian Coast 100k 2004 (Geoscience Australia) datasets.\n\n\n                    Processing:\n\n                    Using ArcMap a copy of the NRM regions shapefile was made (NRM_Regions_2012_GBRMP) and editing enabled. The NRM regions of interest were selected. This selection was then inverted to select all the features we didn't want to keep. These were then deleted.\n\n                    The River Basins 1997 dataset was loaded into ArcMap and a transformation was chosen to convert the ADG66 data into GDA 94. The coast was checked against the Coast 100k dataset to ensure the transformation was correct.\n\n                    The Cape York NRM region was split in two by tracing the catchments along the Great Dividing range based on the River Basins 1997 (Geoscience Australia) dataset. The tip of the eastern side basin of Cape York was drawn to the boundary vertically. The western side was then selected and deleted.\n\n                    The Coast 100k 2004 dataset was added and an a Definition Query was setup to only keep the mainland features (\"FEAT_CODE\" = 'mainland').\n\n                    This was then used to split the NRM_Regions_2010_GBRMP using the Split Polygons tool from the  Advanced Editing menu.\n\n                    A new attribute (FEAT_CODE) was then added to the shapefile to indicate if the feature was part of the mainland ('mainland') or part of the marine boundary ('sea').\n\n                    The Shape_Area attribute was renamed to SHAPE_Area by removing and recreating it. Also Leng_Units and Area_Units was added as text fields.\n\n                    The Data Frame projection was changed to GDA 1994 Australia Albers equal area projection for recalculate the Shape areas and length. This was done using the Calculate Geometry tool. The The AREA_DESC attribute was removed as it no longer made sense.\n\n                    The shapefile was then renamed to GBR_eAtlas_NRM_Regions_2012_GBRMP.shp.\n\n                    NRM_Regions_2012_GBRMP: Natural Resource Management (NRM) Regions (2012), Australian Government Department of the Environment, ERIN DIG, Available from http://www.environment.gov.au/fed/catalog/search/resource/details.page?uuid=%7BD92421DF-37D9-4194-854C-FBD123747A71%7D",
-  "extent": {
-    "bbox": [],
-    "temporal": [
-      [
-        null,
-        null
-      ]
-    ]
+  "title" : "Natural Resource Management (NRM) areas flowing into the Great Barrier Reef Marine Park 2012 (NERP TE 13.1 eAtlas AIMS, source: Dept. Env.)",
+  "description" : "This dataset corresponds to the Natural Resource Management (NRM) Regions corresponding to river catchments neighbouring the Great Barrier Reef Marine Park. The original aim of this dataset was to show river basins that flow into the Great Barrier Reef (GBR) Marine Park, grouping them by their NRM region. The NRM region boundaries already mostly correspond to a grouping of river basin boundaries and so this regrouping of river basins was unnecessary. The NRM regions did however need some adjustments as they extend out to sea and the Cape York NRM region covers river basins on the east and west coast of Cape York and thus contains river basins that do not flow into the GBR. For this reason the Cape York NRM region was split along the Great Dividing range to remove the western catchments so that only eastern catchments were kept. In addition to this the NRM region polygons were split into the mainland and sea areas to allow this dataset to be used for easy map creation. Because of these changes the polygons in this dataset do not correspond to the NRM boundaries, but are based on the NRM boundaries.\n\n                    Since 2006, NRM regions have been important in the delivery of Australian Government funding initiatives including Caring for our Country, the Natural Heritage Trust, the National Landcare Program, the Environmental Stewardship Program and the Working on Country Indigenous land and sea ranger program.\n\n                    The NRM regions included in this dataset: Burnett Mary, Fitzroy, Mackay Whitsunday, Burdekin, Wet Tropics and Cape York (eastern half). Since this dataset was only including catchments neighbouring the marine park it does not include the Torres Strait NRM region and only includes the eastern half of Cape York. The NRM regions were split into mainland and sea features using the Australian Coast 100k 2004 dataset.\n\n                    This dataset was created for the eAtlas and is not an authoritative source of the NRM boundaries. It should be used for research or display purposes only. It should be noted that from time to time the states and/or territories may revise their regional boundaries in accordance with local needs and therefore alterations to either the attribution or boundaries of the data may occur in the future.\n\n                    This dataset was derived from River Basins 1997 (Geoscience Australia), NRM Regions 2012 (Department of Environment) and Australian Coast 100k 2004 (Geoscience Australia) datasets.\n\n\n                    Processing:\n\n                    Using ArcMap a copy of the NRM regions shapefile was made (NRM_Regions_2012_GBRMP) and editing enabled. The NRM regions of interest were selected. This selection was then inverted to select all the features we didn't want to keep. These were then deleted.\n\n                    The River Basins 1997 dataset was loaded into ArcMap and a transformation was chosen to convert the ADG66 data into GDA 94. The coast was checked against the Coast 100k dataset to ensure the transformation was correct.\n\n                    The Cape York NRM region was split in two by tracing the catchments along the Great Dividing range based on the River Basins 1997 (Geoscience Australia) dataset. The tip of the eastern side basin of Cape York was drawn to the boundary vertically. The western side was then selected and deleted.\n\n                    The Coast 100k 2004 dataset was added and an a Definition Query was setup to only keep the mainland features (\"FEAT_CODE\" = 'mainland').\n\n                    This was then used to split the NRM_Regions_2010_GBRMP using the Split Polygons tool from the  Advanced Editing menu.\n\n                    A new attribute (FEAT_CODE) was then added to the shapefile to indicate if the feature was part of the mainland ('mainland') or part of the marine boundary ('sea').\n\n                    The Shape_Area attribute was renamed to SHAPE_Area by removing and recreating it. Also Leng_Units and Area_Units was added as text fields.\n\n                    The Data Frame projection was changed to GDA 1994 Australia Albers equal area projection for recalculate the Shape areas and length. This was done using the Calculate Geometry tool. The The AREA_DESC attribute was removed as it no longer made sense.\n\n                    The shapefile was then renamed to GBR_eAtlas_NRM_Regions_2012_GBRMP.shp.\n\n                    NRM_Regions_2012_GBRMP: Natural Resource Management (NRM) Regions (2012), Australian Government Department of the Environment, ERIN DIG, Available from http://www.environment.gov.au/fed/catalog/search/resource/details.page?uuid=%7BD92421DF-37D9-4194-854C-FBD123747A71%7D",
+  "extent" : {
+    "bbox" : [ ],
+    "temporal" : [ [ null, null ] ]
   },
-  "summaries": {
-    "score": 1,
-    "status": "completed",
-    "credits": [
-      "Department of the Environment, Geoscience Australia"
-    ],
-    "scope": {
-      "code": "dataset",
-      "name": ""
+  "summaries" : {
+    "score" : 1,
+    "status" : "completed",
+    "credits" : [ "Department of the Environment, Geoscience Australia" ],
+    "scope" : {
+      "code" : "dataset",
+      "name" : ""
     },
-    "creation": "2016-08-02T14:43:41",
-    "revision": "2023-09-18T08:11:14",
-    "update_frequency": "completed",
-    "temporal": []
+    "creation" : "2016-08-02T14:43:41",
+    "revision" : "2023-09-18T08:11:14",
+    "update_frequency" : "completed",
+    "temporal" : [ ],
+    "parameter_vocabs" : [ ],
+    "organisation_vocabs" : [ ]
   },
-  "contacts": [
-    {
-      "roles": [
-        "pointOfContact",
-        "about"
-      ],
-      "organization": "Australian Institute of Marine Science (AIMS)",
-      "name": "Lawrey, Eric, Dr",
-      "position": "eAtlas Project Leader",
-      "emails": [
-        "e-atlas@aims.gov.au"
-      ],
-      "addresses": [
-        {
-          "deliveryPoint": [
-            "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE"
-          ],
-          "city": "Townsville",
-          "country": "Australia",
-          "postalCode": "4810",
-          "administrativeArea": "Queensland"
-        }
-      ],
-      "phones": [
-        {
-          "roles": [
-            "voice"
-          ],
-          "value": "+61 7 4753 4444"
-        },
-        {
-          "roles": [
-            "facsimile"
-          ],
-          "value": ""
-        }
-      ],
-      "links": [
-        {
-          "href": "https://eatlas.org.au",
-          "type": "WWW:LINK-1.0-http--link",
-          "title": "eAtlas portal"
-        }
-      ]
-    },
-    {
-      "roles": [
-        "pointOfContact",
-        "metadata"
-      ],
-      "organization": "Australian Institute of Marine Science (AIMS)",
-      "name": "eAtlas Data Manager",
-      "position": "",
-      "emails": [
-        "e-atlas@aims.gov.au"
-      ],
-      "addresses": [
-        {
-          "deliveryPoint": [
-            "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE"
-          ],
-          "city": "Townsville",
-          "country": "Australia",
-          "postalCode": "4810",
-          "administrativeArea": "Queensland"
-        }
-      ],
-      "phones": [
-        {
-          "roles": [
-            "voice"
-          ],
-          "value": "+61 7 4753 4444"
-        },
-        {
-          "roles": [
-            "facsimile"
-          ],
-          "value": ""
-        }
-      ],
-      "links": [
-        {
-          "href": "https://eatlas.org.au",
-          "type": "WWW:LINK-1.0-http--link",
-          "title": "eAtlas portal"
-        }
-      ]
-    },
-    {
-      "roles": [
-        "principalInvestigator",
-        "citation"
-      ],
-      "organization": "Australian Institute of Marine Science (AIMS)",
-      "name": "Lawrey, Eric, Dr",
-      "position": "eAtlas Project Leader",
-      "emails": [
-        "e-atlas@aims.gov.au"
-      ],
-      "addresses": [
-        {
-          "deliveryPoint": [
-            "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE"
-          ],
-          "city": "Townsville",
-          "country": "Australia",
-          "postalCode": "4810",
-          "administrativeArea": "Queensland"
-        }
-      ],
-      "phones": [
-        {
-          "roles": [
-            "voice"
-          ],
-          "value": "+61 7 4753 4444"
-        }
-      ],
-      "links": [
-        {
-          "href": "https://eatlas.org.au",
-          "type": "WWW:LINK-1.0-http--link",
-          "title": "eAtlas portal"
-        }
-      ]
-    }
-  ],
-  "languages": [
-    {
-      "code": "eng",
-      "name": "English"
-    }
-  ],
-  "links": [
-    {
-      "href": "https://maps.eatlas.org.au/index.html?intro=false&z=6&ll=148.79651,-18.50602&l0=ea_ea%3AGBR_NERP-TE-13-1_eAtlas_NRM-Regions-GBRMP-2012,ea_ea-be%3AWorld_Bright-Earth-e-Atlas-basemap&s0=GBR_NRM-Regions-GBRMP_Data-preview",
-      "rel": "related",
-      "type": "text/html",
-      "title": "Interactive map of this dataset"
-    },
-    {
-      "href": "https://maps.eatlas.org.au/maps/wms",
-      "rel": "wms",
-      "type": "",
-      "title": "ea:GBR_NERP-TE-13-1_eAtlas_NRM-Regions-GBRMP-2012"
-    },
-    {
-      "href": "https://eatlas.org.au/data/uuid/71127e4d-9f14-4c57-9845-1dce0b541d8d",
-      "rel": "related",
-      "type": "",
-      "title": "eAtlas Web Mapping Service (WMS) (AIMS)"
-    },
-    {
-      "href": "https://eatlas.org.au/nerp-te/aims-eatlas-13-1",
-      "rel": "related",
-      "type": "",
-      "title": "eAtlas project page"
-    },
-    {
-      "href": "http://www.environment.gov.au/fed/catalog/search/resource/details.page?uuid=%7BD92421DF-37D9-4194-854C-FBD123747A71%7D",
-      "rel": "related",
-      "type": "",
-      "title": "NRM_Regions_2012_GBRMP: Natural Resource Management (NRM) Regions (2012), Australian Government Department of the Environment, ERIN DIG"
-    },
-    {
-      "href": "https://nextcloud.eatlas.org.au/apps/sharealias/a/gbr_eatlas_nrm_regions_gbrmp_2012-zip",
-      "rel": "related",
-      "type": "",
-      "title": "Shapefile + Metadata [Zip 1.5 MB]"
-    },
-    {
-      "href": "https://eatlas.org.au/data/uuid/053f0b32-47cc-4a3f-8325-b37feb33c0e3",
-      "rel": "describedby",
-      "type": "text/html",
-      "title": "Full metadata link"
-    },
-    {
-      "href": "http://i.creativecommons.org/l/by/3.0/au/88x31.png",
-      "rel": "license",
-      "type": "image/png"
-    },
-    {
-      "href": "http://creativecommons.org/licenses/by/3.0/au/",
-      "rel": "license",
-      "type": "text/html"
-    }
-  ],
-  "license": "Creative Commons Attribution 3.0 Australia License",
-  "providers": [
-    {
-      "name": "Australian Institute of Marine Science (AIMS)",
-      "roles": [
-        "pointOfContact"
-      ],
-      "url": "https://eatlas.org.au"
-    }
-  ],
-  "themes": [
-    {
-      "concepts": [
-        {
-          "id": "marine",
-          "url": null
-        }
-      ],
-      "scheme": "",
-      "description": "",
-      "title": "Keywords (Temporal)"
-    }
-  ],
-  "id": "053f0b32-47cc-4a3f-8325-b37feb33c0e3",
-  "search_suggestions": {
-    "abstract_phrases": []
+  "contacts" : [ {
+    "roles" : [ "pointOfContact", "about" ],
+    "organization" : "Australian Institute of Marine Science (AIMS)",
+    "name" : "Lawrey, Eric, Dr",
+    "position" : "eAtlas Project Leader",
+    "emails" : [ "e-atlas@aims.gov.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],
+      "city" : "Townsville",
+      "country" : "Australia",
+      "postalCode" : "4810",
+      "administrativeArea" : "Queensland"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "+61 7 4753 4444"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : ""
+    } ],
+    "links" : [ {
+      "href" : "https://eatlas.org.au",
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : "eAtlas portal"
+    } ]
+  }, {
+    "roles" : [ "pointOfContact", "metadata" ],
+    "organization" : "Australian Institute of Marine Science (AIMS)",
+    "name" : "eAtlas Data Manager",
+    "position" : "",
+    "emails" : [ "e-atlas@aims.gov.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],
+      "city" : "Townsville",
+      "country" : "Australia",
+      "postalCode" : "4810",
+      "administrativeArea" : "Queensland"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "+61 7 4753 4444"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : ""
+    } ],
+    "links" : [ {
+      "href" : "https://eatlas.org.au",
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : "eAtlas portal"
+    } ]
+  }, {
+    "roles" : [ "principalInvestigator", "citation" ],
+    "organization" : "Australian Institute of Marine Science (AIMS)",
+    "name" : "Lawrey, Eric, Dr",
+    "position" : "eAtlas Project Leader",
+    "emails" : [ "e-atlas@aims.gov.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],
+      "city" : "Townsville",
+      "country" : "Australia",
+      "postalCode" : "4810",
+      "administrativeArea" : "Queensland"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "+61 7 4753 4444"
+    } ],
+    "links" : [ {
+      "href" : "https://eatlas.org.au",
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : "eAtlas portal"
+    } ]
+  } ],
+  "languages" : [ {
+    "code" : "eng",
+    "name" : "English"
+  } ],
+  "links" : [ {
+    "href" : "https://maps.eatlas.org.au/index.html?intro=false&z=6&ll=148.79651,-18.50602&l0=ea_ea%3AGBR_NERP-TE-13-1_eAtlas_NRM-Regions-GBRMP-2012,ea_ea-be%3AWorld_Bright-Earth-e-Atlas-basemap&s0=GBR_NRM-Regions-GBRMP_Data-preview",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "Interactive map of this dataset"
+  }, {
+    "href" : "https://maps.eatlas.org.au/maps/wms",
+    "rel" : "wms",
+    "type" : "",
+    "title" : "ea:GBR_NERP-TE-13-1_eAtlas_NRM-Regions-GBRMP-2012"
+  }, {
+    "href" : "https://eatlas.org.au/data/uuid/71127e4d-9f14-4c57-9845-1dce0b541d8d",
+    "rel" : "related",
+    "type" : "",
+    "title" : "eAtlas Web Mapping Service (WMS) (AIMS)"
+  }, {
+    "href" : "https://eatlas.org.au/nerp-te/aims-eatlas-13-1",
+    "rel" : "related",
+    "type" : "",
+    "title" : "eAtlas project page"
+  }, {
+    "href" : "http://www.environment.gov.au/fed/catalog/search/resource/details.page?uuid=%7BD92421DF-37D9-4194-854C-FBD123747A71%7D",
+    "rel" : "related",
+    "type" : "",
+    "title" : "NRM_Regions_2012_GBRMP: Natural Resource Management (NRM) Regions (2012), Australian Government Department of the Environment, ERIN DIG"
+  }, {
+    "href" : "https://nextcloud.eatlas.org.au/apps/sharealias/a/gbr_eatlas_nrm_regions_gbrmp_2012-zip",
+    "rel" : "related",
+    "type" : "",
+    "title" : "Shapefile + Metadata [Zip 1.5 MB]"
+  }, {
+    "href" : "https://eatlas.org.au/data/uuid/053f0b32-47cc-4a3f-8325-b37feb33c0e3",
+    "rel" : "describedby",
+    "type" : "text/html",
+    "title" : "Full metadata link"
+  }, {
+    "href" : "http://i.creativecommons.org/l/by/3.0/au/88x31.png",
+    "rel" : "license",
+    "type" : "image/png"
+  }, {
+    "href" : "http://creativecommons.org/licenses/by/3.0/au/",
+    "rel" : "license",
+    "type" : "text/html"
+  } ],
+  "license" : "Creative Commons Attribution 3.0 Australia License",
+  "providers" : [ {
+    "name" : "Australian Institute of Marine Science (AIMS)",
+    "roles" : [ "pointOfContact" ],
+    "url" : "https://eatlas.org.au"
+  } ],
+  "themes" : [ {
+    "concepts" : [ {
+      "id" : "marine",
+      "url" : null
+    } ],
+    "scheme" : "",
+    "description" : "",
+    "title" : "Keywords (Temporal)"
+  } ],
+  "id" : "053f0b32-47cc-4a3f-8325-b37feb33c0e3",
+  "search_suggestions" : {
+    "abstract_phrases" : [ ]
   },
-  "sci:citation": "{\"suggestedCitation\":null,\"useLimitations\":null,\"otherConstraints\":null}",
-  "type": "Collection",
-  "stac_version": "1.0.0",
-  "stac_extensions": [
-    "https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/contacts/v0.1.1/schema.json",
-    "https://stac-extensions.github.io/projection/v1.1.0/schema.json",
-    "https://stac-extensions.github.io/language/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/themes/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/web-map-links/v1.2.0/schema.json"
-  ]
+  "sci:citation" : "{\"suggestedCitation\":null,\"useLimitations\":null,\"otherConstraints\":null}",
+  "type" : "Collection",
+  "stac_version" : "1.0.0",
+  "stac_extensions" : [ "https://stac-extensions.github.io/scientific/v1.0.0/schema.json", "https://stac-extensions.github.io/contacts/v0.1.1/schema.json", "https://stac-extensions.github.io/projection/v1.1.0/schema.json", "https://stac-extensions.github.io/language/v1.0.0/schema.json", "https://stac-extensions.github.io/themes/v1.0.0/schema.json", "https://stac-extensions.github.io/web-map-links/v1.2.0/schema.json" ]
 }

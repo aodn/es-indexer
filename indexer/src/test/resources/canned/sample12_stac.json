@@ -1,677 +1,280 @@
 {
-  "title": "Aurora Australis Voyage 6 2011/12 Track and Underway Data",
-  "description": "On every voyage of the Aurora Australis, approximately 50 onboard sensors collect data on average every 10 seconds.  These data are known as the underway datasets.  The type of data collected include water and air temperature, wind speeds, ship speed and location, humidity, fluorescence, salinity and so on.  For the full list of available data types, see the website.\n    \nThese data are broadcast \"live\" (every 30 minutes) back to Australia and are available via the Australian Oceanographic Data Centre's portal (see the provided link).  Once the ship returns to port, the data are then transferred to Australian Antarctic Division servers where they are then made available via the Marine Science Data Search system (see the provided URL).\n\nThis dataset contains the underway data collected during Voyage 6 of the Aurora Australis Voyage in the 2011/12 season.\n\nPurpose of voyage: Macquarie Island resupply\n\nUnderway (meteorological) data are available online via the Australian Antarctic Division Data Centre web page (or via the Related URL section).",
-  "extent": {
-    "bbox": [
-      [
-        147.0,
-        -54.0,
-        159.0,
-        -42.4
-      ],
-      [
-        147.0,
-        -54.0,
-        159.0,
-        -42.4
-      ]
-    ],
-    "temporal": [
-      [
-        "2012-04-15T14:00:00Z",
-        "2012-04-30T13:59:59Z"
-      ],
-      [
-        "2012-04-15T14:00:00Z",
-        "2012-04-30T13:59:59Z"
-      ]
-    ]
+  "title" : "Aurora Australis Voyage 6 2011/12 Track and Underway Data",
+  "description" : "On every voyage of the Aurora Australis, approximately 50 onboard sensors collect data on average every 10 seconds.  These data are known as the underway datasets.  The type of data collected include water and air temperature, wind speeds, ship speed and location, humidity, fluorescence, salinity and so on.  For the full list of available data types, see the website.\n\n                    These data are broadcast \"live\" (every 30 minutes) back to Australia and are available via the Australian Oceanographic Data Centre's portal (see the provided link).  Once the ship returns to port, the data are then transferred to Australian Antarctic Division servers where they are then made available via the Marine Science Data Search system (see the provided URL).\n\n                    This dataset contains the underway data collected during Voyage 6 of the Aurora Australis Voyage in the 2011/12 season.\n\n                    Purpose of voyage: Macquarie Island resupply\n\n                    Underway (meteorological) data are available online via the Australian Antarctic Division Data Centre web page (or via the Related URL section).",
+  "extent" : {
+    "bbox" : [ [ 147.0, -54.0, 159.0, -42.4 ], [ 147.0, -54.0, 159.0, -42.4 ] ],
+    "temporal" : [ [ "2012-04-15T14:00:00Z", "2012-04-30T13:59:59Z" ], [ "2012-04-15T14:00:00Z", "2012-04-30T13:59:59Z" ] ]
   },
-  "summaries": {
-    "score": 91,
-    "status": "completed",
-    "credits": [],
-    "scope": {
-      "code": "dataset",
-      "name": ""
+  "summaries" : {
+    "score" : 1,
+    "status" : "completed",
+    "credits" : [ ],
+    "scope" : {
+      "code" : "dataset",
+      "name" : ""
     },
-    "statement": "See the Marine Science Support Data Quality and Programmer's Reports at the Related URL section.\n\nWhere data for a particular sensor do not exist for a particular time, the last known value is used unless the sensor has been disabled or has encountered an error. For example, some sensors only record data every minute, but the resolution for the underway dataset is 10 seconds, so the same value will be used 6 times a minute. No averages are taken for sensors that capture data at a rate other than every 10 seconds. Instead, each record will be a snapshot of each sensor at that time.\n\nThe data have been acquired at 0.1 Hz. There will be the occasional invalid value such as temperatures being out of range.\n\nThis dataset has not been checked. Please verify the data before use.",
-    "creation": "2011-12-12T00:00:00",
-    "dataset_group": "australian_antarctic_division",
-    "update_frequency": "completed",
-    "proj:geometry": {
-      "geometries": [
-        {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [
-                147,
-                -54
-              ],
-              [
-                159,
-                -54
-              ],
-              [
-                159,
-                -42.4
-              ],
-              [
-                147,
-                -42.4
-              ],
-              [
-                147,
-                -54
-              ]
-            ]
-          ]
-        }
-      ],
-      "type": "GeometryCollection"
+    "statement" : "See the Marine Science Support Data Quality and Programmer's Reports at the Related URL section.\n\n                    Where data for a particular sensor do not exist for a particular time, the last known value is used unless the sensor has been disabled or has encountered an error. For example, some sensors only record data every minute, but the resolution for the underway dataset is 10 seconds, so the same value will be used 6 times a minute. No averages are taken for sensors that capture data at a rate other than every 10 seconds. Instead, each record will be a snapshot of each sensor at that time.\n\n                    The data have been acquired at 0.1 Hz. There will be the occasional invalid value such as temperatures being out of range.\n\n                    This dataset has not been checked. Please verify the data before use.",
+    "creation" : "2011-12-12T00:00:00",
+    "update_frequency" : "completed",
+    "proj:geometry" : {
+      "geometries" : [ {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 147, -54 ], [ 159, -54 ], [ 159, -42.4 ], [ 147, -42.4 ], [ 147, -54 ] ] ]
+      } ],
+      "type" : "GeometryCollection"
     },
-    "proj:geometry_noland": {
-      "geometries": [
-        {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [
-                159,
-                -42.5
-              ],
-              [
-                148,
-                -42.5
-              ],
-              [
-                148,
-                -43.25
-              ],
-              [
-                147.25,
-                -42.75
-              ],
-              [
-                147,
-                -43.5
-              ],
-              [
-                147,
-                -54
-              ],
-              [
-                159,
-                -54
-              ],
-              [
-                159,
-                -42.5
-              ]
-            ]
-          ]
-        }
-      ],
-      "type": "GeometryCollection"
+    "proj:geometry_noland" : {
+      "geometries" : [ {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 148.02166048679436, -42.4 ], [ 148.00603274800005, -42.51409270599993 ], [ 147.8886824880001, -42.54509856599992 ], [ 147.9531356130001, -42.71998463299991 ], [ 147.844574415, -42.86614348799992 ], [ 148.004730665, -42.908868096999925 ], [ 147.949554884, -43.07284921699994 ], [ 147.9985457690001, -43.230401299999926 ], [ 147.8828231130001, -43.131524346999925 ], [ 147.79249108200008, -43.244073174999926 ], [ 147.7002059250001, -43.162774346999925 ], [ 147.74789472700004, -43.105726820999905 ], [ 147.62720787900003, -43.0427385399999 ], [ 147.69255618600002, -42.936211846999925 ], [ 147.763031446, -43.03753020599993 ], [ 147.887054884, -43.03443775799991 ], [ 147.8403426440001, -42.90203215899993 ], [ 147.533539259, -42.836602471999925 ], [ 147.5590926440001, -42.977227471999925 ], [ 147.43620853000004, -43.04607512799993 ], [ 147.47730553500003, -42.908868096999925 ], [ 147.2837020190001, -42.77849700299993 ], [ 147.360199415, -42.92522551899992 ], [ 147.33318118600002, -43.04265715899993 ], [ 147.2544051440001, -43.027276299999926 ], [ 147.25757897200003, -43.25432708099993 ], [ 147.16382897200003, -43.27011484199994 ], [ 147.10661868600002, -43.15471770599993 ], [ 147.0605574880001, -43.20159270599993 ], [ 147, -43.152899312757235 ], [ 147, -43.167050764879306 ], [ 147.09978274800005, -43.29941171699994 ], [ 147, -43.32913927711625 ], [ 147, -43.34669057661761 ], [ 147.05534915500004, -43.3562151019999 ], [ 147, -43.38660155215344 ], [ 147, -43.469130779410584 ], [ 147.01783287900003, -43.47812265399995 ], [ 147, -43.48639551023278 ], [ 147, -54 ], [ 159, -54 ], [ 159, -42.4 ], [ 148.02166048679436, -42.4 ] ], [ [ 147.33659915500004, -43.34026458099993 ], [ 147.30388431100002, -43.508884372999944 ], [ 147.21558678500003, -43.41521575299993 ], [ 147.16773522200003, -43.50164153399993 ], [ 147.08619225400003, -43.429620049999926 ], [ 147.17920983200008, -43.45403411299992 ], [ 147.16814212300005, -43.368259372999944 ], [ 147.30445397200003, -43.26181405999995 ], [ 147.33659915500004, -43.34026458099993 ] ], [ [ 147.40211022200003, -43.131117445999905 ], [ 147.4375106130001, -43.238946221999925 ], [ 147.36085045700008, -43.25790780999995 ], [ 147.38786868600002, -43.19622161299992 ], [ 147.29175866000003, -43.153008721999925 ], [ 147.36003665500004, -43.074883721999925 ], [ 147.40211022200003, -43.131117445999905 ] ], [ [ 148.14185631600003, -42.603773695999905 ], [ 148.17603600400003, -42.6482072899999 ], [ 148.01156660200004, -42.75123463299991 ], [ 148.02458743600002, -42.61345794099992 ], [ 148.14185631600003, -42.603773695999905 ] ] ]
+      } ],
+      "type" : "GeometryCollection"
     },
-    "temporal": [
-      {
-        "start": "2012-04-15T14:00:00Z",
-        "end": "2012-04-30T13:59:59Z"
-      }
-    ],
-    "parameter_vocabs": [
-      "humidity",
-      "water pressure",
-      "wind",
-      "air-sea fluxes"
-    ],
-    "organisation_vocabs": []
+    "temporal" : [ {
+      "start" : "2012-04-15T14:00:00Z",
+      "end" : "2012-04-30T13:59:59Z"
+    } ],
+    "parameter_vocabs" : [ ],
+    "organisation_vocabs" : [ ]
   },
-  "contacts": [
-    {
-      "roles": [
-        "custodian",
-        "about"
-      ],
-      "organization": "AU/AADC > Australian Antarctic Data Centre, Australia",
-      "name": "AADC, DATA OFFICER",
-      "position": "DATA CENTER CONTACT",
-      "emails": [
-        "metadata@aad.gov.au"
-      ],
-      "addresses": [
-        {
-          "delivery_point": [
-            "Australian Antarctic Division",
-            "203 Channel Highway"
-          ],
-          "city": "Kingston",
-          "country": "Australia",
-          "postal_code": "7050",
-          "administrative_area": "Tasmania"
-        }
-      ],
-      "phones": [
-        {
-          "roles": [
-            "voice"
-          ],
-          "value": "+61 3 6232 3244"
-        },
-        {
-          "roles": [
-            "facsimile"
-          ],
-          "value": "+61 3 6232 3351"
-        }
-      ],
-      "links": []
-    },
-    {
-      "roles": [
-        "sponsor",
-        "metadata"
-      ],
-      "organization": "Australian Antarctic Division",
-      "name": null,
-      "position": null,
-      "emails": null,
-      "addresses": null,
-      "phones": null,
-      "links": null
-    },
-    {
-      "roles": [
-        "owner",
-        "metadata"
-      ],
-      "organization": "AADC",
-      "name": null,
-      "position": null,
-      "emails": null,
-      "addresses": null,
-      "phones": null,
-      "links": null
-    },
-    {
-      "roles": [
-        "publisher",
-        "citation"
-      ],
-      "organization": "Australian Antarctic Data Centre",
-      "name": null,
-      "position": null,
-      "emails": null,
-      "addresses": null,
-      "phones": null,
-      "links": null
-    }
-  ],
-  "languages": [
-    {
-      "code": "eng",
-      "name": "English"
-    }
-  ],
-  "links": [
-    {
-      "href": "https://data.aad.gov.au/eds/5350/download",
-      "rel": "related",
-      "type": "text/html",
-      "title": "GET DATA > DIRECT DOWNLOAD"
-    },
-    {
-      "href": "http://data.aad.gov.au/aadc/marine_science/underway_extraction/index.cfm",
-      "rel": "related",
-      "type": "text/html",
-      "title": "GET DATA"
-    },
-    {
-      "href": "https://portal.aodn.org.au/",
-      "rel": "related",
-      "type": "text/html",
-      "title": "GET DATA"
-    },
-    {
-      "href": "https://data.aad.gov.au/geoserver/underway/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=underway%3Aunderway_60&outputFormat=csv&cql_filter=set_code=201112060",
-      "rel": "related",
-      "type": "text/html",
-      "title": "USE SERVICE API > WEB FEATURE SERVICE (WFS)"
-    },
-    {
-      "href": "https://data.aad.gov.au/geoserver/underway/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=underway%3Aunderway_1200&outputFormat=csv&cql_filter=set_code=201112060",
-      "rel": "related",
-      "type": "text/html",
-      "title": "USE SERVICE API > WEB FEATURE SERVICE (WFS)"
-    },
-    {
-      "href": "https://data.aad.gov.au/geoserver/underway/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=underway%3Aunderway_7200&outputFormat=csv&cql_filter=set_code=201112060",
-      "rel": "related",
-      "type": "text/html",
-      "title": "USE SERVICE API > WEB FEATURE SERVICE (WFS)"
-    },
-    {
-      "href": "http://data.aad.gov.au/geoserver/underway/wms?request=GetCapabilities",
-      "rel": "related",
-      "type": "text/html",
-      "title": "USE SERVICE API > WEB MAP SERVICE (WMS)"
-    },
-    {
-      "href": "http://data.aad.gov.au/geoserver/underway/wfs?request=GetCapabilities",
-      "rel": "related",
-      "type": "text/html",
-      "title": "USE SERVICE API > WEB FEATURE SERVICE (WFS)"
-    },
-    {
-      "href": "https://data.aad.gov.au/geoserver/underway/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=underway%3Aunderway_mln_1200&outputFormat=SHAPE-ZIP&cql_filter=set_code=201112060",
-      "rel": "related",
-      "type": "text/html",
-      "title": "USE SERVICE API > WEB FEATURE SERVICE (WFS)"
-    },
-    {
-      "href": "http://data.aad.gov.au/aadc/voyages/display_voyage.cfm?voyage_id=572",
-      "rel": "related",
-      "type": "text/html",
-      "title": "VIEW RELATED INFORMATION"
-    },
-    {
-      "href": "http://data.aad.gov.au/aadc/portal/download_file.cfm?file_id=3143",
-      "rel": "related",
-      "type": "text/html",
-      "title": "VIEW RELATED INFORMATION"
-    },
-    {
-      "href": "http://data.aad.gov.au/aadc/voyages/sensors.cfm?set_code=201112060",
-      "rel": "related",
-      "type": "text/html",
-      "title": "VIEW RELATED INFORMATION"
-    },
-    {
-      "href": "http://data.aad.gov.au/aadc/voyages/display_voyage.cfm?set_code=201112060",
-      "rel": "related",
-      "type": "text/html",
-      "title": "VIEW RELATED INFORMATION"
-    },
-    {
-      "href": "http://data.aad.gov.au/aadc/portal/download_file.cfm?file_id=3961",
-      "rel": "related",
-      "type": "text/html",
-      "title": "VIEW RELATED INFORMATION"
-    },
-    {
-      "href": "http://data.aad.gov.au/aadc/metadata/citation.cfm?entry_id=201112060",
-      "rel": "related",
-      "type": "text/html",
-      "title": "VIEW RELATED INFORMATION"
-    },
-    {
-      "href": "https://geonetwork-edge.edge.aodn.org.au:443/geonetwork/images/logos/98d7c596-d071-4c21-8231-5a6be7ddaec8.png",
-      "rel": "icon",
-      "type": "image/png",
-      "title": "Suggest icon for dataset"
-    },
-    {
-      "href": "http://data.aad.gov.au/metadata/201112060",
-      "rel": "describedby",
-      "type": "text/html",
-      "title": "Full metadata link"
-    },
-    {
-      "href": "https://i.creativecommons.org/l/by/3.0/88x31.png",
-      "rel": "license",
-      "type": "image/png"
-    },
-    {
-      "href": "https://creativecommons.org/licenses/by/4.0/legalcode",
-      "rel": "license",
-      "type": "text/html"
-    }
-  ],
-  "license": "Attribution 4.0 International (CC BY 4.0)",
-  "providers": [
-    {
-      "name": "CONNELL, DAVE J.",
-      "roles": [
-        "author"
-      ]
-    },
-    {
-      "name": "Australian Antarctic Division",
-      "roles": [
-        "sponsor"
-      ]
-    },
-    {
-      "name": "AADC",
-      "roles": [
-        "owner"
-      ]
-    }
-  ],
-  "themes": [
-    {
-      "concepts": [
-        {
-          "id": "EARTH SCIENCE > ATMOSPHERE > ATMOSPHERIC PRESSURE > SEA LEVEL PRESSURE",
-          "url": null
-        },
-        {
-          "id": "EARTH SCIENCE > ATMOSPHERE > ATMOSPHERIC TEMPERATURE > SURFACE TEMPERATURE > AIR TEMPERATURE",
-          "url": null
-        },
-        {
-          "id": "EARTH SCIENCE > ATMOSPHERE > ATMOSPHERIC WATER VAPOR > WATER VAPOR INDICATORS > HUMIDITY",
-          "url": null
-        },
-        {
-          "id": "EARTH SCIENCE > ATMOSPHERE > ATMOSPHERIC WINDS > WIND DYNAMICS > CONVECTION",
-          "url": null
-        },
-        {
-          "id": "EARTH SCIENCE > ATMOSPHERE > ATMOSPHERIC RADIATION > SOLAR RADIATION",
-          "url": null
-        }
-      ],
-      "scheme": "discipline",
-      "description": "Science Keywords",
-      "title": "NASA/GCMD Earth Science Keywords"
-    },
-    {
-      "concepts": [
-        {
-          "id": "MARINE",
-          "url": null
-        },
-        {
-          "id": "METEOROLOGY",
-          "url": null
-        }
-      ],
-      "scheme": "",
-      "description": "",
-      "title": ""
-    },
-    {
-      "concepts": [
-        {
-          "id": "ECHO SOUNDERS",
-          "url": null
-        }
-      ],
-      "scheme": "instrument",
-      "description": "Instruments",
-      "title": "NASA/GCMD Earth Science Keywords"
-    },
-    {
-      "concepts": [
-        {
-          "id": "SHIPS",
-          "url": null
-        },
-        {
-          "id": "R/V AA > R/V Aurora Australis",
-          "url": null
-        }
-      ],
-      "scheme": "platform",
-      "description": "Platforms",
-      "title": "NASA/GCMD Earth Science Keywords"
-    },
-    {
-      "concepts": [
-        {
-          "id": "AMD/AU",
-          "url": null
-        },
-        {
-          "id": "CEOS",
-          "url": null
-        },
-        {
-          "id": "AMD",
-          "url": null
-        }
-      ],
-      "scheme": "dataCentre",
-      "description": "IDN Nodes",
-      "title": "NASA/GCMD Earth Science Keywords"
-    },
-    {
-      "concepts": [
-        {
-          "id": "OCEAN > SOUTHERN OCEAN",
-          "url": null
-        },
-        {
-          "id": "CONTINENT > ANTARCTICA",
-          "url": null
-        },
-        {
-          "id": "GEOGRAPHIC REGION > POLAR",
-          "url": null
-        }
-      ],
-      "scheme": "place",
-      "description": "Locations",
-      "title": "NASA/GCMD Earth Science Keywords"
-    }
-  ],
-  "id": "201112060",
-  "search_suggestions": {
-    "abstract_phrases": [
-      "ship",
-      "via",
-      "during voyage",
-      "humidity",
-      "collected during voyage",
-      "onboard sensors collect",
-      "made available via",
-      "australian antarctic",
-      "australia",
-      "australian antarctic division data",
-      "speeds ship speed",
-      "contains",
-      "resupply underway meteorological",
-      "division data centre",
-      "antarctic division data",
-      "science",
-      "australis",
-      "returns",
-      "island resupply",
-      "ship returns",
-      "wind",
-      "average",
-      "underway meteorological data",
-      "datasets",
-      "air temperature",
-      "marine",
-      "see",
-      "search",
-      "available data types",
-      "australian antarctic division servers",
-      "underway",
-      "broadcast live",
-      "temperature",
-      "division data centre web",
-      "where",
-      "science data search system",
-      "so",
-      "data collected include water",
-      "website",
-      "data centre web",
-      "antarctic division",
-      "web page",
-      "collected include",
-      "average every",
-      "dataset",
-      "island resupply underway",
-      "transferred",
-      "search system",
-      "sensors collect",
-      "available online",
-      "available",
-      "dataset contains",
-      "marine science data search",
-      "australis voyage",
-      "temperature wind speeds",
-      "url section",
-      "onboard sensors",
-      "list",
-      "data collected during",
-      "antarctic division servers where",
-      "macquarie",
-      "data collected",
-      "fluorescence salinity",
-      "available data",
-      "once",
-      "port",
-      "australian antarctic division",
-      "centre web page",
-      "meteorological data",
-      "page",
-      "full",
-      "resupply underway",
-      "online via",
-      "collected during",
-      "provided",
-      "back",
-      "speed",
-      "voyage macquarie",
-      "related",
-      "system see",
-      "every",
-      "wind speeds ship speed",
-      "live",
-      "types",
-      "related url section",
-      "temperature wind speeds ship",
-      "macquarie island resupply",
-      "broadcast live every",
-      "live every",
-      "data centre",
-      "underway datasets",
-      "wind speeds ship",
-      "location humidity fluorescence salinity",
-      "macquarie island resupply underway",
-      "approximately",
-      "location",
-      "sensors collect data",
-      "provided link",
-      "full list",
-      "marine science",
-      "speeds ship",
-      "collected",
-      "during",
-      "type",
-      "wind speeds",
-      "oceanographic data",
-      "division",
-      "seconds",
-      "air temperature wind",
-      "division data",
-      "season",
-      "portal",
-      "resupply",
-      "every voyage",
-      "made",
-      "division servers",
-      "centre web",
-      "available online via",
-      "search system see",
-      "system",
-      "macquarie island",
-      "onboard sensors collect data",
-      "broadcast",
-      "season purpose",
-      "voyage macquarie island",
-      "onboard",
-      "location humidity",
-      "underway data",
-      "australian",
-      "air",
-      "aurora",
-      "link once",
-      "meteorological",
-      "known",
-      "web",
-      "made available",
-      "antarctic",
-      "include",
-      "marine science data",
-      "data collected during voyage",
-      "ship speed",
-      "centre",
-      "aurora australis",
-      "url",
-      "portal see",
-      "include water",
-      "aurora australis approximately",
-      "underway data collected",
-      "science data search",
-      "collected include water",
-      "voyage macquarie island resupply",
-      "data",
-      "section",
-      "humidity fluorescence salinity",
-      "fluorescence",
-      "science data",
-      "collect data",
-      "data types",
-      "antarctic division servers",
-      "provided url",
-      "speeds",
-      "australis approximately",
-      "provided link once",
-      "resupply underway meteorological data",
-      "minutes",
-      "island",
-      "water",
-      "voyage",
-      "data types see",
-      "data centre web page",
-      "available via",
-      "underway data collected during",
-      "division servers where",
-      "aurora australis voyage",
-      "collect",
-      "data search system",
-      "types see",
-      "purpose",
-      "related url",
-      "oceanographic",
-      "temperature wind",
-      "link",
-      "antarctic division data centre",
-      "servers",
-      "underway meteorological",
-      "island resupply underway meteorological",
-      "data collected include",
-      "minutes back",
-      "air temperature wind speeds",
-      "location humidity fluorescence",
-      "available data types see",
-      "data search system see",
-      "salinity",
-      "data search",
-      "sensors",
-      "australian oceanographic",
-      "servers where",
-      "online",
-      "humidity fluorescence",
-      "australian oceanographic data"
-    ]
+  "contacts" : [ {
+    "roles" : [ "custodian", "about" ],
+    "organization" : "AU/AADC > Australian Antarctic Data Centre, Australia",
+    "name" : "AADC, DATA OFFICER",
+    "position" : "DATA CENTER CONTACT",
+    "emails" : [ "metadata@aad.gov.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "Australian Antarctic Division", "203 Channel Highway" ],
+      "city" : "Kingston",
+      "country" : "Australia",
+      "postalCode" : "7050",
+      "administrativeArea" : "Tasmania"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "+61 3 6232 3244"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : "+61 3 6232 3351"
+    } ],
+    "links" : [ ]
+  }, {
+    "roles" : [ "sponsor", "metadata" ],
+    "organization" : "Australian Antarctic Division",
+    "name" : null,
+    "position" : null,
+    "emails" : null,
+    "addresses" : null,
+    "phones" : null,
+    "links" : null
+  }, {
+    "roles" : [ "owner", "metadata" ],
+    "organization" : "AADC",
+    "name" : null,
+    "position" : null,
+    "emails" : null,
+    "addresses" : null,
+    "phones" : null,
+    "links" : null
+  }, {
+    "roles" : [ "publisher", "citation" ],
+    "organization" : "Australian Antarctic Data Centre",
+    "name" : null,
+    "position" : null,
+    "emails" : null,
+    "addresses" : null,
+    "phones" : null,
+    "links" : null
+  } ],
+  "languages" : [ {
+    "code" : "eng",
+    "name" : "English"
+  } ],
+  "links" : [ {
+    "href" : "https://data.aad.gov.au/eds/5350/download",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "GET DATA > DIRECT DOWNLOAD"
+  }, {
+    "href" : "http://data.aad.gov.au/aadc/marine_science/underway_extraction/index.cfm",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "GET DATA"
+  }, {
+    "href" : "https://portal.aodn.org.au/",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "GET DATA"
+  }, {
+    "href" : "https://data.aad.gov.au/geoserver/underway/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=underway%3Aunderway_60&outputFormat=csv&cql_filter=set_code=201112060",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "USE SERVICE API > WEB FEATURE SERVICE (WFS)"
+  }, {
+    "href" : "https://data.aad.gov.au/geoserver/underway/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=underway%3Aunderway_1200&outputFormat=csv&cql_filter=set_code=201112060",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "USE SERVICE API > WEB FEATURE SERVICE (WFS)"
+  }, {
+    "href" : "https://data.aad.gov.au/geoserver/underway/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=underway%3Aunderway_7200&outputFormat=csv&cql_filter=set_code=201112060",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "USE SERVICE API > WEB FEATURE SERVICE (WFS)"
+  }, {
+    "href" : "http://data.aad.gov.au/geoserver/underway/wms?request=GetCapabilities",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "USE SERVICE API > WEB MAP SERVICE (WMS)"
+  }, {
+    "href" : "http://data.aad.gov.au/geoserver/underway/wfs?request=GetCapabilities",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "USE SERVICE API > WEB FEATURE SERVICE (WFS)"
+  }, {
+    "href" : "https://data.aad.gov.au/geoserver/underway/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=underway%3Aunderway_mln_1200&outputFormat=SHAPE-ZIP&cql_filter=set_code=201112060",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "USE SERVICE API > WEB FEATURE SERVICE (WFS)"
+  }, {
+    "href" : "http://data.aad.gov.au/aadc/voyages/display_voyage.cfm?voyage_id=572",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "VIEW RELATED INFORMATION"
+  }, {
+    "href" : "http://data.aad.gov.au/aadc/portal/download_file.cfm?file_id=3143",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "VIEW RELATED INFORMATION"
+  }, {
+    "href" : "http://data.aad.gov.au/aadc/voyages/sensors.cfm?set_code=201112060",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "VIEW RELATED INFORMATION"
+  }, {
+    "href" : "http://data.aad.gov.au/aadc/voyages/display_voyage.cfm?set_code=201112060",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "VIEW RELATED INFORMATION"
+  }, {
+    "href" : "http://data.aad.gov.au/aadc/portal/download_file.cfm?file_id=3961",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "VIEW RELATED INFORMATION"
+  }, {
+    "href" : "http://data.aad.gov.au/aadc/metadata/citation.cfm?entry_id=201112060",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "VIEW RELATED INFORMATION"
+  }, {
+    "href" : "http://data.aad.gov.au/metadata/201112060",
+    "rel" : "describedby",
+    "type" : "text/html",
+    "title" : "Full metadata link"
+  }, {
+    "href" : "https://i.creativecommons.org/l/by/3.0/88x31.png",
+    "rel" : "license",
+    "type" : "image/png"
+  }, {
+    "href" : "https://creativecommons.org/licenses/by/4.0/legalcode",
+    "rel" : "license",
+    "type" : "text/html"
+  } ],
+  "license" : "Attribution 4.0 International (CC BY 4.0)",
+  "providers" : [ {
+    "name" : "CONNELL, DAVE J.",
+    "roles" : [ "author" ]
+  }, {
+    "name" : "Australian Antarctic Division",
+    "roles" : [ "sponsor" ]
+  }, {
+    "name" : "AADC",
+    "roles" : [ "owner" ]
+  } ],
+  "themes" : [ {
+    "concepts" : [ {
+      "id" : "EARTH SCIENCE > ATMOSPHERE > ATMOSPHERIC PRESSURE > SEA LEVEL PRESSURE",
+      "url" : null
+    }, {
+      "id" : "EARTH SCIENCE > ATMOSPHERE > ATMOSPHERIC TEMPERATURE > SURFACE TEMPERATURE > AIR TEMPERATURE",
+      "url" : null
+    }, {
+      "id" : "EARTH SCIENCE > ATMOSPHERE > ATMOSPHERIC WATER VAPOR > WATER VAPOR INDICATORS > HUMIDITY",
+      "url" : null
+    }, {
+      "id" : "EARTH SCIENCE > ATMOSPHERE > ATMOSPHERIC WINDS > WIND DYNAMICS > CONVECTION",
+      "url" : null
+    }, {
+      "id" : "EARTH SCIENCE > ATMOSPHERE > ATMOSPHERIC RADIATION > SOLAR RADIATION",
+      "url" : null
+    } ],
+    "scheme" : "discipline",
+    "description" : "Science Keywords",
+    "title" : "NASA/GCMD Earth Science Keywords"
+  }, {
+    "concepts" : [ {
+      "id" : "MARINE",
+      "url" : null
+    }, {
+      "id" : "METEOROLOGY",
+      "url" : null
+    } ],
+    "scheme" : "",
+    "description" : "",
+    "title" : ""
+  }, {
+    "concepts" : [ {
+      "id" : "ECHO SOUNDERS",
+      "url" : null
+    } ],
+    "scheme" : "instrument",
+    "description" : "Instruments",
+    "title" : "NASA/GCMD Earth Science Keywords"
+  }, {
+    "concepts" : [ {
+      "id" : "SHIPS",
+      "url" : null
+    }, {
+      "id" : "R/V AA > R/V Aurora Australis",
+      "url" : null
+    } ],
+    "scheme" : "platform",
+    "description" : "Platforms",
+    "title" : "NASA/GCMD Earth Science Keywords"
+  }, {
+    "concepts" : [ {
+      "id" : "AMD/AU",
+      "url" : null
+    }, {
+      "id" : "CEOS",
+      "url" : null
+    }, {
+      "id" : "AMD",
+      "url" : null
+    } ],
+    "scheme" : "dataCentre",
+    "description" : "IDN Nodes",
+    "title" : "NASA/GCMD Earth Science Keywords"
+  }, {
+    "concepts" : [ {
+      "id" : "OCEAN > SOUTHERN OCEAN",
+      "url" : null
+    }, {
+      "id" : "CONTINENT > ANTARCTICA",
+      "url" : null
+    }, {
+      "id" : "GEOGRAPHIC REGION > POLAR",
+      "url" : null
+    } ],
+    "scheme" : "place",
+    "description" : "Locations",
+    "title" : "NASA/GCMD Earth Science Keywords"
+  } ],
+  "id" : "201112060",
+  "search_suggestions" : {
+    "abstract_phrases" : [ ]
   },
-  "sci:citation": "{\"suggestedCitation\":null,\"useLimitations\":[\"This metadata record is publicly available.\"],\"otherConstraints\":[\"Data are available online via the Australian Antarctic Division Data Centre web page, and also via the Australian Ocean Data Network Web Portal.  A \\\"supplementary\\\" dataset is also available for download from the provided URL.  It contains raw data collected directly from the ship, which has not been quality checked.\",\"This data set conforms to the CCBY Attribution License\\n(http://creativecommons.org/licenses/by/4.0/).\\n\\nPlease follow instructions listed in the citation reference provided at http://data.aad.gov.au/aadc/metadata/citation.cfm?entry_id=201112060 when using these data.\"]}",
-  "stac_version": "1.0.0",
-  "stac_extensions": [
-    "https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/contacts/v0.1.1/schema.json",
-    "https://stac-extensions.github.io/projection/v1.1.0/schema.json",
-    "https://stac-extensions.github.io/language/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/themes/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/web-map-links/v1.2.0/schema.json"
-  ],
-  "type": "Collection"
+  "sci:citation" : "{\"suggestedCitation\":null,\"useLimitations\":[\"This metadata record is publicly available.\"],\"otherConstraints\":[\"Data are available online via the Australian Antarctic Division Data Centre web page, and also via the Australian Ocean Data Network Web Portal.  A \\\"supplementary\\\" dataset is also available for download from the provided URL.  It contains raw data collected directly from the ship, which has not been quality checked.\",\"This data set conforms to the CCBY Attribution License\\n                            (http://creativecommons.org/licenses/by/4.0/).\\n\\n                            Please follow instructions listed in the citation reference provided at http://data.aad.gov.au/aadc/metadata/citation.cfm?entry_id=201112060 when using these data.\"]}",
+  "type" : "Collection",
+  "stac_version" : "1.0.0",
+  "stac_extensions" : [ "https://stac-extensions.github.io/scientific/v1.0.0/schema.json", "https://stac-extensions.github.io/contacts/v0.1.1/schema.json", "https://stac-extensions.github.io/projection/v1.1.0/schema.json", "https://stac-extensions.github.io/language/v1.0.0/schema.json", "https://stac-extensions.github.io/themes/v1.0.0/schema.json", "https://stac-extensions.github.io/web-map-links/v1.2.0/schema.json" ]
 }

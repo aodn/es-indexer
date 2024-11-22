@@ -29,7 +29,9 @@
     "temporal" : [ {
       "start" : "2017-01-13T13:00:00Z",
       "end" : "2016-03-04T12:59:59Z"
-    } ]
+    } ],
+    "parameter_vocabs" : [ ],
+    "organisation_vocabs" : [ ]
   },
   "contacts" : [ {
     "roles" : [ "pointOfContact", "about" ],

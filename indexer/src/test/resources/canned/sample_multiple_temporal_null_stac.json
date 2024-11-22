@@ -34,7 +34,9 @@
       } ],
       "type" : "GeometryCollection"
     },
-    "temporal" : [ ]
+    "temporal" : [ ],
+    "parameter_vocabs" : [ ],
+    "organisation_vocabs" : [ ]
   },
   "contacts" : [ {
     "roles" : [ "pointOfContact", "about" ],

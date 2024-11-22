@@ -1,1123 +1,267 @@
 {
-  "title": "IMOS - ANFOG - Slocum glider deployment along the coast of New South Wales (September-October 2010)",
-  "description": "The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider along the coast of New South Wales.\n\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\n\nThe variables available in this dataset are:\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.",
-  "extent": {
-    "bbox": [
-      [
-        151.801,
-        -33.3906,
-        152.5583,
-        -32.7189
-      ],
-      [
-        151.801,
-        -33.3906,
-        152.5583,
-        -32.7189
-      ]
-    ],
-    "temporal": [
-      [
-        "2010-09-20T15:14:00Z",
-        "2010-10-13T07:59:00Z"
-      ],
-      [
-        "2010-09-20T15:14:00Z",
-        "2010-10-13T07:59:00Z"
-      ]
-    ]
+  "title" : "IMOS - ANFOG - Slocum glider deployment along the coast of New South Wales (September-October 2010)",
+  "description" : "The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider along the coast of New South Wales. The Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf. The variables available in this dataset are: Temperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.",
+  "extent" : {
+    "bbox" : [ [ 151.801, -33.3906, 152.5583, -32.7189 ], [ 151.801, -33.3906, 152.5583, -32.7189 ] ],
+    "temporal" : [ [ "2010-09-20T15:14:00Z", "2010-10-13T07:59:00Z" ], [ "2010-09-20T15:14:00Z", "2010-10-13T07:59:00Z" ] ]
   },
-  "summaries": {
-    "score": 81,
-    "status": "completed",
-    "credits": [
-      "Australia’s Integrated Marine Observing System (IMOS) is enabled by the National Collaborative Research Infrastructure Strategy (NCRIS). It is operated by a consortium of institutions as an unincorporated joint venture, with the University of Tasmania as Lead Agent.",
-      "The University of Western Australia (UWA)"
-    ],
-    "scope": {
-      "code": "dataset",
-      "name": "IMOS Dataset level record"
+  "summaries" : {
+    "score" : 1,
+    "status" : "completed",
+    "credits" : [ "Australia’s Integrated Marine Observing System (IMOS) is enabled by the National Collaborative Research Infrastructure Strategy (NCRIS). It is operated by a consortium of institutions as an unincorporated joint venture, with the University of Tasmania as Lead Agent.", "The University of Western Australia (UWA)" ],
+    "scope" : {
+      "code" : "dataset",
+      "name" : "IMOS Dataset level record"
     },
-    "statement": "The data has undergone the following quality control tests: \n1) Impossible date test, which checks if time values are within a timeframe possible for the ANFOG fleet; 2) Impossible location test, which requires that the observation latitude and longitude from the float be sensible; \n3) Range test, which applies a gross filter on observed values for the measured scientific parameters, that accommodates all of the expected extremes encountered in the oceans around Australia;\n4) Deepest pressure test, which requires that the profile has pressures/depths that are not higher than vehicle safe depth range plus 10%. (If there is a region of incorrect pressures, all corresponding measurements are also flagged as bad data.) \n5) Spike test, which considers that the difference between sequential measurements where one measurement is quite different than adjacent ones, is a spike in both size and gradient. The test does not consider the differences in depth, but assumes a sampling that adequately reproduces the temperature and salinity changes with depth. The algorithm is used on temperature and salinity profiles only. \n6) Gradient test, which is failed when the difference between vertically adjacent measurements is too steep. The test does not consider the differences in depth, but assumes a sampling that adequately reproduces the temperature and salinity changes with depth. The algorithm is used on temperature and salinity profiles only.\n\n \n\nThe results of the above mentioned tests are listed using an IMOS standard set of IODE flags, which the user should refer to when using the data. Only items flagged as 1: Good data or 8: Interpolated data should be used. Each parameter's quality flagging is found in its corresponding quality control parameter (e.g. for the parameter PSAL, the quality flags are found in PSAL_quality_control). \nFor further information, please refer to IMOS NETCDF USER'S MANUAL version 1.2 and AUSTRALIAN NATIONAL FACILITY FOR OCEAN GLIDERS (ANFOG) DATA MANAGEMENT USER'S MANUAL version 1.2 .",
-    "creation": "2017-09-01T14:02:28",
-    "revision": "2017-09-01T14:02:28",
-    "dataset_group": "imos",
-    "dataset_provider": "IMOS",
-    "update_frequency": "completed",
-    "proj:geometry": {
-      "geometries": [
-        {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [
-                151.801,
-                -33.3906
-              ],
-              [
-                152.5583,
-                -33.3906
-              ],
-              [
-                152.5583,
-                -32.7189
-              ],
-              [
-                151.801,
-                -32.7189
-              ],
-              [
-                151.801,
-                -33.3906
-              ]
-            ]
-          ]
-        }
-      ],
-      "type": "GeometryCollection"
+    "statement" : "The data has undergone the following quality control tests: 1) Impossible date test, which checks if time values are within a timeframe possible for the ANFOG fleet; 2) Impossible location test, which requires that the observation latitude and longitude from the float be sensible; 3) Range test, which applies a gross filter on observed values for the measured scientific parameters, that accommodates all of the expected extremes encountered in the oceans around Australia; 4) Deepest pressure test, which requires that the profile has pressures/depths that are not higher than vehicle safe depth range plus 10%. (If there is a region of incorrect pressures, all corresponding measurements are also flagged as bad data.) 5) Spike test, which considers that the difference between sequential measurements where one measurement is quite different than adjacent ones, is a spike in both size and gradient. The test does not consider the differences in depth, but assumes a sampling that adequately reproduces the temperature and salinity changes with depth. The algorithm is used on temperature and salinity profiles only. 6) Gradient test, which is failed when the difference between vertically adjacent measurements is too steep. The test does not consider the differences in depth, but assumes a sampling that adequately reproduces the temperature and salinity changes with depth. The algorithm is used on temperature and salinity profiles only. The results of the above mentioned tests are listed using an IMOS standard set of IODE flags, which the user should refer to when using the data. Only items flagged as 1: Good data or 8: Interpolated data should be used. Each parameter's quality flagging is found in its corresponding quality control parameter (e.g. for the parameter PSAL, the quality flags are found in PSAL_quality_control). For further information, please refer to IMOS NETCDF USER'S MANUAL version 1.2 and AUSTRALIAN NATIONAL FACILITY FOR OCEAN GLIDERS (ANFOG) DATA MANAGEMENT USER'S MANUAL version 1.2 .",
+    "creation" : "2017-09-01T14:02:28",
+    "revision" : "2017-09-01T14:02:28",
+    "dataset_provider" : "IMOS",
+    "update_frequency" : "completed",
+    "proj:geometry" : {
+      "geometries" : [ {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 151.801, -33.3906 ], [ 152.5583, -33.3906 ], [ 152.5583, -32.7189 ], [ 151.801, -32.7189 ], [ 151.801, -33.3906 ] ] ]
+      } ],
+      "type" : "GeometryCollection"
     },
-    "proj:geometry_noland": {
-      "geometries": [
-        {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [
-                152.5,
-                -32.75
-              ],
-              [
-                152,
-                -32.75
-              ],
-              [
-                151.75,
-                -32.75
-              ],
-              [
-                151.75,
-                -33.5
-              ],
-              [
-                152.5,
-                -33.5
-              ],
-              [
-                152.5,
-                -32.75
-              ]
-            ]
-          ]
-        }
-      ],
-      "type": "GeometryCollection"
+    "proj:geometry_noland" : {
+      "geometries" : [ {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 152.09870725145367, -32.7189 ], [ 152.18506920700008, -32.76677825299993 ], [ 151.801, -32.89310063773732 ], [ 151.801, -33.3906 ], [ 152.5583, -33.3906 ], [ 152.5583, -32.7189 ], [ 152.09870725145367, -32.7189 ] ] ]
+      } ],
+      "type" : "GeometryCollection"
     },
-    "temporal": [
-      {
-        "start": "2010-09-20T15:14:00Z",
-        "end": "2010-10-13T07:59:00Z"
-      }
-    ]
+    "temporal" : [ {
+      "start" : "2010-09-20T15:14:00Z",
+      "end" : "2010-10-13T07:59:00Z"
+    } ],
+    "parameter_vocabs" : [ ],
+    "organisation_vocabs" : [ ]
   },
-  "contacts": [
-    {
-      "roles": [
-        "pointOfContact",
-        "about"
-      ],
-      "organization": "School of Civil, Environmental and Mining Engineering (CEME), The University of Western Australia (UWA)",
-      "name": "Pattiaratchi, Charitha, Professor",
-      "position": "",
-      "emails": [
-        "chari.pattiaratchi@uwa.edu.au"
-      ],
-      "addresses": [
-        {
-          "delivery_point": [
-            "MO51, 35 Stirling highway"
-          ],
-          "city": "Crawley",
-          "country": "Australia",
-          "postal_code": "6009",
-          "administrative_area": "Western Australia"
-        }
-      ],
-      "phones": [
-        {
-          "roles": [
-            "voice"
-          ],
-          "value": "61 8 6488 3525"
-        },
-        {
-          "roles": [
-            "facsimile"
-          ],
-          "value": "61 8 6488 1015"
-        }
-      ],
-      "links": []
-    },
-    {
-      "roles": [
-        "distributor",
-        "metadata"
-      ],
-      "organization": "Integrated Marine Observing System (IMOS)",
-      "name": "",
-      "position": "Data Officer",
-      "emails": [
-        "info@aodn.org.au"
-      ],
-      "addresses": [
-        {
-          "delivery_point": [
-            "University of Tasmania",
-            "Private Bag 110"
-          ],
-          "city": "Hobart",
-          "country": "Australia",
-          "postal_code": "7001",
-          "administrative_area": "Tasmania"
-        }
-      ],
-      "phones": [
-        {
-          "roles": [
-            "voice"
-          ],
-          "value": "61 3 6226 7488"
-        },
-        {
-          "roles": [
-            "facsimile"
-          ],
-          "value": "61 3 6226 2107"
-        }
-      ],
-      "links": [
-        {
-          "href": "http://imos.org.au/aodn.html",
-          "type": "WWW:LINK-1.0-http--link",
-          "title": "Website of the Australian Ocean Data Network (AODN)"
-        }
-      ]
-    },
-    {
-      "roles": [
-        "resourceProvider",
-        "citation"
-      ],
-      "organization": "Integrated Marine Observing System (IMOS)",
-      "name": null,
-      "position": null,
-      "emails": [
-        "imos@imos.org.au"
-      ],
-      "addresses": [
-        {
-          "delivery_point": [
-            "Private Bag 110"
-          ],
-          "city": "Hobart",
-          "country": "Australia",
-          "postal_code": "7001",
-          "administrative_area": "Tasmania"
-        }
-      ],
-      "phones": [
-        {
-          "roles": [
-            "voice"
-          ],
-          "value": "61 3 6226 7549"
-        },
-        {
-          "roles": [
-            "facsimile"
-          ],
-          "value": "61 3 6226 2107"
-        }
-      ],
-      "links": [
-        {
-          "href": "http://www.imos.org.au/html",
-          "type": "WWW:LINK-1.0-http--link",
-          "title": "Website of the Integrated Marine Observing System (IMOS)"
-        }
-      ]
-    }
-  ],
-  "languages": [
-    {
-      "code": "eng",
-      "name": "English"
-    }
-  ],
-  "links": [
-    {
-      "href": "http://thredds.aodn.org.au/thredds/dodsC/IMOS/ANFOG/slocum_glider/NSW20100921/IMOS_ANFOG_BCEOPSTUV_20100921T011446Z_SL106_FV01_timeseries_END-20101006T073015Z.nc.html",
-      "rel": "related",
-      "type": "text/html",
-      "title": "Data available via the IMOS OPeNDAP server"
-    },
-    {
-      "href": "http://thredds.aodn.org.au/thredds/fileServer/IMOS/ANFOG/slocum_glider/NSW20100921/IMOS_ANFOG_BCEOPSTUV_20100921T011446Z_SL106_FV01_timeseries_END-20101006T073015Z.nc",
-      "rel": "related",
-      "type": "",
-      "title": "Download data from the IMOS THREDDS server"
-    },
-    {
-      "href": "https://s3-ap-southeast-2.amazonaws.com/content.aodn.org.au/Documents/IMOS/Facilities/Ocean_glider/glider_data_management.pdf",
-      "rel": "related",
-      "type": "text/html",
-      "title": "Link to the ANFOG data management document"
-    },
-    {
-      "href": "http://data.aodn.org.au/?prefix=IMOS/ANFOG/slocum_glider/NSW20100921/",
-      "rel": "related",
-      "type": "text/html",
-      "title": "Summary plots of each variable measured during the deployment (JPEG files)"
-    },
-    {
-      "href": "https://geonetwork-edge.edge.aodn.org.au:443/geonetwork/images/harvesting/IMOS_colour_logo.gif",
-      "rel": "icon",
-      "type": "image/png",
-      "title": "Suggest icon for dataset"
-    },
-    {
-      "href": "https://catalogue-imos.aodn.org.au:443/geonetwork/srv/api/records/236e4480-d188-4818-8258-7bdb0fd5e0aa/attachments/NSW20100921_s.png",
-      "rel": "preview",
-      "type": "image"
-    },
-    {
-      "href": "https://catalogue-imos.aodn.org.au:443/geonetwork/srv/api/records/236e4480-d188-4818-8258-7bdb0fd5e0aa",
-      "rel": "describedby",
-      "type": "text/html",
-      "title": "Full metadata link"
-    },
-    {
-      "href": "https://licensebuttons.net/l/by/4.0/88x31.png",
-      "rel": "license",
-      "type": "image/png"
-    },
-    {
-      "href": "http://creativecommons.org/licenses/by/4.0/",
-      "rel": "license",
-      "type": "text/html"
-    },
-    {
-      "href": "uuid:2436c7a9-59a2-4ed1-8e7c-f513e945bd6e",
-      "rel": "parent",
-      "type": "application/json",
-      "title": "{\"title\":\"Slocum glider : a platform of the IMOS ANFOG facility\",\"recordAbstract\":\"The Australian National Facility for Ocean Gliders (ANFOG) manages Slocum gliders to be deployed on the continental shelf.\\n\\nOcean gliders are autonomous underwater vehicles (AUV) which harvest their propulsion from the ocean itself. By changing its buoyancy, the glider is able to descend and ascend. This momentum is converted to forward motion by its wings. Pitch adjustments are made by moving an internal mass (battery pack) and steering is done using a rudder and/or battery packs. Moving at an average horizontal velocity of 25 - 40 cm s-1 the glider navigates its way to a series of pre-programmed waypoints using GPS, internal dead reckoning and altimeter measurements. The gliders are programmed to provide data through satellite communication when it is at the surface and it is also possible to control the path of the glider during its mission. \\n\\nSlocum gliders, manufactured by Webb Research Corp are optimised for shallow coastal water (< 200m) where high maneuverability is needed. Slocum gliders have a maximum endurance of 30 days and are used in intensive coastal monitoring.\\n\\nSlocum gliders are commonly instrumented with a Seabird-CTD (SBE 41 or GPCTD), WETLabs ECO Triplet (measuring Chlorophyll-a, CDOM & Backscatter), a Satlantic OCR-504 multispectral radiometer and an Aanderaa Oxygen optode.\"}"
-    },
-    {
-      "href": "uuid:bbf37d22-34ff-496d-bdf6-d3f7f767649f",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Western Australia off Two Rocks (September 2010)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider in the region of Two Rocks (Western Australia).\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:c3ec25ef-cc57-40be-9518-9f7d819e59c7",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment along the coast of New South Wales (May - June 2011)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider along the coast of New South Wales.\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:c5a8f4d0-f13b-462c-b882-e8aa4c5a6abf",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Western Australia off Two Rocks (February-March 2010)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider in the region of Two Rocks (Western Australia).\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:c61759e5-6e25-48be-b587-c86c5eca364e",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Western Australia off the coast of Kimberley (May - June 2012)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters including dissolved oxygen and turbidity data measured by a Slocum glider off the coast of Kimberley (Western Australia).\\n\\nSlocum glider data from the oceans around Australia have been collected by ANFOG since June 2008 and are ongoing. The data are obtained from an onboard suite of instruments which include Seabird-SBE41 CTD (Conductivity, Temperature, Depth), WETLabs BBFL2SLO 3 parameter optical sensor (measuring Chlorophyll-a, CDOM and 700nm Backscatter) and an Aanderaa oxygen optode (measuring concentration of dissolved oxygen in seawater.\"}"
-    },
-    {
-      "href": "uuid:c57196a3-8f1d-4212-9c14-33d4e449225c",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"ANFOG - Slocum glider deployment in Western Australia off the coast of Kimberley (December 2013)\",\"recordAbstract\":\"The dataset contains temperature, and turbidity data measured by a Slocum glider off the coast of Kimberley (Western Australia). Salinity and conductivity data collected on this deployment, wasn't suitable quality to be made available.\\n\\nSlocum glider data from the oceans around Australia have been collected by ANFOG since June 2008 and are ongoing. The data are obtained from an onboard suite of instruments which include Seabird-SBE41 CTD (Conductivity, Temperature, Depth), WETLabs BBFL2SLO 3 parameter optical sensor (measuring Chlorophyll-a, CDOM and 700nm Backscatter) and an Aanderaa oxygen optode (measuring concentration of dissolved oxygen in seawater.\"}"
-    },
-    {
-      "href": "uuid:b6c2b127-bd8a-4043-873d-458870f45f04",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Western Australia off Two Rocks (August 2011)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters including dissolved oxygen and turbidity data measured by a Slocum glider in the region of Two Rocks (Western Australia).\\n\\nSlocum glider data from the oceans around Australia have been collected by ANFOG since June 2008 and are ongoing. The data are obtained from an onboard suite of instruments which include Seabird-SBE41 CTD (Conductivity, Temperature, Depth), WETLabs BBFL2SLO 3 parameter optical sensor (measuring Chlorophyll-a, CDOM and 700nm Backscatter) and an Aanderaa oxygen optode (measuring concentration of dissolved oxygen in seawater.\"}"
-    },
-    {
-      "href": "uuid:b480b090-def7-4fbd-8d1b-33fb34ea01fc",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in New South Wales off Port Stephens (November - December 2008)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider in the region of Port Stephens (New South Wales).\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:ab23ca27-07b8-419c-9127-ce5ca49183b7",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Western Australia off Pilbara (March - April 2013)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider in the region off Pilbara (Western Australia).\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:bc307435-e56e-49d1-abd9-92323e3b1ae4",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in New South Wales off Harrington (March- April 2009)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider in the region of Harrington (New South Wales).\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:2444d971-9279-4a5c-ac47-7e7a16baa91c",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in New South Wales off Crowdy Head (October 2009)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider in the region of Crowdy Head (New South Wales).\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:2350e41f-379a-4742-aff7-6b89a4e9fbaf",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"ANFOG - Slocum glider deployment in Western Australia off the coast of Kimberley (Sept - Oct 2013)\",\"recordAbstract\":\"The dataset contains temperature, salinity and turbidity data measured by a Slocum glider off the coast of Kimberley (Western Australia). \\n\\nSlocum glider data from the oceans around Australia have been collected by ANFOG since June 2008 and are ongoing. The data are obtained from an onboard suite of instruments which include Seabird-SBE41 CTD (Conductivity, Temperature, Depth), WETLabs BBFL2SLO 3 parameter optical sensor (measuring Chlorophyll-a, CDOM and 700nm Backscatter) and an Aanderaa oxygen optode (measuring concentration of dissolved oxygen in seawater.\"}"
-    },
-    {
-      "href": "uuid:2fe31b45-721d-4995-adab-a36117b65611",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Western Australia off Two Rocks (April 2009)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider in the region of Two Rocks (Western Australia).\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:334592c9-991a-4e55-aba1-0b3247387a03",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment off Yamba (New South Wales) (November 2012)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider from Yamba (New South Wales) down the coast.\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:32ba8f52-30cb-4705-bf7a-17ad92c76392",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Tasmania in Storm Bay (September 2012)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters measured by a Slocum glider in Storm Bay (Tasmania).\\n\\nSlocum glider data from the oceans around Australia have been collected by ANFOG since June 2008 and are ongoing. The data are obtained from an onboard suite of instruments which include Seabird-SBE41 CTD (Conductivity, Temperature, Depth), WETLabs BBFL2SLO 3 parameter optical sensor (measuring Chlorophyll-a, CDOM and 700nm Backscatter) and an Aanderaa oxygen optode (measuring concentration of dissolved oxygen in seawater.\"}"
-    },
-    {
-      "href": "uuid:31cb2eae-aad1-4233-acd2-37907d5d3d00",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in New South Wales off Port Stephens (October - November 2009)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider in the region of Port Stephens (New South Wales).\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:3c043d08-b808-4e08-a70e-bf9a4fbb5ed2",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment off Yamba (New South Wales) (September 2012)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider from Yamba (New South Wales) down the coast.\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:40960c85-7190-4a9a-bd34-8ebd561dc275",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Tasmania in Storm Bay (February 2013)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters measured by a Slocum glider in Storm Bay (Tasmania). \\n\\nSlocum glider data from the oceans around Australia have been collected by ANFOG since June 2008 and are ongoing. The data are obtained from an onboard suite of instruments which include Seabird-SBE41 CTD (Conductivity, Temperature, Depth), WETLabs BBFL2SLO 3 parameter optical sensor (measuring Chlorophyll-a, CDOM and 700nm Backscatter) and an Aanderaa oxygen optode (measuring concentration of dissolved oxygen in seawater.\"}"
-    },
-    {
-      "href": "uuid:38256cb9-32fb-4728-aa7f-97c5a25a4a39",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Western Australia off Two Rocks (March 2009)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider in the region of Two Rocks (Western Australia).\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:3fc2023c-d4c8-490f-a709-2d8f4f5df660",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Western Australia off Two Rocks (July-August 2010)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider in the region of Two Rocks (Western Australia).\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:70892fd6-c39d-41e0-84d2-8c614114097d",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Western Australia off Two Rocks (September 2011)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters including dissolved oxygen and turbidity data measured by a Slocum glider in the region of Two Rocks (Western Australia).\\n\\nSlocum glider data from the oceans around Australia have been collected by ANFOG since June 2008 and are ongoing. The data are obtained from an onboard suite of instruments which include Seabird-SBE41 CTD (Conductivity, Temperature, Depth), WETLabs BBFL2SLO 3 parameter optical sensor (measuring Chlorophyll-a, CDOM and 700nm Backscatter) and an Aanderaa oxygen optode (measuring concentration of dissolved oxygen in seawater.\"}"
-    },
-    {
-      "href": "uuid:692f0c39-535d-4f97-b0fe-1592e161c125",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Western Australia off Two Rocks (August 2010)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider in the region of Two Rocks (Western Australia).\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:67e3f2cb-d8a3-4aa3-9e54-bd59650999b5",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Western Australia off Two Rocks (December 2009)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider in the region of Two Rocks (Western Australia).\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:63dd6d5a-04f9-4d23-8d75-240e9c6d9760",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Western Australia off the coast of Kimberley (November - December 2011)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters including dissolved oxygen and turbidity data measured by a Slocum glider off the coast of Kimberley (Western Australia).\\n\\nSlocum glider data from the oceans around Australia have been collected by ANFOG since June 2008 and are ongoing. The data are obtained from an onboard suite of instruments which include Seabird-SBE41 CTD (Conductivity, Temperature, Depth), WETLabs BBFL2SLO 3 parameter optical sensor (measuring Chlorophyll-a, CDOM and 700nm Backscatter) and an Aanderaa oxygen optode (measuring concentration of dissolved oxygen in seawater.\"}"
-    },
-    {
-      "href": "uuid:73cac861-f096-4ea9-8b07-bf2cfacb4a0a",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Tasmania in Storm Bay (September - October 2012)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters measured by a Slocum glider in Storm Bay (Tasmania). \\n\\nSlocum glider data from the oceans around Australia have been collected by ANFOG since June 2008 and are ongoing. The data are obtained from an onboard suite of instruments which include Seabird-SBE41 CTD (Conductivity, Temperature, Depth), WETLabs BBFL2SLO 3 parameter optical sensor (measuring Chlorophyll-a, CDOM and 700nm Backscatter) and an Aanderaa oxygen optode (measuring concentration of dissolved oxygen in seawater.\"}"
-    },
-    {
-      "href": "uuid:83eb8eb5-a704-45b1-99be-d6fcc2c2489d",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Western Australia off Two Rocks (June 2009)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider in the region of Two Rocks (Western Australia).\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:857cee7b-72d1-43b5-9fbe-ff77e9e2a2d4",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Western Australia off Pilbara (July 2012)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider in the region off Pilbara (Western Australia).\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:7dec18bb-c9f4-4d76-a567-36cae263d5a4",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in South Australia in Marion Bay (January - February 2009)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider in the region of Marion Bay (South Australia).\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:7e2782ab-1413-4fba-bd99-6f67a97d72e8",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Western Australia off Pilbara (July 2013)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider in the region off Pilbara (Western Australia).\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:7cbc16ce-1488-432f-a15d-988494e908f0",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Spencer Gulf (South Australia) (October - November 2013)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider in Spencer Gulf (South Australia).\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:7eba0403-eb7b-495e-91e3-d6b5d87e1898",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment off Yamba (New South Wales) (November - December 2013)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider from Yamba (New South Wales) down the coast.\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:61760c6b-6671-41c8-b6eb-14be225d14a5",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment off Yamba (New South Wales) (May - June 2013)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider from Yamba (New South Wales) down the coast.\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:4ae86da3-22b5-4595-86ea-ff43517e3c25",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Western Australia off Pilbara (Feb - March 2012)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider in the region off Pilbara (Western Australia).\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:4e0ccf5e-a53c-4657-8cca-558372380c8a",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Western Australia off Pilbara (September - October 2013)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider in the region off Pilbara (Western Australia).\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:61078ebc-f4c1-4135-b93b-8b44c5d85eb1",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Western Australia off Two Rocks (May 2012)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters including dissolved oxygen and turbidity data measured by a Slocum glider in the region of Two Rocks (Western Australia).\\n\\nSlocum glider data from the oceans around Australia have been collected by ANFOG since June 2008 and are ongoing. The data are obtained from an onboard suite of instruments which include Seabird-SBE41 CTD (Conductivity, Temperature, Depth), WETLabs BBFL2SLO 3 parameter optical sensor (measuring Chlorophyll-a, CDOM and 700nm Backscatter) and an Aanderaa oxygen optode (measuring concentration of dissolved oxygen in seawater.\"}"
-    },
-    {
-      "href": "uuid:5fe1b4c7-6a74-48b2-a036-9f78885a1c00",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Western Australia off Two Rocks (June-July 2010)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider in the region of Two Rocks (Western Australia).\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:8cf9f025-f2ad-4d7f-a78c-5a959d771797",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment off Yamba (New South Wales) (July - August 2012)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider from Yamba (New South Wales) down the coast.\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:85ae192f-a667-4987-aaa8-4a5f06739788",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Tasmania in Storm Bay (September - October 2011)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters including dissolved oxygen and turbidity data measured by a Slocum glider in Storm Bay (Tasmania).\\n\\nSlocum glider data from the oceans around Australia have been collected by ANFOG since June 2008 and are ongoing. The data are obtained from an onboard suite of instruments which include Seabird-SBE41 CTD (Conductivity, Temperature, Depth), WETLabs BBFL2SLO 3 parameter optical sensor (measuring Chlorophyll-a, CDOM and 700nm Backscatter) and an Aanderaa oxygen optode (measuring concentration of dissolved oxygen in seawater.\"}"
-    },
-    {
-      "href": "uuid:2ff50a12-9748-470e-8ad8-007059c28932",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment along the coast of New South Wales (November-December 2010)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider along the coast of new South Wales (NSW).\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:39fcdf29-f588-4fc6-89ea-142b6669b679",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Western Australia off Two Rocks (August -September 2012)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters including dissolved oxygen and turbidity data measured by a Slocum glider in the region of Two Rocks (Western Australia).\\n\\nSlocum glider data from the oceans around Australia have been collected by ANFOG since June 2008 and are ongoing. The data are obtained from an onboard suite of instruments which include Seabird-SBE41 CTD (Conductivity, Temperature, Depth), WETLabs BBFL2SLO 3 parameter optical sensor (measuring Chlorophyll-a, CDOM and 700nm Backscatter) and an Aanderaa oxygen optode (measuring concentration of dissolved oxygen in seawater.\"}"
-    },
-    {
-      "href": "uuid:5476f789-d940-4181-bd09-56f277a416aa",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Western Australia off Two Rocks (January-February 2010)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider in the region of Two Rocks (Western Australia).\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:4c5a6cd6-050e-43ad-816a-9469c593bb20",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Western Australia off Two Rocks (March - April 2009)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider in the region of Two Rocks (Western Australia).\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:4d2d6a1c-813c-4a96-a027-97eeaaedba90",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment off Coffs Harbour (New south wales) (November 2011)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider off Coffs Harbour (New South Wales).\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:4ead7771-2841-4410-a897-37447d9f6f46",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Tasmania in Storm Bay (June - July 2013)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters measured by a Slocum glider in Storm Bay (Tasmania). \\n\\nSlocum glider data from the oceans around Australia have been collected by ANFOG since June 2008 and are ongoing. The data are obtained from an onboard suite of instruments which include Seabird-SBE41 CTD (Conductivity, Temperature, Depth), WETLabs BBFL2SLO 3 parameter optical sensor (measuring Chlorophyll-a, CDOM and 700nm Backscatter) and an Aanderaa oxygen optode (measuring concentration of dissolved oxygen in seawater.\"}"
-    },
-    {
-      "href": "uuid:58094642-aa37-40a9-9883-71a28164e5c6",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Western Australia off Two Rocks (January - February 2009)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider in the region of Two Rocks (Western Australia).\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:539676a0-936e-4108-b0b1-afe9f06f15e5",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Western Australia off Two Rocks (May 2010)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider in the region of Two Rocks (Western Australia).\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:5f564100-3f15-4905-a6bb-e00f292c1ade",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment along the coast of New South Wales (August 2011)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider along the coast of New South Wales.\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:7794870e-cade-4fd0-8d45-049c0ae2e546",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Western Australia off Pilbara (June - July 2013)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider in the region off Pilbara (Western Australia).\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:47b2bb53-d217-4e41-b434-742432bc219d",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deep deployment in Western Australia in a canyon off Perth (December 2012)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider in Perth Canyon (Western Australia).\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:3b7ec097-f1a6-45ab-8e34-88519ed488f1",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Western Australia off Two Rocks (June - July 2011)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters including dissolved oxygen and turbidity data measured by a Slocum glider in the region of Two Rocks (Western Australia).\\n\\nSlocum glider data from the oceans around Australia have been collected by ANFOG since June 2008 and are ongoing. The data are obtained from an onboard suite of instruments which include Seabird-SBE41 CTD (Conductivity, Temperature, Depth), WETLabs BBFL2SLO 3 parameter optical sensor (measuring Chlorophyll-a, CDOM and 700nm Backscatter) and an Aanderaa oxygen optode (measuring concentration of dissolved oxygen in seawater.\"}"
-    },
-    {
-      "href": "uuid:4bb87259-ecdc-4f83-a1b2-d9823ded83b4",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"ANFOG - Slocum glider deployment in Western Australia off the coast of Kimberley (July - August 2012)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters including dissolved oxygen and turbidity data measured by a Slocum glider off the coast of Kimberley (Western Australia).\\n\\nSlocum glider data from the oceans around Australia have been collected by ANFOG since June 2008 and are ongoing. The data are obtained from an onboard suite of instruments which include Seabird-SBE41 CTD (Conductivity, Temperature, Depth), WETLabs BBFL2SLO 3 parameter optical sensor (measuring Chlorophyll-a, CDOM and 700nm Backscatter) and an Aanderaa oxygen optode (measuring concentration of dissolved oxygen in seawater.\"}"
-    },
-    {
-      "href": "uuid:7b700bf2-0114-4d8b-9498-618557748aed",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in South Australia in Marion Bay (November 2009)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider in the region of Marion Bay (South Australia).\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:7aa7e9d2-07d8-42c5-98b1-ec1f868aa2b9",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Western Australia off Two Rocks (April - May 2013)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters including dissolved oxygen and turbidity data measured by a Slocum glider in the region of Two Rocks (Western Australia).\\n\\nSlocum glider data from the oceans around Australia have been collected by ANFOG since June 2008 and are ongoing. The data are obtained from an onboard suite of instruments which include Seabird-SBE41 CTD (Conductivity, Temperature, Depth), WETLabs BBFL2SLO 3 parameter optical sensor (measuring Chlorophyll-a, CDOM and 700nm Backscatter) and an Aanderaa oxygen optode (measuring concentration of dissolved oxygen in seawater.\"}"
-    },
-    {
-      "href": "uuid:6ff72ea6-dcaf-4289-a5d9-8f07678162ab",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Tasmania in Storm Bay (June 2012)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters measured by a Slocum glider in Storm Bay (Tasmania). \\n\\nSlocum glider data from the oceans around Australia have been collected by ANFOG since June 2008 and are ongoing. The data are obtained from an onboard suite of instruments which include Seabird-SBE41 CTD (Conductivity, Temperature, Depth), WETLabs BBFL2SLO 3 parameter optical sensor (measuring Chlorophyll-a, CDOM and 700nm Backscatter) and an Aanderaa oxygen optode (measuring concentration of dissolved oxygen in seawater.\"}"
-    },
-    {
-      "href": "uuid:7a66914f-ece7-4150-8c1c-402b16738a6d",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Western Australia off Two Rocks (October - November 2013)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters including dissolved oxygen and turbidity data measured by a Slocum glider in the region of Two Rocks (Western Australia).\\n\\nSlocum glider data from the oceans around Australia have been collected by ANFOG since June 2008 and are ongoing. The data are obtained from an onboard suite of instruments which include Seabird-SBE41 CTD (Conductivity, Temperature, Depth), WETLabs BBFL2SLO 3 parameter optical sensor (measuring Chlorophyll-a, CDOM and 700nm Backscatter) and an Aanderaa oxygen optode (measuring concentration of dissolved oxygen in seawater.\"}"
-    },
-    {
-      "href": "uuid:d088303a-84d6-42b4-ae8b-ad3d8803f94d",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Western Australia off Two Rocks (March 2011)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters including dissolved oxygen and turbidity data measured by a Slocum glider in the region of Two Rocks (Western Australia).\\n\\nSlocum glider data from the oceans around Australia have been collected by ANFOG since June 2008 and are ongoing. The data are obtained from an onboard suite of instruments which include Seabird-SBE41 CTD (Conductivity, Temperature, Depth), WETLabs BBFL2SLO 3 parameter optical sensor (measuring Chlorophyll-a, CDOM and 700nm Backscatter) and an Aanderaa oxygen optode (measuring concentration of dissolved oxygen in seawater.\"}"
-    },
-    {
-      "href": "uuid:c88de8ac-ba71-4cae-8c85-110358d28eef",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Tasmania in Storm Bay (March - April 2013)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters measured by a Slocum glider in Storm Bay (Tasmania). \\n\\nSlocum glider data from the oceans around Australia have been collected by ANFOG since June 2008 and are ongoing. The data are obtained from an onboard suite of instruments which include Seabird-SBE41 CTD (Conductivity, Temperature, Depth), WETLabs BBFL2SLO 3 parameter optical sensor (measuring Chlorophyll-a, CDOM and 700nm Backscatter) and an Aanderaa oxygen optode (measuring concentration of dissolved oxygen in seawater.\"}"
-    },
-    {
-      "href": "uuid:9e1414b2-3f8e-47c4-85df-dcc84444c325",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"ANFOG - Slocum glider deployment in Western Australia off the coast of Kimberley (Feb - Mar 2013)\",\"recordAbstract\":\"The dataset contains temperature, salinity and turbidity data measured by a Slocum glider off the coast of Kimberley (Western Australia). \\n\\nSlocum glider data from the oceans around Australia have been collected by ANFOG since June 2008 and are ongoing. The data are obtained from an onboard suite of instruments which include Seabird-SBE41 CTD (Conductivity, Temperature, Depth), WETLabs BBFL2SLO 3 parameter optical sensor (measuring Chlorophyll-a, CDOM and 700nm Backscatter) and an Aanderaa oxygen optode (measuring concentration of dissolved oxygen in seawater.\"}"
-    },
-    {
-      "href": "uuid:8471efab-5d49-47ea-9a48-ce26aa161fa2",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment off Yamba (New South Wales) (October 2013)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider from Yamba (New South Wales) down the coast.\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:85c4287a-f72a-42d7-919b-2d9d3fcbd5da",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Marion Bay (South Australia) (February 2011)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider in the region of Marion Bay (South Australia).\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:930c96c5-e4bf-490e-8a70-8276e4ef4efc",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Spencer Gulf (South Australia) (September - October 2012)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider in Spencer Gulf (South Australia).\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:954c2a0b-5047-4fde-a534-d744421c9bc5",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Western Australia off Two Rocks (April 2011 - June 2011)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider in the region of Two Rocks (Western Australia).\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:8e615831-1f56-4d12-8305-be44ef61321b",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Spencer Gulf (South Australia) (April 2013)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider in Spencer Gulf (South Australia).\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:8f0c7342-915c-4ce7-a55e-4fa6aa66daa8",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Western Australia off Two Rocks (February - March 2013)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters including dissolved oxygen and turbidity data measured by a Slocum glider in the region of Two Rocks (Western Australia).\\n\\nSlocum glider data from the oceans around Australia have been collected by ANFOG since June 2008 and are ongoing. The data are obtained from an onboard suite of instruments which include Seabird-SBE41 CTD (Conductivity, Temperature, Depth), WETLabs BBFL2SLO 3 parameter optical sensor (measuring Chlorophyll-a, CDOM and 700nm Backscatter) and an Aanderaa oxygen optode (measuring concentration of dissolved oxygen in seawater.\"}"
-    },
-    {
-      "href": "uuid:99a075e3-295b-4090-b3f1-8ce7be1a52d6",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Western Australia off Two Rocks (February - March 2009)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider in the region of Two Rocks (Western Australia).\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:d9668e1a-775d-453b-99e4-535471bb1dbf",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Tasmania in Storm Bay (February - March 2013)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters measured by a Slocum glider in Storm Bay (Tasmania). \\n\\nSlocum glider data from the oceans around Australia have been collected by ANFOG since June 2008 and are ongoing. The data are obtained from an onboard suite of instruments which include Seabird-SBE41 CTD (Conductivity, Temperature, Depth), WETLabs BBFL2SLO 3 parameter optical sensor (measuring Chlorophyll-a, CDOM and 700nm Backscatter) and an Aanderaa oxygen optode (measuring concentration of dissolved oxygen in seawater.\"}"
-    },
-    {
-      "href": "uuid:f58419ab-6b5e-45d3-87fe-5cc7a2b0d23b",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Western Australia off Pilbara (Feb-Mar 2013)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider in the region off Pilbara (Western Australia).\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:e00b98db-0c6f-4ea1-b436-83146f08b9e5",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Western Australia off Kalbarri (December 2009 - January 2010)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider in the region of Kalbarri (Western Australia).\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:a4120f5f-1c85-46cb-af6e-45a5ac484bdb",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Western Australia off Two Rocks (Feb-Mar 2012)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters including dissolved oxygen and turbidity data measured by a Slocum glider in the region of Two Rocks (Western Australia).\\n\\nSlocum glider data from the oceans around Australia have been collected by ANFOG since June 2008 and are ongoing. The data are obtained from an onboard suite of instruments which include Seabird-SBE41 CTD (Conductivity, Temperature, Depth), WETLabs BBFL2SLO 3 parameter optical sensor (measuring Chlorophyll-a, CDOM and 700nm Backscatter) and an Aanderaa oxygen optode (measuring concentration of dissolved oxygen in seawater.\"}"
-    },
-    {
-      "href": "uuid:faedd126-cd62-4db4-81ce-07bbae6eee99",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Spencer Gulf (South Australia) (Nov - Dec 2012)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider in Spencer Gulf (South Australia).\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:f0d8b0af-fe5c-46e7-b803-e1bb3d75067c",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in South Australia in Marion Bay (May - June 2009)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider in the region of Marion Bay (South Australia).\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:f801c714-5bb1-467e-86cb-052991cdfaa4",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Tasmania in Storm Bay (November - December 2012)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters measured by a Slocum glider in Storm Bay (Tasmania). \\n\\nSlocum glider data from the oceans around Australia have been collected by ANFOG since June 2008 and are ongoing. The data are obtained from an onboard suite of instruments which include Seabird-SBE41 CTD (Conductivity, Temperature, Depth), WETLabs BBFL2SLO 3 parameter optical sensor (measuring Chlorophyll-a, CDOM and 700nm Backscatter) and an Aanderaa oxygen optode (measuring concentration of dissolved oxygen in seawater.\"}"
-    },
-    {
-      "href": "uuid:fc2093e5-21c5-4633-8e36-26d985ef9eba",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Tasmania in Storm Bay (October - November 2012)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters measured by a Slocum glider in Storm Bay (Tasmania). \\n\\nSlocum glider data from the oceans around Australia have been collected by ANFOG since June 2008 and are ongoing. The data are obtained from an onboard suite of instruments which include Seabird-SBE41 CTD (Conductivity, Temperature, Depth), WETLabs BBFL2SLO 3 parameter optical sensor (measuring Chlorophyll-a, CDOM and 700nm Backscatter) and an Aanderaa oxygen optode (measuring concentration of dissolved oxygen in seawater.\"}"
-    },
-    {
-      "href": "uuid:cc727869-3a58-4cd8-ae4e-18c348e26115",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Tasmania in Storm Bay (August 2011)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters measured by a Slocum glider in Storm Bay (Tasmania). \\n\\nSlocum glider data from the oceans around Australia have been collected by ANFOG since June 2008 and are ongoing. The data are obtained from an onboard suite of instruments which include Seabird-SBE41 CTD (Conductivity, Temperature, Depth), WETLabs BBFL2SLO 3 parameter optical sensor (measuring Chlorophyll-a, CDOM and 700nm Backscatter) and an Aanderaa oxygen optode (measuring concentration of dissolved oxygen in seawater.\"}"
-    },
-    {
-      "href": "uuid:f47c120e-7472-48d6-a2bd-eb455790dc8a",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Western Australia off Two Rocks (August 2012)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters including dissolved oxygen and turbidity data measured by a Slocum glider in the region of Two Rocks (Western Australia).\\n\\nSlocum glider data from the oceans around Australia have been collected by ANFOG since June 2008 and are ongoing. The data are obtained from an onboard suite of instruments which include Seabird-SBE41 CTD (Conductivity, Temperature, Depth), WETLabs BBFL2SLO 3 parameter optical sensor (measuring Chlorophyll-a, CDOM and 700nm Backscatter) and an Aanderaa oxygen optode (measuring concentration of dissolved oxygen in seawater.\"}"
-    },
-    {
-      "href": "uuid:f87186b2-64db-4cc0-83bb-4a9d9c104c53",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Spencer Gulf (South Australia) (April - May 2012)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider in Spencer Gulf (South Australia).\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:e42231d2-18b6-4f65-a54d-22c8f6be80ba",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Western Australia off Two Rocks (July - August 2009)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider in the region of Two Rocks (Western Australia).\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:06d286b8-42ea-49dd-8ec5-a96c041ad179",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in New South Wales off Port Stephens (March - April 2010)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider in the region of Port Stephens (New South Wales).\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:02afd83a-3c74-4a1a-9d40-59c59b1a6c6d",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Western Australia off Two Rocks (August 2009)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider in the region of Two Rocks (Western Australia).\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:059d52d0-5bd5-421a-8e2b-191ab309f833",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in South Australia in Marion Bay (July 2008)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider in the region of Marion Bay (South Australia).\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:091a4670-dacb-4cd7-b5e5-761c8c9d3bf1",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deep deployment off the south coast of Western Australia in the Bremer canyon (February -March 2013)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider in the Bremer Canyon (Western Australia).\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:079a0082-50c5-4996-b0a9-897469a34118",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"ANFOG - Slocum glider deployment in Western Australia off the coast of Kimberley (June - July 2013)\",\"recordAbstract\":\"The dataset contains temperature, salinity and turbidity data measured by a Slocum glider off the coast of Kimberley (Western Australia). \\n\\nSlocum glider data from the oceans around Australia have been collected by ANFOG since June 2008 and are ongoing. The data are obtained from an onboard suite of instruments which include Seabird-SBE41 CTD (Conductivity, Temperature, Depth), WETLabs BBFL2SLO 3 parameter optical sensor (measuring Chlorophyll-a, CDOM and 700nm Backscatter) and an Aanderaa oxygen optode (measuring concentration of dissolved oxygen in seawater.\"}"
-    },
-    {
-      "href": "uuid:0a5a9f48-b654-4142-add1-439e51e70943",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in South Australia in Marion Bay (February-March 2010)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider in the region of Marion Bay (South Australia).\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:0bb0cb91-6a06-4f13-9359-49428f6c3a95",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Western Australia off Two Rocks (May - June 2009)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider in the region of Two Rocks (Western Australia).\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:0c80f6db-fba1-43df-9a23-f9d400bf09be",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Western Australia off Two Rocks (October - November 2010)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider in the region of Two Rocks (Western Australia).\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:0850bf2b-93b3-416d-ba7a-2d7ccb426fc5",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Western Australia off Pilbara (June 2012 - July 2012)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider in the region of Kalbarri (Western Australia).\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:0fce2aa3-9aff-4fe7-b124-022a74b245d7",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Tasmania in Storm Bay (August - September 2012)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters measured by a Slocum glider in Storm Bay (Tasmania). \\n\\nSlocum glider data from the oceans around Australia have been collected by ANFOG since June 2008 and are ongoing. The data are obtained from an onboard suite of instruments which include Seabird-SBE41 CTD (Conductivity, Temperature, Depth), WETLabs BBFL2SLO 3 parameter optical sensor (measuring Chlorophyll-a, CDOM and 700nm Backscatter) and an Aanderaa oxygen optode (measuring concentration of dissolved oxygen in seawater.\"}"
-    },
-    {
-      "href": "uuid:11f968c0-59b8-4454-9419-b292943a6b13",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment off Yamba (New South Wales) (June - July 2012)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters like for example dissolved oxygen and turbidity data measured by a Slocum glider from Yamba (New South Wales) down the coast.\\n\\nThe Australian National Facility for Ocean Gliders (ANFOG) manages three Slocum gliders to be deployed on the continental shelf.\\n\\nThe variables available in this dataset are:\\nTemperature, salinity, conductivity, density, pressure, chromophoric dissolved oxygen matter, dissolved oxygen, fluorescence and backscatter coefficient at 660nm.\"}"
-    },
-    {
-      "href": "uuid:1232f3f5-d4ff-4f6f-997a-c4b98e355d46",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"ANFOG - Slocum glider deployment in Western Australia off the coast of Kimberley (Sept - Oct 2012)\",\"recordAbstract\":\"The dataset contains temperature, salinity and turbidity data measured by a Slocum glider off the coast of Kimberley (Western Australia). Note that this deployment doesn't contain any dissolved oxygen data.\\n\\nSlocum glider data from the oceans around Australia have been collected by ANFOG since June 2008 and are ongoing. The data are obtained from an onboard suite of instruments which include Seabird-SBE41 CTD (Conductivity, Temperature, Depth), WETLabs BBFL2SLO 3 parameter optical sensor (measuring Chlorophyll-a, CDOM and 700nm Backscatter) and an Aanderaa oxygen optode (measuring concentration of dissolved oxygen in seawater.\"}"
-    },
-    {
-      "href": "uuid:21cfc656-1de6-4987-94c6-bb1633f5ef29",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ANFOG - Slocum glider deployment in Tasmania in Storm Bay (March - April 2012)\",\"recordAbstract\":\"The dataset contains temperature, salinity and biological parameters measured by a Slocum glider in Storm Bay (Tasmania). Note that there is no dissolved oxygen record in this dataset.\\n\\nSlocum glider data from the oceans around Australia have been collected by ANFOG since June 2008 and are ongoing. The data are obtained from an onboard suite of instruments which include Seabird-SBE41 CTD (Conductivity, Temperature, Depth), WETLabs BBFL2SLO 3 parameter optical sensor (measuring Chlorophyll-a, CDOM and 700nm Backscatter) and an Aanderaa oxygen optode (measuring concentration of dissolved oxygen in seawater.\"}"
-    }
-  ],
-  "license": "Creative Commons Attribution 4.0 International License",
-  "providers": [
-    {
-      "name": "Integrated Marine Observing System (IMOS)",
-      "roles": [
-        "distributor"
-      ],
-      "url": "http://imos.org.au/aodn.html"
-    }
-  ],
-  "themes": [
-    {
-      "concepts": [
-        {
-          "id": "Coloured Dissolved Organic Matter (CDOM)",
-          "url": null
-        },
-        {
-          "id": "IMOS Facility | ANFOG | Australian National Facility for Ocean Gliders",
-          "url": null
-        },
-        {
-          "id": "Glider",
-          "url": null
-        },
-        {
-          "id": "Slocum Glider",
-          "url": null
-        },
-        {
-          "id": "IMOS Node | Bluewater and Climate",
-          "url": null
-        }
-      ],
-      "scheme": "theme",
-      "description": "IMOS",
-      "title": "IMOS Keywords Thesaurus"
-    },
-    {
-      "concepts": [
-        {
-          "id": "Oceans | Ocean Chemistry | Chlorophyll",
-          "url": null
-        },
-        {
-          "id": "Oceans | Ocean Chemistry | Suspended Solids",
-          "url": null
-        },
-        {
-          "id": "Oceans | Ocean Temperature | Water Temperature",
-          "url": null
-        },
-        {
-          "id": "Oceans | Ocean Optics | Turbidity",
-          "url": null
-        },
-        {
-          "id": "Oceans | Salinity/density | Conductivity",
-          "url": null
-        },
-        {
-          "id": "Oceans | Ocean Optics | Fluorescence",
-          "url": null
-        },
-        {
-          "id": "Oceans | Ocean Chemistry | Oxygen",
-          "url": null
-        },
-        {
-          "id": "Oceans | Ocean Circulation | Ocean Currents",
-          "url": null
-        }
-      ],
-      "scheme": "theme",
-      "description": "GCMD",
-      "title": "NASA/Global Change Master Directory Earth Science Keywords Version 5.3.8"
-    },
-    {
-      "concepts": [
-        {
-          "id": "CTD (Conductivity-Temperature-Depth Profilers)",
-          "url": null
-        },
-        {
-          "id": "Fluorometers",
-          "url": null
-        }
-      ],
-      "scheme": "theme",
-      "description": "MCP",
-      "title": "Marine Community Profile of ISO19115 v1.4 Collection Methods Vocabulary (Annex C.1.3)"
-    },
-    {
-      "concepts": [
-        {
-          "id": "Countries | Australia",
-          "url": null
-        },
-        {
-          "id": "States, Territories (Australia) | New South Wales",
-          "url": null
-        }
-      ],
-      "scheme": "place",
-      "description": "MCP",
-      "title": "Marine Community Profile of ISO19115 v1.4 Geographic Extent Vocabulary (Annex C.1.2)"
-    },
-    {
-      "concepts": [
-        {
-          "id": "sea_water_temperature",
-          "url": null
-        },
-        {
-          "id": "sea_water_salinity",
-          "url": null
-        },
-        {
-          "id": "sea_water_pressure",
-          "url": null
-        },
-        {
-          "id": "mass_concentration_of_oxygen_in_sea_water",
-          "url": null
-        },
-        {
-          "id": "sea_water_electrical_conductivity",
-          "url": null
-        },
-        {
-          "id": "concentration_of_coloured_dissolved_organic_matter",
-          "url": null
-        },
-        {
-          "id": "volumetric_backscatter_coefficient",
-          "url": null
-        },
-        {
-          "id": "fluorescence_in_sea_water",
-          "url": null
-        }
-      ],
-      "scheme": "",
-      "description": "",
-      "title": "Keywords (Theme)"
-    }
-  ],
-  "id": "236e4480-d188-4818-8258-7bdb0fd5e0aa",
-  "search_suggestions": {
-    "abstract_phrases": [
-      "measured",
-      "chromophoric dissolved oxygen matter",
-      "chromophoric",
-      "three",
-      "three slocum gliders",
-      "contains temperature",
-      "density pressure",
-      "three slocum",
-      "dissolved",
-      "pressure chromophoric dissolved oxygen",
-      "temperature salinity conductivity",
-      "slocum",
-      "conductivity density",
-      "backscatter",
-      "new south",
-      "coast",
-      "contains",
-      "biological",
-      "data measured",
-      "south wales",
-      "matter dissolved",
-      "continental",
-      "turbidity",
-      "ocean gliders anfog",
-      "south",
-      "gliders",
-      "conductivity density pressure chromophoric",
-      "salinity conductivity density pressure",
-      "australian",
-      "conductivity density pressure",
-      "matter",
-      "example",
-      "temperature salinity conductivity density",
-      "temperature",
-      "national",
-      "ocean gliders anfog manages",
-      "gliders anfog manages",
-      "matter dissolved oxygen fluorescence",
-      "oxygen matter dissolved oxygen",
-      "variables",
-      "anfog manages three",
-      "density",
-      "manages",
-      "backscatter coefficient",
-      "matter dissolved oxygen",
-      "slocum glider along",
-      "pressure chromophoric dissolved",
-      "example dissolved",
-      "salinity conductivity",
-      "dataset",
-      "facility",
-      "dissolved oxygen",
-      "manages three",
-      "continental shelf",
-      "anfog manages three slocum",
-      "data",
-      "ocean gliders",
-      "available",
-      "gliders anfog",
-      "dataset contains",
-      "glider",
-      "national facility",
-      "australian national",
-      "parameters like",
-      "oxygen matter",
-      "biological parameters",
-      "conductivity",
-      "fluorescence",
-      "anfog manages",
-      "dataset contains temperature",
-      "temperature salinity",
-      "australian national facility",
-      "oxygen fluorescence",
-      "slocum glider",
-      "oxygen",
-      "new",
-      "like",
-      "density pressure chromophoric",
-      "wales",
-      "pressure",
-      "example dissolved oxygen",
-      "shelf",
-      "ocean",
-      "coefficient",
-      "glider along",
-      "turbidity data measured",
-      "variables available",
-      "parameters",
-      "pressure chromophoric",
-      "biological parameters like",
-      "dissolved oxygen fluorescence",
-      "deployed",
-      "dissolved oxygen matter dissolved",
-      "dissolved oxygen matter",
-      "along",
-      "turbidity data",
-      "manages three slocum gliders",
-      "slocum gliders",
-      "new south wales",
-      "manages three slocum",
-      "dataset contains temperature salinity",
-      "salinity",
-      "gliders anfog manages three",
-      "contains temperature salinity",
-      "oxygen matter dissolved",
-      "chromophoric dissolved oxygen",
-      "salinity conductivity density",
-      "chromophoric dissolved",
-      "anfog",
-      "density pressure chromophoric dissolved"
-    ]
+  "contacts" : [ {
+    "roles" : [ "pointOfContact", "about" ],
+    "organization" : "School of Civil, Environmental and Mining Engineering (CEME), The University of Western Australia (UWA)",
+    "name" : "Pattiaratchi, Charitha, Professor",
+    "position" : "",
+    "emails" : [ "chari.pattiaratchi@uwa.edu.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "MO51, 35 Stirling highway" ],
+      "city" : "Crawley",
+      "country" : "Australia",
+      "postalCode" : "6009",
+      "administrativeArea" : "Western Australia"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "61 8 6488 3525"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : "61 8 6488 1015"
+    } ],
+    "links" : [ ]
+  }, {
+    "roles" : [ "distributor", "metadata" ],
+    "organization" : "Integrated Marine Observing System (IMOS)",
+    "name" : "",
+    "position" : "Data Officer",
+    "emails" : [ "info@aodn.org.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "University of Tasmania", "Private Bag 110" ],
+      "city" : "Hobart",
+      "country" : "Australia",
+      "postalCode" : "7001",
+      "administrativeArea" : "Tasmania"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "61 3 6226 7488"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : "61 3 6226 2107"
+    } ],
+    "links" : [ {
+      "href" : "http://imos.org.au/aodn.html",
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : "Website of the Australian Ocean Data Network (AODN)"
+    } ]
+  }, {
+    "roles" : [ "resourceProvider", "citation" ],
+    "organization" : "Integrated Marine Observing System (IMOS)",
+    "name" : null,
+    "position" : null,
+    "emails" : [ "imos@imos.org.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "Private Bag 110" ],
+      "city" : "Hobart",
+      "country" : "Australia",
+      "postalCode" : "7001",
+      "administrativeArea" : "Tasmania"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "61 3 6226 7549"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : "61 3 6226 2107"
+    } ],
+    "links" : [ {
+      "href" : "http://www.imos.org.au/html",
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : "Website of the Integrated Marine Observing System (IMOS)"
+    } ]
+  } ],
+  "languages" : [ {
+    "code" : "eng",
+    "name" : "English"
+  } ],
+  "links" : [ {
+    "href" : "http://thredds.aodn.org.au/thredds/dodsC/IMOS/ANFOG/slocum_glider/NSW20100921/IMOS_ANFOG_BCEOPSTUV_20100921T011446Z_SL106_FV01_timeseries_END-20101006T073015Z.nc.html",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "Data available via the IMOS OPeNDAP server"
+  }, {
+    "href" : "http://thredds.aodn.org.au/thredds/fileServer/IMOS/ANFOG/slocum_glider/NSW20100921/IMOS_ANFOG_BCEOPSTUV_20100921T011446Z_SL106_FV01_timeseries_END-20101006T073015Z.nc",
+    "rel" : "related",
+    "type" : "",
+    "title" : "Download data from the IMOS THREDDS server"
+  }, {
+    "href" : "https://s3-ap-southeast-2.amazonaws.com/content.aodn.org.au/Documents/IMOS/Facilities/Ocean_glider/glider_data_management.pdf",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "Link to the ANFOG data management document"
+  }, {
+    "href" : "http://data.aodn.org.au/?prefix=IMOS/ANFOG/slocum_glider/NSW20100921/",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "Summary plots of each variable measured during the deployment (JPEG files)"
+  }, {
+    "href" : "https://catalogue-imos.aodn.org.au:443/geonetwork/srv/api/records/236e4480-d188-4818-8258-7bdb0fd5e0aa",
+    "rel" : "describedby",
+    "type" : "text/html",
+    "title" : "Full metadata link"
+  }, {
+    "href" : "https://licensebuttons.net/l/by/4.0/88x31.png",
+    "rel" : "license",
+    "type" : "image/png"
+  }, {
+    "href" : "http://creativecommons.org/licenses/by/4.0/",
+    "rel" : "license",
+    "type" : "text/html"
+  } ],
+  "license" : "Creative Commons Attribution 4.0 International License",
+  "providers" : [ {
+    "name" : "Integrated Marine Observing System (IMOS)",
+    "roles" : [ "distributor" ],
+    "url" : "http://imos.org.au/aodn.html"
+  } ],
+  "themes" : [ {
+    "concepts" : [ {
+      "id" : "Coloured Dissolved Organic Matter (CDOM)",
+      "url" : null
+    }, {
+      "id" : "IMOS Facility | ANFOG | Australian National Facility for Ocean Gliders",
+      "url" : null
+    }, {
+      "id" : "Glider",
+      "url" : null
+    }, {
+      "id" : "Slocum Glider",
+      "url" : null
+    }, {
+      "id" : "IMOS Node | Bluewater and Climate",
+      "url" : null
+    } ],
+    "scheme" : "theme",
+    "description" : "IMOS",
+    "title" : "IMOS Keywords Thesaurus"
+  }, {
+    "concepts" : [ {
+      "id" : "Oceans | Ocean Chemistry | Chlorophyll",
+      "url" : null
+    }, {
+      "id" : "Oceans | Ocean Chemistry | Suspended Solids",
+      "url" : null
+    }, {
+      "id" : "Oceans | Ocean Temperature | Water Temperature",
+      "url" : null
+    }, {
+      "id" : "Oceans | Ocean Optics | Turbidity",
+      "url" : null
+    }, {
+      "id" : "Oceans | Salinity/density | Conductivity",
+      "url" : null
+    }, {
+      "id" : "Oceans | Ocean Optics | Fluorescence",
+      "url" : null
+    }, {
+      "id" : "Oceans | Ocean Chemistry | Oxygen",
+      "url" : null
+    }, {
+      "id" : "Oceans | Ocean Circulation | Ocean Currents",
+      "url" : null
+    } ],
+    "scheme" : "theme",
+    "description" : "GCMD",
+    "title" : "NASA/Global Change Master Directory Earth Science Keywords Version 5.3.8"
+  }, {
+    "concepts" : [ {
+      "id" : "CTD (Conductivity-Temperature-Depth Profilers)",
+      "url" : null
+    }, {
+      "id" : "Fluorometers",
+      "url" : null
+    } ],
+    "scheme" : "theme",
+    "description" : "MCP",
+    "title" : "Marine Community Profile of ISO19115 v1.4 Collection Methods Vocabulary (Annex C.1.3)"
+  }, {
+    "concepts" : [ {
+      "id" : "Countries | Australia",
+      "url" : null
+    }, {
+      "id" : "States, Territories (Australia) | New South Wales",
+      "url" : null
+    } ],
+    "scheme" : "place",
+    "description" : "MCP",
+    "title" : "Marine Community Profile of ISO19115 v1.4 Geographic Extent Vocabulary (Annex C.1.2)"
+  }, {
+    "concepts" : [ {
+      "id" : "sea_water_temperature",
+      "url" : null
+    }, {
+      "id" : "sea_water_salinity",
+      "url" : null
+    }, {
+      "id" : "sea_water_pressure",
+      "url" : null
+    }, {
+      "id" : "mass_concentration_of_oxygen_in_sea_water",
+      "url" : null
+    }, {
+      "id" : "sea_water_electrical_conductivity",
+      "url" : null
+    }, {
+      "id" : "concentration_of_coloured_dissolved_organic_matter",
+      "url" : null
+    }, {
+      "id" : "volumetric_backscatter_coefficient",
+      "url" : null
+    }, {
+      "id" : "fluorescence_in_sea_water",
+      "url" : null
+    } ],
+    "scheme" : "",
+    "description" : "",
+    "title" : "Keywords (Theme)"
+  } ],
+  "id" : "236e4480-d188-4818-8258-7bdb0fd5e0aa",
+  "search_suggestions" : {
+    "abstract_phrases" : [ ]
   },
-  "sci:citation": "{\"suggestedCitation\":\"The citation in a list of references is: \\\"IMOS [year-of-data-download], [Title], [data-access-URL], accessed [date-of-access].\\\"\",\"useLimitations\":[\"Data, products and services from IMOS are provided \\\"as is\\\" without any warranty as to fitness for a particular purpose.\"],\"otherConstraints\":[\"Any users of IMOS data are required to clearly acknowledge the source of the material derived from IMOS in the format: \\\"Data was sourced from Australia’s Integrated Marine Observing System (IMOS) – IMOS is enabled by the National Collaborative Research Infrastructure strategy (NCRIS).\\\" If relevant, also credit other organisations involved in collection of this particular datastream (as listed in 'credit' in the metadata record).\"]}",
-  "type": "Collection",
-  "stac_version": "1.0.0",
-  "stac_extensions": [
-    "https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/contacts/v0.1.1/schema.json",
-    "https://stac-extensions.github.io/projection/v1.1.0/schema.json",
-    "https://stac-extensions.github.io/language/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/themes/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/web-map-links/v1.2.0/schema.json"
-  ]
+  "sci:citation" : "{\"suggestedCitation\":\"The citation in a list of references is: \\\"IMOS [year-of-data-download], [Title], [data-access-URL], accessed [date-of-access].\\\"\",\"useLimitations\":[\"Data, products and services from IMOS are provided \\\"as is\\\" without any warranty as to fitness for a particular purpose.\"],\"otherConstraints\":[\"Any users of IMOS data are required to clearly acknowledge the source of the material derived from IMOS in the format: \\\"Data was sourced from Australia’s Integrated Marine Observing System (IMOS) – IMOS is enabled by the National Collaborative Research Infrastructure strategy (NCRIS).\\\" If relevant, also credit other organisations involved in collection of this particular datastream (as listed in 'credit' in the metadata record).\"]}",
+  "type" : "Collection",
+  "stac_version" : "1.0.0",
+  "stac_extensions" : [ "https://stac-extensions.github.io/scientific/v1.0.0/schema.json", "https://stac-extensions.github.io/contacts/v0.1.1/schema.json", "https://stac-extensions.github.io/projection/v1.1.0/schema.json", "https://stac-extensions.github.io/language/v1.0.0/schema.json", "https://stac-extensions.github.io/themes/v1.0.0/schema.json", "https://stac-extensions.github.io/web-map-links/v1.2.0/schema.json" ]
 }
