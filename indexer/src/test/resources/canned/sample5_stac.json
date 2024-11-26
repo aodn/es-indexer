@@ -1,666 +1,200 @@
 {
-  "title": "IMOS - ACORN - Bonney Coast HF ocean radar site (South Australia, Australia)",
-  "description": "The Bonney Coast (BONC) HF ocean radar system covers an area of the Bonney Coast, South Australia, which has a recurring annual upwelling feature near to the coast that significantly changes the ecosystem from one of warm water originating in Western Australia, to one dominated by cold upwelling water from off the continental shelf.  The dynamics of this area and the relationship between ocean circulation, chemistry and sediments control the larval species and the higher marine species and ecosystems in which they forage.  \n\nThe data from this site provide linking observations between the Southern Ocean and NSW through processes that occur on weekly to El Nino time scales.  \n\nThe BONC HF ocean radar system consists of two SeaSonde crossed loop direction finding stations located at Nora Creina (37.329 S 139.850 E) and Blackfellows Cave (37.940 S 140.457 E).  These radars operate at a frequency of 5.211 MHz, with a bandwidth of 50 KHz, a maximum range of 200 Km\nand a range resolution of 3 Km.  Within the HF radar coverage area surface currents are measured.\n\nThis site was decommissioned in March 2017.",
-  "extent": {
-    "bbox": [
-      [
-        138.2,
-        -39.4,
-        140.8,
-        -37.0
-      ],
-      [
-        138.2,
-        -39.4,
-        140.8,
-        -37.0
-      ]
-    ],
-    "temporal": [
-      [
-        "2010-01-21T01:00:00Z",
-        "2017-03-27T12:59:59Z"
-      ],
-      [
-        "2010-01-21T01:00:00Z",
-        "2017-03-27T12:59:59Z"
-      ]
-    ]
+  "title" : "IMOS - ACORN - Bonney Coast HF ocean radar site (South Australia, Australia)",
+  "description" : "The Bonney Coast (BONC) HF ocean radar system covers an area of the Bonney Coast, South Australia, which has a recurring annual upwelling feature near to the coast that significantly changes the ecosystem from one of warm water originating in Western Australia, to one dominated by cold upwelling water from off the continental shelf. The dynamics of this area and the relationship between ocean circulation, chemistry and sediments control the larval species and the higher marine species and ecosystems in which they forage. The data from this site provide linking observations between the Southern Ocean and NSW through processes that occur on weekly to El Nino time scales. The BONC HF ocean radar system consists of two SeaSonde crossed loop direction finding stations located at Nora Creina (37.329 S 139.850 E) and Blackfellows Cave (37.940 S 140.457 E). These radars operate at a frequency of 5.211 MHz, with a bandwidth of 50 KHz, a maximum range of 200 Km and a range resolution of 3 Km. Within the HF radar coverage area surface currents are measured. This site was decommissioned in March 2017.",
+  "extent" : {
+    "bbox" : [ [ 138.2, -39.4, 140.8, -37.0 ], [ 138.2, -39.4, 140.8, -37.0 ] ],
+    "temporal" : [ [ "2010-01-21T01:00:00Z", "2017-03-27T12:59:59Z" ], [ "2010-01-21T01:00:00Z", "2017-03-27T12:59:59Z" ] ]
   },
-  "summaries": {
-    "score": 76,
-    "status": "completed",
-    "credits": [
-      "Australia’s Integrated Marine Observing System (IMOS) is enabled by the National Collaborative Research Infrastructure Strategy (NCRIS). It is operated by a consortium of institutions as an unincorporated joint venture, with the University of Tasmania as Lead Agent.",
-      "The University of Western Australia (UWA)"
-    ],
-    "scope": {
-      "code": "series",
-      "name": "IMOS Site level record"
+  "summaries" : {
+    "score" : 71,
+    "status" : "completed",
+    "credits" : [ "Australia’s Integrated Marine Observing System (IMOS) is enabled by the National Collaborative Research Infrastructure Strategy (NCRIS). It is operated by a consortium of institutions as an unincorporated joint venture, with the University of Tasmania as Lead Agent.", "The University of Western Australia (UWA)" ],
+    "scope" : {
+      "code" : "series",
+      "name" : "IMOS Site level record"
     },
-    "creation": "2020-07-13T15:06:31",
-    "revision": "2022-05-13T03:40:21",
-    "dataset_group": "imos",
-    "dataset_provider": "IMOS",
-    "update_frequency": "completed",
-    "proj:geometry": {
-      "geometries": [
-        {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [
-                138.2,
-                -39.4
-              ],
-              [
-                140.8,
-                -39.4
-              ],
-              [
-                140.8,
-                -37
-              ],
-              [
-                138.2,
-                -37
-              ],
-              [
-                138.2,
-                -39.4
-              ]
-            ]
-          ]
-        }
-      ],
-      "type": "GeometryCollection"
+    "creation" : "2020-07-13T15:06:31",
+    "revision" : "2022-05-13T03:40:21",
+    "dataset_group" : "sample",
+    "dataset_provider" : "IMOS",
+    "update_frequency" : "completed",
+    "proj:geometry" : {
+      "geometries" : [ {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 138.2, -39.4 ], [ 140.8, -39.4 ], [ 140.8, -37 ], [ 138.2, -37 ], [ 138.2, -39.4 ] ] ]
+      } ],
+      "type" : "GeometryCollection"
     },
-    "proj:geometry_noland": {
-      "geometries": [
-        {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [
-                140.75,
-                -39.5
-              ],
-              [
-                140.75,
-                -38
-              ],
-              [
-                140.5,
-                -38
-              ],
-              [
-                140,
-                -37
-              ],
-              [
-                138.25,
-                -37
-              ],
-              [
-                138.25,
-                -39.5
-              ],
-              [
-                140.75,
-                -39.5
-              ]
-            ]
-          ]
-        }
-      ],
-      "type": "GeometryCollection"
+    "proj:geometry_noland" : {
+      "geometries" : [ {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 140.8, -38.064655571221934 ], [ 140.71355228000004, -38.070570570999905 ], [ 140.5937606130001, -38.03337981599992 ], [ 140.37086022200003, -37.89316171699994 ], [ 140.240570509, -37.665948174999926 ], [ 140.110199415, -37.57040780999995 ], [ 140.1142684250001, -37.517510674999926 ], [ 139.98804772200003, -37.4870744769999 ], [ 139.741547071, -37.18084075299993 ], [ 139.78834069100003, -37.12623463299991 ], [ 139.70341164602308, -37 ], [ 138.2, -37 ], [ 138.2, -39.4 ], [ 140.8, -39.4 ], [ 140.8, -38.064655571221934 ] ] ]
+      } ],
+      "type" : "GeometryCollection"
     },
-    "temporal": [
-      {
-        "start": "2010-01-21T01:00:00Z",
-        "end": "2017-03-27T12:59:59Z"
-      }
-    ]
+    "temporal" : [ {
+      "start" : "2010-01-21T01:00:00Z",
+      "end" : "2017-03-27T12:59:59Z"
+    } ],
+    "parameter_vocabs" : [ "current" ],
+    "organisation_vocabs" : [ "Integrated Marine Observing System (IMOS)" ]
   },
-  "contacts": [
-    {
-      "roles": [
-        "pointOfContact",
-        "about"
-      ],
-      "organization": "Integrated Marine Observing System (IMOS)",
-      "name": "",
-      "position": "Data Officer",
-      "emails": [
-        "info@aodn.org.au"
-      ],
-      "addresses": [
-        {
-          "delivery_point": [
-            "University of Tasmania",
-            "Private Bag 110"
-          ],
-          "city": "Hobart",
-          "country": "Australia",
-          "postal_code": "7001",
-          "administrative_area": "Tasmania"
-        }
-      ],
-      "phones": [
-        {
-          "roles": [
-            "voice"
-          ],
-          "value": "61 3 6226 7488"
-        },
-        {
-          "roles": [
-            "facsimile"
-          ],
-          "value": "61 3 6226 2107"
-        }
-      ],
-      "links": [
-        {
-          "href": "http://imos.org.au/aodn.html",
-          "type": "WWW:LINK-1.0-http--link",
-          "title": "Website of the Australian Ocean Data Network (AODN)"
-        }
-      ]
-    },
-    {
-      "roles": [
-        "distributor",
-        "metadata"
-      ],
-      "organization": "Integrated Marine Observing System (IMOS)",
-      "name": "",
-      "position": "Data Officer",
-      "emails": [
-        "info@aodn.org.au"
-      ],
-      "addresses": [
-        {
-          "delivery_point": [
-            "University of Tasmania",
-            "Private Bag 110"
-          ],
-          "city": "Hobart",
-          "country": "Australia",
-          "postal_code": "7001",
-          "administrative_area": "Tasmania"
-        }
-      ],
-      "phones": [
-        {
-          "roles": [
-            "voice"
-          ],
-          "value": "61 3 6226 7488"
-        },
-        {
-          "roles": [
-            "facsimile"
-          ],
-          "value": "61 3 6226 2107"
-        }
-      ],
-      "links": [
-        {
-          "href": "http://imos.org.au/aodn.html",
-          "type": "WWW:LINK-1.0-http--link",
-          "title": "Website of the Australian Ocean Data Network (AODN)"
-        }
-      ]
-    },
-    {
-      "roles": [
-        "resourceProvider",
-        "citation"
-      ],
-      "organization": "Integrated Marine Observing System (IMOS)",
-      "name": null,
-      "position": null,
-      "emails": [
-        "imos@imos.org.au"
-      ],
-      "addresses": [
-        {
-          "delivery_point": [
-            "Private Bag 110"
-          ],
-          "city": "Hobart",
-          "country": "Australia",
-          "postal_code": "7001",
-          "administrative_area": "Tasmania"
-        }
-      ],
-      "phones": [
-        {
-          "roles": [
-            "voice"
-          ],
-          "value": "61 3 6226 7549"
-        },
-        {
-          "roles": [
-            "facsimile"
-          ],
-          "value": "61 3 6226 2107"
-        }
-      ],
-      "links": [
-        {
-          "href": "http://www.imos.org.au/html",
-          "type": "WWW:LINK-1.0-http--link",
-          "title": "Website of the Integrated Marine Observing System (IMOS)"
-        }
-      ]
-    }
-  ],
-  "languages": [
-    {
-      "code": "eng",
-      "name": "English"
-    }
-  ],
-  "links": [
-    {
-      "href": "http://imos.org.au/facilities/oceanradar",
-      "rel": "related",
-      "type": "text/html",
-      "title": "Ocean Radar page on IMOS website"
-    },
-    {
-      "href": "https://geonetwork-edge.edge.aodn.org.au:443/geonetwork/images/harvesting/IMOS_colour_logo.gif",
-      "rel": "icon",
-      "type": "image/png",
-      "title": "Suggest icon for dataset"
-    },
-    {
-      "href": "https://catalogue-imos.aodn.org.au:443/geonetwork/srv/api/records/2852a776-cbfc-4bc8-a126-f3c036814892",
-      "rel": "describedby",
-      "type": "text/html",
-      "title": "Full metadata link"
-    },
-    {
-      "href": "https://licensebuttons.net/l/by/4.0/88x31.png",
-      "rel": "license",
-      "type": "image/png"
-    },
-    {
-      "href": "http://creativecommons.org/licenses/by/4.0/",
-      "rel": "license",
-      "type": "text/html"
-    },
-    {
-      "href": "uuid:b594fbd9-5436-4a0e-aaa2-a9db25e20697",
-      "rel": "parent",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ACORN - Direction finding ocean radar system (Seasonde)\",\"recordAbstract\":\"Coastal ocean surface radar is a land-based technique which uses scattering from the rough sea surface to obtain echoes which are Doppler shifted by the dynamics of the sea. It has been shown (Crombie, 1955) that the scatter is predominantly a Bragg interaction between the radio wave and the sea surface gravity wave that is propagating in the same direction and with half the wavelength of the radio wave. This Bragg interaction gives two strong first-order lines in the echo spectrum; one from the resonant gravity wave moving radially away from the station, and one from the resonant gravity wave moving towards the station.\\n\\nDirection-finding systems determine the azimuthal direction of a source point by comparing amplitude and phase signals on crossed loop receive antennas. The direction finding calculation is done on Doppler shift spectra for a specified range which includes return echoes from all azimuths. This means that the spectra are spread and second-order echoes from one direction are swamped by the first-order echoes from other directions. Consequently, parameter extraction using second-order echoes is not possible on a routine basis. Directional wave spectra at the location of each radar station are produced by analysing the full azimuthal spread of first-order echo amplitudes, and wind directions are derived across the grid points by taking the ratio of the positive and negative Bragg echoes.\\n\\nSeaSonde HF ocean radar stations are used on the Turquoise Coast (Seabird and Cervantes), Western Australia, and on the Bonney Coast (Nora Creina and Blackfellows Cave), South Australia.\"}"
-    },
-    {
-      "href": "uuid:ad06346a-0b70-4da3-a841-b2881c689907",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ACORN - Newcastle HF ocean radar site (New South Wales, Australia)\",\"recordAbstract\":\"The Newcastle (NEWC) HF ocean radar system covers an area of the Central Coast, New South Wales, an area subject to the variability of the East Australian Current (EAC) and its coupling with coastal winds, tides, and waves. In this area the EAC separates from the coast and generates several eddies which control the larval species and the higher marine species and ecosystems in which they forage.\\n\\nThe NEWC HF ocean radar system consists of two SeaSonde crossed loop direction finding stations located at Sea Rocks (32.441575 S 152.539022 E) and Red Head (33.010245 S 151.727059 E). These radars operate at a frequency of 5.2625 MHz, with a bandwidth of 25 KHz, a maximum range of 200 Km and a range resolution of 6 Km. Within the HF radar coverage area surface currents are measured.\"}"
-    },
-    {
-      "href": "uuid:fb51aa08-c07e-4f7e-acf8-8e5dab108928",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ACORN - Turquoise Coast HF ocean radar site (Western Australia, Australia)\",\"recordAbstract\":\"The Turquoise Coast (TURQ) HF ocean radar system covers the area of shelf between Seabird and Jurien Bay and is the logical continuation of major research efforts to understand the role of the Leeuwin Current System (Leeuwin Current, the Leeuwin Undercurrent and Capes Current) in controlling not only the physical system but also its links to both pelagic and benthic ecosystems. In contrast to eastern ocean basins, which are highly productive, Western Australia experiences an oligotrophic environment. The Leeuwin Current is a shallow (<300 m deep), narrow band (< 100 km wide) of warm, lower salinity, nutrient depleted water of tropical origin that flows poleward from Exmouth to Cape Leeuwin and into the Great Australian Bight. The Current plays a dominant role in controlling the marine life and climate of the region. \\n\\nQuestions which may be addressed by using the HF ocean radar data from TURQ (and ROT) include the variability of the Leeuwin current and its response to the ENSO cycle; Leeuwin Current eddies and their interaction with the shelf waters; and the interaction between the Leeuwin Current, the Capes Current and coastal current during the summer. This is an important region for Western Rock lobster recruitment, and the meanders of the warm Leeuwin Current influence the ecology. This is a region with low tidal range and with a coastline subject to strong sea breezes and intense winter storms. Coastally trapped waves may be generated by the winter weather systems and by tropical cyclones in the summer. \\n\\nThe TURQ HF ocean radar system consists of two SeaSonde crossed loop direction finding stations located at Seabird (31.281 S 115.444 E) and Cervantes (30.506 S 115.060E). From 2012-12-15T11:00:00 the Cervantes station has been replaced by the Green Head station (30.073 S 114.967E) and from 2013-03-19T00:00:00 the Seabird station has been replaced by the Lancelin station (31.027 S 115.328 E). These radars operate at a frequency of 5.211 MHz, with a bandwidth of 50 KHz, a maximum range of 200 Km\\nand a range resolution of 3 Km. Within the HF radar coverage area surface currents are measured.\\n\\nThe TURQ area of coverage has a small overlap of commonly observed ocean with the Rottnest Shelf (ROT) WERA HF ocean radar system on its south side; and with the Coral Coast (CORL) HF ocean radar system on its north side. Together, the CORL, TURQ and ROT systems provide continuous monitoring of the shelf from Fremantle to Geraldton.\"}"
-    },
-    {
-      "href": "uuid:133b2add-6e03-49b4-9b4e-f2c450d9590e",
-      "rel": "sibling",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ACORN - Coral Coast HF ocean radar site (Western Australia, Australia)\",\"recordAbstract\":\"The Coral Coast (CORL) HF ocean radar system covers an area of the Western Australia Coast, Western Australia, an area subject to the variability of the Leeuwin Current (LC) and its coupling with coastal winds, tides, and waves. In this area the LC generates several eddies which control the larval species and the higher marine species and ecosystems in which they forage.\\n\\nThe CORL HF ocean radar system consists of two SeaSonde crossed loop direction finding stations located at Dongara - Port Denison (29.283 S 114.920E) and Green Head (114.967 E 30.073 S). These radars operate at a frequency of 4.463 MHz, with a bandwidth of 25 KHz, a maximum range of 200 Km and a range resolution of 6 Km. Within the HF radar coverage area surface currents are measured.\\n\\nThe CORL area of coverage has a small overlap of commonly observed ocean with the Turqoise Coast (TURQ) SeaSonde HF ocean radar system on its southern side, which in turns early overlaps with the Rottnest HF radar node. Together, the CORL, TURQ and ROT systems provide continuous monitoring of the shelf from Fremantle to Geraldton.\"}"
-    },
-    {
-      "href": "uuid:c455a298-6e4d-4ce3-8610-76f7abb59983",
-      "rel": "child",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ACORN - Blackfellows Cave HF ocean radar station (Bonney Coast, South Australia, Australia)\",\"recordAbstract\":\"The Blackfellows Cave (BFCV) HF ocean radar site (37.940 S 140.457 E) is one of two HF ocean radars covering the Bonney Coast, South Australia. The other HF ocean radar station is at Nora Creina. The HF ocean radar coverage is from the coast to beyond the edge of the continental shelf. \\n\\nThe BFCV HF ocean radar is a SeaSonde crossed-loop direction finding array. This radar operates at a frequency of 5.211 MHz, with a bandwidth of 50 KHz, a maximum range of 200 Km and a range resolution of 3 Km. The antenna bearing is 257 deg true east of north (approximately west by south-west).\\n\\nWithin the HF radar coverage area surface current radials are measured.\\n\\nThis station was decommissioned in March 2017.\"}"
-    },
-    {
-      "href": "uuid:38dd003d-2f71-4715-bd3f-4b1cfdce391d",
-      "rel": "child",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ACORN - Bonney Coast HF ocean radar site (South Australia, Australia) - Delayed mode sea water velocity\",\"recordAbstract\":\"The Bonney Coast (BONC) HF ocean radar system covers an area of the Bonney Coast, South Australia, which has a recurring annual upwelling feature near to the coast that significantly changes the ecosystem from one of warm water originating in Western Australia, to one dominated by cold upwelling water from off the continental shelf. The dynamics of this area and the relationship between ocean circulation, chemistry and sediments control the larval species and the higher marine species and ecosystems in which they forage. \\n\\nThe data from this site provide linking observations between the Southern Ocean and NSW through processes that occur on weekly to El Nino time scales. \\n\\nThe BONC HF ocean radar system consists of two SeaSonde crossed loop direction finding stations located at Nora Creina (37.329 S 139.850 E) and Blackfellows Cave (37.940 S 140.457 E). These radars operate at a frequency of 5.211 MHz, with a bandwidth of 50 KHz, a maximum range of 200 Km and a range resolution of 3 Km. Within the HF radar coverage area surface currents are measured.\\n\\nThis site was decommissioned in March 2017.\"}"
-    },
-    {
-      "href": "uuid:4a1608ab-ebdd-4f98-93c3-15f2da87bfa0",
-      "rel": "child",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ACORN - Bonney Coast HF ocean radar site (South Australia, Australia) - Real-time sea water velocity\",\"recordAbstract\":\"The Bonney Coast (BONC) HF ocean radar system covers an area of the Bonney Coast, South Australia, which has a recurring annual upwelling feature near to the coast that significantly changes the ecosystem from one of warm water originating in Western Australia, to one dominated by cold upwelling water from off the continental shelf. The dynamics of this area and the relationship between ocean circulation, chemistry and sediments control the larval species and the higher marine species and ecosystems in which they forage. \\n\\nThe data from this site provide linking observations between the Southern Ocean and NSW through processes that occur on weekly to El Nino time scales. \\n\\nThe BONC HF ocean radar system consists of two SeaSonde crossed loop direction finding stations located at Nora Creina (37.329 S 139.850 E) and Blackfellows Cave (37.940 S 140.457 E). These radars operate at a frequency of 5.211 MHz, with a bandwidth of 50 KHz, a maximum range of 200 Km\\nand a range resolution of 3 Km. Within the HF radar coverage area surface currents are measured.\\n\\nThis site was decommissioned in March 2017.\"}"
-    },
-    {
-      "href": "uuid:0da2422a-389d-4af6-a34c-a68caefbd23f",
-      "rel": "child",
-      "type": "application/json",
-      "title": "{\"title\":\"IMOS - ACORN - Nora Creina HF ocean radar station (Bonney Coast, South Australia, Australia)\",\"recordAbstract\":\"The Nora Creina (NOCR) HF ocean radar site (37.329 S 139.850 E) is one of two HF ocean radars covering the Bonney Coast, South Australia. The other HF ocean radar station is at Blackfellows Cave. The HF ocean radar coverage is from the coast to beyond the edge of the continental shelf. \\n\\nThe NOCR HF ocean radar is a SeaSonde crossed-loop direction finding array. This radar operates at a frequency of 5.211 MHz, with a bandwidth of 50 KHz, a maximum range of 200 Km and a range resolution of 3 Km. The antenna bearing is 255 deg true east of north (approximately west by south-west).\\n\\nWithin the HF radar coverage area surface current radials are measured.\\n\\nThis station was decommissioned in March 2017.\"}"
-    }
-  ],
-  "license": "Creative Commons Attribution 4.0 International License",
-  "providers": [
-    {
-      "name": "Integrated Marine Observing System (IMOS)",
-      "roles": [
-        "distributor"
-      ],
-      "url": "http://imos.org.au/aodn.html"
-    }
-  ],
-  "themes": [
-    {
-      "concepts": [
-        {
-          "id": "Oceans | Ocean Circulation | Eddies",
-          "url": null
-        },
-        {
-          "id": "Oceans | Ocean Circulation | Ocean Currents",
-          "url": null
-        },
-        {
-          "id": "Oceans | Ocean Circulation | Upwelling",
-          "url": null
-        },
-        {
-          "id": "Oceans | Ocean Circulation | Wind-driven Circulation",
-          "url": null
-        },
-        {
-          "id": "Oceans | Coastal Processes | Coral Reefs",
-          "url": null
-        },
-        {
-          "id": "Radiance Or Imagery | Radio Wave | Radio Wave",
-          "url": null
-        }
-      ],
-      "scheme": "theme",
-      "description": "GCMD",
-      "title": "NASA/Global Change Master Directory Earth Science Keywords Version 5.3.8"
-    },
-    {
-      "concepts": [
-        {
-          "id": "IMOS Site | BONC | Bonney Coast HF ocean radar site",
-          "url": null
-        },
-        {
-          "id": "Marine Features (Australia) | Bonney Coast, SA",
-          "url": null
-        },
-        {
-          "id": "SeaSonde (CODAR) HF Radar | Amplitude Direction Finding",
-          "url": null
-        },
-        {
-          "id": "Doppler Frequency",
-          "url": null
-        },
-        {
-          "id": "Physical Oceanography",
-          "url": null
-        }
-      ],
-      "scheme": "theme",
-      "description": "IMOS",
-      "title": "IMOS Keywords Thesaurus"
-    },
-    {
-      "concepts": [
-        {
-          "id": "Global / Oceans | Southern Ocean",
-          "url": null
-        },
-        {
-          "id": "States, Territories (Australia) | South Australia",
-          "url": null
-        }
-      ],
-      "scheme": "theme",
-      "description": "MCP",
-      "title": "Marine Community Profile of ISO19115 v1.4 Geographic Extent Vocabulary (Annex C.1.2)"
-    }
-  ],
-  "id": "2852a776-cbfc-4bc8-a126-f3c036814892",
-  "search_suggestions": {
-    "abstract_phrases": [
-      "radar system",
-      "range resolution",
-      "warm water",
-      "seasonde crossed loop",
-      "resolution",
-      "stations located",
-      "dynamics",
-      "upwelling",
-      "ecosystem from one",
-      "coast south",
-      "annual",
-      "near",
-      "ocean radar system consists",
-      "finding stations",
-      "coast south australia",
-      "hf ocean radar",
-      "radars",
-      "marine species",
-      "radar coverage area",
-      "australia",
-      "south australia",
-      "mhz",
-      "from off",
-      "southern",
-      "ocean radar system covers",
-      "time scales",
-      "el nino time scales",
-      "two",
-      "marine",
-      "weekly",
-      "originating",
-      "currents",
-      "bonney coast south australia",
-      "site provide",
-      "radars operate",
-      "system consists",
-      "relationship",
-      "nsw through processes",
-      "chemistry",
-      "southern ocean",
-      "one dominated",
-      "direction finding stations",
-      "bandwidth",
-      "which has",
-      "one",
-      "coverage area surface",
-      "south australia which has",
-      "hf radar coverage",
-      "march",
-      "two seasonde crossed loop",
-      "water from",
-      "maximum",
-      "upwelling feature near",
-      "through",
-      "radar system consists",
-      "bonney coast bonc",
-      "bonney coast south",
-      "nsw through",
-      "provide linking",
-      "nino",
-      "frequency",
-      "ocean circulation chemistry",
-      "sediments control",
-      "loop",
-      "has",
-      "area",
-      "which",
-      "annual upwelling feature",
-      "nino time",
-      "area surface",
-      "el",
-      "el nino time",
-      "finding",
-      "observations between",
-      "shelf",
-      "annual upwelling feature near",
-      "two seasonde crossed",
-      "warm",
-      "maximum range",
-      "ocean",
-      "dominated",
-      "data from",
-      "western",
-      "khz",
-      "higher",
-      "linking observations between",
-      "changes",
-      "cold",
-      "provide linking observations",
-      "bonc hf",
-      "coast bonc hf",
-      "covers",
-      "coverage",
-      "nino time scales",
-      "bonc",
-      "blackfellows cave",
-      "coverage area surface currents",
-      "crossed loop",
-      "upwelling feature",
-      "time",
-      "loop direction finding",
-      "bonney coast",
-      "significantly",
-      "hf",
-      "ecosystem from",
-      "upwelling water from off",
-      "measured",
-      "radar coverage",
-      "ecosystem",
-      "hf ocean radar system",
-      "coverage area",
-      "upwelling water from",
-      "water originating",
-      "direction finding",
-      "coast south australia which",
-      "circulation chemistry",
-      "finding stations located",
-      "direction finding stations located",
-      "between",
-      "upwelling water",
-      "hf radar",
-      "creina",
-      "surface",
-      "cold upwelling water from",
-      "linking",
-      "australia which",
-      "stations",
-      "loop direction finding stations",
-      "bonney coast bonc hf",
-      "coast",
-      "system",
-      "between ocean circulation",
-      "operate",
-      "provide",
-      "crossed",
-      "relationship between ocean",
-      "sediments",
-      "continental",
-      "loop direction",
-      "coast bonc hf ocean",
-      "south",
-      "south australia which",
-      "cold upwelling",
-      "hf ocean",
-      "between ocean circulation chemistry",
-      "from one",
-      "radar coverage area surface",
-      "range",
-      "between ocean",
-      "recurring annual",
-      "site provide linking observations",
-      "recurring annual upwelling feature",
-      "western australia",
-      "decommissioned",
-      "nsw",
-      "feature",
-      "annual upwelling",
-      "provide linking observations between",
-      "larval species",
-      "seasonde crossed",
-      "km",
-      "relationship between ocean circulation",
-      "within",
-      "system covers",
-      "off",
-      "radar",
-      "site",
-      "cold upwelling water",
-      "species",
-      "recurring annual upwelling",
-      "surface currents",
-      "located",
-      "area surface currents",
-      "bonc hf ocean",
-      "continental shelf",
-      "el nino",
-      "nora",
-      "data",
-      "feature near",
-      "hf radar coverage area",
-      "through processes",
-      "water from off",
-      "from",
-      "linking observations",
-      "significantly changes",
-      "nora creina",
-      "cave",
-      "recurring",
-      "occur",
-      "crossed loop direction",
-      "water",
-      "seasonde",
-      "ocean radar system",
-      "crossed loop direction finding",
-      "larval",
-      "scales",
-      "seasonde crossed loop direction",
-      "coast bonc",
-      "higher marine",
-      "km within",
-      "ocean radar",
-      "australia which has",
-      "site provide linking",
-      "two seasonde",
-      "forage",
-      "bonney",
-      "bonc hf ocean radar",
-      "blackfellows",
-      "observations",
-      "direction",
-      "relationship between",
-      "processes",
-      "warm water originating",
-      "radar system covers",
-      "control",
-      "circulation",
-      "ecosystems",
-      "higher marine species",
-      "consists",
-      "ocean circulation"
-    ]
+  "contacts" : [ {
+    "roles" : [ "pointOfContact", "about" ],
+    "organization" : "Integrated Marine Observing System (IMOS)",
+    "name" : "",
+    "position" : "Data Officer",
+    "emails" : [ "info@aodn.org.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "University of Tasmania", "Private Bag 110" ],
+      "city" : "Hobart",
+      "country" : "Australia",
+      "postalCode" : "7001",
+      "administrativeArea" : "Tasmania"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "61 3 6226 7488"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : "61 3 6226 2107"
+    } ],
+    "links" : [ {
+      "href" : "http://imos.org.au/aodn.html",
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : "Website of the Australian Ocean Data Network (AODN)"
+    } ]
+  }, {
+    "roles" : [ "distributor", "metadata" ],
+    "organization" : "Integrated Marine Observing System (IMOS)",
+    "name" : "",
+    "position" : "Data Officer",
+    "emails" : [ "info@aodn.org.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "University of Tasmania", "Private Bag 110" ],
+      "city" : "Hobart",
+      "country" : "Australia",
+      "postalCode" : "7001",
+      "administrativeArea" : "Tasmania"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "61 3 6226 7488"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : "61 3 6226 2107"
+    } ],
+    "links" : [ {
+      "href" : "http://imos.org.au/aodn.html",
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : "Website of the Australian Ocean Data Network (AODN)"
+    } ]
+  }, {
+    "roles" : [ "resourceProvider", "citation" ],
+    "organization" : "Integrated Marine Observing System (IMOS)",
+    "emails" : [ "imos@imos.org.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "Private Bag 110" ],
+      "city" : "Hobart",
+      "country" : "Australia",
+      "postalCode" : "7001",
+      "administrativeArea" : "Tasmania"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "61 3 6226 7549"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : "61 3 6226 2107"
+    } ],
+    "links" : [ {
+      "href" : "http://www.imos.org.au/html",
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : "Website of the Integrated Marine Observing System (IMOS)"
+    } ]
+  } ],
+  "languages" : [ {
+    "code" : "eng",
+    "name" : "English"
+  } ],
+  "links" : [ {
+    "href" : "http://imos.org.au/facilities/oceanradar",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "Ocean Radar page on IMOS website"
+  }, {
+    "href" : "https://catalogue-imos.aodn.org.au/geonetwork/images/logos/dbee258b-8730-4072-96d4-2818a69a4afd.png",
+    "rel" : "icon",
+    "type" : "image/png",
+    "title" : "Suggest icon for dataset"
+  }, {
+    "href" : "https://catalogue-imos.aodn.org.au:443/geonetwork/srv/api/records/2852a776-cbfc-4bc8-a126-f3c036814892",
+    "rel" : "describedby",
+    "type" : "text/html",
+    "title" : "Full metadata link"
+  }, {
+    "href" : "https://licensebuttons.net/l/by/4.0/88x31.png",
+    "rel" : "license",
+    "type" : "image/png"
+  }, {
+    "href" : "http://creativecommons.org/licenses/by/4.0/",
+    "rel" : "license",
+    "type" : "text/html"
+  } ],
+  "license" : "Creative Commons Attribution 4.0 International License",
+  "providers" : [ {
+    "name" : "Integrated Marine Observing System (IMOS)",
+    "roles" : [ "distributor" ],
+    "url" : "http://imos.org.au/aodn.html"
+  } ],
+  "themes" : [ {
+    "concepts" : [ {
+      "id" : "Oceans | Ocean Circulation | Eddies"
+    }, {
+      "id" : "Oceans | Ocean Circulation | Ocean Currents"
+    }, {
+      "id" : "Oceans | Ocean Circulation | Upwelling"
+    }, {
+      "id" : "Oceans | Ocean Circulation | Wind-driven Circulation"
+    }, {
+      "id" : "Oceans | Coastal Processes | Coral Reefs"
+    }, {
+      "id" : "Radiance Or Imagery | Radio Wave | Radio Wave"
+    } ],
+    "scheme" : "theme",
+    "description" : "GCMD",
+    "title" : "NASA/Global Change Master Directory Earth Science Keywords Version 5.3.8"
+  }, {
+    "concepts" : [ {
+      "id" : "IMOS Site | BONC | Bonney Coast HF ocean radar site"
+    }, {
+      "id" : "Marine Features (Australia) | Bonney Coast, SA"
+    }, {
+      "id" : "SeaSonde (CODAR) HF Radar | Amplitude Direction Finding"
+    }, {
+      "id" : "Doppler Frequency"
+    }, {
+      "id" : "Physical Oceanography"
+    } ],
+    "scheme" : "theme",
+    "description" : "IMOS",
+    "title" : "IMOS Keywords Thesaurus"
+  }, {
+    "concepts" : [ {
+      "id" : "Global / Oceans | Southern Ocean"
+    }, {
+      "id" : "States, Territories (Australia) | South Australia"
+    } ],
+    "scheme" : "theme",
+    "description" : "MCP",
+    "title" : "Marine Community Profile of ISO19115 v1.4 Geographic Extent Vocabulary (Annex C.1.2)"
+  } ],
+  "id" : "2852a776-cbfc-4bc8-a126-f3c036814892",
+  "search_suggestions" : {
+    "abstract_phrases" : [ "radar system", "range resolution", "warm water", "seasonde crossed loop", "resolution", "stations located", "dynamics", "upwelling", "ecosystem from one", "coast south", "annual", "near", "ocean radar system consists", "finding stations", "coast south australia", "hf ocean radar", "radars", "marine species", "radar coverage area", "australia", "south australia", "mhz", "from off", "southern", "ocean radar system covers", "time scales", "el nino time scales", "two", "marine", "weekly", "originating", "currents", "bonney coast south australia", "site provide", "radars operate", "system consists", "relationship", "nsw through processes", "chemistry", "southern ocean", "one dominated", "direction finding stations", "bandwidth", "which has", "one", "coverage area surface", "south australia which has", "hf radar coverage", "march", "two seasonde crossed loop", "water from", "maximum", "upwelling feature near", "through", "radar system consists", "bonney coast bonc", "bonney coast south", "nsw through", "provide linking", "nino", "frequency", "ocean circulation chemistry", "sediments control", "loop", "has", "area", "which", "annual upwelling feature", "nino time", "area surface", "el", "el nino time", "finding", "observations between", "shelf", "annual upwelling feature near", "two seasonde crossed", "warm", "maximum range", "ocean", "dominated", "data from", "western", "khz", "higher", "linking observations between", "changes", "cold", "provide linking observations", "bonc hf", "coast bonc hf", "covers", "coverage", "nino time scales", "bonc", "blackfellows cave", "coverage area surface currents", "crossed loop", "upwelling feature", "time", "loop direction finding", "bonney coast", "significantly", "hf", "ecosystem from", "upwelling water from off", "measured", "radar coverage", "ecosystem", "hf ocean radar system", "coverage area", "upwelling water from", "water originating", "direction finding", "coast south australia which", "circulation chemistry", "finding stations located", "direction finding stations located", "between", "upwelling water", "hf radar", "creina", "surface", "cold upwelling water from", "linking", "australia which", "stations", "loop direction finding stations", "bonney coast bonc hf", "coast", "system", "between ocean circulation", "operate", "provide", "crossed", "relationship between ocean", "sediments", "continental", "loop direction", "coast bonc hf ocean", "south", "south australia which", "cold upwelling", "hf ocean", "between ocean circulation chemistry", "from one", "radar coverage area surface", "range", "between ocean", "recurring annual", "site provide linking observations", "recurring annual upwelling feature", "western australia", "decommissioned", "nsw", "feature", "annual upwelling", "provide linking observations between", "larval species", "seasonde crossed", "km", "relationship between ocean circulation", "within", "system covers", "off", "radar", "site", "cold upwelling water", "species", "recurring annual upwelling", "surface currents", "located", "area surface currents", "bonc hf ocean", "continental shelf", "el nino", "nora", "data", "feature near", "hf radar coverage area", "through processes", "water from off", "from", "linking observations", "significantly changes", "nora creina", "cave", "recurring", "occur", "crossed loop direction", "water", "seasonde", "ocean radar system", "crossed loop direction finding", "larval", "scales", "seasonde crossed loop direction", "coast bonc", "higher marine", "km within", "ocean radar", "australia which has", "site provide linking", "two seasonde", "forage", "bonney", "bonc hf ocean radar", "blackfellows", "observations", "direction", "relationship between", "processes", "warm water originating", "radar system covers", "control", "circulation", "ecosystems", "higher marine species", "consists", "ocean circulation" ]
   },
-  "sci:citation": "{\"suggestedCitation\":\"The citation in a list of references is: \\\"IMOS [year-of-data-download], [Title], [data-access-URL], accessed [date-of-access].\\\"\",\"useLimitations\":[\"Data, products and services from IMOS are provided \\\"as is\\\" without any warranty as to fitness for a particular purpose.\"],\"otherConstraints\":[\"Any users of IMOS data are required to clearly acknowledge the source of the material derived from IMOS in the format: \\\"Data was sourced from Australia’s Integrated Marine Observing System (IMOS) – IMOS is enabled by the National Collaborative Research Infrastructure strategy (NCRIS).\\\" If relevant, also credit other organisations involved in collection of this particular datastream (as listed in 'credit' in the metadata record).\"]}",
-  "type": "Collection",
-  "stac_version": "1.0.0",
-  "stac_extensions": [
-    "https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/contacts/v0.1.1/schema.json",
-    "https://stac-extensions.github.io/projection/v1.1.0/schema.json",
-    "https://stac-extensions.github.io/language/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/themes/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/web-map-links/v1.2.0/schema.json"
-  ]
+  "sci:citation" : "{\"suggestedCitation\":\"The citation in a list of references is: \\\"IMOS [year-of-data-download], [Title], [data-access-URL], accessed [date-of-access].\\\"\",\"useLimitations\":[\"Data, products and services from IMOS are provided \\\"as is\\\" without any warranty as to fitness for a particular purpose.\"],\"otherConstraints\":[\"Any users of IMOS data are required to clearly acknowledge the source of the material derived from IMOS in the format: \\\"Data was sourced from Australia’s Integrated Marine Observing System (IMOS) – IMOS is enabled by the National Collaborative Research Infrastructure strategy (NCRIS).\\\" If relevant, also credit other organisations involved in collection of this particular datastream (as listed in 'credit' in the metadata record).\"]}",
+  "type" : "Collection",
+  "stac_version" : "1.0.0",
+  "stac_extensions" : [ "https://stac-extensions.github.io/scientific/v1.0.0/schema.json", "https://stac-extensions.github.io/contacts/v0.1.1/schema.json", "https://stac-extensions.github.io/projection/v1.1.0/schema.json", "https://stac-extensions.github.io/language/v1.0.0/schema.json", "https://stac-extensions.github.io/themes/v1.0.0/schema.json", "https://stac-extensions.github.io/web-map-links/v1.2.0/schema.json" ]
 }
