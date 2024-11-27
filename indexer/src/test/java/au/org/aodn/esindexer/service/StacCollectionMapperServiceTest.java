@@ -433,4 +433,17 @@ public class StacCollectionMapperServiceTest {
 
         verify(expected);
     }
+    /**
+     * Another sample to verify this xml can be transformed
+     * @throws IOException - Not expect to throw
+     * @throws JSONException - Not expect to throw
+     */
+    @Test
+    public void verifyNoTransformError() throws IOException, JSONException {
+        String xml = readResourceFile("classpath:canned/sample19.xml");
+        String expected = readResourceFile("classpath:canned/sample18_stac.json");
+        indexerService.indexMetadata(xml);
+
+        verify(expected);
+    }
 }

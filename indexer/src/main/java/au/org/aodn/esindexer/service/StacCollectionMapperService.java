@@ -77,7 +77,7 @@ public abstract class StacCollectionMapperService {
     private GeoNetworkService geoNetworkService;
 
     @Named("mapUUID")
-    String mapUUID(MDMetadataType source) {
+    public String mapUUID(MDMetadataType source) {
         return CommonUtils.getUUID(source);
     }
     /**

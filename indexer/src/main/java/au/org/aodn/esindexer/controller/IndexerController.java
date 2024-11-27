@@ -142,7 +142,7 @@ public class IndexerController {
 
     @PostMapping(path="/{uuid}", produces = "application/json")
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Index a metadata record by UUID")
-    public ResponseEntity<String> addDocumentByUUID(@PathVariable("uuid") String uuid) throws IOException, FactoryException, JAXBException, TransformException, ExecutionException, InterruptedException {
+    public ResponseEntity<String> addDocumentByUUID(@PathVariable("uuid") String uuid) throws IOException, FactoryException, JAXBException, TransformException {
         String metadataValues = geonetworkResourceService.searchRecordBy(uuid);
 
         CompletableFuture<ResponseEntity<String>> f = indexerService.indexMetadata(metadataValues);
