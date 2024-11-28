@@ -144,17 +144,14 @@ public class VocabServiceImpl implements VocabService {
 
     public List<String> extractOrganisationVocabLabelsFromThemes(List<ThemesModel> themes) {
         List<String> results = new ArrayList<>();
-        themes.stream().filter(Objects::nonNull).forEach(theme -> {
-            if (safeGet(theme::getTitle)
-                    .filter(title -> title.toLowerCase().contains("aodn organisation vocabulary"))
-                    .isPresent()) {
-                for (ConceptModel conceptModel : theme.getConcepts()) {
-                    if (conceptModel.getId() != null && !conceptModel.getId().isEmpty()) {
-                        results.add(conceptModel.getId());
-                    }
-                }
-            }
-        });
+        themes.stream()
+                .filter(Objects::nonNull)
+                .forEach(theme -> safeGet(theme::getTitle)
+                        .filter(title -> title.toLowerCase().contains("aodn organisation vocabulary"))
+                        .ifPresent(title -> theme.getConcepts().stream()
+                                .filter(concept -> concept.getId() != null && !concept.getId().isEmpty())
+                                .forEach(concept -> results.add(concept.getId()))
+                        ));
         return results;
     }
 
