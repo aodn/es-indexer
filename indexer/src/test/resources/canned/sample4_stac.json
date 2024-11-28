@@ -43,7 +43,8 @@
       "start" : "1870-07-16T14:10:44Z",
       "end" : "2013-06-17T13:59:59Z"
     } ],
-    "parameter_vocabs" : [ "salinity", "chemical", "carbon", "temperature", "ph (total scale) of the water body", "alkalinity" ]
+    "parameter_vocabs" : [ "salinity", "carbon", "temperature", "alkalinity", "ph (total scale) of the water body" ],
+    "organisation_vocabs" : [ "CSIRO Oceans and Atmosphere", "National Institute for Environmental Studies (NIES)", "Climate Change Research Centre (CCRC)" ]
   },
   "contacts" : [ {
     "roles" : [ "principalInvestigator", "about" ],

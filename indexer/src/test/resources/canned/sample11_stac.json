@@ -78,7 +78,9 @@
     "temporal" : [ {
       "start" : "2008-09-28T14:00:00Z",
       "end" : null
-    } ]
+    } ],
+    "parameter_vocabs" : [ ],
+    "organisation_vocabs" : [ ]
   },
   "contacts" : [ {
     "roles" : [ "pointOfContact", "about" ],

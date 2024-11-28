@@ -35,7 +35,9 @@
     "temporal" : [ {
       "start" : "2010-09-20T15:14:00Z",
       "end" : "2010-10-13T07:59:00Z"
-    } ]
+    } ],
+    "parameter_vocabs" : [ ],
+    "organisation_vocabs" : [ ]
   },
   "contacts" : [ {
     "roles" : [ "pointOfContact", "about" ],

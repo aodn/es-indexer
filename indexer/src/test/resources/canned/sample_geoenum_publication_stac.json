@@ -34,7 +34,9 @@
     "temporal" : [ {
       "start" : "2021-10-12T13:00:00Z",
       "end" : "2022-10-05T12:59:59Z"
-    } ]
+    } ],
+    "parameter_vocabs" : [ ],
+    "organisation_vocabs" : [ ]
   },
   "contacts" : [ {
     "roles" : [ "pointOfContact", "about" ],

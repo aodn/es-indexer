@@ -32,7 +32,9 @@
     "temporal" : [ {
       "start" : "2016-11-17T13:00:00Z",
       "end" : "2016-11-20T12:59:59Z"
-    } ]
+    } ],
+    "parameter_vocabs" : [ ],
+    "organisation_vocabs" : [ ]
   },
   "contacts" : [ {
     "roles" : [ "processor", "metadata" ],

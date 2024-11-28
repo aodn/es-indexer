@@ -34,7 +34,9 @@
     "temporal" : [ {
       "start" : "2019-10-18T13:00:00Z",
       "end" : "2019-12-17T12:59:59Z"
-    } ]
+    } ],
+    "parameter_vocabs" : [ ],
+    "organisation_vocabs" : [ ]
   },
   "contacts" : [ {
     "roles" : [ "pointOfContact", "about" ],

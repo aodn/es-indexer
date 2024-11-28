@@ -40,7 +40,9 @@
     "temporal" : [ {
       "start" : "2018-10-28T13:00:00Z",
       "end" : "2019-11-20T12:59:59Z"
-    } ]
+    } ],
+    "parameter_vocabs" : [ ],
+    "organisation_vocabs" : [ ]
   },
   "contacts" : [ {
     "roles" : [ "principalInvestigator", "about" ],

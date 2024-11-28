@@ -35,7 +35,9 @@
     "temporal" : [ {
       "start" : "2010-01-21T01:00:00Z",
       "end" : "2017-03-27T12:59:59Z"
-    } ]
+    } ],
+    "parameter_vocabs" : [ "current" ],
+    "organisation_vocabs" : [ "Integrated Marine Observing System (IMOS)" ]
   },
   "contacts" : [ {
     "roles" : [ "pointOfContact", "about" ],

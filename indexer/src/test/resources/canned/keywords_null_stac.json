@@ -32,7 +32,9 @@
     "temporal" : [ {
       "start" : "2018-09-13T14:00:00Z",
       "end" : null
-    } ]
+    } ],
+    "parameter_vocabs" : [ ],
+    "organisation_vocabs" : [ ]
   },
   "contacts" : [ {
     "roles" : [ "resourceProvider", "about" ],

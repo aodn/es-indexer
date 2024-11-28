@@ -271,7 +271,9 @@
     "temporal" : [ {
       "start" : "2002-11-30T13:00:00Z",
       "end" : null
-    } ]
+    } ],
+    "parameter_vocabs" : [ ],
+    "organisation_vocabs" : [ ]
   },
   "contacts" : [ {
     "roles" : [ "principalInvestigator", "about" ],

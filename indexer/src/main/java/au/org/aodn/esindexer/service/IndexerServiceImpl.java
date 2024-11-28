@@ -1,5 +1,6 @@
 package au.org.aodn.esindexer.service;
 
+import au.org.aodn.ardcvocabs.model.VocabModel;
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.exception.*;
 import au.org.aodn.esindexer.model.DatasetProvider;
@@ -46,6 +47,8 @@ import java.util.*;
 import java.util.concurrent.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static au.org.aodn.esindexer.utils.CommonUtils.safeGet;
 
 @Slf4j
 @Service
@@ -184,12 +187,18 @@ public class IndexerServiceImpl implements IndexerService {
         stacCollectionModel.getSummaries().setScore(score);
 
         // parameter vocabs
-        List<String> mappedParameterVocabsFromGcmdKeywords = gcmdKeywordUtils.getMappedParameterVocabsFromGcmdKeywords(stacCollectionModel.getThemes());
-        List<String> processedParameterVocabs = vocabService.extractVocabLabelsFromThemes(stacCollectionModel.getThemes(), AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS);
+        Set<String> mappedParameterLabels = new HashSet<>();
+        List<String> processedParameterVocabs = vocabService.extractVocabLabelsFromThemes(
+                stacCollectionModel.getThemes(), AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS
+        );
 
         if (!processedParameterVocabs.isEmpty()) {
-            stacCollectionModel.getSummaries().setParameterVocabs(Stream.concat(mappedParameterVocabsFromGcmdKeywords.stream(), processedParameterVocabs.stream()).distinct().collect(Collectors.toList()));
+            mappedParameterLabels.addAll(processedParameterVocabs);
+        } else {
+            // manual mapping with custom logic when the record doesn't have existing AODN Parameter Vocabs
+            mappedParameterLabels.addAll(gcmdKeywordUtils.getMappedParameterVocabsFromGcmdKeywords(stacCollectionModel.getThemes()));
         }
+        stacCollectionModel.getSummaries().setParameterVocabs(new ArrayList<>(mappedParameterLabels));
 
         /*
         NOTE: The following implementation for platform and organization vocabularies is just a placeholder, not the final version.
@@ -204,7 +213,18 @@ public class IndexerServiceImpl implements IndexerService {
         }
 
         // organisation vocabs
-        // TODO: the logics for mapping record's organisation vocabs are heavily customised for a manual approach, AI now or later? need dedicated service's method
+        Set<String> mappedOrganisationLabels = new HashSet<>();
+        List<String> organisationLabelsFromThemes = vocabService.extractOrganisationVocabLabelsFromThemes(stacCollectionModel.getThemes());
+        if (!organisationLabelsFromThemes.isEmpty()) {
+            mappedOrganisationLabels.addAll(organisationLabelsFromThemes);
+        } else {
+            // manual mapping with custom logics when the record doesn't have existing AODN Organisation Vocabs
+            List<VocabModel> mappedOrganisationVocabsFromContacts = vocabService.getMappedOrganisationVocabsFromContacts(stacCollectionModel.getContacts());
+            for (VocabModel vocabModel : mappedOrganisationVocabsFromContacts) {
+                mappedOrganisationLabels.addAll(extractOrderedLabels(vocabModel));
+            }
+        }
+        stacCollectionModel.getSummaries().setOrganisationVocabs(new ArrayList<>(mappedOrganisationLabels));
 
         // search_as_you_type enabled fields can be extended
         SearchSuggestionsModel searchSuggestionsModel = SearchSuggestionsModel.builder()
@@ -216,6 +236,19 @@ public class IndexerServiceImpl implements IndexerService {
 
         return stacCollectionModel;
     }
+
+    private List<String> extractOrderedLabels(VocabModel vocabModel) {
+        // Priority: DisplayLabel > AltLabels > PrefLabel
+        if (safeGet(vocabModel::getDisplayLabel).isPresent()) {
+            return List.of(vocabModel.getDisplayLabel());
+        } else if (safeGet(vocabModel::getAltLabels).isPresent()) {
+            return vocabModel.getAltLabels();
+        } else if (safeGet(vocabModel::getLabel).isPresent()) {
+            return List.of(vocabModel.getLabel());
+        }
+        return List.of();
+    }
+
     /**
      * Use to index a particular UUID, the async is used to limit the number of same function call to avoid flooding
      * the system.

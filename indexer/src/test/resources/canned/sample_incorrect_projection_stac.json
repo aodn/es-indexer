@@ -76,7 +76,9 @@
     "temporal" : [ {
       "start" : "2003-03-31T14:00:00Z",
       "end" : "2013-03-01T12:59:59Z"
-    } ]
+    } ],
+    "parameter_vocabs" : [ ],
+    "organisation_vocabs" : [ ]
   },
   "contacts" : [ {
     "roles" : [ "author", "about" ],
