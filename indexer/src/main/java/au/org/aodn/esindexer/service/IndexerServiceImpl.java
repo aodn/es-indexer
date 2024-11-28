@@ -242,7 +242,7 @@ public class IndexerServiceImpl implements IndexerService {
         if (safeGet(vocabModel::getDisplayLabel).isPresent()) {
             return List.of(vocabModel.getDisplayLabel());
         } else if (safeGet(vocabModel::getAltLabels).isPresent()) {
-            return List.copyOf(vocabModel.getAltLabels());
+            return vocabModel.getAltLabels();
         } else if (safeGet(vocabModel::getLabel).isPresent()) {
             return List.of(vocabModel.getLabel());
         }
