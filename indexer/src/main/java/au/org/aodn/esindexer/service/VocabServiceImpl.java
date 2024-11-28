@@ -34,6 +34,8 @@ import java.util.concurrent.*;
 import java.io.IOException;
 import java.util.*;
 
+import static au.org.aodn.esindexer.utils.CommonUtils.safeGet;
+
 @Slf4j
 @Service
 // create and inject a stub proxy to self due to the circular reference http://bit.ly/4aFvYtt
@@ -143,7 +145,7 @@ public class VocabServiceImpl implements VocabService {
     public List<String> extractOrganisationVocabLabelsFromThemes(List<ThemesModel> themes) {
         List<String> results = new ArrayList<>();
         themes.stream().filter(Objects::nonNull).forEach(theme -> {
-            if (theme.getTitle().toLowerCase().contains("aodn organisation vocabulary")) {
+            if (safeGet(theme::getTitle).isPresent() && theme.getTitle().toLowerCase().contains("aodn organisation vocabulary")) {
                 for (ConceptModel conceptModel : theme.getConcepts()) {
                     if (conceptModel.getId() != null && !conceptModel.getId().isEmpty()) {
                         results.add(conceptModel.getId());
@@ -161,7 +163,7 @@ public class VocabServiceImpl implements VocabService {
 
         // top priority to citation: cit:citedResponsibleParty>
         for (ContactsModel contact : contacts) {
-            if (contact.getRoles().contains(citationRole)) {
+            if (safeGet(contact::getRoles).isPresent() && contact.getRoles().contains(citationRole)) {
                 String contactOrg = contact.getOrganization();
                 if (contactOrg != null) {
                     contactOrgs.add(contactOrg);
@@ -172,7 +174,7 @@ public class VocabServiceImpl implements VocabService {
         // second priority
         if (contactOrgs.isEmpty()) {
             for (ContactsModel contact : contacts) {
-                if (contact.getRoles().contains(pointOfContactRole)) {
+                if (safeGet(contact::getRoles).isPresent() && contact.getRoles().contains(pointOfContactRole)) {
                     String contactOrg = contact.getOrganization();
                     if (contactOrg != null) {
                         contactOrgs.add(contactOrg);
@@ -188,7 +190,7 @@ public class VocabServiceImpl implements VocabService {
                     VocabModel vocabModel = indexerObjectMapper.treeToValue(orgVocab, VocabModel.class);
                     dfsSearch(vocabModel, contactOrgs, results);
                 } catch (JsonProcessingException e) {
-                    throw new RuntimeException("Error deserializing JsonNode to VocabModel", e);
+                    log.error("Error deserializing JsonNode to VocabModel", e);
                 }
             }
         }
@@ -196,7 +198,15 @@ public class VocabServiceImpl implements VocabService {
         return results;
     }
 
-    // DFS search to find matching vocabs
+    /**
+     * Performs a Depth-First Search (DFS) to find vocab matches.
+     * DFS is well-suited for hierarchical structures due to its memory efficiency
+     * and ability to capture matches at any depth while allowing early exits within branches.
+     *
+     * @param currentVocab the current vocab node being processed
+     * @param contactOrgs  the list of organisation names to match against
+     * @param results      the list to store matching vocab nodes
+     */
     private void dfsSearch(VocabModel currentVocab, List<String> contactOrgs, List<VocabModel> results) {
         // Skip vocabs that have replaced_by field non-null
         if (currentVocab.getReplacedBy() != null) return;

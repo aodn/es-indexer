@@ -196,10 +196,7 @@ public class IndexerServiceImpl implements IndexerService {
             mappedParameterLabels.addAll(processedParameterVocabs);
         } else {
             // manual mapping with custom logic when the record doesn't have existing AODN Parameter Vocabs
-            List<String> mappedParameterVocabsFromGcmdKeywords = gcmdKeywordUtils.getMappedParameterVocabsFromGcmdKeywords(stacCollectionModel.getThemes());
-            if (!mappedParameterVocabsFromGcmdKeywords.isEmpty()) {
-                mappedParameterLabels.addAll(mappedParameterVocabsFromGcmdKeywords);
-            }
+            mappedParameterLabels.addAll(gcmdKeywordUtils.getMappedParameterVocabsFromGcmdKeywords(stacCollectionModel.getThemes()));
         }
         stacCollectionModel.getSummaries().setParameterVocabs(new ArrayList<>(mappedParameterLabels));
 
@@ -223,10 +220,8 @@ public class IndexerServiceImpl implements IndexerService {
         } else {
             // manual mapping with custom logics when the record doesn't have existing AODN Organisation Vocabs
             List<VocabModel> mappedOrganisationVocabsFromContacts = vocabService.getMappedOrganisationVocabsFromContacts(stacCollectionModel.getContacts());
-            if (!mappedOrganisationVocabsFromContacts.isEmpty()) {
-                for (VocabModel vocabModel : mappedOrganisationVocabsFromContacts) {
-                    mappedOrganisationLabels.addAll(extractOrderedLabels(vocabModel));
-                }
+            for (VocabModel vocabModel : mappedOrganisationVocabsFromContacts) {
+                mappedOrganisationLabels.addAll(extractOrderedLabels(vocabModel));
             }
         }
         stacCollectionModel.getSummaries().setOrganisationVocabs(new ArrayList<>(mappedOrganisationLabels));
@@ -243,18 +238,15 @@ public class IndexerServiceImpl implements IndexerService {
     }
 
     private List<String> extractOrderedLabels(VocabModel vocabModel) {
-        List<String> labels = new ArrayList<>();
-
         // Priority: DisplayLabel > AltLabels > PrefLabel
         if (safeGet(vocabModel::getDisplayLabel).isPresent()) {
-            labels.add(vocabModel.getDisplayLabel());
+            return List.of(vocabModel.getDisplayLabel());
         } else if (safeGet(vocabModel::getAltLabels).isPresent()) {
-            labels.addAll(vocabModel.getAltLabels());
+            return List.copyOf(vocabModel.getAltLabels());
         } else if (safeGet(vocabModel::getLabel).isPresent()) {
-            labels.add(vocabModel.getLabel());
+            return List.of(vocabModel.getLabel());
         }
-
-        return labels;
+        return List.of();
     }
 
     /**
