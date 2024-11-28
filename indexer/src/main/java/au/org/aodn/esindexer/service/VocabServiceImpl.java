@@ -145,7 +145,9 @@ public class VocabServiceImpl implements VocabService {
     public List<String> extractOrganisationVocabLabelsFromThemes(List<ThemesModel> themes) {
         List<String> results = new ArrayList<>();
         themes.stream().filter(Objects::nonNull).forEach(theme -> {
-            if (safeGet(theme::getTitle).isPresent() && theme.getTitle().toLowerCase().contains("aodn organisation vocabulary")) {
+            if (safeGet(theme::getTitle)
+                    .filter(title -> title.toLowerCase().contains("aodn organisation vocabulary"))
+                    .isPresent()) {
                 for (ConceptModel conceptModel : theme.getConcepts()) {
                     if (conceptModel.getId() != null && !conceptModel.getId().isEmpty()) {
                         results.add(conceptModel.getId());
@@ -161,26 +163,24 @@ public class VocabServiceImpl implements VocabService {
         String citationRole = "citation";
         String pointOfContactRole = "pointOfContact";
 
-        // top priority to citation: cit:citedResponsibleParty>
-        for (ContactsModel contact : contacts) {
-            if (safeGet(contact::getRoles).isPresent() && contact.getRoles().contains(citationRole)) {
-                String contactOrg = contact.getOrganization();
-                if (contactOrg != null) {
-                    contactOrgs.add(contactOrg);
-                }
-            }
-        }
+        // Top priority to citation: cit:citedResponsibleParty>
+        contacts.stream()
+            .filter(contact -> safeGet(contact::getRoles)
+                .filter(roles -> roles.contains(citationRole))
+                .isPresent())
+            .map(ContactsModel::getOrganization)
+            .filter(Objects::nonNull)
+            .forEach(contactOrgs::add);
 
-        // second priority
+        // Second priority if contactOrgs is still empty
         if (contactOrgs.isEmpty()) {
-            for (ContactsModel contact : contacts) {
-                if (safeGet(contact::getRoles).isPresent() && contact.getRoles().contains(pointOfContactRole)) {
-                    String contactOrg = contact.getOrganization();
-                    if (contactOrg != null) {
-                        contactOrgs.add(contactOrg);
-                    }
-                }
-            }
+            contacts.stream()
+                .filter(contact -> safeGet(contact::getRoles)
+                    .filter(roles -> roles.contains(pointOfContactRole))
+                    .isPresent())
+                .map(ContactsModel::getOrganization)
+                .filter(Objects::nonNull)
+                .forEach(contactOrgs::add);
         }
 
         List<VocabModel> results = new ArrayList<>();
