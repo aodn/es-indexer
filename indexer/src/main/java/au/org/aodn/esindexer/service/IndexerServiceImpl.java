@@ -23,6 +23,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import jakarta.xml.bind.JAXBException;
 import lombok.extern.slf4j.Slf4j;
+import net.opengis.ows10.MetadataType;
 import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.operation.TransformException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -164,10 +165,8 @@ public class IndexerServiceImpl implements IndexerService {
         return new ArrayList<>(results);
     }
 
-    protected StacCollectionModel getMappedMetadataValues(String metadataValues) throws IOException, FactoryException, TransformException, JAXBException {
-        MDMetadataType metadataType = jaxbUtils.unmarshal(metadataValues);
-
-        StacCollectionModel stacCollectionModel = stacCollectionMapperService.mapToSTACCollection(metadataType);
+    protected StacCollectionModel getMappedMetadataValues(MDMetadataType metadataValues) throws IOException, FactoryException, TransformException, JAXBException {
+        StacCollectionModel stacCollectionModel = stacCollectionMapperService.mapToSTACCollection(metadataValues);
 
         // evaluate completeness
         Integer completeness = rankingService.evaluateCompleteness(stacCollectionModel);
@@ -225,7 +224,8 @@ public class IndexerServiceImpl implements IndexerService {
     @Async("asyncIndexMetadata")
     public CompletableFuture<ResponseEntity<String>> indexMetadata(String metadataValues) {
         try {
-            StacCollectionModel mappedMetadataValues = this.getMappedMetadataValues(metadataValues);
+            MDMetadataType metadataType = jaxbUtils.unmarshal(metadataValues);
+            StacCollectionModel mappedMetadataValues = this.getMappedMetadataValues(metadataType);
             String uuid = mappedMetadataValues.getUuid();
 
             // index the metadata if it is published
@@ -324,15 +324,25 @@ public class IndexerServiceImpl implements IndexerService {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
         }
     }
-
+    /**
+     *
+     * @param beginWithUuid - Begin processing after this UUID, that is skip those UUID in front
+     * @param confirm - Need to set to true otherwise it will throw exception
+     * @param skipExist - If uuid already exist in the Elastic, skip it
+     * @param callback - The callback for SSE handling
+     * @return - A list of processed item reponse
+     * @throws IOException - When error happens
+     */
     public List<BulkResponse> indexAllMetadataRecordsFromGeoNetwork(
-            String beginWithUuid, boolean confirm, final Callback callback) throws IOException {
+            String beginWithUuid, boolean confirm, boolean skipExist, final Callback callback) throws IOException {
 
         if (!confirm) {
             throw new IndexAllRequestNotConfirmedException("Please confirm that you want to index all metadata records from GeoNetwork");
         }
-
-        if(beginWithUuid == null) {
+        // If you want to skip exist, then for sure you do not want to clean the index before start, the same for
+        // beginWithUuid, you want to start from a particular fail point so you do not want to clean the processed item
+        // too
+        if(beginWithUuid == null && !skipExist) {
             log.info("Indexing all metadata records from GeoNetwork");
             // recreate index from mapping JSON file
             elasticSearchIndexService.createIndexFromMappingJSONFile(AppConstants.PORTAL_RECORDS_MAPPING_JSON_FILE, indexName);
@@ -352,11 +362,28 @@ public class IndexerServiceImpl implements IndexerService {
         try {
             for (String metadataRecord : geoNetworkResourceService.getAllMetadataRecords(beginWithUuid)) {
                 if (metadataRecord != null) {
+                    MDMetadataType metadataType = jaxbUtils.unmarshal(metadataRecord);
+                    final String uuid = stacCollectionMapperService.mapUUID(metadataType);
+
                     // get mapped metadata values from GeoNetwork to STAC collection schema
                     final CountDownLatch countDown = new CountDownLatch(1);
                     Callable<StacCollectionModel> task = () ->  {
                         try {
-                            return this.getMappedMetadataValues(metadataRecord);
+                            if (skipExist) {
+                                // If skip enabled and uuid exist, skip processing
+                                try {
+                                    this.getDocumentByUUID(uuid);
+                                    if (callback != null) {
+                                        callback.onProgress(
+                                                String.format("INFO - Skip %s due skip exist enabled", uuid));
+                                    }
+                                    return null;
+                                }
+                                catch (Exception e) {
+                                    // That is item not found
+                                }
+                            }
+                            return this.getMappedMetadataValues(metadataType);
                         }
                         catch (FactoryException | JAXBException | TransformException | NullPointerException e) {
                             /*
@@ -383,7 +410,7 @@ public class IndexerServiceImpl implements IndexerService {
                         // Make sure gateway not timeout on long processing
                         while(countDown.getCount() != 0) {
                             if (callback != null) {
-                                callback.onProgress("Processing.... ");
+                                callback.onProgress("Processing.... " + uuid);
                             }
                             countDown.await(30, TimeUnit.SECONDS);
                         }
@@ -505,22 +532,10 @@ public class IndexerServiceImpl implements IndexerService {
                 }
                 for (BulkResponseItem item : result.items()) {
                     if (item.error() != null) {
-                        try {
-                            log.error("UUID {} {} {} {}",
-                                    item.id(),
-                                    item.error().reason(),
-                                    item.error().causedBy(),
-                                    indexerObjectMapper
-                                            .writerWithDefaultPrettyPrinter()
-                                            .writeValueAsString(
-                                                    this.getMappedMetadataValues(
-                                                            geoNetworkResourceService.searchRecordBy(item.id())
-                                                    )
-                                            )
-                            );
-                        } catch (FactoryException | TransformException | JAXBException e) {
-                            log.warn("Parse error on display stac record");
-                        }
+                        log.error("UUID {} {} {}",
+                                item.id(),
+                                item.error().reason(),
+                                item.error().causedBy());
                     }
                 }
             }

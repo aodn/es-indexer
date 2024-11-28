@@ -69,7 +69,7 @@ public class IndexerController {
             @RequestParam(value = "confirm", defaultValue = "false") Boolean confirm,
             @RequestParam(value = "beginWithUuid", required=false) String beginWithUuid) throws IOException {
 
-        List<BulkResponse> responses = indexerService.indexAllMetadataRecordsFromGeoNetwork(beginWithUuid, confirm, null);
+        List<BulkResponse> responses = indexerService.indexAllMetadataRecordsFromGeoNetwork(beginWithUuid, confirm,  false, null);
         return ResponseEntity.ok(responses.toString());
     }
     /**
@@ -87,6 +87,7 @@ public class IndexerController {
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Index all metadata records from GeoNetwork")
     public SseEmitter indexAllMetadataRecordsAsync(
             @RequestParam(value = "confirm", defaultValue = "false") Boolean confirm,
+            @RequestParam(value = "skipExist", defaultValue = "false") Boolean skipExist,
             @RequestParam(value = "beginWithUuid", required=false) String beginWithUuid) {
 
         final SseEmitter emitter = new SseEmitter(0L); // 0L means no timeout;
@@ -130,7 +131,7 @@ public class IndexerController {
 
         new Thread(() -> {
             try {
-                indexerService.indexAllMetadataRecordsFromGeoNetwork(beginWithUuid, confirm, callback);
+                indexerService.indexAllMetadataRecordsFromGeoNetwork(beginWithUuid, confirm, skipExist, callback);
             }
             catch(IOException e) {
                 emitter.completeWithError(e);
