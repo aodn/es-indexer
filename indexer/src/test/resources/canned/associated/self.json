@@ -41,7 +41,9 @@
     },
     "temporal" : [ {
       "start" : "2007-04-03T06:00:00Z"
-    } ]
+    } ],
+    "parameter_vocabs" : [ "ocean biota", "conductivity", "temperature" ],
+    "organisation_vocabs" : [ "Integrated Marine Observing System (IMOS)" ]
   },
   "contacts" : [ {
     "roles" : [ "pointOfContact", "about" ],

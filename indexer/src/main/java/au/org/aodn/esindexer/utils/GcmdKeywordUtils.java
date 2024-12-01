@@ -3,6 +3,9 @@ package au.org.aodn.esindexer.utils;
 import au.org.aodn.stac.model.ConceptModel;
 import au.org.aodn.stac.model.ThemesModel;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
@@ -52,23 +55,20 @@ public class GcmdKeywordUtils {
     // Load the CSV file into a HashMap
     private void loadCsvToMap(String path) {
         try {
-
             log.info("Loading GCMD mapping contents from CSV resource: {}", path);
 
-            // Read the file as a single String
-            String fileContent = readResourceFile(path);
+            // Read the file content using Apache Commons CSV
+            Resource resource = new ClassPathResource(path);
+            try (InputStream inputStream = resource.getInputStream();
+                 Reader reader = new InputStreamReader(inputStream);
+                 CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT)) {
 
-            // Split the content into lines
-            String[] lines = fileContent.split("\\r?\\n");
-
-            // Process each line
-            for (String line : lines) {
-                // Split the line into key and value based on comma
-                String[] parts = line.split(",");
-                if (parts.length >= 2) {
-                    String key = parts[0].trim();
-                    String value = parts[1].trim();
-                    gcmdMapping.put(key, value);
+                for (CSVRecord record : csvParser) {
+                    if (record.size() >= 2) { // Ensure at least key-value pairs exist
+                        String key = record.get(0).trim();
+                        String value = record.get(1).trim();
+                        gcmdMapping.put(key, value);
+                    }
                 }
             }
 

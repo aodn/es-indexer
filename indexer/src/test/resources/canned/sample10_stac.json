@@ -172,7 +172,9 @@
     "temporal" : [ {
       "start" : "2007-09-08T14:00:00Z",
       "end" : null
-    } ]
+    } ],
+    "parameter_vocabs" : [ ],
+    "organisation_vocabs" : [ ]
   },
   "contacts" : [ {
     "roles" : [ "pointOfContact", "about" ],

@@ -36,8 +36,9 @@
       "start" : "2024-01-01T13:00:00Z",
       "end" : "2024-03-05T12:59:59Z"
     } ],
-    "parameter_vocabs" : [ "salinity", "nutrient", "chlorophyll", "air temperature", "precipitation and evaporation", "wave", "air-sea fluxes", "current", "chemical", "air pressure", "carbon", "physical-atmosphere", "bathymetry", "temperature", "wind", "ocean biota", "density", "water pressure" ],
-    "platform_vocabs" : [ "research vessel" ]
+    "parameter_vocabs" : [ "salinity", "current", "ocean biota", "density", "bathymetry", "temperature", "water pressure" ],
+    "platform_vocabs" : [ "research vessel" ],
+    "organisation_vocabs" : [ "CSIRO Oceans and Atmosphere" ]
   },
   "contacts" : [ {
     "roles" : [ "custodian", "about" ],

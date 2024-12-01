@@ -34,7 +34,9 @@
     "temporal" : [ {
       "start" : "1989-01-11T13:00:00Z",
       "end" : "1989-11-15T12:59:59Z"
-    } ]
+    } ],
+    "parameter_vocabs" : [ ],
+    "organisation_vocabs" : [ ]
   },
   "contacts" : [ {
     "roles" : [ "pointOfContact", "about" ],

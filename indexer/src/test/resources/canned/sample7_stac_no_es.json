@@ -94,7 +94,9 @@
     "temporal" : [ {
       "start" : "2021-09-30T14:00:00Z",
       "end" : "2022-12-31T12:59:59Z"
-    } ]
+    } ],
+    "parameter_vocabs" : [ ],
+    "organisation_vocabs" : [ ]
   },
   "contacts" : [ {
     "roles" : [ "principalInvestigator", "about" ],

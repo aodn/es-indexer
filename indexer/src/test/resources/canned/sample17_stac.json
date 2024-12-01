@@ -17,7 +17,9 @@
     "creation" : "2015-02-02T15:39:42",
     "revision" : "2018-11-14T15:23:41",
     "update_frequency" : "other",
-    "temporal" : [ ]
+    "temporal" : [ ],
+    "parameter_vocabs" : [ ],
+    "organisation_vocabs" : [ ]
   },
   "contacts" : [ {
     "roles" : [ "about" ],

@@ -29,7 +29,9 @@
     "temporal" : [ {
       "start" : null,
       "end" : null
-    } ]
+    } ],
+    "parameter_vocabs" : [ ],
+    "organisation_vocabs" : [ ]
   },
   "contacts" : [ {
     "roles" : [ "pointOfContact", "metadata" ],

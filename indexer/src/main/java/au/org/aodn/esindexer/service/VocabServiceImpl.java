@@ -7,6 +7,7 @@ import au.org.aodn.ardcvocabs.service.ArdcVocabService;
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.exception.DocumentNotFoundException;
 import au.org.aodn.stac.model.ConceptModel;
+import au.org.aodn.stac.model.ContactsModel;
 import au.org.aodn.stac.model.ThemesModel;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.ElasticsearchException;
@@ -32,6 +33,8 @@ import java.util.concurrent.*;
 
 import java.io.IOException;
 import java.util.*;
+
+import static au.org.aodn.esindexer.utils.CommonUtils.safeGet;
 
 @Slf4j
 @Service
@@ -137,6 +140,105 @@ public class VocabServiceImpl implements VocabService {
             });
         }
         return results;
+    }
+
+    public List<String> extractOrganisationVocabLabelsFromThemes(List<ThemesModel> themes) {
+        List<String> results = new ArrayList<>();
+        themes.stream()
+                .filter(Objects::nonNull)
+                .forEach(theme -> safeGet(theme::getTitle)
+                        .filter(title -> title.toLowerCase().contains("aodn organisation vocabulary"))
+                        .ifPresent(title -> theme.getConcepts().stream()
+                                .filter(concept -> concept.getId() != null && !concept.getId().isEmpty())
+                                .forEach(concept -> results.add(concept.getId()))
+                        ));
+        return results;
+    }
+
+    public List<VocabModel> getMappedOrganisationVocabsFromContacts(List<ContactsModel> contacts) throws IOException {
+        List<String> contactOrgs = new ArrayList<>();
+        String citationRole = "citation";
+        String pointOfContactRole = "pointOfContact";
+
+        // Top priority to citation: cit:citedResponsibleParty>
+        contacts.stream()
+            .filter(contact -> safeGet(contact::getRoles)
+                .filter(roles -> roles.contains(citationRole))
+                .isPresent())
+            .map(ContactsModel::getOrganization)
+            .filter(Objects::nonNull)
+            .forEach(contactOrgs::add);
+
+        // Second priority if contactOrgs is still empty
+        if (contactOrgs.isEmpty()) {
+            contacts.stream()
+                .filter(contact -> safeGet(contact::getRoles)
+                    .filter(roles -> roles.contains(pointOfContactRole))
+                    .isPresent())
+                .map(ContactsModel::getOrganization)
+                .filter(Objects::nonNull)
+                .forEach(contactOrgs::add);
+        }
+
+        List<VocabModel> results = new ArrayList<>();
+        for (JsonNode orgVocab : self.getOrganisationVocabs()) {
+            if (orgVocab != null) {
+                try {
+                    VocabModel vocabModel = indexerObjectMapper.treeToValue(orgVocab, VocabModel.class);
+                    dfsSearch(vocabModel, contactOrgs, results);
+                } catch (JsonProcessingException e) {
+                    log.error("Error deserializing JsonNode to VocabModel", e);
+                }
+            }
+        }
+
+        return results;
+    }
+
+    /**
+     * Performs a Depth-First Search (DFS) to find vocab matches.
+     * DFS is well-suited for hierarchical structures due to its memory efficiency
+     * and ability to capture matches at any depth while allowing early exits within branches.
+     *
+     * @param currentVocab the current vocab node being processed
+     * @param contactOrgs  the list of organisation names to match against
+     * @param results      the list to store matching vocab nodes
+     */
+    private void dfsSearch(VocabModel currentVocab, List<String> contactOrgs, List<VocabModel> results) {
+        // Skip vocabs that have replaced_by field non-null
+        if (currentVocab.getReplacedBy() != null) return;
+
+        // Check labels in priority order and add to results if a match is found
+        if (findAndAddMatch(Collections.singletonList(currentVocab.getDisplayLabel()), contactOrgs) ||
+                findAndAddMatch(currentVocab.getAltLabels(), contactOrgs) ||
+                findAndAddMatch(Collections.singletonList(currentVocab.getLabel()), contactOrgs) ||
+                findAndAddMatch(currentVocab.getHiddenLabels(), contactOrgs)) {
+            log.info("Match found: {}", currentVocab);
+            results.add(currentVocab);
+            return;
+        }
+
+        // Recursively search narrower nodes
+        List<VocabModel> narrowerNodes = currentVocab.getNarrower();
+        if (narrowerNodes != null) {
+            for (VocabModel narrowerNode : narrowerNodes) {
+                dfsSearch(narrowerNode, contactOrgs, results);
+            }
+        }
+    }
+
+    private boolean findAndAddMatch(List<String> labels, List<String> contactOrgs) {
+        if (labels == null || labels.isEmpty()) return false;
+        for (String label : labels) {
+            if (label != null) {
+                for (String contactOrg : contactOrgs) {
+                    if (label.equalsIgnoreCase(contactOrg)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     protected List<JsonNode> groupVocabsFromEsByKey(String key) throws IOException {

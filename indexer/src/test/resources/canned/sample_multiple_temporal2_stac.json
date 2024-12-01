@@ -118,7 +118,9 @@
     }, {
       "start" : "1984-02-27T13:00:00Z",
       "end" : "1985-02-28T12:59:59Z"
-    } ]
+    } ],
+    "parameter_vocabs" : [ ],
+    "organisation_vocabs" : [ ]
   },
   "contacts" : [ {
     "roles" : [ "principalInvestigator", "about" ],
