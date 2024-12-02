@@ -1,10 +1,15 @@
 package au.org.aodn.ardcvocabs.service;
 
+import au.org.aodn.ardcvocabs.model.ArdcRootPaths;
 import au.org.aodn.ardcvocabs.model.VocabApiPaths;
 import au.org.aodn.ardcvocabs.model.VocabModel;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.TextNode;
+import jakarta.annotation.PostConstruct;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,13 +27,85 @@ import java.util.regex.Pattern;
 
 public class ArdcVocabServiceImpl implements ArdcVocabService {
 
-    protected Logger log = LoggerFactory.getLogger(ArdcVocabServiceImpl.class);
+    protected static Logger log = LoggerFactory.getLogger(ArdcVocabServiceImpl.class);
 
     @Value("${ardcvocabs.baseUrl:https://vocabs.ardc.edu.au/repository/api/lda/aodn}")
     protected String vocabApiBase;
 
     protected RestTemplate restTemplate;
     protected RetryTemplate retryTemplate;
+
+    protected static final String VERSION_REGEX = "^version-\\d+-\\d+$";
+    Map<String, Map<PathName, String>> resolvedPathCollection = new HashMap<>();
+    protected enum PathName {
+        categoryApi,
+        categoryDetailsApi,
+        vocabApi,
+        vocabDetailsApi
+    }
+
+    @PostConstruct
+    public void initialiseVersions() {
+        for (ArdcRootPaths rootPath : ArdcRootPaths.values()) {
+            String categoryVersion = fetchVersion(rootPath.getCategoryRoot());
+            String vocabVersion = fetchVersion(rootPath.getVocabRoot());
+
+            if (categoryVersion != null && vocabVersion != null) {
+                log.info("Fetched ARDC category version for {}: {}", rootPath.name(), categoryVersion);
+                log.info("Fetched ARDC vocab version for {}: {}", rootPath.name(), vocabVersion);
+                Map<PathName, String> resolvedPaths = new HashMap<>();
+                for (VocabApiPaths vocabApiPath : VocabApiPaths.values()) {
+                    if (rootPath.name().equals(vocabApiPath.name())) {
+                        resolvedPaths.put(PathName.categoryApi, String.format(vocabApiPath.getCategoryApiTemplate(), categoryVersion));
+                        resolvedPaths.put(PathName.categoryDetailsApi, String.format(vocabApiPath.getCategoryDetailsTemplate(), categoryVersion, "%s"));
+                        resolvedPaths.put(PathName.vocabApi, String.format(vocabApiPath.getVocabApiTemplate(), vocabVersion));
+                        resolvedPaths.put(PathName.vocabDetailsApi, String.format(vocabApiPath.getVocabDetailsTemplate(), vocabVersion, "%s"));
+                    }
+                }
+                resolvedPathCollection.put(rootPath.name(), resolvedPaths);
+            } else {
+                log.error("Failed to fetch ARDC version for {}", rootPath.name());
+            }
+        }
+    }
+
+    protected static String fetchVersion(String url) {
+        String fullUrl = "https://vocabs.ardc.edu.au" + url;
+        try {
+            RestTemplate restTemplate = new RestTemplate();
+            String htmlContent = restTemplate.getForObject(fullUrl, String.class);
+
+            if (htmlContent != null && !htmlContent.isEmpty()) {
+                // Parse HTML content with Jsoup
+                Document doc = Jsoup.parse(htmlContent);
+
+                // Extract the first h4 element
+                Element firstH4 = doc.selectFirst("div.col-md-4.panel-body:has(.box-tag.box-tag-green) h4:first-of-type");
+
+                if (firstH4 != null) {
+                    String version = firstH4.text()
+                            .toLowerCase()
+                            .replaceAll("[ .]", "-");
+                    // Validate the version format
+                    if (version.matches(VERSION_REGEX)) {
+                        log.info("Valid Version Found: {}", version);
+                        return version;
+                    } else {
+                        log.warn("Version does not match the required format: {}", version);
+                    }
+                } else {
+                    log.warn("No matching h4 element found in the document.");
+                }
+            } else {
+                log.warn("HTML content is empty or null.");
+            }
+        } catch (Exception e) {
+            log.error("Error fetching version from {}: {}", fullUrl, e.getMessage());
+        }
+
+        return null;
+    }
+
 
     protected Function<JsonNode, String> extractSingleText(String key) {
         return (node) -> {
@@ -92,8 +169,8 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
 
     protected VocabModel buildVocabByResourceUri(String vocabUri, String vocabApiBase, VocabApiPaths vocabApiPaths) {
         String resourceDetailsApi = vocabUri.contains("_classes")
-                ? vocabApiPaths.getVocabCategoryDetailsApiPath()
-                : vocabApiPaths.getVocabDetailsApiPath();
+                ? resolvedPathCollection.get(vocabApiPaths.name()).get(PathName.categoryDetailsApi)
+                : resolvedPathCollection.get(vocabApiPaths.name()).get(PathName.vocabDetailsApi);
 
         String detailsUrl = String.format(vocabApiBase + resourceDetailsApi, vocabUri);
 
@@ -166,7 +243,7 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
 
     protected Map<String, List<VocabModel>> getVocabLeafNodes(String vocabApiBase, VocabApiPaths vocabApiPaths) {
         Map<String, List<VocabModel>> results = new HashMap<>();
-        String url = String.format(vocabApiBase + vocabApiPaths.getVocabApiPath());
+        String url = String.format(vocabApiBase + resolvedPathCollection.get(vocabApiPaths.name()).get(PathName.vocabApi));
 
         while (url != null && !url.isEmpty()) {
             try {
@@ -180,7 +257,7 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
                     if (isNodeValid.apply(node, "items")) {
                         for (JsonNode j : node.get("items")) {
                             // Now we need to construct link to detail resources
-                            String dl = String.format(vocabApiBase + vocabApiPaths.getVocabDetailsApiPath(), about.apply(j));
+                            String dl = String.format(vocabApiBase + resolvedPathCollection.get(vocabApiPaths.name()).get(PathName.vocabDetailsApi), about.apply(j));
                             try {
                                 log.debug("getVocabLeafNodes -> {}", dl);
                                 ObjectNode d = retryTemplate.execute(context -> restTemplate.getForObject(dl, ObjectNode.class));
@@ -271,7 +348,7 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
     @Override
     public List<VocabModel> getVocabTreeFromArdcByType(VocabApiPaths vocabApiPaths) {
         Map<String, List<VocabModel>> vocabLeafNodes = getVocabLeafNodes(vocabApiBase, vocabApiPaths);
-        String url = String.format(vocabApiBase + vocabApiPaths.getVocabCategoryApiPath());
+        String url = String.format(vocabApiBase + resolvedPathCollection.get(vocabApiPaths.name()).get(PathName.categoryApi));
         List<VocabModel> vocabCategoryNodes = new ArrayList<>();
         while (url != null && !url.isEmpty()) {
             try {
