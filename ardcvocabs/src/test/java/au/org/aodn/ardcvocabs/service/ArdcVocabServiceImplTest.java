@@ -14,11 +14,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.stubbing.Answer;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
-import org.springframework.retry.RetryCallback;
-import org.springframework.retry.RetryContext;
 import org.springframework.retry.support.RetryTemplate;
 import org.springframework.web.client.RestTemplate;
 
@@ -32,8 +29,6 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.util.AssertionErrors.assertTrue;
 
 @ExtendWith(MockitoExtension.class)
@@ -230,6 +225,36 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
 
     @AfterEach void clear() {
         Mockito.reset(mockRestTemplate);
+    }
+
+    @Test
+    void testFetchVersionWithCannedHtml() throws Exception {
+        String mockHtmlContent;
+        String version;
+
+        mockHtmlContent = readResourceFile("/databag/ardc/viewById22.html");
+        version = ArdcVocabServiceImpl.extractVersionFromHtmlContent(mockHtmlContent);
+        assertEquals("version-1-6", version, "Expected parsed version for viewById22.html is 'version-1-6'");
+
+        mockHtmlContent = readResourceFile("/databag/ardc/viewById24.html");
+        version = ArdcVocabServiceImpl.extractVersionFromHtmlContent(mockHtmlContent);
+        assertEquals("version-2-1", version, "Expected parsed version for viewById24.html is 'version-2-1'");
+
+        mockHtmlContent = readResourceFile("/databag/ardc/viewById25.html");
+        version = ArdcVocabServiceImpl.extractVersionFromHtmlContent(mockHtmlContent);
+        assertEquals("version-6-1", version, "Expected parsed version for viewById25.html is 'version-6-1'");
+
+        mockHtmlContent = readResourceFile("/databag/ardc/viewById26.html");
+        version = ArdcVocabServiceImpl.extractVersionFromHtmlContent(mockHtmlContent);
+        assertEquals("version-1-2", version, "Expected parsed version for viewById26.html is 'version-1-2'");
+
+        mockHtmlContent = readResourceFile("/databag/ardc/viewById28.html");
+        version = ArdcVocabServiceImpl.extractVersionFromHtmlContent(mockHtmlContent);
+        assertEquals("version-2-5", version, "Expected parsed version for viewById28.html is 'version-2-5'");
+
+        mockHtmlContent = readResourceFile("/databag/ardc/viewById29.html");
+        version = ArdcVocabServiceImpl.extractVersionFromHtmlContent(mockHtmlContent);
+        assertEquals("version-2-5", version, "Expected parsed version for viewById29.html is 'version-2-5'");
     }
 
     @Test

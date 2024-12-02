@@ -46,66 +46,89 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
 
     @PostConstruct
     public void initialiseVersions() {
+        String rootHostname = "https://vocabs.ardc.edu.au";
         for (ArdcRootPaths rootPath : ArdcRootPaths.values()) {
-            String categoryVersion = fetchVersion(rootPath.getCategoryRoot());
-            String vocabVersion = fetchVersion(rootPath.getVocabRoot());
+            try {
+                // Fetch HTML contents for category and vocab
+                String categoryRootHtmlContent = fetchHtmlContent(rootHostname + rootPath.getCategoryRoot());
+                String vocabRootHtmlContent = fetchHtmlContent(rootHostname + rootPath.getVocabRoot());
 
-            if (categoryVersion != null && vocabVersion != null) {
-                log.info("Fetched ARDC category version for {}: {}", rootPath.name(), categoryVersion);
-                log.info("Fetched ARDC vocab version for {}: {}", rootPath.name(), vocabVersion);
-                Map<PathName, String> resolvedPaths = new HashMap<>();
-                for (VocabApiPaths vocabApiPath : VocabApiPaths.values()) {
-                    if (rootPath.name().equals(vocabApiPath.name())) {
-                        resolvedPaths.put(PathName.categoryApi, String.format(vocabApiPath.getCategoryApiTemplate(), categoryVersion));
-                        resolvedPaths.put(PathName.categoryDetailsApi, String.format(vocabApiPath.getCategoryDetailsTemplate(), categoryVersion, "%s"));
-                        resolvedPaths.put(PathName.vocabApi, String.format(vocabApiPath.getVocabApiTemplate(), vocabVersion));
-                        resolvedPaths.put(PathName.vocabDetailsApi, String.format(vocabApiPath.getVocabDetailsTemplate(), vocabVersion, "%s"));
+                if (categoryRootHtmlContent != null && vocabRootHtmlContent != null) {
+                    // Extract versions
+                    String categoryVersion = extractVersionFromHtmlContent(categoryRootHtmlContent);
+                    String vocabVersion = extractVersionFromHtmlContent(vocabRootHtmlContent);
+
+                    if (categoryVersion != null && vocabVersion != null) {
+                        log.info("Fetched ARDC category version for {}: {}", rootPath.name(), categoryVersion);
+                        log.info("Fetched ARDC vocab version for {}: {}", rootPath.name(), vocabVersion);
+
+                        // Build and store resolved paths
+                        Map<PathName, String> resolvedPaths = buildResolvedPaths(rootPath, categoryVersion, vocabVersion);
+                        resolvedPathCollection.put(rootPath.name(), resolvedPaths);
+                    } else {
+                        log.error("Failed to extract versions for {}", rootPath.name());
                     }
+                } else {
+                    log.error("Failed to fetch HTML content for {}", rootPath.name());
                 }
-                resolvedPathCollection.put(rootPath.name(), resolvedPaths);
-            } else {
-                log.error("Failed to fetch ARDC version for {}", rootPath.name());
+            } catch (Exception e) {
+                log.error("Error initialising versions for {}: {}", rootPath.name(), e.getMessage(), e);
             }
         }
     }
 
-    protected static String fetchVersion(String url) {
-        String fullUrl = "https://vocabs.ardc.edu.au" + url;
+    private String fetchHtmlContent(String url) {
         try {
-            RestTemplate restTemplate = new RestTemplate();
-            String htmlContent = restTemplate.getForObject(fullUrl, String.class);
-
-            if (htmlContent != null && !htmlContent.isEmpty()) {
-                // Parse HTML content with Jsoup
-                Document doc = Jsoup.parse(htmlContent);
-
-                // Extract the first h4 element
-                Element firstH4 = doc.selectFirst("div.col-md-4.panel-body:has(.box-tag.box-tag-green) h4:first-of-type");
-
-                if (firstH4 != null) {
-                    String version = firstH4.text()
-                            .toLowerCase()
-                            .replaceAll("[ .]", "-");
-                    // Validate the version format
-                    if (version.matches(VERSION_REGEX)) {
-                        log.info("Valid Version Found: {}", version);
-                        return version;
-                    } else {
-                        log.warn("Version does not match the required format: {}", version);
-                    }
-                } else {
-                    log.warn("No matching h4 element found in the document.");
-                }
-            } else {
-                log.warn("HTML content is empty or null.");
-            }
+            return restTemplate.getForObject(url, String.class);
+        } catch (RestClientException e) {
+            log.error("Failed to fetch HTML content from URL {}: {}", url, e.getMessage());
         } catch (Exception e) {
-            log.error("Error fetching version from {}: {}", fullUrl, e.getMessage());
+            log.error("Unexpected error while fetching HTML content from URL {}: {}", url, e.getMessage(), e);
         }
-
         return null;
     }
 
+    protected Map<PathName, String> buildResolvedPaths(ArdcRootPaths rootPath, String categoryVersion, String vocabVersion) {
+        Map<PathName, String> resolvedPaths = new HashMap<>();
+        for (VocabApiPaths vocabApiPath : VocabApiPaths.values()) {
+            if (rootPath.name().equals(vocabApiPath.name())) {
+                resolvedPaths.put(PathName.categoryApi, String.format(vocabApiPath.getCategoryApiTemplate(), categoryVersion));
+                resolvedPaths.put(PathName.categoryDetailsApi, String.format(vocabApiPath.getCategoryDetailsTemplate(), categoryVersion, "%s"));
+                resolvedPaths.put(PathName.vocabApi, String.format(vocabApiPath.getVocabApiTemplate(), vocabVersion));
+                resolvedPaths.put(PathName.vocabDetailsApi, String.format(vocabApiPath.getVocabDetailsTemplate(), vocabVersion, "%s"));
+            }
+        }
+        return resolvedPaths;
+    }
+
+    protected static String extractVersionFromHtmlContent(String htmlContent) {
+        if (htmlContent != null && !htmlContent.isEmpty()) {
+            // Parse HTML content with Jsoup
+            Document doc = Jsoup.parse(htmlContent);
+
+            // Extract the first h4 element
+            // has(.box-tag.box-tag-green) query will ensure to select only the div element that has "Current" indicator
+            Element firstH4 = doc.selectFirst("div.col-md-4.panel-body:has(.box-tag.box-tag-green) h4:first-of-type");
+
+            if (firstH4 != null) {
+                String version = firstH4.text()
+                        .toLowerCase()
+                        .replaceAll("[ .]", "-");
+                // Validate the version format
+                if (version.matches(VERSION_REGEX)) {
+                    log.info("Valid Version Found: {}", version);
+                    return version;
+                } else {
+                    log.warn("Version does not match the required format: {}", version);
+                }
+            } else {
+                log.warn("No matching h4 element found in the document.");
+            }
+        } else {
+            log.warn("HTML content is empty or null.");
+        }
+        return null;
+    }
 
     protected Function<JsonNode, String> extractSingleText(String key) {
         return (node) -> {
