@@ -46,12 +46,11 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
 
     @PostConstruct
     public void initialiseVersions() {
-        String rootHostname = "https://vocabs.ardc.edu.au";
         for (ArdcRootPaths rootPath : ArdcRootPaths.values()) {
             try {
                 // Fetch HTML contents for category and vocab
-                String categoryRootHtmlContent = fetchHtmlContent(rootHostname + rootPath.getCategoryRoot());
-                String vocabRootHtmlContent = fetchHtmlContent(rootHostname + rootPath.getVocabRoot());
+                String categoryRootHtmlContent = fetchHtmlContent(rootPath.getCategoryRoot());
+                String vocabRootHtmlContent = fetchHtmlContent(rootPath.getVocabRoot());
 
                 if (categoryRootHtmlContent != null && vocabRootHtmlContent != null) {
                     // Extract versions

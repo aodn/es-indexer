@@ -22,7 +22,8 @@ public enum ArdcRootPaths {
     private final String vocabRoot;
 
     ArdcRootPaths(String categoryRoot, String vocabRoot) {
-        this.categoryRoot = categoryRoot;
-        this.vocabRoot = vocabRoot;
+        String rootHostname = "https://vocabs.ardc.edu.au";
+        this.categoryRoot = rootHostname + categoryRoot;
+        this.vocabRoot = rootHostname + vocabRoot;
     }
 }
