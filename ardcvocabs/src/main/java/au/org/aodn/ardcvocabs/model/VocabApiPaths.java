@@ -16,9 +16,9 @@ public enum VocabApiPaths {
             "/aodn-platform-vocabulary/%s/resource.json?uri=%s"
     ),
     ORGANISATION_VOCAB(
-            "/aodn-organisation-category-vocabulary/%s/concept",
+            "/aodn-organisation-category-vocabulary/%s/concept.json",
             "/aodn-organisation-category-vocabulary/%s/resource.json?uri=%s",
-            "/aodn-organisation-vocabulary/%s/concept",
+            "/aodn-organisation-vocabulary/%s/concept.json",
             "/aodn-organisation-vocabulary/%s/resource.json?uri=%s"
     );
 

@@ -24,7 +24,9 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -199,6 +201,31 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
         //this.ardcVocabService = new ArdcVocabServiceImpl(new RestTemplate());
         this.ardcVocabService = new ArdcVocabServiceImpl(mockRestTemplate, new RetryTemplate());
         this.ardcVocabService.vocabApiBase = "https://vocabs.ardc.edu.au/repository/api/lda/aodn";
+
+        Map<String, Map<ArdcVocabServiceImpl.PathName, String>> resolvedPathCollection = new HashMap<>();
+
+        resolvedPathCollection.put(VocabApiPaths.PARAMETER_VOCAB.name(), Map.of(
+                ArdcVocabServiceImpl.PathName.vocabApi, "/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+                ArdcVocabServiceImpl.PathName.categoryApi, "/aodn-parameter-category-vocabulary/version-2-1/concept.json",
+                ArdcVocabServiceImpl.PathName.categoryDetailsApi, "/aodn-parameter-category-vocabulary/version-2-1/resource.json?uri=%s",
+                ArdcVocabServiceImpl.PathName.vocabDetailsApi, "/aodn-discovery-parameter-vocabulary/version-1-6/resource.json?uri=%s"
+        ));
+
+        resolvedPathCollection.put(VocabApiPaths.PLATFORM_VOCAB.name(), Map.of(
+                ArdcVocabServiceImpl.PathName.vocabApi, "/aodn-platform-vocabulary/version-6-1/concept.json",
+                ArdcVocabServiceImpl.PathName.categoryApi, "/aodn-platform-category-vocabulary/version-1-2/concept.json",
+                ArdcVocabServiceImpl.PathName.categoryDetailsApi, "/aodn-platform-category-vocabulary/version-1-2/resource.json?uri=%s",
+                ArdcVocabServiceImpl.PathName.vocabDetailsApi, "/aodn-platform-vocabulary/version-6-1/resource.json?uri=%s"
+        ));
+
+        resolvedPathCollection.put(VocabApiPaths.ORGANISATION_VOCAB.name(), Map.of(
+                ArdcVocabServiceImpl.PathName.vocabApi, "/aodn-organisation-vocabulary/version-2-5/concept.json",
+                ArdcVocabServiceImpl.PathName.categoryApi, "/aodn-organisation-category-vocabulary/version-2-5/concept.json",
+                ArdcVocabServiceImpl.PathName.categoryDetailsApi, "/aodn-organisation-category-vocabulary/version-2-5/resource.json?uri=%s",
+                ArdcVocabServiceImpl.PathName.vocabDetailsApi, "/aodn-organisation-vocabulary/version-2-5/resource.json?uri=%s"
+        ));
+
+        this.ardcVocabService.resolvedPathCollection = resolvedPathCollection;
     }
 
     @AfterEach void clear() {
