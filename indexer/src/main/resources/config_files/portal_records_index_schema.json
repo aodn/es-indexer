@@ -88,9 +88,6 @@
           "organisation_vocabs_sayt": { "type": "search_as_you_type", "analyzer": "custom_analyser" }
         }
       },
-      "parameter_vocabs": { "type": "keyword" },
-      "platform_vocabs": { "type": "keyword" },
-      "organisation_vocabs": { "type": "keyword" },
       "keywords": {
         "type": "nested",
         "properties": {
@@ -165,6 +162,9 @@
               }
             }
           },
+          "parameter_vocabs": { "type": "keyword" },
+          "platform_vocabs": { "type": "keyword" },
+          "organisation_vocabs": { "type": "keyword" },
           "statement": { "type": "text" }
         }
       },
