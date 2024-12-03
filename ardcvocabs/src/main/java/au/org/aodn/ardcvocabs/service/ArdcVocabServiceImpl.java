@@ -39,11 +39,8 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
 
     protected static final String VERSION_REGEX = "^version-\\d+-\\d+$";
 
-    @Getter
-    Map<String, Map<PathName, String>> resolvedPathCollection = new HashMap<>();
-
-    @PostConstruct
-    public void initialiseVersions() {
+    public Map<String, Map<PathName, String>> getResolvedPathCollection() {
+        Map<String, Map<PathName, String>> resolvedPathCollection = new HashMap<>();
         for (ArdcRootPaths rootPath : ArdcRootPaths.values()) {
             try {
                 // Fetch HTML contents for category and vocab
@@ -72,6 +69,7 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
                 log.error("Error initialising versions for {}: {}", rootPath.name(), e.getMessage(), e);
             }
         }
+        return resolvedPathCollection;
     }
 
     private String fetchHtmlContent(String url) {
