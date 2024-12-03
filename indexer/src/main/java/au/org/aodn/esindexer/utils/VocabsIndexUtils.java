@@ -1,5 +1,6 @@
 package au.org.aodn.esindexer.utils;
 
+import au.org.aodn.ardcvocabs.service.ArdcVocabService;
 import au.org.aodn.esindexer.service.VocabService;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
@@ -24,12 +25,19 @@ public class VocabsIndexUtils {
         this.vocabService = vocabService;
     }
 
+    protected ArdcVocabService ardcVocabService;
+    @Autowired
+    public void setArdcVocabService(ArdcVocabService ardcVocabService) {
+        this.ardcVocabService = ardcVocabService;
+    }
+
+
     @PostConstruct
     public void init() throws IOException {
         // Check if the initialiseVocabsIndex flag is enabled
         if (initialiseVocabsIndex) {
             log.info("Initialising {} asynchronously", vocabsIndexName);
-            vocabService.populateVocabsDataAsync();
+            vocabService.populateVocabsDataAsync(ardcVocabService.getResolvedPathCollection());
         }
     }
 
@@ -38,7 +46,7 @@ public class VocabsIndexUtils {
         log.info("Refreshing ARDC vocabularies data");
 
         // call synchronous populating method, otherwise existing vocab caches will be emptied while new data hasn't been fully processed yet.
-        vocabService.populateVocabsData();
+        vocabService.populateVocabsData(ardcVocabService.getResolvedPathCollection());
 
         // clear existing caches
         vocabService.clearParameterVocabCache();

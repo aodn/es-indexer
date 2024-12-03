@@ -1,12 +1,14 @@
 package au.org.aodn.ardcvocabs.service;
 
 import au.org.aodn.ardcvocabs.model.ArdcRootPaths;
+import au.org.aodn.ardcvocabs.model.PathName;
 import au.org.aodn.ardcvocabs.model.VocabApiPaths;
 import au.org.aodn.ardcvocabs.model.VocabModel;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.TextNode;
 import jakarta.annotation.PostConstruct;
+import lombok.Getter;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -36,13 +38,9 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
     protected RetryTemplate retryTemplate;
 
     protected static final String VERSION_REGEX = "^version-\\d+-\\d+$";
+
+    @Getter
     Map<String, Map<PathName, String>> resolvedPathCollection = new HashMap<>();
-    protected enum PathName {
-        categoryApi,
-        categoryDetailsApi,
-        vocabApi,
-        vocabDetailsApi
-    }
 
     @PostConstruct
     public void initialiseVersions() {
@@ -189,10 +187,10 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
         this.retryTemplate = retryTemplate;
     }
 
-    protected VocabModel buildVocabByResourceUri(String vocabUri, String vocabApiBase, VocabApiPaths vocabApiPaths) {
+    protected VocabModel buildVocabByResourceUri(String vocabUri, String vocabApiBase, Map<PathName, String> resolvedPaths) {
         String resourceDetailsApi = vocabUri.contains("_classes")
-                ? resolvedPathCollection.get(vocabApiPaths.name()).get(PathName.categoryDetailsApi)
-                : resolvedPathCollection.get(vocabApiPaths.name()).get(PathName.vocabDetailsApi);
+                ? resolvedPaths.get(PathName.categoryDetailsApi)
+                : resolvedPaths.get(PathName.vocabDetailsApi);
 
         String detailsUrl = String.format(vocabApiBase + resourceDetailsApi, vocabUri);
 
@@ -222,7 +220,7 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
                     for (JsonNode j : target.get("narrower")) {
                         if (!about.apply(j).isEmpty()) {
                             // recursive call
-                            VocabModel narrowerNode = buildVocabByResourceUri(about.apply(j), vocabApiBase, vocabApiPaths);
+                            VocabModel narrowerNode = buildVocabByResourceUri(about.apply(j), vocabApiBase, resolvedPaths);
                             if (narrowerNode != null) {
                                 narrowerNodes.add(narrowerNode);
                             }
@@ -242,7 +240,7 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
         return null;
     }
 
-    protected <T> VocabModel buildVocabModel(T currentNode, String vocabApiBase, VocabApiPaths vocabApiPaths) {
+    protected <T> VocabModel buildVocabModel(T currentNode, String vocabApiBase, Map<PathName, String> resolvedPaths) {
         String resourceUri = null;
 
         if (currentNode instanceof ObjectNode objectNode) {
@@ -260,12 +258,12 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
             throw new IllegalArgumentException("Unsupported node type: " + currentNode.getClass().getName());
         }
 
-        return buildVocabByResourceUri(resourceUri, vocabApiBase, vocabApiPaths);
+        return buildVocabByResourceUri(resourceUri, vocabApiBase, resolvedPaths);
     }
 
-    protected Map<String, List<VocabModel>> getVocabLeafNodes(String vocabApiBase, VocabApiPaths vocabApiPaths) {
+    protected Map<String, List<VocabModel>> getVocabLeafNodes(String vocabApiBase, Map<PathName, String> resolvedPaths) {
         Map<String, List<VocabModel>> results = new HashMap<>();
-        String url = String.format(vocabApiBase + resolvedPathCollection.get(vocabApiPaths.name()).get(PathName.vocabApi));
+        String url = String.format(vocabApiBase + resolvedPaths.get(PathName.vocabApi));
 
         while (url != null && !url.isEmpty()) {
             try {
@@ -279,7 +277,7 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
                     if (isNodeValid.apply(node, "items")) {
                         for (JsonNode j : node.get("items")) {
                             // Now we need to construct link to detail resources
-                            String dl = String.format(vocabApiBase + resolvedPathCollection.get(vocabApiPaths.name()).get(PathName.vocabDetailsApi), about.apply(j));
+                            String dl = String.format(vocabApiBase + resolvedPaths.get(PathName.vocabDetailsApi), about.apply(j));
                             try {
                                 log.debug("getVocabLeafNodes -> {}", dl);
                                 ObjectNode d = retryTemplate.execute(context -> restTemplate.getForObject(dl, ObjectNode.class));
@@ -304,7 +302,7 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
                                     List<VocabModel> vocabNarrower = new ArrayList<>();
                                     if(target.has("narrower") && !target.get("narrower").isEmpty()) {
                                         for(JsonNode currentNode : target.get("narrower")) {
-                                            VocabModel narrowerNode = buildVocabModel(currentNode, vocabApiBase, vocabApiPaths);
+                                            VocabModel narrowerNode = buildVocabModel(currentNode, vocabApiBase, resolvedPaths);
                                             if (narrowerNode != null) {
                                                 vocabNarrower.add(narrowerNode);
                                             }
@@ -329,7 +327,7 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
                                             List<VocabModel> completedInternalNodes = new ArrayList<>();
                                             vocab.getNarrower().forEach(currentInternalNode -> {
                                                 // rebuild currentInternalNode (no linked leaf nodes) to completedInternalNode (with linked leaf nodes)
-                                                VocabModel completedInternalNode = buildVocabModel(currentInternalNode, vocabApiBase, vocabApiPaths);
+                                                VocabModel completedInternalNode = buildVocabModel(currentInternalNode, vocabApiBase, resolvedPaths);
                                                 if (completedInternalNode != null) {
                                                     // each internal node now will have linked narrower nodes (if available)
                                                     completedInternalNodes.add(completedInternalNode);
@@ -368,9 +366,9 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
     }
 
     @Override
-    public List<VocabModel> getVocabTreeFromArdcByType(VocabApiPaths vocabApiPaths) {
-        Map<String, List<VocabModel>> vocabLeafNodes = getVocabLeafNodes(vocabApiBase, vocabApiPaths);
-        String url = String.format(vocabApiBase + resolvedPathCollection.get(vocabApiPaths.name()).get(PathName.categoryApi));
+    public List<VocabModel> getVocabTreeFromArdcByType(Map<PathName, String> resolvedPaths) {
+        Map<String, List<VocabModel>> vocabLeafNodes = getVocabLeafNodes(vocabApiBase, resolvedPaths);
+        String url = String.format(vocabApiBase + resolvedPaths.get(PathName.categoryApi));
         List<VocabModel> vocabCategoryNodes = new ArrayList<>();
         while (url != null && !url.isEmpty()) {
             try {
@@ -398,7 +396,7 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
                                 Map<String, List<VocabModel>> internalVocabCategoryNodes = new HashMap<>();
                                 if (j.has("narrower") && !j.get("narrower").isEmpty()) {
                                     j.get("narrower").forEach(currentNode -> {
-                                        VocabModel internalNode = buildVocabModel(currentNode, vocabApiBase, vocabApiPaths);
+                                        VocabModel internalNode = buildVocabModel(currentNode, vocabApiBase, resolvedPaths);
                                         if (internalNode != null) {
                                             List<VocabModel> leafNodes = vocabLeafNodes.getOrDefault(internalNode.getAbout(), Collections.emptyList());
                                             if (!leafNodes.isEmpty()) {
