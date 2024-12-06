@@ -1,6 +1,5 @@
 package au.org.aodn.esindexer.service;
 
-import au.org.aodn.ardcvocabs.model.PathName;
 import au.org.aodn.ardcvocabs.model.VocabApiPaths;
 import au.org.aodn.ardcvocabs.model.VocabDto;
 import au.org.aodn.ardcvocabs.model.VocabModel;
@@ -371,24 +370,24 @@ public class VocabServiceImpl implements VocabService {
         }
     }
 
-    public void populateVocabsData(Map<String, Map<PathName, String>> resolvedPathCollection) throws IOException {
+    public void populateVocabsData() throws IOException {
         log.info("Starting fetching vocabs data process synchronously...");
 
-        List<VocabModel> parameterVocabs = ardcVocabService.getVocabTreeFromArdcByType(resolvedPathCollection.get(VocabApiPaths.PARAMETER_VOCAB.name()));
-        List<VocabModel> platformVocabs = ardcVocabService.getVocabTreeFromArdcByType(resolvedPathCollection.get(VocabApiPaths.PLATFORM_VOCAB.name()));
-        List<VocabModel> organisationVocabs = ardcVocabService.getVocabTreeFromArdcByType(resolvedPathCollection.get(VocabApiPaths.ORGANISATION_VOCAB.name()));
+        List<VocabModel> parameterVocabs = ardcVocabService.getVocabTreeFromArdcByType(VocabApiPaths.PARAMETER_VOCAB);
+        List<VocabModel> platformVocabs = ardcVocabService.getVocabTreeFromArdcByType(VocabApiPaths.PLATFORM_VOCAB);
+        List<VocabModel> organisationVocabs = ardcVocabService.getVocabTreeFromArdcByType(VocabApiPaths.ORGANISATION_VOCAB);
 
         indexAllVocabs(parameterVocabs, platformVocabs, organisationVocabs);
     }
 
-    public void populateVocabsDataAsync(Map<String, Map<PathName, String>> resolvedPathCollection) {
+    public void populateVocabsDataAsync() {
         log.info("Starting async vocabs data fetching process...");
 
         ExecutorService executorService = Executors.newFixedThreadPool(3);
         List<Callable<List<VocabModel>>> vocabTasks = List.of(
-                createVocabFetchTask(resolvedPathCollection.get(VocabApiPaths.PARAMETER_VOCAB.name()), "parameter"),
-                createVocabFetchTask(resolvedPathCollection.get(VocabApiPaths.PLATFORM_VOCAB.name()), "platform"),
-                createVocabFetchTask(resolvedPathCollection.get(VocabApiPaths.ORGANISATION_VOCAB.name()), "organisation")
+                createVocabFetchTask(VocabApiPaths.PARAMETER_VOCAB, "parameter"),
+                createVocabFetchTask(VocabApiPaths.PLATFORM_VOCAB, "platform"),
+                createVocabFetchTask(VocabApiPaths.ORGANISATION_VOCAB, "organisation")
         );
 
         CompletableFuture.runAsync(() -> {
@@ -423,10 +422,10 @@ public class VocabServiceImpl implements VocabService {
         log.info("Vocabs data fetching process started in the background.");
     }
 
-    private Callable<List<VocabModel>> createVocabFetchTask(Map<PathName, String> resolvedPaths, String vocabName) {
+    private Callable<List<VocabModel>> createVocabFetchTask(VocabApiPaths vocabType, String vocabName) {
         return () -> {
             log.info("Fetching {} vocabs from ARDC", vocabName);
-            return ardcVocabService.getVocabTreeFromArdcByType(resolvedPaths);
+            return ardcVocabService.getVocabTreeFromArdcByType(vocabType);
         };
     }
 }

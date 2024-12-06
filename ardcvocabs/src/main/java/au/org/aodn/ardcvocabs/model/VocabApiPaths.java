@@ -4,33 +4,33 @@ import lombok.Getter;
 @Getter
 public enum VocabApiPaths {
     PARAMETER_VOCAB(
-            "/aodn-parameter-category-vocabulary/%s/concept.json",
-            "/aodn-parameter-category-vocabulary/%s/resource.json?uri=%s",
-            "/aodn-discovery-parameter-vocabulary/%s/concept.json",
-            "/aodn-discovery-parameter-vocabulary/%s/resource.json?uri=%s"
+            "/aodn-parameter-category-vocabulary/current/concept.json",
+            "/aodn-parameter-category-vocabulary/current/resource.json?uri=%s",
+            "/aodn-discovery-parameter-vocabulary/current/concept.json",
+            "/aodn-discovery-parameter-vocabulary/current/resource.json?uri=%s"
     ),
     PLATFORM_VOCAB(
-            "/aodn-platform-category-vocabulary/%s/concept.json",
-            "/aodn-platform-category-vocabulary/%s/resource.json?uri=%s",
-            "/aodn-platform-vocabulary/%s/concept.json",
-            "/aodn-platform-vocabulary/%s/resource.json?uri=%s"
+            "/aodn-platform-category-vocabulary/current/concept.json",
+            "/aodn-platform-category-vocabulary/current/resource.json?uri=%s",
+            "/aodn-platform-vocabulary/current/concept.json",
+            "/aodn-platform-vocabulary/current/resource.json?uri=%s"
     ),
     ORGANISATION_VOCAB(
-            "/aodn-organisation-category-vocabulary/%s/concept.json",
-            "/aodn-organisation-category-vocabulary/%s/resource.json?uri=%s",
-            "/aodn-organisation-vocabulary/%s/concept.json",
-            "/aodn-organisation-vocabulary/%s/resource.json?uri=%s"
+            "/aodn-organisation-category-vocabulary/current/concept.json",
+            "/aodn-organisation-category-vocabulary/current/resource.json?uri=%s",
+            "/aodn-organisation-vocabulary/current/concept.json",
+            "/aodn-organisation-vocabulary/current/resource.json?uri=%s"
     );
 
-    private final String categoryApiTemplate;
-    private final String categoryDetailsTemplate;
-    private final String vocabApiTemplate;
-    private final String vocabDetailsTemplate;
+    private final String vocabCategoryApiPath;
+    private final String vocabCategoryDetailsApiPath;
+    private final String vocabApiPath;
+    private final String vocabDetailsApiPath;
 
-    VocabApiPaths(String categoryApiTemplate, String categoryDetailsTemplate, String vocabApiTemplate, String vocabDetailsTemplate) {
-        this.categoryApiTemplate = categoryApiTemplate;
-        this.categoryDetailsTemplate = categoryDetailsTemplate;
-        this.vocabApiTemplate = vocabApiTemplate;
-        this.vocabDetailsTemplate = vocabDetailsTemplate;
+    VocabApiPaths(String vocabCategoryApiPath, String vocabCategoryDetailsApiPath, String vocabApiPath, String vocabDetailsApiPath) {
+        this.vocabCategoryApiPath = vocabCategoryApiPath;
+        this.vocabCategoryDetailsApiPath = vocabCategoryDetailsApiPath;
+        this.vocabApiPath = vocabApiPath;
+        this.vocabDetailsApiPath = vocabDetailsApiPath;
     }
 }
