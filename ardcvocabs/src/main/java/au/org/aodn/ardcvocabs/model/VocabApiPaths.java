@@ -1,26 +1,25 @@
 package au.org.aodn.ardcvocabs.model;
-
 import lombok.Getter;
 
 @Getter
 public enum VocabApiPaths {
     PARAMETER_VOCAB(
-            "/aodn-parameter-category-vocabulary/version-2-1/concept.json",
-            "/aodn-parameter-category-vocabulary/version-2-1/resource.json?uri=%s",
-            "/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
-            "/aodn-discovery-parameter-vocabulary/version-1-6/resource.json?uri=%s"
+            "/aodn-parameter-category-vocabulary/current/concept.json",
+            "/aodn-parameter-category-vocabulary/current/resource.json?uri=%s",
+            "/aodn-discovery-parameter-vocabulary/current/concept.json",
+            "/aodn-discovery-parameter-vocabulary/current/resource.json?uri=%s"
     ),
     PLATFORM_VOCAB(
-            "/aodn-platform-category-vocabulary/version-1-2/concept.json",
-            "/aodn-platform-category-vocabulary/version-1-2/resource.json?uri=%s",
-            "/aodn-platform-vocabulary/version-6-1/concept.json",
-            "/aodn-platform-vocabulary/version-6-1/resource.json?uri=%s"
+            "/aodn-platform-category-vocabulary/current/concept.json",
+            "/aodn-platform-category-vocabulary/current/resource.json?uri=%s",
+            "/aodn-platform-vocabulary/current/concept.json",
+            "/aodn-platform-vocabulary/current/resource.json?uri=%s"
     ),
     ORGANISATION_VOCAB(
-            "/aodn-organisation-category-vocabulary/version-2-5/concept.json",
-            "/aodn-organisation-category-vocabulary/version-2-5/resource.json?uri=%s",
-            "/aodn-organisation-vocabulary/version-2-5/concept.json",
-            "/aodn-organisation-vocabulary/version-2-5/resource.json?uri=%s"
+            "/aodn-organisation-category-vocabulary/current/concept.json",
+            "/aodn-organisation-category-vocabulary/current/resource.json?uri=%s",
+            "/aodn-organisation-vocabulary/current/concept.json",
+            "/aodn-organisation-vocabulary/current/resource.json?uri=%s"
     );
 
     private final String vocabCategoryApiPath;

@@ -55,7 +55,7 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
 
         Mockito.doAnswer(f -> {
             String url = f.getArgument(0);
-            if(url.contains("/aodn-parameter-category-vocabulary/version-2-1/concept.json")) {
+            if(url.contains("/aodn-parameter-category-vocabulary/current/concept.json")) {
                 if(url.contains("_page")) {
                     String page = url.split("=")[1];
                     return objectMapper.readValue(readResourceFile("/databag/category/page" + page + ".json"), ObjectNode.class);
@@ -64,11 +64,11 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
                     return objectMapper.readValue(readResourceFile("/databag/category/page0.json"), ObjectNode.class);
                 }
             }
-            else if (url.contains("/aodn-parameter-category-vocabulary/version-2-1/resource.json?uri=http://vocab.aodn.org.au/def/parameter_classes/category/")) {
+            else if (url.contains("/aodn-parameter-category-vocabulary/current/resource.json?uri=http://vocab.aodn.org.au/def/parameter_classes/category/")) {
                 String[] token = url.split("/");
                 return objectMapper.readValue(readResourceFile("/databag/category/vocab" + token[token.length - 1] + ".json"), ObjectNode.class);
             }
-            else if (url.contains("/aodn-discovery-parameter-vocabulary/version-1-6/concept.json")) {
+            else if (url.contains("/aodn-discovery-parameter-vocabulary/current/concept.json")) {
                 if(url.contains("_page")) {
                     String page = url.split("=")[1];
                     return objectMapper.readValue(readResourceFile("/databag/parameter/page" + page + ".json"), ObjectNode.class);
@@ -77,15 +77,15 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
                     return objectMapper.readValue(readResourceFile("/databag/parameter/page0.json"), ObjectNode.class);
                 }
             }
-            else if (url.contains("/aodn-discovery-parameter-vocabulary/version-1-6/resource.json?uri=http://vocab.aodn.org.au/def/discovery_parameter/entity/")) {
+            else if (url.contains("/aodn-discovery-parameter-vocabulary/current/resource.json?uri=http://vocab.aodn.org.au/def/discovery_parameter/entity/")) {
                 String[] token = url.split("/");
                 return objectMapper.readValue(readResourceFile("/databag/parameter/entity" + token[token.length - 1] + ".json"), ObjectNode.class);
             }
-            else if (url.contains("/aodn-discovery-parameter-vocabulary/version-1-6/resource.json?uri=http://vocab.aodn.org.au/def/discovery_parameter/")) {
+            else if (url.contains("/aodn-discovery-parameter-vocabulary/current/resource.json?uri=http://vocab.aodn.org.au/def/discovery_parameter/")) {
                 String[] token = url.split("/");
                 return objectMapper.readValue(readResourceFile("/databag/parameter/param" + token[token.length - 1] + ".json"), ObjectNode.class);
             }
-            else if (url.contains("/aodn-discovery-parameter-vocabulary/version-1-6/resource.json?uri=http://vocab.nerc.ac.uk/collection/P01/current/")) {
+            else if (url.contains("/aodn-discovery-parameter-vocabulary/current/resource.json?uri=http://vocab.nerc.ac.uk/collection/P01/current/")) {
                 String[] token = url.split("/");
                 return objectMapper.readValue(readResourceFile("/databag/parameter/nerc" + token[token.length - 1] + ".json"), ObjectNode.class);
             }
@@ -95,7 +95,7 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
         })
         .when(template)
         .getForObject(
-                argThat(s -> s.contains("/aodn-discovery-parameter-vocabulary/version-1-6/") || s.contains("/aodn-parameter-category-vocabulary/version-2-1/")),
+                argThat(s -> s.contains("/aodn-discovery-parameter-vocabulary/current/") || s.contains("/aodn-parameter-category-vocabulary/current/")),
                 eq(ObjectNode.class),
                 any(Object[].class)     // It is important to have this any otherwise it will match getForObject(URI, Class<T>)
         );
@@ -108,7 +108,7 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
 
         Mockito.doAnswer(f -> {
             String url = f.getArgument(0);
-            if(url.contains("/aodn-platform-category-vocabulary/version-1-2/concept.json")) {
+            if(url.contains("/aodn-platform-category-vocabulary/current/concept.json")) {
                 if(url.contains("_page")) {
                     String page = url.split("=")[1];
                     return objectMapper.readValue(readResourceFile("/databag/platform/page" + page + ".json"), ObjectNode.class);
@@ -117,7 +117,7 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
                     return objectMapper.readValue(readResourceFile("/databag/platform/page0.json"), ObjectNode.class);
                 }
             }
-            else if (url.contains("/aodn-platform-vocabulary/version-6-1/concept.json")) {
+            else if (url.contains("/aodn-platform-vocabulary/current/concept.json")) {
                 if(url.contains("_page")) {
                     String page = url.split("=")[1];
                     return objectMapper.readValue(readResourceFile("/databag/platform/vocab" + page + ".json"), ObjectNode.class);
@@ -126,11 +126,11 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
                     return objectMapper.readValue(readResourceFile("/databag/platform/vocab0.json"), ObjectNode.class);
                 }
             }
-            else if(url.contains("/aodn-platform-vocabulary/version-6-1/resource.json?uri=http://vocab.aodn.org.au/def/platform/entity/")) {
+            else if(url.contains("/aodn-platform-vocabulary/current/resource.json?uri=http://vocab.aodn.org.au/def/platform/entity/")) {
                 String[] token = url.split("/");
                 return objectMapper.readValue(readResourceFile("/databag/platform/entity" + token[token.length - 1] + ".json"), ObjectNode.class);
             }
-            else if (url.contains("/aodn-platform-vocabulary/version-6-1/resource.json?uri=http://vocab.nerc.ac.uk/collection/")) {
+            else if (url.contains("/aodn-platform-vocabulary/current/resource.json?uri=http://vocab.nerc.ac.uk/collection/")) {
                 String[] token = url.split("/");
                 return objectMapper.readValue(readResourceFile("/databag/platform/nerc" + token[token.length - 1] + ".json"), ObjectNode.class);
             }
@@ -140,7 +140,7 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
         })
         .when(template)
         .getForObject(
-                argThat(s -> s!= null && (s.contains("/aodn-platform-vocabulary/version-6-1/") || s.contains("/aodn-platform-category-vocabulary/version-1-2/"))),
+                argThat(s -> s!= null && (s.contains("/aodn-platform-vocabulary/current/") || s.contains("/aodn-platform-category-vocabulary/current/"))),
                 eq(ObjectNode.class),
                 any(Object[].class)     // It is important to have this any otherwise it will match getForObject(URI, Class<T>)
         );
@@ -153,7 +153,7 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
 
         Mockito.doAnswer(f -> {
             String url = f.getArgument(0);
-            if(url.contains("/aodn-organisation-category-vocabulary/version-2-5/concept.json")) {
+            if(url.contains("/aodn-organisation-category-vocabulary/current/concept.json")) {
                 if(url.contains("_page")) {
                     String page = url.split("=")[1];
                     return objectMapper.readValue(readResourceFile("/databag/organization/page" + page + ".json"), ObjectNode.class);
@@ -162,7 +162,7 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
                     return objectMapper.readValue(readResourceFile("/databag/organization/page0.json"), ObjectNode.class);
                 }
             }
-            else if(url.contains("/aodn-organisation-vocabulary/version-2-5/concept.json")) {
+            else if(url.contains("/aodn-organisation-vocabulary/current/concept.json")) {
                 if(url.contains("_page")) {
                     String page = url.split("=")[1];
                     return objectMapper.readValue(readResourceFile("/databag/organization/vocab" + page + ".json"), ObjectNode.class);
@@ -171,11 +171,11 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
                     return objectMapper.readValue(readResourceFile("/databag/organization/vocab0.json"), ObjectNode.class);
                 }
             }
-            else if(url.contains("/aodn-organisation-vocabulary/version-2-5/resource.json?uri=http://vocab.aodn.org.au/def/organisation/entity/")) {
+            else if(url.contains("/aodn-organisation-vocabulary/current/resource.json?uri=http://vocab.aodn.org.au/def/organisation/entity/")) {
                 String[] token = url.split("/");
                 return objectMapper.readValue(readResourceFile("/databag/organization/entity" + token[token.length - 1] + ".json"), ObjectNode.class);
             }
-            else if(url.contains("/aodn-organisation-category-vocabulary/version-2-5/resource.json?uri=http://vocab.aodn.org.au/def/organisation_classes/category/")) {
+            else if(url.contains("/aodn-organisation-category-vocabulary/current/resource.json?uri=http://vocab.aodn.org.au/def/organisation_classes/category/")) {
                 String[] token = url.split("/");
                 return objectMapper.readValue(readResourceFile("/databag/organization/category" + token[token.length - 1] + ".json"), ObjectNode.class);
             }
@@ -185,7 +185,7 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
         })
         .when(template)
         .getForObject(
-                argThat(s -> s.contains("/aodn-organisation-category-vocabulary/version-2-5/") || s.contains("/aodn-organisation-vocabulary/version-2-5/")),
+                argThat(s -> s.contains("/aodn-organisation-category-vocabulary/current/") || s.contains("/aodn-organisation-vocabulary/current/")),
                 eq(ObjectNode.class),
                 any(Object[].class)     // It is important to have this any otherwise it will match getForObject(URI, Class<T>)
         );
