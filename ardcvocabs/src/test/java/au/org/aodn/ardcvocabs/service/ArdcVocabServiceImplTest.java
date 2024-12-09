@@ -227,36 +227,6 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
     }
 
     @Test
-    void testFetchVersionWithCannedHtml() throws Exception {
-        String mockHtmlContent;
-        String version;
-
-        mockHtmlContent = readResourceFile("/databag/ardc/viewById22.html");
-        version = ArdcVocabServiceImpl.extractVersionFromHtmlContent(mockHtmlContent);
-        assertEquals("version-1-6", version, "Expected parsed version for viewById22.html is 'version-1-6'");
-
-        mockHtmlContent = readResourceFile("/databag/ardc/viewById24.html");
-        version = ArdcVocabServiceImpl.extractVersionFromHtmlContent(mockHtmlContent);
-        assertEquals("version-2-1", version, "Expected parsed version for viewById24.html is 'version-2-1'");
-
-        mockHtmlContent = readResourceFile("/databag/ardc/viewById25.html");
-        version = ArdcVocabServiceImpl.extractVersionFromHtmlContent(mockHtmlContent);
-        assertEquals("version-6-1", version, "Expected parsed version for viewById25.html is 'version-6-1'");
-
-        mockHtmlContent = readResourceFile("/databag/ardc/viewById26.html");
-        version = ArdcVocabServiceImpl.extractVersionFromHtmlContent(mockHtmlContent);
-        assertEquals("version-1-2", version, "Expected parsed version for viewById26.html is 'version-1-2'");
-
-        mockHtmlContent = readResourceFile("/databag/ardc/viewById28.html");
-        version = ArdcVocabServiceImpl.extractVersionFromHtmlContent(mockHtmlContent);
-        assertEquals("version-2-5", version, "Expected parsed version for viewById28.html is 'version-2-5'");
-
-        mockHtmlContent = readResourceFile("/databag/ardc/viewById29.html");
-        version = ArdcVocabServiceImpl.extractVersionFromHtmlContent(mockHtmlContent);
-        assertEquals("version-2-5", version, "Expected parsed version for viewById29.html is 'version-2-5'");
-    }
-
-    @Test
     public void verifyParameterVocab() throws IOException, JSONException {
 
         mockRestTemplate = setupParameterVocabMockRestTemplate(mockRestTemplate);

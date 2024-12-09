@@ -1,17 +1,12 @@
 package au.org.aodn.ardcvocabs.service;
 
-import au.org.aodn.ardcvocabs.model.ArdcRootPaths;
+import au.org.aodn.ardcvocabs.model.ArdcCurrentPaths;
 import au.org.aodn.ardcvocabs.model.PathName;
 import au.org.aodn.ardcvocabs.model.VocabApiPaths;
 import au.org.aodn.ardcvocabs.model.VocabModel;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.TextNode;
-import jakarta.annotation.PostConstruct;
-import lombok.Getter;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -37,44 +32,43 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
     protected RestTemplate restTemplate;
     protected RetryTemplate retryTemplate;
 
-    protected static final String VERSION_REGEX = "^version-\\d+-\\d+$";
+    protected static final String VERSION_REGEX = "/(version-\\d+-\\d+)(?:/|$)";
 
     public Map<String, Map<PathName, String>> getResolvedPathCollection() {
         Map<String, Map<PathName, String>> resolvedPathCollection = new HashMap<>();
-        for (ArdcRootPaths rootPath : ArdcRootPaths.values()) {
+        for (ArdcCurrentPaths currentPath : ArdcCurrentPaths.values()) {
             try {
-                // Fetch HTML contents for category and vocab
-                String categoryRootHtmlContent = fetchHtmlContent(rootPath.getCategoryRoot());
-                String vocabRootHtmlContent = fetchHtmlContent(rootPath.getVocabRoot());
+                ObjectNode categoryCurrentContent = fetchCurrentContents(currentPath.getCategoryCurrent());
+                ObjectNode vocabCurrentContent = fetchCurrentContents(currentPath.getVocabCurrent());
 
-                if (categoryRootHtmlContent != null && vocabRootHtmlContent != null) {
+                if (categoryCurrentContent != null && vocabCurrentContent != null) {
                     // Extract versions
-                    String categoryVersion = extractVersionFromHtmlContent(categoryRootHtmlContent);
-                    String vocabVersion = extractVersionFromHtmlContent(vocabRootHtmlContent);
+                    String categoryVersion = extractVersionFromCurrentContent(categoryCurrentContent);
+                    String vocabVersion = extractVersionFromCurrentContent(vocabCurrentContent);
 
                     if (categoryVersion != null && vocabVersion != null) {
-                        log.info("Fetched ARDC category version for {}: {}", rootPath.name(), categoryVersion);
-                        log.info("Fetched ARDC vocab version for {}: {}", rootPath.name(), vocabVersion);
+                        log.info("Fetched ARDC category version for {}: {}", currentPath.name(), categoryVersion);
+                        log.info("Fetched ARDC vocab version for {}: {}", currentPath.name(), vocabVersion);
 
                         // Build and store resolved paths
-                        Map<PathName, String> resolvedPaths = buildResolvedPaths(rootPath, categoryVersion, vocabVersion);
-                        resolvedPathCollection.put(rootPath.name(), resolvedPaths);
+                        Map<PathName, String> resolvedPaths = buildResolvedPaths(currentPath, categoryVersion, vocabVersion);
+                        resolvedPathCollection.put(currentPath.name(), resolvedPaths);
                     } else {
-                        log.error("Failed to extract versions for {}", rootPath.name());
+                        log.error("Failed to extract versions for {}", currentPath.name());
                     }
                 } else {
-                    log.error("Failed to fetch HTML content for {}", rootPath.name());
+                    log.error("Failed to fetch HTML content for {}", currentPath.name());
                 }
             } catch (Exception e) {
-                log.error("Error initialising versions for {}: {}", rootPath.name(), e.getMessage(), e);
+                log.error("Error initialising versions for {}: {}", currentPath.name(), e.getMessage(), e);
             }
         }
         return resolvedPathCollection;
     }
 
-    private String fetchHtmlContent(String url) {
+    private ObjectNode fetchCurrentContents(String url) {
         try {
-            return restTemplate.getForObject(url, String.class);
+            return retryTemplate.execute(context -> restTemplate.getForObject(url, ObjectNode.class));
         } catch (RestClientException e) {
             log.error("Failed to fetch HTML content from URL {}: {}", url, e.getMessage());
         } catch (Exception e) {
@@ -83,10 +77,10 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
         return null;
     }
 
-    protected Map<PathName, String> buildResolvedPaths(ArdcRootPaths rootPath, String categoryVersion, String vocabVersion) {
+    protected Map<PathName, String> buildResolvedPaths(ArdcCurrentPaths currentPaths, String categoryVersion, String vocabVersion) {
         Map<PathName, String> resolvedPaths = new HashMap<>();
         for (VocabApiPaths vocabApiPath : VocabApiPaths.values()) {
-            if (rootPath.name().equals(vocabApiPath.name())) {
+            if (currentPaths.name().equals(vocabApiPath.name())) {
                 resolvedPaths.put(PathName.categoryApi, String.format(vocabApiPath.getCategoryApiTemplate(), categoryVersion));
                 resolvedPaths.put(PathName.categoryDetailsApi, String.format(vocabApiPath.getCategoryDetailsTemplate(), categoryVersion, "%s"));
                 resolvedPaths.put(PathName.vocabApi, String.format(vocabApiPath.getVocabApiTemplate(), vocabVersion));
@@ -96,31 +90,24 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
         return resolvedPaths;
     }
 
-    protected static String extractVersionFromHtmlContent(String htmlContent) {
-        if (htmlContent != null && !htmlContent.isEmpty()) {
-            // Parse HTML content with Jsoup
-            Document doc = Jsoup.parse(htmlContent);
+    protected String extractVersionFromCurrentContent(ObjectNode currentContent) {
+        if (currentContent != null && !currentContent.isEmpty()) {
+            JsonNode node = currentContent.get("result");
+            if (!about.apply(node).isEmpty()) {
+                Pattern pattern = Pattern.compile(VERSION_REGEX);
+                Matcher matcher = pattern.matcher(about.apply(node));
 
-            // Extract the first h4 element
-            // has(.box-tag.box-tag-green) query will ensure to select only the div element that has "Current" indicator
-            Element firstH4 = doc.selectFirst("div.col-md-4.panel-body:has(.box-tag.box-tag-green) h4:first-of-type");
-
-            if (firstH4 != null) {
-                String version = firstH4.text()
-                        .toLowerCase()
-                        .replaceAll("[ .]", "-");
-                // Validate the version format
-                if (version.matches(VERSION_REGEX)) {
+                if (matcher.find()) {
+                    String version = matcher.group(1);
                     log.info("Valid Version Found: {}", version);
                     return version;
                 } else {
-                    log.warn("Version does not match the required format: {}", version);
+                    log.warn("Version does not match the required format: {}", about.apply(node));
                 }
-            } else {
-                log.warn("No matching h4 element found in the document.");
             }
+
         } else {
-            log.warn("HTML content is empty or null.");
+            log.warn("Current content is empty or null.");
         }
         return null;
     }
