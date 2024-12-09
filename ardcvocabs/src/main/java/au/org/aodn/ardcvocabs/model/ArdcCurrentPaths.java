@@ -21,9 +21,9 @@ public enum ArdcCurrentPaths {
     private final String categoryCurrent;
     private final String vocabCurrent;
 
-    ArdcCurrentPaths(String categoryRoot, String vocabRoot) {
-        String rootHostname = "https://vocabs.ardc.edu.au/repository/api/lda/aodn";
-        this.categoryCurrent = rootHostname + categoryRoot;
-        this.vocabCurrent = rootHostname + vocabRoot;
+    ArdcCurrentPaths(String categoryCurrent, String vocabCurrent) {
+        String baseUrl = "https://vocabs.ardc.edu.au/repository/api/lda/aodn";
+        this.categoryCurrent = baseUrl + categoryCurrent;
+        this.vocabCurrent = baseUrl + vocabCurrent;
     }
 }

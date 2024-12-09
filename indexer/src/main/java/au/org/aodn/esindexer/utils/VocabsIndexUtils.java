@@ -62,7 +62,7 @@ public class VocabsIndexUtils {
                 vocabService.populateVocabsData(latestResolvedPathCollection);
                 refreshCaches();
 
-                // Synchronize the update of the shared resource (storedResolvedPathCollection)
+                // update the head if there are new versions
                 synchronized (this) {
                     storedResolvedPathCollection = latestResolvedPathCollection;
                     log.info("Updated storedResolvedPathCollection with the latest data.");
