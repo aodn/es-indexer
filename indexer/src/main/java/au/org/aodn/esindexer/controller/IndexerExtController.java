@@ -65,7 +65,7 @@ public class IndexerExtController {
     @GetMapping(path="/ardc/parameter/vocabs")
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Get parameter vocabs from ARDC directly")
     public ResponseEntity<List<JsonNode>> getParameterVocabsFromArdc() {
-        List<VocabModel> vocabs = ardcVocabService.getVocabTreeFromArdcByType(VocabApiPaths.PARAMETER_VOCAB);
+        List<VocabModel> vocabs = ardcVocabService.getVocabTreeFromArdcByType(ardcVocabService.getResolvedPathCollection().get(VocabApiPaths.PARAMETER_VOCAB.name()));
         return ResponseEntity.ok(indexerObjectMapper.valueToTree(vocabs));
     }
 
@@ -73,7 +73,7 @@ public class IndexerExtController {
     @GetMapping(path="/ardc/platform/vocabs")
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Get platform vocabs from ARDC directly")
     public ResponseEntity<List<JsonNode>> getPlatformVocabsFromArdc() {
-        List<VocabModel> vocabs = ardcVocabService.getVocabTreeFromArdcByType(VocabApiPaths.PLATFORM_VOCAB);
+        List<VocabModel> vocabs = ardcVocabService.getVocabTreeFromArdcByType(ardcVocabService.getResolvedPathCollection().get(VocabApiPaths.PLATFORM_VOCAB.name()));
         return ResponseEntity.ok(indexerObjectMapper.valueToTree(vocabs));
     }
 
@@ -81,7 +81,7 @@ public class IndexerExtController {
     @GetMapping(path="/ardc/organisation/vocabs")
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Get organisation vocabs from ARDC directly")
     public ResponseEntity<List<JsonNode>> getOrganisationVocabsFromArdc() {
-        List<VocabModel> vocabs = ardcVocabService.getVocabTreeFromArdcByType(VocabApiPaths.ORGANISATION_VOCAB);
+        List<VocabModel> vocabs = ardcVocabService.getVocabTreeFromArdcByType(ardcVocabService.getResolvedPathCollection().get(VocabApiPaths.ORGANISATION_VOCAB.name()));
         return ResponseEntity.ok(indexerObjectMapper.valueToTree(vocabs));
     }
 
@@ -94,7 +94,7 @@ public class IndexerExtController {
         vocabService.clearPlatformVocabCache();
         vocabService.clearOrganisationVocabCache();
         // populate new data
-        vocabService.populateVocabsData();
+        vocabService.populateVocabsData(ardcVocabService.getResolvedPathCollection());
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Populated data to the vocabs index");
     }
 }

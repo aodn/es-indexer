@@ -1,6 +1,7 @@
 package au.org.aodn.ardcvocabs.service;
 
 import au.org.aodn.ardcvocabs.BaseTestClass;
+import au.org.aodn.ardcvocabs.model.PathName;
 import au.org.aodn.ardcvocabs.model.VocabApiPaths;
 import au.org.aodn.ardcvocabs.model.VocabModel;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -14,24 +15,21 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.stubbing.Answer;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
-import org.springframework.retry.RetryCallback;
-import org.springframework.retry.RetryContext;
 import org.springframework.retry.support.RetryTemplate;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.util.AssertionErrors.assertTrue;
 
 @ExtendWith(MockitoExtension.class)
@@ -39,6 +37,8 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
 
     protected ArdcVocabServiceImpl ardcVocabService;
     protected ObjectMapper mapper = new ObjectMapper();
+
+    protected Map<String, Map<PathName, String>> resolvedPathCollection = new HashMap<>();
 
     @Mock
     RestTemplate mockRestTemplate;
@@ -199,6 +199,27 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
         //this.ardcVocabService = new ArdcVocabServiceImpl(new RestTemplate());
         this.ardcVocabService = new ArdcVocabServiceImpl(mockRestTemplate, new RetryTemplate());
         this.ardcVocabService.vocabApiBase = "https://vocabs.ardc.edu.au/repository/api/lda/aodn";
+
+        resolvedPathCollection.put(VocabApiPaths.PARAMETER_VOCAB.name(), Map.of(
+                PathName.vocabApi, "/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+                PathName.categoryApi, "/aodn-parameter-category-vocabulary/version-2-1/concept.json",
+                PathName.categoryDetailsApi, "/aodn-parameter-category-vocabulary/version-2-1/resource.json?uri=%s",
+                PathName.vocabDetailsApi, "/aodn-discovery-parameter-vocabulary/version-1-6/resource.json?uri=%s"
+        ));
+
+        resolvedPathCollection.put(VocabApiPaths.PLATFORM_VOCAB.name(), Map.of(
+                PathName.vocabApi, "/aodn-platform-vocabulary/version-6-1/concept.json",
+                PathName.categoryApi, "/aodn-platform-category-vocabulary/version-1-2/concept.json",
+                PathName.categoryDetailsApi, "/aodn-platform-category-vocabulary/version-1-2/resource.json?uri=%s",
+                PathName.vocabDetailsApi, "/aodn-platform-vocabulary/version-6-1/resource.json?uri=%s"
+        ));
+
+        resolvedPathCollection.put(VocabApiPaths.ORGANISATION_VOCAB.name(), Map.of(
+                PathName.vocabApi, "/aodn-organisation-vocabulary/version-2-5/concept.json",
+                PathName.categoryApi, "/aodn-organisation-category-vocabulary/version-2-5/concept.json",
+                PathName.categoryDetailsApi, "/aodn-organisation-category-vocabulary/version-2-5/resource.json?uri=%s",
+                PathName.vocabDetailsApi, "/aodn-organisation-vocabulary/version-2-5/resource.json?uri=%s"
+        ));
     }
 
     @AfterEach void clear() {
@@ -210,7 +231,7 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
 
         mockRestTemplate = setupParameterVocabMockRestTemplate(mockRestTemplate);
 
-        List<VocabModel> parameterVocabModelList = ardcVocabService.getVocabTreeFromArdcByType(VocabApiPaths.PARAMETER_VOCAB);
+        List<VocabModel> parameterVocabModelList = ardcVocabService.getVocabTreeFromArdcByType(resolvedPathCollection.get(VocabApiPaths.PARAMETER_VOCAB.name()));
         assertEquals(4, parameterVocabModelList.size(), "Total equals");
 
         Optional<VocabModel> c = parameterVocabModelList
@@ -304,7 +325,7 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
     public void verifyPlatform() throws IOException, JSONException {
         mockRestTemplate = setupPlatformMockRestTemplate(mockRestTemplate);
 
-        List<VocabModel> platformVocabsFromArdc = ardcVocabService.getVocabTreeFromArdcByType(VocabApiPaths.PLATFORM_VOCAB);
+        List<VocabModel> platformVocabsFromArdc = ardcVocabService.getVocabTreeFromArdcByType(resolvedPathCollection.get(VocabApiPaths.PLATFORM_VOCAB.name()));
 
         // verify the contents randomly
         assertNotNull(platformVocabsFromArdc);
@@ -344,7 +365,7 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
     public void verifyOrganization() throws IOException, JSONException {
         mockRestTemplate = setupOrganizationMockRestTemplate(mockRestTemplate);
 
-        List<VocabModel> organisationVocabsFromArdc = ardcVocabService.getVocabTreeFromArdcByType(VocabApiPaths.ORGANISATION_VOCAB);
+        List<VocabModel> organisationVocabsFromArdc = ardcVocabService.getVocabTreeFromArdcByType(resolvedPathCollection.get(VocabApiPaths.ORGANISATION_VOCAB.name()));
 
         // verify the contents randomly
         assertNotNull(organisationVocabsFromArdc);
