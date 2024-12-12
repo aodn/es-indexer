@@ -51,14 +51,6 @@ Start a local instance of indexer
 $ docker-compose -f docker-compose-dev.yaml up # [-d: in daemon mode | --build: to see the console logs]
 ```
 
-### Notes on calculation - Centroid
-We pre-calculate the centroid point of each spatial extents using the following method
-1. Use the shape file contains the land only area, adjust it to reduce the line complexity
-2. Remove the land from the spatial extents
-3. Then cut the spatial extents into grid and may result in multiple polygon
-4. In each grid, calculate the centroid, if it is outside of the polygon (aka a U shape), use internal point.
-5. Store the point in the centroid attribute.
-
 ### Endpoints:
 
 | Description                             | Endpoints                              | Environment |
@@ -82,3 +74,14 @@ We pre-calculate the centroid point of each spatial extents using the following 
 > * Accept = text/event-stream
 > * Content-Type = text/event-stream;charset=utf-8
 > * Method = POST
+
+## Notes
+### Centroid Calculation
+Centroid is calculated on the fly
+1. Use the shape file contains the land only area, adjust it to reduce the line complexity
+2. Remove the land from the spatial extents of each record
+3. Store it in a field geometry_noland
+4. If user request Centroid field, the BBOX area that user requested is UNION with geometry_noland.
+5. This gives the current visible area of the spatial extents excluded land area
+6. Then centroid is calculated dynamically based on these areas and return via API call
+* Noted the speed of transfer geometry_noload to OGC api is the key bottleneck for performance.
