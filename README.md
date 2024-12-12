@@ -84,5 +84,4 @@ Centroid is calculated on the fly
 4. If user request Centroid field, the BBOX area that user requested is UNION with geometry_noland.
 5. This gives the current visible area of the spatial extents excluded land area
 6. Then centroid is calculated dynamically based on these areas and return via API call
-* Noted the speed of transfer geometry_noload to OGC api is the key bottleneck for performance. 
-
+* Noted the speed of transfer geometry_noload to OGC api is the key bottleneck for performance.
