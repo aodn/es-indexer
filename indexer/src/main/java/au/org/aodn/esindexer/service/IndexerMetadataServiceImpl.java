@@ -3,7 +3,6 @@ package au.org.aodn.esindexer.service;
 import au.org.aodn.ardcvocabs.model.VocabModel;
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.exception.*;
-import au.org.aodn.esindexer.model.DatasetProvider;
 import au.org.aodn.esindexer.utils.GcmdKeywordUtils;
 import au.org.aodn.esindexer.utils.JaxbUtils;
 import au.org.aodn.metadata.iso19115_3_2018.MDMetadataType;
@@ -27,36 +26,31 @@ import lombok.extern.slf4j.Slf4j;
 import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.operation.TransformException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.retry.annotation.Backoff;
-import org.springframework.retry.annotation.Retryable;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpServerErrorException;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.time.LocalDate;
 import java.util.*;
 import java.util.concurrent.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.function.Function;
 
 import static au.org.aodn.esindexer.utils.CommonUtils.safeGet;
 
 @Slf4j
 @Service
 @Scope(proxyMode = ScopedProxyMode.TARGET_CLASS)
-public class IndexerServiceImpl implements IndexerService {
+public class IndexerMetadataServiceImpl extends IndexServiceImpl implements IndexerMetadataService {
 
     protected String indexName;
-    protected String datasetIndexName;
     protected String tokensAnalyserName;
     protected GeoNetworkService geoNetworkResourceService;
     protected ElasticsearchClient portalElasticsearchClient;
@@ -66,42 +60,38 @@ public class IndexerServiceImpl implements IndexerService {
     protected JaxbUtils<MDMetadataType> jaxbUtils;
     protected RankingService rankingService;
     protected VocabService vocabService;
-    protected DataAccessService dataAccessService;
     protected GcmdKeywordUtils gcmdKeywordUtils;
-    protected static final long DEFAULT_BACKOFF_TIME = 3000L;
 
     @Lazy
     @Autowired
-    protected IndexerService self;
+    protected IndexerMetadataService self;
 
     @Autowired
-    public IndexerServiceImpl(
+    public IndexerMetadataServiceImpl(
             @Value("${elasticsearch.index.name}") String indexName,
-            @Value("${elasticsearch.dataset_index.name}") String datasetIndexName,
             @Value("${elasticsearch.analyser.tokens.name}") String tokensAnalyserName,
             ObjectMapper indexerObjectMapper,
             JaxbUtils<MDMetadataType> jaxbUtils,
             RankingService rankingService,
             GeoNetworkService geoNetworkResourceService,
-            ElasticsearchClient portalElasticsearchClient,
+            @Qualifier("portalElasticsearchClient") ElasticsearchClient elasticsearchClient,
             ElasticSearchIndexService elasticSearchIndexService,
             StacCollectionMapperService stacCollectionMapperService,
             VocabService vocabService,
-            DataAccessService dataAccessService,
             GcmdKeywordUtils gcmdKeywordUtils
     ) {
+        super(elasticsearchClient, indexerObjectMapper);
+
         this.indexName = indexName;
-        this.datasetIndexName = datasetIndexName;
         this.tokensAnalyserName = tokensAnalyserName;
         this.indexerObjectMapper = indexerObjectMapper;
         this.jaxbUtils = jaxbUtils;
         this.rankingService = rankingService;
         this.geoNetworkResourceService = geoNetworkResourceService;
-        this.portalElasticsearchClient = portalElasticsearchClient;
+        this.portalElasticsearchClient = elasticsearchClient;
         this.elasticSearchIndexService = elasticSearchIndexService;
         this.stacCollectionMapperService = stacCollectionMapperService;
         this.vocabService = vocabService;
-        this.dataAccessService = dataAccessService;
         this.gcmdKeywordUtils = gcmdKeywordUtils;
     }
 
@@ -173,7 +163,6 @@ public class IndexerServiceImpl implements IndexerService {
         StacCollectionModel stacCollectionModel = stacCollectionMapperService.mapToSTACCollection(metadataType);
 
         // evaluate completeness
-        Integer completeness = rankingService.evaluateCompleteness(stacCollectionModel);
         // TODO: in future, evaluate other aspects of the data such as relevance, quality, etc using NLP
 
         /* expand score with other aspect of the data such as relevance, quality, etc.
@@ -182,7 +171,7 @@ public class IndexerServiceImpl implements IndexerService {
         * e.g completeness = 80, relevance = 90, quality = 100
         * final score = (80 + 90 + 100) / 3 = 90
         */
-        Integer score = completeness;
+        Integer score = rankingService.evaluateCompleteness(stacCollectionModel);
 
         stacCollectionModel.getSummaries().setScore(score);
 
@@ -293,48 +282,6 @@ public class IndexerServiceImpl implements IndexerService {
         }
     }
 
-    // TODO: Refactor this method later since it uses similar logic as indexAllMetadataRecordsFromGeoNetwork
-    @Override
-    public List<BulkResponse> indexDataset(String uuid, LocalDate startDate, LocalDate endDate) {
-
-        BulkRequest.Builder bulkRequest = new BulkRequest.Builder();
-        List<BulkResponse> responses = new ArrayList<>();
-
-        long dataSize = 0;
-        final long maxSize = 5242880; // is 5mb
-
-        var dataset = new DatasetProvider(uuid, startDate, endDate, dataAccessService).getIterator();
-        try {
-            for (var entry : dataset) {
-                if (entry == null) {
-                    continue;
-                }
-                log.info("add dataset into b with UUID: {} and yearMonth: {}", entry.uuid(), entry.yearMonth());
-
-                bulkRequest.operations(operation -> operation.index(
-                        indexReq -> indexReq
-                                .id(entry.uuid() + entry.yearMonth())
-                                .index(datasetIndexName)
-                                .document(entry)
-                ));
-                dataSize += indexerObjectMapper.writeValueAsBytes(entry).length;
-                if (dataSize > maxSize) {
-                    log.info("Execute bulk request as bulk request is big enough {}", dataSize);
-                    responses.add(reduceResponse(self.executeBulk(bulkRequest, null)));
-                    dataSize = 0;
-                    bulkRequest = new BulkRequest.Builder();
-                }
-            }
-            log.info("Finished execute bulk indexing records to index: {}", datasetIndexName);
-            responses.add(reduceResponse(self.executeBulk(bulkRequest, null)));
-        } catch (Exception e) {
-            log.error("Failed", e);
-            throw new RuntimeException("Exception thrown while indexing dataset with UUID: " + uuid + " | " + e.getMessage(), e);
-        }
-        return responses;
-    }
-
-
     public ResponseEntity<String> deleteDocumentByUUID(String uuid) throws IOException {
         log.info("Deleting document with UUID: {} from index: {}", uuid, indexName);
         try {
@@ -373,6 +320,17 @@ public class IndexerServiceImpl implements IndexerService {
         else {
             log.info("Resume indexing records from GeoNetwork at {}", beginWithUuid);
         }
+
+        Function<BulkResponseItem, Optional<StacCollectionModel>> mapper = (item) ->
+        {
+            try {
+                return Optional.of(this.getMappedMetadataValues(
+                        geoNetworkResourceService.searchRecordBy(item.id())
+                ));
+            } catch (IOException | FactoryException | TransformException | JAXBException e) {
+                return Optional.empty();
+            }
+        };
 
         BulkRequest.Builder bulkRequest = new BulkRequest.Builder();
         List<BulkResponse> results = new ArrayList<>();
@@ -443,7 +401,7 @@ public class IndexerServiceImpl implements IndexerService {
                                 callback.onProgress(String.format("Execute batch as bulk request is big enough %s", dataSize + size));
                             }
 
-                            results.add(reduceResponse(self.executeBulk(bulkRequest, callback)));
+                            results.add(reduceResponse(self.executeBulk(bulkRequest, mapper, callback)));
 
                             dataSize = 0;
                             bulkRequest = new BulkRequest.Builder();
@@ -471,8 +429,9 @@ public class IndexerServiceImpl implements IndexerService {
                     }
                 }
             }
+
             // In case there are residual, just report error
-            BulkResponse temp = reduceResponse(self.executeBulk(bulkRequest, callback));
+            BulkResponse temp = reduceResponse(self.executeBulk(bulkRequest, mapper, callback));
             results.add(temp);
 
             if(callback != null) {
@@ -497,85 +456,5 @@ public class IndexerServiceImpl implements IndexerService {
             executor.shutdown();
         }
         return results;
-    }
-    /**
-     * Keep retry until success, it is ok to insert docs to elastic again because we use _id as identifier.
-     * In case any service is not available, we will keep retry many times, with 100 retry we try 25 mins which is
-     * big enough for aws process restart.
-     *
-     * @param bulkRequest - The bulk request
-     * @param callback - The event call back to avoid timeout
-     * @return - The bulk insert result
-     * @throws IOException - Exceptions on error
-     * @throws HttpServerErrorException.ServiceUnavailable - Exceptions on geonetwork die or elastic not available
-     */
-    @Retryable(
-            retryFor = {Exception.class, HttpServerErrorException.ServiceUnavailable.class},
-            maxAttempts = 1000,
-            backoff = @Backoff(delay = DEFAULT_BACKOFF_TIME)
-    )
-    @Override
-    public BulkResponse executeBulk(BulkRequest.Builder bulkRequest, Callback callback) throws IOException, HttpServerErrorException.ServiceUnavailable {
-        try {
-            // Keep retry until success
-            BulkResponse result = portalElasticsearchClient.bulk(bulkRequest.build());
-
-            // Flush after insert, otherwise you need to wait for next auto-refresh. It is
-            // especially a problem with autotest, where assert happens very fast.
-            portalElasticsearchClient.indices().refresh();
-
-            // Report status if success
-            if(callback != null) {
-                callback.onProgress(reduceResponse(result));
-            }
-
-            // Log errors, if any
-            if (!result.items().isEmpty()) {
-                if (result.errors()) {
-                    log.error("Bulk load have errors? {}", true);
-                } else {
-                    log.info("Bulk load have errors? {}", false);
-                }
-                for (BulkResponseItem item : result.items()) {
-                    if (item.error() != null) {
-                        try {
-                            log.error("UUID {} {} {} {}",
-                                    item.id(),
-                                    item.error().reason(),
-                                    item.error().causedBy(),
-                                    indexerObjectMapper
-                                            .writerWithDefaultPrettyPrinter()
-                                            .writeValueAsString(
-                                                    this.getMappedMetadataValues(
-                                                            geoNetworkResourceService.searchRecordBy(item.id())
-                                                    )
-                                            )
-                            );
-                        } catch (FactoryException | TransformException | JAXBException e) {
-                            log.warn("Parse error on display stac record");
-                        }
-                    }
-                }
-            }
-            return result;
-        }
-        catch(Exception e) {
-            // Report status if not success, this help to keep connection
-            if(callback != null) {
-                callback.onProgress("Exception on bulk save, will retry : " + e.getMessage());
-            }
-            throw e;
-        }
-    }
-
-    protected static BulkResponse reduceResponse(BulkResponse in) {
-        List<BulkResponseItem> errors = in.items()
-                .stream()
-                .filter(p -> !(p.status() == HttpStatus.CREATED.value() || p.status() == HttpStatus.OK.value()))
-                .toList();
-
-        return errors.isEmpty() ?
-                BulkResponse.of(f -> f.items(new ArrayList<>()).errors(false).took(in.took())) :
-                BulkResponse.of(f -> f.items(errors).errors(true).took(in.took()));
     }
 }

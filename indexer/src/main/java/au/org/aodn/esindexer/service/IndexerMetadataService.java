@@ -1,6 +1,5 @@
 package au.org.aodn.esindexer.service;
 
-import co.elastic.clients.elasticsearch.core.BulkRequest;
 import co.elastic.clients.elasticsearch.core.BulkResponse;
 import co.elastic.clients.elasticsearch.core.search.Hit;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -10,22 +9,19 @@ import org.opengis.referencing.operation.TransformException;
 import org.springframework.http.ResponseEntity;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-public interface IndexerService {
+public interface IndexerMetadataService extends IndexService {
     // Event call back to notify caller, this avoid gateway timeout as we have message back to browser
     interface Callback {
         void onProgress(Object update);
         void onComplete(Object result);
     }
     CompletableFuture<ResponseEntity<String>> indexMetadata(String metadataValues) throws IOException, FactoryException, TransformException, JAXBException;
-    List<BulkResponse> indexDataset(String uuid, LocalDate startDate, LocalDate endDate);
     ResponseEntity<String> deleteDocumentByUUID(String uuid) throws IOException;
     List<BulkResponse> indexAllMetadataRecordsFromGeoNetwork(String beginWithUuid, boolean confirm, Callback callback) throws IOException;
     Hit<ObjectNode> getDocumentByUUID(String uuid) throws IOException;
     boolean isMetadataPublished(String uuid);
     boolean isGeoNetworkInstanceReinstalled(long portalIndexDocumentsCount);
-    BulkResponse executeBulk(BulkRequest.Builder bulkRequest, Callback callback) throws IOException;
 }

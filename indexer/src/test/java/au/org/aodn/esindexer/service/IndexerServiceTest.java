@@ -1,6 +1,5 @@
 package au.org.aodn.esindexer.service;
 
-import co.elastic.clients.elasticsearch._types.ErrorCause;
 import co.elastic.clients.elasticsearch.core.BulkResponse;
 import co.elastic.clients.elasticsearch.core.bulk.BulkResponseItem;
 import co.elastic.clients.elasticsearch.core.bulk.OperationType;
@@ -14,6 +13,7 @@ import org.springframework.http.HttpStatus;
  */
 @Slf4j
 public class IndexerServiceTest {
+
     /**
      * Verify this function, it should only return error if items contains status no CREATED or OK
      */
@@ -34,7 +34,7 @@ public class IndexerServiceTest {
                         .errors(false).took(1)
         );
 
-        bulkResponse = IndexerServiceImpl.reduceResponse(bulkResponse);
+        bulkResponse = IndexerMetadataServiceImpl.reduceResponse(bulkResponse);
         Assertions.assertFalse(bulkResponse.errors(), "Should not contain error");
 
         bulkResponse = BulkResponse.of(b ->
@@ -52,7 +52,7 @@ public class IndexerServiceTest {
                         .errors(false).took(1)
         );
 
-        bulkResponse = IndexerServiceImpl.reduceResponse(bulkResponse);
+        bulkResponse = IndexerMetadataServiceImpl.reduceResponse(bulkResponse);
         Assertions.assertTrue(bulkResponse.errors(), "Should contain error");
     }
 }

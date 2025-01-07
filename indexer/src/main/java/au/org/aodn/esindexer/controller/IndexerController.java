@@ -2,7 +2,8 @@ package au.org.aodn.esindexer.controller;
 
 import au.org.aodn.esindexer.service.DataAccessService;
 import au.org.aodn.esindexer.service.GeoNetworkService;
-import au.org.aodn.esindexer.service.IndexerService;
+import au.org.aodn.esindexer.service.IndexCloudOptimizedService;
+import au.org.aodn.esindexer.service.IndexerMetadataService;
 import co.elastic.clients.elasticsearch.core.BulkResponse;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.swagger.v3.oas.annotations.Operation;
@@ -22,7 +23,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 
 @RestController
 @RequestMapping(value = "/api/v1/indexer/index")
@@ -31,7 +31,10 @@ import java.util.concurrent.ExecutionException;
 public class IndexerController {
 
     @Autowired
-    IndexerService indexerService;
+    IndexerMetadataService indexerMetadata;
+
+    @Autowired
+    IndexCloudOptimizedService indexCloudOptimizedData;
 
     @Autowired
     GeoNetworkService geonetworkResourceService;
@@ -51,7 +54,7 @@ public class IndexerController {
     @Operation(description = "Get a document from portal index by UUID")
     public ResponseEntity<ObjectNode> getDocumentByUUID(@PathVariable("uuid") String uuid) throws IOException {
         log.info("getting a document form portal by UUID: {}", uuid);
-        ObjectNode response =  indexerService.getDocumentByUUID(uuid).source();
+        ObjectNode response =  indexerMetadata.getDocumentByUUID(uuid).source();
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
     /**
@@ -69,13 +72,12 @@ public class IndexerController {
             @RequestParam(value = "confirm", defaultValue = "false") Boolean confirm,
             @RequestParam(value = "beginWithUuid", required=false) String beginWithUuid) throws IOException {
 
-        List<BulkResponse> responses = indexerService.indexAllMetadataRecordsFromGeoNetwork(beginWithUuid, confirm, null);
+        List<BulkResponse> responses = indexerMetadata.indexAllMetadataRecordsFromGeoNetwork(beginWithUuid, confirm, null);
         return ResponseEntity.ok(responses.toString());
     }
     /**
      * Emit result to FE so it will not result in gateway time-out. You need to run it with postman or whatever tools
      * support server side event, the content type needs to be text/event-stream in order to work
-     *
      * Noted: There is a bug in postman desktop, so either you run postman using web-browser with agent directly
      * or you need to have version 10.2 or above in order to get the emitted result
      *
@@ -91,7 +93,7 @@ public class IndexerController {
 
         final SseEmitter emitter = new SseEmitter(0L); // 0L means no timeout;
 
-        IndexerService.Callback callback = new IndexerService.Callback() {
+        IndexerMetadataService.Callback callback = new IndexerMetadataService.Callback() {
             @Override
             public void onProgress(Object update) {
                 try {
@@ -130,7 +132,7 @@ public class IndexerController {
 
         new Thread(() -> {
             try {
-                indexerService.indexAllMetadataRecordsFromGeoNetwork(beginWithUuid, confirm, callback);
+                indexerMetadata.indexAllMetadataRecordsFromGeoNetwork(beginWithUuid, confirm, callback);
             }
             catch(IOException e) {
                 emitter.completeWithError(e);
@@ -142,10 +144,10 @@ public class IndexerController {
 
     @PostMapping(path="/{uuid}", produces = "application/json")
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Index a metadata record by UUID")
-    public ResponseEntity<String> addDocumentByUUID(@PathVariable("uuid") String uuid) throws IOException, FactoryException, JAXBException, TransformException, ExecutionException, InterruptedException {
+    public ResponseEntity<String> addDocumentByUUID(@PathVariable("uuid") String uuid) throws IOException, FactoryException, JAXBException, TransformException {
         String metadataValues = geonetworkResourceService.searchRecordBy(uuid);
 
-        CompletableFuture<ResponseEntity<String>> f = indexerService.indexMetadata(metadataValues);
+        CompletableFuture<ResponseEntity<String>> f = indexerMetadata.indexMetadata(metadataValues);
         // Return when done make it back to sync instead of async
         return f.join();
     }
@@ -153,7 +155,7 @@ public class IndexerController {
     @DeleteMapping(path="/{uuid}", produces = "application/json")
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Delete a metadata record by UUID")
     public ResponseEntity<String> deleteDocumentByUUID(@PathVariable("uuid") String uuid) throws IOException {
-        return indexerService.deleteDocumentByUUID(uuid);
+        return indexerMetadata.deleteDocumentByUUID(uuid);
     }
 
     @PostMapping(path="/{uuid}/dataset", produces = "application/json")
@@ -165,7 +167,7 @@ public class IndexerController {
         var endDate = temporalExtents.getEndDate();
         log.info("Indexing dataset with UUID: {} from {} to {}", uuid, startDate, endDate);
 
-        var responses = indexerService.indexDataset(uuid, startDate, endDate);
+        var responses = indexCloudOptimizedData.indexCloudOptimizedData(uuid, startDate, endDate);
 
         List<String> result = new ArrayList<>();
         for (BulkResponse response : responses) {

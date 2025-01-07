@@ -3,8 +3,6 @@ package au.org.aodn.esindexer.service;
 import au.org.aodn.esindexer.BaseTestClass;
 import au.org.aodn.esindexer.configuration.GeoNetworkSearchTestConfig;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
-import co.elastic.clients.elasticsearch.core.BulkResponse;
-import co.elastic.clients.elasticsearch.core.bulk.BulkResponseItem;
 import co.elastic.clients.elasticsearch.core.search.Hit;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.HttpStatus;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.io.IOException;
@@ -38,7 +35,7 @@ public class IndexerServiceIT extends BaseTestClass {
     ElasticsearchClient gn4ElasticsearchClient;
 
     @Autowired
-    protected IndexerService indexerService;
+    protected IndexerMetadataService indexerService;
 
     @Autowired
     protected ObjectMapper indexerObjectMapper;
@@ -237,7 +234,6 @@ public class IndexerServiceIT extends BaseTestClass {
     /**
      * This test is use to make sure if the geonetwork return an empty thumbnails [] array, we are still ok,
      * in the related/5905b3eb-aad0-4f9c-a03e-a02fb3488082.json, the thumbnails: [] is empty
-     * @throws IOException
      */
     @Test
     public void verifyThumbnailLinkNullAdbbdedOnIndex() throws IOException {
