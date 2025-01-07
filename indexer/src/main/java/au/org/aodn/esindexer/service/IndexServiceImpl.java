@@ -64,10 +64,12 @@ public abstract class IndexServiceImpl implements IndexService {
                         callback.onProgress(String.format("Execute batch as bulk request is big enough %s", dataSize + size));
                     }
 
+                    Optional<BulkResponse> result = Optional.of(reduceResponse(proxyImpl.executeBulk(bulkRequest, mapper, callback)));
+
                     dataSize = 0;
                     bulkRequest = new BulkRequest.Builder();
 
-                    return Optional.of(reduceResponse(proxyImpl.executeBulk(bulkRequest, mapper, callback)));
+                    return result;
                 }
                 // Add item to  bulk request to Elasticsearch
                 bulkRequest.operations(op -> op
