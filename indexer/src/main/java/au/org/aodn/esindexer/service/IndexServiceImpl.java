@@ -25,6 +25,79 @@ public abstract class IndexServiceImpl implements IndexService {
     protected ElasticsearchClient elasticClient;
     protected ObjectMapper indexerObjectMapper;
 
+    /**
+     * This processor help to shield the complexity of bulk save of Elastic search where the batch size cannot be
+     * too large. You keep calling the processItem by adding it new item. Once it reached the max size it will flush
+     * to the Elastic, then it will reset and allow adding new item.
+     * You must call flush at the end so that any remain item will get push
+     * @param <T>
+     */
+    protected class BulkRequestProcessor<T> {
+        BulkRequest.Builder bulkRequest = new BulkRequest.Builder();
+        IndexService proxyImpl;
+        Callback callback;
+        Function<BulkResponseItem, Optional<T>> mapper;
+        String indexName;
+        long dataSize = 0;
+        long total = 0;
+
+        BulkRequestProcessor(String indexName, Function<BulkResponseItem, Optional<T>> mapper, IndexService proxyImpl, Callback callback) {
+            this.indexName = indexName;
+            this.proxyImpl = proxyImpl;
+            this.mapper = mapper;
+            this.callback = callback;
+        }
+
+        Optional<BulkResponse> processItem(String id, T item) throws IOException {
+            if(item != null) {
+                int size = indexerObjectMapper.writeValueAsBytes(item).length;
+
+                // We need to split the batch into smaller size to avoid data too large error in ElasticSearch,
+                // the limit is 10mb, so to make check before document add and push batch if size is too big
+                //
+                // dataSize = 0 is init case, just in case we have a very big doc that exceed the limit
+                // and we have not add it to the bulkRequest, hardcode to 5M which should be safe,
+                // usually it is 5M - 15M
+                //
+                if (dataSize + size > IndexServiceImpl.this.getBatchSize() && dataSize != 0) {
+                    if (callback != null) {
+                        callback.onProgress(String.format("Execute batch as bulk request is big enough %s", dataSize + size));
+                    }
+
+                    dataSize = 0;
+                    bulkRequest = new BulkRequest.Builder();
+
+                    return Optional.of(reduceResponse(proxyImpl.executeBulk(bulkRequest, mapper, callback)));
+                }
+                // Add item to  bulk request to Elasticsearch
+                bulkRequest.operations(op -> op
+                        .index(idx -> idx
+                                .id(id)
+                                .index(indexName)
+                                .document(item)
+                        )
+                );
+                dataSize += size;
+                total++;
+
+                if (callback != null) {
+                    callback.onProgress(
+                            String.format(
+                                    "Add uuid %s to batch, batch size is %s, total is %s",
+                                    id,
+                                    dataSize,
+                                    total)
+                    );
+                }
+            }
+            return Optional.empty();
+        }
+
+        Optional<BulkResponse> flush() throws IOException {
+            return Optional.of(reduceResponse(proxyImpl.executeBulk(bulkRequest, mapper, callback)));
+        }
+    }
+
     public IndexServiceImpl(ElasticsearchClient elasticClient, ObjectMapper indexerObjectMapper) {
         this.elasticClient = elasticClient;
         this.indexerObjectMapper = indexerObjectMapper;
@@ -41,6 +114,10 @@ public abstract class IndexServiceImpl implements IndexService {
                 BulkResponse.of(f -> f.items(errors).errors(true).took(in.took()));
     }
 
+    @Override
+    public long getBatchSize() {
+        return 5242880;
+    }
     /**
      * Keep retry until success, it is ok to insert docs to elastic again because we use _id as identifier.
      * In case any service is not available, we will keep retry many times, with 100 retry we try 25 mins which is
@@ -109,4 +186,5 @@ public abstract class IndexServiceImpl implements IndexService {
             throw e;
         }
     }
+
 }

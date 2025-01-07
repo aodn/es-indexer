@@ -54,7 +54,7 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
         List<BulkResponse> responses = new ArrayList<>();
 
         long dataSize = 0;
-        final long maxSize = 5242880; // is 5mb
+        final long maxSize = this.getBatchSize();
 
         var dataset = new DatasetProvider(uuid, startDate, endDate, dataAccessService).getIterator();
         try {

@@ -332,11 +332,9 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
             }
         };
 
-        BulkRequest.Builder bulkRequest = new BulkRequest.Builder();
         List<BulkResponse> results = new ArrayList<>();
+        BulkRequestProcessor<StacCollectionModel> bulkRequestProcessor = new BulkRequestProcessor<>(indexName, mapper, self, callback);
 
-        long dataSize = 0;
-        long total = 0;
         // We need to keep sending messages to client to avoid timeout on long processing
         ExecutorService executor = Executors.newFixedThreadPool(2);
 
@@ -387,56 +385,24 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
                     final StacCollectionModel mappedMetadataValues = value.get();
 
                     if(mappedMetadataValues != null) {
-                        int size = indexerObjectMapper.writeValueAsBytes(mappedMetadataValues).length;
-
-                        // We need to split the batch into smaller size to avoid data too large error in ElasticSearch,
-                        // the limit is 10mb, so to make check before document add and push batch if size is too big
-                        //
-                        // dataSize = 0 is init case, just in case we have a very big doc that exceed the limit
-                        // and we have not add it to the bulkRequest, hardcode to 5M which should be safe,
-                        // usually it is 5M - 15M
-                        //
-                        if (dataSize + size > 5242880 && dataSize != 0) {
-                            if (callback != null) {
-                                callback.onProgress(String.format("Execute batch as bulk request is big enough %s", dataSize + size));
-                            }
-
-                            results.add(reduceResponse(self.executeBulk(bulkRequest, mapper, callback)));
-
-                            dataSize = 0;
-                            bulkRequest = new BulkRequest.Builder();
-                        }
-                        // Add item to  bulk request to Elasticsearch
-                        bulkRequest.operations(op -> op
-                                .index(idx -> idx
-                                        .id(mappedMetadataValues.getUuid())
-                                        .index(indexName)
-                                        .document(mappedMetadataValues)
-                                )
-                        );
-                        dataSize += size;
-                        total++;
-
-                        if (callback != null) {
-                            callback.onProgress(
-                                    String.format(
-                                            "Add uuid %s to batch, batch size is %s, total is %s",
-                                            mappedMetadataValues.getUuid(),
-                                            dataSize,
-                                            total)
-                            );
-                        }
+                        bulkRequestProcessor
+                                .processItem(mappedMetadataValues.getUuid(), mappedMetadataValues)
+                                .ifPresent(results::add);
                     }
                 }
             }
 
             // In case there are residual, just report error
-            BulkResponse temp = reduceResponse(self.executeBulk(bulkRequest, mapper, callback));
-            results.add(temp);
+            bulkRequestProcessor
+                    .flush()
+                    .ifPresent(response -> {
+                        results.add(response);
 
-            if(callback != null) {
-                callback.onComplete(temp);
-            }
+                        if(callback != null) {
+                            callback.onComplete(response);
+                        }
+                    });
+
 
             // TODO now processing for record_suggestions index
             log.info("Finished execute bulk indexing records to index: {}",indexName);

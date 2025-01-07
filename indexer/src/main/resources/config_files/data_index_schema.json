@@ -14,11 +14,8 @@
             "type": "date",
             "format": "yyyy-MM-dd"
           },
-          "longitude": {
-            "type": "float"
-          },
-          "latitude": {
-            "type": "float"
+          "location": {
+            "type": "geo_shape"
           },
           "depth": {
             "type": "float"

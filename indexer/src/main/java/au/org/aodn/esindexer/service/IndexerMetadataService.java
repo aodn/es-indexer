@@ -13,11 +13,7 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 public interface IndexerMetadataService extends IndexService {
-    // Event call back to notify caller, this avoid gateway timeout as we have message back to browser
-    interface Callback {
-        void onProgress(Object update);
-        void onComplete(Object result);
-    }
+
     CompletableFuture<ResponseEntity<String>> indexMetadata(String metadataValues) throws IOException, FactoryException, TransformException, JAXBException;
     ResponseEntity<String> deleteDocumentByUUID(String uuid) throws IOException;
     List<BulkResponse> indexAllMetadataRecordsFromGeoNetwork(String beginWithUuid, boolean confirm, Callback callback) throws IOException;
