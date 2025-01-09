@@ -4,12 +4,9 @@ import au.org.aodn.esindexer.model.Datum;
 import au.org.aodn.esindexer.model.TemporalExtent;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public interface DataAccessService {
-    Datum[] getIndexingDatasetBy(String uuid, LocalDate startDate, LocalDate endDate);
-    String getServiceUrl();
-    void setServiceUrl(String url);
-
-
-    TemporalExtent getTemporalExtentOf(String uuid);
+    List<Datum> getIndexingDatasetBy(String uuid, LocalDate startDate, LocalDate endDate);
+    List<TemporalExtent> getTemporalExtentOf(String uuid);
 }

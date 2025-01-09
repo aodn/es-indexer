@@ -7,6 +7,7 @@ import co.elastic.clients.elasticsearch.core.bulk.BulkResponseItem;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.aop.support.AopUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Retryable;
@@ -33,19 +34,32 @@ public abstract class IndexServiceImpl implements IndexService {
      * @param <T>
      */
     protected class BulkRequestProcessor<T> {
-        BulkRequest.Builder bulkRequest = new BulkRequest.Builder();
-        IndexService proxyImpl;
-        Callback callback;
-        Function<BulkResponseItem, Optional<T>> mapper;
-        String indexName;
-        long dataSize = 0;
-        long total = 0;
+        private final IndexService proxyImpl;
+        private final Callback callback;
+        private final Function<BulkResponseItem, Optional<T>> mapper;
+        private final String indexName;
 
+        private BulkRequest.Builder bulkRequest = new BulkRequest.Builder();
+        private long dataSize = 0;
+        private long total = 0;
+        /**
+         * A class the use to write request by batch to improve writing speed and not to flood the Elastic by too many call.
+         * @param indexName - The elastic index name that store the output json.
+         * @param mapper - An optional mapper to find the original object from source given some input
+         * @param proxyImpl - Must be a IndexService wrapper by the proxy so that the @Retryable call of the executeBulk can be use
+         * @param callback - A callback to the front end to avoid timeout on aws gateway on long run process
+         */
         BulkRequestProcessor(String indexName, Function<BulkResponseItem, Optional<T>> mapper, IndexService proxyImpl, Callback callback) {
             this.indexName = indexName;
-            this.proxyImpl = proxyImpl;
             this.mapper = mapper;
             this.callback = callback;
+
+            if(AopUtils.isAopProxy(proxyImpl) || AopUtils.isJdkDynamicProxy(proxyImpl)) {
+                this.proxyImpl = proxyImpl;
+            }
+            else {
+                throw new RuntimeException("Spring AOP component expected, please pass the Autowrired instance");
+            }
         }
 
         Optional<BulkResponse> processItem(String id, T item) throws IOException {

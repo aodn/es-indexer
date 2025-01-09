@@ -5,7 +5,6 @@ import org.springframework.util.StopWatch;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -40,11 +39,11 @@ public class DatasetProvider {
                     throw new NoSuchElementException();
                 }
 
-                List<Datum> data = Arrays.stream(dataAccessService.getIndexingDatasetBy(
+                List<Datum> data = dataAccessService.getIndexingDatasetBy(
                         uuid,
                         LocalDate.of(currentYearMonth.getYear(), currentYearMonth.getMonthValue(), 1),
                         LocalDate.of(currentYearMonth.getYear(), currentYearMonth.getMonthValue(), currentYearMonth.lengthOfMonth())
-                )).toList();
+                );
                 currentYearMonth = currentYearMonth.plusMonths(1);
                 if (data.isEmpty()) {
                     return null;

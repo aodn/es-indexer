@@ -3,7 +3,8 @@ package au.org.aodn.esindexer.service;
 import au.org.aodn.esindexer.exception.MetadataNotFoundException;
 import au.org.aodn.esindexer.model.Datum;
 import au.org.aodn.esindexer.model.TemporalExtent;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.Getter;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -15,29 +16,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Getter
 public class DataAccessServiceImpl implements DataAccessService {
 
-    private String serverUrl;
+    protected String accessEndPoint;
+    protected RestTemplate restTemplate;
 
-    @Override
-    public String getServiceUrl() {
-        return serverUrl;
+    public DataAccessServiceImpl(String serverUrl, String baseUrl, RestTemplate restTemplate) {
+       this.accessEndPoint = serverUrl + baseUrl;
+       this.restTemplate = restTemplate;
     }
 
     @Override
-    public void setServiceUrl(String url) {
-        this.serverUrl = url;
-    }
-
-    public DataAccessServiceImpl(String serverUrl) {
-       setServiceUrl(serverUrl);
-    }
-
-    @Autowired
-    private RestTemplate restTemplate;
-
-    @Override
-    public Datum[] getIndexingDatasetBy(String uuid, LocalDate startDate, LocalDate endDate) {
+    public List<Datum> getIndexingDatasetBy(String uuid, LocalDate startDate, LocalDate endDate) {
 
         // currently, we force to get data in the same year to simplify the logic
         if (startDate.getYear() != endDate.getYear()) {
@@ -57,33 +48,31 @@ public class DataAccessServiceImpl implements DataAccessService {
                     .buildAndExpand(uuid)
                     .toUriString();
 
-            ResponseEntity<Datum[]> responseEntity = restTemplate.exchange(
+            ResponseEntity<List<Datum>> responseEntity = restTemplate.exchange(
                     url,
                     HttpMethod.GET,
                     request,
-                    Datum[].class,
+                    new ParameterizedTypeReference<>() {},
                     params
             );
 
             if (responseEntity.getStatusCode().is2xxSuccessful()) {
-                List<Datum> data = new ArrayList<>();
                 if (responseEntity.getBody() != null) {
-                    data = List.of(responseEntity.getBody());
+                    return aggregateData(responseEntity.getBody());
                 }
-                var dataToIndex = aggregateData(data);
-                return dataToIndex.toArray(new Datum[0]);
             }
             throw new RuntimeException("Unable to retrieve dataset with UUID: " + uuid );
-
-        } catch (HttpClientErrorException.NotFound e) {
+        }
+        catch (HttpClientErrorException.NotFound e) {
             throw new MetadataNotFoundException("Unable to find dataset with UUID: " + uuid + " in GeoNetwork");
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             throw new RuntimeException("Exception thrown while retrieving dataset with UUID: " + uuid + e.getMessage(), e);
         }
     }
 
     @Override
-    public TemporalExtent getTemporalExtentOf(String uuid) {
+    public List<TemporalExtent> getTemporalExtentOf(String uuid) {
         try {
             HttpEntity<String> request = getRequestEntity(null, null);
 
@@ -94,11 +83,11 @@ public class DataAccessServiceImpl implements DataAccessService {
                     .buildAndExpand(uuid)
                     .toUriString();
 
-            ResponseEntity<TemporalExtent> responseEntity = restTemplate.exchange(
+            ResponseEntity<List<TemporalExtent>> responseEntity = restTemplate.exchange(
                     url,
                     HttpMethod.GET,
                     request,
-                    TemporalExtent.class,
+                    new ParameterizedTypeReference<>() {},
                     params
             );
 
@@ -110,13 +99,12 @@ public class DataAccessServiceImpl implements DataAccessService {
             throw new RuntimeException("Exception thrown while retrieving dataset with UUID: " + uuid + e.getMessage(), e);
         }
     }
-
     /**
      * Summarize the data by counting the number if all the concerned fields are the same
      * @param data the data to summarize
      * @return the summarized data
      */
-    private List<Datum> aggregateData(List<Datum> data) {
+    protected List<Datum> aggregateData(List<Datum> data) {
         var aggregatedData = new ArrayList<Datum>();
         for (var datum: data) {
             if (aggregatedData.contains(datum)) {
@@ -129,10 +117,9 @@ public class DataAccessServiceImpl implements DataAccessService {
         return aggregatedData;
     }
 
-    private String getDataAccessEndpoint() {
-        return getServiceUrl() + "/api/v1/das/";
+    protected String getDataAccessEndpoint() {
+        return this.accessEndPoint;
     }
-
 
     // parameters are not in use for now. May be useful in the future so just keep it
     protected HttpEntity<String> getRequestEntity(MediaType accept, String body) {
@@ -143,6 +130,6 @@ public class DataAccessServiceImpl implements DataAccessService {
                 MediaType.valueOf("application/*+json"),
                 MediaType.ALL
         ));
-        return body == null ? new org.springframework.http.HttpEntity<>(headers) : new org.springframework.http.HttpEntity<>(body, headers);
+        return body == null ? new HttpEntity<>(headers) : new HttpEntity<>(body, headers);
     }
 }

@@ -42,7 +42,7 @@ public class StacCollectionModel {
 
     @JsonProperty("type")
     public String getType() {
-        return AppConstants.STAC_TYPE;
+        return AppConstants.STAC_COLLECTION;
     }
 
     @JsonProperty("stac_extensions")

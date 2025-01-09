@@ -1,8 +1,8 @@
 package au.org.aodn.esindexer.service;
 
+import au.org.aodn.esindexer.model.DatasetEsEntry;
 import au.org.aodn.esindexer.model.DatasetProvider;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
-import co.elastic.clients.elasticsearch.core.BulkRequest;
 import co.elastic.clients.elasticsearch.core.BulkResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +26,7 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
 
     protected DataAccessService dataAccessService;
     protected ObjectMapper indexerObjectMapper;
-    protected String datasetIndexName;
+    protected String indexName;
 
     @Lazy
     @Autowired
@@ -34,53 +34,49 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
 
     @Autowired
     public IndexCloudOptimizedServiceImpl(
-            @Value("${elasticsearch.dataset_index.name}") String datasetIndexName,
+            @Value("${elasticsearch.dataset_index.name}") String indexName,
             @Qualifier("portalElasticsearchClient") ElasticsearchClient elasticsearchClient,
             ObjectMapper indexerObjectMapper,
             DataAccessService dataAccessService) {
 
         super(elasticsearchClient, indexerObjectMapper);
 
-        this.datasetIndexName = datasetIndexName;
+        this.indexName = indexName;
         this.indexerObjectMapper = indexerObjectMapper;
         this.dataAccessService = dataAccessService;
     }
-
-    // TODO: Refactor this method later since it uses similar logic as indexAllMetadataRecordsFromGeoNetwork
+    /**
+     *
+     * @param uuid
+     * @param startDate
+     * @param endDate
+     * @return
+     */
     @Override
     public List<BulkResponse> indexCloudOptimizedData(String uuid, LocalDate startDate, LocalDate endDate) {
 
-        BulkRequest.Builder bulkRequest = new BulkRequest.Builder();
         List<BulkResponse> responses = new ArrayList<>();
 
-        long dataSize = 0;
-        final long maxSize = this.getBatchSize();
+        Iterable<DatasetEsEntry> dataset = new DatasetProvider(uuid, startDate, endDate, dataAccessService).getIterator();
+        BulkRequestProcessor<DatasetEsEntry> bulkRequestProcessor = new BulkRequestProcessor<>(
+                indexName, (item) -> Optional.empty(),self, null
+        );
 
-        var dataset = new DatasetProvider(uuid, startDate, endDate, dataAccessService).getIterator();
         try {
-            for (var entry : dataset) {
-                if (entry == null) {
-                    continue;
-                }
-                log.info("add dataset into b with UUID: {} and yearMonth: {}", entry.uuid(), entry.yearMonth());
-
-                bulkRequest.operations(operation -> operation.index(
-                        indexReq -> indexReq
-                                .id(entry.uuid() + entry.yearMonth())
-                                .index(datasetIndexName)
-                                .document(entry)
-                ));
-                dataSize += indexerObjectMapper.writeValueAsBytes(entry).length;
-                if (dataSize > maxSize) {
-                    log.info("Execute bulk request as bulk request is big enough {}", dataSize);
-                    responses.add(reduceResponse(self.executeBulk(bulkRequest, (item) -> Optional.empty(), null)));
-                    dataSize = 0;
-                    bulkRequest = new BulkRequest.Builder();
+            for (DatasetEsEntry entry : dataset) {
+                if (entry != null) {
+                    log.info("add dataset into b with UUID: {} and yearMonth: {}", entry.uuid(), entry.yearMonth());
+                    bulkRequestProcessor.processItem(entry.uuid(), entry)
+                            .ifPresent(responses::add);
                 }
             }
-            log.info("Finished execute bulk indexing records to index: {}", datasetIndexName);
-            responses.add(reduceResponse(self.executeBulk(bulkRequest, (item) -> Optional.empty(), null)));
-        } catch (Exception e) {
+            bulkRequestProcessor
+                    .flush()
+                    .ifPresent(responses::add);
+
+            log.info("Finished execute bulk indexing records to index: {}", indexName);
+        }
+        catch (Exception e) {
             log.error("Failed", e);
             throw new RuntimeException("Exception thrown while indexing dataset with UUID: " + uuid + " | " + e.getMessage(), e);
         }

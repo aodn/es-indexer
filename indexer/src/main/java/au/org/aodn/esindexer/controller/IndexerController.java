@@ -1,5 +1,6 @@
 package au.org.aodn.esindexer.controller;
 
+import au.org.aodn.esindexer.model.TemporalExtent;
 import au.org.aodn.esindexer.service.DataAccessService;
 import au.org.aodn.esindexer.service.GeoNetworkService;
 import au.org.aodn.esindexer.service.IndexCloudOptimizedService;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -160,20 +162,26 @@ public class IndexerController {
 
     @PostMapping(path="/{uuid}/dataset", produces = "application/json")
     @Operation(security = {@SecurityRequirement(name = "X-API-Key") }, description = "Index a dataset by UUID")
-    public ResponseEntity<List<String>> indexDatasetByUUID(@PathVariable("uuid") String uuid)  {
+    public ResponseEntity<?> indexDatasetByUUID(@PathVariable("uuid") String uuid)  {
 
-        var temporalExtents = dataAccessService.getTemporalExtentOf(uuid);
-        var startDate = temporalExtents.getStartDate();
-        var endDate = temporalExtents.getEndDate();
-        log.info("Indexing dataset with UUID: {} from {} to {}", uuid, startDate, endDate);
+        List<TemporalExtent> temporalExtents = dataAccessService.getTemporalExtentOf(uuid);
+        if(!temporalExtents.isEmpty()) {
+            // Only first block works from dataservice api
+            LocalDate startDate = temporalExtents.get(0).getLocalStartDate();
+            LocalDate endDate = temporalExtents.get(0).getLocalEndDate();
+            log.info("Indexing dataset with UUID: {} from {} to {}", uuid, startDate, endDate);
 
-        var responses = indexCloudOptimizedData.indexCloudOptimizedData(uuid, startDate, endDate);
+            var responses = indexCloudOptimizedData.indexCloudOptimizedData(uuid, startDate, endDate);
 
-        List<String> result = new ArrayList<>();
-        for (BulkResponse response : responses) {
-            result.add(response.toString());
+            List<String> result = new ArrayList<>();
+            for (BulkResponse response : responses) {
+                result.add(response.toString());
+            }
+
+            return ResponseEntity.ok(result);
         }
-
-        return ResponseEntity.ok(result);
+        else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

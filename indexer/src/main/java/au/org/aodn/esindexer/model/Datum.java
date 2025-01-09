@@ -5,6 +5,9 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
+import java.util.Objects;
+import java.util.Optional;
+
 //  If more fields are needed to be filtered, please add more columns here
 //  and don't forget updating the override equals() method
 @Data
@@ -42,17 +45,34 @@ public class Datum {
         if (this == obj) {
             return true;
         }
-        if (obj == null || getClass() != obj.getClass()) {
+        else if (obj instanceof Datum that) {
+            int compareLong = Optional
+                    .ofNullable(that.longitude)
+                    .orElse(Double.NEGATIVE_INFINITY)
+                    .compareTo(Optional.ofNullable(longitude)
+                            .orElse(Double.NEGATIVE_INFINITY));
+
+            int compareLat = Optional
+                    .ofNullable(that.latitude)
+                    .orElse(Double.NEGATIVE_INFINITY)
+                    .compareTo(Optional.ofNullable(latitude)
+                            .orElse(Double.NEGATIVE_INFINITY));
+
+            int compareDepth = Optional
+                    .ofNullable(that.depth)
+                    .orElse(Double.NEGATIVE_INFINITY)
+                    .compareTo(Optional.ofNullable(depth)
+                            .orElse(Double.NEGATIVE_INFINITY));
+
+            boolean compareTime = Objects.equals(that.time, time);
+
+            return compareLong == 0 &&
+                    compareLat == 0 &&
+                    compareDepth == 0 &&
+                    compareTime;
+        }
+        else {
             return false;
         }
-        Datum that = (Datum) obj;
-
-        return Double.compare(that.longitude, longitude) == 0 &&
-                Double.compare(that.latitude, latitude) == 0 &&
-                Double.compare(
-                        that.depth != null? that.depth : 0.0,
-                        depth != null? depth : 0.0
-                ) == 0 &&
-                time.equals(that.time);
     }
 }

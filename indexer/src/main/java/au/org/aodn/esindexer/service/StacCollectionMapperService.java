@@ -1,12 +1,11 @@
 package au.org.aodn.esindexer.service;
 
 import au.org.aodn.esindexer.utils.AssociatedRecordsUtil;
-import au.org.aodn.esindexer.model.GeoNetworkField;
-import au.org.aodn.esindexer.model.MediaType;
 import au.org.aodn.esindexer.model.RelationType;
 import au.org.aodn.esindexer.utils.*;
 import au.org.aodn.stac.model.*;
 
+import au.org.aodn.metadata.geonetwork.GeoNetworkField;
 import au.org.aodn.metadata.iso19115_3_2018.*;
 import au.org.aodn.stac.util.JsonUtil;
 import jakarta.xml.bind.JAXBElement;
@@ -15,6 +14,7 @@ import org.apache.logging.log4j.Logger;
 import org.mapstruct.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -26,7 +26,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import static au.org.aodn.esindexer.model.GeoNetworkField.*;
 import static au.org.aodn.esindexer.utils.CommonUtils.safeGet;
 import static au.org.aodn.esindexer.utils.StringUtil.capitalizeFirstLetter;
 
@@ -318,14 +317,14 @@ public abstract class StacCollectionMapperService {
     String mapSummariesCreation(MDMetadataType source) {
         var dateSources = MapperUtils.findMDDateInfo(source);
         var dateMap = getMetadataDateInfoFrom(dateSources);
-        return safeGet(() -> dateMap.get(creation)).orElse(null);
+        return safeGet(() -> dateMap.get(GeoNetworkField.creation)).orElse(null);
     }
 
     @Named("mapSummaries.revision")
     String mapSummariesRevision(MDMetadataType source) {
         var dateSources = MapperUtils.findMDDateInfo(source);
         var dateMap = getMetadataDateInfoFrom(dateSources);
-        return safeGet(() -> dateMap.get(revision)).orElse(null);
+        return safeGet(() -> dateMap.get(GeoNetworkField.revision)).orElse(null);
     }
 
     private HashMap<GeoNetworkField, String> getMetadataDateInfoFrom(List<AbstractTypedDatePropertyType> dateSources) {
@@ -640,7 +639,7 @@ public abstract class StacCollectionMapperService {
             LinkModel linkModel = LinkModel.builder()
                     .href(url)
                     .rel(RelationType.DESCRIBEDBY.getValue())
-                    .type(MediaType.TEXT_HTML.getValue())
+                    .type(MediaType.TEXT_HTML.toString())
                     .title("Full metadata link")
                     .build();
             results.add(linkModel);
@@ -708,7 +707,7 @@ public abstract class StacCollectionMapperService {
         return graphic.map(graphicUrl -> LinkModel.builder()
                 .href(graphicUrl)
                 .rel(RelationType.LICENSE.getValue())
-                .type(MediaType.IMAGE_PNG.getValue())
+                .type(MediaType.IMAGE_PNG.toString())
                 .build()).orElse(null);
     }
 
@@ -728,7 +727,7 @@ public abstract class StacCollectionMapperService {
                 return LinkModel.builder()
                         .href(url.get())
                         .rel(RelationType.LICENSE.getValue())
-                        .type(MediaType.TEXT_HTML.getValue())
+                        .type(MediaType.TEXT_HTML.toString())
                         .build();
             }
         }

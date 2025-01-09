@@ -53,6 +53,10 @@ geonetwork:
       index: "records"
       endpoint: /geonetwork/srv/api/search
 
+dataaccess:
+  host: http://localhost:5000
+  baseUrl: "/api/v1/das/"
+
 springdoc:
   api-docs:
     enabled: true

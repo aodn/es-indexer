@@ -1,7 +1,7 @@
 {
   "mappings": {
     "properties": {
-      "uuid": {
+      "id": {
         "type": "keyword"
       },
       "year_month": {
