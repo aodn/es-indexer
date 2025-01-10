@@ -30,7 +30,7 @@ public class StacItemModel {
      * Use to generate the vector tile, the STAC format is not optimized and hard to work with for Elastic search
      */
     @JsonProperty("geometry")
-    protected Map<?, ?> geometry;
+    protected Map<?,?> geometry;
     /**
      * REQUIRED if geometry is not null, prohibited if geometry is null. Bounding Box of the asset represented by
      * this Item, formatted according to RFC 7946, section 5.

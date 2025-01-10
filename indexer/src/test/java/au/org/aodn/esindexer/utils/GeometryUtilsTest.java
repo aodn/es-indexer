@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -141,7 +142,11 @@ public class GeometryUtilsTest {
 
     @Test
     public void verifyCreateJsonPoint() {
-        Map<?,?> item = GeometryUtils.createGeoJson(1.2, 2.2, 3.0);
+        Map<?,?> item = GeometryUtils.createGeoJson(
+                BigDecimal.valueOf(1.2),
+                BigDecimal.valueOf(2.2),
+                BigDecimal.valueOf(3.0)
+        );
 
         Assertions.assertNotNull(item);
         Assertions.assertEquals("Feature", item.get("type"));

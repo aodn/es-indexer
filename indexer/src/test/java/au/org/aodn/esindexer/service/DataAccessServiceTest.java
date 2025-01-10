@@ -69,7 +69,7 @@ public class DataAccessServiceTest {
 
         // StacItemModel(uuid=35234913-aa3c-48ec-b9a4-77f822f66ef8|2024-02|170.33|-33.87|530.0, geometry={geometry={coordinates=[170.33, -33.87], type=Point}, type=Feature, properties={depth=530.0}}, bbox=null, properties={time=2024-02, count=15}, links=null, assets=null, collection=35234913-aa3c-48ec-b9a4-77f822f66ef8)
         Optional<StacItemModel> t = models.stream()
-                .filter(f -> f.getUuid().equalsIgnoreCase("35234913-aa3c-48ec-b9a4-77f822f66ef8|2024-02|170.33|-33.87|530.0"))
+                .filter(f -> f.getUuid().equalsIgnoreCase("35234913-aa3c-48ec-b9a4-77f822f66ef8|2024-02|170.33|-33.87|530.00"))
                 .findFirst();
 
         Assertions.assertTrue(t.isPresent(), "Target found");
@@ -79,6 +79,8 @@ public class DataAccessServiceTest {
         Assertions.assertInstanceOf(Map.class, t.get().getGeometry().get("properties"));
 
         Map<?, ?> properties = (Map<?,?>)t.get().getGeometry().get("properties");
-        Assertions.assertEquals(530.0, properties.get("depth"));
+        // The depth is a BigDecimal, so we do a toString() will force it print the .00 which is what we want
+        // to check it contains two decimal
+        Assertions.assertEquals("530.00", properties.get("depth").toString());
     }
 }

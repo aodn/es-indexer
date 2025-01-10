@@ -109,7 +109,7 @@ public class DataAccessServiceImpl implements DataAccessService {
      * @return the summarized data
      */
     protected Map<? extends CloudOptimizedEntry, Long> aggregateData(List<? extends CloudOptimizedEntry> data) {
-        return data.parallelStream()
+        return data.stream()
                 .collect(Collectors.groupingBy(
                         d -> d,
                         Collectors.counting()
@@ -119,10 +119,10 @@ public class DataAccessServiceImpl implements DataAccessService {
      * Group and count the entries based on user object equals/hashcode
      * @param uuid - The parent uuid that associate with input
      * @param data - The aggregated data
-     * @return
+     * @return - List of formatted stac item
      */
     protected List<StacItemModel> toStacItemModel(String uuid, Map<? extends CloudOptimizedEntry, Long> data) {
-        return data.entrySet().parallelStream()
+        return data.entrySet().stream()
                 .filter(d -> d.getKey().getLongitude() != null && d.getKey().getLatitude() != null)
                 .map(d ->
                     StacItemModel.builder()

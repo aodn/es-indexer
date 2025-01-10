@@ -4,24 +4,35 @@
       "id": {
         "type": "keyword"
       },
-      "year_month": {
-        "type": "keyword"
+      "stac_version": { "type": "text" },
+      "stac_extensions": { "type": "text" },
+      "type": { "type": "text" },
+      "collection": { "type": "text" },
+      "geometry": {
+        "type": "geo_shape"
       },
-      "data": {
+      "bbox" : {
+        "type": "double"
+      },
+      "properties" : {
+        "type": "nested",
+        "properties" : {
+          "count": { "type": "double" },
+          "time": { "type": "date" }
+        }
+      },
+      "links": {
         "type": "nested",
         "properties": {
-          "time": {
-            "type": "date",
-            "format": "yyyy-MM-dd"
-          },
-          "location": {
-            "type": "geo_shape"
-          },
-          "depth": {
-            "type": "float"
-          },
-          "count": {
-            "type": "integer"
+          "link" : {
+            "type": "nested",
+            "properties": {
+              "href": { "type": "text" },
+              "rel": { "type": "text" },
+              "type": { "type": "text" },
+              "title": { "type": "text" },
+              "description": { "type": "text" }
+            }
           }
         }
       }

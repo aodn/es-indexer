@@ -20,6 +20,7 @@ import org.locationtech.jts.simplify.DouglasPeuckerSimplifier;
 import org.opengis.feature.simple.SimpleFeature;
 
 import java.io.*;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.util.*;
 import java.util.function.BiFunction;
@@ -107,10 +108,10 @@ public class GeometryUtils {
      * @param lng - lng
      * @param lat - lat
      * @param depth - depth
-     * @return
+     * @return - The map that represent the geoJson
      */
-    public static Map<?,?> createGeoJson(double lng, double lat, double depth) {
-        Point point = factory.createPoint(new Coordinate(lng, lat));
+    public static Map<?,?> createGeoJson(BigDecimal lng, BigDecimal lat, BigDecimal depth) {
+        Point point = factory.createPoint(new Coordinate(lng.doubleValue(), lat.doubleValue()));
 
         try (StringWriter writer = new StringWriter()) {
             geometryJson.write(point, writer);
@@ -141,7 +142,7 @@ public class GeometryUtils {
     }
     /**
      * @param polygons - Assume to be EPSG:4326, as GeoJson always use this encoding.
-     * @return
+     * @return - Map that represent the geojson
      */
     protected static Map<?,?> createGeoJson(List<List<Geometry>> polygons) {
 
@@ -375,7 +376,7 @@ public class GeometryUtils {
      * too many polygon created plus this is not what the metadata provides. Also, it may create non-collinear
      * or self-intersecting polygon.
      * @param rawInput - The parsed XML block that contains the spatial extents area
-     * @return
+     * @return - Map that represent rawInput
      */
     public static Map<?, ?> createGeometryFrom(List<List<AbstractEXGeographicExtentType>> rawInput, Integer gridSize) {
         // The return polygon is in EPSG:4326, so we can call createGeoJson directly

@@ -3,11 +3,14 @@ package au.org.aodn.esindexer.service;
 import au.org.aodn.esindexer.controller.IndexerController;
 import au.org.aodn.esindexer.model.MockServer;
 import au.org.aodn.esindexer.model.TemporalExtent;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.TestMethodOrder;
+import co.elastic.clients.elasticsearch.core.search.Hit;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.json.JSONException;
+import org.junit.jupiter.api.*;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
@@ -30,16 +33,25 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class DataAccessServiceIT {
 
+    @Value("${elasticsearch.dataset_index.name}")
+    protected String INDEX_NAME;
+
     @Autowired
     protected MockServer mockServer;
 
     @Autowired
     protected IndexerController controller;
 
+    @Autowired
+    protected IndexerMetadataService indexerService;
+
+    @Autowired
+    protected ElasticSearchIndexService elasticSearchIndexService;
+
     protected ObjectMapper objectMapper = new ObjectMapper();
 
     @Test
-    public void verifyConversion1() throws IOException {
+    public void verifyConversion1() throws IOException, JSONException {
         try {
             // This set the time range of the mock data range.
             TemporalExtent temporalExtent = TemporalExtent.builder()
@@ -71,6 +83,18 @@ public class DataAccessServiceIT {
                     .andRespond(withSuccess("[]", MediaType.APPLICATION_JSON));
 
             ResponseEntity<?> v = controller.indexDatasetByUUID("35234913-aa3c-48ec-b9a4-77f822f66ef8");
+
+            Assertions.assertInstanceOf(List.class, v.getBody());
+
+            // Insert value correctly
+            Assertions.assertTrue(v.getBody().toString().contains("\"errors\":false"), "Return result OK");
+            Assertions.assertEquals(747L, elasticSearchIndexService.getDocumentsCount(INDEX_NAME), "Doc count correct");
+
+            Hit<ObjectNode> hit = indexerService.getDocumentByUUID("35234913-aa3c-48ec-b9a4-77f822f66ef8|2024-02|170.33|-33.87|530.00", INDEX_NAME);
+
+            String stac1= readResourceFile("classpath:canned/dataservice/35234913-aa3c-48ec-b9a4-77f822f66ef8/StacItem1.json");
+            Assertions.assertNotNull(hit.source(), "Source not null");
+            JSONAssert.assertEquals(stac1, hit.source().toString(), JSONCompareMode.STRICT);
         }
         finally {
             mockServer.getServer().reset();

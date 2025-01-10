@@ -96,6 +96,10 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
     }
 
     public Hit<ObjectNode> getDocumentByUUID(String uuid) throws IOException {
+        return getDocumentByUUID(uuid, indexName);
+    }
+
+    public Hit<ObjectNode> getDocumentByUUID(String uuid, String indexName) throws IOException {
         try {
             SearchResponse<ObjectNode> response = portalElasticsearchClient
                     .search(s -> s

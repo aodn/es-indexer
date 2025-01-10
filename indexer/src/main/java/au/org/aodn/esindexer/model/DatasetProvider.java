@@ -38,7 +38,7 @@ public class DatasetProvider {
             public List<StacItemModel> next() {
                 // please keep it for a while since it benefits the performance optimisation
                 StopWatch timer = new StopWatch();
-                timer.start("Data querying");
+                timer.start(String.format("Data querying for %s %s", currentYearMonth.getYear(), currentYearMonth.getMonth()));
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }

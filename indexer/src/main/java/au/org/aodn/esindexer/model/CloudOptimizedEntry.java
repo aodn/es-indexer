@@ -3,6 +3,7 @@ package au.org.aodn.esindexer.model;
 import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
@@ -20,6 +21,8 @@ import java.util.Optional;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CloudOptimizedEntry {
 
+    static final BigDecimal MIN = new BigDecimal(Double.MIN_VALUE);
+
     @JsonIgnore
     protected DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
@@ -27,13 +30,13 @@ public class CloudOptimizedEntry {
     protected Temporal time;
 
     @JsonIgnore
-    protected Double longitude;
+    protected BigDecimal longitude;
 
     @JsonIgnore
-    protected Double latitude;
+    protected BigDecimal latitude;
 
     @JsonIgnore
-    protected Double depth;
+    protected BigDecimal depth;
 
     @JsonIgnore
     public ZonedDateTime getZonedDateTime() {
@@ -42,17 +45,17 @@ public class CloudOptimizedEntry {
 
     @JsonProperty("DEPTH")
     public void setDepth(Double v) {
-        this.depth = v;
+        this.depth = new BigDecimal(v);
     }
 
     @JsonProperty("LONGITUDE")
     public void setLongitude(Double v) {
-        this.longitude = v;
+        this.longitude = new BigDecimal(v);
     }
 
     @JsonProperty("LATITUDE")
     public void setLatitude(Double v) {
-        this.latitude = v;
+        this.latitude = new BigDecimal(v);
     }
 
     @JsonProperty("TIME")
@@ -85,21 +88,21 @@ public class CloudOptimizedEntry {
         else if (obj instanceof CloudOptimizedEntry that) {
             int compareLong = Optional
                     .ofNullable(that.getLongitude())
-                    .orElse(Double.NEGATIVE_INFINITY)
+                    .orElse(MIN)
                     .compareTo(Optional.ofNullable(getLongitude())
-                            .orElse(Double.NEGATIVE_INFINITY));
+                            .orElse(MIN));
 
             int compareLat = Optional
                     .ofNullable(that.getLatitude())
-                    .orElse(Double.NEGATIVE_INFINITY)
+                    .orElse(MIN)
                     .compareTo(Optional.ofNullable(getLatitude())
-                            .orElse(Double.NEGATIVE_INFINITY));
+                            .orElse(MIN));
 
             int compareDepth = Optional
                     .ofNullable(that.getDepth())
-                    .orElse(Double.NEGATIVE_INFINITY)
+                    .orElse(MIN)
                     .compareTo(Optional.ofNullable(getDepth())
-                            .orElse(Double.NEGATIVE_INFINITY));
+                            .orElse(MIN));
 
             boolean compareTime = Objects.equals(that.getTime(), getTime());
 

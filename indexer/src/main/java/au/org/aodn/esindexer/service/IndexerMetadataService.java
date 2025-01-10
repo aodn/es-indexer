@@ -18,6 +18,7 @@ public interface IndexerMetadataService extends IndexService {
     ResponseEntity<String> deleteDocumentByUUID(String uuid) throws IOException;
     List<BulkResponse> indexAllMetadataRecordsFromGeoNetwork(String beginWithUuid, boolean confirm, Callback callback) throws IOException;
     Hit<ObjectNode> getDocumentByUUID(String uuid) throws IOException;
+    Hit<ObjectNode> getDocumentByUUID(String uuid, String indexName) throws IOException;
     boolean isMetadataPublished(String uuid);
     boolean isGeoNetworkInstanceReinstalled(long portalIndexDocumentsCount);
 }
