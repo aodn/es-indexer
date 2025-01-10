@@ -102,6 +102,44 @@ public class GeometryUtils {
         }
     }
     /**
+     * Although GeoJson point support 3D, however our target Elastic Search do not, so we need to use point2D plus
+     * a properties call depth.
+     * @param lng - lng
+     * @param lat - lat
+     * @param depth - depth
+     * @return
+     */
+    public static Map<?,?> createGeoJson(double lng, double lat, double depth) {
+        Point point = factory.createPoint(new Coordinate(lng, lat));
+
+        try (StringWriter writer = new StringWriter()) {
+            geometryJson.write(point, writer);
+
+            Map<?, ?> values = objectMapper.readValue(writer.toString(), HashMap.class);
+
+            if(values == null)  {
+                logger.warn("Convert geometry to JSON result in null, {}", writer.toString());
+            }
+            else {
+                logger.debug("Created geometry {}", values);
+            }
+
+            Map<String, Object> feature = new HashMap<>();
+            Map<String, Object> properties = new HashMap<>();
+
+            properties.put("depth", depth);
+
+            feature.put("type", "Feature");
+            feature.put("properties", properties);
+            feature.put("geometry", values);
+
+            return feature;
+        }
+        catch(Exception e) {
+            return null;
+        }
+    }
+    /**
      * @param polygons - Assume to be EPSG:4326, as GeoJson always use this encoding.
      * @return
      */

@@ -110,7 +110,12 @@ public abstract class IndexServiceImpl implements IndexService {
         }
 
         Optional<BulkResponse> flush() throws IOException {
-            return Optional.of(reduceResponse(proxyImpl.executeBulk(bulkRequest, mapper, callback)));
+            if(total != 0) {
+                return Optional.of(reduceResponse(proxyImpl.executeBulk(bulkRequest, mapper, callback)));
+            }
+            else {
+                return Optional.empty();
+            }
         }
     }
 

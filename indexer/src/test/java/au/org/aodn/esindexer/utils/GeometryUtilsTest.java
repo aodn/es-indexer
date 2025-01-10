@@ -2,6 +2,7 @@ package au.org.aodn.esindexer.utils;
 
 import au.org.aodn.metadata.iso19115_3_2018.MDMetadataType;
 import jakarta.xml.bind.JAXBException;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.locationtech.jts.geom.*;
@@ -10,6 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import static au.org.aodn.esindexer.BaseTestClass.readResourceFile;
@@ -44,8 +46,8 @@ public class GeometryUtilsTest {
 
         List<List<Geometry>> l = Objects.requireNonNull(withLand);
 
-        assertEquals(l.size(),1, "Land have 1 polygon array");
-        assertEquals(l.get(0).size(),8, "Size 8 with land");
+        assertEquals(1, l.size(), "Land have 1 polygon array");
+        assertEquals(8, l.get(0).size(), "Size 8 with land");
 
         Geometry le = l.get(0).get(0);
         Coordinate[] coors = le.getCoordinates();
@@ -70,7 +72,7 @@ public class GeometryUtilsTest {
 
         List<List<Geometry>> nl = Objects.requireNonNull(noLand);
 
-        assertEquals(nl.size(),1, "No Land have 1 polygon array");
+        assertEquals(1, nl.size(), "No Land have 1 polygon array");
         assertEquals(11, nl.get(0).size(), "Size 11 with land");
 
         Geometry nle = nl.get(0).get(0).getEnvelope();
@@ -114,7 +116,7 @@ public class GeometryUtilsTest {
 
         List<List<Geometry>> nl = Objects.requireNonNull(noLand);
 
-        assertEquals(nl.size(),1, "No Land have 1 polygon array");
+        assertEquals(1, nl.size(), "No Land have 1 polygon array");
         assertEquals(16, nl.get(0).size(), "Size 16 with land");
 
         Geometry nle = nl.get(0).get(0).getEnvelope();
@@ -135,5 +137,26 @@ public class GeometryUtilsTest {
 
         assertEquals(118.0, ncoors[4].getX(), 0.00);
         assertEquals(-36.0, ncoors[4].getY(), 0.00);
+    }
+
+    @Test
+    public void verifyCreateJsonPoint() {
+        Map<?,?> item = GeometryUtils.createGeoJson(1.2, 2.2, 3.0);
+
+        Assertions.assertNotNull(item);
+        Assertions.assertEquals("Feature", item.get("type"));
+        Assertions.assertInstanceOf(Map.class, item.get("geometry"));
+
+        Map<?, ?> geometry = (Map<?,?>)item.get("geometry");
+        Assertions.assertInstanceOf(List.class, geometry.get("coordinates"));
+
+        Assertions.assertInstanceOf(List.class, geometry.get("coordinates"));
+        List<?> coors = (List<?>)geometry.get("coordinates");
+        Assertions.assertEquals(1.2, coors.get(0));
+        Assertions.assertEquals(2.2, coors.get(1));
+
+        Assertions.assertInstanceOf(Map.class, item.get("properties"));
+        Map<?, ?> properties = (Map<?,?>)item.get("properties");
+        Assertions.assertEquals(3.0, properties.get("depth"));
     }
 }

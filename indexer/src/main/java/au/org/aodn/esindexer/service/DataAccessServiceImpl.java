@@ -1,8 +1,11 @@
 package au.org.aodn.esindexer.service;
 
 import au.org.aodn.esindexer.exception.MetadataNotFoundException;
-import au.org.aodn.esindexer.model.Datum;
+import au.org.aodn.esindexer.model.CloudOptimizedEntry;
+import au.org.aodn.esindexer.model.CloudOptimizedEntryReducePrecision;
 import au.org.aodn.esindexer.model.TemporalExtent;
+import au.org.aodn.esindexer.utils.GeometryUtils;
+import au.org.aodn.stac.model.StacItemModel;
 import lombok.Getter;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
@@ -11,10 +14,11 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Getter
 public class DataAccessServiceImpl implements DataAccessService {
@@ -28,7 +32,7 @@ public class DataAccessServiceImpl implements DataAccessService {
     }
 
     @Override
-    public List<Datum> getIndexingDatasetBy(String uuid, LocalDate startDate, LocalDate endDate) {
+    public List<StacItemModel> getIndexingDatasetBy(String uuid, LocalDate startDate, LocalDate endDate) {
 
         // currently, we force to get data in the same year to simplify the logic
         if (startDate.getYear() != endDate.getYear()) {
@@ -48,7 +52,7 @@ public class DataAccessServiceImpl implements DataAccessService {
                     .buildAndExpand(uuid)
                     .toUriString();
 
-            ResponseEntity<List<Datum>> responseEntity = restTemplate.exchange(
+            ResponseEntity<List<CloudOptimizedEntryReducePrecision>> responseEntity = restTemplate.exchange(
                     url,
                     HttpMethod.GET,
                     request,
@@ -58,7 +62,7 @@ public class DataAccessServiceImpl implements DataAccessService {
 
             if (responseEntity.getStatusCode().is2xxSuccessful()) {
                 if (responseEntity.getBody() != null) {
-                    return aggregateData(responseEntity.getBody());
+                    return toStacItemModel(uuid, aggregateData(responseEntity.getBody()));
                 }
             }
             throw new RuntimeException("Unable to retrieve dataset with UUID: " + uuid );
@@ -104,17 +108,41 @@ public class DataAccessServiceImpl implements DataAccessService {
      * @param data the data to summarize
      * @return the summarized data
      */
-    protected List<Datum> aggregateData(List<Datum> data) {
-        var aggregatedData = new ArrayList<Datum>();
-        for (var datum: data) {
-            if (aggregatedData.contains(datum)) {
-                var existingDatum = aggregatedData.get(aggregatedData.indexOf(datum));
-                existingDatum.incrementCount();
-            } else {
-                aggregatedData.add(datum);
-            }
-        }
-        return aggregatedData;
+    protected Map<? extends CloudOptimizedEntry, Long> aggregateData(List<? extends CloudOptimizedEntry> data) {
+        return data.parallelStream()
+                .collect(Collectors.groupingBy(
+                        d -> d,
+                        Collectors.counting()
+                ));
+    }
+    /**
+     * Group and count the entries based on user object equals/hashcode
+     * @param uuid - The parent uuid that associate with input
+     * @param data - The aggregated data
+     * @return
+     */
+    protected List<StacItemModel> toStacItemModel(String uuid, Map<? extends CloudOptimizedEntry, Long> data) {
+        return data.entrySet().parallelStream()
+                .filter(d -> d.getKey().getLongitude() != null && d.getKey().getLatitude() != null)
+                .map(d ->
+                    StacItemModel.builder()
+                            .collection(uuid) // collection point to the uuid of parent
+                            .uuid(String
+                                    .join("|",
+                                            uuid,
+                                            d.getKey().getTime().toString(),
+                                            d.getKey().getLongitude().toString(),
+                                            d.getKey().getLatitude().toString(),
+                                            d.getKey().getDepth().toString()
+                                    )
+                            )
+                            .geometry(GeometryUtils.createGeoJson(d.getKey().getLongitude(), d.getKey().getLatitude(), d.getKey().getDepth()))
+                            .properties(Map.of(
+                                    "count", d.getValue(),
+                                    "time", d.getKey().getZonedDateTime().format(DateTimeFormatter.ISO_ZONED_DATE_TIME)))
+                            .build()
+                )
+                .toList();
     }
 
     protected String getDataAccessEndpoint() {

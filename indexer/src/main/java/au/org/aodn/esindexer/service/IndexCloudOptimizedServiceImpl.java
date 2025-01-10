@@ -1,7 +1,7 @@
 package au.org.aodn.esindexer.service;
 
-import au.org.aodn.esindexer.model.DatasetEsEntry;
 import au.org.aodn.esindexer.model.DatasetProvider;
+import au.org.aodn.stac.model.StacItemModel;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch.core.BulkResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -46,28 +46,30 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
         this.dataAccessService = dataAccessService;
     }
     /**
-     *
-     * @param uuid
-     * @param startDate
-     * @param endDate
-     * @return
+     * Index the cloud optimized data
+     * @param uuid - The UUID of data you want to index
+     * @param startDate - The start range to index
+     * @param endDate - THe end range to index
+     * @return - The index result
      */
     @Override
     public List<BulkResponse> indexCloudOptimizedData(String uuid, LocalDate startDate, LocalDate endDate) {
 
         List<BulkResponse> responses = new ArrayList<>();
 
-        Iterable<DatasetEsEntry> dataset = new DatasetProvider(uuid, startDate, endDate, dataAccessService).getIterator();
-        BulkRequestProcessor<DatasetEsEntry> bulkRequestProcessor = new BulkRequestProcessor<>(
+        Iterable<List<StacItemModel>> dataset = new DatasetProvider(uuid, startDate, endDate, dataAccessService).getIterator();
+        BulkRequestProcessor<StacItemModel> bulkRequestProcessor = new BulkRequestProcessor<>(
                 indexName, (item) -> Optional.empty(),self, null
         );
 
         try {
-            for (DatasetEsEntry entry : dataset) {
-                if (entry != null) {
-                    log.info("add dataset into b with UUID: {} and yearMonth: {}", entry.uuid(), entry.yearMonth());
-                    bulkRequestProcessor.processItem(entry.uuid(), entry)
-                            .ifPresent(responses::add);
+            for (List<StacItemModel> entries : dataset) {
+                if (entries != null) {
+                    for(StacItemModel entry: entries) {
+                        log.debug("add dataset into b with UUID: {} and props: {}", entry.getUuid(), entry.getProperties());
+                        bulkRequestProcessor.processItem(entry.getUuid(), entry)
+                                .ifPresent(responses::add);
+                    }
                 }
             }
             bulkRequestProcessor
