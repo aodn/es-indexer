@@ -162,6 +162,6 @@ public class GeometryUtilsTest {
 
         Assertions.assertInstanceOf(Map.class, item.get("properties"));
         Map<?, ?> properties = (Map<?,?>)item.get("properties");
-        Assertions.assertEquals(3.0, properties.get("depth"));
+        Assertions.assertEquals(BigDecimal.valueOf(3.0), properties.get("depth"));
     }
 }
