@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.time.temporal.Temporal;
 import java.util.Objects;
 import java.util.Optional;
@@ -24,7 +25,10 @@ public class CloudOptimizedEntry {
     static final BigDecimal MIN = new BigDecimal(Double.MIN_VALUE);
 
     @JsonIgnore
-    protected DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    protected DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+    @JsonIgnore
+    protected DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     @JsonIgnore
     protected Temporal time;
@@ -43,24 +47,33 @@ public class CloudOptimizedEntry {
         return ((LocalDateTime)this.time).atZone(ZoneOffset.UTC);
     }
 
-    @JsonProperty("DEPTH")
+    @JsonProperty("depth")
+    @JsonAlias("DEPTH")
     public void setDepth(Double v) {
         this.depth = new BigDecimal(v);
     }
 
-    @JsonProperty("LONGITUDE")
+    @JsonProperty("longitude")
+    @JsonAlias("LONGITUDE")
     public void setLongitude(Double v) {
         this.longitude = new BigDecimal(v);
     }
 
-    @JsonProperty("LATITUDE")
+    @JsonProperty("latitude")
+    @JsonAlias("LATITUDE")
     public void setLatitude(Double v) {
         this.latitude = new BigDecimal(v);
     }
 
-    @JsonProperty("TIME")
+    @JsonProperty("time")
+    @JsonAlias("TIME")
     public void setTime(String time) {
-        this.time = LocalDateTime.parse(time, DATE_FORMATTER);
+        try {
+            this.time = LocalDateTime.parse(time, DATETIME_FORMATTER);
+        }
+        catch(DateTimeParseException pe) {
+            this.time = LocalDateTime.parse(time, DATE_FORMATTER);
+        }
     }
     /**
      * Must use function as child class may override functions

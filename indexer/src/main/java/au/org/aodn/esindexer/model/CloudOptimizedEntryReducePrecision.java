@@ -2,10 +2,8 @@ package au.org.aodn.esindexer.model;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.time.LocalDateTime;
-import java.time.YearMonth;
-import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
+import java.time.*;
+import java.time.format.DateTimeParseException;
 
 /**
  * This class modified the time entry and consider the Year and Month only, and reduce precision it is used
@@ -15,8 +13,14 @@ public class CloudOptimizedEntryReducePrecision extends CloudOptimizedEntry {
 
     @Override
     public void setTime(String time) {
-        LocalDateTime l = LocalDateTime.parse(time, DATE_FORMATTER);
-        this.time = YearMonth.of(l.getYear(), l.getMonth());
+        try {
+            LocalDateTime l = LocalDateTime.parse(time, DATETIME_FORMATTER);
+            this.time = YearMonth.of(l.getYear(), l.getMonth());
+        }
+        catch(DateTimeParseException pe) {
+            LocalDate l = LocalDate.parse(time, DATE_FORMATTER);
+            this.time = YearMonth.of(l.getYear(), l.getMonth());
+        }
     }
 
     @Override

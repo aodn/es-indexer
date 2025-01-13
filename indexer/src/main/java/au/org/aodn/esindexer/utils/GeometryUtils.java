@@ -121,9 +121,6 @@ public class GeometryUtils {
             if(values == null)  {
                 logger.warn("Convert geometry to JSON result in null, {}", writer.toString());
             }
-            else {
-                logger.debug("Created geometry {}", values);
-            }
 
             Map<String, Object> feature = new HashMap<>();
             Map<String, Object> properties = new HashMap<>();
