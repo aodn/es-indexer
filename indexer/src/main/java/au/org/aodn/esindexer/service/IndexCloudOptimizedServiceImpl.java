@@ -77,6 +77,7 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
                     .ifPresent(responses::add);
 
             log.info("Finished execute bulk indexing records to index: {}", indexName);
+            callback.onComplete(responses);
         }
         catch (Exception e) {
             log.error("Failed", e);

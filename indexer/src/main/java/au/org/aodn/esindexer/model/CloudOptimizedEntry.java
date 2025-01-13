@@ -48,25 +48,21 @@ public class CloudOptimizedEntry {
     }
 
     @JsonProperty("depth")
-    @JsonAlias("DEPTH")
     public void setDepth(Double v) {
         this.depth = new BigDecimal(v);
     }
 
     @JsonProperty("longitude")
-    @JsonAlias("LONGITUDE")
     public void setLongitude(Double v) {
         this.longitude = new BigDecimal(v);
     }
 
     @JsonProperty("latitude")
-    @JsonAlias("LATITUDE")
     public void setLatitude(Double v) {
         this.latitude = new BigDecimal(v);
     }
 
     @JsonProperty("time")
-    @JsonAlias("TIME")
     public void setTime(String time) {
         try {
             this.time = LocalDateTime.parse(time, DATETIME_FORMATTER);

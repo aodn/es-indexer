@@ -1,10 +1,7 @@
 package au.org.aodn.esindexer.configuration;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -12,13 +9,13 @@ import org.springframework.context.annotation.Configuration;
 public class ObjectMapperConfig {
     @Bean("indexerObjectMapper")
     public static ObjectMapper objectMapper() {
-        ObjectMapper objectMapper = new ObjectMapper();
-
-        // Enable pretty printing for JSON output
-        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-
-        // Ignore unknown properties during deserialization
-        objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+        ObjectMapper objectMapper = JsonMapper.builder()
+                .enable(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES)
+                // Enable pretty printing for JSON output
+                .enable(SerializationFeature.INDENT_OUTPUT)
+                // Ignore unknown properties during deserialization
+                .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+                .build();
 
         // Use a specific date format for serialization and deserialization (if needed)
         // objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd"));

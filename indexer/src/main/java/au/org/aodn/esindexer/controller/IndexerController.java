@@ -128,14 +128,19 @@ public class IndexerController {
         final IndexService.Callback callback = createCallback(emitter);
 
         new Thread(() -> {
-            List<TemporalExtent> temporalExtents = dataAccessService.getTemporalExtentOf(uuid);
-            if(!temporalExtents.isEmpty()) {
-                // Only first block works from dataservice api
-                LocalDate startDate = temporalExtents.get(0).getLocalStartDate();
-                LocalDate endDate = temporalExtents.get(0).getLocalEndDate();
-                log.info("Indexing dataset with UUID: {} from {} to {}", uuid, startDate, endDate);
+            try {
+                List<TemporalExtent> temporalExtents = dataAccessService.getTemporalExtentOf(uuid);
+                if (!temporalExtents.isEmpty()) {
+                    // Only first block works from dataservice api
+                    LocalDate startDate = temporalExtents.get(0).getLocalStartDate();
+                    LocalDate endDate = temporalExtents.get(0).getLocalEndDate();
+                    log.info("Indexing dataset with UUID: {} from {} to {}", uuid, startDate, endDate);
 
-                indexCloudOptimizedData.indexCloudOptimizedData(uuid, startDate, endDate, callback);
+                    indexCloudOptimizedData.indexCloudOptimizedData(uuid, startDate, endDate, callback);
+                }
+            }
+            finally {
+                emitter.complete();
             }
         }).start();
 

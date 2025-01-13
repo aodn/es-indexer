@@ -20,6 +20,8 @@ import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 import static au.org.aodn.esindexer.BaseTestClass.readResourceFile;
 import static org.springframework.test.web.client.ExpectedCount.once;
@@ -33,7 +35,7 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class DataAccessServiceIT {
 
-    @Value("${elasticsearch.dataset_index.name}")
+    @Value("${elasticsearch.cloud_optimized_index.name}")
     protected String INDEX_NAME;
 
     @Autowired
@@ -51,7 +53,7 @@ public class DataAccessServiceIT {
     protected ObjectMapper objectMapper = new ObjectMapper();
 
     @Test
-    public void verifyConversion1() throws IOException, JSONException {
+    public void verifyConversion1() throws IOException, JSONException, InterruptedException {
         try {
             // This set the time range of the mock data range.
             TemporalExtent temporalExtent = TemporalExtent.builder()
@@ -83,6 +85,9 @@ public class DataAccessServiceIT {
                     .andRespond(withSuccess("[]", MediaType.APPLICATION_JSON));
 
             SseEmitter emitter = controller.indexDatasetByUUID("35234913-aa3c-48ec-b9a4-77f822f66ef8");
+
+            CountDownLatch latch = new CountDownLatch(1);
+            latch.await(5, TimeUnit.SECONDS);
 
             // Insert value correctly
             Assertions.assertEquals(747L, elasticSearchIndexService.getDocumentsCount(INDEX_NAME), "Doc count correct");
