@@ -34,7 +34,7 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
 
     @Autowired
     public IndexCloudOptimizedServiceImpl(
-            @Value("${elasticsearch.dataset_index.name}") String indexName,
+            @Value("${elasticsearch.cloud_optimized_index.name}") String indexName,
             @Qualifier("portalElasticsearchClient") ElasticsearchClient elasticsearchClient,
             ObjectMapper indexerObjectMapper,
             DataAccessService dataAccessService) {
