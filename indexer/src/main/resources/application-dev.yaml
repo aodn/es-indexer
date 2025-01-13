@@ -19,9 +19,6 @@ geonetwork:
       index: "records"
       endpoint: /geonetwork/srv/api/search
 
-dataaccess:
-  host: http://localhost:5000
-
 logging:
   level:
     au.org.aodn.indexer: DEBUG

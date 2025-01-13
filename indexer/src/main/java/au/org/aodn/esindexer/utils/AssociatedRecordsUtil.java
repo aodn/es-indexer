@@ -1,9 +1,9 @@
 package au.org.aodn.esindexer.utils;
 
-import au.org.aodn.esindexer.model.MediaType;
 import au.org.aodn.esindexer.model.RelationType;
 import au.org.aodn.stac.model.LinkModel;
 import au.org.aodn.stac.util.JsonUtil;
+import org.springframework.http.MediaType;
 
 import java.util.*;
 
@@ -55,7 +55,7 @@ public class AssociatedRecordsUtil {
                     .href(href)
                     .rel(relationType.getValue())
                     .title(JsonUtil.toJsonString(titleWithAbstract))
-                    .type(MediaType.APPLICATION_JSON.getValue())
+                    .type(MediaType.APPLICATION_JSON.toString())
                     .build();
         }).orElse(null);
     }

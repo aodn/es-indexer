@@ -20,6 +20,7 @@ import org.locationtech.jts.simplify.DouglasPeuckerSimplifier;
 import org.opengis.feature.simple.SimpleFeature;
 
 import java.io.*;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.util.*;
 import java.util.function.BiFunction;
@@ -102,8 +103,43 @@ public class GeometryUtils {
         }
     }
     /**
+     * Although GeoJson point support 3D, however our target Elastic Search do not, so we need to use point2D plus
+     * a properties call depth.
+     * @param lng - lng
+     * @param lat - lat
+     * @param depth - depth
+     * @return - The map that represent the geoJson
+     */
+    public static Map<?,?> createGeoJson(BigDecimal lng, BigDecimal lat, BigDecimal depth) {
+        Point point = factory.createPoint(new Coordinate(lng.doubleValue(), lat.doubleValue()));
+
+        try (StringWriter writer = new StringWriter()) {
+            geometryJson.write(point, writer);
+
+            Map<?, ?> values = objectMapper.readValue(writer.toString(), HashMap.class);
+
+            if(values == null)  {
+                logger.warn("Convert geometry to JSON result in null, {}", writer.toString());
+            }
+
+            Map<String, Object> feature = new HashMap<>();
+            Map<String, Object> properties = new HashMap<>();
+
+            properties.put("depth", depth);
+
+            feature.put("type", "Feature");
+            feature.put("properties", properties);
+            feature.put("geometry", values);
+
+            return feature;
+        }
+        catch(Exception e) {
+            return null;
+        }
+    }
+    /**
      * @param polygons - Assume to be EPSG:4326, as GeoJson always use this encoding.
-     * @return
+     * @return - Map that represent the geojson
      */
     protected static Map<?,?> createGeoJson(List<List<Geometry>> polygons) {
 
@@ -337,7 +373,7 @@ public class GeometryUtils {
      * too many polygon created plus this is not what the metadata provides. Also, it may create non-collinear
      * or self-intersecting polygon.
      * @param rawInput - The parsed XML block that contains the spatial extents area
-     * @return
+     * @return - Map that represent rawInput
      */
     public static Map<?, ?> createGeometryFrom(List<List<AbstractEXGeographicExtentType>> rawInput, Integer gridSize) {
         // The return polygon is in EPSG:4326, so we can call createGeoJson directly

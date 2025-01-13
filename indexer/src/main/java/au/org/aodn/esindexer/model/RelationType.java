@@ -1,7 +1,7 @@
 package au.org.aodn.esindexer.model;
 
 import lombok.Getter;
-
+// TODO: Should use some lib provide value or move it to stacmodel folder
 @Getter
 public enum RelationType {
     SELF("self"),

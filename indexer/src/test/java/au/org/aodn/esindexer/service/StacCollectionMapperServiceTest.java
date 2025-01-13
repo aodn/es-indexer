@@ -32,7 +32,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Map;
-import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 
@@ -64,9 +63,6 @@ public class StacCollectionMapperServiceTest {
     protected VocabService vocabsService;
 
     @MockBean
-    protected DataAccessService dataAccessService;
-
-    @MockBean
     protected RankingService rankingService;
 
     @MockBean
@@ -77,7 +73,7 @@ public class StacCollectionMapperServiceTest {
 
     protected AtomicReference<IndexRequest<JsonData>> lastRequest = new AtomicReference<>();
 
-    protected IndexerServiceImpl indexerService;
+    protected IndexerMetadataServiceImpl indexerService;
 
     @BeforeAll
     public static void preSetup() {
@@ -111,9 +107,8 @@ public class StacCollectionMapperServiceTest {
 
     @BeforeEach
     public void createIndexerService() throws IOException {
-        indexerService = new IndexerServiceImpl(
+        indexerService = new IndexerMetadataServiceImpl(
                 "any-works",
-                "any-works-dataset",
                 "shingle_analyser",
                 objectMapper,
                 jaxbUtils,
@@ -123,7 +118,6 @@ public class StacCollectionMapperServiceTest {
                 elasticSearchIndexService,
                 service,
                 vocabsService,
-                dataAccessService,
                 gcmdKeywordUtils
         );
         indexerService = spy(indexerService);
@@ -222,7 +216,7 @@ public class StacCollectionMapperServiceTest {
     }
 
     @Test
-    public void verifySummaryGeoCorrect1() throws IOException, JAXBException, JSONException {
+    public void verifySummaryGeoCorrect1() throws IOException, JSONException {
         // We only index one record, the
         String xml = readResourceFile("classpath:canned/sample9.xml");
         String expected = readResourceFile("classpath:canned/sample9_stac.json");
@@ -285,9 +279,7 @@ public class StacCollectionMapperServiceTest {
 
         verify(expected);
     }
-    /**
-     * @throws IOException
-     */
+
     @Test
     public void verifyAbstractCIParty1() throws IOException, JSONException {
         String xml = readResourceFile("classpath:canned/sample12.xml");

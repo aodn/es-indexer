@@ -1,4 +1,4 @@
-package au.org.aodn.esindexer.model;
+package au.org.aodn.metadata.geonetwork;
 
 import lombok.Getter;
 

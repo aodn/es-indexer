@@ -40,8 +40,8 @@ elasticsearch:
     name: portal_records
   vocabs_index:
     name: vocabs_index
-  dataset_index:
-    name: dataset_index
+  cloud_optimized_index:
+    name: es-coindexer-dev
   analyser:
     tokens:
       name: shingle_analyser
@@ -52,6 +52,10 @@ geonetwork:
     api:
       index: "records"
       endpoint: /geonetwork/srv/api/search
+
+dataaccess:
+  host: http://localhost:5000
+  baseUrl: "/api/v1/das/"
 
 springdoc:
   api-docs:

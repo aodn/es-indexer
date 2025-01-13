@@ -1,21 +1,24 @@
 package au.org.aodn.esindexer.model;
 
 import au.org.aodn.esindexer.service.DataAccessService;
+import au.org.aodn.stac.model.StacItemModel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.StopWatch;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
 public class DatasetProvider {
 
-    private final String uuid;
-    private YearMonth currentYearMonth;
-    private final YearMonth endYearMonth;
-    private final DataAccessService dataAccessService;
+    protected Logger log = LoggerFactory.getLogger(DatasetProvider.class);
+    protected final String uuid;
+    protected YearMonth currentYearMonth;
+    protected final YearMonth endYearMonth;
+    protected final DataAccessService dataAccessService;
 
     public DatasetProvider(String uuid, LocalDate startDate, LocalDate endDate, DataAccessService dataAccessService) {
         this.uuid = uuid;
@@ -24,7 +27,7 @@ public class DatasetProvider {
         this.endYearMonth = YearMonth.from(endDate);
     }
 
-    public Iterable<DatasetEsEntry> getIterator() {
+    public Iterable<List<StacItemModel>> getIterator() {
         return () -> new Iterator<>() {
             @Override
             public boolean hasNext() {
@@ -32,27 +35,27 @@ public class DatasetProvider {
             }
 
             @Override
-            public DatasetEsEntry next() {
+            public List<StacItemModel> next() {
                 // please keep it for a while since it benefits the performance optimisation
                 StopWatch timer = new StopWatch();
-                timer.start("Data querying");
+                timer.start(String.format("Data querying for %s %s", currentYearMonth.getYear(), currentYearMonth.getMonth()));
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
 
-                List<Datum> data = Arrays.stream(dataAccessService.getIndexingDatasetBy(
+                List<StacItemModel> data = dataAccessService.getIndexingDatasetBy(
                         uuid,
                         LocalDate.of(currentYearMonth.getYear(), currentYearMonth.getMonthValue(), 1),
                         LocalDate.of(currentYearMonth.getYear(), currentYearMonth.getMonthValue(), currentYearMonth.lengthOfMonth())
-                )).toList();
+                );
                 currentYearMonth = currentYearMonth.plusMonths(1);
                 if (data.isEmpty()) {
                     return null;
                 }
 
                 timer.stop();
-                System.out.println(timer.prettyPrint());
-                return new DatasetEsEntry(uuid, currentYearMonth.toString(), data);
+                log.info(timer.prettyPrint());
+                return data;
             }
         };
     }
