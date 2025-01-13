@@ -6,6 +6,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface IndexCloudOptimizedService extends IndexService {
-    List<BulkResponse> indexCloudOptimizedData(String uuid, LocalDate startDate, LocalDate endDate);
+    List<BulkResponse> indexCloudOptimizedData(String uuid, LocalDate startDate, LocalDate endDate, IndexService.Callback callback);
 
 }

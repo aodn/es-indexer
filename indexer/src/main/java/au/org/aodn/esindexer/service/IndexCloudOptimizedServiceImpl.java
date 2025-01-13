@@ -53,13 +53,13 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
      * @return - The index result
      */
     @Override
-    public List<BulkResponse> indexCloudOptimizedData(String uuid, LocalDate startDate, LocalDate endDate) {
+    public List<BulkResponse> indexCloudOptimizedData(String uuid, LocalDate startDate, LocalDate endDate, IndexService.Callback callback) {
 
         List<BulkResponse> responses = new ArrayList<>();
 
         Iterable<List<StacItemModel>> dataset = new DatasetProvider(uuid, startDate, endDate, dataAccessService).getIterator();
         BulkRequestProcessor<StacItemModel> bulkRequestProcessor = new BulkRequestProcessor<>(
-                indexName, (item) -> Optional.empty(),self, null
+                indexName, (item) -> Optional.empty(),self, callback
         );
 
         try {

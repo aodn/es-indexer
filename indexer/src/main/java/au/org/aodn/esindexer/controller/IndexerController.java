@@ -1,10 +1,7 @@
 package au.org.aodn.esindexer.controller;
 
 import au.org.aodn.esindexer.model.TemporalExtent;
-import au.org.aodn.esindexer.service.DataAccessService;
-import au.org.aodn.esindexer.service.GeoNetworkService;
-import au.org.aodn.esindexer.service.IndexCloudOptimizedService;
-import au.org.aodn.esindexer.service.IndexerMetadataService;
+import au.org.aodn.esindexer.service.*;
 import co.elastic.clients.elasticsearch.core.BulkResponse;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.swagger.v3.oas.annotations.Operation;
@@ -22,7 +19,6 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
@@ -94,43 +90,7 @@ public class IndexerController {
             @RequestParam(value = "beginWithUuid", required=false) String beginWithUuid) {
 
         final SseEmitter emitter = new SseEmitter(0L); // 0L means no timeout;
-
-        IndexerMetadataService.Callback callback = new IndexerMetadataService.Callback() {
-            @Override
-            public void onProgress(Object update) {
-                try {
-                    log.info("Send update with content - {}", update.toString());
-                    SseEmitter.SseEventBuilder event = SseEmitter.event()
-                            .data(update.toString())
-                            .id(String.valueOf(update.hashCode()))
-                            .name("Indexer update event");
-
-                    emitter.send(event);
-                }
-                catch (IOException e) {
-                    // In case of fail, try close the stream, if it cannot be closed. (likely stream terminated
-                    // already, the load error out and we need to result from a particular uuid.
-                    emitter.completeWithError(e);
-                }
-            }
-
-            @Override
-            public void onComplete(Object result) {
-                try {
-                    log.info("Flush and complete update to client");
-                    SseEmitter.SseEventBuilder event = SseEmitter.event()
-                            .data(result.toString())
-                            .id(String.valueOf(result.hashCode()))
-                            .name("Indexer update event");
-
-                    emitter.send(event);
-                    emitter.complete();
-                }
-                catch (IOException e) {
-                    emitter.completeWithError(e);
-                }
-            }
-        };
+        final IndexService.Callback callback = createCallback(emitter);
 
         new Thread(() -> {
             try {
@@ -162,26 +122,60 @@ public class IndexerController {
 
     @PostMapping(path="/{uuid}/dataset", produces = "application/json")
     @Operation(security = {@SecurityRequirement(name = "X-API-Key") }, description = "Index a dataset by UUID")
-    public ResponseEntity<?> indexDatasetByUUID(@PathVariable("uuid") String uuid)  {
+    public SseEmitter indexDatasetByUUID(@PathVariable("uuid") String uuid)  {
 
-        List<TemporalExtent> temporalExtents = dataAccessService.getTemporalExtentOf(uuid);
-        if(!temporalExtents.isEmpty()) {
-            // Only first block works from dataservice api
-            LocalDate startDate = temporalExtents.get(0).getLocalStartDate();
-            LocalDate endDate = temporalExtents.get(0).getLocalEndDate();
-            log.info("Indexing dataset with UUID: {} from {} to {}", uuid, startDate, endDate);
+        final SseEmitter emitter = new SseEmitter(0L); // 0L means no timeout;
+        final IndexService.Callback callback = createCallback(emitter);
 
-            var responses = indexCloudOptimizedData.indexCloudOptimizedData(uuid, startDate, endDate);
+        new Thread(() -> {
+            List<TemporalExtent> temporalExtents = dataAccessService.getTemporalExtentOf(uuid);
+            if(!temporalExtents.isEmpty()) {
+                // Only first block works from dataservice api
+                LocalDate startDate = temporalExtents.get(0).getLocalStartDate();
+                LocalDate endDate = temporalExtents.get(0).getLocalEndDate();
+                log.info("Indexing dataset with UUID: {} from {} to {}", uuid, startDate, endDate);
 
-            List<String> result = new ArrayList<>();
-            for (BulkResponse response : responses) {
-                result.add(response.toString());
+                indexCloudOptimizedData.indexCloudOptimizedData(uuid, startDate, endDate, callback);
+            }
+        }).start();
+
+        return emitter;
+    }
+
+    protected IndexerMetadataService.Callback createCallback(SseEmitter emitter) {
+        return new IndexService.Callback() {
+            @Override
+            public void onProgress(Object update) {
+                try {
+                    log.info("Send update with content - {}", update.toString());
+                    SseEmitter.SseEventBuilder event = SseEmitter.event()
+                            .data(update.toString())
+                            .id(String.valueOf(update.hashCode()))
+                            .name("Indexer update event");
+
+                    emitter.send(event);
+                } catch (IOException e) {
+                    // In case of fail, try close the stream, if it cannot be closed. (likely stream terminated
+                    // already, the load error out and we need to result from a particular uuid.
+                    emitter.completeWithError(e);
+                }
             }
 
-            return ResponseEntity.ok(result);
-        }
-        else {
-            return ResponseEntity.notFound().build();
-        }
+            @Override
+            public void onComplete(Object result) {
+                try {
+                    log.info("Flush and complete update to client");
+                    SseEmitter.SseEventBuilder event = SseEmitter.event()
+                            .data(result.toString())
+                            .id(String.valueOf(result.hashCode()))
+                            .name("Indexer update event");
+
+                    emitter.send(event);
+                    emitter.complete();
+                } catch (IOException e) {
+                    emitter.completeWithError(e);
+                }
+            }
+        };
     }
 }

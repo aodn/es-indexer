@@ -14,8 +14,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
@@ -82,12 +82,9 @@ public class DataAccessServiceIT {
                     .andExpect(method(HttpMethod.GET))
                     .andRespond(withSuccess("[]", MediaType.APPLICATION_JSON));
 
-            ResponseEntity<?> v = controller.indexDatasetByUUID("35234913-aa3c-48ec-b9a4-77f822f66ef8");
-
-            Assertions.assertInstanceOf(List.class, v.getBody());
+            SseEmitter emitter = controller.indexDatasetByUUID("35234913-aa3c-48ec-b9a4-77f822f66ef8");
 
             // Insert value correctly
-            Assertions.assertTrue(v.getBody().toString().contains("\"errors\":false"), "Return result OK");
             Assertions.assertEquals(747L, elasticSearchIndexService.getDocumentsCount(INDEX_NAME), "Doc count correct");
 
             Hit<ObjectNode> hit = indexerService.getDocumentByUUID("35234913-aa3c-48ec-b9a4-77f822f66ef8|2024-02|170.33|-33.87|530.00", INDEX_NAME);
