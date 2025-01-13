@@ -49,6 +49,7 @@ public class DataAccessServiceImpl implements DataAccessService {
                     .queryParam("is_to_index", "true")
                     .queryParam("start_date", startDate)
                     .queryParam("end_date", endDate)
+                    .queryParam("columns", List.of("TIME","DEPTH","LONGITUDE","LATITUDE"))
                     .buildAndExpand(uuid)
                     .toUriString();
 
