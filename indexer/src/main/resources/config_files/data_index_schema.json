@@ -2,7 +2,12 @@
   "mappings": {
     "properties": {
       "id": {
-        "type": "keyword"
+        "type": "keyword",
+        "fields" : {
+          "keyword": {
+            "type": "keyword"
+          }
+        }
       },
       "stac_version": { "type": "text" },
       "stac_extensions": { "type": "text" },
