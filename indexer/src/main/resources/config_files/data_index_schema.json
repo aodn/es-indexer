@@ -19,6 +19,9 @@
       "properties" : {
         "type": "nested",
         "properties" : {
+          "lng": { "type": "double" },
+          "lat": { "type": "double" },
+          "depth": { "type": "double" },
           "count": { "type": "double" },
           "time": { "type": "date" }
         }

@@ -142,10 +142,9 @@ public class GeometryUtilsTest {
 
     @Test
     public void verifyCreateJsonPoint() {
-        Map<?,?> item = GeometryUtils.createGeoJson(
+        Map<?,?> item = GeometryUtils.createGeoShapeJson(
                 BigDecimal.valueOf(1.2),
-                BigDecimal.valueOf(2.2),
-                BigDecimal.valueOf(3.0)
+                BigDecimal.valueOf(2.2)
         );
 
         Assertions.assertNotNull(item);
@@ -159,9 +158,5 @@ public class GeometryUtilsTest {
         List<?> coors = (List<?>)geometry.get("coordinates");
         Assertions.assertEquals(1.2, coors.get(0));
         Assertions.assertEquals(2.2, coors.get(1));
-
-        Assertions.assertInstanceOf(Map.class, item.get("properties"));
-        Map<?, ?> properties = (Map<?,?>)item.get("properties");
-        Assertions.assertEquals(BigDecimal.valueOf(3.0), properties.get("depth"));
     }
 }

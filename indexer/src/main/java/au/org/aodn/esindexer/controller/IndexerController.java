@@ -120,9 +120,30 @@ public class IndexerController {
         return indexerMetadata.deleteDocumentByUUID(uuid);
     }
 
+    @PostMapping(path="/all-dataset", produces = "application/json")
+    @Operation(security = {@SecurityRequirement(name = "X-API-Key") }, description = "Index a dataset by UUID")
+    public SseEmitter indexAllCOData() {
+        final SseEmitter emitter = new SseEmitter(0L); // 0L means no timeout;
+        final IndexService.Callback callback = createCallback(emitter);
+
+        new Thread(() -> {
+            try {
+                indexCloudOptimizedData.indexAllCloudOptimizedData(callback);
+            }
+            catch (IOException ioe) {
+                emitter.completeWithError(ioe);
+            }
+            finally {
+                emitter.complete();
+            }
+        }).start();
+
+        return emitter;
+    }
+
     @PostMapping(path="/{uuid}/dataset", produces = "application/json")
     @Operation(security = {@SecurityRequirement(name = "X-API-Key") }, description = "Index a dataset by UUID")
-    public SseEmitter indexDatasetByUUID(@PathVariable("uuid") String uuid)  {
+    public SseEmitter indexCODataByUUID(@PathVariable("uuid") String uuid)  {
 
         final SseEmitter emitter = new SseEmitter(0L); // 0L means no timeout;
         final IndexService.Callback callback = createCallback(emitter);

@@ -107,10 +107,9 @@ public class GeometryUtils {
      * a properties call depth.
      * @param lng - lng
      * @param lat - lat
-     * @param depth - depth
      * @return - The map that represent the geoJson
      */
-    public static Map<?,?> createGeoJson(BigDecimal lng, BigDecimal lat, BigDecimal depth) {
+    public static Map<?,?> createGeoShapeJson(BigDecimal lng, BigDecimal lat) {
         Point point = factory.createPoint(new Coordinate(lng.doubleValue(), lat.doubleValue()));
 
         try (StringWriter writer = new StringWriter()) {
@@ -124,8 +123,6 @@ public class GeometryUtils {
 
             Map<String, Object> feature = new HashMap<>();
             Map<String, Object> properties = new HashMap<>();
-
-            properties.put("depth", depth);
 
             feature.put("type", "Feature");
             feature.put("properties", properties);
@@ -141,7 +138,7 @@ public class GeometryUtils {
      * @param polygons - Assume to be EPSG:4326, as GeoJson always use this encoding.
      * @return - Map that represent the geojson
      */
-    protected static Map<?,?> createGeoJson(List<List<Geometry>> polygons) {
+    protected static Map<?,?> createGeoShapeJson(List<List<Geometry>> polygons) {
 
         if(!polygons.isEmpty()) {
             // Convert list<list<polygon>> to list<polygon>
@@ -366,7 +363,7 @@ public class GeometryUtils {
      */
     public static Map<?, ?> createGeometryNoLandFrom(List<List<AbstractEXGeographicExtentType>> rawInput, Integer gridSize) {
         List<List<Geometry>> polygon = createGeometryWithoutLand(rawInput);
-        return (polygon != null && !polygon.isEmpty()) ? createGeoJson(polygon) : null;
+        return (polygon != null && !polygon.isEmpty()) ? createGeoShapeJson(polygon) : null;
     }
     /**
      * Create the spatial extents area given the XML info, it will not remove land area for speed reason. Otherwise,
@@ -383,6 +380,6 @@ public class GeometryUtils {
         // List<List<Geometry>> polygon = createGeometryWithoutLand(rawInput);
 
         List<List<Geometry>> polygon = GeometryBase.findPolygonsFrom(GeometryBase.COORDINATE_SYSTEM_CRS84, rawInput);
-        return (polygon != null && !polygon.isEmpty()) ? createGeoJson(polygon) : null;
+        return (polygon != null && !polygon.isEmpty()) ? createGeoShapeJson(polygon) : null;
     }
 }
