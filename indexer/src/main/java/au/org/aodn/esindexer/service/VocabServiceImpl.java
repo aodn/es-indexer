@@ -382,7 +382,7 @@ public class VocabServiceImpl implements VocabService {
         if (!parameterVocabs.isEmpty() && !platformVocabs.isEmpty() && !organisationVocabs.isEmpty()) {
             indexAllVocabs(parameterVocabs, platformVocabs, organisationVocabs);
         } else {
-            throw new IgnoreIndexingVocabsException("One or more vocab tasks returned empty results. Skipping indexing.");
+            throw new IgnoreIndexingVocabsException("One or more vocab lists are empty. Skipping indexing.");
         }
     }
 
