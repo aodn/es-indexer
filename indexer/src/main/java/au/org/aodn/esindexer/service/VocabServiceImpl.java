@@ -7,6 +7,7 @@ import au.org.aodn.ardcvocabs.model.VocabModel;
 import au.org.aodn.ardcvocabs.service.ArdcVocabService;
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.exception.DocumentNotFoundException;
+import au.org.aodn.esindexer.exception.IgnoreIndexingVocabsException;
 import au.org.aodn.stac.model.ConceptModel;
 import au.org.aodn.stac.model.ContactsModel;
 import au.org.aodn.stac.model.ThemesModel;
@@ -380,6 +381,8 @@ public class VocabServiceImpl implements VocabService {
 
         if (!parameterVocabs.isEmpty() && !platformVocabs.isEmpty() && !organisationVocabs.isEmpty()) {
             indexAllVocabs(parameterVocabs, platformVocabs, organisationVocabs);
+        } else {
+            throw new IgnoreIndexingVocabsException("One or more vocab tasks returned empty results. Skipping indexing.");
         }
     }
 
@@ -412,7 +415,7 @@ public class VocabServiceImpl implements VocabService {
 
                 // Validate allResults to ensure none of the lists are empty
                 if (allResults.stream().anyMatch(List::isEmpty)) {
-                    log.error("One or more vocab tasks returned empty results. Skipping indexing.");
+                    throw new IgnoreIndexingVocabsException("One or more vocab tasks returned empty results. Skipping indexing.");
                 } else {
                     // Call indexAllVocabs only after all tasks are completed and validated
                     log.info("Indexing fetched vocabs to {}", vocabsIndexName);

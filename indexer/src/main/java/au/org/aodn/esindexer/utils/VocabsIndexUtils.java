@@ -3,6 +3,7 @@ package au.org.aodn.esindexer.utils;
 import au.org.aodn.ardcvocabs.exception.ExtractingPathVersionsException;
 import au.org.aodn.ardcvocabs.model.PathName;
 import au.org.aodn.ardcvocabs.service.ArdcVocabService;
+import au.org.aodn.esindexer.exception.IgnoreIndexingVocabsException;
 import au.org.aodn.esindexer.service.VocabService;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
@@ -50,7 +51,7 @@ public class VocabsIndexUtils {
                 log.info("Initialising {} asynchronously", vocabsIndexName);
                 storedResolvedPathCollection = ardcVocabService.getResolvedPathCollection();
                 vocabService.populateVocabsDataAsync(storedResolvedPathCollection);
-            } catch (ExtractingPathVersionsException e) {
+            } catch (ExtractingPathVersionsException | IgnoreIndexingVocabsException e) {
                 log.warn("Skip initialising vocabs with error: {}", e.getMessage());
             }
         }
@@ -64,13 +65,16 @@ public class VocabsIndexUtils {
 
             if (!latestResolvedPathCollection.equals(storedResolvedPathCollection)) {
                 log.info("Detected changes in the resolved path collection, updating vocabularies...");
-                vocabService.populateVocabsData(latestResolvedPathCollection);
-                refreshCaches();
-
-                // update the head if there are new versions
-                synchronized (this) {
-                    storedResolvedPathCollection = latestResolvedPathCollection;
-                    log.info("Updated storedResolvedPathCollection with the latest data.");
+                try {
+                    vocabService.populateVocabsData(latestResolvedPathCollection);
+                    refreshCaches();
+                    // update the head if there are new versions
+                    synchronized (this) {
+                        storedResolvedPathCollection = latestResolvedPathCollection;
+                        log.info("Updated storedResolvedPathCollection with the latest data.");
+                    }
+                } catch (IgnoreIndexingVocabsException e) {
+                    log.warn("Skip refreshing vocabs: {}", e.getMessage());
                 }
             } else {
                 log.info("No changes detected in the resolved path collection. Skip updating caches");
