@@ -378,7 +378,9 @@ public class VocabServiceImpl implements VocabService {
         List<VocabModel> platformVocabs = ardcVocabService.getVocabTreeFromArdcByType(resolvedPathCollection.get(VocabApiPaths.PLATFORM_VOCAB.name()));
         List<VocabModel> organisationVocabs = ardcVocabService.getVocabTreeFromArdcByType(resolvedPathCollection.get(VocabApiPaths.ORGANISATION_VOCAB.name()));
 
-        indexAllVocabs(parameterVocabs, platformVocabs, organisationVocabs);
+        if (!parameterVocabs.isEmpty() && !platformVocabs.isEmpty() && !organisationVocabs.isEmpty()) {
+            indexAllVocabs(parameterVocabs, platformVocabs, organisationVocabs);
+        }
     }
 
     public void populateVocabsDataAsync(Map<String, Map<PathName, String>> resolvedPathCollection) {

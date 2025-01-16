@@ -1,5 +1,6 @@
 package au.org.aodn.esindexer.service;
 
+import au.org.aodn.ardcvocabs.model.PathName;
 import au.org.aodn.ardcvocabs.model.VocabApiPaths;
 import au.org.aodn.ardcvocabs.model.VocabModel;
 import au.org.aodn.ardcvocabs.service.ArdcVocabService;
@@ -11,6 +12,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONException;
 import org.junit.jupiter.api.*;
+import org.mockito.InjectMocks;
+import org.mockito.Spy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -24,6 +27,7 @@ import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest(
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
@@ -33,8 +37,9 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class VocabServiceIT extends BaseTestClass {
 
-    @Autowired
-    VocabService vocabService;
+    @InjectMocks
+    @Spy
+    VocabServiceImpl vocabService;
 
     @Autowired
     ArdcVocabService ardcVocabService;
@@ -113,6 +118,27 @@ public class VocabServiceIT extends BaseTestClass {
                 indexerObjectMapper.valueToTree(parameterVocabsFromArdc).toPrettyString(),
                 JSONCompareMode.STRICT
         );
+    }
+
+    @Test
+    void testSkipIndexingIfEmptyVocabs() throws IOException {
+        // Mock resolved path collection
+        Map<String, Map<PathName, String>> resolvedPathCollection = Map.of(
+                "PARAMETER_VOCAB", Map.of(),
+                "PLATFORM_VOCAB", Map.of(),
+                "ORGANISATION_VOCAB", Map.of()
+        );
+
+        // Mock service calls to return empty lists
+        when(ardcVocabService.getVocabTreeFromArdcByType(resolvedPathCollection.get("PARAMETER_VOCAB"))).thenReturn(Collections.emptyList());
+        when(ardcVocabService.getVocabTreeFromArdcByType(resolvedPathCollection.get("PLATFORM_VOCAB"))).thenReturn(Collections.emptyList());
+        when(ardcVocabService.getVocabTreeFromArdcByType(resolvedPathCollection.get("ORGANISATION_VOCAB"))).thenReturn(Collections.emptyList());
+
+        // Call the method
+        vocabService.populateVocabsData(resolvedPathCollection);
+
+        // Verify that indexAllVocabs is not called
+        verify(vocabService, never()).indexAllVocabs(anyList(), anyList(), anyList());
     }
 
     @Test
