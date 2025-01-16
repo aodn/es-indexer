@@ -1,5 +1,6 @@
 package au.org.aodn.esindexer.utils;
 
+import au.org.aodn.ardcvocabs.exception.ExtractingPathVersionsException;
 import au.org.aodn.ardcvocabs.model.PathName;
 import au.org.aodn.ardcvocabs.service.ArdcVocabService;
 import au.org.aodn.esindexer.service.VocabService;
@@ -45,9 +46,13 @@ public class VocabsIndexUtils {
     public void init() throws IOException {
         // Check if the initialiseVocabsIndex flag is enabled
         if (initialiseVocabsIndex) {
-            log.info("Initialising {} asynchronously", vocabsIndexName);
-            storedResolvedPathCollection = ardcVocabService.getResolvedPathCollection();
-            vocabService.populateVocabsDataAsync(storedResolvedPathCollection);
+            try {
+                log.info("Initialising {} asynchronously", vocabsIndexName);
+                storedResolvedPathCollection = ardcVocabService.getResolvedPathCollection();
+                vocabService.populateVocabsDataAsync(storedResolvedPathCollection);
+            } catch (ExtractingPathVersionsException e) {
+                log.warn("Skip initialising vocabs with error: {}", e.getMessage());
+            }
         }
     }
 

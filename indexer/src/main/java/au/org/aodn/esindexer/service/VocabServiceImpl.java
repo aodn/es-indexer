@@ -408,10 +408,14 @@ public class VocabServiceImpl implements VocabService {
                     }
                 }
 
-                // Call indexAllVocabs only after all tasks are completed
-                log.info("Indexing fetched vocabs to {}", vocabsIndexName);
-                indexAllVocabs(allResults.get(0), allResults.get(1), allResults.get(2));
-
+                // Validate allResults to ensure none of the lists are empty
+                if (allResults.stream().anyMatch(List::isEmpty)) {
+                    log.error("One or more vocab tasks returned empty results. Skipping indexing.");
+                } else {
+                    // Call indexAllVocabs only after all tasks are completed and validated
+                    log.info("Indexing fetched vocabs to {}", vocabsIndexName);
+                    indexAllVocabs(allResults.get(0), allResults.get(1), allResults.get(2));
+                }
             } catch (InterruptedException | IOException e) {
                 Thread.currentThread().interrupt();  // Restore interrupt status
                 log.error("Thread was interrupted while processing vocab tasks", e);

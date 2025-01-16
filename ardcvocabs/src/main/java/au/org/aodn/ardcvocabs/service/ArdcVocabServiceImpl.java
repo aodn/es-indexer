@@ -1,5 +1,7 @@
 package au.org.aodn.ardcvocabs.service;
 
+import au.org.aodn.ardcvocabs.exception.ExtractingPathVersionsException;
+import au.org.aodn.ardcvocabs.exception.InvalidVersionFormatException;
 import au.org.aodn.ardcvocabs.model.ArdcCurrentPaths;
 import au.org.aodn.ardcvocabs.model.PathName;
 import au.org.aodn.ardcvocabs.model.VocabApiPaths;
@@ -36,34 +38,47 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
 
     public Map<String, Map<PathName, String>> getResolvedPathCollection() {
         Map<String, Map<PathName, String>> resolvedPathCollection = new HashMap<>();
+
         for (ArdcCurrentPaths currentPath : ArdcCurrentPaths.values()) {
             try {
+                // Fetch current contents
                 ObjectNode categoryCurrentContent = fetchCurrentContents(currentPath.getCategoryCurrent());
                 ObjectNode vocabCurrentContent = fetchCurrentContents(currentPath.getVocabCurrent());
+                validateContentNotNull(currentPath, categoryCurrentContent, vocabCurrentContent);
 
-                if (categoryCurrentContent != null && vocabCurrentContent != null) {
-                    // Extract versions
-                    String categoryVersion = extractVersionFromCurrentContent(categoryCurrentContent);
-                    String vocabVersion = extractVersionFromCurrentContent(vocabCurrentContent);
+                // Extract versions
+                String categoryVersion = extractVersionFromCurrentContent(categoryCurrentContent);
+                String vocabVersion = extractVersionFromCurrentContent(vocabCurrentContent);
+                validateVersionsNotNull(currentPath, categoryVersion, vocabVersion);
 
-                    if (categoryVersion != null && vocabVersion != null) {
-                        log.info("Fetched ARDC category version for {}: {}", currentPath.name(), categoryVersion);
-                        log.info("Fetched ARDC vocab version for {}: {}", currentPath.name(), vocabVersion);
+                log.info("Fetched ARDC category version for {}: {}", currentPath.name(), categoryVersion);
+                log.info("Fetched ARDC vocab version for {}: {}", currentPath.name(), vocabVersion);
 
-                        // Build and store resolved paths
-                        Map<PathName, String> resolvedPaths = buildResolvedPaths(currentPath, categoryVersion, vocabVersion);
-                        resolvedPathCollection.put(currentPath.name(), resolvedPaths);
-                    } else {
-                        log.error("Failed to extract versions for {}", currentPath.name());
-                    }
-                } else {
-                    log.error("Failed to fetch HTML content for {}", currentPath.name());
-                }
+                // Build and store resolved paths
+                Map<PathName, String> resolvedPaths = buildResolvedPaths(currentPath, categoryVersion, vocabVersion);
+                resolvedPathCollection.put(currentPath.name(), resolvedPaths);
+
             } catch (Exception e) {
                 log.error("Error initialising versions for {}: {}", currentPath.name(), e.getMessage(), e);
+                throw new ExtractingPathVersionsException(String.format("Error initialising versions for %s: %s", currentPath.name(), e.getMessage()));
             }
         }
+
         return resolvedPathCollection;
+    }
+
+    private void validateContentNotNull(ArdcCurrentPaths currentPath, ObjectNode categoryContent, ObjectNode vocabContent) {
+        if (categoryContent == null || vocabContent == null) {
+            log.error("Failed to fetch HTML content for {}", currentPath.name());
+            throw new ExtractingPathVersionsException(String.format("Failed to fetch HTML content for %s", currentPath.name()));
+        }
+    }
+
+    private void validateVersionsNotNull(ArdcCurrentPaths currentPath, String categoryVersion, String vocabVersion) {
+        if (categoryVersion == null || vocabVersion == null) {
+            log.error("Version extraction returned null for {}", currentPath.name());
+            throw new ExtractingPathVersionsException(String.format("Version extraction returned null for %s", currentPath.name()));
+        }
     }
 
     private ObjectNode fetchCurrentContents(String url) {
@@ -90,7 +105,7 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
         return resolvedPaths;
     }
 
-    protected String extractVersionFromCurrentContent(ObjectNode currentContent) {
+    protected String extractVersionFromCurrentContent(ObjectNode currentContent) throws InvalidPropertiesFormatException {
         if (currentContent != null && !currentContent.isEmpty()) {
             JsonNode node = currentContent.get("result");
             if (!about.apply(node).isEmpty()) {
@@ -103,9 +118,9 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
                     return version;
                 } else {
                     log.warn("Version does not match the required format: {}", about.apply(node));
+                    throw new InvalidVersionFormatException(String.format("Version does not match the required format: %s", about.apply(node)));
                 }
             }
-
         } else {
             log.warn("Current content is empty or null.");
         }
