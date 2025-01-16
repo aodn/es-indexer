@@ -111,28 +111,7 @@ public class GeometryUtils {
      */
     public static Map<?,?> createGeoShapeJson(BigDecimal lng, BigDecimal lat) {
         Point point = factory.createPoint(new Coordinate(lng.doubleValue(), lat.doubleValue()));
-
-        try (StringWriter writer = new StringWriter()) {
-            geometryJson.write(point, writer);
-
-            Map<?, ?> values = objectMapper.readValue(writer.toString(), HashMap.class);
-
-            if(values == null)  {
-                logger.warn("Convert geometry to JSON result in null, {}", writer.toString());
-            }
-
-            Map<String, Object> feature = new HashMap<>();
-            Map<String, Object> properties = new HashMap<>();
-
-            feature.put("type", "Feature");
-            feature.put("properties", properties);
-            feature.put("geometry", values);
-
-            return feature;
-        }
-        catch(Exception e) {
-            return null;
-        }
+        return createGeoShapeJson(List.of(List.of(point)));
     }
     /**
      * @param polygons - Assume to be EPSG:4326, as GeoJson always use this encoding.
