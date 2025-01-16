@@ -13,6 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONException;
 import org.junit.jupiter.api.*;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Spy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -39,7 +40,13 @@ public class VocabServiceIT extends BaseTestClass {
 
     @InjectMocks
     @Spy
-    VocabServiceImpl vocabService;
+    VocabServiceImpl mockVocabService;
+
+    @Autowired
+    VocabService vocabService;
+
+    @Mock
+    ArdcVocabService mockArdcVocabService;
 
     @Autowired
     ArdcVocabService ardcVocabService;
@@ -130,15 +137,15 @@ public class VocabServiceIT extends BaseTestClass {
         );
 
         // Mock service calls to return empty lists
-        when(ardcVocabService.getVocabTreeFromArdcByType(resolvedPathCollection.get("PARAMETER_VOCAB"))).thenReturn(Collections.emptyList());
-        when(ardcVocabService.getVocabTreeFromArdcByType(resolvedPathCollection.get("PLATFORM_VOCAB"))).thenReturn(Collections.emptyList());
-        when(ardcVocabService.getVocabTreeFromArdcByType(resolvedPathCollection.get("ORGANISATION_VOCAB"))).thenReturn(Collections.emptyList());
+        when(mockArdcVocabService.getVocabTreeFromArdcByType(resolvedPathCollection.get("PARAMETER_VOCAB"))).thenReturn(Collections.emptyList());
+        when(mockArdcVocabService.getVocabTreeFromArdcByType(resolvedPathCollection.get("PLATFORM_VOCAB"))).thenReturn(Collections.emptyList());
+        when(mockArdcVocabService.getVocabTreeFromArdcByType(resolvedPathCollection.get("ORGANISATION_VOCAB"))).thenReturn(Collections.emptyList());
 
         // Call the method
-        vocabService.populateVocabsData(resolvedPathCollection);
+        mockVocabService.populateVocabsData(resolvedPathCollection);
 
         // Verify that indexAllVocabs is not called
-        verify(vocabService, never()).indexAllVocabs(anyList(), anyList(), anyList());
+        verify(mockVocabService, never()).indexAllVocabs(anyList(), anyList(), anyList());
     }
 
     @Test
