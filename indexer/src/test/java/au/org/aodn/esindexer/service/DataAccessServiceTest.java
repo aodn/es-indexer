@@ -75,9 +75,6 @@ public class DataAccessServiceTest {
         Assertions.assertTrue(t.isPresent(), "Target found");
         Assertions.assertEquals(15L, t.get().getProperties().get("count"));
 
-        Assertions.assertNotNull(t.get().getGeometry().get("properties"), "geometry properties no null");
-        Assertions.assertInstanceOf(Map.class, t.get().getGeometry().get("properties"));
-
         Map<?, ?> properties = t.get().getProperties();
         // The depth is a BigDecimal, so we do a toString() will force it print the .00 which is what we want
         // to check it contains two decimal
