@@ -141,7 +141,7 @@ public class DataAccessServiceImpl implements DataAccessService {
                             // this geometry is use for filtering
                             .geometry(GeometryUtils.createGeoShapeJson(d.getKey().getLongitude(), d.getKey().getLatitude()))
                             .properties(Map.of(
-                                    // centroid is of geo_point where you can do sort, the geo_shape in the geometry is used to do filtering or interaction operation
+                                    // Fields dup here is use for aggregation, you must have the geo_shape to do spatial search
                                     "depth", d.getKey().getDepth().doubleValue(),
                                     "lng", d.getKey().getLongitude().doubleValue(),
                                     "lat", d.getKey().getLatitude().doubleValue(),
