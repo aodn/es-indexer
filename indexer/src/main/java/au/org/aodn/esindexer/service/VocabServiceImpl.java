@@ -379,11 +379,11 @@ public class VocabServiceImpl implements VocabService {
         List<VocabModel> platformVocabs = ardcVocabService.getVocabTreeFromArdcByType(resolvedPathCollection.get(VocabApiPaths.PLATFORM_VOCAB.name()));
         List<VocabModel> organisationVocabs = ardcVocabService.getVocabTreeFromArdcByType(resolvedPathCollection.get(VocabApiPaths.ORGANISATION_VOCAB.name()));
 
-        if (!parameterVocabs.isEmpty() && !platformVocabs.isEmpty() && !organisationVocabs.isEmpty()) {
-            indexAllVocabs(parameterVocabs, platformVocabs, organisationVocabs);
-        } else {
+        if (parameterVocabs.isEmpty() || platformVocabs.isEmpty() || organisationVocabs.isEmpty()) {
             throw new IgnoreIndexingVocabsException("One or more vocab lists are empty. Skipping indexing.");
         }
+
+        indexAllVocabs(parameterVocabs, platformVocabs, organisationVocabs);
     }
 
     public void populateVocabsDataAsync(Map<String, Map<PathName, String>> resolvedPathCollection) {
@@ -416,11 +416,11 @@ public class VocabServiceImpl implements VocabService {
                 // Validate allResults to ensure none of the lists are empty
                 if (allResults.stream().anyMatch(List::isEmpty)) {
                     throw new IgnoreIndexingVocabsException("One or more vocab tasks returned empty results. Skipping indexing.");
-                } else {
-                    // Call indexAllVocabs only after all tasks are completed and validated
-                    log.info("Indexing fetched vocabs to {}", vocabsIndexName);
-                    indexAllVocabs(allResults.get(0), allResults.get(1), allResults.get(2));
                 }
+
+                // Call indexAllVocabs only after all tasks are completed and validated
+                log.info("Indexing fetched vocabs to {}", vocabsIndexName);
+                indexAllVocabs(allResults.get(0), allResults.get(1), allResults.get(2));
             } catch (InterruptedException | IOException e) {
                 Thread.currentThread().interrupt();  // Restore interrupt status
                 log.error("Thread was interrupted while processing vocab tasks", e);
