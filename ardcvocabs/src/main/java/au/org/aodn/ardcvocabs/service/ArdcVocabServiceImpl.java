@@ -69,14 +69,12 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
 
     private void validateContentNotNull(ArdcCurrentPaths currentPath, ObjectNode categoryContent, ObjectNode vocabContent) {
         if (categoryContent == null || vocabContent == null) {
-            log.error("Failed to fetch HTML content for {}", currentPath.name());
             throw new ExtractingPathVersionsException(String.format("Failed to fetch HTML content for %s", currentPath.name()));
         }
     }
 
     private void validateVersionsNotNull(ArdcCurrentPaths currentPath, String categoryVersion, String vocabVersion) {
         if (categoryVersion == null || vocabVersion == null) {
-            log.error("Version extraction returned null for {}", currentPath.name());
             throw new ExtractingPathVersionsException(String.format("Version extraction returned null for %s", currentPath.name()));
         }
     }
@@ -117,7 +115,6 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
                     log.info("Valid Version Found: {}", version);
                     return version;
                 } else {
-                    log.warn("Version does not match the required format: {}", about.apply(node));
                     throw new InvalidVersionFormatException(String.format("Version does not match the required format: %s", about.apply(node)));
                 }
             }

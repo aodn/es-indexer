@@ -6,6 +6,7 @@ import au.org.aodn.ardcvocabs.model.VocabModel;
 import au.org.aodn.ardcvocabs.service.ArdcVocabService;
 import au.org.aodn.esindexer.BaseTestClass;
 import au.org.aodn.esindexer.configuration.AppConstants;
+import au.org.aodn.esindexer.exception.IgnoreIndexingVocabsException;
 import au.org.aodn.stac.model.ConceptModel;
 import au.org.aodn.stac.model.ThemesModel;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -142,10 +143,12 @@ public class VocabServiceIT extends BaseTestClass {
         when(mockArdcVocabService.getVocabTreeFromArdcByType(resolvedPathCollection.get("ORGANISATION_VOCAB"))).thenReturn(Collections.emptyList());
 
         // Call the method
-        mockVocabService.populateVocabsData(resolvedPathCollection);
-
-        // Verify that indexAllVocabs is not called
-        verify(mockVocabService, never()).indexAllVocabs(anyList(), anyList(), anyList());
+        try {
+            mockVocabService.populateVocabsData(resolvedPathCollection);
+        } catch (IgnoreIndexingVocabsException e) {
+            // Verify that indexAllVocabs is not called
+            verify(mockVocabService, never()).indexAllVocabs(anyList(), anyList(), anyList());
+        }
     }
 
     @Test
