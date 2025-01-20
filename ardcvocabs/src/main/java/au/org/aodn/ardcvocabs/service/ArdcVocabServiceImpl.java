@@ -2,10 +2,7 @@ package au.org.aodn.ardcvocabs.service;
 
 import au.org.aodn.ardcvocabs.exception.ExtractingPathVersionsException;
 import au.org.aodn.ardcvocabs.exception.InvalidVersionFormatException;
-import au.org.aodn.ardcvocabs.model.ArdcCurrentPaths;
-import au.org.aodn.ardcvocabs.model.PathName;
-import au.org.aodn.ardcvocabs.model.VocabApiPaths;
-import au.org.aodn.ardcvocabs.model.VocabModel;
+import au.org.aodn.ardcvocabs.model.*;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.TextNode;
@@ -64,6 +61,12 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
             }
         }
 
+        return resolvedPathCollection;
+    }
+
+    public Map<String, Map<PathName, String>> getResolvedPathCollection(CustomVersionsDto customVersionsDto) {
+        Map<String, Map<PathName, String>> resolvedPathCollection = new HashMap<>();
+        // TODO: implement here
         return resolvedPathCollection;
     }
 

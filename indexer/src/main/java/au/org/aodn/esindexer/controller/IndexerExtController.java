@@ -1,5 +1,6 @@
 package au.org.aodn.esindexer.controller;
 
+import au.org.aodn.ardcvocabs.model.CustomVersionsDto;
 import au.org.aodn.ardcvocabs.model.VocabApiPaths;
 import au.org.aodn.ardcvocabs.model.VocabModel;
 import au.org.aodn.ardcvocabs.service.ArdcVocabService;
@@ -9,6 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +20,8 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+
+import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequestMapping(value = "/api/v1/indexer/ext/")
@@ -62,33 +66,33 @@ public class IndexerExtController {
     }
 
     // this endpoint for debugging/development purposes
-    @GetMapping(path="/ardc/parameter/vocabs")
+    @PostMapping(path="/ardc/parameter/vocabs", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Get parameter vocabs from ARDC directly")
-    public ResponseEntity<List<JsonNode>> getParameterVocabsFromArdc() {
+    public ResponseEntity<List<JsonNode>> getParameterVocabsFromArdc(@RequestBody CustomVersionsDto customVersionsDto) {
         List<VocabModel> vocabs = ardcVocabService.getVocabTreeFromArdcByType(ardcVocabService.getResolvedPathCollection().get(VocabApiPaths.PARAMETER_VOCAB.name()));
         return ResponseEntity.ok(indexerObjectMapper.valueToTree(vocabs));
     }
 
     // this endpoint for debugging/development purposes
-    @GetMapping(path="/ardc/platform/vocabs")
+    @PostMapping(path="/ardc/platform/vocabs", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Get platform vocabs from ARDC directly")
-    public ResponseEntity<List<JsonNode>> getPlatformVocabsFromArdc() {
+    public ResponseEntity<List<JsonNode>> getPlatformVocabsFromArdc(@RequestBody CustomVersionsDto customVersionsDto) {
         List<VocabModel> vocabs = ardcVocabService.getVocabTreeFromArdcByType(ardcVocabService.getResolvedPathCollection().get(VocabApiPaths.PLATFORM_VOCAB.name()));
         return ResponseEntity.ok(indexerObjectMapper.valueToTree(vocabs));
     }
 
     // this endpoint for debugging/development purposes
-    @GetMapping(path="/ardc/organisation/vocabs")
+    @PostMapping(path="/ardc/organisation/vocabs", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Get organisation vocabs from ARDC directly")
-    public ResponseEntity<List<JsonNode>> getOrganisationVocabsFromArdc() {
+    public ResponseEntity<List<JsonNode>> getOrganisationVocabsFromArdc(@RequestBody CustomVersionsDto customVersionsDto) {
         List<VocabModel> vocabs = ardcVocabService.getVocabTreeFromArdcByType(ardcVocabService.getResolvedPathCollection().get(VocabApiPaths.ORGANISATION_VOCAB.name()));
         return ResponseEntity.ok(indexerObjectMapper.valueToTree(vocabs));
     }
 
     // this endpoint for debugging/development purposes
-    @GetMapping(path="/vocabs/populate")
+    @PostMapping(path="/vocabs/populate", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Populate data to the vocabs index")
-    public ResponseEntity<String> populateDataToVocabsIndex() throws IOException, ExecutionException, InterruptedException {
+    public ResponseEntity<String> populateDataToVocabsIndex(@Valid @RequestBody CustomVersionsDto customVersionsDto) throws IOException {
         // clear existing caches
         vocabService.clearParameterVocabCache();
         vocabService.clearPlatformVocabCache();
