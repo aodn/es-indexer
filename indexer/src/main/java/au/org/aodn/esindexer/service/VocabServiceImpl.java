@@ -7,6 +7,7 @@ import au.org.aodn.ardcvocabs.model.VocabModel;
 import au.org.aodn.ardcvocabs.service.ArdcVocabService;
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.exception.DocumentNotFoundException;
+import au.org.aodn.esindexer.exception.IgnoreIndexingVocabsException;
 import au.org.aodn.stac.model.ConceptModel;
 import au.org.aodn.stac.model.ContactsModel;
 import au.org.aodn.stac.model.ThemesModel;
@@ -378,6 +379,10 @@ public class VocabServiceImpl implements VocabService {
         List<VocabModel> platformVocabs = ardcVocabService.getVocabTreeFromArdcByType(resolvedPathCollection.get(VocabApiPaths.PLATFORM_VOCAB.name()));
         List<VocabModel> organisationVocabs = ardcVocabService.getVocabTreeFromArdcByType(resolvedPathCollection.get(VocabApiPaths.ORGANISATION_VOCAB.name()));
 
+        if (parameterVocabs.isEmpty() || platformVocabs.isEmpty() || organisationVocabs.isEmpty()) {
+            throw new IgnoreIndexingVocabsException("One or more vocab lists are empty. Skipping indexing.");
+        }
+
         indexAllVocabs(parameterVocabs, platformVocabs, organisationVocabs);
     }
 
@@ -408,10 +413,14 @@ public class VocabServiceImpl implements VocabService {
                     }
                 }
 
-                // Call indexAllVocabs only after all tasks are completed
+                // Validate allResults to ensure none of the lists are empty
+                if (allResults.stream().anyMatch(List::isEmpty)) {
+                    throw new IgnoreIndexingVocabsException("One or more vocab tasks returned empty results. Skipping indexing.");
+                }
+
+                // Call indexAllVocabs only after all tasks are completed and validated
                 log.info("Indexing fetched vocabs to {}", vocabsIndexName);
                 indexAllVocabs(allResults.get(0), allResults.get(1), allResults.get(2));
-
             } catch (InterruptedException | IOException e) {
                 Thread.currentThread().interrupt();  // Restore interrupt status
                 log.error("Thread was interrupted while processing vocab tasks", e);
