@@ -139,29 +139,25 @@ public class GeometryUtilsTest {
         assertEquals(118.0, ncoors[4].getX(), 0.00);
         assertEquals(-36.0, ncoors[4].getY(), 0.00);
     }
-
+    /**
+     * Given a point call this function return a GeometryCollection contain a single point
+     */
     @Test
     public void verifyCreateJsonPoint() {
-        Map<?,?> item = GeometryUtils.createGeoJson(
+        Map<?,?> item = GeometryUtils.createGeoShapeJson(
                 BigDecimal.valueOf(1.2),
-                BigDecimal.valueOf(2.2),
-                BigDecimal.valueOf(3.0)
+                BigDecimal.valueOf(2.2)
         );
 
         Assertions.assertNotNull(item);
-        Assertions.assertEquals("Feature", item.get("type"));
-        Assertions.assertInstanceOf(Map.class, item.get("geometry"));
+        Assertions.assertEquals("GeometryCollection", item.get("type"));
+        Assertions.assertInstanceOf(List.class, item.get("geometries"));
 
-        Map<?, ?> geometry = (Map<?,?>)item.get("geometry");
-        Assertions.assertInstanceOf(List.class, geometry.get("coordinates"));
+        List<Map<?,?>> geometries = (List<Map<?,?>>)item.get("geometries");
+        Assertions.assertInstanceOf(List.class, geometries.get(0).get("coordinates"));
 
-        Assertions.assertInstanceOf(List.class, geometry.get("coordinates"));
-        List<?> coors = (List<?>)geometry.get("coordinates");
+        List<?> coors = (List<?>)geometries.get(0).get("coordinates");
         Assertions.assertEquals(1.2, coors.get(0));
         Assertions.assertEquals(2.2, coors.get(1));
-
-        Assertions.assertInstanceOf(Map.class, item.get("properties"));
-        Map<?, ?> properties = (Map<?,?>)item.get("properties");
-        Assertions.assertEquals(BigDecimal.valueOf(3.0), properties.get("depth"));
     }
 }

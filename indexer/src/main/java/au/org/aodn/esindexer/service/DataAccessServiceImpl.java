@@ -137,10 +137,17 @@ public class DataAccessServiceImpl implements DataAccessService {
                                             d.getKey().getDepth().toString()
                                     )
                             )
-                            .geometry(GeometryUtils.createGeoJson(d.getKey().getLongitude(), d.getKey().getLatitude(), d.getKey().getDepth()))
+                            // The elastic query cannot sort by geo_shape or geo_point, so need to flatten value in properties
+                            // this geometry is use for filtering
+                            .geometry(GeometryUtils.createGeoShapeJson(d.getKey().getLongitude(), d.getKey().getLatitude()))
                             .properties(Map.of(
+                                    // Fields dup here is use for aggregation, you must have the geo_shape to do spatial search
+                                    "depth", d.getKey().getDepth().doubleValue(),
+                                    "lng", d.getKey().getLongitude().doubleValue(),
+                                    "lat", d.getKey().getLatitude().doubleValue(),
                                     "count", d.getValue(),
-                                    "time", d.getKey().getZonedDateTime().format(DateTimeFormatter.ISO_ZONED_DATE_TIME)))
+                                    "time", d.getKey().getZonedDateTime().format(DateTimeFormatter.ISO_ZONED_DATE_TIME))
+                            )
                             .build()
                 )
                 .toList();
