@@ -4,16 +4,14 @@ import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.model.DatasetProvider;
 import au.org.aodn.stac.model.StacItemModel;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
+import co.elastic.clients.elasticsearch._types.ElasticsearchException;
 import co.elastic.clients.elasticsearch.core.BulkResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
-import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -22,7 +20,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Slf4j
-@Service
 @Scope(proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements IndexCloudOptimizedService {
 
@@ -35,10 +32,9 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
     @Autowired
     protected IndexCloudOptimizedServiceImpl self;
 
-    @Autowired
     public IndexCloudOptimizedServiceImpl(
-            @Value("${elasticsearch.cloud_optimized_index.name}") String indexName,
-            @Qualifier("portalElasticsearchClient") ElasticsearchClient elasticsearchClient,
+            String indexName,
+            ElasticsearchClient elasticsearchClient,
             ObjectMapper indexerObjectMapper,
             DataAccessService dataAccessService,
             ElasticSearchIndexService elasticSearchIndexService) {
@@ -52,7 +48,19 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
     }
 
     @Override
-    public List<BulkResponse> indexAllCloudOptimizedData(IndexService.Callback callback) throws IOException {
+    public boolean hasIndex(String collectionId) {
+        try {
+            return elasticSearchIndexService.count(this.indexName, "collection", collectionId) > 0;
+        }
+        catch(IOException | ElasticsearchException exception) {
+            // ElasticsearchException when indexName do not exist, this happens in a partial config env
+            // but we still need to make sure indexing works as is, backward compatible
+            return false;
+        }
+    }
+
+    @Override
+    public List<BulkResponse> indexAllCloudOptimizedData(IndexService.Callback callback) {
         elasticSearchIndexService.createIndexFromMappingJSONFile(AppConstants.DATASET_INDEX_MAPPING_JSON_FILE, indexName);
         // TODO: Right now just clear schema, we need to query all UUID and iterate one by one
         return null;

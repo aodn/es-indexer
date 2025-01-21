@@ -5,19 +5,17 @@ import au.org.aodn.esindexer.exception.DeleteIndexException;
 import au.org.aodn.esindexer.exception.IndexNotFoundException;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.ElasticsearchException;
+import co.elastic.clients.elasticsearch.core.CountRequest;
+import co.elastic.clients.elasticsearch.core.CountResponse;
 import co.elastic.clients.elasticsearch.indices.CreateIndexRequest;
 import co.elastic.clients.elasticsearch.indices.CreateIndexResponse;
 import co.elastic.clients.transport.endpoints.BooleanResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.Objects;
 
 
 @Slf4j
@@ -40,7 +38,17 @@ public class ElasticSearchIndexService {
         }
     }
 
-    public void createIndexFromMappingJSONFile(String indexMappingFile, String indexName) throws IOException {
+    public Long count(String indexName, String field, String value) throws IOException, ElasticsearchException {
+        CountRequest request = CountRequest.of(r -> r
+                .index(indexName)
+                .query(q -> q.term(t -> t.field(field).value(value)))
+        );
+
+        CountResponse response = portalElasticsearchClient.count(request);
+        return  (response != null) ? response.count() : null;
+    }
+
+    public void createIndexFromMappingJSONFile(String indexMappingFile, String indexName) {
         // delete the existing index if found first
         this.deleteIndexStore(indexName);
 
@@ -48,7 +56,7 @@ public class ElasticSearchIndexService {
         log.info("Reading index schema definition from JSON file: {}", indexMappingFile);
 
         // https://www.baeldung.com/java-classpath-resource-cannot-be-opened#resources
-        try (InputStream inputStream = getClass().getResourceAsStream("/config_files/" + indexMappingFile);) {
+        try (InputStream inputStream = getClass().getResourceAsStream("/config_files/" + indexMappingFile)) {
             log.info("Creating index: {}", indexName);
             CreateIndexRequest req = CreateIndexRequest.of(b -> b
                     .index(indexName)

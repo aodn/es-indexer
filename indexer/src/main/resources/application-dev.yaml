@@ -22,8 +22,8 @@ geonetwork:
 logging:
   level:
     au.org.aodn.indexer: DEBUG
-    au.org.aodn.ardcvocabs: DEBUG
-    au.org.aodn.esindexer.utils: DEBUG
+    au.org.aodn.ardcvocabs: INFO
+    au.org.aodn.esindexer.utils: INFO
 
 management:
   endpoints:

@@ -68,6 +68,9 @@ public class StacCollectionMapperServiceTest {
     @MockBean
     protected GcmdKeywordUtils gcmdKeywordUtils;
 
+    @MockBean
+    protected IndexCloudOptimizedService indexCloudOptimizedService;
+
     @Autowired
     protected StacCollectionMapperService service;
 
@@ -143,7 +146,7 @@ public class StacCollectionMapperServiceTest {
             return response;
         })
                 .when(portalElasticsearchClient)
-                        .index(any(IndexRequest.class));
+                        .index((IndexRequest<?>)any(IndexRequest.class));
 
         doAnswer(ans -> {
             SearchResponse<ObjectNode> response = Mockito.mock();
@@ -168,6 +171,9 @@ public class StacCollectionMapperServiceTest {
 
         when(rankingService.evaluateCompleteness(any(StacCollectionModel.class)))
                 .thenReturn(1);
+
+        when(indexCloudOptimizedService.hasIndex(eq("35234913-aa3c-48ec-b9a4-77f822f66ef8")))
+                .thenReturn(true);
 
     }
 
@@ -421,6 +427,19 @@ public class StacCollectionMapperServiceTest {
     public void verifyNoJsonStringError() throws IOException, JSONException {
         String xml = readResourceFile("classpath:canned/sample18.xml");
         String expected = readResourceFile("classpath:canned/sample18_stac.json");
+        indexerService.indexMetadata(xml);
+
+        verify(expected);
+    }
+    /**
+     * Verify if cloud optimized data indexed, we will have the assets attribute.
+     * @throws IOException - Not expect to throw
+     * @throws JSONException - Not expect to throw
+     */
+    @Test
+    public void verifyHasIndex() throws IOException, JSONException {
+        String xml = readResourceFile("classpath:canned/dataservice/35234913-aa3c-48ec-b9a4-77f822f66ef8/sample.xml");
+        String expected = readResourceFile("classpath:canned/dataservice/35234913-aa3c-48ec-b9a4-77f822f66ef8/sample.json");
         indexerService.indexMetadata(xml);
 
         verify(expected);
