@@ -55,6 +55,7 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
         catch(IOException | ElasticsearchException exception) {
             // ElasticsearchException when indexName do not exist, this happens in a partial config env
             // but we still need to make sure indexing works as is, backward compatible
+            log.warn("Missing index for collectionId {} on index {}", collectionId, this.indexName);
             return false;
         }
     }
