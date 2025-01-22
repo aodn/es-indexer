@@ -52,6 +52,7 @@ public abstract class StacCollectionMapperService {
     @Mapping(target="license", source = "source", qualifiedByName = "mapLicense")
     @Mapping(target="providers", source = "source", qualifiedByName = "mapProviders")
     @Mapping(target="citation", source="source", qualifiedByName = "mapCitation")
+    @Mapping(target="assets", source = "source", qualifiedByName = "assets")
     @Mapping(target="summaries.status", source = "source", qualifiedByName = "mapSummaries.status")
     @Mapping(target="summaries.scope", source = "source", qualifiedByName = "mapSummaries.scope")
     @Mapping(target="summaries.credits", source = "source", qualifiedByName = "mapSummaries.credits")
@@ -74,6 +75,9 @@ public abstract class StacCollectionMapperService {
     @Autowired
     private GeoNetworkService geoNetworkService;
 
+    @Autowired
+    private IndexCloudOptimizedService indexCloudOptimizedService;
+
     @Named("mapUUID")
     String mapUUID(MDMetadataType source) {
         return CommonUtils.getUUID(source);
@@ -82,7 +86,7 @@ public abstract class StacCollectionMapperService {
      * According to the spec, the bbox must be an of length 2*n where n is number of dimension, so a 2D map, the
      * dimension is 4 and therefore it must be a box.
      *
-     * @param source
+     * @param source - The parsed XML
      * @return The list<BigDecimal> must be of size 4 due to 2D map.
      */
     @Named("mapExtentBbox")
@@ -207,7 +211,7 @@ public abstract class StacCollectionMapperService {
 
     /**
      * Custom mapping for description field, name convention is start with map then the field name
-     * @param source
+     * @param source - The parsed XML
      * @return
      */
     @Named("mapDescription")
@@ -404,7 +408,7 @@ public abstract class StacCollectionMapperService {
      *     <mri:credit>XXXXXX</mri:credit>
      *     <mri:credit>YYYYYY</mri:credit>
      * </mri:MD_DataIdentification>
-     * @param source
+     * @param source - The parsed XML
      * @return
      */
     @Named("mapSummaries.credits")
@@ -433,8 +437,8 @@ public abstract class StacCollectionMapperService {
     /**
      * TODO: Very simple logic here, if provider name contains IMOS
      *
-     * @param source
-     * @return
+     * @param source - The parsed XML
+     * @return - The dataset owner
      */
     @Named("mapSummaries.datasetProvider")
     String mapDatasetOwner(MDMetadataType source) {
@@ -524,7 +528,7 @@ public abstract class StacCollectionMapperService {
                                         return "";
                                     }
                                 }
-                                else if (titleString != null && titleString.getCharacterString().getValue() instanceof String value) {
+                                else if (titleString != null && titleString.getCharacterString().getValue() instanceof String) {
                                     return thesaurusNameType2.getAlternateTitle().stream().map(CharacterStringPropertyType::getCharacterString).map(JAXBElement::getValue).map(Object::toString).collect(Collectors.joining(", "));
                                 }
                                 else {
@@ -757,9 +761,9 @@ public abstract class StacCollectionMapperService {
                                                 providerModel.setName(organisationType2.getName() != null ? organisationType2.getName().getCharacterString().getValue().toString() : "");
 
                                                 organisationType2.getIndividual().forEach(individual -> individual.getCIIndividual().getContactInfo().forEach(contactInfo -> {
-                                                    contactInfo.getCIContact().getOnlineResource().forEach(onlineResource -> {
-                                                        providerModel.setUrl(onlineResource.getCIOnlineResource().getLinkage().getCharacterString().getValue().toString());
-                                                    });
+                                                    contactInfo.getCIContact().getOnlineResource().forEach(onlineResource ->
+                                                            providerModel.setUrl(onlineResource.getCIOnlineResource().getLinkage().getCharacterString().getValue().toString())
+                                                    );
                                                 }));
                                                 results.add(providerModel);
                                             }
@@ -957,26 +961,49 @@ public abstract class StacCollectionMapperService {
                 languageModel.setCode(langCode);
 
                 // all metadata records are in English anyway
-                switch (langCode) {
-                    case "eng" -> languageModel.setName("English");
-                    case "fra" -> languageModel.setName("French");
-                    default -> {
-                        logger.warn("Unable to find language for metadata record: {}, default to eng", CommonUtils.getUUID(source));
-                        languageModel.setCode("eng");
-                        languageModel.setName("English");
+                if(langCode != null) {
+                    switch (langCode) {
+                        case "eng" -> languageModel.setName("English");
+                        case "fra" -> languageModel.setName("French");
+                        default -> {
+                            logger.warn("Unable to find language for metadata record: {}, default to eng", CommonUtils.getUUID(source));
+                            languageModel.setCode("eng");
+                            languageModel.setName("English");
+                        }
                     }
                 }
-
                 results.add(languageModel);
             }
         }
 
         return results;
     }
+
+    @Named("assets")
+    protected Map<String, AssetModel> mapAssetsData(MDMetadataType source) {
+        String collectionId = CommonUtils.getUUID(source);
+        if(indexCloudOptimizedService.hasIndex(collectionId)) {
+            Map.Entry<String, AssetModel> entry = Map.entry(
+                    AssetModel.Role.SUMMARY.toString(),
+                    AssetModel.builder()
+                            .role(AssetModel.Role.SUMMARY)
+                            .type(MediaType.APPLICATION_JSON_VALUE)
+                            .href(String.format("/collections/%s/items/summary", collectionId))
+                            .title("Summary")
+                            .description("Summary of cloud optimized data points")
+                            .build()
+
+            );
+            return Map.ofEntries(entry);
+        }
+        else {
+            return null;
+        }
+    }
     /**
      * Special handle for MimeFileType object.
-     * @param onlineResource
-     * @return
+     * @param onlineResource - The parsed XML that contains the target object
+     * @return - The online resource
      */
     protected String getOnlineResourceName(CIOnlineResourceType2 onlineResource) {
         if(onlineResource.getName() != null && onlineResource.getName().getCharacterString() != null) {
