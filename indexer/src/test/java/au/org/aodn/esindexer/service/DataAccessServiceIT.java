@@ -15,7 +15,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
@@ -84,7 +83,7 @@ public class DataAccessServiceIT {
                     .andExpect(method(HttpMethod.GET))
                     .andRespond(withSuccess("[]", MediaType.APPLICATION_JSON));
 
-            SseEmitter emitter = controller.indexCODataByUUID("35234913-aa3c-48ec-b9a4-77f822f66ef8");
+            controller.indexCODataByUUID("35234913-aa3c-48ec-b9a4-77f822f66ef8");
 
             CountDownLatch latch = new CountDownLatch(1);
             latch.await(5, TimeUnit.SECONDS);

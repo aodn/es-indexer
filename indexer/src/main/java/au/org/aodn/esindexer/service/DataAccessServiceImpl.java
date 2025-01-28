@@ -18,6 +18,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Getter
@@ -29,6 +30,35 @@ public class DataAccessServiceImpl implements DataAccessService {
     public DataAccessServiceImpl(String serverUrl, String baseUrl, RestTemplate restTemplate) {
        this.accessEndPoint = serverUrl + baseUrl;
        this.restTemplate = restTemplate;
+    }
+
+    @Override
+    public Optional<String> getNotebookLink(String uuid) {
+        try {
+            HttpEntity<String> request = getRequestEntity(null, null);
+
+            Map<String, Object> params = new HashMap<>();
+            params.put("uuid", uuid);
+
+            String url = UriComponentsBuilder.fromHttpUrl(getDataAccessEndpoint() + "/data/{uuid}/notebook_url").toUriString();
+            ResponseEntity<String> responseEntity = restTemplate.exchange(
+                    url,
+                    HttpMethod.GET,
+                    request,
+                    new ParameterizedTypeReference<>() {},
+                    params
+            );
+
+            if (responseEntity.getStatusCode().is2xxSuccessful()) {
+                if (responseEntity.getBody() != null || !responseEntity.getBody().isEmpty()) {
+                    return Optional.of(responseEntity.getBody());
+                }
+            }
+            return Optional.empty();
+        }
+        catch(Exception e) {
+            return Optional.empty();
+        }
     }
 
     @Override

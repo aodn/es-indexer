@@ -2,6 +2,7 @@ package au.org.aodn.esindexer.service;
 
 import au.org.aodn.esindexer.BaseTestClass;
 import au.org.aodn.esindexer.configuration.GeoNetworkSearchTestConfig;
+import au.org.aodn.esindexer.model.MockServer;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch.core.search.Hit;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -15,12 +16,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpMethod;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+
+import static org.hamcrest.Matchers.containsString;
+import static org.springframework.test.web.client.ExpectedCount.manyTimes;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
+import static org.springframework.test.web.client.response.MockRestResponseCreators.withResourceNotFound;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
@@ -43,6 +51,9 @@ public class IndexerServiceIT extends BaseTestClass {
     @Autowired
     protected ElasticSearchIndexService elasticSearchIndexService;
 
+    @Autowired
+    protected MockServer mockServer;
+
     @Value("${elasticsearch.index.name}")
     protected String INDEX_NAME;
 
@@ -53,6 +64,10 @@ public class IndexerServiceIT extends BaseTestClass {
                 dockerComposeContainer.getServiceHost(GeoNetworkSearchTestConfig.GN_NAME, GeoNetworkSearchTestConfig.GN_PORT),
                 dockerComposeContainer.getServicePort(GeoNetworkSearchTestConfig.GN_NAME, GeoNetworkSearchTestConfig.GN_PORT))
         );
+        // Old test case do not have this link, so it is expect to be empty
+        mockServer.getServer().expect(manyTimes(), requestTo(containsString("/notebook_url")))
+                .andExpect(method(HttpMethod.GET))
+                .andRespond(withResourceNotFound());
     }
 
     @AfterEach

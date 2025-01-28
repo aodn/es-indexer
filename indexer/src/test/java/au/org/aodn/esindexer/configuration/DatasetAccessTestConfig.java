@@ -15,5 +15,4 @@ public class DatasetAccessTestConfig {
     public DataAccessServiceImpl createDataAccessService(MockServer serviceServer){
         return new DataAccessServiceImpl("http://localhost", "/api/v1/das/", serviceServer.getRestTemplate());
     }
-
 }
