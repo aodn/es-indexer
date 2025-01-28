@@ -32,6 +32,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 
@@ -70,6 +71,9 @@ public class StacCollectionMapperServiceTest {
 
     @MockBean
     protected IndexCloudOptimizedService indexCloudOptimizedService;
+
+    @MockBean
+    protected DataAccessService dataAccessService;
 
     @Autowired
     protected StacCollectionMapperService service;
@@ -340,6 +344,23 @@ public class StacCollectionMapperServiceTest {
     public void verifyCiRoleCodeNullWorks() throws IOException, JSONException {
         String xml = readResourceFile("classpath:canned/sample17.xml");
         String expected = readResourceFile("classpath:canned/sample17_stac.json");
+        indexerService.indexMetadata(xml);
+
+        verify(expected);
+    }
+    /**
+     * This test repeat some test with the exception that when calling the dataservice, it return something
+     * @throws IOException - Not expected
+     * @throws JSONException - Not expected
+     */
+    @Test
+    public void verifyNotebookLink() throws IOException, JSONException {
+        String xml = readResourceFile("classpath:canned/sample17.xml");
+        String expected = readResourceFile("classpath:canned/sample17_stac_notebook.json");
+
+        when(dataAccessService.getNotebookLink(eq("0bef875d-5f77-4b31-bd56-de73fafc2b2e")))
+                .thenReturn(Optional.of("https://nbviewer.org/github/aodn/aodn_cloud_optimised/blob/main/notebooks/autonomous_underwater_vehicle.ipynb"));
+
         indexerService.indexMetadata(xml);
 
         verify(expected);

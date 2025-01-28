@@ -73,10 +73,13 @@ public abstract class StacCollectionMapperService {
     private String timeZoneId;
 
     @Autowired
-    private GeoNetworkService geoNetworkService;
+    protected GeoNetworkService geoNetworkService;
 
     @Autowired
-    private IndexCloudOptimizedService indexCloudOptimizedService;
+    protected DataAccessService dataAccessService;
+
+    @Autowired
+    protected IndexCloudOptimizedService indexCloudOptimizedService;
 
     @Named("mapUUID")
     String mapUUID(MDMetadataType source) {
@@ -212,7 +215,7 @@ public abstract class StacCollectionMapperService {
     /**
      * Custom mapping for description field, name convention is start with map then the field name
      * @param source - The parsed XML
-     * @return
+     * @return The description
      */
     @Named("mapDescription")
     String mapDescription(MDMetadataType source) {
@@ -409,7 +412,7 @@ public abstract class StacCollectionMapperService {
      *     <mri:credit>YYYYYY</mri:credit>
      * </mri:MD_DataIdentification>
      * @param source - The parsed XML
-     * @return
+     * @return The title
      */
     @Named("mapSummaries.credits")
     List<String> mapSummariesCredits(MDMetadataType source) {
@@ -657,6 +660,11 @@ public abstract class StacCollectionMapperService {
         var associatedRecords = getAssociatedRecords(source);
         results.addAll(associatedRecords);
 
+        var notebook = getNotebookLink(source);
+        if (notebook != null) {
+            results.add(notebook);
+        }
+
         return results;
     }
 
@@ -694,7 +702,20 @@ public abstract class StacCollectionMapperService {
         return links;
     }
 
-    private LinkModel getLicenseGraphic(MDLegalConstraintsType legalConstraints) {
+    protected LinkModel getNotebookLink(MDMetadataType source) {
+        String uuid = CommonUtils.getUUID(source);
+
+        return dataAccessService.getNotebookLink(uuid)
+                .map(i -> LinkModel.builder()
+                        .href(i)
+                        .rel(RelationType.RELATED.getValue())
+                        .type(MediaType.APPLICATION_JSON_VALUE)
+                        .title("Python notebook example")
+                        .build())
+                .orElse(null);
+    }
+
+    protected LinkModel getLicenseGraphic(MDLegalConstraintsType legalConstraints) {
         var ciOnlineResource = safeGet(() -> {
             var onlineResource = legalConstraints.getGraphic().get(0)
                     .getMDBrowseGraphic().getLinkage().get(0)
@@ -715,7 +736,7 @@ public abstract class StacCollectionMapperService {
                 .build()).orElse(null);
     }
 
-    private LinkModel getLicenseUrl(MDLegalConstraintsType legalConstraints) {
+    protected LinkModel getLicenseUrl(MDLegalConstraintsType legalConstraints) {
         var references = safeGet(legalConstraints::getReference);
         if (references.isEmpty()) {
             return null;
@@ -855,8 +876,8 @@ public abstract class StacCollectionMapperService {
     /**
      * A sample of contact block will be like this, you can have individual block and organization block together
      *
-     * @param source
-     * @return
+     * @param source - Parsed XML
+     * @return - The Contract Model
      */
     @Named("mapContacts")
     List<ContactsModel> mapContacts(MDMetadataType source) {
