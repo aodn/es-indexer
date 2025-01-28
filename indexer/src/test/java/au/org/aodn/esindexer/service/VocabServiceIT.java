@@ -127,7 +127,10 @@ public class VocabServiceIT extends BaseTestClass {
                 JSONCompareMode.STRICT
         );
     }
-
+    /**
+     * Test to verify update skip if nothing return from source
+     * @throws IOException - Not expected
+     */
     @Test
     void testSkipIndexingIfEmptyVocabs() throws IOException {
         // Mock resolved path collection
