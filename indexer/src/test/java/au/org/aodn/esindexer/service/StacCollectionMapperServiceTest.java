@@ -32,6 +32,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 
@@ -67,6 +68,12 @@ public class StacCollectionMapperServiceTest {
 
     @MockBean
     protected GcmdKeywordUtils gcmdKeywordUtils;
+
+    @MockBean
+    protected IndexCloudOptimizedService indexCloudOptimizedService;
+
+    @MockBean
+    protected DataAccessService dataAccessService;
 
     @Autowired
     protected StacCollectionMapperService service;
@@ -143,7 +150,7 @@ public class StacCollectionMapperServiceTest {
             return response;
         })
                 .when(portalElasticsearchClient)
-                        .index(any(IndexRequest.class));
+                        .index((IndexRequest<?>)any(IndexRequest.class));
 
         doAnswer(ans -> {
             SearchResponse<ObjectNode> response = Mockito.mock();
@@ -168,6 +175,9 @@ public class StacCollectionMapperServiceTest {
 
         when(rankingService.evaluateCompleteness(any(StacCollectionModel.class)))
                 .thenReturn(1);
+
+        when(indexCloudOptimizedService.hasIndex(eq("35234913-aa3c-48ec-b9a4-77f822f66ef8")))
+                .thenReturn(true);
 
     }
 
@@ -339,6 +349,23 @@ public class StacCollectionMapperServiceTest {
         verify(expected);
     }
     /**
+     * This test repeat some test with the exception that when calling the dataservice, it return something
+     * @throws IOException - Not expected
+     * @throws JSONException - Not expected
+     */
+    @Test
+    public void verifyNotebookLink() throws IOException, JSONException {
+        String xml = readResourceFile("classpath:canned/sample17.xml");
+        String expected = readResourceFile("classpath:canned/sample17_stac_notebook.json");
+
+        when(dataAccessService.getNotebookLink(eq("0bef875d-5f77-4b31-bd56-de73fafc2b2e")))
+                .thenReturn(Optional.of("https://nbviewer.org/github/aodn/aodn_cloud_optimised/blob/main/notebooks/autonomous_underwater_vehicle.ipynb"));
+
+        indexerService.indexMetadata(xml);
+
+        verify(expected);
+    }
+    /**
      * Metadata have geometry which result in a point and not a polygon
      *
      * @throws IOException - Do not expect to throw
@@ -421,6 +448,19 @@ public class StacCollectionMapperServiceTest {
     public void verifyNoJsonStringError() throws IOException, JSONException {
         String xml = readResourceFile("classpath:canned/sample18.xml");
         String expected = readResourceFile("classpath:canned/sample18_stac.json");
+        indexerService.indexMetadata(xml);
+
+        verify(expected);
+    }
+    /**
+     * Verify if cloud optimized data indexed, we will have the assets attribute.
+     * @throws IOException - Not expect to throw
+     * @throws JSONException - Not expect to throw
+     */
+    @Test
+    public void verifyHasIndex() throws IOException, JSONException {
+        String xml = readResourceFile("classpath:canned/dataservice/35234913-aa3c-48ec-b9a4-77f822f66ef8/sample.xml");
+        String expected = readResourceFile("classpath:canned/dataservice/35234913-aa3c-48ec-b9a4-77f822f66ef8/sample.json");
         indexerService.indexMetadata(xml);
 
         verify(expected);

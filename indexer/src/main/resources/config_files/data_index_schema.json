@@ -2,17 +2,14 @@
   "mappings": {
     "properties": {
       "id": {
-        "type": "keyword",
-        "fields" : {
-          "keyword": {
-            "type": "keyword"
-          }
-        }
+        "type": "keyword"
       },
       "stac_version": { "type": "text" },
       "stac_extensions": { "type": "text" },
       "type": { "type": "text" },
-      "collection": { "type": "text" },
+      "collection": {
+        "type": "keyword"
+      },
       "geometry": {
         "type": "geo_shape"
       },
@@ -22,6 +19,9 @@
       "properties" : {
         "type": "nested",
         "properties" : {
+          "lng": { "type": "double" },
+          "lat": { "type": "double" },
+          "depth": { "type": "double" },
           "count": { "type": "double" },
           "time": { "type": "date" }
         }

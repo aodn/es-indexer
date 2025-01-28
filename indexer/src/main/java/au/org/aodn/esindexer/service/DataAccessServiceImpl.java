@@ -18,6 +18,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Getter
@@ -32,6 +33,39 @@ public class DataAccessServiceImpl implements DataAccessService {
     }
 
     @Override
+    public Optional<String> getNotebookLink(String uuid) {
+        try {
+            HttpEntity<String> request = getRequestEntity(List.of(MediaType.APPLICATION_JSON));
+
+            Map<String, Object> params = new HashMap<>();
+            params.put("uuid", uuid);
+
+            String url = UriComponentsBuilder
+                    .fromHttpUrl(getDataAccessEndpoint() + "/data/{uuid}/notebook_url")
+                    .buildAndExpand(uuid)
+                    .toUriString();
+
+            ResponseEntity<String> responseEntity = restTemplate.exchange(
+                    url,
+                    HttpMethod.GET,
+                    request,
+                    new ParameterizedTypeReference<>() {},
+                    params
+            );
+
+            if (responseEntity.getStatusCode().is2xxSuccessful()) {
+                if (responseEntity.getBody() != null || !responseEntity.getBody().isEmpty()) {
+                    return Optional.of(responseEntity.getBody());
+                }
+            }
+            return Optional.empty();
+        }
+        catch(Exception e) {
+            return Optional.empty();
+        }
+    }
+
+    @Override
     public List<StacItemModel> getIndexingDatasetBy(String uuid, LocalDate startDate, LocalDate endDate) {
 
         // currently, we force to get data in the same year to simplify the logic
@@ -40,7 +74,7 @@ public class DataAccessServiceImpl implements DataAccessService {
         }
 
         try {
-            HttpEntity<String> request = getRequestEntity(null, null);
+            HttpEntity<String> request = getRequestEntity(List.of(MediaType.APPLICATION_JSON));
 
             Map<String, Object> params = new HashMap<>();
             params.put("uuid", uuid);
@@ -79,7 +113,7 @@ public class DataAccessServiceImpl implements DataAccessService {
     @Override
     public List<TemporalExtent> getTemporalExtentOf(String uuid) {
         try {
-            HttpEntity<String> request = getRequestEntity(null, null);
+            HttpEntity<String> request = getRequestEntity(List.of(MediaType.APPLICATION_JSON));
 
             Map<String, Object> params = new HashMap<>();
             params.put("uuid", uuid);
@@ -137,10 +171,17 @@ public class DataAccessServiceImpl implements DataAccessService {
                                             d.getKey().getDepth().toString()
                                     )
                             )
-                            .geometry(GeometryUtils.createGeoJson(d.getKey().getLongitude(), d.getKey().getLatitude(), d.getKey().getDepth()))
+                            // The elastic query cannot sort by geo_shape or geo_point, so need to flatten value in properties
+                            // this geometry is use for filtering
+                            .geometry(GeometryUtils.createGeoShapeJson(d.getKey().getLongitude(), d.getKey().getLatitude()))
                             .properties(Map.of(
+                                    // Fields dup here is use for aggregation, you must have the geo_shape to do spatial search
+                                    "depth", d.getKey().getDepth().doubleValue(),
+                                    "lng", d.getKey().getLongitude().doubleValue(),
+                                    "lat", d.getKey().getLatitude().doubleValue(),
                                     "count", d.getValue(),
-                                    "time", d.getKey().getZonedDateTime().format(DateTimeFormatter.ISO_ZONED_DATE_TIME)))
+                                    "time", d.getKey().getZonedDateTime().format(DateTimeFormatter.ISO_ZONED_DATE_TIME))
+                            )
                             .build()
                 )
                 .toList();
@@ -151,14 +192,9 @@ public class DataAccessServiceImpl implements DataAccessService {
     }
 
     // parameters are not in use for now. May be useful in the future so just keep it
-    protected HttpEntity<String> getRequestEntity(MediaType accept, String body) {
+    protected HttpEntity<String> getRequestEntity(List<MediaType> accept) {
         HttpHeaders headers = new HttpHeaders();
-        headers.setAccept(List.of(
-                MediaType.TEXT_PLAIN,
-                MediaType.APPLICATION_JSON,
-                MediaType.valueOf("application/*+json"),
-                MediaType.ALL
-        ));
-        return body == null ? new HttpEntity<>(headers) : new HttpEntity<>(body, headers);
+        headers.setAccept(accept);
+        return new HttpEntity<>(headers);
     }
 }

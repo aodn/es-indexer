@@ -1,21 +1,23 @@
 {
   "id": "35234913-aa3c-48ec-b9a4-77f822f66ef8|2024-02|170.33|-33.87|530.00",
   "geometry": {
-    "geometry": {
-      "coordinates": [
-        170.33,
-        -33.87
-      ],
-      "type": "Point"
-    },
-    "type": "Feature",
-    "properties": {
-      "depth": 530.0
-    }
+    "geometries": [
+      {
+        "type": "Point",
+        "coordinates": [
+          170.33,
+          -33.87
+        ]
+      }
+    ],
+    "type": "GeometryCollection"
   },
   "properties": {
+    "time": "2024-02-01T00:00:00Z",
     "count": 15,
-    "time": "2024-02-01T00:00:00Z"
+    "depth": 530.0,
+    "lat": -33.87,
+    "lng": 170.33
   },
   "collection": "35234913-aa3c-48ec-b9a4-77f822f66ef8",
   "stac_version": "1.0.0",

@@ -14,6 +14,7 @@ public class AssetModel {
         METADATA("metadata"),
         THUMBNAIL("thumbnail"),
         OVERVIEW("overview"),
+        SUMMARY("summary"),
         VISUAL("visual"),
         DATE("date"),
         GRAPHIC("graphic"),

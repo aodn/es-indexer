@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
+import java.util.Map;
 
 @Data
 @Builder
@@ -15,9 +16,14 @@ public class StacCollectionModel {
 
     @JsonProperty("id")
     protected String uuid;
-    protected String title;
+
     @JsonProperty("search_suggestions")
     protected SearchSuggestionsModel searchSuggestionsModel;
+
+    @JsonProperty("sci:citation")
+    protected String citation;
+
+    protected String title;
     protected String description;
     protected ExtentModel extent;
     protected SummariesModel summaries;
@@ -26,8 +32,7 @@ public class StacCollectionModel {
     protected List<LinkModel> links;
     protected String license;
     protected List<ProviderModel> providers;
-    @JsonProperty("sci:citation")
-    protected String citation;
+    protected Map<String, AssetModel> assets;
     /**
      * Do not use keywords and use themes instead because the GN's records using controlled vocabularies
      * use keywords field type only for uncontrolled keywords/tags
