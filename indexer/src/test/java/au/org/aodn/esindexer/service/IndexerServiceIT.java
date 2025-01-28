@@ -70,6 +70,11 @@ public class IndexerServiceIT extends BaseTestClass {
                 .andRespond(withResourceNotFound());
     }
 
+    @AfterAll
+    public void resetMock() {
+        mockServer.getServer().reset();
+    }
+
     @AfterEach
     public void clear() throws IOException {
         clearElasticIndex(INDEX_NAME);

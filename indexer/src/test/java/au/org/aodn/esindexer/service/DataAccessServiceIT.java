@@ -51,6 +51,11 @@ public class DataAccessServiceIT {
 
     protected ObjectMapper objectMapper = new ObjectMapper();
 
+    @AfterAll
+    public void resetMock() {
+        mockServer.getServer().reset();
+    }
+
     @Test
     public void verifyConversion1() throws IOException, JSONException, InterruptedException {
         try {
