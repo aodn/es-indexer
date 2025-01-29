@@ -222,9 +222,9 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
         // search_as_you_type enabled fields can be extended
         SearchSuggestionsModel searchSuggestionsModel = SearchSuggestionsModel.builder()
                 .abstractPhrases(this.extractTokensFromDescription(stacCollectionModel.getDescription()))
-                .parameterVocabs(!processedParameterVocabs.isEmpty() ? processedParameterVocabs : null)
-                .platformVocabs(!processedPlatformVocabs.isEmpty() ? processedPlatformVocabs : null)
-                .organisationVocabs(!mappedOrganisationLabels.isEmpty() ? new ArrayList<>(mappedOrganisationLabels) : null)
+                .parameterVocabs(stacCollectionModel.getSummaries().getParameterVocabs())
+                .platformVocabs(stacCollectionModel.getSummaries().getPlatformVocabs())
+                .organisationVocabs(stacCollectionModel.getSummaries().getOrganisationVocabs())
                 .build();
         stacCollectionModel.setSearchSuggestionsModel(searchSuggestionsModel);
 
