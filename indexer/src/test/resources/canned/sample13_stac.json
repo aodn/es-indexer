@@ -33,6 +33,7 @@
       "start" : "2016-11-17T13:00:00Z",
       "end" : "2016-11-20T12:59:59Z"
     } ],
+    "platform_vocabs": [],
     "parameter_vocabs" : [ ],
     "organisation_vocabs" : [ ]
   },
@@ -249,7 +250,10 @@
   } ],
   "id" : "27d1a942-9b21-4b4a-bede-39b00e387a75",
   "search_suggestions" : {
-    "abstract_phrases" : [ ]
+    "abstract_phrases" : [ ],
+    "platform_vocabs_sayt" : [],
+    "parameter_vocabs_sayt" : [],
+    "organisation_vocabs_sayt" : []
   },
   "sci:citation" : "{\"suggestedCitation\":null,\"useLimitations\":null,\"otherConstraints\":[\"Data is made available under a Creative Commons Attribution 4.0 International Licence, please see link. Data is supplied 'as is' without any warranty or guarantee except as required by law to be given to you. The data may not be free of error, comprehensive, current or appropriate for your particular purpose. You accept all risk and responsibility for its use. ATTRIBUTION STATEMENT: The dataset [Insert-dataset-name-here] downloaded on [Insert-DD-Mmm-YYYY-here] was collected on voyage [Insert-voyage-name-here] by the Marine National Facility.\"]}",
   "type" : "Collection",

@@ -95,6 +95,7 @@
       "start" : "2021-09-30T14:00:00Z",
       "end" : "2022-12-31T12:59:59Z"
     } ],
+    "platform_vocabs": [],
     "parameter_vocabs" : [ ],
     "organisation_vocabs" : [ ]
   },
@@ -241,7 +242,10 @@
   "themes" : [ ],
   "id" : "5905b3eb-aad0-4f9c-a03e-a02fb3488082",
   "search_suggestions" : {
-    "abstract_phrases" : [ ]
+    "abstract_phrases" : [ ],
+    "platform_vocabs_sayt" : [],
+    "parameter_vocabs_sayt" : [],
+    "organisation_vocabs_sayt" : []
   },
   "sci:citation" : "{\"suggestedCitation\":null,\"useLimitations\":null,\"otherConstraints\":[\"The data was collected under contract between AIMS and another party(s). Specific agreements for access and use of the data shall be negotiated separately. Contact the AIMS Data Centre (adc@aims.gov.au) for further information\"]}",
   "type" : "Collection",

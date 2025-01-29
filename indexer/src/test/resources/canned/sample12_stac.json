@@ -34,6 +34,7 @@
       "start" : "2012-04-15T14:00:00Z",
       "end" : "2012-04-30T13:59:59Z"
     } ],
+    "platform_vocabs": [],
     "parameter_vocabs" : [ ],
     "organisation_vocabs" : [ ]
   },
@@ -271,7 +272,10 @@
   } ],
   "id" : "201112060",
   "search_suggestions" : {
-    "abstract_phrases" : [ ]
+    "abstract_phrases" : [ ],
+    "platform_vocabs_sayt" : [],
+    "parameter_vocabs_sayt" : [],
+    "organisation_vocabs_sayt" : []
   },
   "sci:citation" : "{\"suggestedCitation\":null,\"useLimitations\":[\"This metadata record is publicly available.\"],\"otherConstraints\":[\"Data are available online via the Australian Antarctic Division Data Centre web page, and also via the Australian Ocean Data Network Web Portal.  A \\\"supplementary\\\" dataset is also available for download from the provided URL.  It contains raw data collected directly from the ship, which has not been quality checked.\",\"This data set conforms to the CCBY Attribution License\\n                            (http://creativecommons.org/licenses/by/4.0/).\\n\\n                            Please follow instructions listed in the citation reference provided at http://data.aad.gov.au/aadc/metadata/citation.cfm?entry_id=201112060 when using these data.\"]}",
   "type" : "Collection",
