@@ -224,6 +224,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
                 .abstractPhrases(this.extractTokensFromDescription(stacCollectionModel.getDescription()))
                 .parameterVocabs(!processedParameterVocabs.isEmpty() ? processedParameterVocabs : null)
                 .platformVocabs(!processedPlatformVocabs.isEmpty() ? processedPlatformVocabs : null)
+                .organisationVocabs(!mappedOrganisationLabels.isEmpty() ? new ArrayList<>(mappedOrganisationLabels) : null)
                 .build();
         stacCollectionModel.setSearchSuggestionsModel(searchSuggestionsModel);
 
