@@ -18,6 +18,7 @@
     "revision" : "2018-11-14T15:23:41",
     "update_frequency" : "other",
     "temporal" : [ ],
+    "platform_vocabs": [],
     "parameter_vocabs" : [ ],
     "organisation_vocabs" : [ ]
   },
@@ -92,7 +93,10 @@
   "themes" : [ ],
   "id" : "0bef875d-5f77-4b31-bd56-de73fafc2b2e",
   "search_suggestions" : {
-    "abstract_phrases" : [ ]
+    "abstract_phrases" : [ ],
+    "platform_vocabs_sayt" : [],
+    "parameter_vocabs_sayt" : [],
+    "organisation_vocabs_sayt" : []
   },
   "sci:citation" : "{\"suggestedCitation\":null,\"useLimitations\":null,\"otherConstraints\":null}",
   "type" : "Collection",

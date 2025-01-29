@@ -201,9 +201,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
         */
         // platform vocabs
         List<String> processedPlatformVocabs = vocabService.extractVocabLabelsFromThemes(stacCollectionModel.getThemes(), AppConstants.AODN_PLATFORM_VOCABS);
-        if (!processedPlatformVocabs.isEmpty()) {
-            stacCollectionModel.getSummaries().setPlatformVocabs(processedPlatformVocabs);
-        }
+        stacCollectionModel.getSummaries().setPlatformVocabs(processedPlatformVocabs);
 
         // organisation vocabs
         Set<String> mappedOrganisationLabels = new HashSet<>();

@@ -35,6 +35,7 @@
       "start" : "2019-10-18T13:00:00Z",
       "end" : "2019-12-17T12:59:59Z"
     } ],
+    "platform_vocabs": [],
     "parameter_vocabs" : [ ],
     "organisation_vocabs" : [ ]
   },
@@ -535,7 +536,10 @@
   } ],
   "id" : "1880cd63-d0f9-42e0-b073-7082527945f2",
   "search_suggestions" : {
-    "abstract_phrases" : [ ]
+    "abstract_phrases" : [ ],
+    "platform_vocabs_sayt" : [],
+    "parameter_vocabs_sayt" : [],
+    "organisation_vocabs_sayt" : []
   },
   "sci:citation" : "{\"suggestedCitation\":null,\"useLimitations\":null,\"otherConstraints\":[\"Access to the raw (not quality-controlled) voyage data is intended for the collectors and processors of the data obtained in the MNF RV Investigator voyage. Quality-controlled data products will be made available under the MNF CCBY  licence.\"]}",
   "type" : "Collection",

@@ -30,6 +30,7 @@
       "start" : "2004-12-31T13:00:00Z",
       "end" : "2013-02-28T12:59:59Z"
     } ],
+    "platform_vocabs": [],
     "parameter_vocabs" : [ ],
     "organisation_vocabs" : [ ]
   },
@@ -87,7 +88,10 @@
   } ],
   "id" : "10955a94-8737-08e4-e053-08114f8c5e74",
   "search_suggestions" : {
-    "abstract_phrases" : [ ]
+    "abstract_phrases" : [ ],
+    "platform_vocabs_sayt" : [],
+    "parameter_vocabs_sayt" : [],
+    "organisation_vocabs_sayt" : []
   },
   "sci:citation" : "{\"suggestedCitation\":null,\"useLimitations\":null,\"otherConstraints\":[\"Data is made available under a Creative Commons Attribution 4.0 International Licence, please see link. Data is supplied 'as is' without any warranty or guarantee except as required by law to be given to you. The data may not be free of error, comprehensive, current or appropriate for your particular purpose. You accept all risk and responsibility for its use. ATTRIBUTION STATEMENT: The dataset [Insert-dataset-name-here] downloaded on [Insert-DD-Mmm-YYYY-here] was provided by CSIRO.\"]}",
   "type" : "Collection",

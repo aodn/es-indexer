@@ -35,6 +35,7 @@
       "start" : "2021-10-12T13:00:00Z",
       "end" : "2022-10-05T12:59:59Z"
     } ],
+    "platform_vocabs": [],
     "parameter_vocabs" : [ ],
     "organisation_vocabs" : [ ]
   },
@@ -176,7 +177,10 @@
   } ],
   "id" : "cffa7269-5d95-486b-9b2e-77316e808398",
   "search_suggestions" : {
-    "abstract_phrases" : [ ]
+    "abstract_phrases" : [ ],
+    "platform_vocabs_sayt" : [],
+    "parameter_vocabs_sayt" : [],
+    "organisation_vocabs_sayt" : []
   },
   "sci:citation" : "{\"suggestedCitation\":\"Cite as: Groom, R., Carter, A. B., Collier, C., Firby, L., Evans, S., Barrett, S., Hoffman, L., van de Wetering, C., Evans, S., Simon, S., & Anderson, S. (2023). Benthic habitats of Yanyuwa Sea Country, Barni - Wardimantha Awara Indigenous Protected Area, Gulf of Carpentaria, Northern Territory, Australia (NESP MaC Project 1.12, JCU & CDU) [Data set]. eAtlas. https://doi.org/10.26274/V6K5-2F34\",\"useLimitations\":null,\"otherConstraints\":null}",
   "type" : "Collection",

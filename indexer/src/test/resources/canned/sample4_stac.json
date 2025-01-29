@@ -43,6 +43,7 @@
       "start" : "1870-07-16T14:10:44Z",
       "end" : "2013-06-17T13:59:59Z"
     } ],
+    "platform_vocabs": [],
     "parameter_vocabs" : [ "salinity", "carbon", "temperature", "alkalinity", "ph (total scale) of the water body" ],
     "organisation_vocabs" : [ "CSIRO Oceans and Atmosphere", "National Institute for Environmental Studies (NIES)", "Climate Change Research Centre (CCRC)" ]
   },
@@ -395,6 +396,7 @@
   "id" : "7709f541-fc0c-4318-b5b9-9053aa474e0e",
   "search_suggestions" : {
     "abstract_phrases" : [ "dataset contains", "calcite", "resolution", "carbon dic", "sea surface", "alkalinity alk sea", "monthly mean", "aragonite calcite", "carbon", "degree resolution over", "monthly mean aragonite calcite", "dissolved", "total alkalinity alk sea", "total alkalinity alk", "inorganic carbon", "sea surface temperature", "alk", "period", "reconstructed time", "surface", "aragonite", "degree", "time series", "inorganic carbon dic total", "dissolved inorganic", "alkalinity", "inorganic", "dic total alkalinity alk", "contains", "ph together", "alk sea", "monthly", "region", "dissolved inorganic carbon dic", "dic total alkalinity", "mean aragonite calcite", "alk sea surface temperature", "monthly mean aragonite", "australian", "resolution over", "distribution", "sea", "carbon dic total alkalinity", "total", "temperature", "alk sea surface", "together", "alkalinity alk", "dissolved inorganic carbon", "over", "salinity", "reconstructed", "alkalinity alk sea surface", "total alkalinity", "inorganic carbon dic", "carbon dic total", "reconstructed time series", "mean aragonite", "degree resolution", "dic total", "surface temperature", "series", "mean", "ph", "time", "dataset", "dic", "australian region" ],
+    "platform_vocabs_sayt" : [],
     "parameter_vocabs_sayt" : [ "salinity", "carbon", "temperature", "alkalinity","ph (total scale) of the water body" ],
     "organisation_vocabs_sayt": [ "CSIRO Oceans and Atmosphere", "National Institute for Environmental Studies (NIES)", "Climate Change Research Centre (CCRC)" ]
   },
