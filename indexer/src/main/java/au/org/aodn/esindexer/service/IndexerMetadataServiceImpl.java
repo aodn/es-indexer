@@ -201,9 +201,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
         */
         // platform vocabs
         List<String> processedPlatformVocabs = vocabService.extractVocabLabelsFromThemes(stacCollectionModel.getThemes(), AppConstants.AODN_PLATFORM_VOCABS);
-        if (!processedPlatformVocabs.isEmpty()) {
-            stacCollectionModel.getSummaries().setPlatformVocabs(processedPlatformVocabs);
-        }
+        stacCollectionModel.getSummaries().setPlatformVocabs(processedPlatformVocabs);
 
         // organisation vocabs
         Set<String> mappedOrganisationLabels = new HashSet<>();
@@ -222,8 +220,9 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
         // search_as_you_type enabled fields can be extended
         SearchSuggestionsModel searchSuggestionsModel = SearchSuggestionsModel.builder()
                 .abstractPhrases(this.extractTokensFromDescription(stacCollectionModel.getDescription()))
-                .parameterVocabs(!processedParameterVocabs.isEmpty() ? processedParameterVocabs : null)
-                .platformVocabs(!processedPlatformVocabs.isEmpty() ? processedPlatformVocabs : null)
+                .parameterVocabs(stacCollectionModel.getSummaries().getParameterVocabs())
+                .platformVocabs(stacCollectionModel.getSummaries().getPlatformVocabs())
+                .organisationVocabs(stacCollectionModel.getSummaries().getOrganisationVocabs())
                 .build();
         stacCollectionModel.setSearchSuggestionsModel(searchSuggestionsModel);
 

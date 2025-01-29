@@ -30,6 +30,7 @@
       "start" : null,
       "end" : null
     } ],
+    "platform_vocabs": [],
     "parameter_vocabs" : [ ],
     "organisation_vocabs" : [ ]
   },
@@ -100,7 +101,10 @@
   } ],
   "id" : "5fec8c73-58a1-4a4b-9e47-cfcd9e3fd3ea",
   "search_suggestions" : {
-    "abstract_phrases" : [ ]
+    "abstract_phrases" : [ ],
+    "platform_vocabs_sayt" : [],
+    "parameter_vocabs_sayt" : [],
+    "organisation_vocabs_sayt" : []
   },
   "sci:citation" : "{\"suggestedCitation\":null,\"useLimitations\":null,\"otherConstraints\":[\"No Restrictions\"]}",
   "type" : "Collection",
