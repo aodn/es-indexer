@@ -236,7 +236,7 @@ public class VocabServiceImpl implements VocabService {
             return; // this will exist the loop
         }
 
-        // continue to reach here if not being returned at line 235
+        // continue to reach here if not being returned at line 236
         // Recursively search narrower nodes
         // when reaching here, the process is likely analysing vocabs at 2nd-level or 3rd-level vocabs
         List<VocabModel> narrowerNodes = currentVocab.getNarrower();
