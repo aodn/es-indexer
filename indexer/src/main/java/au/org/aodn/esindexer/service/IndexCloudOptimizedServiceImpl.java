@@ -1,6 +1,8 @@
 package au.org.aodn.esindexer.service;
 
 import au.org.aodn.cloudoptimized.model.DatasetProvider;
+import au.org.aodn.cloudoptimized.model.MetadataEntity;
+import au.org.aodn.cloudoptimized.model.TemporalExtent;
 import au.org.aodn.cloudoptimized.service.DataAccessService;
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.stac.model.StacItemModel;
@@ -63,9 +65,21 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
 
     @Override
     public List<BulkResponse> indexAllCloudOptimizedData(IndexService.Callback callback) {
+        List<BulkResponse> results = new ArrayList<>();
         elasticSearchIndexService.createIndexFromMappingJSONFile(AppConstants.DATASET_INDEX_MAPPING_JSON_FILE, indexName);
-        // TODO: Right now just clear schema, we need to query all UUID and iterate one by one
-        return null;
+
+        for(MetadataEntity entity : dataAccessService.getAllUuid()) {
+            List<TemporalExtent> temporalExtents = dataAccessService.getTemporalExtentOf(entity.getUuid());
+            if (!temporalExtents.isEmpty()) {
+                // Only first block works from data service api
+                LocalDate startDate = temporalExtents.get(0).getLocalStartDate();
+                LocalDate endDate = temporalExtents.get(0).getLocalEndDate();
+                log.info("Indexing dataset with UUID: {} from {} to {}", entity.getUuid(), startDate, endDate);
+
+                results.addAll(indexCloudOptimizedData(entity.getUuid(), startDate, endDate, callback));
+            }
+        }
+        return results;
     }
     /**
      * Index the cloud optimized data
@@ -102,8 +116,8 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
             callback.onComplete(responses);
         }
         catch (Exception e) {
-            log.error("Failed", e);
-            throw new RuntimeException("Exception thrown while indexing dataset with UUID: " + uuid + " | " + e.getMessage(), e);
+            log.error("Exception thrown while indexing dataset with UUID: {}", uuid, e);
+            callback.onProgress(String.format("Exception thrown while indexing dataset with UUID: %s", uuid));
         }
         return responses;
     }

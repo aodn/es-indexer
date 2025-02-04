@@ -2,6 +2,7 @@ package au.org.aodn.esindexer.service;
 
 import au.org.aodn.cloudoptimized.model.CloudOptimizedEntry;
 import au.org.aodn.cloudoptimized.model.CloudOptimizedEntryReducePrecision;
+import au.org.aodn.cloudoptimized.model.MetadataEntity;
 import au.org.aodn.cloudoptimized.model.TemporalExtent;
 import au.org.aodn.cloudoptimized.service.DataAccessService;
 import au.org.aodn.esindexer.exception.MetadataNotFoundException;
@@ -34,13 +35,13 @@ public class DataAccessServiceImpl implements DataAccessService {
     }
 
     @Override
-    public List<String> getAllUuid() {
+    public List<MetadataEntity> getAllUuid() {
         HttpEntity<String> request = getRequestEntity(List.of(MediaType.APPLICATION_JSON));
         String url = UriComponentsBuilder
-                .fromUriString(getDataAccessEndpoint() + "/data/metadata")
+                .fromUriString(getDataAccessEndpoint() + "/metadata")
                 .toUriString();
 
-        ResponseEntity<List<String>> responseEntity = restTemplate.exchange(
+        ResponseEntity<List<MetadataEntity>> responseEntity = restTemplate.exchange(
                 url,
                 HttpMethod.GET,
                 request,
