@@ -19,6 +19,7 @@ import org.springframework.context.annotation.ScopedProxyMode;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -68,13 +69,19 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
         List<BulkResponse> results = new ArrayList<>();
         elasticSearchIndexService.createIndexFromMappingJSONFile(AppConstants.DATASET_INDEX_MAPPING_JSON_FILE, indexName);
 
-        for(MetadataEntity entity : dataAccessService.getAllUuid()) {
+        List<MetadataEntity> entities = dataAccessService.getAllUuid();
+        List<MetadataEntity> sorted = entities.stream()
+                .sorted(Comparator.comparing(MetadataEntity::getUuid))
+                .toList();
+
+        for(MetadataEntity entity : sorted) {
             List<TemporalExtent> temporalExtents = dataAccessService.getTemporalExtentOf(entity.getUuid());
             if (!temporalExtents.isEmpty()) {
                 // Only first block works from data service api
                 LocalDate startDate = temporalExtents.get(0).getLocalStartDate();
                 LocalDate endDate = temporalExtents.get(0).getLocalEndDate();
-                log.info("Indexing dataset with UUID: {} from {} to {}", entity.getUuid(), startDate, endDate);
+
+                callback.onProgress(String.format("Indexing dataset with UUID: %s from %s to %s", entity.getUuid(), startDate, endDate));
 
                 results.addAll(indexCloudOptimizedData(entity.getUuid(), startDate, endDate, callback));
             }
