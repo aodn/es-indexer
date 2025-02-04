@@ -34,6 +34,28 @@ public class DataAccessServiceImpl implements DataAccessService {
     }
 
     @Override
+    public List<String> getAllUuid() {
+        HttpEntity<String> request = getRequestEntity(List.of(MediaType.APPLICATION_JSON));
+        String url = UriComponentsBuilder
+                .fromUriString(getDataAccessEndpoint() + "/data/metadata")
+                .toUriString();
+
+        ResponseEntity<List<String>> responseEntity = restTemplate.exchange(
+                url,
+                HttpMethod.GET,
+                request,
+                new ParameterizedTypeReference<>() {},
+                Map.of()
+        );
+        if (responseEntity.getStatusCode().is2xxSuccessful()) {
+            return responseEntity.getBody();
+        }
+        else {
+            return null;
+        }
+    }
+
+    @Override
     public Optional<String> getNotebookLink(String uuid) {
         try {
             HttpEntity<String> request = getRequestEntity(List.of(MediaType.APPLICATION_JSON));
@@ -42,7 +64,7 @@ public class DataAccessServiceImpl implements DataAccessService {
             params.put("uuid", uuid);
 
             String url = UriComponentsBuilder
-                    .fromHttpUrl(getDataAccessEndpoint() + "/data/{uuid}/notebook_url")
+                    .fromUriString(getDataAccessEndpoint() + "/data/{uuid}/notebook_url")
                     .buildAndExpand(uuid)
                     .toUriString();
 
@@ -80,7 +102,7 @@ public class DataAccessServiceImpl implements DataAccessService {
             Map<String, Object> params = new HashMap<>();
             params.put("uuid", uuid);
 
-            String url = UriComponentsBuilder.fromHttpUrl(getDataAccessEndpoint() + "/data/{uuid}")
+            String url = UriComponentsBuilder.fromUriString(getDataAccessEndpoint() + "/data/{uuid}")
                     .queryParam("is_to_index", "true")
                     .queryParam("start_date", startDate)
                     .queryParam("end_date", endDate)
@@ -119,7 +141,7 @@ public class DataAccessServiceImpl implements DataAccessService {
             Map<String, Object> params = new HashMap<>();
             params.put("uuid", uuid);
 
-            String url = UriComponentsBuilder.fromHttpUrl(getDataAccessEndpoint() + "/data/{uuid}/temporal_extent")
+            String url = UriComponentsBuilder.fromUriString(getDataAccessEndpoint() + "/data/{uuid}/temporal_extent")
                     .buildAndExpand(uuid)
                     .toUriString();
 

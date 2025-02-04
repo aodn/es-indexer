@@ -10,4 +10,5 @@ public interface DataAccessService {
     List<StacItemModel> getIndexingDatasetBy(String uuid, LocalDate startDate, LocalDate endDate);
     List<TemporalExtent> getTemporalExtentOf(String uuid);
     Optional<String> getNotebookLink(String uuid);
+    List<String> getAllUuid();
 }
