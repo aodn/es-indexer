@@ -1,7 +1,8 @@
 package au.org.aodn.esindexer.service;
 
+import au.org.aodn.cloudoptimized.model.DatasetProvider;
+import au.org.aodn.cloudoptimized.service.DataAccessService;
 import au.org.aodn.esindexer.configuration.AppConstants;
-import au.org.aodn.esindexer.model.DatasetProvider;
 import au.org.aodn.stac.model.StacItemModel;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.ElasticsearchException;

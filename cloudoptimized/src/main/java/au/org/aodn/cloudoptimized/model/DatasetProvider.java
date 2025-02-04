@@ -1,6 +1,6 @@
-package au.org.aodn.esindexer.model;
+package au.org.aodn.cloudoptimized.model;
 
-import au.org.aodn.esindexer.service.DataAccessService;
+import au.org.aodn.cloudoptimized.service.DataAccessService;
 import au.org.aodn.stac.model.StacItemModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

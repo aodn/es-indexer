@@ -1,9 +1,10 @@
 package au.org.aodn.esindexer.service;
 
+import au.org.aodn.cloudoptimized.model.CloudOptimizedEntry;
+import au.org.aodn.cloudoptimized.model.CloudOptimizedEntryReducePrecision;
+import au.org.aodn.cloudoptimized.model.TemporalExtent;
+import au.org.aodn.cloudoptimized.service.DataAccessService;
 import au.org.aodn.esindexer.exception.MetadataNotFoundException;
-import au.org.aodn.esindexer.model.CloudOptimizedEntry;
-import au.org.aodn.esindexer.model.CloudOptimizedEntryReducePrecision;
-import au.org.aodn.esindexer.model.TemporalExtent;
 import au.org.aodn.esindexer.utils.GeometryUtils;
 import au.org.aodn.stac.model.StacItemModel;
 import lombok.Getter;

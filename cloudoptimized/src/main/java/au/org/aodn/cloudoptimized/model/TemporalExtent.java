@@ -1,4 +1,4 @@
-package au.org.aodn.esindexer.model;
+package au.org.aodn.cloudoptimized.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;

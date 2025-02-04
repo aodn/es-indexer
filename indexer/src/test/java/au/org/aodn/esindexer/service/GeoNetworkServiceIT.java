@@ -1,11 +1,11 @@
 package au.org.aodn.esindexer.service;
 
+import au.org.aodn.cloudoptimized.model.RelationType;
 import au.org.aodn.esindexer.BaseTestClass;
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.configuration.GeoNetworkSearchTestConfig;
 
 import au.org.aodn.esindexer.exception.MetadataNotFoundException;
-import au.org.aodn.esindexer.model.RelationType;
 import au.org.aodn.esindexer.utils.AssociatedRecordsUtil;
 import au.org.aodn.esindexer.utils.JaxbUtils;
 import au.org.aodn.metadata.iso19115_3_2018.MDMetadataType;

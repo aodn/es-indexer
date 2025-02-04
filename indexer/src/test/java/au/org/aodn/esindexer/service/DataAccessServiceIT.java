@@ -1,8 +1,8 @@
 package au.org.aodn.esindexer.service;
 
+import au.org.aodn.cloudoptimized.model.TemporalExtent;
 import au.org.aodn.esindexer.controller.IndexerController;
 import au.org.aodn.esindexer.model.MockServer;
-import au.org.aodn.esindexer.model.TemporalExtent;
 import co.elastic.clients.elasticsearch.core.search.Hit;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.json.JSONException;

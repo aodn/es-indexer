@@ -1,6 +1,7 @@
 package au.org.aodn.esindexer.controller;
 
-import au.org.aodn.esindexer.model.TemporalExtent;
+import au.org.aodn.cloudoptimized.model.TemporalExtent;
+import au.org.aodn.cloudoptimized.service.DataAccessService;
 import au.org.aodn.esindexer.service.*;
 import co.elastic.clients.elasticsearch.core.BulkResponse;
 import com.fasterxml.jackson.databind.node.ObjectNode;
