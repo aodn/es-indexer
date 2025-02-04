@@ -159,6 +159,10 @@ public class VocabServiceImpl implements VocabService {
 
     public List<VocabModel> getMappedOrganisationVocabsFromContacts(List<ContactsModel> contacts) throws IOException {
         List<String> contactOrgs = new ArrayList<>();
+
+        // (A) (note this)
+        // only consider "organisations" with below roles
+        // but we don't take them on, only 1, but depends on the priority ranking
         String citationRole = "citation";
         String pointOfContactRole = "pointOfContact";
 
@@ -183,10 +187,18 @@ public class VocabServiceImpl implements VocabService {
         }
 
         List<VocabModel> results = new ArrayList<>();
+
+        // the loop for starting DFS search starts from here, each vocab from self.getOrganisationVocabs() is a top-level vocab
+        // and we will explore each of the top-level vocab down the branch (to 2nd, then to 3rd level vocabs) until a match with vocabs from (A) or move to the next top-level vocab and do the same process again (recursive)
         for (JsonNode orgVocab : self.getOrganisationVocabs()) {
             if (orgVocab != null) {
                 try {
+                    // map the json of the top-level vocab to VocabModel class
                     VocabModel vocabModel = indexerObjectMapper.treeToValue(orgVocab, VocabModel.class);
+                    // comparing and appending matches to results list via dfs search
+                    // vocabModel: current top-level vocab
+                    // contactOrgs: vocabs linked to the metadata record and extracted from (A)
+                    // results: list of found matching vocabs
                     dfsSearch(vocabModel, contactOrgs, results);
                 } catch (JsonProcessingException e) {
                     log.error("Error deserializing JsonNode to VocabModel", e);
@@ -211,16 +223,21 @@ public class VocabServiceImpl implements VocabService {
         if (currentVocab.getReplacedBy() != null) return;
 
         // Check labels in priority order and add to results if a match is found
+        // the condition OR doesn't make multiple matches and adding all the thing while exploring down the branch because there is an order in OR || operator
+        // left-to-right order: https://stackoverflow.com/questions/17054737/does-all-evaluation-happen-from-left-to-right
+        // In Java, the || (logical OR) operator evaluates expressions from left to right and follows short-circuit evaluation
         if (findAndAddMatch(Collections.singletonList(currentVocab.getDisplayLabel()), contactOrgs) ||
                 findAndAddMatch(currentVocab.getAltLabels(), contactOrgs) ||
                 findAndAddMatch(Collections.singletonList(currentVocab.getLabel()), contactOrgs) ||
                 findAndAddMatch(currentVocab.getHiddenLabels(), contactOrgs)) {
             log.info("Match found: {}", currentVocab);
             results.add(currentVocab);
-            return;
+            return; // this will exist the loop
         }
 
+        // continue to reach here if not being returned at line 235
         // Recursively search narrower nodes
+        // when reaching here, the process is likely analysing vocabs at 2nd-level or 3rd-level vocabs
         List<VocabModel> narrowerNodes = currentVocab.getNarrower();
         if (narrowerNodes != null) {
             for (VocabModel narrowerNode : narrowerNodes) {
