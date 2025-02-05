@@ -13,6 +13,7 @@ public interface IndexService {
     interface Callback {
         void onProgress(Object update);
         void onComplete(Object result);
+        void onError(Throwable throwable);
     }
     long getBatchSize();
     <T> BulkResponse executeBulk(BulkRequest.Builder bulkRequest, Function<BulkResponseItem, Optional<T>> mapper, IndexerMetadataService.Callback callback) throws IOException;

@@ -69,7 +69,7 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
         List<BulkResponse> results = new ArrayList<>();
         elasticSearchIndexService.createIndexFromMappingJSONFile(AppConstants.DATASET_INDEX_MAPPING_JSON_FILE, indexName);
 
-        List<MetadataEntity> entities = dataAccessService.getAllUuid();
+        List<MetadataEntity> entities = dataAccessService.getAllMetadata();
         List<MetadataEntity> sorted = entities.stream()
                 .sorted(Comparator.comparing(MetadataEntity::getUuid))
                 .toList();
@@ -82,25 +82,34 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
                 LocalDate endDate = temporalExtents.get(0).getLocalEndDate();
 
                 callback.onProgress(String.format("Indexing dataset with UUID: %s from %s to %s", entity.getUuid(), startDate, endDate));
-
-                results.addAll(indexCloudOptimizedData(entity.getUuid(), startDate, endDate, callback));
+                try {
+                    results.addAll(indexCloudOptimizedData(entity, startDate, endDate, callback));
+                }
+                catch(IOException ioe) {
+                    // Do nothing
+                }
             }
         }
         return results;
     }
     /**
      * Index the cloud optimized data
-     * @param uuid - The UUID of data you want to index
+     * @param entity - The metadata that describe the data
      * @param startDate - The start range to index
      * @param endDate - THe end range to index
      * @return - The index result
      */
     @Override
-    public List<BulkResponse> indexCloudOptimizedData(String uuid, LocalDate startDate, LocalDate endDate, IndexService.Callback callback) {
+    public List<BulkResponse> indexCloudOptimizedData(MetadataEntity entity,
+                                                      LocalDate startDate,
+                                                      LocalDate endDate,
+                                                      IndexService.Callback callback) throws IOException {
 
         List<BulkResponse> responses = new ArrayList<>();
 
-        Iterable<List<StacItemModel>> dataset = new DatasetProvider(uuid, startDate, endDate, dataAccessService).getIterator();
+        Iterable<List<StacItemModel>> dataset = new DatasetProvider(entity.getUuid(), startDate, endDate, dataAccessService)
+                .getIterator(dataAccessService.getFields(entity));
+
         BulkRequestProcessor<StacItemModel> bulkRequestProcessor = new BulkRequestProcessor<>(
                 indexName, (item) -> Optional.empty(),self, callback
         );
@@ -123,8 +132,8 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
             callback.onComplete(responses);
         }
         catch (Exception e) {
-            log.error("Exception thrown while indexing dataset with UUID: {}", uuid, e);
-            callback.onProgress(String.format("Exception thrown while indexing dataset with UUID: %s", uuid));
+            log.error("Exception thrown or not found while indexing cloud optimized data : {}", entity.getUuid(), e);
+            throw e;
         }
         return responses;
     }

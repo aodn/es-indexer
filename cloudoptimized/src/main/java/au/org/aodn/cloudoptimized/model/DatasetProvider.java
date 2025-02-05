@@ -27,7 +27,7 @@ public class DatasetProvider {
         this.endYearMonth = YearMonth.from(endDate);
     }
 
-    public Iterable<List<StacItemModel>> getIterator() {
+    public Iterable<List<StacItemModel>> getIterator(List<MetadataFields> columns) {
         return () -> new Iterator<>() {
             @Override
             public boolean hasNext() {
@@ -46,7 +46,8 @@ public class DatasetProvider {
                 List<StacItemModel> data = dataAccessService.getIndexingDatasetBy(
                         uuid,
                         LocalDate.of(currentYearMonth.getYear(), currentYearMonth.getMonthValue(), 1),
-                        LocalDate.of(currentYearMonth.getYear(), currentYearMonth.getMonthValue(), currentYearMonth.lengthOfMonth())
+                        LocalDate.of(currentYearMonth.getYear(), currentYearMonth.getMonthValue(), currentYearMonth.lengthOfMonth()),
+                        columns
                 );
                 currentYearMonth = currentYearMonth.plusMonths(1);
                 if (data.isEmpty()) {
