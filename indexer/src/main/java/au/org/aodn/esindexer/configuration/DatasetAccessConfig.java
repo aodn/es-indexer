@@ -1,6 +1,6 @@
 package au.org.aodn.esindexer.configuration;
 
-import au.org.aodn.esindexer.service.DataAccessService;
+import au.org.aodn.cloudoptimized.service.DataAccessService;
 import au.org.aodn.esindexer.service.DataAccessServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

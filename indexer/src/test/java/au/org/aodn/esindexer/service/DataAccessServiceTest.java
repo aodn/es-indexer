@@ -1,7 +1,7 @@
 package au.org.aodn.esindexer.service;
 
-import au.org.aodn.esindexer.model.CloudOptimizedEntry;
-import au.org.aodn.esindexer.model.CloudOptimizedEntryReducePrecision;
+import au.org.aodn.cloudoptimized.model.CloudOptimizedEntry;
+import au.org.aodn.cloudoptimized.model.CloudOptimizedEntryReducePrecision;
 import au.org.aodn.stac.model.StacItemModel;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;

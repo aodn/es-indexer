@@ -1,5 +1,6 @@
 package au.org.aodn.esindexer.service;
 
+import au.org.aodn.cloudoptimized.service.DataAccessService;
 import au.org.aodn.esindexer.utils.GcmdKeywordUtils;
 import au.org.aodn.esindexer.utils.GeometryUtils;
 import au.org.aodn.esindexer.utils.JaxbUtils;

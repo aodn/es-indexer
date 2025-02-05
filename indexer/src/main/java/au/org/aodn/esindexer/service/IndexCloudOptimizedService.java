@@ -1,5 +1,6 @@
 package au.org.aodn.esindexer.service;
 
+import au.org.aodn.cloudoptimized.model.MetadataEntity;
 import co.elastic.clients.elasticsearch.core.BulkResponse;
 
 import java.io.IOException;
@@ -9,6 +10,6 @@ import java.util.List;
 public interface IndexCloudOptimizedService extends IndexService {
     // We have indexed cloud optimized data indexed in ElasticSearch
     boolean hasIndex(String collectionId);
-    List<BulkResponse> indexCloudOptimizedData(String uuid, LocalDate startDate, LocalDate endDate, IndexService.Callback callback);
+    List<BulkResponse> indexCloudOptimizedData(MetadataEntity entity, LocalDate startDate, LocalDate endDate, IndexService.Callback callback) throws IOException;
     List<BulkResponse> indexAllCloudOptimizedData(IndexService.Callback callback) throws IOException;
 }

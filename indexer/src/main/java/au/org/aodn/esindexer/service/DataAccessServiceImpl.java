@@ -1,12 +1,12 @@
 package au.org.aodn.esindexer.service;
 
+import au.org.aodn.cloudoptimized.model.*;
+import au.org.aodn.cloudoptimized.service.DataAccessService;
 import au.org.aodn.esindexer.exception.MetadataNotFoundException;
-import au.org.aodn.esindexer.model.CloudOptimizedEntry;
-import au.org.aodn.esindexer.model.CloudOptimizedEntryReducePrecision;
-import au.org.aodn.esindexer.model.TemporalExtent;
 import au.org.aodn.esindexer.utils.GeometryUtils;
 import au.org.aodn.stac.model.StacItemModel;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.web.client.HttpClientErrorException;
@@ -21,6 +21,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Getter
 public class DataAccessServiceImpl implements DataAccessService {
 
@@ -33,15 +34,58 @@ public class DataAccessServiceImpl implements DataAccessService {
     }
 
     @Override
+    public MetadataEntity getMetadataByUuid(String uuid) {
+        HttpEntity<String> request = getRequestEntity(List.of(MediaType.APPLICATION_JSON));
+
+        String url = UriComponentsBuilder
+                .fromUriString(getDataAccessEndpoint() + "/metadata/{uuid}")
+                .buildAndExpand(uuid)
+                .toUriString();
+
+        ResponseEntity<MetadataEntity> responseEntity = restTemplate.exchange(
+                url,
+                HttpMethod.GET,
+                request,
+                new ParameterizedTypeReference<>() {},
+                Map.of()
+        );
+        if (responseEntity.getStatusCode().is2xxSuccessful()) {
+            return responseEntity.getBody();
+        }
+        else {
+            return null;
+        }
+    }
+
+    @Override
+    public List<MetadataEntity> getAllMetadata() {
+        HttpEntity<String> request = getRequestEntity(List.of(MediaType.APPLICATION_JSON));
+        String url = UriComponentsBuilder
+                .fromUriString(getDataAccessEndpoint() + "/metadata")
+                .toUriString();
+
+        ResponseEntity<List<MetadataEntity>> responseEntity = restTemplate.exchange(
+                url,
+                HttpMethod.GET,
+                request,
+                new ParameterizedTypeReference<>() {},
+                Map.of()
+        );
+        if (responseEntity.getStatusCode().is2xxSuccessful()) {
+            return responseEntity.getBody();
+        }
+        else {
+            return List.of();
+        }
+    }
+
+    @Override
     public Optional<String> getNotebookLink(String uuid) {
         try {
             HttpEntity<String> request = getRequestEntity(List.of(MediaType.APPLICATION_JSON));
 
-            Map<String, Object> params = new HashMap<>();
-            params.put("uuid", uuid);
-
             String url = UriComponentsBuilder
-                    .fromHttpUrl(getDataAccessEndpoint() + "/data/{uuid}/notebook_url")
+                    .fromUriString(getDataAccessEndpoint() + "/data/{uuid}/notebook_url")
                     .buildAndExpand(uuid)
                     .toUriString();
 
@@ -50,7 +94,7 @@ public class DataAccessServiceImpl implements DataAccessService {
                     HttpMethod.GET,
                     request,
                     new ParameterizedTypeReference<>() {},
-                    params
+                    Map.of()
             );
 
             if (responseEntity.getStatusCode().is2xxSuccessful()) {
@@ -66,7 +110,7 @@ public class DataAccessServiceImpl implements DataAccessService {
     }
 
     @Override
-    public List<StacItemModel> getIndexingDatasetBy(String uuid, LocalDate startDate, LocalDate endDate) {
+    public List<StacItemModel> getIndexingDatasetBy(String uuid, LocalDate startDate, LocalDate endDate, List<MetadataFields> fields) {
 
         // currently, we force to get data in the same year to simplify the logic
         if (startDate.getYear() != endDate.getYear()) {
@@ -79,11 +123,11 @@ public class DataAccessServiceImpl implements DataAccessService {
             Map<String, Object> params = new HashMap<>();
             params.put("uuid", uuid);
 
-            String url = UriComponentsBuilder.fromHttpUrl(getDataAccessEndpoint() + "/data/{uuid}")
+            String url = UriComponentsBuilder.fromUriString(getDataAccessEndpoint() + "/data/{uuid}")
                     .queryParam("is_to_index", "true")
                     .queryParam("start_date", startDate)
                     .queryParam("end_date", endDate)
-                    .queryParam("columns", List.of("TIME","DEPTH","LONGITUDE","LATITUDE"))
+                    .queryParam("columns", fields)
                     .buildAndExpand(uuid)
                     .toUriString();
 
@@ -97,17 +141,16 @@ public class DataAccessServiceImpl implements DataAccessService {
 
             if (responseEntity.getStatusCode().is2xxSuccessful()) {
                 if (responseEntity.getBody() != null) {
+                    log.info("Indexed cloud optimized data with UUID: {} in S3 for {} -> {}",uuid, startDate, endDate);
                     return toStacItemModel(uuid, aggregateData(responseEntity.getBody()));
                 }
             }
-            throw new RuntimeException("Unable to retrieve dataset with UUID: " + uuid );
-        }
-        catch (HttpClientErrorException.NotFound e) {
-            throw new MetadataNotFoundException("Unable to find dataset with UUID: " + uuid + " in GeoNetwork");
         }
         catch (Exception e) {
-            throw new RuntimeException("Exception thrown while retrieving dataset with UUID: " + uuid + e.getMessage(), e);
+            // Do nothing just return empty list
+            log.info("Unable to find cloud optimized data with UUID: {} in S3 for {} -> {}",uuid, startDate, endDate);
         }
+        return List.of();
     }
 
     @Override
@@ -118,7 +161,7 @@ public class DataAccessServiceImpl implements DataAccessService {
             Map<String, Object> params = new HashMap<>();
             params.put("uuid", uuid);
 
-            String url = UriComponentsBuilder.fromHttpUrl(getDataAccessEndpoint() + "/data/{uuid}/temporal_extent")
+            String url = UriComponentsBuilder.fromUriString(getDataAccessEndpoint() + "/data/{uuid}/temporal_extent")
                     .buildAndExpand(uuid)
                     .toUriString();
 

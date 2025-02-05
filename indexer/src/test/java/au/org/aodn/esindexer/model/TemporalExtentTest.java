@@ -1,5 +1,6 @@
 package au.org.aodn.esindexer.model;
 
+import au.org.aodn.cloudoptimized.model.TemporalExtent;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
