@@ -1,5 +1,6 @@
 package au.org.aodn.esindexer.service;
 
+import au.org.aodn.cloudoptimized.model.MetadataEntity;
 import au.org.aodn.cloudoptimized.model.TemporalExtent;
 import au.org.aodn.esindexer.controller.IndexerController;
 import au.org.aodn.esindexer.model.MockServer;
@@ -60,6 +61,13 @@ public class DataAccessServiceIT {
     public void verifyConversion1() throws IOException, JSONException, InterruptedException {
         try {
             // This set the time range of the mock data range.
+            MetadataEntity metadataEntity = new MetadataEntity();
+            metadataEntity.setUuid("35234913-aa3c-48ec-b9a4-77f822f66ef8");
+
+            mockServer.getServer().expect(once(), requestTo("http://localhost/api/v1/das/metadata/35234913-aa3c-48ec-b9a4-77f822f66ef8"))
+                    .andExpect(method(HttpMethod.GET))
+                    .andRespond(withSuccess(objectMapper.writeValueAsString(metadataEntity), MediaType.APPLICATION_JSON));
+
             TemporalExtent temporalExtent = TemporalExtent.builder()
                     .startDate("2024-01-01T00:00:00+0000")
                     .endDate("2024-04-01T00:00:00+0000")
@@ -71,20 +79,20 @@ public class DataAccessServiceIT {
 
             // Mimic the api call given the range above
             String canned_2024_01= readResourceFile("classpath:canned/dataservice/35234913-aa3c-48ec-b9a4-77f822f66ef8/2024-01.json");
-            mockServer.getServer().expect(once(), requestTo("http://localhost/api/v1/das/data/35234913-aa3c-48ec-b9a4-77f822f66ef8?is_to_index=true&start_date=2024-01-01&end_date=2024-01-31&columns=TIME&columns=DEPTH&columns=LONGITUDE&columns=LATITUDE"))
+            mockServer.getServer().expect(once(), requestTo("http://localhost/api/v1/das/data/35234913-aa3c-48ec-b9a4-77f822f66ef8?is_to_index=true&start_date=2024-01-01&end_date=2024-01-31&columns=TIME&columns=LONGITUDE&columns=LATITUDE"))
                     .andExpect(method(HttpMethod.GET))
                     .andRespond(withSuccess(canned_2024_01, MediaType.APPLICATION_JSON));
 
             String canned_2024_02= readResourceFile("classpath:canned/dataservice/35234913-aa3c-48ec-b9a4-77f822f66ef8/2024-02.json");
-            mockServer.getServer().expect(once(), requestTo("http://localhost/api/v1/das/data/35234913-aa3c-48ec-b9a4-77f822f66ef8?is_to_index=true&start_date=2024-02-01&end_date=2024-02-29&columns=TIME&columns=DEPTH&columns=LONGITUDE&columns=LATITUDE"))
+            mockServer.getServer().expect(once(), requestTo("http://localhost/api/v1/das/data/35234913-aa3c-48ec-b9a4-77f822f66ef8?is_to_index=true&start_date=2024-02-01&end_date=2024-02-29&columns=TIME&columns=LONGITUDE&columns=LATITUDE"))
                     .andExpect(method(HttpMethod.GET))
                     .andRespond(withSuccess(canned_2024_02, MediaType.APPLICATION_JSON));
 
-            mockServer.getServer().expect(once(), requestTo("http://localhost/api/v1/das/data/35234913-aa3c-48ec-b9a4-77f822f66ef8?is_to_index=true&start_date=2024-03-01&end_date=2024-03-31&columns=TIME&columns=DEPTH&columns=LONGITUDE&columns=LATITUDE"))
+            mockServer.getServer().expect(once(), requestTo("http://localhost/api/v1/das/data/35234913-aa3c-48ec-b9a4-77f822f66ef8?is_to_index=true&start_date=2024-03-01&end_date=2024-03-31&columns=TIME&columns=LONGITUDE&columns=LATITUDE"))
                     .andExpect(method(HttpMethod.GET))
                     .andRespond(withSuccess("[]", MediaType.APPLICATION_JSON));
 
-            mockServer.getServer().expect(once(), requestTo("http://localhost/api/v1/das/data/35234913-aa3c-48ec-b9a4-77f822f66ef8?is_to_index=true&start_date=2024-04-01&end_date=2024-04-30&columns=TIME&columns=DEPTH&columns=LONGITUDE&columns=LATITUDE"))
+            mockServer.getServer().expect(once(), requestTo("http://localhost/api/v1/das/data/35234913-aa3c-48ec-b9a4-77f822f66ef8?is_to_index=true&start_date=2024-04-01&end_date=2024-04-30&columns=TIME&columns=LONGITUDE&columns=LATITUDE"))
                     .andExpect(method(HttpMethod.GET))
                     .andRespond(withSuccess("[]", MediaType.APPLICATION_JSON));
 
