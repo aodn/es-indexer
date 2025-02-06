@@ -107,8 +107,8 @@ public class IndexerController {
         return emitter;
     }
 
-    @PostMapping(path="/async/all-cloud", produces = "application/json")
-    @Operation(security = {@SecurityRequirement(name = "X-API-Key") }, description = "Index a dataset by UUID")
+    @PostMapping(path="/async/all-cloud")
+    @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Index a dataset by UUID")
     public SseEmitter indexAllCOData() {
         final SseEmitter emitter = new SseEmitter(0L); // 0L means no timeout;
         final IndexService.Callback callback = createCallback(emitter);
@@ -163,8 +163,8 @@ public class IndexerController {
         return indexerMetadata.deleteDocumentByUUID(uuid);
     }
 
-    @PostMapping(path="/{uuid}/cloud", produces = "application/json")
-    @Operation(security = {@SecurityRequirement(name = "X-API-Key") }, description = "Index a dataset by UUID")
+    @PostMapping(path="/{uuid}/cloud")
+    @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Index a dataset by UUID")
     public SseEmitter indexCODataByUUID(@PathVariable("uuid") String uuid) {
         return indexCODataByUUID(uuid, null);
     }
