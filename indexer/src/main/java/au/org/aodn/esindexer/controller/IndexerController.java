@@ -106,17 +106,30 @@ public class IndexerController {
 
         return emitter;
     }
-
+    /**
+     *
+     * @param uuid - The UUID of the metadata
+     * @param withCO - Index cloud optimized data the same time
+     * @return - No use
+     * @throws IOException - No use
+     * @throws FactoryException - No use
+     * @throws JAXBException - No use
+     * @throws TransformException - No use
+     * @throws InterruptedException - No use
+     */
     @PostMapping(path="/{uuid}", produces = "application/json")
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Index a metadata record by UUID")
-    public ResponseEntity<String> addDocumentByUUID(@PathVariable("uuid") String uuid) throws IOException, FactoryException, JAXBException, TransformException, InterruptedException {
+    public ResponseEntity<String> addDocumentByUUID(
+            @PathVariable("uuid") String uuid,
+            @RequestParam(value = "withCO", defaultValue = "false") Boolean withCO) throws IOException, FactoryException, JAXBException, TransformException, InterruptedException {
 
-        CountDownLatch countDownLatch = new CountDownLatch(1);
-        indexCODataByUUID(uuid, countDownLatch);
+        if(withCO) {
+            CountDownLatch countDownLatch = new CountDownLatch(1);
+            indexCODataByUUID(uuid, countDownLatch);
 
-        // Wait till index co data completed
-        countDownLatch.await();
-
+            // Wait till index co data completed
+            countDownLatch.await();
+        }
         String metadataValues = geonetworkResourceService.searchRecordBy(uuid);
         CompletableFuture<ResponseEntity<String>> f = indexerMetadata.indexMetadata(metadataValues);
         // Return when done make it back to sync instead of async

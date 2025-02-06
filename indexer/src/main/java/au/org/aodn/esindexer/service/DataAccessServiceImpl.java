@@ -148,7 +148,7 @@ public class DataAccessServiceImpl implements DataAccessService {
         }
         catch (Exception e) {
             // Do nothing just return empty list
-            log.info("Unable to find cloud optimized data with UUID: {} in S3 for {} -> {}",uuid, startDate, endDate);
+            log.info("Unable to find cloud optimized data with UUID: {} in S3 for {} -> {}",uuid, startDate, endDate, e);
         }
         return List.of();
     }
@@ -202,8 +202,8 @@ public class DataAccessServiceImpl implements DataAccessService {
     protected List<StacItemModel> toStacItemModel(String uuid, Map<? extends CloudOptimizedEntry, Long> data) {
         return data.entrySet().stream()
                 .filter(d -> d.getKey().getLongitude() != null && d.getKey().getLatitude() != null)
-                .map(d ->
-                    StacItemModel.builder()
+                .map(d -> {
+                    StacItemModel.StacItemModelBuilder builder = StacItemModel.builder()
                             .collection(uuid) // collection point to the uuid of parent
                             .uuid(String
                                     .join("|",
@@ -211,22 +211,29 @@ public class DataAccessServiceImpl implements DataAccessService {
                                             d.getKey().getTime().toString(),
                                             d.getKey().getLongitude().toString(),
                                             d.getKey().getLatitude().toString(),
-                                            d.getKey().getDepth().toString()
+                                            d.getKey().getDepth() != null ? d.getKey().getDepth().toString() : "*"
                                     )
                             )
                             // The elastic query cannot sort by geo_shape or geo_point, so need to flatten value in properties
                             // this geometry is use for filtering
-                            .geometry(GeometryUtils.createGeoShapeJson(d.getKey().getLongitude(), d.getKey().getLatitude()))
-                            .properties(Map.of(
-                                    // Fields dup here is use for aggregation, you must have the geo_shape to do spatial search
-                                    "depth", d.getKey().getDepth().doubleValue(),
-                                    "lng", d.getKey().getLongitude().doubleValue(),
-                                    "lat", d.getKey().getLatitude().doubleValue(),
-                                    "count", d.getValue(),
-                                    "time", d.getKey().getZonedDateTime().format(DateTimeFormatter.ISO_ZONED_DATE_TIME))
-                            )
-                            .build()
-                )
+                            .geometry(GeometryUtils.createGeoShapeJson(d.getKey().getLongitude(), d.getKey().getLatitude()));
+
+                    Map<String, Object> props = new HashMap<>() {{
+                            // Fields dup here is use for aggregation, you must have the geo_shape to do spatial search
+                            put("lng", d.getKey().getLongitude().doubleValue());
+                            put("lat", d.getKey().getLatitude().doubleValue());
+                            put("count", d.getValue());
+                            put("time", d.getKey().getZonedDateTime().format(DateTimeFormatter.ISO_ZONED_DATE_TIME));
+
+                            // Some data do not have depth!
+                            if(d.getKey().getDepth() != null) {
+                                put("depth", d.getKey().getDepth().doubleValue());
+                            }
+                    }};
+
+                    return builder.properties(props).build();
+
+                })
                 .toList();
     }
 

@@ -1,5 +1,10 @@
 package au.org.aodn.esindexer.service;
 
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Scope;
+
 import au.org.aodn.cloudoptimized.model.DatasetProvider;
 import au.org.aodn.cloudoptimized.model.MetadataEntity;
 import au.org.aodn.cloudoptimized.model.TemporalExtent;
@@ -10,10 +15,6 @@ import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.ElasticsearchException;
 import co.elastic.clients.elasticsearch.core.BulkResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 
 import java.io.IOException;
@@ -115,10 +116,12 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
         );
 
         try {
+            int count = 0;
             for (List<StacItemModel> entries : dataset) {
                 if (entries != null) {
                     for(StacItemModel entry: entries) {
                         log.debug("add dataset into b with UUID: {} and props: {}", entry.getUuid(), entry.getProperties());
+                        count++;
                         bulkRequestProcessor.processItem(entry.getUuid(), entry)
                                 .ifPresent(responses::add);
                     }
@@ -128,7 +131,7 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
                     .flush()
                     .ifPresent(responses::add);
 
-            log.info("Finished execute bulk indexing records to index: {}", indexName);
+            log.info("Finished execute bulk indexing records {} to index: {}", count, indexName);
             callback.onComplete(responses);
         }
         catch (Exception e) {
