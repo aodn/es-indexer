@@ -1,6 +1,8 @@
 package au.org.aodn.esindexer.controller;
 
-import au.org.aodn.esindexer.model.TemporalExtent;
+import au.org.aodn.cloudoptimized.model.MetadataEntity;
+import au.org.aodn.cloudoptimized.model.TemporalExtent;
+import au.org.aodn.cloudoptimized.service.DataAccessService;
 import au.org.aodn.esindexer.service.*;
 import co.elastic.clients.elasticsearch.core.BulkResponse;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -21,6 +23,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CountDownLatch;
 
 @RestController
 @RequestMapping(value = "/api/v1/indexer/index")
@@ -103,33 +106,31 @@ public class IndexerController {
 
         return emitter;
     }
-
-    @PostMapping(path="/async/all-cloud", produces = "application/json")
-    @Operation(security = {@SecurityRequirement(name = "X-API-Key") }, description = "Index a dataset by UUID")
-    public SseEmitter indexAllCOData() {
-        final SseEmitter emitter = new SseEmitter(0L); // 0L means no timeout;
-        final IndexService.Callback callback = createCallback(emitter);
-
-        new Thread(() -> {
-            try {
-                indexCloudOptimizedData.indexAllCloudOptimizedData(callback);
-            }
-            catch (IOException ioe) {
-                emitter.completeWithError(ioe);
-            }
-            finally {
-                emitter.complete();
-            }
-        }).start();
-
-        return emitter;
-    }
-
+    /**
+     *
+     * @param uuid - The UUID of the metadata
+     * @param withCO - Index cloud optimized data the same time
+     * @return - No use
+     * @throws IOException - No use
+     * @throws FactoryException - No use
+     * @throws JAXBException - No use
+     * @throws TransformException - No use
+     * @throws InterruptedException - No use
+     */
     @PostMapping(path="/{uuid}", produces = "application/json")
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Index a metadata record by UUID")
-    public ResponseEntity<String> addDocumentByUUID(@PathVariable("uuid") String uuid) throws IOException, FactoryException, JAXBException, TransformException {
-        String metadataValues = geonetworkResourceService.searchRecordBy(uuid);
+    public ResponseEntity<String> addDocumentByUUID(
+            @PathVariable("uuid") String uuid,
+            @RequestParam(value = "withCO", defaultValue = "false") Boolean withCO) throws IOException, FactoryException, JAXBException, TransformException, InterruptedException {
 
+        if(withCO) {
+            CountDownLatch countDownLatch = new CountDownLatch(1);
+            indexCODataByUUID(uuid, countDownLatch);
+
+            // Wait till index co data completed
+            countDownLatch.await();
+        }
+        String metadataValues = geonetworkResourceService.searchRecordBy(uuid);
         CompletableFuture<ResponseEntity<String>> f = indexerMetadata.indexMetadata(metadataValues);
         // Return when done make it back to sync instead of async
         return f.join();
@@ -141,26 +142,62 @@ public class IndexerController {
         return indexerMetadata.deleteDocumentByUUID(uuid);
     }
 
-    @PostMapping(path="/{uuid}/cloud", produces = "application/json")
+    @PostMapping(path="/all-dataset", produces = "application/json")
     @Operation(security = {@SecurityRequirement(name = "X-API-Key") }, description = "Index a dataset by UUID")
-    public SseEmitter indexCODataByUUID(@PathVariable("uuid") String uuid)  {
+    public SseEmitter indexAllCOData() {
+        final SseEmitter emitter = new SseEmitter(0L); // 0L means no timeout;
+        final IndexService.Callback callback = createCallback(emitter);
+
+        new Thread(() -> {
+            try {
+                indexCloudOptimizedData.indexAllCloudOptimizedData(callback);
+            }
+            catch (Exception ioe) {
+                callback.onError(ioe);
+            }
+            finally {
+                emitter.complete();
+            }
+        }).start();
+
+        return emitter;
+    }
+
+    @PostMapping(path="/{uuid}/dataset", produces = "application/json")
+    @Operation(security = {@SecurityRequirement(name = "X-API-Key") }, description = "Index a dataset by UUID")
+    public SseEmitter indexCODataByUUID(@PathVariable("uuid") String uuid) {
+        return indexCODataByUUID(uuid, null);
+    }
+
+    protected SseEmitter indexCODataByUUID(String uuid, CountDownLatch countDownLatch)  {
 
         final SseEmitter emitter = new SseEmitter(0L); // 0L means no timeout;
         final IndexService.Callback callback = createCallback(emitter);
 
         new Thread(() -> {
             try {
+                MetadataEntity entity = dataAccessService.getMetadataByUuid(uuid);
                 List<TemporalExtent> temporalExtents = dataAccessService.getTemporalExtentOf(uuid);
-                if (!temporalExtents.isEmpty()) {
+
+                if (entity != null && !temporalExtents.isEmpty()) {
                     // Only first block works from dataservice api
                     LocalDate startDate = temporalExtents.get(0).getLocalStartDate();
                     LocalDate endDate = temporalExtents.get(0).getLocalEndDate();
-                    log.info("Indexing dataset with UUID: {} from {} to {}", uuid, startDate, endDate);
+                    log.info("Index cloud optimized data with UUID: {} from {} to {}", uuid, startDate, endDate);
 
-                    indexCloudOptimizedData.indexCloudOptimizedData(uuid, startDate, endDate, callback);
+                    indexCloudOptimizedData.indexCloudOptimizedData(entity, startDate, endDate, callback);
+                }
+                else {
+                    log.info("Index cloud optimized data : {} not found", uuid);
                 }
             }
+            catch (Exception ioe) {
+                callback.onError(ioe);
+            }
             finally {
+                if(countDownLatch != null) {
+                    countDownLatch.countDown();
+                }
                 emitter.complete();
             }
         }).start();
@@ -201,6 +238,11 @@ public class IndexerController {
                 } catch (IOException e) {
                     emitter.completeWithError(e);
                 }
+            }
+
+            @Override
+            public void onError(Throwable throwable) {
+                emitter.completeWithError(throwable);
             }
         };
     }
