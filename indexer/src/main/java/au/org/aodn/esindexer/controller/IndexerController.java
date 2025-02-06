@@ -104,23 +104,7 @@ public class IndexerController {
         return emitter;
     }
 
-    @PostMapping(path="/{uuid}", produces = "application/json")
-    @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Index a metadata record by UUID")
-    public ResponseEntity<String> addDocumentByUUID(@PathVariable("uuid") String uuid) throws IOException, FactoryException, JAXBException, TransformException {
-        String metadataValues = geonetworkResourceService.searchRecordBy(uuid);
-
-        CompletableFuture<ResponseEntity<String>> f = indexerMetadata.indexMetadata(metadataValues);
-        // Return when done make it back to sync instead of async
-        return f.join();
-    }
-
-    @DeleteMapping(path="/{uuid}", produces = "application/json")
-    @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Delete a metadata record by UUID")
-    public ResponseEntity<String> deleteDocumentByUUID(@PathVariable("uuid") String uuid) throws IOException {
-        return indexerMetadata.deleteDocumentByUUID(uuid);
-    }
-
-    @PostMapping(path="/all-dataset", produces = "application/json")
+    @PostMapping(path="/async/all-cloud", produces = "application/json")
     @Operation(security = {@SecurityRequirement(name = "X-API-Key") }, description = "Index a dataset by UUID")
     public SseEmitter indexAllCOData() {
         final SseEmitter emitter = new SseEmitter(0L); // 0L means no timeout;
@@ -141,7 +125,23 @@ public class IndexerController {
         return emitter;
     }
 
-    @PostMapping(path="/{uuid}/dataset", produces = "application/json")
+    @PostMapping(path="/{uuid}", produces = "application/json")
+    @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Index a metadata record by UUID")
+    public ResponseEntity<String> addDocumentByUUID(@PathVariable("uuid") String uuid) throws IOException, FactoryException, JAXBException, TransformException {
+        String metadataValues = geonetworkResourceService.searchRecordBy(uuid);
+
+        CompletableFuture<ResponseEntity<String>> f = indexerMetadata.indexMetadata(metadataValues);
+        // Return when done make it back to sync instead of async
+        return f.join();
+    }
+
+    @DeleteMapping(path="/{uuid}", produces = "application/json")
+    @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Delete a metadata record by UUID")
+    public ResponseEntity<String> deleteDocumentByUUID(@PathVariable("uuid") String uuid) throws IOException {
+        return indexerMetadata.deleteDocumentByUUID(uuid);
+    }
+
+    @PostMapping(path="/{uuid}/cloud", produces = "application/json")
     @Operation(security = {@SecurityRequirement(name = "X-API-Key") }, description = "Index a dataset by UUID")
     public SseEmitter indexCODataByUUID(@PathVariable("uuid") String uuid)  {
 

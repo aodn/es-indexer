@@ -53,17 +53,19 @@ $ docker-compose -f docker-compose-dev.yaml up # [-d: in daemon mode | --build: 
 
 ### Endpoints:
 
-| Description                             | Endpoints                              | Environment |
-|-----------------------------------------|----------------------------------------|-------------|
-| Logfile                                 | `/manage/logfile`                      | Edge        |
-| Beans info                              | `/manage/beans`                        | Edge        |
-| Env info                                | `/manage/env`                          | Edge        |
-| Info  (Show version)                    | `/manage/info`                         | Edge        |
-| Health check                            | `/manage/health`                       | Edge        |
-| POST/GET/DELETE against specific record | `/api/v1/indexer/index/{records-uuid}` | All         |
-| Bulk index                              | `/api/v1/indexer/index/all`            | All         |
-| Bulk index Async                        | `/api/v1/indexer/index//async/all      | All         |
-| Swagger UI:                             | `/swagger-ui/index.html`               | All         |
+| Description                                            | Endpoints                              | Environment | Param                                                                   |
+|--------------------------------------------------------|----------------------------------------|-------------|-------------------------------------------------------------------------|
+| Logfile                                                | `/manage/logfile`                      | Edge        |                                                                         |
+| Beans info                                             | `/manage/beans`                        | Edge        |                                                                         |
+| Env info                                               | `/manage/env`                          | Edge        |                                                                         |
+| Info  (Show version)                                   | `/manage/info`                         | Edge        |                                                                         |
+| Health check                                           | `/manage/health`                       | Edge        |                                                                         |
+| POST/GET/DELETE index metadata against specific record | `/api/v1/indexer/index/{uuid}`         | All         | withCO - set true will call index cloud optimized before index metadata |
+| POST Index cloud optimized data on specific record     | `/api/v1/indexer/index/{uuid}/cloud    | All         |                                                                         |
+| Bulk index                                             | `/api/v1/indexer/index/all`            | All         |                                                                         |
+| Bulk index Async metadata on all                       | `/api/v1/indexer/index/async/all       | All         |                                                                         |
+| POST Index Async cloud optimized data on all           | `/api/v1/indexer/index/async/all-cloud | All         |                                                                         |
+| Swagger UI:                                            | `/swagger-ui/index.html`               | All         |                                                                         |
 
 > The 'async/all' endpoints use SSE (Server Side Events) to avoid gateway timeout, you should use
 > postman version 10.2 or above (there is a bug with SSE for previous version), or use the web based
