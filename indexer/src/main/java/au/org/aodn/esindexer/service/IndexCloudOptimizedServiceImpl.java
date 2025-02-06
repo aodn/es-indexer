@@ -120,11 +120,12 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
             for (List<StacItemModel> entries : dataset) {
                 if (entries != null) {
                     for(StacItemModel entry: entries) {
-                        log.debug("add dataset into b with UUID: {} and props: {}", entry.getUuid(), entry.getProperties());
+                        log.debug("add cloud data with UUID: {} and props: {}", entry.getUuid(), entry.getProperties());
                         count++;
                         bulkRequestProcessor.processItem(entry.getUuid(), entry)
                                 .ifPresent(responses::add);
                     }
+                    callback.onProgress(String.format("Added... %d", count));
                 }
             }
             bulkRequestProcessor
@@ -132,7 +133,7 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
                     .ifPresent(responses::add);
 
             log.info("Finished execute bulk indexing records {} to index: {}", count, indexName);
-            callback.onComplete(responses);
+            callback.onProgress(responses);
         }
         catch (Exception e) {
             log.error("Exception thrown or not found while indexing cloud optimized data : {}", entity.getUuid(), e);
