@@ -106,6 +106,27 @@ public class IndexerController {
 
         return emitter;
     }
+
+    @PostMapping(path="/async/all-cloud", produces = "application/json")
+    @Operation(security = {@SecurityRequirement(name = "X-API-Key") }, description = "Index a dataset by UUID")
+    public SseEmitter indexAllCOData() {
+        final SseEmitter emitter = new SseEmitter(0L); // 0L means no timeout;
+        final IndexService.Callback callback = createCallback(emitter);
+
+        new Thread(() -> {
+            try {
+                indexCloudOptimizedData.indexAllCloudOptimizedData(callback);
+            }
+            catch (Exception ioe) {
+                callback.onError(ioe);
+            }
+            finally {
+                emitter.complete();
+            }
+        }).start();
+
+        return emitter;
+    }
     /**
      *
      * @param uuid - The UUID of the metadata
@@ -142,28 +163,7 @@ public class IndexerController {
         return indexerMetadata.deleteDocumentByUUID(uuid);
     }
 
-    @PostMapping(path="/all-dataset", produces = "application/json")
-    @Operation(security = {@SecurityRequirement(name = "X-API-Key") }, description = "Index a dataset by UUID")
-    public SseEmitter indexAllCOData() {
-        final SseEmitter emitter = new SseEmitter(0L); // 0L means no timeout;
-        final IndexService.Callback callback = createCallback(emitter);
-
-        new Thread(() -> {
-            try {
-                indexCloudOptimizedData.indexAllCloudOptimizedData(callback);
-            }
-            catch (Exception ioe) {
-                callback.onError(ioe);
-            }
-            finally {
-                emitter.complete();
-            }
-        }).start();
-
-        return emitter;
-    }
-
-    @PostMapping(path="/{uuid}/dataset", produces = "application/json")
+    @PostMapping(path="/{uuid}/cloud", produces = "application/json")
     @Operation(security = {@SecurityRequirement(name = "X-API-Key") }, description = "Index a dataset by UUID")
     public SseEmitter indexCODataByUUID(@PathVariable("uuid") String uuid) {
         return indexCODataByUUID(uuid, null);
