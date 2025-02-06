@@ -1,4 +1,4 @@
-package au.org.aodn.esindexer.model;
+package au.org.aodn.cloudoptimized.model;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
