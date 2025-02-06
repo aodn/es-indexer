@@ -132,7 +132,7 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
                     .ifPresent(responses::add);
 
             log.info("Finished execute bulk indexing records {} to index: {}", count, indexName);
-            callback.onComplete(responses);
+            callback.onProgress(responses);
         }
         catch (Exception e) {
             log.error("Exception thrown or not found while indexing cloud optimized data : {}", entity.getUuid(), e);
