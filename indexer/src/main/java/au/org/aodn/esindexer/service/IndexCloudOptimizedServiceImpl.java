@@ -122,10 +122,10 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
                     for(StacItemModel entry: entries) {
                         log.debug("add cloud data with UUID: {} and props: {}", entry.getUuid(), entry.getProperties());
                         count++;
-                        bulkRequestProcessor.processItem(entry.getUuid(), entry)
+                        bulkRequestProcessor.processItem(entry.getUuid(), entry, true)
                                 .ifPresent(responses::add);
                     }
-                    callback.onProgress(String.format("Added... %d", count));
+                    callback.onProgress("Processed number of items " + count);
                 }
             }
             bulkRequestProcessor
