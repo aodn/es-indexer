@@ -121,6 +121,7 @@ public class IndexerController {
                 callback.onError(ioe);
             }
             finally {
+                log.info("Close emitter at indexAllCOData");
                 emitter.complete();
             }
         }).start();
@@ -198,6 +199,7 @@ public class IndexerController {
                 if(countDownLatch != null) {
                     countDownLatch.countDown();
                 }
+                log.info("Close emitter at indexCODataByUUID");
                 emitter.complete();
             }
         }).start();
@@ -234,6 +236,7 @@ public class IndexerController {
                             .name("Indexer update event");
 
                     emitter.send(event);
+                    log.info("Close emitter in onComplete");
                     emitter.complete();
                 } catch (IOException e) {
                     emitter.completeWithError(e);

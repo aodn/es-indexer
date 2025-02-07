@@ -389,7 +389,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
 
                     if(mappedMetadataValues != null) {
                         bulkRequestProcessor
-                                .processItem(mappedMetadataValues.getUuid(), mappedMetadataValues)
+                                .processItem(mappedMetadataValues.getUuid(), mappedMetadataValues, false)
                                 .ifPresent(results::add);
                     }
                 }

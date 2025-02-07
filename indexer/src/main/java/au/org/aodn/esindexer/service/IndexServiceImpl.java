@@ -62,7 +62,7 @@ public abstract class IndexServiceImpl implements IndexService {
             }
         }
 
-        Optional<BulkResponse> processItem(String id, T item) throws IOException {
+        Optional<BulkResponse> processItem(String id, T item, boolean skipIndividualReport) throws IOException {
             if(item != null) {
                 int size = indexerObjectMapper.writeValueAsBytes(item).length;
 
@@ -96,7 +96,7 @@ public abstract class IndexServiceImpl implements IndexService {
                 dataSize += size;
                 total++;
 
-                if (callback != null) {
+                if (callback != null && !skipIndividualReport) {
                     callback.onProgress(
                             String.format(
                                     "Add uuid %s to batch, batch size is %s, total is %s",
