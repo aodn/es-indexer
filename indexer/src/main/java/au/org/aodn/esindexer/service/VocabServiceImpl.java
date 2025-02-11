@@ -47,6 +47,10 @@ public class VocabServiceImpl implements VocabService {
     @Value("${elasticsearch.vocabs_index.name}")
     protected String vocabsIndexName;
 
+    protected static final String NARROWER = "narrower";
+    protected static final String LABEL = "label";
+    protected static final String ABOUT = "about";
+
     // self-injection to avoid self-invocation problems when calling the cachable method within the same bean
     @Lazy
     @Autowired
@@ -96,12 +100,12 @@ public class VocabServiceImpl implements VocabService {
         if (!vocabs.isEmpty() && !themes.isEmpty()) {
             // vocabs already filtered by non-null during the get operation
             vocabs.forEach(topLevelVocab -> {
-                if (topLevelVocab.has("narrower") && !topLevelVocab.get("narrower").isEmpty()) {
-                    for (JsonNode secondLevelVocab : topLevelVocab.get("narrower")) {
-                        if (secondLevelVocab != null && secondLevelVocab.has("label") && secondLevelVocab.has("about")) {
+                if (topLevelVocab.has(NARROWER) && !topLevelVocab.get(NARROWER).isEmpty()) {
+                    for (JsonNode secondLevelVocab : topLevelVocab.get(NARROWER)) {
+                        if (secondLevelVocab != null && secondLevelVocab.has(LABEL) && secondLevelVocab.has(ABOUT)) {
                             ConceptModel secondLevelVocabAsConcept = ConceptModel.builder()
-                                    .id(secondLevelVocab.get("label").asText().toLowerCase())
-                                    .url(secondLevelVocab.get("about").asText())
+                                    .id(secondLevelVocab.get(LABEL).asText().toLowerCase())
+                                    .url(secondLevelVocab.get(ABOUT).asText())
                                     .build();
 
                             themes.stream().filter(Objects::nonNull).forEach(theme -> {
@@ -111,13 +115,13 @@ public class VocabServiceImpl implements VocabService {
                                 }
 
                                 // if the record's theme is leaf-node (bottom-level vocab)
-                                if (secondLevelVocab.has("narrower") && !secondLevelVocab.get("narrower").isEmpty()) {
-                                    for (JsonNode bottomLevelVocab : secondLevelVocab.get("narrower")) {
-                                        if (bottomLevelVocab != null && bottomLevelVocab.has("label") && bottomLevelVocab.has("about")) {
+                                if (secondLevelVocab.has(NARROWER) && !secondLevelVocab.get(NARROWER).isEmpty()) {
+                                    for (JsonNode bottomLevelVocab : secondLevelVocab.get(NARROWER)) {
+                                        if (bottomLevelVocab != null && bottomLevelVocab.has(LABEL) && bottomLevelVocab.has(ABOUT)) {
                                             // map the original values to a ConceptModel object for doing comparison
                                             ConceptModel leafVocabAsConcept = ConceptModel.builder()
-                                                    .id(bottomLevelVocab.get("label").asText())
-                                                    .url(bottomLevelVocab.get("about").asText())
+                                                    .id(bottomLevelVocab.get(LABEL).asText())
+                                                    .url(bottomLevelVocab.get(ABOUT).asText())
                                                     .build();
 
                                             // Compare with themes' concepts
