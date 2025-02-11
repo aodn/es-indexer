@@ -90,7 +90,7 @@ public class VocabServiceImpl implements VocabService {
     and returning the second-level vocabularies that match (1 level up from the bottom-level vocabularies)
      */
     @Override
-    public Set<String> extractVocabLabelsFromThemes(List<ThemesModel> themes, VocabType vocabType) throws IOException {
+    public Set<String> extractVocabLabelsFromThemes(List<ThemesModel> themes, VocabType vocabType, boolean includeFirstLevel) throws IOException {
         Set<String> results = new HashSet<>();
         // Iterate over the top-level vocabularies
         List<JsonNode> vocabs = switch (vocabType) {
@@ -113,6 +113,10 @@ public class VocabServiceImpl implements VocabService {
                                 // if the record's theme is already second-level vocab, no need to further check
                                 if (themeMatchConcept(theme, secondLevelVocabAsConcept)) {
                                     results.add(secondLevelVocabAsConcept.getId());
+                                    // Add top level to the list so we can search it
+                                    if(includeFirstLevel) {
+                                        results.add(topLevelVocab.get(LABEL).asText());
+                                    }
                                 }
 
                                 // if the record's theme is leaf-node (bottom-level vocab)
@@ -128,6 +132,10 @@ public class VocabServiceImpl implements VocabService {
                                             // Compare with themes' concepts
                                             if (themeMatchConcept(theme, leafVocabAsConcept)) {
                                                 results.add(secondLevelVocabAsConcept.getId());
+                                                // Add top level to the list so we can search it
+                                                if(includeFirstLevel) {
+                                                    results.add(topLevelVocab.get(LABEL).asText());
+                                                }
                                                 // just checking 1 leaf-node of each second-level vocab is enough, because we only care second-level vocabs.
                                                 break;
                                             }

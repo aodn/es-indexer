@@ -70,7 +70,7 @@ public class VocabServiceIT extends BaseTestClass {
         );
 
         // Perform the test
-        Set<String> parameterVocabs = vocabService.extractVocabLabelsFromThemes(themes, VocabService.VocabType.AODN_DISCOVERY_PARAMETER_VOCABS);
+        Set<String> parameterVocabs = vocabService.extractVocabLabelsFromThemes(themes, VocabService.VocabType.AODN_DISCOVERY_PARAMETER_VOCABS, false);
 
         // Assertions
         assertNotNull(parameterVocabs);
@@ -98,7 +98,7 @@ public class VocabServiceIT extends BaseTestClass {
         );
 
         // Perform the test
-        Set<String> platformVocabs = vocabService.extractVocabLabelsFromThemes(themes, VocabService.VocabType.AODN_PLATFORM_VOCABS);
+        Set<String> platformVocabs = vocabService.extractVocabLabelsFromThemes(themes, VocabService.VocabType.AODN_PLATFORM_VOCABS, true);
 
         // Assertions
         assertNotNull(platformVocabs);
@@ -107,7 +107,11 @@ public class VocabServiceIT extends BaseTestClass {
         assertTrue(platformVocabs.stream().anyMatch(vocab -> vocab.equalsIgnoreCase("moored surface buoy")));
         assertTrue(platformVocabs.stream().anyMatch(vocab -> vocab.equalsIgnoreCase("mooring")));
         assertTrue(platformVocabs.stream().anyMatch(vocab -> vocab.equalsIgnoreCase("drifting subsurface profiling float")));
-        assertEquals(5, platformVocabs.size());
+        assertTrue(platformVocabs.stream().anyMatch(vocab -> vocab.equalsIgnoreCase("vessel")));
+        assertTrue(platformVocabs.stream().anyMatch(vocab -> vocab.equalsIgnoreCase("float")));
+        assertTrue(platformVocabs.stream().anyMatch(vocab -> vocab.equalsIgnoreCase("fixed station")));
+        assertTrue(platformVocabs.stream().anyMatch(vocab -> vocab.equalsIgnoreCase("mooring and buoy")));
+        assertEquals(9, platformVocabs.size());
     }
 
     @Test

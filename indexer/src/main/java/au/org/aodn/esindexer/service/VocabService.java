@@ -30,7 +30,7 @@ public interface VocabService {
             this.type = type;
         }
     }
-    Set<String> extractVocabLabelsFromThemes(List<ThemesModel> themes, VocabType vocabType) throws IOException;
+    Set<String> extractVocabLabelsFromThemes(List<ThemesModel> themes, VocabType vocabType, boolean includeFirstLevel) throws IOException;
     List<String> extractOrganisationVocabLabelsFromThemes(List<ThemesModel> themes) throws IOException;
     List<VocabModel> getMappedOrganisationVocabsFromContacts(List<ContactsModel> contacts) throws IOException;
     void populateVocabsData(Map<String, Map<PathName, String>> resolvedPathCollection) throws IOException;

@@ -182,7 +182,9 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
         // parameter vocabs
         Set<String> mappedParameterLabels = new HashSet<>();
         Set<String> processedParameterVocabs = vocabService.extractVocabLabelsFromThemes(
-                stacCollectionModel.getThemes(), VocabService.VocabType.AODN_DISCOVERY_PARAMETER_VOCABS
+                stacCollectionModel.getThemes(),
+                VocabService.VocabType.AODN_DISCOVERY_PARAMETER_VOCABS,
+                false
         );
 
         if (!processedParameterVocabs.isEmpty()) {
@@ -199,9 +201,11 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
         // TODO: Adjust if necessary, or remove the above comments after making a final decision.
         --------------BEGIN--------------
         */
-        // platform vocabs
+        // platform vocabs use first level to do the search, hence we need to add the first level to the list
         Set<String> processedPlatformVocabs = vocabService.extractVocabLabelsFromThemes(
-                stacCollectionModel.getThemes(), VocabService.VocabType.AODN_PLATFORM_VOCABS
+                stacCollectionModel.getThemes(),
+                VocabService.VocabType.AODN_PLATFORM_VOCABS,
+                true
         );
         stacCollectionModel.getSummaries().setPlatformVocabs(processedPlatformVocabs);
 
