@@ -29,7 +29,7 @@ public class WebMvcConfig {
     public ConcurrentMapCacheManager cacheManager() {
         return new ConcurrentMapCacheManager(
                 VocabService.VocabType.Names.AODN_DISCOVERY_PARAMETER_VOCABS,
-                VocabService.VocabType.Names.AODN_DISCOVERY_PARAMETER_VOCABS,
+                VocabService.VocabType.Names.AODN_PLATFORM_VOCABS,
                 VocabService.VocabType.Names.AODN_ORGANISATION_VOCABS
         );
     }

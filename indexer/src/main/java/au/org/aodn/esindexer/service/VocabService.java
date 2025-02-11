@@ -16,7 +16,7 @@ public interface VocabService {
         AODN_DISCOVERY_PARAMETER_VOCABS(Names.AODN_DISCOVERY_PARAMETER_VOCABS),
         AODN_PLATFORM_VOCABS(Names.AODN_PLATFORM_VOCABS),
         AODN_ORGANISATION_VOCABS(Names.AODN_ORGANISATION_VOCABS);
-
+        // We need constant string for @Cacheable
         public static class Names {
             public static final String AODN_DISCOVERY_PARAMETER_VOCABS = "parameter_vocabs";
             public static final String AODN_PLATFORM_VOCABS = "platform_vocabs";
