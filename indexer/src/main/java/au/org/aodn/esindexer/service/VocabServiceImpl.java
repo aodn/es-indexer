@@ -47,6 +47,10 @@ public class VocabServiceImpl implements VocabService {
     @Value("${elasticsearch.vocabs_index.name}")
     protected String vocabsIndexName;
 
+    protected static final String NARROWER = "narrower";
+    protected static final String LABEL = "label";
+    protected static final String ABOUT = "about";
+
     // self-injection to avoid self-invocation problems when calling the cachable method within the same bean
     @Lazy
     @Autowired
@@ -58,21 +62,15 @@ public class VocabServiceImpl implements VocabService {
     protected ArdcVocabService ardcVocabService;
 
     protected boolean themeMatchConcept(ThemesModel theme, ConceptModel thatConcept) {
-        for (ConceptModel thisConcept : theme.getConcepts()) {
-                /*
-                comparing by combined values (id and url) of the concept object
-                this will prevent cases where bottom-level vocabs are the same in text, but their parent vocabs are different
-                e.g "car -> parts" vs "bike -> parts" ("parts" is the same but different parent)
-                 */
-            if (thisConcept.equals(thatConcept)) {
-                    /* thisConcept is the extracted from the themes of the record...theme.getConcepts()
-                    thatConcept is the object created by iterating over the parameter_vocabs cache...ConceptModel thatConcept = ConceptModel.builder()
-                    using overriding equals method to compare the two objects, this is not checking instanceof ConceptModel class
-                     */
-                return true;
-            }
-        }
-        return false;
+       /*
+        * comparing by combined values (id and url) of the concept object
+        * this will prevent cases where bottom-level vocabs are the same in text, but their parent vocabs are different
+        * e.g "car -> parts" vs "bike -> parts" ("parts" is the same but different parent)
+        * thisConcept is the extracted from the themes of the record...theme.getConcepts()
+        * thatConcept is the object created by iterating over the parameter_vocabs cache...ConceptModel thatConcept = ConceptModel.builder()
+        * using overriding equals method to compare the two objects, this is not checking instanceof ConceptModel class
+        */
+        return theme.getConcepts().stream().anyMatch(f -> f.equals(thatConcept));
     }
 
     @Autowired
@@ -91,44 +89,44 @@ public class VocabServiceImpl implements VocabService {
     this method for analysing the vocabularies of a record aka bottom-level vocabs (found in the themes section)
     and returning the second-level vocabularies that match (1 level up from the bottom-level vocabularies)
      */
-    public List<String> extractVocabLabelsFromThemes(List<ThemesModel> themes, String vocabType) throws IOException {
+    public List<String> extractVocabLabelsFromThemes(List<ThemesModel> themes, VocabType vocabType) throws IOException {
         List<String> results = new ArrayList<>();
         // Iterate over the top-level vocabularies
         List<JsonNode> vocabs = switch (vocabType) {
-            case AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS -> self.getParameterVocabs();
-            case AppConstants.AODN_PLATFORM_VOCABS -> self.getPlatformVocabs();
+            case AODN_DISCOVERY_PARAMETER_VOCABS -> self.getParameterVocabs();
+            case AODN_PLATFORM_VOCABS -> self.getPlatformVocabs();
             default -> new ArrayList<>();
         };
         if (!vocabs.isEmpty() && !themes.isEmpty()) {
-            vocabs.stream().filter(Objects::nonNull).forEach(topLevelVocab -> {
-                if (topLevelVocab.has("narrower") && !topLevelVocab.get("narrower").isEmpty()) {
-                    for (JsonNode secondLevelVocab : topLevelVocab.get("narrower")) {
-                        if (secondLevelVocab != null && secondLevelVocab.has("label") && secondLevelVocab.has("about")) {
-                            String secondLevelVocabLabel = secondLevelVocab.get("label").asText().toLowerCase();
-                            themes.stream().filter(Objects::nonNull).forEach(theme -> {
-                                ConceptModel secondLevelVocabAsConcept = ConceptModel.builder()
-                                        .id(secondLevelVocab.get("label").asText())
-                                        .url(secondLevelVocab.get("about").asText())
-                                        .build();
+            // vocabs already filtered by non-null during the get operation
+            vocabs.forEach(topLevelVocab -> {
+                if (topLevelVocab.has(NARROWER) && !topLevelVocab.get(NARROWER).isEmpty()) {
+                    for (JsonNode secondLevelVocab : topLevelVocab.get(NARROWER)) {
+                        if (secondLevelVocab != null && secondLevelVocab.has(LABEL) && secondLevelVocab.has(ABOUT)) {
+                            ConceptModel secondLevelVocabAsConcept = ConceptModel.builder()
+                                    .id(secondLevelVocab.get(LABEL).asText().toLowerCase())
+                                    .url(secondLevelVocab.get(ABOUT).asText())
+                                    .build();
 
+                            themes.stream().filter(Objects::nonNull).forEach(theme -> {
                                 // if the record's theme is already second-level vocab, no need to further check
-                                if (themeMatchConcept(theme, secondLevelVocabAsConcept) && !results.contains(secondLevelVocabLabel)) {
-                                    results.add(secondLevelVocabLabel);
+                                if (themeMatchConcept(theme, secondLevelVocabAsConcept) && !results.contains(secondLevelVocabAsConcept.getId())) {
+                                    results.add(secondLevelVocabAsConcept.getId());
                                 }
 
                                 // if the record's theme is leaf-node (bottom-level vocab)
-                                if (secondLevelVocab.has("narrower") && !secondLevelVocab.get("narrower").isEmpty()) {
-                                    for (JsonNode bottomLevelVocab : secondLevelVocab.get("narrower")) {
-                                        if (bottomLevelVocab != null && bottomLevelVocab.has("label") && bottomLevelVocab.has("about")) {
+                                if (secondLevelVocab.has(NARROWER) && !secondLevelVocab.get(NARROWER).isEmpty()) {
+                                    for (JsonNode bottomLevelVocab : secondLevelVocab.get(NARROWER)) {
+                                        if (bottomLevelVocab != null && bottomLevelVocab.has(LABEL) && bottomLevelVocab.has(ABOUT)) {
                                             // map the original values to a ConceptModel object for doing comparison
                                             ConceptModel leafVocabAsConcept = ConceptModel.builder()
-                                                    .id(bottomLevelVocab.get("label").asText())
-                                                    .url(bottomLevelVocab.get("about").asText())
+                                                    .id(bottomLevelVocab.get(LABEL).asText())
+                                                    .url(bottomLevelVocab.get(ABOUT).asText())
                                                     .build();
 
                                             // Compare with themes' concepts
-                                            if (themeMatchConcept(theme, leafVocabAsConcept) && !results.contains(secondLevelVocabLabel)) {
-                                                results.add(secondLevelVocabLabel);
+                                            if (themeMatchConcept(theme, leafVocabAsConcept) && !results.contains(secondLevelVocabAsConcept.getId())) {
+                                                results.add(secondLevelVocabAsConcept.getId());
                                                 // just checking 1 leaf-node of each second-level vocab is enough, because we only care second-level vocabs.
                                                 break;
                                             }
@@ -285,32 +283,32 @@ public class VocabServiceImpl implements VocabService {
         return vocabs;
     }
 
-    @Cacheable(value = AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS)
+    @Cacheable(value = VocabType.Names.AODN_DISCOVERY_PARAMETER_VOCABS)
     public List<JsonNode> getParameterVocabs() throws IOException {
         return groupVocabsFromEsByKey("parameter_vocab");
     }
 
-    @Cacheable(value = AppConstants.AODN_PLATFORM_VOCABS)
+    @Cacheable(value = VocabType.Names.AODN_PLATFORM_VOCABS)
     public List<JsonNode> getPlatformVocabs() throws IOException {
         return groupVocabsFromEsByKey("platform_vocab");
     }
 
-    @Cacheable(value = AppConstants.AODN_ORGANISATION_VOCABS)
+    @Cacheable(value = VocabType.Names.AODN_ORGANISATION_VOCABS)
     public List<JsonNode> getOrganisationVocabs() throws IOException {
         return groupVocabsFromEsByKey("organisation_vocab");
     }
 
-    @CacheEvict(value = AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS, allEntries = true)
+    @CacheEvict(value = VocabType.Names.AODN_DISCOVERY_PARAMETER_VOCABS, allEntries = true)
     public void clearParameterVocabCache() {
         // Intentionally empty; the annotation does the job
     }
 
-    @CacheEvict(value = AppConstants.AODN_PLATFORM_VOCABS, allEntries = true)
+    @CacheEvict(value = VocabType.Names.AODN_PLATFORM_VOCABS, allEntries = true)
     public void clearPlatformVocabCache() {
         // Intentionally empty; the annotation does the job
     }
 
-    @CacheEvict(value = AppConstants.AODN_ORGANISATION_VOCABS, allEntries = true)
+    @CacheEvict(value = VocabType.Names.AODN_ORGANISATION_VOCABS, allEntries = true)
     public void clearOrganisationVocabCache() {
         // Intentionally empty; the annotation does the job
     }
