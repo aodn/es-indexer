@@ -1,5 +1,6 @@
 package au.org.aodn.esindexer.configuration;
 
+import au.org.aodn.esindexer.service.VocabService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -27,9 +28,9 @@ public class WebMvcConfig {
     @Bean
     public ConcurrentMapCacheManager cacheManager() {
         return new ConcurrentMapCacheManager(
-                AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS,
-                AppConstants.AODN_PLATFORM_VOCABS,
-                AppConstants.AODN_ORGANISATION_VOCABS
+                VocabService.VocabType.Names.AODN_DISCOVERY_PARAMETER_VOCABS,
+                VocabService.VocabType.Names.AODN_DISCOVERY_PARAMETER_VOCABS,
+                VocabService.VocabType.Names.AODN_ORGANISATION_VOCABS
         );
     }
 

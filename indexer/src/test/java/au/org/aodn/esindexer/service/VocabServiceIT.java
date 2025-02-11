@@ -5,7 +5,6 @@ import au.org.aodn.ardcvocabs.model.VocabApiPaths;
 import au.org.aodn.ardcvocabs.model.VocabModel;
 import au.org.aodn.ardcvocabs.service.ArdcVocabService;
 import au.org.aodn.esindexer.BaseTestClass;
-import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.exception.IgnoreIndexingVocabsException;
 import au.org.aodn.stac.model.ConceptModel;
 import au.org.aodn.stac.model.ThemesModel;
@@ -71,7 +70,7 @@ public class VocabServiceIT extends BaseTestClass {
         );
 
         // Perform the test
-        List<String> parameterVocabs = vocabService.extractVocabLabelsFromThemes(themes, AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS);
+        List<String> parameterVocabs = vocabService.extractVocabLabelsFromThemes(themes, VocabService.VocabType.AODN_DISCOVERY_PARAMETER_VOCABS);
 
         // Assertions
         assertNotNull(parameterVocabs);
@@ -99,7 +98,7 @@ public class VocabServiceIT extends BaseTestClass {
         );
 
         // Perform the test
-        List<String> platformVocabs = vocabService.extractVocabLabelsFromThemes(themes, AppConstants.AODN_PLATFORM_VOCABS);
+        List<String> platformVocabs = vocabService.extractVocabLabelsFromThemes(themes, VocabService.VocabType.AODN_PLATFORM_VOCABS);
 
         // Assertions
         assertNotNull(platformVocabs);

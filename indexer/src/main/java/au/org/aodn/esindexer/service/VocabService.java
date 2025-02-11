@@ -11,7 +11,25 @@ import java.util.List;
 import java.util.Map;
 
 public interface VocabService {
-    List<String> extractVocabLabelsFromThemes(List<ThemesModel> themes, String vocabType) throws IOException;
+
+    enum VocabType {
+        AODN_DISCOVERY_PARAMETER_VOCABS(Names.AODN_DISCOVERY_PARAMETER_VOCABS),
+        AODN_PLATFORM_VOCABS(Names.AODN_PLATFORM_VOCABS),
+        AODN_ORGANISATION_VOCABS(Names.AODN_ORGANISATION_VOCABS);
+
+        public static class Names {
+            public static final String AODN_DISCOVERY_PARAMETER_VOCABS = "parameter_vocabs";
+            public static final String AODN_PLATFORM_VOCABS = "platform_vocabs";
+            public static final String AODN_ORGANISATION_VOCABS = "organisation_vocabs";
+        }
+
+        final String type;
+
+        VocabType(String type) {
+            this.type = type;
+        }
+    }
+    List<String> extractVocabLabelsFromThemes(List<ThemesModel> themes, VocabType vocabType) throws IOException;
     List<String> extractOrganisationVocabLabelsFromThemes(List<ThemesModel> themes) throws IOException;
     List<VocabModel> getMappedOrganisationVocabsFromContacts(List<ContactsModel> contacts) throws IOException;
     void populateVocabsData(Map<String, Map<PathName, String>> resolvedPathCollection) throws IOException;

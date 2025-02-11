@@ -91,12 +91,12 @@ public class VocabServiceImpl implements VocabService {
     this method for analysing the vocabularies of a record aka bottom-level vocabs (found in the themes section)
     and returning the second-level vocabularies that match (1 level up from the bottom-level vocabularies)
      */
-    public List<String> extractVocabLabelsFromThemes(List<ThemesModel> themes, String vocabType) throws IOException {
+    public List<String> extractVocabLabelsFromThemes(List<ThemesModel> themes, VocabType vocabType) throws IOException {
         List<String> results = new ArrayList<>();
         // Iterate over the top-level vocabularies
         List<JsonNode> vocabs = switch (vocabType) {
-            case AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS -> self.getParameterVocabs();
-            case AppConstants.AODN_PLATFORM_VOCABS -> self.getPlatformVocabs();
+            case AODN_DISCOVERY_PARAMETER_VOCABS -> self.getParameterVocabs();
+            case AODN_PLATFORM_VOCABS -> self.getPlatformVocabs();
             default -> new ArrayList<>();
         };
         if (!vocabs.isEmpty() && !themes.isEmpty()) {
@@ -285,32 +285,32 @@ public class VocabServiceImpl implements VocabService {
         return vocabs;
     }
 
-    @Cacheable(value = AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS)
+    @Cacheable(value = VocabType.Names.AODN_DISCOVERY_PARAMETER_VOCABS)
     public List<JsonNode> getParameterVocabs() throws IOException {
         return groupVocabsFromEsByKey("parameter_vocab");
     }
 
-    @Cacheable(value = AppConstants.AODN_PLATFORM_VOCABS)
+    @Cacheable(value = VocabType.Names.AODN_PLATFORM_VOCABS)
     public List<JsonNode> getPlatformVocabs() throws IOException {
         return groupVocabsFromEsByKey("platform_vocab");
     }
 
-    @Cacheable(value = AppConstants.AODN_ORGANISATION_VOCABS)
+    @Cacheable(value = VocabType.Names.AODN_ORGANISATION_VOCABS)
     public List<JsonNode> getOrganisationVocabs() throws IOException {
         return groupVocabsFromEsByKey("organisation_vocab");
     }
 
-    @CacheEvict(value = AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS, allEntries = true)
+    @CacheEvict(value = VocabType.Names.AODN_DISCOVERY_PARAMETER_VOCABS, allEntries = true)
     public void clearParameterVocabCache() {
         // Intentionally empty; the annotation does the job
     }
 
-    @CacheEvict(value = AppConstants.AODN_PLATFORM_VOCABS, allEntries = true)
+    @CacheEvict(value = VocabType.Names.AODN_PLATFORM_VOCABS, allEntries = true)
     public void clearPlatformVocabCache() {
         // Intentionally empty; the annotation does the job
     }
 
-    @CacheEvict(value = AppConstants.AODN_ORGANISATION_VOCABS, allEntries = true)
+    @CacheEvict(value = VocabType.Names.AODN_ORGANISATION_VOCABS, allEntries = true)
     public void clearOrganisationVocabCache() {
         // Intentionally empty; the annotation does the job
     }

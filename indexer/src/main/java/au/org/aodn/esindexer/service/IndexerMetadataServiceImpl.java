@@ -182,7 +182,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
         // parameter vocabs
         Set<String> mappedParameterLabels = new HashSet<>();
         List<String> processedParameterVocabs = vocabService.extractVocabLabelsFromThemes(
-                stacCollectionModel.getThemes(), AppConstants.AODN_DISCOVERY_PARAMETER_VOCABS
+                stacCollectionModel.getThemes(), VocabService.VocabType.AODN_DISCOVERY_PARAMETER_VOCABS
         );
 
         if (!processedParameterVocabs.isEmpty()) {
@@ -200,7 +200,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
         --------------BEGIN--------------
         */
         // platform vocabs
-        List<String> processedPlatformVocabs = vocabService.extractVocabLabelsFromThemes(stacCollectionModel.getThemes(), AppConstants.AODN_PLATFORM_VOCABS);
+        List<String> processedPlatformVocabs = vocabService.extractVocabLabelsFromThemes(stacCollectionModel.getThemes(), VocabService.VocabType.AODN_PLATFORM_VOCABS);
         stacCollectionModel.getSummaries().setPlatformVocabs(processedPlatformVocabs);
 
         // organisation vocabs
@@ -309,7 +309,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
     }
 
     public List<BulkResponse> indexAllMetadataRecordsFromGeoNetwork(
-            String beginWithUuid, boolean confirm, final Callback callback) throws IOException {
+            String beginWithUuid, boolean confirm, final Callback callback) {
 
         if (!confirm) {
             throw new IndexAllRequestNotConfirmedException("Please confirm that you want to index all metadata records from GeoNetwork");
