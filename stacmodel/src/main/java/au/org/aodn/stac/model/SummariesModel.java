@@ -7,6 +7,7 @@ import lombok.Data;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Data
 @Builder
@@ -57,17 +58,17 @@ public class SummariesModel {
      * Discovery Parameter Vocabs
      */
     @JsonProperty("parameter_vocabs")
-    protected List<String> parameterVocabs;
+    protected Set<String> parameterVocabs;
 
     /**
      * ARDC platform vocabs
      */
     @JsonProperty("platform_vocabs")
-    protected List<String> platformVocabs;
+    protected Set<String> platformVocabs;
 
     /**
      * ARDC organisation vocabs
      */
     @JsonProperty("organisation_vocabs")
-    protected List<String> organisationVocabs;
+    protected Set<String> organisationVocabs;
 }

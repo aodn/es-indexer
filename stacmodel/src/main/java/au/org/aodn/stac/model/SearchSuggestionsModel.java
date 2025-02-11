@@ -5,22 +5,22 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Data;
 
-import java.util.List;
+import java.util.Set;
 
 @Data
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SearchSuggestionsModel {
     @JsonProperty("abstract_phrases")
-    private List<String> abstractPhrases;
+    private Set<String> abstractPhrases;
 
     //sayt stands for search_as_you_type
     @JsonProperty("parameter_vocabs_sayt")
-    private List<String> parameterVocabs;
+    private Set<String> parameterVocabs;
 
     @JsonProperty("platform_vocabs_sayt")
-    private List<String> platformVocabs;
+    private Set<String> platformVocabs;
 
     @JsonProperty("organisation_vocabs_sayt")
-    private List<String> organisationVocabs;
+    private Set<String> organisationVocabs;
 }

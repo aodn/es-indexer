@@ -89,8 +89,9 @@ public class VocabServiceImpl implements VocabService {
     this method for analysing the vocabularies of a record aka bottom-level vocabs (found in the themes section)
     and returning the second-level vocabularies that match (1 level up from the bottom-level vocabularies)
      */
-    public List<String> extractVocabLabelsFromThemes(List<ThemesModel> themes, VocabType vocabType) throws IOException {
-        List<String> results = new ArrayList<>();
+    @Override
+    public Set<String> extractVocabLabelsFromThemes(List<ThemesModel> themes, VocabType vocabType) throws IOException {
+        Set<String> results = new HashSet<>();
         // Iterate over the top-level vocabularies
         List<JsonNode> vocabs = switch (vocabType) {
             case AODN_DISCOVERY_PARAMETER_VOCABS -> self.getParameterVocabs();
@@ -110,7 +111,7 @@ public class VocabServiceImpl implements VocabService {
 
                             themes.stream().filter(Objects::nonNull).forEach(theme -> {
                                 // if the record's theme is already second-level vocab, no need to further check
-                                if (themeMatchConcept(theme, secondLevelVocabAsConcept) && !results.contains(secondLevelVocabAsConcept.getId())) {
+                                if (themeMatchConcept(theme, secondLevelVocabAsConcept)) {
                                     results.add(secondLevelVocabAsConcept.getId());
                                 }
 
@@ -125,7 +126,7 @@ public class VocabServiceImpl implements VocabService {
                                                     .build();
 
                                             // Compare with themes' concepts
-                                            if (themeMatchConcept(theme, leafVocabAsConcept) && !results.contains(secondLevelVocabAsConcept.getId())) {
+                                            if (themeMatchConcept(theme, leafVocabAsConcept)) {
                                                 results.add(secondLevelVocabAsConcept.getId());
                                                 // just checking 1 leaf-node of each second-level vocab is enough, because we only care second-level vocabs.
                                                 break;

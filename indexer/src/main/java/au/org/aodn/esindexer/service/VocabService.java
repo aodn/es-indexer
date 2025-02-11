@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public interface VocabService {
 
@@ -29,7 +30,7 @@ public interface VocabService {
             this.type = type;
         }
     }
-    List<String> extractVocabLabelsFromThemes(List<ThemesModel> themes, VocabType vocabType) throws IOException;
+    Set<String> extractVocabLabelsFromThemes(List<ThemesModel> themes, VocabType vocabType) throws IOException;
     List<String> extractOrganisationVocabLabelsFromThemes(List<ThemesModel> themes) throws IOException;
     List<VocabModel> getMappedOrganisationVocabsFromContacts(List<ContactsModel> contacts) throws IOException;
     void populateVocabsData(Map<String, Map<PathName, String>> resolvedPathCollection) throws IOException;

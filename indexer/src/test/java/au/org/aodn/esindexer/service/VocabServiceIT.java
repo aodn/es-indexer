@@ -70,7 +70,7 @@ public class VocabServiceIT extends BaseTestClass {
         );
 
         // Perform the test
-        List<String> parameterVocabs = vocabService.extractVocabLabelsFromThemes(themes, VocabService.VocabType.AODN_DISCOVERY_PARAMETER_VOCABS);
+        Set<String> parameterVocabs = vocabService.extractVocabLabelsFromThemes(themes, VocabService.VocabType.AODN_DISCOVERY_PARAMETER_VOCABS);
 
         // Assertions
         assertNotNull(parameterVocabs);
@@ -98,7 +98,7 @@ public class VocabServiceIT extends BaseTestClass {
         );
 
         // Perform the test
-        List<String> platformVocabs = vocabService.extractVocabLabelsFromThemes(themes, VocabService.VocabType.AODN_PLATFORM_VOCABS);
+        Set<String> platformVocabs = vocabService.extractVocabLabelsFromThemes(themes, VocabService.VocabType.AODN_PLATFORM_VOCABS);
 
         // Assertions
         assertNotNull(platformVocabs);
