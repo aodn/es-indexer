@@ -28,7 +28,7 @@ import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -52,28 +52,28 @@ public class StacCollectionMapperServiceTest {
     protected ObjectMapper objectMapper = new ObjectMapper();
     protected JaxbUtils<MDMetadataType> jaxbUtils = new JaxbUtils<>(MDMetadataType.class);
 
-    @MockBean
+    @MockitoBean
     protected GeoNetworkServiceImpl geoNetworkResourceService;
 
-    @MockBean
+    @MockitoBean
     protected ElasticsearchClient portalElasticsearchClient;
 
-    @MockBean
+    @MockitoBean
     protected ElasticSearchIndexService elasticSearchIndexService;
 
-    @MockBean
+    @MockitoBean
     protected VocabService vocabsService;
 
-    @MockBean
+    @MockitoBean
     protected RankingService rankingService;
 
-    @MockBean
+    @MockitoBean
     protected GcmdKeywordUtils gcmdKeywordUtils;
 
-    @MockBean
+    @MockitoBean
     protected IndexCloudOptimizedService indexCloudOptimizedService;
 
-    @MockBean
+    @MockitoBean
     protected DataAccessService dataAccessService;
 
     @Autowired
@@ -135,7 +135,7 @@ public class StacCollectionMapperServiceTest {
                 .thenReturn(0L);
 
         // Mock the protected method to return an empty string list
-        doReturn(Collections.emptyList()).when(indexerService).extractTokensFromDescription(anyString());
+        doReturn(Collections.emptySet()).when(indexerService).extractTokensFromDescription(anyString());
 
         doNothing()
                 .when(elasticSearchIndexService)

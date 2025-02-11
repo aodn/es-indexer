@@ -144,7 +144,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
         }
     }
 
-    protected List<String> extractTokensFromDescription(String description) throws IOException {
+    protected Set<String> extractTokensFromDescription(String description) throws IOException {
         Set<String> results = new HashSet<>();
 
         AnalyzeRequest request = AnalyzeRequest.of(ar -> ar.index(indexName).analyzer(tokensAnalyserName).text(description));
@@ -158,7 +158,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
             }
         }
 
-        return new ArrayList<>(results);
+        return results;
     }
 
     protected StacCollectionModel getMappedMetadataValues(String metadataValues) throws IOException, FactoryException, TransformException, JAXBException {
@@ -181,8 +181,10 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
 
         // parameter vocabs
         Set<String> mappedParameterLabels = new HashSet<>();
-        List<String> processedParameterVocabs = vocabService.extractVocabLabelsFromThemes(
-                stacCollectionModel.getThemes(), VocabService.VocabType.AODN_DISCOVERY_PARAMETER_VOCABS
+        Set<String> processedParameterVocabs = vocabService.extractVocabLabelsFromThemes(
+                stacCollectionModel.getThemes(),
+                VocabService.VocabType.AODN_DISCOVERY_PARAMETER_VOCABS,
+                false
         );
 
         if (!processedParameterVocabs.isEmpty()) {
@@ -191,7 +193,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
             // manual mapping with custom logic when the record doesn't have existing AODN Parameter Vocabs
             mappedParameterLabels.addAll(gcmdKeywordUtils.getMappedParameterVocabsFromGcmdKeywords(stacCollectionModel.getThemes()));
         }
-        stacCollectionModel.getSummaries().setParameterVocabs(new ArrayList<>(mappedParameterLabels));
+        stacCollectionModel.getSummaries().setParameterVocabs(mappedParameterLabels);
 
         /*
         NOTE: The following implementation for platform and organization vocabularies is just a placeholder, not the final version.
@@ -199,9 +201,11 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
         // TODO: Adjust if necessary, or remove the above comments after making a final decision.
         --------------BEGIN--------------
         */
-        // platform vocabs
-        List<String> processedPlatformVocabs = vocabService.extractVocabLabelsFromThemes(
-                stacCollectionModel.getThemes(), VocabService.VocabType.AODN_PLATFORM_VOCABS
+        // platform vocabs use first level to do the search, hence we need to add the first level to the list
+        Set<String> processedPlatformVocabs = vocabService.extractVocabLabelsFromThemes(
+                stacCollectionModel.getThemes(),
+                VocabService.VocabType.AODN_PLATFORM_VOCABS,
+                true
         );
         stacCollectionModel.getSummaries().setPlatformVocabs(processedPlatformVocabs);
 
@@ -217,7 +221,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
                 mappedOrganisationLabels.addAll(extractOrderedLabels(vocabModel));
             }
         }
-        stacCollectionModel.getSummaries().setOrganisationVocabs(new ArrayList<>(mappedOrganisationLabels));
+        stacCollectionModel.getSummaries().setOrganisationVocabs(mappedOrganisationLabels);
 
         // search_as_you_type enabled fields can be extended
         SearchSuggestionsModel searchSuggestionsModel = SearchSuggestionsModel.builder()
