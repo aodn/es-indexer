@@ -81,7 +81,12 @@ public class VocabServiceIT extends BaseTestClass {
         assertTrue(parameterVocabs.stream().anyMatch(vocab -> vocab.equalsIgnoreCase("pH (total scale) of the water body")));
         assertEquals(5, parameterVocabs.size());
     }
-
+    /**
+     * Verify platform vocab works correctly, the platform vocab share the same logic that it extract the second level vocab however
+     * it add additional level 1 vocab to the result. That is result contains level 1 and level 2, because
+     * the filter for platform applies to level 1 not level 2, so we need these values appear in order to complete the search
+     * @throws IOException - Not expected
+     */
     @Test
     void testExtractPlatformVocabLabelsFromThemes() throws IOException {
         // Prepare themes
@@ -107,10 +112,10 @@ public class VocabServiceIT extends BaseTestClass {
         assertTrue(platformVocabs.stream().anyMatch(vocab -> vocab.equalsIgnoreCase("moored surface buoy")));
         assertTrue(platformVocabs.stream().anyMatch(vocab -> vocab.equalsIgnoreCase("mooring")));
         assertTrue(platformVocabs.stream().anyMatch(vocab -> vocab.equalsIgnoreCase("drifting subsurface profiling float")));
-        assertTrue(platformVocabs.stream().anyMatch(vocab -> vocab.equalsIgnoreCase("vessel")));
-        assertTrue(platformVocabs.stream().anyMatch(vocab -> vocab.equalsIgnoreCase("float")));
-        assertTrue(platformVocabs.stream().anyMatch(vocab -> vocab.equalsIgnoreCase("fixed station")));
-        assertTrue(platformVocabs.stream().anyMatch(vocab -> vocab.equalsIgnoreCase("mooring and buoy")));
+        assertTrue(platformVocabs.stream().anyMatch(vocab -> vocab.equalsIgnoreCase("vessel")));            // Level 1
+        assertTrue(platformVocabs.stream().anyMatch(vocab -> vocab.equalsIgnoreCase("float")));             // Level 1
+        assertTrue(platformVocabs.stream().anyMatch(vocab -> vocab.equalsIgnoreCase("fixed station")));     // Level 1
+        assertTrue(platformVocabs.stream().anyMatch(vocab -> vocab.equalsIgnoreCase("mooring and buoy")));  // Level 1
         assertEquals(9, platformVocabs.size());
     }
 
