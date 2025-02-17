@@ -89,6 +89,9 @@ public abstract class IndexServiceImpl implements IndexService {
                 bulkRequest.operations(op -> op
                         .index(idx -> idx
                                 .id(id)
+                                // Force to write to a single version, we do not need to keep history for now, it should avoid system
+                                // growth fast
+                                .version(1L)
                                 .index(indexName)
                                 .document(item)
                         )
