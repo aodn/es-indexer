@@ -82,7 +82,7 @@
   }, {
       "href" : "https://nbviewer.org/github/aodn/aodn_cloud_optimised/blob/main/notebooks/autonomous_underwater_vehicle.ipynb",
       "rel" : "related",
-      "type" : "application/json",
+      "type" : "application/x-ipynb+json",
       "title" : "Python notebook example"
   }],
   "license" : "",
