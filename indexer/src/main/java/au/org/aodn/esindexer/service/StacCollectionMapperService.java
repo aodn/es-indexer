@@ -161,7 +161,7 @@ public abstract class StacCollectionMapperService {
      */
     private String convertDateToZonedDateTime(String uuid, String dateStr, boolean isStartDate) {
         ZonedDateTime utcZonedDateTime = null;
-        String convertedDateTime = null;
+        String convertedDateTime;
         try {
             // Case 1: Date and Time (e.g., "2024-09-10T10:15:30")
             if (dateStr.matches("\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}")) {
@@ -710,7 +710,7 @@ public abstract class StacCollectionMapperService {
                 .map(i -> LinkModel.builder()
                         .href(i)
                         .rel(RelationType.RELATED.getValue())
-                        .type(MediaType.APPLICATION_JSON_VALUE)
+                        .type("application/x-ipynb+json")
                         .title("Python notebook example")
                         .build())
                 .orElse(null);
