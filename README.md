@@ -92,7 +92,7 @@ will skip the download.
 
 There is a [gcmd-mapping.csv](indexer/src/main/resources/config_files/gcmd-mapping.csv) file which map the GCMD keywords
 to the AODN vocabs, this allow dataset having GCMD keyword searchable using AODN keywords. The mapping is created
-manually by Nat.
+manually by Nat, right now store here [excel](https://universitytasmania.sharepoint.com/:x:/r/sites/tier2-imos-AODN-Team/_layouts/15/Doc.aspx?sourcedoc=%7B0FB939CA-9881-4C33-9254-F59430DA5EFB%7D&file=non_unique_last_term_full_term_gcmd_keywords.xlsx&fromShare=true&action=default&mobileredirect=true)
 
 The vocab is assigned to the metadata manually, and is part of the suggested words. That means user can type vocabs in
 the search box, and able to select some known keywords. Although vocabs have multiple level, so far we only use level 1
