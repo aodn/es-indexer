@@ -1,6 +1,6 @@
 # `es-indexer` - Elasticsearch Indexer
 
-![ESGN_Indexer](https://github.com/aodn/es-indexer/assets/26201635/99615859-b4a4-48be-a3af-72b7f1fc048f)
+![flow1](https://github.com/user-attachments/assets/39d873eb-a2a5-41d1-9cd0-a21bf4fb7745)
 
 This `es-indexer` for ingesting GeoNetwork4 metadata records into an Elasticsearch index. The index schema adheres to the STAC schema but includes some customisations.
 
@@ -79,11 +79,21 @@ $ docker-compose -f docker-compose-dev.yaml up # [-d: in daemon mode | --build: 
 
 ## Notes
 ### Centroid Calculation
-Centroid is calculated on the fly
-1. Use the shape file contains the land only area, adjust it to reduce the line complexity
-2. Remove the land from the spatial extents of each record
-3. Store it in a field geometry_noland
-4. If user request Centroid field, the BBOX area that user requested is UNION with geometry_noland.
-5. This gives the current visible area of the spatial extents excluded land area
-6. Then centroid is calculated dynamically based on these areas and return via API call
-* Noted the speed of transfer geometry_noload to OGC api is the key bottleneck for performance.
+The calculation of centroid isn't happens here, the indexer creates a spatial extents area with land removed. The
+resulting spatial extents is store in geometry_noland. The centroid point is calculated in the OGC api, please refer
+to the README in ogcapi for details.
+
+### ARDC Vocabulary
+When indexer starts, it will try to fetch vocabs from ARDC, please check code under [ardcvocabs](ardcvocabs). The url
+to the API call always points to the "current", this current is maintained manually by Nat. For each vocabs, system needs
+to call two separated API, one target the root level, and the other target all node. In order to avoid un-necessary call,
+the indexer will check the "current" version is diff from the saved version in Elastic, if version is the same then it
+will skip the download.
+
+There is a [gcmd-mapping.csv](indexer/src/main/resources/config_files/gcmd-mapping.csv) file which map the GCMD keywords
+to the AODN vocabs, this allow dataset having GCMD keyword searchable using AODN keywords. The mapping is created
+manually by Nat, right now store here [excel](https://universitytasmania.sharepoint.com/:x:/r/sites/tier2-imos-AODN-Team/_layouts/15/Doc.aspx?sourcedoc=%7B0FB939CA-9881-4C33-9254-F59430DA5EFB%7D&file=non_unique_last_term_full_term_gcmd_keywords.xlsx&fromShare=true&action=default&mobileredirect=true)
+
+The vocab is assigned to the metadata manually, and is part of the suggested words. That means user can type vocabs in
+the search box, and able to select some known keywords. Although vocabs have multiple level, so far we only use level 1
+and level 2.
