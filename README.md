@@ -84,10 +84,10 @@ resulting spatial extents is store in geometry_noland. The centroid point is cal
 to the README in ogcapi for details.
 
 ### ARDC Vocabulary
-When indexer starts, it will try to fetch vocabs from ARDC, please check code under [ardcvocabs](ardcvocabs). The url 
-to the API call always points to the "current", this current is maintained manually by Nat. For each vocabs, system needs 
+When indexer starts, it will try to fetch vocabs from ARDC, please check code under [ardcvocabs](ardcvocabs). The url
+to the API call always points to the "current", this current is maintained manually by Nat. For each vocabs, system needs
 to call two separated API, one target the root level, and the other target all node. In order to avoid un-necessary call,
-the indexer will check the "current" version is diff from the saved version in Elastic, if version is the same then it 
+the indexer will check the "current" version is diff from the saved version in Elastic, if version is the same then it
 will skip the download.
 
 There is a [gcmd-mapping.csv](indexer/src/main/resources/config_files/gcmd-mapping.csv) file which map the GCMD keywords
@@ -95,6 +95,5 @@ to the AODN vocabs, this allow dataset having GCMD keyword searchable using AODN
 manually by Nat.
 
 The vocab is assigned to the metadata manually, and is part of the suggested words. That means user can type vocabs in
-the search box, and able to select some known keywords. Although vocabs have multiple level, so far we only use level 1 
+the search box, and able to select some known keywords. Although vocabs have multiple level, so far we only use level 1
 and level 2.
-
