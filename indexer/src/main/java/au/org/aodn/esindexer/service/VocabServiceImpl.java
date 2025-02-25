@@ -396,13 +396,17 @@ public class VocabServiceImpl implements VocabService {
             log.error("No vocabs to be indexed, nothing to index");
         }
     }
-
+    /**
+     * This method do the population in synchronize way
+     * @param resolvedPathCollection - The path of where to download data
+     * @throws IOException - If something happens, throw to allow client aware of issue.
+     */
     public void populateVocabsData(Map<String, Map<PathName, String>> resolvedPathCollection) throws IOException {
         log.info("Starting fetching vocabs data process synchronously...");
 
-        List<VocabModel> parameterVocabs = ardcVocabService.getVocabTreeFromArdcByType(resolvedPathCollection.get(VocabApiPaths.PARAMETER_VOCAB.name()));
-        List<VocabModel> platformVocabs = ardcVocabService.getVocabTreeFromArdcByType(resolvedPathCollection.get(VocabApiPaths.PLATFORM_VOCAB.name()));
-        List<VocabModel> organisationVocabs = ardcVocabService.getVocabTreeFromArdcByType(resolvedPathCollection.get(VocabApiPaths.ORGANISATION_VOCAB.name()));
+        List<VocabModel> parameterVocabs = ardcVocabService.getARDCVocabByType(resolvedPathCollection.get(VocabApiPaths.PARAMETER_VOCAB.name()));
+        List<VocabModel> platformVocabs = ardcVocabService.getARDCVocabByType(resolvedPathCollection.get(VocabApiPaths.PLATFORM_VOCAB.name()));
+        List<VocabModel> organisationVocabs = ardcVocabService.getARDCVocabByType(resolvedPathCollection.get(VocabApiPaths.ORGANISATION_VOCAB.name()));
 
         if (parameterVocabs.isEmpty() || platformVocabs.isEmpty() || organisationVocabs.isEmpty()) {
             throw new IgnoreIndexingVocabsException("One or more vocab lists are empty. Skipping indexing.");
@@ -410,7 +414,10 @@ public class VocabServiceImpl implements VocabService {
 
         indexAllVocabs(parameterVocabs, platformVocabs, organisationVocabs);
     }
-
+    /**
+     * This method do the population in asynchronize way
+     * @param resolvedPathCollection - The path of where to download data
+     */
     public void populateVocabsDataAsync(Map<String, Map<PathName, String>> resolvedPathCollection) {
         log.info("Starting async vocabs data fetching process...");
 
@@ -446,10 +453,12 @@ public class VocabServiceImpl implements VocabService {
                 // Call indexAllVocabs only after all tasks are completed and validated
                 log.info("Indexing fetched vocabs to {}", vocabsIndexName);
                 indexAllVocabs(allResults.get(0), allResults.get(1), allResults.get(2));
-            } catch (InterruptedException | IOException e) {
+            }
+            catch (InterruptedException | IOException e) {
                 Thread.currentThread().interrupt();  // Restore interrupt status
                 log.error("Thread was interrupted while processing vocab tasks", e);
-            } finally {
+            }
+            finally {
                 executorService.shutdown();
             }
         });
@@ -460,7 +469,7 @@ public class VocabServiceImpl implements VocabService {
     private Callable<List<VocabModel>> createVocabFetchTask(Map<PathName, String> resolvedPaths, String vocabName) {
         return () -> {
             log.info("Fetching {} vocabs from ARDC", vocabName);
-            return ardcVocabService.getVocabTreeFromArdcByType(resolvedPaths);
+            return ardcVocabService.getARDCVocabByType(resolvedPaths);
         };
     }
 }

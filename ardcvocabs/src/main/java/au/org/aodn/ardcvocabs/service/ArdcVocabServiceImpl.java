@@ -363,7 +363,7 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
     }
 
     @Override
-    public List<VocabModel> getVocabTreeFromArdcByType(Map<PathName, String> resolvedPaths) {
+    public List<VocabModel> getARDCVocabByType(Map<PathName, String> resolvedPaths) {
         Map<String, List<VocabModel>> vocabLeafNodes = getVocabLeafNodes(vocabApiBase, resolvedPaths);
         String url = String.format(vocabApiBase + resolvedPaths.get(PathName.categoryApi));
         List<VocabModel> vocabCategoryNodes = new ArrayList<>();
