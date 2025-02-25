@@ -1,6 +1,6 @@
 # `es-indexer` - Elasticsearch Indexer
 
-![ESGN_Indexer](https://github.com/aodn/es-indexer/assets/26201635/99615859-b4a4-48be-a3af-72b7f1fc048f)
+![flow1](https://github.com/user-attachments/assets/39d873eb-a2a5-41d1-9cd0-a21bf4fb7745)
 
 This `es-indexer` for ingesting GeoNetwork4 metadata records into an Elasticsearch index. The index schema adheres to the STAC schema but includes some customisations.
 
