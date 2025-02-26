@@ -85,10 +85,9 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
         Map<Name, String> resolvedPaths = new HashMap<>();
         for (VocabApiPaths vocabApiPath : VocabApiPaths.values()) {
             if (currentPaths.name().equals(vocabApiPath.name())) {
-                resolvedPaths.put(Name.categoryVersion, categoryVersion);
+                resolvedPaths.put(Name.version, categoryVersion + "/" + vocabVersion);
                 resolvedPaths.put(Name.categoryApi, String.format(vocabApiPath.getCategoryApiTemplate(), categoryVersion));
                 resolvedPaths.put(Name.categoryDetailsApi, String.format(vocabApiPath.getCategoryDetailsTemplate(), categoryVersion, "%s"));
-                resolvedPaths.put(Name.vocabVersion, vocabVersion);
                 resolvedPaths.put(Name.vocabApi, String.format(vocabApiPath.getVocabApiTemplate(), vocabVersion));
                 resolvedPaths.put(Name.vocabDetailsApi, String.format(vocabApiPath.getVocabDetailsTemplate(), vocabVersion, "%s"));
             }
@@ -195,7 +194,7 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
                         .label(label.apply(target))
                         .definition(definition.apply(target))
                         .about(vocabUri)
-                        .version(pointers.get(Name.categoryVersion) + "/" + pointers.get(Name.vocabVersion))
+                        .version(pointers.get(Name.version))
                         .displayLabel(displayLabel.apply(target))
                         .hiddenLabels(hiddenLabels.apply(target))
                         .altLabels(altLabels.apply(target))
@@ -280,7 +279,7 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
                                             .label(label.apply(target))
                                             .definition(definition.apply(target))
                                             .about(about.apply(target))
-                                            .version(pointers.get(Name.categoryVersion) + "/" + pointers.get(Name.vocabVersion))
+                                            .version(pointers.get(Name.version))
                                             .displayLabel(displayLabel.apply(target))
                                             .hiddenLabels(hiddenLabels.apply(target))
                                             .altLabels(altLabels.apply(target))
@@ -358,10 +357,9 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
     }
 
     @Override
-    public boolean isVersionEquals(ArdcCurrentPaths path, String catVersion, String vocabVersion) {
+    public boolean isVersionEquals(ArdcCurrentPaths path, String version) {
         Map<Name, String> versioned = this.getVersionedArdcPath(path);
-        return versioned.get(Name.categoryVersion).equals(catVersion) &&
-                versioned.get(Name.vocabVersion).equals(vocabVersion);
+        return versioned.get(Name.version).equals(version);
     }
 
     @Override

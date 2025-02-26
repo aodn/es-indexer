@@ -1,10 +1,9 @@
 package au.org.aodn.ardcvocabs.model;
 
 public enum Name {
-    categoryVersion,
+    version,
     categoryApi,
     categoryDetailsApi,
-    vocabVersion,
     vocabApi,
     vocabDetailsApi
 }

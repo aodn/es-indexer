@@ -454,17 +454,17 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
         setupParameterVocabMockRestTemplate(mockRestTemplate);
 
         Assertions.assertTrue(
-                ardcVocabService.isVersionEquals(ArdcCurrentPaths.ORGANISATION_VOCAB, "version-2-5", "version-2-5"),
+                ardcVocabService.isVersionEquals(ArdcCurrentPaths.ORGANISATION_VOCAB, "version-2-5/version-2-5"),
                 "Expect org equals"
         );
 
         Assertions.assertTrue(
-                ardcVocabService.isVersionEquals(ArdcCurrentPaths.PLATFORM_VOCAB, "version-1-2", "version-6-1"),
+                ardcVocabService.isVersionEquals(ArdcCurrentPaths.PLATFORM_VOCAB, "version-1-2/version-6-1"),
                 "Expect platform equals"
         );
 
         Assertions.assertTrue(
-                ardcVocabService.isVersionEquals(ArdcCurrentPaths.PARAMETER_VOCAB, "version-2-1", "version-1-6"),
+                ardcVocabService.isVersionEquals(ArdcCurrentPaths.PARAMETER_VOCAB, "version-2-1/version-1-6"),
                 "Expect parameter equals"
         );
     }
