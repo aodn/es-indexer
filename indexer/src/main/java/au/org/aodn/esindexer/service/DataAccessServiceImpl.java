@@ -15,10 +15,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -29,8 +26,8 @@ public class DataAccessServiceImpl implements DataAccessService {
     protected RestTemplate restTemplate;
 
     public DataAccessServiceImpl(String serverUrl, String baseUrl, RestTemplate restTemplate) {
-       this.accessEndPoint = serverUrl + baseUrl;
-       this.restTemplate = restTemplate;
+        this.accessEndPoint = serverUrl + baseUrl;
+        this.restTemplate = restTemplate;
     }
 
     @Override
@@ -46,13 +43,13 @@ public class DataAccessServiceImpl implements DataAccessService {
                 url,
                 HttpMethod.GET,
                 request,
-                new ParameterizedTypeReference<>() {},
+                new ParameterizedTypeReference<>() {
+                },
                 Map.of()
         );
         if (responseEntity.getStatusCode().is2xxSuccessful()) {
             return responseEntity.getBody();
-        }
-        else {
+        } else {
             return null;
         }
     }
@@ -68,13 +65,13 @@ public class DataAccessServiceImpl implements DataAccessService {
                 url,
                 HttpMethod.GET,
                 request,
-                new ParameterizedTypeReference<>() {},
+                new ParameterizedTypeReference<>() {
+                },
                 Map.of()
         );
         if (responseEntity.getStatusCode().is2xxSuccessful()) {
             return responseEntity.getBody();
-        }
-        else {
+        } else {
             return List.of();
         }
     }
@@ -93,7 +90,8 @@ public class DataAccessServiceImpl implements DataAccessService {
                     url,
                     HttpMethod.GET,
                     request,
-                    new ParameterizedTypeReference<>() {},
+                    new ParameterizedTypeReference<>() {
+                    },
                     Map.of()
             );
 
@@ -103,8 +101,7 @@ public class DataAccessServiceImpl implements DataAccessService {
                 }
             }
             return Optional.empty();
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             return Optional.empty();
         }
     }
@@ -135,20 +132,22 @@ public class DataAccessServiceImpl implements DataAccessService {
                     url,
                     HttpMethod.GET,
                     request,
-                    new ParameterizedTypeReference<>() {},
+                    new ParameterizedTypeReference<>() {
+                    },
                     params
             );
 
             if (responseEntity.getStatusCode().is2xxSuccessful()) {
                 if (responseEntity.getBody() != null) {
-                    log.info("Indexed cloud optimized data with UUID: {} in S3 for {} -> {}",uuid, startDate, endDate);
+                    log.info("Indexed cloud optimized data with UUID: {} in S3 for {} -> {}", uuid, startDate, endDate);
+
                     return toStacItemModel(uuid, aggregateData(responseEntity.getBody()));
                 }
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             // Do nothing just return empty list
-            log.info("Unable to find cloud optimized data with UUID: {} in S3 for {} -> {}",uuid, startDate, endDate, e);
+            log.info("Unable to find cloud optimized data with UUID: {} in S3 for {} -> {}", uuid, startDate, endDate, e);
+            log.warn("error message is: {}", e.getMessage());
         }
         return List.of();
     }
@@ -169,7 +168,8 @@ public class DataAccessServiceImpl implements DataAccessService {
                     url,
                     HttpMethod.GET,
                     request,
-                    new ParameterizedTypeReference<>() {},
+                    new ParameterizedTypeReference<>() {
+                    },
                     params
             );
 
@@ -181,8 +181,10 @@ public class DataAccessServiceImpl implements DataAccessService {
             throw new RuntimeException("Exception thrown while retrieving dataset with UUID: " + uuid + e.getMessage(), e);
         }
     }
+
     /**
      * Summarize the data by counting the number if all the concerned fields are the same
+     *
      * @param data the data to summarize
      * @return the summarized data
      */
@@ -193,8 +195,10 @@ public class DataAccessServiceImpl implements DataAccessService {
                         Collectors.counting()
                 ));
     }
+
     /**
      * Group and count the entries based on user object equals/hashcode
+     *
      * @param uuid - The parent uuid that associate with input
      * @param data - The aggregated data
      * @return - List of formatted stac item
@@ -219,16 +223,19 @@ public class DataAccessServiceImpl implements DataAccessService {
                             .geometry(GeometryUtils.createGeoShapeJson(d.getKey().getLongitude(), d.getKey().getLatitude()));
 
                     Map<String, Object> props = new HashMap<>() {{
-                            // Fields dup here is use for aggregation, you must have the geo_shape to do spatial search
-                            put("lng", d.getKey().getLongitude().doubleValue());
-                            put("lat", d.getKey().getLatitude().doubleValue());
-                            put("count", d.getValue());
-                            put("time", d.getKey().getZonedDateTime().format(DateTimeFormatter.ISO_ZONED_DATE_TIME));
+                        // Fields dup here is use for aggregation, you must have the geo_shape to do spatial search
+                        put("lng", d.getKey().getLongitude().doubleValue());
+                        put("lat", d.getKey().getLatitude().doubleValue());
+                        put("count", d.getValue());
+                        var dates = new ArrayList<DateCountPair>();
+                        var date = d.getKey().getZonedDateTime().format(DateTimeFormatter.ISO_ZONED_DATE_TIME);
+                        dates.add(new DateCountPair(date, d.getValue()));
+                        put("dates", dates);
 
-                            // Some data do not have depth!
-                            if(d.getKey().getDepth() != null) {
-                                put("depth", d.getKey().getDepth().doubleValue());
-                            }
+                        // Some data do not have depth!
+                        if (d.getKey().getDepth() != null) {
+                            put("depth", d.getKey().getDepth().doubleValue());
+                        }
                     }};
 
                     return builder.properties(props).build();
