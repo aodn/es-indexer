@@ -1,5 +1,6 @@
 package au.org.aodn.esindexer.controller;
 
+import au.org.aodn.ardcvocabs.model.ArdcCurrentPaths;
 import au.org.aodn.ardcvocabs.model.VocabApiPaths;
 import au.org.aodn.ardcvocabs.model.VocabModel;
 import au.org.aodn.ardcvocabs.service.ArdcVocabService;
@@ -65,7 +66,7 @@ public class IndexerExtController {
     @GetMapping(path="/ardc/parameter/vocabs")
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Get parameter vocabs from ARDC directly")
     public ResponseEntity<List<JsonNode>> getParameterVocabsFromArdc() {
-        List<VocabModel> vocabs = ardcVocabService.getARDCVocabByType(ardcVocabService.getResolvedPathCollection().get(VocabApiPaths.PARAMETER_VOCAB.name()));
+        List<VocabModel> vocabs = ardcVocabService.getARDCVocabByType(ArdcCurrentPaths.PARAMETER_VOCAB);
         return ResponseEntity.ok(indexerObjectMapper.valueToTree(vocabs));
     }
 
@@ -73,7 +74,7 @@ public class IndexerExtController {
     @GetMapping(path="/ardc/platform/vocabs")
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Get platform vocabs from ARDC directly")
     public ResponseEntity<List<JsonNode>> getPlatformVocabsFromArdc() {
-        List<VocabModel> vocabs = ardcVocabService.getARDCVocabByType(ardcVocabService.getResolvedPathCollection().get(VocabApiPaths.PLATFORM_VOCAB.name()));
+        List<VocabModel> vocabs = ardcVocabService.getARDCVocabByType(ArdcCurrentPaths.PLATFORM_VOCAB);
         return ResponseEntity.ok(indexerObjectMapper.valueToTree(vocabs));
     }
 
@@ -81,7 +82,7 @@ public class IndexerExtController {
     @GetMapping(path="/ardc/organisation/vocabs")
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Get organisation vocabs from ARDC directly")
     public ResponseEntity<List<JsonNode>> getOrganisationVocabsFromArdc() {
-        List<VocabModel> vocabs = ardcVocabService.getARDCVocabByType(ardcVocabService.getResolvedPathCollection().get(VocabApiPaths.ORGANISATION_VOCAB.name()));
+        List<VocabModel> vocabs = ardcVocabService.getARDCVocabByType(ArdcCurrentPaths.ORGANISATION_VOCAB);
         return ResponseEntity.ok(indexerObjectMapper.valueToTree(vocabs));
     }
 
@@ -93,8 +94,7 @@ public class IndexerExtController {
         vocabService.clearParameterVocabCache();
         vocabService.clearPlatformVocabCache();
         vocabService.clearOrganisationVocabCache();
-        // populate new data
-        vocabService.populateVocabsData(ardcVocabService.getResolvedPathCollection());
+        vocabService.populateVocabsData();
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Populated data to the vocabs index");
     }
 }

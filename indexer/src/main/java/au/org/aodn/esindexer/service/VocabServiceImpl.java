@@ -1,9 +1,6 @@
 package au.org.aodn.esindexer.service;
 
-import au.org.aodn.ardcvocabs.model.PathName;
-import au.org.aodn.ardcvocabs.model.VocabApiPaths;
-import au.org.aodn.ardcvocabs.model.VocabDto;
-import au.org.aodn.ardcvocabs.model.VocabModel;
+import au.org.aodn.ardcvocabs.model.*;
 import au.org.aodn.ardcvocabs.service.ArdcVocabService;
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.exception.DocumentNotFoundException;
@@ -398,15 +395,15 @@ public class VocabServiceImpl implements VocabService {
     }
     /**
      * This method do the population in synchronize way
-     * @param resolvedPathCollection - The path of where to download data
      * @throws IOException - If something happens, throw to allow client aware of issue.
      */
-    public void populateVocabsData(Map<String, Map<PathName, String>> resolvedPathCollection) throws IOException {
+    @Override
+    public void populateVocabsData() throws IOException {
         log.info("Starting fetching vocabs data process synchronously...");
 
-        List<VocabModel> parameterVocabs = ardcVocabService.getARDCVocabByType(resolvedPathCollection.get(VocabApiPaths.PARAMETER_VOCAB.name()));
-        List<VocabModel> platformVocabs = ardcVocabService.getARDCVocabByType(resolvedPathCollection.get(VocabApiPaths.PLATFORM_VOCAB.name()));
-        List<VocabModel> organisationVocabs = ardcVocabService.getARDCVocabByType(resolvedPathCollection.get(VocabApiPaths.ORGANISATION_VOCAB.name()));
+        List<VocabModel> parameterVocabs = ardcVocabService.getARDCVocabByType(ArdcCurrentPaths.PARAMETER_VOCAB);
+        List<VocabModel> platformVocabs = ardcVocabService.getARDCVocabByType(ArdcCurrentPaths.PLATFORM_VOCAB);
+        List<VocabModel> organisationVocabs = ardcVocabService.getARDCVocabByType(ArdcCurrentPaths.ORGANISATION_VOCAB);
 
         if (parameterVocabs.isEmpty() || platformVocabs.isEmpty() || organisationVocabs.isEmpty()) {
             throw new IgnoreIndexingVocabsException("One or more vocab lists are empty. Skipping indexing.");
@@ -416,16 +413,16 @@ public class VocabServiceImpl implements VocabService {
     }
     /**
      * This method do the population in asynchronize way
-     * @param resolvedPathCollection - The path of where to download data
      */
-    public void populateVocabsDataAsync(Map<String, Map<PathName, String>> resolvedPathCollection) {
+    @Override
+    public void populateVocabsDataAsync() {
         log.info("Starting async vocabs data fetching process...");
 
         ExecutorService executorService = Executors.newFixedThreadPool(3);
         List<Callable<List<VocabModel>>> vocabTasks = List.of(
-                createVocabFetchTask(resolvedPathCollection.get(VocabApiPaths.PARAMETER_VOCAB.name()), "parameter"),
-                createVocabFetchTask(resolvedPathCollection.get(VocabApiPaths.PLATFORM_VOCAB.name()), "platform"),
-                createVocabFetchTask(resolvedPathCollection.get(VocabApiPaths.ORGANISATION_VOCAB.name()), "organisation")
+                () -> ardcVocabService.getARDCVocabByType(ArdcCurrentPaths.PARAMETER_VOCAB),
+                () -> ardcVocabService.getARDCVocabByType(ArdcCurrentPaths.PLATFORM_VOCAB),
+                () -> ardcVocabService.getARDCVocabByType(ArdcCurrentPaths.ORGANISATION_VOCAB)
         );
 
         CompletableFuture.runAsync(() -> {
@@ -464,12 +461,5 @@ public class VocabServiceImpl implements VocabService {
         });
 
         log.info("Vocabs data fetching process started in the background.");
-    }
-
-    private Callable<List<VocabModel>> createVocabFetchTask(Map<PathName, String> resolvedPaths, String vocabName) {
-        return () -> {
-            log.info("Fetching {} vocabs from ARDC", vocabName);
-            return ardcVocabService.getARDCVocabByType(resolvedPaths);
-        };
     }
 }

@@ -1,20 +1,16 @@
 package au.org.aodn.esindexer.utils;
 
-import au.org.aodn.ardcvocabs.exception.ExtractingPathVersionsException;
-import au.org.aodn.ardcvocabs.model.PathName;
+import au.org.aodn.ardcvocabs.model.ArdcCurrentPaths;
 import au.org.aodn.ardcvocabs.service.ArdcVocabService;
-import au.org.aodn.esindexer.exception.IgnoreIndexingVocabsException;
 import au.org.aodn.esindexer.service.VocabService;
-import jakarta.annotation.PostConstruct;
+import com.fasterxml.jackson.databind.JsonNode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import java.io.IOException;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicReference;
-
+import java.util.List;
 
 @Slf4j
 public class VocabsIndexUtils {
@@ -23,9 +19,6 @@ public class VocabsIndexUtils {
 
     @Value("${elasticsearch.vocabs_index.name}")
     String vocabsIndexName;
-
-    @Value("${app.initialiseVocabsIndex:true}")
-    protected boolean initialiseVocabsIndex;
 
     @Autowired
     public void setVocabService(VocabService vocabService) {
@@ -37,46 +30,50 @@ public class VocabsIndexUtils {
         this.ardcVocabService = ardcVocabService;
     }
 
-    protected AtomicReference<Map<String, Map<PathName, String>>> storedResolvedPathCollection = new AtomicReference<>();
-
-    @PostConstruct
-    public void init() throws IOException {
-        // Check if the initialiseVocabsIndex flag is enabled
-        if (initialiseVocabsIndex) {
-            try {
-                log.info("Initialising {} asynchronously", vocabsIndexName);
-                storedResolvedPathCollection.set(ardcVocabService.getResolvedPathCollection());
-                vocabService.populateVocabsDataAsync(storedResolvedPathCollection.get());
-            }
-            catch (ExtractingPathVersionsException | IgnoreIndexingVocabsException e) {
-                log.warn("Skip initialising vocabs with error: {}", e.getMessage());
-            }
+    protected static String getDocVersion(List<JsonNode> nodes) {
+        if(!nodes.isEmpty() && nodes.get(0).has("version")) {
+            return nodes.get(0).get("version").asText();
         }
+        return "";
     }
 
     @Scheduled(cron = "0 0 0 * * *")
-    public void scheduledRefreshVocabsData() {
-        try {
-            log.info("Refreshing ARDC vocabularies data");
-            Map<String, Map<PathName, String>> latestResolvedPathCollection = ardcVocabService.getResolvedPathCollection();
+    public void scheduledRefreshVocabsData() throws IOException {
+        log.info("Refreshing ARDC vocabularies data");
+        boolean anyDiff = false;
 
-            if (!latestResolvedPathCollection.equals(storedResolvedPathCollection.get())) {
-                log.info("Detected changes in the resolved path collection, updating vocabularies...");
-                try {
-                    vocabService.populateVocabsData(latestResolvedPathCollection);
-                    refreshCaches();
-                    // update the head if there are new versions
-                    storedResolvedPathCollection.set(latestResolvedPathCollection);
-                    log.info("Updated storedResolvedPathCollection with the latest data.");
+        try {
+            for (ArdcCurrentPaths path : ArdcCurrentPaths.values()) {
+                if (path == ArdcCurrentPaths.PARAMETER_VOCAB) {
+                    String docVer = getDocVersion(vocabService.getParameterVocabs());
+                    if (!ardcVocabService.isVersionEquals(ArdcCurrentPaths.PARAMETER_VOCAB, docVer)) {
+                        anyDiff = true;
+                        break;
+                    }
                 }
-                catch (IgnoreIndexingVocabsException e) {
-                    log.warn("Skip refreshing vocabs: {}", e.getMessage());
+                else if (path == ArdcCurrentPaths.PLATFORM_VOCAB) {
+                    String docVer = getDocVersion(vocabService.getPlatformVocabs());
+                    if (!ardcVocabService.isVersionEquals(ArdcCurrentPaths.PLATFORM_VOCAB, docVer)) {
+                        anyDiff = true;
+                        break;
+                    }
                 }
-            } else {
-                log.info("No changes detected in the resolved path collection. Skip updating caches");
+                else if (path == ArdcCurrentPaths.ORGANISATION_VOCAB) {
+                    String docVer = getDocVersion(vocabService.getOrganisationVocabs());
+                    if (!ardcVocabService.isVersionEquals(ArdcCurrentPaths.ORGANISATION_VOCAB, docVer)) {
+                        anyDiff = true;
+                        break;
+                    }
+                }
             }
         } catch (IOException e) {
-            log.error("Error refreshing vocabularies data: ", e);
+            // Any exception reload the vocab
+            anyDiff = true;
+        }
+
+        if(anyDiff) {
+            vocabService.populateVocabsData();
+            refreshCaches();
         }
     }
 

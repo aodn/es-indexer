@@ -1,6 +1,5 @@
 package au.org.aodn.esindexer;
 
-import au.org.aodn.ardcvocabs.model.PathName;
 import au.org.aodn.ardcvocabs.model.VocabApiPaths;
 import au.org.aodn.esindexer.configuration.GeoNetworkSearchTestConfig;
 import au.org.aodn.esindexer.service.VocabServiceImpl;
@@ -74,33 +73,9 @@ public class BaseTestClass {
         }
     }
 
-    protected Map<String, Map<PathName, String>> resolvedPathCollection = new HashMap<>();
-
     @PostConstruct
     public void init() throws IOException {
-
-        resolvedPathCollection.put(VocabApiPaths.PARAMETER_VOCAB.name(), Map.of(
-                PathName.vocabApi, "/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
-                PathName.categoryApi, "/aodn-parameter-category-vocabulary/version-2-1/concept.json",
-                PathName.categoryDetailsApi, "/aodn-parameter-category-vocabulary/version-2-1/resource.json?uri=%s",
-                PathName.vocabDetailsApi, "/aodn-discovery-parameter-vocabulary/version-1-6/resource.json?uri=%s"
-        ));
-
-        resolvedPathCollection.put(VocabApiPaths.PLATFORM_VOCAB.name(), Map.of(
-                PathName.vocabApi, "/aodn-platform-vocabulary/version-6-1/concept.json",
-                PathName.categoryApi, "/aodn-platform-category-vocabulary/version-1-2/concept.json",
-                PathName.categoryDetailsApi, "/aodn-platform-category-vocabulary/version-1-2/resource.json?uri=%s",
-                PathName.vocabDetailsApi, "/aodn-platform-vocabulary/version-6-1/resource.json?uri=%s"
-        ));
-
-        resolvedPathCollection.put(VocabApiPaths.ORGANISATION_VOCAB.name(), Map.of(
-                PathName.vocabApi, "/aodn-organisation-vocabulary/version-2-5/concept.json",
-                PathName.categoryApi, "/aodn-organisation-category-vocabulary/version-2-5/concept.json",
-                PathName.categoryDetailsApi, "/aodn-organisation-category-vocabulary/version-2-5/resource.json?uri=%s",
-                PathName.vocabDetailsApi, "/aodn-organisation-vocabulary/version-2-5/resource.json?uri=%s"
-        ));
-
-        vocabService.populateVocabsData(resolvedPathCollection);
+        vocabService.populateVocabsData();
     }
 
     protected HttpEntity<String> getRequestEntity(String body) {
