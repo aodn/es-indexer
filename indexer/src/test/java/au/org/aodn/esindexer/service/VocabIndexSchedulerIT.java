@@ -13,6 +13,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 import java.io.IOException;
 
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 
 @SpringBootTest(
@@ -39,6 +40,9 @@ public class VocabIndexSchedulerIT extends BaseTestClass{
 
         // Data loaded to elastic so even you call it the times is 0
         scheduler.scheduledRefreshVocabsData();
-        Mockito.verify(spyVocabService, times(0)).populateVocabsData();
+        Mockito.verify(spyVocabService, never()).populateVocabsData();
+        Mockito.verify(spyVocabService, times(1)).getParameterVocabs();
+        Mockito.verify(spyVocabService, times(1)).getOrganisationVocabs();
+        Mockito.verify(spyVocabService, times(1)).getPlatformVocabs();
     }
 }
