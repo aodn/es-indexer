@@ -1,8 +1,7 @@
-package au.org.aodn.esindexer.utils;
+package au.org.aodn.esindexer.service;
 
 import au.org.aodn.ardcvocabs.model.ArdcCurrentPaths;
 import au.org.aodn.ardcvocabs.service.ArdcVocabService;
-import au.org.aodn.esindexer.service.VocabService;
 import com.fasterxml.jackson.databind.JsonNode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,7 @@ import java.io.IOException;
 import java.util.List;
 
 @Slf4j
-public class VocabsIndexUtils {
+public class VocabIndexScheduler {
     protected VocabService vocabService;
     protected ArdcVocabService ardcVocabService;
 
@@ -39,7 +38,6 @@ public class VocabsIndexUtils {
 
     @Scheduled(cron = "0 0 0 * * *")
     public void scheduledRefreshVocabsData() throws IOException {
-        log.info("Refreshing ARDC vocabularies data");
         boolean anyDiff = false;
 
         try {
@@ -72,8 +70,12 @@ public class VocabsIndexUtils {
         }
 
         if(anyDiff) {
+            log.info("Refreshing ARDC vocabularies data due to version diff");
             vocabService.populateVocabsData();
             refreshCaches();
+        }
+        else {
+            log.info("ARDC vocabularies data version same, ignore refresh");
         }
     }
 

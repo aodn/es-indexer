@@ -95,7 +95,7 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
         return resolvedPaths;
     }
 
-    protected String extractVersionFromCurrentContent(ObjectNode currentContent) throws InvalidPropertiesFormatException {
+    protected String extractVersionFromCurrentContent(ObjectNode currentContent) {
         if (currentContent != null && !currentContent.isEmpty()) {
             JsonNode node = currentContent.get("result");
             if (!about.apply(node).isEmpty()) {
@@ -230,14 +230,16 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
         return null;
     }
 
-    protected <T> VocabModel buildVocabModel(T currentNode, String vocabApiBase, Map<Name, String> resolvedPaths) {
+    protected <T> VocabModel buildVocabModel(T currentNode, String vocabApiBase, Map<Name, String> pointers) {
         String resourceUri = null;
 
         if (currentNode instanceof ObjectNode objectNode) {
             resourceUri = objectNode.has("_about") ? about.apply(objectNode) : objectNode.asText();
-        } else if (currentNode instanceof TextNode textNode) {
+        }
+        else if (currentNode instanceof TextNode textNode) {
             resourceUri = textNode.asText();
-        } else if (currentNode instanceof VocabModel vocabNode) {
+        }
+        else if (currentNode instanceof VocabModel vocabNode) {
             String about = vocabNode.getAbout();
             if (about != null && !about.isEmpty()) {
                 resourceUri = about;
@@ -248,7 +250,7 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
             throw new IllegalArgumentException("Unsupported node type: " + currentNode.getClass().getName());
         }
 
-        return buildVocabByResourceUri(resourceUri, vocabApiBase, resolvedPaths);
+        return buildVocabByResourceUri(resourceUri, vocabApiBase, pointers);
     }
 
     protected Map<String, List<VocabModel>> getVocabLeafNodes(String vocabApiBase, Map<Name, String> pointers) {
@@ -371,8 +373,7 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
         List<VocabModel> vocabCategoryNodes = new ArrayList<>();
         while (url != null && !url.isEmpty()) {
             try {
-                log.debug("Query api -> {}", url);
-                String finalUrl = url;
+                final String finalUrl = url;
                 ObjectNode r = retryTemplate.execute(context -> restTemplate.getForObject(finalUrl, ObjectNode.class));
                 if (r != null && !r.isEmpty()) {
                     JsonNode node = r.get("result");
@@ -389,6 +390,7 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
                                         .label(labelValue)
                                         .definition(definitionValue)
                                         .about(aboutValue)
+                                        .version(versioned.get(Name.version))
                                         .build();
 
                                 // process internal nodes of vocab category

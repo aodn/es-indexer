@@ -306,17 +306,17 @@ public class VocabServiceImpl implements VocabService {
 
     @CacheEvict(value = VocabType.Names.AODN_DISCOVERY_PARAMETER_VOCABS, allEntries = true)
     public void clearParameterVocabCache() {
-        // Intentionally empty; the annotation does the job
+        log.info("Cache evit for {}", VocabType.Names.AODN_DISCOVERY_PARAMETER_VOCABS);
     }
 
     @CacheEvict(value = VocabType.Names.AODN_PLATFORM_VOCABS, allEntries = true)
     public void clearPlatformVocabCache() {
-        // Intentionally empty; the annotation does the job
+        log.info("Cache evit for {}", VocabType.Names.AODN_PLATFORM_VOCABS);
     }
 
     @CacheEvict(value = VocabType.Names.AODN_ORGANISATION_VOCABS, allEntries = true)
     public void clearOrganisationVocabCache() {
-        // Intentionally empty; the annotation does the job
+        log.info("Cache evit for {}", VocabType.Names.AODN_ORGANISATION_VOCABS);
     }
 
     protected void indexAllVocabs(List<VocabModel> parameterVocabs,

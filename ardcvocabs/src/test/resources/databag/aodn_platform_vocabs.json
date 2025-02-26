@@ -32,7 +32,8 @@
         "version": "version-1-2/version-6-1",
         "is_latest_label": true
       }
-    ]
+    ],
+    "version": "version-1-2/version-6-1"
   },
   {
     "label": "AUV",
@@ -97,7 +98,8 @@
         "version": "version-1-2/version-6-1",
         "is_latest_label": true
       }
-    ]
+    ],
+    "version": "version-1-2/version-6-1"
   },
   {
     "label": "Fixed station",
@@ -356,7 +358,8 @@
         "version": "version-1-2/version-6-1",
         "is_latest_label": true
       }
-    ]
+    ],
+    "version": "version-1-2/version-6-1"
   },
   {
     "label": "Float",
@@ -470,7 +473,8 @@
         "version": "version-1-2/version-6-1",
         "is_latest_label": true
       }
-    ]
+    ],
+    "version": "version-1-2/version-6-1"
   },
   {
     "label": "Vessel",
@@ -3863,7 +3867,8 @@
         "version": "version-1-2/version-6-1",
         "is_latest_label": true
       }
-    ]
+    ],
+    "version": "version-1-2/version-6-1"
   },
   {
     "label": "Biological platform",
@@ -3926,7 +3931,8 @@
         "version": "version-1-2/version-6-1",
         "is_latest_label": true
       }
-    ]
+    ],
+    "version": "version-1-2/version-6-1"
   },
   {
     "label": "Satellite",
@@ -4249,7 +4255,8 @@
         "version": "version-1-2/version-6-1",
         "is_latest_label": true
       }
-    ]
+    ],
+    "version": "version-1-2/version-6-1"
   },
   {
     "label": "Radar",
@@ -4270,7 +4277,8 @@
         "version": "version-1-2/version-6-1",
         "is_latest_label": true
       }
-    ]
+    ],
+    "version": "version-1-2/version-6-1"
   },
   {
     "label": "Glider",
@@ -4307,7 +4315,8 @@
         "version": "version-1-2/version-6-1",
         "is_latest_label": true
       }
-    ]
+    ],
+    "version": "version-1-2/version-6-1"
   },
   {
     "label": "Mooring and buoy",
@@ -5632,6 +5641,7 @@
         "version": "version-1-2/version-6-1",
         "is_latest_label": true
       }
-    ]
+    ],
+    "version": "version-1-2/version-6-1"
   }
 ]

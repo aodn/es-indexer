@@ -2255,7 +2255,8 @@
         ],
         "is_latest_label": true
       }
-    ]
+    ],
+    "version": "version-2-5/version-2-5"
   },
   {
     "label": "International",
@@ -3983,7 +3984,8 @@
         "version": "version-2-5/version-2-5",
         "is_latest_label": true
       }
-    ]
+    ],
+    "version": "version-2-5/version-2-5"
   },
   {
     "label": "Non Government",
@@ -4086,7 +4088,8 @@
         "version": "version-2-5/version-2-5",
         "is_latest_label": true
       }
-    ]
+    ],
+    "version": "version-2-5/version-2-5"
   },
   {
     "label": "Commonwealth Departments and Agencies",
@@ -5007,7 +5010,8 @@
         "display_label": "Department of Agriculture, Water and the Environment (DAWE)",
         "is_latest_label": true
       }
-    ]
+    ],
+    "version": "version-2-5/version-2-5"
   },
   {
     "label": "State and Territory Government Departments and Agencies",
@@ -5906,7 +5910,8 @@
         "version": "version-2-5/version-2-5",
         "is_latest_label": true
       }
-    ]
+    ],
+    "version": "version-2-5/version-2-5"
   },
   {
     "label": "Industry",
@@ -6436,7 +6441,8 @@
         ],
         "is_latest_label": true
       }
-    ]
+    ],
+    "version": "version-2-5/version-2-5"
   },
   {
     "label": "Local Government",
@@ -6527,12 +6533,14 @@
         "version": "version-2-5/version-2-5",
         "is_latest_label": true
       }
-    ]
+    ],
+    "version": "version-2-5/version-2-5"
   },
   {
     "label": "Integrated Marine Observing System (IMOS)",
     "definition": "Integrated Marine Observing System category - exclusively for use in the AODN Portal.",
-    "about": "http://vocab.aodn.org.au/def/organisation_classes/category/26"
+    "about": "http://vocab.aodn.org.au/def/organisation_classes/category/26",
+    "version": "version-2-5/version-2-5"
   },
   {
     "label": "Integrated Marine Observing System (IMOS)",
