@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import java.io.IOException;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 
 public interface VocabService {
 
@@ -32,7 +33,7 @@ public interface VocabService {
     List<String> extractOrganisationVocabLabelsFromThemes(List<ThemesModel> themes) throws IOException;
     List<VocabModel> getMappedOrganisationVocabsFromContacts(List<ContactsModel> contacts) throws IOException;
     void populateVocabsData() throws IOException;
-    void populateVocabsDataAsync();
+    CompletableFuture<Void> populateVocabsDataAsync();
     void clearParameterVocabCache();
     void clearPlatformVocabCache();
     void clearOrganisationVocabCache();

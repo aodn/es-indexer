@@ -6,10 +6,13 @@ import com.fasterxml.jackson.databind.JsonNode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Profile;
 import org.springframework.scheduling.annotation.Scheduled;
 
+import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 @Slf4j
 public class VocabIndexScheduler {
@@ -35,41 +38,23 @@ public class VocabIndexScheduler {
         }
         return "";
     }
+    // Avoid this run automatically in test
+    @Profile("!test")
+    @PostConstruct
+    public void init() throws IOException {
+        if(checkVersionDiff()) {
+            log.info("Refreshing ARDC vocabularies data due to version diff");
+            CompletableFuture<Void> f = vocabService.populateVocabsDataAsync();
+            f.thenRun(this::refreshCaches);
+        }
+        else {
+            log.info("ARDC vocabularies data version same, ignore refresh");
+        }
+    }
 
     @Scheduled(cron = "0 0 0 * * *")
     public void scheduledRefreshVocabsData() throws IOException {
-        boolean anyDiff = false;
-
-        try {
-            for (ArdcCurrentPaths path : ArdcCurrentPaths.values()) {
-                if (path == ArdcCurrentPaths.PARAMETER_VOCAB) {
-                    String docVer = getDocVersion(vocabService.getParameterVocabs());
-                    if (!ardcVocabService.isVersionEquals(ArdcCurrentPaths.PARAMETER_VOCAB, docVer)) {
-                        anyDiff = true;
-                        break;
-                    }
-                }
-                else if (path == ArdcCurrentPaths.PLATFORM_VOCAB) {
-                    String docVer = getDocVersion(vocabService.getPlatformVocabs());
-                    if (!ardcVocabService.isVersionEquals(ArdcCurrentPaths.PLATFORM_VOCAB, docVer)) {
-                        anyDiff = true;
-                        break;
-                    }
-                }
-                else if (path == ArdcCurrentPaths.ORGANISATION_VOCAB) {
-                    String docVer = getDocVersion(vocabService.getOrganisationVocabs());
-                    if (!ardcVocabService.isVersionEquals(ArdcCurrentPaths.ORGANISATION_VOCAB, docVer)) {
-                        anyDiff = true;
-                        break;
-                    }
-                }
-            }
-        } catch (IOException e) {
-            // Any exception reload the vocab
-            anyDiff = true;
-        }
-
-        if(anyDiff) {
+        if(checkVersionDiff()) {
             log.info("Refreshing ARDC vocabularies data due to version diff");
             vocabService.populateVocabsData();
             refreshCaches();
@@ -79,7 +64,36 @@ public class VocabIndexScheduler {
         }
     }
 
-    private void refreshCaches() {
+    protected boolean checkVersionDiff() {
+        try {
+            for (ArdcCurrentPaths path : ArdcCurrentPaths.values()) {
+                if (path == ArdcCurrentPaths.PARAMETER_VOCAB) {
+                    String docVer = getDocVersion(vocabService.getParameterVocabs());
+                    if (!ardcVocabService.isVersionEquals(ArdcCurrentPaths.PARAMETER_VOCAB, docVer)) {
+                        return true;
+                    }
+                }
+                else if (path == ArdcCurrentPaths.PLATFORM_VOCAB) {
+                    String docVer = getDocVersion(vocabService.getPlatformVocabs());
+                    if (!ardcVocabService.isVersionEquals(ArdcCurrentPaths.PLATFORM_VOCAB, docVer)) {
+                        return true;
+                    }
+                }
+                else if (path == ArdcCurrentPaths.ORGANISATION_VOCAB) {
+                    String docVer = getDocVersion(vocabService.getOrganisationVocabs());
+                    if (!ardcVocabService.isVersionEquals(ArdcCurrentPaths.ORGANISATION_VOCAB, docVer)) {
+                        return true;
+                    }
+                }
+            }
+        } catch (IOException e) {
+            // Any exception reload the vocab
+            return false;
+        }
+        return false;
+    }
+
+    protected void refreshCaches() {
         try {
             log.info("Clearing existing caches...");
             vocabService.clearParameterVocabCache();

@@ -415,7 +415,7 @@ public class VocabServiceImpl implements VocabService {
      * This method do the population in asynchronize way
      */
     @Override
-    public void populateVocabsDataAsync() {
+    public CompletableFuture<Void> populateVocabsDataAsync() {
         log.info("Starting async vocabs data fetching process...");
 
         ExecutorService executorService = Executors.newFixedThreadPool(3);
@@ -425,8 +425,10 @@ public class VocabServiceImpl implements VocabService {
                 () -> ardcVocabService.getARDCVocabByType(ArdcCurrentPaths.ORGANISATION_VOCAB)
         );
 
-        CompletableFuture.runAsync(() -> {
+        return CompletableFuture.runAsync(() -> {
             try {
+                log.info("Vocabs data fetching process started in the background.");
+
                 // Invoke all tasks and wait for completion
                 List<Future<List<VocabModel>>> completedFutures = executorService.invokeAll(vocabTasks);
 
@@ -459,7 +461,5 @@ public class VocabServiceImpl implements VocabService {
                 executorService.shutdown();
             }
         });
-
-        log.info("Vocabs data fetching process started in the background.");
     }
 }
