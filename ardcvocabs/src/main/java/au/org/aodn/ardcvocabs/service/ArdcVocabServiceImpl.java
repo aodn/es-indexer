@@ -225,7 +225,7 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
                 return vocab;
             }
         } catch(Exception e) {
-            log.error("Item not found in resource {}", detailsUrl);
+            log.warn("Item not found in resource, check with person who maintain the vocabs {}", detailsUrl);
         }
         return null;
     }
