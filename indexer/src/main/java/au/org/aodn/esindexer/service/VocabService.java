@@ -33,7 +33,7 @@ public interface VocabService {
     List<String> extractOrganisationVocabLabelsFromThemes(List<ThemesModel> themes) throws IOException;
     List<VocabModel> getMappedOrganisationVocabsFromContacts(List<ContactsModel> contacts) throws IOException;
     void populateVocabsData() throws IOException;
-    CompletableFuture<Void> populateVocabsDataAsync();
+    CompletableFuture<Void> populateVocabsDataAsync(int delay);
     void clearParameterVocabCache();
     void clearPlatformVocabCache();
     void clearOrganisationVocabCache();

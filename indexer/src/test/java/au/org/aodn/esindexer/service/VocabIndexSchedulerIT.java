@@ -38,7 +38,7 @@ public class VocabIndexSchedulerIT extends BaseTestClass{
         VocabService spyVocabService = Mockito.spy(vocabService);
         scheduler.setVocabService(spyVocabService);
 
-        // Data loaded to elastic so even you call it the times is 0
+        // Data loaded to elastic so even you call it explicitly, it won't call
         scheduler.scheduledRefreshVocabsData();
         Mockito.verify(spyVocabService, never()).populateVocabsData();
         Mockito.verify(spyVocabService, times(1)).getParameterVocabs();

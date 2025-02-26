@@ -73,6 +73,9 @@
                   "replaced_by": {
                     "type": "text"
                   },
+                  "version": {
+                    "type": "text"
+                  },
                   "about": {
                     "type": "keyword"
                   }

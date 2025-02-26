@@ -2,13 +2,13 @@ package au.org.aodn.esindexer.service;
 
 import au.org.aodn.ardcvocabs.model.ArdcCurrentPaths;
 import au.org.aodn.ardcvocabs.service.ArdcVocabService;
+import au.org.aodn.esindexer.exception.IndexNotFoundException;
 import com.fasterxml.jackson.databind.JsonNode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Profile;
 import org.springframework.scheduling.annotation.Scheduled;
-
+import java.util.Random;
 import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.util.List;
@@ -16,11 +16,12 @@ import java.util.concurrent.CompletableFuture;
 
 @Slf4j
 public class VocabIndexScheduler {
+    protected final Random random = new Random();
     protected VocabService vocabService;
     protected ArdcVocabService ardcVocabService;
 
-    @Value("${elasticsearch.vocabs_index.name}")
-    String vocabsIndexName;
+    @Value("${elasticsearch.vocabs_index.enableRefreshDelay:true}")
+    protected Boolean enableRefreshDelay;
 
     @Autowired
     public void setVocabService(VocabService vocabService) {
@@ -38,57 +39,76 @@ public class VocabIndexScheduler {
         }
         return "";
     }
-    // Avoid this run automatically in test
-    @Profile("!test")
+
     @PostConstruct
     public void init() throws IOException {
-        if(checkVersionDiff()) {
-            log.info("Refreshing ARDC vocabularies data due to version diff");
-            CompletableFuture<Void> f = vocabService.populateVocabsDataAsync();
-            f.thenRun(this::refreshCaches);
+        try {
+            if (checkVersionDiff()) {
+                // Version exist means we have outdated docs, we can do a async load and refresh cache in the
+                // background to speed up the start.
+                log.info("Async refresh ARDC vocabularies due to version diff");
+                CompletableFuture<Void> f = vocabService.populateVocabsDataAsync(0);
+                f.thenRun(this::refreshCaches);
+            } else {
+                log.info("ARDC vocabularies data version same, download skipped");
+            }
         }
-        else {
-            log.info("ARDC vocabularies data version same, ignore refresh");
+        catch(IndexNotFoundException ioe) {
+            // Check version failed due to index not exist, it can be a new installed es-instance, populate with sync
+            vocabService.populateVocabsData();
         }
+        refreshCaches();
     }
 
     @Scheduled(cron = "0 0 0 * * *")
     public void scheduledRefreshVocabsData() throws IOException {
-        if(checkVersionDiff()) {
-            log.info("Refreshing ARDC vocabularies data due to version diff");
+        try {
+            if (checkVersionDiff()) {
+                if(enableRefreshDelay) {
+                    // Apply a random 0-30 minutes delay on refresh, this is used to avoid multiple instance
+                    // refresh the index the same time and step on each other. In case of version change, then
+                    // one es-indexer should create the index before the other instance got a chance to download index
+                    // Not a perfect solution, but we do not have a global lock in place (need share db or share instance)
+                    log.info("Async refresh ARDC vocabularies due to version diff");
+                    CompletableFuture<Void> f = vocabService.populateVocabsDataAsync(random.nextInt(30));
+                    f.thenRun(this::refreshCaches);
+                }
+                else {
+                    log.info("Refresh ARDC vocabularies due to version diff");
+                    vocabService.populateVocabsData();
+                    refreshCaches();
+                }
+            } else {
+                log.info("ARDC vocabularies data version same, download skipped");
+            }
+        }
+        catch(IndexNotFoundException inf) {
+            // Index deleted for some reason, re-populate it.
             vocabService.populateVocabsData();
             refreshCaches();
         }
-        else {
-            log.info("ARDC vocabularies data version same, ignore refresh");
-        }
     }
 
-    protected boolean checkVersionDiff() {
-        try {
-            for (ArdcCurrentPaths path : ArdcCurrentPaths.values()) {
-                if (path == ArdcCurrentPaths.PARAMETER_VOCAB) {
-                    String docVer = getDocVersion(vocabService.getParameterVocabs());
-                    if (!ardcVocabService.isVersionEquals(ArdcCurrentPaths.PARAMETER_VOCAB, docVer)) {
-                        return true;
-                    }
-                }
-                else if (path == ArdcCurrentPaths.PLATFORM_VOCAB) {
-                    String docVer = getDocVersion(vocabService.getPlatformVocabs());
-                    if (!ardcVocabService.isVersionEquals(ArdcCurrentPaths.PLATFORM_VOCAB, docVer)) {
-                        return true;
-                    }
-                }
-                else if (path == ArdcCurrentPaths.ORGANISATION_VOCAB) {
-                    String docVer = getDocVersion(vocabService.getOrganisationVocabs());
-                    if (!ardcVocabService.isVersionEquals(ArdcCurrentPaths.ORGANISATION_VOCAB, docVer)) {
-                        return true;
-                    }
+    protected boolean checkVersionDiff() throws IOException {
+        for (ArdcCurrentPaths path : ArdcCurrentPaths.values()) {
+            if (path == ArdcCurrentPaths.PARAMETER_VOCAB) {
+                String docVer = getDocVersion(vocabService.getParameterVocabs());
+                if (!ardcVocabService.isVersionEquals(ArdcCurrentPaths.PARAMETER_VOCAB, docVer)) {
+                    return true;
                 }
             }
-        } catch (IOException e) {
-            // Any exception reload the vocab
-            return false;
+            else if (path == ArdcCurrentPaths.PLATFORM_VOCAB) {
+                String docVer = getDocVersion(vocabService.getPlatformVocabs());
+                if (!ardcVocabService.isVersionEquals(ArdcCurrentPaths.PLATFORM_VOCAB, docVer)) {
+                    return true;
+                }
+            }
+            else if (path == ArdcCurrentPaths.ORGANISATION_VOCAB) {
+                String docVer = getDocVersion(vocabService.getOrganisationVocabs());
+                if (!ardcVocabService.isVersionEquals(ArdcCurrentPaths.ORGANISATION_VOCAB, docVer)) {
+                    return true;
+                }
+            }
         }
         return false;
     }

@@ -412,10 +412,12 @@ public class VocabServiceImpl implements VocabService {
         indexAllVocabs(parameterVocabs, platformVocabs, organisationVocabs);
     }
     /**
-     * This method do the population in asynchronize way
+     * This method do the population in asynchronized way
+     *
+     * @param delay - Delay the execution by number of minutes
      */
     @Override
-    public CompletableFuture<Void> populateVocabsDataAsync() {
+    public CompletableFuture<Void> populateVocabsDataAsync(int delay) {
         log.info("Starting async vocabs data fetching process...");
 
         ExecutorService executorService = Executors.newFixedThreadPool(3);
@@ -460,6 +462,6 @@ public class VocabServiceImpl implements VocabService {
             finally {
                 executorService.shutdown();
             }
-        });
+        }, CompletableFuture.delayedExecutor(delay, TimeUnit.MINUTES, Executors.newSingleThreadExecutor()));
     }
 }
