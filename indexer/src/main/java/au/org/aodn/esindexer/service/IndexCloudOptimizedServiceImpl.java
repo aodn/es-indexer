@@ -1,5 +1,6 @@
 package au.org.aodn.esindexer.service;
 
+import au.org.aodn.cloudoptimized.model.DatasetCache;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -95,21 +96,22 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
     }
     /**
      * Index the cloud optimized data
-     * @param entity - The metadata that describe the data
+     * @param metadata - The metadata that describe the data
      * @param startDate - The start range to index
      * @param endDate - THe end range to index
      * @return - The index result
      */
     @Override
-    public List<BulkResponse> indexCloudOptimizedData(MetadataEntity entity,
+    public List<BulkResponse> indexCloudOptimizedData(MetadataEntity metadata,
                                                       LocalDate startDate,
                                                       LocalDate endDate,
                                                       IndexService.Callback callback) throws IOException {
 
         List<BulkResponse> responses = new ArrayList<>();
+        DatasetCache cache = new DatasetCache();
 
-        Iterable<List<StacItemModel>> dataset = new DatasetProvider(entity.getUuid(), startDate, endDate, dataAccessService)
-                .getIterator(dataAccessService.getFields(entity));
+        Iterable<List<StacItemModel>> dataset = new DatasetProvider(metadata.getUuid(), startDate, endDate, dataAccessService)
+                .getIterator(dataAccessService.getFields(metadata));
 
         BulkRequestProcessor<StacItemModel> bulkRequestProcessor = new BulkRequestProcessor<>(
                 indexName, (item) -> Optional.empty(),self, callback
@@ -119,15 +121,23 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
             int count = 0;
             for (List<StacItemModel> entries : dataset) {
                 if (entries != null) {
-                    for(StacItemModel entry: entries) {
-                        log.debug("add cloud data with UUID: {} and props: {}", entry.getUuid(), entry.getProperties());
+                    for(StacItemModel stacItemModel: entries) {
+                        log.debug("add cloud data with UUID: {} and props: {}", stacItemModel.getUuid(), stacItemModel.getProperties());
                         count++;
-                        bulkRequestProcessor.processItem(entry.getUuid(), entry, true)
-                                .ifPresent(responses::add);
+//                        bulkRequestProcessor.processItem(stacItemModel.getUuid(), stacItemModel, true)
+//                                .ifPresent(responses::add);
+                        cache.addData(stacItemModel);
                     }
                     callback.onProgress("Processed number of items " + count);
                 }
             }
+            cache.getData().forEach(model -> {
+                try {
+                    bulkRequestProcessor.processItem(model.getUuid(), model, true);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
             bulkRequestProcessor
                     .flush()
                     .ifPresent(responses::add);
@@ -136,7 +146,7 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
             callback.onProgress(responses);
         }
         catch (Exception e) {
-            log.error("Exception thrown or not found while indexing cloud optimized data : {}", entity.getUuid(), e);
+            log.error("Exception thrown or not found while indexing cloud optimized data : {}", metadata.getUuid(), e);
             throw e;
         }
         return responses;
