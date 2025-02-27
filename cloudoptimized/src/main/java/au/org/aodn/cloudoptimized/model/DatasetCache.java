@@ -29,8 +29,9 @@ public class DatasetCache {
             data.add(modelToAdd);
         }
         timer.stop();
-        log.info(timer.prettyPrint());
-
+        if (timer.getTotalTimeSeconds() > 1) {
+            log.info(timer.prettyPrint());
+        }
     }
 
     @SuppressWarnings("unchecked")
