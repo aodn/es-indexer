@@ -1,7 +1,8 @@
 package au.org.aodn.ardcvocabs.service;
 
 import au.org.aodn.ardcvocabs.BaseTestClass;
-import au.org.aodn.ardcvocabs.model.PathName;
+import au.org.aodn.ardcvocabs.model.ArdcCurrentPaths;
+import au.org.aodn.ardcvocabs.model.Name;
 import au.org.aodn.ardcvocabs.model.VocabApiPaths;
 import au.org.aodn.ardcvocabs.model.VocabModel;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -38,18 +39,17 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
     protected ArdcVocabServiceImpl ardcVocabService;
     protected ObjectMapper mapper = new ObjectMapper();
 
-    protected Map<String, Map<PathName, String>> resolvedPathCollection = new HashMap<>();
+    protected Map<String, Map<Name, String>> resolvedPathCollection = new HashMap<>();
 
     @Mock
     RestTemplate mockRestTemplate;
 
     /**
      * Check the url and return the canned file content
-     * @param template
-     * @return
-     * @throws IOException
+     * @param template - Mock template
+     * @throws IOException - Not expected
      */
-    public static RestTemplate setupParameterVocabMockRestTemplate(RestTemplate template) throws IOException {
+    public static void setupParameterVocabMockRestTemplate(RestTemplate template) throws IOException {
 
         final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -64,6 +64,9 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
                     return objectMapper.readValue(readResourceFile("/databag/category/page0.json"), ObjectNode.class);
                 }
             }
+            if(url.contains("/aodn-parameter-category-vocabulary/current/concept.json")) {
+                return objectMapper.readValue(readResourceFile("/databag/category/page0.json"), ObjectNode.class);
+            }
             else if (url.contains("/aodn-parameter-category-vocabulary/version-2-1/resource.json?uri=http://vocab.aodn.org.au/def/parameter_classes/category/")) {
                 String[] token = url.split("/");
                 return objectMapper.readValue(readResourceFile("/databag/category/vocab" + token[token.length - 1] + ".json"), ObjectNode.class);
@@ -76,6 +79,9 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
                 else {
                     return objectMapper.readValue(readResourceFile("/databag/parameter/page0.json"), ObjectNode.class);
                 }
+            }
+            else if (url.contains("/aodn-discovery-parameter-vocabulary/current/concept.json")) {
+                return objectMapper.readValue(readResourceFile("/databag/parameter/page0.json"), ObjectNode.class);
             }
             else if (url.contains("/aodn-discovery-parameter-vocabulary/version-1-6/resource.json?uri=http://vocab.aodn.org.au/def/discovery_parameter/entity/")) {
                 String[] token = url.split("/");
@@ -95,15 +101,18 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
         })
         .when(template)
         .getForObject(
-                argThat(s -> s.contains("/aodn-discovery-parameter-vocabulary/version-1-6/") || s.contains("/aodn-parameter-category-vocabulary/version-2-1/")),
+                argThat(s ->
+                        s.contains("/aodn-discovery-parameter-vocabulary/version-1-6/") ||
+                        s.contains("/aodn-parameter-category-vocabulary/version-2-1/") ||
+                        s.contains("/aodn-discovery-parameter-vocabulary/current/") ||
+                        s.contains("/aodn-parameter-category-vocabulary/current/")
+                ),
                 eq(ObjectNode.class),
                 any(Object[].class)     // It is important to have this any otherwise it will match getForObject(URI, Class<T>)
         );
-
-        return  template;
     }
 
-    public static RestTemplate setupPlatformMockRestTemplate(RestTemplate template) throws IOException {
+    public static void setupPlatformMockRestTemplate(RestTemplate template) throws IOException {
         final ObjectMapper objectMapper = new ObjectMapper();
 
         Mockito.doAnswer(f -> {
@@ -117,6 +126,10 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
                     return objectMapper.readValue(readResourceFile("/databag/platform/page0.json"), ObjectNode.class);
                 }
             }
+            else if(url.contains("/aodn-platform-category-vocabulary/current/concept.json")) {
+                // current always point to the first one
+                return objectMapper.readValue(readResourceFile("/databag/platform/page0.json"), ObjectNode.class);
+            }
             else if (url.contains("/aodn-platform-vocabulary/version-6-1/concept.json")) {
                 if(url.contains("_page")) {
                     String page = url.split("=")[1];
@@ -125,6 +138,10 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
                 else {
                     return objectMapper.readValue(readResourceFile("/databag/platform/vocab0.json"), ObjectNode.class);
                 }
+            }
+            else if (url.contains("/aodn-platform-vocabulary/current/concept.json")) {
+                // current always point to the first one
+                return objectMapper.readValue(readResourceFile("/databag/platform/vocab0.json"), ObjectNode.class);
             }
             else if(url.contains("/aodn-platform-vocabulary/version-6-1/resource.json?uri=http://vocab.aodn.org.au/def/platform/entity/")) {
                 String[] token = url.split("/");
@@ -140,15 +157,18 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
         })
         .when(template)
         .getForObject(
-                argThat(s -> s!= null && (s.contains("/aodn-platform-vocabulary/version-6-1/") || s.contains("/aodn-platform-category-vocabulary/version-1-2/"))),
+                argThat(s -> s!= null && (
+                        s.contains("/aodn-platform-vocabulary/version-6-1/") ||
+                        s.contains("/aodn-platform-category-vocabulary/version-1-2/") ||
+                        s.contains("/aodn-platform-vocabulary/current/") ||
+                        s.contains("/aodn-platform-category-vocabulary/current/")
+                )),
                 eq(ObjectNode.class),
                 any(Object[].class)     // It is important to have this any otherwise it will match getForObject(URI, Class<T>)
         );
-
-        return  template;
     }
 
-    public static RestTemplate setupOrganizationMockRestTemplate(RestTemplate template) throws IOException {
+    public static void setupOrganizationMockRestTemplate(RestTemplate template) throws IOException {
         final ObjectMapper objectMapper = new ObjectMapper();
 
         Mockito.doAnswer(f -> {
@@ -179,18 +199,27 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
                 String[] token = url.split("/");
                 return objectMapper.readValue(readResourceFile("/databag/organization/category" + token[token.length - 1] + ".json"), ObjectNode.class);
             }
+            else if(url.contains("/aodn-organisation-category-vocabulary/current/concept.json")) {
+                // Current point back to the page0
+                return objectMapper.readValue(readResourceFile("/databag/organization/page0.json"), ObjectNode.class);
+            }
+            else if(url.contains("/aodn-organisation-vocabulary/current/concept.json")) {
+                return objectMapper.readValue(readResourceFile("/databag/organization/vocab0.json"), ObjectNode.class);            }
             else {
                 throw new FileNotFoundException(url);
             }
         })
         .when(template)
         .getForObject(
-                argThat(s -> s.contains("/aodn-organisation-category-vocabulary/version-2-5/") || s.contains("/aodn-organisation-vocabulary/version-2-5/")),
+                argThat(s ->
+                        s.contains("/aodn-organisation-category-vocabulary/version-2-5/") ||
+                                s.contains("/aodn-organisation-vocabulary/version-2-5/") ||
+                                s.contains("/aodn-organisation-category-vocabulary/current/")
+                                || s.contains("/aodn-organisation-vocabulary/current/")
+                ),
                 eq(ObjectNode.class),
                 any(Object[].class)     // It is important to have this any otherwise it will match getForObject(URI, Class<T>)
         );
-
-        return  template;
     }
 
     @BeforeEach
@@ -201,24 +230,24 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
         this.ardcVocabService.vocabApiBase = "https://vocabs.ardc.edu.au/repository/api/lda/aodn";
 
         resolvedPathCollection.put(VocabApiPaths.PARAMETER_VOCAB.name(), Map.of(
-                PathName.vocabApi, "/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
-                PathName.categoryApi, "/aodn-parameter-category-vocabulary/version-2-1/concept.json",
-                PathName.categoryDetailsApi, "/aodn-parameter-category-vocabulary/version-2-1/resource.json?uri=%s",
-                PathName.vocabDetailsApi, "/aodn-discovery-parameter-vocabulary/version-1-6/resource.json?uri=%s"
+                Name.vocabApi, "/aodn-discovery-parameter-vocabulary/version-1-6/concept.json",
+                Name.categoryApi, "/aodn-parameter-category-vocabulary/version-2-1/concept.json",
+                Name.categoryDetailsApi, "/aodn-parameter-category-vocabulary/version-2-1/resource.json?uri=%s",
+                Name.vocabDetailsApi, "/aodn-discovery-parameter-vocabulary/version-1-6/resource.json?uri=%s"
         ));
 
         resolvedPathCollection.put(VocabApiPaths.PLATFORM_VOCAB.name(), Map.of(
-                PathName.vocabApi, "/aodn-platform-vocabulary/version-6-1/concept.json",
-                PathName.categoryApi, "/aodn-platform-category-vocabulary/version-1-2/concept.json",
-                PathName.categoryDetailsApi, "/aodn-platform-category-vocabulary/version-1-2/resource.json?uri=%s",
-                PathName.vocabDetailsApi, "/aodn-platform-vocabulary/version-6-1/resource.json?uri=%s"
+                Name.vocabApi, "/aodn-platform-vocabulary/version-6-1/concept.json",
+                Name.categoryApi, "/aodn-platform-category-vocabulary/version-1-2/concept.json",
+                Name.categoryDetailsApi, "/aodn-platform-category-vocabulary/version-1-2/resource.json?uri=%s",
+                Name.vocabDetailsApi, "/aodn-platform-vocabulary/version-6-1/resource.json?uri=%s"
         ));
 
         resolvedPathCollection.put(VocabApiPaths.ORGANISATION_VOCAB.name(), Map.of(
-                PathName.vocabApi, "/aodn-organisation-vocabulary/version-2-5/concept.json",
-                PathName.categoryApi, "/aodn-organisation-category-vocabulary/version-2-5/concept.json",
-                PathName.categoryDetailsApi, "/aodn-organisation-category-vocabulary/version-2-5/resource.json?uri=%s",
-                PathName.vocabDetailsApi, "/aodn-organisation-vocabulary/version-2-5/resource.json?uri=%s"
+                Name.vocabApi, "/aodn-organisation-vocabulary/version-2-5/concept.json",
+                Name.categoryApi, "/aodn-organisation-category-vocabulary/version-2-5/concept.json",
+                Name.categoryDetailsApi, "/aodn-organisation-category-vocabulary/version-2-5/resource.json?uri=%s",
+                Name.vocabDetailsApi, "/aodn-organisation-vocabulary/version-2-5/resource.json?uri=%s"
         ));
     }
 
@@ -229,9 +258,9 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
     @Test
     public void verifyParameterVocab() throws IOException, JSONException {
 
-        mockRestTemplate = setupParameterVocabMockRestTemplate(mockRestTemplate);
+        setupParameterVocabMockRestTemplate(mockRestTemplate);
 
-        List<VocabModel> parameterVocabModelList = ardcVocabService.getVocabTreeFromArdcByType(resolvedPathCollection.get(VocabApiPaths.PARAMETER_VOCAB.name()));
+        List<VocabModel> parameterVocabModelList = ardcVocabService.getARDCVocabByType(ArdcCurrentPaths.PARAMETER_VOCAB);
         assertEquals(4, parameterVocabModelList.size(), "Total equals");
 
         Optional<VocabModel> c = parameterVocabModelList
@@ -323,9 +352,9 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
 
     @Test
     public void verifyPlatform() throws IOException, JSONException {
-        mockRestTemplate = setupPlatformMockRestTemplate(mockRestTemplate);
+        setupPlatformMockRestTemplate(mockRestTemplate);
 
-        List<VocabModel> platformVocabsFromArdc = ardcVocabService.getVocabTreeFromArdcByType(resolvedPathCollection.get(VocabApiPaths.PLATFORM_VOCAB.name()));
+        List<VocabModel> platformVocabsFromArdc = ardcVocabService.getARDCVocabByType(ArdcCurrentPaths.PLATFORM_VOCAB);
 
         // verify the contents randomly
         assertNotNull(platformVocabsFromArdc);
@@ -363,9 +392,9 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
 
     @Test
     public void verifyOrganization() throws IOException, JSONException {
-        mockRestTemplate = setupOrganizationMockRestTemplate(mockRestTemplate);
+        setupOrganizationMockRestTemplate(mockRestTemplate);
 
-        List<VocabModel> organisationVocabsFromArdc = ardcVocabService.getVocabTreeFromArdcByType(resolvedPathCollection.get(VocabApiPaths.ORGANISATION_VOCAB.name()));
+        List<VocabModel> organisationVocabsFromArdc = ardcVocabService.getARDCVocabByType(ArdcCurrentPaths.ORGANISATION_VOCAB);
 
         // verify the contents randomly
         assertNotNull(organisationVocabsFromArdc);
@@ -415,6 +444,28 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
                 expectedJson,
                 mapper.valueToTree(organisationVocabsFromArdc).toPrettyString(),
                 JSONCompareMode.STRICT
+        );
+    }
+
+    @Test
+    public void verifyIsVersionEquals() throws IOException {
+        setupOrganizationMockRestTemplate(mockRestTemplate);
+        setupPlatformMockRestTemplate(mockRestTemplate);
+        setupParameterVocabMockRestTemplate(mockRestTemplate);
+
+        Assertions.assertTrue(
+                ardcVocabService.isVersionEquals(ArdcCurrentPaths.ORGANISATION_VOCAB, "version-2-5/version-2-5"),
+                "Expect org equals"
+        );
+
+        Assertions.assertTrue(
+                ardcVocabService.isVersionEquals(ArdcCurrentPaths.PLATFORM_VOCAB, "version-1-2/version-6-1"),
+                "Expect platform equals"
+        );
+
+        Assertions.assertTrue(
+                ardcVocabService.isVersionEquals(ArdcCurrentPaths.PARAMETER_VOCAB, "version-2-1/version-1-6"),
+                "Expect parameter equals"
         );
     }
 }

@@ -1,7 +1,6 @@
 package au.org.aodn.esindexer.service;
 
-import au.org.aodn.ardcvocabs.model.PathName;
-import au.org.aodn.ardcvocabs.model.VocabApiPaths;
+import au.org.aodn.ardcvocabs.model.ArdcCurrentPaths;
 import au.org.aodn.ardcvocabs.model.VocabModel;
 import au.org.aodn.ardcvocabs.service.ArdcVocabService;
 import au.org.aodn.esindexer.BaseTestClass;
@@ -122,7 +121,7 @@ public class VocabServiceIT extends BaseTestClass {
     @Test
     void testProcessParameterVocabs() throws IOException, JSONException {
         // read from ARDC
-        List<VocabModel> parameterVocabsFromArdc = ardcVocabService.getVocabTreeFromArdcByType(resolvedPathCollection.get(VocabApiPaths.PARAMETER_VOCAB.name()));
+        List<VocabModel> parameterVocabsFromArdc = ardcVocabService.getARDCVocabByType(ArdcCurrentPaths.PARAMETER_VOCAB);
 
         // read from Elastic search
         List<JsonNode> parameterVocabsFromEs = vocabService.getParameterVocabs();
@@ -141,21 +140,14 @@ public class VocabServiceIT extends BaseTestClass {
      */
     @Test
     void testSkipIndexingIfEmptyVocabs() throws IOException {
-        // Mock resolved path collection
-        Map<String, Map<PathName, String>> resolvedPathCollection = Map.of(
-                "PARAMETER_VOCAB", Map.of(),
-                "PLATFORM_VOCAB", Map.of(),
-                "ORGANISATION_VOCAB", Map.of()
-        );
-
         // Mock service calls to return empty lists
-        when(mockArdcVocabService.getVocabTreeFromArdcByType(resolvedPathCollection.get("PARAMETER_VOCAB"))).thenReturn(Collections.emptyList());
-        when(mockArdcVocabService.getVocabTreeFromArdcByType(resolvedPathCollection.get("PLATFORM_VOCAB"))).thenReturn(Collections.emptyList());
-        when(mockArdcVocabService.getVocabTreeFromArdcByType(resolvedPathCollection.get("ORGANISATION_VOCAB"))).thenReturn(Collections.emptyList());
+        when(mockArdcVocabService.getARDCVocabByType(ArdcCurrentPaths.PARAMETER_VOCAB)).thenReturn(Collections.emptyList());
+        when(mockArdcVocabService.getARDCVocabByType(ArdcCurrentPaths.PLATFORM_VOCAB)).thenReturn(Collections.emptyList());
+        when(mockArdcVocabService.getARDCVocabByType(ArdcCurrentPaths.ORGANISATION_VOCAB)).thenReturn(Collections.emptyList());
 
         // Call the method
         try {
-            mockVocabService.populateVocabsData(resolvedPathCollection);
+            mockVocabService.populateVocabsData();
         } catch (IgnoreIndexingVocabsException e) {
             // Verify that indexAllVocabs is not called
             verify(mockVocabService, never()).indexAllVocabs(anyList(), anyList(), anyList());
@@ -165,7 +157,7 @@ public class VocabServiceIT extends BaseTestClass {
     @Test
     void testProcessPlatformVocabs() throws IOException, JSONException {
         // read from ARDC
-        List<VocabModel> platformVocabsFromArdc = ardcVocabService.getVocabTreeFromArdcByType(resolvedPathCollection.get(VocabApiPaths.PLATFORM_VOCAB.name()));
+        List<VocabModel> platformVocabsFromArdc = ardcVocabService.getARDCVocabByType(ArdcCurrentPaths.PLATFORM_VOCAB);
 
         // read from Elastic search
         List<JsonNode> platformVocabsFromEs = vocabService.getPlatformVocabs();
@@ -181,7 +173,7 @@ public class VocabServiceIT extends BaseTestClass {
     @Test
     void testProcessOrganisationVocabs() throws IOException, JSONException {
         // read from ARDC
-        List<VocabModel> organisationVocabsFromArdc = ardcVocabService.getVocabTreeFromArdcByType(resolvedPathCollection.get(VocabApiPaths.ORGANISATION_VOCAB.name()));
+        List<VocabModel> organisationVocabsFromArdc = ardcVocabService.getARDCVocabByType(ArdcCurrentPaths.ORGANISATION_VOCAB);
 
         // read from Elastic search
         List<JsonNode> organisationVocabsFromEs = vocabService.getOrganisationVocabs();

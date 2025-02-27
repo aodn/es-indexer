@@ -1,6 +1,7 @@
 package au.org.aodn.ardcvocabs.model;
 
-public enum PathName {
+public enum Name {
+    version,
     categoryApi,
     categoryDetailsApi,
     vocabApi,
