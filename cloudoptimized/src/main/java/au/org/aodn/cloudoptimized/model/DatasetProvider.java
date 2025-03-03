@@ -1,7 +1,7 @@
 package au.org.aodn.cloudoptimized.model;
 
+import au.org.aodn.cloudoptimized.model.geojson.FeatureCollectionGeoJson;
 import au.org.aodn.cloudoptimized.service.DataAccessService;
-import au.org.aodn.stac.model.StacItemModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StopWatch;
@@ -27,7 +27,7 @@ public class DatasetProvider {
         this.endYearMonth = YearMonth.from(endDate);
     }
 
-    public Iterable<List<StacItemModel>> getIterator(List<MetadataFields> columns) {
+    public Iterable<FeatureCollectionGeoJson> getIterator(List<MetadataFields> columns) {
         return () -> new Iterator<>() {
             @Override
             public boolean hasNext() {
@@ -35,7 +35,7 @@ public class DatasetProvider {
             }
 
             @Override
-            public List<StacItemModel> next() {
+            public FeatureCollectionGeoJson next() {
                 // please keep it for a while since it benefits the performance optimisation
                 StopWatch timer = new StopWatch();
                 timer.start(String.format("Data querying for %s %s", currentYearMonth.getYear(), currentYearMonth.getMonth()));
@@ -43,20 +43,23 @@ public class DatasetProvider {
                     throw new NoSuchElementException();
                 }
 
-                List<StacItemModel> data = dataAccessService.getIndexingDatasetBy(
+                FeatureCollectionGeoJson featureCollection = dataAccessService.getIndexingDatasetBy(
                         uuid,
                         LocalDate.of(currentYearMonth.getYear(), currentYearMonth.getMonthValue(), 1),
                         LocalDate.of(currentYearMonth.getYear(), currentYearMonth.getMonthValue(), currentYearMonth.lengthOfMonth()),
                         columns
                 );
                 currentYearMonth = currentYearMonth.plusMonths(1);
-                if (data.isEmpty()) {
+                if (featureCollection == null
+                        || featureCollection.getFeatures() == null
+                        || featureCollection.getFeatures().isEmpty()
+                ) {
                     return null;
                 }
 
                 timer.stop();
                 log.info(timer.prettyPrint());
-                return data;
+                return featureCollection;
             }
         };
     }
