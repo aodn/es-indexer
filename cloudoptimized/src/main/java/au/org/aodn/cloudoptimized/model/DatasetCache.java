@@ -1,33 +1,28 @@
 package au.org.aodn.cloudoptimized.model;
 
+import au.org.aodn.cloudoptimized.model.geojson.FeatureCollectionGeoJson;
 import au.org.aodn.stac.model.StacItemModel;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.StopWatch;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 @Slf4j
 @Getter
 public class DatasetCache {
-    protected final List<StacItemModel> data;
+    protected FeatureCollectionGeoJson featureCollection;
 
-    public DatasetCache() {
-        this.data = new ArrayList<>();
 
-    }
-
-    public void addData(StacItemModel modelToAdd) {
+    public void addData(FeatureCollectionGeoJson featureCollection) {
+        if (this.featureCollection == null) {
+            this.featureCollection = featureCollection;
+            return;
+        }
         StopWatch timer = new StopWatch();
         timer.start("Data adding");
-        var sameLocationModel = findSameLocationModel(modelToAdd);
-        if (sameLocationModel != null) {
-            addNewDateToModel(sameLocationModel, getDateCountPair(modelToAdd));
-        } else {
-            data.add(modelToAdd);
-        }
+        this.featureCollection.getFeatures().addAll(featureCollection.getFeatures());
         timer.stop();
         if (timer.getTotalTimeSeconds() > 1) {
             log.info(timer.prettyPrint());
@@ -51,16 +46,16 @@ public class DatasetCache {
     }
 
 
-    private StacItemModel findSameLocationModel(StacItemModel model) {
-        var coordToCompare = getItemCoordinate(model);
-        for (var item : data) {
-            var existingCoord = getItemCoordinate(item);
-            if (existingCoord.equals(coordToCompare)) {
-                return item;
-            }
-        }
-        return null;
-    }
+//    private StacItemModel findSameLocationModel(StacItemModel model) {
+//        var coordToCompare = getItemCoordinate(model);
+//        for (var item : data) {
+//            var existingCoord = getItemCoordinate(item);
+//            if (existingCoord.equals(coordToCompare)) {
+//                return item;
+//            }
+//        }
+//        return null;
+//    }
 
     @SuppressWarnings("unchecked, rawtypes")
     private Coordinate getItemCoordinate(StacItemModel item) {
