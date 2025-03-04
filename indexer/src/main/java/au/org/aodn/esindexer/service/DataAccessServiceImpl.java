@@ -1,6 +1,10 @@
 package au.org.aodn.esindexer.service;
 
+import au.org.aodn.cloudoptimized.enums.GeoJsonProperty;
 import au.org.aodn.cloudoptimized.model.*;
+import au.org.aodn.cloudoptimized.model.geojson.FeatureCollectionGeoJson;
+import au.org.aodn.cloudoptimized.model.geojson.FeatureGeoJson;
+import au.org.aodn.cloudoptimized.model.geojson.PointGeoJson;
 import au.org.aodn.cloudoptimized.service.DataAccessService;
 import au.org.aodn.esindexer.exception.MetadataNotFoundException;
 import au.org.aodn.esindexer.utils.GeometryUtils;
@@ -107,7 +111,7 @@ public class DataAccessServiceImpl implements DataAccessService {
     }
 
     @Override
-    public List<StacItemModel> getIndexingDatasetBy(String uuid, LocalDate startDate, LocalDate endDate, List<MetadataFields> fields) {
+    public FeatureCollectionGeoJson getIndexingDatasetBy(String uuid, LocalDate startDate, LocalDate endDate, List<MetadataFields> fields) {
 
         // currently, we force to get data in the same year to simplify the logic
         if (startDate.getYear() != endDate.getYear()) {
@@ -138,10 +142,10 @@ public class DataAccessServiceImpl implements DataAccessService {
             );
 
             if (responseEntity.getStatusCode().is2xxSuccessful()) {
-                if (responseEntity.getBody() != null) {
+                if (responseEntity.getBody() != null && !responseEntity.getBody().isEmpty()) {
                     log.info("Indexed cloud optimized data with UUID: {} in S3 for {} -> {}", uuid, startDate, endDate);
 
-                    return toStacItemModel(uuid, aggregateData(responseEntity.getBody()));
+                    return toFeatureCollection(uuid, aggregateData(responseEntity.getBody()));
                 }
             }
         } catch (Exception e) {
@@ -149,7 +153,7 @@ public class DataAccessServiceImpl implements DataAccessService {
             log.info("Unable to find cloud optimized data with UUID: {} in S3 for {} -> {}", uuid, startDate, endDate, e);
             log.warn("error message is: {}", e.getMessage());
         }
-        return List.of();
+        return null;
     }
 
     @Override
@@ -242,6 +246,34 @@ public class DataAccessServiceImpl implements DataAccessService {
 
                 })
                 .toList();
+    }
+
+    protected FeatureCollectionGeoJson toFeatureCollection(String uuid, Map<? extends CloudOptimizedEntry, Long> data) {
+
+        // Because the data provider provides data by month, so assume all the dates
+        // in data here are all the same. So just get the first date to set
+        String dateToSet = null;
+        var features = new ArrayList<FeatureGeoJson>();
+        for (var entry: data.entrySet()) {
+            var feature = new FeatureGeoJson(new PointGeoJson(entry.getKey().getLongitude(), entry.getKey().getLatitude()));
+            feature.addProperty(GeoJsonProperty.COUNT.getValue(), entry.getValue());
+            feature.addProperty(GeoJsonProperty.DATE.getValue(), entry.getKey().getTime().toString());
+            features.add(feature);
+
+            if (dateToSet == null) {
+                dateToSet = entry.getKey().getTime().toString();
+            } else {
+                // if the date is not the same, there must be something wrong in dataprovider. throw exception
+                if (!dateToSet.equals(entry.getKey().getTime().toString())) {
+                    throw new IllegalArgumentException("All the dates in the data must be the same");
+                }
+            }
+        }
+        var featureCollection = new FeatureCollectionGeoJson();
+        featureCollection.setFeatures(features);
+        featureCollection.addProperty(GeoJsonProperty.COLLECTION.getValue(), uuid);
+        featureCollection.addProperty(GeoJsonProperty.DATE.getValue(), dateToSet);
+        return featureCollection;
     }
 
     protected String getDataAccessEndpoint() {
