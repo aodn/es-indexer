@@ -66,6 +66,8 @@ public abstract class IndexServiceImpl implements IndexService {
             if(item != null) {
                 int size = indexerObjectMapper.writeValueAsBytes(item).length;
 
+                System.out.println("Size: " + size);
+
                 // We need to split the batch into smaller size to avoid data too large error in ElasticSearch,
                 // the limit is 10mb, so to make check before document add and push batch if size is too big
                 //

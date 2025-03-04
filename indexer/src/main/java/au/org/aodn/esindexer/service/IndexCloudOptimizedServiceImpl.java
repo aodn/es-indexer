@@ -1,21 +1,20 @@
 package au.org.aodn.esindexer.service;
 
-import au.org.aodn.cloudoptimized.model.DatasetCache;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.context.annotation.Scope;
-
+import au.org.aodn.cloudoptimized.enums.GeoJsonProperty;
 import au.org.aodn.cloudoptimized.model.DatasetProvider;
 import au.org.aodn.cloudoptimized.model.MetadataEntity;
 import au.org.aodn.cloudoptimized.model.TemporalExtent;
+import au.org.aodn.cloudoptimized.model.geojson.FeatureCollectionGeoJson;
 import au.org.aodn.cloudoptimized.service.DataAccessService;
 import au.org.aodn.esindexer.configuration.AppConstants;
-import au.org.aodn.stac.model.StacItemModel;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.ElasticsearchException;
 import co.elastic.clients.elasticsearch.core.BulkResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 
 import java.io.IOException;
@@ -108,36 +107,35 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
                                                       IndexService.Callback callback) throws IOException {
 
         List<BulkResponse> responses = new ArrayList<>();
-        DatasetCache cache = new DatasetCache();
 
-        Iterable<List<StacItemModel>> dataset = new DatasetProvider(metadata.getUuid(), startDate, endDate, dataAccessService)
+
+        elasticSearchIndexService.createIndexFromMappingJSONFile(AppConstants.DATASET_INDEX_MAPPING_JSON_FILE, indexName);
+
+        Iterable<FeatureCollectionGeoJson> dataset = new DatasetProvider(metadata.getUuid(), startDate, endDate, dataAccessService)
                 .getIterator(dataAccessService.getFields(metadata));
 
-        BulkRequestProcessor<StacItemModel> bulkRequestProcessor = new BulkRequestProcessor<>(
+        BulkRequestProcessor<FeatureCollectionGeoJson> bulkRequestProcessor = new BulkRequestProcessor<>(
                 indexName, (item) -> Optional.empty(),self, callback
         );
 
         try {
             int count = 0;
-            for (List<StacItemModel> entries : dataset) {
-                if (entries != null) {
-                    for(StacItemModel stacItemModel: entries) {
-                        log.debug("add cloud data with UUID: {} and props: {}", stacItemModel.getUuid(), stacItemModel.getProperties());
+            for (FeatureCollectionGeoJson featureCollection : dataset) {
+                if (featureCollection != null) {
                         count++;
-//                        bulkRequestProcessor.processItem(stacItemModel.getUuid(), stacItemModel, true)
-//                                .ifPresent(responses::add);
-                        cache.addData(stacItemModel);
-                    }
+
+                        bulkRequestProcessor.processItem(
+                                        featureCollection.getProperties().get(GeoJsonProperty.COLLECTION.getValue()).toString()
+                                                + "|"
+                                                + featureCollection.getProperties().get(GeoJsonProperty.DATE.getValue()).toString(),
+                                        featureCollection, true)
+                            .ifPresent(responses::add);
+
+
                     callback.onProgress("Processed number of items " + count);
                 }
             }
-            cache.getData().forEach(model -> {
-                try {
-                    bulkRequestProcessor.processItem(model.getUuid(), model, true);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            });
+
             bulkRequestProcessor
                     .flush()
                     .ifPresent(responses::add);
