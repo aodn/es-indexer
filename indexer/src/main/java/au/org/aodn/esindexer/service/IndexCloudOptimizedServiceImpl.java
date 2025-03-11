@@ -124,12 +124,22 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
                 if (featureCollection != null) {
                         count++;
 
-                        bulkRequestProcessor.processItem(
-                                        featureCollection.getProperties().get(GeoJsonProperty.COLLECTION.getValue()).toString()
-                                                + "|"
-                                                + featureCollection.getProperties().get(GeoJsonProperty.DATE.getValue()).toString(),
-                                        featureCollection, true)
-                            .ifPresent(responses::add);
+                        var featureCollections = avoidTooManyNestedObjects(featureCollection);
+                        for (FeatureCollectionGeoJson featureCollectionPart : featureCollections) {
+                            bulkRequestProcessor.processItem(
+                                    featureCollectionPart.getProperties().get(GeoJsonProperty.COLLECTION.getValue()).toString()
+                                            + "|"
+                                            + featureCollectionPart.getProperties().get(GeoJsonProperty.DATE.getValue()).toString(),
+                                    featureCollectionPart, true)
+                                    .ifPresent(responses::add);
+                        }
+
+//                        bulkRequestProcessor.processItem(
+//                                        featureCollection.getProperties().get(GeoJsonProperty.COLLECTION.getValue()).toString()
+//                                                + "|"
+//                                                + featureCollection.getProperties().get(GeoJsonProperty.DATE.getValue()).toString(),
+//                                        featureCollection, true)
+//                            .ifPresent(responses::add);
 
 
                     callback.onProgress("Processed number of items " + count);
@@ -148,5 +158,23 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
             throw e;
         }
         return responses;
+    }
+
+    private List<FeatureCollectionGeoJson> avoidTooManyNestedObjects(FeatureCollectionGeoJson featureCollection) {
+        List<FeatureCollectionGeoJson> featureCollections = new ArrayList<>();
+        if (featureCollection.getFeatures().size() > 9000) {
+            // split the feature collection into smaller ones so that all smaller ones have less than 9000 features. e.g.: first featurecollection is from 0 to 8999, second is from 9000 to 17999, etc.
+            int i = 0;
+            while (i < featureCollection.getFeatures().size()) {
+                FeatureCollectionGeoJson featureCollectionPart = new FeatureCollectionGeoJson();
+                featureCollectionPart.setFeatures(featureCollection.getFeatures().subList(i, Math.min(i + 9000, featureCollection.getFeatures().size())));
+                featureCollectionPart.setProperties(featureCollection.getProperties());
+                featureCollections.add(featureCollectionPart);
+                i += 9000;
+            }
+        } else {
+            featureCollections.add(featureCollection);
+        }
+        return featureCollections;
     }
 }
