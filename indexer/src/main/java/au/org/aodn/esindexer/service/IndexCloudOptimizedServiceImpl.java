@@ -109,8 +109,6 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
         List<BulkResponse> responses = new ArrayList<>();
 
 
-        elasticSearchIndexService.createIndexFromMappingJSONFile(AppConstants.DATASET_INDEX_MAPPING_JSON_FILE, indexName);
-
         Iterable<FeatureCollectionGeoJson> dataset = new DatasetProvider(metadata.getUuid(), startDate, endDate, dataAccessService)
                 .getIterator(dataAccessService.getFields(metadata));
 
@@ -134,14 +132,6 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
                                     .ifPresent(responses::add);
                         }
 
-//                        bulkRequestProcessor.processItem(
-//                                        featureCollection.getProperties().get(GeoJsonProperty.COLLECTION.getValue()).toString()
-//                                                + "|"
-//                                                + featureCollection.getProperties().get(GeoJsonProperty.DATE.getValue()).toString(),
-//                                        featureCollection, true)
-//                            .ifPresent(responses::add);
-
-
                     callback.onProgress("Processed number of items " + count);
                 }
             }
@@ -164,6 +154,7 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
         List<FeatureCollectionGeoJson> featureCollections = new ArrayList<>();
         if (featureCollection.getFeatures().size() > 9000) {
             // split the feature collection into smaller ones so that all smaller ones have less than 9000 features. e.g.: first featurecollection is from 0 to 8999, second is from 9000 to 17999, etc.
+            log.info("Splitting feature collection with {} features into smaller ones", featureCollection.getFeatures().size());
             int i = 0;
             while (i < featureCollection.getFeatures().size()) {
                 FeatureCollectionGeoJson featureCollectionPart = new FeatureCollectionGeoJson();
@@ -173,6 +164,7 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
                 i += 9000;
             }
         } else {
+            log.info("Feature collection has {} features", featureCollection.getFeatures().size());
             featureCollections.add(featureCollection);
         }
         return featureCollections;
