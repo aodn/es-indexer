@@ -109,8 +109,14 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
         List<BulkResponse> responses = new ArrayList<>();
 
 
-        Iterable<FeatureCollectionGeoJson> dataset = new DatasetProvider(metadata.getUuid(), startDate, endDate, dataAccessService)
-                .getIterator(dataAccessService.getFields(metadata));
+        Iterable<FeatureCollectionGeoJson> dataset = new DatasetProvider(
+                metadata.getUuid(),
+                startDate,
+                endDate,
+                dataAccessService,
+                dataAccessService.getFields(metadata)
+        )
+                .getIterator();
 
         BulkRequestProcessor<FeatureCollectionGeoJson> bulkRequestProcessor = new BulkRequestProcessor<>(
                 indexName, (item) -> Optional.empty(),self, callback
