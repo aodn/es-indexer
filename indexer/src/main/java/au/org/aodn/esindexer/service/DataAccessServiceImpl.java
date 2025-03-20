@@ -17,7 +17,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.time.LocalDate;
+import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -111,7 +111,10 @@ public class DataAccessServiceImpl implements DataAccessService {
     }
 
     @Override
-    public FeatureCollectionGeoJson getIndexingDatasetBy(String uuid, LocalDate startDate, LocalDate endDate, List<MetadataFields> fields) {
+    public FeatureCollectionGeoJson getIndexingDatasetByMonth(String uuid, YearMonth yearMonth, List<MetadataFields> fields) {
+
+        var startDate = yearMonth.atDay(1);
+        var endDate = yearMonth.atEndOfMonth();
 
         // currently, we force to get data in the same year to simplify the logic
         if (startDate.getYear() != endDate.getYear()) {

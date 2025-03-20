@@ -5,7 +5,7 @@ import au.org.aodn.cloudoptimized.model.MetadataFields;
 import au.org.aodn.cloudoptimized.model.TemporalExtent;
 import au.org.aodn.cloudoptimized.model.geojson.FeatureCollectionGeoJson;
 
-import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,7 +17,7 @@ public interface DataAccessService {
                 List.of(MetadataFields.TIME, MetadataFields.LONGITUDE, MetadataFields.LATITUDE);
     }
 
-    FeatureCollectionGeoJson getIndexingDatasetBy(String uuid, LocalDate startDate, LocalDate endDate, List<MetadataFields> fields);
+    FeatureCollectionGeoJson getIndexingDatasetByMonth(String uuid, YearMonth yearMonth, List<MetadataFields> fields);
     List<TemporalExtent> getTemporalExtentOf(String uuid);
     Optional<String> getNotebookLink(String uuid);
     MetadataEntity getMetadataByUuid(String uuid);

@@ -118,12 +118,9 @@ public class DatasetProvider {
     }
 
     private FeatureCollectionTask queryFeatureCollection(List<MetadataFields> columns, YearMonth yearMonth) {
-        var startDate = yearMonth.atDay(1);
-        var endDate = yearMonth.atEndOfMonth();
-        var featureCollection =  dataAccessService.getIndexingDatasetBy(
+        var featureCollection =  dataAccessService.getIndexingDatasetByMonth(
                 uuid,
-                startDate,
-                endDate,
+                yearMonth,
                 columns
         );
         return new FeatureCollectionTask(yearMonth, featureCollection);
