@@ -109,7 +109,7 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
         List<BulkResponse> responses = new ArrayList<>();
 
 
-        Iterable<FeatureCollectionGeoJson> dataset = new DatasetProvider(
+        Iterable<FeatureCollectionGeoJson> datasetIterator = new DatasetProvider(
                 metadata.getUuid(),
                 startDate,
                 endDate,
@@ -123,7 +123,7 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
         );
 
         try {
-            for (FeatureCollectionGeoJson featureCollection : dataset) {
+            for (FeatureCollectionGeoJson featureCollection : datasetIterator) {
                 if (featureCollection != null) {
 
                     var featureCollections = avoidTooManyNestedObjects(featureCollection);
