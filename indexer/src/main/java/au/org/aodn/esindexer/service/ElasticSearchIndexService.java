@@ -76,23 +76,11 @@ public class ElasticSearchIndexService {
 
     public long getDocumentsCount(String indexName) {
         try {
-            System.out.println("all indexes: " + getAllIndexes());
             return portalElasticsearchClient.count(s -> s
                     .index(indexName)
             ).count();
         } catch (ElasticsearchException | IOException e) {
             throw new IndexNotFoundException("Failed to get documents count from index: " + indexName + " | " + e.getMessage());
-        }
-    }
-
-    public Set<String> getAllIndexes() {
-        try {
-            GetIndexRequest request = GetIndexRequest.of(b -> b.index("*"));
-            GetIndexResponse response = portalElasticsearchClient.indices().get(request);
-            return response.result().keySet();
-        } catch (ElasticsearchException | IOException e) {
-            log.error("Failed to retrieve indexes: {}", e.getMessage());
-            throw new RuntimeException("Failed to retrieve indexes", e);
         }
     }
 }
