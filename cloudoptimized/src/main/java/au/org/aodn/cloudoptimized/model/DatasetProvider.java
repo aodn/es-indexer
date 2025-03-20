@@ -5,7 +5,6 @@ import au.org.aodn.cloudoptimized.service.DataAccessService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.lang.management.ManagementFactory;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.*;
@@ -42,11 +41,11 @@ public class DatasetProvider {
         executorService.submit(this::initializeCache);
     }
 
-    private record FeatureCollectionTask(YearMonth yearMonth, FeatureCollectionGeoJson featureCollection){};
+    private record FeatureCollectionTask(YearMonth yearMonth, FeatureCollectionGeoJson featureCollection){}
 
     private void initializeCache() {
         try {
-            while (!isCacheFull() && !currentYearMonth.isAfter(endYearMonth)) {
+            while (!currentYearMonth.isAfter(endYearMonth)) {
                 fetchData50Threads();
                 System.out.println();
             }
@@ -85,18 +84,6 @@ public class DatasetProvider {
         }
     }
 
-
-    private boolean isCacheFull() {
-        long maxHeap = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getMax();
-        long usedHeap = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getUsed();
-        double usedPercentage = (double) usedHeap / maxHeap * 100;
-
-        log.info("Used heap: {}% of max heap", usedPercentage);
-
-        // to make sure the app is safe, set a lower percentage
-        return usedPercentage >= 50;
-    }
-
     public Iterable<FeatureCollectionGeoJson> getIterator() {
 
         return () -> new Iterator<>() {
@@ -129,7 +116,8 @@ public class DatasetProvider {
         var startDate = yearMonth.atDay(1);
         var endDate = yearMonth.atEndOfMonth();
         var featureCollection =  dataAccessService.getIndexingDatasetBy(
-                uuid,startDate,
+                uuid,
+                startDate,
                 endDate,
                 columns
         );
