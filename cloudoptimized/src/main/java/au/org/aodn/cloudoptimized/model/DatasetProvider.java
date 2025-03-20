@@ -58,7 +58,7 @@ public class DatasetProvider {
 
     private void queryDataByMultiThreads() {
 
-        //TODO: currently, multi-threading is only working well for local running data-access-service. May try to solve the problem in the future.
+        //TODO: currently, multi-threading is only working well for local running data-access-service (may cause outOfMemory exception). May try to solve the problem in the future.
         final int THREADS_COUNT = 10;
         ExecutorService executorService = Executors.newFixedThreadPool(THREADS_COUNT);
         List<Callable<FeatureCollectionTask>> tasks = new ArrayList<>();

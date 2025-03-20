@@ -9,6 +9,8 @@ import co.elastic.clients.elasticsearch.core.CountRequest;
 import co.elastic.clients.elasticsearch.core.CountResponse;
 import co.elastic.clients.elasticsearch.indices.CreateIndexRequest;
 import co.elastic.clients.elasticsearch.indices.CreateIndexResponse;
+import co.elastic.clients.elasticsearch.indices.GetIndexRequest;
+import co.elastic.clients.elasticsearch.indices.GetIndexResponse;
 import co.elastic.clients.transport.endpoints.BooleanResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Set;
 
 
 @Slf4j
@@ -73,11 +76,23 @@ public class ElasticSearchIndexService {
 
     public long getDocumentsCount(String indexName) {
         try {
+            System.out.println("all indexes: " + getAllIndexes());
             return portalElasticsearchClient.count(s -> s
                     .index(indexName)
             ).count();
         } catch (ElasticsearchException | IOException e) {
             throw new IndexNotFoundException("Failed to get documents count from index: " + indexName + " | " + e.getMessage());
+        }
+    }
+
+    public Set<String> getAllIndexes() {
+        try {
+            GetIndexRequest request = GetIndexRequest.of(b -> b.index("*"));
+            GetIndexResponse response = portalElasticsearchClient.indices().get(request);
+            return response.result().keySet();
+        } catch (ElasticsearchException | IOException e) {
+            log.error("Failed to retrieve indexes: {}", e.getMessage());
+            throw new RuntimeException("Failed to retrieve indexes", e);
         }
     }
 }
