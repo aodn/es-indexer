@@ -1,0 +1,119 @@
+{
+  "format": "linked-data-api",
+  "version": "0.2",
+  "result": {
+    "_about": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-7/concept.json",
+    "definition": "https://vocabs.ardc.edu.au/repository/api/lda/meta/aodn/aodn-discovery-parameter-vocabulary/version-1-7/concept.json",
+    "extendedMetadataVersion": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-7/concept.json?_metadata=all",
+    "first": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-7/concept.json?_page=0",
+    "hasPart": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-7/concept.json",
+    "isPartOf": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-7/concept.json",
+    "items": [
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/890",
+        "dctermsCreated": "2015-11-18T00:00:00Z",
+        "dctermsModified": "2019-03-25T23:46:57Z",
+        "definition": "The proportion of the incident light that is absorbed by the dissolved component of a sample from any body of fresh or salt water.",
+        "prefLabel": {
+          "_value": "Light absorption coefficient of dissolved organic matter",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/891",
+        "dctermsCreated": "2015-11-18T00:00:00Z",
+        "dctermsModified": "2019-03-25T23:47:19Z",
+        "definition": "The proportion of the incident light that is absorbed by the algal (phytoplankton) component of a sample from any body of fresh or salt water.",
+        "prefLabel": {
+          "_value": "Light absorption coefficient of phytoplankton",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/892",
+        "dctermsCreated": "2015-11-18T00:00:00Z",
+        "dctermsModified": "2019-03-25T23:47:07Z",
+        "definition": "The proportion of the incident light that is absorbed by the detrital or non-algal component of a sample from any body of fresh or salt water.",
+        "prefLabel": {
+          "_value": "Light absorption coefficient of nonalgal particles",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/893",
+        "dctermsCreated": "2015-11-18T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:23:29Z",
+        "prefLabel": {
+          "_value": "Concentration of inferred chlorophyll from relative fluorescence per unit mass of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/894",
+        "dctermsCreated": "2015-11-18T00:00:00Z",
+        "dctermsModified": "2018-02-23T00:23:30Z",
+        "prefLabel": {
+          "_value": "Concentration of inferred chlorophyll from relative fluorescence per unit volume of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/1",
+        "dctermsCreated": "2015-06-30T06:05:19Z",
+        "dctermsModified": "2018-02-23T00:23:30Z",
+        "definition": "Concentration of dissolved inorganic carbon per unit mass of the water column. Solute may be expressed in terms of mass or quantity of substance.",
+        "prefLabel": {
+          "_value": "Concentration of carbon (total inorganic) per unit mass of the water body",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/10",
+        "dctermsCreated": "2015-08-07T00:50:23Z",
+        "dctermsModified": "2025-01-08T05:05:43Z",
+        "definition": "The net shortwave heat flux is the difference between the downwelling radiation from the sun as modified by the gases and clouds of the atmosphere and the radiation returned from the sea surface, which is either reflected by the surface or backscattered from within the water column.",
+        "prefLabel": {
+          "_value": "Net shortwave heat flux",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/11",
+        "dctermsCreated": "2015-08-07T00:51:43Z",
+        "dctermsModified": "2025-01-08T05:05:27Z",
+        "definition": "Net surface heat flux across the air-sea interface.",
+        "prefLabel": {
+          "_value": "Net heat flux",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/12",
+        "dctermsCreated": "2015-08-07T00:53:51Z",
+        "dctermsModified": "2025-01-08T05:05:38Z",
+        "prefLabel": {
+          "_value": "Net mass flux",
+          "_lang": "en"
+        }
+      },
+      {
+        "_about": "http://vocab.aodn.org.au/def/discovery_parameter/entity/13",
+        "dctermsCreated": "2015-08-07T00:56:36Z",
+        "dctermsModified": "2018-02-23T00:23:31Z",
+        "definition": "The amount (mass or moles) of the following pigments (divinyl chlorophyll-a, chlorophyll-a, chlorophyllide-a, chlorophyll-a allomers and chlorophyll-a prime) in a known volume of any water body.",
+        "prefLabel": {
+          "_value": "Concentration of total chlorophyll-a per unit volume of the water body",
+          "_lang": "en"
+        }
+      }
+    ],
+    "itemsPerPage": 10,
+    "next": "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-discovery-parameter-vocabulary/version-1-7/concept.json?_page=1",
+    "page": 0,
+    "startIndex": 1,
+    "type": [
+      "http://purl.org/linked-data/api/vocab#ListEndpoint",
+      "http://purl.org/linked-data/api/vocab#Page"
+    ]
+  }
+}

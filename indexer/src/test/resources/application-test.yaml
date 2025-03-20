@@ -20,7 +20,8 @@ elasticsearch:
   index:
     name: sample-portal-records
   vocabs_index:
-    name: test-vocabs-index
+    name: "test-vocabs-index"
+    enableRefreshDelay: "false"
   query:
     pageSize: 4
 

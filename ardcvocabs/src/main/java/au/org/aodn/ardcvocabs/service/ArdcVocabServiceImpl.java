@@ -3,14 +3,13 @@ package au.org.aodn.ardcvocabs.service;
 import au.org.aodn.ardcvocabs.exception.ExtractingPathVersionsException;
 import au.org.aodn.ardcvocabs.exception.InvalidVersionFormatException;
 import au.org.aodn.ardcvocabs.model.ArdcCurrentPaths;
-import au.org.aodn.ardcvocabs.model.PathName;
+import au.org.aodn.ardcvocabs.model.Name;
 import au.org.aodn.ardcvocabs.model.VocabApiPaths;
 import au.org.aodn.ardcvocabs.model.VocabModel;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.TextNode;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.retry.support.RetryTemplate;
 import org.springframework.web.client.RestClientException;
@@ -24,9 +23,8 @@ import java.util.stream.Collectors;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@Slf4j
 public class ArdcVocabServiceImpl implements ArdcVocabService {
-
-    protected static Logger log = LoggerFactory.getLogger(ArdcVocabServiceImpl.class);
 
     @Value("${ardcvocabs.baseUrl:https://vocabs.ardc.edu.au/repository/api/lda/aodn}")
     protected String vocabApiBase;
@@ -36,50 +34,43 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
 
     protected static final String VERSION_REGEX = "/(version-\\d+-\\d+)(?:/|$)";
 
-    public Map<String, Map<PathName, String>> getResolvedPathCollection() {
-        Map<String, Map<PathName, String>> resolvedPathCollection = new HashMap<>();
+    protected Map<Name, String> getVersionedArdcPath(ArdcCurrentPaths currentPath) {
+        try {
+            // Fetch current contents
+            ObjectNode categoryCurrentContent = fetchCurrentContents(currentPath.getCategoryCurrent());
+            ObjectNode vocabCurrentContent = fetchCurrentContents(currentPath.getVocabCurrent());
+            validateContentNotNull(currentPath, categoryCurrentContent, vocabCurrentContent);
 
-        for (ArdcCurrentPaths currentPath : ArdcCurrentPaths.values()) {
-            try {
-                // Fetch current contents
-                ObjectNode categoryCurrentContent = fetchCurrentContents(currentPath.getCategoryCurrent());
-                ObjectNode vocabCurrentContent = fetchCurrentContents(currentPath.getVocabCurrent());
-                validateContentNotNull(currentPath, categoryCurrentContent, vocabCurrentContent);
+            // Extract versions
+            String categoryVersion = extractVersionFromCurrentContent(categoryCurrentContent);
+            String vocabVersion = extractVersionFromCurrentContent(vocabCurrentContent);
+            validateVersionsNotNull(currentPath, categoryVersion, vocabVersion);
 
-                // Extract versions
-                String categoryVersion = extractVersionFromCurrentContent(categoryCurrentContent);
-                String vocabVersion = extractVersionFromCurrentContent(vocabCurrentContent);
-                validateVersionsNotNull(currentPath, categoryVersion, vocabVersion);
+            log.info("Fetched ARDC category version for {}: {}", currentPath.name(), categoryVersion);
+            log.info("Fetched ARDC vocab version for {}: {}", currentPath.name(), vocabVersion);
 
-                log.info("Fetched ARDC category version for {}: {}", currentPath.name(), categoryVersion);
-                log.info("Fetched ARDC vocab version for {}: {}", currentPath.name(), vocabVersion);
+            // Build and store resolved paths
+            return buildResolvedPaths(currentPath, categoryVersion, vocabVersion);
 
-                // Build and store resolved paths
-                Map<PathName, String> resolvedPaths = buildResolvedPaths(currentPath, categoryVersion, vocabVersion);
-                resolvedPathCollection.put(currentPath.name(), resolvedPaths);
-
-            } catch (Exception e) {
-                log.error("Error initialising versions for {}: {}", currentPath.name(), e.getMessage(), e);
-                throw new ExtractingPathVersionsException(String.format("Error initialising versions for %s: %s", currentPath.name(), e.getMessage()));
-            }
+        } catch (Exception e) {
+            log.error("Error initialising versions for {}: {}", currentPath.name(), e.getMessage(), e);
+            throw new ExtractingPathVersionsException(String.format("Error initialising versions for %s: %s", currentPath.name(), e.getMessage()));
         }
-
-        return resolvedPathCollection;
     }
 
-    private void validateContentNotNull(ArdcCurrentPaths currentPath, ObjectNode categoryContent, ObjectNode vocabContent) {
+    protected void validateContentNotNull(ArdcCurrentPaths currentPath, ObjectNode categoryContent, ObjectNode vocabContent) {
         if (categoryContent == null || vocabContent == null) {
             throw new ExtractingPathVersionsException(String.format("Failed to fetch HTML content for %s", currentPath.name()));
         }
     }
 
-    private void validateVersionsNotNull(ArdcCurrentPaths currentPath, String categoryVersion, String vocabVersion) {
+    protected void validateVersionsNotNull(ArdcCurrentPaths currentPath, String categoryVersion, String vocabVersion) {
         if (categoryVersion == null || vocabVersion == null) {
             throw new ExtractingPathVersionsException(String.format("Version extraction returned null for %s", currentPath.name()));
         }
     }
 
-    private ObjectNode fetchCurrentContents(String url) {
+    protected ObjectNode fetchCurrentContents(String url) {
         try {
             return retryTemplate.execute(context -> restTemplate.getForObject(url, ObjectNode.class));
         } catch (RestClientException e) {
@@ -90,20 +81,21 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
         return null;
     }
 
-    protected Map<PathName, String> buildResolvedPaths(ArdcCurrentPaths currentPaths, String categoryVersion, String vocabVersion) {
-        Map<PathName, String> resolvedPaths = new HashMap<>();
+    protected Map<Name, String> buildResolvedPaths(ArdcCurrentPaths currentPaths, String categoryVersion, String vocabVersion) {
+        Map<Name, String> resolvedPaths = new HashMap<>();
         for (VocabApiPaths vocabApiPath : VocabApiPaths.values()) {
             if (currentPaths.name().equals(vocabApiPath.name())) {
-                resolvedPaths.put(PathName.categoryApi, String.format(vocabApiPath.getCategoryApiTemplate(), categoryVersion));
-                resolvedPaths.put(PathName.categoryDetailsApi, String.format(vocabApiPath.getCategoryDetailsTemplate(), categoryVersion, "%s"));
-                resolvedPaths.put(PathName.vocabApi, String.format(vocabApiPath.getVocabApiTemplate(), vocabVersion));
-                resolvedPaths.put(PathName.vocabDetailsApi, String.format(vocabApiPath.getVocabDetailsTemplate(), vocabVersion, "%s"));
+                resolvedPaths.put(Name.version, categoryVersion + "/" + vocabVersion);
+                resolvedPaths.put(Name.categoryApi, String.format(vocabApiPath.getCategoryApiTemplate(), categoryVersion));
+                resolvedPaths.put(Name.categoryDetailsApi, String.format(vocabApiPath.getCategoryDetailsTemplate(), categoryVersion, "%s"));
+                resolvedPaths.put(Name.vocabApi, String.format(vocabApiPath.getVocabApiTemplate(), vocabVersion));
+                resolvedPaths.put(Name.vocabDetailsApi, String.format(vocabApiPath.getVocabDetailsTemplate(), vocabVersion, "%s"));
             }
         }
         return resolvedPaths;
     }
 
-    protected String extractVersionFromCurrentContent(ObjectNode currentContent) throws InvalidPropertiesFormatException {
+    protected String extractVersionFromCurrentContent(ObjectNode currentContent) {
         if (currentContent != null && !currentContent.isEmpty()) {
             JsonNode node = currentContent.get("result");
             if (!about.apply(node).isEmpty()) {
@@ -184,10 +176,10 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
         this.retryTemplate = retryTemplate;
     }
 
-    protected VocabModel buildVocabByResourceUri(String vocabUri, String vocabApiBase, Map<PathName, String> resolvedPaths) {
+    protected VocabModel buildVocabByResourceUri(String vocabUri, String vocabApiBase, Map<Name, String> pointers) {
         String resourceDetailsApi = vocabUri.contains("_classes")
-                ? resolvedPaths.get(PathName.categoryDetailsApi)
-                : resolvedPaths.get(PathName.vocabDetailsApi);
+                ? pointers.get(Name.categoryDetailsApi)
+                : pointers.get(Name.vocabDetailsApi);
 
         String detailsUrl = String.format(vocabApiBase + resourceDetailsApi, vocabUri);
 
@@ -202,6 +194,7 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
                         .label(label.apply(target))
                         .definition(definition.apply(target))
                         .about(vocabUri)
+                        .version(pointers.get(Name.version))
                         .displayLabel(displayLabel.apply(target))
                         .hiddenLabels(hiddenLabels.apply(target))
                         .altLabels(altLabels.apply(target))
@@ -217,7 +210,7 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
                     for (JsonNode j : target.get("narrower")) {
                         if (!about.apply(j).isEmpty()) {
                             // recursive call
-                            VocabModel narrowerNode = buildVocabByResourceUri(about.apply(j), vocabApiBase, resolvedPaths);
+                            VocabModel narrowerNode = buildVocabByResourceUri(about.apply(j), vocabApiBase, pointers);
                             if (narrowerNode != null) {
                                 narrowerNodes.add(narrowerNode);
                             }
@@ -232,19 +225,21 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
                 return vocab;
             }
         } catch(Exception e) {
-            log.error("Item not found in resource {}", detailsUrl);
+            log.warn("Item not found in resource, check with person who maintain the vocabs {}", detailsUrl);
         }
         return null;
     }
 
-    protected <T> VocabModel buildVocabModel(T currentNode, String vocabApiBase, Map<PathName, String> resolvedPaths) {
+    protected <T> VocabModel buildVocabModel(T currentNode, String vocabApiBase, Map<Name, String> pointers) {
         String resourceUri = null;
 
         if (currentNode instanceof ObjectNode objectNode) {
             resourceUri = objectNode.has("_about") ? about.apply(objectNode) : objectNode.asText();
-        } else if (currentNode instanceof TextNode textNode) {
+        }
+        else if (currentNode instanceof TextNode textNode) {
             resourceUri = textNode.asText();
-        } else if (currentNode instanceof VocabModel vocabNode) {
+        }
+        else if (currentNode instanceof VocabModel vocabNode) {
             String about = vocabNode.getAbout();
             if (about != null && !about.isEmpty()) {
                 resourceUri = about;
@@ -255,12 +250,12 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
             throw new IllegalArgumentException("Unsupported node type: " + currentNode.getClass().getName());
         }
 
-        return buildVocabByResourceUri(resourceUri, vocabApiBase, resolvedPaths);
+        return buildVocabByResourceUri(resourceUri, vocabApiBase, pointers);
     }
 
-    protected Map<String, List<VocabModel>> getVocabLeafNodes(String vocabApiBase, Map<PathName, String> resolvedPaths) {
+    protected Map<String, List<VocabModel>> getVocabLeafNodes(String vocabApiBase, Map<Name, String> pointers) {
         Map<String, List<VocabModel>> results = new HashMap<>();
-        String url = String.format(vocabApiBase + resolvedPaths.get(PathName.vocabApi));
+        String url = String.format(vocabApiBase + pointers.get(Name.vocabApi));
 
         while (url != null && !url.isEmpty()) {
             try {
@@ -274,7 +269,7 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
                     if (isNodeValid.apply(node, "items")) {
                         for (JsonNode j : node.get("items")) {
                             // Now we need to construct link to detail resources
-                            String dl = String.format(vocabApiBase + resolvedPaths.get(PathName.vocabDetailsApi), about.apply(j));
+                            String dl = String.format(vocabApiBase + pointers.get(Name.vocabDetailsApi), about.apply(j));
                             try {
                                 log.debug("getVocabLeafNodes -> {}", dl);
                                 ObjectNode d = retryTemplate.execute(context -> restTemplate.getForObject(dl, ObjectNode.class));
@@ -286,6 +281,7 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
                                             .label(label.apply(target))
                                             .definition(definition.apply(target))
                                             .about(about.apply(target))
+                                            .version(pointers.get(Name.version))
                                             .displayLabel(displayLabel.apply(target))
                                             .hiddenLabels(hiddenLabels.apply(target))
                                             .altLabels(altLabels.apply(target))
@@ -299,7 +295,7 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
                                     List<VocabModel> vocabNarrower = new ArrayList<>();
                                     if(target.has("narrower") && !target.get("narrower").isEmpty()) {
                                         for(JsonNode currentNode : target.get("narrower")) {
-                                            VocabModel narrowerNode = buildVocabModel(currentNode, vocabApiBase, resolvedPaths);
+                                            VocabModel narrowerNode = buildVocabModel(currentNode, vocabApiBase, pointers);
                                             if (narrowerNode != null) {
                                                 vocabNarrower.add(narrowerNode);
                                             }
@@ -324,7 +320,7 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
                                             List<VocabModel> completedInternalNodes = new ArrayList<>();
                                             vocab.getNarrower().forEach(currentInternalNode -> {
                                                 // rebuild currentInternalNode (no linked leaf nodes) to completedInternalNode (with linked leaf nodes)
-                                                VocabModel completedInternalNode = buildVocabModel(currentInternalNode, vocabApiBase, resolvedPaths);
+                                                VocabModel completedInternalNode = buildVocabModel(currentInternalNode, vocabApiBase, pointers);
                                                 if (completedInternalNode != null) {
                                                     // each internal node now will have linked narrower nodes (if available)
                                                     completedInternalNodes.add(completedInternalNode);
@@ -363,14 +359,21 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
     }
 
     @Override
-    public List<VocabModel> getVocabTreeFromArdcByType(Map<PathName, String> resolvedPaths) {
-        Map<String, List<VocabModel>> vocabLeafNodes = getVocabLeafNodes(vocabApiBase, resolvedPaths);
-        String url = String.format(vocabApiBase + resolvedPaths.get(PathName.categoryApi));
+    public boolean isVersionEquals(ArdcCurrentPaths path, String version) {
+        Map<Name, String> versioned = this.getVersionedArdcPath(path);
+        return versioned.get(Name.version).equals(version);
+    }
+
+    @Override
+    public List<VocabModel> getARDCVocabByType(ArdcCurrentPaths path) {
+        Map<Name, String> versioned = this.getVersionedArdcPath(path);
+
+        Map<String, List<VocabModel>> vocabLeafNodes = getVocabLeafNodes(vocabApiBase, versioned);
+        String url = String.format(vocabApiBase + versioned.get(Name.categoryApi));
         List<VocabModel> vocabCategoryNodes = new ArrayList<>();
         while (url != null && !url.isEmpty()) {
             try {
-                log.debug("Query api -> {}", url);
-                String finalUrl = url;
+                final String finalUrl = url;
                 ObjectNode r = retryTemplate.execute(context -> restTemplate.getForObject(finalUrl, ObjectNode.class));
                 if (r != null && !r.isEmpty()) {
                     JsonNode node = r.get("result");
@@ -387,13 +390,14 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
                                         .label(labelValue)
                                         .definition(definitionValue)
                                         .about(aboutValue)
+                                        .version(versioned.get(Name.version))
                                         .build();
 
                                 // process internal nodes of vocab category
                                 Map<String, List<VocabModel>> internalVocabCategoryNodes = new HashMap<>();
                                 if (j.has("narrower") && !j.get("narrower").isEmpty()) {
                                     j.get("narrower").forEach(currentNode -> {
-                                        VocabModel internalNode = buildVocabModel(currentNode, vocabApiBase, resolvedPaths);
+                                        VocabModel internalNode = buildVocabModel(currentNode, vocabApiBase, versioned);
                                         if (internalNode != null) {
                                             List<VocabModel> leafNodes = vocabLeafNodes.getOrDefault(internalNode.getAbout(), Collections.emptyList());
                                             if (!leafNodes.isEmpty()) {

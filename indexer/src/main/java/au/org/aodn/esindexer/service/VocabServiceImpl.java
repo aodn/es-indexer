@@ -1,9 +1,6 @@
 package au.org.aodn.esindexer.service;
 
-import au.org.aodn.ardcvocabs.model.PathName;
-import au.org.aodn.ardcvocabs.model.VocabApiPaths;
-import au.org.aodn.ardcvocabs.model.VocabDto;
-import au.org.aodn.ardcvocabs.model.VocabModel;
+import au.org.aodn.ardcvocabs.model.*;
 import au.org.aodn.ardcvocabs.service.ArdcVocabService;
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.exception.DocumentNotFoundException;
@@ -309,17 +306,17 @@ public class VocabServiceImpl implements VocabService {
 
     @CacheEvict(value = VocabType.Names.AODN_DISCOVERY_PARAMETER_VOCABS, allEntries = true)
     public void clearParameterVocabCache() {
-        // Intentionally empty; the annotation does the job
+        log.info("Cache evit for {}", VocabType.Names.AODN_DISCOVERY_PARAMETER_VOCABS);
     }
 
     @CacheEvict(value = VocabType.Names.AODN_PLATFORM_VOCABS, allEntries = true)
     public void clearPlatformVocabCache() {
-        // Intentionally empty; the annotation does the job
+        log.info("Cache evit for {}", VocabType.Names.AODN_PLATFORM_VOCABS);
     }
 
     @CacheEvict(value = VocabType.Names.AODN_ORGANISATION_VOCABS, allEntries = true)
     public void clearOrganisationVocabCache() {
-        // Intentionally empty; the annotation does the job
+        log.info("Cache evit for {}", VocabType.Names.AODN_ORGANISATION_VOCABS);
     }
 
     protected void indexAllVocabs(List<VocabModel> parameterVocabs,
@@ -396,13 +393,17 @@ public class VocabServiceImpl implements VocabService {
             log.error("No vocabs to be indexed, nothing to index");
         }
     }
-
-    public void populateVocabsData(Map<String, Map<PathName, String>> resolvedPathCollection) throws IOException {
+    /**
+     * This method do the population in synchronize way
+     * @throws IOException - If something happens, throw to allow client aware of issue.
+     */
+    @Override
+    public void populateVocabsData() throws IOException {
         log.info("Starting fetching vocabs data process synchronously...");
 
-        List<VocabModel> parameterVocabs = ardcVocabService.getVocabTreeFromArdcByType(resolvedPathCollection.get(VocabApiPaths.PARAMETER_VOCAB.name()));
-        List<VocabModel> platformVocabs = ardcVocabService.getVocabTreeFromArdcByType(resolvedPathCollection.get(VocabApiPaths.PLATFORM_VOCAB.name()));
-        List<VocabModel> organisationVocabs = ardcVocabService.getVocabTreeFromArdcByType(resolvedPathCollection.get(VocabApiPaths.ORGANISATION_VOCAB.name()));
+        List<VocabModel> parameterVocabs = ardcVocabService.getARDCVocabByType(ArdcCurrentPaths.PARAMETER_VOCAB);
+        List<VocabModel> platformVocabs = ardcVocabService.getARDCVocabByType(ArdcCurrentPaths.PLATFORM_VOCAB);
+        List<VocabModel> organisationVocabs = ardcVocabService.getARDCVocabByType(ArdcCurrentPaths.ORGANISATION_VOCAB);
 
         if (parameterVocabs.isEmpty() || platformVocabs.isEmpty() || organisationVocabs.isEmpty()) {
             throw new IgnoreIndexingVocabsException("One or more vocab lists are empty. Skipping indexing.");
@@ -410,19 +411,26 @@ public class VocabServiceImpl implements VocabService {
 
         indexAllVocabs(parameterVocabs, platformVocabs, organisationVocabs);
     }
-
-    public void populateVocabsDataAsync(Map<String, Map<PathName, String>> resolvedPathCollection) {
+    /**
+     * This method do the population in asynchronized way
+     *
+     * @param delay - Delay the execution by number of minutes
+     */
+    @Override
+    public CompletableFuture<Void> populateVocabsDataAsync(int delay) {
         log.info("Starting async vocabs data fetching process...");
 
         ExecutorService executorService = Executors.newFixedThreadPool(3);
         List<Callable<List<VocabModel>>> vocabTasks = List.of(
-                createVocabFetchTask(resolvedPathCollection.get(VocabApiPaths.PARAMETER_VOCAB.name()), "parameter"),
-                createVocabFetchTask(resolvedPathCollection.get(VocabApiPaths.PLATFORM_VOCAB.name()), "platform"),
-                createVocabFetchTask(resolvedPathCollection.get(VocabApiPaths.ORGANISATION_VOCAB.name()), "organisation")
+                () -> ardcVocabService.getARDCVocabByType(ArdcCurrentPaths.PARAMETER_VOCAB),
+                () -> ardcVocabService.getARDCVocabByType(ArdcCurrentPaths.PLATFORM_VOCAB),
+                () -> ardcVocabService.getARDCVocabByType(ArdcCurrentPaths.ORGANISATION_VOCAB)
         );
 
-        CompletableFuture.runAsync(() -> {
+        return CompletableFuture.runAsync(() -> {
             try {
+                log.info("Vocabs data fetching process started in the background.");
+
                 // Invoke all tasks and wait for completion
                 List<Future<List<VocabModel>>> completedFutures = executorService.invokeAll(vocabTasks);
 
@@ -446,21 +454,14 @@ public class VocabServiceImpl implements VocabService {
                 // Call indexAllVocabs only after all tasks are completed and validated
                 log.info("Indexing fetched vocabs to {}", vocabsIndexName);
                 indexAllVocabs(allResults.get(0), allResults.get(1), allResults.get(2));
-            } catch (InterruptedException | IOException e) {
+            }
+            catch (InterruptedException | IOException e) {
                 Thread.currentThread().interrupt();  // Restore interrupt status
                 log.error("Thread was interrupted while processing vocab tasks", e);
-            } finally {
+            }
+            finally {
                 executorService.shutdown();
             }
-        });
-
-        log.info("Vocabs data fetching process started in the background.");
-    }
-
-    private Callable<List<VocabModel>> createVocabFetchTask(Map<PathName, String> resolvedPaths, String vocabName) {
-        return () -> {
-            log.info("Fetching {} vocabs from ARDC", vocabName);
-            return ardcVocabService.getVocabTreeFromArdcByType(resolvedPaths);
-        };
+        }, CompletableFuture.delayedExecutor(delay, TimeUnit.MINUTES, Executors.newSingleThreadExecutor()));
     }
 }

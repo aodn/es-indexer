@@ -1,7 +1,7 @@
 package au.org.aodn.esindexer.configuration;
 
 import au.org.aodn.esindexer.utils.GeometryUtils;
-import au.org.aodn.esindexer.utils.VocabsIndexUtils;
+import au.org.aodn.esindexer.service.VocabIndexScheduler;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
@@ -47,15 +47,14 @@ public class IndexerConfig {
      * @return A bean of VocabsUtils
      */
     @Bean
-    @ConditionalOnMissingBean(VocabsIndexUtils.class)
-    public VocabsIndexUtils createVocabsUtils() {
-        return new VocabsIndexUtils();
+    @ConditionalOnMissingBean(VocabIndexScheduler.class)
+    public VocabIndexScheduler createVocabsUtils() {
+        return new VocabIndexScheduler();
     }
     /**
      * This executor is used to limit the number of concurrent call to index metadata so not to flood the
      * geonetwork. This is useful because the geonetwork do not care about re-index call it invoke, hence
      * the elastic of geonetwork may be flooded by its re-index call.
-     *
      * A small thread size is require to not overload the geonetwork.
      *
      * @return - An async task executor with blocking queue to stop too many request. This is a limited queue
