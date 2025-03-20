@@ -56,8 +56,7 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
     public boolean hasIndex(String collectionId) {
         try {
             return elasticSearchIndexService.count(this.indexName, "collection", collectionId) > 0;
-        }
-        catch(IOException | ElasticsearchException exception) {
+        } catch (IOException | ElasticsearchException exception) {
             // ElasticsearchException when indexName do not exist, this happens in a partial config env
             // but we still need to make sure indexing works as is, backward compatible
             log.warn("Missing index for collectionId {} on index {}", collectionId, this.indexName);
@@ -75,7 +74,7 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
                 .sorted(Comparator.comparing(MetadataEntity::getUuid))
                 .toList();
 
-        for(MetadataEntity entity : sorted) {
+        for (MetadataEntity entity : sorted) {
             List<TemporalExtent> temporalExtents = dataAccessService.getTemporalExtentOf(entity.getUuid());
             if (!temporalExtents.isEmpty()) {
                 // Only first block works from data service api
@@ -85,19 +84,20 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
                 callback.onProgress(String.format("Indexing dataset with UUID: %s from %s to %s", entity.getUuid(), startDate, endDate));
                 try {
                     results.addAll(indexCloudOptimizedData(entity, startDate, endDate, callback));
-                }
-                catch(IOException ioe) {
+                } catch (IOException ioe) {
                     // Do nothing
                 }
             }
         }
         return results;
     }
+
     /**
      * Index the cloud optimized data
-     * @param metadata - The metadata that describe the data
+     *
+     * @param metadata  - The metadata that describe the data
      * @param startDate - The start range to index
-     * @param endDate - THe end range to index
+     * @param endDate   - THe end range to index
      * @return - The index result
      */
     @Override
@@ -119,26 +119,37 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
                 .getIterator();
 
         BulkRequestProcessor<FeatureCollectionGeoJson> bulkRequestProcessor = new BulkRequestProcessor<>(
-                indexName, (item) -> Optional.empty(),self, callback
+                indexName, (item) -> Optional.empty(), self, callback
         );
 
         try {
-            int count = 0;
             for (FeatureCollectionGeoJson featureCollection : dataset) {
                 if (featureCollection != null) {
-                        count++;
 
-                        var featureCollections = avoidTooManyNestedObjects(featureCollection);
-                        for (FeatureCollectionGeoJson featureCollectionPart : featureCollections) {
+                    var featureCollections = avoidTooManyNestedObjects(featureCollection);
+                    if (featureCollections.isEmpty()) {
+                        continue;
+                    } else if (featureCollections.size() == 1) {
+                        bulkRequestProcessor.processItem(
+                                        featureCollections.get(0).getProperties().get(GeoJsonProperty.COLLECTION.getValue()).toString()
+                                                + "|"
+                                                + featureCollections.get(0).getProperties().get(GeoJsonProperty.DATE.getValue()).toString(),
+                                        featureCollections.get(0), true)
+                                .ifPresent(responses::add);
+                        continue;
+                    } else {
+                        for (var i = 0; i < featureCollections.size(); i++) {
                             bulkRequestProcessor.processItem(
-                                    featureCollectionPart.getProperties().get(GeoJsonProperty.COLLECTION.getValue()).toString()
-                                            + "|"
-                                            + featureCollectionPart.getProperties().get(GeoJsonProperty.DATE.getValue()).toString(),
-                                    featureCollectionPart, true)
+                                            featureCollections.get(i).getProperties().get(GeoJsonProperty.COLLECTION.getValue()).toString()
+                                                    + "|"
+                                                    + featureCollections.get(i).getProperties().get(GeoJsonProperty.DATE.getValue()).toString()
+                                                    + "(" + i + ")",
+                                            featureCollections.get(i), true)
                                     .ifPresent(responses::add);
                         }
+                    }
 
-                    callback.onProgress("Processed number of items " + count);
+                    callback.onProgress("Processed data in year month: " + featureCollection.getProperties().get(GeoJsonProperty.DATE.getValue()));
                 }
             }
 
@@ -146,10 +157,9 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
                     .flush()
                     .ifPresent(responses::add);
 
-            log.info("Finished execute bulk indexing records {} to index: {}", count, indexName);
+            log.info("Finished execute bulk indexing records to index: {}", indexName);
             callback.onProgress(responses);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             log.error("Exception thrown or not found while indexing cloud optimized data : {}", metadata.getUuid(), e);
             throw e;
         }
@@ -157,8 +167,10 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
     }
 
     private List<FeatureCollectionGeoJson> avoidTooManyNestedObjects(FeatureCollectionGeoJson featureCollection) {
+
+        final int MAX_NESTED_OBJECTS = 9000;
         List<FeatureCollectionGeoJson> featureCollections = new ArrayList<>();
-        if (featureCollection.getFeatures().size() > 9000) {
+        if (featureCollection.getFeatures().size() > MAX_NESTED_OBJECTS) {
             // split the feature collection into smaller ones so that all smaller ones have less than 9000 features. e.g.: first featurecollection is from 0 to 8999, second is from 9000 to 17999, etc.
             log.info("Splitting feature collection with {} features into smaller ones", featureCollection.getFeatures().size());
             int i = 0;

@@ -3,7 +3,7 @@ package au.org.aodn.esindexer.configuration;
 public interface AppConstants {
     String PORTAL_RECORDS_MAPPING_JSON_FILE = "portal_records_index_schema.json";
 
-    // use a temp schema for testing now
+    // use the updated schema and see what will happen soon
 //    String DATASET_INDEX_MAPPING_JSON_FILE = "data_index_schema.json";
     String DATASET_INDEX_MAPPING_JSON_FILE = "data_index_schema2.json";
 
