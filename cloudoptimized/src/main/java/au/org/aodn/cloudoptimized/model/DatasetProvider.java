@@ -38,36 +38,42 @@ public class DatasetProvider {
         this.currentYearMonth = YearMonth.from(startDate);
         this.endYearMonth = YearMonth.from(endDate);
         this.columns = columns;
-        executorService.submit(this::initializeCache);
+        executorService.submit(this::queryAllData);
     }
 
     private record FeatureCollectionTask(YearMonth yearMonth, FeatureCollectionGeoJson featureCollection){}
 
-    private void initializeCache() {
+    private void queryAllData() {
+
+        isGettingData = true;
         try {
             while (!currentYearMonth.isAfter(endYearMonth)) {
-                fetchData50Threads();
-                System.out.println();
+                queryDataByMultiThreads();
             }
         } finally {
             executorService.shutdown();
+            isGettingData = false;
         }
     }
 
-    private void fetchData50Threads() {
-        final int THREADS_COUNT = 15;
-        isGettingData = true;
+    private void queryDataByMultiThreads() {
+
+        //TODO: currently, multi-threading is only working well for local running data-access-service. May try to solve the problem in the future.
+        final int THREADS_COUNT = 10;
         ExecutorService executorService = Executors.newFixedThreadPool(THREADS_COUNT);
         List<Callable<FeatureCollectionTask>> tasks = new ArrayList<>();
+
+        // declare tasks
         for (int i = 0; i < THREADS_COUNT; i++) {
             var taskYearMonth = YearMonth.from(currentYearMonth);
-            tasks.add(() -> getFeatureCollection(columns, taskYearMonth));
+            tasks.add(() -> queryFeatureCollection(columns, taskYearMonth));
             currentYearMonth = currentYearMonth.plusMonths(1);
             if (currentYearMonth.isAfter(endYearMonth)) {
                 break;
             }
         }
 
+        // invoke all tasks and cache the results
         try {
             List<Future<FeatureCollectionTask>> futures = executorService.invokeAll(tasks);
             for (Future<FeatureCollectionTask> future : futures) {
@@ -76,7 +82,6 @@ public class DatasetProvider {
                     featureCollectionCache.put(featureCollectionTask.yearMonth, featureCollectionTask.featureCollection);
                 }
             }
-            isGettingData = false;
         } catch (InterruptedException | ExecutionException e) {
             log.error("Error while fetching data", e);
         } finally {
@@ -112,7 +117,7 @@ public class DatasetProvider {
         };
     }
 
-    private FeatureCollectionTask getFeatureCollection(List<MetadataFields> columns, YearMonth yearMonth) {
+    private FeatureCollectionTask queryFeatureCollection(List<MetadataFields> columns, YearMonth yearMonth) {
         var startDate = yearMonth.atDay(1);
         var endDate = yearMonth.atEndOfMonth();
         var featureCollection =  dataAccessService.getIndexingDatasetBy(
