@@ -1,6 +1,10 @@
 package au.org.aodn.esindexer.service;
 
+import au.org.aodn.cloudoptimized.enums.GeoJsonProperty;
 import au.org.aodn.cloudoptimized.model.*;
+import au.org.aodn.cloudoptimized.model.geojson.FeatureCollectionGeoJson;
+import au.org.aodn.cloudoptimized.model.geojson.FeatureGeoJson;
+import au.org.aodn.cloudoptimized.model.geojson.PointGeoJson;
 import au.org.aodn.cloudoptimized.service.DataAccessService;
 import au.org.aodn.esindexer.exception.MetadataNotFoundException;
 import au.org.aodn.esindexer.utils.GeometryUtils;
@@ -13,12 +17,9 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.time.LocalDate;
+import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -29,8 +30,8 @@ public class DataAccessServiceImpl implements DataAccessService {
     protected RestTemplate restTemplate;
 
     public DataAccessServiceImpl(String serverUrl, String baseUrl, RestTemplate restTemplate) {
-       this.accessEndPoint = serverUrl + baseUrl;
-       this.restTemplate = restTemplate;
+        this.accessEndPoint = serverUrl + baseUrl;
+        this.restTemplate = restTemplate;
     }
 
     @Override
@@ -46,13 +47,13 @@ public class DataAccessServiceImpl implements DataAccessService {
                 url,
                 HttpMethod.GET,
                 request,
-                new ParameterizedTypeReference<>() {},
+                new ParameterizedTypeReference<>() {
+                },
                 Map.of()
         );
         if (responseEntity.getStatusCode().is2xxSuccessful()) {
             return responseEntity.getBody();
-        }
-        else {
+        } else {
             return null;
         }
     }
@@ -68,13 +69,13 @@ public class DataAccessServiceImpl implements DataAccessService {
                 url,
                 HttpMethod.GET,
                 request,
-                new ParameterizedTypeReference<>() {},
+                new ParameterizedTypeReference<>() {
+                },
                 Map.of()
         );
         if (responseEntity.getStatusCode().is2xxSuccessful()) {
             return responseEntity.getBody();
-        }
-        else {
+        } else {
             return List.of();
         }
     }
@@ -93,7 +94,8 @@ public class DataAccessServiceImpl implements DataAccessService {
                     url,
                     HttpMethod.GET,
                     request,
-                    new ParameterizedTypeReference<>() {},
+                    new ParameterizedTypeReference<>() {
+                    },
                     Map.of()
             );
 
@@ -103,14 +105,16 @@ public class DataAccessServiceImpl implements DataAccessService {
                 }
             }
             return Optional.empty();
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             return Optional.empty();
         }
     }
 
     @Override
-    public List<StacItemModel> getIndexingDatasetBy(String uuid, LocalDate startDate, LocalDate endDate, List<MetadataFields> fields) {
+    public FeatureCollectionGeoJson getIndexingDatasetByMonth(String uuid, YearMonth yearMonth, List<MetadataFields> fields) {
+
+        var startDate = yearMonth.atDay(1);
+        var endDate = yearMonth.atEndOfMonth();
 
         // currently, we force to get data in the same year to simplify the logic
         if (startDate.getYear() != endDate.getYear()) {
@@ -135,22 +139,24 @@ public class DataAccessServiceImpl implements DataAccessService {
                     url,
                     HttpMethod.GET,
                     request,
-                    new ParameterizedTypeReference<>() {},
+                    new ParameterizedTypeReference<>() {
+                    },
                     params
             );
 
             if (responseEntity.getStatusCode().is2xxSuccessful()) {
-                if (responseEntity.getBody() != null) {
-                    log.info("Indexed cloud optimized data with UUID: {} in S3 for {} -> {}",uuid, startDate, endDate);
-                    return toStacItemModel(uuid, aggregateData(responseEntity.getBody()));
+                if (responseEntity.getBody() != null && !responseEntity.getBody().isEmpty()) {
+                    log.info("Indexed cloud optimized data with UUID: {} in S3 for {} -> {}", uuid, startDate, endDate);
+
+                    return toFeatureCollection(uuid, aggregateData(responseEntity.getBody()));
                 }
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             // Do nothing just return empty list
-            log.info("Unable to find cloud optimized data with UUID: {} in S3 for {} -> {}",uuid, startDate, endDate, e);
+            log.info("Unable to find cloud optimized data with UUID: {} in S3 for {} -> {}", uuid, startDate, endDate, e);
+            log.warn("error message is: {}", e.getMessage());
         }
-        return List.of();
+        return null;
     }
 
     @Override
@@ -169,7 +175,8 @@ public class DataAccessServiceImpl implements DataAccessService {
                     url,
                     HttpMethod.GET,
                     request,
-                    new ParameterizedTypeReference<>() {},
+                    new ParameterizedTypeReference<>() {
+                    },
                     params
             );
 
@@ -181,8 +188,10 @@ public class DataAccessServiceImpl implements DataAccessService {
             throw new RuntimeException("Exception thrown while retrieving dataset with UUID: " + uuid + e.getMessage(), e);
         }
     }
+
     /**
      * Summarize the data by counting the number if all the concerned fields are the same
+     *
      * @param data the data to summarize
      * @return the summarized data
      */
@@ -193,8 +202,10 @@ public class DataAccessServiceImpl implements DataAccessService {
                         Collectors.counting()
                 ));
     }
+
     /**
      * Group and count the entries based on user object equals/hashcode
+     *
      * @param uuid - The parent uuid that associate with input
      * @param data - The aggregated data
      * @return - List of formatted stac item
@@ -219,22 +230,53 @@ public class DataAccessServiceImpl implements DataAccessService {
                             .geometry(GeometryUtils.createGeoShapeJson(d.getKey().getLongitude(), d.getKey().getLatitude()));
 
                     Map<String, Object> props = new HashMap<>() {{
-                            // Fields dup here is use for aggregation, you must have the geo_shape to do spatial search
-                            put("lng", d.getKey().getLongitude().doubleValue());
-                            put("lat", d.getKey().getLatitude().doubleValue());
-                            put("count", d.getValue());
-                            put("time", d.getKey().getZonedDateTime().format(DateTimeFormatter.ISO_ZONED_DATE_TIME));
+                        // Fields dup here is use for aggregation, you must have the geo_shape to do spatial search
+                        put("lng", d.getKey().getLongitude().doubleValue());
+                        put("lat", d.getKey().getLatitude().doubleValue());
+                        put("count", d.getValue());
+                        var dates = new ArrayList<DateCountPair>();
+                        var date = d.getKey().getZonedDateTime().format(DateTimeFormatter.ISO_ZONED_DATE_TIME);
+                        dates.add(new DateCountPair(date, d.getValue()));
+                        put("dates", dates);
 
-                            // Some data do not have depth!
-                            if(d.getKey().getDepth() != null) {
-                                put("depth", d.getKey().getDepth().doubleValue());
-                            }
+                        // Some data do not have depth!
+                        if (d.getKey().getDepth() != null) {
+                            put("depth", d.getKey().getDepth().doubleValue());
+                        }
                     }};
 
                     return builder.properties(props).build();
 
                 })
                 .toList();
+    }
+
+    protected FeatureCollectionGeoJson toFeatureCollection(String uuid, Map<? extends CloudOptimizedEntry, Long> data) {
+
+        // Because the data provider provides data by month, so assume all the dates
+        // in data here are all the same. So just get the first date to set
+        String dateToSet = null;
+        var features = new ArrayList<FeatureGeoJson>();
+        for (var entry: data.entrySet()) {
+            var feature = new FeatureGeoJson(new PointGeoJson(entry.getKey().getLongitude(), entry.getKey().getLatitude()));
+            feature.addProperty(GeoJsonProperty.COUNT.getValue(), entry.getValue());
+            feature.addProperty(GeoJsonProperty.DATE.getValue(), entry.getKey().getTime().toString());
+            features.add(feature);
+
+            if (dateToSet == null) {
+                dateToSet = entry.getKey().getTime().toString();
+            } else {
+                // if the date is not the same, there must be something wrong in dataprovider. throw exception
+                if (!dateToSet.equals(entry.getKey().getTime().toString())) {
+                    throw new IllegalArgumentException("All the dates in the data must be the same");
+                }
+            }
+        }
+        var featureCollection = new FeatureCollectionGeoJson();
+        featureCollection.setFeatures(features);
+        featureCollection.addProperty(GeoJsonProperty.COLLECTION.getValue(), uuid);
+        featureCollection.addProperty(GeoJsonProperty.DATE.getValue(), dateToSet);
+        return featureCollection;
     }
 
     protected String getDataAccessEndpoint() {

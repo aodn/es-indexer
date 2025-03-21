@@ -1,16 +1,14 @@
 package au.org.aodn.cloudoptimized.model;
 
+import au.org.aodn.cloudoptimized.model.geojson.FeatureCollectionGeoJson;
 import au.org.aodn.cloudoptimized.service.DataAccessService;
-import au.org.aodn.stac.model.StacItemModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.util.StopWatch;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
-import java.util.Iterator;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
+import java.util.concurrent.*;
 
 public class DatasetProvider {
 
@@ -19,45 +17,120 @@ public class DatasetProvider {
     protected YearMonth currentYearMonth;
     protected final YearMonth endYearMonth;
     protected final DataAccessService dataAccessService;
+    protected final ConcurrentHashMap<YearMonth, FeatureCollectionGeoJson> featureCollectionCache = new ConcurrentHashMap<>();
+    protected final List<MetadataFields> columns;
+    private boolean isGettingData = false;
 
-    public DatasetProvider(String uuid, LocalDate startDate, LocalDate endDate, DataAccessService dataAccessService) {
+
+    private final ExecutorService executorService =
+            Executors.newSingleThreadExecutor();
+
+
+    public DatasetProvider(
+            String uuid,
+            LocalDate startDate,
+            LocalDate endDate,
+            DataAccessService dataAccessService,
+            List<MetadataFields> columns
+    ) {
         this.uuid = uuid;
         this.dataAccessService = dataAccessService;
         this.currentYearMonth = YearMonth.from(startDate);
         this.endYearMonth = YearMonth.from(endDate);
+        this.columns = columns;
+        executorService.submit(this::queryAllData);
     }
 
-    public Iterable<List<StacItemModel>> getIterator(List<MetadataFields> columns) {
+    private record FeatureCollectionTask(YearMonth yearMonth, FeatureCollectionGeoJson featureCollection){}
+
+    private void queryAllData() {
+
+        isGettingData = true;
+        try {
+            while (!currentYearMonth.isAfter(endYearMonth)) {
+                queryDataByMultiThreads();
+            }
+        } finally {
+            executorService.shutdown();
+            isGettingData = false;
+        }
+    }
+
+    private void queryDataByMultiThreads() {
+
+        //TODO: currently, multi-threading is only working well for local running data-access-service (may cause outOfMemory exception). May try to solve the problem in the future.
+        final int THREADS_COUNT = 10;
+        ExecutorService executorService = Executors.newFixedThreadPool(THREADS_COUNT);
+        List<Callable<FeatureCollectionTask>> tasks = new ArrayList<>();
+
+        // declare tasks
+        for (int i = 0; i < THREADS_COUNT; i++) {
+            var taskYearMonth = YearMonth.from(currentYearMonth);
+            tasks.add(() -> queryFeatureCollection(columns, taskYearMonth));
+            currentYearMonth = currentYearMonth.plusMonths(1);
+            if (currentYearMonth.isAfter(endYearMonth)) {
+                break;
+            }
+        }
+
+        // invoke all tasks and cache the results
+        try {
+            List<Future<FeatureCollectionTask>> futures = executorService.invokeAll(tasks);
+            for (Future<FeatureCollectionTask> future : futures) {
+                FeatureCollectionTask featureCollectionTask = future.get();
+                if (featureCollectionTask != null && featureCollectionTask.featureCollection != null) {
+                    featureCollectionCache.put(featureCollectionTask.yearMonth, featureCollectionTask.featureCollection);
+                }
+            }
+        } catch (InterruptedException | ExecutionException e) {
+            log.error("Error while fetching data", e);
+        } finally {
+            executorService.shutdown();
+        }
+    }
+
+    public Iterable<FeatureCollectionGeoJson> getIterator() {
+
         return () -> new Iterator<>() {
             @Override
             public boolean hasNext() {
-                return !currentYearMonth.isAfter(endYearMonth);
+                return currentYearMonth.isBefore(endYearMonth) || isGettingData;
             }
 
             @Override
-            public List<StacItemModel> next() {
-                // please keep it for a while since it benefits the performance optimisation
-                StopWatch timer = new StopWatch();
-                timer.start(String.format("Data querying for %s %s", currentYearMonth.getYear(), currentYearMonth.getMonth()));
+            public FeatureCollectionGeoJson next() {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-
-                List<StacItemModel> data = dataAccessService.getIndexingDatasetBy(
-                        uuid,
-                        LocalDate.of(currentYearMonth.getYear(), currentYearMonth.getMonthValue(), 1),
-                        LocalDate.of(currentYearMonth.getYear(), currentYearMonth.getMonthValue(), currentYearMonth.lengthOfMonth()),
-                        columns
-                );
-                currentYearMonth = currentYearMonth.plusMonths(1);
-                if (data.isEmpty()) {
-                    return null;
+                while (getEarliestYearMonth() == null) {
+                    try{
+                        // TODO: use synchronized block , wait() and notify() to avoid busy waiting
+                        Thread.sleep(5000);
+                    } catch (InterruptedException e) {
+                        log.error("Error while waiting for data", e);
+                        Thread.currentThread().interrupt();
+                        throw new RuntimeException(e);
+                    }
                 }
-
-                timer.stop();
-                log.info(timer.prettyPrint());
-                return data;
+                return featureCollectionCache.remove(getEarliestYearMonth());
             }
         };
+    }
+
+    private FeatureCollectionTask queryFeatureCollection(List<MetadataFields> columns, YearMonth yearMonth) {
+        var featureCollection =  dataAccessService.getIndexingDatasetByMonth(
+                uuid,
+                yearMonth,
+                columns
+        );
+        return new FeatureCollectionTask(yearMonth, featureCollection);
+    }
+
+    private YearMonth getEarliestYearMonth() {
+        return featureCollectionCache.entrySet()
+                .stream()
+                .min(Map.Entry.comparingByKey())
+                .map(Map.Entry::getKey)
+                .orElse(null);
     }
 }

@@ -177,16 +177,16 @@ public class IndexerController {
 
         new Thread(() -> {
             try {
-                MetadataEntity entity = dataAccessService.getMetadataByUuid(uuid);
+                MetadataEntity metadata = dataAccessService.getMetadataByUuid(uuid);
                 List<TemporalExtent> temporalExtents = dataAccessService.getTemporalExtentOf(uuid);
 
-                if (entity != null && !temporalExtents.isEmpty()) {
+                if (metadata != null && !temporalExtents.isEmpty()) {
                     // Only first block works from dataservice api
                     LocalDate startDate = temporalExtents.get(0).getLocalStartDate();
                     LocalDate endDate = temporalExtents.get(0).getLocalEndDate();
                     log.info("Index cloud optimized data with UUID: {} from {} to {}", uuid, startDate, endDate);
 
-                    indexCloudOptimizedData.indexCloudOptimizedData(entity, startDate, endDate, callback);
+                    indexCloudOptimizedData.indexCloudOptimizedData(metadata, startDate, endDate, callback);
                 }
                 else {
                     log.info("Index cloud optimized data : {} not found", uuid);
