@@ -146,7 +146,7 @@ public class DataAccessServiceImpl implements DataAccessService {
 
             if (responseEntity.getStatusCode().is2xxSuccessful()) {
                 if (responseEntity.getBody() != null && !responseEntity.getBody().isEmpty()) {
-                    log.info("Indexed cloud optimized data with UUID: {} in S3 for {} -> {}", uuid, startDate, endDate);
+                    log.info("Got cloud optimized data with UUID: {} in S3 for  {}", uuid, yearMonth);
 
                     return toFeatureCollection(uuid, aggregateData(responseEntity.getBody()));
                 }
