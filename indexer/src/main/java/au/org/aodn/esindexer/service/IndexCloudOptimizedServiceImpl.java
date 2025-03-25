@@ -108,6 +108,8 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
 
         List<BulkResponse> responses = new ArrayList<>();
 
+        callback.onProgress("Indexing cloud optimized data for dataset: " + metadata.getUuid());
+        callback.onProgress("Temporal extent: " + startDate + " - " + endDate);
 
         Iterable<FeatureCollectionGeoJson> datasetIterator = new DatasetProvider(
                 metadata.getUuid(),
@@ -124,33 +126,34 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
 
         try {
             for (FeatureCollectionGeoJson featureCollection : datasetIterator) {
-                if (featureCollection != null) {
-
-                    var featureCollections = avoidTooManyNestedObjects(featureCollection);
-                    if (featureCollections.isEmpty()) {
-                        continue;
-                    } else if (featureCollections.size() == 1) {
-                        bulkRequestProcessor.processItem(
-                                        featureCollections.get(0).getProperties().get(GeoJsonProperty.COLLECTION.getValue()).toString()
-                                                + "|"
-                                                + featureCollections.get(0).getProperties().get(GeoJsonProperty.DATE.getValue()).toString(),
-                                        featureCollections.get(0), true)
-                                .ifPresent(responses::add);
-                        continue;
-                    } else {
-                        for (var i = 0; i < featureCollections.size(); i++) {
-                            bulkRequestProcessor.processItem(
-                                            featureCollections.get(i).getProperties().get(GeoJsonProperty.COLLECTION.getValue()).toString()
-                                                    + "|"
-                                                    + featureCollections.get(i).getProperties().get(GeoJsonProperty.DATE.getValue()).toString()
-                                                    + "(" + i + ")",
-                                            featureCollections.get(i), true)
-                                    .ifPresent(responses::add);
-                        }
-                    }
-
-                    callback.onProgress("Processed data in year month: " + featureCollection.getProperties().get(GeoJsonProperty.DATE.getValue()));
+                if (featureCollection == null) {
+                    continue;
                 }
+                var featureCollections = avoidTooManyNestedObjects(featureCollection);
+                if (featureCollections.isEmpty()) {
+                    continue;
+                }
+
+                if (featureCollections.size() == 1) {
+                    bulkRequestProcessor.processItem(
+                                    featureCollections.get(0).getProperties().get(GeoJsonProperty.COLLECTION.getValue()).toString()
+                                            + "|"
+                                            + featureCollections.get(0).getProperties().get(GeoJsonProperty.DATE.getValue()).toString(),
+                                    featureCollections.get(0), true)
+                            .ifPresent(responses::add);
+                } else {
+                    for (var i = 0; i < featureCollections.size(); i++) {
+                        bulkRequestProcessor.processItem(
+                                        featureCollections.get(i).getProperties().get(GeoJsonProperty.COLLECTION.getValue()).toString()
+                                                + "|"
+                                                + featureCollections.get(i).getProperties().get(GeoJsonProperty.DATE.getValue()).toString()
+                                                + "(" + i + ")",
+                                        featureCollections.get(i), true)
+                                .ifPresent(responses::add);
+                    }
+                }
+
+                callback.onProgress("Processed data in year month: " + featureCollection.getProperties().get(GeoJsonProperty.DATE.getValue()));
             }
 
             bulkRequestProcessor
