@@ -455,7 +455,6 @@ public class MapperUtils {
             } else {
                 ContactsModel orgContactsModel = ContactsModel.builder().build();
                 orgContactsModel.setRoles(MapperUtils.mapContactsRole(ciResponsibility));
-                orgContactsModel.setOrganization(MapperUtils.mapContactsOrganization(party));
                 orgContactsModel.setOrganization(organisation.getName().getCharacterString().getValue().toString());
 
                 org.ifPresent(o -> {
