@@ -2,6 +2,8 @@ package au.org.aodn.esindexer.service;
 
 import au.org.aodn.cloudoptimized.model.CloudOptimizedEntry;
 import au.org.aodn.cloudoptimized.model.CloudOptimizedEntryReducePrecision;
+import au.org.aodn.cloudoptimized.service.DataAccessService;
+import au.org.aodn.cloudoptimized.service.DataAccessServiceImpl;
 import au.org.aodn.stac.model.StacItemModel;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
@@ -18,7 +20,7 @@ import java.util.Optional;
 import static au.org.aodn.esindexer.BaseTestClass.readResourceFile;
 
 @Slf4j
-public class DataAccessServiceTest {
+public class DataAccessProcessorTest {
 
     protected ObjectMapper objectMapper = new ObjectMapper();
     /**
@@ -28,7 +30,7 @@ public class DataAccessServiceTest {
     @Test
     public void verifyAggregateCorrect() throws IOException {
         // Our test do not care, pass null is ok
-        DataAccessServiceImpl impl = new DataAccessServiceImpl(null, null, null);
+        DataAccessService impl = new DataAccessServiceImpl(null, null, null);
         String canned_2024_01= readResourceFile("classpath:canned/dataservice/35234913-aa3c-48ec-b9a4-77f822f66ef8/2024-01.json");
 
         List<CloudOptimizedEntryReducePrecision> l = objectMapper.readValue(
@@ -63,7 +65,7 @@ public class DataAccessServiceTest {
         );
 
         Map<? extends CloudOptimizedEntry, Long> result = impl.aggregateData(l);
-        List<StacItemModel> models = impl.toStacItemModel("35234913-aa3c-48ec-b9a4-77f822f66ef8", result);
+        List<StacItemModel> models = DataAccessServiceProcessor.toStacItemModel("35234913-aa3c-48ec-b9a4-77f822f66ef8", result);
 
         Assertions.assertEquals(270, models.size(), "Count correct");
 

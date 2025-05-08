@@ -1,15 +1,11 @@
-package au.org.aodn.esindexer.service;
+package au.org.aodn.cloudoptimized.service;
 
 import au.org.aodn.cloudoptimized.enums.GeoJsonProperty;
 import au.org.aodn.cloudoptimized.model.*;
 import au.org.aodn.cloudoptimized.model.geojson.FeatureCollectionGeoJson;
 import au.org.aodn.cloudoptimized.model.geojson.FeatureGeoJson;
 import au.org.aodn.cloudoptimized.model.geojson.PointGeoJson;
-import au.org.aodn.cloudoptimized.service.DataAccessService;
-import au.org.aodn.esindexer.exception.MetadataNotFoundException;
-import au.org.aodn.esindexer.utils.GeometryUtils;
-import au.org.aodn.stac.model.StacItemModel;
-import lombok.Getter;
+import au.org.aodn.metadata.geonetwork.exception.MetadataNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
@@ -18,12 +14,10 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.time.YearMonth;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Slf4j
-@Getter
 public class DataAccessServiceImpl implements DataAccessService {
 
     protected String accessEndPoint;
@@ -32,6 +26,45 @@ public class DataAccessServiceImpl implements DataAccessService {
     public DataAccessServiceImpl(String serverUrl, String baseUrl, RestTemplate restTemplate) {
         this.accessEndPoint = serverUrl + baseUrl;
         this.restTemplate = restTemplate;
+    }
+
+    protected String getDataAccessEndpoint() {
+        return this.accessEndPoint;
+    }
+
+    // parameters are not in use for now. May be useful in the future so just keep it
+    protected HttpEntity<String> getRequestEntity(List<MediaType> accept) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(accept);
+        return new HttpEntity<>(headers);
+    }
+
+    protected FeatureCollectionGeoJson toFeatureCollection(String uuid, Map<? extends CloudOptimizedEntry, Long> data) {
+
+        // Because the data provider provides data by month, so assume all the dates
+        // in data here are all the same. So just get the first date to set
+        String dateToSet = null;
+        var features = new ArrayList<FeatureGeoJson>();
+        for (var entry: data.entrySet()) {
+            var feature = new FeatureGeoJson(new PointGeoJson(entry.getKey().getLongitude(), entry.getKey().getLatitude()));
+            feature.addProperty(GeoJsonProperty.COUNT.getValue(), entry.getValue());
+            feature.addProperty(GeoJsonProperty.DATE.getValue(), entry.getKey().getTime().toString());
+            features.add(feature);
+
+            if (dateToSet == null) {
+                dateToSet = entry.getKey().getTime().toString();
+            } else {
+                // if the date is not the same, there must be something wrong in dataprovider. throw exception
+                if (!dateToSet.equals(entry.getKey().getTime().toString())) {
+                    throw new IllegalArgumentException("All the dates in the data must be the same");
+                }
+            }
+        }
+        var featureCollection = new FeatureCollectionGeoJson();
+        featureCollection.setFeatures(features);
+        featureCollection.addProperty(GeoJsonProperty.COLLECTION.getValue(), uuid);
+        featureCollection.addProperty(GeoJsonProperty.DATE.getValue(), dateToSet);
+        return featureCollection;
     }
 
     @Override
@@ -57,6 +90,7 @@ public class DataAccessServiceImpl implements DataAccessService {
             return null;
         }
     }
+
 
     @Override
     public List<MetadataEntity> getAllMetadata() {
@@ -188,105 +222,18 @@ public class DataAccessServiceImpl implements DataAccessService {
             throw new RuntimeException("Exception thrown while retrieving dataset with UUID: " + uuid + e.getMessage(), e);
         }
     }
-
     /**
      * Summarize the data by counting the number if all the concerned fields are the same
      *
      * @param data the data to summarize
      * @return the summarized data
      */
-    protected Map<? extends CloudOptimizedEntry, Long> aggregateData(List<? extends CloudOptimizedEntry> data) {
+    @Override
+    public Map<? extends CloudOptimizedEntry, Long> aggregateData(List<? extends CloudOptimizedEntry> data) {
         return data.stream()
                 .collect(Collectors.groupingBy(
                         d -> d,
                         Collectors.counting()
                 ));
-    }
-
-    /**
-     * Group and count the entries based on user object equals/hashcode
-     *
-     * @param uuid - The parent uuid that associate with input
-     * @param data - The aggregated data
-     * @return - List of formatted stac item
-     */
-    protected List<StacItemModel> toStacItemModel(String uuid, Map<? extends CloudOptimizedEntry, Long> data) {
-        return data.entrySet().stream()
-                .filter(d -> d.getKey().getLongitude() != null && d.getKey().getLatitude() != null)
-                .map(d -> {
-                    StacItemModel.StacItemModelBuilder builder = StacItemModel.builder()
-                            .collection(uuid) // collection point to the uuid of parent
-                            .uuid(String
-                                    .join("|",
-                                            uuid,
-                                            d.getKey().getTime().toString(),
-                                            d.getKey().getLongitude().toString(),
-                                            d.getKey().getLatitude().toString(),
-                                            d.getKey().getDepth() != null ? d.getKey().getDepth().toString() : "*"
-                                    )
-                            )
-                            // The elastic query cannot sort by geo_shape or geo_point, so need to flatten value in properties
-                            // this geometry is use for filtering
-                            .geometry(GeometryUtils.createGeoShapeJson(d.getKey().getLongitude(), d.getKey().getLatitude()));
-
-                    Map<String, Object> props = new HashMap<>() {{
-                        // Fields dup here is use for aggregation, you must have the geo_shape to do spatial search
-                        put("lng", d.getKey().getLongitude().doubleValue());
-                        put("lat", d.getKey().getLatitude().doubleValue());
-                        put("count", d.getValue());
-                        var dates = new ArrayList<DateCountPair>();
-                        var date = d.getKey().getZonedDateTime().format(DateTimeFormatter.ISO_ZONED_DATE_TIME);
-                        dates.add(new DateCountPair(date, d.getValue()));
-                        put("dates", dates);
-
-                        // Some data do not have depth!
-                        if (d.getKey().getDepth() != null) {
-                            put("depth", d.getKey().getDepth().doubleValue());
-                        }
-                    }};
-
-                    return builder.properties(props).build();
-
-                })
-                .toList();
-    }
-
-    protected FeatureCollectionGeoJson toFeatureCollection(String uuid, Map<? extends CloudOptimizedEntry, Long> data) {
-
-        // Because the data provider provides data by month, so assume all the dates
-        // in data here are all the same. So just get the first date to set
-        String dateToSet = null;
-        var features = new ArrayList<FeatureGeoJson>();
-        for (var entry: data.entrySet()) {
-            var feature = new FeatureGeoJson(new PointGeoJson(entry.getKey().getLongitude(), entry.getKey().getLatitude()));
-            feature.addProperty(GeoJsonProperty.COUNT.getValue(), entry.getValue());
-            feature.addProperty(GeoJsonProperty.DATE.getValue(), entry.getKey().getTime().toString());
-            features.add(feature);
-
-            if (dateToSet == null) {
-                dateToSet = entry.getKey().getTime().toString();
-            } else {
-                // if the date is not the same, there must be something wrong in dataprovider. throw exception
-                if (!dateToSet.equals(entry.getKey().getTime().toString())) {
-                    throw new IllegalArgumentException("All the dates in the data must be the same");
-                }
-            }
-        }
-        var featureCollection = new FeatureCollectionGeoJson();
-        featureCollection.setFeatures(features);
-        featureCollection.addProperty(GeoJsonProperty.COLLECTION.getValue(), uuid);
-        featureCollection.addProperty(GeoJsonProperty.DATE.getValue(), dateToSet);
-        return featureCollection;
-    }
-
-    protected String getDataAccessEndpoint() {
-        return this.accessEndPoint;
-    }
-
-    // parameters are not in use for now. May be useful in the future so just keep it
-    protected HttpEntity<String> getRequestEntity(List<MediaType> accept) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setAccept(accept);
-        return new HttpEntity<>(headers);
     }
 }

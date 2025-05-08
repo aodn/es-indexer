@@ -1,16 +1,25 @@
-package au.org.aodn.esindexer.configuration;
+package au.org.aodn.cloudoptimized.configuration;
 
 import au.org.aodn.cloudoptimized.service.DataAccessService;
-import au.org.aodn.esindexer.service.DataAccessServiceImpl;
+import au.org.aodn.cloudoptimized.service.DataAccessServiceImpl;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
-@Configuration
-public class DatasetAccessConfig {
+@Slf4j
+@AutoConfiguration
+@ConditionalOnMissingBean(CloudOptimizedAutoConfiguration.class)
+public class CloudOptimizedAutoConfiguration {
+
+    @Bean
+    @ConditionalOnMissingBean(RestTemplate.class)
+    public RestTemplate ardcVocabRestTemplate() {
+        return new RestTemplate();
+    }
 
     @Bean
     @ConditionalOnMissingBean(DataAccessService.class)
