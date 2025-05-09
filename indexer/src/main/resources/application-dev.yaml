@@ -19,6 +19,9 @@ geonetwork:
       index: "records"
       endpoint: /geonetwork/srv/api/search
 
+dataaccess:
+  apiKey: temp
+
 logging:
   level:
     au.org.aodn.indexer: DEBUG
