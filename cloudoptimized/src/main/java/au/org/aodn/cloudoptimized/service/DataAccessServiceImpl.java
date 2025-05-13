@@ -6,12 +6,17 @@ import au.org.aodn.cloudoptimized.model.geojson.FeatureCollectionGeoJson;
 import au.org.aodn.cloudoptimized.model.geojson.FeatureGeoJson;
 import au.org.aodn.cloudoptimized.model.geojson.PointGeoJson;
 import au.org.aodn.metadata.geonetwork.exception.MetadataNotFoundException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriComponentsBuilder;
+import reactor.core.publisher.Flux;
 
 import java.time.YearMonth;
 import java.util.*;
@@ -20,12 +25,16 @@ import java.util.stream.Collectors;
 @Slf4j
 public class DataAccessServiceImpl implements DataAccessService {
 
-    protected String accessEndPoint;
-    protected RestTemplate restTemplate;
+    protected final String accessEndPoint;
+    protected final RestTemplate restTemplate;
+    protected final WebClient webClient;
+    protected final ObjectMapper objectMapper;
 
-    public DataAccessServiceImpl(String serverUrl, String baseUrl, RestTemplate restTemplate) {
+    public DataAccessServiceImpl(String serverUrl, String baseUrl, RestTemplate restTemplate, WebClient webClient, ObjectMapper objectMapper) {
         this.accessEndPoint = serverUrl + baseUrl;
         this.restTemplate = restTemplate;
+        this.webClient = webClient;
+        this.objectMapper = objectMapper;
     }
 
     protected String getDataAccessEndpoint() {
@@ -156,35 +165,53 @@ public class DataAccessServiceImpl implements DataAccessService {
         }
 
         try {
-            HttpEntity<String> request = getRequestEntity(List.of(MediaType.APPLICATION_JSON));
-
             Map<String, Object> params = new HashMap<>();
             params.put("uuid", uuid);
 
             String url = UriComponentsBuilder.fromUriString(getDataAccessEndpoint() + "/data/{uuid}")
                     .queryParam("is_to_index", "true")
+                    .queryParam("f", "sse/json")
                     .queryParam("start_date", startDate)
                     .queryParam("end_date", endDate)
                     .queryParam("columns", fields)
                     .buildAndExpand(uuid)
                     .toUriString();
 
-            ResponseEntity<List<CloudOptimizedEntryReducePrecision>> responseEntity = restTemplate.exchange(
-                    url,
-                    HttpMethod.GET,
-                    request,
-                    new ParameterizedTypeReference<>() {
-                    },
-                    params
-            );
+            List<CloudOptimizedEntryReducePrecision> allEntries = webClient.get()
+                    .uri(url, params)
+                    .accept(MediaType.TEXT_EVENT_STREAM) // Explicitly accept SSE
+                    .retrieve()
+                    .bodyToFlux(String.class)
+                    .filter(data -> data.contains("data")) // Filter for data: lines
+                    .map(data -> {
+                        try {
+                            // Deserialize raw event into SSEEvent
+                            return objectMapper.readValue(data, SSEEvent.class);
+                        } catch (JsonProcessingException e) {
+                            throw new RuntimeException("Failed to parse SSE event: " + data, e);
+                        }
+                    })
+                    .filter(Objects::nonNull)
+                    .filter(event -> !"[]".equalsIgnoreCase(event.getData()))   // Remove empty data
+                    .filter(event -> "completed".equals(event.getStatus()))     // Only process completed events
+                    .map(event -> {
+                        try {
+                            // Deserialize the data field (JSON string) into List<CloudOptimizedEntryReducePrecision>
+                            if (event.getData() != null) {
+                                return objectMapper.readValue(event.getData(), new TypeReference<>() {});
+                            }
+                            return Collections.<CloudOptimizedEntryReducePrecision>emptyList(); // Handle null or missing data
+                        }
+                        catch (JsonProcessingException e) {
+                            throw new RuntimeException("Failed to parse SSE data: " + event.getData(), e);
+                        }
+                    })
+                    .flatMap(Flux::fromIterable)
+                    .collectList()
+                    .block();
 
-            if (responseEntity.getStatusCode().is2xxSuccessful()) {
-                if (responseEntity.getBody() != null && !responseEntity.getBody().isEmpty()) {
-                    log.info("Got cloud optimized data with UUID: {} in S3 for  {}", uuid, yearMonth);
+            return allEntries != null ? toFeatureCollection(uuid, aggregateData(allEntries)) : null;
 
-                    return toFeatureCollection(uuid, aggregateData(responseEntity.getBody()));
-                }
-            }
         } catch (Exception e) {
             // Do nothing just return empty list
             log.info("Unable to find cloud optimized data with UUID: {} in S3 for {} -> {}", uuid, startDate, endDate, e);

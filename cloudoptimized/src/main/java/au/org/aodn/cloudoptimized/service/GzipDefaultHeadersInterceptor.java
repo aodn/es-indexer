@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.client.ClientHttpRequestExecution;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.ClientHttpResponse;
-import org.springframework.lang.NonNullApi;
+import org.springframework.lang.NonNull;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,8 +26,9 @@ public class GzipDefaultHeadersInterceptor implements ClientHttpRequestIntercept
         // Note: Content-Encoding and Accept-Encoding are set dynamically in intercept
     }
 
+    @NonNull
     @Override
-    public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution) throws IOException {
+    public ClientHttpResponse intercept(HttpRequest request, @NonNull byte[] body, ClientHttpRequestExecution execution) throws IOException {
         // Add default headers
         HttpHeaders headers = request.getHeaders();
         headers.addAll(defaultHeaders);
@@ -45,21 +46,25 @@ public class GzipDefaultHeadersInterceptor implements ClientHttpRequestIntercept
     // Wrapper to decompress GZIP response
     private record GzipClientHttpResponseWrapper(ClientHttpResponse delegate) implements ClientHttpResponse {
 
+        @NonNull
         @Override
         public InputStream getBody() throws IOException {
             return new GZIPInputStream(delegate.getBody());
         }
 
+        @NonNull
         @Override
         public HttpHeaders getHeaders() {
             return delegate.getHeaders();
         }
 
+        @NonNull
         @Override
         public HttpStatusCode getStatusCode() throws IOException {
             return delegate.getStatusCode();
         }
 
+        @NonNull
         @Override
         public String getStatusText() throws IOException {
             return delegate.getStatusText();
