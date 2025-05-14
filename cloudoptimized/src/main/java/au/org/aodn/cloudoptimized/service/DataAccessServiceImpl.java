@@ -16,10 +16,10 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriComponentsBuilder;
-import reactor.core.publisher.Flux;
 
 import java.time.YearMonth;
 import java.util.*;
+import java.util.concurrent.CountDownLatch;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -177,7 +177,10 @@ public class DataAccessServiceImpl implements DataAccessService {
                     .buildAndExpand(uuid)
                     .toUriString();
 
-            List<CloudOptimizedEntryReducePrecision> allEntries = webClient.get()
+            List<CloudOptimizedEntryReducePrecision> allEntries = new ArrayList<>();
+            CountDownLatch countDownLatch = new CountDownLatch(1);
+
+            webClient.get()
                     .uri(url, params)
                     .accept(MediaType.TEXT_EVENT_STREAM) // Explicitly accept SSE
                     .retrieve()
@@ -186,31 +189,30 @@ public class DataAccessServiceImpl implements DataAccessService {
                     .map(data -> {
                         try {
                             // Deserialize raw event into SSEEvent
-                            return objectMapper.readValue(data, SSEEvent.class);
-                        } catch (JsonProcessingException e) {
+                            return objectMapper.readValue(data, new TypeReference<SSEEvent<List<CloudOptimizedEntryReducePrecision>>>() {});
+                        }
+                        catch (JsonProcessingException e) {
                             throw new RuntimeException("Failed to parse SSE event: " + data, e);
                         }
                     })
-                    .filter(Objects::nonNull)
-                    .filter(event -> !"[]".equalsIgnoreCase(event.getData()))   // Remove empty data
-                    .filter(event -> "completed".equals(event.getStatus()))     // Only process completed events
-                    .map(event -> {
-                        try {
-                            // Deserialize the data field (JSON string) into List<CloudOptimizedEntryReducePrecision>
-                            if (event.getData() != null) {
-                                return objectMapper.readValue(event.getData(), new TypeReference<>() {});
-                            }
-                            return Collections.<CloudOptimizedEntryReducePrecision>emptyList(); // Handle null or missing data
-                        }
-                        catch (JsonProcessingException e) {
-                            throw new RuntimeException("Failed to parse SSE data: " + event.getData(), e);
+                    .doOnNext(event -> {
+                        if ("processing".equals(event.getStatus())) {
+                            log.info("Processing: {}", event.getMessage());
                         }
                     })
-                    .flatMap(Flux::fromIterable)
-                    .collectList()
-                    .block();
+                    .filter(event -> "completed".equals(event.getStatus()))
+                    .subscribe(event -> {
+                        allEntries.addAll(event.getData());
 
-            return allEntries != null ? toFeatureCollection(uuid, aggregateData(allEntries)) : null;
+                        // Check if this is the end, then we can exit webclient loop
+                        String[] count = event.getMessage().trim().split("/");
+                        if (count.length == 2 && count[0].equalsIgnoreCase(count[1])) {
+                            countDownLatch.countDown();
+                        }
+                    });
+
+            countDownLatch.await();
+            return toFeatureCollection(uuid, aggregateData(allEntries));
 
         } catch (Exception e) {
             // Do nothing just return empty list
