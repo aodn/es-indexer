@@ -16,6 +16,9 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriComponentsBuilder;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Retryable;
+import reactor.netty.http.client.PrematureCloseException;
 
 import java.time.YearMonth;
 import java.util.*;
@@ -24,6 +27,8 @@ import java.util.stream.Collectors;
 
 @Slf4j
 public class DataAccessServiceImpl implements DataAccessService {
+
+    protected static final long DEFAULT_BACKOFF_TIME = 3000L;
 
     protected final String accessEndPoint;
     protected final RestTemplate restTemplate;
@@ -153,6 +158,11 @@ public class DataAccessServiceImpl implements DataAccessService {
         }
     }
 
+    @Retryable(
+            retryFor = { PrematureCloseException.class },
+            maxAttempts = 1000,
+            backoff = @Backoff(delay = DEFAULT_BACKOFF_TIME)
+    )
     @Override
     public FeatureCollectionGeoJson getIndexingDatasetByMonth(String uuid, YearMonth yearMonth, List<MetadataFields> fields) {
 
