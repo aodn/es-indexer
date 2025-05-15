@@ -17,7 +17,6 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriComponentsBuilder;
 import reactor.core.publisher.Flux;
-import reactor.netty.http.client.PrematureCloseException;
 import reactor.util.retry.Retry;
 
 import java.time.Duration;
@@ -33,6 +32,7 @@ public class DataAccessServiceImpl implements DataAccessService {
     protected final RestTemplate restTemplate;
     protected final WebClient webClient;
     protected final ObjectMapper objectMapper;
+    protected final Random random = new Random();
 
     public DataAccessServiceImpl(String serverUrl, String baseUrl, RestTemplate restTemplate, WebClient webClient, ObjectMapper objectMapper) {
         this.accessEndPoint = serverUrl + baseUrl;
@@ -202,9 +202,9 @@ public class DataAccessServiceImpl implements DataAccessService {
                     })
                     .filter(Objects::nonNull)
                     .filter(event -> "completed".equals(event.getStatus()))
-                    .retryWhen(Retry.backoff(10, Duration.ofSeconds(30))
-                            .filter(throwable -> throwable instanceof PrematureCloseException)
-                            .doBeforeRetry(signal -> log.info("Retrying due to: {}", signal.failure().getMessage())))
+                    // Give a random number so that not all retry happens the same time when previous failed
+                    .retryWhen(Retry.backoff(30, Duration.ofSeconds(random.nextInt(45, 90)))
+                            .doBeforeRetry(signal -> log.info("Retrying {} due to: {}", yearMonth, signal.failure().getMessage())))
                     .subscribe(
                             event -> {
                                 String message = event.getMessage() != null ? event.getMessage() : "null";
