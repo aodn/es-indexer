@@ -183,6 +183,8 @@ public class DataAccessServiceImpl implements DataAccessService {
             List<CloudOptimizedEntryReducePrecision> allEntries = new ArrayList<>();
             CountDownLatch countDownLatch = new CountDownLatch(1);
 
+            // Use defer to allow retry with the same argument, with f=sse/json argument above, we signal
+            // server to return result with server side event.
             Flux.defer(
                     () -> webClient.get()
                             .uri(url, params)
@@ -201,6 +203,7 @@ public class DataAccessServiceImpl implements DataAccessService {
                         }
                     })
                     .filter(Objects::nonNull)
+                    // Ignore other status, just process the complete event, the other event is used to keep the connection alive
                     .filter(event -> "completed".equals(event.getStatus()))
                     // Give a random number so that not all retry happens the same time when previous failed
                     .retryWhen(Retry.backoff(30, Duration.ofSeconds(random.nextInt(45, 90)))
