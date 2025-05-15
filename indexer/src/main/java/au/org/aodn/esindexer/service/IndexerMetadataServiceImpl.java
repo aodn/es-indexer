@@ -380,11 +380,10 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
 
                     Callable<Void> msg = () -> {
                         // Make sure gateway not timeout on long processing
-                        while(countDown.getCount() != 0) {
+                        while(!countDown.await(20, TimeUnit.SECONDS)) {
                             if (callback != null) {
-                                callback.onProgress("Processing.... ");
+                                callback.onProgress("Processing Metadata Index.... ");
                             }
-                            countDown.await(30, TimeUnit.SECONDS);
                         }
                         return null;
                     };

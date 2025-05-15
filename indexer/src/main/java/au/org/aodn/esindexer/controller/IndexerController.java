@@ -22,8 +22,7 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.*;
 
 @RestController
 @RequestMapping(value = "/api/v1/indexer/index")
@@ -174,8 +173,22 @@ public class IndexerController {
 
         final SseEmitter emitter = new SseEmitter(0L); // 0L means no timeout;
         final IndexService.Callback callback = createCallback(emitter);
+        final CountDownLatch msgCountDown = new CountDownLatch(1);
 
-        new Thread(() -> {
+        // We need to keep sending messages to client to avoid timeout on long processing
+        ExecutorService executor = Executors.newFixedThreadPool(2);
+
+        Callable<Void> msg = () -> {
+            // Make sure gateway not timeout on long processing
+            while(!msgCountDown.await(20, TimeUnit.SECONDS)) {
+                if (callback != null) {
+                    callback.onProgress("Processing Cloud Optimized Data Index.... ");
+                }
+            }
+            return null;
+        };
+
+        Callable<Void> task = () -> {
             try {
                 MetadataEntity metadata = dataAccessService.getMetadataByUuid(uuid);
                 List<TemporalExtent> temporalExtents = dataAccessService.getTemporalExtentOf(uuid);
@@ -201,8 +214,13 @@ public class IndexerController {
                 }
                 log.info("Close emitter at indexCODataByUUID");
                 emitter.complete();
+                msgCountDown.countDown();
             }
-        }).start();
+            return null;
+        };
+
+        executor.submit(msg);
+        executor.submit(task);
 
         return emitter;
     }
@@ -212,7 +230,7 @@ public class IndexerController {
             @Override
             public void onProgress(Object update) {
                 try {
-                    log.info("Send update with content - {}", update.toString());
+                    log.info("Send sse message to client - {}", update.toString());
                     SseEmitter.SseEventBuilder event = SseEmitter.event()
                             .data(update.toString())
                             .id(String.valueOf(update.hashCode()))

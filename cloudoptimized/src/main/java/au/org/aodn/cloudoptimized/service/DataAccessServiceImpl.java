@@ -16,10 +16,11 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriComponentsBuilder;
-import org.springframework.retry.annotation.Backoff;
-import org.springframework.retry.annotation.Retryable;
+import reactor.core.publisher.Flux;
 import reactor.netty.http.client.PrematureCloseException;
+import reactor.util.retry.Retry;
 
+import java.time.Duration;
 import java.time.YearMonth;
 import java.util.*;
 import java.util.concurrent.CountDownLatch;
@@ -27,8 +28,6 @@ import java.util.stream.Collectors;
 
 @Slf4j
 public class DataAccessServiceImpl implements DataAccessService {
-
-    protected static final long DEFAULT_BACKOFF_TIME = 3000L;
 
     protected final String accessEndPoint;
     protected final RestTemplate restTemplate;
@@ -158,13 +157,8 @@ public class DataAccessServiceImpl implements DataAccessService {
         }
     }
 
-    @Retryable(
-            retryFor = { PrematureCloseException.class },
-            maxAttempts = 1000,
-            backoff = @Backoff(delay = DEFAULT_BACKOFF_TIME)
-    )
     @Override
-    public FeatureCollectionGeoJson getIndexingDatasetByMonth(String uuid, YearMonth yearMonth, List<MetadataFields> fields) {
+    public FeatureCollectionGeoJson getIndexingDatasetByMonth(final String uuid, final YearMonth yearMonth, final List<MetadataFields> fields) {
 
         var startDate = yearMonth.atDay(1);
         var endDate = yearMonth.atEndOfMonth();
@@ -179,7 +173,6 @@ public class DataAccessServiceImpl implements DataAccessService {
             params.put("uuid", uuid);
 
             String url = UriComponentsBuilder.fromUriString(getDataAccessEndpoint() + "/data/{uuid}")
-                    .queryParam("is_to_index", "true")
                     .queryParam("f", "sse/json")
                     .queryParam("start_date", startDate)
                     .queryParam("end_date", endDate)
@@ -190,38 +183,59 @@ public class DataAccessServiceImpl implements DataAccessService {
             List<CloudOptimizedEntryReducePrecision> allEntries = new ArrayList<>();
             CountDownLatch countDownLatch = new CountDownLatch(1);
 
-            webClient.get()
-                    .uri(url, params)
-                    .accept(MediaType.TEXT_EVENT_STREAM) // Explicitly accept SSE
-                    .retrieve()
-                    .bodyToFlux(String.class)
+            Flux.defer(
+                    () -> webClient.get()
+                            .uri(url, params)
+                            .accept(MediaType.TEXT_EVENT_STREAM)
+                            .retrieve()
+                            .bodyToFlux(String.class)
+                    )
                     .filter(data -> data.contains("data")) // Filter for data: lines
                     .map(data -> {
                         try {
                             // Deserialize raw event into SSEEvent
                             return objectMapper.readValue(data, new TypeReference<SSEEvent<List<CloudOptimizedEntryReducePrecision>>>() {});
-                        }
-                        catch (JsonProcessingException e) {
-                            throw new RuntimeException("Failed to parse SSE event: " + data, e);
-                        }
-                    })
-                    .doOnNext(event -> {
-                        if ("processing".equals(event.getStatus())) {
-                            log.info("Processing: {}", event.getMessage());
+                        } catch (JsonProcessingException e) {
+                            log.error("Failed to parse SSE event: {}, Error: {}", data.substring(0, Math.min(100, data.length())), e.getMessage());
+                            return null;
                         }
                     })
+                    .filter(Objects::nonNull)
                     .filter(event -> "completed".equals(event.getStatus()))
-                    .subscribe(event -> {
-                        allEntries.addAll(event.getData());
+                    .retryWhen(Retry.backoff(10, Duration.ofSeconds(30))
+                            .filter(throwable -> throwable instanceof PrematureCloseException)
+                            .doBeforeRetry(signal -> log.info("Retrying due to: {}", signal.failure().getMessage())))
+                    .subscribe(
+                            event -> {
+                                String message = event.getMessage() != null ? event.getMessage() : "null";
+                                log.info("Process event message {} : {}", yearMonth, message);
 
-                        // Check if this is the end, then we can exit webclient loop
-                        String[] count = event.getMessage().trim().split("/");
-                        if (count.length == 2 && count[0].equalsIgnoreCase(count[1])) {
-                            countDownLatch.countDown();
-                        }
-                    });
+                                if (event.getData() != null) {
+                                    allEntries.addAll(event.getData());
+                                } else {
+                                    log.warn("Received completed event with null data for yearMonth: {}", yearMonth);
+                                }
+
+                                // Check if this is the end
+                                String[] count = message.trim().split("/");
+                                if (count.length == 2 && count[0].equalsIgnoreCase(count[1])) {
+                                    log.info("Completion condition met for {}: {} == {}, releasing latch", yearMonth, count[0], count[1]);
+                                    countDownLatch.countDown();
+                                }
+                            },
+                            error -> {
+                                log.error("Fatal error in SSE stream for yearMonth {}: {}", yearMonth, error.getMessage(), error);
+                                countDownLatch.countDown(); // Release latch on fatal error
+                            },
+                            () -> {
+                                log.info("SSE stream completed for yearMonth: {}", yearMonth);
+                                countDownLatch.countDown();
+                            }
+                    );
 
             countDownLatch.await();
+
+            log.info("Aggregate data for {}", yearMonth);
             return toFeatureCollection(uuid, aggregateData(allEntries));
 
         } catch (Exception e) {
