@@ -146,7 +146,7 @@ public class IndexerController {
 
         if(withCO) {
             CountDownLatch countDownLatch = new CountDownLatch(1);
-            indexCODataByUUID(uuid, countDownLatch);
+            indexCODataByUUID(uuid, null, null, countDownLatch);
 
             // Wait till index co data completed
             countDownLatch.await();
@@ -165,11 +165,14 @@ public class IndexerController {
 
     @PostMapping(path="/{uuid}/cloud")
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Index a dataset by UUID")
-    public SseEmitter indexCODataByUUID(@PathVariable("uuid") String uuid) {
-        return indexCODataByUUID(uuid, null);
+    public SseEmitter indexCODataByUUID(
+            @PathVariable("uuid") String uuid,
+            @RequestParam(value="start_date", required = false) String startDate,
+            @RequestParam(value="end_date", required = false) String endDate) {
+        return indexCODataByUUID(uuid, startDate, endDate, null);
     }
 
-    protected SseEmitter indexCODataByUUID(String uuid, CountDownLatch countDownLatch)  {
+    protected SseEmitter indexCODataByUUID(String uuid, String start, String end, CountDownLatch countDownLatch)  {
 
         final SseEmitter emitter = new SseEmitter(0L); // 0L means no timeout;
         final IndexService.Callback callback = createCallback(emitter);
@@ -195,8 +198,8 @@ public class IndexerController {
 
                 if (metadata != null && !temporalExtents.isEmpty()) {
                     // Only first block works from dataservice api
-                    LocalDate startDate = temporalExtents.get(0).getLocalStartDate();
-                    LocalDate endDate = temporalExtents.get(0).getLocalEndDate();
+                    LocalDate startDate = start == null ? temporalExtents.get(0).getLocalStartDate() : LocalDate.parse(start);
+                    LocalDate endDate = end == null ? temporalExtents.get(0).getLocalEndDate() : LocalDate.parse(end);
                     log.info("Index cloud optimized data with UUID: {} from {} to {}", uuid, startDate, endDate);
 
                     indexCloudOptimizedData.indexCloudOptimizedData(metadata, startDate, endDate, callback);

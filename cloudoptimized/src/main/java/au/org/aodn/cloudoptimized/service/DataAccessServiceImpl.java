@@ -180,7 +180,7 @@ public class DataAccessServiceImpl implements DataAccessService {
                     .buildAndExpand(uuid)
                     .toUriString();
 
-            List<CloudOptimizedEntryReducePrecision> allEntries = new ArrayList<>();
+            final Map<CloudOptimizedEntry, Long> allEntries = new HashMap<>();
             CountDownLatch countDownLatch = new CountDownLatch(1);
 
             // Use defer to allow retry with the same argument, with f=sse/json argument above, we signal
@@ -214,7 +214,8 @@ public class DataAccessServiceImpl implements DataAccessService {
                                 log.info("Process event message {} : {}", yearMonth, message);
 
                                 if (event.getData() != null) {
-                                    allEntries.addAll(event.getData());
+                                    // Merge data as event comes, this reduced the memory need to hold the string
+                                    aggregateData(allEntries, event.getData());
                                 } else {
                                     log.warn("Received completed event with null data for yearMonth: {}", yearMonth);
                                 }
@@ -239,7 +240,7 @@ public class DataAccessServiceImpl implements DataAccessService {
             countDownLatch.await();
 
             log.info("Aggregate data for {}", yearMonth);
-            return toFeatureCollection(uuid, aggregateData(allEntries));
+            return toFeatureCollection(uuid, allEntries);
 
         } catch (Exception e) {
             // Do nothing just return empty list
@@ -279,17 +280,23 @@ public class DataAccessServiceImpl implements DataAccessService {
         }
     }
     /**
-     * Summarize the data by counting the number if all the concerned fields are the same
+     * Summarize the data by counting the number if all the concerned fields are the same, merge data with
+     * existing map. That is count will be added for same CloudOptimizedEntry
      *
+     * @param merge - You want to merge the result to an existing map
      * @param data the data to summarize
      * @return the summarized data
      */
     @Override
-    public Map<? extends CloudOptimizedEntry, Long> aggregateData(List<? extends CloudOptimizedEntry> data) {
-        return data.stream()
+    public void aggregateData(Map<CloudOptimizedEntry, Long> merge, List<? extends CloudOptimizedEntry> data) {
+        Map<CloudOptimizedEntry, Long> currentAggregation =  data.stream()
                 .collect(Collectors.groupingBy(
                         d -> d,
                         Collectors.counting()
                 ));
+
+        currentAggregation.forEach((entry, count) ->
+                merge.merge(entry, count, Long::sum)
+        );
     }
 }

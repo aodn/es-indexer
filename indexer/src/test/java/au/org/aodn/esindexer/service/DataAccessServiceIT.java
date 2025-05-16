@@ -97,7 +97,7 @@ public class DataAccessServiceIT {
                     .andExpect(method(HttpMethod.GET))
                     .andRespond(withSuccess("[]", MediaType.APPLICATION_JSON));
 
-            controller.indexCODataByUUID("35234913-aa3c-48ec-b9a4-77f822f66ef8");
+            controller.indexCODataByUUID("35234913-aa3c-48ec-b9a4-77f822f66ef8", null, null);
 
             CountDownLatch latch = new CountDownLatch(1);
             latch.await(5, TimeUnit.SECONDS);

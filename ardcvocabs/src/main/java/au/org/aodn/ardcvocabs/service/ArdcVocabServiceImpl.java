@@ -360,8 +360,15 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
 
     @Override
     public boolean isVersionEquals(ArdcCurrentPaths path, String version) {
-        Map<Name, String> versioned = this.getVersionedArdcPath(path);
-        return versioned.get(Name.version).equals(version);
+        try {
+            Map<Name, String> versioned = this.getVersionedArdcPath(path);
+            return versioned.get(Name.version).equals(version);
+        }
+        catch(ExtractingPathVersionsException ex) {
+            // If we fail to extract assume the cache have the same version
+            // and continue startup
+            return true;
+        }
     }
 
     @Override

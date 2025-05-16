@@ -19,7 +19,7 @@ public interface DataAccessService {
                 List.of(MetadataFields.TIME, MetadataFields.LONGITUDE, MetadataFields.LATITUDE);
     }
 
-    Map<? extends CloudOptimizedEntry, Long> aggregateData(List<? extends CloudOptimizedEntry> data);
+    void aggregateData(Map<CloudOptimizedEntry, Long> merge, List<? extends CloudOptimizedEntry> data);
     FeatureCollectionGeoJson getIndexingDatasetByMonth(String uuid, YearMonth yearMonth, List<MetadataFields> fields);
     List<TemporalExtent> getTemporalExtentOf(String uuid);
     Optional<String> getNotebookLink(String uuid);
