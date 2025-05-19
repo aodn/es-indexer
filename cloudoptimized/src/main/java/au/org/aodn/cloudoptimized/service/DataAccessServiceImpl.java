@@ -221,9 +221,9 @@ public class DataAccessServiceImpl implements DataAccessService {
                                 }
 
                                 // Check if this is the end
-                                String[] count = message.trim().split("/");
-                                if (count.length == 2 && count[0].equalsIgnoreCase(count[1])) {
-                                    log.info("Completion condition met for {}: {} == {}, releasing latch", yearMonth, count[0], count[1]);
+                                String[] sm = message.trim().split("/");
+                                if (sm.length == 2 && sm[1].equalsIgnoreCase("end")) {
+                                    log.info("Completion condition met for {}: {}, releasing latch", yearMonth, message);
                                     countDownLatch.countDown();
                                 }
                             },
@@ -285,7 +285,6 @@ public class DataAccessServiceImpl implements DataAccessService {
      *
      * @param merge - You want to merge the result to an existing map
      * @param data the data to summarize
-     * @return the summarized data
      */
     @Override
     public void aggregateData(Map<CloudOptimizedEntry, Long> merge, List<? extends CloudOptimizedEntry> data) {
