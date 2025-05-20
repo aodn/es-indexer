@@ -1,7 +1,7 @@
 package au.org.aodn.esindexer.service;
 
 import au.org.aodn.cloudoptimized.model.RelationType;
-import au.org.aodn.esindexer.exception.MetadataNotFoundException;
+import au.org.aodn.metadata.geonetwork.exception.MetadataNotFoundException;
 import au.org.aodn.esindexer.utils.CommonUtils;
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.utils.UrlUtils;

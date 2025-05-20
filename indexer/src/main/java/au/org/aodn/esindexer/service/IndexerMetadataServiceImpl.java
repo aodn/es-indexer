@@ -5,6 +5,7 @@ import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.exception.*;
 import au.org.aodn.esindexer.utils.GcmdKeywordUtils;
 import au.org.aodn.esindexer.utils.JaxbUtils;
+import au.org.aodn.metadata.geonetwork.exception.MetadataNotFoundException;
 import au.org.aodn.metadata.iso19115_3_2018.MDMetadataType;
 import au.org.aodn.stac.model.SearchSuggestionsModel;
 import au.org.aodn.stac.model.StacCollectionModel;
@@ -379,11 +380,10 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
 
                     Callable<Void> msg = () -> {
                         // Make sure gateway not timeout on long processing
-                        while(countDown.getCount() != 0) {
+                        while(!countDown.await(20, TimeUnit.SECONDS)) {
                             if (callback != null) {
-                                callback.onProgress("Processing.... ");
+                                callback.onProgress("Processing Metadata Index.... ");
                             }
-                            countDown.await(30, TimeUnit.SECONDS);
                         }
                         return null;
                     };

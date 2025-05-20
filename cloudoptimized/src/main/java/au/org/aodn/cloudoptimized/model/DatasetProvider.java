@@ -9,22 +9,28 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.*;
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class DatasetProvider {
 
+    protected final int THREADS_COUNT = 10;
+
     protected Logger log = LoggerFactory.getLogger(DatasetProvider.class);
     protected final String uuid;
-    protected YearMonth currentYearMonth;
+    protected YearMonth startYearMonth;
     protected final YearMonth endYearMonth;
     protected final DataAccessService dataAccessService;
-    protected final ConcurrentHashMap<YearMonth, FeatureCollectionGeoJson> featureCollectionCache = new ConcurrentHashMap<>();
+
+    // Store in result queue reduce the memory usage and increase processing throughput
+    protected final LinkedBlockingQueue<FeatureCollectionTask> resultQueue = new LinkedBlockingQueue<>();
     protected final List<MetadataFields> columns;
-    private boolean isGettingData = false;
 
+    protected ExecutorService executorService = Executors.newFixedThreadPool(THREADS_COUNT);
+    protected CompletionService<FeatureCollectionTask> completionService = new ExecutorCompletionService<>(executorService);
 
-    private final ExecutorService executorService =
-            Executors.newSingleThreadExecutor();
-
+    // Default value means not yet start processing
+    protected AtomicReference<Integer> taskCount = new AtomicReference<>(null);
+    protected CountDownLatch countDownLatch = new CountDownLatch(1);
 
     public DatasetProvider(
             String uuid,
@@ -35,51 +41,36 @@ public class DatasetProvider {
     ) {
         this.uuid = uuid;
         this.dataAccessService = dataAccessService;
-        this.currentYearMonth = YearMonth.from(startDate);
+        this.startYearMonth = YearMonth.from(startDate);
         this.endYearMonth = YearMonth.from(endDate);
         this.columns = columns;
-        executorService.submit(this::queryAllData);
+        Thread t = new Thread(DatasetProvider.this::queryDataByMultiThreads);
+        t.start();
     }
 
-    private record FeatureCollectionTask(YearMonth yearMonth, FeatureCollectionGeoJson featureCollection){}
+    protected record FeatureCollectionTask(YearMonth yearMonth, FeatureCollectionGeoJson featureCollection){}
 
-    private void queryAllData() {
+    protected void queryDataByMultiThreads() {
 
-        isGettingData = true;
-        try {
-            while (!currentYearMonth.isAfter(endYearMonth)) {
-                queryDataByMultiThreads();
-            }
-        } finally {
-            executorService.shutdown();
-            isGettingData = false;
+        int count = 0;
+        // Create a list of tasks and submit
+        for(YearMonth i = startYearMonth; !i.isAfter(endYearMonth); i = i.plusMonths(1)) {
+            final YearMonth current = i;
+            completionService.submit(() -> queryFeatureCollection(columns, current));
+            count++;
         }
-    }
 
-    private void queryDataByMultiThreads() {
+        taskCount.set(count);
 
-        //TODO: currently, multi-threading is only working well for local running data-access-service (may cause outOfMemory exception). May try to solve the problem in the future.
-        final int THREADS_COUNT = 10;
-        ExecutorService executorService = Executors.newFixedThreadPool(THREADS_COUNT);
-        List<Callable<FeatureCollectionTask>> tasks = new ArrayList<>();
-
-        // declare tasks
-        for (int i = 0; i < THREADS_COUNT; i++) {
-            var taskYearMonth = YearMonth.from(currentYearMonth);
-            tasks.add(() -> queryFeatureCollection(columns, taskYearMonth));
-            currentYearMonth = currentYearMonth.plusMonths(1);
-            if (currentYearMonth.isAfter(endYearMonth)) {
-                break;
-            }
-        }
+        // Allow hasNext below to start processing
+        countDownLatch.countDown();
 
         // invoke all tasks and cache the results
         try {
-            List<Future<FeatureCollectionTask>> futures = executorService.invokeAll(tasks);
-            for (Future<FeatureCollectionTask> future : futures) {
-                FeatureCollectionTask featureCollectionTask = future.get();
-                if (featureCollectionTask != null && featureCollectionTask.featureCollection != null) {
-                    featureCollectionCache.put(featureCollectionTask.yearMonth, featureCollectionTask.featureCollection);
+            for (int i = 0; i < count; i++) {
+                Future<FeatureCollectionTask> featureCollectionTask = completionService.take();
+                if (featureCollectionTask != null && featureCollectionTask.get() != null) {
+                    resultQueue.put(featureCollectionTask.get());
                 }
             }
         } catch (InterruptedException | ExecutionException e) {
@@ -88,31 +79,39 @@ public class DatasetProvider {
             executorService.shutdown();
         }
     }
-
+    /**
+     * It consumes value from queue and depends on which task completed first so the order of the
+     * return of which month of year is not deterministic. Reason is to improve the parallel processing
+     * @return The json data of that task
+     */
     public Iterable<FeatureCollectionGeoJson> getIterator() {
 
         return () -> new Iterator<>() {
+
+            int i = 0;
+
             @Override
             public boolean hasNext() {
-                return currentYearMonth.isBefore(endYearMonth) || isGettingData;
+                try {
+                    countDownLatch.await();
+                    return i < DatasetProvider.this.taskCount.get();
+                }
+                catch (InterruptedException e) {
+                    return false;
+                }
             }
 
             @Override
             public FeatureCollectionGeoJson next() {
-                if (!hasNext()) {
-                    throw new NoSuchElementException();
+                try {
+                    i ++;
+                    FeatureCollectionTask c = resultQueue.take();
+                    log.info("Return data for year month: {}", c.yearMonth());
+                    return c.featureCollection();
                 }
-                while (getEarliestYearMonth() == null) {
-                    try{
-                        // TODO: use synchronized block , wait() and notify() to avoid busy waiting
-                        Thread.sleep(5000);
-                    } catch (InterruptedException e) {
-                        log.error("Error while waiting for data", e);
-                        Thread.currentThread().interrupt();
-                        throw new RuntimeException(e);
-                    }
+                catch (InterruptedException e) {
+                    return null;
                 }
-                return featureCollectionCache.remove(getEarliestYearMonth());
             }
         };
     }
@@ -125,13 +124,5 @@ public class DatasetProvider {
                 columns
         );
         return new FeatureCollectionTask(yearMonth, featureCollection);
-    }
-
-    private YearMonth getEarliestYearMonth() {
-        return featureCollectionCache.entrySet()
-                .stream()
-                .min(Map.Entry.comparingByKey())
-                .map(Map.Entry::getKey)
-                .orElse(null);
     }
 }

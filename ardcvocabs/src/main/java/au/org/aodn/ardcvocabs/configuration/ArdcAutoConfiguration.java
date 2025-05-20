@@ -5,6 +5,7 @@ import au.org.aodn.ardcvocabs.service.ArdcVocabServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.retry.annotation.EnableRetry;
 import org.springframework.retry.backoff.ExponentialBackOffPolicy;
 import org.springframework.retry.policy.SimpleRetryPolicy;
@@ -19,15 +20,14 @@ import org.springframework.web.client.RestTemplate;
 public class ArdcAutoConfiguration {
 
     @Bean
-    public ArdcVocabService createArdcVocabsService(RestTemplate restTemplate, RetryTemplate retryTemplate) {
+    public ArdcVocabService createArdcVocabsService(RetryTemplate retryTemplate) {
         log.info("Create ArdcVocabsService");
-        return new ArdcVocabServiceImpl(restTemplate, retryTemplate);
-    }
 
-    @Bean
-    @ConditionalOnMissingBean(RestTemplate.class)
-    public RestTemplate ardcVocabRestTemplate() {
-        return new RestTemplate();
+        SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
+        requestFactory.setConnectTimeout(5000); // e.g., 5 seconds
+        requestFactory.setReadTimeout(10000);      // e.g., 10 seconds
+
+        return new ArdcVocabServiceImpl(new RestTemplate(requestFactory), retryTemplate);
     }
 
     @Bean

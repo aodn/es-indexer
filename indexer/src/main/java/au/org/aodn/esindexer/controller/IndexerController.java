@@ -22,8 +22,7 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.*;
 
 @RestController
 @RequestMapping(value = "/api/v1/indexer/index")
@@ -147,7 +146,7 @@ public class IndexerController {
 
         if(withCO) {
             CountDownLatch countDownLatch = new CountDownLatch(1);
-            indexCODataByUUID(uuid, countDownLatch);
+            indexCODataByUUID(uuid, null, null, countDownLatch);
 
             // Wait till index co data completed
             countDownLatch.await();
@@ -166,24 +165,41 @@ public class IndexerController {
 
     @PostMapping(path="/{uuid}/cloud")
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Index a dataset by UUID")
-    public SseEmitter indexCODataByUUID(@PathVariable("uuid") String uuid) {
-        return indexCODataByUUID(uuid, null);
+    public SseEmitter indexCODataByUUID(
+            @PathVariable("uuid") String uuid,
+            @RequestParam(value="start_date", required = false) String startDate,
+            @RequestParam(value="end_date", required = false) String endDate) {
+        return indexCODataByUUID(uuid, startDate, endDate, null);
     }
 
-    protected SseEmitter indexCODataByUUID(String uuid, CountDownLatch countDownLatch)  {
+    protected SseEmitter indexCODataByUUID(String uuid, String start, String end, CountDownLatch countDownLatch)  {
 
         final SseEmitter emitter = new SseEmitter(0L); // 0L means no timeout;
         final IndexService.Callback callback = createCallback(emitter);
+        final CountDownLatch msgCountDown = new CountDownLatch(1);
 
-        new Thread(() -> {
+        // We need to keep sending messages to client to avoid timeout on long processing
+        ExecutorService executor = Executors.newFixedThreadPool(2);
+
+        Callable<Void> msg = () -> {
+            // Make sure gateway not timeout on long processing
+            while(!msgCountDown.await(20, TimeUnit.SECONDS)) {
+                if (callback != null) {
+                    callback.onProgress("Processing Cloud Optimized Data Index.... ");
+                }
+            }
+            return null;
+        };
+
+        Callable<Void> task = () -> {
             try {
                 MetadataEntity metadata = dataAccessService.getMetadataByUuid(uuid);
                 List<TemporalExtent> temporalExtents = dataAccessService.getTemporalExtentOf(uuid);
 
                 if (metadata != null && !temporalExtents.isEmpty()) {
                     // Only first block works from dataservice api
-                    LocalDate startDate = temporalExtents.get(0).getLocalStartDate();
-                    LocalDate endDate = temporalExtents.get(0).getLocalEndDate();
+                    LocalDate startDate = start == null ? temporalExtents.get(0).getLocalStartDate() : LocalDate.parse(start);
+                    LocalDate endDate = end == null ? temporalExtents.get(0).getLocalEndDate() : LocalDate.parse(end);
                     log.info("Index cloud optimized data with UUID: {} from {} to {}", uuid, startDate, endDate);
 
                     indexCloudOptimizedData.indexCloudOptimizedData(metadata, startDate, endDate, callback);
@@ -201,8 +217,13 @@ public class IndexerController {
                 }
                 log.info("Close emitter at indexCODataByUUID");
                 emitter.complete();
+                msgCountDown.countDown();
             }
-        }).start();
+            return null;
+        };
+
+        executor.submit(msg);
+        executor.submit(task);
 
         return emitter;
     }
@@ -212,7 +233,7 @@ public class IndexerController {
             @Override
             public void onProgress(Object update) {
                 try {
-                    log.info("Send update with content - {}", update.toString());
+                    log.info("Send sse message to client - {}", update.toString());
                     SseEmitter.SseEventBuilder event = SseEmitter.event()
                             .data(update.toString())
                             .id(String.valueOf(update.hashCode()))

@@ -73,12 +73,15 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
     protected ObjectNode fetchCurrentContents(String url) {
         try {
             return retryTemplate.execute(context -> restTemplate.getForObject(url, ObjectNode.class));
-        } catch (RestClientException e) {
-            log.error("Failed to fetch HTML content from URL {}: {}", url, e.getMessage());
-        } catch (Exception e) {
-            log.error("Unexpected error while fetching HTML content from URL {}: {}", url, e.getMessage(), e);
         }
-        return null;
+        catch (RestClientException e) {
+            log.error("Failed to fetch HTML content from URL {}: {}", url, e.getMessage());
+            throw e;
+        }
+        catch (Exception e) {
+            log.error("Unexpected error while fetching HTML content from URL {}: {}", url, e.getMessage(), e);
+            throw e;
+        }
     }
 
     protected Map<Name, String> buildResolvedPaths(ArdcCurrentPaths currentPaths, String categoryVersion, String vocabVersion) {
@@ -360,8 +363,16 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
 
     @Override
     public boolean isVersionEquals(ArdcCurrentPaths path, String version) {
-        Map<Name, String> versioned = this.getVersionedArdcPath(path);
-        return versioned.get(Name.version).equals(version);
+        try {
+            Map<Name, String> versioned = this.getVersionedArdcPath(path);
+            return versioned.get(Name.version).equals(version);
+        }
+        catch(ExtractingPathVersionsException ex) {
+            // If we fail to extract assume the cache have the same version
+            // and continue startup
+            log.warn("ARDC server not available, assume Elastic have the latest version");
+            return true;
+        }
     }
 
     @Override

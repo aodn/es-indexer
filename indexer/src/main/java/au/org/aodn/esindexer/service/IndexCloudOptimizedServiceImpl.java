@@ -135,12 +135,15 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
                 }
 
                 if (featureCollections.size() == 1) {
-                    bulkRequestProcessor.processItem(
-                                    featureCollections.get(0).getProperties().get(GeoJsonProperty.COLLECTION.getValue()).toString()
-                                            + "|"
-                                            + featureCollections.get(0).getProperties().get(GeoJsonProperty.DATE.getValue()).toString(),
-                                    featureCollections.get(0), true)
-                            .ifPresent(responses::add);
+                    Object collection = featureCollections.get(0).getProperties().get(GeoJsonProperty.COLLECTION.getValue());
+                    Object date = featureCollections.get(0).getProperties().get(GeoJsonProperty.DATE.getValue());
+
+                    if(collection != null && date != null) {
+                        bulkRequestProcessor.processItem(
+                                        String.format("%s|%s", collection, date),
+                                        featureCollections.get(0), true)
+                                .ifPresent(responses::add);
+                    }
                 } else {
                     for (var i = 0; i < featureCollections.size(); i++) {
                         bulkRequestProcessor.processItem(
