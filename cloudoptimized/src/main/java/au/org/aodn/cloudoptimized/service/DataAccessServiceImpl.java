@@ -80,26 +80,38 @@ public class DataAccessServiceImpl implements DataAccessService {
         return featureCollection;
     }
 
+    protected boolean isSafeId(String id) {
+        return id.matches("^[a-zA-Z0-9-_]+$");
+    }
+
     @Override
     public MetadataEntity getMetadataByUuid(String uuid) {
-        HttpEntity<String> request = getRequestEntity(List.of(MediaType.APPLICATION_JSON));
 
-        String url = UriComponentsBuilder
-                .fromUriString(getDataAccessEndpoint() + "/metadata/{uuid}")
-                .buildAndExpand(uuid)
-                .toUriString();
+        // Validate path argument
+        if(isSafeId(uuid)) {
+            HttpEntity<String> request = getRequestEntity(List.of(MediaType.APPLICATION_JSON));
 
-        ResponseEntity<MetadataEntity> responseEntity = restTemplate.exchange(
-                url,
-                HttpMethod.GET,
-                request,
-                new ParameterizedTypeReference<>() {
-                },
-                Map.of()
-        );
-        if (responseEntity.getStatusCode().is2xxSuccessful()) {
-            return responseEntity.getBody();
-        } else {
+            String url = UriComponentsBuilder
+                    .fromUriString(getDataAccessEndpoint() + "/metadata/{uuid}")
+                    .buildAndExpand(uuid)
+                    .toUriString();
+
+            ResponseEntity<MetadataEntity> responseEntity = restTemplate.exchange(
+                    url,
+                    HttpMethod.GET,
+                    request,
+                    new ParameterizedTypeReference<>() {
+                    },
+                    Map.of()
+            );
+            if (responseEntity.getStatusCode().is2xxSuccessful()) {
+                return responseEntity.getBody();
+            } else {
+                return null;
+            }
+        }
+        else {
+            log.warn("Id not in correct format {}", uuid);
             return null;
         }
     }
@@ -252,31 +264,38 @@ public class DataAccessServiceImpl implements DataAccessService {
 
     @Override
     public List<TemporalExtent> getTemporalExtentOf(String uuid) {
-        try {
-            HttpEntity<String> request = getRequestEntity(List.of(MediaType.APPLICATION_JSON));
+        if(isSafeId(uuid)) {
+            try {
+                HttpEntity<String> request = getRequestEntity(List.of(MediaType.APPLICATION_JSON));
 
-            Map<String, Object> params = new HashMap<>();
-            params.put("uuid", uuid);
+                Map<String, Object> params = new HashMap<>();
+                params.put("uuid", uuid);
 
-            String url = UriComponentsBuilder.fromUriString(getDataAccessEndpoint() + "/data/{uuid}/temporal_extent")
-                    .buildAndExpand(uuid)
-                    .toUriString();
+                String url = UriComponentsBuilder.fromUriString(getDataAccessEndpoint() + "/data/{uuid}/temporal_extent")
+                        .buildAndExpand(uuid)
+                        .toUriString();
 
-            ResponseEntity<List<TemporalExtent>> responseEntity = restTemplate.exchange(
-                    url,
-                    HttpMethod.GET,
-                    request,
-                    new ParameterizedTypeReference<>() {
-                    },
-                    params
-            );
+                ResponseEntity<List<TemporalExtent>> responseEntity = restTemplate.exchange(
+                        url,
+                        HttpMethod.GET,
+                        request,
+                        new ParameterizedTypeReference<>() {
+                        },
+                        params
+                );
 
-            return responseEntity.getBody();
+                return responseEntity.getBody();
 
-        } catch (HttpClientErrorException.NotFound e) {
-            throw new MetadataNotFoundException("Unable to find dataset with UUID: " + uuid + " in GeoNetwork");
-        } catch (Exception e) {
-            throw new RuntimeException("Exception thrown while retrieving dataset with UUID: " + uuid + e.getMessage(), e);
+            }
+            catch (HttpClientErrorException.NotFound e) {
+                throw new MetadataNotFoundException("Unable to find dataset with UUID: " + uuid + " in GeoNetwork");
+            }
+            catch (Exception e) {
+                throw new RuntimeException("Exception thrown while retrieving dataset with UUID: " + uuid + e.getMessage(), e);
+            }
+        }
+        else {
+            throw new MetadataNotFoundException("Malform UUID in request: " + uuid);
         }
     }
     /**
