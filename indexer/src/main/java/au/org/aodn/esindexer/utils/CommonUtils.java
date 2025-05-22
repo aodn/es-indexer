@@ -11,8 +11,6 @@ import java.util.function.Supplier;
 
 public class CommonUtils {
 
-    public static MediaType MEDIA_UTF8_XML = new MediaType("application", "xml", StandardCharsets.UTF_8);
-
     public static <T> Optional<T> safeGet(Supplier<T> supplier) {
         try {
             return Optional.of(supplier.get());

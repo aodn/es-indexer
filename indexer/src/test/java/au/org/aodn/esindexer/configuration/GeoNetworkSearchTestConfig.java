@@ -1,12 +1,11 @@
 package au.org.aodn.esindexer.configuration;
 
 import au.org.aodn.esindexer.BaseTestClass;
-import au.org.aodn.esindexer.service.FIFOCache;
-import au.org.aodn.esindexer.service.GeoNetworkServiceImpl;
-import au.org.aodn.esindexer.utils.UrlUtils;
+import au.org.aodn.metadata.geonetwork.service.FIFOCache;
+import au.org.aodn.metadata.geonetwork.service.GeoNetworkServiceImpl;
+import au.org.aodn.metadata.geonetwork.utils.UrlUtils;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.JsonNode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;

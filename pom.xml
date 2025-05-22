@@ -17,8 +17,8 @@
     <description>Meta data indexer for Elastic Search</description>
 
     <modules>
-        <module>geonetwork4-api</module>
         <module>stacmodel</module>
+        <module>geonetwork4-api</module>
         <module>cloudoptimized</module>
         <module>indexer</module>
         <module>ardcvocabs</module>
@@ -32,6 +32,9 @@
         <repository>
             <id>geotools</id>
             <url>https://repo.osgeo.org/repository/release/</url>
+            <releases>
+                <updatePolicy>always</updatePolicy>
+            </releases>
         </repository>
     </repositories>
 

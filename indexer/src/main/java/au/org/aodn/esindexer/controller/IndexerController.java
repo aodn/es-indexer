@@ -4,6 +4,7 @@ import au.org.aodn.cloudoptimized.model.MetadataEntity;
 import au.org.aodn.cloudoptimized.model.TemporalExtent;
 import au.org.aodn.cloudoptimized.service.DataAccessService;
 import au.org.aodn.esindexer.service.*;
+import au.org.aodn.metadata.geonetwork.service.GeoNetworkService;
 import co.elastic.clients.elasticsearch.core.BulkResponse;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.swagger.v3.oas.annotations.Operation;

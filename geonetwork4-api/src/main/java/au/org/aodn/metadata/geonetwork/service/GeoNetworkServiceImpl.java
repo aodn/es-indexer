@@ -1,11 +1,11 @@
-package au.org.aodn.esindexer.service;
+package au.org.aodn.metadata.geonetwork.service;
 
-import au.org.aodn.cloudoptimized.model.RelationType;
+import au.org.aodn.metadata.geonetwork.configuration.AppConstants;
 import au.org.aodn.metadata.geonetwork.exception.MetadataNotFoundException;
-import au.org.aodn.esindexer.utils.CommonUtils;
-import au.org.aodn.esindexer.configuration.AppConstants;
-import au.org.aodn.esindexer.utils.UrlUtils;
+import au.org.aodn.metadata.geonetwork.utils.CommonUtils;
+import au.org.aodn.metadata.geonetwork.utils.UrlUtils;
 import au.org.aodn.stac.model.LinkModel;
+import au.org.aodn.stac.model.RelationType;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.FieldSort;
 import co.elastic.clients.elasticsearch._types.FieldValue;
@@ -17,6 +17,7 @@ import co.elastic.clients.elasticsearch.core.SearchResponse;
 import co.elastic.clients.elasticsearch.core.search.TotalHits;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import lombok.Setter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.elasticsearch.client.ResponseException;
@@ -61,6 +62,12 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
 
     protected FIFOCache<String, Map<String, ?>> cache;
     protected RestTemplate indexerRestTemplate;
+    /**
+     * -- SETTER --
+     *  This is use in test only and therefore it is a protected member.
+     *
+     */
+    @Setter
     protected ElasticsearchClient gn4ElasticClient;
     protected String indexName;
     protected String server;
@@ -306,7 +313,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
             maxAttempts = 10,
             backoff = @Backoff(delay = DEFAULT_BACKOFF_TIME, multiplier = 2.0)
     )
-    protected String findFormatterId(String uuid) {
+    public String findFormatterId(String uuid) {
         try {
             Map<String, Object> params = new HashMap<>();
             params.put("indexName", getIndexName());
@@ -533,13 +540,6 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
     @Override
     public Map<String, ?> getAssociatedRecords(String uuid) {
         return self.getRecordRelated(uuid).orElse(Collections.emptyMap());
-    }
-    /**
-     * This is use in test only and therefore it is a protected member.
-     * @return - Elastic client
-     */
-    protected void setGn4ElasticClient(ElasticsearchClient client) {
-        this.gn4ElasticClient = client;
     }
 
     protected String getGeoNetworkRelatedEndpoint() {

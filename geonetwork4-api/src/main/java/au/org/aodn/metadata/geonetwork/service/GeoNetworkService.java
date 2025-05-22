@@ -1,4 +1,4 @@
-package au.org.aodn.esindexer.service;
+package au.org.aodn.metadata.geonetwork.service;
 
 import au.org.aodn.stac.model.LinkModel;
 

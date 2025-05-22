@@ -1,9 +1,10 @@
 package au.org.aodn.esindexer.service;
 
-import au.org.aodn.cloudoptimized.model.RelationType;
+import au.org.aodn.stac.model.RelationType;
 import au.org.aodn.cloudoptimized.service.DataAccessService;
 import au.org.aodn.esindexer.utils.AssociatedRecordsUtil;
 import au.org.aodn.esindexer.utils.*;
+import au.org.aodn.metadata.geonetwork.service.GeoNetworkService;
 import au.org.aodn.stac.model.*;
 
 import au.org.aodn.metadata.geonetwork.GeoNetworkField;
