@@ -4,6 +4,7 @@ import au.org.aodn.cloudoptimized.service.DataAccessService;
 import au.org.aodn.esindexer.utils.GcmdKeywordUtils;
 import au.org.aodn.esindexer.utils.GeometryUtils;
 import au.org.aodn.esindexer.utils.JaxbUtils;
+import au.org.aodn.metadata.geonetwork.service.GeoNetworkServiceImpl;
 import au.org.aodn.metadata.iso19115_3_2018.MDMetadataType;
 import au.org.aodn.stac.model.StacCollectionModel;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;

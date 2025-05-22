@@ -6,6 +6,7 @@ import au.org.aodn.esindexer.exception.*;
 import au.org.aodn.esindexer.utils.GcmdKeywordUtils;
 import au.org.aodn.esindexer.utils.JaxbUtils;
 import au.org.aodn.metadata.geonetwork.exception.MetadataNotFoundException;
+import au.org.aodn.metadata.geonetwork.service.GeoNetworkService;
 import au.org.aodn.metadata.iso19115_3_2018.MDMetadataType;
 import au.org.aodn.stac.model.SearchSuggestionsModel;
 import au.org.aodn.stac.model.StacCollectionModel;

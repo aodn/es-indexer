@@ -1,8 +1,8 @@
 package au.org.aodn.esindexer.configuration;
 
-import au.org.aodn.esindexer.service.FIFOCache;
-import au.org.aodn.esindexer.service.GeoNetworkServiceImpl;
-import au.org.aodn.esindexer.utils.UrlUtils;
+import au.org.aodn.metadata.geonetwork.service.FIFOCache;
+import au.org.aodn.metadata.geonetwork.service.GeoNetworkServiceImpl;
+import au.org.aodn.metadata.geonetwork.utils.UrlUtils;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.json.jackson.JacksonJsonpMapper;
 import co.elastic.clients.transport.ElasticsearchTransportBase;

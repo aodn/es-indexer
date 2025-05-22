@@ -1,6 +1,6 @@
 package au.org.aodn.esindexer.utils;
 
-import au.org.aodn.cloudoptimized.model.RelationType;
+import au.org.aodn.stac.model.RelationType;
 import au.org.aodn.stac.model.LinkModel;
 import au.org.aodn.stac.util.JsonUtil;
 import org.springframework.http.MediaType;

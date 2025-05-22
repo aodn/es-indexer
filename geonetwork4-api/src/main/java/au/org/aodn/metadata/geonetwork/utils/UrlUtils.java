@@ -1,4 +1,4 @@
-package au.org.aodn.esindexer.utils;
+package au.org.aodn.metadata.geonetwork.utils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
