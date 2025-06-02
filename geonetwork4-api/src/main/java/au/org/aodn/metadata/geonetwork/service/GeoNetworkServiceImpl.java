@@ -105,8 +105,8 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
 
     /**
      *
-     * @param uuid
-     * @return
+     * @param uuid - The query UUID
+     * @return Group name
      * @throws IOException
      * @throws HttpServerErrorException.ServiceUnavailable
      */
@@ -328,7 +328,8 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
             );
 
             if (responseEntity.getStatusCode().is2xxSuccessful()) {
-                if (Objects.requireNonNull(responseEntity.getBody()).get("@xsi:schemaLocation").asText().contains("www.isotc211.org/2005/gmd")) {
+                JsonNode node = Objects.requireNonNull(responseEntity.getBody());
+                if (node.hasNonNull("@xsi:schemaLocation") && node.get("@xsi:schemaLocation").asText().contains("www.isotc211.org/2005/gmd")) {
                     return AppConstants.FORMAT_ISO19115_3_2018;
                 }
                 else {
@@ -567,10 +568,8 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
      * span multiple shards. Each shard must load its requested hits and the hits for any previous pages into memory.
      * For deep pages or large sets of results, these operations can significantly increase memory and CPU usage,
      * resulting in degraded performance or node failures.
-     *
      * You can use the search_after parameter to retrieve the next page of hits using a set of sort values
      * from the previous page.
-     *
      * Noted that the search must always sort the same way, in this search it is UUID, there will be a very small
      * chance that new record added in between calls and therefore sort order changed and some record may skip,
      * but not much we can do because it is non-transactional operation.
