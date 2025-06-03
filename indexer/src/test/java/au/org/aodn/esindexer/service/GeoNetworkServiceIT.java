@@ -117,9 +117,7 @@ public class GeoNetworkServiceIT extends BaseTestClass {
                     geoNetworkService.findFormatterId("830f9a83-ae6b-4260-a82a-24c4851f7119"),
                     "Format is correct");
 
-            Exception exception = assertThrows(MetadataNotFoundException.class, () -> {
-                geoNetworkService.findFormatterId("NOT_FOUND");
-            });
+            Exception exception = assertThrows(MetadataNotFoundException.class, () -> geoNetworkService.findFormatterId("NOT_FOUND"));
 
             Assertions.assertTrue("Unable to find metadata record with UUID: NOT_FOUND in GeoNetwork".contains(exception.getMessage()));
 
@@ -211,7 +209,7 @@ public class GeoNetworkServiceIT extends BaseTestClass {
 
     /**
      * We set a very small page size in test, please refer to
-     * @throws IOException
+     * @throws IOException - Not expected to throw
      */
     @Test
     public void verifyAllMetadataRecordWithPage() throws IOException, JAXBException {
@@ -314,7 +312,7 @@ public class GeoNetworkServiceIT extends BaseTestClass {
      * Need to restore to original object after test
      */
     @Test
-    public void verifyRetryOnGeonetworkBusyWorks() throws IOException, JAXBException {
+    public void verifyRetryOnGeonetworkBusyWorks() throws IOException {
         final String UUID1 = "9e5c3031-a026-48b3-a153-a70c2e2b78b9";
         final String UUID2 = "830f9a83-ae6b-4260-a82a-24c4851f7119";
         final String UUID3 = "06b09398-d3d0-47dc-a54a-a745319fbece";
@@ -361,5 +359,22 @@ public class GeoNetworkServiceIT extends BaseTestClass {
             geoNetworkService.setGn4ElasticClient(gn4ElasticsearchClient);
             deleteRecord(UUID1, UUID2, UUID3, UUID4, UUID5, UUID6, UUID7);
         }
+    }
+    /**
+     * This is a strange XML found in gn4, not a valid metadata
+     * @throws IOException
+     */
+    @Test
+    public void verifyDocWithNoContentWorks() throws IOException {
+        final String UUID1 = "4c70e2fa-af74-4059-8b69-981db66e204f";
+        try {
+            insertMetadataRecords(UUID1, "classpath:canned/sample19.xml");
+            String format = geoNetworkService.findFormatterId(UUID1);
+            Assertions.assertEquals(AppConstants.FORMAT_XML, format, "Format as expected");
+        }
+        finally {
+            deleteRecord(UUID1);
+        }
+
     }
 }
