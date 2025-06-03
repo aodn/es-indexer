@@ -167,27 +167,27 @@
   } ],
   "links" : [ {
     "href" : "http://imos.org.au/expendablebathythermograph.html",
-    "rel" : "related",
+    "rel" : "WWW:LINK-1.0-http--link",
     "type" : "text/html",
     "title" : "Link to Expendable Bathythermograph page on IMOS website"
   }, {
     "href" : "https://catalogue-imos.aodn.org.au:443/geonetwork/srv/api/records/35234913-aa3c-48ec-b9a4-77f822f66ef8/attachments/Devil_Data_Formats.pdf",
-    "rel" : "related",
+    "rel" : "WWW:DOWNLOAD-1.0-http--download",
     "type" : "",
     "title" : "Devil_Data_Formats.pdf"
   }, {
     "href" : "http://content.aodn.org.au/Documents/IMOS/Facilities/ships_of_opportunity/IMOS_XBT_realtime_data_delivery_GTS.pdf",
-    "rel" : "related",
+    "rel" : "WWW:LINK-1.0-http--link",
     "type" : "text/html",
     "title" : "PDF document describing the delivery of XBT data in realtime to the AODN and the GTS"
   }, {
     "href" : "http://data.aodn.org.au/?prefix=IMOS/SOOP/SOOP-XBT/REALTIME/",
-    "rel" : "related",
+    "rel" : "WWW:LINK-1.0-http--link",
     "type" : "text/html",
     "title" : "Files via Amazon Web Services S3 storage"
   }, {
     "href" : "https://portal.aodn.org.au/search?uuid=35234913-aa3c-48ec-b9a4-77f822f66ef8",
-    "rel" : "related",
+    "rel" : "WWW:LINK-1.0-http--link",
     "type" : "text/html",
     "title" : "View and download data though the AODN Portal"
   }, {
@@ -202,17 +202,17 @@
     "title" : "soop_xbt_nrt_profiles_data"
   }, {
     "href" : "https://help.aodn.org.au/web-services/ogc-wfs/",
-    "rel" : "related",
+    "rel" : "WWW:LINK-1.0-http--link",
     "type" : "text/html",
     "title" : "OGC WFS help documentation"
   }, {
     "href" : "http://geoserver-123.aodn.org.au/geoserver/ows",
-    "rel" : "related",
+    "rel" : "IMOS:AGGREGATION--bodaac",
     "type" : "",
     "title" : "soop_xbt_nrt_profiles_map#url"
   }, {
     "href" : "https://help.aodn.org.au/web-services/ncurllist-service/",
-    "rel" : "related",
+    "rel" : "WWW:LINK-1.0-http--link",
     "type" : "text/html",
     "title" : "ncUrlList help documentation"
   }, {

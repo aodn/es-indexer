@@ -176,12 +176,12 @@
   } ],
   "links" : [ {
     "href" : "https://doi.org/10.1007/s00338-023-02426-z",
-    "rel" : "related",
+    "rel" : "WWW:LINK-1.0-http--related",
     "type" : "",
     "title" : "Quigley, K.M., Alvarez-Roa, C., Raina, JB. et al. Heat-evolved microalgal symbionts increase thermal bleaching tolerance of coral juveniles without a trade-off against growth. Coral Reefs 42, 1227–1232 (2023). https://doi.org/10.1007/s00338-023-02426-z"
   }, {
     "href" : "https://doi.org/10.1111/2041-210X.13162",
-    "rel" : "related",
+    "rel" : "WWW:LINK-1.0-http--related",
     "type" : "",
     "title" : "Harianto, J, Carey, N, Byrne, M. respR—An R package for the manipulation and analysis of respirometry data. Methods Ecol Evol. 2019; 10: 912– 920. https://doi.org/10.1111/2041-210X.13162"
   }, {

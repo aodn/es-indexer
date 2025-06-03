@@ -254,7 +254,7 @@
   } ],
   "links" : [ {
     "href" : "articleId=2036",
-    "rel" : "related",
+    "rel" : "WWW:LINK-1.0-http--related",
     "type" : "",
     "title" : "A versatile long-range telementry system particularly suited to meterological, environmental sensing at remote locations. Technical bulletin. Instrumental facilities: Colman RS, Carr K and Gill EF (1982) A versatile long-range telementry system particularly suited to meterological, environmental sensing at remote locations. Technical bulletin. Instrumental facilities. AIMS-IF-82-1. Australian Institute of Marine Science. 30 p."
   }, {
@@ -264,7 +264,7 @@
     "title" : "aims:weather_data"
   }, {
     "href" : "https://weather.aims.gov.au/#/overview",
-    "rel" : "related",
+    "rel" : "WWW:LINK-1.0-http--downloaddata",
     "type" : "",
     "title" : "AIMS weather stations latest readings"
   }, {
@@ -274,27 +274,27 @@
     "title" : "aims:weather_deployment"
   }, {
     "href" : "articleId=2205",
-    "rel" : "related",
+    "rel" : "WWW:LINK-1.0-http--related",
     "type" : "",
     "title" : "Technical notes on weather monitoring telemetry system: Gill EF (1988) Technical notes on weather monitoring telemetry system. Australian Institute of Marine Science. 35 p."
   }, {
     "href" : "https://apps.aims.gov.au/ts-explorer/",
-    "rel" : "related",
+    "rel" : "WWW:LINK-1.0-http--downloaddata",
     "type" : "",
     "title" : "Data access through the Time Series Explorer"
   }, {
     "href" : "https://doi.org/10.1175/JTECH-D-21-0095.1",
-    "rel" : "related",
+    "rel" : "WWW:LINK-1.0-http--related",
     "type" : "",
     "title" : "Nunez, M., Cantin, N., Steinberg, C., van Dongen-Vogels, V., & Bainbridge, S. (2022). Correcting PAR Data from Photovoltaic Quantum Sensors on Remote Weather Stations on the Great Barrier Reef, Journal of Atmospheric and Oceanic Technology, 39(4), 425-448 https://doi.org/10.1175/JTECH-D-21-0095.1"
   }, {
     "href" : "https://docs.ropensci.org/dataaimsr/",
-    "rel" : "related",
+    "rel" : "WWW:LINK-1.0-http--downloaddata",
     "type" : "",
     "title" : "Data access using R"
   }, {
     "href" : "https://open-aims.github.io/data-platform/",
-    "rel" : "related",
+    "rel" : "WWW:LINK-1.0-http--downloaddata",
     "type" : "",
     "title" : "Data access via Programming API"
   }, {

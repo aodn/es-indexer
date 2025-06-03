@@ -118,22 +118,22 @@
   } ],
   "links" : [ {
     "href" : "http://thredds.aodn.org.au/thredds/dodsC/IMOS/ANFOG/slocum_glider/NSW20100921/IMOS_ANFOG_BCEOPSTUV_20100921T011446Z_SL106_FV01_timeseries_END-20101006T073015Z.nc.html",
-    "rel" : "related",
+    "rel" : "WWW:LINK-1.0-http--link",
     "type" : "text/html",
     "title" : "Data available via the IMOS OPeNDAP server"
   }, {
     "href" : "http://thredds.aodn.org.au/thredds/fileServer/IMOS/ANFOG/slocum_glider/NSW20100921/IMOS_ANFOG_BCEOPSTUV_20100921T011446Z_SL106_FV01_timeseries_END-20101006T073015Z.nc",
-    "rel" : "related",
+    "rel" : "WWW:LINK-1.0-http--downloaddata",
     "type" : "",
     "title" : "Download data from the IMOS THREDDS server"
   }, {
     "href" : "https://s3-ap-southeast-2.amazonaws.com/content.aodn.org.au/Documents/IMOS/Facilities/Ocean_glider/glider_data_management.pdf",
-    "rel" : "related",
+    "rel" : "WWW:LINK-1.0-http--link",
     "type" : "text/html",
     "title" : "Link to the ANFOG data management document"
   }, {
     "href" : "http://data.aodn.org.au/?prefix=IMOS/ANFOG/slocum_glider/NSW20100921/",
-    "rel" : "related",
+    "rel" : "WWW:LINK-1.0-http--link",
     "type" : "text/html",
     "title" : "Summary plots of each variable measured during the deployment (JPEG files)"
   }, {

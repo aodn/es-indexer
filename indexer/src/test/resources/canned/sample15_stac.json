@@ -197,17 +197,17 @@
     "title" : "seamap:SeamapAus_QLD_GBRWHA_seagrass"
   }, {
     "href" : "http://nesptropical.edu.au/wp-content/uploads/2016/03/NESP-TWQ-3.1-FINAL-REPORT.pdf",
-    "rel" : "related",
+    "rel" : "WWW:LINK-1.0-http--publication",
     "type" : "",
     "title" : "REPORT - Project Final Report [PDF]"
   }, {
     "href" : "http://eatlas.org.au/nesp-twq-1/gbr-seagrass-mapping-3-1",
-    "rel" : "related",
+    "rel" : "WWW:LINK-1.0-http--related",
     "type" : "",
     "title" : "WEBSITE - Project website"
   }, {
     "href" : "https://eatlas.org.au/geonetwork/srv/eng/catalog.search#/metadata/77998615-bbab-4270-bcb1-96c46f56f85a",
-    "rel" : "related",
+    "rel" : "WWW:LINK-1.0-http--link",
     "type" : "text/html",
     "title" : "Original metadata record [eAtlas catalogue]"
   }, {

@@ -118,52 +118,52 @@
   } ],
   "links" : [ {
     "href" : "https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/05818c50-14c2-11dd-bdaa-00188b4c0af8/attachments/1989_01_12.zip",
-    "rel" : "related",
+    "rel" : "WWW:DOWNLOAD-1.0-http--downloaddata",
     "type" : "",
     "title" : "1989_01_12.zip"
   }, {
     "href" : "https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/05818c50-14c2-11dd-bdaa-00188b4c0af8/attachments/1989_02_09.zip",
-    "rel" : "related",
+    "rel" : "WWW:DOWNLOAD-1.0-http--downloaddata",
     "type" : "",
     "title" : "1989_02_09.zip"
   }, {
     "href" : "https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/05818c50-14c2-11dd-bdaa-00188b4c0af8/attachments/1989_04_13.zip",
-    "rel" : "related",
+    "rel" : "WWW:DOWNLOAD-1.0-http--downloaddata",
     "type" : "",
     "title" : "1989_04_13.zip"
   }, {
     "href" : "https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/05818c50-14c2-11dd-bdaa-00188b4c0af8/attachments/1989_05_09.zip",
-    "rel" : "related",
+    "rel" : "WWW:DOWNLOAD-1.0-http--downloaddata",
     "type" : "",
     "title" : "1989_05_09.zip"
   }, {
     "href" : "https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/05818c50-14c2-11dd-bdaa-00188b4c0af8/attachments/1989_07_12.zip",
-    "rel" : "related",
+    "rel" : "WWW:DOWNLOAD-1.0-http--downloaddata",
     "type" : "",
     "title" : "1989_07_12.zip"
   }, {
     "href" : "https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/05818c50-14c2-11dd-bdaa-00188b4c0af8/attachments/1989_07_28.zip",
-    "rel" : "related",
+    "rel" : "WWW:DOWNLOAD-1.0-http--downloaddata",
     "type" : "",
     "title" : "1989_07_28.zip"
   }, {
     "href" : "https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/05818c50-14c2-11dd-bdaa-00188b4c0af8/attachments/1989_08_29.zip",
-    "rel" : "related",
+    "rel" : "WWW:DOWNLOAD-1.0-http--downloaddata",
     "type" : "",
     "title" : "1989_08_29.zip"
   }, {
     "href" : "https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/05818c50-14c2-11dd-bdaa-00188b4c0af8/attachments/1989_11_15.zip",
-    "rel" : "related",
+    "rel" : "WWW:DOWNLOAD-1.0-http--downloaddata",
     "type" : "",
     "title" : "1989_11_15.zip"
   }, {
     "href" : "https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/05818c50-14c2-11dd-bdaa-00188b4c0af8/attachments/Hierarchy.pdf",
-    "rel" : "related",
+    "rel" : "WWW:DOWNLOAD-1.0-http--downloadother",
     "type" : "",
     "title" : "Hierarchy.pdf"
   }, {
     "href" : "https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/05818c50-14c2-11dd-bdaa-00188b4c0af8/attachments/Temperature_and_Salinity_-_February_1988_to_April_1990.PDF",
-    "rel" : "related",
+    "rel" : "WWW:DOWNLOAD-1.0-http--downloadother",
     "type" : "",
     "title" : "Temperature_and_Salinity_-_February_1988_to_April_1990.PDF"
   }, {

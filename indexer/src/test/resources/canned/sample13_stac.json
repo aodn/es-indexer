@@ -62,47 +62,47 @@
   } ],
   "links" : [ {
     "href" : "https://www.marine.csiro.au/data/trawler/dataset.cfm?survey=IN2016_T03&data_type=uwy",
-    "rel" : "related",
+    "rel" : "WWW:DOWNLOAD-1.0-http--csiro-oa-app",
     "type" : "",
     "title" : "Data Access Via Data Trawler"
   }, {
     "href" : "https://creativecommons.org/licenses/by/4.0/",
-    "rel" : "related",
+    "rel" : "WWW:LINK-1.0-http--link",
     "type" : "text/html",
     "title" : "License / Attribution"
   }, {
     "href" : "https://www.marine.csiro.au/data/reporting/get_file.cfm?eov_pub_id=1484",
-    "rel" : "related",
+    "rel" : "WWW:DOWNLOAD-1.0-http--csiro-oa-app",
     "type" : "",
     "title" : "Download: processing report (pdf): in2016_t03_UWY_ProcessingReport.pdf"
   }, {
     "href" : "https://www.marine.csiro.au/data/trawler/download.cfm?file_id=3494",
-    "rel" : "related",
+    "rel" : "WWW:DOWNLOAD-1.0-http--csiro-oa-app",
     "type" : "",
     "title" : "Download: 10-second (csv data): in2016_t03uwy10sec_csv.zip"
   }, {
     "href" : "https://www.marine.csiro.au/data/trawler/download.cfm?file_id=3495",
-    "rel" : "related",
+    "rel" : "WWW:DOWNLOAD-1.0-http--csiro-oa-app",
     "type" : "",
     "title" : "Download: 5-minute (csv data): in2016_t03uwy5min_csv.zip"
   }, {
     "href" : "https://www.marine.csiro.au/data/trawler/download.cfm?file_id=3496",
-    "rel" : "related",
+    "rel" : "WWW:DOWNLOAD-1.0-http--csiro-oa-app",
     "type" : "",
     "title" : "Download: 5-second (netcdf data): in2016_t03uwy_nc.zip"
   }, {
     "href" : "https://www.marine.csiro.au/data/trawler/survey_list.cfm?source_id=309",
-    "rel" : "related",
+    "rel" : "WWW:LINK-1.0-http--link",
     "type" : "text/html",
     "title" : "RV Investigator Survey Information"
   }, {
     "href" : "https://www.marine.csiro.au/data/underway/?survey=in2016_t03",
-    "rel" : "related",
+    "rel" : "WWW:LINK-1.0-http--link",
     "type" : "text/html",
     "title" : "Visualisation tool for Underway Data"
   }, {
     "href" : "https://mnf.csiro.au/",
-    "rel" : "related",
+    "rel" : "WWW:LINK-1.0-http--link",
     "type" : "text/html",
     "title" : "MNF Home page"
   } ],

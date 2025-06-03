@@ -93,77 +93,77 @@
   } ],
   "links" : [ {
     "href" : "https://data.aad.gov.au/eds/5350/download",
-    "rel" : "related",
+    "rel" : "WWW:LINK-1.0-http--link",
     "type" : "text/html",
     "title" : "GET DATA > DIRECT DOWNLOAD"
   }, {
     "href" : "http://data.aad.gov.au/aadc/marine_science/underway_extraction/index.cfm",
-    "rel" : "related",
+    "rel" : "WWW:LINK-1.0-http--link",
     "type" : "text/html",
     "title" : "GET DATA"
   }, {
     "href" : "https://portal.aodn.org.au/",
-    "rel" : "related",
+    "rel" : "WWW:LINK-1.0-http--link",
     "type" : "text/html",
     "title" : "GET DATA"
   }, {
     "href" : "https://data.aad.gov.au/geoserver/underway/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=underway%3Aunderway_60&outputFormat=csv&cql_filter=set_code=201112060",
-    "rel" : "related",
+    "rel" : "WWW:LINK-1.0-http--link",
     "type" : "text/html",
     "title" : "USE SERVICE API > WEB FEATURE SERVICE (WFS)"
   }, {
     "href" : "https://data.aad.gov.au/geoserver/underway/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=underway%3Aunderway_1200&outputFormat=csv&cql_filter=set_code=201112060",
-    "rel" : "related",
+    "rel" : "WWW:LINK-1.0-http--link",
     "type" : "text/html",
     "title" : "USE SERVICE API > WEB FEATURE SERVICE (WFS)"
   }, {
     "href" : "https://data.aad.gov.au/geoserver/underway/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=underway%3Aunderway_7200&outputFormat=csv&cql_filter=set_code=201112060",
-    "rel" : "related",
+    "rel" : "WWW:LINK-1.0-http--link",
     "type" : "text/html",
     "title" : "USE SERVICE API > WEB FEATURE SERVICE (WFS)"
   }, {
     "href" : "http://data.aad.gov.au/geoserver/underway/wms?request=GetCapabilities",
-    "rel" : "related",
+    "rel" : "WWW:LINK-1.0-http--link",
     "type" : "text/html",
     "title" : "USE SERVICE API > WEB MAP SERVICE (WMS)"
   }, {
     "href" : "http://data.aad.gov.au/geoserver/underway/wfs?request=GetCapabilities",
-    "rel" : "related",
+    "rel" : "WWW:LINK-1.0-http--link",
     "type" : "text/html",
     "title" : "USE SERVICE API > WEB FEATURE SERVICE (WFS)"
   }, {
     "href" : "https://data.aad.gov.au/geoserver/underway/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=underway%3Aunderway_mln_1200&outputFormat=SHAPE-ZIP&cql_filter=set_code=201112060",
-    "rel" : "related",
+    "rel" : "WWW:LINK-1.0-http--link",
     "type" : "text/html",
     "title" : "USE SERVICE API > WEB FEATURE SERVICE (WFS)"
   }, {
     "href" : "http://data.aad.gov.au/aadc/voyages/display_voyage.cfm?voyage_id=572",
-    "rel" : "related",
+    "rel" : "WWW:LINK-1.0-http--link",
     "type" : "text/html",
     "title" : "VIEW RELATED INFORMATION"
   }, {
     "href" : "http://data.aad.gov.au/aadc/portal/download_file.cfm?file_id=3143",
-    "rel" : "related",
+    "rel" : "WWW:LINK-1.0-http--link",
     "type" : "text/html",
     "title" : "VIEW RELATED INFORMATION"
   }, {
     "href" : "http://data.aad.gov.au/aadc/voyages/sensors.cfm?set_code=201112060",
-    "rel" : "related",
+    "rel" : "WWW:LINK-1.0-http--link",
     "type" : "text/html",
     "title" : "VIEW RELATED INFORMATION"
   }, {
     "href" : "http://data.aad.gov.au/aadc/voyages/display_voyage.cfm?set_code=201112060",
-    "rel" : "related",
+    "rel" : "WWW:LINK-1.0-http--link",
     "type" : "text/html",
     "title" : "VIEW RELATED INFORMATION"
   }, {
     "href" : "http://data.aad.gov.au/aadc/portal/download_file.cfm?file_id=3961",
-    "rel" : "related",
+    "rel" : "WWW:LINK-1.0-http--link",
     "type" : "text/html",
     "title" : "VIEW RELATED INFORMATION"
   }, {
     "href" : "http://data.aad.gov.au/aadc/metadata/citation.cfm?entry_id=201112060",
-    "rel" : "related",
+    "rel" : "WWW:LINK-1.0-http--link",
     "type" : "text/html",
     "title" : "VIEW RELATED INFORMATION"
   }, {

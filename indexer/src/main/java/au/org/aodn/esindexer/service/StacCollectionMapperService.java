@@ -618,7 +618,7 @@ public abstract class StacCollectionMapperService {
                                             linkModel.setRel(RelationType.WFS.getValue());
                                         }
                                         else {
-                                            linkModel.setRel(RelationType.RELATED.getValue());
+                                            linkModel.setRel(protocol);
                                         }
                                     });
 

@@ -274,17 +274,17 @@
   } ],
   "links" : [ {
     "href" : "http://imos.org.au/nationalmooringnetwork.html",
-    "rel" : "related",
+    "rel" : "WWW:LINK-1.0-http--link",
     "type" : "text/html",
     "title" : "ANMN page on IMOS website"
   }, {
     "href" : "http://thredds.aodn.org.au/thredds/catalog/IMOS/ANMN/catalog.html",
-    "rel" : "related",
+    "rel" : "WWW:LINK-1.0-http--link",
     "type" : "text/html",
     "title" : "NetCDF files via THREDDS catalog"
   }, {
     "href" : "https://portal.aodn.org.au/search?uuid=ae86e2f5-eaaf-459e-a405-e654d85adb9c",
-    "rel" : "related",
+    "rel" : "WWW:LINK-1.0-http--link",
     "type" : "text/html",
     "title" : "View and download data though the AODN Portal"
   }, {
@@ -294,12 +294,12 @@
     "title" : "imos:anmn_velocity_timeseries_map"
   }, {
     "href" : "http://geoserver-123.aodn.org.au/geoserver/ows",
-    "rel" : "related",
+    "rel" : "IMOS:AGGREGATION--bodaac",
     "type" : "",
     "title" : "anmn_velocity_timeseries_map#file_url"
   }, {
     "href" : "https://help.aodn.org.au/web-services/ncurllist-service/",
-    "rel" : "related",
+    "rel" : "WWW:LINK-1.0-http--link",
     "type" : "text/html",
     "title" : "ncUrlList help documentation"
   }, {

@@ -71,7 +71,7 @@
   } ],
   "links" : [ {
     "href" : "http://data.aodn.org.au/TERN/ACEF/Ecology/ARRAerialSurveyRaw3.csv",
-    "rel" : "related",
+    "rel" : "WWW:LINK-1.0-http--link",
     "type" : "text/html",
     "title" : "Download data"
   }, {
