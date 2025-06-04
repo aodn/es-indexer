@@ -124,27 +124,27 @@
   } ],
   "links" : [ {
     "href" : "https://www.marine.csiro.au/data/trawler/survey_details.cfm?survey=IN2019_V06",
-    "rel" : "WWW:DOWNLOAD-1.0-http--csiro-oa-app",
+    "rel" : "data",
     "type" : "",
     "title" : "Investigator Survey"
   }, {
     "href" : "https://www.marine.csiro.au/data/underway/?survey=in2019_v06",
-    "rel" : "WWW:DOWNLOAD-1.0-http--csiro-oa-app",
+    "rel" : "data",
     "type" : "",
     "title" : "Underway Visualisation Tool"
   }, {
     "href" : "https://doi.org/10.25919/fxwd-kw74",
-    "rel" : "WWW:DOWNLOAD-1.0-http--csiro-dap",
+    "rel" : "data",
     "type" : "",
     "title" : "Data Access Portal (DOI)"
   }, {
     "href" : "https://ws.data.csiro.au/licences/1061",
-    "rel" : "WWW:LINK-1.0-http--link",
+    "rel" : "related",
     "type" : "text/html",
     "title" : "Data Licensing"
   }, {
     "href" : "https://mnf.csiro.au/",
-    "rel" : "WWW:LINK-1.0-http--link",
+    "rel" : "related",
     "type" : "text/html",
     "title" : "Marine National Facility"
   }, {

@@ -59,7 +59,7 @@
   } ],
   "links" : [ {
     "href" : "https://creativecommons.org/licenses/by/4.0/",
-    "rel" : "WWW:LINK-1.0-http--link",
+    "rel" : "related",
     "type" : "text/html",
     "title" : "Documentation Link"
   } ],

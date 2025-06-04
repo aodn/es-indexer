@@ -363,27 +363,27 @@
   } ],
   "links" : [ {
     "href" : "http://www.argodatamgt.org/Documentation",
-    "rel" : "WWW:LINK-1.0-http--link",
+    "rel" : "related",
     "type" : "text/html",
     "title" : "Link to Argo User's Manual"
   }, {
     "href" : "https://imos.org.au/facilities/argofloats/bgcargo",
-    "rel" : "WWW:LINK-1.0-http--link",
+    "rel" : "related",
     "type" : "text/html",
     "title" : "Biogeochemical Argo page on IMOS website"
   }, {
     "href" : "https://biogeochemical-argo.org/measured-variables-general-context.php",
-    "rel" : "WWW:LINK-1.0-http--link",
+    "rel" : "related",
     "type" : "text/html",
     "title" : "Biogeochemical Argo Measured Variables webpage"
   }, {
     "href" : "http://thredds.aodn.org.au/thredds/catalog/IMOS/Argo/dac/catalog.html",
-    "rel" : "WWW:LINK-1.0-http--link",
+    "rel" : "related",
     "type" : "text/html",
     "title" : "NetCDF files via THREDDS catalog"
   }, {
     "href" : "https://portal.aodn.org.au/search?uuid=2223b7f2-4bac-4ff1-9b1e-aae9ac58deef",
-    "rel" : "WWW:LINK-1.0-http--link",
+    "rel" : "related",
     "type" : "text/html",
     "title" : "View and download data though the AODN Portal"
   }, {
@@ -413,7 +413,7 @@
     "title" : "imos:argo_profile_bio_ph_in_situ_total_data"
   }, {
     "href" : "https://help.aodn.org.au/web-services/ogc-wfs/",
-    "rel" : "WWW:LINK-1.0-http--link",
+    "rel" : "related",
     "type" : "text/html",
     "title" : "OGC WFS help documentation"
   }, {
@@ -423,7 +423,7 @@
     "title" : "argo_profile_bio_map#url"
   }, {
     "href" : "https://help.aodn.org.au/web-services/ncurllist-service/",
-    "rel" : "WWW:LINK-1.0-http--link",
+    "rel" : "related",
     "type" : "text/html",
     "title" : "ncUrlList help documentation"
   }, {

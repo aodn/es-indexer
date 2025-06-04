@@ -120,7 +120,7 @@
   } ],
   "links" : [ {
     "href" : "http://imos.org.au/facilities/oceanradar",
-    "rel" : "WWW:LINK-1.0-http--link",
+    "rel" : "related",
     "type" : "text/html",
     "title" : "Ocean Radar page on IMOS website"
   }, {

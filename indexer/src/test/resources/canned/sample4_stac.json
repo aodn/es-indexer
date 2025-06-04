@@ -206,17 +206,17 @@
   } ],
   "links" : [ {
     "href" : "http://www.biogeosciences.net/13/1753/2016",
-    "rel" : "WWW:LINK-1.0-http--link",
+    "rel" : "related",
     "type" : "text/html",
     "title" : "Biogeosciences Journal article"
   }, {
     "href" : "https://portal.aodn.org.au/search?uuid=7709f541-fc0c-4318-b5b9-9053aa474e0e",
-    "rel" : "WWW:LINK-1.0-http--link",
+    "rel" : "related",
     "type" : "text/html",
     "title" : "View and download data though the AODN Portal"
   }, {
     "href" : "http://thredds.aodn.org.au/thredds/dodsC/CSIRO/Climatology/Ocean_Acidification/OA_Reconstruction.nc.html",
-    "rel" : "WWW:LINK-1.0-http--link",
+    "rel" : "related",
     "type" : "text/html",
     "title" : "NetCDF files via THREDDS catalog"
   }, {
@@ -261,7 +261,7 @@
     "title" : "csiro_oa_reconstruction_url"
   }, {
     "href" : "https://help.aodn.org.au/web-services/gogoduck-aggregator/",
-    "rel" : "WWW:LINK-1.0-http--link",
+    "rel" : "related",
     "type" : "text/html",
     "title" : "GoGoDuck help documentation"
   }, {

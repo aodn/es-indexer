@@ -3815,25 +3815,25 @@
   "links": [
     {
       "href": "https://www.marine.csiro.au/data/trawler/survey_details.cfm?survey=IN2024_V01",
-      "rel": "WWW:DOWNLOAD-1.0-http--csiro-oa-app",
+      "rel": "data",
       "type": "",
       "title": "MNF Data Trawler"
     },
     {
       "href": "https://mnf.csiro.au/",
-      "rel": "WWW:LINK-1.0-http--link",
+      "rel": "related",
       "type": "text/html",
       "title": "Marine National Facility"
     },
     {
       "href": "https://doi.org/10.25919/rdrt-bd71",
-      "rel": "WWW:DOWNLOAD-1.0-http--csiro-dap",
+      "rel": "data",
       "type": "",
       "title": "Data Access Portal (DOI)"
     },
     {
       "href": "http://www.marine.csiro.au/data/underway/?survey=IN2024_V01",
-      "rel": "WWW:DOWNLOAD-1.0-http--csiro-oa-app",
+      "rel": "data",
       "type": "",
       "title": "Underway Visualisation Tool"
     },

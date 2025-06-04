@@ -249,11 +249,10 @@ public class StacCollectionMapperServiceTest {
 
     @Test
     public void verifyProtocolExtractionCorrect() throws IOException, JSONException {
-        // Use the existing XML file that has protocols
         String xml = readResourceFile("classpath:canned/sample8.xml");
         String expected = readResourceFile("classpath:canned/sample8_stac.json");
-
         indexerService.indexMetadata(xml);
+
         verify(expected);
     }
 

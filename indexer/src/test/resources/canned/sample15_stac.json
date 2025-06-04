@@ -202,12 +202,12 @@
     "title" : "REPORT - Project Final Report [PDF]"
   }, {
     "href" : "http://eatlas.org.au/nesp-twq-1/gbr-seagrass-mapping-3-1",
-    "rel" : "WWW:LINK-1.0-http--related",
+    "rel" : "related",
     "type" : "",
     "title" : "WEBSITE - Project website"
   }, {
     "href" : "https://eatlas.org.au/geonetwork/srv/eng/catalog.search#/metadata/77998615-bbab-4270-bcb1-96c46f56f85a",
-    "rel" : "WWW:LINK-1.0-http--link",
+    "rel" : "related",
     "type" : "text/html",
     "title" : "Original metadata record [eAtlas catalogue]"
   }, {
