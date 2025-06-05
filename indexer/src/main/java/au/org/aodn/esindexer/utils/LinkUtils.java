@@ -3,11 +3,12 @@ package au.org.aodn.esindexer.utils;
 import java.util.Arrays;
 import java.util.List;
 
+import au.org.aodn.stac.model.RelationType;
+
 /**
  * Protocols here are referenced from old portal project(Grails). Currently, didn't
  * implement all of them. Others can be added if needed.
  */
-@SuppressWarnings("unused")
 public class LinkUtils {
 
     // protocols as reference
@@ -24,36 +25,51 @@ public class LinkUtils {
             "OGC:WFS"
     );
 
-    private final static List<String> DATA_FILE = Arrays.asList(
+    private final static List<String> DATA = Arrays.asList(
             "WWW:DOWNLOAD-1.0-http--download",
             "WWW:DOWNLOAD-1.0-http--downloadother",
             "WWW:DOWNLOAD-1.0-http--downloaddata",
-            "WWW:LINK-1.0-http--downloaddata"
-    );
-
-    private final static List<String> SUPPLEMENTARY= Arrays.asList(
-            "WWW:LINK-1.0-http--link",
             "WWW:LINK-1.0-http--downloaddata",
-            "WWW:LINK-1.0-http--related",
             "WWW:DOWNLOAD-1.0-ftp--download"
     );
 
-    private final static List<String> METADATA_RECORD = List.of(
+    private final static List<String> RELATED= Arrays.asList(
+            "WWW:LINK-1.0-http--link",
+            "WWW:LINK-1.0-http--related"
+    );
+
+    private final static List<String> METADATA = List.of(
             "WWW:LINK-1.0-http--metadata-URL"
     );
 
-    public static boolean isWmsOrWfs (String protocol) {
-        return isWms(protocol) || isWfs(protocol);
-    }
+    /**
+     * Maps protocol strings to their corresponding RelationType based on protocol groups.
+     *
+     * @param protocol The protocol string to map
+     * @return The corresponding RelationType value, or protocol string as default
+     */
+    public static String getRelationType(String protocol) {
+        if (WMS.contains(protocol) || protocol.startsWith("OGC:WMS") || protocol.startsWith("IMOS:NCWMS")) {
+            return RelationType.WMS.getValue();
+        }
 
-    public static boolean isWms(String protocol) {
-        return protocol.startsWith("OGC:WMS")
-                || protocol.startsWith("IMOS:NCWMS")
-                ;
-    }
+        if (WFS.contains(protocol) || protocol.startsWith("OGC:WFS")) {
+            return RelationType.WFS.getValue();
+        }
 
-    public static boolean isWfs(String protocol) {
-        return protocol.startsWith("OGC:WFS");
-    }
+        if (DATA.contains(protocol) || protocol.startsWith("WWW:DOWNLOAD")) {
+            return RelationType.DATA.getValue();
+        }
 
+        if (RELATED.contains(protocol)) {
+            return RelationType.RELATED.getValue();
+        }
+
+        if (METADATA.contains(protocol)) {
+            return RelationType.METADATA.getValue();
+        }
+
+        // Default case - return protocol itself
+        return protocol;
+    }
 }

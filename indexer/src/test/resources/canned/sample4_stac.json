@@ -256,7 +256,7 @@
     "title" : "csiro_oa_reconstruction_url/pH_T"
   }, {
     "href" : "https://processes.aodn.org.au/wps",
-    "rel" : "related",
+    "rel" : "OGC:WPS--gogoduck",
     "type" : "",
     "title" : "csiro_oa_reconstruction_url"
   }, {

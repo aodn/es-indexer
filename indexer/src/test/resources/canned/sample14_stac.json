@@ -123,7 +123,7 @@
     "title" : "Data available via the IMOS OPeNDAP server"
   }, {
     "href" : "http://thredds.aodn.org.au/thredds/fileServer/IMOS/ANFOG/slocum_glider/NSW20100921/IMOS_ANFOG_BCEOPSTUV_20100921T011446Z_SL106_FV01_timeseries_END-20101006T073015Z.nc",
-    "rel" : "related",
+    "rel" : "data",
     "type" : "",
     "title" : "Download data from the IMOS THREDDS server"
   }, {

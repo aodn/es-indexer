@@ -125,7 +125,7 @@
     "title" : "NRM_Regions_2012_GBRMP: Natural Resource Management (NRM) Regions (2012), Australian Government Department of the Environment, ERIN DIG"
   }, {
     "href" : "https://nextcloud.eatlas.org.au/apps/sharealias/a/gbr_eatlas_nrm_regions_gbrmp_2012-zip",
-    "rel" : "related",
+    "rel" : "data",
     "type" : "",
     "title" : "Shapefile + Metadata [Zip 1.5 MB]"
   }, {

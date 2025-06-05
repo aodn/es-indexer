@@ -206,7 +206,7 @@
     "title" : "Project web site"
   }, {
     "href" : "https://nextcloud.eatlas.org.au/apps/sharealias/a/au-nesp-twq-2-2-3-venomous-jellyfish-db-20181130",
-    "rel" : "related",
+    "rel" : "data",
     "type" : "",
     "title" : "Venomous Jellyfish Database extract Nov 2018 CSV + Metadata + Photo [Zip 1.355 MB]"
   }, {

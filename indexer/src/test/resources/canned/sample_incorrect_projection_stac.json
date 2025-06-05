@@ -179,7 +179,7 @@
   } ],
   "links" : [ {
     "href" : "https://data.imas.utas.edu.au/attachments/451eb5a7-7a45-44bf-bcf6-1b5139abd006/ASIMUS2023__alldata_Central_Kerguelen_Plateau_dredge.zip",
-    "rel" : "related",
+    "rel" : "data",
     "type" : "",
     "title" : "DATA ACCESS - complete data package [direct download 195MB .zip]"
   }, {

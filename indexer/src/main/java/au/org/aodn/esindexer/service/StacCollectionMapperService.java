@@ -611,15 +611,7 @@ public abstract class StacCollectionMapperService {
                             // differentiate WMS, WFS and others
                             safeGet(() -> ciOnlineResource.getProtocol().getCharacterString().getValue().toString())
                                     .ifPresent(protocol -> {
-                                        if (LinkUtils.isWms(protocol)) {
-                                            linkModel.setRel(RelationType.WMS.getValue());
-                                        }
-                                        else if (LinkUtils.isWfs(protocol)) {
-                                            linkModel.setRel(RelationType.WFS.getValue());
-                                        }
-                                        else {
-                                            linkModel.setRel(RelationType.RELATED.getValue());
-                                        }
+                                        linkModel.setRel(LinkUtils.getRelationType(protocol));
                                     });
 
                             linkModel.setTitle(getOnlineResourceName(ciOnlineResource));

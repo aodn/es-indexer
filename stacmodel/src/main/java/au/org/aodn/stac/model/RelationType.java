@@ -15,6 +15,8 @@ public enum RelationType {
     PREVIEW("preview"),
     WFS("wfs"),
     WMS("wms"),
+    DATA("data"),
+    METADATA("metadata")
     ;
 
     private final String value;

@@ -114,7 +114,7 @@
     "title" : "nesp-mac-1:NT_JCU_CDU_NESP-MaC-1-12_Yanyuwa-Seagrass-Meadows_2021-2022"
   }, {
     "href" : "https://maps.eatlas.org.au/index.html?intro=false&z=9&ll=136.78606,-15.62248&l0=ea_nesp-mac-1%3ANT_JCU_CDU_NESP-MaC-1-12_Yanyuwa-Seagrass-Meadows_2021-2022,ea_ea-be%3AWorld_Bright-Earth-e-Atlas-basemap,google_HYBRID,google_TERRAIN,google_SATELLITE,google_ROADMAP,ea_nesp-mac-1%3ANT_JCU_CDU_NESP-MaC-1-12_Yanyuwa-Seagrass-Sites_2021-2022&s0=nesp-mac-1%3AYanyuwa-Seagrass_Type&v0=,,f,f,f,f",
-    "rel" : "related",
+    "rel" : "WWW:LINK",
     "type" : "",
     "title" : "Interactive map of the resource"
   }, {
@@ -124,7 +124,7 @@
     "title" : "nesp-mac-1:NT_JCU_CDU_NESP-MaC-1-12_Yanyuwa-Seagrass-Biomass-Interpolation_2021-2022"
   }, {
     "href" : "https://nextcloud.eatlas.org.au/apps/sharealias/a/1.12_Yanyuwa-sea-country-seagrass",
-    "rel" : "related",
+    "rel" : "data",
     "type" : "",
     "title" : "Download a copy of the dataset"
   }, {

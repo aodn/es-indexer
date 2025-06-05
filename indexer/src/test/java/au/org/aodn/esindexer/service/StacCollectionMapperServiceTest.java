@@ -248,6 +248,15 @@ public class StacCollectionMapperServiceTest {
     }
 
     @Test
+    public void verifyProtocolExtractionCorrect() throws IOException, JSONException {
+        String xml = readResourceFile("classpath:canned/sample8.xml");
+        String expected = readResourceFile("classpath:canned/sample8_stac.json");
+        indexerService.indexMetadata(xml);
+
+        verify(expected);
+    }
+
+    @Test
     public void verifyMultipleTemporal1Extents() throws IOException, JSONException {
         String xml = readResourceFile("classpath:canned/sample_multiple_temporal1.xml");
         String expected = readResourceFile("classpath:canned/sample_multiple_temporal1_stac.json");

@@ -172,7 +172,7 @@
     "title" : "Link to Expendable Bathythermograph page on IMOS website"
   }, {
     "href" : "https://catalogue-imos.aodn.org.au:443/geonetwork/srv/api/records/35234913-aa3c-48ec-b9a4-77f822f66ef8/attachments/Devil_Data_Formats.pdf",
-    "rel" : "related",
+    "rel" : "data",
     "type" : "",
     "title" : "Devil_Data_Formats.pdf"
   }, {
@@ -207,7 +207,7 @@
     "title" : "OGC WFS help documentation"
   }, {
     "href" : "http://geoserver-123.aodn.org.au/geoserver/ows",
-    "rel" : "related",
+    "rel" : "IMOS:AGGREGATION--bodaac",
     "type" : "",
     "title" : "soop_xbt_nrt_profiles_map#url"
   }, {

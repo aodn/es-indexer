@@ -294,7 +294,7 @@
     "title" : "imos:anmn_velocity_timeseries_map"
   }, {
     "href" : "http://geoserver-123.aodn.org.au/geoserver/ows",
-    "rel" : "related",
+    "rel" : "IMOS:AGGREGATION--bodaac",
     "type" : "",
     "title" : "anmn_velocity_timeseries_map#file_url"
   }, {
