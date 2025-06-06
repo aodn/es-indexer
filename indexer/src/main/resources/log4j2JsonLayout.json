@@ -10,9 +10,9 @@
     "$resolver": "level",
     "field": "name"
   },
-  "loggerFqcn": {
+  "loggerName": {
     "$resolver": "logger",
-    "field": "fqcn"
+    "field": "name"
   },
   "message": {
     "$resolver": "message",
