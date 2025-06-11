@@ -14,8 +14,8 @@ import java.time.format.DateTimeFormatter;
 @Setter
 @Getter
 public class TemporalExtent{
-
-    static DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssZ");
+    // X is more flexible to handle both Z and +0000 time format
+    static DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssX");
 
     @JsonProperty("start_date")
     protected String startDate;
