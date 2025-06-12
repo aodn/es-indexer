@@ -6,12 +6,10 @@
     </Properties>
     <Appenders>
         <Console name="LogToConsole" target="SYSTEM_OUT">
-            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <JsonTemplateLayout eventTemplateUri="classpath:log4j2JsonLayout.json"/>
         </Console>
         <RollingFile name="LogToRollingFile" fileName="/tmp/logs/indexer.log" filePattern="/tmp/logs/indexer-%i.%d{yyyy-MM-dd}.log">
-            <PatternLayout>
-                <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5p %c - %m%n</Pattern>
-            </PatternLayout>
+            <JsonTemplateLayout eventTemplateUri="classpath:log4j2JsonLayout.json"/>
             <Policies>
                 <TimeBasedTriggeringPolicy />
                 <SizeBasedTriggeringPolicy size="10 MB"/>
