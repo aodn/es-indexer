@@ -39,78 +39,104 @@
     "parameter_vocabs" : [ ],
     "organisation_vocabs" : [ ]
   },
-  "contacts" : [ {
-    "roles" : [ "pointOfContact", "about" ],
-    "organization" : "School of Civil, Environmental and Mining Engineering (CEME), The University of Western Australia (UWA)",
-    "name" : "Pattiaratchi, Charitha, Professor",
-    "position" : "",
-    "emails" : [ "chari.pattiaratchi@uwa.edu.au" ],
-    "addresses" : [ {
-      "deliveryPoint" : [ "MO51, 35 Stirling Highway" ],
-      "city" : "Crawley",
-      "country" : "Australia",
-      "postalCode" : "6009",
-      "administrativeArea" : "Western Australia"
-    } ],
-    "phones" : [ {
-      "roles" : [ "voice" ],
-      "value" : "61 8 6488 3525"
-    }, {
-      "roles" : [ "facsimile" ],
-      "value" : "61 8 6488 1015"
-    } ],
-    "links" : [ ]
-  }, {
-    "roles" : [ "distributor", "metadata" ],
-    "organization" : "Integrated Marine Observing System (IMOS)",
-    "name" : "",
-    "position" : "Data Officer",
-    "emails" : [ "info@aodn.org.au" ],
-    "addresses" : [ {
-      "deliveryPoint" : [ "University of Tasmania", "Private Bag 110" ],
-      "city" : "Hobart",
-      "country" : "Australia",
-      "postalCode" : "7001",
-      "administrativeArea" : "Tasmania"
-    } ],
-    "phones" : [ {
-      "roles" : [ "voice" ],
-      "value" : "61 3 6226 7488"
-    }, {
-      "roles" : [ "facsimile" ],
-      "value" : "61 3 6226 2107"
-    } ],
-    "links" : [ {
-      "href" : "http://imos.org.au/aodn.html",
-      "type" : "WWW:LINK-1.0-http--link",
-      "title" : "Website of the Australian Ocean Data Network (AODN)"
-    } ]
-  }, {
-    "roles" : [ "resourceProvider", "citation" ],
-    "organization" : "Integrated Marine Observing System (IMOS)",
-    "name" : null,
-    "position" : null,
-    "emails" : [ "imos@imos.org.au" ],
-    "addresses" : [ {
-      "deliveryPoint" : [ "Private bag 110" ],
-      "city" : "Hobart",
-      "country" : "Australia",
-      "postalCode" : "7001",
-      "administrativeArea" : "Tasmania"
-    } ],
-    "phones" : [ {
-      "roles" : [ "voice" ],
-      "value" : "61 3 6226 7549"
-    }, {
-      "roles" : [ "facsimile" ],
-      "value" : "61 3 6226 2107"
-    } ],
-    "links" : [ {
-      "href" : "http://www.imos.org.au/html",
-      "type" : "WWW:LINK-1.0-http--link",
-      "title" : "Website of the Integrated Marine Observing System (IMOS)"
-    } ]
-  } ],
+  "contacts": [
+    {
+      "roles": ["pointOfContact", "about"],
+      "organization": "School of Civil, Environmental and Mining Engineering (CEME), The University of Western Australia (UWA)",
+      "name": "Pattiaratchi, Charitha, Professor",
+      "position": "",
+      "emails": ["chari.pattiaratchi@uwa.edu.au"],
+      "addresses": [
+        {
+          "deliveryPoint": ["MO51, 35 Stirling Highway"],
+          "city": "Crawley",
+          "administrativeArea": "Western Australia",
+          "postalCode": "6009",
+          "country": "Australia"
+        }
+      ],
+      "phones": [
+        {
+          "value": "61 8 6488 3525",
+          "roles": ["voice"]
+        },
+        {
+          "value": "61 8 6488 1015",
+          "roles": ["facsimile"]
+        }
+      ],
+      "links": []
+    },
+    {
+      "roles": ["distributor", "metadata"],
+      "organization": "Integrated Marine Observing System (IMOS)",
+      "name": "",
+      "position": "Data Officer",
+      "emails": ["info@aodn.org.au"],
+      "addresses": [
+        {
+          "deliveryPoint": [
+            "University of Tasmania",
+            "Private Bag 110"
+          ],
+          "city": "Hobart",
+          "administrativeArea": "Tasmania",
+          "postalCode": "7001",
+          "country": "Australia"
+        }
+      ],
+      "phones": [
+        {
+          "value": "61 3 6226 7488",
+          "roles": ["voice"]
+        },
+        {
+          "value": "61 3 6226 2107",
+          "roles": ["facsimile"]
+        }
+      ],
+      "links": [
+        {
+          "href": "http://imos.org.au/aodn.html",
+          "title": "Website of the Australian Ocean Data Network (AODN)",
+          "type": "WWW:LINK-1.0-http--link"
+        }
+      ]
+    },
+    {
+      "roles": ["resourceProvider", "citation"],
+      "organization": "Integrated Marine Observing System (IMOS)",
+      "name": "",
+      "position": "",
+      "emails": ["imos@imos.org.au"],
+      "addresses": [
+        {
+          "deliveryPoint": ["Private bag 110"],
+          "city": "Hobart",
+          "administrativeArea": "Tasmania",
+          "postalCode": "7001",
+          "country": "Australia"
+        }
+      ],
+      "phones": [
+        {
+          "value": "61 3 6226 7549",
+          "roles": ["voice"]
+        },
+        {
+          "value": "61 3 6226 2107",
+          "roles": ["facsimile"]
+        }
+      ],
+      "links": [
+        {
+          "href": "http://www.imos.org.au/html",
+          "title": "Website of the Integrated Marine Observing System (IMOS)",
+          "type": "WWW:LINK-1.0-http--link"
+        }
+      ]
+    }
+  ],
   "languages" : [ {
     "code" : "eng",
     "name" : "English"

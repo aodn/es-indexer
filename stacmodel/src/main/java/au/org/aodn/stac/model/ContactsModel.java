@@ -15,8 +15,12 @@ public class ContactsModel {
     protected String position;
 
     // LinkedHashSet to retain order and remove duplicate address, the order is good for debug
-    protected LinkedHashSet<String> emails;
-    protected LinkedHashSet<ContactsAddressModel> addresses;
-    protected LinkedHashSet<ContactsPhoneModel> phones;
-    protected LinkedHashSet<LinkModel> links;
+    @Builder.Default
+    protected LinkedHashSet<String> emails = new LinkedHashSet<>();
+    @Builder.Default
+    protected LinkedHashSet<ContactsAddressModel> addresses = new LinkedHashSet<>();
+    @Builder.Default
+    protected LinkedHashSet<ContactsPhoneModel> phones = new LinkedHashSet<>();
+    @Builder.Default
+    protected LinkedHashSet<LinkModel> links = new LinkedHashSet<>();
 }

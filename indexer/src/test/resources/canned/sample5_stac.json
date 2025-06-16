@@ -93,6 +93,8 @@
   }, {
     "roles" : [ "resourceProvider", "citation" ],
     "organization" : "Integrated Marine Observing System (IMOS)",
+    "name" : "",
+    "position" : "",
     "emails" : [ "imos@imos.org.au" ],
     "addresses" : [ {
       "deliveryPoint" : [ "Private Bag 110" ],

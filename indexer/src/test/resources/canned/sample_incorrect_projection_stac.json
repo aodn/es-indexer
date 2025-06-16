@@ -81,98 +81,124 @@
     "parameter_vocabs" : [ ],
     "organisation_vocabs" : [ ]
   },
-  "contacts" : [ {
-    "roles" : [ "author", "about" ],
-    "organization" : "Institute for Marine and Antarctic Studies (IMAS), University of Tasmania (UTAS)",
-    "name" : "Asimus, Jeremy",
-    "position" : "",
-    "emails" : [ "jeremy.asimus@utas.edu.au" ],
-    "addresses" : [ {
-      "deliveryPoint" : null,
-      "city" : "Hobart",
-      "country" : "Australia",
-      "postalCode" : "7001",
-      "administrativeArea" : "TAS"
-    } ],
-    "phones" : [ ],
-    "links" : [ {
-      "href" : "https://orcid.org/0000-0002-6495-5813",
-      "type" : "WWW:LINK-1.0-http--link",
-      "title" : "ORCID ID"
-    } ]
-  }, {
-    "roles" : [ "distributor", "metadata" ],
-    "organization" : "IMAS Data Manager",
-    "name" : "",
-    "position" : "Data Officer",
-    "emails" : [ "IMAS.DataManager@utas.edu.au" ],
-    "addresses" : [ {
-      "deliveryPoint" : [ "Institute for Marine and Antarctic Studies", "Private Bag 129" ],
-      "city" : "Hobart",
-      "country" : "Australia",
-      "postalCode" : "7001",
-      "administrativeArea" : "Tasmania"
-    } ],
-    "phones" : [ ],
-    "links" : [ {
-      "href" : "https://imas.utas.edu.au",
-      "type" : "WWW:LINK-1.0-http--link",
-      "title" : "Institute for Marine and Antarctic Studies (IMAS) website"
-    } ]
-  }, {
-    "roles" : [ "resourceProvider", "citation" ],
-    "organization" : "Institute for Marine and Antarctic Studies (IMAS)",
-    "name" : null,
-    "position" : null,
-    "emails" : [ "IMAS.DataManager@utas.edu.au" ],
-    "addresses" : [ {
-      "deliveryPoint" : [ "Private Bag 129" ],
-      "city" : "Hobart",
-      "country" : "Australia",
-      "postalCode" : "7001",
-      "administrativeArea" : "Tasmania"
-    } ],
-    "phones" : null,
-    "links" : null
-  }, {
-    "roles" : [ "principalInvestigator", "citation" ],
-    "organization" : "Institute for Marine and Antarctic Studies (IMAS), University of Tasmania (UTAS)",
-    "name" : "Asimus, Jeremy",
-    "position" : "",
-    "emails" : [ "jeremy.asimus@utas.edu.au" ],
-    "addresses" : [ {
-      "deliveryPoint" : [ "Private Bag 129" ],
-      "city" : "Hobart",
-      "country" : "Australia",
-      "postalCode" : "7001",
-      "administrativeArea" : "TAS"
-    } ],
-    "phones" : [ ],
-    "links" : [ {
-      "href" : "https://orcid.org/0000-0002-6495-5813",
-      "type" : "WWW:LINK-1.0-http--link",
-      "title" : "ORCID ID"
-    } ]
-  }, {
-    "roles" : [ "coAuthor", "citation" ],
-    "organization" : "Institute for Marine and Antarctic Studies (IMAS), University of Tasmania (UTAS)",
-    "name" : "Halpin, Jacqueline",
-    "position" : "",
-    "emails" : [ "jacqueline.halpin@utas.edu.au" ],
-    "addresses" : [ {
-      "deliveryPoint" : [ "Private Bag 129" ],
-      "city" : "Hobart",
-      "country" : "Australia",
-      "postalCode" : "7001",
-      "administrativeArea" : "TAS"
-    } ],
-    "phones" : [ ],
-    "links" : [ {
-      "href" : "https://orcid.org/0000-0002-4992-8681",
-      "type" : "WWW:LINK-1.0-http--link",
-      "title" : "ORCID ID"
-    } ]
-  } ],
+  "contacts": [
+    {
+      "roles": ["author", "about"],
+      "organization": "Institute for Marine and Antarctic Studies (IMAS), University of Tasmania (UTAS)",
+      "name": "Asimus, Jeremy",
+      "position": "",
+      "emails": ["jeremy.asimus@utas.edu.au"],
+      "addresses": [
+        {
+          "city": "Hobart",
+          "administrativeArea": "TAS",
+          "postalCode": "7001",
+          "country": "Australia"
+        }
+      ],
+      "phones": [],
+      "links": [
+        {
+          "href": "https://orcid.org/0000-0002-6495-5813",
+          "title": "ORCID ID",
+          "type": "WWW:LINK-1.0-http--link"
+        }
+      ]
+    },
+    {
+      "roles": ["distributor", "metadata"],
+      "organization": "IMAS Data Manager",
+      "name": "",
+      "position": "Data Officer",
+      "emails": ["IMAS.DataManager@utas.edu.au"],
+      "addresses": [
+        {
+          "deliveryPoint": [
+            "Institute for Marine and Antarctic Studies",
+            "Private Bag 129"
+          ],
+          "city": "Hobart",
+          "administrativeArea": "Tasmania",
+          "postalCode": "7001",
+          "country": "Australia"
+        }
+      ],
+      "phones": [],
+      "links": [
+        {
+          "href": "https://imas.utas.edu.au",
+          "title": "Institute for Marine and Antarctic Studies (IMAS) website",
+          "type": "WWW:LINK-1.0-http--link"
+        }
+      ]
+    },
+    {
+      "roles": ["resourceProvider", "citation"],
+      "organization": "Institute for Marine and Antarctic Studies (IMAS)",
+      "name": "",
+      "position": "",
+      "emails": ["IMAS.DataManager@utas.edu.au"],
+      "addresses": [
+        {
+          "deliveryPoint": ["Private Bag 129"],
+          "city": "Hobart",
+          "administrativeArea": "Tasmania",
+          "postalCode": "7001",
+          "country": "Australia"
+        }
+      ],
+      "phones": [],
+      "links": []
+    },
+    {
+      "roles": ["principalInvestigator", "citation"],
+      "organization": "Institute for Marine and Antarctic Studies (IMAS), University of Tasmania (UTAS)",
+      "name": "Asimus, Jeremy",
+      "position": "",
+      "emails": ["jeremy.asimus@utas.edu.au"],
+      "addresses": [
+        {
+          "deliveryPoint": ["Private Bag 129"],
+          "city": "Hobart",
+          "administrativeArea": "TAS",
+          "postalCode": "7001",
+          "country": "Australia"
+        }
+      ],
+      "phones": [],
+      "links": [
+        {
+          "href": "https://orcid.org/0000-0002-6495-5813",
+          "title": "ORCID ID",
+          "type": "WWW:LINK-1.0-http--link"
+        }
+      ]
+    },
+    {
+      "roles": ["coAuthor", "citation"],
+      "organization": "Institute for Marine and Antarctic Studies (IMAS), University of Tasmania (UTAS)",
+      "name": "Halpin, Jacqueline",
+      "position": "",
+      "emails": ["jacqueline.halpin@utas.edu.au"],
+      "addresses": [
+        {
+          "deliveryPoint": ["Private Bag 129"],
+          "city": "Hobart",
+          "administrativeArea": "TAS",
+          "postalCode": "7001",
+          "country": "Australia"
+        }
+      ],
+      "phones": [],
+      "links": [
+        {
+          "href": "https://orcid.org/0000-0002-4992-8681",
+          "title": "ORCID ID",
+          "type": "WWW:LINK-1.0-http--link"
+        }
+      ]
+    }
+  ],
   "languages" : [ {
     "code" : "eng",
     "name" : "English"

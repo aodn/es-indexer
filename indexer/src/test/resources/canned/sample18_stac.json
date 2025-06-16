@@ -334,8 +334,8 @@
   }, {
     "roles" : [ "resourceProvider", "citation" ],
     "organization" : "Integrated Marine Observing System (IMOS)",
-    "name" : null,
-    "position" : null,
+    "name" : "",
+    "position" : "",
     "emails" : [ "imos@imos.org.au" ],
     "addresses" : [ {
       "deliveryPoint" : [ "University of Tasmania", "Private Bag 110" ],

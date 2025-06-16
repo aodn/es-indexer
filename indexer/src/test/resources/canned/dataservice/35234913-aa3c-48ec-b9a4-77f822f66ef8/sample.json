@@ -70,97 +70,131 @@
     "parameter_vocabs" : [ ],
     "organisation_vocabs" : [ ]
   },
-  "contacts" : [ {
-    "roles" : [ "pointOfContact", "about" ],
-    "organization" : "Integrated Marine Observing System (IMOS)",
-    "name" : "",
-    "position" : "Data Officer",
-    "emails" : [ "info@aodn.org.au" ],
-    "addresses" : [ {
-      "deliveryPoint" : [ "University of Tasmania", "Private Bag 110" ],
-      "city" : "Hobart",
-      "country" : "Australia",
-      "postalCode" : "7001",
-      "administrativeArea" : "Tasmania"
-    } ],
-    "phones" : [ {
-      "roles" : [ "voice" ],
-      "value" : "61 3 6226 7488"
-    }, {
-      "roles" : [ "facsimile" ],
-      "value" : "61 3 6226 2107"
-    } ],
-    "links" : [ {
-      "href" : "http://imos.org.au/aodn.html",
-      "type" : "WWW:LINK-1.0-http--link",
-      "title" : "Website of the Australian Ocean Data Network (AODN)"
-    } ]
-  }, {
-    "roles" : [ "processor", "about" ],
-    "organization" : "CSIRO Oceans and Atmosphere - Hobart",
-    "name" : "Cowley, Rebecca",
-    "position" : "",
-    "emails" : [ "Rebecca.Cowley@csiro.au" ],
-    "addresses" : [ {
-      "deliveryPoint" : [ "GPO Box 1538" ],
-      "city" : "Hobart",
-      "country" : "Australia",
-      "postalCode" : "7005",
-      "administrativeArea" : "Tasmania"
-    } ],
-    "phones" : [ ],
-    "links" : [ ]
-  }, {
-    "roles" : [ "distributor", "metadata" ],
-    "organization" : "Integrated Marine Observing System (IMOS)",
-    "name" : "",
-    "position" : "Data Officer",
-    "emails" : [ "info@aodn.org.au" ],
-    "addresses" : [ {
-      "deliveryPoint" : [ "University of Tasmania", "Private Bag 110" ],
-      "city" : "Hobart",
-      "country" : "Australia",
-      "postalCode" : "7001",
-      "administrativeArea" : "Tasmania"
-    } ],
-    "phones" : [ {
-      "roles" : [ "voice" ],
-      "value" : "61 3 6226 7488"
-    }, {
-      "roles" : [ "facsimile" ],
-      "value" : "61 3 6226 2107"
-    } ],
-    "links" : [ {
-      "href" : "http://imos.org.au/aodn.html",
-      "type" : "WWW:LINK-1.0-http--link",
-      "title" : "Website of the Australian Ocean Data Network (AODN)"
-    } ]
-  }, {
-    "roles" : [ "resourceProvider", "citation" ],
-    "organization" : "Integrated Marine Observing System (IMOS)",
-    "name" : null,
-    "position" : null,
-    "emails" : [ "imos@imos.org.au" ],
-    "addresses" : [ {
-      "deliveryPoint" : [ "Private Bag 110" ],
-      "city" : "Hobart",
-      "country" : "Australia",
-      "postalCode" : "7001",
-      "administrativeArea" : "Tasmania"
-    } ],
-    "phones" : [ {
-      "roles" : [ "voice" ],
-      "value" : "61 3 6226 7549"
-    }, {
-      "roles" : [ "facsimile" ],
-      "value" : "61 3 6226 2107"
-    } ],
-    "links" : [ {
-      "href" : "http://www.imos.org.au/html",
-      "type" : "WWW:LINK-1.0-http--link",
-      "title" : "Website of the Integrated Marine Observing System (IMOS)"
-    } ]
-  } ],
+  "contacts": [
+    {
+      "roles": ["pointOfContact", "about"],
+      "organization": "Integrated Marine Observing System (IMOS)",
+      "name": "",
+      "position": "Data Officer",
+      "emails": ["info@aodn.org.au"],
+      "addresses": [
+        {
+          "deliveryPoint": [
+            "University of Tasmania",
+            "Private Bag 110"
+          ],
+          "city": "Hobart",
+          "administrativeArea": "Tasmania",
+          "postalCode": "7001",
+          "country": "Australia"
+        }
+      ],
+      "phones": [
+        {
+          "value": "61 3 6226 7488",
+          "roles": ["voice"]
+        },
+        {
+          "value": "61 3 6226 2107",
+          "roles": ["facsimile"]
+        }
+      ],
+      "links": [
+        {
+          "href": "http://imos.org.au/aodn.html",
+          "title": "Website of the Australian Ocean Data Network (AODN)",
+          "type": "WWW:LINK-1.0-http--link"
+        }
+      ]
+    },
+    {
+      "roles": ["processor", "about"],
+      "organization": "CSIRO Oceans and Atmosphere - Hobart",
+      "name": "Cowley, Rebecca",
+      "position": "",
+      "emails": ["Rebecca.Cowley@csiro.au"],
+      "addresses": [
+        {
+          "deliveryPoint": ["GPO Box 1538"],
+          "city": "Hobart",
+          "administrativeArea": "Tasmania",
+          "postalCode": "7005",
+          "country": "Australia"
+        }
+      ],
+      "phones": [],
+      "links": []
+    },
+    {
+      "roles": ["distributor", "metadata"],
+      "organization": "Integrated Marine Observing System (IMOS)",
+      "name": "",
+      "position": "Data Officer",
+      "emails": ["info@aodn.org.au"],
+      "addresses": [
+        {
+          "deliveryPoint": [
+            "University of Tasmania",
+            "Private Bag 110"
+          ],
+          "city": "Hobart",
+          "administrativeArea": "Tasmania",
+          "postalCode": "7001",
+          "country": "Australia"
+        }
+      ],
+      "phones": [
+        {
+          "value": "61 3 6226 7488",
+          "roles": ["voice"]
+        },
+        {
+          "value": "61 3 6226 2107",
+          "roles": ["facsimile"]
+        }
+      ],
+      "links": [
+        {
+          "href": "http://imos.org.au/aodn.html",
+          "title": "Website of the Australian Ocean Data Network (AODN)",
+          "type": "WWW:LINK-1.0-http--link"
+        }
+      ]
+    },
+    {
+      "roles": ["resourceProvider", "citation"],
+      "organization": "Integrated Marine Observing System (IMOS)",
+      "name": "",
+      "position": "",
+      "emails": ["imos@imos.org.au"],
+      "addresses": [
+        {
+          "deliveryPoint": ["Private Bag 110"],
+          "city": "Hobart",
+          "administrativeArea": "Tasmania",
+          "postalCode": "7001",
+          "country": "Australia"
+        }
+      ],
+      "phones": [
+        {
+          "value": "61 3 6226 7549",
+          "roles": ["voice"]
+        },
+        {
+          "value": "61 3 6226 2107",
+          "roles": ["facsimile"]
+        }
+      ],
+      "links": [
+        {
+          "href": "http://www.imos.org.au/html",
+          "title": "Website of the Integrated Marine Observing System (IMOS)",
+          "type": "WWW:LINK-1.0-http--link"
+        }
+      ]
+    }
+  ],
   "languages" : [ {
     "code" : "eng",
     "name" : "English"

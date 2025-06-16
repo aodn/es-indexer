@@ -54,6 +54,17 @@ public class MapperUtils {
         return safeGet(() -> individual.getCIIndividual().getPositionName().getCharacterString().getValue().toString())
                 .orElse("");
     }
+
+    public static String mapContactsName(CIIndividualType2 individual) {
+        return safeGet(() -> individual.getName().getCharacterString().getValue().toString())
+                .orElse("");
+    }
+
+    public static String mapContactsPosition(CIIndividualType2 individual) {
+        return safeGet(() -> individual.getPositionName().getCharacterString().getValue().toString())
+                .orElse("");
+    }
+
     /**
      * Attribute will not be there if it is empty, this align with what Elastic handle null or empty field.
      * @param address
@@ -91,6 +102,10 @@ public class MapperUtils {
     }
 
     public static String mapContactsEmail(CharacterStringPropertyType electronicMailAddress) {
+        if (electronicMailAddress != null && "missing".equals(electronicMailAddress.getNilReason())) {
+            return null;
+        }
+
         Optional<String> email = safeGet(() -> electronicMailAddress.getCharacterString().getValue().toString());
 
         if (email.isPresent() && !email.get().trim().isEmpty()) {
@@ -350,35 +365,39 @@ public class MapperUtils {
      * @return A temp object to hold the contact info
      */
     public static Optional<Contacts> mapContactInfo(List<CIContactPropertyType2> contactsProperty) {
-        if (contactsProperty == null) {
-            return Optional.empty();
-        } else {
-            Contacts contacts = Contacts.builder().build();
+        Contacts contacts = Contacts.builder().build();
+        if (contactsProperty != null) {
             contactsProperty.forEach(contact -> {
 
-                // Add all address of organization
+                // Add addresses
                 safeGet(() -> contact.getCIContact().getAddress())
                         .ifPresent(addresses -> {
                             addresses.forEach(address -> {
                                 ContactsAddressModel addressModel = mapContactsAddress(address);
-                                if (addressModel.isEmpty()) {
-                                    return;
+                                if (!addressModel.isEmpty()) {
+                                    contacts.getAddresses().add(addressModel);
                                 }
-                                contacts.getAddresses().add(addressModel);
 
-                                safeGet(() -> address.getCIAddress().getElectronicMailAddress())
-                                        .ifPresent(electronicMailAddress ->
-                                            contacts.getEmails().addAll(
-                                                    electronicMailAddress
-                                                            .stream()
-                                                            .map(MapperUtils::mapContactsEmail)
-                                                            .filter(Objects::nonNull)
-                                                            .toList())
-                                );
                             });
                         });
 
-                // Add phone number of organization
+                // Add emails
+                safeGet(() -> contact.getCIContact().getAddress())
+                        .ifPresent(addresses -> {
+                            addresses.forEach(address -> {
+                                safeGet(() -> address.getCIAddress().getElectronicMailAddress())
+                                        .ifPresent(electronicMailAddress ->
+                                                contacts.getEmails().addAll(
+                                                        electronicMailAddress
+                                                                .stream()
+                                                                .map(MapperUtils::mapContactsEmail)
+                                                                .filter(Objects::nonNull)
+                                                                .toList())
+                                        );
+                            });
+                        });
+
+                // Add phone number
                 safeGet(() -> contact.getCIContact().getPhone())
                         .ifPresent(phone ->
                                 contacts.getPhones()
@@ -392,18 +411,29 @@ public class MapperUtils {
                                         .addAll(onlineResource.stream().map(MapperUtils::mapContactsOnlineResource).toList())
                         );
             });
-            return Optional.of(contacts);
         }
+        return Optional.of(contacts);
     }
 
     public static List<ContactsModel> mapContactsFromOrg(CIResponsibilityType2 ciResponsibility, CIOrganisationType2 organisation) {
+        Optional<Contacts> orgContacts = mapContactInfo(organisation.getContactInfo());
 
-        Optional<Contacts> org = mapContactInfo(organisation.getContactInfo());
+        if (organisation.getIndividual() == null || organisation.getIndividual().isEmpty()) {
+            ContactsModel orgContactsModel = ContactsModel.builder().build();
+            orgContactsModel.setRoles(MapperUtils.mapContactsRole(ciResponsibility));
+            orgContactsModel.setOrganization(organisation.getName().getCharacterString().getValue().toString());
+            orgContactsModel.setName("");
+            orgContactsModel.setPosition("");
 
-        if (safeGet(organisation::getIndividual).isEmpty()) {
-            return Collections.emptyList();
+            orgContacts.ifPresent(o -> {
+                orgContactsModel.setAddresses(o.getAddresses());
+                orgContactsModel.setEmails(o.getEmails());
+                orgContactsModel.setPhones(o.getPhones());
+                orgContactsModel.setLinks(o.getOnlineResources());
+            });
+            return List.of(orgContactsModel);
         }
-        return new ArrayList<>(organisation
+        return organisation
                 .getIndividual()
                 .stream()
                 .map(individual -> {
@@ -416,62 +446,57 @@ public class MapperUtils {
                             .ifPresentOrElse(contactsModel::setOrganization, () -> contactsModel.setOrganization(""));
 
                     Optional<Contacts> individualContacts = mapContactInfo(individual.getCIIndividual().getContactInfo());
-                    Contacts orgContacts = org.orElse(null);
 
-                    // Address
-                    contactsModel.setAddresses(individualContacts.map(Contacts::getAddresses)
-                            .filter(addresses -> !addresses.isEmpty())
-                            .orElse(orgContacts != null ? orgContacts.getAddresses() : null));
+                    // Always prefer individual contact info, fall back to org if individual is empty
+                    contactsModel.setAddresses(
+                            individualContacts.map(Contacts::getAddresses)
+                                    .filter(addresses -> !addresses.isEmpty())
+                                    .orElse(orgContacts.map(Contacts::getAddresses).orElse(new LinkedHashSet<>()))
+                    );
 
-                    // Email
-                    contactsModel.setEmails(individualContacts.map(Contacts::getEmails)
-                            .filter(emails -> !emails.isEmpty())
-                            .orElse(orgContacts != null ? orgContacts.getEmails() : null));
+                    contactsModel.setEmails(
+                            individualContacts.map(Contacts::getEmails)
+                                    .filter(emails -> !emails.isEmpty())
+                                    .orElse(orgContacts.map(Contacts::getEmails).orElse(new LinkedHashSet<>()))
+                    );
 
-                    // Phone
-                    contactsModel.setPhones(individualContacts.map(Contacts::getPhones)
-                            .filter(phones -> !phones.isEmpty())
-                            .orElse(orgContacts != null ? orgContacts.getPhones() : null));
+                    contactsModel.setPhones(
+                            individualContacts.map(Contacts::getPhones)
+                                    .filter(phones -> !phones.isEmpty())
+                                    .orElse(orgContacts.map(Contacts::getPhones).orElse(new LinkedHashSet<>()))
+                    );
 
-                    // Online Resources
-                    contactsModel.setLinks(individualContacts.map(Contacts::getOnlineResources)
-                            .filter(links -> !links.isEmpty())
-                            .orElse(orgContacts != null ? orgContacts.getOnlineResources() : null));
+                    contactsModel.setLinks(
+                            individualContacts.map(Contacts::getOnlineResources)
+                                    .filter(links -> !links.isEmpty())
+                                    .orElse(orgContacts.map(Contacts::getOnlineResources).orElse(new LinkedHashSet<>()))
+                    );
 
                     return contactsModel;
                 })
-                .toList());
+                .toList();
     }
 
     public static List<ContactsModel> mapOrgContacts(CIResponsibilityType2 ciResponsibility, AbstractCIPartyPropertyType2 party) {
         List<ContactsModel> results = new ArrayList<>();
-        if (party.getAbstractCIParty() != null
-                && party.getAbstractCIParty().getValue() != null
-                && party.getAbstractCIParty().getValue() instanceof CIOrganisationType2 organisation) {
-            Optional<Contacts> org = mapContactInfo(organisation.getContactInfo());
-
-            if (organisation.getIndividual() != null && !organisation.getIndividual().isEmpty()) {
+        if (party.getAbstractCIParty() != null && party.getAbstractCIParty().getValue() != null) {
+            if (party.getAbstractCIParty().getValue() instanceof CIOrganisationType2 organisation) {
                 results.addAll(mapContactsFromOrg(ciResponsibility, organisation));
-            } else {
-                ContactsModel orgContactsModel = ContactsModel.builder().build();
-                orgContactsModel.setRoles(MapperUtils.mapContactsRole(ciResponsibility));
-                orgContactsModel.setOrganization(organisation.getName().getCharacterString().getValue().toString());
+            } else if (party.getAbstractCIParty().getValue() instanceof CIIndividualType2 individual) {
+                ContactsModel indvContactsModel = ContactsModel.builder().build();
+                indvContactsModel.setName(mapContactsName(individual));
+                indvContactsModel.setPosition(mapContactsPosition(individual));
+                indvContactsModel.setRoles(mapContactsRole(ciResponsibility));
+                indvContactsModel.setOrganization("");
+                Optional<Contacts> indvContactInfo = mapContactInfo(individual.getContactInfo());
 
-                org.ifPresent(o -> {
-                    if (!o.getAddresses().isEmpty()) {
-                        orgContactsModel.setAddresses(o.getAddresses());
-                    }
-                    if (!o.getEmails().isEmpty()) {
-                        orgContactsModel.setEmails(o.getEmails());
-                    }
-                    if (!o.getPhones().isEmpty()) {
-                        orgContactsModel.setPhones(o.getPhones());
-                    }
-                    if (!o.getOnlineResources().isEmpty()) {
-                        orgContactsModel.setLinks(o.getOnlineResources());
-                    }
+                indvContactInfo.ifPresent(i -> {
+                    indvContactsModel.setAddresses(i.getAddresses());
+                    indvContactsModel.setEmails(i.getEmails());
+                    indvContactsModel.setPhones(i.getPhones());
+                    indvContactsModel.setLinks(i.getOnlineResources());
                 });
-                results.add(orgContactsModel);
+                results.add(indvContactsModel);
             }
         }
         return results;

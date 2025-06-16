@@ -3687,7 +3687,7 @@
       "organization": "CSIRO Oceans & Atmosphere - Hobart",
       "name": "data-requests-hf@csiro.au,",
       "position": "Data Requests - Information & Data Centre",
-      "emails": [],
+      "emails": ["data-requests-hf@csiro.au"],
       "addresses": [
         {
           "deliveryPoint": [
@@ -3750,7 +3750,7 @@
       "organization": "CSIRO Oceans & Atmosphere - Hobart",
       "name": "CSIRO O&A, Information & Data Centre",
       "position": "Data Requests",
-      "emails": [],
+      "emails": ["data-requests-hf@csiro.au"],
       "addresses": [
         {
           "deliveryPoint": [

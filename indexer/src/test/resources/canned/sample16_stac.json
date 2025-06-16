@@ -39,79 +39,106 @@
     "parameter_vocabs" : [ ],
     "organisation_vocabs" : [ ]
   },
-  "contacts" : [ {
-    "roles" : [ "pointOfContact", "about" ],
-    "organization" : "Australian Defence Force Academy (ADFA)",
-    "name" : "Robertson, Robin, Dr",
-    "position" : "",
-    "emails" : [ "r.robertson@adfa.edu.au" ],
-    "addresses" : [ {
-      "deliveryPoint" : [ "School of Physical, Environmental and Mathematical Science, Australian Defence Force Academy" ],
-      "city" : "Canberra",
-      "country" : "Australia",
-      "postalCode" : "2600",
-      "administrativeArea" : "ACT"
-    } ],
-    "phones" : [ {
-      "roles" : [ "voice" ],
-      "value" : "61 2 6268 8289"
-    }, {
-      "roles" : [ "facsimile" ],
-      "value" : "61 2 6268 8017"
-    } ],
-    "links" : [ {
-      "href" : "http://www.pems.adfa.edu.au/~s3162789/",
-      "type" : "WWW:LINK-1.0-http--link"
-    } ]
-  }, {
-    "roles" : [ "pointOfContact", "metadata" ],
-    "organization" : "Australian Defence Force Academy (ADFA)",
-    "name" : "Robertson, Robin, Dr",
-    "position" : "",
-    "emails" : [ ],
-    "addresses" : [ ],
-    "phones" : [ ],
-    "links" : [ ]
-  }, {
-    "roles" : [ "principalInvestigator", "citation" ],
-    "organization" : "Australian Defence Force Academy (ADFA)",
-    "name" : "Holloway, Peter",
-    "position" : "",
-    "emails" : [ ],
-    "addresses" : [ ],
-    "phones" : [ ],
-    "links" : [ {
-      "href" : "http://www.marine.csiro.au/~cra171/holloway/MFR54pp585-6.pdf",
-      "type" : "WWW:LINK-1.0-http--link"
-    } ]
-  }, {
-    "roles" : [ "collaborator", "citation" ],
-    "organization" : "Australian Defence Force Academy (ADFA)",
-    "name" : "Symonds, Graham",
-    "position" : "",
-    "emails" : [ ],
-    "addresses" : [ ],
-    "phones" : [ ],
-    "links" : [ ]
-  }, {
-    "roles" : [ "collaborator", "citation" ],
-    "organization" : "Australian Defence Force Academy (ADFA)",
-    "name" : "Nunes-Vaz, Rick",
-    "position" : "",
-    "emails" : [ ],
-    "addresses" : [ ],
-    "phones" : [ ],
-    "links" : [ ]
-  }, {
-    "roles" : [ "collaborator", "citation" ],
-    "organization" : "Australian Defence Force Academy (ADFA)",
-    "name" : "Jeffrey, Marcus",
-    "position" : "",
-    "emails" : [ ],
-    "addresses" : [ ],
-    "phones" : [ ],
-    "links" : [ ]
-  } ],
+
+  "contacts": [
+    {
+      "roles": ["pointOfContact", "about"],
+      "organization": "Australian Defence Force Academy (ADFA)",
+      "name": "Robertson, Robin, Dr",
+      "position": "",
+      "emails": ["r.robertson@adfa.edu.au"],
+      "addresses": [
+        {
+          "deliveryPoint": ["School of Physical, Environmental and Mathematical Science, Australian Defence Force Academy"],
+          "city": "Canberra",
+          "administrativeArea": "ACT",
+          "postalCode": "2600",
+          "country": "Australia"
+        }
+      ],
+      "phones": [
+        {
+          "value": "61 2 6268 8289",
+          "roles": ["voice"]
+        },
+        {
+          "value": "61 2 6268 8017",
+          "roles": ["facsimile"]
+        }
+      ],
+      "links": [
+        {
+          "href": "http://www.pems.adfa.edu.au/~s3162789/",
+          "type": "WWW:LINK-1.0-http--link"
+        }
+      ]
+    },
+    {
+      "roles": ["processor", "metadata"],
+      "organization": "",
+      "name": "",
+      "position": "BlueNet Data Facilitator",
+      "emails": ["info@bluenet.org.au"],
+      "addresses": [],
+      "phones": [],
+      "links": []
+    },
+    {
+      "roles": ["pointOfContact", "metadata"],
+      "organization": "Australian Defence Force Academy (ADFA)",
+      "name": "Robertson, Robin, Dr",
+      "position": "",
+      "emails": ["r.robertson@adfa.edu.au"],
+      "addresses": [],
+      "phones": [],
+      "links": []
+    },
+    {
+      "roles": ["principalInvestigator", "citation"],
+      "organization": "Australian Defence Force Academy (ADFA)",
+      "name": "Holloway, Peter",
+      "position": "",
+      "emails": [],
+      "addresses": [],
+      "phones": [],
+      "links": [
+        {
+          "href": "http://www.marine.csiro.au/~cra171/holloway/MFR54pp585-6.pdf",
+          "type": "WWW:LINK-1.0-http--link"
+        }
+      ]
+    },
+    {
+      "roles": ["collaborator", "citation"],
+      "organization": "Australian Defence Force Academy (ADFA)",
+      "name": "Symonds, Graham",
+      "position": "",
+      "emails": ["Graham.Symonds@csiro.au"],
+      "addresses": [],
+      "phones": [],
+      "links": []
+    },
+    {
+      "roles": ["collaborator", "citation"],
+      "organization": "Australian Defence Force Academy (ADFA)",
+      "name": "Nunes-Vaz, Rick",
+      "position": "",
+      "emails": ["Rick.Nunes-Vaz@dsto.defence.gov.au"],
+      "addresses": [],
+      "phones": [],
+      "links": []
+    },
+    {
+      "roles": ["collaborator", "citation"],
+      "organization": "Australian Defence Force Academy (ADFA)",
+      "name": "Jeffrey, Marcus",
+      "position": "",
+      "emails": [],
+      "addresses": [],
+      "phones": [],
+      "links": []
+    }
+  ],
   "languages" : [ {
     "code" : "eng",
     "name" : "English"
