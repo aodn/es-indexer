@@ -102,10 +102,6 @@ public class MapperUtils {
     }
 
     public static String mapContactsEmail(CharacterStringPropertyType electronicMailAddress) {
-        if (electronicMailAddress != null && "missing".equals(electronicMailAddress.getNilReason())) {
-            return null;
-        }
-
         Optional<String> email = safeGet(() -> electronicMailAddress.getCharacterString().getValue().toString());
 
         if (email.isPresent() && !email.get().trim().isEmpty()) {
@@ -477,26 +473,31 @@ public class MapperUtils {
                 .toList();
     }
 
-    public static List<ContactsModel> mapOrgContacts(CIResponsibilityType2 ciResponsibility, AbstractCIPartyPropertyType2 party) {
+    public static List<ContactsModel> mapContactsFromIndividual(CIResponsibilityType2 ciResponsibility, CIIndividualType2 individual) {
+        ContactsModel indvContactsModel = ContactsModel.builder().build();
+        indvContactsModel.setName(mapContactsName(individual));
+        indvContactsModel.setPosition(mapContactsPosition(individual));
+        indvContactsModel.setRoles(mapContactsRole(ciResponsibility));
+        indvContactsModel.setOrganization("");
+        Optional<Contacts> indvContactInfo = mapContactInfo(individual.getContactInfo());
+
+        indvContactInfo.ifPresent(i -> {
+            indvContactsModel.setAddresses(i.getAddresses());
+            indvContactsModel.setEmails(i.getEmails());
+            indvContactsModel.setPhones(i.getPhones());
+            indvContactsModel.setLinks(i.getOnlineResources());
+        });
+
+        return List.of(indvContactsModel);
+    }
+
+    public static List<ContactsModel> mapPartyContacts(CIResponsibilityType2 ciResponsibility, AbstractCIPartyPropertyType2 party) {
         List<ContactsModel> results = new ArrayList<>();
         if (party.getAbstractCIParty() != null && party.getAbstractCIParty().getValue() != null) {
             if (party.getAbstractCIParty().getValue() instanceof CIOrganisationType2 organisation) {
                 results.addAll(mapContactsFromOrg(ciResponsibility, organisation));
             } else if (party.getAbstractCIParty().getValue() instanceof CIIndividualType2 individual) {
-                ContactsModel indvContactsModel = ContactsModel.builder().build();
-                indvContactsModel.setName(mapContactsName(individual));
-                indvContactsModel.setPosition(mapContactsPosition(individual));
-                indvContactsModel.setRoles(mapContactsRole(ciResponsibility));
-                indvContactsModel.setOrganization("");
-                Optional<Contacts> indvContactInfo = mapContactInfo(individual.getContactInfo());
-
-                indvContactInfo.ifPresent(i -> {
-                    indvContactsModel.setAddresses(i.getAddresses());
-                    indvContactsModel.setEmails(i.getEmails());
-                    indvContactsModel.setPhones(i.getPhones());
-                    indvContactsModel.setLinks(i.getOnlineResources());
-                });
-                results.add(indvContactsModel);
+                results.addAll(mapContactsFromIndividual(ciResponsibility, individual));
             }
         }
         return results;
