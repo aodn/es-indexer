@@ -194,19 +194,25 @@ public class IndexerController {
 
         Callable<Void> task = () -> {
             try {
-                MetadataEntity metadata = dataAccessService.getMetadataByUuid(uuid);
-                List<TemporalExtent> temporalExtents = dataAccessService.getTemporalExtentOf(uuid);
-
-                if (metadata != null && !temporalExtents.isEmpty()) {
-                    // Only first block works from dataservice api
-                    LocalDate startDate = start == null ? temporalExtents.get(0).getLocalStartDate() : LocalDate.parse(start);
-                    LocalDate endDate = end == null ? temporalExtents.get(0).getLocalEndDate() : LocalDate.parse(end);
-                    log.info("Index cloud optimized data with UUID: {} from {} to {}", uuid, startDate, endDate);
-
-                    indexCloudOptimizedData.indexCloudOptimizedData(metadata, startDate, endDate, callback);
+                // Verify if data access service is up or not, it may be down during processing but we have retry
+                DataAccessService.HealthStatus status = dataAccessService.getHealthStatus();
+                if(status != DataAccessService.HealthStatus.UP) {
+                    callback.onComplete(String.format("Data Access Service status %s is not UP, please retry later", status.toString()));
                 }
                 else {
-                    log.info("Index cloud optimized data : {} not found", uuid);
+                    MetadataEntity metadata = dataAccessService.getMetadataByUuid(uuid);
+                    List<TemporalExtent> temporalExtents = dataAccessService.getTemporalExtentOf(uuid);
+
+                    if (metadata != null && !temporalExtents.isEmpty()) {
+                        // Only first block works from dataservice api
+                        LocalDate startDate = start == null ? temporalExtents.get(0).getLocalStartDate() : LocalDate.parse(start);
+                        LocalDate endDate = end == null ? temporalExtents.get(0).getLocalEndDate() : LocalDate.parse(end);
+                        log.info("Index cloud optimized data with UUID: {} from {} to {}", uuid, startDate, endDate);
+
+                        indexCloudOptimizedData.indexCloudOptimizedData(metadata, startDate, endDate, callback);
+                    } else {
+                        log.info("Index cloud optimized data : {} not found", uuid);
+                    }
                 }
             }
             catch (Exception ioe) {

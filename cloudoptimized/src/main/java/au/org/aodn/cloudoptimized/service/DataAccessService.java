@@ -13,6 +13,27 @@ import java.util.Optional;
 
 public interface DataAccessService {
 
+    enum HealthStatus {
+        STARTING("STARTING"),
+        UP("UP"),
+        UNKNOWN("UNKNOWN");
+
+        private final String status;
+
+        HealthStatus(String status) {
+            this.status = status;
+        }
+
+        public static HealthStatus fromValue(String status) {
+            for (HealthStatus s : HealthStatus.values()) {
+                if(s.status.equalsIgnoreCase(status)) {
+                    return s;
+                }
+            }
+            return HealthStatus.UNKNOWN;
+        }
+    }
+
     default List<MetadataFields> getFields(MetadataEntity entity) {
         return entity.getDepth() != null ?
                 List.of(MetadataFields.TIME, MetadataFields.DEPTH, MetadataFields.LONGITUDE, MetadataFields.LATITUDE) :
@@ -25,4 +46,5 @@ public interface DataAccessService {
     Optional<String> getNotebookLink(String uuid);
     MetadataEntity getMetadataByUuid(String uuid);
     List<MetadataEntity> getAllMetadata();
+    HealthStatus getHealthStatus();
 }

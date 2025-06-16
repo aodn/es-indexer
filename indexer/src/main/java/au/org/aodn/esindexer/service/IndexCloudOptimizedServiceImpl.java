@@ -66,26 +66,34 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
 
     @Override
     public List<BulkResponse> indexAllCloudOptimizedData(IndexService.Callback callback) {
+
+        // Verify if data access service is up or not, it may be down during processing but we have retry
+        DataAccessService.HealthStatus status = dataAccessService.getHealthStatus();
         List<BulkResponse> results = new ArrayList<>();
-        elasticSearchIndexService.createIndexFromMappingJSONFile(AppConstants.DATASET_INDEX_MAPPING_JSON_FILE, indexName);
+        if(status != DataAccessService.HealthStatus.UP) {
+            callback.onComplete(String.format("Data Access Service status %s is not UP, please retry later", status.toString()));
+        }
+        else {
+            elasticSearchIndexService.createIndexFromMappingJSONFile(AppConstants.DATASET_INDEX_MAPPING_JSON_FILE, indexName);
 
-        List<MetadataEntity> entities = dataAccessService.getAllMetadata();
-        List<MetadataEntity> sorted = entities.stream()
-                .sorted(Comparator.comparing(MetadataEntity::getUuid))
-                .toList();
+            List<MetadataEntity> entities = dataAccessService.getAllMetadata();
+            List<MetadataEntity> sorted = entities.stream()
+                    .sorted(Comparator.comparing(MetadataEntity::getUuid))
+                    .toList();
 
-        for (MetadataEntity entity : sorted) {
-            List<TemporalExtent> temporalExtents = dataAccessService.getTemporalExtentOf(entity.getUuid());
-            if (!temporalExtents.isEmpty()) {
-                // Only first block works from data service api
-                LocalDate startDate = temporalExtents.get(0).getLocalStartDate();
-                LocalDate endDate = temporalExtents.get(0).getLocalEndDate();
+            for (MetadataEntity entity : sorted) {
+                List<TemporalExtent> temporalExtents = dataAccessService.getTemporalExtentOf(entity.getUuid());
+                if (!temporalExtents.isEmpty()) {
+                    // Only first block works from data service api
+                    LocalDate startDate = temporalExtents.get(0).getLocalStartDate();
+                    LocalDate endDate = temporalExtents.get(0).getLocalEndDate();
 
-                callback.onProgress(String.format("Indexing dataset with UUID: %s from %s to %s", entity.getUuid(), startDate, endDate));
-                try {
-                    results.addAll(indexCloudOptimizedData(entity, startDate, endDate, callback));
-                } catch (IOException ioe) {
-                    // Do nothing
+                    callback.onProgress(String.format("Indexing dataset with UUID: %s from %s to %s", entity.getUuid(), startDate, endDate));
+                    try {
+                        results.addAll(indexCloudOptimizedData(entity, startDate, endDate, callback));
+                    } catch (IOException ioe) {
+                        // Do nothing
+                    }
                 }
             }
         }

@@ -140,6 +140,27 @@ public class DataAccessServiceImpl implements DataAccessService {
     }
 
     @Override
+    public HealthStatus getHealthStatus() {
+        HttpEntity<String> request = getRequestEntity(List.of(MediaType.APPLICATION_JSON));
+        String url = UriComponentsBuilder
+                .fromUriString(getDataAccessEndpoint() + "/health")
+                .toUriString();
+
+        ResponseEntity<Map<String, String>> responseEntity = restTemplate.exchange(
+                url,
+                HttpMethod.GET,
+                request,
+                new ParameterizedTypeReference<>() {
+                },
+                Map.of()
+        );
+
+        return (responseEntity.getStatusCode().is2xxSuccessful() && responseEntity.getBody() != null) ?
+            HealthStatus.fromValue(responseEntity.getBody().get("status")) :
+            HealthStatus.UNKNOWN;
+    }
+
+    @Override
     public Optional<String> getNotebookLink(String uuid) {
         try {
             HttpEntity<String> request = getRequestEntity(List.of(MediaType.APPLICATION_JSON));
