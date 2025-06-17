@@ -19,10 +19,7 @@ import org.springframework.context.annotation.ScopedProxyMode;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Slf4j
 @Scope(proxyMode = ScopedProxyMode.TARGET_CLASS)
@@ -76,23 +73,28 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
         else {
             elasticSearchIndexService.createIndexFromMappingJSONFile(AppConstants.DATASET_INDEX_MAPPING_JSON_FILE, indexName);
 
-            List<MetadataEntity> entities = dataAccessService.getAllMetadata();
-            List<MetadataEntity> sorted = entities.stream()
-                    .sorted(Comparator.comparing(MetadataEntity::getUuid))
+            Map<String, Map<String, MetadataEntity>> entities = dataAccessService.getAllMetadata();
+            List<String> sorted = entities.keySet().stream()
+                    .sorted()
                     .toList();
 
-            for (MetadataEntity entity : sorted) {
-                List<TemporalExtent> temporalExtents = dataAccessService.getTemporalExtentOf(entity.getUuid());
-                if (!temporalExtents.isEmpty()) {
-                    // Only first block works from data service api
-                    LocalDate startDate = temporalExtents.get(0).getLocalStartDate();
-                    LocalDate endDate = temporalExtents.get(0).getLocalEndDate();
+            for (String uuid : sorted) {
+                Map<String, MetadataEntity> entry = entities.get(uuid);
 
-                    callback.onProgress(String.format("Indexing dataset with UUID: %s from %s to %s", entity.getUuid(), startDate, endDate));
-                    try {
-                        results.addAll(indexCloudOptimizedData(entity, startDate, endDate, callback));
-                    } catch (IOException ioe) {
-                        // Do nothing
+                for(String key: entry.keySet()) {
+                    List<TemporalExtent> temporalExtents = dataAccessService.getTemporalExtentOf(uuid, key);
+                    if (!temporalExtents.isEmpty()) {
+                        // Only first block works from data service api
+                        LocalDate startDate = temporalExtents.get(0).getLocalStartDate();
+                        LocalDate endDate = temporalExtents.get(0).getLocalEndDate();
+
+                        callback.onProgress(String.format("Indexing dataset with UUID: %s %s from %s to %s", uuid, key, startDate, endDate));
+                        try {
+                            results.addAll(indexCloudOptimizedData(entry.get(key), startDate, endDate, callback));
+                        }
+                        catch (IOException ioe) {
+                            // Do nothing
+                        }
                     }
                 }
             }
@@ -116,17 +118,17 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
 
         List<BulkResponse> responses = new ArrayList<>();
 
-        callback.onProgress("Indexing cloud optimized data for dataset: " + metadata.getUuid());
+        callback.onProgress("Indexing cloud optimized data for dataset: " + metadata.getUuid() + " " + metadata.getDname());
         callback.onProgress("Temporal extent: " + startDate + " - " + endDate);
 
         Iterable<FeatureCollectionGeoJson> datasetIterator = new DatasetProvider(
                 metadata.getUuid(),
+                metadata.getDname(),
                 startDate,
                 endDate,
                 dataAccessService,
                 dataAccessService.getFields(metadata)
-        )
-                .getIterator();
+        ).getIterator();
 
         BulkRequestProcessor<FeatureCollectionGeoJson> bulkRequestProcessor = new BulkRequestProcessor<>(
                 indexName, (item) -> Optional.empty(), self, callback
@@ -138,33 +140,23 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
                     continue;
                 }
                 var featureCollections = avoidTooManyNestedObjects(featureCollection);
-                if (featureCollections.isEmpty()) {
-                    continue;
-                }
+                if (!featureCollections.isEmpty()) {
+                    for (int i = 0; i < featureCollections.size(); i++) {
+                        // No need to process if there is no features
+                        if(!featureCollections.get(i).getFeatures().isEmpty()) {
+                            String id = featureCollections.get(i).getProperties().get(GeoJsonProperty.COLLECTION.getValue()).toString();
+                            String key = featureCollections.get(i).getProperties().get(GeoJsonProperty.KEY.getValue()).toString();
+                            String date = featureCollections.get(i).getProperties().get(GeoJsonProperty.DATE.getValue()).toString();
 
-                if (featureCollections.size() == 1) {
-                    Object collection = featureCollections.get(0).getProperties().get(GeoJsonProperty.COLLECTION.getValue());
-                    Object date = featureCollections.get(0).getProperties().get(GeoJsonProperty.DATE.getValue());
-
-                    if(collection != null && date != null) {
-                        bulkRequestProcessor.processItem(
-                                        String.format("%s|%s", collection, date),
-                                        featureCollections.get(0), true)
-                                .ifPresent(responses::add);
-                    }
-                } else {
-                    for (var i = 0; i < featureCollections.size(); i++) {
-                        bulkRequestProcessor.processItem(
-                                        featureCollections.get(i).getProperties().get(GeoJsonProperty.COLLECTION.getValue()).toString()
-                                                + "|"
-                                                + featureCollections.get(i).getProperties().get(GeoJsonProperty.DATE.getValue()).toString()
-                                                + "(" + i + ")",
-                                        featureCollections.get(i), true)
-                                .ifPresent(responses::add);
+                            bulkRequestProcessor.processItem(
+                                    String.format("%s|%s|%s|%d", id, key, date, i),
+                                    featureCollections.get(i),
+                                    true
+                            ).ifPresent(responses::add);
+                            callback.onProgress("Processed data in year month: " + featureCollection.getProperties().get(GeoJsonProperty.DATE.getValue()));
+                        }
                     }
                 }
-
-                callback.onProgress("Processed data in year month: " + featureCollection.getProperties().get(GeoJsonProperty.DATE.getValue()));
             }
 
             bulkRequestProcessor

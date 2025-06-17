@@ -23,6 +23,7 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.*;
 
 @RestController
@@ -200,18 +201,23 @@ public class IndexerController {
                     callback.onComplete(String.format("Data Access Service status %s is not UP, please retry later", status.toString()));
                 }
                 else {
-                    MetadataEntity metadata = dataAccessService.getMetadataByUuid(uuid);
-                    List<TemporalExtent> temporalExtents = dataAccessService.getTemporalExtentOf(uuid);
+                    Map<String, MetadataEntity> metadata = dataAccessService.getMetadataByUuid(uuid);
 
-                    if (metadata != null && !temporalExtents.isEmpty()) {
-                        // Only first block works from dataservice api
-                        LocalDate startDate = start == null ? temporalExtents.get(0).getLocalStartDate() : LocalDate.parse(start);
-                        LocalDate endDate = end == null ? temporalExtents.get(0).getLocalEndDate() : LocalDate.parse(end);
-                        log.info("Index cloud optimized data with UUID: {} from {} to {}", uuid, startDate, endDate);
+                    if (metadata != null) {
+                        for (String key : metadata.keySet()) {
+                            List<TemporalExtent> temporalExtents = dataAccessService.getTemporalExtentOf(uuid, key);
 
-                        indexCloudOptimizedData.indexCloudOptimizedData(metadata, startDate, endDate, callback);
-                    } else {
-                        log.info("Index cloud optimized data : {} not found", uuid);
+                            if (!temporalExtents.isEmpty()) {
+                                // Only first block works from dataservice api
+                                LocalDate startDate = start == null ? temporalExtents.get(0).getLocalStartDate() : LocalDate.parse(start);
+                                LocalDate endDate = end == null ? temporalExtents.get(0).getLocalEndDate() : LocalDate.parse(end);
+                                log.info("Index cloud optimized data with UUID: {} from {} to {}", uuid, startDate, endDate);
+
+                                indexCloudOptimizedData.indexCloudOptimizedData(metadata.get(key), startDate, endDate, callback);
+                            } else {
+                                log.info("Index cloud optimized data : {} not found", uuid);
+                            }
+                        }
                     }
                 }
             }

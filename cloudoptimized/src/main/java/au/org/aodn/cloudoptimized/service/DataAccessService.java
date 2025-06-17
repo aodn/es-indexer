@@ -41,10 +41,16 @@ public interface DataAccessService {
     }
 
     void aggregateData(Map<CloudOptimizedEntry, Long> merge, List<? extends CloudOptimizedEntry> data);
-    FeatureCollectionGeoJson getIndexingDatasetByMonth(String uuid, YearMonth yearMonth, List<MetadataFields> fields);
-    List<TemporalExtent> getTemporalExtentOf(String uuid);
+    FeatureCollectionGeoJson getIndexingDatasetByMonth(String uuid, String key, YearMonth yearMonth, List<MetadataFields> fields);
+    /**
+     * Get spatial extents value from the cloud optimize data
+     * @param uuid - UUID of dataset
+     * @param key - UUID can map to multiple dataset, you need a key to find your target
+     * @return - The TemporalExtent value
+     */
+    List<TemporalExtent> getTemporalExtentOf(String uuid, String key);
     Optional<String> getNotebookLink(String uuid);
-    MetadataEntity getMetadataByUuid(String uuid);
-    List<MetadataEntity> getAllMetadata();
+    Map<String, MetadataEntity> getMetadataByUuid(String uuid);
+    Map<String, Map<String, MetadataEntity>> getAllMetadata();
     HealthStatus getHealthStatus();
 }

@@ -8,7 +8,7 @@ public enum GeoJsonProperty {
     COLLECTION("collection"),
     DATE("date"),
     COUNT("count"),
-    ;
+    KEY("key");
 
     private final String value;
 

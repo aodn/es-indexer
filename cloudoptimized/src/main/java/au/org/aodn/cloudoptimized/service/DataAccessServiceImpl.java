@@ -52,7 +52,7 @@ public class DataAccessServiceImpl implements DataAccessService {
         return new HttpEntity<>(headers);
     }
 
-    protected FeatureCollectionGeoJson toFeatureCollection(String uuid, Map<? extends CloudOptimizedEntry, Long> data) {
+    protected FeatureCollectionGeoJson toFeatureCollection(String uuid, String key, Map<? extends CloudOptimizedEntry, Long> data) {
 
         // Because the data provider provides data by month, so assume all the dates
         // in data here are all the same. So just get the first date to set
@@ -73,10 +73,13 @@ public class DataAccessServiceImpl implements DataAccessService {
                 }
             }
         }
-        var featureCollection = new FeatureCollectionGeoJson();
+
+        FeatureCollectionGeoJson featureCollection = new FeatureCollectionGeoJson();
         featureCollection.setFeatures(features);
         featureCollection.addProperty(GeoJsonProperty.COLLECTION.getValue(), uuid);
+        featureCollection.addProperty(GeoJsonProperty.KEY.getValue(), key);
         featureCollection.addProperty(GeoJsonProperty.DATE.getValue(), dateToSet);
+
         return featureCollection;
     }
 
@@ -85,7 +88,7 @@ public class DataAccessServiceImpl implements DataAccessService {
     }
 
     @Override
-    public MetadataEntity getMetadataByUuid(String uuid) {
+    public Map<String, MetadataEntity> getMetadataByUuid(String uuid) {
 
         // Validate path argument
         if(isSafeId(uuid)) {
@@ -96,7 +99,7 @@ public class DataAccessServiceImpl implements DataAccessService {
                     .buildAndExpand(uuid)
                     .toUriString();
 
-            ResponseEntity<MetadataEntity> responseEntity = restTemplate.exchange(
+            ResponseEntity<Map<String, MetadataEntity>> responseEntity = restTemplate.exchange(
                     url,
                     HttpMethod.GET,
                     request,
@@ -118,13 +121,13 @@ public class DataAccessServiceImpl implements DataAccessService {
 
 
     @Override
-    public List<MetadataEntity> getAllMetadata() {
+    public Map<String, Map<String, MetadataEntity>> getAllMetadata() {
         HttpEntity<String> request = getRequestEntity(List.of(MediaType.APPLICATION_JSON));
         String url = UriComponentsBuilder
                 .fromUriString(getDataAccessEndpoint() + "/metadata")
                 .toUriString();
 
-        ResponseEntity<List<MetadataEntity>> responseEntity = restTemplate.exchange(
+        ResponseEntity<Map<String, Map<String, MetadataEntity>>> responseEntity = restTemplate.exchange(
                 url,
                 HttpMethod.GET,
                 request,
@@ -135,7 +138,7 @@ public class DataAccessServiceImpl implements DataAccessService {
         if (responseEntity.getStatusCode().is2xxSuccessful()) {
             return responseEntity.getBody();
         } else {
-            return List.of();
+            return Map.of();
         }
     }
 
@@ -191,7 +194,7 @@ public class DataAccessServiceImpl implements DataAccessService {
     }
 
     @Override
-    public FeatureCollectionGeoJson getIndexingDatasetByMonth(final String uuid, final YearMonth yearMonth, final List<MetadataFields> fields) {
+    public FeatureCollectionGeoJson getIndexingDatasetByMonth(final String uuid, String key, final YearMonth yearMonth, final List<MetadataFields> fields) {
 
         var startDate = yearMonth.atDay(1);
         var endDate = yearMonth.atEndOfMonth();
@@ -205,12 +208,12 @@ public class DataAccessServiceImpl implements DataAccessService {
             Map<String, Object> params = new HashMap<>();
             params.put("uuid", uuid);
 
-            String url = UriComponentsBuilder.fromUriString(getDataAccessEndpoint() + "/data/{uuid}")
+            String url = UriComponentsBuilder.fromUriString(getDataAccessEndpoint() + "/data/{uuid}/{key}")
                     .queryParam("f", "sse/json")
                     .queryParam("start_date", startDate)
                     .queryParam("end_date", endDate)
                     .queryParam("columns", fields)
-                    .buildAndExpand(uuid)
+                    .buildAndExpand(uuid, key)
                     .toUriString();
 
             final Map<CloudOptimizedEntry, Long> allEntries = new HashMap<>();
@@ -273,7 +276,7 @@ public class DataAccessServiceImpl implements DataAccessService {
             countDownLatch.await();
 
             log.info("Aggregate data for {}", yearMonth);
-            return toFeatureCollection(uuid, allEntries);
+            return toFeatureCollection(uuid, key, allEntries);
 
         } catch (Exception e) {
             // Do nothing just return empty list
@@ -284,16 +287,13 @@ public class DataAccessServiceImpl implements DataAccessService {
     }
 
     @Override
-    public List<TemporalExtent> getTemporalExtentOf(String uuid) {
+    public List<TemporalExtent> getTemporalExtentOf(String uuid, String key) {
         if(isSafeId(uuid)) {
             try {
                 HttpEntity<String> request = getRequestEntity(List.of(MediaType.APPLICATION_JSON));
 
-                Map<String, Object> params = new HashMap<>();
-                params.put("uuid", uuid);
-
-                String url = UriComponentsBuilder.fromUriString(getDataAccessEndpoint() + "/data/{uuid}/temporal_extent")
-                        .buildAndExpand(uuid)
+                String url = UriComponentsBuilder.fromUriString(getDataAccessEndpoint() + "/data/{uuid}/{key}/temporal_extent")
+                        .buildAndExpand(uuid, key)
                         .toUriString();
 
                 ResponseEntity<List<TemporalExtent>> responseEntity = restTemplate.exchange(
@@ -302,7 +302,7 @@ public class DataAccessServiceImpl implements DataAccessService {
                         request,
                         new ParameterizedTypeReference<>() {
                         },
-                        params
+                        Map.of()
                 );
 
                 return responseEntity.getBody();

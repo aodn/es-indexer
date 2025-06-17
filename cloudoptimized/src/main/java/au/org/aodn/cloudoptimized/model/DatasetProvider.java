@@ -17,6 +17,7 @@ public class DatasetProvider {
 
     protected Logger log = LoggerFactory.getLogger(DatasetProvider.class);
     protected final String uuid;
+    protected final String key;
     protected YearMonth startYearMonth;
     protected final YearMonth endYearMonth;
     protected final DataAccessService dataAccessService;
@@ -34,12 +35,14 @@ public class DatasetProvider {
 
     public DatasetProvider(
             String uuid,
+            String key,
             LocalDate startDate,
             LocalDate endDate,
             DataAccessService dataAccessService,
             List<MetadataFields> columns
     ) {
         this.uuid = uuid;
+        this.key = key;
         this.dataAccessService = dataAccessService;
         this.startYearMonth = YearMonth.from(startDate);
         this.endYearMonth = YearMonth.from(endDate);
@@ -120,6 +123,7 @@ public class DatasetProvider {
         log.info("Start querying data for year month: {}", yearMonth);
         var featureCollection =  dataAccessService.getIndexingDatasetByMonth(
                 uuid,
+                key,
                 yearMonth,
                 columns
         );
