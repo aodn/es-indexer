@@ -328,7 +328,10 @@ public class DataAccessServiceImpl implements DataAccessService {
      */
     @Override
     public void aggregateData(Map<CloudOptimizedEntry, Long> merge, List<? extends CloudOptimizedEntry> data) {
-        Map<CloudOptimizedEntry, Long> currentAggregation =  data.stream()
+        Map<CloudOptimizedEntry, Long> currentAggregation =  data
+                .stream()
+                // We cannot create a valid geo_shape point if one coordinate is null
+                .filter(d -> d.getLatitude() != null && d.getLongitude() != null)
                 .collect(Collectors.groupingBy(
                         d -> d,
                         Collectors.counting()
