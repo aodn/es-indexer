@@ -178,8 +178,6 @@ public abstract class IndexServiceImpl implements IndexService {
             if (!result.items().isEmpty()) {
                 if (result.errors()) {
                     log.error("Bulk load have errors? {}", true);
-                } else {
-                    log.info("Bulk load have errors? {}", false);
                 }
                 for (BulkResponseItem item : result.items()) {
                     if (item.error() != null) {

@@ -309,7 +309,7 @@ public class DataAccessServiceImpl implements DataAccessService {
 
             }
             catch (HttpClientErrorException.NotFound e) {
-                throw new MetadataNotFoundException("Unable to find dataset with UUID: " + uuid + " in GeoNetwork");
+                throw new MetadataNotFoundException("UUID not found : " + uuid + " in DataAccess Service");
             }
             catch (Exception e) {
                 throw new RuntimeException("Exception thrown while retrieving dataset with UUID: " + uuid + e.getMessage(), e);

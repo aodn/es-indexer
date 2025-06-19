@@ -158,7 +158,15 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
                                     featureCollections.get(i),
                                     true
                             ).ifPresent(responses::add);
-                            callback.onProgress("Processed data in year month: " + featureCollection.getProperties().get(GeoJsonProperty.DATE.getValue()));
+                            callback.onProgress(
+                                    String.format(
+                                            "Processed %s  %s in year month: %s, group %d" ,
+                                            id,
+                                            key,
+                                            featureCollection.getProperties().get(GeoJsonProperty.DATE.getValue()),
+                                            i
+                                    )
+                            );
                         }
                     }
                 }
