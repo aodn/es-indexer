@@ -23,6 +23,7 @@ import java.time.Duration;
 import java.time.YearMonth;
 import java.util.*;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -92,6 +93,9 @@ public class DataAccessServiceImpl implements DataAccessService {
 
         // Validate path argument
         if(isSafeId(uuid)) {
+            // Sometimes the server is down due to SPOT instance or software update.
+            waitTillServiceUp();
+
             HttpEntity<String> request = getRequestEntity(List.of(MediaType.APPLICATION_JSON));
 
             String url = UriComponentsBuilder
@@ -122,6 +126,9 @@ public class DataAccessServiceImpl implements DataAccessService {
 
     @Override
     public Map<String, Map<String, MetadataEntity>> getAllMetadata() {
+        // Sometimes the server is down due to SPOT instance or software update.
+        waitTillServiceUp();
+
         HttpEntity<String> request = getRequestEntity(List.of(MediaType.APPLICATION_JSON));
         String url = UriComponentsBuilder
                 .fromUriString(getDataAccessEndpoint() + "/metadata")
@@ -289,6 +296,9 @@ public class DataAccessServiceImpl implements DataAccessService {
     @Override
     public List<TemporalExtent> getTemporalExtentOf(String uuid, String key) {
         if(isSafeId(uuid)) {
+            // Sometimes the server is down due to SPOT instance or software update.
+            waitTillServiceUp();
+
             try {
                 HttpEntity<String> request = getRequestEntity(List.of(MediaType.APPLICATION_JSON));
 
@@ -340,5 +350,20 @@ public class DataAccessServiceImpl implements DataAccessService {
         currentAggregation.forEach((entry, count) ->
                 merge.merge(entry, count, Long::sum)
         );
+    }
+
+    @Override
+    public void waitTillServiceUp() {
+        CountDownLatch countDownLatch = new CountDownLatch(1);
+
+        try {
+            do {
+                if(this.getHealthStatus() == HealthStatus.UP) {
+                    countDownLatch.countDown();
+                }
+            }
+            while(!countDownLatch.await(30, TimeUnit.SECONDS));
+        }
+        catch (Exception ignored) {}
     }
 }

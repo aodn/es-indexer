@@ -53,4 +53,5 @@ public interface DataAccessService {
     Map<String, MetadataEntity> getMetadataByUuid(String uuid);
     Map<String, Map<String, MetadataEntity>> getAllMetadata();
     HealthStatus getHealthStatus();
+    void waitTillServiceUp();
 }
