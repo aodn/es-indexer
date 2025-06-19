@@ -13,7 +13,7 @@ elasticsearch:
   apiKey: sample-api-key
 
 geonetwork:
-  host: https://geonetwork-edge.aodn.org.au
+  host: https://geonetwork.edge.aodn.org.au
   search:
     api:
       index: "records"

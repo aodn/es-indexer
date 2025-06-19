@@ -7,6 +7,7 @@ import au.org.aodn.cloudoptimized.model.TemporalExtent;
 import au.org.aodn.cloudoptimized.model.geojson.FeatureCollectionGeoJson;
 import au.org.aodn.cloudoptimized.service.DataAccessService;
 import au.org.aodn.esindexer.configuration.AppConstants;
+import au.org.aodn.metadata.geonetwork.exception.MetadataNotFoundException;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.ElasticsearchException;
 import co.elastic.clients.elasticsearch.core.BulkResponse;
@@ -82,19 +83,23 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
                 Map<String, MetadataEntity> entry = entities.get(uuid);
 
                 for(String key: entry.keySet()) {
-                    List<TemporalExtent> temporalExtents = dataAccessService.getTemporalExtentOf(uuid, key);
-                    if (!temporalExtents.isEmpty()) {
-                        // Only first block works from data service api
-                        LocalDate startDate = temporalExtents.get(0).getLocalStartDate();
-                        LocalDate endDate = temporalExtents.get(0).getLocalEndDate();
+                    try {
+                        List<TemporalExtent> temporalExtents = dataAccessService.getTemporalExtentOf(uuid, key);
+                        if (!temporalExtents.isEmpty()) {
+                            // Only first block works from data service api
+                            LocalDate startDate = temporalExtents.get(0).getLocalStartDate();
+                            LocalDate endDate = temporalExtents.get(0).getLocalEndDate();
 
-                        callback.onProgress(String.format("Indexing dataset with UUID: %s %s from %s to %s", uuid, key, startDate, endDate));
-                        try {
-                            results.addAll(indexCloudOptimizedData(entry.get(key), startDate, endDate, callback));
+                            callback.onProgress(String.format("Indexing dataset with UUID: %s %s from %s to %s", uuid, key, startDate, endDate));
+                            try {
+                                results.addAll(indexCloudOptimizedData(entry.get(key), startDate, endDate, callback));
+                            } catch (IOException ioe) {
+                                // Do nothing
+                            }
                         }
-                        catch (IOException ioe) {
-                            // Do nothing
-                        }
+                    }
+                    catch(MetadataNotFoundException enf) {
+                        callback.onProgress(String.format("Metadata not found, skip! %s", enf.getMessage()));
                     }
                 }
             }
