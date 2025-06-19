@@ -74,7 +74,6 @@
     {
       "roles": ["pointOfContact", "about"],
       "organization": "Integrated Marine Observing System (IMOS)",
-      "name": "",
       "position": "Data Officer",
       "emails": ["info@aodn.org.au"],
       "addresses": [
@@ -111,7 +110,6 @@
       "roles": ["processor", "about"],
       "organization": "CSIRO Oceans and Atmosphere - Hobart",
       "name": "Cowley, Rebecca",
-      "position": "",
       "emails": ["Rebecca.Cowley@csiro.au"],
       "addresses": [
         {
@@ -121,14 +119,11 @@
           "postalCode": "7005",
           "country": "Australia"
         }
-      ],
-      "phones": [],
-      "links": []
+      ]
     },
     {
       "roles": ["distributor", "metadata"],
       "organization": "Integrated Marine Observing System (IMOS)",
-      "name": "",
       "position": "Data Officer",
       "emails": ["info@aodn.org.au"],
       "addresses": [
@@ -164,8 +159,6 @@
     {
       "roles": ["resourceProvider", "citation"],
       "organization": "Integrated Marine Observing System (IMOS)",
-      "name": "",
-      "position": "",
       "emails": ["imos@imos.org.au"],
       "addresses": [
         {

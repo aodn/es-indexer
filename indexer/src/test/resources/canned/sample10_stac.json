@@ -181,7 +181,6 @@
     {
       "roles": ["pointOfContact", "about"],
       "organization": "Integrated Marine Observing System (IMOS)",
-      "name": "",
       "position": "Data Officer",
       "emails": ["info@aodn.org.au"],
       "addresses": [
@@ -218,7 +217,6 @@
       "roles": ["principalInvestigator", "about"],
       "organization": "Australian Institute of Marine Science (AIMS)",
       "name": "Cahill, Madeleine",
-      "position": "",
       "emails": ["m.cahill@aims.gov.au"],
       "addresses": [
         {
@@ -229,7 +227,6 @@
           "country": "Australia"
         }
       ],
-      "phones": [],
       "links": [
         {
           "href": "http://imos.org.au/nationalmooringnetwork.html",
@@ -241,7 +238,6 @@
     {
       "roles": ["distributor", "metadata"],
       "organization": "Integrated Marine Observing System (IMOS)",
-      "name": "",
       "position": "Data Officer",
       "emails": ["info@aodn.org.au"],
       "addresses": [
@@ -277,8 +273,6 @@
     {
       "roles": ["resourceProvider", "citation"],
       "organization": "Integrated Marine Observing System (IMOS)",
-      "name": "",
-      "position": "",
       "emails": ["imos@imos.org.au"],
       "addresses": [
         {
@@ -298,8 +292,7 @@
           "value": "61 3 6226 2107",
           "roles": ["facsimile"]
         }
-      ],
-      "links": []
+      ]
     }
   ],
   "languages" : [ {

@@ -50,7 +50,6 @@
     "roles" : [ "pointOfContact", "metadata" ],
     "organization" : "Australian Institute of Marine Science (AIMS)",
     "name" : "eAtlas Data Manager",
-    "position" : "",
     "emails" : [ "e-atlas@aims.gov.au" ],
     "addresses" : [ {
       "deliveryPoint" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],

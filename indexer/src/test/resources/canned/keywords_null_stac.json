@@ -40,29 +40,15 @@
   "contacts": [
     {
       "roles": ["pointOfContact", "about"],
-      "organization": "",
-      "name": "Li, J.",
-      "position": "",
-      "emails": [],
-      "addresses": [],
-      "phones": [],
-      "links": []
+      "name": "Li, J."
     },
     {
       "roles": ["resourceProvider", "about"],
-      "organization": "Environmental Geoscience Division",
-      "name": "",
-      "position": "",
-      "emails": [],
-      "addresses": [],
-      "phones": [],
-      "links": []
+      "organization": "Environmental Geoscience Division"
     },
     {
       "roles": ["pointOfContact", "about"],
       "organization": "Commonwealth of Australia (Geoscience Australia)",
-      "name": "",
-      "position": "",
       "emails": ["clientservices@ga.gov.au"],
       "addresses": [
         {
@@ -82,14 +68,11 @@
           "value": "02 6249 9960",
           "roles": ["facsimile"]
         }
-      ],
-      "links": []
+      ]
     },
     {
       "roles": ["pointOfContact", "metadata"],
       "organization": "Commonwealth of Australia (Geoscience Australia)",
-      "name": "",
-      "position": "",
       "emails": ["clientservices@ga.gov.au"],
       "addresses": [
         {
@@ -109,18 +92,11 @@
           "value": "02 6249 9960",
           "roles": ["facsimile"]
         }
-      ],
-      "links": []
+      ]
     },
     {
       "roles": ["author", "citation"],
-      "organization": "",
-      "name": "Li, J.",
-      "position": "",
-      "emails": [],
-      "addresses": [],
-      "phones": [],
-      "links": []
+      "name": "Li, J."
     }
   ],
   "languages" : [ {

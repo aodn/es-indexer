@@ -45,23 +45,15 @@
       ],
       "emails": [
         "data-requests-hf@csiro.au"
-      ],
-      "addresses": [],
-      "phones": [],
-      "links": []
+      ]
     },
     {
       "name": "Data Officer (AR), Hobart",
       "organization": "CSIRO/Oceans and Atmosphere",
-      "position": "",
       "roles": [
         "processor",
         "metadata"
-      ],
-      "emails": [],
-      "addresses": [],
-      "phones": [],
-      "links": []
+      ]
     },
     {
       "name": "CSIRO O&A, Information & Data Centre",
@@ -73,23 +65,15 @@
       ],
       "emails": [
         "data-requests-hf@csiro.au"
-      ],
-      "addresses": [],
-      "phones": [],
-      "links": []
+      ]
     },
     {
       "name": "Dirita, Vito",
       "organization": "CSIRO",
-      "position": "",
       "roles": [
         "originator",
         "metadata"
-      ],
-      "emails": [],
-      "addresses": [],
-      "phones": [],
-      "links": []
+      ]
     }
   ],
   "languages" : [ {

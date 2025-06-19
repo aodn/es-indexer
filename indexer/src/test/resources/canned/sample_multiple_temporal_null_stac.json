@@ -44,7 +44,6 @@
       "roles": ["pointOfContact", "about"],
       "organization": "School of Civil, Environmental and Mining Engineering (CEME), The University of Western Australia (UWA)",
       "name": "Pattiaratchi, Charitha, Professor",
-      "position": "",
       "emails": ["chari.pattiaratchi@uwa.edu.au"],
       "addresses": [
         {
@@ -64,13 +63,11 @@
           "value": "61 8 6488 1015",
           "roles": ["facsimile"]
         }
-      ],
-      "links": []
+      ]
     },
     {
       "roles": ["distributor", "metadata"],
       "organization": "Integrated Marine Observing System (IMOS)",
-      "name": "",
       "position": "Data Officer",
       "emails": ["info@aodn.org.au"],
       "addresses": [
@@ -106,8 +103,6 @@
     {
       "roles": ["resourceProvider", "citation"],
       "organization": "Integrated Marine Observing System (IMOS)",
-      "name": "",
-      "position": "",
       "emails": ["imos@imos.org.au"],
       "addresses": [
         {

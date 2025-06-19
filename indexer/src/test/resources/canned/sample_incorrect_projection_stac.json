@@ -86,7 +86,6 @@
       "roles": ["author", "about"],
       "organization": "Institute for Marine and Antarctic Studies (IMAS), University of Tasmania (UTAS)",
       "name": "Asimus, Jeremy",
-      "position": "",
       "emails": ["jeremy.asimus@utas.edu.au"],
       "addresses": [
         {
@@ -96,7 +95,6 @@
           "country": "Australia"
         }
       ],
-      "phones": [],
       "links": [
         {
           "href": "https://orcid.org/0000-0002-6495-5813",
@@ -108,7 +106,6 @@
     {
       "roles": ["distributor", "metadata"],
       "organization": "IMAS Data Manager",
-      "name": "",
       "position": "Data Officer",
       "emails": ["IMAS.DataManager@utas.edu.au"],
       "addresses": [
@@ -123,7 +120,6 @@
           "country": "Australia"
         }
       ],
-      "phones": [],
       "links": [
         {
           "href": "https://imas.utas.edu.au",
@@ -135,8 +131,6 @@
     {
       "roles": ["resourceProvider", "citation"],
       "organization": "Institute for Marine and Antarctic Studies (IMAS)",
-      "name": "",
-      "position": "",
       "emails": ["IMAS.DataManager@utas.edu.au"],
       "addresses": [
         {
@@ -146,15 +140,12 @@
           "postalCode": "7001",
           "country": "Australia"
         }
-      ],
-      "phones": [],
-      "links": []
+      ]
     },
     {
       "roles": ["principalInvestigator", "citation"],
       "organization": "Institute for Marine and Antarctic Studies (IMAS), University of Tasmania (UTAS)",
       "name": "Asimus, Jeremy",
-      "position": "",
       "emails": ["jeremy.asimus@utas.edu.au"],
       "addresses": [
         {
@@ -165,7 +156,6 @@
           "country": "Australia"
         }
       ],
-      "phones": [],
       "links": [
         {
           "href": "https://orcid.org/0000-0002-6495-5813",
@@ -178,7 +168,6 @@
       "roles": ["coAuthor", "citation"],
       "organization": "Institute for Marine and Antarctic Studies (IMAS), University of Tasmania (UTAS)",
       "name": "Halpin, Jacqueline",
-      "position": "",
       "emails": ["jacqueline.halpin@utas.edu.au"],
       "addresses": [
         {
@@ -189,7 +178,6 @@
           "country": "Australia"
         }
       ],
-      "phones": [],
       "links": [
         {
           "href": "https://orcid.org/0000-0002-4992-8681",

@@ -75,13 +75,10 @@
             "facsimile"
           ]
         }
-      ],
-      "links": []
+      ]
     },
     {
       "name": "CONNELL, DAVE J.",
-      "organization": "",
-      "position": "",
       "roles": [
         "author",
         "metadata"
@@ -114,65 +111,38 @@
             "facsimile"
           ]
         }
-      ],
-      "links": []
+      ]
     },
     {
-      "name": "",
       "organization": "Australian Antarctic Division",
-      "position": "",
       "roles": [
         "sponsor",
         "metadata"
-      ],
-      "emails": [],
-      "addresses": [],
-      "phones": [],
-      "links": []
+      ]
     },
     {
-      "name": "",
       "organization": "AADC",
-      "position": "",
       "roles": [
         "owner",
         "metadata"
-      ],
-      "emails": [],
-      "addresses": [],
-      "phones": [],
-      "links": []
+      ]
     },
     {
       "name": "Commonwealth of Australia",
-      "organization": "",
-      "position": "",
       "roles": [
         "originator",
         "citation"
-      ],
-      "emails": [],
-      "addresses": [],
-      "phones": [],
-      "links": []
+      ]
     },
     {
-      "name": "",
       "organization": "Australian Antarctic Data Centre",
-      "position": "",
       "roles": [
         "publisher",
         "citation"
-      ],
-      "emails": [],
-      "addresses": [],
-      "phones": [],
-      "links": []
+      ]
     },
     {
       "name": "REEVE, JONO",
-      "organization": "",
-      "position": "",
       "roles": [
         "principalInvestigator",
         "citation"
@@ -199,13 +169,10 @@
             "voice"
           ]
         }
-      ],
-      "links": []
+      ]
     },
     {
       "name": "REEVE, JONO",
-      "organization": "",
-      "position": "",
       "roles": [
         "collaborator",
         "citation"
@@ -232,8 +199,7 @@
             "voice"
           ]
         }
-      ],
-      "links": []
+      ]
     }
   ],
   "languages" : [ {

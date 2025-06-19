@@ -40,20 +40,14 @@
       "organization": "CSIRO Oceans & Atmosphere - Hobart",
       "name": "Fuller, Mike",
       "position": "Senior Experimental Scientist (Oceans & Atmosphere)",
-      "emails": ["Michael.Fuller@csiro.au"],
-      "addresses": [],
-      "phones": [],
-      "links": []
+      "emails": ["Michael.Fuller@csiro.au"]
     },
     {
       "roles": ["pointOfContact", "metadata"],
       "organization": "CSIRO Oceans & Atmosphere - Hobart",
       "name": "CSIRO O&A, Information & Data Centre",
       "position": "Data Requests",
-      "emails": ["data-requests-hf@csiro.au"],
-      "addresses": [],
-      "phones": [],
-      "links": []
+      "emails": ["data-requests-hf@csiro.au"]
     }
   ],
   "languages" : [ {

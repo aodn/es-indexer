@@ -45,7 +45,6 @@
       "roles": ["pointOfContact", "about"],
       "organization": "Australian Defence Force Academy (ADFA)",
       "name": "Robertson, Robin, Dr",
-      "position": "",
       "emails": ["r.robertson@adfa.edu.au"],
       "addresses": [
         {
@@ -75,32 +74,19 @@
     },
     {
       "roles": ["processor", "metadata"],
-      "organization": "",
-      "name": "",
       "position": "BlueNet Data Facilitator",
-      "emails": ["info@bluenet.org.au"],
-      "addresses": [],
-      "phones": [],
-      "links": []
+      "emails": ["info@bluenet.org.au"]
     },
     {
       "roles": ["pointOfContact", "metadata"],
       "organization": "Australian Defence Force Academy (ADFA)",
       "name": "Robertson, Robin, Dr",
-      "position": "",
-      "emails": ["r.robertson@adfa.edu.au"],
-      "addresses": [],
-      "phones": [],
-      "links": []
+      "emails": ["r.robertson@adfa.edu.au"]
     },
     {
       "roles": ["principalInvestigator", "citation"],
       "organization": "Australian Defence Force Academy (ADFA)",
       "name": "Holloway, Peter",
-      "position": "",
-      "emails": [],
-      "addresses": [],
-      "phones": [],
       "links": [
         {
           "href": "http://www.marine.csiro.au/~cra171/holloway/MFR54pp585-6.pdf",
@@ -112,31 +98,18 @@
       "roles": ["collaborator", "citation"],
       "organization": "Australian Defence Force Academy (ADFA)",
       "name": "Symonds, Graham",
-      "position": "",
-      "emails": ["Graham.Symonds@csiro.au"],
-      "addresses": [],
-      "phones": [],
-      "links": []
+      "emails": ["Graham.Symonds@csiro.au"]
     },
     {
       "roles": ["collaborator", "citation"],
       "organization": "Australian Defence Force Academy (ADFA)",
       "name": "Nunes-Vaz, Rick",
-      "position": "",
-      "emails": ["Rick.Nunes-Vaz@dsto.defence.gov.au"],
-      "addresses": [],
-      "phones": [],
-      "links": []
+      "emails": ["Rick.Nunes-Vaz@dsto.defence.gov.au"]
     },
     {
       "roles": ["collaborator", "citation"],
       "organization": "Australian Defence Force Academy (ADFA)",
-      "name": "Jeffrey, Marcus",
-      "position": "",
-      "emails": [],
-      "addresses": [],
-      "phones": [],
-      "links": []
+      "name": "Jeffrey, Marcus"
     }
   ],
   "languages" : [ {

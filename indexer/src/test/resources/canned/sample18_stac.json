@@ -280,7 +280,6 @@
     "roles" : [ "principalInvestigator", "about" ],
     "organization" : "CSIRO Oceans and Atmosphere - Hobart",
     "name" : "Trull, Tom W.",
-    "position" : "",
     "emails" : [ "Tom.Trull@csiro.au" ],
     "addresses" : [ {
       "deliveryPoint" : [ "GPO Box 1538" ],
@@ -288,14 +287,11 @@
       "country" : "Australia",
       "postalCode" : "7005",
       "administrativeArea" : "Tasmania"
-    } ],
-    "phones" : [ ],
-    "links" : [ ]
+    } ]
   }, {
     "roles" : [ "principalInvestigator", "about" ],
     "organization" : "Institute for Marine and Antarctic Studies (IMAS), University of Tasmania (UTAS)",
     "name" : "Strutton, Peter",
-    "position" : "",
     "emails" : [ "Pete.Strutton@utas.edu.au" ],
     "addresses" : [ {
       "deliveryPoint" : [ "IMAS - Hobart", "Private Bag 129" ],
@@ -303,13 +299,10 @@
       "country" : "Australia",
       "postalCode" : "7001",
       "administrativeArea" : "Tasmania"
-    } ],
-    "phones" : [ ],
-    "links" : [ ]
+    } ]
   }, {
     "roles" : [ "distributor", "metadata" ],
     "organization" : "Integrated Marine Observing System (IMOS)",
-    "name" : "",
     "position" : "Data Officer",
     "emails" : [ "info@aodn.org.au" ],
     "addresses" : [ {
@@ -334,8 +327,6 @@
   }, {
     "roles" : [ "resourceProvider", "citation" ],
     "organization" : "Integrated Marine Observing System (IMOS)",
-    "name" : "",
-    "position" : "",
     "emails" : [ "imos@imos.org.au" ],
     "addresses" : [ {
       "deliveryPoint" : [ "University of Tasmania", "Private Bag 110" ],

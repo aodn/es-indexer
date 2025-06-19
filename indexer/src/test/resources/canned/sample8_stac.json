@@ -82,12 +82,7 @@
     {
       "roles": ["processor", "metadata"],
       "organization": "CSIRO/Oceans and Atmosphere",
-      "name": "Data Officer (AR), Hobart",
-      "position": "",
-      "emails": [],
-      "addresses": [],
-      "phones": [],
-      "links": []
+      "name": "Data Officer (AR), Hobart"
     },
     {
       "roles": ["pointOfContact", "metadata"],
@@ -131,12 +126,7 @@
     {
       "roles": ["originator", "metadata"],
       "organization": "CSIRO",
-      "name": "Roubicek, Andres",
-      "position": "",
-      "emails": [],
-      "addresses": [],
-      "phones": [],
-      "links": []
+      "name": "Roubicek, Andres"
     }
   ],
   "languages" : [ {

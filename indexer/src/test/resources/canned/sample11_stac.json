@@ -111,17 +111,8 @@
   }, {
     "roles" : [ "distributor", "metadata" ],
     "organization" : "CSIRO Marine Data Centre",
-    "name" : "",
     "position" : "Data Manager",
     "emails" : [ "data.requests@marine.csiro.au" ],
-    "addresses" : [ {
-      "deliveryPoint" : [ "" ],
-      "city" : "",
-      "country" : "",
-      "postalCode" : "",
-      "administrativeArea" : ""
-    } ],
-    "phones" : [ ],
     "links" : [ {
       "href" : "http://www.marine.csiro.au/datacentre/",
       "type" : "WWW:LINK-1.0-http--link",
@@ -130,8 +121,6 @@
   }, {
     "roles" : [ "resourceProvider", "citation" ],
     "organization" : "Integrated Marine Observing System (IMOS)",
-    "name" : "",
-    "position" : "",
     "emails" : [ "imos@imos.org.au" ],
     "addresses" : [ {
       "deliveryPoint" : [ "University of Tasmania", "Private Bag 110" ],

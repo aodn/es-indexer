@@ -60,7 +60,7 @@
       "deliveryPoint" : [ "GPO BOX 1538" ],
       "city" : "Hobart",
       "country" : "Australia",
-      "postalCode" : "",
+      "postalCode": "",
       "administrativeArea" : "Tasmania"
     } ],
     "phones" : [ {
@@ -79,7 +79,6 @@
     "roles" : [ "pointOfContact", "metadata" ],
     "organization" : "Australian Institute of Marine Science (AIMS)",
     "name" : "eAtlas Data Manager",
-    "position" : "",
     "emails" : [ "e-atlas@aims.gov.au" ],
     "addresses" : [ {
       "deliveryPoint" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],
@@ -119,8 +118,7 @@
     }, {
       "roles" : [ "facsimile" ],
       "value" : ""
-    } ],
-    "links" : [ ]
+    } ]
   }, {
     "roles" : [ "collaborator", "citation" ],
     "organization" : "Oceans and Atmosphere, CSIRO",
@@ -140,8 +138,7 @@
     }, {
       "roles" : [ "facsimile" ],
       "value" : ""
-    } ],
-    "links" : [ ]
+    } ]
   }, {
     "roles" : [ "collaborator", "citation" ],
     "organization" : "Oceans and Atmosphere, CSIRO",
@@ -161,8 +158,7 @@
     }, {
       "roles" : [ "facsimile" ],
       "value" : ""
-    } ],
-    "links" : [ ]
+    } ]
   }, {
     "roles" : [ "collaborator", "citation" ],
     "organization" : "Oceans and Atmosphere, CSIRO",
@@ -182,8 +178,7 @@
     }, {
       "roles" : [ "facsimile" ],
       "value" : ""
-    } ],
-    "links" : [ ]
+    } ]
   } ],
   "languages" : [ {
     "code" : "eng",
