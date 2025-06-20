@@ -43,7 +43,6 @@
     "roles" : [ "pointOfContact", "about" ],
     "organization" : "Centre for Tropical Waters and Aquatic Research (TropWATER), James Cook University (JCU)",
     "name" : "Carter, Alex, Dr",
-    "position" : "",
     "emails" : [ "alexandra.carter@jcu.edu.au" ],
     "addresses" : [ {
       "deliveryPoint" : [ "James Cook University (JCU)" ],
@@ -65,11 +64,7 @@
     "roles" : [ "pointOfContact", "metadata" ],
     "organization" : "Institute for Marine and Antarctic Studies (IMAS), University of Tasmania (UTAS)",
     "name" : "IMAS Data Manager",
-    "position" : "",
-    "emails" : [ ],
-    "addresses" : [ ],
-    "phones" : [ ],
-    "links" : [ ]
+    "emails" : [ "IMAS.DataManager@utas.edu.au" ]
   }, {
     "roles" : [ "principalInvestigator", "citation" ],
     "organization" : "Centre for Tropical Waters and Aquatic Research (TropWATER), James Cook University (JCU)",

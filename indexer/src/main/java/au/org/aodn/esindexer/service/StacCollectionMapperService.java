@@ -895,7 +895,7 @@ public abstract class StacCollectionMapperService {
                                 ciResponsibility.getParty().forEach(party -> {
 
                                     // to tag data contacts (on the "about" panel)
-                                    var mappedContacts = MapperUtils.mapOrgContacts(ciResponsibility, party);
+                                    var mappedContacts = MapperUtils.mapPartyContacts(ciResponsibility, party);
                                     results.addAll(MapperUtils.addRoleToContacts(mappedContacts, "about"));
                                 });
                             }
@@ -922,7 +922,7 @@ public abstract class StacCollectionMapperService {
                 for (var party : ciResponsibility.getParty()) {
 
                     // to tag metadata contacts (on the "metadata" panel)
-                    var mappedContacts = MapperUtils.mapOrgContacts(ciResponsibility, party);
+                    var mappedContacts = MapperUtils.mapPartyContacts(ciResponsibility, party);
                     results.addAll(MapperUtils.addRoleToContacts(mappedContacts, "metadata"));
                 }
             }
@@ -951,7 +951,7 @@ public abstract class StacCollectionMapperService {
                                     logger.warn("Unable to find citation contact info for metadata record: {}", CommonUtils.getUUID(source));
                                 } else {
                                     parties.forEach(party -> {
-                                        var mappedContacts = MapperUtils.mapOrgContacts(ciResponsibility, party);
+                                        var mappedContacts = MapperUtils.mapPartyContacts(ciResponsibility, party);
                                         results.addAll(MapperUtils.addRoleToContacts(mappedContacts, "citation"));
                                     });
                                 }

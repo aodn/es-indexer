@@ -103,7 +103,6 @@
     "roles" : [ "principalInvestigator", "about" ],
     "organization" : "Australian Institute of Marine Science (AIMS)",
     "name" : "Remmers T",
-    "position" : "",
     "emails" : [ "reception@aims.gov.au" ],
     "addresses" : [ {
       "deliveryPoint" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],
@@ -128,7 +127,6 @@
     "roles" : [ "pointOfContact", "about" ],
     "organization" : "Australian Institute of Marine Science (AIMS)",
     "name" : "AIMS Data Centre",
-    "position" : "",
     "emails" : [ "adc@aims.gov.au" ],
     "addresses" : [ {
       "deliveryPoint" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],
@@ -152,7 +150,6 @@
   }, {
     "roles" : [ "pointOfContact", "metadata" ],
     "organization" : "Australian Institute of Marine Science (AIMS)",
-    "name" : "",
     "position" : "AIMS Data Centre",
     "emails" : [ "adc@aims.gov.au" ],
     "addresses" : [ {
@@ -176,8 +173,6 @@
   }, {
     "roles" : [ "publisher", "citation" ],
     "organization" : "Australian Institute of Marine Science (AIMS)",
-    "name" : "",
-    "position" : "",
     "emails" : [ "reception@aims.gov.au" ],
     "addresses" : [ {
       "deliveryPoint" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],
@@ -201,8 +196,6 @@
   }, {
     "roles" : [ "owner", "citation" ],
     "organization" : "Australian Institute of Marine Science (AIMS)",
-    "name" : "",
-    "position" : "",
     "emails" : [ "reception@aims.gov.au" ],
     "addresses" : [ {
       "deliveryPoint" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],

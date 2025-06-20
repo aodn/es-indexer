@@ -3687,7 +3687,7 @@
       "organization": "CSIRO Oceans & Atmosphere - Hobart",
       "name": "data-requests-hf@csiro.au,",
       "position": "Data Requests - Information & Data Centre",
-      "emails": [],
+      "emails": ["data-requests-hf@csiro.au"],
       "addresses": [
         {
           "deliveryPoint": [
@@ -3735,12 +3735,7 @@
         "metadata"
       ],
       "organization": "CSIRO/Oceans and Atmosphere",
-      "name": "Data Officer (AR), Hobart",
-      "position": "",
-      "emails": [],
-      "addresses": [],
-      "phones": [],
-      "links": []
+      "name": "Data Officer (AR), Hobart"
     },
     {
       "roles": [
@@ -3750,7 +3745,7 @@
       "organization": "CSIRO Oceans & Atmosphere - Hobart",
       "name": "CSIRO O&A, Information & Data Centre",
       "position": "Data Requests",
-      "emails": [],
+      "emails": ["data-requests-hf@csiro.au"],
       "addresses": [
         {
           "deliveryPoint": [
@@ -3798,12 +3793,7 @@
         "metadata"
       ],
       "organization": "CSIRO",
-      "name": "Roubicek, Andres",
-      "position": "",
-      "emails": [],
-      "addresses": [],
-      "phones": [],
-      "links": []
+      "name": "Roubicek, Andres"
     }
   ],
   "languages": [

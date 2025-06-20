@@ -34,16 +34,20 @@
     "parameter_vocabs" : [ ],
     "organisation_vocabs" : [ ]
   },
-  "contacts" : [ {
-    "roles" : [ "pointOfContact", "metadata" ],
-    "organization" : "CSIRO Oceans & Atmosphere - Hobart",
-    "name" : "CSIRO O&A, Information & Data Centre",
-    "position" : "Data Requests",
-    "emails" : [ ],
-    "addresses" : [ ],
-    "phones" : [ ],
-    "links" : [ ]
-  } ],
+  "contacts": [
+    {
+      "name": "CSIRO O&A, Information & Data Centre",
+      "organization": "CSIRO Oceans & Atmosphere - Hobart",
+      "position": "Data Requests",
+      "roles": [
+        "pointOfContact",
+        "metadata"
+      ],
+      "emails": [
+        "data-requests-hf@csiro.au"
+      ]
+    }
+  ],
   "languages" : [ {
     "code" : "eng",
     "name" : "English"

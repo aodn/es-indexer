@@ -51,7 +51,6 @@
     "roles" : [ "principalInvestigator", "about" ],
     "organization" : "CSIRO Oceans and Atmosphere - Hobart",
     "name" : "Lenton, Andrew",
-    "position" : "",
     "emails" : [ "Andrew.Lenton@csiro.au" ],
     "addresses" : [ {
       "deliveryPoint" : [ "GPO Box 1538" ],
@@ -59,13 +58,10 @@
       "country" : "Australia",
       "postalCode" : "7000",
       "administrativeArea" : "Tasmania"
-    } ],
-    "phones" : [ ],
-    "links" : [ ]
+    } ]
   }, {
     "roles" : [ "pointOfContact", "about" ],
     "organization" : "Integrated Marine Observing System (IMOS)",
-    "name" : "",
     "position" : "Data Officer",
     "emails" : [ "info@aodn.org.au" ],
     "addresses" : [ {
@@ -90,7 +86,6 @@
   }, {
     "roles" : [ "distributor", "metadata" ],
     "organization" : "Integrated Marine Observing System (IMOS)",
-    "name" : "",
     "position" : "Data Officer",
     "emails" : [ "info@aodn.org.au" ],
     "addresses" : [ {
@@ -116,7 +111,6 @@
     "roles" : [ "principalInvestigator", "citation" ],
     "organization" : "CSIRO Oceans and Atmosphere - Hobart",
     "name" : "Lenton, Andrew",
-    "position" : "",
     "emails" : [ "Andrew.Lenton@csiro.au" ],
     "addresses" : [ {
       "deliveryPoint" : [ "GPO Box 1538" ],
@@ -125,7 +119,6 @@
       "postalCode" : "7000",
       "administrativeArea" : "Tasmania"
     } ],
-    "phones" : [ ],
     "links" : [ {
       "href" : "http://www.csiro.au/en/Research/OandA",
       "type" : "WWW:LINK-1.0-http--link",
@@ -135,7 +128,6 @@
     "roles" : [ "collaborator", "citation" ],
     "organization" : "CSIRO Oceans and Atmosphere - Hobart",
     "name" : "Tilbrook, Bronte",
-    "position" : "",
     "emails" : [ "Bronte.Tilbrook@csiro.au" ],
     "addresses" : [ {
       "deliveryPoint" : [ "GPO Box 1538" ],
@@ -144,7 +136,6 @@
       "postalCode" : "7000",
       "administrativeArea" : "Tasmania"
     } ],
-    "phones" : [ ],
     "links" : [ {
       "href" : "http://www.csiro.au/en/Research/OandA",
       "type" : "WWW:LINK-1.0-http--link",
@@ -154,7 +145,6 @@
     "roles" : [ "collaborator", "citation" ],
     "organization" : "CSIRO Oceans and Atmosphere - Hobart",
     "name" : "Matear, Richard",
-    "position" : "",
     "emails" : [ "Richard.Matear@csiro.au" ],
     "addresses" : [ {
       "deliveryPoint" : [ "GPO Box 1538" ],
@@ -163,7 +153,6 @@
       "postalCode" : "7000",
       "administrativeArea" : "Tasmania"
     } ],
-    "phones" : [ ],
     "links" : [ {
       "href" : "http://www.csiro.au/en/Research/OandA",
       "type" : "WWW:LINK-1.0-http--link",
@@ -173,7 +162,6 @@
     "roles" : [ "collaborator", "citation" ],
     "organization" : "Climate Change Research Centre (CCRC), The University of New South Wales (UNSW)",
     "name" : "Sasse, Tristan",
-    "position" : "",
     "emails" : [ "t.sasse@unsw.edu.au" ],
     "addresses" : [ {
       "deliveryPoint" : [ "Level 4, Mathews Building", "University of New South Wales" ],
@@ -181,14 +169,11 @@
       "country" : "Australia",
       "postalCode" : "2052",
       "administrativeArea" : "New South Wales"
-    } ],
-    "phones" : [ ],
-    "links" : [ ]
+    } ]
   }, {
     "roles" : [ "collaborator", "citation" ],
     "organization" : "National Institute for Environmental Studies (NIES)",
     "name" : "Nojiri, Yukihiro",
-    "position" : "",
     "emails" : [ "nojiri@nies.go.jp" ],
     "addresses" : [ {
       "deliveryPoint" : [ "16-2 Onogawa" ],
@@ -196,9 +181,7 @@
       "country" : "Japan",
       "postalCode" : "305-0053",
       "administrativeArea" : "Ibaraki Prefecture"
-    } ],
-    "phones" : [ ],
-    "links" : [ ]
+    } ]
   } ],
   "languages" : [ {
     "code" : "eng",

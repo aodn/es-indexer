@@ -177,97 +177,124 @@
     "parameter_vocabs" : [ ],
     "organisation_vocabs" : [ ]
   },
-  "contacts" : [ {
-    "roles" : [ "pointOfContact", "about" ],
-    "organization" : "Integrated Marine Observing System (IMOS)",
-    "name" : "",
-    "position" : "Data Officer",
-    "emails" : [ "info@aodn.org.au" ],
-    "addresses" : [ {
-      "deliveryPoint" : [ "University of Tasmania", "Private Bag 110" ],
-      "city" : "Hobart",
-      "country" : "Australia",
-      "postalCode" : "7001",
-      "administrativeArea" : "Tasmania"
-    } ],
-    "phones" : [ {
-      "roles" : [ "voice" ],
-      "value" : "61 3 6226 7488"
-    }, {
-      "roles" : [ "facsimile" ],
-      "value" : "61 3 6226 2107"
-    } ],
-    "links" : [ {
-      "href" : "http://imos.org.au/aodn.html",
-      "type" : "WWW:LINK-1.0-http--link",
-      "title" : "Website of the Australian Ocean Data Network (AODN)"
-    } ]
-  }, {
-    "roles" : [ "principalInvestigator", "about" ],
-    "organization" : "Australian Institute of Marine Science (AIMS)",
-    "name" : "Cahill, Madeleine",
-    "position" : "",
-    "emails" : [ "m.cahill@aims.gov.au" ],
-    "addresses" : [ {
-      "deliveryPoint" : [ "PMB No. 3, Townsville Mail Centre" ],
-      "city" : "Townsville",
-      "country" : "Australia",
-      "postalCode" : "4810",
-      "administrativeArea" : "Queensland"
-    } ],
-    "phones" : [ ],
-    "links" : [ {
-      "href" : "http://imos.org.au/nationalmooringnetwork.html",
-      "type" : "WWW:LINK-1.0-http--link",
-      "title" : "Website of the IMOS Australian National Mooring Network"
-    } ]
-  }, {
-    "roles" : [ "distributor", "metadata" ],
-    "organization" : "Integrated Marine Observing System (IMOS)",
-    "name" : "",
-    "position" : "Data Officer",
-    "emails" : [ "info@aodn.org.au" ],
-    "addresses" : [ {
-      "deliveryPoint" : [ "University of Tasmania", "Private Bag 110" ],
-      "city" : "Hobart",
-      "country" : "Australia",
-      "postalCode" : "7001",
-      "administrativeArea" : "Tasmania"
-    } ],
-    "phones" : [ {
-      "roles" : [ "voice" ],
-      "value" : "61 3 6226 7488"
-    }, {
-      "roles" : [ "facsimile" ],
-      "value" : "61 3 6226 2107"
-    } ],
-    "links" : [ {
-      "href" : "http://imos.org.au/aodn.html",
-      "type" : "WWW:LINK-1.0-http--link",
-      "title" : "Website of the Australian Ocean Data Network (AODN)"
-    } ]
-  }, {
-    "roles" : [ "resourceProvider", "citation" ],
-    "organization" : "Integrated Marine Observing System (IMOS)",
-    "name" : null,
-    "position" : null,
-    "emails" : [ "imos@imos.org.au" ],
-    "addresses" : [ {
-      "deliveryPoint" : [ "Private Bag 110" ],
-      "city" : "Hobart",
-      "country" : "Australia",
-      "postalCode" : "7001",
-      "administrativeArea" : "Tasmania"
-    } ],
-    "phones" : [ {
-      "roles" : [ "voice" ],
-      "value" : "61 3 6226 7549"
-    }, {
-      "roles" : [ "facsimile" ],
-      "value" : "61 3 6226 2107"
-    } ],
-    "links" : null
-  } ],
+  "contacts": [
+    {
+      "roles": ["pointOfContact", "about"],
+      "organization": "Integrated Marine Observing System (IMOS)",
+      "position": "Data Officer",
+      "emails": ["info@aodn.org.au"],
+      "addresses": [
+        {
+          "deliveryPoint": [
+            "University of Tasmania",
+            "Private Bag 110"
+          ],
+          "city": "Hobart",
+          "administrativeArea": "Tasmania",
+          "postalCode": "7001",
+          "country": "Australia"
+        }
+      ],
+      "phones": [
+        {
+          "value": "61 3 6226 7488",
+          "roles": ["voice"]
+        },
+        {
+          "value": "61 3 6226 2107",
+          "roles": ["facsimile"]
+        }
+      ],
+      "links": [
+        {
+          "href": "http://imos.org.au/aodn.html",
+          "title": "Website of the Australian Ocean Data Network (AODN)",
+          "type": "WWW:LINK-1.0-http--link"
+        }
+      ]
+    },
+    {
+      "roles": ["principalInvestigator", "about"],
+      "organization": "Australian Institute of Marine Science (AIMS)",
+      "name": "Cahill, Madeleine",
+      "emails": ["m.cahill@aims.gov.au"],
+      "addresses": [
+        {
+          "deliveryPoint": ["PMB No. 3, Townsville Mail Centre"],
+          "city": "Townsville",
+          "administrativeArea": "Queensland",
+          "postalCode": "4810",
+          "country": "Australia"
+        }
+      ],
+      "links": [
+        {
+          "href": "http://imos.org.au/nationalmooringnetwork.html",
+          "title": "Website of the IMOS Australian National Mooring Network",
+          "type": "WWW:LINK-1.0-http--link"
+        }
+      ]
+    },
+    {
+      "roles": ["distributor", "metadata"],
+      "organization": "Integrated Marine Observing System (IMOS)",
+      "position": "Data Officer",
+      "emails": ["info@aodn.org.au"],
+      "addresses": [
+        {
+          "deliveryPoint": [
+            "University of Tasmania",
+            "Private Bag 110"
+          ],
+          "city": "Hobart",
+          "administrativeArea": "Tasmania",
+          "postalCode": "7001",
+          "country": "Australia"
+        }
+      ],
+      "phones": [
+        {
+          "value": "61 3 6226 7488",
+          "roles": ["voice"]
+        },
+        {
+          "value": "61 3 6226 2107",
+          "roles": ["facsimile"]
+        }
+      ],
+      "links": [
+        {
+          "href": "http://imos.org.au/aodn.html",
+          "title": "Website of the Australian Ocean Data Network (AODN)",
+          "type": "WWW:LINK-1.0-http--link"
+        }
+      ]
+    },
+    {
+      "roles": ["resourceProvider", "citation"],
+      "organization": "Integrated Marine Observing System (IMOS)",
+      "emails": ["imos@imos.org.au"],
+      "addresses": [
+        {
+          "deliveryPoint": ["Private Bag 110"],
+          "city": "Hobart",
+          "administrativeArea": "Tasmania",
+          "postalCode": "7001",
+          "country": "Australia"
+        }
+      ],
+      "phones": [
+        {
+          "value": "61 3 6226 7549",
+          "roles": ["voice"]
+        },
+        {
+          "value": "61 3 6226 2107",
+          "roles": ["facsimile"]
+        }
+      ]
+    }
+  ],
   "languages" : [ {
     "code" : "eng",
     "name" : "English"

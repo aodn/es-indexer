@@ -26,44 +26,26 @@
     "roles" : [ "about" ],
     "organization" : "CSIRO",
     "name" : "Chris Moeseneder",
-    "position" : "",
     "emails" : [ "chris.moeseneder@csiro.au" ],
-    "addresses" : [ {
-      "deliveryPoint" : [ "" ],
-      "city" : "",
-      "country" : "",
-      "postalCode" : "",
-      "administrativeArea" : ""
-    } ],
     "phones" : [ {
       "roles" : [ "voice" ],
       "value" : ""
     }, {
       "roles" : [ "facsimile" ],
       "value" : ""
-    } ],
-    "links" : [ ]
+    } ]
   }, {
     "roles" : [ "metadata" ],
     "organization" : "CSIRO",
     "name" : "Chris Moeseneder",
-    "position" : "",
     "emails" : [ "chris.moeseneder@csiro.au" ],
-    "addresses" : [ {
-      "deliveryPoint" : [ "" ],
-      "city" : "",
-      "country" : "",
-      "postalCode" : "",
-      "administrativeArea" : ""
-    } ],
     "phones" : [ {
       "roles" : [ "voice" ],
       "value" : ""
     }, {
       "roles" : [ "facsimile" ],
       "value" : ""
-    } ],
-    "links" : [ ]
+    } ]
   } ],
   "languages" : [ {
     "code" : "eng",

@@ -37,58 +37,68 @@
     "parameter_vocabs" : [ ],
     "organisation_vocabs" : [ ]
   },
-  "contacts" : [ {
-    "roles" : [ "resourceProvider", "about" ],
-    "organization" : "Environmental Geoscience Division",
-    "name" : null,
-    "position" : null,
-    "emails" : null,
-    "addresses" : null,
-    "phones" : null,
-    "links" : null
-  }, {
-    "roles" : [ "pointOfContact", "about" ],
-    "organization" : "Commonwealth of Australia (Geoscience Australia)",
-    "name" : null,
-    "position" : null,
-    "emails" : [ "clientservices@ga.gov.au" ],
-    "addresses" : [ {
-      "deliveryPoint" : [ "Cnr Jerrabomberra Ave and Hindmarsh Dr GPO Box 378" ],
-      "city" : "Canberra",
-      "country" : "Australia",
-      "postalCode" : "2601",
-      "administrativeArea" : "ACT"
-    } ],
-    "phones" : [ {
-      "roles" : [ "voice" ],
-      "value" : "1800 800 173"
-    }, {
-      "roles" : [ "facsimile" ],
-      "value" : "02 6249 9960"
-    } ],
-    "links" : null
-  }, {
-    "roles" : [ "pointOfContact", "metadata" ],
-    "organization" : "Commonwealth of Australia (Geoscience Australia)",
-    "name" : null,
-    "position" : null,
-    "emails" : [ "clientservices@ga.gov.au" ],
-    "addresses" : [ {
-      "deliveryPoint" : [ "Cnr Jerrabomberra Ave and Hindmarsh Dr GPO Box 378" ],
-      "city" : "Canberra",
-      "country" : "Australia",
-      "postalCode" : "2601",
-      "administrativeArea" : "ACT"
-    } ],
-    "phones" : [ {
-      "roles" : [ "voice" ],
-      "value" : "1800 800 173"
-    }, {
-      "roles" : [ "facsimile" ],
-      "value" : "02 6249 9960"
-    } ],
-    "links" : null
-  } ],
+  "contacts": [
+    {
+      "roles": ["pointOfContact", "about"],
+      "name": "Li, J."
+    },
+    {
+      "roles": ["resourceProvider", "about"],
+      "organization": "Environmental Geoscience Division"
+    },
+    {
+      "roles": ["pointOfContact", "about"],
+      "organization": "Commonwealth of Australia (Geoscience Australia)",
+      "emails": ["clientservices@ga.gov.au"],
+      "addresses": [
+        {
+          "deliveryPoint": ["Cnr Jerrabomberra Ave and Hindmarsh Dr GPO Box 378"],
+          "city": "Canberra",
+          "administrativeArea": "ACT",
+          "postalCode": "2601",
+          "country": "Australia"
+        }
+      ],
+      "phones": [
+        {
+          "value": "1800 800 173",
+          "roles": ["voice"]
+        },
+        {
+          "value": "02 6249 9960",
+          "roles": ["facsimile"]
+        }
+      ]
+    },
+    {
+      "roles": ["pointOfContact", "metadata"],
+      "organization": "Commonwealth of Australia (Geoscience Australia)",
+      "emails": ["clientservices@ga.gov.au"],
+      "addresses": [
+        {
+          "deliveryPoint": ["Cnr Jerrabomberra Ave and Hindmarsh Dr GPO Box 378"],
+          "city": "Canberra",
+          "administrativeArea": "ACT",
+          "postalCode": "2601",
+          "country": "Australia"
+        }
+      ],
+      "phones": [
+        {
+          "value": "1800 800 173",
+          "roles": ["voice"]
+        },
+        {
+          "value": "02 6249 9960",
+          "roles": ["facsimile"]
+        }
+      ]
+    },
+    {
+      "roles": ["author", "citation"],
+      "name": "Li, J."
+    }
+  ],
   "languages" : [ {
     "code" : "eng",
     "name" : "English"
