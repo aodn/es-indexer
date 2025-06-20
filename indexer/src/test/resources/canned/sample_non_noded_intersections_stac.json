@@ -60,7 +60,6 @@
       "deliveryPoint" : [ "GPO BOX 1538" ],
       "city" : "Hobart",
       "country" : "Australia",
-      "postalCode": "",
       "administrativeArea" : "Tasmania"
     } ],
     "phones" : [ {
@@ -129,7 +128,6 @@
       "deliveryPoint" : [ "GPO BOX 1538" ],
       "city" : "Hobart",
       "country" : "Australia",
-      "postalCode" : "",
       "administrativeArea" : "Tasmania"
     } ],
     "phones" : [ {
@@ -149,7 +147,6 @@
       "deliveryPoint" : [ "GPO BOX 1538" ],
       "city" : "Hobart",
       "country" : "Australia",
-      "postalCode" : "",
       "administrativeArea" : "Tasmania"
     } ],
     "phones" : [ {
@@ -166,7 +163,6 @@
     "position" : "Principal Research Scientist",
     "emails" : [ "anthony.richardson@csiro.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "" ],
       "city" : "Dutton Park",
       "country" : "Australia",
       "postalCode" : "4067",

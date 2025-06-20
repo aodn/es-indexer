@@ -10,7 +10,7 @@ import java.util.Objects;
 
 @Data
 @Builder
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class ContactsAddressModel {
     protected List<String> deliveryPoint;
     protected String city;

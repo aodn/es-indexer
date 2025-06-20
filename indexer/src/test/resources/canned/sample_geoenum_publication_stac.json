@@ -45,10 +45,8 @@
     "name" : "Carter, Alex, Dr",
     "emails" : [ "alexandra.carter@jcu.edu.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "" ],
       "city" : "Cairns",
       "country" : "Australia",
-      "postalCode" : "",
       "administrativeArea" : "Queensland"
     } ],
     "phones" : [ {
@@ -81,10 +79,7 @@
     "organization" : "Jungkayi for eastern Vanderlin Island",
     "name" : "Anderson, Stephen, Mr",
     "addresses" : [ {
-      "deliveryPoint" : [ "" ],
-      "city" : "",
       "country" : "Australia",
-      "postalCode" : "",
       "administrativeArea" : "Northern Territory"
     } ],
     "phones" : [ {
