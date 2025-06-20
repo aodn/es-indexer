@@ -110,13 +110,13 @@ public class IndexerController {
 
     @PostMapping(path="/async/all-cloud")
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Index a dataset by UUID")
-    public SseEmitter indexAllCOData() {
+    public SseEmitter indexAllCOData(@RequestParam(value = "beginWithUuid", required=false) String beginWithUuid) {
         final SseEmitter emitter = new SseEmitter(0L); // 0L means no timeout;
         final IndexService.Callback callback = createCallback(emitter);
 
         new Thread(() -> {
             try {
-                indexCloudOptimizedData.indexAllCloudOptimizedData(callback);
+                indexCloudOptimizedData.indexAllCloudOptimizedData(beginWithUuid, callback);
             }
             catch (Exception ioe) {
                 callback.onError(ioe);

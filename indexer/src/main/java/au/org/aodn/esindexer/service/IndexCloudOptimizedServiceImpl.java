@@ -63,7 +63,7 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
     }
 
     @Override
-    public List<BulkResponse> indexAllCloudOptimizedData(IndexService.Callback callback) {
+    public List<BulkResponse> indexAllCloudOptimizedData(String beginWithUuid, IndexService.Callback callback) {
 
         // Verify if data access service is up or not, it may be down during processing but we have retry
         DataAccessService.HealthStatus status = dataAccessService.getHealthStatus();
@@ -72,12 +72,24 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
             callback.onComplete(String.format("Data Access Service status %s is not UP, please retry later", status.toString()));
         }
         else {
-            elasticSearchIndexService.createIndexFromMappingJSONFile(AppConstants.DATASET_INDEX_MAPPING_JSON_FILE, indexName);
-
             Map<String, Map<String, MetadataEntity>> entities = dataAccessService.getAllMetadata();
             List<String> sorted = entities.keySet().stream()
                     .sorted()
                     .toList();
+
+            if(beginWithUuid != null && !sorted.isEmpty()) {
+                // We ignore all UUID before this beginWithUuid
+                int index = sorted.indexOf(beginWithUuid);
+
+                // If target not found or at start, no removal needed, else remove all items before
+                if (index > 0) {
+                    sorted = new ArrayList<>(sorted.subList(index, sorted.size()));
+                }
+            }
+            else {
+                // Do it from scratch so make sense to refresh the schema
+                elasticSearchIndexService.createIndexFromMappingJSONFile(AppConstants.DATASET_INDEX_MAPPING_JSON_FILE, indexName);
+            }
 
             for (String uuid : sorted) {
                 Map<String, MetadataEntity> entry = entities.get(uuid);
