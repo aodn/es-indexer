@@ -7,6 +7,7 @@ import au.org.aodn.cloudoptimized.model.TemporalExtent;
 import au.org.aodn.cloudoptimized.model.geojson.FeatureCollectionGeoJson;
 import au.org.aodn.cloudoptimized.service.DataAccessService;
 import au.org.aodn.esindexer.configuration.AppConstants;
+import au.org.aodn.metadata.geonetwork.exception.MetadataNotFoundException;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.ElasticsearchException;
 import co.elastic.clients.elasticsearch.core.BulkResponse;
@@ -19,10 +20,7 @@ import org.springframework.context.annotation.ScopedProxyMode;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Slf4j
 @Scope(proxyMode = ScopedProxyMode.TARGET_CLASS)
@@ -65,27 +63,56 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
     }
 
     @Override
-    public List<BulkResponse> indexAllCloudOptimizedData(IndexService.Callback callback) {
+    public List<BulkResponse> indexAllCloudOptimizedData(String beginWithUuid, IndexService.Callback callback) {
+
+        // Verify if data access service is up or not, it may be down during processing but we have retry
+        DataAccessService.HealthStatus status = dataAccessService.getHealthStatus();
         List<BulkResponse> results = new ArrayList<>();
-        elasticSearchIndexService.createIndexFromMappingJSONFile(AppConstants.DATASET_INDEX_MAPPING_JSON_FILE, indexName);
+        if(status != DataAccessService.HealthStatus.UP) {
+            callback.onComplete(String.format("Data Access Service status %s is not UP, please retry later", status.toString()));
+        }
+        else {
+            Map<String, Map<String, MetadataEntity>> entities = dataAccessService.getAllMetadata();
+            List<String> sorted = entities.keySet().stream()
+                    .sorted()
+                    .toList();
 
-        List<MetadataEntity> entities = dataAccessService.getAllMetadata();
-        List<MetadataEntity> sorted = entities.stream()
-                .sorted(Comparator.comparing(MetadataEntity::getUuid))
-                .toList();
+            if(beginWithUuid != null && !sorted.isEmpty()) {
+                // We ignore all UUID before this beginWithUuid
+                int index = sorted.indexOf(beginWithUuid);
 
-        for (MetadataEntity entity : sorted) {
-            List<TemporalExtent> temporalExtents = dataAccessService.getTemporalExtentOf(entity.getUuid());
-            if (!temporalExtents.isEmpty()) {
-                // Only first block works from data service api
-                LocalDate startDate = temporalExtents.get(0).getLocalStartDate();
-                LocalDate endDate = temporalExtents.get(0).getLocalEndDate();
+                // If target not found or at start, no removal needed, else remove all items before
+                if (index > 0) {
+                    sorted = new ArrayList<>(sorted.subList(index, sorted.size()));
+                }
+            }
+            else {
+                // Do it from scratch so make sense to refresh the schema
+                elasticSearchIndexService.createIndexFromMappingJSONFile(AppConstants.DATASET_INDEX_MAPPING_JSON_FILE, indexName);
+            }
 
-                callback.onProgress(String.format("Indexing dataset with UUID: %s from %s to %s", entity.getUuid(), startDate, endDate));
-                try {
-                    results.addAll(indexCloudOptimizedData(entity, startDate, endDate, callback));
-                } catch (IOException ioe) {
-                    // Do nothing
+            for (String uuid : sorted) {
+                Map<String, MetadataEntity> entry = entities.get(uuid);
+
+                for(String key: entry.keySet()) {
+                    try {
+                        List<TemporalExtent> temporalExtents = dataAccessService.getTemporalExtentOf(uuid, key);
+                        if (!temporalExtents.isEmpty()) {
+                            // Only first block works from data service api
+                            LocalDate startDate = temporalExtents.get(0).getLocalStartDate();
+                            LocalDate endDate = temporalExtents.get(0).getLocalEndDate();
+
+                            callback.onProgress(String.format("Indexing dataset with UUID: %s %s from %s to %s", uuid, key, startDate, endDate));
+                            try {
+                                results.addAll(indexCloudOptimizedData(entry.get(key), startDate, endDate, callback));
+                            } catch (IOException ioe) {
+                                // Do nothing
+                            }
+                        }
+                    }
+                    catch(MetadataNotFoundException enf) {
+                        callback.onProgress(String.format("Metadata not found, skip! %s", enf.getMessage()));
+                    }
                 }
             }
         }
@@ -108,17 +135,17 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
 
         List<BulkResponse> responses = new ArrayList<>();
 
-        callback.onProgress("Indexing cloud optimized data for dataset: " + metadata.getUuid());
+        callback.onProgress("Indexing cloud optimized data for dataset: " + metadata.getUuid() + " " + metadata.getDname());
         callback.onProgress("Temporal extent: " + startDate + " - " + endDate);
 
         Iterable<FeatureCollectionGeoJson> datasetIterator = new DatasetProvider(
                 metadata.getUuid(),
+                metadata.getDname(),
                 startDate,
                 endDate,
                 dataAccessService,
                 dataAccessService.getFields(metadata)
-        )
-                .getIterator();
+        ).getIterator();
 
         BulkRequestProcessor<FeatureCollectionGeoJson> bulkRequestProcessor = new BulkRequestProcessor<>(
                 indexName, (item) -> Optional.empty(), self, callback
@@ -130,33 +157,31 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
                     continue;
                 }
                 var featureCollections = avoidTooManyNestedObjects(featureCollection);
-                if (featureCollections.isEmpty()) {
-                    continue;
-                }
+                if (!featureCollections.isEmpty()) {
+                    for (int i = 0; i < featureCollections.size(); i++) {
+                        // No need to process if there is no features
+                        if(!featureCollections.get(i).getFeatures().isEmpty()) {
+                            String id = featureCollections.get(i).getProperties().get(GeoJsonProperty.COLLECTION.getValue()).toString();
+                            String key = featureCollections.get(i).getProperties().get(GeoJsonProperty.KEY.getValue()).toString();
+                            String date = featureCollections.get(i).getProperties().get(GeoJsonProperty.DATE.getValue()).toString();
 
-                if (featureCollections.size() == 1) {
-                    Object collection = featureCollections.get(0).getProperties().get(GeoJsonProperty.COLLECTION.getValue());
-                    Object date = featureCollections.get(0).getProperties().get(GeoJsonProperty.DATE.getValue());
-
-                    if(collection != null && date != null) {
-                        bulkRequestProcessor.processItem(
-                                        String.format("%s|%s", collection, date),
-                                        featureCollections.get(0), true)
-                                .ifPresent(responses::add);
+                            bulkRequestProcessor.processItem(
+                                    String.format("%s|%s|%s|%d", id, key, date, i),
+                                    featureCollections.get(i),
+                                    true
+                            ).ifPresent(responses::add);
+                            callback.onProgress(
+                                    String.format(
+                                            "Processed %s  %s in year month: %s, group %d" ,
+                                            id,
+                                            key,
+                                            featureCollection.getProperties().get(GeoJsonProperty.DATE.getValue()),
+                                            i
+                                    )
+                            );
+                        }
                     }
-                } else {
-                    for (var i = 0; i < featureCollections.size(); i++) {
-                        bulkRequestProcessor.processItem(
-                                        featureCollections.get(i).getProperties().get(GeoJsonProperty.COLLECTION.getValue()).toString()
-                                                + "|"
-                                                + featureCollections.get(i).getProperties().get(GeoJsonProperty.DATE.getValue()).toString()
-                                                + "(" + i + ")",
-                                        featureCollections.get(i), true)
-                                .ifPresent(responses::add);
-                    }
                 }
-
-                callback.onProgress("Processed data in year month: " + featureCollection.getProperties().get(GeoJsonProperty.DATE.getValue()));
             }
 
             bulkRequestProcessor

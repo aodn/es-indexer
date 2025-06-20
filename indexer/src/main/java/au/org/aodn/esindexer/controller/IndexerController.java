@@ -23,6 +23,7 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.*;
 
 @RestController
@@ -109,13 +110,13 @@ public class IndexerController {
 
     @PostMapping(path="/async/all-cloud")
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Index a dataset by UUID")
-    public SseEmitter indexAllCOData() {
+    public SseEmitter indexAllCOData(@RequestParam(value = "beginWithUuid", required=false) String beginWithUuid) {
         final SseEmitter emitter = new SseEmitter(0L); // 0L means no timeout;
         final IndexService.Callback callback = createCallback(emitter);
 
         new Thread(() -> {
             try {
-                indexCloudOptimizedData.indexAllCloudOptimizedData(callback);
+                indexCloudOptimizedData.indexAllCloudOptimizedData(beginWithUuid, callback);
             }
             catch (Exception ioe) {
                 callback.onError(ioe);
@@ -194,19 +195,30 @@ public class IndexerController {
 
         Callable<Void> task = () -> {
             try {
-                MetadataEntity metadata = dataAccessService.getMetadataByUuid(uuid);
-                List<TemporalExtent> temporalExtents = dataAccessService.getTemporalExtentOf(uuid);
-
-                if (metadata != null && !temporalExtents.isEmpty()) {
-                    // Only first block works from dataservice api
-                    LocalDate startDate = start == null ? temporalExtents.get(0).getLocalStartDate() : LocalDate.parse(start);
-                    LocalDate endDate = end == null ? temporalExtents.get(0).getLocalEndDate() : LocalDate.parse(end);
-                    log.info("Index cloud optimized data with UUID: {} from {} to {}", uuid, startDate, endDate);
-
-                    indexCloudOptimizedData.indexCloudOptimizedData(metadata, startDate, endDate, callback);
+                // Verify if data access service is up or not, it may be down during processing but we have retry
+                DataAccessService.HealthStatus status = dataAccessService.getHealthStatus();
+                if(status != DataAccessService.HealthStatus.UP) {
+                    callback.onComplete(String.format("Data Access Service status %s is not UP, please retry later", status.toString()));
                 }
                 else {
-                    log.info("Index cloud optimized data : {} not found", uuid);
+                    Map<String, MetadataEntity> metadata = dataAccessService.getMetadataByUuid(uuid);
+
+                    if (metadata != null) {
+                        for (String key : metadata.keySet()) {
+                            List<TemporalExtent> temporalExtents = dataAccessService.getTemporalExtentOf(uuid, key);
+
+                            if (!temporalExtents.isEmpty()) {
+                                // Only first block works from dataservice api
+                                LocalDate startDate = start == null ? temporalExtents.get(0).getLocalStartDate() : LocalDate.parse(start);
+                                LocalDate endDate = end == null ? temporalExtents.get(0).getLocalEndDate() : LocalDate.parse(end);
+                                log.info("Index cloud optimized data with UUID: {} from {} to {}", uuid, startDate, endDate);
+
+                                indexCloudOptimizedData.indexCloudOptimizedData(metadata.get(key), startDate, endDate, callback);
+                            } else {
+                                log.info("Index cloud optimized data : {} not found", uuid);
+                            }
+                        }
+                    }
                 }
             }
             catch (Exception ioe) {

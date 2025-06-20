@@ -5,6 +5,6 @@ public interface AppConstants {
 
     // use the updated schema and see what will happen soon
 //    String DATASET_INDEX_MAPPING_JSON_FILE = "data_index_schema.json";
-    String DATASET_INDEX_MAPPING_JSON_FILE = "data_index_schema2.json";
+    String DATASET_INDEX_MAPPING_JSON_FILE = "data_index_schema.json";
     String VOCABS_INDEX_MAPPING_SCHEMA_FILE = "vocabs_index_schema.json";
 }
