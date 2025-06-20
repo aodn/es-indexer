@@ -396,11 +396,6 @@ public class MapperUtils {
                 // Add phone number
                 safeGet(() -> contact.getCIContact().getPhone())
                         .ifPresent(phones -> {
-                            System.out.println("  Found " + phones.size() + " phones in this contact block");
-                            phones.forEach(phone -> {
-                                ContactsPhoneModel phoneModel = mapContactsPhone(phone);
-                                System.out.println("    Phone: " + phoneModel.getValue() + " - " + phoneModel.getRoles());
-                            });
                             contacts.getPhones()
                                     .addAll(phones.stream().map(MapperUtils::mapContactsPhone).toList());
                         });
@@ -535,14 +530,7 @@ public class MapperUtils {
             indvContactsModel.setRoles(roles);
         }
         Optional<Contacts> indvContactInfo = mapContactInfo(individual.getContactInfo());
-        // Debug logging
-        indvContactInfo.ifPresent(info -> {
-            System.out.println("Individual: " + mapContactsName(individual));
-            System.out.println("Phones found: " + info.getPhones().size());
-            info.getPhones().forEach(phone ->
-                    System.out.println("  Phone: " + phone.getValue() + " (" + phone.getRoles() + ")")
-            );
-        });
+
         // Set contact info
         indvContactInfo.ifPresent(i -> {
             if (!i.getAddresses().isEmpty()) {
