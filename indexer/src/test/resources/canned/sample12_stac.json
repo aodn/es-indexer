@@ -38,55 +38,170 @@
     "parameter_vocabs" : [ ],
     "organisation_vocabs" : [ ]
   },
-  "contacts" : [ {
-    "roles" : [ "custodian", "about" ],
-    "organization" : "AU/AADC > Australian Antarctic Data Centre, Australia",
-    "name" : "AADC, DATA OFFICER",
-    "position" : "DATA CENTER CONTACT",
-    "emails" : [ "metadata@aad.gov.au" ],
-    "addresses" : [ {
-      "deliveryPoint" : [ "Australian Antarctic Division", "203 Channel Highway" ],
-      "city" : "Kingston",
-      "country" : "Australia",
-      "postalCode" : "7050",
-      "administrativeArea" : "Tasmania"
-    } ],
-    "phones" : [ {
-      "roles" : [ "voice" ],
-      "value" : "+61 3 6232 3244"
-    }, {
-      "roles" : [ "facsimile" ],
-      "value" : "+61 3 6232 3351"
-    } ],
-    "links" : [ ]
-  }, {
-    "roles" : [ "sponsor", "metadata" ],
-    "organization" : "Australian Antarctic Division",
-    "name" : null,
-    "position" : null,
-    "emails" : null,
-    "addresses" : null,
-    "phones" : null,
-    "links" : null
-  }, {
-    "roles" : [ "owner", "metadata" ],
-    "organization" : "AADC",
-    "name" : null,
-    "position" : null,
-    "emails" : null,
-    "addresses" : null,
-    "phones" : null,
-    "links" : null
-  }, {
-    "roles" : [ "publisher", "citation" ],
-    "organization" : "Australian Antarctic Data Centre",
-    "name" : null,
-    "position" : null,
-    "emails" : null,
-    "addresses" : null,
-    "phones" : null,
-    "links" : null
-  } ],
+  "contacts":[
+    {
+      "name": "AADC, DATA OFFICER",
+      "organization": "AU/AADC > Australian Antarctic Data Centre, Australia",
+      "position": "DATA CENTER CONTACT",
+      "roles": [
+        "custodian",
+        "about"
+      ],
+      "emails": [
+        "metadata@aad.gov.au"
+      ],
+      "addresses": [
+        {
+          "deliveryPoint": [
+            "Australian Antarctic Division",
+            "203 Channel Highway"
+          ],
+          "city": "Kingston",
+          "administrativeArea": "Tasmania",
+          "postalCode": "7050",
+          "country": "Australia"
+        }
+      ],
+      "phones": [
+        {
+          "value": "+61 3 6232 3244",
+          "roles": [
+            "voice"
+          ]
+        },
+        {
+          "value": "+61 3 6232 3351",
+          "roles": [
+            "facsimile"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "CONNELL, DAVE J.",
+      "roles": [
+        "author",
+        "metadata"
+      ],
+      "emails": [
+        "dave.connell@aad.gov.au"
+      ],
+      "addresses": [
+        {
+          "deliveryPoint": [
+            "Australian Antarctic Division",
+            "203 Channel Highway"
+          ],
+          "city": "Kingston",
+          "administrativeArea": "Tasmania",
+          "postalCode": "7050",
+          "country": "Australia"
+        }
+      ],
+      "phones": [
+        {
+          "value": "+61 3 6232 3244",
+          "roles": [
+            "voice"
+          ]
+        },
+        {
+          "value": "+61 3 6232 3351",
+          "roles": [
+            "facsimile"
+          ]
+        }
+      ]
+    },
+    {
+      "organization": "Australian Antarctic Division",
+      "roles": [
+        "sponsor",
+        "metadata"
+      ]
+    },
+    {
+      "organization": "AADC",
+      "roles": [
+        "owner",
+        "metadata"
+      ]
+    },
+    {
+      "name": "Commonwealth of Australia",
+      "roles": [
+        "originator",
+        "citation"
+      ]
+    },
+    {
+      "organization": "Australian Antarctic Data Centre",
+      "roles": [
+        "publisher",
+        "citation"
+      ]
+    },
+    {
+      "name": "REEVE, JONO",
+      "roles": [
+        "principalInvestigator",
+        "citation"
+      ],
+      "emails": [
+        "jono.reeve@aad.gov.au"
+      ],
+      "addresses": [
+        {
+          "deliveryPoint": [
+            "Australian Antarctic Division",
+            "203 Channel Highway"
+          ],
+          "city": "Kingston",
+          "administrativeArea": "Tasmania",
+          "postalCode": "7050",
+          "country": "Australia"
+        }
+      ],
+      "phones": [
+        {
+          "value": "+61 3 6232 3106",
+          "roles": [
+            "voice"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "REEVE, JONO",
+      "roles": [
+        "collaborator",
+        "citation"
+      ],
+      "emails": [
+        "jono.reeve@aad.gov.au"
+      ],
+      "addresses": [
+        {
+          "deliveryPoint": [
+            "Australian Antarctic Division",
+            "203 Channel Highway"
+          ],
+          "city": "Kingston",
+          "administrativeArea": "Tasmania",
+          "postalCode": "7050",
+          "country": "Australia"
+        }
+      ],
+      "phones": [
+        {
+          "value": "+61 3 6232 3106",
+          "roles": [
+            "voice"
+          ]
+        }
+      ]
+    }
+  ],
   "languages" : [ {
     "code" : "eng",
     "name" : "English"

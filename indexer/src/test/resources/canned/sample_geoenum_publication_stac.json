@@ -43,25 +43,20 @@
     "roles" : [ "pointOfContact", "about" ],
     "organization" : "TropWATER, James Cook University",
     "name" : "Carter, Alex, Dr",
-    "position" : "",
     "emails" : [ "alexandra.carter@jcu.edu.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "" ],
       "city" : "Cairns",
       "country" : "Australia",
-      "postalCode" : "",
       "administrativeArea" : "Queensland"
     } ],
     "phones" : [ {
       "roles" : [ "voice" ],
       "value" : ""
-    } ],
-    "links" : [ ]
+    } ]
   }, {
     "roles" : [ "pointOfContact", "metadata" ],
     "organization" : "Australian Institute of Marine Science (AIMS)",
     "name" : "eAtlas Data Manager",
-    "position" : "",
     "emails" : [ "e-atlas@aims.gov.au" ],
     "addresses" : [ {
       "deliveryPoint" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],
@@ -83,20 +78,14 @@
     "roles" : [ "collaborator", "citation" ],
     "organization" : "Jungkayi for eastern Vanderlin Island",
     "name" : "Anderson, Stephen, Mr",
-    "position" : "",
-    "emails" : [ ],
     "addresses" : [ {
-      "deliveryPoint" : [ "" ],
-      "city" : "",
       "country" : "Australia",
-      "postalCode" : "",
       "administrativeArea" : "Northern Territory"
     } ],
     "phones" : [ {
       "roles" : [ "voice" ],
       "value" : ""
-    } ],
-    "links" : [ ]
+    } ]
   } ],
   "languages" : [ {
     "code" : "eng",

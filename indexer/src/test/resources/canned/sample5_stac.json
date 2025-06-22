@@ -43,7 +43,6 @@
   "contacts" : [ {
     "roles" : [ "pointOfContact", "about" ],
     "organization" : "Integrated Marine Observing System (IMOS)",
-    "name" : "",
     "position" : "Data Officer",
     "emails" : [ "info@aodn.org.au" ],
     "addresses" : [ {
@@ -68,7 +67,6 @@
   }, {
     "roles" : [ "distributor", "metadata" ],
     "organization" : "Integrated Marine Observing System (IMOS)",
-    "name" : "",
     "position" : "Data Officer",
     "emails" : [ "info@aodn.org.au" ],
     "addresses" : [ {

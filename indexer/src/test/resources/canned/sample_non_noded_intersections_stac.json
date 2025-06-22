@@ -60,7 +60,6 @@
       "deliveryPoint" : [ "GPO BOX 1538" ],
       "city" : "Hobart",
       "country" : "Australia",
-      "postalCode" : "",
       "administrativeArea" : "Tasmania"
     } ],
     "phones" : [ {
@@ -79,7 +78,6 @@
     "roles" : [ "pointOfContact", "metadata" ],
     "organization" : "Australian Institute of Marine Science (AIMS)",
     "name" : "eAtlas Data Manager",
-    "position" : "",
     "emails" : [ "e-atlas@aims.gov.au" ],
     "addresses" : [ {
       "deliveryPoint" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],
@@ -119,8 +117,7 @@
     }, {
       "roles" : [ "facsimile" ],
       "value" : ""
-    } ],
-    "links" : [ ]
+    } ]
   }, {
     "roles" : [ "collaborator", "citation" ],
     "organization" : "Oceans and Atmosphere, CSIRO",
@@ -131,7 +128,6 @@
       "deliveryPoint" : [ "GPO BOX 1538" ],
       "city" : "Hobart",
       "country" : "Australia",
-      "postalCode" : "",
       "administrativeArea" : "Tasmania"
     } ],
     "phones" : [ {
@@ -140,8 +136,7 @@
     }, {
       "roles" : [ "facsimile" ],
       "value" : ""
-    } ],
-    "links" : [ ]
+    } ]
   }, {
     "roles" : [ "collaborator", "citation" ],
     "organization" : "Oceans and Atmosphere, CSIRO",
@@ -152,7 +147,6 @@
       "deliveryPoint" : [ "GPO BOX 1538" ],
       "city" : "Hobart",
       "country" : "Australia",
-      "postalCode" : "",
       "administrativeArea" : "Tasmania"
     } ],
     "phones" : [ {
@@ -161,8 +155,7 @@
     }, {
       "roles" : [ "facsimile" ],
       "value" : ""
-    } ],
-    "links" : [ ]
+    } ]
   }, {
     "roles" : [ "collaborator", "citation" ],
     "organization" : "Oceans and Atmosphere, CSIRO",
@@ -170,7 +163,6 @@
     "position" : "Principal Research Scientist",
     "emails" : [ "anthony.richardson@csiro.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "" ],
       "city" : "Dutton Park",
       "country" : "Australia",
       "postalCode" : "4067",
@@ -182,8 +174,7 @@
     }, {
       "roles" : [ "facsimile" ],
       "value" : ""
-    } ],
-    "links" : [ ]
+    } ]
   } ],
   "languages" : [ {
     "code" : "eng",

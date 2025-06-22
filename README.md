@@ -97,3 +97,17 @@ manually by Nat, right now store here [excel](https://universitytasmania.sharepo
 The vocab is assigned to the metadata manually, and is part of the suggested words. That means user can type vocabs in
 the search box, and able to select some known keywords. Although vocabs have multiple level, so far we only use level 1
 and level 2.
+
+## Branching name
+
+- `hotfix/`: for quickly fixing critical issues,
+- `usually/`: with a temporary solution
+- `bugfix/`: for fixing a bug
+- `feature/`: for adding, removing or modifying a feature
+- `test/`: for experimenting something which is not an issue
+- `wip/`: for a work in progress
+
+And add the issue id after an `/` followed with an explanation of the task.
+
+Example of use:
+`feature/6709-add-GN-protocol-to-link-mapping`

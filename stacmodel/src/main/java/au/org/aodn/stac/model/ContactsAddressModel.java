@@ -1,6 +1,7 @@
 package au.org.aodn.stac.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 import lombok.Data;
 
@@ -9,6 +10,7 @@ import java.util.Objects;
 
 @Data
 @Builder
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class ContactsAddressModel {
     protected List<String> deliveryPoint;
     protected String city;
@@ -18,7 +20,7 @@ public class ContactsAddressModel {
 
     @JsonIgnore
     public boolean isEmpty() {
-        return (deliveryPoint == null || deliveryPoint.isEmpty())
+        return (deliveryPoint == null || deliveryPoint.isEmpty() || deliveryPoint.stream().allMatch(String::isBlank))
                 && (city == null || city.isEmpty() || city.isBlank())
                 && (country == null || country.isEmpty() || country.isBlank())
                 && (postalCode == null || postalCode.isEmpty() || postalCode.isBlank())
