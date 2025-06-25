@@ -153,18 +153,20 @@ public class VocabServiceImpl implements VocabService {
         List<String> results = new ArrayList<>();
 
         // filter out null themes and null concepts
-        themes = themes.stream().filter(Objects:: nonNull).filter(theme -> theme.getConcepts() != null).toList();
+        themes = themes.stream()
+                .filter(Objects:: nonNull)
+                .filter(theme -> theme.getConcepts() != null).toList();
 
         for (var theme: themes) {
             for (var concept: theme.getConcepts()) {
-                if (!concept.getTitle().toLowerCase().contains("aodn organisation vocabulary")) {
-                    continue;
-                }
 
                 if (concept.getId() == null || concept.getId().isEmpty()) {
                     continue;
                 }
-                results.add(concept.getId());
+
+                if (concept.getTitle().toLowerCase().contains("aodn organisation vocabulary")) {
+                    results.add(concept.getId());
+                }
             }
         }
         return results;
