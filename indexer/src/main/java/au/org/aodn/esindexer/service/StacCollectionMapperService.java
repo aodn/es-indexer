@@ -2,6 +2,7 @@ package au.org.aodn.esindexer.service;
 
 import au.org.aodn.stac.model.RelationType;
 import au.org.aodn.cloudoptimized.service.DataAccessService;
+import au.org.aodn.datadiscoveryai.service.DataDiscoveryAiService;
 import au.org.aodn.esindexer.utils.AssociatedRecordsUtil;
 import au.org.aodn.esindexer.utils.*;
 import au.org.aodn.metadata.geonetwork.service.GeoNetworkService;
@@ -82,6 +83,9 @@ public abstract class StacCollectionMapperService {
 
     @Autowired
     protected IndexCloudOptimizedService indexCloudOptimizedService;
+
+    @Autowired(required = false)
+    protected DataDiscoveryAiService dataDiscoveryAiService;
 
     @Named("mapUUID")
     String mapUUID(MDMetadataType source) {
@@ -591,6 +595,7 @@ public abstract class StacCollectionMapperService {
     @Named("mapLinks")
     List<LinkModel> mapLinks(MDMetadataType source) {
         final List<LinkModel> results = new ArrayList<>();
+        logger.info("start map links");
 
         // distribution links
         List<MDDistributionType> items = MapperUtils.findMDDistributionType(source);
@@ -659,7 +664,24 @@ public abstract class StacCollectionMapperService {
             results.add(notebook);
         }
 
-        return results;
+        // Enhance links with AI grouping if service is available
+        if (dataDiscoveryAiService != null
+//                && dataDiscoveryAiService.isServiceAvailable()
+        ) {
+            String uuid = CommonUtils.getUUID(source);
+            logger.info("Enhancing links with AI grouping for UUID: {}", uuid);
+            try {
+                List<LinkModel> enhancedLinks = dataDiscoveryAiService.enhanceLinksWithAiGrouping(uuid, results);
+                logger.info("AI grouping for UUID successfully: {}", uuid);
+                return enhancedLinks != null ? enhancedLinks : results;
+            } catch (Exception e) {
+                logger.warn("Failed to enhance links with AI grouping for UUID: {}, falling back to original links", uuid, e);
+                return results;
+            }
+        } else {
+            logger.debug("Data Discovery AI service not available, returning original links");
+            return results;
+        }
     }
 
     private List<LinkModel> getAssociatedRecords(MDMetadataType source) {
