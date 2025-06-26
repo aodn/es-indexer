@@ -68,7 +68,13 @@ public class VocabServiceImpl implements VocabService {
         * thatConcept is the object created by iterating over the parameter_vocabs cache...ConceptModel thatConcept = ConceptModel.builder()
         * using overriding equals method to compare the two objects, this is not checking instanceof ConceptModel class
         */
-        return theme.getConcepts().stream().anyMatch(f -> f.equals(thatConcept));
+
+        // since vocabs don't have title nor description, so only compare id and url
+        return theme.getConcepts()
+                .stream()
+                .anyMatch(f ->
+                        f.getId().equalsIgnoreCase(thatConcept.getId()) &&
+                                f.getUrl().equalsIgnoreCase(thatConcept.getUrl()));
     }
 
     @Autowired
