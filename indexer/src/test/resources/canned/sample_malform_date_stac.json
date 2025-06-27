@@ -68,20 +68,26 @@
   "themes" : [ {
     "concepts" : [ {
       "id" : "Global / Oceans | Indian Ocean",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.place.urn:aodn.org.au:geographicextents&id=urn:aodn.org.au:geographicextents:concept:4"
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.place.urn:aodn.org.au:geographicextents&id=urn:aodn.org.au:geographicextents:concept:4",
+      "description" : "AODN GEN",
+      "title" : "AODN Geographic Extent Names"
     }, {
       "id" : "Global / Oceans | Pacific Ocean",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.place.urn:aodn.org.au:geographicextents&id=urn:aodn.org.au:geographicextents:concept:5"
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.place.urn:aodn.org.au:geographicextents&id=urn:aodn.org.au:geographicextents:concept:5",
+      "description" : "AODN GEN",
+      "title" : "AODN Geographic Extent Names"
     }, {
       "id" : "Global / Oceans | Southern Ocean",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.place.urn:aodn.org.au:geographicextents&id=urn:aodn.org.au:geographicextents:concept:6"
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.place.urn:aodn.org.au:geographicextents&id=urn:aodn.org.au:geographicextents:concept:6",
+      "description" : "AODN GEN",
+      "title" : "AODN Geographic Extent Names"
     }, {
       "id" : "Marine Features (Australia) | Australian EEZ",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.place.urn:aodn.org.au:geographicextents&id=urn:aodn.org.au:geographicextents:concept:1001"
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.place.urn:aodn.org.au:geographicextents&id=urn:aodn.org.au:geographicextents:concept:1001",
+      "description" : "AODN GEN",
+      "title" : "AODN Geographic Extent Names"
     } ],
-    "scheme" : "place",
-    "description" : "AODN GEN",
-    "title" : "AODN Geographic Extent Names"
+    "scheme" : "place"
   } ],
   "id" : "10955a94-8737-08e4-e053-08114f8c5e74",
   "search_suggestions" : {

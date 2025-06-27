@@ -464,7 +464,7 @@ public abstract class StacCollectionMapperService {
         }
     }
 
-    protected List<ConceptModel> mapThemesConcepts(MDKeywordsPropertyType descriptiveKeyword) {
+    protected List<ConceptModel> mapThemesConcepts(MDKeywordsPropertyType descriptiveKeyword, String uuid) {
         final List<ConceptModel> concepts = new ArrayList<>();
         safeGet(() -> descriptiveKeyword.getMDKeywords().getKeyword())
                 .ifPresent(p -> p.forEach(keyword -> {
@@ -476,6 +476,8 @@ public abstract class StacCollectionMapperService {
                         } else {
                             conceptModel.setId(keyword.getCharacterString().getValue().toString());
                         }
+                        conceptModel.setTitle(mapThemesTitle(descriptiveKeyword, uuid));
+                        conceptModel.setDescription(mapThemesDescription(descriptiveKeyword, uuid));
                         concepts.add(conceptModel);
                     }
                 }
@@ -553,18 +555,20 @@ public abstract class StacCollectionMapperService {
     }
 
     protected String mapThemesScheme(MDKeywordsPropertyType descriptiveKeyword, String uuid) {
-        return safeGet(() -> descriptiveKeyword.getMDKeywords().getThesaurusName())
-                .map(abstractCitationPropertyType -> {
-                    if (descriptiveKeyword.getMDKeywords().getType() != null) {
-                        return descriptiveKeyword.getMDKeywords().getType().getMDKeywordTypeCode().getCodeListValue();
-                    } else {
-                        return "";
-                    }
-                })
-                .orElseGet(() -> {
-                    logger.debug("Unable to find themes' scheme for metadata record: " + uuid);
-                    return "";
-                });
+
+        var thesaurusName = safeGet(() -> descriptiveKeyword.getMDKeywords().getThesaurusName());
+        if (thesaurusName.isEmpty()) {
+                    logger.debug("thesaurusName is not found when mapping theme scheme for metadata record: {}", uuid);
+            return "";
+        }
+        var codeListValue = safeGet(() -> descriptiveKeyword.getMDKeywords()
+                .getType().getMDKeywordTypeCode().getCodeListValue());
+        if (codeListValue.isEmpty()) {
+            logger.debug("codeListValue is not found when mapping theme scheme for metadata record: {}", uuid);
+            return "";
+        }
+
+        return codeListValue.get();
     }
 
     @Named("mapThemes")
@@ -577,9 +581,7 @@ public abstract class StacCollectionMapperService {
                     ThemesModel themesModel = ThemesModel.builder().build();
                     String uuid = CommonUtils.getUUID(source);
 
-                    themesModel.setConcepts(mapThemesConcepts(descriptiveKeyword));
-                    themesModel.setTitle(mapThemesTitle(descriptiveKeyword, uuid));
-                    themesModel.setDescription(mapThemesDescription(descriptiveKeyword, uuid));
+                    themesModel.setConcepts(mapThemesConcepts(descriptiveKeyword, uuid));
                     themesModel.setScheme(mapThemesScheme(descriptiveKeyword, uuid));
                     results.add(themesModel);
                 });

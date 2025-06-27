@@ -269,112 +269,178 @@
   } ],
   "themes" : [ {
     "concepts" : [ {
-      "id" : "Oceans | Ocean Temperature | Sea Surface Temperature"
+      "id" : "Oceans | Ocean Temperature | Sea Surface Temperature",
+      "description" : "GCMD",
+      "title" : "NASA/Global Change Master Directory Earth Science Keywords Version 5.3.8"
     }, {
-      "id" : "Oceans | Salinity/density | Salinity"
+      "id" : "Oceans | Salinity/density | Salinity",
+      "description" : "GCMD",
+      "title" : "NASA/Global Change Master Directory Earth Science Keywords Version 5.3.8"
     }, {
-      "id" : "Oceans | Ocean Chemistry | Carbon Dioxide"
+      "id" : "Oceans | Ocean Chemistry | Carbon Dioxide",
+      "description" : "GCMD",
+      "title" : "NASA/Global Change Master Directory Earth Science Keywords Version 5.3.8"
     }, {
-      "id" : "Oceans | Ocean Chemistry | Carbonate"
+      "id" : "Oceans | Ocean Chemistry | Carbonate",
+      "description" : "GCMD",
+      "title" : "NASA/Global Change Master Directory Earth Science Keywords Version 5.3.8"
     }, {
-      "id" : "Oceans | Ocean Chemistry | pH"
+      "id" : "Oceans | Ocean Chemistry | pH",
+      "description" : "GCMD",
+      "title" : "NASA/Global Change Master Directory Earth Science Keywords Version 5.3.8"
     } ],
-    "scheme" : "theme",
-    "description" : "GCMD",
-    "title" : "NASA/Global Change Master Directory Earth Science Keywords Version 5.3.8"
+    "scheme" : "theme"
   }, {
     "concepts" : [ {
-      "id" : "Ocean Biogeochemistry"
+      "id" : "Ocean Biogeochemistry",
+      "description" : "IMOS",
+      "title" : "IMOS Keywords Thesaurus"
     }, {
-      "id" : "pCO2"
+      "id" : "pCO2",
+      "description" : "IMOS",
+      "title" : "IMOS Keywords Thesaurus"
     } ],
-    "scheme" : "theme",
-    "description" : "IMOS",
-    "title" : "IMOS Keywords Thesaurus"
+    "scheme" : "theme"
   }, {
     "concepts" : [ {
-      "id" : "Global / Oceans | Pacific Ocean"
+      "id" : "Global / Oceans | Pacific Ocean",
+      "description" : "",
+      "title" : "AODN Geographic Extents Vocabulary"
     }, {
-      "id" : "Global / Oceans | Southern Ocean"
+      "id" : "Global / Oceans | Southern Ocean",
+      "description" : "",
+      "title" : "AODN Geographic Extents Vocabulary"
     }, {
-      "id" : "Global / Oceans | Indian Ocean"
+      "id" : "Global / Oceans | Indian Ocean",
+      "description" : "",
+      "title" : "AODN Geographic Extents Vocabulary"
     }, {
-      "id" : "Marine Features (Australia) | Great Australian Bight, SA/WA"
+      "id" : "Marine Features (Australia) | Great Australian Bight, SA/WA",
+      "description" : "",
+      "title" : "AODN Geographic Extents Vocabulary"
     }, {
-      "id" : "Marine Features (Australia) | Bass Strait, TAS/VIC"
+      "id" : "Marine Features (Australia) | Bass Strait, TAS/VIC",
+      "description" : "",
+      "title" : "AODN Geographic Extents Vocabulary"
     }, {
-      "id" : "Regional Seas | Coral Sea"
+      "id" : "Regional Seas | Coral Sea",
+      "description" : "",
+      "title" : "AODN Geographic Extents Vocabulary"
     }, {
-      "id" : "Regional Seas | Tasman Sea"
+      "id" : "Regional Seas | Tasman Sea",
+      "description" : "",
+      "title" : "AODN Geographic Extents Vocabulary"
     }, {
-      "id" : "Regional Seas | Timor Sea"
+      "id" : "Regional Seas | Timor Sea",
+      "description" : "",
+      "title" : "AODN Geographic Extents Vocabulary"
     }, {
-      "id" : "Regional Seas | Arafura Sea"
+      "id" : "Regional Seas | Arafura Sea",
+      "description" : "",
+      "title" : "AODN Geographic Extents Vocabulary"
     }, {
-      "id" : "Regional Seas | Banda Sea"
+      "id" : "Regional Seas | Banda Sea",
+      "description" : "",
+      "title" : "AODN Geographic Extents Vocabulary"
     }, {
-      "id" : "Regional Seas | Java Sea"
+      "id" : "Regional Seas | Java Sea",
+      "description" : "",
+      "title" : "AODN Geographic Extents Vocabulary"
     }, {
-      "id" : "Regional Seas | Solomon Sea"
+      "id" : "Regional Seas | Solomon Sea",
+      "description" : "",
+      "title" : "AODN Geographic Extents Vocabulary"
     } ],
-    "scheme" : "place",
-    "description" : "",
-    "title" : "AODN Geographic Extents Vocabulary"
+    "scheme" : "place"
   }, {
     "concepts" : [ {
-      "id" : "Countries | Australia"
+      "id" : "Countries | Australia",
+      "description" : "",
+      "title" : "AODN Geographic Extents Vocabulary"
     }, {
-      "id" : "Countries | Papua New Guinea"
+      "id" : "Countries | Papua New Guinea",
+      "description" : "",
+      "title" : "AODN Geographic Extents Vocabulary"
     }, {
-      "id" : "Countries | Indonesia"
+      "id" : "Countries | Indonesia",
+      "description" : "",
+      "title" : "AODN Geographic Extents Vocabulary"
     }, {
-      "id" : "Countries | Timor-Leste"
+      "id" : "Countries | Timor-Leste",
+      "description" : "",
+      "title" : "AODN Geographic Extents Vocabulary"
     }, {
-      "id" : "Countries | New Zealand"
+      "id" : "Countries | New Zealand",
+      "description" : "",
+      "title" : "AODN Geographic Extents Vocabulary"
     }, {
-      "id" : "States, Territories (Australia) | Western Australia"
+      "id" : "States, Territories (Australia) | Western Australia",
+      "description" : "",
+      "title" : "AODN Geographic Extents Vocabulary"
     }, {
-      "id" : "States, Territories (Australia) | Queensland"
+      "id" : "States, Territories (Australia) | Queensland",
+      "description" : "",
+      "title" : "AODN Geographic Extents Vocabulary"
     }, {
-      "id" : "States, Territories (Australia) | South Australia"
+      "id" : "States, Territories (Australia) | South Australia",
+      "description" : "",
+      "title" : "AODN Geographic Extents Vocabulary"
     }, {
-      "id" : "States, Territories (Australia) | Tasmania"
+      "id" : "States, Territories (Australia) | Tasmania",
+      "description" : "",
+      "title" : "AODN Geographic Extents Vocabulary"
     }, {
-      "id" : "States, Territories (Australia) | Victoria"
+      "id" : "States, Territories (Australia) | Victoria",
+      "description" : "",
+      "title" : "AODN Geographic Extents Vocabulary"
     }, {
-      "id" : "States, Territories (Australia) | New South Wales"
+      "id" : "States, Territories (Australia) | New South Wales",
+      "description" : "",
+      "title" : "AODN Geographic Extents Vocabulary"
     }, {
-      "id" : "States, Territories (Australia) | Northern Territory"
+      "id" : "States, Territories (Australia) | Northern Territory",
+      "description" : "",
+      "title" : "AODN Geographic Extents Vocabulary"
     } ],
-    "scheme" : "place",
-    "description" : "",
-    "title" : "AODN Geographic Extents Vocabulary"
+    "scheme" : "place"
   }, {
     "concepts" : [ {
       "id" : "Temperature of the water body",
-      "url" : "http://vocab.nerc.ac.uk/collection/P01/current/TEMPPR01"
+      "url" : "http://vocab.nerc.ac.uk/collection/P01/current/TEMPPR01",
+      "description" : "",
+      "title" : "AODN Discovery Parameter Vocabulary"
     }, {
       "id" : "Practical salinity of the water body",
-      "url" : "http://vocab.nerc.ac.uk/collection/P01/current/PSLTZZ01"
+      "url" : "http://vocab.nerc.ac.uk/collection/P01/current/PSLTZZ01",
+      "description" : "",
+      "title" : "AODN Discovery Parameter Vocabulary"
     }, {
       "id" : "Concentration of carbon (total inorganic) per unit mass of the water body",
-      "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/1"
+      "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/1",
+      "description" : "",
+      "title" : "AODN Discovery Parameter Vocabulary"
     }, {
       "id" : "Total alkalinity per unit mass of the water body",
-      "url" : "http://vocab.nerc.ac.uk/collection/P01/current/MDMAP014"
+      "url" : "http://vocab.nerc.ac.uk/collection/P01/current/MDMAP014",
+      "description" : "",
+      "title" : "AODN Discovery Parameter Vocabulary"
     }, {
       "id" : "Saturation state of aragonite in the water body",
-      "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/24"
+      "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/24",
+      "description" : "",
+      "title" : "AODN Discovery Parameter Vocabulary"
     }, {
       "id" : "Saturation state of calcite in the water body",
-      "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/25"
+      "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/25",
+      "description" : "",
+      "title" : "AODN Discovery Parameter Vocabulary"
     }, {
       "id" : "pH (total scale) of the water body",
-      "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/27"
+      "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/27",
+      "description" : "",
+      "title" : "AODN Discovery Parameter Vocabulary"
     } ],
-    "scheme" : "theme",
-    "description" : "",
-    "title" : "AODN Discovery Parameter Vocabulary"
+    "scheme" : "theme"
   } ],
   "id" : "7709f541-fc0c-4318-b5b9-9053aa474e0e",
   "search_suggestions" : {

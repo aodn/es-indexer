@@ -32,6 +32,7 @@ import java.util.concurrent.*;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static au.org.aodn.esindexer.utils.CommonUtils.safeGet;
 
@@ -67,7 +68,13 @@ public class VocabServiceImpl implements VocabService {
         * thatConcept is the object created by iterating over the parameter_vocabs cache...ConceptModel thatConcept = ConceptModel.builder()
         * using overriding equals method to compare the two objects, this is not checking instanceof ConceptModel class
         */
-        return theme.getConcepts().stream().anyMatch(f -> f.equals(thatConcept));
+
+        // since vocabs don't have title nor description, so only compare id and url
+        return theme.getConcepts()
+                .stream()
+                .anyMatch(f ->
+                        f.getId().equalsIgnoreCase(thatConcept.getId()) &&
+                                f.getUrl().equalsIgnoreCase(thatConcept.getUrl()));
     }
 
     @Autowired
@@ -150,14 +157,24 @@ public class VocabServiceImpl implements VocabService {
 
     public List<String> extractOrganisationVocabLabelsFromThemes(List<ThemesModel> themes) {
         List<String> results = new ArrayList<>();
-        themes.stream()
-                .filter(Objects::nonNull)
-                .forEach(theme -> safeGet(theme::getTitle)
-                        .filter(title -> title.toLowerCase().contains("aodn organisation vocabulary"))
-                        .ifPresent(title -> theme.getConcepts().stream()
-                                .filter(concept -> concept.getId() != null && !concept.getId().isEmpty())
-                                .forEach(concept -> results.add(concept.getId()))
-                        ));
+
+        // filter out null themes and null concepts
+        themes = themes.stream()
+                .filter(Objects:: nonNull)
+                .filter(theme -> theme.getConcepts() != null).toList();
+
+        for (var theme: themes) {
+            for (var concept: theme.getConcepts()) {
+
+                if (concept.getId() == null || concept.getId().isEmpty()) {
+                    continue;
+                }
+
+                if (concept.getTitle().toLowerCase().contains("aodn organisation vocabulary")) {
+                    results.add(concept.getId());
+                }
+            }
+        }
         return results;
     }
 

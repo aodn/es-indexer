@@ -139,30 +139,32 @@
   "themes" : [ {
     "concepts" : [ {
       "id" : "marine",
-      "url" : null
+      "url" : null,
+      "description" : "",
+      "title" : "Keywords (Theme)"
     }, {
       "id" : "National Environmental Science Program (NESP) Marine and Coastal Hub",
-      "url" : null
+      "url" : null,
+      "description" : "",
+      "title" : "Keywords (Theme)"
     } ],
-    "scheme" : "",
-    "description" : "",
-    "title" : "Keywords (Theme)"
+    "scheme" : ""
   }, {
     "concepts" : [ {
       "id" : "MARINE",
-      "url" : null
+      "url" : null,
+      "description" : "",
+      "title" : "theme.sciencekeywords-8.1_.rdf"
     } ],
-    "scheme" : "theme",
-    "description" : "",
-    "title" : "theme.sciencekeywords-8.1_.rdf"
+    "scheme" : "theme"
   }, {
     "concepts" : [ {
       "id" : "Coastal Waters (Australia)",
-      "url" : null
+      "url" : null,
+      "description" : "",
+      "title" : "AODN Geographic Extents Vocabulary"
     } ],
-    "scheme" : "place",
-    "description" : "",
-    "title" : "AODN Geographic Extents Vocabulary"
+    "scheme" : "place"
   } ],
   "id" : "cffa7269-5d95-486b-9b2e-77316e808398",
   "search_suggestions" : {

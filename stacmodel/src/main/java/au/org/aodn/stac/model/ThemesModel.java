@@ -10,13 +10,9 @@ import java.util.List;
 public class ThemesModel {
     protected List<ConceptModel> concepts;
     protected String scheme;
-    protected String description;
-    protected String title;
 
-    public ThemesModel(List<ConceptModel> concepts, String scheme, String description, String title) {
+    public ThemesModel(List<ConceptModel> concepts, String scheme) {
         this.concepts = concepts;
         this.scheme = scheme;
-        this.description = description;
-        this.title = title;
     }
 }

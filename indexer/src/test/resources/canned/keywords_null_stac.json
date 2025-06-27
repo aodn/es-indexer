@@ -112,11 +112,11 @@
   "themes" : [ {
     "concepts" : [ {
       "id" : "Seabed sediments",
-      "url" : null
+      "url" : null,
+      "description" : "",
+      "title" : "Keywords (FeatureType)"
     } ],
-    "scheme" : "",
-    "description" : "",
-    "title" : "Keywords (FeatureType)"
+    "scheme" : ""
   }, {
     "concepts" : [ ],
     "scheme" : "",
@@ -133,27 +133,27 @@
   }, {
     "concepts" : [ {
       "id" : "National Environmental Science Program",
-      "url" : null
+      "url" : null,
+      "description" : "",
+      "title" : "Keywords"
     } ],
-    "scheme" : "",
-    "description" : "",
-    "title" : "Keywords"
+    "scheme" : ""
   }, {
     "concepts" : [ {
       "id" : "Marine Biodiversity Hub",
-      "url" : null
+      "url" : null,
+      "description" : "",
+      "title" : "Keywords"
     } ],
-    "scheme" : "",
-    "description" : "",
-    "title" : "Keywords"
+    "scheme" : ""
   }, {
     "concepts" : [ {
       "id" : "Published_External",
-      "url" : null
+      "url" : null,
+      "description" : "",
+      "title" : ""
     } ],
-    "scheme" : "",
-    "description" : "",
-    "title" : ""
+    "scheme" : ""
   } ],
   "id" : "15e4afbb-5f76-4053-a0d6-a7cf60059f5a",
   "search_suggestions" : {
