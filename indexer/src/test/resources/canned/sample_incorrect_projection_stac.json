@@ -224,37 +224,49 @@
   "themes" : [ {
     "concepts" : [ {
       "id" : "EARTH SCIENCE | SOLID EARTH | ROCKS/MINERALS/CRYSTALS | IGNEOUS ROCKS",
-      "url" : "https://gcmd.earthdata.nasa.gov/kms/concept/e8d97ffd-2fd2-4989-88a7-9772fc9b7cd8"
+      "url" : "https://gcmd.earthdata.nasa.gov/kms/concept/e8d97ffd-2fd2-4989-88a7-9772fc9b7cd8",
+      "description" : "GCMD",
+      "title" : "Global Change Master Directory Earth Science Keywords, Version 8.5"
     }, {
       "id" : "EARTH SCIENCE | SOLID EARTH | ROCKS/MINERALS/CRYSTALS | IGNEOUS ROCKS | IGNEOUS ROCK AGE DETERMINATIONS",
-      "url" : "https://gcmd.earthdata.nasa.gov/kms/concept/53e3eeca-265b-42d8-ad64-bfcc2acdad26"
+      "url" : "https://gcmd.earthdata.nasa.gov/kms/concept/53e3eeca-265b-42d8-ad64-bfcc2acdad26",
+      "description" : "GCMD",
+      "title" : "Global Change Master Directory Earth Science Keywords, Version 8.5"
     }, {
       "id" : "EARTH SCIENCE | SOLID EARTH | ROCKS/MINERALS/CRYSTALS | IGNEOUS ROCKS | IGNEOUS ROCK FORMATION",
-      "url" : "https://gcmd.earthdata.nasa.gov/kms/concept/984d4966-070d-4f8c-85e7-83bb0fd804a8"
+      "url" : "https://gcmd.earthdata.nasa.gov/kms/concept/984d4966-070d-4f8c-85e7-83bb0fd804a8",
+      "description" : "GCMD",
+      "title" : "Global Change Master Directory Earth Science Keywords, Version 8.5"
     }, {
       "id" : "EARTH SCIENCE | SOLID EARTH | ROCKS/MINERALS/CRYSTALS | METAMORPHIC ROCKS",
-      "url" : "https://gcmd.earthdata.nasa.gov/kms/concept/d220bbb1-410e-4b77-9663-78cb68c6b134"
+      "url" : "https://gcmd.earthdata.nasa.gov/kms/concept/d220bbb1-410e-4b77-9663-78cb68c6b134",
+      "description" : "GCMD",
+      "title" : "Global Change Master Directory Earth Science Keywords, Version 8.5"
     }, {
       "id" : "EARTH SCIENCE | SOLID EARTH | ROCKS/MINERALS/CRYSTALS | METAMORPHIC ROCKS | METAMORPHIC ROCK AGE DETERMINATIONS",
-      "url" : "https://gcmd.earthdata.nasa.gov/kms/concept/02a53a61-4fd2-4294-9dcc-071f701bc263"
+      "url" : "https://gcmd.earthdata.nasa.gov/kms/concept/02a53a61-4fd2-4294-9dcc-071f701bc263",
+      "description" : "GCMD",
+      "title" : "Global Change Master Directory Earth Science Keywords, Version 8.5"
     }, {
       "id" : "EARTH SCIENCE | SOLID EARTH | ROCKS/MINERALS/CRYSTALS | METAMORPHIC ROCKS | METAMORPHIC ROCK FORMATION",
-      "url" : "https://gcmd.earthdata.nasa.gov/kms/concept/a243624b-a9c8-4c53-84d1-bb0fe2a71ef6"
+      "url" : "https://gcmd.earthdata.nasa.gov/kms/concept/a243624b-a9c8-4c53-84d1-bb0fe2a71ef6",
+      "description" : "GCMD",
+      "title" : "Global Change Master Directory Earth Science Keywords, Version 8.5"
     }, {
       "id" : "EARTH SCIENCE | OCEANS | BATHYMETRY/SEAFLOOR TOPOGRAPHY | OCEAN PLATEAUS/RIDGES",
-      "url" : "https://gcmd.earthdata.nasa.gov/kms/concept/73e02157-9df9-415f-93fc-cb457989ddb1"
+      "url" : "https://gcmd.earthdata.nasa.gov/kms/concept/73e02157-9df9-415f-93fc-cb457989ddb1",
+      "description" : "GCMD",
+      "title" : "Global Change Master Directory Earth Science Keywords, Version 8.5"
     } ],
-    "scheme" : "theme",
-    "description" : "GCMD",
-    "title" : "Global Change Master Directory Earth Science Keywords, Version 8.5"
+    "scheme" : "theme"
   }, {
     "concepts" : [ {
       "id" : "Offshore Islands (Australia) | Offshore Islands (Australia) | Heard & McDonald Islands",
-      "url" : "http://vocab.aodn.org.au/def/geographicextents/entity/46"
+      "url" : "http://vocab.aodn.org.au/def/geographicextents/entity/46",
+      "description" : "",
+      "title" : "AODN Geographic Extents Vocabulary"
     } ],
-    "scheme" : "place",
-    "description" : "",
-    "title" : "AODN Geographic Extents Vocabulary"
+    "scheme" : "place"
   } ],
   "id" : "451eb5a7-7a45-44bf-bcf6-1b5139abd006",
   "search_suggestions" : {

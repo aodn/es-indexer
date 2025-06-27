@@ -324,11 +324,11 @@
   }, {
     "concepts" : [ {
       "id" : "Research Voyage: IN2019_V06",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.survey.urn:marlin.csiro.au:surveyregister&id=urn:marlin.csiro.au:surveyregister:concept:2228"
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.survey.urn:marlin.csiro.au:surveyregister&id=urn:marlin.csiro.au:surveyregister:concept:2228",
+      "description" : "",
+      "title" : "CSIRO Survey List"
     } ],
-    "scheme" : "survey",
-    "description" : "",
-    "title" : "CSIRO Survey List"
+    "scheme" : "survey"
   }, {
     "concepts" : [ {
       "id" : "Ship: Investigator (RV)",

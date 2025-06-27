@@ -606,11 +606,11 @@
   }, {
     "concepts" : [ {
       "id" : "Biogeochemical Argo Sub-Facility, Integrated Marine Observing System (IMOS)",
-      "url" : "http://vocab.aodn.org.au/def/organisation/entity/584"
+      "url" : "http://vocab.aodn.org.au/def/organisation/entity/584",
+      "description" : "",
+      "title" : "AODN Organisation Vocabulary"
     } ],
-    "scheme" : "discipline",
-    "description" : "",
-    "title" : "AODN Organisation Vocabulary"
+    "scheme" : "discipline"
   } ],
   "id" : "2223b7f2-4bac-4ff1-9b1e-aae9ac58deef",
   "search_suggestions" : {
