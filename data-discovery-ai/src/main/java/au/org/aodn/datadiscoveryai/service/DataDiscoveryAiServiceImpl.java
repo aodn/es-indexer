@@ -23,8 +23,8 @@ public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
     private final String apiKey;
     private final RestTemplate restTemplate;
 
-    public DataDiscoveryAiServiceImpl(String serviceUrl, String baseUrl, String apiKey, 
-                                     RestTemplate restTemplate) {
+    public DataDiscoveryAiServiceImpl(String serviceUrl, String baseUrl, String apiKey,
+                                      RestTemplate restTemplate) {
         this.serviceUrl = serviceUrl;
         this.baseUrl = baseUrl;
         this.apiKey = apiKey;
@@ -61,7 +61,8 @@ public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
                     url,
                     HttpMethod.POST,
                     requestEntity,
-                    new ParameterizedTypeReference<>() {}
+                    new ParameterizedTypeReference<>() {
+                    }
             );
 
             if (response.getStatusCode().is2xxSuccessful() && response.getBody() != null) {
@@ -74,7 +75,7 @@ public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
 
         } catch (HttpClientErrorException e) {
             log.error("Client error when calling Data Discovery AI service for UUID: {} - Status: {}, Response: {}",
-                     uuid, e.getStatusCode(), e.getResponseBodyAsString());
+                    uuid, e.getStatusCode(), e.getResponseBodyAsString());
             return links;
         } catch (RestClientException e) {
             log.error("Error calling Data Discovery AI service for UUID: {}", uuid, e);

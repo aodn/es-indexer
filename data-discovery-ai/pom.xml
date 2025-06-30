@@ -6,7 +6,7 @@
         <groupId>au.org.aodn</groupId>
         <artifactId>es-indexer</artifactId>
         <version>0.0.0</version>
-        <relativePath>..</relativePath>
+        <relativePath>../pom.xml</relativePath>
     </parent>
     <groupId>au.org.aodn</groupId>
     <artifactId>data-discovery-ai</artifactId>
@@ -47,7 +47,7 @@
         <dependency>
             <groupId>au.org.aodn</groupId>
             <artifactId>stacmodel</artifactId>
-            <version>0.0.0</version>
+            <version>${project.parent.version}</version>
         </dependency>
 
         <!-- Test dependencies -->
@@ -78,4 +78,4 @@
             </plugin>
         </plugins>
     </build>
-</project> 
+</project>

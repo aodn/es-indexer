@@ -25,9 +25,9 @@ public class DataDiscoveryAiAutoConfiguration {
         SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
         factory.setConnectTimeout(30000); // 30 seconds
         factory.setReadTimeout(60000);    // 60 seconds
-        
+
         RestTemplate restTemplate = new RestTemplate(factory);
 
         return new DataDiscoveryAiServiceImpl(serviceUrl, baseUrl, apiKey, restTemplate);
     }
-} 
+}

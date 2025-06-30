@@ -15,7 +15,6 @@ public class LinkModel {
     protected String rel;
     protected String type;
     protected String title;
-    
     @JsonProperty("ai:group")
     protected String aiGroup;
 

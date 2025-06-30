@@ -4,7 +4,9 @@ This module provides AI-enhanced functionalities for STAC collections in the es-
 
 ## Overview
 
-The Data Discovery AI module integrates with a remote AI service to enhance metadata links with semantic grouping information. When processing metadata during indexing, the service calls the remote AI API to analyze links, descriptions, themes... and return AI-generated content.
+The Data Discovery AI module integrates with a remote AI service to enhance metadata links with semantic grouping
+information. When processing metadata during indexing, the service calls the remote AI API to analyze links,
+descriptions, themes... and return AI-generated content.
 
 ## Configuration
 
@@ -16,7 +18,6 @@ datadiscoveryai:
   baseUrl: /api/v1/ml/process_record # API base path
   apiKey: YOUR_API_KEY_HERE # API key for authentication
 ```
-
 
 ## API Contract
 
@@ -76,7 +77,6 @@ The module implements robust error handling:
 - Jackson for JSON processing
 - STAC Model (internal dependency)
 - Lombok for boilerplate reduction
-
 
 ## Architecture
 

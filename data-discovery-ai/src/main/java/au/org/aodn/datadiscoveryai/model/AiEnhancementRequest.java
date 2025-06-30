@@ -14,10 +14,10 @@ import java.util.List;
 public class AiEnhancementRequest {
     @JsonProperty("selected_model")
     private List<String> selectedModel;
-    
+
     @JsonProperty("uuid")
     private String uuid;
-    
+
     @JsonProperty("links")
     private List<LinkModel> links;
 } 
