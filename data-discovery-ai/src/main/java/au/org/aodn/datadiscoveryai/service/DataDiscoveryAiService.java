@@ -13,7 +13,7 @@ public interface DataDiscoveryAiService {
      * @param links The original links from the STAC collection
      * @return Enhanced links with AI grouping information
      */
-    List<LinkModel> enhanceLinksWithAiGrouping(String uuid, List<LinkModel> links);
+    List<LinkModel> enhanceWithLinkGrouping(String uuid, List<LinkModel> links);
     
     /**
      * Check if the Data Discovery AI service is available

@@ -84,7 +84,7 @@ public abstract class StacCollectionMapperService {
     @Autowired
     protected IndexCloudOptimizedService indexCloudOptimizedService;
 
-    @Autowired(required = false)
+    @Autowired
     protected DataDiscoveryAiService dataDiscoveryAiService;
 
     @Named("mapUUID")
@@ -595,7 +595,6 @@ public abstract class StacCollectionMapperService {
     @Named("mapLinks")
     List<LinkModel> mapLinks(MDMetadataType source) {
         final List<LinkModel> results = new ArrayList<>();
-        logger.info("start map links");
 
         // distribution links
         List<MDDistributionType> items = MapperUtils.findMDDistributionType(source);
@@ -665,21 +664,14 @@ public abstract class StacCollectionMapperService {
         }
 
         // Enhance links with AI grouping if service is available
-        if (dataDiscoveryAiService != null
-//                && dataDiscoveryAiService.isServiceAvailable()
-        ) {
-            String uuid = CommonUtils.getUUID(source);
-            logger.info("Enhancing links with AI grouping for UUID: {}", uuid);
+        if (dataDiscoveryAiService.isServiceAvailable()) {
             try {
-                List<LinkModel> enhancedLinks = dataDiscoveryAiService.enhanceLinksWithAiGrouping(uuid, results);
-                logger.info("AI grouping for UUID successfully: {}", uuid);
+                List<LinkModel> enhancedLinks = dataDiscoveryAiService.enhanceWithLinkGrouping(CommonUtils.getUUID(source), results);
                 return enhancedLinks != null ? enhancedLinks : results;
             } catch (Exception e) {
-                logger.warn("Failed to enhance links with AI grouping for UUID: {}, falling back to original links", uuid, e);
                 return results;
             }
         } else {
-            logger.debug("Data Discovery AI service not available, returning original links");
             return results;
         }
     }

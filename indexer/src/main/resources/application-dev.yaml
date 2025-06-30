@@ -22,19 +22,20 @@ geonetwork:
 dataaccess:
   apiKey: temp
 
+datadiscoveryai:
+  host: https://data-discovery-ai-edge.aodn.org.au
+  baseUrl: /api/v1/ml/process_record
+  apiKey: datadiscoveryai-sample-api-key
+
 logging:
   level:
     au.org.aodn.indexer: DEBUG
     au.org.aodn.ardcvocabs: INFO
     au.org.aodn.esindexer.utils: INFO
+    au.org.aodn.datadiscoveryai: DEBUG
 
 management:
   endpoints:
     web:
       exposure:
         include: "health,info,env,beans,logfile"
-
-datadiscoveryai:
-  host: https://data-discovery-ai-edge.aodn.org.au
-  baseUrl: /api/v1/ml/process_record
-  apiKey: datadiscoveryai-sample-api-key
