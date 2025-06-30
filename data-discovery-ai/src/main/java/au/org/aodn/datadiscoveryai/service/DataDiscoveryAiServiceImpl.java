@@ -61,7 +61,7 @@ public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
                     url,
                     HttpMethod.POST,
                     requestEntity,
-                    new ParameterizedTypeReference<AiEnhancementResponse>() {}
+                    new ParameterizedTypeReference<>() {}
             );
 
             if (response.getStatusCode().is2xxSuccessful() && response.getBody() != null) {

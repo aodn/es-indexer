@@ -141,7 +141,7 @@ public abstract class IndexServiceImpl implements IndexService {
 
     @Override
     public long getBatchSize() {
-        return 102400;
+        return 5242880;
     }
     /**
      * Keep retry until success, it is ok to insert docs to elastic again because we use _id as identifier.
