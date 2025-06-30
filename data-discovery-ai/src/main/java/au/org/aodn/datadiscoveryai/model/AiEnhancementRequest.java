@@ -20,4 +20,4 @@ public class AiEnhancementRequest {
 
     @JsonProperty("links")
     private List<LinkModel> links;
-} 
+}

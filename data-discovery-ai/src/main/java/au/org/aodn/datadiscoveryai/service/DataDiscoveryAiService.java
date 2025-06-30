@@ -21,4 +21,4 @@ public interface DataDiscoveryAiService {
      * @return true if service is available, false otherwise
      */
     boolean isServiceAvailable();
-} 
+}

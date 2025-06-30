@@ -14,4 +14,4 @@ public class AiEnhancementResponse {
 
     @JsonProperty("links")
     private List<AiEnhancedLink> links;
-} 
+}

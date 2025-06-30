@@ -114,4 +114,4 @@ public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
                         .build())
                 .collect(Collectors.toList());
     }
-} 
+}

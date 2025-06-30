@@ -24,4 +24,4 @@ public class AiEnhancedLink {
 
     @JsonProperty("ai:group")
     private String aiGroup;
-} 
+}
