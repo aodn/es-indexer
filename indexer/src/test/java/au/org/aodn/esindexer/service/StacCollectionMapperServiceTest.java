@@ -1,6 +1,7 @@
 package au.org.aodn.esindexer.service;
 
 import au.org.aodn.cloudoptimized.service.DataAccessService;
+import au.org.aodn.datadiscoveryai.service.DataDiscoveryAiService;
 import au.org.aodn.esindexer.utils.GcmdKeywordUtils;
 import au.org.aodn.esindexer.utils.GeometryUtils;
 import au.org.aodn.esindexer.utils.JaxbUtils;
@@ -76,6 +77,9 @@ public class StacCollectionMapperServiceTest {
 
     @MockitoBean
     protected DataAccessService dataAccessService;
+
+    @MockitoBean
+    protected DataDiscoveryAiService dataDiscoveryAiService;
 
     @Autowired
     protected StacCollectionMapperService service;
@@ -180,6 +184,9 @@ public class StacCollectionMapperServiceTest {
 
         when(indexCloudOptimizedService.hasIndex(eq("35234913-aa3c-48ec-b9a4-77f822f66ef8")))
                 .thenReturn(true);
+
+        when(dataDiscoveryAiService.isServiceAvailable()).thenReturn(false);
+        when(dataDiscoveryAiService.enhanceWithLinkGrouping(anyString(), anyList())).thenReturn(null);
 
     }
 

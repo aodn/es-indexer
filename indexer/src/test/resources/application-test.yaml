@@ -25,6 +25,11 @@ elasticsearch:
   query:
     pageSize: 4
 
+datadiscoveryai:
+  host: http://localhost
+  baseUrl: /api/v1/ml/
+  apiKey: test-api-key
+
 logging:
   level:
     au.org.aodn.ardcvocabs.service: DEBUG
