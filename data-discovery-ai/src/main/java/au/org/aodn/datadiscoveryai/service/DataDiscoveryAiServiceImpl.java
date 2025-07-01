@@ -20,14 +20,12 @@ public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
 
     private final String serviceUrl;
     private final String baseUrl;
-    private final String apiKey;
     private final RestTemplate restTemplate;
 
-    public DataDiscoveryAiServiceImpl(String serviceUrl, String baseUrl, String apiKey,
+    public DataDiscoveryAiServiceImpl(String serviceUrl, String baseUrl,
                                       RestTemplate restTemplate) {
         this.serviceUrl = serviceUrl;
         this.baseUrl = baseUrl;
-        this.apiKey = apiKey;
         this.restTemplate = restTemplate;
     }
 
@@ -46,23 +44,13 @@ public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
                     .links(links)
                     .build();
 
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
-            headers.setAccept(List.of(MediaType.APPLICATION_JSON));
-            if (apiKey != null && !apiKey.trim().isEmpty()) {
-                headers.set("X-API-Key", apiKey);
-            }
-
-            HttpEntity<AiEnhancementRequest> requestEntity = new HttpEntity<>(request, headers);
-
             String url = serviceUrl + baseUrl;
 
             ResponseEntity<AiEnhancementResponse> response = restTemplate.exchange(
                     url,
                     HttpMethod.POST,
-                    requestEntity,
-                    new ParameterizedTypeReference<>() {
-                    }
+                    new HttpEntity<>(request),
+                    new ParameterizedTypeReference<>() {}
             );
 
             if (response.getStatusCode().is2xxSuccessful() && response.getBody() != null) {
