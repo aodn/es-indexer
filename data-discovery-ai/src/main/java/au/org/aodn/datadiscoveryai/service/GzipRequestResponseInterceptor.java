@@ -42,7 +42,6 @@ public class GzipRequestResponseInterceptor implements ClientHttpRequestIntercep
                 gzipStream.write(body);
             }
             compressedBody = byteStream.toByteArray();
-            
             // Add Content-Encoding header to indicate the body is GZIP compressed
             headers.add(HttpHeaders.CONTENT_ENCODING, "gzip");
         }
@@ -89,4 +88,4 @@ public class GzipRequestResponseInterceptor implements ClientHttpRequestIntercep
             delegate.close();
         }
     }
-} 
+}

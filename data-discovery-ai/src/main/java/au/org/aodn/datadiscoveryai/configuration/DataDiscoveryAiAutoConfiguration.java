@@ -30,7 +30,6 @@ public class DataDiscoveryAiAutoConfiguration {
         factory.setReadTimeout(60000);    // 60 seconds
 
         RestTemplate restTemplate = new RestTemplate(factory);
-        
         // Add GZIP interceptor
         restTemplate.setInterceptors(Collections.singletonList(new GzipRequestResponseInterceptor(apiKey)));
 
