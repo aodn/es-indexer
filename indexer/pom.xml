@@ -246,6 +246,11 @@
         </dependency>
         <dependency>
             <groupId>au.org.aodn</groupId>
+            <artifactId>data-discovery-ai</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>au.org.aodn</groupId>
             <artifactId>ardcvocabs</artifactId>
             <version>${project.parent.version}</version>
             <classifier>tests</classifier>
