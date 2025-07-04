@@ -23,7 +23,8 @@ public class DataDiscoveryAiAutoConfiguration {
     public DataDiscoveryAiServiceImpl createDataDiscoveryAiService(
             @Value("${datadiscoveryai.host}") String serviceUrl,
             @Value("${datadiscoveryai.baseUrl}") String baseUrl,
-            @Value("${datadiscoveryai.apiKey}") String apiKey) {
+            @Value("${datadiscoveryai.apiKey}") String apiKey,
+            @Value("${datadiscoveryai.internalKey}") String internalKey) {
 
         SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
         factory.setConnectTimeout(30000); // 30 seconds
@@ -31,7 +32,7 @@ public class DataDiscoveryAiAutoConfiguration {
 
         RestTemplate restTemplate = new RestTemplate(factory);
         // Add GZIP interceptor
-        restTemplate.setInterceptors(Collections.singletonList(new GzipRequestResponseInterceptor(apiKey)));
+        restTemplate.setInterceptors(Collections.singletonList(new GzipRequestResponseInterceptor(apiKey,internalKey)));
 
         return new DataDiscoveryAiServiceImpl(serviceUrl, baseUrl, restTemplate);
     }

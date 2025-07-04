@@ -18,12 +18,13 @@ public class GzipRequestResponseInterceptor implements ClientHttpRequestIntercep
 
     private final HttpHeaders defaultHeaders;
 
-    public GzipRequestResponseInterceptor(String apiKey) {
+    public GzipRequestResponseInterceptor(String apiKey, String internalKey) {
         this.defaultHeaders = new HttpHeaders();
         defaultHeaders.add(HttpHeaders.CONTENT_TYPE, "application/json");
         defaultHeaders.add(HttpHeaders.ACCEPT, "application/json");
         defaultHeaders.add(HttpHeaders.ACCEPT_ENCODING, "gzip"); // Request GZIP-compressed responses
         defaultHeaders.add("X-API-Key", apiKey);
+        defaultHeaders.add("X-INTERNAL-ES-INDEXER-KEY", internalKey);
     }
 
     @NonNull

@@ -29,6 +29,7 @@ datadiscoveryai:
   host: http://localhost
   baseUrl: /api/v1/ml/
   apiKey: test-api-key
+  internalKey: test-internal-key
 
 logging:
   level:
