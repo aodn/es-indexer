@@ -119,17 +119,15 @@
     "scheme" : ""
   }, {
     "concepts" : [ ],
-    "scheme" : "",
-    "description" : "",
-    "title" : ""
+    "scheme" : ""
   }, {
     "concepts" : [ {
       "id" : "Marine Geoscience",
-      "url" : null
+      "url" : null,
+      "description" : "",
+      "title" : "theme.ANZRC Fields of Research.rdf"
     } ],
-    "scheme" : "theme",
-    "description" : "",
-    "title" : "theme.ANZRC Fields of Research.rdf"
+    "scheme" : "theme"
   }, {
     "concepts" : [ {
       "id" : "National Environmental Science Program",

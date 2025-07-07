@@ -201,27 +201,27 @@
   }, {
     "concepts" : [ {
       "id" : "Marine National Facility",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.discipline.urn:marlin.csiro.au:keywords:cmarAOI&id=urn:marlin.csiro.au:keywords:cmarAOI:concept:3208"
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.discipline.urn:marlin.csiro.au:keywords:cmarAOI&id=urn:marlin.csiro.au:keywords:cmarAOI:concept:3208",
+      "description" : "",
+      "title" : "CSIRO Areas Of Interest"
     } ],
-    "scheme" : "discipline",
-    "description" : "",
-    "title" : "CSIRO Areas Of Interest"
+    "scheme" : "discipline"
   }, {
     "concepts" : [ {
       "id" : "Research Voyage: IN2017_V01",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.survey.urn:marlin.csiro.au:surveyregister&id=urn:marlin.csiro.au:surveyregister:concept:2181"
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.survey.urn:marlin.csiro.au:surveyregister&id=urn:marlin.csiro.au:surveyregister:concept:2181",
+      "description" : "",
+      "title" : "CSIRO Survey List"
     } ],
-    "scheme" : "survey",
-    "description" : "",
-    "title" : "CSIRO Survey List"
+    "scheme" : "survey"
   }, {
     "concepts" : [ {
       "id" : "Vessel Data: Underway",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.discipline.urn:marlin.csiro.au:keywords:standardDataType&id=urn:marlin.csiro.au:keywords:standardDataType:concept:3514"
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.discipline.urn:marlin.csiro.au:keywords:standardDataType&id=urn:marlin.csiro.au:keywords:standardDataType:concept:3514",
+      "description" : "",
+      "title" : "CSIRO Standard Data Types"
     } ],
-    "scheme" : "discipline",
-    "description" : "",
-    "title" : "CSIRO Standard Data Types"
+    "scheme" : "discipline"
   }, {
     "concepts" : [ {
       "id" : "Ship: Investigator (RV)",
