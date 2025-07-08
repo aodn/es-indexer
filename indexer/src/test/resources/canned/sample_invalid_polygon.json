@@ -155,6 +155,11 @@
       "title" : "Keywords (Temporal)"
     } ],
     "scheme" : ""
+  }, {
+    "concepts" : [ {
+      "id" : "oceans"
+    } ],
+    "scheme" : "Categories"
   } ],
   "id" : "053f0b32-47cc-4a3f-8325-b37feb33c0e3",
   "search_suggestions" : {

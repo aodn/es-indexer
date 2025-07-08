@@ -177,6 +177,10 @@ public class VocabServiceImpl implements VocabService {
                     continue;
                 }
 
+                if (concept.getTitle() == null || concept.getTitle().isEmpty()) {
+                    continue;
+                }
+
                 if (concept.getTitle().toLowerCase().contains("aodn organisation vocabulary")) {
                     results.add(concept.getId());
                 }

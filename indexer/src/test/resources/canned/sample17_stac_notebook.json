@@ -72,7 +72,12 @@
     "name" : "CSIRO",
     "roles" : [ null ]
   } ],
-  "themes" : [ ],
+  "themes" : [{
+    "concepts" : [ {
+      "id" : "oceans"
+    } ],
+    "scheme" : "Categories"
+  } ],
   "id" : "0bef875d-5f77-4b31-bd56-de73fafc2b2e",
   "search_suggestions" : {
     "abstract_phrases" : [ ],

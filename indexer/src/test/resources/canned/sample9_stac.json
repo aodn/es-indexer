@@ -196,7 +196,12 @@
     "name" : "Australian Institute of Marine Science (AIMS)",
     "roles" : [ "pointOfContact" ]
   } ],
-  "themes" : [ ],
+  "themes" : [ {
+    "concepts" : [ {
+      "id" : "oceans"
+    } ],
+    "scheme" : "Categories"
+  }],
   "id" : "1e13ab6e-e546-44f2-a007-061c2815268a",
   "search_suggestions" : {
     "abstract_phrases" : [ ],

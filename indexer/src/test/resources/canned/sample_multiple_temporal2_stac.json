@@ -385,6 +385,11 @@
       "title" : "AODN Discovery Parameter Vocabulary"
     } ],
     "scheme" : "theme"
+  }, {
+    "concepts" : [ {
+      "id" : "oceans"
+    } ],
+    "scheme" : "Categories"
   } ],
   "id" : "bb3599d5-ab12-4278-a68b-42cac8e7a746",
   "search_suggestions" : {

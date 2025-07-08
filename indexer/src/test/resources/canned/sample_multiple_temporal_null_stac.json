@@ -265,6 +265,11 @@
       "title" : "Marine Community Profile of ISO19115 v1.4 Collection Methods Vocabulary (Annex C.1.3)"
     } ],
     "scheme" : "theme"
+  }, {
+    "concepts" : [ {
+      "id" : "oceans"
+    } ],
+    "scheme" : "Categories"
   } ],
   "id" : "0d9c8283-6aca-4c21-8495-deed7f316c75",
   "search_suggestions" : {

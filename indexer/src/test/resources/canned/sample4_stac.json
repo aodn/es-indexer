@@ -6,7 +6,7 @@
     "temporal" : [ [ "1870-07-16T14:10:44Z", "2013-06-17T13:59:59Z" ], [ "1870-07-16T14:10:44Z", "2013-06-17T13:59:59Z" ] ]
   },
   "summaries" : {
-    "score" : 78,
+    "score" : 83,
     "status" : "completed",
     "credits" : [ "Australian Climate Change Science Program", "CSIRO carbon cluster", "JSPS KAKENHI Grant no.  26220102", "Integrated Marine Observing System (IMOS) for providing data from their Australian National Reference Stations (NRS)", "Kate Berry and Kristina Patterson for their analysis of the observed carbon data" ],
     "scope" : {
@@ -441,7 +441,12 @@
       "title" : "AODN Discovery Parameter Vocabulary"
     } ],
     "scheme" : "theme"
-  } ],
+  }, {
+    "concepts" : [ {
+      "id" : "oceans"
+    } ],
+    "scheme" : "Categories"
+  }],
   "id" : "7709f541-fc0c-4318-b5b9-9053aa474e0e",
   "search_suggestions" : {
     "abstract_phrases" : [ "dataset contains", "calcite", "resolution", "carbon dic", "sea surface", "alkalinity alk sea", "monthly mean", "aragonite calcite", "carbon", "degree resolution over", "monthly mean aragonite calcite", "dissolved", "total alkalinity alk sea", "total alkalinity alk", "inorganic carbon", "sea surface temperature", "alk", "period", "reconstructed time", "surface", "aragonite", "degree", "time series", "inorganic carbon dic total", "dissolved inorganic", "alkalinity", "inorganic", "dic total alkalinity alk", "contains", "ph together", "alk sea", "monthly", "region", "dissolved inorganic carbon dic", "dic total alkalinity", "mean aragonite calcite", "alk sea surface temperature", "monthly mean aragonite", "australian", "resolution over", "distribution", "sea", "carbon dic total alkalinity", "total", "temperature", "alk sea surface", "together", "alkalinity alk", "dissolved inorganic carbon", "over", "salinity", "reconstructed", "alkalinity alk sea surface", "total alkalinity", "inorganic carbon dic", "carbon dic total", "reconstructed time series", "mean aragonite", "degree resolution", "dic total", "surface temperature", "series", "mean", "ph", "time", "dataset", "dic", "australian region" ],

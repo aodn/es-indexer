@@ -611,6 +611,11 @@
       "title" : "AODN Organisation Vocabulary"
     } ],
     "scheme" : "discipline"
+  }, {
+    "concepts" : [ {
+      "id" : "oceans"
+    } ],
+    "scheme" : "Categories"
   } ],
   "id" : "2223b7f2-4bac-4ff1-9b1e-aae9ac58deef",
   "search_suggestions" : {

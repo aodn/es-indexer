@@ -235,7 +235,12 @@
     "roles" : [ "pointOfContact" ],
     "url" : "https://eatlas.org.au"
   } ],
-  "themes" : [ ],
+  "themes" : [ {
+    "concepts" : [ {
+      "id" : "oceans"
+    } ],
+    "scheme" : "Categories"
+  }],
   "id" : "16904861-53e6-4123-a7bb-781f2429629f",
   "search_suggestions" : {
     "abstract_phrases" : [ ],

@@ -404,6 +404,11 @@
       "title" : "NASA/GCMD Earth Science Keywords"
     } ],
     "scheme" : "place"
+  }, {
+    "concepts" : [ {
+      "id" : "oceans"
+    } ],
+    "scheme" : "Categories"
   } ],
   "id" : "201112060",
   "search_suggestions" : {

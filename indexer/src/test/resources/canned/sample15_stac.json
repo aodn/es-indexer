@@ -289,6 +289,11 @@
       "title" : "Keywords (Theme)"
     } ],
     "scheme" : ""
+  }, {
+    "concepts" : [ {
+      "id" : "oceans"
+    } ],
+    "scheme" : "Categories"
   } ],
   "id" : "77998615-bbab-4270-bcb1-96c46f56f85a",
   "search_suggestions" : {

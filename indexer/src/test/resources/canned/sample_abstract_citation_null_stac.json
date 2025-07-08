@@ -290,6 +290,11 @@
       "title" : "AODN Geographic Extent Names"
     } ],
     "scheme" : "place"
+  }, {
+    "concepts" : [ {
+      "id" : "oceans"
+    } ],
+    "scheme" : "Categories"
   } ],
   "id" : "c9ac30a7-9cad-420e-9ff9-efdffe6bf4ef",
   "search_suggestions" : {

@@ -267,6 +267,11 @@
       "title" : "AODN Geographic Extents Vocabulary"
     } ],
     "scheme" : "place"
+  }, {
+    "concepts" : [ {
+      "id" : "oceans"
+    } ],
+    "scheme" : "Categories"
   } ],
   "id" : "451eb5a7-7a45-44bf-bcf6-1b5139abd006",
   "search_suggestions" : {
