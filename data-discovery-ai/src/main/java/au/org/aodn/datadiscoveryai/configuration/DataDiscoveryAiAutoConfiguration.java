@@ -24,7 +24,7 @@ public class DataDiscoveryAiAutoConfiguration {
             @Value("${datadiscoveryai.host}") String serviceUrl,
             @Value("${datadiscoveryai.baseUrl}") String baseUrl,
             @Value("${datadiscoveryai.apiKey}") String apiKey,
-            @Value("${datadiscoveryai.internalKey}") String internalKey) {
+            @Value("${datadiscoveryai.internalAiHeaderSecret}") String internalKey) {
 
         SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
         factory.setConnectTimeout(30000); // 30 seconds
