@@ -110,6 +110,15 @@ public class GcmdKeywordUtils {
 
         for (ThemesModel themesModel : themes) {
             for (var concept : themesModel.getConcepts()) {
+
+                // TODO: refactor the too deep nested ifs
+                if (concept.getId() == null || concept.getId().isEmpty()) {
+                    continue;
+                }
+                if (concept.getTitle() == null || concept.getTitle().isEmpty()) {
+                    continue;
+                }
+
                 if ((concept.getTitle().toLowerCase().contains("gcmd") || concept.getTitle().toLowerCase().contains("global change master directory")) && !concept.getTitle().toLowerCase().contains("palaeo temporal coverage")) {
                     for (ConceptModel conceptModel : themesModel.getConcepts()) {
                         if (conceptModel.getId() != null && !conceptModel.getId().isEmpty()) {

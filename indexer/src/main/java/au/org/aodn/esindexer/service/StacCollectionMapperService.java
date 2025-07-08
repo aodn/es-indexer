@@ -576,7 +576,10 @@ public abstract class StacCollectionMapperService {
         List<ThemesModel> results = new ArrayList<>();
         List<MDDataIdentificationType> items = MapperUtils.findMDDataIdentificationType(source);
         if (!items.isEmpty()) {
+
             for (MDDataIdentificationType i : items) {
+
+                // get keywords
                 i.getDescriptiveKeywords().forEach(descriptiveKeyword -> {
                     ThemesModel themesModel = ThemesModel.builder().build();
                     String uuid = CommonUtils.getUUID(source);
@@ -585,7 +588,26 @@ public abstract class StacCollectionMapperService {
                     themesModel.setScheme(mapThemesScheme(descriptiveKeyword, uuid));
                     results.add(themesModel);
                 });
+
+                // get categories
+                if (i.getTopicCategory() != null) {
+
+                    var themesModel = ThemesModel.builder().scheme("Categories").concepts(new ArrayList<ConceptModel>()).build();
+                    for (var category : i.getTopicCategory()) {
+                        var categoryValue = safeGet(() -> category.getMDTopicCategoryCode().value());
+                        if (categoryValue.isPresent()) {
+                            var concept = ConceptModel.builder().id(categoryValue.get()).build();
+                            themesModel.getConcepts().add(concept);
+                        }
+                    }
+                    if (!themesModel.getConcepts().isEmpty()) {
+                        results.add(themesModel);
+                    } else {
+                        logger.debug("No categories found for metadata record: {}", CommonUtils.getUUID(source));
+                    }
+                }
             }
+
         }
         return results;
     }
