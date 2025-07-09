@@ -26,6 +26,7 @@ datadiscoveryai:
   host: https://data-discovery-ai-edge.aodn.org.au
   baseUrl: /api/v1/ml/process_record
   apiKey: datadiscoveryai-sample-api-key
+  internalAiHeaderSecret: datadiscoveryai-sample-internal-key
 
 logging:
   level:
