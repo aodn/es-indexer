@@ -20,10 +20,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import jakarta.xml.bind.JAXBException;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONException;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.mockito.Mockito;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
@@ -93,6 +90,9 @@ public class StacCollectionMapperServiceTest {
         Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
         String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
         log.info(out);
+
+//        Assertions.assertEquals( objectMapper.readTree(expected).toPrettyString(), objectMapper.readTree(out.strip()).toPrettyString());
+
         JSONAssert.assertEquals(
                 objectMapper.readTree(expected).toPrettyString(),
                 objectMapper.readTree(out.strip()).toPrettyString(),

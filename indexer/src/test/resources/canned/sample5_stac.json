@@ -207,6 +207,11 @@
       "title" : "Marine Community Profile of ISO19115 v1.4 Geographic Extent Vocabulary (Annex C.1.2)"
     } ],
     "scheme" : "theme"
+  }, {
+    "concepts" : [ {
+      "id" : "oceans"
+    } ],
+    "scheme" : "Categories"
   } ],
   "id" : "2852a776-cbfc-4bc8-a126-f3c036814892",
   "search_suggestions" : {

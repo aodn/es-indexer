@@ -154,7 +154,10 @@
     "scheme" : ""
   }, {
     "concepts" : [ {
-      "id" : "oceans"
+      "id" : "geoscientificInformation",
+      "url" : null,
+      "title" : null,
+      "description" : null
     } ],
     "scheme" : "Categories"
   } ],
