@@ -112,48 +112,54 @@
   "themes" : [ {
     "concepts" : [ {
       "id" : "Seabed sediments",
-      "url" : null
+      "url" : null,
+      "description" : "",
+      "title" : "Keywords (FeatureType)"
     } ],
-    "scheme" : "",
-    "description" : "",
-    "title" : "Keywords (FeatureType)"
+    "scheme" : ""
   }, {
     "concepts" : [ ],
-    "scheme" : "",
-    "description" : "",
-    "title" : ""
+    "scheme" : ""
   }, {
     "concepts" : [ {
       "id" : "Marine Geoscience",
-      "url" : null
+      "url" : null,
+      "description" : "",
+      "title" : "theme.ANZRC Fields of Research.rdf"
     } ],
-    "scheme" : "theme",
-    "description" : "",
-    "title" : "theme.ANZRC Fields of Research.rdf"
+    "scheme" : "theme"
   }, {
     "concepts" : [ {
       "id" : "National Environmental Science Program",
-      "url" : null
+      "url" : null,
+      "description" : "",
+      "title" : "Keywords"
     } ],
-    "scheme" : "",
-    "description" : "",
-    "title" : "Keywords"
+    "scheme" : ""
   }, {
     "concepts" : [ {
       "id" : "Marine Biodiversity Hub",
-      "url" : null
+      "url" : null,
+      "description" : "",
+      "title" : "Keywords"
     } ],
-    "scheme" : "",
-    "description" : "",
-    "title" : "Keywords"
+    "scheme" : ""
   }, {
     "concepts" : [ {
       "id" : "Published_External",
-      "url" : null
+      "url" : null,
+      "description" : "",
+      "title" : ""
     } ],
-    "scheme" : "",
-    "description" : "",
-    "title" : ""
+    "scheme" : ""
+  }, {
+    "concepts" : [ {
+      "id" : "geoscientificInformation",
+      "url" : null,
+      "title" : null,
+      "description" : null
+    } ],
+    "scheme" : "Categories"
   } ],
   "id" : "15e4afbb-5f76-4053-a0d6-a7cf60059f5a",
   "search_suggestions" : {

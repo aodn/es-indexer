@@ -312,55 +312,87 @@
   "themes" : [ {
     "concepts" : [ {
       "id" : "Wireless Sensor Networks Facility, Integrated Marine Observing System (IMOS)",
-      "url" : null
+      "url" : null,
+      "description" : "",
+      "title" : "AODN Organisation Vocabulary"
     } ],
-    "scheme" : "discipline",
-    "description" : "",
-    "title" : "AODN Organisation Vocabulary"
+    "scheme" : "discipline"
   }, {
     "concepts" : [ {
       "id" : "Temperature of the atmosphere",
-      "url" : "http://vocab.nerc.ac.uk/collection/P01/current/CTMPZZ01"
+      "url" : "http://vocab.nerc.ac.uk/collection/P01/current/CTMPZZ01",
+      "description" : "",
+      "title" : "AODN Discovery Parameter Vocabulary"
     }, {
       "id" : "Relative humidity of the atmosphere",
-      "url" : "http://vocab.nerc.ac.uk/collection/P01/current/CRELZZ01"
+      "url" : "http://vocab.nerc.ac.uk/collection/P01/current/CRELZZ01",
+      "description" : "",
+      "title" : "AODN Discovery Parameter Vocabulary"
     }, {
       "id" : "Wind from direction in the atmosphere",
-      "url" : "http://vocab.nerc.ac.uk/collection/P01/current/EWDAZZ01"
+      "url" : "http://vocab.nerc.ac.uk/collection/P01/current/EWDAZZ01",
+      "description" : "",
+      "title" : "AODN Discovery Parameter Vocabulary"
     }, {
       "id" : "Wind speed in the atmosphere",
-      "url" : "http://vocab.nerc.ac.uk/collection/P01/current/ESSAZZ01"
+      "url" : "http://vocab.nerc.ac.uk/collection/P01/current/ESSAZZ01",
+      "description" : "",
+      "title" : "AODN Discovery Parameter Vocabulary"
     }, {
       "id" : "Thickness of precipitation amount (liquid water equivalent) in the atmosphere",
-      "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/386"
+      "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/386",
+      "description" : "",
+      "title" : "AODN Discovery Parameter Vocabulary"
     }, {
       "id" : "Precipitation duration (liquid water equivalent) in the atmosphere",
-      "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/405"
+      "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/405",
+      "description" : "",
+      "title" : "AODN Discovery Parameter Vocabulary"
     }, {
       "id" : "Thickness of hail amount in the atmosphere",
-      "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/638"
+      "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/638",
+      "description" : "",
+      "title" : "AODN Discovery Parameter Vocabulary"
     }, {
       "id" : "Precipitation rate (liquid water equivalent) in the atmosphere",
-      "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/94"
+      "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/94",
+      "description" : "",
+      "title" : "AODN Discovery Parameter Vocabulary"
     }, {
       "id" : "Hail duration in the atmosphere",
-      "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/637"
+      "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/637",
+      "description" : "",
+      "title" : "AODN Discovery Parameter Vocabulary"
     }, {
       "id" : "Downwelling vector irradiance as photons (PAR wavelengths) in the atmosphere",
-      "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/572"
+      "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/572",
+      "description" : "",
+      "title" : "AODN Discovery Parameter Vocabulary"
     }, {
       "id" : "Temperature of the water body",
-      "url" : "http://vocab.nerc.ac.uk/collection/P01/current/TEMPPR01"
+      "url" : "http://vocab.nerc.ac.uk/collection/P01/current/TEMPPR01",
+      "description" : "",
+      "title" : "AODN Discovery Parameter Vocabulary"
     }, {
       "id" : "Pressure (measured variable) exerted by the atmosphere",
-      "url" : "http://vocab.nerc.ac.uk/collection/P01/current/CAPHZZ01"
+      "url" : "http://vocab.nerc.ac.uk/collection/P01/current/CAPHZZ01",
+      "description" : "",
+      "title" : "AODN Discovery Parameter Vocabulary"
     }, {
       "id" : "Hail intensity in the atmosphere",
-      "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/639"
+      "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/639",
+      "description" : "",
+      "title" : "AODN Discovery Parameter Vocabulary"
     } ],
-    "scheme" : "theme",
-    "description" : "",
-    "title" : "AODN Discovery Parameter Vocabulary"
+    "scheme" : "theme"
+  }, {
+    "concepts" : [ {
+      "id" : "oceans",
+      "url" : null,
+      "title" : null,
+      "description" : null
+    } ],
+    "scheme" : "Categories"
   } ],
   "id" : "bb3599d5-ab12-4278-a68b-42cac8e7a746",
   "search_suggestions" : {

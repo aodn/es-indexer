@@ -1,54 +1,169 @@
 {
-  "title" : "Temperature - Salinity distributions / CTD data within Jervis Bay and out across the shelf: 1989",
-  "description" : "This dataset is a component of the 'Jervis Bay Baseline Studies' project conducted by the Department of Defence, CSIRO and the Australian Defence Force Academy.\n\n                    Approximately once per month between 1988-1991, temperature-salinity surveys were conducted within Jervis Bay and out across the continental shelf. Measurements were made using a Neil Brown 'Smart' CTD. On each day of sampling, ~10 stations were chosen across the shelf, with the CTD recorder measuring salinity, temperature and sigma-T through the water column.\n\n                    This record describes CTD data collected in 1989. For each day of sampling three resources are provided: 1) A text document providing details of sampling locations, as well as a CTD summary collected from each of the stations every 4-10 metres down the water column, 2) A map showing the location of each sampling station and, 3) An excel file providing the raw CTD data collected.\n\n                    This is one of nine child records that relate to the parent, 13391430-2ae8-11dd-a735-00188b4c0af8. A pdf outlining the structure and hierarchy of all metadata records relating to this project is available to download through this record. Also available is a pdf of a published working paper documenting this experiment and the results.",
-  "extent" : {
-    "bbox" : [ [ 150.5, -35.5, 151.5, -34.5 ], [ 150.5, -35.5, 151.5, -34.5 ] ],
-    "temporal" : [ [ "1989-01-11T13:00:00Z", "1989-11-15T12:59:59Z" ], [ "1989-01-11T13:00:00Z", "1989-11-15T12:59:59Z" ] ]
+  "title": "Temperature - Salinity distributions / CTD data within Jervis Bay and out across the shelf: 1989",
+  "description": "This dataset is a component of the 'Jervis Bay Baseline Studies' project conducted by the Department of Defence, CSIRO and the Australian Defence Force Academy.\n\n                    Approximately once per month between 1988-1991, temperature-salinity surveys were conducted within Jervis Bay and out across the continental shelf. Measurements were made using a Neil Brown 'Smart' CTD. On each day of sampling, ~10 stations were chosen across the shelf, with the CTD recorder measuring salinity, temperature and sigma-T through the water column.\n\n                    This record describes CTD data collected in 1989. For each day of sampling three resources are provided: 1) A text document providing details of sampling locations, as well as a CTD summary collected from each of the stations every 4-10 metres down the water column, 2) A map showing the location of each sampling station and, 3) An excel file providing the raw CTD data collected.\n\n                    This is one of nine child records that relate to the parent, 13391430-2ae8-11dd-a735-00188b4c0af8. A pdf outlining the structure and hierarchy of all metadata records relating to this project is available to download through this record. Also available is a pdf of a published working paper documenting this experiment and the results.",
+  "extent": {
+    "bbox": [
+      [
+        150.5,
+        -35.5,
+        151.5,
+        -34.5
+      ],
+      [
+        150.5,
+        -35.5,
+        151.5,
+        -34.5
+      ]
+    ],
+    "temporal": [
+      [
+        "1989-01-11T13:00:00Z",
+        "1989-11-15T12:59:59Z"
+      ],
+      [
+        "1989-01-11T13:00:00Z",
+        "1989-11-15T12:59:59Z"
+      ]
+    ]
   },
-  "summaries" : {
-    "score" : 1,
-    "status" : "completed",
-    "credits" : [ "Funded by The Department of Defence", "Funded by CSIRO Division of Fisheries Research" ],
-    "scope" : {
-      "code" : "dataset",
-      "name" : ""
+  "summaries": {
+    "score": 1,
+    "status": "completed",
+    "credits": [
+      "Funded by The Department of Defence",
+      "Funded by CSIRO Division of Fisheries Research"
+    ],
+    "scope": {
+      "code": "dataset",
+      "name": ""
     },
-    "statement" : "For each day of sampling three resources are provided: 1) A text document providing details of sampling locations, as well as a CTD summary collected from each of the stations every 4-10 metres down the water column, 2) A map showing the location of each sampling station and, 3) An excel file providing the raw CTD data collected.\n\n                    It should be noted that the location of stations were originally recorded as distance from Point Perpendicular or Plantation Point on a specified bearing. While processing this data I have used this information to generate lat/long coordinates for each of the stations.\n\n                    Parameters / Structure: Station name, time (AEST), date, water depth (metres), station coordinates (degrees, seconds, minutes), distance from Plantation Point (km and nm), distance from Pt Perpendicular (km and nm), bearing (T) to either Pt. Perpendicular or Plantation Pt., temperature (oC), salinity (PSU), sigma T (no units).  Google Earth image shows the location of sampling stations.",
-    "creation" : "2008-04-10T16:04:00",
-    "revision" : "2015-01-06T16:40:03",
-    "update_frequency" : "completed",
-    "proj:geometry" : {
-      "geometries" : [ {
-        "type" : "Polygon",
-        "coordinates" : [ [ [ 150.5, -35.5 ], [ 151.5, -35.5 ], [ 151.5, -34.5 ], [ 150.5, -34.5 ], [ 150.5, -35.5 ] ] ]
-      } ],
-      "type" : "GeometryCollection"
+    "statement": "For each day of sampling three resources are provided: 1) A text document providing details of sampling locations, as well as a CTD summary collected from each of the stations every 4-10 metres down the water column, 2) A map showing the location of each sampling station and, 3) An excel file providing the raw CTD data collected.\n\n                    It should be noted that the location of stations were originally recorded as distance from Point Perpendicular or Plantation Point on a specified bearing. While processing this data I have used this information to generate lat/long coordinates for each of the stations.\n\n                    Parameters / Structure: Station name, time (AEST), date, water depth (metres), station coordinates (degrees, seconds, minutes), distance from Plantation Point (km and nm), distance from Pt Perpendicular (km and nm), bearing (T) to either Pt. Perpendicular or Plantation Pt., temperature (oC), salinity (PSU), sigma T (no units).  Google Earth image shows the location of sampling stations.",
+    "creation": "2008-04-10T16:04:00",
+    "revision": "2015-01-06T16:40:03",
+    "update_frequency": "completed",
+    "proj:geometry": {
+      "geometries": [
+        {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                150.5,
+                -35.5
+              ],
+              [
+                151.5,
+                -35.5
+              ],
+              [
+                151.5,
+                -34.5
+              ],
+              [
+                150.5,
+                -34.5
+              ],
+              [
+                150.5,
+                -35.5
+              ]
+            ]
+          ]
+        }
+      ],
+      "type": "GeometryCollection"
     },
-    "proj:geometry_noland" : {
-      "geometries" : [ {
-        "type" : "Polygon",
-        "coordinates" : [ [ [ 150.89295552041585, -34.5 ], [ 150.80095462300005, -34.54827239399992 ], [ 150.9170028000001, -34.603448174999926 ], [ 150.7270613940001, -34.874118747999944 ], [ 150.8447371750001, -35.077243747999944 ], [ 150.69556725400003, -35.02613697699991 ], [ 150.75945071700008, -35.17888762799993 ], [ 150.55396569100003, -35.213555596999925 ], [ 150.5, -35.31833912012562 ], [ 150.5, -35.5 ], [ 151.5, -35.5 ], [ 151.5, -34.5 ], [ 150.89295552041585, -34.5 ] ] ]
-      } ],
-      "type" : "GeometryCollection"
+    "proj:geometry_noland": {
+      "geometries": [
+        {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                150.89295552041585,
+                -34.5
+              ],
+              [
+                150.80095462300005,
+                -34.54827239399992
+              ],
+              [
+                150.9170028000001,
+                -34.603448174999926
+              ],
+              [
+                150.7270613940001,
+                -34.874118747999944
+              ],
+              [
+                150.8447371750001,
+                -35.077243747999944
+              ],
+              [
+                150.69556725400003,
+                -35.02613697699991
+              ],
+              [
+                150.75945071700008,
+                -35.17888762799993
+              ],
+              [
+                150.55396569100003,
+                -35.213555596999925
+              ],
+              [
+                150.5,
+                -35.31833912012562
+              ],
+              [
+                150.5,
+                -35.5
+              ],
+              [
+                151.5,
+                -35.5
+              ],
+              [
+                151.5,
+                -34.5
+              ],
+              [
+                150.89295552041585,
+                -34.5
+              ]
+            ]
+          ]
+        }
+      ],
+      "type": "GeometryCollection"
     },
-    "temporal" : [ {
-      "start" : "1989-01-11T13:00:00Z",
-      "end" : "1989-11-15T12:59:59Z"
-    } ],
+    "temporal": [
+      {
+        "start": "1989-01-11T13:00:00Z",
+        "end": "1989-11-15T12:59:59Z"
+      }
+    ],
     "platform_vocabs": [],
-    "parameter_vocabs" : [ ],
-    "organisation_vocabs" : [ ]
+    "parameter_vocabs": [],
+    "organisation_vocabs": []
   },
-
   "contacts": [
     {
-      "roles": ["pointOfContact", "about"],
+      "roles": [
+        "pointOfContact",
+        "about"
+      ],
       "organization": "Australian Defence Force Academy (ADFA)",
       "name": "Robertson, Robin, Dr",
-      "emails": ["r.robertson@adfa.edu.au"],
+      "emails": [
+        "r.robertson@adfa.edu.au"
+      ],
       "addresses": [
         {
-          "deliveryPoint": ["School of Physical, Environmental and Mathematical Science, Australian Defence Force Academy"],
+          "deliveryPoint": [
+            "School of Physical, Environmental and Mathematical Science, Australian Defence Force Academy"
+          ],
           "city": "Canberra",
           "administrativeArea": "ACT",
           "postalCode": "2600",
@@ -58,11 +173,15 @@
       "phones": [
         {
           "value": "61 2 6268 8289",
-          "roles": ["voice"]
+          "roles": [
+            "voice"
+          ]
         },
         {
           "value": "61 2 6268 8017",
-          "roles": ["facsimile"]
+          "roles": [
+            "facsimile"
+          ]
         }
       ],
       "links": [
@@ -73,18 +192,31 @@
       ]
     },
     {
-      "roles": ["processor", "metadata"],
+      "roles": [
+        "processor",
+        "metadata"
+      ],
       "position": "BlueNet Data Facilitator",
-      "emails": ["info@bluenet.org.au"]
+      "emails": [
+        "info@bluenet.org.au"
+      ]
     },
     {
-      "roles": ["pointOfContact", "metadata"],
+      "roles": [
+        "pointOfContact",
+        "metadata"
+      ],
       "organization": "Australian Defence Force Academy (ADFA)",
       "name": "Robertson, Robin, Dr",
-      "emails": ["r.robertson@adfa.edu.au"]
+      "emails": [
+        "r.robertson@adfa.edu.au"
+      ]
     },
     {
-      "roles": ["principalInvestigator", "citation"],
+      "roles": [
+        "principalInvestigator",
+        "citation"
+      ],
       "organization": "Australian Defence Force Academy (ADFA)",
       "name": "Holloway, Peter",
       "links": [
@@ -95,160 +227,271 @@
       ]
     },
     {
-      "roles": ["collaborator", "citation"],
+      "roles": [
+        "collaborator",
+        "citation"
+      ],
       "organization": "Australian Defence Force Academy (ADFA)",
       "name": "Symonds, Graham",
-      "emails": ["Graham.Symonds@csiro.au"]
+      "emails": [
+        "Graham.Symonds@csiro.au"
+      ]
     },
     {
-      "roles": ["collaborator", "citation"],
+      "roles": [
+        "collaborator",
+        "citation"
+      ],
       "organization": "Australian Defence Force Academy (ADFA)",
       "name": "Nunes-Vaz, Rick",
-      "emails": ["Rick.Nunes-Vaz@dsto.defence.gov.au"]
+      "emails": [
+        "Rick.Nunes-Vaz@dsto.defence.gov.au"
+      ]
     },
     {
-      "roles": ["collaborator", "citation"],
+      "roles": [
+        "collaborator",
+        "citation"
+      ],
       "organization": "Australian Defence Force Academy (ADFA)",
       "name": "Jeffrey, Marcus"
     }
   ],
-  "languages" : [ {
-    "code" : "eng",
-    "name" : "English"
-  } ],
-  "links" : [ {
-    "href" : "https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/05818c50-14c2-11dd-bdaa-00188b4c0af8/attachments/1989_01_12.zip",
-    "rel" : "data",
-    "type" : "",
-    "title" : "1989_01_12.zip"
-  }, {
-    "href" : "https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/05818c50-14c2-11dd-bdaa-00188b4c0af8/attachments/1989_02_09.zip",
-    "rel" : "data",
-    "type" : "",
-    "title" : "1989_02_09.zip"
-  }, {
-    "href" : "https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/05818c50-14c2-11dd-bdaa-00188b4c0af8/attachments/1989_04_13.zip",
-    "rel" : "data",
-    "type" : "",
-    "title" : "1989_04_13.zip"
-  }, {
-    "href" : "https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/05818c50-14c2-11dd-bdaa-00188b4c0af8/attachments/1989_05_09.zip",
-    "rel" : "data",
-    "type" : "",
-    "title" : "1989_05_09.zip"
-  }, {
-    "href" : "https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/05818c50-14c2-11dd-bdaa-00188b4c0af8/attachments/1989_07_12.zip",
-    "rel" : "data",
-    "type" : "",
-    "title" : "1989_07_12.zip"
-  }, {
-    "href" : "https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/05818c50-14c2-11dd-bdaa-00188b4c0af8/attachments/1989_07_28.zip",
-    "rel" : "data",
-    "type" : "",
-    "title" : "1989_07_28.zip"
-  }, {
-    "href" : "https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/05818c50-14c2-11dd-bdaa-00188b4c0af8/attachments/1989_08_29.zip",
-    "rel" : "data",
-    "type" : "",
-    "title" : "1989_08_29.zip"
-  }, {
-    "href" : "https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/05818c50-14c2-11dd-bdaa-00188b4c0af8/attachments/1989_11_15.zip",
-    "rel" : "data",
-    "type" : "",
-    "title" : "1989_11_15.zip"
-  }, {
-    "href" : "https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/05818c50-14c2-11dd-bdaa-00188b4c0af8/attachments/Hierarchy.pdf",
-    "rel" : "data",
-    "type" : "",
-    "title" : "Hierarchy.pdf"
-  }, {
-    "href" : "https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/05818c50-14c2-11dd-bdaa-00188b4c0af8/attachments/Temperature_and_Salinity_-_February_1988_to_April_1990.PDF",
-    "rel" : "data",
-    "type" : "",
-    "title" : "Temperature_and_Salinity_-_February_1988_to_April_1990.PDF"
-  }, {
-    "href" : "http://geoserver-123.aodn.org.au/geoserver/wms",
-    "rel" : "wms",
-    "type" : "",
-    "title" : "aodn:JBoceanographic_data"
-  }, {
-    "href" : "https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/05818c50-14c2-11dd-bdaa-00188b4c0af8",
-    "rel" : "describedby",
-    "type" : "text/html",
-    "title" : "Full metadata link"
-  } ],
-  "license" : "",
-  "providers" : [ {
-    "roles" : [ "processor" ]
-  }, {
-    "name" : "Australian Defence Force Academy (ADFA)",
-    "roles" : [ "pointOfContact" ]
-  } ],
-  "themes" : [ {
-    "concepts" : [ {
-      "id" : "Oceans | Salinity/density | Conductivity",
-      "url" : null
-    }, {
-      "id" : "Oceans | Salinity/density | Salinity",
-      "url" : null
-    }, {
-      "id" : "Oceans | Ocean Circulation | Wind-driven Circulation",
-      "url" : null
-    }, {
-      "id" : "Oceans | Ocean Temperature | Water Temperature",
-      "url" : null
-    } ],
-    "scheme" : "discipline",
-    "description" : "",
-    "title" : "Global Change Master Directory Earth Science Keywords v.5.3.8"
-  }, {
-    "concepts" : [ {
-      "id" : "station_name",
-      "url" : null
-    }, {
-      "id" : "time",
-      "url" : null
-    }, {
-      "id" : "date",
-      "url" : null
-    }, {
-      "id" : "depth",
-      "url" : null
-    }, {
-      "id" : "latitude",
-      "url" : null
-    }, {
-      "id" : "longitude",
-      "url" : null
-    }, {
-      "id" : "distance",
-      "url" : null
-    }, {
-      "id" : "bearing",
-      "url" : null
-    }, {
-      "id" : "sea_water_temperature",
-      "url" : null
-    }, {
-      "id" : "sea_water_salinity",
-      "url" : null
-    }, {
-      "id" : "sea_water_density",
-      "url" : null
-    } ],
-    "scheme" : "",
-    "description" : "",
-    "title" : "Keywords (Theme)"
-  } ],
-  "id" : "05818c50-14c2-11dd-bdaa-00188b4c0af8",
-  "search_suggestions" : {
-    "abstract_phrases" : [ ],
-    "platform_vocabs_sayt" : [],
-    "parameter_vocabs_sayt" : [],
-    "organisation_vocabs_sayt" : []
+  "languages": [
+    {
+      "code": "eng",
+      "name": "English"
+    }
+  ],
+  "links": [
+    {
+      "href": "https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/05818c50-14c2-11dd-bdaa-00188b4c0af8/attachments/1989_01_12.zip",
+      "rel": "data",
+      "type": "",
+      "title": "1989_01_12.zip"
+    },
+    {
+      "href": "https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/05818c50-14c2-11dd-bdaa-00188b4c0af8/attachments/1989_02_09.zip",
+      "rel": "data",
+      "type": "",
+      "title": "1989_02_09.zip"
+    },
+    {
+      "href": "https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/05818c50-14c2-11dd-bdaa-00188b4c0af8/attachments/1989_04_13.zip",
+      "rel": "data",
+      "type": "",
+      "title": "1989_04_13.zip"
+    },
+    {
+      "href": "https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/05818c50-14c2-11dd-bdaa-00188b4c0af8/attachments/1989_05_09.zip",
+      "rel": "data",
+      "type": "",
+      "title": "1989_05_09.zip"
+    },
+    {
+      "href": "https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/05818c50-14c2-11dd-bdaa-00188b4c0af8/attachments/1989_07_12.zip",
+      "rel": "data",
+      "type": "",
+      "title": "1989_07_12.zip"
+    },
+    {
+      "href": "https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/05818c50-14c2-11dd-bdaa-00188b4c0af8/attachments/1989_07_28.zip",
+      "rel": "data",
+      "type": "",
+      "title": "1989_07_28.zip"
+    },
+    {
+      "href": "https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/05818c50-14c2-11dd-bdaa-00188b4c0af8/attachments/1989_08_29.zip",
+      "rel": "data",
+      "type": "",
+      "title": "1989_08_29.zip"
+    },
+    {
+      "href": "https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/05818c50-14c2-11dd-bdaa-00188b4c0af8/attachments/1989_11_15.zip",
+      "rel": "data",
+      "type": "",
+      "title": "1989_11_15.zip"
+    },
+    {
+      "href": "https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/05818c50-14c2-11dd-bdaa-00188b4c0af8/attachments/Hierarchy.pdf",
+      "rel": "data",
+      "type": "",
+      "title": "Hierarchy.pdf"
+    },
+    {
+      "href": "https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/05818c50-14c2-11dd-bdaa-00188b4c0af8/attachments/Temperature_and_Salinity_-_February_1988_to_April_1990.PDF",
+      "rel": "data",
+      "type": "",
+      "title": "Temperature_and_Salinity_-_February_1988_to_April_1990.PDF"
+    },
+    {
+      "href": "http://geoserver-123.aodn.org.au/geoserver/wms",
+      "rel": "wms",
+      "type": "",
+      "title": "aodn:JBoceanographic_data"
+    },
+    {
+      "href": "https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/05818c50-14c2-11dd-bdaa-00188b4c0af8",
+      "rel": "describedby",
+      "type": "text/html",
+      "title": "Full metadata link"
+    }
+  ],
+  "license": "",
+  "providers": [
+    {
+      "roles": [
+        "processor"
+      ]
+    },
+    {
+      "name": "Australian Defence Force Academy (ADFA)",
+      "roles": [
+        "pointOfContact"
+      ]
+    }
+  ],
+  "themes": [
+    {
+      "concepts": [
+        {
+          "id": "Oceans | Salinity/density | Conductivity",
+          "url": null,
+          "description": "",
+          "title": "Global Change Master Directory Earth Science Keywords v.5.3.8"
+        },
+        {
+          "id": "Oceans | Salinity/density | Salinity",
+          "url": null,
+          "description": "",
+          "title": "Global Change Master Directory Earth Science Keywords v.5.3.8"
+        },
+        {
+          "id": "Oceans | Ocean Circulation | Wind-driven Circulation",
+          "url": null,
+          "description": "",
+          "title": "Global Change Master Directory Earth Science Keywords v.5.3.8"
+        },
+        {
+          "id": "Oceans | Ocean Temperature | Water Temperature",
+          "url": null,
+          "description": "",
+          "title": "Global Change Master Directory Earth Science Keywords v.5.3.8"
+        }
+      ],
+      "scheme": "discipline"
+    },
+    {
+      "concepts": [
+        {
+          "id": "station_name",
+          "url": null,
+          "description": "",
+          "title": "Keywords (Theme)"
+        },
+        {
+          "id": "time",
+          "url": null,
+          "description": "",
+          "title": "Keywords (Theme)"
+        },
+        {
+          "id": "date",
+          "url": null,
+          "description": "",
+          "title": "Keywords (Theme)"
+        },
+        {
+          "id": "depth",
+          "url": null,
+          "description": "",
+          "title": "Keywords (Theme)"
+        },
+        {
+          "id": "latitude",
+          "url": null,
+          "description": "",
+          "title": "Keywords (Theme)"
+        },
+        {
+          "id": "longitude",
+          "url": null,
+          "description": "",
+          "title": "Keywords (Theme)"
+        },
+        {
+          "id": "distance",
+          "url": null,
+          "description": "",
+          "title": "Keywords (Theme)"
+        },
+        {
+          "id": "bearing",
+          "url": null,
+          "description": "",
+          "title": "Keywords (Theme)"
+        },
+        {
+          "id": "sea_water_temperature",
+          "url": null,
+          "description": "",
+          "title": "Keywords (Theme)"
+        },
+        {
+          "id": "sea_water_salinity",
+          "url": null,
+          "description": "",
+          "title": "Keywords (Theme)"
+        },
+        {
+          "id": "sea_water_density",
+          "url": null,
+          "description": "",
+          "title": "Keywords (Theme)"
+        }
+      ],
+      "scheme": ""
+    },
+    {
+      "concepts": [
+        {
+          "id": "climatologyMeteorologyAtmosphere",
+          "url": null,
+          "title": null,
+          "description": null
+        },
+        {
+          "id": "environment",
+          "url": null,
+          "title": null,
+          "description": null
+        },
+        {
+          "id": "oceans",
+          "url": null,
+          "title": null,
+          "description": null
+        }
+      ],
+      "scheme": "Categories"
+    }
+  ],
+  "id": "05818c50-14c2-11dd-bdaa-00188b4c0af8",
+  "search_suggestions": {
+    "abstract_phrases": [],
+    "platform_vocabs_sayt": [],
+    "parameter_vocabs_sayt": [],
+    "organisation_vocabs_sayt": []
   },
-  "sci:citation" : "{\"suggestedCitation\":null,\"useLimitations\":[\"Every effort has been made to archive the project data and details as accurately as possible. It should be recognised however, that due to the passing away of the principal investigator in 2002, this archival was undertaken by a data facilitator not involved with the original data collection.\"],\"otherConstraints\":[\"© Commonwealth of Australia 2008. The Commonwealth gives no warranty regarding the data's accuracy, completeness, currency or suitability for any particular purpose. All data provided through this record are subject to a licence setting out the conditions under which the data may be used, and the rights and responsibilities of the data receiver. The licence may be viewed at: http://www.osdm.gov.au/OSDM/Policies+and+Guidelines/Spatial+Data+Access+and+Pricing/OSDM+Licence+Internet+-+no+registration/default.aspx.\"]}",
-  "type" : "Collection",
-  "stac_version" : "1.0.0",
-  "stac_extensions" : [ "https://stac-extensions.github.io/scientific/v1.0.0/schema.json", "https://stac-extensions.github.io/contacts/v0.1.1/schema.json", "https://stac-extensions.github.io/projection/v1.1.0/schema.json", "https://stac-extensions.github.io/language/v1.0.0/schema.json", "https://stac-extensions.github.io/themes/v1.0.0/schema.json", "https://stac-extensions.github.io/web-map-links/v1.2.0/schema.json" ]
+  "sci:citation": "{\"suggestedCitation\":null,\"useLimitations\":[\"Every effort has been made to archive the project data and details as accurately as possible. It should be recognised however, that due to the passing away of the principal investigator in 2002, this archival was undertaken by a data facilitator not involved with the original data collection.\"],\"otherConstraints\":[\"© Commonwealth of Australia 2008. The Commonwealth gives no warranty regarding the data's accuracy, completeness, currency or suitability for any particular purpose. All data provided through this record are subject to a licence setting out the conditions under which the data may be used, and the rights and responsibilities of the data receiver. The licence may be viewed at: http://www.osdm.gov.au/OSDM/Policies+and+Guidelines/Spatial+Data+Access+and+Pricing/OSDM+Licence+Internet+-+no+registration/default.aspx.\"]}",
+  "type": "Collection",
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/contacts/v0.1.1/schema.json",
+    "https://stac-extensions.github.io/projection/v1.1.0/schema.json",
+    "https://stac-extensions.github.io/language/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/themes/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/web-map-links/v1.2.0/schema.json"
+  ]
 }

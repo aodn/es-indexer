@@ -58,14 +58,14 @@ public class VocabServiceIT extends BaseTestClass {
         // Prepare themes
         List<ThemesModel> themes = List.of(
                 new ThemesModel(Arrays.asList(
-                        new ConceptModel("Temperature of the water body", "http://vocab.nerc.ac.uk/collection/P01/current/TEMPPR01"),
-                        new ConceptModel("Practical salinity of the water body", "http://vocab.nerc.ac.uk/collection/P01/current/PSLTZZ01"),
-                        new ConceptModel("Concentration of carbon (total inorganic) per unit mass of the water body", "http://vocab.aodn.org.au/def/discovery_parameter/entity/1"),
-                        new ConceptModel("Total alkalinity per unit mass of the water body", "http://vocab.nerc.ac.uk/collection/P01/current/MDMAP014"),
-                        new ConceptModel("Saturation state of aragonite in the water body", "http://vocab.aodn.org.au/def/discovery_parameter/entity/24"),
-                        new ConceptModel("Saturation state of aragonite in the water body", "http://vocab.aodn.org.au/def/discovery_parameter/entity/24"),
-                        new ConceptModel("pH (total scale) of the water body", "http://vocab.aodn.org.au/def/discovery_parameter/entity/27")
-                ), "theme", null, "AODN Discovery Parameter Vocabulary")
+                        new ConceptModel("Temperature of the water body", "http://vocab.nerc.ac.uk/collection/P01/current/TEMPPR01", "AODN Discovery Parameter Vocabulary", null),
+                        new ConceptModel("Practical salinity of the water body", "http://vocab.nerc.ac.uk/collection/P01/current/PSLTZZ01", "AODN Discovery Parameter Vocabulary", null),
+                        new ConceptModel("Concentration of carbon (total inorganic) per unit mass of the water body", "http://vocab.aodn.org.au/def/discovery_parameter/entity/1", "AODN Discovery Parameter Vocabulary", null),
+                        new ConceptModel("Total alkalinity per unit mass of the water body", "http://vocab.nerc.ac.uk/collection/P01/current/MDMAP014", "AODN Discovery Parameter Vocabulary", null),
+                        new ConceptModel("Saturation state of aragonite in the water body", "http://vocab.aodn.org.au/def/discovery_parameter/entity/24", "AODN Discovery Parameter Vocabulary", null),
+                        new ConceptModel("Saturation state of aragonite in the water body", "http://vocab.aodn.org.au/def/discovery_parameter/entity/24", "AODN Discovery Parameter Vocabulary", null),
+                        new ConceptModel("pH (total scale) of the water body", "http://vocab.aodn.org.au/def/discovery_parameter/entity/27", "AODN Discovery Parameter Vocabulary", null)
+                ), "theme")
         );
 
         // Perform the test
@@ -91,14 +91,14 @@ public class VocabServiceIT extends BaseTestClass {
         // Prepare themes
         List<ThemesModel> themes = List.of(
                 new ThemesModel(Arrays.asList(
-                        new ConceptModel("Lizard Island Base Station", "http://vocab.aodn.org.au/def/platform/entity/308"),
-                        new ConceptModel("Orpheus Island Base Station", "http://vocab.aodn.org.au/def/platform/entity/315"),
-                        new ConceptModel("OOCL Panama", "http://vocab.aodn.org.au/def/platform/entity/1"),
-                        new ConceptModel("Wana Bhum", "http://vocab.nerc.ac.uk/collection/P01/current/MDMAP014"),
-                        new ConceptModel("Lizard Island Sensor Float 4", "http://vocab.aodn.org.au/def/platform/entity/314"),
-                        new ConceptModel("Bateman's Marine Park 120m Mooring", "http://vocab.aodn.org.au/def/platform/entity/121"),
-                        new ConceptModel("NEMO Argo Float", "http://vocab.aodn.org.au/def/platform/entity/296")
-                ), "theme", null, "AODN Platform Vocabulary")
+                        new ConceptModel("Lizard Island Base Station", "http://vocab.aodn.org.au/def/platform/entity/308", "AODN Platform Vocabulary", null),
+                        new ConceptModel("Orpheus Island Base Station", "http://vocab.aodn.org.au/def/platform/entity/315", "AODN Platform Vocabulary", null),
+                        new ConceptModel("OOCL Panama", "http://vocab.aodn.org.au/def/platform/entity/1", "AODN Platform Vocabulary", null),
+                        new ConceptModel("Wana Bhum", "http://vocab.nerc.ac.uk/collection/P01/current/MDMAP014", "AODN Platform Vocabulary", null),
+                        new ConceptModel("Lizard Island Sensor Float 4", "http://vocab.aodn.org.au/def/platform/entity/314", "AODN Platform Vocabulary", null),
+                        new ConceptModel("Bateman's Marine Park 120m Mooring", "http://vocab.aodn.org.au/def/platform/entity/121", "AODN Platform Vocabulary", null),
+                        new ConceptModel("NEMO Argo Float", "http://vocab.aodn.org.au/def/platform/entity/296", "AODN Platform Vocabulary", null)
+                ), "theme")
         );
 
         // Perform the test

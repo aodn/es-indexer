@@ -61,47 +61,63 @@
   "themes" : [ {
     "concepts" : [ {
       "id" : "Earth Science | Biosphere | Aquatic Ecosystems | Benthic Habitat",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/09a78997-581b-4d1b-ae71-b2b3f96ef719"
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/09a78997-581b-4d1b-ae71-b2b3f96ef719",
+      "description" : "Olsen, L.M., G. Major, K. Shein, J. Scialdone, S. Ritz, T. Stevens, M. Morahan, A. Aleman, R. Vogel, S. Leicester, H. Weir, M. Meaux, S. Grebas, C.Solomon, M. Holland, T. Northcutt, R. A. Restrepo, R. Bilodeau, 2013. NASA/Global Change Master Directory (GCMD) Earth Science Keywords. Version 8.0.0.0.0",
+      "title" : "GCMD Keywords"
     }, {
       "id" : "Earth Science | Biosphere | Aquatic Ecosystems | Coastal Habitat",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/47be68db-d10d-43e7-b150-61cfd3f06126"
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/47be68db-d10d-43e7-b150-61cfd3f06126",
+      "description" : "Olsen, L.M., G. Major, K. Shein, J. Scialdone, S. Ritz, T. Stevens, M. Morahan, A. Aleman, R. Vogel, S. Leicester, H. Weir, M. Meaux, S. Grebas, C.Solomon, M. Holland, T. Northcutt, R. A. Restrepo, R. Bilodeau, 2013. NASA/Global Change Master Directory (GCMD) Earth Science Keywords. Version 8.0.0.0.0",
+      "title" : "GCMD Keywords"
     }, {
       "id" : "Earth Science | Biosphere | Aquatic Ecosystems | Demersal Habitat",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/af953f41-ab6c-4569-9762-c46ad07118da"
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/af953f41-ab6c-4569-9762-c46ad07118da",
+      "description" : "Olsen, L.M., G. Major, K. Shein, J. Scialdone, S. Ritz, T. Stevens, M. Morahan, A. Aleman, R. Vogel, S. Leicester, H. Weir, M. Meaux, S. Grebas, C.Solomon, M. Holland, T. Northcutt, R. A. Restrepo, R. Bilodeau, 2013. NASA/Global Change Master Directory (GCMD) Earth Science Keywords. Version 8.0.0.0.0",
+      "title" : "GCMD Keywords"
     }, {
       "id" : "Earth Science | Biosphere | Aquatic Ecosystems | Pelagic Habitat",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/3d7ecc4f-e79e-40d1-8796-63059888bf5f"
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/3d7ecc4f-e79e-40d1-8796-63059888bf5f",
+      "description" : "Olsen, L.M., G. Major, K. Shein, J. Scialdone, S. Ritz, T. Stevens, M. Morahan, A. Aleman, R. Vogel, S. Leicester, H. Weir, M. Meaux, S. Grebas, C.Solomon, M. Holland, T. Northcutt, R. A. Restrepo, R. Bilodeau, 2013. NASA/Global Change Master Directory (GCMD) Earth Science Keywords. Version 8.0.0.0.0",
+      "title" : "GCMD Keywords"
     }, {
       "id" : "Earth Science | Biosphere | Terrestrial Ecosystems | Beaches",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/a61d1705-a6b7-4df3-9f8e-57e26029629c"
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/a61d1705-a6b7-4df3-9f8e-57e26029629c",
+      "description" : "Olsen, L.M., G. Major, K. Shein, J. Scialdone, S. Ritz, T. Stevens, M. Morahan, A. Aleman, R. Vogel, S. Leicester, H. Weir, M. Meaux, S. Grebas, C.Solomon, M. Holland, T. Northcutt, R. A. Restrepo, R. Bilodeau, 2013. NASA/Global Change Master Directory (GCMD) Earth Science Keywords. Version 8.0.0.0.0",
+      "title" : "GCMD Keywords"
     } ],
-    "scheme" : "theme",
-    "description" : "Olsen, L.M., G. Major, K. Shein, J. Scialdone, S. Ritz, T. Stevens, M. Morahan, A. Aleman, R. Vogel, S. Leicester, H. Weir, M. Meaux, S. Grebas, C.Solomon, M. Holland, T. Northcutt, R. A. Restrepo, R. Bilodeau, 2013. NASA/Global Change Master Directory (GCMD) Earth Science Keywords. Version 8.0.0.0.0",
-    "title" : "GCMD Keywords"
+    "scheme" : "theme"
   }, {
     "concepts" : [ {
       "id" : "Marine Features (Australia) | Australian North West Shelf, WA",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.place.urn:aodn.org.au:geographicextents&id=urn:aodn.org.au:geographicextents:concept:65"
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.place.urn:aodn.org.au:geographicextents&id=urn:aodn.org.au:geographicextents:concept:65",
+      "description" : "AODN GEN",
+      "title" : "AODN Geographic Extent Names"
     } ],
-    "scheme" : "place",
-    "description" : "AODN GEN",
-    "title" : "AODN Geographic Extent Names"
+    "scheme" : "place"
   }, {
     "concepts" : [ {
       "id" : "North West Shelf - Joint Environmental Management Study - 02-03",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.project.urn:marlin.csiro.au:projectregister&id=urn:marlin.csiro.au:projectregister:concept:1708"
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.project.urn:marlin.csiro.au:projectregister&id=urn:marlin.csiro.au:projectregister:concept:1708",
+      "description" : "MarLIN Project Register",
+      "title" : "CSIRO Project List"
     } ],
-    "scheme" : "project",
-    "description" : "MarLIN Project Register",
-    "title" : "CSIRO Project List"
+    "scheme" : "project"
   }, {
     "concepts" : [ {
       "id" : "North West Shelf Joint Environmental Management Study",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.project.urn:marlin.csiro.au:globalprojectregister&id=urn:marlin.csiro.au:globalprojectregister:concept:20"
+      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.project.urn:marlin.csiro.au:globalprojectregister&id=urn:marlin.csiro.au:globalprojectregister:concept:20",
+      "description" : "MarLIN Global Project Codes Register",
+      "title" : "CSIRO Global Project List"
     } ],
-    "scheme" : "project",
-    "description" : "MarLIN Global Project Codes Register",
-    "title" : "CSIRO Global Project List"
+    "scheme" : "project"
+  }, {
+    "concepts" : [ {
+      "id" : "oceans",
+      "url" : null,
+      "title" : null,
+      "description" : null
+    } ],
+    "scheme" : "Categories"
   } ],
   "id" : "5fec8c73-58a1-4a4b-9e47-cfcd9e3fd3ea",
   "search_suggestions" : {

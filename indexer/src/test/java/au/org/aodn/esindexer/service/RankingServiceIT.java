@@ -92,11 +92,9 @@ class RankingServiceIT extends BaseTestClass {
         // arrange
         List<ThemesModel> themes = new ArrayList<>();
         ThemesModel theme1 = ThemesModel.builder().build();
-        theme1.setTitle("Test");
         themes.add(theme1);
 
         ThemesModel theme2 = ThemesModel.builder().build();
-        theme2.setTitle("Test 2");
         themes.add(theme2);
 
         stacCollectionModel.setThemes(themes);

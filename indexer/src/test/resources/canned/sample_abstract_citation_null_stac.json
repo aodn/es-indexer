@@ -1,40 +1,314 @@
 {
-  "title" : "RV Investigator Voyage IN2017_V01 Underway UWY Data",
-  "description" : "This record describes the Underway (UWY) data collected from the Marine National Facility (MNF) RV Investigator research voyage in2017_v01, titled \"Interactions of the Totten Glacier with the Southern Ocean through multiple glacial cycles.\" The voyage took place from Hobart (TAS) to Hobart between the 14th January and 5th March, 2017.\n\n                    Standard Underway data is continuously recorded, it consists of:\n                    (1) NAV: Navigation data: (dual GPS) Latitude, Longitude, Speed, Heading, course over ground, Gyros, and Doppler Log.\n                    (2) TSG:  Thermosalinograph: Water Salinity, flow-rate, Temperature, Fluorescence, and pCO2.\n                    (3) MET: Atmospheric (port and starboard): Humidity, Wind speed and direction (vane and ultrasonic), Radiometer, Pyranometer, PAR, Air temperature, Air pressure, Rain, Ozone and Trace gases.\n\n                    Data are recorded at 5 second intervals. Near  real-time data is available via the link below. This dataset will be processed and archived within the  CSIRO Oceans & Atmosphere Data Centre in Hobart. Data is available in 5sec intervals in NetCDF, 10 sec and 5 min intervals in ascii format. Additional information regarding this dataset is contained in the cruise report for this voyage and/or the data processing report.",
-  "extent" : {
-    "bbox" : [ [ 113.7, -65.7, 147.5, -42.8 ], [ 113.7, -65.7, 147.5, -42.8 ] ],
-    "temporal" : [ [ "2017-01-13T13:00:00Z", "2016-03-04T12:59:59Z" ], [ "2017-01-13T13:00:00Z", "2016-03-04T12:59:59Z" ] ]
+  "title": "RV Investigator Voyage IN2017_V01 Underway UWY Data",
+  "description": "This record describes the Underway (UWY) data collected from the Marine National Facility (MNF) RV Investigator research voyage in2017_v01, titled \"Interactions of the Totten Glacier with the Southern Ocean through multiple glacial cycles.\" The voyage took place from Hobart (TAS) to Hobart between the 14th January and 5th March, 2017.\n\n                    Standard Underway data is continuously recorded, it consists of:\n                    (1) NAV: Navigation data: (dual GPS) Latitude, Longitude, Speed, Heading, course over ground, Gyros, and Doppler Log.\n                    (2) TSG:  Thermosalinograph: Water Salinity, flow-rate, Temperature, Fluorescence, and pCO2.\n                    (3) MET: Atmospheric (port and starboard): Humidity, Wind speed and direction (vane and ultrasonic), Radiometer, Pyranometer, PAR, Air temperature, Air pressure, Rain, Ozone and Trace gases.\n\n                    Data are recorded at 5 second intervals. Near  real-time data is available via the link below. This dataset will be processed and archived within the  CSIRO Oceans & Atmosphere Data Centre in Hobart. Data is available in 5sec intervals in NetCDF, 10 sec and 5 min intervals in ascii format. Additional information regarding this dataset is contained in the cruise report for this voyage and/or the data processing report.",
+  "extent": {
+    "bbox": [
+      [
+        113.7,
+        -65.7,
+        147.5,
+        -42.8
+      ],
+      [
+        113.7,
+        -65.7,
+        147.5,
+        -42.8
+      ]
+    ],
+    "temporal": [
+      [
+        "2017-01-13T13:00:00Z",
+        "2016-03-04T12:59:59Z"
+      ],
+      [
+        "2017-01-13T13:00:00Z",
+        "2016-03-04T12:59:59Z"
+      ]
+    ]
   },
-  "summaries" : {
-    "score" : 1,
-    "status" : "planned",
-    "credits" : [ ],
-    "statement" : "Data source: original field data.\n                    Data processing performed by CSIRO Oceans and Atmosphere.\n\n                    The portside Humidity sensor became offset from the starboard after 16-January-2017 16:15:35 and subsequently flagged as suspect (data left unchanged) for the remainder of the voyage .\n\n                    The starboard Humidity sensor may also have failed at about 2-March 2017 and has been flagged  as bad with data NaNed.\n\n                    All values between 100-103% have been adjusted back to 100%.\n                    Please refer to the processing report for further information.",
-    "revision" : "2023-11-10T03:57:25",
-    "update_frequency" : "other",
-    "proj:geometry" : {
-      "geometries" : [ {
-        "type" : "Polygon",
-        "coordinates" : [ [ [ 113.7, -65.7 ], [ 147.5, -65.7 ], [ 147.5, -42.8 ], [ 113.7, -42.8 ], [ 113.7, -65.7 ] ] ]
-      } ],
-      "type" : "GeometryCollection"
+  "summaries": {
+    "score": 1,
+    "status": "planned",
+    "credits": [],
+    "statement": "Data source: original field data.\n                    Data processing performed by CSIRO Oceans and Atmosphere.\n\n                    The portside Humidity sensor became offset from the starboard after 16-January-2017 16:15:35 and subsequently flagged as suspect (data left unchanged) for the remainder of the voyage .\n\n                    The starboard Humidity sensor may also have failed at about 2-March 2017 and has been flagged  as bad with data NaNed.\n\n                    All values between 100-103% have been adjusted back to 100%.\n                    Please refer to the processing report for further information.",
+    "revision": "2023-11-10T03:57:25",
+    "update_frequency": "other",
+    "proj:geometry": {
+      "geometries": [
+        {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                113.7,
+                -65.7
+              ],
+              [
+                147.5,
+                -65.7
+              ],
+              [
+                147.5,
+                -42.8
+              ],
+              [
+                113.7,
+                -42.8
+              ],
+              [
+                113.7,
+                -65.7
+              ]
+            ]
+          ]
+        }
+      ],
+      "type": "GeometryCollection"
     },
-    "proj:geometry_noland" : {
-      "geometries" : [ {
-        "type" : "Polygon",
-        "coordinates" : [ [ [ 147.5, -43.01033500635744 ], [ 147.43620853000004, -43.04607512799993 ], [ 147.47730553500003, -42.908868096999925 ], [ 147.31563437222366, -42.8 ], [ 147.2949126774429, -42.8 ], [ 147.360199415, -42.92522551899992 ], [ 147.33318118600002, -43.04265715899993 ], [ 147.2544051440001, -43.027276299999926 ], [ 147.25757897200003, -43.25432708099993 ], [ 147.16382897200003, -43.27011484199994 ], [ 147.10661868600002, -43.15471770599993 ], [ 147.0605574880001, -43.20159270599993 ], [ 146.97291100400003, -43.131117445999905 ], [ 147.09978274800005, -43.29941171699994 ], [ 146.96265709700003, -43.34026458099993 ], [ 147.05534915500004, -43.3562151019999 ], [ 146.92164147200003, -43.429620049999926 ], [ 147.01783287900003, -43.47812265399995 ], [ 146.901703321, -43.5319963519999 ], [ 146.92701256600003, -43.61174895599993 ], [ 146.71070397200003, -43.62900155999995 ], [ 146.5546981130001, -43.469414971999925 ], [ 146.51351972700004, -43.5339494769999 ], [ 146.23812910200004, -43.48455169099992 ], [ 146.02418053500003, -43.5525041649999 ], [ 145.94320722700004, -43.36484140399995 ], [ 146.16138756600003, -43.415948174999926 ], [ 146.2295028000001, -43.31975676899992 ], [ 146.0254012380001, -43.324883721999925 ], [ 145.91716556100002, -43.19589609199994 ], [ 145.86931399800005, -43.27304452899995 ], [ 145.9257918630001, -43.28915780999995 ], [ 145.83179772200003, -43.29257577899995 ], [ 145.42652048769682, -42.8 ], [ 113.7, -42.8 ], [ 113.7, -65.7 ], [ 147.5, -65.7 ], [ 147.5, -43.01033500635744 ] ], [ [ 147.33659915500004, -43.34026458099993 ], [ 147.30388431100002, -43.508884372999944 ], [ 147.21558678500003, -43.41521575299993 ], [ 147.16773522200003, -43.50164153399993 ], [ 147.08619225400003, -43.429620049999926 ], [ 147.17920983200008, -43.45403411299992 ], [ 147.16814212300005, -43.368259372999944 ], [ 147.30445397200003, -43.26181405999995 ], [ 147.33659915500004, -43.34026458099993 ] ], [ [ 147.40211022200003, -43.131117445999905 ], [ 147.4375106130001, -43.238946221999925 ], [ 147.36085045700008, -43.25790780999995 ], [ 147.38786868600002, -43.19622161299992 ], [ 147.29175866000003, -43.153008721999925 ], [ 147.36003665500004, -43.074883721999925 ], [ 147.40211022200003, -43.131117445999905 ] ] ]
-      } ],
-      "type" : "GeometryCollection"
+    "proj:geometry_noland": {
+      "geometries": [
+        {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                147.5,
+                -43.01033500635744
+              ],
+              [
+                147.43620853000004,
+                -43.04607512799993
+              ],
+              [
+                147.47730553500003,
+                -42.908868096999925
+              ],
+              [
+                147.31563437222366,
+                -42.8
+              ],
+              [
+                147.2949126774429,
+                -42.8
+              ],
+              [
+                147.360199415,
+                -42.92522551899992
+              ],
+              [
+                147.33318118600002,
+                -43.04265715899993
+              ],
+              [
+                147.2544051440001,
+                -43.027276299999926
+              ],
+              [
+                147.25757897200003,
+                -43.25432708099993
+              ],
+              [
+                147.16382897200003,
+                -43.27011484199994
+              ],
+              [
+                147.10661868600002,
+                -43.15471770599993
+              ],
+              [
+                147.0605574880001,
+                -43.20159270599993
+              ],
+              [
+                146.97291100400003,
+                -43.131117445999905
+              ],
+              [
+                147.09978274800005,
+                -43.29941171699994
+              ],
+              [
+                146.96265709700003,
+                -43.34026458099993
+              ],
+              [
+                147.05534915500004,
+                -43.3562151019999
+              ],
+              [
+                146.92164147200003,
+                -43.429620049999926
+              ],
+              [
+                147.01783287900003,
+                -43.47812265399995
+              ],
+              [
+                146.901703321,
+                -43.5319963519999
+              ],
+              [
+                146.92701256600003,
+                -43.61174895599993
+              ],
+              [
+                146.71070397200003,
+                -43.62900155999995
+              ],
+              [
+                146.5546981130001,
+                -43.469414971999925
+              ],
+              [
+                146.51351972700004,
+                -43.5339494769999
+              ],
+              [
+                146.23812910200004,
+                -43.48455169099992
+              ],
+              [
+                146.02418053500003,
+                -43.5525041649999
+              ],
+              [
+                145.94320722700004,
+                -43.36484140399995
+              ],
+              [
+                146.16138756600003,
+                -43.415948174999926
+              ],
+              [
+                146.2295028000001,
+                -43.31975676899992
+              ],
+              [
+                146.0254012380001,
+                -43.324883721999925
+              ],
+              [
+                145.91716556100002,
+                -43.19589609199994
+              ],
+              [
+                145.86931399800005,
+                -43.27304452899995
+              ],
+              [
+                145.9257918630001,
+                -43.28915780999995
+              ],
+              [
+                145.83179772200003,
+                -43.29257577899995
+              ],
+              [
+                145.42652048769682,
+                -42.8
+              ],
+              [
+                113.7,
+                -42.8
+              ],
+              [
+                113.7,
+                -65.7
+              ],
+              [
+                147.5,
+                -65.7
+              ],
+              [
+                147.5,
+                -43.01033500635744
+              ]
+            ],
+            [
+              [
+                147.33659915500004,
+                -43.34026458099993
+              ],
+              [
+                147.30388431100002,
+                -43.508884372999944
+              ],
+              [
+                147.21558678500003,
+                -43.41521575299993
+              ],
+              [
+                147.16773522200003,
+                -43.50164153399993
+              ],
+              [
+                147.08619225400003,
+                -43.429620049999926
+              ],
+              [
+                147.17920983200008,
+                -43.45403411299992
+              ],
+              [
+                147.16814212300005,
+                -43.368259372999944
+              ],
+              [
+                147.30445397200003,
+                -43.26181405999995
+              ],
+              [
+                147.33659915500004,
+                -43.34026458099993
+              ]
+            ],
+            [
+              [
+                147.40211022200003,
+                -43.131117445999905
+              ],
+              [
+                147.4375106130001,
+                -43.238946221999925
+              ],
+              [
+                147.36085045700008,
+                -43.25790780999995
+              ],
+              [
+                147.38786868600002,
+                -43.19622161299992
+              ],
+              [
+                147.29175866000003,
+                -43.153008721999925
+              ],
+              [
+                147.36003665500004,
+                -43.074883721999925
+              ],
+              [
+                147.40211022200003,
+                -43.131117445999905
+              ]
+            ]
+          ]
+        }
+      ],
+      "type": "GeometryCollection"
     },
-    "temporal" : [ {
-      "start" : "2017-01-13T13:00:00Z",
-      "end" : "2016-03-04T12:59:59Z"
-    } ],
+    "temporal": [
+      {
+        "start": "2017-01-13T13:00:00Z",
+        "end": "2016-03-04T12:59:59Z"
+      }
+    ],
     "platform_vocabs": [],
-    "parameter_vocabs" : [ ],
-    "organisation_vocabs" : [ ]
+    "parameter_vocabs": [],
+    "organisation_vocabs": []
   },
-  "contacts" : [
+  "contacts": [
     {
       "name": "CSIRO O&A, Information & Data Centre",
       "organization": "CSIRO Oceans & Atmosphere - Hobart",
@@ -76,204 +350,323 @@
       ]
     }
   ],
-  "languages" : [ {
-    "code" : "eng",
-    "name" : "English"
-  } ],
-  "links" : [ {
-    "href" : "https://www.marine.csiro.au/data/trawler/dataset.cfm?survey=IN2017_V01&data_type=uwy",
-    "rel" : "data",
-    "type" : "",
-    "title" : "Data Access Via Data Trawler"
-  }, {
-    "href" : "https://www.marine.csiro.au/data/trawler/download.cfm?file_id=3596",
-    "rel" : "data",
-    "type" : "",
-    "title" : "Download: 10-second (csv data): in2017_v01uwy10sec_csv.zip"
-  }, {
-    "href" : "https://www.marine.csiro.au/data/trawler/download.cfm?file_id=3597",
-    "rel" : "data",
-    "type" : "",
-    "title" : "Download: 5-minute (csv data): in2017_v01uwy5min_csv.zip"
-  }, {
-    "href" : "https://www.marine.csiro.au/data/trawler/download.cfm?file_id=3598",
-    "rel" : "data",
-    "type" : "",
-    "title" : "Download: 5-second (netcdf data): in2017_v01uwy_nc.zip"
-  }, {
-    "href" : "https://www.marine.csiro.au/data/reporting/get_file.cfm?eov_pub_id=1513",
-    "rel" : "data",
-    "type" : "",
-    "title" : "Download: processing report (pdf): in2017_v01_UWY_ProcessingReport.pdf"
-  }, {
-    "href" : "https://www.marine.csiro.au/data/trawler/download.cfm?file_id=5459",
-    "rel" : "data",
-    "type" : "",
-    "title" : "Download: 1-minute (csv data): in2017_v01uwy1min_csv.zip"
-  }, {
-    "href" : "https://www.marine.csiro.au/data/trawler/survey_list.cfm?source_id=309",
-    "rel" : "related",
-    "type" : "text/html",
-    "title" : "RV Investigator Survey Information"
-  }, {
-    "href" : "https://www.marine.csiro.au/data/underway/?survey=in2017_v01",
-    "rel" : "related",
-    "type" : "text/html",
-    "title" : "Visualisation tool for Underway Data"
-  }, {
-    "href" : "https://mnf.csiro.au/",
-    "rel" : "related",
-    "type" : "text/html",
-    "title" : "MNF Home page"
-  } ],
-  "license" : "Attribution 4.0",
-  "providers" : [ {
-    "name" : "CSIRO/Oceans and Atmosphere",
-    "roles" : [ "processor" ]
-  }, {
-    "name" : "CSIRO Oceans & Atmosphere - Hobart",
-    "roles" : [ "pointOfContact" ]
-  }, {
-    "name" : "CSIRO",
-    "roles" : [ "originator" ]
-  } ],
-  "themes" : [ {
-    "concepts" : [ {
-      "id" : "Earth Science | Atmosphere | Atmospheric Temperature | Air Temperature",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/f634ab55-de40-4d0b-93bc-691bf5408ccb"
-    }, {
-      "id" : "Earth Science | Oceans | Ocean Temperature | Sea Surface Temperature",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/bd24a9a9-7d52-4c29-b2a0-6cefd216ae78"
-    }, {
-      "id" : "Earth Science | Atmosphere | Atmospheric Water Vapor | Humidity",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/427e5121-a142-41cb-a8e9-a70b7f98eb6a"
-    }, {
-      "id" : "Earth Science | Atmosphere | Atmospheric Pressure | Atmospheric Pressure Measurements",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/9efbc088-ba8c-4c9c-a458-ad6ad63f4188"
-    }, {
-      "id" : "Earth Science | Atmosphere | Atmospheric Radiation | Solar Radiation",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/a0f3474e-9a54-4a82-97c4-43864b48df4c"
-    }, {
-      "id" : "Earth Science | Oceans | Salinity/Density | Salinity",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/7e95b5fc-1d58-431a-af36-948b29fa870d"
-    }, {
-      "id" : "Earth Science | Oceans | Bathymetry/Seafloor Topography | Water Depth",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/ca477721-473b-40d7-a72b-4ffa963e48fb"
-    }, {
-      "id" : "Earth Science | Atmosphere | Atmospheric Winds | Surface Winds",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/10685919-bc01-43e7-901a-b62ac44627f3"
-    } ],
-    "scheme" : "theme",
-    "description" : "",
-    "title" : "GCMD Keywords"
-  }, {
-    "concepts" : [ {
-      "id" : "Global / Oceans | Southern Ocean",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.place.mcp_regions&id=http://bluenet3.antcrc.utas.edu.au/mcp/geographic_extent_names#6"
-    }, {
-      "id" : "Regional Seas | Tasman Sea",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.place.mcp_regions&id=http://bluenet3.antcrc.utas.edu.au/mcp/geographic_extent_names#23"
-    }, {
-      "id" : "Global / Oceans | Pacific Ocean",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.place.mcp_regions&id=http://bluenet3.antcrc.utas.edu.au/mcp/geographic_extent_names#5"
-    } ],
-    "scheme" : "",
-    "description" : "",
-    "title" : "Keywords (Place)"
-  }, {
-    "concepts" : [ {
-      "id" : "Marine National Facility",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.discipline.urn:marlin.csiro.au:keywords:cmarAOI&id=urn:marlin.csiro.au:keywords:cmarAOI:concept:3208"
-    } ],
-    "scheme" : "discipline",
-    "description" : "",
-    "title" : "CSIRO Areas Of Interest"
-  }, {
-    "concepts" : [ {
-      "id" : "Research Voyage: IN2017_V01",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.survey.urn:marlin.csiro.au:surveyregister&id=urn:marlin.csiro.au:surveyregister:concept:2181"
-    } ],
-    "scheme" : "survey",
-    "description" : "",
-    "title" : "CSIRO Survey List"
-  }, {
-    "concepts" : [ {
-      "id" : "Vessel Data: Underway",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.discipline.urn:marlin.csiro.au:keywords:standardDataType&id=urn:marlin.csiro.au:keywords:standardDataType:concept:3514"
-    } ],
-    "scheme" : "discipline",
-    "description" : "",
-    "title" : "CSIRO Standard Data Types"
-  }, {
-    "concepts" : [ {
-      "id" : "Ship: Investigator (RV)",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.dataSource.urn:marlin.csiro.au:sourceregister&id=urn:marlin.csiro.au:sourceregister:concept:309"
-    } ],
-    "scheme" : "dataSource",
-    "description" : "",
-    "title" : "CSIRO Source List"
-  }, {
-    "concepts" : [ {
-      "id" : "Meteorological Instruments",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:keywords:equipment&id=urn:marlin.csiro.au:keywords:equipment:concept:2261"
-    }, {
-      "id" : "Thermosalinographs",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:keywords:equipment&id=urn:marlin.csiro.au:keywords:equipment:concept:2302"
-    }, {
-      "id" : "Altimeters",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:keywords:equipment&id=urn:marlin.csiro.au:keywords:equipment:concept:2206"
-    } ],
-    "scheme" : "equipment",
-    "description" : "",
-    "title" : "CSIRO Equipment"
-  }, {
-    "concepts" : [ {
-      "id" : "Interactions of the Totten Glacier with the Southern Ocean through multiple glacial cycles.",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.project.urn:marlin.csiro.au:projectregister&id=urn:marlin.csiro.au:projectregister:concept:2454"
-    } ],
-    "scheme" : "project",
-    "description" : "",
-    "title" : "CSIRO Project List"
-  }, {
-    "concepts" : [ {
-      "id" : "Thermosalinographs",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.mcp_collection_methods&id=http://bluenet3.antcrc.utas.edu.au/mcp/collection_methods#122"
-    }, {
-      "id" : "Altimeters",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.mcp_collection_methods&id=http://bluenet3.antcrc.utas.edu.au/mcp/collection_methods#4"
-    } ],
-    "scheme" : "theme",
-    "description" : "",
-    "title" : "MCP Collection Methods"
-  }, {
-    "concepts" : [ {
-      "id" : "Global / Oceans | West Equatorial Pacific Ocean",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.place.urn:marlin.csiro.au:definedregions&id=urn:marlin.csiro.au:definedregions:concept:1021"
-    } ],
-    "scheme" : "place",
-    "description" : "",
-    "title" : ""
-  }, {
-    "concepts" : [ {
-      "id" : "Global / Oceans | Southern Ocean",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.place.urn:aodn.org.au:geographicextents&id=urn:aodn.org.au:geographicextents:concept:6"
-    }, {
-      "id" : "Marine Planning Regions (Australia) | Australian Antarctic",
-      "url" : "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.place.urn:aodn.org.au:geographicextents&id=urn:aodn.org.au:geographicextents:concept:50"
-    } ],
-    "scheme" : "place",
-    "description" : "",
-    "title" : "AODN Geographic Extent Names"
-  } ],
-  "id" : "c9ac30a7-9cad-420e-9ff9-efdffe6bf4ef",
-  "search_suggestions" : {
-    "abstract_phrases" : [ ],
-    "platform_vocabs_sayt" : [],
-    "parameter_vocabs_sayt" : [],
-    "organisation_vocabs_sayt" : []
+  "languages": [
+    {
+      "code": "eng",
+      "name": "English"
+    }
+  ],
+  "links": [
+    {
+      "href": "https://www.marine.csiro.au/data/trawler/dataset.cfm?survey=IN2017_V01&data_type=uwy",
+      "rel": "data",
+      "type": "",
+      "title": "Data Access Via Data Trawler"
+    },
+    {
+      "href": "https://www.marine.csiro.au/data/trawler/download.cfm?file_id=3596",
+      "rel": "data",
+      "type": "",
+      "title": "Download: 10-second (csv data): in2017_v01uwy10sec_csv.zip"
+    },
+    {
+      "href": "https://www.marine.csiro.au/data/trawler/download.cfm?file_id=3597",
+      "rel": "data",
+      "type": "",
+      "title": "Download: 5-minute (csv data): in2017_v01uwy5min_csv.zip"
+    },
+    {
+      "href": "https://www.marine.csiro.au/data/trawler/download.cfm?file_id=3598",
+      "rel": "data",
+      "type": "",
+      "title": "Download: 5-second (netcdf data): in2017_v01uwy_nc.zip"
+    },
+    {
+      "href": "https://www.marine.csiro.au/data/reporting/get_file.cfm?eov_pub_id=1513",
+      "rel": "data",
+      "type": "",
+      "title": "Download: processing report (pdf): in2017_v01_UWY_ProcessingReport.pdf"
+    },
+    {
+      "href": "https://www.marine.csiro.au/data/trawler/download.cfm?file_id=5459",
+      "rel": "data",
+      "type": "",
+      "title": "Download: 1-minute (csv data): in2017_v01uwy1min_csv.zip"
+    },
+    {
+      "href": "https://www.marine.csiro.au/data/trawler/survey_list.cfm?source_id=309",
+      "rel": "related",
+      "type": "text/html",
+      "title": "RV Investigator Survey Information"
+    },
+    {
+      "href": "https://www.marine.csiro.au/data/underway/?survey=in2017_v01",
+      "rel": "related",
+      "type": "text/html",
+      "title": "Visualisation tool for Underway Data"
+    },
+    {
+      "href": "https://mnf.csiro.au/",
+      "rel": "related",
+      "type": "text/html",
+      "title": "MNF Home page"
+    }
+  ],
+  "license": "Attribution 4.0",
+  "providers": [
+    {
+      "name": "CSIRO/Oceans and Atmosphere",
+      "roles": [
+        "processor"
+      ]
+    },
+    {
+      "name": "CSIRO Oceans & Atmosphere - Hobart",
+      "roles": [
+        "pointOfContact"
+      ]
+    },
+    {
+      "name": "CSIRO",
+      "roles": [
+        "originator"
+      ]
+    }
+  ],
+  "themes": [
+    {
+      "concepts": [
+        {
+          "id": "Earth Science | Atmosphere | Atmospheric Temperature | Air Temperature",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/f634ab55-de40-4d0b-93bc-691bf5408ccb",
+          "description": "",
+          "title": "GCMD Keywords"
+        },
+        {
+          "id": "Earth Science | Oceans | Ocean Temperature | Sea Surface Temperature",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/bd24a9a9-7d52-4c29-b2a0-6cefd216ae78",
+          "description": "",
+          "title": "GCMD Keywords"
+        },
+        {
+          "id": "Earth Science | Atmosphere | Atmospheric Water Vapor | Humidity",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/427e5121-a142-41cb-a8e9-a70b7f98eb6a",
+          "description": "",
+          "title": "GCMD Keywords"
+        },
+        {
+          "id": "Earth Science | Atmosphere | Atmospheric Pressure | Atmospheric Pressure Measurements",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/9efbc088-ba8c-4c9c-a458-ad6ad63f4188",
+          "description": "",
+          "title": "GCMD Keywords"
+        },
+        {
+          "id": "Earth Science | Atmosphere | Atmospheric Radiation | Solar Radiation",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/a0f3474e-9a54-4a82-97c4-43864b48df4c",
+          "description": "",
+          "title": "GCMD Keywords"
+        },
+        {
+          "id": "Earth Science | Oceans | Salinity/Density | Salinity",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/7e95b5fc-1d58-431a-af36-948b29fa870d",
+          "description": "",
+          "title": "GCMD Keywords"
+        },
+        {
+          "id": "Earth Science | Oceans | Bathymetry/Seafloor Topography | Water Depth",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/ca477721-473b-40d7-a72b-4ffa963e48fb",
+          "description": "",
+          "title": "GCMD Keywords"
+        },
+        {
+          "id": "Earth Science | Atmosphere | Atmospheric Winds | Surface Winds",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.gcmd_keywords&id=http://gcmdservices.gsfc.nasa.gov/kms/concept/10685919-bc01-43e7-901a-b62ac44627f3",
+          "description": "",
+          "title": "GCMD Keywords"
+        }
+      ],
+      "scheme": "theme"
+    },
+    {
+      "concepts": [
+        {
+          "id": "Global / Oceans | Southern Ocean",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.place.mcp_regions&id=http://bluenet3.antcrc.utas.edu.au/mcp/geographic_extent_names#6",
+          "description": "",
+          "title": "Keywords (Place)"
+        },
+        {
+          "id": "Regional Seas | Tasman Sea",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.place.mcp_regions&id=http://bluenet3.antcrc.utas.edu.au/mcp/geographic_extent_names#23",
+          "description": "",
+          "title": "Keywords (Place)"
+        },
+        {
+          "id": "Global / Oceans | Pacific Ocean",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.place.mcp_regions&id=http://bluenet3.antcrc.utas.edu.au/mcp/geographic_extent_names#5",
+          "description": "",
+          "title": "Keywords (Place)"
+        }
+      ],
+      "scheme": ""
+    },
+    {
+      "concepts": [
+        {
+          "id": "Marine National Facility",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.discipline.urn:marlin.csiro.au:keywords:cmarAOI&id=urn:marlin.csiro.au:keywords:cmarAOI:concept:3208",
+          "description": "",
+          "title": "CSIRO Areas Of Interest"
+        }
+      ],
+      "scheme": "discipline"
+    },
+    {
+      "concepts": [
+        {
+          "id": "Research Voyage: IN2017_V01",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.survey.urn:marlin.csiro.au:surveyregister&id=urn:marlin.csiro.au:surveyregister:concept:2181",
+          "description": "",
+          "title": "CSIRO Survey List"
+        }
+      ],
+      "scheme": "survey"
+    },
+    {
+      "concepts": [
+        {
+          "id": "Vessel Data: Underway",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.discipline.urn:marlin.csiro.au:keywords:standardDataType&id=urn:marlin.csiro.au:keywords:standardDataType:concept:3514",
+          "description": "",
+          "title": "CSIRO Standard Data Types"
+        }
+      ],
+      "scheme": "discipline"
+    },
+    {
+      "concepts": [
+        {
+          "id": "Ship: Investigator (RV)",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.dataSource.urn:marlin.csiro.au:sourceregister&id=urn:marlin.csiro.au:sourceregister:concept:309",
+          "description": "",
+          "title": "CSIRO Source List"
+        }
+      ],
+      "scheme": "dataSource"
+    },
+    {
+      "concepts": [
+        {
+          "id": "Meteorological Instruments",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:keywords:equipment&id=urn:marlin.csiro.au:keywords:equipment:concept:2261",
+          "description": "",
+          "title": "CSIRO Equipment"
+        },
+        {
+          "id": "Thermosalinographs",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:keywords:equipment&id=urn:marlin.csiro.au:keywords:equipment:concept:2302",
+          "description": "",
+          "title": "CSIRO Equipment"
+        },
+        {
+          "id": "Altimeters",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.equipment.urn:marlin.csiro.au:keywords:equipment&id=urn:marlin.csiro.au:keywords:equipment:concept:2206",
+          "description": "",
+          "title": "CSIRO Equipment"
+        }
+      ],
+      "scheme": "equipment"
+    },
+    {
+      "concepts": [
+        {
+          "id": "Interactions of the Totten Glacier with the Southern Ocean through multiple glacial cycles.",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.project.urn:marlin.csiro.au:projectregister&id=urn:marlin.csiro.au:projectregister:concept:2454",
+          "description": "",
+          "title": "CSIRO Project List"
+        }
+      ],
+      "scheme": "project"
+    },
+    {
+      "concepts": [
+        {
+          "id": "Thermosalinographs",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.mcp_collection_methods&id=http://bluenet3.antcrc.utas.edu.au/mcp/collection_methods#122",
+          "description": "",
+          "title": "MCP Collection Methods"
+        },
+        {
+          "id": "Altimeters",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=external.theme.mcp_collection_methods&id=http://bluenet3.antcrc.utas.edu.au/mcp/collection_methods#4",
+          "description": "",
+          "title": "MCP Collection Methods"
+        }
+      ],
+      "scheme": "theme"
+    },
+    {
+      "concepts": [
+        {
+          "id": "Global / Oceans | West Equatorial Pacific Ocean",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.place.urn:marlin.csiro.au:definedregions&id=urn:marlin.csiro.au:definedregions:concept:1021",
+          "description": "",
+          "title": ""
+        }
+      ],
+      "scheme": "place"
+    },
+    {
+      "concepts": [
+        {
+          "id": "Global / Oceans | Southern Ocean",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.place.urn:aodn.org.au:geographicextents&id=urn:aodn.org.au:geographicextents:concept:6",
+          "description": "",
+          "title": "AODN Geographic Extent Names"
+        },
+        {
+          "id": "Marine Planning Regions (Australia) | Australian Antarctic",
+          "url": "https://marlin.csiro.au/geonetwork/srv/eng/xml.keyword.get?thesaurus=register.place.urn:aodn.org.au:geographicextents&id=urn:aodn.org.au:geographicextents:concept:50",
+          "description": "",
+          "title": "AODN Geographic Extent Names"
+        }
+      ],
+      "scheme": "place"
+    },
+    {
+      "concepts": [
+        {
+          "id": "climatologyMeteorologyAtmosphere",
+          "url": null,
+          "title": null,
+          "description": null
+        },
+        {
+          "id": "oceans",
+          "url": null,
+          "title": null,
+          "description": null
+        }
+      ],
+      "scheme": "Categories"
+    }
+  ],
+  "id": "c9ac30a7-9cad-420e-9ff9-efdffe6bf4ef",
+  "search_suggestions": {
+    "abstract_phrases": [],
+    "platform_vocabs_sayt": [],
+    "parameter_vocabs_sayt": [],
+    "organisation_vocabs_sayt": []
   },
-  "sci:citation" : "{\"suggestedCitation\":null,\"useLimitations\":null,\"otherConstraints\":[\"Data is made available under a Creative Commons Attribution 4.0 International Licence, please see link. Data is supplied 'as is' without any warranty or guarantee except as required by law to be given to you. The data may not be free of error, comprehensive, current or appropriate for your particular purpose. You accept all risk and responsibility for its use. ATTRIBUTION STATEMENT: The dataset [Insert-dataset-name-here] downloaded on [Insert-DD-Mmm-YYYY-here] was collected on voyage [Insert-voyage-name-here] by the Marine National Facility.\"]}",
-  "type" : "Collection",
-  "stac_version" : "1.0.0",
-  "stac_extensions" : [ "https://stac-extensions.github.io/scientific/v1.0.0/schema.json", "https://stac-extensions.github.io/contacts/v0.1.1/schema.json", "https://stac-extensions.github.io/projection/v1.1.0/schema.json", "https://stac-extensions.github.io/language/v1.0.0/schema.json", "https://stac-extensions.github.io/themes/v1.0.0/schema.json", "https://stac-extensions.github.io/web-map-links/v1.2.0/schema.json" ]
+  "sci:citation": "{\"suggestedCitation\":null,\"useLimitations\":null,\"otherConstraints\":[\"Data is made available under a Creative Commons Attribution 4.0 International Licence, please see link. Data is supplied 'as is' without any warranty or guarantee except as required by law to be given to you. The data may not be free of error, comprehensive, current or appropriate for your particular purpose. You accept all risk and responsibility for its use. ATTRIBUTION STATEMENT: The dataset [Insert-dataset-name-here] downloaded on [Insert-DD-Mmm-YYYY-here] was collected on voyage [Insert-voyage-name-here] by the Marine National Facility.\"]}",
+  "type": "Collection",
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/contacts/v0.1.1/schema.json",
+    "https://stac-extensions.github.io/projection/v1.1.0/schema.json",
+    "https://stac-extensions.github.io/language/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/themes/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/web-map-links/v1.2.0/schema.json"
+  ]
 }
