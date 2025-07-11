@@ -94,24 +94,14 @@ public class GcmdKeywordUtils {
                     continue;
                 }
 
+                var lowerCaseTitle = concept.getTitle().toLowerCase();
                 // skip concepts that contain "palaeo temporal coverage"
-                if (concept.getTitle().toLowerCase().contains("palaeo temporal coverage")) {
+                if (lowerCaseTitle.contains("palaeo temporal coverage")) {
                     continue;
                 }
 
-                if (concept.getTitle().toLowerCase().contains("global change master directory")
-                        || concept.getTitle().toLowerCase().contains("gcmd")
-                ) {
+                if (lowerCaseTitle.contains("global change master directory") || lowerCaseTitle.contains("gcmd")) {
                     for (var conceptModel : themesModel.getConcepts()) {
-                        if (conceptModel.getId() != null && !conceptModel.getId().isEmpty()) {
-                            keywords.add(getLastWord(conceptModel.getId().replace("\"", "")).toUpperCase());
-                        }
-                    }
-                }
-
-
-                if ((concept.getTitle().toLowerCase().contains("gcmd") || concept.getTitle().toLowerCase().contains("global change master directory")) && !concept.getTitle().toLowerCase().contains("palaeo temporal coverage")) {
-                    for (ConceptModel conceptModel : themesModel.getConcepts()) {
                         if (conceptModel.getId() != null && !conceptModel.getId().isEmpty()) {
                             keywords.add(getLastWord(conceptModel.getId().replace("\"", "")).toUpperCase());
                         }
