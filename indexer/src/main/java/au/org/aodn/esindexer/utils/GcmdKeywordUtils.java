@@ -83,41 +83,32 @@ public class GcmdKeywordUtils {
     protected List<String> extractGcmdKeywordLastWords(List<ThemesModel> themes) {
         log.info("Extracting GCMD keywords from record's themes");
         Set<String> keywords = new HashSet<>();
-//        // Filter out null themes and empty concepts
-//        themes = themes.stream()
-//                .filter(Objects::nonNull)
-//                .filter(theme -> theme.getConcepts() != null)
-//                .filter(theme -> !theme.getConcepts().isEmpty())
-//                .collect(Collectors.toList());
-//
-//        for (var theme : themes) {
-//            for (var concept : theme.getConcepts()) {
-//                if (concept.getId() == null || concept.getId().isEmpty()) {
-//                    continue;
-//                }
-//                if (concept.getTitle() == null || concept.getTitle().isEmpty()) {
-//                    continue;
-//                }
-//               var lowerCaseTitle = concept.getTitle().toLowerCase();
-//                if (lowerCaseTitle.contains("palaeo temporal coverage")) {
-//                    continue;
-//                }
-//                if (lowerCaseTitle.contains("gcmd") || lowerCaseTitle.contains("global change master directory")) {
-//                    keywords.add(getLastWord(concept.getId().replace("\"", "")).toUpperCase());
-//                }
-//            }
-//        }
 
         for (ThemesModel themesModel : themes) {
             for (var concept : themesModel.getConcepts()) {
 
-                // TODO: refactor the too deep nested ifs
                 if (concept.getId() == null || concept.getId().isEmpty()) {
                     continue;
                 }
                 if (concept.getTitle() == null || concept.getTitle().isEmpty()) {
                     continue;
                 }
+
+                // skip concepts that contain "palaeo temporal coverage"
+                if (concept.getTitle().toLowerCase().contains("palaeo temporal coverage")) {
+                    continue;
+                }
+
+                if (concept.getTitle().toLowerCase().contains("global change master directory")
+                        || concept.getTitle().toLowerCase().contains("gcmd")
+                ) {
+                    for (var conceptModel : themesModel.getConcepts()) {
+                        if (conceptModel.getId() != null && !conceptModel.getId().isEmpty()) {
+                            keywords.add(getLastWord(conceptModel.getId().replace("\"", "")).toUpperCase());
+                        }
+                    }
+                }
+
 
                 if ((concept.getTitle().toLowerCase().contains("gcmd") || concept.getTitle().toLowerCase().contains("global change master directory")) && !concept.getTitle().toLowerCase().contains("palaeo temporal coverage")) {
                     for (ConceptModel conceptModel : themesModel.getConcepts()) {
