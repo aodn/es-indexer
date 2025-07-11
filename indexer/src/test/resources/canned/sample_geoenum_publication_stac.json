@@ -1,188 +1,479 @@
 {
-  "title" : "Benthic habitats of Yanyuwa Sea Country, Barni - Wardimantha Awara Indigenous Protected Area, Gulf of Carpentaria, Northern Territory, Australia (NESP MaC Project 1.12, JCU & CDU)",
-  "description" : "This dataset summarises benthic surveys in Yanyuwa Sea Country into 3 GIS shapefiles.\n                    (1) A point (site) shapefile describes seagrass presence/absence at 3248 sites surveyed by small vessel and helicopter.\n                    (2) The meadow shapefile describes attributes of 180 intertidal seagrass meadows.\n                    (3) The interpolation GeoTiff describes variation in seagrass biomass across the seagrass meadows.\n\n                    This project is a partnership between li-Anthawirriyarra rangers, Charles Darwin University, James Cook University, and Mabunji Aboriginal Resource Indigenous Corporation to map the intertidal habitats of the Yanyuwa Indigenous Protected Area (IPA), an area of profound importance to the Marra and Yanyuwa people and to the marine ecosystem of the Gulf of Carpentaria. Benthic habitat maps of Yanyuwa Country were produced, with a focus on seagrass.\n\n                    Report reference: Groom R, Carter A, Collier C, Firby L, Evans S, Barrett S, Hoffmann L, van de Wetering C, Shepherd L, Evans S, Anderson S. (2023) Mapping Critical Habitat in Yanyuwa Sea Country. Report to the National Environmental Science Program. Charles Darwin University, pp. 40. Available at: https://www.nespmarinecoastal.edu.au/wp-content/uploads/2023/07/NESP-MaC-Hub-Project-1.12_Groom-et-al-FINAL-REPORT.pdf\n\n                    Methods:\n                    The sampling methods used to study, describe and monitor seagrass meadows were developed by the TropWATER Seagrass Group and tailored to the location and habitat surveyed; these are described in detail in the relevant publications (https://research.jcu.edu.au/tropwater).\n                    Geographic Information System (GIS)\n\n                    All survey data were entered into a Geographic Information System (GIS) developed for Torres Strait using ArcGIS 10.8. Rectified colour satellite imagery of Yanyuwa Sea Country (Source: Allen Coral Atlas and ESRI), field notes and aerial photographs taken from the helicopter during surveys were used to identify geographical features, such as reef tops, channels and deep-water drop-offs, to assist in determining seagrass meadow boundaries. Three GIS layers were created to describe spatial features of the region: a site layer, seagrass meadow layer, and a seagrass biomass interpolation layer.\n\n                    Seagrass site layer\n                    This layer contains information on data collected at assessment sites. This layer includes:\n                    1.\tTemporal survey details – Survey date;\n                    2.\tSpatial position - Latitude/longitude;\n                    3.\tSurvey location;\n                    4.\tSeagrass information including presence/absence of seagrass, above-ground biomass (total and for each species), percent cover of seagrass at each site and whether individual species were present/absent at a site;\n                    5.\tBenthic macro-invertebrate information including the percent cover of hard coral, soft coral, sponges and other benthic macro invertebrates (e.g. ascidian, clam) at a site;\n                    6.\tAlgae information including percent cover of algae at a site and percent contribution of algae functional groups to algae cover at a site;\n                    7.\tOpen substrate – the percent cover of the site that had no flora or habitat forming benthic invertebrates present;\n                    8.\tDominant sediment type - Sediment type based on grain size visual assessment or deck descriptions.\n                    9.\tSurvey method and vessel\n                    10.\tRelevant comments and presence/absence of megafauna and animals of interest (dugong, turtle, dolphin, evidence of dugong feeding trails);\n                    11.\tData custodians.\n\n                    Seagrass meadow layer\n                    Seagrass presence/absence site data, mapping sites, field notes, and satellite imagery were used to construct meadow boundaries in ArcGIS®. The meadow (polygon) layer provides summary information for all sites within each seagrass meadow, including:\n                    1.\tTemporal survey details – Survey month and year as individual columns and the survey date (the date range the survey took place);\n                    2.\tSpatial survey details – Survey location, meadow identification number that identifies the reef name and the meadow number. This allows individual meadows to be compared among years;\n                    3.\tSurvey method;\n                    4.\tMeadow depth for subtidal meadows. Intertidal: meadow was mapped on an exposed bank during low tide;\n                    5.\tSpecies presence – a list of the seagrass species in the meadow;\n                    6.\tMeadow density – Seagrass meadows were classified as light, moderate, dense based on the mean biomass of the dominant species within the meadow. For example, a Thalassia hemprichii dominated meadow would be classed as “light” if the mean meadow biomass was <5 grams dry weight m-2 (g DW m-2), and “dense” if mean meadow biomass was >25 g DW m-2.\n                    7.\tMeadow community type – Seagrass meadows were classified into community types according to seagrass species composition within each meadow. Species composition was based on the percent each species’ biomass contributed to mean meadow biomass. A standard nomenclature system was used to categorize each meadow.\n                    8.\tMean meadow biomass measured in g DW m-2 (+ standard error if available);\n                    9.\tMeadow area (hectares; ha) (+ mapping precision) of each meadow was calculated in the GDA 2020 Geoscience Australia MGA Zone 53 projection using the ‘calculate geometry’ function in ArcMap. Mapping precision estimates (R; in ha) were based on the mapping method used for that meadow.  Mapping precision estimate was used to calculate an error buffer around each meadow; the area of this buffer is expressed as a meadow reliability estimate (R) in hectares;\n                    10.\tAny relevant comments;\n                    11.\tData custodians.\n\n                    Seagrass biomass interpolation layer\n                    An inverse distance weighted (IDW) interpolation was applied to seagrass site data to describe spatial variation in seagrass biomass within seagrass meadows. The interpolation was conducted in ArcMap 10.8.\n                    Base map\n                    The base map used is courtesy ESRI 2023.\n\n                    Format of the data:\n                    This dataset consists of 1 point layer package, 1 polygon layer package and 1 raster file:\n                    1.\tYanyuwa Sea Country sites 2021-2022.lpk\n                    -\tSymbology representing seagrass presence/absence at each survey site\n                    2.\tYanyuwa Sea Country seagrass meadows 2021-2022.lpk\n                    -\tSymbology representing dominant species (in terms of biomass) for each intertidal meadow.\n                    3.\tYanyuwa Sea Country seagrass biomass interpolation 2021-2022.lpk\n                    -\tSymbology representing the spatial variation in seagrass biomass within each seagrass meadow.\n\n                    Data dictionary:\n                    Yanyuwa Sea Country sites 2021-2022 (point data)\n                    SITE (text) - Unique identifier representing a single sample site\n                    MEADOW (text) - Unique identifier representing what meadow the sample site is located in. Blank if sample site is not located within a meadow\n                    SURVEY_DATE (numeric) – survey date (day/month/year)\n                    MONTH (text) – survey month\n                    YEAR (numeric) – survey year\n                    SURVEY_NAME (text) – Name of survey location\n                    LOCATION (text) – Name of survey location\n                    LATITUDE (numeric) – Site location in decimal degrees south\n                    LONGITUDE (numeric) – Site location in decimal degrees east\n                    TIME (numeric) – sample time (24 hours; GMT +9:30) (NT time - subtidal sites only)\n                    DEPTH (numeric) – depth recorded from vessel depth sounder (metres) for subtidal sites. Intertidal sites depth recorded as 0.\n                    DBMSL (numeric) – depth below mean sea level (metres) for subtidal sites. Intertidal sites depth recorded as 0.\n                    TIDAL (text) – identifying if the site was in an intertidal or subtidal location\n                    SUBSTRATE (text) – tags identifying the types of substrates at the sample site. Possible tags are Mud, Sand, Coarse Sand, Silt, Shell, Rock, Reef, Rubble and various combinations. Listed in order from most dominant substrate to least dominant.\n                    SEAGRASS_P (numeric) – Absence (0) or Presence (1) of seagrass\n                    SEAGRASS_C (numeric) - Estimated % of seagrass cover at sample site\n                    SEAGRASS_B (numeric) - Estimated total biomass per square metre for sample site calculated from the mean of three replicate quadrats. Unit is gdw m-2.\n                    SEAGRASS_SE (numeric) – standard error of biomass at sample site calculated from the three replicate quadrats used to estimate biomass at a sample site. Unit is gdw m-2.\n                    EXCLUDE_B (numeric) – Include (0) or Exclude (1). Any site identified that needs to be excluded from contributing to the calculation of mean meadow biomass, e.g. where a visual estimate of biomass could not be optioned (i.e. no visibility at the site, only a van Veen sediment grab was used at the site)\n                    C. rotundata (numeric) – Estimated biomass of Cymodocea rotundata at the sample site. Unit is gdw m-2.\n                    C. serrulata (numeric) – Estimated biomass of Cymodocea serrulata at the sample site. Unit is gdw m-2.\n                    E. acoroides (numeric) – Estimated biomass of Enhalus acoroides at the sample site. Unit is gdw m-2.\n                    H. uninervis (narrow) (numeric) – Estimated biomass of Halodule uninervis (narrow leaf morphology) at the sample site. Unit is gdw m-2.\n                    H. uninervis (wide) (numeric) – Estimated biomass of Halodule uninervis (wide leaf morphology) at the sample site. Unit is gdw m-2.\n                    H. decipiens (numeric) – Estimated biomass of Halophila decipiens at the sample site. Unit is gdw m-2.\n                    H. ovalis (numeric) – Estimated biomass of Halophila ovalis at the sample site. Unit is gdw m-2.\n                    H. spinulosa (numeric) – Estimated biomass of Halophila spinulosa at the sample site. Unit is gdw m-2.\n                    H. tricostata (numeric) – Estimated biomass of Halophila tricostata at the sample site. Unit is gdw m-2.\n                    S. isoetifolium (numeric) – Estimated biomass of Syringodium isoetifolium at the sample site. Unit is gdw m-2.\n                    T. ciliatum (numeric) – Estimated biomass of Thalassodendron ciliatum at the sample site. Unit is gdw m-2.\n                    T. hemprichii (numeric) – Estimated biomass of Thalassia hemprichii at the\n                    Z. muelleri (numeric) – Estimated biomass of Zostera muelleri at the sample site. Unit is gdw m-2.\n                    ALGAE_COVER (numeric) - Estimated % of algae cover at sample site (all algae types grouped)\n                    TURF_MAT (numeric) – (Turf mat algae % contribution to algae cover). Algae that forms a dense mat on the substrate\n                    ERECT_MACROPHYTE (numeric) – (Erect macrophyte algae % contribution to algae cover). Macrophytic algae with an erect growth form and high level of cellular differentiation, e.g. Sargassum, Caulerpa and Galaxaura species\n                    ENCRUSTING (numeric) – (Encrusting algae % contribution to algae cover). Algae that grows in sheet-like form attached to the substrate or benthos, e.g. coralline algae.\n                    ERECT_CALCAREOUS (numeric) – (Erect calcareous algae % contribution to algae cover). Algae with erect growth form and high level of cellular differentiation containing calcified segments, e.g. Halimeda species.\n                    FILAMENTOUS (numeric) – (Filamentous algae % contribution to algae cover). Thin, thread-like algae with little cellular differentiation.\n                    *Note: TURF_MAT + ERECT_MACROPHYTE + ENCRUSTING + ERECT_CALCAREOUS + FILAMENTOUS = 100% of algae cover\n                    HARD_CORAL (numeric) – (Hard coral %). All scleractinian corals including massive, branching, tabular, digitate and mushroom\n                    SOFT_CORAL (numeric) – (Soft coral %). All alcyonarian corals, i.e. corals lacking a hard limestone skeleton\n                    SPONGE (numeric) – (Sponge %)\n                    OTHER_BMI (numeric) – Any other benthic macro-invertebrates identified, e.g. oysters, ascidians, clams. Other benthic macro-invertebrates are listed in the “comments” attribute for intertidal and shallow subtidal camera drops, and listed as percent cover in the deepwater GIS.\n                    OPEN_SUBSTRATE (numeric) – Open substrate, no seagrass, algae or benthic macro-invertebrates at site\n                    DUGONG (numeric) - Absence (0) or Presence (1) of dugong/s at site\n                    TURTLE (numeric) - Absence (0) or Presence (1) of turtle/s at site\n                    DOLPHIN (numeric) - Absence (0) or Presence (1) of dolphin/s at site\n                    DFT PRESENT (numeric) - Absence (0) or Presence (1) of dugong feeding trails at site. Only clearly visible and therefore assessed at intertidal sites. Subtidal sites not assessed for DFTs coded as -999\n                    METHOD (text) – e.g. helicopter, walking, hovercraft, boat-based including camera, free diving, scuba diving, van Veen grab, sled net\n                    VESSEL (text) – Vessel name (if known)\n                    COMMENTS (text) – Any comments for that site\n                    CUSTODIAN (text) – Custodian/owner of the data set\n                    UPDATED (text) - The date the shapefile was last updated\n                    AUTHOR (text) – Creator of GIS from the data set\n                    *Note: SEAGRASS_C + ALGAE_COVER + HARD_CORAL + SOFT_CORAL + SPONGE + OTHER_BMI + OPEN_SUBSTRATE = 100% of benthic cover\n\n                    Yanyuwa Sea Country seagrass meadows 2021-2022 (polygon data)\n                    ID (numeric) - Unique identifier representing a single meadow\n                    SURVEY_NAME (text) – Name of survey location\n                    LOCATION (text) – Name of survey location\n                    SURVEY_DATE (text) – Sample date (day/month/year)\n                    MONTH (numeric) – Sample month\n                    YEAR (numeric) – Sample year\n                    PERSISTENCE (text) – Meadow form on three categories: enduring, transitory, unknown\n                    DENSITY (text) – Meadow density categories (light, moderate, dense)\n                    TYPE (text) - Meadow community type determined according to seagrass species composition within the meadow\n                    SPECIES (text) – (Seagrass species): seagrass species found within the meadow. Species are recorded as abbreviated species names such as “E. acoroides”\n                    TOT_SITES (numeric) – (Number of survey sites): the number of sample sites within the meadow\n                    BIOMASS (numeric) – (Seagrass biomass (gdw m-2)): Mean biomass calculated from all sites (BIO_SITES) within an individual meadow\n                    SE (numeric) – (Standard Error (gdw m-2)): The error is a calculation of standard error of biomass from all (BIO_SITES) sites within an individual meadow. Where only 1 site surveyed in the meadow, SE will be 0. Where two sites were surveyed and biomass was 0 at one site, mean biomass and SE are the same values when calculated;\n                    AREA_HA (numeric) – (Meadow area (Ha)): Estimated meadow size (unit: hectares)\n                    R_M (numeric) – (Meadow mapping precision (m)): Estimated mapping precision based on mapping method.\n                    R_HA (numeric) - (Meadow reliability estimate (Ha)): Meadow reliability estimate (unit: hectares). Expressing the error buffer around each meadow as calculated from the mapping precision estimate\n                    SURVEY METHOD (text) – e.g. helicopter, walking, hovercraft, boat-based including camera, free diving, scuba diving, van Veen grab, sled net\n                    VESSEL (text) – Vessel name (if known)\n                    COMMENTS (text) – Any relevant comments for that meadow\n                    UPDATED (date) – The date the shapefile was last updated\n                    CUSTODIAN (text) – Custodian/owner of the data set\n                    AUTHOR (text) – Creator of GIS from the data set\n\n                    Yanyuwa biomass interpolation 2022 (interpolation layer)\n                    Inverse Distance Weighted interpolation.\n                    Band 1: Interpolated biomass in gdw m-2\n\n                    Data Description:\n                    This section provides an brief text description of the data. This data set shows that in Yanyuwa sea country in the Gulf of Carpentaria, that there is significant seagrass along the coastline. The inshore coastline seagrass continues from Rosie Creek to Robinson River, where King Ash Bay and Bing Bong has almost continuous, reasonably dense seagrass meadows. Seagrass cover is present around the north, east and southern intertidal areas of West Island. Around the northern side of Black Islet has seagrass as well as north areas of Skull Island. Watson Island has seagrass areas on the southern and eastern coastlines. Seagrass cover can be found on Centre Island on all sides, particularly on the east and western sides. Vanderlin Island has light seagrass cover mostly towards the southern tip. Species present in these regions include C. serrulate, E. acoroides, H. ovalis, H. uninervis.\n\n\n                    eAtlas Processing:\n                    The original data were provided as ArcGIS Layer Packages (lpk]. Data were converted to Shapefiles and\n                    GeoTiff with no modifications to the underlying data.\n\n                    Location of the data:\n                    This dataset is filed in the eAtlas enduring data repository at: data\\\\custodian\\NESP-MaC-1\\1.12_Yanyuwa-sea-country-seagrass",
-  "extent" : {
-    "bbox" : [ [ 136.1866, -16.0337, 137.2787, -15.3817 ], [ 136.1866, -16.0337, 137.2787, -15.3817 ] ],
-    "temporal" : [ [ "2021-10-12T13:00:00Z", "2022-10-05T12:59:59Z" ], [ "2021-10-12T13:00:00Z", "2022-10-05T12:59:59Z" ] ]
+  "title": "Benthic habitats of Yanyuwa Sea Country, Barni - Wardimantha Awara Indigenous Protected Area, Gulf of Carpentaria, Northern Territory, Australia (NESP MaC Project 1.12, JCU & CDU)",
+  "description": "This dataset summarises benthic surveys in Yanyuwa Sea Country into 3 GIS shapefiles.\n                    (1) A point (site) shapefile describes seagrass presence/absence at 3248 sites surveyed by small vessel and helicopter.\n                    (2) The meadow shapefile describes attributes of 180 intertidal seagrass meadows.\n                    (3) The interpolation GeoTiff describes variation in seagrass biomass across the seagrass meadows.\n\n                    This project is a partnership between li-Anthawirriyarra rangers, Charles Darwin University, James Cook University, and Mabunji Aboriginal Resource Indigenous Corporation to map the intertidal habitats of the Yanyuwa Indigenous Protected Area (IPA), an area of profound importance to the Marra and Yanyuwa people and to the marine ecosystem of the Gulf of Carpentaria. Benthic habitat maps of Yanyuwa Country were produced, with a focus on seagrass.\n\n                    Report reference: Groom R, Carter A, Collier C, Firby L, Evans S, Barrett S, Hoffmann L, van de Wetering C, Shepherd L, Evans S, Anderson S. (2023) Mapping Critical Habitat in Yanyuwa Sea Country. Report to the National Environmental Science Program. Charles Darwin University, pp. 40. Available at: https://www.nespmarinecoastal.edu.au/wp-content/uploads/2023/07/NESP-MaC-Hub-Project-1.12_Groom-et-al-FINAL-REPORT.pdf\n\n                    Methods:\n                    The sampling methods used to study, describe and monitor seagrass meadows were developed by the TropWATER Seagrass Group and tailored to the location and habitat surveyed; these are described in detail in the relevant publications (https://research.jcu.edu.au/tropwater).\n                    Geographic Information System (GIS)\n\n                    All survey data were entered into a Geographic Information System (GIS) developed for Torres Strait using ArcGIS 10.8. Rectified colour satellite imagery of Yanyuwa Sea Country (Source: Allen Coral Atlas and ESRI), field notes and aerial photographs taken from the helicopter during surveys were used to identify geographical features, such as reef tops, channels and deep-water drop-offs, to assist in determining seagrass meadow boundaries. Three GIS layers were created to describe spatial features of the region: a site layer, seagrass meadow layer, and a seagrass biomass interpolation layer.\n\n                    Seagrass site layer\n                    This layer contains information on data collected at assessment sites. This layer includes:\n                    1.\tTemporal survey details – Survey date;\n                    2.\tSpatial position - Latitude/longitude;\n                    3.\tSurvey location;\n                    4.\tSeagrass information including presence/absence of seagrass, above-ground biomass (total and for each species), percent cover of seagrass at each site and whether individual species were present/absent at a site;\n                    5.\tBenthic macro-invertebrate information including the percent cover of hard coral, soft coral, sponges and other benthic macro invertebrates (e.g. ascidian, clam) at a site;\n                    6.\tAlgae information including percent cover of algae at a site and percent contribution of algae functional groups to algae cover at a site;\n                    7.\tOpen substrate – the percent cover of the site that had no flora or habitat forming benthic invertebrates present;\n                    8.\tDominant sediment type - Sediment type based on grain size visual assessment or deck descriptions.\n                    9.\tSurvey method and vessel\n                    10.\tRelevant comments and presence/absence of megafauna and animals of interest (dugong, turtle, dolphin, evidence of dugong feeding trails);\n                    11.\tData custodians.\n\n                    Seagrass meadow layer\n                    Seagrass presence/absence site data, mapping sites, field notes, and satellite imagery were used to construct meadow boundaries in ArcGIS®. The meadow (polygon) layer provides summary information for all sites within each seagrass meadow, including:\n                    1.\tTemporal survey details – Survey month and year as individual columns and the survey date (the date range the survey took place);\n                    2.\tSpatial survey details – Survey location, meadow identification number that identifies the reef name and the meadow number. This allows individual meadows to be compared among years;\n                    3.\tSurvey method;\n                    4.\tMeadow depth for subtidal meadows. Intertidal: meadow was mapped on an exposed bank during low tide;\n                    5.\tSpecies presence – a list of the seagrass species in the meadow;\n                    6.\tMeadow density – Seagrass meadows were classified as light, moderate, dense based on the mean biomass of the dominant species within the meadow. For example, a Thalassia hemprichii dominated meadow would be classed as “light” if the mean meadow biomass was <5 grams dry weight m-2 (g DW m-2), and “dense” if mean meadow biomass was >25 g DW m-2.\n                    7.\tMeadow community type – Seagrass meadows were classified into community types according to seagrass species composition within each meadow. Species composition was based on the percent each species’ biomass contributed to mean meadow biomass. A standard nomenclature system was used to categorize each meadow.\n                    8.\tMean meadow biomass measured in g DW m-2 (+ standard error if available);\n                    9.\tMeadow area (hectares; ha) (+ mapping precision) of each meadow was calculated in the GDA 2020 Geoscience Australia MGA Zone 53 projection using the ‘calculate geometry’ function in ArcMap. Mapping precision estimates (R; in ha) were based on the mapping method used for that meadow.  Mapping precision estimate was used to calculate an error buffer around each meadow; the area of this buffer is expressed as a meadow reliability estimate (R) in hectares;\n                    10.\tAny relevant comments;\n                    11.\tData custodians.\n\n                    Seagrass biomass interpolation layer\n                    An inverse distance weighted (IDW) interpolation was applied to seagrass site data to describe spatial variation in seagrass biomass within seagrass meadows. The interpolation was conducted in ArcMap 10.8.\n                    Base map\n                    The base map used is courtesy ESRI 2023.\n\n                    Format of the data:\n                    This dataset consists of 1 point layer package, 1 polygon layer package and 1 raster file:\n                    1.\tYanyuwa Sea Country sites 2021-2022.lpk\n                    -\tSymbology representing seagrass presence/absence at each survey site\n                    2.\tYanyuwa Sea Country seagrass meadows 2021-2022.lpk\n                    -\tSymbology representing dominant species (in terms of biomass) for each intertidal meadow.\n                    3.\tYanyuwa Sea Country seagrass biomass interpolation 2021-2022.lpk\n                    -\tSymbology representing the spatial variation in seagrass biomass within each seagrass meadow.\n\n                    Data dictionary:\n                    Yanyuwa Sea Country sites 2021-2022 (point data)\n                    SITE (text) - Unique identifier representing a single sample site\n                    MEADOW (text) - Unique identifier representing what meadow the sample site is located in. Blank if sample site is not located within a meadow\n                    SURVEY_DATE (numeric) – survey date (day/month/year)\n                    MONTH (text) – survey month\n                    YEAR (numeric) – survey year\n                    SURVEY_NAME (text) – Name of survey location\n                    LOCATION (text) – Name of survey location\n                    LATITUDE (numeric) – Site location in decimal degrees south\n                    LONGITUDE (numeric) – Site location in decimal degrees east\n                    TIME (numeric) – sample time (24 hours; GMT +9:30) (NT time - subtidal sites only)\n                    DEPTH (numeric) – depth recorded from vessel depth sounder (metres) for subtidal sites. Intertidal sites depth recorded as 0.\n                    DBMSL (numeric) – depth below mean sea level (metres) for subtidal sites. Intertidal sites depth recorded as 0.\n                    TIDAL (text) – identifying if the site was in an intertidal or subtidal location\n                    SUBSTRATE (text) – tags identifying the types of substrates at the sample site. Possible tags are Mud, Sand, Coarse Sand, Silt, Shell, Rock, Reef, Rubble and various combinations. Listed in order from most dominant substrate to least dominant.\n                    SEAGRASS_P (numeric) – Absence (0) or Presence (1) of seagrass\n                    SEAGRASS_C (numeric) - Estimated % of seagrass cover at sample site\n                    SEAGRASS_B (numeric) - Estimated total biomass per square metre for sample site calculated from the mean of three replicate quadrats. Unit is gdw m-2.\n                    SEAGRASS_SE (numeric) – standard error of biomass at sample site calculated from the three replicate quadrats used to estimate biomass at a sample site. Unit is gdw m-2.\n                    EXCLUDE_B (numeric) – Include (0) or Exclude (1). Any site identified that needs to be excluded from contributing to the calculation of mean meadow biomass, e.g. where a visual estimate of biomass could not be optioned (i.e. no visibility at the site, only a van Veen sediment grab was used at the site)\n                    C. rotundata (numeric) – Estimated biomass of Cymodocea rotundata at the sample site. Unit is gdw m-2.\n                    C. serrulata (numeric) – Estimated biomass of Cymodocea serrulata at the sample site. Unit is gdw m-2.\n                    E. acoroides (numeric) – Estimated biomass of Enhalus acoroides at the sample site. Unit is gdw m-2.\n                    H. uninervis (narrow) (numeric) – Estimated biomass of Halodule uninervis (narrow leaf morphology) at the sample site. Unit is gdw m-2.\n                    H. uninervis (wide) (numeric) – Estimated biomass of Halodule uninervis (wide leaf morphology) at the sample site. Unit is gdw m-2.\n                    H. decipiens (numeric) – Estimated biomass of Halophila decipiens at the sample site. Unit is gdw m-2.\n                    H. ovalis (numeric) – Estimated biomass of Halophila ovalis at the sample site. Unit is gdw m-2.\n                    H. spinulosa (numeric) – Estimated biomass of Halophila spinulosa at the sample site. Unit is gdw m-2.\n                    H. tricostata (numeric) – Estimated biomass of Halophila tricostata at the sample site. Unit is gdw m-2.\n                    S. isoetifolium (numeric) – Estimated biomass of Syringodium isoetifolium at the sample site. Unit is gdw m-2.\n                    T. ciliatum (numeric) – Estimated biomass of Thalassodendron ciliatum at the sample site. Unit is gdw m-2.\n                    T. hemprichii (numeric) – Estimated biomass of Thalassia hemprichii at the\n                    Z. muelleri (numeric) – Estimated biomass of Zostera muelleri at the sample site. Unit is gdw m-2.\n                    ALGAE_COVER (numeric) - Estimated % of algae cover at sample site (all algae types grouped)\n                    TURF_MAT (numeric) – (Turf mat algae % contribution to algae cover). Algae that forms a dense mat on the substrate\n                    ERECT_MACROPHYTE (numeric) – (Erect macrophyte algae % contribution to algae cover). Macrophytic algae with an erect growth form and high level of cellular differentiation, e.g. Sargassum, Caulerpa and Galaxaura species\n                    ENCRUSTING (numeric) – (Encrusting algae % contribution to algae cover). Algae that grows in sheet-like form attached to the substrate or benthos, e.g. coralline algae.\n                    ERECT_CALCAREOUS (numeric) – (Erect calcareous algae % contribution to algae cover). Algae with erect growth form and high level of cellular differentiation containing calcified segments, e.g. Halimeda species.\n                    FILAMENTOUS (numeric) – (Filamentous algae % contribution to algae cover). Thin, thread-like algae with little cellular differentiation.\n                    *Note: TURF_MAT + ERECT_MACROPHYTE + ENCRUSTING + ERECT_CALCAREOUS + FILAMENTOUS = 100% of algae cover\n                    HARD_CORAL (numeric) – (Hard coral %). All scleractinian corals including massive, branching, tabular, digitate and mushroom\n                    SOFT_CORAL (numeric) – (Soft coral %). All alcyonarian corals, i.e. corals lacking a hard limestone skeleton\n                    SPONGE (numeric) – (Sponge %)\n                    OTHER_BMI (numeric) – Any other benthic macro-invertebrates identified, e.g. oysters, ascidians, clams. Other benthic macro-invertebrates are listed in the “comments” attribute for intertidal and shallow subtidal camera drops, and listed as percent cover in the deepwater GIS.\n                    OPEN_SUBSTRATE (numeric) – Open substrate, no seagrass, algae or benthic macro-invertebrates at site\n                    DUGONG (numeric) - Absence (0) or Presence (1) of dugong/s at site\n                    TURTLE (numeric) - Absence (0) or Presence (1) of turtle/s at site\n                    DOLPHIN (numeric) - Absence (0) or Presence (1) of dolphin/s at site\n                    DFT PRESENT (numeric) - Absence (0) or Presence (1) of dugong feeding trails at site. Only clearly visible and therefore assessed at intertidal sites. Subtidal sites not assessed for DFTs coded as -999\n                    METHOD (text) – e.g. helicopter, walking, hovercraft, boat-based including camera, free diving, scuba diving, van Veen grab, sled net\n                    VESSEL (text) – Vessel name (if known)\n                    COMMENTS (text) – Any comments for that site\n                    CUSTODIAN (text) – Custodian/owner of the data set\n                    UPDATED (text) - The date the shapefile was last updated\n                    AUTHOR (text) – Creator of GIS from the data set\n                    *Note: SEAGRASS_C + ALGAE_COVER + HARD_CORAL + SOFT_CORAL + SPONGE + OTHER_BMI + OPEN_SUBSTRATE = 100% of benthic cover\n\n                    Yanyuwa Sea Country seagrass meadows 2021-2022 (polygon data)\n                    ID (numeric) - Unique identifier representing a single meadow\n                    SURVEY_NAME (text) – Name of survey location\n                    LOCATION (text) – Name of survey location\n                    SURVEY_DATE (text) – Sample date (day/month/year)\n                    MONTH (numeric) – Sample month\n                    YEAR (numeric) – Sample year\n                    PERSISTENCE (text) – Meadow form on three categories: enduring, transitory, unknown\n                    DENSITY (text) – Meadow density categories (light, moderate, dense)\n                    TYPE (text) - Meadow community type determined according to seagrass species composition within the meadow\n                    SPECIES (text) – (Seagrass species): seagrass species found within the meadow. Species are recorded as abbreviated species names such as “E. acoroides”\n                    TOT_SITES (numeric) – (Number of survey sites): the number of sample sites within the meadow\n                    BIOMASS (numeric) – (Seagrass biomass (gdw m-2)): Mean biomass calculated from all sites (BIO_SITES) within an individual meadow\n                    SE (numeric) – (Standard Error (gdw m-2)): The error is a calculation of standard error of biomass from all (BIO_SITES) sites within an individual meadow. Where only 1 site surveyed in the meadow, SE will be 0. Where two sites were surveyed and biomass was 0 at one site, mean biomass and SE are the same values when calculated;\n                    AREA_HA (numeric) – (Meadow area (Ha)): Estimated meadow size (unit: hectares)\n                    R_M (numeric) – (Meadow mapping precision (m)): Estimated mapping precision based on mapping method.\n                    R_HA (numeric) - (Meadow reliability estimate (Ha)): Meadow reliability estimate (unit: hectares). Expressing the error buffer around each meadow as calculated from the mapping precision estimate\n                    SURVEY METHOD (text) – e.g. helicopter, walking, hovercraft, boat-based including camera, free diving, scuba diving, van Veen grab, sled net\n                    VESSEL (text) – Vessel name (if known)\n                    COMMENTS (text) – Any relevant comments for that meadow\n                    UPDATED (date) – The date the shapefile was last updated\n                    CUSTODIAN (text) – Custodian/owner of the data set\n                    AUTHOR (text) – Creator of GIS from the data set\n\n                    Yanyuwa biomass interpolation 2022 (interpolation layer)\n                    Inverse Distance Weighted interpolation.\n                    Band 1: Interpolated biomass in gdw m-2\n\n                    Data Description:\n                    This section provides an brief text description of the data. This data set shows that in Yanyuwa sea country in the Gulf of Carpentaria, that there is significant seagrass along the coastline. The inshore coastline seagrass continues from Rosie Creek to Robinson River, where King Ash Bay and Bing Bong has almost continuous, reasonably dense seagrass meadows. Seagrass cover is present around the north, east and southern intertidal areas of West Island. Around the northern side of Black Islet has seagrass as well as north areas of Skull Island. Watson Island has seagrass areas on the southern and eastern coastlines. Seagrass cover can be found on Centre Island on all sides, particularly on the east and western sides. Vanderlin Island has light seagrass cover mostly towards the southern tip. Species present in these regions include C. serrulate, E. acoroides, H. ovalis, H. uninervis.\n\n\n                    eAtlas Processing:\n                    The original data were provided as ArcGIS Layer Packages (lpk]. Data were converted to Shapefiles and\n                    GeoTiff with no modifications to the underlying data.\n\n                    Location of the data:\n                    This dataset is filed in the eAtlas enduring data repository at: data\\\\custodian\\NESP-MaC-1\\1.12_Yanyuwa-sea-country-seagrass",
+  "extent": {
+    "bbox": [
+      [
+        136.1866,
+        -16.0337,
+        137.2787,
+        -15.3817
+      ],
+      [
+        136.1866,
+        -16.0337,
+        137.2787,
+        -15.3817
+      ]
+    ],
+    "temporal": [
+      [
+        "2021-10-12T13:00:00Z",
+        "2022-10-05T12:59:59Z"
+      ],
+      [
+        "2021-10-12T13:00:00Z",
+        "2022-10-05T12:59:59Z"
+      ]
+    ]
   },
-  "summaries" : {
-    "score" : 1,
-    "status" : "",
-    "credits" : [ "The data collections described in this record are funded by the Australian Government Department of Climate Change, Energy the Environment and Water (DCCEEW) through the NESP Marine and Coastal Hub. In addition to NESP (DCCEEW) funding, this project is matched by an equivalent amount of in-kind support and co-investment from project partners and collaborators." ],
-    "scope" : {
-      "code" : "dataset",
-      "name" : ""
+  "summaries": {
+    "score": 1,
+    "status": "",
+    "credits": [
+      "The data collections described in this record are funded by the Australian Government Department of Climate Change, Energy the Environment and Water (DCCEEW) through the NESP Marine and Coastal Hub. In addition to NESP (DCCEEW) funding, this project is matched by an equivalent amount of in-kind support and co-investment from project partners and collaborators."
+    ],
+    "scope": {
+      "code": "dataset",
+      "name": ""
     },
-    "statement" : "",
-    "creation" : "2023-08-08T05:28:21",
-    "revision" : "2024-03-17T03:07:01",
-    "update_frequency" : "other",
-    "proj:geometry" : {
-      "geometries" : [ {
-        "type" : "Polygon",
-        "coordinates" : [ [ [ 136.1866, -16.0337 ], [ 137.2787, -16.0337 ], [ 137.2787, -15.3817 ], [ 136.1866, -15.3817 ], [ 136.1866, -16.0337 ] ] ]
-      } ],
-      "type" : "GeometryCollection"
+    "statement": "",
+    "creation": "2023-08-08T05:28:21",
+    "revision": "2024-03-17T03:07:01",
+    "update_frequency": "other",
+    "proj:geometry": {
+      "geometries": [
+        {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                136.1866,
+                -16.0337
+              ],
+              [
+                137.2787,
+                -16.0337
+              ],
+              [
+                137.2787,
+                -15.3817
+              ],
+              [
+                136.1866,
+                -15.3817
+              ],
+              [
+                136.1866,
+                -16.0337
+              ]
+            ]
+          ]
+        }
+      ],
+      "type": "GeometryCollection"
     },
-    "proj:geometry_noland" : {
-      "geometries" : [ {
-        "type" : "Polygon",
-        "coordinates" : [ [ [ 136.1866, -15.385430042227686 ], [ 136.2246199880001, -15.408623955999929 ], [ 136.27320397200003, -15.55950286299992 ], [ 136.5947371750001, -15.710870049999926 ], [ 136.71558678500003, -15.935967705999929 ], [ 136.92554772200003, -15.934665622999944 ], [ 136.99187259200005, -15.86419036299992 ], [ 137.23453339107914, -16.0337 ], [ 137.2787, -16.0337 ], [ 137.2787, -15.3817 ], [ 136.1866, -15.3817 ], [ 136.1866, -15.385430042227686 ] ], [ [ 136.6704207690001, -15.663181247999944 ], [ 136.66358483200008, -15.77857838299991 ], [ 136.6157332690001, -15.714043877999927 ], [ 136.6704207690001, -15.663181247999944 ] ], [ [ 137.07789147200003, -15.75123463299991 ], [ 137.07289448400002, -15.846961041999919 ], [ 136.93472486400003, -15.72132449499992 ], [ 136.99475584700008, -15.592776142999924 ], [ 137.08319276400005, -15.652196240999956 ], [ 137.07789147200003, -15.75123463299991 ] ], [ [ 136.80062910200002, -15.642022393999923 ], [ 136.8349715500001, -15.682386976999908 ], [ 136.731781446, -15.744398695999905 ], [ 136.731781446, -15.648858330999929 ], [ 136.80062910200002, -15.642022393999923 ] ], [ [ 136.6157332690001, -15.538995049999926 ], [ 136.5879012380001, -15.635186455999929 ], [ 136.4985457690001, -15.627699476999908 ], [ 136.52491295700008, -15.534274997999944 ], [ 136.6157332690001, -15.538995049999926 ] ], [ [ 136.89568118600005, -15.587497653999947 ], [ 136.848480665, -15.635186455999929 ], [ 136.8833113940001, -15.49814218499995 ], [ 136.89568118600005, -15.587497653999947 ] ] ]
-      } ],
-      "type" : "GeometryCollection"
+    "proj:geometry_noland": {
+      "geometries": [
+        {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                136.1866,
+                -15.385430042227686
+              ],
+              [
+                136.2246199880001,
+                -15.408623955999929
+              ],
+              [
+                136.27320397200003,
+                -15.55950286299992
+              ],
+              [
+                136.5947371750001,
+                -15.710870049999926
+              ],
+              [
+                136.71558678500003,
+                -15.935967705999929
+              ],
+              [
+                136.92554772200003,
+                -15.934665622999944
+              ],
+              [
+                136.99187259200005,
+                -15.86419036299992
+              ],
+              [
+                137.23453339107914,
+                -16.0337
+              ],
+              [
+                137.2787,
+                -16.0337
+              ],
+              [
+                137.2787,
+                -15.3817
+              ],
+              [
+                136.1866,
+                -15.3817
+              ],
+              [
+                136.1866,
+                -15.385430042227686
+              ]
+            ],
+            [
+              [
+                136.6704207690001,
+                -15.663181247999944
+              ],
+              [
+                136.66358483200008,
+                -15.77857838299991
+              ],
+              [
+                136.6157332690001,
+                -15.714043877999927
+              ],
+              [
+                136.6704207690001,
+                -15.663181247999944
+              ]
+            ],
+            [
+              [
+                137.07789147200003,
+                -15.75123463299991
+              ],
+              [
+                137.07289448400002,
+                -15.846961041999919
+              ],
+              [
+                136.93472486400003,
+                -15.72132449499992
+              ],
+              [
+                136.99475584700008,
+                -15.592776142999924
+              ],
+              [
+                137.08319276400005,
+                -15.652196240999956
+              ],
+              [
+                137.07789147200003,
+                -15.75123463299991
+              ]
+            ],
+            [
+              [
+                136.80062910200002,
+                -15.642022393999923
+              ],
+              [
+                136.8349715500001,
+                -15.682386976999908
+              ],
+              [
+                136.731781446,
+                -15.744398695999905
+              ],
+              [
+                136.731781446,
+                -15.648858330999929
+              ],
+              [
+                136.80062910200002,
+                -15.642022393999923
+              ]
+            ],
+            [
+              [
+                136.6157332690001,
+                -15.538995049999926
+              ],
+              [
+                136.5879012380001,
+                -15.635186455999929
+              ],
+              [
+                136.4985457690001,
+                -15.627699476999908
+              ],
+              [
+                136.52491295700008,
+                -15.534274997999944
+              ],
+              [
+                136.6157332690001,
+                -15.538995049999926
+              ]
+            ],
+            [
+              [
+                136.89568118600005,
+                -15.587497653999947
+              ],
+              [
+                136.848480665,
+                -15.635186455999929
+              ],
+              [
+                136.8833113940001,
+                -15.49814218499995
+              ],
+              [
+                136.89568118600005,
+                -15.587497653999947
+              ]
+            ]
+          ]
+        }
+      ],
+      "type": "GeometryCollection"
     },
-    "temporal" : [ {
-      "start" : "2021-10-12T13:00:00Z",
-      "end" : "2022-10-05T12:59:59Z"
-    } ],
+    "temporal": [
+      {
+        "start": "2021-10-12T13:00:00Z",
+        "end": "2022-10-05T12:59:59Z"
+      }
+    ],
     "platform_vocabs": [],
-    "parameter_vocabs" : [ ],
-    "organisation_vocabs" : [ ]
+    "parameter_vocabs": [],
+    "organisation_vocabs": []
   },
-  "contacts" : [ {
-    "roles" : [ "pointOfContact", "about" ],
-    "organization" : "TropWATER, James Cook University",
-    "name" : "Carter, Alex, Dr",
-    "emails" : [ "alexandra.carter@jcu.edu.au" ],
-    "addresses" : [ {
-      "city" : "Cairns",
-      "country" : "Australia",
-      "administrativeArea" : "Queensland"
-    } ],
-    "phones" : [ {
-      "roles" : [ "voice" ],
-      "value" : ""
-    } ]
-  }, {
-    "roles" : [ "pointOfContact", "metadata" ],
-    "organization" : "Australian Institute of Marine Science (AIMS)",
-    "name" : "eAtlas Data Manager",
-    "emails" : [ "e-atlas@aims.gov.au" ],
-    "addresses" : [ {
-      "deliveryPoint" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],
-      "city" : "Townsville",
-      "country" : "Australia",
-      "postalCode" : "4810",
-      "administrativeArea" : "Queensland"
-    } ],
-    "phones" : [ {
-      "roles" : [ "voice" ],
-      "value" : "+61 7 4753 4444"
-    } ],
-    "links" : [ {
-      "href" : "https://eatlas.org.au",
-      "type" : "WWW:LINK-1.0-http--link",
-      "title" : "eAtlas portal"
-    } ]
-  }, {
-    "roles" : [ "collaborator", "citation" ],
-    "organization" : "Jungkayi for eastern Vanderlin Island",
-    "name" : "Anderson, Stephen, Mr",
-    "addresses" : [ {
-      "country" : "Australia",
-      "administrativeArea" : "Northern Territory"
-    } ],
-    "phones" : [ {
-      "roles" : [ "voice" ],
-      "value" : ""
-    } ]
-  } ],
-  "languages" : [ {
-    "code" : "eng",
-    "name" : "English"
-  } ],
-  "links" : [ {
-    "href" : "https://maps.eatlas.org.au/maps/ows",
-    "rel" : "wms",
-    "type" : "",
-    "title" : "nesp-mac-1:NT_JCU_CDU_NESP-MaC-1-12_Yanyuwa-Seagrass-Sites_2021-2022"
-  }, {
-    "href" : "https://maps.eatlas.org.au/maps/ows",
-    "rel" : "wms",
-    "type" : "",
-    "title" : "nesp-mac-1:NT_JCU_CDU_NESP-MaC-1-12_Yanyuwa-Seagrass-Meadows_2021-2022"
-  }, {
-    "href" : "https://maps.eatlas.org.au/index.html?intro=false&z=9&ll=136.78606,-15.62248&l0=ea_nesp-mac-1%3ANT_JCU_CDU_NESP-MaC-1-12_Yanyuwa-Seagrass-Meadows_2021-2022,ea_ea-be%3AWorld_Bright-Earth-e-Atlas-basemap,google_HYBRID,google_TERRAIN,google_SATELLITE,google_ROADMAP,ea_nesp-mac-1%3ANT_JCU_CDU_NESP-MaC-1-12_Yanyuwa-Seagrass-Sites_2021-2022&s0=nesp-mac-1%3AYanyuwa-Seagrass_Type&v0=,,f,f,f,f",
-    "rel" : "WWW:LINK",
-    "type" : "",
-    "title" : "Interactive map of the resource"
-  }, {
-    "href" : "https://maps.eatlas.org.au/maps/ows",
-    "rel" : "wms",
-    "type" : "",
-    "title" : "nesp-mac-1:NT_JCU_CDU_NESP-MaC-1-12_Yanyuwa-Seagrass-Biomass-Interpolation_2021-2022"
-  }, {
-    "href" : "https://nextcloud.eatlas.org.au/apps/sharealias/a/1.12_Yanyuwa-sea-country-seagrass",
-    "rel" : "data",
-    "type" : "",
-    "title" : "Download a copy of the dataset"
-  }, {
-    "href" : "https://eatlas.org.au/data/uuid/cffa7269-5d95-486b-9b2e-77316e808398",
-    "rel" : "describedby",
-    "type" : "text/html",
-    "title" : "Full metadata link"
-  }, {
-    "href" : "https://i.creativecommons.org/l/by/4.0/88x31.png",
-    "rel" : "license",
-    "type" : "image/png"
-  }, {
-    "href" : "http://creativecommons.org/licenses/by/4.0/",
-    "rel" : "license",
-    "type" : "text/html"
-  } ],
-  "license" : "Creative Commons Attribution 4.0 International License",
-  "providers" : [ {
-    "name" : "Australian Institute of Marine Science (AIMS)",
-    "roles" : [ "pointOfContact" ],
-    "url" : "https://eatlas.org.au"
-  } ],
-  "themes" : [ {
-    "concepts" : [ {
-      "id" : "marine",
-      "url" : null,
-      "description" : "",
-      "title" : "Keywords (Theme)"
-    }, {
-      "id" : "National Environmental Science Program (NESP) Marine and Coastal Hub",
-      "url" : null,
-      "description" : "",
-      "title" : "Keywords (Theme)"
-    } ],
-    "scheme" : ""
-  }, {
-    "concepts" : [ {
-      "id" : "MARINE",
-      "url" : null,
-      "description" : "",
-      "title" : "theme.sciencekeywords-8.1_.rdf"
-    } ],
-    "scheme" : "theme"
-  }, {
-    "concepts" : [ {
-      "id" : "Coastal Waters (Australia)",
-      "url" : null,
-      "description" : "",
-      "title" : "AODN Geographic Extents Vocabulary"
-    } ],
-    "scheme" : "place"
-  }, {
-    "concepts" : [ {
-      "id" : "oceans",
-      "url" : null,
-      "title" : null,
-      "description" : null
-    } ],
-    "scheme" : "Categories"
-  } ],
-  "id" : "cffa7269-5d95-486b-9b2e-77316e808398",
-  "search_suggestions" : {
-    "abstract_phrases" : [ ],
-    "platform_vocabs_sayt" : [],
-    "parameter_vocabs_sayt" : [],
-    "organisation_vocabs_sayt" : []
+  "contacts": [
+    {
+      "roles": [
+        "pointOfContact",
+        "about"
+      ],
+      "organization": "TropWATER, James Cook University",
+      "name": "Carter, Alex, Dr",
+      "emails": [
+        "alexandra.carter@jcu.edu.au"
+      ],
+      "addresses": [
+        {
+          "city": "Cairns",
+          "country": "Australia",
+          "administrativeArea": "Queensland"
+        }
+      ],
+      "phones": [
+        {
+          "roles": [
+            "voice"
+          ],
+          "value": ""
+        }
+      ]
+    },
+    {
+      "roles": [
+        "pointOfContact",
+        "metadata"
+      ],
+      "organization": "Australian Institute of Marine Science (AIMS)",
+      "name": "eAtlas Data Manager",
+      "emails": [
+        "e-atlas@aims.gov.au"
+      ],
+      "addresses": [
+        {
+          "deliveryPoint": [
+            "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE"
+          ],
+          "city": "Townsville",
+          "country": "Australia",
+          "postalCode": "4810",
+          "administrativeArea": "Queensland"
+        }
+      ],
+      "phones": [
+        {
+          "roles": [
+            "voice"
+          ],
+          "value": "+61 7 4753 4444"
+        }
+      ],
+      "links": [
+        {
+          "href": "https://eatlas.org.au",
+          "type": "WWW:LINK-1.0-http--link",
+          "title": "eAtlas portal"
+        }
+      ]
+    },
+    {
+      "roles": [
+        "collaborator",
+        "citation"
+      ],
+      "organization": "Jungkayi for eastern Vanderlin Island",
+      "name": "Anderson, Stephen, Mr",
+      "addresses": [
+        {
+          "country": "Australia",
+          "administrativeArea": "Northern Territory"
+        }
+      ],
+      "phones": [
+        {
+          "roles": [
+            "voice"
+          ],
+          "value": ""
+        }
+      ]
+    }
+  ],
+  "languages": [
+    {
+      "code": "eng",
+      "name": "English"
+    }
+  ],
+  "links": [
+    {
+      "href": "https://maps.eatlas.org.au/maps/ows",
+      "rel": "wms",
+      "type": "",
+      "title": "nesp-mac-1:NT_JCU_CDU_NESP-MaC-1-12_Yanyuwa-Seagrass-Sites_2021-2022"
+    },
+    {
+      "href": "https://maps.eatlas.org.au/maps/ows",
+      "rel": "wms",
+      "type": "",
+      "title": "nesp-mac-1:NT_JCU_CDU_NESP-MaC-1-12_Yanyuwa-Seagrass-Meadows_2021-2022"
+    },
+    {
+      "href": "https://maps.eatlas.org.au/index.html?intro=false&z=9&ll=136.78606,-15.62248&l0=ea_nesp-mac-1%3ANT_JCU_CDU_NESP-MaC-1-12_Yanyuwa-Seagrass-Meadows_2021-2022,ea_ea-be%3AWorld_Bright-Earth-e-Atlas-basemap,google_HYBRID,google_TERRAIN,google_SATELLITE,google_ROADMAP,ea_nesp-mac-1%3ANT_JCU_CDU_NESP-MaC-1-12_Yanyuwa-Seagrass-Sites_2021-2022&s0=nesp-mac-1%3AYanyuwa-Seagrass_Type&v0=,,f,f,f,f",
+      "rel": "WWW:LINK",
+      "type": "",
+      "title": "Interactive map of the resource"
+    },
+    {
+      "href": "https://maps.eatlas.org.au/maps/ows",
+      "rel": "wms",
+      "type": "",
+      "title": "nesp-mac-1:NT_JCU_CDU_NESP-MaC-1-12_Yanyuwa-Seagrass-Biomass-Interpolation_2021-2022"
+    },
+    {
+      "href": "https://nextcloud.eatlas.org.au/apps/sharealias/a/1.12_Yanyuwa-sea-country-seagrass",
+      "rel": "data",
+      "type": "",
+      "title": "Download a copy of the dataset"
+    },
+    {
+      "href": "https://eatlas.org.au/data/uuid/cffa7269-5d95-486b-9b2e-77316e808398",
+      "rel": "describedby",
+      "type": "text/html",
+      "title": "Full metadata link"
+    },
+    {
+      "href": "https://i.creativecommons.org/l/by/4.0/88x31.png",
+      "rel": "license",
+      "type": "image/png"
+    },
+    {
+      "href": "http://creativecommons.org/licenses/by/4.0/",
+      "rel": "license",
+      "type": "text/html"
+    }
+  ],
+  "license": "Creative Commons Attribution 4.0 International License",
+  "providers": [
+    {
+      "name": "Australian Institute of Marine Science (AIMS)",
+      "roles": [
+        "pointOfContact"
+      ],
+      "url": "https://eatlas.org.au"
+    }
+  ],
+  "themes": [
+    {
+      "concepts": [
+        {
+          "id": "marine",
+          "url": null,
+          "description": "",
+          "title": "Keywords (Theme)"
+        },
+        {
+          "id": "National Environmental Science Program (NESP) Marine and Coastal Hub",
+          "url": null,
+          "description": "",
+          "title": "Keywords (Theme)"
+        }
+      ],
+      "scheme": ""
+    },
+    {
+      "concepts": [
+        {
+          "id": "MARINE",
+          "url": null,
+          "description": "",
+          "title": "theme.sciencekeywords-8.1_.rdf"
+        }
+      ],
+      "scheme": "theme"
+    },
+    {
+      "concepts": [
+        {
+          "id": "Coastal Waters (Australia)",
+          "url": null,
+          "description": "",
+          "title": "AODN Geographic Extents Vocabulary"
+        }
+      ],
+      "scheme": "place"
+    },
+    {
+      "concepts": [
+        {
+          "id": "environment",
+          "url": null,
+          "title": null,
+          "description": null
+        },
+        {
+          "id": "biota",
+          "url": null,
+          "title": null,
+          "description": null
+        }
+      ],
+      "scheme": "Categories"
+    }
+  ],
+  "id": "cffa7269-5d95-486b-9b2e-77316e808398",
+  "search_suggestions": {
+    "abstract_phrases": [],
+    "platform_vocabs_sayt": [],
+    "parameter_vocabs_sayt": [],
+    "organisation_vocabs_sayt": []
   },
-  "sci:citation" : "{\"suggestedCitation\":\"Cite as: Groom, R., Carter, A. B., Collier, C., Firby, L., Evans, S., Barrett, S., Hoffman, L., van de Wetering, C., Evans, S., Simon, S., & Anderson, S. (2023). Benthic habitats of Yanyuwa Sea Country, Barni - Wardimantha Awara Indigenous Protected Area, Gulf of Carpentaria, Northern Territory, Australia (NESP MaC Project 1.12, JCU & CDU) [Data set]. eAtlas. https://doi.org/10.26274/V6K5-2F34\",\"useLimitations\":null,\"otherConstraints\":null}",
-  "type" : "Collection",
-  "stac_version" : "1.0.0",
-  "stac_extensions" : [ "https://stac-extensions.github.io/scientific/v1.0.0/schema.json", "https://stac-extensions.github.io/contacts/v0.1.1/schema.json", "https://stac-extensions.github.io/projection/v1.1.0/schema.json", "https://stac-extensions.github.io/language/v1.0.0/schema.json", "https://stac-extensions.github.io/themes/v1.0.0/schema.json", "https://stac-extensions.github.io/web-map-links/v1.2.0/schema.json" ]
+  "sci:citation": "{\"suggestedCitation\":\"Cite as: Groom, R., Carter, A. B., Collier, C., Firby, L., Evans, S., Barrett, S., Hoffman, L., van de Wetering, C., Evans, S., Simon, S., & Anderson, S. (2023). Benthic habitats of Yanyuwa Sea Country, Barni - Wardimantha Awara Indigenous Protected Area, Gulf of Carpentaria, Northern Territory, Australia (NESP MaC Project 1.12, JCU & CDU) [Data set]. eAtlas. https://doi.org/10.26274/V6K5-2F34\",\"useLimitations\":null,\"otherConstraints\":null}",
+  "type": "Collection",
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/contacts/v0.1.1/schema.json",
+    "https://stac-extensions.github.io/projection/v1.1.0/schema.json",
+    "https://stac-extensions.github.io/language/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/themes/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/web-map-links/v1.2.0/schema.json"
+  ]
 }
