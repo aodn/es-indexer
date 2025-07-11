@@ -2,6 +2,7 @@ package au.org.aodn.esindexer.service;
 
 import au.org.aodn.stac.model.RelationType;
 import au.org.aodn.cloudoptimized.service.DataAccessService;
+import au.org.aodn.datadiscoveryai.service.DataDiscoveryAiService;
 import au.org.aodn.esindexer.utils.AssociatedRecordsUtil;
 import au.org.aodn.esindexer.utils.*;
 import au.org.aodn.metadata.geonetwork.service.GeoNetworkService;
@@ -82,6 +83,9 @@ public abstract class StacCollectionMapperService {
 
     @Autowired
     protected IndexCloudOptimizedService indexCloudOptimizedService;
+
+    @Autowired
+    protected DataDiscoveryAiService dataDiscoveryAiService;
 
     @Named("mapUUID")
     String mapUUID(MDMetadataType source) {
@@ -683,7 +687,17 @@ public abstract class StacCollectionMapperService {
             results.add(notebook);
         }
 
-        return results;
+        // Enhance links with AI grouping if service is available
+        if (dataDiscoveryAiService.isServiceAvailable()) {
+            try {
+                List<LinkModel> enhancedLinks = dataDiscoveryAiService.enhanceWithLinkGrouping(CommonUtils.getUUID(source), results);
+                return enhancedLinks != null ? enhancedLinks : results;
+            } catch (Exception e) {
+                return results;
+            }
+        } else {
+            return results;
+        }
     }
 
     private List<LinkModel> getAssociatedRecords(MDMetadataType source) {
