@@ -17,6 +17,8 @@ import java.nio.file.Files;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static au.org.aodn.esindexer.utils.CommonUtils.safeGet;
+
 
 @Slf4j
 @Component
@@ -45,8 +47,8 @@ public class GcmdKeywordUtils {
     private static String readResourceFile(String path) throws IOException {
         Resource resource = new ClassPathResource(path);
         InputStream fStream = resource.getInputStream();
-        try ( BufferedReader reader = new BufferedReader(
-                new InputStreamReader(fStream)) ) {
+        try (BufferedReader reader = new BufferedReader(
+                new InputStreamReader(fStream))) {
             return reader.lines()
                     .collect(Collectors.joining("\n"));
         }
@@ -81,15 +83,30 @@ public class GcmdKeywordUtils {
     protected List<String> extractGcmdKeywordLastWords(List<ThemesModel> themes) {
         log.info("Extracting GCMD keywords from record's themes");
         Set<String> keywords = new HashSet<>();
+
         for (ThemesModel themesModel : themes) {
-            if ((themesModel.getTitle().toLowerCase().contains("gcmd") || themesModel.getTitle().toLowerCase().contains("global change master directory")) && !themesModel.getTitle().toLowerCase().contains("palaeo temporal coverage")) {
-                for (ConceptModel conceptModel : themesModel.getConcepts()) {
-                    if (conceptModel.getId() != null && !conceptModel.getId().isEmpty()) {
-                        keywords.add(getLastWord(conceptModel.getId().replace("\"", "")).toUpperCase());
-                    }
+            for (var concept : themesModel.getConcepts()) {
+
+                if (concept.getId() == null || concept.getId().isEmpty()) {
+                    continue;
+                }
+                if (concept.getTitle() == null || concept.getTitle().isEmpty()) {
+                    continue;
+                }
+
+                var lowerCaseTitle = concept.getTitle().toLowerCase();
+                // skip concepts that contain "palaeo temporal coverage"
+                if (lowerCaseTitle.contains("palaeo temporal coverage")) {
+                    continue;
+                }
+
+                if (lowerCaseTitle.contains("global change master directory") || lowerCaseTitle.contains("gcmd")) {
+                    keywords.add(getLastWord(concept.getId().replace("\"", "")).toUpperCase());
                 }
             }
         }
+
+
         return new ArrayList<>(keywords);
     }
 

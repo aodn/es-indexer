@@ -227,58 +227,76 @@
   "themes" : [ {
     "concepts" : [ {
       "id" : "marine",
-      "url" : null
+      "url" : null,
+      "description" : "",
+      "title" : "Keywords (Theme)"
     } ],
-    "scheme" : "",
-    "description" : "",
-    "title" : "Keywords (Theme)"
+    "scheme" : ""
   }, {
     "concepts" : [ {
       "id" : "EARTH SCIENCE | BIOSPHERE | AQUATIC ECOSYSTEMS | BENTHIC HABITAT",
-      "url" : "http://gcmdservices.gsfc.nasa.gov/kms/concept/09a78997-581b-4d1b-ae71-b2b3f96ef719"
+      "url" : "http://gcmdservices.gsfc.nasa.gov/kms/concept/09a78997-581b-4d1b-ae71-b2b3f96ef719",
+      "description" : "NASA Global Change Master Directory (GCMD) Earth Science Keywords",
+      "title" : "Global Change Master Directory (GCMD) Earth Science Keywords Version 8.0"
     }, {
       "id" : "EARTH SCIENCE | BIOSPHERE | AQUATIC ECOSYSTEMS | MARINE HABITAT",
-      "url" : "http://gcmdservices.gsfc.nasa.gov/kms/concept/f6350232-b1c7-458c-bc43-bda357ebb6db"
+      "url" : "http://gcmdservices.gsfc.nasa.gov/kms/concept/f6350232-b1c7-458c-bc43-bda357ebb6db",
+      "description" : "NASA Global Change Master Directory (GCMD) Earth Science Keywords",
+      "title" : "Global Change Master Directory (GCMD) Earth Science Keywords Version 8.0"
     }, {
       "id" : "EARTH SCIENCE | BIOLOGICAL CLASSIFICATION | PLANTS | ANGIOSPERMS (FLOWERING PLANTS) | MONOCOTS | SEAGRASS",
-      "url" : "http://gcmdservices.gsfc.nasa.gov/kms/concept/e36c5faa-c772-4bb0-aeca-b361e160ce9d"
+      "url" : "http://gcmdservices.gsfc.nasa.gov/kms/concept/e36c5faa-c772-4bb0-aeca-b361e160ce9d",
+      "description" : "NASA Global Change Master Directory (GCMD) Earth Science Keywords",
+      "title" : "Global Change Master Directory (GCMD) Earth Science Keywords Version 8.0"
     } ],
-    "scheme" : "theme",
-    "description" : "NASA Global Change Master Directory (GCMD) Earth Science Keywords",
-    "title" : "Global Change Master Directory (GCMD) Earth Science Keywords Version 8.0"
+    "scheme" : "theme"
   }, {
     "concepts" : [ {
       "id" : "Environmental Sciences not elsewhere classified",
-      "url" : "http://purl.org/au-research/vocabulary/anzsrc-for/2008/059999"
+      "url" : "http://purl.org/au-research/vocabulary/anzsrc-for/2008/059999",
+      "description" : "",
+      "title" : "Australian and New Zealand Standard Research Classification (ANZSRC): Fields of Research"
     }, {
       "id" : "Environmental Management",
-      "url" : "http://purl.org/au-research/vocabulary/anzsrc-for/2008/050205"
+      "url" : "http://purl.org/au-research/vocabulary/anzsrc-for/2008/050205",
+      "description" : "",
+      "title" : "Australian and New Zealand Standard Research Classification (ANZSRC): Fields of Research"
     }, {
       "id" : "Marine and Estuarine Ecology (incl. Marine Ichthyology)",
-      "url" : "http://purl.org/au-research/vocabulary/anzsrc-for/2008/060205"
+      "url" : "http://purl.org/au-research/vocabulary/anzsrc-for/2008/060205",
+      "description" : "",
+      "title" : "Australian and New Zealand Standard Research Classification (ANZSRC): Fields of Research"
     } ],
-    "scheme" : "theme",
-    "description" : "",
-    "title" : "Australian and New Zealand Standard Research Classification (ANZSRC): Fields of Research"
+    "scheme" : "theme"
   }, {
     "concepts" : [ {
       "id" : "Biotic taxonomic identification",
-      "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/489"
+      "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/489",
+      "description" : "",
+      "title" : "AODN Discovery Parameter Vocabulary"
     }, {
       "id" : "Abundance of biota",
-      "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/488"
+      "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/488",
+      "description" : "",
+      "title" : "AODN Discovery Parameter Vocabulary"
     } ],
-    "scheme" : "theme",
-    "description" : "",
-    "title" : "AODN Discovery Parameter Vocabulary"
+    "scheme" : "theme"
   }, {
     "concepts" : [ {
       "id" : "Benthic habitat",
-      "url" : null
+      "url" : null,
+      "description" : "",
+      "title" : "Keywords (Theme)"
     } ],
-    "scheme" : "",
-    "description" : "",
-    "title" : "Keywords (Theme)"
+    "scheme" : ""
+  }, {
+    "concepts" : [ {
+      "id" : "biota",
+      "url" : null,
+      "title" : null,
+      "description" : null
+    } ],
+    "scheme" : "Categories"
   } ],
   "id" : "77998615-bbab-4270-bcb1-96c46f56f85a",
   "search_suggestions" : {

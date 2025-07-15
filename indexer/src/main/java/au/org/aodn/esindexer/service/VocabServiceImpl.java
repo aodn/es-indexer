@@ -32,6 +32,7 @@ import java.util.concurrent.*;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static au.org.aodn.esindexer.utils.CommonUtils.safeGet;
 
@@ -59,15 +60,27 @@ public class VocabServiceImpl implements VocabService {
     protected ArdcVocabService ardcVocabService;
 
     protected boolean themeMatchConcept(ThemesModel theme, ConceptModel thatConcept) {
-       /*
-        * comparing by combined values (id and url) of the concept object
-        * this will prevent cases where bottom-level vocabs are the same in text, but their parent vocabs are different
-        * e.g "car -> parts" vs "bike -> parts" ("parts" is the same but different parent)
-        * thisConcept is the extracted from the themes of the record...theme.getConcepts()
-        * thatConcept is the object created by iterating over the parameter_vocabs cache...ConceptModel thatConcept = ConceptModel.builder()
-        * using overriding equals method to compare the two objects, this is not checking instanceof ConceptModel class
-        */
-        return theme.getConcepts().stream().anyMatch(f -> f.equals(thatConcept));
+        /*
+         * comparing by combined values (id and url) of the concept object
+         * this will prevent cases where bottom-level vocabs are the same in text, but their parent vocabs are different
+         * e.g "car -> parts" vs "bike -> parts" ("parts" is the same but different parent)
+         * thisConcept is the extracted from the themes of the record...theme.getConcepts()
+         * thatConcept is the object created by iterating over the parameter_vocabs cache...ConceptModel thatConcept = ConceptModel.builder()
+         * using overriding equals method to compare the two objects, this is not checking instanceof ConceptModel class
+         */
+
+        // since vocabs don't have title nor description, so only compare id and url
+        return theme.getConcepts()
+                .stream()
+                .anyMatch(f ->
+                {
+                    var thisId = safeGet(() -> f.getId().toLowerCase()).orElse("");
+                    var thatId = safeGet(() -> thatConcept.getId().toLowerCase()).orElse("");
+
+                    var thisUrl = safeGet(() -> f.getUrl().toLowerCase()).orElse("");
+                    var thatUrl = safeGet(() -> thatConcept.getUrl().toLowerCase()).orElse("");
+                    return thisId.equals(thatId) && thisUrl.equals(thatUrl);
+                });
     }
 
     @Autowired
@@ -82,6 +95,7 @@ public class VocabServiceImpl implements VocabService {
         this.portalElasticsearchClient = portalElasticsearchClient;
         this.elasticSearchIndexService = elasticSearchIndexService;
     }
+
     /*
     this method for analysing the vocabularies of a record aka bottom-level vocabs (found in the themes section)
     and returning the second-level vocabularies that match (1 level up from the bottom-level vocabularies)
@@ -111,7 +125,7 @@ public class VocabServiceImpl implements VocabService {
                                 if (themeMatchConcept(theme, secondLevelVocabAsConcept)) {
                                     results.add(secondLevelVocabAsConcept.getId());
                                     // Add top level to the list so we can search it
-                                    if(includeFirstLevel) {
+                                    if (includeFirstLevel) {
                                         results.add(topLevelVocab.get(LABEL).asText());
                                     }
                                 }
@@ -130,7 +144,7 @@ public class VocabServiceImpl implements VocabService {
                                             if (themeMatchConcept(theme, leafVocabAsConcept)) {
                                                 results.add(secondLevelVocabAsConcept.getId());
                                                 // Add top level to the list so we can search it
-                                                if(includeFirstLevel) {
+                                                if (includeFirstLevel) {
                                                     results.add(topLevelVocab.get(LABEL).asText());
                                                 }
                                                 // just checking 1 leaf-node of each second-level vocab is enough, because we only care second-level vocabs.
@@ -150,14 +164,28 @@ public class VocabServiceImpl implements VocabService {
 
     public List<String> extractOrganisationVocabLabelsFromThemes(List<ThemesModel> themes) {
         List<String> results = new ArrayList<>();
-        themes.stream()
+
+        // filter out null themes and null concepts
+        themes = themes.stream()
                 .filter(Objects::nonNull)
-                .forEach(theme -> safeGet(theme::getTitle)
-                        .filter(title -> title.toLowerCase().contains("aodn organisation vocabulary"))
-                        .ifPresent(title -> theme.getConcepts().stream()
-                                .filter(concept -> concept.getId() != null && !concept.getId().isEmpty())
-                                .forEach(concept -> results.add(concept.getId()))
-                        ));
+                .filter(theme -> theme.getConcepts() != null).toList();
+
+        for (var theme : themes) {
+            for (var concept : theme.getConcepts()) {
+
+                if (concept.getId() == null || concept.getId().isEmpty()) {
+                    continue;
+                }
+
+                if (concept.getTitle() == null || concept.getTitle().isEmpty()) {
+                    continue;
+                }
+
+                if (concept.getTitle().toLowerCase().contains("aodn organisation vocabulary")) {
+                    results.add(concept.getId());
+                }
+            }
+        }
         return results;
     }
 
@@ -172,22 +200,22 @@ public class VocabServiceImpl implements VocabService {
 
         // Top priority to citation: cit:citedResponsibleParty>
         contacts.stream()
-            .filter(contact -> safeGet(contact::getRoles)
-                .filter(roles -> roles.contains(citationRole))
-                .isPresent())
-            .map(ContactsModel::getOrganization)
-            .filter(Objects::nonNull)
-            .forEach(contactOrgs::add);
+                .filter(contact -> safeGet(contact::getRoles)
+                        .filter(roles -> roles.contains(citationRole))
+                        .isPresent())
+                .map(ContactsModel::getOrganization)
+                .filter(Objects::nonNull)
+                .forEach(contactOrgs::add);
 
         // Second priority if contactOrgs is still empty
         if (contactOrgs.isEmpty()) {
             contacts.stream()
-                .filter(contact -> safeGet(contact::getRoles)
-                    .filter(roles -> roles.contains(pointOfContactRole))
-                    .isPresent())
-                .map(ContactsModel::getOrganization)
-                .filter(Objects::nonNull)
-                .forEach(contactOrgs::add);
+                    .filter(contact -> safeGet(contact::getRoles)
+                            .filter(roles -> roles.contains(pointOfContactRole))
+                            .isPresent())
+                    .map(ContactsModel::getOrganization)
+                    .filter(Objects::nonNull)
+                    .forEach(contactOrgs::add);
         }
 
         List<VocabModel> results = new ArrayList<>();
@@ -380,7 +408,7 @@ public class VocabServiceImpl implements VocabService {
             // Log errors, if any
             if (result.errors()) {
                 log.error("Bulk had errors");
-                for (BulkResponseItem item: result.items()) {
+                for (BulkResponseItem item : result.items()) {
                     if (item.error() != null) {
                         log.error("{} {}", item.error().reason(), item.error().causedBy());
                     }
@@ -393,8 +421,10 @@ public class VocabServiceImpl implements VocabService {
             log.error("No vocabs to be indexed, nothing to index");
         }
     }
+
     /**
      * This method do the population in synchronize way
+     *
      * @throws IOException - If something happens, throw to allow client aware of issue.
      */
     @Override
@@ -411,6 +441,7 @@ public class VocabServiceImpl implements VocabService {
 
         indexAllVocabs(parameterVocabs, platformVocabs, organisationVocabs);
     }
+
     /**
      * This method do the population in asynchronized way
      *
@@ -454,12 +485,10 @@ public class VocabServiceImpl implements VocabService {
                 // Call indexAllVocabs only after all tasks are completed and validated
                 log.info("Indexing fetched vocabs to {}", vocabsIndexName);
                 indexAllVocabs(allResults.get(0), allResults.get(1), allResults.get(2));
-            }
-            catch (InterruptedException | IOException e) {
+            } catch (InterruptedException | IOException e) {
                 Thread.currentThread().interrupt();  // Restore interrupt status
                 log.error("Thread was interrupted while processing vocab tasks", e);
-            }
-            finally {
+            } finally {
                 executorService.shutdown();
             }
         }, CompletableFuture.delayedExecutor(delay, TimeUnit.MINUTES, Executors.newSingleThreadExecutor()));
