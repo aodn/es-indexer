@@ -101,11 +101,7 @@ public class GcmdKeywordUtils {
                 }
 
                 if (lowerCaseTitle.contains("global change master directory") || lowerCaseTitle.contains("gcmd")) {
-                    for (var conceptModel : themesModel.getConcepts()) {
-                        if (conceptModel.getId() != null && !conceptModel.getId().isEmpty()) {
-                            keywords.add(getLastWord(conceptModel.getId().replace("\"", "")).toUpperCase());
-                        }
-                    }
+                    keywords.add(getLastWord(concept.getId().replace("\"", "")).toUpperCase());
                 }
             }
         }
