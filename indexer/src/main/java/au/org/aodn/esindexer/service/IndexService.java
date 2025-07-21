@@ -16,5 +16,5 @@ public interface IndexService {
         void onError(Throwable throwable);
     }
     long getBatchSize();
-    <T> BulkResponse executeBulk(BulkRequest.Builder bulkRequest, Function<BulkResponseItem, Optional<T>> mapper, IndexerMetadataService.Callback callback) throws IOException;
+    <T> BulkResponse executeBulk(BulkRequest bulkRequest, Function<BulkResponseItem, Optional<T>> mapper, IndexerMetadataService.Callback callback) throws IOException;
 }

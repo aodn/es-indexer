@@ -25,13 +25,14 @@ import java.util.Optional;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CloudOptimizedEntry {
 
-    static final BigDecimal MIN = new BigDecimal(Double.MIN_VALUE);
+    @JsonIgnore
+    protected static final BigDecimal MIN = new BigDecimal(Double.MIN_VALUE);
 
     @JsonIgnore
-    protected DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    protected static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     @JsonIgnore
-    protected DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    protected static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     @JsonIgnore
     protected Temporal time;

@@ -82,7 +82,7 @@ public abstract class IndexServiceImpl implements IndexService {
                         callback.onProgress(String.format("Execute batch as bulk request is big enough %s", dataSize + size));
                     }
 
-                    Optional<BulkResponse> result = Optional.of(reduceResponse(proxyImpl.executeBulk(bulkRequest, mapper, callback)));
+                    Optional<BulkResponse> result = Optional.of(reduceResponse(proxyImpl.executeBulk(bulkRequest.build(), mapper, callback)));
 
                     dataSize = 0;
                     bulkRequest = new BulkRequest.Builder();
@@ -115,7 +115,7 @@ public abstract class IndexServiceImpl implements IndexService {
 
         Optional<BulkResponse> flush() throws IOException {
             if(total != 0) {
-                return Optional.of(reduceResponse(proxyImpl.executeBulk(bulkRequest, mapper, callback)));
+                return Optional.of(reduceResponse(proxyImpl.executeBulk(bulkRequest.build(), mapper, callback)));
             }
             else {
                 return Optional.empty();
@@ -160,10 +160,10 @@ public abstract class IndexServiceImpl implements IndexService {
             backoff = @Backoff(delay = DEFAULT_BACKOFF_TIME)
     )
     @Override
-    public <T> BulkResponse executeBulk(BulkRequest.Builder bulkRequest, Function<BulkResponseItem, Optional<T>> mapper, IndexerMetadataService.Callback callback) throws IOException, HttpServerErrorException.ServiceUnavailable {
+    public <T> BulkResponse executeBulk(BulkRequest bulkRequest, Function<BulkResponseItem, Optional<T>> mapper, IndexerMetadataService.Callback callback) throws IOException, HttpServerErrorException.ServiceUnavailable {
         try {
             // Keep retry until success
-            BulkResponse result = elasticClient.bulk(bulkRequest.build());
+            BulkResponse result = elasticClient.bulk(bulkRequest);
 
             // Flush after insert, otherwise you need to wait for next auto-refresh. It is
             // especially a problem with autotest, where assert happens very fast.
