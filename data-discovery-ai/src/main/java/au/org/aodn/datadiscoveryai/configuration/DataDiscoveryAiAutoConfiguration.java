@@ -47,9 +47,10 @@ public class DataDiscoveryAiAutoConfiguration {
     }
 
     @Bean("dataDiscoveryAiWebClient")
-    public WebClient createAIWebClient(@Value("${datadiscoveryai.apiKey:TEMP}") String apiKey) {
+    public WebClient createAIWebClient(@Value("${datadiscoveryai.apiKey:TEMP}") String apiKey, @Value("${datadiscoveryai.internalAiHeaderSecret:TEMP}") String internalHeaderSecret) {
         HttpHeaders defaultHeaders = new HttpHeaders();
         defaultHeaders.add("X-API-Key", apiKey);
+        defaultHeaders.add("X-INTERNAL-AI-HEADER-SECRET", internalHeaderSecret);
 
         // Use WebClient for SSE
         return WebClient.builder()
