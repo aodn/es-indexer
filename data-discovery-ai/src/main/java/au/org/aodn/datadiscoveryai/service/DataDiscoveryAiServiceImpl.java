@@ -63,7 +63,14 @@ public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
                     .bodyToFlux(new ParameterizedTypeReference<ServerSentEvent<String>>() {});
 
             ServerSentEvent<String> doneEvent = eventStream
-                    .filter(e -> "done".equals(e.event()))
+                    .doOnNext(event -> {
+                        if ("error".equals(event.event())) {
+                            log.error("Failed to call Data Discovery AI service: {}", event.data());
+                        } else if ("processing".equals(event.event())) {
+                            log.info("ata Discovery AI service processing...");
+                        }
+                    })
+                    .filter(event -> "done".equals(event.event()))
                     .blockFirst();
 
             if (doneEvent != null && doneEvent.data() != null) {
