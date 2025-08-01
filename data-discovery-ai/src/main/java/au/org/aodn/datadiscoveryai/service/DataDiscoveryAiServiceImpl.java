@@ -16,8 +16,12 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.zip.GZIPOutputStream;
 
 @Slf4j
 public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
@@ -54,11 +58,14 @@ public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
 
             String url = serviceUrl + baseUrl;
 
+            // compress request
+            byte[] gzippedRequest = gzip(request);
+
             Flux<ServerSentEvent<String>> eventStream = webClient.post()
                     .uri(url)
                     .contentType(MediaType.APPLICATION_JSON)
                     .accept(MediaType.TEXT_EVENT_STREAM)
-                    .bodyValue(request)
+                    .bodyValue(gzippedRequest)
                     .retrieve()
                     .bodyToFlux(new ParameterizedTypeReference<ServerSentEvent<String>>() {});
 
@@ -67,7 +74,7 @@ public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
                         if ("error".equals(event.event())) {
                             log.error("Failed to call Data Discovery AI service: {}", event.data());
                         } else if ("processing".equals(event.event())) {
-                            log.info("ata Discovery AI service processing...");
+                            log.info("Data Discovery AI service processing...");
                         }
                     })
                     .filter(event -> "done".equals(event.event()))
@@ -123,4 +130,17 @@ public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
                         .build())
                 .collect(Collectors.toList());
     }
+
+    private byte[] gzip(AiEnhancementRequest aiEnhancementRequest) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        String json = objectMapper.writeValueAsString(aiEnhancementRequest);
+        byte[] jsonBytes = json.getBytes(StandardCharsets.UTF_8);
+
+        ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
+        try (GZIPOutputStream gzip = new GZIPOutputStream(byteStream)) {
+            gzip.write(jsonBytes);
+        }
+        return byteStream.toByteArray();
+    }
+
 }
