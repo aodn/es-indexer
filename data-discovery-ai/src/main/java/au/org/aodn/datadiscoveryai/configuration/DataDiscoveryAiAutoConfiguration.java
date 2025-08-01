@@ -57,8 +57,6 @@ public class DataDiscoveryAiAutoConfiguration {
         defaultHeaders.add("X-API-Key", apiKey);
         defaultHeaders.add("X-INTERNAL-AI-HEADER-SECRET", internalHeaderSecret);
         defaultHeaders.add(HttpHeaders.CONTENT_TYPE, "application/json");
-        defaultHeaders.add(HttpHeaders.ACCEPT_ENCODING, "gzip");
-        defaultHeaders.add(HttpHeaders.CONTENT_ENCODING, "gzip");
 
         // customise httpclient to set timeout and compress
         HttpClient httpClient = HttpClient.create()

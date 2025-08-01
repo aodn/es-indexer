@@ -58,14 +58,11 @@ public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
 
             String url = serviceUrl + baseUrl;
 
-            // compress request
-            byte[] gzippedRequest = gzip(request);
-
             Flux<ServerSentEvent<String>> eventStream = webClient.post()
                     .uri(url)
                     .contentType(MediaType.APPLICATION_JSON)
                     .accept(MediaType.TEXT_EVENT_STREAM)
-                    .bodyValue(gzippedRequest)
+                    .bodyValue(request)
                     .retrieve()
                     .bodyToFlux(new ParameterizedTypeReference<ServerSentEvent<String>>() {});
 
@@ -129,18 +126,6 @@ public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
                         .aiGroup(aiLink.getAiGroup())
                         .build())
                 .collect(Collectors.toList());
-    }
-
-    private byte[] gzip(AiEnhancementRequest aiEnhancementRequest) throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        String json = objectMapper.writeValueAsString(aiEnhancementRequest);
-        byte[] jsonBytes = json.getBytes(StandardCharsets.UTF_8);
-
-        ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
-        try (GZIPOutputStream gzip = new GZIPOutputStream(byteStream)) {
-            gzip.write(jsonBytes);
-        }
-        return byteStream.toByteArray();
     }
 
 }
