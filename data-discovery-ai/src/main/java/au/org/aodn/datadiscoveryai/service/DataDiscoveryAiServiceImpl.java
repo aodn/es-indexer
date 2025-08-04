@@ -5,15 +5,23 @@ import au.org.aodn.datadiscoveryai.model.AiEnhancedLink;
 import au.org.aodn.datadiscoveryai.model.AiEnhancementRequest;
 import au.org.aodn.datadiscoveryai.model.AiEnhancementResponse;
 import au.org.aodn.stac.model.LinkModel;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
+import org.springframework.http.codec.ServerSentEvent;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Flux;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.zip.GZIPOutputStream;
 
 @Slf4j
 public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
@@ -21,12 +29,16 @@ public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
     private final String serviceUrl;
     private final String baseUrl;
     private final RestTemplate restTemplate;
+    protected final WebClient webClient;
+    protected final ObjectMapper objectMapper;
 
     public DataDiscoveryAiServiceImpl(String serviceUrl, String baseUrl,
-                                      RestTemplate restTemplate) {
+                                      RestTemplate restTemplate, WebClient webClient, ObjectMapper objectMapper) {
         this.serviceUrl = serviceUrl;
         this.baseUrl = baseUrl;
         this.restTemplate = restTemplate;
+        this.webClient = webClient;
+        this.objectMapper = objectMapper;
     }
 
     @Override
@@ -46,18 +58,31 @@ public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
 
             String url = serviceUrl + baseUrl;
 
-            ResponseEntity<AiEnhancementResponse> response = restTemplate.exchange(
-                    url,
-                    HttpMethod.POST,
-                    new HttpEntity<>(request),
-                    new ParameterizedTypeReference<>() {}
-            );
+            Flux<ServerSentEvent<String>> eventStream = webClient.post()
+                    .uri(url)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .accept(MediaType.TEXT_EVENT_STREAM)
+                    .bodyValue(request)
+                    .retrieve()
+                    .bodyToFlux(new ParameterizedTypeReference<ServerSentEvent<String>>() {});
 
-            if (response.getStatusCode().is2xxSuccessful() && response.getBody() != null) {
+            ServerSentEvent<String> doneEvent = eventStream
+                    .doOnNext(event -> {
+                        if ("error".equals(event.event())) {
+                            log.error("Failed to call Data Discovery AI service: {}", event.data());
+                        } else if ("processing".equals(event.event())) {
+                            log.info("Data Discovery AI service processing...");
+                        }
+                    })
+                    .filter(event -> "done".equals(event.event()))
+                    .blockFirst();
+
+            if (doneEvent != null && doneEvent.data() != null) {
                 log.info("Successfully calling Data Discovery AI service for UUID: {} with {} links", uuid, links.size());
-                return convertAiEnhancedLinksToLinkModels(response.getBody().getLinks());
+                AiEnhancementResponse responseObj = objectMapper.readValue(doneEvent.data(), AiEnhancementResponse.class);
+                return convertAiEnhancedLinksToLinkModels(responseObj.getLinks());
             } else {
-                log.warn("Received non-successful response from AI service: {}", response.getStatusCode());
+                log.warn("Received non-successful response from AI service: Processing not completed.");
                 return links;
             }
 
@@ -102,4 +127,5 @@ public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
                         .build())
                 .collect(Collectors.toList());
     }
+
 }

@@ -2,6 +2,7 @@ package au.org.aodn.cloudoptimized.configuration;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpHeaders;
 import au.org.aodn.cloudoptimized.service.DataAccessService;
 import au.org.aodn.cloudoptimized.service.DataAccessServiceImpl;
@@ -33,7 +34,7 @@ public class DataAccessServiceAutoConfiguration {
             @Value("${dataaccess.host:http://localhost:5000}") String serverUrl,
             @Value("${dataaccess.baseUrl:/api/v1/das/}") String baseUrl,
             @Value("${dataaccess.apiKey:TEMP}") String apiKey,
-            WebClient webClient){
+            @Qualifier("dataAccessWebClient") WebClient webClient){
 
         // A special rest template that turn on compression on both send and receive
         // it is important because cloud optimize is large
@@ -45,7 +46,7 @@ public class DataAccessServiceAutoConfiguration {
         return new DataAccessServiceImpl(serverUrl, baseUrl, restTemplate, webClient, objectMapper);
     }
 
-    @Bean
+    @Bean("dataAccessWebClient")
     public WebClient createWebClient(@Value("${dataaccess.apiKey:TEMP}") String apiKey) {
         HttpHeaders defaultHeaders = new HttpHeaders();
         defaultHeaders.add("X-API-Key", apiKey);
