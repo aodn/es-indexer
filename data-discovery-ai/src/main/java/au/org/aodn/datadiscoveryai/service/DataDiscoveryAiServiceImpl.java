@@ -16,12 +16,10 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.zip.GZIPOutputStream;
+
 
 @Slf4j
 public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
@@ -47,12 +45,35 @@ public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
             return links;
         }
 
-        var selectedModels = List.of(AIModel.LINK_GROUPING.getValue());
+        AiEnhancementResponse response = enhanceWithAi(uuid, links, null, null);
+        if (response != null && response.getLinks() != null) {
+            return convertAiEnhancedLinksToLinkModels(response.getLinks());
+        }
+        return links;
+    }
+
+    @Override
+    public AiEnhancementResponse enhanceWithAi(String uuid, List<LinkModel> links, String title, String description) {
+        List<String> selectedModels = new ArrayList<>();
+        
+        // Add models based on provided parameters
+        if (links != null && !links.isEmpty()) {
+            selectedModels.add(AIModel.LINK_GROUPING.getValue());
+        }
+        if ((title != null && !title.isEmpty()) || (description != null && !description.isEmpty())) {
+            selectedModels.add(AIModel.DESCRIPTION_FORMATTING.getValue());
+        }
+
+        if (selectedModels.isEmpty()) {
+            return null;
+        }
 
         try {
             AiEnhancementRequest request = AiEnhancementRequest.builder()
                     .selectedModel(selectedModels)
                     .uuid(uuid)
+                    .title(title)
+                    .abstractText(description)
                     .links(links)
                     .build();
 
@@ -78,24 +99,23 @@ public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
                     .blockFirst();
 
             if (doneEvent != null && doneEvent.data() != null) {
-                log.info("Successfully calling Data Discovery AI service for UUID: {} with {} links", uuid, links.size());
-                AiEnhancementResponse responseObj = objectMapper.readValue(doneEvent.data(), AiEnhancementResponse.class);
-                return convertAiEnhancedLinksToLinkModels(responseObj.getLinks());
+                log.info("Successfully calling Data Discovery AI service for UUID: {} with {} models", uuid, selectedModels.size());
+                return objectMapper.readValue(doneEvent.data(), AiEnhancementResponse.class);
             } else {
                 log.warn("Received non-successful response from AI service: Processing not completed.");
-                return links;
+                return null;
             }
 
         } catch (HttpClientErrorException e) {
             log.error("Client error when calling Data Discovery AI service for UUID: {} - Status: {}, Response: {}",
                     uuid, e.getStatusCode(), e.getResponseBodyAsString());
-            return links;
+            return null;
         } catch (RestClientException e) {
             log.error("Error calling Data Discovery AI service for UUID: {}", uuid, e);
-            return links;
+            return null;
         } catch (Exception e) {
-            log.error("Unexpected error when enhancing links for UUID: {}", uuid, e);
-            return links;
+            log.error("Unexpected error when enhancing content for UUID: {}", uuid, e);
+            return null;
         }
     }
 
@@ -126,6 +146,14 @@ public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
                         .aiGroup(aiLink.getAiGroup())
                         .build())
                 .collect(Collectors.toList());
+    }
+
+    /**
+     * Public utility method to convert AI-enhanced links to LinkModel objects
+     * This is used by other services that need to convert AI response links
+     */
+    public List<LinkModel> convertAiLinksToLinkModels(List<AiEnhancedLink> aiEnhancedLinks) {
+        return convertAiEnhancedLinksToLinkModels(aiEnhancedLinks);
     }
 
 }

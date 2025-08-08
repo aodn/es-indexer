@@ -23,6 +23,12 @@ public class SummariesModel {
     protected String revision;
 
     /**
+     * AI-enhanced description from the AI service
+     */
+    @JsonProperty("ai:description")
+    protected String aiDescription;
+
+    /**
      * Group info as setup in geonetwork
      */
     @JsonProperty("dataset_group")

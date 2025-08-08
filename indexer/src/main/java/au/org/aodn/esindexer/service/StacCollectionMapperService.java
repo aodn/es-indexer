@@ -3,6 +3,8 @@ package au.org.aodn.esindexer.service;
 import au.org.aodn.stac.model.RelationType;
 import au.org.aodn.cloudoptimized.service.DataAccessService;
 import au.org.aodn.datadiscoveryai.service.DataDiscoveryAiService;
+import au.org.aodn.datadiscoveryai.model.AiEnhancedLink;
+import au.org.aodn.datadiscoveryai.model.AiEnhancementResponse;
 import au.org.aodn.esindexer.utils.AssociatedRecordsUtil;
 import au.org.aodn.esindexer.utils.*;
 import au.org.aodn.metadata.geonetwork.service.GeoNetworkService;
@@ -68,6 +70,7 @@ public abstract class StacCollectionMapperService {
     @Mapping(target="summaries.statement", source="source", qualifiedByName = "mapSummaries.statement")
     @Mapping(target="summaries.creation", source = "source", qualifiedByName = "mapSummaries.creation")
     @Mapping(target="summaries.revision", source = "source", qualifiedByName = "mapSummaries.revision")
+    @Mapping(target="summaries.aiDescription", source = "source", qualifiedByName = "mapSummaries.aiDescription")
     public abstract StacCollectionModel mapToSTACCollection(MDMetadataType source);
 
     protected static final Logger logger = LogManager.getLogger(StacCollectionMapperService.class);
@@ -338,6 +341,26 @@ public abstract class StacCollectionMapperService {
         var dateSources = MapperUtils.findMDDateInfo(source);
         var dateMap = getMetadataDateInfoFrom(dateSources);
         return safeGet(() -> dateMap.get(GeoNetworkField.revision)).orElse(null);
+    }
+
+    @Named("mapSummaries.aiDescription")
+    String mapSummariesAiDescription(MDMetadataType source) {
+        // Get title and description for AI enhancement
+        if (dataDiscoveryAiService.isServiceAvailable()) {
+            try {
+                String uuid = CommonUtils.getUUID(source);
+                String title = CommonUtils.getTitle(source);
+                String description = CommonUtils.getDescription(source);
+                
+                AiEnhancementResponse aiResponse = dataDiscoveryAiService.enhanceWithAi(uuid, null, title, description);
+                if (aiResponse != null && aiResponse.getSummaries() != null && aiResponse.getSummaries().containsKey("ai:description")) {
+                    return aiResponse.getSummaries().get("ai:description");
+                }
+            } catch (Exception e) {
+                logger.warn("Failed to enhance description with AI for UUID: {}", CommonUtils.getUUID(source), e);
+            }
+        }
+        return null; // Return null if AI service is unavailable or enhancement fails
     }
 
     private HashMap<GeoNetworkField, String> getMetadataDateInfoFrom(List<AbstractTypedDatePropertyType> dateSources) {
@@ -690,8 +713,11 @@ public abstract class StacCollectionMapperService {
         // Enhance links with AI grouping if service is available
         if (dataDiscoveryAiService.isServiceAvailable()) {
             try {
-                List<LinkModel> enhancedLinks = dataDiscoveryAiService.enhanceWithLinkGrouping(CommonUtils.getUUID(source), results);
-                return enhancedLinks != null ? enhancedLinks : results;
+                AiEnhancementResponse aiResponse = dataDiscoveryAiService.enhanceWithAi(CommonUtils.getUUID(source), results, null, null);
+                if (aiResponse != null && aiResponse.getLinks() != null && !aiResponse.getLinks().isEmpty()) {
+                    return dataDiscoveryAiService.convertAiLinksToLinkModels(aiResponse.getLinks());
+                }
+                return results;
             } catch (Exception e) {
                 return results;
             }
@@ -1071,4 +1097,5 @@ public abstract class StacCollectionMapperService {
             return null;
         }
     }
+
 }
