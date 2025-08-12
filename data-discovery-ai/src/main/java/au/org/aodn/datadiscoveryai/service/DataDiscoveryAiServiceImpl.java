@@ -40,7 +40,7 @@ public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
     }
 
     @Override
-    public List<LinkModel> enhanceWithLinkGrouping(String uuid, List<LinkModel> links) {
+    public List<LinkModel> enhanceLinkGrouping(String uuid, List<LinkModel> links) {
         if (links == null || links.isEmpty()) {
             return links;
         }
@@ -53,9 +53,22 @@ public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
     }
 
     @Override
+    public String enhanceDescription(String uuid, String title, String description) {
+        if ((title == null || title.isEmpty()) && (description == null || description.isEmpty())) {
+            return null;
+        }
+
+        AiEnhancementResponse response = enhanceWithAi(uuid, null, title, description);
+        if (response != null && response.getSummaries() != null && response.getSummaries().containsKey("ai:description")) {
+            return response.getSummaries().get("ai:description");
+        }
+        return null;
+    }
+
+    @Override
     public AiEnhancementResponse enhanceWithAi(String uuid, List<LinkModel> links, String title, String description) {
         List<String> selectedModels = new ArrayList<>();
-        
+
         // Add models based on provided parameters
         if (links != null && !links.isEmpty()) {
             selectedModels.add(AIModel.LINK_GROUPING.getValue());

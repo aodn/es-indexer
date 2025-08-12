@@ -345,22 +345,18 @@ public abstract class StacCollectionMapperService {
 
     @Named("mapSummaries.aiDescription")
     String mapSummariesAiDescription(MDMetadataType source) {
-        // Get title and description for AI enhancement
         if (dataDiscoveryAiService.isServiceAvailable()) {
             try {
                 String uuid = CommonUtils.getUUID(source);
                 String title = CommonUtils.getTitle(source);
                 String description = CommonUtils.getDescription(source);
-                
-                AiEnhancementResponse aiResponse = dataDiscoveryAiService.enhanceWithAi(uuid, null, title, description);
-                if (aiResponse != null && aiResponse.getSummaries() != null && aiResponse.getSummaries().containsKey("ai:description")) {
-                    return aiResponse.getSummaries().get("ai:description");
-                }
+
+                return dataDiscoveryAiService.enhanceDescription(uuid, title, description);
             } catch (Exception e) {
                 logger.warn("Failed to enhance description with AI for UUID: {}", CommonUtils.getUUID(source), e);
             }
         }
-        return null; // Return null if AI service is unavailable or enhancement fails
+        return null;
     }
 
     private HashMap<GeoNetworkField, String> getMetadataDateInfoFrom(List<AbstractTypedDatePropertyType> dateSources) {
@@ -713,11 +709,8 @@ public abstract class StacCollectionMapperService {
         // Enhance links with AI grouping if service is available
         if (dataDiscoveryAiService.isServiceAvailable()) {
             try {
-                AiEnhancementResponse aiResponse = dataDiscoveryAiService.enhanceWithAi(CommonUtils.getUUID(source), results, null, null);
-                if (aiResponse != null && aiResponse.getLinks() != null && !aiResponse.getLinks().isEmpty()) {
-                    return dataDiscoveryAiService.convertAiLinksToLinkModels(aiResponse.getLinks());
-                }
-                return results;
+                List<LinkModel> enhancedLinks = dataDiscoveryAiService.enhanceLinkGrouping(CommonUtils.getUUID(source), results);
+                return enhancedLinks != null ? enhancedLinks : results;
             } catch (Exception e) {
                 return results;
             }
