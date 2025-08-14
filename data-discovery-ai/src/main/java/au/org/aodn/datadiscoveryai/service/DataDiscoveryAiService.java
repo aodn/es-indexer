@@ -9,25 +9,6 @@ import java.util.List;
 public interface DataDiscoveryAiService {
 
     /**
-     * Enhances the provided links with AI-generated grouping information
-     *
-     * @param uuid  The UUID of the dataset
-     * @param links The original links from the dataset
-     * @return Enhanced links with AI grouping information
-     */
-    List<LinkModel> enhanceLinkGrouping(String uuid, List<LinkModel> links);
-
-    /**
-     * Enhances the provided description with AI-generated formatting
-     *
-     * @param uuid  The UUID of the dataset
-     * @param title The title of the dataset
-     * @param description The description of the dataset
-     * @return Enhanced description, or null if enhancement fails
-     */
-    String enhanceDescription(String uuid, String title, String description);
-
-    /**
      * Enhances the provided content with AI-generated grouping and description formatting
      *
      * @param uuid  The UUID of the dataset
@@ -45,6 +26,11 @@ public interface DataDiscoveryAiService {
      */
     boolean isServiceAvailable();
 
+
+    List<LinkModel> getEnhancedLinks(AiEnhancementResponse aiResponse);
+
+    String getEnhancedDescription(AiEnhancementResponse aiResponse);
+
     /**
      * Converts AI-enhanced links to LinkModel objects
      * This is a utility method for other services that need to convert AI response links
@@ -52,5 +38,5 @@ public interface DataDiscoveryAiService {
      * @param aiEnhancedLinks The AI-enhanced links from the AI service response
      * @return List of LinkModel objects with AI grouping information
      */
-    List<LinkModel> convertAiLinksToLinkModels(List<AiEnhancedLink> aiEnhancedLinks);
+    List<LinkModel> convertAiEnhancedLinksToLinkModels(List<AiEnhancedLink> aiEnhancedLinks);
 }

@@ -39,31 +39,7 @@ public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
         this.objectMapper = objectMapper;
     }
 
-    @Override
-    public List<LinkModel> enhanceLinkGrouping(String uuid, List<LinkModel> links) {
-        if (links == null || links.isEmpty()) {
-            return links;
-        }
 
-        AiEnhancementResponse response = enhanceWithAi(uuid, links, null, null);
-        if (response != null && response.getLinks() != null) {
-            return convertAiEnhancedLinksToLinkModels(response.getLinks());
-        }
-        return links;
-    }
-
-    @Override
-    public String enhanceDescription(String uuid, String title, String description) {
-        if ((title == null || title.isEmpty()) && (description == null || description.isEmpty())) {
-            return null;
-        }
-
-        AiEnhancementResponse response = enhanceWithAi(uuid, null, title, description);
-        if (response != null && response.getSummaries() != null && response.getSummaries().containsKey("ai:description")) {
-            return response.getSummaries().get("ai:description");
-        }
-        return null;
-    }
 
     @Override
     public AiEnhancementResponse enhanceWithAi(String uuid, List<LinkModel> links, String title, String description) {
@@ -145,7 +121,24 @@ public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
         }
     }
 
-    private List<LinkModel> convertAiEnhancedLinksToLinkModels(List<AiEnhancedLink> aiEnhancedLinks) {
+    @Override
+    public List<LinkModel> getEnhancedLinks(AiEnhancementResponse aiResponse) {
+        if (aiResponse != null && aiResponse.getLinks() != null) {
+            return convertAiEnhancedLinksToLinkModels(aiResponse.getLinks());
+        }
+        return null;
+    }
+
+    @Override
+    public String getEnhancedDescription(AiEnhancementResponse aiResponse) {
+        if (aiResponse != null && aiResponse.getSummaries() != null && aiResponse.getSummaries().containsKey("ai:description")) {
+            return aiResponse.getSummaries().get("ai:description");
+        }
+        return null;
+    }
+
+    @Override
+    public List<LinkModel> convertAiEnhancedLinksToLinkModels(List<AiEnhancedLink> aiEnhancedLinks) {
         if (aiEnhancedLinks == null) {
             return List.of();
         }
@@ -160,13 +153,4 @@ public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
                         .build())
                 .collect(Collectors.toList());
     }
-
-    /**
-     * Public utility method to convert AI-enhanced links to LinkModel objects
-     * This is used by other services that need to convert AI response links
-     */
-    public List<LinkModel> convertAiLinksToLinkModels(List<AiEnhancedLink> aiEnhancedLinks) {
-        return convertAiEnhancedLinksToLinkModels(aiEnhancedLinks);
-    }
-
 }

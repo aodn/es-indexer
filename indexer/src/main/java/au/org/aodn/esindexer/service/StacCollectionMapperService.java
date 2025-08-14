@@ -2,9 +2,6 @@ package au.org.aodn.esindexer.service;
 
 import au.org.aodn.stac.model.RelationType;
 import au.org.aodn.cloudoptimized.service.DataAccessService;
-import au.org.aodn.datadiscoveryai.service.DataDiscoveryAiService;
-import au.org.aodn.datadiscoveryai.model.AiEnhancedLink;
-import au.org.aodn.datadiscoveryai.model.AiEnhancementResponse;
 import au.org.aodn.esindexer.utils.AssociatedRecordsUtil;
 import au.org.aodn.esindexer.utils.*;
 import au.org.aodn.metadata.geonetwork.service.GeoNetworkService;
@@ -42,7 +39,7 @@ import static au.org.aodn.esindexer.utils.StringUtil.capitalizeFirstLetter;
 public abstract class StacCollectionMapperService {
     @BeforeMapping
     void beforeMapping(MDMetadataType source) {
-        logger.info("Processing uuid: {}", CommonUtils.getUUID(source));
+        logger.info("Processing mapping uuid: {}", CommonUtils.getUUID(source));
     }
 
     @Mapping(target="uuid", source = "source", qualifiedByName = "mapUUID")
@@ -86,9 +83,6 @@ public abstract class StacCollectionMapperService {
 
     @Autowired
     protected IndexCloudOptimizedService indexCloudOptimizedService;
-
-    @Autowired
-    protected DataDiscoveryAiService dataDiscoveryAiService;
 
     @Named("mapUUID")
     String mapUUID(MDMetadataType source) {
@@ -345,17 +339,7 @@ public abstract class StacCollectionMapperService {
 
     @Named("mapSummaries.aiDescription")
     String mapSummariesAiDescription(MDMetadataType source) {
-        if (dataDiscoveryAiService.isServiceAvailable()) {
-            try {
-                String uuid = CommonUtils.getUUID(source);
-                String title = CommonUtils.getTitle(source);
-                String description = CommonUtils.getDescription(source);
-
-                return dataDiscoveryAiService.enhanceDescription(uuid, title, description);
-            } catch (Exception e) {
-                logger.warn("Failed to enhance description with AI for UUID: {}", CommonUtils.getUUID(source), e);
-            }
-        }
+        // AI description will be handled in @AfterMapping to avoid duplicate calls
         return null;
     }
 
@@ -706,17 +690,8 @@ public abstract class StacCollectionMapperService {
             results.add(notebook);
         }
 
-        // Enhance links with AI grouping if service is available
-        if (dataDiscoveryAiService.isServiceAvailable()) {
-            try {
-                List<LinkModel> enhancedLinks = dataDiscoveryAiService.enhanceLinkGrouping(CommonUtils.getUUID(source), results);
-                return enhancedLinks != null ? enhancedLinks : results;
-            } catch (Exception e) {
-                return results;
-            }
-        } else {
-            return results;
-        }
+        // AI link enhancement will be handled in @AfterMapping to avoid duplicate calls
+        return results;
     }
 
     private List<LinkModel> getAssociatedRecords(MDMetadataType source) {

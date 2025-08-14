@@ -1,8 +1,13 @@
 package au.org.aodn.esindexer.service;
 
 import au.org.aodn.ardcvocabs.model.VocabModel;
+import au.org.aodn.ardcvocabs.service.ArdcVocabService;
+import au.org.aodn.cloudoptimized.service.DataAccessService;
+import au.org.aodn.datadiscoveryai.service.DataDiscoveryAiService;
+import au.org.aodn.datadiscoveryai.model.AiEnhancementResponse;
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.exception.*;
+import au.org.aodn.esindexer.utils.CommonUtils;
 import au.org.aodn.esindexer.utils.GcmdKeywordUtils;
 import au.org.aodn.esindexer.utils.JaxbUtils;
 import au.org.aodn.metadata.geonetwork.exception.MetadataNotFoundException;
@@ -37,6 +42,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpServerErrorException;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -46,6 +52,7 @@ import java.util.concurrent.*;
 import java.util.function.Function;
 
 import static au.org.aodn.esindexer.utils.CommonUtils.safeGet;
+import au.org.aodn.stac.model.LinkModel;
 
 @Slf4j
 @Service
@@ -63,6 +70,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
     protected RankingService rankingService;
     protected VocabService vocabService;
     protected GcmdKeywordUtils gcmdKeywordUtils;
+    protected DataDiscoveryAiService dataDiscoveryAiService;
 
     @Lazy
     @Autowired
@@ -80,7 +88,8 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
             ElasticSearchIndexService elasticSearchIndexService,
             StacCollectionMapperService stacCollectionMapperService,
             VocabService vocabService,
-            GcmdKeywordUtils gcmdKeywordUtils
+            GcmdKeywordUtils gcmdKeywordUtils,
+            DataDiscoveryAiService dataDiscoveryAiService
     ) {
         super(elasticsearchClient, indexerObjectMapper);
 
@@ -95,6 +104,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
         this.stacCollectionMapperService = stacCollectionMapperService;
         this.vocabService = vocabService;
         this.gcmdKeywordUtils = gcmdKeywordUtils;
+        this.dataDiscoveryAiService = dataDiscoveryAiService;
     }
 
     public Hit<ObjectNode> getDocumentByUUID(String uuid) throws IOException {
@@ -166,7 +176,11 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
     protected StacCollectionModel getMappedMetadataValues(String metadataValues) throws IOException, FactoryException, TransformException, JAXBException {
         MDMetadataType metadataType = jaxbUtils.unmarshal(metadataValues);
 
+        // Step 1: Pure mapping (XML -> STAC)
         StacCollectionModel stacCollectionModel = stacCollectionMapperService.mapToSTACCollection(metadataType);
+
+        // Step 2: Apply AI enhancements
+        enhanceWithAi(stacCollectionModel, metadataType);
 
         // evaluate completeness
         // TODO: in future, evaluate other aspects of the data such as relevance, quality, etc using NLP
@@ -235,6 +249,39 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
         stacCollectionModel.setSearchSuggestionsModel(searchSuggestionsModel);
 
         return stacCollectionModel;
+    }
+
+    /**
+     * Enhances a STAC collection with AI-generated content including description and link grouping
+     */
+    protected void enhanceWithAi(StacCollectionModel target, MDMetadataType source) {
+        String uuid = CommonUtils.getUUID(source);
+        String title = CommonUtils.getTitle(source);
+        String description = CommonUtils.getDescription(source);
+
+        if (dataDiscoveryAiService.isServiceAvailable()) {
+            log.info("start enhancing STAC collection in service layer with UUID: {}", uuid);
+            try {
+                // Make a single AI call for both description and link enhancement
+                var aiResponse = dataDiscoveryAiService.enhanceWithAi(uuid, target.getLinks(), title, description);
+
+                if (aiResponse != null) {
+                    // Update AI description if available
+                    String enhancedDescription = dataDiscoveryAiService.getEnhancedDescription(aiResponse);
+                    if (enhancedDescription != null && !enhancedDescription.trim().isEmpty()) {
+                        target.getSummaries().setAiDescription(enhancedDescription);
+                    }
+
+                    // Update links if AI enhanced links are available
+                    List<LinkModel> enhancedLinks = dataDiscoveryAiService.getEnhancedLinks(aiResponse);
+                    if (enhancedLinks != null && !enhancedLinks.isEmpty()) {
+                        target.setLinks(enhancedLinks);
+                    }
+                }
+            } catch (Exception e) {
+                log.warn("Failed to enhance STAC collection with AI for UUID: {}", uuid, e);
+            }
+        }
     }
 
     private List<String> extractOrderedLabels(VocabModel vocabModel) {
