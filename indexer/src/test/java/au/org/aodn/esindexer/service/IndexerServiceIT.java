@@ -4,6 +4,9 @@ import au.org.aodn.esindexer.BaseTestClass;
 import au.org.aodn.esindexer.configuration.GeoNetworkSearchTestConfig;
 import au.org.aodn.esindexer.model.MockServer;
 import au.org.aodn.metadata.geonetwork.service.GeoNetworkServiceImpl;
+import au.org.aodn.datadiscoveryai.service.DataDiscoveryAiService;
+import au.org.aodn.datadiscoveryai.model.AiEnhancementResponse;
+import au.org.aodn.stac.model.LinkModel;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch.core.search.Hit;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -19,6 +22,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpMethod;
 import org.springframework.test.context.ActiveProfiles;
+import org.mockito.Mockito;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -26,6 +31,10 @@ import java.util.List;
 import java.util.Objects;
 
 import static org.hamcrest.Matchers.containsString;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.anyList;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.client.ExpectedCount.manyTimes;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
@@ -57,6 +66,9 @@ public class IndexerServiceIT extends BaseTestClass {
 
     @Value("${elasticsearch.index.name}")
     protected String INDEX_NAME;
+
+    @MockitoBean
+    protected DataDiscoveryAiService dataDiscoveryAiService;
 
     @BeforeAll
     public void setup() {
@@ -329,6 +341,104 @@ public class IndexerServiceIT extends BaseTestClass {
             Assertions.assertEquals(expected.size(), actual.size(), "abstractPhrases not equals for sample 7. Uuid: " + uuid);
         }
         finally {
+            deleteRecord(uuid);
+        }
+    }
+
+    /**
+     * Test case when AI service is available and returns both enhanced links and enhanced description
+     * This test verifies that both AI link grouping and AI description enhancement are properly applied
+     * during the indexing process in the service layer
+     * @throws IOException - Not expected
+     * @throws JSONException - Not expected
+     */
+    @Test
+    public void verifyAiServiceEnhancement() throws IOException, JSONException {
+        String uuid = "e18eee85-c6c4-4be2-ac8c-930991cf2534";
+
+        // Mock the enhanced links returned by AI service
+        List<LinkModel> enhancedLinks = Arrays.asList(
+                LinkModel.builder()
+                        .href("https://www.marine.csiro.au/data/trawler/survey_details.cfm?survey=IN2024_V01")
+                        .rel("data")
+                        .type("")
+                        .title("MNF Data Trawler")
+                        .aiGroup("Data Access")
+                        .build(),
+                LinkModel.builder()
+                        .href("https://mnf.csiro.au/")
+                        .rel("related")
+                        .type("text/html")
+                        .title("Marine National Facility")
+                        .aiGroup("Other")
+                        .build(),
+                LinkModel.builder()
+                        .href("https://doi.org/10.25919/rdrt-bd71")
+                        .rel("data")
+                        .type("")
+                        .title("Data Access Portal (DOI)")
+                        .aiGroup("Data Access")
+                        .build(),
+                LinkModel.builder()
+                        .href("http://www.marine.csiro.au/data/underway/?survey=IN2024_V01")
+                        .rel("data")
+                        .type("")
+                        .title("Underway Visualisation Tool")
+                        .aiGroup("Data Access")
+                        .build(),
+                //there are some links that are not enhanced by AI
+                LinkModel.builder()
+                        .href("https://www.marine.csiro.au/data/trawler/survey_mapfile.cfm?survey=IN2024_V01&data_type=uwy")
+                        .rel("preview")
+                        .type("image")
+                        .build(),
+                LinkModel.builder()
+                        .href("http://140.79.20.100:8080/geonetwork/srv/eng/catalog.search#/metadata/ff887cf9-18bb-464e-8bad-5dc6e0ad946b")
+                        .rel("describedby")
+                        .type("text/html")
+                        .title("Full metadata link")
+                        .build(),
+                LinkModel.builder()
+                        .href("https://i.creativecommons.org/l/by/4.0/88x31.png")
+                        .rel("license")
+                        .type("image/png")
+                        .build(),
+                LinkModel.builder()
+                        .href("https://creativecommons.org/licenses/by/4.0/")
+                        .rel("license")
+                        .type("text/html")
+                        .build()
+        );
+
+        // Mock the AI enhanced description
+        String enhancedDescription = "This record describes the **End of Voyage (EOV)** data archive from the **Marine National Facility (MNF)** RV Investigator voyage **IN2024_V01**, titled \"Multidisciplinary Investigations of the Southern Ocean (MISO): linking physics, biogeochemistry, plankton, aerosols, clouds, and climate.\" The voyage took place between **January 02, 2024** and **March 05, 2024 (AEST)**, departing from **Hobart** and returning to **Fremantle**.\n\nFor further information please refer to the voyage documentation links.\n\nInstruments used and data collected include:\n\n### Regular measurements:\n- Lowered ADCP (LADCP)\n- Acoustic Doppler Current Profiler (ADCP; 75, 150 KHz)\n- Greenhouse Gas Analysers (Picarro)\n- Cloud Condensation Nuclei counter (CCN)\n- Condensation Particle Counters (CPC)\n- Disdrometer\n- Radon sensor\n- Scanning Mobility Particle Sizers (SMPS)\n- CTD\n- Hydrochemistry\n- Triaxus\n- Fisheries Echosounder (EK80)\n- Multibeam Echosounder (EM710, EM122)\n- Sub-bottom Profiler (SBP120)\n- GPS Positioning System\n- Doppler Velocity Log\n- Thermosalinographs (TSG)\n- Fluorometer\n- Oxygen Optode\n- pCO2\n- Multiangle Absorption Photometer (MAAP)\n- Ozone Sensor\n- Nephelometer\n- Atmospheric Temperature, Humidity, Pressure, Wind and Rain sensors\n- Photosynthetically Active Radiation (PAR) sensor\n- Precision Infrared Radiometer (PIR)\n- Precision Spectral Pyranometer (PSP)\n- Starboard and Portside Radiometers\n- Air Sampler\n- Ultra Short BaseLine Underwater Positioning System (USBL)\n- Weather Radar\n- Expendable Bathythermographs (XBTs).\n\n### Voyage-specific measurements:\n\n- **Black Carbon sensor (Aethalometer)**\n- **Mobility particle size spectrometer (MPSS)**\n- **Bongo Net**\n- **Chemical Ionisation Mass Spectrometer (CIMS)**\n- **Cloud Radar (BASTA)**\n- **Fast Repetition Rate Chlorophyll-a Fluorometer (FRRf)**\n- **Mini Micro-Pulse LIDAR (miniMPL)**\n- **Micro Rain Radar (MRR)**\n- **Neutral Cluster Air Ion Spectrometer (NAIS)**\n- **Proton-Transfer-Reaction Mass Spectrometry (PTR-MS)**\n- **Radiosondes**\n- **Cloud and Aerosol Backscatter Lidar (RMAN)**\n- **Stabilised Platform**\n- **Mercury Analyser (Tekran)**\n- **Time of Flight Aerosol Chemical Speciation Monitor (ToF-ACSM)**\n- **Water Vapor Radiometer (WVR)**\n- **Aerosol mass spectrometer (AMS)**\n- **Core Argo floats**\n- **Biogeochemical (BGC) Argo floats**\n- **Near-surface Drifters**\n- **In situ pumps (ISPs)**\n- **Ice Nucleating Particles (INPs)**\n- **Ozone Sensor**\n- **Trace Metal Aerosol Sampling**\n- **Trace Metal CTD Rosette and Bottles**\n- **Organic Sulfur Sequential Chemical Analysis Robot (OSSCAR)**\n- **Omics data and various biological data.**\n\nThe archive for the **IN2024_V01 EOV raw data** is curated by the **CSIRO National Collections and Marine Infrastructure (NCMI) Information and Data Centre (IDC)** in Hobart, with a permanent archive at the **CSIRO Data Access Portal** ([https://data.csiro.au/](https://data.csiro.au/)), providing access to voyage participants and processors of the data collected on the voyage.\n\nAll voyage documentation is available electronically to **MNF support** via the local network. Applications to access voyage documentation by non-CSIRO participants can be made via **data-requests-hf@csiro.au**.\n\nAll processed data from this voyage are made publicly available through the **MNF Data Trawler** (in the related links).";
+
+        // Create mock AI response
+        AiEnhancementResponse mockAiResponse = Mockito.mock(AiEnhancementResponse.class);
+
+        // Set up AI service to be available and mock the combined enhancement
+        when(dataDiscoveryAiService.isServiceAvailable()).thenReturn(true);
+        when(dataDiscoveryAiService.enhanceWithAi(anyString(), anyList(), anyString(), anyString())).thenReturn(mockAiResponse);
+        when(dataDiscoveryAiService.getEnhancedLinks(eq(mockAiResponse))).thenReturn(enhancedLinks);
+        when(dataDiscoveryAiService.getEnhancedDescription(eq(mockAiResponse))).thenReturn(enhancedDescription);
+
+        try {
+            String expectedData = readResourceFile("classpath:canned/aienhancement/sample2_stac_ai_enhanced.json");
+
+            insertMetadataRecords(uuid, "classpath:canned/aienhancement/sample2.xml");
+
+            indexerService.indexAllMetadataRecordsFromGeoNetwork(null, true, null);
+            Hit<ObjectNode> objectNodeHit = indexerService.getDocumentByUUID(uuid);
+
+            String test = String.valueOf(Objects.requireNonNull(objectNodeHit.source()));
+
+            String expected = indexerObjectMapper.readTree(expectedData).toPrettyString();
+            String actual = indexerObjectMapper.readTree(test).toPrettyString();
+            logger.info(actual);
+            JSONAssert.assertEquals(expected, actual, JSONCompareMode.STRICT);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        } finally {
             deleteRecord(uuid);
         }
     }

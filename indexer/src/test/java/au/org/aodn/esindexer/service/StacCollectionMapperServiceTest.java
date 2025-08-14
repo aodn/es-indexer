@@ -2,14 +2,11 @@ package au.org.aodn.esindexer.service;
 
 import au.org.aodn.cloudoptimized.service.DataAccessService;
 import au.org.aodn.datadiscoveryai.service.DataDiscoveryAiService;
-import au.org.aodn.datadiscoveryai.model.AiEnhancementResponse;
-
 import au.org.aodn.esindexer.utils.GcmdKeywordUtils;
 import au.org.aodn.esindexer.utils.GeometryUtils;
 import au.org.aodn.esindexer.utils.JaxbUtils;
 import au.org.aodn.metadata.geonetwork.service.GeoNetworkServiceImpl;
 import au.org.aodn.metadata.iso19115_3_2018.MDMetadataType;
-import au.org.aodn.stac.model.LinkModel;
 import au.org.aodn.stac.model.StacCollectionModel;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch.core.IndexRequest;
@@ -183,11 +180,6 @@ public class StacCollectionMapperServiceTest {
 
         when(indexCloudOptimizedService.hasIndex(eq("35234913-aa3c-48ec-b9a4-77f822f66ef8")))
                 .thenReturn(true);
-
-        when(dataDiscoveryAiService.isServiceAvailable()).thenReturn(false);
-        when(dataDiscoveryAiService.enhanceWithAi(anyString(), anyList(), anyString(), anyString())).thenReturn(null);
-        when(dataDiscoveryAiService.getEnhancedLinks(any(AiEnhancementResponse.class))).thenReturn(null);
-        when(dataDiscoveryAiService.getEnhancedDescription(any(AiEnhancementResponse.class))).thenReturn(null);
 
     }
 
@@ -480,89 +472,6 @@ public class StacCollectionMapperServiceTest {
     public void verifyHasIndex() throws IOException, JSONException {
         String xml = readResourceFile("classpath:canned/dataservice/35234913-aa3c-48ec-b9a4-77f822f66ef8/sample.xml");
         String expected = readResourceFile("classpath:canned/dataservice/35234913-aa3c-48ec-b9a4-77f822f66ef8/sample.json");
-        indexerService.indexMetadata(xml);
-
-        verify(expected);
-    }
-
-        /**
-     * Test case when AI service is available and returns both enhanced links and enhanced description
-     * This test verifies that both AI link grouping and AI description enhancement are properly applied
-     * @throws IOException - Not expected
-     * @throws JSONException - Not expected
-     */
-    @Test
-    public void verifyAiService() throws IOException, JSONException {
-        // Mock the enhanced links returned by AI service
-        List<LinkModel> enhancedLinks = Arrays.asList(
-                LinkModel.builder()
-                        .href("https://www.marine.csiro.au/data/trawler/survey_details.cfm?survey=IN2019_V06")
-                        .rel("data")
-                        .type("")
-                        .title("Investigator Survey")
-                        .aiGroup("Data Access")
-                        .build(),
-                LinkModel.builder()
-                        .href("https://www.marine.csiro.au/data/underway/?survey=in2019_v06")
-                        .rel("data")
-                        .type("")
-                        .title("Underway Visualisation Tool")
-                        .aiGroup("Other")
-                        .build(),
-                LinkModel.builder()
-                        .href("https://doi.org/10.25919/fxwd-kw74")
-                        .rel("data")
-                        .type("")
-                        .title("Data Access Portal (DOI)")
-                        .aiGroup("Data Access")
-                        .build(),
-                LinkModel.builder()
-                        .href("https://ws.data.csiro.au/licences/1061")
-                        .rel("related")
-                        .type("text/html")
-                        .title("Data Licensing")
-                        .aiGroup("Data Access")
-                        .build(),
-                LinkModel.builder()
-                        .href("https://mnf.csiro.au/")
-                        .rel("related")
-                        .type("text/html")
-                        .title("Marine National Facility")
-                        .aiGroup("Other")
-                        .build(),
-                // Some links remain without AI groups (like metadata and license links)
-                LinkModel.builder()
-                        .href("https://marlin.csiro.au/geonetwork/srv/eng/catalog.search#/metadata/1880cd63-d0f9-42e0-b073-7082527945f2")
-                        .rel("describedby")
-                        .type("text/html")
-                        .title("Full metadata link")
-                        .build(),
-                LinkModel.builder()
-                        .href("https://i.creativecommons.org/l/by/4.0/88x31.png")
-                        .rel("license")
-                        .type("image/png")
-                        .build(),
-                LinkModel.builder()
-                        .href("https://creativecommons.org/licenses/by/4.0/")
-                        .rel("license")
-                        .type("text/html")
-                        .build()
-        );
-
-        // Mock the AI enhanced description
-        String enhancedDescription = "This record describes the **End of Voyage (EOV)** archive from the **Marine National Facility (MNF) RV Investigator** research voyage **IN2019_V06**, titled \"Tropical observations of atmospheric convection, biogenic emissions, ocean mixing, and processes generating intraseasonal SST variability.\" The voyage took place from **Darwin (NT)** to **Darwin** between **October 19 and December 17, 2019 (AEST)**.\n\nFor further information please refer to the voyage documentation links below.\n\nInstruments used and data collected include:\n\n- **Regular measurements:**\n  - Acoustic Doppler Current Profiler (ADCP; 75, 150 KHz)\n  - Lowered ADCP (LADCP)\n  - Disdrometer\n  - Fisheries echosounder (EK60)\n  - Multibeam Echosounder (EM710, EM122)\n  - Sub-bottom Profiler (SBP120)\n  - Gravimeter\n  - GPS Positioning System\n  - Doppler Velocity Log\n  - Atmospheric Temperature, Humidity, Pressure, Wind and Rain sensors\n  - Photosynthetically Active Radiation (PAR) sensor\n  - Precision Infrared Radiometer (PIR)\n  - Precision Spectral Pyranometer (PSP)\n  - Nephelometer\n  - pCO2\n  - Condensation Particle Counters (CPC)\n  - Cloud Condensation Nuclei counter (CCN)\n  - Multiangle Absorption Photometer (MAAP)\n  - Starboard and Portside Radiometers\n  - Ozone sensors\n  - Weather Radar\n  - Greenhouse Gas Analysers (Aerodyne, Picarro)\n  - Infrared Sea Surface Temperature Autonomous Radiometer (ISAR)\n  - Fluorometer\n  - Oxygen optode\n  - Thermosalinographs (TSG)\n  - CTD\n  - Hydrochemistry\n  - Expendable Bathythermographs (XBTs).\n\n### Voyage-specific measurements:\n\n- **AIRBOX**: \n  - TSI 3772 Condensation Particle Counter (3772CPC) \n  - Black Carbon sensor (Aethalometer) \n  - Aerosol mass spectrometer (AMS) \n  - Chemical Ionisation Mass Spectrometer (CIMS) \n  - Cloud Radar (BASTA) \n  - Weather Station \n  - Multi-AXis Differential Optical Absorption Spectrometer (MAX-DOAS) \n  - mini Micro-Pulse LIDAR (miniMPL) \n  - Neutral Cluster Air Ion Spectrometer (NAIS) \n  - Radon sensor \n  - Cloud and Aerosol Backscatter Lidar (RMAN) \n  - Scanning Mobility Particle Sizers (SMPS) \n  - Sonic Anemometer \n  - Greenhouse Gas Analyser (Fourier Transform Infrared (FTIR) spectrometer - Spectronus) \n  - Mercury Analyser (Tekran) \n  - Gas Chromatograph - Electron Capture Detector (uDirac) \n  - Volatility-Hygroscopicity Tandem Differential Mobility Analyser (VH-TDMA) \n- **Radiosondes** \n- **Wave-powered Profiler** (Wirewalker) \n- **Sea State cameras** \n- **Triaxus** \n- **ECO Triplet** \n- **Sound Velocity Profile** (SVP)\n\nThe archive for the **IN2019_V06 EOV raw data** is curated by the **CSIRO NCMI Information and Data Centre (IDC)** in Hobart, with a permanent archive at the **CSIRO Data Access Portal (DAP)**, [https://data.csiro.au/dap/](https://data.csiro.au/dap/), providing access to participants and processors of the data collected in the voyage.\n\nAll voyage documentation is available electronically to **MNF support** via the local network. Access to voyage documentation for non-CSIRO participants can be made via **NCMI_DataLibrarians@csiro.au**.";
-
-        // Create mock AI response
-        AiEnhancementResponse mockAiResponse = Mockito.mock(AiEnhancementResponse.class);
-
-        // Set up AI service to be available and mock the combined enhancement
-        when(dataDiscoveryAiService.isServiceAvailable()).thenReturn(true);
-        when(dataDiscoveryAiService.enhanceWithAi(anyString(), anyList(), anyString(), anyString())).thenReturn(mockAiResponse);
-        when(dataDiscoveryAiService.getEnhancedLinks(eq(mockAiResponse))).thenReturn(enhancedLinks);
-        when(dataDiscoveryAiService.getEnhancedDescription(eq(mockAiResponse))).thenReturn(enhancedDescription);
-
-        String xml = readResourceFile("classpath:canned/aienhancement/sample1.xml");
-        String expected = readResourceFile("classpath:canned/aienhancement/sample1_stac_ai_enhanced.json");
         indexerService.indexMetadata(xml);
 
         verify(expected);
