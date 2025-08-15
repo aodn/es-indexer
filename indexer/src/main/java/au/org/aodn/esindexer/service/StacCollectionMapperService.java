@@ -67,7 +67,6 @@ public abstract class StacCollectionMapperService {
     @Mapping(target="summaries.statement", source="source", qualifiedByName = "mapSummaries.statement")
     @Mapping(target="summaries.creation", source = "source", qualifiedByName = "mapSummaries.creation")
     @Mapping(target="summaries.revision", source = "source", qualifiedByName = "mapSummaries.revision")
-    @Mapping(target="summaries.aiDescription", source = "source", qualifiedByName = "mapSummaries.aiDescription")
     public abstract StacCollectionModel mapToSTACCollection(MDMetadataType source);
 
     protected static final Logger logger = LogManager.getLogger(StacCollectionMapperService.class);
@@ -335,12 +334,6 @@ public abstract class StacCollectionMapperService {
         var dateSources = MapperUtils.findMDDateInfo(source);
         var dateMap = getMetadataDateInfoFrom(dateSources);
         return safeGet(() -> dateMap.get(GeoNetworkField.revision)).orElse(null);
-    }
-
-    @Named("mapSummaries.aiDescription")
-    String mapSummariesAiDescription(MDMetadataType source) {
-        // AI description will be handled in @AfterMapping to avoid duplicate calls
-        return null;
     }
 
     private HashMap<GeoNetworkField, String> getMetadataDateInfoFrom(List<AbstractTypedDatePropertyType> dateSources) {
