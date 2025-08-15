@@ -18,6 +18,12 @@ public class AiEnhancementRequest {
     @JsonProperty("uuid")
     private String uuid;
 
+    @JsonProperty("title")
+    private String title;
+
+    @JsonProperty("abstract")
+    private String abstractText;
+
     @JsonProperty("links")
     private List<LinkModel> links;
 }
