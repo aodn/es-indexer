@@ -63,6 +63,11 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
     }
 
     @Override
+    public String getHitId(String collectionId) {
+        return elasticSearchIndexService.getFirstMatchId(this.indexName, "properties.collection.keyword", collectionId);
+    }
+
+    @Override
     public List<BulkResponse> indexAllCloudOptimizedData(String beginWithUuid, IndexService.Callback callback) {
 
         // Verify if data access service is up or not, it may be down during processing but we have retry

@@ -181,6 +181,9 @@ public class StacCollectionMapperServiceTest {
         when(indexCloudOptimizedService.hasIndex(eq("35234913-aa3c-48ec-b9a4-77f822f66ef8")))
                 .thenReturn(true);
 
+        when(indexCloudOptimizedService.getHitId(eq("35234913-aa3c-48ec-b9a4-77f822f66ef8")))
+                .thenReturn("8af21108-c535-43bf-8dab-c1f45a26088c|vessel_trv_realtime_qc.parquet|2009-08|0");
+
     }
 
     @Test
