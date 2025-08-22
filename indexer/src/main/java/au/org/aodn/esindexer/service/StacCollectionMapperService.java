@@ -1023,11 +1023,23 @@ public abstract class StacCollectionMapperService {
     protected Map<String, AssetModel> mapAssetsData(MDMetadataType source) {
         String collectionId = CommonUtils.getUUID(source);
         if(indexCloudOptimizedService.hasIndex(collectionId)) {
+            var hitId = indexCloudOptimizedService.getHitId(collectionId);
+            var mediaType = MediaType.APPLICATION_JSON_VALUE;
+            if(hitId == null) {
+                logger.error("Unable to find hitId for collection: {}", collectionId);
+            }
+            if (hitId.contains(".parquet")) {
+                mediaType = "application/x-parquet";
+            }
+            else if (hitId.contains(".zarr")) {
+                mediaType = "application/x-zarr";
+            }
+
             Map.Entry<String, AssetModel> entry = Map.entry(
                     AssetModel.Role.SUMMARY.toString(),
                     AssetModel.builder()
                             .role(AssetModel.Role.SUMMARY)
-                            .type(MediaType.APPLICATION_JSON_VALUE)
+                            .type(mediaType)
                             .href(String.format("/collections/%s/items/summary", collectionId))
                             .title("Summary")
                             .description("Summary of cloud optimized data points")

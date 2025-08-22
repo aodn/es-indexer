@@ -7,6 +7,7 @@ import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.ElasticsearchException;
 import co.elastic.clients.elasticsearch.core.CountRequest;
 import co.elastic.clients.elasticsearch.core.CountResponse;
+import co.elastic.clients.elasticsearch.core.SearchRequest;
 import co.elastic.clients.elasticsearch.indices.CreateIndexRequest;
 import co.elastic.clients.elasticsearch.indices.CreateIndexResponse;
 import co.elastic.clients.elasticsearch.indices.GetIndexRequest;
@@ -49,6 +50,22 @@ public class ElasticSearchIndexService {
 
         CountResponse response = portalElasticsearchClient.count(request);
         return  (response != null) ? response.count() : null;
+    }
+
+    public String getFirstMatchId(String indexName, String field, String value) {
+        var request = SearchRequest.of( search -> search
+                .index(indexName)
+                .query(q -> q.term(t -> t.field(field).value(value)))
+                .size(1)
+                .source(src -> src.fetch(false))
+        );
+        try{
+            var response = portalElasticsearchClient.search(request, Void.class);
+            return response.hits().hits().isEmpty()? null: response.hits().hits().get(0).id();
+        } catch (ElasticsearchException | IOException e) {
+            log.error("Failed to search index: {} for field: {} with value: {} | {}", indexName, field, value, e.getMessage());
+            return null;
+        }
     }
 
     public void createIndexFromMappingJSONFile(String indexMappingFile, String indexName) {
