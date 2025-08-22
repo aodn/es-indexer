@@ -1028,7 +1028,7 @@ public abstract class StacCollectionMapperService {
             if(hitId == null) {
                 logger.error("Unable to find hitId for collection: {}", collectionId);
             }
-            if (hitId.contains(".parquet")) {
+            else if (hitId.contains(".parquet")) {
                 mediaType = "application/x-parquet";
             }
             else if (hitId.contains(".zarr")) {
