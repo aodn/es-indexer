@@ -454,7 +454,7 @@
     "parameter_vocabs_sayt" : [ "salinity", "carbon", "temperature", "alkalinity","ph (total scale) of the water body" ],
     "organisation_vocabs_sayt": [ "CSIRO Oceans and Atmosphere", "National Institute for Environmental Studies (NIES)", "Climate Change Research Centre (CCRC)" ]
   },
-  "sci:citation" : "{\"suggestedCitation\":null,\"useLimitations\":null,\"otherConstraints\":[\"The citation in a list of references is: citation name/s (year metadata published), metadata title. File identifier and Data accessed at (add http link).\"]}",
+  "sci:citation" : "{\"suggestedCitation\":\"The citation in a list of references is: citation name/s (year metadata published), metadata title. File identifier and Data accessed at (add http link).\",\"useLimitations\":null,\"otherConstraints\":null}",
   "type" : "Collection",
   "stac_version" : "1.0.0",
   "stac_extensions" : [ "https://stac-extensions.github.io/scientific/v1.0.0/schema.json", "https://stac-extensions.github.io/contacts/v0.1.1/schema.json", "https://stac-extensions.github.io/projection/v1.1.0/schema.json", "https://stac-extensions.github.io/language/v1.0.0/schema.json", "https://stac-extensions.github.io/themes/v1.0.0/schema.json", "https://stac-extensions.github.io/web-map-links/v1.2.0/schema.json" ]
