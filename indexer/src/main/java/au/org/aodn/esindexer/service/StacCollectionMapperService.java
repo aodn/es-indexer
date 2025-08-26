@@ -248,13 +248,23 @@ public abstract class StacCollectionMapperService {
                     if (otherConstraints == null) {
                         continue;
                     }
-                    otherConstraints.forEach(constraint -> safeGet(() -> constraint.getCharacterString().getValue().toString()).ifPresent(cons -> {
-                        if (isSuggestedCitation(cons)) {
-                            citation.setSuggestedCitation(cons);
-                        } else {
-                            citation.addOtherConstraint(cons);
-                        }
-                    }));
+
+                    otherConstraints.forEach(constraint ->
+                            safeGet(() -> constraint.getCharacterString().getValue().toString())
+                                    .ifPresent(cons -> {
+                                        // split into suggested citation text + remaining other constraints text: parts[0]=suggested, parts[1]=remaining
+                                        String[] parts = extractCitationParts((String) cons);
+
+                                        if (parts[0] != null && !parts[0].isBlank()) {
+                                            if (citation.getSuggestedCitation() == null || citation.getSuggestedCitation().isBlank()) {
+                                                citation.setSuggestedCitation(parts[0]);
+                                            }
+                                        }
+                                        if (parts[1] != null && !parts[1].isBlank()) {
+                                            citation.addOtherConstraint(parts[1]);
+                                        }
+                                    })
+                    );
                 }
                 else if (abstractConstraints instanceof MDConstraintsType constraints) {
                     var useLimitations = safeGet(constraints::getUseLimitation);
@@ -294,8 +304,81 @@ public abstract class StacCollectionMapperService {
         if (constraint.toLowerCase().contains("cite as")) {
             return true;
         }
+        // IMAS data has this identifier, e.g., https://geonetwork-edge.aodn.org.au/geonetwork/srv/eng/catalog.search#/metadata/20b07936-3bfb-4a72-805d-0b24f1fd4d3f/formatters/xsl-view?root=div&view=advanced
+        // and https://catalogue.aodn.org.au/geonetwork/srv/eng/catalog.search#/metadata/697b1314-7351-4478-b5f4-7ca4e5a1db3a/formatters/imos-full-view?root=div&view=advanced&approved=true
+        if (constraint.toLowerCase().contains("data accessed at")) {
+            return true;
+        }
         return false;
     }
+
+    /**
+     * This is a helper function addition to isSuggestedCitation function. This is because for CSIRO and AAD data, the suggested citation text is mixed with other constraints text.
+     * We need to split them separeted, with specific identifiers.
+     * Identifier for CSIRO data: "ATTRIBUTION STATEMENT", which is a sentence ends up with a period.
+     * Identifier for AAD data: "Please follow instructions listed in the citation reference provided at URL when using these data", which is a sentence normally ends up with a period, but sometimes can be ended with a right bracket.
+     * @param constraint the constraint text
+     * @return [suggested, remaining] if matched the suggested citation pattern, [null, remaining] if no suggested citation matches, the whole text fallback to other constraints, [suggested, null] if found suggested citation, and no remaining text left, [null, null] if neither suggested citation or other constraints text found.
+     */
+    private static String[] extractCitationParts(String constraint) {
+        if (constraint == null) return new String[]{null, null};
+
+        // CSIRO pattern: "ATTRIBUTION STATEMENT" sentence (e.g. https://geonetwork-edge.aodn.org.au/geonetwork/srv/eng/catalog.search#/metadata/207809c8-b555-37f5-e053-08114f8c1f41/formatters/xsl-view?root=div&view=advanced)
+        Pattern csiroPattern = Pattern.compile("(?is)\\bATTRIBUTION\\s+STATEMENT:\\s*([^\\n\\r]+?)(?:[.!?]\\s*|$)");
+        Matcher csiroMatcher = csiroPattern.matcher(constraint);
+        if (csiroMatcher.find()) {
+            String suggested = ("ATTRIBUTION STATEMENT: " + csiroMatcher.group(1) + ".").trim();
+            String remaining = (constraint.substring(0, Math.max(0, csiroMatcher.start())) +
+                    constraint.substring(Math.min(csiroMatcher.end(), constraint.length()))).trim();
+            if (remaining.isEmpty()) remaining = null;
+            return new String[]{suggested, remaining};
+        }
+
+        // AAD pattern: "Please follow instructions listed in the citation reference provided at URL when using these data", which is a sentence normally ends up with period, but sometimes can be ended with a right bracket.
+        // example: https://geonetwork-edge.aodn.org.au/geonetwork/srv/eng/catalog.search#/metadata/AADC-00099/formatters/xsl-view?root=div&view=advanced
+        Pattern aadPattern = Pattern.compile(
+                "(?is)\\bplease\\s+follow\\s+instructions\\s+listed\\s+in\\s+the\\s+citation\\s+reference\\s+provided\\s+at\\s+(https?://\\S+?)\\s+when\\s+using\\s+these\\s+data[.)]?"
+        );
+        Matcher aadMatcher = aadPattern.matcher(constraint);
+        if (aadMatcher.find()) {
+            // URL captured in group 1
+            String url = aadMatcher.group(1);
+
+            // Find sentence boundaries like end point or right brack or new line
+            int anchor = aadMatcher.start();
+            int start = 0;
+            for (int i = anchor - 1; i >= 0; i--) {
+                char c = constraint.charAt(i);
+                if (c == '.' || c == ')' || c == '\n') { start = i + 1; break; }
+            }
+            int end = aadMatcher.end();
+
+            // build suggested citation text
+            String suggested = constraint.substring(start, end).trim();
+
+            // If the sentence ends with '.' or ')' but the URL itself does not, trim the trailing char
+            if (!url.endsWith(".") && suggested.endsWith(".")) {
+                suggested = suggested.substring(0, suggested.length() - 1).trim();
+            } else if (!url.endsWith(")") && suggested.endsWith(")")) {
+                suggested = suggested.substring(0, suggested.length() - 1).trim();
+            }
+
+            // build remaining text to fall back to other constraints field
+            String remaining = constraint.substring(0, start) + constraint.substring(end);
+            if (remaining.isEmpty()) remaining = null;
+
+            return new String[]{suggested, remaining};
+        }
+
+        // Fallback to isSuggestedCitation check
+        if (isSuggestedCitation(constraint)) {
+            return new String[]{constraint, null};
+        }
+
+        // If nothing matches suggested citation pattern, everything remains in other constraints
+        return new String[]{null, constraint};
+    }
+
 
     @Named("mapSummaries.temporal")
     List<Map<String,String>> mapSummariesTemporal(MDMetadataType source) {
