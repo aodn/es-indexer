@@ -316,25 +316,21 @@ public abstract class StacCollectionMapperService {
     /**
      * This is a helper function addition to isSuggestedCitation function. This is because for CSIRO and AAD data, the suggested citation text is mixed with other constraints text.
      * We need to split them separeted, with specific identifiers.
-     * Identifier for CSIRO data: "ATTRIBUTION STATEMENT", which is a sentence ends up with an end point.
-     * Identifier for AAD data: "citation reference provided at ", which is a sentence normally ends up with an end point, but sometimes can be ended with a right brack ).
+     * Identifier for CSIRO data: "ATTRIBUTION STATEMENT", which is a sentence ends up with a period.
+     * Identifier for AAD data: "Please follow instructions listed in the citation reference provided at URL when using these data", which is a sentence normally ends up with a period, but sometimes can be ended with a right bracket.
      * @param constraint the constraint text
-     * @return [suggested, remaining] if matched the suggested citation pattern,
+     * @return [suggested, remaining] if matched the suggested citation pattern, [null, remaining] if no suggested citation matches, the whole text fallback to other constraints, [suggested, null] if found suggested citation, and no remaining text left, [null, null] if neither suggested citation or other constraints text found.
      */
     private static String[] extractCitationParts(String constraint) {
         if (constraint == null) return new String[]{null, null};
 
-        // normalise whitespace
-        String text = constraint.replace('\u00A0',' ').trim().replaceAll("\\s+", " ").trim();
-        if (text.isBlank()) return new String[]{null, null};
-
         // CSIRO pattern: "ATTRIBUTION STATEMENT" sentence (e.g. https://geonetwork-edge.aodn.org.au/geonetwork/srv/eng/catalog.search#/metadata/207809c8-b555-37f5-e053-08114f8c1f41/formatters/xsl-view?root=div&view=advanced)
         Pattern csiroPattern = Pattern.compile("(?is)\\bATTRIBUTION\\s+STATEMENT:\\s*([^\\n\\r]+?)(?:[.!?]\\s*|$)");
-        Matcher csiroMatcher = csiroPattern.matcher(text);
+        Matcher csiroMatcher = csiroPattern.matcher(constraint);
         if (csiroMatcher.find()) {
-            String suggested = ("ATTRIBUTION STATEMENT: " + csiroMatcher.group(1)).trim();
-            String remaining = (text.substring(0, Math.max(0, csiroMatcher.start())) + " " +
-                    text.substring(Math.min(csiroMatcher.end(), text.length()))).trim();
+            String suggested = ("ATTRIBUTION STATEMENT: " + csiroMatcher.group(1) + ".").trim();
+            String remaining = (constraint.substring(0, Math.max(0, csiroMatcher.start())) +
+                    constraint.substring(Math.min(csiroMatcher.end(), constraint.length()))).trim();
             if (remaining.isEmpty()) remaining = null;
             return new String[]{suggested, remaining};
         }
@@ -344,7 +340,7 @@ public abstract class StacCollectionMapperService {
         Pattern aadPattern = Pattern.compile(
                 "(?is)\\bplease\\s+follow\\s+instructions\\s+listed\\s+in\\s+the\\s+citation\\s+reference\\s+provided\\s+at\\s+(https?://\\S+?)\\s+when\\s+using\\s+these\\s+data[.)]?"
         );
-        Matcher aadMatcher = aadPattern.matcher(text);
+        Matcher aadMatcher = aadPattern.matcher(constraint);
         if (aadMatcher.find()) {
             // URL captured in group 1
             String url = aadMatcher.group(1);
@@ -353,13 +349,13 @@ public abstract class StacCollectionMapperService {
             int anchor = aadMatcher.start();
             int start = 0;
             for (int i = anchor - 1; i >= 0; i--) {
-                char c = text.charAt(i);
+                char c = constraint.charAt(i);
                 if (c == '.' || c == ')' || c == '\n') { start = i + 1; break; }
             }
             int end = aadMatcher.end();
 
             // build suggested citation text
-            String suggested = text.substring(start, end).trim();
+            String suggested = constraint.substring(start, end).trim();
 
             // If the sentence ends with '.' or ')' but the URL itself does not, trim the trailing char
             if (!url.endsWith(".") && suggested.endsWith(".")) {
@@ -369,19 +365,19 @@ public abstract class StacCollectionMapperService {
             }
 
             // build remaining text to fall back to other constraints field
-            String remaining = (text.substring(0, start) + " " + text.substring(end)).trim();
+            String remaining = constraint.substring(0, start) + constraint.substring(end);
             if (remaining.isEmpty()) remaining = null;
 
             return new String[]{suggested, remaining};
         }
 
         // Fallback to isSuggestedCitation check
-        if (isSuggestedCitation(text)) {
-            return new String[]{text, null};
+        if (isSuggestedCitation(constraint)) {
+            return new String[]{constraint, null};
         }
 
         // If nothing matches suggested citation pattern, everything remains in other constraints
-        return new String[]{null, text};
+        return new String[]{null, constraint};
     }
 
 
