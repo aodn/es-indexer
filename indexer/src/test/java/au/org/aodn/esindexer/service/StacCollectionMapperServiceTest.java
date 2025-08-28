@@ -420,7 +420,6 @@ public class StacCollectionMapperServiceTest {
     }
     /**
      * Sample contains invalid polygon where only x coor is valid but y is NaN
-     *
      * @throws IOException - Do not expect to throw
      */
     @Test
@@ -475,6 +474,20 @@ public class StacCollectionMapperServiceTest {
     public void verifyHasIndex() throws IOException, JSONException {
         String xml = readResourceFile("classpath:canned/dataservice/35234913-aa3c-48ec-b9a4-77f822f66ef8/sample.xml");
         String expected = readResourceFile("classpath:canned/dataservice/35234913-aa3c-48ec-b9a4-77f822f66ef8/sample.json");
+        indexerService.indexMetadata(xml);
+
+        verify(expected);
+    }
+    /**
+     * This XML contains an invalid value in the EAST point of the bounding box, it is set to 360, which is invalid value.
+     * Max value allow in this case is 180, so code to set it back to 180 if exceed 180
+     * @throws IOException - Not expected
+     * @throws JSONException - Not expected
+     */
+    @Test
+    public void verifyBBoxEastInvalidValueWorks() throws IOException, JSONException {
+        String xml = readResourceFile("classpath:canned/sample20.xml");
+        String expected = readResourceFile("classpath:canned/sample20_stac.json");
         indexerService.indexMetadata(xml);
 
         verify(expected);

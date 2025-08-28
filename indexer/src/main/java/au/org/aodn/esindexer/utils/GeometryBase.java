@@ -284,6 +284,9 @@ public class GeometryBase {
         double north = bbt.getNorthBoundLatitude().getDecimal().doubleValue();
         double south = bbt.getSouthBoundLatitude().getDecimal().doubleValue();
 
+        // Sometime value input is incorrect, fix it here
+        east = east >= 180 ? 180 : east;
+
         // Define the coordinates for the bounding box
         Coordinate[] coordinates = new Coordinate[]{
                 new Coordinate(west, south),
