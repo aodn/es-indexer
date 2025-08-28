@@ -492,4 +492,17 @@ public class StacCollectionMapperServiceTest {
 
         verify(expected);
     }
+    /**
+     * Handle null exception in this case
+     * @throws IOException - Not expected
+     * @throws JSONException - Not expected
+     */
+    @Test
+    public void verifyAbstractConstraintsNullWorks() throws IOException, JSONException {
+        String xml = readResourceFile("classpath:canned/sample21.xml");
+        String expected = readResourceFile("classpath:canned/sample21_stac.json");
+        indexerService.indexMetadata(xml);
+
+        verify(expected);
+    }
 }
