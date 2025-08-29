@@ -334,7 +334,7 @@
     "platform_vocabs_sayt": [],
     "organisation_vocabs_sayt": []
   },
-  "sci:citation": "{\"suggestedCitation\":null,\"useLimitations\":[\"https://creativecommons.org/share-your-work/cclicenses/\"],\"otherConstraints\":[\"Cite data as: Satellite-Derived Bathymetry and Seafloor Habitat Classification Mapping of Cocos (Keeling) Islands Marine Park (2024). Director of National Parks (Parks Australia), EOMAP Pty Ltd. Data accessed at https://metadata.imas.utas.edu.au/geonetwork/srv/eng/catalog.search#/metadata/dec073c6-0bdc-44b0-83da-48bc1042a93e on [access date].\",\"https://www.eomap.com/exchange/pdf/EOMAP_Terms_Conditions_for_User_of_EOMAP_Products.pdf\"]}",
+  "sci:citation": "{\"suggestedCitation\":\"Cite data as: Satellite-Derived Bathymetry and Seafloor Habitat Classification Mapping of Cocos (Keeling) Islands Marine Park (2024). Director of National Parks (Parks Australia), EOMAP Pty Ltd. Data accessed at https://metadata.imas.utas.edu.au/geonetwork/srv/eng/catalog.search#/metadata/dec073c6-0bdc-44b0-83da-48bc1042a93e on [access date].\",\"useLimitations\":[\"https://creativecommons.org/share-your-work/cclicenses/\"],\"otherConstraints\":[\"https://www.eomap.com/exchange/pdf/EOMAP_Terms_Conditions_for_User_of_EOMAP_Products.pdf\"]}",
   "type": "Collection",
   "stac_version": "1.0.0",
   "stac_extensions": [
