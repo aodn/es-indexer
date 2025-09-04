@@ -7,12 +7,15 @@ import org.apache.logging.log4j.Logger;
 import org.geotools.geometry.jts.JTS;
 import org.geotools.referencing.CRS;
 import org.locationtech.jts.geom.*;
+import org.locationtech.jts.geom.util.GeometryFixer;
+import org.locationtech.jts.simplify.DouglasPeuckerSimplifier;
 import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
 import org.opengis.referencing.operation.MathTransform;
 import org.opengis.referencing.operation.TransformException;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -35,25 +38,7 @@ public class GeometryBase {
 
     // Must hardcode 4326 as all GeoJson use WGS84 which is EPSG 4326
     protected static GeometryFactory geoJsonFactory = new GeometryFactory(new PrecisionModel(), 4326);
-    /**
-     *
-     * @param boundingBox
-     * @param polygons - The polygon that fit into the bounding box.
-     * @return
-     * @throws FactoryException
-     * @throws TransformException
-     */
-    public static Envelope calculateBoundingBox(Envelope boundingBox, Polygon... polygons) throws FactoryException, TransformException {
 
-        // Iterate through the polygons
-        for (Polygon polygon : polygons) {
-            // Transform the polygon to CRS:84
-            // Update the bounding box with the current polygon's envelope
-            boundingBox.expandToInclude(polygon.getEnvelopeInternal());
-        }
-
-        return boundingBox;
-    }
     /**
      * Ths function is use to extract a list of list of polygon from the XML, the coor can be store in box type of geometry type and hence
      * we need to use a if state to correctly locate the coordinate based on type.
@@ -123,19 +108,36 @@ public class GeometryBase {
                             // TODO: Only process LinearRingType for now
                             // Set the coor system for the factory
                             // CoordinateReferenceSystem system = CRS.decode(mst.getSrsName().trim(), true);
+
+                            // Process exterior ring
+                            AtomicReference<LinearRing> exteriorRing = new AtomicReference<>();
                             if (plt.getExterior() != null && plt.getExterior().getAbstractRing().getValue() instanceof LinearRingType linearRingType) {
                                 safeGet(linearRingType::getPosList)
                                         .ifPresent(pos -> {
                                             // We need to store it so that we can create the multi-array as told by spec
-                                            Polygon polygon = linerPositionToPolygon(pos, null);
-                                            if(polygon != null) {
-                                                logger.debug("LinearRingType added {}", polygon);
-                                                polygons.add(polygon);
+                                            LinearRing r = linerPositionToLinearRing(pos, plt.getSrsName());
+                                            if(r != null) {
+                                                exteriorRing.set(r);
+                                                logger.debug("LinearRingType added {}", r);
                                             }
                                         });
                             }
-                        }
 
+                            // Process interior rings (holes)
+                            AtomicReference<List<LinearRing>> interiorRings = new AtomicReference<>(new ArrayList<>());
+                            if (plt.getInterior() != null) {
+                                for (AbstractRingPropertyType interior : plt.getInterior()) {
+                                    if (interior.getAbstractRing().getValue() instanceof LinearRingType linearRingType) {
+                                        LinearRing interiorRing = linerPositionToLinearRing(linearRingType.getPosList(), plt.getSrsName());
+                                        if(interiorRing != null) {
+                                            interiorRings.get().add(interiorRing);
+                                        }
+                                    }
+                                }
+                            }
+                            Polygon polygon = geoJsonFactory.createPolygon(exteriorRing.get(), null);
+                            polygons.add(polygon);
+                        }
                     }
                 }
             }
@@ -274,13 +276,13 @@ public class GeometryBase {
      * @param pos
      * @return
      */
-    protected static Polygon linerPositionToPolygon(DirectPositionListType pos, String proj) {
+    protected static List<Coordinate> linerPositionToCoordinates(DirectPositionListType pos, String proj) {
+        List<Coordinate> items = new ArrayList<>();
         // Assume 2D if not present
         Double dimension = safeGet(() -> pos.getSrsDimension().doubleValue()).orElse(2.0);
         // TODO: Handle 2D now, can be 3D
         if (dimension == 2.0) {
             List<Double> v = pos.getValue();
-            List<Coordinate> items = new ArrayList<>();
 
             String projection = proj != null ? proj : pos.getSrsName();
             MathTransform transform = null;
@@ -309,13 +311,30 @@ public class GeometryBase {
                     items.add(coordinate);
                 }
             }
-            try {
-                // We need to store it so that we can create the multi-array as told by spec
-                return geoJsonFactory.createPolygon(items.toArray(new Coordinate[0]));
-            }
-            catch(IllegalArgumentException iae) {
-                logger.warn("Invalid LinearRingType", iae);
-            }
+        }
+        return items;
+    }
+
+    protected static Polygon linerPositionToPolygon(DirectPositionListType pos, String proj) {
+        List<Coordinate> items = linerPositionToCoordinates(pos, proj);
+        try {
+            // We need to store it so that we can create the multi-array as told by spec
+            return geoJsonFactory.createPolygon(items.toArray(new Coordinate[0]));
+        }
+        catch(IllegalArgumentException iae) {
+            logger.warn("Invalid Polygon", iae);
+        }
+        return null;
+    }
+
+    protected static LinearRing linerPositionToLinearRing(DirectPositionListType pos, String proj) {
+        List<Coordinate> items = linerPositionToCoordinates(pos, proj);
+        try {
+            // We need to store it so that we can create the multi-array as told by spec
+            return geoJsonFactory.createLinearRing(items.toArray(new Coordinate[0]));
+        }
+        catch(IllegalArgumentException iae) {
+            logger.warn("Invalid LinearRingType", iae);
         }
         return null;
     }

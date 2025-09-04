@@ -193,7 +193,7 @@ public class GeometryUtils {
      * @param factory GeometryFactory to create new LinearRing objects if reordering is needed.
      * @return Polygon with correctly ordered vertices.
      */
-    protected static Geometry ensureCounterClockwise(Polygon polygon, GeometryFactory factory) {
+    protected static Polygon ensureCounterClockwise(Polygon polygon, GeometryFactory factory) {
         // Check and reorder exterior ring if necessary
         LinearRing shell = polygon.getExteriorRing();
         if (orientation(shell.getCoordinates()) == PointOrientation.CLOCKWISE) {
