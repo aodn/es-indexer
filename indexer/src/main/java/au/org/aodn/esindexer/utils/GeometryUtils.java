@@ -8,6 +8,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.geotools.data.shapefile.ShapefileDataStore;
 import org.geotools.data.shapefile.ShapefileDataStoreFactory;
+import org.locationtech.jts.geom.util.GeometryFixer;
+import org.locationtech.jts.operation.relate.RelateOp;
 import org.locationtech.jts.precision.GeometryPrecisionReducer;
 import org.geotools.data.simple.SimpleFeatureCollection;
 import org.geotools.data.simple.SimpleFeatureIterator;
@@ -122,7 +124,7 @@ public class GeometryUtils {
         if(!polygons.isEmpty()) {
             // Convert list<list<polygon>> to list<polygon>
             List<Geometry> reduced = polygons.stream().flatMap(List::stream).toList();
-            List<Geometry> orientedPolygons = reduced.stream()
+            Geometry[] orientedPolygons = reduced.stream()
                     .map(geometry -> {
                         Geometry result = geometry;
                         if (geometry instanceof Polygon polygon) {
@@ -133,12 +135,12 @@ public class GeometryUtils {
                             // Standard: https://www.rfc-editor.org/rfc/rfc7946#section-3.1.6
                             result = GeometryUtils.ensureCounterClockwise(polygon, factory);
                         }
-                        return result.isEmpty() ? null : result;
+                        return result;
                     })
-                    .filter(Objects::nonNull)
-                    .toList();
+                    .filter(r -> !r.isEmpty())
+                    .toArray(Geometry[]::new);
 
-            GeometryCollection collection = new GeometryCollection(orientedPolygons.toArray(new Geometry[0]), factory);
+            GeometryCollection collection = new GeometryCollection(orientedPolygons, factory);
             try (StringWriter writer = new StringWriter()) {
                 geometryJson.write(collection, writer);
 
@@ -191,7 +193,7 @@ public class GeometryUtils {
      * @param factory GeometryFactory to create new LinearRing objects if reordering is needed.
      * @return Polygon with correctly ordered vertices.
      */
-    protected static Polygon ensureCounterClockwise(Polygon polygon, GeometryFactory factory) {
+    protected static Geometry ensureCounterClockwise(Polygon polygon, GeometryFactory factory) {
         // Check and reorder exterior ring if necessary
         LinearRing shell = polygon.getExteriorRing();
         if (orientation(shell.getCoordinates()) == PointOrientation.CLOCKWISE) {
@@ -342,7 +344,7 @@ public class GeometryUtils {
      */
     public static Map<?, ?> createGeometryNoLandFrom(List<List<AbstractEXGeographicExtentType>> rawInput, Integer gridSize) {
         List<List<Geometry>> polygon = createGeometryWithoutLand(rawInput);
-        return (polygon != null && !polygon.isEmpty()) ? createGeoShapeJson(polygon) : null;
+        return !polygon.isEmpty() ? createGeoShapeJson(polygon) : null;
     }
     /**
      * Create the spatial extents area given the XML info, it will not remove land area for speed reason. Otherwise,
@@ -359,6 +361,6 @@ public class GeometryUtils {
         // List<List<Geometry>> polygon = createGeometryWithoutLand(rawInput);
 
         List<List<Geometry>> polygon = GeometryBase.findPolygonsFrom(GeometryBase.COORDINATE_SYSTEM_CRS84, rawInput);
-        return (polygon != null && !polygon.isEmpty()) ? createGeoShapeJson(polygon) : null;
+        return !polygon.isEmpty() ? createGeoShapeJson(polygon) : null;
     }
 }
