@@ -1,7 +1,7 @@
 package au.org.aodn.cloudoptimized.model.geojson;
 
 
-import au.org.aodn.cloudoptimized.enums.GeoJsonType;
+import au.org.aodn.cloudoptimized.enums.GeoJsonTypes;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,9 +14,9 @@ import java.util.Objects;
 @Getter
 public class FeatureCollectionGeoJson  {
 
-    private final String type = GeoJsonType.FEATURE_COLLECTION.getValue();
+    private final String type = GeoJsonTypes.FEATURE_COLLECTION.getValue();
     private List<FeatureGeoJson> features;
-    private Map<String, Object> properties;
+    private Map<String, Object> properties = new HashMap<>();
 
     public void addProperty(String key, Object value) {
         if (Objects.isNull(properties)) {
