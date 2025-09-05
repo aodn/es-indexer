@@ -7,15 +7,12 @@ import org.apache.logging.log4j.Logger;
 import org.geotools.geometry.jts.JTS;
 import org.geotools.referencing.CRS;
 import org.locationtech.jts.geom.*;
-import org.locationtech.jts.geom.util.GeometryFixer;
-import org.locationtech.jts.simplify.DouglasPeuckerSimplifier;
 import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
 import org.opengis.referencing.operation.MathTransform;
 import org.opengis.referencing.operation.TransformException;
 
 import java.util.*;
-import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -40,15 +37,14 @@ public class GeometryBase {
     protected static GeometryFactory geoJsonFactory = new GeometryFactory(new PrecisionModel(), 4326);
 
     /**
-     * Ths function is use to extract a list of list of polygon from the XML, the coor can be store in box type of geometry type and hence
+     * Ths function is use to extract a list of list of polygon from the XML, the coordinate can be store in box type of geometry type and hence
      * we need to use a if state to correctly locate the coordinate based on type.
-     *
      * The EXBoundingPolygonType should return a box while the EXGeographicBoundingBoxType will be a polygon, in either case
      * this can fit into a polygon
      *
-     * @param rawCRS
-     * @param rawInput - A list of list of AbstractEXGeographicExtentType, AbstractEXGeographicExtentType is a base type, and can be a bbox or geometry
-     * @return
+     * @param rawCRS - The coordination reference.
+     * @param rawInput - A list of AbstractEXGeographicExtentType, AbstractEXGeographicExtentType is a base type, and can be a bbox or geometry
+     * @return - Geometry of the polygon
      */
     public static List<List<Geometry>> findPolygonsFrom(final String rawCRS, List<List<AbstractEXGeographicExtentType>> rawInput) {
         return rawInput
@@ -110,33 +106,35 @@ public class GeometryBase {
                             // CoordinateReferenceSystem system = CRS.decode(mst.getSrsName().trim(), true);
 
                             // Process exterior ring
-                            AtomicReference<LinearRing> exteriorRing = new AtomicReference<>();
-                            if (plt.getExterior() != null && plt.getExterior().getAbstractRing().getValue() instanceof LinearRingType linearRingType) {
-                                safeGet(linearRingType::getPosList)
-                                        .ifPresent(pos -> {
+                            if (plt.getExterior() != null && plt.getExterior().getAbstractRing().getValue() instanceof LinearRingType exLinearRingType) {
+                                Optional<LinearRing> exteriorRing = safeGet(exLinearRingType::getPosList)
+                                        .map(pos -> {
                                             // We need to store it so that we can create the multi-array as told by spec
                                             LinearRing r = linerPositionToLinearRing(pos, plt.getSrsName());
-                                            if(r != null) {
-                                                exteriorRing.set(r);
-                                                logger.debug("LinearRingType added {}", r);
-                                            }
+                                            logger.debug("LinearRingType added {}", r);
+                                            return r;
                                         });
-                            }
 
-                            // Process interior rings (holes)
-                            AtomicReference<List<LinearRing>> interiorRings = new AtomicReference<>(new ArrayList<>());
-                            if (plt.getInterior() != null) {
-                                for (AbstractRingPropertyType interior : plt.getInterior()) {
-                                    if (interior.getAbstractRing().getValue() instanceof LinearRingType linearRingType) {
-                                        LinearRing interiorRing = linerPositionToLinearRing(linearRingType.getPosList(), plt.getSrsName());
-                                        if(interiorRing != null) {
-                                            interiorRings.get().add(interiorRing);
+                                // Process interior rings (holes)
+                                exteriorRing.ifPresent(ring -> {
+                                    List<LinearRing> interiorRings = new ArrayList<>();
+                                    if (plt.getInterior() != null) {
+                                        for (AbstractRingPropertyType interior : plt.getInterior()) {
+                                            if (interior.getAbstractRing().getValue() instanceof LinearRingType inLinearRingType) {
+                                                LinearRing interiorRing = linerPositionToLinearRing(inLinearRingType.getPosList(), plt.getSrsName());
+                                                // In some case, the interior ring value is set incorrectly where it is outside the
+                                                // exterior ring, this will not work with geojson in Elastic search because of the right hand
+                                                // rule that exterior ring need to be anti-clockwise and interior ring needs to be clockwise
+                                                // For those interior ring outside exterior ring, it should be another polygon
+                                                if(interiorRing != null && interiorRing.within(ring)) {
+                                                    interiorRings.add(interiorRing);
+                                                }
+                                            }
                                         }
                                     }
-                                }
+                                    polygons.add(geoJsonFactory.createPolygon(ring, interiorRings.toArray(new LinearRing[0])));
+                                });
                             }
-                            Polygon polygon = geoJsonFactory.createPolygon(exteriorRing.get(), null);
-                            polygons.add(polygon);
                         }
                     }
                 }
@@ -163,12 +161,11 @@ public class GeometryBase {
      *     <gco:Decimal>-19.10415</gco:Decimal>
      *   </gex:northBoundLatitude>
      * </gex:EX_GeographicBoundingBox>
-     *
      * with North, East, South, West only, but people may not necessary create a box are but can set coordinate to
      * Points or Line, so our return type needs to be Geometry
      *
-     * @param rawCRS
-     * @param rawInput
+     * @param rawCRS - The coordinate reference
+     * @param rawInput - The raw parsed XML input of the section of AbstractEXGeographicExtentType
      * @return - List of Geometry, where it can be Point, Line or Box aka (Polygon)
      */
     protected static List<Geometry> findPolygonsFromEXGeographicBoundingBoxType(String rawCRS, List<AbstractEXGeographicExtentType> rawInput) {
@@ -229,7 +226,7 @@ public class GeometryBase {
                 return Optional.of(geoJsonFactory.createPolygon(coordinates));
             }
             else {
-                logger.warn("Unknown shape, not point or polygon {}", coordinates);
+                logger.warn("Unknown shape, not point or polygon {}", (Object) coordinates);
                 return Optional.empty();
             }
         }
@@ -272,11 +269,14 @@ public class GeometryBase {
         return polygon.getDimension() == 2;
     }
     /**
-     *
-     * @param pos
-     * @return
+     * Convert the linearPosition attribute to list of coordination for further processing, use internally
+     * @param pos - The object that holds the section like this
+     *            <gml:posList srsDimension="2">
+     *                -60.51553344691095 -45.68359375005144 -60.60853564740216 -46.035816073053326 -60.68042373666604 -45.13080215479556 -60.54016101332009 -45.45302212217308 -60.51553344691095 -45.68359375005144
+     *            </gml:posList>
+     * @return - The list of coordinate, for example, [-60.51553344691095 -45.68359375005144], [-45.68359375005144 -60.60853564740216], [-60.60853564740216 -46.035816073053326]...
      */
-    protected static List<Coordinate> linerPositionToCoordinates(DirectPositionListType pos, String proj) {
+    protected static List<Coordinate> linearPositionToCoordinates(DirectPositionListType pos, String proj) {
         List<Coordinate> items = new ArrayList<>();
         // Assume 2D if not present
         Double dimension = safeGet(() -> pos.getSrsDimension().doubleValue()).orElse(2.0);
@@ -316,7 +316,7 @@ public class GeometryBase {
     }
 
     protected static Polygon linerPositionToPolygon(DirectPositionListType pos, String proj) {
-        List<Coordinate> items = linerPositionToCoordinates(pos, proj);
+        List<Coordinate> items = linearPositionToCoordinates(pos, proj);
         try {
             // We need to store it so that we can create the multi-array as told by spec
             return geoJsonFactory.createPolygon(items.toArray(new Coordinate[0]));
@@ -328,7 +328,7 @@ public class GeometryBase {
     }
 
     protected static LinearRing linerPositionToLinearRing(DirectPositionListType pos, String proj) {
-        List<Coordinate> items = linerPositionToCoordinates(pos, proj);
+        List<Coordinate> items = linearPositionToCoordinates(pos, proj);
         try {
             // We need to store it so that we can create the multi-array as told by spec
             return geoJsonFactory.createLinearRing(items.toArray(new Coordinate[0]));
