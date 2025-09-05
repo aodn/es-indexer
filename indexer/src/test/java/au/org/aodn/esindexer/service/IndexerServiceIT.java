@@ -120,11 +120,7 @@ public class IndexerServiceIT extends BaseTestClass {
 
             indexerService.indexAllMetadataRecordsFromGeoNetwork(null, true, null);
 
-            // The sample1 geometry have error [1:9695] failed to parse field [summaries.proj:geometry] of type [geo_shape]
-            // ErrorCause: {"type":"illegal_argument_exception","reason":"Polygon self-intersection at lat=57.0 lon=-66.0"}
-            //
-            // So it will not insert correctly and result in 1 doc only
-            Assertions.assertEquals(1L, elasticSearchIndexService.getDocumentsCount(INDEX_NAME), "Doc count correct");
+            Assertions.assertEquals(2L, elasticSearchIndexService.getDocumentsCount(INDEX_NAME), "Doc count correct");
         }
         finally {
             deleteRecord(uuid2,uuid1);
