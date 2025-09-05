@@ -6,4 +6,4 @@ COPY ./indexer/target/indexer-*.jar /app/app.jar
 ENV PROFILE='default'
 EXPOSE 8080
 
-ENTRYPOINT exec java ${JAVA_OPTS} -jar app.jar
+ENTRYPOINT exec java ${JAVA_OPTS} -jar app.jar ${APP_ARGS}
