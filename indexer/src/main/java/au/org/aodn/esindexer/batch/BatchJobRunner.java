@@ -1,6 +1,7 @@
 package au.org.aodn.esindexer.batch;
 
 import au.org.aodn.esindexer.controller.IndexerController;
+import au.org.aodn.esindexer.service.IndexCloudOptimizedService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ public class BatchJobRunner {
     @Autowired
     private IndexerController indexerController;
 
+    @Autowired
+    private IndexCloudOptimizedService indexCloudOptimizedService;
+
     private static final String INDEX_ALL_METADATA = "indexAllMetadata";
     private static final String INDEX_ALL_METADATA_FROM_UUID = "indexAllMetadataFromUuid";
     private static final String INDEX_ONE_METADATA = "indexMetadata";
@@ -28,16 +32,23 @@ public class BatchJobRunner {
             case INDEX_ALL_METADATA:
                 indexAllMetadata();
                 break;
+
             case INDEX_ALL_METADATA_FROM_UUID:
                 throw new NotImplementedException("IndexAllMetadataFromUuid not yet implemented");
+
             case INDEX_ONE_METADATA:
                 throw new NotImplementedException("IndexMetadata not yet implemented");
+
             case INDEX_ALL_CLOUD_OPTIMISED_DATASET:
-                throw new NotImplementedException("IndexAllCloudOptimisedDataset not yet implemented");
+                indexAllCloudOptimisedDataset("ffe8f19c-de4a-4362-89be-7605b2dd6b8c");
+                break;
+
             case INDEX_ALL_CLOUD_OPTIMISED_DATASET_FROM_UUID:
                 throw new NotImplementedException("IndexAllCODataFromUuid not yet implemented");
+
             case INDEX_ONE_CLOUD_OPTIMISED_DATASET:
                 throw new NotImplementedException("IndexCloudOptimisedDataset not yet implemented");
+
             default:
                 throw new IllegalArgumentException("Unknown job name: " + jobName);
         }
@@ -54,10 +65,10 @@ public class BatchJobRunner {
         }
     }
 
-    private void indexAllCloudOptimisedDataset() {
+    private void indexAllCloudOptimisedDataset(String beginWithUuid) {
         log.info("Indexing all cloud optimised dataset");
         try{
-            indexerController.indexAllCOData(null);
+            indexCloudOptimizedService.indexAllCloudOptimizedData(beginWithUuid, null);
         } catch (Exception e) {
             log.error("Error indexing all cloud optimised dataset", e);
         }
