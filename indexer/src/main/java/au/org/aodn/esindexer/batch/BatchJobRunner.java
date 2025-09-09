@@ -2,6 +2,8 @@ package au.org.aodn.esindexer.batch;
 
 import au.org.aodn.esindexer.controller.IndexerController;
 import au.org.aodn.esindexer.service.IndexCloudOptimizedService;
+import au.org.aodn.esindexer.service.IndexService;
+import au.org.aodn.esindexer.service.IndexerMetadataService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,7 @@ import org.springframework.stereotype.Component;
 public class BatchJobRunner {
 
     @Autowired
-    private IndexerController indexerController;
+    private IndexerMetadataService indexerMetadataService;
 
     @Autowired
     private IndexCloudOptimizedService indexCloudOptimizedService;
@@ -26,25 +28,38 @@ public class BatchJobRunner {
     private static final String INDEX_ALL_CLOUD_OPTIMISED_DATASET_FROM_UUID = "indexAllCODataFromUuid";
     private static final String INDEX_ONE_CLOUD_OPTIMISED_DATASET = "indexCODataset";
 
-    public void run(String jobName) throws Exception {
+    public void run(String jobName, String jobParam) throws Exception {
         log.info("Starting batch job: {}", jobName);
         switch (jobName) {
             case INDEX_ALL_METADATA:
-                indexAllMetadata();
+                if (jobParam != null) {
+                    throw new IllegalArgumentException("Job parameter not required for job: " + jobName);
+                }
+                indexAllMetadata(null);
                 break;
 
             case INDEX_ALL_METADATA_FROM_UUID:
-                throw new NotImplementedException("IndexAllMetadataFromUuid not yet implemented");
+                if (jobParam == null) {
+                    throw new IllegalArgumentException("Job parameter (beginWithUuid) is required for job: " + jobName);
+                }
+                indexAllMetadata(jobParam);
 
             case INDEX_ONE_METADATA:
                 throw new NotImplementedException("IndexMetadata not yet implemented");
 
             case INDEX_ALL_CLOUD_OPTIMISED_DATASET:
-                indexAllCloudOptimisedDataset("ffe8f19c-de4a-4362-89be-7605b2dd6b8c");
+                if (jobParam != null) {
+                    throw new IllegalArgumentException("Job parameter not required for job: " + jobName);
+                }
+                indexAllCloudOptimisedDataset(null);
                 break;
 
             case INDEX_ALL_CLOUD_OPTIMISED_DATASET_FROM_UUID:
-                throw new NotImplementedException("IndexAllCODataFromUuid not yet implemented");
+                if (jobParam == null) {
+                    throw new IllegalArgumentException("Job parameter (beginWithUuid) is required for job: " + jobName);
+                }
+                indexAllCloudOptimisedDataset(jobParam);
+                break;
 
             case INDEX_ONE_CLOUD_OPTIMISED_DATASET:
                 throw new NotImplementedException("IndexCloudOptimisedDataset not yet implemented");
@@ -56,10 +71,11 @@ public class BatchJobRunner {
     }
 
 
-    private void indexAllMetadata() {
+    private void indexAllMetadata(String beginWithUuid) {
         log.info("Indexing all metadata");
         try{
-            indexerController.indexAllMetadataRecords(true, "toxicity_hm_sw");
+            var loggingCallback = new LoggingCallback();
+            indexerMetadataService.indexAllMetadataRecordsFromGeoNetwork(beginWithUuid, true, loggingCallback);
         } catch (Exception e) {
             log.error("Error indexing all metadata", e);
         }
@@ -68,7 +84,8 @@ public class BatchJobRunner {
     private void indexAllCloudOptimisedDataset(String beginWithUuid) {
         log.info("Indexing all cloud optimised dataset");
         try{
-            indexCloudOptimizedService.indexAllCloudOptimizedData(beginWithUuid, null);
+            var loggingCallback = new LoggingCallback();
+            indexCloudOptimizedService.indexAllCloudOptimizedData(beginWithUuid, loggingCallback);
         } catch (Exception e) {
             log.error("Error indexing all cloud optimised dataset", e);
         }
