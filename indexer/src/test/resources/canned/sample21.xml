@@ -1,0 +1,973 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdb:MD_Metadata xmlns:mdb="http://standards.iso.org/iso/19115/-3/mdb/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cat="http://standards.iso.org/iso/19115/-3/cat/1.0" xmlns:gfc="http://standards.iso.org/iso/19110/gfc/1.1" xmlns:cit="http://standards.iso.org/iso/19115/-3/cit/2.0" xmlns:gcx="http://standards.iso.org/iso/19115/-3/gcx/1.0" xmlns:gex="http://standards.iso.org/iso/19115/-3/gex/1.0" xmlns:lan="http://standards.iso.org/iso/19115/-3/lan/1.0" xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.1" xmlns:mas="http://standards.iso.org/iso/19115/-3/mas/1.0" xmlns:mcc="http://standards.iso.org/iso/19115/-3/mcc/1.0" xmlns:mco="http://standards.iso.org/iso/19115/-3/mco/1.0" xmlns:mda="http://standards.iso.org/iso/19115/-3/mda/1.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/2.0" xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/2.0" xmlns:mex="http://standards.iso.org/iso/19115/-3/mex/1.0" xmlns:mmi="http://standards.iso.org/iso/19115/-3/mmi/1.0" xmlns:mpc="http://standards.iso.org/iso/19115/-3/mpc/1.0" xmlns:mrc="http://standards.iso.org/iso/19115/-3/mrc/2.0" xmlns:mrd="http://standards.iso.org/iso/19115/-3/mrd/1.0" xmlns:mri="http://standards.iso.org/iso/19115/-3/mri/1.0" xmlns:mrl="http://standards.iso.org/iso/19115/-3/mrl/2.0" xmlns:mrs="http://standards.iso.org/iso/19115/-3/mrs/1.0" xmlns:msr="http://standards.iso.org/iso/19115/-3/msr/2.0" xmlns:mdq="http://standards.iso.org/iso/19157/-2/mdq/1.0" xmlns:mac="http://standards.iso.org/iso/19115/-3/mac/2.0" xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://standards.iso.org/iso/19115/-3/cat/1.0 http://standards.iso.org/iso/19115/-3/cat/1.0/cat.xsd http://standards.iso.org/iso/19115/-3/cit/2.0 http://standards.iso.org/iso/19115/-3/cit/2.0/cit.xsd http://standards.iso.org/iso/19115/-3/gcx/1.0 http://standards.iso.org/iso/19115/-3/gcx/1.0/gcx.xsd http://standards.iso.org/iso/19115/-3/gex/1.0 http://standards.iso.org/iso/19115/-3/gex/1.0/gex.xsd http://standards.iso.org/iso/19115/-3/lan/1.0 http://standards.iso.org/iso/19115/-3/lan/1.0/lan.xsd http://standards.iso.org/iso/19115/-3/srv/2.0 http://standards.iso.org/iso/19115/-3/srv/2.0/srv.xsd http://standards.iso.org/iso/19115/-3/mas/1.0 http://standards.iso.org/iso/19115/-3/mas/1.0/mas.xsd http://standards.iso.org/iso/19115/-3/mcc/1.0 http://standards.iso.org/iso/19115/-3/mcc/1.0/mcc.xsd http://standards.iso.org/iso/19115/-3/mco/1.0 http://standards.iso.org/iso/19115/-3/mco/1.0/mco.xsd http://standards.iso.org/iso/19115/-3/mda/2.0 http://standards.iso.org/iso/19115/-3/mda/2.0/mda.xsd http://standards.iso.org/iso/19115/-3/mdb/2.0 http://standards.iso.org/iso/19115/-3/mdb/2.0/mdb.xsd http://standards.iso.org/iso/19115/-3/mds/2.0 http://standards.iso.org/iso/19115/-3/mds/2.0/mds.xsd http://standards.iso.org/iso/19115/-3/mdt/2.0 http://standards.iso.org/iso/19115/-3/mdt/2.0/mdt.xsd http://standards.iso.org/iso/19115/-3/mex/1.0 http://standards.iso.org/iso/19115/-3/mex/1.0/mex.xsd http://standards.iso.org/iso/19115/-3/mmi/1.0 http://standards.iso.org/iso/19115/-3/mmi/1.0/mmi.xsd http://standards.iso.org/iso/19115/-3/mpc/1.0 http://standards.iso.org/iso/19115/-3/mpc/1.0/mpc.xsd http://standards.iso.org/iso/19115/-3/mrc/2.0 http://standards.iso.org/iso/19115/-3/mrc/2.0/mrc.xsd http://standards.iso.org/iso/19115/-3/mrd/1.0 http://standards.iso.org/iso/19115/-3/mrd/1.0/mrd.xsd http://standards.iso.org/iso/19115/-3/mri/1.0 http://standards.iso.org/iso/19115/-3/mri/1.0/mri.xsd http://standards.iso.org/iso/19115/-3/mrl/2.0 http://standards.iso.org/iso/19115/-3/mrl/2.0/mrl.xsd http://standards.iso.org/iso/19115/-3/mrs/1.0 http://standards.iso.org/iso/19115/-3/mrs/1.0/mrs.xsd http://standards.iso.org/iso/19115/-3/msr/2.0 http://standards.iso.org/iso/19115/-3/msr/2.0/msr.xsd http://standards.iso.org/iso/19157/-2/mdq/1.0 http://standards.iso.org/iso/19157/-2/mdq/1.0/mdq.xsd http://standards.iso.org/iso/19115/-3/mac/2.0 http://standards.iso.org/iso/19115/-3/mac/2.0/mac.xsd http://standards.iso.org/iso/19115/-3/gco/1.0 http://standards.iso.org/iso/19115/-3/gco/1.0/gco.xsd http://standards.iso.org/iso/19115/-3/gmw/1.0 http://standards.iso.org/iso/19115/-3/gmw/1.0/gmw.xsd http://www.opengis.net/gml/3.2 http://schemas.opengis.net/gml/3.2.1/gml.xsd http://www.w3.org/1999/xlink http://www.w3.org/1999/xlink.xsd">
+    <mdb:metadataIdentifier>
+        <mcc:MD_Identifier>
+            <mcc:code>
+                <gco:CharacterString>dec073c6-0bdc-44b0-83da-48bc1042a93e</gco:CharacterString>
+            </mcc:code>
+            <mcc:codeSpace>
+                <gco:CharacterString>urn:uuid</gco:CharacterString>
+            </mcc:codeSpace>
+        </mcc:MD_Identifier>
+    </mdb:metadataIdentifier>
+    <mdb:defaultLocale xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0" xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0">
+        <lan:PT_Locale id="EN">
+            <lan:language>
+                <lan:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="eng" />
+            </lan:language>
+            <lan:characterEncoding>
+                <lan:MD_CharacterSetCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_CharacterSetCode" codeListValue="utf8" />
+            </lan:characterEncoding>
+        </lan:PT_Locale>
+    </mdb:defaultLocale>
+    <mdb:parentMetadata uuidref="4739e4b0-4dba-4ec5-b658-02c09f27ab9a" />
+    <mdb:metadataScope xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0" xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0">
+        <mdb:MD_MetadataScope>
+            <mdb:resourceScope>
+                <mcc:MD_ScopeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ScopeCode" codeListValue="dataset" />
+            </mdb:resourceScope>
+            <mdb:name>
+                <gco:CharacterString>IMAS Dataset level record</gco:CharacterString>
+            </mdb:name>
+        </mdb:MD_MetadataScope>
+    </mdb:metadataScope>
+    <mdb:contact>
+        <cit:CI_Responsibility>
+            <cit:role>
+                <cit:CI_RoleCode codeListValue="distributor" codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" />
+            </cit:role>
+            <cit:party>
+                <cit:CI_Organisation>
+                    <cit:name>
+                        <gco:CharacterString>Institute for Marine and Antarctic Studies</gco:CharacterString>
+                    </cit:name>
+                    <cit:contactInfo>
+                        <cit:CI_Contact>
+                            <cit:onlineResource>
+                                <cit:CI_OnlineResource>
+                                    <cit:linkage>
+                                        <gco:CharacterString>https://imas.utas.edu.au/</gco:CharacterString>
+                                    </cit:linkage>
+                                    <cit:protocol>
+                                        <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
+                                    </cit:protocol>
+                                    <cit:name>
+                                        <gco:CharacterString>IMAS website</gco:CharacterString>
+                                    </cit:name>
+                                    <cit:description gco:nilReason="missing">
+                                        <gco:CharacterString />
+                                    </cit:description>
+                                    <cit:function>
+                                        <cit:CI_OnLineFunctionCode codeListValue="" codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_OnLineFunctionCode" />
+                                    </cit:function>
+                                </cit:CI_OnlineResource>
+                            </cit:onlineResource>
+                        </cit:CI_Contact>
+                    </cit:contactInfo>
+                    <cit:individual>
+                        <cit:CI_Individual>
+                            <cit:name gco:nilReason="missing">
+                                <gco:CharacterString />
+                            </cit:name>
+                            <cit:contactInfo>
+                                <cit:CI_Contact>
+                                    <cit:address>
+                                        <cit:CI_Address>
+                                            <cit:electronicMailAddress>
+                                                <gco:CharacterString>IMAS.DataManager@utas.edu.au</gco:CharacterString>
+                                            </cit:electronicMailAddress>
+                                        </cit:CI_Address>
+                                    </cit:address>
+                                </cit:CI_Contact>
+                            </cit:contactInfo>
+                            <cit:positionName>
+                                <gco:CharacterString>IMAS Data Manager</gco:CharacterString>
+                            </cit:positionName>
+                        </cit:CI_Individual>
+                    </cit:individual>
+                </cit:CI_Organisation>
+            </cit:party>
+        </cit:CI_Responsibility>
+    </mdb:contact>
+    <mdb:dateInfo xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0" xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0">
+        <!-- ID2 -->
+        <!-- Date when metadata record was *created*. This is automatically generated by the tool when the user first creates their record (note that date of *creation* and date of *revision* will be different, if a user has not submitted a record on the same day as creation). This is user-editable, if they choose.-->
+        <cit:CI_Date>
+            <cit:date>
+                <gco:DateTime>2025-01-07T00:00:00</gco:DateTime>
+            </cit:date>
+            <cit:dateType>
+                <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode" codeListValue="creation" />
+            </cit:dateType>
+        </cit:CI_Date>
+    </mdb:dateInfo>
+    <mdb:dateInfo>
+        <cit:CI_Date>
+            <cit:date>
+                <gco:DateTime>2025-05-09T11:29:40</gco:DateTime>
+            </cit:date>
+            <cit:dateType>
+                <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode" codeListValue="revision" />
+            </cit:dateType>
+        </cit:CI_Date>
+    </mdb:dateInfo>
+    <mdb:metadataStandard xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0" xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0">
+        <!-- Details of the metadata standard applied in this XML file. These details are set in the XML. -->
+        <cit:CI_Citation>
+            <cit:title>
+                <gco:CharacterString>ISO 19115-3:2018</gco:CharacterString>
+            </cit:title>
+        </cit:CI_Citation>
+    </mdb:metadataStandard>
+    <mdb:metadataLinkage xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0" xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0">
+        <!-- Details for Point-of-Truth URLs. The catalogue URL is extracted from the "site contents" entry, and the UUID is generated by this tool. -->
+        <cit:CI_OnlineResource>
+            <cit:linkage>
+                <gco:CharacterString>https://metadata.imas.utas.edu.au/geonetwork/srv/eng/catalog.search#/metadata/dec073c6-0bdc-44b0-83da-48bc1042a93e</gco:CharacterString>
+            </cit:linkage>
+            <cit:protocol>
+                <gco:CharacterString>WWW:LINK-1.0-http--metadata-URL</gco:CharacterString>
+            </cit:protocol>
+            <cit:description>
+                <gco:CharacterString>Point of truth URL of this metadata record</gco:CharacterString>
+            </cit:description>
+        </cit:CI_OnlineResource>
+    </mdb:metadataLinkage>
+    <mdb:identificationInfo xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0" xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0">
+        <mri:MD_DataIdentification>
+            <mri:citation>
+                <cit:CI_Citation>
+                    <cit:title>
+                        <gco:CharacterString>Satellite-Derived Bathymetry and Seafloor Habitat Classification Mapping of Cocos (Keeling) Islands Marine Park</gco:CharacterString>
+                    </cit:title>
+                    <cit:date>
+                        <!-- Date when a metadata record was *published*. This is set to today's date by default (ie will match *revision* date above). This is not user-editable. Note that Geonetwork admin may want to alter this date when actually *publishing* the record to Geonetwork (if catalogue is not set to auto-update this upon metadata insert). -->
+                        <cit:CI_Date>
+                            <cit:date>
+                                <gco:DateTime>2025-01-10T00:00:00</gco:DateTime>
+                            </cit:date>
+                            <cit:dateType>
+                                <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                            </cit:dateType>
+                        </cit:CI_Date>
+                    </cit:date>
+                    <cit:citedResponsibleParty>
+                        <!--  HARD-CODED CONTENT - TO EDIT: Admin/publisher my want to hard-code themselves as 'resource provider' here (can be removed, if not needed) -->
+                        <cit:CI_Responsibility>
+                            <cit:role>
+                                <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="resourceProvider" />
+                            </cit:role>
+                            <cit:party>
+                                <cit:CI_Organisation>
+                                    <cit:name>
+                                        <gco:CharacterString>Institute for Marine and Antarctic Studies</gco:CharacterString>
+                                    </cit:name>
+                                    <cit:contactInfo>
+                                        <cit:CI_Contact>
+                                            <cit:address>
+                                                <cit:CI_Address>
+                                                    <cit:deliveryPoint>
+                                                        <gco:CharacterString>Private Bag 129</gco:CharacterString>
+                                                    </cit:deliveryPoint>
+                                                    <cit:city>
+                                                        <gco:CharacterString>Hobart</gco:CharacterString>
+                                                    </cit:city>
+                                                    <cit:administrativeArea>
+                                                        <gco:CharacterString>Tasmania</gco:CharacterString>
+                                                    </cit:administrativeArea>
+                                                    <cit:postalCode>
+                                                        <gco:CharacterString>7001</gco:CharacterString>
+                                                    </cit:postalCode>
+                                                    <cit:country>
+                                                        <gco:CharacterString>Australia</gco:CharacterString>
+                                                    </cit:country>
+                                                    <cit:electronicMailAddress>
+                                                        <gco:CharacterString>IMAS.DataManager@utas.edu.au</gco:CharacterString>
+                                                    </cit:electronicMailAddress>
+                                                </cit:CI_Address>
+                                            </cit:address>
+                                        </cit:CI_Contact>
+                                    </cit:contactInfo>
+                                </cit:CI_Organisation>
+                            </cit:party>
+                        </cit:CI_Responsibility>
+                    </cit:citedResponsibleParty>
+                    <cit:citedResponsibleParty>
+                        <!--  At least one citedResponsibleParty must be entered by the user -->
+                        <cit:CI_Responsibility>
+                            <cit:role>
+                                <!-- Who9 -->
+                                <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="processor" />
+                            </cit:role>
+                            <cit:party>
+                                <cit:CI_Organisation>
+                                    <cit:name>
+                                        <gco:CharacterString>EOMAP Australia Pty Ltd</gco:CharacterString>
+                                    </cit:name>
+                                    <cit:individual>
+                                        <cit:CI_Individual>
+                                            <cit:name>
+                                                <gco:CharacterString>Twiggs, Emily</gco:CharacterString>
+                                            </cit:name>
+                                            <cit:contactInfo>
+                                                <cit:CI_Contact>
+                                                    <cit:address>
+                                                        <cit:CI_Address>
+                                                            <cit:deliveryPoint>
+                                                                <gco:CharacterString>The Wharf, 123 Parkyn Parade</gco:CharacterString>
+                                                            </cit:deliveryPoint>
+                                                            <cit:city>
+                                                                <gco:CharacterString>Mooloolaba</gco:CharacterString>
+                                                            </cit:city>
+                                                            <cit:administrativeArea>
+                                                                <gco:CharacterString>Queensland</gco:CharacterString>
+                                                            </cit:administrativeArea>
+                                                            <cit:postalCode>
+                                                                <gco:CharacterString>4557</gco:CharacterString>
+                                                            </cit:postalCode>
+                                                            <cit:country>
+                                                                <gco:CharacterString>Australia</gco:CharacterString>
+                                                            </cit:country>
+                                                            <cit:electronicMailAddress>
+                                                                <gco:CharacterString>twiggs@eomap.com</gco:CharacterString>
+                                                            </cit:electronicMailAddress>
+                                                        </cit:CI_Address>
+                                                    </cit:address>
+                                                </cit:CI_Contact>
+                                            </cit:contactInfo>
+                                        </cit:CI_Individual>
+                                    </cit:individual>
+                                </cit:CI_Organisation>
+                            </cit:party>
+                        </cit:CI_Responsibility>
+                    </cit:citedResponsibleParty>
+                </cit:CI_Citation>
+            </mri:citation>
+            <mri:abstract>
+                <gco:CharacterString>Parks Australia - Indian Oceans Territory (IOT) Grants Project: Satellite-Derived Bathymetry and Seafloor Habitat Classification Mapping of Cocos (Keeling) Island Marine Park
+
+                    This project mapped Satellite-derived Bathymetry (SDB) and seafloor habitats at 2m horizontal spatial resolution, for the shallow waters (~0-25 m) of the Cocos (Keeling) Islands Marine Park. SDB data was processed using EOMAP's proprietary software and algorithm package Watcor-X, which generates SDB using multipspectral satellite data. The SDB is based on the physics-based inversion method of the radiative transfer equation which models the pathway of light and its interaction through different media (e.g. atmosphere and water column). The thematic classification of the seabed was based on multispectral satellite image analytics. Satellite imagery was pre-processed by applying a set of image correction procedures to reduce environmental noise, resulting in a standardised reflectance surface of the subsurface and seafloor. The information on seafloor reflectance at different wavelengths was used to run an object-based classification procedure which groups objects of similar spectral characteristics, shape and texture into different classes of major seafloor habitat type.
+
+                    These critical geospatial data layers provide the essential environmental baseline information for the long-term monitoring and management of the IOT Marine Parks. Having access to digital, georeferenced, high-resolution, satellite-derived maps of bathymetry and benthic habitats of shallow water areas, is of fundamental use in the areas of navigation and safety-at-sea, ecological research, environmental modelling, management and conservation, and monitoring the impacts from climate change.</gco:CharacterString>
+            </mri:abstract>
+            <mri:credit>
+                <gco:CharacterString>Director of National Parks (Parks Australia), Cocos (Keeling) Islands SDB/Seafloor Classification © EOMAP, 2023-24</gco:CharacterString>
+            </mri:credit>
+            <mri:status>
+                <!-- ID4 -->
+                <!--  The user must select from a subset of ISO status codes. -->
+                <mcc:MD_ProgressCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ProgressCode" codeListValue="completed" />
+            </mri:status>
+            <mri:pointOfContact>
+                <!--  At least one pointOfContact must be entered by the user. -->
+                <cit:CI_Responsibility>
+                    <cit:role>
+                        <!-- Who1 -->
+                        <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="pointOfContact" />
+                    </cit:role>
+                    <cit:party>
+                        <cit:CI_Organisation>
+                            <cit:name>
+                                <gco:CharacterString>EOMAP Australia Pty Ltd</gco:CharacterString>
+                            </cit:name>
+                            <cit:individual>
+                                <cit:CI_Individual>
+                                    <cit:name>
+                                        <gco:CharacterString>Twiggs, Emily</gco:CharacterString>
+                                    </cit:name>
+                                    <cit:contactInfo>
+                                        <cit:CI_Contact>
+                                            <cit:address>
+                                                <cit:CI_Address>
+                                                    <cit:electronicMailAddress>
+                                                        <gco:CharacterString>twiggs@eomap.com</gco:CharacterString>
+                                                    </cit:electronicMailAddress>
+                                                </cit:CI_Address>
+                                            </cit:address>
+                                        </cit:CI_Contact>
+                                    </cit:contactInfo>
+                                </cit:CI_Individual>
+                            </cit:individual>
+                        </cit:CI_Organisation>
+                    </cit:party>
+                </cit:CI_Responsibility>
+            </mri:pointOfContact>
+            <mri:topicCategory>
+                <mri:MD_TopicCategoryCode>biota</mri:MD_TopicCategoryCode>
+            </mri:topicCategory>
+            <mri:topicCategory>
+                <mri:MD_TopicCategoryCode>geoscientificInformation</mri:MD_TopicCategoryCode>
+            </mri:topicCategory>
+            <mri:extent>
+                <gex:EX_Extent>
+                    <gex:geographicElement>
+                        <gex:EX_GeographicBoundingBox>
+                            <gex:westBoundLongitude>
+                                <gco:Decimal>96.764145</gco:Decimal>
+                            </gex:westBoundLongitude>
+                            <gex:eastBoundLongitude>
+                                <gco:Decimal>96.985245</gco:Decimal>
+                            </gex:eastBoundLongitude>
+                            <gex:southBoundLatitude>
+                                <gco:Decimal>-12.259517</gco:Decimal>
+                            </gex:southBoundLatitude>
+                            <gex:northBoundLatitude>
+                                <gco:Decimal>-11.771936</gco:Decimal>
+                            </gex:northBoundLatitude>
+                        </gex:EX_GeographicBoundingBox>
+                    </gex:geographicElement>
+                    <gex:temporalElement>
+                        <gex:EX_TemporalExtent>
+                            <gex:extent>
+                                <gml:TimePeriod gml:id="d5137372e782a1052958">
+                                    <gml:beginPosition>2019-06-23</gml:beginPosition>
+                                    <gml:endPosition>2022-07-08</gml:endPosition>
+                                </gml:TimePeriod>
+                            </gex:extent>
+                        </gex:EX_TemporalExtent>
+                    </gex:temporalElement>
+                    <gex:verticalElement>
+                        <!--  A user can optionally enter depth or altitude info. The verticalCRS content will auto-populate based on whether they choose 'depth' or 'altitude'.-->
+                        <gex:EX_VerticalExtent>
+                            <gex:minimumValue>
+                                <gco:Real>0</gco:Real>
+                            </gex:minimumValue>
+                            <gex:maximumValue>
+                                <gco:Real>30</gco:Real>
+                            </gex:maximumValue>
+                            <gex:verticalCRS>
+                                <gml:VerticalCRS gml:id="d431822e741a1050910">
+                                    <gml:identifier codeSpace="urn:ogc:def:crs:EPSG::">EPSG::5715</gml:identifier>
+                                    <gml:name>MSL depth</gml:name>
+                                    <gml:scope>World</gml:scope>
+                                </gml:VerticalCRS>
+                            </gex:verticalCRS>
+                        </gex:EX_VerticalExtent>
+                    </gex:verticalElement>
+                </gex:EX_Extent>
+            </mri:extent>
+            <mri:resourceMaintenance>
+                <!-- ID5 -->
+                <!--  The user must select how frequently the data will be updated, from a list defined by ISO -->
+                <mmi:MD_MaintenanceInformation>
+                    <mmi:maintenanceAndUpdateFrequency>
+                        <mmi:MD_MaintenanceFrequencyCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_MaintenanceFrequencyCode" codeListValue="notPlanned" />
+                    </mmi:maintenanceAndUpdateFrequency>
+                </mmi:MD_MaintenanceInformation>
+            </mri:resourceMaintenance>
+            <mri:graphicOverview>
+                <mcc:MD_BrowseGraphic>
+                    <mcc:fileName>
+                        <gco:CharacterString>https://metadata.imas.utas.edu.au/geonetwork/srv/api/records/dec073c6-0bdc-44b0-83da-48bc1042a93e/attachments/PA_logo.jpg</gco:CharacterString>
+                    </mcc:fileName>
+                    <mcc:fileDescription>
+                        <gco:CharacterString>PA_logo.jpg</gco:CharacterString>
+                    </mcc:fileDescription>
+                </mcc:MD_BrowseGraphic>
+            </mri:graphicOverview>
+            <mri:graphicOverview>
+                <mcc:MD_BrowseGraphic>
+                    <mcc:fileName>
+                        <gco:CharacterString>https://metadata.imas.utas.edu.au/geonetwork/srv/api/records/dec073c6-0bdc-44b0-83da-48bc1042a93e/attachments/EOMAP_logo.png</gco:CharacterString>
+                    </mcc:fileName>
+                    <mcc:fileDescription>
+                        <gco:CharacterString>EOMAP_logo.png</gco:CharacterString>
+                    </mcc:fileDescription>
+                </mcc:MD_BrowseGraphic>
+            </mri:graphicOverview>
+            <mri:descriptiveKeywords>
+                <mri:MD_Keywords>
+                    <mri:keyword>
+                        <gco:CharacterString>Habitat Mapping</gco:CharacterString>
+                    </mri:keyword>
+                    <mri:keyword>
+                        <gco:CharacterString>Seafloor Classification</gco:CharacterString>
+                    </mri:keyword>
+                    <mri:keyword>
+                        <gco:CharacterString>Satellite Mapping</gco:CharacterString>
+                    </mri:keyword>
+                    <mri:keyword>
+                        <gco:CharacterString>Marine Parks</gco:CharacterString>
+                    </mri:keyword>
+                    <mri:type>
+                        <mri:MD_KeywordTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_KeywordTypeCode" codeListValue="theme" />
+                    </mri:type>
+                </mri:MD_Keywords>
+            </mri:descriptiveKeywords>
+            <mri:descriptiveKeywords>
+                <mri:MD_Keywords>
+                    <mri:keyword>
+                        <gcx:Anchor xlink:href="https://gcmd.earthdata.nasa.gov/kms/concept/c16bda61-353b-4668-af2f-bbb98785b6fa">EARTH SCIENCE | OCEANS | BATHYMETRY/SEAFLOOR TOPOGRAPHY</gcx:Anchor>
+                    </mri:keyword>
+                    <mri:keyword>
+                        <gcx:Anchor xlink:href="https://gcmd.earthdata.nasa.gov/kms/concept/80d79c7e-6c64-4ada-bfcc-4093969758a5">EARTH SCIENCE | OCEANS | BATHYMETRY/SEAFLOOR TOPOGRAPHY | BATHYMETRY</gcx:Anchor>
+                    </mri:keyword>
+                    <mri:keyword>
+                        <gcx:Anchor xlink:href="https://gcmd.earthdata.nasa.gov/kms/concept/09a78997-581b-4d1b-ae71-b2b3f96ef719">EARTH SCIENCE | BIOSPHERE | ECOSYSTEMS | MARINE ECOSYSTEMS | BENTHIC</gcx:Anchor>
+                    </mri:keyword>
+                    <mri:keyword>
+                        <gcx:Anchor xlink:href="https://gcmd.earthdata.nasa.gov/kms/concept/fbec5145-79e6-4ed0-a804-6228aa6daba5">EARTH SCIENCE | BIOLOGICAL CLASSIFICATION</gcx:Anchor>
+                    </mri:keyword>
+                    <mri:type>
+                        <mri:MD_KeywordTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_KeywordTypeCode" codeListValue="theme" />
+                    </mri:type>
+                    <mri:thesaurusName>
+                        <cit:CI_Citation>
+                            <cit:title>
+                                <gco:CharacterString>Global Change Master Directory Earth Science Keywords, Version 8.5</gco:CharacterString>
+                            </cit:title>
+                            <cit:alternateTitle>
+                                <gco:CharacterString>GCMD</gco:CharacterString>
+                            </cit:alternateTitle>
+                            <cit:date>
+                                <cit:CI_Date>
+                                    <cit:date>
+                                        <gco:Date>2017-04-21</gco:Date>
+                                    </cit:date>
+                                    <cit:dateType>
+                                        <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode" codeListValue="revision" />
+                                    </cit:dateType>
+                                </cit:CI_Date>
+                            </cit:date>
+                            <cit:edition>
+                                <gco:CharacterString>8.5</gco:CharacterString>
+                            </cit:edition>
+                            <cit:identifier>
+                                <mcc:MD_Identifier>
+                                    <mcc:code>
+                                        <gcx:Anchor xlink:href="https://metadata.imas.utas.edu.au/geonetwork/srv/eng/thesaurus.download?ref=external.theme.sciencekeywords">geonetwork.thesaurus.external.theme.sciencekeywords</gcx:Anchor>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </cit:identifier>
+                            <cit:citedResponsibleParty>
+                                <cit:CI_Responsibility>
+                                    <cit:role>
+                                        <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="owner" />
+                                    </cit:role>
+                                    <cit:party>
+                                        <cit:CI_Organisation>
+                                            <cit:name>
+                                                <gco:CharacterString>Global Change Data Center, Science and Exploration Directorate, Goddard Space Flight Center (GSFC) National Aeronautics and Space Administration (NASA)</gco:CharacterString>
+                                            </cit:name>
+                                        </cit:CI_Organisation>
+                                    </cit:party>
+                                </cit:CI_Responsibility>
+                            </cit:citedResponsibleParty>
+                        </cit:CI_Citation>
+                    </mri:thesaurusName>
+                </mri:MD_Keywords>
+            </mri:descriptiveKeywords>
+            <mri:descriptiveKeywords>
+                <mri:MD_Keywords>
+                    <mri:keyword>
+                        <gcx:Anchor>Maxar's WorldView-2/3</gcx:Anchor>
+                    </mri:keyword>
+                    <mri:keyword>
+                        <gcx:Anchor>Airbus Pleiades-1</gcx:Anchor>
+                    </mri:keyword>
+                    <mri:type>
+                        <mri:MD_KeywordTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_KeywordTypeCode" codeListValue="theme" />
+                    </mri:type>
+                    <mri:thesaurusName>
+                        <cit:CI_Citation>
+                            <cit:title>
+                                <gcx:Anchor xlink:href="http://vocab.aodn.org.au/def/platform/1">AODN Platform Vocabulary</gcx:Anchor>
+                            </cit:title>
+                            <cit:date>
+                                <cit:CI_Date>
+                                    <cit:date>
+                                        <gco:Date>2021-10-12</gco:Date>
+                                    </cit:date>
+                                    <cit:dateType>
+                                        <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                                    </cit:dateType>
+                                </cit:CI_Date>
+                            </cit:date>
+                            <cit:identifier>
+                                <!-- Local catalogue reference needs to be updated by catalogue set in Site Contents (or from template). -->
+                                <mcc:MD_Identifier>
+                                    <mcc:code>
+                                        <gcx:Anchor xlink:href="https://metadata.imas.utas.edu.au/geonetwork/srv/eng/thesaurus.download?ref=external.theme.aodn_aodn-platform-vocabulary">geonetwork.thesaurus.external.theme.aodn_aodn-platform-vocabulary</gcx:Anchor>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </cit:identifier>
+                        </cit:CI_Citation>
+                    </mri:thesaurusName>
+                </mri:MD_Keywords>
+            </mri:descriptiveKeywords>
+            <mri:descriptiveKeywords>
+                <mri:MD_Keywords>
+                    <mri:keyword>
+                        <gcx:Anchor xlink:href="http://vocab.aodn.org.au/def/geographicextents/entity/45">Offshore Islands (Australia) | Offshore Islands (Australia) | Cocos (Keeling) Island</gcx:Anchor>
+                    </mri:keyword>
+                    <mri:type>
+                        <mri:MD_KeywordTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_KeywordTypeCode" codeListValue="place" />
+                    </mri:type>
+                    <mri:thesaurusName>
+                        <cit:CI_Citation>
+                            <cit:title>
+                                <gcx:Anchor xlink:href="http://vocab.aodn.org.au/def/geographicextents/1">AODN Geographic Extents Vocabulary</gcx:Anchor>
+                            </cit:title>
+                            <cit:date>
+                                <cit:CI_Date>
+                                    <cit:date>
+                                        <gco:Date>2021-09-02</gco:Date>
+                                    </cit:date>
+                                    <cit:dateType>
+                                        <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                                    </cit:dateType>
+                                </cit:CI_Date>
+                            </cit:date>
+                            <cit:identifier>
+                                <mcc:MD_Identifier>
+                                    <mcc:code>
+                                        <gcx:Anchor xlink:href="https://metadata.imas.utas.edu.au/geonetwork/srv/api/registries/vocabularies/external.place.aodn_aodn-geographic-extents-vocabulary">geonetwork.thesaurus.external.place.aodn_aodn-geographic-extents-vocabulary</gcx:Anchor>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </cit:identifier>
+                        </cit:CI_Citation>
+                    </mri:thesaurusName>
+                </mri:MD_Keywords>
+            </mri:descriptiveKeywords>
+            <mri:resourceConstraints />
+            <mri:resourceConstraints>
+                <mco:MD_Constraints>
+                    <mco:useLimitation>
+                        <gco:CharacterString>https://creativecommons.org/share-your-work/cclicenses/</gco:CharacterString>
+                    </mco:useLimitation>
+                </mco:MD_Constraints>
+            </mri:resourceConstraints>
+            <mri:resourceConstraints>
+                <mco:MD_LegalConstraints>
+                    <mco:graphic>
+                        <mcc:MD_BrowseGraphic>
+                            <mcc:fileName gco:nilReason="inapplicable" />
+                            <mcc:linkage>
+                                <cit:CI_OnlineResource>
+                                    <cit:linkage>
+                                        <gco:CharacterString>https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png</gco:CharacterString>
+                                    </cit:linkage>
+                                    <cit:protocol>
+                                        <gco:CharacterString>WWW:LINK-1.0-http--related</gco:CharacterString>
+                                    </cit:protocol>
+                                    <cit:description>
+                                        <gco:CharacterString>License Graphic</gco:CharacterString>
+                                    </cit:description>
+                                </cit:CI_OnlineResource>
+                            </mcc:linkage>
+                        </mcc:MD_BrowseGraphic>
+                    </mco:graphic>
+                    <mco:reference>
+                        <!-- About5 -->
+                        <cit:CI_Citation>
+                            <cit:title>
+                                <gco:CharacterString>Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</gco:CharacterString>
+                            </cit:title>
+                            <cit:alternateTitle>
+                                <gco:CharacterString>CC BY-NC-SA</gco:CharacterString>
+                            </cit:alternateTitle>
+                            <cit:edition>
+                                <gco:CharacterString>4.0</gco:CharacterString>
+                            </cit:edition>
+                            <cit:citedResponsibleParty>
+                                <cit:CI_Responsibility>
+                                    <cit:party>
+                                        <cit:CI_Organisation>
+                                            <cit:contactInfo>
+                                                <cit:CI_Contact>
+                                                    <cit:onlineResource>
+                                                        <cit:CI_OnlineResource>
+                                                            <cit:linkage>
+                                                                <gco:CharacterString>http://creativecommons.org/international/</gco:CharacterString>
+                                                            </cit:linkage>
+                                                            <cit:protocol>
+                                                                <gco:CharacterString>WWW:LINK-1.0-http--related</gco:CharacterString>
+                                                            </cit:protocol>
+                                                        </cit:CI_OnlineResource>
+                                                    </cit:onlineResource>
+                                                </cit:CI_Contact>
+                                            </cit:contactInfo>
+                                        </cit:CI_Organisation>
+                                    </cit:party>
+                                </cit:CI_Responsibility>
+                            </cit:citedResponsibleParty>
+                            <cit:onlineResource>
+                                <cit:CI_OnlineResource>
+                                    <cit:linkage>
+                                        <gco:CharacterString>https://creativecommons.org/licenses/by-nc-sa/4.0/</gco:CharacterString>
+                                    </cit:linkage>
+                                    <cit:protocol>
+                                        <gco:CharacterString>WWW:LINK-1.0-http--related</gco:CharacterString>
+                                    </cit:protocol>
+                                    <cit:description>
+                                        <gco:CharacterString>License Text</gco:CharacterString>
+                                    </cit:description>
+                                </cit:CI_OnlineResource>
+                            </cit:onlineResource>
+                        </cit:CI_Citation>
+                    </mco:reference>
+                    <mco:otherConstraints>
+                        <gco:CharacterString>Cite data as: Satellite-Derived Bathymetry and Seafloor Habitat Classification Mapping of Cocos (Keeling) Islands Marine Park (2024). Director of National Parks (Parks Australia), EOMAP Pty Ltd. Data accessed at https://metadata.imas.utas.edu.au/geonetwork/srv/eng/catalog.search#/metadata/dec073c6-0bdc-44b0-83da-48bc1042a93e on [access date].</gco:CharacterString>
+                    </mco:otherConstraints>
+                    <mco:otherConstraints>
+                        <gco:CharacterString>https://www.eomap.com/exchange/pdf/EOMAP_Terms_Conditions_for_User_of_EOMAP_Products.pdf</gco:CharacterString>
+                    </mco:otherConstraints>
+                </mco:MD_LegalConstraints>
+            </mri:resourceConstraints>
+            <mri:defaultLocale>
+                <lan:PT_Locale>
+                    <lan:language>
+                        <lan:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="eng" />
+                    </lan:language>
+                    <lan:characterEncoding>
+                        <lan:MD_CharacterSetCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_CharacterSetCode" codeListValue="utf8" />
+                    </lan:characterEncoding>
+                </lan:PT_Locale>
+            </mri:defaultLocale>
+            <mri:supplementalInformation />
+        </mri:MD_DataIdentification>
+    </mdb:identificationInfo>
+    <mdb:contentInfo xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0" xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0">
+        <mrc:MD_CoverageDescription>
+            <mrc:attributeDescription gco:nilReason="inapplicable" />
+            <mrc:attributeGroup>
+                <mrc:MD_AttributeGroup>
+                    <mrc:contentType>
+                        <mrc:MD_CoverageContentTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_CoverageContentTypeCode" codeListValue="physicalMeasurement" />
+                    </mrc:contentType>
+                    <mrc:attribute>
+                        <mrc:MD_SampleDimension>
+                            <mrc:name>
+                                <mcc:MD_Identifier>
+                                    <mcc:code>
+                                        <gcx:Anchor>Habitat Mapping</gcx:Anchor>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </mrc:name>
+                            <mrc:units>
+                                <gml:BaseUnit gml:id="d20e484">
+                                    <gml:name>Classes</gml:name>
+                                    <gml:unitsSystem />
+                                </gml:BaseUnit>
+                            </mrc:units>
+                        </mrc:MD_SampleDimension>
+                    </mrc:attribute>
+                    <mrc:attribute>
+                        <mrc:MD_SampleDimension>
+                            <mrc:name>
+                                <mcc:MD_Identifier>
+                                    <mcc:code>
+                                        <gcx:Anchor>Habitat Mapping</gcx:Anchor>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </mrc:name>
+                            <mrc:units>
+                                <gml:BaseUnit gml:id="d20e484">
+                                    <gml:name>Classes</gml:name>
+                                    <gml:unitsSystem />
+                                </gml:BaseUnit>
+                            </mrc:units>
+                        </mrc:MD_SampleDimension>
+                    </mrc:attribute>
+                </mrc:MD_AttributeGroup>
+            </mrc:attributeGroup>
+        </mrc:MD_CoverageDescription>
+    </mdb:contentInfo>
+    <mdb:distributionInfo xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0" xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0">
+        <mrd:MD_Distribution>
+            <mrd:distributionFormat>
+                <!-- Info on distribution format of data, from user input-->
+                <mrd:MD_Format>
+                    <mrd:formatSpecificationCitation>
+                        <cit:CI_Citation>
+                            <cit:title>
+                                <gco:CharacterString>Geotiff, Shapefile</gco:CharacterString>
+                            </cit:title>
+                        </cit:CI_Citation>
+                    </mrd:formatSpecificationCitation>
+                </mrd:MD_Format>
+                <mrd:transferOptions>
+                    <mrd:MD_DigitalTransferOptions>
+                        <mrd:onLine>
+                            <cit:CI_OnlineResource>
+                                <cit:linkage>
+                                    <gco:CharacterString>https://data.imas.utas.edu.au/attachments/dec073c6-0bdc-44b0-83da-48bc1042a93e/CocosKeelingIslandsMP_Seafloor_Classification_EOMAP.zip</gco:CharacterString>
+                                </cit:linkage>
+                                <cit:protocol>
+                                    <gco:CharacterString>WWW:LINK-1.0-http--downloaddata</gco:CharacterString>
+                                </cit:protocol>
+                                <cit:name>
+                                    <gco:CharacterString>DATA ACCESS - Cocos (Keeling) Islands MP classified habitat [direct download data package 75 MB .zip]</gco:CharacterString>
+                                </cit:name>
+                                <cit:description gco:nilReason="missing">
+                                    <gco:CharacterString />
+                                </cit:description>
+                                <cit:function>
+                                    <cit:CI_OnLineFunctionCode codeListValue="" codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_OnLineFunctionCode" />
+                                </cit:function>
+                            </cit:CI_OnlineResource>
+                        </mrd:onLine>
+                        <mrd:onLine>
+                            <cit:CI_OnlineResource>
+                                <cit:linkage>
+                                    <gco:CharacterString>https://data.imas.utas.edu.au/attachments/dec073c6-0bdc-44b0-83da-48bc1042a93e/CocosKeelingIslandsMP_Satellite_Derived_Bathymetry_EOMAP.zip</gco:CharacterString>
+                                </cit:linkage>
+                                <cit:protocol>
+                                    <gco:CharacterString>WWW:LINK-1.0-http--downloaddata</gco:CharacterString>
+                                </cit:protocol>
+                                <cit:name>
+                                    <gco:CharacterString>DATA ACCESS - Cocos (Keeling) Islands MP satellite-derived bathymetry [direct download data package 820 MB .zip]</gco:CharacterString>
+                                </cit:name>
+                                <cit:description gco:nilReason="missing">
+                                    <gco:CharacterString />
+                                </cit:description>
+                                <cit:function>
+                                    <cit:CI_OnLineFunctionCode codeListValue="" codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_OnLineFunctionCode" />
+                                </cit:function>
+                            </cit:CI_OnlineResource>
+                        </mrd:onLine>
+                        <mrd:onLine>
+                            <cit:CI_OnlineResource>
+                                <cit:linkage>
+                                    <gco:CharacterString>https://data.imas.utas.edu.au/attachments/dec073c6-0bdc-44b0-83da-48bc1042a93e/CocosKeelingIslandsMP_Satellite_Imagery_EOMAP.zip</gco:CharacterString>
+                                </cit:linkage>
+                                <cit:protocol>
+                                    <gco:CharacterString>WWW:LINK-1.0-http--downloaddata</gco:CharacterString>
+                                </cit:protocol>
+                                <cit:name>
+                                    <gco:CharacterString>DATA ACCESS - Cocos (Keeling) Islands MP satellite imagery [direct download data package 315 MB .zip]</gco:CharacterString>
+                                </cit:name>
+                                <cit:description gco:nilReason="missing">
+                                    <gco:CharacterString />
+                                </cit:description>
+                                <cit:function>
+                                    <cit:CI_OnLineFunctionCode codeListValue="" codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_OnLineFunctionCode" />
+                                </cit:function>
+                            </cit:CI_OnlineResource>
+                        </mrd:onLine>
+                        <mrd:onLine>
+                            <cit:CI_OnlineResource>
+                                <cit:linkage>
+                                    <gco:CharacterString>https://seamapaustralia.org/map/#17c24346-d0c9-426e-bffb-394b2e72fea6</gco:CharacterString>
+                                </cit:linkage>
+                                <cit:protocol>
+                                    <gco:CharacterString>WWW:LINK-1.0-http--portal</gco:CharacterString>
+                                </cit:protocol>
+                                <cit:name>
+                                    <gco:CharacterString>View and interact with data on Seamap Australia online mapping portal</gco:CharacterString>
+                                </cit:name>
+                                <cit:description gco:nilReason="missing">
+                                    <gco:CharacterString />
+                                </cit:description>
+                                <cit:function>
+                                    <cit:CI_OnLineFunctionCode codeListValue="" codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_OnLineFunctionCode" />
+                                </cit:function>
+                            </cit:CI_OnlineResource>
+                        </mrd:onLine>
+                        <mrd:onLine>
+                            <cit:CI_OnlineResource>
+                                <cit:linkage>
+                                    <gco:CharacterString>https://data.imas.utas.edu.au/attachments/dec073c6-0bdc-44b0-83da-48bc1042a93e/maps/SDB_AUS_CocosIsland_EOMAP_20220701_20220708_2m_MSL_map.pdf</gco:CharacterString>
+                                </cit:linkage>
+                                <cit:protocol>
+                                    <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
+                                </cit:protocol>
+                                <cit:name>
+                                    <gco:CharacterString>PDF map of bathymetry - Cocos Island</gco:CharacterString>
+                                </cit:name>
+                                <cit:description gco:nilReason="missing">
+                                    <gco:CharacterString />
+                                </cit:description>
+                                <cit:function>
+                                    <cit:CI_OnLineFunctionCode codeListValue="" codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_OnLineFunctionCode" />
+                                </cit:function>
+                            </cit:CI_OnlineResource>
+                        </mrd:onLine>
+                        <mrd:onLine>
+                            <cit:CI_OnlineResource>
+                                <cit:linkage>
+                                    <gco:CharacterString>https://data.imas.utas.edu.au/attachments/dec073c6-0bdc-44b0-83da-48bc1042a93e/maps/SDB_AUS_NorthKeeling_EOMAP_20190623T035912_2m_MSL_map.pdf</gco:CharacterString>
+                                </cit:linkage>
+                                <cit:protocol>
+                                    <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
+                                </cit:protocol>
+                                <cit:name>
+                                    <gco:CharacterString>PDF map of bathymetry - North Keeling Island</gco:CharacterString>
+                                </cit:name>
+                                <cit:description gco:nilReason="missing">
+                                    <gco:CharacterString />
+                                </cit:description>
+                                <cit:function>
+                                    <cit:CI_OnLineFunctionCode codeListValue="" codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_OnLineFunctionCode" />
+                                </cit:function>
+                            </cit:CI_OnlineResource>
+                        </mrd:onLine>
+                        <mrd:onLine>
+                            <cit:CI_OnlineResource>
+                                <cit:linkage>
+                                    <gco:CharacterString>https://data.imas.utas.edu.au/attachments/dec073c6-0bdc-44b0-83da-48bc1042a93e/maps/VUC_AUS_CocosIsland_EOMAP_20220701_20220708_2m_MSL_map.pdf</gco:CharacterString>
+                                </cit:linkage>
+                                <cit:protocol>
+                                    <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
+                                </cit:protocol>
+                                <cit:name>
+                                    <gco:CharacterString>PDF map of bathymetric vertical uncertainties - Cocos Island</gco:CharacterString>
+                                </cit:name>
+                                <cit:description gco:nilReason="missing">
+                                    <gco:CharacterString />
+                                </cit:description>
+                                <cit:function>
+                                    <cit:CI_OnLineFunctionCode codeListValue="" codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_OnLineFunctionCode" />
+                                </cit:function>
+                            </cit:CI_OnlineResource>
+                        </mrd:onLine>
+                        <mrd:onLine>
+                            <cit:CI_OnlineResource>
+                                <cit:linkage>
+                                    <gco:CharacterString>https://data.imas.utas.edu.au/attachments/dec073c6-0bdc-44b0-83da-48bc1042a93e/maps/VUC_AUS_NorthKeeling_EOMAP_20190623T035912_2m_MSL_map.pdf</gco:CharacterString>
+                                </cit:linkage>
+                                <cit:protocol>
+                                    <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
+                                </cit:protocol>
+                                <cit:name>
+                                    <gco:CharacterString>PDF map of bathymetric vertical uncertainties - North Keeling Island</gco:CharacterString>
+                                </cit:name>
+                                <cit:description gco:nilReason="missing">
+                                    <gco:CharacterString />
+                                </cit:description>
+                                <cit:function>
+                                    <cit:CI_OnLineFunctionCode codeListValue="" codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_OnLineFunctionCode" />
+                                </cit:function>
+                            </cit:CI_OnlineResource>
+                        </mrd:onLine>
+                        <mrd:onLine>
+                            <cit:CI_OnlineResource>
+                                <cit:linkage>
+                                    <gco:CharacterString>https://geoserver.imas.utas.edu.au/geoserver/seamap/wms</gco:CharacterString>
+                                </cit:linkage>
+                                <cit:protocol>
+                                    <gco:CharacterString>OGC:WMS-1.3.0-http-get-map</gco:CharacterString>
+                                </cit:protocol>
+                                <cit:name>
+                                    <gco:CharacterString>EOMAP_CocosKeelingIslandsMP_2m_bathymetry</gco:CharacterString>
+                                </cit:name>
+                                <cit:description>
+                                    <gco:CharacterString>MAP - Cocos (Keeling) Islands MP high-resolution (2m) bathymetry</gco:CharacterString>
+                                </cit:description>
+                                <cit:function>
+                                    <cit:CI_OnLineFunctionCode codeListValue="" codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_OnLineFunctionCode" />
+                                </cit:function>
+                            </cit:CI_OnlineResource>
+                        </mrd:onLine>
+                        <mrd:onLine>
+                            <cit:CI_OnlineResource>
+                                <cit:linkage>
+                                    <gco:CharacterString>https://geoserver.imas.utas.edu.au/geoserver/seamap/wms</gco:CharacterString>
+                                </cit:linkage>
+                                <cit:protocol>
+                                    <gco:CharacterString>OGC:WMS-1.3.0-http-get-map</gco:CharacterString>
+                                </cit:protocol>
+                                <cit:name>
+                                    <gco:CharacterString>SeamapAus_Ext_EOMAP_CocosKeelingMP_2022_grp</gco:CharacterString>
+                                </cit:name>
+                                <cit:description>
+                                    <gco:CharacterString>MAP - Cocos (Keeling) Islands MP habitat classification</gco:CharacterString>
+                                </cit:description>
+                                <cit:function>
+                                    <cit:CI_OnLineFunctionCode codeListValue="" codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_OnLineFunctionCode" />
+                                </cit:function>
+                            </cit:CI_OnlineResource>
+                        </mrd:onLine>
+                    </mrd:MD_DigitalTransferOptions>
+                </mrd:transferOptions>
+            </mrd:distributionFormat>
+        </mrd:MD_Distribution>
+    </mdb:distributionInfo>
+    <mdb:resourceLineage>
+        <mrl:LI_Lineage>
+            <mrl:statement>
+                <gco:CharacterString>The Cocos (Keeling) Islands Marine Park survey was acquired by the Australian Government (Parks Australia) as part of the IOT Marine Park Funding grant in 2023-2024, undertaken by EOMAP Australia Pty Ltd and EOMAP GmbH &amp; Co.KG.
+
+                    The data provides bathymetric and seafloor classification information based on optical satellite image data. Maxar's WorldView-2/3 (Cocos) and Airbus Pleiades-1 (North Keeling) multispectral satellite data were processed by the Modular and Inversion System (MIP) by EOMAP GmbH &amp; Co.KG. The MIP is designed for the physically based assessment of hydro-biological parameters from multi- and hyperspectral remote sensing data. EOMAPs Satellite-Derived Bathymetry (SDB) method relies on the reflected light energy which is measured at the satellite sensor in space. In order to measure the water column thickness, the sea bottom reflection must be separated from all other simultaneously measured portions of light. Other contributors of light scattered to the sensor are atmospheric molecules and aerosols, adjacent scattering from land, the water surface reflection, and light scattered and absorbed due to particular properties of water constituents and the pure water itself. The pure water itself also absorbs light in a spectrally specific manner and therefore leaves unique signatures in the signal while the light passes through the water column and returns after reflection at the sea bottom. This property is relevant to estimate water depth from optical satellite imagery. As many properties can vary over space and time, effective correction, regularisation and retrieval algorithms must be applied to avoid unstable results. EOMAP developed and maintains these unique algorithm and its workflows for almost two decades. The maximum depth the system is able to sense is related to the complex interaction of radiance of bottom material, incident sun angle and intensity, and the type and quantity of organics or sediments in the water column. As a rule-of-thumb, satellite-derived bathymetry should be capable of sensing bottom to depths equal to one to one point five times the Secchi depth.
+
+                    EOMAP's Seafloor Classification (SFC) method is based on seafloor reflection at different wavelengths, which is being used to run an object-based classification procedure grouping objects of similar spectral characteristics, shape and texture into different classes of seafloor coverage.
+
+                    Correction modules applied to the satellite imagery:
+                    - Corrected for Satellite sensor noise: Yes
+                    - Corrected for atmospheric effects: Yes
+                    - Corrected for the effect of adjacent land reflectance: Yes
+                    - Corrected for effects of turbidity: Yes
+
+                    Datum: Mean Sea Level (MSL) / Lowest Astromical Tide (LAT) based on Admirality Total Tide Station Port Refuge, 4628 (HAT: +1.5m above CD, MSL: +0.64m above CD, SATREC: +0.8m above CD, LAT: +0.0m above CD) Data type: 32bit Geotiff and ASCII xyz text file Units: m NoDataValue: -9999.</gco:CharacterString>
+            </mrl:statement>
+            <mrl:scope>
+                <mcc:MD_Scope>
+                    <mcc:level>
+                        <mcc:MD_ScopeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ScopeCode" codeListValue="dataset" />
+                    </mcc:level>
+                </mcc:MD_Scope>
+            </mrl:scope>
+        </mrl:LI_Lineage>
+    </mdb:resourceLineage>
+    <mdb:acquisitionInformation xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0" xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0">
+        <mac:MI_AcquisitionInformation>
+            <mac:scope>
+                <mcc:MD_Scope>
+                    <mcc:level>
+                        <mcc:MD_ScopeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ScopeCode" codeListValue="dataset" />
+                    </mcc:level>
+                </mcc:MD_Scope>
+            </mac:scope>
+            <mac:platform>
+                <mac:MI_Platform>
+                    <mac:identifier>
+                        <mcc:MD_Identifier>
+                            <mcc:code>
+                                <gcx:Anchor>Maxar's WorldView-2/3</gcx:Anchor>
+                            </mcc:code>
+                        </mcc:MD_Identifier>
+                    </mac:identifier>
+                    <mac:instrument>
+                        <mac:MI_Instrument>
+                            <mac:identifier>
+                                <mcc:MD_Identifier>
+                                    <mcc:code>
+                                        <gcx:Anchor>Multispectral Satellite Sensor</gcx:Anchor>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </mac:identifier>
+                            <mac:type gco:nilReason="missing">
+                                <gco:CharacterString />
+                            </mac:type>
+                        </mac:MI_Instrument>
+                    </mac:instrument>
+                </mac:MI_Platform>
+            </mac:platform>
+            <mac:platform>
+                <mac:MI_Platform>
+                    <mac:identifier>
+                        <mcc:MD_Identifier>
+                            <mcc:code>
+                                <gcx:Anchor>Airbus Pleiades-1</gcx:Anchor>
+                            </mcc:code>
+                        </mcc:MD_Identifier>
+                    </mac:identifier>
+                    <mac:instrument>
+                        <mac:MI_Instrument>
+                            <mac:identifier>
+                                <mcc:MD_Identifier>
+                                    <mcc:code>
+                                        <gcx:Anchor>Multispectral Satellite Sensor</gcx:Anchor>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </mac:identifier>
+                            <mac:type gco:nilReason="missing">
+                                <gco:CharacterString />
+                            </mac:type>
+                        </mac:MI_Instrument>
+                    </mac:instrument>
+                </mac:MI_Platform>
+            </mac:platform>
+        </mac:MI_AcquisitionInformation>
+    </mdb:acquisitionInformation>
+</mdb:MD_Metadata>

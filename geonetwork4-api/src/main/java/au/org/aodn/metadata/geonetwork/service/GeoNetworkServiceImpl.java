@@ -350,7 +350,12 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
      * @return - The XML give UUID
      * @throws HttpServerErrorException.ServiceUnavailable - We are running in cloud and instance may be restarted
      */
-    public String searchRecordBy(String uuid) throws HttpServerErrorException.ServiceUnavailable {
+    @Retryable(
+            retryFor = {HttpClientErrorException.BadRequest.class, HttpServerErrorException.ServiceUnavailable.class},
+            maxAttempts = 10,
+            backoff = @Backoff(delay = DEFAULT_BACKOFF_TIME, multiplier = 2.0)
+    )
+    public String searchRecordBy(String uuid) throws HttpServerErrorException.ServiceUnavailable, HttpClientErrorException.BadRequest {
         try {
             HttpEntity<String> requestEntity = getRequestEntity(null);
 
@@ -494,7 +499,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
                             lastUUID.set(uuid);
 
                             try {
-                                return GeoNetworkServiceImpl.this.searchRecordBy(uuid);
+                                return self.searchRecordBy(uuid);
                             }
                             catch(MetadataNotFoundException me) {
                                 // Should be a very rare case where someone deleted the doc in geonetwork

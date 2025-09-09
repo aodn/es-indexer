@@ -1,0 +1,348 @@
+{
+  "title": "Satellite-Derived Bathymetry and Seafloor Habitat Classification Mapping of Cocos (Keeling) Islands Marine Park",
+  "description": "Parks Australia - Indian Oceans Territory (IOT) Grants Project: Satellite-Derived Bathymetry and Seafloor Habitat Classification Mapping of Cocos (Keeling) Island Marine Park\n\n                    This project mapped Satellite-derived Bathymetry (SDB) and seafloor habitats at 2m horizontal spatial resolution, for the shallow waters (~0-25 m) of the Cocos (Keeling) Islands Marine Park. SDB data was processed using EOMAP's proprietary software and algorithm package Watcor-X, which generates SDB using multipspectral satellite data. The SDB is based on the physics-based inversion method of the radiative transfer equation which models the pathway of light and its interaction through different media (e.g. atmosphere and water column). The thematic classification of the seabed was based on multispectral satellite image analytics. Satellite imagery was pre-processed by applying a set of image correction procedures to reduce environmental noise, resulting in a standardised reflectance surface of the subsurface and seafloor. The information on seafloor reflectance at different wavelengths was used to run an object-based classification procedure which groups objects of similar spectral characteristics, shape and texture into different classes of major seafloor habitat type.\n\n                    These critical geospatial data layers provide the essential environmental baseline information for the long-term monitoring and management of the IOT Marine Parks. Having access to digital, georeferenced, high-resolution, satellite-derived maps of bathymetry and benthic habitats of shallow water areas, is of fundamental use in the areas of navigation and safety-at-sea, ecological research, environmental modelling, management and conservation, and monitoring the impacts from climate change.",
+  "extent": {
+    "bbox": [
+      [
+        96.764145,
+        -12.259517,
+        96.985245,
+        -11.771936
+      ],
+      [
+        96.764145,
+        -12.259517,
+        96.985245,
+        -11.771936
+      ]
+    ],
+    "temporal": [
+      [
+        "2019-06-22T14:00:00Z",
+        "2022-07-08T13:59:59Z"
+      ],
+      [
+        "2019-06-22T14:00:00Z",
+        "2022-07-08T13:59:59Z"
+      ]
+    ]
+  },
+  "summaries": {
+    "score": 1,
+    "status": "completed",
+    "credits": [
+      "Director of National Parks (Parks Australia), Cocos (Keeling) Islands SDB/Seafloor Classification © EOMAP, 2023-24"
+    ],
+    "scope": {
+      "code": "dataset",
+      "name": "IMAS Dataset level record"
+    },
+    "statement": "The Cocos (Keeling) Islands Marine Park survey was acquired by the Australian Government (Parks Australia) as part of the IOT Marine Park Funding grant in 2023-2024, undertaken by EOMAP Australia Pty Ltd and EOMAP GmbH & Co.KG.\n\n                    The data provides bathymetric and seafloor classification information based on optical satellite image data. Maxar's WorldView-2/3 (Cocos) and Airbus Pleiades-1 (North Keeling) multispectral satellite data were processed by the Modular and Inversion System (MIP) by EOMAP GmbH & Co.KG. The MIP is designed for the physically based assessment of hydro-biological parameters from multi- and hyperspectral remote sensing data. EOMAPs Satellite-Derived Bathymetry (SDB) method relies on the reflected light energy which is measured at the satellite sensor in space. In order to measure the water column thickness, the sea bottom reflection must be separated from all other simultaneously measured portions of light. Other contributors of light scattered to the sensor are atmospheric molecules and aerosols, adjacent scattering from land, the water surface reflection, and light scattered and absorbed due to particular properties of water constituents and the pure water itself. The pure water itself also absorbs light in a spectrally specific manner and therefore leaves unique signatures in the signal while the light passes through the water column and returns after reflection at the sea bottom. This property is relevant to estimate water depth from optical satellite imagery. As many properties can vary over space and time, effective correction, regularisation and retrieval algorithms must be applied to avoid unstable results. EOMAP developed and maintains these unique algorithm and its workflows for almost two decades. The maximum depth the system is able to sense is related to the complex interaction of radiance of bottom material, incident sun angle and intensity, and the type and quantity of organics or sediments in the water column. As a rule-of-thumb, satellite-derived bathymetry should be capable of sensing bottom to depths equal to one to one point five times the Secchi depth.\n\n                    EOMAP's Seafloor Classification (SFC) method is based on seafloor reflection at different wavelengths, which is being used to run an object-based classification procedure grouping objects of similar spectral characteristics, shape and texture into different classes of seafloor coverage.\n\n                    Correction modules applied to the satellite imagery:\n                    - Corrected for Satellite sensor noise: Yes\n                    - Corrected for atmospheric effects: Yes\n                    - Corrected for the effect of adjacent land reflectance: Yes\n                    - Corrected for effects of turbidity: Yes\n\n                    Datum: Mean Sea Level (MSL) / Lowest Astromical Tide (LAT) based on Admirality Total Tide Station Port Refuge, 4628 (HAT: +1.5m above CD, MSL: +0.64m above CD, SATREC: +0.8m above CD, LAT: +0.0m above CD) Data type: 32bit Geotiff and ASCII xyz text file Units: m NoDataValue: -9999.",
+    "creation": "2025-01-07T00:00:00",
+    "revision": "2025-05-09T11:29:40",
+    "update_frequency": "completed",
+    "proj:geometry": {
+      "geometries": [
+        {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                96.764145,
+                -12.259517
+              ],
+              [
+                96.985245,
+                -12.259517
+              ],
+              [
+                96.985245,
+                -11.771936
+              ],
+              [
+                96.764145,
+                -11.771936
+              ],
+              [
+                96.764145,
+                -12.259517
+              ]
+            ]
+          ]
+        }
+      ],
+      "type": "GeometryCollection"
+    },
+    "proj:geometry_noland": {
+      "geometries": [
+        {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                96.764145,
+                -12.259517
+              ],
+              [
+                96.985245,
+                -12.259517
+              ],
+              [
+                96.985245,
+                -11.771936
+              ],
+              [
+                96.764145,
+                -11.771936
+              ],
+              [
+                96.764145,
+                -12.259517
+              ]
+            ]
+          ]
+        }
+      ],
+      "type": "GeometryCollection"
+    },
+    "temporal": [
+      {
+        "start": "2019-06-22T14:00:00Z",
+        "end": "2022-07-08T13:59:59Z"
+      }
+    ],
+    "parameter_vocabs": [],
+    "platform_vocabs": [],
+    "organisation_vocabs": []
+  },
+  "contacts": [
+    {
+      "roles": [
+        "pointOfContact",
+        "about"
+      ],
+      "organization": "EOMAP Australia Pty Ltd",
+      "name": "Twiggs, Emily",
+      "emails": [
+        "twiggs@eomap.com"
+      ]
+    },
+    {
+      "roles": [
+        "distributor",
+        "metadata"
+      ],
+      "organization": "Institute for Marine and Antarctic Studies",
+      "position": "IMAS Data Manager",
+      "emails": [
+        "IMAS.DataManager@utas.edu.au"
+      ],
+      "links": [
+        {
+          "href": "https://imas.utas.edu.au/",
+          "type": "WWW:LINK-1.0-http--link",
+          "title": "IMAS website"
+        }
+      ]
+    },
+    {
+      "roles": [
+        "resourceProvider",
+        "citation"
+      ],
+      "organization": "Institute for Marine and Antarctic Studies",
+      "emails": [
+        "IMAS.DataManager@utas.edu.au"
+      ],
+      "addresses": [
+        {
+          "deliveryPoint": [
+            "Private Bag 129"
+          ],
+          "city": "Hobart",
+          "country": "Australia",
+          "postalCode": "7001",
+          "administrativeArea": "Tasmania"
+        }
+      ]
+    },
+    {
+      "roles": [
+        "processor",
+        "citation"
+      ],
+      "organization": "EOMAP Australia Pty Ltd",
+      "name": "Twiggs, Emily",
+      "emails": [
+        "twiggs@eomap.com"
+      ],
+      "addresses": [
+        {
+          "deliveryPoint": [
+            "The Wharf, 123 Parkyn Parade"
+          ],
+          "city": "Mooloolaba",
+          "country": "Australia",
+          "postalCode": "4557",
+          "administrativeArea": "Queensland"
+        }
+      ]
+    }
+  ],
+  "languages": [
+    {
+      "code": "eng",
+      "name": "English"
+    }
+  ],
+  "links": [
+    {
+      "href": "https://metadata.imas.utas.edu.au/geonetwork/srv/eng/catalog.search#/metadata/dec073c6-0bdc-44b0-83da-48bc1042a93e",
+      "rel": "describedby",
+      "type": "text/html",
+      "title": "Full metadata link"
+    },
+    {
+      "href": "https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png",
+      "rel": "license",
+      "type": "image/png"
+    },
+    {
+      "href": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "rel": "license",
+      "type": "text/html"
+    }
+  ],
+  "license": "Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International",
+  "providers": [
+    {
+      "name": "Institute for Marine and Antarctic Studies",
+      "roles": [
+        "distributor"
+      ]
+    }
+  ],
+  "themes": [
+    {
+      "concepts": [
+        {
+          "id": "Habitat Mapping",
+          "url": null,
+          "title": "Keywords (Theme)",
+          "description": ""
+        },
+        {
+          "id": "Seafloor Classification",
+          "url": null,
+          "title": "Keywords (Theme)",
+          "description": ""
+        },
+        {
+          "id": "Satellite Mapping",
+          "url": null,
+          "title": "Keywords (Theme)",
+          "description": ""
+        },
+        {
+          "id": "Marine Parks",
+          "url": null,
+          "title": "Keywords (Theme)",
+          "description": ""
+        }
+      ],
+      "scheme": ""
+    },
+    {
+      "concepts": [
+        {
+          "id": "EARTH SCIENCE | OCEANS | BATHYMETRY/SEAFLOOR TOPOGRAPHY",
+          "url": "https://gcmd.earthdata.nasa.gov/kms/concept/c16bda61-353b-4668-af2f-bbb98785b6fa",
+          "title": "Global Change Master Directory Earth Science Keywords, Version 8.5",
+          "description": "GCMD"
+        },
+        {
+          "id": "EARTH SCIENCE | OCEANS | BATHYMETRY/SEAFLOOR TOPOGRAPHY | BATHYMETRY",
+          "url": "https://gcmd.earthdata.nasa.gov/kms/concept/80d79c7e-6c64-4ada-bfcc-4093969758a5",
+          "title": "Global Change Master Directory Earth Science Keywords, Version 8.5",
+          "description": "GCMD"
+        },
+        {
+          "id": "EARTH SCIENCE | BIOSPHERE | ECOSYSTEMS | MARINE ECOSYSTEMS | BENTHIC",
+          "url": "https://gcmd.earthdata.nasa.gov/kms/concept/09a78997-581b-4d1b-ae71-b2b3f96ef719",
+          "title": "Global Change Master Directory Earth Science Keywords, Version 8.5",
+          "description": "GCMD"
+        },
+        {
+          "id": "EARTH SCIENCE | BIOLOGICAL CLASSIFICATION",
+          "url": "https://gcmd.earthdata.nasa.gov/kms/concept/fbec5145-79e6-4ed0-a804-6228aa6daba5",
+          "title": "Global Change Master Directory Earth Science Keywords, Version 8.5",
+          "description": "GCMD"
+        }
+      ],
+      "scheme": "theme"
+    },
+    {
+      "concepts": [
+        {
+          "id": "Maxar's WorldView-2/3",
+          "url": null,
+          "title": "AODN Platform Vocabulary",
+          "description": ""
+        },
+        {
+          "id": "Airbus Pleiades-1",
+          "url": null,
+          "title": "AODN Platform Vocabulary",
+          "description": ""
+        }
+      ],
+      "scheme": "theme"
+    },
+    {
+      "concepts": [
+        {
+          "id": "Offshore Islands (Australia) | Offshore Islands (Australia) | Cocos (Keeling) Island",
+          "url": "http://vocab.aodn.org.au/def/geographicextents/entity/45",
+          "title": "AODN Geographic Extents Vocabulary",
+          "description": ""
+        }
+      ],
+      "scheme": "place"
+    },
+    {
+      "concepts": [
+        {
+          "id": "biota",
+          "url": null,
+          "title": null,
+          "description": null
+        },
+        {
+          "id": "geoscientificInformation",
+          "url": null,
+          "title": null,
+          "description": null
+        }
+      ],
+      "scheme": "Categories"
+    }
+  ],
+  "id": "dec073c6-0bdc-44b0-83da-48bc1042a93e",
+  "search_suggestions": {
+    "abstract_phrases": [],
+    "parameter_vocabs_sayt": [],
+    "platform_vocabs_sayt": [],
+    "organisation_vocabs_sayt": []
+  },
+  "sci:citation": "{\"suggestedCitation\":\"Cite data as: Satellite-Derived Bathymetry and Seafloor Habitat Classification Mapping of Cocos (Keeling) Islands Marine Park (2024). Director of National Parks (Parks Australia), EOMAP Pty Ltd. Data accessed at https://metadata.imas.utas.edu.au/geonetwork/srv/eng/catalog.search#/metadata/dec073c6-0bdc-44b0-83da-48bc1042a93e on [access date].\",\"useLimitations\":[\"https://creativecommons.org/share-your-work/cclicenses/\"],\"otherConstraints\":[\"https://www.eomap.com/exchange/pdf/EOMAP_Terms_Conditions_for_User_of_EOMAP_Products.pdf\"]}",
+  "type": "Collection",
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/contacts/v0.1.1/schema.json",
+    "https://stac-extensions.github.io/projection/v1.1.0/schema.json",
+    "https://stac-extensions.github.io/language/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/themes/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/web-map-links/v1.2.0/schema.json"
+  ]
+}
