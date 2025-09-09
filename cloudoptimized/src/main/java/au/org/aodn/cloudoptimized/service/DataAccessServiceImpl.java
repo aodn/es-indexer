@@ -20,6 +20,7 @@ import reactor.core.publisher.Flux;
 import reactor.util.retry.Retry;
 
 import java.time.Duration;
+import java.time.Instant;
 import java.time.YearMonth;
 import java.util.*;
 import java.util.concurrent.CountDownLatch;
@@ -365,5 +366,47 @@ public class DataAccessServiceImpl implements DataAccessService {
             while(!countDownLatch.await(30, TimeUnit.SECONDS));
         }
         catch (Exception ignored) {}
+    }
+
+    @Override
+    public FeatureCollectionGeoJson getZarrIndexingDataByMonth(
+            String uuid, String key, YearMonth yearMonth
+    ) {
+        var startDate = Instant.parse(yearMonth.atDay(1) + "T00:00:00.000000000Z");
+        var endDate = Instant.parse(yearMonth.atEndOfMonth() + "T23:59:59.999999999Z");
+
+        try {
+
+            var url = UriComponentsBuilder.fromUriString(getDataAccessEndpoint() + "/data/{uuid}/{key}/zarr_rect")
+                    .queryParam("start_date", startDate)
+                    .queryParam("end_date", endDate)
+                    .buildAndExpand(uuid, key)
+                    .toUriString();
+
+            var request = getRequestEntity(List.of(MediaType.APPLICATION_JSON));
+
+            var responseEntity = restTemplate.exchange(
+                    url,
+                    HttpMethod.GET,
+                    request,
+                    new ParameterizedTypeReference<FeatureCollectionGeoJson>() {
+                    },
+                    Map.of()
+            );
+
+            if (!responseEntity.getStatusCode().is2xxSuccessful()) {
+                log.error("Request to DataAccess Service failed with status code: {} for UUID: {} in {} -> {}", responseEntity.getStatusCode(), uuid, startDate, endDate);
+                return null;
+            }
+            if (responseEntity.getBody() == null) {
+                log.warn("No data found from DataAccess Service for UUID: {} in {} -> {}", uuid, startDate, endDate);
+                return null;
+            }
+            return responseEntity.getBody();
+
+        } catch (Exception e) {
+            log.error("Exception thrown while retrieving Zarr indexing data with UUID: {} in {} -> {}", uuid, startDate, endDate, e);
+            return null;
+        }
     }
 }
