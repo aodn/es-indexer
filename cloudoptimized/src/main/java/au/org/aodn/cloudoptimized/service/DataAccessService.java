@@ -54,4 +54,9 @@ public interface DataAccessService {
     Map<String, Map<String, MetadataEntity>> getAllMetadata();
     HealthStatus getHealthStatus();
     void waitTillServiceUp();
+
+    /**
+     * Get Zarr indexing data by month. It is a short term solution for Zarr indexing. May change later
+     */
+    FeatureCollectionGeoJson getZarrIndexingDataByMonth(String uuid, String key, YearMonth yearMonth);
 }

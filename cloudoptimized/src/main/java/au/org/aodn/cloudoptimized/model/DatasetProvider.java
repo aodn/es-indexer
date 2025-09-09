@@ -121,12 +121,20 @@ public class DatasetProvider {
 
     private FeatureCollectionTask queryFeatureCollection(List<MetadataFields> columns, YearMonth yearMonth) {
         log.info("Start querying data for year month: {}", yearMonth);
-        var featureCollection =  dataAccessService.getIndexingDatasetByMonth(
-                uuid,
-                key,
-                yearMonth,
-                columns
-        );
+        FeatureCollectionGeoJson featureCollection;
+        if (key.endsWith(".zarr")) {
+            featureCollection = dataAccessService.getZarrIndexingDataByMonth(uuid, key, yearMonth);
+        } else if (key.endsWith(".parquet")) {
+            featureCollection =  dataAccessService.getIndexingDatasetByMonth(
+                    uuid,
+                    key,
+                    yearMonth,
+                    columns
+            );
+        } else {
+            throw new UnsupportedOperationException( "Only support .zarr and .parquet dataset for now");
+        }
+
         return new FeatureCollectionTask(yearMonth, featureCollection);
     }
 }
