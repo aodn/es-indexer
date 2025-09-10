@@ -255,7 +255,7 @@ public class DataAccessServiceImpl implements DataAccessService {
                     .subscribe(
                             event -> {
                                 String message = event.getMessage() != null ? event.getMessage() : "null";
-                                log.info("Process event message {} : {}", yearMonth, message);
+                                log.debug("Process event message {} : {}", yearMonth, message);
 
                                 if (event.getData() != null) {
                                     // Merge data as event comes, this reduced the memory need to hold the string
@@ -276,14 +276,14 @@ public class DataAccessServiceImpl implements DataAccessService {
                                 countDownLatch.countDown(); // Release latch on fatal error
                             },
                             () -> {
-                                log.info("SSE stream completed for yearMonth: {}", yearMonth);
+                                log.debug("SSE stream completed for yearMonth: {}", yearMonth);
                                 countDownLatch.countDown();
                             }
                     );
 
             countDownLatch.await();
 
-            log.info("Aggregate data for {}", yearMonth);
+            log.debug("Aggregate data for {}", yearMonth);
             return toFeatureCollection(uuid, key, allEntries);
 
         } catch (Exception e) {

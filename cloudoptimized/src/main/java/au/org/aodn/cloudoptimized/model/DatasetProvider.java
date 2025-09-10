@@ -109,7 +109,7 @@ public class DatasetProvider {
                 try {
                     i ++;
                     FeatureCollectionTask c = resultQueue.take();
-                    log.info("Return data for year month: {}", c.yearMonth());
+                    log.debug("Return data for year month: {}", c.yearMonth());
                     return c.featureCollection();
                 }
                 catch (InterruptedException e) {
@@ -120,7 +120,7 @@ public class DatasetProvider {
     }
 
     private FeatureCollectionTask queryFeatureCollection(List<MetadataFields> columns, YearMonth yearMonth) {
-        log.info("Start querying data for year month: {}", yearMonth);
+        log.debug("Start querying data for year month: {}", yearMonth);
         FeatureCollectionGeoJson featureCollection;
         if (key.endsWith(".zarr")) {
             featureCollection = dataAccessService.getZarrIndexingDataByMonth(uuid, key, yearMonth);

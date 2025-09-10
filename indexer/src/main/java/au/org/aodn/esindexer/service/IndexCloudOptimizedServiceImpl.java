@@ -218,7 +218,7 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
                 i += 9000;
             }
         } else {
-            log.info("Feature collection has {} features", featureCollection.getFeatures().size());
+            log.debug("Feature collection has {} features", featureCollection.getFeatures().size());
             featureCollections.add(featureCollection);
         }
         return featureCollections;
