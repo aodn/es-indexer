@@ -20,6 +20,10 @@ public class Application {
     private static final String BATCH = "batch";
     public static void main(String[] args) {
 
+        System.out.println("args length: " + args.length);
+        for (String arg : args) {
+            System.out.println(arg);
+        }
         // if the first argument is not "batch", start the web application as a backend server
         if (args.length == 0 || !args[0].equals(BATCH)) {
             SpringApplication.run(Application.class, args);
@@ -28,7 +32,7 @@ public class Application {
 
 
         // otherwise, run the batch job
-        if (args.length != 2) {
+        if (args.length < 2 || args.length > 3) {
             System.err.println("Argument count mismatch. Arg count: " + args.length);
             System.exit(1);
         }
@@ -40,8 +44,9 @@ public class Application {
 
 
             String jobName = args[1];
+            String jobParam = args.length == 3 ? args[2] : null;
             try {
-                runner.run(jobName);
+                runner.run(jobName, jobParam);
             } catch (Exception e) {
                 System.err.println("Batch job failed with exception: " + e.getMessage());
                 System.exit(1);
