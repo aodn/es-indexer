@@ -62,7 +62,10 @@ public class BatchJobRunner {
                 break;
 
             case INDEX_ONE_CLOUD_OPTIMISED_DATASET:
-                throw new NotImplementedException("IndexCloudOptimisedDataset not yet implemented");
+                if (jobParam == null) {
+                    throw new IllegalArgumentException("Job parameter (metadataUuid) is required for job: " + jobName);
+                }
+
 
             default:
                 throw new IllegalArgumentException("Unknown job name: " + jobName);
