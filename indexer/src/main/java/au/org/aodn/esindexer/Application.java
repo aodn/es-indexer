@@ -32,7 +32,7 @@ public class Application {
 
 
         // otherwise, run the batch job
-        if (args.length < 2 || args.length > 3) {
+        if (args.length != 1 ) {
             System.err.println("Argument count mismatch. Arg count: " + args.length);
             System.exit(1);
         }
@@ -42,9 +42,13 @@ public class Application {
                 .run(args);
         BatchJobRunner runner = context.getBean(BatchJobRunner.class);
 
+        String jobName = System.getenv("INDEXER_BATCH_JOB_NAME");
+        if (jobName == null) {
+            System.err.println("Environment variable INDEXER_BATCH_JOB_NAME is not set.");
+            System.exit(1);
+        }
+        String jobParam = System.getenv("INDEXER_BATCH_JOB_PARAM");
 
-            String jobName = args[1];
-            String jobParam = args.length == 3 ? args[2] : null;
             try {
                 runner.run(jobName, jobParam);
             } catch (Exception e) {

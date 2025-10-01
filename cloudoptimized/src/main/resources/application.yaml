@@ -1,4 +1,0 @@
-aws:
-  region: ap-southeast-2
-  s3:
-    bucket: havier-example-bucket
