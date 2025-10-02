@@ -267,7 +267,7 @@ public class DataAccessServiceImpl implements DataAccessService {
                                 // Check if this is the end
                                 String[] sm = message.trim().split("/");
                                 if (sm.length == 2 && sm[1].equalsIgnoreCase("end")) {
-                                    log.info("Completion condition met for {}: {}, releasing latch", yearMonth, message);
+                                    log.debug("Completion condition met for {}: {}, releasing latch", yearMonth, message);
                                     countDownLatch.countDown();
                                 }
                             },

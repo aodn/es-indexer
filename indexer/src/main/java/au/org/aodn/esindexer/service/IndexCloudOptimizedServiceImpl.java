@@ -100,6 +100,7 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
                 Map<String, MetadataEntity> entry = entities.get(uuid);
 
                 for(String key: entry.keySet()) {
+                    log.info("Start indexing dataset with UUID: {}, dataset: {}", uuid, key);
                     try {
                         List<TemporalExtent> temporalExtents = dataAccessService.getTemporalExtentOf(uuid, key);
                         if (!temporalExtents.isEmpty()) {
@@ -118,6 +119,7 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
                     catch(MetadataNotFoundException enf) {
                         callback.onProgress(String.format("Metadata not found, skip! %s", enf.getMessage()));
                     }
+                    log.info("Finish indexing dataset with UUID: {}, dataset: {}", uuid, key);
                 }
             }
         }

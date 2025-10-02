@@ -7,12 +7,12 @@ import lombok.extern.slf4j.Slf4j;
 public class LoggingCallback implements IndexService.Callback {
     @Override
     public void onProgress(Object update) {
-        log.info("Progress: {}", update);
+        log.debug("Progress: {}", update);
     }
 
     @Override
     public void onComplete(Object result) {
-        log.info("Completed: {}", result);
+        log.debug("Completed: {}", result);
     }
 
     @Override
