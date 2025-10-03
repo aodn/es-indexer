@@ -1,8 +1,6 @@
 package au.org.aodn.esindexer.batch;
 
-import au.org.aodn.esindexer.controller.IndexerController;
 import au.org.aodn.esindexer.service.IndexCloudOptimizedService;
-import au.org.aodn.esindexer.service.IndexService;
 import au.org.aodn.esindexer.service.IndexerMetadataService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.NotImplementedException;
@@ -11,15 +9,11 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 /**
-/**
-/**
-/**
-/**
  * BatchJobRunner is responsible for executing batch jobs based on the provided job name and parameters.
  * It supports various indexing operations, including indexing metadata and cloud-optimized datasets.
  * <p>
  * Usage:
- * When submitting a batch job, override the environment variable "QPP_ARGS" with 2 or 3 arguments seperated by space;
+ * When submitting a batch job, override the environment variable "APP_ARGS" with 2 or 3 arguments seperated by space;
  * The first argument is "batch" to indicate a batch job.
  * The second argument is the job name, which can be one of the following:
  * <ul>
@@ -41,9 +35,6 @@ import org.springframework.stereotype.Component;
 public class BatchJobRunner {
 
     @Autowired
-    private IndexerMetadataService indexerMetadataService;
-
-    @Autowired
     private IndexCloudOptimizedService indexCloudOptimizedService;
 
     private static final String INDEX_ALL_METADATA = "indexAllMetadata";
@@ -57,10 +48,10 @@ public class BatchJobRunner {
         log.info("Starting batch job: {}", jobName);
         switch (jobName) {
             case INDEX_ALL_METADATA:
-                throw new NotImplementedException("Index All Metadata");
+                throw new NotImplementedException("Index All Metadata not yet implemented");
 
             case INDEX_ALL_METADATA_FROM_UUID:
-                throw new NotImplementedException("Index All Metadata");
+                throw new NotImplementedException("Index All Metadata not yet implemented");
 
             case INDEX_ONE_METADATA:
                 throw new NotImplementedException("IndexMetadata not yet implemented");
