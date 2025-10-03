@@ -1119,19 +1119,32 @@ public abstract class StacCollectionMapperService {
             else if (hitId.contains(".zarr")) {
                 mediaType = "application/x-zarr";
             }
+            var cloudOptimisedMetadata = dataAccessService.getMetadataByUuid(collectionId);
+            if(cloudOptimisedMetadata == null || cloudOptimisedMetadata.isEmpty()) {
+                throw new RuntimeException("Unable to find cloud optimized metadata for collection: " + collectionId);
+            }
 
-            Map.Entry<String, AssetModel> entry = Map.entry(
-                    AssetModel.Role.SUMMARY.toString(),
-                    AssetModel.builder()
-                            .role(AssetModel.Role.SUMMARY)
-                            .type(mediaType)
-                            .href(String.format("/collections/%s/items/summary", collectionId))
-                            .title("Summary")
-                            .description("Summary of cloud optimized data points")
-                            .build()
+            var datasets = cloudOptimisedMetadata.values();
 
-            );
-            return Map.ofEntries(entry);
+            var entires = new HashMap<String, AssetModel>();
+
+            for (var dataset: datasets) {
+                var dname = dataset.getDname();
+                Map.Entry<String, AssetModel> entry = Map.entry(
+                        AssetModel.Role.SUMMARY.toString(),
+                        AssetModel.builder()
+                                .role(AssetModel.Role.SUMMARY)
+                                .type(mediaType)
+                                .href(String.format("/collections/%s/items/summary", collectionId))
+                                .title(dname)
+                                .description("Summary of cloud optimized data points")
+                                .build()
+
+                );
+                entires.put(entry.getKey(), entry.getValue());
+            }
+
+            return entires;
         }
         else {
             return null;
