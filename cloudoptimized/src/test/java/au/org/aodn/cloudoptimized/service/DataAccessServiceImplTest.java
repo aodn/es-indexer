@@ -1,23 +1,15 @@
 package au.org.aodn.cloudoptimized.service;
 
-import au.org.aodn.cloudoptimized.model.geojson.FeatureCollectionGeoJson;
 import au.org.aodn.cloudoptimized.model.geojson.FeatureGeoJson;
 import au.org.aodn.cloudoptimized.model.geojson.PolygonGeoJson;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 import java.time.YearMonth;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -95,7 +87,9 @@ class DataAccessServiceImplTest {
         when(requestHeadersUriSpec.uri(anyString())).thenReturn(requestHeadersSpec);
         when(requestHeadersSpec.accept(any())).thenReturn(requestHeadersSpec);
         when(requestHeadersSpec.retrieve()).thenReturn(responseSpec);
-        when(responseSpec.bodyToMono(String.class)).thenReturn(Mono.just(mockJsonResponse));
+        when(responseSpec.bodyToMono(String.class))
+                .thenThrow(new RuntimeException("502 Bad Gateway")) // First request
+                .thenReturn(Mono.just(mockJsonResponse)); // second request (successful);
 
         // Inject the mocked WebClient into the service
         dataAccessService = new DataAccessServiceImpl(
@@ -122,6 +116,8 @@ class DataAccessServiceImplTest {
         assertEquals("2011-05", result.getProperties().get("date"));
         assertEquals("db049981-3d4e-4cb2-9c4b-e697650845b9", result.getProperties().get("collection"));
         assertEquals("radar_SouthAustraliaGulfs_wind_delayed_qc.zarr", result.getProperties().get("key"));
+
+        verify(responseSpec, times(2)).bodyToMono(String.class);
     }
 
 }

@@ -393,7 +393,7 @@ public class DataAccessServiceImpl implements DataAccessService {
                             .bodyToMono(String.class)
                             .flux()
             )
-            .retryWhen(Retry.backoff(5, Duration.ofSeconds(random.nextInt(5, 10)))
+            .retryWhen(Retry.backoff(30, Duration.ofSeconds(random.nextInt(45, 90)))
                     .doBeforeRetry(signal -> log.info("Retrying getZarrIndexingDataByMonth for {} due to: {}", yearMonth, signal.failure().getMessage())))
             .subscribe(
                     data -> {
