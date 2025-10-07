@@ -376,33 +376,51 @@ public class DataAccessServiceImpl implements DataAccessService {
         var endDate = Instant.parse(yearMonth.atEndOfMonth() + "T23:59:59.999999999Z");
 
         try {
-
             var url = UriComponentsBuilder.fromUriString(getDataAccessEndpoint() + "/data/{uuid}/{key}/zarr_rect")
                     .queryParam("start_date", startDate)
                     .queryParam("end_date", endDate)
                     .buildAndExpand(uuid, key)
                     .toUriString();
 
-            var request = getRequestEntity(List.of(MediaType.APPLICATION_JSON));
+            CountDownLatch countDownLatch = new CountDownLatch(1);
+            final FeatureCollectionGeoJson[] result = new FeatureCollectionGeoJson[1];
 
-            var responseEntity = restTemplate.exchange(
-                    url,
-                    HttpMethod.GET,
-                    request,
-                    new ParameterizedTypeReference<FeatureCollectionGeoJson>() {
+            Flux.defer(
+                    () -> webClient.get()
+                            .uri(url)
+                            .accept(MediaType.APPLICATION_JSON)
+                            .retrieve()
+                            .bodyToMono(String.class)
+                            .flux()
+            )
+            .retryWhen(Retry.backoff(5, Duration.ofSeconds(random.nextInt(5, 10)))
+                    .doBeforeRetry(signal -> log.info("Retrying getZarrIndexingDataByMonth for {} due to: {}", yearMonth, signal.failure().getMessage())))
+            .subscribe(
+                    data -> {
+                        try {
+                            FeatureCollectionGeoJson geoJson = objectMapper.readValue(data, FeatureCollectionGeoJson.class);
+                            result[0] = geoJson;
+                        } catch (Exception e) {
+                            log.error("Failed to parse FeatureCollectionGeoJson: {}", e.getMessage());
+                        }
+                        countDownLatch.countDown();
                     },
-                    Map.of()
+                    error -> {
+                        log.error("Fatal error in Zarr SSE stream for yearMonth {}: {}", yearMonth, error.getMessage(), error);
+                        countDownLatch.countDown();
+                    },
+                    () -> {
+                        log.debug("Zarr SSE stream completed for yearMonth: {}", yearMonth);
+                        countDownLatch.countDown();
+                    }
             );
 
-            if (!responseEntity.getStatusCode().is2xxSuccessful()) {
-                log.error("Request to DataAccess Service failed with status code: {} for UUID: {} in {} -> {}", responseEntity.getStatusCode(), uuid, startDate, endDate);
-                return null;
-            }
-            if (responseEntity.getBody() == null) {
+            countDownLatch.await();
+
+            if (result[0] == null) {
                 log.warn("No data found from DataAccess Service for UUID: {} in {} -> {}", uuid, startDate, endDate);
-                return null;
             }
-            return responseEntity.getBody();
+            return result[0];
 
         } catch (Exception e) {
             log.error("Exception thrown while retrieving Zarr indexing data with UUID: {} in {} -> {}", uuid, startDate, endDate, e);
