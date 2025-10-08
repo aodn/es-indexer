@@ -1,5 +1,6 @@
 package au.org.aodn.cloudoptimized.service;
 
+import au.org.aodn.cloudoptimized.model.TemporalExtent;
 import au.org.aodn.cloudoptimized.model.geojson.FeatureGeoJson;
 import au.org.aodn.cloudoptimized.model.geojson.PolygonGeoJson;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -118,6 +119,58 @@ class DataAccessServiceImplTest {
         assertEquals("radar_SouthAustraliaGulfs_wind_delayed_qc.zarr", result.getProperties().get("key"));
 
         verify(responseSpec, times(2)).bodyToMono(String.class);
+    }
+
+    @Test
+    void testGetTemporalExtentOf_withRetry() {
+        // Mock WebClient components
+        WebClient.RequestHeadersUriSpec requestHeadersUriSpec = mock(WebClient.RequestHeadersUriSpec.class);
+        WebClient.RequestHeadersSpec requestHeadersSpec = mock(WebClient.RequestHeadersSpec.class);
+        WebClient.ResponseSpec responseSpec = mock(WebClient.ResponseSpec.class);
+
+        // Prepare mock response (as JSON array)
+        String mockJsonResponse = """
+        [
+            {"start":"2020-01-01T00:00:00Z","end":"2020-12-31T23:59:59Z"}
+        ]
+        """;
+
+        // Mock the WebClient behavior
+        WebClient mockWebClient = mock(WebClient.class);
+        when(mockWebClient.get()).thenReturn(requestHeadersUriSpec);
+        when(requestHeadersUriSpec.uri(anyString())).thenReturn(requestHeadersSpec);
+        when(requestHeadersSpec.accept(any())).thenReturn(requestHeadersSpec);
+        when(requestHeadersSpec.retrieve()).thenReturn(responseSpec);
+        when(responseSpec.bodyToFlux(any(Class.class)))
+                .thenThrow(new RuntimeException("502 Bad Gateway")) // First call fails
+                .thenReturn(reactor.core.publisher.Flux.just(
+//                        new TemporalExtent("2020-01-01T00:00:00Z", "2020-12-31T23:59:59Z")
+                        TemporalExtent.builder()
+                                .startDate("2020-01-01T00:00:00Z")
+                                .endDate("2020-12-31T23:59:59Z")
+                                .build()
+                )); // Second call succeeds
+
+        // Inject the mocked WebClient into the service
+        dataAccessService = new DataAccessServiceImpl(
+                "server-url",
+                "base-url",
+                mockRestTemplate,
+                mockWebClient,
+                new ObjectMapper()
+        );
+
+        // Call the method under test
+        var result = dataAccessService.getTemporalExtentOf("test-uuid", "test-key");
+
+        // Assert the result
+        assertNotNull(result);
+        assertEquals(1, result.size());
+        assertEquals("2020-01-01T00:00:00Z", result.get(0).getStartDate());
+        assertEquals("2020-12-31T23:59:59Z", result.get(0).getEndDate());
+
+        // Verify retry (should call twice)
+        verify(responseSpec, times(2)).bodyToFlux(any(Class.class));
     }
 
 }
