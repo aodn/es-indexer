@@ -21,6 +21,7 @@ import reactor.util.retry.Retry;
 
 import java.time.Duration;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.*;
 import java.util.concurrent.CountDownLatch;
@@ -201,8 +202,141 @@ public class DataAccessServiceImpl implements DataAccessService {
         }
     }
 
+    /**
+     * This function is a temp solution for very heavy requests of Parquet May be
+     * removed in the future.
+     */
+    private List<? extends CloudOptimizedEntry> getIndexingDatasetByDays(final String uuid, String key, final LocalDate startDate, final LocalDate endDate, final List<MetadataFields> fields) {
+        try {
+            Map<String, Object> params = new HashMap<>();
+            params.put("uuid", uuid);
+
+            String url = UriComponentsBuilder.fromUriString(getDataAccessEndpoint() + "/data/{uuid}/{key}")
+                    .queryParam("f", "sse/json")
+                    .queryParam("start_date", startDate)
+                    .queryParam("end_date", endDate)
+                    .queryParam("columns", fields)
+                    .buildAndExpand(uuid, key)
+                    .toUriString();
+
+            final List<CloudOptimizedEntryReducePrecision> allEventData = new ArrayList<>();
+            CountDownLatch countDownLatch = new CountDownLatch(1);
+            var dateRange = startDate + " to " + endDate;
+
+            // Use defer to allow retry with the same argument, with f=sse/json argument above, we signal
+            // server to return result with server side event.
+            Flux.defer(
+                            () -> webClient.get()
+                                    .uri(url, params)
+                                    .accept(MediaType.TEXT_EVENT_STREAM)
+                                    .retrieve()
+                                    .bodyToFlux(String.class)
+                    )
+                    .filter(data -> data.contains("data")) // Filter for data: lines
+                    .map(data -> {
+                        try {
+                            // Deserialize raw event into SSEEvent
+                            return objectMapper.readValue(data, new TypeReference<SSEEvent<List<CloudOptimizedEntryReducePrecision>>>() {});
+                        } catch (JsonProcessingException e) {
+                            log.error("Failed to parse SSE event: {}, Error: {}", data.substring(0, Math.min(100, data.length())), e.getMessage());
+                            return null;
+                        }
+                    })
+                    .filter(Objects::nonNull)
+                    // Ignore other status, just process the complete event, the other event is used to keep the connection alive
+                    .filter(event -> "completed".equals(event.getStatus()))
+                    // Give a random number so that not all retry happens the same time when previous failed
+                    .retryWhen(Retry.backoff(30, Duration.ofSeconds(random.nextInt(45, 90)))
+                            .doBeforeRetry(signal -> log.info("Retrying {} due to: {}", dateRange, signal.failure().getMessage())))
+                    .subscribe(
+                            event -> {
+                                String message = event.getMessage() != null ? event.getMessage() : "null";
+                                log.debug("Process event message {} : {}", dateRange, message);
+
+                                if (event.getData() != null) {
+                                    // Merge data as event comes, this reduced the memory need to hold the string
+                                    allEventData.addAll(event.getData());
+                                } else {
+                                    log.warn("Received completed event with null data for date range: {}", dateRange);
+                                }
+
+                                // Check if this is the end
+                                String[] sm = message.trim().split("/");
+                                if (sm.length == 2 && sm[1].equalsIgnoreCase("end")) {
+                                    log.debug("Completion condition met for {}: {}, releasing latch", dateRange, message);
+                                    countDownLatch.countDown();
+                                }
+                            },
+                            error -> {
+                                log.error("Fatal error in SSE stream for dateRange {}: {}", dateRange, error.getMessage(), error);
+                                countDownLatch.countDown(); // Release latch on fatal error
+                            },
+                            () -> {
+                                log.debug("SSE stream completed for dateRange: {}", dateRange);
+                                countDownLatch.countDown();
+                            }
+                    );
+
+            countDownLatch.await();
+
+            log.debug("Aggregate data for {}", dateRange);
+            if (!allEventData.isEmpty()) {
+                return allEventData;
+            } else {
+                log.info("No data found from DataAccess Service for UUID: {} in {} -> {}", uuid, startDate, endDate);
+            }
+
+        } catch (Exception e) {
+            // Do nothing just return empty list
+            log.info("Unable to find cloud optimized data with UUID: {} in S3 for {} -> {}", uuid, startDate, endDate, e);
+            log.warn("error message is: {}", e.getMessage());
+        }
+        return null;
+    }
     @Override
     public FeatureCollectionGeoJson getIndexingDatasetByMonth(final String uuid, String key, final YearMonth yearMonth, final List<MetadataFields> fields) {
+
+        var startDate = yearMonth.atDay(1);
+        var endDate = yearMonth.atEndOfMonth();
+
+        // currently, we force to get data in the same year to simplify the logic
+        if (startDate.getYear() != endDate.getYear()) {
+            throw new IllegalArgumentException("Start date and end date must be in the same year");
+        }
+
+        List<CloudOptimizedEntry> eventDataList = new ArrayList<>();
+
+        final int dateRangeLength = 3; // days
+        var currentStartDate = startDate;
+        while (!currentStartDate.isAfter(endDate)) {
+            var currentEndDate = currentStartDate.plusDays(dateRangeLength - 1);
+            if (currentEndDate.isAfter(endDate)) {
+                currentEndDate = endDate;
+            }
+
+            var eventData = getIndexingDatasetByDays(uuid, key, currentStartDate, currentEndDate, fields);
+            if (eventData != null) {
+                for (var entry : eventData) {
+                    eventDataList.add((CloudOptimizedEntry) entry);
+                }
+            }
+            currentStartDate = currentEndDate.plusDays(1);
+        }
+        // Merge all the entities
+        final Map<CloudOptimizedEntry, Long> allEntries = new HashMap<>();
+        aggregateData(allEntries, eventDataList);
+        return toFeatureCollection(uuid, key, allEntries);
+    }
+
+    /**
+     * this function is the old version of getIndexingDatasetByMonth, it may be removed in the future. only for testing now
+     * @param uuid
+     * @param key
+     * @param yearMonth
+     * @param fields
+     * @return
+     */
+    public FeatureCollectionGeoJson getIndexingDatasetByMonth_old(final String uuid, String key, final YearMonth yearMonth, final List<MetadataFields> fields) {
 
         var startDate = yearMonth.atDay(1);
         var endDate = yearMonth.atEndOfMonth();
@@ -230,11 +364,11 @@ public class DataAccessServiceImpl implements DataAccessService {
             // Use defer to allow retry with the same argument, with f=sse/json argument above, we signal
             // server to return result with server side event.
             Flux.defer(
-                    () -> webClient.get()
-                            .uri(url, params)
-                            .accept(MediaType.TEXT_EVENT_STREAM)
-                            .retrieve()
-                            .bodyToFlux(String.class)
+                            () -> webClient.get()
+                                    .uri(url, params)
+                                    .accept(MediaType.TEXT_EVENT_STREAM)
+                                    .retrieve()
+                                    .bodyToFlux(String.class)
                     )
                     .filter(data -> data.contains("data")) // Filter for data: lines
                     .map(data -> {
@@ -255,7 +389,7 @@ public class DataAccessServiceImpl implements DataAccessService {
                     .subscribe(
                             event -> {
                                 String message = event.getMessage() != null ? event.getMessage() : "null";
-                                log.debug("Process event message {} : {}", yearMonth, message);
+                                log.info("Process event message {} : {}", yearMonth, message);
 
                                 if (event.getData() != null) {
                                     // Merge data as event comes, this reduced the memory need to hold the string
@@ -267,7 +401,7 @@ public class DataAccessServiceImpl implements DataAccessService {
                                 // Check if this is the end
                                 String[] sm = message.trim().split("/");
                                 if (sm.length == 2 && sm[1].equalsIgnoreCase("end")) {
-                                    log.debug("Completion condition met for {}: {}, releasing latch", yearMonth, message);
+                                    log.info("Completion condition met for {}: {}, releasing latch", yearMonth, message);
                                     countDownLatch.countDown();
                                 }
                             },
@@ -276,14 +410,14 @@ public class DataAccessServiceImpl implements DataAccessService {
                                 countDownLatch.countDown(); // Release latch on fatal error
                             },
                             () -> {
-                                log.debug("SSE stream completed for yearMonth: {}", yearMonth);
+                                log.info("SSE stream completed for yearMonth: {}", yearMonth);
                                 countDownLatch.countDown();
                             }
                     );
 
             countDownLatch.await();
 
-            log.debug("Aggregate data for {}", yearMonth);
+            log.info("Aggregate data for {}", yearMonth);
             return toFeatureCollection(uuid, key, allEntries);
 
         } catch (Exception e) {
