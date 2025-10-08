@@ -2,8 +2,10 @@ package au.org.aodn.cloudoptimized.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
@@ -11,6 +13,8 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Setter
 @Getter
 public class TemporalExtent{
