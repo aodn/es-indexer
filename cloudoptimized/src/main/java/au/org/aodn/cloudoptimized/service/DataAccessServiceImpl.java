@@ -296,37 +296,36 @@ public class DataAccessServiceImpl implements DataAccessService {
 
     @Override
     public List<TemporalExtent> getTemporalExtentOf(String uuid, String key) {
-        if(isSafeId(uuid)) {
+        if (isSafeId(uuid)) {
             // Sometimes the server is down due to SPOT instance or software update.
             waitTillServiceUp();
 
             try {
-                HttpEntity<String> request = getRequestEntity(List.of(MediaType.APPLICATION_JSON));
-
                 String url = UriComponentsBuilder.fromUriString(getDataAccessEndpoint() + "/data/{uuid}/{key}/temporal_extent")
                         .buildAndExpand(uuid, key)
                         .toUriString();
 
-                ResponseEntity<List<TemporalExtent>> responseEntity = restTemplate.exchange(
-                        url,
-                        HttpMethod.GET,
-                        request,
-                        new ParameterizedTypeReference<>() {
-                        },
-                        Map.of()
-                );
+                // Use WebClient with retry/backoff, similar to other methods
+                List<TemporalExtent> result = Flux.defer(() ->
+                        webClient.get()
+                                .uri(url)
+                                .accept(MediaType.APPLICATION_JSON)
+                                .retrieve()
+                                .bodyToFlux(TemporalExtent.class)
+                )
+                .retryWhen(Retry.backoff(30, Duration.ofSeconds(random.nextInt(45, 90)))
+                        .doBeforeRetry(signal -> log.info("Retrying getTemporalExtentOf for {} due to: {}", uuid, signal.failure().getMessage())))
+                .collectList()
+                .block();
 
-                return responseEntity.getBody();
-
-            }
-            catch (HttpClientErrorException.NotFound e) {
-                throw new MetadataNotFoundException("UUID not found : " + uuid + " in DataAccess Service");
-            }
-            catch (Exception e) {
+                return result;
+            } catch (Exception e) {
+                if (e.getCause() instanceof HttpClientErrorException.NotFound) {
+                    throw new MetadataNotFoundException("UUID not found : " + uuid + " in DataAccess Service");
+                }
                 throw new RuntimeException("Exception thrown while retrieving dataset with UUID: " + uuid + e.getMessage(), e);
             }
-        }
-        else {
+        } else {
             throw new MetadataNotFoundException("Malform UUID in request: " + uuid);
         }
     }
@@ -427,4 +426,5 @@ public class DataAccessServiceImpl implements DataAccessService {
             return null;
         }
     }
+
 }
