@@ -19,10 +19,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import reactor.core.publisher.Flux;
 import reactor.util.retry.Retry;
 
-import java.time.Duration;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.YearMonth;
+import java.time.*;
 import java.util.*;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -38,6 +35,9 @@ public class DataAccessServiceImpl implements DataAccessService {
     protected final WebClient webClient;
     protected final ObjectMapper objectMapper;
     protected final Random random = new Random();
+
+    private final static int MAX_RETRY_ATTEMPT = 30;  //times
+    private final static int RETRY_DELAY = 30; // second
 
     public DataAccessServiceImpl(String serverUrl, String baseUrl, RestTemplate restTemplate, WebClient webClient, ObjectMapper objectMapper) {
         this.accessEndPoint = serverUrl + baseUrl;
@@ -209,14 +209,16 @@ public class DataAccessServiceImpl implements DataAccessService {
      * removed in the future.
      */
     private List<? extends CloudOptimizedEntry> getIndexingDatasetByDays(final String uuid, String key, final LocalDate startDate, final LocalDate endDate, final List<MetadataFields> fields) {
+        log.info("Fetching for UUID: {} in {} -> {}", uuid, startDate, endDate);
         try {
             Map<String, Object> params = new HashMap<>();
             params.put("uuid", uuid);
+            LocalDateTime endDateTime = endDate.atTime(LocalTime.MAX);
 
             String url = UriComponentsBuilder.fromUriString(getDataAccessEndpoint() + "/data/{uuid}/{key}")
                     .queryParam("f", "sse/json")
                     .queryParam("start_date", startDate)
-                    .queryParam("end_date", endDate)
+                    .queryParam("end_date", endDateTime)
                     .queryParam("columns", fields)
                     .buildAndExpand(uuid, key)
                     .toUriString();
@@ -248,7 +250,7 @@ public class DataAccessServiceImpl implements DataAccessService {
                     // Ignore other status, just process the complete event, the other event is used to keep the connection alive
                     .filter(event -> "completed".equals(event.getStatus()))
                     // Give a random number so that not all retry happens the same time when previous failed
-                    .retryWhen(Retry.backoff(30, Duration.ofSeconds(random.nextInt(45, 90)))
+                    .retryWhen(Retry.fixedDelay(MAX_RETRY_ATTEMPT, Duration.ofSeconds(RETRY_DELAY))
                             .doBeforeRetry(signal -> log.info("Retrying {} due to: {}", dateRange, signal.failure().getMessage())))
                     .subscribe(
                             event -> {
@@ -274,7 +276,7 @@ public class DataAccessServiceImpl implements DataAccessService {
                                 countDownLatch.countDown(); // Release latch on fatal error
                             },
                             () -> {
-                                log.debug("SSE stream completed for dateRange: {}", dateRange);
+                                log.info("SSE stream completed for dateRange: {}", dateRange);
                                 countDownLatch.countDown();
                             }
                     );
@@ -402,7 +404,7 @@ public class DataAccessServiceImpl implements DataAccessService {
                     // Ignore other status, just process the complete event, the other event is used to keep the connection alive
                     .filter(event -> "completed".equals(event.getStatus()))
                     // Give a random number so that not all retry happens the same time when previous failed
-                    .retryWhen(Retry.backoff(30, Duration.ofSeconds(random.nextInt(45, 90)))
+                    .retryWhen(Retry.fixedDelay(MAX_RETRY_ATTEMPT, Duration.ofSeconds(RETRY_DELAY))
                             .doBeforeRetry(signal -> log.info("Retrying {} due to: {}", yearMonth, signal.failure().getMessage())))
                     .subscribe(
                             event -> {
@@ -465,7 +467,7 @@ public class DataAccessServiceImpl implements DataAccessService {
                                 .retrieve()
                                 .bodyToFlux(TemporalExtent.class)
                 )
-                .retryWhen(Retry.backoff(30, Duration.ofSeconds(random.nextInt(45, 90)))
+                .retryWhen(Retry.fixedDelay(MAX_RETRY_ATTEMPT, Duration.ofSeconds(RETRY_DELAY))
                         .doBeforeRetry(signal -> log.info("Retrying getTemporalExtentOf for {} due to: {}", uuid, signal.failure().getMessage())))
                 .collectList()
                 .block();
@@ -544,7 +546,7 @@ public class DataAccessServiceImpl implements DataAccessService {
                             .bodyToMono(String.class)
                             .flux()
             )
-            .retryWhen(Retry.backoff(30, Duration.ofSeconds(random.nextInt(45, 90)))
+            .retryWhen(Retry.fixedDelay(MAX_RETRY_ATTEMPT, Duration.ofSeconds(RETRY_DELAY))
                     .doBeforeRetry(signal -> log.info("Retrying getZarrIndexingDataByMonth for {} due to: {}", yearMonth, signal.failure().getMessage())))
             .subscribe(
                     data -> {
@@ -578,5 +580,6 @@ public class DataAccessServiceImpl implements DataAccessService {
             return null;
         }
     }
+
 
 }
