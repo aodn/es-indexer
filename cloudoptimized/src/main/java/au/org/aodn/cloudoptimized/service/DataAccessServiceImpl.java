@@ -25,6 +25,8 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.*;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -305,23 +307,39 @@ public class DataAccessServiceImpl implements DataAccessService {
         }
 
         List<CloudOptimizedEntry> eventDataList = new ArrayList<>();
-
-        final int dateRangeLength = 3; // days
+        final int dateRangeLength = 7; // days
         var currentStartDate = startDate;
+
+        // Use ExecutorService for parallel execution
+        int numThreads = Runtime.getRuntime().availableProcessors();
+        ExecutorService executor = java.util.concurrent.Executors.newFixedThreadPool(numThreads);
+        List<java.util.concurrent.Future<List<? extends CloudOptimizedEntry>>> futures = new ArrayList<>();
+
         while (!currentStartDate.isAfter(endDate)) {
             var currentEndDate = currentStartDate.plusDays(dateRangeLength - 1);
             if (currentEndDate.isAfter(endDate)) {
                 currentEndDate = endDate;
             }
-
-            var eventData = getIndexingDatasetByDays(uuid, key, currentStartDate, currentEndDate, fields);
-            if (eventData != null) {
-                for (var entry : eventData) {
-                    eventDataList.add((CloudOptimizedEntry) entry);
-                }
-            }
+            final var start = currentStartDate;
+            final var end = currentEndDate;
+            futures.add(executor.submit(() -> getIndexingDatasetByDays(uuid, key, start, end, fields)));
             currentStartDate = currentEndDate.plusDays(1);
         }
+
+        for (java.util.concurrent.Future<List<? extends CloudOptimizedEntry>> future : futures) {
+            try {
+                var eventData = future.get();
+                if (eventData != null) {
+                    for (var entry : eventData) {
+                        eventDataList.add((CloudOptimizedEntry) entry);
+                    }
+                }
+            } catch (Exception e) {
+                // Handle exceptions from parallel tasks
+                throw new RuntimeException("Exception in parallel data fetching: " + e.getMessage(), e);
+            }
+        }
+        executor.shutdown();
         // Merge all the entities
         final Map<CloudOptimizedEntry, Long> allEntries = new HashMap<>();
         aggregateData(allEntries, eventDataList);
