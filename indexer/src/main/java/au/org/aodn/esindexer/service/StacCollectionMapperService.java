@@ -295,18 +295,28 @@ public abstract class StacCollectionMapperService {
      * @return true if the constraint is like a suggested citation
      */
     private static boolean isSuggestedCitation(String constraint) {
+        String lowerConstraint = constraint.toLowerCase();
         String regex = "\\[[^]]+]";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(constraint);
-        if (constraint.toLowerCase().contains("citation") && matcher.find()) {
+        boolean hasBrackets = matcher.find();
+
+        if (lowerConstraint.contains("citation") && hasBrackets) {
             return true;
         }
-        if (constraint.toLowerCase().contains("cite as")) {
+        // IMAS data has the identifier of "cita data as",
+        // e.g., https://geonetwork-metatest.edge.aodn.org.au/geonetwork/srv/eng/catalog.search#/metadata/0145df96-3847-474b-8b63-a66f0e03ff54/formatters/xsl-view?root=div&view=advanced
+        Pattern citationPattern = Pattern.compile("cite(\\s+data)?\\s+as");
+        if (citationPattern.matcher(lowerConstraint).find()) {
+            return true;
+        }
+        // IMOS data has this identifier, e.g., https://catalogue-imos.aodn.org.au/geonetwork/srv/eng/catalog.search#/metadata/2fda7836-81d8-4081-818e-6d344fd6cc6c
+        if (lowerConstraint.contains("citation") && lowerConstraint.contains("all associated reports")) {
             return true;
         }
         // IMAS data has this identifier, e.g., https://geonetwork-edge.aodn.org.au/geonetwork/srv/eng/catalog.search#/metadata/20b07936-3bfb-4a72-805d-0b24f1fd4d3f/formatters/xsl-view?root=div&view=advanced
         // and https://catalogue.aodn.org.au/geonetwork/srv/eng/catalog.search#/metadata/697b1314-7351-4478-b5f4-7ca4e5a1db3a/formatters/imos-full-view?root=div&view=advanced&approved=true
-        if (constraint.toLowerCase().contains("data accessed at")) {
+        if (lowerConstraint.contains("data accessed at")) {
             return true;
         }
         return false;
