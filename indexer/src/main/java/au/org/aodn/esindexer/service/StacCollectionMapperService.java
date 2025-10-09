@@ -249,22 +249,60 @@ public abstract class StacCollectionMapperService {
                         continue;
                     }
 
-                    otherConstraints.forEach(constraint ->
-                            safeGet(() -> constraint.getCharacterString().getValue().toString())
-                                    .ifPresent(cons -> {
-                                        // split into suggested citation text + remaining other constraints text: parts[0]=suggested, parts[1]=remaining
-                                        String[] parts = extractCitationParts((String) cons);
+                    // Define versioned citation pattern and go through to find versioned citations. This is because in IMOS data, there are multiple citations with different document version.
+                    // We use the newest version as the suggested citation, and the rests remain in other constraints filed.
+                    // e.g., https://catalogue.aodn.org.au/geonetwork/srv/eng/catalog.search#/metadata/aa14b1a4-eb3f-4c6e-89a9-622c1f95bfb2/formatters/imos-full-view?root=div&view=advanced&approved=true
+                    Pattern versionCitationPattern = Pattern.compile("citation in a list of references for Version\\s+(\\d+(?:\\.\\d+)*)", Pattern.CASE_INSENSITIVE);
+                    Map<Double, String> versionedCitations = new HashMap<>();
+                    List<CharacterStringPropertyType> nonVersionedConstraints = new ArrayList<>();
 
-                                        if (parts[0] != null && !parts[0].isBlank()) {
-                                            if (citation.getSuggestedCitation() == null || citation.getSuggestedCitation().isBlank()) {
-                                                citation.setSuggestedCitation(parts[0]);
-                                            }
-                                        }
-                                        if (parts[1] != null && !parts[1].isBlank()) {
-                                            citation.addOtherConstraint(parts[1]);
-                                        }
-                                    })
+                    otherConstraints.forEach(constraint ->
+                        safeGet(() -> constraint.getCharacterString().getValue().toString())
+                                .ifPresent(cons -> {
+                                    String constraintText = (String) cons;
+                                    Matcher versionMatcher = versionCitationPattern.matcher(constraintText);
+
+                                    if (versionMatcher.find()) {
+                                        String versionStr = versionMatcher.group(1);
+                                        double versionNum = parseVersion(versionStr);
+                                        versionedCitations.put(versionNum, constraintText);
+                                    } else {
+                                        nonVersionedConstraints.add(constraint);
+                                    }
+                                })
                     );
+
+                    if (!versionedCitations.isEmpty()) {
+                        Double maxVersion = versionedCitations.keySet().stream()
+                                .max(Double::compare)
+                                .orElse(null);
+                        // deal with versioned citations
+                        if (maxVersion != null) {
+                            String latestCitation = versionedCitations.get(maxVersion);
+                            citation.setSuggestedCitation(latestCitation);
+                            versionedCitations.entrySet().stream()
+                                    .filter(entry -> !entry.getKey().equals(maxVersion))
+                                    .forEach(entry -> citation.addOtherConstraint(entry.getValue()));
+                        }
+                    }
+
+                    nonVersionedConstraints.forEach(constraint ->
+                        safeGet(() -> constraint.getCharacterString().getValue().toString())
+                                .ifPresent(cons -> {
+                                    // split into suggested citation text + remaining other constraints text: parts[0]=suggested, parts[1]=remaining
+                                    String[] parts = extractCitationParts((String) cons);
+
+                                    if (parts[0] != null && !parts[0].isBlank()) {
+                                        if (citation.getSuggestedCitation() == null || citation.getSuggestedCitation().isBlank()) {
+                                            citation.setSuggestedCitation(parts[0]);
+                                        }
+                                    }
+                                    if (parts[1] != null && !parts[1].isBlank()) {
+                                        citation.addOtherConstraint(parts[1]);
+                                    }
+                                })
+                    );
+
                 }
                 else if (abstractConstraints instanceof MDConstraintsType constraints) {
                     var useLimitations = safeGet(constraints::getUseLimitation);
@@ -284,6 +322,17 @@ public abstract class StacCollectionMapperService {
         return SummariesUtils.getStatement(source);
     }
 
+    /**
+     * A helper function to parse version number in a string constraint
+     * A few IMOS dataset need this, e.g., https://catalogue.aodn.org.au/geonetwork/srv/eng/catalog.search#/metadata/aa14b1a4-eb3f-4c6e-89a9-622c1f95bfb2/formatters/imos-full-view?root=div&view=advanced&approved=true
+     */
+    private static double parseVersion(String version) {
+        try {
+            return Double.parseDouble(version);
+        } catch (NumberFormatException e) {
+            return 0.0;
+        }
+    }
 
     /**
      * Because suggested citation and other constraints are in the same block,
