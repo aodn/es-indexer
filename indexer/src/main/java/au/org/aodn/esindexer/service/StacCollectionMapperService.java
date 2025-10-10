@@ -1146,14 +1146,19 @@ public abstract class StacCollectionMapperService {
             Object value = onlineResource.getName().getCharacterString().getValue();
             if(value != null && !value.toString().trim().isEmpty()) {
                 if(value instanceof MimeFileTypeType mt) {
-                    return mt.getValue();
+                    if(mt.getValue() != null && !mt.getValue().trim().isEmpty()) {
+                        return mt.getValue();
+                    }
                 }
-                return value.toString();
+                else {
+                    return value.toString();
+                }
             }
-            else {
-                //if value is empty string, use description as the fallback title
-                if (onlineResource.getDescription() != null) {
-                    return onlineResource.getDescription().getCharacterString().getValue().toString();
+            //if value is empty string, use description as the fallback title
+            if (onlineResource.getDescription() != null && onlineResource.getDescription().getCharacterString() != null) {
+                Object descValue = onlineResource.getDescription().getCharacterString().getValue();
+                if(descValue != null) {
+                    return descValue.toString();
                 }
             }
         }
