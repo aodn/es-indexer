@@ -1142,26 +1142,28 @@ public abstract class StacCollectionMapperService {
      * @return - The online resource
      */
     protected String getOnlineResourceName(CIOnlineResourceType2 onlineResource) {
-        if(onlineResource.getName() != null && onlineResource.getName().getCharacterString() != null) {
-            Object value = onlineResource.getName().getCharacterString().getValue();
-            if(value != null && !value.toString().trim().isEmpty()) {
-                if(value instanceof MimeFileTypeType mt) {
-                    if(mt.getValue() != null && !mt.getValue().trim().isEmpty()) {
-                        return mt.getValue();
-                    }
-                }
-                else {
-                    return value.toString();
+        var value = safeGet(() -> onlineResource.getName().getCharacterString().getValue())
+                .orElse(null);
+
+        if(value != null && !value.toString().trim().isEmpty()) {
+            if(value instanceof MimeFileTypeType mt) {
+                String mimeValue = mt.getValue();
+                if(mimeValue != null && !mimeValue.trim().isEmpty()) {
+                    return mimeValue;
                 }
             }
-            //if value is empty string, use description as the fallback title
-            if (onlineResource.getDescription() != null && onlineResource.getDescription().getCharacterString() != null) {
-                Object descValue = onlineResource.getDescription().getCharacterString().getValue();
-                if(descValue != null) {
-                    return descValue.toString();
-                }
+            else {
+                return value.toString();
             }
         }
+        // if value is null or empty string, use description as the fallback title
+        var descValue = safeGet(() -> onlineResource.getDescription().getCharacterString().getValue())
+                .orElse(null);
+
+        if(descValue != null) {
+            return descValue.toString();
+        }
+
         return null;
     }
 }
