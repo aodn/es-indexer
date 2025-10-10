@@ -1,0 +1,739 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdb:MD_Metadata xmlns:mdb="http://standards.iso.org/iso/19115/-3/mdb/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cat="http://standards.iso.org/iso/19115/-3/cat/1.0" xmlns:cit="http://standards.iso.org/iso/19115/-3/cit/2.0" xmlns:gcx="http://standards.iso.org/iso/19115/-3/gcx/1.0" xmlns:gex="http://standards.iso.org/iso/19115/-3/gex/1.0" xmlns:lan="http://standards.iso.org/iso/19115/-3/lan/1.0" xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0" xmlns:mas="http://standards.iso.org/iso/19115/-3/mas/1.0" xmlns:mcc="http://standards.iso.org/iso/19115/-3/mcc/1.0" xmlns:mco="http://standards.iso.org/iso/19115/-3/mco/1.0" xmlns:mda="http://standards.iso.org/iso/19115/-3/mda/1.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0" xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0" xmlns:mex="http://standards.iso.org/iso/19115/-3/mex/1.0" xmlns:mmi="http://standards.iso.org/iso/19115/-3/mmi/1.0" xmlns:mpc="http://standards.iso.org/iso/19115/-3/mpc/1.0" xmlns:mrc="http://standards.iso.org/iso/19115/-3/mrc/2.0" xmlns:mrd="http://standards.iso.org/iso/19115/-3/mrd/1.0" xmlns:mri="http://standards.iso.org/iso/19115/-3/mri/1.0" xmlns:mrl="http://standards.iso.org/iso/19115/-3/mrl/2.0" xmlns:mrs="http://standards.iso.org/iso/19115/-3/mrs/1.0" xmlns:msr="http://standards.iso.org/iso/19115/-3/msr/2.0" xmlns:mdq="http://standards.iso.org/iso/19157/-2/mdq/1.0" xmlns:mac="http://standards.iso.org/iso/19115/-3/mac/2.0" xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:geonet="http://www.fao.org/geonetwork" xsi:schemaLocation="http://standards.iso.org/iso/19115/-3/cat/1.0 http://standards.iso.org/iso/19115/-3/cat/1.0/cat.xsd http://standards.iso.org/iso/19115/-3/cit/2.0 http://standards.iso.org/iso/19115/-3/cit/2.0/cit.xsd http://standards.iso.org/iso/19115/-3/gcx/1.0 http://standards.iso.org/iso/19115/-3/gcx/1.0/gcx.xsd http://standards.iso.org/iso/19115/-3/gex/1.0 http://standards.iso.org/iso/19115/-3/gex/1.0/gex.xsd http://standards.iso.org/iso/19115/-3/lan/1.0 http://standards.iso.org/iso/19115/-3/lan/1.0/lan.xsd http://standards.iso.org/iso/19115/-3/srv/2.0 http://standards.iso.org/iso/19115/-3/srv/2.0/srv.xsd http://standards.iso.org/iso/19115/-3/mas/1.0 http://standards.iso.org/iso/19115/-3/mas/1.0/mas.xsd http://standards.iso.org/iso/19115/-3/mcc/1.0 http://standards.iso.org/iso/19115/-3/mcc/1.0/mcc.xsd http://standards.iso.org/iso/19115/-3/mco/1.0 http://standards.iso.org/iso/19115/-3/mco/1.0/mco.xsd http://standards.iso.org/iso/19115/-3/mda/2.0 http://standards.iso.org/iso/19115/-3/mda/2.0/mda.xsd http://standards.iso.org/iso/19115/-3/mdb/2.0 http://standards.iso.org/iso/19115/-3/mdb/2.0/mdb.xsd http://standards.iso.org/iso/19115/-3/mds/2.0 http://standards.iso.org/iso/19115/-3/mds/2.0/mds.xsd http://standards.iso.org/iso/19115/-3/mdt/2.0 http://standards.iso.org/iso/19115/-3/mdt/2.0/mdt.xsd http://standards.iso.org/iso/19115/-3/mex/1.0 http://standards.iso.org/iso/19115/-3/mex/1.0/mex.xsd http://standards.iso.org/iso/19115/-3/mmi/1.0 http://standards.iso.org/iso/19115/-3/mmi/1.0/mmi.xsd http://standards.iso.org/iso/19115/-3/mpc/1.0 http://standards.iso.org/iso/19115/-3/mpc/1.0/mpc.xsd http://standards.iso.org/iso/19115/-3/mrc/2.0 http://standards.iso.org/iso/19115/-3/mrc/2.0/mrc.xsd http://standards.iso.org/iso/19115/-3/mrd/1.0 http://standards.iso.org/iso/19115/-3/mrd/1.0/mrd.xsd http://standards.iso.org/iso/19115/-3/mri/1.0 http://standards.iso.org/iso/19115/-3/mri/1.0/mri.xsd http://standards.iso.org/iso/19115/-3/mrl/2.0 http://standards.iso.org/iso/19115/-3/mrl/2.0/mrl.xsd http://standards.iso.org/iso/19115/-3/mrs/1.0 http://standards.iso.org/iso/19115/-3/mrs/1.0/mrs.xsd http://standards.iso.org/iso/19115/-3/msr/2.0 http://standards.iso.org/iso/19115/-3/msr/2.0/msr.xsd http://standards.iso.org/iso/19157/-2/mdq/1.0 http://standards.iso.org/iso/19157/-2/mdq/1.0/mdq.xsd http://standards.iso.org/iso/19115/-3/mac/2.0 http://standards.iso.org/iso/19115/-3/mac/2.0/mac.xsd http://standards.iso.org/iso/19115/-3/gco/1.0 http://standards.iso.org/iso/19115/-3/gco/1.0/gco.xsd http://standards.iso.org/iso/19115/-3/gmw/1.0 http://standards.iso.org/iso/19115/-3/gmw/1.0/gmw.xsd http://www.opengis.net/gml/3.2 http://schemas.opengis.net/gml/3.2.1/gml.xsd http://www.w3.org/1999/xlink http://www.w3.org/1999/xlink.xsd">
+    <mdb:metadataIdentifier>
+        <mcc:MD_Identifier>
+            <mcc:code>
+                <gco:CharacterString>492a87d95e8243728486718e7aed02a8</gco:CharacterString>
+            </mcc:code>
+        </mcc:MD_Identifier>
+    </mdb:metadataIdentifier>
+    <mdb:defaultLocale>
+        <lan:PT_Locale>
+            <lan:language>
+                <lan:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="eng" />
+            </lan:language>
+            <lan:characterEncoding>
+                <lan:MD_CharacterSetCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_CharacterSetCode" codeListValue="utf8" />
+            </lan:characterEncoding>
+        </lan:PT_Locale>
+    </mdb:defaultLocale>
+    <mdb:parentMetadata uuidref="4739e4b0-4dba-4ec5-b658-02c09f27ab9a" />
+    <mdb:metadataScope>
+        <mdb:MD_MetadataScope>
+            <mdb:resourceScope>
+                <mcc:MD_ScopeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ScopeCode" codeListValue="dataset" />
+            </mdb:resourceScope>
+            <mdb:name>
+                <gco:CharacterString />
+            </mdb:name>
+        </mdb:MD_MetadataScope>
+    </mdb:metadataScope>
+    <mdb:contact>
+        <cit:CI_Responsibility>
+            <cit:role>
+                <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="pointOfContact" />
+            </cit:role>
+            <cit:party>
+                <cit:CI_Organisation>
+                    <cit:name>
+                        <gco:CharacterString>Institute for Marine and Antarctic Studies (IMAS), University of Tasmania (UTAS)</gco:CharacterString>
+                    </cit:name>
+                    <cit:individual>
+                        <cit:CI_Individual>
+                            <cit:name>
+                                <gco:CharacterString>IMAS Data Manager</gco:CharacterString>
+                            </cit:name>
+                            <cit:contactInfo>
+                                <cit:CI_Contact>
+                                    <cit:address>
+                                        <cit:CI_Address>
+                                            <cit:electronicMailAddress>
+                                                <gco:CharacterString>IMAS.DataManager@utas.edu.au</gco:CharacterString>
+                                            </cit:electronicMailAddress>
+                                        </cit:CI_Address>
+                                    </cit:address>
+                                </cit:CI_Contact>
+                            </cit:contactInfo>
+                        </cit:CI_Individual>
+                    </cit:individual>
+                </cit:CI_Organisation>
+            </cit:party>
+        </cit:CI_Responsibility>
+    </mdb:contact>
+    <mdb:dateInfo>
+        <cit:CI_Date>
+            <cit:date>
+                <gco:DateTime>2020-09-23T12:29:21</gco:DateTime>
+            </cit:date>
+            <cit:dateType>
+                <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode" codeListValue="creation" />
+            </cit:dateType>
+        </cit:CI_Date>
+    </mdb:dateInfo>
+    <mdb:dateInfo>
+        <cit:CI_Date>
+            <cit:date>
+                <gco:DateTime>2020-09-23T12:29:21</gco:DateTime>
+            </cit:date>
+            <cit:dateType>
+                <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode" codeListValue="revision" />
+            </cit:dateType>
+        </cit:CI_Date>
+    </mdb:dateInfo>
+    <mdb:metadataStandard>
+        <cit:CI_Citation>
+            <cit:title>
+                <gco:CharacterString>ISO 19115-3:2018</gco:CharacterString>
+            </cit:title>
+        </cit:CI_Citation>
+    </mdb:metadataStandard>
+    <mdb:metadataLinkage>
+        <cit:CI_OnlineResource>
+            <cit:linkage>
+                <gco:CharacterString>https://metadata.imas.utas.edu.au/geonetwork/srv/eng/catalog.search#/metadata/492a87d95e8243728486718e7aed02a8</gco:CharacterString>
+            </cit:linkage>
+            <cit:protocol>
+                <gco:CharacterString>WWW:LINK-1.0-http--metadata-URL</gco:CharacterString>
+            </cit:protocol>
+            <cit:description>
+                <gco:CharacterString>Point of truth URL of this metadata record</gco:CharacterString>
+            </cit:description>
+        </cit:CI_OnlineResource>
+    </mdb:metadataLinkage>
+    <mdb:identificationInfo>
+        <mri:MD_DataIdentification>
+            <mri:citation>
+                <cit:CI_Citation>
+                    <cit:title>
+                        <gco:CharacterString>Great Barrier Reef 10m Grid (GBR10) GBRMP Benthic</gco:CharacterString>
+                    </cit:title>
+                    <cit:date>
+                        <cit:CI_Date>
+                            <cit:date>
+                                <gco:Date>2023-03-08</gco:Date>
+                            </cit:date>
+                            <cit:dateType>
+                                <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                            </cit:dateType>
+                        </cit:CI_Date>
+                    </cit:date>
+                    <cit:citedResponsibleParty>
+                        <cit:CI_Responsibility>
+                            <cit:role>
+                                <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="principalInvestigator" />
+                            </cit:role>
+                            <cit:party>
+                                <cit:CI_Organisation>
+                                    <cit:name>
+                                        <gco:CharacterString>Great Barrier Reef Marine Park Authority (GBRMPA)</gco:CharacterString>
+                                    </cit:name>
+                                </cit:CI_Organisation>
+                            </cit:party>
+                        </cit:CI_Responsibility>
+                    </cit:citedResponsibleParty>
+                </cit:CI_Citation>
+            </mri:citation>
+            <mri:abstract>
+                <gco:CharacterString>The GBR10 benthic habitat type map is the output of a modelling process that combines satellite imagery and other environmental attributes like water depth, slope and wave climate, along with known occurrences of benthic habitat type. The occurrences of benthic habitat type were derived through machine learning applied to geolocated photos of the benthos (&gt;100,000 photos) that were collected along reef flats and reef slopes at various offshore shallow reefs (~100 reefs). The modelling process involves taking those occurrences of benthic habitat at known locations (training data) and using a machine learning model to build a relationship between benthic habitat type and the underlying data layers (imagery, depth, slope, waves). Because the data layers cover the whole Great Barrier Reef, a prediction is then able to be made for benthic habitat across the whole Great Barrier Reef as well. Contextual editing was then used to make changes to the map, based on a set of geomorphology- and ecology-based rules, such as what environment a class can occur in and what classes are able to neighbour each other (object-based rulesets). This map covers the “offshore” or “mid and outer-shelf” reefs of the Great Barrier Reef Marine Park. Some of the occurrences of benthic habitat type are withheld from the process, and used to check how well the mapping performed at the end (validation). The mapping was carried out by the Remote Sensing Research Centre at the University of Queensland.
+
+                    The scientific method for generating the benthic habitat map can be briefly described as:
+                    1. Ingestion of Sentinel-2 satellite image data, bathymetry and wave climate data derived from Sentinel-2 image data, and various additional derived environmental covariates into Google Earth Engine
+                    2. Stacking of the input data sources into a model-ready environment
+                    3. Running a segmentation routine to create image objects
+                    4. Fitting a supervised machine learning model (e.g. random forest) to known occurrences in order to classify segments into benthic classes
+                    5. Application of object based rules using a range of colour, shape texture and relationship rules to modify the class attribution
+                    6. Validation of mapping accuracy and performance
+
+                    This is an snapshot of the GBR10 benthic dataset taken on Jan 2023 for the Seamap Australia project from the GBRMP Reef Knowledge System (https://reefiq.gbrmpa.gov.au/ReefKnowledgeSystem), see also https://gbrmpa.maps.arcgis.com/home/item.html?id=492a87d95e8243728486718e7aed02a8. An updated version of the data may be available from the source provider.</gco:CharacterString>
+            </mri:abstract>
+            <mri:status>
+                <mcc:MD_ProgressCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ProgressCode" codeListValue="onGoing" />
+            </mri:status>
+            <mri:pointOfContact>
+                <cit:CI_Responsibility>
+                    <cit:role>
+                        <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="owner" />
+                    </cit:role>
+                    <cit:party>
+                        <cit:CI_Organisation>
+                            <cit:name>
+                                <gco:CharacterString>Great Barrier Reef Marine Park Authority (GBRMPA)</gco:CharacterString>
+                            </cit:name>
+                            <cit:individual>
+                                <cit:CI_Individual>
+                                    <cit:contactInfo>
+                                        <cit:CI_Contact>
+                                            <cit:phone>
+                                                <cit:CI_Telephone>
+                                                    <cit:number>
+                                                        <gco:CharacterString>+61 7 4750 0700</gco:CharacterString>
+                                                    </cit:number>
+                                                    <cit:numberType>
+                                                        <cit:CI_TelephoneTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_TelephoneTypeCode" codeListValue="voice" />
+                                                    </cit:numberType>
+                                                </cit:CI_Telephone>
+                                            </cit:phone>
+                                            <cit:address>
+                                                <cit:CI_Address>
+                                                    <cit:deliveryPoint>
+                                                        <gco:CharacterString>280 Flinders Street</gco:CharacterString>
+                                                    </cit:deliveryPoint>
+                                                    <cit:deliveryPoint>
+                                                        <gco:CharacterString>PO Box 1379</gco:CharacterString>
+                                                    </cit:deliveryPoint>
+                                                    <cit:city>
+                                                        <gco:CharacterString>Townsville</gco:CharacterString>
+                                                    </cit:city>
+                                                    <cit:administrativeArea>
+                                                        <gco:CharacterString>Queensland</gco:CharacterString>
+                                                    </cit:administrativeArea>
+                                                    <cit:postalCode>
+                                                        <gco:CharacterString>4810</gco:CharacterString>
+                                                    </cit:postalCode>
+                                                    <cit:country>
+                                                        <gco:CharacterString>Australia</gco:CharacterString>
+                                                    </cit:country>
+                                                    <cit:electronicMailAddress>
+                                                        <gco:CharacterString>gis@gbrmpa.gov.au</gco:CharacterString>
+                                                    </cit:electronicMailAddress>
+                                                </cit:CI_Address>
+                                            </cit:address>
+                                        </cit:CI_Contact>
+                                    </cit:contactInfo>
+                                    <cit:positionName>
+                                        <gco:CharacterString>Manager, Geospatial Services</gco:CharacterString>
+                                    </cit:positionName>
+                                </cit:CI_Individual>
+                            </cit:individual>
+                        </cit:CI_Organisation>
+                    </cit:party>
+                </cit:CI_Responsibility>
+            </mri:pointOfContact>
+            <mri:topicCategory>
+                <mri:MD_TopicCategoryCode>biota</mri:MD_TopicCategoryCode>
+            </mri:topicCategory>
+            <mri:topicCategory />
+            <mri:topicCategory>
+                <mri:MD_TopicCategoryCode>oceans</mri:MD_TopicCategoryCode>
+            </mri:topicCategory>
+            <mri:topicCategory />
+            <mri:extent>
+                <gex:EX_Extent>
+                    <gex:geographicElement>
+                        <gex:EX_GeographicBoundingBox>
+                            <gex:westBoundLongitude>
+                                <gco:Decimal>142.8508</gco:Decimal>
+                            </gex:westBoundLongitude>
+                            <gex:eastBoundLongitude>
+                                <gco:Decimal>152.9498</gco:Decimal>
+                            </gex:eastBoundLongitude>
+                            <gex:southBoundLatitude>
+                                <gco:Decimal>-24.3632</gco:Decimal>
+                            </gex:southBoundLatitude>
+                            <gex:northBoundLatitude>
+                                <gco:Decimal>-10.6635</gco:Decimal>
+                            </gex:northBoundLatitude>
+                        </gex:EX_GeographicBoundingBox>
+                    </gex:geographicElement>
+                    <gex:temporalElement>
+                        <gex:EX_TemporalExtent>
+                            <gex:extent>
+                                <gml:TimeInstant gml:id="d614874e567a1050910">
+                                    <gml:timePosition>2021-08-10</gml:timePosition>
+                                </gml:TimeInstant>
+                            </gex:extent>
+                        </gex:EX_TemporalExtent>
+                    </gex:temporalElement>
+                </gex:EX_Extent>
+            </mri:extent>
+            <mri:resourceMaintenance>
+                <mmi:MD_MaintenanceInformation>
+                    <mmi:maintenanceAndUpdateFrequency>
+                        <mmi:MD_MaintenanceFrequencyCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_MaintenanceFrequencyCode" codeListValue="unknown" />
+                    </mmi:maintenanceAndUpdateFrequency>
+                </mmi:MD_MaintenanceInformation>
+            </mri:resourceMaintenance>
+            <mri:graphicOverview>
+                <mcc:MD_BrowseGraphic>
+                    <mcc:fileName>
+                        <gco:CharacterString>https://metadata.imas.utas.edu.au/geonetwork/srv/api/records/492a87d95e8243728486718e7aed02a8/attachments/GBRMPA.png</gco:CharacterString>
+                    </mcc:fileName>
+                    <mcc:fileDescription>
+                        <gco:CharacterString>GBRMPA.png</gco:CharacterString>
+                    </mcc:fileDescription>
+                </mcc:MD_BrowseGraphic>
+            </mri:graphicOverview>
+            <mri:resourceFormat>
+                <mrd:MD_Format>
+                    <mrd:formatSpecificationCitation>
+                        <cit:CI_Citation>
+                            <cit:title>
+                                <gco:CharacterString>raster (geotiff)</gco:CharacterString>
+                            </cit:title>
+                            <cit:alternateTitle />
+                            <cit:date gco:nilReason="unknown" />
+                            <cit:edition>
+                                <gco:CharacterString>-</gco:CharacterString>
+                            </cit:edition>
+                        </cit:CI_Citation>
+                    </mrd:formatSpecificationCitation>
+                </mrd:MD_Format>
+            </mri:resourceFormat>
+            <mri:descriptiveKeywords>
+                <mri:MD_Keywords>
+                    <mri:type>
+                        <mri:MD_KeywordTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_KeywordTypeCode" codeListValue="theme" />
+                    </mri:type>
+                    <mri:thesaurusName>
+                        <cit:CI_Citation>
+                            <cit:title>
+                                <gco:CharacterString>Global Change Master Directory (GCMD) Earth Science Keywords Version 8.0</gco:CharacterString>
+                            </cit:title>
+                            <cit:alternateTitle>
+                                <gco:CharacterString>NASA Global Change Master Directory (GCMD) Earth Science Keywords</gco:CharacterString>
+                            </cit:alternateTitle>
+                            <cit:date>
+                                <cit:CI_Date>
+                                    <cit:date>
+                                        <gco:DateTime>2014-10-20T00:00:00</gco:DateTime>
+                                    </cit:date>
+                                    <cit:dateType>
+                                        <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode" codeListValue="revision" />
+                                    </cit:dateType>
+                                </cit:CI_Date>
+                            </cit:date>
+                            <cit:date>
+                                <cit:CI_Date>
+                                    <cit:date>
+                                        <gco:DateTime>2013-01-01T00:00:00</gco:DateTime>
+                                    </cit:date>
+                                    <cit:dateType>
+                                        <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode" codeListValue="creation" />
+                                    </cit:dateType>
+                                </cit:CI_Date>
+                            </cit:date>
+                            <cit:identifier>
+                                <mcc:MD_Identifier>
+                                    <mcc:code>
+                                        <gcx:Anchor xlink:href="https://metadata.imas.utas.edu.au/geonetwork/srv/eng/thesaurus.download?ref=external.theme.sciencekeywords">geonetwork.thesaurus.external.theme.sciencekeywords</gcx:Anchor>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </cit:identifier>
+                            <cit:citedResponsibleParty>
+                                <cit:CI_Responsibility>
+                                    <cit:role>
+                                        <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="owner" />
+                                    </cit:role>
+                                    <cit:party>
+                                        <cit:CI_Organisation>
+                                            <cit:name>
+                                                <gco:CharacterString>NASA</gco:CharacterString>
+                                            </cit:name>
+                                            <cit:contactInfo>
+                                                <cit:CI_Contact>
+                                                    <cit:onlineResource>
+                                                        <cit:CI_OnlineResource>
+                                                            <cit:linkage>
+                                                                <gco:CharacterString>http://gcmd.gsfc.nasa.gov/Resources/valids</gco:CharacterString>
+                                                            </cit:linkage>
+                                                            <cit:protocol>
+                                                                <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
+                                                            </cit:protocol>
+                                                        </cit:CI_OnlineResource>
+                                                    </cit:onlineResource>
+                                                </cit:CI_Contact>
+                                            </cit:contactInfo>
+                                            <cit:individual>
+                                                <cit:CI_Individual>
+                                                    <cit:name>
+                                                        <gco:CharacterString>Olsen, L.M., G. Major, K. Shein, J. Scialdone, S. Ritz, T. Stevens, M. Morahan, A. Aleman, R. Vogel, S. Leicester, H. Weir, M. Meaux, S. Grebas, C.Solomon, M. Holland, T. Northcutt, R. A. Restrepo, R. Bilodeau</gco:CharacterString>
+                                                    </cit:name>
+                                                </cit:CI_Individual>
+                                            </cit:individual>
+                                        </cit:CI_Organisation>
+                                    </cit:party>
+                                </cit:CI_Responsibility>
+                            </cit:citedResponsibleParty>
+                        </cit:CI_Citation>
+                    </mri:thesaurusName>
+                    <mri:keyword>
+                        <gcx:Anchor xlink:href="http://gcmdservices.gsfc.nasa.gov/kms/concept/f6350232-b1c7-458c-bc43-bda357ebb6db">EARTH SCIENCE | BIOSPHERE | AQUATIC ECOSYSTEMS | MARINE HABITAT</gcx:Anchor>
+                    </mri:keyword>
+                </mri:MD_Keywords>
+                <mri:keyword>
+                    <gcx:Anchor xlink:href="http://gcmdservices.gsfc.nasa.gov/kms/concept/5a1ebca4-057d-43b9-af6a-04f57b93f8bb">EARTH SCIENCE | BIOSPHERE | AQUATIC ECOSYSTEMS | ESTUARINE HABITAT</gcx:Anchor>
+                </mri:keyword>
+            </mri:descriptiveKeywords>
+            <mri:descriptiveKeywords>
+                <mri:MD_Keywords>
+                    <mri:keyword>
+                        <gcx:Anchor xlink:href="http://purl.org/au-research/vocabulary/anzsrc-for/2008/059999">Environmental Sciences not elsewhere classified</gcx:Anchor>
+                    </mri:keyword>
+                    <mri:keyword>
+                        <gcx:Anchor xlink:href="http://purl.org/au-research/vocabulary/anzsrc-for/2008/050205">Environmental Management</gcx:Anchor>
+                    </mri:keyword>
+                    <mri:keyword>
+                        <gcx:Anchor xlink:href="http://purl.org/au-research/vocabulary/anzsrc-for/2008/060205">Marine and Estuarine Ecology (incl. Marine Ichthyology)</gcx:Anchor>
+                    </mri:keyword>
+                    <mri:type>
+                        <mri:MD_KeywordTypeCode codeList="http://standards.iso.org/iso/19115/-3/resources/codeList.xml#MD_KeywordTypeCode" codeListValue="theme" />
+                    </mri:type>
+                    <mri:thesaurusName>
+                        <cit:CI_Citation>
+                            <cit:title>
+                                <gcx:Anchor xlink:href="http://purl.org/au-research/vocabulary/anzsrc-for/2008/">Australian and New Zealand Standard Research Classification (ANZSRC): Fields of Research</gcx:Anchor>
+                            </cit:title>
+                            <cit:date>
+                                <cit:CI_Date>
+                                    <cit:date>
+                                        <gco:Date>2021-07-12</gco:Date>
+                                    </cit:date>
+                                    <cit:dateType>
+                                        <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                                    </cit:dateType>
+                                </cit:CI_Date>
+                            </cit:date>
+                            <cit:identifier>
+                                <mcc:MD_Identifier>
+                                    <mcc:code>
+                                        <gcx:Anchor xlink:href="https://metadata.imas.utas.edu.au/geonetwork/srv/eng/thesaurus.download?ref=external.theme.ANZSRC_FOR_Codes">geonetwork.thesaurus.external.theme.ANZSRC_FOR_Codes</gcx:Anchor>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </cit:identifier>
+                        </cit:CI_Citation>
+                    </mri:thesaurusName>
+                </mri:MD_Keywords>
+            </mri:descriptiveKeywords>
+            <mri:descriptiveKeywords>
+                <mri:MD_Keywords>
+                    <mri:keyword gco:nilReason="missing">
+                        <gco:CharacterString />
+                    </mri:keyword>
+                    <mri:type>
+                        <mri:MD_KeywordTypeCode codeList="http://standards.iso.org/iso/19115/-3/resources/codeList.xml#MD_KeywordTypeCode" codeListValue="theme" />
+                    </mri:type>
+                    <mri:thesaurusName>
+                        <cit:CI_Citation>
+                            <cit:title>
+                                <gcx:Anchor xlink:href="http://vocab.aodn.org.au/def/platform/1">AODN Platform Vocabulary</gcx:Anchor>
+                            </cit:title>
+                            <cit:date>
+                                <cit:CI_Date>
+                                    <cit:date>
+                                        <gco:Date>2021-08-17</gco:Date>
+                                    </cit:date>
+                                    <cit:dateType>
+                                        <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                                    </cit:dateType>
+                                </cit:CI_Date>
+                            </cit:date>
+                            <cit:identifier>
+                                <mcc:MD_Identifier>
+                                    <mcc:code>
+                                        <gcx:Anchor xlink:href="https://metadata.imas.utas.edu.au/geonetwork/srv/eng/thesaurus.download?ref=external.theme.aodn_aodn-platform-vocabulary">geonetwork.thesaurus.external.theme.aodn_aodn-platform-vocabulary</gcx:Anchor>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </cit:identifier>
+                        </cit:CI_Citation>
+                    </mri:thesaurusName>
+                </mri:MD_Keywords>
+            </mri:descriptiveKeywords>
+            <mri:descriptiveKeywords>
+                <mri:MD_Keywords>
+                    <mri:keyword>
+                        <gco:CharacterString>Benthic habitat</gco:CharacterString>
+                    </mri:keyword>
+                    <mri:type>
+                        <mri:MD_KeywordTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_KeywordTypeCode" codeListValue="theme" />
+                    </mri:type>
+                </mri:MD_Keywords>
+            </mri:descriptiveKeywords>
+            <mri:descriptiveKeywords>
+                <mri:MD_Keywords>
+                    <mri:keyword>
+                        <gcx:Anchor xlink:href="http://vocab.nerc.ac.uk/collection/L05/current/180">underwater cameras</gcx:Anchor>
+                    </mri:keyword>
+                    <mri:keyword>
+                        <gcx:Anchor xlink:href="http://vocab.nerc.ac.uk/collection/L05/current/311">cameras</gcx:Anchor>
+                    </mri:keyword>
+                    <mri:type>
+                        <mri:MD_KeywordTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_KeywordTypeCode" codeListValue="instrument" />
+                    </mri:type>
+                    <mri:thesaurusName>
+                        <cit:CI_Citation>
+                            <cit:title>
+                                <gcx:Anchor>AODN Instrument Vocabulary</gcx:Anchor>
+                            </cit:title>
+                            <cit:date>
+                                <cit:CI_Date>
+                                    <cit:date>
+                                        <gco:Date>2020-03-03</gco:Date>
+                                    </cit:date>
+                                    <cit:dateType>
+                                        <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                                    </cit:dateType>
+                                </cit:CI_Date>
+                            </cit:date>
+                            <cit:identifier>
+                                <mcc:MD_Identifier>
+                                    <mcc:code>
+                                        <gcx:Anchor xlink:href="https://metadata.imas.utas.edu.au/geonetwork/srv/eng/thesaurus.download?ref=external.theme.aodn_aodn-instrument-vocabulary">geonetwork.thesaurus.external.theme.aodn_aodn-instrument-vocabulary</gcx:Anchor>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </cit:identifier>
+                        </cit:CI_Citation>
+                    </mri:thesaurusName>
+                </mri:MD_Keywords>
+            </mri:descriptiveKeywords>
+            <mri:resourceSpecificUsage>
+                <mri:MD_Usage>
+                    <mri:specificUsage>
+                        <gco:CharacterString>Data supplied for use by the Seamap Australia Project.</gco:CharacterString>
+                    </mri:specificUsage>
+                    <mri:userContactInfo>
+                        <cit:CI_Responsibility>
+                            <cit:role gco:nilReason="missing" />
+                            <cit:party>
+                                <cit:CI_Organisation>
+                                    <cit:name gco:nilReason="missing">
+                                        <gco:CharacterString />
+                                    </cit:name>
+                                    <cit:individual>
+                                        <cit:CI_Individual>
+                                            <cit:name gco:nilReason="missing">
+                                                <gco:CharacterString />
+                                            </cit:name>
+                                            <cit:positionName gco:nilReason="missing">
+                                                <gco:CharacterString />
+                                            </cit:positionName>
+                                        </cit:CI_Individual>
+                                    </cit:individual>
+                                </cit:CI_Organisation>
+                            </cit:party>
+                        </cit:CI_Responsibility>
+                    </mri:userContactInfo>
+                </mri:MD_Usage>
+            </mri:resourceSpecificUsage>
+            <mri:resourceConstraints>
+                <mco:MD_SecurityConstraints>
+                    <mco:classification>
+                        <mco:MD_ClassificationCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ClassificationCode" codeListValue="unclassified" />
+                    </mco:classification>
+                </mco:MD_SecurityConstraints>
+            </mri:resourceConstraints>
+            <mri:resourceConstraints>
+                <mco:MD_LegalConstraints>
+                    <mco:graphic>
+                        <mcc:MD_BrowseGraphic>
+                            <mcc:fileName gco:nilReason="inapplicable" />
+                            <mcc:linkage>
+                                <cit:CI_OnlineResource>
+                                    <cit:linkage>
+                                        <gco:CharacterString>http://i.creativecommons.org/l/by/4.0/88x31.png</gco:CharacterString>
+                                    </cit:linkage>
+                                    <cit:protocol>
+                                        <gco:CharacterString>WWW:LINK-1.0-http--related</gco:CharacterString>
+                                    </cit:protocol>
+                                    <cit:description>
+                                        <gco:CharacterString>License Graphic</gco:CharacterString>
+                                    </cit:description>
+                                </cit:CI_OnlineResource>
+                            </mcc:linkage>
+                        </mcc:MD_BrowseGraphic>
+                    </mco:graphic>
+                    <mco:reference>
+                        <cit:CI_Citation>
+                            <cit:title>
+                                <gco:CharacterString>Creative Commons Attribution 4.0 International License</gco:CharacterString>
+                            </cit:title>
+                            <cit:citedResponsibleParty>
+                                <cit:CI_Responsibility>
+                                    <cit:role>
+                                        <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="" />
+                                    </cit:role>
+                                    <cit:party>
+                                        <cit:CI_Organisation>
+                                            <cit:name gco:nilReason="missing">
+                                                <gco:CharacterString />
+                                            </cit:name>
+                                            <cit:contactInfo>
+                                                <cit:CI_Contact>
+                                                    <cit:address>
+                                                        <cit:CI_Address>
+                                                            <cit:electronicMailAddress gco:nilReason="missing">
+                                                                <gco:CharacterString />
+                                                            </cit:electronicMailAddress>
+                                                        </cit:CI_Address>
+                                                    </cit:address>
+                                                    <cit:onlineResource>
+                                                        <cit:CI_OnlineResource>
+                                                            <cit:linkage>
+                                                                <gco:CharacterString>http://creativecommons.org/international/</gco:CharacterString>
+                                                            </cit:linkage>
+                                                            <cit:protocol>
+                                                                <gco:CharacterString>WWW:LINK-1.0-http--related</gco:CharacterString>
+                                                            </cit:protocol>
+                                                            <cit:name gco:nilReason="missing">
+                                                                <gco:CharacterString />
+                                                            </cit:name>
+                                                            <cit:description gco:nilReason="missing">
+                                                                <gco:CharacterString />
+                                                            </cit:description>
+                                                        </cit:CI_OnlineResource>
+                                                    </cit:onlineResource>
+                                                </cit:CI_Contact>
+                                            </cit:contactInfo>
+                                        </cit:CI_Organisation>
+                                    </cit:party>
+                                </cit:CI_Responsibility>
+                            </cit:citedResponsibleParty>
+                            <cit:onlineResource>
+                                <cit:CI_OnlineResource>
+                                    <cit:linkage>
+                                        <gco:CharacterString>http://creativecommons.org/licenses/by/4.0/</gco:CharacterString>
+                                    </cit:linkage>
+                                    <cit:protocol>
+                                        <gco:CharacterString>WWW:LINK-1.0-http--related</gco:CharacterString>
+                                    </cit:protocol>
+                                    <cit:description>
+                                        <gco:CharacterString>License Text</gco:CharacterString>
+                                    </cit:description>
+                                </cit:CI_OnlineResource>
+                            </cit:onlineResource>
+                        </cit:CI_Citation>
+                    </mco:reference>
+                    <mco:otherConstraints>
+                        <gco:CharacterString>Cite data as: Great Barrier Reef Marine Park Authority (2021): GBR10 GBRMP Benthic. Data accessed at https://metadata.imas.utas.edu.au/geonetwork/srv/eng/catalog.search#/metadata/492a87d95e8243728486718e7aed02a8 on [access date]</gco:CharacterString>
+                    </mco:otherConstraints>
+                    <mco:otherConstraints>
+                        <gco:CharacterString>This dataset is hosted by the Institute for Marine and Antarctic Studies (IMAS), University of Tasmania, on behalf of the Great Barrier Reef Marine Park Authority for the purposes of the Seamap Australia collaborative project (testing a national marine benthic habitat classification scheme).</gco:CharacterString>
+                    </mco:otherConstraints>
+                </mco:MD_LegalConstraints>
+            </mri:resourceConstraints>
+            <mri:defaultLocale>
+                <lan:PT_Locale>
+                    <lan:language>
+                        <lan:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="eng" />
+                    </lan:language>
+                    <lan:characterEncoding>
+                        <lan:MD_CharacterSetCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_CharacterSetCode" codeListValue="utf8" />
+                    </lan:characterEncoding>
+                </lan:PT_Locale>
+            </mri:defaultLocale>
+            <mri:supplementalInformation>
+                <gco:CharacterString>A detailed overview of the mapping process can be found in the following publications:
+                    Lyons et al. (2020). Mapping the world's coral reefs using a global multiscale earth observation framework. Remote Sensing in Ecology and Conservation. https://doi.org/10.1002/rse2.157
+                    Roelfsema et al. (2021). How Much Shallow Coral Habitat is there on The Great Barrier Reef. Remote Sensing. https://doi.org/10.3390/rs13214343
+
+                    A detailed overview of generating training and validation data can be found here:
+                    Roelfsema et al (2021). Workflow for the generation of expert-derived training and validation data: a view to global scale habitat mapping. Frontiers in Marine Science. https://doi.org/10.3389/fmars.2021.643381
+
+                    A detailed overview of the classification system and mapping classes can be found in this publication:
+                    Kennedy et al (2021). Reef Cover, a coral reef classification for global habitat mapping from remote sensing. Nature Scientific Data https://doi.org/10.1038/s41597-021-00958-z
+
+                    A detailed overview of the geolocated photo quadrat surveys and analysis for benthic composition can be found in this publication:
+                    Roelfsema et al. (2021). Benthic and coral reef community field data for Heron Reef, Southern Great Barrier Reef, Australia, 2002-2018. Scientific Data https://doi.org/10.1038/s41597-021-00871-5</gco:CharacterString>
+            </mri:supplementalInformation>
+        </mri:MD_DataIdentification>
+    </mdb:identificationInfo>
+    <mdb:contentInfo />
+    <mdb:distributionInfo>
+        <mrd:MD_Distribution>
+            <mrd:distributionFormat>
+                <mrd:MD_Format>
+                    <mrd:formatSpecificationCitation>
+                        <cit:CI_Citation>
+                            <cit:title>
+                                <gco:CharacterString>raster (geotiff)</gco:CharacterString>
+                            </cit:title>
+                            <cit:alternateTitle />
+                            <cit:date gco:nilReason="unknown" />
+                            <cit:edition>
+                                <gco:CharacterString>-</gco:CharacterString>
+                            </cit:edition>
+                        </cit:CI_Citation>
+                    </mrd:formatSpecificationCitation>
+                </mrd:MD_Format>
+            </mrd:distributionFormat>
+            <mrd:transferOptions>
+                <mrd:MD_DigitalTransferOptions>
+                    <mrd:onLine>
+                        <cit:CI_OnlineResource>
+                            <cit:linkage>
+                                <gco:CharacterString>https://data.imas.utas.edu.au/attachments/seamap_hosted_thirdparty/GBR10/GBR10_GBRMP_Benthic.tif</gco:CharacterString>
+                            </cit:linkage>
+                            <cit:protocol>
+                                <gco:CharacterString>WWW:LINK-1.0-http--downloaddata</gco:CharacterString>
+                            </cit:protocol>
+                            <cit:name>
+                                <gco:CharacterString />
+                            </cit:name>
+                            <cit:description>
+                                <gco:CharacterString>DATA ACCESS - GBR10 benthic habitat type [Geotiff direct download]</gco:CharacterString>
+                            </cit:description>
+                        </cit:CI_OnlineResource>
+                    </mrd:onLine>
+                    <mrd:onLine>
+                        <cit:CI_OnlineResource>
+                            <cit:linkage>
+                                <gco:CharacterString>https://geoserver.imas.utas.edu.au/geoserver/seamap/wms</gco:CharacterString>
+                            </cit:linkage>
+                            <cit:protocol>
+                                <gco:CharacterString>OGC:WMS-1.3.0-http-get-map</gco:CharacterString>
+                            </cit:protocol>
+                            <cit:name>
+                                <gco:CharacterString>seamap:SeamapAus_QLD_GBR10_benthictype</gco:CharacterString>
+                            </cit:name>
+                            <cit:description>
+                                <gco:CharacterString>MAP - GBR10 benthic habitat type</gco:CharacterString>
+                            </cit:description>
+                        </cit:CI_OnlineResource>
+                    </mrd:onLine>
+                    <mrd:onLine>
+                        <cit:CI_OnlineResource>
+                            <cit:linkage>
+                                <gco:CharacterString>https://gbrmpa.maps.arcgis.com/home/item.html?id=492a87d95e8243728486718e7aed02a8</gco:CharacterString>
+                            </cit:linkage>
+                            <cit:protocol>
+                                <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
+                            </cit:protocol>
+                            <cit:name>
+                                <gco:CharacterString>Original metadata record</gco:CharacterString>
+                            </cit:name>
+                        </cit:CI_OnlineResource>
+                    </mrd:onLine>
+                </mrd:MD_DigitalTransferOptions>
+            </mrd:transferOptions>
+        </mrd:MD_Distribution>
+    </mdb:distributionInfo>
+    <mdb:resourceLineage>
+        <mrl:LI_Lineage>
+            <mrl:statement>
+                <gco:CharacterString>Class name (Raster Code)
+                    --Coral/Algae: Coral/Algae is any hard bottom area supporting living coral and/or algae (15)
+                    --Sand:  Sand is any soft-bottom area dominated by fine unconsolidated sediments (11)
+                    --Rubble:  Rubble is any habitat featuring loose, rough fragments of broken reef material (12)
+                    --Rock: Rock is any exposed area of hard bare substrate (13)
+
+                    Data provides seafloor reflectance based on Sentinel-2 data at 10 m resolution for the first five image bands. Data were processed by the Modular and Inversion System by EOMAP GmbH &amp; Co.KG. Modular and Inversion System is designed for the physically based assessment of hydro-biological parameters from multi- and hyperspectral remote sensing data. The seafloor reflectance (SFR) represent the reflectance data, which have been corrected
+                    for effects of the atmosphere, water surface and water column.
+
+                    Correction modules applied:
+                    --Corrected for Satellite sensor noise: Yes
+                    --Corrected for atmospheric effects: Yes
+                    --Corrected for the effect of adjacent land reflectance: Yes
+                    --Corrected for effects of turbidity: Yes
+                    --Corrected for water refraction effect: No
+                    --Ground-control points accessed to improve horizontal accuracy: No
+                    --Local in-situ data accessed for calibration and validation purposes: No</gco:CharacterString>
+            </mrl:statement>
+            <mrl:scope>
+                <mcc:MD_Scope>
+                    <mcc:level>
+                        <mcc:MD_ScopeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ScopeCode" codeListValue="dataset" />
+                    </mcc:level>
+                </mcc:MD_Scope>
+            </mrl:scope>
+        </mrl:LI_Lineage>
+    </mdb:resourceLineage>
+</mdb:MD_Metadata>
