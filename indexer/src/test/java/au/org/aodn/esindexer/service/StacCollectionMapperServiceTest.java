@@ -518,6 +518,19 @@ public class StacCollectionMapperServiceTest {
 
         verify(expected);
     }
+    /**
+     * Handle null exception in this case
+     * @throws IOException - Not expected
+     * @throws JSONException - Not expected
+     */
+    @Test
+    public void verifyEmptyLinkName() throws IOException, JSONException {
+        String xml = readResourceFile("classpath:canned/sample_empty_link_name.xml");
+        String expected = readResourceFile("classpath:canned/sample_empty_link_name_stac.json");
+        indexerService.indexMetadata(xml);
+
+        verify(expected);
+    }
 
 
     /**

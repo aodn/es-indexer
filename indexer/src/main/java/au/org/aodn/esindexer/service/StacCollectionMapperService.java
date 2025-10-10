@@ -779,7 +779,6 @@ public abstract class StacCollectionMapperService {
                                     .ifPresent(protocol -> {
                                         linkModel.setRel(LinkUtils.getRelationType(protocol));
                                     });
-
                             linkModel.setTitle(getOnlineResourceName(ciOnlineResource));
                             results.add(linkModel);
                         }
@@ -1202,17 +1201,28 @@ public abstract class StacCollectionMapperService {
      * @return - The online resource
      */
     protected String getOnlineResourceName(CIOnlineResourceType2 onlineResource) {
-        if(onlineResource.getName() != null && onlineResource.getName().getCharacterString() != null) {
-            if(onlineResource.getName().getCharacterString().getValue() instanceof MimeFileTypeType mt) {
-                return mt.getValue();
+        var value = safeGet(() -> onlineResource.getName().getCharacterString().getValue())
+                .orElse(null);
+
+        if(value != null && !value.toString().trim().isEmpty()) {
+            if(value instanceof MimeFileTypeType mt) {
+                String mimeValue = mt.getValue();
+                if(mimeValue != null && !mimeValue.trim().isEmpty()) {
+                    return mimeValue;
+                }
             }
             else {
-                return onlineResource.getName().getCharacterString().getValue().toString();
+                return value.toString();
             }
         }
-        else {
-            return null;
-        }
-    }
+        // if value is null or empty string, use description as the fallback title
+        var descValue = safeGet(() -> onlineResource.getDescription().getCharacterString().getValue())
+                .orElse(null);
 
+        if(descValue != null) {
+            return descValue.toString();
+        }
+
+        return null;
+    }
 }
