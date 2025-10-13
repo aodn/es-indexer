@@ -119,6 +119,9 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
                     catch(MetadataNotFoundException enf) {
                         callback.onProgress(String.format("Metadata not found, skip! %s", enf.getMessage()));
                     }
+                    catch(Exception e) {
+                        log.error("Error indexing dataset with UUID: {}, dataset: {}", uuid, key, e);
+                    }
                     log.info("Finish indexing dataset with UUID: {}, dataset: {}", uuid, key);
                 }
             }

@@ -120,6 +120,10 @@ public class DatasetProvider {
     }
 
     private FeatureCollectionTask queryFeatureCollection(List<MetadataFields> columns, YearMonth yearMonth) {
+        // Log only once per year to prevent log flooding
+        if (yearMonth.getMonth().getValue() == 1) {
+            log.info("Processing data for year: {}", yearMonth.getYear());
+        }
         log.debug("Start querying data for year month: {}", yearMonth);
         FeatureCollectionGeoJson featureCollection;
         if (key.endsWith(".zarr")) {

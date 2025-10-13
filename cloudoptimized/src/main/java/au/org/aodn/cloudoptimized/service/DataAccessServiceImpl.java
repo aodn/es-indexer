@@ -209,7 +209,7 @@ public class DataAccessServiceImpl implements DataAccessService {
      * removed in the future.
      */
     private List<? extends CloudOptimizedEntry> getIndexingDatasetByDays(final String uuid, String key, final LocalDate startDate, final LocalDate endDate, final List<MetadataFields> fields) {
-        log.info("Fetching for UUID: {} in {} -> {}", uuid, startDate, endDate);
+        log.debug("Fetching for UUID: {} in {} -> {}", uuid, startDate, endDate);
         try {
             Map<String, Object> params = new HashMap<>();
             params.put("uuid", uuid);
@@ -276,7 +276,7 @@ public class DataAccessServiceImpl implements DataAccessService {
                                 countDownLatch.countDown(); // Release latch on fatal error
                             },
                             () -> {
-                                log.info("SSE stream completed for dateRange: {}", dateRange);
+                                log.debug("SSE stream completed for dateRange: {}", dateRange);
                                 countDownLatch.countDown();
                             }
                     );
@@ -430,7 +430,7 @@ public class DataAccessServiceImpl implements DataAccessService {
                                 countDownLatch.countDown(); // Release latch on fatal error
                             },
                             () -> {
-                                log.info("SSE stream completed for yearMonth: {}", yearMonth);
+                                log.debug("SSE stream completed for yearMonth: {}", yearMonth);
                                 countDownLatch.countDown();
                             }
                     );
