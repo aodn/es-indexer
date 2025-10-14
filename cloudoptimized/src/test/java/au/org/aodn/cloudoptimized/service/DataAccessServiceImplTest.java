@@ -177,7 +177,7 @@ class DataAccessServiceImplTest {
     }
 
     @Test
-    void testGetIndexingDatasetByMonth_new_old_same_behavior() throws Exception {
+    void testGetIndexingDatasetByMonth() throws Exception {
         // Mock WebClient components
         WebClient.RequestHeadersUriSpec requestHeadersUriSpec = mock(WebClient.RequestHeadersUriSpec.class);
         WebClient.RequestHeadersSpec requestHeadersSpec = mock(WebClient.RequestHeadersSpec.class);
@@ -218,8 +218,6 @@ class DataAccessServiceImplTest {
         YearMonth yearMonth = YearMonth.of(2025, 10);
         List<MetadataFields> fields = List.of();
 
-        // Call the method under test
-        var result = dataAccessService.getIndexingDatasetByMonth_old(uuid, key, yearMonth, fields);
 
 
         String newSseEventJson1 = """
@@ -242,22 +240,10 @@ class DataAccessServiceImplTest {
                 .thenReturn(reactor.core.publisher.Flux.just(newSseEventJson4))
         ;
 
-        var newResult = dataAccessService.getIndexingDatasetByMonth(uuid, key, yearMonth, fields);
+        var result = dataAccessService.getIndexingDatasetByMonth(uuid, key, yearMonth, fields);
 
-        // Assert the result
-        assertNotNull(result);
-        assertEquals(uuid, result.getProperties().get("collection"));
-        assertEquals(key, result.getProperties().get("key"));
-        assertEquals(1, result.getFeatures().size());
 
-        // Check each feature for correct date and coordinates
-        var feature1 = result.getFeatures().get(0);
-        assertEquals(-35.0, ((PointGeoJson) feature1.getGeometry()).getCoordinates().get(1).doubleValue(), 1e-8);
-        assertEquals(150.0, ((PointGeoJson) feature1.getGeometry()).getCoordinates().get(0).doubleValue(), 1e-8);
-        assertEquals("2025-10", feature1.getProperties().get("date"));
-        assertEquals(3L, feature1.getProperties().get("count"));
-
-        var feature2 = newResult.getFeatures().get(0);
+        var feature2 = result.getFeatures().get(0);
         assertEquals(-35.0, ((PointGeoJson) feature2.getGeometry()).getCoordinates().get(1).doubleValue(), 1e-8);
         assertEquals(150.0, ((PointGeoJson) feature2.getGeometry()).getCoordinates().get(0).doubleValue(), 1e-8);
         assertEquals("2025-10", feature2.getProperties().get("date"));

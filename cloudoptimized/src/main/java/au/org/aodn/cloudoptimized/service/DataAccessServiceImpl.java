@@ -5,25 +5,26 @@ import au.org.aodn.cloudoptimized.model.*;
 import au.org.aodn.cloudoptimized.model.geojson.FeatureCollectionGeoJson;
 import au.org.aodn.cloudoptimized.model.geojson.FeatureGeoJson;
 import au.org.aodn.cloudoptimized.model.geojson.PointGeoJson;
-import au.org.aodn.metadata.geonetwork.exception.MetadataNotFoundException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriComponentsBuilder;
 import reactor.core.publisher.Flux;
 import reactor.util.retry.Retry;
 
+import org.springframework.retry.annotation.Retryable;
+import org.springframework.retry.annotation.Recover;
+import org.springframework.retry.annotation.Backoff;
+
 import java.time.*;
 import java.util.*;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -37,7 +38,7 @@ public class DataAccessServiceImpl implements DataAccessService {
     protected final Random random = new Random();
 
     private final static int MAX_RETRY_ATTEMPT = 100;  //times
-    private final static int RETRY_DELAY = 10; // second
+    private final static int RETRY_DELAY_SECOND = 10; // second
 
     public DataAccessServiceImpl(String serverUrl, String baseUrl, RestTemplate restTemplate, WebClient webClient, ObjectMapper objectMapper) {
         this.accessEndPoint = serverUrl + baseUrl;
@@ -250,7 +251,7 @@ public class DataAccessServiceImpl implements DataAccessService {
                     // Ignore other status, just process the complete event, the other event is used to keep the connection alive
                     .filter(event -> "completed".equals(event.getStatus()))
                     // Give a random number so that not all retry happens the same time when previous failed
-                    .retryWhen(Retry.fixedDelay(MAX_RETRY_ATTEMPT, Duration.ofSeconds(RETRY_DELAY))
+                    .retryWhen(Retry.fixedDelay(MAX_RETRY_ATTEMPT, Duration.ofSeconds(RETRY_DELAY_SECOND))
                             .doBeforeRetry(signal -> log.info("Retrying {} due to: {}", dateRange, signal.failure().getMessage())))
                     .subscribe(
                             event -> {
@@ -348,141 +349,36 @@ public class DataAccessServiceImpl implements DataAccessService {
         return toFeatureCollection(uuid, key, allEntries);
     }
 
-    /**
-     * this function is the old version of getIndexingDatasetByMonth, it may be removed in the future. only for testing now
-     * @param uuid
-     * @param key
-     * @param yearMonth
-     * @param fields
-     * @return
-     */
-    public FeatureCollectionGeoJson getIndexingDatasetByMonth_old(final String uuid, String key, final YearMonth yearMonth, final List<MetadataFields> fields) {
-
-        var startDate = yearMonth.atDay(1);
-        var endDate = yearMonth.atEndOfMonth();
-
-        // currently, we force to get data in the same year to simplify the logic
-        if (startDate.getYear() != endDate.getYear()) {
-            throw new IllegalArgumentException("Start date and end date must be in the same year");
-        }
-
-        try {
-            Map<String, Object> params = new HashMap<>();
-            params.put("uuid", uuid);
-
-            String url = UriComponentsBuilder.fromUriString(getDataAccessEndpoint() + "/data/{uuid}/{key}")
-                    .queryParam("f", "sse/json")
-                    .queryParam("start_date", startDate)
-                    .queryParam("end_date", endDate)
-                    .queryParam("columns", fields)
-                    .buildAndExpand(uuid, key)
-                    .toUriString();
-
-            final Map<CloudOptimizedEntry, Long> allEntries = new HashMap<>();
-            CountDownLatch countDownLatch = new CountDownLatch(1);
-
-            // Use defer to allow retry with the same argument, with f=sse/json argument above, we signal
-            // server to return result with server side event.
-            Flux.defer(
-                            () -> webClient.get()
-                                    .uri(url, params)
-                                    .accept(MediaType.TEXT_EVENT_STREAM)
-                                    .retrieve()
-                                    .bodyToFlux(String.class)
-                    )
-                    .filter(data -> data.contains("data")) // Filter for data: lines
-                    .map(data -> {
-                        try {
-                            // Deserialize raw event into SSEEvent
-                            return objectMapper.readValue(data, new TypeReference<SSEEvent<List<CloudOptimizedEntryReducePrecision>>>() {});
-                        } catch (JsonProcessingException e) {
-                            log.error("Failed to parse SSE event: {}, Error: {}", data.substring(0, Math.min(100, data.length())), e.getMessage());
-                            return null;
-                        }
-                    })
-                    .filter(Objects::nonNull)
-                    // Ignore other status, just process the complete event, the other event is used to keep the connection alive
-                    .filter(event -> "completed".equals(event.getStatus()))
-                    // Give a random number so that not all retry happens the same time when previous failed
-                    .retryWhen(Retry.fixedDelay(MAX_RETRY_ATTEMPT, Duration.ofSeconds(RETRY_DELAY))
-                            .doBeforeRetry(signal -> log.info("Retrying {} due to: {}", yearMonth, signal.failure().getMessage())))
-                    .subscribe(
-                            event -> {
-                                String message = event.getMessage() != null ? event.getMessage() : "null";
-                                log.info("Process event message {} : {}", yearMonth, message);
-
-                                if (event.getData() != null) {
-                                    // Merge data as event comes, this reduced the memory need to hold the string
-                                    aggregateData(allEntries, event.getData());
-                                } else {
-                                    log.warn("Received completed event with null data for yearMonth: {}", yearMonth);
-                                }
-
-                                // Check if this is the end
-                                String[] sm = message.trim().split("/");
-                                if (sm.length == 2 && sm[1].equalsIgnoreCase("end")) {
-                                    log.info("Completion condition met for {}: {}, releasing latch", yearMonth, message);
-                                    countDownLatch.countDown();
-                                }
-                            },
-                            error -> {
-                                log.error("Fatal error in SSE stream for yearMonth {}: {}", yearMonth, error.getMessage(), error);
-                                countDownLatch.countDown(); // Release latch on fatal error
-                            },
-                            () -> {
-                                log.debug("SSE stream completed for yearMonth: {}", yearMonth);
-                                countDownLatch.countDown();
-                            }
-                    );
-
-            countDownLatch.await();
-
-            log.info("Aggregate data for {}", yearMonth);
-            return toFeatureCollection(uuid, key, allEntries);
-
-        } catch (Exception e) {
-            // Do nothing just return empty list
-            log.info("Unable to find cloud optimized data with UUID: {} in S3 for {} -> {}", uuid, startDate, endDate, e);
-            log.warn("error message is: {}", e.getMessage());
-        }
-        return null;
-    }
-
     @Override
+    @Retryable(
+        retryFor = { Exception.class },
+        maxAttempts = MAX_RETRY_ATTEMPT,
+        backoff = @Backoff(delay = RETRY_DELAY_SECOND * 1000)
+    )
     public List<TemporalExtent> getTemporalExtentOf(String uuid, String key) {
-        if (isSafeId(uuid)) {
-            // Sometimes the server is down due to SPOT instance or software update.
-            waitTillServiceUp();
+        try {
+            String url = UriComponentsBuilder.fromUriString(getDataAccessEndpoint() + "/data/{uuid}/{key}/temporal_extent")
+                .buildAndExpand(uuid, key)
+                .toUriString();
 
-            try {
-                String url = UriComponentsBuilder.fromUriString(getDataAccessEndpoint() + "/data/{uuid}/{key}/temporal_extent")
-                        .buildAndExpand(uuid, key)
-                        .toUriString();
-
-                // Use WebClient with retry/backoff, similar to other methods
-                List<TemporalExtent> result = Flux.defer(() ->
-                        webClient.get()
-                                .uri(url)
-                                .accept(MediaType.APPLICATION_JSON)
-                                .retrieve()
-                                .bodyToFlux(TemporalExtent.class)
-                )
-                .retryWhen(Retry.fixedDelay(MAX_RETRY_ATTEMPT, Duration.ofSeconds(RETRY_DELAY))
-                        .doBeforeRetry(signal -> log.info("Retrying getTemporalExtentOf for {} due to: {}", uuid, signal.failure().getMessage())))
-                .collectList()
+            String response = webClient.get()
+                .uri(url)
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .bodyToMono(String.class)
                 .block();
 
-                return result;
-            } catch (Exception e) {
-                if (e.getCause() instanceof HttpClientErrorException.NotFound) {
-                    throw new MetadataNotFoundException("UUID not found : " + uuid + " in DataAccess Service");
-                }
-                throw new RuntimeException("Exception thrown while retrieving dataset with UUID: " + uuid + e.getMessage(), e);
+            if (response == null) {
+                log.warn("No data found from DataAccess Service for UUID: {}", uuid);
+                return Collections.emptyList();
             }
-        } else {
-            throw new MetadataNotFoundException("Malform UUID in request: " + uuid);
+            return Arrays.asList(objectMapper.readValue(response, TemporalExtent[].class));
+        } catch (Exception e) {
+            log.error("Exception thrown while retrieving temporal extent with UUID: {}", uuid, e);
+            throw new RuntimeException("Failed to get temporal extent from DataAccess Service", e);
         }
     }
+
     /**
      * Summarize the data by counting the number if all the concerned fields are the same, merge data with
      * existing map. That is count will be added for same CloudOptimizedEntry
@@ -522,12 +418,14 @@ public class DataAccessServiceImpl implements DataAccessService {
     }
 
     @Override
-    public FeatureCollectionGeoJson getZarrIndexingDataByMonth(
-            String uuid, String key, YearMonth yearMonth
-    ) {
+    @Retryable(
+        retryFor = { Exception.class },
+        maxAttempts = MAX_RETRY_ATTEMPT,
+        backoff = @Backoff(delay = RETRY_DELAY_SECOND * 1000)
+    )
+    public FeatureCollectionGeoJson getZarrIndexingDataByMonth(String uuid, String key, YearMonth yearMonth) {
         var startDate = Instant.parse(yearMonth.atDay(1) + "T00:00:00.000000000Z");
         var endDate = Instant.parse(yearMonth.atEndOfMonth() + "T23:59:59.999999999Z");
-
         try {
             var url = UriComponentsBuilder.fromUriString(getDataAccessEndpoint() + "/data/{uuid}/{key}/zarr_rect")
                     .queryParam("start_date", startDate)
@@ -535,51 +433,23 @@ public class DataAccessServiceImpl implements DataAccessService {
                     .buildAndExpand(uuid, key)
                     .toUriString();
 
-            CountDownLatch countDownLatch = new CountDownLatch(1);
-            final FeatureCollectionGeoJson[] result = new FeatureCollectionGeoJson[1];
+            String response = webClient.get()
+                    .uri(url)
+                    .accept(MediaType.APPLICATION_JSON)
+                    .retrieve()
+                    .bodyToMono(String.class)
+                    .block();
 
-            Flux.defer(
-                    () -> webClient.get()
-                            .uri(url)
-                            .accept(MediaType.APPLICATION_JSON)
-                            .retrieve()
-                            .bodyToMono(String.class)
-                            .flux()
-            )
-            .retryWhen(Retry.fixedDelay(MAX_RETRY_ATTEMPT, Duration.ofSeconds(RETRY_DELAY))
-                    .doBeforeRetry(signal -> log.info("Retrying getZarrIndexingDataByMonth for {} due to: {}", yearMonth, signal.failure().getMessage())))
-            .subscribe(
-                    data -> {
-                        try {
-                            FeatureCollectionGeoJson geoJson = objectMapper.readValue(data, FeatureCollectionGeoJson.class);
-                            result[0] = geoJson;
-                        } catch (Exception e) {
-                            log.error("Failed to parse FeatureCollectionGeoJson: {}", e.getMessage());
-                        }
-                        countDownLatch.countDown();
-                    },
-                    error -> {
-                        log.error("Fatal error in Zarr SSE stream for yearMonth {}: {}", yearMonth, error.getMessage(), error);
-                        countDownLatch.countDown();
-                    },
-                    () -> {
-                        log.debug("Zarr SSE stream completed for yearMonth: {}", yearMonth);
-                        countDownLatch.countDown();
-                    }
-            );
-
-            countDownLatch.await();
-
-            if (result[0] == null) {
+            if (response == null) {
                 log.warn("No data found from DataAccess Service for UUID: {} in {} -> {}", uuid, startDate, endDate);
+                return null;
             }
-            return result[0];
-
+            FeatureCollectionGeoJson geoJson = objectMapper.readValue(response, FeatureCollectionGeoJson.class);
+            return geoJson;
         } catch (Exception e) {
             log.error("Exception thrown while retrieving Zarr indexing data with UUID: {} in {} -> {}", uuid, startDate, endDate, e);
-            return null;
+            throw new RuntimeException("Failed to get Zarr indexing data from DataAccess Service", e);
         }
     }
-
 
 }
