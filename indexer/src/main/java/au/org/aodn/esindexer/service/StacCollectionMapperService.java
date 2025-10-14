@@ -249,22 +249,60 @@ public abstract class StacCollectionMapperService {
                         continue;
                     }
 
-                    otherConstraints.forEach(constraint ->
-                            safeGet(() -> constraint.getCharacterString().getValue().toString())
-                                    .ifPresent(cons -> {
-                                        // split into suggested citation text + remaining other constraints text: parts[0]=suggested, parts[1]=remaining
-                                        String[] parts = extractCitationParts((String) cons);
+                    // Define versioned citation pattern and go through to find versioned citations. This is because in IMOS data, there are multiple citations with different document version.
+                    // We use the newest version as the suggested citation, and the rests remain in other constraints filed.
+                    // e.g., https://catalogue.aodn.org.au/geonetwork/srv/eng/catalog.search#/metadata/aa14b1a4-eb3f-4c6e-89a9-622c1f95bfb2/formatters/imos-full-view?root=div&view=advanced&approved=true
+                    Pattern versionCitationPattern = Pattern.compile("citation in a list of references for Version\\s+(\\d+(?:\\.\\d+)*)", Pattern.CASE_INSENSITIVE);
+                    Map<Double, String> versionedCitations = new HashMap<>();
+                    List<CharacterStringPropertyType> nonVersionedConstraints = new ArrayList<>();
 
-                                        if (parts[0] != null && !parts[0].isBlank()) {
-                                            if (citation.getSuggestedCitation() == null || citation.getSuggestedCitation().isBlank()) {
-                                                citation.setSuggestedCitation(parts[0]);
-                                            }
-                                        }
-                                        if (parts[1] != null && !parts[1].isBlank()) {
-                                            citation.addOtherConstraint(parts[1]);
-                                        }
-                                    })
+                    otherConstraints.forEach(constraint ->
+                        safeGet(() -> constraint.getCharacterString().getValue().toString())
+                                .ifPresent(cons -> {
+                                    String constraintText = (String) cons;
+                                    Matcher versionMatcher = versionCitationPattern.matcher(constraintText);
+
+                                    if (versionMatcher.find()) {
+                                        String versionStr = versionMatcher.group(1);
+                                        double versionNum = parseVersion(versionStr);
+                                        versionedCitations.put(versionNum, constraintText);
+                                    } else {
+                                        nonVersionedConstraints.add(constraint);
+                                    }
+                                })
                     );
+
+                    if (!versionedCitations.isEmpty()) {
+                        Double maxVersion = versionedCitations.keySet().stream()
+                                .max(Double::compare)
+                                .orElse(null);
+                        // deal with versioned citations
+                        if (maxVersion != null) {
+                            String latestCitation = versionedCitations.get(maxVersion);
+                            citation.setSuggestedCitation(latestCitation);
+                            versionedCitations.entrySet().stream()
+                                    .filter(entry -> !entry.getKey().equals(maxVersion))
+                                    .forEach(entry -> citation.addOtherConstraint(entry.getValue()));
+                        }
+                    }
+
+                    nonVersionedConstraints.forEach(constraint ->
+                        safeGet(() -> constraint.getCharacterString().getValue().toString())
+                                .ifPresent(cons -> {
+                                    // split into suggested citation text + remaining other constraints text: parts[0]=suggested, parts[1]=remaining
+                                    String[] parts = extractCitationParts((String) cons);
+
+                                    if (parts[0] != null && !parts[0].isBlank()) {
+                                        if (citation.getSuggestedCitation() == null || citation.getSuggestedCitation().isBlank()) {
+                                            citation.setSuggestedCitation(parts[0]);
+                                        }
+                                    }
+                                    if (parts[1] != null && !parts[1].isBlank()) {
+                                        citation.addOtherConstraint(parts[1]);
+                                    }
+                                })
+                    );
+
                 }
                 else if (abstractConstraints instanceof MDConstraintsType constraints) {
                     var useLimitations = safeGet(constraints::getUseLimitation);
@@ -284,6 +322,17 @@ public abstract class StacCollectionMapperService {
         return SummariesUtils.getStatement(source);
     }
 
+    /**
+     * A helper function to parse version number in a string constraint
+     * A few IMOS dataset need this, e.g., https://catalogue.aodn.org.au/geonetwork/srv/eng/catalog.search#/metadata/aa14b1a4-eb3f-4c6e-89a9-622c1f95bfb2/formatters/imos-full-view?root=div&view=advanced&approved=true
+     */
+    private static double parseVersion(String version) {
+        try {
+            return Double.parseDouble(version);
+        } catch (NumberFormatException e) {
+            return 0.0;
+        }
+    }
 
     /**
      * Because suggested citation and other constraints are in the same block,
@@ -295,18 +344,28 @@ public abstract class StacCollectionMapperService {
      * @return true if the constraint is like a suggested citation
      */
     private static boolean isSuggestedCitation(String constraint) {
+        String lowerConstraint = constraint.toLowerCase();
         String regex = "\\[[^]]+]";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(constraint);
-        if (constraint.toLowerCase().contains("citation") && matcher.find()) {
+        boolean hasBrackets = matcher.find();
+
+        if (lowerConstraint.contains("citation") && hasBrackets) {
             return true;
         }
-        if (constraint.toLowerCase().contains("cite as")) {
+        // IMAS data has the identifier of "cita data as",
+        // e.g., https://geonetwork-metatest.edge.aodn.org.au/geonetwork/srv/eng/catalog.search#/metadata/0145df96-3847-474b-8b63-a66f0e03ff54/formatters/xsl-view?root=div&view=advanced
+        Pattern citationPattern = Pattern.compile("cite(\\s+data)?\\s+as");
+        if (citationPattern.matcher(lowerConstraint).find()) {
+            return true;
+        }
+        // IMOS data has this identifier, e.g., https://catalogue-imos.aodn.org.au/geonetwork/srv/eng/catalog.search#/metadata/2fda7836-81d8-4081-818e-6d344fd6cc6c
+        if (lowerConstraint.contains("citation") && lowerConstraint.contains("all associated reports")) {
             return true;
         }
         // IMAS data has this identifier, e.g., https://geonetwork-edge.aodn.org.au/geonetwork/srv/eng/catalog.search#/metadata/20b07936-3bfb-4a72-805d-0b24f1fd4d3f/formatters/xsl-view?root=div&view=advanced
         // and https://catalogue.aodn.org.au/geonetwork/srv/eng/catalog.search#/metadata/697b1314-7351-4478-b5f4-7ca4e5a1db3a/formatters/imos-full-view?root=div&view=advanced&approved=true
-        if (constraint.toLowerCase().contains("data accessed at")) {
+        if (lowerConstraint.contains("data accessed at")) {
             return true;
         }
         return false;
@@ -720,7 +779,6 @@ public abstract class StacCollectionMapperService {
                                     .ifPresent(protocol -> {
                                         linkModel.setRel(LinkUtils.getRelationType(protocol));
                                     });
-
                             linkModel.setTitle(getOnlineResourceName(ciOnlineResource));
                             results.add(linkModel);
                         }
@@ -1143,17 +1201,28 @@ public abstract class StacCollectionMapperService {
      * @return - The online resource
      */
     protected String getOnlineResourceName(CIOnlineResourceType2 onlineResource) {
-        if(onlineResource.getName() != null && onlineResource.getName().getCharacterString() != null) {
-            if(onlineResource.getName().getCharacterString().getValue() instanceof MimeFileTypeType mt) {
-                return mt.getValue();
+        var value = safeGet(() -> onlineResource.getName().getCharacterString().getValue())
+                .orElse(null);
+
+        if(value != null && !value.toString().trim().isEmpty()) {
+            if(value instanceof MimeFileTypeType mt) {
+                String mimeValue = mt.getValue();
+                if(mimeValue != null && !mimeValue.trim().isEmpty()) {
+                    return mimeValue;
+                }
             }
             else {
-                return onlineResource.getName().getCharacterString().getValue().toString();
+                return value.toString();
             }
         }
-        else {
-            return null;
-        }
-    }
+        // if value is null or empty string, use description as the fallback title
+        var descValue = safeGet(() -> onlineResource.getDescription().getCharacterString().getValue())
+                .orElse(null);
 
+        if(descValue != null) {
+            return descValue.toString();
+        }
+
+        return null;
+    }
 }

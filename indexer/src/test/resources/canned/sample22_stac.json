@@ -1,0 +1,239 @@
+{
+  "title" : "IMOS - National Mooring Network - National Reference Stations - Biogeochemical Operations Manual",
+  "description" : "This manual outlines best-practice techniques in biogeochemical and blue-water oceanography for ensuring the output of reliable, quality data to the end-user community. The aim is for sampling, analytical, and reporting standards to be at least equivalent to: the WOCE (World Ocean Circulation Experiment) and JGOFS (Joint Global Ocean Flux Study) studies.\n\n                    Procedures for sampling, analyses and data handling are outlined here for the Australian Integrated Marine Observing System (IMOS) National Reference Station (NRS) project. Use of these procedures will ensure consistency in sampling and analysis, leading to high quality data gathering.\n\n                    Monthly collection of biogeochemical data from most NRS sites gathers information on seasonal, annual and long term variability in Australian marine ecosystems.\n\n                    The NRS network is designed to provide baseline information, at timescales relevant to human response, that is required to understand how large-scale, long-term change and variability in the global ocean are affecting the ecosystems of Australia's coastal seas. The stations are operated by the National Mooring Network, a facility of IMOS.",
+  "extent" : {
+    "bbox" : [ ],
+    "temporal" : [ [ null, null ] ]
+  },
+  "summaries" : {
+    "score" : 1,
+    "status" : "onGoing",
+    "credits" : [ "Australia’s Integrated Marine Observing System (IMOS) is enabled by the National Collaborative Research Infrastructure Strategy (NCRIS). It is operated by a consortium of institutions as an unincorporated joint venture, with the University of Tasmania as Lead Agent.", "CSIRO Marine and Atmospheric Research (CMAR) - Abell, G., Allen, S., Berry, K., Bonham, P., Clementson, L., Coman, F., Critchley, G., Frampton, D., Latham, V., Richardson, A., Robert, S., Terhell, D., Thompson, P.A., Tilbrook, B. and Sherrington, R.", "Flinders University and South Australian Research and Development Institute (SARDI) - Seuront, L.", "Department of Environment and Climate Change (DECC), New South Wales Government - Pritchard, T., Ingleton, T.", "Australian Institute of Marine Science (AIMS) - Bainbridge, S., Skuza, M., Steinberg, C.", "eMarine Information Infrastructure (eMII), Integrated Marine Observing System (IMOS) - Magierowski, R., Roberts, K., Tattersall, K.", "Integrated Marine Observing System (IMOS) - Hidas, M., Lara-Lopez, A.", "School of Biological, Earth and Environmental Sciences (BEES), The University of New South Wales (UNSW) - Suthers, I." ],
+    "scope" : {
+      "code" : "document",
+      "name" : "IMOS Publication"
+    },
+    "creation" : "2020-07-02T09:54:40",
+    "revision" : "2025-10-01T05:18:10",
+    "dataset_provider" : "IMOS",
+    "update_frequency" : "other",
+    "temporal" : [ ],
+    "parameter_vocabs" : [ ],
+    "platform_vocabs" : [ ],
+    "organisation_vocabs" : [ ]
+  },
+  "contacts" : [ {
+    "roles" : [ "author", "about" ],
+    "organization" : "CSIRO Oceans and Atmosphere - Hobart",
+    "name" : "Davies, Claire H.",
+    "emails" : [ "Claire.Davies@csiro.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "GPO Box 1538" ],
+      "city" : "Hobart",
+      "country" : "Australia",
+      "postalCode" : "7001",
+      "administrativeArea" : "Tasmania"
+    } ]
+  }, {
+    "roles" : [ "author", "about" ],
+    "organization" : "Integrated Marine Observing System (IMOS)",
+    "name" : "Sommerville, Emma",
+    "position" : "Operations Manager",
+    "emails" : [ "Emma.Sommerville@utas.edu.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "University of Tasmania", "Private Bag 110" ],
+      "city" : "Hobart",
+      "country" : "Australia",
+      "postalCode" : "7001",
+      "administrativeArea" : "Tasmania"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "61 3 6226 7549"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : "61 3 6226 2107"
+    } ],
+    "links" : [ {
+      "href" : "http://imos.org.au/",
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : "Website of the Integrated Marine Observing System (IMOS)"
+    } ]
+  }, {
+    "roles" : [ "distributor", "metadata" ],
+    "organization" : "Integrated Marine Observing System (IMOS)",
+    "position" : "Data Officer",
+    "emails" : [ "info@aodn.org.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "University of Tasmania", "Private Bag 110" ],
+      "city" : "Hobart",
+      "country" : "Australia",
+      "postalCode" : "7001",
+      "administrativeArea" : "Tasmania"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "61 3 6226 7488"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : "61 3 6226 2107"
+    } ],
+    "links" : [ {
+      "href" : "http://imos.org.au/aodn.html",
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : "Website of the Australian Ocean Data Network (AODN)"
+    } ]
+  }, {
+    "roles" : [ "author", "citation" ],
+    "organization" : "CSIRO Oceans and Atmosphere - Hobart",
+    "name" : "Davies, Claire H.",
+    "emails" : [ "Claire.Davies@csiro.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "GPO Box 1538" ],
+      "city" : "Hobart",
+      "country" : "Australia",
+      "postalCode" : "7001",
+      "administrativeArea" : "Tasmania"
+    } ]
+  }, {
+    "roles" : [ "author", "citation" ],
+    "organization" : "Integrated Marine Observing System (IMOS)",
+    "name" : "Sommerville, Emma",
+    "position" : "Operations Manager",
+    "emails" : [ "Emma.Sommerville@utas.edu.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "University of Tasmania", "Private Bag 110" ],
+      "city" : "Hobart",
+      "country" : "Australia",
+      "postalCode" : "7001",
+      "administrativeArea" : "Tasmania"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "61 3 6226 7549"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : "61 3 6226 2107"
+    } ]
+  }, {
+    "roles" : [ "publisher", "citation" ],
+    "organization" : "Integrated Marine Observing System (IMOS)",
+    "emails" : [ "imos@imos.org.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "Private Bag 110" ],
+      "city" : "Hobart",
+      "country" : "Australia",
+      "postalCode" : "7001",
+      "administrativeArea" : "Tasmania"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "61 3 6226 7549"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : "61 3 6226 2107"
+    } ],
+    "links" : [ {
+      "href" : "http://www.imos.org.au/html",
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : "Website of the Integrated Marine Observing System (IMOS)"
+    } ]
+  } ],
+  "languages" : [ {
+    "code" : "eng",
+    "name" : "English"
+  } ],
+  "links" : [ {
+    "href" : "http://imos.org.au/nrs.html",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "National Reference Stations page on IMOS website"
+  }, {
+    "href" : "https://portal.aodn.org.au/",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "AODN Data Portal (discover NRS data by refining your search using the NRS sub-facility under IMOS, in the Organisation Facet)"
+  }, {
+    "href" : "http://content.aodn.org.au/Documents/IMOS/Facilities/national_mooring/IMOS_NRS_BGCManual_LATEST.pdf",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "IMOS NRS BGC Manual - Latest Version"
+  }, {
+    "href" : "http://content.aodn.org.au/Documents/IMOS/Facilities/national_mooring/IMOS_NRS_BGCManual_V3.2.1_Jan2019.pdf",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "IMOS NRS BGC Manual - Version 3.2.1"
+  }, {
+    "href" : "http://content.aodn.org.au/Documents/IMOS/Facilities/national_mooring/IMOS_NRS_BGCManual_V3.3_Aug2019.pdf",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "IMOS NRS BGC Manual - Version 3.3"
+  }, {
+    "href" : "http://content.aodn.org.au/Documents/IMOS/Facilities/national_mooring/IMOS_NRS_BGCManual_V3.3.1_July2020.pdf",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "IMOS NRS BGC Manual - Version 3.3.1"
+  }, {
+    "href" : "http://content.aodn.org.au/Documents/IMOS/Facilities/national_mooring/IMOS_NRS_BGCManual_V4.0_June2023.pdf",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "IMOS NRS BGC Manual - Version 4.0"
+  }, {
+    "href" : "http://content.aodn.org.au/Documents/IMOS/Facilities/national_mooring/IMOS_NRS_BGCManual_V5.0_Sept2025.pdf",
+    "rel" : "",
+    "type" : "",
+    "title" : "IMOS NRS BGC Manual - Version 5.0"
+  }, {
+    "href" : "http://content.aodn.org.au/?prefix=Documents/IMOS/Facilities/national_mooring/",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "IMOS NRS BGC Manual - Previous Versions plus Supplementary documentation"
+  }, {
+    "href" : "https://catalogue-imos.aodn.org.au:443/geonetwork/srv/api/records/aa14b1a4-eb3f-4c6e-89a9-622c1f95bfb2",
+    "rel" : "describedby",
+    "type" : "text/html",
+    "title" : "Full metadata link"
+  }, {
+    "href" : "https://licensebuttons.net/l/by/4.0/88x31.png",
+    "rel" : "license",
+    "type" : "image/png"
+  }, {
+    "href" : "http://creativecommons.org/licenses/by/4.0/",
+    "rel" : "license",
+    "type" : "text/html"
+  } ],
+  "license" : "Creative Commons Attribution 4.0 International License",
+  "providers" : [ {
+    "name" : "Integrated Marine Observing System (IMOS)",
+    "roles" : [ "distributor" ],
+    "url" : "http://imos.org.au/aodn.html"
+  } ],
+  "themes" : [ {
+    "concepts" : [ {
+      "id" : "National Reference Stations Sub-Facility, Integrated Marine Observing System (IMOS)",
+      "url" : null,
+      "title" : "AODN Organisation Vocabulary",
+      "description" : ""
+    } ],
+    "scheme" : "discipline"
+  }, {
+    "concepts" : [ {
+      "id" : "oceans",
+      "url" : null,
+      "title" : null,
+      "description" : null
+    } ],
+    "scheme" : "Categories"
+  } ],
+  "id" : "aa14b1a4-eb3f-4c6e-89a9-622c1f95bfb2",
+  "search_suggestions" : {
+    "abstract_phrases" : [ ],
+    "parameter_vocabs_sayt" : [ ],
+    "platform_vocabs_sayt" : [ ],
+    "organisation_vocabs_sayt" : [ ]
+  },
+  "sci:citation" : "{\"suggestedCitation\":\"The citation in a list of references for Version 5.0: “Davies, C. (Ed.) (2025), National Reference Stations Biogeochemical Operations Manual Version 5. Integrated Marine Observing System. DOI: 10.26198/5c4a56f2a8ae3 (https://doi.org/10.26198/5c4a56f2a8ae3).”\",\"useLimitations\":[\"Data, products and services from IMOS are provided \\\"as is\\\" without any warranty as to fitness for a particular purpose.\"],\"otherConstraints\":[\"The citation in a list of references for Version 4.0: “Davies, C. (Ed.) (2023), National Reference Stations Biogeochemical Operations Manual Version 4. Integrated Marine Observing System. DOI: 10.26198/5c4a56f2a8ae3 (https://doi.org/10.26198/5c4a56f2a8ae3).”\",\"The citation in a list of references for Version 3.2.1: “Davies, C. and Sommerville, E. (Eds.) (2017), National Reference Stations Biogeochemical Operations Manual Version 3.2.1. Integrated Marine Observing System. DOI: 10.26198/5c4a56f2a8ae3 (http://dx.doi.org/10.26198/5c4a56f2a8ae3).”\",\"The citation in a list of references for Version 3.3: “Davies, C. and Sommerville, E. (Eds.) (2017), National Reference Stations Biogeochemical Operations Manual Version 3.3. Integrated Marine Observing System. DOI: 10.26198/5c4a56f2a8ae3 (http://dx.doi.org/10.26198/5c4a56f2a8ae3).”\",\"Any users of IMOS data are required to clearly acknowledge the source of the material derived from IMOS in the format: \\\"Data was sourced from Australia’s Integrated Marine Observing System (IMOS) – IMOS is enabled by the National Collaborative Research Infrastructure strategy (NCRIS).\\\" If relevant, also credit other organisations involved in collection of this particular datastream (as listed in 'credit' in the metadata record).\"]}",
+  "type" : "Collection",
+  "stac_version" : "1.0.0",
+  "stac_extensions" : [ "https://stac-extensions.github.io/scientific/v1.0.0/schema.json", "https://stac-extensions.github.io/contacts/v0.1.1/schema.json", "https://stac-extensions.github.io/projection/v1.1.0/schema.json", "https://stac-extensions.github.io/language/v1.0.0/schema.json", "https://stac-extensions.github.io/themes/v1.0.0/schema.json", "https://stac-extensions.github.io/web-map-links/v1.2.0/schema.json" ]
+}
