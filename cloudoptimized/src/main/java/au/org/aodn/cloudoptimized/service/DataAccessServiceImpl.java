@@ -309,7 +309,7 @@ public class DataAccessServiceImpl implements DataAccessService {
         }
 
         List<CloudOptimizedEntry> eventDataList = new ArrayList<>();
-        final int dateRangeLength = 16; // days
+        final int dateRangeLength = 11; // days
         var currentStartDate = startDate;
 
         // Use ExecutorService for parallel execution
