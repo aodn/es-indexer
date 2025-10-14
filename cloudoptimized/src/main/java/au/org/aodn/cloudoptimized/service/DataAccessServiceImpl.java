@@ -36,8 +36,8 @@ public class DataAccessServiceImpl implements DataAccessService {
     protected final ObjectMapper objectMapper;
     protected final Random random = new Random();
 
-    private final static int MAX_RETRY_ATTEMPT = 30;  //times
-    private final static int RETRY_DELAY = 30; // second
+    private final static int MAX_RETRY_ATTEMPT = 100;  //times
+    private final static int RETRY_DELAY = 10; // second
 
     public DataAccessServiceImpl(String serverUrl, String baseUrl, RestTemplate restTemplate, WebClient webClient, ObjectMapper objectMapper) {
         this.accessEndPoint = serverUrl + baseUrl;
