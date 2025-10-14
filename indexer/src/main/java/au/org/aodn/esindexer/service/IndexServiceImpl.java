@@ -126,7 +126,7 @@ public abstract class IndexServiceImpl implements IndexService {
                     log.info("when flush total is {}", total);
 
                     return Optional.empty();
-                } 
+                }
             }
             else {
                 return Optional.empty();
