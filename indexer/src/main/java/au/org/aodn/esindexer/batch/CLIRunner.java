@@ -46,4 +46,3 @@ public class CLIRunner implements CommandLineRunner {
         log.info("Web Application started with arguments: {}", Arrays.toString(args));
     }
 }
-
