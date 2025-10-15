@@ -19,11 +19,14 @@ import org.springframework.web.util.UriComponentsBuilder;
 import reactor.core.publisher.Flux;
 import reactor.util.retry.Retry;
 
-import java.time.Duration;
-import java.time.Instant;
-import java.time.YearMonth;
+import org.springframework.retry.annotation.Retryable;
+import org.springframework.retry.annotation.Recover;
+import org.springframework.retry.annotation.Backoff;
+
+import java.time.*;
 import java.util.*;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -35,6 +38,9 @@ public class DataAccessServiceImpl implements DataAccessService {
     protected final WebClient webClient;
     protected final ObjectMapper objectMapper;
     protected final Random random = new Random();
+
+    private final static int MAX_RETRY_ATTEMPT = 100;  //times
+    private final static int RETRY_DELAY_SECOND = 10; // second
 
     public DataAccessServiceImpl(String serverUrl, String baseUrl, RestTemplate restTemplate, WebClient webClient, ObjectMapper objectMapper) {
         this.accessEndPoint = serverUrl + baseUrl;
@@ -201,40 +207,37 @@ public class DataAccessServiceImpl implements DataAccessService {
         }
     }
 
-    @Override
-    public FeatureCollectionGeoJson getIndexingDatasetByMonth(final String uuid, String key, final YearMonth yearMonth, final List<MetadataFields> fields) {
-
-        var startDate = yearMonth.atDay(1);
-        var endDate = yearMonth.atEndOfMonth();
-
-        // currently, we force to get data in the same year to simplify the logic
-        if (startDate.getYear() != endDate.getYear()) {
-            throw new IllegalArgumentException("Start date and end date must be in the same year");
-        }
-
+    /**
+     * This function is a temp solution for very heavy requests of Parquet May be
+     * removed in the future.
+     */
+    private List<? extends CloudOptimizedEntry> getIndexingDatasetByDays(final String uuid, String key, final LocalDate startDate, final LocalDate endDate, final List<MetadataFields> fields) {
+        log.debug("Fetching for UUID: {} in {} -> {}", uuid, startDate, endDate);
         try {
             Map<String, Object> params = new HashMap<>();
             params.put("uuid", uuid);
+            LocalDateTime endDateTime = endDate.atTime(LocalTime.MAX);
 
             String url = UriComponentsBuilder.fromUriString(getDataAccessEndpoint() + "/data/{uuid}/{key}")
                     .queryParam("f", "sse/json")
                     .queryParam("start_date", startDate)
-                    .queryParam("end_date", endDate)
+                    .queryParam("end_date", endDateTime)
                     .queryParam("columns", fields)
                     .buildAndExpand(uuid, key)
                     .toUriString();
 
-            final Map<CloudOptimizedEntry, Long> allEntries = new HashMap<>();
+            final List<CloudOptimizedEntryReducePrecision> allEventData = new ArrayList<>();
             CountDownLatch countDownLatch = new CountDownLatch(1);
+            var dateRange = startDate + " to " + endDate;
 
             // Use defer to allow retry with the same argument, with f=sse/json argument above, we signal
             // server to return result with server side event.
             Flux.defer(
-                    () -> webClient.get()
-                            .uri(url, params)
-                            .accept(MediaType.TEXT_EVENT_STREAM)
-                            .retrieve()
-                            .bodyToFlux(String.class)
+                            () -> webClient.get()
+                                    .uri(url, params)
+                                    .accept(MediaType.TEXT_EVENT_STREAM)
+                                    .retrieve()
+                                    .bodyToFlux(String.class)
                     )
                     .filter(data -> data.contains("data")) // Filter for data: lines
                     .map(data -> {
@@ -250,41 +253,45 @@ public class DataAccessServiceImpl implements DataAccessService {
                     // Ignore other status, just process the complete event, the other event is used to keep the connection alive
                     .filter(event -> "completed".equals(event.getStatus()))
                     // Give a random number so that not all retry happens the same time when previous failed
-                    .retryWhen(Retry.backoff(30, Duration.ofSeconds(random.nextInt(45, 90)))
-                            .doBeforeRetry(signal -> log.info("Retrying {} due to: {}", yearMonth, signal.failure().getMessage())))
+                    .retryWhen(Retry.fixedDelay(MAX_RETRY_ATTEMPT, Duration.ofSeconds(RETRY_DELAY_SECOND))
+                            .doBeforeRetry(signal -> log.info("Retrying {} due to: {}", dateRange, signal.failure().getMessage())))
                     .subscribe(
                             event -> {
                                 String message = event.getMessage() != null ? event.getMessage() : "null";
-                                log.info("Process event message {} : {}", yearMonth, message);
+                                log.debug("Process event message {} : {}", dateRange, message);
 
                                 if (event.getData() != null) {
                                     // Merge data as event comes, this reduced the memory need to hold the string
-                                    aggregateData(allEntries, event.getData());
+                                    allEventData.addAll(event.getData());
                                 } else {
-                                    log.warn("Received completed event with null data for yearMonth: {}", yearMonth);
+                                    log.warn("Received completed event with null data for date range: {}", dateRange);
                                 }
 
                                 // Check if this is the end
                                 String[] sm = message.trim().split("/");
                                 if (sm.length == 2 && sm[1].equalsIgnoreCase("end")) {
-                                    log.info("Completion condition met for {}: {}, releasing latch", yearMonth, message);
+                                    log.debug("Completion condition met for {}: {}, releasing latch", dateRange, message);
                                     countDownLatch.countDown();
                                 }
                             },
                             error -> {
-                                log.error("Fatal error in SSE stream for yearMonth {}: {}", yearMonth, error.getMessage(), error);
+                                log.error("Fatal error in SSE stream for dateRange {}: {}", dateRange, error.getMessage(), error);
                                 countDownLatch.countDown(); // Release latch on fatal error
                             },
                             () -> {
-                                log.info("SSE stream completed for yearMonth: {}", yearMonth);
+                                log.debug("SSE stream completed for dateRange: {}", dateRange);
                                 countDownLatch.countDown();
                             }
                     );
 
             countDownLatch.await();
 
-            log.info("Aggregate data for {}", yearMonth);
-            return toFeatureCollection(uuid, key, allEntries);
+            log.debug("Aggregate data for {}", dateRange);
+            if (!allEventData.isEmpty()) {
+                return allEventData;
+            } else {
+                log.info("No data found from DataAccess Service for UUID: {} in {} -> {}", uuid, startDate, endDate);
+            }
 
         } catch (Exception e) {
             // Do nothing just return empty list
@@ -293,8 +300,63 @@ public class DataAccessServiceImpl implements DataAccessService {
         }
         return null;
     }
+    @Override
+    public FeatureCollectionGeoJson getIndexingDatasetByMonth(final String uuid, String key, final YearMonth yearMonth, final List<MetadataFields> fields) {
+
+        var startDate = yearMonth.atDay(1);
+        var endDate = yearMonth.atEndOfMonth();
+
+        // currently, we force to get data in the same year to simplify the logic
+        if (startDate.getYear() != endDate.getYear()) {
+            throw new IllegalArgumentException("Start date and end date must be in the same year");
+        }
+
+        List<CloudOptimizedEntry> eventDataList = new ArrayList<>();
+        final int dateRangeLength = 11; // days
+        var currentStartDate = startDate;
+
+        // Use ExecutorService for parallel execution
+        int numThreads = Runtime.getRuntime().availableProcessors();
+        ExecutorService executor = java.util.concurrent.Executors.newFixedThreadPool(numThreads);
+        List<java.util.concurrent.Future<List<? extends CloudOptimizedEntry>>> futures = new ArrayList<>();
+
+        while (!currentStartDate.isAfter(endDate)) {
+            var currentEndDate = currentStartDate.plusDays(dateRangeLength - 1);
+            if (currentEndDate.isAfter(endDate)) {
+                currentEndDate = endDate;
+            }
+            final var start = currentStartDate;
+            final var end = currentEndDate;
+            futures.add(executor.submit(() -> getIndexingDatasetByDays(uuid, key, start, end, fields)));
+            currentStartDate = currentEndDate.plusDays(1);
+        }
+
+        for (java.util.concurrent.Future<List<? extends CloudOptimizedEntry>> future : futures) {
+            try {
+                var eventData = future.get();
+                if (eventData != null) {
+                    for (var entry : eventData) {
+                        eventDataList.add((CloudOptimizedEntry) entry);
+                    }
+                }
+            } catch (Exception e) {
+                // Handle exceptions from parallel tasks
+                throw new RuntimeException("Exception in parallel data fetching: " + e.getMessage(), e);
+            }
+        }
+        executor.shutdown();
+        // Merge all the entities
+        final Map<CloudOptimizedEntry, Long> allEntries = new HashMap<>();
+        aggregateData(allEntries, eventDataList);
+        return toFeatureCollection(uuid, key, allEntries);
+    }
 
     @Override
+    @Retryable(
+        retryFor = { Exception.class },
+        maxAttempts = MAX_RETRY_ATTEMPT,
+        backoff = @Backoff(delay = RETRY_DELAY_SECOND * 1000)
+    )
     public List<TemporalExtent> getTemporalExtentOf(String uuid, String key) {
         if(isSafeId(uuid)) {
             // Sometimes the server is down due to SPOT instance or software update.
@@ -330,6 +392,7 @@ public class DataAccessServiceImpl implements DataAccessService {
             throw new MetadataNotFoundException("Malform UUID in request: " + uuid);
         }
     }
+
     /**
      * Summarize the data by counting the number if all the concerned fields are the same, merge data with
      * existing map. That is count will be added for same CloudOptimizedEntry
@@ -369,12 +432,14 @@ public class DataAccessServiceImpl implements DataAccessService {
     }
 
     @Override
-    public FeatureCollectionGeoJson getZarrIndexingDataByMonth(
-            String uuid, String key, YearMonth yearMonth
-    ) {
+    @Retryable(
+        retryFor = { Exception.class },
+        maxAttempts = MAX_RETRY_ATTEMPT,
+        backoff = @Backoff(delay = RETRY_DELAY_SECOND * 1000)
+    )
+    public FeatureCollectionGeoJson getZarrIndexingDataByMonth(String uuid, String key, YearMonth yearMonth) {
         var startDate = Instant.parse(yearMonth.atDay(1) + "T00:00:00.000000000Z");
         var endDate = Instant.parse(yearMonth.atEndOfMonth() + "T23:59:59.999999999Z");
-
         try {
 
             var url = UriComponentsBuilder.fromUriString(getDataAccessEndpoint() + "/data/{uuid}/{key}/zarr_rect")
@@ -409,4 +474,5 @@ public class DataAccessServiceImpl implements DataAccessService {
             return null;
         }
     }
+
 }

@@ -4,6 +4,7 @@ import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch.core.BulkRequest;
 import co.elastic.clients.elasticsearch.core.BulkResponse;
 import co.elastic.clients.elasticsearch.core.bulk.BulkResponseItem;
+import co.elastic.clients.util.MissingRequiredPropertyException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -68,7 +69,7 @@ public abstract class IndexServiceImpl implements IndexService {
 
                 var usageSize = size + dataSize;
                 double roundedPercentage = Math.round((double) usageSize / getBatchSize() * 100.0) / 100.0;
-                log.info("Bulk size usage: {}%", (roundedPercentage * 100));
+                log.debug("Bulk size usage: {}%", (roundedPercentage * 100));
 
                 // We need to split the batch into smaller size to avoid data too large error in ElasticSearch,
                 // the limit is 10mb, so to make check before document add and push batch if size is too big
@@ -115,7 +116,17 @@ public abstract class IndexServiceImpl implements IndexService {
 
         Optional<BulkResponse> flush() throws IOException {
             if(total != 0) {
-                return Optional.of(reduceResponse(proxyImpl.executeBulk(bulkRequest.build(), mapper, callback)));
+                try {
+                    return Optional.of(reduceResponse(proxyImpl.executeBulk(bulkRequest.build(), mapper, callback)));
+                } catch (MissingRequiredPropertyException e) {
+
+                    log.error("Error on flush, bulk request {}", indexerObjectMapper.writeValueAsString(bulkRequest));
+                    log.error("Error: ", e);
+
+                    log.info("when flush total is {}", total);
+
+                    return Optional.empty();
+                }
             }
             else {
                 return Optional.empty();
