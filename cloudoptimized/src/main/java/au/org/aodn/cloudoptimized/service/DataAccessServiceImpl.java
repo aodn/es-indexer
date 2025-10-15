@@ -5,12 +5,14 @@ import au.org.aodn.cloudoptimized.model.*;
 import au.org.aodn.cloudoptimized.model.geojson.FeatureCollectionGeoJson;
 import au.org.aodn.cloudoptimized.model.geojson.FeatureGeoJson;
 import au.org.aodn.cloudoptimized.model.geojson.PointGeoJson;
+import au.org.aodn.metadata.geonetwork.exception.MetadataNotFoundException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -356,26 +358,38 @@ public class DataAccessServiceImpl implements DataAccessService {
         backoff = @Backoff(delay = RETRY_DELAY_SECOND * 1000)
     )
     public List<TemporalExtent> getTemporalExtentOf(String uuid, String key) {
-        try {
-            String url = UriComponentsBuilder.fromUriString(getDataAccessEndpoint() + "/data/{uuid}/{key}/temporal_extent")
-                .buildAndExpand(uuid, key)
-                .toUriString();
+        if(isSafeId(uuid)) {
+            // Sometimes the server is down due to SPOT instance or software update.
+            waitTillServiceUp();
 
-            String response = webClient.get()
-                .uri(url)
-                .accept(MediaType.APPLICATION_JSON)
-                .retrieve()
-                .bodyToMono(String.class)
-                .block();
+            try {
+                HttpEntity<String> request = getRequestEntity(List.of(MediaType.APPLICATION_JSON));
 
-            if (response == null) {
-                log.warn("No data found from DataAccess Service for UUID: {}", uuid);
-                return Collections.emptyList();
+                String url = UriComponentsBuilder.fromUriString(getDataAccessEndpoint() + "/data/{uuid}/{key}/temporal_extent")
+                        .buildAndExpand(uuid, key)
+                        .toUriString();
+
+                ResponseEntity<List<TemporalExtent>> responseEntity = restTemplate.exchange(
+                        url,
+                        HttpMethod.GET,
+                        request,
+                        new ParameterizedTypeReference<>() {
+                        },
+                        Map.of()
+                );
+
+                return responseEntity.getBody();
+
             }
-            return Arrays.asList(objectMapper.readValue(response, TemporalExtent[].class));
-        } catch (Exception e) {
-            log.error("Exception thrown while retrieving temporal extent with UUID: {}", uuid, e);
-            throw new RuntimeException("Failed to get temporal extent from DataAccess Service", e);
+            catch (HttpClientErrorException.NotFound e) {
+                throw new MetadataNotFoundException("UUID not found : " + uuid + " in DataAccess Service");
+            }
+            catch (Exception e) {
+                throw new RuntimeException("Exception thrown while retrieving dataset with UUID: " + uuid + e.getMessage(), e);
+            }
+        }
+        else {
+            throw new MetadataNotFoundException("Malform UUID in request: " + uuid);
         }
     }
 
@@ -427,28 +441,37 @@ public class DataAccessServiceImpl implements DataAccessService {
         var startDate = Instant.parse(yearMonth.atDay(1) + "T00:00:00.000000000Z");
         var endDate = Instant.parse(yearMonth.atEndOfMonth() + "T23:59:59.999999999Z");
         try {
+
             var url = UriComponentsBuilder.fromUriString(getDataAccessEndpoint() + "/data/{uuid}/{key}/zarr_rect")
                     .queryParam("start_date", startDate)
                     .queryParam("end_date", endDate)
                     .buildAndExpand(uuid, key)
                     .toUriString();
 
-            String response = webClient.get()
-                    .uri(url)
-                    .accept(MediaType.APPLICATION_JSON)
-                    .retrieve()
-                    .bodyToMono(String.class)
-                    .block();
+            var request = getRequestEntity(List.of(MediaType.APPLICATION_JSON));
 
-            if (response == null) {
+            var responseEntity = restTemplate.exchange(
+                    url,
+                    HttpMethod.GET,
+                    request,
+                    new ParameterizedTypeReference<FeatureCollectionGeoJson>() {
+                    },
+                    Map.of()
+            );
+
+            if (!responseEntity.getStatusCode().is2xxSuccessful()) {
+                log.error("Request to DataAccess Service failed with status code: {} for UUID: {} in {} -> {}", responseEntity.getStatusCode(), uuid, startDate, endDate);
+                return null;
+            }
+            if (responseEntity.getBody() == null) {
                 log.warn("No data found from DataAccess Service for UUID: {} in {} -> {}", uuid, startDate, endDate);
                 return null;
             }
-            FeatureCollectionGeoJson geoJson = objectMapper.readValue(response, FeatureCollectionGeoJson.class);
-            return geoJson;
+            return responseEntity.getBody();
+
         } catch (Exception e) {
             log.error("Exception thrown while retrieving Zarr indexing data with UUID: {} in {} -> {}", uuid, startDate, endDate, e);
-            throw new RuntimeException("Failed to get Zarr indexing data from DataAccess Service", e);
+            return null;
         }
     }
 
