@@ -1,48 +1,51 @@
 package au.org.aodn.esindexer.batch;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ConfigurableApplicationContext;
 
-import java.util.Arrays;
+import java.util.List;
 
 @Slf4j
 @Component
 public class CLIRunner implements CommandLineRunner {
-    private static final String BATCH = "batch";
-    private final BatchJobRunner batchJobRunner;
-    private final ConfigurableApplicationContext context;
+    public static final String BATCH = "batch";
+    public static final String JOB_NAME = "jobName";
+
+    protected final BatchJobRunner batchJobRunner;
+    protected final ApplicationArguments args;
 
     @Autowired
-    public CLIRunner(BatchJobRunner batchJobRunner, ConfigurableApplicationContext context) {
+    public CLIRunner(ApplicationArguments args, BatchJobRunner batchJobRunner) {
         this.batchJobRunner = batchJobRunner;
-        this.context = context;
+        this.args = args;
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... rawArgs) throws Exception {
 
-        if (args.length > 0 && BATCH.equals(args[0])) {
-            if (args.length < 2 || args.length > 3) {
-                log.error("Argument count mismatch. Arg count: " + args.length);
+        if (args.containsOption(BATCH)) {
+            if (!args.containsOption(JOB_NAME) || args.getOptionValues(JOB_NAME).size() != 1) {
+                log.error("Argument must have --jobName and contains one value only");
                 System.exit(1);
             }
-            String jobName = args[1];
-            String jobParam = args.length == 3 ? args[2] : null;
+
+            List<String> jobName = args.getOptionValues(JOB_NAME);
+
             try {
-                batchJobRunner.run(jobName, jobParam);
-            } catch (Exception e) {
-                log.error("Batch job failed with exception: " + e.getMessage());
+                batchJobRunner.run(jobName.get(0), null);
+            }
+            catch (Exception e) {
+                log.error("Batch job failed with exception: {}", e.getMessage());
                 System.exit(1);
             }
             log.info("Batch job completed successfully.");
-            context.close();
             System.exit(0);
         }
 
         // If not batch, do nothing (web server runs)
-        log.info("Web Application started with arguments: {}", Arrays.toString(args));
+        log.info("Start application in web mode");
     }
 }
