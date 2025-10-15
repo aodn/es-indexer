@@ -55,7 +55,7 @@
     "href" : "http://data.aodn.org.au/TERN/ACEF/Ecology/ARRAerialSurveyRaw3.csv",
     "rel" : "related",
     "type" : "text/html",
-    "title" : "Download data"
+    "title" : "Download data[]"
   }, {
     "href" : "https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/0bef875d-5f77-4b31-bd56-de73fafc2b2e",
     "rel" : "describedby",

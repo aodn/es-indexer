@@ -184,27 +184,27 @@
     "href" : "https://geoserver.imas.utas.edu.au/geoserver/seamap/wfs?version=1.0.0&request=GetFeature&typeName=SeamapAus_QLD_GBRWHA_seagrass&outputFormat=SHAPE-ZIP",
     "rel" : "wfs",
     "type" : "",
-    "title" : "SHAPE-ZIP"
+    "title" : "SHAPE-ZIP[DATA ACCESS - This OGC WFS service returns the data (GBRWHA seagrass) in Shapefile format.]"
   }, {
     "href" : "https://geoserver.imas.utas.edu.au/geoserver/seamap/wms",
     "rel" : "wms",
     "type" : "",
-    "title" : "seamap:SeamapAus_QLD_GBRWHA_seagrass"
+    "title" : "seamap:SeamapAus_QLD_GBRWHA_seagrass[MAP - GBRWHA seagrass]"
   }, {
     "href" : "http://nesptropical.edu.au/wp-content/uploads/2016/03/NESP-TWQ-3.1-FINAL-REPORT.pdf",
     "rel" : "WWW:LINK-1.0-http--publication",
     "type" : "",
-    "title" : "REPORT - Project Final Report [PDF]"
+    "title" : "REPORT - Project Final Report [PDF][]"
   }, {
     "href" : "http://eatlas.org.au/nesp-twq-1/gbr-seagrass-mapping-3-1",
     "rel" : "related",
     "type" : "",
-    "title" : "WEBSITE - Project website"
+    "title" : "WEBSITE - Project website[]"
   }, {
     "href" : "https://eatlas.org.au/geonetwork/srv/eng/catalog.search#/metadata/77998615-bbab-4270-bcb1-96c46f56f85a",
     "rel" : "related",
     "type" : "text/html",
-    "title" : "Original metadata record [eAtlas catalogue]"
+    "title" : "Original metadata record [eAtlas catalogue][]"
   }, {
     "href" : "https://metadata.imas.utas.edu.au/geonetwork/srv/eng/catalog.search#/metadata/77998615-bbab-4270-bcb1-96c46f56f85a",
     "rel" : "describedby",

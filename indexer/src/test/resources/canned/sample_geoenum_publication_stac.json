@@ -347,31 +347,31 @@
       "href": "https://maps.eatlas.org.au/maps/ows",
       "rel": "wms",
       "type": "",
-      "title": "nesp-mac-1:NT_JCU_CDU_NESP-MaC-1-12_Yanyuwa-Seagrass-Sites_2021-2022"
+      "title": "nesp-mac-1:NT_JCU_CDU_NESP-MaC-1-12_Yanyuwa-Seagrass-Sites_2021-2022[Yanyuwa Seagrass Sites, 2021-2022 (NESP MaC 1-12, JCU & CDU)]"
     },
     {
       "href": "https://maps.eatlas.org.au/maps/ows",
       "rel": "wms",
       "type": "",
-      "title": "nesp-mac-1:NT_JCU_CDU_NESP-MaC-1-12_Yanyuwa-Seagrass-Meadows_2021-2022"
+      "title": "nesp-mac-1:NT_JCU_CDU_NESP-MaC-1-12_Yanyuwa-Seagrass-Meadows_2021-2022[Yanyuwa Seagrass Meadows, 2021-2022 (NESP MaC 1-12, JCU & CDU)]"
     },
     {
       "href": "https://maps.eatlas.org.au/index.html?intro=false&z=9&ll=136.78606,-15.62248&l0=ea_nesp-mac-1%3ANT_JCU_CDU_NESP-MaC-1-12_Yanyuwa-Seagrass-Meadows_2021-2022,ea_ea-be%3AWorld_Bright-Earth-e-Atlas-basemap,google_HYBRID,google_TERRAIN,google_SATELLITE,google_ROADMAP,ea_nesp-mac-1%3ANT_JCU_CDU_NESP-MaC-1-12_Yanyuwa-Seagrass-Sites_2021-2022&s0=nesp-mac-1%3AYanyuwa-Seagrass_Type&v0=,,f,f,f,f",
       "rel": "WWW:LINK",
       "type": "",
-      "title": "Interactive map of the resource"
+      "title": "Interactive map of the resource[Interactive map of the resource: This dataset summarises benthic surveys in Yanyuwa Sea Country - meadow type and presence/absence of seagrass.]"
     },
     {
       "href": "https://maps.eatlas.org.au/maps/ows",
       "rel": "wms",
       "type": "",
-      "title": "nesp-mac-1:NT_JCU_CDU_NESP-MaC-1-12_Yanyuwa-Seagrass-Biomass-Interpolation_2021-2022"
+      "title": "nesp-mac-1:NT_JCU_CDU_NESP-MaC-1-12_Yanyuwa-Seagrass-Biomass-Interpolation_2021-2022[Yanyuwa Seagrass Biomass Interpolation, 2021-2022 (NESP MaC 1.12, JCU & CDU)]"
     },
     {
       "href": "https://nextcloud.eatlas.org.au/apps/sharealias/a/1.12_Yanyuwa-sea-country-seagrass",
       "rel": "data",
       "type": "",
-      "title": "Download a copy of the dataset"
+      "title": "Download a copy of the dataset[Access the dataset [2 shapefiles, 1 geotiff & 3 preview images]]"
     },
     {
       "href": "https://eatlas.org.au/data/uuid/cffa7269-5d95-486b-9b2e-77316e808398",

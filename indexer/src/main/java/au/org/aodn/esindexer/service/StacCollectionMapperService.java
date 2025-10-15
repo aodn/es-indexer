@@ -1197,32 +1197,54 @@ public abstract class StacCollectionMapperService {
     }
     /**
      * Special handle for MimeFileType object.
+     * Construct the online resource name with the combination of link title and description in the format: title[description]
+     * The combined title always ends with square brackets to enable reliable parsing.
+     * The content within the LAST pair of brackets is always the description.
+     * Everything before the last bracket pair is the title (which may contain its own brackets).
+     * Examples:
+     *   - "My Title[My Description]" -> title: "My Title", description: "My Description"
+     *   - "My Title[]" -> title: "My Title", description: empty
+     *   - "Title [with brackets][Description]" -> title: "Title [with brackets]", description: "Description"
+     *   - Returns null if both title and description are null
      * @param onlineResource - The parsed XML that contains the target object
      * @return - The online resource
      */
     protected String getOnlineResourceName(CIOnlineResourceType2 onlineResource) {
         var value = safeGet(() -> onlineResource.getName().getCharacterString().getValue())
                 .orElse(null);
-
+        String initialTitle = null;
         if(value != null && !value.toString().trim().isEmpty()) {
             if(value instanceof MimeFileTypeType mt) {
                 String mimeValue = mt.getValue();
                 if(mimeValue != null && !mimeValue.trim().isEmpty()) {
-                    return mimeValue;
+                    initialTitle = mimeValue;
                 }
             }
             else {
-                return value.toString();
+                initialTitle = value.toString();
             }
         }
         // if value is null or empty string, use description as the fallback title
         var descValue = safeGet(() -> onlineResource.getDescription().getCharacterString().getValue())
                 .orElse(null);
+        String linkDescription = null;
 
-        if(descValue != null) {
-            return descValue.toString();
+        if(descValue != null && !descValue.toString().trim().isEmpty()) {
+            linkDescription = descValue.toString().trim();
         }
 
+        // the returned link title is the combined title and description in the format of title[description]
+        // the end of the combined link title should always with an open bracket so that we can extract title and description from the last bracket separately.
+        if(initialTitle != null && linkDescription != null) {
+            return initialTitle + "[" + linkDescription + "]";
+        }
+        else if(initialTitle != null) {
+            return initialTitle + "[]";
+        }
+        // if the title is empty while description not, use description as the fallback title
+        else if(linkDescription != null) {
+            return linkDescription + "[]";
+        }
         return null;
     }
 }

@@ -361,55 +361,55 @@
       "href": "https://www.marine.csiro.au/data/trawler/dataset.cfm?survey=IN2017_V01&data_type=uwy",
       "rel": "data",
       "type": "",
-      "title": "Data Access Via Data Trawler"
+      "title": "Data Access Via Data Trawler[Data available via Data Trawler for IN2017_V01 ( when available)]"
     },
     {
       "href": "https://www.marine.csiro.au/data/trawler/download.cfm?file_id=3596",
       "rel": "data",
       "type": "",
-      "title": "Download: 10-second (csv data): in2017_v01uwy10sec_csv.zip"
+      "title": "Download: 10-second (csv data): in2017_v01uwy10sec_csv.zip[]"
     },
     {
       "href": "https://www.marine.csiro.au/data/trawler/download.cfm?file_id=3597",
       "rel": "data",
       "type": "",
-      "title": "Download: 5-minute (csv data): in2017_v01uwy5min_csv.zip"
+      "title": "Download: 5-minute (csv data): in2017_v01uwy5min_csv.zip[]"
     },
     {
       "href": "https://www.marine.csiro.au/data/trawler/download.cfm?file_id=3598",
       "rel": "data",
       "type": "",
-      "title": "Download: 5-second (netcdf data): in2017_v01uwy_nc.zip"
+      "title": "Download: 5-second (netcdf data): in2017_v01uwy_nc.zip[]"
     },
     {
       "href": "https://www.marine.csiro.au/data/reporting/get_file.cfm?eov_pub_id=1513",
       "rel": "data",
       "type": "",
-      "title": "Download: processing report (pdf): in2017_v01_UWY_ProcessingReport.pdf"
+      "title": "Download: processing report (pdf): in2017_v01_UWY_ProcessingReport.pdf[]"
     },
     {
       "href": "https://www.marine.csiro.au/data/trawler/download.cfm?file_id=5459",
       "rel": "data",
       "type": "",
-      "title": "Download: 1-minute (csv data): in2017_v01uwy1min_csv.zip"
+      "title": "Download: 1-minute (csv data): in2017_v01uwy1min_csv.zip[]"
     },
     {
       "href": "https://www.marine.csiro.au/data/trawler/survey_list.cfm?source_id=309",
       "rel": "related",
       "type": "text/html",
-      "title": "RV Investigator Survey Information"
+      "title": "RV Investigator Survey Information[RV Investigator Survey Information including voyage plans and summaries]"
     },
     {
       "href": "https://www.marine.csiro.au/data/underway/?survey=in2017_v01",
       "rel": "related",
       "type": "text/html",
-      "title": "Visualisation tool for Underway Data"
+      "title": "Visualisation tool for Underway Data[Visualisation tool for near real-time Underway Data]"
     },
     {
       "href": "https://mnf.csiro.au/",
       "rel": "related",
       "type": "text/html",
-      "title": "MNF Home page"
+      "title": "MNF Home page[Marine National Facility Home page]"
     }
   ],
   "license": "Attribution 4.0",
