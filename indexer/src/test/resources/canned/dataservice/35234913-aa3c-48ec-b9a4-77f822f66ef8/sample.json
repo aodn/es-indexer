@@ -2917,61 +2917,61 @@
       "href": "http://imos.org.au/expendablebathythermograph.html",
       "rel": "related",
       "type": "text/html",
-      "title": "Link to Expendable Bathythermograph page on IMOS website"
+      "title": "Link to Expendable Bathythermograph page on IMOS website[]"
     },
     {
       "href": "https://catalogue-imos.aodn.org.au:443/geonetwork/srv/api/records/35234913-aa3c-48ec-b9a4-77f822f66ef8/attachments/Devil_Data_Formats.pdf",
       "rel": "data",
       "type": "",
-      "title": "Devil_Data_Formats.pdf"
+      "title": "Devil_Data_Formats.pdf[PDF document describing the Devil Data formats]"
     },
     {
       "href": "http://content.aodn.org.au/Documents/IMOS/Facilities/ships_of_opportunity/IMOS_XBT_realtime_data_delivery_GTS.pdf",
       "rel": "related",
       "type": "text/html",
-      "title": "PDF document describing the delivery of XBT data in realtime to the AODN and the GTS"
+      "title": "PDF document describing the delivery of XBT data in realtime to the AODN and the GTS[]"
     },
     {
       "href": "http://data.aodn.org.au/?prefix=IMOS/SOOP/SOOP-XBT/REALTIME/",
       "rel": "related",
       "type": "text/html",
-      "title": "Files via Amazon Web Services S3 storage"
+      "title": "Files via Amazon Web Services S3 storage[]"
     },
     {
       "href": "https://portal.aodn.org.au/search?uuid=35234913-aa3c-48ec-b9a4-77f822f66ef8",
       "rel": "related",
       "type": "text/html",
-      "title": "View and download data though the AODN Portal"
+      "title": "View and download data though the AODN Portal[]"
     },
     {
       "href": "http://geoserver-123.aodn.org.au/geoserver/wms",
       "rel": "wms",
       "type": "",
-      "title": "imos:soop_xbt_nrt_profiles_map"
+      "title": "imos:soop_xbt_nrt_profiles_map[SOOP XBT - real-time]"
     },
     {
       "href": "http://geoserver-123.aodn.org.au/geoserver/ows",
       "rel": "wfs",
       "type": "",
-      "title": "soop_xbt_nrt_profiles_data"
+      "title": "soop_xbt_nrt_profiles_data[This OGC WFS service returns filtered geographic information. The returned data is available in multiple formats including CSV.]"
     },
     {
       "href": "https://help.aodn.org.au/web-services/ogc-wfs/",
       "rel": "related",
       "type": "text/html",
-      "title": "OGC WFS help documentation"
+      "title": "OGC WFS help documentation[]"
     },
     {
       "href": "http://geoserver-123.aodn.org.au/geoserver/ows",
       "rel": "IMOS:AGGREGATION--bodaac",
       "type": "",
-      "title": "soop_xbt_nrt_profiles_map#url"
+      "title": "soop_xbt_nrt_profiles_map#url[The ncUrlList is a WFS service that returns a list of URLs matching a query.]"
     },
     {
       "href": "https://help.aodn.org.au/web-services/ncurllist-service/",
       "rel": "related",
       "type": "text/html",
-      "title": "ncUrlList help documentation"
+      "title": "ncUrlList help documentation[]"
     },
     {
       "href": "https://catalogue-imos.aodn.org.au:443/geonetwork/srv/api/records/35234913-aa3c-48ec-b9a4-77f822f66ef8",

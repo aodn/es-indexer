@@ -184,37 +184,37 @@
     "href" : "https://nesptropical.edu.au/index.php/round-2-projects/project-2-2-3/",
     "rel" : "related",
     "type" : "text/html",
-    "title" : "NESP TWQ Project 2.2.3"
+    "title" : "NESP TWQ Project 2.2.3[]"
   }, {
     "href" : "https://maps.eatlas.org.au/index.html?intro=false&z=6&ll=146.23608,-18.99354&l0=ea_nesp2%3AAU_NESP-TWQ-2-2-3_CSIRO_Venomous-Jellyfish-DB_extract_20181130,ea_ea-be%3AWorld_Bright-Earth-e-Atlas-basemap,google_HYBRID,google_TERRAIN,google_SATELLITE,google_ROADMAP&v0=,,f,f,f,f",
     "rel" : "related",
     "type" : "",
-    "title" : "eAtlas Web Mapping Service (WMS) (AIMS)"
+    "title" : "eAtlas Web Mapping Service (WMS) (AIMS)[]"
   }, {
     "href" : "https://eatlas.org.au/nesp-twq-2/jellyfish-early-warning-2-2-3",
     "rel" : "related",
     "type" : "",
-    "title" : "Project web site"
+    "title" : "Project web site[]"
   }, {
     "href" : "https://nextcloud.eatlas.org.au/apps/sharealias/a/au-nesp-twq-2-2-3-venomous-jellyfish-db-20181130",
     "rel" : "data",
     "type" : "",
-    "title" : "Venomous Jellyfish Database extract Nov 2018 CSV + Metadata + Photo [Zip 1.355 MB]"
+    "title" : "Venomous Jellyfish Database extract Nov 2018 CSV + Metadata + Photo [Zip 1.355 MB][]"
   }, {
     "href" : "https://maps.eatlas.org.au/index.html?intro=false&z=5&ll=146.93921,-18.03512&l0=ea_nesp2%3AAU_NESP-TWQ-2-2-3_CSIRO_Venomous-Jellyfish-DB_extract_20181130,ea_ea-be%3AWorld_Bright-Earth-e-Atlas-basemap,google_HYBRID,google_TERRAIN,google_SATELLITE,google_ROADMAP&v0=,,f,f,f,f",
     "rel" : "related",
     "type" : "",
-    "title" : "Interactive map of this dataset"
+    "title" : "Interactive map of this dataset[]"
   }, {
     "href" : "https://maps.eatlas.org.au/maps/wms",
     "rel" : "wms",
     "type" : "",
-    "title" : "nesp2:AU_NESP-TWQ-2-2-3_CSIRO_Venomous-Jellyfish-DB_extract_20181130"
+    "title" : "nesp2:AU_NESP-TWQ-2-2-3_CSIRO_Venomous-Jellyfish-DB_extract_20181130[]"
   }, {
     "href" : "https://eatlas.org.au/data/uuid/c5ce8cb6-04e5-4153-836d-df91878a3131",
     "rel" : "related",
     "type" : "",
-    "title" : "R code for analysis of Irukandji data of the GBR (NESP TWQ 2.2.3, CSIRO)"
+    "title" : "R code for analysis of Irukandji data of the GBR (NESP TWQ 2.2.3, CSIRO)[]"
   }, {
     "href" : "https://eatlas.org.au/data/uuid/16904861-53e6-4123-a7bb-781f2429629f",
     "rel" : "describedby",

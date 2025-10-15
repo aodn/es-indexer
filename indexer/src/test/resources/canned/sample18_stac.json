@@ -356,67 +356,67 @@
     "href" : "http://www.argodatamgt.org/Documentation",
     "rel" : "related",
     "type" : "text/html",
-    "title" : "Link to Argo User's Manual"
+    "title" : "Link to Argo User's Manual[]"
   }, {
     "href" : "https://imos.org.au/facilities/argofloats/bgcargo",
     "rel" : "related",
     "type" : "text/html",
-    "title" : "Biogeochemical Argo page on IMOS website"
+    "title" : "Biogeochemical Argo page on IMOS website[]"
   }, {
     "href" : "https://biogeochemical-argo.org/measured-variables-general-context.php",
     "rel" : "related",
     "type" : "text/html",
-    "title" : "Biogeochemical Argo Measured Variables webpage"
+    "title" : "Biogeochemical Argo Measured Variables webpage[]"
   }, {
     "href" : "http://thredds.aodn.org.au/thredds/catalog/IMOS/Argo/dac/catalog.html",
     "rel" : "related",
     "type" : "text/html",
-    "title" : "NetCDF files via THREDDS catalog"
+    "title" : "NetCDF files via THREDDS catalog[]"
   }, {
     "href" : "https://portal.aodn.org.au/search?uuid=2223b7f2-4bac-4ff1-9b1e-aae9ac58deef",
     "rel" : "related",
     "type" : "text/html",
-    "title" : "View and download data though the AODN Portal"
+    "title" : "View and download data though the AODN Portal[]"
   }, {
     "href" : "http://geoserver-123.aodn.org.au/geoserver/wms",
     "rel" : "wms",
     "type" : "",
-    "title" : "imos:argo_profile_bio_map"
+    "title" : "imos:argo_profile_bio_map[Argo Profiles - BGC]"
   }, {
     "href" : "http://geoserver-123.aodn.org.au/geoserver/ows",
     "rel" : "wfs",
     "type" : "",
-    "title" : "imos:argo_profile_bio_chla_bcksctt_data"
+    "title" : "imos:argo_profile_bio_chla_bcksctt_data[This OGC WFS service returns filtered geographic information. The returned data (Chlorophyll A - Backscattering) is available in multiple formats including CSV.]"
   }, {
     "href" : "http://geoserver-123.aodn.org.au/geoserver/ows",
     "rel" : "wfs",
     "type" : "",
-    "title" : "imos:argo_profile_bio_doxy_data"
+    "title" : "imos:argo_profile_bio_doxy_data[This OGC WFS service returns filtered geographic information. The returned data (Oxygen) is available in multiple formats including CSV.]"
   }, {
     "href" : "http://geoserver-123.aodn.org.au/geoserver/ows",
     "rel" : "wfs",
     "type" : "",
-    "title" : "imos:argo_profile_bio_nitrate_data"
+    "title" : "imos:argo_profile_bio_nitrate_data[This OGC WFS service returns filtered geographic information. The returned data (Nitrate) is available in multiple formats including CSV.]"
   }, {
     "href" : "http://geoserver-123.aodn.org.au/geoserver/ows",
     "rel" : "wfs",
     "type" : "",
-    "title" : "imos:argo_profile_bio_ph_in_situ_total_data"
+    "title" : "imos:argo_profile_bio_ph_in_situ_total_data[This OGC WFS service returns filtered geographic information. The returned data (pH) is available in multiple formats including CSV.]"
   }, {
     "href" : "https://help.aodn.org.au/web-services/ogc-wfs/",
     "rel" : "related",
     "type" : "text/html",
-    "title" : "OGC WFS help documentation"
+    "title" : "OGC WFS help documentation[]"
   }, {
     "href" : "http://geoserver-123.aodn.org.au/geoserver/ows",
     "rel" : "IMOS:AGGREGATION--bodaac",
     "type" : "",
-    "title" : "argo_profile_bio_map#url"
+    "title" : "argo_profile_bio_map#url[The ncUrlList is a WFS service that returns a list of URLs matching a query.]"
   }, {
     "href" : "https://help.aodn.org.au/web-services/ncurllist-service/",
     "rel" : "related",
     "type" : "text/html",
-    "title" : "ncUrlList help documentation"
+    "title" : "ncUrlList help documentation[]"
   }, {
     "href" : "https://catalogue-imos.aodn.org.au:443/geonetwork/srv/api/records/2223b7f2-4bac-4ff1-9b1e-aae9ac58deef",
     "rel" : "describedby",

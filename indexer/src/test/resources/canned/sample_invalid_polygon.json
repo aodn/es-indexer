@@ -101,32 +101,32 @@
     "href" : "https://maps.eatlas.org.au/index.html?intro=false&z=6&ll=148.79651,-18.50602&l0=ea_ea%3AGBR_NERP-TE-13-1_eAtlas_NRM-Regions-GBRMP-2012,ea_ea-be%3AWorld_Bright-Earth-e-Atlas-basemap&s0=GBR_NRM-Regions-GBRMP_Data-preview",
     "rel" : "related",
     "type" : "text/html",
-    "title" : "Interactive map of this dataset"
+    "title" : "Interactive map of this dataset[]"
   }, {
     "href" : "https://maps.eatlas.org.au/maps/wms",
     "rel" : "wms",
     "type" : "",
-    "title" : "ea:GBR_NERP-TE-13-1_eAtlas_NRM-Regions-GBRMP-2012"
+    "title" : "ea:GBR_NERP-TE-13-1_eAtlas_NRM-Regions-GBRMP-2012[]"
   }, {
     "href" : "https://eatlas.org.au/data/uuid/71127e4d-9f14-4c57-9845-1dce0b541d8d",
     "rel" : "related",
     "type" : "",
-    "title" : "eAtlas Web Mapping Service (WMS) (AIMS)"
+    "title" : "eAtlas Web Mapping Service (WMS) (AIMS)[]"
   }, {
     "href" : "https://eatlas.org.au/nerp-te/aims-eatlas-13-1",
     "rel" : "related",
     "type" : "",
-    "title" : "eAtlas project page"
+    "title" : "eAtlas project page[]"
   }, {
     "href" : "http://www.environment.gov.au/fed/catalog/search/resource/details.page?uuid=%7BD92421DF-37D9-4194-854C-FBD123747A71%7D",
     "rel" : "related",
     "type" : "",
-    "title" : "NRM_Regions_2012_GBRMP: Natural Resource Management (NRM) Regions (2012), Australian Government Department of the Environment, ERIN DIG"
+    "title" : "NRM_Regions_2012_GBRMP: Natural Resource Management (NRM) Regions (2012), Australian Government Department of the Environment, ERIN DIG[]"
   }, {
     "href" : "https://nextcloud.eatlas.org.au/apps/sharealias/a/gbr_eatlas_nrm_regions_gbrmp_2012-zip",
     "rel" : "data",
     "type" : "",
-    "title" : "Shapefile + Metadata [Zip 1.5 MB]"
+    "title" : "Shapefile + Metadata [Zip 1.5 MB][]"
   }, {
     "href" : "https://eatlas.org.au/data/uuid/053f0b32-47cc-4a3f-8325-b37feb33c0e3",
     "rel" : "describedby",

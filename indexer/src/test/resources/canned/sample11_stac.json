@@ -150,27 +150,27 @@
     "href" : "https://catalogue-imos.aodn.org.au:443/geonetwork/srv/api/records/6c981d98-d7fb-4120-9ebe-347ef1188ae0",
     "rel" : "related",
     "type" : "text/html",
-    "title" : "ANMN National Reference Station (NRS) Sub-Facility metadata record"
+    "title" : "ANMN National Reference Station (NRS) Sub-Facility metadata record[National Reference Station (NRS) Sub-Facility metadata record]"
   }, {
     "href" : "http://imos.org.au/nationalmooringnetwork.html",
     "rel" : "related",
     "type" : "text/html",
-    "title" : "Australian National Mooring Network"
+    "title" : "Australian National Mooring Network[National Mooring Network - Home Page]"
   }, {
     "href" : "https://publications.csiro.au/rpr/pub?pid=procite:f67a7186-7528-4efd-91c2-27f730665446",
     "rel" : "related",
     "type" : "text/html",
-    "title" : "CSIRO ePublish - Lynch et al (2008)"
+    "title" : "CSIRO ePublish - Lynch et al (2008)[CSIRO ePublish - Lynch et al (2008)]"
   }, {
     "href" : "http://content.aodn.org.au/Documents/IMOS/Facilities/national_mooring/IMOS_NRS_BGCManual_LATEST.pdf",
     "rel" : "related",
     "type" : "text/html",
-    "title" : "IMOS_NRS_BGC_Operations_Handbook_ver2.2 (IMOS portal)"
+    "title" : "IMOS_NRS_BGC_Operations_Handbook_ver2.2 (IMOS portal)[IMOS NRS BGC Manual - Latest Version]"
   }, {
     "href" : "http://content.aodn.org.au/?prefix=Documents/IMOS/Facilities/national_mooring/",
     "rel" : "related",
     "type" : "text/html",
-    "title" : "IMOS NRS BGC Manual - Previous Versions plus Supplementary documentation"
+    "title" : "IMOS NRS BGC Manual - Previous Versions plus Supplementary documentation[]"
   }, {
     "href" : "https://catalogue-imos.aodn.org.au:443/geonetwork/srv/api/records/fa93c66e-0e56-7e1d-e043-08114f8c1b76",
     "rel" : "describedby",

@@ -232,55 +232,55 @@
       "href": "https://www.marine.csiro.au/data/trawler/dataset.cfm?survey=IN2016_T03&data_type=uwy",
       "rel": "data",
       "type": "",
-      "title": "Data Access Via Data Trawler"
+      "title": "Data Access Via Data Trawler[Data available via Data Trawler for IN2016_T03 ( when available)]"
     },
     {
       "href": "https://creativecommons.org/licenses/by/4.0/",
       "rel": "related",
       "type": "text/html",
-      "title": "License / Attribution"
+      "title": "License / Attribution[]"
     },
     {
       "href": "https://www.marine.csiro.au/data/reporting/get_file.cfm?eov_pub_id=1484",
       "rel": "data",
       "type": "",
-      "title": "Download: processing report (pdf): in2016_t03_UWY_ProcessingReport.pdf"
+      "title": "Download: processing report (pdf): in2016_t03_UWY_ProcessingReport.pdf[]"
     },
     {
       "href": "https://www.marine.csiro.au/data/trawler/download.cfm?file_id=3494",
       "rel": "data",
       "type": "",
-      "title": "Download: 10-second (csv data): in2016_t03uwy10sec_csv.zip"
+      "title": "Download: 10-second (csv data): in2016_t03uwy10sec_csv.zip[]"
     },
     {
       "href": "https://www.marine.csiro.au/data/trawler/download.cfm?file_id=3495",
       "rel": "data",
       "type": "",
-      "title": "Download: 5-minute (csv data): in2016_t03uwy5min_csv.zip"
+      "title": "Download: 5-minute (csv data): in2016_t03uwy5min_csv.zip[]"
     },
     {
       "href": "https://www.marine.csiro.au/data/trawler/download.cfm?file_id=3496",
       "rel": "data",
       "type": "",
-      "title": "Download: 5-second (netcdf data): in2016_t03uwy_nc.zip"
+      "title": "Download: 5-second (netcdf data): in2016_t03uwy_nc.zip[]"
     },
     {
       "href": "https://www.marine.csiro.au/data/trawler/survey_list.cfm?source_id=309",
       "rel": "related",
       "type": "text/html",
-      "title": "RV Investigator Survey Information"
+      "title": "RV Investigator Survey Information[RV Investigator Survey Information including voyage plans and summaries]"
     },
     {
       "href": "https://www.marine.csiro.au/data/underway/?survey=in2016_t03",
       "rel": "related",
       "type": "text/html",
-      "title": "Visualisation tool for Underway Data"
+      "title": "Visualisation tool for Underway Data[Visualisation tool for near real-time Underway Data]"
     },
     {
       "href": "https://mnf.csiro.au/",
       "rel": "related",
       "type": "text/html",
-      "title": "MNF Home page"
+      "title": "MNF Home page[Marine National Facility Home page]"
     }
   ],
   "license": "Attribution 4.0",

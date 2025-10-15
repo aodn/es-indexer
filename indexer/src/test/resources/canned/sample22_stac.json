@@ -147,47 +147,47 @@
     "href" : "http://imos.org.au/nrs.html",
     "rel" : "related",
     "type" : "text/html",
-    "title" : "National Reference Stations page on IMOS website"
+    "title" : "National Reference Stations page on IMOS website[]"
   }, {
     "href" : "https://portal.aodn.org.au/",
     "rel" : "related",
     "type" : "text/html",
-    "title" : "AODN Data Portal (discover NRS data by refining your search using the NRS sub-facility under IMOS, in the Organisation Facet)"
+    "title" : "AODN Data Portal (discover NRS data by refining your search using the NRS sub-facility under IMOS, in the Organisation Facet)[]"
   }, {
     "href" : "http://content.aodn.org.au/Documents/IMOS/Facilities/national_mooring/IMOS_NRS_BGCManual_LATEST.pdf",
     "rel" : "related",
     "type" : "text/html",
-    "title" : "IMOS NRS BGC Manual - Latest Version"
+    "title" : "IMOS NRS BGC Manual - Latest Version[]"
   }, {
     "href" : "http://content.aodn.org.au/Documents/IMOS/Facilities/national_mooring/IMOS_NRS_BGCManual_V3.2.1_Jan2019.pdf",
     "rel" : "related",
     "type" : "text/html",
-    "title" : "IMOS NRS BGC Manual - Version 3.2.1"
+    "title" : "IMOS NRS BGC Manual - Version 3.2.1[]"
   }, {
     "href" : "http://content.aodn.org.au/Documents/IMOS/Facilities/national_mooring/IMOS_NRS_BGCManual_V3.3_Aug2019.pdf",
     "rel" : "related",
     "type" : "text/html",
-    "title" : "IMOS NRS BGC Manual - Version 3.3"
+    "title" : "IMOS NRS BGC Manual - Version 3.3[]"
   }, {
     "href" : "http://content.aodn.org.au/Documents/IMOS/Facilities/national_mooring/IMOS_NRS_BGCManual_V3.3.1_July2020.pdf",
     "rel" : "related",
     "type" : "text/html",
-    "title" : "IMOS NRS BGC Manual - Version 3.3.1"
+    "title" : "IMOS NRS BGC Manual - Version 3.3.1[]"
   }, {
     "href" : "http://content.aodn.org.au/Documents/IMOS/Facilities/national_mooring/IMOS_NRS_BGCManual_V4.0_June2023.pdf",
     "rel" : "related",
     "type" : "text/html",
-    "title" : "IMOS NRS BGC Manual - Version 4.0"
+    "title" : "IMOS NRS BGC Manual - Version 4.0[]"
   }, {
     "href" : "http://content.aodn.org.au/Documents/IMOS/Facilities/national_mooring/IMOS_NRS_BGCManual_V5.0_Sept2025.pdf",
     "rel" : "",
     "type" : "",
-    "title" : "IMOS NRS BGC Manual - Version 5.0"
+    "title" : "IMOS NRS BGC Manual - Version 5.0[]"
   }, {
     "href" : "http://content.aodn.org.au/?prefix=Documents/IMOS/Facilities/national_mooring/",
     "rel" : "related",
     "type" : "text/html",
-    "title" : "IMOS NRS BGC Manual - Previous Versions plus Supplementary documentation"
+    "title" : "IMOS NRS BGC Manual - Previous Versions plus Supplementary documentation[]"
   }, {
     "href" : "https://catalogue-imos.aodn.org.au:443/geonetwork/srv/api/records/aa14b1a4-eb3f-4c6e-89a9-622c1f95bfb2",
     "rel" : "describedby",

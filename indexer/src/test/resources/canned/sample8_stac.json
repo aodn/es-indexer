@@ -137,27 +137,27 @@
     "href" : "https://www.marine.csiro.au/data/trawler/survey_details.cfm?survey=IN2019_V06",
     "rel" : "data",
     "type" : "",
-    "title" : "Investigator Survey"
+    "title" : "Investigator Survey[Link to RV Investigator Survey Information, including voyage plans and summaries]"
   }, {
     "href" : "https://www.marine.csiro.au/data/underway/?survey=in2019_v06",
     "rel" : "data",
     "type" : "",
-    "title" : "Underway Visualisation Tool"
+    "title" : "Underway Visualisation Tool[Link to visualisation tool for Near Real-Time Underway Data]"
   }, {
     "href" : "https://doi.org/10.25919/fxwd-kw74",
     "rel" : "data",
     "type" : "",
-    "title" : "Data Access Portal (DOI)"
+    "title" : "Data Access Portal (DOI)[Link to the CSIRO Data Access Portal]"
   }, {
     "href" : "https://ws.data.csiro.au/licences/1061",
     "rel" : "related",
     "type" : "text/html",
-    "title" : "Data Licensing"
+    "title" : "Data Licensing[Link to Data License / Attribution Statements]"
   }, {
     "href" : "https://mnf.csiro.au/",
     "rel" : "related",
     "type" : "text/html",
-    "title" : "Marine National Facility"
+    "title" : "Marine National Facility[Link to the Marine National Facility Webpage]"
   }, {
     "href" : "https://marlin.csiro.au/geonetwork/srv/eng/catalog.search#/metadata/1880cd63-d0f9-42e0-b073-7082527945f2",
     "rel" : "describedby",
