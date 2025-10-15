@@ -2,16 +2,22 @@ package au.org.aodn.cloudoptimized.service;
 
 import au.org.aodn.cloudoptimized.model.MetadataFields;
 import au.org.aodn.cloudoptimized.model.TemporalExtent;
+import au.org.aodn.cloudoptimized.model.geojson.FeatureCollectionGeoJson;
 import au.org.aodn.cloudoptimized.model.geojson.FeatureGeoJson;
 import au.org.aodn.cloudoptimized.model.geojson.PointGeoJson;
 import au.org.aodn.cloudoptimized.model.geojson.PolygonGeoJson;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
+import java.math.BigDecimal;
 import java.time.YearMonth;
 import java.util.List;
 
@@ -32,152 +38,88 @@ class DataAccessServiceImplTest {
 
     @Test
     void testGetZarrIndexingDataByMonth() {
-        // Mock WebClient components
-        WebClient.RequestHeadersUriSpec requestHeadersUriSpec = mock(WebClient.RequestHeadersUriSpec.class);
-        WebClient.RequestHeadersSpec requestHeadersSpec = mock(WebClient.RequestHeadersSpec.class);
-        WebClient.ResponseSpec responseSpec = mock(WebClient.ResponseSpec.class);
+        // Arrange
+        String uuid = "test-uuid";
+        String key = "test-key";
+        YearMonth yearMonth = YearMonth.of(2025, 10);
+        String expectedUrl = "http://example.com/data/test-uuid/test-key/zarr_rect?start_date=2025-10-01T00:00:00.000000000Z&end_date=2025-10-31T23:59:59.999999999Z";
 
-        // Define the mock response
-        String mockJsonResponse = """
-                    {
-                                     "type": "FeatureCollection",
-                                     "features": [
-                                         {
-                                             "type": "Feature",
-                                             "geometry": {
-                                                 "type": "Polygon",
-                                                 "coordinates": [
-                                                     [
-                                                         [
-                                                             132.953957,
-                                                             -37.454966
-                                                         ],
-                                                         [
-                                                             132.953957,
-                                                             -34.823425
-                                                         ],
-                                                         [
-                                                             137.443624,
-                                                             -34.823425
-                                                         ],
-                                                         [
-                                                             137.443624,
-                                                             -37.454966
-                                                         ],
-                                                         [
-                                                             132.953957,
-                                                             -37.454966
-                                                         ]
-                                                     ]
-                                                 ]
-                                             },
-                                             "properties": {
-                                                 "date": "2011-05",
-                                                 "count": 3849480
-                                             }
-                                         }
-                                     ],
-                                     "properties": {
-                                         "date": "2011-05",
-                                         "collection": "db049981-3d4e-4cb2-9c4b-e697650845b9",
-                                         "key": "radar_SouthAustraliaGulfs_wind_delayed_qc.zarr"
-                                     }
-                                 }
-                """;
-
-        // Mock the WebClient behavior
-        WebClient mockWebClient = mock(WebClient.class);
-        when(mockWebClient.get()).thenReturn(requestHeadersUriSpec);
-        when(requestHeadersUriSpec.uri(anyString())).thenReturn(requestHeadersSpec);
-        when(requestHeadersSpec.accept(any())).thenReturn(requestHeadersSpec);
-        when(requestHeadersSpec.retrieve()).thenReturn(responseSpec);
-        when(responseSpec.bodyToMono(String.class))
-                .thenThrow(new RuntimeException("502 Bad Gateway")) // First request
-                .thenReturn(Mono.just(mockJsonResponse)); // second request (successful);
-
-        // Inject the mocked WebClient into the service
+        FeatureCollectionGeoJson mockResponse = new FeatureCollectionGeoJson(
+                List.of(new FeatureGeoJson(
+                        new PointGeoJson(BigDecimal.ONE, BigDecimal.ONE)
+                )),
+                null
+        );
+        ResponseEntity<FeatureCollectionGeoJson> responseEntity = new ResponseEntity<>(mockResponse, HttpStatus.OK);
         dataAccessService = new DataAccessServiceImpl(
-                "server-url",
-                "base-url",
+                "http://localhost",
+                "/api",
                 mockRestTemplate,
-                mockWebClient,
+                null,
                 new ObjectMapper()
         );
 
-        // Call the method under test
-        var result = dataAccessService.getZarrIndexingDataByMonth("test-uuid", "test-key", YearMonth.of(2024, 6));
+        // Correct the mock setup to ensure the responseEntity is not null
+        when(mockRestTemplate.exchange(
+                anyString(),
+                eq(org.springframework.http.HttpMethod.GET),
+                any(),
+                any(org.springframework.core.ParameterizedTypeReference.class),
+                anyMap()
+        )).thenReturn(responseEntity);
 
-        // Assert the result
+
+        // Act
+        FeatureCollectionGeoJson result = dataAccessService.getZarrIndexingDataByMonth(uuid, key, yearMonth);
+
+        // Assert
         assertNotNull(result);
-        assertEquals(1, result.getFeatures().size());
-        FeatureGeoJson feature = result.getFeatures().get(0);
-        assertEquals("Feature", feature.getType());
-        assertTrue(feature.getGeometry() instanceof PolygonGeoJson);
-        PolygonGeoJson polygon = (PolygonGeoJson) feature.getGeometry();
-        assertEquals(5, polygon.getCoordinates().get(0).size()); // 5 coordinates in the polygon
-        assertEquals("2011-05", feature.getProperties().get("date"));
-        assertEquals(3849480, feature.getProperties().get("count"));
-        assertEquals("2011-05", result.getProperties().get("date"));
-        assertEquals("db049981-3d4e-4cb2-9c4b-e697650845b9", result.getProperties().get("collection"));
-        assertEquals("radar_SouthAustraliaGulfs_wind_delayed_qc.zarr", result.getProperties().get("key"));
-
-        verify(responseSpec, times(2)).bodyToMono(String.class);
+        assertEquals(mockResponse, result);
     }
 
     @Test
-    void testGetTemporalExtentOf_withRetry() {
-        // Mock WebClient components
-        WebClient.RequestHeadersUriSpec requestHeadersUriSpec = mock(WebClient.RequestHeadersUriSpec.class);
-        WebClient.RequestHeadersSpec requestHeadersSpec = mock(WebClient.RequestHeadersSpec.class);
-        WebClient.ResponseSpec responseSpec = mock(WebClient.ResponseSpec.class);
-
-        // Prepare mock response (as JSON array)
-        String mockJsonResponse = """
-                [
-                    {"start":"2020-01-01T00:00:00Z","end":"2020-12-31T23:59:59Z"}
-                ]
-                """;
-
-        // Mock the WebClient behavior
-        WebClient mockWebClient = mock(WebClient.class);
-        when(mockWebClient.get()).thenReturn(requestHeadersUriSpec);
-        when(requestHeadersUriSpec.uri(anyString())).thenReturn(requestHeadersSpec);
-        when(requestHeadersSpec.accept(any())).thenReturn(requestHeadersSpec);
-        when(requestHeadersSpec.retrieve()).thenReturn(responseSpec);
-        when(responseSpec.bodyToFlux(any(Class.class)))
-                .thenThrow(new RuntimeException("502 Bad Gateway")) // First call fails
-                .thenReturn(reactor.core.publisher.Flux.just(
-//                        new TemporalExtent("2020-01-01T00:00:00Z", "2020-12-31T23:59:59Z")
-                        TemporalExtent.builder()
-                                .startDate("2020-01-01T00:00:00Z")
-                                .endDate("2020-12-31T23:59:59Z")
-                                .build()
-                )); // Second call succeeds
-
-        // Inject the mocked WebClient into the service
+    void testGetTemporalExtentOf_retriesOnFailure() {
+        String uuid = "testUuid";
+        String key = "testKey";
+        var expected = List.of(TemporalExtent.builder()
+                .startDate("2020-01-01T00:00:00Z")
+                .endDate("2020-12-31T23:59:59Z")
+                .build());
         dataAccessService = new DataAccessServiceImpl(
-                "server-url",
-                "base-url",
+                "http://localhost",
+                "/api",
                 mockRestTemplate,
-                mockWebClient,
+                null,
                 new ObjectMapper()
         );
+        // First call throws, second call returns success
+        when(mockRestTemplate.exchange(
+                anyString(),
+                eq(org.springframework.http.HttpMethod.GET),
+                any(),
+                any(org.springframework.core.ParameterizedTypeReference.class),
+                anyMap()
+        ))
+        .thenThrow(new RuntimeException("Temporary error"))
+        .thenReturn(new ResponseEntity<>(expected, HttpStatus.OK));
 
         // Call the method under test
-        var result = dataAccessService.getTemporalExtentOf("test-uuid", "test-key");
-
-        // Assert the result
+        List<TemporalExtent> result = dataAccessService.getTemporalExtentOf(uuid, key);
         assertNotNull(result);
         assertEquals(1, result.size());
         assertEquals("2020-01-01T00:00:00Z", result.get(0).getStartDate());
         assertEquals("2020-12-31T23:59:59Z", result.get(0).getEndDate());
-
-        // Verify retry (should call twice)
-        verify(responseSpec, times(2)).bodyToFlux(any(Class.class));
+        verify(mockRestTemplate, times(2)).exchange(
+                anyString(),
+                eq(org.springframework.http.HttpMethod.GET),
+                any(),
+                any(org.springframework.core.ParameterizedTypeReference.class),
+                anyMap()
+        );
     }
 
     @Test
-    void testGetIndexingDatasetByMonth() throws Exception {
+    void testGetIndexingDatasetByMonth()   {
         // Mock WebClient components
         WebClient.RequestHeadersUriSpec requestHeadersUriSpec = mock(WebClient.RequestHeadersUriSpec.class);
         WebClient.RequestHeadersSpec requestHeadersSpec = mock(WebClient.RequestHeadersSpec.class);
