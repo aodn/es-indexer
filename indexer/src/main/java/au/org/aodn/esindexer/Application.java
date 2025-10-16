@@ -24,6 +24,7 @@ public class Application {
 
         if(isBatchMode) {
             app.setWebApplicationType(WebApplicationType.NONE);
+            app.setAdditionalProfiles(BATCH);
         }
         app.run(args);
     }
