@@ -1,0 +1,22 @@
+spring:
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+      - org.springframework.boot.autoconfigure.security.servlet.WebSecurityConfiguration
+      - org.springframework.boot.autoconfigure.actuate.*
+
+management:
+  endpoints:
+    enabled-by-default: false
+    jackson:
+      isolated-object-mapper: false
+  info:
+    defaults:
+      enabled: false
+    env:
+      enabled: false
+  health:
+    defaults:
+      enabled: false
+
+debug: false

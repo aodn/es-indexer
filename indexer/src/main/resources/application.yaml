@@ -30,8 +30,6 @@ management:
   endpoints:
     web:
       base-path: /manage
-      exposure:
-        include: "health,info"
   health:
     elasticsearch:
       enabled: false
