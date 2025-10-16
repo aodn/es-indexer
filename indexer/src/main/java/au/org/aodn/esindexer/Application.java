@@ -23,7 +23,7 @@ public class Application {
         boolean isBatchMode = Arrays.asList(args).contains("--" + BATCH);
 
         if(isBatchMode) {
-            String currentProfiles = System.getProperty("spring.profiles.active","");
+            String currentProfiles = System.getProperty("spring.profiles.active", System.getenv("SPRING_PROFILES_ACTIVE"));
             builder
                     .web(WebApplicationType.NONE)
                     .profiles(currentProfiles, "batch");    // Do not change order, batch must be last to override some setting in other profile
