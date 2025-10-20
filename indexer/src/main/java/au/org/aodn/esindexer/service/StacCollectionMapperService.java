@@ -10,6 +10,8 @@ import au.org.aodn.stac.model.*;
 import au.org.aodn.metadata.geonetwork.GeoNetworkField;
 import au.org.aodn.metadata.iso19115_3_2018.*;
 import au.org.aodn.stac.util.JsonUtil;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.xml.bind.JAXBElement;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -1233,18 +1235,17 @@ public abstract class StacCollectionMapperService {
             linkDescription = descValue.toString().trim();
         }
 
-        // the returned link title is the combined title and description in the format of title[description]
-        // the end of the combined link title should always with an open bracket so that we can extract title and description from the last bracket separately.
-        if(initialTitle != null && linkDescription != null) {
-            return initialTitle + "[" + linkDescription + "]";
+        // the returned link title is the json string, which should contains field title and description
+        // use linkedhashmap to ensure order as title, description
+        Map<String, String> result = new LinkedHashMap<>();
+        result.put("title", initialTitle);
+        result.put("description", linkDescription);
+
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            return mapper.writeValueAsString(result);
+        } catch (JsonProcessingException e) {
+            return null;
         }
-        else if(initialTitle != null) {
-            return initialTitle + "[]";
-        }
-        // if the title is empty while description not, use description as the fallback title
-        else if(linkDescription != null) {
-            return linkDescription + "[]";
-        }
-        return null;
     }
 }
