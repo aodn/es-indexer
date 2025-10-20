@@ -1204,9 +1204,10 @@ public abstract class StacCollectionMapperService {
      * The content within the LAST pair of brackets is always the description.
      * Everything before the last bracket pair is the title (which may contain its own brackets).
      * Examples:
-     *   - "My Title[My Description]" -> title: "My Title", description: "My Description"
-     *   - "My Title[]" -> title: "My Title", description: empty
-     *   - "Title [with brackets][Description]" -> title: "Title [with brackets]", description: "Description"
+     *   - "{"title":"My Title", "description": "My Description"}" -> title: "My Title", description: "My Description"
+     *   - "{"title":"My Title", "description": ""}"  -> title: "My Title", description: empty
+     *   - "{"title":"Title [with brackets]", "description": "Description"}" -> title: "Title [with brackets]", description: "Description"
+     *   - "{"title":"Description", "description": ""}" if title is empty but have description text
      *   - Returns null if both title and description are null
      * @param onlineResource - The parsed XML that contains the target object
      * @return - The online resource

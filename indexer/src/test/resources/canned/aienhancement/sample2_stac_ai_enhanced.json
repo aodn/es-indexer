@@ -3808,14 +3808,14 @@
       "href": "https://www.marine.csiro.au/data/trawler/survey_details.cfm?survey=IN2024_V01",
       "rel": "data",
       "type": "",
-      "title": "MNF Data Trawler[Link to processed data and survey information (plans, summaries, etc.) via MNF Data Trawler]",
+      "title": "{\"title\":\"MNF Data Trawler\",\"description\":\"Link to processed data and survey information (plans, summaries, etc.) via MNF Data Trawler\"}",
       "ai:group": "Data Access"
     },
     {
       "href": "https://mnf.csiro.au/",
       "rel": "related",
       "type": "text/html",
-      "title": "Marine National Facility[Link to the Marine National Facility Webpage]",
+      "title": "{\"title\":\"Marine National Facility\",\"description\":\"Link to the Marine National Facility Webpage\"}",
       "ai:group": "Other"
     },
     {
