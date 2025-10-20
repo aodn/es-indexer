@@ -358,28 +358,28 @@ public class IndexerServiceIT extends BaseTestClass {
                         .href("https://www.marine.csiro.au/data/trawler/survey_details.cfm?survey=IN2024_V01")
                         .rel("data")
                         .type("")
-                        .title("MNF Data Trawler[Link to processed data and survey information (plans, summaries, etc.) via MNF Data Trawler]")
+                        .title("{\"title\":\"MNF Data Trawler\",\"description\":\"Link to processed data and survey information (plans, summaries, etc.) via MNF Data Trawler\"}")
                         .aiGroup("Data Access")
                         .build(),
                 LinkModel.builder()
                         .href("https://mnf.csiro.au/")
                         .rel("related")
                         .type("text/html")
-                        .title("Marine National Facility[Link to the Marine National Facility Webpage]")
+                        .title("{\"title\":\"Marine National Facility\",\"description\":\"Link to the Marine National Facility Webpage\"}")
                         .aiGroup("Other")
                         .build(),
                 LinkModel.builder()
                         .href("https://doi.org/10.25919/rdrt-bd71")
                         .rel("data")
                         .type("")
-                        .title("Data Access Portal (DOI)[Link to this record at the CSIRO Data Access Portal]")
+                        .title("{\"title\":\"Data Access Portal (DOI)\",\"description\":\"Link to this record at the CSIRO Data Access Portal\"}")
                         .aiGroup("Data Access")
                         .build(),
                 LinkModel.builder()
                         .href("http://www.marine.csiro.au/data/underway/?survey=IN2024_V01")
                         .rel("data")
                         .type("")
-                        .title("Underway Visualisation Tool[Link to visualisation tool for Near Real-Time Underway Data (NRUD)]")
+                        .title("{\"title\":\"Underway Visualisation Tool\",\"description\":\"Link to visualisation tool for Near Real-Time Underway Data (NRUD)\"}")
                         .aiGroup("Data Access")
                         .build(),
                 //there are some links that are not enhanced by AI

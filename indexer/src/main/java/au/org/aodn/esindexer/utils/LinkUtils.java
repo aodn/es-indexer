@@ -4,12 +4,14 @@ import java.util.Arrays;
 import java.util.List;
 
 import au.org.aodn.stac.model.RelationType;
+import au.org.aodn.stac.util.JsonUtil;
 
 /**
  * Protocols here are referenced from old portal project(Grails). Currently, didn't
  * implement all of them. Others can be added if needed.
  */
 public class LinkUtils {
+    private record TitleWithDescription(String title, String description) {}
 
     // protocols as reference
     private final static List<String> WMS = Arrays.asList(
@@ -71,5 +73,11 @@ public class LinkUtils {
 
         // Default case - return protocol itself
         return protocol;
+    }
+
+    // build link title with title and description
+    public static String buildTitleJsonString(String title, String description) {
+        var titleWithDescription = new TitleWithDescription(title, description);
+        return JsonUtil.toJsonString(titleWithDescription);
     }
 }

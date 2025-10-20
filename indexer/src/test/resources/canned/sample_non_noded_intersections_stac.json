@@ -46,8 +46,8 @@
       "start" : "1883-11-30T14:10:44Z",
       "end" : "2017-03-15T13:00:00Z"
     } ],
-    "platform_vocabs": [],
     "parameter_vocabs" : [ ],
+    "platform_vocabs" : [ ],
     "organisation_vocabs" : [ ]
   },
   "contacts" : [ {
@@ -184,37 +184,37 @@
     "href" : "https://nesptropical.edu.au/index.php/round-2-projects/project-2-2-3/",
     "rel" : "related",
     "type" : "text/html",
-    "title" : "NESP TWQ Project 2.2.3[]"
+    "title" : "{\"title\":\"NESP TWQ Project 2.2.3\",\"description\":\"\"}"
   }, {
     "href" : "https://maps.eatlas.org.au/index.html?intro=false&z=6&ll=146.23608,-18.99354&l0=ea_nesp2%3AAU_NESP-TWQ-2-2-3_CSIRO_Venomous-Jellyfish-DB_extract_20181130,ea_ea-be%3AWorld_Bright-Earth-e-Atlas-basemap,google_HYBRID,google_TERRAIN,google_SATELLITE,google_ROADMAP&v0=,,f,f,f,f",
     "rel" : "related",
     "type" : "",
-    "title" : "eAtlas Web Mapping Service (WMS) (AIMS)[]"
+    "title" : "{\"title\":\"eAtlas Web Mapping Service (WMS) (AIMS)\",\"description\":\"\"}"
   }, {
     "href" : "https://eatlas.org.au/nesp-twq-2/jellyfish-early-warning-2-2-3",
     "rel" : "related",
     "type" : "",
-    "title" : "Project web site[]"
+    "title" : "{\"title\":\"Project web site\",\"description\":\"\"}"
   }, {
     "href" : "https://nextcloud.eatlas.org.au/apps/sharealias/a/au-nesp-twq-2-2-3-venomous-jellyfish-db-20181130",
     "rel" : "data",
     "type" : "",
-    "title" : "Venomous Jellyfish Database extract Nov 2018 CSV + Metadata + Photo [Zip 1.355 MB][]"
+    "title" : "{\"title\":\"Venomous Jellyfish Database extract Nov 2018 CSV + Metadata + Photo [Zip 1.355 MB]\",\"description\":\"\"}"
   }, {
     "href" : "https://maps.eatlas.org.au/index.html?intro=false&z=5&ll=146.93921,-18.03512&l0=ea_nesp2%3AAU_NESP-TWQ-2-2-3_CSIRO_Venomous-Jellyfish-DB_extract_20181130,ea_ea-be%3AWorld_Bright-Earth-e-Atlas-basemap,google_HYBRID,google_TERRAIN,google_SATELLITE,google_ROADMAP&v0=,,f,f,f,f",
     "rel" : "related",
     "type" : "",
-    "title" : "Interactive map of this dataset[]"
+    "title" : "{\"title\":\"Interactive map of this dataset\",\"description\":\"\"}"
   }, {
     "href" : "https://maps.eatlas.org.au/maps/wms",
     "rel" : "wms",
     "type" : "",
-    "title" : "nesp2:AU_NESP-TWQ-2-2-3_CSIRO_Venomous-Jellyfish-DB_extract_20181130[]"
+    "title" : "{\"title\":\"nesp2:AU_NESP-TWQ-2-2-3_CSIRO_Venomous-Jellyfish-DB_extract_20181130\",\"description\":\"\"}"
   }, {
     "href" : "https://eatlas.org.au/data/uuid/c5ce8cb6-04e5-4153-836d-df91878a3131",
     "rel" : "related",
     "type" : "",
-    "title" : "R code for analysis of Irukandji data of the GBR (NESP TWQ 2.2.3, CSIRO)[]"
+    "title" : "{\"title\":\"R code for analysis of Irukandji data of the GBR (NESP TWQ 2.2.3, CSIRO)\",\"description\":\"\"}"
   }, {
     "href" : "https://eatlas.org.au/data/uuid/16904861-53e6-4123-a7bb-781f2429629f",
     "rel" : "describedby",
@@ -243,13 +243,13 @@
       "description" : null
     } ],
     "scheme" : "Categories"
-  }],
+  } ],
   "id" : "16904861-53e6-4123-a7bb-781f2429629f",
   "search_suggestions" : {
     "abstract_phrases" : [ ],
-    "platform_vocabs_sayt" : [],
-    "parameter_vocabs_sayt" : [],
-    "organisation_vocabs_sayt" : []
+    "parameter_vocabs_sayt" : [ ],
+    "platform_vocabs_sayt" : [ ],
+    "organisation_vocabs_sayt" : [ ]
   },
   "sci:citation" : "{\"suggestedCitation\":null,\"useLimitations\":null,\"otherConstraints\":[\"This database is based on the \\\"Irukandji Sting Database\\\" assembled and curated by Dr Lisa-Ann Gershwin of the Australian Marine Stinger Advisory Services, and others, and enhanced by CSIRO.\\n                            Derivative products and copies of this work must display this acknowledgement:\\n                            \\\"Based on or contains data provided by Dr Lisa-ann Gershwin (Australian Marine Stinger Advisory Services) and CSIRO. In consideration of the state permitting use of this data you acknowledge and agree that the State gives no warranty in relation to the data (including accuracy, reliability, completeness, currency or suitability) and accepts no liability (including without limitation, liability in negligence) for any loss, damage or costs (including consequential damage) relating to any use of the data. Data must not be used for direct marketing or be used in breach of the privacy laws.\\\"\\n                            You must also include meta-data with the product(s) and include as a minimum the metadata provided with this supplied data.\"]}",
   "type" : "Collection",

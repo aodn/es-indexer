@@ -17,8 +17,8 @@
     "revision" : "2023-09-18T08:11:14",
     "update_frequency" : "completed",
     "temporal" : [ ],
-    "platform_vocabs": [],
     "parameter_vocabs" : [ ],
+    "platform_vocabs" : [ ],
     "organisation_vocabs" : [ ]
   },
   "contacts" : [ {
@@ -101,32 +101,32 @@
     "href" : "https://maps.eatlas.org.au/index.html?intro=false&z=6&ll=148.79651,-18.50602&l0=ea_ea%3AGBR_NERP-TE-13-1_eAtlas_NRM-Regions-GBRMP-2012,ea_ea-be%3AWorld_Bright-Earth-e-Atlas-basemap&s0=GBR_NRM-Regions-GBRMP_Data-preview",
     "rel" : "related",
     "type" : "text/html",
-    "title" : "Interactive map of this dataset[]"
+    "title" : "{\"title\":\"Interactive map of this dataset\",\"description\":\"\"}"
   }, {
     "href" : "https://maps.eatlas.org.au/maps/wms",
     "rel" : "wms",
     "type" : "",
-    "title" : "ea:GBR_NERP-TE-13-1_eAtlas_NRM-Regions-GBRMP-2012[]"
+    "title" : "{\"title\":\"ea:GBR_NERP-TE-13-1_eAtlas_NRM-Regions-GBRMP-2012\",\"description\":\"\"}"
   }, {
     "href" : "https://eatlas.org.au/data/uuid/71127e4d-9f14-4c57-9845-1dce0b541d8d",
     "rel" : "related",
     "type" : "",
-    "title" : "eAtlas Web Mapping Service (WMS) (AIMS)[]"
+    "title" : "{\"title\":\"eAtlas Web Mapping Service (WMS) (AIMS)\",\"description\":\"\"}"
   }, {
     "href" : "https://eatlas.org.au/nerp-te/aims-eatlas-13-1",
     "rel" : "related",
     "type" : "",
-    "title" : "eAtlas project page[]"
+    "title" : "{\"title\":\"eAtlas project page\",\"description\":\"\"}"
   }, {
     "href" : "http://www.environment.gov.au/fed/catalog/search/resource/details.page?uuid=%7BD92421DF-37D9-4194-854C-FBD123747A71%7D",
     "rel" : "related",
     "type" : "",
-    "title" : "NRM_Regions_2012_GBRMP: Natural Resource Management (NRM) Regions (2012), Australian Government Department of the Environment, ERIN DIG[]"
+    "title" : "{\"title\":\"NRM_Regions_2012_GBRMP: Natural Resource Management (NRM) Regions (2012), Australian Government Department of the Environment, ERIN DIG\",\"description\":\"\"}"
   }, {
     "href" : "https://nextcloud.eatlas.org.au/apps/sharealias/a/gbr_eatlas_nrm_regions_gbrmp_2012-zip",
     "rel" : "data",
     "type" : "",
-    "title" : "Shapefile + Metadata [Zip 1.5 MB][]"
+    "title" : "{\"title\":\"Shapefile + Metadata [Zip 1.5 MB]\",\"description\":\"\"}"
   }, {
     "href" : "https://eatlas.org.au/data/uuid/053f0b32-47cc-4a3f-8325-b37feb33c0e3",
     "rel" : "describedby",
@@ -151,8 +151,8 @@
     "concepts" : [ {
       "id" : "marine",
       "url" : null,
-      "description" : "",
-      "title" : "Keywords (Temporal)"
+      "title" : "Keywords (Temporal)",
+      "description" : ""
     } ],
     "scheme" : ""
   }, {
@@ -167,9 +167,9 @@
   "id" : "053f0b32-47cc-4a3f-8325-b37feb33c0e3",
   "search_suggestions" : {
     "abstract_phrases" : [ ],
-    "platform_vocabs_sayt" : [],
-    "parameter_vocabs_sayt" : [],
-    "organisation_vocabs_sayt" : []
+    "parameter_vocabs_sayt" : [ ],
+    "platform_vocabs_sayt" : [ ],
+    "organisation_vocabs_sayt" : [ ]
   },
   "sci:citation" : "{\"suggestedCitation\":null,\"useLimitations\":null,\"otherConstraints\":null}",
   "type" : "Collection",

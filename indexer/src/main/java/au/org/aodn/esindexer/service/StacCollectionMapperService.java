@@ -1236,16 +1236,17 @@ public abstract class StacCollectionMapperService {
         }
 
         // the returned link title is the json string, which should contains field title and description
-        // use linkedhashmap to ensure order as title, description
-        Map<String, String> result = new LinkedHashMap<>();
-        result.put("title", initialTitle);
-        result.put("description", linkDescription);
-
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            return mapper.writeValueAsString(result);
-        } catch (JsonProcessingException e) {
-            return null;
+        if(initialTitle != null && linkDescription != null) {
+            return LinkUtils.buildTitleJsonString(initialTitle, linkDescription);
         }
+        else if(initialTitle != null) {
+            return LinkUtils.buildTitleJsonString(initialTitle, "");
+        }
+        // if the title is empty while description not, use description as the fallback title
+        else if(linkDescription != null) {
+            return LinkUtils.buildTitleJsonString(linkDescription, "");
+        }
+        // if the title and description are none, return null
+        return null;
     }
 }
