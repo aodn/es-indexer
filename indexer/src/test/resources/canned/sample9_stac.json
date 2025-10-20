@@ -41,8 +41,8 @@
       "start" : "2018-10-28T13:00:00Z",
       "end" : "2019-11-20T12:59:59Z"
     } ],
-    "platform_vocabs": [],
     "parameter_vocabs" : [ ],
+    "platform_vocabs" : [ ],
     "organisation_vocabs" : [ ]
   },
   "contacts" : [ {
@@ -171,12 +171,12 @@
     "href" : "https://doi.org/10.1007/s00338-023-02426-z",
     "rel" : "related",
     "type" : "",
-    "title" : "Quigley, K.M., Alvarez-Roa, C., Raina, JB. et al. Heat-evolved microalgal symbionts increase thermal bleaching tolerance of coral juveniles without a trade-off against growth. Coral Reefs 42, 1227–1232 (2023). https://doi.org/10.1007/s00338-023-02426-z[Quigley, K.M., Alvarez-Roa, C., Raina, JB. et al. Heat-evolved microalgal symbionts increase thermal bleaching tolerance of coral juveniles without a trade-off against growth. Coral Reefs 42, 1227–1232 (2023). https://doi.org/10.1007/s00338-023-02426-z]"
+    "title" : "{\"title\":\"Quigley, K.M., Alvarez-Roa, C., Raina, JB. et al. Heat-evolved microalgal symbionts increase thermal bleaching tolerance of coral juveniles without a trade-off against growth. Coral Reefs 42, 1227–1232 (2023). https://doi.org/10.1007/s00338-023-02426-z\",\"description\":\"Quigley, K.M., Alvarez-Roa, C., Raina, JB. et al. Heat-evolved microalgal symbionts increase thermal bleaching tolerance of coral juveniles without a trade-off against growth. Coral Reefs 42, 1227–1232 (2023). https://doi.org/10.1007/s00338-023-02426-z\"}"
   }, {
     "href" : "https://doi.org/10.1111/2041-210X.13162",
     "rel" : "related",
     "type" : "",
-    "title" : "Harianto, J, Carey, N, Byrne, M. respR—An R package for the manipulation and analysis of respirometry data. Methods Ecol Evol. 2019; 10: 912– 920. https://doi.org/10.1111/2041-210X.13162[Harianto, J, Carey, N, Byrne, M. respR—An R package for the manipulation and analysis of respirometry data. Methods Ecol Evol. 2019; 10: 912– 920. https://doi.org/10.1111/2041-210X.13162]"
+    "title" : "{\"title\":\"Harianto, J, Carey, N, Byrne, M. respR—An R package for the manipulation and analysis of respirometry data. Methods Ecol Evol. 2019; 10: 912– 920. https://doi.org/10.1111/2041-210X.13162\",\"description\":\"Harianto, J, Carey, N, Byrne, M. respR—An R package for the manipulation and analysis of respirometry data. Methods Ecol Evol. 2019; 10: 912– 920. https://doi.org/10.1111/2041-210X.13162\"}"
   }, {
     "href" : "https://apps.aims.gov.au/metadata/view/1e13ab6e-e546-44f2-a007-061c2815268a",
     "rel" : "describedby",
@@ -204,13 +204,13 @@
       "description" : null
     } ],
     "scheme" : "Categories"
-  }],
+  } ],
   "id" : "1e13ab6e-e546-44f2-a007-061c2815268a",
   "search_suggestions" : {
     "abstract_phrases" : [ ],
-    "platform_vocabs_sayt" : [],
-    "parameter_vocabs_sayt" : [],
-    "organisation_vocabs_sayt" : []
+    "parameter_vocabs_sayt" : [ ],
+    "platform_vocabs_sayt" : [ ],
+    "organisation_vocabs_sayt" : [ ]
   },
   "sci:citation" : "{\"suggestedCitation\":\"Attribution: Format for citation of metadata sourced from Australian Institute of Marine Science (AIMS) in a list of reference is as follows: \\\"Australian Institute of Marine Science (AIMS). (2022). Heat-evolved microalgal symbionts increase thermal bleaching tolerance of coral juveniles without a trade-off against growth. https://apps.aims.gov.au/metadata/view/1e13ab6e-e546-44f2-a007-061c2815268a, accessed[date-of-access]\\\".\",\"useLimitations\":null,\"otherConstraints\":[\"Use Limitation: All AIMS data, products and services are provided \\\"as is\\\" and AIMS does not warrant their fitness for a particular purpose or non-infringement. While AIMS has made every reasonable effort to ensure high quality of the data, products and services, to the extent permitted by law the data, products and services are provided without any warranties of any kind, either expressed or implied, including without limitation any implied warranties of title, merchantability, and fitness for a particular purpose or non-infringement. AIMS make no representation or warranty that the data, products and services are accurate, complete, reliable or current. To the extent permitted by law, AIMS exclude all liability to any person arising directly or indirectly from the use of the data, products and services.\"]}",
   "type" : "Collection",

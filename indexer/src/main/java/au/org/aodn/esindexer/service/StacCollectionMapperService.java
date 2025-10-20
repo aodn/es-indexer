@@ -10,6 +10,8 @@ import au.org.aodn.stac.model.*;
 import au.org.aodn.metadata.geonetwork.GeoNetworkField;
 import au.org.aodn.metadata.iso19115_3_2018.*;
 import au.org.aodn.stac.util.JsonUtil;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.xml.bind.JAXBElement;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -1202,9 +1204,10 @@ public abstract class StacCollectionMapperService {
      * The content within the LAST pair of brackets is always the description.
      * Everything before the last bracket pair is the title (which may contain its own brackets).
      * Examples:
-     *   - "My Title[My Description]" -> title: "My Title", description: "My Description"
-     *   - "My Title[]" -> title: "My Title", description: empty
-     *   - "Title [with brackets][Description]" -> title: "Title [with brackets]", description: "Description"
+     *   - "{"title":"My Title", "description": "My Description"}" -> title: "My Title", description: "My Description"
+     *   - "{"title":"My Title", "description": ""}"  -> title: "My Title", description: empty
+     *   - "{"title":"Title [with brackets]", "description": "Description"}" -> title: "Title [with brackets]", description: "Description"
+     *   - "{"title":"Description", "description": ""}" if title is empty but have description text
      *   - Returns null if both title and description are null
      * @param onlineResource - The parsed XML that contains the target object
      * @return - The online resource
@@ -1233,18 +1236,18 @@ public abstract class StacCollectionMapperService {
             linkDescription = descValue.toString().trim();
         }
 
-        // the returned link title is the combined title and description in the format of title[description]
-        // the end of the combined link title should always with an open bracket so that we can extract title and description from the last bracket separately.
+        // the returned link title is the json string, which should contains field title and description
         if(initialTitle != null && linkDescription != null) {
-            return initialTitle + "[" + linkDescription + "]";
+            return LinkUtils.buildTitleJsonString(initialTitle, linkDescription);
         }
         else if(initialTitle != null) {
-            return initialTitle + "[]";
+            return LinkUtils.buildTitleJsonString(initialTitle, "");
         }
         // if the title is empty while description not, use description as the fallback title
         else if(linkDescription != null) {
-            return linkDescription + "[]";
+            return LinkUtils.buildTitleJsonString(linkDescription, "");
         }
+        // if the title and description are none, return null
         return null;
     }
 }

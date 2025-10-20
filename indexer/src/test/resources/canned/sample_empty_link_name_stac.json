@@ -72,17 +72,17 @@
     "href" : "https://data.imas.utas.edu.au/attachments/seamap_hosted_thirdparty/GBR10/GBR10_GBRMP_Benthic.tif",
     "rel" : "data",
     "type" : "",
-    "title" : "DATA ACCESS - GBR10 benthic habitat type [Geotiff direct download][]"
+    "title" : "{\"title\":\"DATA ACCESS - GBR10 benthic habitat type [Geotiff direct download]\",\"description\":\"\"}"
   }, {
     "href" : "https://geoserver.imas.utas.edu.au/geoserver/seamap/wms",
     "rel" : "wms",
     "type" : "",
-    "title" : "seamap:SeamapAus_QLD_GBR10_benthictype[MAP - GBR10 benthic habitat type]"
+    "title" : "{\"title\":\"seamap:SeamapAus_QLD_GBR10_benthictype\",\"description\":\"MAP - GBR10 benthic habitat type\"}"
   }, {
     "href" : "https://gbrmpa.maps.arcgis.com/home/item.html?id=492a87d95e8243728486718e7aed02a8",
     "rel" : "related",
     "type" : "text/html",
-    "title" : "Original metadata record[]"
+    "title" : "{\"title\":\"Original metadata record\",\"description\":\"\"}"
   }, {
     "href" : "https://metadata.imas.utas.edu.au/geonetwork/srv/eng/catalog.search#/metadata/492a87d95e8243728486718e7aed02a8",
     "rel" : "describedby",

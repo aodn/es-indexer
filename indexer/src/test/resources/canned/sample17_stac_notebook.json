@@ -18,8 +18,8 @@
     "revision" : "2018-11-14T15:23:41",
     "update_frequency" : "other",
     "temporal" : [ ],
-    "platform_vocabs": [],
     "parameter_vocabs" : [ ],
+    "platform_vocabs" : [ ],
     "organisation_vocabs" : [ ]
   },
   "contacts" : [ {
@@ -55,24 +55,24 @@
     "href" : "http://data.aodn.org.au/TERN/ACEF/Ecology/ARRAerialSurveyRaw3.csv",
     "rel" : "related",
     "type" : "text/html",
-    "title" : "Download data[]"
+    "title" : "{\"title\":\"Download data\",\"description\":\"\"}"
   }, {
     "href" : "https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/0bef875d-5f77-4b31-bd56-de73fafc2b2e",
     "rel" : "describedby",
     "type" : "text/html",
     "title" : "Full metadata link"
   }, {
-      "href" : "https://nbviewer.org/github/aodn/aodn_cloud_optimised/blob/main/notebooks/autonomous_underwater_vehicle.ipynb",
-      "rel" : "related",
-      "type" : "application/x-ipynb+json",
-      "title" : "Python notebook example"
-  }],
+    "href" : "https://nbviewer.org/github/aodn/aodn_cloud_optimised/blob/main/notebooks/autonomous_underwater_vehicle.ipynb",
+    "rel" : "related",
+    "type" : "application/x-ipynb+json",
+    "title" : "Python notebook example"
+  } ],
   "license" : "",
   "providers" : [ {
     "name" : "CSIRO",
     "roles" : [ null ]
   } ],
-  "themes" : [{
+  "themes" : [ {
     "concepts" : [ {
       "id" : "oceans",
       "url" : null,
@@ -84,9 +84,9 @@
   "id" : "0bef875d-5f77-4b31-bd56-de73fafc2b2e",
   "search_suggestions" : {
     "abstract_phrases" : [ ],
-    "platform_vocabs_sayt" : [],
-    "parameter_vocabs_sayt" : [],
-    "organisation_vocabs_sayt" : []
+    "parameter_vocabs_sayt" : [ ],
+    "platform_vocabs_sayt" : [ ],
+    "organisation_vocabs_sayt" : [ ]
   },
   "sci:citation" : "{\"suggestedCitation\":null,\"useLimitations\":null,\"otherConstraints\":null}",
   "type" : "Collection",
