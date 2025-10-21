@@ -1,5 +1,6 @@
 package au.org.aodn.esindexer.utils;
 
+import lombok.Getter;
 import lombok.Setter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -38,6 +39,7 @@ public class StacUtils {
     protected static Logger logger = LogManager.getLogger(StacUtils.class);
 
     @Setter
+    @Getter
     protected static int scale = 10;
 
     /**
