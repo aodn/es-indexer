@@ -2,7 +2,7 @@
   "title" : "IMOS - Animal Tracking Facility Satellite Relay Tagging Program",
   "description" : "The Animal Tracking Facility (formerly known as the Australian Animal Tracking And Monitoring System (AATAMS)) is a coordinated marine animal tagging project. Satellite Relay Data Loggers (SRDL) (most with CTDs, and some also with fluorometers) are used to explore how marine mammal behaviour relates to their oceanic environment. Loggers developed at the University of St Andrews Sea Mammal Research Unit transmit data in near real time via the Argo satellite system. The Satellite Relay Data Loggers are deployed on marine mammals, including Elephant Seals, Weddell Seals, Australian Fur Seals, Australian Sea Lions, New Zealand Fur Seals. Data parameters measured by the instruments include time, conductivity (salinity), temperature, speed, fluorescence (available in the future) and depth. Data is being collected in the Southern Ocean, the Great Australian Bight, and off the South-East Coast of Australia.",
   "extent" : {
-    "bbox" : [ [ -180.0, -80.0, 180.0, -30.0 ], [ 40.0, -80.0, 180.0, -30.0 ], [ -180.0, -80.0, -130.0, -30.0 ] ],
+    "bbox" : [ [ 40.0, -80.0, 230.0, -30.0 ], [ 40.0, -80.0, 180.0, -30.0 ], [ -180.0, -80.0, -130.0, -30.0 ] ],
     "temporal" : [ [ "2007-04-03T06:00:00Z", null ], [ "2007-04-03T06:00:00Z", null ] ]
   },
   "summaries" : {
