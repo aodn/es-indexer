@@ -2,7 +2,7 @@
   "title" : "IMOS - Argo Profiles - biogeochemical data",
   "description" : "The IMOS Biogeochemical Argo sub-facility aims to undertake real time monitoring of the broad ocean state around Australia by deploying Biogeochemical Argo floats in scientifically important areas of Australia's Exclusive Economic Zone, surrounding seas and the Southern Ocean. The data presented here, includes all Biogeochemical Argo profiles collected since 2002, and covers the oceans worldwide. In collaboration with the US SOCCOM project, the first IMOS Australia Biogeochemical Argo floats were deployed in the East Australia Current in September 2019. Biogeochemical Argo floats are profiling floats that, in addition to temperature and salinity (this data is provided by the IMOS - Argo Profiles - core data collection, https://catalogue-imos.aodn.org.au/geonetwork/srv/eng/catalog.search#/metadata/4402cb50-e20a-44ee-93e6-4728259250d2), carry sensors to measure any combination of dissolved oxygen, pH, dissolved nitrate, chlorophyll fluorescence, particulate backscatter and incoming solar radiation (data provided for the first 4 variables only).\n\n                    A typical Argo float mission is to profile from 2000 m depth to the sea surface every 10 days. On deployment, the float sinks to a depth of 1000 m and drifts with the ocean currents for 9 days. Then the float sinks deeper to its profile depth (usually 2000 m) before starting to ascend through the water column measuring parameters as it rises. Once at the surface it transmits location and profile data via satellite to land-based Argo data centres. After transmission the float sinks again and repeats the cycle.\n\n                    Each Argo float is identified by a unique identification number called a WMO ID. WMO (World Meteorological Organisation) ID Numbers are assigned to measurement stations and observing platforms to enable researchers to keep track of, and uniquely identify their floats. The average life of the latest model APEX Argo floats are around 3.7 years or approximately 135 cycles. These statistics are for floats with the standard alkaline battery configuration from an analysis by Kobayashi et al (2009). In the Australian Argo program, the floats are deployed with a combination of lithium and alkaline battery packs which extends float lifetime. Argo Australia floats usually last 5 years.",
   "extent" : {
-    "bbox" : [ [ -180.0, -80.0, 180.0, 85.0 ], [ 175.0, 80.0, 180.0, 85.0 ], [ 150.0, 80.0, 155.0, 85.0 ], [ -175.0, 80.0, -170.0, 85.0 ], [ -180.0, 75.0, -175.0, 80.0 ], [ -160.0, 70.0, -155.0, 75.0 ], [ 20.0, 10.0, 25.0, 15.0 ], [ 175.0, -25.0, 180.0, -10.0 ], [ -180.0, -80.0, 180.0, 85.0 ] ],
+    "bbox" : [ [ 20.0, -80.0, 205.0, 85.0 ], [ 175.0, 80.0, 180.0, 85.0 ], [ 150.0, 80.0, 155.0, 85.0 ], [ -175.0, 80.0, -170.0, 85.0 ], [ -180.0, 75.0, -175.0, 80.0 ], [ -160.0, 70.0, -155.0, 75.0 ], [ 20.0, 10.0, 25.0, 15.0 ], [ 175.0, -25.0, 180.0, -10.0 ], [ -180.0, -80.0, 180.0, 85.0 ] ],
     "temporal" : [ [ "2002-11-30T13:00:00Z", null ], [ "2002-11-30T13:00:00Z", null ] ]
   },
   "summaries" : {
@@ -272,8 +272,8 @@
       "start" : "2002-11-30T13:00:00Z",
       "end" : null
     } ],
-    "platform_vocabs": [],
     "parameter_vocabs" : [ ],
+    "platform_vocabs" : [ ],
     "organisation_vocabs" : [ ]
   },
   "contacts" : [ {
@@ -356,67 +356,67 @@
     "href" : "http://www.argodatamgt.org/Documentation",
     "rel" : "related",
     "type" : "text/html",
-    "title" : "Link to Argo User's Manual"
+    "title" : "{\"title\":\"Link to Argo User's Manual\",\"description\":\"\"}"
   }, {
     "href" : "https://imos.org.au/facilities/argofloats/bgcargo",
     "rel" : "related",
     "type" : "text/html",
-    "title" : "Biogeochemical Argo page on IMOS website"
+    "title" : "{\"title\":\"Biogeochemical Argo page on IMOS website\",\"description\":\"\"}"
   }, {
     "href" : "https://biogeochemical-argo.org/measured-variables-general-context.php",
     "rel" : "related",
     "type" : "text/html",
-    "title" : "Biogeochemical Argo Measured Variables webpage"
+    "title" : "{\"title\":\"Biogeochemical Argo Measured Variables webpage\",\"description\":\"\"}"
   }, {
     "href" : "http://thredds.aodn.org.au/thredds/catalog/IMOS/Argo/dac/catalog.html",
     "rel" : "related",
     "type" : "text/html",
-    "title" : "NetCDF files via THREDDS catalog"
+    "title" : "{\"title\":\"NetCDF files via THREDDS catalog\",\"description\":\"\"}"
   }, {
     "href" : "https://portal.aodn.org.au/search?uuid=2223b7f2-4bac-4ff1-9b1e-aae9ac58deef",
     "rel" : "related",
     "type" : "text/html",
-    "title" : "View and download data though the AODN Portal"
+    "title" : "{\"title\":\"View and download data though the AODN Portal\",\"description\":\"\"}"
   }, {
     "href" : "http://geoserver-123.aodn.org.au/geoserver/wms",
     "rel" : "wms",
     "type" : "",
-    "title" : "imos:argo_profile_bio_map"
+    "title" : "{\"title\":\"imos:argo_profile_bio_map\",\"description\":\"Argo Profiles - BGC\"}"
   }, {
     "href" : "http://geoserver-123.aodn.org.au/geoserver/ows",
     "rel" : "wfs",
     "type" : "",
-    "title" : "imos:argo_profile_bio_chla_bcksctt_data"
+    "title" : "{\"title\":\"imos:argo_profile_bio_chla_bcksctt_data\",\"description\":\"This OGC WFS service returns filtered geographic information. The returned data (Chlorophyll A - Backscattering) is available in multiple formats including CSV.\"}"
   }, {
     "href" : "http://geoserver-123.aodn.org.au/geoserver/ows",
     "rel" : "wfs",
     "type" : "",
-    "title" : "imos:argo_profile_bio_doxy_data"
+    "title" : "{\"title\":\"imos:argo_profile_bio_doxy_data\",\"description\":\"This OGC WFS service returns filtered geographic information. The returned data (Oxygen) is available in multiple formats including CSV.\"}"
   }, {
     "href" : "http://geoserver-123.aodn.org.au/geoserver/ows",
     "rel" : "wfs",
     "type" : "",
-    "title" : "imos:argo_profile_bio_nitrate_data"
+    "title" : "{\"title\":\"imos:argo_profile_bio_nitrate_data\",\"description\":\"This OGC WFS service returns filtered geographic information. The returned data (Nitrate) is available in multiple formats including CSV.\"}"
   }, {
     "href" : "http://geoserver-123.aodn.org.au/geoserver/ows",
     "rel" : "wfs",
     "type" : "",
-    "title" : "imos:argo_profile_bio_ph_in_situ_total_data"
+    "title" : "{\"title\":\"imos:argo_profile_bio_ph_in_situ_total_data\",\"description\":\"This OGC WFS service returns filtered geographic information. The returned data (pH) is available in multiple formats including CSV.\"}"
   }, {
     "href" : "https://help.aodn.org.au/web-services/ogc-wfs/",
     "rel" : "related",
     "type" : "text/html",
-    "title" : "OGC WFS help documentation"
+    "title" : "{\"title\":\"OGC WFS help documentation\",\"description\":\"\"}"
   }, {
     "href" : "http://geoserver-123.aodn.org.au/geoserver/ows",
     "rel" : "IMOS:AGGREGATION--bodaac",
     "type" : "",
-    "title" : "argo_profile_bio_map#url"
+    "title" : "{\"title\":\"argo_profile_bio_map#url\",\"description\":\"The ncUrlList is a WFS service that returns a list of URLs matching a query.\"}"
   }, {
     "href" : "https://help.aodn.org.au/web-services/ncurllist-service/",
     "rel" : "related",
     "type" : "text/html",
-    "title" : "ncUrlList help documentation"
+    "title" : "{\"title\":\"ncUrlList help documentation\",\"description\":\"\"}"
   }, {
     "href" : "https://catalogue-imos.aodn.org.au:443/geonetwork/srv/api/records/2223b7f2-4bac-4ff1-9b1e-aae9ac58deef",
     "rel" : "describedby",
@@ -441,174 +441,174 @@
     "concepts" : [ {
       "id" : "Oceans | Ocean Chemistry | Chlorophyll",
       "url" : null,
-      "description" : "GCMD",
-      "title" : "NASA/Global Change Master Directory Earth Science Keywords Version 5.3.8"
+      "title" : "NASA/Global Change Master Directory Earth Science Keywords Version 5.3.8",
+      "description" : "GCMD"
     }, {
       "id" : "Oceans | Ocean Pressure | Water Pressure",
       "url" : null,
-      "description" : "GCMD",
-      "title" : "NASA/Global Change Master Directory Earth Science Keywords Version 5.3.8"
+      "title" : "NASA/Global Change Master Directory Earth Science Keywords Version 5.3.8",
+      "description" : "GCMD"
     }, {
       "id" : "Oceans | Ocean Chemistry | Nitrate",
       "url" : null,
-      "description" : "GCMD",
-      "title" : "NASA/Global Change Master Directory Earth Science Keywords Version 5.3.8"
+      "title" : "NASA/Global Change Master Directory Earth Science Keywords Version 5.3.8",
+      "description" : "GCMD"
     }, {
       "id" : "Oceans | Ocean Chemistry | pH",
       "url" : null,
-      "description" : "GCMD",
-      "title" : "NASA/Global Change Master Directory Earth Science Keywords Version 5.3.8"
+      "title" : "NASA/Global Change Master Directory Earth Science Keywords Version 5.3.8",
+      "description" : "GCMD"
     }, {
       "id" : "Oceans | Ocean Chemistry | Oxygen",
       "url" : null,
-      "description" : "GCMD",
-      "title" : "NASA/Global Change Master Directory Earth Science Keywords Version 5.3.8"
+      "title" : "NASA/Global Change Master Directory Earth Science Keywords Version 5.3.8",
+      "description" : "GCMD"
     } ],
     "scheme" : "theme"
   }, {
     "concepts" : [ {
       "id" : "Profiling Float | Autonomous Profiling Float",
       "url" : null,
-      "description" : "MCP",
-      "title" : "Marine Community Profile of ISO19115 v1.4 Collection Methods Vocabulary (Annex C.1.3)"
+      "title" : "Marine Community Profile of ISO19115 v1.4 Collection Methods Vocabulary (Annex C.1.3)",
+      "description" : "MCP"
     } ],
     "scheme" : "theme"
   }, {
     "concepts" : [ {
       "id" : "IMOS Node | Bluewater and Climate",
       "url" : null,
-      "description" : "IMOS",
-      "title" : "IMOS Keywords Thesaurus"
+      "title" : "IMOS Keywords Thesaurus",
+      "description" : "IMOS"
     } ],
     "scheme" : "theme"
   }, {
     "concepts" : [ {
       "id" : "Global / Oceans | Atlantic Ocean",
       "url" : null,
-      "description" : "",
-      "title" : "AODN Geographic Extents Vocabulary"
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
     }, {
       "id" : "Global / Oceans | Southern Ocean",
       "url" : null,
-      "description" : "",
-      "title" : "AODN Geographic Extents Vocabulary"
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
     }, {
       "id" : "Regional Seas | Arabian Sea",
       "url" : null,
-      "description" : "",
-      "title" : "AODN Geographic Extents Vocabulary"
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
     }, {
       "id" : "Regional Seas | Mediterranean Sea",
       "url" : null,
-      "description" : "",
-      "title" : "AODN Geographic Extents Vocabulary"
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
     }, {
       "id" : "Global / Oceans | Indian Ocean",
       "url" : null,
-      "description" : "",
-      "title" : "AODN Geographic Extents Vocabulary"
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
     }, {
       "id" : "Marine Features (Australia) | Great Australian Bight, SA/WA",
       "url" : null,
-      "description" : "",
-      "title" : "AODN Geographic Extents Vocabulary"
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
     }, {
       "id" : "Regional Seas | Tasman Sea",
       "url" : null,
-      "description" : "",
-      "title" : "AODN Geographic Extents Vocabulary"
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
     }, {
       "id" : "Regional Seas | Coral Sea",
       "url" : null,
-      "description" : "",
-      "title" : "AODN Geographic Extents Vocabulary"
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
     }, {
       "id" : "Regional Seas | Red Sea",
       "url" : null,
-      "description" : "",
-      "title" : "AODN Geographic Extents Vocabulary"
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
     }, {
       "id" : "Marine Features (Global) | Bay of Bengal",
       "url" : null,
-      "description" : "",
-      "title" : "AODN Geographic Extents Vocabulary"
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
     }, {
       "id" : "Regional Seas | Timor Sea",
       "url" : null,
-      "description" : "",
-      "title" : "AODN Geographic Extents Vocabulary"
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
     }, {
       "id" : "Global / Oceans | Pacific Ocean",
       "url" : null,
-      "description" : "",
-      "title" : "AODN Geographic Extents Vocabulary"
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
     }, {
       "id" : "Regional Seas | Philippine Sea",
       "url" : null,
-      "description" : "",
-      "title" : "AODN Geographic Extents Vocabulary"
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
     } ],
     "scheme" : "place"
   }, {
     "concepts" : [ {
       "id" : "drifting subsurface profiling float",
       "url" : "http://vocab.nerc.ac.uk/collection/L06/current/46",
-      "description" : "",
-      "title" : "AODN Platform Vocabulary"
+      "title" : "AODN Platform Vocabulary",
+      "description" : ""
     } ],
     "scheme" : "theme"
   }, {
     "concepts" : [ {
       "id" : "Pressure (measured variable) in the water body exerted by overlying sea water and any medium above it",
       "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/565",
-      "description" : "",
-      "title" : "AODN Discovery Parameter Vocabulary"
+      "title" : "AODN Discovery Parameter Vocabulary",
+      "description" : ""
     }, {
       "id" : "Concentration of inferred chlorophyll from relative fluorescence per unit volume of the water body",
       "url" : "http://vocab.aodn.org.au/def/discovery_parameter/894",
-      "description" : "",
-      "title" : "AODN Discovery Parameter Vocabulary"
+      "title" : "AODN Discovery Parameter Vocabulary",
+      "description" : ""
     }, {
       "id" : "Concentration of oxygen {O2} per unit mass of the water body",
       "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/373",
-      "description" : "",
-      "title" : "AODN Discovery Parameter Vocabulary"
+      "title" : "AODN Discovery Parameter Vocabulary",
+      "description" : ""
     }, {
       "id" : "pH (total scale) of the water body",
       "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/27",
-      "description" : "",
-      "title" : "AODN Discovery Parameter Vocabulary"
+      "title" : "AODN Discovery Parameter Vocabulary",
+      "description" : ""
     }, {
       "id" : "Concentration of nitrate {NO3} per unit mass of the water body",
       "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/375",
-      "description" : "",
-      "title" : "AODN Discovery Parameter Vocabulary"
+      "title" : "AODN Discovery Parameter Vocabulary",
+      "description" : ""
     } ],
     "scheme" : "theme"
   }, {
     "concepts" : [ {
       "id" : "dissolved gas sensors",
       "url" : "http://vocab.nerc.ac.uk/collection/L05/current/351",
-      "description" : "",
-      "title" : "AODN Instrument Vocabulary"
+      "title" : "AODN Instrument Vocabulary",
+      "description" : ""
     }, {
       "id" : "radiometers",
       "url" : "http://vocab.nerc.ac.uk/collection/L05/current/122",
-      "description" : "",
-      "title" : "AODN Instrument Vocabulary"
+      "title" : "AODN Instrument Vocabulary",
+      "description" : ""
     }, {
       "id" : "water biogeochemical sensor",
       "url" : "http://vocab.aodn.org.au/def/instrument/entity/361",
-      "description" : "",
-      "title" : "AODN Instrument Vocabulary"
+      "title" : "AODN Instrument Vocabulary",
+      "description" : ""
     } ],
     "scheme" : "theme"
   }, {
     "concepts" : [ {
       "id" : "Biogeochemical Argo Sub-Facility, Integrated Marine Observing System (IMOS)",
       "url" : "http://vocab.aodn.org.au/def/organisation/entity/584",
-      "description" : "",
-      "title" : "AODN Organisation Vocabulary"
+      "title" : "AODN Organisation Vocabulary",
+      "description" : ""
     } ],
     "scheme" : "discipline"
   }, {
@@ -623,9 +623,9 @@
   "id" : "2223b7f2-4bac-4ff1-9b1e-aae9ac58deef",
   "search_suggestions" : {
     "abstract_phrases" : [ ],
-    "platform_vocabs_sayt" : [],
-    "parameter_vocabs_sayt" : [],
-    "organisation_vocabs_sayt" : []
+    "parameter_vocabs_sayt" : [ ],
+    "platform_vocabs_sayt" : [ ],
+    "organisation_vocabs_sayt" : [ ]
   },
   "sci:citation" : "{\"suggestedCitation\":\"The citation in a list of references is: \\\"IMOS [year-of-data-download], [Title], [data-access-URL], accessed [date-of-access].\\\"\",\"useLimitations\":[\"Data, products and services from IMOS are provided \\\"as is\\\" without any warranty as to fitness for a particular purpose.\"],\"otherConstraints\":[\"Any users of IMOS data are required to clearly acknowledge the source of the material derived from IMOS in the format: \\\"Data was sourced from Australia?s Integrated Marine Observing System (IMOS) ? IMOS is enabled by the National Collaborative Research Infrastructure strategy (NCRIS).\\\" If relevant, also credit other organisations involved in collection of this particular datastream (as listed in 'credit' in the metadata record).\",\"The Argo Data Management Team has assigned Digital Object Identifiers (DOIs) to their datasets and ask that these are also cited. Please refer to https://argo.ucsd.edu/data/acknowledging-argo/ for determination of the appropriate DOI.\"]}",
   "type" : "Collection",

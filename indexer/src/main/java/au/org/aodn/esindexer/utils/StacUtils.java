@@ -1,12 +1,11 @@
 package au.org.aodn.esindexer.utils;
 
+import lombok.Getter;
 import lombok.Setter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.Envelope;
 import org.locationtech.jts.geom.Geometry;
-import org.locationtech.jts.geom.Polygon;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -40,12 +39,13 @@ public class StacUtils {
     protected static Logger logger = LogManager.getLogger(StacUtils.class);
 
     @Setter
+    @Getter
     protected static int scale = 10;
 
     /**
-     *
+     * Create list of bbox, where the first one is the overall bbox
      * @param listOfPolygons - Assume to be EPSG:4326 as this is what GeoJson use
-     * @return
+     * @return List of STAC bbox
      */
     public static List<List<BigDecimal>> createStacBBox(List<List<Geometry>> listOfPolygons) {
         List<List<BigDecimal>> result = new ArrayList<>();
@@ -59,7 +59,13 @@ public class StacUtils {
                             // Add polygon one by one to expand the overall bounding box area, this is requirement
                             // of STAC to have an overall bounding box of all smaller area as the first bbox in the list.
                             if (polygon != null && polygon.getEnvelopeInternal() != null) {
-                                overallBoundingBox.expandToInclude(polygon.getEnvelopeInternal());
+                                Envelope env = polygon.getEnvelopeInternal();
+                                // Normalize longitudes to [0, 360]
+                                double minX = env.getMinX() < 0 ? env.getMinX() + 360.0 : env.getMinX();
+                                double maxX = env.getMaxX() < 0 ? env.getMaxX() + 360.0 : env.getMaxX();
+                                Envelope normalizedEnv = new Envelope(minX, maxX, env.getMinY(), env.getMaxY());
+                                overallBoundingBox.expandToInclude(normalizedEnv);
+
                                 hasBoundingBoxUpdate.set(true);
                             }
                         }
@@ -68,6 +74,16 @@ public class StacUtils {
             // Now write the first box to the head of list only if we have at least on polygon exist, if no polygon
             // exist then we can skip the reset of operation
             if(hasBoundingBoxUpdate.get()) {
+                double minX = overallBoundingBox.getMinX();
+                double maxX = overallBoundingBox.getMaxX();
+                // Shift to [-180, 180]
+                if (minX > 180.0) minX -= 360.0;
+                if (maxX > 180.0) maxX -= 360.0;
+                // Ensure maxX >= minX, result can be > 180 but needed as we need to represent box cross
+                // meridian, if you do not allow it you may have bbox longitude flipped in wrong direction
+                if (maxX < minX) maxX += 360.0;
+                overallBoundingBox.init(minX, maxX, overallBoundingBox.getMinY(), overallBoundingBox.getMaxY());
+
                 result.add(List.of(
                         BigDecimal.valueOf(overallBoundingBox.getMinX()).setScale(scale, RoundingMode.HALF_UP),
                         BigDecimal.valueOf(overallBoundingBox.getMinY()).setScale(scale, RoundingMode.HALF_UP),

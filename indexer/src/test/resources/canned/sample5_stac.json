@@ -120,7 +120,7 @@
     "href" : "http://imos.org.au/facilities/oceanradar",
     "rel" : "related",
     "type" : "text/html",
-    "title" : "Ocean Radar page on IMOS website"
+    "title" : "{\"title\":\"Ocean Radar page on IMOS website\",\"description\":\"\"}"
   }, {
     "href" : "https://catalogue-imos.aodn.org.au/geonetwork/images/logos/dbee258b-8730-4072-96d4-2818a69a4afd.png",
     "rel" : "icon",

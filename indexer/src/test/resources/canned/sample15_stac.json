@@ -35,8 +35,8 @@
       "start" : "1984-10-31T13:00:00Z",
       "end" : "2014-12-30T13:00:00Z"
     } ],
-    "platform_vocabs": [],
     "parameter_vocabs" : [ ],
+    "platform_vocabs" : [ ],
     "organisation_vocabs" : [ ]
   },
   "contacts" : [ {
@@ -184,27 +184,27 @@
     "href" : "https://geoserver.imas.utas.edu.au/geoserver/seamap/wfs?version=1.0.0&request=GetFeature&typeName=SeamapAus_QLD_GBRWHA_seagrass&outputFormat=SHAPE-ZIP",
     "rel" : "wfs",
     "type" : "",
-    "title" : "SHAPE-ZIP"
+    "title" : "{\"title\":\"SHAPE-ZIP\",\"description\":\"DATA ACCESS - This OGC WFS service returns the data (GBRWHA seagrass) in Shapefile format.\"}"
   }, {
     "href" : "https://geoserver.imas.utas.edu.au/geoserver/seamap/wms",
     "rel" : "wms",
     "type" : "",
-    "title" : "seamap:SeamapAus_QLD_GBRWHA_seagrass"
+    "title" : "{\"title\":\"seamap:SeamapAus_QLD_GBRWHA_seagrass\",\"description\":\"MAP - GBRWHA seagrass\"}"
   }, {
     "href" : "http://nesptropical.edu.au/wp-content/uploads/2016/03/NESP-TWQ-3.1-FINAL-REPORT.pdf",
     "rel" : "WWW:LINK-1.0-http--publication",
     "type" : "",
-    "title" : "REPORT - Project Final Report [PDF]"
+    "title" : "{\"title\":\"REPORT - Project Final Report [PDF]\",\"description\":\"\"}"
   }, {
     "href" : "http://eatlas.org.au/nesp-twq-1/gbr-seagrass-mapping-3-1",
     "rel" : "related",
     "type" : "",
-    "title" : "WEBSITE - Project website"
+    "title" : "{\"title\":\"WEBSITE - Project website\",\"description\":\"\"}"
   }, {
     "href" : "https://eatlas.org.au/geonetwork/srv/eng/catalog.search#/metadata/77998615-bbab-4270-bcb1-96c46f56f85a",
     "rel" : "related",
     "type" : "text/html",
-    "title" : "Original metadata record [eAtlas catalogue]"
+    "title" : "{\"title\":\"Original metadata record [eAtlas catalogue]\",\"description\":\"\"}"
   }, {
     "href" : "https://metadata.imas.utas.edu.au/geonetwork/srv/eng/catalog.search#/metadata/77998615-bbab-4270-bcb1-96c46f56f85a",
     "rel" : "describedby",
@@ -228,65 +228,65 @@
     "concepts" : [ {
       "id" : "marine",
       "url" : null,
-      "description" : "",
-      "title" : "Keywords (Theme)"
+      "title" : "Keywords (Theme)",
+      "description" : ""
     } ],
     "scheme" : ""
   }, {
     "concepts" : [ {
       "id" : "EARTH SCIENCE | BIOSPHERE | AQUATIC ECOSYSTEMS | BENTHIC HABITAT",
       "url" : "http://gcmdservices.gsfc.nasa.gov/kms/concept/09a78997-581b-4d1b-ae71-b2b3f96ef719",
-      "description" : "NASA Global Change Master Directory (GCMD) Earth Science Keywords",
-      "title" : "Global Change Master Directory (GCMD) Earth Science Keywords Version 8.0"
+      "title" : "Global Change Master Directory (GCMD) Earth Science Keywords Version 8.0",
+      "description" : "NASA Global Change Master Directory (GCMD) Earth Science Keywords"
     }, {
       "id" : "EARTH SCIENCE | BIOSPHERE | AQUATIC ECOSYSTEMS | MARINE HABITAT",
       "url" : "http://gcmdservices.gsfc.nasa.gov/kms/concept/f6350232-b1c7-458c-bc43-bda357ebb6db",
-      "description" : "NASA Global Change Master Directory (GCMD) Earth Science Keywords",
-      "title" : "Global Change Master Directory (GCMD) Earth Science Keywords Version 8.0"
+      "title" : "Global Change Master Directory (GCMD) Earth Science Keywords Version 8.0",
+      "description" : "NASA Global Change Master Directory (GCMD) Earth Science Keywords"
     }, {
       "id" : "EARTH SCIENCE | BIOLOGICAL CLASSIFICATION | PLANTS | ANGIOSPERMS (FLOWERING PLANTS) | MONOCOTS | SEAGRASS",
       "url" : "http://gcmdservices.gsfc.nasa.gov/kms/concept/e36c5faa-c772-4bb0-aeca-b361e160ce9d",
-      "description" : "NASA Global Change Master Directory (GCMD) Earth Science Keywords",
-      "title" : "Global Change Master Directory (GCMD) Earth Science Keywords Version 8.0"
+      "title" : "Global Change Master Directory (GCMD) Earth Science Keywords Version 8.0",
+      "description" : "NASA Global Change Master Directory (GCMD) Earth Science Keywords"
     } ],
     "scheme" : "theme"
   }, {
     "concepts" : [ {
       "id" : "Environmental Sciences not elsewhere classified",
       "url" : "http://purl.org/au-research/vocabulary/anzsrc-for/2008/059999",
-      "description" : "",
-      "title" : "Australian and New Zealand Standard Research Classification (ANZSRC): Fields of Research"
+      "title" : "Australian and New Zealand Standard Research Classification (ANZSRC): Fields of Research",
+      "description" : ""
     }, {
       "id" : "Environmental Management",
       "url" : "http://purl.org/au-research/vocabulary/anzsrc-for/2008/050205",
-      "description" : "",
-      "title" : "Australian and New Zealand Standard Research Classification (ANZSRC): Fields of Research"
+      "title" : "Australian and New Zealand Standard Research Classification (ANZSRC): Fields of Research",
+      "description" : ""
     }, {
       "id" : "Marine and Estuarine Ecology (incl. Marine Ichthyology)",
       "url" : "http://purl.org/au-research/vocabulary/anzsrc-for/2008/060205",
-      "description" : "",
-      "title" : "Australian and New Zealand Standard Research Classification (ANZSRC): Fields of Research"
+      "title" : "Australian and New Zealand Standard Research Classification (ANZSRC): Fields of Research",
+      "description" : ""
     } ],
     "scheme" : "theme"
   }, {
     "concepts" : [ {
       "id" : "Biotic taxonomic identification",
       "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/489",
-      "description" : "",
-      "title" : "AODN Discovery Parameter Vocabulary"
+      "title" : "AODN Discovery Parameter Vocabulary",
+      "description" : ""
     }, {
       "id" : "Abundance of biota",
       "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/488",
-      "description" : "",
-      "title" : "AODN Discovery Parameter Vocabulary"
+      "title" : "AODN Discovery Parameter Vocabulary",
+      "description" : ""
     } ],
     "scheme" : "theme"
   }, {
     "concepts" : [ {
       "id" : "Benthic habitat",
       "url" : null,
-      "description" : "",
-      "title" : "Keywords (Theme)"
+      "title" : "Keywords (Theme)",
+      "description" : ""
     } ],
     "scheme" : ""
   }, {
@@ -301,9 +301,9 @@
   "id" : "77998615-bbab-4270-bcb1-96c46f56f85a",
   "search_suggestions" : {
     "abstract_phrases" : [ ],
-    "platform_vocabs_sayt" : [],
-    "parameter_vocabs_sayt" : [],
-    "organisation_vocabs_sayt" : []
+    "parameter_vocabs_sayt" : [ ],
+    "platform_vocabs_sayt" : [ ],
+    "organisation_vocabs_sayt" : [ ]
   },
   "sci:citation" : "{\"suggestedCitation\":\"Cite data as: Coles R, Carter A, McKenna S, Rasheed M, McKenzie L (2014). Collation of spatial seagrass data from 1984 - 2014 for the Great Barrier Reef World Heritage Area. James Cook University. Data accessed at http://metadata.imas.utas.edu.au/geonetwork/srv/en/metadata.show?uuid=77998615-bbab-4270-bcb1-96c46f56f85a on (access date).\",\"useLimitations\":null,\"otherConstraints\":[\"This dataset is hosted by the Institute for Marine and Antarctic Studies (IMAS), University of Tasmania, on behalf of James Cook University (JCU) for the purposes of the Seamap Australia collaborative project (testing a national marine benthic habitat classification scheme).\"]}",
   "type" : "Collection",

@@ -7,6 +7,7 @@ import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -22,6 +23,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
 
 @Configuration
+@ConditionalOnWebApplication
 @EnableWebSecurity
 @Order(1)
 public class SecurityConfig {
@@ -74,7 +76,6 @@ public class SecurityConfig {
                     .requestMatchers(antMatcher("/manage/**")).permitAll()
                     .anyRequest().authenticated()
             );
-;
 
         return http.build();
     }

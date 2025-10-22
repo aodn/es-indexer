@@ -1,0 +1,185 @@
+{
+  "title" : "Great Barrier Reef 10m Grid (GBR10) GBRMP Benthic",
+  "description" : "The GBR10 benthic habitat type map is the output of a modelling process that combines satellite imagery and other environmental attributes like water depth, slope and wave climate, along with known occurrences of benthic habitat type. The occurrences of benthic habitat type were derived through machine learning applied to geolocated photos of the benthos (>100,000 photos) that were collected along reef flats and reef slopes at various offshore shallow reefs (~100 reefs). The modelling process involves taking those occurrences of benthic habitat at known locations (training data) and using a machine learning model to build a relationship between benthic habitat type and the underlying data layers (imagery, depth, slope, waves). Because the data layers cover the whole Great Barrier Reef, a prediction is then able to be made for benthic habitat across the whole Great Barrier Reef as well. Contextual editing was then used to make changes to the map, based on a set of geomorphology- and ecology-based rules, such as what environment a class can occur in and what classes are able to neighbour each other (object-based rulesets). This map covers the “offshore” or “mid and outer-shelf” reefs of the Great Barrier Reef Marine Park. Some of the occurrences of benthic habitat type are withheld from the process, and used to check how well the mapping performed at the end (validation). The mapping was carried out by the Remote Sensing Research Centre at the University of Queensland.\n\n                    The scientific method for generating the benthic habitat map can be briefly described as:\n                    1. Ingestion of Sentinel-2 satellite image data, bathymetry and wave climate data derived from Sentinel-2 image data, and various additional derived environmental covariates into Google Earth Engine\n                    2. Stacking of the input data sources into a model-ready environment\n                    3. Running a segmentation routine to create image objects\n                    4. Fitting a supervised machine learning model (e.g. random forest) to known occurrences in order to classify segments into benthic classes\n                    5. Application of object based rules using a range of colour, shape texture and relationship rules to modify the class attribution\n                    6. Validation of mapping accuracy and performance\n\n                    This is an snapshot of the GBR10 benthic dataset taken on Jan 2023 for the Seamap Australia project from the GBRMP Reef Knowledge System (https://reefiq.gbrmpa.gov.au/ReefKnowledgeSystem), see also https://gbrmpa.maps.arcgis.com/home/item.html?id=492a87d95e8243728486718e7aed02a8. An updated version of the data may be available from the source provider.",
+  "extent" : {
+    "bbox" : [ [ 142.8508, -24.3632, 152.9498, -10.6635 ], [ 142.8508, -24.3632, 152.9498, -10.6635 ] ],
+    "temporal" : [ [ null, null ], [ null, null ] ]
+  },
+  "summaries" : {
+    "score" : 1,
+    "status" : "onGoing",
+    "credits" : [ ],
+    "scope" : {
+      "code" : "dataset",
+      "name" : ""
+    },
+    "statement" : "Class name (Raster Code)\n                    --Coral/Algae: Coral/Algae is any hard bottom area supporting living coral and/or algae (15)\n                    --Sand:  Sand is any soft-bottom area dominated by fine unconsolidated sediments (11)\n                    --Rubble:  Rubble is any habitat featuring loose, rough fragments of broken reef material (12)\n                    --Rock: Rock is any exposed area of hard bare substrate (13)\n\n                    Data provides seafloor reflectance based on Sentinel-2 data at 10 m resolution for the first five image bands. Data were processed by the Modular and Inversion System by EOMAP GmbH & Co.KG. Modular and Inversion System is designed for the physically based assessment of hydro-biological parameters from multi- and hyperspectral remote sensing data. The seafloor reflectance (SFR) represent the reflectance data, which have been corrected\n                    for effects of the atmosphere, water surface and water column.\n\n                    Correction modules applied:\n                    --Corrected for Satellite sensor noise: Yes\n                    --Corrected for atmospheric effects: Yes\n                    --Corrected for the effect of adjacent land reflectance: Yes\n                    --Corrected for effects of turbidity: Yes\n                    --Corrected for water refraction effect: No\n                    --Ground-control points accessed to improve horizontal accuracy: No\n                    --Local in-situ data accessed for calibration and validation purposes: No",
+    "creation" : "2020-09-23T12:29:21",
+    "revision" : "2020-09-23T12:29:21",
+    "update_frequency" : "other",
+    "proj:geometry" : {
+      "geometries" : [ {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 142.8508, -24.3632 ], [ 152.9498, -24.3632 ], [ 152.9498, -10.6635 ], [ 142.8508, -10.6635 ], [ 142.8508, -24.3632 ] ] ]
+      } ],
+      "type" : "GeometryCollection"
+    },
+    "proj:geometry_noland" : {
+      "geometries" : [ {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 152.85474738163322, -10.6635 ], [ 152.8711043630001, -10.674411716999941 ], [ 152.75367272200003, -10.708184502999927 ], [ 152.63839199201783, -10.6635 ], [ 150.95828829052672, -10.6635 ], [ 150.92448978000004, -10.680271091999941 ], [ 150.92649280503213, -10.6635 ], [ 150.33732192460224, -10.6635 ], [ 150.211273634, -10.701348565999922 ], [ 150.12177627001464, -10.6635 ], [ 142.8508, -10.6635 ], [ 142.8508, -11.315437489017654 ], [ 142.87224368600005, -11.38250090899993 ], [ 142.8623153000001, -11.83684661299992 ], [ 142.9921981130001, -11.934014580999929 ], [ 143.2490340500001, -11.968194268999923 ], [ 143.086273634, -12.149021091999941 ], [ 143.0771590500001, -12.328789971999925 ], [ 143.2529403000001, -12.388929945999905 ], [ 143.2949324880001, -12.53484465899993 ], [ 143.433929884, -12.61305103999996 ], [ 143.35889733200008, -12.88054778399993 ], [ 143.543793165, -12.832777601999908 ], [ 143.5029403000001, -13.07512786299992 ], [ 143.59791100400003, -13.524183851999908 ], [ 143.53012129, -13.750176690999922 ], [ 143.68726647200003, -14.014336846999925 ], [ 143.78272545700008, -14.402276299999926 ], [ 143.94117272200003, -14.511163018999923 ], [ 144.16163170700008, -14.37314218499995 ], [ 144.2011824880001, -14.250420830999929 ], [ 144.30355879, -14.31259530999995 ], [ 144.4863387380001, -14.16187916499996 ], [ 144.580414259, -14.36419036299992 ], [ 144.633148634, -14.33993905999995 ], [ 144.67758222700004, -14.555840752999927 ], [ 144.900726759, -14.61419036299992 ], [ 145.03052819100003, -14.80592213299991 ], [ 145.22282962300005, -14.832696221999925 ], [ 145.3457137380001, -14.942559502999927 ], [ 145.23585045700008, -15.165948174999926 ], [ 145.34945722700004, -15.250420830999929 ], [ 145.24390709700003, -15.428399346999925 ], [ 145.46241295700008, -16.060479424999926 ], [ 145.4004012380001, -16.443291924999926 ], [ 145.72250410200004, -16.800225518999923 ], [ 145.774261915, -16.98837655999995 ], [ 145.83912194100003, -16.881524346999925 ], [ 145.9550887380001, -16.87314218499995 ], [ 145.8818465500001, -17.059665622999944 ], [ 146.14771569100003, -17.63258228999996 ], [ 146.010101759, -18.23650481599992 ], [ 146.1665323170924, -18.366129198566156 ], [ 146.09734134200008, -18.245212497999944 ], [ 146.302093946, -18.23723723799992 ], [ 146.31902103000004, -18.38298919099992 ], [ 146.31080162900003, -18.47869231599992 ], [ 146.22339928500003, -18.465508721999925 ], [ 146.18796811833076, -18.403589956364065 ], [ 146.20915774800005, -18.513360283999926 ], [ 146.33936608200008, -18.527032158999926 ], [ 146.27076256600003, -18.85165780999995 ], [ 146.33326256600003, -18.95907968499995 ], [ 146.90512129, -19.304620049999922 ], [ 147.02409915500004, -19.177422783999926 ], [ 147.13396243600002, -19.410821221999925 ], [ 147.42139733200008, -19.412774346999925 ], [ 147.4023543630001, -19.303887627999927 ], [ 147.68425540500004, -19.828057549999922 ], [ 147.78500410200004, -19.835381768999923 ], [ 147.750824415, -19.69150155999995 ], [ 147.82390384200008, -19.714288018999923 ], [ 147.929047071, -19.897556247999944 ], [ 148.27857506600003, -19.96575286299992 ], [ 148.26490319100003, -20.083103122999944 ], [ 148.40202884200008, -20.19850025799991 ], [ 148.46404056100002, -20.185479424999922 ], [ 148.44418379, -20.061944268999923 ], [ 148.56006920700008, -20.052666924999922 ], [ 148.61085045700008, -20.213636976999908 ], [ 148.6484481130001, -20.16497161299992 ], [ 148.68311608200008, -20.274183851999908 ], [ 148.78199303500003, -20.24081796699994 ], [ 148.93702233200008, -20.53492603999996 ], [ 148.70101972700004, -20.43922291499996 ], [ 148.6601668630001, -20.572198174999922 ], [ 148.84351647200003, -20.77752044099992 ], [ 148.8271590500001, -20.890557549999922 ], [ 149.05632571700008, -20.89853280999995 ], [ 149.02662194100003, -20.976250908999926 ], [ 149.23121178500003, -21.089776299999922 ], [ 149.19654381600003, -21.220147393999923 ], [ 149.34107506600003, -21.42441171699994 ], [ 149.29216556100002, -21.51067473799992 ], [ 149.39519290500004, -21.503838799999922 ], [ 149.42937259200008, -21.58375416499996 ], [ 149.48715254, -21.535902601999908 ], [ 149.43539472700004, -21.789727471999925 ], [ 149.58757571700008, -22.28215911299992 ], [ 149.69743899800005, -22.34433359199994 ], [ 149.66325931100002, -22.493829033999926 ], [ 149.81275475400003, -22.378106377999927 ], [ 150.04672285200004, -22.645277601999908 ], [ 149.92351321700008, -22.298272393999923 ], [ 150.05355879, -22.14153411299992 ], [ 150.19402103000004, -22.37867603999996 ], [ 150.60914147200003, -22.610528252999927 ], [ 150.54371178500003, -22.36695728999996 ], [ 150.61841881600003, -22.33440520599993 ], [ 150.66382897200003, -22.419366143999923 ], [ 150.67750084700003, -22.35800546699994 ], [ 150.7597762380001, -22.47047291499996 ], [ 150.67750084700003, -22.56267669099992 ], [ 150.73194420700008, -22.628106377999927 ], [ 150.7734481130001, -22.53020598799992 ], [ 150.82642662900003, -22.697930596999925 ], [ 150.73650149800005, -22.93287525799991 ], [ 150.88233483200008, -23.48886484199994 ], [ 150.81397545700008, -23.509209893999923 ], [ 151.011277435, -23.56650198099993 ], [ 151.16010631867877, -23.71136545507619 ], [ 150.979607397, -23.487385632999917 ], [ 151.239105665, -23.48886484199994 ], [ 151.269867384, -23.666273695999905 ], [ 151.29761803500003, -23.74822356599992 ], [ 151.2246941297366, -23.77423238293017 ], [ 151.55054772200003, -24.091403903999947 ], [ 151.69166100400003, -24.098321221999925 ], [ 151.64136803500003, -23.97828541499996 ], [ 151.721039259, -24.05868905999995 ], [ 151.78044681100002, -24.022556247999944 ], [ 151.9854954520898, -24.3632 ], [ 152.9498, -24.3632 ], [ 152.9498, -10.6635 ], [ 152.85474738163322, -10.6635 ] ], [ [ 151.37232506600003, -23.820245049999922 ], [ 151.38306725400003, -23.879571221999925 ], [ 151.33326256600003, -23.75017669099992 ], [ 151.37232506600003, -23.820245049999922 ] ], [ [ 150.53663170700008, -22.275323174999922 ], [ 150.48226972700004, -22.34498463299991 ], [ 150.47836347700004, -22.216241143999923 ], [ 150.53663170700008, -22.275323174999922 ] ], [ [ 149.0673934250001, -20.315199476999908 ], [ 148.92701256600003, -20.28728606599992 ], [ 148.9848738940001, -20.151462497999944 ], [ 149.0673934250001, -20.315199476999908 ] ], [ [ 148.9575301440001, -20.14381275799991 ], [ 148.8818465500001, -20.13762786299992 ], [ 148.96371504, -20.04159921699994 ], [ 148.9575301440001, -20.14381275799991 ] ], [ [ 146.860199415, -19.115980726999908 ], [ 146.82007897200003, -19.17506275799991 ], [ 146.7802840500001, -19.132012627999927 ], [ 146.860199415, -19.115980726999908 ] ], [ [ 146.65113366000003, -18.745782158999926 ], [ 146.57016035200004, -18.760837497999944 ], [ 146.58130944100003, -18.68222421699994 ], [ 146.65113366000003, -18.745782158999926 ] ] ]
+      } ],
+      "type" : "GeometryCollection"
+    },
+    "temporal" : [ {
+      "start" : null,
+      "end" : null
+    } ],
+    "parameter_vocabs" : [ ],
+    "platform_vocabs" : [ ],
+    "organisation_vocabs" : [ ]
+  },
+  "contacts" : [ {
+    "roles" : [ "owner", "about" ],
+    "organization" : "Great Barrier Reef Marine Park Authority (GBRMPA)",
+    "position" : "Manager, Geospatial Services",
+    "emails" : [ "gis@gbrmpa.gov.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "280 Flinders Street", "PO Box 1379" ],
+      "city" : "Townsville",
+      "country" : "Australia",
+      "postalCode" : "4810",
+      "administrativeArea" : "Queensland"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "+61 7 4750 0700"
+    } ]
+  }, {
+    "roles" : [ "pointOfContact", "metadata" ],
+    "organization" : "Institute for Marine and Antarctic Studies (IMAS), University of Tasmania (UTAS)",
+    "name" : "IMAS Data Manager",
+    "emails" : [ "IMAS.DataManager@utas.edu.au" ]
+  }, {
+    "roles" : [ "principalInvestigator", "citation" ],
+    "organization" : "Great Barrier Reef Marine Park Authority (GBRMPA)"
+  } ],
+  "languages" : [ {
+    "code" : "eng",
+    "name" : "English"
+  } ],
+  "links" : [ {
+    "href" : "https://data.imas.utas.edu.au/attachments/seamap_hosted_thirdparty/GBR10/GBR10_GBRMP_Benthic.tif",
+    "rel" : "data",
+    "type" : "",
+    "title" : "{\"title\":\"DATA ACCESS - GBR10 benthic habitat type [Geotiff direct download]\",\"description\":\"\"}"
+  }, {
+    "href" : "https://geoserver.imas.utas.edu.au/geoserver/seamap/wms",
+    "rel" : "wms",
+    "type" : "",
+    "title" : "{\"title\":\"seamap:SeamapAus_QLD_GBR10_benthictype\",\"description\":\"MAP - GBR10 benthic habitat type\"}"
+  }, {
+    "href" : "https://gbrmpa.maps.arcgis.com/home/item.html?id=492a87d95e8243728486718e7aed02a8",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "{\"title\":\"Original metadata record\",\"description\":\"\"}"
+  }, {
+    "href" : "https://metadata.imas.utas.edu.au/geonetwork/srv/eng/catalog.search#/metadata/492a87d95e8243728486718e7aed02a8",
+    "rel" : "describedby",
+    "type" : "text/html",
+    "title" : "Full metadata link"
+  }, {
+    "href" : "http://i.creativecommons.org/l/by/4.0/88x31.png",
+    "rel" : "license",
+    "type" : "image/png"
+  }, {
+    "href" : "http://creativecommons.org/licenses/by/4.0/",
+    "rel" : "license",
+    "type" : "text/html"
+  } ],
+  "license" : "Creative Commons Attribution 4.0 International License",
+  "providers" : [ {
+    "name" : "Institute for Marine and Antarctic Studies (IMAS), University of Tasmania (UTAS)",
+    "roles" : [ "pointOfContact" ]
+  } ],
+  "themes" : [ {
+    "concepts" : [ {
+      "id" : "EARTH SCIENCE | BIOSPHERE | AQUATIC ECOSYSTEMS | MARINE HABITAT",
+      "url" : "http://gcmdservices.gsfc.nasa.gov/kms/concept/f6350232-b1c7-458c-bc43-bda357ebb6db",
+      "title" : "Global Change Master Directory (GCMD) Earth Science Keywords Version 8.0",
+      "description" : "NASA Global Change Master Directory (GCMD) Earth Science Keywords"
+    } ],
+    "scheme" : "theme"
+  }, {
+    "concepts" : [ {
+      "id" : "Environmental Sciences not elsewhere classified",
+      "url" : "http://purl.org/au-research/vocabulary/anzsrc-for/2008/059999",
+      "title" : "Australian and New Zealand Standard Research Classification (ANZSRC): Fields of Research",
+      "description" : ""
+    }, {
+      "id" : "Environmental Management",
+      "url" : "http://purl.org/au-research/vocabulary/anzsrc-for/2008/050205",
+      "title" : "Australian and New Zealand Standard Research Classification (ANZSRC): Fields of Research",
+      "description" : ""
+    }, {
+      "id" : "Marine and Estuarine Ecology (incl. Marine Ichthyology)",
+      "url" : "http://purl.org/au-research/vocabulary/anzsrc-for/2008/060205",
+      "title" : "Australian and New Zealand Standard Research Classification (ANZSRC): Fields of Research",
+      "description" : ""
+    } ],
+    "scheme" : "theme"
+  }, {
+    "concepts" : [ {
+      "id" : "",
+      "url" : null,
+      "title" : "AODN Platform Vocabulary",
+      "description" : ""
+    } ],
+    "scheme" : "theme"
+  }, {
+    "concepts" : [ {
+      "id" : "Benthic habitat",
+      "url" : null,
+      "title" : "Keywords (Theme)",
+      "description" : ""
+    } ],
+    "scheme" : ""
+  }, {
+    "concepts" : [ {
+      "id" : "underwater cameras",
+      "url" : "http://vocab.nerc.ac.uk/collection/L05/current/180",
+      "title" : "AODN Instrument Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "cameras",
+      "url" : "http://vocab.nerc.ac.uk/collection/L05/current/311",
+      "title" : "AODN Instrument Vocabulary",
+      "description" : ""
+    } ],
+    "scheme" : "instrument"
+  }, {
+    "concepts" : [ {
+      "id" : "biota",
+      "url" : null,
+      "title" : null,
+      "description" : null
+    }, {
+      "id" : "oceans",
+      "url" : null,
+      "title" : null,
+      "description" : null
+    } ],
+    "scheme" : "Categories"
+  } ],
+  "id" : "492a87d95e8243728486718e7aed02a8",
+  "search_suggestions" : {
+    "abstract_phrases" : [ ],
+    "parameter_vocabs_sayt" : [ ],
+    "platform_vocabs_sayt" : [ ],
+    "organisation_vocabs_sayt" : [ ]
+  },
+  "sci:citation" : "{\"suggestedCitation\":\"Cite data as: Great Barrier Reef Marine Park Authority (2021): GBR10 GBRMP Benthic. Data accessed at https://metadata.imas.utas.edu.au/geonetwork/srv/eng/catalog.search#/metadata/492a87d95e8243728486718e7aed02a8 on [access date]\",\"useLimitations\":null,\"otherConstraints\":[\"This dataset is hosted by the Institute for Marine and Antarctic Studies (IMAS), University of Tasmania, on behalf of the Great Barrier Reef Marine Park Authority for the purposes of the Seamap Australia collaborative project (testing a national marine benthic habitat classification scheme).\"]}",
+  "type" : "Collection",
+  "stac_version" : "1.0.0",
+  "stac_extensions" : [ "https://stac-extensions.github.io/scientific/v1.0.0/schema.json", "https://stac-extensions.github.io/contacts/v0.1.1/schema.json", "https://stac-extensions.github.io/projection/v1.1.0/schema.json", "https://stac-extensions.github.io/language/v1.0.0/schema.json", "https://stac-extensions.github.io/themes/v1.0.0/schema.json", "https://stac-extensions.github.io/web-map-links/v1.2.0/schema.json" ]
+}

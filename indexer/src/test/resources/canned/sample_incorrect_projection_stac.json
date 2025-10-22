@@ -77,116 +77,89 @@
       "start" : "2003-03-31T14:00:00Z",
       "end" : "2013-03-01T12:59:59Z"
     } ],
-    "platform_vocabs": [],
     "parameter_vocabs" : [ ],
+    "platform_vocabs" : [ ],
     "organisation_vocabs" : [ ]
   },
-  "contacts": [
-    {
-      "roles": ["author", "about"],
-      "organization": "Institute for Marine and Antarctic Studies (IMAS), University of Tasmania (UTAS)",
-      "name": "Asimus, Jeremy",
-      "emails": ["jeremy.asimus@utas.edu.au"],
-      "addresses": [
-        {
-          "city": "Hobart",
-          "administrativeArea": "TAS",
-          "postalCode": "7001",
-          "country": "Australia"
-        }
-      ],
-      "links": [
-        {
-          "href": "https://orcid.org/0000-0002-6495-5813",
-          "title": "ORCID ID",
-          "type": "WWW:LINK-1.0-http--link"
-        }
-      ]
-    },
-    {
-      "roles": ["distributor", "metadata"],
-      "organization": "IMAS Data Manager",
-      "position": "Data Officer",
-      "emails": ["IMAS.DataManager@utas.edu.au"],
-      "addresses": [
-        {
-          "deliveryPoint": [
-            "Institute for Marine and Antarctic Studies",
-            "Private Bag 129"
-          ],
-          "city": "Hobart",
-          "administrativeArea": "Tasmania",
-          "postalCode": "7001",
-          "country": "Australia"
-        }
-      ],
-      "links": [
-        {
-          "href": "https://imas.utas.edu.au",
-          "title": "Institute for Marine and Antarctic Studies (IMAS) website",
-          "type": "WWW:LINK-1.0-http--link"
-        }
-      ]
-    },
-    {
-      "roles": ["resourceProvider", "citation"],
-      "organization": "Institute for Marine and Antarctic Studies (IMAS)",
-      "emails": ["IMAS.DataManager@utas.edu.au"],
-      "addresses": [
-        {
-          "deliveryPoint": ["Private Bag 129"],
-          "city": "Hobart",
-          "administrativeArea": "Tasmania",
-          "postalCode": "7001",
-          "country": "Australia"
-        }
-      ]
-    },
-    {
-      "roles": ["principalInvestigator", "citation"],
-      "organization": "Institute for Marine and Antarctic Studies (IMAS), University of Tasmania (UTAS)",
-      "name": "Asimus, Jeremy",
-      "emails": ["jeremy.asimus@utas.edu.au"],
-      "addresses": [
-        {
-          "deliveryPoint": ["Private Bag 129"],
-          "city": "Hobart",
-          "administrativeArea": "TAS",
-          "postalCode": "7001",
-          "country": "Australia"
-        }
-      ],
-      "links": [
-        {
-          "href": "https://orcid.org/0000-0002-6495-5813",
-          "title": "ORCID ID",
-          "type": "WWW:LINK-1.0-http--link"
-        }
-      ]
-    },
-    {
-      "roles": ["coAuthor", "citation"],
-      "organization": "Institute for Marine and Antarctic Studies (IMAS), University of Tasmania (UTAS)",
-      "name": "Halpin, Jacqueline",
-      "emails": ["jacqueline.halpin@utas.edu.au"],
-      "addresses": [
-        {
-          "deliveryPoint": ["Private Bag 129"],
-          "city": "Hobart",
-          "administrativeArea": "TAS",
-          "postalCode": "7001",
-          "country": "Australia"
-        }
-      ],
-      "links": [
-        {
-          "href": "https://orcid.org/0000-0002-4992-8681",
-          "title": "ORCID ID",
-          "type": "WWW:LINK-1.0-http--link"
-        }
-      ]
-    }
-  ],
+  "contacts" : [ {
+    "roles" : [ "author", "about" ],
+    "organization" : "Institute for Marine and Antarctic Studies (IMAS), University of Tasmania (UTAS)",
+    "name" : "Asimus, Jeremy",
+    "emails" : [ "jeremy.asimus@utas.edu.au" ],
+    "addresses" : [ {
+      "city" : "Hobart",
+      "country" : "Australia",
+      "postalCode" : "7001",
+      "administrativeArea" : "TAS"
+    } ],
+    "links" : [ {
+      "href" : "https://orcid.org/0000-0002-6495-5813",
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : "ORCID ID"
+    } ]
+  }, {
+    "roles" : [ "distributor", "metadata" ],
+    "organization" : "IMAS Data Manager",
+    "position" : "Data Officer",
+    "emails" : [ "IMAS.DataManager@utas.edu.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "Institute for Marine and Antarctic Studies", "Private Bag 129" ],
+      "city" : "Hobart",
+      "country" : "Australia",
+      "postalCode" : "7001",
+      "administrativeArea" : "Tasmania"
+    } ],
+    "links" : [ {
+      "href" : "https://imas.utas.edu.au",
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : "Institute for Marine and Antarctic Studies (IMAS) website"
+    } ]
+  }, {
+    "roles" : [ "resourceProvider", "citation" ],
+    "organization" : "Institute for Marine and Antarctic Studies (IMAS)",
+    "emails" : [ "IMAS.DataManager@utas.edu.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "Private Bag 129" ],
+      "city" : "Hobart",
+      "country" : "Australia",
+      "postalCode" : "7001",
+      "administrativeArea" : "Tasmania"
+    } ]
+  }, {
+    "roles" : [ "principalInvestigator", "citation" ],
+    "organization" : "Institute for Marine and Antarctic Studies (IMAS), University of Tasmania (UTAS)",
+    "name" : "Asimus, Jeremy",
+    "emails" : [ "jeremy.asimus@utas.edu.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "Private Bag 129" ],
+      "city" : "Hobart",
+      "country" : "Australia",
+      "postalCode" : "7001",
+      "administrativeArea" : "TAS"
+    } ],
+    "links" : [ {
+      "href" : "https://orcid.org/0000-0002-6495-5813",
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : "ORCID ID"
+    } ]
+  }, {
+    "roles" : [ "coAuthor", "citation" ],
+    "organization" : "Institute for Marine and Antarctic Studies (IMAS), University of Tasmania (UTAS)",
+    "name" : "Halpin, Jacqueline",
+    "emails" : [ "jacqueline.halpin@utas.edu.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "Private Bag 129" ],
+      "city" : "Hobart",
+      "country" : "Australia",
+      "postalCode" : "7001",
+      "administrativeArea" : "TAS"
+    } ],
+    "links" : [ {
+      "href" : "https://orcid.org/0000-0002-4992-8681",
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : "ORCID ID"
+    } ]
+  } ],
   "languages" : [ {
     "code" : "eng",
     "name" : "English"
@@ -195,12 +168,12 @@
     "href" : "https://data.imas.utas.edu.au/attachments/451eb5a7-7a45-44bf-bcf6-1b5139abd006/ASIMUS2023__alldata_Central_Kerguelen_Plateau_dredge.zip",
     "rel" : "data",
     "type" : "",
-    "title" : "DATA ACCESS - complete data package [direct download 195MB .zip]"
+    "title" : "{\"title\":\"DATA ACCESS - complete data package [direct download 195MB .zip]\",\"description\":\"\"}"
   }, {
     "href" : "https://data.imas.utas.edu.au/attachments/451eb5a7-7a45-44bf-bcf6-1b5139abd006/",
     "rel" : "related",
     "type" : "text/html",
-    "title" : "DATA ACCESS - explore & download all available files in web browser"
+    "title" : "{\"title\":\"DATA ACCESS - explore & download all available files in web browser\",\"description\":\"\"}"
   }, {
     "href" : "https://metadata.imas.utas.edu.au/geonetwork/srv/eng/catalog.search#/metadata/451eb5a7-7a45-44bf-bcf6-1b5139abd006",
     "rel" : "describedby",
@@ -225,46 +198,46 @@
     "concepts" : [ {
       "id" : "EARTH SCIENCE | SOLID EARTH | ROCKS/MINERALS/CRYSTALS | IGNEOUS ROCKS",
       "url" : "https://gcmd.earthdata.nasa.gov/kms/concept/e8d97ffd-2fd2-4989-88a7-9772fc9b7cd8",
-      "description" : "GCMD",
-      "title" : "Global Change Master Directory Earth Science Keywords, Version 8.5"
+      "title" : "Global Change Master Directory Earth Science Keywords, Version 8.5",
+      "description" : "GCMD"
     }, {
       "id" : "EARTH SCIENCE | SOLID EARTH | ROCKS/MINERALS/CRYSTALS | IGNEOUS ROCKS | IGNEOUS ROCK AGE DETERMINATIONS",
       "url" : "https://gcmd.earthdata.nasa.gov/kms/concept/53e3eeca-265b-42d8-ad64-bfcc2acdad26",
-      "description" : "GCMD",
-      "title" : "Global Change Master Directory Earth Science Keywords, Version 8.5"
+      "title" : "Global Change Master Directory Earth Science Keywords, Version 8.5",
+      "description" : "GCMD"
     }, {
       "id" : "EARTH SCIENCE | SOLID EARTH | ROCKS/MINERALS/CRYSTALS | IGNEOUS ROCKS | IGNEOUS ROCK FORMATION",
       "url" : "https://gcmd.earthdata.nasa.gov/kms/concept/984d4966-070d-4f8c-85e7-83bb0fd804a8",
-      "description" : "GCMD",
-      "title" : "Global Change Master Directory Earth Science Keywords, Version 8.5"
+      "title" : "Global Change Master Directory Earth Science Keywords, Version 8.5",
+      "description" : "GCMD"
     }, {
       "id" : "EARTH SCIENCE | SOLID EARTH | ROCKS/MINERALS/CRYSTALS | METAMORPHIC ROCKS",
       "url" : "https://gcmd.earthdata.nasa.gov/kms/concept/d220bbb1-410e-4b77-9663-78cb68c6b134",
-      "description" : "GCMD",
-      "title" : "Global Change Master Directory Earth Science Keywords, Version 8.5"
+      "title" : "Global Change Master Directory Earth Science Keywords, Version 8.5",
+      "description" : "GCMD"
     }, {
       "id" : "EARTH SCIENCE | SOLID EARTH | ROCKS/MINERALS/CRYSTALS | METAMORPHIC ROCKS | METAMORPHIC ROCK AGE DETERMINATIONS",
       "url" : "https://gcmd.earthdata.nasa.gov/kms/concept/02a53a61-4fd2-4294-9dcc-071f701bc263",
-      "description" : "GCMD",
-      "title" : "Global Change Master Directory Earth Science Keywords, Version 8.5"
+      "title" : "Global Change Master Directory Earth Science Keywords, Version 8.5",
+      "description" : "GCMD"
     }, {
       "id" : "EARTH SCIENCE | SOLID EARTH | ROCKS/MINERALS/CRYSTALS | METAMORPHIC ROCKS | METAMORPHIC ROCK FORMATION",
       "url" : "https://gcmd.earthdata.nasa.gov/kms/concept/a243624b-a9c8-4c53-84d1-bb0fe2a71ef6",
-      "description" : "GCMD",
-      "title" : "Global Change Master Directory Earth Science Keywords, Version 8.5"
+      "title" : "Global Change Master Directory Earth Science Keywords, Version 8.5",
+      "description" : "GCMD"
     }, {
       "id" : "EARTH SCIENCE | OCEANS | BATHYMETRY/SEAFLOOR TOPOGRAPHY | OCEAN PLATEAUS/RIDGES",
       "url" : "https://gcmd.earthdata.nasa.gov/kms/concept/73e02157-9df9-415f-93fc-cb457989ddb1",
-      "description" : "GCMD",
-      "title" : "Global Change Master Directory Earth Science Keywords, Version 8.5"
+      "title" : "Global Change Master Directory Earth Science Keywords, Version 8.5",
+      "description" : "GCMD"
     } ],
     "scheme" : "theme"
   }, {
     "concepts" : [ {
       "id" : "Offshore Islands (Australia) | Offshore Islands (Australia) | Heard & McDonald Islands",
       "url" : "http://vocab.aodn.org.au/def/geographicextents/entity/46",
-      "description" : "",
-      "title" : "AODN Geographic Extents Vocabulary"
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
     } ],
     "scheme" : "place"
   }, {
@@ -279,11 +252,11 @@
   "id" : "451eb5a7-7a45-44bf-bcf6-1b5139abd006",
   "search_suggestions" : {
     "abstract_phrases" : [ ],
-    "platform_vocabs_sayt" : [],
-    "parameter_vocabs_sayt" : [],
-    "organisation_vocabs_sayt" : []
+    "parameter_vocabs_sayt" : [ ],
+    "platform_vocabs_sayt" : [ ],
+    "organisation_vocabs_sayt" : [ ]
   },
-  "sci:citation" : "{\"suggestedCitation\":null,\"useLimitations\":[\"Data, products and services from IMAS are provided \\\"as is\\\" without any warranty as to fitness for a particular purpose.\"],\"otherConstraints\":[\"This dataset is the intellectual property of the University of Tasmania (UTAS) through the Institute for Marine and Antarctic Studies (IMAS).\",\"Cite data as: Asimus, J., & Halpin, J. (2023). Central Kerguelen Plateau SC Cruise 26 dredge details [Data set]. Institute for Marine and Antarctic Studies (IMAS), University of Tasmania (UTAS). https://doi.org/10.25959/YSV9-QW58\"]}",
+  "sci:citation" : "{\"suggestedCitation\":\"Cite data as: Asimus, J., & Halpin, J. (2023). Central Kerguelen Plateau SC Cruise 26 dredge details [Data set]. Institute for Marine and Antarctic Studies (IMAS), University of Tasmania (UTAS). https://doi.org/10.25959/YSV9-QW58\",\"useLimitations\":[\"Data, products and services from IMAS are provided \\\"as is\\\" without any warranty as to fitness for a particular purpose.\"],\"otherConstraints\":[\"This dataset is the intellectual property of the University of Tasmania (UTAS) through the Institute for Marine and Antarctic Studies (IMAS).\"]}",
   "type" : "Collection",
   "stac_version" : "1.0.0",
   "stac_extensions" : [ "https://stac-extensions.github.io/scientific/v1.0.0/schema.json", "https://stac-extensions.github.io/contacts/v0.1.1/schema.json", "https://stac-extensions.github.io/projection/v1.1.0/schema.json", "https://stac-extensions.github.io/language/v1.0.0/schema.json", "https://stac-extensions.github.io/themes/v1.0.0/schema.json", "https://stac-extensions.github.io/web-map-links/v1.2.0/schema.json" ]

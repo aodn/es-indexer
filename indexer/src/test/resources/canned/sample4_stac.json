@@ -191,62 +191,62 @@
     "href" : "http://www.biogeosciences.net/13/1753/2016",
     "rel" : "related",
     "type" : "text/html",
-    "title" : "Biogeosciences Journal article"
+    "title" : "{\"title\":\"Biogeosciences Journal article\",\"description\":\"\"}"
   }, {
     "href" : "https://portal.aodn.org.au/search?uuid=7709f541-fc0c-4318-b5b9-9053aa474e0e",
     "rel" : "related",
     "type" : "text/html",
-    "title" : "View and download data though the AODN Portal"
+    "title" : "{\"title\":\"View and download data though the AODN Portal\",\"description\":\"\"}"
   }, {
     "href" : "http://thredds.aodn.org.au/thredds/dodsC/CSIRO/Climatology/Ocean_Acidification/OA_Reconstruction.nc.html",
     "rel" : "related",
     "type" : "text/html",
-    "title" : "NetCDF files via THREDDS catalog"
+    "title" : "{\"title\":\"NetCDF files via THREDDS catalog\",\"description\":\"\"}"
   }, {
     "href" : "http://geoserver-123.aodn.org.au/geoserver/ncwms",
     "rel" : "wms",
     "type" : "",
-    "title" : "csiro_oa_reconstruction_url/SST"
+    "title" : "{\"title\":\"csiro_oa_reconstruction_url/SST\",\"description\":\"Sea Surface Temperature - WMS layer\"}"
   }, {
     "href" : "http://geoserver-123.aodn.org.au/geoserver/ncwms",
     "rel" : "wms",
     "type" : "",
-    "title" : "csiro_oa_reconstruction_url/SSS"
+    "title" : "{\"title\":\"csiro_oa_reconstruction_url/SSS\",\"description\":\"Sea surface salinity - WMS layer\"}"
   }, {
     "href" : "http://geoserver-123.aodn.org.au/geoserver/ncwms",
     "rel" : "wms",
     "type" : "",
-    "title" : "csiro_oa_reconstruction_url/ALK"
+    "title" : "{\"title\":\"csiro_oa_reconstruction_url/ALK\",\"description\":\"Total Alkalinity - WMS layer\"}"
   }, {
     "href" : "http://geoserver-123.aodn.org.au/geoserver/ncwms",
     "rel" : "wms",
     "type" : "",
-    "title" : "csiro_oa_reconstruction_url/DIC"
+    "title" : "{\"title\":\"csiro_oa_reconstruction_url/DIC\",\"description\":\"Mole concentration of dissolved inorganic carbon (DIC) - WMS layer\"}"
   }, {
     "href" : "http://geoserver-123.aodn.org.au/geoserver/ncwms",
     "rel" : "wms",
     "type" : "",
-    "title" : "csiro_oa_reconstruction_url/OMEGA_A"
+    "title" : "{\"title\":\"csiro_oa_reconstruction_url/OMEGA_A\",\"description\":\"Aragonite saturation state - WMS layer\"}"
   }, {
     "href" : "http://geoserver-123.aodn.org.au/geoserver/ncwms",
     "rel" : "wms",
     "type" : "",
-    "title" : "csiro_oa_reconstruction_url/OMEGA_C"
+    "title" : "{\"title\":\"csiro_oa_reconstruction_url/OMEGA_C\",\"description\":\"Calcite saturation state - WMS layer\"}"
   }, {
     "href" : "http://geoserver-123.aodn.org.au/geoserver/ncwms",
     "rel" : "wms",
     "type" : "",
-    "title" : "csiro_oa_reconstruction_url/pH_T"
+    "title" : "{\"title\":\"csiro_oa_reconstruction_url/pH_T\",\"description\":\"Sea water pH (total scale) - WMS layer\"}"
   }, {
     "href" : "https://processes.aodn.org.au/wps",
     "rel" : "OGC:WPS--gogoduck",
     "type" : "",
-    "title" : "csiro_oa_reconstruction_url"
+    "title" : "{\"title\":\"csiro_oa_reconstruction_url\",\"description\":\"The GoGoDuck subsets and aggregates gridded data.  Data is returned as a NetCDF file\"}"
   }, {
     "href" : "https://help.aodn.org.au/web-services/gogoduck-aggregator/",
     "rel" : "related",
     "type" : "text/html",
-    "title" : "GoGoDuck help documentation"
+    "title" : "{\"title\":\"GoGoDuck help documentation\",\"description\":\"\"}"
   }, {
     "href" : "https://catalogue-imos.aodn.org.au:443/geonetwork/srv/api/records/7709f541-fc0c-4318-b5b9-9053aa474e0e",
     "rel" : "describedby",

@@ -119,8 +119,8 @@
       "start" : "1984-02-27T13:00:00Z",
       "end" : null
     } ],
-    "platform_vocabs": [],
     "parameter_vocabs" : [ ],
+    "platform_vocabs" : [ ],
     "organisation_vocabs" : [ ]
   },
   "contacts" : [ {
@@ -249,47 +249,47 @@
     "href" : "articleId=2036",
     "rel" : "related",
     "type" : "",
-    "title" : "A versatile long-range telementry system particularly suited to meterological, environmental sensing at remote locations. Technical bulletin. Instrumental facilities: Colman RS, Carr K and Gill EF (1982) A versatile long-range telementry system particularly suited to meterological, environmental sensing at remote locations. Technical bulletin. Instrumental facilities. AIMS-IF-82-1. Australian Institute of Marine Science. 30 p."
+    "title" : "{\"title\":\"A versatile long-range telementry system particularly suited to meterological, environmental sensing at remote locations. Technical bulletin. Instrumental facilities: Colman RS, Carr K and Gill EF (1982) A versatile long-range telementry system particularly suited to meterological, environmental sensing at remote locations. Technical bulletin. Instrumental facilities. AIMS-IF-82-1. Australian Institute of Marine Science. 30 p.\",\"description\":\"A versatile long-range telementry system particularly suited to meterological, environmental sensing at remote locations. Technical bulletin. Instrumental facilities: Colman RS, Carr K and Gill EF  (1982) A versatile long-range telementry system particularly suited to meterological, environmental sensing at remote locations. Technical bulletin. Instrumental facilities. AIMS-IF-82-1. Australian Institute of Marine Science. 30 p.\"}"
   }, {
     "href" : "https://geoserver.apps.aims.gov.au/aims/ows",
     "rel" : "wfs",
     "type" : "",
-    "title" : "aims:weather_data"
+    "title" : "{\"title\":\"aims:weather_data\",\"description\":\"Weather data\"}"
   }, {
     "href" : "https://weather.aims.gov.au/#/overview",
     "rel" : "data",
     "type" : "",
-    "title" : "AIMS weather stations latest readings"
+    "title" : "{\"title\":\"AIMS weather stations latest readings\",\"description\":\"AIMS weather stations latest readings\"}"
   }, {
     "href" : "https://geoserver.apps.aims.gov.au/aims/wms",
     "rel" : "wms",
     "type" : "",
-    "title" : "aims:weather_deployment"
+    "title" : "{\"title\":\"aims:weather_deployment\",\"description\":\"Weather Stations\"}"
   }, {
     "href" : "articleId=2205",
     "rel" : "related",
     "type" : "",
-    "title" : "Technical notes on weather monitoring telemetry system: Gill EF (1988) Technical notes on weather monitoring telemetry system. Australian Institute of Marine Science. 35 p."
+    "title" : "{\"title\":\"Technical notes on weather monitoring telemetry system: Gill EF (1988) Technical notes on weather monitoring telemetry system. Australian Institute of Marine Science. 35 p.\",\"description\":\"Technical notes on weather monitoring telemetry system: Gill EF  (1988) Technical notes on weather monitoring telemetry system. Australian Institute of Marine Science. 35 p.\"}"
   }, {
     "href" : "https://apps.aims.gov.au/ts-explorer/",
     "rel" : "data",
     "type" : "",
-    "title" : "Data access through the Time Series Explorer"
+    "title" : "{\"title\":\"Data access through the Time Series Explorer\",\"description\":\"Data access through the Time Series Explorer\"}"
   }, {
     "href" : "https://doi.org/10.1175/JTECH-D-21-0095.1",
     "rel" : "related",
     "type" : "",
-    "title" : "Nunez, M., Cantin, N., Steinberg, C., van Dongen-Vogels, V., & Bainbridge, S. (2022). Correcting PAR Data from Photovoltaic Quantum Sensors on Remote Weather Stations on the Great Barrier Reef, Journal of Atmospheric and Oceanic Technology, 39(4), 425-448 https://doi.org/10.1175/JTECH-D-21-0095.1"
+    "title" : "{\"title\":\"Nunez, M., Cantin, N., Steinberg, C., van Dongen-Vogels, V., & Bainbridge, S. (2022). Correcting PAR Data from Photovoltaic Quantum Sensors on Remote Weather Stations on the Great Barrier Reef, Journal of Atmospheric and Oceanic Technology, 39(4), 425-448 https://doi.org/10.1175/JTECH-D-21-0095.1\",\"description\":\"Nunez, M., Cantin, N., Steinberg, C., van Dongen-Vogels, V., & Bainbridge, S. (2022). Correcting PAR Data from Photovoltaic Quantum Sensors on Remote Weather Stations on the Great Barrier Reef, Journal of Atmospheric and Oceanic Technology, 39(4), 425-448 https://doi.org/10.1175/JTECH-D-21-0095.1\"}"
   }, {
     "href" : "https://docs.ropensci.org/dataaimsr/",
     "rel" : "data",
     "type" : "",
-    "title" : "Data access using R"
+    "title" : "{\"title\":\"Data access using R\",\"description\":\"Data access using R\"}"
   }, {
     "href" : "https://open-aims.github.io/data-platform/",
     "rel" : "data",
     "type" : "",
-    "title" : "Data access via Programming API"
+    "title" : "{\"title\":\"Data access via Programming API\",\"description\":\"Data access via Programming API\"}"
   }, {
     "href" : "https://doi.org/10.25845/5c09bf93f315d",
     "rel" : "describedby",
@@ -313,76 +313,76 @@
     "concepts" : [ {
       "id" : "Wireless Sensor Networks Facility, Integrated Marine Observing System (IMOS)",
       "url" : null,
-      "description" : "",
-      "title" : "AODN Organisation Vocabulary"
+      "title" : "AODN Organisation Vocabulary",
+      "description" : ""
     } ],
     "scheme" : "discipline"
   }, {
     "concepts" : [ {
       "id" : "Temperature of the atmosphere",
       "url" : "http://vocab.nerc.ac.uk/collection/P01/current/CTMPZZ01",
-      "description" : "",
-      "title" : "AODN Discovery Parameter Vocabulary"
+      "title" : "AODN Discovery Parameter Vocabulary",
+      "description" : ""
     }, {
       "id" : "Relative humidity of the atmosphere",
       "url" : "http://vocab.nerc.ac.uk/collection/P01/current/CRELZZ01",
-      "description" : "",
-      "title" : "AODN Discovery Parameter Vocabulary"
+      "title" : "AODN Discovery Parameter Vocabulary",
+      "description" : ""
     }, {
       "id" : "Wind from direction in the atmosphere",
       "url" : "http://vocab.nerc.ac.uk/collection/P01/current/EWDAZZ01",
-      "description" : "",
-      "title" : "AODN Discovery Parameter Vocabulary"
+      "title" : "AODN Discovery Parameter Vocabulary",
+      "description" : ""
     }, {
       "id" : "Wind speed in the atmosphere",
       "url" : "http://vocab.nerc.ac.uk/collection/P01/current/ESSAZZ01",
-      "description" : "",
-      "title" : "AODN Discovery Parameter Vocabulary"
+      "title" : "AODN Discovery Parameter Vocabulary",
+      "description" : ""
     }, {
       "id" : "Thickness of precipitation amount (liquid water equivalent) in the atmosphere",
       "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/386",
-      "description" : "",
-      "title" : "AODN Discovery Parameter Vocabulary"
+      "title" : "AODN Discovery Parameter Vocabulary",
+      "description" : ""
     }, {
       "id" : "Precipitation duration (liquid water equivalent) in the atmosphere",
       "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/405",
-      "description" : "",
-      "title" : "AODN Discovery Parameter Vocabulary"
+      "title" : "AODN Discovery Parameter Vocabulary",
+      "description" : ""
     }, {
       "id" : "Thickness of hail amount in the atmosphere",
       "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/638",
-      "description" : "",
-      "title" : "AODN Discovery Parameter Vocabulary"
+      "title" : "AODN Discovery Parameter Vocabulary",
+      "description" : ""
     }, {
       "id" : "Precipitation rate (liquid water equivalent) in the atmosphere",
       "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/94",
-      "description" : "",
-      "title" : "AODN Discovery Parameter Vocabulary"
+      "title" : "AODN Discovery Parameter Vocabulary",
+      "description" : ""
     }, {
       "id" : "Hail duration in the atmosphere",
       "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/637",
-      "description" : "",
-      "title" : "AODN Discovery Parameter Vocabulary"
+      "title" : "AODN Discovery Parameter Vocabulary",
+      "description" : ""
     }, {
       "id" : "Downwelling vector irradiance as photons (PAR wavelengths) in the atmosphere",
       "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/572",
-      "description" : "",
-      "title" : "AODN Discovery Parameter Vocabulary"
+      "title" : "AODN Discovery Parameter Vocabulary",
+      "description" : ""
     }, {
       "id" : "Temperature of the water body",
       "url" : "http://vocab.nerc.ac.uk/collection/P01/current/TEMPPR01",
-      "description" : "",
-      "title" : "AODN Discovery Parameter Vocabulary"
+      "title" : "AODN Discovery Parameter Vocabulary",
+      "description" : ""
     }, {
       "id" : "Pressure (measured variable) exerted by the atmosphere",
       "url" : "http://vocab.nerc.ac.uk/collection/P01/current/CAPHZZ01",
-      "description" : "",
-      "title" : "AODN Discovery Parameter Vocabulary"
+      "title" : "AODN Discovery Parameter Vocabulary",
+      "description" : ""
     }, {
       "id" : "Hail intensity in the atmosphere",
       "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/639",
-      "description" : "",
-      "title" : "AODN Discovery Parameter Vocabulary"
+      "title" : "AODN Discovery Parameter Vocabulary",
+      "description" : ""
     } ],
     "scheme" : "theme"
   }, {
@@ -397,9 +397,9 @@
   "id" : "bb3599d5-ab12-4278-a68b-42cac8e7a746",
   "search_suggestions" : {
     "abstract_phrases" : [ ],
-    "platform_vocabs_sayt" : [],
-    "parameter_vocabs_sayt" : [],
-    "organisation_vocabs_sayt" : []
+    "parameter_vocabs_sayt" : [ ],
+    "platform_vocabs_sayt" : [ ],
+    "organisation_vocabs_sayt" : [ ]
   },
   "sci:citation" : "{\"suggestedCitation\":\"Attribution: Format for citation of metadata sourced from Australian Institute of Marine Science (AIMS) in a list of reference is as follows: \\\"Australian Institute of Marine Science (AIMS). (2009). Northern Australia Automated Marine Weather and Oceanographic Stations. https://doi.org/10.25845/5c09bf93f315d, accessed[date-of-access]\\\".\",\"useLimitations\":null,\"otherConstraints\":[\"Use Limitation: All AIMS data, products and services are provided \\\"as is\\\" and AIMS does not warrant their fitness for a particular purpose or non-infringement. While AIMS has made every reasonable effort to ensure high quality of the data, products and services, to the extent permitted by law the data, products and services are provided without any warranties of any kind, either expressed or implied, including without limitation any implied warranties of title, merchantability, and fitness for a particular purpose or non-infringement. AIMS make no representation or warranty that the data, products and services are accurate, complete, reliable or current. To the extent permitted by law, AIMS exclude all liability to any person arising directly or indirectly from the use of the data, products and services.\",\"Metadata Usage:Security classification code: unclassified\"]}",
   "type" : "Collection",

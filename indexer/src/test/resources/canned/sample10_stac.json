@@ -173,128 +173,94 @@
       "start" : "2007-09-08T14:00:00Z",
       "end" : null
     } ],
-    "platform_vocabs": [],
     "parameter_vocabs" : [ ],
+    "platform_vocabs" : [ ],
     "organisation_vocabs" : [ ]
   },
-  "contacts": [
-    {
-      "roles": ["pointOfContact", "about"],
-      "organization": "Integrated Marine Observing System (IMOS)",
-      "position": "Data Officer",
-      "emails": ["info@aodn.org.au"],
-      "addresses": [
-        {
-          "deliveryPoint": [
-            "University of Tasmania",
-            "Private Bag 110"
-          ],
-          "city": "Hobart",
-          "administrativeArea": "Tasmania",
-          "postalCode": "7001",
-          "country": "Australia"
-        }
-      ],
-      "phones": [
-        {
-          "value": "61 3 6226 7488",
-          "roles": ["voice"]
-        },
-        {
-          "value": "61 3 6226 2107",
-          "roles": ["facsimile"]
-        }
-      ],
-      "links": [
-        {
-          "href": "http://imos.org.au/aodn.html",
-          "title": "Website of the Australian Ocean Data Network (AODN)",
-          "type": "WWW:LINK-1.0-http--link"
-        }
-      ]
-    },
-    {
-      "roles": ["principalInvestigator", "about"],
-      "organization": "Australian Institute of Marine Science (AIMS)",
-      "name": "Cahill, Madeleine",
-      "emails": ["m.cahill@aims.gov.au"],
-      "addresses": [
-        {
-          "deliveryPoint": ["PMB No. 3, Townsville Mail Centre"],
-          "city": "Townsville",
-          "administrativeArea": "Queensland",
-          "postalCode": "4810",
-          "country": "Australia"
-        }
-      ],
-      "links": [
-        {
-          "href": "http://imos.org.au/nationalmooringnetwork.html",
-          "title": "Website of the IMOS Australian National Mooring Network",
-          "type": "WWW:LINK-1.0-http--link"
-        }
-      ]
-    },
-    {
-      "roles": ["distributor", "metadata"],
-      "organization": "Integrated Marine Observing System (IMOS)",
-      "position": "Data Officer",
-      "emails": ["info@aodn.org.au"],
-      "addresses": [
-        {
-          "deliveryPoint": [
-            "University of Tasmania",
-            "Private Bag 110"
-          ],
-          "city": "Hobart",
-          "administrativeArea": "Tasmania",
-          "postalCode": "7001",
-          "country": "Australia"
-        }
-      ],
-      "phones": [
-        {
-          "value": "61 3 6226 7488",
-          "roles": ["voice"]
-        },
-        {
-          "value": "61 3 6226 2107",
-          "roles": ["facsimile"]
-        }
-      ],
-      "links": [
-        {
-          "href": "http://imos.org.au/aodn.html",
-          "title": "Website of the Australian Ocean Data Network (AODN)",
-          "type": "WWW:LINK-1.0-http--link"
-        }
-      ]
-    },
-    {
-      "roles": ["resourceProvider", "citation"],
-      "organization": "Integrated Marine Observing System (IMOS)",
-      "emails": ["imos@imos.org.au"],
-      "addresses": [
-        {
-          "deliveryPoint": ["Private Bag 110"],
-          "city": "Hobart",
-          "administrativeArea": "Tasmania",
-          "postalCode": "7001",
-          "country": "Australia"
-        }
-      ],
-      "phones": [
-        {
-          "value": "61 3 6226 7549",
-          "roles": ["voice"]
-        },
-        {
-          "value": "61 3 6226 2107",
-          "roles": ["facsimile"]
-        }
-      ]
-    }
-  ],
+  "contacts" : [ {
+    "roles" : [ "pointOfContact", "about" ],
+    "organization" : "Integrated Marine Observing System (IMOS)",
+    "position" : "Data Officer",
+    "emails" : [ "info@aodn.org.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "University of Tasmania", "Private Bag 110" ],
+      "city" : "Hobart",
+      "country" : "Australia",
+      "postalCode" : "7001",
+      "administrativeArea" : "Tasmania"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "61 3 6226 7488"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : "61 3 6226 2107"
+    } ],
+    "links" : [ {
+      "href" : "http://imos.org.au/aodn.html",
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : "Website of the Australian Ocean Data Network (AODN)"
+    } ]
+  }, {
+    "roles" : [ "principalInvestigator", "about" ],
+    "organization" : "Australian Institute of Marine Science (AIMS)",
+    "name" : "Cahill, Madeleine",
+    "emails" : [ "m.cahill@aims.gov.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "PMB No. 3, Townsville Mail Centre" ],
+      "city" : "Townsville",
+      "country" : "Australia",
+      "postalCode" : "4810",
+      "administrativeArea" : "Queensland"
+    } ],
+    "links" : [ {
+      "href" : "http://imos.org.au/nationalmooringnetwork.html",
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : "Website of the IMOS Australian National Mooring Network"
+    } ]
+  }, {
+    "roles" : [ "distributor", "metadata" ],
+    "organization" : "Integrated Marine Observing System (IMOS)",
+    "position" : "Data Officer",
+    "emails" : [ "info@aodn.org.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "University of Tasmania", "Private Bag 110" ],
+      "city" : "Hobart",
+      "country" : "Australia",
+      "postalCode" : "7001",
+      "administrativeArea" : "Tasmania"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "61 3 6226 7488"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : "61 3 6226 2107"
+    } ],
+    "links" : [ {
+      "href" : "http://imos.org.au/aodn.html",
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : "Website of the Australian Ocean Data Network (AODN)"
+    } ]
+  }, {
+    "roles" : [ "resourceProvider", "citation" ],
+    "organization" : "Integrated Marine Observing System (IMOS)",
+    "emails" : [ "imos@imos.org.au" ],
+    "addresses" : [ {
+      "deliveryPoint" : [ "Private Bag 110" ],
+      "city" : "Hobart",
+      "country" : "Australia",
+      "postalCode" : "7001",
+      "administrativeArea" : "Tasmania"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "61 3 6226 7549"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : "61 3 6226 2107"
+    } ]
+  } ],
   "languages" : [ {
     "code" : "eng",
     "name" : "English"
@@ -303,32 +269,32 @@
     "href" : "http://imos.org.au/nationalmooringnetwork.html",
     "rel" : "related",
     "type" : "text/html",
-    "title" : "ANMN page on IMOS website"
+    "title" : "{\"title\":\"ANMN page on IMOS website\",\"description\":\"\"}"
   }, {
     "href" : "http://thredds.aodn.org.au/thredds/catalog/IMOS/ANMN/catalog.html",
     "rel" : "related",
     "type" : "text/html",
-    "title" : "NetCDF files via THREDDS catalog"
+    "title" : "{\"title\":\"NetCDF files via THREDDS catalog\",\"description\":\"\"}"
   }, {
     "href" : "https://portal.aodn.org.au/search?uuid=ae86e2f5-eaaf-459e-a405-e654d85adb9c",
     "rel" : "related",
     "type" : "text/html",
-    "title" : "View and download data though the AODN Portal"
+    "title" : "{\"title\":\"View and download data though the AODN Portal\",\"description\":\"\"}"
   }, {
     "href" : "http://geoserver-123.aodn.org.au/geoserver/wms",
     "rel" : "wms",
     "type" : "",
-    "title" : "imos:anmn_velocity_timeseries_map"
+    "title" : "{\"title\":\"imos:anmn_velocity_timeseries_map\",\"description\":\"Moorings - velocity time-series\"}"
   }, {
     "href" : "http://geoserver-123.aodn.org.au/geoserver/ows",
     "rel" : "IMOS:AGGREGATION--bodaac",
     "type" : "",
-    "title" : "anmn_velocity_timeseries_map#file_url"
+    "title" : "{\"title\":\"anmn_velocity_timeseries_map#file_url\",\"description\":\"The ncUrlList is a WFS service that returns a list of URLs matching a query.\"}"
   }, {
     "href" : "https://help.aodn.org.au/web-services/ncurllist-service/",
     "rel" : "related",
     "type" : "text/html",
-    "title" : "ncUrlList help documentation"
+    "title" : "{\"title\":\"ncUrlList help documentation\",\"description\":\"\"}"
   }, {
     "href" : "https://catalogue-imos.aodn.org.au:443/geonetwork/srv/api/records/ae86e2f5-eaaf-459e-a405-e654d85adb9c",
     "rel" : "describedby",
@@ -353,284 +319,284 @@
     "concepts" : [ {
       "id" : "Oceans | Ocean Temperature | Water Temperature",
       "url" : null,
-      "description" : "GCMD",
-      "title" : "NASA/Global Change Master Directory Earth Science Keywords Version 5.3.8"
+      "title" : "NASA/Global Change Master Directory Earth Science Keywords Version 5.3.8",
+      "description" : "GCMD"
     }, {
       "id" : "Oceans | Bathymetry | Water Depth",
       "url" : null,
-      "description" : "GCMD",
-      "title" : "NASA/Global Change Master Directory Earth Science Keywords Version 5.3.8"
+      "title" : "NASA/Global Change Master Directory Earth Science Keywords Version 5.3.8",
+      "description" : "GCMD"
     }, {
       "id" : "Oceans | Ocean Circulation | Ocean Currents",
       "url" : null,
-      "description" : "GCMD",
-      "title" : "NASA/Global Change Master Directory Earth Science Keywords Version 5.3.8"
+      "title" : "NASA/Global Change Master Directory Earth Science Keywords Version 5.3.8",
+      "description" : "GCMD"
     }, {
       "id" : "Oceans | Salinity/density | Conductivity",
       "url" : null,
-      "description" : "GCMD",
-      "title" : "NASA/Global Change Master Directory Earth Science Keywords Version 5.3.8"
+      "title" : "NASA/Global Change Master Directory Earth Science Keywords Version 5.3.8",
+      "description" : "GCMD"
     } ],
     "scheme" : "theme"
   }, {
     "concepts" : [ {
       "id" : "Buoys | Moored Buoys",
       "url" : null,
-      "description" : "MCP",
-      "title" : "Marine Community Profile of ISO19115 v1.4 Collection Methods Vocabulary (Annex C.1.3)"
+      "title" : "Marine Community Profile of ISO19115 v1.4 Collection Methods Vocabulary (Annex C.1.3)",
+      "description" : "MCP"
     }, {
       "id" : "Current Meters/Profilers | Acoustic Doppler Current Profiler (ADCP)",
       "url" : null,
-      "description" : "MCP",
-      "title" : "Marine Community Profile of ISO19115 v1.4 Collection Methods Vocabulary (Annex C.1.3)"
+      "title" : "Marine Community Profile of ISO19115 v1.4 Collection Methods Vocabulary (Annex C.1.3)",
+      "description" : "MCP"
     } ],
     "scheme" : ""
   }, {
     "concepts" : [ {
       "id" : "Slope Mooring",
       "url" : null,
-      "description" : "IMOS",
-      "title" : "IMOS Keywords Thesaurus"
+      "title" : "IMOS Keywords Thesaurus",
+      "description" : "IMOS"
     }, {
       "id" : "Shelf Mooring",
       "url" : null,
-      "description" : "IMOS",
-      "title" : "IMOS Keywords Thesaurus"
+      "title" : "IMOS Keywords Thesaurus",
+      "description" : "IMOS"
     }, {
       "id" : "Deepwater Mooring",
       "url" : null,
-      "description" : "IMOS",
-      "title" : "IMOS Keywords Thesaurus"
+      "title" : "IMOS Keywords Thesaurus",
+      "description" : "IMOS"
     } ],
     "scheme" : ""
   }, {
     "concepts" : [ {
       "id" : "Global / Oceans | Indian Ocean",
       "url" : null,
-      "description" : "",
-      "title" : "AODN Geographic Extents Vocabulary"
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
     }, {
       "id" : "Global / Oceans | Pacific Ocean",
       "url" : null,
-      "description" : "",
-      "title" : "AODN Geographic Extents Vocabulary"
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
     }, {
       "id" : "Marine Features (Australia) | Great Australian Bight, SA/WA",
       "url" : null,
-      "description" : "",
-      "title" : "AODN Geographic Extents Vocabulary"
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
     }, {
       "id" : "Regional Seas | Tasman Sea",
       "url" : null,
-      "description" : "",
-      "title" : "AODN Geographic Extents Vocabulary"
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
     }, {
       "id" : "Regional Seas | Coral Sea",
       "url" : null,
-      "description" : "",
-      "title" : "AODN Geographic Extents Vocabulary"
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
     }, {
       "id" : "Regional Seas | Timor Sea",
       "url" : null,
-      "description" : "",
-      "title" : "AODN Geographic Extents Vocabulary"
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
     } ],
     "scheme" : "place"
   }, {
     "concepts" : [ {
       "id" : "States, Territories (Australia) | Western Australia",
       "url" : null,
-      "description" : "",
-      "title" : "AODN Geographic Extents Vocabulary"
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
     }, {
       "id" : "States, Territories (Australia) | Victoria",
       "url" : null,
-      "description" : "",
-      "title" : "AODN Geographic Extents Vocabulary"
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
     }, {
       "id" : "States, Territories (Australia) | Tasmania",
       "url" : null,
-      "description" : "",
-      "title" : "AODN Geographic Extents Vocabulary"
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
     }, {
       "id" : "States, Territories (Australia) | South Australia",
       "url" : null,
-      "description" : "",
-      "title" : "AODN Geographic Extents Vocabulary"
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
     }, {
       "id" : "States, Territories (Australia) | South Australia",
       "url" : null,
-      "description" : "",
-      "title" : "AODN Geographic Extents Vocabulary"
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
     }, {
       "id" : "States, Territories (Australia) | Queensland",
       "url" : null,
-      "description" : "",
-      "title" : "AODN Geographic Extents Vocabulary"
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
     }, {
       "id" : "States, Territories (Australia) | Northern Territory",
       "url" : null,
-      "description" : "",
-      "title" : "AODN Geographic Extents Vocabulary"
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
     }, {
       "id" : "States, Territories (Australia) | New South Wales",
       "url" : null,
-      "description" : "",
-      "title" : "AODN Geographic Extents Vocabulary"
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
     }, {
       "id" : "Marine Features (Australia) | Maria Island, TAS",
       "url" : null,
-      "description" : "",
-      "title" : "AODN Geographic Extents Vocabulary"
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
     }, {
       "id" : "Marine Features (Australia) | Kangaroo Island, SA",
       "url" : null,
-      "description" : "",
-      "title" : "AODN Geographic Extents Vocabulary"
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
     }, {
       "id" : "Coastal Cities / Towns (Australia) | Darwin, NT",
       "url" : null,
-      "description" : "",
-      "title" : "AODN Geographic Extents Vocabulary"
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
     }, {
       "id" : "Coastal Cities / Towns (Australia) | Sydney, NSW",
       "url" : null,
-      "description" : "",
-      "title" : "AODN Geographic Extents Vocabulary"
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
     }, {
       "id" : "Marine Features (Australia) | Kimberley Coast, WA",
       "url" : null,
-      "description" : "",
-      "title" : "AODN Geographic Extents Vocabulary"
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
     }, {
       "id" : "Coastal Cities / Towns (Australia) | Coffs Harbour, NSW",
       "url" : null,
-      "description" : "",
-      "title" : "AODN Geographic Extents Vocabulary"
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
     }, {
       "id" : "Marine Features (Australia) | Kimberley Islands, WA",
       "url" : null,
-      "description" : "",
-      "title" : "AODN Geographic Extents Vocabulary"
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
     }, {
       "id" : "Marine Features (Australia) | Ningaloo Marine Park, WA",
       "url" : null,
-      "description" : "",
-      "title" : "AODN Geographic Extents Vocabulary"
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
     }, {
       "id" : "Coastal Cities / Towns (Australia) | Perth, WA",
       "url" : null,
-      "description" : "",
-      "title" : "AODN Geographic Extents Vocabulary"
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
     }, {
       "id" : "Countries | Indonesia",
       "url" : null,
-      "description" : "",
-      "title" : "AODN Geographic Extents Vocabulary"
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
     }, {
       "id" : "Marine Features (Australia) | Rottnest Island, WA",
       "url" : null,
-      "description" : "",
-      "title" : "AODN Geographic Extents Vocabulary"
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
     }, {
       "id" : "Countries | Australia",
       "url" : null,
-      "description" : "",
-      "title" : "AODN Geographic Extents Vocabulary"
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
     }, {
       "id" : "Marine Features (Australia) | Pilbara Coast, WA",
       "url" : null,
-      "description" : "",
-      "title" : "AODN Geographic Extents Vocabulary"
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
     }, {
       "id" : "Coastal Cities / Towns (Australia) | Esperance, WA",
       "url" : null,
-      "description" : "",
-      "title" : "AODN Geographic Extents Vocabulary"
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
     }, {
       "id" : "Marine Features (Australia) | Great Barrier Reef, QLD",
       "url" : null,
-      "description" : "",
-      "title" : "AODN Geographic Extents Vocabulary"
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
     } ],
     "scheme" : "place"
   }, {
     "concepts" : [ {
       "id" : "mooring",
       "url" : "http://vocab.nerc.ac.uk/collection/L06/current/48",
-      "description" : "",
-      "title" : "AODN Platform Vocabulary"
+      "title" : "AODN Platform Vocabulary",
+      "description" : ""
     } ],
     "scheme" : "theme"
   }, {
     "concepts" : [ {
       "id" : "Eastward current velocity in the water body",
       "url" : "http://vocab.nerc.ac.uk/collection/P01/current/LCEWZZ01",
-      "description" : "",
-      "title" : "AODN Discovery Parameter Vocabulary"
+      "title" : "AODN Discovery Parameter Vocabulary",
+      "description" : ""
     }, {
       "id" : "Current speed in the water body",
       "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/383",
-      "description" : "",
-      "title" : "AODN Discovery Parameter Vocabulary"
+      "title" : "AODN Discovery Parameter Vocabulary",
+      "description" : ""
     }, {
       "id" : "Current direction in the water body",
       "url" : "http://vocab.nerc.ac.uk/collection/P01/current/LCDAZZ01",
-      "description" : "",
-      "title" : "AODN Discovery Parameter Vocabulary"
+      "title" : "AODN Discovery Parameter Vocabulary",
+      "description" : ""
     }, {
       "id" : "Upward current velocity in the water body",
       "url" : "http://vocab.nerc.ac.uk/collection/P01/current/LRZAZZZZ",
-      "description" : "",
-      "title" : "AODN Discovery Parameter Vocabulary"
+      "title" : "AODN Discovery Parameter Vocabulary",
+      "description" : ""
     }, {
       "id" : "Pressure (measured variable) in the water body exerted by overlying sea water only",
       "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/566",
-      "description" : "",
-      "title" : "AODN Discovery Parameter Vocabulary"
+      "title" : "AODN Discovery Parameter Vocabulary",
+      "description" : ""
     }, {
       "id" : "Northward current velocity in the water body",
       "url" : "http://vocab.nerc.ac.uk/collection/P01/current/LCNSZZ01",
-      "description" : "",
-      "title" : "AODN Discovery Parameter Vocabulary"
+      "title" : "AODN Discovery Parameter Vocabulary",
+      "description" : ""
     }, {
       "id" : "Acoustic signal return amplitude from the water body",
       "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/399",
-      "description" : "",
-      "title" : "AODN Discovery Parameter Vocabulary"
+      "title" : "AODN Discovery Parameter Vocabulary",
+      "description" : ""
     } ],
     "scheme" : "theme"
   }, {
     "concepts" : [ {
       "id" : "National Reference Stations Sub-Facility, Integrated Marine Observing System (IMOS)",
       "url" : "http://vocab.aodn.org.au/def/organisation/entity/501",
-      "description" : "",
-      "title" : "AODN Organisation Vocabulary"
+      "title" : "AODN Organisation Vocabulary",
+      "description" : ""
     }, {
       "id" : "Queensland and Northern Australia Moorings Sub-Facility, Integrated Marine Observing System (IMOS)",
       "url" : "http://vocab.aodn.org.au/def/organisation/entity/503",
-      "description" : "",
-      "title" : "AODN Organisation Vocabulary"
+      "title" : "AODN Organisation Vocabulary",
+      "description" : ""
     }, {
       "id" : "Southern Australia Moorings Sub-Facility, Integrated Marine Observing System (IMOS)",
       "url" : "http://vocab.aodn.org.au/def/organisation/entity/504",
-      "description" : "",
-      "title" : "AODN Organisation Vocabulary"
+      "title" : "AODN Organisation Vocabulary",
+      "description" : ""
     }, {
       "id" : "Western Australia Moorings Sub-Facility, Integrated Marine Observing System (IMOS)",
       "url" : "http://vocab.aodn.org.au/def/organisation/entity/505",
-      "description" : "",
-      "title" : "AODN Organisation Vocabulary"
+      "title" : "AODN Organisation Vocabulary",
+      "description" : ""
     }, {
       "id" : "Victoria Moorings Sub-Facility, Integrated Marine Observing System (IMOS)",
       "url" : "http://vocab.aodn.org.au/def/organisation/entity/592",
-      "description" : "",
-      "title" : "AODN Organisation Vocabulary"
+      "title" : "AODN Organisation Vocabulary",
+      "description" : ""
     }, {
       "id" : "New South Wales Moorings Sub-Facility, Integrated Marine Observing System (IMOS)",
       "url" : "http://vocab.aodn.org.au/def/organisation/entity/502",
-      "description" : "",
-      "title" : "AODN Organisation Vocabulary"
+      "title" : "AODN Organisation Vocabulary",
+      "description" : ""
     } ],
     "scheme" : "discipline"
   }, {
@@ -645,9 +611,9 @@
   "id" : "ae86e2f5-eaaf-459e-a405-e654d85adb9c",
   "search_suggestions" : {
     "abstract_phrases" : [ ],
-    "platform_vocabs_sayt" : [],
-    "parameter_vocabs_sayt" : [],
-    "organisation_vocabs_sayt" : []
+    "parameter_vocabs_sayt" : [ ],
+    "platform_vocabs_sayt" : [ ],
+    "organisation_vocabs_sayt" : [ ]
   },
   "sci:citation" : "{\"suggestedCitation\":\"The citation in a list of references is: \\\"IMOS [year-of-data-download], [Title], [data-access-URL], accessed [date-of-access].\\\"\",\"useLimitations\":[\"Data, products and services from IMOS are provided \\\"as is\\\" without any warranty as to fitness for a particular purpose.\"],\"otherConstraints\":[\"Any users of IMOS data are required to clearly acknowledge the source of the material derived from IMOS in the format: \\\"Data was sourced from Australia's Integrated Marine Observing System (IMOS) - IMOS is enabled by the National Collaborative Research Infrastructure strategy (NCRIS).\\\" If relevant, also credit other organisations involved in collection of this particular datastream (as listed in 'credit' in the metadata record).\",\"If using data from the Ningaloo (TAN100) mooring, please add to the citation - \\\"Department of Jobs, Tourism, Science and Innovation (DJTSI), Western Australian Government\\\".\",\"If using data from the Ocean Reference Station 65m (ORS065) mooring, please add to the citation - \\\"Sydney Water Corporation\\\".\"]}",
   "type" : "Collection",

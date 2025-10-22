@@ -100,6 +100,7 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
                 Map<String, MetadataEntity> entry = entities.get(uuid);
 
                 for(String key: entry.keySet()) {
+                    log.info("Start indexing dataset with UUID: {}, dataset: {}", uuid, key);
                     try {
                         List<TemporalExtent> temporalExtents = dataAccessService.getTemporalExtentOf(uuid, key);
                         if (!temporalExtents.isEmpty()) {
@@ -114,9 +115,13 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
                                 // Do nothing
                             }
                         }
+                        log.info("Finish indexing dataset with UUID: {}, dataset: {}", uuid, key);
                     }
                     catch(MetadataNotFoundException enf) {
                         callback.onProgress(String.format("Metadata not found, skip! %s", enf.getMessage()));
+                    }
+                    catch(Exception e) {
+                        callback.onError(new RuntimeException(String.format("Error indexing dataset with UUID: %s %s", uuid, key), e));
                     }
                 }
             }
@@ -218,7 +223,7 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
                 i += 9000;
             }
         } else {
-            log.info("Feature collection has {} features", featureCollection.getFeatures().size());
+            log.debug("Feature collection has {} features", featureCollection.getFeatures().size());
             featureCollections.add(featureCollection);
         }
         return featureCollections;

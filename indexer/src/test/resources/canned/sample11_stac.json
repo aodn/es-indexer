@@ -79,8 +79,8 @@
       "start" : "2008-09-28T14:00:00Z",
       "end" : null
     } ],
-    "platform_vocabs": [],
     "parameter_vocabs" : [ ],
+    "platform_vocabs" : [ ],
     "organisation_vocabs" : [ ]
   },
   "contacts" : [ {
@@ -150,27 +150,27 @@
     "href" : "https://catalogue-imos.aodn.org.au:443/geonetwork/srv/api/records/6c981d98-d7fb-4120-9ebe-347ef1188ae0",
     "rel" : "related",
     "type" : "text/html",
-    "title" : "ANMN National Reference Station (NRS) Sub-Facility metadata record"
+    "title" : "{\"title\":\"ANMN National Reference Station (NRS) Sub-Facility metadata record\",\"description\":\"National Reference Station (NRS) Sub-Facility metadata record\"}"
   }, {
     "href" : "http://imos.org.au/nationalmooringnetwork.html",
     "rel" : "related",
     "type" : "text/html",
-    "title" : "Australian National Mooring Network"
+    "title" : "{\"title\":\"Australian National Mooring Network\",\"description\":\"National Mooring Network - Home Page\"}"
   }, {
     "href" : "https://publications.csiro.au/rpr/pub?pid=procite:f67a7186-7528-4efd-91c2-27f730665446",
     "rel" : "related",
     "type" : "text/html",
-    "title" : "CSIRO ePublish - Lynch et al (2008)"
+    "title" : "{\"title\":\"CSIRO ePublish - Lynch et al (2008)\",\"description\":\"CSIRO ePublish - Lynch et al (2008)\"}"
   }, {
     "href" : "http://content.aodn.org.au/Documents/IMOS/Facilities/national_mooring/IMOS_NRS_BGCManual_LATEST.pdf",
     "rel" : "related",
     "type" : "text/html",
-    "title" : "IMOS_NRS_BGC_Operations_Handbook_ver2.2 (IMOS portal)"
+    "title" : "{\"title\":\"IMOS_NRS_BGC_Operations_Handbook_ver2.2 (IMOS portal)\",\"description\":\"IMOS NRS BGC Manual - Latest Version\"}"
   }, {
     "href" : "http://content.aodn.org.au/?prefix=Documents/IMOS/Facilities/national_mooring/",
     "rel" : "related",
     "type" : "text/html",
-    "title" : "IMOS NRS BGC Manual - Previous Versions plus Supplementary documentation"
+    "title" : "{\"title\":\"IMOS NRS BGC Manual - Previous Versions plus Supplementary documentation\",\"description\":\"\"}"
   }, {
     "href" : "https://catalogue-imos.aodn.org.au:443/geonetwork/srv/api/records/fa93c66e-0e56-7e1d-e043-08114f8c1b76",
     "rel" : "describedby",
@@ -183,292 +183,237 @@
     "roles" : [ "distributor" ],
     "url" : "http://www.marine.csiro.au/datacentre/"
   } ],
-  "themes": [
-    {
-      "concepts": [
-        {
-          "id": "Oceans | Ocean Chemistry | Nitrate",
-          "url": null,
-          "description": "GCMD",
-          "title": "Olsen, L.M., G. Major, K. Shein, J. Scialdone, R. Vogel, S. Leicester, H. Weir, S. Ritz, T. Stevens, M. Meaux, C.Solomon, R. Bilodeau, M. Holland, T. Northcutt, R. A. Restrepo, 2007. NASA/Global Change Master Directory (GCMD) Earth Science Keywords. Version 6.0.0.0.0"
-        },
-        {
-          "id": "Oceans | Ocean Chemistry | Nitrite",
-          "url": null,
-          "description": "GCMD",
-          "title": "Olsen, L.M., G. Major, K. Shein, J. Scialdone, R. Vogel, S. Leicester, H. Weir, S. Ritz, T. Stevens, M. Meaux, C.Solomon, R. Bilodeau, M. Holland, T. Northcutt, R. A. Restrepo, 2007. NASA/Global Change Master Directory (GCMD) Earth Science Keywords. Version 6.0.0.0.0"
-        },
-        {
-          "id": "Oceans | Ocean Chemistry | Nutrients",
-          "url": null,
-          "description": "GCMD",
-          "title": "Olsen, L.M., G. Major, K. Shein, J. Scialdone, R. Vogel, S. Leicester, H. Weir, S. Ritz, T. Stevens, M. Meaux, C.Solomon, R. Bilodeau, M. Holland, T. Northcutt, R. A. Restrepo, 2007. NASA/Global Change Master Directory (GCMD) Earth Science Keywords. Version 6.0.0.0.0"
-        },
-        {
-          "id": "Oceans | Ocean Chemistry | Oxygen",
-          "url": null,
-          "description": "GCMD",
-          "title": "Olsen, L.M., G. Major, K. Shein, J. Scialdone, R. Vogel, S. Leicester, H. Weir, S. Ritz, T. Stevens, M. Meaux, C.Solomon, R. Bilodeau, M. Holland, T. Northcutt, R. A. Restrepo, 2007. NASA/Global Change Master Directory (GCMD) Earth Science Keywords. Version 6.0.0.0.0"
-        },
-        {
-          "id": "Oceans | Ocean Chemistry | Phosphate",
-          "url": null,
-          "description": "GCMD",
-          "title": "Olsen, L.M., G. Major, K. Shein, J. Scialdone, R. Vogel, S. Leicester, H. Weir, S. Ritz, T. Stevens, M. Meaux, C.Solomon, R. Bilodeau, M. Holland, T. Northcutt, R. A. Restrepo, 2007. NASA/Global Change Master Directory (GCMD) Earth Science Keywords. Version 6.0.0.0.0"
-        },
-        {
-          "id": "Oceans | Ocean Chemistry | Silicate",
-          "url": null,
-          "description": "GCMD",
-          "title": "Olsen, L.M., G. Major, K. Shein, J. Scialdone, R. Vogel, S. Leicester, H. Weir, S. Ritz, T. Stevens, M. Meaux, C.Solomon, R. Bilodeau, M. Holland, T. Northcutt, R. A. Restrepo, 2007. NASA/Global Change Master Directory (GCMD) Earth Science Keywords. Version 6.0.0.0.0"
-        }
-      ],
-      "scheme": "theme"
-    },
-    {
-      "concepts": [
-        {
-          "id": "Global / Oceans | Indian Ocean",
-          "url": null,
-          "description": "",
-          "title": "AODN Geographic Extents Vocabulary"
-        },
-        {
-          "id": "Marine Features (Australia) | Great Australian Bight, SA/WA",
-          "url": null,
-          "description": "",
-          "title": "AODN Geographic Extents Vocabulary"
-        },
-        {
-          "id": "Regional Seas | Tasman Sea",
-          "url": null,
-          "description": "",
-          "title": "AODN Geographic Extents Vocabulary"
-        },
-        {
-          "id": "Regional Seas | Timor Sea",
-          "url": null,
-          "description": "",
-          "title": "AODN Geographic Extents Vocabulary"
-        },
-        {
-          "id": "Regional Seas | Coral Sea",
-          "url": null,
-          "description": "",
-          "title": "AODN Geographic Extents Vocabulary"
-        },
-        {
-          "id": "Global / Oceans | Pacific Ocean",
-          "url": null,
-          "description": "",
-          "title": "AODN Geographic Extents Vocabulary"
-        }
-      ],
-      "scheme": "place"
-    },
-    {
-      "concepts": [
-        {
-          "id": "States, Territories (Australia) | Western Australia",
-          "url": null,
-          "description": "",
-          "title": "AODN Geographic Extents Vocabulary"
-        },
-        {
-          "id": "Countries | Australia",
-          "url": null,
-          "description": "",
-          "title": "AODN Geographic Extents Vocabulary"
-        },
-        {
-          "id": "States, Territories (Australia) | Victoria",
-          "url": null,
-          "description": "",
-          "title": "AODN Geographic Extents Vocabulary"
-        },
-        {
-          "id": "States, Territories (Australia) | Tasmania",
-          "url": null,
-          "description": "",
-          "title": "AODN Geographic Extents Vocabulary"
-        },
-        {
-          "id": "States, Territories (Australia) | South Australia",
-          "url": null,
-          "description": "",
-          "title": "AODN Geographic Extents Vocabulary"
-        },
-        {
-          "id": "Marine Features (Australia) | Kangaroo Island, SA",
-          "url": null,
-          "description": "",
-          "title": "AODN Geographic Extents Vocabulary"
-        },
-        {
-          "id": "States, Territories (Australia) | Northern Territory",
-          "url": null,
-          "description": "",
-          "title": "AODN Geographic Extents Vocabulary"
-        },
-        {
-          "id": "States, Territories (Australia) | New South Wales",
-          "url": null,
-          "description": "",
-          "title": "AODN Geographic Extents Vocabulary"
-        },
-        {
-          "id": "Marine Features (Australia) | North Stradbroke Island, QLD",
-          "url": null,
-          "description": "",
-          "title": "AODN Geographic Extents Vocabulary"
-        },
-        {
-          "id": "States, Territories (Australia) | Queensland",
-          "url": null,
-          "description": "",
-          "title": "AODN Geographic Extents Vocabulary"
-        },
-        {
-          "id": "Marine Features (Australia) | Maria Island, TAS",
-          "url": null,
-          "description": "",
-          "title": "AODN Geographic Extents Vocabulary"
-        },
-        {
-          "id": "Marine Features (Australia) | Port Hacking, NSW",
-          "url": null,
-          "description": "",
-          "title": "AODN Geographic Extents Vocabulary"
-        },
-        {
-          "id": "Coastal Cities / Towns (Australia) | Esperance, WA",
-          "url": null,
-          "description": "",
-          "title": "AODN Geographic Extents Vocabulary"
-        },
-        {
-          "id": "Marine Features (Australia) | Ningaloo Marine Park, WA",
-          "url": null,
-          "description": "",
-          "title": "AODN Geographic Extents Vocabulary"
-        },
-        {
-          "id": "Marine Features (Australia) | Rottnest Island, WA",
-          "url": null,
-          "description": "",
-          "title": "AODN Geographic Extents Vocabulary"
-        },
-        {
-          "id": "Coastal Cities / Towns (Australia) | Darwin, NT",
-          "url": null,
-          "description": "",
-          "title": "AODN Geographic Extents Vocabulary"
-        }
-      ],
-      "scheme": "place"
-    },
-    {
-      "concepts": [
-        {
-          "id": "small boat",
-          "url": "http://vocab.aodn.org.au/def/platform/entity/823",
-          "description": "",
-          "title": "AODN Platform Vocabulary"
-        }
-      ],
-      "scheme": "theme"
-    },
-    {
-      "concepts": [
-        {
-          "id": "Practical salinity of the water body",
-          "url": "http://vocab.nerc.ac.uk/collection/P01/current/PSLTZZ01",
-          "description": "",
-          "title": "AODN Discovery Parameter Vocabulary"
-        },
-        {
-          "id": "Concentration of silicate {SiO4} per unit volume of the water body",
-          "url": "http://vocab.aodn.org.au/def/discovery_parameter/entity/376",
-          "description": "",
-          "title": "AODN Discovery Parameter Vocabulary"
-        },
-        {
-          "id": "Concentration of nitrate {NO3} per unit volume of the water body",
-          "url": "http://vocab.aodn.org.au/def/discovery_parameter/entity/374",
-          "description": "",
-          "title": "AODN Discovery Parameter Vocabulary"
-        },
-        {
-          "id": "Concentration of phosphate {PO4} per unit volume of the water body",
-          "url": "http://vocab.aodn.org.au/def/discovery_parameter/entity/379",
-          "description": "",
-          "title": "AODN Discovery Parameter Vocabulary"
-        },
-        {
-          "id": "Concentration of ammonium {NH4} per unit volume of the water body",
-          "url": "http://vocab.aodn.org.au/def/discovery_parameter/entity/377",
-          "description": "",
-          "title": "AODN Discovery Parameter Vocabulary"
-        },
-        {
-          "id": "Total alkalinity per unit mass of the water body",
-          "url": "http://vocab.nerc.ac.uk/collection/P01/current/MDMAP014",
-          "description": "",
-          "title": "AODN Discovery Parameter Vocabulary"
-        },
-        {
-          "id": "Concentration of oxygen {O2} per unit volume of the water body",
-          "url": "http://vocab.aodn.org.au/def/discovery_parameter/entity/372",
-          "description": "",
-          "title": "AODN Discovery Parameter Vocabulary"
-        },
-        {
-          "id": "Concentration of carbon (total inorganic) per unit mass of the water body",
-          "url": "http://vocab.aodn.org.au/def/discovery_parameter/entity/1",
-          "description": "",
-          "title": "AODN Discovery Parameter Vocabulary"
-        }
-      ],
-      "scheme": "theme"
-    },
-    {
-      "concepts": [
-        {
-          "id": "discrete water samplers",
-          "url": "http://vocab.nerc.ac.uk/collection/L05/current/30",
-          "description": "",
-          "title": "AODN Instrument Vocabulary"
-        }
-      ],
-      "scheme": "theme"
-    },
-    {
-      "concepts": [
-        {
-          "id": "National Reference Stations Sub-Facility, Integrated Marine Observing System (IMOS)",
-          "url": "http://vocab.aodn.org.au/def/organisation/entity/501",
-          "description": "",
-          "title": "AODN Organisation Vocabulary"
-        }
-      ],
-      "scheme": "discipline"
-    },
-    {
-      "concepts" : [ {
-        "id" : "oceans",
-        "url" : null,
-        "title" : null,
-        "description" : null
-      } ],
-      "scheme" : "Categories"
-    }
-  ],
+  "themes" : [ {
+    "concepts" : [ {
+      "id" : "Oceans | Ocean Chemistry | Nitrate",
+      "url" : null,
+      "title" : "Olsen, L.M., G. Major, K. Shein, J. Scialdone, R. Vogel, S. Leicester, H. Weir, S. Ritz, T. Stevens, M. Meaux, C.Solomon, R. Bilodeau, M. Holland, T. Northcutt, R. A. Restrepo, 2007. NASA/Global Change Master Directory (GCMD) Earth Science Keywords. Version 6.0.0.0.0",
+      "description" : "GCMD"
+    }, {
+      "id" : "Oceans | Ocean Chemistry | Nitrite",
+      "url" : null,
+      "title" : "Olsen, L.M., G. Major, K. Shein, J. Scialdone, R. Vogel, S. Leicester, H. Weir, S. Ritz, T. Stevens, M. Meaux, C.Solomon, R. Bilodeau, M. Holland, T. Northcutt, R. A. Restrepo, 2007. NASA/Global Change Master Directory (GCMD) Earth Science Keywords. Version 6.0.0.0.0",
+      "description" : "GCMD"
+    }, {
+      "id" : "Oceans | Ocean Chemistry | Nutrients",
+      "url" : null,
+      "title" : "Olsen, L.M., G. Major, K. Shein, J. Scialdone, R. Vogel, S. Leicester, H. Weir, S. Ritz, T. Stevens, M. Meaux, C.Solomon, R. Bilodeau, M. Holland, T. Northcutt, R. A. Restrepo, 2007. NASA/Global Change Master Directory (GCMD) Earth Science Keywords. Version 6.0.0.0.0",
+      "description" : "GCMD"
+    }, {
+      "id" : "Oceans | Ocean Chemistry | Oxygen",
+      "url" : null,
+      "title" : "Olsen, L.M., G. Major, K. Shein, J. Scialdone, R. Vogel, S. Leicester, H. Weir, S. Ritz, T. Stevens, M. Meaux, C.Solomon, R. Bilodeau, M. Holland, T. Northcutt, R. A. Restrepo, 2007. NASA/Global Change Master Directory (GCMD) Earth Science Keywords. Version 6.0.0.0.0",
+      "description" : "GCMD"
+    }, {
+      "id" : "Oceans | Ocean Chemistry | Phosphate",
+      "url" : null,
+      "title" : "Olsen, L.M., G. Major, K. Shein, J. Scialdone, R. Vogel, S. Leicester, H. Weir, S. Ritz, T. Stevens, M. Meaux, C.Solomon, R. Bilodeau, M. Holland, T. Northcutt, R. A. Restrepo, 2007. NASA/Global Change Master Directory (GCMD) Earth Science Keywords. Version 6.0.0.0.0",
+      "description" : "GCMD"
+    }, {
+      "id" : "Oceans | Ocean Chemistry | Silicate",
+      "url" : null,
+      "title" : "Olsen, L.M., G. Major, K. Shein, J. Scialdone, R. Vogel, S. Leicester, H. Weir, S. Ritz, T. Stevens, M. Meaux, C.Solomon, R. Bilodeau, M. Holland, T. Northcutt, R. A. Restrepo, 2007. NASA/Global Change Master Directory (GCMD) Earth Science Keywords. Version 6.0.0.0.0",
+      "description" : "GCMD"
+    } ],
+    "scheme" : "theme"
+  }, {
+    "concepts" : [ {
+      "id" : "Global / Oceans | Indian Ocean",
+      "url" : null,
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "Marine Features (Australia) | Great Australian Bight, SA/WA",
+      "url" : null,
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "Regional Seas | Tasman Sea",
+      "url" : null,
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "Regional Seas | Timor Sea",
+      "url" : null,
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "Regional Seas | Coral Sea",
+      "url" : null,
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "Global / Oceans | Pacific Ocean",
+      "url" : null,
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
+    } ],
+    "scheme" : "place"
+  }, {
+    "concepts" : [ {
+      "id" : "States, Territories (Australia) | Western Australia",
+      "url" : null,
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "Countries | Australia",
+      "url" : null,
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "States, Territories (Australia) | Victoria",
+      "url" : null,
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "States, Territories (Australia) | Tasmania",
+      "url" : null,
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "States, Territories (Australia) | South Australia",
+      "url" : null,
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "Marine Features (Australia) | Kangaroo Island, SA",
+      "url" : null,
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "States, Territories (Australia) | Northern Territory",
+      "url" : null,
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "States, Territories (Australia) | New South Wales",
+      "url" : null,
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "Marine Features (Australia) | North Stradbroke Island, QLD",
+      "url" : null,
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "States, Territories (Australia) | Queensland",
+      "url" : null,
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "Marine Features (Australia) | Maria Island, TAS",
+      "url" : null,
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "Marine Features (Australia) | Port Hacking, NSW",
+      "url" : null,
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "Coastal Cities / Towns (Australia) | Esperance, WA",
+      "url" : null,
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "Marine Features (Australia) | Ningaloo Marine Park, WA",
+      "url" : null,
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "Marine Features (Australia) | Rottnest Island, WA",
+      "url" : null,
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "Coastal Cities / Towns (Australia) | Darwin, NT",
+      "url" : null,
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
+    } ],
+    "scheme" : "place"
+  }, {
+    "concepts" : [ {
+      "id" : "small boat",
+      "url" : "http://vocab.aodn.org.au/def/platform/entity/823",
+      "title" : "AODN Platform Vocabulary",
+      "description" : ""
+    } ],
+    "scheme" : "theme"
+  }, {
+    "concepts" : [ {
+      "id" : "Practical salinity of the water body",
+      "url" : "http://vocab.nerc.ac.uk/collection/P01/current/PSLTZZ01",
+      "title" : "AODN Discovery Parameter Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "Concentration of silicate {SiO4} per unit volume of the water body",
+      "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/376",
+      "title" : "AODN Discovery Parameter Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "Concentration of nitrate {NO3} per unit volume of the water body",
+      "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/374",
+      "title" : "AODN Discovery Parameter Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "Concentration of phosphate {PO4} per unit volume of the water body",
+      "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/379",
+      "title" : "AODN Discovery Parameter Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "Concentration of ammonium {NH4} per unit volume of the water body",
+      "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/377",
+      "title" : "AODN Discovery Parameter Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "Total alkalinity per unit mass of the water body",
+      "url" : "http://vocab.nerc.ac.uk/collection/P01/current/MDMAP014",
+      "title" : "AODN Discovery Parameter Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "Concentration of oxygen {O2} per unit volume of the water body",
+      "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/372",
+      "title" : "AODN Discovery Parameter Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "Concentration of carbon (total inorganic) per unit mass of the water body",
+      "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/1",
+      "title" : "AODN Discovery Parameter Vocabulary",
+      "description" : ""
+    } ],
+    "scheme" : "theme"
+  }, {
+    "concepts" : [ {
+      "id" : "discrete water samplers",
+      "url" : "http://vocab.nerc.ac.uk/collection/L05/current/30",
+      "title" : "AODN Instrument Vocabulary",
+      "description" : ""
+    } ],
+    "scheme" : "theme"
+  }, {
+    "concepts" : [ {
+      "id" : "National Reference Stations Sub-Facility, Integrated Marine Observing System (IMOS)",
+      "url" : "http://vocab.aodn.org.au/def/organisation/entity/501",
+      "title" : "AODN Organisation Vocabulary",
+      "description" : ""
+    } ],
+    "scheme" : "discipline"
+  }, {
+    "concepts" : [ {
+      "id" : "oceans",
+      "url" : null,
+      "title" : null,
+      "description" : null
+    } ],
+    "scheme" : "Categories"
+  } ],
   "id" : "fa93c66e-0e56-7e1d-e043-08114f8c1b76",
   "search_suggestions" : {
     "abstract_phrases" : [ ],
-    "platform_vocabs_sayt" : [],
-    "parameter_vocabs_sayt" : [],
-    "organisation_vocabs_sayt" : []
+    "parameter_vocabs_sayt" : [ ],
+    "platform_vocabs_sayt" : [ ],
+    "organisation_vocabs_sayt" : [ ]
   },
   "sci:citation" : "{\"suggestedCitation\":\"This material is released under the Creative Commons Attribution 4.0 International licence. The citation in a list of references is: \\\"IMOS [year-of-data-download], [Title], [data-access-URL], accessed [date-of-access].\\\" Any users of IMOS data are required to clearly acknowledge the source of the material derived from IMOS in the format: \\\"Data was sourced from Australia’s Integrated Marine Observing System (IMOS) – IMOS is enabled by the National Collaborative Research Infrastructure strategy (NCRIS).\\\"\",\"useLimitations\":null,\"otherConstraints\":null}",
   "type" : "Collection",
