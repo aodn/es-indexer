@@ -27,6 +27,7 @@ import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
 import java.io.IOException;
@@ -43,6 +44,7 @@ import static org.mockito.Mockito.*;
  * component for speed testing.
  */
 @Slf4j
+@ActiveProfiles("test")
 @SpringBootTest(classes = {StacCollectionMapperServiceImpl.class})
 public class StacCollectionMapperServiceTest {
 
@@ -531,8 +533,6 @@ public class StacCollectionMapperServiceTest {
 
         verify(expected);
     }
-
-
     /**
      * Handle null exception in this case
      * @throws IOException - Not expected
@@ -542,6 +542,15 @@ public class StacCollectionMapperServiceTest {
     public void verifyVersionedCitationWorks() throws IOException, JSONException {
         String xml = readResourceFile("classpath:canned/sample22.xml");
         String expected = readResourceFile("classpath:canned/sample22_stac.json");
+        indexerService.indexMetadata(xml);
+
+        verify(expected);
+    }
+
+    @Test
+    public void verifyHandleNullCorrectly() throws IOException, JSONException {
+        String xml = readResourceFile("classpath:canned/sample23.xml");
+        String expected = readResourceFile("classpath:canned/sample23_stac.json");
         indexerService.indexMetadata(xml);
 
         verify(expected);
