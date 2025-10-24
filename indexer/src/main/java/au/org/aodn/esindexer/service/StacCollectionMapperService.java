@@ -10,8 +10,6 @@ import au.org.aodn.stac.model.*;
 import au.org.aodn.metadata.geonetwork.GeoNetworkField;
 import au.org.aodn.metadata.iso19115_3_2018.*;
 import au.org.aodn.stac.util.JsonUtil;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.xml.bind.JAXBElement;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -261,13 +259,12 @@ public abstract class StacCollectionMapperService {
                     otherConstraints.forEach(constraint ->
                         safeGet(() -> constraint.getCharacterString().getValue().toString())
                                 .ifPresent(cons -> {
-                                    String constraintText = (String) cons;
-                                    Matcher versionMatcher = versionCitationPattern.matcher(constraintText);
+                                    Matcher versionMatcher = versionCitationPattern.matcher(cons);
 
                                     if (versionMatcher.find()) {
                                         String versionStr = versionMatcher.group(1);
                                         double versionNum = parseVersion(versionStr);
-                                        versionedCitations.put(versionNum, constraintText);
+                                        versionedCitations.put(versionNum, cons);
                                     } else {
                                         nonVersionedConstraints.add(constraint);
                                     }
@@ -326,7 +323,7 @@ public abstract class StacCollectionMapperService {
 
     /**
      * A helper function to parse version number in a string constraint
-     * A few IMOS dataset need this, e.g., https://catalogue.aodn.org.au/geonetwork/srv/eng/catalog.search#/metadata/aa14b1a4-eb3f-4c6e-89a9-622c1f95bfb2/formatters/imos-full-view?root=div&view=advanced&approved=true
+     * A few IMOS dataset need this, e.g., <a href="https://catalogue.aodn.org.au/geonetwork/srv/eng/catalog.search#/metadata/aa14b1a4-eb3f-4c6e-89a9-622c1f95bfb2/formatters/imos-full-view?root=div&view=advanced&approved=true">...</a>
      */
     private static double parseVersion(String version) {
         try {
@@ -943,9 +940,19 @@ public abstract class StacCollectionMapperService {
                                                 ));
                                                 providerModel.setName(organisationType2.getName() != null ? organisationType2.getName().getCharacterString().getValue().toString() : "");
 
-                                                organisationType2.getIndividual().forEach(individual -> individual.getCIIndividual().getContactInfo().forEach(contactInfo -> {
-                                                    contactInfo.getCIContact().getOnlineResource().forEach(onlineResource ->
-                                                            providerModel.setUrl(onlineResource.getCIOnlineResource().getLinkage().getCharacterString().getValue().toString())
+                                                organisationType2
+                                                        .getIndividual()
+                                                        .stream()
+                                                        .map(CIIndividualPropertyType2::getCIIndividual)
+                                                        .filter(Objects::nonNull)
+                                                        .map(AbstractCIPartyType2::getContactInfo)
+                                                        .filter(Objects::nonNull)
+                                                        .forEach(ci -> ci.stream()
+                                                                .map(CIContactPropertyType2::getCIContact)
+                                                                .filter(Objects::nonNull)
+                                                                .forEach(contact -> {
+                                                                    contact.getOnlineResource().forEach(onlineResource ->
+                                                                        providerModel.setUrl(onlineResource.getCIOnlineResource().getLinkage().getCharacterString().getValue().toString())
                                                     );
                                                 }));
                                                 results.add(providerModel);
