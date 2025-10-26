@@ -319,7 +319,9 @@ public class GeometryBase {
         List<Coordinate> items = linearPositionToCoordinates(pos, proj);
         try {
             // We need to store it so that we can create the multi-array as told by spec
-            return geoJsonFactory.createPolygon(items.toArray(new Coordinate[0]));
+            Polygon polygon = geoJsonFactory.createPolygon(items.toArray(new Coordinate[0]));
+            // Fix self-intersect if needed
+            return polygon.isValid() ? polygon : (Polygon)polygon.buffer(0);
         }
         catch(IllegalArgumentException iae) {
             logger.warn("Invalid Polygon", iae);
@@ -331,7 +333,9 @@ public class GeometryBase {
         List<Coordinate> items = linearPositionToCoordinates(pos, proj);
         try {
             // We need to store it so that we can create the multi-array as told by spec
-            return geoJsonFactory.createLinearRing(items.toArray(new Coordinate[0]));
+            LinearRing ring = geoJsonFactory.createLinearRing(items.toArray(new Coordinate[0]));
+            // Fix self-intersect if needed
+            return ring.isValid() ? ring : (LinearRing)ring.buffer(0);
         }
         catch(IllegalArgumentException iae) {
             logger.warn("Invalid LinearRingType", iae);
