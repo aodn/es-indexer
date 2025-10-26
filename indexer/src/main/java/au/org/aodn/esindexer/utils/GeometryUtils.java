@@ -8,8 +8,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.geotools.data.shapefile.ShapefileDataStore;
 import org.geotools.data.shapefile.ShapefileDataStoreFactory;
-import org.locationtech.jts.geom.util.GeometryFixer;
-import org.locationtech.jts.operation.relate.RelateOp;
 import org.locationtech.jts.precision.GeometryPrecisionReducer;
 import org.geotools.data.simple.SimpleFeatureCollection;
 import org.geotools.data.simple.SimpleFeatureIterator;
@@ -238,7 +236,6 @@ public class GeometryUtils {
         // Iterate over the geometries in the MultiPolygon
         for (int i = 0; i < multipolygon.getNumGeometries(); i++) {
             Geometry geometry = multipolygon.getGeometryN(i);
-            // Ensure that the geometry is a Polygon before adding to the list
             geo.add(geometry);
         }
         return geo;
