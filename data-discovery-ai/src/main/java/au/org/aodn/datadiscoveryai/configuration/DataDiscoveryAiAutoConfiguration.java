@@ -36,8 +36,8 @@ public class DataDiscoveryAiAutoConfiguration {
     public DataDiscoveryAiServiceImpl createDataDiscoveryAiService(
             @Value("${datadiscoveryai.host}") String serviceUrl,
             @Value("${datadiscoveryai.baseUrl}") String baseUrl,
-            @Value("${datadiscoveryai.apiKey}") String apiKey,
-            @Value("${datadiscoveryai.internalAiHeaderSecret}") String internalKey,
+            @Value("${datadiscoveryai.apiKey:TEMP}") String apiKey,
+            @Value("${datadiscoveryai.internalAiHeaderSecret:TEMP}") String internalKey,
             @Qualifier("dataDiscoveryAiWebClient") WebClient  webClient) {
 
         SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
