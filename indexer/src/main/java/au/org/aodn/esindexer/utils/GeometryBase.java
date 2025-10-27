@@ -92,7 +92,7 @@ public class GeometryBase {
                                             .map(value -> (LinearRingType) value)
                                             .flatMap(linearRingType ->
                                                     safeGet(linearRingType::getPosList)).ifPresent(pos -> {
-                                                        Polygon polygon = linerPositionToPolygon(pos, polygonType.getSrsName());
+                                                        Geometry polygon = linerPositionToPolygon(pos, polygonType.getSrsName());
                                                         if(polygon != null) {
                                                             logger.debug("MultiSurfaceType 2D added (findPolygonsFromEXBoundingPolygonType) {}", polygon);
                                                             polygons.add(polygon);
@@ -325,13 +325,13 @@ public class GeometryBase {
         return items;
     }
 
-    protected static Polygon linerPositionToPolygon(DirectPositionListType pos, String proj) {
+    protected static Geometry linerPositionToPolygon(DirectPositionListType pos, String proj) {
         List<Coordinate> items = linearPositionToCoordinates(pos, proj);
         try {
             // We need to store it so that we can create the multi-array as told by spec
             Polygon polygon = geoJsonFactory.createPolygon(items.toArray(new Coordinate[0]));
             // Fix self-intersect if needed
-            return polygon.isValid() ? polygon : (Polygon)polygon.buffer(0);
+            return polygon.isValid() ? polygon : polygon.buffer(0);
         }
         catch(IllegalArgumentException iae) {
             logger.warn("Invalid Polygon", iae);
@@ -343,9 +343,7 @@ public class GeometryBase {
         List<Coordinate> items = linearPositionToCoordinates(pos, proj);
         try {
             // We need to store it so that we can create the multi-array as told by spec
-            LinearRing ring = geoJsonFactory.createLinearRing(items.toArray(new Coordinate[0]));
-            // Fix self-intersect if needed
-            return ring.isValid() ? ring : (LinearRing)ring.buffer(0);
+            return geoJsonFactory.createLinearRing(items.toArray(new Coordinate[0]));
         }
         catch(IllegalArgumentException iae) {
             logger.warn("Invalid LinearRingType", iae);
