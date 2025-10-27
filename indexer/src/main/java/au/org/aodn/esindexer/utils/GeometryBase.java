@@ -208,6 +208,16 @@ public class GeometryBase {
         // Sometime value input is incorrect, fix it here, a value bigger than 180 for coordinate imply max value 180
         east = east >= 180 ? 180 : east;
 
+        if (!(-90 <= south && south <= 90)) {
+            logger.error("Invalid south latitude, value should be +/- 90 but {}", south);
+            return Optional.empty();
+        }
+
+        if (!(-90 <= north && north <= 90)) {
+            logger.error("Invalid north latitude, value should be +/- 90 but {}", north);
+            return Optional.empty();
+        }
+
         // Define the coordinates for the bounding box
         Coordinate[] coordinates = new Coordinate[]{
                 new Coordinate(west, south),
@@ -226,7 +236,7 @@ public class GeometryBase {
                 return Optional.of(geoJsonFactory.createPolygon(coordinates));
             }
             else {
-                logger.warn("Unknown shape, not point or polygon {}", (Object) coordinates);
+                logger.error("Unknown shape, not point or polygon {}", (Object) coordinates);
                 return Optional.empty();
             }
         }

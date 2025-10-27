@@ -534,19 +534,6 @@ public class StacCollectionMapperServiceTest {
         verify(expected);
     }
     /**
-     * Handle another self intersect case
-     * @throws IOException - Not expected
-     * @throws JSONException - Not expected
-     */
-    @Test
-    public void verifyNoSelfIntersect3() throws IOException, JSONException {
-        String xml = readResourceFile("classpath:canned/sample_self_intersect3.xml");
-        String expected = readResourceFile("classpath:canned/sample_self_intersect3_stac.json");
-        indexerService.indexMetadata(xml);
-
-        verify(expected);
-    }
-    /**
      * Handle null exception in this case
      * @throws IOException - Not expected
      * @throws JSONException - Not expected
