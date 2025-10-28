@@ -92,7 +92,7 @@ public class GeometryBase {
                                             .map(value -> (LinearRingType) value)
                                             .flatMap(linearRingType ->
                                                     safeGet(linearRingType::getPosList)).ifPresent(pos -> {
-                                                        Polygon polygon = linerPositionToPolygon(pos, polygonType.getSrsName());
+                                                        Geometry polygon = linerPositionToPolygon(pos, polygonType.getSrsName());
                                                         if(polygon != null) {
                                                             logger.debug("MultiSurfaceType 2D added (findPolygonsFromEXBoundingPolygonType) {}", polygon);
                                                             polygons.add(polygon);
@@ -208,6 +208,16 @@ public class GeometryBase {
         // Sometime value input is incorrect, fix it here, a value bigger than 180 for coordinate imply max value 180
         east = east >= 180 ? 180 : east;
 
+        if (!(-90 <= south && south <= 90)) {
+            logger.error("Invalid south latitude, value should be +/- 90 but {}", south);
+            return Optional.empty();
+        }
+
+        if (!(-90 <= north && north <= 90)) {
+            logger.error("Invalid north latitude, value should be +/- 90 but {}", north);
+            return Optional.empty();
+        }
+
         // Define the coordinates for the bounding box
         Coordinate[] coordinates = new Coordinate[]{
                 new Coordinate(west, south),
@@ -226,7 +236,7 @@ public class GeometryBase {
                 return Optional.of(geoJsonFactory.createPolygon(coordinates));
             }
             else {
-                logger.warn("Unknown shape, not point or polygon {}", (Object) coordinates);
+                logger.error("Unknown shape, not point or polygon {}", (Object) coordinates);
                 return Optional.empty();
             }
         }
@@ -315,11 +325,13 @@ public class GeometryBase {
         return items;
     }
 
-    protected static Polygon linerPositionToPolygon(DirectPositionListType pos, String proj) {
+    protected static Geometry linerPositionToPolygon(DirectPositionListType pos, String proj) {
         List<Coordinate> items = linearPositionToCoordinates(pos, proj);
         try {
             // We need to store it so that we can create the multi-array as told by spec
-            return geoJsonFactory.createPolygon(items.toArray(new Coordinate[0]));
+            Polygon polygon = geoJsonFactory.createPolygon(items.toArray(new Coordinate[0]));
+            // Fix self-intersect if needed
+            return polygon.isValid() ? polygon : polygon.buffer(0);
         }
         catch(IllegalArgumentException iae) {
             logger.warn("Invalid Polygon", iae);

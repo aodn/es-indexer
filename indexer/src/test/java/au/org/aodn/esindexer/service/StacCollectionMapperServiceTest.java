@@ -508,14 +508,27 @@ public class StacCollectionMapperServiceTest {
         verify(expected);
     }
     /**
-     * Handle null exception in this case
+     * Handle case self intersect, code should manage the polygon correctly without problem
      * @throws IOException - Not expected
      * @throws JSONException - Not expected
      */
     @Test
-    public void verifyNoSelfIntersect() throws IOException, JSONException {
-        String xml = readResourceFile("classpath:canned/sample_self_intersect.xml");
-        String expected = readResourceFile("classpath:canned/sample_self_intersect_stac.json");
+    public void verifyNoSelfIntersect1() throws IOException, JSONException {
+        String xml = readResourceFile("classpath:canned/sample_self_intersect1.xml");
+        String expected = readResourceFile("classpath:canned/sample_self_intersect1_stac.json");
+        indexerService.indexMetadata(xml);
+
+        verify(expected);
+    }
+    /**
+     * Handle another self intersect case
+     * @throws IOException - Not expected
+     * @throws JSONException - Not expected
+     */
+    @Test
+    public void verifyNoSelfIntersect2() throws IOException, JSONException {
+        String xml = readResourceFile("classpath:canned/sample_self_intersect2.xml");
+        String expected = readResourceFile("classpath:canned/sample_self_intersect2_stac.json");
         indexerService.indexMetadata(xml);
 
         verify(expected);
