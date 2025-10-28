@@ -1188,7 +1188,6 @@ public abstract class StacCollectionMapperService {
             if(cloudOptimisedMetadata == null || cloudOptimisedMetadata.isEmpty()) {
                 throw new RuntimeException("Unable to find cloud optimized metadata for collection: " + collectionId);
             }
-
             var datasets = cloudOptimisedMetadata.values();
 
             var entries = new HashMap<String, Object>();
