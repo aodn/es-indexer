@@ -32,7 +32,7 @@ public class StacCollectionModel {
     protected List<LinkModel> links;
     protected String license;
     protected List<ProviderModel> providers;
-    protected Map<String, Object> assets;
+    protected Map<String, AssetModel> assets;
     /**
      * Do not use keywords and use themes instead because the GN's records using controlled vocabularies
      * use keywords field type only for uncontrolled keywords/tags

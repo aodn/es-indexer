@@ -1165,12 +1165,11 @@ public abstract class StacCollectionMapperService {
     }
 
     /**
-     * Maps assets for the collection. For cloud-optimized datasets, adds a "summary" field
-     * containing a list of AssetModel objects, where each title corresponds to a dataset name
+     * Maps assets for the collection. For cloud-optimized datasets, the key is the dataset name which is
      * retrieved from the data access service.
      */
     @Named("assets")
-    protected Map<String, Object> mapAssetsData(MDMetadataType source) {
+    protected Map<String, AssetModel> mapAssetsData(MDMetadataType source) {
         String collectionId = CommonUtils.getUUID(source);
         if(indexCloudOptimizedService.hasIndex(collectionId)) {
             var hitId = indexCloudOptimizedService.getHitId(collectionId);
@@ -1190,20 +1189,22 @@ public abstract class StacCollectionMapperService {
             }
             var datasets = cloudOptimisedMetadata.values();
 
-            var entries = new HashMap<String, Object>();
-            var summaryList = new ArrayList<AssetModel>();
-            for (var dataset : datasets) {
+            var entries = new HashMap<String, AssetModel>();
+            for (var dataset: datasets) {
                 var dname = dataset.getDname();
-                var asset = AssetModel.builder()
-                        .role(AssetModel.Role.SUMMARY)
-                        .type(mediaType)
-                        .href(String.format("/collections/%s/items/summary", collectionId))
-                        .title(dname)
-                        .description("Summary of cloud optimized data points")
-                        .build();
-                summaryList.add(asset);
+                Map.Entry<String, AssetModel> entry = Map.entry(
+                        dname,
+                        AssetModel.builder()
+                                .role(AssetModel.Role.SUMMARY)
+                                .type(mediaType)
+                                .href(String.format("/collections/%s/items/summary", collectionId))
+                                .title(dname)
+                                .description("Summary of cloud optimized data points")
+                                .build()
+
+                );
+                entries.put(entry.getKey(), entry.getValue());
             }
-            entries.put(AssetModel.Role.SUMMARY.toString(), summaryList);
 
             return entries;
         }
