@@ -1,5 +1,6 @@
 package au.org.aodn.esindexer.service;
 
+import au.org.aodn.cloudoptimized.model.MetadataEntity;
 import au.org.aodn.cloudoptimized.service.DataAccessService;
 import au.org.aodn.datadiscoveryai.service.DataDiscoveryAiService;
 import au.org.aodn.esindexer.utils.GcmdKeywordUtils;
@@ -186,6 +187,12 @@ public class StacCollectionMapperServiceTest {
         when(indexCloudOptimizedService.getHitId(eq("35234913-aa3c-48ec-b9a4-77f822f66ef8")))
                 .thenReturn("8af21108-c535-43bf-8dab-c1f45a26088c|vessel_trv_realtime_qc.parquet|2009-08|0");
 
+        MetadataEntity mockMetadata = new MetadataEntity();
+        mockMetadata.setUuid("35234913-aa3c-48ec-b9a4-77f822f66ef8");
+        String mockDname = "vessel_xbt_realtime_nonqc.parquet";
+        mockMetadata.setDname(mockDname);
+        when(dataAccessService.getMetadataByUuid(eq("35234913-aa3c-48ec-b9a4-77f822f66ef8")))
+                .thenReturn(Map.of(mockDname, mockMetadata));
     }
 
     @Test

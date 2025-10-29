@@ -1171,6 +1171,10 @@ public abstract class StacCollectionMapperService {
         return results;
     }
 
+    /**
+     * Maps assets for the collection. For cloud-optimized datasets, the key is the dataset name which is
+     * retrieved from the data access service.
+     */
     @Named("assets")
     protected Map<String, AssetModel> mapAssetsData(MDMetadataType source) {
         String collectionId = CommonUtils.getUUID(source);
@@ -1186,19 +1190,30 @@ public abstract class StacCollectionMapperService {
             else if (hitId.contains(".zarr")) {
                 mediaType = "application/x-zarr";
             }
+            var cloudOptimisedMetadata = dataAccessService.getMetadataByUuid(collectionId);
+            if(cloudOptimisedMetadata == null || cloudOptimisedMetadata.isEmpty()) {
+                throw new RuntimeException("Unable to find cloud optimized metadata for collection: " + collectionId);
+            }
+            var datasets = cloudOptimisedMetadata.values();
 
-            Map.Entry<String, AssetModel> entry = Map.entry(
-                    AssetModel.Role.SUMMARY.toString(),
-                    AssetModel.builder()
-                            .role(AssetModel.Role.SUMMARY)
-                            .type(mediaType)
-                            .href(String.format("/collections/%s/items/summary", collectionId))
-                            .title("Summary")
-                            .description("Summary of cloud optimized data points")
-                            .build()
+            var entries = new HashMap<String, AssetModel>();
+            for (var dataset: datasets) {
+                var dname = dataset.getDname();
+                Map.Entry<String, AssetModel> entry = Map.entry(
+                        dname,
+                        AssetModel.builder()
+                                .role(AssetModel.Role.SUMMARY)
+                                .type(mediaType)
+                                .href(String.format("/collections/%s/items/summary", collectionId))
+                                .title(dname)
+                                .description("Summary of cloud optimized data points")
+                                .build()
 
-            );
-            return Map.ofEntries(entry);
+                );
+                entries.put(entry.getKey(), entry.getValue());
+            }
+
+            return entries;
         }
         else {
             return null;
