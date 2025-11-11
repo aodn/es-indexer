@@ -364,10 +364,7 @@ public abstract class StacCollectionMapperService {
         }
         // IMAS data has this identifier, e.g., https://geonetwork-edge.aodn.org.au/geonetwork/srv/eng/catalog.search#/metadata/20b07936-3bfb-4a72-805d-0b24f1fd4d3f/formatters/xsl-view?root=div&view=advanced
         // and https://catalogue.aodn.org.au/geonetwork/srv/eng/catalog.search#/metadata/697b1314-7351-4478-b5f4-7ca4e5a1db3a/formatters/imos-full-view?root=div&view=advanced&approved=true
-        if (lowerConstraint.contains("data accessed at")) {
-            return true;
-        }
-        return false;
+        return lowerConstraint.contains("data accessed at");
     }
 
     /**
@@ -593,16 +590,27 @@ public abstract class StacCollectionMapperService {
                 .filter(p -> p.getName() != null)
                 .anyMatch(p -> p.getName().contains("IMOS")) ? "IMOS" : null;
     }
-
+    /**
+     * Get the group name from geonetwork and store it in dataset_group field. Multiple group
+     * support if the group name is comma separated
+     * @param source - The parsed dataset
+     * @return - A list of group
+     */
     @Named("mapSummaries.datasetGroup")
-    String mapGeoNetworkGroup(MDMetadataType source) {
+    List<String> mapGeoNetworkGroup(MDMetadataType source) {
         try {
             String group = geoNetworkService.findGroupById(CommonUtils.getUUID(source));
-            return group != null ? group.toLowerCase() : null;
+            if(group != null) {
+                // The group name can represent multiple group if it is comma separated
+                return Arrays.stream(group.toLowerCase().split(","))
+                        .map(String::trim)
+                        .toList();
+            }
         }
         catch (IOException e) {
-            return null;
+            // Do nothing return null
         }
+        return null;
     }
 
     protected List<ConceptModel> mapThemesConcepts(MDKeywordsPropertyType descriptiveKeyword, String uuid) {
@@ -733,7 +741,7 @@ public abstract class StacCollectionMapperService {
                 // get categories
                 if (i.getTopicCategory() != null) {
 
-                    var themesModel = ThemesModel.builder().scheme("Categories").concepts(new ArrayList<ConceptModel>()).build();
+                    var themesModel = ThemesModel.builder().scheme("Categories").concepts(new ArrayList<>()).build();
                     for (var category : i.getTopicCategory()) {
                         var categoryValue = safeGet(() -> category.getMDTopicCategoryCode().value());
                         if (categoryValue.isPresent()) {
@@ -775,9 +783,9 @@ public abstract class StacCollectionMapperService {
 
                             // differentiate WMS, WFS and others
                             safeGet(() -> ciOnlineResource.getProtocol().getCharacterString().getValue().toString())
-                                    .ifPresent(protocol -> {
-                                        linkModel.setRel(LinkUtils.getRelationType(protocol));
-                                    });
+                                    .ifPresent(protocol ->
+                                        linkModel.setRel(LinkUtils.getRelationType(protocol))
+                                    );
                             linkModel.setTitle(getOnlineResourceName(ciOnlineResource));
                             results.add(linkModel);
                         }
@@ -950,11 +958,12 @@ public abstract class StacCollectionMapperService {
                                                         .forEach(ci -> ci.stream()
                                                                 .map(CIContactPropertyType2::getCIContact)
                                                                 .filter(Objects::nonNull)
-                                                                .forEach(contact -> {
-                                                                    contact.getOnlineResource().forEach(onlineResource ->
-                                                                        providerModel.setUrl(onlineResource.getCIOnlineResource().getLinkage().getCharacterString().getValue().toString())
-                                                    );
-                                                }));
+                                                                .forEach(contact ->
+                                                                    contact.getOnlineResource()
+                                                                            .forEach(onlineResource ->
+                                                                                    providerModel.setUrl(onlineResource.getCIOnlineResource().getLinkage().getCharacterString().getValue().toString()))
+                                                                )
+                                                        );
                                                 results.add(providerModel);
                                             }
                                             else if(party.getAbstractCIParty().getValue() instanceof CIIndividualType2 individualType2) {
@@ -1002,12 +1011,11 @@ public abstract class StacCollectionMapperService {
                                 safeGet(legalConstraintsType::getOtherConstraints).ifPresent( otherConstraints -> {
                                     otherConstraints.forEach( otherConstraint -> {
                                         Optional<String> licenseTitle = safeGet(() -> otherConstraint.getCharacterString().getValue().toString());
-                                        if (licenseTitle.isEmpty()) {
-                                            return;
-                                        }
-                                        for (var potentialKey : potentialKeys) {
-                                            if (licenseTitle.get().toLowerCase().contains(potentialKey)) {
-                                                licenses.add(licenseTitle.get());
+                                        if (licenseTitle.isPresent()) {
+                                            for (var potentialKey : potentialKeys) {
+                                                if (licenseTitle.get().toLowerCase().contains(potentialKey)) {
+                                                    licenses.add(licenseTitle.get());
+                                                }
                                             }
                                         }
                                     });
@@ -1029,7 +1037,7 @@ public abstract class StacCollectionMapperService {
     private List<String> findLicenseInCitationBlock(MDLegalConstraintsType legalConstraintsType) {
         List<String> licenses = new ArrayList<>();
         safeGet(legalConstraintsType::getReference)
-                .ifPresent(i -> {
+                .ifPresent(i ->
                     i.forEach(reference -> {
                         var title = safeGet(() -> {
                             var ciCitation = (CICitationType2) reference.getAbstractCitation().getValue();
@@ -1039,8 +1047,8 @@ public abstract class StacCollectionMapperService {
                             return;
                         }
                         licenses.add(title.get());
-                    });
-                });
+                    })
+                );
         return licenses;
     }
 
