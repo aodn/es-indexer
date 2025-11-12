@@ -16,7 +16,7 @@
     "statement" : "",
     "creation" : "2024-05-10T00:00:00",
     "revision" : "2024-05-16T00:00:00",
-    "dataset_group" : "sample",
+    "dataset_group" : ["sample"],
     "update_frequency" : "completed",
     "proj:geometry" : {
       "geometries" : [ {
