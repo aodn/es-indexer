@@ -16,7 +16,7 @@
     "statement" : "The Animal Tracking Facility Satellite Relay Tag data has been supplied to the Australian Ocean Data Network (AODN) by participants, via the St Andrews University Sea Mammal Research Unit. Tags used on species: Australian Fur Seal, Australian Sea Lion, New Zealand Fur Seal and Southern Elephant Seal - CTD Satellite Relay Data Loggers (SRDL). Collect conductivity, temperature and depth information. On some Australian Sea Lions - CTD/Fluorometer Satellite Relay Data Loggers (SRDL). Collects conductivity, temperature, fluorescence and depth information. Weddell Seals - Satellite Relay Data Loggers (SRDL). Collect temperature, speed and depth information.",
     "creation" : "2020-06-26T11:46:35",
     "revision" : "2022-05-13T04:48:51",
-    "dataset_group" : "sample",
+    "dataset_group" : ["sample"],
     "dataset_provider" : "IMOS",
     "update_frequency" : "real-time",
     "proj:geometry" : {
