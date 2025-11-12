@@ -575,4 +575,21 @@ public class StacCollectionMapperServiceTest {
 
         verify(expected);
     }
+    /**
+     * Verify dataset_group allow multiple group for same dataset
+     * @throws IOException - Not expected
+     * @throws JSONException - Not expected
+     */
+    @Test
+    public void verifyHandleMultipleGroupCorrectly() throws IOException, JSONException {
+        String xml = readResourceFile("classpath:canned/sample24.xml");
+        String expected = readResourceFile("classpath:canned/sample24_stac.json");
+
+        when(geoNetworkResourceService.findGroupById("b9bf6b57-54a0-44b3-bd17-30ccfb2b246f"))
+                .thenReturn("group1, group 2, group3");
+
+        indexerService.indexMetadata(xml);
+
+        verify(expected);
+    }
 }
