@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.Set;
 
 
@@ -90,6 +91,25 @@ public class ElasticSearchIndexService {
             throw new CreateIndexException("Failed to elastic index from schema file: " + indexName + " | " + e.getMessage());
         }
     }
+
+    public List<String> getAllIndicesWithPrefix(String baseIndexName) {
+        try {
+            GetIndexRequest getIndexRequest = GetIndexRequest.of(b -> b.index(baseIndexName + "*"));
+            GetIndexResponse getIndexResponse = portalElasticsearchClient.indices().get(getIndexRequest);
+            Set<String> indexNames = getIndexResponse.result().keySet();
+            return indexNames.stream().toList();
+        } catch (ElasticsearchException | IOException e) {
+            throw new IndexNotFoundException("Failed to get indices with prefix: " + baseIndexName + " | " + e.getMessage());
+        }
+    }
+
+
+
+
+
+
+
+
 
     public long getDocumentsCount(String indexName) {
         try {
