@@ -103,6 +103,32 @@ public class ElasticSearchIndexService {
         }
     }
 
+    /**
+     * index name is in this format: baseIndexName_vX where X is the version number
+     * @param existingIndices list of existing index names
+     * @return next available version number
+     */
+    public int getAvailableVersionNumber(List<String> existingIndices) {
+        int maxVersion = 0;
+        for (String indexName : existingIndices) {
+            String[] parts = indexName.split("_v");
+            if (parts.length != 2) {
+                log.warn("Index name: {} does not follow the expected format", indexName);
+                continue;
+            }
+            try {
+                int version = Integer.parseInt(parts[1]);
+                if (version > maxVersion) {
+                    maxVersion = version;
+                }
+            } catch (NumberFormatException e) {
+                log.warn("Index name: {} has invalid version format", indexName);
+            }
+        }
+        return maxVersion + 1;
+    }
+
+
 
 
 
