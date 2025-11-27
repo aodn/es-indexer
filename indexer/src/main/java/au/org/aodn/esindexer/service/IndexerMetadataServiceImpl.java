@@ -111,6 +111,8 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
         return getDocumentByUUID(uuid, indexName);
     }
 
+
+
     public Hit<ObjectNode> getDocumentByUUID(String uuid, String indexName) throws IOException {
         try {
             SearchResponse<ObjectNode> response = portalElasticsearchClient
@@ -142,6 +144,12 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
          * and the portal index has more than 0 documents (the most recent metadata yet indexed to portal index at this point)
          */
         return geoNetworkResourceService.isMetadataRecordsCountLessThan(2) && portalIndexDocumentsCount > 0;
+    }
+
+//    remove later
+    @Override
+    public String debugInterface( ) {
+        return elasticSearchIndexService.getAvailableIndexName(indexName);
     }
 
     @Override
@@ -366,14 +374,17 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
     public List<BulkResponse> indexAllMetadataRecordsFromGeoNetwork(
             String beginWithUuid, boolean confirm, final Callback callback) {
 
+        String versionedIndexName = indexName;
+
         if (!confirm) {
             throw new IndexAllRequestNotConfirmedException("Please confirm that you want to index all metadata records from GeoNetwork");
         }
 
         if(beginWithUuid == null) {
             log.info("Indexing all metadata records from GeoNetwork");
+            versionedIndexName = elasticSearchIndexService.getAvailableIndexName(indexName);
             // recreate index from mapping JSON file
-            elasticSearchIndexService.createIndexFromMappingJSONFile(AppConstants.PORTAL_RECORDS_MAPPING_JSON_FILE, indexName);
+            elasticSearchIndexService.createIndexFromMappingJSONFile(AppConstants.PORTAL_RECORDS_MAPPING_JSON_FILE, versionedIndexName);
         }
         else {
             log.info("Resume indexing records from GeoNetwork at {}", beginWithUuid);
@@ -391,7 +402,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
         };
 
         List<BulkResponse> results = new ArrayList<>();
-        BulkRequestProcessor<StacCollectionModel> bulkRequestProcessor = new BulkRequestProcessor<>(indexName, mapper, self, callback);
+        BulkRequestProcessor<StacCollectionModel> bulkRequestProcessor = new BulkRequestProcessor<>(versionedIndexName, mapper, self, callback);
 
         // We need to keep sending messages to client to avoid timeout on long processing
         ExecutorService executor = Executors.newFixedThreadPool(2);
@@ -462,7 +473,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
 
 
             // TODO now processing for record_suggestions index
-            log.info("Finished execute bulk indexing records to index: {}",indexName);
+            log.info("Finished execute bulk indexing records to index: {}",versionedIndexName);
         }
         catch(Exception e) {
             log.error("Failed", e);
