@@ -173,6 +173,37 @@ public class IndexerServiceIT extends BaseTestClass {
     }
 
     @Test
+    public void verifyIndexAlias() throws IOException {
+        String uuid = "7709f541-fc0c-4318-b5b9-9053aa474e0e";
+        try {
+
+            insertMetadataRecords(uuid, "classpath:canned/sample4.xml");
+
+            indexerService.indexAllMetadataRecordsFromGeoNetwork(null, true, null);
+
+
+            var indices = elasticSearchIndexService.getAllIndicesWithPrefix(INDEX_NAME);
+
+            //assert there is an index whose name is INDEX_NAME + "-v1"
+            Assertions.assertTrue(
+                    indices.stream().anyMatch(
+                            indexName -> indexName.equals(INDEX_NAME + "_v1")
+                    )
+            );
+
+            // assert querying via alias works
+            Hit<ObjectNode> objectNodeHit = indexerService.getDocumentByUUID(uuid, INDEX_NAME);
+            String test = String.valueOf(Objects.requireNonNull(objectNodeHit.source()));
+
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            deleteRecord(uuid);
+        }
+    }
+
+    @Test
     public void verifyAssociatedRecordIndexer() throws IOException{
 
         var targetRecordId = "4637bd9b-8fba-4a10-bf23-26a511e17042";
