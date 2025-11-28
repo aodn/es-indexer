@@ -1,10 +1,7 @@
 package au.org.aodn.esindexer.service;
 
 import au.org.aodn.ardcvocabs.model.VocabModel;
-import au.org.aodn.ardcvocabs.service.ArdcVocabService;
-import au.org.aodn.cloudoptimized.service.DataAccessService;
 import au.org.aodn.datadiscoveryai.service.DataDiscoveryAiService;
-import au.org.aodn.datadiscoveryai.model.AiEnhancementResponse;
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.exception.*;
 import au.org.aodn.esindexer.utils.CommonUtils;
@@ -42,7 +39,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpServerErrorException;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -157,9 +153,13 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
     }
 
     protected Set<String> extractTokensFromDescription(String description) throws IOException {
+        return extractTokensFromDescription(description, indexName);
+    }
+
+    protected Set<String> extractTokensFromDescription(String description, String targetIndexName) throws IOException {
         Set<String> results = new HashSet<>();
 
-        AnalyzeRequest request = AnalyzeRequest.of(ar -> ar.index(indexName).analyzer(tokensAnalyserName).text(description));
+        AnalyzeRequest request = AnalyzeRequest.of(ar -> ar.index(targetIndexName).analyzer(tokensAnalyserName).text(description));
         AnalyzeResponse response = portalElasticsearchClient.indices().analyze(request);
 
         for (AnalyzeToken token : response.tokens()) {
@@ -174,6 +174,10 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
     }
 
     protected StacCollectionModel getMappedMetadataValues(String metadataValues) throws IOException, FactoryException, TransformException, JAXBException {
+        return getMappedMetadataValues(metadataValues, indexName);
+    }
+
+    protected StacCollectionModel getMappedMetadataValues(String metadataValues, String targetIndexName) throws IOException, FactoryException, TransformException, JAXBException {
         MDMetadataType metadataType = jaxbUtils.unmarshal(metadataValues);
 
         // Step 1: Pure mapping (XML -> STAC)
@@ -241,7 +245,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
 
         // search_as_you_type enabled fields can be extended
         SearchSuggestionsModel searchSuggestionsModel = SearchSuggestionsModel.builder()
-                .abstractPhrases(this.extractTokensFromDescription(stacCollectionModel.getDescription()))
+                .abstractPhrases(this.extractTokensFromDescription(stacCollectionModel.getDescription(), targetIndexName))
                 .parameterVocabs(stacCollectionModel.getSummaries().getParameterVocabs())
                 .platformVocabs(stacCollectionModel.getSummaries().getPlatformVocabs())
                 .organisationVocabs(stacCollectionModel.getSummaries().getOrganisationVocabs())
@@ -366,7 +370,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
     public List<BulkResponse> indexAllMetadataRecordsFromGeoNetwork(
             String beginWithUuid, boolean confirm, final Callback callback) {
 
-        String versionedIndexName = indexName;
+        final String versionedIndexName = beginWithUuid != null? indexName : elasticSearchIndexService.getAvailableVersionedIndexName(indexName);
 
         if (!confirm) {
             throw new IndexAllRequestNotConfirmedException("Please confirm that you want to index all metadata records from GeoNetwork");
@@ -374,7 +378,6 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
 
         if(beginWithUuid == null) {
             log.info("Indexing all metadata records from GeoNetwork");
-            versionedIndexName = elasticSearchIndexService.getAvailableIndexName(indexName);
             // recreate index from mapping JSON file
             elasticSearchIndexService.createIndexFromMappingJSONFile(AppConstants.PORTAL_RECORDS_MAPPING_JSON_FILE, versionedIndexName);
         }
@@ -386,7 +389,8 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
         {
             try {
                 return Optional.of(this.getMappedMetadataValues(
-                        geoNetworkResourceService.searchRecordBy(item.id())
+                        geoNetworkResourceService.searchRecordBy(item.id()),
+                        versionedIndexName
                 ));
             } catch (IOException | FactoryException | TransformException | JAXBException e) {
                 return Optional.empty();
@@ -406,7 +410,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
                     final CountDownLatch countDown = new CountDownLatch(1);
                     Callable<StacCollectionModel> task = () ->  {
                         try {
-                            return this.getMappedMetadataValues(metadataRecord);
+                            return this.getMappedMetadataValues(metadataRecord, versionedIndexName);
                         }
                         catch (FactoryException | JAXBException | TransformException | NullPointerException e) {
                             /*

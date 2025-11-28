@@ -128,7 +128,7 @@ public class ElasticSearchIndexService {
         return maxVersion + 1;
     }
 
-    public String getAvailableIndexName(String baseIndexName) {
+    public String getAvailableVersionedIndexName(String baseIndexName) {
         List<String> existingIndices = this.getAllIndicesWithPrefix(baseIndexName);
         int nextVersion = this.getAvailableVersionNumber(existingIndices);
         return baseIndexName + "_v" + nextVersion;
