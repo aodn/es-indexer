@@ -111,8 +111,6 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
         return getDocumentByUUID(uuid, indexName);
     }
 
-
-
     public Hit<ObjectNode> getDocumentByUUID(String uuid, String indexName) throws IOException {
         try {
             SearchResponse<ObjectNode> response = portalElasticsearchClient
@@ -144,12 +142,6 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
          * and the portal index has more than 0 documents (the most recent metadata yet indexed to portal index at this point)
          */
         return geoNetworkResourceService.isMetadataRecordsCountLessThan(2) && portalIndexDocumentsCount > 0;
-    }
-
-//    remove later
-    @Override
-    public String debugInterface( ) {
-        return elasticSearchIndexService.getAvailableIndexName(indexName);
     }
 
     @Override
@@ -489,6 +481,55 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
         finally {
             executor.shutdown();
         }
+
+        //After indexing, if there is a same-name index, delete it
+        checkAndDelete(indexName, versionedIndexName);
+
+        // switch alias to point to the new index
+        if (beginWithUuid == null) {
+            elasticSearchIndexService.switchAliasToNewIndex(indexName, versionedIndexName);
+            log.info("Alias: {} switched to point to index: {}", indexName, versionedIndexName);
+        }
+
         return results;
+    }
+
+    /**
+     * This method only for smoothly swapping from non-alias index to alias-based index.
+     * If alias already working properly in all edge, staging and prod, this method is not needed and can be removed later.
+     * @param alias
+     * @param versionedIndexName
+     */
+    public void checkAndDelete(String alias ,String versionedIndexName) {
+        try {
+            // First determine if the provided name is an alias. If it is an alias, do NOT delete.
+            boolean isAlias = false;
+            try {
+                var getAliasResp = portalElasticsearchClient.indices().getAlias(g -> g.name(alias));
+                if (getAliasResp.result() != null && !getAliasResp.result().isEmpty()) {
+                    isAlias = true;
+                    log.info("Provided name '{}' resolves to an alias pointing to concrete indices: {}. Skipping delete.", alias, getAliasResp.result().keySet());
+                }
+            } catch (ElasticsearchException | IOException e) {
+                // If alias lookup fails or returns not found, treat as not an alias and continue to index existence check.
+                log.debug("Alias lookup for '{}' failed or not found: {}", alias, e.getMessage());
+            }
+
+            if (isAlias) {
+                return; // do not attempt to delete when the name is an alias
+            }
+
+            // Fallback: check if a concrete index with the same name exists, and delete it if appropriate
+            var hasSameNameIndex = portalElasticsearchClient.indices()
+                    .exists( e -> e.index(alias))
+                    .value();
+
+            if (hasSameNameIndex && !alias.equals(versionedIndexName)) {
+                elasticSearchIndexService.deleteIndexStore(alias);
+            }
+
+        } catch (ElasticsearchException | IOException e) {
+            log.error("Failed to check/delete same name index: {} | {}", alias, e.getMessage());
+        }
     }
 }
