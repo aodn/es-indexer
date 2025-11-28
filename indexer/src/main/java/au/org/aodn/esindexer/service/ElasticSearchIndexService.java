@@ -134,11 +134,22 @@ public class ElasticSearchIndexService {
         return baseIndexName + "_v" + nextVersion;
     }
 
-
-
-
-
-
+    public void switchAliasToNewIndex(String alias, String newIndexName) {
+        try {
+            log.info("Switching alias: {} to point to new index: {}", alias, newIndexName);
+            portalElasticsearchClient.indices().updateAliases(ua -> ua
+                    .actions(a -> a
+                            .remove(r -> r.alias(alias).index("*"))
+                    )
+                    .actions(a -> a
+                            .add(ad -> ad.alias(alias).index(newIndexName))
+                    )
+            );
+            log.info("Alias: {} now points to index: {}", alias, newIndexName);
+        } catch (ElasticsearchException | IOException e) {
+            throw new IndexNotFoundException("Failed to switch alias: " + alias + " to new index: " + newIndexName + " | " + e.getMessage());
+        }
+    }
 
 
     public long getDocumentsCount(String indexName) {
