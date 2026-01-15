@@ -635,14 +635,14 @@ public abstract class StacCollectionMapperService {
     }
 
     protected String mapThemesTitle(MDKeywordsPropertyType descriptiveKeyword, String uuid) {
-        return safeGet(() -> descriptiveKeyword.getMDKeywords().getThesaurusName().getAbstractCitation())
+        String title = safeGet(() -> descriptiveKeyword.getMDKeywords().getThesaurusName().getAbstractCitation())
                 .map(citation -> {
                     if(citation.getValue() instanceof CICitationType2 thesaurusNameType2) {
                         CharacterStringPropertyType titleString = thesaurusNameType2.getTitle();
                         if (titleString != null
                                 && titleString.getCharacterString() != null
                                 && titleString.getCharacterString().getValue() instanceof AnchorType value) {
-                            return (value.getValue() != null ? value.getValue() : "");
+                            return value.getValue();
                         }
                         else if (titleString != null
                                 && titleString.getCharacterString() != null
@@ -650,24 +650,23 @@ public abstract class StacCollectionMapperService {
                             return value;
                         }
                     }
-                    return "";
+                    return null;
                 })
-                .orElseGet(() -> {
-                    // If no thesaurusName, try to use type as title
-                    // make sure it is really not a thesaurusName
-                    if (safeGet(() -> descriptiveKeyword.getMDKeywords().getThesaurusName()).isEmpty()) {
-                        var type = safeGet(() -> descriptiveKeyword.getMDKeywords().getType().getMDKeywordTypeCode().getCodeListValue());
-                        if (type.isPresent()) {
-                            if (type.get().isEmpty()) {
-                                return "Keywords";
-                            }
-                            return String.format("Keywords (%s)", capitalizeFirstLetter(type.get()));
-                        }
+                .orElse(null);
 
-                    }
-                    logger.debug("Unable to find themes' title for metadata record: {}", uuid);
-                    return "";
-                });
+        // If no thesaurusName, try to use type as title
+        // make sure it is really not a thesaurusName
+        if (title == null || title.trim().isEmpty()) {
+            if (safeGet(() -> descriptiveKeyword.getMDKeywords().getThesaurusName()).isEmpty()) {
+                var type = safeGet(() -> descriptiveKeyword.getMDKeywords().getType().getMDKeywordTypeCode().getCodeListValue());
+                if (type.isPresent() && !type.get().isEmpty()) {
+                    title = String.format("Keywords (%s)", capitalizeFirstLetter(type.get()));
+                }
+            }
+        }
+
+        // Use title if valid, otherwise "Descriptive Keywords"
+        return (title != null && !title.trim().isEmpty()) ? title : "Descriptive Keyword";
     }
 
     protected String mapThemesDescription(MDKeywordsPropertyType descriptiveKeyword, String uuid) {

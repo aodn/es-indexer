@@ -133,7 +133,7 @@
       "id" : "National Environmental Science Program",
       "url" : null,
       "description" : "",
-      "title" : "Keywords"
+      "title" : "Descriptive Keyword"
     } ],
     "scheme" : ""
   }, {
@@ -141,7 +141,7 @@
       "id" : "Marine Biodiversity Hub",
       "url" : null,
       "description" : "",
-      "title" : "Keywords"
+      "title" : "Descriptive Keyword"
     } ],
     "scheme" : ""
   }, {
@@ -149,7 +149,7 @@
       "id" : "Published_External",
       "url" : null,
       "description" : "",
-      "title" : ""
+      "title" : "Descriptive Keyword"
     } ],
     "scheme" : ""
   }, {
