@@ -665,8 +665,13 @@ public abstract class StacCollectionMapperService {
             }
         }
 
-        // Use title if valid, otherwise "Descriptive Keywords"
-        return (title != null && !title.trim().isEmpty()) ? title : "Descriptive Keyword";
+        // Use title if valid, otherwise use default "Descriptive Keyword"
+        if (title == null || title.trim().isEmpty()) {
+            logger.debug("Using default 'Descriptive Keyword' title for metadata record: {}", uuid);
+            return "Descriptive Keyword";
+        }
+
+        return title;
     }
 
     protected String mapThemesDescription(MDKeywordsPropertyType descriptiveKeyword, String uuid) {
