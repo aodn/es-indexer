@@ -370,7 +370,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
     public List<BulkResponse> indexAllMetadataRecordsFromGeoNetwork(
             String beginWithUuid, boolean confirm, final Callback callback) {
 
-        final String versionedIndexName = beginWithUuid != null? indexName : elasticSearchIndexService.getAvailableVersionedIndexName(indexName);
+        final String versionedIndexName = beginWithUuid != null? indexName : elasticSearchIndexService.getVersionedIndexName(indexName);
 
         if (!confirm) {
             throw new IndexAllRequestNotConfirmedException("Please confirm that you want to index all metadata records from GeoNetwork");

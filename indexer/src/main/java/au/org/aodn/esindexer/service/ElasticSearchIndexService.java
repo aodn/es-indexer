@@ -19,6 +19,8 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Set;
 
@@ -128,10 +130,15 @@ public class ElasticSearchIndexService {
         return maxVersion + 1;
     }
 
-    public String getAvailableVersionedIndexName(String baseIndexName) {
-        List<String> existingIndices = this.getAllIndicesWithPrefix(baseIndexName);
-        int nextVersion = this.getAvailableVersionNumber(existingIndices);
-        return baseIndexName + "_v" + nextVersion;
+    /**
+     * Generate a versioned index name by appending the current date and time to the base index name.
+     * @param baseIndexName the base index name
+     * @return the versioned index name in the format: baseIndexName__yyyyMMdd_HHmmssZ
+     */
+    public String getVersionedIndexName(String baseIndexName) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmssZ");
+        String dateTime = ZonedDateTime.now().format(formatter);
+        return baseIndexName + "__" + dateTime;
     }
 
     public void switchAliasToNewIndex(String alias, String newIndexName) {
