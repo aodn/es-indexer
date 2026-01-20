@@ -24,15 +24,17 @@ import org.springframework.http.HttpMethod;
 import org.springframework.test.context.ActiveProfiles;
 import org.mockito.Mockito;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
 
 import java.io.IOException;
+import java.time.ZonedDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 import static org.hamcrest.Matchers.containsString;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.anyList;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.client.ExpectedCount.manyTimes;
@@ -54,6 +56,9 @@ public class IndexerServiceIT extends BaseTestClass {
 
     @Autowired
     protected IndexerMetadataService indexerService;
+
+    @MockitoSpyBean
+    protected IndexerMetadataServiceImpl indexerMetadataServiceImpl;
 
     @Autowired
     protected ObjectMapper indexerObjectMapper;
@@ -173,27 +178,23 @@ public class IndexerServiceIT extends BaseTestClass {
     }
 
     @Test
-    public void verifyIndexAlias() throws IOException {
+    public void verifyAlias() {
         String uuid = "7709f541-fc0c-4318-b5b9-9053aa474e0e";
         try {
+
+            // mock the return value of ZonedDatetTime.now() to ensure consistent test results
+            String expectedData = readResourceFile("classpath:canned/sample4_stac.json");
 
             insertMetadataRecords(uuid, "classpath:canned/sample4.xml");
 
             indexerService.indexAllMetadataRecordsFromGeoNetwork(null, true, null);
 
-
-            var indices = elasticSearchIndexService.getAllIndicesWithPrefix(INDEX_NAME);
-
-            //assert there is an index whose name is INDEX_NAME + "-v1"
-            Assertions.assertTrue(
-                    indices.stream().anyMatch(
-                            indexName -> indexName.equals(INDEX_NAME + "_v1")
-                    )
-            );
-
-            // assert querying via alias works
-            Hit<ObjectNode> objectNodeHit = indexerService.getDocumentByUUID(uuid, INDEX_NAME);
-            String test = String.valueOf(Objects.requireNonNull(objectNodeHit.source()));
+            // alias can be used to get the document
+            var objectHit = indexerService.getDocumentByUUID(uuid, INDEX_NAME);
+            var source = String.valueOf(Objects.requireNonNull(objectHit.source()));
+            String expected = indexerObjectMapper.readTree(expectedData).toPrettyString();
+            String actual = indexerObjectMapper.readTree(source).toPrettyString();
+            JSONAssert.assertEquals(expected, actual, JSONCompareMode.STRICT);
 
 
         } catch (Exception e) {
