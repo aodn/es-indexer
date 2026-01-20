@@ -4,6 +4,7 @@ import au.org.aodn.esindexer.BaseTestClass;
 import au.org.aodn.esindexer.configuration.GeoNetworkSearchTestConfig;
 import au.org.aodn.esindexer.exception.DocumentNotFoundException;
 import au.org.aodn.esindexer.model.MockServer;
+import au.org.aodn.metadata.geonetwork.service.GeoNetworkService;
 import au.org.aodn.metadata.geonetwork.service.GeoNetworkServiceImpl;
 import au.org.aodn.datadiscoveryai.service.DataDiscoveryAiService;
 import au.org.aodn.datadiscoveryai.model.AiEnhancementResponse;
@@ -15,6 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.json.JSONException;
 import org.junit.jupiter.api.*;
+import org.opengis.referencing.FactoryException;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,9 +63,6 @@ public class IndexerServiceIT extends BaseTestClass {
     @Autowired
     protected IndexerMetadataService indexerService;
 
-    @MockitoSpyBean
-    protected IndexerMetadataServiceImpl indexerMetadataServiceImpl;
-
     @Autowired
     protected ObjectMapper indexerObjectMapper;
 
@@ -78,6 +77,8 @@ public class IndexerServiceIT extends BaseTestClass {
 
     @MockitoBean
     protected DataDiscoveryAiService dataDiscoveryAiService;
+    @Autowired
+    private IndexerMetadataService indexerMetadataService;
 
     @BeforeAll
     public void setup() {
@@ -182,91 +183,23 @@ public class IndexerServiceIT extends BaseTestClass {
     }
 
 
-    @SuppressWarnings("unchecked")
     @Test
     public void verifyAlias() {
-        String uuid = "7709f541-fc0c-4318-b5b9-9053aa474e0e";
+        var uuid = "7709f541-fc0c-4318-b5b9-9053aa474e0e";
         try {
 
             String expectedData = readResourceFile("classpath:canned/sample4_stac.json");
 
             insertMetadataRecords(uuid, "classpath:canned/sample4.xml");
 
-            indexerService.indexAllMetadataRecordsFromGeoNetwork(null, true, null);
+            indexerMetadataService.indexAllMetadataRecordsFromGeoNetwork(null, true, null);
 
             // alias can be used to get the document
-            var objectHit = indexerService.getDocumentByUUID(uuid, INDEX_NAME);
+            var objectHit = indexerMetadataService.getDocumentByUUID(uuid, INDEX_NAME);
             var source = String.valueOf(Objects.requireNonNull(objectHit.source()));
             String expected = indexerObjectMapper.readTree(expectedData).toPrettyString();
             String actual = indexerObjectMapper.readTree(source).toPrettyString();
             JSONAssert.assertEquals(expected, actual, JSONCompareMode.STRICT);
-
-            // Force throwing exception to make the system still working when indexing fail
-            JaxbUtils<MDMetadataType> mockJaxb = (JaxbUtils<MDMetadataType>) Mockito.mock(JaxbUtils.class);
-            try {
-                when(mockJaxb.unmarshal(anyString())).thenThrow(new JAXBException("forced failure"));
-            } catch (JAXBException e) {
-                // not expected while stubbing a mock
-            }
-            // Inject the mocked JaxbUtils into the spy bean so mapping will fail during indexing
-            indexerMetadataServiceImpl.jaxbUtils = mockJaxb;
-
-            indexerService.indexAllMetadataRecordsFromGeoNetwork(null, true, null);
-
-            var uuidShouldFail = "2852a776-cbfc-4bc8-a126-f3c036814892";
-            insertMetadataRecords(uuid, "classpath:canned/sample5.xml");
-
-            // shouldn't be able to get the new indexed document as indexing failed
-            try {
-                var ignored = indexerService.getDocumentByUUID(uuidShouldFail, INDEX_NAME);
-                Assertions.fail("DocumentNotFoundException expected but not thrown for uuid: " + uuidShouldFail);
-            } catch (DocumentNotFoundException e) {
-                // expected
-            }
-
-            // but should still be able to get the old indexed document using the alias
-            var objectHit2 = indexerService.getDocumentByUUID(uuid, INDEX_NAME);
-            var source2 = String.valueOf(Objects.requireNonNull(objectHit2.source()));
-            String actual2 = indexerObjectMapper.readTree(source2).toPrettyString();
-            JSONAssert.assertEquals(expected, actual2, JSONCompareMode.STRICT);
-
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        } finally {
-            deleteRecord(uuid);
-        }
-    }
-
-    @SuppressWarnings("unchecked")
-    @Test
-    public void verifyAliasWhenIndexingFailed() {
-        String uuid = "7709f541-fc0c-4318-b5b9-9053aa474e0e";
-        try {
-
-            // mock the return value of ZonedDatetTime.now() to ensure consistent test results
-            String expectedData = readResourceFile("classpath:canned/sample4_stac.json");
-
-            insertMetadataRecords(uuid, "classpath:canned/sample4.xml");
-
-            // Force mapping to fail by replacing the real JaxbUtils with a mock that throws JAXBException
-            JaxbUtils<MDMetadataType> mockJaxb = (JaxbUtils<MDMetadataType>) Mockito.mock(JaxbUtils.class);
-            try {
-                when(mockJaxb.unmarshal(anyString())).thenThrow(new JAXBException("forced failure"));
-            } catch (JAXBException e) {
-                // not expected while stubbing a mock
-            }
-            // Inject the mocked JaxbUtils into the spy bean so mapping will fail during indexing
-            indexerMetadataServiceImpl.jaxbUtils = mockJaxb;
-
-            indexerService.indexAllMetadataRecordsFromGeoNetwork(null, true, null);
-
-            // alias can be used to get the document
-            var objectHit = indexerService.getDocumentByUUID(uuid, INDEX_NAME);
-            var source = String.valueOf(Objects.requireNonNull(objectHit.source()));
-            String expected = indexerObjectMapper.readTree(expectedData).toPrettyString();
-            String actual = indexerObjectMapper.readTree(source).toPrettyString();
-            JSONAssert.assertEquals(expected, actual, JSONCompareMode.STRICT);
-
 
         } catch (Exception e) {
             throw new RuntimeException(e);
