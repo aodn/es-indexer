@@ -93,55 +93,18 @@ public class ElasticSearchIndexService {
             throw new CreateIndexException("Failed to elastic index from schema file: " + indexName + " | " + e.getMessage());
         }
     }
-
-    public List<String> getAllIndicesWithPrefix(String baseIndexName) {
-        try {
-            GetIndexRequest getIndexRequest = GetIndexRequest.of(b -> b.index(baseIndexName + "*"));
-            GetIndexResponse getIndexResponse = portalElasticsearchClient.indices().get(getIndexRequest);
-            Set<String> indexNames = getIndexResponse.result().keySet();
-            return indexNames.stream().toList();
-        } catch (ElasticsearchException | IOException e) {
-            throw new IndexNotFoundException("Failed to get indices with prefix: " + baseIndexName + " | " + e.getMessage());
-        }
-    }
-
-    /**
-     * index name is in this format: baseIndexName_vX where X is the version number
-     * @param existingIndices list of existing index names
-     * @return next available version number
-     */
-    public int getAvailableVersionNumber(List<String> existingIndices) {
-        int maxVersion = 0;
-        for (String indexName : existingIndices) {
-            String[] parts = indexName.split("_v");
-            if (parts.length != 2) {
-                log.warn("Index name: {} does not follow the expected format", indexName);
-                continue;
-            }
-            try {
-                int version = Integer.parseInt(parts[1]);
-                if (version > maxVersion) {
-                    maxVersion = version;
-                }
-            } catch (NumberFormatException e) {
-                log.warn("Index name: {} has invalid version format", indexName);
-            }
-        }
-        return maxVersion + 1;
-    }
-
     /**
      * Generate a versioned index name by appending the current date and time to the base index name.
      * @param baseIndexName the base index name
      * @return the versioned index name in the format: baseIndexName__yyyyMMdd_HHmmssZ
      */
-    public String getVersionedIndexName(String baseIndexName) {
+    protected String getVersionedIndexName(String baseIndexName) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmssZ");
         String dateTime = ZonedDateTime.now().format(formatter);
         return baseIndexName + "__" + dateTime;
     }
 
-    public void switchAliasToNewIndex(String alias, String newIndexName) {
+    protected void switchAliasToNewIndex(String alias, String newIndexName) {
         try {
             log.info("Switching alias: {} to point to new index: {}", alias, newIndexName);
             portalElasticsearchClient.indices().updateAliases(ua -> ua
