@@ -213,22 +213,22 @@ public class IndexerServiceIT extends BaseTestClass {
 
             indexerService.indexAllMetadataRecordsFromGeoNetwork(null, true, null);
 
-            var uuid2 = "2852a776-cbfc-4bc8-a126-f3c036814892";
+            var uuidShouldFail = "2852a776-cbfc-4bc8-a126-f3c036814892";
             insertMetadataRecords(uuid, "classpath:canned/sample5.xml");
 
             // shouldn't be able to get the new indexed document as indexing failed
             try {
-                var ignored = indexerService.getDocumentByUUID(uuid2, INDEX_NAME);
-                Assertions.fail("DocumentNotFoundException expected but not thrown for uuid: " + uuid2);
+                var ignored = indexerService.getDocumentByUUID(uuidShouldFail, INDEX_NAME);
+                Assertions.fail("DocumentNotFoundException expected but not thrown for uuid: " + uuidShouldFail);
             } catch (DocumentNotFoundException e) {
                 // expected
             }
 
             // but should still be able to get the old indexed document using the alias
-            var objectHit3 = indexerService.getDocumentByUUID(uuid, INDEX_NAME);
-            var source3 = String.valueOf(Objects.requireNonNull(objectHit3.source()));
-            String actual3 = indexerObjectMapper.readTree(source3).toPrettyString();
-            JSONAssert.assertEquals(expected, actual3, JSONCompareMode.STRICT);
+            var objectHit2 = indexerService.getDocumentByUUID(uuid, INDEX_NAME);
+            var source2 = String.valueOf(Objects.requireNonNull(objectHit2.source()));
+            String actual2 = indexerObjectMapper.readTree(source2).toPrettyString();
+            JSONAssert.assertEquals(expected, actual2, JSONCompareMode.STRICT);
 
         } catch (Exception e) {
             throw new RuntimeException(e);
