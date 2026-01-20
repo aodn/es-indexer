@@ -2,6 +2,7 @@ package au.org.aodn.esindexer.service;
 
 import au.org.aodn.esindexer.BaseTestClass;
 import au.org.aodn.esindexer.configuration.GeoNetworkSearchTestConfig;
+import au.org.aodn.esindexer.exception.DocumentNotFoundException;
 import au.org.aodn.esindexer.model.MockServer;
 import au.org.aodn.metadata.geonetwork.service.GeoNetworkServiceImpl;
 import au.org.aodn.datadiscoveryai.service.DataDiscoveryAiService;
@@ -41,6 +42,9 @@ import static org.springframework.test.web.client.ExpectedCount.manyTimes;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withResourceNotFound;
+import jakarta.xml.bind.JAXBException;
+import au.org.aodn.esindexer.utils.JaxbUtils;
+import au.org.aodn.metadata.iso19115_3_2018.MDMetadataType;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
@@ -177,8 +181,65 @@ public class IndexerServiceIT extends BaseTestClass {
         }
     }
 
+
+    @SuppressWarnings("unchecked")
     @Test
     public void verifyAlias() {
+        String uuid = "7709f541-fc0c-4318-b5b9-9053aa474e0e";
+        try {
+
+            String expectedData = readResourceFile("classpath:canned/sample4_stac.json");
+
+            insertMetadataRecords(uuid, "classpath:canned/sample4.xml");
+
+            indexerService.indexAllMetadataRecordsFromGeoNetwork(null, true, null);
+
+            // alias can be used to get the document
+            var objectHit = indexerService.getDocumentByUUID(uuid, INDEX_NAME);
+            var source = String.valueOf(Objects.requireNonNull(objectHit.source()));
+            String expected = indexerObjectMapper.readTree(expectedData).toPrettyString();
+            String actual = indexerObjectMapper.readTree(source).toPrettyString();
+            JSONAssert.assertEquals(expected, actual, JSONCompareMode.STRICT);
+
+            // Force throwing exception to make the system still working when indexing fail
+            JaxbUtils<MDMetadataType> mockJaxb = (JaxbUtils<MDMetadataType>) Mockito.mock(JaxbUtils.class);
+            try {
+                when(mockJaxb.unmarshal(anyString())).thenThrow(new JAXBException("forced failure"));
+            } catch (JAXBException e) {
+                // not expected while stubbing a mock
+            }
+            // Inject the mocked JaxbUtils into the spy bean so mapping will fail during indexing
+            indexerMetadataServiceImpl.jaxbUtils = mockJaxb;
+
+            indexerService.indexAllMetadataRecordsFromGeoNetwork(null, true, null);
+
+            var uuid2 = "2852a776-cbfc-4bc8-a126-f3c036814892";
+            insertMetadataRecords(uuid, "classpath:canned/sample5.xml");
+
+            // shouldn't be able to get the new indexed document as indexing failed
+            try {
+                var ignored = indexerService.getDocumentByUUID(uuid2, INDEX_NAME);
+                Assertions.fail("DocumentNotFoundException expected but not thrown for uuid: " + uuid2);
+            } catch (DocumentNotFoundException e) {
+                // expected
+            }
+
+            // but should still be able to get the old indexed document using the alias
+            var objectHit3 = indexerService.getDocumentByUUID(uuid, INDEX_NAME);
+            var source3 = String.valueOf(Objects.requireNonNull(objectHit3.source()));
+            String actual3 = indexerObjectMapper.readTree(source3).toPrettyString();
+            JSONAssert.assertEquals(expected, actual3, JSONCompareMode.STRICT);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            deleteRecord(uuid);
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    @Test
+    public void verifyAliasWhenIndexingFailed() {
         String uuid = "7709f541-fc0c-4318-b5b9-9053aa474e0e";
         try {
 
@@ -186,6 +247,16 @@ public class IndexerServiceIT extends BaseTestClass {
             String expectedData = readResourceFile("classpath:canned/sample4_stac.json");
 
             insertMetadataRecords(uuid, "classpath:canned/sample4.xml");
+
+            // Force mapping to fail by replacing the real JaxbUtils with a mock that throws JAXBException
+            JaxbUtils<MDMetadataType> mockJaxb = (JaxbUtils<MDMetadataType>) Mockito.mock(JaxbUtils.class);
+            try {
+                when(mockJaxb.unmarshal(anyString())).thenThrow(new JAXBException("forced failure"));
+            } catch (JAXBException e) {
+                // not expected while stubbing a mock
+            }
+            // Inject the mocked JaxbUtils into the spy bean so mapping will fail during indexing
+            indexerMetadataServiceImpl.jaxbUtils = mockJaxb;
 
             indexerService.indexAllMetadataRecordsFromGeoNetwork(null, true, null);
 

@@ -403,6 +403,9 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
         // We need to keep sending messages to client to avoid timeout on long processing
         ExecutorService executor = Executors.newFixedThreadPool(2);
 
+        // Track if indexing completed successfully without errors
+        boolean isIndexingSucceeded = true;
+
         try {
             for (String metadataRecord : geoNetworkResourceService.getAllMetadataRecords(beginWithUuid)) {
                 if (metadataRecord != null) {
@@ -452,6 +455,9 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
                         bulkRequestProcessor
                                 .processItem(mappedMetadataValues.getUuid(), mappedMetadataValues, false)
                                 .ifPresent(results::add);
+                    } else {
+                        // A record failed to map, mark indexing as failed
+                        isIndexingSucceeded = false;
                     }
                 }
             }
@@ -467,12 +473,21 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
                         }
                     });
 
+            // Check if any bulk response has errors
+            for (BulkResponse response : results) {
+                if (response.errors()) {
+                    isIndexingSucceeded = false;
+                    log.warn("Bulk indexing had errors, alias switch will be skipped");
+                    break;
+                }
+            }
 
             // TODO now processing for record_suggestions index
             log.info("Finished execute bulk indexing records to index: {}",versionedIndexName);
         }
         catch(Exception e) {
             log.error("Failed", e);
+            isIndexingSucceeded = false;
 
             if (callback != null) {
                 callback.onComplete(
@@ -486,13 +501,22 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
             executor.shutdown();
         }
 
-        //After indexing, if there is a same-name index, delete it
-        checkAndDelete(indexName, versionedIndexName);
+        // Only proceed with alias switch if indexing was fully successful
+        if (isIndexingSucceeded) {
+            //After indexing, if there is a same-name index, delete it
+            // this is not a regular deleting of old index. it is only for smoothly swapping from non-alias index to alias-based index.
+            checkAndDelete(indexName, versionedIndexName);
 
-        // switch alias to point to the new index
-        if (beginWithUuid == null) {
-            elasticSearchIndexService.switchAliasToNewIndex(indexName, versionedIndexName);
-            log.info("Alias: {} switched to point to index: {}", indexName, versionedIndexName);
+            // switch alias to point to the new index
+            if (beginWithUuid == null) {
+                elasticSearchIndexService.switchAliasToNewIndex(indexName, versionedIndexName);
+                log.info("Alias: {} switched to point to index: {}", indexName, versionedIndexName);
+            }
+        } else {
+            log.warn("Indexing had errors, alias switch skipped. New index '{}' was created but alias '{}' still points to the old index.", versionedIndexName, indexName);
+            if (callback != null) {
+                callback.onProgress("WARNING - Alias switch skipped due to indexing errors. Manual intervention may be required.");
+            }
         }
 
         return results;
