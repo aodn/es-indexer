@@ -152,10 +152,6 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
         }
     }
 
-    protected Set<String> extractTokensFromDescription(String description) throws IOException {
-        return extractTokensFromDescription(description, indexName);
-    }
-
     protected Set<String> extractTokensFromDescription(String description, String targetIndexName) throws IOException {
         Set<String> results = new HashSet<>();
 
