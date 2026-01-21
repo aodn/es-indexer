@@ -19,6 +19,9 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Set;
 
 
@@ -90,6 +93,34 @@ public class ElasticSearchIndexService {
             throw new CreateIndexException("Failed to elastic index from schema file: " + indexName + " | " + e.getMessage());
         }
     }
+    /**
+     * Generate a versioned index name by appending the current date and time to the base index name.
+     * @param baseIndexName the base index name
+     * @return the versioned index name in the format: baseIndexName__yyyyMMdd_HHmmssZ
+     */
+    protected String getVersionedIndexName(String baseIndexName) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmssZ");
+        String dateTime = ZonedDateTime.now().format(formatter);
+        return baseIndexName + "__" + dateTime;
+    }
+
+    protected void switchAliasToNewIndex(String alias, String newIndexName) {
+        try {
+            log.info("Switching alias: {} to point to new index: {}", alias, newIndexName);
+            portalElasticsearchClient.indices().updateAliases(ua -> ua
+                    .actions(a -> a
+                            .remove(r -> r.alias(alias).index("*"))
+                    )
+                    .actions(a -> a
+                            .add(ad -> ad.alias(alias).index(newIndexName))
+                    )
+            );
+            log.info("Alias: {} now points to index: {}", alias, newIndexName);
+        } catch (ElasticsearchException | IOException e) {
+            throw new IndexNotFoundException("Failed to switch alias: " + alias + " to new index: " + newIndexName + " | " + e.getMessage());
+        }
+    }
+
 
     public long getDocumentsCount(String indexName) {
         try {

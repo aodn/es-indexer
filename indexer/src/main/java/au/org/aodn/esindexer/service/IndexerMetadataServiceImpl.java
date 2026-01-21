@@ -1,10 +1,7 @@
 package au.org.aodn.esindexer.service;
 
 import au.org.aodn.ardcvocabs.model.VocabModel;
-import au.org.aodn.ardcvocabs.service.ArdcVocabService;
-import au.org.aodn.cloudoptimized.service.DataAccessService;
 import au.org.aodn.datadiscoveryai.service.DataDiscoveryAiService;
-import au.org.aodn.datadiscoveryai.model.AiEnhancementResponse;
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.exception.*;
 import au.org.aodn.esindexer.utils.CommonUtils;
@@ -42,7 +39,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpServerErrorException;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -156,10 +152,10 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
         }
     }
 
-    protected Set<String> extractTokensFromDescription(String description) throws IOException {
+    protected Set<String> extractTokensFromDescription(String description, String targetIndexName) throws IOException {
         Set<String> results = new HashSet<>();
 
-        AnalyzeRequest request = AnalyzeRequest.of(ar -> ar.index(indexName).analyzer(tokensAnalyserName).text(description));
+        AnalyzeRequest request = AnalyzeRequest.of(ar -> ar.index(targetIndexName).analyzer(tokensAnalyserName).text(description));
         AnalyzeResponse response = portalElasticsearchClient.indices().analyze(request);
 
         for (AnalyzeToken token : response.tokens()) {
@@ -174,6 +170,10 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
     }
 
     protected StacCollectionModel getMappedMetadataValues(String metadataValues) throws IOException, FactoryException, TransformException, JAXBException {
+        return getMappedMetadataValues(metadataValues, indexName);
+    }
+
+    protected StacCollectionModel getMappedMetadataValues(String metadataValues, String targetIndexName) throws IOException, FactoryException, TransformException, JAXBException {
         MDMetadataType metadataType = jaxbUtils.unmarshal(metadataValues);
 
         // Step 1: Pure mapping (XML -> STAC)
@@ -241,7 +241,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
 
         // search_as_you_type enabled fields can be extended
         SearchSuggestionsModel searchSuggestionsModel = SearchSuggestionsModel.builder()
-                .abstractPhrases(this.extractTokensFromDescription(stacCollectionModel.getDescription()))
+                .abstractPhrases(this.extractTokensFromDescription(stacCollectionModel.getDescription(), targetIndexName))
                 .parameterVocabs(stacCollectionModel.getSummaries().getParameterVocabs())
                 .platformVocabs(stacCollectionModel.getSummaries().getPlatformVocabs())
                 .organisationVocabs(stacCollectionModel.getSummaries().getOrganisationVocabs())
@@ -366,6 +366,8 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
     public List<BulkResponse> indexAllMetadataRecordsFromGeoNetwork(
             String beginWithUuid, boolean confirm, final Callback callback) {
 
+        final String versionedIndexName = beginWithUuid != null? indexName : elasticSearchIndexService.getVersionedIndexName(indexName);
+
         if (!confirm) {
             throw new IndexAllRequestNotConfirmedException("Please confirm that you want to index all metadata records from GeoNetwork");
         }
@@ -373,7 +375,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
         if(beginWithUuid == null) {
             log.info("Indexing all metadata records from GeoNetwork");
             // recreate index from mapping JSON file
-            elasticSearchIndexService.createIndexFromMappingJSONFile(AppConstants.PORTAL_RECORDS_MAPPING_JSON_FILE, indexName);
+            elasticSearchIndexService.createIndexFromMappingJSONFile(AppConstants.PORTAL_RECORDS_MAPPING_JSON_FILE, versionedIndexName);
         }
         else {
             log.info("Resume indexing records from GeoNetwork at {}", beginWithUuid);
@@ -383,7 +385,8 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
         {
             try {
                 return Optional.of(this.getMappedMetadataValues(
-                        geoNetworkResourceService.searchRecordBy(item.id())
+                        geoNetworkResourceService.searchRecordBy(item.id()),
+                        versionedIndexName
                 ));
             } catch (IOException | FactoryException | TransformException | JAXBException e) {
                 return Optional.empty();
@@ -391,10 +394,13 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
         };
 
         List<BulkResponse> results = new ArrayList<>();
-        BulkRequestProcessor<StacCollectionModel> bulkRequestProcessor = new BulkRequestProcessor<>(indexName, mapper, self, callback);
+        BulkRequestProcessor<StacCollectionModel> bulkRequestProcessor = new BulkRequestProcessor<>(versionedIndexName, mapper, self, callback);
 
         // We need to keep sending messages to client to avoid timeout on long processing
         ExecutorService executor = Executors.newFixedThreadPool(2);
+
+        // Track if indexing completed successfully without errors
+        boolean isIndexingSucceeded = true;
 
         try {
             for (String metadataRecord : geoNetworkResourceService.getAllMetadataRecords(beginWithUuid)) {
@@ -403,7 +409,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
                     final CountDownLatch countDown = new CountDownLatch(1);
                     Callable<StacCollectionModel> task = () ->  {
                         try {
-                            return this.getMappedMetadataValues(metadataRecord);
+                            return this.getMappedMetadataValues(metadataRecord, versionedIndexName);
                         }
                         catch (FactoryException | JAXBException | TransformException | NullPointerException e) {
                             /*
@@ -445,6 +451,9 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
                         bulkRequestProcessor
                                 .processItem(mappedMetadataValues.getUuid(), mappedMetadataValues, false)
                                 .ifPresent(results::add);
+                    } else {
+                        // A record failed to map, mark indexing as failed
+                        isIndexingSucceeded = false;
                     }
                 }
             }
@@ -460,12 +469,21 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
                         }
                     });
 
+            // Check if any bulk response has errors
+            for (BulkResponse response : results) {
+                if (response.errors()) {
+                    isIndexingSucceeded = false;
+                    log.warn("Bulk indexing had errors, alias switch will be skipped");
+                    break;
+                }
+            }
 
             // TODO now processing for record_suggestions index
-            log.info("Finished execute bulk indexing records to index: {}",indexName);
+            log.info("Finished execute bulk indexing records to index: {}",versionedIndexName);
         }
         catch(Exception e) {
             log.error("Failed", e);
+            isIndexingSucceeded = false;
 
             if (callback != null) {
                 callback.onComplete(
@@ -478,6 +496,64 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
         finally {
             executor.shutdown();
         }
+
+        // Only proceed with alias switch if indexing was fully successful
+        if (isIndexingSucceeded) {
+            //After indexing, if there is a same-name index, delete it
+            // this is not a regular deleting of old index. it is only for smoothly swapping from non-alias index to alias-based index.
+            checkAndDelete(indexName, versionedIndexName);
+
+            // switch alias to point to the new index
+            if (beginWithUuid == null) {
+                elasticSearchIndexService.switchAliasToNewIndex(indexName, versionedIndexName);
+                log.info("Alias: {} switched to point to index: {}", indexName, versionedIndexName);
+            }
+        } else {
+            log.warn("Indexing had errors, alias switch skipped. New index '{}' was created but alias '{}' still points to the old index.", versionedIndexName, indexName);
+            if (callback != null) {
+                callback.onProgress("WARNING - Alias switch skipped due to indexing errors. Manual intervention may be required.");
+            }
+        }
+
         return results;
+    }
+
+    /**
+     * This method only for smoothly swapping from non-alias index to alias-based index.
+     * If alias already working properly in all edge, staging and prod, this method is not needed and can be removed later.
+     * @param alias
+     * @param versionedIndexName
+     */
+    public void checkAndDelete(String alias ,String versionedIndexName) {
+        try {
+            // First determine if the provided name is an alias. If it is an alias, do NOT delete.
+            boolean isAlias = false;
+            try {
+                var getAliasResp = portalElasticsearchClient.indices().getAlias(g -> g.name(alias));
+                if (getAliasResp.result() != null && !getAliasResp.result().isEmpty()) {
+                    isAlias = true;
+                    log.info("Provided name '{}' resolves to an alias pointing to concrete indices: {}. Skipping delete.", alias, getAliasResp.result().keySet());
+                }
+            } catch (ElasticsearchException | IOException e) {
+                // If alias lookup fails or returns not found, treat as not an alias and continue to index existence check.
+                log.debug("Alias lookup for '{}' failed or not found: {}", alias, e.getMessage());
+            }
+
+            if (isAlias) {
+                return; // do not attempt to delete when the name is an alias
+            }
+
+            // Fallback: check if a concrete index with the same name exists, and delete it if appropriate
+            var hasSameNameIndex = portalElasticsearchClient.indices()
+                    .exists( e -> e.index(alias))
+                    .value();
+
+            if (hasSameNameIndex && !alias.equals(versionedIndexName)) {
+                elasticSearchIndexService.deleteIndexStore(alias);
+            }
+
+        } catch (ElasticsearchException | IOException e) {
+            log.error("Failed to check/delete same name index: {} | {}", alias, e.getMessage());
+        }
     }
 }

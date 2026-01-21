@@ -139,7 +139,7 @@ public class StacCollectionMapperServiceTest {
                 .thenReturn(0L);
 
         // Mock the protected method to return an empty string list
-        doReturn(Collections.emptySet()).when(indexerService).extractTokensFromDescription(anyString());
+        doReturn(Collections.emptySet()).when(indexerService).extractTokensFromDescription(anyString(), anyString());
 
         doNothing()
                 .when(elasticSearchIndexService)

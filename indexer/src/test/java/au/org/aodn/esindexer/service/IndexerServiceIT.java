@@ -2,7 +2,9 @@ package au.org.aodn.esindexer.service;
 
 import au.org.aodn.esindexer.BaseTestClass;
 import au.org.aodn.esindexer.configuration.GeoNetworkSearchTestConfig;
+import au.org.aodn.esindexer.exception.DocumentNotFoundException;
 import au.org.aodn.esindexer.model.MockServer;
+import au.org.aodn.metadata.geonetwork.service.GeoNetworkService;
 import au.org.aodn.metadata.geonetwork.service.GeoNetworkServiceImpl;
 import au.org.aodn.datadiscoveryai.service.DataDiscoveryAiService;
 import au.org.aodn.datadiscoveryai.model.AiEnhancementResponse;
@@ -14,6 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.json.JSONException;
 import org.junit.jupiter.api.*;
+import org.opengis.referencing.FactoryException;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,21 +27,26 @@ import org.springframework.http.HttpMethod;
 import org.springframework.test.context.ActiveProfiles;
 import org.mockito.Mockito;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
 
 import java.io.IOException;
+import java.time.ZonedDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 import static org.hamcrest.Matchers.containsString;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.anyList;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.client.ExpectedCount.manyTimes;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withResourceNotFound;
+import jakarta.xml.bind.JAXBException;
+import au.org.aodn.esindexer.utils.JaxbUtils;
+import au.org.aodn.metadata.iso19115_3_2018.MDMetadataType;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
@@ -69,6 +77,8 @@ public class IndexerServiceIT extends BaseTestClass {
 
     @MockitoBean
     protected DataDiscoveryAiService dataDiscoveryAiService;
+    @Autowired
+    private IndexerMetadataService indexerMetadataService;
 
     @BeforeAll
     public void setup() {
@@ -166,6 +176,32 @@ public class IndexerServiceIT extends BaseTestClass {
             logger.info(actual);
             JSONAssert.assertEquals(expected, actual, JSONCompareMode.STRICT);
         } catch (JSONException e) {
+            throw new RuntimeException(e);
+        } finally {
+            deleteRecord(uuid);
+        }
+    }
+
+
+    @Test
+    public void verifyAlias() {
+        var uuid = "7709f541-fc0c-4318-b5b9-9053aa474e0e";
+        try {
+
+            String expectedData = readResourceFile("classpath:canned/sample4_stac.json");
+
+            insertMetadataRecords(uuid, "classpath:canned/sample4.xml");
+
+            indexerMetadataService.indexAllMetadataRecordsFromGeoNetwork(null, true, null);
+
+            // alias can be used to get the document
+            var objectHit = indexerMetadataService.getDocumentByUUID(uuid, INDEX_NAME);
+            var source = String.valueOf(Objects.requireNonNull(objectHit.source()));
+            String expected = indexerObjectMapper.readTree(expectedData).toPrettyString();
+            String actual = indexerObjectMapper.readTree(source).toPrettyString();
+            JSONAssert.assertEquals(expected, actual, JSONCompareMode.STRICT);
+
+        } catch (Exception e) {
             throw new RuntimeException(e);
         } finally {
             deleteRecord(uuid);
