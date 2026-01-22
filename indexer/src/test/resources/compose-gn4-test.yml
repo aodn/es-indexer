@@ -51,7 +51,7 @@ services:
       retries: 120
 
   geonetwork:
-    image: geonetwork:4.4.5
+    image: geonetwork:4.4.8
     # https://github.com/docker/compose/issues/8154
     depends_on:
       kibana:
