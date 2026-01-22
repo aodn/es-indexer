@@ -149,10 +149,10 @@ public abstract class IndexServiceImpl implements IndexService {
                 BulkResponse.of(f -> f.items(new ArrayList<>()).errors(false).took(in.took())) :
                 BulkResponse.of(f -> f.items(errors).errors(true).took(in.took()));
     }
-
+    // Need to tune to avoid excess env memory
     @Override
     public long getBatchSize() {
-        return 5242880;
+        return 4194304;
     }
     /**
      * Keep retry until success, it is ok to insert docs to elastic again because we use _id as identifier.

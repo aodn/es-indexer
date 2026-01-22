@@ -16,7 +16,7 @@ app:
 
 elasticsearch:
   docker:
-    elasticVersion: "8.11.3"
+    elasticVersion: "8.13.3"
   index:
     name: sample-portal-records
   vocabs_index:
