@@ -366,7 +366,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
     public List<BulkResponse> indexAllMetadataRecordsFromGeoNetwork(
             String beginWithUuid, boolean confirm, final Callback callback) {
 
-        final String versionedIndexName = beginWithUuid != null? indexName : elasticSearchIndexService.getVersionedIndexName(indexName);
+        final String workingIndexName = indexName + elasticSearchIndexService.getWorkingIndexSuffix(indexName);
 
         if (!confirm) {
             throw new IndexAllRequestNotConfirmedException("Please confirm that you want to index all metadata records from GeoNetwork");
@@ -375,7 +375,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
         if(beginWithUuid == null) {
             log.info("Indexing all metadata records from GeoNetwork");
             // recreate index from mapping JSON file
-            elasticSearchIndexService.createIndexFromMappingJSONFile(AppConstants.PORTAL_RECORDS_MAPPING_JSON_FILE, versionedIndexName);
+            elasticSearchIndexService.createIndexFromMappingJSONFile(AppConstants.PORTAL_RECORDS_MAPPING_JSON_FILE, workingIndexName);
         }
         else {
             log.info("Resume indexing records from GeoNetwork at {}", beginWithUuid);
@@ -386,7 +386,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
             try {
                 return Optional.of(this.getMappedMetadataValues(
                         geoNetworkResourceService.searchRecordBy(item.id()),
-                        versionedIndexName
+                        workingIndexName
                 ));
             } catch (IOException | FactoryException | TransformException | JAXBException e) {
                 return Optional.empty();
@@ -394,7 +394,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
         };
 
         List<BulkResponse> results = new ArrayList<>();
-        BulkRequestProcessor<StacCollectionModel> bulkRequestProcessor = new BulkRequestProcessor<>(versionedIndexName, mapper, self, callback);
+        BulkRequestProcessor<StacCollectionModel> bulkRequestProcessor = new BulkRequestProcessor<>(workingIndexName, mapper, self, callback);
 
         // We need to keep sending messages to client to avoid timeout on long processing
         ExecutorService executor = Executors.newFixedThreadPool(2);
@@ -409,7 +409,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
                     final CountDownLatch countDown = new CountDownLatch(1);
                     Callable<StacCollectionModel> task = () ->  {
                         try {
-                            return this.getMappedMetadataValues(metadataRecord, versionedIndexName);
+                            return this.getMappedMetadataValues(metadataRecord, workingIndexName);
                         }
                         catch (FactoryException | JAXBException | TransformException | NullPointerException e) {
                             /*
@@ -479,7 +479,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
             }
 
             // TODO now processing for record_suggestions index
-            log.info("Finished execute bulk indexing records to index: {}",versionedIndexName);
+            log.info("Finished execute bulk indexing records to index: {}",workingIndexName);
         }
         catch(Exception e) {
             log.error("Failed", e);
@@ -497,19 +497,42 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
             executor.shutdown();
         }
 
+        try {
+
+            var metadataCount = geoNetworkResourceService.getAllMetadataCounts();
+            // get document count from portal index
+            var indexedCountResponse = portalElasticsearchClient.count(c -> c.index(workingIndexName));
+            var indexedCount = indexedCountResponse.count();
+            log.info("Total metadata records in GeoNetwork: {}, total indexed documents in portal index {}: {}",
+                    metadataCount,
+                    workingIndexName,
+                    indexedCount);
+
+            if (indexedCount != metadataCount) {
+                log.warn(" Indexed document count ({}) does not match metadata count ({}) from GeoNetwork", indexedCount, metadataCount);
+            }
+            // if indexedCount is more than 90% of metadataCount, it is acceptable
+            if (indexedCount > metadataCount * 0.9) {
+                //After indexing, if there is a same-name index, delete it
+                // this is not a regular deleting of old index. it is only for smoothly swapping from non-alias index to alias-based index.
+                checkAndDelete(indexName, workingIndexName);
+
+                // switch alias to point to the new index
+                elasticSearchIndexService.switchAliasToNewIndex(indexName, workingIndexName);
+                log.info("Alias: {} switched to point to index: {}", indexName, workingIndexName);
+            } else {
+                throw new RuntimeException("Indexed document count is less than 90% of metadata count from GeoNetwork, alias switch aborted.");
+            }
+
+        } catch (IOException e) {
+            log.error("Failed to get total metadata count from GeoNetwork: {}", e.getMessage());
+        }
+
         // Only proceed with alias switch if indexing was fully successful
         if (isIndexingSucceeded) {
-            //After indexing, if there is a same-name index, delete it
-            // this is not a regular deleting of old index. it is only for smoothly swapping from non-alias index to alias-based index.
-            checkAndDelete(indexName, versionedIndexName);
 
-            // switch alias to point to the new index
-            if (beginWithUuid == null) {
-                elasticSearchIndexService.switchAliasToNewIndex(indexName, versionedIndexName);
-                log.info("Alias: {} switched to point to index: {}", indexName, versionedIndexName);
-            }
         } else {
-            log.warn("Indexing had errors, alias switch skipped. New index '{}' was created but alias '{}' still points to the old index.", versionedIndexName, indexName);
+            log.warn("Indexing had errors, alias switch skipped. New index '{}' was created but alias '{}' still points to the old index.", workingIndexName, indexName);
             if (callback != null) {
                 callback.onProgress("WARNING - Alias switch skipped due to indexing errors. Manual intervention may be required.");
             }
