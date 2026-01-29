@@ -5,13 +5,14 @@ import au.org.aodn.esindexer.exception.DeleteIndexException;
 import au.org.aodn.esindexer.exception.IndexNotFoundException;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.ElasticsearchException;
+import co.elastic.clients.elasticsearch.cat.IndicesResponse;
+import co.elastic.clients.elasticsearch.cat.indices.IndicesRecord;
 import co.elastic.clients.elasticsearch.core.CountRequest;
 import co.elastic.clients.elasticsearch.core.CountResponse;
 import co.elastic.clients.elasticsearch.core.SearchRequest;
 import co.elastic.clients.elasticsearch.indices.CreateIndexRequest;
 import co.elastic.clients.elasticsearch.indices.CreateIndexResponse;
-import co.elastic.clients.elasticsearch.indices.GetIndexRequest;
-import co.elastic.clients.elasticsearch.indices.GetIndexResponse;
+import co.elastic.clients.elasticsearch.indices.GetAliasResponse;
 import co.elastic.clients.transport.endpoints.BooleanResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +20,8 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Set;
+import java.util.stream.Collectors;
 
 
 @Slf4j
@@ -31,6 +30,11 @@ public class ElasticSearchIndexService {
 
     @Autowired
     ElasticsearchClient portalElasticsearchClient;
+
+
+    // Naming below follows the blue-green deployment pattern which is the pattern we are using for index updates and are recommended naming convention.
+    private static final String indexSuffix1 = "-blue";
+    private static final String indexSuffix2 = "-green";
 
     protected void deleteIndexStore(String indexName) {
         try {
@@ -96,12 +100,41 @@ public class ElasticSearchIndexService {
     /**
      * Generate a versioned index name by appending the current date and time to the base index name.
      * @param baseIndexName the base index name
-     * @return the versioned index name in the format: baseIndexName__yyyyMMdd_HHmmssZ
+     *
      */
-    protected String getVersionedIndexName(String baseIndexName) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmssZ");
-        String dateTime = ZonedDateTime.now().format(formatter);
-        return baseIndexName + "__" + dateTime;
+    protected String getWorkingIndexSuffix(String baseIndexName) {
+
+        // get all indices (nothing to do with aliases)
+        var indices = getAllIndexNames();
+        if (!indices.contains(baseIndexName + indexSuffix1)) {
+            return indexSuffix1;
+        } else if (!indices.contains(baseIndexName + indexSuffix2)) {
+            return indexSuffix2;
+        } else {
+            // both indices exist, find out which one is not currently pointed to by the alias
+            log.warn("Both blue and green indices exist for base index name: {}. Determining the inactive index.", baseIndexName);
+            try {
+                GetAliasResponse aliasResponse = portalElasticsearchClient.indices().getAlias(ga -> ga.name(baseIndexName));
+                var aliasedIndices = aliasResponse.result().keySet();
+
+                if (aliasedIndices.contains(baseIndexName + indexSuffix1)) {
+                    return indexSuffix1;
+                } else {
+                    return indexSuffix2;
+                }
+            } catch (ElasticsearchException | IOException e) {
+                throw new IndexNotFoundException("Failed to get alias information for index: " + baseIndexName + " | " + e.getMessage());
+            }
+        }
+    }
+
+    private List<String> getAllIndexNames() {
+        try {
+            IndicesResponse response = portalElasticsearchClient.cat().indices(i -> i);
+            return response.valueBody().stream().map(IndicesRecord::index).distinct().collect(Collectors.toList());
+        } catch ( ElasticsearchException | IOException e) {
+            throw new IndexNotFoundException("Failed to get indices from Elasticsearch | " + e.getMessage());
+        }
     }
 
     protected void switchAliasToNewIndex(String alias, String newIndexName) {
