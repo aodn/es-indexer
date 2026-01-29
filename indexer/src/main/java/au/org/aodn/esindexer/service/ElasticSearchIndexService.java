@@ -97,6 +97,17 @@ public class ElasticSearchIndexService {
             throw new CreateIndexException("Failed to elastic index from schema file: " + indexName + " | " + e.getMessage());
         }
     }
+
+    protected String getIndexSuffixOtherThan(String suffix) {
+        if (suffix.equals(indexSuffix1)) {
+            return indexSuffix2;
+        }
+        if (suffix.equals(indexSuffix2)) {
+            return indexSuffix1;
+        }
+        throw new IllegalArgumentException("Invalid index suffix: " + suffix);
+    }
+
     /**
      * Generate a versioned index name by appending the current date and time to the base index name.
      * @param baseIndexName the base index name
