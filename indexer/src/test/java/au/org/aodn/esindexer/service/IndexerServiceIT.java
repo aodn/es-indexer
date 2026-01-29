@@ -2,9 +2,7 @@ package au.org.aodn.esindexer.service;
 
 import au.org.aodn.esindexer.BaseTestClass;
 import au.org.aodn.esindexer.configuration.GeoNetworkSearchTestConfig;
-import au.org.aodn.esindexer.exception.DocumentNotFoundException;
 import au.org.aodn.esindexer.model.MockServer;
-import au.org.aodn.metadata.geonetwork.service.GeoNetworkService;
 import au.org.aodn.metadata.geonetwork.service.GeoNetworkServiceImpl;
 import au.org.aodn.datadiscoveryai.service.DataDiscoveryAiService;
 import au.org.aodn.datadiscoveryai.model.AiEnhancementResponse;
@@ -16,7 +14,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.json.JSONException;
 import org.junit.jupiter.api.*;
-import org.opengis.referencing.FactoryException;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,10 +24,8 @@ import org.springframework.http.HttpMethod;
 import org.springframework.test.context.ActiveProfiles;
 import org.mockito.Mockito;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
-import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
 
 import java.io.IOException;
-import java.time.ZonedDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -44,9 +39,6 @@ import static org.springframework.test.web.client.ExpectedCount.manyTimes;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withResourceNotFound;
-import jakarta.xml.bind.JAXBException;
-import au.org.aodn.esindexer.utils.JaxbUtils;
-import au.org.aodn.metadata.iso19115_3_2018.MDMetadataType;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
@@ -135,6 +127,13 @@ public class IndexerServiceIT extends BaseTestClass {
         finally {
             deleteRecord(uuid2,uuid1);
         }
+    }
+
+    @Test
+    public void verifyGetWorkingIndexName() {
+        String suffix = elasticSearchIndexService.getWorkingIndexSuffix(INDEX_NAME);
+        Assertions.assertEquals( "-blue", suffix, "Working index name correct");
+        Assertions.assertEquals(  "-blue1", suffix, "Working index name correct");
     }
 
     @Test
