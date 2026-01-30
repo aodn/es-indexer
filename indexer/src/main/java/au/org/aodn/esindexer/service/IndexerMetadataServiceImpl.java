@@ -366,7 +366,8 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
     public List<BulkResponse> indexAllMetadataRecordsFromGeoNetwork(
             String beginWithUuid, boolean confirm, final Callback callback) {
 
-        final String workingIndexName = indexName + elasticSearchIndexService.getWorkingIndexSuffix(indexName);
+        final String workingIndexSuffix = elasticSearchIndexService.getWorkingIndexSuffix(indexName);
+        final String workingIndexName = indexName + workingIndexSuffix;
 
         if (!confirm) {
             throw new IndexAllRequestNotConfirmedException("Please confirm that you want to index all metadata records from GeoNetwork");
@@ -398,9 +399,6 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
 
         // We need to keep sending messages to client to avoid timeout on long processing
         ExecutorService executor = Executors.newFixedThreadPool(2);
-
-        // Track if indexing completed successfully without errors
-        boolean isIndexingSucceeded = true;
 
         try {
             for (String metadataRecord : geoNetworkResourceService.getAllMetadataRecords(beginWithUuid)) {
@@ -451,9 +449,6 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
                         bulkRequestProcessor
                                 .processItem(mappedMetadataValues.getUuid(), mappedMetadataValues, false)
                                 .ifPresent(results::add);
-                    } else {
-                        // A record failed to map, mark indexing as failed
-                        isIndexingSucceeded = false;
                     }
                 }
             }
@@ -469,21 +464,12 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
                         }
                     });
 
-            // Check if any bulk response has errors
-            for (BulkResponse response : results) {
-                if (response.errors()) {
-                    isIndexingSucceeded = false;
-                    log.warn("Bulk indexing had errors, alias switch will be skipped");
-                    break;
-                }
-            }
 
             // TODO now processing for record_suggestions index
             log.info("Finished execute bulk indexing records to index: {}",workingIndexName);
         }
         catch(Exception e) {
             log.error("Failed", e);
-            isIndexingSucceeded = false;
 
             if (callback != null) {
                 callback.onComplete(
@@ -520,22 +506,15 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
                 // switch alias to point to the new index
                 elasticSearchIndexService.switchAliasToNewIndex(indexName, workingIndexName);
                 log.info("Alias: {} switched to point to index: {}", indexName, workingIndexName);
+                var indexToDelete = indexName + elasticSearchIndexService.getIndexSuffixOtherThan(workingIndexSuffix);
+                elasticSearchIndexService.deleteIndexStore(indexToDelete);
+                log.info("Old index: {} deleted after alias switch", indexToDelete);
             } else {
                 throw new RuntimeException("Indexed document count is less than 90% of metadata count from GeoNetwork, alias switch aborted.");
             }
 
         } catch (IOException e) {
             log.error("Failed to get total metadata count from GeoNetwork: {}", e.getMessage());
-        }
-
-        // Only proceed with alias switch if indexing was fully successful
-        if (isIndexingSucceeded) {
-
-        } else {
-            log.warn("Indexing had errors, alias switch skipped. New index '{}' was created but alias '{}' still points to the old index.", workingIndexName, indexName);
-            if (callback != null) {
-                callback.onProgress("WARNING - Alias switch skipped due to indexing errors. Manual intervention may be required.");
-            }
         }
 
         return results;
@@ -545,9 +524,9 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
      * This method only for smoothly swapping from non-alias index to alias-based index.
      * If alias already working properly in all edge, staging and prod, this method is not needed and can be removed later.
      * @param alias
-     * @param versionedIndexName
+     * @param workingIndexName
      */
-    public void checkAndDelete(String alias ,String versionedIndexName) {
+    public void checkAndDelete(String alias ,String workingIndexName) {
         try {
             // First determine if the provided name is an alias. If it is an alias, do NOT delete.
             boolean isAlias = false;
@@ -571,7 +550,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
                     .exists( e -> e.index(alias))
                     .value();
 
-            if (hasSameNameIndex && !alias.equals(versionedIndexName)) {
+            if (hasSameNameIndex && !alias.equals(workingIndexName)) {
                 elasticSearchIndexService.deleteIndexStore(alias);
             }
 
