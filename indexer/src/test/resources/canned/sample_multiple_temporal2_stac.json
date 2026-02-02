@@ -84,10 +84,16 @@
         "coordinates" : [ 147.9, -18.8 ]
       }, {
         "type" : "Point",
+        "coordinates" : [ 147.0588, -19.2774 ]
+      }, {
+        "type" : "Point",
         "coordinates" : [ 147.4, -19.3 ]
       }, {
         "type" : "Point",
         "coordinates" : [ 145.8225, -15.9617 ]
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.23, -18.2453 ]
       }, {
         "type" : "Point",
         "coordinates" : [ 149.1808, -19.74 ]
@@ -100,6 +106,9 @@
       }, {
         "type" : "Point",
         "coordinates" : [ 146.8812, -19.1558 ]
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 145.3989, -16.2481 ]
       }, {
         "type" : "Point",
         "coordinates" : [ 150.9385, -23.1538 ]
