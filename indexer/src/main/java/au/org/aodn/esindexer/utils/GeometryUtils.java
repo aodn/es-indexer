@@ -256,7 +256,9 @@ public class GeometryUtils {
                             // Try fixing it with buffer(0), which often fixes small topological errors
                             // it fixed the non-noded intersection issue
                             .map(geometry -> geometry.isValid() ? geometry : geometry.buffer(0))
-                            .map(geometry -> geometry.difference(landGeometry))
+                            // Special case where some spatial area do appear on land only, so if you make a diff and result is empty,
+                            // that means it is pure land area, in this case we should include it.
+                            .map(geometry -> geometry.difference(landGeometry).isEmpty() ? geometry : geometry.difference(landGeometry))
                             .map(geometry -> reducer != null ? reducer.reduce(geometry) : geometry)
                             .map(GeometryUtils::convertToListGeometry)
                             .flatMap(Collection::stream)

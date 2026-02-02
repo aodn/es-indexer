@@ -47,9 +47,8 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
     /**
      * Check the url and return the canned file content
      * @param template - Mock template
-     * @throws IOException - Not expected
      */
-    public static void setupParameterVocabMockRestTemplate(RestTemplate template) throws IOException {
+    public static void setupParameterVocabMockRestTemplate(RestTemplate template) {
 
         final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -112,7 +111,7 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
         );
     }
 
-    public static void setupPlatformMockRestTemplate(RestTemplate template) throws IOException {
+    public static void setupPlatformMockRestTemplate(RestTemplate template) {
         final ObjectMapper objectMapper = new ObjectMapper();
 
         Mockito.doAnswer(f -> {
@@ -168,7 +167,7 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
         );
     }
 
-    public static void setupOrganizationMockRestTemplate(RestTemplate template) throws IOException {
+    public static void setupOrganizationMockRestTemplate(RestTemplate template) {
         final ObjectMapper objectMapper = new ObjectMapper();
 
         Mockito.doAnswer(f -> {
@@ -448,7 +447,7 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
     }
 
     @Test
-    public void verifyIsVersionEquals() throws IOException {
+    public void verifyIsVersionEquals() {
         setupOrganizationMockRestTemplate(mockRestTemplate);
         setupPlatformMockRestTemplate(mockRestTemplate);
         setupParameterVocabMockRestTemplate(mockRestTemplate);
