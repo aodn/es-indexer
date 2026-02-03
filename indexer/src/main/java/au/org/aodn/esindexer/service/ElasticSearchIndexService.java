@@ -155,7 +155,13 @@ public class ElasticSearchIndexService {
                 throw new IndexNotFoundException("Incomplete index: " + incompleteIndex + " does not end with expected suffixes: " + indexSuffix1 + " or " + indexSuffix2);
             }
             return incompleteIndex;
-        } catch (ElasticsearchException | IOException e) {
+        } catch (ElasticsearchException e) {
+            if (e.status() == 404) {
+                // no index found for the given alias. It means no incomplete index
+                return null;
+            }
+            throw new RuntimeException("Failed to get indexing index name for alias: " + incompleteAliasName + " | " + e.getMessage());
+        } catch ( IOException e) {
             throw new RuntimeException("Failed to get indexing index name for alias: " + incompleteAliasName + " | " + e.getMessage());
         }
     }
