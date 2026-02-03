@@ -374,7 +374,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
         var incompleteIndexName = elasticSearchIndexService.getIncompleteIndexName(runningAliasName);
 
         var runingIndexName = incompleteIndexName == null ?
-                indexName + "-" + indexingIndexSuffix :
+                indexName + indexingIndexSuffix :
                 incompleteIndexName;
 
         if (!confirm) {
