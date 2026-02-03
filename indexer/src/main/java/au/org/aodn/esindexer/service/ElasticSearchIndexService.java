@@ -3,6 +3,7 @@ package au.org.aodn.esindexer.service;
 import au.org.aodn.esindexer.exception.CreateIndexException;
 import au.org.aodn.esindexer.exception.DeleteIndexException;
 import au.org.aodn.esindexer.exception.IndexNotFoundException;
+import au.org.aodn.esindexer.exception.MultipleIndicesException;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.ElasticsearchException;
 import co.elastic.clients.elasticsearch.cat.IndicesResponse;
@@ -127,17 +128,43 @@ public class ElasticSearchIndexService {
             try {
                 GetAliasResponse aliasResponse = portalElasticsearchClient.indices().getAlias(ga -> ga.name(baseIndexName));
                 var aliasedIndices = aliasResponse.result().keySet();
+                // if more than one index is pointed to by the alias, it's an error
+                if (aliasedIndices.size() > 1) {
+                    throw new MultipleIndicesException("Multiple indices found for alias: " + baseIndexName + ". Expected only one.");
+                }
 
                 if (aliasedIndices.contains(baseIndexName + indexSuffix1)) {
-                    return indexSuffix1;
-                } else {
                     return indexSuffix2;
+                } else {
+                    return indexSuffix1;
                 }
             } catch (ElasticsearchException | IOException e) {
                 throw new IndexNotFoundException("Failed to get alias information for index: " + baseIndexName + " | " + e.getMessage());
             }
         }
     }
+
+    protected String getIndexingIndexName(String indexingAliasName) {
+        // get all indices who have the given alias
+        try {
+            GetAliasResponse aliasResponse = portalElasticsearchClient.indices().getAlias(ga -> ga.name(indexingAliasName));
+            var aliasedIndices = aliasResponse.result().keySet();
+            if (aliasedIndices.isEmpty()) {
+                // no index found for the given alias. It means no incomplete index
+                return null;
+            }
+            // if more than one index is pointed to by the alias, it's an error
+            if (aliasedIndices.size() > 1) {
+                throw new MultipleIndicesException("Multiple indices found for alias: " + indexingAliasName + ". Expected only one.");
+            }
+
+            return aliasedIndices.iterator().next();
+        } catch (ElasticsearchException | IOException e) {
+            throw new RuntimeException("Failed to get indexing index name for alias: " + indexingAliasName + " | " + e.getMessage());
+        }
+    }
+
+
 
     private List<String> getAllIndexNames() {
         try {
@@ -148,7 +175,7 @@ public class ElasticSearchIndexService {
         }
     }
 
-    protected void switchAliasToNewIndex(String alias, String newIndexName) {
+    protected void updateAliasToNewIndex(String alias, String newIndexName) {
         try {
             log.info("Switching alias: {} to point to new index: {}", alias, newIndexName);
             portalElasticsearchClient.indices().updateAliases(ua -> ua
@@ -161,7 +188,21 @@ public class ElasticSearchIndexService {
             );
             log.info("Alias: {} now points to index: {}", alias, newIndexName);
         } catch (ElasticsearchException | IOException e) {
-            throw new IndexNotFoundException("Failed to switch alias: " + alias + " to new index: " + newIndexName + " | " + e.getMessage());
+            throw new RuntimeException("Failed to switch alias: " + alias + " to new index: " + newIndexName + " | " + e.getMessage());
+        }
+    }
+
+    protected void removeAliasFromIndex(String alias, String indexName) {
+        try {
+            log.info("Removing alias: {} from index: {}", alias, indexName);
+            portalElasticsearchClient.indices().updateAliases(ua -> ua
+                    .actions(a -> a
+                            .remove(r -> r.alias(alias).index(indexName))
+                    )
+            );
+            log.info("Alias: {} removed from index: {}", alias, indexName);
+        } catch (ElasticsearchException | IOException e) {
+            throw new RuntimeException("Failed to remove alias: " + alias + " from index: " + indexName + " | " + e.getMessage());
         }
     }
 
