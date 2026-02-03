@@ -56,6 +56,7 @@ import au.org.aodn.stac.model.LinkModel;
 public class IndexerMetadataServiceImpl extends IndexServiceImpl implements IndexerMetadataService {
 
     protected String indexName;
+    protected final static String indexingAliasSuffix = "-running";
     protected String tokensAnalyserName;
     protected GeoNetworkService geoNetworkResourceService;
     protected ElasticsearchClient portalElasticsearchClient;
@@ -366,8 +367,9 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
     public List<BulkResponse> indexAllMetadataRecordsFromGeoNetwork(
             String beginWithUuid, boolean confirm, final Callback callback) {
 
-        final String workingIndexSuffix = elasticSearchIndexService.getWorkingIndexSuffix(indexName);
-        final String workingIndexName = indexName + workingIndexSuffix;
+        final String indexingIndexSuffix = elasticSearchIndexService.getWorkingIndexSuffix(indexName);
+        final String indexingIndexName = indexName + indexingIndexSuffix;
+        final String indexingAliasName = indexName + indexingAliasSuffix;
 
         if (!confirm) {
             throw new IndexAllRequestNotConfirmedException("Please confirm that you want to index all metadata records from GeoNetwork");
@@ -375,8 +377,20 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
 
         if(beginWithUuid == null) {
             log.info("Indexing all metadata records from GeoNetwork");
+
+            // check if there is an incomplete indexing index. If yes, delete it first.
+            // For most cases, the createIndexFromMappingJSONFile() invoking below will delete the existing index first before creating a new one,
+            // but please keep this check here to avoid any unexpected weird situation.
+            var incompleteIndexName = elasticSearchIndexService.getIndexingIndexName(indexingAliasName);
+            if (incompleteIndexName != null) {
+                elasticSearchIndexService.deleteIndexStore(incompleteIndexName);
+            }
+
             // recreate index from mapping JSON file
-            elasticSearchIndexService.createIndexFromMappingJSONFile(AppConstants.PORTAL_RECORDS_MAPPING_JSON_FILE, workingIndexName);
+            elasticSearchIndexService.createIndexFromMappingJSONFile(AppConstants.PORTAL_RECORDS_MAPPING_JSON_FILE, indexingIndexName);
+
+            // give the working index an indexing alias for more robust handling
+            elasticSearchIndexService.updateAliasToNewIndex(indexingAliasName, indexingIndexName);
         }
         else {
             log.info("Resume indexing records from GeoNetwork at {}", beginWithUuid);
@@ -387,7 +401,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
             try {
                 return Optional.of(this.getMappedMetadataValues(
                         geoNetworkResourceService.searchRecordBy(item.id()),
-                        workingIndexName
+                        indexingIndexName
                 ));
             } catch (IOException | FactoryException | TransformException | JAXBException e) {
                 return Optional.empty();
@@ -395,7 +409,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
         };
 
         List<BulkResponse> results = new ArrayList<>();
-        BulkRequestProcessor<StacCollectionModel> bulkRequestProcessor = new BulkRequestProcessor<>(workingIndexName, mapper, self, callback);
+        BulkRequestProcessor<StacCollectionModel> bulkRequestProcessor = new BulkRequestProcessor<>(indexingIndexName, mapper, self, callback);
 
         // We need to keep sending messages to client to avoid timeout on long processing
         ExecutorService executor = Executors.newFixedThreadPool(2);
@@ -407,7 +421,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
                     final CountDownLatch countDown = new CountDownLatch(1);
                     Callable<StacCollectionModel> task = () ->  {
                         try {
-                            return this.getMappedMetadataValues(metadataRecord, workingIndexName);
+                            return this.getMappedMetadataValues(metadataRecord, indexingIndexName);
                         }
                         catch (FactoryException | JAXBException | TransformException | NullPointerException e) {
                             /*
@@ -466,7 +480,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
 
 
             // TODO now processing for record_suggestions index
-            log.info("Finished execute bulk indexing records to index: {}",workingIndexName);
+            log.info("Finished execute bulk indexing records to index: {}",indexingIndexName);
         }
         catch(Exception e) {
             log.error("Failed", e);
@@ -487,11 +501,11 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
 
             var metadataCount = geoNetworkResourceService.getAllMetadataCounts();
             // get document count from portal index
-            var indexedCountResponse = portalElasticsearchClient.count(c -> c.index(workingIndexName));
+            var indexedCountResponse = portalElasticsearchClient.count(c -> c.index(indexingIndexName));
             var indexedCount = indexedCountResponse.count();
             log.info("Total metadata records in GeoNetwork: {}, total indexed documents in portal index {}: {}",
                     metadataCount,
-                    workingIndexName,
+                    indexingIndexName,
                     indexedCount);
 
             if (indexedCount != metadataCount) {
@@ -501,14 +515,21 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
             if (indexedCount > metadataCount * 0.9) {
                 //After indexing, if there is a same-name index, delete it
                 // this is not a regular deleting of old index. it is only for smoothly swapping from non-alias index to alias-based index.
-                checkAndDelete(indexName, workingIndexName);
+                checkAndDelete(indexName, indexingIndexName);
+
+                // remove the running alias from the already completed index
+                elasticSearchIndexService.removeAliasFromIndex(indexingAliasName, indexingIndexName);
+
+                // The below one is the old index still using the alias (e.g. es-indexer-edge)
+                var indexNameToDelete = elasticSearchIndexService.getIndexNameFromAlias(indexName);
+
 
                 // switch alias to point to the new index
-                elasticSearchIndexService.switchAliasToNewIndex(indexName, workingIndexName);
-                log.info("Alias: {} switched to point to index: {}", indexName, workingIndexName);
-                var indexToDelete = indexName + elasticSearchIndexService.getIndexSuffixOtherThan(workingIndexSuffix);
-                elasticSearchIndexService.deleteIndexStore(indexToDelete);
-                log.info("Old index: {} deleted after alias switch", indexToDelete);
+                elasticSearchIndexService.updateAliasToNewIndex(indexName, indexingIndexName);
+                log.info("Alias: {} switched to point to index: {}", indexName, indexingIndexName);
+                // after switching, delete the old index
+                elasticSearchIndexService.deleteIndexStore(indexNameToDelete);
+                log.info("Old index: {} deleted after alias switch", indexNameToDelete);
             } else {
                 throw new RuntimeException("Indexed document count is less than 90% of metadata count from GeoNetwork, alias switch aborted.");
             }

@@ -99,15 +99,6 @@ public class ElasticSearchIndexService {
         }
     }
 
-    protected String getIndexSuffixOtherThan(String suffix) {
-        if (suffix.equals(indexSuffix1)) {
-            return indexSuffix2;
-        }
-        if (suffix.equals(indexSuffix2)) {
-            return indexSuffix1;
-        }
-        throw new IllegalArgumentException("Invalid index suffix: " + suffix);
-    }
 
     /**
      * Generate a versioned index name by appending the current date and time to the base index name.
@@ -189,6 +180,24 @@ public class ElasticSearchIndexService {
             log.info("Alias: {} now points to index: {}", alias, newIndexName);
         } catch (ElasticsearchException | IOException e) {
             throw new RuntimeException("Failed to switch alias: " + alias + " to new index: " + newIndexName + " | " + e.getMessage());
+        }
+    }
+
+    protected String getIndexNameFromAlias(String alias) {
+        try {
+            GetAliasResponse aliasResponse = portalElasticsearchClient.indices().getAlias(ga -> ga.name(alias));
+            var aliasedIndices = aliasResponse.result().keySet();
+            if (aliasedIndices.isEmpty()) {
+                throw new IndexNotFoundException("No index found for alias: " + alias);
+            }
+            // if more than one index is pointed to by the alias, it's an error
+            if (aliasedIndices.size() > 1) {
+                throw new MultipleIndicesException("Multiple indices found for alias: " + alias + ". Expected only one.");
+            }
+
+            return aliasedIndices.iterator().next();
+        } catch (ElasticsearchException | IOException e) {
+            throw new RuntimeException("Failed to get index name from alias: " + alias + " | " + e.getMessage());
         }
     }
 
