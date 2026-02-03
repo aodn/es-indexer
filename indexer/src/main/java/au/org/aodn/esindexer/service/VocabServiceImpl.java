@@ -32,7 +32,6 @@ import java.util.concurrent.*;
 
 import java.io.IOException;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static au.org.aodn.esindexer.utils.CommonUtils.safeGet;
 
@@ -372,7 +371,7 @@ public class VocabServiceImpl implements VocabService {
         }
 
         // recreate index from mapping JSON file
-        elasticSearchIndexService.createIndexFromMappingJSONFile(AppConstants.VOCABS_INDEX_MAPPING_SCHEMA_FILE, vocabsIndexName);
+        elasticSearchIndexService.recreateIndexFromMappingJSONFile(AppConstants.VOCABS_INDEX_MAPPING_SCHEMA_FILE, vocabsIndexName);
         log.info("Indexing all vocabs to {}", vocabsIndexName);
 
         bulkIndexVocabs(vocabDtos);

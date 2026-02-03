@@ -131,7 +131,7 @@ public class IndexerServiceIT extends BaseTestClass {
 
     @Test
     public void verifyGetWorkingIndexName() {
-        String suffix = elasticSearchIndexService.getWorkingIndexSuffix(INDEX_NAME);
+        String suffix = elasticSearchIndexService.getIndexingIndexSuffix(INDEX_NAME);
         Assertions.assertEquals( "-blue", suffix, "Working index name correct");
         Assertions.assertEquals(  "-blue1", suffix, "Working index name correct");
     }
