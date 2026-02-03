@@ -59,12 +59,12 @@ public class DeliveryModeUtils {
         String status = SummariesUtils.getStatus(source);
 
         if(status != null) {
-            status = status.toLowerCase();
+            String normalisedStatus = normaliseStatus(status);
 
-            if(status.contains("completed")) {
+            if(normalisedStatus.contains("completed")) {
                 return DeliveryMode.completed;
             }
-            else if(status.contains("ongoing")) {
+            else if(normalisedStatus.contains("ongoing")) {
                 return scanRealTimeOrDelayed(CommonUtils.getTitle(source))
                         .orElse(
                                 scanRealTimeOrDelayed(CommonUtils.getDescription(source))
@@ -76,5 +76,32 @@ public class DeliveryModeUtils {
             }
         }
         return DeliveryMode.other;
+    }
+
+    /**
+     * The status field is provided by data provider, which can be not generic to 'completed' or 'onGoing'.
+     * See examples: https://github.com/aodn/backlog/issues/7978#issuecomment-3809180417
+     * This function normalizes non-standard status values from data providers to standardized terms 'completed' or 'ongoing' according to a mapping rule:
+     * https://github.com/aodn/backlog/issues/7978#issuecomment-3821113084
+     * so that to consistent delivery mode determination.
+     * */
+    public static String normaliseStatus (String customisedStatus) {
+        if (customisedStatus == null) {
+            return null;
+        }
+
+        String lowerStatus = customisedStatus.toLowerCase();
+        if (lowerStatus.equals("historicalarchive") ||
+                lowerStatus.equals("obsolete") ||
+                lowerStatus.equals("deprecated") ||
+                lowerStatus.contains("complete")
+        ) {
+            return "completed";
+        }
+        // some record has a status of 'on going' so check with a regex mapping
+        else if (lowerStatus.matches(".*on\\s?going.*")) {
+            return "ongoing";
+        }
+        return customisedStatus;
     }
 }
