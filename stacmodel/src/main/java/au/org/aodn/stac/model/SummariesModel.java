@@ -28,6 +28,9 @@ public class SummariesModel {
     @JsonProperty("ai:description")
     protected String aiDescription;
 
+    @JsonProperty("ai:update_frequency")
+    protected String aiUpdateFrequency;
+
     /**
      * Group info as setup in geonetwork
      */

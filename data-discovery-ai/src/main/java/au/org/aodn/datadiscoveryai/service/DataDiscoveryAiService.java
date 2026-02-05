@@ -1,6 +1,7 @@
 package au.org.aodn.datadiscoveryai.service;
 
 import au.org.aodn.datadiscoveryai.model.AiEnhancedLink;
+import au.org.aodn.datadiscoveryai.model.AiEnhancementRequest;
 import au.org.aodn.datadiscoveryai.model.AiEnhancementResponse;
 import au.org.aodn.stac.model.LinkModel;
 
@@ -11,13 +12,10 @@ public interface DataDiscoveryAiService {
     /**
      * Enhances the provided content with AI-generated grouping and description formatting
      *
-     * @param uuid  The UUID of the dataset
-     * @param links The original links from the STAC collection (can be null)
-     * @param title The title of the dataset (can be null)
-     * @param description The description of the dataset (can be null)
+     * @param aiEnhancementRequest  The request sent to AI service for record enhancement
      * @return AI enhancement response with enhanced links and summaries
      */
-    AiEnhancementResponse enhanceWithAi(String uuid, List<LinkModel> links, String title, String description);
+    AiEnhancementResponse enhanceWithAi(AiEnhancementRequest aiEnhancementRequest);
 
     /**
      * Check if the Data Discovery AI service is available
@@ -30,6 +28,8 @@ public interface DataDiscoveryAiService {
     List<LinkModel> getEnhancedLinks(AiEnhancementResponse aiResponse);
 
     String getEnhancedDescription(AiEnhancementResponse aiResponse);
+
+    String getEnhancedUpdateFrequency(AiEnhancementResponse aiResponse);
 
     /**
      * Converts AI-enhanced links to LinkModel objects

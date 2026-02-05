@@ -177,6 +177,9 @@
           "ai:description": {
             "type": "keyword"
           },
+          "ai:update_frequency": {
+            "type": "keyword"
+          },
           "score": {
             "type": "long"
           },

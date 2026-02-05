@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
+import java.util.Map;
 
 @Data
 @Builder
@@ -26,4 +27,13 @@ public class AiEnhancementRequest {
 
     @JsonProperty("links")
     private List<LinkModel> links;
+
+    @JsonProperty("lineage")
+    private String lineageText;
+
+    @JsonProperty("status")
+    private String status;
+
+    @JsonProperty("temporal")
+    private List<Map<String, String>> temporal;
 }

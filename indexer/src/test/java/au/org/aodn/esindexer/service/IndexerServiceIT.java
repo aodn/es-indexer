@@ -1,5 +1,6 @@
 package au.org.aodn.esindexer.service;
 
+import au.org.aodn.datadiscoveryai.model.AiEnhancementRequest;
 import au.org.aodn.esindexer.BaseTestClass;
 import au.org.aodn.esindexer.configuration.GeoNetworkSearchTestConfig;
 import au.org.aodn.esindexer.exception.DocumentNotFoundException;
@@ -36,9 +37,7 @@ import java.util.List;
 import java.util.Objects;
 
 import static org.hamcrest.Matchers.containsString;
-import static org.mockito.ArgumentMatchers.anyList;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.client.ExpectedCount.manyTimes;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
@@ -450,7 +449,8 @@ public class IndexerServiceIT extends BaseTestClass {
 
         // Set up AI service to be available and mock the combined enhancement
         when(dataDiscoveryAiService.isServiceAvailable()).thenReturn(true);
-        when(dataDiscoveryAiService.enhanceWithAi(anyString(), anyList(), anyString(), anyString())).thenReturn(mockAiResponse);
+        when(dataDiscoveryAiService.enhanceWithAi(any(AiEnhancementRequest.class)))
+                .thenReturn(mockAiResponse);
         when(dataDiscoveryAiService.getEnhancedLinks(eq(mockAiResponse))).thenReturn(enhancedLinks);
         when(dataDiscoveryAiService.getEnhancedDescription(eq(mockAiResponse))).thenReturn(enhancedDescription);
 
