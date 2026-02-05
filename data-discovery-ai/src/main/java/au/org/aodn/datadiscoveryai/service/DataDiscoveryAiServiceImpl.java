@@ -57,7 +57,7 @@ public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
         if ((title != null && !title.isEmpty()) || (description != null && !description.isEmpty())) {
             selectedModels.add(AIModel.DESCRIPTION_FORMATTING.getValue());
             // lineage can be empty for records that need to identify delivery mode so we only need to check title and description are not empty
-            selectedModels.add(AIModel.DESCRIPTION_FORMATTING.getValue());
+            selectedModels.add(AIModel.DELIVERY_CLASSIFICATION.getValue());
         }
 
         if (selectedModels.isEmpty()) {
