@@ -121,6 +121,7 @@ public class StacCollectionMapperServiceTest {
         indexerService = new IndexerMetadataServiceImpl(
                 "any-works",
                 "shingle_analyser",
+                1000,
                 objectMapper,
                 jaxbUtils,
                 rankingService,
