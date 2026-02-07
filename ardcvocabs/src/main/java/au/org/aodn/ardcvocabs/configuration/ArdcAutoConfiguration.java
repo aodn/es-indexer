@@ -5,6 +5,7 @@ import au.org.aodn.ardcvocabs.service.ArdcVocabServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.retry.annotation.EnableRetry;
 import org.springframework.retry.backoff.ExponentialBackOffPolicy;
@@ -27,7 +28,18 @@ public class ArdcAutoConfiguration {
         requestFactory.setConnectTimeout(5000); // e.g., 5 seconds
         requestFactory.setReadTimeout(10000);      // e.g., 10 seconds
 
-        return new ArdcVocabServiceImpl(new RestTemplate(requestFactory), retryTemplate);
+        RestTemplate template = new RestTemplate(requestFactory);
+
+        // Set default User-Agent, pretend user browser to avoid being blocked by remote server, but there are still rate limit
+        template.getInterceptors().add((request, body, execution) -> {
+            request.getHeaders().set(
+                    HttpHeaders.USER_AGENT,
+                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36 Edg/130.0.0.0"
+            );
+            return execution.execute(request, body);
+        });
+
+        return new ArdcVocabServiceImpl(template, retryTemplate);
     }
 
     @Bean

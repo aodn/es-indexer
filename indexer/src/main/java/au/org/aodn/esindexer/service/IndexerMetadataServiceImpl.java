@@ -57,6 +57,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
 
     protected String indexName;
     protected String tokensAnalyserName;
+    protected int tokenMaxCount;
     protected GeoNetworkService geoNetworkResourceService;
     protected ElasticsearchClient portalElasticsearchClient;
     protected ElasticSearchIndexService elasticSearchIndexService;
@@ -76,6 +77,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
     public IndexerMetadataServiceImpl(
             @Value("${elasticsearch.index.name}") String indexName,
             @Value("${elasticsearch.analyser.tokens.name}") String tokensAnalyserName,
+            @Value("${elasticsearch.analyser.tokens.maxTokenCount:1000}") int tokenMaxCount,
             ObjectMapper indexerObjectMapper,
             JaxbUtils<MDMetadataType> jaxbUtils,
             RankingService rankingService,
@@ -91,6 +93,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
 
         this.indexName = indexName;
         this.tokensAnalyserName = tokensAnalyserName;
+        this.tokenMaxCount = tokenMaxCount;
         this.indexerObjectMapper = indexerObjectMapper;
         this.jaxbUtils = jaxbUtils;
         this.rankingService = rankingService;
@@ -153,9 +156,15 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
     }
 
     protected Set<String> extractTokensFromDescription(String description, String targetIndexName) throws IOException {
-        Set<String> results = new HashSet<>();
+        log.debug("Analyze desc : {}", description);
 
-        AnalyzeRequest request = AnalyzeRequest.of(ar -> ar.index(targetIndexName).analyzer(tokensAnalyserName).text(description));
+        Set<String> results = new HashSet<>();
+        AnalyzeRequest request = AnalyzeRequest.of(ar -> ar
+                .index(targetIndexName)
+                .analyzer(tokensAnalyserName)
+                .text(description)
+                .attributes("max_token_count:" + this.tokenMaxCount)
+        );
         AnalyzeResponse response = portalElasticsearchClient.indices().analyze(request);
 
         for (AnalyzeToken token : response.tokens()) {
@@ -517,14 +526,13 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
 
         return results;
     }
-
     /**
      * This method only for smoothly swapping from non-alias index to alias-based index.
      * If alias already working properly in all edge, staging and prod, this method is not needed and can be removed later.
-     * @param alias
-     * @param versionedIndexName
+     * @param alias - The alias name, which is use to determine if this is the in use index.
+     * @param versionedIndexName - The name of the index, it will be different each time and use alias to set it name as current index.
      */
-    public void checkAndDelete(String alias ,String versionedIndexName) {
+    protected void checkAndDelete(String alias ,String versionedIndexName) {
         try {
             // First determine if the provided name is an alias. If it is an alias, do NOT delete.
             boolean isAlias = false;
