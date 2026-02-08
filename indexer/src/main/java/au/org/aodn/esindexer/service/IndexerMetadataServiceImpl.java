@@ -77,7 +77,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
     public IndexerMetadataServiceImpl(
             @Value("${elasticsearch.index.name}") String indexName,
             @Value("${elasticsearch.analyser.tokens.name}") String tokensAnalyserName,
-            @Value("${elasticsearch.analyser.tokens.maxTokenCount:600}") int tokenMaxCount,
+            @Value("${elasticsearch.analyser.tokens.maxTokenCount:1000}") int tokenMaxCount,
             ObjectMapper indexerObjectMapper,
             JaxbUtils<MDMetadataType> jaxbUtils,
             RankingService rankingService,
@@ -154,7 +154,14 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
             return false;
         }
     }
-
+    /**
+     * Call the analyzer to create token, however it cannot be too big and too fast else you will get
+     * URI [/es-indexer-edge__20260208_224943+0000/_analyze], status line [HTTP/1.1 429 Too Many Requests]
+     * @param description - The text you want to tokenize
+     * @param targetIndexName - The index name
+     * @return - The token created from description
+     * @throws IOException - Not expected
+     */
     protected Set<String> extractTokensFromDescription(String description, String targetIndexName) throws IOException {
         log.debug("Analyze desc : {}", description);
 
@@ -165,6 +172,14 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
                 .text(description)
                 .attributes("max_token_count:" + this.tokenMaxCount)
         );
+
+        try {
+            Thread.sleep(800); // 800 ms – adjust to 1000–1500 if still hitting 429
+        }
+        catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+
         AnalyzeResponse response = portalElasticsearchClient.indices().analyze(request);
 
         for (AnalyzeToken token : response.tokens()) {

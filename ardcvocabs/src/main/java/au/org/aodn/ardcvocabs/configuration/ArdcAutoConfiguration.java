@@ -14,11 +14,16 @@ import org.springframework.retry.support.RetryTemplate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
+
 @Slf4j
 @AutoConfiguration
 @ConditionalOnMissingBean(ArdcVocabService.class)
 @EnableRetry  // Enable retry support
 public class ArdcAutoConfiguration {
+
+    protected CountDownLatch limit = new CountDownLatch(1);
 
     @Bean
     public ArdcVocabService createArdcVocabsService(RetryTemplate retryTemplate) {
@@ -36,6 +41,16 @@ public class ArdcAutoConfiguration {
                     HttpHeaders.USER_AGENT,
                     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36 Edg/130.0.0.0"
             );
+            return execution.execute(request, body);
+        });
+
+        // Add delay before every request (most effective simple fix)
+        template.getInterceptors().add((request, body, execution) -> {
+            try {
+                limit.await(2, TimeUnit.SECONDS); // 1.2 seconds – adjust based on observed limits
+            } catch (InterruptedException e) {
+                // Ignore
+            }
             return execution.execute(request, body);
         });
 
