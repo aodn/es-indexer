@@ -14,18 +14,19 @@
           "type": "custom",
           "tokenizer": "standard",
           "char_filter": [
-            "html_strip",
-            "emoticons"
+            "html_strip"
           ],
           "filter": [
             "lowercase",
-            "english_stop",
+            "asciifolding",
+            "remove_numbers",
             "uuid_filter",
             "non_standard_pattern_filter",
+            "et_al_stop",
+            "english_stop",
             "length_filter",
-            "remove_numbers",
-            "unique",
-            "shingle_filter"
+            "shingle_filter",
+            "unique"
           ]
         }
       },
@@ -58,6 +59,10 @@
         "length_filter": {
           "type": "length",
           "min": 2
+        },
+        "et_al_stop": {
+          "type": "stop",
+          "stopwords": ["et", "al", "et al", "et.", "al."]
         }
       }
     }
