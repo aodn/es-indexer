@@ -77,7 +77,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
     public IndexerMetadataServiceImpl(
             @Value("${elasticsearch.index.name}") String indexName,
             @Value("${elasticsearch.analyser.tokens.name}") String tokensAnalyserName,
-            @Value("${elasticsearch.analyser.tokens.maxTokenCount:1000}") int tokenMaxCount,
+            @Value("${elasticsearch.analyser.tokens.maxTokenCount:500}") int tokenMaxCount,
             ObjectMapper indexerObjectMapper,
             JaxbUtils<MDMetadataType> jaxbUtils,
             RankingService rankingService,
@@ -163,8 +163,6 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
      * @throws IOException - Not expected
      */
     protected Set<String> extractTokensFromDescription(String description, String targetIndexName) throws IOException {
-        log.debug("Analyze desc : {}", description);
-
         Set<String> results = new HashSet<>();
         AnalyzeRequest request = AnalyzeRequest.of(ar -> ar
                 .index(targetIndexName)
@@ -172,13 +170,6 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
                 .text(description)
                 .attributes("max_token_count:" + this.tokenMaxCount)
         );
-
-        try {
-            Thread.sleep(800); // 800 ms – adjust to 1000–1500 if still hitting 429
-        }
-        catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-        }
 
         AnalyzeResponse response = portalElasticsearchClient.indices().analyze(request);
 
@@ -190,6 +181,16 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
             }
         }
 
+        if(results.size() > this.tokenMaxCount / 2) {
+            log.debug("Analyze ({} tokens) -> {}", results.size(), description);
+            // In case the token is too big give some time to avoid exceed rate limit
+            try {
+                Thread.sleep(1500); // 800 ms – adjust to 1000–1500 if still hitting 429
+            }
+            catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
         return results;
     }
 
