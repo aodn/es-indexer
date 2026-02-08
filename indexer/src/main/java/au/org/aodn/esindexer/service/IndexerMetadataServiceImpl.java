@@ -77,7 +77,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
     public IndexerMetadataServiceImpl(
             @Value("${elasticsearch.index.name}") String indexName,
             @Value("${elasticsearch.analyser.tokens.name}") String tokensAnalyserName,
-            @Value("${elasticsearch.analyser.tokens.maxTokenCount:1000}") int tokenMaxCount,
+            @Value("${elasticsearch.analyser.tokens.maxTokenCount:600}") int tokenMaxCount,
             ObjectMapper indexerObjectMapper,
             JaxbUtils<MDMetadataType> jaxbUtils,
             RankingService rankingService,
