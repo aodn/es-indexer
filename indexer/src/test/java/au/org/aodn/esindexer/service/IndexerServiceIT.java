@@ -29,6 +29,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.mockito.ArgumentMatchers.anyList;
@@ -580,6 +581,153 @@ public class IndexerServiceIT extends BaseTestClass {
         } catch (JSONException e) {
             throw new RuntimeException(e);
         } finally {
+            deleteRecord(uuid);
+        }
+    }
+    /**
+     * Too big token generated will cause circuit break and crash Elastic search, we have set a limit in the
+     * schema to only consider the first n token in the description, then we apply shingle without created output_unigrams
+     * that is unigrams is excluded. This will make the output much smaller
+     * Text: quick brown fox jumps
+     * Becomes:
+     * unigrams: quick, brown, fox, jumps
+     * bigrams: quick brown, brown fox, fox jumps
+     * trigrams: quick brown fox, brown fox jumps
+     * four-grams: quick brown fox jumps
+     * @throws IOException - If file not found
+     */
+    @Test
+    public void verifyTokenGeneratedMaxLimit() throws IOException {
+        String uuid = "fa93c66e-0e56-7e1d-e043-08114f8c1b76";
+        try {
+            // The doc is not important, it is just use to create the index given the schema
+            insertMetadataRecords(uuid, "classpath:canned/sample11.xml");
+            indexerService.indexAllMetadataRecordsFromGeoNetwork(null, true, null);
+
+            // Now we verify the limit
+            String bigDesc = """
+                    William Shakespeare was the son of John Shakespeare, an alderman and a successful glover (glove-maker)
+                    originally from Snitterfield in Warwickshire, and Mary Arden, the daughter of an affluent landowning family
+                    that was influential in the Recusant Catholic community.[3][4][5] He was born in Stratford-upon-Avon,
+                    where he was baptised on 26 April 1564. His date of birth is unknown but is traditionally observed
+                    on 23 April, Saint George's Day.[1] This date, which can be traced to William Oldys and George Steevens,
+                    has proved appealing to biographers because Shakespeare died on the same date in 1616.[6][7]
+                    He was the third of eight children, and the eldest surviving son.[8]
+                    
+                    Although no attendance records for the period survive, most biographers agree that Shakespeare was
+                    probably educated at the King's New School in Stratford,[9][10][11] a free school chartered in 1553,
+                    [12] about a quarter-mile (400 m) from his home. Grammar schools varied in quality during the
+                    Elizabethan era, but grammar school curricula were largely similar: the basic Latin text was
+                    standardised by royal decree,[13][14] and the school would have provided an intensive education
+                    in grammar based upon Latin classical authors.[15]
+                    
+                    At the age of 18, Shakespeare married 26-year-old Anne Hathaway. The consistory court of the Diocese
+                    of Worcester issued a marriage licence on 27 November 1582. The next day, two of Hathaway's neighbours
+                    posted bonds guaranteeing that no lawful claims impeded the marriage.[16] The ceremony may
+                    have been arranged in some haste; the Worcester chancellor allowed the marriage banns to be read once
+                    instead of the usual three times.[17][18] Six months after the marriage, Anne gave birth to a daughter,
+                    Susanna, baptised 26 May 1583.[19] Twins, son Hamnet and daughter Judith, followed almost two years
+                    later and were baptised 2 February 1585.[20] Hamnet died of unknown causes at the age of 11 and was
+                    buried 11 August 1596.[21]
+                    Shakespeare's coat of arms, from the 1602 book The book of coates and creasts. Promptuarium armorum.
+                    It features spears as a pun on the family name.[d]
+                    
+                    After the birth of the twins, Shakespeare left few historical traces until he is mentioned as part
+                    of the London theatre scene in 1592. The exception is the appearance of his name in the "complaints
+                    bill" of a law case before the Queen's Bench court at Westminster dated Michaelmas Term 1588 and
+                    9 October 1589.[22] Scholars refer to the years between 1585 and 1592 as Shakespeare's "lost years".
+                    [23] Biographers attempting to account for this period have reported many apocryphal stories.
+                    Nicholas Rowe, Shakespeare's first biographer, recounted a Stratford legend that Shakespeare fled
+                    the town for London to escape prosecution for deer poaching in the estate of local squire Thomas Lucy.
+                    Shakespeare is also supposed to have taken his revenge on Lucy by writing a scurrilous ballad about him.
+                    [24][25] Another 18th-century story has Shakespeare starting his theatrical career minding the horses
+                    of theatre patrons in London.[26] John Aubrey reported that Shakespeare had been a country schoolmaster.
+                    [27] Some 20th-century scholars suggested that Shakespeare may have been employed as a schoolmaster by
+                    Alexander Hoghton of Lancashire, a Catholic landowner who named a certain "William Shakeshafte" in
+                    his will.[28][29] Little evidence substantiates such stories other than hearsay collected after
+                    his death, and Shakeshafte was a common name in the Lancashire area.[30][31]
+                    London and theatrical career
+                    
+                    It is not known definitively when Shakespeare began writing, but contemporary allusions and records
+                    of performances show that several of his plays were on the London stage by 1592.[32] By then, he was
+                    sufficiently known in London to be attacked in print by the playwright Robert Greene in his Groats-Worth of Wit from that year:
+                    
+                        ... there is an upstart Crow, beautified with our feathers, that with his Tiger's heart wrapped
+                        in a Player's hide, supposes he is as well able to bombast out a blank verse as the best of you:
+                        and being an absolute Johannes factotum, is in his own conceit the only Shake-scene in a country.[33]
+                    
+                    Scholars differ on the exact meaning of Greene's words,[33][34] but most agree that Greene was accusing
+                    Shakespeare of reaching above his rank in trying to match such university-educated writers as Christopher
+                    Marlowe, Thomas Nashe and Greene himself (the so-called "University Wits").[35] The italicised phrase
+                    parodying the line "Oh, tiger's heart wrapped in a woman's hide" from Shakespeare's Henry VI, Part 3,
+                    along with the pun "Shake-scene", clearly identify Shakespeare as Greene's target. As used here, Johannes
+                    Factotum ("Jack of all trades") refers to a second-rate tinkerer with the work of others, rather than
+                    the more common "universal genius".[33][36]
+                    
+                    Greene's attack is the earliest surviving mention of Shakespeare's work in the theatre. Biographers suggest
+                    that his career may have begun any time from the mid-1580s to just before Greene's remarks.[37][38][39]
+                    After 1594 Shakespeare's plays were performed at The Theatre, in Shoreditch, only by the Lord Chamberlain's Men,
+                    a company owned by a group of players, including Shakespeare, that soon became the leading playing company in
+                    London.[40] After the death of Queen Elizabeth in 1603, the company was awarded a royal patent by the
+                    new King James I, and changed its name to the King's Men.[41]
+                    
+                        All the world's a stage,
+                        and all the men and women merely players:
+                        they have their exits and their entrances;
+                        and one man in his time plays many parts ...
+                    
+                    —As You Like It, Act II, Scene 7, 139–142[42]
+                    
+                    In 1599 a partnership of members of the company built their own theatre on the south bank of the
+                    River Thames, which they named the Globe. In 1608 the partnership also took over the Blackfriars
+                    indoor theatre. Extant records of Shakespeare's property purchases and investments indicate that
+                    his association with the company made him a wealthy man,[43] and in 1597 he bought the second-largest
+                    house in Stratford, New Place, and in 1605 invested in a share of the parish tithes in Stratford.[44]
+                    
+                    Some of Shakespeare's plays were published in quarto editions, beginning in 1594, and by 1598 his
+                    name had become a selling point and began to appear on the title pages.[45][46][47] Shakespeare
+                    continued to act in his own and other plays after his success as a playwright. The 1616 edition of
+                    Ben Jonson's Works names him on the cast lists for Every Man in His Humour (1598) and Sejanus His
+                    Fall (1603).[48] The absence of his name from the 1605 cast list for Jonson's Volpone is taken by
+                    some scholars as a sign that his acting career was nearing its end.[37] The First Folio of 1623,
+                    however, lists Shakespeare as one of "the Principal Actors in all these Plays", some of which were
+                    first staged after Volpone, although one cannot know for certain which roles he played.[49] In 1610,
+                    John Davies of Hereford wrote that "good Will" played "kingly" roles.[50] In 1709 Rowe passed down a
+                    tradition that Shakespeare played the ghost of Hamlet's father.[51] Later traditions maintain that he
+                    also played Adam in As You Like It, and the Chorus in Henry V,[52][53] though scholars doubt the
+                    sources of that information.[54]
+                    
+                    Later years and death
+                    Shakespeare's funerary monument in Stratford-upon-Avon
+                    
+                    Nicholas Rowe was the first biographer to record the tradition, repeated by Samuel Johnson, that Shakespeare
+                    retired to Stratford "some years before his death".[60][61] He was still working as an actor in London in 1608;
+                    in an answer to the sharers' petition in 1635, Cuthbert Burbage stated that after purchasing the lease of the
+                    Blackfriars Theatre in 1608 from Henry Evans, the King's Men "placed men players" there, "which were Heminges,
+                    Condell, Shakespeare, etc.".[62] However, it is perhaps relevant that the bubonic plague raged in London throughout
+                    1609.[63][64] The London public playhouses were repeatedly closed during extended outbreaks of the plague
+                    (a total of over 60 months closure between May 1603 and February 1610),[65] which meant there was often no acting work.
+                    Retirement from all work was uncommon at that time.[66] Shakespeare continued to visit London during the years 1611–1614.[60]
+                    In 1612 he was called as a witness in Bellott v Mountjoy, a court case concerning the marriage settlement of Mountjoy's daughter,
+                    Mary.[67][68] In March 1613 he bought a gatehouse in the former Blackfriars priory;[69] and from November 1614 he was
+                    in London for several weeks with his son-in-law, John Hall.[70] After 1610 Shakespeare wrote fewer plays, and none
+                    are attributed to him after 1613.[71] His last three plays were collaborations, probably with John Fletcher,[72]
+                    who succeeded him as the house playwright of the King's Men. He retired in 1613, before the Globe
+                    Theatre burned down during the performance of Henry VIII on 29 June.[71]
+                    
+                    Shakespeare died on 23 April 1616, at the age of 52.[e] He died within a month of signing his will, a document which
+                    he begins by describing himself as being in "perfect health". No extant contemporary source explains how or why he died.
+                    Half a century later, John Ward, the vicar of Stratford, wrote in his notebook: "Shakespeare, Drayton, and Ben Jonson
+                    had a merry meeting and, it seems, drank too hard, for Shakespeare died of a fever there contracted",[74][75] not an
+                    impossible scenario since Shakespeare knew Jonson and Michael Drayton. Of the tributes from fellow authors, one refers
+                    to his relatively sudden death: "We wondered, Shakespeare, that thou went'st so soon / From the world's stage to the
+                    grave's tiring room."[76][f]
+                    """;
+
+            Set<String> token = ((IndexerMetadataServiceImpl)indexerService).extractTokensFromDescription(bigDesc, INDEX_NAME);
+            Assertions.assertTrue(token.size() <= 1500, "Should not generate big token given larger desc");
+        }
+        finally {
             deleteRecord(uuid);
         }
     }

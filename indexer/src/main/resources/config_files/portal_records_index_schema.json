@@ -59,7 +59,7 @@
         },
         "token_limit" : {
           "type": "limit",
-          "max_token_count": 4500
+          "max_token_count": 500
         },
         "length_filter": {
           "type": "length",
