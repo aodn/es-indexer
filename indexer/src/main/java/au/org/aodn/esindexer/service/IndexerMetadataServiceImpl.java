@@ -27,6 +27,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import jakarta.xml.bind.JAXBException;
 import lombok.extern.slf4j.Slf4j;
+import org.elasticsearch.client.ResponseException;
 import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.operation.TransformException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -159,7 +162,12 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
      * @return - The token created from description
      * @throws IOException - Not expected
      */
-    protected Set<String> extractTokensFromDescription(String description, String targetIndexName) throws IOException {
+    @Retryable(
+            retryFor = ResponseException.class,
+            maxAttempts = 15,
+            backoff = @Backoff(delay = 60000, multiplier = 2)
+    )
+    public Set<String> extractTokensFromDescription(String description, String targetIndexName) throws IOException {
         Set<String> results = new HashSet<>();
         AnalyzeRequest request = AnalyzeRequest.of(ar -> ar
                 .index(targetIndexName)
@@ -251,7 +259,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
 
         // search_as_you_type enabled fields can be extended
         SearchSuggestionsModel searchSuggestionsModel = SearchSuggestionsModel.builder()
-                .abstractPhrases(this.extractTokensFromDescription(stacCollectionModel.getDescription(), targetIndexName))
+                .abstractPhrases(self.extractTokensFromDescription(stacCollectionModel.getDescription(), targetIndexName))
                 .parameterVocabs(stacCollectionModel.getSummaries().getParameterVocabs())
                 .platformVocabs(stacCollectionModel.getSummaries().getPlatformVocabs())
                 .organisationVocabs(stacCollectionModel.getSummaries().getOrganisationVocabs())
