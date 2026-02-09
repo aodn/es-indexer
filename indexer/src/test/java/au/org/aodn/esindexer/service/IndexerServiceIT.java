@@ -613,14 +613,14 @@ public class IndexerServiceIT extends BaseTestClass {
                     on 23 April, Saint George's Day.[1] This date, which can be traced to William Oldys and George Steevens,
                     has proved appealing to biographers because Shakespeare died on the same date in 1616.[6][7]
                     He was the third of eight children, and the eldest surviving son.[8]
-                    
+
                     Although no attendance records for the period survive, most biographers agree that Shakespeare was
                     probably educated at the King's New School in Stratford,[9][10][11] a free school chartered in 1553,
                     [12] about a quarter-mile (400 m) from his home. Grammar schools varied in quality during the
                     Elizabethan era, but grammar school curricula were largely similar: the basic Latin text was
                     standardised by royal decree,[13][14] and the school would have provided an intensive education
                     in grammar based upon Latin classical authors.[15]
-                    
+
                     At the age of 18, Shakespeare married 26-year-old Anne Hathaway. The consistory court of the Diocese
                     of Worcester issued a marriage licence on 27 November 1582. The next day, two of Hathaway's neighbours
                     posted bonds guaranteeing that no lawful claims impeded the marriage.[16] The ceremony may
@@ -631,7 +631,7 @@ public class IndexerServiceIT extends BaseTestClass {
                     buried 11 August 1596.[21]
                     Shakespeare's coat of arms, from the 1602 book The book of coates and creasts. Promptuarium armorum.
                     It features spears as a pun on the family name.[d]
-                    
+
                     After the birth of the twins, Shakespeare left few historical traces until he is mentioned as part
                     of the London theatre scene in 1592. The exception is the appearance of his name in the "complaints
                     bill" of a law case before the Queen's Bench court at Westminster dated Michaelmas Term 1588 and
@@ -647,15 +647,15 @@ public class IndexerServiceIT extends BaseTestClass {
                     his will.[28][29] Little evidence substantiates such stories other than hearsay collected after
                     his death, and Shakeshafte was a common name in the Lancashire area.[30][31]
                     London and theatrical career
-                    
+
                     It is not known definitively when Shakespeare began writing, but contemporary allusions and records
                     of performances show that several of his plays were on the London stage by 1592.[32] By then, he was
                     sufficiently known in London to be attacked in print by the playwright Robert Greene in his Groats-Worth of Wit from that year:
-                    
+
                         ... there is an upstart Crow, beautified with our feathers, that with his Tiger's heart wrapped
                         in a Player's hide, supposes he is as well able to bombast out a blank verse as the best of you:
                         and being an absolute Johannes factotum, is in his own conceit the only Shake-scene in a country.[33]
-                    
+
                     Scholars differ on the exact meaning of Greene's words,[33][34] but most agree that Greene was accusing
                     Shakespeare of reaching above his rank in trying to match such university-educated writers as Christopher
                     Marlowe, Thomas Nashe and Greene himself (the so-called "University Wits").[35] The italicised phrase
@@ -663,27 +663,27 @@ public class IndexerServiceIT extends BaseTestClass {
                     along with the pun "Shake-scene", clearly identify Shakespeare as Greene's target. As used here, Johannes
                     Factotum ("Jack of all trades") refers to a second-rate tinkerer with the work of others, rather than
                     the more common "universal genius".[33][36]
-                    
+
                     Greene's attack is the earliest surviving mention of Shakespeare's work in the theatre. Biographers suggest
                     that his career may have begun any time from the mid-1580s to just before Greene's remarks.[37][38][39]
                     After 1594 Shakespeare's plays were performed at The Theatre, in Shoreditch, only by the Lord Chamberlain's Men,
                     a company owned by a group of players, including Shakespeare, that soon became the leading playing company in
                     London.[40] After the death of Queen Elizabeth in 1603, the company was awarded a royal patent by the
                     new King James I, and changed its name to the King's Men.[41]
-                    
+
                         All the world's a stage,
                         and all the men and women merely players:
                         they have their exits and their entrances;
                         and one man in his time plays many parts ...
-                    
+
                     —As You Like It, Act II, Scene 7, 139–142[42]
-                    
+
                     In 1599 a partnership of members of the company built their own theatre on the south bank of the
                     River Thames, which they named the Globe. In 1608 the partnership also took over the Blackfriars
                     indoor theatre. Extant records of Shakespeare's property purchases and investments indicate that
                     his association with the company made him a wealthy man,[43] and in 1597 he bought the second-largest
                     house in Stratford, New Place, and in 1605 invested in a share of the parish tithes in Stratford.[44]
-                    
+
                     Some of Shakespeare's plays were published in quarto editions, beginning in 1594, and by 1598 his
                     name had become a selling point and began to appear on the title pages.[45][46][47] Shakespeare
                     continued to act in his own and other plays after his success as a playwright. The 1616 edition of
@@ -696,10 +696,10 @@ public class IndexerServiceIT extends BaseTestClass {
                     tradition that Shakespeare played the ghost of Hamlet's father.[51] Later traditions maintain that he
                     also played Adam in As You Like It, and the Chorus in Henry V,[52][53] though scholars doubt the
                     sources of that information.[54]
-                    
+
                     Later years and death
                     Shakespeare's funerary monument in Stratford-upon-Avon
-                    
+
                     Nicholas Rowe was the first biographer to record the tradition, repeated by Samuel Johnson, that Shakespeare
                     retired to Stratford "some years before his death".[60][61] He was still working as an actor in London in 1608;
                     in an answer to the sharers' petition in 1635, Cuthbert Burbage stated that after purchasing the lease of the
@@ -714,7 +714,7 @@ public class IndexerServiceIT extends BaseTestClass {
                     are attributed to him after 1613.[71] His last three plays were collaborations, probably with John Fletcher,[72]
                     who succeeded him as the house playwright of the King's Men. He retired in 1613, before the Globe
                     Theatre burned down during the performance of Henry VIII on 29 June.[71]
-                    
+
                     Shakespeare died on 23 April 1616, at the age of 52.[e] He died within a month of signing his will, a document which
                     he begins by describing himself as being in "perfect health". No extant contemporary source explains how or why he died.
                     Half a century later, John Ward, the vicar of Stratford, wrote in his notebook: "Shakespeare, Drayton, and Ben Jonson
