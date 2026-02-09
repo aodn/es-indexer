@@ -7,7 +7,6 @@ import au.org.aodn.metadata.geonetwork.service.GeoNetworkServiceImpl;
 import au.org.aodn.datadiscoveryai.service.DataDiscoveryAiService;
 import au.org.aodn.datadiscoveryai.model.AiEnhancementResponse;
 import au.org.aodn.stac.model.LinkModel;
-import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch.core.search.Hit;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,7 +16,6 @@ import org.junit.jupiter.api.*;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpMethod;
@@ -49,9 +47,6 @@ public class IndexerServiceIT extends BaseTestClass {
 
     @Autowired
     protected GeoNetworkServiceImpl geoNetworkService;
-
-    @Qualifier("gn4ElasticsearchClient")
-    ElasticsearchClient gn4ElasticsearchClient;
 
     @Autowired
     protected IndexerMetadataService indexerService;
@@ -492,7 +487,6 @@ public class IndexerServiceIT extends BaseTestClass {
      * This test verifies that both AI link grouping and AI description enhancement are properly applied
      * during the indexing process in the service layer
      * @throws IOException - Not expected
-     * @throws JSONException - Not expected
      */
     @Test
     public void verifyAiServiceEnhancement() throws IOException {
@@ -587,7 +581,9 @@ public class IndexerServiceIT extends BaseTestClass {
     /**
      * Too big token generated will cause circuit break and crash Elastic search, we have set a limit in the
      * schema to only consider the first n token in the description, then we apply shingle without created output_unigrams
-     * that is unigrams is excluded. This will make the output much smaller
+     * that is unigrams is excluded. This will make the output much smaller. The hard code schema value is a number with
+     * trial and error that fix most existing test case. It is a tradeoff that we cannot handle too big desc given the memory
+     * constraint.
      * Text: quick brown fox jumps
      * Becomes:
      * unigrams: quick, brown, fox, jumps
