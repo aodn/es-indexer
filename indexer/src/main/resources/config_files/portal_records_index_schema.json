@@ -25,6 +25,7 @@
             "et_al_stop",
             "english_stop",
             "length_filter",
+            "token_limit",
             "shingle_filter",
             "unique"
           ]
@@ -55,6 +56,10 @@
           "type": "pattern_replace",
           "pattern": "\\b\\d+\\b",
           "replacement": ""
+        },
+        "token_limit" : {
+          "type": "limit",
+          "max_token_count": 5000
         },
         "length_filter": {
           "type": "length",

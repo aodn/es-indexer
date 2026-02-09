@@ -57,7 +57,6 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
 
     protected String indexName;
     protected String tokensAnalyserName;
-    protected int tokenMaxCount;
     protected GeoNetworkService geoNetworkResourceService;
     protected ElasticsearchClient portalElasticsearchClient;
     protected ElasticSearchIndexService elasticSearchIndexService;
@@ -77,7 +76,6 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
     public IndexerMetadataServiceImpl(
             @Value("${elasticsearch.index.name}") String indexName,
             @Value("${elasticsearch.analyser.tokens.name}") String tokensAnalyserName,
-            @Value("${elasticsearch.analyser.tokens.maxTokenCount:500}") int tokenMaxCount,
             ObjectMapper indexerObjectMapper,
             JaxbUtils<MDMetadataType> jaxbUtils,
             RankingService rankingService,
@@ -93,7 +91,6 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
 
         this.indexName = indexName;
         this.tokensAnalyserName = tokensAnalyserName;
-        this.tokenMaxCount = tokenMaxCount;
         this.indexerObjectMapper = indexerObjectMapper;
         this.jaxbUtils = jaxbUtils;
         this.rankingService = rankingService;
@@ -168,7 +165,6 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
                 .index(targetIndexName)
                 .analyzer(tokensAnalyserName)
                 .text(description)
-                .attributes("max_token_count:" + this.tokenMaxCount)
         );
 
         AnalyzeResponse response = portalElasticsearchClient.indices().analyze(request);
@@ -181,7 +177,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
             }
         }
 
-        if(results.size() > this.tokenMaxCount / 2) {
+        if(results.size() > 5000) {
             log.debug("Analyze ({} tokens) -> {}", results.size(), description);
             // In case the token is too big give some time to avoid exceed rate limit
             try {
