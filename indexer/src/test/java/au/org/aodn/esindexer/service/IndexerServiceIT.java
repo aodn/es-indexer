@@ -200,6 +200,9 @@ public class IndexerServiceIT extends BaseTestClass {
             String actual = indexerObjectMapper.readTree(source).toPrettyString();
             JSONAssert.assertEquals(expected, actual, JSONCompareMode.STRICT);
 
+            // no running alias
+            Assertions.assertThrows(RuntimeException.class, () -> indexerMetadataService.getDocumentByUUID(uuid, INDEX_NAME+"-running"));
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         } finally {

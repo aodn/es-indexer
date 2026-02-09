@@ -125,8 +125,10 @@ public class ElasticSearchIndexService {
                 }
 
                 if (aliasedIndices.contains(baseIndexName + indexSuffix1)) {
+                    log.info("Index: {} is currently pointed to by alias: {}. Using the other index suffix: {}", baseIndexName + indexSuffix1, baseIndexName, indexSuffix2);
                     return indexSuffix2;
                 } else {
+                    log.info("Index: {} is currently pointed to by alias: {}. Using the other index suffix: {}", baseIndexName + indexSuffix2, baseIndexName, indexSuffix1);
                     return indexSuffix1;
                 }
             } catch (ElasticsearchException | IOException e) {
@@ -134,39 +136,6 @@ public class ElasticSearchIndexService {
             }
         }
     }
-
-    protected String getIncompleteIndexName(String incompleteAliasName) {
-        // get all indices who have the incomplete alias
-        try {
-            GetAliasResponse aliasResponse = portalElasticsearchClient.indices().getAlias(ga -> ga.name(incompleteAliasName));
-            var aliasedIndices = aliasResponse.result().keySet();
-            if (aliasedIndices.isEmpty()) {
-                // no index found for the given alias. It means no incomplete index
-                return null;
-            }
-            // if more than one index is pointed to by the alias, it's an error
-            if (aliasedIndices.size() > 1) {
-                throw new MultipleIndicesException("Multiple indices found for alias: " + incompleteAliasName + ". Expected only one.");
-            }
-
-            var incompleteIndex = aliasedIndices.iterator().next();
-            // if the incomplete index is not ending with either -blue or -green, it's an error
-            if (!incompleteIndex.endsWith(indexSuffix1) && !incompleteIndex.endsWith(indexSuffix2)) {
-                throw new IndexNotFoundException("Incomplete index: " + incompleteIndex + " does not end with expected suffixes: " + indexSuffix1 + " or " + indexSuffix2);
-            }
-            return incompleteIndex;
-        } catch (ElasticsearchException e) {
-            if (e.status() == 404) {
-                // no index found for the given alias. It means no incomplete index
-                return null;
-            }
-            throw new RuntimeException("Failed to get indexing index name for alias: " + incompleteAliasName + " | " + e.getMessage());
-        } catch ( IOException e) {
-            throw new RuntimeException("Failed to get indexing index name for alias: " + incompleteAliasName + " | " + e.getMessage());
-        }
-    }
-
-
 
     private List<String> getAllIndexNames() {
         try {
@@ -202,6 +171,7 @@ public class ElasticSearchIndexService {
                 // It is possible that no index is found for the given alias because sometimes developers may modify indices manually in Kibana,
                 // or the first time indexing from non-alias indices to alias-based indices.
                 log.warn("No index found for alias: {}." , alias);
+                return null;
             }
             // if more than one index is pointed to by the alias, it's an error
             if (aliasedIndices.size() > 1) {
@@ -209,7 +179,14 @@ public class ElasticSearchIndexService {
             }
 
             return aliasedIndices.iterator().next();
-        } catch (ElasticsearchException | IOException e) {
+        } catch (ElasticsearchException e) {
+            if (e.status() == 404) {
+                // no index found for the given alias. It is ok for some scenarios so we can just log a warning and return null
+                log.warn("No index found for alias: {}." , alias);
+                return null;
+            }
+            throw new RuntimeException("Failed to get index name from alias: " + alias + " | " + e.getMessage());
+        }catch ( IOException e) {
             throw new RuntimeException("Failed to get index name from alias: " + alias + " | " + e.getMessage());
         }
     }

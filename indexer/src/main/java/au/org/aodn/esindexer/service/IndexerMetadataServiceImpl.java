@@ -371,7 +371,10 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
         // this suffix is the one without the in-use alias
         var indexingIndexSuffix = elasticSearchIndexService.getIndexingIndexSuffix(indexName);
 
-        var incompleteIndexName = elasticSearchIndexService.getIncompleteIndexName(runningAliasName);
+        // try to find if there is already an incomplete index with the alias,
+        // if yes, it means there is an ongoing indexing process which has not been completed, and we can resume from the incomplete index;
+        // if no, it means there is no ongoing indexing process, and we can start a new one with a new index.
+        var incompleteIndexName = elasticSearchIndexService.getIndexNameFromAlias(runningAliasName);
 
         var runingIndexName = incompleteIndexName == null ?
                 indexName + indexingIndexSuffix :
