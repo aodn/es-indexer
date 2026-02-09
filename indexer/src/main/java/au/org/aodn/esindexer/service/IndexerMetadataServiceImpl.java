@@ -176,17 +176,6 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
                 results.add(cleanedToken);
             }
         }
-
-        if(results.size() > 5000) {
-            log.debug("Analyze ({} tokens) -> {}", results.size(), description);
-            // In case the token is too big give some time to avoid exceed rate limit
-            try {
-                Thread.sleep(1500); // 800 ms – adjust to 1000–1500 if still hitting 429
-            }
-            catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-            }
-        }
         return results;
     }
 
