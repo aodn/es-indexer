@@ -20,7 +20,7 @@ public interface IndexerMetadataService extends IndexService {
     List<BulkResponse> indexAllMetadataRecordsFromGeoNetwork(String beginWithUuid, boolean confirm, Callback callback) throws IOException;
     Hit<ObjectNode> getDocumentByUUID(String uuid) throws IOException;
     Hit<ObjectNode> getDocumentByUUID(String uuid, String indexName) throws IOException;
-    Set<String> extractTokensFromDescription(String description, String targetIndexName) throws IOException
+    Set<String> extractTokensFromDescription(String description, String targetIndexName) throws IOException;
     boolean isMetadataPublished(String uuid);
     boolean isGeoNetworkInstanceReinstalled(long portalIndexDocumentsCount);
 }
