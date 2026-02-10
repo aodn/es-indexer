@@ -1,6 +1,7 @@
 package au.org.aodn.datadiscoveryai.service;
 
 import au.org.aodn.datadiscoveryai.enums.AIModel;
+import au.org.aodn.datadiscoveryai.enums.AiEnhancementSummaryField;
 import au.org.aodn.datadiscoveryai.model.AiEnhancedLink;
 import au.org.aodn.datadiscoveryai.model.AiEnhancementRequest;
 import au.org.aodn.datadiscoveryai.model.AiEnhancementResponse;
@@ -42,7 +43,12 @@ public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
 
 
     @Override
-    public AiEnhancementResponse enhanceWithAi(String uuid, List<LinkModel> links, String title, String description) {
+    public AiEnhancementResponse enhanceWithAi(AiEnhancementRequest aiEnhancementRequest) {
+        List<LinkModel> links = aiEnhancementRequest.getLinks();
+        String title = aiEnhancementRequest.getTitle();
+        String description = aiEnhancementRequest.getAbstractText();
+        String uuid = aiEnhancementRequest.getUuid();
+
         List<String> selectedModels = new ArrayList<>();
 
         // Add models based on provided parameters
@@ -51,28 +57,24 @@ public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
         }
         if ((title != null && !title.isEmpty()) || (description != null && !description.isEmpty())) {
             selectedModels.add(AIModel.DESCRIPTION_FORMATTING.getValue());
+            // lineage can be empty for records that need to identify delivery mode so we only need to check title and description are not empty
+            selectedModels.add(AIModel.DELIVERY_CLASSIFICATION.getValue());
         }
 
         if (selectedModels.isEmpty()) {
             return null;
         }
 
-        try {
-            AiEnhancementRequest request = AiEnhancementRequest.builder()
-                    .selectedModel(selectedModels)
-                    .uuid(uuid)
-                    .title(title)
-                    .abstractText(description)
-                    .links(links)
-                    .build();
+        aiEnhancementRequest.setSelectedModel(selectedModels);
 
+        try {
             String url = serviceUrl + baseUrl;
 
             Flux<ServerSentEvent<String>> eventStream = webClient.post()
                     .uri(url)
                     .contentType(MediaType.APPLICATION_JSON)
                     .accept(MediaType.TEXT_EVENT_STREAM)
-                    .bodyValue(request)
+                    .bodyValue(aiEnhancementRequest)
                     .retrieve()
                     .bodyToFlux(new ParameterizedTypeReference<ServerSentEvent<String>>() {});
 
@@ -131,8 +133,18 @@ public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
 
     @Override
     public String getEnhancedDescription(AiEnhancementResponse aiResponse) {
-        if (aiResponse != null && aiResponse.getSummaries() != null && aiResponse.getSummaries().containsKey("ai:description")) {
-            return aiResponse.getSummaries().get("ai:description");
+        if (aiResponse != null && aiResponse.getSummaries() != null
+                && aiResponse.getSummaries().containsKey(AiEnhancementSummaryField.AI_DESCRIPTION.getFieldName())) {
+            return aiResponse.getSummaries().get(AiEnhancementSummaryField.AI_DESCRIPTION.getFieldName());
+        }
+        return null;
+    }
+
+    @Override
+    public String getEnhancedUpdateFrequency(AiEnhancementResponse aiResponse) {
+        if (aiResponse != null && aiResponse.getSummaries() != null
+                && aiResponse.getSummaries().containsKey(AiEnhancementSummaryField.AI_UPDATE_FREQUENCY.getFieldName())) {
+            return aiResponse.getSummaries().get(AiEnhancementSummaryField.AI_UPDATE_FREQUENCY.getFieldName());
         }
         return null;
     }

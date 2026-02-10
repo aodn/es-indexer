@@ -200,6 +200,9 @@
             "type": "keyword",
             "index": false
           },
+          "ai:update_frequency": {
+            "type": "keyword"
+          },
           "score": {
             "type": "long"
           },

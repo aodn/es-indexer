@@ -2,6 +2,7 @@ package au.org.aodn.esindexer.service;
 
 import au.org.aodn.ardcvocabs.model.VocabModel;
 import au.org.aodn.datadiscoveryai.service.DataDiscoveryAiService;
+import au.org.aodn.datadiscoveryai.model.AiEnhancementRequest;
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.exception.*;
 import au.org.aodn.esindexer.utils.CommonUtils;
@@ -277,11 +278,26 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
         String title = CommonUtils.getTitle(source);
         String description = CommonUtils.getDescription(source);
 
+        String status = safeGet(() -> target.getSummaries().getStatus()).orElse(null);
+        List<Map<String, String>> temporal = safeGet(() -> target.getSummaries().getTemporal()).orElse(null);
+        String statement = safeGet(() -> target.getSummaries().getStatement()).orElse(null);
+
         if (dataDiscoveryAiService.isServiceAvailable()) {
             log.info("start enhancing STAC collection in service layer with UUID: {}", uuid);
             try {
+                // build AI enhancement request
+                var aiEnhancementRequest = AiEnhancementRequest.builder()
+                        .uuid(uuid)
+                        .title(title)
+                        .abstractText(description)
+                        .links(target.getLinks())
+                        .lineageText(statement)
+                        .status(status)
+                        .temporal(temporal)
+                        .build();
+
                 // Make a single AI call for both description and link enhancement
-                var aiResponse = dataDiscoveryAiService.enhanceWithAi(uuid, target.getLinks(), title, description);
+                var aiResponse = dataDiscoveryAiService.enhanceWithAi(aiEnhancementRequest);
 
                 if (aiResponse != null) {
                     // Update AI description if available
@@ -294,6 +310,11 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
                     List<LinkModel> enhancedLinks = dataDiscoveryAiService.getEnhancedLinks(aiResponse);
                     if (enhancedLinks != null && !enhancedLinks.isEmpty()) {
                         target.setLinks(enhancedLinks);
+                    }
+
+                    String inferredUpdateFrequency = dataDiscoveryAiService.getEnhancedUpdateFrequency(aiResponse);
+                    if (inferredUpdateFrequency != null) {
+                        target.getSummaries().setAiUpdateFrequency(inferredUpdateFrequency);
                     }
                 }
             } catch (Exception e) {
