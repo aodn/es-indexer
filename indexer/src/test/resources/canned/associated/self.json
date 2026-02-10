@@ -16,7 +16,7 @@
     "statement" : "The Animal Tracking Facility Satellite Relay Tag data has been supplied to the Australian Ocean Data Network (AODN) by participants, via the St Andrews University Sea Mammal Research Unit. Tags used on species: Australian Fur Seal, Australian Sea Lion, New Zealand Fur Seal and Southern Elephant Seal - CTD Satellite Relay Data Loggers (SRDL). Collect conductivity, temperature and depth information. On some Australian Sea Lions - CTD/Fluorometer Satellite Relay Data Loggers (SRDL). Collects conductivity, temperature, fluorescence and depth information. Weddell Seals - Satellite Relay Data Loggers (SRDL). Collect temperature, speed and depth information.",
     "creation" : "2020-06-26T11:46:35",
     "revision" : "2022-05-13T04:48:51",
-    "dataset_group" : ["sample"],
+    "dataset_group" : [ "sample" ],
     "dataset_provider" : "IMOS",
     "update_frequency" : "real-time",
     "proj:geometry" : {
@@ -42,8 +42,8 @@
     "temporal" : [ {
       "start" : "2007-04-03T06:00:00Z"
     } ],
-    "platform_vocabs": [],
     "parameter_vocabs" : [ "ocean biota", "conductivity", "temperature" ],
+    "platform_vocabs" : [ ],
     "organisation_vocabs" : [ "Integrated Marine Observing System (IMOS)" ]
   },
   "contacts" : [ {
@@ -182,76 +182,76 @@
   "themes" : [ {
     "concepts" : [ {
       "id" : "Oceans | Ocean Temperature | Water Temperature",
-      "description" : "GCMD",
-      "title" : "NASA/Global Change Master Directory Earth Science Keywords Version 5.3.8"
+      "title" : "NASA/Global Change Master Directory Earth Science Keywords Version 5.3.8",
+      "description" : "GCMD"
     }, {
       "id" : "Oceans | Salinity/density | Conductivity",
-      "description" : "GCMD",
-      "title" : "NASA/Global Change Master Directory Earth Science Keywords Version 5.3.8"
+      "title" : "NASA/Global Change Master Directory Earth Science Keywords Version 5.3.8",
+      "description" : "GCMD"
     }, {
       "id" : "Oceans | Marine Biology | Marine Mammals",
-      "description" : "GCMD",
-      "title" : "NASA/Global Change Master Directory Earth Science Keywords Version 5.3.8"
+      "title" : "NASA/Global Change Master Directory Earth Science Keywords Version 5.3.8",
+      "description" : "GCMD"
     }, {
       "id" : "Oceans | Marine Biology | Marine Birds",
-      "description" : "GCMD",
-      "title" : "NASA/Global Change Master Directory Earth Science Keywords Version 5.3.8"
+      "title" : "NASA/Global Change Master Directory Earth Science Keywords Version 5.3.8",
+      "description" : "GCMD"
     } ],
     "scheme" : ""
   }, {
     "concepts" : [ {
       "id" : "Satellite Tag",
-      "description" : "IMOS",
-      "title" : "IMOS Keywords Thesaurus"
+      "title" : "IMOS Keywords Thesaurus",
+      "description" : "IMOS"
     }, {
       "id" : "CTD Satellite Relay Data Logger",
-      "description" : "IMOS",
-      "title" : "IMOS Keywords Thesaurus"
+      "title" : "IMOS Keywords Thesaurus",
+      "description" : "IMOS"
     }, {
       "id" : "Agency | SMRU | Sea Mammal Research Unit",
-      "description" : "IMOS",
-      "title" : "IMOS Keywords Thesaurus"
+      "title" : "IMOS Keywords Thesaurus",
+      "description" : "IMOS"
     } ],
     "scheme" : ""
   }, {
     "concepts" : [ {
       "id" : "Tags and Tracking Devices",
-      "description" : "",
-      "title" : "Marine Community Profile of ISO19115 v1.4 Collection Methods Vocabulary (Annex C.1.3)"
+      "title" : "Marine Community Profile of ISO19115 v1.4 Collection Methods Vocabulary (Annex C.1.3)",
+      "description" : ""
     } ],
     "scheme" : "theme"
   }, {
     "concepts" : [ {
       "id" : "device_wmo_ref",
-      "description" : "",
-      "title" : "Keywords (Theme)"
+      "title" : "Keywords (Theme)",
+      "description" : ""
     }, {
       "id" : "depth",
-      "description" : "",
-      "title" : "Keywords (Theme)"
+      "title" : "Keywords (Theme)",
+      "description" : ""
     }, {
       "id" : "sea_water_temperature",
-      "description" : "",
-      "title" : "Keywords (Theme)"
+      "title" : "Keywords (Theme)",
+      "description" : ""
     }, {
       "id" : "sea_water_pressure",
-      "description" : "",
-      "title" : "Keywords (Theme)"
+      "title" : "Keywords (Theme)",
+      "description" : ""
     }, {
       "id" : "sea_water_salinity",
-      "description" : "",
-      "title" : "Keywords (Theme)"
+      "title" : "Keywords (Theme)",
+      "description" : ""
     }, {
       "id" : "latitude",
-      "description" : "",
-      "title" : "Keywords (Theme)"
+      "title" : "Keywords (Theme)",
+      "description" : ""
     }, {
       "id" : "longitude",
-      "description" : "",
-      "title" : "Keywords (Theme)"
+      "title" : "Keywords (Theme)",
+      "description" : ""
     } ],
     "scheme" : ""
-  },{
+  }, {
     "concepts" : [ {
       "id" : "oceans"
     } ],
@@ -259,13 +259,13 @@
   } ],
   "id" : "4637bd9b-8fba-4a10-bf23-26a511e17042",
   "search_suggestions" : {
-    "abstract_phrases" : [ "satellite relay data", "mammals including elephant", "andrews", "via", "how marine", "monitoring system", "satellite relay data loggers", "mammal research", "oceanic", "zealand", "near", "oceanic environment", "south east", "australian sea lions new", "great australian", "australian fur seals", "australia", "monitoring", "time via", "south east coast", "argo satellite system", "coordinated marine animal", "temperature speed fluorescence", "marine mammal behaviour relates", "near real time", "how marine mammal", "animal tagging project", "zealand fur seals data", "speed fluorescence available", "relay data loggers", "fur seals australian sea", "fluorometers", "animal", "fluorescence available", "southern", "data loggers srdl most", "how marine mammal behaviour", "sea lions", "mammal research unit transmit", "seals australian", "marine", "sea", "how", "speed fluorescence", "include time conductivity", "australian animal tracking", "andrews sea", "temperature", "monitoring system aatams", "marine mammal behaviour", "australian fur", "tracking facility", "st", "southern ocean", "instruments include time conductivity", "andrews sea mammal", "marine animal tagging project", "near real", "time conductivity salinity temperature", "salinity temperature speed", "conductivity salinity temperature", "data parameters", "parameters measured", "australian sea lions", "coordinated", "loggers", "mammals including", "loggers srdl most", "available", "project", "facility formerly", "developed", "research", "weddell seals", "elephant seals weddell", "seals", "project satellite relay", "project satellite relay data", "argo satellite", "elephant seals", "sea lions new", "conductivity salinity", "new zealand fur", "data parameters measured", "ocean", "including elephant seals weddell", "tracking facility formerly", "seals australian sea", "elephant", "parameters", "some", "some also", "relates", "seals weddell seals", "fur seals australian", "animal tracking facility", "speed", "explore how", "mammal", "lions new zealand fur", "instruments include", "include time", "satellite", "marine mammal", "andrews sea mammal research", "relay", "marine mammals", "transmit", "including elephant seals", "seals data", "salinity temperature", "ctds", "tagging project", "sea mammal", "environment", "conductivity salinity temperature speed", "argo", "great australian bight", "environment loggers", "time", "tagging", "measured", "zealand fur", "mammal behaviour", "mammal behaviour relates", "collected", "tracking facility formerly known", "tracking", "seals data parameters measured", "seals australian sea lions", "australian sea", "east coast", "srdl", "instruments", "depth data", "weddell", "weddell seals australian", "environment loggers developed", "st andrews sea", "marine mammals including", "st andrews", "being", "including elephant", "being collected", "coast", "system", "research unit transmit", "mammals", "time conductivity", "elephant seals weddell seals", "explore how marine mammal", "research unit", "unit transmit data", "sea mammal research unit", "seals australian fur seals", "south", "seals australian fur", "australian", "new zealand fur seals", "known", "coordinated marine animal tagging", "time conductivity salinity", "include", "explore", "salinity temperature speed fluorescence", "fur seals data parameters", "instruments include time", "great", "off", "animal tagging project satellite", "depth", "future", "behaviour", "facility", "explore how marine", "sea lions new zealand", "include time conductivity salinity", "relay data", "fur", "data", "coordinated marine", "seals weddell", "seals data parameters", "loggers srdl", "seals weddell seals australian", "used", "behaviour relates", "marine animal tagging", "st andrews sea mammal", "satellite system", "conductivity", "australian bight", "system aatams", "fluorescence", "relay data loggers srdl", "bight", "near real time via", "data loggers", "temperature speed", "oceanic environment loggers developed", "new", "mammal research unit", "including", "fur seals data", "tagging project satellite relay", "project satellite", "marine mammals including elephant", "australian fur seals australian", "real", "most", "animal tagging", "sea mammal research", "unit", "transmit data", "formerly known", "marine animal", "data loggers srdl", "university", "deployed", "real time via", "animal tracking facility formerly", "new zealand", "east", "research unit transmit data", "facility formerly known", "zealand fur seals", "weddell seals australian fur", "real time", "oceanic environment loggers", "aatams", "salinity", "animal tracking", "srdl most", "tagging project satellite", "satellite relay", "also", "loggers developed", "mammals including elephant seals", "fur seals", "lions new", "lions", "lions new zealand", "australian animal", "temperature speed fluorescence available", "formerly", "unit transmit" ],
-    "platform_vocabs_sayt" : [],
+    "abstract_phrases" : [ "data near", "satellite relay data", "via argo", "mammals including elephant", "andrews", "via", "how marine", "monitoring system", "satellite relay data loggers", "mammal research", "oceanic", "zealand", "near", "oceanic environment", "south east", "australian sea lions new", "great australian", "australian fur seals", "australia", "most ctds", "monitoring", "time via", "south east coast", "fluorometers used", "developed university", "argo satellite system", "coordinated marine animal", "temperature speed fluorescence", "marine mammal behaviour relates", "near real time", "how marine mammal", "animal tagging project", "zealand fur seals data", "speed fluorescence available", "relay data loggers", "fur seals australian sea", "fluorometers", "data near real", "animal", "fluorescence available", "southern", "data loggers srdl most", "how marine mammal behaviour", "sea lions", "mammal research unit transmit", "seals australian", "system satellite", "time via argo", "marine", "sea", "how", "speed fluorescence", "include time conductivity", "australian animal tracking", "andrews sea", "temperature", "monitoring system aatams", "marine mammal behaviour", "australian fur", "tracking facility", "st", "southern ocean", "instruments include time conductivity", "measured instruments", "andrews sea mammal", "marine animal tagging project", "near real", "time conductivity salinity temperature", "salinity temperature speed", "conductivity salinity temperature", "future depth data", "university st andrews", "data parameters", "parameters measured", "australian sea lions", "coordinated", "animal tracking monitoring", "loggers", "mammals including", "loggers srdl most", "available", "project", "satellite system satellite", "facility formerly", "developed", "research", "weddell seals", "system satellite relay", "elephant seals weddell", "seals", "project satellite relay", "srdl most ctds", "project satellite relay data", "argo satellite", "ocean great", "elephant seals", "sea lions new", "conductivity salinity", "new zealand fur", "data parameters measured", "ocean", "including elephant seals weddell", "tracking facility formerly", "seals australian sea", "elephant", "parameters", "some", "some also", "relates", "seals weddell seals", "fur seals australian", "animal tracking facility", "off south east", "speed", "explore how", "mammal", "lions new zealand fur", "instruments include", "include time", "satellite", "data being", "marine mammal", "andrews sea mammal research", "available future", "relay", "marine mammals", "transmit", "including elephant seals", "data loggers deployed", "seals data", "salinity temperature", "ctds", "collected southern", "tagging project", "ctds some", "sea mammal", "environment", "conductivity salinity temperature speed", "argo", "great australian bight", "environment loggers", "time", "ocean great australian", "deployed marine", "tagging", "measured", "zealand fur", "mammal behaviour", "mammal behaviour relates", "known australian", "collected", "tracking facility formerly known", "tracking", "tracking monitoring", "seals data parameters measured", "seals australian sea lions", "australian sea", "east coast", "srdl", "instruments", "tracking monitoring system", "depth data", "weddell", "weddell seals australian", "environment loggers developed", "st andrews sea", "marine mammals including", "st andrews", "being", "including elephant", "transmit data near", "being collected", "coast", "system", "research unit transmit", "data being collected", "mammals", "time conductivity", "deployed marine mammals", "ctds some also", "elephant seals weddell seals", "explore how marine mammal", "research unit", "unit transmit data", "bight off", "also fluorometers", "sea mammal research unit", "seals australian fur seals", "south", "east coast australia", "seals australian fur", "australian", "loggers deployed", "new zealand fur seals", "known", "coordinated marine animal tagging", "time conductivity salinity", "australian bight off", "include", "explore", "university st", "salinity temperature speed fluorescence", "future depth", "fur seals data parameters", "instruments include time", "great", "off", "animal tagging project satellite", "depth", "future", "relates oceanic", "behaviour", "facility", "explore how marine", "sea lions new zealand", "depth data being", "include time conductivity salinity", "relay data", "fur", "data", "coordinated marine", "seals weddell", "seals data parameters", "coast australia", "loggers srdl", "seals weddell seals australian", "used", "behaviour relates", "used explore", "marine animal tagging", "st andrews sea mammal", "satellite system", "conductivity", "australian bight", "system aatams", "fluorescence", "relay data loggers srdl", "bight", "near real time via", "off south", "data loggers", "temperature speed", "oceanic environment loggers developed", "new", "mammal research unit", "including", "fur seals data", "southern ocean great", "tagging project satellite relay", "project satellite", "marine mammals including elephant", "australian fur seals australian", "real", "most", "animal tagging", "sea mammal research", "unit", "via argo satellite", "transmit data", "formerly known", "marine animal", "data loggers srdl", "university", "deployed", "real time via", "aatams coordinated", "animal tracking facility formerly", "new zealand", "some also fluorometers", "used explore how", "east", "research unit transmit data", "facility formerly known", "zealand fur seals", "weddell seals australian fur", "real time", "oceanic environment loggers", "aatams", "salinity", "animal tracking", "srdl most", "tagging project satellite", "satellite relay", "also", "loggers developed", "mammals including elephant seals", "fur seals", "lions new", "lions", "lions new zealand", "australian animal", "temperature speed fluorescence available", "formerly", "unit transmit" ],
     "parameter_vocabs_sayt" : [ "ocean biota", "conductivity", "temperature" ],
+    "platform_vocabs_sayt" : [ ],
     "organisation_vocabs_sayt" : [ "Integrated Marine Observing System (IMOS)" ]
   },
   "sci:citation" : "{\"suggestedCitation\":\"The citation in a list of references is: \\\"IMOS [year-of-data-download], [Title], [data-access-URL], accessed [date-of-access].\\\"\",\"useLimitations\":[\"Data, products and services from IMOS are provided \\\"as is\\\" without any warranty as to fitness for a particular purpose.\"],\"otherConstraints\":[\"Any users of IMOS data are required to clearly acknowledge the source of the material derived from IMOS in the format: \\\"Data was sourced from Australia’s Integrated Marine Observing System (IMOS) – IMOS is enabled by the National Collaborative Research Infrastructure strategy (NCRIS).\\\" If relevant, also credit other organisations involved in collection of this particular datastream (as listed in 'credit' in the metadata record).\"]}",
-  "type" : "Collection",
   "stac_version" : "1.0.0",
-  "stac_extensions" : [ "https://stac-extensions.github.io/scientific/v1.0.0/schema.json", "https://stac-extensions.github.io/contacts/v0.1.1/schema.json", "https://stac-extensions.github.io/projection/v1.1.0/schema.json", "https://stac-extensions.github.io/language/v1.0.0/schema.json", "https://stac-extensions.github.io/themes/v1.0.0/schema.json", "https://stac-extensions.github.io/web-map-links/v1.2.0/schema.json" ]
+  "stac_extensions" : [ "https://stac-extensions.github.io/scientific/v1.0.0/schema.json", "https://stac-extensions.github.io/contacts/v0.1.1/schema.json", "https://stac-extensions.github.io/projection/v1.1.0/schema.json", "https://stac-extensions.github.io/language/v1.0.0/schema.json", "https://stac-extensions.github.io/themes/v1.0.0/schema.json", "https://stac-extensions.github.io/web-map-links/v1.2.0/schema.json" ],
+  "type" : "Collection"
 }

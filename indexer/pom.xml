@@ -226,17 +226,17 @@
         </dependency>
         <dependency>
             <groupId>au.org.aodn</groupId>
-            <artifactId>geonetwork-api</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>au.org.aodn</groupId>
             <artifactId>ardcvocabs</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>
             <groupId>au.org.aodn</groupId>
             <artifactId>stacmodel</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>au.org.aodn</groupId>
+            <artifactId>geonetwork-api</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>
