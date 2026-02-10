@@ -262,6 +262,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
 
         String status = safeGet(() -> target.getSummaries().getStatus()).orElse(null);
         List<Map<String, String>> temporal = safeGet(() -> target.getSummaries().getTemporal()).orElse(null);
+        String statement = safeGet(() -> target.getSummaries().getStatement()).orElse(null);
 
         if (dataDiscoveryAiService.isServiceAvailable()) {
             log.info("start enhancing STAC collection in service layer with UUID: {}", uuid);
@@ -272,6 +273,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
                         .title(title)
                         .abstractText(description)
                         .links(target.getLinks())
+                        .lineageText(statement)
                         .status(status)
                         .temporal(temporal)
                         .build();
