@@ -1,6 +1,7 @@
 package au.org.aodn.datadiscoveryai.service;
 
 import au.org.aodn.datadiscoveryai.enums.AIModel;
+import au.org.aodn.datadiscoveryai.enums.AiEnhancementSummaryField;
 import au.org.aodn.datadiscoveryai.model.AiEnhancedLink;
 import au.org.aodn.datadiscoveryai.model.AiEnhancementRequest;
 import au.org.aodn.datadiscoveryai.model.AiEnhancementResponse;
@@ -132,16 +133,18 @@ public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
 
     @Override
     public String getEnhancedDescription(AiEnhancementResponse aiResponse) {
-        if (aiResponse != null && aiResponse.getSummaries() != null && aiResponse.getSummaries().containsKey("ai:description")) {
-            return aiResponse.getSummaries().get("ai:description");
+        if (aiResponse != null && aiResponse.getSummaries() != null
+                && aiResponse.getSummaries().containsKey(AiEnhancementSummaryField.AI_DESCRIPTION.getFieldName())) {
+            return aiResponse.getSummaries().get(AiEnhancementSummaryField.AI_DESCRIPTION.getFieldName());
         }
         return null;
     }
 
     @Override
     public String getEnhancedUpdateFrequency(AiEnhancementResponse aiResponse) {
-        if (aiResponse != null && aiResponse.getSummaries()!= null && aiResponse.getSummaries().containsKey("ai:update_frequency")) {
-            return aiResponse.getSummaries().get("ai:update_frequency");
+        if (aiResponse != null && aiResponse.getSummaries() != null
+                && aiResponse.getSummaries().containsKey(AiEnhancementSummaryField.AI_UPDATE_FREQUENCY.getFieldName())) {
+            return aiResponse.getSummaries().get(AiEnhancementSummaryField.AI_UPDATE_FREQUENCY.getFieldName());
         }
         return null;
     }
