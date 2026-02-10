@@ -28,6 +28,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import jakarta.xml.bind.JAXBException;
 import lombok.extern.slf4j.Slf4j;
+import org.elasticsearch.client.ResponseException;
 import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.operation.TransformException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -152,11 +155,27 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
             return false;
         }
     }
-
-    protected Set<String> extractTokensFromDescription(String description, String targetIndexName) throws IOException {
+    /**
+     * Call the analyzer to create token, however it cannot be too big and too fast else you will get
+     * URI [/es-indexer-edge__20260208_224943+0000/_analyze], status line [HTTP/1.1 429 Too Many Requests]
+     * @param description - The text you want to tokenize
+     * @param targetIndexName - The index name
+     * @return - The token created from description
+     * @throws IOException - Not expected
+     */
+    @Retryable(
+            retryFor = ResponseException.class,
+            maxAttempts = 15,
+            backoff = @Backoff(delay = 60000, multiplier = 2)
+    )
+    public Set<String> extractTokensFromDescription(String description, String targetIndexName) throws IOException {
         Set<String> results = new HashSet<>();
+        AnalyzeRequest request = AnalyzeRequest.of(ar -> ar
+                .index(targetIndexName)
+                .analyzer(tokensAnalyserName)
+                .text(description)
+        );
 
-        AnalyzeRequest request = AnalyzeRequest.of(ar -> ar.index(targetIndexName).analyzer(tokensAnalyserName).text(description));
         AnalyzeResponse response = portalElasticsearchClient.indices().analyze(request);
 
         for (AnalyzeToken token : response.tokens()) {
@@ -166,7 +185,6 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
                 results.add(cleanedToken);
             }
         }
-
         return results;
     }
 
@@ -242,7 +260,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
 
         // search_as_you_type enabled fields can be extended
         SearchSuggestionsModel searchSuggestionsModel = SearchSuggestionsModel.builder()
-                .abstractPhrases(this.extractTokensFromDescription(stacCollectionModel.getDescription(), targetIndexName))
+                .abstractPhrases(self.extractTokensFromDescription(stacCollectionModel.getDescription(), targetIndexName))
                 .parameterVocabs(stacCollectionModel.getSummaries().getParameterVocabs())
                 .platformVocabs(stacCollectionModel.getSummaries().getPlatformVocabs())
                 .organisationVocabs(stacCollectionModel.getSummaries().getOrganisationVocabs())
@@ -538,14 +556,13 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
 
         return results;
     }
-
     /**
      * This method only for smoothly swapping from non-alias index to alias-based index.
      * If alias already working properly in all edge, staging and prod, this method is not needed and can be removed later.
-     * @param alias
-     * @param versionedIndexName
+     * @param alias - The alias name, which is use to determine if this is the in use index.
+     * @param versionedIndexName - The name of the index, it will be different each time and use alias to set it name as current index.
      */
-    public void checkAndDelete(String alias ,String versionedIndexName) {
+    protected void checkAndDelete(String alias ,String versionedIndexName) {
         try {
             // First determine if the provided name is an alias. If it is an alias, do NOT delete.
             boolean isAlias = false;

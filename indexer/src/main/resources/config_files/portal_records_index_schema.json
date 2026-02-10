@@ -13,14 +13,21 @@
         "shingle_analyser": {
           "type": "custom",
           "tokenizer": "standard",
+          "char_filter": [
+            "html_strip"
+          ],
           "filter": [
             "lowercase",
-            "english_stop",
-            "shingle_filter",
+            "asciifolding",
+            "remove_numbers",
             "uuid_filter",
             "non_standard_pattern_filter",
+            "et_al_stop",
+            "english_stop",
             "length_filter",
-            "remove_numbers"
+            "token_limit",
+            "shingle_filter",
+            "unique"
           ]
         }
       },
@@ -50,9 +57,17 @@
           "pattern": "\\b\\d+\\b",
           "replacement": ""
         },
+        "token_limit" : {
+          "type": "limit",
+          "max_token_count": 350
+        },
         "length_filter": {
           "type": "length",
           "min": 2
+        },
+        "et_al_stop": {
+          "type": "stop",
+          "stopwords": ["et", "al", "et al", "et.", "al."]
         }
       }
     }
@@ -70,10 +85,12 @@
         "analyzer": "keyword"
       },
       "stac_version": {
-        "type": "text"
+        "type": "keyword",
+        "index": false
       },
       "type": {
-        "type": "text"
+        "type": "keyword",
+        "index": false
       },
       "title": {
         "type": "text",
@@ -136,7 +153,8 @@
         "type": "text"
       },
       "license": {
-        "type": "keyword"
+        "type": "keyword",
+        "index": false
       },
       "links": {
         "type": "nested",
@@ -145,22 +163,25 @@
             "type": "nested",
             "properties": {
               "href": {
-                "type": "text"
+                "type": "keyword",
+                "index": false
               },
               "rel": {
-                "type": "text"
+                "type": "keyword",
+                "index": false
               },
               "type": {
-                "type": "text"
+                "type": "keyword",
+                "index": false
               },
               "title": {
-                "type": "text"
+                "type": "keyword"
               },
               "description": {
-                "type": "text"
+                "type": "keyword"
               },
               "ai:group": {
-                "type": "text"
+                "type": "keyword"
               }
             }
           }
@@ -170,12 +191,14 @@
         "type": "flattened"
       },
       "sci:citation": {
-        "type": "keyword"
+        "type": "keyword",
+        "index": false
       },
       "summaries": {
         "properties": {
           "ai:description": {
-            "type": "keyword"
+            "type": "keyword",
+            "index": false
           },
           "ai:update_frequency": {
             "type": "keyword"
@@ -184,7 +207,7 @@
             "type": "long"
           },
           "status": {
-            "type": "text"
+            "type": "keyword"
           },
           "credits": {
             "type": "text"
@@ -193,10 +216,10 @@
             "type": "nested",
             "properties": {
               "code": {
-                "type": "text"
+                "type": "keyword"
               },
               "name": {
-                "type": "text"
+                "type": "keyword"
               }
             }
           },
@@ -230,7 +253,8 @@
             }
           },
           "statement": {
-            "type": "text"
+            "type": "keyword",
+            "index": false
           }
         }
       },
@@ -241,22 +265,26 @@
             "type": "nested",
             "properties": {
               "name": {
-                "type": "text"
+                "type": "keyword",
+                "index": false
               },
               "organization": {
-                "type": "text"
+                "type": "keyword"
               },
               "position": {
-                "type": "text"
+                "type": "keyword",
+                "index": false
               },
               "phones": {
                 "type": "nested",
                 "properties": {
                   "value": {
-                    "type": "keyword"
+                    "type": "keyword",
+                    "index": false
                   },
                   "roles": {
-                    "type": "keyword"
+                    "type": "keyword",
+                    "index": false
                   }
                 }
               },
@@ -264,10 +292,12 @@
                 "type": "nested",
                 "properties": {
                   "value": {
-                    "type": "keyword"
+                    "type": "keyword",
+                    "index": false
                   },
                   "roles": {
-                    "type": "keyword"
+                    "type": "keyword",
+                    "index": false
                   }
                 }
               },
@@ -275,19 +305,24 @@
                 "type": "nested",
                 "properties": {
                   "delivery_point": {
-                    "type": "keyword"
+                    "type": "keyword",
+                    "index": false
                   },
                   "city": {
-                    "type": "keyword"
+                    "type": "keyword",
+                    "index": false
                   },
                   "administrative_area": {
-                    "type": "keyword"
+                    "type": "keyword",
+                    "index": false
                   },
                   "postal_code": {
-                    "type": "keyword"
+                    "type": "keyword",
+                    "index": false
                   },
                   "country": {
-                    "type": "keyword"
+                    "type": "keyword",
+                    "index": false
                   }
                 }
               },
@@ -317,7 +352,8 @@
                 }
               },
               "roles": {
-                "type": "text"
+                "type": "keyword",
+                "index": false
               }
             }
           }
