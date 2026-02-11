@@ -47,7 +47,7 @@ public class ArdcAutoConfiguration {
         // Add delay before every request (most effective simple fix)
         template.getInterceptors().add((request, body, execution) -> {
             try {
-                limit.await(2, TimeUnit.SECONDS); // 1.2 seconds – adjust based on observed limits
+                limit.await(800, TimeUnit.MILLISECONDS); // 1 seconds – adjust based on observed limits
             } catch (InterruptedException e) {
                 // Ignore
             }
