@@ -21,11 +21,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.actuate.health.Health;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.*;
@@ -58,6 +60,8 @@ public class VocabServiceImpl implements VocabService {
     protected ElasticSearchIndexService elasticSearchIndexService;
     protected ObjectMapper indexerObjectMapper;
     protected ArdcVocabService ardcVocabService;
+    protected String available = null;
+    protected ExecutorService executorService = Executors.newFixedThreadPool(3);
 
     protected boolean themeMatchConcept(ThemesModel theme, ConceptModel thatConcept) {
         /*
@@ -332,6 +336,25 @@ public class VocabServiceImpl implements VocabService {
         return groupVocabsFromEsByKey("organisation_vocab");
     }
 
+    @Override
+    public void setAvailable(String status) {
+        available = status;
+    }
+
+    @Override
+    public Health health() {
+        if(available == null) {
+            return Health.status(HttpStatus.OK.toString())
+                    .build();
+        }
+        else {
+            return Health.status(HttpStatus.SERVICE_UNAVAILABLE.toString())
+                    .withDetail("reason", available)
+                    .build();
+
+        }
+    }
+
     @CacheEvict(value = VocabType.Names.AODN_DISCOVERY_PARAMETER_VOCABS, allEntries = true)
     public void clearParameterVocabCache() {
         log.info("Cache evit for {}", VocabType.Names.AODN_DISCOVERY_PARAMETER_VOCABS);
@@ -451,7 +474,6 @@ public class VocabServiceImpl implements VocabService {
     public CompletableFuture<Void> populateVocabsDataAsync(int delay) {
         log.info("Starting async vocabs data fetching process...");
 
-        ExecutorService executorService = Executors.newFixedThreadPool(3);
         List<Callable<List<VocabModel>>> vocabTasks = List.of(
                 () -> ardcVocabService.getARDCVocabByType(ArdcCurrentPaths.PARAMETER_VOCAB),
                 () -> ardcVocabService.getARDCVocabByType(ArdcCurrentPaths.PLATFORM_VOCAB),
