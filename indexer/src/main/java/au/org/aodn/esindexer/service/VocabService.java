@@ -4,6 +4,7 @@ import au.org.aodn.ardcvocabs.model.VocabModel;
 import au.org.aodn.stac.model.ContactsModel;
 import au.org.aodn.stac.model.ThemesModel;
 import com.fasterxml.jackson.databind.JsonNode;
+import org.springframework.boot.actuate.health.Health;
 
 import java.io.IOException;
 import java.util.List;
@@ -40,4 +41,6 @@ public interface VocabService {
     List<JsonNode> getParameterVocabs() throws IOException;
     List<JsonNode> getPlatformVocabs() throws IOException;
     List<JsonNode> getOrganisationVocabs() throws IOException;
+    void setAvailable(String status);
+    Health health();
 }
