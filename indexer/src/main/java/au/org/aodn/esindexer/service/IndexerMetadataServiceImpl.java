@@ -589,10 +589,9 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
      * This method only for smoothly swapping from non-alias index to alias-based index.
      * If alias already working properly in all edge, staging and prod, this method is not needed and can be removed later.
      * @param alias - The alias name, which is use to determine if this is the in use index.
-     * @param versionedIndexName - The name of the index, it will be different each time and use alias to set it name as current index.
+     * @param workingIndexName - The name of the index,
      */
-    protected void checkAndDelete(String alias ,String versionedIndexName) {
-    public void checkAndDelete(String alias ,String workingIndexName) {
+    protected void checkAndDelete(String alias ,String workingIndexName) {
         try {
             // First determine if the provided name is an alias. If it is an alias, do NOT delete.
             boolean isAlias = false;

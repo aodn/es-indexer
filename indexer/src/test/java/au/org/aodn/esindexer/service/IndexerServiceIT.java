@@ -195,7 +195,7 @@ public class IndexerServiceIT extends BaseTestClass {
             JSONAssert.assertEquals(expected, actual, JSONCompareMode.STRICT);
 
             // no running alias
-            Assertions.assertThrows(RuntimeException.class, () -> indexerMetadataService.getDocumentByUUID(uuid, INDEX_NAME+"-running"));
+            Assertions.assertThrows(RuntimeException.class, () -> indexerService.getDocumentByUUID(uuid, INDEX_NAME+"-running"));
 
         } catch (Exception e) {
             throw new RuntimeException(e);
