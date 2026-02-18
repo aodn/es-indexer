@@ -123,6 +123,13 @@ public class IndexerServiceIT extends BaseTestClass {
     }
 
     @Test
+    public void verifyGetWorkingIndexName() {
+        String suffix = elasticSearchIndexService.getIndexingIndexSuffix(INDEX_NAME);
+        Assertions.assertEquals( "-blue", suffix, "Working index name correct");
+        Assertions.assertEquals(  "-blue1", suffix, "Working index name correct");
+    }
+
+    @Test
     public void verifyDeleteDocumentByUUID() throws IOException {
         String uuid1 = "830f9a83-ae6b-4260-a82a-24c4851f7119";
         String uuid2 = "06b09398-d3d0-47dc-a54a-a745319fbece";
@@ -186,6 +193,9 @@ public class IndexerServiceIT extends BaseTestClass {
             String expected = indexerObjectMapper.readTree(expectedData).toPrettyString();
             String actual = indexerObjectMapper.readTree(source).toPrettyString();
             JSONAssert.assertEquals(expected, actual, JSONCompareMode.STRICT);
+
+            // no running alias
+            Assertions.assertThrows(RuntimeException.class, () -> indexerService.getDocumentByUUID(uuid, INDEX_NAME+"-running"));
 
         } catch (Exception e) {
             throw new RuntimeException(e);

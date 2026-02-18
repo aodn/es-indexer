@@ -3,15 +3,17 @@ package au.org.aodn.esindexer.service;
 import au.org.aodn.esindexer.exception.CreateIndexException;
 import au.org.aodn.esindexer.exception.DeleteIndexException;
 import au.org.aodn.esindexer.exception.IndexNotFoundException;
+import au.org.aodn.esindexer.exception.MultipleIndicesException;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.ElasticsearchException;
+import co.elastic.clients.elasticsearch.cat.IndicesResponse;
+import co.elastic.clients.elasticsearch.cat.indices.IndicesRecord;
 import co.elastic.clients.elasticsearch.core.CountRequest;
 import co.elastic.clients.elasticsearch.core.CountResponse;
 import co.elastic.clients.elasticsearch.core.SearchRequest;
 import co.elastic.clients.elasticsearch.indices.CreateIndexRequest;
 import co.elastic.clients.elasticsearch.indices.CreateIndexResponse;
-import co.elastic.clients.elasticsearch.indices.GetIndexRequest;
-import co.elastic.clients.elasticsearch.indices.GetIndexResponse;
+import co.elastic.clients.elasticsearch.indices.GetAliasResponse;
 import co.elastic.clients.transport.endpoints.BooleanResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +21,8 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Set;
+import java.util.stream.Collectors;
 
 
 @Slf4j
@@ -31,6 +31,11 @@ public class ElasticSearchIndexService {
 
     @Autowired
     ElasticsearchClient portalElasticsearchClient;
+
+
+    // Naming below follows the blue-green deployment pattern which is the pattern we are using for index updates and are recommended naming convention.
+    private static final String indexSuffix1 = "-blue";
+    private static final String indexSuffix2 = "-green";
 
     protected void deleteIndexStore(String indexName) {
         try {
@@ -71,7 +76,7 @@ public class ElasticSearchIndexService {
         }
     }
 
-    public void createIndexFromMappingJSONFile(String indexMappingFile, String indexName) {
+    public void recreateIndexFromMappingJSONFile(String indexMappingFile, String indexName) {
         // delete the existing index if found first
         this.deleteIndexStore(indexName);
 
@@ -93,18 +98,55 @@ public class ElasticSearchIndexService {
             throw new CreateIndexException("Failed to elastic index from schema file: " + indexName + " | " + e.getMessage());
         }
     }
+
+
     /**
      * Generate a versioned index name by appending the current date and time to the base index name.
      * @param baseIndexName the base index name
-     * @return the versioned index name in the format: baseIndexName__yyyyMMdd_HHmmssZ
+     *
      */
-    protected String getVersionedIndexName(String baseIndexName) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmssZ");
-        String dateTime = ZonedDateTime.now().format(formatter);
-        return baseIndexName + "__" + dateTime;
+    protected String getIndexingIndexSuffix(String baseIndexName) {
+
+        // get all indices (nothing to do with aliases)
+        var indices = getAllIndexNames();
+        if (!indices.contains(baseIndexName + indexSuffix1)) {
+            return indexSuffix1;
+        } else if (!indices.contains(baseIndexName + indexSuffix2)) {
+            return indexSuffix2;
+        } else {
+            // both indices exist, find out which one is not currently pointed to by the alias
+            log.warn("Both blue and green indices exist for base index name: {}. Determining the inactive index.", baseIndexName);
+            try {
+                GetAliasResponse aliasResponse = portalElasticsearchClient.indices().getAlias(ga -> ga.name(baseIndexName));
+                var aliasedIndices = aliasResponse.result().keySet();
+                // if more than one index is pointed to by the alias, it's an error
+                if (aliasedIndices.size() > 1) {
+                    throw new MultipleIndicesException("Multiple indices found for alias: " + baseIndexName + ". Expected only one.");
+                }
+
+                if (aliasedIndices.contains(baseIndexName + indexSuffix1)) {
+                    log.info("Index: {} is currently pointed to by alias: {}. Using the other index suffix: {}", baseIndexName + indexSuffix1, baseIndexName, indexSuffix2);
+                    return indexSuffix2;
+                } else {
+                    log.info("Index: {} is currently pointed to by alias: {}. Using the other index suffix: {}", baseIndexName + indexSuffix2, baseIndexName, indexSuffix1);
+                    return indexSuffix1;
+                }
+            } catch (ElasticsearchException | IOException e) {
+                throw new IndexNotFoundException("Failed to get alias information for index: " + baseIndexName + " | " + e.getMessage());
+            }
+        }
     }
 
-    protected void switchAliasToNewIndex(String alias, String newIndexName) {
+    private List<String> getAllIndexNames() {
+        try {
+            IndicesResponse response = portalElasticsearchClient.cat().indices(i -> i);
+            return response.valueBody().stream().map(IndicesRecord::index).distinct().collect(Collectors.toList());
+        } catch ( ElasticsearchException | IOException e) {
+            throw new IndexNotFoundException("Failed to get indices from Elasticsearch | " + e.getMessage());
+        }
+    }
+
+    protected void updateAliasToNewIndex(String alias, String newIndexName) {
         try {
             log.info("Switching alias: {} to point to new index: {}", alias, newIndexName);
             portalElasticsearchClient.indices().updateAliases(ua -> ua
@@ -117,7 +159,49 @@ public class ElasticSearchIndexService {
             );
             log.info("Alias: {} now points to index: {}", alias, newIndexName);
         } catch (ElasticsearchException | IOException e) {
-            throw new IndexNotFoundException("Failed to switch alias: " + alias + " to new index: " + newIndexName + " | " + e.getMessage());
+            throw new RuntimeException("Failed to switch alias: " + alias + " to new index: " + newIndexName + " | " + e.getMessage());
+        }
+    }
+
+    protected String getIndexNameFromAlias(String alias) {
+        try {
+            GetAliasResponse aliasResponse = portalElasticsearchClient.indices().getAlias(ga -> ga.name(alias));
+            var aliasedIndices = aliasResponse.result().keySet();
+            if (aliasedIndices.isEmpty()) {
+                // It is possible that no index is found for the given alias because sometimes developers may modify indices manually in Kibana,
+                // or the first time indexing from non-alias indices to alias-based indices.
+                log.warn("No index found for alias: {}." , alias);
+                return null;
+            }
+            // if more than one index is pointed to by the alias, it's an error
+            if (aliasedIndices.size() > 1) {
+                throw new MultipleIndicesException("Multiple indices found for alias: " + alias + ". Expected only one.");
+            }
+
+            return aliasedIndices.iterator().next();
+        } catch (ElasticsearchException e) {
+            if (e.status() == 404) {
+                // no index found for the given alias. It is ok for some scenarios so we can just log a warning and return null
+                log.warn("No index found for alias: {}." , alias);
+                return null;
+            }
+            throw new RuntimeException("Failed to get index name from alias: " + alias + " | " + e.getMessage());
+        }catch ( IOException e) {
+            throw new RuntimeException("Failed to get index name from alias: " + alias + " | " + e.getMessage());
+        }
+    }
+
+    protected void removeAliasFromIndex(String alias, String indexName) {
+        try {
+            log.info("Removing alias: {} from index: {}", alias, indexName);
+            portalElasticsearchClient.indices().updateAliases(ua -> ua
+                    .actions(a -> a
+                            .remove(r -> r.alias(alias).index(indexName))
+                    )
+            );
+            log.info("Alias: {} removed from index: {}", alias, indexName);
+        } catch (ElasticsearchException | IOException e) {
+            throw new RuntimeException("Failed to remove alias: " + alias + " from index: " + indexName + " | " + e.getMessage());
         }
     }
 
