@@ -5,6 +5,7 @@ import au.org.aodn.ardcvocabs.service.ArdcVocabServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.retry.annotation.EnableRetry;
 import org.springframework.retry.backoff.ExponentialBackOffPolicy;
@@ -13,11 +14,16 @@ import org.springframework.retry.support.RetryTemplate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
+
 @Slf4j
 @AutoConfiguration
 @ConditionalOnMissingBean(ArdcVocabService.class)
 @EnableRetry  // Enable retry support
 public class ArdcAutoConfiguration {
+
+    protected CountDownLatch limit = new CountDownLatch(1);
 
     @Bean
     public ArdcVocabService createArdcVocabsService(RetryTemplate retryTemplate) {
@@ -27,7 +33,28 @@ public class ArdcAutoConfiguration {
         requestFactory.setConnectTimeout(5000); // e.g., 5 seconds
         requestFactory.setReadTimeout(10000);      // e.g., 10 seconds
 
-        return new ArdcVocabServiceImpl(new RestTemplate(requestFactory), retryTemplate);
+        RestTemplate template = new RestTemplate(requestFactory);
+
+        // Set default User-Agent, pretend user browser to avoid being blocked by remote server, but there are still rate limit
+        template.getInterceptors().add((request, body, execution) -> {
+            request.getHeaders().set(
+                    HttpHeaders.USER_AGENT,
+                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36 Edg/130.0.0.0"
+            );
+            return execution.execute(request, body);
+        });
+
+        // Add delay before every request (most effective simple fix)
+        template.getInterceptors().add((request, body, execution) -> {
+            try {
+                limit.await(800, TimeUnit.MILLISECONDS); // 1 seconds – adjust based on observed limits
+            } catch (InterruptedException e) {
+                // Ignore
+            }
+            return execution.execute(request, body);
+        });
+
+        return new ArdcVocabServiceImpl(template, retryTemplate);
     }
 
     @Bean

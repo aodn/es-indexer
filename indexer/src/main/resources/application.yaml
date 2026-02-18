@@ -33,7 +33,11 @@ management:
   health:
     elasticsearch:
       enabled: false
+    diskspace:
+      enabled: false
   endpoint:
+    health:
+      show-details: always
     logfile:
       external-file: /tmp/logs/indexer.log
 

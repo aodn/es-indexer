@@ -133,6 +133,7 @@ public class StacCollectionMapperServiceTest {
                 dataDiscoveryAiService
         );
         indexerService = spy(indexerService);
+        indexerService.self = indexerService;
 
         // Number is 0, pretend fresh elastic instance
         when(elasticSearchIndexService.getDocumentsCount(anyString()))

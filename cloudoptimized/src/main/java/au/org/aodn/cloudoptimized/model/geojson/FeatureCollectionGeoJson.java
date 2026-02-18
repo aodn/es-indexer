@@ -19,9 +19,12 @@ public class FeatureCollectionGeoJson  {
 
     @JsonProperty("type")
     private final String type = GeoJsonTypes.FEATURE_COLLECTION.getValue();
+
     @JsonProperty("features")
     private List<FeatureGeoJson> features;
+
     @JsonProperty("properties")
+    @Builder.Default
     private Map<String, Object> properties = new HashMap<>();
 
     public void addProperty(String key, Object value) {

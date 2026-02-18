@@ -2,6 +2,7 @@ package au.org.aodn.esindexer.service;
 
 import au.org.aodn.ardcvocabs.model.VocabModel;
 import au.org.aodn.datadiscoveryai.service.DataDiscoveryAiService;
+import au.org.aodn.datadiscoveryai.model.AiEnhancementRequest;
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.exception.*;
 import au.org.aodn.esindexer.utils.CommonUtils;
@@ -27,6 +28,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import jakarta.xml.bind.JAXBException;
 import lombok.extern.slf4j.Slf4j;
+import org.elasticsearch.client.ResponseException;
 import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.operation.TransformException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +39,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -152,11 +156,27 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
             return false;
         }
     }
-
-    protected Set<String> extractTokensFromDescription(String description, String targetIndexName) throws IOException {
+    /**
+     * Call the analyzer to create token, however it cannot be too big and too fast else you will get
+     * URI [/es-indexer-edge__20260208_224943+0000/_analyze], status line [HTTP/1.1 429 Too Many Requests]
+     * @param description - The text you want to tokenize
+     * @param targetIndexName - The index name
+     * @return - The token created from description
+     * @throws IOException - Not expected
+     */
+    @Retryable(
+            retryFor = ResponseException.class,
+            maxAttempts = 15,
+            backoff = @Backoff(delay = 60000, multiplier = 2)
+    )
+    public Set<String> extractTokensFromDescription(String description, String targetIndexName) throws IOException {
         Set<String> results = new HashSet<>();
+        AnalyzeRequest request = AnalyzeRequest.of(ar -> ar
+                .index(targetIndexName)
+                .analyzer(tokensAnalyserName)
+                .text(description)
+        );
 
-        AnalyzeRequest request = AnalyzeRequest.of(ar -> ar.index(targetIndexName).analyzer(tokensAnalyserName).text(description));
         AnalyzeResponse response = portalElasticsearchClient.indices().analyze(request);
 
         for (AnalyzeToken token : response.tokens()) {
@@ -166,7 +186,6 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
                 results.add(cleanedToken);
             }
         }
-
         return results;
     }
 
@@ -242,7 +261,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
 
         // search_as_you_type enabled fields can be extended
         SearchSuggestionsModel searchSuggestionsModel = SearchSuggestionsModel.builder()
-                .abstractPhrases(this.extractTokensFromDescription(stacCollectionModel.getDescription(), targetIndexName))
+                .abstractPhrases(self.extractTokensFromDescription(stacCollectionModel.getDescription(), targetIndexName))
                 .parameterVocabs(stacCollectionModel.getSummaries().getParameterVocabs())
                 .platformVocabs(stacCollectionModel.getSummaries().getPlatformVocabs())
                 .organisationVocabs(stacCollectionModel.getSummaries().getOrganisationVocabs())
@@ -260,11 +279,26 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
         String title = CommonUtils.getTitle(source);
         String description = CommonUtils.getDescription(source);
 
+        String status = safeGet(() -> target.getSummaries().getStatus()).orElse(null);
+        List<Map<String, String>> temporal = safeGet(() -> target.getSummaries().getTemporal()).orElse(null);
+        String statement = safeGet(() -> target.getSummaries().getStatement()).orElse(null);
+
         if (dataDiscoveryAiService.isServiceAvailable()) {
             log.info("start enhancing STAC collection in service layer with UUID: {}", uuid);
             try {
+                // build AI enhancement request
+                var aiEnhancementRequest = AiEnhancementRequest.builder()
+                        .uuid(uuid)
+                        .title(title)
+                        .abstractText(description)
+                        .links(target.getLinks())
+                        .lineageText(statement)
+                        .status(status)
+                        .temporal(temporal)
+                        .build();
+
                 // Make a single AI call for both description and link enhancement
-                var aiResponse = dataDiscoveryAiService.enhanceWithAi(uuid, target.getLinks(), title, description);
+                var aiResponse = dataDiscoveryAiService.enhanceWithAi(aiEnhancementRequest);
 
                 if (aiResponse != null) {
                     // Update AI description if available
@@ -277,6 +311,11 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
                     List<LinkModel> enhancedLinks = dataDiscoveryAiService.getEnhancedLinks(aiResponse);
                     if (enhancedLinks != null && !enhancedLinks.isEmpty()) {
                         target.setLinks(enhancedLinks);
+                    }
+
+                    String inferredUpdateFrequency = dataDiscoveryAiService.getEnhancedUpdateFrequency(aiResponse);
+                    if (inferredUpdateFrequency != null) {
+                        target.getSummaries().setAiUpdateFrequency(inferredUpdateFrequency);
                     }
                 }
             } catch (Exception e) {
@@ -546,13 +585,13 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
 
         return results;
     }
-
     /**
      * This method only for smoothly swapping from non-alias index to alias-based index.
      * If alias already working properly in all edge, staging and prod, this method is not needed and can be removed later.
-     * @param alias
-     * @param workingIndexName
+     * @param alias - The alias name, which is use to determine if this is the in use index.
+     * @param versionedIndexName - The name of the index, it will be different each time and use alias to set it name as current index.
      */
+    protected void checkAndDelete(String alias ,String versionedIndexName) {
     public void checkAndDelete(String alias ,String workingIndexName) {
         try {
             // First determine if the provided name is an alias. If it is an alias, do NOT delete.

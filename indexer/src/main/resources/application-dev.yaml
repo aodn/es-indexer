@@ -33,6 +33,7 @@ logging:
     au.org.aodn.indexer: DEBUG
     au.org.aodn.ardcvocabs: INFO
     au.org.aodn.esindexer.utils: INFO
+    au.org.aodn.esindexer.service: DEBUG
     au.org.aodn.datadiscoveryai: DEBUG
 
 management:
