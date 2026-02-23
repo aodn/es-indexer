@@ -576,7 +576,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
                 elasticSearchIndexService.deleteIndexStore(indexNameToDelete);
                 log.info("Old index: {} deleted after alias switch", indexNameToDelete);
             } else {
-                throw new RuntimeException("Indexed document count is less than 90% of metadata count from GeoNetwork, alias switch aborted.");
+                throw new RuntimeException("Indexed document count is less than 90% of metadata count from GeoNetwork, alias switch aborted. GeoNetwork metadata count: " + metadataCount + ", indexed document count: " + indexedCount);
             }
 
         } catch (IOException e) {
