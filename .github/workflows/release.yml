@@ -25,14 +25,35 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Set up JDK 17
+      - name: Get CodeArtifact Auth Token
+        run: |
+          TOKEN=$(aws codeartifact get-authorization-token \
+          --domain ${{ vars.CODEARTIFACT_DOMAIN }} \
+          --domain-owner ${{ steps.aws_auth.outputs.aws-account-id }} \
+          --region ${{ vars.AWS_REGION }} \
+          --query authorizationToken --output text)
+          echo "CODEARTIFACT_AUTH_TOKEN=$TOKEN" >> $GITHUB_ENV
+
+      - name: Get CodeARtifact Maven endpoint
+        run: |
+          URL=$(aws codeartifact get-repository-endpoint \
+          --domain ${{ vars.CODEARTIFACT_DOMAIN }} \
+          --repository ${{ vars.CODEARTIFACT_REPO }} \
+          --format maven \
+          --region ${{ vars.AWS_REGION }} \
+          --query repositoryEndpoint --output text)
+          echo "CODEARTIFACT_REPO_URL=$URL" >> $GITHUB_ENV
+
+
+      - name: Set up JDK 17 & maven server
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
           cache: 'maven'
           server-id: 'codeartifact'
-          server-password: 'CODEARTIFACT_AUTH_TOKEN'
+          server-username: 'aws'
+          server-password: ${{ env.CODEARTIFACT_AUTH_TOKEN }}
 
       - name: Configure AWS Credentials
         id: aws_auth
