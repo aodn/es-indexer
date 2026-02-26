@@ -415,7 +415,8 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
         // if no, it means there is no ongoing indexing process, and we can start a new one with a new index.
         var incompleteIndexName = elasticSearchIndexService.getIndexNameFromAlias(runningAliasName);
 
-        var runingIndexName = incompleteIndexName == null ?
+        log.info("Found incomplete index with name: {} for alias: {}", incompleteIndexName, runningAliasName);
+        var runningIndexName = incompleteIndexName == null ?
                 indexName + indexingIndexSuffix :
                 incompleteIndexName;
 
@@ -427,10 +428,11 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
             log.info("Indexing all metadata records from GeoNetwork");
 
             // Because it is a full reindex, we need to remove the incomplete index first, and then recreate it
-            elasticSearchIndexService.recreateIndexFromMappingJSONFile(AppConstants.PORTAL_RECORDS_MAPPING_JSON_FILE, runingIndexName);
+            log.warn("An incomplete index with name {} is found, it will be deleted and recreated because there is no beginWithUuid provided to resume from a particular UUID. ", incompleteIndexName);
+            elasticSearchIndexService.recreateIndexFromMappingJSONFile(AppConstants.PORTAL_RECORDS_MAPPING_JSON_FILE, runningIndexName);
 
             // give the working index an indexing alias for more robust handling
-            elasticSearchIndexService.updateAliasToNewIndex(runningAliasName, runingIndexName);
+            elasticSearchIndexService.updateAliasToNewIndex(runningAliasName, runningIndexName);
         }
         else {
             // if the beginWithUuid is provided, it means resuming from a particular UUID.
@@ -438,6 +440,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
             if (incompleteIndexName == null) {
                 throw new RuntimeException("Cannot find the incomplete index to resume from UUID: " + beginWithUuid);
             }
+            log.info("The index {} will be used to resume", runningIndexName);
             log.info("Resume indexing records from GeoNetwork at {}", beginWithUuid);
         }
 
@@ -446,7 +449,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
             try {
                 return Optional.of(this.getMappedMetadataValues(
                         geoNetworkResourceService.searchRecordBy(item.id()),
-                        runingIndexName
+                        runningIndexName
                 ));
             } catch (IOException | FactoryException | TransformException | JAXBException e) {
                 return Optional.empty();
@@ -454,7 +457,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
         };
 
         List<BulkResponse> results = new ArrayList<>();
-        BulkRequestProcessor<StacCollectionModel> bulkRequestProcessor = new BulkRequestProcessor<>(runingIndexName, mapper, self, callback);
+        BulkRequestProcessor<StacCollectionModel> bulkRequestProcessor = new BulkRequestProcessor<>(runningIndexName, mapper, self, callback);
 
         // We need to keep sending messages to client to avoid timeout on long processing
         ExecutorService executor = Executors.newFixedThreadPool(2);
@@ -466,7 +469,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
                     final CountDownLatch countDown = new CountDownLatch(1);
                     Callable<StacCollectionModel> task = () ->  {
                         try {
-                            return this.getMappedMetadataValues(metadataRecord, runingIndexName);
+                            return this.getMappedMetadataValues(metadataRecord, runningIndexName);
                         }
                         catch (FactoryException | JAXBException | TransformException | NullPointerException e) {
                             /*
@@ -509,6 +512,8 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
                                 .processItem(mappedMetadataValues.getUuid(), mappedMetadataValues, false)
                                 .ifPresent(results::add);
                     }
+                } else {
+                    log.warn("Got null metadata record from GeoNetwork, skip it.");
                 }
             }
 
@@ -525,7 +530,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
 
 
             // TODO now processing for record_suggestions index
-            log.info("Finished execute bulk indexing records to index: {}",runingIndexName);
+            log.info("Finished execute bulk indexing records to index: {}",runningIndexName);
         }
         catch(Exception e) {
             log.error("Failed", e);
@@ -546,11 +551,11 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
 
             var metadataCount = geoNetworkResourceService.getAllMetadataCounts();
             // get document count from portal index
-            var indexedCountResponse = portalElasticsearchClient.count(c -> c.index(runingIndexName));
+            var indexedCountResponse = portalElasticsearchClient.count(c -> c.index(runningIndexName));
             var indexedCount = indexedCountResponse.count();
             log.info("Total metadata records in GeoNetwork: {}, total indexed documents in portal index {}: {}",
                     metadataCount,
-                    runingIndexName,
+                    runningIndexName,
                     indexedCount);
 
             if (indexedCount != metadataCount) {
@@ -560,17 +565,17 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
             if (indexedCount > metadataCount * 0.9) {
                 //After indexing, if there is a same-name index, delete it
                 // this is not a regular deleting of old index. it is only for smoothly swapping from non-alias index to alias-based index.
-                checkAndDelete(indexName, runingIndexName);
+                checkAndDelete(indexName, runningIndexName);
 
                 // remove the running alias from the already completed index
-                elasticSearchIndexService.removeAliasFromIndex(runningAliasName, runingIndexName);
+                elasticSearchIndexService.removeAliasFromIndex(runningAliasName, runningIndexName);
 
                 // The below one is the old index still using the alias (e.g. es-indexer-edge)
                 var indexNameToDelete = elasticSearchIndexService.getIndexNameFromAlias(indexName);
 
                 // switch alias to point to the new index
-                elasticSearchIndexService.updateAliasToNewIndex(indexName, runingIndexName);
-                log.info("Alias: {} switched to point to index: {}", indexName, runingIndexName);
+                elasticSearchIndexService.updateAliasToNewIndex(indexName, runningIndexName);
+                log.info("Alias: {} switched to point to index: {}", indexName, runningIndexName);
 
                 // after switching, delete the old index
                 elasticSearchIndexService.deleteIndexStore(indexNameToDelete);
