@@ -163,6 +163,16 @@ public class MapperUtils {
                 .collect(Collectors.toList());
     }
 
+    public static List<SVServiceIdentificationType> findSVServiceIdentificationType(MDMetadataType source) {
+        return source.getIdentificationInfo()
+                .stream()
+                .filter(f -> f.getAbstractResourceDescription() != null)
+                .filter(f -> f.getAbstractResourceDescription().getValue() != null)
+                .filter(f -> f.getAbstractResourceDescription().getValue() instanceof SVServiceIdentificationType)
+                .map(f -> (SVServiceIdentificationType) f.getAbstractResourceDescription().getValue())
+                .collect(Collectors.toList());
+    }
+
     public static List<MDMetadataScopeType> findMDMetadataScopePropertyType(MDMetadataType source) {
         return source.getMetadataScope()
                 .stream()
