@@ -206,6 +206,10 @@ public class BaseTestClass {
             // of the concurrency issue in elastic search, and can be resolved by retrying )
             persevere(() -> delete(uuid, requestEntity));
         }
+
+        // Trigger GeoNetwork reindex with reset=true to ensure its ES index is refreshed after deletions
+        // This prevents stale entries from appearing in subsequent test runs
+        persevere(() -> triggerIndexer(requestEntity, true));
     }
 
     protected boolean triggerIndexer(HttpEntity<String> requestEntity) {
