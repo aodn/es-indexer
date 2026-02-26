@@ -5,7 +5,9 @@ import au.org.aodn.datadiscoveryai.enums.AiEnhancementSummaryField;
 import au.org.aodn.datadiscoveryai.model.AiEnhancedLink;
 import au.org.aodn.datadiscoveryai.model.AiEnhancementRequest;
 import au.org.aodn.datadiscoveryai.model.AiEnhancementResponse;
+import au.org.aodn.stac.model.ConceptModel;
 import au.org.aodn.stac.model.LinkModel;
+import au.org.aodn.stac.model.ThemesModel;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
@@ -31,6 +33,12 @@ public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
     protected final WebClient webClient;
     protected final ObjectMapper objectMapper;
 
+    // vocab titles used for deciding to call AI keyword classification or not
+    private static final String AODN_DISCOVERY_PARAMETER_VOCABULARY = "AODN Discovery Parameter Vocabulary";
+    private static final String AODN_PLATFORM_VOCABULARY = "AODN Platform Vocabulary";
+    private static final String NASA_GCMD_VOCABULARY = "NASA/Global Change Master Directory";
+    private static final String GCMD_VOCABULARY = "GCMD Keywords";
+
     public DataDiscoveryAiServiceImpl(String serviceUrl, String baseUrl,
                                       RestTemplate restTemplate, WebClient webClient, ObjectMapper objectMapper) {
         this.serviceUrl = serviceUrl;
@@ -48,6 +56,7 @@ public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
         String title = aiEnhancementRequest.getTitle();
         String description = aiEnhancementRequest.getAbstractText();
         String uuid = aiEnhancementRequest.getUuid();
+        List<ThemesModel> themes = aiEnhancementRequest.getThemes();
 
         List<String> selectedModels = new ArrayList<>();
 
@@ -59,6 +68,12 @@ public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
             selectedModels.add(AIModel.DESCRIPTION_FORMATTING.getValue());
             // lineage can be empty for records that need to identify delivery mode so we only need to check title and description are not empty
             selectedModels.add(AIModel.DELIVERY_CLASSIFICATION.getValue());
+
+            // check original themes to see if vocab missing
+            if (shouldCallAiEnhancementThemes(themes)) {
+                log.debug("Record missing required parameter/platform concepts, need AI keyword classification");
+                selectedModels.add(AIModel.KEYWORD_CLASSIFICATION.getValue());
+            }
         }
 
         if (selectedModels.isEmpty()) {
@@ -150,6 +165,36 @@ public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
     }
 
     @Override
+    public List<ThemesModel> getEnhancedThemes(AiEnhancementResponse aiResponse) {
+        if (aiResponse != null && aiResponse.getThemes() != null) {
+            // Convert each JsonNode into ThemesModel manually
+            return aiResponse.getThemes().stream()
+                    .map(node -> {
+                        List<ConceptModel> concepts = new ArrayList<>();
+                        // Iterate over concepts array in the JSON node
+                        if (node.has("concepts")) {
+                            node.get("concepts").forEach(conceptNode -> {
+                                concepts.add(ConceptModel.builder()
+                                        .id(conceptNode.has("id") ? conceptNode.get("id").asText() : null)
+                                        .url(conceptNode.has("url") ? conceptNode.get("url").asText() : null)
+                                        .title(conceptNode.has("title") ? conceptNode.get("title").asText() : null)
+                                        .description(conceptNode.has("description") ? conceptNode.get("description").asText() : null)
+                                        .aiDescription(conceptNode.has("ai:description") ? conceptNode.get("ai:description").asText() : null)
+                                        .build());
+                            });
+                        }
+                        // Build ThemesModel
+                        return ThemesModel.builder()
+                                .scheme(node.has("scheme") ? node.get("scheme").asText() : null)
+                                .concepts(concepts)
+                                .build();
+                    })
+                    .collect(Collectors.toList());
+        }
+        return List.of();
+    }
+
+    @Override
     public List<LinkModel> convertAiEnhancedLinksToLinkModels(List<AiEnhancedLink> aiEnhancedLinks) {
         if (aiEnhancedLinks == null) {
             return List.of();
@@ -164,5 +209,23 @@ public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
                         .aiGroup(aiLink.getAiGroup())
                         .build())
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Boolean shouldCallAiEnhancementThemes(List<ThemesModel> originalThemes) {
+        if (originalThemes == null || originalThemes.isEmpty()) {
+            return false;
+        }
+        // return true only if no parameter nor platform nor GCMD vocab concepts exist in original themes
+        return originalThemes.stream()
+                .flatMap(theme -> theme.getConcepts().stream())
+                .noneMatch(concept ->
+                        concept.getTitle() != null && (
+                                concept.getTitle().contains(AODN_DISCOVERY_PARAMETER_VOCABULARY) ||
+                                        concept.getTitle().contains(NASA_GCMD_VOCABULARY) ||
+                                        concept.getTitle().contains(GCMD_VOCABULARY) ||
+                                        concept.getTitle().contains(AODN_PLATFORM_VOCABULARY)
+                        )
+                );
     }
 }

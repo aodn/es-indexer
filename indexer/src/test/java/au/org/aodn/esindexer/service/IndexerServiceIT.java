@@ -7,7 +7,9 @@ import au.org.aodn.esindexer.model.MockServer;
 import au.org.aodn.metadata.geonetwork.service.GeoNetworkServiceImpl;
 import au.org.aodn.datadiscoveryai.service.DataDiscoveryAiService;
 import au.org.aodn.datadiscoveryai.model.AiEnhancementResponse;
+import au.org.aodn.stac.model.ConceptModel;
 import au.org.aodn.stac.model.LinkModel;
+import au.org.aodn.stac.model.ThemesModel;
 import co.elastic.clients.elasticsearch.core.search.Hit;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -482,13 +484,13 @@ public class IndexerServiceIT extends BaseTestClass {
         }
     }
     /**
-     * Test case when AI service is available and returns both enhanced links and enhanced description
-     * This test verifies that both AI link grouping and AI description enhancement are properly applied
+     * Test case when AI service is available and returns enhanced links, enhanced description, and enhanced update frequency
+     * This test verifies that both AI link grouping, AI description enhancement, AI delivery mode models are properly called and applied
      * during the indexing process in the service layer
      * @throws IOException - Not expected
      */
     @Test
-    public void verifyAiServiceEnhancement() throws IOException {
+    public void verifyAiServiceEnhancementWithoutKeywordClassification() throws IOException {
         String uuid = "e18eee85-c6c4-4be2-ac8c-930991cf2534";
 
         // Mock the enhanced links returned by AI service
@@ -582,6 +584,121 @@ public class IndexerServiceIT extends BaseTestClass {
             deleteRecord(uuid);
         }
     }
+
+    /**
+     * Test case when AI service is available and returns enhanced fields including: links, description, update frequency, and themes
+     * This test verifies that while AI enhancement for link grouping, description formatting, and delivery mode classification always being called,
+     * AI keyword classification only called when original themes don't have parameter or GCMD vocab, and ai:parameter_vocabs are properly set
+     * @throws IOException - Not expected
+     */
+    @Test
+    public void verifyAiServiceEnhancementWithKeywordClassification() throws IOException {
+        String uuid = "516811d7-cce1-207a-e0440003ba8c79dd";
+
+        // Mock the enhanced links returned by AI service
+        List<LinkModel> enhancedLinks = Arrays.asList(
+                LinkModel.builder()
+                        .href("http://www.fish.wa.gov.au/docs/pub/ResProject/stockassessment/project07.php?0405")
+                        .rel("related")
+                        .type("text/html")
+                        .title("{\"title\":\"Project summary - Recreational Fisheries Databases\",\"description\":\"Project summary - Recreational Fisheries Databases\"}")
+                        .aiGroup("Data Access")
+                        .build(),
+                //there are some links that are not enhanced by AI
+                LinkModel.builder()
+                        .href("https://geonetwork.edge.aodn.org.au:443/geonetwork/images/logos/2f850269-0bdc-4491-80b0-f837c7eff6e3.png")
+                        .rel("icon")
+                        .type("image/png")
+                        .title("Suggest icon for dataset")
+                        .build(),
+                LinkModel.builder()
+                        .href("https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/516811d7-cce1-207a-e0440003ba8c79dd/attachments/NWMRI_s.png")
+                        .rel("preview")
+                        .type("image")
+                        .build(),
+                LinkModel.builder()
+                        .href("https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/516811d7-cce1-207a-e0440003ba8c79dd")
+                        .rel("describedby")
+                        .type("text/html")
+                        .title("Full metadata link")
+                        .build()
+        );
+
+        // Mock the AI enhanced description
+        String enhancedDescription = "mocked AI enhanced description";
+
+        // Mock the AI enhanced update frequency
+        String enhancedUpdateFrequency = "completed";
+
+        // Mock the AI predicted themes - these have ai:description so they are AI enhanced
+        List<ThemesModel> enhancedThemes = List.of(
+                ThemesModel.builder()
+                        .scheme("theme")
+                        .concepts(List.of(
+                                ConceptModel.builder()
+                                        .id("Biotic taxonomic identification")
+                                        .url("http://vocab.aodn.org.au/def/discovery_parameter/entity/489")
+                                        .title("AODN Discovery Parameter Vocabulary")
+                                        .description("")
+                                        .aiDescription("This is the prediction provided by AI model.")
+                                        .build(),
+                                ConceptModel.builder()
+                                        .id("Abundance of biot")
+                                        .url("http://vocab.aodn.org.au/def/discovery_parameter/entity/488")
+                                        .title("AODN Discovery Parameter Vocabulary")
+                                        .description("")
+                                        .aiDescription("This is the prediction provided by AI model.")
+                                        .build()
+                        ))
+                        .build(),
+                ThemesModel.builder()
+                        .scheme("theme")
+                        .concepts(List.of(
+                                ConceptModel.builder()
+                                        .id("diver")
+                                        .url("http://vocab.nerc.ac.uk/collection/L06/current/72")
+                                        .title("AODN Platform Vocabulary")
+                                        .description("")
+                                        .aiDescription("This is the prediction provided by AI model.")
+                                        .build()
+                        ))
+                        .build()
+        );
+
+        // Create mock AI response
+        AiEnhancementResponse mockAiResponse = Mockito.mock(AiEnhancementResponse.class);
+
+        // Set up AI service to be available and mock the combined enhancement
+        when(dataDiscoveryAiService.isServiceAvailable()).thenReturn(true);
+        when(dataDiscoveryAiService.enhanceWithAi(any(AiEnhancementRequest.class)))
+                .thenReturn(mockAiResponse);
+        when(dataDiscoveryAiService.getEnhancedLinks(eq(mockAiResponse))).thenReturn(enhancedLinks);
+        when(dataDiscoveryAiService.getEnhancedDescription(eq(mockAiResponse))).thenReturn(enhancedDescription);
+        when(dataDiscoveryAiService.getEnhancedUpdateFrequency(eq(mockAiResponse))).thenReturn(enhancedUpdateFrequency);
+        // Mock enhanced themes - only returned when keyword classification is called
+        when(dataDiscoveryAiService.getEnhancedThemes(eq(mockAiResponse))).thenReturn(enhancedThemes);
+
+        try {
+            String expectedData = readResourceFile("classpath:canned/aienhancement/sample_need_keyword_enhancement.json");
+
+            insertMetadataRecords(uuid, "classpath:canned/aienhancement/sample_need_keyword_enhancement.xml");
+
+            indexerService.indexAllMetadataRecordsFromGeoNetwork(null, true, null);
+            Hit<ObjectNode> objectNodeHit = indexerService.getDocumentByUUID(uuid);
+
+            String test = String.valueOf(Objects.requireNonNull(objectNodeHit.source()));
+
+            String expected = indexerObjectMapper.readTree(expectedData).toPrettyString();
+            String actual = indexerObjectMapper.readTree(test).toPrettyString();
+            logger.info(actual);
+            JSONAssert.assertEquals(expected, actual, JSONCompareMode.STRICT);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        } finally {
+            deleteRecord(uuid);
+        }
+    }
+
     /**
      * Too big token generated will cause circuit break and crash Elastic search, we have set a limit in the
      * schema to only consider the first n token in the description, then we apply shingle without created output_unigrams

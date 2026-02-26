@@ -31,6 +31,12 @@ public class SummariesModel {
     @JsonProperty("ai:update_frequency")
     protected String aiUpdateFrequency;
 
+    @JsonProperty("ai:parameter_vocabs")
+    protected Set<String> aiParameterVocabs;
+
+    @JsonProperty("ai:platform_vocabs")
+    protected Set<String> aiPlatformVocabs;
+
     /**
      * Group info as setup in geonetwork
      */

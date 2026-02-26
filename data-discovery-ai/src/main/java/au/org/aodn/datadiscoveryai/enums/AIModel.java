@@ -4,7 +4,7 @@ import lombok.Getter;
 
 @Getter
 public enum AIModel {
-    KEYWORK_CLASSIFICATION("keyword_classification"),
+    KEYWORD_CLASSIFICATION("keyword_classification"),
     LINK_GROUPING("link_grouping"),
     DELIVERY_CLASSIFICATION("delivery_classification"),
     DESCRIPTION_FORMATTING("description_formatting"),

@@ -1,0 +1,557 @@
+{
+  "title": "Recreational Fisheries Databases",
+  "description": "The section manages recreational fishing information obtained from ongoing provision of data from Angling Club Field Day Records Book, Angler's Log Book, surveys completed by Fisheries Officers and VFLO surveys. Information is now obtained from licenced charter boat operators who have been providing returns since September 2001.\n\nThe section also monitors the general public participation rate and satisfaction with recreational fishing and awareness of the Department's various roles annually based on a phone survey. Similarly, information on recreational catch and fishing effort for the abalone, marron, SW freshwater angling and rock lobster fisheries is collected and reported using an annual telephone survey of licence holders.\n\nTime: ongoing.",
+  "extent": {
+    "bbox": [
+      [111, -35, 129, -13],
+      [111, -35, 129, -13]
+    ],
+    "temporal": [
+      [
+        "2000-12-31T13:00:00Z",
+        null],
+      [
+        "2000-12-31T13:00:00Z",
+        null]
+    ]
+  },
+  "summaries": {
+    "score": 78,
+    "status": "onGoing",
+    "credits": [
+      "N. Sumner (Project leader)"
+    ],
+    "statement": "Original record compiled for the Western Australian Marine Science Institution (WAMSI), Project 3.8, 2008. Originally sourced from WA Fisheries website (May, 2008). Spatial extent assumed to be whole of WA.",
+    "creation": "2017-11-21T18:11:58",
+    "revision": "2017-11-21T18:11:58",
+    "ai:description": "The section manages recreational fishing information obtained from ongoing provision of data from Angling Club Field Day Records Book, Angler's Log Book, surveys completed by Fisheries Officers and VFLO surveys. Information is now obtained from licenced charter boat operators who have been providing returns since September 2001.\n\nThe section also monitors the general public participation rate and satisfaction with recreational fishing and awareness of the Department's various roles annually based on a phone survey. Similarly, information on recreational catch and fishing effort for the abalone, marron, SW freshwater angling and rock lobster fisheries is collected and reported using an annual telephone survey of licence holders.\n\nTime: ongoing.",
+    "ai:update_frequency": "other",
+    "ai:parameter_vocabs": [
+      "ocean biota"
+    ],
+    "ai:platform_vocabs": [
+      "diver"
+    ],
+    "dataset_group": [
+      "aodn"
+    ],
+    "update_frequency": "other",
+    "proj:geometry": {
+      "geometries": [
+        {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [111, -35],
+              [129, -35],
+              [129, -13],
+              [111, -13],
+              [111, -35]
+            ]
+          ]
+        }
+      ],
+      "type": "GeometryCollection"
+    },
+    "proj:geometry_noland": {
+      "geometries": [
+        {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [111, -35],
+              [118, -35],
+              [116, -34.75],
+              [115, -34.25],
+              [115.75, -31.75],
+              [113.25, -26.25],
+              [113.75, -26.5],
+              [113.5, -25.5],
+              [114.25, -26.25],
+              [113.5, -24.5],
+              [113.75, -22.5],
+              [116.75, -20.5],
+              [121.25, -19.5],
+              [123, -16.5],
+              [123.5, -17.5],
+              [123.5, -16.25],
+              [125, -16.5],
+              [124.5, -15.5],
+              [125.25, -15.5],
+              [126, -14],
+              [127.5, -14],
+              [128, -15.5],
+              [128.5, -14.75],
+              [129, -15],
+              [129, -13],
+              [111, -13],
+              [111, -35]
+            ]
+          ]
+        },
+        {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [129, -35],
+              [129, -31.75],
+              [126, -32.25],
+              [123.5, -34],
+              [120, -34],
+              [118, -35],
+              [129, -35]
+            ]
+          ]
+        }
+      ],
+      "type": "GeometryCollection"
+    },
+    "temporal": [
+      {
+        "start": "2000-12-31T13:00:00Z",
+        "end": null
+      }
+    ],
+    "parameter_vocabs": [],
+    "platform_vocabs": [],
+    "organisation_vocabs": []
+  },
+  "contacts": [
+    {
+      "roles": [
+        "pointOfContact",
+        "about"
+      ],
+      "organization": "Department of Fisheries (DoF), Western Australian Government",
+      "name": "WA DoF Manager",
+      "position": "Enquiries Desk",
+      "emails": [
+        "headoffice@fish.wa.gov.au"
+      ],
+      "addresses": [
+        {
+          "delivery_point": [
+            "168-170 St George's Terrace"
+          ],
+          "city": "Perth",
+          "country": "Australia",
+          "postal_code": "6000",
+          "administrative_area": "WA"
+        }
+      ],
+      "phones": [
+        {
+          "roles": [
+            "voice"
+          ],
+          "value": "+61 8 9482 7333"
+        },
+        {
+          "roles": [
+            "facsimile"
+          ],
+          "value": "+61 8 9482 7389"
+        }
+      ],
+      "links": [
+        {
+          "href": "http://www.fish.wa.gov.au/",
+          "type": "WWW:LINK-1.0-http--link",
+          "title": "Contact Web Address."
+        }
+      ]
+    },
+    {
+      "roles": [
+        "distributor",
+        "metadata"
+      ],
+      "organization": "iVEC",
+      "name": "Luke Edwards",
+      "position": "Marine Information Officer",
+      "emails": [
+        "luke@ivec.org"
+      ],
+      "addresses": [
+        {
+          "delivery_point": [
+            "Australian Resources Research Centre",
+            "26 Dick Perry Avenue"
+          ],
+          "city": "Kensington",
+          "country": "Australia",
+          "postal_code": "6151",
+          "administrative_area": "WA"
+        }
+      ],
+      "phones": [
+        {
+          "roles": [
+            "voice"
+          ],
+          "value": "+61 8 9266 3546"
+        },
+        {
+          "roles": [
+            "facsimile"
+          ],
+          "value": "+61 8 9266 2377"
+        }
+      ]
+    }
+  ],
+  "languages": [
+    {
+      "code": "eng",
+      "name": "English"
+    }
+  ],
+  "links": [
+    {
+      "href": "http://www.fish.wa.gov.au/docs/pub/ResProject/stockassessment/project07.php?0405",
+      "rel": "related",
+      "type": "text/html",
+      "title": "{\"title\":\"Project summary - Recreational Fisheries Databases\",\"description\":\"Project summary - Recreational Fisheries Databases\"}",
+      "ai:group": "Document"
+    },
+    {
+      "href": "https://geonetwork.edge.aodn.org.au:443/geonetwork/images/logos/2f850269-0bdc-4491-80b0-f837c7eff6e3.png",
+      "rel": "icon",
+      "type": "image/png",
+      "title": "Suggest icon for dataset"
+    },
+    {
+      "href": "https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/516811d7-cce1-207a-e0440003ba8c79dd/attachments/NWMRI_s.png",
+      "rel": "preview",
+      "type": "image"
+    },
+    {
+      "href": "https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/516811d7-cce1-207a-e0440003ba8c79dd",
+      "rel": "describedby",
+      "type": "text/html",
+      "title": "Full metadata link"
+    }
+  ],
+  "license": "",
+  "providers": [
+    {
+      "name": "iVEC",
+      "roles": [
+        "distributor"
+      ]
+    }
+  ],
+  "themes": [
+    {
+      "concepts": [
+        {
+          "id": "biota",
+          "url": null,
+          "title": null,
+          "description": null
+        },
+        {
+          "id": "environment",
+          "url": null,
+          "title": null,
+          "description": null
+        }
+      ],
+      "scheme": "Categories"
+    },
+    {
+      "concepts": [
+        {
+          "id": "Biotic taxonomic identification",
+          "url": "http://vocab.aodn.org.au/def/discovery_parameter/entity/489",
+          "title": "AODN Discovery Parameter Vocabulary",
+          "description": "",
+          "ai:description": "This is the prediction provided by AI model."
+        },
+        {
+          "id": "Abundance of biota",
+          "url": "http://vocab.aodn.org.au/def/discovery_parameter/entity/488",
+          "title": "AODN Discovery Parameter Vocabulary",
+          "description": "",
+          "ai:description": "This is the prediction provided by AI model."
+        }
+      ],
+      "scheme": "theme"
+    },
+    {
+      "concepts": [
+        {
+          "id": "diver",
+          "url": "http://vocab.nerc.ac.uk/collection/L06/current/72",
+          "title": "AODN Platform Vocabulary",
+          "description": "",
+          "ai:description": "This is the prediction provided by AI model."
+        }
+      ],
+      "scheme": "theme"
+    }
+  ],
+  "id": "516811d7-cce1-207a-e0440003ba8c79dd",
+  "search_suggestions": {
+    "abstract_phrases": [
+      "operators who have been",
+      "been",
+      "general public",
+      "vflo",
+      "now obtained from",
+      "information obtained from",
+      "vflo surveys",
+      "section also monitors",
+      "collected reported",
+      "ongoing",
+      "annual",
+      "who have",
+      "based phone",
+      "angling",
+      "general public participation",
+      "based",
+      "using",
+      "field day",
+      "manages recreational fishing information",
+      "completed",
+      "licenced",
+      "from ongoing",
+      "vflo surveys information",
+      "returns",
+      "obtained",
+      "from licenced charter boat",
+      "monitors",
+      "annually",
+      "marron",
+      "providing",
+      "operators who",
+      "catch fishing",
+      "been providing returns",
+      "been providing",
+      "licence holders",
+      "reported",
+      "charter boat operators",
+      "roles annually based",
+      "information obtained from ongoing",
+      "public participation",
+      "also monitors general",
+      "freshwater angling rock",
+      "now obtained",
+      "obtained from licenced",
+      "sw",
+      "field day records book",
+      "manages",
+      "using annual",
+      "roles annually",
+      "information now",
+      "phone survey similarly information",
+      "ongoing provision data",
+      "officers vflo surveys",
+      "returns since",
+      "information",
+      "fishing information obtained",
+      "charter boat operators who",
+      "annual telephone survey",
+      "book log book",
+      "participation rate satisfaction",
+      "recreational",
+      "various roles",
+      "participation rate",
+      "provision data",
+      "lobster fisheries",
+      "awareness",
+      "survey similarly information",
+      "boat operators who",
+      "club",
+      "since september",
+      "reported using annual",
+      "holders time",
+      "surveys completed fisheries",
+      "lobster fisheries collected",
+      "various roles annually based",
+      "telephone survey licence",
+      "boat operators",
+      "obtained from ongoing provision",
+      "have been providing",
+      "returns since september",
+      "fishing effort",
+      "lobster",
+      "telephone",
+      "club field",
+      "field day records",
+      "from ongoing provision",
+      "providing returns since september",
+      "also monitors",
+      "marron sw freshwater",
+      "telephone survey",
+      "data from",
+      "now obtained from licenced",
+      "provision data from",
+      "obtained from",
+      "log book",
+      "club field day",
+      "records",
+      "public participation rate",
+      "book",
+      "roles",
+      "catch fishing effort",
+      "section manages recreational fishing",
+      "collected reported using",
+      "from angling",
+      "effort",
+      "rock lobster fisheries",
+      "september section",
+      "rate",
+      "recreational fishing awareness",
+      "records book log",
+      "now",
+      "been providing returns since",
+      "recreational fishing information",
+      "abalone",
+      "obtained from licenced charter",
+      "annually based",
+      "abalone marron",
+      "recreational catch",
+      "reported using",
+      "log book surveys",
+      "monitors general",
+      "book log",
+      "general public participation rate",
+      "sw freshwater angling",
+      "recreational fishing",
+      "from angling club field",
+      "fisheries",
+      "angling club",
+      "fisheries collected",
+      "time",
+      "information now obtained",
+      "licence holders time ongoing",
+      "fisheries officers",
+      "surveys information",
+      "charter",
+      "providing returns",
+      "completed fisheries officers",
+      "collected",
+      "operators who have",
+      "fishing awareness",
+      "angling rock lobster",
+      "manages recreational",
+      "licenced charter boat operators",
+      "fishing information obtained from",
+      "day records book",
+      "data from angling",
+      "catch",
+      "ongoing provision",
+      "data from angling club",
+      "marron sw",
+      "effort abalone",
+      "fisheries officers vflo",
+      "phone survey",
+      "from angling club",
+      "field",
+      "phone",
+      "time ongoing",
+      "from licenced charter",
+      "angling club field day",
+      "participation",
+      "fishing information",
+      "rock lobster",
+      "section manages",
+      "log",
+      "satisfaction recreational",
+      "club field day records",
+      "rock",
+      "operators",
+      "holders",
+      "providing returns since",
+      "have",
+      "log book surveys completed",
+      "annual telephone",
+      "abalone marron sw",
+      "freshwater angling",
+      "survey licence holders",
+      "section also",
+      "have been",
+      "satisfaction",
+      "boat",
+      "charter boat",
+      "book surveys",
+      "phone survey similarly",
+      "information recreational catch",
+      "information recreational",
+      "surveys information now",
+      "obtained from ongoing",
+      "have been providing returns",
+      "completed fisheries",
+      "data",
+      "from licenced",
+      "holders time ongoing",
+      "section",
+      "day records",
+      "officers vflo",
+      "licenced charter boat",
+      "surveys completed",
+      "from",
+      "freshwater",
+      "day",
+      "officers",
+      "licence",
+      "using annual telephone",
+      "recreational catch fishing",
+      "similarly information recreational",
+      "monitors general public",
+      "angling rock",
+      "licenced charter",
+      "who have been providing",
+      "survey similarly",
+      "provision",
+      "survey",
+      "who",
+      "since",
+      "section manages recreational",
+      "various roles annually",
+      "marron sw freshwater angling",
+      "surveys",
+      "records book",
+      "book surveys completed",
+      "general",
+      "september",
+      "public",
+      "similarly",
+      "satisfaction recreational fishing",
+      "rate satisfaction",
+      "boat operators who have",
+      "sw freshwater",
+      "abalone marron sw freshwater",
+      "similarly information",
+      "recreational fishing information obtained",
+      "fishing",
+      "also",
+      "licence holders time",
+      "who have been",
+      "information obtained",
+      "angling club field",
+      "various",
+      "manages recreational fishing",
+      "survey licence"
+    ],
+    "parameter_vocabs_sayt": [
+      "ocean biota"
+    ],
+    "platform_vocabs_sayt": [
+      "diver"
+    ],
+    "organisation_vocabs_sayt": []
+  },
+  "sci:citation": "{\"suggestedCitation\":null,\"useLimitations\":null,\"otherConstraints\":[\"No Restrictions\"]}",
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/contacts/v0.1.1/schema.json",
+    "https://stac-extensions.github.io/projection/v1.1.0/schema.json",
+    "https://stac-extensions.github.io/language/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/themes/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/web-map-links/v1.2.0/schema.json"
+  ],
+  "type": "Collection"
+}
