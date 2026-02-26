@@ -562,10 +562,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
                 log.warn(" Indexed document count ({}) does not match metadata count ({}) from GeoNetwork", indexedCount, metadataCount);
             }
 
-            // If the metadata count is very small (e.g., in test cases), comparing the indexed count with the metadata count is not meaningful.
-            // This is because, due to Elasticsearch's eventual consistency, recently deleted records may still appear for a short time.
-            // Test cases assert their own expected results, so the 90% threshold check can be unreliable in this context.
-            if (metadataCount < 10 || indexedCount > metadataCount * 0.9) {
+            if (indexedCount > metadataCount * 0.9) {
                 finalizeAliasSwitching(runningIndexName, runningAliasName);
             } else {
                 throw new RuntimeException("Indexed document count is less than 90% of metadata count from GeoNetwork, alias switch aborted. GeoNetwork metadata count: " + metadataCount + ", indexed document count: " + indexedCount);

@@ -391,6 +391,11 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
      */
     @Override
     public Long getAllMetadataCounts() throws IOException {
+        // Refresh the index first to ensure we get an accurate count.
+        // Elasticsearch has eventual consistency, so without refresh,
+        // recently added or deleted documents may not be reflected in the count.
+        gn4ElasticClient.indices().refresh(r -> r.index(indexName));
+
         // Set size = 0 will return total count, elastic behavior :)
         SearchRequest request = SearchRequest.of(r -> r.size(0).index(indexName));
 
