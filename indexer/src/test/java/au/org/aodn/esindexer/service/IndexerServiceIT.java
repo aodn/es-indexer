@@ -34,7 +34,7 @@ import java.util.Set;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.client.ExpectedCount.manyTimes;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
@@ -574,6 +574,9 @@ public class IndexerServiceIT extends BaseTestClass {
 
             String test = String.valueOf(Objects.requireNonNull(objectNodeHit.source()));
 
+            // keyword model should not be called
+            verify(dataDiscoveryAiService, never()).getEnhancedThemes(any());
+
             String expected = indexerObjectMapper.readTree(expectedData).toPrettyString();
             String actual = indexerObjectMapper.readTree(test).toPrettyString();
             logger.info(actual);
@@ -602,7 +605,7 @@ public class IndexerServiceIT extends BaseTestClass {
                         .rel("related")
                         .type("text/html")
                         .title("{\"title\":\"Project summary - Recreational Fisheries Databases\",\"description\":\"Project summary - Recreational Fisheries Databases\"}")
-                        .aiGroup("Data Access")
+                        .aiGroup("Document")
                         .build(),
                 //there are some links that are not enhanced by AI
                 LinkModel.builder()
@@ -625,10 +628,10 @@ public class IndexerServiceIT extends BaseTestClass {
         );
 
         // Mock the AI enhanced description
-        String enhancedDescription = "mocked AI enhanced description";
+        String enhancedDescription = "The section manages recreational fishing information obtained from ongoing provision of data from Angling Club Field Day Records Book, Angler's Log Book, surveys completed by Fisheries Officers and VFLO surveys. Information is now obtained from licenced charter boat operators who have been providing returns since September 2001.\n\nThe section also monitors the general public participation rate and satisfaction with recreational fishing and awareness of the Department's various roles annually based on a phone survey. Similarly, information on recreational catch and fishing effort for the abalone, marron, SW freshwater angling and rock lobster fisheries is collected and reported using an annual telephone survey of licence holders.\n\nTime: ongoing.";
 
         // Mock the AI enhanced update frequency
-        String enhancedUpdateFrequency = "completed";
+        String enhancedUpdateFrequency = "other";
 
         // Mock the AI predicted themes - these have ai:description so they are AI enhanced
         List<ThemesModel> enhancedThemes = List.of(
@@ -643,7 +646,7 @@ public class IndexerServiceIT extends BaseTestClass {
                                         .aiDescription("This is the prediction provided by AI model.")
                                         .build(),
                                 ConceptModel.builder()
-                                        .id("Abundance of biot")
+                                        .id("Abundance of biota")
                                         .url("http://vocab.aodn.org.au/def/discovery_parameter/entity/488")
                                         .title("AODN Discovery Parameter Vocabulary")
                                         .description("")
@@ -688,10 +691,33 @@ public class IndexerServiceIT extends BaseTestClass {
 
             String test = String.valueOf(Objects.requireNonNull(objectNodeHit.source()));
 
-            String expected = indexerObjectMapper.readTree(expectedData).toPrettyString();
-            String actual = indexerObjectMapper.readTree(test).toPrettyString();
-            logger.info(actual);
-            JSONAssert.assertEquals(expected, actual, JSONCompareMode.STRICT);
+            // check if keyword classification model really being called
+            verify(dataDiscoveryAiService, times(1)).getEnhancedThemes(eq(mockAiResponse));
+
+            // check if aiEnhanced themes existed
+            JsonNode actualThemes = indexerObjectMapper.readTree(test).get("themes");
+            JsonNode expectedThemes = indexerObjectMapper.readTree(expectedData).get("themes");
+            JSONAssert.assertEquals(
+                    expectedThemes.toString(),
+                    actualThemes.toString(),
+                    JSONCompareMode.STRICT
+            );
+
+            // check if ai:parameter_vocabs and ai:platform in summaries
+            JsonNode actualSummaries = indexerObjectMapper.readTree(test).get("summaries");
+            JsonNode expectedSummaries = indexerObjectMapper.readTree(expectedData).get("summaries");
+
+            JSONAssert.assertEquals(
+                    expectedSummaries.get("ai:parameter_vocabs").toString(),
+                    actualSummaries.get("ai:parameter_vocabs").toString(),
+                    JSONCompareMode.STRICT
+            );
+
+            JSONAssert.assertEquals(
+                    expectedSummaries.get("ai:platform_vocabs").toString(),
+                    actualSummaries.get("ai:platform_vocabs").toString(),
+                    JSONCompareMode.STRICT
+            );
         } catch (JSONException e) {
             throw new RuntimeException(e);
         } finally {

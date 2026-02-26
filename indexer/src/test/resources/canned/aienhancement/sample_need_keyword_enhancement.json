@@ -32,9 +32,7 @@
     "ai:platform_vocabs": [
       "diver"
     ],
-    "dataset_group": [
-      "aodn"
-    ],
+    "dataset_group" : [ "sample" ],
     "update_frequency": "other",
     "proj:geometry": {
       "geometries": [
