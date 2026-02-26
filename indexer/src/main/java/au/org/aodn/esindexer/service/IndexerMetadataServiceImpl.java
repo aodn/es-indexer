@@ -408,16 +408,15 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
         var runningAliasName = indexName + RUNNING_ALIAS_SUFFIX;
 
         // this suffix is the one without the in-use alias
-        var indexingIndexSuffix = elasticSearchIndexService.getIndexingIndexSuffix(indexName);
+        var availableIndexSuffix = elasticSearchIndexService.getAvailableIndexSuffix(indexName);
 
         // try to find if there is already an incomplete index with the alias,
         // if yes, it means there is an ongoing indexing process which has not been completed, and we can resume from the incomplete index;
         // if no, it means there is no ongoing indexing process, and we can start a new one with a new index.
         var incompleteIndexName = elasticSearchIndexService.getIndexNameFromAlias(runningAliasName);
 
-        log.info("Found incomplete index with name: {} for alias: {}", incompleteIndexName, runningAliasName);
         var runningIndexName = incompleteIndexName == null ?
-                indexName + indexingIndexSuffix :
+                indexName + availableIndexSuffix :
                 incompleteIndexName;
 
         if (!confirm) {
@@ -427,11 +426,12 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
         if(beginWithUuid == null) {
             log.info("Indexing all metadata records from GeoNetwork");
 
-            // Because it is a full reindex, we need to remove the incomplete index first, and then recreate it
+            // Because it is a full reindex, we need to remove the incomplete index first, and then recreate it.
+            // currently, we don't want any leftover incomplete indices existing if we are not resume indexing based on it.
             log.warn("An incomplete index with name {} is found, it will be deleted and recreated because there is no beginWithUuid provided to resume from a particular UUID. ", incompleteIndexName);
             elasticSearchIndexService.recreateIndexFromMappingJSONFile(AppConstants.PORTAL_RECORDS_MAPPING_JSON_FILE, runningIndexName);
 
-            // give the working index an indexing alias for more robust handling
+            // give the working index an running alias for more robust handling
             elasticSearchIndexService.updateAliasToNewIndex(runningAliasName, runningIndexName);
         }
         else {

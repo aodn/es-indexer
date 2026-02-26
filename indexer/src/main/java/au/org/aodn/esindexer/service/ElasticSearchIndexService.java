@@ -105,7 +105,7 @@ public class ElasticSearchIndexService {
      * @param baseIndexName the base index name
      *
      */
-    protected String getIndexingIndexSuffix(String baseIndexName) {
+    protected String getAvailableIndexSuffix(String baseIndexName) {
 
         // get all indices (nothing to do with aliases)
         var indices = getAllIndexNames();
