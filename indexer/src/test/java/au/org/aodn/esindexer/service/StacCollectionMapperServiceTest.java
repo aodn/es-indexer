@@ -593,4 +593,13 @@ public class StacCollectionMapperServiceTest {
 
         verify(expected);
     }
+
+    @Test
+    public void verifyAbnormalStructureXmlWork() throws IOException, JSONException {
+        String xml = readResourceFile("classpath:canned/sample_abnormal_structure_GA.xml");
+        String expected = readResourceFile("classpath:canned/sample_abnormal_structure_GA_stac.json");
+        indexerService.indexMetadata(xml);
+
+        verify(expected);
+    }
 }

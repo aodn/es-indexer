@@ -53,9 +53,22 @@ public class CommonUtils {
     }
 
     public static String getTitle(MDMetadataType source) {
+        // Primary: try to extract title from MD_DataIdentification blocks
         List<MDDataIdentificationType> items = MapperUtils.findMDDataIdentificationType(source);
-        if(!items.isEmpty()) {
-            // Need to assert only 1 block contains our target
+        String title = extractTitleFromIdentifications(items);
+
+        if (title.isBlank()) {
+            // Fallback: try to extract title from SV_ServiceIdentification blocks
+            // Some records use srv:SV_ServiceIdentification instead of mri:MD_DataIdentification
+            List<SVServiceIdentificationType> serviceItems = MapperUtils.findSVServiceIdentificationType(source);
+            title = extractTitleFromIdentifications(serviceItems);
+        }
+
+        return title;
+    }
+
+    private static String extractTitleFromIdentifications(List<? extends AbstractMDIdentificationType> items) {
+        if (!items.isEmpty()) {
             return items.stream()
                     .map(item -> safeGet(() -> item.getCitation().getAbstractCitation().getValue()))
                     // If valid
@@ -63,14 +76,12 @@ public class CommonUtils {
                     .map(Optional::get)
                     .map(ac -> {
                         // Try to find the title from these places
-                        if(ac instanceof CICitationType2 type2) {
+                        if (ac instanceof CICitationType2 type2) {
                             return type2.getTitle().getCharacterString().getValue().toString();
-                        }
-                        else if(ac instanceof CICitationType type1) {
+                        } else if (ac instanceof CICitationType type1) {
                             // Backward compatible
                             return type1.getTitle().getCharacterString().getValue().toString();
-                        }
-                        else {
+                        } else {
                             return "";
                         }
                     })
@@ -85,12 +96,21 @@ public class CommonUtils {
 
     public static String getDescription(MDMetadataType source) {
         List<MDDataIdentificationType> items = MapperUtils.findMDDataIdentificationType(source);
+        String description = extractDescriptionFromIdentifications(items);
 
-        if(!items.isEmpty()) {
-            // Need to assert only 1 block contains our target
-            for(MDDataIdentificationType i : items) {
-                // TODO: Null or empty check
-                return i.getAbstract().getCharacterString().getValue().toString();
+        if (description.isBlank()) {
+            List<SVServiceIdentificationType> serviceItems = MapperUtils.findSVServiceIdentificationType(source);
+            description = extractDescriptionFromIdentifications(serviceItems);
+        }
+
+        return description;
+    }
+
+    private static String extractDescriptionFromIdentifications(List<? extends AbstractMDIdentificationType> items) {
+        if (!items.isEmpty()) {
+            for (AbstractMDIdentificationType i : items) {
+                return safeGet(() -> i.getAbstract().getCharacterString().getValue().toString())
+                        .orElse("");
             }
         }
         return "";

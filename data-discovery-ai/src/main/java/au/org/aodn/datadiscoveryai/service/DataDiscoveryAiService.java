@@ -4,6 +4,7 @@ import au.org.aodn.datadiscoveryai.model.AiEnhancedLink;
 import au.org.aodn.datadiscoveryai.model.AiEnhancementRequest;
 import au.org.aodn.datadiscoveryai.model.AiEnhancementResponse;
 import au.org.aodn.stac.model.LinkModel;
+import au.org.aodn.stac.model.ThemesModel;
 
 import java.util.List;
 
@@ -31,6 +32,8 @@ public interface DataDiscoveryAiService {
 
     String getEnhancedUpdateFrequency(AiEnhancementResponse aiResponse);
 
+    List<ThemesModel> getEnhancedThemes(AiEnhancementResponse aiResponse);
+
     /**
      * Converts AI-enhanced links to LinkModel objects
      * This is a utility method for other services that need to convert AI response links
@@ -39,4 +42,9 @@ public interface DataDiscoveryAiService {
      * @return List of LinkModel objects with AI grouping information
      */
     List<LinkModel> convertAiEnhancedLinksToLinkModels(List<AiEnhancedLink> aiEnhancedLinks);
+
+    /**
+     * Go through themes to see if it contains parameter/platform/GCMD vocabs concepts already. If so, we don't need to call AI service
+     * */
+    Boolean shouldCallAiEnhancementThemes(List<ThemesModel> originalThemes);
 }

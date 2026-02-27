@@ -1,5 +1,7 @@
 package au.org.aodn.stac.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Data;
 
@@ -14,12 +16,29 @@ public class ConceptModel {
     private String title;
     private  String description;
 
+    // field for distinguishing AI guessed keywords
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonProperty("ai:description")
+    private String aiDescription;
+
     public ConceptModel(String id, String url, String title, String description) {
         this.id = id;
         this.url = url;
         this.title = title;
         this.description = description;
+        // for original keywords, not show this field
+        this.aiDescription = null;
     }
+
+    // need this full constructor required by builder
+    public ConceptModel(String id, String url, String title, String description, String aiDescription) {
+        this.id = id;
+        this.url = url;
+        this.title = title;
+        this.description = description;
+        this.aiDescription = aiDescription;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

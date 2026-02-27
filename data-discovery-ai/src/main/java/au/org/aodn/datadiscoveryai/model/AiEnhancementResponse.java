@@ -3,6 +3,7 @@ package au.org.aodn.datadiscoveryai.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.JsonNode;
 import lombok.Data;
 
 import java.util.List;
@@ -18,4 +19,7 @@ public class AiEnhancementResponse {
 
     @JsonProperty("links")
     private List<AiEnhancedLink> links;
+
+    @JsonProperty("themes")
+    private List<JsonNode> themes;
 }
