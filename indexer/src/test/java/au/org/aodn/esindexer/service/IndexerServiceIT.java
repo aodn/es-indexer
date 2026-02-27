@@ -189,11 +189,6 @@ public class IndexerServiceIT extends BaseTestClass {
             String actual = indexerObjectMapper.readTree(source).toPrettyString();
             JSONAssert.assertEquals(expected, actual, JSONCompareMode.STRICT);
 
-            //
-
-
-            // no running alias
-//            Assertions.assertThrows(RuntimeException.class, () -> indexerService.getDocumentByUUID(uuid, INDEX_NAME+"-running"));
             deleteRecord(uuid);
 
             clearElasticIndex(INDEX_NAME);
