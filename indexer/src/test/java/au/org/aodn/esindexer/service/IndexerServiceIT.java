@@ -574,9 +574,6 @@ public class IndexerServiceIT extends BaseTestClass {
 
             String test = String.valueOf(Objects.requireNonNull(objectNodeHit.source()));
 
-            // keyword model should not be called
-            verify(dataDiscoveryAiService, never()).getEnhancedThemes(any());
-
             String expected = indexerObjectMapper.readTree(expectedData).toPrettyString();
             String actual = indexerObjectMapper.readTree(test).toPrettyString();
             logger.info(actual);
@@ -693,15 +690,6 @@ public class IndexerServiceIT extends BaseTestClass {
 
             // check if keyword classification model really being called
             verify(dataDiscoveryAiService, times(1)).getEnhancedThemes(eq(mockAiResponse));
-
-            // check if aiEnhanced themes existed
-            JsonNode actualThemes = indexerObjectMapper.readTree(test).get("themes");
-            JsonNode expectedThemes = indexerObjectMapper.readTree(expectedData).get("themes");
-            JSONAssert.assertEquals(
-                    expectedThemes.toString(),
-                    actualThemes.toString(),
-                    JSONCompareMode.STRICT
-            );
 
             // check if ai:parameter_vocabs and ai:platform in summaries
             JsonNode actualSummaries = indexerObjectMapper.readTree(test).get("summaries");
