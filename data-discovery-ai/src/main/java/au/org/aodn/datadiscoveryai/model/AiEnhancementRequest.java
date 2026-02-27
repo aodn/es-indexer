@@ -1,6 +1,7 @@
 package au.org.aodn.datadiscoveryai.model;
 
 import au.org.aodn.stac.model.LinkModel;
+import au.org.aodn.stac.model.ThemesModel;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
@@ -36,4 +37,7 @@ public class AiEnhancementRequest {
 
     @JsonProperty("temporal")
     private List<Map<String, String>> temporal;
+
+    @JsonProperty("themes")
+    private List<ThemesModel> themes;
 }

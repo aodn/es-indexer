@@ -13,6 +13,7 @@ import au.org.aodn.metadata.geonetwork.service.GeoNetworkService;
 import au.org.aodn.metadata.iso19115_3_2018.MDMetadataType;
 import au.org.aodn.stac.model.SearchSuggestionsModel;
 import au.org.aodn.stac.model.StacCollectionModel;
+import au.org.aodn.stac.model.ThemesModel;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.ElasticsearchException;
 import co.elastic.clients.elasticsearch.core.*;
@@ -50,6 +51,8 @@ import java.io.InputStream;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static au.org.aodn.esindexer.utils.CommonUtils.safeGet;
 import au.org.aodn.stac.model.LinkModel;
@@ -214,10 +217,21 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
 
         stacCollectionModel.getSummaries().setScore(score);
 
+        // extract parameter vocabs and platform vocabs
+        // separate original themes from AI enhanced themes (AI themes have concepts with ai:description property)
+        List<ThemesModel> originalThemes = stacCollectionModel.getThemes().stream()
+                .filter(theme -> theme.getConcepts().stream()
+                        .noneMatch(concept -> concept.getAiDescription() != null))
+                .toList();
+        // for AI predicted themes, the concept.ai:description field is not null
+        List<ThemesModel> aiThemes = stacCollectionModel.getThemes().stream()
+                .filter(theme -> theme.getConcepts().stream()
+                        .anyMatch(concept -> concept.getAiDescription() != null))
+                .toList();
         // parameter vocabs
         Set<String> mappedParameterLabels = new HashSet<>();
         Set<String> processedParameterVocabs = vocabService.extractVocabLabelsFromThemes(
-                stacCollectionModel.getThemes(),
+                originalThemes,
                 VocabService.VocabType.AODN_DISCOVERY_PARAMETER_VOCABS,
                 false
         );
@@ -226,9 +240,20 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
             mappedParameterLabels.addAll(processedParameterVocabs);
         } else {
             // manual mapping with custom logic when the record doesn't have existing AODN Parameter Vocabs
-            mappedParameterLabels.addAll(gcmdKeywordUtils.getMappedParameterVocabsFromGcmdKeywords(stacCollectionModel.getThemes()));
+            // use originalThemes to avoid mixing AI enhanced concepts into GCMD mapping
+            mappedParameterLabels.addAll(gcmdKeywordUtils.getMappedParameterVocabsFromGcmdKeywords(originalThemes));
         }
         stacCollectionModel.getSummaries().setParameterVocabs(mappedParameterLabels);
+
+        // process AI enhanced themes -> aiParameterVocabs
+        if (!aiThemes.isEmpty()) {
+            Set<String> aiParameterLabels = vocabService.extractVocabLabelsFromThemes(
+                    aiThemes,
+                    VocabService.VocabType.AODN_DISCOVERY_PARAMETER_VOCABS,
+                    false
+            );
+            stacCollectionModel.getSummaries().setAiParameterVocabs(aiParameterLabels);
+        }
 
         /*
         NOTE: The following implementation for platform and organization vocabularies is just a placeholder, not the final version.
@@ -237,12 +262,23 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
         --------------BEGIN--------------
         */
         // platform vocabs use first level to do the search, hence we need to add the first level to the list
+        // operate with original themes
         Set<String> processedPlatformVocabs = vocabService.extractVocabLabelsFromThemes(
-                stacCollectionModel.getThemes(),
+                originalThemes,
                 VocabService.VocabType.AODN_PLATFORM_VOCABS,
                 true
         );
         stacCollectionModel.getSummaries().setPlatformVocabs(processedPlatformVocabs);
+
+        // process AI enhanced themes -> aiPlatformVocabs
+        if (!aiThemes.isEmpty()) {
+            Set<String> aiPlatformLabels = vocabService.extractVocabLabelsFromThemes(
+                    aiThemes,
+                    VocabService.VocabType.AODN_PLATFORM_VOCABS,
+                    false
+            );
+            stacCollectionModel.getSummaries().setAiPlatformVocabs(aiPlatformLabels);
+        }
 
         // organisation vocabs
         Set<String> mappedOrganisationLabels = new HashSet<>();
@@ -259,10 +295,29 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
         stacCollectionModel.getSummaries().setOrganisationVocabs(mappedOrganisationLabels);
 
         // search_as_you_type enabled fields can be extended
+        // safely merge original parameter vocabs and AI-predicted Parameter vocabs and platform vocabs to serch suggestion
+        // Merge parameterVocabs and aiParameterVocabs, handling null cases
+        Set<String> allParameterVocabs = Stream.of(
+                        stacCollectionModel.getSummaries().getParameterVocabs(),
+                        stacCollectionModel.getSummaries().getAiParameterVocabs()
+                )
+                .filter(Objects::nonNull) // skip null sets, e.g. no AI parameter vocabs
+                .flatMap(Set::stream)
+                .collect(Collectors.toSet());
+
+        // Merge platformVocabs and aiPlatformVocabs
+        Set<String> allPlatformVocabs = Stream.of(
+                        stacCollectionModel.getSummaries().getPlatformVocabs(),
+                        stacCollectionModel.getSummaries().getAiPlatformVocabs() // skip null sets, e.g. no AI platform vocabs
+                )
+                .filter(Objects::nonNull)
+                .flatMap(Set::stream)
+                .collect(Collectors.toSet());
+
         SearchSuggestionsModel searchSuggestionsModel = SearchSuggestionsModel.builder()
                 .abstractPhrases(self.extractTokensFromDescription(stacCollectionModel.getDescription(), targetIndexName))
-                .parameterVocabs(stacCollectionModel.getSummaries().getParameterVocabs())
-                .platformVocabs(stacCollectionModel.getSummaries().getPlatformVocabs())
+                .parameterVocabs(allParameterVocabs)
+                .platformVocabs(allPlatformVocabs)
                 .organisationVocabs(stacCollectionModel.getSummaries().getOrganisationVocabs())
                 .build();
         stacCollectionModel.setSearchSuggestionsModel(searchSuggestionsModel);
@@ -281,6 +336,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
         String status = safeGet(() -> target.getSummaries().getStatus()).orElse(null);
         List<Map<String, String>> temporal = safeGet(() -> target.getSummaries().getTemporal()).orElse(null);
         String statement = safeGet(() -> target.getSummaries().getStatement()).orElse(null);
+        List<ThemesModel> themes = safeGet(target::getThemes).orElse(null);
 
         if (dataDiscoveryAiService.isServiceAvailable()) {
             log.info("start enhancing STAC collection in service layer with UUID: {}", uuid);
@@ -294,6 +350,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
                         .lineageText(statement)
                         .status(status)
                         .temporal(temporal)
+                        .themes(themes)
                         .build();
 
                 // Make a single AI call for both description and link enhancement
@@ -315,6 +372,15 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
                     String inferredUpdateFrequency = dataDiscoveryAiService.getEnhancedUpdateFrequency(aiResponse);
                     if (inferredUpdateFrequency != null) {
                         target.getSummaries().setAiUpdateFrequency(inferredUpdateFrequency);
+                    }
+
+                    // Append predicted themes if AI enhanced themes are available
+                    List<ThemesModel> enhancedThemes = dataDiscoveryAiService.getEnhancedThemes(aiResponse);
+                    if(enhancedThemes != null) {
+                        // add enhanced themes and original themes
+                        List<ThemesModel> mergedThemes = new ArrayList<>(target.getThemes());
+                        mergedThemes.addAll(enhancedThemes);
+                        target.setThemes(mergedThemes);
                     }
                 }
             } catch (Exception e) {
