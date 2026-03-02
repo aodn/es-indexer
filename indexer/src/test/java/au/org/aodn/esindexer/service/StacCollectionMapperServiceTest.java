@@ -144,7 +144,7 @@ public class StacCollectionMapperServiceTest {
 
         doNothing()
                 .when(elasticSearchIndexService)
-                .createIndexFromMappingJSONFile(anyString(), anyString());
+                .recreateIndexFromMappingJSONFile(anyString(), anyString());
 
         doAnswer(ans -> {
             lastRequest.set(ans.getArgument(0));

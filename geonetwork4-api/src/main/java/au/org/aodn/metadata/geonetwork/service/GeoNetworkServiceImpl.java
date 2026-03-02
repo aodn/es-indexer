@@ -391,6 +391,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
      */
     @Override
     public Long getAllMetadataCounts() throws IOException {
+
         // Set size = 0 will return total count, elastic behavior :)
         SearchRequest request = SearchRequest.of(r -> r.size(0).index(indexName));
 

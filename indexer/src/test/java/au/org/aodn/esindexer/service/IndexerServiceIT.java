@@ -1,12 +1,12 @@
 package au.org.aodn.esindexer.service;
 
 import au.org.aodn.datadiscoveryai.model.AiEnhancementRequest;
+import au.org.aodn.datadiscoveryai.model.AiEnhancementResponse;
+import au.org.aodn.datadiscoveryai.service.DataDiscoveryAiService;
 import au.org.aodn.esindexer.BaseTestClass;
 import au.org.aodn.esindexer.configuration.GeoNetworkSearchTestConfig;
 import au.org.aodn.esindexer.model.MockServer;
 import au.org.aodn.metadata.geonetwork.service.GeoNetworkServiceImpl;
-import au.org.aodn.datadiscoveryai.service.DataDiscoveryAiService;
-import au.org.aodn.datadiscoveryai.model.AiEnhancementResponse;
 import au.org.aodn.stac.model.ConceptModel;
 import au.org.aodn.stac.model.LinkModel;
 import au.org.aodn.stac.model.ThemesModel;
@@ -14,8 +14,10 @@ import co.elastic.clients.elasticsearch.core.search.Hit;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
 import org.junit.jupiter.api.*;
+import org.mockito.Mockito;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +25,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpMethod;
 import org.springframework.test.context.ActiveProfiles;
-import org.mockito.Mockito;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -33,7 +35,8 @@ import java.util.Objects;
 import java.util.Set;
 
 import static org.hamcrest.Matchers.containsString;
-import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.client.ExpectedCount.manyTimes;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
@@ -49,8 +52,8 @@ public class IndexerServiceIT extends BaseTestClass {
     @Autowired
     protected GeoNetworkServiceImpl geoNetworkService;
 
-    @Autowired
-    protected IndexerMetadataService indexerService;
+    @MockitoSpyBean
+    protected IndexerMetadataServiceImpl indexerService;
 
     @Autowired
     protected ObjectMapper indexerObjectMapper;
@@ -172,7 +175,7 @@ public class IndexerServiceIT extends BaseTestClass {
      * Alias is used to point which index is the current in use index
      */
     @Test
-    public void verifyAlias() {
+    public void verifyAlias() throws IOException {
         var uuid = "7709f541-fc0c-4318-b5b9-9053aa474e0e";
         try {
 
@@ -192,9 +195,132 @@ public class IndexerServiceIT extends BaseTestClass {
         } catch (Exception e) {
             throw new RuntimeException(e);
         } finally {
+            clearElasticIndex(INDEX_NAME);
             deleteRecord(uuid);
         }
     }
+
+    /**
+     * Test that running index is preserved when indexing fails midway,
+     * allowing resume with beginWithUuid parameter.
+     */
+    @Test
+    public void verifyRunningIndexAndResumeFeature() throws IOException {
+        // UUIDs from sample1.xml to sample11.xml
+        var uuid1 = "9e5c3031-a026-48b3-a153-a70c2e2b78b9";   // sample1
+        var uuid2 = "830f9a83-ae6b-4260-a82a-24c4851f7119";   // sample2
+        var uuid3 = "06b09398-d3d0-47dc-a54a-a745319fbece";   // sample3
+        var uuid4 = "7709f541-fc0c-4318-b5b9-9053aa474e0e";   // sample4
+        var uuid5 = "2852a776-cbfc-4bc8-a126-f3c036814892";   // sample5
+        var uuid6 = "e18eee85-c6c4-4be2-ac8c-930991cf2534";   // sample6
+        var uuid7 = "5905b3eb-aad0-4f9c-a03e-a02fb3488082";   // sample7
+        var uuid8 = "1880cd63-d0f9-42e0-b073-7082527945f2";   // sample8
+        var uuid9 = "1e13ab6e-e546-44f2-a007-061c2815268a";   // sample9
+        var uuid10 = "ae86e2f5-eaaf-459e-a405-e654d85adb9c";  // sample10
+        var uuid11 = "fa93c66e-0e56-7e1d-e043-08114f8c1b76";  // sample11
+
+        var allUuids = List.of(uuid1, uuid2, uuid3, uuid4, uuid5, uuid6, uuid7, uuid8, uuid9, uuid10, uuid11);
+        var runningAliasName = INDEX_NAME + "-running";
+
+        try {
+            insertMetadataRecords(uuid1, "classpath:canned/sample1.xml");
+            insertMetadataRecords(uuid2, "classpath:canned/sample2.xml");
+            insertMetadataRecords(uuid3, "classpath:canned/sample3.xml");
+            insertMetadataRecords(uuid4, "classpath:canned/sample4.xml");
+            insertMetadataRecords(uuid5, "classpath:canned/sample5.xml");
+            insertMetadataRecords(uuid6, "classpath:canned/sample6.xml");
+            insertMetadataRecords(uuid7, "classpath:canned/sample7.xml");
+            insertMetadataRecords(uuid8, "classpath:canned/sample8.xml");
+            insertMetadataRecords(uuid9, "classpath:canned/sample9.xml");
+            insertMetadataRecords(uuid10, "classpath:canned/sample10.xml");
+            insertMetadataRecords(uuid11, "classpath:canned/sample11.xml");
+
+            // Create a callback that throws an exception on the first onProgress call
+            var failingCallback = createFailingCallback();
+
+            // First indexing attempt - should fail after some documents are indexed
+            RuntimeException thrownException = null;
+            try {
+                indexerService.indexAllMetadataRecordsFromGeoNetwork(null, true, failingCallback);
+            } catch (RuntimeException e) {
+                logger.info("Expected exception caught: {}", e.getMessage());
+                thrownException = e;
+            }
+
+            // Verify that an exception was thrown
+            Assertions.assertNotNull(thrownException, "An exception should have been thrown");
+            logger.info("Exception message: {}", thrownException.getMessage());
+
+            // Verify running index exists with the -running alias
+            var runningIndexName = elasticSearchIndexService.getIndexNameFromAlias(runningAliasName);
+            logger.info("Running index name after failure: {}", runningIndexName);
+            Assertions.assertNotNull(runningIndexName, "Running index should exist after failed indexing");
+
+            // Now resume indexing
+            // Because our "beginWithUuid" feature starts after the specified UUID, we can use this fake UUID to ensure all records are indexed
+            var fakeUuid = "00000000-0000-0000-0000-000000000000";
+            indexerService.indexAllMetadataRecordsFromGeoNetwork(fakeUuid, true, null);
+
+            // Verify all documents are indexed and the main index can be queried
+            Assertions.assertEquals(allUuids.size(), elasticSearchIndexService.getDocumentsCount(INDEX_NAME), "All documents should be indexed after resume");
+
+            // Verify the running index has been cleaned up
+            var leftoverRunningIndex = elasticSearchIndexService.getIndexNameFromAlias(runningAliasName);
+            Assertions.assertNull(leftoverRunningIndex, "Running index should be cleaned up after successful indexing");
+
+            // index again, and fail it
+            try {
+                indexerService.indexAllMetadataRecordsFromGeoNetwork(null, true, failingCallback);
+            } catch (RuntimeException e) {
+                logger.info("Expected exception caught on second indexing: {}", e.getMessage());
+            }
+
+            // the in-use index should not be affected by the failed indexing, and should still be able to query all documents
+            Assertions.assertEquals(allUuids.size(), elasticSearchIndexService.getDocumentsCount(INDEX_NAME), "All documents should still be indexed after second failed indexing");
+
+
+        } finally {
+            // Clean up both the main index and any running index
+            clearElasticIndex(INDEX_NAME);
+
+            // Also try to clean up any leftover running index
+            try {
+                var leftoverRunningIndex = elasticSearchIndexService.getIndexNameFromAlias(runningAliasName);
+                if (leftoverRunningIndex != null) {
+                    elasticSearchIndexService.deleteIndexStore(leftoverRunningIndex);
+                }
+            } catch (Exception e) {
+                logger.debug("No leftover running index to clean up: {}", e.getMessage());
+            }
+
+            // Delete all records from GeoNetwork
+            deleteRecord(allUuids.toArray(new String[0]));
+        }
+    }
+
+    // please keep getting the failing callback via function (not a shared instance) as we don't want any unexpected behavior caused by shared instance.
+    private IndexService.@NotNull Callback createFailingCallback() {
+        return new IndexService.Callback() {
+            @Override
+            public void onProgress(Object update) {
+                String message = update != null ? update.toString() : "";
+                logger.info("Callback onProgress: {}", message);
+                logger.info(">>> Throwing exception on first onProgress call <<<");
+                throw new RuntimeException("Simulated failure on first indexing");
+            }
+
+            @Override
+            public void onComplete(Object result) {
+                logger.info("Callback onComplete: {}", result);
+            }
+
+            @Override
+            public void onError(Throwable throwable) {
+                logger.error("Callback onError: {}", throwable.getMessage());
+            }
+        };
+    }
+
 
     @Test
     public void verifyAssociatedRecordIndexer() throws IOException{
