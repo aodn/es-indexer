@@ -7,8 +7,6 @@ import au.org.aodn.esindexer.BaseTestClass;
 import au.org.aodn.esindexer.configuration.GeoNetworkSearchTestConfig;
 import au.org.aodn.esindexer.model.MockServer;
 import au.org.aodn.metadata.geonetwork.service.GeoNetworkServiceImpl;
-import au.org.aodn.datadiscoveryai.service.DataDiscoveryAiService;
-import au.org.aodn.datadiscoveryai.model.AiEnhancementResponse;
 import au.org.aodn.stac.model.ConceptModel;
 import au.org.aodn.stac.model.LinkModel;
 import au.org.aodn.stac.model.ThemesModel;
@@ -16,6 +14,7 @@ import co.elastic.clients.elasticsearch.core.search.Hit;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
 import org.junit.jupiter.api.*;
 import org.mockito.Mockito;
@@ -36,7 +35,8 @@ import java.util.Objects;
 import java.util.Set;
 
 import static org.hamcrest.Matchers.containsString;
-import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.client.ExpectedCount.manyTimes;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
@@ -236,25 +236,7 @@ public class IndexerServiceIT extends BaseTestClass {
             insertMetadataRecords(uuid11, "classpath:canned/sample11.xml");
 
             // Create a callback that throws an exception on the first onProgress call
-            IndexService.Callback failingCallback = new IndexService.Callback() {
-                @Override
-                public void onProgress(Object update) {
-                    String message = update != null ? update.toString() : "";
-                    logger.info("Callback onProgress: {}", message);
-                    logger.info(">>> Throwing exception on first onProgress call <<<");
-                    throw new RuntimeException("Simulated failure on first indexing");
-                }
-
-                @Override
-                public void onComplete(Object result) {
-                    logger.info("Callback onComplete: {}", result);
-                }
-
-                @Override
-                public void onError(Throwable throwable) {
-                    logger.error("Callback onError: {}", throwable.getMessage());
-                }
-            };
+            var failingCallback = createFailingCallback();
 
             // First indexing attempt - should fail after some documents are indexed
             RuntimeException thrownException = null;
@@ -286,6 +268,17 @@ public class IndexerServiceIT extends BaseTestClass {
             var leftoverRunningIndex = elasticSearchIndexService.getIndexNameFromAlias(runningAliasName);
             Assertions.assertNull(leftoverRunningIndex, "Running index should be cleaned up after successful indexing");
 
+            // index again, and fail it
+            try {
+                indexerService.indexAllMetadataRecordsFromGeoNetwork(null, true, failingCallback);
+            } catch (RuntimeException e) {
+                logger.info("Expected exception caught on second indexing: {}", e.getMessage());
+            }
+
+            // the in-use index should not be affected by the failed indexing, and should still be able to query all documents
+            Assertions.assertEquals(allUuids.size(), elasticSearchIndexService.getDocumentsCount(INDEX_NAME), "All documents should still be indexed after second failed indexing");
+
+
         } finally {
             // Clean up both the main index and any running index
             clearElasticIndex(INDEX_NAME);
@@ -304,6 +297,30 @@ public class IndexerServiceIT extends BaseTestClass {
             deleteRecord(allUuids.toArray(new String[0]));
         }
     }
+
+    // please keep getting the failing callback via function (not a shared instance) as we don't want any unexpected behavior caused by shared instance.
+    private IndexService.@NotNull Callback createFailingCallback() {
+        return new IndexService.Callback() {
+            @Override
+            public void onProgress(Object update) {
+                String message = update != null ? update.toString() : "";
+                logger.info("Callback onProgress: {}", message);
+                logger.info(">>> Throwing exception on first onProgress call <<<");
+                throw new RuntimeException("Simulated failure on first indexing");
+            }
+
+            @Override
+            public void onComplete(Object result) {
+                logger.info("Callback onComplete: {}", result);
+            }
+
+            @Override
+            public void onError(Throwable throwable) {
+                logger.error("Callback onError: {}", throwable.getMessage());
+            }
+        };
+    }
+
 
     @Test
     public void verifyAssociatedRecordIndexer() throws IOException{

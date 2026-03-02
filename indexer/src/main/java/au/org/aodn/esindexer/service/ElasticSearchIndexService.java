@@ -142,7 +142,8 @@ public class ElasticSearchIndexService {
             IndicesResponse response = portalElasticsearchClient.cat().indices(i -> i);
             return response.valueBody().stream().map(IndicesRecord::index).distinct().collect(Collectors.toList());
         } catch ( ElasticsearchException | IOException e) {
-            throw new IndexNotFoundException("Failed to get indices from Elasticsearch | " + e.getMessage());
+            //If no any indices, this function will return an empty list. This catch is for other Exceptions.
+            throw new RuntimeException("Failed to get indices from Elasticsearch | " + e.getMessage());
         }
     }
 
