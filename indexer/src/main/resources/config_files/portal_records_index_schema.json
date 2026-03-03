@@ -203,6 +203,12 @@
           "ai:update_frequency": {
             "type": "keyword"
           },
+          "ai:parameter_vocabs": {
+            "type": "keyword"
+          },
+          "ai:platform_vocabs": {
+            "type": "keyword"
+          },
           "score": {
             "type": "long"
           },
