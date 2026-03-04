@@ -20,7 +20,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import org.springframework.web.client.RestTemplate;
-import org.testcontainers.containers.DockerComposeContainer;
+import org.testcontainers.containers.ComposeContainer;
 import org.testcontainers.containers.wait.strategy.Wait;
 import org.testcontainers.shaded.com.fasterxml.jackson.core.type.TypeReference;
 import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
@@ -45,10 +45,10 @@ public class GeoNetworkSearchTestConfig {
     public static final int GN_PORT = 8080;
 
     @Bean
-    public DockerComposeContainer createCompose() {
+    public ComposeContainer createCompose() {
         // ES is set to use password for authenticate, hence if your connection to "/" for ES will result in 401
         // if server start correctly
-        DockerComposeContainer container = new DockerComposeContainer(new File("src/test/resources/compose-gn4-test.yml"))
+        ComposeContainer container = new ComposeContainer(new File("src/test/resources/compose-gn4-test.yml"))
                 // Technically we do not need the Elastic port expose as query is done via geonetwork. Here
                 // we just use the port for wait purpose
                 .withExposedService(GN_ELASTIC_NAME, 1, GN_ELASTIC_PORT,
@@ -63,7 +63,7 @@ public class GeoNetworkSearchTestConfig {
     @Bean(name = "gn4ElasticRestClient")
     public RestClient createRestClientTransport1(
             @Value("${geonetwork.search.api.endpoint}") String path,
-            DockerComposeContainer dockerComposeContainer) {
+            ComposeContainer dockerComposeContainer) {
 
         // Create the low-level client, noted the elastic search 7 is behind geonetwork and
         // is therefore elastic api is expose via geonetwork with slightly different search path
