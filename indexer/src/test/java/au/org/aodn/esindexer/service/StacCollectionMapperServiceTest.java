@@ -602,4 +602,32 @@ public class StacCollectionMapperServiceTest {
 
         verify(expected);
     }
+
+    /**
+     * Verify GCMD citation descriptions are excluded from theme concepts.
+     * The test sample (abstract_resposibilty_null.xml) contains GCMD citation in its theme descriptions,
+     * and the expected output should have empty descriptions for those concepts.
+     */
+    @Test
+    public void verifyGcmdCitationDescriptionExcluded() throws IOException, JSONException {
+        String xml = readResourceFile("classpath:canned/abstract_resposibilty_null.xml");
+        String expected = readResourceFile("classpath:canned/abstract_resposibilty_null_stac.json");
+        indexerService.indexMetadata(xml);
+
+        verify(expected);
+
+        // additionally verify that GCMD descriptions are empty
+        Map<?, ?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
+        List<Map<String, Object>> themes = (List<Map<String, Object>>) content.get("themes");
+        for (Map<String, Object> theme : themes) {
+            List<Map<String, Object>> concepts = (List<Map<String, Object>>) theme.get("concepts");
+            for (Map<String, Object> concept : concepts) {
+                String description = (String) concept.get("description");
+                Assertions.assertFalse(
+                        description != null && description.contains("NASA/Global Change Master Directory"),
+                        "GCMD citation should be excluded from concept description"
+                );
+            }
+        }
+    }
 }
