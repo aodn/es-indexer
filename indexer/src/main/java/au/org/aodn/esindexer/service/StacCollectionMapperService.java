@@ -2,6 +2,7 @@ package au.org.aodn.esindexer.service;
 
 import au.org.aodn.stac.model.RelationType;
 import au.org.aodn.cloudoptimized.service.DataAccessService;
+import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.utils.AssociatedRecordsUtil;
 import au.org.aodn.esindexer.utils.*;
 import au.org.aodn.metadata.geonetwork.service.GeoNetworkService;
@@ -675,7 +676,7 @@ public abstract class StacCollectionMapperService {
     }
 
     protected String mapThemesDescription(MDKeywordsPropertyType descriptiveKeyword, String uuid) {
-        return safeGet(() -> descriptiveKeyword.getMDKeywords().getThesaurusName())
+        String description = safeGet(() -> descriptiveKeyword.getMDKeywords().getThesaurusName())
                 .map(abstractCitationPropertyType ->
                     safeGet(() -> abstractCitationPropertyType.getAbstractCitation().getValue())
                             .map(v -> (CICitationType2)v)
@@ -705,6 +706,11 @@ public abstract class StacCollectionMapperService {
                     return "";
                 });
 
+        // Clear GCMD citation strings not intended for display (version suffix varies)
+        if (description.trim().startsWith(AppConstants.GCMD_CITATION_PREFIX)) {
+            return "";
+        }
+        return description;
     }
 
     protected String mapThemesScheme(MDKeywordsPropertyType descriptiveKeyword, String uuid) {
@@ -739,6 +745,7 @@ public abstract class StacCollectionMapperService {
 
                     themesModel.setConcepts(mapThemesConcepts(descriptiveKeyword, uuid));
                     themesModel.setScheme(mapThemesScheme(descriptiveKeyword, uuid));
+
                     results.add(themesModel);
                 });
 
