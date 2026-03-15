@@ -2,7 +2,6 @@ package au.org.aodn.esindexer.service;
 
 import au.org.aodn.stac.model.RelationType;
 import au.org.aodn.cloudoptimized.service.DataAccessService;
-import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.utils.AssociatedRecordsUtil;
 import au.org.aodn.esindexer.utils.*;
 import au.org.aodn.metadata.geonetwork.service.GeoNetworkService;
@@ -706,8 +705,9 @@ public abstract class StacCollectionMapperService {
                     return "";
                 });
 
-        // Clear GCMD citation strings not intended for display (version suffix varies)
-        if (description.trim().startsWith(AppConstants.GCMD_CITATION_PREFIX)) {
+        // Exclude GCMD citation from concept description, version suffix varies (e.g. "Version 8.0.0.0.0")
+        String gcmdCitationPrefix = "Olsen, L.M., G. Major, K. Shein, J. Scialdone, S. Ritz, T. Stevens, M. Morahan, A. Aleman, R. Vogel, S. Leicester, H. Weir, M. Meaux, S. Grebas, C.Solomon, M. Holland, T. Northcutt, R. A. Restrepo, R. Bilodeau, 2013. NASA/Global Change Master Directory (GCMD) Earth Science Keywords.";
+        if (description.trim().startsWith(gcmdCitationPrefix)) {
             return "";
         }
         return description;
