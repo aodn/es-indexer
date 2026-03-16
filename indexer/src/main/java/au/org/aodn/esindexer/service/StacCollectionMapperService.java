@@ -675,7 +675,7 @@ public abstract class StacCollectionMapperService {
     }
 
     protected String mapThemesDescription(MDKeywordsPropertyType descriptiveKeyword, String uuid) {
-        return safeGet(() -> descriptiveKeyword.getMDKeywords().getThesaurusName())
+        String description = safeGet(() -> descriptiveKeyword.getMDKeywords().getThesaurusName())
                 .map(abstractCitationPropertyType ->
                     safeGet(() -> abstractCitationPropertyType.getAbstractCitation().getValue())
                             .map(v -> (CICitationType2)v)
@@ -705,6 +705,12 @@ public abstract class StacCollectionMapperService {
                     return "";
                 });
 
+        // Exclude GCMD citation from concept description, version suffix varies (e.g. "Version 8.0.0.0.0")
+        String gcmdCitationPrefix = "Olsen, L.M., G. Major, K. Shein, J. Scialdone, S. Ritz, T. Stevens, M. Morahan, A. Aleman, R. Vogel, S. Leicester, H. Weir, M. Meaux, S. Grebas, C.Solomon, M. Holland, T. Northcutt, R. A. Restrepo, R. Bilodeau, 2013. NASA/Global Change Master Directory (GCMD) Earth Science Keywords.";
+        if (description.trim().startsWith(gcmdCitationPrefix)) {
+            return "";
+        }
+        return description;
     }
 
     protected String mapThemesScheme(MDKeywordsPropertyType descriptiveKeyword, String uuid) {
@@ -739,6 +745,7 @@ public abstract class StacCollectionMapperService {
 
                     themesModel.setConcepts(mapThemesConcepts(descriptiveKeyword, uuid));
                     themesModel.setScheme(mapThemesScheme(descriptiveKeyword, uuid));
+
                     results.add(themesModel);
                 });
 
