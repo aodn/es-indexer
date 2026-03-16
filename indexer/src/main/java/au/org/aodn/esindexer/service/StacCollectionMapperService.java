@@ -197,6 +197,11 @@ public abstract class StacCollectionMapperService {
                 ZonedDateTime zt =  ld.atZone(ZoneId.of(timeZoneId));
                 utcZonedDateTime = zt.withZoneSameInstant(ZoneOffset.UTC);
             }
+            // Case 5: Date and Time with trailing Z indicating UTC (e.g., "2014-12-31T00:00:00Z")
+            else if (dateStr.matches("\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z")) {
+                convertedDateTime = dateStr.substring(0, dateStr.length() - 1);
+                utcZonedDateTime = ZonedDateTime.parse(convertedDateTime, TemporalUtils.TIME_FORMATTER.withZone(ZoneOffset.UTC));
+            }
 
 
             // Convert to UTC

@@ -36,7 +36,10 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 
+import org.springframework.test.util.ReflectionTestUtils;
+
 import static au.org.aodn.esindexer.BaseTestClass.readResourceFile;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
@@ -294,6 +297,16 @@ public class StacCollectionMapperServiceTest {
         indexerService.indexMetadata(xml);
 
         verify(expected);
+    }
+
+    @Test
+    public void verifyTemporalWithTrailingZ() {
+        // "2014-12-31T00:00:00Z" is already UTC, should be returned as-is
+        String startResult = ReflectionTestUtils.invokeMethod(service, "convertDateToZonedDateTime", "test-uuid", "2014-12-31T00:00:00Z", true);
+        assertEquals("2014-12-31T00:00:00Z", startResult);
+
+        String endResult = ReflectionTestUtils.invokeMethod(service, "convertDateToZonedDateTime", "test-uuid", "2014-12-31T00:00:00Z", false);
+        assertEquals("2014-12-31T00:00:00Z", endResult);
     }
 
     @Test
