@@ -197,8 +197,11 @@ public class DataAccessServiceImpl implements DataAccessService {
             );
 
             if (responseEntity.getStatusCode().is2xxSuccessful()) {
-                if (responseEntity.getBody() != null || !responseEntity.getBody().isEmpty()) {
-                    return Optional.of(responseEntity.getBody());
+                if (responseEntity.getBody() != null && !responseEntity.getBody().isEmpty()) {
+                    // The response is a JSON string (e.g., "https://..."), so we need to deserialize it
+                    // to remove the enclosing quotes and handle any escape characters properly
+                    String notebookUrl = objectMapper.readValue(responseEntity.getBody(), String.class);
+                    return Optional.of(notebookUrl);
                 }
             }
             return Optional.empty();
