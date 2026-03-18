@@ -113,7 +113,118 @@
             ]
         }
     ],
-    "themes": [],
+    "themes": [
+        {
+            "concepts": [
+                {
+                    "id": "Earth Sciences",
+                    "url": null,
+                    "title": "Australian and New Zealand Standard Research Classification: Fields of Research",
+                    "description": ""
+                }
+            ],
+            "scheme": "discipline"
+        },
+        {
+            "concepts": [
+                {
+                    "id": "web service",
+                    "url": null,
+                    "title": "Descriptive Keyword",
+                    "description": ""
+                }
+            ],
+            "scheme": ""
+        },
+        {
+            "concepts": [
+                {
+                    "id": "Australia",
+                    "url": null,
+                    "title": "Descriptive Keyword",
+                    "description": ""
+                }
+            ],
+            "scheme": ""
+        },
+        {
+            "concepts": [
+                {
+                    "id": "National Base Map",
+                    "url": null,
+                    "title": "Descriptive Keyword",
+                    "description": ""
+                }
+            ],
+            "scheme": ""
+        },
+        {
+            "concepts": [
+                {
+                    "id": "National Map",
+                    "url": null,
+                    "title": "Descriptive Keyword",
+                    "description": ""
+                }
+            ],
+            "scheme": ""
+        },
+        {
+            "concepts": [
+                {
+                    "id": "Base Map",
+                    "url": null,
+                    "title": "Descriptive Keyword",
+                    "description": ""
+                }
+            ],
+            "scheme": ""
+        },
+        {
+            "concepts": [
+                {
+                    "id": "Topography",
+                    "url": null,
+                    "title": "Descriptive Keyword",
+                    "description": ""
+                }
+            ],
+            "scheme": ""
+        },
+        {
+            "concepts": [
+                {
+                    "id": "Published_External",
+                    "url": null,
+                    "title": "Descriptive Keyword",
+                    "description": ""
+                }
+            ],
+            "scheme": ""
+        },
+        {
+            "concepts": [
+                {
+                    "id": "MapServer",
+                    "url": null,
+                    "title": "Descriptive Keyword",
+                    "description": ""
+                }
+            ],
+            "scheme": ""
+        },
+        {
+            "concepts": [
+                {
+                    "id": "geoscientificInformation",
+                    "url": null,
+                    "title": null,
+                    "description": null
+                }
+            ],
+            "scheme": "Categories"
+        }
+    ],
     "id": "023fa111-4007-408d-8aaf-e7058d765378",
     "search_suggestions": {
         "abstract_phrases": [],
