@@ -733,43 +733,48 @@ public abstract class StacCollectionMapperService {
     @Named("mapThemes")
     List<ThemesModel> mapThemes(MDMetadataType source) {
         List<ThemesModel> results = new ArrayList<>();
+
         List<MDDataIdentificationType> items = MapperUtils.findMDDataIdentificationType(source);
         if (!items.isEmpty()) {
+            mapThemesFromIdentifications(items, source, results);
+        } else {
+            // Fallback: some records (e.g. GA) use srv:SV_ServiceIdentification instead of mri:MD_DataIdentification
+            List<SVServiceIdentificationType> serviceItems = MapperUtils.findSVServiceIdentificationType(source);
+            mapThemesFromIdentifications(serviceItems, source, results);
+        }
 
-            for (MDDataIdentificationType i : items) {
+        return results;
+    }
 
-                // get keywords
-                i.getDescriptiveKeywords().forEach(descriptiveKeyword -> {
-                    ThemesModel themesModel = ThemesModel.builder().build();
-                    String uuid = CommonUtils.getUUID(source);
+    private void mapThemesFromIdentifications(List<? extends AbstractMDIdentificationType> items, MDMetadataType source, List<ThemesModel> results) {
+        String uuid = CommonUtils.getUUID(source);
+        for (AbstractMDIdentificationType i : items) {
 
-                    themesModel.setConcepts(mapThemesConcepts(descriptiveKeyword, uuid));
-                    themesModel.setScheme(mapThemesScheme(descriptiveKeyword, uuid));
+            // get keywords
+            i.getDescriptiveKeywords().forEach(descriptiveKeyword -> {
+                ThemesModel themesModel = ThemesModel.builder().build();
+                themesModel.setConcepts(mapThemesConcepts(descriptiveKeyword, uuid));
+                themesModel.setScheme(mapThemesScheme(descriptiveKeyword, uuid));
+                results.add(themesModel);
+            });
 
-                    results.add(themesModel);
-                });
-
-                // get categories
-                if (i.getTopicCategory() != null) {
-
-                    var themesModel = ThemesModel.builder().scheme("Categories").concepts(new ArrayList<>()).build();
-                    for (var category : i.getTopicCategory()) {
-                        var categoryValue = safeGet(() -> category.getMDTopicCategoryCode().value());
-                        if (categoryValue.isPresent()) {
-                            var concept = ConceptModel.builder().id(categoryValue.get()).build();
-                            themesModel.getConcepts().add(concept);
-                        }
-                    }
-                    if (!themesModel.getConcepts().isEmpty()) {
-                        results.add(themesModel);
-                    } else {
-                        logger.debug("No categories found for metadata record: {}", CommonUtils.getUUID(source));
+            // get categories
+            if (i.getTopicCategory() != null) {
+                var themesModel = ThemesModel.builder().scheme("Categories").concepts(new ArrayList<>()).build();
+                for (var category : i.getTopicCategory()) {
+                    var categoryValue = safeGet(() -> category.getMDTopicCategoryCode().value());
+                    if (categoryValue.isPresent()) {
+                        var concept = ConceptModel.builder().id(categoryValue.get()).build();
+                        themesModel.getConcepts().add(concept);
                     }
                 }
+                if (!themesModel.getConcepts().isEmpty()) {
+                    results.add(themesModel);
+                } else {
+                    logger.debug("No categories found for metadata record: {}", uuid);
+                }
             }
-
         }
-        return results;
     }
 
     @Named("mapLinks")
