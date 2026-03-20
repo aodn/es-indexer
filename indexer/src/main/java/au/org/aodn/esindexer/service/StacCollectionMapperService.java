@@ -111,13 +111,22 @@ public abstract class StacCollectionMapperService {
     List<String[]> createExtentTemporal(MDMetadataType source) {
 
         List<MDDataIdentificationType> items = MapperUtils.findMDDataIdentificationType(source);
-        if (items.isEmpty()) {
-            logger.warn("Unable to find extent temporal information for metadata record: {}", CommonUtils.getUUID(source));
-            return null;
+        // Primary: MDDataIdentification; Fallback: SVServiceIdentification (e.g. GA records)
+        List<? extends AbstractMDIdentificationType> identifications;
+        if (!items.isEmpty()) {
+            identifications = items;
+        } else {
+            List<SVServiceIdentificationType> svcItems = MapperUtils.findSVServiceIdentificationType(source);
+            if (!svcItems.isEmpty()) {
+                identifications = svcItems;
+            } else {
+                logger.warn("Unable to find extent temporal information for metadata record: {}", CommonUtils.getUUID(source));
+                return null;
+            }
         }
 
         List<String[]> result = new ArrayList<>();
-        for (MDDataIdentificationType item : items) {
+        for (AbstractMDIdentificationType item : identifications) {
             item.getExtent().forEach(extent -> {
                 if (!(extent.getAbstractExtent().getValue() instanceof EXExtentType exExtentType)) {
                     return;
