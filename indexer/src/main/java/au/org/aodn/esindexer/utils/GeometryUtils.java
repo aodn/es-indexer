@@ -279,13 +279,17 @@ public class GeometryUtils {
             P param) {
 
         List<MDDataIdentificationType> items = MapperUtils.findMDDataIdentificationType(source);
-        if(!items.isEmpty()) {
-            if(items.size() > 1) {
+        // Primary: MDDataIdentification; Fallback: SVServiceIdentification (e.g. GA records)
+        List<? extends AbstractMDIdentificationType> identifications = items.isEmpty()
+                ? MapperUtils.findSVServiceIdentificationType(source)
+                : items;
+        if(!identifications.isEmpty()) {
+            if(identifications.size() > 1) {
                 logger.warn("!! More than 1 block of MDDataIdentificationType, data will be missed !!");
             }
-            // Assume only 1 block of <mri:MD_DataIdentification>
+            // Assume only 1 block of <mri:MD_DataIdentification> or <srv:SV_ServiceIdentification>
             // We only concern geographicElement here
-            List<EXExtentType> ext = items.get(0)
+            List<EXExtentType> ext = identifications.get(0)
                     .getExtent()
                     .stream()
                     .filter(f -> f.getAbstractExtent() != null)
