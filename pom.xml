@@ -50,6 +50,7 @@
         <org.geotools.version>29.2</org.geotools.version>
         <org.springboot.actuator.version>3.2.0</org.springboot.actuator.version>
         <org.testcontainer.version>1.21.4</org.testcontainer.version>
+        <aws.sdk.version>2.29.52</aws.sdk.version>
     </properties>
 
     <dependencyManagement>
@@ -215,6 +216,16 @@
                 <artifactId>jsonassert</artifactId>
                 <version>1.5.0</version>
                 <scope>test</scope>
+            </dependency>
+            <dependency>
+            <groupId>software.amazon.awssdk</groupId>
+            <artifactId>batch</artifactId>
+            <version>${aws.sdk.version}</version>
+        </dependency>
+            <dependency>
+                <groupId>software.amazon.awssdk</groupId>
+                <artifactId>auth</artifactId>
+                <version>${aws.sdk.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
