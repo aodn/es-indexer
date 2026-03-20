@@ -1,15 +1,15 @@
 package au.org.aodn.esindexer.batch;
 
-import au.org.aodn.esindexer.service.IndexerMetadataService;
 import au.org.aodn.esindexer.service.IndexCloudOptimizedService;
-import org.apache.commons.lang3.NotImplementedException;
+import au.org.aodn.esindexer.service.IndexerMetadataService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class BatchJobRunnerTest {
     @Mock
@@ -25,27 +25,9 @@ class BatchJobRunnerTest {
     }
 
     @Test
-    void runIndexAllMetadataShouldThrowNotImplemented() {
-        Exception ex = assertThrows(NotImplementedException.class, () -> batchJobRunner.run("indexAllMetadata", null));
-        assertTrue(ex.getMessage().contains("Index All Metadata"));
-    }
-
-    @Test
-    void runIndexAllMetadataWithParamShouldThrowNotImplemented() {
-        Exception ex = assertThrows(NotImplementedException.class, () -> batchJobRunner.run("indexAllMetadata", "param"));
-        assertTrue(ex.getMessage().contains("Index All Metadata"));
-    }
-
-    @Test
-    void runIndexAllMetadataFromUuidShouldThrowNotImplemented() {
-        Exception ex = assertThrows(NotImplementedException.class, () -> batchJobRunner.run("indexAllMetadataFromUuid", "param"));
-        assertTrue(ex.getMessage().contains("Index All Metadata"));
-    }
-
-    @Test
-    void runIndexAllMetadataFromUuidMissingParamShouldThrowNotImplemented() {
-        Exception ex = assertThrows(org.apache.commons.lang3.NotImplementedException.class, () -> batchJobRunner.run("indexAllMetadataFromUuid", null));
-        assertTrue(ex.getMessage().contains("Index All Metadata"));
+    void runIndexAllMetadataWithParamShouldThrow() {
+        Exception ex = assertThrows(IllegalArgumentException.class, () -> batchJobRunner.run("indexAllMetadata", "param"));
+        assertTrue(ex.getMessage().contains("Job parameter not required"));
     }
 
     @Test
