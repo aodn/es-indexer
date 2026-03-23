@@ -799,29 +799,29 @@ public abstract class StacCollectionMapperService {
         List<MDDistributionType> items = MapperUtils.findMDDistributionType(source);
         if (!items.isEmpty()) {
             for (MDDistributionType i : items) {
-                i.getTransferOptions().forEach(transferOption -> transferOption.getMDDigitalTransferOptions().getOnLine().forEach(link -> {
-                    if (link.getAbstractOnlineResource() != null && link.getAbstractOnlineResource().getValue() instanceof CIOnlineResourceType2 ciOnlineResource) {
-                        if (ciOnlineResource.getLinkage().getCharacterString() != null && !ciOnlineResource.getLinkage().getCharacterString().getValue().toString().isEmpty()) {
-                            LinkModel linkModel = LinkModel.builder().build();
-                            if (ciOnlineResource.getProtocol() != null) {
-                                linkModel.setType(Objects.equals(ciOnlineResource.getProtocol().getCharacterString().getValue().toString(), "WWW:LINK-1.0-http--link") ? "text/html" : "");
-                            }
-                            linkModel.setHref(ciOnlineResource.getLinkage().getCharacterString().getValue().toString());
+                // mrd:transferOptions
+                i.getTransferOptions().forEach(transferOption ->
+                        transferOption.getMDDigitalTransferOptions().getOnLine().forEach(link ->
+                                addLinkFromOnlineResource(link, results)));
 
-                            // an empty string by default
-                            linkModel.setRel("");
-
-                            // differentiate WMS, WFS and others
-                            safeGet(() -> ciOnlineResource.getProtocol().getCharacterString().getValue().toString())
-                                    .ifPresent(protocol ->
-                                        linkModel.setRel(LinkUtils.getRelationType(protocol))
-                                    );
-                            linkModel.setTitle(getOnlineResourceName(ciOnlineResource));
-                            results.add(linkModel);
-                        }
-                    }
-                }));
+                // mrd:distributor → mrd:distributorTransferOptions
+                i.getDistributor().stream()
+                        .map(MDDistributorPropertyType::getMDDistributor)
+                        .filter(Objects::nonNull)
+                        .forEach(distributor ->
+                                distributor.getDistributorTransferOptions().forEach(transferOption ->
+                                        transferOption.getMDDigitalTransferOptions().getOnLine().forEach(link ->
+                                                addLinkFromOnlineResource(link, results))));
             }
+        } else {
+            // srv:containsOperations → srv:connectPoint for data access links
+            MapperUtils.findSVServiceIdentificationType(source).forEach(svc ->
+                    svc.getContainsOperations().stream()
+                            .map(SVOperationMetadataPropertyType::getSVOperationMetadata)
+                            .filter(Objects::nonNull)
+                            .forEach(op ->
+                                    op.getConnectPoint().forEach(link ->
+                                            addLinkFromOnlineResource(link, results))));
         }
 
         // Now add links for logos
@@ -863,6 +863,32 @@ public abstract class StacCollectionMapperService {
 
         // AI link enhancement will be handled in @AfterMapping to avoid duplicate calls
         return results;
+    }
+
+    private void addLinkFromOnlineResource(AbstractOnlineResourcePropertyType link, List<LinkModel> results) {
+        if (link.getAbstractOnlineResource() == null) return;
+        if (!(link.getAbstractOnlineResource().getValue() instanceof CIOnlineResourceType2 ciOnlineResource)) return;
+        if (ciOnlineResource.getLinkage().getCharacterString() == null) return;
+
+        String href = ciOnlineResource.getLinkage().getCharacterString().getValue().toString();
+        if (href.isEmpty()) return;
+
+        LinkModel linkModel = LinkModel.builder().build();
+        if (ciOnlineResource.getProtocol() != null) {
+            linkModel.setType(Objects.equals(ciOnlineResource.getProtocol().getCharacterString().getValue().toString(), "WWW:LINK-1.0-http--link") ? "text/html" : "");
+        }
+        linkModel.setHref(href);
+
+        // an empty string by default
+        linkModel.setRel("");
+
+        // differentiate WMS, WFS and others
+        safeGet(() -> ciOnlineResource.getProtocol().getCharacterString().getValue().toString())
+                .ifPresent(protocol ->
+                        linkModel.setRel(LinkUtils.getRelationType(protocol))
+                );
+        linkModel.setTitle(getOnlineResourceName(ciOnlineResource));
+        results.add(linkModel);
     }
 
     private List<LinkModel> getAssociatedRecords(MDMetadataType source) {
