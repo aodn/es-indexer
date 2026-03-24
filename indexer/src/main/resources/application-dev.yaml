@@ -20,12 +20,13 @@ geonetwork:
       endpoint: /geonetwork/srv/api/search
 
 dataaccess:
-  apiKey: temp
+#  apiKey: 00d28713-6f79-4608-bd89-dcbae1ff5d1b
+  apiKey: wrwqrwqrafsafasf
 
 datadiscoveryai:
   host: https://data-discovery-ai-edge.aodn.org.au
   baseUrl: /api/v1/ml/process_record
-  apiKey: datadiscoveryai-sample-api-key
+  apiKey: 3690bb2d-ab7e-46ce-9410-4363315d3a31
   internalAiHeaderSecret: datadiscoveryai-sample-internal-key
 
 logging:
