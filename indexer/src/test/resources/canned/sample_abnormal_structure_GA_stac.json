@@ -105,6 +105,12 @@
     "languages": [],
     "links": [
         {
+            "href": "https://services.ga.gov.au/gis/rest/services/NationalBaseMap_NoLabels/MapServer",
+            "rel": "ESRI: Map Service",
+            "type": "",
+            "title": "{\"title\":\"National Base Map MapServer\",\"description\":\"The National Base Map - without labels service provides seamless topographic colour mapping for the whole of Australia, including the outer islands of Norfolk, Lord Howe & Macquarie Islands, the external territories of Cocos (Keeling), Christmas, Heard and McDonald Islands and the Australian Antarctic Territory. This version of the base map does not have any labelling associated with the map.\"}"
+        },
+        {
             "href": "https://ecat.ga.gov.au/geonetwork/srv/eng/catalog.search#/metadata/22dfc864-305e-49e3-b570-0572d6232d4f",
             "rel": "describedby",
             "type": "text/html",

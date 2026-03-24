@@ -103,7 +103,17 @@
     "code" : "eng",
     "name" : "English"
   } ],
-  "links" : [ ],
+  "links" : [{
+  "href": "https://d28rz98at9flks.cloudfront.net/123300/Data_package.zip",
+  "rel": "related",
+  "type": "text/html",
+  "title": "{\"title\":\"Download the data package\",\"description\":\"Download the data package\"}"
+}, {
+    "href": "https://d28rz98at9flks.cloudfront.net/123300/Metadata.docx",
+    "rel": "related",
+    "type": "text/html",
+    "title": "{\"title\":\"Download the Metadata\",\"description\":\"Download the Metadata\"}"
+  }],
   "license" : "Creative Commons Attribution 4.0 International Licence",
   "providers" : [ {
     "name" : "Commonwealth of Australia (Geoscience Australia)",
