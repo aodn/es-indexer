@@ -108,17 +108,19 @@ public class IndexerController {
                 ? "--batch --jobName=indexAllMetadataFromUuid --jobParam=" + beginWithUuid
                 : "--batch --jobName=indexAllMetadata";
 
+        var envVariables = List.of(
+                KeyValuePair.builder()
+                        .name("APP_ARGS")
+                        .value(appArgs)
+                        .build()
+        );
+
         var request = SubmitJobRequest.builder()
                 .jobName("index-all-metadata-records")
                 .jobQueue("indexing-queue")
-                .jobDefinition("scheduled-es-indexing-dev")
+                .jobDefinition("scheduled-es-indexing")
                 .containerOverrides(override -> override
-                        .environment(List.of(
-                                KeyValuePair.builder()
-                                        .name("APP_ARGS")
-                                        .value(appArgs)
-                                        .build()
-                        ))
+                        .environment(envVariables)
                 )
                 .build();
 
