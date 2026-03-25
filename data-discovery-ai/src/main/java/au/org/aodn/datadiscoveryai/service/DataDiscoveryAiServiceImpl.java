@@ -21,10 +21,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -154,7 +151,9 @@ public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
     public String getEnhancedDescription(AiEnhancementResponse aiResponse) {
         if (aiResponse != null && aiResponse.getSummaries() != null
                 && aiResponse.getSummaries().containsKey(AiEnhancementSummaryField.AI_DESCRIPTION.getFieldName())) {
-            return aiResponse.getSummaries().get(AiEnhancementSummaryField.AI_DESCRIPTION.getFieldName());
+            return Optional.ofNullable(aiResponse.getSummaries().get(AiEnhancementSummaryField.AI_DESCRIPTION.getFieldName()))
+                    .map(JsonNode::asText)
+                    .orElse(null);
         }
         return null;
     }
@@ -163,7 +162,9 @@ public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
     public String getEnhancedUpdateFrequency(AiEnhancementResponse aiResponse) {
         if (aiResponse != null && aiResponse.getSummaries() != null
                 && aiResponse.getSummaries().containsKey(AiEnhancementSummaryField.AI_UPDATE_FREQUENCY.getFieldName())) {
-            return aiResponse.getSummaries().get(AiEnhancementSummaryField.AI_UPDATE_FREQUENCY.getFieldName());
+            return Optional.ofNullable(aiResponse.getSummaries().get(AiEnhancementSummaryField.AI_UPDATE_FREQUENCY.getFieldName()))
+                    .map(JsonNode::asText)
+                    .orElse(null);
         }
         return null;
     }
@@ -171,8 +172,10 @@ public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
     public Map<String, AssetModel> getEnhancedAssets(AiEnhancementResponse aiResponse) {
         if (aiResponse != null && aiResponse.getSummaries() != null
                 && aiResponse.getSummaries().containsKey(AiEnhancementSummaryField.AI_ASSETS.getFieldName())
+                && aiResponse.getSummaries().get(AiEnhancementSummaryField.AI_ASSETS.getFieldName()) != null
+                && !aiResponse.getSummaries().get(AiEnhancementSummaryField.AI_ASSETS.getFieldName()).isEmpty()
         ) {
-            // get "ai:assets" value directly as JsonNode (no extra deserialization needed)
+            // get "ai:assets" value directly as per entry
             JsonNode downloadableLinks = aiResponse.getSummaries().get(AiEnhancementSummaryField.AI_ASSETS.getFieldName());
 
             var entries = new HashMap<String, AssetModel>();
