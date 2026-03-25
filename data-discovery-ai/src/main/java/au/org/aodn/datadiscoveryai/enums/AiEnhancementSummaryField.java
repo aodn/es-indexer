@@ -4,7 +4,8 @@ import lombok.Getter;
 @Getter
 public enum AiEnhancementSummaryField {
     AI_DESCRIPTION("ai:description"),
-    AI_UPDATE_FREQUENCY("ai:update_frequency");
+    AI_UPDATE_FREQUENCY("ai:update_frequency"),
+    AI_ASSETS("ai:assets");
 
     private final String fieldName;
 

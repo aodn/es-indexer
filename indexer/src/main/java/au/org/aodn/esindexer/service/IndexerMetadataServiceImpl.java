@@ -11,9 +11,7 @@ import au.org.aodn.esindexer.utils.JaxbUtils;
 import au.org.aodn.metadata.geonetwork.exception.MetadataNotFoundException;
 import au.org.aodn.metadata.geonetwork.service.GeoNetworkService;
 import au.org.aodn.metadata.iso19115_3_2018.MDMetadataType;
-import au.org.aodn.stac.model.SearchSuggestionsModel;
-import au.org.aodn.stac.model.StacCollectionModel;
-import au.org.aodn.stac.model.ThemesModel;
+import au.org.aodn.stac.model.*;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.ElasticsearchException;
 import co.elastic.clients.elasticsearch.core.*;
@@ -55,7 +53,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static au.org.aodn.esindexer.utils.CommonUtils.safeGet;
-import au.org.aodn.stac.model.LinkModel;
 
 @Slf4j
 @Service
@@ -368,6 +365,12 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
                     List<LinkModel> enhancedLinks = dataDiscoveryAiService.getEnhancedLinks(aiResponse);
                     if (enhancedLinks != null && !enhancedLinks.isEmpty()) {
                         target.setLinks(enhancedLinks);
+                    }
+
+                    // Add ai:asset field in summaries to save downloadable links which are tagged by AI model
+                    Map<String, AssetModel> enhancedAssets = dataDiscoveryAiService.getEnhancedAssets(aiResponse);
+                    if (enhancedAssets != null) {
+                        target.getSummaries().setAiAssets(enhancedAssets);
                     }
 
                     String inferredUpdateFrequency = dataDiscoveryAiService.getEnhancedUpdateFrequency(aiResponse);

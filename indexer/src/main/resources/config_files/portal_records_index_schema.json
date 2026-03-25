@@ -209,6 +209,9 @@
           "ai:platform_vocabs": {
             "type": "keyword"
           },
+          "ai:assets": {
+            "type": "flattened"
+          },
           "score": {
             "type": "long"
           },

@@ -5,9 +5,11 @@ import au.org.aodn.datadiscoveryai.enums.AiEnhancementSummaryField;
 import au.org.aodn.datadiscoveryai.model.AiEnhancedLink;
 import au.org.aodn.datadiscoveryai.model.AiEnhancementRequest;
 import au.org.aodn.datadiscoveryai.model.AiEnhancementResponse;
+import au.org.aodn.stac.model.AssetModel;
 import au.org.aodn.stac.model.ConceptModel;
 import au.org.aodn.stac.model.LinkModel;
 import au.org.aodn.stac.model.ThemesModel;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
@@ -20,7 +22,9 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 
@@ -160,6 +164,36 @@ public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
         if (aiResponse != null && aiResponse.getSummaries() != null
                 && aiResponse.getSummaries().containsKey(AiEnhancementSummaryField.AI_UPDATE_FREQUENCY.getFieldName())) {
             return aiResponse.getSummaries().get(AiEnhancementSummaryField.AI_UPDATE_FREQUENCY.getFieldName());
+        }
+        return null;
+    }
+    @Override
+    public Map<String, AssetModel> getEnhancedAssets(AiEnhancementResponse aiResponse) {
+        if (aiResponse != null && aiResponse.getSummaries() != null
+                && aiResponse.getSummaries().containsKey(AiEnhancementSummaryField.AI_ASSETS.getFieldName())
+        ) {
+            // get "ai:assets" value directly as JsonNode (no extra deserialization needed)
+            JsonNode downloadableLinks = aiResponse.getSummaries().get(AiEnhancementSummaryField.AI_ASSETS.getFieldName());
+
+            var entries = new HashMap<String, AssetModel>();
+
+            // convert to asset object with DATA role
+            downloadableLinks.fields().forEachRemaining(entry -> {
+                String url = entry.getKey();
+                JsonNode assetNode = entry.getValue();
+                entries.put(
+                        url,
+                        AssetModel.builder()
+                                .href(assetNode.path("href").asText())
+                                .title(assetNode.path("title").asText())
+                                .description(assetNode.path("description").asText())
+                                .type(assetNode.path("type").asText())
+                                .role(AssetModel.Role.DATA)
+                                .build()
+                );
+            });
+
+            return entries;
         }
         return null;
     }

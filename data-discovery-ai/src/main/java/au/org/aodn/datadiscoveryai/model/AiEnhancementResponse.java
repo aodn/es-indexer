@@ -15,7 +15,7 @@ import java.util.Map;
 public class AiEnhancementResponse {
 
     @JsonProperty("summaries")
-    private Map<String, String> summaries;
+    private Map<String, JsonNode> summaries;
 
     @JsonProperty("links")
     private List<AiEnhancedLink> links;
