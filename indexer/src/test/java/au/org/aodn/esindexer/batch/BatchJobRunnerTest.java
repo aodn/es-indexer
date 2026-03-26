@@ -10,6 +10,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.verify;
 
 class BatchJobRunnerTest {
     @Mock
@@ -25,27 +27,15 @@ class BatchJobRunnerTest {
     }
 
     @Test
-    void runIndexAllMetadataShouldThrowNotImplemented() {
-        Exception ex = assertThrows(NotImplementedException.class, () -> batchJobRunner.run("indexAllMetadata", null));
-        assertTrue(ex.getMessage().contains("Index All Metadata"));
+    void runIndexAllMetadataWithParamShouldThrow() {
+        Exception ex = assertThrows(IllegalArgumentException.class, () -> batchJobRunner.run("indexAllMetadata", "param"));
+        assertTrue(ex.getMessage().contains("Job parameter not required"));
     }
 
     @Test
-    void runIndexAllMetadataWithParamShouldThrowNotImplemented() {
-        Exception ex = assertThrows(NotImplementedException.class, () -> batchJobRunner.run("indexAllMetadata", "param"));
-        assertTrue(ex.getMessage().contains("Index All Metadata"));
-    }
-
-    @Test
-    void runIndexAllMetadataFromUuidShouldThrowNotImplemented() {
-        Exception ex = assertThrows(NotImplementedException.class, () -> batchJobRunner.run("indexAllMetadataFromUuid", "param"));
-        assertTrue(ex.getMessage().contains("Index All Metadata"));
-    }
-
-    @Test
-    void runIndexAllMetadataFromUuidMissingParamShouldThrowNotImplemented() {
-        Exception ex = assertThrows(org.apache.commons.lang3.NotImplementedException.class, () -> batchJobRunner.run("indexAllMetadataFromUuid", null));
-        assertTrue(ex.getMessage().contains("Index All Metadata"));
+    void runIndexAllMetadataShouldCallService() throws Exception {
+        batchJobRunner.run("indexAllMetadata", null);
+        verify(indexerMetadataService).indexAllMetadataRecordsFromGeoNetwork(isNull(), eq(true), any());
     }
 
     @Test

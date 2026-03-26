@@ -37,6 +37,9 @@ public class BatchJobRunner {
     @Autowired
     private IndexCloudOptimizedService indexCloudOptimizedService;
 
+    @Autowired
+    private IndexerMetadataService indexerMetadataService;
+
     private static final String INDEX_ALL_METADATA = "indexAllMetadata";
     private static final String INDEX_ALL_METADATA_FROM_UUID = "indexAllMetadataFromUuid";
     private static final String INDEX_ONE_METADATA = "indexMetadata";
@@ -48,10 +51,18 @@ public class BatchJobRunner {
         log.info("Starting batch job: {}", jobName);
         switch (jobName) {
             case INDEX_ALL_METADATA:
-                throw new NotImplementedException("Index All Metadata not yet implemented");
+                if (jobParam != null) {
+                    throw new IllegalArgumentException("Job parameter not required for job: " + jobName);
+                }
+                indexAllMetadata(null);
+                break;
 
             case INDEX_ALL_METADATA_FROM_UUID:
-                throw new NotImplementedException("Index All Metadata not yet implemented");
+                if (jobParam == null) {
+                    throw new IllegalArgumentException("Job parameter (beginWithUuid) is required for job: " + jobName);
+                }
+                indexAllMetadata(jobParam);
+                break;
 
             case INDEX_ONE_METADATA:
                 throw new NotImplementedException("IndexMetadata not yet implemented");
@@ -91,6 +102,20 @@ public class BatchJobRunner {
             indexCloudOptimizedService.indexAllCloudOptimizedData(beginWithUuid, loggingCallback);
         } catch (Exception e) {
             log.error("Error indexing all cloud optimised dataset", e);
+        }
+    }
+
+    private void indexAllMetadata(String beginWithUuid) {
+        log.info("Indexing all metadata");
+        if (beginWithUuid != null) {
+            log.info("Beginning with uuid: {}", beginWithUuid);
+        }
+
+        try{
+            var loggingCallback = new LoggingCallback();
+            indexerMetadataService.indexAllMetadataRecordsFromGeoNetwork(beginWithUuid, true, loggingCallback);
+        } catch (Exception e) {
+            log.error("Error indexing all metadata", e);
         }
     }
 

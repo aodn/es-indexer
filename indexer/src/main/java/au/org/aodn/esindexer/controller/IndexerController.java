@@ -3,7 +3,9 @@ package au.org.aodn.esindexer.controller;
 import au.org.aodn.cloudoptimized.model.MetadataEntity;
 import au.org.aodn.cloudoptimized.model.TemporalExtent;
 import au.org.aodn.cloudoptimized.service.DataAccessService;
-import au.org.aodn.esindexer.service.*;
+import au.org.aodn.esindexer.service.IndexCloudOptimizedService;
+import au.org.aodn.esindexer.service.IndexService;
+import au.org.aodn.esindexer.service.IndexerMetadataService;
 import au.org.aodn.metadata.geonetwork.service.GeoNetworkService;
 import co.elastic.clients.elasticsearch.core.BulkResponse;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -19,6 +21,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
+import software.amazon.awssdk.services.batch.BatchClient;
+import software.amazon.awssdk.services.batch.model.KeyValuePair;
+import software.amazon.awssdk.services.batch.model.SubmitJobRequest;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -43,6 +48,9 @@ public class IndexerController {
 
     @Autowired
     DataAccessService dataAccessService;
+
+    @Autowired
+    BatchClient batchClient;
 
     @GetMapping(path="/records/{uuid}", produces = "application/json")
     @Operation(description = "Get a document from GeoNetwork by UUID directly - JSON format response")
@@ -77,6 +85,50 @@ public class IndexerController {
         List<BulkResponse> responses = indexerMetadata.indexAllMetadataRecordsFromGeoNetwork(beginWithUuid, confirm, null);
         return ResponseEntity.ok(responses.toString());
     }
+
+    /**
+     * index all metadata records in aws batch, it is to prevent aws to gracefully shutdown ecs instance and cause some unexpected issues.
+     * @param confirm
+     * @param beginWithUuid
+     * @return
+     * @throws IOException
+     */
+    @PostMapping(path="/allinbatch", consumes = "application/json", produces = "application/json")
+    @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Index all metadata records from GeoNetwork in aws batch")
+    public ResponseEntity<String> indexAllMetadataRecordsInBatch(
+            @RequestParam(value = "confirm", defaultValue = "false") Boolean confirm,
+            @RequestParam(value = "beginWithUuid", required=false) String beginWithUuid) throws IOException {
+
+        if (!confirm) {
+            return ResponseEntity.badRequest().body("You must set confirm to true to really index all metadata records in batch");
+        }
+
+        // Build the APP_ARGS value based on parameters
+        String appArgs = beginWithUuid != null
+                ? "--batch --jobName=indexAllMetadataFromUuid --jobParam=" + beginWithUuid
+                : "--batch --jobName=indexAllMetadata";
+
+        var envVariables = List.of(
+                KeyValuePair.builder()
+                        .name("APP_ARGS")
+                        .value(appArgs)
+                        .build()
+        );
+
+        var request = SubmitJobRequest.builder()
+                .jobName("index-all-metadata-records")
+                .jobQueue("indexing-queue")
+                .jobDefinition("scheduled-es-indexing")
+                .containerOverrides(override -> override
+                        .environment(envVariables)
+                )
+                .build();
+
+        var response = batchClient.submitJob(request);
+
+        return ResponseEntity.ok("Job submitted with jobId: " + response.jobId() + ", APP_ARGS: " + appArgs);
+    }
+
     /**
      * Emit result to FE so it will not result in gateway time-out. You need to run it with postman or whatever tools
      * support server side event, the content type needs to be text/event-stream in order to work
