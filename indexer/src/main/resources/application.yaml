@@ -52,6 +52,9 @@ elasticsearch:
     tokens:
       name: shingle_analyser
 
+aws:
+  region: ap-southeast-2
+
 geonetwork:
   host: http://localhost:8080
   search:

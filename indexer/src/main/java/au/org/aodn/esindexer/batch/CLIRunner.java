@@ -13,6 +13,7 @@ import java.util.List;
 public class CLIRunner implements CommandLineRunner {
     public static final String BATCH = "batch";
     public static final String JOB_NAME = "jobName";
+    public static final String JOB_PARAM = "jobParam";
 
     protected final BatchJobRunner batchJobRunner;
     protected final ApplicationArguments args;
@@ -33,9 +34,13 @@ public class CLIRunner implements CommandLineRunner {
             }
 
             List<String> jobName = args.getOptionValues(JOB_NAME);
+            String jobParam = null;
+            if (args.getOptionValues(JOB_PARAM) != null && args.getOptionValues(JOB_PARAM).size() > 0) {
+                jobParam = args.getOptionValues(JOB_PARAM).get(0);
+            }
 
             try {
-                batchJobRunner.run(jobName.get(0), null);
+                batchJobRunner.run(jobName.get(0), jobParam);
             }
             catch (Exception e) {
                 log.error("Batch job failed with exception: {}", e.getMessage());
