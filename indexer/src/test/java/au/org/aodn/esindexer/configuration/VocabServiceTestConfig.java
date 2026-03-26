@@ -3,6 +3,7 @@ package au.org.aodn.esindexer.configuration;
 import au.org.aodn.ardcvocabs.service.ArdcVocabService;
 import au.org.aodn.ardcvocabs.service.ArdcVocabServiceImpl;
 import au.org.aodn.ardcvocabs.service.ArdcVocabServiceImplTest;
+import au.org.aodn.esindexer.service.VocabIndexScheduler;
 import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,5 +28,18 @@ public class VocabServiceTestConfig {
         ArdcVocabServiceImplTest.setupOrganizationMockRestTemplate(template);
 
         return new ArdcVocabServiceImpl(template, new RetryTemplate());
+    }
+
+    /**
+     * Override the production VocabIndexScheduler with a no-op version for testing.
+     * Prevents a background thread racing with BaseTestClass.init()'s populateVocabsData() call
+     */
+    @Bean
+    public VocabIndexScheduler createTestVocabIndexScheduler() {
+        return new VocabIndexScheduler() {
+            @Override
+            public void init() {
+            }
+        };
     }
 }
