@@ -16,7 +16,7 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.*;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.client.RestClientException;
-import org.testcontainers.containers.DockerComposeContainer;
+import org.testcontainers.containers.ComposeContainer;
 
 import javax.annotation.PostConstruct;
 import java.io.File;
@@ -52,7 +52,7 @@ public class BaseTestClass {
     protected ElasticsearchClient client;
 
     @Autowired
-    protected DockerComposeContainer dockerComposeContainer;
+    protected ComposeContainer dockerComposeContainer;
 
     @Autowired
     protected VocabServiceImpl vocabService;
