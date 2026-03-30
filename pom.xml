@@ -125,7 +125,7 @@
             <dependency>
                 <groupId>co.elastic.clients</groupId>
                 <artifactId>elasticsearch-java</artifactId>
-                <version>8.13.3</version>
+                <version>8.19.10</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/jakarta.xml.bind/jakarta.xml.bind-api -->
             <dependency>
