@@ -168,37 +168,40 @@ public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
         }
         return null;
     }
+
     @Override
     public Map<String, AssetModel> getEnhancedAssets(AiEnhancementResponse aiResponse) {
-        if (aiResponse != null && aiResponse.getSummaries() != null
-                && aiResponse.getSummaries().containsKey(AiEnhancementSummaryField.AI_ASSETS.getFieldName())
-                && aiResponse.getSummaries().get(AiEnhancementSummaryField.AI_ASSETS.getFieldName()) != null
-                && !aiResponse.getSummaries().get(AiEnhancementSummaryField.AI_ASSETS.getFieldName()).isEmpty()
-        ) {
-            // get "ai:assets" value directly as per entry
-            JsonNode downloadableLinks = aiResponse.getSummaries().get(AiEnhancementSummaryField.AI_ASSETS.getFieldName());
-
-            var entries = new HashMap<String, AssetModel>();
-
-            // convert to asset object with DATA role
-            downloadableLinks.fields().forEachRemaining(entry -> {
-                String url = entry.getKey();
-                JsonNode assetNode = entry.getValue();
-                entries.put(
-                        url,
-                        AssetModel.builder()
-                                .href(assetNode.path("href").asText())
-                                .title(assetNode.path("title").asText())
-                                .description(assetNode.path("description").asText())
-                                .type(assetNode.path("type").asText())
-                                .role(AssetModel.Role.DATA)
-                                .build()
-                );
-            });
-
-            return entries;
+        if (aiResponse == null || aiResponse.getSummaries() == null) {
+            return null;
         }
-        return null;
+
+        // get "ai:assets" value directly as entries
+        JsonNode downloadableLinks = aiResponse.getSummaries().get(
+                AiEnhancementSummaryField.AI_ASSETS.getFieldName()
+        );
+
+        if (downloadableLinks == null || !downloadableLinks.isObject() || downloadableLinks.isEmpty()) {
+            return null;
+        }
+
+        var entries = new HashMap<String, AssetModel>();
+
+        // convert each entry to asset object with DATA role
+        downloadableLinks.fields().forEachRemaining(entry -> {
+            String url = entry.getKey();
+            JsonNode assetNode = entry.getValue();
+            entries.put(
+                    url,
+                    AssetModel.builder()
+                            .href(assetNode.path("href").asText())
+                            .title(assetNode.path("title").asText())
+                            .description(assetNode.path("description").asText())
+                            .type(assetNode.path("type").asText())
+                            .role(AssetModel.Role.DATA)
+                            .build()
+            );
+        });
+        return entries;
     }
 
     @Override
