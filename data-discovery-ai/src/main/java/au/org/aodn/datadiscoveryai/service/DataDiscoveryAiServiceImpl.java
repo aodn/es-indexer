@@ -8,6 +8,7 @@ import au.org.aodn.datadiscoveryai.model.AiEnhancementResponse;
 import au.org.aodn.stac.model.ConceptModel;
 import au.org.aodn.stac.model.LinkModel;
 import au.org.aodn.stac.model.ThemesModel;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
@@ -19,8 +20,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -150,7 +150,9 @@ public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
     public String getEnhancedDescription(AiEnhancementResponse aiResponse) {
         if (aiResponse != null && aiResponse.getSummaries() != null
                 && aiResponse.getSummaries().containsKey(AiEnhancementSummaryField.AI_DESCRIPTION.getFieldName())) {
-            return aiResponse.getSummaries().get(AiEnhancementSummaryField.AI_DESCRIPTION.getFieldName());
+            return Optional.ofNullable(aiResponse.getSummaries().get(AiEnhancementSummaryField.AI_DESCRIPTION.getFieldName()))
+                    .map(JsonNode::asText)
+                    .orElse(null);
         }
         return null;
     }
@@ -159,7 +161,9 @@ public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
     public String getEnhancedUpdateFrequency(AiEnhancementResponse aiResponse) {
         if (aiResponse != null && aiResponse.getSummaries() != null
                 && aiResponse.getSummaries().containsKey(AiEnhancementSummaryField.AI_UPDATE_FREQUENCY.getFieldName())) {
-            return aiResponse.getSummaries().get(AiEnhancementSummaryField.AI_UPDATE_FREQUENCY.getFieldName());
+            return Optional.ofNullable(aiResponse.getSummaries().get(AiEnhancementSummaryField.AI_UPDATE_FREQUENCY.getFieldName()))
+                    .map(JsonNode::asText)
+                    .orElse(null);
         }
         return null;
     }
