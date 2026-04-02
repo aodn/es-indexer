@@ -5,7 +5,6 @@ import au.org.aodn.datadiscoveryai.enums.AiEnhancementSummaryField;
 import au.org.aodn.datadiscoveryai.model.AiEnhancedLink;
 import au.org.aodn.datadiscoveryai.model.AiEnhancementRequest;
 import au.org.aodn.datadiscoveryai.model.AiEnhancementResponse;
-import au.org.aodn.stac.model.AssetModel;
 import au.org.aodn.stac.model.ConceptModel;
 import au.org.aodn.stac.model.LinkModel;
 import au.org.aodn.stac.model.ThemesModel;

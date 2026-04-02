@@ -14,7 +14,6 @@ import au.org.aodn.stac.model.ConceptModel;
 import au.org.aodn.stac.model.LinkModel;
 import au.org.aodn.stac.model.StacCollectionModel;
 import au.org.aodn.stac.model.ThemesModel;
-import au.org.aodn.stac.model.AssetModel;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch.core.IndexRequest;
 import co.elastic.clients.elasticsearch.core.IndexResponse;
@@ -839,18 +838,6 @@ public class StacCollectionMapperServiceTest {
                         .href("https://creativecommons.org/licenses/by/4.0/")
                         .rel("license")
                         .type("text/html")
-                        .build()
-        );
-
-        // Mock the AI enhanced assets
-        Map<String, AssetModel> enhancedAssets = Map.of(
-                "https://doi.org/10.25919/rdrt-bd71",
-                AssetModel.builder()
-                        .href("https://doi.org/10.25919/rdrt-bd71")
-                        .title("Data Access Portal (DOI)")
-                        .description("Link to this record at the CSIRO Data Access Portal")
-                        .type("")
-                        .role(AssetModel.Role.DATA)
                         .build()
         );
 
