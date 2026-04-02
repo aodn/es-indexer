@@ -14,6 +14,7 @@ import au.org.aodn.metadata.iso19115_3_2018.MDMetadataType;
 import au.org.aodn.stac.model.SearchSuggestionsModel;
 import au.org.aodn.stac.model.StacCollectionModel;
 import au.org.aodn.stac.model.ThemesModel;
+import au.org.aodn.stac.model.LinkModel;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.ElasticsearchException;
 import co.elastic.clients.elasticsearch.core.*;
@@ -55,7 +56,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static au.org.aodn.esindexer.utils.CommonUtils.safeGet;
-import au.org.aodn.stac.model.LinkModel;
 
 @Slf4j
 @Service

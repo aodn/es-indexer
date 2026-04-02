@@ -211,6 +211,7 @@ public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
                         .type(aiLink.getType())
                         .title(aiLink.getTitle())
                         .aiGroup(aiLink.getAiGroup())
+                        .aiRole(aiLink.getAiRole())
                         .build())
                 .collect(Collectors.toList());
     }

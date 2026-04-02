@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -24,4 +26,7 @@ public class AiEnhancedLink {
 
     @JsonProperty("ai:group")
     private String aiGroup;
+
+    @JsonProperty("ai:role")
+    private List<String> aiRole;
 }

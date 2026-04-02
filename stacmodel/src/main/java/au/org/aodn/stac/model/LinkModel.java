@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.List;
 import java.util.Objects;
 
 @Data
@@ -17,10 +18,12 @@ public class LinkModel {
     protected String title;
     @JsonProperty("ai:group")
     protected String aiGroup;
+    @JsonProperty("ai:role")
+    protected List<String> aiRole;
 
     @Override
     public int hashCode() {
-        return Objects.hash(href, rel, type, title, aiGroup);
+        return Objects.hash(href, rel, type, title, aiGroup, aiRole);
     }
 
     @Override

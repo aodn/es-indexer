@@ -5,7 +5,6 @@ import au.org.aodn.datadiscoveryai.model.AiEnhancementRequest;
 import au.org.aodn.datadiscoveryai.model.AiEnhancementResponse;
 import au.org.aodn.stac.model.LinkModel;
 import au.org.aodn.stac.model.ThemesModel;
-
 import java.util.List;
 
 public interface DataDiscoveryAiService {
