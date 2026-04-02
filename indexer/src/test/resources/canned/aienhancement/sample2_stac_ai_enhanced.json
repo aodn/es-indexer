@@ -131,7 +131,8 @@
     "rel" : "data",
     "type" : "",
     "title" : "{\"title\":\"Data Access Portal (DOI)\",\"description\":\"Link to this record at the CSIRO Data Access Portal\"}",
-    "ai:group" : "Data Access"
+    "ai:group" : "Data Access",
+    "ai:role": ["download"]
   }, {
     "href" : "http://www.marine.csiro.au/data/underway/?survey=IN2024_V01",
     "rel" : "data",

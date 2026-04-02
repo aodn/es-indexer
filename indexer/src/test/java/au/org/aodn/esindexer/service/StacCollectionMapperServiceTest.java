@@ -809,6 +809,7 @@ public class StacCollectionMapperServiceTest {
                         .type("")
                         .title("{\"title\":\"Data Access Portal (DOI)\",\"description\":\"Link to this record at the CSIRO Data Access Portal\"}")
                         .aiGroup("Data Access")
+                        .aiRole(List.of("download"))
                         .build(),
                 LinkModel.builder()
                         .href("http://www.marine.csiro.au/data/underway/?survey=IN2024_V01")
