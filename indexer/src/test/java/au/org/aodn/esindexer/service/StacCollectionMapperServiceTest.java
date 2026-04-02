@@ -869,7 +869,6 @@ public class StacCollectionMapperServiceTest {
         when(dataDiscoveryAiService.getEnhancedLinks(eq(mockAiResponse))).thenReturn(enhancedLinks);
         when(dataDiscoveryAiService.getEnhancedDescription(eq(mockAiResponse))).thenReturn(enhancedDescription);
         when(dataDiscoveryAiService.getEnhancedUpdateFrequency(eq(mockAiResponse))).thenReturn(enhancedUpdateFrequency);
-        when(dataDiscoveryAiService.getEnhancedAssets(eq(mockAiResponse))).thenReturn(enhancedAssets);
 
         String xml = readResourceFile("classpath:canned/aienhancement/sample2.xml");
         String expected = readResourceFile("classpath:canned/aienhancement/sample2_stac_ai_enhanced.json");

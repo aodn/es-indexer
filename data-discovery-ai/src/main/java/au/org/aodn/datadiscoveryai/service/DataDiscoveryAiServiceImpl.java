@@ -170,41 +170,6 @@ public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
     }
 
     @Override
-    public Map<String, AssetModel> getEnhancedAssets(AiEnhancementResponse aiResponse) {
-        if (aiResponse == null || aiResponse.getSummaries() == null) {
-            return null;
-        }
-
-        // get "ai:assets" value directly as entries
-        JsonNode downloadableLinks = aiResponse.getSummaries().get(
-                AiEnhancementSummaryField.AI_ASSETS.getFieldName()
-        );
-
-        if (downloadableLinks == null || !downloadableLinks.isObject() || downloadableLinks.isEmpty()) {
-            return null;
-        }
-
-        var entries = new HashMap<String, AssetModel>();
-
-        // convert each entry to asset object with DATA role
-        downloadableLinks.fields().forEachRemaining(entry -> {
-            String url = entry.getKey();
-            JsonNode assetNode = entry.getValue();
-            entries.put(
-                    url,
-                    AssetModel.builder()
-                            .href(assetNode.path("href").asText())
-                            .title(assetNode.path("title").asText())
-                            .description(assetNode.path("description").asText())
-                            .type(assetNode.path("type").asText())
-                            .role(AssetModel.Role.DATA)
-                            .build()
-            );
-        });
-        return entries;
-    }
-
-    @Override
     public List<ThemesModel> getEnhancedThemes(AiEnhancementResponse aiResponse) {
         if (aiResponse != null && aiResponse.getThemes() != null) {
             // Convert each JsonNode into ThemesModel manually

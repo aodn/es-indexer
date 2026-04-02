@@ -367,12 +367,6 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
                         target.setLinks(enhancedLinks);
                     }
 
-                    // Add ai:asset field in summaries to save downloadable links which are tagged by AI model
-                    Map<String, AssetModel> enhancedAssets = dataDiscoveryAiService.getEnhancedAssets(aiResponse);
-                    if (enhancedAssets != null) {
-                        target.getSummaries().setAiAssets(enhancedAssets);
-                    }
-
                     String inferredUpdateFrequency = dataDiscoveryAiService.getEnhancedUpdateFrequency(aiResponse);
                     if (inferredUpdateFrequency != null) {
                         target.getSummaries().setAiUpdateFrequency(inferredUpdateFrequency);

@@ -36,8 +36,6 @@ public interface DataDiscoveryAiService {
 
     List<ThemesModel> getEnhancedThemes(AiEnhancementResponse aiResponse);
 
-    Map<String, AssetModel> getEnhancedAssets(AiEnhancementResponse aiResponse);
-
     /**
      * Converts AI-enhanced links to LinkModel objects
      * This is a utility method for other services that need to convert AI response links

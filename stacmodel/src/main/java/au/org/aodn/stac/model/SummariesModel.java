@@ -37,9 +37,6 @@ public class SummariesModel {
     @JsonProperty("ai:platform_vocabs")
     protected Set<String> aiPlatformVocabs;
 
-    @JsonProperty("ai:assets")
-    protected Map<String, AssetModel> aiAssets;
-
     /**
      * Group info as setup in geonetwork
      */
