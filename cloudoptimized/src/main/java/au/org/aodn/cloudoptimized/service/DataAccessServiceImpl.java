@@ -254,7 +254,7 @@ public class DataAccessServiceImpl implements DataAccessService {
                     })
                     .filter(Objects::nonNull)
                     // For debug purpose, track SSE request
-                    .doOnNext(event -> log.debug("SSE event received for {}, status={}", dateRange, event.getStatus()))
+                    .doOnNext(event -> log.debug("SSE event received for {}, status={}, message={}, request_id={}", dateRange, event.getStatus(), event.getMessage(), event.getRequestId()))
                     // Ignore other status, just process the complete event, the other event is used to keep the connection alive
                     .filter(event -> "completed".equals(event.getStatus()))
                     // Give a random number so that not all retry happens the same time when previous failed
