@@ -18,3 +18,5 @@ management:
 logging:
   level:
     au.org.aodn.ardcvocabs: DEBUG
+    # for debugging auto-co-indexing purpose
+    au.org.aodn.cloudoptimized: DEBUG
