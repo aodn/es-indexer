@@ -91,6 +91,11 @@ public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
                     .accept(MediaType.TEXT_EVENT_STREAM)
                     .bodyValue(aiEnhancementRequest)
                     .retrieve()
+                    .onStatus(
+                        status -> status.isError(),
+                        response -> response.bodyToMono(String.class)
+                                .map(body -> new RuntimeException("API error: " + response.statusCode() + " - " + body))
+                    )
                     .bodyToFlux(new ParameterizedTypeReference<ServerSentEvent<String>>() {});
 
             ServerSentEvent<String> doneEvent = eventStream

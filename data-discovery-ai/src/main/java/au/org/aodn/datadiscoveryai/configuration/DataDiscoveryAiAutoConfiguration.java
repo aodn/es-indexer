@@ -70,6 +70,9 @@ public class DataDiscoveryAiAutoConfiguration {
         return WebClient.builder()
                 .defaultHeaders(headers -> headers.addAll(defaultHeaders)) // Set default headers
                 .clientConnector(new ReactorClientHttpConnector(httpClient))
+                .codecs(configurer -> configurer
+                        .defaultCodecs()
+                        .maxInMemorySize(10 * 1024 * 1024)) // increase buffer size to 10MB
                 .build();
     }
 }
