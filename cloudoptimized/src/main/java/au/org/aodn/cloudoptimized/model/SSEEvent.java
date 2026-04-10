@@ -20,4 +20,8 @@ public class SSEEvent<T> {
     @JsonProperty("data")
     protected T data; // JSON string for result events
 
+    // for debug request purpose
+    @JsonProperty("request_id")
+    protected String requestId;
+
 }
