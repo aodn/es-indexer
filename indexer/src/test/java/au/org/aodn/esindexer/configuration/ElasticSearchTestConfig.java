@@ -50,6 +50,8 @@ public class ElasticSearchTestConfig {
                 .allowInsecure();
 
         ElasticsearchContainer container = new ElasticsearchContainer(ELASTICSEARCH_IMAGE)
+                // Enable trail-license for inference engine testing
+                .withEnv("xpack.license.self_generated.type", "trial")
                 .waitingFor(httpsWaitStrategy);
 
         container.start();
@@ -73,11 +75,14 @@ public class ElasticSearchTestConfig {
 
         RestClient client = RestClient
                 .builder(HttpHost.create("https://" + container.getHttpHostAddress()))
-                .setHttpClientConfigCallback(httpClientBuilder -> {
-                    httpClientBuilder.setDefaultCredentialsProvider(credentialsProvider);
-                    httpClientBuilder.setSSLContext(container.createSslContextFromCa());
-                    return httpClientBuilder;
-                })
+                .setHttpClientConfigCallback(builder -> builder
+                        .setDefaultCredentialsProvider(credentialsProvider)
+                        .setSSLContext(container.createSslContextFromCa())
+                )
+                .setRequestConfigCallback(builder -> builder
+                        // 5 mins timeout
+                        .setSocketTimeout(300000)
+                )
                 .build();
 
         // Create the transport with a Jackson mapper

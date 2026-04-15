@@ -64,6 +64,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
 
     protected String indexName;
     protected final static String RUNNING_ALIAS_SUFFIX = "-running";
+    protected final static String SEMATIC_INFERENCE_ID = "sematic-search-inference";
     protected String tokensAnalyserName;
     protected GeoNetworkService geoNetworkResourceService;
     protected ElasticsearchClient portalElasticsearchClient;
@@ -94,7 +95,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
             VocabService vocabService,
             GcmdKeywordUtils gcmdKeywordUtils,
             DataDiscoveryAiService dataDiscoveryAiService
-    ) {
+    ) throws Exception {
         super(elasticsearchClient, indexerObjectMapper);
 
         this.indexName = indexName;
@@ -109,6 +110,12 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
         this.vocabService = vocabService;
         this.gcmdKeywordUtils = gcmdKeywordUtils;
         this.dataDiscoveryAiService = dataDiscoveryAiService;
+
+        if(!elasticSearchIndexService.inferenceIdExists(SEMATIC_INFERENCE_ID)) {
+            // Check if the inference endpoint exists, if not, create it
+            log.warn("Inference endpoint {} does not exist, creating it", SEMATIC_INFERENCE_ID);
+            elasticSearchIndexService.setupE5SmallInferenceEndpoint(SEMATIC_INFERENCE_ID);
+        }
     }
 
     public Hit<ObjectNode> getDocumentByUUID(String uuid) throws IOException {
@@ -401,7 +408,6 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
         }
         return List.of();
     }
-
     /**
      * Use to index a particular UUID, the async is used to limit the number of same function call to avoid flooding
      * the system.

@@ -126,7 +126,7 @@ public class StacCollectionMapperServiceTest {
     }
 
     @BeforeEach
-    public void createIndexerService() throws IOException {
+    public void createIndexerService() throws Exception {
         indexerService = new IndexerMetadataServiceImpl(
                 "any-works",
                 "shingle_analyser",
