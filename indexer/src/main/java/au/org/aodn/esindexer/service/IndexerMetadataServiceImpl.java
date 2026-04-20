@@ -64,7 +64,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
 
     protected String indexName;
     protected final static String RUNNING_ALIAS_SUFFIX = "-running";
-    protected final static String SEMATIC_INFERENCE_ID = "sematic-search-inference";
+    protected final static String SEMATIC_INFERENCE_ID = "semantic-search-inference";
     protected String tokensAnalyserName;
     protected GeoNetworkService geoNetworkResourceService;
     protected ElasticsearchClient portalElasticsearchClient;

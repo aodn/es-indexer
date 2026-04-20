@@ -100,7 +100,7 @@
           },
           "semantic": {
             "type": "semantic_text",
-            "inference_id": "sematic-search-inference"
+            "inference_id": "semantic-search-inference"
           }
         }
       },
@@ -158,7 +158,7 @@
         "fields": {
           "semantic": {
             "type": "semantic_text",
-            "inference_id": "sematic-search-inference"
+            "inference_id": "semantic-search-inference"
           }
         }
       },
