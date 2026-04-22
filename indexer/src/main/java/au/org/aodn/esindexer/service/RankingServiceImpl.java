@@ -1,5 +1,6 @@
 package au.org.aodn.esindexer.service;
 
+import au.org.aodn.stac.model.RelationType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -39,6 +40,18 @@ public class RankingServiceImpl implements RankingService {
 
     @Value("${app.ranking.link.maxWeight:20}")
     protected int linkMaxWeigth;
+
+    @Value("${app.ranking.imos.weight:10}")
+    protected int imosWeigth;
+
+    @Value("${app.ranking.downloadable.weight:10}")
+    protected int downloadableWeigth;
+
+    @Value("${app.ranking.codownload.weight:20}")
+    protected int cloudOptimizedWeigth;
+
+    @Value("${app.ranking.superseded.penalty:-10}")
+    protected int supersededPenalty;
 
     public Integer evaluateCompleteness(StacCollectionModel stacCollectionModel) {
         int total = 0;
@@ -112,6 +125,36 @@ public class RankingServiceImpl implements RankingService {
             }
             count++;
         }
+        // IMOS record dataset_group = ["IMOS"]
+        if (stacCollectionModel.getSummaries() != null
+                && stacCollectionModel.getSummaries().getDatasetGroup() != null
+                && stacCollectionModel.getSummaries().getDatasetGroup().size() == 1
+                && "IMOS".equalsIgnoreCase(stacCollectionModel.getSummaries().getDatasetGroup().get(0))) {
+            log.debug("IMOS owned record");
+            total += imosWeigth;
+        }
+        // Cloud-optimised download service: assets populated means cloud-optimised index exists
+        if (stacCollectionModel.getAssets() != null && !stacCollectionModel.getAssets().isEmpty()) {
+            log.debug("Record has cloud optimised link");
+            total += cloudOptimizedWeigth;
+        }
+        // Has downloadable links (this will include WFS download)
+        if (stacCollectionModel.getLinks() != null
+                && stacCollectionModel.getLinks().stream().anyMatch(link ->
+                link.getAiRole() != null && link.getAiRole().contains("download"))) {
+            log.debug("Record has downloadable links");
+            total += downloadableWeigth;
+        }
+
+        // Penalty for superseded record: status equals superseded / deprecated / obsolete
+        if (stacCollectionModel.getSummaries() != null
+                && stacCollectionModel.getSummaries().getStatus() != null) {
+            String status = stacCollectionModel.getSummaries().getStatus().toLowerCase();
+            if (status.contains("superseded") || status.contains("deprecated") || status.contains("obsolete") || status.contains("historicalarchive")) {
+                total += supersededPenalty;
+            }
+        }
+
         // The more field exist, the higher the mark
         return total + count;
     }
