@@ -7,13 +7,19 @@ import org.apache.http.Header;
 import org.apache.http.HttpHost;
 import org.apache.http.client.config.CookieSpecs;
 import org.apache.http.client.config.RequestConfig;
+import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.message.BasicHeader;
+import org.apache.http.ssl.SSLContexts;
 import org.elasticsearch.client.RestClient;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.security.KeyManagementException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
 
 @Configuration
 public class ElasticSearchConfig {
@@ -26,8 +32,10 @@ public class ElasticSearchConfig {
 
     @Bean(name = "portalElasticTransport")
     @ConditionalOnMissingBean(name = "portalElasticTransport")
-    public RestClientTransport createRestClientTransport(@Value("${elasticsearch.serverUrl}") String serverUrl,
-                                                         @Value("${elasticsearch.apiKey}") String apiKey) {
+    public RestClientTransport createRestClientTransport(
+            @Value("${elasticsearch.trustAllCertificates:false}") Boolean trustAllCertificates,
+            @Value("${elasticsearch.serverUrl}") String serverUrl,
+            @Value("${elasticsearch.apiKey}") String apiKey) {
         // Create the low-level client
         RestClient restClient = RestClient
                 .builder(HttpHost.create(serverUrl))
@@ -40,11 +48,26 @@ public class ElasticSearchConfig {
                 // spUPEFELYK1yZQLtfaQoLBu/tE451zrEaTlD5L6kaSnPvkR+OrhljaMAyG2cHhuiwtRxS;
                 // Expires=Sun, 01 Sep 2024 07:17:25 GMT; Path=/".
                 // Invalid 'expires' attribute: Sun, 01 Sep 2024 07:17:25 GMT
-                .setHttpClientConfigCallback(httpClientBuilder -> httpClientBuilder
-                        .setDefaultRequestConfig(RequestConfig.custom()
-                                .setCookieSpec(CookieSpecs.STANDARD)
-                                .build()))
-                .build();
+                .setHttpClientConfigCallback(httpClientBuilder -> {
+                    httpClientBuilder.setDefaultRequestConfig(RequestConfig.custom()
+                            .setCookieSpec(CookieSpecs.STANDARD)
+                            .build());
+
+                    if (Boolean.TRUE.equals(trustAllCertificates)) {
+                        // This is use when you run a local ES instance, turn on temp license and test
+                        // some features like semantic search
+                        try {
+                            httpClientBuilder
+                                    .setSSLContext(SSLContexts.custom()
+                                            .loadTrustMaterial(null, (chain, authType) -> true)
+                                            .build())
+                                    .setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE);
+                        } catch (NoSuchAlgorithmException | KeyManagementException | KeyStoreException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                    return httpClientBuilder;
+                }).build();
 
         // Create the transport with a Jackson mapper
         return new RestClientTransport(restClient, new JacksonJsonpMapper());

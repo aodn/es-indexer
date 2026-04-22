@@ -11,6 +11,7 @@ elasticsearch:
     name: dev_portal_records
   serverUrl: https://dev-discovery-index.es.ap-southeast-2.aws.found.io
   apiKey: sample-api-key
+  trustAllCertificates: true
 
 geonetwork:
   host: https://geonetwork.edge.aodn.org.au
