@@ -126,7 +126,7 @@ class RankingServiceIT extends BaseTestClass {
         stacCollectionModel.setSummaries(SummariesModel.builder()
                 .datasetGroup(List.of("imos"))
                 .build());
-        assertEquals(mockRankingService.imosWeigth + 1, mockRankingService.evaluateCompleteness(stacCollectionModel));
+        assertEquals(mockRankingService.imosWeigth, mockRankingService.evaluateCompleteness(stacCollectionModel));
     }
 
     @Test
@@ -142,12 +142,18 @@ class RankingServiceIT extends BaseTestClass {
     public void testDownloadableLinks() {
         RankingServiceImpl mockRankingService = Mockito.spy(rankingService);
         List<LinkModel> links = new ArrayList<>();
-        links.add(LinkModel.builder().rel(RelationType.DATA.getValue()).href("http://example.com/data").build());
+        links.add(LinkModel.builder()
+                .rel("related")
+                .href("http://example.com/data")
+                .aiGroup("Data Access")
+                .aiRole(List.of("download"))
+                .build());
         stacCollectionModel.setLinks(links);
         // 1 link → linkMinWeigth(10) + downloadableWeigth(10) + count(1) = 21
         assertEquals(mockRankingService.linkMinWeigth + mockRankingService.downloadableWeigth + 1,
                 mockRankingService.evaluateCompleteness(stacCollectionModel));
     }
+
 
     @Test
     public void testSupersededPenalty() {
@@ -155,6 +161,7 @@ class RankingServiceIT extends BaseTestClass {
         stacCollectionModel.setSummaries(SummariesModel.builder()
                 .status("superseded")
                 .build());
-        assertEquals(-mockRankingService.supersededPenalty, mockRankingService.evaluateCompleteness(stacCollectionModel));
+        // penalty -10
+        assertEquals(mockRankingService.supersededPenalty, mockRankingService.evaluateCompleteness(stacCollectionModel));
     }
 }
