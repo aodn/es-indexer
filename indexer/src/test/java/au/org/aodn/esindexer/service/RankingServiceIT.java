@@ -15,6 +15,7 @@ import static org.mockito.Mockito.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
@@ -117,5 +118,50 @@ class RankingServiceIT extends BaseTestClass {
         // assert, because only 1 field found, so we add 1 to the weight
         assertEquals(mockRankingService.lineageWeigth + 1, mockRankingService.evaluateCompleteness(stacCollectionModel));
         verify(mockRankingService, times(1)).evaluateCompleteness(stacCollectionModel);
+    }
+
+    @Test
+    public void testImosOwnedRecord() {
+        RankingServiceImpl mockRankingService = Mockito.spy(rankingService);
+        stacCollectionModel.setSummaries(SummariesModel.builder()
+                .datasetGroup(List.of("imos"))
+                .build());
+        assertEquals(mockRankingService.imosWeigth, mockRankingService.evaluateCompleteness(stacCollectionModel));
+    }
+
+    @Test
+    public void testCloudOptimisedDownloadService() {
+        RankingServiceImpl mockRankingService = Mockito.spy(rankingService);
+        stacCollectionModel.setAssets(Map.of(
+                "cloud-optimised.parquet", AssetModel.builder().role(AssetModel.Role.SUMMARY).build()
+        ));
+        assertEquals(mockRankingService.cloudOptimizedWeigth, mockRankingService.evaluateCompleteness(stacCollectionModel));
+    }
+
+    @Test
+    public void testDownloadableLinks() {
+        RankingServiceImpl mockRankingService = Mockito.spy(rankingService);
+        List<LinkModel> links = new ArrayList<>();
+        links.add(LinkModel.builder()
+                .rel("related")
+                .href("http://example.com/data")
+                .aiGroup("Data Access")
+                .aiRole(List.of("download"))
+                .build());
+        stacCollectionModel.setLinks(links);
+        // 1 link → linkMinWeigth(10) + downloadableWeigth(10) + count(1) = 21
+        assertEquals(mockRankingService.linkMinWeigth + mockRankingService.downloadableWeigth + 1,
+                mockRankingService.evaluateCompleteness(stacCollectionModel));
+    }
+
+
+    @Test
+    public void testSupersededPenalty() {
+        RankingServiceImpl mockRankingService = Mockito.spy(rankingService);
+        stacCollectionModel.setSummaries(SummariesModel.builder()
+                .status("superseded")
+                .build());
+        // penalty -10
+        assertEquals(mockRankingService.supersededPenalty, mockRankingService.evaluateCompleteness(stacCollectionModel));
     }
 }

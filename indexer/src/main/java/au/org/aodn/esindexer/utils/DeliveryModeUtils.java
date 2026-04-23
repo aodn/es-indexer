@@ -91,11 +91,8 @@ public class DeliveryModeUtils {
         }
 
         String lowerStatus = customisedStatus.toLowerCase();
-        if (lowerStatus.equals("historicalarchive") ||
-                lowerStatus.equals("obsolete") ||
-                lowerStatus.equals("deprecated") ||
-                lowerStatus.contains("complete")
-        ) {
+        // some record has a status of 'complete' so fix the typing
+        if (lowerStatus.contains("complete")) {
             return "completed";
         }
         // some record has a status of 'on going' so check with a regex mapping

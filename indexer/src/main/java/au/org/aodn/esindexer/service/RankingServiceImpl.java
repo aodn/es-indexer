@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 
 import au.org.aodn.stac.model.StacCollectionModel;
 
+import static au.org.aodn.esindexer.utils.CommonUtils.safeGet;
+
 @Slf4j
 @Service
 public class RankingServiceImpl implements RankingService {
@@ -39,6 +41,18 @@ public class RankingServiceImpl implements RankingService {
 
     @Value("${app.ranking.link.maxWeight:20}")
     protected int linkMaxWeigth;
+
+    @Value("${app.ranking.imos.weight:10}")
+    protected int imosWeigth;
+
+    @Value("${app.ranking.downloadable.weight:10}")
+    protected int downloadableWeigth;
+
+    @Value("${app.ranking.codownload.weight:20}")
+    protected int cloudOptimizedWeigth;
+
+    @Value("${app.ranking.superseded.penalty:-10}")
+    protected int supersededPenalty;
 
     public Integer evaluateCompleteness(StacCollectionModel stacCollectionModel) {
         int total = 0;
@@ -74,7 +88,7 @@ public class RankingServiceImpl implements RankingService {
             count++;
         }
         // Lineage
-        if (stacCollectionModel.getSummaries() != null && stacCollectionModel.getSummaries().getStatement() != null) {
+        if (safeGet(() -> stacCollectionModel.getSummaries().getStatement()).isPresent()) {
             log.debug("Lineage found");
             total += lineageWeigth;
             count++;
@@ -112,6 +126,34 @@ public class RankingServiceImpl implements RankingService {
             }
             count++;
         }
+        // IMOS record dataset_group = ["IMOS"]
+        if (safeGet(() -> stacCollectionModel.getSummaries().getDatasetGroup())
+                .filter(g -> g.size() == 1 && "IMOS".equalsIgnoreCase(g.get(0)))
+                .isPresent()) {
+            log.debug("IMOS owned record");
+            total += imosWeigth;
+        }
+        // Cloud-optimised download service: assets populated means cloud-optimised index exists
+        if (stacCollectionModel.getAssets() != null && !stacCollectionModel.getAssets().isEmpty()) {
+            log.debug("Record has cloud optimised link");
+            total += cloudOptimizedWeigth;
+        }
+        // Has downloadable links (this will include WFS download)
+        if (stacCollectionModel.getLinks() != null
+                && stacCollectionModel.getLinks().stream().anyMatch(link ->
+                link.getAiRole() != null && link.getAiRole().contains("download"))) {
+            log.debug("Record has downloadable links");
+            total += downloadableWeigth;
+        }
+        // Penalty for superseded record: status equals superseded / deprecated / obsolete
+        if (safeGet(() -> stacCollectionModel.getSummaries().getStatus())
+                .map(String::toLowerCase)
+                .filter(s -> s.contains("superseded") || s.contains("deprecated")
+                        || s.contains("obsolete")   || s.contains("historicalarchive"))
+                .isPresent()) {
+            total += supersededPenalty;
+        }
+
         // The more field exist, the higher the mark
         return total + count;
     }
