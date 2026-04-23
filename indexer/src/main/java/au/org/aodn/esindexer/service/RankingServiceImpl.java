@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 
 import au.org.aodn.stac.model.StacCollectionModel;
 
+import static au.org.aodn.esindexer.utils.CommonUtils.safeGet;
+
 @Slf4j
 @Service
 public class RankingServiceImpl implements RankingService {
@@ -86,7 +88,7 @@ public class RankingServiceImpl implements RankingService {
             count++;
         }
         // Lineage
-        if (stacCollectionModel.getSummaries() != null && stacCollectionModel.getSummaries().getStatement() != null) {
+        if (safeGet(() -> stacCollectionModel.getSummaries().getStatement()).isPresent()) {
             log.debug("Lineage found");
             total += lineageWeigth;
             count++;
@@ -125,10 +127,9 @@ public class RankingServiceImpl implements RankingService {
             count++;
         }
         // IMOS record dataset_group = ["IMOS"]
-        if (stacCollectionModel.getSummaries() != null
-                && stacCollectionModel.getSummaries().getDatasetGroup() != null
-                && stacCollectionModel.getSummaries().getDatasetGroup().size() == 1
-                && "IMOS".equalsIgnoreCase(stacCollectionModel.getSummaries().getDatasetGroup().get(0))) {
+        if (safeGet(() -> stacCollectionModel.getSummaries().getDatasetGroup())
+                .filter(g -> g.size() == 1 && "IMOS".equalsIgnoreCase(g.get(0)))
+                .isPresent()) {
             log.debug("IMOS owned record");
             total += imosWeigth;
         }
@@ -144,14 +145,13 @@ public class RankingServiceImpl implements RankingService {
             log.debug("Record has downloadable links");
             total += downloadableWeigth;
         }
-
         // Penalty for superseded record: status equals superseded / deprecated / obsolete
-        if (stacCollectionModel.getSummaries() != null
-                && stacCollectionModel.getSummaries().getStatus() != null) {
-            String status = stacCollectionModel.getSummaries().getStatus().toLowerCase();
-            if (status.contains("superseded") || status.contains("deprecated") || status.contains("obsolete") || status.contains("historicalarchive")) {
-                total += supersededPenalty;
-            }
+        if (safeGet(() -> stacCollectionModel.getSummaries().getStatus())
+                .map(String::toLowerCase)
+                .filter(s -> s.contains("superseded") || s.contains("deprecated")
+                        || s.contains("obsolete")   || s.contains("historicalarchive"))
+                .isPresent()) {
+            total += supersededPenalty;
         }
 
         // The more field exist, the higher the mark
