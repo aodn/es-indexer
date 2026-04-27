@@ -81,9 +81,10 @@ public class RankingServiceImpl implements RankingService {
         // Keywords store in theme
         if (stacCollectionModel.getThemes() != null && !stacCollectionModel.getThemes().isEmpty()) {
             List<ThemesModel> originalThemes = stacCollectionModel.getThemes().stream()
-                    .filter(theme -> theme.getConcepts().stream()
-                            // exclude AI predicted keywords
+                    .filter(theme -> safeGet(() -> theme.getConcepts().stream()
+                            // exclude AI predicted keywords (concept with ai:description field)
                             .noneMatch(concept -> concept.getAiDescription() != null))
+                            .orElse(true))
                     .toList();
             log.debug("Keywords found with size: {}", originalThemes.size());
             if (!originalThemes.isEmpty()) {
