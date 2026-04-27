@@ -193,7 +193,7 @@ class RankingServiceIT extends BaseTestClass {
         stacCollectionModel.setSummaries(SummariesModel.builder()
                 .status("superseded")
                 .build());
-        // penalty -10
+        // penalty -20
         assertEquals(mockRankingService.supersededPenalty, mockRankingService.evaluateCompleteness(stacCollectionModel));
     }
 }

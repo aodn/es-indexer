@@ -54,7 +54,7 @@ public class RankingServiceImpl implements RankingService {
     @Value("${app.ranking.codownload.weight:20}")
     protected int cloudOptimizedWeigth;
 
-    @Value("${app.ranking.superseded.penalty:-10}")
+    @Value("${app.ranking.superseded.penalty:-20}")
     protected int supersededPenalty;
 
     public Integer evaluateCompleteness(StacCollectionModel stacCollectionModel) {
