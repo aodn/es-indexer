@@ -1,10 +1,13 @@
 package au.org.aodn.esindexer.service;
 
+import au.org.aodn.stac.model.ThemesModel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import au.org.aodn.stac.model.StacCollectionModel;
+
+import java.util.List;
 
 import static au.org.aodn.esindexer.utils.CommonUtils.safeGet;
 
@@ -51,7 +54,7 @@ public class RankingServiceImpl implements RankingService {
     @Value("${app.ranking.codownload.weight:20}")
     protected int cloudOptimizedWeigth;
 
-    @Value("${app.ranking.superseded.penalty:-10}")
+    @Value("${app.ranking.superseded.penalty:-20}")
     protected int supersededPenalty;
 
     public Integer evaluateCompleteness(StacCollectionModel stacCollectionModel) {
@@ -77,18 +80,25 @@ public class RankingServiceImpl implements RankingService {
         */
         // Keywords store in theme
         if (stacCollectionModel.getThemes() != null && !stacCollectionModel.getThemes().isEmpty()) {
-            log.debug("Keywords found with size: {}", stacCollectionModel.getThemes().size());
-            if (stacCollectionModel.getThemes().size() <= 2) {
-                total += themeMinWeigth;
-            } else if (stacCollectionModel.getThemes().size() <= 5) {
-                total += themeMidWeigth;
-            } else {
-                total += themeMaxWeigth;
+            List<ThemesModel> originalThemes = stacCollectionModel.getThemes().stream()
+                    .filter(theme -> safeGet(() -> theme.getConcepts().stream()
+                            // exclude AI predicted keywords (concept with ai:description field)
+                            .noneMatch(concept -> concept.getAiDescription() != null))
+                            .orElse(true))
+                    .toList();
+            log.debug("Keywords found with size: {}", originalThemes.size());
+            if (!originalThemes.isEmpty()) {
+                if (originalThemes.size() <= 2)      total += themeMinWeigth;
+                else if (originalThemes.size() <= 5) total += themeMidWeigth;
+                else                                 total += themeMaxWeigth;
+                count++;
             }
-            count++;
         }
         // Lineage
-        if (safeGet(() -> stacCollectionModel.getSummaries().getStatement()).isPresent()) {
+        if (safeGet(() -> stacCollectionModel.getSummaries().getStatement())
+                // empty string should not add up score
+                .filter(s -> !s.isBlank())
+                .isPresent()) {
             log.debug("Lineage found");
             total += lineageWeigth;
             count++;
@@ -153,7 +163,7 @@ public class RankingServiceImpl implements RankingService {
                 .isPresent()) {
             total += supersededPenalty;
         }
-
+        log.debug("Overall count of metadata elements:{}", count);
         // The more field exist, the higher the mark
         return total + count;
     }
