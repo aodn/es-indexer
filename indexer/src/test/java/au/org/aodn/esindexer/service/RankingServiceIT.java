@@ -106,6 +106,26 @@ class RankingServiceIT extends BaseTestClass {
     }
 
     @Test
+    public void testMixedThemesFound() {
+        RankingServiceImpl mockRankingService = Mockito.spy(rankingService);
+        // 1 original keyword and 1 AI predicted keyword
+        List<ThemesModel> themes = List.of(
+                ThemesModel.builder()
+                        .concepts(List.of(ConceptModel.builder().id("original-keyword").build()))
+                        .build(),
+                ThemesModel.builder()
+                        .concepts(List.of(ConceptModel.builder()
+                                .id("ai-keyword")
+                                .aiDescription("ai predicted")
+                                .build()))
+                        .build()
+        );
+        stacCollectionModel.setThemes(themes);
+        // 1 original theme → themeMinWeigth(10) + count(1) = 11
+        assertEquals(mockRankingService.themeMinWeigth + 1, mockRankingService.evaluateCompleteness(stacCollectionModel));
+    }
+
+    @Test
     public void testLinageFound() {
         RankingServiceImpl mockRankingService = Mockito.spy(rankingService);
         // arrange
@@ -117,6 +137,18 @@ class RankingServiceIT extends BaseTestClass {
 
         // assert, because only 1 field found, so we add 1 to the weight
         assertEquals(mockRankingService.lineageWeigth + 1, mockRankingService.evaluateCompleteness(stacCollectionModel));
+        verify(mockRankingService, times(1)).evaluateCompleteness(stacCollectionModel);
+    }
+
+    @Test
+    public void testLineageBlankStatementNotCounted() {
+        RankingServiceImpl mockRankingService = Mockito.spy(rankingService);
+        stacCollectionModel.setSummaries(SummariesModel
+                .builder()
+                .statement("")   // blank lineage should not take into account
+                .build()
+        );
+        assertEquals(0, mockRankingService.evaluateCompleteness(stacCollectionModel));
         verify(mockRankingService, times(1)).evaluateCompleteness(stacCollectionModel);
     }
 
