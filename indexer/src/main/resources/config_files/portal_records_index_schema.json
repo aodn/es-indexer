@@ -97,6 +97,10 @@
         "fields": {
           "keyword": {
             "type": "keyword"
+          },
+          "semantic": {
+            "type": "semantic_text",
+            "inference_id": "semantic-search-inference"
           }
         }
       },
@@ -150,7 +154,13 @@
         }
       },
       "description": {
-        "type": "text"
+        "type": "text",
+        "fields": {
+          "semantic": {
+            "type": "semantic_text",
+            "inference_id": "semantic-search-inference"
+          }
+        }
       },
       "license": {
         "type": "keyword",
