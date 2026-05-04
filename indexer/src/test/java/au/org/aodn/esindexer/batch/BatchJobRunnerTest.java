@@ -11,6 +11,7 @@ import org.mockito.MockitoAnnotations;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
 
 class BatchJobRunnerTest {
@@ -42,6 +43,16 @@ class BatchJobRunnerTest {
     void runIndexAllCloudOptimisedDatasetWithParamShouldThrow() {
         Exception ex = assertThrows(IllegalArgumentException.class, () -> batchJobRunner.run("indexAllCODataset", "param"));
         assertTrue(ex.getMessage().contains("Job parameter not required"));
+    }
+
+    @Test
+    void runIndexAllCloudOptimisedDatasetShouldPropagateServiceError() throws Exception {
+        doThrow(new IllegalStateException("Data Access Service status STARTING is not UP, please retry later"))
+                .when(indexCloudOptimizedService)
+                .indexAllCloudOptimizedData(isNull(), any());
+
+        Exception ex = assertThrows(IllegalStateException.class, () -> batchJobRunner.run("indexAllCODataset", null));
+        assertTrue(ex.getMessage().contains("Data Access Service status STARTING is not UP"));
     }
 
     @Test

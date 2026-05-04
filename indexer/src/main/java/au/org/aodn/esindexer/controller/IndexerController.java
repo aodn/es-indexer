@@ -250,7 +250,10 @@ public class IndexerController {
                 // Verify if data access service is up or not, it may be down during processing but we have retry
                 DataAccessService.HealthStatus status = dataAccessService.getHealthStatus();
                 if(status != DataAccessService.HealthStatus.UP) {
-                    callback.onComplete(String.format("Data Access Service status %s is not UP, please retry later", status.toString()));
+                    // This should be treated as error so that we can capture it in log
+                    throw new IllegalStateException(
+                            String.format("Data Access Service status %s is not UP, please retry later", status)
+                    );
                 }
                 else {
                     Map<String, MetadataEntity> metadata = dataAccessService.getMetadataByUuid(uuid);

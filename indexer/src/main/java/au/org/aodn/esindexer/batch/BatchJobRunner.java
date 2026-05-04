@@ -95,13 +95,14 @@ public class BatchJobRunner {
     }
 
 
-    private void indexAllCloudOptimisedDataset(String beginWithUuid) {
+    private void indexAllCloudOptimisedDataset(String beginWithUuid) throws Exception {
         log.info("Indexing all cloud optimised dataset");
         try{
             var loggingCallback = new LoggingCallback();
             indexCloudOptimizedService.indexAllCloudOptimizedData(beginWithUuid, loggingCallback);
         } catch (Exception e) {
             log.error("Error indexing all cloud optimised dataset", e);
+            throw e;
         }
     }
 

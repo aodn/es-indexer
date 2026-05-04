@@ -74,7 +74,10 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
         DataAccessService.HealthStatus status = dataAccessService.getHealthStatus();
         List<BulkResponse> results = new ArrayList<>();
         if(status != DataAccessService.HealthStatus.UP) {
-            callback.onComplete(String.format("Data Access Service status %s is not UP, please retry later", status.toString()));
+            // This should be treated as error so that we can capture it in log
+            throw new IllegalStateException(
+                    String.format("Data Access Service status %s is not UP, please retry later", status)
+            );
         }
         else {
             Map<String, Map<String, MetadataEntity>> entities = dataAccessService.getAllMetadata();
