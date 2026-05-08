@@ -126,7 +126,11 @@ public class DatasetProvider {
         }
         log.debug("Start querying data for year month: {}", yearMonth);
         FeatureCollectionGeoJson featureCollection;
-        if (key.endsWith(".zarr")) {
+        // hard code the AMSA dataset to treat it as zarr dataset, because it has a large amount of data
+        boolean isAmsaDataset = uuid.equals("2a5739e7-0cb8-444a-b83b-b2bc841b0ce8")
+                && key.equals("aggregated_amsa_nonqc.parquet");
+
+        if (isAmsaDataset || key.endsWith(".zarr")) {
             featureCollection = dataAccessService.getZarrIndexingDataByMonth(uuid, key, yearMonth);
         } else if (key.endsWith(".parquet")) {
             featureCollection =  dataAccessService.getIndexingDatasetByMonth(
