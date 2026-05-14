@@ -244,7 +244,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
             // use originalThemes to avoid mixing AI enhanced concepts into GCMD mapping
             mappedParameterLabels.addAll(gcmdKeywordUtils.getMappedParameterVocabsFromGcmdKeywords(originalThemes));
         }
-        stacCollectionModel.getSummaries().setParameterVocabs(mappedParameterLabels);
+        stacCollectionModel.getSummaries().setParameterVocabs(new ArrayList<>(mappedParameterLabels));
 
         // process AI enhanced themes -> aiParameterVocabs
         if (!aiThemes.isEmpty()) {
@@ -253,7 +253,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
                     VocabService.VocabType.AODN_DISCOVERY_PARAMETER_VOCABS,
                     false
             );
-            stacCollectionModel.getSummaries().setAiParameterVocabs(aiParameterLabels);
+            stacCollectionModel.getSummaries().setAiParameterVocabs(new ArrayList<>(aiParameterLabels));
         }
 
         /*
@@ -269,7 +269,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
                 VocabService.VocabType.AODN_PLATFORM_VOCABS,
                 true
         );
-        stacCollectionModel.getSummaries().setPlatformVocabs(processedPlatformVocabs);
+        stacCollectionModel.getSummaries().setPlatformVocabs(new ArrayList<>(processedPlatformVocabs));
 
         // process AI enhanced themes -> aiPlatformVocabs
         if (!aiThemes.isEmpty()) {
@@ -278,7 +278,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
                     VocabService.VocabType.AODN_PLATFORM_VOCABS,
                     false
             );
-            stacCollectionModel.getSummaries().setAiPlatformVocabs(aiPlatformLabels);
+            stacCollectionModel.getSummaries().setAiPlatformVocabs(new ArrayList<>(aiPlatformLabels));
         }
 
         // organisation vocabs
@@ -293,7 +293,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
                 mappedOrganisationLabels.addAll(extractOrderedLabels(vocabModel));
             }
         }
-        stacCollectionModel.getSummaries().setOrganisationVocabs(mappedOrganisationLabels);
+        stacCollectionModel.getSummaries().setOrganisationVocabs(new ArrayList<>(mappedOrganisationLabels));
 
         // search_as_you_type enabled fields can be extended
         // safely merge original parameter vocabs and AI-predicted Parameter vocabs and platform vocabs to serch suggestion
@@ -303,7 +303,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
                         stacCollectionModel.getSummaries().getAiParameterVocabs()
                 )
                 .filter(Objects::nonNull) // skip null sets, e.g. no AI parameter vocabs
-                .flatMap(Set::stream)
+                .flatMap(Collection::stream)
                 .collect(Collectors.toSet());
 
         // Merge platformVocabs and aiPlatformVocabs
@@ -312,14 +312,14 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
                         stacCollectionModel.getSummaries().getAiPlatformVocabs() // skip null sets, e.g. no AI platform vocabs
                 )
                 .filter(Objects::nonNull)
-                .flatMap(Set::stream)
+                .flatMap(Collection::stream)
                 .collect(Collectors.toSet());
 
         SearchSuggestionsModel searchSuggestionsModel = SearchSuggestionsModel.builder()
                 .abstractPhrases(self.extractTokensFromDescription(stacCollectionModel.getDescription(), targetIndexName))
                 .parameterVocabs(allParameterVocabs)
                 .platformVocabs(allPlatformVocabs)
-                .organisationVocabs(stacCollectionModel.getSummaries().getOrganisationVocabs())
+                .organisationVocabs(new HashSet<>(stacCollectionModel.getSummaries().getOrganisationVocabs()))
                 .build();
         stacCollectionModel.setSearchSuggestionsModel(searchSuggestionsModel);
 
