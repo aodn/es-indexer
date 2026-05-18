@@ -3,8 +3,10 @@ package au.org.aodn.stac.model;
 import au.org.aodn.stac.configuration.AppConstants;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -12,13 +14,13 @@ import java.util.Map;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class StacItemModel {
 
-    @JsonProperty("type")
-    public String getType() {
-        return AppConstants.STAC_FEATURE;
-    }
+    @Builder.Default
+    protected String type = AppConstants.STAC_FEATURE;
     /**
      * REQUIRED. Provider identifier. The ID should be unique within the Collection that contains the Item.
      */
@@ -56,9 +58,8 @@ public class StacItemModel {
     protected String collection;
 
     @JsonProperty("stac_version")
-    public String getStacVersion() {
-        return AppConstants.STAC_VERSION;
-    }
+    @Builder.Default
+    protected String stacVersion = AppConstants.STAC_VERSION;
 
     @JsonProperty("stac_extensions")
     public String[] getStacExtension() {
