@@ -47,7 +47,7 @@
     "addresses" : [ {
       "city" : "Cairns",
       "country" : "Australia",
-      "administrativeArea" : "Queensland"
+      "administrative_area" : "Queensland"
     } ],
     "phones" : [ {
       "roles" : [ "voice" ],
@@ -59,11 +59,11 @@
     "name" : "eAtlas Data Manager",
     "emails" : [ "e-atlas@aims.gov.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],
+      "delivery_point" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],
       "city" : "Townsville",
       "country" : "Australia",
-      "postalCode" : "4810",
-      "administrativeArea" : "Queensland"
+      "postal_code" : "4810",
+      "administrative_area" : "Queensland"
     } ],
     "phones" : [ {
       "roles" : [ "voice" ],
@@ -80,7 +80,7 @@
     "name" : "Anderson, Stephen, Mr",
     "addresses" : [ {
       "country" : "Australia",
-      "administrativeArea" : "Northern Territory"
+      "administrative_area" : "Northern Territory"
     } ],
     "phones" : [ {
       "roles" : [ "voice" ],

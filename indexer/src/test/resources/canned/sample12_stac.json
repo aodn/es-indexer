@@ -45,11 +45,11 @@
     "position" : "DATA CENTER CONTACT",
     "emails" : [ "metadata@aad.gov.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "Australian Antarctic Division", "203 Channel Highway" ],
+      "delivery_point" : [ "Australian Antarctic Division", "203 Channel Highway" ],
       "city" : "Kingston",
       "country" : "Australia",
-      "postalCode" : "7050",
-      "administrativeArea" : "Tasmania"
+      "postal_code" : "7050",
+      "administrative_area" : "Tasmania"
     } ],
     "phones" : [ {
       "roles" : [ "voice" ],
@@ -63,11 +63,11 @@
     "name" : "CONNELL, DAVE J.",
     "emails" : [ "dave.connell@aad.gov.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "Australian Antarctic Division", "203 Channel Highway" ],
+      "delivery_point" : [ "Australian Antarctic Division", "203 Channel Highway" ],
       "city" : "Kingston",
       "country" : "Australia",
-      "postalCode" : "7050",
-      "administrativeArea" : "Tasmania"
+      "postal_code" : "7050",
+      "administrative_area" : "Tasmania"
     } ],
     "phones" : [ {
       "roles" : [ "voice" ],
@@ -93,11 +93,11 @@
     "name" : "REEVE, JONO",
     "emails" : [ "jono.reeve@aad.gov.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "Australian Antarctic Division", "203 Channel Highway" ],
+      "delivery_point" : [ "Australian Antarctic Division", "203 Channel Highway" ],
       "city" : "Kingston",
       "country" : "Australia",
-      "postalCode" : "7050",
-      "administrativeArea" : "Tasmania"
+      "postal_code" : "7050",
+      "administrative_area" : "Tasmania"
     } ],
     "phones" : [ {
       "roles" : [ "voice" ],
@@ -108,11 +108,11 @@
     "name" : "REEVE, JONO",
     "emails" : [ "jono.reeve@aad.gov.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "Australian Antarctic Division", "203 Channel Highway" ],
+      "delivery_point" : [ "Australian Antarctic Division", "203 Channel Highway" ],
       "city" : "Kingston",
       "country" : "Australia",
-      "postalCode" : "7050",
-      "administrativeArea" : "Tasmania"
+      "postal_code" : "7050",
+      "administrative_area" : "Tasmania"
     } ],
     "phones" : [ {
       "roles" : [ "voice" ],

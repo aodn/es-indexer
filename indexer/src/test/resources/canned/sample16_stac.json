@@ -45,11 +45,11 @@
     "name" : "Robertson, Robin, Dr",
     "emails" : [ "r.robertson@adfa.edu.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "School of Physical, Environmental and Mathematical Science, Australian Defence Force Academy" ],
+      "delivery_point" : [ "School of Physical, Environmental and Mathematical Science, Australian Defence Force Academy" ],
       "city" : "Canberra",
       "country" : "Australia",
-      "postalCode" : "2600",
-      "administrativeArea" : "ACT"
+      "postal_code" : "2600",
+      "administrative_area" : "ACT"
     } ],
     "phones" : [ {
       "roles" : [ "voice" ],

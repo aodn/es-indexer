@@ -49,17 +49,17 @@
       "emails": ["data-requests-hf@csiro.au"],
       "addresses": [
         {
-          "deliveryPoint": ["GPO Box 1538"],
+          "delivery_point": ["GPO Box 1538"],
           "city": "Hobart",
-          "administrativeArea": "TAS",
-          "postalCode": "7001",
+          "administrative_area": "TAS",
+          "postal_code": "7001",
           "country": "Australia"
         },
         {
-          "deliveryPoint": ["Castray Esplanade"],
+          "delivery_point": ["Castray Esplanade"],
           "city": "Hobart",
-          "administrativeArea": "TAS",
-          "postalCode": "7000",
+          "administrative_area": "TAS",
+          "postal_code": "7000",
           "country": "Australia"
         }
       ],
@@ -93,17 +93,17 @@
       "emails": ["data-requests-hf@csiro.au"],
       "addresses": [
         {
-          "deliveryPoint": ["GPO Box 1538"],
+          "delivery_point": ["GPO Box 1538"],
           "city": "Hobart",
-          "administrativeArea": "TAS",
-          "postalCode": "7001",
+          "administrative_area": "TAS",
+          "postal_code": "7001",
           "country": "Australia"
         },
         {
-          "deliveryPoint": ["Castray Esplanade"],
+          "delivery_point": ["Castray Esplanade"],
           "city": "Hobart",
-          "administrativeArea": "TAS",
-          "postalCode": "7000",
+          "administrative_area": "TAS",
+          "postal_code": "7000",
           "country": "Australia"
         }
       ],

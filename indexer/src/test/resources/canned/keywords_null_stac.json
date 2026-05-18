@@ -52,10 +52,10 @@
       "emails": ["clientservices@ga.gov.au"],
       "addresses": [
         {
-          "deliveryPoint": ["Cnr Jerrabomberra Ave and Hindmarsh Dr GPO Box 378"],
+          "delivery_point": ["Cnr Jerrabomberra Ave and Hindmarsh Dr GPO Box 378"],
           "city": "Canberra",
-          "administrativeArea": "ACT",
-          "postalCode": "2601",
+          "administrative_area": "ACT",
+          "postal_code": "2601",
           "country": "Australia"
         }
       ],
@@ -76,10 +76,10 @@
       "emails": ["clientservices@ga.gov.au"],
       "addresses": [
         {
-          "deliveryPoint": ["Cnr Jerrabomberra Ave and Hindmarsh Dr GPO Box 378"],
+          "delivery_point": ["Cnr Jerrabomberra Ave and Hindmarsh Dr GPO Box 378"],
           "city": "Canberra",
-          "administrativeArea": "ACT",
-          "postalCode": "2601",
+          "administrative_area": "ACT",
+          "postal_code": "2601",
           "country": "Australia"
         }
       ],

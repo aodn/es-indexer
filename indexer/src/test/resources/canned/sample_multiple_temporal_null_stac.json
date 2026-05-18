@@ -47,10 +47,10 @@
       "emails": ["chari.pattiaratchi@uwa.edu.au"],
       "addresses": [
         {
-          "deliveryPoint": ["MO51, 35 Stirling Highway"],
+          "delivery_point": ["MO51, 35 Stirling Highway"],
           "city": "Crawley",
-          "administrativeArea": "Western Australia",
-          "postalCode": "6009",
+          "administrative_area": "Western Australia",
+          "postal_code": "6009",
           "country": "Australia"
         }
       ],
@@ -72,13 +72,13 @@
       "emails": ["info@aodn.org.au"],
       "addresses": [
         {
-          "deliveryPoint": [
+          "delivery_point": [
             "University of Tasmania",
             "Private Bag 110"
           ],
           "city": "Hobart",
-          "administrativeArea": "Tasmania",
-          "postalCode": "7001",
+          "administrative_area": "Tasmania",
+          "postal_code": "7001",
           "country": "Australia"
         }
       ],
@@ -106,10 +106,10 @@
       "emails": ["imos@imos.org.au"],
       "addresses": [
         {
-          "deliveryPoint": ["Private bag 110"],
+          "delivery_point": ["Private bag 110"],
           "city": "Hobart",
-          "administrativeArea": "Tasmania",
-          "postalCode": "7001",
+          "administrative_area": "Tasmania",
+          "postal_code": "7001",
           "country": "Australia"
         }
       ],

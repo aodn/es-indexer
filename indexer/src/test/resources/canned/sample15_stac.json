@@ -45,11 +45,11 @@
     "name" : "Carter, Alex, Dr",
     "emails" : [ "alexandra.carter@jcu.edu.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "James Cook University (JCU)" ],
+      "delivery_point" : [ "James Cook University (JCU)" ],
       "city" : "Cairns",
       "country" : "Australia",
-      "postalCode" : "4878",
-      "administrativeArea" : "Queensland"
+      "postal_code" : "4878",
+      "administrative_area" : "Queensland"
     } ],
     "phones" : [ {
       "roles" : [ "voice" ],
@@ -72,11 +72,11 @@
     "position" : "Principal Research Scientist",
     "emails" : [ "rob.coles@jcu.edu.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "James Cook University (JCU)" ],
+      "delivery_point" : [ "James Cook University (JCU)" ],
       "city" : "Cairns",
       "country" : "Australia",
-      "postalCode" : "4878",
-      "administrativeArea" : "Queensland"
+      "postal_code" : "4878",
+      "administrative_area" : "Queensland"
     } ],
     "phones" : [ {
       "roles" : [ "voice" ],
@@ -94,11 +94,11 @@
     "position" : "Senior Research Officer",
     "emails" : [ "alexandra.carter@jcu.edu.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "James Cook University (JCU)" ],
+      "delivery_point" : [ "James Cook University (JCU)" ],
       "city" : "Cairns",
       "country" : "Australia",
-      "postalCode" : "4878",
-      "administrativeArea" : "Queensland"
+      "postal_code" : "4878",
+      "administrative_area" : "Queensland"
     } ],
     "phones" : [ {
       "roles" : [ "voice" ],
@@ -116,11 +116,11 @@
     "position" : "Senior Research Officer",
     "emails" : [ "skye.mckenna@jcu.edu.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "James Cook University (JCU)" ],
+      "delivery_point" : [ "James Cook University (JCU)" ],
       "city" : "Cairns",
       "country" : "Australia",
-      "postalCode" : "4878",
-      "administrativeArea" : "Queensland"
+      "postal_code" : "4878",
+      "administrative_area" : "Queensland"
     } ],
     "phones" : [ {
       "roles" : [ "voice" ],
@@ -138,11 +138,11 @@
     "position" : "Principal Research Scientist",
     "emails" : [ "michael.rasheed@jcu.edu.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "James Cook University (JCU)" ],
+      "delivery_point" : [ "James Cook University (JCU)" ],
       "city" : "Cairns",
       "country" : "Australia",
-      "postalCode" : "4878",
-      "administrativeArea" : "Queensland"
+      "postal_code" : "4878",
+      "administrative_area" : "Queensland"
     } ],
     "phones" : [ {
       "roles" : [ "voice" ],
@@ -160,11 +160,11 @@
     "position" : "Principal Research Officer",
     "emails" : [ "len.mckenzie@jcu.edu.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "James Cook University (JCU)" ],
+      "delivery_point" : [ "James Cook University (JCU)" ],
       "city" : "Cairns",
       "country" : "Australia",
-      "postalCode" : "4878",
-      "administrativeArea" : "Queensland"
+      "postal_code" : "4878",
+      "administrative_area" : "Queensland"
     } ],
     "phones" : [ {
       "roles" : [ "voice" ],
