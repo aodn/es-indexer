@@ -1,8 +1,10 @@
 package au.org.aodn.stac.model;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.ArrayList;
@@ -10,6 +12,8 @@ import java.util.List;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @SuppressWarnings("unused")
 public class Citation {
 
