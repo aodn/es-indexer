@@ -11,6 +11,7 @@ import java.util.List;
 @Builder
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class ContactsModel {
+    protected String identifier;
     protected List<String> roles;
     protected String organization;
     protected String name;

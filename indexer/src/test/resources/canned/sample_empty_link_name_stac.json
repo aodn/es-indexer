@@ -45,11 +45,11 @@
     "position" : "Manager, Geospatial Services",
     "emails" : [ "gis@gbrmpa.gov.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "280 Flinders Street", "PO Box 1379" ],
+      "delivery_point" : [ "280 Flinders Street", "PO Box 1379" ],
       "city" : "Townsville",
       "country" : "Australia",
-      "postalCode" : "4810",
-      "administrativeArea" : "Queensland"
+      "postal_code" : "4810",
+      "administrative_area" : "Queensland"
     } ],
     "phones" : [ {
       "roles" : [ "voice" ],

@@ -76,11 +76,11 @@
     "position" : "Data Officer",
     "emails" : [ "info@aodn.org.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "University of Tasmania", "Private Bag 110" ],
+      "delivery_point" : [ "University of Tasmania", "Private Bag 110" ],
       "city" : "Hobart",
       "country" : "Australia",
-      "postalCode" : "7001",
-      "administrativeArea" : "Tasmania"
+      "postal_code" : "7001",
+      "administrative_area" : "Tasmania"
     } ],
     "phones" : [ {
       "roles" : [ "voice" ],
@@ -100,11 +100,11 @@
     "name" : "Cowley, Rebecca",
     "emails" : [ "Rebecca.Cowley@csiro.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "GPO Box 1538" ],
+      "delivery_point" : [ "GPO Box 1538" ],
       "city" : "Hobart",
       "country" : "Australia",
-      "postalCode" : "7005",
-      "administrativeArea" : "Tasmania"
+      "postal_code" : "7005",
+      "administrative_area" : "Tasmania"
     } ]
   }, {
     "roles" : [ "distributor", "metadata" ],
@@ -112,11 +112,11 @@
     "position" : "Data Officer",
     "emails" : [ "info@aodn.org.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "University of Tasmania", "Private Bag 110" ],
+      "delivery_point" : [ "University of Tasmania", "Private Bag 110" ],
       "city" : "Hobart",
       "country" : "Australia",
-      "postalCode" : "7001",
-      "administrativeArea" : "Tasmania"
+      "postal_code" : "7001",
+      "administrative_area" : "Tasmania"
     } ],
     "phones" : [ {
       "roles" : [ "voice" ],
@@ -135,11 +135,11 @@
     "organization" : "Integrated Marine Observing System (IMOS)",
     "emails" : [ "imos@imos.org.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "Private Bag 110" ],
+      "delivery_point" : [ "Private Bag 110" ],
       "city" : "Hobart",
       "country" : "Australia",
-      "postalCode" : "7001",
-      "administrativeArea" : "Tasmania"
+      "postal_code" : "7001",
+      "administrative_area" : "Tasmania"
     } ],
     "phones" : [ {
       "roles" : [ "voice" ],

@@ -21,20 +21,20 @@ public class TemporalUtils {
      * @param temporals
      * @return
      */
-    public static List<String[]> concatOverallTemporalRange(List<String[]> temporals) {
+    public static List<List<String>> concatOverallTemporalRange(List<List<String>> temporals) {
         ZonedDateTime min = null;
         // Set the max to the smallest to give change to increase in value.
         ZonedDateTime max = Instant.EPOCH.atZone(ZoneOffset.UTC);
 
         if(temporals != null) {
-            for (String[] temporal : temporals) {
-                if (temporal[0] != null) {
-                    ZonedDateTime t = ZonedDateTime.parse(temporal[0]);
+            for (List<String> temporal : temporals) {
+                if (temporal.get(0) != null) {
+                    ZonedDateTime t = ZonedDateTime.parse(temporal.get(0));
                     min = (min == null || min.isAfter(t)) ? t : min;
                 }
 
-                if (temporal[1] != null && max != null) {
-                    ZonedDateTime t = ZonedDateTime.parse(temporal[1]);
+                if (temporal.get(1) != null && max != null) {
+                    ZonedDateTime t = ZonedDateTime.parse(temporal.get(1));
                     max = max.isBefore(t) ? t : max;
                 }
                 else {
@@ -44,13 +44,12 @@ public class TemporalUtils {
                 }
             }
             // Append the overall to the front
-            List<String[]> f = new ArrayList<>();
+            List<List<String>> f = new ArrayList<>();
 
-            f.add(new String[]{
-                    min == null ? null : min.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME),
-                    max == null || Instant.EPOCH.atZone(ZoneOffset.UTC).equals(max) ? null : max.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)
-                }
-            );
+            List<String> overall = new ArrayList<>(2);
+            overall.add(min == null ? null : min.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME));
+            overall.add(max == null || Instant.EPOCH.atZone(ZoneOffset.UTC).equals(max) ? null : max.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME));
+            f.add(overall);
 
             f.addAll(temporals);
             return f;

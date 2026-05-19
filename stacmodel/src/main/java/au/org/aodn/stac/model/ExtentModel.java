@@ -47,5 +47,5 @@ public class ExtentModel {
      * Timestamps consist of a date and time in UTC and MUST be formatted according to RFC 3339, section 5.6.
      * The temporal reference system is the Gregorian calendar.
      */
-    protected List<String[]> temporal;
+    protected List<List<String>> temporal;
 }

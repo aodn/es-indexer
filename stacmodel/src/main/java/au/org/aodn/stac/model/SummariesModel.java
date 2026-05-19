@@ -2,19 +2,22 @@ package au.org.aodn.stac.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SummariesModel {
 
-    protected Integer score;
+    protected int score;
     protected String status;
     protected List<String> credits;
     protected Map<String, String> scope;
@@ -32,10 +35,10 @@ public class SummariesModel {
     protected String aiUpdateFrequency;
 
     @JsonProperty("ai:parameter_vocabs")
-    protected Set<String> aiParameterVocabs;
+    protected List<String> aiParameterVocabs;
 
     @JsonProperty("ai:platform_vocabs")
-    protected Set<String> aiPlatformVocabs;
+    protected List<String> aiPlatformVocabs;
 
     /**
      * Group info as setup in geonetwork
@@ -66,24 +69,23 @@ public class SummariesModel {
     /**
      * Use for effective search on temporal.
      */
-    @JsonProperty("temporal")
     protected List<Map<String, String>> temporal;
 
     /**
      * Discovery Parameter Vocabs
      */
     @JsonProperty("parameter_vocabs")
-    protected Set<String> parameterVocabs;
+    protected List<String> parameterVocabs;
 
     /**
      * ARDC platform vocabs
      */
     @JsonProperty("platform_vocabs")
-    protected Set<String> platformVocabs;
+    protected List<String> platformVocabs;
 
     /**
      * ARDC organisation vocabs
      */
     @JsonProperty("organisation_vocabs")
-    protected Set<String> organisationVocabs;
+    protected List<String> organisationVocabs;
 }

@@ -1,30 +1,32 @@
 package au.org.aodn.stac.model;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @SuppressWarnings("unused")
 public class Citation {
 
     private String suggestedCitation;
     private List<String> useLimitations;
-    private List<String> otherConstraints ;
+    private List<String> otherConstraints;
 
-    public void addUseLimitation(String useLimitation){
+    public void addUseLimitation(String useLimitation) {
         if (this.useLimitations == null) {
             this.useLimitations = new ArrayList<>();
         }
         this.useLimitations.add(useLimitation);
     }
 
-    public void addOtherConstraint(String otherConstraint){
+    public void addOtherConstraint(String otherConstraint) {
         if (this.otherConstraints == null) {
             this.otherConstraints = new ArrayList<>();
         }
