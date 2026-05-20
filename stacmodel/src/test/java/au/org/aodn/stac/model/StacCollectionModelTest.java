@@ -13,10 +13,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-// Field values below are drawn from real IMOS canned fixtures in
-// indexer/src/test/resources/canned/ (sample10_stac.json, sample4_stac.json,
-// sample2_stac_ai_enhanced.json) so the round trip exercises wire shapes that
-// match what ogcapi-java actually reads from portal_records.
 class StacCollectionModelTest {
 
     // FAIL_ON_UNKNOWN_PROPERTIES=false mirrors how a real STAC consumer reads docs —

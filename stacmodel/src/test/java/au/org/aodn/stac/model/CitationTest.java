@@ -8,9 +8,10 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-// Field values mirror the sci:citation payload found in
-// indexer/src/test/resources/canned/sample10_stac.json so we exercise the
-// real wire shape ogcapi-java reads from portal_records.
+// Standalone on purpose — Citation is the one model not reachable through
+// StacCollectionModel's full-document roundtrip. On the wire, sci:citation is
+// stored as a double-encoded JSON string so StacCollectionModel.citation is `String`, not
+// `Citation`.
 class CitationTest {
 
     private final ObjectMapper mapper = new ObjectMapper();

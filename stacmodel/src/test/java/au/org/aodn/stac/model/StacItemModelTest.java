@@ -12,10 +12,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-// Geometry / bbox / temporal values reflect the shape of a real ANMN mooring
-// time-series record (see indexer/src/test/resources/canned/sample10_stac.json):
-// IMOS coastal stations sit roughly within the Australian EEZ bbox
-// (113..154 E, -43..-9 N) and use ISO-8601 UTC datetimes.
 class StacItemModelTest {
 
     private final ObjectMapper mapper = new ObjectMapper();
