@@ -12,13 +12,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+// Geometry / bbox / temporal values reflect the shape of a real ANMN mooring
+// time-series record (see indexer/src/test/resources/canned/sample10_stac.json):
+// IMOS coastal stations sit roughly within the Australian EEZ bbox
+// (113..154 E, -43..-9 N) and use ISO-8601 UTC datetimes.
 class StacItemModelTest {
 
     private final ObjectMapper mapper = new ObjectMapper();
 
     @Test
     void builderDefaults_typeAndStacVersion() {
-        StacItemModel item = StacItemModel.builder().uuid("item-1").build();
+        StacItemModel item = StacItemModel.builder().uuid("test-uuid-1").build();
 
         assertEquals("Feature", item.getType());
         assertEquals("1.0.0", item.getStacVersion());
@@ -27,28 +31,35 @@ class StacItemModelTest {
     @Test
     void serialize_emitsExpectedWireKeys() {
         LinkModel link = LinkModel.builder()
-                .href("https://example.org")
-                .rel("self")
+                .href("http://imos.org.au/nationalmooringnetwork.html")
+                .rel("related")
+                .title("ANMN page on IMOS website")
                 .build();
 
         StacItemModel item = StacItemModel.builder()
-                .uuid("item-1")
-                .collection("col-1")
-                .geometry(Map.of("type", "Point"))
-                .bbox(List.of(List.of(BigDecimal.ZERO, BigDecimal.ZERO)))
-                .properties(Map.of("datetime", "2020-01-01T00:00:00Z"))
+                .uuid("test-uuid-1")
+                .collection("ae86e2f5-eaaf-459e-a405-e654d85adb9c")
+                .geometry(Map.of(
+                        "type", "Point",
+                        "coordinates", List.of(BigDecimal.valueOf(116.0), BigDecimal.valueOf(-21.0))))
+                .bbox(List.of(List.of(
+                        BigDecimal.valueOf(113.0), BigDecimal.valueOf(-43.0),
+                        BigDecimal.valueOf(154.0), BigDecimal.valueOf(-9.0))))
+                .properties(Map.of("datetime", "2007-09-08T14:00:00Z"))
                 .links(List.of(link))
                 .build();
 
         JsonNode tree = mapper.valueToTree(item);
 
-        assertEquals("item-1", tree.get("id").asText());
+        assertEquals("test-uuid-1", tree.get("id").asText());
         assertEquals("Feature", tree.get("type").asText());
         assertEquals("1.0.0", tree.get("stac_version").asText());
-        assertEquals("col-1", tree.get("collection").asText());
+        assertEquals("ae86e2f5-eaaf-459e-a405-e654d85adb9c", tree.get("collection").asText());
         assertNotNull(tree.get("geometry"));
         assertNotNull(tree.get("bbox"));
-        assertNotNull(tree.get("properties"));
+        assertEquals("2007-09-08T14:00:00Z", tree.get("properties").get("datetime").asText());
+        assertEquals("http://imos.org.au/nationalmooringnetwork.html",
+                tree.get("links").get(0).get("href").asText());
         assertTrue(tree.get("stac_extensions").isArray());
     }
 
@@ -60,11 +71,11 @@ class StacItemModelTest {
                 {
                   "type": "Feature",
                   "stac_version": "1.0.0",
-                  "id": "item-1",
-                  "collection": "col-1",
-                  "geometry": {"type": "Point"},
-                  "bbox": [[0, 0]],
-                  "properties": {"datetime": "2020-01-01T00:00:00Z"}
+                  "id": "test-uuid-1",
+                  "collection": "ae86e2f5-eaaf-459e-a405-e654d85adb9c",
+                  "geometry": {"type": "Point", "coordinates": [116.0, -21.0]},
+                  "bbox": [[113.0, -43.0, 154.0, -9.0]],
+                  "properties": {"datetime": "2007-09-08T14:00:00Z"}
                 }
                 """;
 
@@ -72,8 +83,8 @@ class StacItemModelTest {
 
         assertEquals("Feature", parsed.getType());
         assertEquals("1.0.0", parsed.getStacVersion());
-        assertEquals("item-1", parsed.getUuid());
-        assertEquals("col-1", parsed.getCollection());
+        assertEquals("test-uuid-1", parsed.getUuid());
+        assertEquals("ae86e2f5-eaaf-459e-a405-e654d85adb9c", parsed.getCollection());
         assertNotNull(parsed.getGeometry());
         assertNotNull(parsed.getBbox());
         assertNotNull(parsed.getProperties());
