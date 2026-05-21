@@ -1,11 +1,15 @@
 package au.org.aodn.stac.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class AssetModel {
     // https://github.com/radiantearth/stac-spec/blob/master/best-practices.md#list-of-asset-roles

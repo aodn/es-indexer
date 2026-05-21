@@ -84,7 +84,7 @@ public class ElasticSearchIndexService {
         log.info("Reading index schema definition from JSON file: {}", indexMappingFile);
 
         // https://www.baeldung.com/java-classpath-resource-cannot-be-opened#resources
-        try (InputStream inputStream = getClass().getResourceAsStream("/config_files/" + indexMappingFile)) {
+        try (InputStream inputStream = getClass().getResourceAsStream("/schema/" + indexMappingFile)) {
             log.info("Creating index: {}", indexName);
             CreateIndexRequest req = CreateIndexRequest.of(b -> b
                     .index(indexName)
