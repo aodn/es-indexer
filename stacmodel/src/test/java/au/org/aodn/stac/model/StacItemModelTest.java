@@ -61,8 +61,6 @@ class StacItemModelTest {
 
     @Test
     void deserialize_setsTypeAndStacVersionFromInput() throws Exception {
-        // Step 1 #6: type and stacVersion must be settable so input docs deserialize,
-        // not getter-only constants.
         String json = """
                 {
                   "type": "Feature",

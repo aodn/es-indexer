@@ -122,7 +122,7 @@ class StacCollectionModelTest {
         assertEquals("Tasmania", addr.get("administrative_area").asText());
         assertEquals("7001", addr.get("postal_code").asText());
 
-        // ExtentModel.temporal is List<List<String>>, not String[]
+        // ExtentModel.temporal is List<List<String>>
         JsonNode temporal = tree.get("extent").get("temporal");
         assertTrue(temporal.isArray());
         assertTrue(temporal.get(0).isArray());
@@ -179,9 +179,6 @@ class StacCollectionModelTest {
 
     @Test
     void fullDocument_roundtrip_preservesWireKeys() throws Exception {
-        // Guards Rule 1: every nested type must have a public no-args ctor so
-        // ogcapi-java can deserialize a real portal_records doc into
-        // StacCollectionModel without Jackson choking on any nested type.
         SummariesModel summaries = SummariesModel.builder()
                 .score(83)
                 .updateFrequency("completed")
@@ -300,7 +297,7 @@ class StacCollectionModelTest {
         assertEquals("AI-suggested keyword",
                 tree.get("themes").get(0).get("concepts").get(0).get("ai:description").asText());
 
-        // Strongest signal: round-tripped object equals the original.
+        // Round-tripped object equals the original.
         assertEquals(original, parsed);
     }
 }

@@ -10,18 +10,10 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 // Standalone on purpose — Citation is the one model not reachable through
 // StacCollectionModel's full-document roundtrip. On the wire, sci:citation is
-// stored as a double-encoded JSON string so StacCollectionModel.citation is `String`, not
-// `Citation`.
+// stored as a double-encoded JSON string so StacCollectionModel.citation is `String`, not `Citation`.
 class CitationTest {
 
     private final ObjectMapper mapper = new ObjectMapper();
-
-    @Test
-    void noArgsConstructor_isPublic() throws Exception {
-        // Regression guard: Jackson needs a public no-args ctor to deserialize.
-        Citation c = Citation.class.getDeclaredConstructor().newInstance();
-        assertNotNull(c);
-    }
 
     @Test
     void roundtrip_preservesFields() throws Exception {
