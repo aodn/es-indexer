@@ -20,7 +20,6 @@ import reactor.core.publisher.Flux;
 import reactor.util.retry.Retry;
 
 import org.springframework.retry.annotation.Retryable;
-import org.springframework.retry.annotation.Recover;
 import org.springframework.retry.annotation.Backoff;
 
 import java.time.*;
@@ -37,7 +36,6 @@ public class DataAccessServiceImpl implements DataAccessService {
     protected final RestTemplate restTemplate;
     protected final WebClient webClient;
     protected final ObjectMapper objectMapper;
-    protected final Random random = new Random();
 
     private final static int MAX_RETRY_ATTEMPT = 100;  //times
     private final static int RETRY_DELAY_SECOND = 10; // second
@@ -101,7 +99,7 @@ public class DataAccessServiceImpl implements DataAccessService {
         // Validate path argument
         if(isSafeId(uuid)) {
             // Sometimes the server is down due to SPOT instance or software update.
-            waitTillServiceUp();
+            waitTillServiceUp(Integer.MAX_VALUE);
 
             HttpEntity<String> request = getRequestEntity(List.of(MediaType.APPLICATION_JSON));
 
@@ -134,7 +132,7 @@ public class DataAccessServiceImpl implements DataAccessService {
     @Override
     public Map<String, Map<String, MetadataEntity>> getAllMetadata() {
         // Sometimes the server is down due to SPOT instance or software update.
-        waitTillServiceUp();
+        waitTillServiceUp(Integer.MAX_VALUE);
 
         HttpEntity<String> request = getRequestEntity(List.of(MediaType.APPLICATION_JSON));
         String url = UriComponentsBuilder
@@ -340,9 +338,7 @@ public class DataAccessServiceImpl implements DataAccessService {
             try {
                 var eventData = future.get();
                 if (eventData != null) {
-                    for (var entry : eventData) {
-                        eventDataList.add((CloudOptimizedEntry) entry);
-                    }
+                    eventDataList.addAll(eventData);
                 }
             } catch (Exception e) {
                 // Handle exceptions from parallel tasks
@@ -365,7 +361,7 @@ public class DataAccessServiceImpl implements DataAccessService {
     public List<TemporalExtent> getTemporalExtentOf(String uuid, String key) {
         if(isSafeId(uuid)) {
             // Sometimes the server is down due to SPOT instance or software update.
-            waitTillServiceUp();
+            waitTillServiceUp(Integer.MAX_VALUE);
 
             try {
                 HttpEntity<String> request = getRequestEntity(List.of(MediaType.APPLICATION_JSON));
@@ -420,20 +416,28 @@ public class DataAccessServiceImpl implements DataAccessService {
                 merge.merge(entry, count, Long::sum)
         );
     }
-
+    /**
+     * Wait 10 sec in each check, 10 is a good value, some operation works with SSE and if you wait
+     * too long, it will fail due to cloudfront timeout (30 sec max of no response)
+     * @param maxRetry - max retry count
+     * @return - Last check status
+     */
     @Override
-    public void waitTillServiceUp() {
-        CountDownLatch countDownLatch = new CountDownLatch(1);
-
+    public HealthStatus waitTillServiceUp(int maxRetry) {
+        CountDownLatch countDownLatch = new CountDownLatch(maxRetry);
+        HealthStatus lastStatus = HealthStatus.UNKNOWN;
         try {
             do {
-                if(this.getHealthStatus() == HealthStatus.UP) {
-                    countDownLatch.countDown();
+                lastStatus = this.getHealthStatus();
+                if(lastStatus == HealthStatus.UP) {
+                    return HealthStatus.UP;
                 }
+                countDownLatch.countDown();
             }
-            while(!countDownLatch.await(30, TimeUnit.SECONDS));
+            while(!countDownLatch.await(10, TimeUnit.SECONDS));
         }
         catch (Exception ignored) {}
+        return lastStatus;
     }
 
     @Override
