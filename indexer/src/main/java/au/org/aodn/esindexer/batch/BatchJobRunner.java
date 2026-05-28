@@ -103,22 +103,8 @@ public class BatchJobRunner {
         try{
             log.info("Check all data access service is up...");
             var loggingCallback = new LoggingCallback();
-            // This is a short temp solution to verify the 30-35 data access service is in up status, we will
-            // move away from doing it here in future and this whole function call will be moved.
-            int count = 0;
-            while (count <= 35) {
-                // The cloud front is round robin, and right now the max process we have is 35. If all
-                // return UP then we are good, else we need to keep retry
-                if(dataAccessService.waitTillServiceUp(1) == DataAccessService.HealthStatus.UP) {
-                    count++;
-                }
-                else {
-                    log.info("Some data access service is not UP, retrying...");
-                    count = 0;
-                }
-            }
             log.info("Indexing all cloud optimised dataset");
-            indexCloudOptimizedService.indexAllCloudOptimizedData(beginWithUuid, 100, loggingCallback);
+            indexCloudOptimizedService.indexAllCloudOptimizedData(beginWithUuid, loggingCallback);
         } catch (Exception e) {
             log.error("Error indexing all cloud optimised dataset", e);
         }

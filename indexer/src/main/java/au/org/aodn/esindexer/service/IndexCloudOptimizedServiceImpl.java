@@ -66,69 +66,67 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
     public String getHitId(String collectionId) {
         return elasticSearchIndexService.getFirstMatchId(this.indexName, "properties.collection.keyword", collectionId);
     }
-
+    /**
+     * We will remove this function in the upcoming change. We replace it with pmtitle if works.
+     * @param beginWithUuid - The UUID to start indexing from, if null, we will start from scratch
+     * @param callback - The callback to avoid timeout
+     * @return - The list of bulk response
+     */
     @Override
-    public List<BulkResponse> indexAllCloudOptimizedData(String beginWithUuid, int maxWaitRetry, IndexService.Callback callback) {
+    public List<BulkResponse> indexAllCloudOptimizedData(String beginWithUuid, IndexService.Callback callback) {
+        // It is unreliable to check data service status here because in a multiple process env,
+        // even the one instance is UP the other instance can be down given round-robin fashion,
+        // it is better to check the status in the real function call.
+        List<BulkResponse> results = new ArrayList<>();
+        Map<String, Map<String, MetadataEntity>> entities = dataAccessService.getAllMetadata();
+        List<String> sorted = entities.keySet().stream()
+                .sorted()
+                .toList();
 
-        // Wait for depends on service to be up, in batch env, this is not really safe because one instance up do not
-        // mean all depend service is up, so this only works in env not batch.
-        DataAccessService.HealthStatus status = dataAccessService.waitTillServiceUp(maxWaitRetry);
-        if(status != DataAccessService.HealthStatus.UP) {
-            callback.onComplete(String.format("Data Access Service status %s is not UP after %s retry, process give up", status, maxWaitRetry));
-            return null;
+        if(beginWithUuid != null && !sorted.isEmpty()) {
+            // We ignore all UUID before this beginWithUuid
+            int index = sorted.indexOf(beginWithUuid);
+
+            // If target not found or at start, no removal needed, else remove all items before
+            if (index > 0) {
+                sorted = new ArrayList<>(sorted.subList(index, sorted.size()));
+            }
         }
         else {
-            List<BulkResponse> results = new ArrayList<>();
-            Map<String, Map<String, MetadataEntity>> entities = dataAccessService.getAllMetadata();
-            List<String> sorted = entities.keySet().stream()
-                    .sorted()
-                    .toList();
-
-            if(beginWithUuid != null && !sorted.isEmpty()) {
-                // We ignore all UUID before this beginWithUuid
-                int index = sorted.indexOf(beginWithUuid);
-
-                // If target not found or at start, no removal needed, else remove all items before
-                if (index > 0) {
-                    sorted = new ArrayList<>(sorted.subList(index, sorted.size()));
-                }
-            }
-            else {
-                // Do it from scratch so make sense to refresh the schema
-                elasticSearchIndexService.recreateIndexFromMappingJSONFile(AppConstants.DATASET_INDEX_MAPPING_JSON_FILE, indexName);
-            }
-
-            for (String uuid : sorted) {
-                Map<String, MetadataEntity> entry = entities.get(uuid);
-
-                for(String key: entry.keySet()) {
-                    log.info("Start indexing dataset with UUID: {}, dataset: {}", uuid, key);
-                    try {
-                        List<TemporalExtent> temporalExtents = dataAccessService.getTemporalExtentOf(uuid, key);
-                        if (!temporalExtents.isEmpty()) {
-                            // Only first block works from data service api
-                            LocalDate startDate = temporalExtents.get(0).getLocalStartDate();
-                            LocalDate endDate = temporalExtents.get(0).getLocalEndDate();
-
-                            callback.onProgress(String.format("Indexing dataset with UUID: %s %s from %s to %s", uuid, key, startDate, endDate));
-                            try {
-                                results.addAll(indexCloudOptimizedData(entry.get(key), startDate, endDate, callback));
-                            } catch (IOException ioe) {
-                                // Do nothing
-                            }
-                        }
-                        log.info("Finish indexing dataset with UUID: {}, dataset: {}", uuid, key);
-                    }
-                    catch(MetadataNotFoundException enf) {
-                        callback.onProgress(String.format("Metadata not found, skip! %s", enf.getMessage()));
-                    }
-                    catch(Exception e) {
-                        callback.onError(new RuntimeException(String.format("Error indexing dataset with UUID: %s %s", uuid, key), e));
-                    }
-                }
-            }
-            return results;
+            // Do it from scratch so make sense to refresh the schema
+            elasticSearchIndexService.recreateIndexFromMappingJSONFile(AppConstants.DATASET_INDEX_MAPPING_JSON_FILE, indexName);
         }
+
+        for (String uuid : sorted) {
+            Map<String, MetadataEntity> entry = entities.get(uuid);
+
+            for(String key: entry.keySet()) {
+                log.info("Start indexing dataset with UUID: {}, dataset: {}", uuid, key);
+                try {
+                    List<TemporalExtent> temporalExtents = dataAccessService.getTemporalExtentOf(uuid, key);
+                    if (!temporalExtents.isEmpty()) {
+                        // Only first block works from data service api
+                        LocalDate startDate = temporalExtents.get(0).getLocalStartDate();
+                        LocalDate endDate = temporalExtents.get(0).getLocalEndDate();
+
+                        callback.onProgress(String.format("Indexing dataset with UUID: %s %s from %s to %s", uuid, key, startDate, endDate));
+                        try {
+                            results.addAll(indexCloudOptimizedData(entry.get(key), startDate, endDate, callback));
+                        } catch (IOException ioe) {
+                            // Do nothing
+                        }
+                    }
+                    log.info("Finish indexing dataset with UUID: {}, dataset: {}", uuid, key);
+                }
+                catch(MetadataNotFoundException enf) {
+                    callback.onProgress(String.format("Metadata not found, skip! %s", enf.getMessage()));
+                }
+                catch(Exception e) {
+                    callback.onError(new RuntimeException(String.format("Error indexing dataset with UUID: %s %s", uuid, key), e));
+                }
+            }
+        }
+        return results;
     }
 
     /**

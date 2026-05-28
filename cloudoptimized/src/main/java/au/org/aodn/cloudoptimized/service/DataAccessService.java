@@ -53,7 +53,7 @@ public interface DataAccessService {
     Map<String, MetadataEntity> getMetadataByUuid(String uuid);
     Map<String, Map<String, MetadataEntity>> getAllMetadata();
     HealthStatus getHealthStatus();
-    HealthStatus waitTillServiceUp(int numRetry);
+    void waitTillServiceUp();
 
     /**
      * Get Zarr indexing data by month. It is a short term solution for Zarr indexing. May change later

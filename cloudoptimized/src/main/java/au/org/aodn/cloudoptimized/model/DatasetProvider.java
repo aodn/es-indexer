@@ -118,8 +118,13 @@ public class DatasetProvider {
             }
         };
     }
-
-    private FeatureCollectionTask queryFeatureCollection(List<MetadataFields> columns, YearMonth yearMonth) {
+    /**
+     * Key call to query the data
+     * @param columns - The columns to query
+     * @param yearMonth - The year month to query
+     * @return - The feature collection
+     */
+    protected FeatureCollectionTask queryFeatureCollection(List<MetadataFields> columns, YearMonth yearMonth) {
         // Log only once per year to prevent log flooding
         if (yearMonth.getMonth().getValue() == 1) {
             log.info("Processing data for year: {}", yearMonth.getYear());
@@ -127,8 +132,11 @@ public class DatasetProvider {
         log.debug("Start querying data for year month: {}", yearMonth);
         FeatureCollectionGeoJson featureCollection;
         if (key.endsWith(".zarr")) {
+            // The function will do internal retry on exception
             featureCollection = dataAccessService.getZarrIndexingDataByMonth(uuid, key, yearMonth);
-        } else if (key.endsWith(".parquet")) {
+        }
+        else if (key.endsWith(".parquet")) {
+            // The function will do internal retry on exception
             featureCollection =  dataAccessService.getIndexingDatasetByMonth(
                     uuid,
                     key,

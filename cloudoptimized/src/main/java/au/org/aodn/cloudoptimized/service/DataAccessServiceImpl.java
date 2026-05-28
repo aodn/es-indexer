@@ -13,6 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
+import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -94,12 +96,17 @@ public class DataAccessServiceImpl implements DataAccessService {
     }
 
     @Override
+    @Retryable(
+            retryFor = { HttpServerErrorException.ServiceUnavailable.class, ResourceAccessException.class },
+            maxAttempts = MAX_RETRY_ATTEMPT,
+            backoff = @Backoff(delay = RETRY_DELAY_SECOND * 1000)
+    )
     public Map<String, MetadataEntity> getMetadataByUuid(String uuid) {
 
         // Validate path argument
         if(isSafeId(uuid)) {
             // Sometimes the server is down due to SPOT instance or software update.
-            waitTillServiceUp(Integer.MAX_VALUE);
+            waitTillServiceUp();
 
             HttpEntity<String> request = getRequestEntity(List.of(MediaType.APPLICATION_JSON));
 
@@ -128,31 +135,41 @@ public class DataAccessServiceImpl implements DataAccessService {
         }
     }
 
-
     @Override
+    @Retryable(
+            retryFor = { HttpServerErrorException.ServiceUnavailable.class, ResourceAccessException.class },
+            maxAttempts = MAX_RETRY_ATTEMPT,
+            backoff = @Backoff(delay = RETRY_DELAY_SECOND * 1000)
+    )
     public Map<String, Map<String, MetadataEntity>> getAllMetadata() {
-        // Sometimes the server is down due to SPOT instance or software update.
-        waitTillServiceUp(Integer.MAX_VALUE);
 
-        HttpEntity<String> request = getRequestEntity(List.of(MediaType.APPLICATION_JSON));
-        String url = UriComponentsBuilder
-                .fromUriString(getDataAccessEndpoint() + "/metadata")
-                .toUriString();
+        try {
+            HttpEntity<String> request = getRequestEntity(List.of(MediaType.APPLICATION_JSON));
+            String url = UriComponentsBuilder
+                    .fromUriString(getDataAccessEndpoint() + "/metadata")
+                    .toUriString();
 
-        ResponseEntity<Map<String, Map<String, MetadataEntity>>> responseEntity = restTemplate.exchange(
-                url,
-                HttpMethod.GET,
-                request,
-                new ParameterizedTypeReference<>() {
-                },
-                Map.of()
-        );
-        if (responseEntity.getStatusCode().is2xxSuccessful()) {
-            return responseEntity.getBody();
-        } else {
-            return Map.of();
+            ResponseEntity<Map<String, Map<String, MetadataEntity>>> responseEntity = restTemplate.exchange(
+                    url,
+                    HttpMethod.GET,
+                    request,
+                    new ParameterizedTypeReference<>() {
+                    },
+                    Map.of()
+            );
+            if (responseEntity.getStatusCode().is2xxSuccessful()) {
+                return responseEntity.getBody();
+            } else {
+                return Map.of();
+            }
+        } catch (HttpServerErrorException.ServiceUnavailable ex) {
+                // Caught when FastAPI returns 503 (api_status is False)
+                String errorJson = ex.getResponseBodyAsString();
+                // errorJson contains: {"detail":"API is not ready. Metadata initialization is still in progress."}
+                log.error("FastAPI is not ready yet: {}", errorJson);
+                throw ex;
+            }
         }
-    }
 
     @Override
     public HealthStatus getHealthStatus() {
@@ -303,7 +320,13 @@ public class DataAccessServiceImpl implements DataAccessService {
         }
         return null;
     }
+
     @Override
+    @Retryable(
+            retryFor = { HttpServerErrorException.ServiceUnavailable.class, ResourceAccessException.class },
+            maxAttempts = MAX_RETRY_ATTEMPT,
+            backoff = @Backoff(delay = RETRY_DELAY_SECOND * 1000)
+    )
     public FeatureCollectionGeoJson getIndexingDatasetByMonth(final String uuid, String key, final YearMonth yearMonth, final List<MetadataFields> fields) {
 
         var startDate = yearMonth.atDay(1);
@@ -354,15 +377,13 @@ public class DataAccessServiceImpl implements DataAccessService {
 
     @Override
     @Retryable(
-        retryFor = { Exception.class },
+        retryFor = { HttpServerErrorException.ServiceUnavailable.class, ResourceAccessException.class },
         maxAttempts = MAX_RETRY_ATTEMPT,
         backoff = @Backoff(delay = RETRY_DELAY_SECOND * 1000)
     )
     public List<TemporalExtent> getTemporalExtentOf(String uuid, String key) {
         if(isSafeId(uuid)) {
-            // Sometimes the server is down due to SPOT instance or software update.
-            waitTillServiceUp(Integer.MAX_VALUE);
-
+            log.info("Fetching temporal extent of UUID: {}", uuid);
             try {
                 HttpEntity<String> request = getRequestEntity(List.of(MediaType.APPLICATION_JSON));
 
@@ -383,17 +404,20 @@ public class DataAccessServiceImpl implements DataAccessService {
 
             }
             catch (HttpClientErrorException.NotFound e) {
-                throw new MetadataNotFoundException("UUID not found : " + uuid + " in DataAccess Service");
+                throw new MetadataNotFoundException("temporal_extent of uuid not found: " + uuid + " in DataAccess Service");
+            }
+            catch (HttpServerErrorException.ServiceUnavailable sna) {
+                log.error("Waiting data access service UP");
+                throw sna;
             }
             catch (Exception e) {
-                throw new RuntimeException("Exception thrown while retrieving dataset with UUID: " + uuid + e.getMessage(), e);
+                throw new RuntimeException("Exception thrown while retrieving dataset with UUID: " + uuid + " " + e.getMessage(), e);
             }
         }
         else {
             throw new MetadataNotFoundException("Malform UUID in request: " + uuid);
         }
     }
-
     /**
      * Summarize the data by counting the number if all the concerned fields are the same, merge data with
      * existing map. That is count will be added for same CloudOptimizedEntry
@@ -416,28 +440,20 @@ public class DataAccessServiceImpl implements DataAccessService {
                 merge.merge(entry, count, Long::sum)
         );
     }
-    /**
-     * Wait 10 sec in each check, 10 is a good value, some operation works with SSE and if you wait
-     * too long, it will fail due to cloudfront timeout (30 sec max of no response)
-     * @param maxRetry - max retry count
-     * @return - Last check status
-     */
+
     @Override
-    public HealthStatus waitTillServiceUp(int maxRetry) {
-        CountDownLatch countDownLatch = new CountDownLatch(maxRetry);
-        HealthStatus lastStatus = HealthStatus.UNKNOWN;
+    public void waitTillServiceUp() {
+        CountDownLatch countDownLatch = new CountDownLatch(1);
+
         try {
             do {
-                lastStatus = this.getHealthStatus();
-                if(lastStatus == HealthStatus.UP) {
-                    return HealthStatus.UP;
+                if(this.getHealthStatus() == HealthStatus.UP) {
+                    countDownLatch.countDown();
                 }
-                countDownLatch.countDown();
             }
-            while(!countDownLatch.await(10, TimeUnit.SECONDS));
+            while(!countDownLatch.await(30, TimeUnit.SECONDS));
         }
         catch (Exception ignored) {}
-        return lastStatus;
     }
 
     @Override
@@ -449,39 +465,31 @@ public class DataAccessServiceImpl implements DataAccessService {
     public FeatureCollectionGeoJson getZarrIndexingDataByMonth(String uuid, String key, YearMonth yearMonth) {
         var startDate = Instant.parse(yearMonth.atDay(1) + "T00:00:00.000000000Z");
         var endDate = Instant.parse(yearMonth.atEndOfMonth() + "T23:59:59.999999999Z");
-        try {
+        var url = UriComponentsBuilder.fromUriString(getDataAccessEndpoint() + "/data/{uuid}/{key}/zarr_rect")
+                .queryParam("start_date", startDate)
+                .queryParam("end_date", endDate)
+                .buildAndExpand(uuid, key)
+                .toUriString();
 
-            var url = UriComponentsBuilder.fromUriString(getDataAccessEndpoint() + "/data/{uuid}/{key}/zarr_rect")
-                    .queryParam("start_date", startDate)
-                    .queryParam("end_date", endDate)
-                    .buildAndExpand(uuid, key)
-                    .toUriString();
+        var request = getRequestEntity(List.of(MediaType.APPLICATION_JSON));
 
-            var request = getRequestEntity(List.of(MediaType.APPLICATION_JSON));
+        ResponseEntity<FeatureCollectionGeoJson> responseEntity = restTemplate.exchange(
+                url,
+                HttpMethod.GET,
+                request,
+                new ParameterizedTypeReference<>() {},
+                Map.of()
+        );
 
-            var responseEntity = restTemplate.exchange(
-                    url,
-                    HttpMethod.GET,
-                    request,
-                    new ParameterizedTypeReference<FeatureCollectionGeoJson>() {
-                    },
-                    Map.of()
-            );
-
-            if (!responseEntity.getStatusCode().is2xxSuccessful()) {
-                log.error("Request to DataAccess Service failed with status code: {} for UUID: {} in {} -> {}", responseEntity.getStatusCode(), uuid, startDate, endDate);
-                return null;
-            }
-            if (responseEntity.getBody() == null) {
-                log.warn("No data found from DataAccess Service for UUID: {} in {} -> {}", uuid, startDate, endDate);
-                return null;
-            }
-            return responseEntity.getBody();
-
-        } catch (Exception e) {
-            log.error("Exception thrown while retrieving Zarr indexing data with UUID: {} in {} -> {}", uuid, startDate, endDate, e);
+        if (!responseEntity.getStatusCode().is2xxSuccessful()) {
+            log.error("Request to DataAccess Service failed with status code: {} for UUID: {} in {} -> {}", responseEntity.getStatusCode(), uuid, startDate, endDate);
             return null;
         }
+        if (responseEntity.getBody() == null) {
+            log.warn("No data found from DataAccess Service for UUID: {} in {} -> {}", uuid, startDate, endDate);
+            return null;
+        }
+        return responseEntity.getBody();
     }
 
 }
