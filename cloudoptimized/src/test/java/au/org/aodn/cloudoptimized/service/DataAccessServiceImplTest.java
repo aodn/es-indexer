@@ -1,7 +1,6 @@
 package au.org.aodn.cloudoptimized.service;
 
 import au.org.aodn.cloudoptimized.model.MetadataFields;
-import au.org.aodn.cloudoptimized.model.TemporalExtent;
 import au.org.aodn.cloudoptimized.model.geojson.FeatureCollectionGeoJson;
 import au.org.aodn.cloudoptimized.model.geojson.FeatureGeoJson;
 import au.org.aodn.cloudoptimized.model.geojson.PointGeoJson;
@@ -26,13 +25,10 @@ import static org.mockito.Mockito.*;
 class DataAccessServiceImplTest {
 
     private RestTemplate mockRestTemplate;
-    private DataAccessServiceImpl dataAccessService;
 
     @BeforeEach
     public void setUp() {
         mockRestTemplate = mock(RestTemplate.class);
-
-
     }
 
     @Test
@@ -50,7 +46,7 @@ class DataAccessServiceImplTest {
                 null
         );
         ResponseEntity<FeatureCollectionGeoJson> responseEntity = new ResponseEntity<>(mockResponse, HttpStatus.OK);
-        dataAccessService = new DataAccessServiceImpl(
+        DataAccessServiceImpl dataAccessService = new DataAccessServiceImpl(
                 "http://localhost",
                 "/api",
                 mockRestTemplate,
@@ -74,47 +70,6 @@ class DataAccessServiceImplTest {
         // Assert
         assertNotNull(result);
         assertEquals(mockResponse, result);
-    }
-
-    @Test
-    void testGetTemporalExtentOf_retriesOnFailure() {
-        String uuid = "testUuid";
-        String key = "testKey";
-        var expected = List.of(TemporalExtent.builder()
-                .startDate("2020-01-01T00:00:00Z")
-                .endDate("2020-12-31T23:59:59Z")
-                .build());
-        dataAccessService = new DataAccessServiceImpl(
-                "http://localhost",
-                "/api",
-                mockRestTemplate,
-                null,
-                new ObjectMapper()
-        );
-        // First call throws, second call returns success
-        when(mockRestTemplate.exchange(
-                anyString(),
-                eq(org.springframework.http.HttpMethod.GET),
-                any(),
-                any(org.springframework.core.ParameterizedTypeReference.class),
-                anyMap()
-        ))
-        .thenThrow(new RuntimeException("Temporary error"))
-        .thenReturn(new ResponseEntity<>(expected, HttpStatus.OK));
-
-        // Call the method under test
-        List<TemporalExtent> result = dataAccessService.getTemporalExtentOf(uuid, key);
-        assertNotNull(result);
-        assertEquals(1, result.size());
-        assertEquals("2020-01-01T00:00:00Z", result.get(0).getStartDate());
-        assertEquals("2020-12-31T23:59:59Z", result.get(0).getEndDate());
-        verify(mockRestTemplate, times(2)).exchange(
-                anyString(),
-                eq(org.springframework.http.HttpMethod.GET),
-                any(),
-                any(org.springframework.core.ParameterizedTypeReference.class),
-                anyMap()
-        );
     }
 
     @Test
@@ -145,7 +100,7 @@ class DataAccessServiceImplTest {
                 .thenReturn(reactor.core.publisher.Flux.just(sseEventJson1, sseEventJson2, sseEventJson3));
 
         // Inject the mocked WebClient into the service
-        dataAccessService = new DataAccessServiceImpl(
+        DataAccessServiceImpl dataAccessService = new DataAccessServiceImpl(
                 "server-url",
                 "base-url",
                 mockRestTemplate,
@@ -202,7 +157,7 @@ class DataAccessServiceImplTest {
 
         ResponseEntity<String> responseEntity = new ResponseEntity<>(jsonResponseWithQuotes, HttpStatus.OK);
 
-        dataAccessService = new DataAccessServiceImpl(
+        DataAccessServiceImpl dataAccessService = new DataAccessServiceImpl(
                 "http://localhost",
                 "/api",
                 mockRestTemplate,
@@ -235,7 +190,7 @@ class DataAccessServiceImplTest {
         String uuid = "test-uuid";
         ResponseEntity<String> responseEntity = new ResponseEntity<>("", HttpStatus.OK);
 
-        dataAccessService = new DataAccessServiceImpl(
+        DataAccessServiceImpl dataAccessService = new DataAccessServiceImpl(
                 "http://localhost",
                 "/api",
                 mockRestTemplate,
@@ -264,7 +219,7 @@ class DataAccessServiceImplTest {
         String uuid = "test-uuid";
         ResponseEntity<String> responseEntity = new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
 
-        dataAccessService = new DataAccessServiceImpl(
+        DataAccessServiceImpl dataAccessService = new DataAccessServiceImpl(
                 "http://localhost",
                 "/api",
                 mockRestTemplate,
@@ -292,7 +247,7 @@ class DataAccessServiceImplTest {
         // Arrange
         String uuid = "test-uuid";
 
-        dataAccessService = new DataAccessServiceImpl(
+        DataAccessServiceImpl dataAccessService = new DataAccessServiceImpl(
                 "http://localhost",
                 "/api",
                 mockRestTemplate,

@@ -411,14 +411,13 @@ public class DataAccessServiceImpl implements DataAccessService {
                 throw sna;
             }
             catch (Exception e) {
-                throw new RuntimeException("Exception thrown while retrieving dataset with UUID: " + uuid + e.getMessage(), e);
+                throw new RuntimeException("Exception thrown while retrieving dataset with UUID: " + uuid + " " + e.getMessage(), e);
             }
         }
         else {
             throw new MetadataNotFoundException("Malform UUID in request: " + uuid);
         }
     }
-
     /**
      * Summarize the data by counting the number if all the concerned fields are the same, merge data with
      * existing map. That is count will be added for same CloudOptimizedEntry
