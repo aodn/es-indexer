@@ -95,7 +95,7 @@ class SearchSuggestionsModelTest {
         assertNull(m.getPlatformVocabs());
         assertNull(m.getOrganisationVocabs());
     }
-    
+
     @Test
     void serialize_flatShape_nullsSuppressed() throws Exception {
         SearchSuggestionsModel m = SearchSuggestionsModel.builder()
