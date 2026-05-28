@@ -8,16 +8,16 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-// Standalone on purpose — Citation is the one model not reachable through
+// Standalone on purpose — CitationModel is the one model not reachable through
 // StacCollectionModel's full-document roundtrip. On the wire, sci:citation is
-// stored as a double-encoded JSON string so StacCollectionModel.citation is `String`, not `Citation`.
-class CitationTest {
+// stored as a double-encoded JSON string so StacCollectionModel.citation is `String`, not `CitationModel`.
+class CitationModelTest {
 
     private final ObjectMapper mapper = new ObjectMapper();
 
     @Test
     void roundtrip_preservesFields() throws Exception {
-        Citation original = Citation.builder()
+        CitationModel original = CitationModel.builder()
                 .suggestedCitation(
                         "IMOS [year-of-data-download], [Title], [data-access-URL], "
                                 + "accessed [date-of-access].")
@@ -30,7 +30,7 @@ class CitationTest {
                 .build();
 
         String json = mapper.writeValueAsString(original);
-        Citation parsed = mapper.readValue(json, Citation.class);
+        CitationModel parsed = mapper.readValue(json, CitationModel.class);
 
         assertEquals(original, parsed);
     }

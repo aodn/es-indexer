@@ -242,7 +242,7 @@ public abstract class StacCollectionMapperService {
     String mapCitation(MDMetadataType source) {
 
         List<MDDataIdentificationType> items = MapperUtils.findMDDataIdentificationType(source);
-        var citation = Citation.builder().build();
+        var citation = CitationModel.builder().build();
         if(items.isEmpty()) {
             return JsonUtil.toJsonString(citation);
         }
