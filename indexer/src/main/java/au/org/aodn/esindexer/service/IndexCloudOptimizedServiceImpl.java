@@ -68,15 +68,17 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
     }
 
     @Override
-    public List<BulkResponse> indexAllCloudOptimizedData(String beginWithUuid, IndexService.Callback callback) {
+    public List<BulkResponse> indexAllCloudOptimizedData(String beginWithUuid, int maxWaitRetry, IndexService.Callback callback) {
 
-        // Verify if data access service is up or not, it may be down during processing but we have retry
-        DataAccessService.HealthStatus status = dataAccessService.getHealthStatus();
-        List<BulkResponse> results = new ArrayList<>();
+        // Wait for depends on service to be up, in batch env, this is not really safe because one instance up do not
+        // mean all depend service is up, so this only works in env not batch.
+        DataAccessService.HealthStatus status = dataAccessService.waitTillServiceUp(maxWaitRetry);
         if(status != DataAccessService.HealthStatus.UP) {
-            callback.onComplete(String.format("Data Access Service status %s is not UP, please retry later", status.toString()));
+            callback.onComplete(String.format("Data Access Service status %s is not UP after %s retry, process give up", status, maxWaitRetry));
+            return null;
         }
         else {
+            List<BulkResponse> results = new ArrayList<>();
             Map<String, Map<String, MetadataEntity>> entities = dataAccessService.getAllMetadata();
             List<String> sorted = entities.keySet().stream()
                     .sorted()
@@ -125,8 +127,8 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
                     }
                 }
             }
+            return results;
         }
-        return results;
     }
 
     /**

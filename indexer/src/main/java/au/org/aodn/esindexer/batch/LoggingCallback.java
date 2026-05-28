@@ -3,20 +3,23 @@ package au.org.aodn.esindexer.batch;
 import au.org.aodn.esindexer.service.IndexService;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * Need to use info status otherise the batch job will not print anything
+ */
 @Slf4j
 public class LoggingCallback implements IndexService.Callback {
     @Override
     public void onProgress(Object update) {
-        log.debug("Progress: {}", update);
+        log.info("Progress: {}", update);
     }
 
     @Override
     public void onComplete(Object result) {
-        log.debug("Completed: {}", result);
+        log.info("Completed: {}", result);
     }
 
     @Override
     public void onError(Throwable throwable) {
-        log.error("Error: {}", throwable.getMessage(), throwable);
+        log.info("Error: {}", throwable.getMessage(), throwable);
     }
 }
