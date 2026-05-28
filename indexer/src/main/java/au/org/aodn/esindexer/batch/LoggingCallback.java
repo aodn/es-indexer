@@ -3,6 +3,9 @@ package au.org.aodn.esindexer.batch;
 import au.org.aodn.esindexer.service.IndexService;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * Need to use info status otherise the batch job will not print anything
+ */
 @Slf4j
 public class LoggingCallback implements IndexService.Callback {
     @Override

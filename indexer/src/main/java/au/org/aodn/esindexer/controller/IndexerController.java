@@ -88,16 +88,16 @@ public class IndexerController {
 
     /**
      * index all metadata records in aws batch, it is to prevent aws to gracefully shutdown ecs instance and cause some unexpected issues.
-     * @param confirm
-     * @param beginWithUuid
-     * @return
-     * @throws IOException
+     * @param confirm - Must set to true to begin a load
+     * @param beginWithUuid - You want to start load from a particular uuid, it is useful for resume previous incomplete
+     * @return - The job result
+     * @throws IOException - Any failure during reload, it is the caller to handle the error
      */
     @PostMapping(path="/allinbatch", consumes = "application/json", produces = "application/json")
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Index all metadata records from GeoNetwork in aws batch")
     public ResponseEntity<String> indexAllMetadataRecordsInBatch(
             @RequestParam(value = "confirm", defaultValue = "false") Boolean confirm,
-            @RequestParam(value = "beginWithUuid", required=false) String beginWithUuid) throws IOException {
+            @RequestParam(value = "beginWithUuid", required=false) String beginWithUuid) {
 
         if (!confirm) {
             return ResponseEntity.badRequest().body("You must set confirm to true to really index all metadata records in batch");
@@ -168,7 +168,7 @@ public class IndexerController {
 
         new Thread(() -> {
             try {
-                indexCloudOptimizedData.indexAllCloudOptimizedData(beginWithUuid, callback);
+                indexCloudOptimizedData.indexAllCloudOptimizedData(beginWithUuid, 1, callback);
             }
             catch (Exception ioe) {
                 callback.onError(ioe);

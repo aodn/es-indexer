@@ -104,11 +104,11 @@ public abstract class StacCollectionMapperService {
     }
 
     @Named("mapExtentTemporal")
-    List<String[]> mapExtentTemporal(MDMetadataType source) {
+    List<List<String>> mapExtentTemporal(MDMetadataType source) {
         return TemporalUtils.concatOverallTemporalRange(createExtentTemporal(source));
     }
 
-    List<String[]> createExtentTemporal(MDMetadataType source) {
+    List<List<String>> createExtentTemporal(MDMetadataType source) {
 
         List<MDDataIdentificationType> items = MapperUtils.findMDDataIdentificationType(source);
         // Primary: MDDataIdentification; Fallback: SVServiceIdentification (e.g. GA records)
@@ -125,7 +125,7 @@ public abstract class StacCollectionMapperService {
             }
         }
 
-        List<String[]> result = new ArrayList<>();
+        List<List<String>> result = new ArrayList<>();
         for (AbstractMDIdentificationType item : identifications) {
             item.getExtent().forEach(extent -> {
                 if (!(extent.getAbstractExtent().getValue() instanceof EXExtentType exExtentType)) {
@@ -133,9 +133,9 @@ public abstract class StacCollectionMapperService {
                 }
 
                 exExtentType.getTemporalElement().forEach(temporalElement -> {
-                    String[] temporalPair = new String[2];
-                    temporalPair[0] = null;
-                    temporalPair[1] = null;
+                    List<String> temporalPair = new ArrayList<>(2);
+                    temporalPair.add(null);
+                    temporalPair.add(null);
                     var abstractTimePrimitive = safeGet(() ->
                             temporalElement.getEXTemporalExtent().getValue().getExtent().getAbstractTimePrimitive().getValue())
                             .orElse(null);
@@ -145,13 +145,13 @@ public abstract class StacCollectionMapperService {
                         if (pair0.isEmpty()) {
                             pair0 = safeGet(() -> timePeriodType.getBeginPosition().getValue().get(0));
                         }
-                        pair0.ifPresent(pair -> temporalPair[0] = convertDateToZonedDateTime(CommonUtils.getUUID(source), pair, true));
+                        pair0.ifPresent(pair -> temporalPair.set(0, convertDateToZonedDateTime(CommonUtils.getUUID(source), pair, true)));
 
                         var pair1 = safeGet(() -> timePeriodType.getEnd().getTimeInstant().getTimePosition().getValue().get(0));
                         if (pair1.isEmpty()) {
                             pair1 = safeGet(() -> timePeriodType.getEndPosition().getValue().get(0));
                         }
-                        pair1.ifPresent(pair -> temporalPair[1] = convertDateToZonedDateTime(CommonUtils.getUUID(source), pair, false));
+                        pair1.ifPresent(pair -> temporalPair.set(1, convertDateToZonedDateTime(CommonUtils.getUUID(source), pair, false)));
                     }
 
                     result.add(temporalPair);
@@ -242,7 +242,7 @@ public abstract class StacCollectionMapperService {
     String mapCitation(MDMetadataType source) {
 
         List<MDDataIdentificationType> items = MapperUtils.findMDDataIdentificationType(source);
-        var citation = Citation.builder().build();
+        var citation = CitationModel.builder().build();
         if(items.isEmpty()) {
             return JsonUtil.toJsonString(citation);
         }
@@ -452,13 +452,13 @@ public abstract class StacCollectionMapperService {
     @Named("mapSummaries.temporal")
     List<Map<String,String>> mapSummariesTemporal(MDMetadataType source) {
         List<Map<String,String>> result = new ArrayList<>();
-        List<String[]> temp = createExtentTemporal(source);
+        List<List<String>> temp = createExtentTemporal(source);
 
         if (temp != null) {
-            for (String[] t : temp) {
+            for (List<String> t : temp) {
                 Map<String, String> temporal = new HashMap<>();
-                temporal.put("start", t[0]);
-                temporal.put("end", t[1]);
+                temporal.put("start", t.get(0));
+                temporal.put("end", t.get(1));
 
                 result.add(temporal);
             }

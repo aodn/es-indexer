@@ -57,10 +57,10 @@
     "position" : "Director Coastal Information (Coastal Infrastructure)",
     "emails" : [ "cdc@transport.wa.gov.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "1 Essex Street" ],
+      "delivery_point" : [ "1 Essex Street" ],
       "city" : "Fremantle",
-      "postalCode" : "6160",
-      "administrativeArea" : "WA"
+      "postal_code" : "6160",
+      "administrative_area" : "WA"
     } ]
   }, {
     "roles" : [ "custodian", "metadata" ],
@@ -74,10 +74,10 @@
     "position" : "Director Coastal Information (Coastal Infrastructure)",
     "emails" : [ "cdc@transport.wa.gov.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "1 Essex Street" ],
+      "delivery_point" : [ "1 Essex Street" ],
       "city" : "Fremantle",
-      "postalCode" : "6160",
-      "administrativeArea" : "WA"
+      "postal_code" : "6160",
+      "administrative_area" : "WA"
     } ]
   } ],
   "languages" : [ {

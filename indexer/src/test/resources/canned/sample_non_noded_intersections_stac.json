@@ -57,10 +57,10 @@
     "position" : "Principal Research Scientist",
     "emails" : [ "scott.condie@csiro.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "GPO BOX 1538" ],
+      "delivery_point" : [ "GPO BOX 1538" ],
       "city" : "Hobart",
       "country" : "Australia",
-      "administrativeArea" : "Tasmania"
+      "administrative_area" : "Tasmania"
     } ],
     "phones" : [ {
       "roles" : [ "voice" ],
@@ -80,11 +80,11 @@
     "name" : "eAtlas Data Manager",
     "emails" : [ "e-atlas@aims.gov.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],
+      "delivery_point" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],
       "city" : "Townsville",
       "country" : "Australia",
-      "postalCode" : "4810",
-      "administrativeArea" : "Queensland"
+      "postal_code" : "4810",
+      "administrative_area" : "Queensland"
     } ],
     "phones" : [ {
       "roles" : [ "voice" ],
@@ -105,11 +105,11 @@
     "position" : "Research Scientist",
     "emails" : [ "lisa-ann.gershwin@csiro.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "+61 3 6232 5222" ],
+      "delivery_point" : [ "+61 3 6232 5222" ],
       "city" : "GPO BOX 1538",
       "country" : "Australia",
-      "postalCode" : "Tasmania",
-      "administrativeArea" : "Hobart"
+      "postal_code" : "Tasmania",
+      "administrative_area" : "Hobart"
     } ],
     "phones" : [ {
       "roles" : [ "voice" ],
@@ -125,10 +125,10 @@
     "position" : "Research Officer",
     "emails" : [ "linda.thomas@csiro.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "GPO BOX 1538" ],
+      "delivery_point" : [ "GPO BOX 1538" ],
       "city" : "Hobart",
       "country" : "Australia",
-      "administrativeArea" : "Tasmania"
+      "administrative_area" : "Tasmania"
     } ],
     "phones" : [ {
       "roles" : [ "voice" ],
@@ -144,10 +144,10 @@
     "position" : "Principal Research Scientist",
     "emails" : [ "scott.condie@csiro.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "GPO BOX 1538" ],
+      "delivery_point" : [ "GPO BOX 1538" ],
       "city" : "Hobart",
       "country" : "Australia",
-      "administrativeArea" : "Tasmania"
+      "administrative_area" : "Tasmania"
     } ],
     "phones" : [ {
       "roles" : [ "voice" ],
@@ -165,8 +165,8 @@
     "addresses" : [ {
       "city" : "Dutton Park",
       "country" : "Australia",
-      "postalCode" : "4067",
-      "administrativeArea" : "Brisbane"
+      "postal_code" : "4067",
+      "administrative_area" : "Brisbane"
     } ],
     "phones" : [ {
       "roles" : [ "voice" ],

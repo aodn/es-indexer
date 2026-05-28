@@ -285,11 +285,11 @@
     "name" : "Trull, Tom W.",
     "emails" : [ "Tom.Trull@csiro.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "GPO Box 1538" ],
+      "delivery_point" : [ "GPO Box 1538" ],
       "city" : "Hobart",
       "country" : "Australia",
-      "postalCode" : "7005",
-      "administrativeArea" : "Tasmania"
+      "postal_code" : "7005",
+      "administrative_area" : "Tasmania"
     } ]
   }, {
     "roles" : [ "principalInvestigator", "about" ],
@@ -297,11 +297,11 @@
     "name" : "Strutton, Peter",
     "emails" : [ "Pete.Strutton@utas.edu.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "IMAS - Hobart", "Private Bag 129" ],
+      "delivery_point" : [ "IMAS - Hobart", "Private Bag 129" ],
       "city" : "Hobart",
       "country" : "Australia",
-      "postalCode" : "7001",
-      "administrativeArea" : "Tasmania"
+      "postal_code" : "7001",
+      "administrative_area" : "Tasmania"
     } ]
   }, {
     "roles" : [ "distributor", "metadata" ],
@@ -309,11 +309,11 @@
     "position" : "Data Officer",
     "emails" : [ "info@aodn.org.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "University of Tasmania", "Private Bag 110" ],
+      "delivery_point" : [ "University of Tasmania", "Private Bag 110" ],
       "city" : "Hobart",
       "country" : "Australia",
-      "postalCode" : "7001",
-      "administrativeArea" : "Tasmania"
+      "postal_code" : "7001",
+      "administrative_area" : "Tasmania"
     } ],
     "phones" : [ {
       "roles" : [ "voice" ],
@@ -332,11 +332,11 @@
     "organization" : "Integrated Marine Observing System (IMOS)",
     "emails" : [ "imos@imos.org.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "University of Tasmania", "Private Bag 110" ],
+      "delivery_point" : [ "University of Tasmania", "Private Bag 110" ],
       "city" : "Hobart",
       "country" : "Australia",
-      "postalCode" : "7001",
-      "administrativeArea" : "Tasmania"
+      "postal_code" : "7001",
+      "administrative_area" : "Tasmania"
     } ],
     "phones" : [ {
       "roles" : [ "voice" ],

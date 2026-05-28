@@ -46,11 +46,11 @@
     "position" : "Data Officer",
     "emails" : [ "info@aodn.org.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "University of Tasmania", "Private Bag 110" ],
+      "delivery_point" : [ "University of Tasmania", "Private Bag 110" ],
       "city" : "Hobart",
       "country" : "Australia",
-      "postalCode" : "7001",
-      "administrativeArea" : "Tasmania"
+      "postal_code" : "7001",
+      "administrative_area" : "Tasmania"
     } ],
     "phones" : [ {
       "roles" : [ "voice" ],
@@ -70,11 +70,11 @@
     "position" : "Data Officer",
     "emails" : [ "info@aodn.org.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "University of Tasmania", "Private Bag 110" ],
+      "delivery_point" : [ "University of Tasmania", "Private Bag 110" ],
       "city" : "Hobart",
       "country" : "Australia",
-      "postalCode" : "7001",
-      "administrativeArea" : "Tasmania"
+      "postal_code" : "7001",
+      "administrative_area" : "Tasmania"
     } ],
     "phones" : [ {
       "roles" : [ "voice" ],
@@ -93,11 +93,11 @@
     "organization" : "Integrated Marine Observing System (IMOS)",
     "emails" : [ "imos@imos.org.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "Private Bag 110" ],
+      "delivery_point" : [ "Private Bag 110" ],
       "city" : "Hobart",
       "country" : "Australia",
-      "postalCode" : "7001",
-      "administrativeArea" : "Tasmania"
+      "postal_code" : "7001",
+      "administrative_area" : "Tasmania"
     } ],
     "phones" : [ {
       "roles" : [ "voice" ],

@@ -53,11 +53,11 @@
     "name" : "Lenton, Andrew",
     "emails" : [ "Andrew.Lenton@csiro.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "GPO Box 1538" ],
+      "delivery_point" : [ "GPO Box 1538" ],
       "city" : "Hobart",
       "country" : "Australia",
-      "postalCode" : "7000",
-      "administrativeArea" : "Tasmania"
+      "postal_code" : "7000",
+      "administrative_area" : "Tasmania"
     } ]
   }, {
     "roles" : [ "pointOfContact", "about" ],
@@ -65,11 +65,11 @@
     "position" : "Data Officer",
     "emails" : [ "info@aodn.org.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "University of Tasmania", "Private Bag 110" ],
+      "delivery_point" : [ "University of Tasmania", "Private Bag 110" ],
       "city" : "Hobart",
       "country" : "Australia",
-      "postalCode" : "7001",
-      "administrativeArea" : "Tasmania"
+      "postal_code" : "7001",
+      "administrative_area" : "Tasmania"
     } ],
     "phones" : [ {
       "roles" : [ "voice" ],
@@ -89,11 +89,11 @@
     "position" : "Data Officer",
     "emails" : [ "info@aodn.org.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "University of Tasmania", "Private Bag 110" ],
+      "delivery_point" : [ "University of Tasmania", "Private Bag 110" ],
       "city" : "Hobart",
       "country" : "Australia",
-      "postalCode" : "7001",
-      "administrativeArea" : "Tasmania"
+      "postal_code" : "7001",
+      "administrative_area" : "Tasmania"
     } ],
     "phones" : [ {
       "roles" : [ "voice" ],
@@ -113,11 +113,11 @@
     "name" : "Lenton, Andrew",
     "emails" : [ "Andrew.Lenton@csiro.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "GPO Box 1538" ],
+      "delivery_point" : [ "GPO Box 1538" ],
       "city" : "Hobart",
       "country" : "Australia",
-      "postalCode" : "7000",
-      "administrativeArea" : "Tasmania"
+      "postal_code" : "7000",
+      "administrative_area" : "Tasmania"
     } ],
     "links" : [ {
       "href" : "http://www.csiro.au/en/Research/OandA",
@@ -130,11 +130,11 @@
     "name" : "Tilbrook, Bronte",
     "emails" : [ "Bronte.Tilbrook@csiro.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "GPO Box 1538" ],
+      "delivery_point" : [ "GPO Box 1538" ],
       "city" : "Hobart",
       "country" : "Australia",
-      "postalCode" : "7000",
-      "administrativeArea" : "Tasmania"
+      "postal_code" : "7000",
+      "administrative_area" : "Tasmania"
     } ],
     "links" : [ {
       "href" : "http://www.csiro.au/en/Research/OandA",
@@ -147,11 +147,11 @@
     "name" : "Matear, Richard",
     "emails" : [ "Richard.Matear@csiro.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "GPO Box 1538" ],
+      "delivery_point" : [ "GPO Box 1538" ],
       "city" : "Hobart",
       "country" : "Australia",
-      "postalCode" : "7000",
-      "administrativeArea" : "Tasmania"
+      "postal_code" : "7000",
+      "administrative_area" : "Tasmania"
     } ],
     "links" : [ {
       "href" : "http://www.csiro.au/en/Research/OandA",
@@ -164,11 +164,11 @@
     "name" : "Sasse, Tristan",
     "emails" : [ "t.sasse@unsw.edu.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "Level 4, Mathews Building", "University of New South Wales" ],
+      "delivery_point" : [ "Level 4, Mathews Building", "University of New South Wales" ],
       "city" : "Sydney",
       "country" : "Australia",
-      "postalCode" : "2052",
-      "administrativeArea" : "New South Wales"
+      "postal_code" : "2052",
+      "administrative_area" : "New South Wales"
     } ]
   }, {
     "roles" : [ "collaborator", "citation" ],
@@ -176,11 +176,11 @@
     "name" : "Nojiri, Yukihiro",
     "emails" : [ "nojiri@nies.go.jp" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "16-2 Onogawa" ],
+      "delivery_point" : [ "16-2 Onogawa" ],
       "city" : "Tsukuba",
       "country" : "Japan",
-      "postalCode" : "305-0053",
-      "administrativeArea" : "Ibaraki Prefecture"
+      "postal_code" : "305-0053",
+      "administrative_area" : "Ibaraki Prefecture"
     } ]
   } ],
   "languages" : [ {

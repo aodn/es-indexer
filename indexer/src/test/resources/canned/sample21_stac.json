@@ -156,13 +156,13 @@
       ],
       "addresses": [
         {
-          "deliveryPoint": [
+          "delivery_point": [
             "Private Bag 129"
           ],
           "city": "Hobart",
           "country": "Australia",
-          "postalCode": "7001",
-          "administrativeArea": "Tasmania"
+          "postal_code": "7001",
+          "administrative_area": "Tasmania"
         }
       ]
     },
@@ -178,13 +178,13 @@
       ],
       "addresses": [
         {
-          "deliveryPoint": [
+          "delivery_point": [
             "The Wharf, 123 Parkyn Parade"
           ],
           "city": "Mooloolaba",
           "country": "Australia",
-          "postalCode": "4557",
-          "administrativeArea": "Queensland"
+          "postal_code": "4557",
+          "administrative_area": "Queensland"
         }
       ]
     }

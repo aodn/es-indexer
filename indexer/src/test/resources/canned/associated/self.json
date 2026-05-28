@@ -52,11 +52,11 @@
     "position" : "Data Officer",
     "emails" : [ "info@aodn.org.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "University of Tasmania", "Private Bag 110" ],
+      "delivery_point" : [ "University of Tasmania", "Private Bag 110" ],
       "city" : "Hobart",
       "country" : "Australia",
-      "postalCode" : "7001",
-      "administrativeArea" : "Tasmania"
+      "postal_code" : "7001",
+      "administrative_area" : "Tasmania"
     } ],
     "phones" : [ {
       "roles" : [ "voice" ],
@@ -77,11 +77,11 @@
     "position" : "Animal Tracking Facility Leader",
     "emails" : [ "robert.harcourt@mq.edu.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "Marine Predator Research Group", "Department of Biological Sciences, Macquarie University", "North Ryde" ],
+      "delivery_point" : [ "Marine Predator Research Group", "Department of Biological Sciences, Macquarie University", "North Ryde" ],
       "city" : "Sydney",
       "country" : "Australia",
-      "postalCode" : "2109",
-      "administrativeArea" : "New South Wales"
+      "postal_code" : "2109",
+      "administrative_area" : "New South Wales"
     } ],
     "links" : [ {
       "href" : "http://web.science.mq.edu.au/directory/listing/person.htm?id=rharcour",
@@ -94,11 +94,11 @@
     "position" : "Data Officer",
     "emails" : [ "info@aodn.org.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "University of Tasmania", "Private Bag 110" ],
+      "delivery_point" : [ "University of Tasmania", "Private Bag 110" ],
       "city" : "Hobart",
       "country" : "Australia",
-      "postalCode" : "7001",
-      "administrativeArea" : "Tasmania"
+      "postal_code" : "7001",
+      "administrative_area" : "Tasmania"
     } ],
     "phones" : [ {
       "roles" : [ "voice" ],
@@ -117,11 +117,11 @@
     "organization" : "Integrated Marine Observing System (IMOS)",
     "emails" : [ "imos@imos.org.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "Private Bag 110" ],
+      "delivery_point" : [ "Private Bag 110" ],
       "city" : "Hobart",
       "country" : "Australia",
-      "postalCode" : "7001",
-      "administrativeArea" : "Tasmania"
+      "postal_code" : "7001",
+      "administrative_area" : "Tasmania"
     } ],
     "phones" : [ {
       "roles" : [ "voice" ],

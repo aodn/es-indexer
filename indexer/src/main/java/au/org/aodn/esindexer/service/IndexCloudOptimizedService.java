@@ -12,5 +12,5 @@ public interface IndexCloudOptimizedService extends IndexService {
     boolean hasIndex(String collectionId);
     String getHitId(String collectionId);
     List<BulkResponse> indexCloudOptimizedData(MetadataEntity entity, LocalDate startDate, LocalDate endDate, IndexService.Callback callback) throws IOException;
-    List<BulkResponse> indexAllCloudOptimizedData(String beginWithUuid, IndexService.Callback callback) throws IOException;
+    List<BulkResponse> indexAllCloudOptimizedData(String beginWithUuid, int maxWaitRetry, IndexService.Callback callback) throws IOException;
 }

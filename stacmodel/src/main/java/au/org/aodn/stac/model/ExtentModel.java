@@ -1,13 +1,17 @@
 package au.org.aodn.stac.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ExtentModel {
     /**
      * https://github.com/radiantearth/stac-spec/blob/master/collection-spec/collection-spec.md#temporal-extent-object
@@ -47,5 +51,5 @@ public class ExtentModel {
      * Timestamps consist of a date and time in UTC and MUST be formatted according to RFC 3339, section 5.6.
      * The temporal reference system is the Gregorian calendar.
      */
-    protected List<String[]> temporal;
+    protected List<List<String>> temporal;
 }

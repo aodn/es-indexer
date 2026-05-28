@@ -89,8 +89,8 @@
     "addresses" : [ {
       "city" : "Hobart",
       "country" : "Australia",
-      "postalCode" : "7001",
-      "administrativeArea" : "TAS"
+      "postal_code" : "7001",
+      "administrative_area" : "TAS"
     } ],
     "links" : [ {
       "href" : "https://orcid.org/0000-0002-6495-5813",
@@ -103,11 +103,11 @@
     "position" : "Data Officer",
     "emails" : [ "IMAS.DataManager@utas.edu.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "Institute for Marine and Antarctic Studies", "Private Bag 129" ],
+      "delivery_point" : [ "Institute for Marine and Antarctic Studies", "Private Bag 129" ],
       "city" : "Hobart",
       "country" : "Australia",
-      "postalCode" : "7001",
-      "administrativeArea" : "Tasmania"
+      "postal_code" : "7001",
+      "administrative_area" : "Tasmania"
     } ],
     "links" : [ {
       "href" : "https://imas.utas.edu.au",
@@ -119,11 +119,11 @@
     "organization" : "Institute for Marine and Antarctic Studies (IMAS)",
     "emails" : [ "IMAS.DataManager@utas.edu.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "Private Bag 129" ],
+      "delivery_point" : [ "Private Bag 129" ],
       "city" : "Hobart",
       "country" : "Australia",
-      "postalCode" : "7001",
-      "administrativeArea" : "Tasmania"
+      "postal_code" : "7001",
+      "administrative_area" : "Tasmania"
     } ]
   }, {
     "roles" : [ "principalInvestigator", "citation" ],
@@ -131,11 +131,11 @@
     "name" : "Asimus, Jeremy",
     "emails" : [ "jeremy.asimus@utas.edu.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "Private Bag 129" ],
+      "delivery_point" : [ "Private Bag 129" ],
       "city" : "Hobart",
       "country" : "Australia",
-      "postalCode" : "7001",
-      "administrativeArea" : "TAS"
+      "postal_code" : "7001",
+      "administrative_area" : "TAS"
     } ],
     "links" : [ {
       "href" : "https://orcid.org/0000-0002-6495-5813",
@@ -148,11 +148,11 @@
     "name" : "Halpin, Jacqueline",
     "emails" : [ "jacqueline.halpin@utas.edu.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "Private Bag 129" ],
+      "delivery_point" : [ "Private Bag 129" ],
       "city" : "Hobart",
       "country" : "Australia",
-      "postalCode" : "7001",
-      "administrativeArea" : "TAS"
+      "postal_code" : "7001",
+      "administrative_area" : "TAS"
     } ],
     "links" : [ {
       "href" : "https://orcid.org/0000-0002-4992-8681",

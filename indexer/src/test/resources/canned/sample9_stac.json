@@ -51,11 +51,11 @@
     "name" : "Quigley, KM",
     "emails" : [ "reception@aims.gov.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],
+      "delivery_point" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],
       "city" : "TOWNSVILLE",
       "country" : "Australia",
-      "postalCode" : "4810",
-      "administrativeArea" : "Queensland"
+      "postal_code" : "4810",
+      "administrative_area" : "Queensland"
     } ],
     "phones" : [ {
       "roles" : [ "voice" ],
@@ -75,11 +75,11 @@
     "name" : "AIMS Data Centre",
     "emails" : [ "adc@aims.gov.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],
+      "delivery_point" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],
       "city" : "TOWNSVILLE",
       "country" : "Australia",
-      "postalCode" : "4810",
-      "administrativeArea" : "Queensland"
+      "postal_code" : "4810",
+      "administrative_area" : "Queensland"
     } ],
     "phones" : [ {
       "roles" : [ "voice" ],
@@ -99,11 +99,11 @@
     "position" : "AIMS Data Centre",
     "emails" : [ "adc@aims.gov.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "PRIVATE MAIL BAG 3" ],
+      "delivery_point" : [ "PRIVATE MAIL BAG 3" ],
       "city" : "TOWNSVILLE MAIL CENTRE",
       "country" : "Australia",
-      "postalCode" : "4810",
-      "administrativeArea" : "Queensland"
+      "postal_code" : "4810",
+      "administrative_area" : "Queensland"
     } ],
     "phones" : [ {
       "roles" : [ "voice" ],
@@ -121,11 +121,11 @@
     "organization" : "Australian Institute of Marine Science (AIMS)",
     "emails" : [ "reception@aims.gov.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],
+      "delivery_point" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],
       "city" : "TOWNSVILLE",
       "country" : "Australia",
-      "postalCode" : "4810",
-      "administrativeArea" : "Queensland"
+      "postal_code" : "4810",
+      "administrative_area" : "Queensland"
     } ],
     "phones" : [ {
       "roles" : [ "voice" ],
@@ -144,11 +144,11 @@
     "organization" : "Australian Institute of Marine Science (AIMS)",
     "emails" : [ "reception@aims.gov.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],
+      "delivery_point" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],
       "city" : "TOWNSVILLE",
       "country" : "Australia",
-      "postalCode" : "4810",
-      "administrativeArea" : "Queensland"
+      "postal_code" : "4810",
+      "administrative_area" : "Queensland"
     } ],
     "phones" : [ {
       "roles" : [ "voice" ],

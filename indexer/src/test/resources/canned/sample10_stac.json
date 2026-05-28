@@ -183,11 +183,11 @@
     "position" : "Data Officer",
     "emails" : [ "info@aodn.org.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "University of Tasmania", "Private Bag 110" ],
+      "delivery_point" : [ "University of Tasmania", "Private Bag 110" ],
       "city" : "Hobart",
       "country" : "Australia",
-      "postalCode" : "7001",
-      "administrativeArea" : "Tasmania"
+      "postal_code" : "7001",
+      "administrative_area" : "Tasmania"
     } ],
     "phones" : [ {
       "roles" : [ "voice" ],
@@ -207,11 +207,11 @@
     "name" : "Cahill, Madeleine",
     "emails" : [ "m.cahill@aims.gov.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "PMB No. 3, Townsville Mail Centre" ],
+      "delivery_point" : [ "PMB No. 3, Townsville Mail Centre" ],
       "city" : "Townsville",
       "country" : "Australia",
-      "postalCode" : "4810",
-      "administrativeArea" : "Queensland"
+      "postal_code" : "4810",
+      "administrative_area" : "Queensland"
     } ],
     "links" : [ {
       "href" : "http://imos.org.au/nationalmooringnetwork.html",
@@ -224,11 +224,11 @@
     "position" : "Data Officer",
     "emails" : [ "info@aodn.org.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "University of Tasmania", "Private Bag 110" ],
+      "delivery_point" : [ "University of Tasmania", "Private Bag 110" ],
       "city" : "Hobart",
       "country" : "Australia",
-      "postalCode" : "7001",
-      "administrativeArea" : "Tasmania"
+      "postal_code" : "7001",
+      "administrative_area" : "Tasmania"
     } ],
     "phones" : [ {
       "roles" : [ "voice" ],
@@ -247,11 +247,11 @@
     "organization" : "Integrated Marine Observing System (IMOS)",
     "emails" : [ "imos@imos.org.au" ],
     "addresses" : [ {
-      "deliveryPoint" : [ "Private Bag 110" ],
+      "delivery_point" : [ "Private Bag 110" ],
       "city" : "Hobart",
       "country" : "Australia",
-      "postalCode" : "7001",
-      "administrativeArea" : "Tasmania"
+      "postal_code" : "7001",
+      "administrative_area" : "Tasmania"
     } ],
     "phones" : [ {
       "roles" : [ "voice" ],
