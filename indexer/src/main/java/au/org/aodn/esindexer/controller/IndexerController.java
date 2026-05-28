@@ -168,7 +168,7 @@ public class IndexerController {
 
         new Thread(() -> {
             try {
-                indexCloudOptimizedData.indexAllCloudOptimizedData(beginWithUuid, 1, callback);
+                indexCloudOptimizedData.indexAllCloudOptimizedData(beginWithUuid, callback);
             }
             catch (Exception ioe) {
                 callback.onError(ioe);

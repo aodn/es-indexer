@@ -38,7 +38,6 @@ public class DataAccessServiceImpl implements DataAccessService {
     protected final RestTemplate restTemplate;
     protected final WebClient webClient;
     protected final ObjectMapper objectMapper;
-    protected final Random random = new Random();
 
     private final static int MAX_RETRY_ATTEMPT = 100;  //times
     private final static int RETRY_DELAY_SECOND = 10; // second
@@ -135,7 +134,6 @@ public class DataAccessServiceImpl implements DataAccessService {
             return null;
         }
     }
-
 
     @Override
     @Retryable(
