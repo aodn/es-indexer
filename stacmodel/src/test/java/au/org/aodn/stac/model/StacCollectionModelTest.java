@@ -256,7 +256,7 @@ class StacCollectionModelTest {
                 .build();
 
         SearchSuggestionsModel suggestions = SearchSuggestionsModel.builder()
-                .abstractPhrases(java.util.Set.of("ocean current velocity time-series"))
+                .abstractPhrases(List.of("ocean current velocity time-series"))
                 .build();
 
         StacCollectionModel original = StacCollectionModel.builder()
