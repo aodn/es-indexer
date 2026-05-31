@@ -191,6 +191,27 @@ public class IndexerServiceIT extends BaseTestClass {
         }
     }
 
+    /** After indexAll, the index exposes acronym_search_analyser (the analyzer used to expand acronym queries). */
+    @Test
+    public void verifyAcronymSearchAnalyserAvailableOnIndex() throws IOException {
+        var uuid = "7709f541-fc0c-4318-b5b9-9053aa474e0e";
+        try {
+            insertMetadataRecords(uuid, "classpath:canned/sample4.xml");
+            indexerService.indexAllMetadataRecordsFromGeoNetwork(null, true, null);
+
+            var resp = client.indices().analyze(a -> a
+                    .index(INDEX_NAME)
+                    .analyzer("acronym_search_analyser")
+                    .text("nrmn"));
+
+            Assertions.assertNotNull(resp.tokens(), "acronym_search_analyser should be callable on the index");
+            Assertions.assertFalse(resp.tokens().isEmpty(), "Analyzer should produce at least one token");
+        } finally {
+            clearElasticIndex(INDEX_NAME);
+            deleteRecord(uuid);
+        }
+    }
+
     /**
      * Test that running index is preserved when indexing fails midway,
      * allowing resume with beginWithUuid parameter.
