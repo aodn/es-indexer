@@ -212,6 +212,24 @@ public class IndexerServiceIT extends BaseTestClass {
         }
     }
 
+    /** After indexAll, the portal-acronyms synonyms set is populated from the dictionary file. */
+    @Test
+    public void verifyPortalAcronymsSynonymsSetIsPopulatedAfterIndexAll() throws IOException {
+        var uuid = "7709f541-fc0c-4318-b5b9-9053aa474e0e";
+        try {
+            insertMetadataRecords(uuid, "classpath:canned/sample4.xml");
+            indexerService.indexAllMetadataRecordsFromGeoNetwork(null, true, null);
+
+            var resp = client.synonyms().getSynonym(s -> s.id("portal-acronyms"));
+
+            Assertions.assertTrue(resp.count() > 0,
+                    "portal-acronyms synonyms set should contain rules after indexAll");
+        } finally {
+            clearElasticIndex(INDEX_NAME);
+            deleteRecord(uuid);
+        }
+    }
+
     /**
      * Test that running index is preserved when indexing fails midway,
      * allowing resume with beginWithUuid parameter.
