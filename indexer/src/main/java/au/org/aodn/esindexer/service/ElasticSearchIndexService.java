@@ -14,13 +14,17 @@ import co.elastic.clients.elasticsearch.core.SearchRequest;
 import co.elastic.clients.elasticsearch.indices.CreateIndexRequest;
 import co.elastic.clients.elasticsearch.indices.CreateIndexResponse;
 import co.elastic.clients.elasticsearch.indices.GetAliasResponse;
+import co.elastic.clients.elasticsearch.synonyms.SynonymRule;
 import co.elastic.clients.transport.endpoints.BooleanResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -96,6 +100,36 @@ public class ElasticSearchIndexService {
         catch (ElasticsearchException | IOException e) {
             log.error("Failed to create index: {} | {}", indexName, e.getMessage());
             throw new CreateIndexException("Failed to elastic index from schema file: " + indexName + " | " + e.getMessage());
+        }
+    }
+
+    /** Replaces the named ES synonyms set with the rules read from a classpath file. */
+    public void replaceSynonymSetFromFile(String synonymSetName, String classpathFileName) {
+        try (InputStream inputStream = getClass().getResourceAsStream("/" + classpathFileName)) {
+            if (inputStream == null) {
+                log.warn("Synonyms file not found on classpath, skipping update: {}", classpathFileName);
+                return;
+            }
+
+            List<SynonymRule> synonymRules = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))
+                    .lines()
+                    .map(String::trim)
+                    .filter(line -> !line.isEmpty() && !line.startsWith("#"))
+                    .map(line -> SynonymRule.of(r -> r.synonyms(line)))
+                    .collect(Collectors.toList());
+
+            if (synonymRules.isEmpty()) {
+                log.warn("Synonyms file '{}' has no rules, skipping update of set '{}'", classpathFileName, synonymSetName);
+                return;
+            }
+
+            portalElasticsearchClient.synonyms().putSynonym(builder -> builder
+                    .id(synonymSetName)
+                    .synonymsSet(synonymRules)
+            );
+            log.info("Replaced synonyms set '{}' with {} rules from '{}'", synonymSetName, synonymRules.size(), classpathFileName);
+        } catch (ElasticsearchException | IOException e) {
+            log.error("Failed to replace synonyms set '{}' from '{}': {}", synonymSetName, classpathFileName, e.getMessage());
         }
     }
 

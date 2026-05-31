@@ -7,4 +7,7 @@ public interface AppConstants {
 //    String DATASET_INDEX_MAPPING_JSON_FILE = "data_index_schema.json";
     String DATASET_INDEX_MAPPING_JSON_FILE = "data_index_schema.json";
     String VOCABS_INDEX_MAPPING_SCHEMA_FILE = "vocabs_index_schema.json";
+
+    String PORTAL_ACRONYMS_FILE = "portal-acronyms.txt";
+    String PORTAL_ACRONYMS_SET_NAME = "portal-acronyms";
 }
