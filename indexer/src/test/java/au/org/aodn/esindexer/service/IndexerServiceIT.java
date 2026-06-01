@@ -191,39 +191,25 @@ public class IndexerServiceIT extends BaseTestClass {
         }
     }
 
-    /** After indexAll, the index exposes acronym_search_analyser (the analyzer used to expand acronym queries). */
+    /**
+     * searching by an acronym must match a document that only contains the full name.
+     * sample12'ans title/description contain "Aurora Australis" but no "aa" token; the dictionary maps
+     * "aa => aurora australis". A hit on the query "aa" can therefore only come from search-time
+     * synonym expansion via acronym_search_analyser.
+     */
     @Test
-    public void verifyAcronymSearchAnalyserAvailableOnIndex() throws IOException {
-        var uuid = "7709f541-fc0c-4318-b5b9-9053aa474e0e";
+    public void acronymQueryExpandsToFullNameAndMatchesDocument() throws IOException {
+        var uuid = "201112060";
         try {
-            insertMetadataRecords(uuid, "classpath:canned/sample4.xml");
+            insertMetadataRecords(uuid, "classpath:canned/sample12.xml");
             indexerService.indexAllMetadataRecordsFromGeoNetwork(null, true, null);
 
-            var resp = client.indices().analyze(a -> a
+            var resp = client.search(s -> s
                     .index(INDEX_NAME)
-                    .analyzer("acronym_search_analyser")
-                    .text("nrmn"));
+                    .query(q -> q.match(m -> m.field("title").query("aa"))), ObjectNode.class);
 
-            Assertions.assertNotNull(resp.tokens(), "acronym_search_analyser should be callable on the index");
-            Assertions.assertFalse(resp.tokens().isEmpty(), "Analyzer should produce at least one token");
-        } finally {
-            clearElasticIndex(INDEX_NAME);
-            deleteRecord(uuid);
-        }
-    }
-
-    /** After indexAll, the portal-acronyms synonyms set is populated from the dictionary file. */
-    @Test
-    public void verifyPortalAcronymsSynonymsSetIsPopulatedAfterIndexAll() throws IOException {
-        var uuid = "7709f541-fc0c-4318-b5b9-9053aa474e0e";
-        try {
-            insertMetadataRecords(uuid, "classpath:canned/sample4.xml");
-            indexerService.indexAllMetadataRecordsFromGeoNetwork(null, true, null);
-
-            var resp = client.synonyms().getSynonym(s -> s.id("portal-acronyms"));
-
-            Assertions.assertTrue(resp.count() > 0,
-                    "portal-acronyms synonyms set should contain rules after indexAll");
+            Assertions.assertFalse(resp.hits().hits().isEmpty(),
+                    "Acronym query 'aa' should expand to 'aurora australis' and match sample12");
         } finally {
             clearElasticIndex(INDEX_NAME);
             deleteRecord(uuid);
