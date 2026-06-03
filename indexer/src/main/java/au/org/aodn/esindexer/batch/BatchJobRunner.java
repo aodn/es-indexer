@@ -100,13 +100,15 @@ public class BatchJobRunner {
 
 
     private void indexAllCloudOptimisedDataset(String beginWithUuid) {
+        LoggingCallback loggingCallback = new LoggingCallback();
         try{
-            log.info("Check all data access service is up...");
-            var loggingCallback = new LoggingCallback();
-            log.info("Indexing all cloud optimised dataset");
+            loggingCallback.onProgress("Indexing all cloud optimised dataset");
             indexCloudOptimizedService.indexAllCloudOptimizedData(beginWithUuid, loggingCallback);
         } catch (Exception e) {
-            log.error("Error indexing all cloud optimised dataset", e);
+            loggingCallback.onProgress(String.format("Error indexing all cloud optimised dataset %s", e));
+        }
+        finally {
+            loggingCallback.onComplete("Finished indexing all cloud optimised dataset");
         }
     }
 
