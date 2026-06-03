@@ -16,12 +16,14 @@ public class GzipDefaultHeadersInterceptor implements ClientHttpRequestIntercept
 
     private final HttpHeaders defaultHeaders;
 
-    public GzipDefaultHeadersInterceptor(String apiKey) {
+    public GzipDefaultHeadersInterceptor(String apiKey, String internalHeaderSecret) {
         this.defaultHeaders = new HttpHeaders();
         defaultHeaders.add(HttpHeaders.CONTENT_TYPE, "application/json");
         defaultHeaders.add(HttpHeaders.ACCEPT, "application/json");
         defaultHeaders.add(HttpHeaders.ACCEPT_ENCODING, "gzip"); // Request GZIP-compressed responses
         defaultHeaders.add("X-API-Key", apiKey);
+        // This is use to disable certain firewall rules that block rest api repeat call
+        defaultHeaders.add("x-internal-das-header-secret", internalHeaderSecret);
         // Add more default headers as needed
         // Note: Content-Encoding and Accept-Encoding are set dynamically in intercept
     }

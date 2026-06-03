@@ -36,6 +36,7 @@ public class DataAccessServiceAutoConfiguration {
             @Value("${dataaccess.host:http://localhost:5000}") String serverUrl,
             @Value("${dataaccess.baseUrl:/api/v1/das/}") String baseUrl,
             @Value("${dataaccess.apiKey:TEMP}") String apiKey,
+            @Value("${dataaccess.internalHeaderSecret:TEMP}") String internalHeaderSecret,
             @Qualifier("dataAccessWebClient") WebClient webClient){
 
         // A special rest template that turn on compression on both send and receive
@@ -43,15 +44,19 @@ public class DataAccessServiceAutoConfiguration {
         SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
         RestTemplate restTemplate = new RestTemplate(factory);
         // Add interceptor for default headers and GZIP compression
-        restTemplate.getInterceptors().add(new GzipDefaultHeadersInterceptor(apiKey));
+        restTemplate.getInterceptors().add(new GzipDefaultHeadersInterceptor(apiKey, internalHeaderSecret));
 
         return new DataAccessServiceImpl(serverUrl, baseUrl, restTemplate, webClient, objectMapper);
     }
 
     @Bean("dataAccessWebClient")
-    public WebClient createWebClient(@Value("${dataaccess.apiKey:TEMP}") String apiKey) {
+    public WebClient createWebClient(
+            @Value("${dataaccess.apiKey:TEMP}") String apiKey,
+            @Value("${dataaccess.internalHeaderSecret:TEMP}") String internalHeaderSecret) {
         HttpHeaders defaultHeaders = new HttpHeaders();
         defaultHeaders.add("X-API-Key", apiKey);
+        // This is use to disable certain firewall rules that block rest api repeat call
+        defaultHeaders.add("x-internal-das-header-secret", internalHeaderSecret);
 
         // Optional: Increase buffer limit if individual events are still too large
         ExchangeStrategies strategies = ExchangeStrategies.builder()
