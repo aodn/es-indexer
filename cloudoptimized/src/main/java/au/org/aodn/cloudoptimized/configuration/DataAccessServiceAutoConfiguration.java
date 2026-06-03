@@ -36,6 +36,7 @@ public class DataAccessServiceAutoConfiguration {
             @Value("${dataaccess.host:http://localhost:5000}") String serverUrl,
             @Value("${dataaccess.baseUrl:/api/v1/das/}") String baseUrl,
             @Value("${dataaccess.apiKey:TEMP}") String apiKey,
+            @Value("${dataaccess.internalHeaderSecret:TEMP}") String internalHeaderSecret,
             @Qualifier("dataAccessWebClient") WebClient webClient){
 
         // A special rest template that turn on compression on both send and receive
@@ -44,6 +45,13 @@ public class DataAccessServiceAutoConfiguration {
         RestTemplate restTemplate = new RestTemplate(factory);
         // Add interceptor for default headers and GZIP compression
         restTemplate.getInterceptors().add(new GzipDefaultHeadersInterceptor(apiKey));
+
+        // This is a signal firewall that it is calling from an internal process and do not apply
+        // certain rules for blocking repeat call.
+        restTemplate.getInterceptors().add((request, body, execution) -> {
+            request.getHeaders().set("x-internal-das-header-secret", internalHeaderSecret);
+            return execution.execute(request, body);
+        });
 
         return new DataAccessServiceImpl(serverUrl, baseUrl, restTemplate, webClient, objectMapper);
     }
