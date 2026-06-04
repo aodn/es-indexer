@@ -97,6 +97,7 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
             elasticSearchIndexService.recreateIndexFromMappingJSONFile(AppConstants.DATASET_INDEX_MAPPING_JSON_FILE, indexName);
         }
 
+        callback.onProgress(String.format("UUIDs to be process : %s", sorted));
         for (String uuid : sorted) {
             Map<String, MetadataEntity> entry = entities.get(uuid);
 

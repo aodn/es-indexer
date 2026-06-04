@@ -10,6 +10,7 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -19,8 +20,18 @@ import java.util.Arrays;
 
 @Configuration
 @EnableCaching
-@EnableScheduling
 public class WebMvcConfig {
+
+    /**
+     * Inner configuration to enable scheduling only for non-batch profiles.
+     * This (combined with spring.task.scheduling.enabled=false in batch yaml and !batch profile on VocabIndexScheduler)
+     * prevents the cron/scheduler executor threads from starting in batch mode.
+     */
+    @Configuration
+    @Profile("!batch")
+    @EnableScheduling
+    public static class SchedulingEnabledConfig {
+    }
 
     @Autowired
     protected ObjectMapper indexerObjectMapper;
