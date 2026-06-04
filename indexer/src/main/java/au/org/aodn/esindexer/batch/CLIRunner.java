@@ -3,6 +3,8 @@ package au.org.aodn.esindexer.batch;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -17,11 +19,13 @@ public class CLIRunner implements CommandLineRunner {
 
     protected final BatchJobRunner batchJobRunner;
     protected final ApplicationArguments args;
+    protected final ConfigurableApplicationContext context;
 
     @Autowired
-    public CLIRunner(ApplicationArguments args, BatchJobRunner batchJobRunner) {
+    public CLIRunner(ApplicationArguments args, BatchJobRunner batchJobRunner, ConfigurableApplicationContext context) {
         this.batchJobRunner = batchJobRunner;
         this.args = args;
+        this.context = context;
     }
 
     @Override
@@ -30,12 +34,12 @@ public class CLIRunner implements CommandLineRunner {
         if (args.containsOption(BATCH)) {
             if (!args.containsOption(JOB_NAME) || args.getOptionValues(JOB_NAME).size() != 1) {
                 log.error("Argument must have --jobName and contains one value only");
-                System.exit(1);
+                exitWithCode(1);
             }
 
             List<String> jobName = args.getOptionValues(JOB_NAME);
             String jobParam = null;
-            if (args.getOptionValues(JOB_PARAM) != null && args.getOptionValues(JOB_PARAM).size() > 0) {
+            if (args.getOptionValues(JOB_PARAM) != null && !args.getOptionValues(JOB_PARAM).isEmpty()) {
                 jobParam = args.getOptionValues(JOB_PARAM).get(0);
             }
 
@@ -44,13 +48,26 @@ public class CLIRunner implements CommandLineRunner {
             }
             catch (Exception e) {
                 log.error("Batch job failed with exception: {}", e.getMessage());
-                System.exit(1);
+                exitWithCode(1);
             }
             log.info("Batch job completed successfully.");
-            System.exit(0);
+            exitWithCode(0);
         }
 
         // If not batch, do nothing (web server runs)
         log.info("Start application in web mode");
+    }
+
+    private void exitWithCode(int code) {
+        // Use SpringApplication.exit to trigger orderly shutdown of context, beans, executors, schedulers, etc.
+        int exitCode = SpringApplication.exit(context, () -> code);
+        // Last-resort fallback: brief sleep to allow shutdown hooks / @PreDestroy / awaitTermination to make progress,
+        // then force System.exit in case lingering non-daemon threads (e.g. from libraries) would otherwise prevent termination.
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+        System.exit(exitCode);
     }
 }

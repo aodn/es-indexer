@@ -28,8 +28,11 @@ import java.time.*;
 import java.util.*;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
+
+import javax.annotation.PreDestroy;
 
 @Slf4j
 public class DataAccessServiceImpl implements DataAccessService {
@@ -38,6 +41,7 @@ public class DataAccessServiceImpl implements DataAccessService {
     protected final RestTemplate restTemplate;
     protected final WebClient webClient;
     protected final ObjectMapper objectMapper;
+    protected ExecutorService executorService;
 
     private final static int MAX_RETRY_ATTEMPT = 100;  //times
     private final static int RETRY_DELAY_SECOND = 10; // second
@@ -47,6 +51,8 @@ public class DataAccessServiceImpl implements DataAccessService {
         this.restTemplate = restTemplate;
         this.webClient = webClient;
         this.objectMapper = objectMapper;
+        int numThreads = Runtime.getRuntime().availableProcessors();
+        this.executorService = Executors.newFixedThreadPool(numThreads);
     }
 
     protected String getDataAccessEndpoint() {
@@ -341,9 +347,7 @@ public class DataAccessServiceImpl implements DataAccessService {
         final int dateRangeLength = 11; // days
         var currentStartDate = startDate;
 
-        // Use ExecutorService for parallel execution
-        int numThreads = Runtime.getRuntime().availableProcessors();
-        ExecutorService executor = java.util.concurrent.Executors.newFixedThreadPool(numThreads);
+        // Use managed ExecutorService for parallel execution (cleaned up via @PreDestroy)
         List<java.util.concurrent.Future<List<? extends CloudOptimizedEntry>>> futures = new ArrayList<>();
 
         while (!currentStartDate.isAfter(endDate)) {
@@ -353,7 +357,7 @@ public class DataAccessServiceImpl implements DataAccessService {
             }
             final var start = currentStartDate;
             final var end = currentEndDate;
-            futures.add(executor.submit(() -> getIndexingDatasetByDays(uuid, key, start, end, fields)));
+            futures.add(executorService.submit(() -> getIndexingDatasetByDays(uuid, key, start, end, fields)));
             currentStartDate = currentEndDate.plusDays(1);
         }
 
@@ -368,11 +372,26 @@ public class DataAccessServiceImpl implements DataAccessService {
                 throw new RuntimeException("Exception in parallel data fetching: " + e.getMessage(), e);
             }
         }
-        executor.shutdown();
+        // Note: do not shutdown here; executorService is long-lived and cleaned in @PreDestroy
         // Merge all the entities
         final Map<CloudOptimizedEntry, Long> allEntries = new HashMap<>();
         aggregateData(allEntries, eventDataList);
         return toFeatureCollection(uuid, key, allEntries);
+    }
+
+    protected void shutdownExecutor(ExecutorService executor) {
+        executor.shutdown();
+        try {
+            if (!executor.awaitTermination(60, TimeUnit.SECONDS)) {
+                executor.shutdownNow();
+                if (!executor.awaitTermination(60, TimeUnit.SECONDS)) {
+                    log.error("Executor did not terminate");
+                }
+            }
+        } catch (InterruptedException ie) {
+            executor.shutdownNow();
+            Thread.currentThread().interrupt();
+        }
     }
 
     @Override
@@ -383,7 +402,7 @@ public class DataAccessServiceImpl implements DataAccessService {
     )
     public List<TemporalExtent> getTemporalExtentOf(String uuid, String key) {
         if(isSafeId(uuid)) {
-            log.info("Fetching temporal extent of UUID: {}", uuid);
+            log.info("Fetching temporal extent of UUID: {}, {}", uuid, key);
             try {
                 HttpEntity<String> request = getRequestEntity(List.of(MediaType.APPLICATION_JSON));
 
@@ -490,6 +509,13 @@ public class DataAccessServiceImpl implements DataAccessService {
             return null;
         }
         return responseEntity.getBody();
+    }
+
+    @PreDestroy
+    public void cleanup() {
+        if (executorService != null) {
+            shutdownExecutor(executorService);
+        }
     }
 
 }

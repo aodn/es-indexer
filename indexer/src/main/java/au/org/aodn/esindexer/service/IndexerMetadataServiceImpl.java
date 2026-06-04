@@ -611,7 +611,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
             }
         }
         finally {
-            executor.shutdown();
+            shutdownExecutor(executor);
         }
 
         try {
@@ -706,6 +706,21 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
 
         } catch (ElasticsearchException | IOException e) {
             log.error("Failed to check/delete same name index: {} | {}", alias, e.getMessage());
+        }
+    }
+
+    protected void shutdownExecutor(ExecutorService executor) {
+        executor.shutdown();
+        try {
+            if (!executor.awaitTermination(60, TimeUnit.SECONDS)) {
+                executor.shutdownNow();
+                if (!executor.awaitTermination(60, TimeUnit.SECONDS)) {
+                    log.error("Executor did not terminate");
+                }
+            }
+        } catch (InterruptedException ie) {
+            executor.shutdownNow();
+            Thread.currentThread().interrupt();
         }
     }
 }

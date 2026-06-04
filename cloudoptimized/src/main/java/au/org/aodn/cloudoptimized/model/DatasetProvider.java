@@ -26,7 +26,11 @@ public class DatasetProvider {
     protected final LinkedBlockingQueue<FeatureCollectionTask> resultQueue = new LinkedBlockingQueue<>();
     protected final List<MetadataFields> columns;
 
-    protected ExecutorService executorService = Executors.newFixedThreadPool(THREADS_COUNT);
+    protected ExecutorService executorService = Executors.newFixedThreadPool(THREADS_COUNT, r -> {
+        Thread t = new Thread(r, "DatasetProvider-worker");
+        t.setDaemon(true);
+        return t;
+    });
     protected CompletionService<FeatureCollectionTask> completionService = new ExecutorCompletionService<>(executorService);
 
     // Default value means not yet start processing
@@ -48,6 +52,7 @@ public class DatasetProvider {
         this.endYearMonth = YearMonth.from(endDate);
         this.columns = columns;
         Thread t = new Thread(DatasetProvider.this::queryDataByMultiThreads);
+        t.setDaemon(true);
         t.start();
     }
 
@@ -79,7 +84,22 @@ public class DatasetProvider {
         } catch (InterruptedException | ExecutionException e) {
             log.error("Error while fetching data", e);
         } finally {
-            executorService.shutdown();
+            shutdownExecutor(executorService);
+        }
+    }
+
+    protected void shutdownExecutor(ExecutorService executor) {
+        executor.shutdown();
+        try {
+            if (!executor.awaitTermination(60, TimeUnit.SECONDS)) {
+                executor.shutdownNow();
+                if (!executor.awaitTermination(60, TimeUnit.SECONDS)) {
+                    log.error("Executor did not terminate");
+                }
+            }
+        } catch (InterruptedException ie) {
+            executor.shutdownNow();
+            Thread.currentThread().interrupt();
         }
     }
     /**
