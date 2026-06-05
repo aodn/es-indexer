@@ -34,11 +34,10 @@ public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
     protected final ObjectMapper objectMapper;
 
     // vocab titles used for deciding to call AI keyword classification or not
-    private static final String AODN_DISCOVERY_PARAMETER_VOCABULARY = "AODN Discovery Parameter Vocabulary";
-    private static final String AODN_PLATFORM_VOCABULARY = "AODN Platform Vocabulary";
-    private static final String NASA_GCMD_VOCABULARY = "NASA/Global Change Master Directory";
-    private static final String GCMD_VOCABULARY = "GCMD Keywords";
-    private static final String GCMD_DESCRIPTION = "GCMD";
+    private static final String AODN_DISCOVERY_PARAMETER_VOCABULARY = "aodn discovery parameter vocabulary";
+    private static final String AODN_PLATFORM_VOCABULARY = "aodn platform vocabulary";
+    private static final String GCMD_FULL_VOCABULARY = "global change master directory";
+    private static final String GCMD_DESCRIPTION = "gcmd";
 
     public DataDiscoveryAiServiceImpl(String serviceUrl, String baseUrl,
                                       RestTemplate restTemplate, WebClient webClient, ObjectMapper objectMapper) {
@@ -232,13 +231,13 @@ public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
                 .flatMap(theme -> theme.getConcepts().stream())
                 .noneMatch(concept ->
                         concept.getTitle() != null && (
-                                concept.getTitle().contains(AODN_DISCOVERY_PARAMETER_VOCABULARY) ||
-                                        concept.getTitle().contains(NASA_GCMD_VOCABULARY) ||
-                                        concept.getTitle().contains(GCMD_VOCABULARY) ||
-                                        concept.getTitle().contains(AODN_PLATFORM_VOCABULARY)
+                                concept.getTitle().toLowerCase().contains(AODN_DISCOVERY_PARAMETER_VOCABULARY) ||
+                                        concept.getTitle().toLowerCase().contains(AODN_PLATFORM_VOCABULARY) ||
+                                        concept.getTitle().toLowerCase().contains(GCMD_FULL_VOCABULARY) ||
+                                        concept.getTitle().toLowerCase().contains(GCMD_DESCRIPTION)
                         ) ||
                                 concept.getDescription() != null &&
-                                        concept.getDescription().contains(GCMD_DESCRIPTION)
+                                        concept.getDescription().toLowerCase().contains(GCMD_DESCRIPTION)
                 );
     }
 }
