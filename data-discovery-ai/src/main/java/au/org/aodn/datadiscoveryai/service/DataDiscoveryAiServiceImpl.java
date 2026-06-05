@@ -37,7 +37,7 @@ public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
     private static final String AODN_DISCOVERY_PARAMETER_VOCABULARY = "aodn discovery parameter vocabulary";
     private static final String AODN_PLATFORM_VOCABULARY = "aodn platform vocabulary";
     private static final String GCMD_FULL_VOCABULARY = "global change master directory";
-    private static final String GCMD_DESCRIPTION = "gcmd";
+    private static final String GCMD_SHORT_VOCABULARY = "gcmd";
 
     public DataDiscoveryAiServiceImpl(String serviceUrl, String baseUrl,
                                       RestTemplate restTemplate, WebClient webClient, ObjectMapper objectMapper) {
@@ -234,7 +234,7 @@ public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
                                 concept.getTitle().toLowerCase().contains(AODN_DISCOVERY_PARAMETER_VOCABULARY) ||
                                         concept.getTitle().toLowerCase().contains(AODN_PLATFORM_VOCABULARY) ||
                                         concept.getTitle().toLowerCase().contains(GCMD_FULL_VOCABULARY) ||
-                                        concept.getTitle().toLowerCase().contains(GCMD_DESCRIPTION)
+                                        concept.getTitle().toLowerCase().contains(GCMD_SHORT_VOCABULARY)
                         )
                 );
     }
