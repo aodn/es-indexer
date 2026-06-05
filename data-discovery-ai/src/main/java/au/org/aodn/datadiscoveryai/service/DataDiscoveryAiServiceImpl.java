@@ -235,9 +235,7 @@ public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
                                         concept.getTitle().toLowerCase().contains(AODN_PLATFORM_VOCABULARY) ||
                                         concept.getTitle().toLowerCase().contains(GCMD_FULL_VOCABULARY) ||
                                         concept.getTitle().toLowerCase().contains(GCMD_DESCRIPTION)
-                        ) ||
-                                concept.getDescription() != null &&
-                                        concept.getDescription().toLowerCase().contains(GCMD_DESCRIPTION)
+                        )
                 );
     }
 }
