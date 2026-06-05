@@ -38,6 +38,7 @@ public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
     private static final String AODN_PLATFORM_VOCABULARY = "AODN Platform Vocabulary";
     private static final String NASA_GCMD_VOCABULARY = "NASA/Global Change Master Directory";
     private static final String GCMD_VOCABULARY = "GCMD Keywords";
+    private static final String GCMD_DESCRIPTION = "GCMD";
 
     public DataDiscoveryAiServiceImpl(String serviceUrl, String baseUrl,
                                       RestTemplate restTemplate, WebClient webClient, ObjectMapper objectMapper) {
@@ -235,7 +236,9 @@ public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
                                         concept.getTitle().contains(NASA_GCMD_VOCABULARY) ||
                                         concept.getTitle().contains(GCMD_VOCABULARY) ||
                                         concept.getTitle().contains(AODN_PLATFORM_VOCABULARY)
-                        )
+                        ) ||
+                                concept.getDescription() != null &&
+                                        concept.getDescription().contains(GCMD_DESCRIPTION)
                 );
     }
 }
