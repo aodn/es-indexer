@@ -84,12 +84,17 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
                 .toList();
 
         if(beginWithUuid != null && !sorted.isEmpty()) {
-            // We ignore all UUID before this beginWithUuid
-            int index = sorted.indexOf(beginWithUuid);
+            // The CO is going to migrate to PMTile, so it is just a hotfix to avoid
+            // cleaning up all data before reindex all. Currently, the index is too slow and
+            // because the index cleaned, the metadata indexing thinks some data is not CO available which is wrong
+            if(!"".equalsIgnoreCase(beginWithUuid)) {
+                // We ignore all UUID before this beginWithUuid
+                int index = sorted.indexOf(beginWithUuid);
 
-            // If target not found or at start, no removal needed, else remove all items before
-            if (index > 0) {
-                sorted = new ArrayList<>(sorted.subList(index, sorted.size()));
+                // If target not found or at start, no removal needed, else remove all items before
+                if (index > 0) {
+                    sorted = new ArrayList<>(sorted.subList(index, sorted.size()));
+                }
             }
         }
         else {
