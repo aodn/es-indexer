@@ -5,6 +5,7 @@ import au.org.aodn.cloudoptimized.service.DataAccessService;
 import au.org.aodn.datadiscoveryai.model.AiEnhancementRequest;
 import au.org.aodn.datadiscoveryai.model.AiEnhancementResponse;
 import au.org.aodn.datadiscoveryai.service.DataDiscoveryAiService;
+import au.org.aodn.esindexer.configuration.AcronymConfig;
 import au.org.aodn.esindexer.utils.GcmdKeywordUtils;
 import au.org.aodn.esindexer.utils.GeometryUtils;
 import au.org.aodn.esindexer.utils.JaxbUtils;
@@ -139,7 +140,8 @@ public class StacCollectionMapperServiceTest {
                 service,
                 vocabsService,
                 gcmdKeywordUtils,
-                dataDiscoveryAiService
+                dataDiscoveryAiService,
+                new AcronymConfig()
         );
         indexerService = spy(indexerService);
         indexerService.self = indexerService;

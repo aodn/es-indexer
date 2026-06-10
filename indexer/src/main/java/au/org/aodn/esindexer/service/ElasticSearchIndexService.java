@@ -20,11 +20,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -103,36 +100,20 @@ public class ElasticSearchIndexService {
         }
     }
 
-    /** Replaces the named ES synonyms set with the rules read from a classpath file. */
-    public void replaceSynonymSetFromFile(String synonymSetName, String classpathFileName) {
-        try (InputStream inputStream = getClass().getResourceAsStream("/" + classpathFileName)) {
-            if (inputStream == null) {
-                log.warn("Synonyms file not found on classpath, skipping update: {}", classpathFileName);
-                return;
-            }
-
-            List<SynonymRule> synonymRules = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))
-                    .lines()
-                    .map(String::trim)
-                    .filter(line -> !line.isEmpty() && !line.startsWith("#"))
-                    .map(line -> SynonymRule.of(r -> r.synonyms(line)))
-                    .collect(Collectors.toList());
-
-            if (synonymRules.isEmpty()) {
-                log.warn("Synonyms file '{}' has no rules, skipping update of set '{}'", classpathFileName, synonymSetName);
-                return;
-            }
-
-            portalElasticsearchClient.synonyms().putSynonym(builder -> builder
+    /** Creates or fully replaces the named ES synonyms set with the given rules ("acronym => full name"); overwrites, never appends. */
+    public void replaceSynonymSet(String synonymSetName, List<String> rules) {
+        List<SynonymRule> synonymRules = rules.stream()
+                .map(rule -> SynonymRule.of(r -> r.synonyms(rule)))
+                .collect(Collectors.toList());
+        try {
+            portalElasticsearchClient.synonyms().putSynonym(b -> b
                     .id(synonymSetName)
-                    .synonymsSet(synonymRules)
-            );
-            log.info("Replaced synonyms set '{}' with {} rules from '{}'", synonymSetName, synonymRules.size(), classpathFileName);
+                    .synonymsSet(synonymRules));
+            log.info("Replaced synonyms set '{}' with {} rules", synonymSetName, synonymRules.size());
         } catch (ElasticsearchException | IOException e) {
-            log.error("Failed to replace synonyms set '{}' from '{}': {}", synonymSetName, classpathFileName, e.getMessage());
+            log.error("Failed to replace synonyms set '{}': {}", synonymSetName, e.getMessage());
         }
     }
-
 
     /**
      * Generate a versioned index name by appending the current date and time to the base index name.

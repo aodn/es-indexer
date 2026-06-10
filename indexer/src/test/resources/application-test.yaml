@@ -24,6 +24,9 @@ elasticsearch:
     enableRefreshDelay: "false"
   query:
     pageSize: 4
+  acronyms:
+    values:
+      - "aa => aurora australis"
 
 datadiscoveryai:
   host: http://localhost
