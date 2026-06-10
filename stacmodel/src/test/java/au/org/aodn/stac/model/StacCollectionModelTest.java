@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -68,9 +67,9 @@ class StacCollectionModelTest {
                 .organization("Integrated Marine Observing System (IMOS)")
                 .position("Data Officer")
                 .roles(List.of("pointOfContact", "about"))
-                .emails(new LinkedHashSet<>(List.of("info@aodn.org.au")))
-                .addresses(new LinkedHashSet<>(List.of(address)))
-                .phones(new LinkedHashSet<>(List.of(phone)))
+                .emails(List.of("info@aodn.org.au"))
+                .addresses(List.of(address))
+                .phones(List.of(phone))
                 .build();
 
         ExtentModel extent = ExtentModel.builder()
@@ -218,9 +217,9 @@ class StacCollectionModelTest {
                 .organization("Integrated Marine Observing System (IMOS)")
                 .position("Data Officer")
                 .roles(List.of("pointOfContact", "about"))
-                .emails(new LinkedHashSet<>(List.of("info@aodn.org.au")))
-                .addresses(new LinkedHashSet<>(List.of(address)))
-                .phones(new LinkedHashSet<>(List.of(phone)))
+                .emails(List.of("info@aodn.org.au"))
+                .addresses(List.of(address))
+                .phones(List.of(phone))
                 .build();
 
         ExtentModel extent = ExtentModel.builder()
@@ -257,7 +256,7 @@ class StacCollectionModelTest {
                 .build();
 
         SearchSuggestionsModel suggestions = SearchSuggestionsModel.builder()
-                .abstractPhrases(java.util.Set.of("ocean current velocity time-series"))
+                .abstractPhrases(List.of("ocean current velocity time-series"))
                 .build();
 
         StacCollectionModel original = StacCollectionModel.builder()

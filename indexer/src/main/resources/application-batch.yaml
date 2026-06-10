@@ -4,6 +4,9 @@ spring:
       - org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
       - org.springframework.boot.autoconfigure.security.servlet.WebSecurityConfiguration
       - org.springframework.boot.autoconfigure.actuate.*
+  task:
+    scheduling:
+      enabled: false
 
 management:
   endpoints:

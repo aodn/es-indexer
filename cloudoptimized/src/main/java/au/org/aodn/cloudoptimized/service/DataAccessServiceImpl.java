@@ -13,6 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
+import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -20,15 +22,17 @@ import reactor.core.publisher.Flux;
 import reactor.util.retry.Retry;
 
 import org.springframework.retry.annotation.Retryable;
-import org.springframework.retry.annotation.Recover;
 import org.springframework.retry.annotation.Backoff;
 
 import java.time.*;
 import java.util.*;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
+
+import javax.annotation.PreDestroy;
 
 @Slf4j
 public class DataAccessServiceImpl implements DataAccessService {
@@ -37,7 +41,7 @@ public class DataAccessServiceImpl implements DataAccessService {
     protected final RestTemplate restTemplate;
     protected final WebClient webClient;
     protected final ObjectMapper objectMapper;
-    protected final Random random = new Random();
+    protected ExecutorService executorService;
 
     private final static int MAX_RETRY_ATTEMPT = 100;  //times
     private final static int RETRY_DELAY_SECOND = 10; // second
@@ -47,6 +51,8 @@ public class DataAccessServiceImpl implements DataAccessService {
         this.restTemplate = restTemplate;
         this.webClient = webClient;
         this.objectMapper = objectMapper;
+        int numThreads = Runtime.getRuntime().availableProcessors();
+        this.executorService = Executors.newFixedThreadPool(numThreads);
     }
 
     protected String getDataAccessEndpoint() {
@@ -96,6 +102,11 @@ public class DataAccessServiceImpl implements DataAccessService {
     }
 
     @Override
+    @Retryable(
+            retryFor = { HttpServerErrorException.ServiceUnavailable.class, ResourceAccessException.class },
+            maxAttempts = MAX_RETRY_ATTEMPT,
+            backoff = @Backoff(delay = RETRY_DELAY_SECOND * 1000)
+    )
     public Map<String, MetadataEntity> getMetadataByUuid(String uuid) {
 
         // Validate path argument
@@ -130,31 +141,41 @@ public class DataAccessServiceImpl implements DataAccessService {
         }
     }
 
-
     @Override
+    @Retryable(
+            retryFor = { HttpServerErrorException.ServiceUnavailable.class, ResourceAccessException.class },
+            maxAttempts = MAX_RETRY_ATTEMPT,
+            backoff = @Backoff(delay = RETRY_DELAY_SECOND * 1000)
+    )
     public Map<String, Map<String, MetadataEntity>> getAllMetadata() {
-        // Sometimes the server is down due to SPOT instance or software update.
-        waitTillServiceUp();
 
-        HttpEntity<String> request = getRequestEntity(List.of(MediaType.APPLICATION_JSON));
-        String url = UriComponentsBuilder
-                .fromUriString(getDataAccessEndpoint() + "/metadata")
-                .toUriString();
+        try {
+            HttpEntity<String> request = getRequestEntity(List.of(MediaType.APPLICATION_JSON));
+            String url = UriComponentsBuilder
+                    .fromUriString(getDataAccessEndpoint() + "/metadata")
+                    .toUriString();
 
-        ResponseEntity<Map<String, Map<String, MetadataEntity>>> responseEntity = restTemplate.exchange(
-                url,
-                HttpMethod.GET,
-                request,
-                new ParameterizedTypeReference<>() {
-                },
-                Map.of()
-        );
-        if (responseEntity.getStatusCode().is2xxSuccessful()) {
-            return responseEntity.getBody();
-        } else {
-            return Map.of();
+            ResponseEntity<Map<String, Map<String, MetadataEntity>>> responseEntity = restTemplate.exchange(
+                    url,
+                    HttpMethod.GET,
+                    request,
+                    new ParameterizedTypeReference<>() {
+                    },
+                    Map.of()
+            );
+            if (responseEntity.getStatusCode().is2xxSuccessful()) {
+                return responseEntity.getBody();
+            } else {
+                return Map.of();
+            }
+        } catch (HttpServerErrorException.ServiceUnavailable ex) {
+                // Caught when FastAPI returns 503 (api_status is False)
+                String errorJson = ex.getResponseBodyAsString();
+                // errorJson contains: {"detail":"API is not ready. Metadata initialization is still in progress."}
+                log.error("FastAPI is not ready yet: {}", errorJson);
+                throw ex;
+            }
         }
-    }
 
     @Override
     public HealthStatus getHealthStatus() {
@@ -305,7 +326,13 @@ public class DataAccessServiceImpl implements DataAccessService {
         }
         return null;
     }
+
     @Override
+    @Retryable(
+            retryFor = { HttpServerErrorException.ServiceUnavailable.class, ResourceAccessException.class },
+            maxAttempts = MAX_RETRY_ATTEMPT,
+            backoff = @Backoff(delay = RETRY_DELAY_SECOND * 1000)
+    )
     public FeatureCollectionGeoJson getIndexingDatasetByMonth(final String uuid, String key, final YearMonth yearMonth, final List<MetadataFields> fields) {
 
         var startDate = yearMonth.atDay(1);
@@ -320,9 +347,7 @@ public class DataAccessServiceImpl implements DataAccessService {
         final int dateRangeLength = 11; // days
         var currentStartDate = startDate;
 
-        // Use ExecutorService for parallel execution
-        int numThreads = Runtime.getRuntime().availableProcessors();
-        ExecutorService executor = java.util.concurrent.Executors.newFixedThreadPool(numThreads);
+        // Use managed ExecutorService for parallel execution (cleaned up via @PreDestroy)
         List<java.util.concurrent.Future<List<? extends CloudOptimizedEntry>>> futures = new ArrayList<>();
 
         while (!currentStartDate.isAfter(endDate)) {
@@ -332,7 +357,7 @@ public class DataAccessServiceImpl implements DataAccessService {
             }
             final var start = currentStartDate;
             final var end = currentEndDate;
-            futures.add(executor.submit(() -> getIndexingDatasetByDays(uuid, key, start, end, fields)));
+            futures.add(executorService.submit(() -> getIndexingDatasetByDays(uuid, key, start, end, fields)));
             currentStartDate = currentEndDate.plusDays(1);
         }
 
@@ -340,33 +365,44 @@ public class DataAccessServiceImpl implements DataAccessService {
             try {
                 var eventData = future.get();
                 if (eventData != null) {
-                    for (var entry : eventData) {
-                        eventDataList.add((CloudOptimizedEntry) entry);
-                    }
+                    eventDataList.addAll(eventData);
                 }
             } catch (Exception e) {
                 // Handle exceptions from parallel tasks
                 throw new RuntimeException("Exception in parallel data fetching: " + e.getMessage(), e);
             }
         }
-        executor.shutdown();
+        // Note: do not shutdown here; executorService is long-lived and cleaned in @PreDestroy
         // Merge all the entities
         final Map<CloudOptimizedEntry, Long> allEntries = new HashMap<>();
         aggregateData(allEntries, eventDataList);
         return toFeatureCollection(uuid, key, allEntries);
     }
 
+    protected void shutdownExecutor(ExecutorService executor) {
+        executor.shutdown();
+        try {
+            if (!executor.awaitTermination(60, TimeUnit.SECONDS)) {
+                executor.shutdownNow();
+                if (!executor.awaitTermination(60, TimeUnit.SECONDS)) {
+                    log.error("Executor did not terminate");
+                }
+            }
+        } catch (InterruptedException ie) {
+            executor.shutdownNow();
+            Thread.currentThread().interrupt();
+        }
+    }
+
     @Override
     @Retryable(
-        retryFor = { Exception.class },
+        retryFor = { HttpServerErrorException.ServiceUnavailable.class, ResourceAccessException.class },
         maxAttempts = MAX_RETRY_ATTEMPT,
         backoff = @Backoff(delay = RETRY_DELAY_SECOND * 1000)
     )
     public List<TemporalExtent> getTemporalExtentOf(String uuid, String key) {
         if(isSafeId(uuid)) {
-            // Sometimes the server is down due to SPOT instance or software update.
-            waitTillServiceUp();
-
+            log.info("Fetching temporal extent of UUID: {}, {}", uuid, key);
             try {
                 HttpEntity<String> request = getRequestEntity(List.of(MediaType.APPLICATION_JSON));
 
@@ -387,17 +423,20 @@ public class DataAccessServiceImpl implements DataAccessService {
 
             }
             catch (HttpClientErrorException.NotFound e) {
-                throw new MetadataNotFoundException("UUID not found : " + uuid + " in DataAccess Service");
+                throw new MetadataNotFoundException("temporal_extent of uuid not found: " + uuid + " in DataAccess Service");
+            }
+            catch (HttpServerErrorException.ServiceUnavailable sna) {
+                log.error("Waiting data access service UP");
+                throw sna;
             }
             catch (Exception e) {
-                throw new RuntimeException("Exception thrown while retrieving dataset with UUID: " + uuid + e.getMessage(), e);
+                throw new RuntimeException("Exception thrown while retrieving dataset with UUID: " + uuid + " " + e.getMessage(), e);
             }
         }
         else {
             throw new MetadataNotFoundException("Malform UUID in request: " + uuid);
         }
     }
-
     /**
      * Summarize the data by counting the number if all the concerned fields are the same, merge data with
      * existing map. That is count will be added for same CloudOptimizedEntry
@@ -445,38 +484,37 @@ public class DataAccessServiceImpl implements DataAccessService {
     public FeatureCollectionGeoJson getZarrIndexingDataByMonth(String uuid, String key, YearMonth yearMonth) {
         var startDate = Instant.parse(yearMonth.atDay(1) + "T00:00:00.000000000Z");
         var endDate = Instant.parse(yearMonth.atEndOfMonth() + "T23:59:59.999999999Z");
-        try {
+        var url = UriComponentsBuilder.fromUriString(getDataAccessEndpoint() + "/data/{uuid}/{key}/zarr_rect")
+                .queryParam("start_date", startDate)
+                .queryParam("end_date", endDate)
+                .buildAndExpand(uuid, key)
+                .toUriString();
 
-            var url = UriComponentsBuilder.fromUriString(getDataAccessEndpoint() + "/data/{uuid}/{key}/zarr_rect")
-                    .queryParam("start_date", startDate)
-                    .queryParam("end_date", endDate)
-                    .buildAndExpand(uuid, key)
-                    .toUriString();
+        var request = getRequestEntity(List.of(MediaType.APPLICATION_JSON));
 
-            var request = getRequestEntity(List.of(MediaType.APPLICATION_JSON));
+        ResponseEntity<FeatureCollectionGeoJson> responseEntity = restTemplate.exchange(
+                url,
+                HttpMethod.GET,
+                request,
+                new ParameterizedTypeReference<>() {},
+                Map.of()
+        );
 
-            var responseEntity = restTemplate.exchange(
-                    url,
-                    HttpMethod.GET,
-                    request,
-                    new ParameterizedTypeReference<FeatureCollectionGeoJson>() {
-                    },
-                    Map.of()
-            );
-
-            if (!responseEntity.getStatusCode().is2xxSuccessful()) {
-                log.error("Request to DataAccess Service failed with status code: {} for UUID: {} in {} -> {}", responseEntity.getStatusCode(), uuid, startDate, endDate);
-                return null;
-            }
-            if (responseEntity.getBody() == null) {
-                log.warn("No data found from DataAccess Service for UUID: {} in {} -> {}", uuid, startDate, endDate);
-                return null;
-            }
-            return responseEntity.getBody();
-
-        } catch (Exception e) {
-            log.error("Exception thrown while retrieving Zarr indexing data with UUID: {} in {} -> {}", uuid, startDate, endDate, e);
+        if (!responseEntity.getStatusCode().is2xxSuccessful()) {
+            log.error("Request to DataAccess Service failed with status code: {} for UUID: {} in {} -> {}", responseEntity.getStatusCode(), uuid, startDate, endDate);
             return null;
+        }
+        if (responseEntity.getBody() == null) {
+            log.warn("No data found from DataAccess Service for UUID: {} in {} -> {}", uuid, startDate, endDate);
+            return null;
+        }
+        return responseEntity.getBody();
+    }
+
+    @PreDestroy
+    public void cleanup() {
+        if (executorService != null) {
+            shutdownExecutor(executorService);
         }
     }
 

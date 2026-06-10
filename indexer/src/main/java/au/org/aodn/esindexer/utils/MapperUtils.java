@@ -34,6 +34,10 @@ public class MapperUtils {
         protected LinkedHashSet<LinkModel> onlineResources = new LinkedHashSet<>();
     }
 
+    private static <T> List<T> toList(Collection<T> source) {
+        return source == null ? null : new ArrayList<>(source);
+    }
+
     public static List<String> mapContactsRole(CIResponsibilityType2 ciResponsibility) {
         return safeGet(() -> ciResponsibility.getRole().getCIRoleCode().getCodeListValue().trim())
                 .filter(role -> !role.isEmpty())
@@ -73,6 +77,7 @@ public class MapperUtils {
 
     /**
      * Attribute will not be there if it is empty, this align with what Elastic handle null or empty field.
+     *
      * @param address the CIAddressPropertyType2 object to map
      * @return a ContactsAddressModel non-null object with the address info
      */
@@ -83,7 +88,7 @@ public class MapperUtils {
             List<String> deliveryPoints = new ArrayList<>();
 
             value.forEach(deliveryPoint -> {
-                safeGet(()-> deliveryPoint.getCharacterString().getValue().toString().trim())
+                safeGet(() -> deliveryPoint.getCharacterString().getValue().toString().trim())
                         .filter(s -> !s.isEmpty())
                         .ifPresent(deliveryPoints::add);
             });
@@ -182,7 +187,7 @@ public class MapperUtils {
     }
 
     public static List<AbstractLineageInformationPropertyType> findMDResourceLineage(MDMetadataType source) {
-        var lineages =  source.getResourceLineage();
+        var lineages = source.getResourceLineage();
         if (lineages == null) {
             return Collections.emptyList();
         }
@@ -219,160 +224,160 @@ public class MapperUtils {
 
     /**
      * Look into the CIContact XML and extract related info and return as a Contract object. Please modify this function
-     if more fields need to be returned.
-     *   <mdb:contact>
-     *     <cit:CI_Responsibility>
-     *       <cit:role>
-     *         <cit:CI_RoleCode codeList="http://schemas.aodn.org.au/mcp-3.0/codelists.xml#CI_RoleCode" codeListValue="pointOfContact">pointOfContact</cit:CI_RoleCode>
-     *       </cit:role>
-     *       <cit:party>
-     *         <cit:CI_Organisation xsi:schemaLocation="http://standards.iso.org/iso/19115/-3/mds/2.0 http://standards.iso.org/iso/19115/-3/mds/2.0/mds.xsd">
-     *           <cit:name>
-     *             <gco:CharacterString xsi:schemaLocation="http://standards.iso.org/iso/19115/-3/mds/2.0 http://standards.iso.org/iso/19115/-3/mds/2.0/mds.xsd">CSIRO Oceans &amp; Atmosphere - Hobart</gco:CharacterString>
-     *           </cit:name>
-     *           <cit:contactInfo>
-     *             <cit:CI_Contact xsi:schemaLocation="http://standards.iso.org/iso/19115/-3/mds/2.0 http://standards.iso.org/iso/19115/-3/mds/2.0/mds.xsd">
-     *               <cit:phone>
-     *                 <cit:CI_Telephone>
-     *                   <cit:number>
-     *                     <gco:CharacterString>+61 3 6232 5222</gco:CharacterString>
-     *                   </cit:number>
-     *                   <cit:numberType>
-     *                     <cit:CI_TelephoneTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelist/cat/codelists.xml#CI_RoleCode" codeListValue="voice" />
-     *                   </cit:numberType>
-     *                 </cit:CI_Telephone>
-     *               </cit:phone>
-     *               <cit:phone>
-     *                 <cit:CI_Telephone>
-     *                   <cit:number>
-     *                     <gco:CharacterString>+61 3 6232 5000</gco:CharacterString>
-     *                   </cit:number>
-     *                   <cit:numberType>
-     *                     <cit:CI_TelephoneTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelist/cat/codelists.xml#CI_RoleCode" codeListValue="facsimile" />
-     *                   </cit:numberType>
-     *                 </cit:CI_Telephone>
-     *               </cit:phone>
-     *               <cit:address>
-     *                 <cit:CI_Address>
-     *                   <cit:deliveryPoint>
-     *                     <gco:CharacterString>GPO Box 1538</gco:CharacterString>
-     *                   </cit:deliveryPoint>
-     *                   <cit:city>
-     *                     <gco:CharacterString>Hobart</gco:CharacterString>
-     *                   </cit:city>
-     *                   <cit:administrativeArea>
-     *                     <gco:CharacterString>TAS</gco:CharacterString>
-     *                   </cit:administrativeArea>
-     *                   <cit:postalCode>
-     *                     <gco:CharacterString>7001</gco:CharacterString>
-     *                   </cit:postalCode>
-     *                   <cit:country>
-     *                     <gco:CharacterString>Australia</gco:CharacterString>
-     *                   </cit:country>
-     *                   <cit:electronicMailAddress gco:nilReason="missing">
-     *                     <gco:CharacterString />
-     *                   </cit:electronicMailAddress>
-     *                 </cit:CI_Address>
-     *               </cit:address>
-     *               <cit:onlineResource>
-     *                 <cit:CI_OnlineResource>
-     *                   <cit:linkage>
-     *                     <gco:CharacterString>http://www.csiro.au/en/Research/OandA</gco:CharacterString>
-     *                   </cit:linkage>
-     *                   <cit:protocol>
-     *                     <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
-     *                   </cit:protocol>
-     *                   <cit:description>
-     *                     <gco:CharacterString>Web address for organisation CSIRO Oceans &amp; Atmosphere - Hobart</gco:CharacterString>
-     *                   </cit:description>
-     *                 </cit:CI_OnlineResource>
-     *               </cit:onlineResource>
-     *             </cit:CI_Contact>
-     *           </cit:contactInfo>
-     *           <cit:contactInfo>
-     *             <cit:CI_Contact xsi:schemaLocation="http://standards.iso.org/iso/19115/-3/mds/2.0 http://standards.iso.org/iso/19115/-3/mds/2.0/mds.xsd">
-     *               <cit:phone>
-     *                 <cit:CI_Telephone>
-     *                   <cit:number>
-     *                     <gco:CharacterString>+61 3 6232 5222</gco:CharacterString>
-     *                   </cit:number>
-     *                   <cit:numberType>
-     *                     <cit:CI_TelephoneTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelist/cat/codelists.xml#CI_RoleCode" codeListValue="voice" />
-     *                   </cit:numberType>
-     *                 </cit:CI_Telephone>
-     *               </cit:phone>
-     *               <cit:phone>
-     *                 <cit:CI_Telephone>
-     *                   <cit:number>
-     *                     <gco:CharacterString>+61 3 6232 5000</gco:CharacterString>
-     *                   </cit:number>
-     *                   <cit:numberType>
-     *                     <cit:CI_TelephoneTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelist/cat/codelists.xml#CI_RoleCode" codeListValue="facsimile" />
-     *                   </cit:numberType>
-     *                 </cit:CI_Telephone>
-     *               </cit:phone>
-     *               <cit:address>
-     *                 <cit:CI_Address>
-     *                   <cit:deliveryPoint>
-     *                     <gco:CharacterString>Castray Esplanade</gco:CharacterString>
-     *                   </cit:deliveryPoint>
-     *                   <cit:city>
-     *                     <gco:CharacterString>Hobart</gco:CharacterString>
-     *                   </cit:city>
-     *                   <cit:administrativeArea>
-     *                     <gco:CharacterString>TAS</gco:CharacterString>
-     *                   </cit:administrativeArea>
-     *                   <cit:postalCode>
-     *                     <gco:CharacterString>7000</gco:CharacterString>
-     *                   </cit:postalCode>
-     *                   <cit:country>
-     *                     <gco:CharacterString>Australia</gco:CharacterString>
-     *                   </cit:country>
-     *                   <cit:electronicMailAddress gco:nilReason="missing">
-     *                     <gco:CharacterString />
-     *                   </cit:electronicMailAddress>
-     *                 </cit:CI_Address>
-     *               </cit:address>
-     *               <cit:onlineResource>
-     *                 <cit:CI_OnlineResource>
-     *                   <cit:linkage>
-     *                     <gco:CharacterString>http://www.csiro.au/en/Research/OandA</gco:CharacterString>
-     *                   </cit:linkage>
-     *                   <cit:protocol>
-     *                     <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
-     *                   </cit:protocol>
-     *                   <cit:description>
-     *                     <gco:CharacterString>Web address for organisation CSIRO Oceans &amp; Atmosphere - Hobart</gco:CharacterString>
-     *                   </cit:description>
-     *                 </cit:CI_OnlineResource>
-     *               </cit:onlineResource>
-     *             </cit:CI_Contact>
-     *           </cit:contactInfo>
-     *           <cit:individual>
-     *             <cit:CI_Individual>
-     *               <cit:name>
-     *                 <gco:CharacterString>CSIRO O&amp;A, Information &amp; Data Centre</gco:CharacterString>
-     *               </cit:name>
-     *               <cit:contactInfo>
-     *                 <cit:CI_Contact>
-     *                   <cit:address>
-     *                     <cit:CI_Address>
-     *                       <cit:electronicMailAddress>
-     *                         <gco:CharacterString>data-requests-hf@csiro.au</gco:CharacterString>
-     *                       </cit:electronicMailAddress>
-     *                     </cit:CI_Address>
-     *                   </cit:address>
-     *                 </cit:CI_Contact>
-     *               </cit:contactInfo>
-     *               <cit:positionName>
-     *                 <gco:CharacterString>Data Requests</gco:CharacterString>
-     *               </cit:positionName>
-     *             </cit:CI_Individual>
-     *           </cit:individual>
-     *         </cit:CI_Organisation>
-     *       </cit:party>
-     *     </cit:CI_Responsibility>
-     *   </mdb:contact>
+     * if more fields need to be returned.
+     * <mdb:contact>
+     * <cit:CI_Responsibility>
+     * <cit:role>
+     * <cit:CI_RoleCode codeList="http://schemas.aodn.org.au/mcp-3.0/codelists.xml#CI_RoleCode" codeListValue="pointOfContact">pointOfContact</cit:CI_RoleCode>
+     * </cit:role>
+     * <cit:party>
+     * <cit:CI_Organisation xsi:schemaLocation="http://standards.iso.org/iso/19115/-3/mds/2.0 http://standards.iso.org/iso/19115/-3/mds/2.0/mds.xsd">
+     * <cit:name>
+     * <gco:CharacterString xsi:schemaLocation="http://standards.iso.org/iso/19115/-3/mds/2.0 http://standards.iso.org/iso/19115/-3/mds/2.0/mds.xsd">CSIRO Oceans &amp; Atmosphere - Hobart</gco:CharacterString>
+     * </cit:name>
+     * <cit:contactInfo>
+     * <cit:CI_Contact xsi:schemaLocation="http://standards.iso.org/iso/19115/-3/mds/2.0 http://standards.iso.org/iso/19115/-3/mds/2.0/mds.xsd">
+     * <cit:phone>
+     * <cit:CI_Telephone>
+     * <cit:number>
+     * <gco:CharacterString>+61 3 6232 5222</gco:CharacterString>
+     * </cit:number>
+     * <cit:numberType>
+     * <cit:CI_TelephoneTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelist/cat/codelists.xml#CI_RoleCode" codeListValue="voice" />
+     * </cit:numberType>
+     * </cit:CI_Telephone>
+     * </cit:phone>
+     * <cit:phone>
+     * <cit:CI_Telephone>
+     * <cit:number>
+     * <gco:CharacterString>+61 3 6232 5000</gco:CharacterString>
+     * </cit:number>
+     * <cit:numberType>
+     * <cit:CI_TelephoneTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelist/cat/codelists.xml#CI_RoleCode" codeListValue="facsimile" />
+     * </cit:numberType>
+     * </cit:CI_Telephone>
+     * </cit:phone>
+     * <cit:address>
+     * <cit:CI_Address>
+     * <cit:deliveryPoint>
+     * <gco:CharacterString>GPO Box 1538</gco:CharacterString>
+     * </cit:deliveryPoint>
+     * <cit:city>
+     * <gco:CharacterString>Hobart</gco:CharacterString>
+     * </cit:city>
+     * <cit:administrativeArea>
+     * <gco:CharacterString>TAS</gco:CharacterString>
+     * </cit:administrativeArea>
+     * <cit:postalCode>
+     * <gco:CharacterString>7001</gco:CharacterString>
+     * </cit:postalCode>
+     * <cit:country>
+     * <gco:CharacterString>Australia</gco:CharacterString>
+     * </cit:country>
+     * <cit:electronicMailAddress gco:nilReason="missing">
+     * <gco:CharacterString />
+     * </cit:electronicMailAddress>
+     * </cit:CI_Address>
+     * </cit:address>
+     * <cit:onlineResource>
+     * <cit:CI_OnlineResource>
+     * <cit:linkage>
+     * <gco:CharacterString>http://www.csiro.au/en/Research/OandA</gco:CharacterString>
+     * </cit:linkage>
+     * <cit:protocol>
+     * <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
+     * </cit:protocol>
+     * <cit:description>
+     * <gco:CharacterString>Web address for organisation CSIRO Oceans &amp; Atmosphere - Hobart</gco:CharacterString>
+     * </cit:description>
+     * </cit:CI_OnlineResource>
+     * </cit:onlineResource>
+     * </cit:CI_Contact>
+     * </cit:contactInfo>
+     * <cit:contactInfo>
+     * <cit:CI_Contact xsi:schemaLocation="http://standards.iso.org/iso/19115/-3/mds/2.0 http://standards.iso.org/iso/19115/-3/mds/2.0/mds.xsd">
+     * <cit:phone>
+     * <cit:CI_Telephone>
+     * <cit:number>
+     * <gco:CharacterString>+61 3 6232 5222</gco:CharacterString>
+     * </cit:number>
+     * <cit:numberType>
+     * <cit:CI_TelephoneTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelist/cat/codelists.xml#CI_RoleCode" codeListValue="voice" />
+     * </cit:numberType>
+     * </cit:CI_Telephone>
+     * </cit:phone>
+     * <cit:phone>
+     * <cit:CI_Telephone>
+     * <cit:number>
+     * <gco:CharacterString>+61 3 6232 5000</gco:CharacterString>
+     * </cit:number>
+     * <cit:numberType>
+     * <cit:CI_TelephoneTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelist/cat/codelists.xml#CI_RoleCode" codeListValue="facsimile" />
+     * </cit:numberType>
+     * </cit:CI_Telephone>
+     * </cit:phone>
+     * <cit:address>
+     * <cit:CI_Address>
+     * <cit:deliveryPoint>
+     * <gco:CharacterString>Castray Esplanade</gco:CharacterString>
+     * </cit:deliveryPoint>
+     * <cit:city>
+     * <gco:CharacterString>Hobart</gco:CharacterString>
+     * </cit:city>
+     * <cit:administrativeArea>
+     * <gco:CharacterString>TAS</gco:CharacterString>
+     * </cit:administrativeArea>
+     * <cit:postalCode>
+     * <gco:CharacterString>7000</gco:CharacterString>
+     * </cit:postalCode>
+     * <cit:country>
+     * <gco:CharacterString>Australia</gco:CharacterString>
+     * </cit:country>
+     * <cit:electronicMailAddress gco:nilReason="missing">
+     * <gco:CharacterString />
+     * </cit:electronicMailAddress>
+     * </cit:CI_Address>
+     * </cit:address>
+     * <cit:onlineResource>
+     * <cit:CI_OnlineResource>
+     * <cit:linkage>
+     * <gco:CharacterString>http://www.csiro.au/en/Research/OandA</gco:CharacterString>
+     * </cit:linkage>
+     * <cit:protocol>
+     * <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
+     * </cit:protocol>
+     * <cit:description>
+     * <gco:CharacterString>Web address for organisation CSIRO Oceans &amp; Atmosphere - Hobart</gco:CharacterString>
+     * </cit:description>
+     * </cit:CI_OnlineResource>
+     * </cit:onlineResource>
+     * </cit:CI_Contact>
+     * </cit:contactInfo>
+     * <cit:individual>
+     * <cit:CI_Individual>
+     * <cit:name>
+     * <gco:CharacterString>CSIRO O&amp;A, Information &amp; Data Centre</gco:CharacterString>
+     * </cit:name>
+     * <cit:contactInfo>
+     * <cit:CI_Contact>
+     * <cit:address>
+     * <cit:CI_Address>
+     * <cit:electronicMailAddress>
+     * <gco:CharacterString>data-requests-hf@csiro.au</gco:CharacterString>
+     * </cit:electronicMailAddress>
+     * </cit:CI_Address>
+     * </cit:address>
+     * </cit:CI_Contact>
+     * </cit:contactInfo>
+     * <cit:positionName>
+     * <gco:CharacterString>Data Requests</gco:CharacterString>
+     * </cit:positionName>
+     * </cit:CI_Individual>
+     * </cit:individual>
+     * </cit:CI_Organisation>
+     * </cit:party>
+     * </cit:CI_Responsibility>
+     * </mdb:contact>
      *
      * @param contactsProperty The CIContactPropertyType2, it will appear in organization or individual contact
      * @return A temp object to hold the contact info
@@ -435,7 +440,6 @@ public class MapperUtils {
     }
 
 
-
     public static List<ContactsModel> mapContactsFromOrg(CIResponsibilityType2 ciResponsibility, CIOrganisationType2 organisation) {
         // If the organisation has no individual contacts, just create organisation contacts model
         if (safeGet(organisation::getIndividual).map(List::isEmpty).orElse(true)) {
@@ -444,10 +448,10 @@ public class MapperUtils {
                     .builder()
                     .roles(mapContactsRole(ciResponsibility))
                     .organization(mapContactsOrganization(organisation))
-                    .addresses(orgContactInfo.map(Contacts::getAddresses).orElse(null))
-                    .emails(orgContactInfo.map(Contacts::getEmails).orElse(null))
-                    .phones(orgContactInfo.map(Contacts::getPhones).orElse(null))
-                    .links(orgContactInfo.map(Contacts::getOnlineResources).orElse(null))
+                    .addresses(toList(orgContactInfo.map(Contacts::getAddresses).orElse(null)))
+                    .emails(toList(orgContactInfo.map(Contacts::getEmails).orElse(null)))
+                    .phones(toList(orgContactInfo.map(Contacts::getPhones).orElse(null)))
+                    .links(toList(orgContactInfo.map(Contacts::getOnlineResources).orElse(null)))
                     .build();
 
             return List.of(orgContactsModel);
@@ -468,29 +472,29 @@ public class MapperUtils {
 
                     // Set the contact info from individual or organisation
                     // Always prefer individual contact info over organisation contact info
-                    contactsModel.setAddresses(
+                    contactsModel.setAddresses(toList(
                             indvContactInfo.map(Contacts::getAddresses)
                                     .filter(addr -> !addr.isEmpty())
                                     .orElse(orgContactInfo.map(Contacts::getAddresses).orElse(null))
-                    );
+                    ));
 
-                    contactsModel.setEmails(
+                    contactsModel.setEmails(toList(
                             indvContactInfo.map(Contacts::getEmails)
                                     .filter(email -> !email.isEmpty())
                                     .orElse(orgContactInfo.map(Contacts::getEmails).orElse(null))
-                    );
+                    ));
 
-                    contactsModel.setPhones(
+                    contactsModel.setPhones(toList(
                             indvContactInfo.map(Contacts::getPhones)
                                     .filter(phone -> !phone.isEmpty())
                                     .orElse(orgContactInfo.map(Contacts::getPhones).orElse(null))
-                    );
+                    ));
 
-                    contactsModel.setLinks(
+                    contactsModel.setLinks(toList(
                             indvContactInfo.map(Contacts::getOnlineResources)
                                     .filter(link -> !link.isEmpty())
                                     .orElse(orgContactInfo.map(Contacts::getOnlineResources).orElse(null))
-                    );
+                    ));
 
                     return contactsModel;
                 })
@@ -504,10 +508,10 @@ public class MapperUtils {
                 .roles(mapContactsRole(ciResponsibility))
                 .name(mapContactsName(individual))
                 .position(mapContactsPosition(individual))
-                .addresses(indvContactInfo.map(Contacts::getAddresses).orElse(null))
-                .emails(indvContactInfo.map(Contacts::getEmails).orElse(null))
-                .phones(indvContactInfo.map(Contacts::getPhones).orElse(null))
-                .links(indvContactInfo.map(Contacts::getOnlineResources).orElse(null))
+                .addresses(toList(indvContactInfo.map(Contacts::getAddresses).orElse(null)))
+                .emails(toList(indvContactInfo.map(Contacts::getEmails).orElse(null)))
+                .phones(toList(indvContactInfo.map(Contacts::getPhones).orElse(null)))
+                .links(toList(indvContactInfo.map(Contacts::getOnlineResources).orElse(null)))
                 .build();
         return List.of(indvContactsModel);
     }

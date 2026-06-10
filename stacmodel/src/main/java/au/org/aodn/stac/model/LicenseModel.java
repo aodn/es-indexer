@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class License {
+public class LicenseModel {
     private String title;
     private String url;
     private String licenseGraphic;

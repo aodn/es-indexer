@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuppressWarnings("unused")
-public class Citation {
+public class CitationModel {
 
     private String suggestedCitation;
     private List<String> useLimitations;

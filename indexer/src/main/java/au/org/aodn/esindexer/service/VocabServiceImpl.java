@@ -510,8 +510,23 @@ public class VocabServiceImpl implements VocabService {
                 Thread.currentThread().interrupt();  // Restore interrupt status
                 log.error("Thread was interrupted while processing vocab tasks", e);
             } finally {
-                executorService.shutdown();
+                shutdownExecutor(executorService);
             }
         }, CompletableFuture.delayedExecutor(delay, TimeUnit.MINUTES, Executors.newSingleThreadExecutor()));
+    }
+
+    protected void shutdownExecutor(ExecutorService executor) {
+        executor.shutdown();
+        try {
+            if (!executor.awaitTermination(60, TimeUnit.SECONDS)) {
+                executor.shutdownNow();
+                if (!executor.awaitTermination(60, TimeUnit.SECONDS)) {
+                    log.error("Executor did not terminate");
+                }
+            }
+        } catch (InterruptedException ie) {
+            executor.shutdownNow();
+            Thread.currentThread().interrupt();
+        }
     }
 }

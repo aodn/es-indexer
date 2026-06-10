@@ -53,7 +53,6 @@ import java.io.InputStream;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static au.org.aodn.esindexer.utils.CommonUtils.safeGet;
@@ -302,28 +301,30 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
         // search_as_you_type enabled fields can be extended
         // safely merge original parameter vocabs and AI-predicted Parameter vocabs and platform vocabs to serch suggestion
         // Merge parameterVocabs and aiParameterVocabs, handling null cases
-        Set<String> allParameterVocabs = Stream.of(
+        List<String> allParameterVocabs = Stream.of(
                         stacCollectionModel.getSummaries().getParameterVocabs(),
                         stacCollectionModel.getSummaries().getAiParameterVocabs()
                 )
-                .filter(Objects::nonNull) // skip null sets, e.g. no AI parameter vocabs
+                .filter(Objects::nonNull) // skip null lists, e.g. no AI parameter vocabs
                 .flatMap(Collection::stream)
-                .collect(Collectors.toSet());
+                .distinct()
+                .toList();
 
         // Merge platformVocabs and aiPlatformVocabs
-        Set<String> allPlatformVocabs = Stream.of(
+        List<String> allPlatformVocabs = Stream.of(
                         stacCollectionModel.getSummaries().getPlatformVocabs(),
-                        stacCollectionModel.getSummaries().getAiPlatformVocabs() // skip null sets, e.g. no AI platform vocabs
+                        stacCollectionModel.getSummaries().getAiPlatformVocabs() // skip null lists, e.g. no AI platform vocabs
                 )
                 .filter(Objects::nonNull)
                 .flatMap(Collection::stream)
-                .collect(Collectors.toSet());
+                .distinct()
+                .toList();
 
         SearchSuggestionsModel searchSuggestionsModel = SearchSuggestionsModel.builder()
-                .abstractPhrases(self.extractTokensFromDescription(stacCollectionModel.getDescription(), targetIndexName))
+                .abstractPhrases(List.copyOf(self.extractTokensFromDescription(stacCollectionModel.getDescription(), targetIndexName)))
                 .parameterVocabs(allParameterVocabs)
                 .platformVocabs(allPlatformVocabs)
-                .organisationVocabs(new HashSet<>(stacCollectionModel.getSummaries().getOrganisationVocabs()))
+                .organisationVocabs(stacCollectionModel.getSummaries().getOrganisationVocabs())
                 .build();
         stacCollectionModel.setSearchSuggestionsModel(searchSuggestionsModel);
 
@@ -617,7 +618,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
             }
         }
         finally {
-            executor.shutdown();
+            shutdownExecutor(executor);
         }
 
         try {
@@ -712,6 +713,21 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
 
         } catch (ElasticsearchException | IOException e) {
             log.error("Failed to check/delete same name index: {} | {}", alias, e.getMessage());
+        }
+    }
+
+    protected void shutdownExecutor(ExecutorService executor) {
+        executor.shutdown();
+        try {
+            if (!executor.awaitTermination(60, TimeUnit.SECONDS)) {
+                executor.shutdownNow();
+                if (!executor.awaitTermination(60, TimeUnit.SECONDS)) {
+                    log.error("Executor did not terminate");
+                }
+            }
+        } catch (InterruptedException ie) {
+            executor.shutdownNow();
+            Thread.currentThread().interrupt();
         }
     }
 }

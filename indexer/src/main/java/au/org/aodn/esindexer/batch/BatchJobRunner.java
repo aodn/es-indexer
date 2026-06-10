@@ -1,5 +1,6 @@
 package au.org.aodn.esindexer.batch;
 
+import au.org.aodn.cloudoptimized.service.DataAccessService;
 import au.org.aodn.esindexer.service.IndexCloudOptimizedService;
 import au.org.aodn.esindexer.service.IndexerMetadataService;
 import lombok.extern.slf4j.Slf4j;
@@ -39,6 +40,9 @@ public class BatchJobRunner {
 
     @Autowired
     private IndexerMetadataService indexerMetadataService;
+
+    @Autowired
+    protected DataAccessService dataAccessService;
 
     private static final String INDEX_ALL_METADATA = "indexAllMetadata";
     private static final String INDEX_ALL_METADATA_FROM_UUID = "indexAllMetadataFromUuid";
@@ -96,12 +100,15 @@ public class BatchJobRunner {
 
 
     private void indexAllCloudOptimisedDataset(String beginWithUuid) {
-        log.info("Indexing all cloud optimised dataset");
+        LoggingCallback loggingCallback = new LoggingCallback();
         try{
-            var loggingCallback = new LoggingCallback();
+            loggingCallback.onProgress("Indexing all cloud optimised dataset");
             indexCloudOptimizedService.indexAllCloudOptimizedData(beginWithUuid, loggingCallback);
         } catch (Exception e) {
-            log.error("Error indexing all cloud optimised dataset", e);
+            loggingCallback.onProgress(String.format("Error indexing all cloud optimised dataset %s", e));
+        }
+        finally {
+            loggingCallback.onComplete("Finished indexing all cloud optimised dataset");
         }
     }
 

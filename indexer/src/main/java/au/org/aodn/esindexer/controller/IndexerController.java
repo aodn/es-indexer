@@ -88,16 +88,16 @@ public class IndexerController {
 
     /**
      * index all metadata records in aws batch, it is to prevent aws to gracefully shutdown ecs instance and cause some unexpected issues.
-     * @param confirm
-     * @param beginWithUuid
-     * @return
-     * @throws IOException
+     * @param confirm - Must set to true to begin a load
+     * @param beginWithUuid - You want to start load from a particular uuid, it is useful for resume previous incomplete
+     * @return - The job result
+     * @throws IOException - Any failure during reload, it is the caller to handle the error
      */
     @PostMapping(path="/allinbatch", consumes = "application/json", produces = "application/json")
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Index all metadata records from GeoNetwork in aws batch")
     public ResponseEntity<String> indexAllMetadataRecordsInBatch(
             @RequestParam(value = "confirm", defaultValue = "false") Boolean confirm,
-            @RequestParam(value = "beginWithUuid", required=false) String beginWithUuid) throws IOException {
+            @RequestParam(value = "beginWithUuid", required=false) String beginWithUuid) {
 
         if (!confirm) {
             return ResponseEntity.badRequest().body("You must set confirm to true to really index all metadata records in batch");
@@ -247,28 +247,21 @@ public class IndexerController {
 
         Callable<Void> task = () -> {
             try {
-                // Verify if data access service is up or not, it may be down during processing but we have retry
-                DataAccessService.HealthStatus status = dataAccessService.getHealthStatus();
-                if(status != DataAccessService.HealthStatus.UP) {
-                    callback.onComplete(String.format("Data Access Service status %s is not UP, please retry later", status.toString()));
-                }
-                else {
-                    Map<String, MetadataEntity> metadata = dataAccessService.getMetadataByUuid(uuid);
+                Map<String, MetadataEntity> metadata = dataAccessService.getMetadataByUuid(uuid);
 
-                    if (metadata != null) {
-                        for (String key : metadata.keySet()) {
-                            List<TemporalExtent> temporalExtents = dataAccessService.getTemporalExtentOf(uuid, key);
+                if (metadata != null) {
+                    for (String key : metadata.keySet()) {
+                        List<TemporalExtent> temporalExtents = dataAccessService.getTemporalExtentOf(uuid, key);
 
-                            if (!temporalExtents.isEmpty()) {
-                                // Only first block works from dataservice api
-                                LocalDate startDate = start == null ? temporalExtents.get(0).getLocalStartDate() : LocalDate.parse(start);
-                                LocalDate endDate = end == null ? temporalExtents.get(0).getLocalEndDate() : LocalDate.parse(end);
-                                log.info("Index cloud optimized data with UUID: {} from {} to {}", uuid, startDate, endDate);
+                        if (!temporalExtents.isEmpty()) {
+                            // Only first block works from dataservice api
+                            LocalDate startDate = start == null ? temporalExtents.get(0).getLocalStartDate() : LocalDate.parse(start);
+                            LocalDate endDate = end == null ? temporalExtents.get(0).getLocalEndDate() : LocalDate.parse(end);
+                            log.info("Index cloud optimized data with UUID: {} from {} to {}", uuid, startDate, endDate);
 
-                                indexCloudOptimizedData.indexCloudOptimizedData(metadata.get(key), startDate, endDate, callback);
-                            } else {
-                                log.info("Index cloud optimized data : {} not found", uuid);
-                            }
+                            indexCloudOptimizedData.indexCloudOptimizedData(metadata.get(key), startDate, endDate, callback);
+                        } else {
+                            log.info("Index cloud optimized data : {} not found", uuid);
                         }
                     }
                 }
@@ -330,8 +323,16 @@ public class IndexerController {
             }
 
             @Override
-            public void onError(Throwable throwable) {
-                emitter.completeWithError(throwable);
+            public void onError(Throwable t) {
+                try {
+                    emitter.send(SseEmitter.event()
+                            .name("error")
+                            .data(t.getMessage()));
+                    emitter.complete();
+                } catch (Exception e) {
+                    emitter.completeWithError(e);
+                }
+
             }
         };
     }
