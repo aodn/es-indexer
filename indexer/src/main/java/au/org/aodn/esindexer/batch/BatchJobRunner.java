@@ -75,7 +75,7 @@ public class BatchJobRunner {
                 if (jobParam != null) {
                     throw new IllegalArgumentException("Job parameter not required for job: " + jobName);
                 }
-                indexAllCloudOptimisedDataset(null);
+                indexAllCloudOptimisedDataset("");
                 break;
 
             case INDEX_ALL_CLOUD_OPTIMISED_DATASET_FROM_UUID:
