@@ -35,7 +35,7 @@ public class AcronymService {
 
     /**
      * Push the configured acronyms into the ES synonyms set (creates or fully replaces it; overwrites, never appends).
-     * Live update, no reindex required.
+     * Triggered on a full reindex or by POST /api/v1/indexer/index/acronyms — live update, no reindex required.
      */
     public void syncAcronyms() throws IOException {
         List<SynonymRule> synonymRules = acronyms.stream()
