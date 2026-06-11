@@ -5,7 +5,6 @@ import au.org.aodn.cloudoptimized.service.DataAccessService;
 import au.org.aodn.datadiscoveryai.model.AiEnhancementRequest;
 import au.org.aodn.datadiscoveryai.model.AiEnhancementResponse;
 import au.org.aodn.datadiscoveryai.service.DataDiscoveryAiService;
-import au.org.aodn.esindexer.configuration.AcronymConfig;
 import au.org.aodn.esindexer.utils.GcmdKeywordUtils;
 import au.org.aodn.esindexer.utils.GeometryUtils;
 import au.org.aodn.esindexer.utils.JaxbUtils;
@@ -89,6 +88,9 @@ public class StacCollectionMapperServiceTest {
     @MockitoBean
     protected DataDiscoveryAiService dataDiscoveryAiService;
 
+    @MockitoBean
+    protected AcronymService acronymService;
+
     @Autowired
     protected StacCollectionMapperService service;
 
@@ -141,7 +143,7 @@ public class StacCollectionMapperServiceTest {
                 vocabsService,
                 gcmdKeywordUtils,
                 dataDiscoveryAiService,
-                new AcronymConfig()
+                acronymService
         );
         indexerService = spy(indexerService);
         indexerService.self = indexerService;

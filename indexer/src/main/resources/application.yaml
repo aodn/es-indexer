@@ -52,7 +52,7 @@ elasticsearch:
     tokens:
       name: shingle_analyser
   acronyms:
-    # acronym => full name rules, pushed to the ES synonyms set on full reindex (#8387)
+    # acronym => full name rules, pushed to the ES synonyms set on full reindex
     name: portal-acronyms
     values:
       - "nrmn => national reef monitoring network"
@@ -283,9 +283,9 @@ springdoc:
 # Actuator info point
 info:
   application:
-    name: '@project.name@'
-    description: '@project.description@'
-    version: '@project.version@'
+    name: "@project.name@"
+    description: "@project.description@"
+    version: "@project.version@"
 
 logging:
   level:

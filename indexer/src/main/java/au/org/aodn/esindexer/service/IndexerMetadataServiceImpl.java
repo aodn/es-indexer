@@ -3,7 +3,6 @@ package au.org.aodn.esindexer.service;
 import au.org.aodn.ardcvocabs.model.VocabModel;
 import au.org.aodn.datadiscoveryai.service.DataDiscoveryAiService;
 import au.org.aodn.datadiscoveryai.model.AiEnhancementRequest;
-import au.org.aodn.esindexer.configuration.AcronymConfig;
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.exception.*;
 import au.org.aodn.esindexer.utils.CommonUtils;
@@ -75,7 +74,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
     protected VocabService vocabService;
     protected GcmdKeywordUtils gcmdKeywordUtils;
     protected DataDiscoveryAiService dataDiscoveryAiService;
-    protected AcronymConfig acronymConfig;
+    protected AcronymService acronymService;
 
     @Lazy
     @Autowired
@@ -95,7 +94,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
             VocabService vocabService,
             GcmdKeywordUtils gcmdKeywordUtils,
             DataDiscoveryAiService dataDiscoveryAiService,
-            AcronymConfig acronymConfig
+            AcronymService acronymService
     ) {
         super(elasticsearchClient, indexerObjectMapper);
 
@@ -111,7 +110,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
         this.vocabService = vocabService;
         this.gcmdKeywordUtils = gcmdKeywordUtils;
         this.dataDiscoveryAiService = dataDiscoveryAiService;
-        this.acronymConfig = acronymConfig;
+        this.acronymService = acronymService;
     }
 
     public Hit<ObjectNode> getDocumentByUUID(String uuid) throws IOException {
@@ -498,7 +497,12 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
             log.info("Indexing all metadata records from GeoNetwork");
 
             // Sync the synonyms set referenced by the schema before creating the index.
-            elasticSearchIndexService.replaceSynonymSet(acronymConfig.getName(), acronymConfig.getValues());
+            // An acronym sync failure shouldn't abort the whole reindex.
+            try {
+                acronymService.syncAcronyms();
+            } catch (ElasticsearchException | IOException e) {
+                log.error("Acronym sync failed, continuing reindex: {}", e.getMessage());
+            }
 
             // Because it is a full reindex, we need to remove the incomplete index first, and then recreate it.
             // currently, we don't want any leftover incomplete indices existing if we are not resume indexing based on it.

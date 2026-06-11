@@ -5,6 +5,7 @@ import au.org.aodn.cloudoptimized.model.TemporalExtent;
 import au.org.aodn.cloudoptimized.service.DataAccessService;
 import au.org.aodn.esindexer.service.IndexCloudOptimizedService;
 import au.org.aodn.esindexer.service.IndexService;
+import au.org.aodn.esindexer.service.AcronymService;
 import au.org.aodn.esindexer.service.IndexerMetadataService;
 import au.org.aodn.metadata.geonetwork.service.GeoNetworkService;
 import co.elastic.clients.elasticsearch.core.BulkResponse;
@@ -52,6 +53,9 @@ public class IndexerController {
     @Autowired
     BatchClient batchClient;
 
+    @Autowired
+    AcronymService acronymService;
+
     @GetMapping(path="/records/{uuid}", produces = "application/json")
     @Operation(description = "Get a document from GeoNetwork by UUID directly - JSON format response")
     public ResponseEntity<String> getMetadataRecordFromGeoNetworkByUUID(@PathVariable("uuid") String uuid) {
@@ -84,6 +88,18 @@ public class IndexerController {
 
         List<BulkResponse> responses = indexerMetadata.indexAllMetadataRecordsFromGeoNetwork(beginWithUuid, confirm, null);
         return ResponseEntity.ok(responses.toString());
+    }
+
+    /**
+     * Push the acronyms configured in application.yaml into the ES synonyms set, live (no reindex).
+     * @return A confirmation message
+     */
+    @PostMapping(path="/acronyms", produces = "application/json")
+    @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Push the configured acronyms into the ES synonyms set (live update, no reindex)")
+    public ResponseEntity<String> syncAcronyms() throws IOException {
+        log.info("syncing acronym synonyms set from configuration");
+        acronymService.syncAcronyms();
+        return ResponseEntity.ok("Acronym synonyms set updated");
     }
 
     /**

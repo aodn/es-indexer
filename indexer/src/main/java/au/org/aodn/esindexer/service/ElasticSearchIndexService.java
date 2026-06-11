@@ -101,18 +101,14 @@ public class ElasticSearchIndexService {
     }
 
     /** Creates or fully replaces the named ES synonyms set with the given rules ("acronym => full name"); overwrites, never appends. */
-    public void replaceSynonymSet(String synonymSetName, List<String> rules) {
+    public void replaceSynonymSet(String synonymSetName, List<String> rules) throws IOException {
         List<SynonymRule> synonymRules = rules.stream()
                 .map(rule -> SynonymRule.of(r -> r.synonyms(rule)))
                 .collect(Collectors.toList());
-        try {
-            portalElasticsearchClient.synonyms().putSynonym(b -> b
-                    .id(synonymSetName)
-                    .synonymsSet(synonymRules));
-            log.info("Replaced synonyms set '{}' with {} rules", synonymSetName, synonymRules.size());
-        } catch (ElasticsearchException | IOException e) {
-            log.error("Failed to replace synonyms set '{}': {}", synonymSetName, e.getMessage());
-        }
+        portalElasticsearchClient.synonyms().putSynonym(b -> b
+                .id(synonymSetName)
+                .synonymsSet(synonymRules));
+        log.info("Replaced synonyms set '{}' with {} rules", synonymSetName, synonymRules.size());
     }
 
     /**
