@@ -14,7 +14,6 @@ import co.elastic.clients.elasticsearch.core.SearchRequest;
 import co.elastic.clients.elasticsearch.indices.CreateIndexRequest;
 import co.elastic.clients.elasticsearch.indices.CreateIndexResponse;
 import co.elastic.clients.elasticsearch.indices.GetAliasResponse;
-import co.elastic.clients.elasticsearch.synonyms.SynonymRule;
 import co.elastic.clients.transport.endpoints.BooleanResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -98,17 +97,6 @@ public class ElasticSearchIndexService {
             log.error("Failed to create index: {} | {}", indexName, e.getMessage());
             throw new CreateIndexException("Failed to elastic index from schema file: " + indexName + " | " + e.getMessage());
         }
-    }
-
-    /** Creates or fully replaces the named ES synonyms set with the given rules ("acronym => full name"); overwrites, never appends. */
-    public void replaceSynonymSet(String synonymSetName, List<String> rules) throws IOException {
-        List<SynonymRule> synonymRules = rules.stream()
-                .map(rule -> SynonymRule.of(r -> r.synonyms(rule)))
-                .collect(Collectors.toList());
-        portalElasticsearchClient.synonyms().putSynonym(b -> b
-                .id(synonymSetName)
-                .synonymsSet(synonymRules));
-        log.info("Replaced synonyms set '{}' with {} rules", synonymSetName, synonymRules.size());
     }
 
     /**
