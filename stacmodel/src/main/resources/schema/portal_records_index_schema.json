@@ -5,6 +5,11 @@
         "custom_analyser": {
           "type": "custom",
           "tokenizer": "standard",
+          "filter": ["lowercase", "english_stop"]
+        },
+        "acronym_search_analyser": {
+          "type": "custom",
+          "tokenizer": "standard",
           "filter": ["lowercase", "english_stop", "acronym_synonym_filter"]
         },
         "shingle_analyser": {
@@ -94,7 +99,7 @@
       },
       "title": {
         "type": "text",
-        "analyzer": "custom_analyser",
+        "search_analyzer": "acronym_search_analyser",
         "fields": {
           "keyword": {
             "type": "keyword"
@@ -106,19 +111,23 @@
         "properties": {
           "abstract_phrases": {
             "type": "search_as_you_type",
-            "analyzer": "custom_analyser"
+            "analyzer": "custom_analyser",
+            "search_analyzer": "acronym_search_analyser"
           },
           "parameter_vocabs_sayt": {
             "type": "search_as_you_type",
-            "analyzer": "custom_analyser"
+            "analyzer": "custom_analyser",
+            "search_analyzer": "acronym_search_analyser"
           },
           "platform_vocabs_sayt": {
             "type": "search_as_you_type",
-            "analyzer": "custom_analyser"
+            "analyzer": "custom_analyser",
+            "search_analyzer": "acronym_search_analyser"
           },
           "organisation_vocabs_sayt": {
             "type": "search_as_you_type",
-            "analyzer": "custom_analyser"
+            "analyzer": "custom_analyser",
+            "search_analyzer": "acronym_search_analyser"
           }
         }
       },
@@ -152,7 +161,7 @@
       },
       "description": {
         "type": "text",
-        "analyzer": "custom_analyser"
+        "search_analyzer": "acronym_search_analyser"
       },
       "license": {
         "type": "keyword",
