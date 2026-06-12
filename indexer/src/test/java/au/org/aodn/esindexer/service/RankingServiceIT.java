@@ -35,13 +35,11 @@ class RankingServiceIT extends BaseTestClass {
     RankingServiceImpl rankingService;
 
     private StacCollectionModel stacCollectionModel;
-    private ExtentModel extentModel;
 
     @BeforeEach
     public void setUp() {
         stacCollectionModel = StacCollectionModel.builder().build();
-        extentModel = ExtentModel.builder().build();
-        stacCollectionModel.setExtent(extentModel);
+        stacCollectionModel.setExtent(ExtentModel.builder().build());
     }
 
     @Test
