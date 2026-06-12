@@ -320,7 +320,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
                 .toList();
 
         SearchSuggestionsModel searchSuggestionsModel = SearchSuggestionsModel.builder()
-                .abstractPhrases(List.copyOf(self.extractTokensFromDescription(stacCollectionModel.getDescription(), targetIndexName)))
+                .abstractPhrases(abstractPhrasesWithAcronyms(stacCollectionModel.getDescription(), targetIndexName))
                 .parameterVocabs(allParameterVocabs)
                 .platformVocabs(allPlatformVocabs)
                 .organisationVocabs(stacCollectionModel.getSummaries().getOrganisationVocabs())
@@ -328,6 +328,13 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
         stacCollectionModel.setSearchSuggestionsModel(searchSuggestionsModel);
 
         return stacCollectionModel;
+    }
+
+    /** Autocomplete phrases from the abstract, plus acronym phrases so typing "aa" surfaces "AA - aurora australis". */
+    protected List<String> abstractPhrasesWithAcronyms(String description, String targetIndexName) throws IOException {
+        Set<String> phrases = new HashSet<>(self.extractTokensFromDescription(description, targetIndexName));
+        phrases.addAll(acronymService.buildAcronymSuggestions(description));
+        return List.copyOf(phrases);
     }
 
     /**

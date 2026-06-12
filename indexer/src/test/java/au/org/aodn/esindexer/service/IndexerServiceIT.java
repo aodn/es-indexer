@@ -217,6 +217,35 @@ public class IndexerServiceIT extends BaseTestClass {
     }
 
     /**
+     * typing "aa" in the autocomplete must surface the full name: sample12 contains "Aurora Australis"
+     * but no "aa" token, so a hit can only come from the phrase added at index time.
+     */
+    @Test
+    public void acronymPhraseIsAddedToSuggestions() throws IOException {
+        var uuid = "201112060";
+        try {
+            insertMetadataRecords(uuid, "classpath:canned/sample12.xml");
+            indexerService.indexAllMetadataRecordsFromGeoNetwork(null, true, null);
+
+            var resp = client.search(s -> s
+                    .index(INDEX_NAME)
+                    .query(q -> q.nested(n -> n
+                            .path("search_suggestions")
+                            .query(nq -> nq.matchBoolPrefix(m -> m
+                                    .field("search_suggestions.abstract_phrases")
+                                    .query("aa")
+                            ))
+                    )), ObjectNode.class);
+
+            Assertions.assertFalse(resp.hits().hits().isEmpty(),
+                    "Suggestion input 'aa' should match the 'aa aurora australis' phrase added at index time");
+        } finally {
+            clearElasticIndex(INDEX_NAME);
+            deleteRecord(uuid);
+        }
+    }
+
+    /**
      * Test that running index is preserved when indexing fails midway,
      * allowing resume with beginWithUuid parameter.
      */

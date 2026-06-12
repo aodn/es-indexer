@@ -10,6 +10,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -45,5 +46,26 @@ public class AcronymService {
                 .id(synonymSetName)
                 .synonymsSet(synonymRules));
         log.info("Replaced synonyms set '{}' with {} rules", synonymSetName, synonymRules.size());
+    }
+
+    /** So a user typing "aa" in the search box gets "AA - aurora australis" in the autocomplete dropdown. */
+    public List<String> buildAcronymSuggestions(String text) {
+        if (text == null || text.isBlank()) {
+            return List.of();
+        }
+        String lowerCaseText = text.toLowerCase();
+        List<String> suggestions = new ArrayList<>();
+        for (String rule : acronyms) {
+            String[] parts = rule.split("=>", 2);   // each rule: "aa => aurora australis"
+            if (parts.length != 2) {
+                continue;
+            }
+            String acronym = parts[0].trim();
+            String fullName = parts[1].trim();
+            if (!fullName.isEmpty() && lowerCaseText.contains(fullName)) {
+                suggestions.add(acronym.toUpperCase() + " - " + fullName);
+            }
+        }
+        return suggestions;
     }
 }
