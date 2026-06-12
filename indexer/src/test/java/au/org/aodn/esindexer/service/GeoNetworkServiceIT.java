@@ -1,5 +1,6 @@
 package au.org.aodn.esindexer.service;
 
+import au.org.aodn.esindexer.Application;
 import au.org.aodn.stac.model.RelationType;
 import au.org.aodn.esindexer.BaseTestClass;
 import au.org.aodn.esindexer.configuration.GeoNetworkSearchTestConfig;
@@ -33,7 +34,10 @@ import java.util.List;
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(
+        webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
+        classes = Application.class
+)
 @ActiveProfiles("test")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -362,7 +366,7 @@ public class GeoNetworkServiceIT extends BaseTestClass {
     }
     /**
      * This is a strange XML found in gn4, not a valid metadata
-     * @throws IOException
+     * @throws IOException - Not expected to throw
      */
     @Test
     public void verifyDocWithNoContentWorks() throws IOException {

@@ -1,5 +1,7 @@
 package au.org.aodn.stac.util;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 
 import java.io.BufferedReader;
@@ -7,10 +9,7 @@ import java.io.Reader;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class JsonUtilTest {
 
@@ -49,5 +48,32 @@ public class JsonUtilTest {
         // Non-existent file returns null
         Reader r = JsonUtil.createJsonStream("does-not-exist.json", null);
         assertNull(r, "should return null for missing resource");
+
+        // Critical: synonym_graph filter using updateable synonyms_set MUST NOT be present
+        // in any index-time analyzer (ES forbids it). It may only appear via search_analyzer.
+        try (Reader reader = JsonUtil.createJsonStream("portal_records_index_schema.json", Map.of("portal-acronyms", "it-synset"))) {
+            assertNotNull(reader);
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode root = mapper.readTree(new BufferedReader(reader).lines().collect(Collectors.joining("\n")));
+
+            JsonNode customAnalyser = root.path("settings").path("analysis").path("analyzer").path("custom_analyser");
+            JsonNode searchAnalyser = root.path("settings").path("analysis").path("analyzer").path("acronym_search_analyser");
+
+            String customFilters = customAnalyser.path("filter").toString();
+            String searchFilters = searchAnalyser.path("filter").toString();
+
+            assertFalse(customFilters.contains("acronym_synonym_filter"),
+                    "custom_analyser (index) must not reference the synonym filter");
+            assertTrue(searchFilters.contains("acronym_synonym_filter"),
+                    "acronym_search_analyser (search) must include the synonym filter");
+
+            // Spot-check that search_analyzer is wired on key fields
+            JsonNode title = root.path("mappings").path("properties").path("title");
+            assertTrue(title.has("search_analyzer"), "title should declare search_analyzer for acronym expansion");
+            assertEquals("acronym_search_analyser", title.path("search_analyzer").asText());
+
+            JsonNode desc = root.path("mappings").path("properties").path("description");
+            assertTrue(desc.has("search_analyzer"));
+        }
     }
 }

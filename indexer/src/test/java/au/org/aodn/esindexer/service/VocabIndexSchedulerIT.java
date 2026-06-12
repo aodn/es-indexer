@@ -1,6 +1,7 @@
 package au.org.aodn.esindexer.service;
 
 
+import au.org.aodn.esindexer.Application;
 import au.org.aodn.esindexer.BaseTestClass;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
@@ -17,7 +18,8 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 
 @SpringBootTest(
-        webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
+        webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
+        classes = Application.class
 )
 @ActiveProfiles("test")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)

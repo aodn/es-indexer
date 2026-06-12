@@ -1,6 +1,7 @@
 package au.org.aodn.esindexer.service;
 
 import au.org.aodn.datadiscoveryai.service.DataDiscoveryAiService;
+import au.org.aodn.esindexer.Application;
 import au.org.aodn.esindexer.BaseTestClass;
 import au.org.aodn.esindexer.configuration.GeoNetworkSearchTestConfig;
 import au.org.aodn.esindexer.model.MockServer;
@@ -34,7 +35,10 @@ import static org.springframework.test.web.client.match.MockRestRequestMatchers.
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withResourceNotFound;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(
+        webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
+        classes = Application.class
+)
 @ActiveProfiles("test")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -768,7 +772,7 @@ public class IndexerServiceIT extends BaseTestClass {
                     grave's tiring room."[76][f]
                     """;
 
-            Set<String> token = ((IndexerMetadataServiceImpl)indexerService).extractTokensFromDescription(bigDesc, INDEX_NAME);
+            Set<String> token = (indexerService).extractTokensFromDescription(bigDesc, INDEX_NAME);
             Assertions.assertTrue(token.size() <= 1500, "Should not generate big token given larger desc");
         }
         finally {

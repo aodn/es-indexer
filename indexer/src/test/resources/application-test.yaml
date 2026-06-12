@@ -40,3 +40,7 @@ logging:
     au.org.aodn.ardcvocabs.service: DEBUG
     org.hibernate.SQL: DEBUG
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    # Reduce noise from Spring Boot test context bootstrap when @SpringBootTest
+    # classes do not declare an explicit nested @Configuration or classes= attribute.
+    org.springframework.test.context.support.AnnotationConfigContextLoaderUtils: WARN
+    org.springframework.boot.test.context.SpringBootTestContextBootstrapper: WARN
