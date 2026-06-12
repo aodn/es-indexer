@@ -25,6 +25,7 @@ elasticsearch:
   query:
     pageSize: 4
   acronyms:
+    name: portal-acronyms-test
     values:
       - "aa => aurora australis"
 

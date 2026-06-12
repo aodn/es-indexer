@@ -4,6 +4,7 @@ import au.org.aodn.esindexer.exception.CreateIndexException;
 import au.org.aodn.esindexer.exception.DeleteIndexException;
 import au.org.aodn.esindexer.exception.IndexNotFoundException;
 import au.org.aodn.esindexer.exception.MultipleIndicesException;
+import au.org.aodn.stac.util.JsonUtil;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.ElasticsearchException;
 import co.elastic.clients.elasticsearch.cat.IndicesResponse;
@@ -17,11 +18,13 @@ import co.elastic.clients.elasticsearch.indices.GetAliasResponse;
 import co.elastic.clients.transport.endpoints.BooleanResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.Reader;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 
@@ -32,6 +35,8 @@ public class ElasticSearchIndexService {
     @Autowired
     ElasticsearchClient portalElasticsearchClient;
 
+    @Value("${elasticsearch.acronyms.name:portal-acronyms}")
+    protected String acronymName;
 
     // Naming below follows the blue-green deployment pattern which is the pattern we are using for index updates and are recommended naming convention.
     private static final String indexSuffix1 = "-blue";
@@ -84,11 +89,11 @@ public class ElasticSearchIndexService {
         log.info("Reading index schema definition from JSON file: {}", indexMappingFile);
 
         // https://www.baeldung.com/java-classpath-resource-cannot-be-opened#resources
-        try (InputStream inputStream = getClass().getResourceAsStream("/schema/" + indexMappingFile)) {
+        try (Reader reader = JsonUtil.createJsonStream(indexMappingFile, Map.of("portal-acronyms", acronymName))) {
             log.info("Creating index: {}", indexName);
             CreateIndexRequest req = CreateIndexRequest.of(b -> b
                     .index(indexName)
-                    .withJson(inputStream)
+                    .withJson(reader)
             );
             CreateIndexResponse response = portalElasticsearchClient.indices().create(req);
             log.info(response.toString());

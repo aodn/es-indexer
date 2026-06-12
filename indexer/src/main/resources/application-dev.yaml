@@ -9,6 +9,8 @@ app:
 elasticsearch:
   index:
     name: dev_portal_records
+  acronyms:
+    name: portal-acronyms-dev
   serverUrl: https://dev-discovery-index.es.ap-southeast-2.aws.found.io
   apiKey: sample-api-key
 

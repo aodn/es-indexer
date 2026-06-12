@@ -9,6 +9,10 @@ app:
     enableGridSpatialExtents: true
     reducerPrecision: 4.0
 
+elasticsearch:
+  acronyms:
+    name: portal-acronyms-edge
+
 management:
   endpoints:
     web:

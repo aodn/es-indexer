@@ -1,5 +1,6 @@
 package au.org.aodn.esindexer.configuration;
 
+import au.org.aodn.esindexer.service.AcronymService;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.json.jackson.JacksonJsonpMapper;
 import co.elastic.clients.transport.rest_client.RestClientTransport;
@@ -14,6 +15,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.List;
 
 @Configuration
 public class ElasticSearchConfig {
@@ -48,5 +51,13 @@ public class ElasticSearchConfig {
 
         // Create the transport with a Jackson mapper
         return new RestClientTransport(restClient, new JacksonJsonpMapper());
+    }
+
+    @Bean
+    public AcronymService acronymService(
+            @Value("${elasticsearch.acronyms.name:portal-acronyms}") String synonymSetName,
+            @Value("${elasticsearch.acronyms.values:}") List<String> acronyms,
+            @Qualifier("portalElasticsearchClient") ElasticsearchClient portalElasticsearchClient) {
+        return new AcronymService(synonymSetName, acronyms, portalElasticsearchClient);
     }
 }

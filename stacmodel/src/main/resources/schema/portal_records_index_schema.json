@@ -5,11 +5,6 @@
         "custom_analyser": {
           "type": "custom",
           "tokenizer": "standard",
-          "filter": ["lowercase", "english_stop"]
-        },
-        "acronym_search_analyser": {
-          "type": "custom",
-          "tokenizer": "standard",
           "filter": ["lowercase", "english_stop", "acronym_synonym_filter"]
         },
         "shingle_analyser": {
@@ -38,7 +33,7 @@
         },
         "acronym_synonym_filter": {
           "type": "synonym_graph",
-          "synonyms_set": "portal-acronyms",
+          "synonyms_set": "${portal-acronyms}",
           "updateable": true
         },
         "shingle_filter": {
@@ -100,7 +95,6 @@
       "title": {
         "type": "text",
         "analyzer": "custom_analyser",
-        "search_analyzer": "acronym_search_analyser",
         "fields": {
           "keyword": {
             "type": "keyword"
@@ -158,8 +152,7 @@
       },
       "description": {
         "type": "text",
-        "analyzer": "custom_analyser",
-        "search_analyzer": "acronym_search_analyser"
+        "analyzer": "custom_analyser"
       },
       "license": {
         "type": "keyword",
