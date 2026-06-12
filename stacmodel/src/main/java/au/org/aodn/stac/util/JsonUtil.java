@@ -26,8 +26,10 @@ public class JsonUtil {
         try (InputStream inputStream = JsonUtil.class.getResourceAsStream("/schema/" + indexMappingFile)) {
             if (inputStream != null) {
                 String json = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
-                for (Map.Entry<String, String> entry : param.entrySet()) {
-                    json = json.replace("${" + entry.getKey() + "}", entry.getValue());
+                if(param != null) {
+                    for (Map.Entry<String, String> entry : param.entrySet()) {
+                        json = json.replace("${" + entry.getKey() + "}", entry.getValue());
+                    }
                 }
                 return new StringReader(json);
             }

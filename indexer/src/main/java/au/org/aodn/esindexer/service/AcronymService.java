@@ -2,14 +2,8 @@ package au.org.aodn.esindexer.service;
 
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch.synonyms.SynonymRule;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.bind.Bindable;
-import org.springframework.boot.context.properties.bind.Binder;
-import org.springframework.core.env.Environment;
-import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.List;
@@ -20,8 +14,10 @@ import java.util.stream.Collectors;
 public class AcronymService {
 
     private final ElasticsearchClient portalElasticsearchClient;
-    private final String synonymSetName;
     private final List<String> acronyms;
+
+    @Getter
+    private final String synonymSetName;
 
     public AcronymService(
             String synonymSetName,

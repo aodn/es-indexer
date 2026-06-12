@@ -394,7 +394,7 @@ public class VocabServiceImpl implements VocabService {
         }
 
         // recreate index from mapping JSON file
-        elasticSearchIndexService.recreateIndexFromMappingJSONFile(AppConstants.VOCABS_INDEX_MAPPING_SCHEMA_FILE, vocabsIndexName);
+        elasticSearchIndexService.recreateIndexFromMappingJSONFile(AppConstants.VOCABS_INDEX_MAPPING_SCHEMA_FILE, vocabsIndexName, null);
         log.info("Indexing all vocabs to {}", vocabsIndexName);
 
         bulkIndexVocabs(vocabDtos);

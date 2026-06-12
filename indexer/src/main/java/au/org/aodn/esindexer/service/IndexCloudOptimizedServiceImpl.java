@@ -99,7 +99,7 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
         }
         else {
             // Do it from scratch so make sense to refresh the schema
-            elasticSearchIndexService.recreateIndexFromMappingJSONFile(AppConstants.DATASET_INDEX_MAPPING_JSON_FILE, indexName);
+            elasticSearchIndexService.recreateIndexFromMappingJSONFile(AppConstants.DATASET_INDEX_MAPPING_JSON_FILE, indexName, null);
         }
 
         callback.onProgress(String.format("UUIDs to be process : %s", sorted));

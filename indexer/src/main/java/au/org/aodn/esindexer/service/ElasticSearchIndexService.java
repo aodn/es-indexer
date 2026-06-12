@@ -18,7 +18,6 @@ import co.elastic.clients.elasticsearch.indices.GetAliasResponse;
 import co.elastic.clients.transport.endpoints.BooleanResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -34,9 +33,6 @@ public class ElasticSearchIndexService {
 
     @Autowired
     ElasticsearchClient portalElasticsearchClient;
-
-    @Value("${elasticsearch.acronyms.name:portal-acronyms}")
-    protected String acronymName;
 
     // Naming below follows the blue-green deployment pattern which is the pattern we are using for index updates and are recommended naming convention.
     private static final String indexSuffix1 = "-blue";
@@ -81,7 +77,7 @@ public class ElasticSearchIndexService {
         }
     }
 
-    public void recreateIndexFromMappingJSONFile(String indexMappingFile, String indexName) {
+    public void recreateIndexFromMappingJSONFile(String indexMappingFile, String indexName, Map<String, String> indexSettings) {
         // delete the existing index if found first
         this.deleteIndexStore(indexName);
 
@@ -89,7 +85,7 @@ public class ElasticSearchIndexService {
         log.info("Reading index schema definition from JSON file: {}", indexMappingFile);
 
         // https://www.baeldung.com/java-classpath-resource-cannot-be-opened#resources
-        try (Reader reader = JsonUtil.createJsonStream(indexMappingFile, Map.of("portal-acronyms", acronymName))) {
+        try (Reader reader = JsonUtil.createJsonStream(indexMappingFile, indexSettings)) {
             log.info("Creating index: {}", indexName);
             CreateIndexRequest req = CreateIndexRequest.of(b -> b
                     .index(indexName)

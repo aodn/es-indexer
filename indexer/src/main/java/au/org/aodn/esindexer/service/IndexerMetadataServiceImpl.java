@@ -507,7 +507,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
             // Because it is a full reindex, we need to remove the incomplete index first, and then recreate it.
             // currently, we don't want any leftover incomplete indices existing if we are not resume indexing based on it.
             log.warn("An incomplete index with name {} is found, it will be deleted and recreated because there is no beginWithUuid provided to resume from a particular UUID. ", incompleteIndexName);
-            elasticSearchIndexService.recreateIndexFromMappingJSONFile(AppConstants.PORTAL_RECORDS_MAPPING_JSON_FILE, runningIndexName);
+            elasticSearchIndexService.recreateIndexFromMappingJSONFile(AppConstants.PORTAL_RECORDS_MAPPING_JSON_FILE, runningIndexName, Map.of("portal-acronyms", acronymService.getSynonymSetName()));
 
             // give the working index an running alias for more robust handling
             elasticSearchIndexService.updateAliasToNewIndex(runningAliasName, runningIndexName);
