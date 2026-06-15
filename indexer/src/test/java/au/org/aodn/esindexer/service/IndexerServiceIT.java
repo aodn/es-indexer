@@ -243,7 +243,11 @@ public class IndexerServiceIT extends BaseTestClass {
             var resp = client.search(s -> s
                     .index(INDEX_NAME)
                     .query(q -> q.multiMatch(mm -> mm
-                            .fields("title.search_as_you_type", "title.search_as_you_type._2gram", "title.search_as_you_type._3gram")
+                            .fields(
+                                    "search_suggestions.abstract_phrases^10",
+                                    "search_suggestions.abstract_phrases._2gram^5",
+                                    "search_suggestions.abstract_phrases._3gram^2"
+                            )
                             .query("auro")
                             .type(TextQueryType.BoolPrefix))), ObjectNode.class);
 
