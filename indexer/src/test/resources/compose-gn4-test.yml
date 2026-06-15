@@ -31,14 +31,14 @@ services:
     command: >
       bash -c '
         echo "Waiting for Elasticsearch API responsiveness...";
-        until curl -s -u "elastic:changeme" http://elastic:9200/_cluster/health | grep -q -E "(yellow|green)"; do 
-          echo "Waiting for cluster to be healthy..."; 
-          sleep 5; 
+        until curl -s -u "elastic:changeme" http://elastic:9200/_cluster/health | grep -q -E "(yellow|green)"; do
+          echo "Waiting for cluster to be healthy...";
+          sleep 5;
         done;
         echo "Setting kibana_system password...";
-        until curl -s -u "elastic:changeme" -H "Content-Type: application/json" -X POST http://elastic:9200/_security/user/kibana_system/_password -d "{\"password\":\"password\"}" | grep -q "^{}"; do 
+        until curl -s -u "elastic:changeme" -H "Content-Type: application/json" -X POST http://elastic:9200/_security/user/kibana_system/_password -d "{\"password\":\"password\"}" | grep -q "^{}"; do
           echo "Retrying password configuration...";
-          sleep 5; 
+          sleep 5;
         done;
         echo "All done";
       '
