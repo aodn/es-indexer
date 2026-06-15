@@ -6,6 +6,7 @@ import au.org.aodn.esindexer.BaseTestClass;
 import au.org.aodn.esindexer.configuration.GeoNetworkSearchTestConfig;
 import au.org.aodn.esindexer.model.MockServer;
 import au.org.aodn.metadata.geonetwork.service.GeoNetworkServiceImpl;
+import co.elastic.clients.elasticsearch._types.query_dsl.TextQueryType;
 import co.elastic.clients.elasticsearch.core.search.Hit;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -194,7 +195,6 @@ public class IndexerServiceIT extends BaseTestClass {
             deleteRecord(uuid);
         }
     }
-
     /**
      * searching by an acronym must match a document that only contains the full name.
      * sample12'ans title/description contain "Aurora Australis" but no "aa" token; the dictionary maps
@@ -219,7 +219,41 @@ public class IndexerServiceIT extends BaseTestClass {
             deleteRecord(uuid);
         }
     }
+    /**
+     * Tests whether a partial input query using the "search_as_you_type" field matches partial terms
+     * in indexed records. A more comprehensive test is in ogc api, here we just make sure change do not
+     * result in empty list.
+     * The test performs the following:
+     * - Inserts a metadata record with a specific UUID into the GeoNetwork system using a provided XML sample.
+     * - Indexes all metadata records into Elasticsearch for searching.
+     * - Executes a search query using the Elasticsearch client with the "search_as_you_type" field and its 2-gram and 3-gram variations.
+     * - Verifies that a partial query term ('auro') matches documents containing phrases such as 'aurora australis'.
+     * - Ensures that the expected hits are returned from the index.
+     * Cleanup operations are performed in a `finally` block, which includes clearing the Elasticsearch index and deleting the inserted record.
+     *
+     * @throws IOException If an I/O exception occurs during the test execution.
+     */
+    @Test
+    public void searchAsYouTypeQueryMatchesPartialInput() throws IOException {
+        var uuid = "201112060";
+        try {
+            insertMetadataRecords(uuid, "classpath:canned/sample12.xml");
+            indexerService.indexAllMetadataRecordsFromGeoNetwork(null, true, null);
 
+            var resp = client.search(s -> s
+                    .index(INDEX_NAME)
+                    .query(q -> q.multiMatch(mm -> mm
+                            .fields("title.search_as_you_type", "title.search_as_you_type._2gram", "title.search_as_you_type._3gram")
+                            .query("auro")
+                            .type(TextQueryType.BoolPrefix))), ObjectNode.class);
+
+            Assertions.assertFalse(resp.hits().hits().isEmpty(),
+                    "Partial query 'auro' should match 'aurora australis' via search_as_you_type fields");
+        } finally {
+            clearElasticIndex(INDEX_NAME);
+            deleteRecord(uuid);
+        }
+    }
     /**
      * Test that running index is preserved when indexing fails midway,
      * allowing resume with beginWithUuid parameter.

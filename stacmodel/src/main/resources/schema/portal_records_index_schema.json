@@ -2,7 +2,7 @@
   "settings": {
     "analysis": {
       "analyzer": {
-        "custom_analyser": {
+        "english_stop_analyser": {
           "type": "custom",
           "tokenizer": "standard",
           "filter": ["lowercase", "english_stop"]
@@ -111,23 +111,19 @@
         "properties": {
           "abstract_phrases": {
             "type": "search_as_you_type",
-            "analyzer": "custom_analyser",
-            "search_analyzer": "acronym_search_analyser"
+            "analyzer": "english_stop_analyser"
           },
           "parameter_vocabs_sayt": {
             "type": "search_as_you_type",
-            "analyzer": "custom_analyser",
-            "search_analyzer": "acronym_search_analyser"
+            "analyzer": "english_stop_analyser"
           },
           "platform_vocabs_sayt": {
             "type": "search_as_you_type",
-            "analyzer": "custom_analyser",
-            "search_analyzer": "acronym_search_analyser"
+            "analyzer": "english_stop_analyser"
           },
           "organisation_vocabs_sayt": {
             "type": "search_as_you_type",
-            "analyzer": "custom_analyser",
-            "search_analyzer": "acronym_search_analyser"
+            "analyzer": "english_stop_analyser"
           }
         }
       },
