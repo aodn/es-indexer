@@ -49,6 +49,8 @@ public class GeoNetworkSearchTestConfig {
         // ES is set to use password for authenticate, hence if your connection to "/" for ES will result in 401
         // if server start correctly
         ComposeContainer container = new ComposeContainer(new File("src/test/resources/compose-gn4-test.yml"))
+                // Enable log streaming for all child services
+                .withTailChildContainers(true)
                 // Technically we do not need the Elastic port expose as query is done via geonetwork. Here
                 // we just use the port for wait purpose
                 .withExposedService(GN_ELASTIC_NAME, 1, GN_ELASTIC_PORT,

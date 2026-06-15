@@ -1,18 +1,7 @@
-# start a test instance of gn4 and elastic search 7 that required by gn4, it is better to debug this by
+# start a test instance of gn4 and elastic search that required by gn4, it is better to debug this by
 # first start this compose locally and make sure it works before you run it with the autotest. That makes
 # your debug easier.
 services:
-  setup:
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.19.10
-    user: "1000"
-    command: >
-      bash -c '
-        until curl http://elastic:9200 | grep -q "missing authentication credentials"; do echo "Waiting es-container up... "; sleep 2; done;
-        echo "Setting kibana_system password";
-        until curl -s -u "elastic:changeme" -H "Content-Type: application/json" http://elastic:9200/_security/user/kibana_system/_password -d "{\"password\":\"password\"}" | grep -q "^{}"; do sleep 10; done;
-        echo "All done";
-      '
-
   elastic:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.19.10
     environment:
@@ -20,15 +9,39 @@ services:
       - ELASTIC_PASSWORD=changeme
       - xpack.security.enabled=true
       - discovery.type=single-node
+      # Suppress disk watermark checks for unstable local/test environments
+      - cluster.routing.allocation.disk.threshold_enabled=false
     healthcheck:
       test:
         [
           "CMD-SHELL",
-          "curl -s http://elastic:9200 | grep -q 'missing authentication credentials'",
+          "curl -s http://localhost:9200 | grep -q 'missing authentication credentials'",
         ]
       interval: 10s
       timeout: 10s
       retries: 120
+
+  setup:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.19.10
+    # Run as root inside setup container to allow low-level network hooks if needed
+    user: "0"
+    depends_on:
+      elastic:
+        condition: service_healthy
+    command: >
+      bash -c '
+        echo "Waiting for Elasticsearch API responsiveness...";
+        until curl -s -u "elastic:changeme" http://elastic:9200/_cluster/health | grep -q -E "(yellow|green)"; do 
+          echo "Waiting for cluster to be healthy..."; 
+          sleep 5; 
+        done;
+        echo "Setting kibana_system password...";
+        until curl -s -u "elastic:changeme" -H "Content-Type: application/json" -X POST http://elastic:9200/_security/user/kibana_system/_password -d "{\"password\":\"password\"}" | grep -q "^{}"; do 
+          echo "Retrying password configuration...";
+          sleep 5; 
+        done;
+        echo "All done";
+      '
 
   kibana:
     image: docker.elastic.co/kibana/kibana:8.19.10
@@ -36,15 +49,16 @@ services:
       - ELASTICSEARCH_HOSTS=http://elastic:9200
       - ELASTICSEARCH_USERNAME=kibana_system
       - ELASTICSEARCH_PASSWORD=password
-      - ENTERPRISESEARCH_HOST=http://enterprise-search:3002
     depends_on:
       elastic:
         condition: service_healthy
+      setup:
+        condition: service_completed_successfully
     healthcheck:
       test:
         [
           "CMD-SHELL",
-          "curl -s -I http://kibana:5601 | grep -q 'HTTP/1.1 302 Found'",
+          "curl -s -I http://localhost:5601 | grep -q 'HTTP/1.1 302 Found'",
         ]
       interval: 10s
       timeout: 10s
@@ -52,7 +66,6 @@ services:
 
   geonetwork:
     image: geonetwork:4.4.9
-    # https://github.com/docker/compose/issues/8154
     depends_on:
       kibana:
         condition: service_healthy
@@ -64,9 +77,4 @@ services:
         -Des.url=${ES_PROTOCOL:-http}://${ES_HOST:-elastic}:${ES_PORT:-9200}
         -Des.username=${ES_USERNAME:-elastic}
         -Des.password=${ES_PASSWORD:-changeme}
-
       KB_URL: ${KB_URL:-http://kibana:5601}
-    # If you want to debug this yml, you can uncomment the port mapping
-    # however port is of no use when running in testcontainer
-    # ports:
-    #  - 8080:8080
