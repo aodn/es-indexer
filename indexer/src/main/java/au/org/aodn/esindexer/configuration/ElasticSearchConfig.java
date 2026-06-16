@@ -1,8 +1,10 @@
 package au.org.aodn.esindexer.configuration;
 
+import au.org.aodn.esindexer.service.AcronymService;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.json.jackson.JacksonJsonpMapper;
 import co.elastic.clients.transport.rest_client.RestClientTransport;
+import lombok.Data;
 import org.apache.http.Header;
 import org.apache.http.HttpHost;
 import org.apache.http.client.config.CookieSpecs;
@@ -12,11 +14,22 @@ import org.elasticsearch.client.RestClient;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.List;
+
 @Configuration
 public class ElasticSearchConfig {
+
+    @Data
+    @Configuration
+    @ConfigurationProperties(prefix = "elasticsearch.acronyms")
+    public static class AcronymConfigProperties {
+        private String name;
+        private List<String> values;
+    }
 
     @Bean(name = "portalElasticsearchClient")
     public ElasticsearchClient createElasticsearchClient(@Qualifier("portalElasticTransport") RestClientTransport transport) {
@@ -48,5 +61,12 @@ public class ElasticSearchConfig {
 
         // Create the transport with a Jackson mapper
         return new RestClientTransport(restClient, new JacksonJsonpMapper());
+    }
+
+    @Bean
+    public AcronymService acronymService(
+            AcronymConfigProperties props,
+            @Qualifier("portalElasticsearchClient") ElasticsearchClient portalElasticsearchClient) {
+        return new AcronymService(props.getName(), props.getValues(), portalElasticsearchClient);
     }
 }

@@ -1,5 +1,6 @@
 package au.org.aodn.esindexer.service;
 
+import au.org.aodn.esindexer.Application;
 import au.org.aodn.esindexer.BaseTestClass;
 import au.org.aodn.stac.model.*;
 import org.junit.jupiter.api.*;
@@ -17,7 +18,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(
+        webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
+        classes = Application.class
+)
 @ActiveProfiles("test")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -35,13 +39,11 @@ class RankingServiceIT extends BaseTestClass {
     RankingServiceImpl rankingService;
 
     private StacCollectionModel stacCollectionModel;
-    private ExtentModel extentModel;
 
     @BeforeEach
     public void setUp() {
         stacCollectionModel = StacCollectionModel.builder().build();
-        extentModel = ExtentModel.builder().build();
-        stacCollectionModel.setExtent(extentModel);
+        stacCollectionModel.setExtent(ExtentModel.builder().build());
     }
 
     @Test

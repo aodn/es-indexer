@@ -4,6 +4,7 @@ import au.org.aodn.esindexer.exception.CreateIndexException;
 import au.org.aodn.esindexer.exception.DeleteIndexException;
 import au.org.aodn.esindexer.exception.IndexNotFoundException;
 import au.org.aodn.esindexer.exception.MultipleIndicesException;
+import au.org.aodn.stac.util.JsonUtil;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.ElasticsearchException;
 import co.elastic.clients.elasticsearch.cat.IndicesResponse;
@@ -20,8 +21,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.Reader;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 
@@ -31,7 +33,6 @@ public class ElasticSearchIndexService {
 
     @Autowired
     ElasticsearchClient portalElasticsearchClient;
-
 
     // Naming below follows the blue-green deployment pattern which is the pattern we are using for index updates and are recommended naming convention.
     private static final String indexSuffix1 = "-blue";
@@ -76,7 +77,7 @@ public class ElasticSearchIndexService {
         }
     }
 
-    public void recreateIndexFromMappingJSONFile(String indexMappingFile, String indexName) {
+    public void recreateIndexFromMappingJSONFile(String indexMappingFile, String indexName, Map<String, String> indexSettings) {
         // delete the existing index if found first
         this.deleteIndexStore(indexName);
 
@@ -84,11 +85,11 @@ public class ElasticSearchIndexService {
         log.info("Reading index schema definition from JSON file: {}", indexMappingFile);
 
         // https://www.baeldung.com/java-classpath-resource-cannot-be-opened#resources
-        try (InputStream inputStream = getClass().getResourceAsStream("/schema/" + indexMappingFile)) {
+        try (Reader reader = JsonUtil.createJsonStream(indexMappingFile, indexSettings)) {
             log.info("Creating index: {}", indexName);
             CreateIndexRequest req = CreateIndexRequest.of(b -> b
                     .index(indexName)
-                    .withJson(inputStream)
+                    .withJson(reader)
             );
             CreateIndexResponse response = portalElasticsearchClient.indices().create(req);
             log.info(response.toString());
@@ -98,7 +99,6 @@ public class ElasticSearchIndexService {
             throw new CreateIndexException("Failed to elastic index from schema file: " + indexName + " | " + e.getMessage());
         }
     }
-
 
     /**
      * Generate a versioned index name by appending the current date and time to the base index name.

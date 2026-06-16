@@ -1,10 +1,12 @@
 package au.org.aodn.esindexer.service;
 
 import au.org.aodn.datadiscoveryai.service.DataDiscoveryAiService;
+import au.org.aodn.esindexer.Application;
 import au.org.aodn.esindexer.BaseTestClass;
 import au.org.aodn.esindexer.configuration.GeoNetworkSearchTestConfig;
 import au.org.aodn.esindexer.model.MockServer;
 import au.org.aodn.metadata.geonetwork.service.GeoNetworkServiceImpl;
+import co.elastic.clients.elasticsearch._types.query_dsl.TextQueryType;
 import co.elastic.clients.elasticsearch.core.search.Hit;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -34,7 +36,10 @@ import static org.springframework.test.web.client.match.MockRestRequestMatchers.
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withResourceNotFound;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(
+        webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
+        classes = Application.class
+)
 @ActiveProfiles("test")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -190,7 +195,76 @@ public class IndexerServiceIT extends BaseTestClass {
             deleteRecord(uuid);
         }
     }
+    /**
+     * searching by an acronym must match a document that only contains the full name.
+     * sample12'ans title/description contain "Aurora Australis" but no "aa" token; the dictionary maps
+     * "aa => aurora australis". A hit on the query "aa" can therefore only come from search-time
+     * synonym expansion via acronym_search_analyser.
+     */
+    @Test
+    public void acronymQueryExpandsToFullNameAndMatchesDocument() throws IOException {
+        var uuid = "201112060";
+        try {
+            insertMetadataRecords(uuid, "classpath:canned/sample12.xml");
+            indexerService.indexAllMetadataRecordsFromGeoNetwork(null, true, null);
 
+            var resp = client.search(s -> s
+                    .index(INDEX_NAME)
+                    .query(q -> q.match(m -> m.field("title").query("aa"))), ObjectNode.class);
+
+            Assertions.assertFalse(resp.hits().hits().isEmpty(),
+                    "Acronym query 'aa' should expand to 'aurora australis' and match sample12");
+        } finally {
+            clearElasticIndex(INDEX_NAME);
+            deleteRecord(uuid);
+        }
+    }
+    /**
+     * Tests whether a partial input query using the "search_as_you_type" field matches partial terms
+     * in indexed records. A more comprehensive test is in ogc api, here we just make sure change do not
+     * result in empty list.
+     * The test performs the following:
+     * - Inserts a metadata record with a specific UUID into the GeoNetwork system using a provided XML sample.
+     * - Indexes all metadata records into Elasticsearch for searching.
+     * - Executes a search query using the Elasticsearch client with the "search_as_you_type" field and its 2-gram and 3-gram variations.
+     * - Verifies that a partial query term ('auro') matches documents containing phrases such as 'aurora australis'.
+     * - Ensures that the expected hits are returned from the index.
+     * Cleanup operations are performed in a `finally` block, which includes clearing the Elasticsearch index and deleting the inserted record.
+     *
+     * @throws IOException If an I/O exception occurs during the test execution.
+     */
+    @Test
+    public void searchAsYouTypeQueryMatchesPartialInput() throws IOException {
+        var uuid = "201112060";
+        try {
+            insertMetadataRecords(uuid, "classpath:canned/sample12.xml");
+            indexerService.indexAllMetadataRecordsFromGeoNetwork(null, true, null);
+
+            var resp = client.search(s -> s
+                    .index(INDEX_NAME)
+                    .query(q -> q.bool(b -> b
+                            .filter(f -> f.matchAll(ma -> ma))
+                            .must(m -> m.nested(n -> n
+                                    .path("search_suggestions")
+                                    .query(nq -> nq.bool(nb -> nb
+                                            .should(sb -> sb.bool(b1 -> b1.should(
+                                                    m1 -> m1.multiMatch(mm -> mm
+                                                            .fields("search_suggestions.abstract_phrases^10", "search_suggestions.abstract_phrases._2gram^5", "search_suggestions.abstract_phrases._3gram^2")
+                                                            .fuzziness("AUTO")
+                                                            .query("auro")
+                                                            .type(TextQueryType.BoolPrefix))
+                                            )))
+                                    ))
+                            ))
+                    )), ObjectNode.class);
+
+            Assertions.assertFalse(resp.hits().hits().isEmpty(),
+                    "Partial query 'auro' should match 'aurora australis' via search_as_you_type fields");
+        } finally {
+            clearElasticIndex(INDEX_NAME);
+            deleteRecord(uuid);
+        }
+    }
     /**
      * Test that running index is preserved when indexing fails midway,
      * allowing resume with beginWithUuid parameter.
@@ -743,7 +817,7 @@ public class IndexerServiceIT extends BaseTestClass {
                     grave's tiring room."[76][f]
                     """;
 
-            Set<String> token = ((IndexerMetadataServiceImpl)indexerService).extractTokensFromDescription(bigDesc, INDEX_NAME);
+            Set<String> token = (indexerService).extractTokensFromDescription(bigDesc, INDEX_NAME);
             Assertions.assertTrue(token.size() <= 1500, "Should not generate big token given larger desc");
         }
         finally {

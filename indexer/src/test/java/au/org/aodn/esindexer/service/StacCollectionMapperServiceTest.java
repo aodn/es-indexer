@@ -88,6 +88,9 @@ public class StacCollectionMapperServiceTest {
     @MockitoBean
     protected DataDiscoveryAiService dataDiscoveryAiService;
 
+    @MockitoBean
+    protected AcronymService acronymService;
+
     @Autowired
     protected StacCollectionMapperService service;
 
@@ -139,7 +142,8 @@ public class StacCollectionMapperServiceTest {
                 service,
                 vocabsService,
                 gcmdKeywordUtils,
-                dataDiscoveryAiService
+                dataDiscoveryAiService,
+                acronymService
         );
         indexerService = spy(indexerService);
         indexerService.self = indexerService;
@@ -153,7 +157,7 @@ public class StacCollectionMapperServiceTest {
 
         doNothing()
                 .when(elasticSearchIndexService)
-                .recreateIndexFromMappingJSONFile(anyString(), anyString());
+                .recreateIndexFromMappingJSONFile(anyString(), anyString(), any());
 
         doAnswer(ans -> {
             lastRequest.set(ans.getArgument(0));
