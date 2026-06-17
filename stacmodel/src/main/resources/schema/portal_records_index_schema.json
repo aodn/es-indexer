@@ -10,7 +10,7 @@
         "acronym_search_analyser": {
           "type": "custom",
           "tokenizer": "standard",
-          "filter": ["lowercase", "english_stop", "acronym_synonym_filter"]
+          "filter": ["lowercase", "acronym_synonym_filter"]
         },
         "shingle_analyser": {
           "type": "custom",
@@ -99,10 +99,13 @@
       },
       "title": {
         "type": "text",
-        "search_analyzer": "acronym_search_analyser",
         "fields": {
           "keyword": {
             "type": "keyword"
+          },
+          "synonyms": {
+            "type": "text",
+            "search_analyzer": "acronym_search_analyser"
           }
         }
       },
@@ -157,7 +160,12 @@
       },
       "description": {
         "type": "text",
-        "search_analyzer": "acronym_search_analyser"
+        "fields": {
+          "synonyms": {
+            "type": "text",
+            "search_analyzer": "acronym_search_analyser"
+          }
+        }
       },
       "license": {
         "type": "keyword",

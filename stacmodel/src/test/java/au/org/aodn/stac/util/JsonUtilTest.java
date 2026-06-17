@@ -67,13 +67,16 @@ public class JsonUtilTest {
             assertTrue(searchFilters.contains("acronym_synonym_filter"),
                     "acronym_search_analyser (search) must include the synonym filter");
 
-            // Spot-check that search_analyzer is wired on key fields
+            // Acronym expansion lives on dedicated synonyms sub-fields, kept off the primary
+            // title/description fields so their analysis stays clean.
             JsonNode title = root.path("mappings").path("properties").path("title");
-            assertTrue(title.has("search_analyzer"), "title should declare search_analyzer for acronym expansion");
-            assertEquals("acronym_search_analyser", title.path("search_analyzer").asText());
+            assertFalse(title.has("search_analyzer"), "primary title must not carry the acronym analyzer");
+            assertEquals("acronym_search_analyser", title.path("fields").path("synonyms").path("search_analyzer").asText(),
+                    "title.synonyms sub-field should declare the acronym search_analyzer");
 
             JsonNode desc = root.path("mappings").path("properties").path("description");
-            assertTrue(desc.has("search_analyzer"));
+            assertFalse(desc.has("search_analyzer"), "primary description must not carry the acronym analyzer");
+            assertEquals("acronym_search_analyser", desc.path("fields").path("synonyms").path("search_analyzer").asText());
         }
     }
 }

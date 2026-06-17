@@ -28,6 +28,7 @@ elasticsearch:
     name: portal-acronyms-test
     values:
       - "aa => aurora australis"
+      - "soop => ships of opportunity"
 
 datadiscoveryai:
   host: http://localhost
