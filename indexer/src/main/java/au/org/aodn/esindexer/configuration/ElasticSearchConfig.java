@@ -1,6 +1,7 @@
 package au.org.aodn.esindexer.configuration;
 
 import au.org.aodn.esindexer.service.AcronymService;
+import au.org.aodn.esindexer.service.VocabService;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.json.jackson.JacksonJsonpMapper;
 import co.elastic.clients.transport.rest_client.RestClientTransport;
@@ -18,8 +19,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.List;
-
 @Configuration
 public class ElasticSearchConfig {
 
@@ -28,7 +27,6 @@ public class ElasticSearchConfig {
     @ConfigurationProperties(prefix = "elasticsearch.acronyms")
     public static class AcronymConfigProperties {
         private String name;
-        private List<String> values;
     }
 
     @Bean(name = "portalElasticsearchClient")
@@ -66,7 +64,8 @@ public class ElasticSearchConfig {
     @Bean
     public AcronymService acronymService(
             AcronymConfigProperties props,
-            @Qualifier("portalElasticsearchClient") ElasticsearchClient portalElasticsearchClient) {
-        return new AcronymService(props.getName(), props.getValues(), portalElasticsearchClient);
+            @Qualifier("portalElasticsearchClient") ElasticsearchClient portalElasticsearchClient,
+            VocabService vocabService) {
+        return new AcronymService(props.getName(), portalElasticsearchClient, vocabService);
     }
 }

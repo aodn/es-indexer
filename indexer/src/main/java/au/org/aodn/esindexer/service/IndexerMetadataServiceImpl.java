@@ -499,7 +499,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
             // Sync the synonyms set referenced by the schema before creating the index.
             // An acronym sync failure shouldn't abort the whole reindex.
             try {
-                acronymService.syncAcronyms();
+                acronymService.pushAcronymListToElasticsearch();
             } catch (ElasticsearchException | IOException e) {
                 log.error("Acronym sync failed, continuing reindex: {}", e.getMessage());
             }
