@@ -19,6 +19,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.List;
+
 @Configuration
 public class ElasticSearchConfig {
 
@@ -27,6 +29,7 @@ public class ElasticSearchConfig {
     @ConfigurationProperties(prefix = "elasticsearch.acronyms")
     public static class AcronymConfigProperties {
         private String name;
+        private List<String> manual;
     }
 
     @Bean(name = "portalElasticsearchClient")
@@ -66,6 +69,6 @@ public class ElasticSearchConfig {
             AcronymConfigProperties props,
             @Qualifier("portalElasticsearchClient") ElasticsearchClient portalElasticsearchClient,
             VocabService vocabService) {
-        return new AcronymService(props.getName(), portalElasticsearchClient, vocabService);
+        return new AcronymService(props.getName(), props.getManual(), portalElasticsearchClient, vocabService);
     }
 }

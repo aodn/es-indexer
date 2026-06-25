@@ -20,7 +20,8 @@ import java.util.stream.Collectors;
  * Flow:
  *   ARDC Organisation vocabulary (https://vocabs.ardc.edu.au/)
  *     -> cached in vocabs_index (populated upstream by the ardcvocabs module)
- *     -> this service reads it and builds "short => long" rules
+ *     -> this service reads it and builds "short => long" rules   (e.g. "aad => australian antarctic division")
+ *     -> appends the manual rules from config
  *     -> pushed into the ES synonyms set.
  */
 @Slf4j
@@ -29,17 +30,22 @@ public class AcronymService {
     private final ElasticsearchClient portalElasticsearchClient;
     private final VocabService vocabService;
 
-    /** Step 5 - acronyms that are data/product codes, not organisations; dropped from every rule. */
+    /** Step 4 - acronyms that are data/product codes, not organisations; dropped from every rule. */
     private static final Set<String> SPECIAL_CASES = Set.of("co2", "sst l2p");
+
+    /** Manual "short => long" rules from config, for acronyms the vocab misses (e.g. nrmn); appended, never overwrites - if the vocab has the same acronym, both expansions are kept. */
+    private final List<String> manualAcronyms;
 
     @Getter
     private final String synonymSetName;
 
     public AcronymService(
             String synonymSetName,
+            List<String> manualAcronyms,
             ElasticsearchClient portalElasticsearchClient,
             VocabService vocabService) {
         this.synonymSetName = synonymSetName;
+        this.manualAcronyms = manualAcronyms != null ? manualAcronyms : List.of();
         this.portalElasticsearchClient = portalElasticsearchClient;
         this.vocabService = vocabService;
     }
@@ -48,8 +54,9 @@ public class AcronymService {
      * Push the acronyms into the ES synonyms set (creates or fully replaces it; overwrites, never appends).
      *
      * Source:
-     *   Every rule comes only from the Organisation vocab, mapping each acronym to its full name:
-     *   hidden label => display label   (or prefLabel when there is no display label).
+     *   Rules come from the Organisation vocab (each acronym mapped to its full name:
+     *   hidden label => display label, or prefLabel when there is no display label),
+     *   plus the manual rules from config (elasticsearch.acronyms.manual).
      *
      * Triggers:
      *   - automatically, during a full portal_records reindex
@@ -62,7 +69,7 @@ public class AcronymService {
         log.info("Pushing acronym list into synonyms set '{}'", synonymSetName);
 
         List<JsonNode> vocabs = fetchVocabs();              // Step 1   - read the Organisation vocab
-        List<String> acronymList = buildAcronymList(vocabs); // Steps 2-7 - build the cleaned, sorted list
+        List<String> acronymList = buildAcronymList(vocabs); // Steps 2-8 - build list + append manual rules
 
         // If no rules came from the vocab (e.g. vocabs not indexed yet), keep the existing set untouched.
         if (acronymList.isEmpty()) {
@@ -70,7 +77,7 @@ public class AcronymService {
             return;
         }
 
-        replaceSynonymsSet(acronymList);                    // Step 8   - overwrite the ES synonyms set
+        replaceSynonymsSet(acronymList);                    // Step 9   - overwrite the ES synonyms set
     }
 
     /**
@@ -119,8 +126,8 @@ public class AcronymService {
     }
 
     /**
-     * Steps 2-7 - the pipeline: turn the vocab trees into the final, sorted rule list.
-     * in:  Organisation vocab trees
+     * Steps 2-8 - the pipeline: build rules from the vocab, append the manual rules, dedupe and sort.
+     * in:  Organisation vocab trees (+ manual rules from config)
      * out: ["aad => australian antarctic division", "bom => bureau of meteorology", ...]
      */
     private List<String> buildAcronymList(List<JsonNode> vocabTrees) {
@@ -131,21 +138,33 @@ public class AcronymService {
                 .map(AcronymService::buildSynonymRule)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toCollection(ArrayList::new));
-        log.info("Step 3 - {} rules built", rules.size());
+        log.info("Step 3 - {} rules built from the vocab", rules.size());
 
-        rules = new ArrayList<>(new LinkedHashSet<>(rules));                    // Step 4 - drop duplicate lines
-        log.info("Step 4 - {} rules after de-duplication", rules.size());
+        rules = dropSpecialCases(rules);                                        // Step 4 - drop CO2, SST L2P
+        log.info("Step 4 - {} rules after dropping special cases", rules.size());
 
-        rules = dropSpecialCases(rules);                                        // Step 5 - drop CO2, SST L2P
-        log.info("Step 5 - {} rules after dropping special cases", rules.size());
+        rules = stripParens(rules);                                            // Step 5 - remove "(...)"
+        log.info("Step 5 - {} rules after removing brackets", rules.size());
 
-        rules = stripParens(rules);                                            // Step 6 - remove "(...)"
-        log.info("Step 6 - {} rules after removing brackets", rules.size());
+        rules.addAll(manualRules());                                           // Step 6 - append manual rules
+        log.info("Step 6 - {} rules after appending {} manual rules", rules.size(), manualRules().size());
 
-        rules.sort(String::compareTo);                                         // Step 7 - sort A -> Z
-        log.info("Step 7 - {} final rules (sorted)", rules.size());
+        rules = new ArrayList<>(new LinkedHashSet<>(rules));                    // Step 7 - drop duplicate lines
+        log.info("Step 7 - {} rules after de-duplication", rules.size());
+
+        rules.sort(String::compareTo);                                         // Step 8 - sort A -> Z
+        log.info("Step 8 - {} final rules (sorted)", rules.size());
 
         return rules;
+    }
+
+    /** Step 6 - the manual rules from config, trimmed; blanks dropped. */
+    private List<String> manualRules() {
+        return manualAcronyms.stream()
+                .filter(Objects::nonNull)
+                .map(String::trim)
+                .filter(rule -> !rule.isEmpty())
+                .collect(Collectors.toList());
     }
 
     /**
@@ -255,7 +274,7 @@ public class AcronymService {
     }
 
     /**
-     * Step 5 - remove data/product codes (CO2, SST L2P) from the left side; drop the rule if none remain.
+     * Step 4 - remove data/product codes (CO2, SST L2P) from the left side; drop the rule if none remain.
      * in:  "co2 => carbon dioxide"            -> (removed)
      * in:  "bom, sst l2p => bureau of met..." -> "bom => bureau of met..."
      */
@@ -280,7 +299,7 @@ public class AcronymService {
     }
 
     /**
-     * Step 6 - drop the "(...)" tail from the full name so it reads cleanly.
+     * Step 5 - drop the "(...)" tail from the full name so it reads cleanly.
      * in:  "aad => australian antarctic division (aad)"
      * out: "aad => australian antarctic division"
      */
@@ -301,7 +320,7 @@ public class AcronymService {
     }
 
     /**
-     * Step 8 - overwrite the ES synonyms set with the rules (full replace, never append).
+     * Step 9 - overwrite the ES synonyms set with the rules (full replace, never append).
      * in:  ["aad => australian antarctic division", "bom => bureau of meteorology"]
      * out: synonyms set now holds exactly those rules (live; the search analyser reloads automatically).
      */
@@ -312,7 +331,7 @@ public class AcronymService {
         portalElasticsearchClient.synonyms().putSynonym(b -> b
                 .id(synonymSetName)
                 .synonymsSet(synonymRules));
-        log.info("Step 8 - replaced synonyms set '{}' with {} rules", synonymSetName, synonymRules.size());
+        log.info("Step 9 - replaced synonyms set '{}' with {} rules", synonymSetName, synonymRules.size());
     }
 
     /** Read a string field from a concept, or null when it is missing/blank. */

@@ -53,6 +53,8 @@ elasticsearch:
       name: shingle_analyser
   acronyms:
     name: portal-acronyms
+    manual:
+      - "nrmn => national reef monitoring network"
 
 aws:
   region: ap-southeast-2
