@@ -8,8 +8,6 @@ import au.org.aodn.esindexer.model.MockServer;
 import au.org.aodn.metadata.geonetwork.service.GeoNetworkServiceImpl;
 import co.elastic.clients.elasticsearch._types.query_dsl.TextQueryType;
 import co.elastic.clients.elasticsearch.core.search.Hit;
-import co.elastic.clients.elasticsearch.indices.AnalyzeRequest;
-import co.elastic.clients.elasticsearch.indices.analyze.AnalyzeToken;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -196,68 +194,6 @@ public class IndexerServiceIT extends BaseTestClass {
             clearElasticIndex(INDEX_NAME);
             deleteRecord(uuid);
         }
-    }
-    // sample12.xml's title/description say "Aurora Australis" but never the token "aa".
-    private static final String ACRONYM_SAMPLE_UUID = "201112060";
-
-    /** Searching the acronym "aa" finds a record that only says "aurora australis" — proof of search-time expansion. */
-    @Test
-    public void acronymQueryExpandsToFullNameAndMatchesDocument() throws IOException {
-        try {
-            buildIndexWithAcronymDictionary();
-
-            var hits = searchAcronymField("aa");
-
-            Assertions.assertFalse(hits.isEmpty(),
-                    "'aa' should expand to 'aurora australis' and match the record");
-        } finally {
-            cleanUpAcronymIndex();
-        }
-    }
-
-    /** "soop" must still expand, even though its full name "ships of opportunity" contains a stopword ("of"). */
-    @Test
-    public void acronymWithStopwordInExpansionStillExpands() throws IOException {
-        try {
-            buildIndexWithAcronymDictionary();
-
-            var tokens = analyzeTokens("soop");
-
-            Assertions.assertTrue(tokens.contains("ships") && tokens.contains("opportunity"),
-                    "'soop' should expand to 'ships of opportunity'; got " + tokens);
-        } finally {
-            cleanUpAcronymIndex();
-        }
-    }
-
-    /** Index sample12 and rebuild the index, which also syncs the acronym dictionary into the synonyms set. */
-    private void buildIndexWithAcronymDictionary() throws IOException {
-        insertMetadataRecords(ACRONYM_SAMPLE_UUID, "classpath:canned/sample12.xml");
-        indexerService.indexAllMetadataRecordsFromGeoNetwork(null, true, null);
-    }
-
-    private void cleanUpAcronymIndex() throws IOException {
-        clearElasticIndex(INDEX_NAME);
-        deleteRecord(ACRONYM_SAMPLE_UUID);
-    }
-
-    /** Search the given term against the acronym-aware title.synonyms sub-field. */
-    private List<Hit<ObjectNode>> searchAcronymField(String term) throws IOException {
-        return client.search(s -> s
-                .index(INDEX_NAME)
-                .query(q -> q.match(m -> m.field("title.synonyms").query(term))), ObjectNode.class)
-                .hits().hits();
-    }
-
-    /** Run the given text through the acronym_search_analyser and return the resulting tokens. */
-    private List<String> analyzeTokens(String text) throws IOException {
-        AnalyzeRequest request = AnalyzeRequest.of(a -> a
-                .index(INDEX_NAME)
-                .analyzer("acronym_search_analyser")
-                .text(text));
-        return client.indices().analyze(request).tokens().stream()
-                .map(AnalyzeToken::token)
-                .toList();
     }
     /**
      * Tests whether a partial input query using the "search_as_you_type" field matches partial terms

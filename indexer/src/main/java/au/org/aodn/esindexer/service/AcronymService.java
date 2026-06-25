@@ -129,8 +129,9 @@ public class AcronymService {
      * Steps 2-8 - the pipeline: build rules from the vocab, append the manual rules, dedupe and sort.
      * in:  Organisation vocab trees (+ manual rules from config)
      * out: ["aad => australian antarctic division", "bom => bureau of meteorology", ...]
+     * Package-private so AcronymServiceTest can feed it canned vocab without ES or the network.
      */
-    private List<String> buildAcronymList(List<JsonNode> vocabTrees) {
+    List<String> buildAcronymList(List<JsonNode> vocabTrees) {
         List<JsonNode> concepts = flattenConcepts(vocabTrees);                  // Step 2 - flatten trees -> concepts
         log.info("Step 2 - {} concepts from {} roots", concepts.size(), vocabTrees.size());
 
