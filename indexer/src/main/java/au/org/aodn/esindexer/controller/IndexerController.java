@@ -91,15 +91,28 @@ public class IndexerController {
     }
 
     /**
-     * Push the acronyms configured in application.yaml into the ES synonyms set, live (no reindex).
+     * Build the acronyms from the Organisation vocab (vocabs_index) and push them into the ES
+     * synonyms set, live (no reindex). Overwrites the set.
      * @return A confirmation message
      */
     @PostMapping(path="/acronyms", produces = "application/json")
-    @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Push the configured acronyms into the ES synonyms set (live update, no reindex)")
+    @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Build acronyms from the Organisation vocab and push them into the ES synonyms set (live, no reindex)")
     public ResponseEntity<String> syncAcronyms() throws IOException {
-        log.info("syncing acronym synonyms set from configuration");
-        acronymService.syncAcronyms();
+        log.info("pushing acronym synonyms set from the Organisation vocab");
+        acronymService.pushAcronymListToElasticsearch();
         return ResponseEntity.ok("Acronym synonyms set updated");
+    }
+
+    /**
+     * Read-only preview of the acronym rules from the Organisation vocab (vocabs_index). Nothing is
+     * pushed; the synonyms set is left untouched. Use it to check the rules before POST /acronyms.
+     * @return The "short => long" rules
+     */
+    @GetMapping(path="/acronyms/preview", produces = "application/json")
+    @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Preview acronym rules from the Organisation vocab (read-only, nothing is pushed)")
+    public ResponseEntity<AcronymService.AcronymPreview> previewAcronyms() {
+        log.info("previewing acronym synonyms from the Organisation vocab");
+        return ResponseEntity.ok(acronymService.previewAcronyms());
     }
 
     /**
