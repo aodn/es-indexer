@@ -150,6 +150,23 @@ class AcronymServiceTest {
     }
 
     /**
+     * Step 7 - one acronym with two different full names (two vocab concepts share "ams") keeps both
+     * rules, so the acronym expands to either full name at search time.
+     * in:  concepts "Australian Marine Sciences (AMS)" + "Antarctic Meteorological Service (AMS)"
+     * out: ["ams => antarctic meteorological service", "ams => australian marine sciences"]
+     */
+    @Test
+    void keepsMultipleFullNamesForOneAcronym() {
+        var rules = service().buildAcronymList(vocab(
+                concept("Australian Marine Sciences", "AMS"),
+                concept("Antarctic Meteorological Service", "AMS")));
+
+        assertEquals(List.of(
+                "ams => antarctic meteorological service",
+                "ams => australian marine sciences"), rules);
+    }
+
+    /**
      * Step 2 + 8 - nested "narrower" children are walked too, and the result is sorted A -> Z.
      * in:  root "BOM" with child "AAD"
      * out: ["aad => australian antarctic division", "bom => bureau of meteorology"]
