@@ -22,6 +22,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpMethod;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
 
 import java.io.IOException;
 import java.util.List;
@@ -54,8 +55,11 @@ public class AcronymServiceIT extends BaseTestClass {
     @Autowired
     protected GeoNetworkServiceImpl geoNetworkService;
 
-    @Autowired
-    protected IndexerMetadataService indexerService;
+    // Declared as a spy (not a plain @Autowired) so this class's context matches IndexerServiceIT's
+    // bean-override set exactly, letting Spring reuse the same cached context (and its docker stack)
+    // instead of starting another GeoNetwork + Elasticsearch set just for this class.
+    @MockitoSpyBean
+    protected IndexerMetadataServiceImpl indexerService;
 
     @Autowired
     protected IndexerController indexerController;
