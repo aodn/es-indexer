@@ -28,7 +28,11 @@ elasticsearch:
     name: portal-acronyms-test
     manual:
       - "aa => aurora australis"
+      # full name has a stopword ("of") - same rule as index time
       - "soop => ships of opportunity"
+      # one acronym, two full names - "ams" must expand to both at search time
+      - "ams => australian marine sciences"
+      - "ams => antarctic meteorological service"
 
 datadiscoveryai:
   host: http://localhost

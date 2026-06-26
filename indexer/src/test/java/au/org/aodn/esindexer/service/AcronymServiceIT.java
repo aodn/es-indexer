@@ -36,7 +36,8 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 /**
  * Acronym synonyms end-to-end: the manual rules from config (elasticsearch.acronyms.manual) flow
  * into the ES synonyms set and expand at search time. The test manual rules are "aa => aurora
- * australis" and "soop => ships of opportunity" (see application-test.yaml).
+ * australis", "soop => ships of opportunity", and the one-acronym-two-names pair "ams => australian
+ * marine sciences" / "ams => antarctic meteorological service" (see application-test.yaml).
  *
  * The index (with the acronym schema and synonyms set) is built once in {@link #setup()}; each test
  * is read-only over it, so they stay independent and {@link #cleanUp()} tears it down at the end.
@@ -130,6 +131,15 @@ public class AcronymServiceIT extends BaseTestClass {
 
         Assertions.assertTrue(tokens.contains("ships") && tokens.contains("opportunity"),
                 "'soop' should expand to 'ships of opportunity'; got " + tokens);
+    }
+
+    /** One acronym, two full names: "ams" expands to BOTH at search time, so both full names' tokens appear. */
+    @Test
+    public void acronymWithMultipleFullNamesExpandsToAll() throws IOException {
+        var tokens = analyzeTokens("ams");
+
+        Assertions.assertTrue(tokens.contains("marine") && tokens.contains("meteorological"),
+                "'ams' should expand to both 'australian marine sciences' and 'antarctic meteorological service'; got " + tokens);
     }
 
     // ---- helpers ----
