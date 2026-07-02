@@ -97,10 +97,14 @@ public class IndexerController {
      */
     @PostMapping(path="/acronyms", produces = "application/json")
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Build acronyms from the Organisation vocab and push them into the ES synonyms set (live, no reindex)")
-    public ResponseEntity<String> syncAcronyms() throws IOException {
+    public ResponseEntity<AcronymService.AcronymSyncResult> syncAcronyms() throws IOException {
         log.info("pushing acronym synonyms set from the Organisation vocab");
-        acronymService.pushAcronymListToElasticsearch();
-        return ResponseEntity.ok("Acronym synonyms set updated");
+        int pushed = acronymService.pushAcronymListToElasticsearch();
+        String message = pushed > 0
+                ? "Acronym synonyms set updated with " + pushed + " rules"
+                : "No rules came from the vocab; synonyms set left unchanged";
+        return ResponseEntity.ok(new AcronymService.AcronymSyncResult(
+                acronymService.getSynonymSetName(), pushed, message));
     }
 
     /**
@@ -110,9 +114,21 @@ public class IndexerController {
      */
     @GetMapping(path="/acronyms/preview", produces = "application/json")
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Preview acronym rules from the Organisation vocab (read-only, nothing is pushed)")
-    public ResponseEntity<AcronymService.AcronymPreview> previewAcronyms() {
+    public ResponseEntity<AcronymService.AcronymPreview> previewAcronyms() throws IOException {
         log.info("previewing acronym synonyms from the Organisation vocab");
         return ResponseEntity.ok(acronymService.previewAcronyms());
+    }
+
+    /**
+     * Show the acronym rules currently live in the ES synonyms set (what search uses now);
+     * /acronyms/preview shows what a push would write instead.
+     * @return The "short => long" rules live in the synonyms set
+     */
+    @GetMapping(path="/acronyms/current", produces = "application/json")
+    @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Show the acronym rules currently live in the ES synonyms set (read-only)")
+    public ResponseEntity<AcronymService.AcronymCurrent> currentAcronyms() throws IOException {
+        log.info("reading the acronym synonyms set currently live in ES");
+        return ResponseEntity.ok(acronymService.currentAcronyms());
     }
 
     /**

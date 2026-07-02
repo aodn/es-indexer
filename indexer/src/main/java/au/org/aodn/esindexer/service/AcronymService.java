@@ -1,12 +1,19 @@
 package au.org.aodn.esindexer.service;
 
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
+import au.org.aodn.esindexer.exception.DocumentNotFoundException;
+import co.elastic.clients.elasticsearch._types.ElasticsearchException;
 import co.elastic.clients.elasticsearch.synonyms.SynonymRule;
+import co.elastic.clients.elasticsearch.synonyms.SynonymRuleRead;
 import com.fasterxml.jackson.databind.JsonNode;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -32,6 +39,12 @@ public class AcronymService {
 
     /** Step 4 - acronyms that are data/product codes, not organisations; dropped from every rule. */
     private static final Set<String> SPECIAL_CASES = Set.of("co2", "sst l2p");
+
+    private static final ZoneId AUSTRALIAN_ZONE = ZoneId.of("Australia/Sydney");
+    private static final String META_DOC_ID = "acronyms";
+
+    /** GET _synonyms defaults to 10 rules per page; a set is capped at 10000, so ask for them all. */
+    private static final int MAX_SYNONYM_RULES = 10_000;
 
     /** Manual "short => long" rules from config, for acronyms the vocab misses (e.g. nrmn); appended, never overwrites - if the vocab has the same acronym, both expansions are kept. */
     private final List<String> manualAcronyms;
@@ -64,8 +77,9 @@ public class AcronymService {
      *   - on demand, via POST /api/v1/indexer/index/acronyms  (a live update that needs no reindex).
      *
      * The flow is intentionally split into small, ordered steps so it is easy to follow in the logs.
+     * @return the number of rules pushed; 0 means the vocab was empty and the set was left unchanged.
      */
-    public void pushAcronymListToElasticsearch() throws IOException {
+    public int pushAcronymListToElasticsearch() throws IOException {
         log.info("Pushing acronym list into synonyms set '{}'", synonymSetName);
 
         List<JsonNode> vocabs = fetchVocabs();              // Step 1   - read the Organisation vocab
@@ -74,10 +88,12 @@ public class AcronymService {
         // If no rules came from the vocab (e.g. vocabs not indexed yet), keep the existing set untouched.
         if (acronymList.isEmpty()) {
             log.warn("No acronym rules came from the vocab; leaving synonyms set '{}' unchanged", synonymSetName);
-            return;
+            return 0;
         }
 
         replaceSynonymsSet(acronymList);                    // Step 9   - overwrite the ES synonyms set
+        stampLastModified();                                // Step 10  - record when it was last pushed
+        return acronymList.size();
     }
 
     /**
@@ -85,7 +101,7 @@ public class AcronymService {
      * synonyms set. Also reports the vocabs_index source version so you can see how fresh it is.
      * Use this to inspect what {@link #pushAcronymListToElasticsearch()} would push.
      */
-    public AcronymPreview previewAcronyms() {
+    public AcronymPreview previewAcronyms() throws IOException {
         List<JsonNode> vocabs = fetchVocabs();
         String version = vocabVersion(vocabs);
         List<String> acronymList = buildAcronymList(vocabs);
@@ -104,6 +120,74 @@ public class AcronymService {
     /** Preview payload: the vocabs_index version it came from, the rule count, and the rules. */
     public record AcronymPreview(String vocabVersion, int count, List<String> rules) {}
 
+    /** Sync payload: which set was pushed, how many rules (0 = nothing came from the vocab), and a human message. */
+    public record AcronymSyncResult(String synonymSetName, int count, String message) {}
+
+    /** Read-only: the rules currently live in the ES synonyms set (empty if nothing pushed yet). */
+    public AcronymCurrent currentAcronyms() throws IOException {
+        List<String> rules;
+        try {
+            rules = portalElasticsearchClient.synonyms().getSynonym(g -> g.id(synonymSetName).size(MAX_SYNONYM_RULES))
+                    .synonymsSet().stream()
+                    .map(SynonymRuleRead::synonyms)
+                    .filter(Objects::nonNull)
+                    .sorted(String::compareTo)          // same order as the preview
+                    .collect(Collectors.toList());
+        } catch (ElasticsearchException e) {
+            if (e.status() != 404) {
+                throw e;    // a real ES error - surface it, don't pretend the set is empty
+            }
+            log.info("Synonyms set '{}' does not exist yet; reporting it as empty", synonymSetName);
+            rules = new ArrayList<>();
+        }
+        String lastModified = readLastModified();
+        log.info("Current - synonyms set '{}' holds {} acronym rules (last modified {})",
+                synonymSetName, rules.size(), lastModified);
+        return new AcronymCurrent(synonymSetName, lastModified, rules.size(), rules);
+    }
+
+    /** Current payload: the set name, when it was last pushed (Australian time, null if never), count, rules. */
+    public record AcronymCurrent(String synonymSetName, String lastModified, int count, List<String> rules) {}
+
+    /** Meta doc holding the last push time; ES tracks no modified date for a synonyms set, so we store our own. */
+    record AcronymMeta(String lastModified) {}
+
+    /** Step 10 - record "now" (Australian time, to the second) as the last push time; failure never breaks the push. */
+    private void stampLastModified() {
+        String now = ZonedDateTime.now(AUSTRALIAN_ZONE)
+                .truncatedTo(ChronoUnit.SECONDS)
+                .format(DateTimeFormatter.ISO_OFFSET_DATE_TIME);
+        try {
+            portalElasticsearchClient.index(i -> i
+                    .index(metaIndex())
+                    .id(META_DOC_ID)
+                    .document(new AcronymMeta(now)));
+            log.info("Step 10 - stamped synonyms set '{}' last modified {}", synonymSetName, now);
+        } catch (Exception e) {
+            log.warn("Step 10 - could not stamp last-modified for '{}': {}", synonymSetName, e.getMessage());
+        }
+    }
+
+    /** The last push time (Australian time), or null if it was never pushed / the meta doc is missing. */
+    private String readLastModified() {
+        try {
+            var response = portalElasticsearchClient.get(g -> g.index(metaIndex()).id(META_DOC_ID), AcronymMeta.class);
+            return response.found() && response.source() != null ? response.source().lastModified() : null;
+        } catch (ElasticsearchException e) {
+            if (e.status() != 404) {    // 404 = never pushed; other errors are already surfaced by the rules read
+                log.warn("Could not read last-modified for '{}': {}", synonymSetName, e.getMessage());
+            }
+            return null;
+        } catch (IOException e) {
+            log.warn("Could not read last-modified for '{}': {}", synonymSetName, e.getMessage());
+            return null;
+        }
+    }
+
+    private String metaIndex() {
+        return synonymSetName + "-meta";
+    }
+
     // ----------------------------------------------------------------------------------------------
     // Steps (run top-to-bottom; each one is small and self-contained)
     // ----------------------------------------------------------------------------------------------
@@ -111,16 +195,16 @@ public class AcronymService {
     /**
      * Step 1 - read the Organisation vocab trees from vocabs_index.
      * in:  (reads the cached vocabs_index)
-     * out: list of Organisation root nodes; empty if the index is missing/unavailable.
+     * out: list of Organisation root nodes; empty when vocabs_index is not populated yet.
+     * A real ES error propagates (callers surface it; the reindex guards its own call).
      */
-    private List<JsonNode> fetchVocabs() {
+    private List<JsonNode> fetchVocabs() throws IOException {
         try {
             List<JsonNode> organisationVocabs = vocabService.getOrganisationVocabs();
             log.info("Step 1 - read {} organisation vocab roots from vocabs_index", organisationVocabs.size());
             return organisationVocabs;
-        } catch (Exception e) {
-            // vocabs_index may be empty/unavailable here; never let this step break a reindex.
-            log.warn("Step 1 - could not read vocabs_index, no acronyms will come from it: {}", e.getMessage());
+        } catch (DocumentNotFoundException e) {
+            log.warn("Step 1 - vocabs_index not populated yet, no acronyms will come from it: {}", e.getMessage());
             return new ArrayList<>();
         }
     }
