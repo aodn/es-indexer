@@ -25,6 +25,7 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
 
 import java.io.IOException;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 import static org.hamcrest.Matchers.containsString;
@@ -102,7 +103,7 @@ public class AcronymServiceIT extends BaseTestClass {
 
     /** Preview is read-only: it lists the rules that would be pushed, including the manual ones from config. */
     @Test
-    public void previewIncludesManualAcronymRules() {
+    public void previewIncludesManualAcronymRules() throws IOException {
         var preview = indexerController.previewAcronyms().getBody();
 
         Assertions.assertNotNull(preview, "preview body should not be null");
@@ -111,6 +112,36 @@ public class AcronymServiceIT extends BaseTestClass {
                 "preview should include the manual rule for 'aa'; got " + preview.rules());
         Assertions.assertTrue(preview.rules().contains("soop => ships of opportunity"),
                 "preview should include the manual rule for 'soop'; got " + preview.rules());
+    }
+
+    /** Current shows what is live in the synonyms set after the reindex, including the manual rules from config. */
+    @Test
+    public void currentReflectsTheLiveSynonymsSet() throws IOException {
+        var current = indexerController.currentAcronyms().getBody();
+
+        Assertions.assertNotNull(current, "current body should not be null");
+        Assertions.assertEquals(current.rules().size(), current.count(), "count should match the rule list size");
+        Assertions.assertTrue(current.rules().contains("aa => aurora australis"),
+                "current should include the manual rule for 'aa'; got " + current.rules());
+        Assertions.assertTrue(current.rules().contains("soop => ships of opportunity"),
+                "current should include the manual rule for 'soop'; got " + current.rules());
+        Assertions.assertNotNull(current.lastModified(),
+                "the reindex in setup() should have stamped a last-modified date");
+        // Guard the format: it must be a parseable offset date-time (zone/format is a deliberate choice).
+        Assertions.assertDoesNotThrow(() -> OffsetDateTime.parse(current.lastModified()),
+                "lastModified should be an ISO offset date-time; got " + current.lastModified());
+    }
+
+    /** Sync reports the real outcome: the number of rules pushed, not a blanket "updated". */
+    @Test
+    public void syncReportsTheNumberOfRulesPushed() throws IOException {
+        var result = indexerController.syncAcronyms().getBody();
+
+        Assertions.assertNotNull(result, "sync body should not be null");
+        Assertions.assertNotNull(result.synonymSetName(), "sync should report which synonym set was pushed");
+        Assertions.assertTrue(result.count() > 0, "the manual rules alone should push at least one rule");
+        Assertions.assertTrue(result.message().contains("updated with " + result.count() + " rules"),
+                "sync message should report the rule count; got " + result.message());
     }
 
     // ---- search behaviour: the acronym expands at search time and matches the indexed document ----
