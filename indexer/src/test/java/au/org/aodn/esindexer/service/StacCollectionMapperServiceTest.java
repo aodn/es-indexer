@@ -512,7 +512,7 @@ public class StacCollectionMapperServiceTest {
     /**
      * Verify each asset's media type is derived from its own dataset file name, so a collection with
      * both parquet and zarr datasets gets the correct type per asset.
-     * @throws IOException - Not expect to throw
+     * @throws IOException - Not expected to throw
      */
     @Test
     public void verifyAssetTypeMatchDatasetFileType() throws IOException {

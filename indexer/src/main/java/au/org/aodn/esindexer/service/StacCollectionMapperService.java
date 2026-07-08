@@ -1248,23 +1248,17 @@ public abstract class StacCollectionMapperService {
             if(cloudOptimisedMetadata == null || cloudOptimisedMetadata.isEmpty()) {
                 throw new RuntimeException("Unable to find cloud optimized metadata for collection: " + collectionId);
             }
-            var datasets = cloudOptimisedMetadata.values();
-
             var entries = new HashMap<String, AssetModel>();
-            for (var dataset: datasets) {
-                var dname = dataset.getDname();
-                Map.Entry<String, AssetModel> entry = Map.entry(
-                        dname,
-                        AssetModel.builder()
-                                .role(AssetModel.Role.SUMMARY)
-                                .type(getMediaTypeFromDname(dname))
-                                .href(String.format("/collections/%s/items/summary", collectionId))
-                                .title(dname)
-                                .description("Summary of cloud optimized data points")
-                                .build()
-
-                );
-                entries.put(entry.getKey(), entry.getValue());
+            for (var entry : cloudOptimisedMetadata.entrySet()) {
+                var key = entry.getKey();
+                var dname = entry.getValue().getDname() != null ? entry.getValue().getDname() : key;
+                entries.put(key, AssetModel.builder()
+                        .role(AssetModel.Role.SUMMARY)
+                        .type(getMediaTypeFromDname(dname))
+                        .href(String.format("/collections/%s/items/summary", collectionId))
+                        .title(dname)
+                        .description("Summary of cloud optimized data points")
+                        .build());
             }
 
             return entries;
