@@ -62,8 +62,15 @@ jobs:
             --output text)
           echo "CODEARTIFACT_REPO_URL=$REPO_URL" >> "$GITHUB_ENV"
 
-      - name: Build with Maven & Publish to CodeArtifact
-        run: mvn -B clean deploy --file pom.xml
+      # Run the full build and all tests BEFORE publishing anything.
+      - name: Build with Maven & Verify
+        run: mvn -B clean verify --file pom.xml
+        env:
+          CODEARTIFACT_AUTH_TOKEN: ${{ env.CODEARTIFACT_AUTH_TOKEN }}
+          CODEARTIFACT_REPO_URL: ${{ env.CODEARTIFACT_REPO_URL }}
+
+      - name: Publish to CodeArtifact
+        run: mvn -B deploy -DskipTests --file pom.xml
         env:
           CODEARTIFACT_AUTH_TOKEN: ${{ env.CODEARTIFACT_AUTH_TOKEN }}
           CODEARTIFACT_REPO_URL: ${{ env.CODEARTIFACT_REPO_URL }}
@@ -100,7 +107,7 @@ jobs:
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
 
   trigger_staging_deploy:
-    needs: [build_push]
+    needs: [ build_push ]
     uses: ./.github/workflows/trigger_deploy.yml
     with:
       app_name: es-indexer
@@ -109,7 +116,7 @@ jobs:
     secrets: inherit
 
   trigger_production_deploy:
-    needs: [build_push, trigger_staging_deploy]
+    needs: [ build_push, trigger_staging_deploy ]
     uses: ./.github/workflows/trigger_deploy.yml
     with:
       app_name: es-indexer
