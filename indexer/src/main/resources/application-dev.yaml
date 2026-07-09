@@ -1,3 +1,7 @@
+spring:
+  config:
+    import: optional:file:.env.dev[.properties]
+
 server:
   port: 8081
 

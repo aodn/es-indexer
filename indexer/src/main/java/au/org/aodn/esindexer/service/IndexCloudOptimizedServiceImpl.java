@@ -62,10 +62,6 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
         }
     }
 
-    @Override
-    public String getHitId(String collectionId) {
-        return elasticSearchIndexService.getFirstMatchId(this.indexName, "properties.collection.keyword", collectionId);
-    }
     /**
      * We will remove this function in the upcoming change. We replace it with pmtitle if works.
      * @param beginWithUuid - The UUID to start indexing from, if null, we will start from scratch

@@ -10,6 +10,7 @@ import au.org.aodn.esindexer.utils.GeometryUtils;
 import au.org.aodn.esindexer.utils.JaxbUtils;
 import au.org.aodn.metadata.geonetwork.service.GeoNetworkServiceImpl;
 import au.org.aodn.metadata.iso19115_3_2018.MDMetadataType;
+import au.org.aodn.cloudoptimized.enums.DatasetMediaType;
 import au.org.aodn.stac.model.ConceptModel;
 import au.org.aodn.stac.model.LinkModel;
 import au.org.aodn.stac.model.StacCollectionModel;
@@ -197,9 +198,6 @@ public class StacCollectionMapperServiceTest {
 
         when(indexCloudOptimizedService.hasIndex(eq("35234913-aa3c-48ec-b9a4-77f822f66ef8")))
                 .thenReturn(true);
-
-        when(indexCloudOptimizedService.getHitId(eq("35234913-aa3c-48ec-b9a4-77f822f66ef8")))
-                .thenReturn("8af21108-c535-43bf-8dab-c1f45a26088c|vessel_trv_realtime_qc.parquet|2009-08|0");
 
         MetadataEntity mockMetadata = new MetadataEntity();
         mockMetadata.setUuid("35234913-aa3c-48ec-b9a4-77f822f66ef8");
@@ -510,6 +508,33 @@ public class StacCollectionMapperServiceTest {
         indexerService.indexMetadata(xml);
 
         verify(expected);
+    }
+    /**
+     * Verify each asset's media type is derived from its own dataset file name, so a collection with
+     * both parquet and zarr datasets gets the correct type per asset.
+     * @throws IOException - Not expected to throw
+     */
+    @Test
+    public void verifyAssetTypeMatchDatasetFileType() throws IOException {
+        MetadataEntity parquetMetadata = new MetadataEntity();
+        parquetMetadata.setUuid("35234913-aa3c-48ec-b9a4-77f822f66ef8");
+        String parquetDname = "station_lucinda_jetty_hourly_wetlabs_wqm.parquet";
+        parquetMetadata.setDname(parquetDname);
+
+        MetadataEntity zarrMetadata = new MetadataEntity();
+        zarrMetadata.setUuid("35234913-aa3c-48ec-b9a4-77f822f66ef8");
+        String zarrDname = "station_lucinda_jetty_dalec.zarr";
+        zarrMetadata.setDname(zarrDname);
+
+        when(dataAccessService.getMetadataByUuid(eq("35234913-aa3c-48ec-b9a4-77f822f66ef8")))
+                .thenReturn(Map.of(parquetDname, parquetMetadata, zarrDname, zarrMetadata));
+
+        String xml = readResourceFile("classpath:canned/dataservice/35234913-aa3c-48ec-b9a4-77f822f66ef8/sample.xml");
+        indexerService.indexMetadata(xml);
+
+        JsonNode assets = objectMapper.readTree(lastRequest.get().document().toString()).get("assets");
+        assertEquals(DatasetMediaType.APPLICATION_PARQUET.getValue(), assets.get(parquetDname).get("type").asText());
+        assertEquals(DatasetMediaType.APPLICATION_ZARR.getValue(), assets.get(zarrDname).get("type").asText());
     }
     /**
      * This XML contains an invalid value in the EAST point of the bounding box, it is set to 360, which is invalid value.

@@ -35,4 +35,5 @@ build/
 .vscode/
 
 .env
+.env.dev
 .git-versioned-pom.xml

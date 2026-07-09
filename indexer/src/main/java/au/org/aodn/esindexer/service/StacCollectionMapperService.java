@@ -1,6 +1,7 @@
 package au.org.aodn.esindexer.service;
 
 import au.org.aodn.stac.model.RelationType;
+import au.org.aodn.cloudoptimized.enums.DatasetMediaType;
 import au.org.aodn.cloudoptimized.service.DataAccessService;
 import au.org.aodn.esindexer.utils.AssociatedRecordsUtil;
 import au.org.aodn.esindexer.utils.*;
@@ -1243,38 +1244,21 @@ public abstract class StacCollectionMapperService {
     protected Map<String, AssetModel> mapAssetsData(MDMetadataType source) {
         String collectionId = CommonUtils.getUUID(source);
         if(indexCloudOptimizedService.hasIndex(collectionId)) {
-            var hitId = indexCloudOptimizedService.getHitId(collectionId);
-            var mediaType = MediaType.APPLICATION_JSON_VALUE;
-            if(hitId == null) {
-                logger.error("Unable to find hitId for collection: {}", collectionId);
-            }
-            else if (hitId.contains(".parquet")) {
-                mediaType = "application/x-parquet";
-            }
-            else if (hitId.contains(".zarr")) {
-                mediaType = "application/x-zarr";
-            }
             var cloudOptimisedMetadata = dataAccessService.getMetadataByUuid(collectionId);
             if(cloudOptimisedMetadata == null || cloudOptimisedMetadata.isEmpty()) {
                 throw new RuntimeException("Unable to find cloud optimized metadata for collection: " + collectionId);
             }
-            var datasets = cloudOptimisedMetadata.values();
-
             var entries = new HashMap<String, AssetModel>();
-            for (var dataset: datasets) {
-                var dname = dataset.getDname();
-                Map.Entry<String, AssetModel> entry = Map.entry(
-                        dname,
-                        AssetModel.builder()
-                                .role(AssetModel.Role.SUMMARY)
-                                .type(mediaType)
-                                .href(String.format("/collections/%s/items/summary", collectionId))
-                                .title(dname)
-                                .description("Summary of cloud optimized data points")
-                                .build()
-
-                );
-                entries.put(entry.getKey(), entry.getValue());
+            for (var entry : cloudOptimisedMetadata.entrySet()) {
+                var key = entry.getKey();
+                var dname = entry.getValue().getDname() != null ? entry.getValue().getDname() : key;
+                entries.put(key, AssetModel.builder()
+                        .role(AssetModel.Role.SUMMARY)
+                        .type(getMediaTypeFromDname(dname))
+                        .href(String.format("/collections/%s/items/summary", collectionId))
+                        .title(dname)
+                        .description("Summary of cloud optimized data points")
+                        .build());
             }
 
             return entries;
@@ -1282,6 +1266,19 @@ public abstract class StacCollectionMapperService {
         else {
             return null;
         }
+    }
+
+    protected static String getMediaTypeFromDname(String dname) {
+        if (dname == null) {
+            return MediaType.APPLICATION_JSON_VALUE;
+        }
+        if (dname.endsWith(".parquet")) {
+            return DatasetMediaType.APPLICATION_PARQUET.getValue();
+        }
+        if (dname.endsWith(".zarr")) {
+            return DatasetMediaType.APPLICATION_ZARR.getValue();
+        }
+        return MediaType.APPLICATION_JSON_VALUE;
     }
     /**
      * Special handle for MimeFileType object.
