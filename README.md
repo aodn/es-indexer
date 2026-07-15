@@ -98,6 +98,19 @@ The vocab is assigned to the metadata manually, and is part of the suggested wor
 the search box, and able to select some known keywords. Although vocabs have multiple level, so far we only use level 1
 and level 2.
 
+### Organization Vocabulary
+This vocab provides value for organization filter and generates the acronym for the organization. The acronym is
+expanded during elastic search via build in function. In the application.yaml you can see additional entries for
+acronym which is used to fill in the missing from organization vocab.
+
+```yaml
+acronyms:
+  name: portal-acronyms
+  manual:
+  - "nrmn => national reef monitoring network"
+
+```
+
 ## Branching name
 
 - `hotfix/`: for quickly fixing critical issues,
