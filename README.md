@@ -100,7 +100,7 @@ and level 2.
 
 ### Organization Vocabulary
 This vocab provides value for organization filter and generates the acronym for the organization. The acronym is
-expanded during elastic search via build in function. In the application.yaml you can see additional entries for 
+expanded during elastic search via build in function. In the application.yaml you can see additional entries for
 acronym which is used to fill in the missing from organization vocab.
 
 ```yaml
