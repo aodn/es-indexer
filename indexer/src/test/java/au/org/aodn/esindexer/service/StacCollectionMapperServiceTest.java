@@ -196,9 +196,6 @@ public class StacCollectionMapperServiceTest {
         when(rankingService.evaluateCompleteness(any(StacCollectionModel.class)))
                 .thenReturn(1);
 
-        when(indexCloudOptimizedService.hasIndex(eq("35234913-aa3c-48ec-b9a4-77f822f66ef8")))
-                .thenReturn(true);
-
         MetadataEntity mockMetadata = new MetadataEntity();
         mockMetadata.setUuid("35234913-aa3c-48ec-b9a4-77f822f66ef8");
         String mockDname = "vessel_xbt_realtime_nonqc.parquet";

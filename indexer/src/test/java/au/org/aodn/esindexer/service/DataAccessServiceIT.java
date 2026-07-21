@@ -65,6 +65,9 @@ public class DataAccessServiceIT {
     @Test
     public void verifyConversion1() throws IOException, JSONException, InterruptedException {
         try {
+            // Clear CommonTestConfig's catch-all 404 before registering path-specific responses.
+            mockServer.getServer().reset();
+
             // This set the time range of the mock data range.
             MetadataEntity metadataEntity = new MetadataEntity();
             metadataEntity.setUuid("35234913-aa3c-48ec-b9a4-77f822f66ef8");

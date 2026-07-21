@@ -19,7 +19,6 @@ import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.HttpMethod;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
@@ -28,18 +27,11 @@ import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.List;
 
-import static org.hamcrest.Matchers.containsString;
-import static org.springframework.test.web.client.ExpectedCount.manyTimes;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
-import static org.springframework.test.web.client.response.MockRestResponseCreators.withResourceNotFound;
-
 /**
  * Acronym synonyms end-to-end: the manual rules from config (elasticsearch.acronyms.manual) flow
  * into the ES synonyms set and expand at search time. The test manual rules are "aa => aurora
  * australis", "soop => ships of opportunity", and the one-acronym-two-names pair "ams => australian
  * marine sciences" / "ams => antarctic meteorological service" (see application-test.yaml).
- *
  * The index (with the acronym schema and synonyms set) is built once in {@link #setup()}; each test
  * is read-only over it, so they stay independent and {@link #cleanUp()} tears it down at the end.
  */
@@ -84,10 +76,7 @@ public class AcronymServiceIT extends BaseTestClass {
                 dockerComposeContainer.getServiceHost(GeoNetworkSearchTestConfig.GN_NAME, GeoNetworkSearchTestConfig.GN_PORT),
                 dockerComposeContainer.getServicePort(GeoNetworkSearchTestConfig.GN_NAME, GeoNetworkSearchTestConfig.GN_PORT))
         );
-        // sample12 has no notebook link, so the indexer's data-access lookup is expected to 404.
-        mockServer.getServer().expect(manyTimes(), requestTo(containsString("/notebook_url")))
-                .andExpect(method(HttpMethod.GET))
-                .andRespond(withResourceNotFound());
+        // DAS GETs (/metadata/{uuid}, /notebook_url, etc.) default to 404 via CommonTestConfig.
         insertMetadataRecords(ACRONYM_SAMPLE_UUID, "classpath:canned/sample12.xml");
         indexerService.indexAllMetadataRecordsFromGeoNetwork(null, true, null);
     }

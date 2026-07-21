@@ -40,6 +40,10 @@ datadiscoveryai:
   apiKey: test-api-key
   internalAiHeaderSecret: test-internal-key
 
+dataAccessService:
+  server:
+    healthCheck: false
+
 logging:
   level:
     au.org.aodn.ardcvocabs.service: DEBUG

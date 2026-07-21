@@ -10,6 +10,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.web.client.HttpClientErrorException;
@@ -45,6 +46,9 @@ public class DataAccessServiceImpl implements DataAccessService {
 
     private final static int MAX_RETRY_ATTEMPT = 100;  //times
     private final static int RETRY_DELAY_SECOND = 10; // second
+
+    @Value("${dataAccessService.server.healthCheck:true}")
+    protected boolean healthCheck;
 
     public DataAccessServiceImpl(String serverUrl, String baseUrl, RestTemplate restTemplate, WebClient webClient, ObjectMapper objectMapper) {
         this.accessEndPoint = serverUrl + baseUrl;
@@ -121,17 +125,22 @@ public class DataAccessServiceImpl implements DataAccessService {
                     .buildAndExpand(uuid)
                     .toUriString();
 
-            ResponseEntity<Map<String, MetadataEntity>> responseEntity = restTemplate.exchange(
-                    url,
-                    HttpMethod.GET,
-                    request,
-                    new ParameterizedTypeReference<>() {
-                    },
-                    Map.of()
-            );
-            if (responseEntity.getStatusCode().is2xxSuccessful()) {
-                return responseEntity.getBody();
-            } else {
+            try {
+                ResponseEntity<Map<String, MetadataEntity>> responseEntity = restTemplate.exchange(
+                        url,
+                        HttpMethod.GET,
+                        request,
+                        new ParameterizedTypeReference<>() {
+                        },
+                        Map.of()
+                );
+                if (responseEntity.getStatusCode().is2xxSuccessful()) {
+                    return responseEntity.getBody();
+                } else {
+                    return null;
+                }
+            }
+            catch(HttpClientErrorException.NotFound e) {
                 return null;
             }
         }
@@ -459,20 +468,24 @@ public class DataAccessServiceImpl implements DataAccessService {
                 merge.merge(entry, count, Long::sum)
         );
     }
-
+    /**
+     * Wait till the service is up, if the service is down, it will wait for 30 seconds and then retry
+     */
     @Override
     public void waitTillServiceUp() {
-        CountDownLatch countDownLatch = new CountDownLatch(1);
+        if(healthCheck) {
+            CountDownLatch countDownLatch = new CountDownLatch(1);
 
-        try {
-            do {
-                if(this.getHealthStatus() == HealthStatus.UP) {
-                    countDownLatch.countDown();
+            try {
+                do {
+                    if (this.getHealthStatus() == HealthStatus.UP) {
+                        countDownLatch.countDown();
+                    }
                 }
+                while (!countDownLatch.await(30, TimeUnit.SECONDS));
+            } catch (Exception ignored) {
             }
-            while(!countDownLatch.await(30, TimeUnit.SECONDS));
         }
-        catch (Exception ignored) {}
     }
 
     @Override

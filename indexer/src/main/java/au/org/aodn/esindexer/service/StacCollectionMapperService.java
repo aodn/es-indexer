@@ -1,5 +1,6 @@
 package au.org.aodn.esindexer.service;
 
+import au.org.aodn.cloudoptimized.model.MetadataEntity;
 import au.org.aodn.stac.model.RelationType;
 import au.org.aodn.cloudoptimized.enums.DatasetMediaType;
 import au.org.aodn.cloudoptimized.service.DataAccessService;
@@ -304,7 +305,7 @@ public abstract class StacCollectionMapperService {
                         safeGet(() -> constraint.getCharacterString().getValue().toString())
                                 .ifPresent(cons -> {
                                     // split into suggested citation text + remaining other constraints text: parts[0]=suggested, parts[1]=remaining
-                                    String[] parts = extractCitationParts((String) cons);
+                                    String[] parts = extractCitationParts(cons);
 
                                     if (parts[0] != null && !parts[0].isBlank()) {
                                         if (citation.getSuggestedCitation() == null || citation.getSuggestedCitation().isBlank()) {
@@ -1243,11 +1244,8 @@ public abstract class StacCollectionMapperService {
     @Named("assets")
     protected Map<String, AssetModel> mapAssetsData(MDMetadataType source) {
         String collectionId = CommonUtils.getUUID(source);
-        if(indexCloudOptimizedService.hasIndex(collectionId)) {
-            var cloudOptimisedMetadata = dataAccessService.getMetadataByUuid(collectionId);
-            if(cloudOptimisedMetadata == null || cloudOptimisedMetadata.isEmpty()) {
-                throw new RuntimeException("Unable to find cloud optimized metadata for collection: " + collectionId);
-            }
+        Map<String, MetadataEntity> cloudOptimisedMetadata = dataAccessService.getMetadataByUuid(collectionId);
+        if(cloudOptimisedMetadata != null && !cloudOptimisedMetadata.isEmpty()) {
             var entries = new HashMap<String, AssetModel>();
             for (var entry : cloudOptimisedMetadata.entrySet()) {
                 var key = entry.getKey();
@@ -1255,17 +1253,14 @@ public abstract class StacCollectionMapperService {
                 entries.put(key, AssetModel.builder()
                         .role(AssetModel.Role.SUMMARY)
                         .type(getMediaTypeFromDname(dname))
-                        .href(String.format("/collections/%s/items/summary", collectionId))
+                        .href(null)
                         .title(dname)
                         .description("Summary of cloud optimized data points")
                         .build());
             }
-
             return entries;
         }
-        else {
-            return null;
-        }
+        return null;
     }
 
     protected static String getMediaTypeFromDname(String dname) {
