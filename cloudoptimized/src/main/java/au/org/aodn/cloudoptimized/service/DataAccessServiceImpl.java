@@ -103,7 +103,15 @@ public class DataAccessServiceImpl implements DataAccessService {
     }
 
     protected boolean isSafeId(String id) {
-        return id.matches("^[a-zA-Z0-9-_]+$");
+        if (id == null || id.isBlank()) {
+            return false;
+        }
+        try {
+            UUID parsed = UUID.fromString(id);
+            return parsed.toString().equalsIgnoreCase(id);
+        } catch (IllegalArgumentException ex) {
+            return false;
+        }
     }
 
     @Override
