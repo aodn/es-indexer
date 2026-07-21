@@ -25,6 +25,7 @@ import reactor.util.retry.Retry;
 import org.springframework.retry.annotation.Retryable;
 import org.springframework.retry.annotation.Backoff;
 
+import java.net.URI;
 import java.time.*;
 import java.util.*;
 import java.util.concurrent.CountDownLatch;
@@ -120,19 +121,19 @@ public class DataAccessServiceImpl implements DataAccessService {
 
             HttpEntity<String> request = getRequestEntity(List.of(MediaType.APPLICATION_JSON));
 
-            String url = UriComponentsBuilder
-                    .fromUriString(getDataAccessEndpoint() + "/metadata/{uuid}")
+            URI uri = UriComponentsBuilder
+                    .fromUriString(getDataAccessEndpoint())
+                    .pathSegment("metadata", "{uuid}")
                     .buildAndExpand(uuid)
-                    .toUriString();
+                    .toUri();
 
             try {
                 ResponseEntity<Map<String, MetadataEntity>> responseEntity = restTemplate.exchange(
-                        url,
+                        uri,
                         HttpMethod.GET,
                         request,
                         new ParameterizedTypeReference<>() {
-                        },
-                        Map.of()
+                        }
                 );
                 if (responseEntity.getStatusCode().is2xxSuccessful()) {
                     return responseEntity.getBody();
