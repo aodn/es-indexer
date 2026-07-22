@@ -58,7 +58,7 @@ public class DataAccessServiceIT {
 
     @AfterAll
     public void resetMock() {
-        mockServer.getServer().reset();
+        mockServer.resetToDefault();
     }
 
     @Disabled("This test is disabled and will fix it later")
@@ -119,7 +119,7 @@ public class DataAccessServiceIT {
             JSONAssert.assertEquals(stac1, hit.source().toString(), JSONCompareMode.STRICT);
         }
         finally {
-            mockServer.getServer().reset();
+            mockServer.resetToDefault();
         }
     }
 }

@@ -32,8 +32,9 @@ import java.util.List;
  * into the ES synonyms set and expand at search time. The test manual rules are "aa => aurora
  * australis", "soop => ships of opportunity", and the one-acronym-two-names pair "ams => australian
  * marine sciences" / "ams => antarctic meteorological service" (see application-test.yaml).
- * The index (with the acronym schema and synonyms set) is built once in {@link #setup()}; each test
- * is read-only over it, so they stay independent and {@link #cleanUp()} tears it down at the end.
+ * The index (with the acronym schema and synonyms set) is built once in {@link #setup()}. Most tests
+ * are read-only over it; the document-search test reindexes itself so suite-level mock pollution
+ * cannot leave the portal index empty. {@link #cleanUp()} tears it down at the end.
  */
 @SpringBootTest(
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
@@ -76,7 +77,8 @@ public class AcronymServiceIT extends BaseTestClass {
                 dockerComposeContainer.getServiceHost(GeoNetworkSearchTestConfig.GN_NAME, GeoNetworkSearchTestConfig.GN_PORT),
                 dockerComposeContainer.getServicePort(GeoNetworkSearchTestConfig.GN_NAME, GeoNetworkSearchTestConfig.GN_PORT))
         );
-        // DAS GETs (/metadata/{uuid}, /notebook_url, etc.) default to 404 via CommonTestConfig.
+        // Restore DAS 404 defaults in case an earlier IT wiped them with getServer().reset().
+        mockServer.resetToDefault();
         insertMetadataRecords(ACRONYM_SAMPLE_UUID, "classpath:canned/sample12.xml");
         indexerService.indexAllMetadataRecordsFromGeoNetwork(null, true, null);
     }
@@ -85,7 +87,7 @@ public class AcronymServiceIT extends BaseTestClass {
     public void cleanUp() throws IOException {
         clearElasticIndex(INDEX_NAME);
         deleteRecord(ACRONYM_SAMPLE_UUID);
-        mockServer.getServer().reset();
+        mockServer.resetToDefault();
     }
 
     // ---- rule output: the rules built from vocab + manual, via the read-only preview endpoint ----
@@ -135,9 +137,18 @@ public class AcronymServiceIT extends BaseTestClass {
 
     // ---- search behaviour: the acronym expands at search time and matches the indexed document ----
 
-    /** Searching the acronym "aa" finds a record that only says "aurora australis" — proof of search-time expansion. */
+    /**
+     * Searching the acronym "aa" finds a record that only says "aurora australis" — proof of search-time expansion.
+     * <p>
+     * Self-contained: reindexes after restoring DAS defaults via {@link MockServer#resetToDefault()}, so
+     * suite-level {@code getServer().reset()} pollution cannot leave the portal index empty.
+     */
     @Test
     public void acronymQueryExpandsToFullNameAndMatchesDocument() throws IOException {
+        mockServer.resetToDefault();
+        insertMetadataRecords(ACRONYM_SAMPLE_UUID, "classpath:canned/sample12.xml");
+        indexerService.indexAllMetadataRecordsFromGeoNetwork(null, true, null);
+
         var hits = searchAcronymField("aa");
 
         Assertions.assertFalse(hits.isEmpty(),

@@ -71,7 +71,7 @@ public class IndexerServiceIT extends BaseTestClass {
 
     @AfterAll
     public void resetMock() {
-        mockServer.getServer().reset();
+        mockServer.resetToDefault();
     }
 
     @AfterEach
