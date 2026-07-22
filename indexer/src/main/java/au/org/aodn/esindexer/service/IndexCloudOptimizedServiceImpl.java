@@ -9,7 +9,6 @@ import au.org.aodn.cloudoptimized.service.DataAccessService;
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.metadata.geonetwork.exception.MetadataNotFoundException;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
-import co.elastic.clients.elasticsearch._types.ElasticsearchException;
 import co.elastic.clients.elasticsearch.core.BulkResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -48,18 +47,6 @@ public class IndexCloudOptimizedServiceImpl extends IndexServiceImpl implements 
         this.indexerObjectMapper = indexerObjectMapper;
         this.dataAccessService = dataAccessService;
         this.elasticSearchIndexService = elasticSearchIndexService;
-    }
-
-    @Override
-    public boolean hasIndex(String collectionId) {
-        try {
-            return elasticSearchIndexService.count(this.indexName, "properties.collection.keyword", collectionId) > 0;
-        } catch (IOException | ElasticsearchException exception) {
-            // ElasticsearchException when indexName do not exist, this happens in a partial config env
-            // but we still need to make sure indexing works as is, backward compatible
-            log.warn("Missing index for collectionId {} on index {}", collectionId, this.indexName);
-            return false;
-        }
     }
 
     /**

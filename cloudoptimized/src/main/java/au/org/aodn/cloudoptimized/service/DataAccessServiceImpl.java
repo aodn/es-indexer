@@ -10,6 +10,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.web.client.HttpClientErrorException;
@@ -24,6 +25,7 @@ import reactor.util.retry.Retry;
 import org.springframework.retry.annotation.Retryable;
 import org.springframework.retry.annotation.Backoff;
 
+import java.net.URI;
 import java.time.*;
 import java.util.*;
 import java.util.concurrent.CountDownLatch;
@@ -45,6 +47,9 @@ public class DataAccessServiceImpl implements DataAccessService {
 
     private final static int MAX_RETRY_ATTEMPT = 100;  //times
     private final static int RETRY_DELAY_SECOND = 10; // second
+
+    @Value("${dataAccessService.server.healthCheck:true}")
+    protected boolean healthCheck;
 
     public DataAccessServiceImpl(String serverUrl, String baseUrl, RestTemplate restTemplate, WebClient webClient, ObjectMapper objectMapper) {
         this.accessEndPoint = serverUrl + baseUrl;
@@ -98,7 +103,8 @@ public class DataAccessServiceImpl implements DataAccessService {
     }
 
     protected boolean isSafeId(String id) {
-        return id.matches("^[a-zA-Z0-9-_]+$");
+        // Path-safe id only: metadata ids are not always RFC-4122 UUIDs.
+        return id != null && id.matches("^[a-zA-Z0-9-_]+$");
     }
 
     @Override
@@ -116,22 +122,27 @@ public class DataAccessServiceImpl implements DataAccessService {
 
             HttpEntity<String> request = getRequestEntity(List.of(MediaType.APPLICATION_JSON));
 
-            String url = UriComponentsBuilder
-                    .fromUriString(getDataAccessEndpoint() + "/metadata/{uuid}")
+            URI uri = UriComponentsBuilder
+                    .fromUriString(getDataAccessEndpoint())
+                    .pathSegment("metadata", "{uuid}")
                     .buildAndExpand(uuid)
-                    .toUriString();
+                    .toUri();
 
-            ResponseEntity<Map<String, MetadataEntity>> responseEntity = restTemplate.exchange(
-                    url,
-                    HttpMethod.GET,
-                    request,
-                    new ParameterizedTypeReference<>() {
-                    },
-                    Map.of()
-            );
-            if (responseEntity.getStatusCode().is2xxSuccessful()) {
-                return responseEntity.getBody();
-            } else {
+            try {
+                ResponseEntity<Map<String, MetadataEntity>> responseEntity = restTemplate.exchange(
+                        uri,
+                        HttpMethod.GET,
+                        request,
+                        new ParameterizedTypeReference<>() {
+                        }
+                );
+                if (responseEntity.getStatusCode().is2xxSuccessful()) {
+                    return responseEntity.getBody();
+                } else {
+                    return null;
+                }
+            }
+            catch(HttpClientErrorException.NotFound e) {
                 return null;
             }
         }
@@ -459,20 +470,24 @@ public class DataAccessServiceImpl implements DataAccessService {
                 merge.merge(entry, count, Long::sum)
         );
     }
-
+    /**
+     * Wait till the service is up, if the service is down, it will wait for 30 seconds and then retry
+     */
     @Override
     public void waitTillServiceUp() {
-        CountDownLatch countDownLatch = new CountDownLatch(1);
+        if(healthCheck) {
+            CountDownLatch countDownLatch = new CountDownLatch(1);
 
-        try {
-            do {
-                if(this.getHealthStatus() == HealthStatus.UP) {
-                    countDownLatch.countDown();
+            try {
+                do {
+                    if (this.getHealthStatus() == HealthStatus.UP) {
+                        countDownLatch.countDown();
+                    }
                 }
+                while (!countDownLatch.await(30, TimeUnit.SECONDS));
+            } catch (Exception ignored) {
             }
-            while(!countDownLatch.await(30, TimeUnit.SECONDS));
         }
-        catch (Exception ignored) {}
     }
 
     @Override

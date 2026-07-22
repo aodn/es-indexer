@@ -13,9 +13,22 @@ public class CommonTestConfig {
     @Bean
     public MockServer createMockServer() {
         RestTemplate template = new RestTemplate(new SimpleClientHttpRequestFactory());
-        return MockServer.builder()
-                .server(MockRestServiceServer.createServer(template))
+
+        // ignoreExpectOrder so tests can register path-specific expectations without FIFO
+        // conflicts against the default catch-all on MockServer.expectDefaultNotFound().
+        MockRestServiceServer server = MockRestServiceServer
+                .bindTo(template)
+                .ignoreExpectOrder(true)
+                .build();
+
+        MockServer mockServer = MockServer.builder()
+                .server(server)
                 .restTemplate(template)
                 .build();
+
+        // Default DAS GETs → 404. Tests that need non-404 responses should getServer().reset()
+        // then register their own expects, and restore via mockServer.resetToDefault() afterwards.
+        mockServer.expectDefaultNotFound();
+        return mockServer;
     }
 }

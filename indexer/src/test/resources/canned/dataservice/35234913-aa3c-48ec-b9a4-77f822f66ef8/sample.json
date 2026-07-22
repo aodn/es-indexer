@@ -230,7 +230,6 @@
   } ],
   "assets" : {
     "vessel_xbt_realtime_nonqc.parquet" : {
-      "href" : "/collections/35234913-aa3c-48ec-b9a4-77f822f66ef8/items/summary",
       "title" : "vessel_xbt_realtime_nonqc.parquet",
       "description" : "Summary of cloud optimized data points",
       "type" : "application/x-parquet",

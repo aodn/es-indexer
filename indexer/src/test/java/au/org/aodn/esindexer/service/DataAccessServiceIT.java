@@ -58,13 +58,16 @@ public class DataAccessServiceIT {
 
     @AfterAll
     public void resetMock() {
-        mockServer.getServer().reset();
+        mockServer.resetToDefault();
     }
 
     @Disabled("This test is disabled and will fix it later")
     @Test
     public void verifyConversion1() throws IOException, JSONException, InterruptedException {
         try {
+            // Clear CommonTestConfig's catch-all 404 before registering path-specific responses.
+            mockServer.getServer().reset();
+
             // This set the time range of the mock data range.
             MetadataEntity metadataEntity = new MetadataEntity();
             metadataEntity.setUuid("35234913-aa3c-48ec-b9a4-77f822f66ef8");
@@ -116,7 +119,7 @@ public class DataAccessServiceIT {
             JSONAssert.assertEquals(stac1, hit.source().toString(), JSONCompareMode.STRICT);
         }
         finally {
-            mockServer.getServer().reset();
+            mockServer.resetToDefault();
         }
     }
 }
