@@ -18,4 +18,17 @@ public class VocabDto {
 
     @JsonProperty("organisation_vocab")
     VocabModel organisationVocabModel;
+
+    /**
+     * Computed property serialized into every indexed doc so the {@code concept_semantic} semantic_text
+     * field is populated automatically (bulk index serializes this DTO). {@code @JsonInclude(NON_NULL)}
+     * omits it when there is no text to embed.
+     */
+    @JsonProperty("concept_semantic")
+    public String getConceptSemantic() {
+        VocabModel m = parameterVocabModel != null ? parameterVocabModel
+                     : platformVocabModel  != null ? platformVocabModel
+                     : organisationVocabModel;
+        return m == null ? null : m.toConceptText();
+    }
 }
