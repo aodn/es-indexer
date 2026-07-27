@@ -55,6 +55,11 @@ elasticsearch:
     name: portal-acronyms
     manual:
       - "nrmn => national reef monitoring network"
+  # semantic_text fields (concept_semantic, description_semantic) need the licensed `inference`
+  # feature. Left off here so a basic-licence cluster still builds a working index - the edge/prod
+  # deployments, which are licensed, switch it on.
+  semantic:
+    enabled: false
 
 aws:
   region: ap-southeast-2

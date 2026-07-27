@@ -24,6 +24,10 @@ elasticsearch:
     enableRefreshDelay: "false"
   query:
     pageSize: 4
+  # the test container runs a basic licence, which has no `inference` - keep semantic_text out of the
+  # mappings or every indexed document is rejected
+  semantic:
+    enabled: false
   acronyms:
     name: portal-acronyms-test
     manual:
