@@ -11,3 +11,5 @@ management:
 elasticsearch:
   acronyms:
     name: portal-acronyms-production
+  semantic:
+    enabled: true
