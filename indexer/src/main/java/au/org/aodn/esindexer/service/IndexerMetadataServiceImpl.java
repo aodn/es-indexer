@@ -17,6 +17,7 @@ import au.org.aodn.stac.model.ThemesModel;
 import au.org.aodn.stac.model.LinkModel;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.ElasticsearchException;
+import co.elastic.clients.elasticsearch._types.VersionType;
 import co.elastic.clients.elasticsearch.core.*;
 import co.elastic.clients.elasticsearch.core.bulk.BulkResponseItem;
 import co.elastic.clients.elasticsearch.core.search.Hit;
@@ -49,6 +50,11 @@ import org.springframework.stereotype.Service;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.function.Function;
@@ -414,6 +420,15 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
      */
     @Async("asyncIndexMetadata")
     public CompletableFuture<ResponseEntity<String>> indexMetadata(String metadataValues) {
+        return indexMetadataInternal(metadataValues, false);
+    }
+
+    @Async("asyncIndexMetadata")
+    public CompletableFuture<ResponseEntity<String>> indexMetadata(String metadataValues, boolean force) {
+        return indexMetadataInternal(metadataValues, force);
+    }
+
+    protected CompletableFuture<ResponseEntity<String>> indexMetadataInternal(String metadataValues, boolean force) {
         try {
             StacCollectionModel mappedMetadataValues = this.getMappedMetadataValues(metadataValues);
             String uuid = mappedMetadataValues.getUuid();
@@ -421,21 +436,37 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
             // index the metadata if it is published
             if (this.isMetadataPublished(uuid)) {
                 IndexRequest<JsonData> req;
+                String revisionDate = safeGet(() -> mappedMetadataValues.getSummaries().getRevision()).orElse(null);
+                Long revisionVersion = force ? null : toEpochMillis(revisionDate, uuid);
 
                 try (InputStream is = new ByteArrayInputStream(indexerObjectMapper.writeValueAsBytes(mappedMetadataValues))) {
                     log.info("Ingesting a new metadata with UUID: {} to index: {}", uuid, indexName);
                     log.debug("{}", mappedMetadataValues);
 
                     // With the id in place, it will always update the same doc given the same id
-                    req = IndexRequest.of(b -> b
-                            .id(uuid)
-                            .index(indexName)
-                            .withJson(is));
+                    req = IndexRequest.of(b -> {
+                        b.id(uuid)
+                                .index(indexName)
+                                .withJson(is);
+                        // Use the record's revision date as an external version, so replaying an
+                        // older or unchanged record (e.g. re-harvest after a GN4 restore) cannot
+                        // overwrite a doc indexed from a newer revision. ES rejects it with 409.
+                        if (revisionVersion != null) {
+                            b.version(revisionVersion).versionType(VersionType.External);
+                        }
+                        return b;
+                    });
 
                     IndexResponse response = portalElasticsearchClient.index(req);
                     log.info("Metadata with UUID: {} indexed with version: {}", uuid, response.version());
                     return CompletableFuture.completedFuture(ResponseEntity.status(HttpStatus.OK).body(response.toString()));
                 } catch (ElasticsearchException e) {
+                    if (e.status() == HttpStatus.CONFLICT.value()) {
+                        String msg = String.format(
+                                "Skipped %s, index already up to date. Use force=true to overwrite.", uuid);
+                        log.info(msg);
+                        return CompletableFuture.completedFuture(ResponseEntity.status(HttpStatus.OK).body(msg));
+                    }
                     String fullError = String.format("%s -> %s", e.getMessage(), e.error().causedBy());
                     log.error(fullError);
                     throw new IndexingRecordException(fullError);
@@ -448,6 +479,29 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
             log.error(e.getMessage());
             throw new MappingValueException(e.getMessage());
         }
+    }
+
+    /**
+     * The record's revision date in epoch millis, used as the doc's external version in Elasticsearch.
+     * Returns null when the record carries no parsable revision date — those docs are indexed
+     * without a version guard, i.e. every write wins.
+     */
+    protected Long toEpochMillis(String revisionDate, String uuid) {
+        if (revisionDate == null) {
+            return null;
+        }
+        try {
+            return OffsetDateTime.parse(revisionDate).toInstant().toEpochMilli();
+        } catch (DateTimeParseException ignored) { }
+        try {
+            return LocalDateTime.parse(revisionDate).toInstant(ZoneOffset.UTC).toEpochMilli();
+        } catch (DateTimeParseException ignored) { }
+        try {
+            return LocalDate.parse(revisionDate).atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli();
+        } catch (DateTimeParseException ignored) { }
+        log.warn("Cannot parse revision date '{}' of UUID: {}, indexing without version guard",
+                revisionDate, uuid);
+        return null;
     }
 
     public ResponseEntity<String> deleteDocumentByUUID(String uuid) throws IOException {

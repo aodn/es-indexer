@@ -16,6 +16,7 @@ import java.util.concurrent.CompletableFuture;
 public interface IndexerMetadataService extends IndexService {
 
     CompletableFuture<ResponseEntity<String>> indexMetadata(String metadataValues) throws IOException, FactoryException, TransformException, JAXBException;
+    CompletableFuture<ResponseEntity<String>> indexMetadata(String metadataValues, boolean force) throws IOException, FactoryException, TransformException, JAXBException;
     ResponseEntity<String> deleteDocumentByUUID(String uuid) throws IOException;
     List<BulkResponse> indexAllMetadataRecordsFromGeoNetwork(String beginWithUuid, boolean confirm, Callback callback) throws IOException;
     Hit<ObjectNode> getDocumentByUUID(String uuid) throws IOException;

@@ -16,6 +16,9 @@ import au.org.aodn.stac.model.LinkModel;
 import au.org.aodn.stac.model.StacCollectionModel;
 import au.org.aodn.stac.model.ThemesModel;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
+import co.elastic.clients.elasticsearch._types.ElasticsearchException;
+import co.elastic.clients.elasticsearch._types.ErrorResponse;
+import co.elastic.clients.elasticsearch._types.VersionType;
 import co.elastic.clients.elasticsearch.core.IndexRequest;
 import co.elastic.clients.elasticsearch.core.IndexResponse;
 import co.elastic.clients.elasticsearch.core.SearchResponse;
@@ -35,10 +38,14 @@ import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
@@ -47,6 +54,8 @@ import org.springframework.test.util.ReflectionTestUtils;
 
 import static au.org.aodn.esindexer.BaseTestClass.readResourceFile;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
@@ -890,6 +899,54 @@ public class StacCollectionMapperServiceTest {
         indexerService.indexMetadata(xml);
 
         verify(expected);
+    }
+
+    /**
+     * The record's revision date must be sent as an external version, so Elasticsearch itself
+     * rejects replays of older or unchanged records (e.g. re-harvest after a GN4 restore).
+     */
+    @Test
+    public void verifyIndexRequestUsesRevisionDateAsExternalVersion() throws IOException {
+        // sample8.xml carries revision date 2022-03-04T00:18:20
+        String xml = readResourceFile("classpath:canned/sample8.xml");
+        indexerService.indexMetadata(xml);
+
+        long revisionAsEpochMillis = LocalDateTime.parse("2022-03-04T00:18:20")
+                .toInstant(ZoneOffset.UTC)
+                .toEpochMilli();
+
+        assertEquals(revisionAsEpochMillis, lastRequest.get().version());
+        assertEquals(VersionType.External, lastRequest.get().versionType());
+    }
+
+    @Test
+    public void verifyForceIndexBypassesVersionGuard() throws IOException {
+        String xml = readResourceFile("classpath:canned/sample8.xml");
+        indexerService.indexMetadata(xml, true);
+
+        assertNull(lastRequest.get().version());
+        assertNull(lastRequest.get().versionType());
+    }
+
+    /**
+     * A version conflict means the index already holds the same or a newer revision of the record.
+     * That is a normal outcome of replaying old data, so it must be reported as a skip, not an error.
+     */
+    @Test
+    public void verifyVersionConflictIsSkippedNotError() throws IOException {
+        doThrow(new ElasticsearchException("es/index", ErrorResponse.of(b -> b
+                .status(HttpStatus.CONFLICT.value())
+                .error(e -> e
+                        .type("version_conflict_engine_exception")
+                        .reason("a newer revision is already indexed")))))
+                .when(portalElasticsearchClient)
+                .index((IndexRequest<?>) any(IndexRequest.class));
+
+        String xml = readResourceFile("classpath:canned/sample8.xml");
+        ResponseEntity<String> response = indexerService.indexMetadata(xml).join();
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertTrue(Objects.requireNonNull(response.getBody()).contains("index already up to date"));
     }
 
 }

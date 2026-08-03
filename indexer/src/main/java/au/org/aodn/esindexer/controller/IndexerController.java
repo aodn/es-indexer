@@ -230,6 +230,7 @@ public class IndexerController {
      *
      * @param uuid - The UUID of the metadata
      * @param withCO - Index cloud optimized data the same time
+     * @param force - Skip the revision-date version guard and overwrite the doc unconditionally
      * @return - No use
      * @throws IOException - No use
      * @throws FactoryException - No use
@@ -241,7 +242,8 @@ public class IndexerController {
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Index a metadata record by UUID")
     public ResponseEntity<String> addDocumentByUUID(
             @PathVariable("uuid") String uuid,
-            @RequestParam(value = "withCO", defaultValue = "false") Boolean withCO) throws IOException, FactoryException, JAXBException, TransformException, InterruptedException {
+            @RequestParam(value = "withCO", defaultValue = "false") Boolean withCO,
+            @RequestParam(value = "force", defaultValue = "false") Boolean force) throws IOException, FactoryException, JAXBException, TransformException, InterruptedException {
 
         if(withCO) {
             CountDownLatch countDownLatch = new CountDownLatch(1);
@@ -251,7 +253,7 @@ public class IndexerController {
             countDownLatch.await();
         }
         String metadataValues = geonetworkResourceService.searchRecordBy(uuid);
-        CompletableFuture<ResponseEntity<String>> f = indexerMetadata.indexMetadata(metadataValues);
+        CompletableFuture<ResponseEntity<String>> f = indexerMetadata.indexMetadata(metadataValues, force);
         // Return when done make it back to sync instead of async
         return f.join();
     }
