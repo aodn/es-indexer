@@ -527,6 +527,32 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
         }
     }
 
+    /**
+     * A full reindex replaces the live index with GeoNetwork's current content on alias swap,
+     * so a half-empty GeoNetwork (e.g. restore in progress) must not be reindexed.
+     */
+    protected void refuseIndexAllIfGeoNetworkLooksIncomplete() {
+        long indexedCount;
+        try {
+            indexedCount = elasticSearchIndexService.getDocumentsCount(indexName);
+        } catch (IndexNotFoundException e) {
+            return;  // no index yet, nothing to protect
+        }
+
+        try {
+            Long geoNetworkCount = geoNetworkResourceService.getAllMetadataCounts();
+            // Loose ratio: the two counts never match exactly (unpublished records, orphan docs)
+            final double minGeoNetworkToIndexedRatio = 0.5;
+            if (geoNetworkCount != null && geoNetworkCount < indexedCount * minGeoNetworkToIndexedRatio) {
+                throw new IndexAllRequestNotConfirmedException(String.format(
+                        "Refused: GeoNetwork looks incomplete (%d records vs %d indexed docs)",
+                        geoNetworkCount, indexedCount));
+            }
+        } catch (IOException e) {
+            log.warn("Cannot compare GeoNetwork/index record counts, skip the check: {}", e.getMessage());
+        }
+    }
+
     public List<BulkResponse> indexAllMetadataRecordsFromGeoNetwork(
             String beginWithUuid, boolean confirm, final Callback callback) {
         var runningAliasName = indexName + RUNNING_ALIAS_SUFFIX;
@@ -549,6 +575,8 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
 
         if(beginWithUuid == null) {
             log.info("Indexing all metadata records from GeoNetwork");
+
+            refuseIndexAllIfGeoNetworkLooksIncomplete();
 
             // Sync the synonyms set referenced by the schema before creating the index.
             // An acronym sync failure shouldn't abort the whole reindex.

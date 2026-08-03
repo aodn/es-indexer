@@ -5,6 +5,8 @@ import au.org.aodn.cloudoptimized.service.DataAccessService;
 import au.org.aodn.datadiscoveryai.model.AiEnhancementRequest;
 import au.org.aodn.datadiscoveryai.model.AiEnhancementResponse;
 import au.org.aodn.datadiscoveryai.service.DataDiscoveryAiService;
+import au.org.aodn.esindexer.exception.IndexAllRequestNotConfirmedException;
+import au.org.aodn.esindexer.exception.IndexNotFoundException;
 import au.org.aodn.esindexer.utils.GcmdKeywordUtils;
 import au.org.aodn.esindexer.utils.GeometryUtils;
 import au.org.aodn.esindexer.utils.JaxbUtils;
@@ -947,6 +949,23 @@ public class StacCollectionMapperServiceTest {
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertTrue(Objects.requireNonNull(response.getBody()).contains("index already up to date"));
+    }
+
+    @Test
+    public void verifyIndexAllRefusedWhenGeoNetworkLooksIncomplete() throws IOException {
+        when(elasticSearchIndexService.getDocumentsCount(anyString())).thenReturn(100L);
+        when(geoNetworkResourceService.getAllMetadataCounts()).thenReturn(3L);
+
+        Assertions.assertThrows(IndexAllRequestNotConfirmedException.class,
+                indexerService::refuseIndexAllIfGeoNetworkLooksIncomplete);
+    }
+
+    @Test
+    public void verifyIndexAllProceedsWhenIndexDoesNotExist() {
+        when(elasticSearchIndexService.getDocumentsCount(anyString()))
+                .thenThrow(new IndexNotFoundException("no such index"));
+
+        Assertions.assertDoesNotThrow(indexerService::refuseIndexAllIfGeoNetworkLooksIncomplete);
     }
 
 }
