@@ -2,6 +2,10 @@
   "mappings": {
     "dynamic": true,
     "properties": {
+      "concept_semantic": {
+        "type": "semantic_text",
+        "inference_id": ".elser-2-elasticsearch"
+      },
       "parameter_vocab": {
         "properties": {
           "label": {

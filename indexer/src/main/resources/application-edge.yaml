@@ -12,6 +12,8 @@ app:
 elasticsearch:
   acronyms:
     name: portal-acronyms-edge
+  semantic:
+    enabled: true
 
 management:
   endpoints:

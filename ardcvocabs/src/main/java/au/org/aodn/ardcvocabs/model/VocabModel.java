@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Stream;
 
 @Builder
 @Getter
@@ -29,4 +31,25 @@ public class VocabModel {
     protected List<VocabModel> broader;
     protected List<VocabModel> narrower;
     protected String version;
+
+    /**
+     * Concat the concept text so that helps to its semantic representation. Include all text for representing a vocab.
+     */
+    public String toConceptText() {
+        List<String> parts = Stream.of(
+                        Stream.of(label, displayLabel),
+                        stream(altLabels),
+                        stream(hiddenLabels),
+                        Stream.of(definition),
+                        stream(narrower).map(VocabModel::getLabel))
+                .flatMap(s -> s)
+                .filter(Objects::nonNull)
+                .toList();
+
+        return parts.isEmpty() ? null : String.join(". ", parts);
+    }
+
+    private static <T> Stream<T> stream(List<T> values) {
+        return values == null ? Stream.empty() : values.stream();
+    }
 }

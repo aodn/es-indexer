@@ -18,6 +18,7 @@ import co.elastic.clients.elasticsearch.indices.GetAliasResponse;
 import co.elastic.clients.transport.endpoints.BooleanResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -33,6 +34,14 @@ public class ElasticSearchIndexService {
 
     @Autowired
     ElasticsearchClient portalElasticsearchClient;
+
+    /*
+        semantic_text fields need the licensed `inference` feature. Off by default so a basic-licence
+        cluster (integration tests, local dev) still gets a usable index - see
+        JsonUtil.stripSemanticTextFields. Turn it on for the edge/prod clusters, which are licensed.
+    */
+    @Value("${elasticsearch.semantic.enabled:false}")
+    boolean semanticEnabled;
 
     // Naming below follows the blue-green deployment pattern which is the pattern we are using for index updates and are recommended naming convention.
     private static final String indexSuffix1 = "-blue";
@@ -85,7 +94,7 @@ public class ElasticSearchIndexService {
         log.info("Reading index schema definition from JSON file: {}", indexMappingFile);
 
         // https://www.baeldung.com/java-classpath-resource-cannot-be-opened#resources
-        try (Reader reader = JsonUtil.createJsonStream(indexMappingFile, indexSettings)) {
+        try (Reader reader = JsonUtil.createJsonStream(indexMappingFile, indexSettings, semanticEnabled)) {
             log.info("Creating index: {}", indexName);
             CreateIndexRequest req = CreateIndexRequest.of(b -> b
                     .index(indexName)
