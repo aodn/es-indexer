@@ -72,23 +72,33 @@ public class VocabIndexScheduler {
     @Scheduled(cron = "0 0 0 * * *")
     public void scheduledRefreshVocabsData() throws IOException {
         try {
-            if (checkVersionDiff()) {
+            boolean refreshRequired = checkVersionDiff() || vocabService.isVocabsIndexSchemaOutdated();
+            if (refreshRequired) {
                 if(enableRefreshDelay) {
                     // Apply a random 0-30 minutes delay on refresh, this is used to avoid multiple instance
                     // refresh the index the same time and step on each other. In case of version change, then
                     // one es-indexer should create the index before the other instance got a chance to download index
                     // Not a perfect solution, but we do not have a global lock in place (need share db or share instance)
-                    log.info("Schedule async refresh ARDC vocabularies due to version diff");
-                    CompletableFuture<Void> f = vocabService.populateVocabsDataAsync(random.nextInt(30));
+                    log.info("Schedule async refresh ARDC vocabularies due to version or schema diff");
+                    // Re-check after jitter: another replica may already have promoted the rebuild.
+                    CompletableFuture<Void> f = vocabService.populateVocabsDataAsync(
+                            random.nextInt(30),
+                            () -> {
+                                try {
+                                    return checkVersionDiff() || vocabService.isVocabsIndexSchemaOutdated();
+                                } catch (IOException e) {
+                                    throw new RuntimeException("Failed to re-check vocab rebuild precondition", e);
+                                }
+                            });
                     f.thenRun(this::refreshCaches);
                 }
                 else {
-                    log.info("Refresh ARDC vocabularies due to version diff");
+                    log.info("Refresh ARDC vocabularies due to version or schema diff, start populating vocabs data...");
                     vocabService.populateVocabsData();
                     refreshCaches();
                 }
             } else {
-                log.info("ARDC vocabularies data version same, download skipped");
+                log.info("ARDC vocabularies data version and schema are current, download skipped");
             }
         }
         catch(IndexNotFoundException inf) {
