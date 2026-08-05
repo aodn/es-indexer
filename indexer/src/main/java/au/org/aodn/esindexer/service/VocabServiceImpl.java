@@ -623,7 +623,7 @@ public class VocabServiceImpl implements VocabService {
     public void recreateVocabsIndexAsync() {
         populateVocabsDataAsync(0, () -> true);
     }
-    
+
     /**
      * The same blue/green strategy used for
      * */
