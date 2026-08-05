@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.BooleanSupplier;
 
 public interface VocabService {
 
@@ -35,6 +36,10 @@ public interface VocabService {
     List<VocabModel> getMappedOrganisationVocabsFromContacts(List<ContactsModel> contacts) throws IOException;
     void populateVocabsData() throws IOException;
     CompletableFuture<Void> populateVocabsDataAsync(int delay);
+    CompletableFuture<Void> populateVocabsDataAsync(int delay, BooleanSupplier precondition);
+    void recreateVocabsIndexAsync();
+    void deleteVocabsIndex();
+    boolean isVocabsIndexSchemaOutdated();
     void clearParameterVocabCache();
     void clearPlatformVocabCache();
     void clearOrganisationVocabCache();

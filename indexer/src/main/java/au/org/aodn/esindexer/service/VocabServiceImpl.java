@@ -5,6 +5,7 @@ import au.org.aodn.ardcvocabs.service.ArdcVocabService;
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.exception.DocumentNotFoundException;
 import au.org.aodn.esindexer.exception.IgnoreIndexingVocabsException;
+import au.org.aodn.esindexer.exception.VocabIndexBusyException;
 import au.org.aodn.stac.model.ConceptModel;
 import au.org.aodn.stac.model.ContactsModel;
 import au.org.aodn.stac.model.ThemesModel;
@@ -27,10 +28,13 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.BooleanSupplier;
+import java.time.Instant;
+import javax.annotation.PreDestroy;
 
 import java.io.IOException;
 import java.util.*;
@@ -59,8 +63,11 @@ public class VocabServiceImpl implements VocabService {
     protected ElasticSearchIndexService elasticSearchIndexService;
     protected ObjectMapper indexerObjectMapper;
     protected ArdcVocabService ardcVocabService;
-    protected String available = null;
-    protected ExecutorService executorService = Executors.newFixedThreadPool(3);
+    protected volatile String available = null;
+    private final AtomicBoolean rebuilding = new AtomicBoolean(false);
+    private final ExecutorService rebuildLauncherExecutor = Executors.newSingleThreadExecutor();
+    private volatile Instant rebuildStartedAt;
+    private volatile String lastRebuildFailure;
 
     protected boolean themeMatchConcept(ThemesModel theme, ConceptModel thatConcept) {
         /*
@@ -342,16 +349,24 @@ public class VocabServiceImpl implements VocabService {
 
     @Override
     public Health health() {
-        if(available == null) {
-            return Health.status(HttpStatus.OK.toString())
-                    .build();
-        }
-        else {
-            return Health.status(HttpStatus.SERVICE_UNAVAILABLE.toString())
+        if (available != null) {
+            return Health.down()
                     .withDetail("reason", available)
                     .build();
-
         }
+        if (rebuilding.get()) {
+            // The live alias continues to serve reads while its replacement is built.
+            return Health.up()
+                    .withDetail("vocabRebuild", "in progress")
+                    .withDetail("startedAt", rebuildStartedAt == null ? "unknown" : rebuildStartedAt.toString())
+                    .build();
+        }
+        if (lastRebuildFailure != null) {
+            return Health.up()
+                    .withDetail("vocabLastRebuild", "failed: " + lastRebuildFailure)
+                    .build();
+        }
+        return Health.up().build();
     }
 
     @CacheEvict(value = VocabType.Names.AODN_DISCOVERY_PARAMETER_VOCABS, allEntries = true)
@@ -393,14 +408,44 @@ public class VocabServiceImpl implements VocabService {
             vocabDtos.add(vocabDto);
         }
 
-        // recreate index from mapping JSON file
-        elasticSearchIndexService.recreateIndexFromMappingJSONFile(AppConstants.VOCABS_INDEX_MAPPING_SCHEMA_FILE, vocabsIndexName, null);
-        log.info("Indexing all vocabs to {}", vocabsIndexName);
+        var runningAlias = vocabsIndexName + ElasticSearchIndexService.RUNNING_ALIAS_SUFFIX;
+        var targetIndex = vocabsIndexName + elasticSearchIndexService.getAvailableIndexSuffix(vocabsIndexName);
+        elasticSearchIndexService.recreateIndexFromMappingJSONFile(
+                AppConstants.VOCABS_INDEX_MAPPING_SCHEMA_FILE, targetIndex, null);
+        // NOTE: the -running alias is kept for symmetry with the records flow only.
+        // Vocabs always rebuild from scratch (no resume), so nothing reads this alias
+        // between set here and removal after promotion. Do not add resume logic.
+        elasticSearchIndexService.updateAliasToNewIndex(runningAlias, targetIndex);
+        log.info("Indexing all vocabs to {}", targetIndex);
 
-        bulkIndexVocabs(vocabDtos);
+        // Concurrency note: two replicas may interleave writes into the same target
+        // index. This is tolerated ONLY because both index the identical vocab set
+        // with identical doc ids (upserts converge). If vocab sources ever diverge
+        // per replica, this assumption breaks and a real lock is required.
+        bulkIndexVocabs(vocabDtos, targetIndex);
+
+        long expected = vocabDtos.stream().map(this::vocabDocumentId).distinct().count();
+        long actual = elasticSearchIndexService.getDocumentsCount(targetIndex);
+        if (actual != expected) {
+            log.error("Vocab rebuild count mismatch (expected {}, found {}), keeping current index live", expected, actual);
+            throw new IOException("Vocab rebuild count mismatch for " + targetIndex);
+        }
+
+        // One-off migration: the vocabs index used to be a concrete index sharing the
+        // alias name, and Elasticsearch refuses aliases that collide with an index.
+        if (elasticSearchIndexService.getIndexNameFromAlias(vocabsIndexName) == null) {
+            elasticSearchIndexService.deleteIndexStore(vocabsIndexName);
+        }
+        elasticSearchIndexService.removeAliasFromIndex(runningAlias, targetIndex);
+        var oldIndex = elasticSearchIndexService.getIndexNameFromAlias(vocabsIndexName);
+        elasticSearchIndexService.updateAliasToNewIndex(vocabsIndexName, targetIndex);
+        if (oldIndex != null) {
+            elasticSearchIndexService.deleteIndexStore(oldIndex);
+        }
+        refreshCachesAfterSuccessfulRebuild();
     }
 
-    protected void bulkIndexVocabs(List<VocabDto> vocabs) throws IOException {
+    protected void bulkIndexVocabs(List<VocabDto> vocabs, String targetIndex) throws IOException {
         if (!vocabs.isEmpty()) {
             BulkRequest.Builder bulkRequest = new BulkRequest.Builder();
 
@@ -411,12 +456,13 @@ public class VocabServiceImpl implements VocabService {
                     // send bulk request to Elasticsearch
                     bulkRequest.operations(op -> op
                             .index(idx -> idx
-                                    .index(vocabsIndexName)
+                                    .index(targetIndex)
+                                    .id(vocabDocumentId(vocab))
                                     .document(vocab)
                             )
                     );
                 } catch (JsonProcessingException e) {
-                    log.error("Failed to ingest parameterVocabs to {}", vocabsIndexName);
+                    log.error("Failed to ingest vocab to {}", targetIndex);
                     throw new RuntimeException(e);
                 }
             }
@@ -425,7 +471,7 @@ public class VocabServiceImpl implements VocabService {
 
             // Flush after insert, otherwise you need to wait for next auto-refresh. It is
             // especially a problem with autotest, where assert happens very fast.
-            portalElasticsearchClient.indices().refresh();
+            portalElasticsearchClient.indices().refresh(r -> r.index(targetIndex));
 
             // Log errors, if any
             if (result.errors()) {
@@ -435,12 +481,38 @@ public class VocabServiceImpl implements VocabService {
                         log.error("{} {}", item.error().reason(), item.error().causedBy());
                     }
                 }
+                throw new IOException("Bulk indexing vocabs failed for " + targetIndex);
             } else {
-                log.info("Finished bulk indexing items to index: {}", vocabsIndexName);
+                log.info("Finished bulk indexing items to index: {}", targetIndex);
             }
-            log.info("Total documents in index: {} is {}", vocabsIndexName, elasticSearchIndexService.getDocumentsCount(vocabsIndexName));
+            log.info("Total documents in index: {} is {}", targetIndex, elasticSearchIndexService.getDocumentsCount(targetIndex));
         } else {
-            log.error("No vocabs to be indexed, nothing to index");
+            throw new IOException("No vocabs to be indexed");
+        }
+    }
+
+    private String vocabDocumentId(VocabDto vocab) {
+        VocabModel model = vocab.getParameterVocabModel() != null ? vocab.getParameterVocabModel()
+                : vocab.getPlatformVocabModel() != null ? vocab.getPlatformVocabModel()
+                : vocab.getOrganisationVocabModel();
+        if (model == null || model.getAbout() == null || model.getAbout().isBlank()) {
+            throw new IllegalArgumentException("Vocab document has no stable about URI for its Elasticsearch id");
+        }
+        return model.getAbout();
+    }
+
+    private void refreshCachesAfterSuccessfulRebuild() {
+        // Invoke via the injected proxy so @CacheEvict is applied.
+        self.clearParameterVocabCache();
+        self.clearPlatformVocabCache();
+        self.clearOrganisationVocabCache();
+        try {
+            self.getParameterVocabs();
+            self.getPlatformVocabs();
+            self.getOrganisationVocabs();
+        } catch (IOException e) {
+            // Promotion has already succeeded. A later cache miss will retry the read.
+            log.error("Failed to warm vocab caches after alias promotion", e);
         }
     }
 
@@ -471,7 +543,34 @@ public class VocabServiceImpl implements VocabService {
      */
     @Override
     public CompletableFuture<Void> populateVocabsDataAsync(int delay) {
+        return populateVocabsDataAsync(delay, () -> true);
+    }
+
+    @Override
+    public CompletableFuture<Void> populateVocabsDataAsync(int delay, BooleanSupplier precondition) {
+        if (!rebuilding.compareAndSet(false, true)) {
+            throw new VocabIndexBusyException("A vocab index rebuild is already in progress on this replica");
+        }
+        rebuildStartedAt = Instant.now();
+        lastRebuildFailure = null;
         log.info("Starting async vocabs data fetching process...");
+
+        CompletableFuture<Void> result = populateVocabsDataAsyncInternal(delay, precondition);
+        result.whenComplete((ignored, error) -> {
+            rebuilding.set(false);
+            rebuildStartedAt = null;
+            if (error == null) {
+                lastRebuildFailure = null;
+            } else {
+                Throwable cause = error instanceof CompletionException && error.getCause() != null ? error.getCause() : error;
+                lastRebuildFailure = Objects.toString(cause.getMessage(), cause.getClass().getSimpleName());
+                log.error("Vocab index rebuild failed", cause);
+            }
+        });
+        return result;
+    }
+
+    private CompletableFuture<Void> populateVocabsDataAsyncInternal(int delay, BooleanSupplier precondition) {
 
         List<Callable<List<VocabModel>>> vocabTasks = List.of(
                 () -> ardcVocabService.getARDCVocabByType(ArdcCurrentPaths.PARAMETER_VOCAB),
@@ -480,11 +579,16 @@ public class VocabServiceImpl implements VocabService {
         );
 
         return CompletableFuture.runAsync(() -> {
+            ExecutorService fetchExecutor = Executors.newFixedThreadPool(3);
             try {
                 log.info("Vocabs data fetching process started in the background.");
+                if (!precondition.getAsBoolean()) {
+                    log.info("Vocab rebuild precondition is no longer true; skipping run");
+                    return;
+                }
 
                 // Invoke all tasks and wait for completion
-                List<Future<List<VocabModel>>> completedFutures = executorService.invokeAll(vocabTasks);
+                List<Future<List<VocabModel>>> completedFutures = fetchExecutor.invokeAll(vocabTasks);
 
                 // Ensure all tasks are completed and check for exceptions
                 List<List<VocabModel>> allResults = new ArrayList<>();
@@ -492,9 +596,7 @@ public class VocabServiceImpl implements VocabService {
                     try {
                         allResults.add(future.get());  // Blocks until the task is completed and retrieves the result
                     } catch (Exception taskException) {
-                        log.error("Task failed with an exception", taskException);
-                        // Handle failure for this particular task
-                        allResults.add(Collections.emptyList()); // add empty result for failed task
+                        throw new CompletionException("A vocab fetch task failed", taskException);
                     }
                 }
 
@@ -506,13 +608,49 @@ public class VocabServiceImpl implements VocabService {
                 // Call indexAllVocabs only after all tasks are completed and validated
                 log.info("Indexing fetched vocabs to {}", vocabsIndexName);
                 indexAllVocabs(allResults.get(0), allResults.get(1), allResults.get(2));
-            } catch (InterruptedException | IOException e) {
-                Thread.currentThread().interrupt();  // Restore interrupt status
-                log.error("Thread was interrupted while processing vocab tasks", e);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                throw new CompletionException(e);
+            } catch (IOException | RuntimeException e) {
+                throw new CompletionException(e);
             } finally {
-                shutdownExecutor(executorService);
+                shutdownExecutor(fetchExecutor);
             }
-        }, CompletableFuture.delayedExecutor(delay, TimeUnit.MINUTES, Executors.newSingleThreadExecutor()));
+        }, CompletableFuture.delayedExecutor(delay, TimeUnit.MINUTES, rebuildLauncherExecutor));
+    }
+
+    @Override
+    public void recreateVocabsIndexAsync() {
+        populateVocabsDataAsync(0, () -> true);
+    }
+    
+    /**
+     * The same blue/green strategy used for
+     * */
+    @Override
+    public void deleteVocabsIndex() {
+        String liveIndex = elasticSearchIndexService.getIndexNameFromAlias(vocabsIndexName);
+        removeAliasIfPresent(vocabsIndexName);
+        removeAliasIfPresent(vocabsIndexName + ElasticSearchIndexService.RUNNING_ALIAS_SUFFIX);
+        elasticSearchIndexService.deleteIndexStore(vocabsIndexName + ElasticSearchIndexService.INDEX_SUFFIX_BLUE);
+        elasticSearchIndexService.deleteIndexStore(vocabsIndexName + ElasticSearchIndexService.INDEX_SUFFIX_GREEN);
+        if (liveIndex == null) {
+            // Also clean a pre-migration concrete index if break-glass is used early.
+            elasticSearchIndexService.deleteIndexStore(vocabsIndexName);
+        }
+    }
+
+    private void removeAliasIfPresent(String alias) {
+        String index = elasticSearchIndexService.getIndexNameFromAlias(alias);
+        if (index != null) {
+            elasticSearchIndexService.removeAliasFromIndex(alias, index);
+        }
+    }
+
+    @Override
+    public boolean isVocabsIndexSchemaOutdated() {
+        return elasticSearchIndexService.isMappingOutdated(
+                AppConstants.VOCABS_INDEX_MAPPING_SCHEMA_FILE, vocabsIndexName);
     }
 
     protected void shutdownExecutor(ExecutorService executor) {
@@ -528,5 +666,10 @@ public class VocabServiceImpl implements VocabService {
             executor.shutdownNow();
             Thread.currentThread().interrupt();
         }
+    }
+
+    @PreDestroy
+    protected void shutdownRebuildLauncherExecutor() {
+        shutdownExecutor(rebuildLauncherExecutor);
     }
 }

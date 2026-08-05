@@ -475,7 +475,7 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
 
     public List<BulkResponse> indexAllMetadataRecordsFromGeoNetwork(
             String beginWithUuid, boolean confirm, final Callback callback) {
-        var runningAliasName = indexName + RUNNING_ALIAS_SUFFIX;
+        var runningAliasName = indexName + ElasticSearchIndexService.RUNNING_ALIAS_SUFFIX;
 
         // this suffix is the one without the in-use alias
         var availableIndexSuffix = elasticSearchIndexService.getAvailableIndexSuffix(indexName);

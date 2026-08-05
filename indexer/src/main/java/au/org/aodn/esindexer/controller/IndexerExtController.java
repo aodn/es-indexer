@@ -4,6 +4,7 @@ import au.org.aodn.ardcvocabs.model.ArdcCurrentPaths;
 import au.org.aodn.ardcvocabs.model.VocabApiPaths;
 import au.org.aodn.ardcvocabs.model.VocabModel;
 import au.org.aodn.ardcvocabs.service.ArdcVocabService;
+import au.org.aodn.esindexer.exception.IndexAllRequestNotConfirmedException;
 import au.org.aodn.esindexer.service.VocabService;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -88,13 +89,32 @@ public class IndexerExtController {
 
     // this endpoint for debugging/development purposes
     @GetMapping(path="/vocabs/populate")
-    @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Populate data to the vocabs index")
+    @Deprecated
+    @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, deprecated = true,
+            description = "Deprecated synchronous vocab population endpoint. Use PUT /vocabs for a background blue/green rebuild.")
     public ResponseEntity<String> populateDataToVocabsIndex() throws IOException, ExecutionException, InterruptedException {
-        // clear existing caches
-        vocabService.clearParameterVocabCache();
-        vocabService.clearPlatformVocabCache();
-        vocabService.clearOrganisationVocabCache();
         vocabService.populateVocabsData();
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Populated data to the vocabs index");
+    }
+
+    @PutMapping(path="/vocabs/index")
+    @Operation(security = { @SecurityRequirement(name = "X-API-Key") },
+            description = "Starts a background blue/green vocab rebuild. The 409 guard is per-replica and best-effort, not a cluster-wide lock.")
+    public ResponseEntity<String> recreateVocabsIndex() {
+        vocabService.recreateVocabsIndexAsync();
+        return ResponseEntity.accepted()
+                .body("Rebuild started. Poll GET /manage/health (details.vocabRebuild) or watch logs.");
+    }
+
+    @DeleteMapping(path="/vocabs/index")
+    @Operation(security = { @SecurityRequirement(name = "X-API-Key") },
+            description = "Break-glass cleanup of both vocab aliases and both blue/green indices. Requires confirm=true.")
+    public ResponseEntity<String> deleteVocabsIndex(
+            @RequestParam(value = "confirm", defaultValue = "false") Boolean confirm) {
+        if (!confirm) {
+            throw new IndexAllRequestNotConfirmedException("Please confirm that you want to delete the vocab indices");
+        }
+        vocabService.deleteVocabsIndex();
+        return ResponseEntity.noContent().build();
     }
 }
