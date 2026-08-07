@@ -1,9 +1,6 @@
 package au.org.aodn.esindexer.controller;
 
-import au.org.aodn.cloudoptimized.model.MetadataEntity;
-import au.org.aodn.cloudoptimized.model.TemporalExtent;
-import au.org.aodn.cloudoptimized.service.DataAccessService;
-import au.org.aodn.esindexer.service.IndexCloudOptimizedService;
+
 import au.org.aodn.esindexer.service.IndexService;
 import au.org.aodn.esindexer.service.AcronymService;
 import au.org.aodn.esindexer.service.IndexerMetadataService;
@@ -27,9 +24,7 @@ import software.amazon.awssdk.services.batch.model.KeyValuePair;
 import software.amazon.awssdk.services.batch.model.SubmitJobRequest;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.*;
 
 @RestController
@@ -42,13 +37,7 @@ public class IndexerController {
     IndexerMetadataService indexerMetadata;
 
     @Autowired
-    IndexCloudOptimizedService indexCloudOptimizedData;
-
-    @Autowired
     GeoNetworkService geonetworkResourceService;
-
-    @Autowired
-    DataAccessService dataAccessService;
 
     @Autowired
     BatchClient batchClient;
@@ -136,7 +125,6 @@ public class IndexerController {
      * @param confirm - Must set to true to begin a load
      * @param beginWithUuid - You want to start load from a particular uuid, it is useful for resume previous incomplete
      * @return - The job result
-     * @throws IOException - Any failure during reload, it is the caller to handle the error
      */
     @PostMapping(path="/allinbatch", consumes = "application/json", produces = "application/json")
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Index all metadata records from GeoNetwork in aws batch")
@@ -204,32 +192,9 @@ public class IndexerController {
 
         return emitter;
     }
-
-    @PostMapping(path="/async/all-cloud")
-    @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Index a dataset by UUID")
-    public SseEmitter indexAllCOData(@RequestParam(value = "beginWithUuid", required=false) String beginWithUuid) {
-        final SseEmitter emitter = new SseEmitter(0L); // 0L means no timeout;
-        final IndexService.Callback callback = createCallback(emitter);
-
-        new Thread(() -> {
-            try {
-                indexCloudOptimizedData.indexAllCloudOptimizedData(beginWithUuid, callback);
-            }
-            catch (Exception ioe) {
-                callback.onError(ioe);
-            }
-            finally {
-                log.info("Close emitter at indexAllCOData");
-                emitter.complete();
-            }
-        }).start();
-
-        return emitter;
-    }
     /**
      *
      * @param uuid - The UUID of the metadata
-     * @param withCO - Index cloud optimized data the same time
      * @return - No use
      * @throws IOException - No use
      * @throws FactoryException - No use
@@ -240,16 +205,8 @@ public class IndexerController {
     @PostMapping(path="/{uuid}", produces = "application/json")
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Index a metadata record by UUID")
     public ResponseEntity<String> addDocumentByUUID(
-            @PathVariable("uuid") String uuid,
-            @RequestParam(value = "withCO", defaultValue = "false") Boolean withCO) throws IOException, FactoryException, JAXBException, TransformException, InterruptedException {
+            @PathVariable("uuid") String uuid) throws IOException, FactoryException, JAXBException, TransformException {
 
-        if(withCO) {
-            CountDownLatch countDownLatch = new CountDownLatch(1);
-            indexCODataByUUID(uuid, null, null, countDownLatch);
-
-            // Wait till index co data completed
-            countDownLatch.await();
-        }
         String metadataValues = geonetworkResourceService.searchRecordBy(uuid);
         CompletableFuture<ResponseEntity<String>> f = indexerMetadata.indexMetadata(metadataValues);
         // Return when done make it back to sync instead of async
@@ -260,75 +217,6 @@ public class IndexerController {
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Delete a metadata record by UUID")
     public ResponseEntity<String> deleteDocumentByUUID(@PathVariable("uuid") String uuid) throws IOException {
         return indexerMetadata.deleteDocumentByUUID(uuid);
-    }
-
-    @PostMapping(path="/{uuid}/cloud")
-    @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Index a dataset by UUID")
-    public SseEmitter indexCODataByUUID(
-            @PathVariable("uuid") String uuid,
-            @RequestParam(value="start_date", required = false) String startDate,
-            @RequestParam(value="end_date", required = false) String endDate) {
-        return indexCODataByUUID(uuid, startDate, endDate, null);
-    }
-
-    protected SseEmitter indexCODataByUUID(String uuid, String start, String end, CountDownLatch countDownLatch)  {
-
-        final SseEmitter emitter = new SseEmitter(0L); // 0L means no timeout;
-        final IndexService.Callback callback = createCallback(emitter);
-        final CountDownLatch msgCountDown = new CountDownLatch(1);
-
-        // We need to keep sending messages to client to avoid timeout on long processing
-        ExecutorService executor = Executors.newFixedThreadPool(2);
-
-        Callable<Void> msg = () -> {
-            // Make sure gateway not timeout on long processing
-            while(!msgCountDown.await(20, TimeUnit.SECONDS)) {
-                if (callback != null) {
-                    callback.onProgress("Processing Cloud Optimized Data Index.... ");
-                }
-            }
-            return null;
-        };
-
-        Callable<Void> task = () -> {
-            try {
-                Map<String, MetadataEntity> metadata = dataAccessService.getMetadataByUuid(uuid);
-
-                if (metadata != null) {
-                    for (String key : metadata.keySet()) {
-                        List<TemporalExtent> temporalExtents = dataAccessService.getTemporalExtentOf(uuid, key);
-
-                        if (!temporalExtents.isEmpty()) {
-                            // Only first block works from dataservice api
-                            LocalDate startDate = start == null ? temporalExtents.get(0).getLocalStartDate() : LocalDate.parse(start);
-                            LocalDate endDate = end == null ? temporalExtents.get(0).getLocalEndDate() : LocalDate.parse(end);
-                            log.info("Index cloud optimized data with UUID: {} from {} to {}", uuid, startDate, endDate);
-
-                            indexCloudOptimizedData.indexCloudOptimizedData(metadata.get(key), startDate, endDate, callback);
-                        } else {
-                            log.info("Index cloud optimized data : {} not found", uuid);
-                        }
-                    }
-                }
-            }
-            catch (Exception ioe) {
-                callback.onError(ioe);
-            }
-            finally {
-                if(countDownLatch != null) {
-                    countDownLatch.countDown();
-                }
-                log.info("Close emitter at indexCODataByUUID");
-                emitter.complete();
-                msgCountDown.countDown();
-            }
-            return null;
-        };
-
-        executor.submit(msg);
-        executor.submit(task);
-
-        return emitter;
     }
 
     protected IndexerMetadataService.Callback createCallback(SseEmitter emitter) {

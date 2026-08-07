@@ -82,9 +82,6 @@ public abstract class StacCollectionMapperService {
     @Autowired
     protected DataAccessService dataAccessService;
 
-    @Autowired
-    protected IndexCloudOptimizedService indexCloudOptimizedService;
-
     @Named("mapUUID")
     String mapUUID(MDMetadataType source) {
         return CommonUtils.getUUID(source);
