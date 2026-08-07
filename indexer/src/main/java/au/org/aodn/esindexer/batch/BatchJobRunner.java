@@ -1,6 +1,5 @@
 package au.org.aodn.esindexer.batch;
 
-import au.org.aodn.cloudoptimized.service.DataAccessService;
 import au.org.aodn.esindexer.service.IndexerMetadataService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,9 +34,6 @@ public class BatchJobRunner {
 
     @Autowired
     private IndexerMetadataService indexerMetadataService;
-
-    @Autowired
-    protected DataAccessService dataAccessService;
 
     private static final String INDEX_ALL_METADATA = "indexAllMetadata";
     private static final String INDEX_ALL_METADATA_FROM_UUID = "indexAllMetadataFromUuid";
