@@ -1,6 +1,5 @@
 package au.org.aodn.cloudoptimized.service;
 
-import au.org.aodn.cloudoptimized.model.CloudOptimizedEntry;
 import au.org.aodn.cloudoptimized.model.MetadataEntity;
 import au.org.aodn.cloudoptimized.model.MetadataFields;
 import au.org.aodn.cloudoptimized.model.TemporalExtent;
@@ -39,9 +38,6 @@ public interface DataAccessService {
                 List.of(MetadataFields.TIME, MetadataFields.DEPTH, MetadataFields.LONGITUDE, MetadataFields.LATITUDE) :
                 List.of(MetadataFields.TIME, MetadataFields.LONGITUDE, MetadataFields.LATITUDE);
     }
-
-    void aggregateData(Map<CloudOptimizedEntry, Long> merge, List<? extends CloudOptimizedEntry> data);
-    FeatureCollectionGeoJson getIndexingDatasetByMonth(String uuid, String key, YearMonth yearMonth, List<MetadataFields> fields);
     /**
      * Get spatial extents value from the cloud optimize data
      * @param uuid - UUID of dataset
@@ -54,9 +50,4 @@ public interface DataAccessService {
     Map<String, Map<String, MetadataEntity>> getAllMetadata();
     HealthStatus getHealthStatus();
     void waitTillServiceUp();
-
-    /**
-     * Get Zarr indexing data by month. It is a short term solution for Zarr indexing. May change later
-     */
-    FeatureCollectionGeoJson getZarrIndexingDataByMonth(String uuid, String key, YearMonth yearMonth);
 }
