@@ -12,6 +12,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.TextNode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.retry.backoff.BackOffInterruptedException;
 import org.springframework.retry.support.RetryTemplate;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
@@ -35,7 +36,6 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
 
     protected RestTemplate restTemplate;
     protected RetryTemplate retryTemplate;
-    protected int maxConsecutiveItemFailures;
 
     /**
      * State scoped to one ARDC vocabulary harvest.
@@ -48,16 +48,6 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
         protected final Map<String, JsonNode> detailTargets = new HashMap<>();
         // Resource URIs currently being processed by the recursive model builder.
         protected final Set<String> inProgress = new HashSet<>();
-        //Number of consecutive retryable requests that remained unsuccessful after all retry attempts were exhausted
-        protected int consecutiveFailures;
-        // Resets the consecutive-failure count after a successful request.
-        protected void recordSuccess() {
-            consecutiveFailures = 0;
-        }
-        // Records an exhausted retryable failure.
-        protected int recordFailure() {
-            return ++consecutiveFailures;
-        }
     }
 
     protected static final String VERSION_REGEX = "/(version-\\d+-\\d+)(?:/|$)";
@@ -69,8 +59,8 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
     protected Map<Name, String> getVersionedArdcPath(ArdcCurrentPaths currentPath, HarvestRun run) {
         try {
             // Fetch current contents
-            ObjectNode categoryCurrentContent = fetchCurrentContents(currentPath.getCategoryCurrent(), run);
-            ObjectNode vocabCurrentContent = fetchCurrentContents(currentPath.getVocabCurrent(), run);
+            ObjectNode categoryCurrentContent = fetchCurrentContents(currentPath.getCategoryCurrent());
+            ObjectNode vocabCurrentContent = fetchCurrentContents(currentPath.getVocabCurrent());
             validateContentNotNull(currentPath, categoryCurrentContent, vocabCurrentContent);
 
             // Extract versions
@@ -104,11 +94,9 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
         }
     }
 
-    protected ObjectNode fetchCurrentContents(String url, HarvestRun run) {
+    protected ObjectNode fetchCurrentContents(String url) {
         try {
-            ObjectNode result = retryTemplate.execute(context -> restTemplate.getForObject(url, ObjectNode.class));
-            recordSuccess(run);
-            return result;
+            return retryTemplate.execute(context -> restTemplate.getForObject(url, ObjectNode.class));
         }
         catch (RestClientException e) {
             log.error("Failed to fetch HTML content from URL {}: {}", url, e.getMessage());
@@ -211,16 +199,8 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
     protected BiFunction<JsonNode, String, Boolean> isNodeValid = (node, item) -> node != null && !node.isEmpty() && node.has(item) && !node.get(item).isEmpty();
 
     public ArdcVocabServiceImpl(RestTemplate restTemplate, RetryTemplate retryTemplate) {
-        this(restTemplate, retryTemplate, 5);
-    }
-
-    public ArdcVocabServiceImpl(
-            RestTemplate restTemplate,
-            RetryTemplate retryTemplate,
-            int maxConsecutiveItemFailures) {
         this.restTemplate = restTemplate;
         this.retryTemplate = retryTemplate;
-        this.maxConsecutiveItemFailures = Math.max(1, maxConsecutiveItemFailures);
     }
 
     protected VocabModel buildVocabByResourceUri(String vocabUri, String vocabApiBase, Map<Name, String> pointers) {
@@ -250,7 +230,6 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
         try {
             log.debug("Query api -> {}", detailsUrl);
             ObjectNode detailsObj = retryTemplate.execute(context -> restTemplate.getForObject(detailsUrl, ObjectNode.class));
-            recordSuccess(run);
             if(isNodeValid.apply(detailsObj, "result") && isNodeValid.apply(detailsObj.get("result"), "primaryTopic")) {
                 JsonNode target = detailsObj.get("result").get("primaryTopic");
                 run.detailTargets.put(vocabUri, target);
@@ -264,12 +243,12 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
                 log.warn("ARDC vocabulary resource not found at {}; skipping item", detailsUrl);
                 return null;
             }
-            if (isRetryableFailure(e)) {
-                run.recordFailure();
-                throw incomplete(detailsUrl, run, e);
+            if (isInterrupted(e)) {
+                Thread.currentThread().interrupt();
+                throw incomplete(detailsUrl, e);
             }
-            if (e instanceof RestClientException) {
-                throw incomplete(detailsUrl, run, e);
+            if (isRetryableFailure(e) || e instanceof RestClientException) {
+                throw incomplete(detailsUrl, e);
             }
             log.warn("Invalid ARDC vocabulary resource at {}; skipping item", detailsUrl, e);
         }
@@ -364,12 +343,6 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
         return buildVocabByResourceUri(resourceUri, vocabApiBase, pointers, run);
     }
 
-    protected void recordSuccess(HarvestRun run) {
-        if (run != null) {
-            run.recordSuccess();
-        }
-    }
-
     protected boolean isRetryableFailure(Throwable failure) {
         for (Throwable current = failure; current != null; current = current.getCause()) {
             if (current instanceof HttpClientErrorException.TooManyRequests
@@ -390,12 +363,23 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
         return false;
     }
 
-    protected VocabHarvestIncompleteException incomplete(String url, HarvestRun run, Throwable cause) {
-        return new VocabHarvestIncompleteException(
-                url,
-                run.consecutiveFailures,
-                maxConsecutiveItemFailures,
-                cause);
+    /**
+     * The request throttle and the retry backoff both sleep, so an interrupt surfaces either as an
+     * InterruptedException or as Spring Retry's BackOffInterruptedException. Neither is retryable nor a
+     * RestClientException, so without this check they would fall through to a "skip item" branch and the
+     * harvest would quietly return a partial tree.
+     */
+    protected boolean isInterrupted(Throwable failure) {
+        for (Throwable current = failure; current != null; current = current.getCause()) {
+            if (current instanceof InterruptedException || current instanceof BackOffInterruptedException) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    protected VocabHarvestIncompleteException incomplete(String url, Throwable cause) {
+        return new VocabHarvestIncompleteException(url, cause);
     }
 
     protected Map<String, List<VocabModel>> getVocabLeafNodes(
@@ -411,7 +395,6 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
                 log.debug("getVocabLeafNodes -> {}", pageUrl);
                 ObjectNode response = retryTemplate.execute(
                         context -> restTemplate.getForObject(pageUrl, ObjectNode.class));
-                recordSuccess(run);
 
                 if (response == null || response.isEmpty() || !isNodeValid.apply(response, "result")) {
                     throw new IllegalStateException("Invalid vocabulary listing payload");
@@ -428,11 +411,11 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
             } catch (VocabHarvestIncompleteException e) {
                 throw e;
             } catch (Exception e) {
-                if (isRetryableFailure(e)) {
-                    run.recordFailure();
+                if (isInterrupted(e)) {
+                    Thread.currentThread().interrupt();
                 }
                 log.error("Failed to complete ARDC vocabulary listing page {}", pageUrl, e);
-                throw incomplete(pageUrl, run, e);
+                throw incomplete(pageUrl, e);
             }
         }
 
@@ -461,23 +444,20 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
                 log.debug("getVocabLeafNodes -> {}", detailsUrl);
                 details = retryTemplate.execute(
                         context -> restTemplate.getForObject(detailsUrl, ObjectNode.class));
-                recordSuccess(run);
             } catch (Exception e) {
                 if (isNotFound(e)) {
                     log.warn("ARDC vocabulary item not found at {}; skipping item", detailsUrl);
                     return;
                 }
-                if (isRetryableFailure(e)) {
-                    int failures = run.recordFailure();
-                    if (failures >= maxConsecutiveItemFailures) {
-                        throw incomplete(detailsUrl, run, e);
-                    }
-                    log.warn("Transient failure fetching ARDC vocabulary item {} ({}/{} consecutive failures); skipping item",
-                            detailsUrl, failures, maxConsecutiveItemFailures, e);
-                    return;
+                if (isInterrupted(e)) {
+                    Thread.currentThread().interrupt();
+                    throw incomplete(detailsUrl, e);
                 }
-                if (e instanceof RestClientException) {
-                    throw incomplete(detailsUrl, run, e);
+                // A failure that survived every retry attempt means ARDC is unhealthy. Skipping the item here
+                // would drop a leaf from the tree while the harvest still looks complete to the indexer, which
+                // is the silent-partial-tree bug this class exists to prevent. Abort instead.
+                if (isRetryableFailure(e) || e instanceof RestClientException) {
+                    throw incomplete(detailsUrl, e);
                 }
                 log.warn("Invalid ARDC vocabulary item at {}; skipping item", detailsUrl, e);
                 return;
@@ -553,7 +533,6 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
             String pageUrl = url;
             try {
                 ObjectNode r = retryTemplate.execute(context -> restTemplate.getForObject(pageUrl, ObjectNode.class));
-                recordSuccess(run);
                 if (r == null || r.isEmpty() || !isNodeValid.apply(r, "result")) {
                     throw new IllegalStateException("Invalid category listing payload");
                 }
@@ -617,11 +596,11 @@ public class ArdcVocabServiceImpl implements ArdcVocabService {
             } catch (VocabHarvestIncompleteException e) {
                 throw e;
             } catch (Exception e) {
-                if (isRetryableFailure(e)) {
-                    run.recordFailure();
+                if (isInterrupted(e)) {
+                    Thread.currentThread().interrupt();
                 }
                 log.error("Failed to complete ARDC category listing page {}", pageUrl, e);
-                throw incomplete(pageUrl, run, e);
+                throw incomplete(pageUrl, e);
             }
         }
 

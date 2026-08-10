@@ -16,6 +16,7 @@ import org.junit.jupiter.api.*;
 import org.mockito.InjectMocks;
 import org.mockito.InOrder;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -62,6 +63,17 @@ public class VocabServiceIT extends BaseTestClass {
 
     @Autowired
     protected ObjectMapper indexerObjectMapper;
+
+    /**
+     * This class is PER_CLASS, so Spring's MockitoTestExecutionListener initialises the annotated mocks once for
+     * the whole class rather than per method. Without an explicit reset, stubs and invocation counts leak between
+     * tests: a thenThrow stub left by one test fires while the next test is still stubbing, and a spy invocation
+     * from one test breaks another test's verify(..., never()).
+     */
+    @BeforeEach
+    void resetMocks() {
+        Mockito.reset(mockVocabService, mockArdcVocabService);
+    }
 
     @Test
     void testExtractParameterVocabLabelsFromThemes() throws IOException {
@@ -151,9 +163,9 @@ public class VocabServiceIT extends BaseTestClass {
     @Test
     void testSkipIndexingIfEmptyVocabs() throws IOException {
         // Mock service calls to return empty lists
-        when(mockArdcVocabService.getARDCVocabByType(ArdcCurrentPaths.PARAMETER_VOCAB)).thenReturn(Collections.emptyList());
-        when(mockArdcVocabService.getARDCVocabByType(ArdcCurrentPaths.PLATFORM_VOCAB)).thenReturn(Collections.emptyList());
-        when(mockArdcVocabService.getARDCVocabByType(ArdcCurrentPaths.ORGANISATION_VOCAB)).thenReturn(Collections.emptyList());
+        doReturn(Collections.emptyList()).when(mockArdcVocabService).getARDCVocabByType(ArdcCurrentPaths.PARAMETER_VOCAB);
+        doReturn(Collections.emptyList()).when(mockArdcVocabService).getARDCVocabByType(ArdcCurrentPaths.PLATFORM_VOCAB);
+        doReturn(Collections.emptyList()).when(mockArdcVocabService).getARDCVocabByType(ArdcCurrentPaths.ORGANISATION_VOCAB);
 
         assertThrows(IgnoreIndexingVocabsException.class, () -> mockVocabService.populateVocabsData());
         verify(mockVocabService, never()).indexAllVocabs(anyList(), anyList(), anyList());
@@ -161,8 +173,9 @@ public class VocabServiceIT extends BaseTestClass {
 
     @Test
     void testIncompleteHarvestIsNotIndexedSynchronously() throws IOException {
-        when(mockArdcVocabService.getARDCVocabByType(ArdcCurrentPaths.PARAMETER_VOCAB))
-                .thenThrow(incompleteHarvestException());
+        // doThrow rather than when(...).thenThrow: the latter invokes the mock while stubbing it
+        doThrow(incompleteHarvestException())
+                .when(mockArdcVocabService).getARDCVocabByType(ArdcCurrentPaths.PARAMETER_VOCAB);
 
         assertThrows(VocabHarvestIncompleteException.class, () -> mockVocabService.populateVocabsData());
         verify(mockVocabService, never()).indexAllVocabs(anyList(), anyList(), anyList());
@@ -171,12 +184,12 @@ public class VocabServiceIT extends BaseTestClass {
 
     @Test
     void testIncompleteHarvestIsNotIndexedAsynchronously() throws IOException {
-        when(mockArdcVocabService.getARDCVocabByType(ArdcCurrentPaths.PARAMETER_VOCAB))
-                .thenThrow(incompleteHarvestException());
-        when(mockArdcVocabService.getARDCVocabByType(ArdcCurrentPaths.PLATFORM_VOCAB))
-                .thenReturn(List.of(vocab("Platform", "http://example.com/platform")));
-        when(mockArdcVocabService.getARDCVocabByType(ArdcCurrentPaths.ORGANISATION_VOCAB))
-                .thenReturn(List.of(vocab("Organisation", "http://example.com/organisation")));
+        doThrow(incompleteHarvestException())
+                .when(mockArdcVocabService).getARDCVocabByType(ArdcCurrentPaths.PARAMETER_VOCAB);
+        doReturn(List.of(vocab("Platform", "http://example.com/platform")))
+                .when(mockArdcVocabService).getARDCVocabByType(ArdcCurrentPaths.PLATFORM_VOCAB);
+        doReturn(List.of(vocab("Organisation", "http://example.com/organisation")))
+                .when(mockArdcVocabService).getARDCVocabByType(ArdcCurrentPaths.ORGANISATION_VOCAB);
 
         CompletableFuture<Void> future = mockVocabService.populateVocabsDataAsync(0);
 
@@ -190,12 +203,12 @@ public class VocabServiceIT extends BaseTestClass {
 
     @Test
     void testAsyncHarvestsRunSequentiallyInOrder() throws Exception {
-        when(mockArdcVocabService.getARDCVocabByType(ArdcCurrentPaths.PARAMETER_VOCAB))
-                .thenReturn(List.of(vocab("Parameter", "http://example.com/parameter")));
-        when(mockArdcVocabService.getARDCVocabByType(ArdcCurrentPaths.PLATFORM_VOCAB))
-                .thenReturn(List.of(vocab("Platform", "http://example.com/platform")));
-        when(mockArdcVocabService.getARDCVocabByType(ArdcCurrentPaths.ORGANISATION_VOCAB))
-                .thenReturn(List.of(vocab("Organisation", "http://example.com/organisation")));
+        doReturn(List.of(vocab("Parameter", "http://example.com/parameter")))
+                .when(mockArdcVocabService).getARDCVocabByType(ArdcCurrentPaths.PARAMETER_VOCAB);
+        doReturn(List.of(vocab("Platform", "http://example.com/platform")))
+                .when(mockArdcVocabService).getARDCVocabByType(ArdcCurrentPaths.PLATFORM_VOCAB);
+        doReturn(List.of(vocab("Organisation", "http://example.com/organisation")))
+                .when(mockArdcVocabService).getARDCVocabByType(ArdcCurrentPaths.ORGANISATION_VOCAB);
         doNothing().when(mockVocabService).indexAllVocabs(anyList(), anyList(), anyList());
 
         mockVocabService.populateVocabsDataAsync(0).get(30, TimeUnit.SECONDS);
@@ -244,8 +257,6 @@ public class VocabServiceIT extends BaseTestClass {
     private VocabHarvestIncompleteException incompleteHarvestException() {
         return new VocabHarvestIncompleteException(
                 "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
-                5,
-                5,
                 HttpClientErrorException.create(
                         HttpStatus.TOO_MANY_REQUESTS,
                         "Too Many Requests",

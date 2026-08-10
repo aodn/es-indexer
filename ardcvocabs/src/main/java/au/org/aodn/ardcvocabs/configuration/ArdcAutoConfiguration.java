@@ -19,6 +19,7 @@ import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
@@ -33,8 +34,6 @@ public class ArdcAutoConfiguration {
     protected Integer maxAttempts = 5;
     // the backoff time for retry-after-retryable failures, unit as seconds
     protected Long backoffInitialSeconds = 30L;
-    // the max number of failures for item details
-    protected Integer maxConsecutiveItemFailures = 5;
 
     @Bean
     public ArdcVocabService createArdcVocabsService(RetryTemplate retryTemplate) {
@@ -60,12 +59,17 @@ public class ArdcAutoConfiguration {
             try {
                 TimeUnit.MILLISECONDS.sleep(requestDelayMs);
             } catch (InterruptedException e) {
+                // sleep() clears the interrupt flag on the way out. Restore it, and abandon the request rather
+                // than sending it: once the flag is set every later sleep() throws immediately, so proceeding
+                // here would fire the rest of the harvest with no delay at all and provoke the 429 storm the
+                // throttle exists to avoid.
                 Thread.currentThread().interrupt();
+                throw new IOException("Interrupted while throttling ARDC request", e);
             }
             return execution.execute(request, body);
         });
 
-        return new ArdcVocabServiceImpl(template, retryTemplate, maxConsecutiveItemFailures);
+        return new ArdcVocabServiceImpl(template, retryTemplate);
     }
 
     /**
