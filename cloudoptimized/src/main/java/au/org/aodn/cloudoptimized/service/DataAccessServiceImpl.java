@@ -28,7 +28,6 @@ import org.springframework.retry.annotation.Backoff;
 import java.net.URI;
 import java.time.*;
 import java.util.*;
-import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -47,6 +46,7 @@ public class DataAccessServiceImpl implements DataAccessService {
 
     private final static int MAX_RETRY_ATTEMPT = 100;  //times
     private final static int RETRY_DELAY_SECOND = 10; // second
+    private final static int HEALTH_CHECK_INTERVAL_SECOND = 30;
 
     @Value("${dataAccessService.server.healthCheck:true}")
     protected boolean healthCheck;
@@ -76,9 +76,28 @@ public class DataAccessServiceImpl implements DataAccessService {
         return id != null && id.matches("^[a-zA-Z0-9-_]+$");
     }
 
+    /**
+     * Re-throw transient server errors so {@link Retryable} can back off and retry
+     * (e.g. nginx 502/504 while the data-access service restarts).
+     */
+    protected void rethrowIfRetryable(RuntimeException ex) {
+        if (ex instanceof HttpServerErrorException.ServiceUnavailable
+                || ex instanceof HttpServerErrorException.BadGateway
+                || ex instanceof HttpServerErrorException.GatewayTimeout
+                || ex instanceof ResourceAccessException) {
+            log.warn("Data access service temporary failure, will retry: {}", ex.getMessage());
+            throw ex;
+        }
+    }
+
     @Override
     @Retryable(
-            retryFor = { HttpServerErrorException.ServiceUnavailable.class, ResourceAccessException.class },
+            retryFor = {
+                    HttpServerErrorException.ServiceUnavailable.class,
+                    HttpServerErrorException.BadGateway.class,
+                    HttpServerErrorException.GatewayTimeout.class,
+                    ResourceAccessException.class
+            },
             maxAttempts = MAX_RETRY_ATTEMPT,
             backoff = @Backoff(delay = RETRY_DELAY_SECOND * 1000)
     )
@@ -114,6 +133,10 @@ public class DataAccessServiceImpl implements DataAccessService {
             catch(HttpClientErrorException.NotFound e) {
                 return null;
             }
+            catch (HttpServerErrorException | ResourceAccessException e) {
+                rethrowIfRetryable(e);
+                throw e;
+            }
         }
         else {
             log.warn("Id not in correct format {}", uuid);
@@ -123,7 +146,12 @@ public class DataAccessServiceImpl implements DataAccessService {
 
     @Override
     @Retryable(
-            retryFor = { HttpServerErrorException.ServiceUnavailable.class, ResourceAccessException.class },
+            retryFor = {
+                    HttpServerErrorException.ServiceUnavailable.class,
+                    HttpServerErrorException.BadGateway.class,
+                    HttpServerErrorException.GatewayTimeout.class,
+                    ResourceAccessException.class
+            },
             maxAttempts = MAX_RETRY_ATTEMPT,
             backoff = @Backoff(delay = RETRY_DELAY_SECOND * 1000)
     )
@@ -154,8 +182,12 @@ public class DataAccessServiceImpl implements DataAccessService {
                 // errorJson contains: {"detail":"API is not ready. Metadata initialization is still in progress."}
                 log.error("FastAPI is not ready yet: {}", errorJson);
                 throw ex;
-            }
+        } catch (HttpServerErrorException.BadGateway | HttpServerErrorException.GatewayTimeout | ResourceAccessException ex) {
+                // Nginx/proxy returns 502/504 while backend restarts
+                rethrowIfRetryable(ex);
+                throw ex;
         }
+    }
 
     @Override
     public HealthStatus getHealthStatus() {
@@ -228,9 +260,14 @@ public class DataAccessServiceImpl implements DataAccessService {
 
     @Override
     @Retryable(
-        retryFor = { HttpServerErrorException.ServiceUnavailable.class, ResourceAccessException.class },
-        maxAttempts = MAX_RETRY_ATTEMPT,
-        backoff = @Backoff(delay = RETRY_DELAY_SECOND * 1000)
+            retryFor = {
+                    HttpServerErrorException.ServiceUnavailable.class,
+                    HttpServerErrorException.BadGateway.class,
+                    HttpServerErrorException.GatewayTimeout.class,
+                    ResourceAccessException.class
+            },
+            maxAttempts = MAX_RETRY_ATTEMPT,
+            backoff = @Backoff(delay = RETRY_DELAY_SECOND * 1000)
     )
     public List<TemporalExtent> getTemporalExtentOf(String uuid, String key) {
         if(isSafeId(uuid)) {
@@ -257,9 +294,10 @@ public class DataAccessServiceImpl implements DataAccessService {
             catch (HttpClientErrorException.NotFound e) {
                 throw new MetadataNotFoundException("temporal_extent of uuid not found: " + uuid + " in DataAccess Service");
             }
-            catch (HttpServerErrorException.ServiceUnavailable sna) {
-                log.error("Waiting data access service UP");
-                throw sna;
+            catch (HttpServerErrorException | ResourceAccessException e) {
+                // Must rethrow as-is so @Retryable can match 502/503/504 and connection errors
+                rethrowIfRetryable(e);
+                throw new RuntimeException("Exception thrown while retrieving dataset with UUID: " + uuid + " " + e.getMessage(), e);
             }
             catch (Exception e) {
                 throw new RuntimeException("Exception thrown while retrieving dataset with UUID: " + uuid + " " + e.getMessage(), e);
@@ -270,21 +308,27 @@ public class DataAccessServiceImpl implements DataAccessService {
         }
     }
     /**
-     * Wait till the service is up, if the service is down, it will wait for 30 seconds and then retry
+     * Wait till the service is up. Keeps polling when health returns non-UP or throws
+     * (e.g. nginx 502 while the backend is restarting).
      */
     @Override
     public void waitTillServiceUp() {
         if(healthCheck) {
-            CountDownLatch countDownLatch = new CountDownLatch(1);
-
-            try {
-                do {
+            while (true) {
+                try {
                     if (this.getHealthStatus() == HealthStatus.UP) {
-                        countDownLatch.countDown();
+                        return;
                     }
+                    log.info("Data access service not UP yet, waiting before re-check");
+                } catch (Exception e) {
+                    log.warn("Data access service health check failed, waiting before re-check: {}", e.getMessage());
                 }
-                while (!countDownLatch.await(30, TimeUnit.SECONDS));
-            } catch (Exception ignored) {
+                try {
+                    TimeUnit.SECONDS.sleep(HEALTH_CHECK_INTERVAL_SECOND);
+                } catch (InterruptedException ie) {
+                    Thread.currentThread().interrupt();
+                    return;
+                }
             }
         }
     }
