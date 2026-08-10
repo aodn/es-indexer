@@ -51,17 +51,16 @@ public class VocabServiceImpl extends IndexServiceImpl implements VocabService {
     protected static final String LABEL = "label";
     protected static final String ABOUT = "about";
 
-    // self-injection to avoid self-invocation problems when calling the cachable method within the same bean
+    // self-injection to avoid self-invocation problems when calling the cachable method within the same bean,
+    // and so BulkRequestProcessor can invoke @Retryable executeBulk through the Spring AOP proxy
     @Lazy
     @Autowired
-    VocabService self;
+    VocabServiceImpl self;
 
     protected ElasticsearchClient portalElasticsearchClient;
     protected ElasticSearchIndexService elasticSearchIndexService;
-    protected ObjectMapper indexerObjectMapper;
     protected ArdcVocabService ardcVocabService;
     protected String available = null;
-    protected ExecutorService executorService = Executors.newFixedThreadPool(3);
 
     protected boolean themeMatchConcept(ThemesModel theme, ConceptModel thatConcept) {
         /*
