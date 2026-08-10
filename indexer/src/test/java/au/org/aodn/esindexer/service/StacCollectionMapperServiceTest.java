@@ -81,9 +81,6 @@ public class StacCollectionMapperServiceTest {
     protected GcmdKeywordUtils gcmdKeywordUtils;
 
     @MockitoBean
-    protected IndexCloudOptimizedService indexCloudOptimizedService;
-
-    @MockitoBean
     protected DataAccessService dataAccessService;
 
     @MockitoBean

@@ -2,7 +2,6 @@ package au.org.aodn.esindexer.service;
 
 import au.org.aodn.cloudoptimized.model.MetadataEntity;
 import au.org.aodn.cloudoptimized.model.TemporalExtent;
-import au.org.aodn.esindexer.controller.IndexerController;
 import au.org.aodn.esindexer.model.MockServer;
 import co.elastic.clients.elasticsearch.core.search.Hit;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -44,9 +43,6 @@ public class DataAccessServiceIT {
 
     @Autowired
     protected MockServer mockServer;
-
-    @Autowired
-    protected IndexerController controller;
 
     @Autowired
     protected IndexerMetadataService indexerService;
@@ -103,8 +99,6 @@ public class DataAccessServiceIT {
             mockServer.getServer().expect(once(), requestTo("http://localhost/api/v1/das/data/35234913-aa3c-48ec-b9a4-77f822f66ef8?is_to_index=true&start_date=2024-04-01&end_date=2024-04-30&columns=TIME&columns=LONGITUDE&columns=LATITUDE"))
                     .andExpect(method(HttpMethod.GET))
                     .andRespond(withSuccess("[]", MediaType.APPLICATION_JSON));
-
-            controller.indexCODataByUUID("35234913-aa3c-48ec-b9a4-77f822f66ef8", null, null);
 
             CountDownLatch latch = new CountDownLatch(1);
             latch.await(5, TimeUnit.SECONDS);

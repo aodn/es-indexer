@@ -10,8 +10,6 @@ import au.org.aodn.stac.model.ContactsModel;
 import au.org.aodn.stac.model.ThemesModel;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.ElasticsearchException;
-import co.elastic.clients.elasticsearch.core.BulkRequest;
-import co.elastic.clients.elasticsearch.core.BulkResponse;
 import co.elastic.clients.elasticsearch.core.SearchResponse;
 import co.elastic.clients.elasticsearch.core.bulk.BulkResponseItem;
 import co.elastic.clients.elasticsearch.core.search.Hit;
@@ -20,6 +18,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.actuate.health.Health;
 import org.springframework.cache.annotation.CacheEvict;
@@ -35,6 +34,7 @@ import java.util.concurrent.*;
 import java.io.IOException;
 import java.util.*;
 import java.util.function.Supplier;
+import java.util.function.Function;
 
 import static au.org.aodn.esindexer.utils.CommonUtils.safeGet;
 
@@ -42,7 +42,7 @@ import static au.org.aodn.esindexer.utils.CommonUtils.safeGet;
 @Service
 // create and inject a stub proxy to self due to the circular reference http://bit.ly/4aFvYtt
 @Scope(proxyMode = ScopedProxyMode.TARGET_CLASS)
-public class VocabServiceImpl implements VocabService {
+public class VocabServiceImpl extends IndexServiceImpl implements VocabService {
 
     @Value("${elasticsearch.vocabs_index.name}")
     protected String vocabsIndexName;
@@ -61,6 +61,7 @@ public class VocabServiceImpl implements VocabService {
     protected ObjectMapper indexerObjectMapper;
     protected ArdcVocabService ardcVocabService;
     protected String available = null;
+    protected ExecutorService executorService = Executors.newFixedThreadPool(3);
 
     protected boolean themeMatchConcept(ThemesModel theme, ConceptModel thatConcept) {
         /*
@@ -90,10 +91,9 @@ public class VocabServiceImpl implements VocabService {
     public VocabServiceImpl(
             ArdcVocabService ardcVocabService,
             ObjectMapper indexerObjectMapper,
-            ElasticsearchClient portalElasticsearchClient,
+            @Qualifier("portalElasticsearchClient") ElasticsearchClient portalElasticsearchClient,
             ElasticSearchIndexService elasticSearchIndexService) {
-
-        this.indexerObjectMapper = indexerObjectMapper;
+        super(portalElasticsearchClient, indexerObjectMapper);
         this.ardcVocabService = ardcVocabService;
         this.portalElasticsearchClient = portalElasticsearchClient;
         this.elasticSearchIndexService = elasticSearchIndexService;
@@ -400,48 +400,70 @@ public class VocabServiceImpl implements VocabService {
         bulkIndexVocabs(vocabDtos);
     }
 
+    /**
+     * Index vocabs in size-limited bulk batches via {@link BulkRequestProcessor} / {@link #executeBulk},
+     * so large vocab trees do not hit Elasticsearch "entity too large" limits.
+     */
     protected void bulkIndexVocabs(List<VocabDto> vocabs) throws IOException {
-        if (!vocabs.isEmpty()) {
-            BulkRequest.Builder bulkRequest = new BulkRequest.Builder();
-
-            for (VocabDto vocab : vocabs) {
-                try {
-                    // convert vocab values to binary data
-                    log.debug("Ingested json is {}", indexerObjectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(vocab));
-                    // send bulk request to Elasticsearch
-                    bulkRequest.operations(op -> op
-                            .index(idx -> idx
-                                    .index(vocabsIndexName)
-                                    .document(vocab)
-                            )
-                    );
-                } catch (JsonProcessingException e) {
-                    log.error("Failed to ingest parameterVocabs to {}", vocabsIndexName);
-                    throw new RuntimeException(e);
-                }
-            }
-
-            BulkResponse result = portalElasticsearchClient.bulk(bulkRequest.build());
-
-            // Flush after insert, otherwise you need to wait for next auto-refresh. It is
-            // especially a problem with autotest, where assert happens very fast.
-            portalElasticsearchClient.indices().refresh();
-
-            // Log errors, if any
-            if (result.errors()) {
-                log.error("Bulk had errors");
-                for (BulkResponseItem item : result.items()) {
-                    if (item.error() != null) {
-                        log.error("{} {}", item.error().reason(), item.error().causedBy());
-                    }
-                }
-            } else {
-                log.info("Finished bulk indexing items to index: {}", vocabsIndexName);
-            }
-            log.info("Total documents in index: {} is {}", vocabsIndexName, elasticSearchIndexService.getDocumentsCount(vocabsIndexName));
-        } else {
+        if (vocabs.isEmpty()) {
             log.error("No vocabs to be indexed, nothing to index");
+            return;
         }
+
+        Map<String, VocabDto> byId = new HashMap<>();
+        for (VocabDto vocab : vocabs) {
+            byId.put(resolveVocabDocumentId(vocab), vocab);
+        }
+
+        Function<BulkResponseItem, Optional<VocabDto>> mapper = item ->
+                Optional.ofNullable(byId.get(item.id()));
+
+        BulkRequestProcessor<VocabDto> bulkRequestProcessor =
+                new BulkRequestProcessor<>(vocabsIndexName, mapper, self, null);
+
+        for (VocabDto vocab : vocabs) {
+            try {
+                log.debug("Ingested json is {}",
+                        indexerObjectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(vocab));
+            } catch (JsonProcessingException e) {
+                log.error("Failed to serialize vocab for indexing to {}", vocabsIndexName);
+                throw new RuntimeException(e);
+            }
+            // skipIndividualReport=true: vocab load is typically background and not streamed to a client
+            bulkRequestProcessor.processItem(resolveVocabDocumentId(vocab), vocab, true);
+        }
+
+        bulkRequestProcessor.flush();
+        log.info("Finished bulk indexing items to index: {}", vocabsIndexName);
+        log.info("Total documents in index: {} is {}",
+                vocabsIndexName, elasticSearchIndexService.getDocumentsCount(vocabsIndexName));
+    }
+
+    /**
+     * Stable document id so bulk retries overwrite rather than duplicate.
+     * Prefix by vocab type because about/label may not be unique across types.
+     */
+    protected String resolveVocabDocumentId(VocabDto vocab) {
+        if (vocab.getParameterVocabModel() != null) {
+            return "parameter:" + vocabIdPart(vocab.getParameterVocabModel());
+        }
+        if (vocab.getPlatformVocabModel() != null) {
+            return "platform:" + vocabIdPart(vocab.getPlatformVocabModel());
+        }
+        if (vocab.getOrganisationVocabModel() != null) {
+            return "organisation:" + vocabIdPart(vocab.getOrganisationVocabModel());
+        }
+        throw new IllegalArgumentException("VocabDto has no vocab model set");
+    }
+
+    protected String vocabIdPart(VocabModel model) {
+        if (model.getAbout() != null && !model.getAbout().isBlank()) {
+            return model.getAbout();
+        }
+        if (model.getLabel() != null && !model.getLabel().isBlank()) {
+            return model.getLabel();
+        }
+        throw new IllegalArgumentException("VocabModel has neither about nor label for document id");
     }
 
     /**
