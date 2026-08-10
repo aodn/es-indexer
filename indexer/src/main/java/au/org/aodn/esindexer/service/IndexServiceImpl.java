@@ -72,25 +72,24 @@ public abstract class IndexServiceImpl implements IndexService {
                 log.debug("Bulk size usage: {}%", (roundedPercentage * 100));
 
                 // We need to split the batch into smaller size to avoid data too large error in ElasticSearch,
-                // the limit is 10mb, so to make check before document add and push batch if size is too big
+                // the limit is 10mb, so check before document add and push batch if size is too big.
                 //
-                // dataSize = 0 is init case, just in case we have a very big doc that exceed the limit
-                // and we have not add it to the bulkRequest, hardcode to 5M which should be safe,
-                // usually it is 5M - 15M
+                // dataSize = 0 is init case, just in case we have a very big doc that exceeds the limit
+                // and we have not add it to the bulkRequest yet; batch size is 5M which should be safe,
+                // usually the ES limit is 5M - 15M.
                 //
+                Optional<BulkResponse> flushed = Optional.empty();
                 if (dataSize + size > IndexServiceImpl.this.getBatchSize() && dataSize != 0) {
                     if (callback != null) {
                         callback.onProgress(String.format("Execute batch as bulk request is big enough %s", dataSize + size));
                     }
 
-                    Optional<BulkResponse> result = Optional.of(reduceResponse(proxyImpl.executeBulk(bulkRequest.build(), mapper, callback)));
+                    flushed = Optional.of(reduceResponse(proxyImpl.executeBulk(bulkRequest.build(), mapper, callback)));
 
                     dataSize = 0;
                     bulkRequest = new BulkRequest.Builder();
-
-                    return result;
                 }
-                // Add item to  bulk request to Elasticsearch
+                // Add item to bulk request (including the item that triggered a flush above)
                 bulkRequest.operations(op -> op
                         .index(idx -> idx
                                 .id(id)
@@ -110,6 +109,7 @@ public abstract class IndexServiceImpl implements IndexService {
                                     total)
                     );
                 }
+                return flushed;
             }
             return Optional.empty();
         }
