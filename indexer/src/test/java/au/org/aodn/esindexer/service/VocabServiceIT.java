@@ -1,5 +1,6 @@
 package au.org.aodn.esindexer.service;
 
+import au.org.aodn.ardcvocabs.exception.VocabHarvestIncompleteException;
 import au.org.aodn.ardcvocabs.model.ArdcCurrentPaths;
 import au.org.aodn.ardcvocabs.model.VocabModel;
 import au.org.aodn.ardcvocabs.service.ArdcVocabService;
@@ -13,14 +14,21 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONException;
 import org.junit.jupiter.api.*;
 import org.mockito.InjectMocks;
+import org.mockito.InOrder;
 import org.mockito.Mock;
 import org.mockito.Spy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 // JSONAssert is a useful dependency for comparing JSON values, replacing the traditional string-to-string approach when dealing with JSON.
 // More details: https://www.baeldung.com/jsonassert#overview, https://github.com/skyscreamer/JSONassert
@@ -147,13 +155,57 @@ public class VocabServiceIT extends BaseTestClass {
         when(mockArdcVocabService.getARDCVocabByType(ArdcCurrentPaths.PLATFORM_VOCAB)).thenReturn(Collections.emptyList());
         when(mockArdcVocabService.getARDCVocabByType(ArdcCurrentPaths.ORGANISATION_VOCAB)).thenReturn(Collections.emptyList());
 
-        // Call the method
-        try {
-            mockVocabService.populateVocabsData();
-        } catch (IgnoreIndexingVocabsException e) {
-            // Verify that indexAllVocabs is not called
-            verify(mockVocabService, never()).indexAllVocabs(anyList(), anyList(), anyList());
-        }
+        assertThrows(IgnoreIndexingVocabsException.class, () -> mockVocabService.populateVocabsData());
+        verify(mockVocabService, never()).indexAllVocabs(anyList(), anyList(), anyList());
+    }
+
+    @Test
+    void testIncompleteHarvestIsNotIndexedSynchronously() throws IOException {
+        when(mockArdcVocabService.getARDCVocabByType(ArdcCurrentPaths.PARAMETER_VOCAB))
+                .thenThrow(incompleteHarvestException());
+
+        assertThrows(VocabHarvestIncompleteException.class, () -> mockVocabService.populateVocabsData());
+        verify(mockVocabService, never()).indexAllVocabs(anyList(), anyList(), anyList());
+        verify(mockArdcVocabService, never()).getARDCVocabByType(ArdcCurrentPaths.PLATFORM_VOCAB);
+    }
+
+    @Test
+    void testIncompleteHarvestIsNotIndexedAsynchronously() throws IOException {
+        when(mockArdcVocabService.getARDCVocabByType(ArdcCurrentPaths.PARAMETER_VOCAB))
+                .thenThrow(incompleteHarvestException());
+        when(mockArdcVocabService.getARDCVocabByType(ArdcCurrentPaths.PLATFORM_VOCAB))
+                .thenReturn(List.of(vocab("Platform", "http://example.com/platform")));
+        when(mockArdcVocabService.getARDCVocabByType(ArdcCurrentPaths.ORGANISATION_VOCAB))
+                .thenReturn(List.of(vocab("Organisation", "http://example.com/organisation")));
+
+        CompletableFuture<Void> future = mockVocabService.populateVocabsDataAsync(0);
+
+        // The async loop replaces a failed task with an empty list, so the future loses the harvest's root cause.
+        ExecutionException thrown = assertThrows(
+                ExecutionException.class,
+                () -> future.get(30, TimeUnit.SECONDS));
+        assertInstanceOf(IgnoreIndexingVocabsException.class, thrown.getCause());
+        verify(mockVocabService, never()).indexAllVocabs(anyList(), anyList(), anyList());
+    }
+
+    @Test
+    void testAsyncHarvestsRunSequentiallyInOrder() throws Exception {
+        when(mockArdcVocabService.getARDCVocabByType(ArdcCurrentPaths.PARAMETER_VOCAB))
+                .thenReturn(List.of(vocab("Parameter", "http://example.com/parameter")));
+        when(mockArdcVocabService.getARDCVocabByType(ArdcCurrentPaths.PLATFORM_VOCAB))
+                .thenReturn(List.of(vocab("Platform", "http://example.com/platform")));
+        when(mockArdcVocabService.getARDCVocabByType(ArdcCurrentPaths.ORGANISATION_VOCAB))
+                .thenReturn(List.of(vocab("Organisation", "http://example.com/organisation")));
+        doNothing().when(mockVocabService).indexAllVocabs(anyList(), anyList(), anyList());
+
+        mockVocabService.populateVocabsDataAsync(0).get(30, TimeUnit.SECONDS);
+
+        // InOrder proves invocation order, not non-overlap; instant stubs cannot reliably expose concurrency.
+        InOrder inOrder = inOrder(mockArdcVocabService);
+        inOrder.verify(mockArdcVocabService).getARDCVocabByType(ArdcCurrentPaths.PARAMETER_VOCAB);
+        inOrder.verify(mockArdcVocabService).getARDCVocabByType(ArdcCurrentPaths.PLATFORM_VOCAB);
+        inOrder.verify(mockArdcVocabService).getARDCVocabByType(ArdcCurrentPaths.ORGANISATION_VOCAB);
+        verify(mockVocabService, times(1)).indexAllVocabs(anyList(), anyList(), anyList());
     }
 
     @Test
@@ -187,5 +239,25 @@ public class VocabServiceIT extends BaseTestClass {
                 indexerObjectMapper.valueToTree(organisationVocabsFromArdc).toPrettyString(),
                 JSONCompareMode.STRICT
         );
+    }
+
+    private VocabHarvestIncompleteException incompleteHarvestException() {
+        return new VocabHarvestIncompleteException(
+                "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
+                5,
+                5,
+                HttpClientErrorException.create(
+                        HttpStatus.TOO_MANY_REQUESTS,
+                        "Too Many Requests",
+                        HttpHeaders.EMPTY,
+                        null,
+                        null));
+    }
+
+    private VocabModel vocab(String label, String about) {
+        return VocabModel.builder()
+                .label(label)
+                .about(about)
+                .build();
     }
 }
