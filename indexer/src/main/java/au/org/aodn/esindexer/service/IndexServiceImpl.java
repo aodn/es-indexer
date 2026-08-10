@@ -24,6 +24,12 @@ import java.util.function.Function;
 public abstract class IndexServiceImpl implements IndexService {
 
     protected static final long DEFAULT_BACKOFF_TIME = 3000L;
+    /**
+     * Serializes bulk writes across all IndexServiceImpl subclasses (e.g. metadata + vocabs)
+     * so concurrent callers do not hit Elasticsearch with overlapping bulk requests.
+     */
+    private static final Object BULK_EXECUTE_LOCK = new Object();
+
     protected ElasticsearchClient elasticClient;
     protected ObjectMapper indexerObjectMapper;
 
@@ -72,25 +78,24 @@ public abstract class IndexServiceImpl implements IndexService {
                 log.debug("Bulk size usage: {}%", (roundedPercentage * 100));
 
                 // We need to split the batch into smaller size to avoid data too large error in ElasticSearch,
-                // the limit is 10mb, so to make check before document add and push batch if size is too big
+                // the limit is 10mb, so check before document add and push batch if size is too big.
                 //
-                // dataSize = 0 is init case, just in case we have a very big doc that exceed the limit
-                // and we have not add it to the bulkRequest, hardcode to 5M which should be safe,
-                // usually it is 5M - 15M
+                // dataSize = 0 is init case, just in case we have a very big doc that exceeds the limit
+                // and we have not add it to the bulkRequest yet; batch size is 5M which should be safe,
+                // usually the ES limit is 5M - 15M.
                 //
+                Optional<BulkResponse> flushed = Optional.empty();
                 if (dataSize + size > IndexServiceImpl.this.getBatchSize() && dataSize != 0) {
                     if (callback != null) {
                         callback.onProgress(String.format("Execute batch as bulk request is big enough %s", dataSize + size));
                     }
 
-                    Optional<BulkResponse> result = Optional.of(reduceResponse(proxyImpl.executeBulk(bulkRequest.build(), mapper, callback)));
+                    flushed = Optional.of(reduceResponse(proxyImpl.executeBulk(bulkRequest.build(), mapper, callback)));
 
                     dataSize = 0;
                     bulkRequest = new BulkRequest.Builder();
-
-                    return result;
                 }
-                // Add item to  bulk request to Elasticsearch
+                // Add item to bulk request (including the item that triggered a flush above)
                 bulkRequest.operations(op -> op
                         .index(idx -> idx
                                 .id(id)
@@ -110,6 +115,7 @@ public abstract class IndexServiceImpl implements IndexService {
                                     total)
                     );
                 }
+                return flushed;
             }
             return Optional.empty();
         }
@@ -172,52 +178,54 @@ public abstract class IndexServiceImpl implements IndexService {
     )
     @Override
     public <T> BulkResponse executeBulk(BulkRequest bulkRequest, Function<BulkResponseItem, Optional<T>> mapper, IndexerMetadataService.Callback callback) throws IOException, HttpServerErrorException.ServiceUnavailable {
-        try {
-            // Keep retry until success
-            BulkResponse result = elasticClient.bulk(bulkRequest);
+        // One bulk at a time process-wide (metadata, vocabs, etc. share this lock)
+        synchronized (BULK_EXECUTE_LOCK) {
+            try {
+                // Keep retry until success
+                BulkResponse result = elasticClient.bulk(bulkRequest);
 
-            // Flush after insert, otherwise you need to wait for next auto-refresh. It is
-            // especially a problem with autotest, where assert happens very fast.
-            elasticClient.indices().refresh();
+                // Flush after insert, otherwise you need to wait for next auto-refresh. It is
+                // especially a problem with autotest, where assert happens very fast.
+                elasticClient.indices().refresh();
 
-            // Report status if success
-            if(callback != null) {
-                callback.onProgress(reduceResponse(result));
-            }
-
-            // Log errors, if any
-            if (!result.items().isEmpty()) {
-                if (result.errors()) {
-                    log.error("Bulk load have errors? {}", true);
+                // Report status if success
+                if (callback != null) {
+                    callback.onProgress(reduceResponse(result));
                 }
-                for (BulkResponseItem item : result.items()) {
-                    if (item.error() != null) {
-                        Optional<T> i = mapper.apply(item);
-                        i.ifPresent(a -> {
-                            try {
-                                log.error("UUID {} {} {} {}",
-                                        item.id(),
-                                        item.error().reason(),
-                                        item.error().causedBy(),
-                                        indexerObjectMapper
-                                                .writerWithDefaultPrettyPrinter()
-                                                .writeValueAsString(a)
-                                );
-                            } catch (JsonProcessingException e) {
-                                log.error("Fail to convert item with json mapper, {}", item.id());
-                            }
-                        });
+
+                // Log errors, if any
+                if (!result.items().isEmpty()) {
+                    if (result.errors()) {
+                        log.error("Bulk load have errors? {}", true);
+                    }
+                    for (BulkResponseItem item : result.items()) {
+                        if (item.error() != null) {
+                            Optional<T> i = mapper.apply(item);
+                            i.ifPresent(a -> {
+                                try {
+                                    log.error("UUID {} {} {} {}",
+                                            item.id(),
+                                            item.error().reason(),
+                                            item.error().causedBy(),
+                                            indexerObjectMapper
+                                                    .writerWithDefaultPrettyPrinter()
+                                                    .writeValueAsString(a)
+                                    );
+                                } catch (JsonProcessingException e) {
+                                    log.error("Fail to convert item with json mapper, {}", item.id());
+                                }
+                            });
+                        }
                     }
                 }
+                return result;
+            } catch (Exception e) {
+                // Report status if not success, this help to keep connection
+                if (callback != null) {
+                    callback.onProgress("Exception on bulk save, will retry : " + e.getMessage());
+                }
+                throw e;
             }
-            return result;
-        }
-        catch(Exception e) {
-            // Report status if not success, this help to keep connection
-            if(callback != null) {
-                callback.onProgress("Exception on bulk save, will retry : " + e.getMessage());
-            }
-            throw e;
         }
     }
 
