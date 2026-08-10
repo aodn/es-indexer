@@ -24,6 +24,12 @@ import java.util.function.Function;
 public abstract class IndexServiceImpl implements IndexService {
 
     protected static final long DEFAULT_BACKOFF_TIME = 3000L;
+    /**
+     * Serializes bulk writes across all IndexServiceImpl subclasses (e.g. metadata + vocabs)
+     * so concurrent callers do not hit Elasticsearch with overlapping bulk requests.
+     */
+    private static final Object BULK_EXECUTE_LOCK = new Object();
+
     protected ElasticsearchClient elasticClient;
     protected ObjectMapper indexerObjectMapper;
 
@@ -172,52 +178,54 @@ public abstract class IndexServiceImpl implements IndexService {
     )
     @Override
     public <T> BulkResponse executeBulk(BulkRequest bulkRequest, Function<BulkResponseItem, Optional<T>> mapper, IndexerMetadataService.Callback callback) throws IOException, HttpServerErrorException.ServiceUnavailable {
-        try {
-            // Keep retry until success
-            BulkResponse result = elasticClient.bulk(bulkRequest);
+        // One bulk at a time process-wide (metadata, vocabs, etc. share this lock)
+        synchronized (BULK_EXECUTE_LOCK) {
+            try {
+                // Keep retry until success
+                BulkResponse result = elasticClient.bulk(bulkRequest);
 
-            // Flush after insert, otherwise you need to wait for next auto-refresh. It is
-            // especially a problem with autotest, where assert happens very fast.
-            elasticClient.indices().refresh();
+                // Flush after insert, otherwise you need to wait for next auto-refresh. It is
+                // especially a problem with autotest, where assert happens very fast.
+                elasticClient.indices().refresh();
 
-            // Report status if success
-            if(callback != null) {
-                callback.onProgress(reduceResponse(result));
-            }
-
-            // Log errors, if any
-            if (!result.items().isEmpty()) {
-                if (result.errors()) {
-                    log.error("Bulk load have errors? {}", true);
+                // Report status if success
+                if (callback != null) {
+                    callback.onProgress(reduceResponse(result));
                 }
-                for (BulkResponseItem item : result.items()) {
-                    if (item.error() != null) {
-                        Optional<T> i = mapper.apply(item);
-                        i.ifPresent(a -> {
-                            try {
-                                log.error("UUID {} {} {} {}",
-                                        item.id(),
-                                        item.error().reason(),
-                                        item.error().causedBy(),
-                                        indexerObjectMapper
-                                                .writerWithDefaultPrettyPrinter()
-                                                .writeValueAsString(a)
-                                );
-                            } catch (JsonProcessingException e) {
-                                log.error("Fail to convert item with json mapper, {}", item.id());
-                            }
-                        });
+
+                // Log errors, if any
+                if (!result.items().isEmpty()) {
+                    if (result.errors()) {
+                        log.error("Bulk load have errors? {}", true);
+                    }
+                    for (BulkResponseItem item : result.items()) {
+                        if (item.error() != null) {
+                            Optional<T> i = mapper.apply(item);
+                            i.ifPresent(a -> {
+                                try {
+                                    log.error("UUID {} {} {} {}",
+                                            item.id(),
+                                            item.error().reason(),
+                                            item.error().causedBy(),
+                                            indexerObjectMapper
+                                                    .writerWithDefaultPrettyPrinter()
+                                                    .writeValueAsString(a)
+                                    );
+                                } catch (JsonProcessingException e) {
+                                    log.error("Fail to convert item with json mapper, {}", item.id());
+                                }
+                            });
+                        }
                     }
                 }
+                return result;
+            } catch (Exception e) {
+                // Report status if not success, this help to keep connection
+                if (callback != null) {
+                    callback.onProgress("Exception on bulk save, will retry : " + e.getMessage());
+                }
+                throw e;
             }
-            return result;
-        }
-        catch(Exception e) {
-            // Report status if not success, this help to keep connection
-            if(callback != null) {
-                callback.onProgress("Exception on bulk save, will retry : " + e.getMessage());
-            }
-            throw e;
         }
     }
 
