@@ -1,7 +1,6 @@
 package au.org.aodn.esindexer.controller;
 
 import au.org.aodn.ardcvocabs.model.ArdcCurrentPaths;
-import au.org.aodn.ardcvocabs.model.VocabApiPaths;
 import au.org.aodn.ardcvocabs.model.VocabModel;
 import au.org.aodn.ardcvocabs.service.ArdcVocabService;
 import au.org.aodn.esindexer.service.VocabService;
@@ -87,9 +86,9 @@ public class IndexerExtController {
     }
 
     // this endpoint for debugging/development purposes
-    @GetMapping(path="/vocabs/populate")
+    @PostMapping(path="/vocabs/populate")
     @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Populate data to the vocabs index")
-    public ResponseEntity<String> populateDataToVocabsIndex() throws IOException, ExecutionException, InterruptedException {
+    public ResponseEntity<String> populateDataToVocabsIndex() throws IOException {
         // clear existing caches
         vocabService.clearParameterVocabCache();
         vocabService.clearPlatformVocabCache();
