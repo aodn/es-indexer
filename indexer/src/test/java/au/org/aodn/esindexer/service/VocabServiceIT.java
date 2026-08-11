@@ -6,6 +6,7 @@ import au.org.aodn.ardcvocabs.model.VocabModel;
 import au.org.aodn.ardcvocabs.service.ArdcVocabService;
 import au.org.aodn.esindexer.Application;
 import au.org.aodn.esindexer.BaseTestClass;
+import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.exception.IgnoreIndexingVocabsException;
 import au.org.aodn.stac.model.ConceptModel;
 import au.org.aodn.stac.model.ThemesModel;
@@ -24,6 +25,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.util.AopTestUtils;
 import org.springframework.web.client.HttpClientErrorException;
 
 import java.io.IOException;
@@ -324,6 +326,79 @@ public class VocabServiceIT extends BaseTestClass {
                 "Alias should not have moved after a flat harvest");
         assertEquals(docCountBefore, elasticSearchIndexService.getDocumentsCount(vocabsIndexName),
                 "Existing vocabs should be untouched after a flat harvest");
+    }
+
+    /**
+     * An incompletely built index (few records) is not published - the alias keeps serving the previous index, and the partial one is deleted.
+     */
+    @Test
+    void testPartialIndexAbortsAliasSwitchAndDeletesTheHalfBuiltIndex() throws IOException {
+        var indexBefore = elasticSearchIndexService.getIndexNameFromAlias(vocabsIndexName);
+        var docsBefore = elasticSearchIndexService.getDocumentsCount(vocabsIndexName);
+        assertNotNull(indexBefore);
+        assertTrue(docsBefore > 0);
+
+        // the vocabs bean is proxied (scoped proxy + caching), so unwrap it to reach switchVocabsAlias
+        var impl = AopTestUtils.<VocabServiceImpl>getUltimateTargetObject(vocabService);
+        var halfBuilt = vocabsIndexName + elasticSearchIndexService.getAvailableIndexSuffix(vocabsIndexName);
+        // an empty index stands in for a bulk load that wrote fewer documents than expected
+        elasticSearchIndexService.recreateIndexFromMappingJSONFile(
+                AppConstants.VOCABS_INDEX_MAPPING_SCHEMA_FILE, halfBuilt, null);
+
+        assertThrows(IgnoreIndexingVocabsException.class, () -> impl.switchVocabsAlias(halfBuilt, 5));
+
+        assertFalse(
+                client.indices().exists(e -> e.index(halfBuilt)).value(),
+                "Half-built index " + halfBuilt + " should be deleted when the count check fails");
+        assertEquals(indexBefore, elasticSearchIndexService.getIndexNameFromAlias(vocabsIndexName),
+                "Alias should not have moved onto a partially built index");
+        assertEquals(docsBefore, elasticSearchIndexService.getDocumentsCount(vocabsIndexName),
+                "Existing vocabs should still be served after an aborted switch");
+    }
+
+    /**
+     * An unsuccessfully built index (exception occurred) is not published - the alias keeps serving the previous index, and the half-built one is left behind for the next run to reclaim.
+     */
+    @Test
+    void testBulkFailureKeepsTheServingIndexAndTheNextRunRecovers() throws IOException {
+        var indexBefore = elasticSearchIndexService.getIndexNameFromAlias(vocabsIndexName);
+        var docsBefore = elasticSearchIndexService.getDocumentsCount(vocabsIndexName);
+        assertNotNull(indexBefore);
+        assertTrue(docsBefore > 0);
+
+        // the colour the alias is not on, i.e. where the next rebuild goes
+        var leftOver = indexBefore.endsWith("-blue") ? vocabsIndexName + "-green" : vocabsIndexName + "-blue";
+        try {
+            // spy the unwrapped bean so populateVocabsData runs for real up to the bulk load
+            var failingService = Mockito.spy(AopTestUtils.<VocabServiceImpl>getUltimateTargetObject(vocabService));
+            doThrow(new RuntimeException("bulk load failed part way through"))
+                    .when(failingService).bulkIndexVocabs(anyList(), anyString());
+
+            assertThrows(RuntimeException.class, failingService::populateVocabsData);
+
+            assertEquals(indexBefore, elasticSearchIndexService.getIndexNameFromAlias(vocabsIndexName),
+                    "Alias should not have moved after a failed bulk load");
+            assertEquals(docsBefore, elasticSearchIndexService.getDocumentsCount(vocabsIndexName),
+                    "Existing vocabs should still be served after a failed bulk load");
+            assertTrue(
+                    client.indices().exists(e -> e.index(leftOver)).value(),
+                    "Failed run leaves the half-built index " + leftOver + " behind for the next run to reclaim");
+
+            // next run builds into the leftover index and publishes it
+            vocabService.populateVocabsData();
+
+            assertEquals(leftOver, elasticSearchIndexService.getIndexNameFromAlias(vocabsIndexName),
+                    "Next run should reclaim the leftover index and switch the alias to it");
+            assertTrue(elasticSearchIndexService.getDocumentsCount(vocabsIndexName) > 0);
+            assertFalse(
+                    client.indices().exists(e -> e.index(indexBefore)).value(),
+                    "Superseded index " + indexBefore + " should be deleted after the alias switch");
+        } finally {
+            // only if the recovery never happened, otherwise this is now the live index
+            if (!leftOver.equals(elasticSearchIndexService.getIndexNameFromAlias(vocabsIndexName))) {
+                elasticSearchIndexService.deleteIndexStore(leftOver);
+            }
+        }
     }
 
     private VocabHarvestIncompleteException incompleteHarvestException() {
