@@ -246,22 +246,13 @@ public class GeometryUtils {
     }
     /**
      * Repair invalid / self-intersecting polygons so Elasticsearch geo_shape accepts them.
-     * Land difference and precision reduction often produce self-intersecting rings
-     * (e.g. near lon=179 for nearly-global bboxes). Prefer GeometryFixer; fall back to buffer(0).
-     *
-     * @param geometry input geometry
-     * @param force when true, always run GeometryFixer (used after land difference where Lucene
-     *              can reject rings that still pass JTS isValid)
+     * Prefer GeometryFixer; fall back to buffer(0). Only rewrites geometry when it is invalid —
+     * forced repair changes valid coastlines and breaks golden STAC snapshots.
      */
-    protected static Geometry makeValidGeometry(Geometry geometry, boolean force) {
-        if (geometry == null || geometry.isEmpty()) {
+    protected static Geometry makeValidGeometry(Geometry geometry) {
+        if (geometry == null || geometry.isEmpty() || geometry.isValid()) {
             return geometry;
         }
-        if (!force && geometry.isValid()) {
-            return geometry;
-        }
-        // GeometryFixer repairs self-intersections and is also used after land difference
-        // to re-node rings that Lucene/geo_shape may still reject.
         Geometry fixed = GeometryFixer.fix(geometry);
         if (fixed != null && !fixed.isEmpty()) {
             return fixed;
@@ -277,10 +268,6 @@ public class GeometryUtils {
         }
         logger.warn("Unable to fully repair invalid geometry of type {}", geometry.getGeometryType());
         return geometry;
-    }
-
-    protected static Geometry makeValidGeometry(Geometry geometry) {
-        return makeValidGeometry(geometry, false);
     }
 
     /**
@@ -303,15 +290,13 @@ public class GeometryUtils {
                                 Geometry withoutLand = geometry.difference(landGeometry);
                                 return withoutLand.isEmpty() ? geometry : withoutLand;
                             })
-                            // Force repair: difference with simplified land often yields self-intersections
-                            // that Elasticsearch geo_shape rejects (even when JTS isValid is true)
-                            .map(g -> makeValidGeometry(g, true))
+                            // Difference / precision reduce can introduce self-intersections
+                            .map(GeometryUtils::makeValidGeometry)
                             .map(geometry -> reducer != null ? reducer.reduce(geometry) : geometry)
-                            // Precision reduction can re-introduce invalid topology
-                            .map(g -> makeValidGeometry(g, true))
+                            .map(GeometryUtils::makeValidGeometry)
                             .map(GeometryUtils::convertToListGeometry)
                             .flatMap(Collection::stream)
-                            .map(g -> makeValidGeometry(g, true))
+                            .map(GeometryUtils::makeValidGeometry)
                             .filter(g -> g != null && !g.isEmpty())
                             .toList()
                 )
