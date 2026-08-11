@@ -15,6 +15,7 @@ import org.geotools.data.simple.SimpleFeatureSource;
 import org.geotools.geojson.geom.GeometryJSON;
 import org.locationtech.jts.algorithm.Area;
 import org.locationtech.jts.geom.*;
+import org.locationtech.jts.geom.util.GeometryFixer;
 import org.locationtech.jts.operation.union.UnaryUnionOp;
 import org.locationtech.jts.simplify.DouglasPeuckerSimplifier;
 import org.opengis.feature.simple.SimpleFeature;
@@ -135,7 +136,9 @@ public class GeometryUtils {
                         }
                         return result;
                     })
-                    .filter(r -> !r.isEmpty())
+                    // Orientation can leave invalid rings if the source was borderline
+                    .map(GeometryUtils::makeValidGeometry)
+                    .filter(r -> r != null && !r.isEmpty())
                     .toArray(Geometry[]::new);
 
             GeometryCollection collection = new GeometryCollection(orientedPolygons, factory);
@@ -242,6 +245,45 @@ public class GeometryUtils {
 
     }
     /**
+     * Repair invalid / self-intersecting polygons so Elasticsearch geo_shape accepts them.
+     * Land difference and precision reduction often produce self-intersecting rings
+     * (e.g. near lon=179 for nearly-global bboxes). Prefer GeometryFixer; fall back to buffer(0).
+     *
+     * @param geometry input geometry
+     * @param force when true, always run GeometryFixer (used after land difference where Lucene
+     *              can reject rings that still pass JTS isValid)
+     */
+    protected static Geometry makeValidGeometry(Geometry geometry, boolean force) {
+        if (geometry == null || geometry.isEmpty()) {
+            return geometry;
+        }
+        if (!force && geometry.isValid()) {
+            return geometry;
+        }
+        // GeometryFixer repairs self-intersections and is also used after land difference
+        // to re-node rings that Lucene/geo_shape may still reject.
+        Geometry fixed = GeometryFixer.fix(geometry);
+        if (fixed != null && !fixed.isEmpty()) {
+            return fixed;
+        }
+        try {
+            Geometry buffered = geometry.buffer(0);
+            if (buffered != null && !buffered.isEmpty()) {
+                return buffered;
+            }
+        }
+        catch (Exception e) {
+            logger.warn("buffer(0) failed while repairing geometry: {}", e.getMessage());
+        }
+        logger.warn("Unable to fully repair invalid geometry of type {}", geometry.getGeometryType());
+        return geometry;
+    }
+
+    protected static Geometry makeValidGeometry(Geometry geometry) {
+        return makeValidGeometry(geometry, false);
+    }
+
+    /**
      * The geometry from geonetwork can be pretty bad that it cover area of sea and land, this function is use
      * to remove the land part
      * @param geoList - The polygon after parsing Goenetwork XML
@@ -253,15 +295,24 @@ public class GeometryUtils {
                 .map(geometries ->
                     geometries.stream()
                             .filter(Objects::nonNull)
-                            // Try fixing it with buffer(0), which often fixes small topological errors
-                            // it fixed the non-noded intersection issue
-                            .map(geometry -> geometry.isValid() ? geometry : geometry.buffer(0))
+                            // Fix input topological errors (non-noded / self-intersect) before difference
+                            .map(GeometryUtils::makeValidGeometry)
                             // Special case where some spatial area do appear on land only, so if you make a diff and result is empty,
                             // that means it is pure land area, in this case we should include it.
-                            .map(geometry -> geometry.difference(landGeometry).isEmpty() ? geometry : geometry.difference(landGeometry))
+                            .map(geometry -> {
+                                Geometry withoutLand = geometry.difference(landGeometry);
+                                return withoutLand.isEmpty() ? geometry : withoutLand;
+                            })
+                            // Force repair: difference with simplified land often yields self-intersections
+                            // that Elasticsearch geo_shape rejects (even when JTS isValid is true)
+                            .map(g -> makeValidGeometry(g, true))
                             .map(geometry -> reducer != null ? reducer.reduce(geometry) : geometry)
+                            // Precision reduction can re-introduce invalid topology
+                            .map(g -> makeValidGeometry(g, true))
                             .map(GeometryUtils::convertToListGeometry)
                             .flatMap(Collection::stream)
+                            .map(g -> makeValidGeometry(g, true))
+                            .filter(g -> g != null && !g.isEmpty())
                             .toList()
                 )
                 .toList();
