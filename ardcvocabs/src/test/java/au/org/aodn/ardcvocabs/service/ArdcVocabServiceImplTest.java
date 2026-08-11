@@ -1,6 +1,7 @@
 package au.org.aodn.ardcvocabs.service;
 
 import au.org.aodn.ardcvocabs.BaseTestClass;
+import au.org.aodn.ardcvocabs.exception.VocabHarvestIncompleteException;
 import au.org.aodn.ardcvocabs.model.ArdcCurrentPaths;
 import au.org.aodn.ardcvocabs.model.Name;
 import au.org.aodn.ardcvocabs.model.VocabApiPaths;
@@ -18,7 +19,10 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.retry.support.RetryTemplate;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.FileNotFoundException;
@@ -252,6 +256,42 @@ public class ArdcVocabServiceImplTest extends BaseTestClass {
 
     @AfterEach void clear() {
         Mockito.reset(mockRestTemplate);
+    }
+
+    /**
+     * Regression guard for the silent-partial-tree bug (8939).
+     *
+     * A single vocabulary item whose details request keeps failing with HTTP 429 must abort the whole harvest.
+     * The earlier behaviour was to log a warning, drop that leaf, and carry on, so getARDCVocabByType returned a
+     * tree that looked complete but was quietly missing branches - and the indexer had no way to tell.
+     */
+    @Test
+    public void verifyRateLimitedItemFailsHarvestInsteadOfDroppingIt() {
+
+        setupParameterVocabMockRestTemplate(mockRestTemplate);
+
+        // Stub one item's details URL to be permanently rate limited. Declared after the happy-path setup so it
+        // takes precedence for this URL, while every other request still returns its canned payload.
+        String rateLimitedUri = "http://vocab.aodn.org.au/def/discovery_parameter/entity/1";
+        Mockito.doThrow(HttpClientErrorException.create(
+                        HttpStatus.TOO_MANY_REQUESTS,
+                        "Too Many Requests",
+                        HttpHeaders.EMPTY,
+                        null,
+                        null))
+                .when(mockRestTemplate)
+                .getForObject(
+                        argThat(s -> s != null && s.endsWith("resource.json?uri=" + rateLimitedUri)),
+                        eq(ObjectNode.class),
+                        any(Object[].class));
+
+        VocabHarvestIncompleteException thrown = Assertions.assertThrows(
+                VocabHarvestIncompleteException.class,
+                () -> ardcVocabService.getARDCVocabByType(ArdcCurrentPaths.PARAMETER_VOCAB),
+                "A rate-limited item must fail the harvest, not be silently dropped from the tree");
+
+        assertTrue("Reports the failing url", thrown.getMessage().contains(rateLimitedUri));
+        assertNotNull(thrown.getCause(), "Keeps the underlying HTTP failure as the cause");
     }
 
     @Test

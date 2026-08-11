@@ -8,10 +8,11 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.retry.annotation.EnableRetry;
-import org.springframework.retry.backoff.ExponentialBackOffPolicy;
-import org.springframework.retry.policy.SimpleRetryPolicy;
 import org.springframework.retry.support.RetryTemplate;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
+import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.concurrent.CountDownLatch;
@@ -24,6 +25,13 @@ import java.util.concurrent.TimeUnit;
 public class ArdcAutoConfiguration {
 
     protected CountDownLatch limit = new CountDownLatch(1);
+
+    // the delay between requests unit as ms
+    protected Long requestDelayMs = 1000L;
+    // the max number of retry for HTTP 429, 5xx, and connection/read timeouts. No retry apply on other 4xx response like HTTP 404
+    protected Integer maxAttempts = 5;
+    // the backoff time for retry-after-retryable failures, unit as seconds
+    protected Long backoffInitialSeconds = 30L;
 
     @Bean
     public ArdcVocabService createArdcVocabsService(RetryTemplate retryTemplate) {
@@ -47,9 +55,9 @@ public class ArdcAutoConfiguration {
         // Add delay before every request (most effective simple fix)
         template.getInterceptors().add((request, body, execution) -> {
             try {
-                limit.await(800, TimeUnit.MILLISECONDS); // 1 seconds – adjust based on observed limits
+                limit.await(requestDelayMs, TimeUnit.MILLISECONDS); // 1 seconds – adjust based on observed limits
             } catch (InterruptedException e) {
-                // Ignore
+                log.error("Vocab harvest interrupted.");
             }
             return execution.execute(request, body);
         });
@@ -57,22 +65,30 @@ public class ArdcAutoConfiguration {
         return new ArdcVocabServiceImpl(template, retryTemplate);
     }
 
+    /**
+     * Define the retry template for different cases:
+     * Retry (retryablePolicy):
+     *   - HTTP 429 (TooManyRequests)
+     *   - HTTP 5XX (HttpServerErrorException)
+     *   - Connect/read timeout or network failure (ResourceAccessException)
+     * Not Retry (nonRetryablePolicy)
+     *   - HTTP 404 (NotFound)
+     *   - Other HTTP 4xx (Other HttpClientErrorException)
+     *   - Programming/payload/unknown failure (fallback to anything else)
+     * */
     @Bean
     public RetryTemplate retryTemplate() {
-        RetryTemplate retryTemplate = new RetryTemplate();
-
-        // Configure retry policy (3 attempts)
-        SimpleRetryPolicy retryPolicy = new SimpleRetryPolicy();
-        retryPolicy.setMaxAttempts(3);
-        retryTemplate.setRetryPolicy(retryPolicy);
-
-        // Configure backoff policy (exponential backoff starting at 1 second, doubling each time)
-        ExponentialBackOffPolicy backOffPolicy = new ExponentialBackOffPolicy();
-        backOffPolicy.setInitialInterval(1000); // 1 second
-        backOffPolicy.setMultiplier(2); // 2x each retry
-        backOffPolicy.setMaxInterval(5000); // max 5 seconds
-        retryTemplate.setBackOffPolicy(backOffPolicy);
-
-        return retryTemplate;
+        return RetryTemplate.builder()
+                .maxAttempts(maxAttempts)
+                .exponentialBackoff(
+                        TimeUnit.SECONDS.toMillis(backoffInitialSeconds),
+                        2,
+                        // time delay for 5 attempts: 30 -> 60 -> 120 -> 240
+                        TimeUnit.SECONDS.toMillis(240))
+                .retryOn(exception ->
+                        exception instanceof HttpClientErrorException.TooManyRequests
+                                || exception instanceof HttpServerErrorException
+                                || exception instanceof ResourceAccessException)
+                .build();
     }
 }

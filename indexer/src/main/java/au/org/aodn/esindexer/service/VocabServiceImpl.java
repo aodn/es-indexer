@@ -33,6 +33,7 @@ import java.util.concurrent.*;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.function.Supplier;
 import java.util.function.Function;
 
 import static au.org.aodn.esindexer.utils.CommonUtils.safeGet;
@@ -60,7 +61,6 @@ public class VocabServiceImpl extends IndexServiceImpl implements VocabService {
     protected ElasticSearchIndexService elasticSearchIndexService;
     protected ArdcVocabService ardcVocabService;
     protected String available = null;
-    protected ExecutorService executorService = Executors.newFixedThreadPool(3);
 
     protected boolean themeMatchConcept(ThemesModel theme, ConceptModel thatConcept) {
         /*
@@ -494,7 +494,7 @@ public class VocabServiceImpl extends IndexServiceImpl implements VocabService {
     public CompletableFuture<Void> populateVocabsDataAsync(int delay) {
         log.info("Starting async vocabs data fetching process...");
 
-        List<Callable<List<VocabModel>>> vocabTasks = List.of(
+        List<Supplier<List<VocabModel>>> vocabTasks = List.of(
                 () -> ardcVocabService.getARDCVocabByType(ArdcCurrentPaths.PARAMETER_VOCAB),
                 () -> ardcVocabService.getARDCVocabByType(ArdcCurrentPaths.PLATFORM_VOCAB),
                 () -> ardcVocabService.getARDCVocabByType(ArdcCurrentPaths.ORGANISATION_VOCAB)
@@ -504,18 +504,14 @@ public class VocabServiceImpl extends IndexServiceImpl implements VocabService {
             try {
                 log.info("Vocabs data fetching process started in the background.");
 
-                // Invoke all tasks and wait for completion
-                List<Future<List<VocabModel>>> completedFutures = executorService.invokeAll(vocabTasks);
-
-                // Ensure all tasks are completed and check for exceptions
                 List<List<VocabModel>> allResults = new ArrayList<>();
-                for (Future<List<VocabModel>> future : completedFutures) {
+                // for parameter/platform/organisation vocabularies, using separate harvest task, each harvest should finish before the next starts.
+                for (Supplier<List<VocabModel>> vocabTask : vocabTasks) {
                     try {
-                        allResults.add(future.get());  // Blocks until the task is completed and retrieves the result
+                        allResults.add(vocabTask.get());
                     } catch (Exception taskException) {
                         log.error("Task failed with an exception", taskException);
-                        // Handle failure for this particular task
-                        allResults.add(Collections.emptyList()); // add empty result for failed task
+                        allResults.add(Collections.emptyList());
                     }
                 }
 
@@ -527,27 +523,9 @@ public class VocabServiceImpl extends IndexServiceImpl implements VocabService {
                 // Call indexAllVocabs only after all tasks are completed and validated
                 log.info("Indexing fetched vocabs to {}", vocabsIndexName);
                 indexAllVocabs(allResults.get(0), allResults.get(1), allResults.get(2));
-            } catch (InterruptedException | IOException e) {
-                Thread.currentThread().interrupt();  // Restore interrupt status
-                log.error("Thread was interrupted while processing vocab tasks", e);
-            } finally {
-                shutdownExecutor(executorService);
+            } catch (IOException e) {
+                log.error("Failed to index fetched vocabularies", e);
             }
         }, CompletableFuture.delayedExecutor(delay, TimeUnit.MINUTES, Executors.newSingleThreadExecutor()));
-    }
-
-    protected void shutdownExecutor(ExecutorService executor) {
-        executor.shutdown();
-        try {
-            if (!executor.awaitTermination(60, TimeUnit.SECONDS)) {
-                executor.shutdownNow();
-                if (!executor.awaitTermination(60, TimeUnit.SECONDS)) {
-                    log.error("Executor did not terminate");
-                }
-            }
-        } catch (InterruptedException ie) {
-            executor.shutdownNow();
-            Thread.currentThread().interrupt();
-        }
     }
 }
