@@ -5,13 +5,9 @@ import au.org.aodn.ardcvocabs.service.ArdcVocabServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.retry.annotation.EnableRetry;
-import org.springframework.retry.policy.ExceptionClassifierRetryPolicy;
-import org.springframework.retry.policy.NeverRetryPolicy;
-import org.springframework.retry.policy.SimpleRetryPolicy;
 import org.springframework.retry.support.RetryTemplate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.HttpClientErrorException;
@@ -19,7 +15,7 @@ import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.IOException;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
@@ -27,6 +23,8 @@ import java.util.concurrent.TimeUnit;
 @ConditionalOnMissingBean(ArdcVocabService.class)
 @EnableRetry  // Enable retry support
 public class ArdcAutoConfiguration {
+
+    protected CountDownLatch limit = new CountDownLatch(1);
 
     // the delay between requests unit as ms
     protected Long requestDelayMs = 1000L;
@@ -54,17 +52,12 @@ public class ArdcAutoConfiguration {
             return execution.execute(request, body);
         });
 
-        // add a fixed delay for each request
+        // Add delay before every request (most effective simple fix)
         template.getInterceptors().add((request, body, execution) -> {
             try {
-                TimeUnit.MILLISECONDS.sleep(requestDelayMs);
+                limit.await(requestDelayMs, TimeUnit.MILLISECONDS); // 1 seconds – adjust based on observed limits
             } catch (InterruptedException e) {
-                // sleep() clears the interrupt flag on the way out. Restore it, and abandon the request rather
-                // than sending it: once the flag is set every later sleep() throws immediately, so proceeding
-                // here would fire the rest of the harvest with no delay at all and provoke the 429 storm the
-                // throttle exists to avoid.
-                Thread.currentThread().interrupt();
-                throw new IOException("Interrupted while throttling ARDC request", e);
+                log.error("Vocab harvest interrupted.");
             }
             return execution.execute(request, body);
         });
