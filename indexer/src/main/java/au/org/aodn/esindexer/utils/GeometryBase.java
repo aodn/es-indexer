@@ -207,6 +207,15 @@ public class GeometryBase {
 
         // Sometime value input is incorrect, fix it here, a value bigger than 180 for coordinate imply max value 180
         east = east >= 180 ? 180 : east;
+        west = west <= -180 ? -180 : west;
+
+        // Nearly-global bboxes that stop just short of the dateline (e.g. west=-180, east=179)
+        // leave a 1° strip. After land is subtracted that strip edge (lon≈179) often produces
+        // self-intersecting rings that Elasticsearch geo_shape rejects. Treat as full globe.
+        if (west <= -180 && east >= 179 && east < 180) {
+            logger.debug("Expanding near-global eastBound from {} to 180", east);
+            east = 180;
+        }
 
         if (!(-90 <= south && south <= 90)) {
             logger.error("Invalid south latitude, value should be +/- 90 but {}", south);

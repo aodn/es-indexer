@@ -23,6 +23,7 @@ import co.elastic.clients.elasticsearch.core.search.HitsMetadata;
 import co.elastic.clients.elasticsearch.core.search.TotalHits;
 import co.elastic.clients.json.JsonData;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -635,6 +636,20 @@ public class StacCollectionMapperServiceTest {
 
         verify(expected);
     }
+    /**
+     * We should not throw exception even if the word boundary is covering world.
+     * @throws IOException - Not expected
+     * @throws JSONException - Not expected
+     */
+    @Test
+    public void verifyHandleWordBoundaryCorrectly() throws IOException, JSONException {
+        String xml = readResourceFile("classpath:canned/sample25.xml");
+        String expected = readResourceFile("classpath:canned/sample25_stac.json");
+
+        indexerService.indexMetadata(xml);
+
+        verify(expected);
+    }
 
     @Test
     public void verifyAbnormalStructureXmlWork() throws IOException, JSONException {
@@ -658,13 +673,22 @@ public class StacCollectionMapperServiceTest {
 
         verify(expected);
 
-        // additionally verify that GCMD descriptions are empty
-        Map<?, ?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
-        List<Map<String, Object>> themes = (List<Map<String, Object>>) content.get("themes");
+        // additionally verify that GCMD descriptions are empty (TypeReference avoids unchecked casts)
+        Map<String, Object> content = objectMapper.readValue(
+                lastRequest.get().document().toString(),
+                new TypeReference<>() {}
+        );
+        List<Map<String, Object>> themes = objectMapper.convertValue(
+                content.get("themes"),
+                new TypeReference<>() {}
+        );
         for (Map<String, Object> theme : themes) {
-            List<Map<String, Object>> concepts = (List<Map<String, Object>>) theme.get("concepts");
+            List<Map<String, Object>> concepts = objectMapper.convertValue(
+                    theme.get("concepts"),
+                    new TypeReference<>() {}
+            );
             for (Map<String, Object> concept : concepts) {
-                String description = (String) concept.get("description");
+                String description = objectMapper.convertValue(concept.get("description"), String.class);
                 Assertions.assertFalse(
                         description != null && description.contains("NASA/Global Change Master Directory"),
                         "GCMD citation should be excluded from concept description"

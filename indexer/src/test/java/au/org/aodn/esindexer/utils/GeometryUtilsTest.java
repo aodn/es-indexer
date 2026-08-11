@@ -140,6 +140,54 @@ public class GeometryUtilsTest {
         assertEquals(-36.0, ncoors[4].getY(), 0.00);
     }
     /**
+     * COWCLIP global metadata uses west=-180, east=179. createGeometryNoLandFrom (land strip)
+     * previously produced self-intersecting rings near lon=179 that Elasticsearch geo_shape
+     * rejected. Ensure the no-land path yields non-empty, valid polygons and serializable geojson.
+     * Record: 1de0e8b1-4777-4526-b3d7-805938b8e6bc / bug 8072.
+     */
+    @Test
+    public void verifyGlobalBboxNoLandGeometriesAreValid() throws IOException, JAXBException {
+        GeometryUtils.setReducerPrecision(4.0);
+        GeometryUtils.setCoastalPrecision(0.5);
+        GeometryUtils.init();
+
+        String xml = readResourceFile("classpath:canned/sample_cowclip_global_bbox.xml");
+        MDMetadataType source = jaxb.unmarshal(xml);
+
+        List<List<Geometry>> noLand = GeometryUtils.createGeometryItems(
+                source,
+                (rawInput, s) -> GeometryUtils.createGeometryWithoutLand(rawInput),
+                null
+        );
+
+        List<List<Geometry>> nl = Objects.requireNonNull(noLand);
+        Assertions.assertFalse(nl.isEmpty(), "Expected geometry after land strip");
+
+        int invalid = 0;
+        int parts = 0;
+        for (List<Geometry> group : nl) {
+            for (Geometry g : group) {
+                parts++;
+                if (!g.isValid()) {
+                    invalid++;
+                    logger.error("Invalid no-land geometry: type={} envelope={}",
+                            g.getGeometryType(), g.getEnvelopeInternal());
+                }
+            }
+        }
+        Assertions.assertTrue(parts > 0, "Expected at least one geometry part");
+        assertEquals(0, invalid, "All no-land geometries must be valid for geo_shape indexing");
+
+        Map<?, ?> geoJson = GeometryUtils.createGeometryItems(
+                source,
+                GeometryUtils::createGeometryNoLandFrom,
+                null
+        );
+        Assertions.assertNotNull(geoJson, "createGeometryNoLandFrom must produce geojson");
+        Assertions.assertEquals("GeometryCollection", geoJson.get("type"));
+    }
+
+    /**
      * Given a point call this function return a GeometryCollection contain a single point
      */
     @Test

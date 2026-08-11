@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdb:MD_Metadata xmlns:mdb="http://standards.iso.org/iso/19115/-3/mdb/2.0"
+                 xmlns:gex="http://standards.iso.org/iso/19115/-3/gex/1.0"
+                 xmlns:mri="http://standards.iso.org/iso/19115/-3/mri/1.0"
+                 xmlns:mcc="http://standards.iso.org/iso/19115/-3/mcc/1.0"
+                 xmlns:cit="http://standards.iso.org/iso/19115/-3/cit/2.0"
+                 xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0"
+                 xmlns:gml="http://www.opengis.net/gml/3.2">
+  <mdb:metadataIdentifier>
+    <mcc:MD_Identifier>
+      <mcc:code>
+        <gco:CharacterString>1de0e8b1-4777-4526-b3d7-805938b8e6bc</gco:CharacterString>
+      </mcc:code>
+    </mcc:MD_Identifier>
+  </mdb:metadataIdentifier>
+  <mdb:identificationInfo>
+    <mri:MD_DataIdentification>
+      <mri:citation>
+        <cit:CI_Citation>
+          <cit:title>
+            <gco:CharacterString>COWCLIP2.0 ocean wave climate (global bbox self-intersect repro)</gco:CharacterString>
+          </cit:title>
+        </cit:CI_Citation>
+      </mri:citation>
+      <mri:abstract>
+        <gco:CharacterString>Minimal fixture for nearly-global bbox -180..179 that can produce self-intersecting geometry_noland.</gco:CharacterString>
+      </mri:abstract>
+      <mri:extent>
+        <gex:EX_Extent>
+          <gex:geographicElement>
+            <gex:EX_GeographicBoundingBox>
+              <gex:westBoundLongitude>
+                <gco:Decimal>-180.00</gco:Decimal>
+              </gex:westBoundLongitude>
+              <gex:eastBoundLongitude>
+                <gco:Decimal>179.00</gco:Decimal>
+              </gex:eastBoundLongitude>
+              <gex:southBoundLatitude>
+                <gco:Decimal>-90.00</gco:Decimal>
+              </gex:southBoundLatitude>
+              <gex:northBoundLatitude>
+                <gco:Decimal>90.00</gco:Decimal>
+              </gex:northBoundLatitude>
+            </gex:EX_GeographicBoundingBox>
+          </gex:geographicElement>
+        </gex:EX_Extent>
+      </mri:extent>
+    </mri:MD_DataIdentification>
+  </mdb:identificationInfo>
+</mdb:MD_Metadata>
