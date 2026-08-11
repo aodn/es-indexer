@@ -808,9 +808,14 @@ public abstract class StacCollectionMapperService {
                         .map(MDDistributorPropertyType::getMDDistributor)
                         .filter(Objects::nonNull)
                         .forEach(distributor ->
-                                distributor.getDistributorTransferOptions().forEach(transferOption ->
-                                        transferOption.getMDDigitalTransferOptions().getOnLine().forEach(link ->
-                                                addLinkFromOnlineResource(link, results))));
+                                distributor.getDistributorTransferOptions().stream()
+                                        .map(MDDigitalTransferOptionsPropertyType::getMDDigitalTransferOptions)
+                                        .filter(Objects::nonNull)
+                                        .forEach(options ->
+                                                options.getOnLine().forEach(link ->
+                                                    addLinkFromOnlineResource(link, results)
+                                                )
+                                        ));
             }
         } else {
             // srv:containsOperations → srv:connectPoint for data access links
@@ -1050,35 +1055,33 @@ public abstract class StacCollectionMapperService {
         List<String> potentialKeys = Arrays.asList("license", "creative commons");
         if (!items.isEmpty()) {
             for (MDDataIdentificationType i : items) {
-                i.getResourceConstraints().forEach(resourceConstraint -> {
-                    safeGet(() -> resourceConstraint.getAbstractConstraints().getValue()).ifPresent(constraints -> {
-                        if (constraints instanceof MDLegalConstraintsType legalConstraintsType) {
+                i.getResourceConstraints().forEach(resourceConstraint -> safeGet(() -> resourceConstraint.getAbstractConstraints().getValue()).ifPresent(constraints -> {
+                    if (constraints instanceof MDLegalConstraintsType legalConstraintsType) {
 
-                            // try to find licence in citation block first
-                            var licencesInCitation = findLicenseInCitationBlock(legalConstraintsType);
-                            if (!licencesInCitation.isEmpty()) {
-                                licenses.addAll(licencesInCitation);
-                            }
+                        // try to find licence in citation block first
+                        var licencesInCitation = findLicenseInCitationBlock(legalConstraintsType);
+                        if (!licencesInCitation.isEmpty()) {
+                            licenses.addAll(licencesInCitation);
+                        }
 
-                            // Some organizations didn't put license in the citation block, so now try finding in different location
-                            // (other constraints)if above didn't add any values to licenses array
-                            if (licenses.isEmpty()) {
-                                safeGet(legalConstraintsType::getOtherConstraints).ifPresent( otherConstraints -> {
-                                    otherConstraints.forEach( otherConstraint -> {
-                                        Optional<String> licenseTitle = safeGet(() -> otherConstraint.getCharacterString().getValue().toString());
-                                        if (licenseTitle.isPresent()) {
-                                            for (var potentialKey : potentialKeys) {
-                                                if (licenseTitle.get().toLowerCase().contains(potentialKey)) {
-                                                    licenses.add(licenseTitle.get());
-                                                }
+                        // Some organizations didn't put license in the citation block, so now try finding in different location
+                        // (other constraints)if above didn't add any values to licenses array
+                        if (licenses.isEmpty()) {
+                            safeGet(legalConstraintsType::getOtherConstraints).ifPresent( otherConstraints -> {
+                                otherConstraints.forEach( otherConstraint -> {
+                                    Optional<String> licenseTitle = safeGet(() -> otherConstraint.getCharacterString().getValue().toString());
+                                    if (licenseTitle.isPresent()) {
+                                        for (var potentialKey : potentialKeys) {
+                                            if (licenseTitle.get().toLowerCase().contains(potentialKey)) {
+                                                licenses.add(licenseTitle.get());
                                             }
                                         }
-                                    });
+                                    }
                                 });
-                            }
+                            });
                         }
-                    });
-                });
+                    }
+                }));
             }
         }
         if (!licenses.isEmpty()) {
