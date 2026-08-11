@@ -19,6 +19,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -63,6 +64,12 @@ public class VocabServiceIT extends BaseTestClass {
 
     @Autowired
     protected ObjectMapper indexerObjectMapper;
+
+    @Autowired
+    protected ElasticSearchIndexService elasticSearchIndexService;
+
+    @Value("${elasticsearch.vocabs_index.name}")
+    protected String vocabsIndexName;
 
     /**
      * This class is PER_CLASS, so Spring's MockitoTestExecutionListener initialises the annotated mocks once for
@@ -254,6 +261,71 @@ public class VocabServiceIT extends BaseTestClass {
         );
     }
 
+    /**
+     * The configured vocabs index name must be an alias over a blue/green colour, never a concrete
+     * index, otherwise a rebuild would delete the data that is currently being served.
+     */
+    @Test
+    void testVocabsIndexNameIsAnAliasOverAColour() throws IOException {
+        var currentIndex = elasticSearchIndexService.getIndexNameFromAlias(vocabsIndexName);
+
+        assertNotNull(currentIndex, vocabsIndexName + " should be an alias after populating vocabs");
+        assertTrue(
+                currentIndex.equals(vocabsIndexName + "-blue") || currentIndex.equals(vocabsIndexName + "-green"),
+                "Alias should point at a blue/green index but points at " + currentIndex);
+        // reads keep working through the alias
+        assertFalse(vocabService.getParameterVocabs().isEmpty());
+    }
+
+    /**
+     * A rebuild goes into the other colour and only then moves the alias, so the previous index is a
+     * live backup for the whole run. Once the swap is done the superseded colour is cleaned up.
+     */
+    @Test
+    void testRepopulateSwapsToTheOtherColour() throws IOException {
+        var indexBefore = elasticSearchIndexService.getIndexNameFromAlias(vocabsIndexName);
+        assertNotNull(indexBefore);
+
+        vocabService.populateVocabsData();
+
+        var indexAfter = elasticSearchIndexService.getIndexNameFromAlias(vocabsIndexName);
+        assertNotNull(indexAfter);
+        assertNotEquals(indexBefore, indexAfter, "Rebuild should have swapped to the other colour");
+        assertFalse(
+                client.indices().exists(e -> e.index(indexBefore)).value(),
+                "Superseded index " + indexBefore + " should be deleted after the alias switch");
+        assertTrue(elasticSearchIndexService.getDocumentsCount(vocabsIndexName) > 0);
+    }
+
+    /**
+     * Regression test for the 429 Too Many Requests bug: ARDC rate limiting truncated the harvest,
+     * so every platform root came back with no narrower terms. That tree is non-empty, so a size check
+     * passes, but it is useless for record indexing - and the old index had already been deleted.
+     * Now the flat tree is rejected and the existing index keeps serving.
+     */
+    @Test
+    void testFlatHarvestKeepsTheExistingVocabsIndex() throws IOException {
+        var indexBefore = elasticSearchIndexService.getIndexNameFromAlias(vocabsIndexName);
+        var docCountBefore = elasticSearchIndexService.getDocumentsCount(vocabsIndexName);
+        assertNotNull(indexBefore);
+        assertTrue(docCountBefore > 0);
+
+        doReturn(List.of(vocabWithChild("Parameter", "http://example.com/parameter")))
+                .when(mockArdcVocabService).getARDCVocabByType(ArdcCurrentPaths.PARAMETER_VOCAB);
+        // truncated harvest: roots present, no children
+        doReturn(List.of(vocab("Platform", "http://example.com/platform")))
+                .when(mockArdcVocabService).getARDCVocabByType(ArdcCurrentPaths.PLATFORM_VOCAB);
+        doReturn(List.of(vocabWithChild("Organisation", "http://example.com/organisation")))
+                .when(mockArdcVocabService).getARDCVocabByType(ArdcCurrentPaths.ORGANISATION_VOCAB);
+
+        assertThrows(IgnoreIndexingVocabsException.class, () -> mockVocabService.populateVocabsData());
+
+        assertEquals(indexBefore, elasticSearchIndexService.getIndexNameFromAlias(vocabsIndexName),
+                "Alias should not have moved after a flat harvest");
+        assertEquals(docCountBefore, elasticSearchIndexService.getDocumentsCount(vocabsIndexName),
+                "Existing vocabs should be untouched after a flat harvest");
+    }
+
     private VocabHarvestIncompleteException incompleteHarvestException() {
         return new VocabHarvestIncompleteException(
                 "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
@@ -269,6 +341,15 @@ public class VocabServiceIT extends BaseTestClass {
         return VocabModel.builder()
                 .label(label)
                 .about(about)
+                .build();
+    }
+
+    /** A root with a child, i.e. what a complete harvest looks like. */
+    private VocabModel vocabWithChild(String label, String about) {
+        return VocabModel.builder()
+                .label(label)
+                .about(about)
+                .narrower(List.of(vocab(label + " child", about + "/1")))
                 .build();
     }
 }
