@@ -6,6 +6,7 @@ import au.org.aodn.ardcvocabs.model.VocabModel;
 import au.org.aodn.ardcvocabs.service.ArdcVocabService;
 import au.org.aodn.esindexer.Application;
 import au.org.aodn.esindexer.BaseTestClass;
+import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.exception.IgnoreIndexingVocabsException;
 import au.org.aodn.stac.model.ConceptModel;
 import au.org.aodn.stac.model.ThemesModel;
@@ -19,10 +20,12 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.util.AopTestUtils;
 import org.springframework.web.client.HttpClientErrorException;
 
 import java.io.IOException;
@@ -63,6 +66,12 @@ public class VocabServiceIT extends BaseTestClass {
 
     @Autowired
     protected ObjectMapper indexerObjectMapper;
+
+    @Autowired
+    protected ElasticSearchIndexService elasticSearchIndexService;
+
+    @Value("${elasticsearch.vocabs_index.name}")
+    protected String vocabsIndexName;
 
     /**
      * This class is PER_CLASS, so Spring's MockitoTestExecutionListener initialises the annotated mocks once for
@@ -254,6 +263,144 @@ public class VocabServiceIT extends BaseTestClass {
         );
     }
 
+    /**
+     * The configured vocabs index name must be an alias over a blue/green colour, never a concrete
+     * index, otherwise a rebuild would delete the data that is currently being served.
+     */
+    @Test
+    void testVocabsIndexNameIsAnAliasOverAColour() throws IOException {
+        var currentIndex = elasticSearchIndexService.getIndexNameFromAlias(vocabsIndexName);
+
+        assertNotNull(currentIndex, vocabsIndexName + " should be an alias after populating vocabs");
+        assertTrue(
+                currentIndex.equals(vocabsIndexName + "-blue") || currentIndex.equals(vocabsIndexName + "-green"),
+                "Alias should point at a blue/green index but points at " + currentIndex);
+        // reads keep working through the alias
+        assertFalse(vocabService.getParameterVocabs().isEmpty());
+    }
+
+    /**
+     * A rebuild goes into the other colour and only then moves the alias, so the previous index is a
+     * live backup for the whole run. Once the swap is done the superseded colour is cleaned up.
+     */
+    @Test
+    void testRepopulateSwapsToTheOtherColour() throws IOException {
+        var indexBefore = elasticSearchIndexService.getIndexNameFromAlias(vocabsIndexName);
+        assertNotNull(indexBefore);
+
+        vocabService.populateVocabsData();
+
+        var indexAfter = elasticSearchIndexService.getIndexNameFromAlias(vocabsIndexName);
+        assertNotNull(indexAfter);
+        assertNotEquals(indexBefore, indexAfter, "Rebuild should have swapped to the other colour");
+        assertFalse(
+                client.indices().exists(e -> e.index(indexBefore)).value(),
+                "Superseded index " + indexBefore + " should be deleted after the alias switch");
+        assertTrue(elasticSearchIndexService.getDocumentsCount(vocabsIndexName) > 0);
+    }
+
+    /**
+     * Regression test for the 429 Too Many Requests bug: ARDC rate limiting truncated the harvest,
+     * so every platform root came back with no narrower terms. That tree is non-empty, so a size check
+     * passes, but it is useless for record indexing - and the old index had already been deleted.
+     * Now the flat tree is rejected and the existing index keeps serving.
+     */
+    @Test
+    void testFlatHarvestKeepsTheExistingVocabsIndex() throws IOException {
+        var indexBefore = elasticSearchIndexService.getIndexNameFromAlias(vocabsIndexName);
+        var docCountBefore = elasticSearchIndexService.getDocumentsCount(vocabsIndexName);
+        assertNotNull(indexBefore);
+        assertTrue(docCountBefore > 0);
+
+        doReturn(List.of(vocabWithChild("Parameter", "http://example.com/parameter")))
+                .when(mockArdcVocabService).getARDCVocabByType(ArdcCurrentPaths.PARAMETER_VOCAB);
+        // truncated harvest: roots present, no children
+        doReturn(List.of(vocab("Platform", "http://example.com/platform")))
+                .when(mockArdcVocabService).getARDCVocabByType(ArdcCurrentPaths.PLATFORM_VOCAB);
+        doReturn(List.of(vocabWithChild("Organisation", "http://example.com/organisation")))
+                .when(mockArdcVocabService).getARDCVocabByType(ArdcCurrentPaths.ORGANISATION_VOCAB);
+
+        assertThrows(IgnoreIndexingVocabsException.class, () -> mockVocabService.populateVocabsData());
+
+        assertEquals(indexBefore, elasticSearchIndexService.getIndexNameFromAlias(vocabsIndexName),
+                "Alias should not have moved after a flat harvest");
+        assertEquals(docCountBefore, elasticSearchIndexService.getDocumentsCount(vocabsIndexName),
+                "Existing vocabs should be untouched after a flat harvest");
+    }
+
+    /**
+     * An incompletely built index (few records) is not published - the alias keeps serving the previous index, and the partial one is deleted.
+     */
+    @Test
+    void testPartialIndexAbortsAliasSwitchAndDeletesTheHalfBuiltIndex() throws IOException {
+        var indexBefore = elasticSearchIndexService.getIndexNameFromAlias(vocabsIndexName);
+        var docsBefore = elasticSearchIndexService.getDocumentsCount(vocabsIndexName);
+        assertNotNull(indexBefore);
+        assertTrue(docsBefore > 0);
+
+        // the vocabs bean is proxied (scoped proxy + caching), so unwrap it to reach switchVocabsAlias
+        var impl = AopTestUtils.<VocabServiceImpl>getUltimateTargetObject(vocabService);
+        var halfBuilt = vocabsIndexName + elasticSearchIndexService.getAvailableIndexSuffix(vocabsIndexName);
+        // an empty index stands in for a bulk load that wrote fewer documents than expected
+        elasticSearchIndexService.recreateIndexFromMappingJSONFile(
+                AppConstants.VOCABS_INDEX_MAPPING_SCHEMA_FILE, halfBuilt, null);
+
+        assertThrows(IgnoreIndexingVocabsException.class, () -> impl.switchVocabsAlias(halfBuilt, 5));
+
+        assertFalse(
+                client.indices().exists(e -> e.index(halfBuilt)).value(),
+                "Half-built index " + halfBuilt + " should be deleted when the count check fails");
+        assertEquals(indexBefore, elasticSearchIndexService.getIndexNameFromAlias(vocabsIndexName),
+                "Alias should not have moved onto a partially built index");
+        assertEquals(docsBefore, elasticSearchIndexService.getDocumentsCount(vocabsIndexName),
+                "Existing vocabs should still be served after an aborted switch");
+    }
+
+    /**
+     * An unsuccessfully built index (exception occurred) is not published - the alias keeps serving the previous index, and the half-built one is left behind for the next run to reclaim.
+     */
+    @Test
+    void testBulkFailureKeepsTheServingIndexAndTheNextRunRecovers() throws IOException {
+        var indexBefore = elasticSearchIndexService.getIndexNameFromAlias(vocabsIndexName);
+        var docsBefore = elasticSearchIndexService.getDocumentsCount(vocabsIndexName);
+        assertNotNull(indexBefore);
+        assertTrue(docsBefore > 0);
+
+        // the colour the alias is not on, i.e. where the next rebuild goes
+        var leftOver = indexBefore.endsWith("-blue") ? vocabsIndexName + "-green" : vocabsIndexName + "-blue";
+        try {
+            // spy the unwrapped bean so populateVocabsData runs for real up to the bulk load
+            var failingService = Mockito.spy(AopTestUtils.<VocabServiceImpl>getUltimateTargetObject(vocabService));
+            doThrow(new RuntimeException("bulk load failed part way through"))
+                    .when(failingService).bulkIndexVocabs(anyList(), anyString());
+
+            assertThrows(RuntimeException.class, failingService::populateVocabsData);
+
+            assertEquals(indexBefore, elasticSearchIndexService.getIndexNameFromAlias(vocabsIndexName),
+                    "Alias should not have moved after a failed bulk load");
+            assertEquals(docsBefore, elasticSearchIndexService.getDocumentsCount(vocabsIndexName),
+                    "Existing vocabs should still be served after a failed bulk load");
+            assertTrue(
+                    client.indices().exists(e -> e.index(leftOver)).value(),
+                    "Failed run leaves the half-built index " + leftOver + " behind for the next run to reclaim");
+
+            // next run builds into the leftover index and publishes it
+            vocabService.populateVocabsData();
+
+            assertEquals(leftOver, elasticSearchIndexService.getIndexNameFromAlias(vocabsIndexName),
+                    "Next run should reclaim the leftover index and switch the alias to it");
+            assertTrue(elasticSearchIndexService.getDocumentsCount(vocabsIndexName) > 0);
+            assertFalse(
+                    client.indices().exists(e -> e.index(indexBefore)).value(),
+                    "Superseded index " + indexBefore + " should be deleted after the alias switch");
+        } finally {
+            // only if the recovery never happened, otherwise this is now the live index
+            if (!leftOver.equals(elasticSearchIndexService.getIndexNameFromAlias(vocabsIndexName))) {
+                elasticSearchIndexService.deleteIndexStore(leftOver);
+            }
+        }
+    }
+
     private VocabHarvestIncompleteException incompleteHarvestException() {
         return new VocabHarvestIncompleteException(
                 "https://vocabs.ardc.edu.au/repository/api/lda/aodn/aodn-platform-vocabulary/version-6-1/concept.json",
@@ -269,6 +416,15 @@ public class VocabServiceIT extends BaseTestClass {
         return VocabModel.builder()
                 .label(label)
                 .about(about)
+                .build();
+    }
+
+    /** A root with a child, i.e. what a complete harvest looks like. */
+    private VocabModel vocabWithChild(String label, String about) {
+        return VocabModel.builder()
+                .label(label)
+                .about(about)
+                .narrower(List.of(vocab(label + " child", about + "/1")))
                 .build();
     }
 }

@@ -372,6 +372,11 @@ public class VocabServiceImpl extends IndexServiceImpl implements VocabService {
                                   List<VocabModel> platformVocabs,
                                   List<VocabModel> organisationVocabs) throws IOException {
 
+        // Reject a degraded harvest before creating anything, so the live index is never touched.
+        requireHierarchy("parameter", parameterVocabs);
+        requireHierarchy("platform", platformVocabs);
+        requireHierarchy("organisation", organisationVocabs);
+
         List<VocabDto> vocabDtos = new ArrayList<>();
 
         // parameter vocabs
@@ -392,21 +397,97 @@ public class VocabServiceImpl extends IndexServiceImpl implements VocabService {
             vocabDtos.add(vocabDto);
         }
 
-        // recreate index from mapping JSON file
-        elasticSearchIndexService.recreateIndexFromMappingJSONFile(AppConstants.VOCABS_INDEX_MAPPING_SCHEMA_FILE, vocabsIndexName, null);
-        log.info("Indexing all vocabs to {}", vocabsIndexName);
+        /*
+         * Same blue/green policy as the records index. An incomplete harvest can therefore never leave the portal without vocabs.
+         */
+        var newIndexName = vocabsIndexName + elasticSearchIndexService.getAvailableIndexSuffix(vocabsIndexName);
 
-        bulkIndexVocabs(vocabDtos);
+        // recreate index from mapping JSON file
+        elasticSearchIndexService.recreateIndexFromMappingJSONFile(AppConstants.VOCABS_INDEX_MAPPING_SCHEMA_FILE, newIndexName, null);
+        log.info("Indexing all vocabs to {}", newIndexName);
+
+        var expectedDocsCount = bulkIndexVocabs(vocabDtos, newIndexName);
+
+        switchVocabsAlias(newIndexName, expectedDocsCount);
+    }
+
+    /**
+     * Guard against a degraded ARDC harvest that returns roots but no children. A truncated harvest
+     * (e.g. ARDC rate limiting cutting pagination short) yields top-level concepts with an empty
+     * {@code narrower}, which is non-empty enough to pass a size check yet useless: every lookup in
+     * {@link #extractVocabLabelsFromThemes} walks {@code narrower}, so records end up with no vocabs.
+     */
+    protected void requireHierarchy(String vocabType, List<VocabModel> roots) {
+        if (roots == null || roots.isEmpty()) {
+            throw new IgnoreIndexingVocabsException(
+                    "No " + vocabType + " vocabs harvested. Skipping indexing, keeping the existing " + vocabsIndexName);
+        }
+        boolean hasChildren = roots.stream()
+                .filter(Objects::nonNull)
+                .anyMatch(root -> root.getNarrower() != null && !root.getNarrower().isEmpty());
+
+        if (!hasChildren) {
+            throw new IgnoreIndexingVocabsException(
+                    "Harvested " + vocabType + " vocab tree is flat (" + roots.size()
+                            + " roots, none with narrower terms), which indicates an incomplete harvest. "
+                            + "Skipping indexing, keeping the existing " + vocabsIndexName);
+        }
+    }
+
+    /**
+     * Point the vocabs alias at a freshly built index, but only once that index really holds every
+     * document. Anything that throws before the alias is updated leaves the previous index serving
+     * reads, which is the point of the blue-green policy.
+     *
+     * @param newIndexName  the concrete index just built
+     * @param expectedDocs  number of distinct documents that should be in it
+     */
+    protected void switchVocabsAlias(String newIndexName, long expectedDocs) throws IOException {
+        // The vocab index is small, so an explicit refresh is cheap and gives an exact count rather
+        // than the eventual-consistency slack the records index has to tolerate.
+        portalElasticsearchClient.indices().refresh(r -> r.index(newIndexName));
+
+        var indexedCount = elasticSearchIndexService.getDocumentsCount(newIndexName);
+        if (indexedCount < expectedDocs) {
+            // Leave no half-built colour behind, otherwise the next run has no free suffix to build into.
+            elasticSearchIndexService.deleteIndexStore(newIndexName);
+            throw new IgnoreIndexingVocabsException(
+                    "Only " + indexedCount + " of " + expectedDocs + " vocab documents made it into "
+                            + newIndexName + ". Alias switch aborted, keeping the existing " + vocabsIndexName);
+        }
+
+        /*
+         * Elasticsearch refuses an alias whose name collides with a concrete index, and older environments
+         * still have a concrete index literally named vocabsIndexName. getIndexNameFromAlias returns null
+         * when the name is not an alias, and deleteIndexStore is a no-op when nothing exists with that name.
+         * This block can be dropped once every environment is alias based.
+         */
+        var currentIndexName = elasticSearchIndexService.getIndexNameFromAlias(vocabsIndexName);
+        if (currentIndexName == null) {
+            elasticSearchIndexService.deleteIndexStore(vocabsIndexName);
+        }
+
+        elasticSearchIndexService.updateAliasToNewIndex(vocabsIndexName, newIndexName);
+        log.info("Alias: {} switched to point to index: {}", vocabsIndexName, newIndexName);
+
+        // Only after the switch, so the alias is never left dangling.
+        if (currentIndexName != null && !currentIndexName.equals(newIndexName)) {
+            elasticSearchIndexService.deleteIndexStore(currentIndexName);
+            log.info("Old index: {} deleted after alias switch", currentIndexName);
+        }
     }
 
     /**
      * Index vocabs in size-limited bulk batches via {@link BulkRequestProcessor} / {@link #executeBulk},
      * so large vocab trees do not hit Elasticsearch "entity too large" limits.
+     *
+     * @param targetIndexName the concrete index to write into, never the alias
+     * @return the number of distinct documents that should end up in the index
      */
-    protected void bulkIndexVocabs(List<VocabDto> vocabs) throws IOException {
+    protected long bulkIndexVocabs(List<VocabDto> vocabs, String targetIndexName) throws IOException {
         if (vocabs.isEmpty()) {
             log.error("No vocabs to be indexed, nothing to index");
-            return;
+            return 0;
         }
 
         Map<String, VocabDto> byId = new HashMap<>();
@@ -418,14 +499,14 @@ public class VocabServiceImpl extends IndexServiceImpl implements VocabService {
                 Optional.ofNullable(byId.get(item.id()));
 
         BulkRequestProcessor<VocabDto> bulkRequestProcessor =
-                new BulkRequestProcessor<>(vocabsIndexName, mapper, self, null);
+                new BulkRequestProcessor<>(targetIndexName, mapper, self, null);
 
         for (VocabDto vocab : vocabs) {
             try {
                 log.debug("Ingested json is {}",
                         indexerObjectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(vocab));
             } catch (JsonProcessingException e) {
-                log.error("Failed to serialize vocab for indexing to {}", vocabsIndexName);
+                log.error("Failed to serialize vocab for indexing to {}", targetIndexName);
                 throw new RuntimeException(e);
             }
             // skipIndividualReport=true: vocab load is typically background and not streamed to a client
@@ -433,9 +514,12 @@ public class VocabServiceImpl extends IndexServiceImpl implements VocabService {
         }
 
         bulkRequestProcessor.flush();
-        log.info("Finished bulk indexing items to index: {}", vocabsIndexName);
+        log.info("Finished bulk indexing items to index: {}", targetIndexName);
         log.info("Total documents in index: {} is {}",
-                vocabsIndexName, elasticSearchIndexService.getDocumentsCount(vocabsIndexName));
+                targetIndexName, elasticSearchIndexService.getDocumentsCount(targetIndexName));
+
+        // ids are de-duplicated, so the map size is what the index should hold
+        return byId.size();
     }
 
     /**
