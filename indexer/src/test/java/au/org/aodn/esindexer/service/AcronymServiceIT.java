@@ -6,7 +6,6 @@ import au.org.aodn.esindexer.BaseTestClass;
 import au.org.aodn.esindexer.configuration.GeoNetworkSearchTestConfig;
 import au.org.aodn.esindexer.controller.IndexerController;
 import au.org.aodn.esindexer.model.MockServer;
-import au.org.aodn.metadata.geonetwork.service.GeoNetworkServiceImpl;
 import co.elastic.clients.elasticsearch.core.search.Hit;
 import co.elastic.clients.elasticsearch.indices.AnalyzeRequest;
 import co.elastic.clients.elasticsearch.indices.analyze.AnalyzeToken;
@@ -47,8 +46,6 @@ public class AcronymServiceIT extends BaseTestClass {
     // sample12.xml's title/description say "Aurora Australis" but never the token "aa".
     private static final String ACRONYM_SAMPLE_UUID = "201112060";
 
-    @Autowired
-    protected GeoNetworkServiceImpl geoNetworkService;
 
     // Declared as a spy (not a plain @Autowired) so this class's context matches IndexerServiceIT's
     // bean-override set exactly, letting Spring reuse the same cached context (and its docker stack)
