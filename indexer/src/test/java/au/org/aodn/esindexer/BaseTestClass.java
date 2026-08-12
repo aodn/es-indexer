@@ -2,6 +2,7 @@ package au.org.aodn.esindexer;
 
 import au.org.aodn.esindexer.configuration.GeoNetworkSearchTestConfig;
 import au.org.aodn.esindexer.service.VocabServiceImpl;
+import au.org.aodn.metadata.geonetwork.service.GeoNetworkServiceImpl;
 import au.org.aodn.metadata.geonetwork.utils.CommonUtils;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.ElasticsearchException;
@@ -35,6 +36,10 @@ public class BaseTestClass {
 
     protected final Logger logger = LogManager.getLogger(BaseTestClass.class);
 
+    // How long to wait for GeoNetwork to serve searches again after it has been asked to reindex
+    protected static final int GN_READY_MAX_ATTEMPTS = 60;
+    protected static final long GN_READY_DELAY_MS = 500L;
+
     protected String xsrfToken = null;
 
     @LocalServerPort
@@ -53,6 +58,9 @@ public class BaseTestClass {
 
     @Autowired
     protected ComposeContainer dockerComposeContainer;
+
+    @Autowired
+    protected GeoNetworkServiceImpl geoNetworkService;
 
     @Autowired
     protected VocabServiceImpl vocabService;
@@ -228,10 +236,85 @@ public class BaseTestClass {
                 );
         if (trigger.getStatusCode().is2xxSuccessful()) {
             logger.info("Triggered indexer successfully");
+            awaitGeoNetworkSearchable(reset);
             return true;
         }
         logger.warn("Serverr not ready yet. Will retry. Status code: {}", trigger.getStatusCode());
         return false;
+    }
+
+    /**
+     * A GeoNetwork reindex - most of all one with reset=true - deletes and recreates its Elasticsearch
+     * index. While that window is open, a query through the GeoNetwork search proxy comes back as an
+     * error body that the Elastic client cannot deserialize (UnexpectedJsonEventException), which the
+     * indexer reports as "Failed to fetch data from GeoNetwork Elastic API" and then indexes zero
+     * record. GeoNetwork answers the trigger call before its index has settled, so wait here until it
+     * says it has stopped indexing and its index serves a search again.
+     *
+     * @param afterReset - True when the reindex dropped the index, in which case a single healthy probe
+     *                     can still be reading the about-to-be-deleted index, so ask for two in a row.
+     */
+    protected void awaitGeoNetworkSearchable(boolean afterReset) {
+        int required = afterReset ? 2 : 1;
+        int healthy = 0;
+
+        for (int attempt = 0; attempt < GN_READY_MAX_ATTEMPTS; attempt++) {
+            healthy = (!isGeoNetworkIndexing() && isGeoNetworkSearchable()) ? healthy + 1 : 0;
+
+            if (healthy >= required) {
+                return;
+            }
+
+            try {
+                Thread.sleep(GN_READY_DELAY_MS);
+            }
+            catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                return;
+            }
+        }
+        logger.warn("GeoNetwork index still not searchable after {} checks, carry on and let the test report it",
+                GN_READY_MAX_ATTEMPTS);
+    }
+
+    /**
+     * @return - True while GeoNetwork reports a reindex in progress. An unreadable answer counts as not
+     *           indexing so that a missing endpoint cannot stall the suite, the search probe below is
+     *           the one that decides.
+     */
+    protected boolean isGeoNetworkIndexing() {
+        try {
+            ResponseEntity<String> response = testRestTemplate
+                    .exchange(
+                            isIndexUrl(),
+                            HttpMethod.GET,
+                            getRequestEntity(Optional.empty(), MediaType.APPLICATION_JSON, null),
+                            String.class
+                    );
+
+            return response.getStatusCode().is2xxSuccessful()
+                    && Boolean.parseBoolean(String.valueOf(response.getBody()).trim());
+        }
+        catch (Exception e) {
+            return false;
+        }
+    }
+
+    /**
+     * Probe the very call the indexer makes first, a count over the GeoNetwork index, so that the test
+     * only proceeds once that call works.
+     *
+     * @return - True if GeoNetwork serves a search over its index
+     */
+    protected boolean isGeoNetworkSearchable() {
+        try {
+            geoNetworkService.getAllMetadataCounts();
+            return true;
+        }
+        catch (Exception e) {
+            logger.info("GeoNetwork index not searchable yet: {}", e.getMessage());
+            return false;
+        }
     }
 
     private boolean delete(String uuid, HttpEntity<String> requestEntity) {

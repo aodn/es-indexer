@@ -5,7 +5,6 @@ import au.org.aodn.esindexer.Application;
 import au.org.aodn.esindexer.BaseTestClass;
 import au.org.aodn.esindexer.configuration.GeoNetworkSearchTestConfig;
 import au.org.aodn.esindexer.model.MockServer;
-import au.org.aodn.metadata.geonetwork.service.GeoNetworkServiceImpl;
 import co.elastic.clients.elasticsearch._types.query_dsl.TextQueryType;
 import co.elastic.clients.elasticsearch.core.search.Hit;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -37,9 +36,6 @@ import java.util.Set;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class IndexerServiceIT extends BaseTestClass {
-
-    @Autowired
-    protected GeoNetworkServiceImpl geoNetworkService;
 
     @MockitoSpyBean
     protected IndexerMetadataServiceImpl indexerService;

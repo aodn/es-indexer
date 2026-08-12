@@ -9,7 +9,6 @@ import au.org.aodn.metadata.geonetwork.configuration.AppConstants;
 import au.org.aodn.metadata.geonetwork.exception.MetadataNotFoundException;
 import au.org.aodn.esindexer.utils.AssociatedRecordsUtil;
 import au.org.aodn.esindexer.utils.JaxbUtils;
-import au.org.aodn.metadata.geonetwork.service.GeoNetworkServiceImpl;
 import au.org.aodn.metadata.iso19115_3_2018.MDMetadataType;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch.core.SearchRequest;
@@ -42,9 +41,7 @@ import static org.mockito.ArgumentMatchers.any;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class GeoNetworkServiceIT extends BaseTestClass {
-    // Must use the impl to access protected method for testing
-    @Autowired
-    protected GeoNetworkServiceImpl geoNetworkService;
+    // geoNetworkService (the impl, to reach protected methods) comes from BaseTestClass
 
     @Autowired
     @Qualifier("gn4ElasticsearchClient")
