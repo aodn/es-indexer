@@ -151,7 +151,8 @@ public class IndexerController {
         var request = SubmitJobRequest.builder()
                 .jobName("index-all-metadata-records")
                 .jobQueue("indexing-queue")
-                .jobDefinition("scheduled-es-indexing")
+                // this is the same as in AWS batch job definition to be used
+                .jobDefinition("es-indexer-metadata-indexing-job-definition")
                 .containerOverrides(override -> override
                         .environment(envVariables)
                 )
