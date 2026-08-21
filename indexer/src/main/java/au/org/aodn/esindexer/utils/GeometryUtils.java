@@ -270,6 +270,13 @@ public class GeometryUtils {
         return geometry;
     }
 
+    protected static Geometry dropInteriorRings(Geometry geometry) {
+        if (geometry instanceof Polygon polygon && polygon.getNumInteriorRing() > 0) {
+            return factory.createPolygon(polygon.getExteriorRing());
+        }
+        return geometry;
+    }
+
     /**
      * The geometry from geonetwork can be pretty bad that it cover area of sea and land, this function is use
      * to remove the land part
@@ -296,6 +303,9 @@ public class GeometryUtils {
                             .map(GeometryUtils::makeValidGeometry)
                             .map(GeometryUtils::convertToListGeometry)
                             .flatMap(Collection::stream)
+                            // After precision reduce, holes often touch the shell. JTS isValid()
+                            // allows that; Lucene geo_shape does not (e.g. lat=-67 lon=-67.5).
+                            .map(geometry -> reducer != null ? dropInteriorRings(geometry) : geometry)
                             .map(GeometryUtils::makeValidGeometry)
                             .filter(g -> g != null && !g.isEmpty())
                             .toList()

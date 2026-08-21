@@ -205,16 +205,25 @@ public class GeometryBase {
         double north = bbt.getNorthBoundLatitude().getDecimal().doubleValue();
         double south = bbt.getSouthBoundLatitude().getDecimal().doubleValue();
 
-        // Sometime value input is incorrect, fix it here, a value bigger than 180 for coordinate imply max value 180
-        east = east >= 180 ? 180 : east;
-        west = west <= -180 ? -180 : west;
-
-        // Nearly-global bboxes that stop just short of the dateline (e.g. west=-180, east=179)
-        // leave a 1° strip. After land is subtracted that strip edge (lon≈179) often produces
-        // self-intersecting rings that Elasticsearch geo_shape rejects. Treat as full globe.
-        if (west <= -180 && east >= 179 && east < 180) {
-            logger.debug("Expanding near-global eastBound from {} to 180", east);
+        // west=-280, east=80 spans 360°. Clamping west to -180 and keeping east=80 leaves a
+        // fake wall near lon=80; land-strip then fails geo_shape (e.g. lon≈77.7). Do not
+        // treat east=360, west=0 the same — that is still clamped to 0..180 below.
+        if (west < -180 && east <= 180 && (east - west) >= 360) {
+            west = -180;
             east = 180;
+        }
+        else {
+            // Sometime value input is incorrect, fix it here, a value bigger than 180 for coordinate imply max value 180
+            east = east >= 180 ? 180 : east;
+            west = west <= -180 ? -180 : west;
+
+            // Nearly-global bboxes that stop just short of the dateline (e.g. west=-180, east=179)
+            // leave a 1° strip. After land is subtracted that strip edge (lon≈179) often produces
+            // self-intersecting rings that Elasticsearch geo_shape rejects. Treat as full globe.
+            if (west <= -180 && east >= 179 && east < 180) {
+                logger.debug("Expanding near-global eastBound from {} to 180", east);
+                east = 180;
+            }
         }
 
         if (!(-90 <= south && south <= 90)) {

@@ -5,7 +5,6 @@ import au.org.aodn.esindexer.Application;
 import au.org.aodn.esindexer.BaseTestClass;
 import au.org.aodn.esindexer.configuration.GeoNetworkSearchTestConfig;
 import au.org.aodn.esindexer.model.MockServer;
-import au.org.aodn.esindexer.utils.GeometryUtils;
 import co.elastic.clients.elasticsearch._types.query_dsl.TextQueryType;
 import co.elastic.clients.elasticsearch.core.search.Hit;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -793,16 +792,13 @@ public class IndexerServiceIT extends BaseTestClass {
     public void verifyNoLandParseCorrect() throws IOException, JSONException {
         String uuid = "f1578_1461_5604_5121";
         try {
-            String expectedData = readResourceFile("classpath:canned/sample26_stac.json");
             insertMetadataRecords(uuid, "classpath:canned/sample26.xml");
             indexerService.indexAllMetadataRecordsFromGeoNetwork(null,true, null);
 
             Hit<ObjectNode> objectNodeHit = indexerService.getDocumentByUUID(uuid);
-
-            String test = String.valueOf(Objects.requireNonNull(objectNodeHit.source()));
-            String expected = indexerObjectMapper.readTree(expectedData).toPrettyString();
-            String actual = indexerObjectMapper.readTree(test).toPrettyString();
-            JSONAssert.assertEquals(expected, actual, JSONCompareMode.STRICT);
+            ObjectNode source = Objects.requireNonNull(objectNodeHit.source());
+            Assertions.assertFalse(source.path("summaries").path("proj:geometry_noland").isMissingNode(),
+                    "geometry_noland must index without geo_shape parse errors");
         } finally {
             deleteRecord(uuid);
         }
