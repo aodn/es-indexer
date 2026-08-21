@@ -22,6 +22,7 @@ app:
   initialiseVocabsIndex: true
   geometry:
     gridLandSize: 10.0
+    reducerPrecision: 4.0
 
 management:
   info:

@@ -1,7 +1,3 @@
-app:
-  geometry:
-    reducerPrecision: 4.0
-
 management:
   endpoints:
     web:
