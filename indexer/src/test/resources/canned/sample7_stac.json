@@ -16,6 +16,10 @@
     "statement" : "",
     "creation" : "2024-05-10T00:00:00",
     "revision" : "2024-05-16T00:00:00",
+    "temporal" : [ {
+      "start" : "2021-09-30T14:00:00Z",
+      "end" : "2022-12-31T12:59:59Z"
+    } ],
     "dataset_group" : [ "sample" ],
     "update_frequency" : "completed",
     "proj:geometry" : {
@@ -58,44 +62,40 @@
     "proj:geometry_noland" : {
       "geometries" : [ {
         "type" : "Point",
-        "coordinates" : [ 142.9417419433594, -9.998605505008365 ]
+        "coordinates" : [ 143, -10 ]
       }, {
         "type" : "Point",
-        "coordinates" : [ 143.3969879150391, -9.734774881537218 ]
+        "coordinates" : [ 143.5, -9.75 ]
       }, {
         "type" : "Point",
-        "coordinates" : [ 143.3969879150391, -9.847097830667153 ]
+        "coordinates" : [ 143.5, -9.75 ]
       }, {
         "type" : "Point",
-        "coordinates" : [ 145.44284820556643, -14.685231911438933 ]
+        "coordinates" : [ 145.5, -14.75 ]
       }, {
         "type" : "Point",
-        "coordinates" : [ 146.22768402099612, -16.863033829999537 ]
+        "coordinates" : [ 146.25, -16.75 ]
       }, {
         "type" : "Point",
-        "coordinates" : [ 146.4995956420899, -18.572060113333826 ]
+        "coordinates" : [ 146.5, -18.5 ]
       }, {
         "type" : "Point",
-        "coordinates" : [ 146.51950836181643, -18.643642706975996 ]
+        "coordinates" : [ 146.5, -18.75 ]
       }, {
         "type" : "Point",
-        "coordinates" : [ 147.64663696289065, -18.77891636903418 ]
+        "coordinates" : [ 147.75, -18.75 ]
       }, {
         "type" : "Point",
-        "coordinates" : [ 150.97008705139163, -23.196700709795724 ]
+        "coordinates" : [ 151, -23.25 ]
       }, {
         "type" : "Point",
-        "coordinates" : [ 151.92478179931643, -23.4456087744153 ]
+        "coordinates" : [ 152, -23.5 ]
       }, {
         "type" : "Point",
-        "coordinates" : [ 152.3920440673828, -23.893371525860456 ]
+        "coordinates" : [ 152.5, -24 ]
       } ],
       "type" : "GeometryCollection"
     },
-    "temporal" : [ {
-      "start" : "2021-09-30T14:00:00Z",
-      "end" : "2022-12-31T12:59:59Z"
-    } ],
     "parameter_vocabs" : [ ],
     "platform_vocabs" : [ ],
     "organisation_vocabs" : [ "Australian Institute of Marine Science (AIMS)" ]
@@ -106,9 +106,9 @@
     "name" : "Remmers T",
     "emails" : [ "reception@aims.gov.au" ],
     "addresses" : [ {
-      "delivery_point" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],
       "city" : "TOWNSVILLE",
       "country" : "Australia",
+      "delivery_point" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],
       "postal_code" : "4810",
       "administrative_area" : "Queensland"
     } ],
@@ -130,9 +130,9 @@
     "name" : "AIMS Data Centre",
     "emails" : [ "adc@aims.gov.au" ],
     "addresses" : [ {
-      "delivery_point" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],
       "city" : "TOWNSVILLE",
       "country" : "Australia",
+      "delivery_point" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],
       "postal_code" : "4810",
       "administrative_area" : "Queensland"
     } ],
@@ -154,9 +154,9 @@
     "position" : "AIMS Data Centre",
     "emails" : [ "adc@aims.gov.au" ],
     "addresses" : [ {
-      "delivery_point" : [ "PRIVATE MAIL BAG 3" ],
       "city" : "TOWNSVILLE MAIL CENTRE",
       "country" : "Australia",
+      "delivery_point" : [ "PRIVATE MAIL BAG 3" ],
       "postal_code" : "4810",
       "administrative_area" : "Queensland"
     } ],
@@ -176,9 +176,9 @@
     "organization" : "Australian Institute of Marine Science (AIMS)",
     "emails" : [ "reception@aims.gov.au" ],
     "addresses" : [ {
-      "delivery_point" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],
       "city" : "TOWNSVILLE",
       "country" : "Australia",
+      "delivery_point" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],
       "postal_code" : "4810",
       "administrative_area" : "Queensland"
     } ],
@@ -199,9 +199,9 @@
     "organization" : "Australian Institute of Marine Science (AIMS)",
     "emails" : [ "reception@aims.gov.au" ],
     "addresses" : [ {
-      "delivery_point" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],
       "city" : "TOWNSVILLE",
       "country" : "Australia",
+      "delivery_point" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],
       "postal_code" : "4810",
       "administrative_area" : "Queensland"
     } ],

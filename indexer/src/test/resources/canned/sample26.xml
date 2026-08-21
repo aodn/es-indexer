@@ -1,0 +1,954 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdb:MD_Metadata xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xmlns:cat="http://standards.iso.org/iso/19115/-3/cat/1.0"
+                 xmlns:gfc="http://standards.iso.org/iso/19110/gfc/1.1"
+                 xmlns:cit="http://standards.iso.org/iso/19115/-3/cit/2.0"
+                 xmlns:gcx="http://standards.iso.org/iso/19115/-3/gcx/1.0"
+                 xmlns:gex="http://standards.iso.org/iso/19115/-3/gex/1.0"
+                 xmlns:lan="http://standards.iso.org/iso/19115/-3/lan/1.0"
+                 xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0"
+                 xmlns:mas="http://standards.iso.org/iso/19115/-3/mas/1.0"
+                 xmlns:mcc="http://standards.iso.org/iso/19115/-3/mcc/1.0"
+                 xmlns:mco="http://standards.iso.org/iso/19115/-3/mco/1.0"
+                 xmlns:mda="http://standards.iso.org/iso/19115/-3/mda/1.0"
+                 xmlns:mdb="http://standards.iso.org/iso/19115/-3/mdb/2.0"
+                 xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/2.0"
+                 xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/2.0"
+                 xmlns:mex="http://standards.iso.org/iso/19115/-3/mex/1.0"
+                 xmlns:mmi="http://standards.iso.org/iso/19115/-3/mmi/1.0"
+                 xmlns:mpc="http://standards.iso.org/iso/19115/-3/mpc/1.0"
+                 xmlns:mrc="http://standards.iso.org/iso/19115/-3/mrc/2.0"
+                 xmlns:mrd="http://standards.iso.org/iso/19115/-3/mrd/1.0"
+                 xmlns:mri="http://standards.iso.org/iso/19115/-3/mri/1.0"
+                 xmlns:mrl="http://standards.iso.org/iso/19115/-3/mrl/2.0"
+                 xmlns:mrs="http://standards.iso.org/iso/19115/-3/mrs/1.0"
+                 xmlns:msr="http://standards.iso.org/iso/19115/-3/msr/2.0"
+                 xmlns:mdq="http://standards.iso.org/iso/19157/-2/mdq/1.0"
+                 xmlns:dqm="http://standards.iso.org/iso/19157/-2/dqm/1.0"
+                 xmlns:mac="http://standards.iso.org/iso/19115/-3/mac/2.0"
+                 xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0"
+                 xmlns:gml="http://www.opengis.net/gml/3.2"
+                 xmlns:xlink="http://www.w3.org/1999/xlink">
+    <mdb:metadataIdentifier>
+        <mcc:MD_Identifier>
+            <mcc:code>
+                <gco:CharacterString>f1578_1461_5604_5121</gco:CharacterString>
+            </mcc:code>
+        </mcc:MD_Identifier>
+    </mdb:metadataIdentifier>
+    <mdb:defaultLocale>
+        <lan:PT_Locale/>
+    </mdb:defaultLocale>
+    <mdb:parentMetadata uuidref="f2925_9133_9514_1641"/>
+    <mdb:metadataScope>
+        <mdb:MD_MetadataScope>
+            <mdb:resourceScope>
+                <mcc:MD_ScopeCode codeList="https://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ScopeCode"
+                                  codeListValue="dataset">dataset</mcc:MD_ScopeCode>
+            </mdb:resourceScope>
+        </mdb:MD_MetadataScope>
+    </mdb:metadataScope>
+    <mdb:contact>
+        <cit:CI_Responsibility>
+            <cit:role>
+                <cit:CI_RoleCode codeList="https://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode"
+                                 codeListValue="author">author</cit:CI_RoleCode>
+            </cit:role>
+            <cit:party>
+                <cit:CI_Organisation>
+                    <cit:name>
+                        <gco:CharacterString>Australian National University</gco:CharacterString>
+                    </cit:name>
+                    <cit:contactInfo>
+                        <cit:CI_Contact>
+                            <cit:address>
+                                <cit:CI_Address>
+                                    <cit:city>
+                                        <gco:CharacterString>Canberra, ACT</gco:CharacterString>
+                                    </cit:city>
+                                    <cit:postalCode>
+                                        <gco:CharacterString>0200</gco:CharacterString>
+                                    </cit:postalCode>
+                                    <cit:country>
+                                        <gco:CharacterString>Australia</gco:CharacterString>
+                                    </cit:country>
+                                </cit:CI_Address>
+                            </cit:address>
+                        </cit:CI_Contact>
+                    </cit:contactInfo>
+                    <cit:individual>
+                        <cit:CI_Individual>
+                            <cit:name>
+                                <gco:CharacterString>Australian National University</gco:CharacterString>
+                            </cit:name>
+                        </cit:CI_Individual>
+                    </cit:individual>
+                </cit:CI_Organisation>
+            </cit:party>
+        </cit:CI_Responsibility>
+    </mdb:contact>
+    <mdb:contact>
+        <cit:CI_Responsibility>
+            <cit:role>
+                <cit:CI_RoleCode codeList="https://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode"
+                                 codeListValue="author">author</cit:CI_RoleCode>
+            </cit:role>
+            <cit:party>
+                <cit:CI_Organisation>
+                    <cit:name>
+                        <gco:CharacterString>Australian National University</gco:CharacterString>
+                    </cit:name>
+                    <cit:contactInfo>
+                        <cit:CI_Contact>
+                            <cit:address>
+                                <cit:CI_Address>
+                                    <cit:city>
+                                        <gco:CharacterString>Canberra, ACT</gco:CharacterString>
+                                    </cit:city>
+                                    <cit:postalCode>
+                                        <gco:CharacterString>0200</gco:CharacterString>
+                                    </cit:postalCode>
+                                    <cit:country>
+                                        <gco:CharacterString>Australia</gco:CharacterString>
+                                    </cit:country>
+                                    <cit:electronicMailAddress>
+                                        <gco:CharacterString>Andrew.Kiss@anu.edu.au</gco:CharacterString>
+                                    </cit:electronicMailAddress>
+                                </cit:CI_Address>
+                            </cit:address>
+                        </cit:CI_Contact>
+                    </cit:contactInfo>
+                    <cit:individual>
+                        <cit:CI_Individual>
+                            <cit:name>
+                                <gco:CharacterString>Andrew Kiss</gco:CharacterString>
+                            </cit:name>
+                        </cit:CI_Individual>
+                    </cit:individual>
+                </cit:CI_Organisation>
+            </cit:party>
+        </cit:CI_Responsibility>
+    </mdb:contact>
+    <mdb:contact>
+        <cit:CI_Responsibility>
+            <cit:role>
+                <cit:CI_RoleCode codeList="https://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode"
+                                 codeListValue="author">author</cit:CI_RoleCode>
+            </cit:role>
+            <cit:party>
+                <cit:CI_Organisation>
+                    <cit:name>
+                        <gco:CharacterString>Australian National University</gco:CharacterString>
+                    </cit:name>
+                    <cit:contactInfo>
+                        <cit:CI_Contact>
+                            <cit:address>
+                                <cit:CI_Address>
+                                    <cit:city>
+                                        <gco:CharacterString>Canberra, ACT</gco:CharacterString>
+                                    </cit:city>
+                                    <cit:postalCode>
+                                        <gco:CharacterString>0200</gco:CharacterString>
+                                    </cit:postalCode>
+                                    <cit:country>
+                                        <gco:CharacterString>Australia</gco:CharacterString>
+                                    </cit:country>
+                                    <cit:electronicMailAddress>
+                                        <gco:CharacterString>Andy.Hogg@anu.edu.au,</gco:CharacterString>
+                                    </cit:electronicMailAddress>
+                                </cit:CI_Address>
+                            </cit:address>
+                        </cit:CI_Contact>
+                    </cit:contactInfo>
+                    <cit:individual>
+                        <cit:CI_Individual>
+                            <cit:name>
+                                <gco:CharacterString>Andrew Hogg</gco:CharacterString>
+                            </cit:name>
+                        </cit:CI_Individual>
+                    </cit:individual>
+                </cit:CI_Organisation>
+            </cit:party>
+        </cit:CI_Responsibility>
+    </mdb:contact>
+    <mdb:dateInfo>
+        <cit:CI_Date>
+            <cit:date>
+                <gco:DateTime>2021-04-20</gco:DateTime>
+            </cit:date>
+            <cit:dateType>
+                <cit:CI_DateTypeCode codeList="https://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode"
+                                     codeListValue="revision">revision</cit:CI_DateTypeCode>
+            </cit:dateType>
+        </cit:CI_Date>
+    </mdb:dateInfo>
+    <mdb:metadataStandard>
+        <cit:CI_Citation>
+            <cit:title>
+                <gco:CharacterString/>
+            </cit:title>
+            <cit:edition>
+                <gco:CharacterString/>
+            </cit:edition>
+        </cit:CI_Citation>
+    </mdb:metadataStandard>
+    <mdb:referenceSystemInfo>
+        <mrs:MD_ReferenceSystem>
+            <mrs:referenceSystemIdentifier>
+                <mcc:MD_Identifier/>
+            </mrs:referenceSystemIdentifier>
+        </mrs:MD_ReferenceSystem>
+    </mdb:referenceSystemInfo>
+    <mdb:identificationInfo>
+        <mri:MD_DataIdentification>
+            <mri:citation>
+                <cit:CI_Citation>
+                    <cit:title>
+                        <gco:CharacterString>ACCESS-OM2 0.1 degree global model output (interannual forcing simulation)</gco:CharacterString>
+                    </cit:title>
+                    <cit:alternateTitle>
+                        <gco:CharacterString/>
+                    </cit:alternateTitle>
+                    <cit:edition>
+                        <gco:CharacterString>v20210420</gco:CharacterString>
+                    </cit:edition>
+                    <cit:date>
+                        <cit:CI_Date>
+                            <cit:date>
+                                <gco:DateTime>2021-04-20 20:38:56</gco:DateTime>
+                            </cit:date>
+                            <cit:dateType>
+                                <cit:CI_DateTypeCode codeList="https://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode"
+                                                     codeListValue="creation">creation</cit:CI_DateTypeCode>
+                            </cit:dateType>
+                        </cit:CI_Date>
+                    </cit:date>
+                    <cit:date>
+                        <cit:CI_Date>
+                            <cit:date>
+                                <gco:DateTime>2021-04-21 21:23:26</gco:DateTime>
+                            </cit:date>
+                            <cit:dateType>
+                                <cit:CI_DateTypeCode codeList="https://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode"
+                                                     codeListValue="publication">publication</cit:CI_DateTypeCode>
+                            </cit:dateType>
+                        </cit:CI_Date>
+                    </cit:date>
+                    <cit:date>
+                        <cit:CI_Date>
+                            <cit:date>
+                                <gco:DateTime>2025-06-10 13:45:57</gco:DateTime>
+                            </cit:date>
+                            <cit:dateType>
+                                <cit:CI_DateTypeCode codeList="https://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode"
+                                                     codeListValue="revision">revision</cit:CI_DateTypeCode>
+                            </cit:dateType>
+                        </cit:CI_Date>
+                    </cit:date>
+                    <cit:identifier>
+                        <mcc:MD_Identifier>
+                            <mcc:code>
+                                <gco:CharacterString>cj50</gco:CharacterString>
+                            </mcc:code>
+                        </mcc:MD_Identifier>
+                    </cit:identifier>
+                </cit:CI_Citation>
+            </mri:citation>
+            <mri:abstract>
+                <gco:CharacterString>ACCESS-OM2-01 is COSIMA's flagship high-resolution ocean-sea ice model. It uses 0.1° lateral resolution at the Equator, tripolar in the north and Mercator projection down to 65°S, with 75 vertical levels. &#xD;
+                    &#xD;
+                    The ACCESS-OM2 global model configuration is based on that described in Kiss et al. (2020),&#xD;
+                    https://doi.org/10.5194/gmd-13-401-2020, but with many improvements.&#xD;
+                    &#xD;
+                    This dataset was run with JRA55-do v1.4.0 interannually-varying forcing with all solid runoff converted to liquid runoff with no heat transfer. It is a 61-year spin up, from 1 Jan 1958 to 1 Jan 2019. Initial conditions are WOA13v2 potential temperature (NB: should have been conservative temperature) and practical salinity. &#xD;
+                    &#xD;
+                    For more information on the run configuration and history, please see: https://github.com/COSIMA/01deg_jra55_iaf/tree/01deg_jra55v140_iaf&#xD;
+                    &#xD;
+                    https://github.com/COSIMA/01deg_jra55_iaf/tree/01deg_jra55v140_iaf_cycle2&#xD;
+                    &#xD;
+                    https://github.com/COSIMA/01deg_jra55_iaf/tree/01deg_jra55v140_iaf_cycle3&#xD;
+                    &#xD;
+                    https://github.com/COSIMA/01deg_jra55_iaf/tree/01deg_jra55v140_iaf_cycle4&#xD;
+                    &#xD;
+                    Outputs are described here: http://cosima.org.au/index.php/2020/07/29/data-available-0-1-1958-2018-access-om2-iaf-run/</gco:CharacterString>
+            </mri:abstract>
+            <mri:credit>
+                <gco:CharacterString>ARC Centre of Excellence for Climate System Science&#xD;
+                    &#xD;
+                    ARC Linkage grant LP160100073</gco:CharacterString>
+            </mri:credit>
+            <mri:pointOfContact>
+                <cit:CI_Responsibility>
+                    <cit:role>
+                        <cit:CI_RoleCode codeList="https://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode"
+                                         codeListValue="author">author</cit:CI_RoleCode>
+                    </cit:role>
+                    <cit:party>
+                        <cit:CI_Organisation>
+                            <cit:name>
+                                <gco:CharacterString>Australian National University</gco:CharacterString>
+                            </cit:name>
+                            <cit:contactInfo>
+                                <cit:CI_Contact>
+                                    <cit:phone>
+                                        <cit:CI_Telephone>
+                                            <cit:number>
+                                                <gco:CharacterString/>
+                                            </cit:number>
+                                            <cit:numberType>
+                                                <cit:CI_TelephoneTypeCode codeList="https://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_TelephoneTypeCode"
+                                                                          codeListValue="voice">voice</cit:CI_TelephoneTypeCode>
+                                            </cit:numberType>
+                                        </cit:CI_Telephone>
+                                    </cit:phone>
+                                    <cit:phone>
+                                        <cit:CI_Telephone>
+                                            <cit:number>
+                                                <gco:CharacterString/>
+                                            </cit:number>
+                                            <cit:numberType>
+                                                <cit:CI_TelephoneTypeCode codeList="https://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_TelephoneTypeCode"
+                                                                          codeListValue="facsimile">facsimile</cit:CI_TelephoneTypeCode>
+                                            </cit:numberType>
+                                        </cit:CI_Telephone>
+                                    </cit:phone>
+                                    <cit:address>
+                                        <cit:CI_Address>
+                                            <cit:deliveryPoint gco:nilReason="missing">
+                                                <gco:CharacterString/>
+                                            </cit:deliveryPoint>
+                                            <cit:administrativeArea gco:nilReason="missing">
+                                                <gco:CharacterString/>
+                                            </cit:administrativeArea>
+                                            <cit:city>
+                                                <gco:CharacterString>Canberra, ACT</gco:CharacterString>
+                                            </cit:city>
+                                            <cit:postalCode>
+                                                <gco:CharacterString>0200</gco:CharacterString>
+                                            </cit:postalCode>
+                                            <cit:country>
+                                                <gco:CharacterString>Australia</gco:CharacterString>
+                                            </cit:country>
+                                            <cit:electronicMailAddress gco:nilReason="missing">
+                                                <gco:CharacterString/>
+                                            </cit:electronicMailAddress>
+                                        </cit:CI_Address>
+                                    </cit:address>
+                                </cit:CI_Contact>
+                            </cit:contactInfo>
+                            <cit:individual>
+                                <cit:CI_Individual>
+                                    <cit:name>
+                                        <gco:CharacterString>Australian National University</gco:CharacterString>
+                                    </cit:name>
+                                    <cit:positionName gco:nilReason="missing">
+                                        <gco:CharacterString/>
+                                    </cit:positionName>
+                                </cit:CI_Individual>
+                            </cit:individual>
+                        </cit:CI_Organisation>
+                    </cit:party>
+                </cit:CI_Responsibility>
+            </mri:pointOfContact>
+            <mri:pointOfContact>
+                <cit:CI_Responsibility>
+                    <cit:role>
+                        <cit:CI_RoleCode codeList="https://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode"
+                                         codeListValue="author">author</cit:CI_RoleCode>
+                    </cit:role>
+                    <cit:party>
+                        <cit:CI_Organisation>
+                            <cit:name>
+                                <gco:CharacterString>Australian National University</gco:CharacterString>
+                            </cit:name>
+                            <cit:contactInfo>
+                                <cit:CI_Contact>
+                                    <cit:phone>
+                                        <cit:CI_Telephone>
+                                            <cit:number>
+                                                <gco:CharacterString/>
+                                            </cit:number>
+                                            <cit:numberType>
+                                                <cit:CI_TelephoneTypeCode codeList="https://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_TelephoneTypeCode"
+                                                                          codeListValue="voice">voice</cit:CI_TelephoneTypeCode>
+                                            </cit:numberType>
+                                        </cit:CI_Telephone>
+                                    </cit:phone>
+                                    <cit:phone>
+                                        <cit:CI_Telephone>
+                                            <cit:number>
+                                                <gco:CharacterString/>
+                                            </cit:number>
+                                            <cit:numberType>
+                                                <cit:CI_TelephoneTypeCode codeList="https://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_TelephoneTypeCode"
+                                                                          codeListValue="facsimile">facsimile</cit:CI_TelephoneTypeCode>
+                                            </cit:numberType>
+                                        </cit:CI_Telephone>
+                                    </cit:phone>
+                                    <cit:address>
+                                        <cit:CI_Address>
+                                            <cit:deliveryPoint gco:nilReason="missing">
+                                                <gco:CharacterString/>
+                                            </cit:deliveryPoint>
+                                            <cit:administrativeArea gco:nilReason="missing">
+                                                <gco:CharacterString/>
+                                            </cit:administrativeArea>
+                                            <cit:city>
+                                                <gco:CharacterString>Canberra, ACT</gco:CharacterString>
+                                            </cit:city>
+                                            <cit:postalCode>
+                                                <gco:CharacterString>0200</gco:CharacterString>
+                                            </cit:postalCode>
+                                            <cit:country>
+                                                <gco:CharacterString>Australia</gco:CharacterString>
+                                            </cit:country>
+                                            <cit:electronicMailAddress>
+                                                <gco:CharacterString>Andrew.Kiss@anu.edu.au</gco:CharacterString>
+                                            </cit:electronicMailAddress>
+                                        </cit:CI_Address>
+                                    </cit:address>
+                                </cit:CI_Contact>
+                            </cit:contactInfo>
+                            <cit:individual>
+                                <cit:CI_Individual>
+                                    <cit:name>
+                                        <gco:CharacterString>Andrew Kiss</gco:CharacterString>
+                                    </cit:name>
+                                    <cit:positionName gco:nilReason="missing">
+                                        <gco:CharacterString/>
+                                    </cit:positionName>
+                                </cit:CI_Individual>
+                            </cit:individual>
+                        </cit:CI_Organisation>
+                    </cit:party>
+                </cit:CI_Responsibility>
+            </mri:pointOfContact>
+            <mri:pointOfContact>
+                <cit:CI_Responsibility>
+                    <cit:role>
+                        <cit:CI_RoleCode codeList="https://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode"
+                                         codeListValue="author">author</cit:CI_RoleCode>
+                    </cit:role>
+                    <cit:party>
+                        <cit:CI_Organisation>
+                            <cit:name>
+                                <gco:CharacterString>Australian National University</gco:CharacterString>
+                            </cit:name>
+                            <cit:contactInfo>
+                                <cit:CI_Contact>
+                                    <cit:phone>
+                                        <cit:CI_Telephone>
+                                            <cit:number>
+                                                <gco:CharacterString/>
+                                            </cit:number>
+                                            <cit:numberType>
+                                                <cit:CI_TelephoneTypeCode codeList="https://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_TelephoneTypeCode"
+                                                                          codeListValue="voice">voice</cit:CI_TelephoneTypeCode>
+                                            </cit:numberType>
+                                        </cit:CI_Telephone>
+                                    </cit:phone>
+                                    <cit:phone>
+                                        <cit:CI_Telephone>
+                                            <cit:number>
+                                                <gco:CharacterString/>
+                                            </cit:number>
+                                            <cit:numberType>
+                                                <cit:CI_TelephoneTypeCode codeList="https://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_TelephoneTypeCode"
+                                                                          codeListValue="facsimile">facsimile</cit:CI_TelephoneTypeCode>
+                                            </cit:numberType>
+                                        </cit:CI_Telephone>
+                                    </cit:phone>
+                                    <cit:address>
+                                        <cit:CI_Address>
+                                            <cit:deliveryPoint gco:nilReason="missing">
+                                                <gco:CharacterString/>
+                                            </cit:deliveryPoint>
+                                            <cit:administrativeArea gco:nilReason="missing">
+                                                <gco:CharacterString/>
+                                            </cit:administrativeArea>
+                                            <cit:city>
+                                                <gco:CharacterString>Canberra, ACT</gco:CharacterString>
+                                            </cit:city>
+                                            <cit:postalCode>
+                                                <gco:CharacterString>0200</gco:CharacterString>
+                                            </cit:postalCode>
+                                            <cit:country>
+                                                <gco:CharacterString>Australia</gco:CharacterString>
+                                            </cit:country>
+                                            <cit:electronicMailAddress>
+                                                <gco:CharacterString>Andy.Hogg@anu.edu.au,</gco:CharacterString>
+                                            </cit:electronicMailAddress>
+                                        </cit:CI_Address>
+                                    </cit:address>
+                                </cit:CI_Contact>
+                            </cit:contactInfo>
+                            <cit:individual>
+                                <cit:CI_Individual>
+                                    <cit:name>
+                                        <gco:CharacterString>Andrew Hogg</gco:CharacterString>
+                                    </cit:name>
+                                    <cit:positionName gco:nilReason="missing">
+                                        <gco:CharacterString/>
+                                    </cit:positionName>
+                                </cit:CI_Individual>
+                            </cit:individual>
+                        </cit:CI_Organisation>
+                    </cit:party>
+                </cit:CI_Responsibility>
+            </mri:pointOfContact>
+            <mri:topicCategory>
+                <mri:MD_TopicCategoryCode>oceans</mri:MD_TopicCategoryCode>
+            </mri:topicCategory>
+            <mri:extent>
+                <gex:EX_Extent>
+                    <gex:description gco:nilReason="missing"/>
+                    <gex:geographicElement>
+                        <gex:EX_GeographicBoundingBox>
+                            <gex:extentTypeCode gco:nilReason="missing"/>
+                            <gex:westBoundLongitude>
+                                <gco:Decimal>-280</gco:Decimal>
+                            </gex:westBoundLongitude>
+                            <gex:eastBoundLongitude>
+                                <gco:Decimal>80</gco:Decimal>
+                            </gex:eastBoundLongitude>
+                            <gex:southBoundLatitude>
+                                <gco:Decimal>-82</gco:Decimal>
+                            </gex:southBoundLatitude>
+                            <gex:northBoundLatitude>
+                                <gco:Decimal>90</gco:Decimal>
+                            </gex:northBoundLatitude>
+                        </gex:EX_GeographicBoundingBox>
+                        <gex:temporalElement>
+                            <gex:EX_TemporalExtent id="temporalExtent">
+                                <gex:extent>
+                                    <TimePeriod xmlns="http://www.opengis.net/gml/3.2" gml:id="boundingTemporalExtentPeriod">
+                                        <beginPosition>1958-01-01</beginPosition>
+                                        <endPosition>2018-12-31</endPosition>
+                                    </TimePeriod>
+                                </gex:extent>
+                            </gex:EX_TemporalExtent>
+                        </gex:temporalElement>
+                    </gex:geographicElement>
+                </gex:EX_Extent>
+            </mri:extent>
+            <mri:resourceMaintenance>
+                <mmi:MD_MaintenanceInformation>
+                    <mmi:maintenanceAndUpdateFrequency>
+                        <mmi:MD_MaintenanceFrequencyCode codeList="http://www.isotc211.org/2005/resources/codeList.xml#MD_MaintenanceFrequencyCode"
+                                                         codeListValue="notPlanned">notPlanned</mmi:MD_MaintenanceFrequencyCode>
+                    </mmi:maintenanceAndUpdateFrequency>
+                </mmi:MD_MaintenanceInformation>
+            </mri:resourceMaintenance>
+            <mri:resourceFormat>
+                <mrd:MD_Format>
+                    <mrd:formatSpecificationCitation>
+                        <cit:CI_Citation>
+                            <cit:title>
+                                <gco:CharacterString/>
+                            </cit:title>
+                            <cit:date gco:nilReason="unknown"/>
+                            <cit:edition>
+                                <gco:CharacterString/>
+                            </cit:edition>
+                        </cit:CI_Citation>
+                    </mrd:formatSpecificationCitation>
+                </mrd:MD_Format>
+                <mrd:MD_Format>
+                    <mrd:formatSpecificationCitation>
+                        <cit:CI_Citation>
+                            <cit:title>
+                                <gco:CharacterString/>
+                            </cit:title>
+                            <cit:date gco:nilReason="unknown"/>
+                            <cit:edition>
+                                <gco:CharacterString/>
+                            </cit:edition>
+                        </cit:CI_Citation>
+                    </mrd:formatSpecificationCitation>
+                </mrd:MD_Format>
+            </mri:resourceFormat>
+            <mri:descriptiveKeywords>
+                <mri:MD_Keywords>
+                    <mri:keyword>
+                        <gco:CharacterString/>
+                    </mri:keyword>
+                </mri:MD_Keywords>
+            </mri:descriptiveKeywords>
+            <mri:descriptiveKeywords>
+                <mri:MD_Keywords>
+                    <mri:keyword>
+                        <gco:CharacterString/>
+                    </mri:keyword>
+                </mri:MD_Keywords>
+            </mri:descriptiveKeywords>
+            <mri:resourceSpecificUsage>
+                <mri:MD_Usage>
+                    <mri:nci_source_id>
+                        <gco:CharacterString/>
+                    </mri:nci_source_id>
+                    <mri:nci_source_provider>
+                        <gco:CharacterString/>
+                    </mri:nci_source_provider>
+                    <mri:nci_date_harvest>
+                        <gco:CharacterString>0000-00-00 00:00:00</gco:CharacterString>
+                    </mri:nci_date_harvest>
+                    <mri:nci_data_link>
+                        <gco:CharacterString/>
+                    </mri:nci_data_link>
+                    <mri:abs_code>
+                        <gco:CharacterString>0405</gco:CharacterString>
+                    </mri:abs_code>
+                    <mri:abs_code_description>
+                        <gco:CharacterString>Oceanography</gco:CharacterString>
+                    </mri:abs_code_description>
+                    <mri:system_version>
+                        <gco:CharacterString>7</gco:CharacterString>
+                    </mri:system_version>
+                    <mri:resource_identifier_code>
+                        <gco:CharacterString/>
+                    </mri:resource_identifier_code>
+                    <mri:resource_identifier_codespace>
+                        <gco:CharacterString/>
+                    </mri:resource_identifier_codespace>
+                    <mri:character_set>
+                        <gco:CharacterString/>
+                    </mri:character_set>
+                    <mri:dataset_status>
+                        <gco:CharacterString>completed</gco:CharacterString>
+                    </mri:dataset_status>
+                </mri:MD_Usage>
+            </mri:resourceSpecificUsage>
+            <mri:resourceConstraints>
+                <mco:MD_LegalConstraints>
+                    <mco:useLimitation>
+                        <gco:CharacterString>Attribution-NonCommercial-NoDerivatives 4.0 International (http://creativecommons.org/licenses/by-nc-nd/4.0/legalcode)&#xD;
+                            &#xD;
+                            We request that users of this or other ACCESS-OM2 model code or output data:&#xD;
+                            &#xD;
+                            &#xD;
+                            (a) consider citing Kiss et al. (2020) [http://doi.org/10.5194/gmd-13-401-2020 ]&#xD;
+                            &#xD;
+                            &#xD;
+                            (b) include an acknowledgement such as the following:&#xD;
+                            "The authors thank the Consortium for Ocean-Sea Ice Modelling in Australia (COSIMA; http://www.cosima.org.au)&#xD;
+                            for making the ACCESS-OM2 suite of models available at https://github.com/COSIMA/access-om2.&#xD;
+                            Model runs were undertaken with the assistance of resources from the National Computational Infrastructure (NCI),&#xD;
+                            which is supported by the Australian Government."&#xD;
+                            &#xD;
+                            &#xD;
+                            (c) let us know of any publications which use these models or data so we can add them to our list: https://scholar.google.com/citations?hl=en&amp;user=inVqu_4AAAAJ</gco:CharacterString>
+                    </mco:useLimitation>
+                    <mco:accessConstraints>
+                        <mco:MD_RestrictionCode codeList="http://www.isotc211.org/2005/resources/codeList.xml#MD_RestrictionCode"
+                                                codeListValue="license">license</mco:MD_RestrictionCode>
+                    </mco:accessConstraints>
+                </mco:MD_LegalConstraints>
+            </mri:resourceConstraints>
+            <mri:resourceConstraints>
+                <mco:MD_LegalConstraints>
+                    <mco:useConstraints>
+                        <mco:MD_RestrictionCode codeList="http://www.isotc211.org/2005/resources/codeList.xml#MD_RestrictionCode"
+                                                codeListValue="license">license</mco:MD_RestrictionCode>
+                    </mco:useConstraints>
+                    <mco:useConstraints>
+                        <mco:MD_RestrictionCode codeList="http://www.isotc211.org/2005/resources/codeList.xml#MD_RestrictionCode"
+                                                codeListValue="license">license</mco:MD_RestrictionCode>
+                    </mco:useConstraints>
+                </mco:MD_LegalConstraints>
+            </mri:resourceConstraints>
+            <mri:resourceConstraints>
+                <mco:MD_SecurityConstraints>
+                    <mco:classification>
+                        <mco:MD_ClassificationCode codeList="http://www.isotc211.org/2005/resources/codeList.xml#MD_ClassificationCode"
+                                                   codeListValue="unclassified">unclassified</mco:MD_ClassificationCode>
+                    </mco:classification>
+                </mco:MD_SecurityConstraints>
+            </mri:resourceConstraints>
+            <mri:defaultLocale>
+                <lan:PT_Locale/>
+            </mri:defaultLocale>
+            <mri:supplementalInformation>
+                <gco:CharacterString/>
+            </mri:supplementalInformation>
+        </mri:MD_DataIdentification>
+    </mdb:identificationInfo>
+    <mdb:distributionInfo>
+        <mrd:MD_Distribution>
+            <mrd:distributionFormat>
+                <mrd:MD_Format>
+                    <mrd:formatSpecificationCitation>
+                        <cit:CI_Citation>
+                            <cit:title>
+                                <gco:CharacterString>NetCDF4</gco:CharacterString>
+                            </cit:title>
+                            <cit:date gco:nilReason="unknown"/>
+                            <cit:edition>
+                                <gco:CharacterString/>
+                            </cit:edition>
+                        </cit:CI_Citation>
+                    </mrd:formatSpecificationCitation>
+                    <mrd:formatDistributor>
+                        <mrd:MD_Distributor>
+                            <mrd:distributorContact>
+                                <cit:CI_Responsibility>
+                                    <cit:party>
+                                        <cit:CI_Organisation>
+                                            <cit:name>
+                                                <gco:CharacterString/>
+                                            </cit:name>
+                                            <cit:contactInfo>
+                                                <cit:CI_Contact>
+                                                    <cit:phone>
+                                                        <cit:CI_Telephone>
+                                                            <cit:number>
+                                                                <gco:CharacterString/>
+                                                            </cit:number>
+                                                            <cit:numberType>
+                                                                <cit:CI_TelephoneTypeCode codeList="https://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_TelephoneTypeCode"
+                                                                                          codeListValue="voice">voice</cit:CI_TelephoneTypeCode>
+                                                            </cit:numberType>
+                                                        </cit:CI_Telephone>
+                                                    </cit:phone>
+                                                    <cit:phone>
+                                                        <cit:CI_Telephone>
+                                                            <cit:number>
+                                                                <gco:CharacterString/>
+                                                            </cit:number>
+                                                            <cit:numberType>
+                                                                <cit:CI_TelephoneTypeCode codeList="https://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_TelephoneTypeCode"
+                                                                                          codeListValue="facsimile">facsimile</cit:CI_TelephoneTypeCode>
+                                                            </cit:numberType>
+                                                        </cit:CI_Telephone>
+                                                    </cit:phone>
+                                                    <cit:address>
+                                                        <cit:CI_Address>
+                                                            <cit:deliveryPoint>
+                                                                <gco:CharacterString/>
+                                                            </cit:deliveryPoint>
+                                                            <cit:administrativeArea>
+                                                                <gco:CharacterString/>
+                                                            </cit:administrativeArea>
+                                                            <cit:city>
+                                                                <gco:CharacterString/>
+                                                            </cit:city>
+                                                            <cit:postalCode>
+                                                                <gco:CharacterString/>
+                                                            </cit:postalCode>
+                                                            <cit:country>
+                                                                <gco:CharacterString/>
+                                                            </cit:country>
+                                                            <cit:electronicMailAddress>
+                                                                <gco:CharacterString/>
+                                                            </cit:electronicMailAddress>
+                                                        </cit:CI_Address>
+                                                    </cit:address>
+                                                </cit:CI_Contact>
+                                            </cit:contactInfo>
+                                            <cit:individual>
+                                                <cit:CI_Individual>
+                                                    <cit:name>
+                                                        <gco:CharacterString/>
+                                                    </cit:name>
+                                                    <cit:positionName>
+                                                        <gco:CharacterString/>
+                                                    </cit:positionName>
+                                                </cit:CI_Individual>
+                                            </cit:individual>
+                                        </cit:CI_Organisation>
+                                    </cit:party>
+                                </cit:CI_Responsibility>
+                            </mrd:distributorContact>
+                        </mrd:MD_Distributor>
+                    </mrd:formatDistributor>
+                </mrd:MD_Format>
+            </mrd:distributionFormat>
+            <mrd:distributionFormat>
+                <mrd:MD_Format>
+                    <mrd:formatSpecificationCitation>
+                        <cit:CI_Citation>
+                            <cit:title>
+                                <gco:CharacterString/>
+                            </cit:title>
+                            <cit:date gco:nilReason="unknown"/>
+                            <cit:edition>
+                                <gco:CharacterString/>
+                            </cit:edition>
+                        </cit:CI_Citation>
+                    </mrd:formatSpecificationCitation>
+                    <mrd:formatDistributor>
+                        <mrd:MD_Distributor>
+                            <mrd:distributorContact>
+                                <cit:CI_Responsibility>
+                                    <cit:party>
+                                        <cit:CI_Organisation>
+                                            <cit:name>
+                                                <gco:CharacterString/>
+                                            </cit:name>
+                                            <cit:contactInfo>
+                                                <cit:CI_Contact>
+                                                    <cit:phone>
+                                                        <cit:CI_Telephone>
+                                                            <cit:number>
+                                                                <gco:CharacterString/>
+                                                            </cit:number>
+                                                            <cit:numberType>
+                                                                <cit:CI_TelephoneTypeCode codeList="https://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_TelephoneTypeCode"
+                                                                                          codeListValue="voice">voice</cit:CI_TelephoneTypeCode>
+                                                            </cit:numberType>
+                                                        </cit:CI_Telephone>
+                                                    </cit:phone>
+                                                    <cit:phone>
+                                                        <cit:CI_Telephone>
+                                                            <cit:number>
+                                                                <gco:CharacterString/>
+                                                            </cit:number>
+                                                            <cit:numberType>
+                                                                <cit:CI_TelephoneTypeCode codeList="https://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_TelephoneTypeCode"
+                                                                                          codeListValue="facsimile">facsimile</cit:CI_TelephoneTypeCode>
+                                                            </cit:numberType>
+                                                        </cit:CI_Telephone>
+                                                    </cit:phone>
+                                                    <cit:address>
+                                                        <cit:CI_Address>
+                                                            <cit:deliveryPoint>
+                                                                <gco:CharacterString/>
+                                                            </cit:deliveryPoint>
+                                                            <cit:administrativeArea>
+                                                                <gco:CharacterString/>
+                                                            </cit:administrativeArea>
+                                                            <cit:city>
+                                                                <gco:CharacterString/>
+                                                            </cit:city>
+                                                            <cit:postalCode>
+                                                                <gco:CharacterString/>
+                                                            </cit:postalCode>
+                                                            <cit:country>
+                                                                <gco:CharacterString/>
+                                                            </cit:country>
+                                                            <cit:electronicMailAddress>
+                                                                <gco:CharacterString/>
+                                                            </cit:electronicMailAddress>
+                                                        </cit:CI_Address>
+                                                    </cit:address>
+                                                </cit:CI_Contact>
+                                            </cit:contactInfo>
+                                            <cit:individual>
+                                                <cit:CI_Individual>
+                                                    <cit:name>
+                                                        <gco:CharacterString/>
+                                                    </cit:name>
+                                                    <cit:positionName>
+                                                        <gco:CharacterString/>
+                                                    </cit:positionName>
+                                                </cit:CI_Individual>
+                                            </cit:individual>
+                                        </cit:CI_Organisation>
+                                    </cit:party>
+                                </cit:CI_Responsibility>
+                            </mrd:distributorContact>
+                            <mrd:distributorTransferOptions>
+                                <mrd:MD_DigitalTransferOptions>
+                                    <mrd:onLine>
+                                        <cit:CI_OnlineResource>
+                                            <cit:linkage>
+                                                <gco:CharacterString>https://thredds.nci.org.au/thredds/catalog/catalogs/cj50/access-om2/raw-output/access-om2-01/access-om2-01.html</gco:CharacterString>
+                                            </cit:linkage>
+                                            <cit:protocol>
+                                                <gco:CharacterString>WWW:DOWNLOAD-1.0-http--download</gco:CharacterString>
+                                            </cit:protocol>
+                                            <cit:name>
+                                                <gco:CharacterString>NCI THREDDS Data Server</gco:CharacterString>
+                                            </cit:name>
+                                            <cit:description>
+                                                <gco:CharacterString/>
+                                            </cit:description>
+                                            <cit:function>
+                                                <cit:CI_OnLineFunctionCode codeList="http://www.isotc211.org/2005/resources/codeList.xml#CI_OnLineFunctionCode"
+                                                                           codeListValue="download">download</cit:CI_OnLineFunctionCode>
+                                            </cit:function>
+                                        </cit:CI_OnlineResource>
+                                    </mrd:onLine>
+                                </mrd:MD_DigitalTransferOptions>
+                            </mrd:distributorTransferOptions>
+                        </mrd:MD_Distributor>
+                    </mrd:formatDistributor>
+                </mrd:MD_Format>
+            </mrd:distributionFormat>
+            <mrd:distributor>
+                <mrd:MD_Distributor>
+                    <mrd:distributionOrderProcess>
+                        <mrd:MD_StandardOrderProcess>
+                            <mrd:plannedAvailableDateTime>
+                                <gco:CharacterString/>
+                            </mrd:plannedAvailableDateTime>
+                            <mrd:orderingInstructions>
+                                <gco:CharacterString/>
+                            </mrd:orderingInstructions>
+                            <mrd:transferSize>
+                                <gco:CharacterString/>
+                            </mrd:transferSize>
+                        </mrd:MD_StandardOrderProcess>
+                    </mrd:distributionOrderProcess>
+                </mrd:MD_Distributor>
+            </mrd:distributor>
+            <mrd:distributorTransferOptions>
+                <mrd:MD_DigitalTransferOptions>
+                    <mrd:offLine>
+                        <mrd:MD_Medium>
+                            <mrd:mediumName>
+                                <gco:CharacterString>/g/data/cj50/access-om2/raw-output/access-om2-01</gco:CharacterString>
+                            </mrd:mediumName>
+                        </mrd:MD_Medium>
+                    </mrd:offLine>
+                </mrd:MD_DigitalTransferOptions>
+            </mrd:distributorTransferOptions>
+        </mrd:MD_Distribution>
+    </mdb:distributionInfo>
+    <mdb:resourceLineage>
+        <mrl:LI_Lineage>
+            <mrl:statement>
+                <gco:CharacterString>ACCESS-OM2-01 model simulations&#xD;
+                    &#xD;
+                    A. E. KISS, A. McC. HOGG &amp; 28 others (2020). ACCESS-OM2: A Global Ocean-Sea Ice Model at Three Resolutions, Geosci. Model Dev., Geosci. Model Dev., 13, 401-442, doi: http://doi.org/10.5194/gmd-13-401-2020.&#xD;
+                    &#xD;
+                    Source code: https://github.com/COSIMA/access-om2&#xD;
+                    &#xD;
+                    Branches containing the configuration and history for these experiments:&#xD;
+                    https://github.com/COSIMA/01deg_jra55_iaf/tree/01deg_jra55v140_iaf&#xD;
+                    &#xD;
+                    https://github.com/COSIMA/01deg_jra55_iaf/tree/01deg_jra55v140_iaf_cycle2&#xD;
+                    &#xD;
+                    https://github.com/COSIMA/01deg_jra55_iaf/tree/01deg_jra55v140_iaf_cycle3&#xD;
+                    &#xD;
+                    https://github.com/COSIMA/01deg_jra55_iaf/tree/01deg_jra55v140_iaf_cycle4</gco:CharacterString>
+            </mrl:statement>
+            <mrl:scope>
+                <mcc:MD_Scope/>
+            </mrl:scope>
+        </mrl:LI_Lineage>
+    </mdb:resourceLineage>
+    <mdb:metadataConstraints>
+        <mco:MD_SecurityConstraints>
+            <mco:classification>
+                <mco:MD_ClassificationCode codeList="http://www.isotc211.org/2005/resources/codeList.xml#MD_ClassificationCode"
+                                           codeListValue="unclassified">unclassified</mco:MD_ClassificationCode>
+            </mco:classification>
+        </mco:MD_SecurityConstraints>
+    </mdb:metadataConstraints>
+    <mdb:metadataConstraints>
+        <mco:MD_LegalConstraints>
+            <mco:accessConstraints>
+                <mco:MD_RestrictionCode codeList="http://www.isotc211.org/2005/resources/codeList.xml#MD_RestrictionCode"
+                                        codeListValue=""/>
+            </mco:accessConstraints>
+        </mco:MD_LegalConstraints>
+    </mdb:metadataConstraints>
+    <mdb:metadataConstraints>
+        <mco:MD_LegalConstraints>
+            <mco:useConstraints>
+                <mco:MD_RestrictionCode codeList="http://www.isotc211.org/2005/resources/codeList.xml#MD_RestrictionCode"
+                                        codeListValue="license">license</mco:MD_RestrictionCode>
+            </mco:useConstraints>
+        </mco:MD_LegalConstraints>
+    </mdb:metadataConstraints>
+</mdb:MD_Metadata>
