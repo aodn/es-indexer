@@ -15,6 +15,10 @@
     },
     "creation" : "2020-07-13T15:06:31",
     "revision" : "2022-05-13T03:40:21",
+    "temporal" : [ {
+      "start" : "2010-01-21T01:00:00Z",
+      "end" : "2017-03-27T12:59:59Z"
+    } ],
     "dataset_group" : [ "sample" ],
     "dataset_provider" : "IMOS",
     "update_frequency" : "completed",
@@ -28,14 +32,10 @@
     "proj:geometry_noland" : {
       "geometries" : [ {
         "type" : "Polygon",
-        "coordinates" : [ [ [ 140.8, -38.064655571221934 ], [ 140.71355228000004, -38.070570570999905 ], [ 140.5937606130001, -38.03337981599992 ], [ 140.37086022200003, -37.89316171699994 ], [ 140.240570509, -37.665948174999926 ], [ 140.110199415, -37.57040780999995 ], [ 140.1142684250001, -37.517510674999926 ], [ 139.98804772200003, -37.4870744769999 ], [ 139.741547071, -37.18084075299993 ], [ 139.78834069100003, -37.12623463299991 ], [ 139.70341164602308, -37 ], [ 138.2, -37 ], [ 138.2, -39.4 ], [ 140.8, -39.4 ], [ 140.8, -38.064655571221934 ] ] ]
+        "coordinates" : [ [ [ 140.75, -39.5 ], [ 140.75, -38 ], [ 140.5, -38 ], [ 140.25, -38 ], [ 140.25, -37.75 ], [ 140, -37.5 ], [ 139.75, -37.25 ], [ 139.75, -37 ], [ 138.25, -37 ], [ 138.25, -39.5 ], [ 140.75, -39.5 ] ] ]
       } ],
       "type" : "GeometryCollection"
     },
-    "temporal" : [ {
-      "start" : "2010-01-21T01:00:00Z",
-      "end" : "2017-03-27T12:59:59Z"
-    } ],
     "parameter_vocabs" : [ "current", "coastal processes", "radio wave", "circulation" ],
     "platform_vocabs" : [ ],
     "organisation_vocabs" : [ "Integrated Marine Observing System (IMOS)" ]
@@ -46,9 +46,9 @@
     "position" : "Data Officer",
     "emails" : [ "info@aodn.org.au" ],
     "addresses" : [ {
-      "delivery_point" : [ "University of Tasmania", "Private Bag 110" ],
       "city" : "Hobart",
       "country" : "Australia",
+      "delivery_point" : [ "University of Tasmania", "Private Bag 110" ],
       "postal_code" : "7001",
       "administrative_area" : "Tasmania"
     } ],
@@ -70,9 +70,9 @@
     "position" : "Data Officer",
     "emails" : [ "info@aodn.org.au" ],
     "addresses" : [ {
-      "delivery_point" : [ "University of Tasmania", "Private Bag 110" ],
       "city" : "Hobart",
       "country" : "Australia",
+      "delivery_point" : [ "University of Tasmania", "Private Bag 110" ],
       "postal_code" : "7001",
       "administrative_area" : "Tasmania"
     } ],
@@ -93,9 +93,9 @@
     "organization" : "Integrated Marine Observing System (IMOS)",
     "emails" : [ "imos@imos.org.au" ],
     "addresses" : [ {
-      "delivery_point" : [ "Private Bag 110" ],
       "city" : "Hobart",
       "country" : "Australia",
+      "delivery_point" : [ "Private Bag 110" ],
       "postal_code" : "7001",
       "administrative_area" : "Tasmania"
     } ],
