@@ -5,6 +5,7 @@ import au.org.aodn.esindexer.Application;
 import au.org.aodn.esindexer.BaseTestClass;
 import au.org.aodn.esindexer.configuration.GeoNetworkSearchTestConfig;
 import au.org.aodn.esindexer.model.MockServer;
+import au.org.aodn.esindexer.utils.GeometryUtils;
 import co.elastic.clients.elasticsearch._types.query_dsl.TextQueryType;
 import co.elastic.clients.elasticsearch.core.search.Hit;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -145,7 +146,6 @@ public class IndexerServiceIT extends BaseTestClass {
 
             String expected = indexerObjectMapper.readTree(expectedData).toPrettyString();
             String actual = indexerObjectMapper.readTree(test).toPrettyString();
-            logger.info(actual);
             JSONAssert.assertEquals(expected, actual, JSONCompareMode.STRICT);
         } catch (JSONException e) {
             throw new RuntimeException(e);
@@ -371,7 +371,6 @@ public class IndexerServiceIT extends BaseTestClass {
 
             String expected = indexerObjectMapper.readTree(expectedData).toPrettyString();
             String actual = indexerObjectMapper.readTree(resultJson).toPrettyString();
-            logger.info(actual);
             JSONAssert.assertEquals(expected, actual, JSONCompareMode.STRICT);
         } catch (JSONException e) {
             throw new RuntimeException(e);
@@ -402,7 +401,6 @@ public class IndexerServiceIT extends BaseTestClass {
 
             String expected = indexerObjectMapper.readTree(expectedData).toPrettyString();
             String actual = indexerObjectMapper.readTree(test).toPrettyString();
-            logger.info(actual);
             JSONAssert.assertEquals(expected, actual, JSONCompareMode.STRICT);
         } catch (JSONException e) {
             throw new RuntimeException(e);
@@ -429,7 +427,6 @@ public class IndexerServiceIT extends BaseTestClass {
 
             String expected = indexerObjectMapper.readTree(expectedData).toPrettyString();
             String actual = indexerObjectMapper.readTree(test).toPrettyString();
-            logger.info(actual);
             JSONAssert.assertEquals(expected, actual, JSONCompareMode.STRICT);
         } catch (JSONException e) {
             throw new RuntimeException(e);
@@ -455,7 +452,6 @@ public class IndexerServiceIT extends BaseTestClass {
             String test = String.valueOf(Objects.requireNonNull(objectNodeHit.source()));
             String expected = indexerObjectMapper.readTree(expectedData).toPrettyString();
             String actual = indexerObjectMapper.readTree(test).toPrettyString();
-            logger.info(actual);
             JSONAssert.assertEquals(expected, actual, JSONCompareMode.STRICT);
         } catch (JSONException e) {
             throw new RuntimeException(e);
@@ -636,7 +632,6 @@ public class IndexerServiceIT extends BaseTestClass {
             deleteRecord(uuid);
         }
     }
-
     /**
      * Too big token generated will cause circuit break and crash Elastic search, we have set a limit in the
      * schema to only consider the first n token in the description, then we apply shingle without created output_unigrams
@@ -783,6 +778,32 @@ public class IndexerServiceIT extends BaseTestClass {
             Assertions.assertTrue(token.size() <= 1500, "Should not generate big token given larger desc");
         }
         finally {
+            deleteRecord(uuid);
+        }
+    }
+    /**
+     * Verifies that the parsing and indexing of metadata records into Elasticsearch produce the correct structure
+     * and content without any data related to "land". This ensures that records are accurately transformed into STAC
+     * (SpatioTemporal Asset Catalog) format during the indexing process. This sample has west=-280 east 80
+     *
+     * @throws IOException   If there is any issue reading resource files or interacting with the GeoNetwork/Elasticsearch systems.
+     * @throws JSONException If there is any issue during the comparison of JSON structures.
+     */
+    @Test
+    public void verifyNoLandParseCorrect() throws IOException, JSONException {
+        String uuid = "f1578_1461_5604_5121";
+        try {
+            String expectedData = readResourceFile("classpath:canned/sample26_stac.json");
+            insertMetadataRecords(uuid, "classpath:canned/sample26.xml");
+            indexerService.indexAllMetadataRecordsFromGeoNetwork(null,true, null);
+
+            Hit<ObjectNode> objectNodeHit = indexerService.getDocumentByUUID(uuid);
+
+            String test = String.valueOf(Objects.requireNonNull(objectNodeHit.source()));
+            String expected = indexerObjectMapper.readTree(expectedData).toPrettyString();
+            String actual = indexerObjectMapper.readTree(test).toPrettyString();
+            JSONAssert.assertEquals(expected, actual, JSONCompareMode.STRICT);
+        } finally {
             deleteRecord(uuid);
         }
     }
