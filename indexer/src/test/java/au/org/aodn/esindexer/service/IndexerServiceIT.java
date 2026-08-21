@@ -792,13 +792,16 @@ public class IndexerServiceIT extends BaseTestClass {
     public void verifyNoLandParseCorrect() throws IOException, JSONException {
         String uuid = "f1578_1461_5604_5121";
         try {
+            String expectedData = readResourceFile("classpath:canned/sample26_stac.json");
             insertMetadataRecords(uuid, "classpath:canned/sample26.xml");
             indexerService.indexAllMetadataRecordsFromGeoNetwork(null,true, null);
 
             Hit<ObjectNode> objectNodeHit = indexerService.getDocumentByUUID(uuid);
-            ObjectNode source = Objects.requireNonNull(objectNodeHit.source());
-            Assertions.assertFalse(source.path("summaries").path("proj:geometry_noland").isMissingNode(),
-                    "geometry_noland must index without geo_shape parse errors");
+
+            String test = String.valueOf(Objects.requireNonNull(objectNodeHit.source()));
+            String expected = indexerObjectMapper.readTree(expectedData).toPrettyString();
+            String actual = indexerObjectMapper.readTree(test).toPrettyString();
+            JSONAssert.assertEquals(expected, actual, JSONCompareMode.STRICT);
         } finally {
             deleteRecord(uuid);
         }
