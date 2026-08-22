@@ -270,11 +270,27 @@ public class GeometryUtils {
         return geometry;
     }
 
-    protected static Geometry dropInteriorRings(Geometry geometry) {
-        if (geometry instanceof Polygon polygon && polygon.getNumInteriorRing() > 0) {
-            return factory.createPolygon(polygon.getExteriorRing());
+    /**
+     * Precision reduce can snap an island hole onto the outer ring. JTS still reports
+     * isValid(); Lucene geo_shape treats the touch as a self-intersection. Keep holes
+     * that stay disjoint from the shell so existing regional records are unchanged.
+     */
+    protected static Geometry dropTouchingInteriorRings(Geometry geometry) {
+        if (!(geometry instanceof Polygon polygon) || polygon.getNumInteriorRing() == 0) {
+            return geometry;
         }
-        return geometry;
+        LinearRing shell = polygon.getExteriorRing();
+        List<LinearRing> holes = new ArrayList<>();
+        for (int i = 0; i < polygon.getNumInteriorRing(); i++) {
+            LinearRing hole = polygon.getInteriorRingN(i);
+            if (hole.disjoint(shell)) {
+                holes.add(hole);
+            }
+        }
+        if (holes.size() == polygon.getNumInteriorRing()) {
+            return polygon;
+        }
+        return factory.createPolygon(shell, holes.toArray(LinearRing[]::new));
     }
 
     /**
@@ -305,7 +321,7 @@ public class GeometryUtils {
                             .flatMap(Collection::stream)
                             // After precision reduce, holes often touch the shell. JTS isValid()
                             // allows that; Lucene geo_shape does not (e.g. lat=-67 lon=-67.5).
-                            .map(geometry -> reducer != null ? dropInteriorRings(geometry) : geometry)
+                            .map(geometry -> reducer != null ? dropTouchingInteriorRings(geometry) : geometry)
                             .map(GeometryUtils::makeValidGeometry)
                             .filter(g -> g != null && !g.isEmpty())
                             .toList()
