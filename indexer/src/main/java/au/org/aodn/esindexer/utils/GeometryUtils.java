@@ -25,6 +25,7 @@ import java.math.BigDecimal;
 import java.net.URL;
 import java.util.*;
 import java.util.function.BiFunction;
+import java.util.stream.Stream;
 
 public class GeometryUtils {
 
@@ -271,26 +272,22 @@ public class GeometryUtils {
     }
 
     /**
-     * Precision reduce can snap an island hole onto the outer ring. JTS still reports
-     * isValid(); Lucene geo_shape treats the touch as a self-intersection. Keep holes
-     * that stay disjoint from the shell so existing regional records are unchanged.
+     * Full-globe land-strip plus precision reduce produces island holes that touch the
+     * shell; Lucene geo_shape rejects those. Regional records keep holes (same as main).
      */
-    protected static Geometry dropTouchingInteriorRings(Geometry geometry) {
-        if (!(geometry instanceof Polygon polygon) || polygon.getNumInteriorRing() == 0) {
-            return geometry;
+    protected static Geometry dropInteriorRings(Geometry geometry) {
+        if (geometry instanceof Polygon polygon && polygon.getNumInteriorRing() > 0) {
+            return factory.createPolygon(polygon.getExteriorRing());
         }
-        LinearRing shell = polygon.getExteriorRing();
-        List<LinearRing> holes = new ArrayList<>();
-        for (int i = 0; i < polygon.getNumInteriorRing(); i++) {
-            LinearRing hole = polygon.getInteriorRingN(i);
-            if (hole.disjoint(shell)) {
-                holes.add(hole);
-            }
+        return geometry;
+    }
+
+    protected static boolean isFullGlobeEnvelope(Geometry geometry) {
+        if (geometry == null || geometry.isEmpty()) {
+            return false;
         }
-        if (holes.size() == polygon.getNumInteriorRing()) {
-            return polygon;
-        }
-        return factory.createPolygon(shell, holes.toArray(LinearRing[]::new));
+        Envelope envelope = geometry.getEnvelopeInternal();
+        return envelope.getWidth() >= 359 && envelope.getMinX() <= -180 && envelope.getMaxX() >= 180;
     }
 
     /**
@@ -307,23 +304,27 @@ public class GeometryUtils {
                             .filter(Objects::nonNull)
                             // Fix input topological errors (non-noded / self-intersect) before difference
                             .map(GeometryUtils::makeValidGeometry)
-                            // Special case where some spatial area do appear on land only, so if you make a diff and result is empty,
-                            // that means it is pure land area, in this case we should include it.
-                            .map(geometry -> {
+                            .flatMap(geometry -> {
+                                boolean fullGlobe = isFullGlobeEnvelope(geometry);
+                                // Special case where some spatial area do appear on land only, so if you make a diff and result is empty,
+                                // that means it is pure land area, in this case we should include it.
                                 Geometry withoutLand = geometry.difference(landGeometry);
-                                return withoutLand.isEmpty() ? geometry : withoutLand;
+                                Geometry result = withoutLand.isEmpty() ? geometry : withoutLand;
+                                result = makeValidGeometry(result);
+                                if (reducer != null) {
+                                    result = makeValidGeometry(reducer.reduce(result));
+                                }
+                                Stream<Geometry> parts = convertToListGeometry(result).stream();
+                                // Only sample26-style global extents need holes removed (Lucene
+                                // self-intersect at e.g. lat=-67 lon=-67.5). sample4 and similar
+                                // regional records must keep island holes to match main snapshots.
+                                if (fullGlobe && reducer != null) {
+                                    parts = parts.map(GeometryUtils::dropInteriorRings);
+                                }
+                                return parts
+                                        .map(GeometryUtils::makeValidGeometry)
+                                        .filter(g -> g != null && !g.isEmpty());
                             })
-                            // Difference / precision reduce can introduce self-intersections
-                            .map(GeometryUtils::makeValidGeometry)
-                            .map(geometry -> reducer != null ? reducer.reduce(geometry) : geometry)
-                            .map(GeometryUtils::makeValidGeometry)
-                            .map(GeometryUtils::convertToListGeometry)
-                            .flatMap(Collection::stream)
-                            // After precision reduce, holes often touch the shell. JTS isValid()
-                            // allows that; Lucene geo_shape does not (e.g. lat=-67 lon=-67.5).
-                            .map(geometry -> reducer != null ? dropTouchingInteriorRings(geometry) : geometry)
-                            .map(GeometryUtils::makeValidGeometry)
-                            .filter(g -> g != null && !g.isEmpty())
                             .toList()
                 )
                 .toList();
