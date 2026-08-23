@@ -188,6 +188,28 @@ public class GeometryUtilsTest {
     }
 
     /**
+     * f1578_1461_5604_5121 (sample26): west=-280, east=80. DEV uses coastalPrecision 0.5
+     * and reducerPrecision 4.0.
+     */
+    @Test
+    public void verifySample26NoLandGeometriesAreValidWithDevPrecision() throws IOException, JAXBException {
+        GeometryUtils.setReducerPrecision(4.0);
+        GeometryUtils.setCoastalPrecision(0.5);
+        GeometryUtils.init();
+
+        String xml = readResourceFile("classpath:canned/sample26.xml");
+        MDMetadataType source = jaxb.unmarshal(xml);
+
+        Map<?, ?> geoJson = GeometryUtils.createGeometryItems(
+                source,
+                GeometryUtils::createGeometryNoLandFrom,
+                null
+        );
+        Assertions.assertNotNull(geoJson, "createGeometryNoLandFrom must produce geojson");
+        Assertions.assertEquals("GeometryCollection", geoJson.get("type"));
+    }
+
+    /**
      * Given a point call this function return a GeometryCollection contain a single point
      */
     @Test
