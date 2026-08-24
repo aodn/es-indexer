@@ -806,4 +806,30 @@ public class IndexerServiceIT extends BaseTestClass {
             deleteRecord(uuid);
         }
     }
+    /**
+     * A special case where metadata has a very long statement not fit into the keyword type, a change
+     * is made to schema so "text" type so it can index correctly. The downside is we cannot sort or aggs
+     * with the statement field. Which seems ok as we do not sort and agg a statement field.
+     * This test makes sure it will fail if someone changes the schema to the "keyword" type.
+     * @throws IOException - Not expected to throw
+     * @throws JSONException - Not expected to throw
+     */
+    @Test
+    public void verifyVeryLongStatementParseCorrect() throws IOException, JSONException {
+        String uuid = "TNE_8A_acidification_microbes";
+        try {
+            String expectedData = readResourceFile("classpath:canned/sample27_stac.json");
+            insertMetadataRecords(uuid, "classpath:canned/sample27.xml");
+            indexerService.indexAllMetadataRecordsFromGeoNetwork(null,true, null);
+
+            Hit<ObjectNode> objectNodeHit = indexerService.getDocumentByUUID(uuid);
+
+            String test = String.valueOf(Objects.requireNonNull(objectNodeHit.source()));
+            String expected = indexerObjectMapper.readTree(expectedData).toPrettyString();
+            String actual = indexerObjectMapper.readTree(test).toPrettyString();
+            JSONAssert.assertEquals(expected, actual, JSONCompareMode.STRICT);
+        } finally {
+            deleteRecord(uuid);
+        }
+    }
 }
