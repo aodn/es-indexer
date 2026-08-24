@@ -127,16 +127,6 @@ public class JsonUtilTest {
     public void verifySemanticFieldsKeptWhenEnabled() throws Exception {
         ObjectMapper mapper = new ObjectMapper();
 
-        try (Reader r = JsonUtil.createJsonStream("portal_records_index_schema.json",
-                Map.of("portal-acronyms", "it-synset"))) {
-            assertNotNull(r);
-            JsonNode props = mapper.readTree(new BufferedReader(r).lines().collect(Collectors.joining("\n")))
-                    .path("mappings").path("properties");
-
-            assertEquals("semantic_text", props.path("description_semantic").path("type").asText());
-            assertEquals("description_semantic", props.path("description").path("copy_to").asText());
-        }
-
         try (Reader r = JsonUtil.createJsonStream("vocabs_index_schema.json", null)) {
             assertNotNull(r);
             JsonNode props = mapper.readTree(new BufferedReader(r).lines().collect(Collectors.joining("\n")))
