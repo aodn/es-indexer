@@ -160,17 +160,12 @@
       },
       "description": {
         "type": "text",
-        "copy_to": "description_semantic",
         "fields": {
           "synonyms": {
             "type": "text",
             "search_analyzer": "acronym_search_analyser"
           }
         }
-      },
-      "description_semantic": {
-        "type": "semantic_text",
-        "inference_id": ".elser-2-elasticsearch"
       },
       "license": {
         "type": "keyword",
