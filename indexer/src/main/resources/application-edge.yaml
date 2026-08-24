@@ -12,7 +12,7 @@ elasticsearch:
   acronyms:
     name: portal-acronyms-edge
   semantic:
-    enabled: false
+    enabled: true
 
 management:
   endpoints:
