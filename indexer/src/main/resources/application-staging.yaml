@@ -8,4 +8,4 @@ elasticsearch:
   acronyms:
     name: portal-acronyms-staging
   semantic:
-    enabled: false
+    enabled: true

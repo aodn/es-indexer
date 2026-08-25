@@ -8,4 +8,4 @@ elasticsearch:
   acronyms:
     name: portal-acronyms-production
   semantic:
-    enabled: false
+    enabled: true
