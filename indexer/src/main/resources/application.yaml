@@ -56,10 +56,6 @@ elasticsearch:
     name: portal-acronyms
     manual:
       - "nrmn => national reef monitoring network"
-  # semantic_text fields (concept_semantic, description_semantic) need the licensed `inference` feature.
-  # Switch it on for edge/staging/production.
-  semantic:
-    enabled: false
 
 aws:
   region: ap-southeast-2

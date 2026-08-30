@@ -80,51 +80,8 @@ public class JsonUtilTest {
         }
     }
 
-    /**
-     * semantic_text needs the licensed `inference` feature; on a basic-licence cluster an index carrying
-     * one rejects every document written to it. With semantic disabled the schema must come back with no
-     * semantic field and no dangling copy_to, while everything else stays intact.
-     */
     @Test
-    public void verifySemanticFieldsStrippedWhenDisabled() throws Exception {
-        ObjectMapper mapper = new ObjectMapper();
-
-        try (Reader r = JsonUtil.createJsonStream("portal_records_index_schema.json",
-                Map.of("portal-acronyms", "it-synset"), false)) {
-            assertNotNull(r);
-            JsonNode props = mapper.readTree(new BufferedReader(r).lines().collect(Collectors.joining("\n")))
-                    .path("mappings").path("properties");
-
-            assertTrue(props.path("description_semantic").isMissingNode(),
-                    "description_semantic must be gone when semantic is disabled");
-            assertFalse(props.path("description").has("copy_to"),
-                    "description.copy_to must go with the field it fed, or ES rejects the mapping");
-
-            // untouched neighbours
-            assertEquals("text", props.path("description").path("type").asText());
-            assertEquals("acronym_search_analyser",
-                    props.path("description").path("fields").path("synonyms").path("search_analyzer").asText());
-            assertEquals("keyword", props.path("parameter_vocabs").path("type").asText());
-        }
-
-        try (Reader r = JsonUtil.createJsonStream("vocabs_index_schema.json", null, false)) {
-            assertNotNull(r);
-            JsonNode props = mapper.readTree(new BufferedReader(r).lines().collect(Collectors.joining("\n")))
-                    .path("mappings").path("properties");
-
-            assertTrue(props.path("concept_semantic").isMissingNode(),
-                    "concept_semantic must be gone when semantic is disabled");
-            assertTrue(props.has("parameter_vocab"), "the rest of the vocabs mapping must survive");
-            assertTrue(props.has("platform_vocab"));
-            assertTrue(props.has("organisation_vocab"));
-        }
-    }
-
-    /**
-     * The default (and the licensed clusters) must still get the semantic fields.
-     */
-    @Test
-    public void verifySemanticFieldsKeptWhenEnabled() throws Exception {
+    public void verifySemanticFieldsPresentInSchema() throws Exception {
         ObjectMapper mapper = new ObjectMapper();
 
         try (Reader r = JsonUtil.createJsonStream("vocabs_index_schema.json", null)) {

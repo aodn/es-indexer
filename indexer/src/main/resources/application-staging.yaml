@@ -7,5 +7,3 @@ management:
 elasticsearch:
   acronyms:
     name: portal-acronyms-staging
-  semantic:
-    enabled: true
