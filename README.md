@@ -37,11 +37,13 @@ $ mvn clean install # [-DskipTests]
 If you do not use `-DskipTests`, then autotest will run where it will create a docker geonetwork instance, inject the
 sample data and then run the indexer. You can treat this as kind of integration testing.
 
-This project container 3 submodules:
-* **geonetwork** - This is used to compile JAXB lib to handle XML return from GEONetowrk, it is iso19115 standard
-* **stacmodel** - A group of java class that create the STAC json which store in elastic search, so if app needs to read
-  STAC from elastic, use this lib
-* **indexer** - The main app that do the transformation.
+This project contains these modules:
+* **geonetwork4-api** - JAXB bindings for ISO 19115 XML returned by GeoNetwork
+* **stacmodel** - Java types and index mapping JSON used to store STAC documents in Elasticsearch
+* **ardcvocabs** - ARDC vocabulary fetch and models (including `concept_semantic` for ELSER)
+* **cloudoptimized** - Cloud-optimised data indexing
+* **data-discovery-ai** - Optional AI enrichment of metadata links
+* **indexer** - The main Spring Boot app that transforms GeoNetwork records and writes the indices
 
 ### Docker
 
@@ -78,6 +80,18 @@ $ docker-compose -f docker-compose-dev.yaml up # [-d: in daemon mode | --build: 
 > * Method = POST
 
 ## Notes
+### Semantic search (ELSER)
+
+Index mappings always include Elasticsearch `semantic_text` fields (for example `concept_semantic` on the vocabs index, using inference id `.elser-2-elasticsearch`). There is no `elasticsearch.semantic.enabled` flag: the same schema is used in every environment.
+
+That feature needs a cluster with the licensed `inference` capability:
+
+* **Tests** start Testcontainers Elasticsearch with `xpack.license.self_generated.type=trial`. `InferenceIT` checks that a semantic query on vocabs returns results. Or you can use Kabana UI and enable the trail ML license.
+* **Edge / staging / production** already run on licensed Elastic Cloud.
+* **Local / `dev`** Elasticsearch must also use a trial (or equivalent) licence. A basic-licence node will reject index create or documents that use `semantic_text`.
+
+First-time inference can take a while while ELSER loads; integration tests wait for it.
+
 ### Centroid Calculation
 The calculation of centroid isn't happens here, the indexer creates a spatial extents area with land removed. The
 resulting spatial extents is store in geometry_noland. The centroid point is calculated in the OGC api, please refer
