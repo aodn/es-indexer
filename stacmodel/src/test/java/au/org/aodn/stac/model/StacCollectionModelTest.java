@@ -24,6 +24,7 @@ class StacCollectionModelTest {
     void serialize_emitsExpectedWireKeys() throws Exception {
         SummariesModel summaries = SummariesModel.builder()
                 .score(83)
+                .tier(2)
                 .status("completed")
                 .updateFrequency("completed")
                 .aiDescription("This record describes the End of Voyage archive from RV Investigator IN2019_V06.")
@@ -97,6 +98,7 @@ class StacCollectionModelTest {
         // SummariesModel ai:* / proj:* / snake_case keys
         JsonNode sum = tree.get("summaries");
         assertEquals(83, sum.get("score").asInt());
+        assertEquals(2, sum.get("tier").asInt());
         assertEquals("completed", sum.get("update_frequency").asText());
         assertTrue(sum.get("ai:description").asText().startsWith("This record describes"));
         assertTrue(sum.has("ai:parameter_vocabs"));

@@ -913,4 +913,40 @@ public class StacCollectionMapperServiceTest {
         verify(expected);
     }
 
+    protected int indexAndGetTier(String xmlResource) throws IOException {
+        String xml = readResourceFile(xmlResource);
+        indexerService.indexMetadata(xml);
+        return objectMapper.readTree(lastRequest.get().document().toString())
+                .get("summaries")
+                .get("tier")
+                .asInt();
+    }
+
+    /**
+     * A record whose resource scope is "document" is put in the document tier so that ogc-api can
+     * sort it below records that describe data.
+     * @throws IOException - Not expected to throw
+     */
+    @Test
+    public void verifyDocumentRecordGetsDocumentTier() throws IOException {
+        // sample22.xml declares MD_ScopeCode codeListValue="document" (name "IMOS Publication")
+        assertEquals(3, indexAndGetTier("classpath:canned/sample22.xml"));
+    }
+
+    /**
+     * Anything that is not a document falls back to the dataset tier, including records that
+     * declare no resource scope at all and the series/collection style records whose tier is not
+     * decided yet.
+     * @throws IOException - Not expected to throw
+     */
+    @Test
+    public void verifyNonDocumentRecordsGetDatasetTier() throws IOException {
+        // scope code "dataset"
+        assertEquals(2, indexAndGetTier("classpath:canned/sample7.xml"));
+        // scope code "series", an IMOS site level record
+        assertEquals(2, indexAndGetTier("classpath:canned/sample5.xml"));
+        // no mdb:metadataScope element at all
+        assertEquals(2, indexAndGetTier("classpath:canned/sample13.xml"));
+    }
+
 }

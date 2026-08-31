@@ -59,6 +59,7 @@ public abstract class StacCollectionMapperService {
     @Mapping(target="assets", source = "source", qualifiedByName = "assets")
     @Mapping(target="summaries.status", source = "source", qualifiedByName = "mapSummaries.status")
     @Mapping(target="summaries.scope", source = "source", qualifiedByName = "mapSummaries.scope")
+    @Mapping(target="summaries.tier", source = "source", qualifiedByName = "mapSummaries.tier")
     @Mapping(target="summaries.credits", source = "source", qualifiedByName = "mapSummaries.credits")
     @Mapping(target="summaries.geometry", source = "source", qualifiedByName = "mapSummaries.geometry")
     @Mapping(target="summaries.geometryNoLand", source = "source", qualifiedByName = "mapSummaries.geometryNoland")
@@ -72,6 +73,11 @@ public abstract class StacCollectionMapperService {
     public abstract StacCollectionModel mapToSTACCollection(MDMetadataType source);
 
     protected static final Logger logger = LogManager.getLogger(StacCollectionMapperService.class);
+
+    // Tier 1 is reserved for IMOS collection records, see createSummariesTier()
+    protected static final String DOCUMENT_SCOPE_CODE = "document";
+    protected static final int TIER_DATASET = 2;
+    protected static final int TIER_DOCUMENT = 3;
 
     @Value("${spring.jpa.properties.hibernate.jdbc.time_zone}")
     private String timeZoneId;
@@ -534,20 +540,37 @@ public abstract class StacCollectionMapperService {
     Map<String, String> createSummariesScope(MDMetadataType source) {
         List<MDMetadataScopeType> items = MapperUtils.findMDMetadataScopePropertyType(source);
         if (!items.isEmpty()) {
-            for (MDMetadataScopeType i : items) {
+            // A record may declare more than one scope, only the first is used, same as getScopeCode()
+            MDMetadataScopeType i = items.get(0);
 
-                Map<String, String> result = new HashMap<>();
-                CodeListValueType codeListValueType = i.getResourceScope().getMDScopeCode();
-                result.put("code", codeListValueType != null ? codeListValueType.getCodeListValue() : "");
-                CharacterStringPropertyType nameString = i.getName();
-                result.put("name", nameString != null ? nameString.getCharacterString().getValue().toString() : "");
+            Map<String, String> result = new HashMap<>();
+            String code = SummariesUtils.getScopeCode(source);
+            result.put("code", code != null ? code : "");
+            CharacterStringPropertyType nameString = i.getName();
+            result.put("name", nameString != null ? nameString.getCharacterString().getValue().toString() : "");
 
-                return result;
-            }
+            return result;
         }
 
         logger.warn("Unable to find scope metadata record: {}", CommonUtils.getUUID(source));
         return null;
+    }
+
+    /**
+     * The tier is used by ogc-api as a sort option so that documents rank below data. Every record
+     * gets a tier so the sort never has to deal with a missing value. Tier 1 is reserved for IMOS
+     * collection records, the selection criteria for those and for the IMOS facility/sub-facility
+     * records are not settled yet, so everything that is not a document falls back to the dataset
+     * tier.
+     *
+     * @param source - The parsed XML document
+     * @return - The tier of the record
+     */
+    @Named("mapSummaries.tier")
+    Integer createSummariesTier(MDMetadataType source) {
+        return DOCUMENT_SCOPE_CODE.equalsIgnoreCase(SummariesUtils.getScopeCode(source))
+                ? TIER_DOCUMENT
+                : TIER_DATASET;
     }
     /**
      * Custom mapping for title field, name convention is start with map then the field name
