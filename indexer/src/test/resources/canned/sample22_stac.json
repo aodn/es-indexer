@@ -7,6 +7,7 @@
   },
   "summaries" : {
     "score" : 1,
+    "tier" : 3,
     "status" : "onGoing",
     "credits" : [ "Australia’s Integrated Marine Observing System (IMOS) is enabled by the National Collaborative Research Infrastructure Strategy (NCRIS). It is operated by a consortium of institutions as an unincorporated joint venture, with the University of Tasmania as Lead Agent.", "CSIRO Marine and Atmospheric Research (CMAR) - Abell, G., Allen, S., Berry, K., Bonham, P., Clementson, L., Coman, F., Critchley, G., Frampton, D., Latham, V., Richardson, A., Robert, S., Terhell, D., Thompson, P.A., Tilbrook, B. and Sherrington, R.", "Flinders University and South Australian Research and Development Institute (SARDI) - Seuront, L.", "Department of Environment and Climate Change (DECC), New South Wales Government - Pritchard, T., Ingleton, T.", "Australian Institute of Marine Science (AIMS) - Bainbridge, S., Skuza, M., Steinberg, C.", "eMarine Information Infrastructure (eMII), Integrated Marine Observing System (IMOS) - Magierowski, R., Roberts, K., Tattersall, K.", "Integrated Marine Observing System (IMOS) - Hidas, M., Lara-Lopez, A.", "School of Biological, Earth and Environmental Sciences (BEES), The University of New South Wales (UNSW) - Suthers, I." ],
     "scope" : {

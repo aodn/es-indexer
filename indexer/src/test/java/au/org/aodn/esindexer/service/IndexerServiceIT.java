@@ -484,6 +484,36 @@ public class IndexerServiceIT extends BaseTestClass {
     }
 
     /**
+     * The tier must survive the real index mapping, it is what ogc-api sorts on so that documents
+     * rank below records that describe data.
+     * @throws IOException - If file not found
+     */
+    @Test
+    public void verifySummariesTierIndexed() throws IOException {
+        // sample22 declares resource scope "document", sample11 does not declare a scope at all
+        String documentUuid = "aa14b1a4-eb3f-4c6e-89a9-622c1f95bfb2";
+        String datasetUuid = "fa93c66e-0e56-7e1d-e043-08114f8c1b76";
+        try {
+            insertMetadataRecords(documentUuid, "classpath:canned/sample22.xml");
+            insertMetadataRecords(datasetUuid, "classpath:canned/sample11.xml");
+
+            indexerService.indexAllMetadataRecordsFromGeoNetwork(null, true, null);
+
+            JsonNode documentNode = indexerObjectMapper.readTree(
+                    String.valueOf(Objects.requireNonNull(indexerService.getDocumentByUUID(documentUuid).source())));
+            Assertions.assertEquals(3, documentNode.path("summaries").path("tier").asInt(),
+                    "Document record is not in the document tier.");
+
+            JsonNode datasetNode = indexerObjectMapper.readTree(
+                    String.valueOf(Objects.requireNonNull(indexerService.getDocumentByUUID(datasetUuid).source())));
+            Assertions.assertEquals(2, datasetNode.path("summaries").path("tier").asInt(),
+                    "Non document record is not in the dataset tier.");
+        } finally {
+            deleteRecord(documentUuid, datasetUuid);
+        }
+    }
+
+    /**
      * Verify extracted phrases from abstract (extractTokensFromDescription method)
      * @throws IOException - If file not found
      */

@@ -7,6 +7,7 @@
   },
   "summaries" : {
     "score" : 1,
+    "tier" : 2,
     "status" : "onGoing",
     "credits" : [ "These data are from the National Mooring Network, part of the Australia’s Integrated Marine Observing System (IMOS) is enabled by the National Collaborative Research Infrastructure Strategy (NCRIS). It is operated by a consortium of institutions as an unincorporated joint venture, with the University of Tasmania as Lead Agent.", "Operation of the National Reference Station (NRS) sampling and analyses is provided by the IMOS NRS Biogeochemical (BGC) project and is distributed between several operators and is coordinated nationally. Nutrient analyses (2009- ) performed by Val Latham (CMAR - Hobart) and Peter Hughes (CMAR - Floreat) Salinity and oxygen analyses (2009- ) performed by Val Latham (CMAR - Hobart) Carbon and Alkalinity analyses (2009- ) performed by Kate Berry (CMAR - Hobart)" ],
     "statement" : "Sampling is conducted monthly (Esperance and Ningaloo 3 monthly) off small vessels. Depths sampled range from surface to 105 metres depending on the site and depths are usually sampled at 10 metre intervals. The nutrient analyses is performed at CMAR Hobart and Floreat laboratories. Full details are documented in the “IMOS National Reference Stations Biogeochemical Operations Manual”. Data is archived in the ORABN1:PLANKTON_NRS_ENV database at CMAR Dutton Park. Data is also exported to IMOS and made available via the AODN portal.",
