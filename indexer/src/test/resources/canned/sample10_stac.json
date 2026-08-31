@@ -7,6 +7,7 @@
   },
   "summaries" : {
     "score" : 1,
+    "tier" : 2,
     "status" : "onGoing",
     "credits" : [ "Australia's Integrated Marine Observing System (IMOS) is enabled by the National Collaborative Research Infrastructure Strategy (NCRIS). It is operated by a consortium of institutions as an unincorporated joint venture, with the University of Tasmania as Lead Agent.", "Sydney Institute of Marine Science (SIMS)", "Australian Institute of Marine Science (AIMS)", "South Australian Research and Development Institute (SARDI)", "CSIRO Oceans and Atmosphere", "Darwin Port", "The University of New South Wales (UNSW)", "Office of Environment and Heritage (OEH), New South Wales Government", "Sydney Water Corporation", "Oceanographic Field Services Pty Ltd", "University of Technology, Sydney (UTS)", "SA Water", "Environment Protection Authority (EPA), South Australian Government", "Deakin University", "Department of Jobs, Tourism, Science and Innovation (DJTSI), Western Australian Government" ],
     "scope" : {

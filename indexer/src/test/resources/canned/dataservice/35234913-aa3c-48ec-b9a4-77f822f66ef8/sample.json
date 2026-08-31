@@ -7,6 +7,7 @@
   },
   "summaries" : {
     "score" : 1,
+    "tier" : 2,
     "status" : "onGoing",
     "credits" : [ "Australia's Integrated Marine Observing System (IMOS) is enabled by the National Collaborative Research Infrastructure Strategy (NCRIS). It is operated by a consortium of institutions as an unincorporated joint venture, with the University of Tasmania as Lead Agent.", "CSIRO Oceans & Atmosphere", "Australian Bureau of Meteorology (BOM)", "Royal Australian Navy (RAN)", "Scripps Institution of Oceanography", "National Oceanic and Atmospheric Administration (NOAA)", "Atlantic Oceanographic and Meteorological Laboratory (AOML)" ],
     "scope" : {

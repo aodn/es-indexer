@@ -7,6 +7,7 @@
   },
   "summaries" : {
     "score" : 1,
+    "tier" : 2,
     "status" : "onGoing",
     "credits" : [ ],
     "statement" : "Shapefiles obtained from AFMA. Closures gazetted under ComLaw -- details collated into a data base.  Additional closures extracted from CommLaw documents",

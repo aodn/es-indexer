@@ -7,6 +7,7 @@
   },
   "summaries" : {
     "score" : 1,
+    "tier" : 2,
     "status" : "planned",
     "credits" : [ ],
     "statement" : "Data source: original field data.\n                    Data processing performed by CSIRO Oceans and Atmosphere.\n\n                    The portside Humidity sensor became offset from the starboard after 16-January-2017 16:15:35 and subsequently flagged as suspect (data left unchanged) for the remainder of the voyage .\n\n                    The starboard Humidity sensor may also have failed at about 2-March 2017 and has been flagged  as bad with data NaNed.\n\n                    All values between 100-103% have been adjusted back to 100%.\n                    Please refer to the processing report for further information.",

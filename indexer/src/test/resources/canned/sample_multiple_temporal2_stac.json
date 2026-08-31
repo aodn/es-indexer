@@ -7,6 +7,7 @@
   },
   "summaries" : {
     "score" : 1,
+    "tier" : 2,
     "status" : "onGoing",
     "credits" : [ "Queensland State Government Integrated Marine Observing System (IMOS)", "Wireless Sensor Networks Facility (formerly known as Facility for The Automated Intelligent Monitoring of Marine Systems (FAIMMS)), part of the Great Barrier Reef Ocean Observing System project (GBROOS) (IMOS)", "Tropical Water Quality Hub of the National Environmental Science Programme (NESP)", "Torres Strait Regional Authority (TSRA)", "Tropical Ecosystems hub of the National Environmental Research Program (NERP)", "Australian Institute of Marine Science (AIMS)", "Integrated Marine Observing System (IMOS)", "Bainbridge, Scott. (AIMS)" ],
     "scope" : {

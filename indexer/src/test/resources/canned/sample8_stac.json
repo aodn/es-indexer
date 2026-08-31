@@ -7,6 +7,7 @@
   },
   "summaries" : {
     "score" : 1,
+    "tier" : 2,
     "status" : "completed",
     "credits" : [ "This data was collected on the Marine National Facility (MNF) RV Investigator voyage IN2019_V06." ],
     "scope" : {
