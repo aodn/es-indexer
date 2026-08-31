@@ -33,6 +33,22 @@ public class SummariesUtils {
         return null;
     }
 
+    /**
+     * mdb:metadataScope/mdb:MD_MetadataScope/mdb:resourceScope/mcc:MD_ScopeCode/@codeListValue
+     * A record may declare more than one scope, only the first is used so that this value always
+     * agrees with the scope reported in the summaries.
+     *
+     * @param source - The parsed XML document
+     * @return - The scope code, or null if the record declares no scope
+     */
+    public static String getScopeCode(MDMetadataType source) {
+        return MapperUtils.findMDMetadataScopePropertyType(source)
+                .stream()
+                .findFirst()
+                .flatMap(i -> safeGet(() -> i.getResourceScope().getMDScopeCode().getCodeListValue()))
+                .orElse(null);
+    }
+
     public static String getStatement(MDMetadataType source) {
         var lineages = MapperUtils.findMDResourceLineage(source);
         if (lineages.isEmpty()) {

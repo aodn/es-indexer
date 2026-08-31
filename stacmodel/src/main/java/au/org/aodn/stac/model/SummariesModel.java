@@ -18,6 +18,13 @@ import java.util.Map;
 public class SummariesModel {
 
     protected int score;
+    /**
+     * Record kind, used by ogc-api as the primary sort key to prioritise/deprioritise records.
+     * IMOS Collection > datasets > IMOS facility/subfacility and document
+     * 1 = IMOS collection (reserved for future work), 2 = dataset and anything not otherwise classified, 3 = document (and IMOS facility/sub-facility, reserved for future work).
+     * Set default as 2 so ogc-api can always sort by this value
+     */
+    protected Integer tier;
     protected String status;
     protected List<String> credits;
     protected Map<String, String> scope;
