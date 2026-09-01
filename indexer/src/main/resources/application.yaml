@@ -56,6 +56,7 @@ elasticsearch:
     name: portal-acronyms
     manual:
       - "nrmn => national reef monitoring network"
+      - "aad => australian_antarctic_division"
 
 aws:
   region: ap-southeast-2
