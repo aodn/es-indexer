@@ -69,6 +69,23 @@ public class AssociatedRecordsUtilTest {
     }
 
     @Test
+    public void testGenerateAssociatedRecords_withMultipleChildren_keepsAll() {
+        // When a record has two parents, visiting either parent must list this record under "children"
+        Map<String, Object> data = new LinkedHashMap<>();
+        data.put("children", List.of(
+                record("ec424e4f-0f55-41a5-a3f2-726bc4541947", "Benthic cover data", "abstract"),
+                record("0a65be6d-1c76-49ac-a151-80acf123612c", "Global benthic cover data", "abstract"),
+                record("9efa25cd-4da4-47b5-9385-45e3cbd11705", "Cryptobenthic fish", "abstract")
+        ));
+
+        List<LinkModel> links = AssociatedRecordsUtil.generateAssociatedRecords(data);
+
+        List<LinkModel> childLinks = linksWithRel(links, RelationType.CHILD);
+        assertEquals(3, childLinks.size(), "All children should be kept");
+        assertTrue(childLinks.stream().anyMatch(l -> l.getHref().equals("uuid:0a65be6d-1c76-49ac-a151-80acf123612c")));
+    }
+
+    @Test
     public void testGenerateAssociatedRecords_withNoParentKey_returnsNoParentLinks() {
         Map<String, Object> data = new LinkedHashMap<>();
         data.put("siblings", List.of(
