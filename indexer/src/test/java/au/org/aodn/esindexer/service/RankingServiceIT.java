@@ -198,4 +198,13 @@ class RankingServiceIT extends BaseTestClass {
         // penalty -20
         assertEquals(mockRankingService.supersededPenalty, mockRankingService.evaluateCompleteness(stacCollectionModel));
     }
+
+    @Test
+    public void testDocumentPenalty() {
+        RankingServiceImpl mockRankingService = Mockito.spy(rankingService);
+        stacCollectionModel.setSummaries(SummariesModel.builder()
+                .scope(Map.of("code", "document"))
+                .build());
+        assertEquals(mockRankingService.documentPenalty, mockRankingService.evaluateCompleteness(stacCollectionModel));
+    }
 }
