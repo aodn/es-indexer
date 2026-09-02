@@ -1,0 +1,1251 @@
+{
+  "title" : "IMOS - National Reef Monitoring Network Sub-Facility - Global benthic cover data (photoquadrat image annotations)",
+  "description" : "The National Reef Monitoring Network brings together shallow reef surveys conducted around Australia into a centralised database. The IMOS National Reef Monitoring Network Sub-Facility collates, cleans, stores and makes this data rapidly available from contributors including: Reef Life Survey; Parks Australia; IMOS Understanding of Marine Imagery Sub-Facility; Department of Biodiversity, Conservation and Attractions (Western Australia); Department for Environment and Water (South Australia); Department of Primary Industries and Regional Development (New South Wales); Tasmanian Parks and Wildlife Service; Parks Victoria and Institute for Marine and Antarctic Studies (IMAS).\n\nThe data provided by the National Reef Monitoring Network contributes to establishing and supporting national marine baselines, and assisting with the management of Commonwealth and State marine reserves.\n\nReef Life Survey (RLS) and the Australian Temperate Reef Network (ATRC) aims to improve biodiversity conservation and the sustainable management of marine resources by coordinating surveys of rocky and coral reefs using scientific methods, with the ultimate goal to improve coastal stewardship. Our activities depend on the skills of marine scientists, experienced and motivated recreational SCUBA divers, partnerships with management agencies and university researchers, and active input from the ATRC partners and RLS Advisory Committee.\n\nRLS and ATRC data are freely available to the public for non-profit purposes, so not only managers, but also groups such as local dive clubs or schools may use these data to look at changes over time in their own local reefs. By making data freely available and through public outputs, RLS and ATRC aims to raise broader community awareness of the status of Australia's marine biodiversity and associated conservation issues.\n\nThe IMOS Understanding of Marine Imagery Sub-Facility provides a national repository for marine imagery and annotations, facilitating the sharing of quantitative data on species and habitat distributions. Squidle+ serves as the foundational software platform for this sub-facility, providing an end-to-end environment for the delivery, management, and annotation of marine imagery. Squidle+ is the primary platform for National Reef Monitoring Network image management.\n\nThis dataset contains data on the habitat composition scored from photoquadrats taken by RLS and ATRC divers and partners along 50m transects on shallow rocky and coral reefs. 20 images are taken along each 50 m transect line at 2.5 m intervals, and images were annotated using a point-overlay approach (usually with 5 points per image overlaid and labelled using standardised schemes of habitat categories). The data are generated using two different methodologies: full-biodiversity (comprehensive labelling of all habitat components) and targeted (labelling of target taxa only, eg. habitat-forming corals).  Values are given as percent coverage for each 50 m transect-analysis, as denoted by it's unique dataset_id.\n\nImages, annotation statistics, the RLS standardised label scheme and associated exemplar images, can be viewed online at squidle.org.  Image and annotation statistics are also available in the related IMOS collections:\n- IMOS - Understanding of Marine Imagery (UMI) Sub-Facility - Squidle+ Annotation counts by Campaign (https://catalogue-imos.aodn.org.au/geonetwork/srv/api/records/5a94a2cf-0810-44ea-a28d-cc8a5c30fbd7)\n- IMOS - Understanding of Marine Imagery (UMI) Sub-Facility - Squidle+ Imagery and Tracks by Deployment (https://catalogue-imos.aodn.org.au/geonetwork/srv/api/records/0c9bdfd6-2760-4bde-8230-241132790701)\n\nThis dataset supersedes the RLS specific \"Reef Life Survey (RLS): Habitat Quadrats \" collection that was available at https://catalogue-rls.imas.utas.edu.au/geonetwork/srv/en/metadata.show?uuid=6e9c4980-1005-11dd-b28e-00188b4c0af8 (provision of data was stopped in June 2021).",
+  "extent" : {
+    "bbox" : [ [ 2.0, -56.0, 358.0, 79.0 ], [ -121.0, 33.0, -119.0, 35.0 ], [ 135.0, 33.0, 136.0, 34.0 ], [ 130.0, 32.0, 131.0, 33.0 ], [ 16.0, 78.0, 17.0, 79.0 ], [ -6.0, 56.0, -5.0, 57.0 ], [ -22.0, 70.0, -21.0, 71.0 ], [ -3.0, 55.0, -2.0, 56.0 ], [ -6.0, 54.0, -5.0, 55.0 ], [ -125.0, 49.0, -124.0, 50.0 ], [ -124.0, 47.0, -123.0, 49.0 ], [ -126.0, 50.0, -125.0, 51.0 ], [ 13.0, 40.0, 14.0, 41.0 ], [ 2.0, 39.0, 4.0, 40.0 ], [ 5.0, 43.0, 6.0, 44.0 ], [ 13.0, 43.0, 14.0, 44.0 ], [ 3.0, 42.0, 4.0, 43.0 ], [ 144.0, 42.0, 145.0, 43.0 ], [ -71.0, 42.0, -69.0, 44.0 ], [ 140.0, 40.0, 141.0, 41.0 ], [ -122.0, 36.0, -121.0, 37.0 ], [ 34.0, 25.0, 35.0, 26.0 ], [ -17.0, 28.0, -16.0, 29.0 ], [ -19.0, 27.0, -17.0, 28.0 ], [ 127.0, 26.0, 128.0, 27.0 ], [ -83.0, 24.0, -80.0, 25.0 ], [ 35.0, 23.0, 36.0, 25.0 ], [ -111.0, 24.0, -110.0, 25.0 ], [ -110.0, 23.0, -109.0, 24.0 ], [ -69.0, 12.0, -68.0, 13.0 ], [ -82.0, 12.0, -81.0, 14.0 ], [ -86.0, 9.0, -85.0, 12.0 ], [ -73.0, 21.0, -72.0, 22.0 ], [ -159.0, 21.0, -157.0, 22.0 ], [ -82.0, 19.0, -81.0, 20.0 ], [ -89.0, 16.0, -88.0, 17.0 ], [ 166.0, 11.0, 167.0, 12.0 ], [ 169.0, 10.0, 170.0, 11.0 ], [ 102.0, 10.0, 104.0, 11.0 ], [ -80.0, 8.0, -78.0, 10.0 ], [ -84.0, 7.0, -80.0, 10.0 ], [ 95.0, 5.0, 96.0, 6.0 ], [ -88.0, 5.0, -87.0, 6.0 ], [ 72.0, 3.0, 74.0, 5.0 ], [ -82.0, 3.0, -81.0, 5.0 ], [ -93.0, 1.0, -91.0, 2.0 ], [ -92.0, -2.0, -89.0, 1.0 ], [ 55.0, -5.0, 56.0, -4.0 ], [ 150.0, -6.0, 151.0, -5.0 ], [ -82.0, -2.0, -80.0, -1.0 ], [ 130.0, -3.0, 132.0, 1.0 ], [ 152.0, -5.0, 153.0, -4.0 ], [ 115.0, -9.0, 116.0, -8.0 ], [ 122.0, -9.0, 123.0, -8.0 ], [ 156.0, -9.0, 157.0, -8.0 ], [ 129.0, -10.0, 130.0, -9.0 ], [ -141.0, -10.0, -139.0, -8.0 ], [ 40.0, -11.0, 41.0, -10.0 ], [ 105.0, -11.0, 106.0, -10.0 ], [ 130.0, -11.0, 131.0, -10.0 ], [ 129.0, -12.0, 130.0, -11.0 ], [ 130.0, -13.0, 131.0, -12.0 ], [ 122.0, -13.0, 125.0, -11.0 ], [ 146.0, -14.0, 147.0, -13.0 ], [ -164.0, -14.0, -163.0, -13.0 ], [ -172.0, -14.0, -171.0, -13.0 ], [ 121.0, -15.0, 122.0, -13.0 ], [ 132.0, -15.0, 137.0, -10.0 ], [ -171.0, -15.0, -168.0, -14.0 ], [ -174.0, -16.0, -173.0, -15.0 ], [ 140.0, -16.0, 141.0, -15.0 ], [ 137.0, -16.0, 138.0, -15.0 ], [ 123.0, -17.0, 124.0, -16.0 ], [ -147.0, -17.0, -143.0, -15.0 ], [ 139.0, -17.0, 140.0, -16.0 ], [ 39.0, -17.0, 40.0, -16.0 ], [ -154.0, -17.0, -153.0, -16.0 ], [ -152.0, -18.0, -149.0, -16.0 ], [ 148.0, -18.0, 149.0, -17.0 ], [ 155.0, -18.0, 156.0, -17.0 ], [ 118.0, -18.0, 120.0, -17.0 ], [ -40.0, -19.0, -38.0, -17.0 ], [ -160.0, -19.0, -159.0, -18.0 ], [ -164.0, -19.0, -163.0, -17.0 ], [ -142.0, -19.0, -140.0, -18.0 ], [ 141.0, -19.0, 148.0, -9.0 ], [ 149.0, -20.0, 153.0, -16.0 ], [ 119.0, -20.0, 120.0, -19.0 ], [ -170.0, -20.0, -169.0, -18.0 ], [ -180.0, -24.0, -178.0, -23.0 ], [ -136.0, -24.0, -134.0, -23.0 ], [ 153.0, -24.0, 156.0, -20.0 ], [ 150.0, -25.0, 153.0, -22.0 ], [ -125.0, -25.0, -124.0, -24.0 ], [ -129.0, -25.0, -128.0, -24.0 ], [ 113.0, -24.0, 119.0, -20.0 ], [ 148.0, -21.0, 150.0, -18.0 ], [ -160.0, -22.0, -159.0, -21.0 ], [ -155.0, -22.0, -154.0, -21.0 ], [ -176.0, -22.0, -174.0, -18.0 ], [ -106.0, -27.0, -105.0, -26.0 ], [ 113.0, -27.0, 114.0, -26.0 ], [ -110.0, -28.0, -109.0, -27.0 ], [ 113.0, -29.0, 115.0, -28.0 ], [ -178.0, -30.0, -177.0, -29.0 ], [ 152.0, -33.0, 153.0, -31.0 ], [ 114.0, -34.0, 116.0, -30.0 ], [ 134.0, -34.0, 135.0, -32.0 ], [ 151.0, -34.0, 152.0, -33.0 ], [ 23.0, -35.0, 24.0, -33.0 ], [ 18.0, -35.0, 19.0, -34.0 ], [ 136.0, -36.0, 139.0, -34.0 ], [ 167.0, -30.0, 168.0, -28.0 ], [ 159.0, -30.0, 160.0, -29.0 ], [ 153.0, -31.0, 154.0, -26.0 ], [ 159.0, -32.0, 160.0, -31.0 ], [ -179.0, -32.0, -178.0, -30.0 ], [ 117.0, -36.0, 119.0, -35.0 ], [ 148.0, -38.0, 151.0, -35.0 ], [ 172.0, -38.0, 178.0, -34.0 ], [ -66.0, -42.0, -65.0, -41.0 ], [ -65.0, -43.0, -64.0, -42.0 ], [ 144.0, -41.0, 148.0, -37.0 ], [ -73.0, -43.0, -72.0, -42.0 ], [ 145.0, -44.0, 148.0, -42.0 ], [ -58.0, -52.0, -57.0, -51.0 ], [ -69.0, -56.0, -67.0, -54.0 ] ],
+    "temporal" : [ [ "2006-09-01T14:00:00Z", null ], [ "2006-09-01T14:00:00Z", null ] ]
+  },
+  "summaries" : {
+    "score" : 106,
+    "status" : "onGoing",
+    "credits" : [ "Reef Life Survey and Australian Temperate Reef Collaboration partners", "This research used Australia's Integrated Marine Observing System (IMOS) infrastructure for database support and storage. IMOS is enabled by the National Collaborative Research Infrastructure Strategy (NCRIS) and is operated by a consortium of institutions as an unincorporated joint venture, with the University of Tasmania as Lead Agent.", "Squidle+, developed by Ariell Friedman (Greybits Engineering), underpins the Understanding Marine Imaging Facility, Integrated Marine Observing System. Development has also been supported by the Schmidt Ocean Institute, the Japan Agency for Marine-Earth Science and Technology, the Nectar science cloud.", "The dataset collection described in this record was funded by the Australian Government Department of Climate Change, the Environment, Energy & Water (DCCEEW) through the NESP Marine and Coastal Hub. In addition to NESP (DCCEEW) funding, this project was supported by an equivalent amount of in-kind support and co-investment from project partners and collaborators.", "This dataset collection forms part of the NESP MaC Project 5.9 ? Making marine environmental data more assessment ready, 2025 (UTAS, IMOS)\",\"Reef Life Survey and Australian Temperate Reef Collaboration partners" ],
+    "scope" : {
+      "code" : "dataset",
+      "name" : "IMOS dataset level record"
+    },
+    "statement" : "There are two versions of the data available from this collection:\n- the original NRMN data format\n- data with a schema compliant with the standard Darwin Core framework",
+    "creation" : "2021-05-21T12:00:00",
+    "revision" : "2026-09-01T15:20:30",
+    "temporal" : [ {
+      "start" : "2006-09-01T14:00:00Z"
+    } ],
+    "dataset_group" : [ "sample" ],
+    "dataset_provider" : "IMOS",
+    "update_frequency" : "other",
+    "proj:geometry" : {
+      "geometries" : [ {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -121, 33 ], [ -120, 33 ], [ -120, 34 ], [ -119, 34 ], [ -119, 35 ], [ -121, 35 ], [ -121, 33 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 135, 33 ], [ 136, 33 ], [ 136, 34 ], [ 135, 34 ], [ 135, 33 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 130, 32 ], [ 131, 32 ], [ 131, 33 ], [ 130, 33 ], [ 130, 32 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 16, 78 ], [ 17, 78 ], [ 17, 79 ], [ 16, 79 ], [ 16, 78 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -6, 56 ], [ -5, 56 ], [ -5, 57 ], [ -6, 57 ], [ -6, 56 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -22, 70 ], [ -21, 70 ], [ -21, 71 ], [ -22, 71 ], [ -22, 70 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -3, 55 ], [ -2, 55 ], [ -2, 56 ], [ -3, 56 ], [ -3, 55 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -6, 54 ], [ -5, 54 ], [ -5, 55 ], [ -6, 55 ], [ -6, 54 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -125, 49 ], [ -124, 49 ], [ -124, 50 ], [ -125, 50 ], [ -125, 49 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -124, 47 ], [ -123, 47 ], [ -123, 49 ], [ -124, 49 ], [ -124, 47 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -126, 50 ], [ -125, 50 ], [ -125, 51 ], [ -126, 51 ], [ -126, 50 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 13, 40 ], [ 14, 40 ], [ 14, 41 ], [ 13, 41 ], [ 13, 40 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 3, 40 ], [ 2, 40 ], [ 2, 39 ], [ 4, 39 ], [ 4, 40 ], [ 3, 40 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 5, 43 ], [ 6, 43 ], [ 6, 44 ], [ 5, 44 ], [ 5, 43 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 13, 43 ], [ 14, 43 ], [ 14, 44 ], [ 13, 44 ], [ 13, 43 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 3, 42 ], [ 4, 42 ], [ 4, 43 ], [ 3, 43 ], [ 3, 42 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 144, 42 ], [ 145, 42 ], [ 145, 43 ], [ 144, 43 ], [ 144, 42 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -71, 42 ], [ -70, 42 ], [ -70, 43 ], [ -69, 43 ], [ -69, 44 ], [ -71, 44 ], [ -71, 42 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 140, 40 ], [ 141, 40 ], [ 141, 41 ], [ 140, 41 ], [ 140, 40 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -122, 36 ], [ -121, 36 ], [ -121, 37 ], [ -122, 37 ], [ -122, 36 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 34, 25 ], [ 35, 25 ], [ 35, 26 ], [ 34, 26 ], [ 34, 25 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -17, 28 ], [ -16, 28 ], [ -16, 29 ], [ -17, 29 ], [ -17, 28 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -19, 27 ], [ -17, 27 ], [ -17, 28 ], [ -19, 28 ], [ -19, 27 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 127, 26 ], [ 128, 26 ], [ 128, 27 ], [ 127, 27 ], [ 127, 26 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -81, 25 ], [ -83, 25 ], [ -83, 24 ], [ -80, 24 ], [ -80, 25 ], [ -81, 25 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 35, 23 ], [ 36, 23 ], [ 36, 25 ], [ 35, 25 ], [ 35, 23 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -111, 24 ], [ -110, 24 ], [ -110, 25 ], [ -111, 25 ], [ -111, 24 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -110, 23 ], [ -109, 23 ], [ -109, 24 ], [ -110, 24 ], [ -110, 23 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -69, 12 ], [ -68, 12 ], [ -68, 13 ], [ -69, 13 ], [ -69, 12 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -82, 12 ], [ -81, 12 ], [ -81, 14 ], [ -82, 14 ], [ -82, 12 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -86, 9 ], [ -85, 9 ], [ -85, 12 ], [ -86, 12 ], [ -86, 9 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -73, 21 ], [ -72, 21 ], [ -72, 22 ], [ -73, 22 ], [ -73, 21 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -159, 21 ], [ -157, 21 ], [ -157, 22 ], [ -159, 22 ], [ -159, 21 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -82, 19 ], [ -81, 19 ], [ -81, 20 ], [ -82, 20 ], [ -82, 19 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -89, 16 ], [ -88, 16 ], [ -88, 17 ], [ -89, 17 ], [ -89, 16 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 166, 11 ], [ 167, 11 ], [ 167, 12 ], [ 166, 12 ], [ 166, 11 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 169, 10 ], [ 170, 10 ], [ 170, 11 ], [ 169, 11 ], [ 169, 10 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 102, 10 ], [ 104, 10 ], [ 104, 11 ], [ 102, 11 ], [ 102, 10 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -80, 8 ], [ -78, 8 ], [ -78, 10 ], [ -79, 10 ], [ -79, 9 ], [ -80, 9 ], [ -80, 8 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -83, 7 ], [ -80, 7 ], [ -80, 8 ], [ -82, 8 ], [ -82, 10 ], [ -83, 10 ], [ -83, 9 ], [ -84, 9 ], [ -84, 8 ], [ -83, 8 ], [ -83, 7 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 95, 5 ], [ 96, 5 ], [ 96, 6 ], [ 95, 6 ], [ 95, 5 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -88, 5 ], [ -87, 5 ], [ -87, 6 ], [ -88, 6 ], [ -88, 5 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 74, 4 ], [ 74, 5 ], [ 72, 5 ], [ 72, 3 ], [ 74, 3 ], [ 74, 4 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -82, 3 ], [ -81, 3 ], [ -81, 5 ], [ -82, 5 ], [ -82, 3 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -93, 1 ], [ -91, 1 ], [ -91, 2 ], [ -93, 2 ], [ -93, 1 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -91, -2 ], [ -89, -2 ], [ -89, -1 ], [ -90, -1 ], [ -90, 0.0 ], [ -89, 0.0 ], [ -89, 1 ], [ -91, 1 ], [ -91, 0.0 ], [ -92, 0.0 ], [ -92, -1 ], [ -91, -1 ], [ -91, -2 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 55, -5 ], [ 56, -5 ], [ 56, -4 ], [ 55, -4 ], [ 55, -5 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 150, -6 ], [ 151, -6 ], [ 151, -5 ], [ 150, -5 ], [ 150, -6 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -81, -1 ], [ -82, -1 ], [ -82, -2 ], [ -80, -2 ], [ -80, -1 ], [ -81, -1 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 130, -3 ], [ 131, -3 ], [ 131, -1 ], [ 132, -1 ], [ 132, 0.0 ], [ 131, 0.0 ], [ 131, 1 ], [ 130, 1 ], [ 130, -3 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 152, -5 ], [ 153, -5 ], [ 153, -4 ], [ 152, -4 ], [ 152, -5 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 115, -9 ], [ 116, -9 ], [ 116, -8 ], [ 115, -8 ], [ 115, -9 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 122, -9 ], [ 123, -9 ], [ 123, -8 ], [ 122, -8 ], [ 122, -9 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 156, -9 ], [ 157, -9 ], [ 157, -8 ], [ 156, -8 ], [ 156, -9 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 129, -10 ], [ 130, -10 ], [ 130, -9 ], [ 129, -9 ], [ 129, -10 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -141, -10 ], [ -139, -10 ], [ -139, -9 ], [ -140, -9 ], [ -140, -8 ], [ -141, -8 ], [ -141, -10 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 40, -11 ], [ 41, -11 ], [ 41, -10 ], [ 40, -10 ], [ 40, -11 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 105, -11 ], [ 106, -11 ], [ 106, -10 ], [ 105, -10 ], [ 105, -11 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 130, -11 ], [ 131, -11 ], [ 131, -10 ], [ 130, -10 ], [ 130, -11 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 129, -12 ], [ 130, -12 ], [ 130, -11 ], [ 129, -11 ], [ 129, -12 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 130, -13 ], [ 131, -13 ], [ 131, -12 ], [ 130, -12 ], [ 130, -13 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 122, -13 ], [ 125, -13 ], [ 125, -12 ], [ 124, -12 ], [ 124, -11 ], [ 123, -11 ], [ 123, -12 ], [ 122, -12 ], [ 122, -13 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 146, -14 ], [ 147, -14 ], [ 147, -13 ], [ 146, -13 ], [ 146, -14 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -164, -14 ], [ -163, -14 ], [ -163, -13 ], [ -164, -13 ], [ -164, -14 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -172, -14 ], [ -171, -14 ], [ -171, -13 ], [ -172, -13 ], [ -172, -14 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 121, -15 ], [ 122, -15 ], [ 122, -13 ], [ 121, -13 ], [ 121, -15 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 136, -15 ], [ 137, -15 ], [ 137, -11 ], [ 134, -11 ], [ 134, -10 ], [ 132, -10 ], [ 132, -11 ], [ 133, -11 ], [ 133, -12 ], [ 136, -12 ], [ 136, -15 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -170, -14 ], [ -171, -14 ], [ -171, -15 ], [ -168, -15 ], [ -168, -14 ], [ -170, -14 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -174, -16 ], [ -173, -16 ], [ -173, -15 ], [ -174, -15 ], [ -174, -16 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 140, -16 ], [ 141, -16 ], [ 141, -15 ], [ 140, -15 ], [ 140, -16 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 137, -16 ], [ 138, -16 ], [ 138, -15 ], [ 137, -15 ], [ 137, -16 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 123, -17 ], [ 124, -17 ], [ 124, -16 ], [ 123, -16 ], [ 123, -17 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -145, -16 ], [ -145, -15 ], [ -147, -15 ], [ -147, -16 ], [ -146, -16 ], [ -146, -17 ], [ -143, -17 ], [ -143, -16 ], [ -145, -16 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 139, -17 ], [ 140, -17 ], [ 140, -16 ], [ 139, -16 ], [ 139, -17 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 39, -17 ], [ 40, -17 ], [ 40, -16 ], [ 39, -16 ], [ 39, -17 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -154, -17 ], [ -153, -17 ], [ -153, -16 ], [ -154, -16 ], [ -154, -17 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -150, -18 ], [ -149, -18 ], [ -149, -16 ], [ -152, -16 ], [ -152, -17 ], [ -150, -17 ], [ -150, -18 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 148, -18 ], [ 149, -18 ], [ 149, -17 ], [ 148, -17 ], [ 148, -18 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 155, -18 ], [ 156, -18 ], [ 156, -17 ], [ 155, -17 ], [ 155, -18 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 118, -18 ], [ 120, -18 ], [ 120, -17 ], [ 118, -17 ], [ 118, -18 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -39, -19 ], [ -38, -19 ], [ -38, -17 ], [ -40, -17 ], [ -40, -18 ], [ -39, -18 ], [ -39, -19 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -160, -19 ], [ -159, -19 ], [ -159, -18 ], [ -160, -18 ], [ -160, -19 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -164, -19 ], [ -163, -19 ], [ -163, -17 ], [ -164, -17 ], [ -164, -19 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -141, -18 ], [ -142, -18 ], [ -142, -19 ], [ -140, -19 ], [ -140, -18 ], [ -141, -18 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 146, -19 ], [ 148, -19 ], [ 148, -18 ], [ 147, -18 ], [ 147, -17 ], [ 148, -17 ], [ 148, -15 ], [ 147, -15 ], [ 147, -16 ], [ 146, -16 ], [ 146, -14 ], [ 145, -14 ], [ 145, -13 ], [ 144, -13 ], [ 144, -11 ], [ 145, -11 ], [ 145, -9 ], [ 144, -9 ], [ 144, -10 ], [ 141, -10 ], [ 141, -11 ], [ 143, -11 ], [ 143, -14 ], [ 144, -14 ], [ 144, -15 ], [ 145, -15 ], [ 145, -17 ], [ 146, -17 ], [ 146, -19 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 152, -20 ], [ 153, -20 ], [ 153, -17 ], [ 151, -17 ], [ 151, -16 ], [ 149, -16 ], [ 149, -17 ], [ 150, -17 ], [ 150, -18 ], [ 152, -18 ], [ 152, -20 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 119, -20 ], [ 120, -20 ], [ 120, -19 ], [ 119, -19 ], [ 119, -20 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -170, -20 ], [ -169, -20 ], [ -169, -18 ], [ -170, -18 ], [ -170, -20 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -179, -23 ], [ -180, -23 ], [ -180, -24 ], [ -178, -24 ], [ -178, -23 ], [ -179, -23 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -135, -23 ], [ -136, -23 ], [ -136, -24 ], [ -134, -24 ], [ -134, -23 ], [ -135, -23 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 155, -24 ], [ 156, -24 ], [ 156, -21 ], [ 155, -21 ], [ 155, -20 ], [ 154, -20 ], [ 154, -21 ], [ 153, -21 ], [ 153, -22 ], [ 155, -22 ], [ 155, -24 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 152, -25 ], [ 153, -25 ], [ 153, -22 ], [ 152, -22 ], [ 152, -23 ], [ 150, -23 ], [ 150, -24 ], [ 152, -24 ], [ 152, -25 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -125, -25 ], [ -124, -25 ], [ -124, -24 ], [ -125, -24 ], [ -125, -25 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -129, -25 ], [ -128, -25 ], [ -128, -24 ], [ -129, -24 ], [ -129, -25 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 118, -20 ], [ 115, -20 ], [ 115, -21 ], [ 113, -21 ], [ 113, -24 ], [ 114, -24 ], [ 114, -23 ], [ 115, -23 ], [ 115, -22 ], [ 116, -22 ], [ 116, -21 ], [ 119, -21 ], [ 119, -20 ], [ 118, -20 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 150, -20 ], [ 150, -18 ], [ 149, -18 ], [ 149, -19 ], [ 148, -19 ], [ 148, -21 ], [ 150, -21 ], [ 150, -20 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -160, -22 ], [ -159, -22 ], [ -159, -21 ], [ -160, -21 ], [ -160, -22 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -155, -22 ], [ -154, -22 ], [ -154, -21 ], [ -155, -21 ], [ -155, -22 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -174, -21 ], [ -174, -18 ], [ -175, -18 ], [ -175, -21 ], [ -176, -21 ], [ -176, -22 ], [ -174, -22 ], [ -174, -21 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -106, -27 ], [ -105, -27 ], [ -105, -26 ], [ -106, -26 ], [ -106, -27 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 113, -27 ], [ 114, -27 ], [ 114, -26 ], [ 113, -26 ], [ 113, -27 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -110, -28 ], [ -109, -28 ], [ -109, -27 ], [ -110, -27 ], [ -110, -28 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 113, -29 ], [ 115, -29 ], [ 115, -28 ], [ 113, -28 ], [ 113, -29 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -178, -30 ], [ -177, -30 ], [ -177, -29 ], [ -178, -29 ], [ -178, -30 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 152, -33 ], [ 153, -33 ], [ 153, -31 ], [ 152, -31 ], [ 152, -33 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 116, -33 ], [ 116, -30 ], [ 114, -30 ], [ 114, -31 ], [ 115, -31 ], [ 115, -33 ], [ 114, -33 ], [ 114, -34 ], [ 116, -34 ], [ 116, -33 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 134, -34 ], [ 135, -34 ], [ 135, -32 ], [ 134, -32 ], [ 134, -34 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 151, -34 ], [ 152, -34 ], [ 152, -33 ], [ 151, -33 ], [ 151, -34 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 23, -35 ], [ 24, -35 ], [ 24, -33 ], [ 23, -33 ], [ 23, -35 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 18, -35 ], [ 19, -35 ], [ 19, -34 ], [ 18, -34 ], [ 18, -35 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 136, -36 ], [ 139, -36 ], [ 139, -35 ], [ 138, -35 ], [ 138, -34 ], [ 137, -34 ], [ 137, -35 ], [ 136, -35 ], [ 136, -36 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 167, -30 ], [ 168, -30 ], [ 168, -28 ], [ 167, -28 ], [ 167, -30 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 159, -30 ], [ 160, -30 ], [ 160, -29 ], [ 159, -29 ], [ 159, -30 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 153, -31 ], [ 154, -31 ], [ 154, -26 ], [ 153, -26 ], [ 153, -31 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 159, -32 ], [ 160, -32 ], [ 160, -31 ], [ 159, -31 ], [ 159, -32 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -179, -32 ], [ -178, -32 ], [ -178, -30 ], [ -179, -30 ], [ -179, -32 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 117, -36 ], [ 119, -36 ], [ 119, -35 ], [ 117, -35 ], [ 117, -36 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 151, -37 ], [ 151, -35 ], [ 150, -35 ], [ 150, -37 ], [ 148, -37 ], [ 148, -38 ], [ 151, -38 ], [ 151, -37 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 178, -37 ], [ 178, -36 ], [ 176, -36 ], [ 176, -35 ], [ 174, -35 ], [ 174, -34 ], [ 172, -34 ], [ 172, -35 ], [ 173, -35 ], [ 173, -36 ], [ 174, -36 ], [ 174, -37 ], [ 176, -37 ], [ 176, -38 ], [ 178, -38 ], [ 178, -37 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -66, -42 ], [ -65, -42 ], [ -65, -41 ], [ -66, -41 ], [ -66, -42 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -65, -43 ], [ -64, -43 ], [ -64, -42 ], [ -65, -42 ], [ -65, -43 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 147, -41 ], [ 148, -41 ], [ 148, -39 ], [ 147, -39 ], [ 147, -38 ], [ 146, -38 ], [ 146, -37 ], [ 144, -37 ], [ 144, -39 ], [ 146, -39 ], [ 146, -40 ], [ 147, -40 ], [ 147, -41 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -73, -43 ], [ -72, -43 ], [ -72, -42 ], [ -73, -42 ], [ -73, -43 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 145, -44 ], [ 148, -44 ], [ 148, -42 ], [ 147, -42 ], [ 147, -43 ], [ 145, -43 ], [ 145, -44 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -58, -52 ], [ -57, -52 ], [ -57, -51 ], [ -58, -51 ], [ -58, -52 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -69, -56 ], [ -68, -56 ], [ -68, -55 ], [ -67, -55 ], [ -67, -54 ], [ -69, -54 ], [ -69, -56 ] ] ]
+      } ],
+      "type" : "GeometryCollection"
+    },
+    "proj:geometry_noland" : {
+      "geometries" : [ {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -121, 35 ], [ -121, 33 ], [ -120, 33 ], [ -120, 34 ], [ -119.25, 34 ], [ -119.25, 34.25 ], [ -119.5, 34.5 ], [ -120, 34.5 ], [ -120.25, 34.5 ], [ -120.5, 34.5 ], [ -120.5, 34.75 ], [ -120.75, 34.75 ], [ -120.75, 35 ], [ -121, 35 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 135, 34 ], [ 135, 33 ], [ 136, 33 ], [ 136, 33.5 ], [ 135.75, 33.5 ], [ 135.5, 33.5 ], [ 135.25, 33.75 ], [ 135.25, 34 ], [ 135, 34 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 130, 32.25 ], [ 130, 32 ], [ 130.25, 32 ], [ 130.5, 32.25 ], [ 130.5, 32.5 ], [ 130.75, 32.75 ], [ 130.5, 32.75 ], [ 130.5, 33 ], [ 130.25, 33 ], [ 130, 33 ], [ 130, 32.5 ], [ 130.25, 32.5 ], [ 130.25, 32.25 ], [ 130, 32.25 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 16, 78.5 ], [ 16, 78.25 ], [ 17, 78.25 ], [ 17, 78.5 ], [ 16.75, 78.5 ], [ 16.75, 78.75 ], [ 16.5, 78.75 ], [ 16.25, 78.75 ], [ 16.25, 78.5 ], [ 16, 78.5 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -6, 56.25 ], [ -6, 56 ], [ -5.75, 56 ], [ -5.5, 56 ], [ -5.5, 56.25 ], [ -5.5, 56.5 ], [ -5.75, 56.5 ], [ -5.75, 56.25 ], [ -6, 56.25 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -6, 56.75 ], [ -6, 56.5 ], [ -5.75, 56.5 ], [ -5.75, 56.75 ], [ -5.75, 57 ], [ -6, 57 ], [ -6, 56.75 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -5.25, 56.75 ], [ -5.5, 56.5 ], [ -5.25, 56.5 ], [ -5.25, 56.75 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -22, 70.25 ], [ -22, 70 ], [ -21, 70 ], [ -21, 71 ], [ -21.75, 71 ], [ -21.75, 70.75 ], [ -21.75, 70.5 ], [ -22, 70.5 ], [ -22, 70.25 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -6, 54.75 ], [ -6, 54.5 ], [ -5.75, 54.5 ], [ -5.75, 54.75 ], [ -6, 54.75 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -5.25, 55 ], [ -6, 55 ], [ -5.75, 54.75 ], [ -5.5, 54.75 ], [ -5.5, 54.5 ], [ -5.75, 54.5 ], [ -5.75, 54.25 ], [ -6, 54 ], [ -5, 54 ], [ -5, 54.75 ], [ -5.25, 55 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -125, 50 ], [ -125, 49.75 ], [ -124.75, 49.75 ], [ -124.75, 49.5 ], [ -124.25, 49.25 ], [ -124, 49.25 ], [ -124, 49.5 ], [ -124.25, 49.75 ], [ -124.5, 49.75 ], [ -124.75, 50 ], [ -125, 50 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -123.5, 48.5 ], [ -123.5, 48.25 ], [ -123.25, 48 ], [ -123.25, 48.25 ], [ -123, 48.25 ], [ -123, 49 ], [ -123.5, 49 ], [ -123.25, 48.75 ], [ -123.5, 48.75 ], [ -123.5, 48.5 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -123.5, 49 ], [ -123.75, 49 ], [ -123.75, 48.75 ], [ -123.5, 48.75 ], [ -123.5, 49 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -123, 47.25 ], [ -123, 47.5 ], [ -123.25, 47.25 ], [ -123, 47.25 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -125.5, 51 ], [ -125.75, 51 ], [ -125.75, 50.75 ], [ -125.5, 50.75 ], [ -125.5, 51 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -125, 50.25 ], [ -125, 50.5 ], [ -125.25, 50.5 ], [ -125.5, 50.5 ], [ -125.75, 50.5 ], [ -125.5, 50.25 ], [ -125.25, 50.25 ], [ -125.25, 50 ], [ -125, 50 ], [ -125, 50.25 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 13, 41 ], [ 13, 40 ], [ 14, 40 ], [ 14, 40.75 ], [ 14, 41 ], [ 13, 41 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 4, 40 ], [ 3.25, 40 ], [ 3.25, 39.75 ], [ 3.5, 39.75 ], [ 3.25, 39.5 ], [ 3, 39.25 ], [ 2.75, 39.5 ], [ 2.5, 39.5 ], [ 2.75, 39.75 ], [ 3, 40 ], [ 2, 40 ], [ 2, 39 ], [ 4, 39 ], [ 4, 40 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 5, 43.25 ], [ 5, 43 ], [ 5.75, 43 ], [ 5.75, 43.25 ], [ 5.25, 43.25 ], [ 5, 43.25 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 14, 44 ], [ 13, 44 ], [ 13.25, 43.75 ], [ 13.5, 43.5 ], [ 13.75, 43 ], [ 14, 43 ], [ 14, 44 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 3, 43 ], [ 3, 42.5 ], [ 3.25, 42.5 ], [ 3.25, 42.25 ], [ 3.25, 42 ], [ 4, 42 ], [ 4, 43 ], [ 3, 43 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 144, 42.75 ], [ 144, 42 ], [ 145, 42 ], [ 145, 43 ], [ 144.75, 43 ], [ 144.5, 43 ], [ 144.25, 43 ], [ 144, 42.75 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -71, 42.5 ], [ -71, 42.25 ], [ -70.75, 42.25 ], [ -70.75, 42 ], [ -70.5, 42 ], [ -70, 42 ], [ -70, 43 ], [ -69, 43 ], [ -69, 44 ], [ -69.25, 44 ], [ -69.5, 44 ], [ -69.5, 43.75 ], [ -69.75, 43.75 ], [ -70, 43.75 ], [ -70.25, 43.75 ], [ -70.25, 43.5 ], [ -70.5, 43.25 ], [ -70.75, 43 ], [ -70.75, 42.75 ], [ -70.5, 42.75 ], [ -70.75, 42.5 ], [ -71, 42.5 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 140, 41 ], [ 140, 40.75 ], [ 140.25, 40.75 ], [ 140.25, 41 ], [ 140, 41 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -122, 36.25 ], [ -122, 36 ], [ -121.5, 36 ], [ -122, 36.25 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -122, 37 ], [ -122, 36.5 ], [ -121.75, 36.5 ], [ -121.75, 36.75 ], [ -122, 37 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 35, 26 ], [ 34.25, 26 ], [ 34.5, 25.75 ], [ 35, 25 ], [ 35, 26 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -17, 28.25 ], [ -17, 28 ], [ -16.75, 28 ], [ -17, 28.25 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -17, 29 ], [ -17, 28.25 ], [ -16.5, 28.5 ], [ -16.25, 28.5 ], [ -16.5, 28.25 ], [ -16.5, 28 ], [ -16, 28 ], [ -16, 29 ], [ -17, 29 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -19, 28 ], [ -19, 27 ], [ -17, 27 ], [ -17, 28 ], [ -17.25, 28 ], [ -19, 28 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 127, 27 ], [ 127, 26 ], [ 128, 26 ], [ 128, 26.25 ], [ 127.75, 26.25 ], [ 127.75, 26.5 ], [ 128, 26.5 ], [ 128, 26.75 ], [ 128, 27 ], [ 127, 27 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -80, 25 ], [ -81, 25 ], [ -83, 25 ], [ -83, 24 ], [ -80, 24 ], [ -80, 25 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 36, 25 ], [ 35, 25 ], [ 35.25, 24.5 ], [ 35.5, 24.25 ], [ 35.5, 24 ], [ 35.5, 23.5 ], [ 35.75, 23 ], [ 36, 23 ], [ 36, 25 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -110, 25 ], [ -110.75, 25 ], [ -110.75, 24.75 ], [ -110.75, 24.5 ], [ -110.75, 24.25 ], [ -110.5, 24.25 ], [ -110.25, 24.25 ], [ -110, 24.25 ], [ -110, 25 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -109, 24 ], [ -109.75, 24 ], [ -109.75, 23.75 ], [ -109.5, 23.5 ], [ -109.5, 23.25 ], [ -109.75, 23 ], [ -109, 23 ], [ -109, 24 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -69, 13 ], [ -69, 12.25 ], [ -68.75, 12.25 ], [ -68.75, 12 ], [ -68, 12 ], [ -68, 13 ], [ -69, 13 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -82, 14 ], [ -82, 12 ], [ -81, 12 ], [ -81, 14 ], [ -82, 14 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -86, 11 ], [ -86, 9 ], [ -85, 9 ], [ -85, 9.5 ], [ -85.25, 9.75 ], [ -85.75, 10 ], [ -85.75, 10.25 ], [ -85.75, 10.5 ], [ -85.75, 10.75 ], [ -85.75, 11 ], [ -86, 11.25 ], [ -86, 11 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -85, 10 ], [ -85, 10.25 ], [ -85.25, 10.25 ], [ -85.25, 10 ], [ -85, 10 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -73, 21.25 ], [ -73, 21 ], [ -72, 21 ], [ -72, 22 ], [ -73, 22 ], [ -73, 21.25 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -159, 22 ], [ -159, 21 ], [ -157.25, 21 ], [ -157.25, 21.25 ], [ -157, 21.25 ], [ -157, 22 ], [ -159, 22 ] ], [ [ -157.75, 21.25 ], [ -158, 21.25 ], [ -158, 21.5 ], [ -157.75, 21.5 ], [ -157.75, 21.25 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -82, 20 ], [ -82, 19 ], [ -81, 19 ], [ -81, 20 ], [ -82, 20 ] ], [ [ -81.25, 19.25 ], [ -81.5, 19.25 ], [ -81.5, 19.5 ], [ -81.25, 19.25 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -88, 17 ], [ -88.25, 17 ], [ -88.25, 16.75 ], [ -88.5, 16.25 ], [ -88.75, 16.25 ], [ -89, 16 ], [ -88, 16 ], [ -88, 17 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 166, 12 ], [ 166, 11 ], [ 167, 11 ], [ 167, 12 ], [ 166, 12 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 169, 11 ], [ 169, 10 ], [ 170, 10 ], [ 170, 11 ], [ 169, 11 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 102, 11 ], [ 102, 10 ], [ 104, 10 ], [ 104, 10.5 ], [ 103.75, 10.75 ], [ 103.75, 11 ], [ 103.5, 11 ], [ 103.25, 11 ], [ 102, 11 ] ], [ [ 103.5, 10.75 ], [ 103.75, 10.75 ], [ 103.75, 10.5 ], [ 103.5, 10.5 ], [ 103.5, 10.75 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -80, 8.25 ], [ -80, 8 ], [ -78.25, 8 ], [ -78.25, 8.25 ], [ -78.5, 8.25 ], [ -78.5, 8.5 ], [ -78.5, 8.75 ], [ -78.75, 8.75 ], [ -78.75, 9 ], [ -79, 9 ], [ -79.5, 9 ], [ -79.75, 8.75 ], [ -79.75, 8.5 ], [ -80, 8.25 ] ], [ [ -79, 8.5 ], [ -78.75, 8.25 ], [ -79, 8.25 ], [ -79, 8.5 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -79, 10 ], [ -79, 9.5 ], [ -78.5, 9.5 ], [ -78, 9.25 ], [ -78, 10 ], [ -79, 10 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -83, 8 ], [ -83, 7 ], [ -80, 7 ], [ -80, 7.5 ], [ -80.25, 7.5 ], [ -80.25, 7.25 ], [ -80.5, 7.25 ], [ -80.75, 7.25 ], [ -81, 7.25 ], [ -81, 7.5 ], [ -81, 7.75 ], [ -81.25, 7.75 ], [ -81.5, 7.75 ], [ -81.5, 8 ], [ -81.75, 8 ], [ -82, 8 ], [ -82, 8.25 ], [ -82.25, 8.25 ], [ -82.5, 8.25 ], [ -82.75, 8.25 ], [ -83, 8.25 ], [ -83.25, 8.25 ], [ -83.25, 8.5 ], [ -83.25, 8.75 ], [ -83.5, 8.75 ], [ -83.5, 9 ], [ -83.75, 9 ], [ -84, 9 ], [ -84, 8 ], [ -83, 8 ] ], [ [ -83.75, 8.75 ], [ -83.5, 8.75 ], [ -83.5, 8.5 ], [ -83.75, 8.5 ], [ -83.75, 8.75 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -82, 10 ], [ -83, 10 ], [ -82.75, 9.75 ], [ -82.5, 9.5 ], [ -82.25, 9.5 ], [ -82.25, 9.25 ], [ -82.25, 9 ], [ -82, 9 ], [ -82, 9.25 ], [ -82, 10 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 95, 5.5 ], [ 95, 5 ], [ 95.25, 5 ], [ 95.25, 5.25 ], [ 95.25, 5.5 ], [ 95, 5.5 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 95, 6 ], [ 95, 5.5 ], [ 95.25, 5.75 ], [ 95.25, 5.5 ], [ 95.5, 5.75 ], [ 95.5, 5.5 ], [ 96, 5.5 ], [ 96, 6 ], [ 95, 6 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -88, 6 ], [ -88, 5 ], [ -87, 5 ], [ -87, 6 ], [ -88, 6 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 74, 3 ], [ 74, 4 ], [ 74, 5 ], [ 72, 5 ], [ 72, 3 ], [ 74, 3 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -82, 5 ], [ -82, 3 ], [ -81, 3 ], [ -81, 5 ], [ -82, 5 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -93, 2 ], [ -93, 1 ], [ -91, 1 ], [ -91, 2 ], [ -93, 2 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -91, -1 ], [ -91, -2 ], [ -89, -2 ], [ -89, -1 ], [ -90, -1 ], [ -90, 0.0 ], [ -89, 0.0 ], [ -89, 1 ], [ -91, 1 ], [ -91, 0.0 ], [ -91.25, 0.0 ], [ -91.5, 0.0 ], [ -92, 0.0 ], [ -92, -1 ], [ -91.5, -1 ], [ -91.5, -0.75 ], [ -91.25, -0.75 ], [ -91, -0.5 ], [ -90.75, -0.75 ], [ -90.75, -1 ], [ -91, -1 ] ], [ [ -91.25, -0.25 ], [ -91, -0.5 ], [ -91.25, -0.5 ], [ -91.25, -0.25 ] ], [ [ -90.25, -0.5 ], [ -90.25, -0.75 ], [ -90.5, -0.75 ], [ -90.5, -0.5 ], [ -90.25, -0.5 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 55, -4 ], [ 55, -5 ], [ 56, -5 ], [ 56, -4 ], [ 55, -4 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 150, -5 ], [ 150, -5.5 ], [ 150.25, -5.5 ], [ 150.5, -5.5 ], [ 150.75, -5.5 ], [ 151, -5.5 ], [ 151, -5.25 ], [ 151, -5 ], [ 150, -5 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -80.75, -1 ], [ -81, -1 ], [ -82, -1 ], [ -82, -2 ], [ -80.75, -2 ], [ -80.75, -1.5 ], [ -80.75, -1.25 ], [ -80.75, -1 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 130, -2 ], [ 130, -3 ], [ 130.5, -3 ], [ 131, -3 ], [ 131, -1.5 ], [ 131, -1.25 ], [ 130.75, -1.25 ], [ 130.75, -1 ], [ 131, -1 ], [ 131.25, -1 ], [ 131.25, -0.75 ], [ 131.5, -0.75 ], [ 132, -0.75 ], [ 132, 0.0 ], [ 131.25, 0.0 ], [ 131.25, -0.25 ], [ 131, -0.25 ], [ 130.75, -0.5 ], [ 130.75, -0.25 ], [ 130.5, -0.25 ], [ 130.25, -0.25 ], [ 130.25, 0.0 ], [ 130.5, 0.0 ], [ 130.75, 0.0 ], [ 131, 0.0 ], [ 131, 1 ], [ 130, 1 ], [ 130, -1.75 ], [ 130.25, -1.75 ], [ 130.5, -1.75 ], [ 130.5, -2 ], [ 130.25, -2 ], [ 130, -2 ] ], [ [ 130.75, -0.75 ], [ 130.5, -1 ], [ 130.5, -0.75 ], [ 130.75, -0.75 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 152, -4 ], [ 152, -4.25 ], [ 152.25, -4.25 ], [ 152.5, -4.25 ], [ 152.25, -4.5 ], [ 152.5, -4.75 ], [ 152.25, -5 ], [ 153, -5 ], [ 153, -4.75 ], [ 152.75, -4.5 ], [ 152.75, -4.25 ], [ 152.75, -4 ], [ 152, -4 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 115, -8.75 ], [ 115, -9 ], [ 116, -9 ], [ 116, -8.75 ], [ 116, -8.5 ], [ 116, -8 ], [ 115.25, -8 ], [ 115.5, -8.25 ], [ 115.75, -8.5 ], [ 115.25, -8.5 ], [ 115.25, -8.75 ], [ 115, -8.75 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 115, -8 ], [ 115, -8.25 ], [ 115.25, -8 ], [ 115, -8 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 122, -8.75 ], [ 122, -9 ], [ 123, -9 ], [ 123, -8.5 ], [ 122.75, -8.5 ], [ 122.5, -8.75 ], [ 122.25, -8.75 ], [ 122, -8.75 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 122, -8 ], [ 122, -8.5 ], [ 122.25, -8.75 ], [ 122.5, -8.5 ], [ 122.75, -8.5 ], [ 122.75, -8.25 ], [ 122.75, -8 ], [ 122, -8 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 156, -8 ], [ 156, -9 ], [ 157, -9 ], [ 157, -8 ], [ 156, -8 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 129, -9 ], [ 129, -10 ], [ 130, -10 ], [ 130, -9 ], [ 129, -9 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -141, -8 ], [ -141, -10 ], [ -139, -10 ], [ -139, -9 ], [ -140, -9 ], [ -140.25, -9 ], [ -140.25, -8.75 ], [ -140, -8.75 ], [ -140, -8 ], [ -141, -8 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 40, -10 ], [ 40, -10.25 ], [ 40.25, -10.25 ], [ 40.5, -10.25 ], [ 40.5, -10.5 ], [ 40.5, -10.75 ], [ 40.5, -11 ], [ 41, -11 ], [ 41, -10 ], [ 40, -10 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 105, -10 ], [ 105, -11 ], [ 106, -11 ], [ 106, -10 ], [ 105, -10 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 130, -10 ], [ 130, -11 ], [ 131, -11 ], [ 131, -10 ], [ 130, -10 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 129, -11 ], [ 129, -12 ], [ 130, -12 ], [ 130, -11 ], [ 129, -11 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 130, -12 ], [ 130, -13 ], [ 130.25, -13 ], [ 130.25, -12.75 ], [ 130.5, -12.75 ], [ 130.5, -12.5 ], [ 130.75, -12.5 ], [ 131, -12.25 ], [ 131, -12 ], [ 130, -12 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 122, -12 ], [ 122, -13 ], [ 125, -13 ], [ 125, -12 ], [ 124, -12 ], [ 124, -11 ], [ 123, -11 ], [ 123, -12 ], [ 122, -12 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 146, -13 ], [ 146, -14 ], [ 147, -14 ], [ 147, -13 ], [ 146, -13 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -164, -13 ], [ -164, -14 ], [ -163, -14 ], [ -163, -13 ], [ -164, -13 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -172, -13 ], [ -172, -13.75 ], [ -171.75, -13.75 ], [ -171.5, -14 ], [ -171, -14 ], [ -171, -13 ], [ -172, -13 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 121, -13 ], [ 121, -15 ], [ 122, -15 ], [ 122, -13 ], [ 121, -13 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 136, -14.25 ], [ 136, -15 ], [ 137, -15 ], [ 137, -13.75 ], [ 137, -12.25 ], [ 136.75, -12.5 ], [ 136.75, -12.75 ], [ 136.5, -12.75 ], [ 136.5, -13 ], [ 136.25, -13 ], [ 136.25, -13.25 ], [ 136, -13.25 ], [ 136, -13.5 ], [ 136, -13.75 ], [ 136, -14 ], [ 136, -14.25 ] ], [ [ 136.75, -13.75 ], [ 137, -13.75 ], [ 136.75, -14 ], [ 136.75, -14.25 ], [ 136.5, -14.25 ], [ 136.5, -14 ], [ 136.5, -13.75 ], [ 136.75, -13.75 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 136, -12.25 ], [ 136, -12.5 ], [ 136.25, -12.5 ], [ 136.25, -12.25 ], [ 136.5, -12 ], [ 136.75, -12.25 ], [ 137, -12.25 ], [ 137, -11 ], [ 134, -11 ], [ 134, -10 ], [ 132, -10 ], [ 132, -11 ], [ 133, -11 ], [ 133, -11.5 ], [ 133.25, -11.75 ], [ 133.5, -11.75 ], [ 133.75, -11.75 ], [ 134, -11.75 ], [ 134, -12 ], [ 134.25, -12 ], [ 134.5, -12 ], [ 134.75, -12 ], [ 135.25, -12 ], [ 135.5, -12 ], [ 135.75, -12 ], [ 136, -12 ], [ 136, -12.25 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -168, -14 ], [ -170, -14 ], [ -171, -14 ], [ -171, -15 ], [ -168, -15 ], [ -168, -14 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -174, -15 ], [ -174, -16 ], [ -173, -16 ], [ -173, -15 ], [ -174, -15 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 140, -15 ], [ 140, -16 ], [ 141, -16 ], [ 141, -15 ], [ 140, -15 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 137, -15 ], [ 137, -16 ], [ 137.25, -16 ], [ 138, -16 ], [ 138, -15 ], [ 137, -15 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 123, -16.5 ], [ 123, -16.75 ], [ 123.25, -16.75 ], [ 123.25, -17 ], [ 123.5, -17 ], [ 123.75, -17 ], [ 124, -16.75 ], [ 123.75, -16.75 ], [ 123.5, -16.75 ], [ 123.5, -16.5 ], [ 123.75, -16.5 ], [ 124, -16.5 ], [ 124, -16.25 ], [ 124, -16 ], [ 123, -16 ], [ 123, -16.5 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -143, -16 ], [ -145, -16 ], [ -145, -15 ], [ -147, -15 ], [ -147, -16 ], [ -146, -16 ], [ -146, -17 ], [ -143, -17 ], [ -143, -16 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 139, -16 ], [ 139, -17 ], [ 139.25, -17 ], [ 140, -17 ], [ 140, -16 ], [ 139, -16 ] ], [ [ 139.5, -16.5 ], [ 139.5, -16.75 ], [ 139.25, -16.75 ], [ 139.25, -16.5 ], [ 139.5, -16.5 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 40, -17 ], [ 40, -16.5 ], [ 39.75, -16.25 ], [ 39.75, -16.5 ], [ 39.25, -16.75 ], [ 39, -17 ], [ 40, -17 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -154, -16 ], [ -154, -17 ], [ -153, -17 ], [ -153, -16 ], [ -154, -16 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -150, -17 ], [ -150, -18 ], [ -149, -18 ], [ -149, -16 ], [ -152, -16 ], [ -152, -17 ], [ -150, -17 ] ], [ [ -149.25, -17.75 ], [ -149.5, -17.75 ], [ -149.5, -17.5 ], [ -149.25, -17.75 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 148, -17 ], [ 148, -18 ], [ 149, -18 ], [ 149, -17 ], [ 148, -17 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 155, -17 ], [ 155, -18 ], [ 156, -18 ], [ 156, -17 ], [ 155, -17 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 118, -17 ], [ 118, -18 ], [ 120, -18 ], [ 120, -17 ], [ 118, -17 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -39, -18 ], [ -39, -19 ], [ -38, -19 ], [ -38, -17 ], [ -39.25, -17 ], [ -39.25, -17.25 ], [ -39.25, -17.5 ], [ -39.25, -17.75 ], [ -39.5, -18 ], [ -39, -18 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -160, -18 ], [ -160, -19 ], [ -159, -19 ], [ -159, -18 ], [ -160, -18 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -164, -17 ], [ -164, -19 ], [ -163, -19 ], [ -163, -17 ], [ -164, -17 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -140, -18 ], [ -141, -18 ], [ -142, -18 ], [ -142, -19 ], [ -140, -19 ], [ -140, -18 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 146, -17 ], [ 146, -17.5 ], [ 146.25, -17.75 ], [ 146, -18.25 ], [ 146.25, -18.5 ], [ 146.25, -18.75 ], [ 146.25, -19 ], [ 148, -19 ], [ 148, -18 ], [ 147, -18 ], [ 147, -17 ], [ 148, -17 ], [ 148, -15 ], [ 147, -15 ], [ 147, -16 ], [ 146, -16 ], [ 146, -14 ], [ 145, -14 ], [ 145, -13 ], [ 144, -13 ], [ 144, -11 ], [ 145, -11 ], [ 145, -9 ], [ 144, -9 ], [ 144, -10 ], [ 142.25, -10 ], [ 142, -10 ], [ 141, -10 ], [ 141, -11 ], [ 142.25, -11 ], [ 142.5, -10.75 ], [ 142.5, -11 ], [ 142.75, -11 ], [ 143, -11 ], [ 143, -12 ], [ 143, -12.25 ], [ 143.25, -12.5 ], [ 143.5, -12.5 ], [ 143.5, -12.75 ], [ 143.25, -13 ], [ 143.5, -13 ], [ 143.5, -13.5 ], [ 143.5, -13.75 ], [ 143.5, -14 ], [ 143.75, -14 ], [ 144, -14 ], [ 144, -14.5 ], [ 144.25, -14.25 ], [ 144.5, -14.25 ], [ 144.75, -14.25 ], [ 144.75, -14.5 ], [ 145, -14.5 ], [ 145, -14.75 ], [ 145.25, -14.75 ], [ 145.25, -15 ], [ 145.25, -15.25 ], [ 145.25, -15.5 ], [ 145.25, -15.75 ], [ 145.25, -16 ], [ 145.5, -16 ], [ 145.5, -16.25 ], [ 145.5, -16.5 ], [ 145.75, -16.75 ], [ 145.75, -17 ], [ 146, -17 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 152, -18 ], [ 152, -20 ], [ 153, -20 ], [ 153, -17 ], [ 151, -17 ], [ 151, -16 ], [ 149, -16 ], [ 149, -17 ], [ 150, -17 ], [ 150, -18 ], [ 152, -18 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 119, -19 ], [ 119, -20 ], [ 119.25, -20 ], [ 119.5, -20 ], [ 119.75, -20 ], [ 120, -19.75 ], [ 120, -19 ], [ 119, -19 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -170, -18 ], [ -170, -20 ], [ -169, -20 ], [ -169, -18 ], [ -170, -18 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -178, -23 ], [ -179, -23 ], [ -180, -23 ], [ -180, -24 ], [ -178, -24 ], [ -178, -23 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -134, -23 ], [ -135, -23 ], [ -136, -23 ], [ -136, -24 ], [ -134, -24 ], [ -134, -23 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 155, -22 ], [ 155, -24 ], [ 156, -24 ], [ 156, -21 ], [ 155, -21 ], [ 155, -20 ], [ 154, -20 ], [ 154, -21 ], [ 153, -21 ], [ 153, -22 ], [ 155, -22 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 152, -24.25 ], [ 152, -24.5 ], [ 152.5, -24.75 ], [ 152.5, -25 ], [ 153, -25 ], [ 153, -22 ], [ 152, -22 ], [ 152, -23 ], [ 150.75, -23 ], [ 150.75, -23.25 ], [ 150.75, -23.5 ], [ 151, -23.5 ], [ 151.25, -23.5 ], [ 151.25, -23.75 ], [ 151.5, -24 ], [ 151.75, -24 ], [ 152, -24 ], [ 152, -24.25 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -125, -24 ], [ -125, -25 ], [ -124, -25 ], [ -124, -24 ], [ -125, -24 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -129, -24 ], [ -129, -25 ], [ -128, -25 ], [ -128, -24 ], [ -129, -24 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 119, -20 ], [ 118, -20 ], [ 115, -20 ], [ 115, -21 ], [ 113, -21 ], [ 113, -24 ], [ 113.5, -24 ], [ 113.5, -23.5 ], [ 113.75, -23.5 ], [ 113.75, -23.25 ], [ 113.75, -23 ], [ 113.75, -22.75 ], [ 113.75, -22.5 ], [ 114, -22.25 ], [ 114.25, -22.25 ], [ 114.5, -22 ], [ 114.75, -21.75 ], [ 115, -21.75 ], [ 115.5, -21.5 ], [ 115.75, -21.25 ], [ 116, -21 ], [ 116.25, -21 ], [ 116.25, -20.75 ], [ 116.5, -20.75 ], [ 116.75, -20.75 ], [ 117.25, -20.5 ], [ 117.25, -20.75 ], [ 117.75, -20.75 ], [ 118.25, -20.25 ], [ 118.75, -20.25 ], [ 119, -20 ] ], [ [ 114.25, -21.75 ], [ 114, -22 ], [ 114, -21.75 ], [ 114.25, -21.75 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 150, -21 ], [ 150, -20 ], [ 150, -18 ], [ 149, -18 ], [ 149, -19 ], [ 148, -19 ], [ 148, -20 ], [ 148.25, -20 ], [ 148.5, -20.25 ], [ 148.75, -20.25 ], [ 148.75, -20.5 ], [ 148.75, -20.75 ], [ 149, -20.75 ], [ 149, -21 ], [ 149.25, -21 ], [ 150, -21 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -160, -21 ], [ -160, -22 ], [ -159, -22 ], [ -159, -21 ], [ -160, -21 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -155, -21 ], [ -155, -22 ], [ -154, -22 ], [ -154, -21 ], [ -155, -21 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -174, -22 ], [ -174, -21 ], [ -174, -18 ], [ -175, -18 ], [ -175, -21 ], [ -176, -21 ], [ -176, -22 ], [ -174, -22 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -106, -26 ], [ -106, -27 ], [ -105, -27 ], [ -105, -26 ], [ -106, -26 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 113, -26 ], [ 113, -27 ], [ 114, -27 ], [ 113.75, -26.75 ], [ 113.5, -26.75 ], [ 113.5, -26.5 ], [ 113.25, -26.5 ], [ 113.25, -26.25 ], [ 113.25, -26 ], [ 113, -26 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 114, -26.5 ], [ 114, -26.25 ], [ 113.75, -26.25 ], [ 113.5, -26.25 ], [ 113.5, -26.5 ], [ 113.75, -26.5 ], [ 114, -26.5 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -110, -27 ], [ -110, -28 ], [ -109, -28 ], [ -109, -27 ], [ -109.25, -27 ], [ -109.5, -27.25 ], [ -109.5, -27 ], [ -110, -27 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 113, -28 ], [ 113, -29 ], [ 114.75, -29 ], [ 114.5, -28.75 ], [ 114.5, -28.5 ], [ 114.25, -28 ], [ 113, -28 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -178, -29 ], [ -178, -30 ], [ -177, -30 ], [ -177, -29 ], [ -178, -29 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 152, -32.75 ], [ 152, -33 ], [ 153, -33 ], [ 153, -31.5 ], [ 152.75, -31.5 ], [ 152.75, -31.75 ], [ 152.5, -32 ], [ 152.5, -32.25 ], [ 152.5, -32.5 ], [ 152.25, -32.5 ], [ 152.25, -32.75 ], [ 152, -32.75 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 114, -34 ], [ 115, -34 ], [ 115, -33.75 ], [ 115, -33.5 ], [ 115.25, -33.75 ], [ 115.5, -33.5 ], [ 115.75, -33.25 ], [ 115.75, -33 ], [ 115.75, -32.75 ], [ 115.75, -32.5 ], [ 115.75, -32.25 ], [ 115.75, -31.75 ], [ 115.25, -31 ], [ 115.25, -30.75 ], [ 115, -30.5 ], [ 115, -30 ], [ 114, -30 ], [ 114, -31 ], [ 115, -31 ], [ 115, -33 ], [ 114, -33 ], [ 114, -34 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 134, -33 ], [ 134, -34 ], [ 135, -34 ], [ 135, -33.75 ], [ 134.75, -33.75 ], [ 134.75, -33.5 ], [ 134.75, -33.25 ], [ 134.5, -33.25 ], [ 134.25, -33.25 ], [ 134.25, -33 ], [ 134, -33 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 134, -32.5 ], [ 134, -32.75 ], [ 134.25, -32.75 ], [ 134.25, -32.5 ], [ 134, -32.5 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 152, -33 ], [ 151.75, -33 ], [ 151.5, -33.25 ], [ 151.5, -33.5 ], [ 151.25, -33.5 ], [ 151.25, -33.75 ], [ 151.25, -34 ], [ 152, -34 ], [ 152, -33 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 23, -34 ], [ 23, -35 ], [ 24, -35 ], [ 24, -34 ], [ 23.75, -34 ], [ 23.5, -34 ], [ 23.25, -34 ], [ 23, -34 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 18, -34 ], [ 18, -35 ], [ 19, -35 ], [ 19, -34.5 ], [ 19, -34.25 ], [ 18.75, -34.25 ], [ 18.75, -34 ], [ 18.5, -34 ], [ 18.5, -34.25 ], [ 18.25, -34.25 ], [ 18.25, -34 ], [ 18, -34 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 136, -35 ], [ 136, -36 ], [ 136.5, -36 ], [ 136.5, -35.75 ], [ 137.25, -35.5 ], [ 137.5, -35.5 ], [ 137.5, -35.75 ], [ 137.75, -35.75 ], [ 138, -35.75 ], [ 138, -36 ], [ 139, -36 ], [ 139, -35.5 ], [ 138.75, -35.5 ], [ 138.5, -35.75 ], [ 138.25, -35.75 ], [ 138.25, -35.5 ], [ 138.5, -35.25 ], [ 138.5, -35 ], [ 138, -35 ], [ 138, -34.5 ], [ 137.75, -35.25 ], [ 137.5, -35 ], [ 137.25, -35.25 ], [ 137, -35.25 ], [ 137, -35 ], [ 136, -35 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 137, -34 ], [ 137, -35 ], [ 137.25, -35 ], [ 137.5, -35 ], [ 137.5, -34.5 ], [ 137.5, -34.25 ], [ 137.5, -34 ], [ 137, -34 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 167, -28 ], [ 167, -30 ], [ 168, -30 ], [ 168, -28 ], [ 167, -28 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 159, -29 ], [ 159, -30 ], [ 160, -30 ], [ 160, -29 ], [ 159, -29 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 153, -30.75 ], [ 153, -31 ], [ 154, -31 ], [ 154, -26 ], [ 153.25, -26 ], [ 153, -26.25 ], [ 153.25, -26.5 ], [ 153, -26.75 ], [ 153.25, -26.75 ], [ 153.25, -27 ], [ 153, -27 ], [ 153, -27.25 ], [ 153.25, -27.25 ], [ 153.5, -27.75 ], [ 153.5, -28 ], [ 153.5, -28.25 ], [ 153.5, -28.5 ], [ 153.5, -28.75 ], [ 153.5, -29 ], [ 153.5, -29.25 ], [ 153.25, -29.25 ], [ 153.25, -29.5 ], [ 153.25, -29.75 ], [ 153, -30.5 ], [ 153, -30.75 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 159, -31 ], [ 159, -32 ], [ 160, -32 ], [ 160, -31 ], [ 159, -31 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -179, -30 ], [ -179, -32 ], [ -178, -32 ], [ -178, -30 ], [ -179, -30 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 117, -35 ], [ 117, -36 ], [ 119, -36 ], [ 119, -35 ], [ 118.5, -35 ], [ 118.25, -35 ], [ 118, -35 ], [ 117.75, -35 ], [ 117.5, -35.25 ], [ 117.25, -35 ], [ 117, -35 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 151, -38 ], [ 151, -37 ], [ 151, -35 ], [ 150.75, -35 ], [ 150.75, -35.25 ], [ 150.5, -35.25 ], [ 150.25, -35.75 ], [ 150.25, -36 ], [ 150.25, -36.25 ], [ 150, -36.5 ], [ 150, -37 ], [ 150, -37.25 ], [ 150, -37.5 ], [ 149.75, -37.5 ], [ 149.75, -37.75 ], [ 149.5, -37.75 ], [ 149.25, -37.75 ], [ 148.25, -37.75 ], [ 148, -37.75 ], [ 148, -38 ], [ 151, -38 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 173, -36 ], [ 174, -36 ], [ 173.5, -35.5 ], [ 173.25, -35.5 ], [ 173.25, -35.25 ], [ 173.25, -35 ], [ 173.25, -34.75 ], [ 173.5, -34.75 ], [ 173.5, -35 ], [ 173.75, -35 ], [ 174, -35 ], [ 174, -34 ], [ 172, -34 ], [ 172, -35 ], [ 173, -35 ], [ 173, -36 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 178, -37.5 ], [ 178, -37 ], [ 178, -36 ], [ 176, -36 ], [ 176, -35 ], [ 174, -35 ], [ 174, -35.25 ], [ 174.25, -35.25 ], [ 174.5, -35.5 ], [ 174.5, -35.75 ], [ 174.5, -36 ], [ 174.75, -36 ], [ 174.75, -36.25 ], [ 174.75, -36.5 ], [ 174.75, -36.75 ], [ 175, -36.75 ], [ 175, -37 ], [ 175.25, -37 ], [ 175.5, -37 ], [ 175.5, -36.75 ], [ 175.75, -36.75 ], [ 175.75, -37 ], [ 176, -37 ], [ 176, -37.25 ], [ 176, -37.5 ], [ 176, -37.75 ], [ 176.25, -37.75 ], [ 176.75, -38 ], [ 177, -38 ], [ 177.25, -38 ], [ 177.5, -38 ], [ 177.75, -37.75 ], [ 178, -37.5 ] ], [ [ 175.5, -36.25 ], [ 175.25, -36.25 ], [ 175.5, -36 ], [ 175.5, -36.25 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 174, -37 ], [ 174.5, -37 ], [ 174.5, -36.75 ], [ 174.5, -36.5 ], [ 174.25, -36.5 ], [ 174, -36.5 ], [ 174, -37 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -65, -41 ], [ -65.25, -41 ], [ -65.25, -41.25 ], [ -65, -41.5 ], [ -65, -41 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -64, -42 ], [ -65, -42 ], [ -64.75, -42.25 ], [ -64.5, -42.25 ], [ -64.5, -42.5 ], [ -64, -42.5 ], [ -64, -42.25 ], [ -64, -42 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -64.75, -43 ], [ -64, -43 ], [ -64.25, -42.75 ], [ -64.5, -42.5 ], [ -64.75, -42.5 ], [ -65, -42.75 ], [ -64.75, -43 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 147, -40 ], [ 147, -41 ], [ 147.25, -41 ], [ 147.5, -41 ], [ 147.75, -40.75 ], [ 148, -40.75 ], [ 148, -40.5 ], [ 148, -40.25 ], [ 148, -40 ], [ 147.75, -40 ], [ 147.75, -39.75 ], [ 148, -39.75 ], [ 148, -39 ], [ 147, -39 ], [ 147, -38.5 ], [ 146.75, -38.75 ], [ 146.5, -38.75 ], [ 146.5, -39 ], [ 146.25, -39 ], [ 146.25, -38.75 ], [ 146, -38.75 ], [ 145.75, -38.75 ], [ 145.5, -38.75 ], [ 145.5, -38.5 ], [ 145.5, -38.25 ], [ 145.25, -38.5 ], [ 145, -38.5 ], [ 144.75, -38.5 ], [ 144.75, -38.25 ], [ 145, -38.25 ], [ 145, -38 ], [ 144.5, -38 ], [ 144.5, -38.25 ], [ 144, -38.5 ], [ 144, -39 ], [ 146, -39 ], [ 146, -40 ], [ 147, -40 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -73, -42 ], [ -73, -43 ], [ -72.75, -43 ], [ -72.75, -42.75 ], [ -72.75, -42.5 ], [ -72.75, -42.25 ], [ -72.5, -42.25 ], [ -72.5, -42 ], [ -72.75, -42 ], [ -73, -42 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 145, -43 ], [ 145, -44 ], [ 148, -44 ], [ 148, -43.25 ], [ 147.75, -43.25 ], [ 147.75, -43 ], [ 148, -43 ], [ 148, -42.75 ], [ 147.75, -42.75 ], [ 147.5, -42.75 ], [ 147.5, -43 ], [ 147.5, -43.25 ], [ 147.25, -43.25 ], [ 147, -43.25 ], [ 147, -43.5 ], [ 146.75, -43.75 ], [ 146.5, -43.5 ], [ 146.25, -43.5 ], [ 146.25, -43.25 ], [ 146, -43.25 ], [ 145.75, -43.25 ], [ 145.75, -43 ], [ 145.5, -43 ], [ 145, -43 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -58, -51.75 ], [ -58, -52 ], [ -57, -52 ], [ -57, -51 ], [ -58, -51 ], [ -58, -51.5 ], [ -57.75, -51.5 ], [ -57.75, -51.75 ], [ -58, -51.75 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -69, -55.25 ], [ -69, -56 ], [ -68, -56 ], [ -68, -55.75 ], [ -68, -55.5 ], [ -68, -55.25 ], [ -68.25, -55.25 ], [ -68.25, -55.5 ], [ -68.5, -55.5 ], [ -68.75, -55.5 ], [ -68.75, -55.25 ], [ -68.75, -55 ], [ -69, -55 ], [ -69, -55.25 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ -68, -55 ], [ -67.25, -55 ], [ -68, -54.75 ], [ -68.25, -54.75 ], [ -68.5, -54.75 ], [ -68.5, -55 ], [ -68.5, -55.25 ], [ -68.25, -55.25 ], [ -68.25, -55 ], [ -68, -55 ] ] ]
+      } ],
+      "type" : "GeometryCollection"
+    },
+    "parameter_vocabs" : [ "ocean biota" ],
+    "platform_vocabs" : [ "Biological platform", "diver" ],
+    "organisation_vocabs" : [ "Marine Imagery Sub-Facility, Integrated Marine Observing System (IMOS)", "National Reef Monitoring Network Sub-Facility, Integrated Marine Observing System (IMOS)" ]
+  },
+  "contacts" : [ {
+    "roles" : [ "pointOfContact", "about" ],
+    "organization" : "Integrated Marine Observing System (IMOS)",
+    "position" : "Data Officer",
+    "emails" : [ "info@aodn.org.au" ],
+    "addresses" : [ {
+      "city" : "Hobart",
+      "country" : "Australia",
+      "delivery_point" : [ "University of Tasmania", "Private Bag 110" ],
+      "postal_code" : "7001",
+      "administrative_area" : "Tasmania"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "61 3 6226 7488"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : "61 3 6226 2107"
+    } ],
+    "links" : [ {
+      "href" : "http://imos.org.au/aodn.html",
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : "Website of the Australian Ocean Data Network (AODN)"
+    }, {
+      "href" : "https://ror.org/010x3gp67",
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : "ROR ID"
+    } ]
+  }, {
+    "roles" : [ "pointOfContact", "about" ],
+    "organization" : "Institute for Marine and Antarctic Studies (IMAS), University of Tasmania (UTAS)",
+    "name" : "Oh, Elizabeth",
+    "position" : "Program Support Officer",
+    "emails" : [ "Elizabeth.Oh@utas.edu.au" ],
+    "addresses" : [ {
+      "city" : "Hobart",
+      "country" : "Australia",
+      "delivery_point" : [ "IMAS - Taroona", "Private Bag 49" ],
+      "postal_code" : "7001",
+      "administrative_area" : "Tasmania"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "+61 3 6226 8347"
+    }, {
+      "roles" : [ "facsimilie" ],
+      "value" : "+61 3 6227 8035"
+    } ],
+    "links" : [ {
+      "href" : "https://orcid.org/0000-0001-7061-5068",
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : "ORCID ID"
+    } ]
+  }, {
+    "roles" : [ "distributor", "metadata" ],
+    "organization" : "Integrated Marine Observing System (IMOS)",
+    "position" : "Data Officer",
+    "emails" : [ "info@aodn.org.au" ],
+    "addresses" : [ {
+      "city" : "Hobart",
+      "country" : "Australia",
+      "delivery_point" : [ "University of Tasmania", "Private Bag 110" ],
+      "postal_code" : "7001",
+      "administrative_area" : "Tasmania"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "61 3 6226 7488"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : "61 3 6226 2107"
+    } ],
+    "links" : [ {
+      "href" : "http://imos.org.au/aodn.html",
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : "Website of the Australian Ocean Data Network (AODN)"
+    } ]
+  }, {
+    "roles" : [ "contributor", "citation" ],
+    "organization" : "Reef Life Survey Foundation (RLS)",
+    "emails" : [ "enquiries@reeflifesurvey.com" ],
+    "addresses" : [ {
+      "city" : "Battery Point",
+      "country" : "Australia",
+      "delivery_point" : [ "60 Napolean Street" ],
+      "postal_code" : "7001",
+      "administrative_area" : "Tasmania"
+    } ],
+    "links" : [ {
+      "href" : "https://reeflifesurvey.com/",
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : "Website of Reef Life Survey"
+    } ]
+  }, {
+    "roles" : [ "distributor", "citation" ],
+    "organization" : "Integrated Marine Observing System (IMOS)",
+    "emails" : [ "imos@imos.org.au" ],
+    "addresses" : [ {
+      "city" : "Hobart",
+      "country" : "Australia",
+      "delivery_point" : [ "Private Bag 110" ],
+      "postal_code" : "7001",
+      "administrative_area" : "Tasmania"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "61 3 6226 7549"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : "61 3 6226 2107"
+    } ],
+    "links" : [ {
+      "href" : "http://www.imos.org.au/html",
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : "Website of the Integrated Marine Observing System (IMOS)"
+    }, {
+      "href" : "https://ror.org/010x3gp67",
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : "ROR ID"
+    } ]
+  } ],
+  "languages" : [ {
+    "code" : "eng",
+    "name" : "English"
+  } ],
+  "links" : [ {
+    "href" : "https://imos.org.au/auv/national-reef-monitoring-network",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "{\"title\":\"NRMN page on IMOS website\",\"description\":\"\"}"
+  }, {
+    "href" : "https://portal.aodn.org.au/search?uuid=0a65be6d-1c76-49ac-a151-80acf123612c",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "{\"title\":\"View and download data though the AODN Portal\",\"description\":\"\"}"
+  }, {
+    "href" : "https://aodn-cloud-optimised.s3.ap-southeast-2.amazonaws.com/diver_photoquadrat_score_qc.parquet/",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "{\"title\":\"Data files via Amazon Web Services S3 storage - download link (full dataset)\",\"description\":\"\"}"
+  }, {
+    "href" : "s3://aodn-cloud-optimised/diver_photoquadrat_score_qc.parquet/",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "{\"title\":\"Data files accessible via Amazon S3 (public access, S3 URI)\",\"description\":\"\"}"
+  }, {
+    "href" : "https://aodn-cloud-optimised.s3.ap-southeast-2.amazonaws.com/diver_photoquadrat_qc_DwC.parquet/",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "{\"title\":\"Data files via Amazon Web Services S3 storage - download link (full dataset) - Darwin Core compliant data\",\"description\":\"\"}"
+  }, {
+    "href" : "s3://aodn-cloud-optimised/diver_photoquadrat_qc_DwC.parquet/",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "{\"title\":\"Data files accessible via Amazon S3 (public access, S3 URI) - Darwin Core compliant data\",\"description\":\"\"}"
+  }, {
+    "href" : "https://atrc.au/",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "{\"title\":\"Website of Australian Temperate Reef Collaboration (ATRC)\",\"description\":\"\"}"
+  }, {
+    "href" : "https://reeflifesurvey.com/explorer/",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "{\"title\":\"Reef Life Survey Explorer\",\"description\":\"\"}"
+  }, {
+    "href" : "https://squidle.org/",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "{\"title\":\"Squidle+ website\",\"description\":\"\"}"
+  }, {
+    "href" : "https://doi.org/10.1016/j.biocon.2020.108855",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "{\"title\":\"Access to Edgar et. al. (2020) Biological Conservation paper\",\"description\":\"\"}"
+  }, {
+    "href" : "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0141039",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "{\"title\":\"CATAMI paper - RLS habitat categories extend this scheme\",\"description\":\"\"}"
+  }, {
+    "href" : "https://reeflifesurvey.com/wp-content/uploads/2019/02/NEW-Methods-Manual_150815.pdf",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "{\"title\":\"Reef Life Survey Methods Manual\",\"description\":\"\"}"
+  }, {
+    "href" : "http://content.aodn.org.au/Documents/IMOS/Facilities/autonomous_underwater_vehicles/ATRC_Methods_Manual_2022.pdf",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "{\"title\":\"Australian Temperate Reef Collaboration Methods Manual\",\"description\":\"\"}"
+  }, {
+    "href" : "https://content.aodn.org.au/Documents/IMOS/Facilities/autonomous_underwater_vehicles/IMOS_NRMN_QAQC_LATEST.pdf",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "{\"title\":\"NRMN Database QA/QC Protocols Manual\",\"description\":\"\"}"
+  }, {
+    "href" : "https://content.aodn.org.au/Documents/IMOS/Facilities/autonomous_underwater_vehicles/RLS_Image_Annotation_Protocol_LATEST.pdf",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "{\"title\":\"RLS Image Annotation Protocol Manual\",\"description\":\"\"}"
+  }, {
+    "href" : "https://content.aodn.org.au/Documents/IMOS/Facilities/autonomous_underwater_vehicles/IMOS_NRMN_Photo_Quadrat_Aggregated_Data_Product_Technical_Document_LATEST.pdf",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "{\"title\":\"Technical description of product\",\"description\":\"\"}"
+  }, {
+    "href" : "https://registry.opendata.aws/",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "{\"title\":\"Access To AWS Open Data Program registry for the Cloud Optimised version of this dataset (data is not yet available)\",\"description\":\"\"}"
+  }, {
+    "href" : "https://github.com/aodn/aodn_cloud_optimised/blob/main/notebooks/diver_photoquadrat_score_qc.ipynb",
+    "rel" : "related",
+    "type" : "text/html",
+    "title" : "{\"title\":\"Access to Jupyter notebook to query Cloud Optimised converted dataset\",\"description\":\"\"}"
+  }, {
+    "href" : "https://catalogue-imos.aodn.org.au:443/geonetwork/srv/api/records/0a65be6d-1c76-49ac-a151-80acf123612c",
+    "rel" : "describedby",
+    "type" : "text/html",
+    "title" : "Full metadata link"
+  }, {
+    "href" : "https://licensebuttons.net/l/by/4.0/88x31.png",
+    "rel" : "license",
+    "type" : "image/png"
+  }, {
+    "href" : "http://creativecommons.org/licenses/by/4.0/",
+    "rel" : "license",
+    "type" : "text/html"
+  }, {
+    "href" : "uuid:8cdcdcad-399b-4bed-8cb2-29c486b6b124",
+    "rel" : "parent",
+    "type" : "application/json",
+    "title" : "{\"title\":\"IMOS - National Reef Monitoring Network Sub-Facility\",\"recordAbstract\":\"The National Reef Monitoring Network brings together shallow reef surveys conducted around Australia into a centralised database. The IMOS National Reef Monitoring Network sub-Facility collates, cleans, stores and makes this data rapidly available from contributors including: Reef Life Survey, Parks Australia, Department of Biodiversity, Conservation and Attractions (Western Australia), Department of Environment, Water and Natural Resources (South Australia), Department of Primary Industries (New South Wales), Tasmanian Parks and Wildlife Service and Parks Victoria.\\n\\nThe data provided by the National Reef Monitoring Network contributes to establishing and supporting national marine baselines, and assisting with the management of Commonwealth and State marine reserves.\\n\\nReef Life Survey (RLS) and the Australian Temperate Reef Network (ATRC) aims to improve biodiversity conservation and the sustainable management of marine resources by coordinating surveys of rocky and coral reefs using scientific methods, with the ultimate goal to improve coastal stewardship. Our activities depend on the skills of marine scientists, experienced and motivated recreational SCUBA divers, partnerships with management agencies and university researchers, and active input from the ATRC partners and RLS Advisory Committee.\\n\\nRLS and ATRC data are freely available to the public for non-profit purposes, so not only managers, but also groups such as local dive clubs or schools may use these data to look at changes over time in their own local reefs. By making data freely available and through public outputs, RLS and ATRC aims to raise broader community awareness of the status of Australia’s marine biodiversity and associated conservation issues.\"}"
+  }, {
+    "href" : "uuid:aeb0afce-7fc7-4d48-91fc-f7b8e730073c",
+    "rel" : "parent",
+    "type" : "application/json",
+    "title" : "{\"title\":\"NESP MaC Project 5.9 – Making marine environmental data more assessment ready, 2025 (UTAS, IMOS)\",\"recordAbstract\":\"The 2020 Independent Review of the EPBC Act (the Samuel Review) states that “Decision-makers, proponents and the community do not have access to the best available data, information and science. This results in sub-optimal decision-making, inefficiency and additional cost for business, and poor transparency for the community. Immediate investment in the information supply chain is needed to support reform. We can't wait until perfect data is available. What is missing at the moment, is the step required to routinely turn well-managed marine research data into marine environmental data and products, that can be consumed by the EIA national environmental data supply chain and made available for use in SOE reports, Environmental Economic Accounts, environmental assessments, and tracking of environmental trends and outcomes.\\n\\nThis project will address that gap by (a) identifying priority datasets currently managed as research data and (b) building the additional information infrastructure required to (c) routinely deliver marine environmental data and products that are assessment ready, in line with the Nature Positive Plan.\\n\\nPlanned Outputs\\n\\n• Final technical report with analysed data and summary of recommendations for policy makers of key findings [written]\"}"
+  } ],
+  "license" : "Creative Commons Attribution 4.0 International License",
+  "providers" : [ {
+    "name" : "Integrated Marine Observing System (IMOS)",
+    "roles" : [ "distributor" ],
+    "url" : "http://imos.org.au/aodn.html"
+  } ],
+  "themes" : [ {
+    "concepts" : [ {
+      "id" : "Marine Features (Australia) | Gulf St. Vincent, SA",
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "Global / Oceans | Atlantic Ocean",
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "Marine Features (Australia) | Bass Strait, TAS/VIC",
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "Regional Seas | Gulf of Thailand",
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "Regional Seas | Bismarck Sea",
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "Regional Seas | Banda Sea",
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "Regional Seas | Solomon Sea",
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "Regional Seas | Arafura Sea",
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "Global / Oceans | Indian Ocean",
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "Regional Seas | Tasman Sea",
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "Global / Oceans | Pacific Ocean",
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "Regional Seas | Red Sea",
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "Regional Seas | Coral Sea",
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "Regional Seas | Timor Sea",
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "Global / Oceans | World",
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "Global / Oceans | Southern Ocean",
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
+    } ],
+    "scheme" : "place"
+  }, {
+    "concepts" : [ {
+      "id" : "",
+      "title" : "AODN Geographic Extents Vocabulary",
+      "description" : ""
+    } ],
+    "scheme" : "place"
+  }, {
+    "concepts" : [ {
+      "id" : "diver",
+      "url" : "http://vocab.nerc.ac.uk/collection/L06/current/72",
+      "title" : "AODN Platform Vocabulary",
+      "description" : ""
+    } ],
+    "scheme" : "theme"
+  }, {
+    "concepts" : [ {
+      "id" : "Biotic taxonomic identification",
+      "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/489",
+      "title" : "AODN Discovery Parameter Vocabulary",
+      "description" : ""
+    } ],
+    "scheme" : "theme"
+  }, {
+    "concepts" : [ {
+      "id" : "Marine Imagery Sub-Facility, Integrated Marine Observing System (IMOS)",
+      "url" : "http://vocab.aodn.org.au/def/organisation/entity/589",
+      "title" : "AODN Organisation Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "National Reef Monitoring Network Sub-Facility, Integrated Marine Observing System (IMOS)",
+      "url" : "http://vocab.aodn.org.au/def/organisation/entity/587",
+      "title" : "AODN Organisation Vocabulary",
+      "description" : ""
+    } ],
+    "scheme" : "discipline"
+  }, {
+    "concepts" : [ {
+      "id" : "CORAL REEF",
+      "title" : "GCMD Earth Science and Earth Science Services Keywords",
+      "description" : ""
+    }, {
+      "id" : "BENTHIC",
+      "title" : "GCMD Earth Science and Earth Science Services Keywords",
+      "description" : ""
+    }, {
+      "id" : "KELP FOREST",
+      "title" : "GCMD Earth Science and Earth Science Services Keywords",
+      "description" : ""
+    } ],
+    "scheme" : "theme"
+  }, {
+    "concepts" : [ {
+      "id" : "MACROALGAE (SEAWEEDS)",
+      "title" : "GCMD Earth Science and Earth Science Services Keywords",
+      "description" : ""
+    }, {
+      "id" : "IMAGE PROCESSING",
+      "title" : "GCMD Earth Science and Earth Science Services Keywords",
+      "description" : ""
+    } ],
+    "scheme" : "theme"
+  }, {
+    "concepts" : [ {
+      "id" : "oceans"
+    }, {
+      "id" : "biota"
+    }, {
+      "id" : "environment"
+    } ],
+    "scheme" : "Categories"
+  } ],
+  "id" : "0a65be6d-1c76-49ac-a151-80acf123612c",
+  "search_suggestions" : {
+    "abstract_phrases" : [ "through public outputs", "issues imos understanding", "habitat", "each transect", "also available", "coastal stewardship our activities", "together shallow reef", "end end", "survey rls", "coordinating surveys", "components targeted labelling", "images taken", "overlaid labelled using", "advisory committee", "understanding", "surveys conducted", "marine baselines", "forming corals values", "target taxa only eg", "goal improve", "reserves", "community", "analysis", "australia department environment", "contains", "aims improve", "imagery squidle", "establishing supporting", "institute", "south wales", "so only", "platform sub", "providing", "wales tasmanian", "non profit purposes", "dataset contains data", "approach usually", "available from contributors", "targeted", "improve biodiversity conservation", "divers partners", "annotation", "committee", "local dive clubs", "composition scored from photoquadrats", "statistics rls", "imas", "only managers", "brings together shallow reef", "atrc partners rls", "changes over", "habitat components targeted", "from photoquadrats", "image management dataset", "imos understanding marine", "shallow", "per image", "counts campaign", "reef monitoring", "resources coordinating surveys", "imos collections", "aims improve biodiversity", "photoquadrats", "generated", "stores makes", "surveys conducted around australia", "labelling target", "reef life", "primary platform", "making", "cleans stores makes", "researchers active input", "given percent", "supporting national marine", "conservation sustainable", "atrc data freely", "contributes", "imagery sub", "conservation issues imos", "labelling all", "available from", "rapidly available from contributors", "reserves reef life", "methods ultimate", "database imos", "regional", "all habitat components", "provided", "south wales tasmanian parks", "squidle", "establishing supporting national", "service parks victoria", "environment water", "network brings together shallow", "provides", "imagery annotations", "end", "new south wales", "data rapidly", "images can", "habitat forming corals values", "umi sub facility squidle", "development new", "image annotation", "agencies", "label", "sub facility department", "delivery management annotation", "environment", "community awareness", "parks australia imos", "marine imagery sub", "service", "scuba divers partnerships", "stewardship", "contributors", "using two different methodologies", "water south australia", "department environment", "approach", "scuba divers", "advisory committee rls", "scientists experienced motivated", "per", "australian temperate", "water south", "reserves reef", "using standardised schemes", "sharing quantitative", "percent coverage each", "wales tasmanian parks", "components targeted", "two different methodologies", "rls atrc divers", "schools", "delivery management", "rls advisory committee", "managers", "sharing quantitative data", "targeted labelling", "agencies university", "local", "network image management", "western australia", "rls standardised", "label scheme associated", "australia imos understanding", "points per image overlaid", "antarctic", "stores", "input from", "imas data", "through public outputs rls", "labelled using standardised", "life survey rls", "network sub", "species", "coral reefs", "industries", "rls", "rapidly available", "associated exemplar images can", "outputs", "point overlay approach usually", "national reef", "atrc", "images were", "points", "analysis denoted", "changes over time", "coral", "contributors including", "our activities", "raise", "cleans stores", "all", "new", "including", "conducted", "end end environment", "wales", "labelling all habitat", "monitoring network image management", "clubs schools", "were annotated using", "ultimate goal improve", "intervals", "university researchers", "tasmanian parks wildlife", "depend skills", "primary industries regional", "improve", "were", "habitat categories", "stewardship our activities", "university", "understanding marine", "supporting national marine baselines", "facility collates", "habitat categories data", "taxa only", "state marine reserves", "around", "environment water south", "annotations facilitating", "marine resources coordinating", "habitat composition", "profit purposes", "broader community awareness", "parks australia", "department", "imagery sub facility", "imos understanding", "srv api records", "committee rls atrc", "committee rls", "related imos collections imos", "serves foundational", "labelled using", "raise broader", "transects shallow rocky", "activities", "quantitative", "catalogue geonetwork", "stewardship our activities depend", "using two", "software platform", "establishing", "facility squidle annotation", "unique images", "environment delivery", "marine resources", "label scheme", "skills", "skills marine scientists", "unique images annotation", "https catalogue", "sub facility squidle annotation", "attractions", "state", "annotation statistics", "api", "repository marine imagery", "freely available", "freely available through", "reef", "species habitat distributions", "using", "scheme associated", "marine imagery", "images taken along", "imagery umi", "attractions western australia", "wildlife service parks", "new south", "eg habitat forming corals", "monitoring", "each", "conservation attractions western", "temperate reef", "south australia", "input", "managers also groups", "public outputs rls", "imos", "data habitat", "network atrc aims", "also groups", "contributes establishing", "transect analysis", "two", "marine", "scored from photoquadrats taken", "divers partners along", "generated using", "biodiversity associated", "imos national reef", "department biodiversity conservation", "national marine baselines", "taken", "provides national", "aims raise", "broader", "images were annotated using", "eg habitat", "squidle annotation counts", "collates cleans stores", "atrc partners", "percent coverage", "baselines assisting", "partners", "reef surveys conducted", "values given", "australia centralised", "purposes so only", "activities depend", "dataset", "rls atrc", "australia department", "through", "monitoring network contributes", "along transects", "different methodologies", "recreational scuba divers", "coral reefs images", "parks victoria institute", "partnerships management agencies", "local reefs making", "given", "local reefs", "overlay", "images were annotated", "ultimate", "methodologies full biodiversity comprehensive", "sharing", "survey parks", "associated exemplar images", "catalogue", "partners along transects", "facility providing", "related imos collections", "coastal", "full", "foundational software", "national repository marine", "associated conservation", "non", "available from contributors including", "annotation marine imagery", "surveys conducted around", "including reef life survey", "imagery sub facility department", "supporting", "different methodologies full", "delivery", "biodiversity conservation attractions", "partners rls advisory", "shallow reef", "development new south", "target", "marine biodiversity associated", "generated using two", "forming corals", "commonwealth", "time", "conservation attractions", "standardised label", "forming", "network image", "using point", "reef surveys", "issues", "regional development new", "collections", "facility department biodiversity", "methodologies full biodiversity", "australian temperate reef", "images", "habitat components", "ultimate goal", "including reef", "attractions western australia department", "data generated", "photoquadrats taken", "distributions squidle serves", "annotation counts", "parks wildlife", "australia department primary", "using scientific", "management agencies university", "primary", "marine reserves", "only eg habitat forming", "antarctic studies imas", "methods", "annotation statistics rls", "associated exemplar", "australian", "department biodiversity", "antarctic studies", "rapidly available from", "coastal stewardship", "raise broader community", "categories", "shallow rocky coral", "were annotated", "collates", "sub facility", "national reef monitoring network", "active input", "umi sub", "statistics rls standardised", "around australia", "end environment", "sustainable management", "national marine", "taxa only eg habitat", "facility", "facility squidle annotation counts", "statistics", "providing end", "reefs using scientific", "life survey parks australia", "understanding marine imagery", "reefs making", "two different", "network sub facility", "only eg habitat", "exemplar images can", "habitat distributions", "marine reserves reef life", "improve biodiversity", "time own", "divers partnerships management", "tasmanian", "water", "overlaid", "corals values", "data rapidly available from", "raise broader community awareness", "reef network atrc aims", "using point overlay", "together shallow", "annotated using", "local dive", "transect analysis denoted", "comprehensive labelling", "values", "marine biodiversity", "full biodiversity", "photoquadrats taken rls", "percent", "rocky", "point", "database", "along", "issues imos", "profit", "wildlife", "biodiversity associated conservation", "habitat composition scored from", "annotations facilitating sharing", "squidle primary", "coral reefs using scientific", "data freely", "also", "reef monitoring network image", "comprehensive labelling all", "makes data", "composition scored from", "coverage each", "brings together shallow", "active input from", "habitat composition scored", "https catalogue geonetwork", "overlaid labelled", "image annotation statistics", "conducted around", "points per", "standardised label scheme", "exemplar", "standardised schemes", "biodiversity comprehensive labelling", "reef monitoring network", "targeted labelling target", "available related", "only eg", "using scientific methods", "active", "marine imagery squidle", "rls atrc data", "reefs using", "experienced motivated", "eg habitat forming", "outputs rls", "facility provides", "biodiversity comprehensive", "intervals images", "scheme", "sustainable", "habitat forming", "schools may use", "state marine reserves reef", "over time", "divers partnerships", "composition", "national", "taken along each", "cleans", "standardised schemes habitat", "attractions western", "development new south wales", "sub facility squidle", "tasmanian parks", "data generated using", "marine antarctic studies", "input from atrc", "using standardised", "network contributes establishing", "rls atrc aims", "imagery annotations facilitating", "image overlaid", "scored from", "freely", "network sub facility collates", "wildlife service parks victoria", "recreational", "dataset contains", "stewardship our", "different methodologies full biodiversity", "management commonwealth", "monitoring network", "marine imagery annotations", "brings", "usually points", "temperate reef network atrc", "coastal stewardship our", "image", "goal improve coastal", "eg", "provides national repository", "taken rls", "motivated recreational scuba divers", "non profit", "geonetwork", "collections imos", "western", "management dataset contains", "denoted unique", "industries regional", "full biodiversity comprehensive", "per image overlaid", "south wales tasmanian", "online image", "our activities depend", "umi", "related", "taxa only eg", "facility providing end", "imagery sub facility provides", "two different methodologies full", "public non profit", "over", "rls australian", "assisting management", "annotation counts campaign", "public outputs", "platform national", "outputs rls atrc", "srv api", "dive clubs", "reef surveys conducted around", "management", "coral reefs using", "transects", "database imos national", "look changes", "comprehensive", "use data", "service parks", "monitoring network sub facility", "habitat distributions squidle", "from atrc", "primary platform national", "reserves reef life survey", "imagery", "usually", "https", "available through public", "victoria", "advisory", "corals", "researchers", "geonetwork srv", "data rapidly available", "schemes", "distributions", "conservation", "through public", "centralised", "from contributors", "management marine resources", "umi sub facility", "reef network atrc", "status", "reefs making data", "serves", "department primary industries", "australian temperate reef network", "image management", "scheme associated exemplar", "aims raise broader", "water south australia department", "schools may", "habitat forming corals", "available through", "marine scientists", "national repository", "labelled using standardised schemes", "own local", "overlay approach usually", "viewed", "biodiversity conservation", "labelling target taxa", "together", "facility department", "management annotation", "images annotation statistics", "transects shallow", "national reef monitoring", "may", "can viewed", "provided national", "scored from photoquadrats", "related imos", "platform national reef", "atrc divers partners", "image overlaid labelled", "data species", "coordinating surveys rocky", "institute marine", "researchers active", "facilitating sharing", "facility collates cleans stores", "use", "annotations", "marine imagery sub facility", "commonwealth state", "broader community", "species habitat", "atrc aims raise", "facility collates cleans", "shallow reef surveys", "from contributors including reef", "atrc aims", "quantitative data species", "different", "improve coastal", "life survey", "collections imos understanding", "motivated", "scuba", "campaign https catalogue", "annotation statistics also", "improve coastal stewardship", "contains data", "labelled", "studies imas", "scientists", "from photoquadrats taken", "reef network", "survey", "supporting national", "api records", "parks victoria", "reef life survey parks", "network contributes", "surveys", "making data freely", "awareness status", "imos national", "rls standardised label scheme", "rls standardised label", "dive", "imagery umi sub facility", "geonetwork srv api", "life survey parks", "experienced", "reef monitoring network brings", "assisting", "agencies university researchers", "rapidly", "rls advisory committee rls", "methodologies full", "scored", "srv", "given percent coverage", "atrc data", "online", "public non", "shallow reef surveys conducted", "centralised database imos", "target taxa only", "depend", "marine imagery umi sub", "counts", "may use", "foundational", "along each", "partners rls", "points per image", "network brings together", "non profit purposes so", "taxa", "reef life survey", "methodologies", "new south wales tasmanian", "distributions squidle", "australia", "statistics also", "catalogue geonetwork srv", "unique", "recreational scuba divers partnerships", "imagery umi sub", "groups local", "sub", "components", "atrc aims improve", "contributors including reef", "marine scientists experienced", "from atrc partners", "australia imos", "scientific methods", "data freely available", "squidle annotation", "own local reefs", "denoted", "images annotation", "partnerships management", "so", "recreational scuba", "geonetwork srv api records", "can viewed online", "all habitat", "makes", "full biodiversity comprehensive labelling", "exemplar images", "profit purposes so", "associated", "point overlay approach", "using two different", "squidle serves", "available public", "surveys rocky", "sustainable management marine", "available", "standardised", "awareness", "rocky coral", "repository marine", "composition scored", "baselines", "reef life survey rls", "experienced motivated recreational", "associated conservation issues", "parks wildlife service", "reefs", "monitoring network sub", "look", "clubs schools may", "reef monitoring network contributes", "temperate", "making data", "temperate reef network", "foundational software platform", "campaign", "status marine", "marine antarctic", "management agencies", "records", "overlay approach", "changes", "life", "may use data", "improve coastal stewardship our", "transect line", "atrc divers", "counts campaign https", "habitat distributions squidle serves", "industries regional development", "quantitative data", "coverage", "coordinating", "network brings", "primary industries", "statistics also available", "shallow rocky", "victoria institute", "motivated recreational scuba", "regional development", "sub facility provides", "network atrc", "intervals images were", "managers also", "software", "reefs images", "contributors including reef life", "repository", "target taxa", "annotated", "point overlay", "imas data provided", "studies imas data", "conducted around australia", "annotated using point", "rocky coral reefs", "making data freely available", "sub facility collates cleans", "categories data", "goal", "imos collections imos understanding", "dive clubs schools", "facilitating", "reefs using scientific methods", "purposes so", "so only managers", "labelling", "taken along", "data provided", "rls advisory", "monitoring network brings", "south", "management dataset", "parks australia imos understanding", "our", "sub facility collates", "sub facility providing", "partnerships", "regional development new south", "state marine", "skills marine", "marine imagery umi", "look changes over", "facility provides national", "monitoring network brings together", "partners along", "schemes habitat", "western australia department", "annotation marine", "conservation issues", "data", "imos collections imos", "facility squidle", "own", "data look", "generated using two different", "brings together", "images can viewed", "parks", "reef monitoring network sub", "collates cleans", "divers", "only", "from", "scientists experienced", "development", "south australia department", "including reef life", "wildlife service", "only managers also", "purposes", "transect", "commonwealth state marine", "together shallow reef surveys", "line", "scientific", "campaign https", "resources coordinating", "platform", "network", "can", "public", "corals values given", "motivated recreational", "centralised database", "clubs", "studies", "makes data rapidly", "department primary", "monitoring network image", "biodiversity", "aims", "schemes habitat categories", "imos national reef monitoring", "viewed online", "resources", "groups", "management marine", "survey parks australia imos", "university researchers active", "from contributors including", "marine baselines assisting", "marine reserves reef", "survey parks australia" ],
+    "parameter_vocabs_sayt" : [ "ocean biota" ],
+    "platform_vocabs_sayt" : [ "Biological platform", "diver" ],
+    "organisation_vocabs_sayt" : [ "Marine Imagery Sub-Facility, Integrated Marine Observing System (IMOS)", "National Reef Monitoring Network Sub-Facility, Integrated Marine Observing System (IMOS)" ]
+  },
+  "sci:citation" : "{\"suggestedCitation\":\"The citation in a list of references is: \\\"Reef Life Survey (RLS); Integrated Marine Observing System (IMOS), [year-of-data-download], IMOS - National Reef Monitoring Network Sub-Facility - Global benthic cover data (photoquadrat image annotations), [data-access-URL], accessed [date-of-access].\\\"\",\"useLimitations\":[\"Data, products and services from IMOS are provided \\\"as is\\\" without any warranty as to fitness for a particular purpose.\"],\"otherConstraints\":[\"Please also utilise and cite this paper when using this data: Graham J. Edgar, Antonia Cooper, Susan C. Baker, William Barker, Neville S. Barrett, Mikel A. Becerro, Amanda E. Bates, Danny Brock, Daniela M. Ceccarelli, Ella Clausius, Marlene Davey, Tom R. Davis, Paul B. Day, Andrew Green, Samuel R. Griffiths, Jamie Hicks, Ivan A. Hinojosa, Ben K. Jones, Stuart Kininmonth, Meryl F. Larkin, Natali Lazzari, Jonathan S. Lefcheck, Scott D. Ling, Peter Mooney, Elizabeth Oh, Alejandro Perez-Matus, Jacqueline B. Pocklington, Rodrigo Riera, Jose A. Sanabria-Fernandez, Yanir Seroussi, Ian Shaw, Derek Shields, Joe Shields, Margo Smith, German A. Soler, Jemina Stuart-Smith, John Turnbull, Rick D. Stuart-Smith. Establishing the ecological basis for conservation of shallow marine life using Reef Life Survey, Biological Conservation, Volume 252, 2020, https://doi.org/10.1016/j.biocon.2020.108855\",\"Oh, E., & Cooper, A. Reef Life Survey Image Annotation Protocol. Version 2.0. Reef Life Survey, Integrated Marine Observing System. 2025. https://doi.org/10.26198/mwwh-gx50\",\"Friedman, A., Monk, J., Pizarro, O., Lindsay, D., Oh, E., Thornton, B., Carroll, A., Przeslawski, R., & Williams, S. Squidle+: A collaborative platform to manage, discover and annotate marine imagery. Frontiers in Marine Science, Volume 12. 2026, https://doi.org/10.3389/fmars.2025.1677103[\"]}",
+  "type" : "Collection",
+  "stac_version" : "1.0.0",
+  "stac_extensions" : [ "https://stac-extensions.github.io/scientific/v1.0.0/schema.json", "https://stac-extensions.github.io/contacts/v0.1.1/schema.json", "https://stac-extensions.github.io/projection/v1.1.0/schema.json", "https://stac-extensions.github.io/language/v1.0.0/schema.json", "https://stac-extensions.github.io/themes/v1.0.0/schema.json", "https://stac-extensions.github.io/web-map-links/v1.2.0/schema.json" ]
+}

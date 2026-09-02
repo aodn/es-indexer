@@ -18,13 +18,12 @@ public class AssociatedRecordsUtil {
         if (data == null || data.isEmpty()) {
             return records;
         }
-        var parentRecord = getParentRecord(data);
-        if (!parentRecord.isEmpty()) {
-            var parentLink = buildLink(parentRecord, RelationType.PARENT);
+        getParentRecords(data).forEach(record -> {
+            var parentLink = buildLink(record, RelationType.PARENT);
             if (parentLink != null) {
                 records.add(parentLink);
             }
-        }
+        });
         getSiblingRecords(data).forEach(record -> {
             var siblingLink = buildLink(record, RelationType.SIBLING);
             if (siblingLink != null) {
@@ -72,13 +71,8 @@ public class AssociatedRecordsUtil {
         }
     }
 
-    // should only have 1 parent
-    private static Map<String, Object> getParentRecord(Map<String, ?> associatedRecordMap) {
-        var records = getRecordsByRelationKey(associatedRecordMap, "parent");
-        if (!records.isEmpty()) {
-            return records.get(0);
-        }
-        return Collections.emptyMap();
+    private static List<Map<String, Object>> getParentRecords(Map<String, ?> associatedRecordMap) {
+        return getRecordsByRelationKey(associatedRecordMap, "parent");
     }
 
     private static List<Map<String, Object>> getSiblingRecords(Map<String, ?> associatedRecordMap) {
