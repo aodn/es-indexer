@@ -70,7 +70,9 @@ public class AssociatedRecordsUtilTest {
 
     @Test
     public void testGenerateAssociatedRecords_withMultipleChildren_keepsAll() {
-        // When a record has two parents, visiting either parent must list this record under "children"
+        // getChildRecords() was never truncated to one, unlike the old getParentRecord() -
+        // this locks that in. Only this method's own multi-child behavior is tested here;
+        // it's what makes a record show up under "Sub Records" on every one of its parents.
         Map<String, Object> data = new LinkedHashMap<>();
         data.put("children", List.of(
                 record("ec424e4f-0f55-41a5-a3f2-726bc4541947", "Benthic cover data", "abstract"),
@@ -82,7 +84,9 @@ public class AssociatedRecordsUtilTest {
 
         List<LinkModel> childLinks = linksWithRel(links, RelationType.CHILD);
         assertEquals(3, childLinks.size(), "All children should be kept");
+        assertTrue(childLinks.stream().anyMatch(l -> l.getHref().equals("uuid:ec424e4f-0f55-41a5-a3f2-726bc4541947")));
         assertTrue(childLinks.stream().anyMatch(l -> l.getHref().equals("uuid:0a65be6d-1c76-49ac-a151-80acf123612c")));
+        assertTrue(childLinks.stream().anyMatch(l -> l.getHref().equals("uuid:9efa25cd-4da4-47b5-9385-45e3cbd11705")));
     }
 
     @Test
