@@ -57,6 +57,9 @@ public class RankingServiceImpl implements RankingService {
     @Value("${app.ranking.superseded.penalty:-20}")
     protected int supersededPenalty;
 
+    @Value("${app.ranking.document.penalty:-20}")
+    protected int documentPenalty;
+
     public Integer evaluateCompleteness(StacCollectionModel stacCollectionModel) {
         int total = 0;
         int count = 0;
@@ -163,6 +166,13 @@ public class RankingServiceImpl implements RankingService {
                 .isPresent()) {
             total += supersededPenalty;
         }
+        // Penalty for document record: scope.code equals document
+        if (safeGet(() -> stacCollectionModel.getSummaries().getScope().get("code"))
+                .filter("document"::equalsIgnoreCase)
+                .isPresent()) {
+            total += documentPenalty;
+        }
+
         log.debug("Overall count of metadata elements:{}", count);
         // The more field exist, the higher the mark
         return total + count;
