@@ -344,7 +344,7 @@
       <mri:abstract>
         <gco:CharacterString>The National Reef Monitoring Network brings together shallow reef surveys conducted around Australia into a centralised database. The IMOS National Reef Monitoring Network Sub-Facility collates, cleans, stores and makes this data rapidly available from contributors including: Reef Life Survey; Parks Australia; IMOS Understanding of Marine Imagery Sub-Facility; Department of Biodiversity, Conservation and Attractions (Western Australia); Department for Environment and Water (South Australia); Department of Primary Industries and Regional Development (New South Wales); Tasmanian Parks and Wildlife Service; Parks Victoria and Institute for Marine and Antarctic Studies (IMAS).
 
-The data provided by the National Reef Monitoring Network contributes to establishing and supporting national marine baselines, and assisting with the management of Commonwealth and State marine reserves. 
+The data provided by the National Reef Monitoring Network contributes to establishing and supporting national marine baselines, and assisting with the management of Commonwealth and State marine reserves.
 
 Reef Life Survey (RLS) and the Australian Temperate Reef Network (ATRC) aims to improve biodiversity conservation and the sustainable management of marine resources by coordinating surveys of rocky and coral reefs using scientific methods, with the ultimate goal to improve coastal stewardship. Our activities depend on the skills of marine scientists, experienced and motivated recreational SCUBA divers, partnerships with management agencies and university researchers, and active input from the ATRC partners and RLS Advisory Committee.
 
@@ -352,10 +352,10 @@ RLS and ATRC data are freely available to the public for non-profit purposes, so
 
 The IMOS Understanding of Marine Imagery Sub-Facility provides a national repository for marine imagery and annotations, facilitating the sharing of quantitative data on species and habitat distributions. Squidle+ serves as the foundational software platform for this sub-facility, providing an end-to-end environment for the delivery, management, and annotation of marine imagery. Squidle+ is the primary platform for National Reef Monitoring Network image management.
 
-This dataset contains data on the habitat composition scored from photoquadrats taken by RLS and ATRC divers and partners along 50m transects on shallow rocky and coral reefs. 20 images are taken along each 50 m transect line at 2.5 m intervals, and images were annotated using a point-overlay approach (usually with 5 points per image overlaid and labelled using standardised schemes of habitat categories). The data are generated using two different methodologies: full-biodiversity (comprehensive labelling of all habitat components) and targeted (labelling of target taxa only, eg. habitat-forming corals).  Values are given as percent coverage for each 50 m transect-analysis, as denoted by it's unique dataset_id.  
+This dataset contains data on the habitat composition scored from photoquadrats taken by RLS and ATRC divers and partners along 50m transects on shallow rocky and coral reefs. 20 images are taken along each 50 m transect line at 2.5 m intervals, and images were annotated using a point-overlay approach (usually with 5 points per image overlaid and labelled using standardised schemes of habitat categories). The data are generated using two different methodologies: full-biodiversity (comprehensive labelling of all habitat components) and targeted (labelling of target taxa only, eg. habitat-forming corals).  Values are given as percent coverage for each 50 m transect-analysis, as denoted by it's unique dataset_id.
 
 Images, annotation statistics, the RLS standardised label scheme and associated exemplar images, can be viewed online at squidle.org.  Image and annotation statistics are also available in the related IMOS collections:
-- IMOS - Understanding of Marine Imagery (UMI) Sub-Facility - Squidle+ Annotation counts by Campaign (https://catalogue-imos.aodn.org.au/geonetwork/srv/api/records/5a94a2cf-0810-44ea-a28d-cc8a5c30fbd7) 
+- IMOS - Understanding of Marine Imagery (UMI) Sub-Facility - Squidle+ Annotation counts by Campaign (https://catalogue-imos.aodn.org.au/geonetwork/srv/api/records/5a94a2cf-0810-44ea-a28d-cc8a5c30fbd7)
 - IMOS - Understanding of Marine Imagery (UMI) Sub-Facility - Squidle+ Imagery and Tracks by Deployment (https://catalogue-imos.aodn.org.au/geonetwork/srv/api/records/0c9bdfd6-2760-4bde-8230-241132790701)
 
 This dataset supersedes the RLS specific "Reef Life Survey (RLS): Habitat Quadrats " collection that was available at https://catalogue-rls.imas.utas.edu.au/geonetwork/srv/en/metadata.show?uuid=6e9c4980-1005-11dd-b28e-00188b4c0af8 (provision of data was stopped in June 2021).</gco:CharacterString>
@@ -3661,4 +3661,3 @@ For details on the standardised survey procedures (specifically Digital Photo-qu
     </mac:MI_AcquisitionInformation>
   </mdb:acquisitionInformation>
 </mdb:MD_Metadata>
-

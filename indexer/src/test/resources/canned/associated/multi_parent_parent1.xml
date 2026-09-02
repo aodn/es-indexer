@@ -754,7 +754,7 @@
       <mri:abstract>
         <gco:CharacterString>The National Reef Monitoring Network brings together shallow reef surveys conducted around Australia into a centralised database. The IMOS National Reef Monitoring Network sub-Facility collates, cleans, stores and makes this data rapidly available from contributors including: Reef Life Survey, Parks Australia, Department of Biodiversity, Conservation and Attractions (Western Australia), Department of Environment, Water and Natural Resources (South Australia), Department of Primary Industries (New South Wales), Tasmanian Parks and Wildlife Service and Parks Victoria.
 
-The data provided by the National Reef Monitoring Network contributes to establishing and supporting national marine baselines, and assisting with the management of Commonwealth and State marine reserves. 
+The data provided by the National Reef Monitoring Network contributes to establishing and supporting national marine baselines, and assisting with the management of Commonwealth and State marine reserves.
 
 Reef Life Survey (RLS) and the Australian Temperate Reef Network (ATRC) aims to improve biodiversity conservation and the sustainable management of marine resources by coordinating surveys of rocky and coral reefs using scientific methods, with the ultimate goal to improve coastal stewardship. Our activities depend on the skills of marine scientists, experienced and motivated recreational SCUBA divers, partnerships with management agencies and university researchers, and active input from the ATRC partners and RLS Advisory Committee.
 
@@ -1402,4 +1402,3 @@ Edgar, G., &amp; Barrett, N. (2012). An assessment of population responses of co
     </mac:MI_AcquisitionInformation>
   </mdb:acquisitionInformation>
 </mdb:MD_Metadata>
-
