@@ -378,6 +378,34 @@ public class IndexerServiceIT extends BaseTestClass {
         }
     }
 
+    @Test
+    public void verifyAssociatedRecordIndexerWithMultipleParents() throws IOException {
+
+        var targetRecordId = "0a65be6d-1c76-49ac-a151-80acf123612c";
+        var parent1Id = "8cdcdcad-399b-4bed-8cb2-29c486b6b124";
+        var parent2Id = "aeb0afce-7fc7-4d48-91fc-f7b8e730073c";
+
+        String expectedData = readResourceFile("classpath:canned/associated/multi_parent_self.json");
+
+        try {
+            insertMetadataRecords(targetRecordId, "classpath:canned/associated/multi_parent_self.xml");
+            insertMetadataRecords(parent1Id, "classpath:canned/associated/multi_parent_parent1.xml");
+            insertMetadataRecords(parent2Id, "classpath:canned/associated/multi_parent_parent2.xml");
+
+            indexerService.indexAllMetadataRecordsFromGeoNetwork(null, true, null);
+            var targetResult = indexerService.getDocumentByUUID(targetRecordId);
+            String resultJson = String.valueOf(Objects.requireNonNull(targetResult.source()));
+
+            String expected = indexerObjectMapper.readTree(expectedData).toPrettyString();
+            String actual = indexerObjectMapper.readTree(resultJson).toPrettyString();
+            JSONAssert.assertEquals(expected, actual, JSONCompareMode.STRICT);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        } finally {
+            deleteRecord(targetRecordId, parent1Id, parent2Id);
+        }
+    }
+
     /**
      * Some dataset can provide links to logos, this test is use to verify the logo links added correctly to the STAC,
      * this function is better test with docker image as it need to invoke some additional function where we need to

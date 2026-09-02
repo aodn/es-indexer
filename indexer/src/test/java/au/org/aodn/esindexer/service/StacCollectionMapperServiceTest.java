@@ -48,7 +48,6 @@ import org.springframework.test.util.ReflectionTestUtils;
 
 import static au.org.aodn.esindexer.BaseTestClass.readResourceFile;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
@@ -531,55 +530,6 @@ public class StacCollectionMapperServiceTest {
         JsonNode assets = objectMapper.readTree(lastRequest.get().document().toString()).get("assets");
         assertEquals(DatasetMediaType.APPLICATION_PARQUET.getValue(), assets.get(parquetDname).get("type").asText());
         assertEquals(DatasetMediaType.APPLICATION_ZARR.getValue(), assets.get(zarrDname).get("type").asText());
-    }
-    /**
-     * Verify a record with multiple GeoNetwork "parent" entries is mapped into multiple
-     * rel:"parent" links through the real XML -> STAC JSON pipeline, not just
-     * AssociatedRecordsUtil in isolation. See aodn/backlog#8290.
-     */
-    @Test
-    public void verifyMultipleParentLinksAreMapped() throws IOException {
-        // buildLink() casts title/description to LinkedHashMap and CommonUtils.safeGet()
-        // swallows the resulting ClassCastException if a Map.of(...) (or any non-LinkedHashMap)
-        // is used instead - the link then fails silently (null) rather than the test erroring.
-        Map<String, String> title1 = new LinkedHashMap<>();
-        title1.put("eng", "NRMN Sub-Facility");
-        Map<String, String> description1 = new LinkedHashMap<>();
-        description1.put("eng", "facility abstract");
-        Map<String, Object> parent1 = new LinkedHashMap<>();
-        parent1.put("id", "8cdcdcad-399b-4bed-8cb2-29c486b6b124");
-        parent1.put("title", title1);
-        parent1.put("description", description1);
-
-        Map<String, String> title2 = new LinkedHashMap<>();
-        title2.put("eng", "NESP MaC Project 5.9");
-        Map<String, String> description2 = new LinkedHashMap<>();
-        description2.put("eng", "project abstract");
-        Map<String, Object> parent2 = new LinkedHashMap<>();
-        parent2.put("id", "aeb0afce-7fc7-4d48-91fc-f7b8e730073c");
-        parent2.put("title", title2);
-        parent2.put("description", description2);
-
-        Map<String, Object> associatedRecordsData = new LinkedHashMap<>();
-        associatedRecordsData.put("parent", List.of(parent1, parent2));
-        // getAssociatedRecords() returns Map<String, ?>; doReturn (unlike when().thenReturn())
-        // takes a plain Object and sidesteps the per-call wildcard capture mismatch.
-        doReturn(associatedRecordsData).when(geoNetworkResourceService).getAssociatedRecords(anyString());
-
-        String xml = readResourceFile("classpath:canned/sample8.xml");
-        indexerService.indexMetadata(xml);
-
-        JsonNode links = objectMapper.readTree(lastRequest.get().document().toString()).get("links");
-        List<JsonNode> parentLinks = new ArrayList<>();
-        links.forEach(link -> {
-            if ("parent".equals(link.get("rel").asText())) {
-                parentLinks.add(link);
-            }
-        });
-
-        assertEquals(2, parentLinks.size());
-        assertTrue(parentLinks.stream().anyMatch(l -> l.get("href").asText().equals("uuid:8cdcdcad-399b-4bed-8cb2-29c486b6b124")));
-        assertTrue(parentLinks.stream().anyMatch(l -> l.get("href").asText().equals("uuid:aeb0afce-7fc7-4d48-91fc-f7b8e730073c")));
     }
     /**
      * This XML contains an invalid value in the EAST point of the bounding box, it is set to 360, which is invalid value.
