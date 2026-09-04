@@ -66,6 +66,7 @@ public abstract class StacCollectionMapperService {
     @Mapping(target="summaries.updateFrequency", source = "source", qualifiedByName = "mapSummaries.updateFrequency")
     @Mapping(target="summaries.datasetProvider", source = "source", qualifiedByName = "mapSummaries.datasetProvider")
     @Mapping(target="summaries.datasetGroup", source = "source", qualifiedByName = "mapSummaries.datasetGroup")
+    @Mapping(target="summaries.categories", source = "source", qualifiedByName = "mapSummaries.categories")
     @Mapping(target="summaries.statement", source="source", qualifiedByName = "mapSummaries.statement")
     @Mapping(target="summaries.creation", source = "source", qualifiedByName = "mapSummaries.creation")
     @Mapping(target="summaries.revision", source = "source", qualifiedByName = "mapSummaries.revision")
@@ -624,6 +625,24 @@ public abstract class StacCollectionMapperService {
             // Do nothing return null
         }
         return null;
+    }
+    /**
+     * Get the categories assigned in geonetwork and store it in the categories field. The portal:IMOS
+     * category identifies the IMOS portal collection records, it is set by the geonetwork harvester.
+     * @param source - The parsed dataset
+     * @return - A list of category, null if the record have none so the field is omitted from the
+     * document, SummariesModel is JsonInclude.NON_NULL
+     */
+    @Named("mapSummaries.categories")
+    List<String> mapGeoNetworkCategories(MDMetadataType source) {
+        try {
+            List<String> categories = geoNetworkService.findCategoriesById(CommonUtils.getUUID(source));
+            return categories.isEmpty() ? null : categories;
+        }
+        catch (IOException e) {
+            // Do nothing return null
+            return null;
+        }
     }
 
     protected List<ConceptModel> mapThemesConcepts(MDKeywordsPropertyType descriptiveKeyword, String uuid) {
