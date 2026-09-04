@@ -1,6 +1,7 @@
 package au.org.aodn.esindexer.utils;
 
 import au.org.aodn.metadata.iso19115_3_2018.*;
+import au.org.aodn.stac.model.SpatialExtentModel;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,6 +27,8 @@ import java.net.URL;
 import java.util.*;
 import java.util.function.BiFunction;
 import java.util.stream.Stream;
+
+import static au.org.aodn.esindexer.utils.CommonUtils.safeGet;
 
 public class GeometryUtils {
 
@@ -328,6 +331,50 @@ public class GeometryUtils {
                             .toList()
                 )
                 .toList();
+    }
+    /**
+     * One entry per gex:EX_Extent block that has a gex:description, paired with the bbox of that block
+     * @param source - A parsed XML from geonetwork
+     * @return - Extents with description, or null if none found
+     */
+    public static List<SpatialExtentModel> createSpatialExtentsFrom(MDMetadataType source) {
+        List<MDDataIdentificationType> items = MapperUtils.findMDDataIdentificationType(source);
+        List<? extends AbstractMDIdentificationType> identifications = items.isEmpty()
+                ? MapperUtils.findSVServiceIdentificationType(source)
+                : items;
+        if (identifications.isEmpty()) {
+            return null;
+        }
+        List<SpatialExtentModel> result = new ArrayList<>();
+        identifications.get(0).getExtent().stream()
+                .filter(f -> f.getAbstractExtent() != null)
+                .filter(f -> f.getAbstractExtent().getValue() instanceof EXExtentType)
+                .map(f -> (EXExtentType) f.getAbstractExtent().getValue())
+                .filter(f -> f.getGeographicElement() != null)
+                .forEach(ext -> {
+                    String description = safeGet(() ->
+                            ext.getDescription().getCharacterString().getValue().toString().trim()).orElse(null);
+                    if (description == null || description.isEmpty()) {
+                        return;
+                    }
+                    List<AbstractEXGeographicExtentType> elements = ext.getGeographicElement().stream()
+                            .map(AbstractEXGeographicExtentPropertyType::getAbstractEXGeographicExtent)
+                            .filter(Objects::nonNull)
+                            .map(m -> (m.getValue() instanceof EXBoundingPolygonType || m.getValue() instanceof EXGeographicBoundingBoxType)
+                                    ? (AbstractEXGeographicExtentType) m.getValue() : null)
+                            .filter(Objects::nonNull)
+                            .toList();
+                    // Reuse createStacBBox (rounding, antimeridian handling), first entry is the overall bbox
+                    List<List<BigDecimal>> bbox = StacUtils.createStacBBox(
+                            GeometryBase.findPolygonsFrom(GeometryBase.COORDINATE_SYSTEM_CRS84, List.of(elements)));
+                    if (!bbox.isEmpty()) {
+                        result.add(SpatialExtentModel.builder()
+                                .description(description)
+                                .bbox(bbox.get(0))
+                                .build());
+                    }
+                });
+        return result.isEmpty() ? null : result;
     }
     /**
      * Function to locate the geometry field in source and pass it to the handler for processing

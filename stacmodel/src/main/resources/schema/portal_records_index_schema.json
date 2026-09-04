@@ -276,6 +276,10 @@
               }
             }
           },
+          "spatial_extents": {
+            "type": "object",
+            "enabled": false
+          },
           "statement": {
             "type": "text",
             "index": false

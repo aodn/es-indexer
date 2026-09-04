@@ -72,6 +72,12 @@ public class SummariesModel {
     protected List<Map<String, String>> temporal;
 
     /**
+     * Spatial extents that have a gex:description, used by portal to label extent points on the details map
+     */
+    @JsonProperty("spatial_extents")
+    protected List<SpatialExtentModel> spatialExtents;
+
+    /**
      * Discovery Parameter Vocabs
      */
     @JsonProperty("parameter_vocabs")

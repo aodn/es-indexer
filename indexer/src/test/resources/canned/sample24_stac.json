@@ -6,6 +6,10 @@
     "temporal" : [ [ "2015-05-23T14:00:00Z", "2017-07-16T13:59:59Z" ], [ "2015-05-23T14:00:00Z", "2017-07-16T13:59:59Z" ] ]
   },
   "summaries" : {
+    "spatial_extents" : [ {
+        "description" : "Beagle Gulf Buoy, Beagle Gulf",
+        "bbox" : [ 130.58333, -12.10823, 130.58333, -12.10823 ]
+      } ],
     "score" : 1,
     "status" : "completed",
     "credits" : [ "Australian Institute of Marine Science (AIMS)", "Australia's Integrated Marine Observing System (IMOS) is enabled by the National Collaborative Research Infrastructure Strategy (NCRIS). It is operated by a consortium of institutions as an unincorporated joint venture, with the University of Tasmania as Lead Agent.", "Queensland State Government" ],

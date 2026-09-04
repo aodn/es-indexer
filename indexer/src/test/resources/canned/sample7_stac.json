@@ -6,6 +6,40 @@
     "temporal" : [ [ "2021-09-30T14:00:00Z", "2022-12-31T12:59:59Z" ], [ "2021-09-30T14:00:00Z", "2022-12-31T12:59:59Z" ] ]
   },
   "summaries" : {
+    "spatial_extents" : [ {
+        "description" : "Dungeness",
+        "bbox" : [ 142.9417419434, -9.998605505, 142.9417419434, -9.998605505 ]
+      }, {
+        "description" : "Masig",
+        "bbox" : [ 143.396987915, -9.7347748815, 143.396987915, -9.7347748815 ]
+      }, {
+        "description" : "Aukane",
+        "bbox" : [ 143.396987915, -9.8470978307, 143.396987915, -9.8470978307 ]
+      }, {
+        "description" : "Lizard Island",
+        "bbox" : [ 145.4428482056, -14.6852319114, 145.4428482056, -14.6852319114 ]
+      }, {
+        "description" : "Moore Reef",
+        "bbox" : [ 146.227684021, -16.86303383, 146.227684021, -16.86303383 ]
+      }, {
+        "description" : "Pelorus Island",
+        "bbox" : [ 146.4995956421, -18.5720601133, 146.4995956421, -18.5720601133 ]
+      }, {
+        "description" : "Orpheus Island",
+        "bbox" : [ 146.5195083618, -18.643642707, 146.5195083618, -18.643642707 ]
+      }, {
+        "description" : "Davies Reef",
+        "bbox" : [ 147.6466369629, -18.778916369, 147.6466369629, -18.778916369 ]
+      }, {
+        "description" : "Halfway Island",
+        "bbox" : [ 150.9700870514, -23.1967007098, 150.9700870514, -23.1967007098 ]
+      }, {
+        "description" : "Heron Island",
+        "bbox" : [ 151.9247817993, -23.4456087744, 151.9247817993, -23.4456087744 ]
+      }, {
+        "description" : "Lady Musgrave Island",
+        "bbox" : [ 152.3920440674, -23.8933715259, 152.3920440674, -23.8933715259 ]
+      } ],
     "score" : 75,
     "status" : "completed",
     "credits" : [ "This data was collected by the 'Field integrated testing project' of EcoRRAP. We thank all team members, students, and volunteers for their efforts.", "The Reef Restoration and Adaptation Program is funded by the partnership between the Australian Government’s Reef Trust and the Great Barrier Reef Foundation." ],

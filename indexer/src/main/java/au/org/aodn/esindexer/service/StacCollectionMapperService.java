@@ -62,6 +62,7 @@ public abstract class StacCollectionMapperService {
     @Mapping(target="summaries.credits", source = "source", qualifiedByName = "mapSummaries.credits")
     @Mapping(target="summaries.geometry", source = "source", qualifiedByName = "mapSummaries.geometry")
     @Mapping(target="summaries.geometryNoLand", source = "source", qualifiedByName = "mapSummaries.geometryNoland")
+    @Mapping(target="summaries.spatialExtents", source = "source", qualifiedByName = "mapSummaries.spatialExtents")
     @Mapping(target="summaries.temporal", source = "source", qualifiedByName = "mapSummaries.temporal")
     @Mapping(target="summaries.updateFrequency", source = "source", qualifiedByName = "mapSummaries.updateFrequency")
     @Mapping(target="summaries.datasetProvider", source = "source", qualifiedByName = "mapSummaries.datasetProvider")
@@ -523,6 +524,11 @@ public abstract class StacCollectionMapperService {
                 GeometryUtils::createGeometryFrom,
                 10  // This is useful in testing/edge only.
         );
+    }
+
+    @Named("mapSummaries.spatialExtents")
+    List<SpatialExtentModel> mapSummariesSpatialExtents(MDMetadataType source) {
+        return GeometryUtils.createSpatialExtentsFrom(source);
     }
 
     @Named("mapSummaries.status")
