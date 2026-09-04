@@ -87,7 +87,6 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
 
     public final static String UUID = "uuid";
     protected final static String GEONETWORK_GROUP = "groupOwner";
-    protected final static String GEONETWORK_CATEGORY = "cat";
 
     public GeoNetworkServiceImpl(
             String server,
@@ -105,20 +104,18 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
     }
 
     /**
-     * Query the geonetwork elastic index for a record and return its _source, limited to a single
-     * field. The uuid is unique in geonetwork so at most one hit is expected. A shared function by findDatsetGroup and findCategories
      *
      * @param uuid - The query UUID
-     * @param field - The only _source field to include in the response
-     * @return - The hit _source, empty if no record matches the uuid
+     * @return Group name
      * @throws IOException
+     * @throws HttpServerErrorException.ServiceUnavailable
      */
-    protected Optional<ObjectNode> findRecordSourceById(String uuid, String field) throws IOException {
+    public String findGroupById(String uuid) throws IOException, HttpServerErrorException.ServiceUnavailable {
         SearchRequest request = new SearchRequest.Builder()
                 .index(indexName)
                 .query(q -> q.bool(b -> b.filter(f -> f.matchPhrase(p -> p.field(UUID).query(uuid)))))
                 .source(s -> s
-                        .filter(f -> f.includes(field)))
+                        .filter(f -> f.includes(GEONETWORK_GROUP)))
                 .size(1)
                 .build();
 
@@ -126,22 +123,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
 
         if(response.hits() != null && response.hits().hits() != null && !response.hits().hits().isEmpty()) {
             // UUID should result in only 1 record, hence get(0) is ok.
-            return Optional.ofNullable(response.hits().hits().get(0).source());
-        }
-        return Optional.empty();
-    }
-    /**
-     * Find group associated with a record, queried by uuid. Used for STAC summaries.dataset_group field
-     * @param uuid - The query UUID
-     * @return Group name
-     * @throws IOException
-     * @throws HttpServerErrorException.ServiceUnavailable
-     */
-    public String findGroupById(String uuid) throws IOException, HttpServerErrorException.ServiceUnavailable {
-        Optional<ObjectNode> optSource = findRecordSourceById(uuid, GEONETWORK_GROUP);
-
-        if(optSource.isPresent()) {
-            String group = optSource.get().get(GEONETWORK_GROUP).asText();
+            String group = response.hits().hits().get(0).source().get(GEONETWORK_GROUP).asText();
 
             Map<String, Object> params = new HashMap<>();
             params.put("id", group);
@@ -168,26 +150,37 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
      * The category is set by the geonetwork harvester using GN3 protocol, it is use to identify which portal the record
      * belongs to, for example portal:IMOS. A record can have no category.
      *
+     * Geonetwork call the categories "tags" in its API, the endpoint returns them as a json array, the
+     * "name" of each entry is the category name. The entry also carries a "label" with a translation per
+     * language, we do not need it.
+     *
      * @param uuid - The query UUID
      * @return - Category names as stored in geonetwork, never null, empty list if none found
-     * @throws IOException
      */
     @Override
-    public List<String> findCategoriesById(String uuid) throws IOException {
-        Optional<ObjectNode> optSource = findRecordSourceById(uuid, GEONETWORK_CATEGORY);
+    public List<String> findCategoriesById(String uuid) {
+        Map<String, Object> params = new HashMap<>();
+        params.put(UUID, uuid);
 
-        if(optSource.isPresent() && optSource.get().hasNonNull(GEONETWORK_CATEGORY)) {
-            JsonNode categories = optSource.get().get(GEONETWORK_CATEGORY);
-            // Geonetwork returns an array if the record have multiple categories, but a bare
-            // string if it only have one.
-            if(categories.isArray()) {
+        try {
+            ResponseEntity<JsonNode> responseEntity = indexerRestTemplate.exchange(
+                    getGeoNetworkRecordTagsEndpoint(),
+                    HttpMethod.GET,
+                    defaultRequestEntity,
+                    JsonNode.class, params);
+
+            if(responseEntity.getStatusCode().is2xxSuccessful() && responseEntity.getBody() != null) {
                 List<String> result = new ArrayList<>();
-                categories.forEach(category -> result.add(category.asText()));
+                responseEntity.getBody().forEach(tag -> {
+                    if(tag.hasNonNull("name")) {
+                        result.add(tag.get("name").asText());
+                    }
+                });
                 return result;
             }
-            else {
-                return List.of(categories.asText());
-            }
+        }
+        catch(HttpClientErrorException clientErrorException) {
+            logger.warn("Fail to get categories of record {}, reason {}", uuid, clientErrorException.getMessage());
         }
         return List.of();
     }
@@ -608,6 +601,11 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
 
     protected String getGeoNetworkGroupsEndpoint() {
         return getServer() + "/geonetwork/srv/api/groups/{id}";
+    }
+
+    // Get record's category
+    protected String getGeoNetworkRecordTagsEndpoint() {
+        return getServer() + "/geonetwork/srv/api/records/{uuid}/tags";
     }
 
     protected String getReIndexEndpoint() {

@@ -635,14 +635,8 @@ public abstract class StacCollectionMapperService {
      */
     @Named("mapSummaries.categories")
     List<String> mapGeoNetworkCategories(MDMetadataType source) {
-        try {
-            List<String> categories = geoNetworkService.findCategoriesById(CommonUtils.getUUID(source));
-            return categories.isEmpty() ? null : categories;
-        }
-        catch (IOException e) {
-            // Do nothing return null
-            return null;
-        }
+        List<String> categories = geoNetworkService.findCategoriesById(CommonUtils.getUUID(source));
+        return categories.isEmpty() ? null : categories;
     }
 
     protected List<ConceptModel> mapThemesConcepts(MDKeywordsPropertyType descriptiveKeyword, String uuid) {
