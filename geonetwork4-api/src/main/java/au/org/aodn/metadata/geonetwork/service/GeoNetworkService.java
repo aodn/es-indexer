@@ -3,6 +3,7 @@ package au.org.aodn.metadata.geonetwork.service;
 import au.org.aodn.stac.model.LinkModel;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -15,6 +16,13 @@ public interface GeoNetworkService {
 
     String searchRecordBy(String uuid);
     String findGroupById(String uuid) throws IOException;
+    /**
+     * The categories assigned to the record in geonetwork, the portal:IMOS category is use to identify the IMOS portal collection records.
+     *
+     * @param uuid - The query UUID
+     * @return - The category names, empty if the record has none, return a list to support multiple categories (if any)
+     */
+    List<String> findCategoriesById(String uuid) throws IOException;
 
     Optional<LinkModel> getThumbnail(String uuid);
     Optional<LinkModel> getLogo(String uuid);
