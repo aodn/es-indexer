@@ -31,6 +31,7 @@ import jakarta.xml.bind.JAXBException;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONException;
 import org.junit.jupiter.api.*;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
@@ -48,6 +49,8 @@ import org.springframework.test.util.ReflectionTestUtils;
 
 import static au.org.aodn.esindexer.BaseTestClass.readResourceFile;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
@@ -635,6 +638,65 @@ public class StacCollectionMapperServiceTest {
         indexerService.indexMetadata(xml);
 
         verify(expected);
+    }
+    /**
+     * Verify the geonetwork categories, for example portal:IMOS, end up in summaries.categories of the
+     * mapped model. The field is JsonIgnore so it must NOT appear in the document sent to elastic, we
+     * therefore assert on the model captured on its way to the ranking service rather than on the
+     * indexed document.
+     * @throws IOException - Not expected
+     */
+    @Test
+    public void verifyHandleCategoriesCorrectly() throws IOException {
+        String xml = readResourceFile("classpath:canned/sample24.xml");
+
+        when(geoNetworkResourceService.findGroupById("b9bf6b57-54a0-44b3-bd17-30ccfb2b246f"))
+                .thenReturn("group1, group 2, group3");
+
+        when(geoNetworkResourceService.findCategoriesById("b9bf6b57-54a0-44b3-bd17-30ccfb2b246f"))
+                .thenReturn(List.of("portal:IMOS", "MARVL"));
+
+        indexerService.indexMetadata(xml);
+
+        ArgumentCaptor<StacCollectionModel> captor = ArgumentCaptor.forClass(StacCollectionModel.class);
+        Mockito.verify(rankingService).evaluateCompleteness(captor.capture());
+
+        assertEquals(
+                List.of("portal:IMOS", "MARVL"),
+                captor.getValue().getSummaries().getCategories(),
+                "Categories mapped from geonetwork");
+
+        // JsonIgnore, the categories must never reach the elastic index
+        assertFalse(
+                objectMapper.readTree(lastRequest.get().document().toString())
+                        .path("summaries")
+                        .has("categories"),
+                "Categories must not be indexed");
+    }
+    /**
+     * A record with no category in geonetwork must leave summaries.categories null so nothing
+     * downstream mistakes an empty list for a real value.
+     * @throws IOException - Not expected
+     */
+    @Test
+    public void verifyHandleNoCategoryCorrectly() throws IOException {
+        String xml = readResourceFile("classpath:canned/sample24.xml");
+
+        when(geoNetworkResourceService.findGroupById("b9bf6b57-54a0-44b3-bd17-30ccfb2b246f"))
+                .thenReturn("group1, group 2, group3");
+
+        // Mockito returns an empty list by default, be explicit about what is under test
+        when(geoNetworkResourceService.findCategoriesById("b9bf6b57-54a0-44b3-bd17-30ccfb2b246f"))
+                .thenReturn(List.of());
+
+        indexerService.indexMetadata(xml);
+
+        ArgumentCaptor<StacCollectionModel> captor = ArgumentCaptor.forClass(StacCollectionModel.class);
+        Mockito.verify(rankingService).evaluateCompleteness(captor.capture());
+
+        assertNull(
+                captor.getValue().getSummaries().getCategories(),
+                "No category in geonetwork means null, not an empty list");
     }
     /**
      * We should not throw exception even if the word boundary is covering world.
