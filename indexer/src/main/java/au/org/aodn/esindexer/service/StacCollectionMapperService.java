@@ -518,11 +518,8 @@ public abstract class StacCollectionMapperService {
 
     @Named("mapSummaries.geometry")
     Map<?,?> mapSummariesGeometry(MDMetadataType source) {
-        return GeometryUtils.createGeometryItems(
-                source,
-                GeometryUtils::createGeometryFrom,
-                10  // This is useful in testing/edge only.
-        );
+        // Each geometry carries its extent description, shown in the portal map popup
+        return GeometryUtils.createGeometryWithDescriptionsFrom(source);
     }
 
     @Named("mapSummaries.status")

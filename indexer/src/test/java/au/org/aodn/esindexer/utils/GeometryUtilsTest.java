@@ -230,4 +230,41 @@ public class GeometryUtilsTest {
         Assertions.assertEquals(1.2, coors.get(0));
         Assertions.assertEquals(2.2, coors.get(1));
     }
+
+    @Test
+    public void verifyDescriptionsOnGeometries() throws IOException, JAXBException {
+        String xml = readResourceFile("classpath:canned/sample7.xml");
+        Map<?, ?> geojson = GeometryUtils.createGeometryWithDescriptionsFrom(jaxb.unmarshal(xml));
+
+        assertEquals(
+                List.of("Dungeness", "Masig", "Aukane", "Lizard Island", "Moore Reef", "Pelorus Island",
+                        "Orpheus Island", "Davies Reef", "Halfway Island", "Heron Island", "Lady Musgrave Island"),
+                descriptionsIn(geojson));
+    }
+
+    @Test
+    public void verifyNoDescriptionNoMember() throws IOException, JAXBException {
+        String xml = readResourceFile("classpath:canned/sample4.xml");
+        Map<?, ?> geojson = GeometryUtils.createGeometryWithDescriptionsFrom(jaxb.unmarshal(xml));
+
+        assertEquals(0, descriptionsIn(geojson).size());
+    }
+
+    // A description covers every geometry of its extent, points and boxes alike
+    @Test
+    public void verifySharedDescriptionOnEveryGeometry() throws IOException, JAXBException {
+        String xml = readResourceFile("classpath:canned/sample_spatial_extent_shared_description.xml");
+        Map<?, ?> geojson = GeometryUtils.createGeometryWithDescriptionsFrom(jaxb.unmarshal(xml));
+
+        assertEquals(List.of("Two moorings", "Two moorings", "Survey box"), descriptionsIn(geojson));
+    }
+
+    @SuppressWarnings("unchecked")
+    private static List<String> descriptionsIn(Map<?, ?> geojson) {
+        List<Map<String, Object>> members = (List<Map<String, Object>>) geojson.get("geometries");
+        return members.stream()
+                .map(member -> (String) member.get("description"))
+                .filter(Objects::nonNull)
+                .toList();
+    }
 }

@@ -20,10 +20,12 @@
     "proj:geometry" : {
       "geometries" : [ {
         "type" : "Point",
-        "coordinates" : [ 146.862133, -19.10415 ]
+        "coordinates" : [ 146.862133, -19.10415 ],
+        "description" : "Magnetic Island"
       }, {
         "type" : "Point",
-        "coordinates" : [ 146.85, -19.168333 ]
+        "coordinates" : [ 146.85, -19.168333 ],
+        "description" : "Nelly Bay, Magnetic Island"
       } ],
       "type" : "GeometryCollection"
     },
