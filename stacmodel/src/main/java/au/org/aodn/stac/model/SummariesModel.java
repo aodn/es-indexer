@@ -1,5 +1,6 @@
 package au.org.aodn.stac.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -45,6 +46,13 @@ public class SummariesModel {
      */
     @JsonProperty("dataset_group")
     protected List<String> datasetGroup;
+    /**
+     * Categories assigned to the record in geonetwork, the portal:IMOS category flags a record as an IMOS portal collection record.
+     * JsonIgnore because this value is only used within the code base and no need to be passed to the Elasticsearch index.
+     * If we are going to apply this value for downstream use in the future, we need to add this in record schema.
+     */
+    @JsonIgnore
+    protected List<String> categories;
     /**
      * It is used to flag who owns the dataset, right now this field appears if it is from IMOS
      */

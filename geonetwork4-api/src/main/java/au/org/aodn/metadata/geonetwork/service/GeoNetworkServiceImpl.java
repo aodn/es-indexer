@@ -147,6 +147,44 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
 
     }
     /**
+     * The category is set by the geonetwork harvester using GN3 protocol, it is use to identify which portal the record
+     * belongs to, for example portal:IMOS. A record can have no category.
+     *
+     * Geonetwork call the categories "tags" in its API, the endpoint returns them as a json array, the
+     * "name" of each entry is the category name. The entry also carries a "label" with a translation per
+     * language, we do not need it.
+     *
+     * @param uuid - The query UUID
+     * @return - Category names as stored in geonetwork, never null, empty list if none found
+     */
+    @Override
+    public List<String> findCategoriesById(String uuid) {
+        Map<String, Object> params = new HashMap<>();
+        params.put(UUID, uuid);
+
+        try {
+            ResponseEntity<JsonNode> responseEntity = indexerRestTemplate.exchange(
+                    getGeoNetworkRecordTagsEndpoint(),
+                    HttpMethod.GET,
+                    defaultRequestEntity,
+                    JsonNode.class, params);
+
+            if(responseEntity.getStatusCode().is2xxSuccessful() && responseEntity.getBody() != null) {
+                List<String> result = new ArrayList<>();
+                responseEntity.getBody().forEach(tag -> {
+                    if(tag.hasNonNull("name")) {
+                        result.add(tag.get("name").asText());
+                    }
+                });
+                return result;
+            }
+        }
+        catch(HttpClientErrorException clientErrorException) {
+            logger.warn("Fail to get categories of record {}, reason {}", uuid, clientErrorException.getMessage());
+        }
+        return List.of();
+    }
+    /**
      * Please check comment section of getRecordRelated to understand how the structure looks like for
      * thumbnail section
      * @param uuid - UUID of record
@@ -563,6 +601,11 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
 
     protected String getGeoNetworkGroupsEndpoint() {
         return getServer() + "/geonetwork/srv/api/groups/{id}";
+    }
+
+    // Get record's category
+    protected String getGeoNetworkRecordTagsEndpoint() {
+        return getServer() + "/geonetwork/srv/api/records/{uuid}/tags";
     }
 
     protected String getReIndexEndpoint() {
