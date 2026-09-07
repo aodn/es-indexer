@@ -6,6 +6,7 @@ import au.org.aodn.datadiscoveryai.model.AiEnhancementRequest;
 import au.org.aodn.esindexer.configuration.AppConstants;
 import au.org.aodn.esindexer.exception.*;
 import au.org.aodn.esindexer.utils.CommonUtils;
+import au.org.aodn.esindexer.utils.FacilityRecordUtils;
 import au.org.aodn.esindexer.utils.GcmdKeywordUtils;
 import au.org.aodn.esindexer.utils.JaxbUtils;
 import au.org.aodn.metadata.geonetwork.exception.MetadataNotFoundException;
@@ -356,6 +357,8 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
                         .status(status)
                         .temporal(temporal)
                         .themes(themes)
+                        // a facility / sub-facility record is not a dataset, it has no delivery mode to predict
+                        .skipDeliveryClassification(FacilityRecordUtils.isImosFacilityRecord(target))
                         .build();
 
                 // Make a single AI call for both description and link enhancement
