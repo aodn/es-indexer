@@ -6,6 +6,10 @@
     "temporal" : [ [ "2010-01-21T01:00:00Z", "2017-03-27T12:59:59Z" ], [ "2010-01-21T01:00:00Z", "2017-03-27T12:59:59Z" ] ]
   },
   "summaries" : {
+    "spatial_extents" : [ {
+        "description" : "Data are available on a geographic grid within the area that corresponds to the union of the regions of coverage of the Nora Creina and Blackfellow Cave radar stations. This is an irregular polygon within which is located a geographic grid with a nominal grid spacing of 4 Km.",
+        "bbox" : [ 138.2, -39.4, 140.8, -37.0 ]
+      } ],
     "score" : 71,
     "status" : "completed",
     "credits" : [ "Australia’s Integrated Marine Observing System (IMOS) is enabled by the National Collaborative Research Infrastructure Strategy (NCRIS). It is operated by a consortium of institutions as an unincorporated joint venture, with the University of Tasmania as Lead Agent.", "The University of Western Australia (UWA)" ],

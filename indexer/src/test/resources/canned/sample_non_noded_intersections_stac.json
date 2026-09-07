@@ -6,6 +6,10 @@
     "temporal" : [ [ "1883-11-30T14:10:44Z", "2017-03-15T13:00:00Z" ], [ "1883-11-30T14:10:44Z", "2017-03-15T13:00:00Z" ] ]
   },
   "summaries" : {
+    "spatial_extents" : [ {
+        "description" : "Far North Queensland, Australia",
+        "bbox" : [ 139.0869140625, -28.0810546875, 153.9404296875, -9.9755859375 ]
+      } ],
     "score" : 1,
     "status" : "",
     "credits" : [ ],

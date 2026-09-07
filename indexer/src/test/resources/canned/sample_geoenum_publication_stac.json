@@ -6,6 +6,10 @@
     "temporal" : [ [ "2021-10-12T13:00:00Z", "2022-10-05T12:59:59Z" ], [ "2021-10-12T13:00:00Z", "2022-10-05T12:59:59Z" ] ]
   },
   "summaries" : {
+    "spatial_extents" : [ {
+        "description" : "Benthic habitats were surveyed in Yanyuwa Sea Country, Northern Territory, Australia. Survey sites and mapped seagrass meadows are provided as GIS shapefiles.",
+        "bbox" : [ 136.1866, -16.0337, 137.2787, -15.3817 ]
+      } ],
     "score" : 1,
     "status" : "",
     "credits" : [ "The data collections described in this record are funded by the Australian Government Department of Climate Change, Energy the Environment and Water (DCCEEW) through the NESP Marine and Coastal Hub. In addition to NESP (DCCEEW) funding, this project is matched by an equivalent amount of in-kind support and co-investment from project partners and collaborators." ],

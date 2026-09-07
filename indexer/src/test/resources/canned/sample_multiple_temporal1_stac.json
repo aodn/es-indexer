@@ -6,6 +6,55 @@
     "temporal" : [ [ "1980-02-27T13:00:00Z", null ], [ "1980-02-27T13:00:00Z", "1982-02-28T12:59:59Z" ], [ "1984-02-27T13:00:00Z", null ] ]
   },
   "summaries" : {
+    "spatial_extents" : [ {
+        "description" : "Region 8",
+        "bbox" : [ 146.4831, -18.6128, 146.4831, -18.6128 ]
+      }, {
+        "description" : "Region 7",
+        "bbox" : [ 146.879, -18.4777, 146.879, -18.4777 ]
+      }, {
+        "description" : "Region 9",
+        "bbox" : [ 147.0667, -18.6333, 147.0667, -18.6333 ]
+      }, {
+        "description" : "Region 10",
+        "bbox" : [ 147.9, -18.8, 147.9, -18.8 ]
+      }, {
+        "description" : "Region 13",
+        "bbox" : [ 147.0588, -19.2774, 147.0588, -19.2774 ]
+      }, {
+        "description" : "Region 14",
+        "bbox" : [ 147.4, -19.3, 147.4, -19.3 ]
+      }, {
+        "description" : "Region 3",
+        "bbox" : [ 145.8225, -15.9617, 145.8225, -15.9617 ]
+      }, {
+        "description" : "Region 5",
+        "bbox" : [ 146.23, -18.2453, 146.23, -18.2453 ]
+      }, {
+        "description" : "Region 15",
+        "bbox" : [ 149.1808, -19.74, 149.1808, -19.74 ]
+      }, {
+        "description" : "Region 6",
+        "bbox" : [ 147.383, -18.2746, 147.383, -18.2746 ]
+      }, {
+        "description" : "Region 1",
+        "bbox" : [ 113.917, -22.033, 113.917, -22.033 ]
+      }, {
+        "description" : "Region 11",
+        "bbox" : [ 146.8812, -19.1558, 146.8812, -19.1558 ]
+      }, {
+        "description" : "Region 4",
+        "bbox" : [ 145.3989, -16.2481, 145.3989, -16.2481 ]
+      }, {
+        "description" : "Region 16",
+        "bbox" : [ 150.9385, -23.1538, 150.9385, -23.1538 ]
+      }, {
+        "description" : "Region 12",
+        "bbox" : [ 147.015, -19.185, 147.015, -19.185 ]
+      }, {
+        "description" : "Region 2",
+        "bbox" : [ 143.0686, -10.0511, 143.0686, -10.0511 ]
+      } ],
     "score" : 1,
     "status" : "onGoing",
     "credits" : [ "Queensland State Government Integrated Marine Observing System (IMOS)", "Wireless Sensor Networks Facility (formerly known as Facility for The Automated Intelligent Monitoring of Marine Systems (FAIMMS)), part of the Great Barrier Reef Ocean Observing System project (GBROOS) (IMOS)", "Tropical Water Quality Hub of the National Environmental Science Programme (NESP)", "Torres Strait Regional Authority (TSRA)", "Tropical Ecosystems hub of the National Environmental Research Program (NERP)", "Australian Institute of Marine Science (AIMS)", "Integrated Marine Observing System (IMOS)", "Bainbridge, Scott. (AIMS)" ],

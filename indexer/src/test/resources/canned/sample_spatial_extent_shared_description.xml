@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Minimal record with one gex:description shared by two locations, for SpatialExtentUtilsTest -->
+<mdb:MD_Metadata xmlns:mdb="http://standards.iso.org/iso/19115/-3/mdb/2.0"
+                 xmlns:mri="http://standards.iso.org/iso/19115/-3/mri/1.0"
+                 xmlns:gex="http://standards.iso.org/iso/19115/-3/gex/1.0"
+                 xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0">
+    <mdb:identificationInfo>
+        <mri:MD_DataIdentification>
+            <mri:extent>
+                <gex:EX_Extent>
+                    <gex:description>
+                        <gco:CharacterString>Two moorings</gco:CharacterString>
+                    </gex:description>
+                    <gex:geographicElement>
+                        <gex:EX_GeographicBoundingBox>
+                            <gex:westBoundLongitude><gco:Decimal>142.0</gco:Decimal></gex:westBoundLongitude>
+                            <gex:eastBoundLongitude><gco:Decimal>142.0</gco:Decimal></gex:eastBoundLongitude>
+                            <gex:southBoundLatitude><gco:Decimal>-19.0</gco:Decimal></gex:southBoundLatitude>
+                            <gex:northBoundLatitude><gco:Decimal>-19.0</gco:Decimal></gex:northBoundLatitude>
+                        </gex:EX_GeographicBoundingBox>
+                    </gex:geographicElement>
+                    <gex:geographicElement>
+                        <gex:EX_GeographicBoundingBox>
+                            <gex:westBoundLongitude><gco:Decimal>146.0</gco:Decimal></gex:westBoundLongitude>
+                            <gex:eastBoundLongitude><gco:Decimal>146.0</gco:Decimal></gex:eastBoundLongitude>
+                            <gex:southBoundLatitude><gco:Decimal>-10.0</gco:Decimal></gex:southBoundLatitude>
+                            <gex:northBoundLatitude><gco:Decimal>-10.0</gco:Decimal></gex:northBoundLatitude>
+                        </gex:EX_GeographicBoundingBox>
+                    </gex:geographicElement>
+                </gex:EX_Extent>
+            </mri:extent>
+        </mri:MD_DataIdentification>
+    </mdb:identificationInfo>
+</mdb:MD_Metadata>
