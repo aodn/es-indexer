@@ -3,8 +3,6 @@ package au.org.aodn.cloudoptimized.service;
 import au.org.aodn.cloudoptimized.model.MetadataEntity;
 import au.org.aodn.cloudoptimized.model.MetadataFields;
 import au.org.aodn.cloudoptimized.model.TemporalExtent;
-import au.org.aodn.cloudoptimized.model.geojson.FeatureCollectionGeoJson;
-
 import java.time.YearMonth;
 import java.util.List;
 import java.util.Map;

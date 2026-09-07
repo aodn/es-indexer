@@ -1,10 +1,6 @@
 package au.org.aodn.cloudoptimized.service;
 
-import au.org.aodn.cloudoptimized.enums.GeoJsonProperty;
 import au.org.aodn.cloudoptimized.model.*;
-import au.org.aodn.cloudoptimized.model.geojson.FeatureCollectionGeoJson;
-import au.org.aodn.cloudoptimized.model.geojson.FeatureGeoJson;
-import au.org.aodn.cloudoptimized.model.geojson.PointGeoJson;
 import au.org.aodn.metadata.geonetwork.exception.MetadataNotFoundException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
