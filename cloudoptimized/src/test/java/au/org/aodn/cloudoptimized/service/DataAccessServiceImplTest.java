@@ -1,9 +1,6 @@
 package au.org.aodn.cloudoptimized.service;
 
 import au.org.aodn.cloudoptimized.model.MetadataFields;
-import au.org.aodn.cloudoptimized.model.geojson.FeatureCollectionGeoJson;
-import au.org.aodn.cloudoptimized.model.geojson.FeatureGeoJson;
-import au.org.aodn.cloudoptimized.model.geojson.PointGeoJson;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

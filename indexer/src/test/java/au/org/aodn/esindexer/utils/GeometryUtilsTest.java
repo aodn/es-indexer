@@ -2,6 +2,7 @@ package au.org.aodn.esindexer.utils;
 
 import au.org.aodn.metadata.iso19115_3_2018.MDMetadataType;
 import jakarta.xml.bind.JAXBException;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,6 +30,13 @@ public class GeometryUtilsTest {
     @BeforeEach
     public void init() {
         GeometryUtils.setCoastalPrecision(0.03);
+    }
+
+    @AfterAll
+    public static void restoreGeometryDefaults() {
+        GeometryUtils.setCoastalPrecision(0.05);
+        GeometryUtils.setReducerPrecision(null);
+        GeometryUtils.init();
     }
 
     @Test

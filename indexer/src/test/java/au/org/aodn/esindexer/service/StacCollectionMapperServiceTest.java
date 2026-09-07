@@ -102,7 +102,12 @@ public class StacCollectionMapperServiceTest {
 
     @BeforeAll
     public static void preSetup() {
+        // GeometryUtils is static process state. GeometryUtilsTest can leave
+        // reducerPrecision=4.0 from a prior class in the same Surefire JVM, which
+        // changes proj:geometry_noland and fails golden STAC snapshots in CI.
         GeometryUtils.setCoastalPrecision(0.05);
+        GeometryUtils.setReducerPrecision(null);
+        GeometryUtils.init();
     }
 
     protected void verify(String expected) throws JsonProcessingException, JSONException {
@@ -117,7 +122,7 @@ public class StacCollectionMapperServiceTest {
     }
 
     public StacCollectionMapperServiceTest() throws JAXBException {
-        GeometryUtils.init();
+        // Declares JAXBException for the jaxbUtils field initializer.
     }
 
     @AfterEach
