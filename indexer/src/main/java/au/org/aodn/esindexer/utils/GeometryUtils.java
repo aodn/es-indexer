@@ -27,12 +27,17 @@ import java.util.*;
 import java.util.function.BiFunction;
 import java.util.stream.Stream;
 
+import static au.org.aodn.esindexer.utils.CommonUtils.safeGet;
+
 public class GeometryUtils {
 
     public enum PointOrientation {
         CLOCKWISE,
         COUNTER_CLOCKWISE,
         FLAT
+    }
+
+    public record GeometryWithDescription(String description, List<AbstractEXGeographicExtentType> geometries) {
     }
 
     protected static Logger logger = LogManager.getLogger(GeometryUtils.class);
@@ -338,7 +343,7 @@ public class GeometryUtils {
      */
     public static <R, P> R createGeometryItems(
             MDMetadataType source,
-            BiFunction<List<List<AbstractEXGeographicExtentType>>, P, R> handler,
+            BiFunction<List<GeometryWithDescription>, P, R> handler,
             P param) {
 
         List<MDDataIdentificationType> items = MapperUtils.findMDDataIdentificationType(source);
@@ -364,15 +369,16 @@ public class GeometryUtils {
 
             // We want to get a list of item where each item contains multiple, (aka list) of
             // (EXGeographicBoundingBoxType or EXBoundingPolygonType)
-            List<List<AbstractEXGeographicExtentType>> rawInput = ext.stream()
-                    .map(EXExtentType::getGeographicElement)
-                    .map(l ->
+            List<GeometryWithDescription> rawInput = ext.stream()
+                    .map(l -> new GeometryWithDescription(
+                            // Extract the description of the polygon
+                            safeGet(() -> l.getDescription().getCharacterString().toString()).orElse(""),
                             /*
                                 l = List<AbstractEXGeographicExtentPropertyType>
                                 For each AbstractEXGeographicExtentPropertyType, we get the tag that store the
-                                coordinate, it is either a EXBoundingPolygonType or EXGeographicBoundingBoxType
+                                coordinate, it is either an EXBoundingPolygonType or EXGeographicBoundingBoxType
                              */
-                            l.stream()
+                            l.getGeographicElement().stream()
                                     .map(AbstractEXGeographicExtentPropertyType::getAbstractEXGeographicExtent)
                                     .filter(Objects::nonNull)
                                     .filter(m -> (m.getValue() instanceof EXBoundingPolygonType || m.getValue() instanceof EXGeographicBoundingBoxType))
@@ -384,10 +390,11 @@ public class GeometryUtils {
                                         } else if (m.getValue() instanceof EXGeographicBoundingBoxType) {
                                             return m.getValue();
                                         }
-                                        return null; // Handle other cases or return appropriate default value
+                                        return null; // Handle other cases or return the appropriate default value
                                     })
                                     .filter(Objects::nonNull) // Filter out null values if any
                                     .toList()
+                            )
                     )
                     .toList();
             return handler.apply(rawInput, param);
@@ -395,7 +402,7 @@ public class GeometryUtils {
         return null;
     }
 
-    protected static List<List<Geometry>> createGeometryWithoutLand(List<List<AbstractEXGeographicExtentType>> rawInput) {
+    protected static List<List<Geometry>> createGeometryWithoutLand(List<GeometryWithDescription> rawInput) {
         return removeLandAreaFromGeometry(
                 GeometryBase.findPolygonsFrom(GeometryBase.COORDINATE_SYSTEM_CRS84, rawInput)
         );
@@ -408,7 +415,7 @@ public class GeometryUtils {
      * @param rawInput - The parsed XML block that contains the spatial extents area
      * @return - Centroid point which will not appear on land.
      */
-    public static Map<?, ?> createGeometryNoLandFrom(List<List<AbstractEXGeographicExtentType>> rawInput, Integer gridSize) {
+    public static Map<?, ?> createGeometryNoLandFrom(List<GeometryWithDescription> rawInput, Integer gridSize) {
         List<List<Geometry>> polygon = createGeometryWithoutLand(rawInput);
         return !polygon.isEmpty() ? createGeoShapeJson(polygon) : null;
     }
@@ -419,7 +426,7 @@ public class GeometryUtils {
      * @param rawInput - The parsed XML block that contains the spatial extents area
      * @return - Map that represent rawInput
      */
-    public static Map<?, ?> createGeometryFrom(List<List<AbstractEXGeographicExtentType>> rawInput, Integer gridSize) {
+    public static Map<?, ?> createGeometryFrom(List<GeometryWithDescription> rawInput, Integer gridSize) {
         // The return polygon is in EPSG:4326, so we can call createGeoJson directly
 
         // Un-remark this line and remark the line below if you want to visualize the polygon on map, change this

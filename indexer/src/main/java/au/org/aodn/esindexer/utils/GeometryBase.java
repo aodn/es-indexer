@@ -46,17 +46,17 @@ public class GeometryBase {
      * @param rawInput - A list of AbstractEXGeographicExtentType, AbstractEXGeographicExtentType is a base type, and can be a bbox or geometry
      * @return - Geometry of the polygon
      */
-    public static List<List<Geometry>> findPolygonsFrom(final String rawCRS, List<List<AbstractEXGeographicExtentType>> rawInput) {
+    public static List<List<Geometry>> findPolygonsFrom(final String rawCRS, List<GeometryUtils.GeometryWithDescription> rawInput) {
         return rawInput
                 .stream()
                 .map(r -> {
-                    if(!r.isEmpty() && r.get(0) instanceof EXBoundingPolygonType) {
+                    if(!r.geometries().isEmpty() && r.geometries().get(0) instanceof EXBoundingPolygonType) {
                         return findPolygonsFromEXBoundingPolygonType(rawCRS, r);
                     }
-                    else if(!r.isEmpty() && r.get(0) instanceof EXGeographicBoundingBoxType) {
+                    else if(!r.geometries().isEmpty() && r.geometries().get(0) instanceof EXGeographicBoundingBoxType) {
                         return findPolygonsFromEXGeographicBoundingBoxType(rawCRS, r);
                     }
-                    // Some type not support so return null
+                    // Some type doesn't support so return null
                     return null;
                 })
                 .filter(Objects::nonNull)
@@ -64,12 +64,11 @@ public class GeometryBase {
                 .toList();
     }
 
-    protected static List<Geometry> findPolygonsFromEXBoundingPolygonType(String rawCRS, List<AbstractEXGeographicExtentType> rawInput) {
+    protected static List<Geometry> findPolygonsFromEXBoundingPolygonType(String rawCRS, GeometryUtils.GeometryWithDescription rawInput) {
         final List<Geometry> polygons = new ArrayList<>();
 
         if(COORDINATE_SYSTEM_CRS84.equals(rawCRS)) {
-            List<List<GMObjectPropertyType>> input = rawInput
-                    .stream()
+            List<List<GMObjectPropertyType>> input = rawInput.geometries().stream()
                     .filter(f -> f instanceof EXBoundingPolygonType)
                     .map(m -> (EXBoundingPolygonType) m)
                     .map(EXBoundingPolygonType::getPolygon)
@@ -161,24 +160,25 @@ public class GeometryBase {
      *     <gco:Decimal>-19.10415</gco:Decimal>
      *   </gex:northBoundLatitude>
      * </gex:EX_GeographicBoundingBox>
-     * with North, East, South, West only, but people may not necessary create a box are but can set coordinate to
+     * with North, East, South, West only, but people may not necessarily create a box are but can set coordinate to
      * Points or Line, so our return type needs to be Geometry
      *
      * @param rawCRS - The coordinate reference
      * @param rawInput - The raw parsed XML input of the section of AbstractEXGeographicExtentType
      * @return - List of Geometry, where it can be Point, Line or Box aka (Polygon)
      */
-    protected static List<Geometry> findPolygonsFromEXGeographicBoundingBoxType(String rawCRS, List<AbstractEXGeographicExtentType> rawInput) {
+    protected static List<Geometry> findPolygonsFromEXGeographicBoundingBoxType(String rawCRS, GeometryUtils.GeometryWithDescription rawInput) {
         final List<Geometry> geometries = new ArrayList<>();
 
         if(COORDINATE_SYSTEM_CRS84.equals(rawCRS)) {
-            List<EXGeographicBoundingBoxType> input = rawInput.stream()
+            List<EXGeographicBoundingBoxType> input = rawInput.geometries().stream()
                     .filter(f -> f instanceof EXGeographicBoundingBoxType)
                     .map(m -> (EXGeographicBoundingBoxType) m)
                     .toList();
 
-            // Noted that some user do not create a box in this section but a Point!! This isn't correct but
-            // the geonetwork allow this, so we need to deal with it.
+            // Noted that some user does not create a box in this section but a Point!! This isn't correct, but
+            // the geonetwork allows
+            //  this, so we need to deal with it.
             for (EXGeographicBoundingBoxType bbt : input) {
                 if (bbt.getWestBoundLongitude().getDecimal() == null || bbt.getEastBoundLongitude().getDecimal() == null || bbt.getNorthBoundLatitude().getDecimal() == null || bbt.getSouthBoundLatitude().getDecimal() == null) {
                     logger.warn("Invalid BBOX found for findPolygonsFromEXGeographicBoundingBoxType using CRS {}", rawCRS);
