@@ -234,7 +234,7 @@ public class GeometryUtilsTest {
     @Test
     public void verifyDescriptionsOnGeometries() throws IOException, JAXBException {
         String xml = readResourceFile("classpath:canned/sample7.xml");
-        Map<?, ?> geojson = GeometryUtils.createGeometryWithDescriptionsFrom(jaxb.unmarshal(xml));
+        Map<?, ?> geojson = GeometryUtils.createGeometryItems(jaxb.unmarshal(xml), GeometryUtils::createGeometryFrom, null);
 
         assertEquals(
                 List.of("Dungeness", "Masig", "Aukane", "Lizard Island", "Moore Reef", "Pelorus Island",
@@ -245,7 +245,7 @@ public class GeometryUtilsTest {
     @Test
     public void verifyNoDescriptionNoMember() throws IOException, JAXBException {
         String xml = readResourceFile("classpath:canned/sample4.xml");
-        Map<?, ?> geojson = GeometryUtils.createGeometryWithDescriptionsFrom(jaxb.unmarshal(xml));
+        Map<?, ?> geojson = GeometryUtils.createGeometryItems(jaxb.unmarshal(xml), GeometryUtils::createGeometryFrom, null);
 
         assertEquals(0, descriptionsIn(geojson).size());
     }
@@ -254,7 +254,7 @@ public class GeometryUtilsTest {
     @Test
     public void verifySharedDescriptionOnEveryGeometry() throws IOException, JAXBException {
         String xml = readResourceFile("classpath:canned/sample_spatial_extent_shared_description.xml");
-        Map<?, ?> geojson = GeometryUtils.createGeometryWithDescriptionsFrom(jaxb.unmarshal(xml));
+        Map<?, ?> geojson = GeometryUtils.createGeometryItems(jaxb.unmarshal(xml), GeometryUtils::createGeometryFrom, null);
 
         assertEquals(List.of("Two moorings", "Two moorings", "Survey box"), descriptionsIn(geojson));
     }

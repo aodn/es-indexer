@@ -118,8 +118,7 @@ public class GeometryUtils {
         return createGeoShapeJson(List.of(List.of(point)));
     }
     /**
-     * @param polygons - Assume to be EPSG:4326, as GeoJson always use this encoding. A String userData on a
-     *                 geometry becomes the "description" member of its geojson, see writeDescriptions
+     * @param polygons - Assume to be EPSG:4326, as GeoJson always use this encoding.
      * @return - Map that represent the geojson
      */
     protected static Map<?,?> createGeoShapeJson(List<List<Geometry>> polygons) {
@@ -138,10 +137,10 @@ public class GeometryUtils {
                             // Standard: https://www.rfc-editor.org/rfc/rfc7946#section-3.1.6
                             result = GeometryUtils.ensureCounterClockwise(polygon, factory);
                         }
-                        return keepUserData(geometry, result);
+                        return result;
                     })
                     // Orientation can leave invalid rings if the source was borderline
-                    .map(geometry -> keepUserData(geometry, makeValidGeometry(geometry)))
+                    .map(GeometryUtils::makeValidGeometry)
                     .filter(r -> r != null && !r.isEmpty())
                     .toArray(Geometry[]::new);
 
@@ -156,7 +155,6 @@ public class GeometryUtils {
                 }
                 else {
                     logger.debug("Created geometry {}", values);
-                    writeDescriptions(orientedPolygons, values);
                 }
                 return values;
             } catch (IOException | StringIndexOutOfBoundsException e) {
@@ -345,63 +343,75 @@ public class GeometryUtils {
             BiFunction<List<List<AbstractEXGeographicExtentType>>, P, R> handler,
             P param) {
 
-        List<EXExtentType> extents = findExtents(source);
-        if (extents == null) {
-            return null;
-        }
-        // One list per extent, holding its EXGeographicBoundingBoxType or EXBoundingPolygonType elements
-        List<List<AbstractEXGeographicExtentType>> rawInput = extents.stream()
-                .map(GeometryUtils::findGeographicElements)
-                .toList();
-        return handler.apply(rawInput, param);
-    }
-    /**
-     * The extents of the identification block. Primary: MDDataIdentification; Fallback: SVServiceIdentification (e.g. GA records)
-     * @param source - The parsed XML
-     * @return - The extents that have geographic elements, null if the record has no identification block
-     */
-    protected static List<EXExtentType> findExtents(MDMetadataType source) {
         List<MDDataIdentificationType> items = MapperUtils.findMDDataIdentificationType(source);
+        // Primary: MDDataIdentification; Fallback: SVServiceIdentification (e.g. GA records)
         List<? extends AbstractMDIdentificationType> identifications = items.isEmpty()
                 ? MapperUtils.findSVServiceIdentificationType(source)
                 : items;
-        if (identifications.isEmpty()) {
-            return null;
+        if(!identifications.isEmpty()) {
+            if(identifications.size() > 1) {
+                logger.warn("!! More than 1 block of MDDataIdentificationType, data will be missed !!");
+            }
+            // Assume only 1 block of <mri:MD_DataIdentification> or <srv:SV_ServiceIdentification>
+            // We only concern geographicElement here
+            List<EXExtentType> ext = identifications.get(0)
+                    .getExtent()
+                    .stream()
+                    .filter(f -> f.getAbstractExtent() != null)
+                    .filter(f -> f.getAbstractExtent().getValue() != null)
+                    .filter(f -> f.getAbstractExtent().getValue() instanceof EXExtentType)
+                    .map(f -> (EXExtentType) f.getAbstractExtent().getValue())
+                    .filter(f -> f.getGeographicElement() != null)
+                    .toList();
+
+            // We want to get a list of item where each item contains multiple, (aka list) of
+            // (EXGeographicBoundingBoxType or EXBoundingPolygonType)
+            // Each extent's elements carry its description, createGeometryFrom writes it into the geojson
+            List<List<AbstractEXGeographicExtentType>> rawInput = ext.stream()
+                    .<List<AbstractEXGeographicExtentType>>map(extent -> new ExtentElements(findDescriptionOf(extent),
+                            /*
+                                extent.getGeographicElement() = List<AbstractEXGeographicExtentPropertyType>
+                                For each AbstractEXGeographicExtentPropertyType, we get the tag that store the
+                                coordinate, it is either a EXBoundingPolygonType or EXGeographicBoundingBoxType
+                             */
+                            extent.getGeographicElement().stream()
+                                    .map(AbstractEXGeographicExtentPropertyType::getAbstractEXGeographicExtent)
+                                    .filter(Objects::nonNull)
+                                    .filter(m -> (m.getValue() instanceof EXBoundingPolygonType || m.getValue() instanceof EXGeographicBoundingBoxType))
+                                    .map(m -> {
+                                        if (m.getValue() instanceof EXBoundingPolygonType exBoundingPolygonType) {
+                                            if (!exBoundingPolygonType.getPolygon().isEmpty() && exBoundingPolygonType.getPolygon().get(0).getAbstractGeometry() != null) {
+                                                return exBoundingPolygonType;
+                                            }
+                                        } else if (m.getValue() instanceof EXGeographicBoundingBoxType) {
+                                            return m.getValue();
+                                        }
+                                        return null; // Handle other cases or return appropriate default value
+                                    })
+                                    .filter(Objects::nonNull) // Filter out null values if any
+                                    .toList()
+                    ))
+                    .toList();
+            return handler.apply(rawInput, param);
         }
-        if (identifications.size() > 1) {
-            logger.warn("!! More than 1 block of MDDataIdentificationType, data will be missed !!");
-        }
-        // Assume only 1 block of <mri:MD_DataIdentification> or <srv:SV_ServiceIdentification>
-        return identifications.get(0)
-                .getExtent()
-                .stream()
-                .filter(f -> f.getAbstractExtent() != null)
-                .filter(f -> f.getAbstractExtent().getValue() != null)
-                .filter(f -> f.getAbstractExtent().getValue() instanceof EXExtentType)
-                .map(f -> (EXExtentType) f.getAbstractExtent().getValue())
-                .filter(f -> f.getGeographicElement() != null)
-                .toList();
-    }
-    /**
-     * The EXGeographicBoundingBoxType and EXBoundingPolygonType elements of one extent, other kinds are skipped
-     * @param extent - One extent block
-     * @return - The elements that carry coordinates
-     */
-    protected static List<AbstractEXGeographicExtentType> findGeographicElements(EXExtentType extent) {
-        return extent.getGeographicElement()
-                .stream()
-                .map(AbstractEXGeographicExtentPropertyType::getAbstractEXGeographicExtent)
-                .filter(Objects::nonNull)
-                .map(element -> (AbstractEXGeographicExtentType) element.getValue())
-                .filter(element -> element instanceof EXGeographicBoundingBoxType || hasPolygon(element))
-                .toList();
+        return null;
     }
 
-    // Some records declare a bounding polygon with no geometry inside, skip those
-    private static boolean hasPolygon(AbstractEXGeographicExtentType element) {
-        return element instanceof EXBoundingPolygonType polygon
-                && !polygon.getPolygon().isEmpty()
-                && polygon.getPolygon().get(0).getAbstractGeometry() != null;
+    // The geographic elements of one extent, labelled with that extent's description
+    protected static class ExtentElements extends ArrayList<AbstractEXGeographicExtentType> {
+        final String description;   // null when the extent has none
+
+        ExtentElements(String description, List<? extends AbstractEXGeographicExtentType> elements) {
+            super(elements);
+            this.description = description;
+        }
+    }
+
+    // The gex:description text of one extent, null if absent or blank
+    protected static String findDescriptionOf(EXExtentType extent) {
+        return safeGet(() -> extent.getDescription().getCharacterString().getValue().toString().trim())
+                .filter(text -> !text.isEmpty())
+                .orElse(null);
     }
 
     protected static List<List<Geometry>> createGeometryWithoutLand(List<List<AbstractEXGeographicExtentType>> rawInput) {
@@ -435,62 +445,30 @@ public class GeometryUtils {
         // line will cause the spatial extends draw on map with land removed.
         // List<List<Geometry>> polygon = createGeometryWithoutLand(rawInput);
 
-        List<List<Geometry>> polygon = GeometryBase.findPolygonsFrom(GeometryBase.COORDINATE_SYSTEM_CRS84, rawInput);
-        return !polygon.isEmpty() ? createGeoShapeJson(polygon) : null;
-    }
-    /**
-     * The spatial extents geojson with each extent's description on its own geometries,
-     * e.g. {"type":"Point","coordinates":[...],"description":"Pelorus Reef"}
-     * @param source - A parsed XML from geonetwork
-     * @return - Map that represent the geojson, null if the record has none
-     */
-    public static Map<?, ?> createGeometryWithDescriptionsFrom(MDMetadataType source) {
-        List<EXExtentType> extents = findExtents(source);
-        if (extents == null) {
+        List<Map<String, Object>> members = new ArrayList<>();
+        for (List<AbstractEXGeographicExtentType> elements : rawInput) {
+            // One extent at a time, so its description lands only on its own geometries
+            List<List<Geometry>> polygon = GeometryBase.findPolygonsFrom(GeometryBase.COORDINATE_SYSTEM_CRS84, List.of(elements));
+            Map<?, ?> geojson = polygon.isEmpty() ? null : createGeoShapeJson(polygon);
+            if (geojson == null) {
+                continue;
+            }
+            String description = elements instanceof ExtentElements extent ? extent.description : null;
+            for (Object member : (List<?>) geojson.get("geometries")) {
+                @SuppressWarnings("unchecked")
+                Map<String, Object> geometry = (Map<String, Object>) member;
+                if (description != null) {
+                    geometry.put("description", description);
+                }
+                members.add(geometry);
+            }
+        }
+        if (members.isEmpty()) {
             return null;
         }
-        List<List<Geometry>> geometries = new ArrayList<>();
-        for (EXExtentType extent : extents) {
-            // One extent at a time, so a description cannot slip onto another extent's geometries
-            List<List<Geometry>> extentGeometries = GeometryBase.findPolygonsFrom(
-                    GeometryBase.COORDINATE_SYSTEM_CRS84, List.of(findGeographicElements(extent)));
-            String description = findDescriptionOf(extent);
-            if (description != null) {
-                extentGeometries.forEach(group -> group.forEach(geometry -> geometry.setUserData(description)));
-            }
-            geometries.addAll(extentGeometries);
-        }
-        return geometries.isEmpty() ? null : createGeoShapeJson(geometries);
-    }
-
-    // The gex:description text of one extent, null if absent or blank
-    private static String findDescriptionOf(EXExtentType extent) {
-        return safeGet(() -> extent.getDescription().getCharacterString().getValue().toString().trim())
-                .filter(text -> !text.isEmpty())
-                .orElse(null);
-    }
-
-    // JTS operations return new instances, carry the description over
-    private static Geometry keepUserData(Geometry from, Geometry to) {
-        if (to != null && to.getUserData() == null) {
-            to.setUserData(from.getUserData());
-        }
-        return to;
-    }
-
-    // A description travels on JTS userData, write it into the matching geojson member
-    private static void writeDescriptions(Geometry[] orientedPolygons, Map<?, ?> geojson) {
-        if (!(geojson.get("geometries") instanceof List<?> members)
-                || members.size() != orientedPolygons.length) {
-            return;
-        }
-        for (int i = 0; i < orientedPolygons.length; i++) {
-            if (orientedPolygons[i].getUserData() instanceof String description
-                    && members.get(i) instanceof Map<?, ?> member) {
-                @SuppressWarnings("unchecked")
-                Map<String, Object> writable = (Map<String, Object>) member;
-                writable.put("description", description);
-            }
-        }
+        Map<String, Object> collection = new LinkedHashMap<>();
+        collection.put("type", "GeometryCollection");
+        collection.put("geometries", members);
+        return collection;
     }
 }
