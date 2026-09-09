@@ -43,8 +43,7 @@ public class AiEnhancementRequest {
     private List<ThemesModel> themes;
 
     /**
-     * Set for the records that are not datasets, for example the IMOS Facility / Sub-Facility records, so the
-     * delivery mode is not predicted for them, see https://github.com/aodn/backlog/issues/9003
+     * Set for the records that are not datasets, for example the IMOS Facility / Sub-Facility records, so the delivery mode is not predicted for them
      * JsonIgnore because it only selects the models to call, the AI service does not need it.
      */
     @JsonIgnore
