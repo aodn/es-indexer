@@ -1,0 +1,2415 @@
+{
+  "title" : "EcoRRAP oceanographic logger data",
+  "description" : "Oceanographic loggers have been deployed continuously at our EcoRRAP monitoring sites since inception in 2021. Deployments are typically for 12 months, with loggers exchanged and data retrieved during the annual monitoring expeditions. Data have been collected to provide explanatory information for ecological datasets, and for model parameterisation.\n\n\n                    At the main reef per cluster (i.e. Masig Island, Lizard Island, Moore Reef, Pelorus Island, Davies Reef, Mial Island and Heron Island) an array of loggers was deployed at one of the Front Deep zones. These loggers measured salinity, temperature, depth, light (PAR) and currents (current profiles and surface waves). The loggers were attached to a 1m2 flat steel frame affixed to the seafloor so that the instrument sensors were approximately 50cm from the bottom. A Spotter wave buoy was also deployed adjacent to each main-reef instrument array. These measured surface wave and temperature (at 5m deep and the seafloor) data, as well as calculated wind speeds. Some later Spotter models also measured barometric pressure. The Spotter temperature data timeseries are typically shorter than the wave timeseries.\n\n\n                    Temperature sensors and tilt current meters were further deployed at many other zones. Exact deployment details are described in the &ldquo;202411_EcoRRAP_logger_metadata_record.xls&rdquo; spreadsheet attached. Temperature loggers were generally deployed at one zone type per reef. Where a zone type is a combination of reef aspect and depth. For example, Front1 shallow and Front1 deep are different zone types, while Front1 shallow and Front2 shallow are the same zone type (i.e. both Front sites at the same depth). Smaller reefs and reefs with presumably more homogenous temperatures had lower numbers of site types monitored for temperature due to limited numbers of sensors available. Tilt current meters were deployed at each zone at different time points throughout the sampling period. These deployments were typically for 2 &ndash; 3 months.\n\n\n\n\n\n                    Instruments used:\n\n\n                    The below is a list of logger types used for the different parameters. Refer to the manufacturer&rsquo;s websites for further product information and user guides. Loggers were typically deployed with 10 minute sampling intervals. Wave measurements were conducted every two or three hours depending on instrument model to maximise deployment length.\n\n\n                    CTDs (conductivity / salinity, temperature and depth):\n\n\n\n                    Seabird Electronics SBE37: https://www.seabird.com/moored/sbe-37-sm-smp-smp-odo-microcat/family?productCategoryId=54627473786\n\n                    Seabird Electronics SBE16 Plus: https://www.seabird.com/sbe-16plus-v2-seacat/product?id=60761421598\n\n\n\n                    Light (PAR):\n\n\n\n                    Licor light sensor (LI-192) attached to RBR solo3 logger: https://rbr-global.com/products/compact-loggers/rbrsolo-do-tu-par/\n\n                    RBR solo PAR: https://rbr-global.com/products/compact-loggers/rbrsolo-par-rad/\n\n                    Light bio-wiper: zebratech - https://www.zebra-tech.co.nz/hydro-wiper/\n\n\n\n                    Depth:\n\n\n\n                    RBR solo3 D - https://rbr-global.com/products/compact-loggers/rbrsolo-d/\n\n\n\n                    Temperature:\n\n\n\n                    RBR solo3 T - https://rbr-global.com/products/compact-loggers/rbrsolo-t-2/\n\n                    Seabird Electronics SBE39: https://www.seabird.com/moored/sbe-39plus-temperature-depth-recorder/family?productCategoryId=54627473774\n\n\n\n                    Acoustic currents and waves:\n\n\n\n                    Nortek Signature1000: https://www.nortekgroup.com/products/signature-1000\n\n                    Nortek AWAC 600kHz: https://www.nortekgroup.com/products/awac-600-khz\n\n                    Nortek Aquadopp profiler: https://observator.com/products/nortek-aquadopp-profiler/\n\n                    Teledyne RDI ADCP: https://www.teledynemarine.com/en-us/products/Pages/workhorse-sentinel-adcp.aspx\n\n\n\n                    Tilt current meter:\n\n\n\n                    Marotte: https://www.marinegeophysics.com.au/current-meter/\n\n\n\n                    Wave buoy and temperature string:\n\n\n\n                    Sofar Ocean Spotter smart mooring: https://www.sofarocean.com/posts/introducing-spotter-smart-mooring\n\n\n\n                    The file structure of processed data are organised by parameter and then collection fieldtrip (date and then AIMS fieldtrip numbers). Typically a collection fieldtrip visited one or two of our EcoRRAP regions in the Torres strait, Northern, Central and Southern Great Barrier Reef.\n\n\n                    So as an example, temperature data from PAOR_FL1S between 23/1/21 &ndash; 30/3/21, retrieved on fieldtrip 7626 (the first data row in the attached deployment metadata spreadsheet), can be found in the folder &ldquo;CTD_DATA \\ 202103_7626_Central_GBR&rdquo; being a combination of parameter (CTD), collection fieldtrip date (March 2021), AIMS fieldtrip number (7626) and region (Central GBR).",
+  "extent" : {
+    "bbox" : [ [ 142.90858, -23.91752, 152.41391, -9.73419 ], [ 143.41571, -9.74405, 143.41571, -9.74405 ], [ 146.49924, -18.5391, 146.49924, -18.5391 ], [ 146.49562, -18.57153, 146.49562, -18.57153 ], [ 145.46938, -14.69137, 145.46938, -14.69137 ], [ 150.92053, -23.16196, 150.92053, -23.16196 ], [ 150.90279, -23.15056, 150.90279, -23.15056 ], [ 150.90276, -23.15072, 150.90276, -23.15072 ], [ 147.70859, -18.6532, 147.70859, -18.6532 ], [ 147.69923, -18.94397, 147.69923, -18.94397 ], [ 147.69295, -18.94938, 147.69295, -18.94938 ], [ 147.71846, -18.6521, 147.71846, -18.6521 ], [ 147.71848, -18.65213, 147.71848, -18.65213 ], [ 147.70871, -18.65321, 147.70871, -18.65321 ], [ 146.2258, -16.85995, 146.2258, -16.85995 ], [ 147.70859, -18.6532, 147.70859, -18.6532 ], [ 147.70267, -18.66035, 147.70267, -18.66035 ], [ 147.70198, -18.94938, 147.70198, -18.94938 ], [ 147.69295, -18.94923, 147.69295, -18.94923 ], [ 147.70267, -18.66035, 147.70267, -18.66035 ], [ 146.49544, -18.57224, 146.49544, -18.57224 ], [ 147.62712, -18.82586, 147.62712, -18.82586 ], [ 146.25343, -16.87196, 146.25343, -16.87196 ], [ 146.25371, -16.87209, 146.25371, -16.87209 ], [ 146.24483, -16.88292, 146.24483, -16.88292 ], [ 146.24457, -16.88279, 146.24457, -16.88279 ], [ 150.93681, -23.19657, 150.93681, -23.19657 ], [ 146.24475, -16.88298, 146.24475, -16.88298 ], [ 146.24475, -16.88298, 146.24475, -16.88298 ], [ 146.24475, -16.88298, 146.24475, -16.88298 ], [ 146.24464, -16.88305, 146.24464, -16.88305 ], [ 146.2258, -16.85995, 146.2258, -16.85995 ], [ 146.2373, -16.84844, 146.2373, -16.84844 ], [ 146.2373, -16.84844, 146.2373, -16.84844 ], [ 146.22552, -16.85995, 146.22552, -16.85995 ], [ 146.22543, -16.85991, 146.22543, -16.85991 ], [ 146.22597, -16.85996, 146.22597, -16.85996 ], [ 146.21741, -16.84714, 146.21741, -16.84714 ], [ 146.18407, -16.88189, 146.18407, -16.88189 ], [ 146.18381, -16.88192, 146.18381, -16.88192 ], [ 146.22597, -16.85996, 146.22597, -16.85996 ], [ 146.18407, -16.88189, 146.18407, -16.88189 ], [ 146.21736, -16.84719, 146.21736, -16.84719 ], [ 146.18402, -16.88184, 146.18402, -16.88184 ], [ 150.90285, -23.15041, 150.90285, -23.15041 ], [ 143.446817, -9.765033, 143.446817, -9.765033 ], [ 150.912683, -23.09275, 150.912683, -23.09275 ], [ 150.90285, -23.15041, 150.90285, -23.15041 ], [ 150.90285, -23.15041, 150.90285, -23.15041 ], [ 147.62738, -18.82591, 147.62738, -18.82591 ], [ 147.62712, -18.82586, 147.62712, -18.82586 ], [ 147.65221, -18.83171, 147.65221, -18.83171 ], [ 147.66884, -18.80592, 147.66884, -18.80592 ], [ 142.92525, -9.88176, 142.92525, -9.88176 ], [ 146.22552, -16.85995, 146.22552, -16.85995 ], [ 147.66856, -18.80615, 147.66856, -18.80615 ], [ 147.66862, -18.80575, 147.66862, -18.80575 ], [ 147.63336, -18.83292, 147.63336, -18.83292 ], [ 146.18402, -16.8819, 146.18402, -16.8819 ], [ 147.69923, -18.94399, 147.69923, -18.94399 ], [ 146.18402, -16.8819, 146.18402, -16.8819 ], [ 145.46939, -14.69143, 145.46939, -14.69143 ], [ 145.44537, -14.69805, 145.44537, -14.69805 ], [ 146.24886, -16.88887, 146.24886, -16.88887 ], [ 145.44202, -14.65083, 145.44202, -14.65083 ], [ 145.49297, -14.64948, 145.49297, -14.64948 ], [ 145.46529, -14.68781, 145.46529, -14.68781 ], [ 147.62727, -18.8259, 147.62727, -18.8259 ], [ 147.63336, -18.83292, 147.63336, -18.83292 ], [ 146.495, -18.57263, 146.495, -18.57263 ], [ 146.48315, -18.61276, 146.48315, -18.61276 ], [ 143.00543, -9.9312, 143.00543, -9.9312 ], [ 143.41585, -9.74463, 143.41585, -9.74463 ], [ 143.00543, -9.9312, 143.00543, -9.9312 ], [ 143.00534, -9.93117, 143.00534, -9.93117 ], [ 142.92517, -9.88165, 142.92517, -9.88165 ], [ 142.92517, -9.88165, 142.92517, -9.88165 ], [ 142.92525, -9.88176, 142.92525, -9.88176 ], [ 142.93288, -9.87852, 142.93288, -9.87852 ], [ 147.66394, -18.81966, 147.66394, -18.81966 ], [ 147.66391, -18.8192, 147.66391, -18.8192 ], [ 142.92267, -9.93386, 142.92267, -9.93386 ], [ 147.66376, -18.81618, 147.66376, -18.81618 ], [ 143.43503, -9.73419, 143.43503, -9.73419 ], [ 143.46025, -9.7462, 143.46025, -9.7462 ], [ 145.44545, -14.6981, 145.44545, -14.6981 ], [ 145.44545, -14.6981, 145.44545, -14.6981 ], [ 145.46928, -14.69129, 145.46928, -14.69129 ], [ 146.24457, -16.88264, 146.24457, -16.88264 ], [ 145.46518, -14.68764, 145.46518, -14.68764 ], [ 146.24463, -16.88276, 146.24463, -16.88276 ], [ 145.49297, -14.64948, 145.49297, -14.64948 ], [ 151.92088, -23.43401, 151.92088, -23.43401 ], [ 145.46523, -14.68768, 145.46523, -14.68768 ], [ 145.46533, -14.68762, 145.46533, -14.68762 ], [ 146.486033, -18.549017, 146.486033, -18.549017 ], [ 146.486033, -18.549017, 146.486033, -18.549017 ], [ 143.40729, -9.88355, 143.40729, -9.88355 ], [ 146.48822, -18.55054, 146.48822, -18.55054 ], [ 152.40399, -23.89441, 152.40399, -23.89441 ], [ 151.95224, -23.42807, 151.95224, -23.42807 ], [ 151.95242, -23.42847, 151.95242, -23.42847 ], [ 151.95253, -23.42878, 151.95253, -23.42878 ], [ 151.96863, -23.45391, 151.96863, -23.45391 ], [ 151.96863, -23.45391, 151.96863, -23.45391 ], [ 151.92572, -23.45601, 151.92572, -23.45601 ], [ 151.92041, -23.43398, 151.92041, -23.43398 ], [ 151.92566, -23.45611, 151.92566, -23.45611 ], [ 151.92091, -23.43408, 151.92091, -23.43408 ], [ 150.89906, -23.08526, 150.89906, -23.08526 ], [ 150.89891, -23.08508, 150.89891, -23.08508 ], [ 150.96664, -23.20172, 150.96664, -23.20172 ], [ 143.00534, -9.93117, 143.00534, -9.93117 ], [ 150.96721, -23.20164, 150.96721, -23.20164 ], [ 150.93726, -23.19642, 150.93726, -23.19642 ], [ 150.90279, -23.15038, 150.90279, -23.15038 ], [ 150.90276, -23.15072, 150.90276, -23.15072 ], [ 145.46973, -14.69979, 145.46973, -14.69979 ], [ 152.39369, -23.90081, 152.39369, -23.90081 ], [ 147.66394, -18.81966, 147.66394, -18.81966 ], [ 147.66394, -18.81966, 147.66394, -18.81966 ], [ 147.66394, -18.81966, 147.66394, -18.81966 ], [ 147.65248, -18.83187, 147.65248, -18.83187 ], [ 147.65248, -18.83187, 147.65248, -18.83187 ], [ 147.65221, -18.83171, 147.65221, -18.83171 ], [ 146.49562, -18.57153, 146.49562, -18.57153 ], [ 146.49544, -18.57224, 146.49544, -18.57224 ], [ 146.495, -18.57263, 146.495, -18.57263 ], [ 146.49544, -18.57224, 146.49544, -18.57224 ], [ 146.495, -18.57263, 146.495, -18.57263 ], [ 146.49562, -18.57153, 146.49562, -18.57153 ], [ 146.48842, -18.5508, 146.48842, -18.5508 ], [ 146.48859, -18.55076, 146.48859, -18.55076 ], [ 146.48822, -18.55054, 146.48822, -18.55054 ], [ 146.48859, -18.55076, 146.48859, -18.55076 ], [ 143.40704, -9.88363, 143.40704, -9.88363 ], [ 147.65221, -18.83171, 147.65221, -18.83171 ], [ 147.65268, -18.83181, 147.65268, -18.83181 ], [ 152.40421, -23.89483, 152.40421, -23.89483 ], [ 152.41391, -23.89633, 152.41391, -23.89633 ], [ 150.90279, -23.15038, 150.90279, -23.15038 ], [ 152.41391, -23.89633, 152.41391, -23.89633 ], [ 150.90279, -23.15038, 150.90279, -23.15038 ], [ 150.9207, -23.16187, 150.9207, -23.16187 ], [ 143.41005, -9.87995, 143.41005, -9.87995 ], [ 143.40973, -9.87976, 143.40973, -9.87976 ], [ 142.92276, -9.93405, 142.92276, -9.93405 ], [ 143.3893, -9.86766, 143.3893, -9.86766 ], [ 143.38939, -9.86777, 143.38939, -9.86777 ], [ 146.23726, -16.8485, 146.23726, -16.8485 ], [ 143.41005, -9.87995, 143.41005, -9.87995 ], [ 143.40973, -9.87976, 143.40973, -9.87976 ], [ 147.70267, -18.66035, 147.70267, -18.66035 ], [ 146.25369, -16.87191, 146.25369, -16.87191 ], [ 146.25362, -16.87201, 146.25362, -16.87201 ], [ 145.44543, -14.69811, 145.44543, -14.69811 ], [ 147.63365, -18.83293, 147.63365, -18.83293 ], [ 147.63336, -18.83292, 147.63336, -18.83292 ], [ 150.88542, -23.08432, 150.88542, -23.08432 ], [ 150.886, -23.08429, 150.886, -23.08429 ], [ 146.25362, -16.87201, 146.25362, -16.87201 ], [ 143.38852, -9.87567, 143.38852, -9.87567 ], [ 143.39441, -9.882, 143.39441, -9.882 ], [ 143.39439, -9.88172, 143.39439, -9.88172 ], [ 143.40681, -9.88335, 143.40681, -9.88335 ], [ 147.66394, -18.81966, 147.66394, -18.81966 ], [ 147.65268, -18.83181, 147.65268, -18.83181 ], [ 146.23718, -16.84859, 146.23718, -16.84859 ], [ 145.46951, -14.69113, 145.46951, -14.69113 ], [ 146.48842, -18.5508, 146.48842, -18.5508 ], [ 146.48822, -18.55054, 146.48822, -18.55054 ], [ 146.21744, -16.84712, 146.21744, -16.84712 ], [ 146.48842, -18.5508, 146.48842, -18.5508 ], [ 146.48859, -18.55076, 146.48859, -18.55076 ], [ 146.48843, -18.54098, 146.48843, -18.54098 ], [ 146.48862, -18.54103, 146.48862, -18.54103 ], [ 146.49924, -18.5391, 146.49924, -18.5391 ], [ 146.48909, -18.54104, 146.48909, -18.54104 ], [ 146.49924, -18.5391, 146.49924, -18.5391 ], [ 146.49895, -18.53953, 146.49895, -18.53953 ], [ 146.49893, -18.54003, 146.49893, -18.54003 ], [ 146.49924, -18.5391, 146.49924, -18.5391 ], [ 147.660733, -18.823133, 147.660733, -18.823133 ], [ 146.49895, -18.53953, 146.49895, -18.53953 ], [ 146.49893, -18.54003, 146.49893, -18.54003 ], [ 146.49924, -18.5391, 146.49924, -18.5391 ], [ 146.49924, -18.5391, 146.49924, -18.5391 ], [ 146.49895, -18.53953, 146.49895, -18.53953 ], [ 147.62727, -18.8259, 147.62727, -18.8259 ], [ 147.62712, -18.82586, 147.62712, -18.82586 ], [ 147.66394, -18.81966, 147.66394, -18.81966 ], [ 147.66394, -18.81966, 147.66394, -18.81966 ], [ 147.66391, -18.8192, 147.66391, -18.8192 ], [ 147.62738, -18.82591, 147.62738, -18.82591 ], [ 147.62727, -18.8259, 147.62727, -18.8259 ], [ 147.66376, -18.81618, 147.66376, -18.81618 ], [ 147.65248, -18.83187, 147.65248, -18.83187 ], [ 143.38873, -9.8753, 143.38873, -9.8753 ], [ 142.93295, -9.87865, 142.93295, -9.87865 ], [ 142.92276, -9.93405, 142.92276, -9.93405 ], [ 142.90858, -9.9853, 142.90858, -9.9853 ], [ 142.90881, -9.98513, 142.90881, -9.98513 ], [ 142.92653, -10.03724, 142.92653, -10.03724 ], [ 142.92267, -9.93386, 142.92267, -9.93386 ], [ 143.39987, -9.74876, 143.39987, -9.74876 ], [ 143.39992, -9.74877, 143.39992, -9.74877 ], [ 143.40012, -9.74886, 143.40012, -9.74886 ], [ 143.4214, -9.76227, 143.4214, -9.76227 ], [ 143.46025, -9.7462, 143.46025, -9.7462 ], [ 143.46025, -9.7462, 143.46025, -9.7462 ], [ 147.65268, -18.83181, 147.65268, -18.83181 ], [ 143.45851, -9.74831, 143.45851, -9.74831 ], [ 143.45831, -9.74817, 143.45831, -9.74817 ], [ 143.46025, -9.7462, 143.46025, -9.7462 ], [ 143.46025, -9.7462, 143.46025, -9.7462 ], [ 143.45851, -9.74831, 143.45851, -9.74831 ], [ 143.45831, -9.74817, 143.45831, -9.74817 ], [ 152.41367, -23.88511, 152.41367, -23.88511 ], [ 147.70198, -18.94938, 147.70198, -18.94938 ], [ 145.46951, -14.69113, 145.46951, -14.69113 ], [ 145.46951, -14.69113, 145.46951, -14.69113 ], [ 146.21744, -16.84712, 146.21744, -16.84712 ], [ 146.21744, -16.84712, 146.21744, -16.84712 ], [ 146.21759, -16.84731, 146.21759, -16.84731 ], [ 146.23726, -16.8485, 146.23726, -16.8485 ], [ 147.66862, -18.80575, 147.66862, -18.80575 ], [ 147.66862, -18.80575, 147.66862, -18.80575 ], [ 146.21759, -16.84731, 146.21759, -16.84731 ], [ 145.44197, -14.66776, 145.44197, -14.66776 ], [ 145.44202, -14.65083, 145.44202, -14.65083 ], [ 145.49286, -14.6494, 145.49286, -14.6494 ], [ 145.4928, -14.64963, 145.4928, -14.64963 ], [ 145.44197, -14.66776, 145.44197, -14.66776 ], [ 145.44244, -14.66777, 145.44244, -14.66777 ], [ 146.25371, -16.87209, 146.25371, -16.87209 ], [ 152.41367, -23.88511, 152.41367, -23.88511 ], [ 147.63365, -18.83293, 147.63365, -18.83293 ], [ 147.66391, -18.8192, 147.66391, -18.8192 ], [ 147.66376, -18.81618, 147.66376, -18.81618 ], [ 147.66394, -18.81966, 147.66394, -18.81966 ], [ 146.49893, -18.54003, 146.49893, -18.54003 ], [ 147.62738, -18.82591, 147.62738, -18.82591 ], [ 147.63316, -18.83125, 147.63316, -18.83125 ], [ 147.63724, -18.81433, 147.63724, -18.81433 ], [ 147.63721, -18.81448, 147.63721, -18.81448 ], [ 147.63721, -18.81448, 147.63721, -18.81448 ], [ 147.63721, -18.81448, 147.63721, -18.81448 ], [ 145.469517, -14.699, 145.469517, -14.699 ], [ 147.658767, -18.824367, 147.658767, -18.824367 ], [ 143.41579, -9.74423, 143.41579, -9.74423 ], [ 143.41718, -9.7639, 143.41718, -9.7639 ], [ 143.39803, -9.75998, 143.39803, -9.75998 ], [ 143.39822, -9.75989, 143.39822, -9.75989 ], [ 151.97797, -23.47209, 151.97797, -23.47209 ], [ 151.97772, -23.47196, 151.97772, -23.47196 ], [ 151.97749, -23.47164, 151.97749, -23.47164 ], [ 151.95108, -23.47086, 151.95108, -23.47086 ], [ 151.95108, -23.47086, 151.95108, -23.47086 ], [ 151.95108, -23.47086, 151.95108, -23.47086 ], [ 151.95108, -23.47086, 151.95108, -23.47086 ], [ 151.95108, -23.47086, 151.95108, -23.47086 ], [ 151.95093, -23.47046, 151.95093, -23.47046 ], [ 151.95093, -23.47046, 151.95093, -23.47046 ], [ 151.95097, -23.47036, 151.95097, -23.47036 ], [ 152.41367, -23.88511, 152.41367, -23.88511 ], [ 152.3924, -23.91752, 152.3924, -23.91752 ], [ 152.39223, -23.91708, 152.39223, -23.91708 ], [ 152.39342, -23.9003, 152.39342, -23.9003 ] ],
+    "temporal" : [ [ "2019-12-31T13:00:00Z", null ], [ "2019-12-31T13:00:00Z", null ] ]
+  },
+  "summaries" : {
+    "score" : 1,
+    "status" : "onGoing",
+    "credits" : [ "Australian Institute of Marine Science (AIMS), Australia" ],
+    "scope" : {
+      "code" : "dataset",
+      "name" : ""
+    },
+    "statement" : "The majority of loggers are not equipped with telemetry, so data needs to be manually retrieved upon collection. The exception to this is the Spotter wave buoys which transmit data in near real time. On collection trips logger data is recovered and deployment metadata is managed via a dedicated Microsoft Access database. The data is backed up on the internal AIMS server, and the AIMS Oceanographic team applies QA / QC tools to the data following standard procedures (IMOS Matlab toolbox: https://github.com/aodn/imos-toolbox/wiki). All processed data are output as NetCDF files (.nc) in UTC time. Column headers, parameters and units are all standard as per the toolbox output. All temperature sensors are run in a water bath with a recently calibrated Seabird CTD both pre- and post-deployment to account for instrument offsets and drift.\n\n\n                    Summary statistics files are also produced (as .csv) for ease of use in statistical models. These are output in local time (GMT+10). Refer to attached &ldquo;ecorrap_stats_description.txt&rdquo; for column header and unit descriptions, found in the AIMS_EcoRRAP_Oceanography_CSV_FILES.zip.\n\n\n                    Data collection is ongoing and will be updated iteratively and logged here. First release of data occured on 17/01/2025 for data up to 11/2024.",
+    "creation" : "2023-02-15T00:00:00",
+    "revision" : "2025-06-05T00:00:00",
+    "temporal" : [ {
+      "start" : "2019-12-31T13:00:00Z",
+      "end" : null
+    } ],
+    "update_frequency" : "real-time",
+    "proj:geometry" : {
+      "geometries" : [ {
+        "type" : "Point",
+        "coordinates" : [ 143.41571, -9.74405 ],
+        "description" : "Masig - 301-305"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.49924, -18.5391 ],
+        "description" : "Pelorus Reef - 5479 Currents / Waves"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.49562, -18.57153 ],
+        "description" : "Orpheus Reef - 205831 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 145.46938, -14.69137 ],
+        "description" : "Lizard Island - 655-659"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 150.92053, -23.16196 ],
+        "description" : "Middle - 496-500"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 150.90279, -23.15056 ],
+        "description" : "Miall - 501-505"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 150.90276, -23.15072 ],
+        "description" : "Miall - 506-510"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.70859, -18.6532 ],
+        "description" : "Chicken Reef - 541-545"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.69923, -18.94397 ],
+        "description" : "Little Broadhurst - 511-515"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.69295, -18.94938 ],
+        "description" : "Little Broadhurst - 526-530"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.71846, -18.6521 ],
+        "description" : "Chicken Reef - 531-535"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.71848, -18.65213 ],
+        "description" : "Chicken Reef - 536-540"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.70871, -18.65321 ],
+        "description" : "Chicken Reef - 546-550"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.2258, -16.85995 ],
+        "description" : "Moore Reef - 1055 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.70859, -18.6532 ],
+        "description" : "Chicken Reef - 203094 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.70267, -18.66035 ],
+        "description" : "Chicken Reef - 556-560"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.70198, -18.94938 ],
+        "description" : "Little Broadhurst - 203099 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.69295, -18.94923 ],
+        "description" : "Little Broadhurst - 521-525"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.70267, -18.66035 ],
+        "description" : "Chicken Reef - 203088 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.49544, -18.57224 ],
+        "description" : "Orpheus Reef - 205832 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.62712, -18.82586 ],
+        "description" : "Davies Reef - 205854 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.25343, -16.87196 ],
+        "description" : "Moore Reef - 595-599"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.25371, -16.87209 ],
+        "description" : "Moore Reef - 1058 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.24483, -16.88292 ],
+        "description" : "Moore Reef - B1822 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.24457, -16.88279 ],
+        "description" : "Moore Reef - B1825 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 150.93681, -23.19657 ],
+        "description" : "Great Keppel - 481-485"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.24475, -16.88298 ],
+        "description" : "Moore Reef - 200245 Light"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.24475, -16.88298 ],
+        "description" : "Moore Reef - 6146 CTD"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.24475, -16.88298 ],
+        "description" : "Moore Reef - WAV 5468 Currents, waves"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.24464, -16.88305 ],
+        "description" : "Moore Reef - 600-604"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.2258, -16.85995 ],
+        "description" : "Moore Reef - B1836 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.2373, -16.84844 ],
+        "description" : "Moore Reef - B1823 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.2373, -16.84844 ],
+        "description" : "Moore Reef - 615-619"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.22552, -16.85995 ],
+        "description" : "Moore Reef - 620-624"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.22543, -16.85991 ],
+        "description" : "Moore Reef - 625-629"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.22597, -16.85996 ],
+        "description" : "Moore Reef - B1827 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.21741, -16.84714 ],
+        "description" : "Moore Reef - B1831 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.18407, -16.88189 ],
+        "description" : "Moore Reef - B1795 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.18381, -16.88192 ],
+        "description" : "Moore Reef - B1828 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.22597, -16.85996 ],
+        "description" : "Moore Reef - 1059 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.18407, -16.88189 ],
+        "description" : "Moore Reef - ¿0676 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.21736, -16.84719 ],
+        "description" : "Moore Reef - 635-639"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.18402, -16.88184 ],
+        "description" : "Moore Reef - 640-644"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 150.90285, -23.15041 ],
+        "description" : "Miall - 200225 Light"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.446817, -9.765033 ],
+        "description" : "Masig - 1736 Waves, temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 150.912683, -23.09275 ],
+        "description" : "North Keppel - 1741 Waves, temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 150.90285, -23.15041 ],
+        "description" : "Miall - 6144 CTD"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 150.90285, -23.15041 ],
+        "description" : "Miall - 5581 Currents, waves"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.62738, -18.82591 ],
+        "description" : "Davies Reef - 205837 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.62712, -18.82586 ],
+        "description" : "Davies Reef - B1080 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.65221, -18.83171 ],
+        "description" : "Davies Reef - 106-110"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.66884, -18.80592 ],
+        "description" : "Davies Reef - 111-115"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 142.92525, -9.88176 ],
+        "description" : "Dungeness Reef - 205849 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.22552, -16.85995 ],
+        "description" : "Moore Reef - 630-634"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.66856, -18.80615 ],
+        "description" : "Davies Reef - 121-125"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.66862, -18.80575 ],
+        "description" : "Davies Reef - 205857"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.63336, -18.83292 ],
+        "description" : "Davies Reef - B1088"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.18402, -16.8819 ],
+        "description" : "Moore Reef - 645-649"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.69923, -18.94399 ],
+        "description" : "Little Broadhurst - 516-520"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.18402, -16.8819 ],
+        "description" : "Moore Reef - 650-654"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 145.46939, -14.69143 ],
+        "description" : "Lizard Island - B1826 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 145.44537, -14.69805 ],
+        "description" : "Lizard Island - _0935 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.24886, -16.88887 ],
+        "description" : "Moore Reef - 1351 Waves, temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 145.44202, -14.65083 ],
+        "description" : "Lizard Island - _0922 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 145.49297, -14.64948 ],
+        "description" : "Lizard Island - _0926 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 145.46529, -14.68781 ],
+        "description" : "Lizard Island - B1834 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.62727, -18.8259 ],
+        "description" : "Davies Reef - 205838 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.63336, -18.83292 ],
+        "description" : "Davies Reef - 205846"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.495, -18.57263 ],
+        "description" : "Orpheus Reef - 205833 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.48315, -18.61276 ],
+        "description" : "Orpheus Reef - 200231 In air PAR"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.00543, -9.9312 ],
+        "description" : "Dungeness Reef - 205845 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.41585, -9.74463 ],
+        "description" : "Masig - 316-320"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.00543, -9.9312 ],
+        "description" : "Dungeness Reef - 151-155"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.00534, -9.93117 ],
+        "description" : "Dungeness Reef - 156-160"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 142.92517, -9.88165 ],
+        "description" : "Dungeness Reef - 205844 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 142.92517, -9.88165 ],
+        "description" : "Dungeness Reef - 161-165"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 142.92525, -9.88176 ],
+        "description" : "Dungeness Reef - 166-170"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 142.93288, -9.87852 ],
+        "description" : "Dungeness Reef - 171-175"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.66394, -18.81966 ],
+        "description" : "Davies Reef - B1787 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.66391, -18.8192 ],
+        "description" : "Davies Reef - B1794 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 142.92267, -9.93386 ],
+        "description" : "Dungeness Reef - 205851 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.66376, -18.81618 ],
+        "description" : "Davies Reef - B1803 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.43503, -9.73419 ],
+        "description" : "Masig - 241-245"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.46025, -9.7462 ],
+        "description" : "Masig - 236-240"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 145.44545, -14.6981 ],
+        "description" : "Lizard Island - 670-674"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 145.44545, -14.6981 ],
+        "description" : "Lizard Island - B1830 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 145.46928, -14.69129 ],
+        "description" : "Lizard Island - 660-664"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.24457, -16.88264 ],
+        "description" : "Moore Reef - 610-614"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 145.46518, -14.68764 ],
+        "description" : "Lizard Island - _0917 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.24463, -16.88276 ],
+        "description" : "Moore Reef - 605-609"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 145.49297, -14.64948 ],
+        "description" : "Lizard Island - B1837 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 151.92088, -23.43401 ],
+        "description" : "Heron - 441-445"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 145.46523, -14.68768 ],
+        "description" : "Lizard Island - 705-709"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 145.46533, -14.68762 ],
+        "description" : "Lizard Island - 710-714"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.486033, -18.549017 ],
+        "description" : "Orpheus Reef - 1672"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.486033, -18.549017 ],
+        "description" : "Orpheus Reef - 1343"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.40729, -9.88355 ],
+        "description" : "Aukane - 266-270"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.48822, -18.55054 ],
+        "description" : "Pelorus Reef - 205836 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 152.40399, -23.89441 ],
+        "description" : "Lady Musgrave - 391-395"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 151.95224, -23.42807 ],
+        "description" : "Heron - 406-410"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 151.95242, -23.42847 ],
+        "description" : "Heron - 411-415"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 151.95253, -23.42878 ],
+        "description" : "Heron - 416-420"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 151.96863, -23.45391 ],
+        "description" : "Heron - 203100 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 151.96863, -23.45391 ],
+        "description" : "Heron - 421-425"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 151.92572, -23.45601 ],
+        "description" : "Heron - 431-435"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 151.92041, -23.43398 ],
+        "description" : "Heron - 436-440"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 151.92566, -23.45611 ],
+        "description" : "Heron - 426-430"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 151.92091, -23.43408 ],
+        "description" : "Heron - 446-450"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 150.89906, -23.08526 ],
+        "description" : "North Keppel - 451-455"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 150.89891, -23.08508 ],
+        "description" : "North Keppel - 456-460"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 150.96664, -23.20172 ],
+        "description" : "Halfway - 471-475"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.00534, -9.93117 ],
+        "description" : "Dungeness Reef - 205852 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 150.96721, -23.20164 ],
+        "description" : "Halfway - 476-480"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 150.93726, -23.19642 ],
+        "description" : "Great Keppel - 486-490"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 150.90279, -23.15038 ],
+        "description" : "Miall - 200218 Light"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 150.90276, -23.15072 ],
+        "description" : "Miall - 202831 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 145.46973, -14.69979 ],
+        "description" : "Lizard Island - 1933 Waves, temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 152.39369, -23.90081 ],
+        "description" : "Lady Musgrave - 386-390"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.66394, -18.81966 ],
+        "description" : "Davies Reef - 205841 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.66394, -18.81966 ],
+        "description" : "Davies Reef - 200242 Light"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.66394, -18.81966 ],
+        "description" : "Davies Reef - 205842 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.65248, -18.83187 ],
+        "description" : "Davies Reef - B1796 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.65248, -18.83187 ],
+        "description" : "Davies Reef - 205855 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.65221, -18.83171 ],
+        "description" : "Davies Reef - 205853 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.49562, -18.57153 ],
+        "description" : "Orpheus Reef - 51-55"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.49544, -18.57224 ],
+        "description" : "Orpheus Reef - 56-60"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.495, -18.57263 ],
+        "description" : "Orpheus Reef - 61-65"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.49544, -18.57224 ],
+        "description" : "Orpheus Reef - B1782 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.495, -18.57263 ],
+        "description" : "Orpheus Reef - B1789 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.49562, -18.57153 ],
+        "description" : "Orpheus Reef - B1793 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.48842, -18.5508 ],
+        "description" : "Pelorus Reef - B1783 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.48859, -18.55076 ],
+        "description" : "Pelorus Reef - B1785 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.48822, -18.55054 ],
+        "description" : "Pelorus Reef - B1788 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.48859, -18.55076 ],
+        "description" : "Pelorus Reef - 205835 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.40704, -9.88363 ],
+        "description" : "Aukane - 256-260"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.65221, -18.83171 ],
+        "description" : "Davies Reef - B1795 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.65268, -18.83181 ],
+        "description" : "Davies Reef - 205840 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 152.40421, -23.89483 ],
+        "description" : "Lady Musgrave - 396-400"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 152.41391, -23.89633 ],
+        "description" : "Lady Musgrave - 401-405"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 150.90279, -23.15038 ],
+        "description" : "Miall - 6413 CTD"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 152.41391, -23.89633 ],
+        "description" : "Lady Musgrave - 205848 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 150.90279, -23.15038 ],
+        "description" : "Miall - 5130 Currents, waves"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 150.9207, -23.16187 ],
+        "description" : "Middle - 491-495"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.41005, -9.87995 ],
+        "description" : "Aukane - 246-250"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.40973, -9.87976 ],
+        "description" : "Aukane - 251-255"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 142.92276, -9.93405 ],
+        "description" : "Dungeness Reef - 186-190"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.3893, -9.86766 ],
+        "description" : "Aukane - 271-275"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.38939, -9.86777 ],
+        "description" : "Aukane - 276-280"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.23726, -16.8485 ],
+        "description" : "Moore Reef - 575-579"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.41005, -9.87995 ],
+        "description" : "Aukane - 205857 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.40973, -9.87976 ],
+        "description" : "Aukane - 205853 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.70267, -18.66035 ],
+        "description" : "Chicken Reef - 551-555"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.25369, -16.87191 ],
+        "description" : "Moore Reef - 585-589"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.25362, -16.87201 ],
+        "description" : "Moore Reef - 590-594"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 145.44543, -14.69811 ],
+        "description" : "Lizard Island - 665-669"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.63365, -18.83293 ],
+        "description" : "Davies Reef - 205850"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.63336, -18.83292 ],
+        "description" : "Davies Reef - 126-130"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 150.88542, -23.08432 ],
+        "description" : "North Keppel - 461-465"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 150.886, -23.08429 ],
+        "description" : "North Keppel - 466-470"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.25362, -16.87201 ],
+        "description" : "Moore Reef - B1833 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.38852, -9.87567 ],
+        "description" : "Aukane - 281-285"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.39441, -9.882 ],
+        "description" : "Aukane - 291-295"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.39439, -9.88172 ],
+        "description" : "Aukane - 296-300"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.40681, -9.88335 ],
+        "description" : "Aukane - 261-265"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.66394, -18.81966 ],
+        "description" : "Davies Reef - 21079 CTD"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.65268, -18.83181 ],
+        "description" : "Davies Reef - B1791 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.23718, -16.84859 ],
+        "description" : "Moore Reef - 580-584"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 145.46951, -14.69113 ],
+        "description" : "Lizard Island - 56-09034 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.48842, -18.5508 ],
+        "description" : "Pelorus Reef - 205839 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.48822, -18.55054 ],
+        "description" : "Pelorus Reef - 21 ¿ 25"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.21744, -16.84712 ],
+        "description" : "Moore Reef - B1785 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.48842, -18.5508 ],
+        "description" : "Pelorus Reef - 26-30"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.48859, -18.55076 ],
+        "description" : "Pelorus Reef - 31-35"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.48843, -18.54098 ],
+        "description" : "Pelorus Reef - 36-40"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.48862, -18.54103 ],
+        "description" : "Pelorus Reef - 41-45"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.49924, -18.5391 ],
+        "description" : "Pelorus Reef - 200239 Light"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.48909, -18.54104 ],
+        "description" : "Pelorus Reef - 46-50"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.49924, -18.5391 ],
+        "description" : "Pelorus Reef - B1790 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.49895, -18.53953 ],
+        "description" : "Pelorus Reef - B1800 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.49893, -18.54003 ],
+        "description" : "Pelorus Reef - B1802 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.49924, -18.5391 ],
+        "description" : "Pelorus Reef - 205828 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.660733, -18.823133 ],
+        "description" : "Davies Reef - 1670"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.49895, -18.53953 ],
+        "description" : "Pelorus Reef - 205829 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.49893, -18.54003 ],
+        "description" : "Pelorus Reef - 205830 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.49924, -18.5391 ],
+        "description" : "Pelorus Reef - 11867 CTD"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.49924, -18.5391 ],
+        "description" : "Pelorus Reef - 66-70"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.49895, -18.53953 ],
+        "description" : "Pelorus Reef - 71-75"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.62727, -18.8259 ],
+        "description" : "Davies Reef - 86-90"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.62712, -18.82586 ],
+        "description" : "Davies Reef - 91-95"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.66394, -18.81966 ],
+        "description" : "Davies Reef - 45571"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.66394, -18.81966 ],
+        "description" : "Davies Reef - 42309"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.66391, -18.8192 ],
+        "description" : "Davies Reef - 45413"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.62738, -18.82591 ],
+        "description" : "Davies Reef - B1076 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.62727, -18.8259 ],
+        "description" : "Davies Reef - B1079 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.66376, -18.81618 ],
+        "description" : "Davies Reef - 16-20"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.65248, -18.83187 ],
+        "description" : "Davies Reef - 101-105"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.38873, -9.8753 ],
+        "description" : "Aukane - 286-290"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 142.93295, -9.87865 ],
+        "description" : "Dungeness Reef - 176-180"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 142.92276, -9.93405 ],
+        "description" : "Dungeness Reef - 205832 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 142.90858, -9.9853 ],
+        "description" : "Dungeness Reef - 191-195"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 142.90881, -9.98513 ],
+        "description" : "Dungeness Reef - 196-200"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 142.92653, -10.03724 ],
+        "description" : "Day Reef - 201-205"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 142.92267, -9.93386 ],
+        "description" : "Dungeness Reef - 181-185"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.39987, -9.74876 ],
+        "description" : "Masig - 206-210"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.39992, -9.74877 ],
+        "description" : "Masig - 211-215"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.40012, -9.74886 ],
+        "description" : "Masig - 216-220"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.4214, -9.76227 ],
+        "description" : "Masig - 221-225"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.46025, -9.7462 ],
+        "description" : "Masig - 200228 Light"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.46025, -9.7462 ],
+        "description" : "Masig - 205833 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.65268, -18.83181 ],
+        "description" : "Davies Reef - 96-100"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.45851, -9.74831 ],
+        "description" : "Masig - 205847 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.45831, -9.74817 ],
+        "description" : "Masig - 205856 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.46025, -9.7462 ],
+        "description" : "Masig - 4261 Currents, waves"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.46025, -9.7462 ],
+        "description" : "Masig - 6144 CTD"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.45851, -9.74831 ],
+        "description" : "Masig - 226-230"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.45831, -9.74817 ],
+        "description" : "Masig - 231-235"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 152.41367, -23.88511 ],
+        "description" : "Lady Musgrave - 361-365"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.70198, -18.94938 ],
+        "description" : "Little Broadhurst - 561-564, 509"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 145.46951, -14.69113 ],
+        "description" : "Lizard Island - 200223 Light"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 145.46951, -14.69113 ],
+        "description" : "Lizard Island - 5914 Currents, waves"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.21744, -16.84712 ],
+        "description" : "Moore Reef - 1054 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.21744, -16.84712 ],
+        "description" : "Moore Reef - 565-569"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.21759, -16.84731 ],
+        "description" : "Moore Reef - B1885 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.23726, -16.8485 ],
+        "description" : "Moore Reef - B1080 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.66862, -18.80575 ],
+        "description" : "Davies Reef - B1083"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.66862, -18.80575 ],
+        "description" : "Davies Reef - 116-120"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.21759, -16.84731 ],
+        "description" : "Moore Reef - 570-574"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 145.44197, -14.66776 ],
+        "description" : "Lizard Island - B1835 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 145.44202, -14.65083 ],
+        "description" : "Lizard Island - B1832 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 145.49286, -14.6494 ],
+        "description" : "Lizard Island - 675-679"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 145.4928, -14.64963 ],
+        "description" : "Lizard Island - 680-684"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 145.44197, -14.66776 ],
+        "description" : "Lizard Island - 695-699"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 145.44244, -14.66777 ],
+        "description" : "Lizard Island - 700-704"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.25371, -16.87209 ],
+        "description" : "Moore Reef - B1824 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 152.41367, -23.88511 ],
+        "description" : "Lady Musgrave - 366-370"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.63365, -18.83293 ],
+        "description" : "Davies Reef - 131-135"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.66391, -18.8192 ],
+        "description" : "Davies Reef - 205834 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.66376, -18.81618 ],
+        "description" : "Davies Reef - 205843 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.66394, -18.81966 ],
+        "description" : "Davies Reef - 5492 Currents / Waves"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.49893, -18.54003 ],
+        "description" : "Pelorus Reef - 76-80"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.62738, -18.82591 ],
+        "description" : "Davies Reef - 81-85"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.63316, -18.83125 ],
+        "description" : "Davies Reef - 136-140"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.63724, -18.81433 ],
+        "description" : "Davies Reef - 141-145"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.63721, -18.81448 ],
+        "description" : "Davies Reef - 146-150"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.63721, -18.81448 ],
+        "description" : "Davies Reef - 205848"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.63721, -18.81448 ],
+        "description" : "Davies Reef - B1077 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 145.469517, -14.699 ],
+        "description" : "Lizard Island - 1074 Waves, temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.658767, -18.824367 ],
+        "description" : "Davies Reef - 1077 Waves, temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.41579, -9.74423 ],
+        "description" : "Masig - 311-315"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.41718, -9.7639 ],
+        "description" : "Masig - 306-310"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.39803, -9.75998 ],
+        "description" : "Masig - 321-325"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.39822, -9.75989 ],
+        "description" : "Masig - 326-330"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 151.97797, -23.47209 ],
+        "description" : "Heron - 331-335"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 151.97772, -23.47196 ],
+        "description" : "Heron - 336-340"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 151.97749, -23.47164 ],
+        "description" : "Heron - 341-345"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 151.95108, -23.47086 ],
+        "description" : "Heron - 5581 Currents, waves"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 151.95108, -23.47086 ],
+        "description" : "Heron - 6149 CTD"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 151.95108, -23.47086 ],
+        "description" : "Heron - 200238 Light"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 151.95108, -23.47086 ],
+        "description" : "Heron - 205840 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 151.95108, -23.47086 ],
+        "description" : "Heron - 346-350"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 151.95093, -23.47046 ],
+        "description" : "Heron - 205831 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 151.95093, -23.47046 ],
+        "description" : "Heron - 351-355"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 151.95097, -23.47036 ],
+        "description" : "Heron - 356-360"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 152.41367, -23.88511 ],
+        "description" : "Lady Musgrave - 205855 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 152.3924, -23.91752 ],
+        "description" : "Lady Musgrave - 371-375"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 152.39223, -23.91708 ],
+        "description" : "Lady Musgrave - 376-380"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 152.39342, -23.9003 ],
+        "description" : "Lady Musgrave - 381-385"
+      } ],
+      "type" : "GeometryCollection"
+    },
+    "proj:geometry_noland" : {
+      "geometries" : [ {
+        "type" : "Point",
+        "coordinates" : [ 143.41571, -9.74405 ],
+        "description" : "Masig - 301-305"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.49924, -18.5391 ],
+        "description" : "Pelorus Reef - 5479 Currents / Waves"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.49562, -18.57153 ],
+        "description" : "Orpheus Reef - 205831 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 145.46938, -14.69137 ],
+        "description" : "Lizard Island - 655-659"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 150.92053, -23.16196 ],
+        "description" : "Middle - 496-500"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 150.90279, -23.15056 ],
+        "description" : "Miall - 501-505"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 150.90276, -23.15072 ],
+        "description" : "Miall - 506-510"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.70859, -18.6532 ],
+        "description" : "Chicken Reef - 541-545"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.69923, -18.94397 ],
+        "description" : "Little Broadhurst - 511-515"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.69295, -18.94938 ],
+        "description" : "Little Broadhurst - 526-530"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.71846, -18.6521 ],
+        "description" : "Chicken Reef - 531-535"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.71848, -18.65213 ],
+        "description" : "Chicken Reef - 536-540"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.70871, -18.65321 ],
+        "description" : "Chicken Reef - 546-550"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.2258, -16.85995 ],
+        "description" : "Moore Reef - 1055 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.70859, -18.6532 ],
+        "description" : "Chicken Reef - 203094 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.70267, -18.66035 ],
+        "description" : "Chicken Reef - 556-560"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.70198, -18.94938 ],
+        "description" : "Little Broadhurst - 203099 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.69295, -18.94923 ],
+        "description" : "Little Broadhurst - 521-525"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.70267, -18.66035 ],
+        "description" : "Chicken Reef - 203088 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.49544, -18.57224 ],
+        "description" : "Orpheus Reef - 205832 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.62712, -18.82586 ],
+        "description" : "Davies Reef - 205854 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.25343, -16.87196 ],
+        "description" : "Moore Reef - 595-599"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.25371, -16.87209 ],
+        "description" : "Moore Reef - 1058 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.24483, -16.88292 ],
+        "description" : "Moore Reef - B1822 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.24457, -16.88279 ],
+        "description" : "Moore Reef - B1825 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 150.93681, -23.19657 ],
+        "description" : "Great Keppel - 481-485"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.24475, -16.88298 ],
+        "description" : "Moore Reef - 200245 Light"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.24475, -16.88298 ],
+        "description" : "Moore Reef - 6146 CTD"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.24475, -16.88298 ],
+        "description" : "Moore Reef - WAV 5468 Currents, waves"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.24464, -16.88305 ],
+        "description" : "Moore Reef - 600-604"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.2258, -16.85995 ],
+        "description" : "Moore Reef - B1836 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.2373, -16.84844 ],
+        "description" : "Moore Reef - B1823 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.2373, -16.84844 ],
+        "description" : "Moore Reef - 615-619"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.22552, -16.85995 ],
+        "description" : "Moore Reef - 620-624"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.22543, -16.85991 ],
+        "description" : "Moore Reef - 625-629"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.22597, -16.85996 ],
+        "description" : "Moore Reef - B1827 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.21741, -16.84714 ],
+        "description" : "Moore Reef - B1831 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.18407, -16.88189 ],
+        "description" : "Moore Reef - B1795 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.18381, -16.88192 ],
+        "description" : "Moore Reef - B1828 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.22597, -16.85996 ],
+        "description" : "Moore Reef - 1059 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.18407, -16.88189 ],
+        "description" : "Moore Reef - ¿0676 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.21736, -16.84719 ],
+        "description" : "Moore Reef - 635-639"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.18402, -16.88184 ],
+        "description" : "Moore Reef - 640-644"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 150.90285, -23.15041 ],
+        "description" : "Miall - 200225 Light"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.446817, -9.765033 ],
+        "description" : "Masig - 1736 Waves, temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 150.912683, -23.09275 ],
+        "description" : "North Keppel - 1741 Waves, temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 150.90285, -23.15041 ],
+        "description" : "Miall - 6144 CTD"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 150.90285, -23.15041 ],
+        "description" : "Miall - 5581 Currents, waves"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.62738, -18.82591 ],
+        "description" : "Davies Reef - 205837 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.62712, -18.82586 ],
+        "description" : "Davies Reef - B1080 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.65221, -18.83171 ],
+        "description" : "Davies Reef - 106-110"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.66884, -18.80592 ],
+        "description" : "Davies Reef - 111-115"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 142.92525, -9.88176 ],
+        "description" : "Dungeness Reef - 205849 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.22552, -16.85995 ],
+        "description" : "Moore Reef - 630-634"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.66856, -18.80615 ],
+        "description" : "Davies Reef - 121-125"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.66862, -18.80575 ],
+        "description" : "Davies Reef - 205857"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.63336, -18.83292 ],
+        "description" : "Davies Reef - B1088"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.18402, -16.8819 ],
+        "description" : "Moore Reef - 645-649"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.69923, -18.94399 ],
+        "description" : "Little Broadhurst - 516-520"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.18402, -16.8819 ],
+        "description" : "Moore Reef - 650-654"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 145.46939, -14.69143 ],
+        "description" : "Lizard Island - B1826 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 145.44537, -14.69805 ],
+        "description" : "Lizard Island - _0935 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.24886, -16.88887 ],
+        "description" : "Moore Reef - 1351 Waves, temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 145.44202, -14.65083 ],
+        "description" : "Lizard Island - _0922 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 145.49297, -14.64948 ],
+        "description" : "Lizard Island - _0926 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 145.46529, -14.68781 ],
+        "description" : "Lizard Island - B1834 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.62727, -18.8259 ],
+        "description" : "Davies Reef - 205838 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.63336, -18.83292 ],
+        "description" : "Davies Reef - 205846"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.495, -18.57263 ],
+        "description" : "Orpheus Reef - 205833 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.48315, -18.61276 ],
+        "description" : "Orpheus Reef - 200231 In air PAR"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.00543, -9.9312 ],
+        "description" : "Dungeness Reef - 205845 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.41585, -9.74463 ],
+        "description" : "Masig - 316-320"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.00543, -9.9312 ],
+        "description" : "Dungeness Reef - 151-155"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.00534, -9.93117 ],
+        "description" : "Dungeness Reef - 156-160"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 142.92517, -9.88165 ],
+        "description" : "Dungeness Reef - 205844 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 142.92517, -9.88165 ],
+        "description" : "Dungeness Reef - 161-165"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 142.92525, -9.88176 ],
+        "description" : "Dungeness Reef - 166-170"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 142.93288, -9.87852 ],
+        "description" : "Dungeness Reef - 171-175"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.66394, -18.81966 ],
+        "description" : "Davies Reef - B1787 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.66391, -18.8192 ],
+        "description" : "Davies Reef - B1794 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 142.92267, -9.93386 ],
+        "description" : "Dungeness Reef - 205851 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.66376, -18.81618 ],
+        "description" : "Davies Reef - B1803 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.43503, -9.73419 ],
+        "description" : "Masig - 241-245"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.46025, -9.7462 ],
+        "description" : "Masig - 236-240"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 145.44545, -14.6981 ],
+        "description" : "Lizard Island - 670-674"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 145.44545, -14.6981 ],
+        "description" : "Lizard Island - B1830 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 145.46928, -14.69129 ],
+        "description" : "Lizard Island - 660-664"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.24457, -16.88264 ],
+        "description" : "Moore Reef - 610-614"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 145.46518, -14.68764 ],
+        "description" : "Lizard Island - _0917 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.24463, -16.88276 ],
+        "description" : "Moore Reef - 605-609"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 145.49297, -14.64948 ],
+        "description" : "Lizard Island - B1837 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 151.92088, -23.43401 ],
+        "description" : "Heron - 441-445"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 145.46523, -14.68768 ],
+        "description" : "Lizard Island - 705-709"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 145.46533, -14.68762 ],
+        "description" : "Lizard Island - 710-714"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.486033, -18.549017 ],
+        "description" : "Orpheus Reef - 1672"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.486033, -18.549017 ],
+        "description" : "Orpheus Reef - 1343"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.40729, -9.88355 ],
+        "description" : "Aukane - 266-270"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.48822, -18.55054 ],
+        "description" : "Pelorus Reef - 205836 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 152.40399, -23.89441 ],
+        "description" : "Lady Musgrave - 391-395"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 151.95224, -23.42807 ],
+        "description" : "Heron - 406-410"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 151.95242, -23.42847 ],
+        "description" : "Heron - 411-415"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 151.95253, -23.42878 ],
+        "description" : "Heron - 416-420"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 151.96863, -23.45391 ],
+        "description" : "Heron - 203100 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 151.96863, -23.45391 ],
+        "description" : "Heron - 421-425"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 151.92572, -23.45601 ],
+        "description" : "Heron - 431-435"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 151.92041, -23.43398 ],
+        "description" : "Heron - 436-440"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 151.92566, -23.45611 ],
+        "description" : "Heron - 426-430"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 151.92091, -23.43408 ],
+        "description" : "Heron - 446-450"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 150.89906, -23.08526 ],
+        "description" : "North Keppel - 451-455"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 150.89891, -23.08508 ],
+        "description" : "North Keppel - 456-460"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 150.96664, -23.20172 ],
+        "description" : "Halfway - 471-475"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.00534, -9.93117 ],
+        "description" : "Dungeness Reef - 205852 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 150.96721, -23.20164 ],
+        "description" : "Halfway - 476-480"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 150.93726, -23.19642 ],
+        "description" : "Great Keppel - 486-490"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 150.90279, -23.15038 ],
+        "description" : "Miall - 200218 Light"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 150.90276, -23.15072 ],
+        "description" : "Miall - 202831 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 145.46973, -14.69979 ],
+        "description" : "Lizard Island - 1933 Waves, temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 152.39369, -23.90081 ],
+        "description" : "Lady Musgrave - 386-390"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.66394, -18.81966 ],
+        "description" : "Davies Reef - 205841 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.66394, -18.81966 ],
+        "description" : "Davies Reef - 200242 Light"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.66394, -18.81966 ],
+        "description" : "Davies Reef - 205842 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.65248, -18.83187 ],
+        "description" : "Davies Reef - B1796 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.65248, -18.83187 ],
+        "description" : "Davies Reef - 205855 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.65221, -18.83171 ],
+        "description" : "Davies Reef - 205853 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.49562, -18.57153 ],
+        "description" : "Orpheus Reef - 51-55"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.49544, -18.57224 ],
+        "description" : "Orpheus Reef - 56-60"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.495, -18.57263 ],
+        "description" : "Orpheus Reef - 61-65"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.49544, -18.57224 ],
+        "description" : "Orpheus Reef - B1782 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.495, -18.57263 ],
+        "description" : "Orpheus Reef - B1789 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.49562, -18.57153 ],
+        "description" : "Orpheus Reef - B1793 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.48842, -18.5508 ],
+        "description" : "Pelorus Reef - B1783 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.48859, -18.55076 ],
+        "description" : "Pelorus Reef - B1785 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.48822, -18.55054 ],
+        "description" : "Pelorus Reef - B1788 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.48859, -18.55076 ],
+        "description" : "Pelorus Reef - 205835 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.40704, -9.88363 ],
+        "description" : "Aukane - 256-260"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.65221, -18.83171 ],
+        "description" : "Davies Reef - B1795 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.65268, -18.83181 ],
+        "description" : "Davies Reef - 205840 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 152.40421, -23.89483 ],
+        "description" : "Lady Musgrave - 396-400"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 152.41391, -23.89633 ],
+        "description" : "Lady Musgrave - 401-405"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 150.90279, -23.15038 ],
+        "description" : "Miall - 6413 CTD"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 152.41391, -23.89633 ],
+        "description" : "Lady Musgrave - 205848 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 150.90279, -23.15038 ],
+        "description" : "Miall - 5130 Currents, waves"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 150.9207, -23.16187 ],
+        "description" : "Middle - 491-495"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.41005, -9.87995 ],
+        "description" : "Aukane - 246-250"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.40973, -9.87976 ],
+        "description" : "Aukane - 251-255"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 142.92276, -9.93405 ],
+        "description" : "Dungeness Reef - 186-190"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.3893, -9.86766 ],
+        "description" : "Aukane - 271-275"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.38939, -9.86777 ],
+        "description" : "Aukane - 276-280"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.23726, -16.8485 ],
+        "description" : "Moore Reef - 575-579"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.41005, -9.87995 ],
+        "description" : "Aukane - 205857 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.40973, -9.87976 ],
+        "description" : "Aukane - 205853 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.70267, -18.66035 ],
+        "description" : "Chicken Reef - 551-555"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.25369, -16.87191 ],
+        "description" : "Moore Reef - 585-589"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.25362, -16.87201 ],
+        "description" : "Moore Reef - 590-594"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 145.44543, -14.69811 ],
+        "description" : "Lizard Island - 665-669"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.63365, -18.83293 ],
+        "description" : "Davies Reef - 205850"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.63336, -18.83292 ],
+        "description" : "Davies Reef - 126-130"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 150.88542, -23.08432 ],
+        "description" : "North Keppel - 461-465"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 150.886, -23.08429 ],
+        "description" : "North Keppel - 466-470"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.25362, -16.87201 ],
+        "description" : "Moore Reef - B1833 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.38852, -9.87567 ],
+        "description" : "Aukane - 281-285"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.39441, -9.882 ],
+        "description" : "Aukane - 291-295"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.39439, -9.88172 ],
+        "description" : "Aukane - 296-300"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.40681, -9.88335 ],
+        "description" : "Aukane - 261-265"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.66394, -18.81966 ],
+        "description" : "Davies Reef - 21079 CTD"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.65268, -18.83181 ],
+        "description" : "Davies Reef - B1791 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.23718, -16.84859 ],
+        "description" : "Moore Reef - 580-584"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 145.46951, -14.69113 ],
+        "description" : "Lizard Island - 56-09034 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.48842, -18.5508 ],
+        "description" : "Pelorus Reef - 205839 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.48822, -18.55054 ],
+        "description" : "Pelorus Reef - 21 ¿ 25"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.21744, -16.84712 ],
+        "description" : "Moore Reef - B1785 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.48842, -18.5508 ],
+        "description" : "Pelorus Reef - 26-30"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.48859, -18.55076 ],
+        "description" : "Pelorus Reef - 31-35"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.48843, -18.54098 ],
+        "description" : "Pelorus Reef - 36-40"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.48862, -18.54103 ],
+        "description" : "Pelorus Reef - 41-45"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.49924, -18.5391 ],
+        "description" : "Pelorus Reef - 200239 Light"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.48909, -18.54104 ],
+        "description" : "Pelorus Reef - 46-50"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.49924, -18.5391 ],
+        "description" : "Pelorus Reef - B1790 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.49895, -18.53953 ],
+        "description" : "Pelorus Reef - B1800 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.49893, -18.54003 ],
+        "description" : "Pelorus Reef - B1802 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.49924, -18.5391 ],
+        "description" : "Pelorus Reef - 205828 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.660733, -18.823133 ],
+        "description" : "Davies Reef - 1670"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.49895, -18.53953 ],
+        "description" : "Pelorus Reef - 205829 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.49893, -18.54003 ],
+        "description" : "Pelorus Reef - 205830 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.49924, -18.5391 ],
+        "description" : "Pelorus Reef - 11867 CTD"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.49924, -18.5391 ],
+        "description" : "Pelorus Reef - 66-70"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.49895, -18.53953 ],
+        "description" : "Pelorus Reef - 71-75"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.62727, -18.8259 ],
+        "description" : "Davies Reef - 86-90"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.62712, -18.82586 ],
+        "description" : "Davies Reef - 91-95"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.66394, -18.81966 ],
+        "description" : "Davies Reef - 45571"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.66394, -18.81966 ],
+        "description" : "Davies Reef - 42309"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.66391, -18.8192 ],
+        "description" : "Davies Reef - 45413"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.62738, -18.82591 ],
+        "description" : "Davies Reef - B1076 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.62727, -18.8259 ],
+        "description" : "Davies Reef - B1079 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.66376, -18.81618 ],
+        "description" : "Davies Reef - 16-20"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.65248, -18.83187 ],
+        "description" : "Davies Reef - 101-105"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.38873, -9.8753 ],
+        "description" : "Aukane - 286-290"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 142.93295, -9.87865 ],
+        "description" : "Dungeness Reef - 176-180"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 142.92276, -9.93405 ],
+        "description" : "Dungeness Reef - 205832 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 142.90858, -9.9853 ],
+        "description" : "Dungeness Reef - 191-195"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 142.90881, -9.98513 ],
+        "description" : "Dungeness Reef - 196-200"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 142.92653, -10.03724 ],
+        "description" : "Day Reef - 201-205"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 142.92267, -9.93386 ],
+        "description" : "Dungeness Reef - 181-185"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.39987, -9.74876 ],
+        "description" : "Masig - 206-210"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.39992, -9.74877 ],
+        "description" : "Masig - 211-215"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.40012, -9.74886 ],
+        "description" : "Masig - 216-220"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.4214, -9.76227 ],
+        "description" : "Masig - 221-225"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.46025, -9.7462 ],
+        "description" : "Masig - 200228 Light"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.46025, -9.7462 ],
+        "description" : "Masig - 205833 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.65268, -18.83181 ],
+        "description" : "Davies Reef - 96-100"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.45851, -9.74831 ],
+        "description" : "Masig - 205847 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.45831, -9.74817 ],
+        "description" : "Masig - 205856 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.46025, -9.7462 ],
+        "description" : "Masig - 4261 Currents, waves"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.46025, -9.7462 ],
+        "description" : "Masig - 6144 CTD"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.45851, -9.74831 ],
+        "description" : "Masig - 226-230"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.45831, -9.74817 ],
+        "description" : "Masig - 231-235"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 152.41367, -23.88511 ],
+        "description" : "Lady Musgrave - 361-365"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.70198, -18.94938 ],
+        "description" : "Little Broadhurst - 561-564, 509"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 145.46951, -14.69113 ],
+        "description" : "Lizard Island - 200223 Light"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 145.46951, -14.69113 ],
+        "description" : "Lizard Island - 5914 Currents, waves"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.21744, -16.84712 ],
+        "description" : "Moore Reef - 1054 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.21744, -16.84712 ],
+        "description" : "Moore Reef - 565-569"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.21759, -16.84731 ],
+        "description" : "Moore Reef - B1885 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.23726, -16.8485 ],
+        "description" : "Moore Reef - B1080 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.66862, -18.80575 ],
+        "description" : "Davies Reef - B1083"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.66862, -18.80575 ],
+        "description" : "Davies Reef - 116-120"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.21759, -16.84731 ],
+        "description" : "Moore Reef - 570-574"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 145.44197, -14.66776 ],
+        "description" : "Lizard Island - B1835 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 145.44202, -14.65083 ],
+        "description" : "Lizard Island - B1832 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 145.49286, -14.6494 ],
+        "description" : "Lizard Island - 675-679"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 145.4928, -14.64963 ],
+        "description" : "Lizard Island - 680-684"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 145.44197, -14.66776 ],
+        "description" : "Lizard Island - 695-699"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 145.44244, -14.66777 ],
+        "description" : "Lizard Island - 700-704"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.25371, -16.87209 ],
+        "description" : "Moore Reef - B1824 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 152.41367, -23.88511 ],
+        "description" : "Lady Musgrave - 366-370"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.63365, -18.83293 ],
+        "description" : "Davies Reef - 131-135"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.66391, -18.8192 ],
+        "description" : "Davies Reef - 205834 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.66376, -18.81618 ],
+        "description" : "Davies Reef - 205843 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.66394, -18.81966 ],
+        "description" : "Davies Reef - 5492 Currents / Waves"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 146.49893, -18.54003 ],
+        "description" : "Pelorus Reef - 76-80"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.62738, -18.82591 ],
+        "description" : "Davies Reef - 81-85"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.63316, -18.83125 ],
+        "description" : "Davies Reef - 136-140"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.63724, -18.81433 ],
+        "description" : "Davies Reef - 141-145"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.63721, -18.81448 ],
+        "description" : "Davies Reef - 146-150"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.63721, -18.81448 ],
+        "description" : "Davies Reef - 205848"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.63721, -18.81448 ],
+        "description" : "Davies Reef - B1077 Currents"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 145.469517, -14.699 ],
+        "description" : "Lizard Island - 1074 Waves, temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 147.658767, -18.824367 ],
+        "description" : "Davies Reef - 1077 Waves, temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.41579, -9.74423 ],
+        "description" : "Masig - 311-315"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.41718, -9.7639 ],
+        "description" : "Masig - 306-310"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.39803, -9.75998 ],
+        "description" : "Masig - 321-325"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 143.39822, -9.75989 ],
+        "description" : "Masig - 326-330"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 151.97797, -23.47209 ],
+        "description" : "Heron - 331-335"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 151.97772, -23.47196 ],
+        "description" : "Heron - 336-340"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 151.97749, -23.47164 ],
+        "description" : "Heron - 341-345"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 151.95108, -23.47086 ],
+        "description" : "Heron - 5581 Currents, waves"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 151.95108, -23.47086 ],
+        "description" : "Heron - 6149 CTD"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 151.95108, -23.47086 ],
+        "description" : "Heron - 200238 Light"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 151.95108, -23.47086 ],
+        "description" : "Heron - 205840 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 151.95108, -23.47086 ],
+        "description" : "Heron - 346-350"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 151.95093, -23.47046 ],
+        "description" : "Heron - 205831 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 151.95093, -23.47046 ],
+        "description" : "Heron - 351-355"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 151.95097, -23.47036 ],
+        "description" : "Heron - 356-360"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 152.41367, -23.88511 ],
+        "description" : "Lady Musgrave - 205855 Temperature"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 152.3924, -23.91752 ],
+        "description" : "Lady Musgrave - 371-375"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 152.39223, -23.91708 ],
+        "description" : "Lady Musgrave - 376-380"
+      }, {
+        "type" : "Point",
+        "coordinates" : [ 152.39342, -23.9003 ],
+        "description" : "Lady Musgrave - 381-385"
+      } ],
+      "type" : "GeometryCollection"
+    },
+    "parameter_vocabs" : [ ],
+    "platform_vocabs" : [ ],
+    "organisation_vocabs" : [ ]
+  },
+  "contacts" : [ {
+    "roles" : [ "principalInvestigator", "about" ],
+    "organization" : "Australian Institute of Marine Science (AIMS)",
+    "emails" : [ "reception@aims.gov.au" ],
+    "addresses" : [ {
+      "city" : "TOWNSVILLE",
+      "country" : "Australia",
+      "delivery_point" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],
+      "postal_code" : "4810",
+      "administrative_area" : "Queensland"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "+61 7 4753 4444"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : ""
+    } ],
+    "links" : [ {
+      "href" : "https://www.aims.gov.au",
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : "AIMS Web Site"
+    } ]
+  }, {
+    "roles" : [ "pointOfContact", "about" ],
+    "organization" : "Australian Institute of Marine Science (AIMS)",
+    "name" : "AIMS Data Centre",
+    "emails" : [ "adc@aims.gov.au" ],
+    "addresses" : [ {
+      "city" : "TOWNSVILLE",
+      "country" : "Australia",
+      "delivery_point" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],
+      "postal_code" : "4810",
+      "administrative_area" : "Queensland"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "+61 7 4753 4444"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : ""
+    } ],
+    "links" : [ {
+      "href" : "https://www.aims.gov.au",
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : "AIMS Web Site"
+    } ]
+  }, {
+    "roles" : [ "pointOfContact", "metadata" ],
+    "organization" : "Australian Institute of Marine Science (AIMS)",
+    "position" : "AIMS Data Centre",
+    "emails" : [ "adc@aims.gov.au" ],
+    "addresses" : [ {
+      "city" : "TOWNSVILLE MAIL CENTRE",
+      "country" : "Australia",
+      "delivery_point" : [ "PRIVATE MAIL BAG 3" ],
+      "postal_code" : "4810",
+      "administrative_area" : "Queensland"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "+61 7 4753 4444"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : "+61 7 4772 5852"
+    } ],
+    "links" : [ {
+      "href" : "https://www.aims.gov.au/adc",
+      "type" : "WWW:LINK-1.0-http--link"
+    } ]
+  }, {
+    "roles" : [ "publisher", "citation" ],
+    "organization" : "Australian Institute of Marine Science (AIMS)",
+    "emails" : [ "reception@aims.gov.au" ],
+    "addresses" : [ {
+      "city" : "TOWNSVILLE",
+      "country" : "Australia",
+      "delivery_point" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],
+      "postal_code" : "4810",
+      "administrative_area" : "Queensland"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "+61 7 4753 4444"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : ""
+    } ],
+    "links" : [ {
+      "href" : "https://www.aims.gov.au",
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : "AIMS Web Site"
+    } ]
+  }, {
+    "roles" : [ "owner", "citation" ],
+    "organization" : "Australian Institute of Marine Science (AIMS)",
+    "emails" : [ "reception@aims.gov.au" ],
+    "addresses" : [ {
+      "city" : "TOWNSVILLE",
+      "country" : "Australia",
+      "delivery_point" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],
+      "postal_code" : "4810",
+      "administrative_area" : "Queensland"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "+61 7 4753 4444"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : ""
+    } ],
+    "links" : [ {
+      "href" : "https://www.aims.gov.au",
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : "AIMS Web Site"
+    } ]
+  } ],
+  "languages" : [ {
+    "code" : "eng",
+    "name" : "English"
+  } ],
+  "links" : [ {
+    "href" : "https://geoserver.apps.aims.gov.au/aims/wms",
+    "rel" : "wms",
+    "type" : "",
+    "title" : "{\"title\":\"aims:AIMS_EcoRAPP_Oceanographic-Loggers_202411_v2\",\"description\":\"AIMS EcoRRAP Oceanographic Loggers\"}"
+  }, {
+    "href" : "https://data.aims.gov.au/data-download/778cc4e3-7979-4601-8fdf-772f345d8956/AIMS_EcoRRAP_Oceanography_LIGHT_DATA.zip",
+    "rel" : "data",
+    "type" : "",
+    "title" : "{\"title\":\"NetCDF files for LIGHT from all sites - AIMS_EcoRRAP_Oceanography_LIGHT_DATA.zip [Folder size: 55.8 MB]\",\"description\":\"NetCDF files for LIGHT from all sites - AIMS_EcoRRAP_Oceanography_LIGHT_DATA.zip [Folder size: 55.8 MB]\"}"
+  }, {
+    "href" : "https://data.aims.gov.au/data-download/778cc4e3-7979-4601-8fdf-772f345d8956/AIMS_EcoRRAP_Oceanography_CURRENTS_DATA.zip",
+    "rel" : "data",
+    "type" : "",
+    "title" : "{\"title\":\"NetCDF files for CURRENTS from all sites - AIMS_EcoRRAP_Oceanography_CURRENTS_DATA.zip [Folder size: 655 MB]\",\"description\":\"NetCDF files for CURRENTS from all sites - AIMS_EcoRRAP_Oceanography_CURRENTS_DATA.zip [Folder size: 655 MB]\"}"
+  }, {
+    "href" : "https://api.aims.gov.au/data-v2.0/778cc4e3-7979-4601-8fdf-772f345d8956/files/Data-Dictionary_ EcoRRAP-oceanographic-logger-data_V1.pdf",
+    "rel" : "data",
+    "type" : "",
+    "title" : "{\"title\":\"Data Dictionary - EcoRRAP oceanographic logger data [PDF size: 72KB]\",\"description\":\"Data Dictionary - EcoRRAP oceanographic logger data [PDF size: 72KB]\"}"
+  }, {
+    "href" : "https://data.aims.gov.au/data-download/778cc4e3-7979-4601-8fdf-772f345d8956/AIMS_EcoRRAP_Oceanography_WAVE_DATA.zip",
+    "rel" : "data",
+    "type" : "",
+    "title" : "{\"title\":\"NetCDF files for WAVE for all sites - AIMS_EcoRRAP_Oceanography_WAVE_DATA.zip [Folder size: 329 MB]\",\"description\":\"NetCDF files for WAVE for all sites - AIMS_EcoRRAP_Oceanography_WAVE_DATA.zip [Folder size: 329 MB]\"}"
+  }, {
+    "href" : "https://data.aims.gov.au/data-download/778cc4e3-7979-4601-8fdf-772f345d8956/AIMS_EcoRRAP_Oceanography_CTD_DATA.zip",
+    "rel" : "data",
+    "type" : "",
+    "title" : "{\"title\":\"NetCDF files for CTD from all sites - AIMS_EcoRRAP_Oceanography_CTD_DATA.zip [Folder size: 2.79 GB]\",\"description\":\"NetCDF files for CTD from all sites - AIMS_EcoRRAP_Oceanography_CTD_DATA.zip [Folder size: 2.79 GB]\"}"
+  }, {
+    "href" : "https://data.aims.gov.au/data-download/778cc4e3-7979-4601-8fdf-772f345d8956/AIMS_EcoRRAP_Oceanography_SPOTTER_DATA.zip",
+    "rel" : "data",
+    "type" : "",
+    "title" : "{\"title\":\"NetCDF files for SPOTTER from all sites - AIMS_EcoRRAP_Oceanography_SPOTTER_DATA.zip [Folder size: 2.9 MB]\",\"description\":\"NetCDF files for SPOTTER from all sites - AIMS_EcoRRAP_Oceanography_SPOTTER_DATA.zip [Folder size: 2.9 MB]\"}"
+  }, {
+    "href" : "https://api.aims.gov.au/data-v2.0/778cc4e3-7979-4601-8fdf-772f345d8956/files/202411_EcoRRAP_logger_metadata_summary.csv",
+    "rel" : "data",
+    "type" : "",
+    "title" : "{\"title\":\"EcoRRAP logger metadata summary (202411) [csv file size: 106 KB]\",\"description\":\"EcoRRAP logger metadata summary (202411) [csv file size: 106 KB]\"}"
+  }, {
+    "href" : "https://data.aims.gov.au/data-download/778cc4e3-7979-4601-8fdf-772f345d8956/AIMS_EcoRRAP_Oceanography_CSV_FILES.zip",
+    "rel" : "data",
+    "type" : "",
+    "title" : "{\"title\":\"Collected CSV files for all sites - AIMS_EcoRRAP_Oceanography_CSV_FILES.zip [Folder size: 67MB]\",\"description\":\"Collected CSV files for all sites - AIMS_EcoRRAP_Oceanography_CSV_FILES.zip [Folder size: 67MB]\"}"
+  }, {
+    "href" : "https://apps.aims.gov.au/metadata/view/778cc4e3-7979-4601-8fdf-772f345d8956",
+    "rel" : "describedby",
+    "type" : "text/html",
+    "title" : "Full metadata link"
+  }, {
+    "href" : "http://i.creativecommons.org/l/by-nc/3.0/au/88x31.png",
+    "rel" : "license",
+    "type" : "image/png"
+  }, {
+    "href" : "http://creativecommons.org/licenses/by-nc/3.0/au/",
+    "rel" : "license",
+    "type" : "text/html"
+  } ],
+  "license" : "Creative Commons Attribution-NonCommercial 3.0 Australia License",
+  "providers" : [ {
+    "name" : "Australian Institute of Marine Science (AIMS)",
+    "roles" : [ "pointOfContact" ]
+  } ],
+  "themes" : [ {
+    "concepts" : [ {
+      "id" : "Current speed in the water body",
+      "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/383",
+      "title" : "AODN Discovery Parameter Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "Specific electrical conductivity of the water body",
+      "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/730",
+      "title" : "AODN Discovery Parameter Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "Depth of observation or sample collection",
+      "url" : "user contributed",
+      "title" : "AODN Discovery Parameter Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "Temperature of the water body",
+      "url" : "http://vocab.nerc.ac.uk/collection/P01/current/TEMPPR01",
+      "title" : "AODN Discovery Parameter Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "Practical salinity of the water body",
+      "url" : "http://vocab.nerc.ac.uk/collection/P01/current/PSLTZZ01",
+      "title" : "AODN Discovery Parameter Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "Downwelling vector irradiance as photons (PAR wavelengths) in the water body",
+      "url" : "http://vocab.aodn.org.au/def/discovery_parameter/entity/573",
+      "title" : "AODN Discovery Parameter Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "Current direction in the water body",
+      "url" : "http://vocab.nerc.ac.uk/collection/P01/current/LCDAZZ01",
+      "title" : "AODN Discovery Parameter Vocabulary",
+      "description" : ""
+    } ],
+    "scheme" : "theme"
+  }, {
+    "concepts" : [ {
+      "id" : "oceans",
+      "url" : null,
+      "title" : null,
+      "description" : null
+    } ],
+    "scheme" : "Categories"
+  } ],
+  "id" : "778cc4e3-7979-4601-8fdf-772f345d8956",
+  "search_suggestions" : {
+    "abstract_phrases" : [ ],
+    "parameter_vocabs_sayt" : [ ],
+    "platform_vocabs_sayt" : [ ],
+    "organisation_vocabs_sayt" : [ ]
+  },
+  "sci:citation" : "{\"suggestedCitation\":\"Attribution: Format for citation of metadata sourced from Australian Institute of Marine Science (AIMS) in a list of reference is as follows: \\\"Australian Institute of Marine Science (AIMS). (2023). EcoRRAP oceanographic logger data. https://apps.aims.gov.au/metadata/view/778cc4e3-7979-4601-8fdf-772f345d8956, accessed[date-of-access]\\\".\",\"useLimitations\":null,\"otherConstraints\":[\"Use Limitation: All AIMS data, products and services are provided \\\"as is\\\" and AIMS does not warrant their fitness for a particular purpose or non-infringement. While AIMS has made every reasonable effort to ensure high quality of the data, products and services, to the extent permitted by law the data, products and services are provided without any warranties of any kind, either expressed or implied, including without limitation any implied warranties of title, merchantability, and fitness for a particular purpose or non-infringement. AIMS make no representation or warranty that the data, products and services are accurate, complete, reliable or current. To the extent permitted by law, AIMS exclude all liability to any person arising directly or indirectly from the use of the data, products and services.\"]}",
+  "type" : "Collection",
+  "stac_version" : "1.0.0",
+  "stac_extensions" : [ "https://stac-extensions.github.io/scientific/v1.0.0/schema.json", "https://stac-extensions.github.io/contacts/v0.1.1/schema.json", "https://stac-extensions.github.io/projection/v1.1.0/schema.json", "https://stac-extensions.github.io/language/v1.0.0/schema.json", "https://stac-extensions.github.io/themes/v1.0.0/schema.json", "https://stac-extensions.github.io/web-map-links/v1.2.0/schema.json" ]
+}

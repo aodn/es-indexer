@@ -979,5 +979,17 @@ public class StacCollectionMapperServiceTest {
 
         verify(expected);
     }
+    /**
+     * Source XML geometry may have description field, this test verify we capture it correctly
+     * @throws IOException - Not expected
+     * @throws JSONException - Not expected
+     */
+    @Test
+    public void verifyGeometryWithDescriptionWork() throws IOException, JSONException {
+        String xml = readResourceFile("classpath:canned/sample_spatial_extent_shared_description.xml");
+        String expected = readResourceFile("classpath:canned/sample_spatial_extent_shared_description.json");
+        indexerService.indexMetadata(xml);
 
+        verify(expected);
+    }
 }

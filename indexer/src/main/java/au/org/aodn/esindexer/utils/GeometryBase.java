@@ -93,6 +93,7 @@ public class GeometryBase {
                                                     safeGet(linearRingType::getPosList)).ifPresent(pos -> {
                                                         Geometry polygon = linerPositionToPolygon(pos, polygonType.getSrsName());
                                                         if(polygon != null) {
+                                                            attachDescription(polygon, rawInput.description());
                                                             logger.debug("MultiSurfaceType 2D added (findPolygonsFromEXBoundingPolygonType) {}", polygon);
                                                             polygons.add(polygon);
                                                         }
@@ -131,7 +132,9 @@ public class GeometryBase {
                                             }
                                         }
                                     }
-                                    polygons.add(geoJsonFactory.createPolygon(ring, interiorRings.toArray(new LinearRing[0])));
+                                    Geometry polygon = geoJsonFactory.createPolygon(ring, interiorRings.toArray(new LinearRing[0]));
+                                    attachDescription(polygon, rawInput.description());
+                                    polygons.add(polygon);
                                 });
                             }
                         }
@@ -184,7 +187,10 @@ public class GeometryBase {
                     logger.warn("Invalid BBOX found for findPolygonsFromEXGeographicBoundingBoxType using CRS {}", rawCRS);
                 } else {
                     logger.debug("BBOX found for findPolygonsFromEXGeographicBoundingBoxType using CRS {}", rawCRS);
-                    getCoordinates(bbt).ifPresent(geometries::add);
+                    getCoordinates(bbt).ifPresent(geometry -> {
+                        attachDescription(geometry, rawInput.description());
+                        geometries.add(geometry);
+                    });
                 }
             }
         }
@@ -195,6 +201,12 @@ public class GeometryBase {
         else {
             logger.warn("No applicable BBOX calculation found for findPolygonsFromEXGeographicBoundingBoxType using CRS {}", rawCRS);
             return null;
+        }
+    }
+
+    protected static void attachDescription(Geometry geometry, String description) {
+        if (geometry != null && description != null && !description.isBlank()) {
+            geometry.setUserData(description);
         }
     }
 

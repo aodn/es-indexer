@@ -140,6 +140,7 @@ public class GeometryUtils {
                             // Standard: https://www.rfc-editor.org/rfc/rfc7946#section-3.1.6
                             result = GeometryUtils.ensureCounterClockwise(polygon, factory);
                         }
+                        copyUserData(geometry, result);
                         return result;
                     })
                     // Orientation can leave invalid rings if the source was borderline
@@ -151,12 +152,13 @@ public class GeometryUtils {
             try (StringWriter writer = new StringWriter()) {
                 geometryJson.write(collection, writer);
 
-                Map<?, ?> values = objectMapper.readValue(writer.toString(), HashMap.class);
+                HashMap<String, Object> values = objectMapper.readValue(writer.toString(), HashMap.class);
 
                 if(values == null)  {
                     logger.warn("Convert geometry to JSON result in null, {}", writer.toString());
                 }
                 else {
+                    addDescriptionsToGeoJson(values, orientedPolygons);
                     logger.debug("Created geometry {}", values);
                 }
                 return values;
@@ -217,7 +219,31 @@ public class GeometryUtils {
             holes[i] = hole;
         }
 
-        return factory.createPolygon(shell, holes);
+        Polygon reoriented = factory.createPolygon(shell, holes);
+        copyUserData(polygon, reoriented);
+        return reoriented;
+    }
+
+    protected static void copyUserData(Geometry source, Geometry target) {
+        if (source != null && target != null && source != target && source.getUserData() != null) {
+            target.setUserData(source.getUserData());
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    protected static void addDescriptionsToGeoJson(Map<String, Object> geoJson, Geometry[] geometries) {
+        Object geometriesNode = geoJson.get("geometries");
+        if (!(geometriesNode instanceof List<?> geometryList)) {
+            return;
+        }
+        for (int i = 0; i < geometries.length && i < geometryList.size(); i++) {
+            if (!(geometries[i].getUserData() instanceof String description) || description.isBlank()) {
+                continue;
+            }
+            if (geometryList.get(i) instanceof Map<?, ?> geometryMap) {
+                ((Map<String, Object>) geometryMap).put("description", description);
+            }
+        }
     }
     /**
      * Reverses the order of coordinates in an array.
@@ -245,6 +271,7 @@ public class GeometryUtils {
         // Iterate over the geometries in the MultiPolygon
         for (int i = 0; i < multipolygon.getNumGeometries(); i++) {
             Geometry geometry = multipolygon.getGeometryN(i);
+            copyUserData(multipolygon, geometry);
             geo.add(geometry);
         }
         return geo;
@@ -261,11 +288,13 @@ public class GeometryUtils {
         }
         Geometry fixed = GeometryFixer.fix(geometry);
         if (fixed != null && !fixed.isEmpty()) {
+            copyUserData(geometry, fixed);
             return fixed;
         }
         try {
             Geometry buffered = geometry.buffer(0);
             if (buffered != null && !buffered.isEmpty()) {
+                copyUserData(geometry, buffered);
                 return buffered;
             }
         }
@@ -282,7 +311,9 @@ public class GeometryUtils {
      */
     protected static Geometry dropInteriorRings(Geometry geometry) {
         if (geometry instanceof Polygon polygon && polygon.getNumInteriorRing() > 0) {
-            return factory.createPolygon(polygon.getExteriorRing());
+            Geometry simplified = factory.createPolygon(polygon.getExteriorRing());
+            copyUserData(geometry, simplified);
+            return simplified;
         }
         return geometry;
     }
@@ -315,6 +346,7 @@ public class GeometryUtils {
                                 // that means it is pure land area, in this case we should include it.
                                 Geometry withoutLand = geometry.difference(landGeometry);
                                 Geometry result = withoutLand.isEmpty() ? geometry : withoutLand;
+                                copyUserData(geometry, result);
                                 result = makeValidGeometry(result);
                                 if (reducer != null) {
                                     result = makeValidGeometry(reducer.reduce(result));
@@ -372,7 +404,7 @@ public class GeometryUtils {
             List<GeometryWithDescription> rawInput = ext.stream()
                     .map(l -> new GeometryWithDescription(
                             // Extract the description of the polygon
-                            safeGet(() -> l.getDescription().getCharacterString().toString()).orElse(""),
+                            safeGet(() -> l.getDescription().getCharacterString().getValue().toString()).orElse(null),
                             /*
                                 l = List<AbstractEXGeographicExtentPropertyType>
                                 For each AbstractEXGeographicExtentPropertyType, we get the tag that store the
