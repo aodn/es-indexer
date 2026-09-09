@@ -992,4 +992,18 @@ public class StacCollectionMapperServiceTest {
 
         verify(expected);
     }
+
+    /**
+     * One extent description shared by two points, plus a described box, every geometry must carry its own
+     * @throws IOException - Not expected
+     * @throws JSONException - Not expected
+     */
+    @Test
+    public void verifyOneDescriptionSharedBySeveralGeometriesWork() throws IOException, JSONException {
+        String xml = readResourceFile("classpath:canned/sample_extent_two_points_one_description.xml");
+        String expected = readResourceFile("classpath:canned/sample_extent_two_points_one_description.json");
+        indexerService.indexMetadata(xml);
+
+        verify(expected);
+    }
 }
