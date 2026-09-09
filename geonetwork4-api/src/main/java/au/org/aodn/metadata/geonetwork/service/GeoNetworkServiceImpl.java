@@ -176,6 +176,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
                         result.add(tag.get("name").asText());
                     }
                 });
+                logger.debug("Found Categories: {}", result);
                 return result;
             }
         }

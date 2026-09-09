@@ -2,6 +2,7 @@ package au.org.aodn.datadiscoveryai.model;
 
 import au.org.aodn.stac.model.LinkModel;
 import au.org.aodn.stac.model.ThemesModel;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
@@ -40,4 +41,11 @@ public class AiEnhancementRequest {
 
     @JsonProperty("themes")
     private List<ThemesModel> themes;
+
+    /**
+     * Set for the records that are not datasets, for example the IMOS Facility / Sub-Facility records, so the delivery mode is not predicted for them
+     * JsonIgnore because it only selects the models to call, the AI service does not need it.
+     */
+    @JsonIgnore
+    private boolean skipDeliveryClassification;
 }

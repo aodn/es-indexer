@@ -1,5 +1,6 @@
 package au.org.aodn.esindexer.service;
 
+import au.org.aodn.esindexer.utils.FacilityRecordUtils;
 import au.org.aodn.stac.model.ThemesModel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -48,6 +49,9 @@ public class RankingServiceImpl implements RankingService {
     @Value("${app.ranking.imos.weight:10}")
     protected int imosWeigth;
 
+    @Value("${app.ranking.portalImos.weight:20}")
+    protected int portalImosWeight;
+
     @Value("${app.ranking.downloadable.weight:10}")
     protected int downloadableWeigth;
 
@@ -59,6 +63,9 @@ public class RankingServiceImpl implements RankingService {
 
     @Value("${app.ranking.document.penalty:-20}")
     protected int documentPenalty;
+
+    @Value("${app.ranking.facility.penalty:-20}")
+    protected int facilityPenalty;
 
     public Integer evaluateCompleteness(StacCollectionModel stacCollectionModel) {
         int total = 0;
@@ -140,11 +147,16 @@ public class RankingServiceImpl implements RankingService {
             count++;
         }
         // IMOS record dataset_group = ["IMOS"]
-        if (safeGet(() -> stacCollectionModel.getSummaries().getDatasetGroup())
-                .filter(g -> g.size() == 1 && "IMOS".equalsIgnoreCase(g.get(0)))
-                .isPresent()) {
+        if (FacilityRecordUtils.isImosOwned(
+                safeGet(() -> stacCollectionModel.getSummaries().getDatasetGroup()).orElse(null))) {
             log.debug("IMOS owned record");
             total += imosWeigth;
+        }
+        // IMOS portal collection record, the portal:IMOS category means the portal serves data for it
+        if (FacilityRecordUtils.isImosCollectionRecord(
+                safeGet(() -> stacCollectionModel.getSummaries().getCategories()).orElse(null))) {
+            log.debug("IMOS portal collection record");
+            total += portalImosWeight;
         }
         // Cloud-optimised download service: assets populated means cloud-optimised index exists
         if (stacCollectionModel.getAssets() != null && !stacCollectionModel.getAssets().isEmpty()) {
@@ -171,6 +183,11 @@ public class RankingServiceImpl implements RankingService {
                 .filter("document"::equalsIgnoreCase)
                 .isPresent()) {
             total += documentPenalty;
+        }
+        // Penalty for IMOS Facility / Sub-Facility record, it describes a facility and has no data attached
+        if (FacilityRecordUtils.isImosFacilityRecord(stacCollectionModel)) {
+            log.debug("IMOS facility / sub-facility record with no data attached");
+            total += facilityPenalty;
         }
 
         log.debug("Overall count of metadata elements:{}", count);

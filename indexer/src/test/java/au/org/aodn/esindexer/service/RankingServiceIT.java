@@ -207,4 +207,32 @@ class RankingServiceIT extends BaseTestClass {
                 .build());
         assertEquals(mockRankingService.documentPenalty, mockRankingService.evaluateCompleteness(stacCollectionModel));
     }
+
+    @Test
+    public void testFacilityPenalty() {
+        RankingServiceImpl mockRankingService = Mockito.spy(rankingService);
+        // The three scope codes that identify a facility / sub-facility record
+        for (String code : List.of("collectionHardware", "series", "collectionSession")) {
+            stacCollectionModel.setSummaries(SummariesModel.builder()
+                    .datasetGroup(List.of("IMOS"))
+                    .scope(Map.of("code", code))
+                    .build());
+            // IMOS owned so it keeps the imos weight, then the facility penalty applies on top
+            assertEquals(mockRankingService.imosWeigth + mockRankingService.facilityPenalty,
+                    mockRankingService.evaluateCompleteness(stacCollectionModel),
+                    "Facility penalty applies to scope code " + code);
+        }
+    }
+
+    @Test
+    public void testPortalImosCollectionRecord() {
+        RankingServiceImpl mockRankingService = Mockito.spy(rankingService);
+        stacCollectionModel.setSummaries(SummariesModel.builder()
+                .datasetGroup(List.of("IMOS"))
+                .scope(Map.of("code", "dataset"))
+                .categories(List.of("portal:IMOS"))
+                .build());
+        assertEquals(mockRankingService.imosWeigth + mockRankingService.portalImosWeight,
+                mockRankingService.evaluateCompleteness(stacCollectionModel));
+    }
 }
