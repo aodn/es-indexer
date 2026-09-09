@@ -119,13 +119,13 @@ public class GeometryUtils {
      */
     public static Map<?,?> createGeoShapeJson(BigDecimal lng, BigDecimal lat) {
         Point point = factory.createPoint(new Coordinate(lng.doubleValue(), lat.doubleValue()));
-        return createGeoShapeJson(List.of(List.of(point)));
+        return createGeoShapeJson(List.of(List.of(point)), false);
     }
     /**
      * @param polygons - Assume to be EPSG:4326, as GeoJson always use this encoding.
      * @return - Map that represent the geojson
      */
-    protected static Map<?,?> createGeoShapeJson(List<List<Geometry>> polygons) {
+    protected static Map<?,?> createGeoShapeJson(List<List<Geometry>> polygons, boolean withMetadata) {
 
         if(!polygons.isEmpty()) {
             // Convert list<list<polygon>> to list<polygon>
@@ -147,7 +147,7 @@ public class GeometryUtils {
                     // Orientation can leave invalid rings if the source was borderline
                     .map(GeometryUtils::makeValidGeometry)
                     .filter(r -> r != null && !r.isEmpty())
-                    .map(GeometryUtils::geometryToGeoJson)
+                    .map(r -> GeometryUtils.geometryToGeoJson(r, withMetadata))
                     .filter(Objects::nonNull)
                     .toList();
 
@@ -224,7 +224,7 @@ public class GeometryUtils {
     }
 
     @SuppressWarnings("unchecked")
-    protected static Map<String, Object> geometryToGeoJson(Geometry geometry) {
+    protected static Map<String, Object> geometryToGeoJson(Geometry geometry, boolean withMetadata) {
         try (StringWriter writer = new StringWriter()) {
             geometryJson.write(geometry, writer);
             Map<String, Object> geoJson = objectMapper.readValue(
@@ -235,7 +235,7 @@ public class GeometryUtils {
                 logger.warn("Convert geometry to JSON result in null, {}", writer);
                 return null;
             }
-            if (geometry.getUserData() instanceof String description && !description.isBlank()) {
+            if (withMetadata && geometry.getUserData() instanceof String description && !description.isBlank()) {
                 Object metadataNode = geoJson.get("metadata");
                 Map<String, Object> metadata;
                 if (metadataNode instanceof Map<?, ?> existingMetadata) {
@@ -456,7 +456,7 @@ public class GeometryUtils {
      */
     public static Map<?, ?> createGeometryNoLandFrom(List<GeometryWithDescription> rawInput, Integer gridSize) {
         List<List<Geometry>> polygon = createGeometryWithoutLand(rawInput);
-        return !polygon.isEmpty() ? createGeoShapeJson(polygon) : null;
+        return !polygon.isEmpty() ? createGeoShapeJson(polygon, false) : null;
     }
     /**
      * Create the spatial extents area given the XML info, it will not remove land area for speed reason. Otherwise,
@@ -473,6 +473,6 @@ public class GeometryUtils {
         // List<List<Geometry>> polygon = createGeometryWithoutLand(rawInput);
 
         List<List<Geometry>> polygon = GeometryBase.findPolygonsFrom(GeometryBase.COORDINATE_SYSTEM_CRS84, rawInput);
-        return !polygon.isEmpty() ? createGeoShapeJson(polygon) : null;
+        return !polygon.isEmpty() ? createGeoShapeJson(polygon, true) : null;
     }
 }
