@@ -1,6 +1,7 @@
 package au.org.aodn.esindexer.utils;
 
 import au.org.aodn.metadata.iso19115_3_2018.*;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
 import lombok.Setter;
@@ -128,8 +129,8 @@ public class GeometryUtils {
 
         if(!polygons.isEmpty()) {
             // Convert list<list<polygon>> to list<polygon>
-            List<Geometry> reduced = polygons.stream().flatMap(List::stream).toList();
-            Geometry[] orientedPolygons = reduced.stream()
+            List<Map<String, Object>> geometries = polygons.stream()
+                    .flatMap(List::stream)
                     .map(geometry -> {
                         Geometry result = geometry;
                         if (geometry instanceof Polygon polygon) {
@@ -146,26 +147,18 @@ public class GeometryUtils {
                     // Orientation can leave invalid rings if the source was borderline
                     .map(GeometryUtils::makeValidGeometry)
                     .filter(r -> r != null && !r.isEmpty())
-                    .toArray(Geometry[]::new);
+                    .map(GeometryUtils::geometryToGeoJson)
+                    .filter(Objects::nonNull)
+                    .toList();
 
-            GeometryCollection collection = new GeometryCollection(orientedPolygons, factory);
-            try (StringWriter writer = new StringWriter()) {
-                geometryJson.write(collection, writer);
-
-                HashMap<String, Object> values = objectMapper.readValue(writer.toString(), HashMap.class);
-
-                if(values == null)  {
-                    logger.warn("Convert geometry to JSON result in null, {}", writer.toString());
-                }
-                else {
-                    addDescriptionsToGeoJson(values, orientedPolygons);
-                    logger.debug("Created geometry {}", values);
-                }
-                return values;
-            } catch (IOException | StringIndexOutOfBoundsException e) {
-                logger.error("Error create geometry {} ",collection, e);
+            if (geometries.isEmpty()) {
                 return null;
             }
+            Map<String, Object> values = new HashMap<>();
+            values.put("type", "GeometryCollection");
+            values.put("geometries", geometries);
+            logger.debug("Created geometry {}", values);
+            return values;
         }
         return null;
     }
@@ -231,18 +224,32 @@ public class GeometryUtils {
     }
 
     @SuppressWarnings("unchecked")
-    protected static void addDescriptionsToGeoJson(Map<String, Object> geoJson, Geometry[] geometries) {
-        Object geometriesNode = geoJson.get("geometries");
-        if (!(geometriesNode instanceof List<?> geometryList)) {
-            return;
-        }
-        for (int i = 0; i < geometries.length && i < geometryList.size(); i++) {
-            if (!(geometries[i].getUserData() instanceof String description) || description.isBlank()) {
-                continue;
+    protected static Map<String, Object> geometryToGeoJson(Geometry geometry) {
+        try (StringWriter writer = new StringWriter()) {
+            geometryJson.write(geometry, writer);
+            Map<String, Object> geoJson = objectMapper.readValue(
+                    writer.toString(),
+                    new TypeReference<>() {}
+            );
+            if (geoJson == null) {
+                logger.warn("Convert geometry to JSON result in null, {}", writer);
+                return null;
             }
-            if (geometryList.get(i) instanceof Map<?, ?> geometryMap) {
-                ((Map<String, Object>) geometryMap).put("description", description);
+            if (geometry.getUserData() instanceof String description && !description.isBlank()) {
+                Object propertiesNode = geoJson.get("properties");
+                Map<String, Object> properties;
+                if (propertiesNode instanceof Map<?, ?> existingProperties) {
+                    properties = (Map<String, Object>) existingProperties;
+                } else {
+                    properties = new HashMap<>();
+                    geoJson.put("properties", properties);
+                }
+                properties.put("description", description);
             }
+            return geoJson;
+        } catch (IOException | StringIndexOutOfBoundsException e) {
+            logger.error("Error create geometry {} ", geometry, e);
+            return null;
         }
     }
     /**

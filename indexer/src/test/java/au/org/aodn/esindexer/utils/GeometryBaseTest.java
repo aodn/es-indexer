@@ -96,12 +96,15 @@ public class GeometryBaseTest {
                 input
         );
 
+        assertNotNull(geometries);
         assertEquals(1, geometries.size());
         assertEquals("Southern extent", geometries.get(0).getUserData());
 
         java.util.Map<?, ?> geoJson = GeometryUtils.createGeoShapeJson(java.util.List.of(geometries));
+        assertNotNull(geoJson);
         java.util.List<java.util.Map<?, ?>> collection = (java.util.List<java.util.Map<?, ?>>) geoJson.get("geometries");
-        assertEquals("Southern extent", collection.get(0).get("description"));
+        java.util.Map<?, ?> properties = (java.util.Map<?, ?>) collection.get(0).get("properties");
+        assertEquals("Southern extent", properties.get("description"));
     }
 
     @Test
@@ -134,6 +137,7 @@ public class GeometryBaseTest {
                 input
         );
 
+        assertNotNull(geometries);
         assertNull(geometries.get(0).getUserData());
     }
 
@@ -156,14 +160,14 @@ public class GeometryBaseTest {
         };
 
         assertEquals(
-                GeometryUtils.orientation(ccwCoords),
                 GeometryUtils.PointOrientation.COUNTER_CLOCKWISE,
+                GeometryUtils.orientation(ccwCoords),
                 "CCW coords"
         );
 
         assertEquals(
-                GeometryUtils.orientation(cwCoords),
                 GeometryUtils.PointOrientation.CLOCKWISE,
+                GeometryUtils.orientation(cwCoords),
                 "CW coords"
         );
     }
@@ -204,15 +208,15 @@ public class GeometryBaseTest {
         Polygon cwPolygon = factory.createPolygon(cwRing);
 
         assertEquals(
-                GeometryUtils.orientation(cwCoords),
                 GeometryUtils.PointOrientation.CLOCKWISE,
+                GeometryUtils.orientation(cwCoords),
                 "CW"
         );
 
         Polygon ccwPolygon = GeometryUtils.ensureCounterClockwise(cwPolygon, factory);
         assertEquals(
-                GeometryUtils.orientation(ccwPolygon.getExteriorRing().getCoordinates()),
                 GeometryUtils.PointOrientation.COUNTER_CLOCKWISE,
+                GeometryUtils.orientation(ccwPolygon.getExteriorRing().getCoordinates()),
                 "CCW"
         );
 
@@ -229,8 +233,8 @@ public class GeometryBaseTest {
 
         Polygon ensuredCcwPolygon = GeometryUtils.ensureCounterClockwise(originalCcwPolygon, factory);
         assertEquals(
-                GeometryUtils.orientation(ensuredCcwPolygon.getExteriorRing().getCoordinates()),
                 GeometryUtils.PointOrientation.COUNTER_CLOCKWISE,
+                GeometryUtils.orientation(ensuredCcwPolygon.getExteriorRing().getCoordinates()),
                 "CCW"
         );
     }
@@ -253,8 +257,8 @@ public class GeometryBaseTest {
 
         Polygon ccwPolygon = GeometryUtils.ensureCounterClockwise(cwPolygon, factory);
         assertEquals(
-                GeometryUtils.orientation(ccwPolygon.getExteriorRing().getCoordinates()),
                 GeometryUtils.PointOrientation.COUNTER_CLOCKWISE,
+                GeometryUtils.orientation(ccwPolygon.getExteriorRing().getCoordinates()),
                 "CCW"
         );
     }
@@ -279,8 +283,8 @@ public class GeometryBaseTest {
 
         Polygon ccwPolygon = GeometryUtils.ensureCounterClockwise(cwPolygon, factory);
         assertEquals(
-                GeometryUtils.orientation(ccwPolygon.getExteriorRing().getCoordinates()),
                 GeometryUtils.PointOrientation.COUNTER_CLOCKWISE,
+                GeometryUtils.orientation(ccwPolygon.getExteriorRing().getCoordinates()),
                 "CCW"
         );
     }
