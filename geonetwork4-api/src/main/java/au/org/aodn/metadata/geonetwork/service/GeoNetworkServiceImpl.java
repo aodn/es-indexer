@@ -107,8 +107,8 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
      *
      * @param uuid - The query UUID
      * @return Group name
-     * @throws IOException
-     * @throws HttpServerErrorException.ServiceUnavailable
+     * @throws IOException - No record found with the given UUID
+     * @throws HttpServerErrorException.ServiceUnavailable - We are running in cloud and instance may be restarted
      */
     public String findGroupById(String uuid) throws IOException, HttpServerErrorException.ServiceUnavailable {
         SearchRequest request = new SearchRequest.Builder()
@@ -149,7 +149,6 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
     /**
      * The category is set by the geonetwork harvester using GN3 protocol, it is use to identify which portal the record
      * belongs to, for example portal:IMOS. A record can have no category.
-     *
      * Geonetwork call the categories "tags" in its API, the endpoint returns them as a json array, the
      * "name" of each entry is the category name. The entry also carries a "label" with a translation per
      * language, we do not need it.
@@ -344,8 +343,8 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
     }
     /**
      * If geonetwork for some reason reboot, it is cloud env anyway, we keep retry evey 10 seconds
-     * @param uuid
-     * @return
+     * @param uuid - UUID of record
+     * @return - The formatterId of the record, if not found, return XML
      */
     @Retryable(
             retryFor = HttpServerErrorException.ServiceUnavailable.class,
@@ -390,7 +389,11 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
      * @throws HttpServerErrorException.ServiceUnavailable - We are running in cloud and instance may be restarted
      */
     @Retryable(
-            retryFor = {HttpClientErrorException.BadRequest.class, HttpServerErrorException.ServiceUnavailable.class},
+            retryFor = {
+                    HttpClientErrorException.BadRequest.class,
+                    HttpServerErrorException.BadGateway.class,
+                    HttpServerErrorException.ServiceUnavailable.class
+            },
             maxAttempts = 10,
             backoff = @Backoff(delay = DEFAULT_BACKOFF_TIME, multiplier = 2.0)
     )
@@ -607,10 +610,6 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
     // Get record's category
     protected String getGeoNetworkRecordTagsEndpoint() {
         return getServer() + "/geonetwork/srv/api/records/{uuid}/tags";
-    }
-
-    protected String getReIndexEndpoint() {
-        return getServer() + "/geonetwork/srv/api/site/index?reset=false&asynchronous=false";
     }
     /**
      * According to ElasticSearch Doc:
