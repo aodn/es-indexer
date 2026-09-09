@@ -236,15 +236,15 @@ public class GeometryUtils {
                 return null;
             }
             if (geometry.getUserData() instanceof String description && !description.isBlank()) {
-                Object propertiesNode = geoJson.get("properties");
-                Map<String, Object> properties;
-                if (propertiesNode instanceof Map<?, ?> existingProperties) {
-                    properties = (Map<String, Object>) existingProperties;
+                Object metadataNode = geoJson.get("metadata");
+                Map<String, Object> metadata;
+                if (metadataNode instanceof Map<?, ?> existingMetadata) {
+                    metadata = (Map<String, Object>) existingMetadata;
                 } else {
-                    properties = new HashMap<>();
-                    geoJson.put("properties", properties);
+                    metadata = new HashMap<>();
+                    geoJson.put("metadata", metadata);
                 }
-                properties.put("description", description);
+                metadata.put("description", description);
             }
             return geoJson;
         } catch (IOException | StringIndexOutOfBoundsException e) {

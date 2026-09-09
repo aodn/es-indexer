@@ -21,97 +21,97 @@
       "geometries" : [ {
         "type" : "Point",
         "coordinates" : [ 146.4831, -18.6128 ],
-        "properties" : {
+        "metadata" : {
           "description" : "Region 8"
         }
       }, {
         "type" : "Point",
         "coordinates" : [ 146.879, -18.4777 ],
-        "properties" : {
+        "metadata" : {
           "description" : "Region 7"
         }
       }, {
         "type" : "Point",
         "coordinates" : [ 147.0667, -18.6333 ],
-        "properties" : {
+        "metadata" : {
           "description" : "Region 9"
         }
       }, {
         "type" : "Point",
         "coordinates" : [ 147.9, -18.8 ],
-        "properties" : {
+        "metadata" : {
           "description" : "Region 10"
         }
       }, {
         "type" : "Point",
         "coordinates" : [ 147.0588, -19.2774 ],
-        "properties" : {
+        "metadata" : {
           "description" : "Region 13"
         }
       }, {
         "type" : "Point",
         "coordinates" : [ 147.4, -19.3 ],
-        "properties" : {
+        "metadata" : {
           "description" : "Region 14"
         }
       }, {
         "type" : "Point",
         "coordinates" : [ 145.8225, -15.9617 ],
-        "properties" : {
+        "metadata" : {
           "description" : "Region 3"
         }
       }, {
         "type" : "Point",
         "coordinates" : [ 146.23, -18.2453 ],
-        "properties" : {
+        "metadata" : {
           "description" : "Region 5"
         }
       }, {
         "type" : "Point",
         "coordinates" : [ 149.1808, -19.74 ],
-        "properties" : {
+        "metadata" : {
           "description" : "Region 15"
         }
       }, {
         "type" : "Point",
         "coordinates" : [ 147.383, -18.2746 ],
-        "properties" : {
+        "metadata" : {
           "description" : "Region 6"
         }
       }, {
         "type" : "Point",
         "coordinates" : [ 113.917, -22.033 ],
-        "properties" : {
+        "metadata" : {
           "description" : "Region 1"
         }
       }, {
         "type" : "Point",
         "coordinates" : [ 146.8812, -19.1558 ],
-        "properties" : {
+        "metadata" : {
           "description" : "Region 11"
         }
       }, {
         "type" : "Point",
         "coordinates" : [ 145.3989, -16.2481 ],
-        "properties" : {
+        "metadata" : {
           "description" : "Region 4"
         }
       }, {
         "type" : "Point",
         "coordinates" : [ 150.9385, -23.1538 ],
-        "properties" : {
+        "metadata" : {
           "description" : "Region 16"
         }
       }, {
         "type" : "Point",
         "coordinates" : [ 147.015, -19.185 ],
-        "properties" : {
+        "metadata" : {
           "description" : "Region 12"
         }
       }, {
         "type" : "Point",
         "coordinates" : [ 143.0686, -10.0511 ],
-        "properties" : {
+        "metadata" : {
           "description" : "Region 2"
         }
       } ],

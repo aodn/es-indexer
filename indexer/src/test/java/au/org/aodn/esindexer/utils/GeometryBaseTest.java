@@ -103,8 +103,8 @@ public class GeometryBaseTest {
         java.util.Map<?, ?> geoJson = GeometryUtils.createGeoShapeJson(java.util.List.of(geometries));
         assertNotNull(geoJson);
         java.util.List<java.util.Map<?, ?>> collection = (java.util.List<java.util.Map<?, ?>>) geoJson.get("geometries");
-        java.util.Map<?, ?> properties = (java.util.Map<?, ?>) collection.get(0).get("properties");
-        assertEquals("Southern extent", properties.get("description"));
+        java.util.Map<?, ?> metadata = (java.util.Map<?, ?>) collection.get(0).get("metadata");
+        assertEquals("Southern extent", metadata.get("description"));
     }
 
     @Test

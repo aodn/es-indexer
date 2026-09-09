@@ -22,7 +22,7 @@
       "geometries" : [ {
         "type" : "Point",
         "coordinates" : [ 130.58333, -12.10823 ],
-        "properties" : {
+        "metadata" : {
           "description" : "Beagle Gulf Buoy, Beagle Gulf"
         }
       } ],

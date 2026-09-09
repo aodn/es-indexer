@@ -21,67 +21,67 @@
       "geometries" : [ {
         "type" : "Point",
         "coordinates" : [ 142.9417419433594, -9.998605505008365 ],
-        "properties" : {
+        "metadata" : {
           "description" : "Dungeness"
         }
       }, {
         "type" : "Point",
         "coordinates" : [ 143.3969879150391, -9.734774881537218 ],
-        "properties" : {
+        "metadata" : {
           "description" : "Masig"
         }
       }, {
         "type" : "Point",
         "coordinates" : [ 143.3969879150391, -9.847097830667153 ],
-        "properties" : {
+        "metadata" : {
           "description" : "Aukane"
         }
       }, {
         "type" : "Point",
         "coordinates" : [ 145.44284820556643, -14.685231911438933 ],
-        "properties" : {
+        "metadata" : {
           "description" : "Lizard Island"
         }
       }, {
         "type" : "Point",
         "coordinates" : [ 146.22768402099612, -16.863033829999537 ],
-        "properties" : {
+        "metadata" : {
           "description" : "Moore Reef"
         }
       }, {
         "type" : "Point",
         "coordinates" : [ 146.4995956420899, -18.572060113333826 ],
-        "properties" : {
+        "metadata" : {
           "description" : "Pelorus Island"
         }
       }, {
         "type" : "Point",
         "coordinates" : [ 146.51950836181643, -18.643642706975996 ],
-        "properties" : {
+        "metadata" : {
           "description" : "Orpheus Island"
         }
       }, {
         "type" : "Point",
         "coordinates" : [ 147.64663696289065, -18.77891636903418 ],
-        "properties" : {
+        "metadata" : {
           "description" : "Davies Reef"
         }
       }, {
         "type" : "Point",
         "coordinates" : [ 150.97008705139163, -23.196700709795724 ],
-        "properties" : {
+        "metadata" : {
           "description" : "Halfway Island"
         }
       }, {
         "type" : "Point",
         "coordinates" : [ 151.92478179931643, -23.4456087744153 ],
-        "properties" : {
+        "metadata" : {
           "description" : "Heron Island"
         }
       }, {
         "type" : "Point",
         "coordinates" : [ 152.3920440673828, -23.893371525860456 ],
-        "properties" : {
+        "metadata" : {
           "description" : "Lady Musgrave Island"
         }
       } ],
