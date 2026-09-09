@@ -411,7 +411,7 @@ public class GeometryUtils {
             List<GeometryWithDescription> rawInput = ext.stream()
                     .map(l -> new GeometryWithDescription(
                             // Extract the description of the polygon
-                            safeGet(() -> l.getDescription().getCharacterString().getValue().toString()).orElse(null),
+                            safeGet(() -> l.getDescription().getCharacterString().getValue().toString().trim()).orElse(null),
                             /*
                                 l = List<AbstractEXGeographicExtentPropertyType>
                                 For each AbstractEXGeographicExtentPropertyType, we get the tag that store the
