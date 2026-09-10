@@ -10,7 +10,12 @@
         "acronym_search_analyser": {
           "type": "custom",
           "tokenizer": "standard",
-          "filter": ["lowercase", "acronym_synonym_filter"]
+          "filter": ["lowercase", "english_possessive_stemmer", "acronym_synonym_filter"]
+        },
+        "acronym_index_analyser": {
+          "type": "custom",
+          "tokenizer": "standard",
+          "filter": ["lowercase", "english_possessive_stemmer"]
         },
         "shingle_analyser": {
           "type": "custom",
@@ -32,6 +37,10 @@
         }
       },
       "filter": {
+        "english_possessive_stemmer": {
+          "type":       "stemmer",
+          "language":   "possessive_english"
+        },
         "english_stop": {
           "type": "stop",
           "stopwords": "_english_"
@@ -105,6 +114,7 @@
           },
           "synonyms": {
             "type": "text",
+            "analyzer": "acronym_index_analyser",
             "search_analyzer": "acronym_search_analyser"
           }
         }
@@ -163,6 +173,7 @@
         "fields": {
           "synonyms": {
             "type": "text",
+            "analyzer": "acronym_index_analyser",
             "search_analyzer": "acronym_search_analyser"
           }
         }

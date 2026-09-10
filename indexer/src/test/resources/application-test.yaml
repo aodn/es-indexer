@@ -33,6 +33,8 @@ elasticsearch:
       # one acronym, two full names - "ams" must expand to both at search time
       - "ams => australian marine sciences"
       - "ams => antarctic meteorological service"
+      # possessive in the record text
+      - "aodc => australian oceanographic data centre"
 
 datadiscoveryai:
   host: http://localhost
