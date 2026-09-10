@@ -238,4 +238,19 @@ public class GeometryUtilsTest {
         Assertions.assertEquals(1.2, coors.get(0));
         Assertions.assertEquals(2.2, coors.get(1));
     }
+
+    // A description covers every geometry of its extent, points and boxes alike
+    @Test
+    @SuppressWarnings("unchecked")
+    public void verifySharedDescriptionOnEveryGeometry() throws IOException, JAXBException {
+        String xml = readResourceFile("classpath:canned/sample_extent_two_points_one_description.xml");
+        Map<?, ?> geojson = GeometryUtils.createGeometryItems(jaxb.unmarshal(xml), GeometryUtils::createGeometryFrom, null);
+
+        List<Map<String, Object>> members = (List<Map<String, Object>>) geojson.get("geometries");
+        List<String> descriptions = members.stream()
+                .map(member -> (Map<?, ?>) member.get("metadata"))
+                .map(metadata -> metadata == null ? null : (String) metadata.get("description"))
+                .toList();
+        assertEquals(List.of("Two moorings", "Two moorings", "Survey box"), descriptions);
+    }
 }

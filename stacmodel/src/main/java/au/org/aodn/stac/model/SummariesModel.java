@@ -64,7 +64,8 @@ public class SummariesModel {
     @JsonProperty("update_frequency")
     protected String updateFrequency;
     /**
-     * Use to generate the vector tile, the STAC format is not optimized and hard to work with for Elastic search
+     * Use to generate the vector tile, the STAC format is not optimized and hard to work with for Elastic search.
+     * A geometry may carry {"metadata": {"description": ...}} from its extent's gex:description, stored in _source only.
      */
     @JsonProperty("proj:geometry")
     protected Map<?, ?> geometry;

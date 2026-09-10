@@ -1,6 +1,7 @@
 package au.org.aodn.esindexer.utils;
 
 import au.org.aodn.metadata.iso19115_3_2018.*;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,12 +28,17 @@ import java.util.*;
 import java.util.function.BiFunction;
 import java.util.stream.Stream;
 
+import static au.org.aodn.esindexer.utils.CommonUtils.safeGet;
+
 public class GeometryUtils {
 
     public enum PointOrientation {
         CLOCKWISE,
         COUNTER_CLOCKWISE,
         FLAT
+    }
+
+    public record GeometryWithDescription(String description, List<AbstractEXGeographicExtentType> geometries) {
     }
 
     protected static Logger logger = LogManager.getLogger(GeometryUtils.class);
@@ -113,18 +119,18 @@ public class GeometryUtils {
      */
     public static Map<?,?> createGeoShapeJson(BigDecimal lng, BigDecimal lat) {
         Point point = factory.createPoint(new Coordinate(lng.doubleValue(), lat.doubleValue()));
-        return createGeoShapeJson(List.of(List.of(point)));
+        return createGeoShapeJson(List.of(List.of(point)), false);
     }
     /**
      * @param polygons - Assume to be EPSG:4326, as GeoJson always use this encoding.
      * @return - Map that represent the geojson
      */
-    protected static Map<?,?> createGeoShapeJson(List<List<Geometry>> polygons) {
+    protected static Map<?,?> createGeoShapeJson(List<List<Geometry>> polygons, boolean withMetadata) {
 
         if(!polygons.isEmpty()) {
             // Convert list<list<polygon>> to list<polygon>
-            List<Geometry> reduced = polygons.stream().flatMap(List::stream).toList();
-            Geometry[] orientedPolygons = reduced.stream()
+            List<Map<String, Object>> geometries = polygons.stream()
+                    .flatMap(List::stream)
                     .map(geometry -> {
                         Geometry result = geometry;
                         if (geometry instanceof Polygon polygon) {
@@ -135,30 +141,24 @@ public class GeometryUtils {
                             // Standard: https://www.rfc-editor.org/rfc/rfc7946#section-3.1.6
                             result = GeometryUtils.ensureCounterClockwise(polygon, factory);
                         }
+                        copyUserData(geometry, result);
                         return result;
                     })
                     // Orientation can leave invalid rings if the source was borderline
                     .map(GeometryUtils::makeValidGeometry)
                     .filter(r -> r != null && !r.isEmpty())
-                    .toArray(Geometry[]::new);
+                    .map(r -> GeometryUtils.geometryToGeoJson(r, withMetadata))
+                    .filter(Objects::nonNull)
+                    .toList();
 
-            GeometryCollection collection = new GeometryCollection(orientedPolygons, factory);
-            try (StringWriter writer = new StringWriter()) {
-                geometryJson.write(collection, writer);
-
-                Map<?, ?> values = objectMapper.readValue(writer.toString(), HashMap.class);
-
-                if(values == null)  {
-                    logger.warn("Convert geometry to JSON result in null, {}", writer.toString());
-                }
-                else {
-                    logger.debug("Created geometry {}", values);
-                }
-                return values;
-            } catch (IOException | StringIndexOutOfBoundsException e) {
-                logger.error("Error create geometry {} ",collection, e);
+            if (geometries.isEmpty()) {
                 return null;
             }
+            Map<String, Object> values = new HashMap<>();
+            values.put("type", "GeometryCollection");
+            values.put("geometries", geometries);
+            logger.debug("Created geometry {}", values);
+            return values;
         }
         return null;
     }
@@ -212,7 +212,45 @@ public class GeometryUtils {
             holes[i] = hole;
         }
 
-        return factory.createPolygon(shell, holes);
+        Polygon reoriented = factory.createPolygon(shell, holes);
+        copyUserData(polygon, reoriented);
+        return reoriented;
+    }
+
+    protected static void copyUserData(Geometry source, Geometry target) {
+        if (source != null && target != null && source != target && source.getUserData() != null) {
+            target.setUserData(source.getUserData());
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    protected static Map<String, Object> geometryToGeoJson(Geometry geometry, boolean withMetadata) {
+        try (StringWriter writer = new StringWriter()) {
+            geometryJson.write(geometry, writer);
+            Map<String, Object> geoJson = objectMapper.readValue(
+                    writer.toString(),
+                    new TypeReference<>() {}
+            );
+            if (geoJson == null) {
+                logger.warn("Convert geometry to JSON result in null, {}", writer);
+                return null;
+            }
+            if (withMetadata && geometry.getUserData() instanceof String description && !description.isBlank()) {
+                Object metadataNode = geoJson.get("metadata");
+                Map<String, Object> metadata;
+                if (metadataNode instanceof Map<?, ?> existingMetadata) {
+                    metadata = (Map<String, Object>) existingMetadata;
+                } else {
+                    metadata = new HashMap<>();
+                    geoJson.put("metadata", metadata);
+                }
+                metadata.put("description", description);
+            }
+            return geoJson;
+        } catch (IOException | StringIndexOutOfBoundsException e) {
+            logger.error("Error create geometry {} ", geometry, e);
+            return null;
+        }
     }
     /**
      * Reverses the order of coordinates in an array.
@@ -240,6 +278,7 @@ public class GeometryUtils {
         // Iterate over the geometries in the MultiPolygon
         for (int i = 0; i < multipolygon.getNumGeometries(); i++) {
             Geometry geometry = multipolygon.getGeometryN(i);
+            copyUserData(multipolygon, geometry);
             geo.add(geometry);
         }
         return geo;
@@ -256,11 +295,13 @@ public class GeometryUtils {
         }
         Geometry fixed = GeometryFixer.fix(geometry);
         if (fixed != null && !fixed.isEmpty()) {
+            copyUserData(geometry, fixed);
             return fixed;
         }
         try {
             Geometry buffered = geometry.buffer(0);
             if (buffered != null && !buffered.isEmpty()) {
+                copyUserData(geometry, buffered);
                 return buffered;
             }
         }
@@ -277,7 +318,9 @@ public class GeometryUtils {
      */
     protected static Geometry dropInteriorRings(Geometry geometry) {
         if (geometry instanceof Polygon polygon && polygon.getNumInteriorRing() > 0) {
-            return factory.createPolygon(polygon.getExteriorRing());
+            Geometry simplified = factory.createPolygon(polygon.getExteriorRing());
+            copyUserData(geometry, simplified);
+            return simplified;
         }
         return geometry;
     }
@@ -310,6 +353,7 @@ public class GeometryUtils {
                                 // that means it is pure land area, in this case we should include it.
                                 Geometry withoutLand = geometry.difference(landGeometry);
                                 Geometry result = withoutLand.isEmpty() ? geometry : withoutLand;
+                                copyUserData(geometry, result);
                                 result = makeValidGeometry(result);
                                 if (reducer != null) {
                                     result = makeValidGeometry(reducer.reduce(result));
@@ -338,7 +382,7 @@ public class GeometryUtils {
      */
     public static <R, P> R createGeometryItems(
             MDMetadataType source,
-            BiFunction<List<List<AbstractEXGeographicExtentType>>, P, R> handler,
+            BiFunction<List<GeometryWithDescription>, P, R> handler,
             P param) {
 
         List<MDDataIdentificationType> items = MapperUtils.findMDDataIdentificationType(source);
@@ -364,15 +408,16 @@ public class GeometryUtils {
 
             // We want to get a list of item where each item contains multiple, (aka list) of
             // (EXGeographicBoundingBoxType or EXBoundingPolygonType)
-            List<List<AbstractEXGeographicExtentType>> rawInput = ext.stream()
-                    .map(EXExtentType::getGeographicElement)
-                    .map(l ->
+            List<GeometryWithDescription> rawInput = ext.stream()
+                    .map(l -> new GeometryWithDescription(
+                            // Extract the description of the polygon
+                            safeGet(() -> l.getDescription().getCharacterString().getValue().toString().trim()).orElse(null),
                             /*
                                 l = List<AbstractEXGeographicExtentPropertyType>
                                 For each AbstractEXGeographicExtentPropertyType, we get the tag that store the
-                                coordinate, it is either a EXBoundingPolygonType or EXGeographicBoundingBoxType
+                                coordinate, it is either an EXBoundingPolygonType or EXGeographicBoundingBoxType
                              */
-                            l.stream()
+                            l.getGeographicElement().stream()
                                     .map(AbstractEXGeographicExtentPropertyType::getAbstractEXGeographicExtent)
                                     .filter(Objects::nonNull)
                                     .filter(m -> (m.getValue() instanceof EXBoundingPolygonType || m.getValue() instanceof EXGeographicBoundingBoxType))
@@ -384,10 +429,11 @@ public class GeometryUtils {
                                         } else if (m.getValue() instanceof EXGeographicBoundingBoxType) {
                                             return m.getValue();
                                         }
-                                        return null; // Handle other cases or return appropriate default value
+                                        return null; // Handle other cases or return the appropriate default value
                                     })
                                     .filter(Objects::nonNull) // Filter out null values if any
                                     .toList()
+                            )
                     )
                     .toList();
             return handler.apply(rawInput, param);
@@ -395,7 +441,7 @@ public class GeometryUtils {
         return null;
     }
 
-    protected static List<List<Geometry>> createGeometryWithoutLand(List<List<AbstractEXGeographicExtentType>> rawInput) {
+    protected static List<List<Geometry>> createGeometryWithoutLand(List<GeometryWithDescription> rawInput) {
         return removeLandAreaFromGeometry(
                 GeometryBase.findPolygonsFrom(GeometryBase.COORDINATE_SYSTEM_CRS84, rawInput)
         );
@@ -408,9 +454,9 @@ public class GeometryUtils {
      * @param rawInput - The parsed XML block that contains the spatial extents area
      * @return - Centroid point which will not appear on land.
      */
-    public static Map<?, ?> createGeometryNoLandFrom(List<List<AbstractEXGeographicExtentType>> rawInput, Integer gridSize) {
+    public static Map<?, ?> createGeometryNoLandFrom(List<GeometryWithDescription> rawInput, Integer gridSize) {
         List<List<Geometry>> polygon = createGeometryWithoutLand(rawInput);
-        return !polygon.isEmpty() ? createGeoShapeJson(polygon) : null;
+        return !polygon.isEmpty() ? createGeoShapeJson(polygon, false) : null;
     }
     /**
      * Create the spatial extents area given the XML info, it will not remove land area for speed reason. Otherwise,
@@ -419,7 +465,7 @@ public class GeometryUtils {
      * @param rawInput - The parsed XML block that contains the spatial extents area
      * @return - Map that represent rawInput
      */
-    public static Map<?, ?> createGeometryFrom(List<List<AbstractEXGeographicExtentType>> rawInput, Integer gridSize) {
+    public static Map<?, ?> createGeometryFrom(List<GeometryWithDescription> rawInput, Integer gridSize) {
         // The return polygon is in EPSG:4326, so we can call createGeoJson directly
 
         // Un-remark this line and remark the line below if you want to visualize the polygon on map, change this
@@ -427,6 +473,6 @@ public class GeometryUtils {
         // List<List<Geometry>> polygon = createGeometryWithoutLand(rawInput);
 
         List<List<Geometry>> polygon = GeometryBase.findPolygonsFrom(GeometryBase.COORDINATE_SYSTEM_CRS84, rawInput);
-        return !polygon.isEmpty() ? createGeoShapeJson(polygon) : null;
+        return !polygon.isEmpty() ? createGeoShapeJson(polygon, true) : null;
     }
 }

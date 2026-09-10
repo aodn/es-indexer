@@ -25,7 +25,10 @@
     "proj:geometry" : {
       "geometries" : [ {
         "type" : "Polygon",
-        "coordinates" : [ [ [ 138.2, -39.4 ], [ 140.8, -39.4 ], [ 140.8, -37 ], [ 138.2, -37 ], [ 138.2, -39.4 ] ] ]
+        "coordinates" : [ [ [ 138.2, -39.4 ], [ 140.8, -39.4 ], [ 140.8, -37 ], [ 138.2, -37 ], [ 138.2, -39.4 ] ] ],
+        "metadata" : {
+          "description" : "Data are available on a geographic grid within the area that corresponds to the union of the regions of coverage of the Nora Creina and Blackfellow Cave radar stations. This is an irregular polygon within which is located a geographic grid with a nominal grid spacing of 4 Km."
+        }
       } ],
       "type" : "GeometryCollection"
     },
