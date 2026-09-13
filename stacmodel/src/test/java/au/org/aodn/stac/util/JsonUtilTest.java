@@ -56,27 +56,38 @@ public class JsonUtilTest {
             ObjectMapper mapper = new ObjectMapper();
             JsonNode root = mapper.readTree(new BufferedReader(reader).lines().collect(Collectors.joining("\n")));
 
-            JsonNode customAnalyser = root.path("settings").path("analysis").path("analyzer").path("custom_analyser");
-            JsonNode searchAnalyser = root.path("settings").path("analysis").path("analyzer").path("acronym_search_analyser");
+            JsonNode analysis = root.path("settings").path("analysis");
+            JsonNode indexAnalyser = analysis.path("analyzer").path("acronym_index_analyser");
+            JsonNode searchAnalyser = analysis.path("analyzer").path("acronym_search_analyser");
+            JsonNode possessiveStemmer = analysis.path("filter").path("english_possessive_stemmer");
 
-            String customFilters = customAnalyser.path("filter").toString();
-            String searchFilters = searchAnalyser.path("filter").toString();
-
-            assertFalse(customFilters.contains("acronym_synonym_filter"),
-                    "custom_analyser (index) must not reference the synonym filter");
-            assertTrue(searchFilters.contains("acronym_synonym_filter"),
-                    "acronym_search_analyser (search) must include the synonym filter");
+            assertEquals("[\"lowercase\",\"english_possessive_stemmer\"]",
+                    indexAnalyser.path("filter").toString(),
+                    "acronym_index_analyser must strip possessives without using the synonym filter");
+            assertFalse(indexAnalyser.path("filter").toString().contains("acronym_synonym_filter"),
+                    "acronym_index_analyser must not reference the updateable synonym filter");
+            assertEquals("[\"lowercase\",\"english_possessive_stemmer\",\"acronym_synonym_filter\"]",
+                    searchAnalyser.path("filter").toString(),
+                    "the possessive stemmer must run before acronym expansion at search time");
+            assertEquals("stemmer", possessiveStemmer.path("type").asText(),
+                    "english_possessive_stemmer must be declared before an analyser can reference it");
+            assertEquals("possessive_english", possessiveStemmer.path("language").asText());
 
             // Acronym expansion lives on dedicated synonyms sub-fields, kept off the primary
             // title/description fields so their analysis stays clean.
             JsonNode title = root.path("mappings").path("properties").path("title");
             assertFalse(title.has("search_analyzer"), "primary title must not carry the acronym analyzer");
-            assertEquals("acronym_search_analyser", title.path("fields").path("synonyms").path("search_analyzer").asText(),
+            JsonNode titleSynonyms = title.path("fields").path("synonyms");
+            assertEquals("acronym_index_analyser", titleSynonyms.path("analyzer").asText(),
+                    "title.synonyms sub-field should declare the acronym index analyzer");
+            assertEquals("acronym_search_analyser", titleSynonyms.path("search_analyzer").asText(),
                     "title.synonyms sub-field should declare the acronym search_analyzer");
 
             JsonNode desc = root.path("mappings").path("properties").path("description");
             assertFalse(desc.has("search_analyzer"), "primary description must not carry the acronym analyzer");
-            assertEquals("acronym_search_analyser", desc.path("fields").path("synonyms").path("search_analyzer").asText());
+            JsonNode descSynonyms = desc.path("fields").path("synonyms");
+            assertEquals("acronym_index_analyser", descSynonyms.path("analyzer").asText());
+            assertEquals("acronym_search_analyser", descSynonyms.path("search_analyzer").asText());
         }
     }
 

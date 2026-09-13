@@ -21,7 +21,10 @@
     "proj:geometry" : {
       "geometries" : [ {
         "type" : "Point",
-        "coordinates" : [ 130.58333, -12.10823 ]
+        "coordinates" : [ 130.58333, -12.10823 ],
+        "metadata" : {
+          "description" : "Beagle Gulf Buoy, Beagle Gulf"
+        }
       } ],
       "type" : "GeometryCollection"
     },

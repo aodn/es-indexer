@@ -67,6 +67,81 @@ public class GeometryBaseTest {
     }
 
     @Test
+    public void verifyBoundingBoxDescriptionAttachedWhenNotNull() {
+        EXGeographicBoundingBoxType boundingBoxType = new EXGeographicBoundingBoxType();
+
+        DecimalPropertyType w = new DecimalPropertyType();
+        w.setDecimal(BigDecimal.valueOf(60));
+        boundingBoxType.setWestBoundLongitude(w);
+
+        DecimalPropertyType s = new DecimalPropertyType();
+        s.setDecimal(BigDecimal.valueOf(-68));
+        boundingBoxType.setSouthBoundLatitude(s);
+
+        DecimalPropertyType e = new DecimalPropertyType();
+        e.setDecimal(BigDecimal.valueOf(78));
+        boundingBoxType.setEastBoundLongitude(e);
+
+        DecimalPropertyType n = new DecimalPropertyType();
+        n.setDecimal(BigDecimal.valueOf(-66));
+        boundingBoxType.setNorthBoundLatitude(n);
+
+        GeometryUtils.GeometryWithDescription input = new GeometryUtils.GeometryWithDescription(
+                "Southern extent",
+                java.util.List.of(boundingBoxType)
+        );
+
+        java.util.List<Geometry> geometries = GeometryBase.findPolygonsFromEXGeographicBoundingBoxType(
+                GeometryBase.COORDINATE_SYSTEM_CRS84,
+                input
+        );
+
+        assertNotNull(geometries);
+        assertEquals(1, geometries.size());
+        assertEquals("Southern extent", geometries.get(0).getUserData());
+
+        java.util.Map<?, ?> geoJson = GeometryUtils.createGeoShapeJson(java.util.List.of(geometries), true);
+        assertNotNull(geoJson);
+        java.util.List<java.util.Map<?, ?>> collection = (java.util.List<java.util.Map<?, ?>>) geoJson.get("geometries");
+        java.util.Map<?, ?> metadata = (java.util.Map<?, ?>) collection.get(0).get("metadata");
+        assertEquals("Southern extent", metadata.get("description"));
+    }
+
+    @Test
+    public void verifyBoundingBoxDescriptionSkippedWhenNull() {
+        EXGeographicBoundingBoxType boundingBoxType = new EXGeographicBoundingBoxType();
+
+        DecimalPropertyType w = new DecimalPropertyType();
+        w.setDecimal(BigDecimal.valueOf(60));
+        boundingBoxType.setWestBoundLongitude(w);
+
+        DecimalPropertyType s = new DecimalPropertyType();
+        s.setDecimal(BigDecimal.valueOf(-68));
+        boundingBoxType.setSouthBoundLatitude(s);
+
+        DecimalPropertyType e = new DecimalPropertyType();
+        e.setDecimal(BigDecimal.valueOf(78));
+        boundingBoxType.setEastBoundLongitude(e);
+
+        DecimalPropertyType n = new DecimalPropertyType();
+        n.setDecimal(BigDecimal.valueOf(-66));
+        boundingBoxType.setNorthBoundLatitude(n);
+
+        GeometryUtils.GeometryWithDescription input = new GeometryUtils.GeometryWithDescription(
+                null,
+                java.util.List.of(boundingBoxType)
+        );
+
+        java.util.List<Geometry> geometries = GeometryBase.findPolygonsFromEXGeographicBoundingBoxType(
+                GeometryBase.COORDINATE_SYSTEM_CRS84,
+                input
+        );
+
+        assertNotNull(geometries);
+        assertNull(geometries.get(0).getUserData());
+    }
+
+    @Test
     public void testIsCounterClockwise() {
         Coordinate[] ccwCoords = new Coordinate[] {
                 new Coordinate(0, 0),
@@ -85,14 +160,14 @@ public class GeometryBaseTest {
         };
 
         assertEquals(
-                GeometryUtils.orientation(ccwCoords),
                 GeometryUtils.PointOrientation.COUNTER_CLOCKWISE,
+                GeometryUtils.orientation(ccwCoords),
                 "CCW coords"
         );
 
         assertEquals(
-                GeometryUtils.orientation(cwCoords),
                 GeometryUtils.PointOrientation.CLOCKWISE,
+                GeometryUtils.orientation(cwCoords),
                 "CW coords"
         );
     }
@@ -133,15 +208,15 @@ public class GeometryBaseTest {
         Polygon cwPolygon = factory.createPolygon(cwRing);
 
         assertEquals(
-                GeometryUtils.orientation(cwCoords),
                 GeometryUtils.PointOrientation.CLOCKWISE,
+                GeometryUtils.orientation(cwCoords),
                 "CW"
         );
 
         Polygon ccwPolygon = GeometryUtils.ensureCounterClockwise(cwPolygon, factory);
         assertEquals(
-                GeometryUtils.orientation(ccwPolygon.getExteriorRing().getCoordinates()),
                 GeometryUtils.PointOrientation.COUNTER_CLOCKWISE,
+                GeometryUtils.orientation(ccwPolygon.getExteriorRing().getCoordinates()),
                 "CCW"
         );
 
@@ -158,8 +233,8 @@ public class GeometryBaseTest {
 
         Polygon ensuredCcwPolygon = GeometryUtils.ensureCounterClockwise(originalCcwPolygon, factory);
         assertEquals(
-                GeometryUtils.orientation(ensuredCcwPolygon.getExteriorRing().getCoordinates()),
                 GeometryUtils.PointOrientation.COUNTER_CLOCKWISE,
+                GeometryUtils.orientation(ensuredCcwPolygon.getExteriorRing().getCoordinates()),
                 "CCW"
         );
     }
@@ -182,8 +257,8 @@ public class GeometryBaseTest {
 
         Polygon ccwPolygon = GeometryUtils.ensureCounterClockwise(cwPolygon, factory);
         assertEquals(
-                GeometryUtils.orientation(ccwPolygon.getExteriorRing().getCoordinates()),
                 GeometryUtils.PointOrientation.COUNTER_CLOCKWISE,
+                GeometryUtils.orientation(ccwPolygon.getExteriorRing().getCoordinates()),
                 "CCW"
         );
     }
@@ -208,8 +283,8 @@ public class GeometryBaseTest {
 
         Polygon ccwPolygon = GeometryUtils.ensureCounterClockwise(cwPolygon, factory);
         assertEquals(
-                GeometryUtils.orientation(ccwPolygon.getExteriorRing().getCoordinates()),
                 GeometryUtils.PointOrientation.COUNTER_CLOCKWISE,
+                GeometryUtils.orientation(ccwPolygon.getExteriorRing().getCoordinates()),
                 "CCW"
         );
     }

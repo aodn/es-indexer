@@ -6,6 +6,7 @@ import au.org.aodn.esindexer.BaseTestClass;
 import au.org.aodn.esindexer.configuration.GeoNetworkSearchTestConfig;
 import au.org.aodn.esindexer.controller.IndexerController;
 import au.org.aodn.esindexer.model.MockServer;
+import co.elastic.clients.elasticsearch._types.query_dsl.Operator;
 import co.elastic.clients.elasticsearch.core.search.Hit;
 import co.elastic.clients.elasticsearch.indices.AnalyzeRequest;
 import co.elastic.clients.elasticsearch.indices.analyze.AnalyzeToken;
@@ -29,8 +30,9 @@ import java.util.List;
 /**
  * Acronym synonyms end-to-end: the manual rules from config (elasticsearch.acronyms.manual) flow
  * into the ES synonyms set and expand at search time. The test manual rules are "aa => aurora
- * australis", "soop => ships of opportunity", and the one-acronym-two-names pair "ams => australian
- * marine sciences" / "ams => antarctic meteorological service" (see application-test.yaml).
+ * australis", "soop => ships of opportunity", "aodc => australian oceanographic data centre", and
+ * the one-acronym-two-names pair "ams => australian marine sciences" / "ams => antarctic
+ * meteorological service" (see application-test.yaml).
  * The index (with the acronym schema and synonyms set) is built once in {@link #setup()}. Most tests
  * are read-only over it; the document-search test reindexes itself so suite-level mock pollution
  * cannot leave the portal index empty. {@link #cleanUp()} tears it down at the end.
@@ -146,7 +148,7 @@ public class AcronymServiceIT extends BaseTestClass {
         insertMetadataRecords(ACRONYM_SAMPLE_UUID, "classpath:canned/sample12.xml");
         indexerService.indexAllMetadataRecordsFromGeoNetwork(null, true, null);
 
-        var hits = searchAcronymField("aa");
+        var hits = searchAcronymField("title.synonyms", "aa", Operator.Or);
 
         Assertions.assertFalse(hits.isEmpty(),
                 "'aa' should expand to 'aurora australis' and match the record");
@@ -155,7 +157,7 @@ public class AcronymServiceIT extends BaseTestClass {
     /** "soop" must still expand, even though its full name "ships of opportunity" contains a stopword ("of"). */
     @Test
     public void acronymWithStopwordInExpansionStillExpands() throws IOException {
-        var tokens = analyzeTokens("soop");
+        var tokens = analyzeTokens("acronym_search_analyser", "soop");
 
         Assertions.assertTrue(tokens.contains("ships") && tokens.contains("opportunity"),
                 "'soop' should expand to 'ships of opportunity'; got " + tokens);
@@ -164,27 +166,45 @@ public class AcronymServiceIT extends BaseTestClass {
     /** One acronym, two full names: "ams" expands to BOTH at search time, so both full names' tokens appear. */
     @Test
     public void acronymWithMultipleFullNamesExpandsToAll() throws IOException {
-        var tokens = analyzeTokens("ams");
+        var tokens = analyzeTokens("acronym_search_analyser", "ams");
 
         Assertions.assertTrue(tokens.contains("marine") && tokens.contains("meteorological"),
                 "'ams' should expand to both 'australian marine sciences' and 'antarctic meteorological service'; got " + tokens);
     }
 
+    /** The full acronym expansion must match a final organisation token carrying a possessive in the document. */
+    @Test
+    public void acronymMatchesPossessiveOrganisationNameInDescription() throws IOException {
+        var hits = searchAcronymField("description.synonyms", "aodc", Operator.And);
+
+        Assertions.assertTrue(hits.stream().anyMatch(hit -> ACRONYM_SAMPLE_UUID.equals(hit.id())),
+                "'aodc' should match sample12's possessive organisation name via its full expansion");
+    }
+
+    /** Both apostrophe forms supported by Lucene must be removed by the index-time analyser. */
+    @Test
+    public void acronymIndexAnalyserStripsAsciiAndCurlyPossessives() throws IOException {
+        Assertions.assertEquals(List.of("authority"),
+                analyzeTokens("acronym_index_analyser", "Authority's"));
+        Assertions.assertEquals(List.of("authority"),
+                analyzeTokens("acronym_index_analyser", "Authority’s"));
+    }
+
     // ---- helpers ----
 
-    /** Search the given term against the acronym-aware title.synonyms sub-field. */
-    private List<Hit<ObjectNode>> searchAcronymField(String term) throws IOException {
+    /** Search the given term against an acronym-aware field with the requested match operator. */
+    private List<Hit<ObjectNode>> searchAcronymField(String field, String term, Operator operator) throws IOException {
         return client.search(s -> s
                 .index(INDEX_NAME)
-                .query(q -> q.match(m -> m.field("title.synonyms").query(term))), ObjectNode.class)
+                .query(q -> q.match(m -> m.field(field).query(term).operator(operator))), ObjectNode.class)
                 .hits().hits();
     }
 
-    /** Run the given text through the acronym_search_analyser and return the resulting tokens. */
-    private List<String> analyzeTokens(String text) throws IOException {
+    /** Run the given text through an analyser and return the resulting tokens. */
+    private List<String> analyzeTokens(String analyser, String text) throws IOException {
         AnalyzeRequest request = AnalyzeRequest.of(a -> a
                 .index(INDEX_NAME)
-                .analyzer("acronym_search_analyser")
+                .analyzer(analyser)
                 .text(text));
         return client.indices().analyze(request).tokens().stream()
                 .map(AnalyzeToken::token)

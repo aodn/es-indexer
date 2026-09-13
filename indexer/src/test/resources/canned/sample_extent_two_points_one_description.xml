@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Minimal record for description-on-geometry tests: one description shared by two points, plus a described box -->
+<mdb:MD_Metadata xmlns:mdb="http://standards.iso.org/iso/19115/-3/mdb/2.0"
+                 xmlns:mri="http://standards.iso.org/iso/19115/-3/mri/1.0"
+                 xmlns:gex="http://standards.iso.org/iso/19115/-3/gex/1.0"
+                 xmlns:mcc="http://standards.iso.org/iso/19115/-3/mcc/1.0"
+                 xmlns:cit="http://standards.iso.org/iso/19115/-3/cit/2.0"
+                 xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0">
+    <mdb:metadataIdentifier>
+        <mcc:MD_Identifier>
+            <mcc:code>
+                <gco:CharacterString>88050000-0000-4000-8000-000000000001</gco:CharacterString>
+            </mcc:code>
+        </mcc:MD_Identifier>
+    </mdb:metadataIdentifier>
+    <mdb:identificationInfo>
+        <mri:MD_DataIdentification>
+            <mri:citation>
+                <cit:CI_Citation>
+                    <cit:title>
+                        <gco:CharacterString>Two moorings and a survey box</gco:CharacterString>
+                    </cit:title>
+                </cit:CI_Citation>
+            </mri:citation>
+            <mri:extent>
+                <gex:EX_Extent>
+                    <gex:description>
+                        <gco:CharacterString>Two moorings</gco:CharacterString>
+                    </gex:description>
+                    <gex:geographicElement>
+                        <gex:EX_GeographicBoundingBox>
+                            <gex:westBoundLongitude><gco:Decimal>142.0</gco:Decimal></gex:westBoundLongitude>
+                            <gex:eastBoundLongitude><gco:Decimal>142.0</gco:Decimal></gex:eastBoundLongitude>
+                            <gex:southBoundLatitude><gco:Decimal>-19.0</gco:Decimal></gex:southBoundLatitude>
+                            <gex:northBoundLatitude><gco:Decimal>-19.0</gco:Decimal></gex:northBoundLatitude>
+                        </gex:EX_GeographicBoundingBox>
+                    </gex:geographicElement>
+                    <gex:geographicElement>
+                        <gex:EX_GeographicBoundingBox>
+                            <gex:westBoundLongitude><gco:Decimal>146.0</gco:Decimal></gex:westBoundLongitude>
+                            <gex:eastBoundLongitude><gco:Decimal>146.0</gco:Decimal></gex:eastBoundLongitude>
+                            <gex:southBoundLatitude><gco:Decimal>-10.0</gco:Decimal></gex:southBoundLatitude>
+                            <gex:northBoundLatitude><gco:Decimal>-10.0</gco:Decimal></gex:northBoundLatitude>
+                        </gex:EX_GeographicBoundingBox>
+                    </gex:geographicElement>
+                </gex:EX_Extent>
+            </mri:extent>
+            <mri:extent>
+                <gex:EX_Extent>
+                    <gex:description>
+                        <gco:CharacterString>Survey box</gco:CharacterString>
+                    </gex:description>
+                    <gex:geographicElement>
+                        <gex:EX_GeographicBoundingBox>
+                            <gex:westBoundLongitude><gco:Decimal>150.0</gco:Decimal></gex:westBoundLongitude>
+                            <gex:eastBoundLongitude><gco:Decimal>151.0</gco:Decimal></gex:eastBoundLongitude>
+                            <gex:southBoundLatitude><gco:Decimal>-21.0</gco:Decimal></gex:southBoundLatitude>
+                            <gex:northBoundLatitude><gco:Decimal>-20.0</gco:Decimal></gex:northBoundLatitude>
+                        </gex:EX_GeographicBoundingBox>
+                    </gex:geographicElement>
+                </gex:EX_Extent>
+            </mri:extent>
+        </mri:MD_DataIdentification>
+    </mdb:identificationInfo>
+</mdb:MD_Metadata>

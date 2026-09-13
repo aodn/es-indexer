@@ -20,7 +20,10 @@
     "proj:geometry" : {
       "geometries" : [ {
         "type" : "Polygon",
-        "coordinates" : [ [ [ 136.1866, -16.0337 ], [ 137.2787, -16.0337 ], [ 137.2787, -15.3817 ], [ 136.1866, -15.3817 ], [ 136.1866, -16.0337 ] ] ]
+        "coordinates" : [ [ [ 136.1866, -16.0337 ], [ 137.2787, -16.0337 ], [ 137.2787, -15.3817 ], [ 136.1866, -15.3817 ], [ 136.1866, -16.0337 ] ] ],
+        "metadata" : {
+          "description" : "Benthic habitats were surveyed in Yanyuwa Sea Country, Northern Territory, Australia. Survey sites and mapped seagrass meadows are provided as GIS shapefiles."
+        }
       } ],
       "type" : "GeometryCollection"
     },
