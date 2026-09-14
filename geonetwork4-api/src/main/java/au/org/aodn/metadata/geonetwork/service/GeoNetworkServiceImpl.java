@@ -485,7 +485,8 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
                     HttpClientErrorException.BadRequest.class,
                     HttpServerErrorException.BadGateway.class,
                     HttpServerErrorException.GatewayTimeout.class,
-                    HttpServerErrorException.ServiceUnavailable.class
+                    HttpServerErrorException.ServiceUnavailable.class,
+                    RuntimeException.class
             },
             maxAttempts = 10,
             backoff = @Backoff(delay = 1500L)
