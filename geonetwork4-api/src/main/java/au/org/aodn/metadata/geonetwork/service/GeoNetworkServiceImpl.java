@@ -123,28 +123,25 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
 
         if(response.hits() != null && response.hits().hits() != null && !response.hits().hits().isEmpty()) {
             // UUID should result in only 1 record, hence get(0) is ok.
-            String group = response.hits().hits().get(0).source().get(GEONETWORK_GROUP).asText();
+            ObjectNode source = response.hits().hits().get(0).source();
+            if (source != null) {
+                String group = source.get(GEONETWORK_GROUP).asText();
 
-            Map<String, Object> params = new HashMap<>();
-            params.put("id", group);
+                Map<String, Object> params = new HashMap<>();
+                params.put("id", group);
 
-            ResponseEntity<JsonNode> responseEntity = indexerRestTemplate.exchange(
-                    getGeoNetworkGroupsEndpoint(),
-                    HttpMethod.GET,
-                    defaultRequestEntity,
-                    JsonNode.class, params);
+                ResponseEntity<JsonNode> responseEntity = indexerRestTemplate.exchange(
+                        getGeoNetworkGroupsEndpoint(),
+                        HttpMethod.GET,
+                        defaultRequestEntity,
+                        JsonNode.class, params);
 
-            if(responseEntity.getStatusCode().is2xxSuccessful()) {
-                return Objects.requireNonNull(responseEntity.getBody()).get("name").asText();
-            }
-            else {
-                return null;
+                if (responseEntity.getStatusCode().is2xxSuccessful()) {
+                    return Objects.requireNonNull(responseEntity.getBody()).get("name").asText();
+                }
             }
         }
-        else {
-            return null;
-        }
-
+        return null;
     }
     /**
      * The category is set by the geonetwork harvester using GN3 protocol, it is use to identify which portal the record
@@ -251,7 +248,12 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
     }
 
     @Retryable(
-            retryFor = {HttpClientErrorException.BadRequest.class, HttpServerErrorException.ServiceUnavailable.class},
+            retryFor = {
+                    HttpClientErrorException.BadRequest.class,
+                    HttpServerErrorException.BadGateway.class,
+                    HttpServerErrorException.GatewayTimeout.class,
+                    HttpServerErrorException.ServiceUnavailable.class
+            },
             maxAttempts = 10,
             backoff = @Backoff(delay = DEFAULT_BACKOFF_TIME, multiplier = 2.0)
     )
@@ -300,7 +302,12 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
      * 75%, it will throw BadRequest exception if we push it too hard, so we need to retry on bad request
      */
     @Retryable(
-            retryFor = {HttpClientErrorException.BadRequest.class, HttpServerErrorException.ServiceUnavailable.class},
+            retryFor = {
+                    HttpClientErrorException.BadRequest.class,
+                    HttpServerErrorException.BadGateway.class,
+                    HttpServerErrorException.GatewayTimeout.class,
+                    HttpServerErrorException.ServiceUnavailable.class
+            },
             maxAttempts = 10,
             backoff = @Backoff(delay = DEFAULT_BACKOFF_TIME, multiplier = 2.0)
     )
@@ -347,7 +354,12 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
      * @return - The formatterId of the record, if not found, return XML
      */
     @Retryable(
-            retryFor = HttpServerErrorException.ServiceUnavailable.class,
+            retryFor = {
+                    HttpClientErrorException.BadRequest.class,
+                    HttpServerErrorException.BadGateway.class,
+                    HttpServerErrorException.GatewayTimeout.class,
+                    HttpServerErrorException.ServiceUnavailable.class
+            },
             maxAttempts = 10,
             backoff = @Backoff(delay = DEFAULT_BACKOFF_TIME, multiplier = 2.0)
     )
@@ -392,6 +404,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
             retryFor = {
                     HttpClientErrorException.BadRequest.class,
                     HttpServerErrorException.BadGateway.class,
+                    HttpServerErrorException.GatewayTimeout.class,
                     HttpServerErrorException.ServiceUnavailable.class
             },
             maxAttempts = 10,
@@ -468,7 +481,13 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
      * 75%, it will throw BadRequest exception if we push it too hard, so we need to retry on bad request
      */
     @Retryable(
-            retryFor = {HttpClientErrorException.BadRequest.class, RuntimeException.class},
+            retryFor = {
+                    HttpClientErrorException.BadRequest.class,
+                    HttpServerErrorException.BadGateway.class,
+                    HttpServerErrorException.GatewayTimeout.class,
+                    HttpServerErrorException.ServiceUnavailable.class,
+                    RuntimeException.class
+            },
             maxAttempts = 10,
             backoff = @Backoff(delay = 1500L)
     )
@@ -553,9 +572,9 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
                     }
 
                     private String getUUID(int index) {
-                        if(response.get().hits().hits().get(index).source() != null
-                            && response.get().hits().hits().get(index).source().has(UUID)) {
-                            return response.get().hits().hits().get(index).source().get(UUID).asText();
+                        ObjectNode source = response.get().hits().hits().get(index).source();
+                        if(source != null && source.has(UUID)) {
+                            return source.get(UUID).asText();
                         }
                         return null;
                     }
