@@ -226,7 +226,7 @@
       "summaries": {
         "properties": {
           "ai:description": {
-            "type": "keyword",
+            "type": "text",
             "index": false
           },
           "ai:update_frequency": {
