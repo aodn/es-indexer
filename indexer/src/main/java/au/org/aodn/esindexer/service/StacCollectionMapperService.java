@@ -20,9 +20,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
-
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
@@ -623,7 +620,7 @@ public abstract class StacCollectionMapperService {
                         .toList();
             }
         }
-        catch (HttpClientErrorException.NotFound | IOException e) {
+        catch (Exception e) {
             logger.warn("Unable to find group for UUID: {}", uuid, e);
         }
         return null;
