@@ -47,8 +47,6 @@ elasticsearch:
     name: portal_records
   vocabs_index:
     name: vocabs_index
-  cloud_optimized_index:
-    name: es-coindexer-dev
   analyser:
     tokens:
       name: shingle_analyser

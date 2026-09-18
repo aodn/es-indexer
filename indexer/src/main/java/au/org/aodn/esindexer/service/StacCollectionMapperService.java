@@ -20,8 +20,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
-
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
@@ -612,8 +610,9 @@ public abstract class StacCollectionMapperService {
      */
     @Named("mapSummaries.datasetGroup")
     List<String> mapGeoNetworkGroup(MDMetadataType source) {
+        String uuid = CommonUtils.getUUID(source);
         try {
-            String group = geoNetworkService.findGroupById(CommonUtils.getUUID(source));
+            String group = geoNetworkService.findGroupById(uuid);
             if(group != null) {
                 // The group name can represent multiple group if it is comma separated
                 return Arrays.stream(group.toLowerCase().split(","))
@@ -621,8 +620,8 @@ public abstract class StacCollectionMapperService {
                         .toList();
             }
         }
-        catch (IOException e) {
-            // Do nothing return null
+        catch (Exception e) {
+            logger.warn("Unable to find group for UUID: {}", uuid, e);
         }
         return null;
     }
