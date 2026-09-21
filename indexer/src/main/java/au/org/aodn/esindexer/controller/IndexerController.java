@@ -24,12 +24,13 @@ import software.amazon.awssdk.services.batch.model.KeyValuePair;
 import software.amazon.awssdk.services.batch.model.SubmitJobRequest;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.*;
 
 @RestController
 @RequestMapping(value = "/api/v1/indexer/index")
-@Tag(name="Indexer", description = "The Indexer API")
+@Tag(name = "Indexer", description = "The Indexer API")
 @Slf4j
 public class IndexerController {
 
@@ -45,35 +46,36 @@ public class IndexerController {
     @Autowired
     AcronymService acronymService;
 
-    @GetMapping(path="/records/{uuid}", produces = "application/json")
+    @GetMapping(path = "/records/{uuid}", produces = "application/json")
     @Operation(description = "Get a document from GeoNetwork by UUID directly - JSON format response")
     public ResponseEntity<String> getMetadataRecordFromGeoNetworkByUUID(@PathVariable("uuid") String uuid) {
         log.info("getting a document from geonetwork by UUID: {}", uuid);
-        String response =  geonetworkResourceService.searchRecordBy(uuid);
+        String response = geonetworkResourceService.searchRecordBy(uuid);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @GetMapping(path="/{uuid}", produces = "application/json")
+    @GetMapping(path = "/{uuid}", produces = "application/json")
     @Operation(description = "Get a document from portal index by UUID")
     public ResponseEntity<ObjectNode> getDocumentByUUID(@PathVariable("uuid") String uuid) throws IOException {
         log.info("getting a document form portal by UUID: {}", uuid);
-        ObjectNode response =  indexerMetadata.getDocumentByUUID(uuid).source();
+        ObjectNode response = indexerMetadata.getDocumentByUUID(uuid).source();
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
+
     /**
      * A synchronized load operation, useful for local run but likely fail in cloud due to gateway time out. No response
      * come back unlike everything done. Please use async load with postman if you want feedback constantly.
      *
-     * @param confirm - Must set to true to begin load
+     * @param confirm       - Must set to true to begin load
      * @param beginWithUuid - You want to start load with particular uuid, it is useful for resume previous incomplete reload
      * @return A string contains all ingested record status
      * @throws IOException - Any failure during reload, it is the called to handle the error
      */
-    @PostMapping(path="/all", consumes = "application/json", produces = "application/json")
-    @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Index all metadata records from GeoNetwork")
+    @PostMapping(path = "/all", consumes = "application/json", produces = "application/json")
+    @Operation(security = {@SecurityRequirement(name = "X-API-Key")}, description = "Index all metadata records from GeoNetwork")
     public ResponseEntity<String> indexAllMetadataRecords(
             @RequestParam(value = "confirm", defaultValue = "false") Boolean confirm,
-            @RequestParam(value = "beginWithUuid", required=false) String beginWithUuid) throws IOException {
+            @RequestParam(value = "beginWithUuid", required = false) String beginWithUuid) throws IOException {
 
         List<BulkResponse> responses = indexerMetadata.indexAllMetadataRecordsFromGeoNetwork(beginWithUuid, confirm, null);
         return ResponseEntity.ok(responses.toString());
@@ -82,10 +84,11 @@ public class IndexerController {
     /**
      * Build the acronyms from the Organisation vocab (vocabs_index) and push them into the ES
      * synonyms set, live (no reindex). Overwrites the set.
+     *
      * @return A confirmation message
      */
-    @PostMapping(path="/acronyms", produces = "application/json")
-    @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Build acronyms from the Organisation vocab and push them into the ES synonyms set (live, no reindex)")
+    @PostMapping(path = "/acronyms", produces = "application/json")
+    @Operation(security = {@SecurityRequirement(name = "X-API-Key")}, description = "Build acronyms from the Organisation vocab and push them into the ES synonyms set (live, no reindex)")
     public ResponseEntity<AcronymService.AcronymSyncResult> syncAcronyms() throws IOException {
         log.info("pushing acronym synonyms set from the Organisation vocab");
         int pushed = acronymService.pushAcronymListToElasticsearch();
@@ -99,10 +102,11 @@ public class IndexerController {
     /**
      * Read-only preview of the acronym rules from the Organisation vocab (vocabs_index). Nothing is
      * pushed; the synonyms set is left untouched. Use it to check the rules before POST /acronyms.
+     *
      * @return The "short => long" rules
      */
-    @GetMapping(path="/acronyms/preview", produces = "application/json")
-    @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Preview acronym rules from the Organisation vocab (read-only, nothing is pushed)")
+    @GetMapping(path = "/acronyms/preview", produces = "application/json")
+    @Operation(security = {@SecurityRequirement(name = "X-API-Key")}, description = "Preview acronym rules from the Organisation vocab (read-only, nothing is pushed)")
     public ResponseEntity<AcronymService.AcronymPreview> previewAcronyms() throws IOException {
         log.info("previewing acronym synonyms from the Organisation vocab");
         return ResponseEntity.ok(acronymService.previewAcronyms());
@@ -111,10 +115,11 @@ public class IndexerController {
     /**
      * Show the acronym rules currently live in the ES synonyms set (what search uses now);
      * /acronyms/preview shows what a push would write instead.
+     *
      * @return The "short => long" rules live in the synonyms set
      */
-    @GetMapping(path="/acronyms/current", produces = "application/json")
-    @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Show the acronym rules currently live in the ES synonyms set (read-only)")
+    @GetMapping(path = "/acronyms/current", produces = "application/json")
+    @Operation(security = {@SecurityRequirement(name = "X-API-Key")}, description = "Show the acronym rules currently live in the ES synonyms set (read-only)")
     public ResponseEntity<AcronymService.AcronymCurrent> currentAcronyms() throws IOException {
         log.info("reading the acronym synonyms set currently live in ES");
         return ResponseEntity.ok(acronymService.currentAcronyms());
@@ -122,15 +127,16 @@ public class IndexerController {
 
     /**
      * index all metadata records in aws batch, it is to prevent aws to gracefully shutdown ecs instance and cause some unexpected issues.
-     * @param confirm - Must set to true to begin a load
+     *
+     * @param confirm       - Must set to true to begin a load
      * @param beginWithUuid - You want to start load from a particular uuid, it is useful for resume previous incomplete
      * @return - The job result
      */
-    @PostMapping(path="/allinbatch", consumes = "application/json", produces = "application/json")
-    @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Index all metadata records from GeoNetwork in aws batch")
+    @PostMapping(path = "/allinbatch", consumes = "application/json", produces = "application/json")
+    @Operation(security = {@SecurityRequirement(name = "X-API-Key")}, description = "Index all metadata records from GeoNetwork in aws batch")
     public ResponseEntity<String> indexAllMetadataRecordsInBatch(
             @RequestParam(value = "confirm", defaultValue = "false") Boolean confirm,
-            @RequestParam(value = "beginWithUuid", required=false) String beginWithUuid) {
+            @RequestParam(value = "beginWithUuid", required = false) String beginWithUuid) {
 
         if (!confirm) {
             return ResponseEntity.badRequest().body("You must set confirm to true to really index all metadata records in batch");
@@ -164,20 +170,58 @@ public class IndexerController {
     }
 
     /**
+     * Trigger the pmtiles generation in aws batch. The job is run by the data-access-service image, its entry_point.py
+     * reads the job "parameters" (not env variables like the metadata indexing job) and dispatch on the "type" value.
+     *
+     * @param confirm - Must set to true to really submit the job
+     * @param uuid    - Optional, generate pmtiles for this dataset only, otherwise all parquet datasets are processed
+     * @return - The job result
+     */
+    @PostMapping(path = "/pmtilesinbatch", consumes = "application/json", produces = "application/json")
+    @Operation(security = {@SecurityRequirement(name = "X-API-Key")}, description = "Generate pmtiles for the parquet datasets in aws batch")
+    public ResponseEntity<String> generatePmTilesInBatch(
+            @RequestParam(value = "confirm", defaultValue = "false") Boolean confirm,
+            @RequestParam(value = "uuid", required = false) String uuid) {
+
+        if (!confirm) {
+            return ResponseEntity.badRequest().body("You must set confirm to true to really generate the pmtiles in batch");
+        }
+
+        // The data-access-service entry_point.py switches on "type", and use "uuid" to limit the run to one dataset
+        var parameters = new HashMap<String, String>();
+        parameters.put("type", "generate-pmtiles-for-parquet");
+
+        if (uuid != null && !uuid.isBlank()) {
+            parameters.put("uuid", uuid.trim());
+        }
+
+        var request = SubmitJobRequest.builder()
+                .jobName("generate-pmtiles")
+                .jobQueue("pmtiles-batch-job-queue")
+                .jobDefinition("pmtiles-batch-job-definition")
+                .parameters(parameters)
+                .build();
+
+        var response = batchClient.submitJob(request);
+
+        return ResponseEntity.ok("Job submitted with jobId: " + response.jobId() + ", parameters: " + parameters);
+    }
+
+    /**
      * Emit result to FE so it will not result in gateway time-out. You need to run it with postman or whatever tools
      * support server side event, the content type needs to be text/event-stream in order to work
      * Noted: There is a bug in postman desktop, so either you run postman using web-browser with agent directly
      * or you need to have version 10.2 or above in order to get the emitted result
      *
-     * @param confirm - Must set to true to begin load
+     * @param confirm       - Must set to true to begin load
      * @param beginWithUuid - You want to start load with particular uuid, it is useful for resume previous incomplete reload
      * @return The SSeEmitter for status update, you can use it to tell which record is being ingested and ingest status.
      */
-    @PostMapping(path="/async/all")
-    @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Index all metadata records from GeoNetwork")
+    @PostMapping(path = "/async/all")
+    @Operation(security = {@SecurityRequirement(name = "X-API-Key")}, description = "Index all metadata records from GeoNetwork")
     public SseEmitter indexAllMetadataRecordsAsync(
             @RequestParam(value = "confirm", defaultValue = "false") Boolean confirm,
-            @RequestParam(value = "beginWithUuid", required=false) String beginWithUuid) {
+            @RequestParam(value = "beginWithUuid", required = false) String beginWithUuid) {
 
         final SseEmitter emitter = new SseEmitter(0L); // 0L means no timeout;
         final IndexService.Callback callback = createCallback(emitter);
@@ -185,26 +229,26 @@ public class IndexerController {
         new Thread(() -> {
             try {
                 indexerMetadata.indexAllMetadataRecordsFromGeoNetwork(beginWithUuid, confirm, callback);
-            }
-            catch(IOException e) {
+            } catch (IOException e) {
                 emitter.completeWithError(e);
             }
         }).start();
 
         return emitter;
     }
+
     /**
      *
      * @param uuid - The UUID of the metadata
      * @return - No use
-     * @throws IOException - No use
-     * @throws FactoryException - No use
-     * @throws JAXBException - No use
-     * @throws TransformException - No use
+     * @throws IOException          - No use
+     * @throws FactoryException     - No use
+     * @throws JAXBException        - No use
+     * @throws TransformException   - No use
      * @throws InterruptedException - No use
      */
-    @PostMapping(path="/{uuid}", produces = "application/json")
-    @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Index a metadata record by UUID")
+    @PostMapping(path = "/{uuid}", produces = "application/json")
+    @Operation(security = {@SecurityRequirement(name = "X-API-Key")}, description = "Index a metadata record by UUID")
     public ResponseEntity<String> addDocumentByUUID(
             @PathVariable("uuid") String uuid) throws IOException, FactoryException, JAXBException, TransformException {
 
@@ -214,8 +258,8 @@ public class IndexerController {
         return f.join();
     }
 
-    @DeleteMapping(path="/{uuid}", produces = "application/json")
-    @Operation(security = { @SecurityRequirement(name = "X-API-Key") }, description = "Delete a metadata record by UUID")
+    @DeleteMapping(path = "/{uuid}", produces = "application/json")
+    @Operation(security = {@SecurityRequirement(name = "X-API-Key")}, description = "Delete a metadata record by UUID")
     public ResponseEntity<String> deleteDocumentByUUID(@PathVariable("uuid") String uuid) throws IOException {
         return indexerMetadata.deleteDocumentByUUID(uuid);
     }
