@@ -18,8 +18,10 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 import reactor.core.publisher.Flux;
 
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -97,7 +99,15 @@ public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
                     .onStatus(
                         status -> status.isError(),
                         response -> response.bodyToMono(String.class)
-                                .map(body -> new RuntimeException("API error: " + response.statusCode() + " - " + body))
+                                .defaultIfEmpty("")
+                                // Typed so a transient failure (e.g. 503 "models: STARTING" while the AI
+                                // service loads its models) can be told apart from a real error below.
+                                .map(body -> WebClientResponseException.create(
+                                        response.statusCode().value(),
+                                        "API error: " + response.statusCode() + " - " + body,
+                                        response.headers().asHttpHeaders(),
+                                        body.getBytes(StandardCharsets.UTF_8),
+                                        StandardCharsets.UTF_8))
                     )
                     .bodyToFlux(new ParameterizedTypeReference<ServerSentEvent<String>>() {});
 
@@ -120,6 +130,18 @@ public class DataDiscoveryAiServiceImpl implements DataDiscoveryAiService {
                 return null;
             }
 
+        } catch (WebClientResponseException e) {
+            if (e.getStatusCode().is5xxServerError() || e.getStatusCode().value() == HttpStatus.TOO_MANY_REQUESTS.value()) {
+                // Not an error: the AI service is warming up or briefly overloaded, so this record is
+                // simply indexed without AI enhancement. No stack trace, same convention as
+                // DataAccessServiceImpl.rethrowIfRetryable.
+                log.warn("Data Discovery AI service temporary failure for UUID: {} - Status: {}, Response: {}",
+                        uuid, e.getStatusCode(), e.getResponseBodyAsString());
+            } else {
+                log.error("Client error when calling Data Discovery AI service for UUID: {} - Status: {}, Response: {}",
+                        uuid, e.getStatusCode(), e.getResponseBodyAsString());
+            }
+            return null;
         } catch (HttpClientErrorException e) {
             log.error("Client error when calling Data Discovery AI service for UUID: {} - Status: {}, Response: {}",
                     uuid, e.getStatusCode(), e.getResponseBodyAsString());
