@@ -395,6 +395,9 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
                 log.warn("Failed to enhance STAC collection with AI for UUID: {}", uuid, e);
             }
         }
+        else{
+            log.warn("Data Discovery AI service not available. Failed to enhance STAC collection with AI for UUID: {}", uuid);
+        }
     }
 
     private List<String> extractOrderedLabels(VocabModel vocabModel) {
