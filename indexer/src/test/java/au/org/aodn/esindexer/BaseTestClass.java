@@ -320,11 +320,10 @@ public class BaseTestClass {
     private boolean delete(String uuid, HttpEntity<String> requestEntity) {
         logger.info("Deleting GN doc {}", uuid);
         try {
-            // Delete by query basically does a search for the objects to delete and
-            // then deletes them with version conflict checking. Without a _refresh
-            // in between, the search done by _delete_by_query might return the
-            // old version of the document, leading to a version conflict when
-            // the delete is attempted.
+            // Delete by query searches, then deletes that exact sequence number. Wait until the
+            // reindex that just ran has stopped writing, otherwise the search still holds the
+            // previous seqNo and Elasticsearch returns 409.
+            awaitGeoNetworkSearchable(false);
 
             ResponseEntity<String> response = testRestTemplate
                     .exchange(
