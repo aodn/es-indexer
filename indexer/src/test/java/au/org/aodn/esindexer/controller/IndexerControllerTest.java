@@ -22,7 +22,7 @@ class IndexerControllerTest {
     private BatchClient batchClient;
 
     @InjectMocks
-    private IndexerController indexerController;
+    private BatchController batchController;
 
     @Captor
     private ArgumentCaptor<SubmitJobRequest> requestCaptor;
@@ -39,7 +39,7 @@ class IndexerControllerTest {
 
     @Test
     void generatePmTilesInBatchWithoutConfirmShouldNotSubmit() {
-        var response = indexerController.generatePmTilesInBatch(false, null);
+        var response = batchController.generatePmTilesInBatch(false, null);
 
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
         verify(batchClient, never()).submitJob(any(SubmitJobRequest.class));
@@ -49,7 +49,7 @@ class IndexerControllerTest {
     void generatePmTilesInBatchWithoutUuidShouldSubmitForAllDatasets() {
         mockSubmitJob();
 
-        var response = indexerController.generatePmTilesInBatch(true, null);
+        var response = batchController.generatePmTilesInBatch(true, null);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertTrue(response.getBody().contains("job-1"));
@@ -69,7 +69,7 @@ class IndexerControllerTest {
     void generatePmTilesInBatchWithUuidShouldSubmitForThatUuidOnly() {
         mockSubmitJob();
 
-        var response = indexerController.generatePmTilesInBatch(true, "  abc-123  ");
+        var response = batchController.generatePmTilesInBatch(true, "  abc-123  ");
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
 
@@ -84,7 +84,7 @@ class IndexerControllerTest {
     void generatePmTilesInBatchWithBlankUuidShouldSubmitForAllDatasets() {
         mockSubmitJob();
 
-        indexerController.generatePmTilesInBatch(true, "   ");
+        batchController.generatePmTilesInBatch(true, "   ");
 
         verify(batchClient).submitJob(requestCaptor.capture());
         assertFalse(requestCaptor.getValue().parameters().containsKey("uuid"));

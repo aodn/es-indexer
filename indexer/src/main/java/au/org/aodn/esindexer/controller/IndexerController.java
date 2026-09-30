@@ -5,7 +5,6 @@ import au.org.aodn.esindexer.service.IndexService;
 import au.org.aodn.esindexer.service.AcronymService;
 import au.org.aodn.esindexer.service.IndexerMetadataService;
 import au.org.aodn.metadata.geonetwork.service.GeoNetworkService;
-import co.elastic.clients.elasticsearch.core.BulkResponse;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -19,13 +18,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
-import software.amazon.awssdk.services.batch.BatchClient;
-import software.amazon.awssdk.services.batch.model.KeyValuePair;
-import software.amazon.awssdk.services.batch.model.SubmitJobRequest;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
 import java.util.concurrent.*;
 
 @RestController
@@ -39,9 +33,6 @@ public class IndexerController {
 
     @Autowired
     GeoNetworkService geonetworkResourceService;
-
-    @Autowired
-    BatchClient batchClient;
 
     @Autowired
     AcronymService acronymService;
@@ -61,26 +52,6 @@ public class IndexerController {
         ObjectNode response = indexerMetadata.getDocumentByUUID(uuid).source();
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
-
-    /**
-     * A synchronized load operation, useful for local run but likely fail in cloud due to gateway time out. No response
-     * come back unlike everything done. Please use async load with postman if you want feedback constantly.
-     *
-     * @param confirm       - Must set to true to begin load
-     * @param beginWithUuid - You want to start load with particular uuid, it is useful for resume previous incomplete reload
-     * @return A string contains all ingested record status
-     * @throws IOException - Any failure during reload, it is the called to handle the error
-     */
-    @PostMapping(path = "/all", consumes = "application/json", produces = "application/json")
-    @Operation(security = {@SecurityRequirement(name = "X-API-Key")}, description = "Index all metadata records from GeoNetwork")
-    public ResponseEntity<String> indexAllMetadataRecords(
-            @RequestParam(value = "confirm", defaultValue = "false") Boolean confirm,
-            @RequestParam(value = "beginWithUuid", required = false) String beginWithUuid) throws IOException {
-
-        List<BulkResponse> responses = indexerMetadata.indexAllMetadataRecordsFromGeoNetwork(beginWithUuid, confirm, null);
-        return ResponseEntity.ok(responses.toString());
-    }
-
     /**
      * Build the acronyms from the Organisation vocab (vocabs_index) and push them into the ES
      * synonyms set, live (no reindex). Overwrites the set.
@@ -98,7 +69,6 @@ public class IndexerController {
         return ResponseEntity.ok(new AcronymService.AcronymSyncResult(
                 acronymService.getSynonymSetName(), pushed, message));
     }
-
     /**
      * Read-only preview of the acronym rules from the Organisation vocab (vocabs_index). Nothing is
      * pushed; the synonyms set is left untouched. Use it to check the rules before POST /acronyms.
@@ -111,7 +81,6 @@ public class IndexerController {
         log.info("previewing acronym synonyms from the Organisation vocab");
         return ResponseEntity.ok(acronymService.previewAcronyms());
     }
-
     /**
      * Show the acronym rules currently live in the ES synonyms set (what search uses now);
      * /acronyms/preview shows what a push would write instead.
@@ -124,89 +93,6 @@ public class IndexerController {
         log.info("reading the acronym synonyms set currently live in ES");
         return ResponseEntity.ok(acronymService.currentAcronyms());
     }
-
-    /**
-     * index all metadata records in aws batch, it is to prevent aws to gracefully shutdown ecs instance and cause some unexpected issues.
-     *
-     * @param confirm       - Must set to true to begin a load
-     * @param beginWithUuid - You want to start load from a particular uuid, it is useful for resume previous incomplete
-     * @return - The job result
-     */
-    @PostMapping(path = "/allinbatch", consumes = "application/json", produces = "application/json")
-    @Operation(security = {@SecurityRequirement(name = "X-API-Key")}, description = "Index all metadata records from GeoNetwork in aws batch")
-    public ResponseEntity<String> indexAllMetadataRecordsInBatch(
-            @RequestParam(value = "confirm", defaultValue = "false") Boolean confirm,
-            @RequestParam(value = "beginWithUuid", required = false) String beginWithUuid) {
-
-        if (!confirm) {
-            return ResponseEntity.badRequest().body("You must set confirm to true to really index all metadata records in batch");
-        }
-
-        // Build the APP_ARGS value based on parameters
-        String appArgs = beginWithUuid != null
-                ? "--batch --jobName=indexAllMetadataFromUuid --jobParam=" + beginWithUuid
-                : "--batch --jobName=indexAllMetadata";
-
-        var envVariables = List.of(
-                KeyValuePair.builder()
-                        .name("APP_ARGS")
-                        .value(appArgs)
-                        .build()
-        );
-
-        var request = SubmitJobRequest.builder()
-                .jobName("index-all-metadata-records")
-                .jobQueue("indexing-queue")
-                // this is the same as in AWS batch job definition to be used
-                .jobDefinition("es-indexer-metadata-indexing-job-definition")
-                .containerOverrides(override -> override
-                        .environment(envVariables)
-                )
-                .build();
-
-        var response = batchClient.submitJob(request);
-
-        return ResponseEntity.ok("Job submitted with jobId: " + response.jobId() + ", APP_ARGS: " + appArgs);
-    }
-
-    /**
-     * Trigger the pmtiles generation in aws batch. The job is run by the data-access-service image, its entry_point.py
-     * reads the job "parameters" (not env variables like the metadata indexing job) and dispatch on the "type" value.
-     *
-     * @param confirm - Must set to true to really submit the job
-     * @param uuid    - Optional, generate pmtiles for this dataset only, otherwise all parquet datasets are processed
-     * @return - The job result
-     */
-    @PostMapping(path = "/pmtilesinbatch", consumes = "application/json", produces = "application/json")
-    @Operation(security = {@SecurityRequirement(name = "X-API-Key")}, description = "Generate pmtiles for the parquet datasets in aws batch")
-    public ResponseEntity<String> generatePmTilesInBatch(
-            @RequestParam(value = "confirm", defaultValue = "false") Boolean confirm,
-            @RequestParam(value = "uuid", required = false) String uuid) {
-
-        if (!confirm) {
-            return ResponseEntity.badRequest().body("You must set confirm to true to really generate the pmtiles in batch");
-        }
-
-        // The data-access-service entry_point.py switches on "type", and use "uuid" to limit the run to one dataset
-        var parameters = new HashMap<String, String>();
-        parameters.put("type", "generate-pmtiles-for-parquet");
-
-        if (uuid != null && !uuid.isBlank()) {
-            parameters.put("uuid", uuid.trim());
-        }
-
-        var request = SubmitJobRequest.builder()
-                .jobName("generate-pmtiles")
-                .jobQueue("pmtiles-batch-job-queue")
-                .jobDefinition("pmtiles-batch-job-definition")
-                .parameters(parameters)
-                .build();
-
-        var response = batchClient.submitJob(request);
-
-        return ResponseEntity.ok("Job submitted with jobId: " + response.jobId() + ", parameters: " + parameters);
-    }
-
     /**
      * Emit result to FE so it will not result in gateway time-out. You need to run it with postman or whatever tools
      * support server side event, the content type needs to be text/event-stream in order to work
@@ -236,7 +122,6 @@ public class IndexerController {
 
         return emitter;
     }
-
     /**
      *
      * @param uuid - The UUID of the metadata
@@ -245,7 +130,6 @@ public class IndexerController {
      * @throws FactoryException     - No use
      * @throws JAXBException        - No use
      * @throws TransformException   - No use
-     * @throws InterruptedException - No use
      */
     @PostMapping(path = "/{uuid}", produces = "application/json")
     @Operation(security = {@SecurityRequirement(name = "X-API-Key")}, description = "Index a metadata record by UUID")
