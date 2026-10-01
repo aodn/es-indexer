@@ -908,8 +908,15 @@ public abstract class StacCollectionMapperService {
     }
 
     private List<LinkModel> getAssociatedRecords(MDMetadataType source) {
-        var associatedRecordsData = geoNetworkService.getAssociatedRecords(CommonUtils.getUUID(source));
-        return AssociatedRecordsUtil.generateAssociatedRecords(associatedRecordsData);
+        var uuid = CommonUtils.getUUID(source);
+        var associatedRecordsData = geoNetworkService.getAssociatedRecords(uuid);
+        // Records filtered out by the harvester only exist in the source geonetwork
+        var harvestSourceUri = geoNetworkService.getHarvestSourceUri(uuid).orElse(null);
+        var upstreamRecordsData = harvestSourceUri == null ?
+                Collections.<String, Object>emptyMap() :
+                geoNetworkService.getUpstreamAssociatedRecords(harvestSourceUri, uuid);
+
+        return AssociatedRecordsUtil.generateAssociatedRecords(associatedRecordsData, upstreamRecordsData, harvestSourceUri);
     }
 
     private List<LinkModel> getLicenseLinks(MDMetadataType source) {
