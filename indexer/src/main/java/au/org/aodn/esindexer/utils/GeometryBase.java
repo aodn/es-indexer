@@ -239,12 +239,12 @@ public class GeometryBase {
         }
 
         if (!(-90 <= south && south <= 90)) {
-            logger.error("Invalid south latitude, value should be +/- 90 but {}", south);
+            logger.warn("Invalid south latitude, value should be +/- 90 but {}", south);
             return Optional.empty();
         }
 
         if (!(-90 <= north && north <= 90)) {
-            logger.error("Invalid north latitude, value should be +/- 90 but {}", north);
+            logger.warn("Invalid north latitude, value should be +/- 90 but {}", north);
             return Optional.empty();
         }
 
