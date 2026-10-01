@@ -62,9 +62,6 @@ public class VocabServiceIT extends BaseTestClass {
     ArdcVocabService mockArdcVocabService;
 
     @Autowired
-    ArdcVocabService ardcVocabService;
-
-    @Autowired
     protected ObjectMapper indexerObjectMapper;
 
     @Autowired
@@ -151,19 +148,7 @@ public class VocabServiceIT extends BaseTestClass {
 
     @Test
     void testProcessParameterVocabs() throws IOException, JSONException {
-        // read from ARDC
-        List<VocabModel> parameterVocabsFromArdc = ardcVocabService.getARDCVocabByType(ArdcCurrentPaths.PARAMETER_VOCAB);
-
-        // read from Elastic search
-        List<JsonNode> parameterVocabsFromEs = vocabService.getParameterVocabs();
-        assertNotNull(parameterVocabsFromEs);
-        assertEquals(parameterVocabsFromEs.size(), parameterVocabsFromArdc.size());
-
-        JSONAssert.assertEquals(
-                indexerObjectMapper.valueToTree(parameterVocabsFromEs).toPrettyString(),
-                indexerObjectMapper.valueToTree(parameterVocabsFromArdc).toPrettyString(),
-                JSONCompareMode.STRICT
-        );
+        assertIndexedVocabsMatchFixture(vocabService.getParameterVocabs(), "/databag/aodn_discovery_parameter_vocabs.json");
     }
     /**
      * Test to verify update skip if nothing return from source
@@ -232,35 +217,35 @@ public class VocabServiceIT extends BaseTestClass {
 
     @Test
     void testProcessPlatformVocabs() throws IOException, JSONException {
-        // read from ARDC
-        List<VocabModel> platformVocabsFromArdc = ardcVocabService.getARDCVocabByType(ArdcCurrentPaths.PLATFORM_VOCAB);
-
-        // read from Elastic search
-        List<JsonNode> platformVocabsFromEs = vocabService.getPlatformVocabs();
-        assertNotNull(platformVocabsFromEs);
-        assertEquals(platformVocabsFromEs.size(), platformVocabsFromArdc.size());
-
-        JSONAssert.assertEquals(
-                indexerObjectMapper.valueToTree(platformVocabsFromEs).toPrettyString(),
-                indexerObjectMapper.valueToTree(platformVocabsFromArdc).toPrettyString(),
-                JSONCompareMode.STRICT);
+        assertIndexedVocabsMatchFixture(vocabService.getPlatformVocabs(), "/databag/aodn_platform_vocabs.json");
     }
 
     @Test
     void testProcessOrganisationVocabs() throws IOException, JSONException {
-        // read from ARDC
-        List<VocabModel> organisationVocabsFromArdc = ardcVocabService.getARDCVocabByType(ArdcCurrentPaths.ORGANISATION_VOCAB);
+        assertIndexedVocabsMatchFixture(vocabService.getOrganisationVocabs(), "/databag/aodn_organisation_vocabs.json");
+    }
 
-        // read from Elastic search
-        List<JsonNode> organisationVocabsFromEs = vocabService.getOrganisationVocabs();
-        assertNotNull(organisationVocabsFromEs);
-        assertEquals(organisationVocabsFromEs.size(), organisationVocabsFromArdc.size());
+    /**
+     * Indexed vocabs come back from Elasticsearch in hit order, which is not the harvest order.
+     * Compare them to the canned databag by concept URI.
+     */
+    private void assertIndexedVocabsMatchFixture(List<JsonNode> indexed, String fixturePath) throws IOException, JSONException {
+        assertNotNull(indexed);
+        JsonNode expected = indexerObjectMapper.readTree(
+                au.org.aodn.ardcvocabs.BaseTestClass.readResourceFile(fixturePath));
+        assertEquals(expected.size(), indexed.size());
 
         JSONAssert.assertEquals(
-                indexerObjectMapper.valueToTree(organisationVocabsFromEs).toPrettyString(),
-                indexerObjectMapper.valueToTree(organisationVocabsFromArdc).toPrettyString(),
-                JSONCompareMode.STRICT
-        );
+                sortedByAbout(expected).toPrettyString(),
+                sortedByAbout(indexerObjectMapper.valueToTree(indexed)).toPrettyString(),
+                JSONCompareMode.STRICT);
+    }
+
+    private JsonNode sortedByAbout(JsonNode vocabs) {
+        List<JsonNode> sorted = new ArrayList<>();
+        vocabs.forEach(sorted::add);
+        sorted.sort(Comparator.comparing(node -> node.path("about").asText()));
+        return indexerObjectMapper.valueToTree(sorted);
     }
 
     /**
@@ -306,7 +291,7 @@ public class VocabServiceIT extends BaseTestClass {
      * Now the flat tree is rejected and the existing index keeps serving.
      */
     @Test
-    void testFlatHarvestKeepsTheExistingVocabsIndex() throws IOException {
+    void testFlatHarvestKeepsTheExistingVocabsIndex() {
         var indexBefore = elasticSearchIndexService.getIndexNameFromAlias(vocabsIndexName);
         var docCountBefore = elasticSearchIndexService.getDocumentsCount(vocabsIndexName);
         assertNotNull(indexBefore);

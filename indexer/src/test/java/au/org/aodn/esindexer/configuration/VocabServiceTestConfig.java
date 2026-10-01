@@ -7,19 +7,20 @@ import au.org.aodn.esindexer.service.VocabIndexScheduler;
 import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.retry.support.RetryTemplate;
 import org.springframework.web.client.RestTemplate;
-
-import java.io.IOException;
 
 @Configuration
 public class VocabServiceTestConfig {
     /**
      * Create this bean for testing, once created the default auto config will not init the bean for you
+     * Must use @Primary so we always use mock during testing
      * @return - Mock bean
      */
     @Bean
-    public ArdcVocabService createMockArdcVocabService() throws IOException {
+    @Primary
+    public ArdcVocabService createMockArdcVocabService() {
 
         RestTemplate template = Mockito.mock(RestTemplate.class);
 
