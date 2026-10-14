@@ -8,7 +8,10 @@ import org.springframework.stereotype.Service;
 
 import au.org.aodn.stac.model.StacCollectionModel;
 
+import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import static au.org.aodn.esindexer.utils.CommonUtils.safeGet;
 
@@ -67,8 +70,12 @@ public class RankingServiceImpl implements RankingService {
     @Value("${app.ranking.facility.penalty:-20}")
     protected int facilityPenalty;
 
-    public Integer evaluateCompleteness(StacCollectionModel stacCollectionModel) {
-        int total = 0;
+    public CompletenessScore evaluateCompleteness(StacCollectionModel stacCollectionModel) {
+        // Every rule is present, a rule not met keeps 0, so the breakdown shows what was checked and not only what was found
+        Map<String, Integer> breakdown = new LinkedHashMap<>();
+        for (Rule rule : Rule.values()) {
+            breakdown.put(rule.key, 0);
+        }
         int count = 0;
        /*
         * The implementation of this method can be adjusted
@@ -98,9 +105,9 @@ public class RankingServiceImpl implements RankingService {
                     .toList();
             log.debug("Keywords found with size: {}", originalThemes.size());
             if (!originalThemes.isEmpty()) {
-                if (originalThemes.size() <= 2)      total += themeMinWeigth;
-                else if (originalThemes.size() <= 5) total += themeMidWeigth;
-                else                                 total += themeMaxWeigth;
+                if (originalThemes.size() <= 2)      breakdown.put(Rule.KEYWORDS.key, themeMinWeigth);
+                else if (originalThemes.size() <= 5) breakdown.put(Rule.KEYWORDS.key, themeMidWeigth);
+                else                                 breakdown.put(Rule.KEYWORDS.key, themeMaxWeigth);
                 count++;
             }
         }
@@ -110,39 +117,39 @@ public class RankingServiceImpl implements RankingService {
                 .filter(s -> !s.isBlank())
                 .isPresent()) {
             log.debug("Lineage found");
-            total += lineageWeigth;
+            breakdown.put(Rule.STATEMENT.key, lineageWeigth);
             count++;
         }
         // License
         if (stacCollectionModel.getLicense() != null) {
             log.debug("License found");
-            total += licenseWeigth;
+            breakdown.put(Rule.LICENSE.key, licenseWeigth);
             count++;
         }
         // Constraint (citation)
         if (stacCollectionModel.getCitation() != null) {
             log.debug("Citation found");
-            total += citationWeigth;
+            breakdown.put(Rule.CITATION.key, citationWeigth);
             count++;
         }
         // Abstract
         if (stacCollectionModel.getDescription() != null && !stacCollectionModel.getDescription().isBlank()) {
             log.debug("Description found");
             int w = (int) (stacCollectionModel.getDescription().length() * descriptionWeigth);
-            total += Math.min(w, 25);
+            breakdown.put(Rule.ABSTRACT.key, Math.min(w, 25));
             count++;
         }
         // Links
         if (stacCollectionModel.getLinks() != null && !stacCollectionModel.getLinks().isEmpty()) {
             log.debug("Links found with size: {}", stacCollectionModel.getLinks().size());
             if (stacCollectionModel.getLinks().size() <= 2) {
-                total += linkMinWeigth;
+                breakdown.put(Rule.LINKS.key, linkMinWeigth);
             }
             else if (stacCollectionModel.getLinks().size() <= 5) {
-                total += linkMidWeigth;
+                breakdown.put(Rule.LINKS.key, linkMidWeigth);
             }
             else {
-                total += linkMaxWeigth;
+                breakdown.put(Rule.LINKS.key, linkMaxWeigth);
             }
             count++;
         }
@@ -150,25 +157,25 @@ public class RankingServiceImpl implements RankingService {
         if (FacilityRecordUtils.isImosOwned(
                 safeGet(() -> stacCollectionModel.getSummaries().getDatasetGroup()).orElse(null))) {
             log.debug("IMOS owned record");
-            total += imosWeigth;
+            breakdown.put(Rule.IMOS_OWNED.key, imosWeigth);
         }
         // IMOS portal collection record, the portal:IMOS category means the portal serves data for it
         if (FacilityRecordUtils.isImosCollectionRecord(
                 safeGet(() -> stacCollectionModel.getSummaries().getCategories()).orElse(null))) {
             log.debug("IMOS portal collection record");
-            total += portalImosWeight;
+            breakdown.put(Rule.IMOS_COLLECTION.key, portalImosWeight);
         }
         // Cloud-optimised download service: assets populated means cloud-optimised index exists
         if (stacCollectionModel.getAssets() != null && !stacCollectionModel.getAssets().isEmpty()) {
             log.debug("Record has cloud optimised link");
-            total += cloudOptimizedWeigth;
+            breakdown.put(Rule.CLOUD_OPTIMISED_DOWNLOAD.key, cloudOptimizedWeigth);
         }
         // Has downloadable links (this will include WFS download)
         if (stacCollectionModel.getLinks() != null
                 && stacCollectionModel.getLinks().stream().anyMatch(link ->
                 link.getAiRole() != null && link.getAiRole().contains("download"))) {
             log.debug("Record has downloadable links");
-            total += downloadableWeigth;
+            breakdown.put(Rule.DOWNLOADABLE_LINKS.key, downloadableWeigth);
         }
         // Penalty for superseded record: status equals superseded / deprecated / obsolete
         if (safeGet(() -> stacCollectionModel.getSummaries().getStatus())
@@ -176,22 +183,26 @@ public class RankingServiceImpl implements RankingService {
                 .filter(s -> s.contains("superseded") || s.contains("deprecated")
                         || s.contains("obsolete")   || s.contains("historicalarchive"))
                 .isPresent()) {
-            total += supersededPenalty;
+            breakdown.put(Rule.OUT_OF_DATE.key, supersededPenalty);
         }
         // Penalty for document record: scope.code equals document
         if (safeGet(() -> stacCollectionModel.getSummaries().getScope().get("code"))
                 .filter("document"::equalsIgnoreCase)
                 .isPresent()) {
-            total += documentPenalty;
+            breakdown.put(Rule.DOCUMENT.key, documentPenalty);
         }
         // Penalty for IMOS Facility / Sub-Facility record, it describes a facility and has no data attached
         if (FacilityRecordUtils.isImosFacilityRecord(stacCollectionModel)) {
             log.debug("IMOS facility / sub-facility record with no data attached");
-            total += facilityPenalty;
+            breakdown.put(Rule.IMOS_FACILITY.key, facilityPenalty);
         }
 
         log.debug("Overall count of metadata elements:{}", count);
         // The more field exist, the higher the mark
-        return total + count;
+        breakdown.put(Rule.METADATA_ELEMENTS.key, count);
+
+        // The score is the sum of the breakdown, so the two always agree
+        int total = breakdown.values().stream().mapToInt(Integer::intValue).sum();
+        return new CompletenessScore(total, Collections.unmodifiableMap(breakdown));
     }
 }
