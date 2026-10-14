@@ -19,6 +19,12 @@ import java.util.Map;
 public class SummariesModel {
 
     protected int score;
+    /**
+     * Points each ranking rule added to the score, keyed by rule name. The values add up to score, it is stored
+     * for troubleshooting the ranking only and is not indexed.
+     */
+    @JsonProperty("score_breakdown")
+    protected Map<String, Integer> scoreBreakdown;
     protected String status;
     protected List<String> credits;
     protected Map<String, String> scope;

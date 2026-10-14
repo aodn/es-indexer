@@ -241,6 +241,10 @@
           "score": {
             "type": "long"
           },
+          "score_breakdown": {
+            "type": "object",
+            "enabled": false
+          },
           "status": {
             "type": "keyword"
           },
