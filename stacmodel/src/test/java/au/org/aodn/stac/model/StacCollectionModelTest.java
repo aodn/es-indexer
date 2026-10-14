@@ -24,6 +24,7 @@ class StacCollectionModelTest {
     void serialize_emitsExpectedWireKeys() throws Exception {
         SummariesModel summaries = SummariesModel.builder()
                 .score(83)
+                .scoreBreakdown(Map.of("license", 10))
                 .status("completed")
                 .updateFrequency("completed")
                 .aiDescription("This record describes the End of Voyage archive from RV Investigator IN2019_V06.")
@@ -97,6 +98,7 @@ class StacCollectionModelTest {
         // SummariesModel ai:* / proj:* / snake_case keys
         JsonNode sum = tree.get("summaries");
         assertEquals(83, sum.get("score").asInt());
+        assertEquals(10, sum.path("score_breakdown").path("license").asInt());
         assertEquals("completed", sum.get("update_frequency").asText());
         assertTrue(sum.get("ai:description").asText().startsWith("This record describes"));
         assertTrue(sum.has("ai:parameter_vocabs"));
@@ -133,6 +135,7 @@ class StacCollectionModelTest {
         String json = """
                 {
                   "score": 83,
+                  "score_breakdown": {"license": 10, "out_of_date": -20},
                   "update_frequency": "completed",
                   "ai:description": "End of Voyage archive from RV Investigator IN2019_V06",
                   "ai:parameter_vocabs": ["temperature"],
@@ -146,6 +149,7 @@ class StacCollectionModelTest {
         SummariesModel parsed = mapper.readValue(json, SummariesModel.class);
 
         assertEquals(83, parsed.getScore());
+        assertEquals(Map.of("license", 10, "out_of_date", -20), parsed.getScoreBreakdown());
         assertEquals("completed", parsed.getUpdateFrequency());
         assertEquals("End of Voyage archive from RV Investigator IN2019_V06",
                 parsed.getAiDescription());
