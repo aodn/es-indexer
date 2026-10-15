@@ -438,13 +438,25 @@ public class GeometryUtils {
                     .toList();
             if (GeometryBase.findPolygonsFrom(GeometryBase.COORDINATE_SYSTEM_CRS84, rawInput).stream()
                     .flatMap(List::stream)
-                    .anyMatch(geometry -> geometry != null && !geometry.isValid())) {
+                    .anyMatch(GeometryUtils::unusableAfterRepair)) {
                 logger.error("Invalid polygon for metadata uuid {}, omitting spatial extent", CommonUtils.getUUID(source));
                 rawInput = List.of();
             }
             return handler.apply(rawInput, param);
         }
         return null;
+    }
+
+    /**
+     * Self-intersecting rings are invalid but makeValidGeometry repairs them.
+     * A collapsed track stays invalid, and the land difference then fails.
+     */
+    protected static boolean unusableAfterRepair(Geometry geometry) {
+        if (geometry == null || geometry.isValid()) {
+            return false;
+        }
+        Geometry repaired = makeValidGeometry(geometry);
+        return repaired == null || repaired.isEmpty() || !repaired.isValid();
     }
 
     protected static List<List<Geometry>> createGeometryWithoutLand(List<GeometryWithDescription> rawInput) {
