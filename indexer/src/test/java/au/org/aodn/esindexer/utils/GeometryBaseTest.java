@@ -1,13 +1,17 @@
 package au.org.aodn.esindexer.utils;
 
+import au.org.aodn.metadata.iso19115_3_2018.CoordinatesType;
 import au.org.aodn.metadata.iso19115_3_2018.DecimalPropertyType;
+import au.org.aodn.metadata.iso19115_3_2018.DirectPositionListType;
 import au.org.aodn.metadata.iso19115_3_2018.EXGeographicBoundingBoxType;
+import au.org.aodn.metadata.iso19115_3_2018.LinearRingType;
 import org.junit.jupiter.api.Test;
 import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.geom.Point;
 import org.locationtech.jts.geom.Polygon;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -287,5 +291,22 @@ public class GeometryBaseTest {
                 GeometryUtils.orientation(ccwPolygon.getExteriorRing().getCoordinates()),
                 "CCW"
         );
+    }
+
+    @Test
+    public void deprecatedGmlCoordinatesBecomeTwoDimensionalPosList() {
+        CoordinatesType coordinates = new CoordinatesType();
+        coordinates.setValue("150.897,-23.15508,0 150.92636,-23.1808,0 150.89618,-23.14652,0 150.897,-23.15508,0");
+        LinearRingType ring = new LinearRingType();
+        ring.setCoordinates(coordinates);
+
+        DirectPositionListType pos = GeometryBase.ringToPosList(ring).orElseThrow();
+        assertEquals(List.of(150.897, -23.15508, 150.92636, -23.1808, 150.89618, -23.14652, 150.897, -23.15508), pos.getValue());
+
+        LinearRing parsed = GeometryBase.linerPositionToLinearRing(pos, "CRS:84");
+        assertNotNull(parsed);
+        assertEquals(4, parsed.getNumPoints());
+        assertEquals(150.897, parsed.getCoordinateN(0).x, 1e-9);
+        assertEquals(-23.15508, parsed.getCoordinateN(0).y, 1e-9);
     }
 }

@@ -1,0 +1,211 @@
+{
+  "title" : "IMOS Ships of Opportunity Underway Data from AIMS Vessel RV Cape Ferguson Trip 4730 From 21 Apr 2009 To 03 May 2009",
+  "description" : "'Ships of Opportunity' (SOOP) is a facility of the Australian 'Integrated Marine Observing System' (IMOS) project. This data set was collected by the SOOP sub-facility 'Sensors on Tropical Research Vessels' aboard the RV Cape Ferguson Trip 4730.",
+  "extent" : {
+    "bbox" : [ ],
+    "temporal" : [ [ "2009-04-20T14:00:00Z", "2009-05-03T13:59:59Z" ], [ "2009-04-20T14:00:00Z", "2009-05-03T13:59:59Z" ] ]
+  },
+  "summaries" : {
+    "score" : 1,
+    "status" : "completed",
+    "credits" : [ "Australia's Integrated Marine Observing System (IMOS) is enabled by the National Collaborative Research Infrastructure Strategy (NCRIS). It is operated by a consortium of institutions as an unincorporated joint venture, with the University of Tasmania as Lead Agent.", "Great Barrier Reef Ocean Observing System (GBROOS), a geographic node of the Integrated Marine Observing System (IMOS) project", "Australian Institute of Marine Science (AIMS)" ],
+    "scope" : {
+      "code" : "dataset",
+      "name" : ""
+    },
+    "statement" : "All sensors are factory calibrated and then calibrated and serviced every six months.The clocks on all instruments are set each night at mid-night from a central server which is turn has its clock set off an NTP server. Typical time drift in a day is a few seconds.The clocks on all instruments are set each night at mid-night from a central server which is turn has its clock set off an NTP server. The location of all fixed equipment is recorded using a standard GPS so the accuracy should be within 5-10m using WGS-84. All mobile equipment has an on-board GPS and so should have equivalent accuracy although is will be around 10-20m due to the nature of the movement of the buoys.\n                    Instruments are replaced and serviced at regular intervals. There is a single metadata record for each research trip with the deployment details for each of the sensors that make up the underway sensor package described in the metadata record. Data are quality controlled by validating against a set of rules (bounds checking, etc) and then flagged using the IODE set of flags.",
+    "creation" : "2026-10-12T00:00:00",
+    "revision" : "2026-10-12T00:00:00",
+    "temporal" : [ {
+      "start" : "2009-04-20T14:00:00Z",
+      "end" : "2009-05-03T13:59:59Z"
+    } ],
+    "update_frequency" : "completed",
+    "parameter_vocabs" : [ ],
+    "platform_vocabs" : [ ],
+    "organisation_vocabs" : [ ]
+  },
+  "contacts" : [ {
+    "roles" : [ "pointOfContact", "about" ],
+    "organization" : "Australian Institute of Marine Science (AIMS)",
+    "name" : "Wojtasiewicz, Bozena, Dr",
+    "emails" : [ "reception@aims.gov.au" ],
+    "addresses" : [ {
+      "city" : "TOWNSVILLE",
+      "country" : "Australia",
+      "delivery_point" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],
+      "postal_code" : "4810",
+      "administrative_area" : "Queensland"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "+61 7 4753 4444"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : ""
+    } ],
+    "links" : [ {
+      "href" : "https://www.aims.gov.au",
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : "AIMS Web Site"
+    } ]
+  }, {
+    "roles" : [ "pointOfContact", "metadata" ],
+    "organization" : "Australian Institute of Marine Science (AIMS)",
+    "position" : "AIMS Data Centre",
+    "emails" : [ "adc@aims.gov.au" ],
+    "addresses" : [ {
+      "city" : "TOWNSVILLE MAIL CENTRE",
+      "country" : "Australia",
+      "delivery_point" : [ "PRIVATE MAIL BAG 3" ],
+      "postal_code" : "4810",
+      "administrative_area" : "Queensland"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "+61 7 4753 4444"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : "+61 7 4772 5852"
+    } ],
+    "links" : [ {
+      "href" : "https://www.aims.gov.au/adc",
+      "type" : "WWW:LINK-1.0-http--link"
+    } ]
+  }, {
+    "roles" : [ "publisher", "citation" ],
+    "organization" : "Australian Institute of Marine Science (AIMS)",
+    "emails" : [ "reception@aims.gov.au" ],
+    "addresses" : [ {
+      "city" : "TOWNSVILLE",
+      "country" : "Australia",
+      "delivery_point" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],
+      "postal_code" : "4810",
+      "administrative_area" : "Queensland"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "+61 7 4753 4444"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : ""
+    } ],
+    "links" : [ {
+      "href" : "https://www.aims.gov.au",
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : "AIMS Web Site"
+    } ]
+  }, {
+    "roles" : [ "owner", "citation" ],
+    "organization" : "Integrated Marine Observing System (IMOS)",
+    "emails" : [ "imos@imos.org.au" ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : ""
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : ""
+    } ],
+    "links" : [ {
+      "href" : "",
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : ""
+    } ]
+  } ],
+  "languages" : [ {
+    "code" : "eng",
+    "name" : "English"
+  } ],
+  "links" : [ {
+    "href" : "https://apps.aims.gov.au/ts-explorer/?source=2422:Underway,2423:Underway,2424:Underway&fromDate=2009-04-21T10:43:54&thruDate=2009-05-03T06:17:07",
+    "rel" : "data",
+    "type" : "",
+    "title" : "{\"title\":\"All data channels.\",\"description\":\"All data channels.\"}"
+  }, {
+    "href" : "https://maps.aims.gov.au/geoserver/wms",
+    "rel" : "wms",
+    "type" : "",
+    "title" : "{\"title\":\"aims:AIMS_TRIP_4730\",\"description\":\"WMS Layer for underway data from trip:4730\"}"
+  }, {
+    "href" : "https://apps.aims.gov.au/ts-explorer/?qc=level1&source=2421:Underway&fromDate=2009-04-21T00:00:00&thruDate=2009-05-03T00:00:00",
+    "rel" : "data",
+    "type" : "",
+    "title" : "{\"title\":\"RV Cape Ferguson Trip 4730 Fluorescence @1.9m Daily Averages\",\"description\":\"RV Cape Ferguson Trip 4730 Fluorescence @1.9m Daily Averages\"}"
+  }, {
+    "href" : "https://apps.aims.gov.au/ts-explorer/?qc=level1&source=2422:Underway&fromDate=2009-04-21T00:00:00&thruDate=2009-05-03T00:00:00",
+    "rel" : "data",
+    "type" : "",
+    "title" : "{\"title\":\"RV Cape Ferguson Trip 4730 Seawater Intake Temperature @1.9m Daily Averages\",\"description\":\"RV Cape Ferguson Trip 4730 Seawater Intake Temperature @1.9m Daily Averages\"}"
+  }, {
+    "href" : "https://apps.aims.gov.au/ts-explorer/?qc=level1&source=2423:Underway&fromDate=2009-04-21T00:00:00&thruDate=2009-05-03T00:00:00",
+    "rel" : "data",
+    "type" : "",
+    "title" : "{\"title\":\"RV Cape Ferguson Trip 4730 Salinity @1.9m Daily Averages\",\"description\":\"RV Cape Ferguson Trip 4730 Salinity @1.9m Daily Averages\"}"
+  }, {
+    "href" : "https://apps.aims.gov.au/ts-explorer/?qc=level1&source=2424:Underway&fromDate=2009-04-21T00:00:00&thruDate=2009-05-03T00:00:00",
+    "rel" : "data",
+    "type" : "",
+    "title" : "{\"title\":\"RV Cape Ferguson Trip 4730 Turbidity @1.9m Daily Averages\",\"description\":\"RV Cape Ferguson Trip 4730 Turbidity @1.9m Daily Averages\"}"
+  }, {
+    "href" : "https://apps.aims.gov.au/metadata/view/04edf2ca-2111-468e-be0c-cbe875faa011",
+    "rel" : "describedby",
+    "type" : "text/html",
+    "title" : "Full metadata link"
+  }, {
+    "href" : "http://i.creativecommons.org/l/by/3.0/au/88x31.png",
+    "rel" : "license",
+    "type" : "image/png"
+  }, {
+    "href" : "http://creativecommons.org/licenses/by/3.0/au/",
+    "rel" : "license",
+    "type" : "text/html"
+  } ],
+  "license" : "Creative Commons Attribution 3.0 Australia License",
+  "providers" : [ {
+    "name" : "Australian Institute of Marine Science (AIMS)",
+    "roles" : [ "pointOfContact" ]
+  } ],
+  "themes" : [ {
+    "concepts" : [ {
+      "id" : "Practical salinity of the water body",
+      "url" : "http://vocab.nerc.ac.uk/collection/P01/current/PSLTZZ01",
+      "title" : "AODN Discovery Parameter Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "Fluorescence of the water body",
+      "url" : "http://vocab.nerc.ac.uk/collection/P01/current/FLUOZZZZ",
+      "title" : "AODN Discovery Parameter Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "Temperature of the water body",
+      "url" : "http://vocab.nerc.ac.uk/collection/P01/current/TEMPPR01",
+      "title" : "AODN Discovery Parameter Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "Turbidity of the water body",
+      "url" : "http://vocab.nerc.ac.uk/collection/P01/current/TURBXXXX",
+      "title" : "AODN Discovery Parameter Vocabulary",
+      "description" : ""
+    } ],
+    "scheme" : "theme"
+  }, {
+    "concepts" : [ {
+      "id" : "oceans",
+      "url" : null,
+      "title" : null,
+      "description" : null
+    } ],
+    "scheme" : "Categories"
+  } ],
+  "id" : "04edf2ca-2111-468e-be0c-cbe875faa011",
+  "search_suggestions" : {
+    "abstract_phrases" : [ ],
+    "parameter_vocabs_sayt" : [ ],
+    "platform_vocabs_sayt" : [ ],
+    "organisation_vocabs_sayt" : [ ]
+  },
+  "sci:citation" : "{\"suggestedCitation\":\"Attribution: Format for citation of metadata sourced from Australian Institute of Marine Science (AIMS) in a list of reference is as follows: \\\"Integrated Marine Observing System (IMOS). (2026). IMOS Ships of Opportunity Underway Data from AIMS Vessel RV Cape Ferguson Trip 4730 From 21 Apr 2009 To 03 May 2009. https://apps.aims.gov.au/metadata/view/04edf2ca-2111-468e-be0c-cbe875faa011, accessed[date-of-access]\\\".\",\"useLimitations\":null,\"otherConstraints\":[\"Use Limitation: All AIMS data, products and services are provided \\\"as is\\\" and AIMS does not warrant their fitness for a particular purpose or non-infringement. While AIMS has made every reasonable effort to ensure high quality of the data, products and services, to the extent permitted by law the data, products and services are provided without any warranties of any kind, either expressed or implied, including without limitation any implied warranties of title, merchantability, and fitness for a particular purpose or non-infringement. AIMS make no representation or warranty that the data, products and services are accurate, complete, reliable or current. To the extent permitted by law, AIMS exclude all liability to any person arising directly or indirectly from the use of the data, products and services.\"]}",
+  "type" : "Collection",
+  "stac_version" : "1.0.0",
+  "stac_extensions" : [ "https://stac-extensions.github.io/scientific/v1.0.0/schema.json", "https://stac-extensions.github.io/contacts/v0.1.1/schema.json", "https://stac-extensions.github.io/projection/v1.1.0/schema.json", "https://stac-extensions.github.io/language/v1.0.0/schema.json", "https://stac-extensions.github.io/themes/v1.0.0/schema.json", "https://stac-extensions.github.io/web-map-links/v1.2.0/schema.json" ]
+}

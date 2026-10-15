@@ -14,6 +14,7 @@ import org.opengis.referencing.operation.TransformException;
 
 import java.util.*;
 import java.util.function.Function;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import static au.org.aodn.esindexer.utils.CommonUtils.safeGet;
@@ -89,8 +90,7 @@ public class GeometryBase {
                                     safeGet(() -> polygonType.getExterior().getAbstractRing().getValue())
                                             .filter(value -> value instanceof LinearRingType)
                                             .map(value -> (LinearRingType) value)
-                                            .flatMap(linearRingType ->
-                                                    safeGet(linearRingType::getPosList)).ifPresent(pos -> {
+                                            .flatMap(GeometryBase::ringToPosList).ifPresent(pos -> {
                                                         Geometry polygon = linerPositionToPolygon(pos, polygonType.getSrsName());
                                                         if(polygon != null) {
                                                             attachDescription(polygon, rawInput.description());
@@ -107,7 +107,7 @@ public class GeometryBase {
 
                             // Process exterior ring
                             if (plt.getExterior() != null && plt.getExterior().getAbstractRing().getValue() instanceof LinearRingType exLinearRingType) {
-                                Optional<LinearRing> exteriorRing = safeGet(exLinearRingType::getPosList)
+                                Optional<LinearRing> exteriorRing = ringToPosList(exLinearRingType)
                                         .map(pos -> {
                                             // We need to store it so that we can create the multi-array as told by spec
                                             LinearRing r = linerPositionToLinearRing(pos, plt.getSrsName());
@@ -121,7 +121,9 @@ public class GeometryBase {
                                     if (plt.getInterior() != null) {
                                         for (AbstractRingPropertyType interior : plt.getInterior()) {
                                             if (interior.getAbstractRing().getValue() instanceof LinearRingType inLinearRingType) {
-                                                LinearRing interiorRing = linerPositionToLinearRing(inLinearRingType.getPosList(), plt.getSrsName());
+                                                LinearRing interiorRing = ringToPosList(inLinearRingType)
+                                                        .map(pos -> linerPositionToLinearRing(pos, plt.getSrsName()))
+                                                        .orElse(null);
                                                 // In some case, the interior ring value is set incorrectly where it is outside the
                                                 // exterior ring, this will not work with geojson in Elastic search because of the right hand
                                                 // rule that exterior ring need to be anti-clockwise and interior ring needs to be clockwise
@@ -133,8 +135,18 @@ public class GeometryBase {
                                         }
                                     }
                                     Geometry polygon = geoJsonFactory.createPolygon(ring, interiorRings.toArray(new LinearRing[0]));
-                                    attachDescription(polygon, rawInput.description());
-                                    polygons.add(polygon);
+                                    if (!polygon.isValid()) {
+                                        // Out-and-back tracks stored as gml:coordinates are self-overlapping.
+                                        // buffer(0) drops a zero-area ring; a real bow-tie becomes a polygon.
+                                        polygon = polygon.buffer(0);
+                                    }
+                                    if (polygon == null || polygon.isEmpty()) {
+                                        logger.warn("Skipping bounding polygon with no area after repair");
+                                    }
+                                    else {
+                                        attachDescription(polygon, rawInput.description());
+                                        polygons.add(polygon);
+                                    }
                                 });
                             }
                         }
@@ -360,13 +372,61 @@ public class GeometryBase {
         try {
             // We need to store it so that we can create the multi-array as told by spec
             Polygon polygon = geoJsonFactory.createPolygon(items.toArray(new Coordinate[0]));
-            // Fix self-intersect if needed
-            return polygon.isValid() ? polygon : polygon.buffer(0);
+            // Fix self-intersect if needed. A collapsed track buffers to an empty geometry.
+            Geometry repaired = polygon.isValid() ? polygon : polygon.buffer(0);
+            return repaired == null || repaired.isEmpty() ? null : repaired;
         }
         catch(IllegalArgumentException iae) {
             logger.warn("Invalid Polygon", iae);
         }
         return null;
+    }
+
+    /**
+     * gml:LinearRing stores positions as gml:posList, or the deprecated gml:coordinates
+     * string (tuple separator, then ordinate separator, optional third ordinate).
+     * Both become a 2D posList so the existing ring builders can consume them.
+     */
+    protected static Optional<DirectPositionListType> ringToPosList(LinearRingType ring) {
+        if (ring == null) {
+            return Optional.empty();
+        }
+        if (ring.getPosList() != null && ring.getPosList().getValue() != null && !ring.getPosList().getValue().isEmpty()) {
+            return Optional.of(ring.getPosList());
+        }
+        return Optional.ofNullable(coordinatesToPosList(ring.getCoordinates()));
+    }
+
+    protected static DirectPositionListType coordinatesToPosList(CoordinatesType coordinates) {
+        if (coordinates == null || coordinates.getValue() == null || coordinates.getValue().isBlank()) {
+            return null;
+        }
+        String decimal = coordinates.getDecimal();
+        String componentSeparator = coordinates.getCs();
+        String tupleSeparator = coordinates.getTs();
+        List<Double> values = new ArrayList<>();
+        for (String tuple : coordinates.getValue().trim().split(Pattern.quote(tupleSeparator))) {
+            if (tuple.isBlank()) {
+                continue;
+            }
+            String[] ordinates = tuple.split(Pattern.quote(componentSeparator), -1);
+            if (ordinates.length < 2) {
+                continue;
+            }
+            values.add(parseOrdinate(ordinates[0], decimal));
+            values.add(parseOrdinate(ordinates[1], decimal));
+        }
+        if (values.size() < 4) {
+            return null;
+        }
+        DirectPositionListType pos = new DirectPositionListType();
+        pos.getValue().addAll(values);
+        return pos;
+    }
+
+    protected static double parseOrdinate(String raw, String decimal) {
+        String normalized = ".".equals(decimal) ? raw.trim() : raw.trim().replace(decimal, ".");
+        return Double.parseDouble(normalized);
     }
 
     protected static LinearRing linerPositionToLinearRing(DirectPositionListType pos, String proj) {

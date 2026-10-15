@@ -1007,4 +1007,17 @@ public class StacCollectionMapperServiceTest {
 
         verify(expected);
     }
+    /**
+     * A bug where this particular dataset fail to exlude land from the spatial extents
+     * @throws IOException - Not expected
+     * @throws JSONException - Not expected
+     */
+    @Test
+    public void verifyExcludeLandWorksForDataset() throws IOException, JSONException {
+        String xml = readResourceFile("classpath:canned/sample28.xml");
+        String expected = readResourceFile("classpath:canned/sample28_stac.json");
+        indexerService.indexMetadata(xml);
+
+        verify(expected);
+    }
 }
