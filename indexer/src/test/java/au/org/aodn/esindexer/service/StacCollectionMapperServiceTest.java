@@ -1007,4 +1007,30 @@ public class StacCollectionMapperServiceTest {
 
         verify(expected);
     }
+    /**
+     * This dataset has a polygon with invalid geometry, which should be excluded from the spatial extent
+     * @throws IOException - Not expected
+     * @throws JSONException - Not expected
+     */
+    @Test
+    public void verifyExcludeLandWorksForDataset1() throws IOException, JSONException {
+        String xml = readResourceFile("classpath:canned/sample28.xml");
+        String expected = readResourceFile("classpath:canned/sample28_stac.json");
+        indexerService.indexMetadata(xml);
+
+        verify(expected);
+    }
+    /**
+     * This dataset has -180 / 180 and -80 / 80 spatial extents, which means it cover the world.
+     * @throws IOException - Not expected
+     * @throws JSONException - Not expected
+     */
+    @Test
+    public void verifyExcludeLandWorksWithPos180Neg180() throws IOException, JSONException {
+        String xml = readResourceFile("classpath:canned/sample29.xml");
+        String expected = readResourceFile("classpath:canned/sample29_stac.json");
+        indexerService.indexMetadata(xml);
+
+        verify(expected);
+    }
 }

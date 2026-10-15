@@ -45,4 +45,43 @@ public class StacUtilsTest {
         );
         assertEquals(expectedOverall, result.get(0), "Overall bounding box is incorrect");
     }
+
+    @Test
+    public void fullLongitudeSpanIsTheWholeWorld() {
+        GeometryFactory factory = new GeometryFactory();
+        List<List<Geometry>> inputPolygons = Collections.singletonList(
+                Collections.singletonList(factory.toGeometry(new Envelope(-180.0, 180.0, -80.0, 80.0)))
+        );
+
+        List<List<BigDecimal>> result = StacUtils.createStacBBox(inputPolygons);
+
+        List<BigDecimal> world = Arrays.asList(
+                BigDecimal.valueOf(-180.0).setScale(StacUtils.getScale(), RoundingMode.HALF_UP),
+                BigDecimal.valueOf(-80.0).setScale(StacUtils.getScale(), RoundingMode.HALF_UP),
+                BigDecimal.valueOf(180.0).setScale(StacUtils.getScale(), RoundingMode.HALF_UP),
+                BigDecimal.valueOf(80.0).setScale(StacUtils.getScale(), RoundingMode.HALF_UP)
+        );
+        assertEquals(2, result.size());
+        assertEquals(world, result.get(0), "Overall bbox must span the world, not the dateline");
+        assertEquals(world, result.get(1));
+    }
+
+    @Test
+    public void fullLongitudeRectangleDoesNotSwallowSmallerCells() {
+        GeometryFactory factory = new GeometryFactory();
+        List<List<Geometry>> inputPolygons = Arrays.asList(
+                Collections.singletonList(factory.toGeometry(new Envelope(20.0, 25.0, 10.0, 15.0))),
+                Collections.singletonList(factory.toGeometry(new Envelope(-180.0, 180.0, -80.0, 85.0)))
+        );
+
+        List<List<BigDecimal>> result = StacUtils.createStacBBox(inputPolygons);
+
+        List<BigDecimal> overall = Arrays.asList(
+                BigDecimal.valueOf(20.0).setScale(StacUtils.getScale(), RoundingMode.HALF_UP),
+                BigDecimal.valueOf(-80.0).setScale(StacUtils.getScale(), RoundingMode.HALF_UP),
+                BigDecimal.valueOf(180.0).setScale(StacUtils.getScale(), RoundingMode.HALF_UP),
+                BigDecimal.valueOf(85.0).setScale(StacUtils.getScale(), RoundingMode.HALF_UP)
+        );
+        assertEquals(overall, result.get(0));
+    }
 }
