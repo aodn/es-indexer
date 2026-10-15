@@ -7,6 +7,22 @@
   },
   "summaries" : {
     "score" : 106,
+    "score_breakdown" : {
+      "keywords" : 20,
+      "statement" : 10,
+      "license" : 10,
+      "citation" : 15,
+      "abstract" : 25,
+      "links" : 20,
+      "metadata_elements" : 6,
+      "imos_owned" : 0,
+      "cloud_optimised_download" : 0,
+      "downloadable_links" : 0,
+      "out_of_date" : 0,
+      "document" : 0,
+      "imos_facility" : 0,
+      "imos_collection" : 0
+    },
     "status" : "onGoing",
     "credits" : [ "Reef Life Survey and Australian Temperate Reef Collaboration partners", "This research used Australia's Integrated Marine Observing System (IMOS) infrastructure for database support and storage. IMOS is enabled by the National Collaborative Research Infrastructure Strategy (NCRIS) and is operated by a consortium of institutions as an unincorporated joint venture, with the University of Tasmania as Lead Agent.", "Squidle+, developed by Ariell Friedman (Greybits Engineering), underpins the Understanding Marine Imaging Facility, Integrated Marine Observing System. Development has also been supported by the Schmidt Ocean Institute, the Japan Agency for Marine-Earth Science and Technology, the Nectar science cloud.", "The dataset collection described in this record was funded by the Australian Government Department of Climate Change, the Environment, Energy & Water (DCCEEW) through the NESP Marine and Coastal Hub. In addition to NESP (DCCEEW) funding, this project was supported by an equivalent amount of in-kind support and co-investment from project partners and collaborators.", "This dataset collection forms part of the NESP MaC Project 5.9 ? Making marine environmental data more assessment ready, 2025 (UTAS, IMOS)\",\"Reef Life Survey and Australian Temperate Reef Collaboration partners" ],
     "scope" : {

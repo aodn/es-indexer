@@ -217,9 +217,11 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
         * e.g completeness = 80, relevance = 90, quality = 100
         * final score = (80 + 90 + 100) / 3 = 90
         */
-        Integer score = rankingService.evaluateCompleteness(stacCollectionModel);
+        RankingService.CompletenessScore completeness = rankingService.evaluateCompleteness(stacCollectionModel);
 
-        stacCollectionModel.getSummaries().setScore(score);
+        stacCollectionModel.getSummaries().setScore(completeness.total());
+        // kept with the score so the admin explain endpoint in ogcapi can show how the score was made
+        stacCollectionModel.getSummaries().setScoreBreakdown(completeness.breakdown());
 
         // extract parameter vocabs and platform vocabs
         // separate original themes from AI enhanced themes (AI themes have concepts with ai:description property)

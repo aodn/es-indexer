@@ -199,8 +199,9 @@ public class StacCollectionMapperServiceTest {
         when(geoNetworkResourceService.searchRecordBy(anyString()))
                 .thenReturn("");
 
+        // A null breakdown is not written to the document, so the canned stac files need no score_breakdown
         when(rankingService.evaluateCompleteness(any(StacCollectionModel.class)))
-                .thenReturn(1);
+                .thenReturn(new RankingService.CompletenessScore(1, null));
 
         MetadataEntity mockMetadata = new MetadataEntity();
         mockMetadata.setUuid("35234913-aa3c-48ec-b9a4-77f822f66ef8");
