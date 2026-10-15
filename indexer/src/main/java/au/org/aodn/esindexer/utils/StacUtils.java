@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.Envelope;
 import org.locationtech.jts.geom.Geometry;
 
@@ -53,6 +54,10 @@ public class StacUtils {
         if(listOfPolygons != null) {
             final Envelope overallBoundingBox = new Envelope();
             final AtomicBoolean hasBoundingBoxUpdate = new AtomicBoolean(false);
+            // A lone EX_GeographicBoundingBox of -180..180 is the whole world. The same envelope
+            // on a dateline-crossing polygon, or mixed with smaller cells, must keep the 0..360 shift.
+            final AtomicBoolean worldLongitudeBox = new AtomicBoolean(false);
+            final AtomicBoolean partialLongitude = new AtomicBoolean(false);
             listOfPolygons
                     .forEach(polygons -> {
                         for (Geometry polygon : polygons) {
@@ -60,9 +65,20 @@ public class StacUtils {
                             // of STAC to have an overall bounding box of all smaller area as the first bbox in the list.
                             if (polygon != null && polygon.getEnvelopeInternal() != null) {
                                 Envelope env = polygon.getEnvelopeInternal();
-                                // Normalize longitudes to [0, 360]
-                                double minX = env.getMinX() < 0 ? env.getMinX() + 360.0 : env.getMinX();
-                                double maxX = env.getMaxX() < 0 ? env.getMaxX() + 360.0 : env.getMaxX();
+                                double minX;
+                                double maxX;
+                                if (isFullLongitudeRectangle(polygon, env)) {
+                                    worldLongitudeBox.set(true);
+                                    // Keep the collapsed meridian so this box does not widen a union of smaller cells.
+                                    minX = 180.0;
+                                    maxX = 180.0;
+                                }
+                                else {
+                                    partialLongitude.set(true);
+                                    // Normalize longitudes to [0, 360]
+                                    minX = env.getMinX() < 0 ? env.getMinX() + 360.0 : env.getMinX();
+                                    maxX = env.getMaxX() < 0 ? env.getMaxX() + 360.0 : env.getMaxX();
+                                }
                                 Envelope normalizedEnv = new Envelope(minX, maxX, env.getMinY(), env.getMaxY());
                                 overallBoundingBox.expandToInclude(normalizedEnv);
 
@@ -76,12 +92,19 @@ public class StacUtils {
             if(hasBoundingBoxUpdate.get()) {
                 double minX = overallBoundingBox.getMinX();
                 double maxX = overallBoundingBox.getMaxX();
-                // Shift to [-180, 180]
-                if (minX > 180.0) minX -= 360.0;
-                if (maxX > 180.0) maxX -= 360.0;
-                // Ensure maxX >= minX, result can be > 180 but needed as we need to represent box cross
-                // meridian, if you do not allow it you may have bbox longitude flipped in wrong direction
-                if (maxX < minX) maxX += 360.0;
+                if (worldLongitudeBox.get() && !partialLongitude.get()) {
+                    // -180 and 180 are the same meridian, so the shift above is the line at 180.
+                    minX = -180.0;
+                    maxX = 180.0;
+                }
+                else {
+                    // Shift to [-180, 180]
+                    if (minX > 180.0) minX -= 360.0;
+                    if (maxX > 180.0) maxX -= 360.0;
+                    // Ensure maxX >= minX, result can be > 180 but needed as we need to represent box cross
+                    // meridian, if you do not allow it you may have bbox longitude flipped in wrong direction
+                    if (maxX < minX) maxX += 360.0;
+                }
                 overallBoundingBox.init(minX, maxX, overallBoundingBox.getMinY(), overallBoundingBox.getMaxY());
 
                 result.add(List.of(
@@ -115,5 +138,29 @@ public class StacUtils {
         }
 
         return result;
+    }
+
+    /**
+     * True for the four-corner box produced from west=-180, east=180.
+     * A polygon that merely reaches both sides of the dateline is not this box.
+     */
+    private static boolean isFullLongitudeRectangle(Geometry geometry, Envelope env) {
+        if (env.getMinX() > -180.0 || env.getMaxX() < 180.0) {
+            return false;
+        }
+        Coordinate[] coordinates = geometry.getCoordinates();
+        if (coordinates.length < 4 || coordinates.length > 5) {
+            return false;
+        }
+        for (Coordinate coordinate : coordinates) {
+            boolean onLongitudeEdge = Math.abs(coordinate.x - env.getMinX()) < 1e-6
+                    || Math.abs(coordinate.x - env.getMaxX()) < 1e-6;
+            boolean onLatitudeEdge = Math.abs(coordinate.y - env.getMinY()) < 1e-6
+                    || Math.abs(coordinate.y - env.getMaxY()) < 1e-6;
+            if (!onLongitudeEdge || !onLatitudeEdge) {
+                return false;
+            }
+        }
+        return true;
     }
 }

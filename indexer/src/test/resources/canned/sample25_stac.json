@@ -2,7 +2,7 @@
   "title" : "COWCLIP2.0 ocean wave climate and extremes statistics from CMIP5-driven wave models",
   "description" : "The Coordinated Ocean Wave Climate Project (COWCLIP) has undertaken a process of aligning modelled ocean wave data driven by CMIP5 global climate models in historical and projection periods under standardised conditions, using a coherent set of codes across all modelled wave datasets to generate climate and extremes statistics, and these statistical data were merged produce this data collection ready for direct comparison and analysis. The findings of these wave climate projections are published in Morim et al (2019), DOI: 10.1038/s41558-019-0542-5. This data collection accompanies a data descriptor paper in Scientific Data.",
   "extent" : {
-    "bbox" : [ [ 180.0, -90.0, 180.0, 90.0 ], [ -180.0, -90.0, 180.0, 90.0 ] ],
+    "bbox" : [ [ -180.0, -90.0, 180.0, 90.0 ], [ -180.0, -90.0, 180.0, 90.0 ] ],
     "temporal" : [ [ "1978-12-31T13:00:00Z", "2099-12-31T12:59:59Z" ], [ "1978-12-31T13:00:00Z", "2005-12-31T12:59:59Z" ], [ "2079-12-31T13:00:00Z", "2099-12-31T12:59:59Z" ] ]
   },
   "summaries" : {
