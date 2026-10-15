@@ -135,18 +135,8 @@ public class GeometryBase {
                                         }
                                     }
                                     Geometry polygon = geoJsonFactory.createPolygon(ring, interiorRings.toArray(new LinearRing[0]));
-                                    if (!polygon.isValid()) {
-                                        // Out-and-back tracks stored as gml:coordinates are self-overlapping.
-                                        // buffer(0) drops a zero-area ring; a real bow-tie becomes a polygon.
-                                        polygon = polygon.buffer(0);
-                                    }
-                                    if (polygon == null || polygon.isEmpty()) {
-                                        logger.warn("Skipping bounding polygon with no area after repair");
-                                    }
-                                    else {
-                                        attachDescription(polygon, rawInput.description());
-                                        polygons.add(polygon);
-                                    }
+                                    attachDescription(polygon, rawInput.description());
+                                    polygons.add(polygon);
                                 });
                             }
                         }
@@ -372,9 +362,8 @@ public class GeometryBase {
         try {
             // We need to store it so that we can create the multi-array as told by spec
             Polygon polygon = geoJsonFactory.createPolygon(items.toArray(new Coordinate[0]));
-            // Fix self-intersect if needed. A collapsed track buffers to an empty geometry.
-            Geometry repaired = polygon.isValid() ? polygon : polygon.buffer(0);
-            return repaired == null || repaired.isEmpty() ? null : repaired;
+            // Fix self-intersect if needed
+            return polygon.isValid() ? polygon : polygon.buffer(0);
         }
         catch(IllegalArgumentException iae) {
             logger.warn("Invalid Polygon", iae);
@@ -383,9 +372,8 @@ public class GeometryBase {
     }
 
     /**
-     * gml:LinearRing stores positions as gml:posList, or the deprecated gml:coordinates
-     * string (tuple separator, then ordinate separator, optional third ordinate).
-     * Both become a 2D posList so the existing ring builders can consume them.
+     * gml:LinearRing is either gml:posList or the deprecated gml:coordinates string.
+     * Coordinates tuples are lon,lat or lon,lat,z. Only the first two ordinates are kept.
      */
     protected static Optional<DirectPositionListType> ringToPosList(LinearRingType ring) {
         if (ring == null) {
@@ -394,34 +382,28 @@ public class GeometryBase {
         if (ring.getPosList() != null && ring.getPosList().getValue() != null && !ring.getPosList().getValue().isEmpty()) {
             return Optional.of(ring.getPosList());
         }
-        return Optional.ofNullable(coordinatesToPosList(ring.getCoordinates()));
-    }
-
-    protected static DirectPositionListType coordinatesToPosList(CoordinatesType coordinates) {
+        CoordinatesType coordinates = ring.getCoordinates();
         if (coordinates == null || coordinates.getValue() == null || coordinates.getValue().isBlank()) {
-            return null;
+            return Optional.empty();
         }
-        String decimal = coordinates.getDecimal();
-        String componentSeparator = coordinates.getCs();
-        String tupleSeparator = coordinates.getTs();
         List<Double> values = new ArrayList<>();
-        for (String tuple : coordinates.getValue().trim().split(Pattern.quote(tupleSeparator))) {
+        for (String tuple : coordinates.getValue().trim().split(Pattern.quote(coordinates.getTs()))) {
             if (tuple.isBlank()) {
                 continue;
             }
-            String[] ordinates = tuple.split(Pattern.quote(componentSeparator), -1);
+            String[] ordinates = tuple.split(Pattern.quote(coordinates.getCs()), -1);
             if (ordinates.length < 2) {
                 continue;
             }
-            values.add(parseOrdinate(ordinates[0], decimal));
-            values.add(parseOrdinate(ordinates[1], decimal));
+            values.add(parseOrdinate(ordinates[0], coordinates.getDecimal()));
+            values.add(parseOrdinate(ordinates[1], coordinates.getDecimal()));
         }
         if (values.size() < 4) {
-            return null;
+            return Optional.empty();
         }
         DirectPositionListType pos = new DirectPositionListType();
         pos.getValue().addAll(values);
-        return pos;
+        return Optional.of(pos);
     }
 
     protected static double parseOrdinate(String raw, String decimal) {

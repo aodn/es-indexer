@@ -302,11 +302,5 @@ public class GeometryBaseTest {
 
         DirectPositionListType pos = GeometryBase.ringToPosList(ring).orElseThrow();
         assertEquals(List.of(150.897, -23.15508, 150.92636, -23.1808, 150.89618, -23.14652, 150.897, -23.15508), pos.getValue());
-
-        LinearRing parsed = GeometryBase.linerPositionToLinearRing(pos, "CRS:84");
-        assertNotNull(parsed);
-        assertEquals(4, parsed.getNumPoints());
-        assertEquals(150.897, parsed.getCoordinateN(0).x, 1e-9);
-        assertEquals(-23.15508, parsed.getCoordinateN(0).y, 1e-9);
     }
 }

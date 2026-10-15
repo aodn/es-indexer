@@ -436,6 +436,12 @@ public class GeometryUtils {
                             )
                     )
                     .toList();
+            if (GeometryBase.findPolygonsFrom(GeometryBase.COORDINATE_SYSTEM_CRS84, rawInput).stream()
+                    .flatMap(List::stream)
+                    .anyMatch(geometry -> geometry != null && !geometry.isValid())) {
+                logger.warn("Invalid polygon for metadata uuid {}, omitting spatial extent", CommonUtils.getUUID(source));
+                rawInput = List.of();
+            }
             return handler.apply(rawInput, param);
         }
         return null;
