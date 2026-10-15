@@ -7,6 +7,22 @@
   },
   "summaries" : {
     "score" : 106,
+    "score_breakdown" : {
+      "keywords" : 20,
+      "statement" : 10,
+      "license" : 10,
+      "citation" : 15,
+      "abstract" : 25,
+      "links" : 20,
+      "metadata_elements" : 6,
+      "imos_owned" : 0,
+      "cloud_optimised_download" : 0,
+      "downloadable_links" : 0,
+      "out_of_date" : 0,
+      "document" : 0,
+      "imos_facility" : 0,
+      "imos_collection" : 0
+    },
     "status" : "completed",
     "credits" : [ "Data collected on the Marine National Facility (MNF) RV Investigator voyage IN2024_V01.", "The MNF must be acknowledged in all outputs derived from Data and/or Samples collected by, or with support from, the MNF. Acknowledge the MNF in outputs with the statement:\n\n                    “We acknowledge the use of the CSIRO Marine National Facility (https://ror.org/01mae9353 ) in undertaking this research.”\n\n                    Acknowledgment and citations should be in all forms of publication including presentations (where the acknowledgement should be on the closing slide), journals, books, reports and related research outputs." ],
     "scope" : {
