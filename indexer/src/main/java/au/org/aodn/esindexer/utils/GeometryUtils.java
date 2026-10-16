@@ -313,16 +313,34 @@ public class GeometryUtils {
     }
 
     /**
-     * Full-globe land-strip plus precision reduce produces island holes that touch the
-     * shell; Lucene geo_shape rejects those. Regional records keep holes (same as main).
+     * Full-globe land-strip stores continents as holes. Dropping those holes fills the land
+     * back in. A hole that touches the shell is rejected by Lucene geo_shape, so pull only
+     * that ring slightly inward. Leave every other coastline untouched.
      */
-    protected static Geometry dropInteriorRings(Geometry geometry) {
-        if (geometry instanceof Polygon polygon && polygon.getNumInteriorRing() > 0) {
-            Geometry simplified = factory.createPolygon(polygon.getExteriorRing());
-            copyUserData(geometry, simplified);
-            return simplified;
+    protected static Geometry keepLandHoles(Geometry geometry) {
+        if (!(geometry instanceof Polygon polygon) || polygon.getNumInteriorRing() == 0) {
+            return geometry;
         }
-        return geometry;
+        Geometry shell = polygon.getExteriorRing();
+        List<LinearRing> holes = new ArrayList<>();
+        for (int i = 0; i < polygon.getNumInteriorRing(); i++) {
+            LinearRing hole = polygon.getInteriorRingN(i);
+            if (!hole.intersects(shell)) {
+                holes.add(hole);
+                continue;
+            }
+            Geometry shrunk = factory.createPolygon(hole).buffer(-0.05);
+            if (shrunk instanceof Polygon shrunkPolygon
+                    && !shrunkPolygon.isEmpty()
+                    && !shrunkPolygon.getExteriorRing().intersects(shell)) {
+                holes.add(factory.createLinearRing(shrunkPolygon.getExteriorRing().getCoordinates()));
+            }
+        }
+        Geometry kept = factory.createPolygon(
+                factory.createLinearRing(shell.getCoordinates()),
+                holes.toArray(LinearRing[]::new));
+        copyUserData(geometry, kept);
+        return kept;
     }
 
     protected static boolean isFullGlobeEnvelope(Geometry geometry) {
@@ -359,11 +377,10 @@ public class GeometryUtils {
                                     result = makeValidGeometry(reducer.reduce(result));
                                 }
                                 Stream<Geometry> parts = convertToListGeometry(result).stream();
-                                // Only sample26-style global extents need holes removed (Lucene
-                                // self-intersect at e.g. lat=-67 lon=-67.5). sample4 and similar
-                                // regional records must keep island holes to match main snapshots.
+                                // Keep continent holes. Removing them fills Australia and the Pacific
+                                // islands back in. Regional records are unchanged.
                                 if (fullGlobe && reducer != null) {
-                                    parts = parts.map(GeometryUtils::dropInteriorRings);
+                                    parts = parts.map(GeometryUtils::keepLandHoles);
                                 }
                                 return parts
                                         .map(GeometryUtils::makeValidGeometry)
