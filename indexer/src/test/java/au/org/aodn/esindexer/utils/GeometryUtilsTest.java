@@ -186,6 +186,13 @@ public class GeometryUtilsTest {
         Assertions.assertTrue(parts > 0, "Expected at least one geometry part");
         assertEquals(0, invalid, "All no-land geometries must be valid for geo_shape indexing");
 
+        Geometry coverage = nl.stream().flatMap(List::stream).reduce(Geometry::union).orElseThrow();
+        GeometryFactory points = new GeometryFactory();
+        Assertions.assertFalse(coverage.covers(points.createPoint(new Coordinate(133.0, -25.0))), "Australia");
+        Assertions.assertFalse(coverage.covers(points.createPoint(new Coordinate(143.0, -6.0))), "Papua New Guinea");
+        Assertions.assertFalse(coverage.covers(points.createPoint(new Coordinate(-100.0, 60.0))), "Canada");
+        Assertions.assertTrue(coverage.covers(points.createPoint(new Coordinate(-150.0, 0.0))), "open Pacific");
+
         Map<?, ?> geoJson = GeometryUtils.createGeometryItems(
                 source,
                 GeometryUtils::createGeometryNoLandFrom,
