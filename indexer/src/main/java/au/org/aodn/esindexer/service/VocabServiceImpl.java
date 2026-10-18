@@ -99,8 +99,9 @@ public class VocabServiceImpl extends IndexServiceImpl implements VocabService {
     }
 
     /*
-    this method for analysing the vocabularies of a record aka bottom-level vocabs (found in the themes section)
-    and returning the second-level vocabularies that match (1 level up from the bottom-level vocabularies)
+    this method for analysing the vocabularies of a record (found in the themes section) and returning the
+    second-level vocabularies that match, where a match is the second-level vocab itself or any vocab at any
+    depth below level 2 (e.g. level 3 or level 4 nodes map up to their level-2 ancestor)
      */
     @Override
     public Set<String> extractVocabLabelsFromThemes(List<ThemesModel> themes, VocabType vocabType, boolean includeFirstLevel) throws IOException {
@@ -122,46 +123,60 @@ public class VocabServiceImpl extends IndexServiceImpl implements VocabService {
                                     .url(secondLevelVocab.get(ABOUT).asText())
                                     .build();
 
-                            themes.stream().filter(Objects::nonNull).forEach(theme -> {
-                                // if the record's theme is already second-level vocab, no need to further check
-                                if (themeMatchConcept(theme, secondLevelVocabAsConcept)) {
-                                    results.add(secondLevelVocabAsConcept.getId());
-                                    // Add top level to the list so we can search it
-                                    if (includeFirstLevel) {
-                                        results.add(topLevelVocab.get(LABEL).asText());
-                                    }
-                                }
+                            // matched if a theme is the second-level vocab itself, or any node at any depth below it
+                            boolean matched = themes.stream()
+                                    .filter(Objects::nonNull)
+                                    .anyMatch(theme -> themeMatchConcept(theme, secondLevelVocabAsConcept))
+                                    || anyDescendantMatches(secondLevelVocab, themes);
 
-                                // if the record's theme is leaf-node (bottom-level vocab)
-                                if (secondLevelVocab.has(NARROWER) && !secondLevelVocab.get(NARROWER).isEmpty()) {
-                                    for (JsonNode bottomLevelVocab : secondLevelVocab.get(NARROWER)) {
-                                        if (bottomLevelVocab != null && bottomLevelVocab.has(LABEL) && bottomLevelVocab.has(ABOUT)) {
-                                            // map the original values to a ConceptModel object for doing comparison
-                                            ConceptModel leafVocabAsConcept = ConceptModel.builder()
-                                                    .id(bottomLevelVocab.get(LABEL).asText())
-                                                    .url(bottomLevelVocab.get(ABOUT).asText())
-                                                    .build();
-
-                                            // Compare with themes' concepts
-                                            if (themeMatchConcept(theme, leafVocabAsConcept)) {
-                                                results.add(secondLevelVocabAsConcept.getId());
-                                                // Add top level to the list so we can search it
-                                                if (includeFirstLevel) {
-                                                    results.add(topLevelVocab.get(LABEL).asText());
-                                                }
-                                                // just checking 1 leaf-node of each second-level vocab is enough, because we only care second-level vocabs.
-                                                break;
-                                            }
-                                        }
-                                    }
+                            if (matched) {
+                                results.add(secondLevelVocabAsConcept.getId());
+                                // Add top level to the list so we can search it
+                                if (includeFirstLevel) {
+                                    results.add(topLevelVocab.get(LABEL).asText());
                                 }
-                            });
+                            }
                         }
                     }
                 }
             });
         }
         return results;
+    }
+
+    /**
+     * Depth-first search of all descendants (via narrower) of the given node, returning true on the first
+     * descendant that matches any of the non-null themes. Children without label/about are not compared
+     * but are still descended into.
+     *
+     * @param node   the vocab node whose descendants are searched (the node itself is not compared)
+     * @param themes the record's themes
+     * @return true if any descendant matches a theme
+     */
+    protected boolean anyDescendantMatches(JsonNode node, List<ThemesModel> themes) {
+        if (node == null || !node.has(NARROWER) || node.get(NARROWER).isEmpty()) {
+            return false;
+        }
+        for (JsonNode child : node.get(NARROWER)) {
+            if (child == null) continue;
+            if (child.has(LABEL) && child.has(ABOUT)) {
+                // map the original values to a ConceptModel object for doing comparison
+                ConceptModel childAsConcept = ConceptModel.builder()
+                        .id(child.get(LABEL).asText())
+                        .url(child.get(ABOUT).asText())
+                        .build();
+                boolean matched = themes.stream()
+                        .filter(Objects::nonNull)
+                        .anyMatch(theme -> themeMatchConcept(theme, childAsConcept));
+                if (matched) {
+                    return true;
+                }
+            }
+            if (anyDescendantMatches(child, themes)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public List<String> extractOrganisationVocabLabelsFromThemes(List<ThemesModel> themes) {
