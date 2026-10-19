@@ -303,4 +303,22 @@ public class GeometryBaseTest {
         DirectPositionListType pos = GeometryBase.ringToPosList(ring).orElseThrow();
         assertEquals(List.of(150.897, -23.15508, 150.92636, -23.1808, 150.89618, -23.14652, 150.897, -23.15508), pos.getValue());
     }
+
+    @Test
+    public void flatCommaSeparatedCoordinatesBecomePosList() {
+        CoordinatesType coordinates = new CoordinatesType();
+        coordinates.setValue("151.87843, -23.45895, 151.86952, -23.48970, 151.87252, -23.49043, 151.90253, -23.45683, 151.90041, -23.45359, 151.87843, -23.45895.");
+        LinearRingType ring = new LinearRingType();
+        ring.setCoordinates(coordinates);
+
+        DirectPositionListType pos = GeometryBase.ringToPosList(ring).orElseThrow();
+        assertEquals(List.of(
+                151.87843, -23.45895,
+                151.86952, -23.48970,
+                151.87252, -23.49043,
+                151.90253, -23.45683,
+                151.90041, -23.45359,
+                151.87843, -23.45895
+        ), pos.getValue());
+    }
 }

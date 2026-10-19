@@ -328,9 +328,12 @@ public class GeometryBase {
 
             String projection = proj != null ? proj : pos.getSrsName();
             MathTransform transform = null;
+            boolean latitudeFirst = false;
             if(projection != null && !projection.isBlank()) {
                 try {
-                    transform = CRS.findMathTransform(CRS.decode(projection), CRS84);
+                    CoordinateReferenceSystem source = CRS.decode(projection);
+                    transform = CRS.findMathTransform(source, CRS84);
+                    latitudeFirst = CRS.getAxisOrder(source) == CRS.AxisOrder.NORTH_EAST;
                 }
                 catch (FactoryException e) {
                     // Default is WGS84 (CRS84), so do nothing need to transform
@@ -340,7 +343,11 @@ public class GeometryBase {
             // Create the MathTransform object for transforming between source and target CRS
             for (int z = 0; z < v.size(); z += 2) {
                 Coordinate coordinate = new Coordinate(v.get(z), v.get(z + 1));
-                if(transform != null) {
+                // Some EPSG:4326 rings are stored longitude-first. A latitude cannot exceed 90.
+                boolean alreadyLongitudeLatitude = latitudeFirst
+                        && Math.abs(coordinate.x) > 90
+                        && Math.abs(coordinate.y) <= 90;
+                if(transform != null && !alreadyLongitudeLatitude) {
                     try {
                         // try transform to the correct coordinate
                         items.add(JTS.transform(coordinate, null, transform));
@@ -387,16 +394,32 @@ public class GeometryBase {
             return Optional.empty();
         }
         List<Double> values = new ArrayList<>();
+        List<Double> flat = new ArrayList<>();
+        boolean sawTuple = false;
         for (String tuple : coordinates.getValue().trim().split(Pattern.quote(coordinates.getTs()))) {
             if (tuple.isBlank()) {
                 continue;
             }
             String[] ordinates = tuple.split(Pattern.quote(coordinates.getCs()), -1);
-            if (ordinates.length < 2) {
-                continue;
+            List<String> present = new ArrayList<>();
+            for (String ordinate : ordinates) {
+                if (!ordinate.isBlank()) {
+                    present.add(ordinate);
+                }
             }
-            values.add(parseOrdinate(ordinates[0], coordinates.getDecimal()));
-            values.add(parseOrdinate(ordinates[1], coordinates.getDecimal()));
+            // gml:coordinates tuples are "lon,lat" or "lon,lat,z", separated by ts (default space).
+            // Some records are a flat "lon, lat, lon, lat." list, so each token has one ordinate.
+            if (present.size() >= 2) {
+                sawTuple = true;
+                values.add(parseOrdinate(present.get(0), coordinates.getDecimal()));
+                values.add(parseOrdinate(present.get(1), coordinates.getDecimal()));
+            }
+            else if (present.size() == 1) {
+                flat.add(parseOrdinate(present.get(0), coordinates.getDecimal()));
+            }
+        }
+        if (!sawTuple && flat.size() >= 4 && flat.size() % 2 == 0) {
+            values.addAll(flat);
         }
         if (values.size() < 4) {
             return Optional.empty();
@@ -407,7 +430,14 @@ public class GeometryBase {
     }
 
     protected static double parseOrdinate(String raw, String decimal) {
-        String normalized = ".".equals(decimal) ? raw.trim() : raw.trim().replace(decimal, ".");
+        String normalized = raw.trim();
+        // A sentence-ending period after the last ordinate is not the decimal mark.
+        if (normalized.endsWith(".") && normalized.indexOf('.') < normalized.length() - 1) {
+            normalized = normalized.substring(0, normalized.length() - 1);
+        }
+        if (!".".equals(decimal)) {
+            normalized = normalized.replace(decimal, ".");
+        }
         return Double.parseDouble(normalized);
     }
 

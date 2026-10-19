@@ -1033,4 +1033,13 @@ public class StacCollectionMapperServiceTest {
 
         verify(expected);
     }
+
+    @Test
+    public void verifyRingParseCorrectly() throws IOException, JSONException {
+        String xml = readResourceFile("classpath:canned/sample30.xml");
+        String expected = readResourceFile("classpath:canned/sample30_stac.json");
+        indexerService.indexMetadata(xml);
+
+        verify(expected);
+    }
 }
