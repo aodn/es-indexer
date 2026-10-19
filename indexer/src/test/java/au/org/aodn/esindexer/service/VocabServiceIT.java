@@ -12,6 +12,7 @@ import au.org.aodn.stac.model.ConceptModel;
 import au.org.aodn.stac.model.ThemesModel;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.json.JSONException;
 import org.junit.jupiter.api.*;
 import org.mockito.InjectMocks;
@@ -107,6 +108,67 @@ public class VocabServiceIT extends BaseTestClass {
         assertTrue(parameterVocabs.stream().anyMatch(vocab -> vocab.equalsIgnoreCase("carbon")));
         assertTrue(parameterVocabs.stream().anyMatch(vocab -> vocab.equalsIgnoreCase("pH (total scale) of the water body")));
         assertEquals(5, parameterVocabs.size());
+    }
+    /**
+     * Verify a level-4 parameter vocab maps up to its level-2 ancestor. The canned ARDC data is at most 3 levels deep,
+     * so a level-4 child is added under a real level-3 node (Physical-Water > Temperature > Temperature of the water body)
+     * of the indexed tree. Before the fix only levels 2 and 3 were compared, so a level-4 theme matched nothing.
+     * @throws IOException - Not expected
+     */
+    @Test
+    void testExtractParameterVocabLabelsFromThemesMatchesLevelFour() throws IOException {
+        String level3About = "http://vocab.nerc.ac.uk/collection/P01/current/TEMPPR01";
+        String level4Label = "Temperature of the water body near the sea floor";
+        String level4About = "http://vocab.aodn.org.au/def/discovery_parameter/entity/level-4-test";
+
+        // deep copy, the indexed vocabs are cached so they must not be changed in place
+        List<JsonNode> parameterTree = new ArrayList<>();
+        vocabService.getParameterVocabs().forEach(vocab -> parameterTree.add(vocab.deepCopy()));
+
+        ObjectNode level3 = findVocabByAbout(parameterTree, level3About)
+                .orElseThrow(() -> new AssertionError("Level-3 vocab " + level3About + " not found in indexed parameter vocabs"));
+        assertFalse(level3.has("narrower"), "Level-3 vocab should be a leaf in the canned data");
+        level3.putArray("narrower")
+                .addObject()
+                .put("label", level4Label)
+                .put("about", level4About);
+
+        // spy the unwrapped bean and point self at the spy so extractVocabLabelsFromThemes reads the 4-level tree
+        var service = Mockito.spy(AopTestUtils.<VocabServiceImpl>getUltimateTargetObject(vocabService));
+        doReturn(parameterTree).when(service).getParameterVocabs();
+        service.self = service;
+
+        Set<String> matched = service.extractVocabLabelsFromThemes(
+                List.of(new ThemesModel(List.of(
+                        new ConceptModel(level4Label, level4About, "AODN Discovery Parameter Vocabulary", null, null)
+                ), "theme")),
+                VocabService.VocabType.AODN_DISCOVERY_PARAMETER_VOCABS,
+                false);
+        assertEquals(Set.of("temperature"), matched);
+
+        // a match needs both label and url, same label under a different url is not the same vocab
+        Set<String> unmatched = service.extractVocabLabelsFromThemes(
+                List.of(new ThemesModel(List.of(
+                        new ConceptModel(level4Label, level4About + "-other", "AODN Discovery Parameter Vocabulary", null, null)
+                ), "theme")),
+                VocabService.VocabType.AODN_DISCOVERY_PARAMETER_VOCABS,
+                false);
+        assertTrue(unmatched.isEmpty());
+    }
+
+    private Optional<ObjectNode> findVocabByAbout(List<JsonNode> vocabs, String about) {
+        for (JsonNode vocab : vocabs) {
+            if (about.equals(vocab.path("about").asText())) {
+                return Optional.of((ObjectNode) vocab);
+            }
+            List<JsonNode> narrower = new ArrayList<>();
+            vocab.path("narrower").forEach(narrower::add);
+            Optional<ObjectNode> found = findVocabByAbout(narrower, about);
+            if (found.isPresent()) {
+                return found;
+            }
+        }
+        return Optional.empty();
     }
     /**
      * Verify platform vocab works correctly, the platform vocab share the same logic that it extract the second level vocab however
