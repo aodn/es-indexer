@@ -321,4 +321,21 @@ public class GeometryBaseTest {
                 151.87843, -23.45895
         ), pos.getValue());
     }
+
+    @Test
+    public void parenthesizedCoordinatesBecomePosList() {
+        CoordinatesType coordinates = new CoordinatesType();
+        coordinates.setValue("(-19.20167,146.81583),(-19.10550,146.86017),(-19.13483,146.95017),(-19.21850,146.98083) ,(-19.20167,146.81583)");
+        LinearRingType ring = new LinearRingType();
+        ring.setCoordinates(coordinates);
+
+        DirectPositionListType pos = GeometryBase.ringToPosList(ring).orElseThrow();
+        assertEquals(List.of(
+                -19.20167, 146.81583,
+                -19.10550, 146.86017,
+                -19.13483, 146.95017,
+                -19.21850, 146.98083,
+                -19.20167, 146.81583
+        ), pos.getValue());
+    }
 }

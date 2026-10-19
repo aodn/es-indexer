@@ -1,0 +1,159 @@
+{
+  "title" : "Water sample data from Cleveland Bay - 1993",
+  "description" : "This is data collected during dredging by the Townsville Port Authority in Cleveland Bay in 1993.  Data are divided into a number of main groups: Wind, tide gauge, wave rider, S4, sediment traps, water samples and nephelometers.\n\n                    Unique site numbers were assigned within Cleveland Bay at which data were collected.  Some of these sites were named, and others were unnamed.",
+  "extent" : {
+    "bbox" : [ [ 146.81583, -19.2185, 146.98083, -19.1055 ], [ 146.81583, -19.2185, 146.98083, -19.1055 ] ],
+    "temporal" : [ [ "1993-01-03T13:00:00Z", "1993-04-21T13:59:59Z" ], [ "1993-01-03T13:00:00Z", "1993-04-21T13:59:59Z" ] ]
+  },
+  "summaries" : {
+    "score" : 1,
+    "status" : "completed",
+    "credits" : [ "Arnstein Prytz" ],
+    "scope" : {
+      "code" : "dataset",
+      "name" : ""
+    },
+    "statement" : "Water samples were taken at a number of locations, all data stored\n                    in one file.\n\n                    a) Cleveland Bay       CLEVELAB.WS\n\n                    Data are stored with all sites in one file.  The structure of\n                    this file is illustrated below.  Column 1 contains the date and\n                    time of the start of a measurement as a 14 digit numeric string.\n                    Column 2 represents the same date and time, but as a decimal day\n                    number, where 1.00000 represents midnight of 1 January 1993.\n                    Columns 3-6 represent the suspended sediment concentration (SSC)\n                    in mg/l.  Column 7 represents the site number.\n\n                    -------------------------------------------------\n                    YYYYMMDDhhmmss     t     mg/l mg/l mg/l mg/l Site\n                    -------------------------------------------------\n                    19930104000000   4.00000   29   29   *    *    1\n                    19930104000000   4.00000   32   38   *    *    2\n                    19930104000000   4.00000   29   29   *    *    8\n                    19930104000000   4.00000   28   31   *    *   10\n                    19930104000000   4.00000   35   47   *    *   12\n\n                    -------------------------------------------------\n                    YYYYMMDDhhmmss     t     mg/l mg/l mg/l mg/l Site\n                    -------------------------------------------------\n                    19930118000000  18.00000   28   50   *    *   13\n                    19930118000000  18.00000   32   47   *    *   15\n                    19930118000000  18.00000   38   46   *    *   19\n                    ........................................\n\n                    Site_1=146 58.85  19 13.11\n                    Site_2=146 58.34  19 11.87\n                    Site_3=146 57.51  19 10.52\n                    Site_40=146 57.01  19 08.09\n                    Site_4=146 56.22  19 07.96\n                    Site_5=146 53.92  19 09.50\n                    Site_6=146 53.18  19 09.27\n                    Site_7=146 52.77  19 09.17\n                    Site_8=146 52.08  19 09.39\n                    Site_10=146 52.65  19 07.87\n                    Site_12=146 51.61  19 06.33\n                    Site_13=146 48.95  19 12.10\n                    Site_15=146 50.40  19 11.90\n                    Site_16=146 51.20  19 10.50\n                    Site_17=146 52.50  19 10.50\n                    Site_18=146 53.70  19 10.50\n                    Site_19=146 54.90  19 10.50\n                    Site_20=146 56.00  19 10.50\n                    Site_21=146 52.80  19 09.90\n                    Site_22=146 56.10  19 09.70\n                    Site_23=146 57.30  19 09.90\n                    Site_24=146 53.70  19 08.90\n                    Site_25=146 54.90  19 08.90\n                    Site_26=146 56.00  19 08.90\n                    Site_27=146 57.20  19 08.90\n                    Site_28=146 52.90  19 08.50\n                    Site_29=146 53.60  19 08.00\n                    Site_30=146 54.90  19 08.00\n                    Site_31=146 56.00  19 08.00\n                    Site_32=146 51.60  19 09.90\n                    Site_33=146 54.90  19 09.70\n                    Site_34=146 49.70  19 12.10\n                    Site_35=146 58.00  19 11.87",
+    "creation" : "2007-02-05T00:00:00.000",
+    "revision" : "2015-01-23T10:05:47",
+    "temporal" : [ {
+      "start" : "1993-01-03T13:00:00Z",
+      "end" : "1993-04-21T13:59:59Z"
+    } ],
+    "update_frequency" : "completed",
+    "proj:geometry" : {
+      "geometries" : [ {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 146.81583, -19.20167 ], [ 146.98083, -19.2185 ], [ 146.95017, -19.13483 ], [ 146.86017, -19.1055 ], [ 146.81583, -19.20167 ] ] ]
+      } ],
+      "type" : "GeometryCollection"
+    },
+    "proj:geometry_noland" : {
+      "geometries" : [ {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 146.81583, -19.20167 ], [ 146.98083, -19.2185 ], [ 146.95017, -19.13483 ], [ 146.86017, -19.1055 ], [ 146.85484227072806, -19.117055429050144 ], [ 146.860199415, -19.115980726999908 ], [ 146.8450558780029, -19.138281351205688 ], [ 146.81583, -19.20167 ] ] ]
+      } ],
+      "type" : "GeometryCollection"
+    },
+    "parameter_vocabs" : [ ],
+    "platform_vocabs" : [ ],
+    "organisation_vocabs" : [ ]
+  },
+  "contacts" : [ {
+    "roles" : [ "principalInvestigator", "about" ],
+    "organization" : "College of Science, Technology and Engineering (CSTE), James Cook University (JCU)",
+    "name" : "Ridd, Peter, Professor",
+    "emails" : [ "peter.ridd@jcu.edu.au" ],
+    "addresses" : [ {
+      "city" : "Townsville",
+      "country" : "Australia",
+      "delivery_point" : [ "James Cook University (JCU)" ],
+      "postal_code" : "4811",
+      "administrative_area" : "QLD"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "61 7 4781 4978"
+    } ],
+    "links" : [ {
+      "href" : "https://research.jcu.edu.au/portfolio/peter.ridd",
+      "type" : "WWW:LINK-1.0-http--link"
+    } ]
+  }, {
+    "roles" : [ "principalInvestigator", "metadata" ],
+    "organization" : "College of Science, Technology and Engineering (CSTE), James Cook University (JCU)",
+    "name" : "Ridd, Peter, Professor",
+    "emails" : [ "peter.ridd@jcu.edu.au" ]
+  }, {
+    "roles" : [ "processor", "metadata" ],
+    "position" : "BlueNet Data Facilitator",
+    "emails" : [ "info@bluenet.org.au" ]
+  }, {
+    "roles" : [ "principalInvestigator", "citation" ],
+    "organization" : "School of Mathematics, Physics and Information Technology, James Cook University (JCU)",
+    "name" : "Ridd, Peter, Professor",
+    "emails" : [ "peter.ridd@jcu.edu.au" ],
+    "addresses" : [ {
+      "city" : "Townsville",
+      "country" : "Australia",
+      "delivery_point" : [ "School of Mathematics, Physics and IT, JCU" ],
+      "postal_code" : "4811",
+      "administrative_area" : "QLD"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "61 7 4781 4978"
+    } ]
+  } ],
+  "languages" : [ {
+    "code" : "eng",
+    "name" : "English"
+  } ],
+  "links" : [ {
+    "href" : "https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/03cde810-1499-11dc-80b6-00188b4c0af8/attachments/clevelab.ws.txt",
+    "rel" : "data",
+    "type" : "",
+    "title" : "{\"title\":\"clevelab.ws.txt\",\"description\":\"\"}"
+  }, {
+    "href" : "http://geoserver-123.aodn.org.au/geoserver/wms",
+    "rel" : "wms",
+    "type" : "",
+    "title" : "{\"title\":\"aodn:cleveland_bay_data\",\"description\":\"Cleveland Bay Study Data\"}"
+  }, {
+    "href" : "https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/03cde810-1499-11dc-80b6-00188b4c0af8",
+    "rel" : "describedby",
+    "type" : "text/html",
+    "title" : "Full metadata link"
+  }, {
+    "href" : "http://i.creativecommons.org/l/by/2.5/au/88x31.png",
+    "rel" : "license",
+    "type" : "image/png"
+  }, {
+    "href" : "http://creativecommons.org/licenses/by/2.5/au/",
+    "rel" : "license",
+    "type" : "text/html"
+  } ],
+  "license" : "Creative Commons Attribution 2.5 Australia License",
+  "providers" : [ {
+    "name" : "College of Science, Technology and Engineering (CSTE), James Cook University (JCU)",
+    "roles" : [ "principalInvestigator" ]
+  }, {
+    "roles" : [ "processor" ]
+  } ],
+  "themes" : [ {
+    "concepts" : [ {
+      "id" : "Oceans | Water Quality | Suspended Solids",
+      "url" : null,
+      "title" : "Global Change Master Directory Earth Science Keywords v.5.3.8",
+      "description" : ""
+    } ],
+    "scheme" : "theme"
+  }, {
+    "concepts" : [ {
+      "id" : "concentration_of_suspended_sediment_in_sea_water",
+      "url" : null,
+      "title" : "Keywords (Theme)",
+      "description" : ""
+    } ],
+    "scheme" : ""
+  }, {
+    "concepts" : [ {
+      "id" : "oceans",
+      "url" : null,
+      "title" : null,
+      "description" : null
+    } ],
+    "scheme" : "Categories"
+  } ],
+  "id" : "03cde810-1499-11dc-80b6-00188b4c0af8",
+  "search_suggestions" : {
+    "abstract_phrases" : [ ],
+    "parameter_vocabs_sayt" : [ ],
+    "platform_vocabs_sayt" : [ ],
+    "organisation_vocabs_sayt" : [ ]
+  },
+  "sci:citation" : "{\"suggestedCitation\":\"The citation in a list of references is: citation author name/s (year metadata published), metadata title. Citation author organisation/s. File identifier and Data accessed at (add http link).\",\"useLimitations\":null,\"otherConstraints\":null}",
+  "type" : "Collection",
+  "stac_version" : "1.0.0",
+  "stac_extensions" : [ "https://stac-extensions.github.io/scientific/v1.0.0/schema.json", "https://stac-extensions.github.io/contacts/v0.1.1/schema.json", "https://stac-extensions.github.io/projection/v1.1.0/schema.json", "https://stac-extensions.github.io/language/v1.0.0/schema.json", "https://stac-extensions.github.io/themes/v1.0.0/schema.json", "https://stac-extensions.github.io/web-map-links/v1.2.0/schema.json" ]
+}

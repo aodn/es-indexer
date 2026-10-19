@@ -396,7 +396,9 @@ public class GeometryBase {
         List<Double> values = new ArrayList<>();
         List<Double> flat = new ArrayList<>();
         boolean sawTuple = false;
-        for (String tuple : coordinates.getValue().trim().split(Pattern.quote(coordinates.getTs()))) {
+        // Parentheses around tuples, as in "(-19.2,146.8),(-19.1,146.9)", are not part of the ordinate.
+        String text = coordinates.getValue().trim().replace("(", "").replace(")", "");
+        for (String tuple : text.split(Pattern.quote(coordinates.getTs()))) {
             if (tuple.isBlank()) {
                 continue;
             }
@@ -408,8 +410,16 @@ public class GeometryBase {
                 }
             }
             // gml:coordinates tuples are "lon,lat" or "lon,lat,z", separated by ts (default space).
-            // Some records are a flat "lon, lat, lon, lat." list, so each token has one ordinate.
-            if (present.size() >= 2) {
+            // A comma-separated run of four or more ordinates is several positions in one token.
+            // A flat "lon, lat, lon, lat." list leaves one ordinate in each token.
+            if (present.size() >= 4 && present.size() % 2 == 0) {
+                sawTuple = true;
+                for (int i = 0; i < present.size(); i += 2) {
+                    values.add(parseOrdinate(present.get(i), coordinates.getDecimal()));
+                    values.add(parseOrdinate(present.get(i + 1), coordinates.getDecimal()));
+                }
+            }
+            else if (present.size() >= 2) {
                 sawTuple = true;
                 values.add(parseOrdinate(present.get(0), coordinates.getDecimal()));
                 values.add(parseOrdinate(present.get(1), coordinates.getDecimal()));
