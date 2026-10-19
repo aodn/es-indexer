@@ -11,9 +11,9 @@ public class BBoxUtils {
 
     protected static Logger logger = LogManager.getLogger(BBoxUtils.class);
 
-    public static List<List<BigDecimal>> createBBoxFrom(List<GeometryUtils.GeometryWithDescription> rawInput, final Integer noUse) {
+    public static List<List<BigDecimal>> createBBoxFrom(List<GeometryUtils.GeometryWithDescription> rawInput, final Integer noUse, String metadataUuid) {
         //TODO: avoid hardcode CRS, get it from document
-        List<List<Geometry>> polygons = GeometryBase.findPolygonsFrom(GeometryBase.COORDINATE_SYSTEM_CRS84, rawInput);
+        List<List<Geometry>> polygons = GeometryBase.findPolygonsFrom(GeometryBase.COORDINATE_SYSTEM_CRS84, rawInput, metadataUuid);
         return StacUtils.createStacBBox(polygons);
     }
 }
