@@ -48,6 +48,10 @@ public class GeometryBase {
      * @return - Geometry of the polygon
      */
     public static List<List<Geometry>> findPolygonsFrom(final String rawCRS, List<GeometryUtils.GeometryWithDescription> rawInput) {
+        return findPolygonsFrom(rawCRS, rawInput, null);
+    }
+
+    public static List<List<Geometry>> findPolygonsFrom(final String rawCRS, List<GeometryUtils.GeometryWithDescription> rawInput, String metadataUuid) {
         return rawInput
                 .stream()
                 .map(r -> {
@@ -55,7 +59,7 @@ public class GeometryBase {
                         return findPolygonsFromEXBoundingPolygonType(rawCRS, r);
                     }
                     else if(!r.geometries().isEmpty() && r.geometries().get(0) instanceof EXGeographicBoundingBoxType) {
-                        return findPolygonsFromEXGeographicBoundingBoxType(rawCRS, r);
+                        return findPolygonsFromEXGeographicBoundingBoxType(rawCRS, r, metadataUuid);
                     }
                     // Some type doesn't support so return null
                     return null;
@@ -173,6 +177,10 @@ public class GeometryBase {
      * @return - List of Geometry, where it can be Point, Line or Box aka (Polygon)
      */
     protected static List<Geometry> findPolygonsFromEXGeographicBoundingBoxType(String rawCRS, GeometryUtils.GeometryWithDescription rawInput) {
+        return findPolygonsFromEXGeographicBoundingBoxType(rawCRS, rawInput, null);
+    }
+
+    protected static List<Geometry> findPolygonsFromEXGeographicBoundingBoxType(String rawCRS, GeometryUtils.GeometryWithDescription rawInput, String metadataUuid) {
         final List<Geometry> geometries = new ArrayList<>();
 
         if(COORDINATE_SYSTEM_CRS84.equals(rawCRS)) {
@@ -189,7 +197,7 @@ public class GeometryBase {
                     logger.warn("Invalid BBOX found for findPolygonsFromEXGeographicBoundingBoxType using CRS {}", rawCRS);
                 } else {
                     logger.debug("BBOX found for findPolygonsFromEXGeographicBoundingBoxType using CRS {}", rawCRS);
-                    getCoordinates(bbt).ifPresent(geometry -> {
+                    getCoordinates(bbt, metadataUuid).ifPresent(geometry -> {
                         attachDescription(geometry, rawInput.description());
                         geometries.add(geometry);
                     });
@@ -213,6 +221,10 @@ public class GeometryBase {
     }
 
     protected static Optional<Geometry> getCoordinates(EXGeographicBoundingBoxType bbt) {
+        return getCoordinates(bbt, null);
+    }
+
+    protected static Optional<Geometry> getCoordinates(EXGeographicBoundingBoxType bbt, String metadataUuid) {
 
         double east = bbt.getEastBoundLongitude().getDecimal().doubleValue();
         double west = bbt.getWestBoundLongitude().getDecimal().doubleValue();
@@ -241,7 +253,7 @@ public class GeometryBase {
         }
 
         if (!(-90 <= south && south <= 90)) {
-            logger.warn("Invalid south latitude, value should be +/- 90 but {}", south);
+            logger.warn("Invalid south latitude, value should be +/- 90 but {} for metadata uuid {}", south, metadataUuid);
             return Optional.empty();
         }
 

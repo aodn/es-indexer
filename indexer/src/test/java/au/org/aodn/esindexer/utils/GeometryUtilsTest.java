@@ -49,7 +49,7 @@ public class GeometryUtilsTest {
         // Whole spatial extends
         List<List<Geometry>> withLand = GeometryUtils.createGeometryItems(
                 source,
-                (rawInput, size) -> GeometryBase.findPolygonsFrom(GeometryBase.COORDINATE_SYSTEM_CRS84, rawInput),
+                (rawInput, size, metadataUuid) -> GeometryBase.findPolygonsFrom(GeometryBase.COORDINATE_SYSTEM_CRS84, rawInput, metadataUuid),
                 null
         );
 
@@ -75,7 +75,7 @@ public class GeometryUtilsTest {
         // Strip the land away.
         List<List<Geometry>> noLand = GeometryUtils.createGeometryItems(
                 source,
-                (rawInput, s) -> GeometryUtils.createGeometryWithoutLand(rawInput),
+                (rawInput, s, metadataUuid) -> GeometryUtils.createGeometryWithoutLand(rawInput, metadataUuid),
                 null
         );
 
@@ -119,7 +119,7 @@ public class GeometryUtilsTest {
         // Strip the land away.
         List<List<Geometry>> noLand = GeometryUtils.createGeometryItems(
                 source,
-                (rawInput, s) -> GeometryUtils.createGeometryWithoutLand(rawInput),
+                (rawInput, s, metadataUuid) -> GeometryUtils.createGeometryWithoutLand(rawInput, metadataUuid),
                 null
         );
 
@@ -164,7 +164,7 @@ public class GeometryUtilsTest {
 
         List<List<Geometry>> noLand = GeometryUtils.createGeometryItems(
                 source,
-                (rawInput, s) -> GeometryUtils.createGeometryWithoutLand(rawInput),
+                (rawInput, s, metadataUuid) -> GeometryUtils.createGeometryWithoutLand(rawInput, metadataUuid),
                 null
         );
 
@@ -253,6 +253,7 @@ public class GeometryUtilsTest {
         String xml = readResourceFile("classpath:canned/sample_extent_two_points_one_description.xml");
         Map<?, ?> geojson = GeometryUtils.createGeometryItems(jaxb.unmarshal(xml), GeometryUtils::createGeometryFrom, null);
 
+        Assertions.assertNotNull(geojson);
         List<Map<String, Object>> members = (List<Map<String, Object>>) geojson.get("geometries");
         List<String> descriptions = members.stream()
                 .map(member -> (Map<?, ?>) member.get("metadata"))
