@@ -102,6 +102,36 @@ public class BatchController {
                 "parameters: " + parameters
         );
     }
+    /**
+     * Trigger the generation of tiler to parquet for fast rendering.
+     * This method submits a batch job to the data-access-service, with job parameters
+     *
+     * @param confirm Must be set to true to submit the batch job. If false, the operation will not proceed.
+     * @return A ResponseEntity containing the result of the job submission. If the confirm parameter is not true,
+     *         a bad request response is returned. Otherwise, a success response with job details is returned.
+     */
+    @PostMapping(path = "/tiler-parquet", consumes = "application/json", produces = "application/json")
+    @Operation(security = {@SecurityRequirement(name = "X-API-Key")}, description = "Generate tiler summary in aws batch for fast rendering")
+    public ResponseEntity<String> generateTilerParquetInBatch(
+            @RequestParam(value = "confirm", defaultValue = "false") Boolean confirm) {
+
+        var rejected = rejectUnlessConfirmed(confirm, "generate the tiler in batch");
+        if (rejected != null) {
+            return rejected;
+        }
+
+        // The data-access-service entry_point.py switches on "type", and use "uuid" to limit the run to one dataset
+        var parameters = new HashMap<String, String>();
+        parameters.put("type", "generate-tiler-parquet");
+
+        return submitJob(
+                "generate-tiler-parquet",
+                "data-access-service-batch-tiler-parquet-job-queue",
+                "data-access-service-batch-tiler-parquet-job-definition",
+                builder -> builder.parameters(parameters),
+                "parameters: " + parameters
+        );
+    }
 
     private ResponseEntity<String> rejectUnlessConfirmed(Boolean confirm, String action) {
         if (Boolean.TRUE.equals(confirm)) {
