@@ -1033,4 +1033,26 @@ public class StacCollectionMapperServiceTest {
 
         verify(expected);
     }
+    /**
+     * This dataset has a polygon with invalid geometry, which should be excluded from the spatial extent
+     * @throws IOException - Not expected
+     * @throws JSONException - Not expected
+     */
+    @Test
+    public void verifyRingParseCorrectly() throws IOException, JSONException {
+        String xml = readResourceFile("classpath:canned/sample30.xml");
+        String expected = readResourceFile("classpath:canned/sample30_stac.json");
+        indexerService.indexMetadata(xml);
+
+        verify(expected);
+    }
+
+    @Test
+    public void verifyRingParseCorrectly2() throws IOException, JSONException {
+        String xml = readResourceFile("classpath:canned/sample31.xml");
+        String expected = readResourceFile("classpath:canned/sample31_stac.json");
+        indexerService.indexMetadata(xml);
+
+        verify(expected);
+    }
 }

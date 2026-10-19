@@ -1,0 +1,1061 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdb:MD_Metadata xmlns:mdb="http://standards.iso.org/iso/19115/-3/mdb/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cat="http://standards.iso.org/iso/19115/-3/cat/1.0" xmlns:cit="http://standards.iso.org/iso/19115/-3/cit/2.0" xmlns:gcx="http://standards.iso.org/iso/19115/-3/gcx/1.0" xmlns:gex="http://standards.iso.org/iso/19115/-3/gex/1.0" xmlns:lan="http://standards.iso.org/iso/19115/-3/lan/1.0" xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0" xmlns:mas="http://standards.iso.org/iso/19115/-3/mas/1.0" xmlns:mcc="http://standards.iso.org/iso/19115/-3/mcc/1.0" xmlns:mco="http://standards.iso.org/iso/19115/-3/mco/1.0" xmlns:mda="http://standards.iso.org/iso/19115/-3/mda/1.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0" xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0" xmlns:mex="http://standards.iso.org/iso/19115/-3/mex/1.0" xmlns:mmi="http://standards.iso.org/iso/19115/-3/mmi/1.0" xmlns:mpc="http://standards.iso.org/iso/19115/-3/mpc/1.0" xmlns:mrc="http://standards.iso.org/iso/19115/-3/mrc/2.0" xmlns:mrd="http://standards.iso.org/iso/19115/-3/mrd/1.0" xmlns:mri="http://standards.iso.org/iso/19115/-3/mri/1.0" xmlns:mrl="http://standards.iso.org/iso/19115/-3/mrl/2.0" xmlns:mrs="http://standards.iso.org/iso/19115/-3/mrs/1.0" xmlns:msr="http://standards.iso.org/iso/19115/-3/msr/2.0" xmlns:mdq="http://standards.iso.org/iso/19157/-2/mdq/1.0" xmlns:mac="http://standards.iso.org/iso/19115/-3/mac/2.0" xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://standards.iso.org/iso/19115/-3/cat/1.0 http://standards.iso.org/iso/19115/-3/cat/1.0/cat.xsd http://standards.iso.org/iso/19115/-3/cit/2.0 http://standards.iso.org/iso/19115/-3/cit/2.0/cit.xsd http://standards.iso.org/iso/19115/-3/gcx/1.0 http://standards.iso.org/iso/19115/-3/gcx/1.0/gcx.xsd http://standards.iso.org/iso/19115/-3/gex/1.0 http://standards.iso.org/iso/19115/-3/gex/1.0/gex.xsd http://standards.iso.org/iso/19115/-3/lan/1.0 http://standards.iso.org/iso/19115/-3/lan/1.0/lan.xsd http://standards.iso.org/iso/19115/-3/srv/2.0 http://standards.iso.org/iso/19115/-3/srv/2.0/srv.xsd http://standards.iso.org/iso/19115/-3/mas/1.0 http://standards.iso.org/iso/19115/-3/mas/1.0/mas.xsd http://standards.iso.org/iso/19115/-3/mcc/1.0 http://standards.iso.org/iso/19115/-3/mcc/1.0/mcc.xsd http://standards.iso.org/iso/19115/-3/mco/1.0 http://standards.iso.org/iso/19115/-3/mco/1.0/mco.xsd http://standards.iso.org/iso/19115/-3/mda/2.0 http://standards.iso.org/iso/19115/-3/mda/2.0/mda.xsd http://standards.iso.org/iso/19115/-3/mdb/2.0 http://standards.iso.org/iso/19115/-3/mdb/2.0/mdb.xsd http://standards.iso.org/iso/19115/-3/mds/2.0 http://standards.iso.org/iso/19115/-3/mds/2.0/mds.xsd http://standards.iso.org/iso/19115/-3/mdt/2.0 http://standards.iso.org/iso/19115/-3/mdt/2.0/mdt.xsd http://standards.iso.org/iso/19115/-3/mex/1.0 http://standards.iso.org/iso/19115/-3/mex/1.0/mex.xsd http://standards.iso.org/iso/19115/-3/mmi/1.0 http://standards.iso.org/iso/19115/-3/mmi/1.0/mmi.xsd http://standards.iso.org/iso/19115/-3/mpc/1.0 http://standards.iso.org/iso/19115/-3/mpc/1.0/mpc.xsd http://standards.iso.org/iso/19115/-3/mrc/2.0 http://standards.iso.org/iso/19115/-3/mrc/2.0/mrc.xsd http://standards.iso.org/iso/19115/-3/mrd/1.0 http://standards.iso.org/iso/19115/-3/mrd/1.0/mrd.xsd http://standards.iso.org/iso/19115/-3/mri/1.0 http://standards.iso.org/iso/19115/-3/mri/1.0/mri.xsd http://standards.iso.org/iso/19115/-3/mrl/2.0 http://standards.iso.org/iso/19115/-3/mrl/2.0/mrl.xsd http://standards.iso.org/iso/19115/-3/mrs/1.0 http://standards.iso.org/iso/19115/-3/mrs/1.0/mrs.xsd http://standards.iso.org/iso/19115/-3/msr/2.0 http://standards.iso.org/iso/19115/-3/msr/2.0/msr.xsd http://standards.iso.org/iso/19157/-2/mdq/1.0 http://standards.iso.org/iso/19157/-2/mdq/1.0/mdq.xsd http://standards.iso.org/iso/19115/-3/mac/2.0 http://standards.iso.org/iso/19115/-3/mac/2.0/mac.xsd http://standards.iso.org/iso/19115/-3/gco/1.0 http://standards.iso.org/iso/19115/-3/gco/1.0/gco.xsd http://standards.iso.org/iso/19115/-3/gmw/1.0 http://standards.iso.org/iso/19115/-3/gmw/1.0/gmw.xsd http://www.opengis.net/gml/3.2 http://schemas.opengis.net/gml/3.2.1/gml.xsd http://www.w3.org/1999/xlink http://www.w3.org/1999/xlink.xsd">
+    <mdb:metadataIdentifier>
+        <mcc:MD_Identifier>
+            <mcc:code>
+                <gco:CharacterString>0063c8d0-13da-11dc-b213-00188b4c0af8</gco:CharacterString>
+            </mcc:code>
+        </mcc:MD_Identifier>
+    </mdb:metadataIdentifier>
+    <mdb:defaultLocale>
+        <lan:PT_Locale>
+            <lan:language>
+                <lan:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="eng" />
+            </lan:language>
+            <lan:characterEncoding>
+                <lan:MD_CharacterSetCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_CharacterSetCode" codeListValue="utf8" />
+            </lan:characterEncoding>
+        </lan:PT_Locale>
+    </mdb:defaultLocale>
+    <mdb:parentMetadata uuidref="3a4eacd0-13c2-11dc-b213-00188b4c0af8" />
+    <mdb:metadataScope>
+        <mdb:MD_MetadataScope>
+            <mdb:resourceScope>
+                <mcc:MD_ScopeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ScopeCode" codeListValue="dataset" />
+            </mdb:resourceScope>
+            <mdb:name>
+                <gco:CharacterString />
+            </mdb:name>
+        </mdb:MD_MetadataScope>
+    </mdb:metadataScope>
+    <mdb:contact>
+        <cit:CI_Responsibility>
+            <cit:role>
+                <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="processor" />
+            </cit:role>
+            <cit:party>
+                <cit:CI_Individual>
+                    <cit:contactInfo>
+                        <cit:CI_Contact>
+                            <cit:address>
+                                <cit:CI_Address>
+                                    <cit:electronicMailAddress>
+                                        <gco:CharacterString>info@bluenet.org.au</gco:CharacterString>
+                                    </cit:electronicMailAddress>
+                                </cit:CI_Address>
+                            </cit:address>
+                        </cit:CI_Contact>
+                    </cit:contactInfo>
+                    <cit:positionName>
+                        <gco:CharacterString>BlueNet Data Facilitator</gco:CharacterString>
+                    </cit:positionName>
+                </cit:CI_Individual>
+            </cit:party>
+        </cit:CI_Responsibility>
+    </mdb:contact>
+    <mdb:contact>
+        <cit:CI_Responsibility>
+            <cit:role>
+                <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="principalInvestigator" />
+            </cit:role>
+            <cit:party>
+                <cit:CI_Organisation>
+                    <cit:name>
+                        <gco:CharacterString>Commonwealth of Australia (Geoscience Australia)</gco:CharacterString>
+                    </cit:name>
+                    <cit:individual>
+                        <cit:CI_Individual>
+                            <cit:name>
+                                <gco:CharacterString>Ryan, David</gco:CharacterString>
+                            </cit:name>
+                        </cit:CI_Individual>
+                    </cit:individual>
+                </cit:CI_Organisation>
+            </cit:party>
+        </cit:CI_Responsibility>
+    </mdb:contact>
+    <mdb:dateInfo>
+        <cit:CI_Date>
+            <cit:date>
+                <gco:DateTime>2007-06-06T15:00:00</gco:DateTime>
+            </cit:date>
+            <cit:dateType>
+                <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode" codeListValue="creation" />
+            </cit:dateType>
+        </cit:CI_Date>
+    </mdb:dateInfo>
+    <mdb:dateInfo>
+        <cit:CI_Date>
+            <cit:date>
+                <gco:DateTime>2014-12-16T12:26:33</gco:DateTime>
+            </cit:date>
+            <cit:dateType>
+                <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode" codeListValue="revision" />
+            </cit:dateType>
+        </cit:CI_Date>
+    </mdb:dateInfo>
+    <mdb:metadataStandard>
+        <cit:CI_Citation>
+            <cit:title>
+                <gco:CharacterString>ISO 19115-3:2018</gco:CharacterString>
+            </cit:title>
+        </cit:CI_Citation>
+    </mdb:metadataStandard>
+    <mdb:metadataLinkage>
+        <cit:CI_OnlineResource>
+            <cit:linkage>
+                <gco:CharacterString>https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/0063c8d0-13da-11dc-b213-00188b4c0af8</gco:CharacterString>
+            </cit:linkage>
+            <cit:protocol>
+                <gco:CharacterString>WWW:LINK-1.0-http--metadata-URL</gco:CharacterString>
+            </cit:protocol>
+            <cit:description>
+                <gco:CharacterString>Point of truth URL of this metadata record</gco:CharacterString>
+            </cit:description>
+        </cit:CI_OnlineResource>
+    </mdb:metadataLinkage>
+    <mdb:identificationInfo>
+        <mri:MD_DataIdentification>
+            <mri:citation>
+                <cit:CI_Citation>
+                    <cit:title>
+                        <gco:CharacterString>Grainsize of surface samples collected from the reef flat physiographic zone of Wistari Reef</gco:CharacterString>
+                    </cit:title>
+                    <cit:date>
+                        <cit:CI_Date>
+                            <cit:date>
+                                <gco:DateTime>2007-06-06T13:00:00</gco:DateTime>
+                            </cit:date>
+                            <cit:dateType>
+                                <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                            </cit:dateType>
+                        </cit:CI_Date>
+                    </cit:date>
+                    <cit:citedResponsibleParty>
+                        <cit:CI_Responsibility>
+                            <cit:role>
+                                <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="principalInvestigator" />
+                            </cit:role>
+                            <cit:party>
+                                <cit:CI_Organisation>
+                                    <cit:name>
+                                        <gco:CharacterString>Department of Earth and Marine Sciences (DEMS), The Australian National University (ANU)</gco:CharacterString>
+                                    </cit:name>
+                                    <cit:individual>
+                                        <cit:CI_Individual>
+                                            <cit:name>
+                                                <gco:CharacterString>Ryan, David</gco:CharacterString>
+                                            </cit:name>
+                                            <cit:contactInfo>
+                                                <cit:CI_Contact>
+                                                    <cit:phone>
+                                                        <cit:CI_Telephone>
+                                                            <cit:number>
+                                                                <gco:CharacterString>61 427 894 739</gco:CharacterString>
+                                                            </cit:number>
+                                                            <cit:numberType>
+                                                                <cit:CI_TelephoneTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_TelephoneTypeCode" codeListValue="voice" />
+                                                            </cit:numberType>
+                                                        </cit:CI_Telephone>
+                                                    </cit:phone>
+                                                    <cit:address>
+                                                        <cit:CI_Address>
+                                                            <cit:electronicMailAddress>
+                                                                <gco:CharacterString>David.ryan75@gmail.com</gco:CharacterString>
+                                                            </cit:electronicMailAddress>
+                                                        </cit:CI_Address>
+                                                    </cit:address>
+                                                </cit:CI_Contact>
+                                            </cit:contactInfo>
+                                            <cit:positionName>
+                                                <gco:CharacterString>Honours Student</gco:CharacterString>
+                                            </cit:positionName>
+                                        </cit:CI_Individual>
+                                    </cit:individual>
+                                </cit:CI_Organisation>
+                            </cit:party>
+                        </cit:CI_Responsibility>
+                    </cit:citedResponsibleParty>
+                    <cit:citedResponsibleParty>
+                        <cit:CI_Responsibility>
+                            <cit:role>
+                                <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="collaborator" />
+                            </cit:role>
+                            <cit:party>
+                                <cit:CI_Organisation>
+                                    <cit:name>
+                                        <gco:CharacterString>Department of Earth and Marine Sciences (DEMS), The Australian National University (ANU)</gco:CharacterString>
+                                    </cit:name>
+                                    <cit:individual>
+                                        <cit:CI_Individual>
+                                            <cit:name>
+                                                <gco:CharacterString>Opdyke, Bradley, Dr</gco:CharacterString>
+                                            </cit:name>
+                                            <cit:contactInfo>
+                                                <cit:CI_Contact>
+                                                    <cit:phone>
+                                                        <cit:CI_Telephone>
+                                                            <cit:number>
+                                                                <gco:CharacterString>61 2 6125 4205</gco:CharacterString>
+                                                            </cit:number>
+                                                            <cit:numberType>
+                                                                <cit:CI_TelephoneTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_TelephoneTypeCode" codeListValue="voice" />
+                                                            </cit:numberType>
+                                                        </cit:CI_Telephone>
+                                                    </cit:phone>
+                                                    <cit:phone>
+                                                        <cit:CI_Telephone>
+                                                            <cit:number>
+                                                                <gco:CharacterString>61 2 6125 5544</gco:CharacterString>
+                                                            </cit:number>
+                                                            <cit:numberType>
+                                                                <cit:CI_TelephoneTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_TelephoneTypeCode" codeListValue="facsimile" />
+                                                            </cit:numberType>
+                                                        </cit:CI_Telephone>
+                                                    </cit:phone>
+                                                    <cit:address>
+                                                        <cit:CI_Address>
+                                                            <cit:deliveryPoint>
+                                                                <gco:CharacterString>Building 47, The Australian National University</gco:CharacterString>
+                                                            </cit:deliveryPoint>
+                                                            <cit:city>
+                                                                <gco:CharacterString>Canberra</gco:CharacterString>
+                                                            </cit:city>
+                                                            <cit:administrativeArea>
+                                                                <gco:CharacterString>ACT</gco:CharacterString>
+                                                            </cit:administrativeArea>
+                                                            <cit:postalCode>
+                                                                <gco:CharacterString>0200</gco:CharacterString>
+                                                            </cit:postalCode>
+                                                            <cit:country>
+                                                                <gco:CharacterString>Australia</gco:CharacterString>
+                                                            </cit:country>
+                                                            <cit:electronicMailAddress>
+                                                                <gco:CharacterString>Bradley.Opdyke@anu.edu.au</gco:CharacterString>
+                                                            </cit:electronicMailAddress>
+                                                        </cit:CI_Address>
+                                                    </cit:address>
+                                                </cit:CI_Contact>
+                                            </cit:contactInfo>
+                                            <cit:positionName>
+                                                <gco:CharacterString>Senior Lecturer</gco:CharacterString>
+                                            </cit:positionName>
+                                        </cit:CI_Individual>
+                                    </cit:individual>
+                                </cit:CI_Organisation>
+                            </cit:party>
+                        </cit:CI_Responsibility>
+                    </cit:citedResponsibleParty>
+                </cit:CI_Citation>
+            </mri:citation>
+            <mri:abstract>
+                <gco:CharacterString>Wistari Reef is a lagoonal platform reef, situated on the Tropic of Capricorn, within the Capricorn and Bunker region of the southern Great Barrier Reef. Five surface samples were taken from the reef flats and analysed to determine mean grainsize and the sorting coefficient (expressed as the standard deviation of grainsize) within each sample. The reef flat features moderately well-sorted coarse to very coarse sand, and can be divided into two sub-groups: the windward reef flats (samples S62 and S61) and the leeward reef flats (samples S24, S25 and S02).</gco:CharacterString>
+            </mri:abstract>
+            <mri:purpose>
+                <gco:CharacterString>To provide an overview of the sedimentary zones of Wistari Reef.  Conducted as part of a broader study looking at Holocene production and accumulation of sediments on Wistari Reef.</gco:CharacterString>
+            </mri:purpose>
+            <mri:credit>
+                <gco:CharacterString>Funded by The Australian Research Council (ARC)</gco:CharacterString>
+            </mri:credit>
+            <mri:credit>
+                <gco:CharacterString>The Australian National University (ANU)</gco:CharacterString>
+            </mri:credit>
+            <mri:status>
+                <mcc:MD_ProgressCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ProgressCode" codeListValue="completed" />
+            </mri:status>
+            <mri:pointOfContact>
+                <cit:CI_Responsibility>
+                    <cit:role>
+                        <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="principalInvestigator" />
+                    </cit:role>
+                    <cit:party>
+                        <cit:CI_Organisation>
+                            <cit:name>
+                                <gco:CharacterString>Commonwealth of Australia (Geoscience Australia)</gco:CharacterString>
+                            </cit:name>
+                            <cit:individual>
+                                <cit:CI_Individual>
+                                    <cit:name>
+                                        <gco:CharacterString>Ryan, David</gco:CharacterString>
+                                    </cit:name>
+                                    <cit:contactInfo>
+                                        <cit:CI_Contact>
+                                            <cit:phone>
+                                                <cit:CI_Telephone>
+                                                    <cit:number>
+                                                        <gco:CharacterString>61 427 894 739</gco:CharacterString>
+                                                    </cit:number>
+                                                    <cit:numberType>
+                                                        <cit:CI_TelephoneTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_TelephoneTypeCode" codeListValue="voice" />
+                                                    </cit:numberType>
+                                                </cit:CI_Telephone>
+                                            </cit:phone>
+                                            <cit:address>
+                                                <cit:CI_Address>
+                                                    <cit:electronicMailAddress>
+                                                        <gco:CharacterString>David.ryan75@gmail.com</gco:CharacterString>
+                                                    </cit:electronicMailAddress>
+                                                </cit:CI_Address>
+                                            </cit:address>
+                                        </cit:CI_Contact>
+                                    </cit:contactInfo>
+                                    <cit:positionName>
+                                        <gco:CharacterString>Sedimentologist</gco:CharacterString>
+                                    </cit:positionName>
+                                </cit:CI_Individual>
+                            </cit:individual>
+                        </cit:CI_Organisation>
+                    </cit:party>
+                </cit:CI_Responsibility>
+            </mri:pointOfContact>
+            <mri:pointOfContact>
+                <cit:CI_Responsibility>
+                    <cit:role>
+                        <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="collaborator" />
+                    </cit:role>
+                    <cit:party>
+                        <cit:CI_Organisation>
+                            <cit:name>
+                                <gco:CharacterString>Research School of Earth Sciences (RSES), The Australian National University (ANU)</gco:CharacterString>
+                            </cit:name>
+                            <cit:individual>
+                                <cit:CI_Individual>
+                                    <cit:name>
+                                        <gco:CharacterString>Opdyke, Bradley, Dr</gco:CharacterString>
+                                    </cit:name>
+                                    <cit:contactInfo>
+                                        <cit:CI_Contact>
+                                            <cit:phone>
+                                                <cit:CI_Telephone>
+                                                    <cit:number>
+                                                        <gco:CharacterString>61 2 6125 4205</gco:CharacterString>
+                                                    </cit:number>
+                                                    <cit:numberType>
+                                                        <cit:CI_TelephoneTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_TelephoneTypeCode" codeListValue="voice" />
+                                                    </cit:numberType>
+                                                </cit:CI_Telephone>
+                                            </cit:phone>
+                                            <cit:phone>
+                                                <cit:CI_Telephone>
+                                                    <cit:number>
+                                                        <gco:CharacterString>61 2 6125 5544</gco:CharacterString>
+                                                    </cit:number>
+                                                    <cit:numberType>
+                                                        <cit:CI_TelephoneTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_TelephoneTypeCode" codeListValue="facsimile" />
+                                                    </cit:numberType>
+                                                </cit:CI_Telephone>
+                                            </cit:phone>
+                                            <cit:address>
+                                                <cit:CI_Address>
+                                                    <cit:deliveryPoint>
+                                                        <gco:CharacterString>Building 142, The Australian National University</gco:CharacterString>
+                                                    </cit:deliveryPoint>
+                                                    <cit:city>
+                                                        <gco:CharacterString>Canberra</gco:CharacterString>
+                                                    </cit:city>
+                                                    <cit:administrativeArea>
+                                                        <gco:CharacterString>ACT</gco:CharacterString>
+                                                    </cit:administrativeArea>
+                                                    <cit:postalCode>
+                                                        <gco:CharacterString>0200</gco:CharacterString>
+                                                    </cit:postalCode>
+                                                    <cit:country>
+                                                        <gco:CharacterString>Australia</gco:CharacterString>
+                                                    </cit:country>
+                                                    <cit:electronicMailAddress>
+                                                        <gco:CharacterString>Bradley.Opdyke@anu.edu.au</gco:CharacterString>
+                                                    </cit:electronicMailAddress>
+                                                </cit:CI_Address>
+                                            </cit:address>
+                                        </cit:CI_Contact>
+                                    </cit:contactInfo>
+                                    <cit:positionName>
+                                        <gco:CharacterString>Senior Lecturer</gco:CharacterString>
+                                    </cit:positionName>
+                                </cit:CI_Individual>
+                            </cit:individual>
+                        </cit:CI_Organisation>
+                    </cit:party>
+                </cit:CI_Responsibility>
+            </mri:pointOfContact>
+            <mri:topicCategory>
+                <mri:MD_TopicCategoryCode>environment</mri:MD_TopicCategoryCode>
+            </mri:topicCategory>
+            <mri:extent>
+                <gex:EX_Extent>
+                    <gex:geographicElement>
+                        <gex:EX_BoundingPolygon>
+                            <gex:polygon>
+                                <gml:Polygon gml:id="d102e1421" srsName="urn:x-ogc:def:crs:EPSG:6.6:4326">
+                                    <gml:exterior>
+                                        <gml:LinearRing>
+                                            <gml:coordinates>151.87843, -23.45895, 151.86952, -23.48970, 151.87252, -23.49043, 151.90253, -23.45683, 151.90041, -23.45359, 151.87843, -23.45895.</gml:coordinates>
+                                        </gml:LinearRing>
+                                    </gml:exterior>
+                                </gml:Polygon>
+                            </gex:polygon>
+                        </gex:EX_BoundingPolygon>
+                    </gex:geographicElement>
+                    <gex:geographicElement>
+                        <gex:EX_GeographicBoundingBox>
+                            <gex:westBoundLongitude>
+                                <gco:Decimal>151.5</gco:Decimal>
+                            </gex:westBoundLongitude>
+                            <gex:eastBoundLongitude>
+                                <gco:Decimal>153</gco:Decimal>
+                            </gex:eastBoundLongitude>
+                            <gex:southBoundLatitude>
+                                <gco:Decimal>-24.5</gco:Decimal>
+                            </gex:southBoundLatitude>
+                            <gex:northBoundLatitude>
+                                <gco:Decimal>-23</gco:Decimal>
+                            </gex:northBoundLatitude>
+                        </gex:EX_GeographicBoundingBox>
+                    </gex:geographicElement>
+                    <gex:geographicElement>
+                        <gex:EX_GeographicDescription>
+                            <gex:geographicIdentifier>
+                                <mcc:MD_Identifier>
+                                    <mcc:authority>
+                                        <cit:CI_Citation>
+                                            <cit:title>
+                                                <gco:CharacterString>Marine Community Profile v1.2</gco:CharacterString>
+                                            </cit:title>
+                                            <cit:date>
+                                                <cit:CI_Date>
+                                                    <cit:date>
+                                                        <gco:DateTime>2006-10-13T10:43:00</gco:DateTime>
+                                                    </cit:date>
+                                                    <cit:dateType>
+                                                        <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode" codeListValue="revision" />
+                                                    </cit:dateType>
+                                                </cit:CI_Date>
+                                            </cit:date>
+                                            <cit:citedResponsibleParty>
+                                                <cit:CI_Responsibility>
+                                                    <cit:role>
+                                                        <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="owner" />
+                                                    </cit:role>
+                                                    <cit:party>
+                                                        <cit:CI_Organisation>
+                                                            <cit:name>
+                                                                <gco:CharacterString>Australian Ocean Data Centre Joint Facility</gco:CharacterString>
+                                                            </cit:name>
+                                                            <cit:contactInfo>
+                                                                <cit:CI_Contact>
+                                                                    <cit:onlineResource>
+                                                                        <cit:CI_OnlineResource>
+                                                                            <cit:linkage>
+                                                                                <gco:CharacterString>http://www.aodc.gov.au/</gco:CharacterString>
+                                                                            </cit:linkage>
+                                                                            <cit:protocol>
+                                                                                <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
+                                                                            </cit:protocol>
+                                                                        </cit:CI_OnlineResource>
+                                                                    </cit:onlineResource>
+                                                                </cit:CI_Contact>
+                                                            </cit:contactInfo>
+                                                        </cit:CI_Organisation>
+                                                    </cit:party>
+                                                </cit:CI_Responsibility>
+                                            </cit:citedResponsibleParty>
+                                        </cit:CI_Citation>
+                                    </mcc:authority>
+                                    <mcc:code>
+                                        <gco:CharacterString>Great Barrier Reef Capricorn/Bunker Section, QLD</gco:CharacterString>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </gex:geographicIdentifier>
+                        </gex:EX_GeographicDescription>
+                    </gex:geographicElement>
+                    <gex:geographicElement>
+                        <gex:EX_GeographicDescription>
+                            <gex:geographicIdentifier>
+                                <mcc:MD_Identifier>
+                                    <mcc:authority>
+                                        <cit:CI_Citation>
+                                            <cit:title>
+                                                <gco:CharacterString>c-squares</gco:CharacterString>
+                                            </cit:title>
+                                            <cit:date>
+                                                <cit:CI_Date>
+                                                    <cit:date>
+                                                        <gco:DateTime>2001-12-13T14:34:00</gco:DateTime>
+                                                    </cit:date>
+                                                    <cit:dateType>
+                                                        <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode" codeListValue="creation" />
+                                                    </cit:dateType>
+                                                </cit:CI_Date>
+                                            </cit:date>
+                                            <cit:citedResponsibleParty>
+                                                <cit:CI_Responsibility>
+                                                    <cit:role>
+                                                        <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="owner" />
+                                                    </cit:role>
+                                                    <cit:party>
+                                                        <cit:CI_Organisation>
+                                                            <cit:name>
+                                                                <gco:CharacterString>CSIRO Marine and Atmospheric Research</gco:CharacterString>
+                                                            </cit:name>
+                                                            <cit:contactInfo>
+                                                                <cit:CI_Contact>
+                                                                    <cit:onlineResource>
+                                                                        <cit:CI_OnlineResource>
+                                                                            <cit:linkage>
+                                                                                <gco:CharacterString>http://www.marine.csiro.au/csquares/index.html</gco:CharacterString>
+                                                                            </cit:linkage>
+                                                                            <cit:protocol>
+                                                                                <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
+                                                                            </cit:protocol>
+                                                                        </cit:CI_OnlineResource>
+                                                                    </cit:onlineResource>
+                                                                </cit:CI_Contact>
+                                                            </cit:contactInfo>
+                                                            <cit:individual>
+                                                                <cit:CI_Individual>
+                                                                    <cit:name>
+                                                                        <gco:CharacterString>Rees, Tony</gco:CharacterString>
+                                                                    </cit:name>
+                                                                </cit:CI_Individual>
+                                                            </cit:individual>
+                                                        </cit:CI_Organisation>
+                                                    </cit:party>
+                                                </cit:CI_Responsibility>
+                                            </cit:citedResponsibleParty>
+                                        </cit:CI_Citation>
+                                    </mcc:authority>
+                                    <mcc:code>
+                                        <gco:CharacterString>3215:131:2</gco:CharacterString>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </gex:geographicIdentifier>
+                        </gex:EX_GeographicDescription>
+                    </gex:geographicElement>
+                    <gex:temporalElement>
+                        <gex:EX_TemporalExtent>
+                            <gex:extent>
+                                <gml:TimePeriod gml:id="d102e1582">
+                                    <gml:beginPosition>1998</gml:beginPosition>
+                                    <gml:endPosition>1998</gml:endPosition>
+                                </gml:TimePeriod>
+                            </gex:extent>
+                        </gex:EX_TemporalExtent>
+                    </gex:temporalElement>
+                </gex:EX_Extent>
+            </mri:extent>
+            <mri:graphicOverview>
+                <mcc:MD_BrowseGraphic>
+                    <mcc:fileName>
+                        <gco:CharacterString>https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/0063c8d0-13da-11dc-b213-00188b4c0af8/attachments/shallow reef flats_s.png</gco:CharacterString>
+                    </mcc:fileName>
+                    <mcc:fileDescription>
+                        <gco:CharacterString>thumbnail</gco:CharacterString>
+                    </mcc:fileDescription>
+                    <mcc:fileType>
+                        <gco:CharacterString>png</gco:CharacterString>
+                    </mcc:fileType>
+                </mcc:MD_BrowseGraphic>
+            </mri:graphicOverview>
+            <mri:graphicOverview>
+                <mcc:MD_BrowseGraphic>
+                    <mcc:fileName>
+                        <gco:CharacterString>https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/0063c8d0-13da-11dc-b213-00188b4c0af8/attachments/shallow reef flats.png</gco:CharacterString>
+                    </mcc:fileName>
+                    <mcc:fileDescription>
+                        <gco:CharacterString>large_thumbnail</gco:CharacterString>
+                    </mcc:fileDescription>
+                    <mcc:fileType>
+                        <gco:CharacterString>png</gco:CharacterString>
+                    </mcc:fileType>
+                </mcc:MD_BrowseGraphic>
+            </mri:graphicOverview>
+            <mri:resourceFormat>
+                <mrd:MD_Format>
+                    <mrd:formatSpecificationCitation>
+                        <cit:CI_Citation>
+                            <cit:title>
+                                <gco:CharacterString>Windows Photo Gallery</gco:CharacterString>
+                            </cit:title>
+                            <cit:alternateTitle />
+                            <cit:date gco:nilReason="unknown" />
+                            <cit:edition>
+                                <gco:CharacterString>2007</gco:CharacterString>
+                            </cit:edition>
+                        </cit:CI_Citation>
+                    </mrd:formatSpecificationCitation>
+                </mrd:MD_Format>
+            </mri:resourceFormat>
+            <mri:descriptiveKeywords>
+                <mri:MD_Keywords>
+                    <mri:keyword>
+                        <gco:CharacterString>Oceans | Coastal Processes | Coral Reefs</gco:CharacterString>
+                    </mri:keyword>
+                    <mri:type>
+                        <mri:MD_KeywordTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_KeywordTypeCode" codeListValue="discipline" />
+                    </mri:type>
+                    <mri:thesaurusName>
+                        <cit:CI_Citation>
+                            <cit:title>
+                                <gco:CharacterString>Global Change Master Directory Earth Science Keywords v.5.3.8</gco:CharacterString>
+                            </cit:title>
+                            <cit:date>
+                                <cit:CI_Date>
+                                    <cit:date>
+                                        <gco:DateTime>2007-04-17T10:37:00</gco:DateTime>
+                                    </cit:date>
+                                    <cit:dateType>
+                                        <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode" codeListValue="revision" />
+                                    </cit:dateType>
+                                </cit:CI_Date>
+                            </cit:date>
+                            <cit:citedResponsibleParty>
+                                <cit:CI_Responsibility>
+                                    <cit:role>
+                                        <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="owner" />
+                                    </cit:role>
+                                    <cit:party>
+                                        <cit:CI_Organisation>
+                                            <cit:name>
+                                                <gco:CharacterString>NASA</gco:CharacterString>
+                                            </cit:name>
+                                            <cit:contactInfo>
+                                                <cit:CI_Contact>
+                                                    <cit:onlineResource>
+                                                        <cit:CI_OnlineResource>
+                                                            <cit:linkage>
+                                                                <gco:CharacterString>http://gcmd.gsfc.nasa.gov/Resources/valids/</gco:CharacterString>
+                                                            </cit:linkage>
+                                                            <cit:protocol>
+                                                                <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
+                                                            </cit:protocol>
+                                                        </cit:CI_OnlineResource>
+                                                    </cit:onlineResource>
+                                                </cit:CI_Contact>
+                                            </cit:contactInfo>
+                                        </cit:CI_Organisation>
+                                    </cit:party>
+                                </cit:CI_Responsibility>
+                            </cit:citedResponsibleParty>
+                        </cit:CI_Citation>
+                    </mri:thesaurusName>
+                </mri:MD_Keywords>
+            </mri:descriptiveKeywords>
+            <mri:descriptiveKeywords>
+                <mri:MD_Keywords>
+                    <mri:keyword>
+                        <gco:CharacterString>Oceans | Marine Sediments | Sediment Grain Size</gco:CharacterString>
+                    </mri:keyword>
+                    <mri:type>
+                        <mri:MD_KeywordTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_KeywordTypeCode" codeListValue="discipline" />
+                    </mri:type>
+                    <mri:thesaurusName>
+                        <cit:CI_Citation>
+                            <cit:title>
+                                <gco:CharacterString>Global Change Master Directory Earth Science Keywords v.5.3.8</gco:CharacterString>
+                            </cit:title>
+                            <cit:date>
+                                <cit:CI_Date>
+                                    <cit:date>
+                                        <gco:DateTime>2007-04-17T10:38:00</gco:DateTime>
+                                    </cit:date>
+                                    <cit:dateType>
+                                        <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode" codeListValue="revision" />
+                                    </cit:dateType>
+                                </cit:CI_Date>
+                            </cit:date>
+                            <cit:citedResponsibleParty>
+                                <cit:CI_Responsibility>
+                                    <cit:role>
+                                        <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="owner" />
+                                    </cit:role>
+                                    <cit:party>
+                                        <cit:CI_Organisation>
+                                            <cit:name>
+                                                <gco:CharacterString>NASA</gco:CharacterString>
+                                            </cit:name>
+                                            <cit:contactInfo>
+                                                <cit:CI_Contact>
+                                                    <cit:onlineResource>
+                                                        <cit:CI_OnlineResource>
+                                                            <cit:linkage>
+                                                                <gco:CharacterString>http://gcmd.gsfc.nasa.gov/Resources/valids/</gco:CharacterString>
+                                                            </cit:linkage>
+                                                            <cit:protocol>
+                                                                <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
+                                                            </cit:protocol>
+                                                        </cit:CI_OnlineResource>
+                                                    </cit:onlineResource>
+                                                </cit:CI_Contact>
+                                            </cit:contactInfo>
+                                        </cit:CI_Organisation>
+                                    </cit:party>
+                                </cit:CI_Responsibility>
+                            </cit:citedResponsibleParty>
+                        </cit:CI_Citation>
+                    </mri:thesaurusName>
+                </mri:MD_Keywords>
+            </mri:descriptiveKeywords>
+            <mri:descriptiveKeywords>
+                <mri:MD_Keywords>
+                    <mri:keyword>
+                        <gco:CharacterString>grainsize_size_category</gco:CharacterString>
+                    </mri:keyword>
+                    <mri:keyword>
+                        <gco:CharacterString>longitude</gco:CharacterString>
+                    </mri:keyword>
+                    <mri:keyword>
+                        <gco:CharacterString>latitude</gco:CharacterString>
+                    </mri:keyword>
+                    <mri:type>
+                        <mri:MD_KeywordTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_KeywordTypeCode" codeListValue="theme" />
+                    </mri:type>
+                </mri:MD_Keywords>
+            </mri:descriptiveKeywords>
+            <mri:resourceConstraints>
+                <mco:MD_SecurityConstraints>
+                    <mco:classification>
+                        <mco:MD_ClassificationCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ClassificationCode" codeListValue="unclassified" />
+                    </mco:classification>
+                </mco:MD_SecurityConstraints>
+            </mri:resourceConstraints>
+            <mri:resourceConstraints>
+                <mco:MD_LegalConstraints>
+                    <mco:graphic>
+                        <mcc:MD_BrowseGraphic>
+                            <mcc:fileName gco:nilReason="inapplicable" />
+                            <mcc:linkage>
+                                <cit:CI_OnlineResource>
+                                    <cit:linkage>
+                                        <gco:CharacterString>http://i.creativecommons.org/l/by/2.5/au/88x31.png</gco:CharacterString>
+                                    </cit:linkage>
+                                    <cit:protocol>
+                                        <gco:CharacterString>WWW:LINK-1.0-http--related</gco:CharacterString>
+                                    </cit:protocol>
+                                    <cit:description>
+                                        <gco:CharacterString>License Graphic</gco:CharacterString>
+                                    </cit:description>
+                                </cit:CI_OnlineResource>
+                            </mcc:linkage>
+                        </mcc:MD_BrowseGraphic>
+                    </mco:graphic>
+                    <mco:reference>
+                        <cit:CI_Citation>
+                            <cit:title>
+                                <gco:CharacterString>Creative Commons Attribution 2.5 Australia License</gco:CharacterString>
+                            </cit:title>
+                            <cit:citedResponsibleParty>
+                                <cit:CI_Responsibility>
+                                    <cit:role>
+                                        <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="" />
+                                    </cit:role>
+                                    <cit:party>
+                                        <cit:CI_Organisation>
+                                            <cit:name gco:nilReason="missing">
+                                                <gco:CharacterString />
+                                            </cit:name>
+                                            <cit:contactInfo>
+                                                <cit:CI_Contact>
+                                                    <cit:address>
+                                                        <cit:CI_Address>
+                                                            <cit:electronicMailAddress gco:nilReason="missing">
+                                                                <gco:CharacterString />
+                                                            </cit:electronicMailAddress>
+                                                        </cit:CI_Address>
+                                                    </cit:address>
+                                                    <cit:onlineResource>
+                                                        <cit:CI_OnlineResource>
+                                                            <cit:linkage>
+                                                                <gco:CharacterString>http://creativecommons.org/international/au/</gco:CharacterString>
+                                                            </cit:linkage>
+                                                            <cit:protocol>
+                                                                <gco:CharacterString>WWW:LINK-1.0-http--related</gco:CharacterString>
+                                                            </cit:protocol>
+                                                            <cit:name gco:nilReason="missing">
+                                                                <gco:CharacterString />
+                                                            </cit:name>
+                                                            <cit:description gco:nilReason="missing">
+                                                                <gco:CharacterString />
+                                                            </cit:description>
+                                                        </cit:CI_OnlineResource>
+                                                    </cit:onlineResource>
+                                                </cit:CI_Contact>
+                                            </cit:contactInfo>
+                                        </cit:CI_Organisation>
+                                    </cit:party>
+                                </cit:CI_Responsibility>
+                            </cit:citedResponsibleParty>
+                            <cit:onlineResource>
+                                <cit:CI_OnlineResource>
+                                    <cit:linkage>
+                                        <gco:CharacterString>http://creativecommons.org/licenses/by/2.5/au/</gco:CharacterString>
+                                    </cit:linkage>
+                                    <cit:protocol>
+                                        <gco:CharacterString>WWW:LINK-1.0-http--related</gco:CharacterString>
+                                    </cit:protocol>
+                                    <cit:description>
+                                        <gco:CharacterString>License Text</gco:CharacterString>
+                                    </cit:description>
+                                </cit:CI_OnlineResource>
+                            </cit:onlineResource>
+                        </cit:CI_Citation>
+                    </mco:reference>
+                    <mco:otherConstraints>
+                        <gco:CharacterString>The citation in a list of references is: citation author name/s (year metadata published), metadata title. Citation author organisation/s. File identifier and Data accessed at (add http link).</gco:CharacterString>
+                    </mco:otherConstraints>
+                </mco:MD_LegalConstraints>
+            </mri:resourceConstraints>
+            <mri:associatedResource>
+                <mri:MD_AssociatedResource>
+                    <mri:name>
+                        <cit:CI_Citation>
+                            <cit:title>
+                                <gco:CharacterString>Datasets relating to Wistari Reef</gco:CharacterString>
+                            </cit:title>
+                            <cit:date>
+                                <cit:CI_Date>
+                                    <cit:date>
+                                        <gco:DateTime>2008-12-15T00:00:00</gco:DateTime>
+                                    </cit:date>
+                                    <cit:dateType>
+                                        <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                                    </cit:dateType>
+                                </cit:CI_Date>
+                            </cit:date>
+                            <cit:citedResponsibleParty>
+                                <cit:CI_Responsibility>
+                                    <cit:role>
+                                        <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="processor" />
+                                    </cit:role>
+                                    <cit:party>
+                                        <cit:CI_Individual>
+                                            <cit:contactInfo>
+                                                <cit:CI_Contact>
+                                                    <cit:address>
+                                                        <cit:CI_Address>
+                                                            <cit:electronicMailAddress>
+                                                                <gco:CharacterString>info@bluenet.org.au</gco:CharacterString>
+                                                            </cit:electronicMailAddress>
+                                                        </cit:CI_Address>
+                                                    </cit:address>
+                                                </cit:CI_Contact>
+                                            </cit:contactInfo>
+                                            <cit:positionName>
+                                                <gco:CharacterString>BlueNet Data Facilitator</gco:CharacterString>
+                                            </cit:positionName>
+                                        </cit:CI_Individual>
+                                    </cit:party>
+                                </cit:CI_Responsibility>
+                            </cit:citedResponsibleParty>
+                        </cit:CI_Citation>
+                    </mri:name>
+                    <mri:associationType gco:nilReason="missing" />
+                </mri:MD_AssociatedResource>
+            </mri:associatedResource>
+            <mri:defaultLocale>
+                <lan:PT_Locale>
+                    <lan:language>
+                        <lan:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="eng" />
+                    </lan:language>
+                    <lan:characterEncoding>
+                        <lan:MD_CharacterSetCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_CharacterSetCode" codeListValue="utf8" />
+                    </lan:characterEncoding>
+                </lan:PT_Locale>
+            </mri:defaultLocale>
+            <mri:supplementalInformation>
+                <gco:CharacterString>[Ryan, D.A. (1998) Holocene Production and Accumulation of Sediments on Wistari Reef, southern Great Barrier Reef Province Unpublished Honours Thesis, Australian National University. 98pp]
+
+                    [Ryan, D.A., Opdyke, B.N., Jell, J.S. (2001) Holocene sediments of Wistari Reef: towards a global quantification of coral reef related neritic sedimentation in the Holocene Palaeogeography, Palaeoclimatology, Palaeoecology, 175:173-184]</gco:CharacterString>
+            </mri:supplementalInformation>
+        </mri:MD_DataIdentification>
+    </mdb:identificationInfo>
+    <mdb:contentInfo>
+        <mrc:MD_CoverageDescription>
+            <mrc:attributeDescription gco:nilReason="inapplicable" />
+            <mrc:attributeGroup>
+                <mrc:MD_AttributeGroup>
+                    <mrc:contentType>
+                        <mrc:MD_CoverageContentTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_CoverageContentTypeCode" codeListValue="physicalMeasurement" />
+                    </mrc:contentType>
+                    <mrc:attribute>
+                        <mrc:MD_SampleDimension>
+                            <mrc:description gco:nilReason="missing">
+                                <gco:CharacterString />
+                            </mrc:description>
+                            <mrc:name>
+                                <mcc:MD_Identifier>
+                                    <mcc:code>
+                                        <gco:CharacterString>grainsize_size_category</gco:CharacterString>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </mrc:name>
+                            <mrc:units>
+                                <gml:BaseUnit gml:id="d20e417">
+                                    <gml:identifier codeSpace="unknown" />
+                                    <gml:name>Percentage</gml:name>
+                                    <gml:unitsSystem />
+                                </gml:BaseUnit>
+                            </mrc:units>
+                        </mrc:MD_SampleDimension>
+                    </mrc:attribute>
+                    <mrc:attribute>
+                        <mrc:MD_SampleDimension>
+                            <mrc:description gco:nilReason="missing">
+                                <gco:CharacterString />
+                            </mrc:description>
+                            <mrc:name>
+                                <mcc:MD_Identifier>
+                                    <mcc:code>
+                                        <gco:CharacterString>longitude</gco:CharacterString>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </mrc:name>
+                            <mrc:units>
+                                <gml:BaseUnit gml:id="d20e439">
+                                    <gml:identifier codeSpace="unknown" />
+                                    <gml:name>Degrees</gml:name>
+                                    <gml:unitsSystem />
+                                </gml:BaseUnit>
+                            </mrc:units>
+                        </mrc:MD_SampleDimension>
+                    </mrc:attribute>
+                    <mrc:attribute>
+                        <mrc:MD_SampleDimension>
+                            <mrc:description gco:nilReason="missing">
+                                <gco:CharacterString />
+                            </mrc:description>
+                            <mrc:name>
+                                <mcc:MD_Identifier>
+                                    <mcc:code>
+                                        <gco:CharacterString>latitude</gco:CharacterString>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </mrc:name>
+                            <mrc:units>
+                                <gml:BaseUnit gml:id="d20e461">
+                                    <gml:identifier codeSpace="unknown" />
+                                    <gml:name>Degrees</gml:name>
+                                    <gml:unitsSystem />
+                                </gml:BaseUnit>
+                            </mrc:units>
+                        </mrc:MD_SampleDimension>
+                    </mrc:attribute>
+                </mrc:MD_AttributeGroup>
+            </mrc:attributeGroup>
+        </mrc:MD_CoverageDescription>
+    </mdb:contentInfo>
+    <mdb:distributionInfo>
+        <mrd:MD_Distribution>
+            <mrd:distributionFormat>
+                <mrd:MD_Format>
+                    <mrd:formatSpecificationCitation>
+                        <cit:CI_Citation>
+                            <cit:title>
+                                <gco:CharacterString>Windows Photo Gallery</gco:CharacterString>
+                            </cit:title>
+                            <cit:alternateTitle />
+                            <cit:date gco:nilReason="unknown" />
+                            <cit:edition>
+                                <gco:CharacterString>2007</gco:CharacterString>
+                            </cit:edition>
+                        </cit:CI_Citation>
+                    </mrd:formatSpecificationCitation>
+                </mrd:MD_Format>
+            </mrd:distributionFormat>
+            <mrd:transferOptions>
+                <mrd:MD_DigitalTransferOptions>
+                    <mrd:onLine>
+                        <cit:CI_OnlineResource>
+                            <cit:linkage>
+                                <gco:CharacterString>https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/0063c8d0-13da-11dc-b213-00188b4c0af8/attachments/ANU_Ryan_Rfft_2_data.JPG</gco:CharacterString>
+                            </cit:linkage>
+                            <cit:protocol>
+                                <gco:CharacterString>WWW:DOWNLOAD-1.0-http--downloaddata</gco:CharacterString>
+                            </cit:protocol>
+                            <cit:name>
+                                <gcx:MimeFileType type="image/pjpeg">ANU_Ryan_Rfft_2_data.JPG</gcx:MimeFileType>
+                            </cit:name>
+                        </cit:CI_OnlineResource>
+                    </mrd:onLine>
+                    <mrd:onLine>
+                        <cit:CI_OnlineResource>
+                            <cit:linkage>
+                                <gco:CharacterString>http://geoserver-123.aodn.org.au/geoserver/wms</gco:CharacterString>
+                            </cit:linkage>
+                            <cit:protocol>
+                                <gco:CharacterString>OGC:WMS-1.1.1-http-get-map</gco:CharacterString>
+                            </cit:protocol>
+                            <cit:name>
+                                <gco:CharacterString>aodn:sediment_data_wistari_reef</gco:CharacterString>
+                            </cit:name>
+                            <cit:description>
+                                <gco:CharacterString>Sediment data - Wistari Reef</gco:CharacterString>
+                            </cit:description>
+                        </cit:CI_OnlineResource>
+                    </mrd:onLine>
+                </mrd:MD_DigitalTransferOptions>
+            </mrd:transferOptions>
+        </mrd:MD_Distribution>
+    </mdb:distributionInfo>
+    <mdb:resourceLineage>
+        <mrl:LI_Lineage>
+            <mrl:statement>
+                <gco:CharacterString>Surface samples were collected on reef walks or on boat transects across Wistari Reef. Deeper samples were obtained by diving. Samples were collected using a hand-held scoop and 600ml plastic bottles. Sediment samples were sieved in order to determine modal particle diameters, and sorting data. Samples were first dry sieved. Sieves of sizes -1.0phi to 2.5phi were stacked and installed on a sieving shaker. Samples were weighed out to approximately 250g, and each sample was sieved for 15 mins to ensure correct separation of size fractions. Each fraction was then removed from the sieve and weighed. The size fractions 2.5phi, 3.0phi, 3.5phi and 4.0phi were pre-weighed, and wet sieved separately using a low pressure water hose, through smaller micropalaeontological sieves. Sediment textures are expressed in terms of mean grainsize, and sorting coefficient, represented by standard deviation.</gco:CharacterString>
+            </mrl:statement>
+            <mrl:scope>
+                <mcc:MD_Scope>
+                    <mcc:level>
+                        <mcc:MD_ScopeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ScopeCode" codeListValue="collectionHardware" />
+                    </mcc:level>
+                    <mcc:levelDescription>
+                        <mcc:MD_ScopeDescription>
+                            <mcc:attributes uuidref="" />
+                        </mcc:MD_ScopeDescription>
+                    </mcc:levelDescription>
+                </mcc:MD_Scope>
+            </mrl:scope>
+        </mrl:LI_Lineage>
+    </mdb:resourceLineage>
+    <mdb:resourceLineage>
+        <mrl:LI_Lineage>
+            <mrl:statement>
+                <gco:CharacterString>The reef flat features moderately well-sorted coarse to very coarse sand. Although this data provides the average mean grainsize and sorting coefficient, there is great variation in grainsize and sorting. It is perhaps better to review individual samples in relation to their location. e.g. on the leeward, or on the windward portions of the reef flats.</gco:CharacterString>
+            </mrl:statement>
+            <mrl:scope>
+                <mcc:MD_Scope>
+                    <mcc:level>
+                        <mcc:MD_ScopeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ScopeCode" codeListValue="dataset" />
+                    </mcc:level>
+                </mcc:MD_Scope>
+            </mrl:scope>
+        </mrl:LI_Lineage>
+    </mdb:resourceLineage>
+    <geonet:info xmlns:geonet="http://www.fao.org/geonetwork">
+        <id>296343</id>
+        <schema>iso19115-3.2018</schema>
+        <createDate>2014-12-16T01:26:33Z</createDate>
+        <changeDate>2014-12-16T01:26:33Z</changeDate>
+        <isTemplate>n</isTemplate>
+        <title />
+        <source>2c92e966-e8ff-4a75-b541-81e9d5c11dd1</source>
+        <uuid>0063c8d0-13da-11dc-b213-00188b4c0af8</uuid>
+        <isHarvested>y</isHarvested>
+        <popularity>24</popularity>
+        <rating>0</rating>
+        <displayOrder>0</displayOrder>
+        <harvestInfo>
+            <type>csw</type>
+        </harvestInfo>
+        <isPublishedToAll>true</isPublishedToAll>
+        <view>true</view>
+        <notify>false</notify>
+        <download>true</download>
+        <dynamic>true</dynamic>
+        <featured>false</featured>
+        <ownerId>1</ownerId>
+        <ownername>admin</ownername>
+        <groupOwnerName>AODN</groupOwnerName>
+        <valid>-1</valid>
+        <baseUrl>https://geonetwork.edge.aodn.org.au/geonetwork</baseUrl>
+        <locService>/srv/en</locService>
+    </geonet:info>
+</mdb:MD_Metadata>

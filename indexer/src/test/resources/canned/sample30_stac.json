@@ -1,0 +1,200 @@
+{
+  "title" : "Grainsize of surface samples collected from the reef flat physiographic zone of Wistari Reef",
+  "description" : "Wistari Reef is a lagoonal platform reef, situated on the Tropic of Capricorn, within the Capricorn and Bunker region of the southern Great Barrier Reef. Five surface samples were taken from the reef flats and analysed to determine mean grainsize and the sorting coefficient (expressed as the standard deviation of grainsize) within each sample. The reef flat features moderately well-sorted coarse to very coarse sand, and can be divided into two sub-groups: the windward reef flats (samples S62 and S61) and the leeward reef flats (samples S24, S25 and S02).",
+  "extent" : {
+    "bbox" : [ [ 151.86952, -23.49043, 151.90253, -23.45359 ], [ 151.86952, -23.49043, 151.90253, -23.45359 ] ],
+    "temporal" : [ [ "1997-12-31T13:00:00Z", "1998-12-31T12:59:59Z" ], [ "1997-12-31T13:00:00Z", "1998-12-31T12:59:59Z" ] ]
+  },
+  "summaries" : {
+    "score" : 1,
+    "status" : "completed",
+    "credits" : [ "Funded by The Australian Research Council (ARC)", "The Australian National University (ANU)" ],
+    "scope" : {
+      "code" : "dataset",
+      "name" : ""
+    },
+    "statement" : "Surface samples were collected on reef walks or on boat transects across Wistari Reef. Deeper samples were obtained by diving. Samples were collected using a hand-held scoop and 600ml plastic bottles. Sediment samples were sieved in order to determine modal particle diameters, and sorting data. Samples were first dry sieved. Sieves of sizes -1.0phi to 2.5phi were stacked and installed on a sieving shaker. Samples were weighed out to approximately 250g, and each sample was sieved for 15 mins to ensure correct separation of size fractions. Each fraction was then removed from the sieve and weighed. The size fractions 2.5phi, 3.0phi, 3.5phi and 4.0phi were pre-weighed, and wet sieved separately using a low pressure water hose, through smaller micropalaeontological sieves. Sediment textures are expressed in terms of mean grainsize, and sorting coefficient, represented by standard deviation.",
+    "creation" : "2007-06-06T15:00:00",
+    "revision" : "2014-12-16T12:26:33",
+    "temporal" : [ {
+      "start" : "1997-12-31T13:00:00Z",
+      "end" : "1998-12-31T12:59:59Z"
+    } ],
+    "update_frequency" : "completed",
+    "proj:geometry" : {
+      "geometries" : [ {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 151.87843, -23.45895 ], [ 151.86952, -23.4897 ], [ 151.87252, -23.49043 ], [ 151.90253, -23.45683 ], [ 151.90041, -23.45359 ], [ 151.87843, -23.45895 ] ] ]
+      } ],
+      "type" : "GeometryCollection"
+    },
+    "proj:geometry_noland" : {
+      "geometries" : [ {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 151.87843, -23.45895 ], [ 151.86952, -23.4897 ], [ 151.87252, -23.49043 ], [ 151.90253, -23.45683 ], [ 151.90041, -23.45359 ], [ 151.87843, -23.45895 ] ] ]
+      } ],
+      "type" : "GeometryCollection"
+    },
+    "parameter_vocabs" : [ ],
+    "platform_vocabs" : [ ],
+    "organisation_vocabs" : [ ]
+  },
+  "contacts" : [ {
+    "roles" : [ "principalInvestigator", "about" ],
+    "organization" : "Commonwealth of Australia (Geoscience Australia)",
+    "name" : "Ryan, David",
+    "position" : "Sedimentologist",
+    "emails" : [ "David.ryan75@gmail.com" ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "61 427 894 739"
+    } ]
+  }, {
+    "roles" : [ "collaborator", "about" ],
+    "organization" : "Research School of Earth Sciences (RSES), The Australian National University (ANU)",
+    "name" : "Opdyke, Bradley, Dr",
+    "position" : "Senior Lecturer",
+    "emails" : [ "Bradley.Opdyke@anu.edu.au" ],
+    "addresses" : [ {
+      "city" : "Canberra",
+      "country" : "Australia",
+      "delivery_point" : [ "Building 142, The Australian National University" ],
+      "postal_code" : "0200",
+      "administrative_area" : "ACT"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "61 2 6125 4205"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : "61 2 6125 5544"
+    } ]
+  }, {
+    "roles" : [ "processor", "metadata" ],
+    "position" : "BlueNet Data Facilitator",
+    "emails" : [ "info@bluenet.org.au" ]
+  }, {
+    "roles" : [ "principalInvestigator", "metadata" ],
+    "organization" : "Commonwealth of Australia (Geoscience Australia)",
+    "name" : "Ryan, David"
+  }, {
+    "roles" : [ "principalInvestigator", "citation" ],
+    "organization" : "Department of Earth and Marine Sciences (DEMS), The Australian National University (ANU)",
+    "name" : "Ryan, David",
+    "position" : "Honours Student",
+    "emails" : [ "David.ryan75@gmail.com" ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "61 427 894 739"
+    } ]
+  }, {
+    "roles" : [ "collaborator", "citation" ],
+    "organization" : "Department of Earth and Marine Sciences (DEMS), The Australian National University (ANU)",
+    "name" : "Opdyke, Bradley, Dr",
+    "position" : "Senior Lecturer",
+    "emails" : [ "Bradley.Opdyke@anu.edu.au" ],
+    "addresses" : [ {
+      "city" : "Canberra",
+      "country" : "Australia",
+      "delivery_point" : [ "Building 47, The Australian National University" ],
+      "postal_code" : "0200",
+      "administrative_area" : "ACT"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "61 2 6125 4205"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : "61 2 6125 5544"
+    } ]
+  } ],
+  "languages" : [ {
+    "code" : "eng",
+    "name" : "English"
+  } ],
+  "links" : [ {
+    "href" : "https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/0063c8d0-13da-11dc-b213-00188b4c0af8/attachments/ANU_Ryan_Rfft_2_data.JPG",
+    "rel" : "data",
+    "type" : "",
+    "title" : "{\"title\":\"ANU_Ryan_Rfft_2_data.JPG\",\"description\":\"\"}"
+  }, {
+    "href" : "http://geoserver-123.aodn.org.au/geoserver/wms",
+    "rel" : "wms",
+    "type" : "",
+    "title" : "{\"title\":\"aodn:sediment_data_wistari_reef\",\"description\":\"Sediment data - Wistari Reef\"}"
+  }, {
+    "href" : "https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/0063c8d0-13da-11dc-b213-00188b4c0af8",
+    "rel" : "describedby",
+    "type" : "text/html",
+    "title" : "Full metadata link"
+  }, {
+    "href" : "http://i.creativecommons.org/l/by/2.5/au/88x31.png",
+    "rel" : "license",
+    "type" : "image/png"
+  }, {
+    "href" : "http://creativecommons.org/licenses/by/2.5/au/",
+    "rel" : "license",
+    "type" : "text/html"
+  } ],
+  "license" : "Creative Commons Attribution 2.5 Australia License",
+  "providers" : [ {
+    "roles" : [ "processor" ]
+  }, {
+    "name" : "Commonwealth of Australia (Geoscience Australia)",
+    "roles" : [ "principalInvestigator" ]
+  } ],
+  "themes" : [ {
+    "concepts" : [ {
+      "id" : "Oceans | Coastal Processes | Coral Reefs",
+      "url" : null,
+      "title" : "Global Change Master Directory Earth Science Keywords v.5.3.8",
+      "description" : ""
+    } ],
+    "scheme" : "discipline"
+  }, {
+    "concepts" : [ {
+      "id" : "Oceans | Marine Sediments | Sediment Grain Size",
+      "url" : null,
+      "title" : "Global Change Master Directory Earth Science Keywords v.5.3.8",
+      "description" : ""
+    } ],
+    "scheme" : "discipline"
+  }, {
+    "concepts" : [ {
+      "id" : "grainsize_size_category",
+      "url" : null,
+      "title" : "Keywords (Theme)",
+      "description" : ""
+    }, {
+      "id" : "longitude",
+      "url" : null,
+      "title" : "Keywords (Theme)",
+      "description" : ""
+    }, {
+      "id" : "latitude",
+      "url" : null,
+      "title" : "Keywords (Theme)",
+      "description" : ""
+    } ],
+    "scheme" : ""
+  }, {
+    "concepts" : [ {
+      "id" : "environment",
+      "url" : null,
+      "title" : null,
+      "description" : null
+    } ],
+    "scheme" : "Categories"
+  } ],
+  "id" : "0063c8d0-13da-11dc-b213-00188b4c0af8",
+  "search_suggestions" : {
+    "abstract_phrases" : [ ],
+    "parameter_vocabs_sayt" : [ ],
+    "platform_vocabs_sayt" : [ ],
+    "organisation_vocabs_sayt" : [ ]
+  },
+  "sci:citation" : "{\"suggestedCitation\":\"The citation in a list of references is: citation author name/s (year metadata published), metadata title. Citation author organisation/s. File identifier and Data accessed at (add http link).\",\"useLimitations\":null,\"otherConstraints\":null}",
+  "type" : "Collection",
+  "stac_version" : "1.0.0",
+  "stac_extensions" : [ "https://stac-extensions.github.io/scientific/v1.0.0/schema.json", "https://stac-extensions.github.io/contacts/v0.1.1/schema.json", "https://stac-extensions.github.io/projection/v1.1.0/schema.json", "https://stac-extensions.github.io/language/v1.0.0/schema.json", "https://stac-extensions.github.io/themes/v1.0.0/schema.json", "https://stac-extensions.github.io/web-map-links/v1.2.0/schema.json" ]
+}
