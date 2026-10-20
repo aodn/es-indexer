@@ -1,0 +1,246 @@
+{
+  "title" : "IMOS Ships of Opportunity Underway Data from AIMS Vessel RV Solander Trip 5114 From 26 Jun 2010 To 30 Jun 2010",
+  "description" : "'Ships of Opportunity' (SOOP) is a facility of the Australian 'Integrated Marine Observing System' (IMOS) project. This data set was collected by the SOOP sub-facility 'Sensors on Tropical Research Vessels' aboard the RV Solander Trip 5114.",
+  "extent" : {
+    "bbox" : [ [ 127.55034, -13.74374, 130.3827, -9.8133 ], [ 127.55034, -13.74374, 130.3827, -9.8133 ] ],
+    "temporal" : [ [ "2010-06-25T14:00:00Z", "2010-06-30T13:59:59Z" ], [ "2010-06-25T14:00:00Z", "2010-06-30T13:59:59Z" ] ]
+  },
+  "summaries" : {
+    "score" : 1,
+    "status" : "completed",
+    "credits" : [ "Australia's Integrated Marine Observing System (IMOS) is enabled by the National Collaborative Research Infrastructure Strategy (NCRIS). It is operated by a consortium of institutions as an unincorporated joint venture, with the University of Tasmania as Lead Agent.", "Great Barrier Reef Ocean Observing System (GBROOS), a geographic node of the Integrated Marine Observing System (IMOS) project", "Australian Institute of Marine Science (AIMS)" ],
+    "scope" : {
+      "code" : "dataset",
+      "name" : ""
+    },
+    "statement" : "All sensors are factory calibrated and then calibrated and serviced every six months.The clocks on all instruments are set each night at mid-night from a central server which is turn has its clock set off an NTP server. Typical time drift in a day is a few seconds.The clocks on all instruments are set each night at mid-night from a central server which is turn has its clock set off an NTP server. The location of all fixed equipment is recorded using a standard GPS so the accuracy should be within 5-10m using WGS-84. All mobile equipment has an on-board GPS and so should have equivalent accuracy although is will be around 10-20m due to the nature of the movement of the buoys.\n                    Instruments are replaced and serviced at regular intervals. There is a single metadata record for each research trip with the deployment details for each of the sensors that make up the underway sensor package described in the metadata record. Data are quality controlled by validating against a set of rules (bounds checking, etc) and then flagged using the IODE set of flags.",
+    "creation" : "2026-10-19T00:00:00",
+    "revision" : "2026-10-19T00:00:00",
+    "temporal" : [ {
+      "start" : "2010-06-25T14:00:00Z",
+      "end" : "2010-06-30T13:59:59Z"
+    } ],
+    "update_frequency" : "completed",
+    "proj:geometry" : {
+      "geometries" : [ {
+        "type" : "MultiPolygon",
+        "coordinates" : [ [ [ [ 127.55164495604473, -9.816838922920036 ], [ 127.55318829003383, -9.817037351575777 ], [ 127.55312, -9.81682 ], [ 127.55327377882512, -9.816787321999664 ], [ 127.55034, -9.8133 ], [ 127.83276, -9.97412 ], [ 127.90902, -10.0149 ], [ 128.07582, -10.11056 ], [ 128.18028, -10.1677 ], [ 128.85794, -10.54958 ], [ 129.03282, -10.6449 ], [ 129.08104, -10.67348 ], [ 129.30726, -10.79968 ], [ 129.73312, -11.0349 ], [ 129.78772, -11.0668 ], [ 129.81344, -11.08496 ], [ 129.8615, -11.12934 ], [ 129.88762, -11.14912 ], [ 129.91698, -11.1602 ], [ 129.97658, -11.1768 ], [ 130.08472, -11.22992 ], [ 130.13402, -11.25818 ], [ 130.17026, -11.26182 ], [ 130.21318, -11.26058 ], [ 130.2634, -11.2635 ], [ 130.3199, -11.2832 ], [ 130.36016, -11.32282 ], [ 130.3827, -11.3766 ], [ 129.37012, -13.74374 ], [ 128.9688, -13.60762 ], [ 128.9697, -13.60854 ], [ 128.96208, -13.61 ], [ 128.94924, -13.6073 ], [ 128.93386, -13.5984 ], [ 128.9243, -13.5906 ], [ 128.9333, -13.5924 ], [ 128.95334, -13.6001 ], [ 128.96762, -13.6083 ], [ 128.96771474092725, -13.606965014206848 ], [ 128.96848, -13.6079 ], [ 128.96778121532174, -13.606028329557457 ], [ 128.96784, -13.6052 ], [ 128.9671970483968, -13.604463658778464 ], [ 128.834, -13.2477 ], [ 128.73482, -12.98772 ], [ 128.67958, -12.8369 ], [ 128.6757, -12.83012 ], [ 128.65662, -12.7729 ], [ 128.62178, -12.67992 ], [ 128.61734, -12.67202 ], [ 128.54242, -12.46452 ], [ 128.49836, -12.3523 ], [ 128.4903845058079, -12.329388580320867 ], [ 128.48848, -12.32944 ], [ 128.46054, -12.32262 ], [ 128.47486, -12.2887 ], [ 128.4764037847963, -12.289225781778446 ], [ 128.47636, -12.2891 ], [ 128.47685942311958, -12.289380962946526 ], [ 128.47762, -12.28964 ], [ 128.46832, -12.28564 ], [ 128.46538, -12.26594 ], [ 128.4217, -12.1379 ], [ 128.41384, -12.13202 ], [ 128.4059, -12.10184 ], [ 128.3954, -12.07008 ], [ 128.36168, -11.98082 ], [ 128.35828, -11.97914 ], [ 128.3449, -11.93332 ], [ 128.30604, -11.8241 ], [ 128.30092, -11.82006 ], [ 128.27842, -11.80872 ], [ 128.26622, -11.78746 ], [ 128.25638, -11.72684 ], [ 128.2514, -11.7082 ], [ 128.25038, -11.6785 ], [ 128.24816, -11.66746 ], [ 128.219, -11.58822 ], [ 128.18422, -11.50094 ], [ 128.16456, -11.44288 ], [ 128.0712, -11.19384 ], [ 128.05696, -11.1471 ], [ 128.04602, -11.11696 ], [ 127.99997834384972, -10.999964686221128 ], [ 128.0004, -11.00018 ], [ 127.99990371520276, -10.999775049212001 ], [ 127.99958947882274, -10.998976550918172 ], [ 127.99893846480813, -10.998987439133897 ], [ 127.99870875, -10.9988 ], [ 127.9984, -10.9988 ], [ 127.99865111155462, -10.998752969073381 ], [ 127.99138, -10.99282 ], [ 127.98498, -10.97792 ], [ 127.96674, -10.91554 ], [ 127.94262, -10.84382 ], [ 127.913, -10.77108 ], [ 127.88336, -10.68766 ], [ 127.8815, -10.68574 ], [ 127.87156, -10.65702 ], [ 127.8162, -10.51566 ], [ 127.7634, -10.37272 ], [ 127.70506, -10.2224 ], [ 127.70162, -10.21818 ], [ 127.64636, -10.06484 ], [ 127.6431, -10.06138 ], [ 127.62288, -10.0008 ], [ 127.5898, -9.91262 ], [ 127.58362, -9.9015 ], [ 127.57982, -9.9018 ], [ 127.5543578871589, -9.820759912013571 ], [ 127.55306, -9.8361 ], [ 127.55885511147011, -9.919547857021188 ], [ 127.55548, -9.88158 ], [ 127.55164495604473, -9.816838922920036 ] ], [ [ 128.0843152285973, -10.997559511929333 ], [ 128.09726, -10.99754 ], [ 128.09876, -10.99876 ], [ 128.09744, -10.99734 ], [ 128.0843152285973, -10.997559511929333 ] ], [ [ 128.52580389263613, -12.316915896417049 ], [ 128.52638, -12.31724 ], [ 128.52758, -12.31646 ], [ 128.5265804144858, -12.315439651581949 ], [ 128.52580389263613, -12.316915896417049 ] ] ], [ [ [ 127.99809228340527, -10.999001591526088 ], [ 127.9946, -10.99906 ], [ 127.99664, -10.99826 ], [ 127.99809228340527, -10.999001591526088 ] ] ], [ [ [ 127.56368054409732, -9.989032631217398 ], [ 127.56632, -10.02704 ], [ 127.5632, -10.02044 ], [ 127.56424, -10.0203 ], [ 127.56368054409732, -9.989032631217398 ] ] ], [ [ [ 127.55164495604473, -9.816838922920036 ], [ 127.55072, -9.81672 ], [ 127.5516, -9.81608 ], [ 127.55164495604473, -9.816838922920036 ] ] ], [ [ [ 128.96771474092725, -13.606965014206848 ], [ 128.94278, -13.5765 ], [ 128.9671970483968, -13.604463658778464 ], [ 128.96778121532174, -13.606028329557457 ], [ 128.96771474092725, -13.606965014206848 ] ] ], [ [ [ 127.99997834384972, -10.999964686221128 ], [ 127.99809228340527, -10.999001591526088 ], [ 127.99893846480813, -10.998987439133897 ], [ 127.99990371520276, -10.999775049212001 ], [ 127.99997834384972, -10.999964686221128 ] ] ], [ [ [ 127.55885511147011, -9.919547857021188 ], [ 127.56334, -9.97 ], [ 127.56368054409732, -9.989032631217398 ], [ 127.55885511147011, -9.919547857021188 ] ] ] ],
+        "metadata" : {
+          "description" : "RV Solander Trip 5114 segment 2010-06-26T08:15:01 to 2010-06-30T22:39:41"
+        }
+      } ],
+      "type" : "GeometryCollection"
+    },
+    "proj:geometry_noland" : {
+      "geometries" : [ {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 127.55164495604473, -9.816838922920036 ], [ 127.55548, -9.88158 ], [ 127.55885511147011, -9.919547857021188 ], [ 127.55306, -9.8361 ], [ 127.5543578871589, -9.820759912013571 ], [ 127.57982, -9.9018 ], [ 127.58362, -9.9015 ], [ 127.5898, -9.91262 ], [ 127.62288, -10.0008 ], [ 127.6431, -10.06138 ], [ 127.64636, -10.06484 ], [ 127.70162, -10.21818 ], [ 127.70506, -10.2224 ], [ 127.7634, -10.37272 ], [ 127.8162, -10.51566 ], [ 127.87156, -10.65702 ], [ 127.8815, -10.68574 ], [ 127.88336, -10.68766 ], [ 127.913, -10.77108 ], [ 127.94262, -10.84382 ], [ 127.96674, -10.91554 ], [ 127.98498, -10.97792 ], [ 127.99138, -10.99282 ], [ 127.99865111155462, -10.998752969073381 ], [ 127.9984, -10.9988 ], [ 127.99870875, -10.9988 ], [ 127.99893846480813, -10.998987439133897 ], [ 127.99958947882274, -10.998976550918172 ], [ 127.99990371520276, -10.999775049212001 ], [ 128.0004, -11.00018 ], [ 127.99997834384972, -10.999964686221128 ], [ 128.04602, -11.11696 ], [ 128.05696, -11.1471 ], [ 128.0712, -11.19384 ], [ 128.16456, -11.44288 ], [ 128.18422, -11.50094 ], [ 128.219, -11.58822 ], [ 128.24816, -11.66746 ], [ 128.25038, -11.6785 ], [ 128.2514, -11.7082 ], [ 128.25638, -11.72684 ], [ 128.26622, -11.78746 ], [ 128.27842, -11.80872 ], [ 128.30092, -11.82006 ], [ 128.30604, -11.8241 ], [ 128.3449, -11.93332 ], [ 128.35828, -11.97914 ], [ 128.36168, -11.98082 ], [ 128.3954, -12.07008 ], [ 128.4059, -12.10184 ], [ 128.41384, -12.13202 ], [ 128.4217, -12.1379 ], [ 128.46538, -12.26594 ], [ 128.46832, -12.28564 ], [ 128.47762, -12.28964 ], [ 128.47685942311958, -12.289380962946526 ], [ 128.47636, -12.2891 ], [ 128.4764037847963, -12.289225781778446 ], [ 128.47486, -12.2887 ], [ 128.46054, -12.32262 ], [ 128.48848, -12.32944 ], [ 128.4903845058079, -12.329388580320867 ], [ 128.49836, -12.3523 ], [ 128.54242, -12.46452 ], [ 128.61734, -12.67202 ], [ 128.62178, -12.67992 ], [ 128.65662, -12.7729 ], [ 128.6757, -12.83012 ], [ 128.67958, -12.8369 ], [ 128.73482, -12.98772 ], [ 128.834, -13.2477 ], [ 128.9671970483968, -13.604463658778464 ], [ 128.96784, -13.6052 ], [ 128.96778121532174, -13.606028329557457 ], [ 128.96848, -13.6079 ], [ 128.96771474092725, -13.606965014206848 ], [ 128.96762, -13.6083 ], [ 128.95334, -13.6001 ], [ 128.9333, -13.5924 ], [ 128.9243, -13.5906 ], [ 128.93386, -13.5984 ], [ 128.94924, -13.6073 ], [ 128.96208, -13.61 ], [ 128.9697, -13.60854 ], [ 128.9688, -13.60762 ], [ 129.37012, -13.74374 ], [ 130.207721359172, -11.785653052449723 ], [ 130.0166121750001, -11.77703215899993 ], [ 130.07154381600003, -11.67115650799991 ], [ 130.18539472700002, -11.676527601999908 ], [ 130.1469832690001, -11.489027601999908 ], [ 130.34498131600003, -11.317071221999925 ], [ 130.36932458050848, -11.40786813732756 ], [ 130.3827, -11.3766 ], [ 130.36016, -11.32282 ], [ 130.3199, -11.2832 ], [ 130.2634, -11.2635 ], [ 130.21318, -11.26058 ], [ 130.17026, -11.26182 ], [ 130.13402, -11.25818 ], [ 130.08472, -11.22992 ], [ 129.97658, -11.1768 ], [ 129.91698, -11.1602 ], [ 129.88762, -11.14912 ], [ 129.8615, -11.12934 ], [ 129.81344, -11.08496 ], [ 129.78772, -11.0668 ], [ 129.73312, -11.0349 ], [ 129.30726, -10.79968 ], [ 129.08104, -10.67348 ], [ 129.03282, -10.6449 ], [ 128.85794, -10.54958 ], [ 128.18028, -10.1677 ], [ 128.07582, -10.11056 ], [ 127.90902, -10.0149 ], [ 127.83276, -9.97412 ], [ 127.55034, -9.8133 ], [ 127.55327377882512, -9.816787321999664 ], [ 127.55312, -9.81682 ], [ 127.55318829003383, -9.817037351575777 ], [ 127.55164495604473, -9.816838922920036 ] ], [ [ 128.0843152285973, -10.997559511929333 ], [ 128.09744, -10.99734 ], [ 128.09876, -10.99876 ], [ 128.09726, -10.99754 ], [ 128.0843152285973, -10.997559511929333 ] ], [ [ 128.52580389263613, -12.316915896417049 ], [ 128.5265804144858, -12.315439651581949 ], [ 128.52758, -12.31646 ], [ 128.52638, -12.31724 ], [ 128.52580389263613, -12.316915896417049 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 127.99809228340527, -10.999001591526088 ], [ 127.99664, -10.99826 ], [ 127.9946, -10.99906 ], [ 127.99809228340527, -10.999001591526088 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 127.56368054409732, -9.989032631217398 ], [ 127.56424, -10.0203 ], [ 127.5632, -10.02044 ], [ 127.56632, -10.02704 ], [ 127.56368054409732, -9.989032631217398 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 127.55164495604473, -9.816838922920036 ], [ 127.5516, -9.81608 ], [ 127.55072, -9.81672 ], [ 127.55164495604473, -9.816838922920036 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 128.96771474092725, -13.606965014206848 ], [ 128.96778121532174, -13.606028329557457 ], [ 128.9671970483968, -13.604463658778464 ], [ 128.94278, -13.5765 ], [ 128.96771474092725, -13.606965014206848 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 127.99997834384972, -10.999964686221128 ], [ 127.99990371520276, -10.999775049212001 ], [ 127.99893846480813, -10.998987439133897 ], [ 127.99809228340527, -10.999001591526088 ], [ 127.99997834384972, -10.999964686221128 ] ] ]
+      }, {
+        "type" : "Polygon",
+        "coordinates" : [ [ [ 127.55885511147011, -9.919547857021188 ], [ 127.56368054409732, -9.989032631217398 ], [ 127.56334, -9.97 ], [ 127.55885511147011, -9.919547857021188 ] ] ]
+      } ],
+      "type" : "GeometryCollection"
+    },
+    "parameter_vocabs" : [ ],
+    "platform_vocabs" : [ ],
+    "organisation_vocabs" : [ ]
+  },
+  "contacts" : [ {
+    "roles" : [ "pointOfContact", "about" ],
+    "organization" : "Australian Institute of Marine Science (AIMS)",
+    "name" : "Wojtasiewicz, Bozena, Dr",
+    "emails" : [ "reception@aims.gov.au" ],
+    "addresses" : [ {
+      "city" : "TOWNSVILLE",
+      "country" : "Australia",
+      "delivery_point" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],
+      "postal_code" : "4810",
+      "administrative_area" : "Queensland"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "+61 7 4753 4444"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : ""
+    } ],
+    "links" : [ {
+      "href" : "https://www.aims.gov.au",
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : "AIMS Web Site"
+    } ]
+  }, {
+    "roles" : [ "pointOfContact", "metadata" ],
+    "organization" : "Australian Institute of Marine Science (AIMS)",
+    "position" : "AIMS Data Centre",
+    "emails" : [ "adc@aims.gov.au" ],
+    "addresses" : [ {
+      "city" : "TOWNSVILLE MAIL CENTRE",
+      "country" : "Australia",
+      "delivery_point" : [ "PRIVATE MAIL BAG 3" ],
+      "postal_code" : "4810",
+      "administrative_area" : "Queensland"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "+61 7 4753 4444"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : "+61 7 4772 5852"
+    } ],
+    "links" : [ {
+      "href" : "https://www.aims.gov.au/adc",
+      "type" : "WWW:LINK-1.0-http--link"
+    } ]
+  }, {
+    "roles" : [ "publisher", "citation" ],
+    "organization" : "Australian Institute of Marine Science (AIMS)",
+    "emails" : [ "reception@aims.gov.au" ],
+    "addresses" : [ {
+      "city" : "TOWNSVILLE",
+      "country" : "Australia",
+      "delivery_point" : [ "PRIVATE MAIL BAG 3, TOWNSVILLE MAIL CENTRE" ],
+      "postal_code" : "4810",
+      "administrative_area" : "Queensland"
+    } ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : "+61 7 4753 4444"
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : ""
+    } ],
+    "links" : [ {
+      "href" : "https://www.aims.gov.au",
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : "AIMS Web Site"
+    } ]
+  }, {
+    "roles" : [ "owner", "citation" ],
+    "organization" : "Integrated Marine Observing System (IMOS)",
+    "emails" : [ "imos@imos.org.au" ],
+    "phones" : [ {
+      "roles" : [ "voice" ],
+      "value" : ""
+    }, {
+      "roles" : [ "facsimile" ],
+      "value" : ""
+    } ],
+    "links" : [ {
+      "href" : "",
+      "type" : "WWW:LINK-1.0-http--link",
+      "title" : ""
+    } ]
+  } ],
+  "languages" : [ {
+    "code" : "eng",
+    "name" : "English"
+  } ],
+  "links" : [ {
+    "href" : "https://apps.aims.gov.au/ts-explorer/?source=3082:Underway,3083:Underway,3081:Underway&fromDate=2010-06-26T08:15:01&thruDate=2010-06-30T22:48:52",
+    "rel" : "data",
+    "type" : "",
+    "title" : "{\"title\":\"All data channels.\",\"description\":\"All data channels.\"}"
+  }, {
+    "href" : "https://maps.aims.gov.au/geoserver/wms",
+    "rel" : "wms",
+    "type" : "",
+    "title" : "{\"title\":\"aims:AIMS_TRIP_5114\",\"description\":\"WMS Layer for underway data from trip:5114\"}"
+  }, {
+    "href" : "https://apps.aims.gov.au/ts-explorer/?qc=level1&source=3081:Underway&fromDate=2010-06-26T00:00:00&thruDate=2010-06-30T00:00:00",
+    "rel" : "data",
+    "type" : "",
+    "title" : "{\"title\":\"RV Solander Trip 5114 Turbidity @2.5m Daily Averages\",\"description\":\"RV Solander Trip 5114 Turbidity @2.5m Daily Averages\"}"
+  }, {
+    "href" : "https://apps.aims.gov.au/ts-explorer/?qc=level1&source=3083:Underway&fromDate=2010-06-26T00:00:00&thruDate=2010-06-30T00:00:00",
+    "rel" : "data",
+    "type" : "",
+    "title" : "{\"title\":\"RV Solander Trip 5114 Salinity @2.5m Daily Averages\",\"description\":\"RV Solander Trip 5114 Salinity @2.5m Daily Averages\"}"
+  }, {
+    "href" : "https://apps.aims.gov.au/ts-explorer/?qc=level1&source=3082:Underway&fromDate=2010-06-26T00:00:00&thruDate=2010-06-30T00:00:00",
+    "rel" : "data",
+    "type" : "",
+    "title" : "{\"title\":\"RV Solander Trip 5114 Seawater Intake Temperature @2.5m Daily Averages\",\"description\":\"RV Solander Trip 5114 Seawater Intake Temperature @2.5m Daily Averages\"}"
+  }, {
+    "href" : "https://apps.aims.gov.au/ts-explorer/?qc=level1&source=3084:Underway&fromDate=2010-06-26T00:00:00&thruDate=2010-06-30T00:00:00",
+    "rel" : "data",
+    "type" : "",
+    "title" : "{\"title\":\"RV Solander Trip 5114 Fluorescence @2.5m Daily Averages\",\"description\":\"RV Solander Trip 5114 Fluorescence @2.5m Daily Averages\"}"
+  }, {
+    "href" : "https://apps.aims.gov.au/metadata/view/00fee0c8-6203-4271-8d46-f36c075fa6cf",
+    "rel" : "describedby",
+    "type" : "text/html",
+    "title" : "Full metadata link"
+  }, {
+    "href" : "http://i.creativecommons.org/l/by/3.0/au/88x31.png",
+    "rel" : "license",
+    "type" : "image/png"
+  }, {
+    "href" : "http://creativecommons.org/licenses/by/3.0/au/",
+    "rel" : "license",
+    "type" : "text/html"
+  } ],
+  "license" : "Creative Commons Attribution 3.0 Australia License",
+  "providers" : [ {
+    "name" : "Australian Institute of Marine Science (AIMS)",
+    "roles" : [ "pointOfContact" ]
+  } ],
+  "themes" : [ {
+    "concepts" : [ {
+      "id" : "Practical salinity of the water body",
+      "url" : "http://vocab.nerc.ac.uk/collection/P01/current/PSLTZZ01",
+      "title" : "AODN Discovery Parameter Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "Temperature of the water body",
+      "url" : "http://vocab.nerc.ac.uk/collection/P01/current/TEMPPR01",
+      "title" : "AODN Discovery Parameter Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "Fluorescence of the water body",
+      "url" : "http://vocab.nerc.ac.uk/collection/P01/current/FLUOZZZZ",
+      "title" : "AODN Discovery Parameter Vocabulary",
+      "description" : ""
+    }, {
+      "id" : "Turbidity of the water body",
+      "url" : "http://vocab.nerc.ac.uk/collection/P01/current/TURBXXXX",
+      "title" : "AODN Discovery Parameter Vocabulary",
+      "description" : ""
+    } ],
+    "scheme" : "theme"
+  }, {
+    "concepts" : [ {
+      "id" : "oceans",
+      "url" : null,
+      "title" : null,
+      "description" : null
+    } ],
+    "scheme" : "Categories"
+  } ],
+  "id" : "00fee0c8-6203-4271-8d46-f36c075fa6cf",
+  "search_suggestions" : {
+    "abstract_phrases" : [ ],
+    "parameter_vocabs_sayt" : [ ],
+    "platform_vocabs_sayt" : [ ],
+    "organisation_vocabs_sayt" : [ ]
+  },
+  "sci:citation" : "{\"suggestedCitation\":\"Attribution: Format for citation of metadata sourced from Australian Institute of Marine Science (AIMS) in a list of reference is as follows: \\\"Integrated Marine Observing System (IMOS). (2026). IMOS Ships of Opportunity Underway Data from AIMS Vessel RV Solander Trip 5114 From 26 Jun 2010 To 30 Jun 2010. https://apps.aims.gov.au/metadata/view/00fee0c8-6203-4271-8d46-f36c075fa6cf, accessed[date-of-access]\\\".\",\"useLimitations\":null,\"otherConstraints\":[\"Use Limitation: All AIMS data, products and services are provided \\\"as is\\\" and AIMS does not warrant their fitness for a particular purpose or non-infringement. While AIMS has made every reasonable effort to ensure high quality of the data, products and services, to the extent permitted by law the data, products and services are provided without any warranties of any kind, either expressed or implied, including without limitation any implied warranties of title, merchantability, and fitness for a particular purpose or non-infringement. AIMS make no representation or warranty that the data, products and services are accurate, complete, reliable or current. To the extent permitted by law, AIMS exclude all liability to any person arising directly or indirectly from the use of the data, products and services.\"]}",
+  "type" : "Collection",
+  "stac_version" : "1.0.0",
+  "stac_extensions" : [ "https://stac-extensions.github.io/scientific/v1.0.0/schema.json", "https://stac-extensions.github.io/contacts/v0.1.1/schema.json", "https://stac-extensions.github.io/projection/v1.1.0/schema.json", "https://stac-extensions.github.io/language/v1.0.0/schema.json", "https://stac-extensions.github.io/themes/v1.0.0/schema.json", "https://stac-extensions.github.io/web-map-links/v1.2.0/schema.json" ]
+}
