@@ -1061,7 +1061,7 @@ public class StacCollectionMapperServiceTest {
         verify(expected);
     }
     /**
-     * Another test for diff text sequence of the geometry field in XML
+     * Another test for diff text sequence of the geometry field in XML, innner ring and outer ring parse incorrectly
      * @throws IOException - Not expected
      * @throws JSONException - Not expected
      */
