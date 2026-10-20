@@ -1008,7 +1008,8 @@ public class StacCollectionMapperServiceTest {
         verify(expected);
     }
     /**
-     * This dataset has a polygon with invalid geometry, which should be excluded from the spatial extent
+     * This dataset had a similar issue with verifyRingParseCorrectly3, so if verifyRingParseCorrectly3 works, this
+     * should work too.
      * @throws IOException - Not expected
      * @throws JSONException - Not expected
      */
@@ -1046,11 +1047,28 @@ public class StacCollectionMapperServiceTest {
 
         verify(expected);
     }
-
+    /**
+     * Another test for diff text sequence of the geometry field in XML
+     * @throws IOException - Not expected
+     * @throws JSONException - Not expected
+     */
     @Test
     public void verifyRingParseCorrectly2() throws IOException, JSONException {
         String xml = readResourceFile("classpath:canned/sample31.xml");
         String expected = readResourceFile("classpath:canned/sample31_stac.json");
+        indexerService.indexMetadata(xml);
+
+        verify(expected);
+    }
+    /**
+     * Another test for diff text sequence of the geometry field in XML
+     * @throws IOException - Not expected
+     * @throws JSONException - Not expected
+     */
+    @Test
+    public void verifyRingParseCorrectly3() throws IOException, JSONException {
+        String xml = readResourceFile("classpath:canned/sample32.xml");
+        String expected = readResourceFile("classpath:canned/sample32_stac.json");
         indexerService.indexMetadata(xml);
 
         verify(expected);

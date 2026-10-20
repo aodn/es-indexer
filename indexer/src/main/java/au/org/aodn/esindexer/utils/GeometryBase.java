@@ -373,6 +373,34 @@ public class GeometryBase {
                 }
             }
         }
+        return dropRetracedReverseRing(items);
+    }
+
+    /**
+     * Some bounding polygons repeat a closed ring and then the same vertices in reverse.
+     * The two passes cancel, so the ring has no area and repair collapses it.
+     * Keep the first closed ring when the tail is that exact reverse.
+     */
+    protected static List<Coordinate> dropRetracedReverseRing(List<Coordinate> items) {
+        int n = items.size();
+        if (n < 7 || !items.get(0).equals2D(items.get(n - 1))) {
+            return items;
+        }
+        for (int i = 3; i < n - 1; i++) {
+            if (n != 2 * i + 1 || !items.get(i).equals2D(items.get(0))) {
+                continue;
+            }
+            boolean reverse = true;
+            for (int k = 0; k <= i; k++) {
+                if (!items.get(i + k).equals2D(items.get(i - k))) {
+                    reverse = false;
+                    break;
+                }
+            }
+            if (reverse) {
+                return new ArrayList<>(items.subList(0, i + 1));
+            }
+        }
         return items;
     }
 

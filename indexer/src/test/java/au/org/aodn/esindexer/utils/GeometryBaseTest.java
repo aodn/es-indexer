@@ -323,6 +323,23 @@ public class GeometryBaseTest {
     }
 
     @Test
+    public void retracedReverseRingKeepsTheFirstClosedRing() {
+        CoordinatesType coordinates = new CoordinatesType();
+        coordinates.setValue("0,0,0 2,0,0 2,1,0 0,1,0 0,0,0 0,1,0 2,1,0 2,0,0 0,0,0");
+        LinearRingType ring = new LinearRingType();
+        ring.setCoordinates(coordinates);
+
+        DirectPositionListType pos = GeometryBase.ringToPosList(ring).orElseThrow();
+        List<Coordinate> kept = GeometryBase.linearPositionToCoordinates(pos, "CRS:84");
+        assertEquals(5, kept.size());
+        assertEquals(new Coordinate(0, 0), kept.get(0));
+        assertEquals(new Coordinate(2, 0), kept.get(1));
+        assertEquals(new Coordinate(2, 1), kept.get(2));
+        assertEquals(new Coordinate(0, 1), kept.get(3));
+        assertEquals(new Coordinate(0, 0), kept.get(4));
+    }
+
+    @Test
     public void parenthesizedCoordinatesBecomePosList() {
         CoordinatesType coordinates = new CoordinatesType();
         coordinates.setValue("(-19.20167,146.81583),(-19.10550,146.86017),(-19.13483,146.95017),(-19.21850,146.98083) ,(-19.20167,146.81583)");
