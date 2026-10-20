@@ -7,7 +7,6 @@ spring:
 app:
   geometry:
     enableGridSpatialExtents: true
-    coastalPrecision: 0.08
 elasticsearch:
   acronyms:
     name: portal-acronyms-edge
