@@ -159,7 +159,8 @@ public class RankingServiceImpl implements RankingService {
             log.debug("IMOS owned record");
             breakdown.put(Rule.IMOS_OWNED.key, imosWeigth);
         }
-        // IMOS portal collection record, the portal:IMOS category means the portal serves data for it
+        // IMOS portal collection record, the IMOS collection categories (portal:IMOS, portal:IMOS_newcollections, portal:AODN),
+        // see FacilityRecordUtils.PORTAL_IMOS_CATEGORIES, mean the portal serves data for it
         if (FacilityRecordUtils.isImosCollectionRecord(
                 safeGet(() -> stacCollectionModel.getSummaries().getCategories()).orElse(null))) {
             log.debug("IMOS portal collection record");

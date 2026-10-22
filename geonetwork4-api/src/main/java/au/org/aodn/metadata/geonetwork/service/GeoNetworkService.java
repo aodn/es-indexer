@@ -17,7 +17,7 @@ public interface GeoNetworkService {
     String searchRecordBy(String uuid);
     String findGroupById(String uuid) throws IOException;
     /**
-     * The categories assigned to the record in geonetwork, the portal:IMOS category is use to identify the IMOS portal collection records.
+     * The categories assigned to the record in geonetwork, the IMOS collection categories (portal:IMOS, portal:IMOS_newcollections, portal:AODN) are used to identify the IMOS portal collection records.
      * Use geonetwork API /geonetwork/srv/api/records/{uuid}/tags to get this value.
      * Example response:[{"name":"portal:IMOS","id":131,"label":{"swe":"portal:IMOS","dut":"portal:IMOS","fin":"portal:IMOS","rum":"portal:IMOS","pol":"portal:IMOS","aze":"portal:IMOS","nor":"portal:IMOS","tur":"portal:IMOS","dan":"portal:IMOS","geo":"portal:IMOS","rus":"portal:IMOS","ara":"portal:IMOS","por":"portal:IMOS","vie":"portal:IMOS","ger":"portal:IMOS","cat":"portal:IMOS","ita":"portal:IMOS","fre":"portal:IMOS","arm":"portal:IMOS","ukr":"portal:IMOS","eng":"portal:IMOS","wel":"portal:IMOS","spa":"portal:IMOS","chi":"portal:IMOS","slo":"portal:IMOS"}}]
      *
