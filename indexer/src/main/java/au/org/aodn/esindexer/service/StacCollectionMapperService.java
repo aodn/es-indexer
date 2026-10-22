@@ -626,8 +626,9 @@ public abstract class StacCollectionMapperService {
         return null;
     }
     /**
-     * Get the categories assigned in geonetwork and store it in the categories field. The portal:IMOS
-     * category identifies the IMOS portal collection records, it is set by the geonetwork harvester.
+     * Get the categories assigned in geonetwork and store it in the categories field. The IMOS collection categories
+     * (portal:IMOS, portal:IMOS_newcollections, portal:AODN), see FacilityRecordUtils.PORTAL_IMOS_CATEGORIES,
+     * identify the IMOS portal collection records, they are set by the geonetwork harvester.
      * @param source - The parsed dataset
      * @return - A list of category, null if the record have none so the field is omitted from the
      * document, SummariesModel is JsonInclude.NON_NULL
