@@ -15,9 +15,8 @@ import static au.org.aodn.esindexer.utils.CommonUtils.safeGet;
 public class FacilityRecordUtils {
     /**
      * The geonetwork categories flagging an IMOS portal collection record (portal:IMOS, portal:IMOS_newcollections, portal:AODN), a record carrying any one of them is a collection record, see SummariesModel.categories.
-     * Lowercase because the lookup lowercases the record category, same as FACILITY_SCOPE_CODES. Public so tests in other packages can iterate it.
      */
-    public static final Set<String> PORTAL_IMOS_CATEGORIES = Set.of("portal:imos", "portal:imos_newcollections", "portal:aodn");
+    public static final Set<String> PORTAL_IMOS_CATEGORIES = Set.of("portal:IMOS", "portal:IMOS_newcollections", "portal:AODN");
     /**
      * The scope codes used by the Facility / Sub-Facility records, lowercase because the lookup lowercases the record scope code
      */
@@ -42,7 +41,7 @@ public class FacilityRecordUtils {
      */
     public static boolean isImosCollectionRecord(List<String> categories) {
         return categories != null
-                && categories.stream().filter(Objects::nonNull).map(String::toLowerCase).anyMatch(PORTAL_IMOS_CATEGORIES::contains);
+                && categories.stream().filter(Objects::nonNull).anyMatch(PORTAL_IMOS_CATEGORIES::contains);
     }
 
     /**
