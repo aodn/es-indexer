@@ -53,7 +53,7 @@ public class SummariesModel {
     @JsonProperty("dataset_group")
     protected List<String> datasetGroup;
     /**
-     * Categories assigned to the record in geonetwork, the portal:IMOS category flags a record as an IMOS portal collection record.
+     * Categories assigned to the record in geonetwork, the IMOS collection categories (portal:IMOS, portal:IMOS_newcollections, portal:AODN) flag a record as an IMOS portal collection record.
      * JsonIgnore because this value is only used within the code base and no need to be passed to the Elasticsearch index.
      * If we are going to apply this value for downstream use in the future, we need to add this in record schema.
      */

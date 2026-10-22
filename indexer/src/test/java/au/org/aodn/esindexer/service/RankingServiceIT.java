@@ -2,6 +2,7 @@ package au.org.aodn.esindexer.service;
 
 import au.org.aodn.esindexer.Application;
 import au.org.aodn.esindexer.BaseTestClass;
+import au.org.aodn.esindexer.utils.FacilityRecordUtils;
 import au.org.aodn.stac.model.*;
 import org.junit.jupiter.api.*;
 import org.mockito.Mockito;
@@ -228,13 +229,16 @@ class RankingServiceIT extends BaseTestClass {
     @Test
     public void testPortalImosCollectionRecord() {
         RankingServiceImpl mockRankingService = Mockito.spy(rankingService);
-        stacCollectionModel.setSummaries(SummariesModel.builder()
-                .datasetGroup(List.of("IMOS"))
-                .scope(Map.of("code", "dataset"))
-                .categories(List.of("portal:IMOS"))
-                .build());
-        assertEquals(mockRankingService.imosWeigth + mockRankingService.portalImosWeight,
-                mockRankingService.evaluateCompleteness(stacCollectionModel).total());
+        for (String category : FacilityRecordUtils.PORTAL_IMOS_CATEGORIES) {
+            stacCollectionModel.setSummaries(SummariesModel.builder()
+                    .datasetGroup(List.of("IMOS"))
+                    .scope(Map.of("code", "dataset"))
+                    .categories(List.of(category))
+                    .build());
+            assertEquals(mockRankingService.imosWeigth + mockRankingService.portalImosWeight,
+                    mockRankingService.evaluateCompleteness(stacCollectionModel).total(),
+                    "IMOS collection category " + category + " gets the portal IMOS weight");
+        }
     }
 
     // ---- score_breakdown: the points each rule added, the values must add up to the score ----
@@ -311,17 +315,20 @@ class RankingServiceIT extends BaseTestClass {
 
     @Test
     public void testBreakdownPortalImosCollectionRecord() {
-        stacCollectionModel.setSummaries(SummariesModel.builder()
-                .datasetGroup(List.of("IMOS"))
-                .scope(Map.of("code", "series"))
-                .categories(List.of("portal:IMOS"))
-                .build());
+        for (String category : FacilityRecordUtils.PORTAL_IMOS_CATEGORIES) {
+            stacCollectionModel.setSummaries(SummariesModel.builder()
+                    .datasetGroup(List.of("IMOS"))
+                    .scope(Map.of("code", "series"))
+                    .categories(List.of(category))
+                    .build());
 
-        Map<String, Integer> breakdown = assertBreakdownConsistent(rankingService.evaluateCompleteness(stacCollectionModel));
+            Map<String, Integer> breakdown = assertBreakdownConsistent(rankingService.evaluateCompleteness(stacCollectionModel));
 
-        assertEquals(rankingService.imosWeigth, breakdown.get(RankingService.Rule.IMOS_OWNED.key));
-        assertEquals(rankingService.portalImosWeight, breakdown.get(RankingService.Rule.IMOS_COLLECTION.key));
-        assertEquals(0, breakdown.get(RankingService.Rule.IMOS_FACILITY.key), "portal:IMOS means not a facility record");
+            assertEquals(rankingService.imosWeigth, breakdown.get(RankingService.Rule.IMOS_OWNED.key));
+            assertEquals(rankingService.portalImosWeight, breakdown.get(RankingService.Rule.IMOS_COLLECTION.key),
+                    category + " is an IMOS collection category");
+            assertEquals(0, breakdown.get(RankingService.Rule.IMOS_FACILITY.key), category + " means not a facility record");
+        }
     }
 
     @Test
