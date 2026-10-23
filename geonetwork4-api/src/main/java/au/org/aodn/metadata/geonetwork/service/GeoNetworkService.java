@@ -54,4 +54,18 @@ public interface GeoNetworkService {
     Long getAllMetadataCounts() throws IOException;
 
     Map<String, ?> getAssociatedRecords(String uuid);
+    /**
+     * The geonetwork the record is harvested from, for example https://catalogue-imos.aodn.org.au/geonetwork
+     * @param uuid - UUID of record
+     * @return - The base url of the source geonetwork, empty if the record is not harvested from a geonetwork
+     */
+    Optional<String> getHarvestSourceUri(String uuid);
+    /**
+     * Same as getAssociatedRecords but query the source geonetwork the record harvested from, it contains
+     * associated records that are filtered out by the harvester and therefore not exist in our geonetwork
+     * @param harvestSourceUri - The source geonetwork base url, see getHarvestSourceUri
+     * @param uuid - UUID of record
+     * @return - The related records, empty map if the source geonetwork cannot be reached
+     */
+    Map<String, ?> getUpstreamAssociatedRecords(String harvestSourceUri, String uuid);
 }

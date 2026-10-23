@@ -33,6 +33,8 @@ import org.springframework.retry.annotation.Retryable;
 import org.springframework.retry.support.RetryTemplate;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
+import org.springframework.web.client.ResourceAccessException;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
@@ -45,6 +47,9 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
     public static final String SUGGEST_LOGOS = "suggest_logos";
     public static final String THUMB_NAILS = "thumbnails";
     public static final String URL = "url";
+    protected static final String IS_HARVESTED = "isHarvested";
+    protected static final String HARVESTER_TYPE = "harvesterType";
+    protected static final String HARVESTER_URI = "harvesterUri";
 
     protected static final long DEFAULT_BACKOFF_TIME = 3000L;
 
@@ -61,6 +66,12 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
     protected int ES_PAGE_SIZE;
 
     protected FIFOCache<String, Map<String, ?>> cache;
+    protected RetryTemplate upstreamRetryTemplate = RetryTemplate
+            .builder()
+            .maxAttempts(3)
+            .exponentialBackoff(1000, 2, 5000)
+            .retryOn(List.of(HttpServerErrorException.class, ResourceAccessException.class))
+            .build();
     protected RestTemplate indexerRestTemplate;
     /**
      * -- SETTER --
@@ -608,6 +619,67 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
     @Override
     public Map<String, ?> getAssociatedRecords(String uuid) {
         return self.getRecordRelated(uuid).orElse(Collections.emptyMap());
+    }
+
+    /**
+     * The harvesterUri comes from our geonetwork extension api, only geonetwork harvester points to a geonetwork,
+     * other harvester type (csw etc.) may not have the related api, so we ignore them.
+     * @param uuid - UUID of record
+     * @return - Base url of the source geonetwork, e.g. https://catalogue-imos.aodn.org.au/geonetwork
+     */
+    @Override
+    public Optional<String> getHarvestSourceUri(String uuid) {
+        return self.getRecordExtraInfo(uuid)
+                .filter(info -> Boolean.TRUE.equals(info.get(IS_HARVESTED)))
+                .filter(info -> info.get(HARVESTER_TYPE) instanceof String type && type.contains(".harvester.geonet."))
+                .map(info -> info.get(HARVESTER_URI) instanceof String uri ? uri.strip() : null)
+                .filter(uri -> !uri.isEmpty())
+                .map(uri -> uri.endsWith("/") ? uri.substring(0, uri.length() - 1) : uri);
+    }
+    /**
+     * Do not put the result in the cache, the cache holds the related info of our geonetwork only, the upstream
+     * result contains records we do not have.
+     * The source geonetwork is outside our control, so we retry a few times only, and an associated
+     * record link is not worth failing the indexing.
+     */
+    @Override
+    public Map<String, ?> getUpstreamAssociatedRecords(String harvestSourceUri, String uuid) {
+        Map<String, Object> params = new HashMap<>();
+        params.put(UUID, uuid);
+
+        try {
+            ResponseEntity<Map<String, Map<String, ?>>> responseEntity = upstreamRetryTemplate.execute(context ->
+                    indexerRestTemplate.exchange(
+                            getUpstreamRelatedEndpoint(harvestSourceUri),
+                            HttpMethod.GET,
+                            defaultRequestEntity,
+                            new ParameterizedTypeReference<>() {},
+                            params
+                    )
+            );
+            if (responseEntity.getStatusCode().is2xxSuccessful()
+                    && responseEntity.getBody() != null
+                    && responseEntity.getBody().get(uuid) != null) {
+                return responseEntity.getBody().get(uuid);
+            }
+        }
+        catch (RestClientException e) {
+            logger.warn("Fail to get related records of {} from source geonetwork {}, reason {}",
+                    uuid, harvestSourceUri, e.getMessage());
+        }
+        return Collections.emptyMap();
+    }
+    /**
+     * @param harvestSourceUri - Base url of a geonetwork, e.g. https://catalogue-imos.aodn.org.au/geonetwork
+     * @param uuid - UUID of record
+     * @return - The page that display the record in that geonetwork
+     */
+    public static String getRecordPageUrl(String harvestSourceUri, String uuid) {
+        return harvestSourceUri + "/srv/eng/catalog.search#/metadata/" + uuid;
+    }
+
+    protected String getUpstreamRelatedEndpoint(String harvestSourceUri) {
+        return harvestSourceUri + "/srv/api/related?type=parent&type=brothersAndSisters&type=children&uuid={uuid}";
     }
 
     protected String getGeoNetworkRelatedEndpoint() {

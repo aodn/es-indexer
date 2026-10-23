@@ -106,4 +106,66 @@ public class AssociatedRecordsUtilTest {
     public void testGenerateAssociatedRecords_withNullData_returnsEmptyList() {
         assertTrue(AssociatedRecordsUtil.generateAssociatedRecords(null).isEmpty());
     }
+
+    private static final String UPSTREAM = "https://catalogue-imos.aodn.org.au/geonetwork";
+
+    @Test
+    public void testGenerateAssociatedRecords_withChildrenOnlyInUpstream_linksToUpstreamGeonetwork() {
+        // af5d0ff9-bb9c-4b7c-a63c-854a630b6984, the AUV records are filtered out by the harvester
+        Map<String, Object> local = new LinkedHashMap<>();
+        local.put("children", List.of(
+                record("8cdcdcad-399b-4bed-8cb2-29c486b6b124", "NRMN Sub-Facility", "abstract")
+        ));
+        Map<String, Object> upstream = new LinkedHashMap<>();
+        upstream.put("children", List.of(
+                record("0f65b7ae-1f6f-4a55-b804-1c991f791e1a", "AUV Iver", "abstract"),
+                record("8cdcdcad-399b-4bed-8cb2-29c486b6b124", "NRMN Sub-Facility", "abstract"),
+                record("8dfa2b64-4eed-491c-ba5e-645ea9409d4d", "AUV Nimbus", "abstract")
+        ));
+
+        List<LinkModel> links = AssociatedRecordsUtil.generateAssociatedRecords(local, upstream, UPSTREAM);
+
+        List<LinkModel> childLinks = linksWithRel(links, RelationType.CHILD);
+        assertEquals(List.of(
+                "uuid:8cdcdcad-399b-4bed-8cb2-29c486b6b124",
+                UPSTREAM + "/srv/eng/catalog.search#/metadata/0f65b7ae-1f6f-4a55-b804-1c991f791e1a",
+                UPSTREAM + "/srv/eng/catalog.search#/metadata/8dfa2b64-4eed-491c-ba5e-645ea9409d4d"
+        ), childLinks.stream().map(LinkModel::getHref).toList(), "Record in both should not duplicate");
+        assertEquals("{\"title\":\"AUV Iver\",\"recordAbstract\":\"abstract\"}", childLinks.get(1).getTitle());
+        assertEquals("application/json", childLinks.get(1).getType());
+    }
+
+    @Test
+    public void testGenerateAssociatedRecords_withUpstreamOnlyRelation_addedPerRelation() {
+        Map<String, Object> upstream = new LinkedHashMap<>();
+        upstream.put("parent", List.of(record("c78801d0-bffe-11dc-a463-00188b4c0af8", "IMOS", "abstract")));
+        upstream.put("siblings", List.of(record("95c09bad-1847-48f0-9ed7-1ba36e7abb8d", "Low Cost Wave Buoys", "abstract")));
+
+        List<LinkModel> links = AssociatedRecordsUtil.generateAssociatedRecords(Map.of(), upstream, UPSTREAM);
+
+        assertEquals(UPSTREAM + "/srv/eng/catalog.search#/metadata/c78801d0-bffe-11dc-a463-00188b4c0af8",
+                linksWithRel(links, RelationType.PARENT).get(0).getHref());
+        assertEquals(UPSTREAM + "/srv/eng/catalog.search#/metadata/95c09bad-1847-48f0-9ed7-1ba36e7abb8d",
+                linksWithRel(links, RelationType.SIBLING).get(0).getHref());
+        assertTrue(linksWithRel(links, RelationType.CHILD).isEmpty());
+    }
+
+    @Test
+    public void testGenerateAssociatedRecords_withEmptyUpstream_sameAsLocalOnly() {
+        Map<String, Object> local = new LinkedHashMap<>();
+        local.put("siblings", List.of(record("0ede6b3d-8635-472f-b91c-56a758b4e091", "Sibling", "abstract")));
+
+        assertEquals(
+                AssociatedRecordsUtil.generateAssociatedRecords(local),
+                AssociatedRecordsUtil.generateAssociatedRecords(local, Map.of(), UPSTREAM)
+        );
+    }
+
+    @Test
+    public void testGenerateAssociatedRecords_withoutHarvestSource_ignoresUpstream() {
+        Map<String, Object> upstream = new LinkedHashMap<>();
+        upstream.put("children", List.of(record("0f65b7ae-1f6f-4a55-b804-1c991f791e1a", "AUV Iver", "abstract")));
+
+        assertTrue(AssociatedRecordsUtil.generateAssociatedRecords(Map.of(), upstream, null).isEmpty());
+    }
 }
