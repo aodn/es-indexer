@@ -8,7 +8,6 @@ server:
 app:
   geometry:
     enableGridSpatialExtents: true
-    coastalPrecision: 0.05
 elasticsearch:
   index:
     name: dev_portal_records
