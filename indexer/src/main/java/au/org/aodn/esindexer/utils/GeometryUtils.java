@@ -17,6 +17,8 @@ import org.geotools.geojson.geom.GeometryJSON;
 import org.locationtech.jts.algorithm.Area;
 import org.locationtech.jts.geom.*;
 import org.locationtech.jts.geom.util.GeometryFixer;
+import org.locationtech.jts.operation.valid.IsValidOp;
+import org.locationtech.jts.operation.valid.TopologyValidationError;
 import org.locationtech.jts.operation.union.UnaryUnionOp;
 import org.locationtech.jts.simplify.DouglasPeuckerSimplifier;
 import org.opengis.feature.simple.SimpleFeature;
@@ -312,8 +314,24 @@ public class GeometryUtils {
         catch (Exception e) {
             logger.warn("buffer(0) failed while repairing geometry: {}", e.getMessage());
         }
-        logger.warn("Unable to fully repair invalid geometry of type {}", geometry.getGeometryType());
         return geometry;
+    }
+
+    /**
+     * JTS reason the geometry was rejected, including the coordinate of a self-intersection
+     * or collapsed ring when one is available.
+     */
+    protected static String validationReason(Geometry geometry) {
+        try {
+            TopologyValidationError error = new IsValidOp(geometry).getValidationError();
+            if (error == null) {
+                return "no validation error";
+            }
+            return error.toString();
+        }
+        catch (RuntimeException e) {
+            return e.getClass().getSimpleName() + ": " + e.getMessage();
+        }
     }
 
     /**
@@ -458,10 +476,18 @@ public class GeometryUtils {
                     )
                     .toList();
             String metadataUuid = CommonUtils.safeGet(() -> CommonUtils.getUUID(source)).orElse(null);
-            if (GeometryBase.findPolygonsFrom(GeometryBase.COORDINATE_SYSTEM_CRS84, rawInput, metadataUuid).stream()
+            List<String> invalidReasons = GeometryBase.findPolygonsFrom(GeometryBase.COORDINATE_SYSTEM_CRS84, rawInput, metadataUuid).stream()
                     .flatMap(List::stream)
-                    .anyMatch(GeometryUtils::unusableAfterRepair)) {
-                logger.error("Invalid polygon for metadata uuid {}, omitting spatial extent", metadataUuid);
+                    .map(GeometryUtils::unusableReason)
+                    .flatMap(Optional::stream)
+                    .distinct()
+                    .toList();
+            if (!invalidReasons.isEmpty()) {
+                logger.error(
+                        "{} for uuid {}, omitting spatial extent",
+                        String.join("; ", invalidReasons),
+                        metadataUuid
+                        );
                 rawInput = List.of();
             }
             return handler.apply(rawInput, param, metadataUuid);
@@ -474,11 +500,23 @@ public class GeometryUtils {
      * A collapsed track stays invalid, and the land difference then fails.
      */
     protected static boolean unusableAfterRepair(Geometry geometry) {
+        return unusableReason(geometry).isPresent();
+    }
+
+    /**
+     * Empty when the geometry is already valid or repair produced a valid geometry.
+     * Otherwise the JTS reason repair could not remove.
+     */
+    protected static Optional<String> unusableReason(Geometry geometry) {
         if (geometry == null || geometry.isValid()) {
-            return false;
+            return Optional.empty();
         }
         Geometry repaired = makeValidGeometry(geometry);
-        return repaired == null || repaired.isEmpty() || !repaired.isValid();
+        if (repaired != null && !repaired.isEmpty() && repaired.isValid()) {
+            return Optional.empty();
+        }
+        Geometry reported = repaired != null && !repaired.isEmpty() ? repaired : geometry;
+        return Optional.of(validationReason(reported));
     }
 
     protected static List<List<Geometry>> createGeometryWithoutLand(List<GeometryWithDescription> rawInput, String metadataUuid) {
