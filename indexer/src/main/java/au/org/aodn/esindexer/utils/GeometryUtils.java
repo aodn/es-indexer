@@ -483,7 +483,7 @@ public class GeometryUtils {
                     .distinct()
                     .toList();
             if (!invalidReasons.isEmpty()) {
-                logger.error(
+                logger.warn(
                         "{} for uuid {}, omitting spatial extent",
                         String.join("; ", invalidReasons),
                         metadataUuid
