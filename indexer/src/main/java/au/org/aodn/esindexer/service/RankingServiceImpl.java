@@ -64,7 +64,7 @@ public class RankingServiceImpl implements RankingService {
     @Value("${app.ranking.superseded.penalty:-20}")
     protected int supersededPenalty;
 
-    @Value("${app.ranking.document.penalty:-20}")
+    @Value("${app.ranking.document.penalty:-45}")
     protected int documentPenalty;
 
     @Value("${app.ranking.facility.penalty:-20}")
