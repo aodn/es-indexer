@@ -36,7 +36,9 @@ public interface RankingService {
         /** Is IMOS facility/sub-facility */
         IMOS_FACILITY("imos_facility"),
         /** Is IMOS collection */
-        IMOS_COLLECTION("imos_collection");
+        IMOS_COLLECTION("imos_collection"),
+        /** IMOS owned record with ongoing status, not a document, facility or out-of-date record */
+        IMOS_ONGOING("imos_ongoing");
 
         public final String key;
 

@@ -195,19 +195,25 @@ class RankingServiceIT extends BaseTestClass {
     public void testSupersededPenalty() {
         RankingServiceImpl mockRankingService = Mockito.spy(rankingService);
         stacCollectionModel.setSummaries(SummariesModel.builder()
-                .status("superseded")
+                .datasetGroup(List.of("IMOS"))
+                .status("onGoing | superseded")
                 .build());
-        // penalty -20
-        assertEquals(mockRankingService.supersededPenalty, mockRankingService.evaluateCompleteness(stacCollectionModel).total());
+        // IMOS owned keeps the imos weight, out-of-date gets the penalty and no IMOS ongoing weight
+        assertEquals(mockRankingService.imosWeigth + mockRankingService.supersededPenalty,
+                mockRankingService.evaluateCompleteness(stacCollectionModel).total());
     }
 
     @Test
     public void testDocumentPenalty() {
         RankingServiceImpl mockRankingService = Mockito.spy(rankingService);
         stacCollectionModel.setSummaries(SummariesModel.builder()
+                .datasetGroup(List.of("IMOS"))
+                .status("onGoing")
                 .scope(Map.of("code", "document"))
                 .build());
-        assertEquals(mockRankingService.documentPenalty, mockRankingService.evaluateCompleteness(stacCollectionModel).total());
+        // IMOS owned keeps the imos weight, a document gets the penalty and no IMOS ongoing weight
+        assertEquals(mockRankingService.imosWeigth + mockRankingService.documentPenalty,
+                mockRankingService.evaluateCompleteness(stacCollectionModel).total());
     }
 
     @Test
@@ -217,9 +223,10 @@ class RankingServiceIT extends BaseTestClass {
         for (String code : List.of("collectionHardware", "series", "collectionSession")) {
             stacCollectionModel.setSummaries(SummariesModel.builder()
                     .datasetGroup(List.of("IMOS"))
+                    .status("onGoing")
                     .scope(Map.of("code", code))
                     .build());
-            // IMOS owned so it keeps the imos weight, then the facility penalty applies on top
+            // IMOS owned so it keeps the imos weight, then the facility penalty applies on top, no IMOS ongoing weight
             assertEquals(mockRankingService.imosWeigth + mockRankingService.facilityPenalty,
                     mockRankingService.evaluateCompleteness(stacCollectionModel).total(),
                     "Facility penalty applies to scope code " + code);
@@ -351,6 +358,7 @@ class RankingServiceIT extends BaseTestClass {
                 "cloud-optimised.parquet", AssetModel.builder().role(AssetModel.Role.SUMMARY).build()));
         stacCollectionModel.setSummaries(SummariesModel.builder()
                 .statement("Statement")
+                .status("onGoing")
                 .datasetGroup(List.of("IMOS"))
                 .scope(Map.of("code", "dataset"))
                 .categories(List.of("portal:IMOS"))
@@ -373,5 +381,6 @@ class RankingServiceIT extends BaseTestClass {
         assertEquals(0, breakdown.get(RankingService.Rule.OUT_OF_DATE.key));
         assertEquals(0, breakdown.get(RankingService.Rule.DOCUMENT.key));
         assertEquals(0, breakdown.get(RankingService.Rule.IMOS_FACILITY.key));
+        assertEquals(rankingService.imosOngoingWeight, breakdown.get(RankingService.Rule.IMOS_ONGOING.key));
     }
 }
