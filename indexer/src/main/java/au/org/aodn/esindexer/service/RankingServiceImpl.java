@@ -1,5 +1,6 @@
 package au.org.aodn.esindexer.service;
 
+import au.org.aodn.esindexer.utils.DeliveryModeUtils;
 import au.org.aodn.esindexer.utils.FacilityRecordUtils;
 import au.org.aodn.stac.model.ThemesModel;
 import lombok.extern.slf4j.Slf4j;
@@ -69,6 +70,9 @@ public class RankingServiceImpl implements RankingService {
 
     @Value("${app.ranking.facility.penalty:-20}")
     protected int facilityPenalty;
+
+    @Value("${app.ranking.imosOngoing.weight:15}")
+    protected int imosOngoingWeight;
 
     public CompletenessScore evaluateCompleteness(StacCollectionModel stacCollectionModel) {
         // Every rule is present, a rule not met keeps 0, so the breakdown shows what was checked and not only what was found
@@ -154,8 +158,9 @@ public class RankingServiceImpl implements RankingService {
             count++;
         }
         // IMOS record dataset_group = ["IMOS"]
-        if (FacilityRecordUtils.isImosOwned(
-                safeGet(() -> stacCollectionModel.getSummaries().getDatasetGroup()).orElse(null))) {
+        boolean isImosOwned = FacilityRecordUtils.isImosOwned(
+                safeGet(() -> stacCollectionModel.getSummaries().getDatasetGroup()).orElse(null));
+        if (isImosOwned) {
             log.debug("IMOS owned record");
             breakdown.put(Rule.IMOS_OWNED.key, imosWeigth);
         }
@@ -179,23 +184,33 @@ public class RankingServiceImpl implements RankingService {
             breakdown.put(Rule.DOWNLOADABLE_LINKS.key, downloadableWeigth);
         }
         // Penalty for superseded record: status equals superseded / deprecated / obsolete
-        if (safeGet(() -> stacCollectionModel.getSummaries().getStatus())
+        boolean isOutOfDate = safeGet(() -> stacCollectionModel.getSummaries().getStatus())
                 .map(String::toLowerCase)
                 .filter(s -> s.contains("superseded") || s.contains("deprecated")
                         || s.contains("obsolete")   || s.contains("historicalarchive"))
-                .isPresent()) {
+                .isPresent();
+        if (isOutOfDate) {
             breakdown.put(Rule.OUT_OF_DATE.key, supersededPenalty);
         }
         // Penalty for document record: scope.code equals document
-        if (safeGet(() -> stacCollectionModel.getSummaries().getScope().get("code"))
+        boolean isDocument = safeGet(() -> stacCollectionModel.getSummaries().getScope().get("code"))
                 .filter("document"::equalsIgnoreCase)
-                .isPresent()) {
+                .isPresent();
+        if (isDocument) {
             breakdown.put(Rule.DOCUMENT.key, documentPenalty);
         }
         // Penalty for IMOS Facility / Sub-Facility record, it describes a facility and has no data attached
-        if (FacilityRecordUtils.isImosFacilityRecord(stacCollectionModel)) {
+        boolean isFacility = FacilityRecordUtils.isImosFacilityRecord(stacCollectionModel);
+        if (isFacility) {
             log.debug("IMOS facility / sub-facility record with no data attached");
             breakdown.put(Rule.IMOS_FACILITY.key, facilityPenalty);
+        }
+        // IMOS ongoing data ranks above completed data of the same kind, documents, facility and out-of-date records excluded
+        boolean isOngoing = "ongoing".equals(DeliveryModeUtils.normaliseStatus(
+                safeGet(() -> stacCollectionModel.getSummaries().getStatus()).orElse(null)));
+        if (isImosOwned && isOngoing && !isOutOfDate && !isDocument && !isFacility) {
+            log.debug("IMOS ongoing record");
+            breakdown.put(Rule.IMOS_ONGOING.key, imosOngoingWeight);
         }
 
         log.debug("Overall count of metadata elements:{}", count);
