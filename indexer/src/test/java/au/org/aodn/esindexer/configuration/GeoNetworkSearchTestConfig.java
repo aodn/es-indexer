@@ -167,6 +167,17 @@ public class GeoNetworkSearchTestConfig {
                         eq(Map.class),
                         anyMap());
 
+        // The canned extrainfo points to the real source geonetwork (catalogue-imos), never call it in test,
+        // the record is not found there so no extra associated record is added.
+        doReturn(ResponseEntity.notFound().build())
+                .when(template)
+                .exchange(
+                        argThat(a -> a.contains("/srv/api/related") && !a.startsWith(impl.getServer())),
+                        eq(HttpMethod.GET),
+                        any(HttpEntity.class),
+                        isA(ParameterizedTypeReference.class),
+                        anyMap());
+
         return impl;
     }
     /**
