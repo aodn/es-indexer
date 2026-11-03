@@ -1,5 +1,6 @@
 package au.org.aodn.cloudoptimized.service;
 
+import au.org.aodn.cloudoptimized.enums.MetadataKeyType;
 import au.org.aodn.cloudoptimized.model.MetadataEntity;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -151,13 +152,14 @@ class DataAccessServiceImplTest {
     }
 
     @Test
-    void testMetadataEntity_ReadCloudOptimisedFlag() throws Exception {
+    void testMetadataEntity_ReadType() throws Exception {
         // Arrange: the metadata endpoint response, one key of each kind
         String json = """
                 {
-                  "a.parquet": {"uuid": "test-uuid", "dname": "a.parquet", "cloud_optimised": true},
-                  "original_netcdfs": {"uuid": "test-uuid", "dname": "original_netcdfs", "lat": null, "lng": null, "depth": null, "cloud_optimised": false},
-                  "b.zarr": {"uuid": "test-uuid", "dname": "b.zarr"}
+                  "a.parquet": {"uuid": "test-uuid", "dname": "a.parquet", "type": "cloud_optimised"},
+                  "original_netcdfs": {"uuid": "test-uuid", "dname": "original_netcdfs", "lat": null, "lng": null, "depth": null, "type": "data_index"},
+                  "b.zarr": {"uuid": "test-uuid", "dname": "b.zarr"},
+                  "c.parquet": {"uuid": "test-uuid", "dname": "c.parquet", "type": "something_new"}
                 }
                 """;
 
@@ -165,11 +167,14 @@ class DataAccessServiceImplTest {
         Map<String, MetadataEntity> result = new ObjectMapper().readValue(json, new TypeReference<>() {
         });
 
-        // Assert: no flag means cloud-optimised, as the data access service did not send it before
-        assertTrue(result.get("a.parquet").isCloudOptimised());
-        assertFalse(result.get("original_netcdfs").isCloudOptimised());
+        // Assert
+        assertEquals(MetadataKeyType.CLOUD_OPTIMISED, result.get("a.parquet").getType());
+        assertEquals(MetadataKeyType.DATA_INDEX, result.get("original_netcdfs").getType());
         assertEquals("original_netcdfs", result.get("original_netcdfs").getDname());
-        assertTrue(result.get("b.zarr").isCloudOptimised());
+        // No type means the kind is unknown
+        assertNull(result.get("b.zarr").getType());
+        // An unknown type does not fail the response
+        assertNull(result.get("c.parquet").getType());
     }
 
 }

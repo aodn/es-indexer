@@ -3,6 +3,7 @@ package au.org.aodn.esindexer.service;
 import au.org.aodn.cloudoptimized.model.MetadataEntity;
 import au.org.aodn.stac.model.RelationType;
 import au.org.aodn.cloudoptimized.enums.DatasetMediaType;
+import au.org.aodn.cloudoptimized.enums.MetadataKeyType;
 import au.org.aodn.cloudoptimized.service.DataAccessService;
 import au.org.aodn.esindexer.utils.AssociatedRecordsUtil;
 import au.org.aodn.esindexer.utils.*;
@@ -1253,8 +1254,8 @@ public abstract class StacCollectionMapperService {
     /**
      * Maps assets for the collection. The keys are retrieved from the data access service.
      * For cloud-optimized datasets, the key is the dataset name and the asset role is SUMMARY.
-     * A collection with no cloud-optimized data may have one key for the list of its original NetCDF files,
-     * the asset role is FILE_LIST.
+     * A collection with no cloud-optimized data may have one key of type "data_index" for the list of its
+     * original NetCDF files, the asset role is FILE_LIST.
      */
     @Named("assets")
     protected Map<String, AssetModel> mapAssetsData(MDMetadataType source) {
@@ -1265,13 +1266,13 @@ public abstract class StacCollectionMapperService {
             for (var entry : datasetMetadata.entrySet()) {
                 var key = entry.getKey();
                 var dname = entry.getValue().getDname() != null ? entry.getValue().getDname() : key;
-                var cloudOptimised = entry.getValue().isCloudOptimised();
+                var dataIndex = entry.getValue().getType() == MetadataKeyType.DATA_INDEX;
                 entries.put(key, AssetModel.builder()
-                        .role(cloudOptimised ? AssetModel.Role.SUMMARY : AssetModel.Role.FILE_LIST)
-                        .type(cloudOptimised ? getMediaTypeFromDname(dname) : DatasetMediaType.APPLICATION_NETCDF_LIST.getValue())
+                        .role(dataIndex ? AssetModel.Role.FILE_LIST : AssetModel.Role.SUMMARY)
+                        .type(dataIndex ? DatasetMediaType.APPLICATION_NETCDF_LIST.getValue() : getMediaTypeFromDname(dname))
                         .href(null)
                         .title(dname)
-                        .description(cloudOptimised ? "Summary of cloud optimized data points" : "Original NetCDF files list")
+                        .description(dataIndex ? "Original NetCDF files list" : "Summary of cloud optimized data points")
                         .build());
             }
             return entries;

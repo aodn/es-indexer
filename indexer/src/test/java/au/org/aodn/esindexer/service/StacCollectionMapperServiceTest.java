@@ -11,6 +11,7 @@ import au.org.aodn.esindexer.utils.JaxbUtils;
 import au.org.aodn.metadata.geonetwork.service.GeoNetworkServiceImpl;
 import au.org.aodn.metadata.iso19115_3_2018.MDMetadataType;
 import au.org.aodn.cloudoptimized.enums.DatasetMediaType;
+import au.org.aodn.cloudoptimized.enums.MetadataKeyType;
 import au.org.aodn.stac.model.AssetModel;
 import au.org.aodn.stac.model.ConceptModel;
 import au.org.aodn.stac.model.LinkModel;
@@ -552,7 +553,7 @@ public class StacCollectionMapperServiceTest {
         netcdfMetadata.setUuid("35234913-aa3c-48ec-b9a4-77f822f66ef8");
         String netcdfKey = "original_netcdfs";
         netcdfMetadata.setDname(netcdfKey);
-        netcdfMetadata.setCloudOptimised(false);
+        netcdfMetadata.setType(MetadataKeyType.DATA_INDEX.getValue());
 
         when(dataAccessService.getMetadataByUuid(eq("35234913-aa3c-48ec-b9a4-77f822f66ef8")))
                 .thenReturn(Map.of(netcdfKey, netcdfMetadata));
