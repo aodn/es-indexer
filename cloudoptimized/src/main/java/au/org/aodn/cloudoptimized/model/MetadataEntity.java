@@ -1,5 +1,6 @@
 package au.org.aodn.cloudoptimized.model;
 
+import au.org.aodn.cloudoptimized.enums.MetadataKeyType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -31,6 +32,10 @@ public class MetadataEntity {
     @JsonIgnore
     protected String uuid;
 
+    // null if the data access service does not send "type", or sends an unknown value
+    @JsonIgnore
+    protected MetadataKeyType type;
+
     @JsonProperty("depth")
     public void setDepth(Depth v) {
         this.depth = v;
@@ -44,5 +49,11 @@ public class MetadataEntity {
     @JsonProperty("uuid")
     public void setUuid(String v) {
         this.uuid = v;
+    }
+
+    // Read as a string, so an unknown value does not fail the whole response
+    @JsonProperty("type")
+    public void setType(String v) {
+        this.type = MetadataKeyType.fromValue(v);
     }
 }

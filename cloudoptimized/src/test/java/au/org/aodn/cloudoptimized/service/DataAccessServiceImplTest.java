@@ -1,6 +1,8 @@
 package au.org.aodn.cloudoptimized.service;
 
-import au.org.aodn.cloudoptimized.model.MetadataFields;
+import au.org.aodn.cloudoptimized.enums.MetadataKeyType;
+import au.org.aodn.cloudoptimized.model.MetadataEntity;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,11 +11,9 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.reactive.function.client.WebClient;
 
-import java.math.BigDecimal;
-import java.time.YearMonth;
-import java.util.List;
+
+import java.util.Map;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -149,6 +149,32 @@ class DataAccessServiceImplTest {
 
         // Assert
         assertTrue(result.isEmpty());
+    }
+
+    @Test
+    void testMetadataEntity_ReadType() throws Exception {
+        // Arrange: the metadata endpoint response, one key of each kind
+        String json = """
+                {
+                  "a.parquet": {"uuid": "test-uuid", "dname": "a.parquet", "type": "cloud_optimised"},
+                  "original_netcdfs": {"uuid": "test-uuid", "dname": "original_netcdfs", "lat": null, "lng": null, "depth": null, "type": "data_index"},
+                  "b.zarr": {"uuid": "test-uuid", "dname": "b.zarr"},
+                  "c.parquet": {"uuid": "test-uuid", "dname": "c.parquet", "type": "something_new"}
+                }
+                """;
+
+        // Act
+        Map<String, MetadataEntity> result = new ObjectMapper().readValue(json, new TypeReference<>() {
+        });
+
+        // Assert
+        assertEquals(MetadataKeyType.CLOUD_OPTIMISED, result.get("a.parquet").getType());
+        assertEquals(MetadataKeyType.DATA_INDEX, result.get("original_netcdfs").getType());
+        assertEquals("original_netcdfs", result.get("original_netcdfs").getDname());
+        // No type means the kind is unknown
+        assertNull(result.get("b.zarr").getType());
+        // An unknown type does not fail the response
+        assertNull(result.get("c.parquet").getType());
     }
 
 }

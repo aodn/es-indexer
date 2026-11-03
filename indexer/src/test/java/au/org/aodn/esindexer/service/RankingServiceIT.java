@@ -1,5 +1,6 @@
 package au.org.aodn.esindexer.service;
 
+import au.org.aodn.cloudoptimized.enums.DatasetMediaType;
 import au.org.aodn.esindexer.Application;
 import au.org.aodn.esindexer.BaseTestClass;
 import au.org.aodn.esindexer.utils.FacilityRecordUtils;
@@ -172,6 +173,18 @@ class RankingServiceIT extends BaseTestClass {
                 "cloud-optimised.parquet", AssetModel.builder().role(AssetModel.Role.SUMMARY).build()
         ));
         assertEquals(mockRankingService.cloudOptimizedWeigth, mockRankingService.evaluateCompleteness(stacCollectionModel).total());
+    }
+
+    @Test
+    public void testOriginalNetcdfListAssetNotCloudOptimised() {
+        RankingServiceImpl mockRankingService = Mockito.spy(rankingService);
+        stacCollectionModel.setAssets(Map.of(
+                "original_netcdfs", AssetModel.builder()
+                        .role(AssetModel.Role.FILE_LIST)
+                        .type(DatasetMediaType.APPLICATION_NETCDF_LIST.getValue())
+                        .build()
+        ));
+        assertEquals(0, mockRankingService.evaluateCompleteness(stacCollectionModel).total());
     }
 
     @Test

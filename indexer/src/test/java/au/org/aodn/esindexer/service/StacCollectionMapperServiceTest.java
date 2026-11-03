@@ -11,6 +11,8 @@ import au.org.aodn.esindexer.utils.JaxbUtils;
 import au.org.aodn.metadata.geonetwork.service.GeoNetworkServiceImpl;
 import au.org.aodn.metadata.iso19115_3_2018.MDMetadataType;
 import au.org.aodn.cloudoptimized.enums.DatasetMediaType;
+import au.org.aodn.cloudoptimized.enums.MetadataKeyType;
+import au.org.aodn.stac.model.AssetModel;
 import au.org.aodn.stac.model.ConceptModel;
 import au.org.aodn.stac.model.LinkModel;
 import au.org.aodn.stac.model.StacCollectionModel;
@@ -539,6 +541,32 @@ public class StacCollectionMapperServiceTest {
         JsonNode assets = objectMapper.readTree(lastRequest.get().document().toString()).get("assets");
         assertEquals(DatasetMediaType.APPLICATION_PARQUET.getValue(), assets.get(parquetDname).get("type").asText());
         assertEquals(DatasetMediaType.APPLICATION_ZARR.getValue(), assets.get(zarrDname).get("type").asText());
+    }
+    /**
+     * A collection with no cloud-optimised data has one key for the list of its original NetCDF files.
+     * Verify it is mapped to a file-list asset with type application/x-netcdf.
+     * @throws IOException - Not expected to throw
+     */
+    @Test
+    public void verifyAssetOfNonCloudOptimisedKey() throws IOException {
+        MetadataEntity netcdfMetadata = new MetadataEntity();
+        netcdfMetadata.setUuid("35234913-aa3c-48ec-b9a4-77f822f66ef8");
+        String netcdfKey = "original_netcdfs";
+        netcdfMetadata.setDname(netcdfKey);
+        netcdfMetadata.setType(MetadataKeyType.DATA_INDEX.getValue());
+
+        when(dataAccessService.getMetadataByUuid(eq("35234913-aa3c-48ec-b9a4-77f822f66ef8")))
+                .thenReturn(Map.of(netcdfKey, netcdfMetadata));
+
+        String xml = readResourceFile("classpath:canned/dataservice/35234913-aa3c-48ec-b9a4-77f822f66ef8/sample.xml");
+        indexerService.indexMetadata(xml);
+
+        JsonNode assets = objectMapper.readTree(lastRequest.get().document().toString()).get("assets");
+        assertEquals(1, assets.size());
+        assertEquals(AssetModel.Role.FILE_LIST.name(), assets.get(netcdfKey).get("role").asText());
+        assertEquals(DatasetMediaType.APPLICATION_NETCDF_LIST.getValue(), assets.get(netcdfKey).get("type").asText());
+        assertEquals(netcdfKey, assets.get(netcdfKey).get("title").asText());
+        assertEquals("Original NetCDF files list", assets.get(netcdfKey).get("description").asText());
     }
     /**
      * This XML contains an invalid value in the EAST point of the bounding box, it is set to 360, which is invalid value.
