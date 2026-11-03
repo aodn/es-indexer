@@ -26,7 +26,8 @@ public class AssetModel {
         SNOW_ICE("snow-ice"),
         LAND_WATER("land-water"),
         WATER_MASK("water-mask"),
-        ISO_19115("iso-19115");
+        ISO_19115("iso-19115"),
+        FILE_LIST("file-list");
 
         private final String role;
 
@@ -39,6 +40,7 @@ public class AssetModel {
             return role;
         }
     }
+
     /**
      * REQUIRED. URI to the asset object. Relative and absolute URI are both allowed. Trailing slashes are significant.
      */

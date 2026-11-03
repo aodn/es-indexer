@@ -1,6 +1,7 @@
 package au.org.aodn.cloudoptimized.service;
 
-import au.org.aodn.cloudoptimized.model.MetadataFields;
+import au.org.aodn.cloudoptimized.model.MetadataEntity;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,11 +10,9 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.reactive.function.client.WebClient;
 
-import java.math.BigDecimal;
-import java.time.YearMonth;
-import java.util.List;
+
+import java.util.Map;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -149,6 +148,28 @@ class DataAccessServiceImplTest {
 
         // Assert
         assertTrue(result.isEmpty());
+    }
+
+    @Test
+    void testMetadataEntity_ReadCloudOptimisedFlag() throws Exception {
+        // Arrange: the metadata endpoint response, one key of each kind
+        String json = """
+                {
+                  "a.parquet": {"uuid": "test-uuid", "dname": "a.parquet", "cloud_optimised": true},
+                  "original_netcdfs": {"uuid": "test-uuid", "dname": "original_netcdfs", "lat": null, "lng": null, "depth": null, "cloud_optimised": false},
+                  "b.zarr": {"uuid": "test-uuid", "dname": "b.zarr"}
+                }
+                """;
+
+        // Act
+        Map<String, MetadataEntity> result = new ObjectMapper().readValue(json, new TypeReference<>() {
+        });
+
+        // Assert: no flag means cloud-optimised, as the data access service did not send it before
+        assertTrue(result.get("a.parquet").isCloudOptimised());
+        assertFalse(result.get("original_netcdfs").isCloudOptimised());
+        assertEquals("original_netcdfs", result.get("original_netcdfs").getDname());
+        assertTrue(result.get("b.zarr").isCloudOptimised());
     }
 
 }

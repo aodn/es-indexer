@@ -31,6 +31,9 @@ public class MetadataEntity {
     @JsonIgnore
     protected String uuid;
 
+    @JsonIgnore
+    protected boolean cloudOptimised = true;
+
     @JsonProperty("depth")
     public void setDepth(Depth v) {
         this.depth = v;
@@ -44,5 +47,10 @@ public class MetadataEntity {
     @JsonProperty("uuid")
     public void setUuid(String v) {
         this.uuid = v;
+    }
+
+    @JsonProperty("cloud_optimised")
+    public void setCloudOptimised(boolean v) {
+        this.cloudOptimised = v;
     }
 }

@@ -1251,24 +1251,27 @@ public abstract class StacCollectionMapperService {
     }
 
     /**
-     * Maps assets for the collection. For cloud-optimized datasets, the key is the dataset name which is
-     * retrieved from the data access service.
+     * Maps assets for the collection. The keys are retrieved from the data access service.
+     * For cloud-optimized datasets, the key is the dataset name and the asset role is SUMMARY.
+     * A collection with no cloud-optimized data may have one key for the list of its original NetCDF files,
+     * the asset role is FILE_LIST.
      */
     @Named("assets")
     protected Map<String, AssetModel> mapAssetsData(MDMetadataType source) {
         String collectionId = CommonUtils.getUUID(source);
-        Map<String, MetadataEntity> cloudOptimisedMetadata = dataAccessService.getMetadataByUuid(collectionId);
-        if(cloudOptimisedMetadata != null && !cloudOptimisedMetadata.isEmpty()) {
+        Map<String, MetadataEntity> datasetMetadata = dataAccessService.getMetadataByUuid(collectionId);
+        if(datasetMetadata != null && !datasetMetadata.isEmpty()) {
             var entries = new HashMap<String, AssetModel>();
-            for (var entry : cloudOptimisedMetadata.entrySet()) {
+            for (var entry : datasetMetadata.entrySet()) {
                 var key = entry.getKey();
                 var dname = entry.getValue().getDname() != null ? entry.getValue().getDname() : key;
+                var cloudOptimised = entry.getValue().isCloudOptimised();
                 entries.put(key, AssetModel.builder()
-                        .role(AssetModel.Role.SUMMARY)
-                        .type(getMediaTypeFromDname(dname))
+                        .role(cloudOptimised ? AssetModel.Role.SUMMARY : AssetModel.Role.FILE_LIST)
+                        .type(cloudOptimised ? getMediaTypeFromDname(dname) : DatasetMediaType.APPLICATION_NETCDF_LIST.getValue())
                         .href(null)
                         .title(dname)
-                        .description("Summary of cloud optimized data points")
+                        .description(cloudOptimised ? "Summary of cloud optimized data points" : "Original NetCDF files list")
                         .build());
             }
             return entries;

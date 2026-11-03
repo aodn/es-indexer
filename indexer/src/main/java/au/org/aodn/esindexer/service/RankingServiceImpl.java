@@ -2,6 +2,7 @@ package au.org.aodn.esindexer.service;
 
 import au.org.aodn.esindexer.utils.DeliveryModeUtils;
 import au.org.aodn.esindexer.utils.FacilityRecordUtils;
+import au.org.aodn.stac.model.AssetModel;
 import au.org.aodn.stac.model.ThemesModel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -171,8 +172,11 @@ public class RankingServiceImpl implements RankingService {
             log.debug("IMOS portal collection record");
             breakdown.put(Rule.IMOS_COLLECTION.key, portalImosWeight);
         }
-        // Cloud-optimised download service: assets populated means cloud-optimised index exists
-        if (stacCollectionModel.getAssets() != null && !stacCollectionModel.getAssets().isEmpty()) {
+        // Cloud-optimised download service: a SUMMARY asset means cloud-optimised index exists.
+        // The asset of the original NetCDF files list (role FILE_LIST) is not cloud-optimised.
+        if (stacCollectionModel.getAssets() != null
+                && stacCollectionModel.getAssets().values().stream()
+                .anyMatch(asset -> asset.getRole() == AssetModel.Role.SUMMARY)) {
             log.debug("Record has cloud optimised link");
             breakdown.put(Rule.CLOUD_OPTIMISED_DOWNLOAD.key, cloudOptimizedWeigth);
         }
