@@ -18,6 +18,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -31,11 +32,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import java.io.IOException;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.CompletableFuture;
 
 import static org.hamcrest.Matchers.endsWith;
 import static org.springframework.test.web.client.ExpectedCount.manyTimes;
@@ -236,29 +240,37 @@ public class IndexerSettingServiceIT extends BaseTestClass {
 
     /**
      * Over HTTP: the add takes a JSON body, the delete takes comma separated uuids in the query. A uuid
-     * that is not in GeoNetwork stays on the list and is reported in reindex_failed, with status 200.
+     * that is not in GeoNetwork is never kept on the list and is reported in not_found, with status 200.
      */
     @Test
-    public void addAndDeleteOverHttp() {
+    public void addAndDeleteOverHttp() throws IOException {
+        // "on-list" is a uuid with no record that got on the list before, the add must not lose it
+        indexerSettingService.addSkipCoUuids(List.of("on-list"));
+
         ResponseEntity<JsonNode> added = testRestTemplate.exchange(
                 url("/skip_co/uuids"), HttpMethod.POST,
                 new HttpEntity<>("{ \"uuids\": [\"not-exist-1\", \" not-exist-2 \", \"not-exist-1\"] }", apiKeyHeaders()),
                 JsonNode.class);
 
         Assertions.assertEquals(HttpStatus.OK, added.getStatusCode());
-        Assertions.assertEquals(List.of("not-exist-1", "not-exist-2"), texts(added.getBody().get("uuids")));
+        Assertions.assertEquals(List.of("on-list"), texts(added.getBody().get("uuids")), "The add is undone");
         Assertions.assertEquals(List.of(), texts(added.getBody().get("reindexed")));
-        Assertions.assertEquals(List.of("not-exist-1", "not-exist-2"), texts(added.getBody().get("reindex_failed")));
+        Assertions.assertEquals(List.of(), texts(added.getBody().get("reindex_failed")));
+        Assertions.assertEquals(List.of("not-exist-1", "not-exist-2"), texts(added.getBody().get("not_found")));
         Assertions.assertDoesNotThrow(() -> Instant.parse(added.getBody().get("updated_at").asText()));
+        Assertions.assertEquals(List.of("on-list"), indexerSettingService.getSkipCoSetting().uuids());
 
+        // A uuid with no record can still be removed, there is nothing to reindex
         ResponseEntity<JsonNode> deleted = testRestTemplate.exchange(
-                url("/skip_co/uuids?uuids=not-exist-1,not-exist-2"), HttpMethod.DELETE,
+                url("/skip_co/uuids?uuids=on-list,not-exist-1"), HttpMethod.DELETE,
                 new HttpEntity<>(apiKeyHeaders()),
                 JsonNode.class);
 
         Assertions.assertEquals(HttpStatus.OK, deleted.getStatusCode());
         Assertions.assertEquals(List.of(), texts(deleted.getBody().get("uuids")));
-        Assertions.assertEquals(List.of("not-exist-1", "not-exist-2"), texts(deleted.getBody().get("reindex_failed")));
+        Assertions.assertEquals(List.of(), texts(deleted.getBody().get("reindex_failed")));
+        Assertions.assertEquals(List.of("on-list", "not-exist-1"), texts(deleted.getBody().get("not_found")));
+        Assertions.assertEquals(List.of(), indexerSettingService.getSkipCoSetting().uuids());
 
         ResponseEntity<String> empty = testRestTemplate.exchange(
                 url("/skip_co/uuids"), HttpMethod.POST,
@@ -273,10 +285,11 @@ public class IndexerSettingServiceIT extends BaseTestClass {
      * The data access service returns the cloud-optimised key and the data-index key of the record.
      * Not on the list: the cloud-optimised asset only. On the list: the data-index asset only, for
      * the single record reindex of the endpoint and for the full reindex. After a remove the
-     * cloud-optimised asset is back.
+     * cloud-optimised asset is back. An add or a remove with a failed reindex changes nothing, the
+     * list and the record still agree.
      */
     @Test
-    public void recordOnTheListIsIndexedWithDataIndexKeyOnly() throws IOException {
+    public void recordOnTheListIsIndexedWithDataIndexKeyOnly() throws Exception {
         String uuid = "9e5c3031-a026-48b3-a153-a70c2e2b78b9";
         try {
             insertMetadataRecords(uuid, "classpath:canned/sample1.xml");
@@ -301,10 +314,26 @@ public class IndexerSettingServiceIT extends BaseTestClass {
             Assertions.assertEquals(List.of(uuid), indexerSettingService.getSkipCoSetting().uuids(),
                     "A full reindex does not touch the settings");
 
+            // Remove with a failed reindex: the uuid is put back, the list and the record still agree
+            var notRemoved = withFailedReindex(() -> indexerSettingController.removeSkipCoUuids(List.of(uuid))).getBody();
+            Assertions.assertEquals(List.of(uuid), notRemoved.uuids());
+            Assertions.assertEquals(List.of(uuid), notRemoved.reindexFailed());
+            Assertions.assertEquals(List.of(uuid), indexerSettingService.getSkipCoSetting().uuids());
+            Assertions.assertEquals(List.of(DATA_INDEX_KEY), assetKeys(uuid));
+
             // Remove: the cloud-optimised asset is back
             var removed = indexerSettingController.removeSkipCoUuids(List.of(uuid)).getBody();
             Assertions.assertEquals(List.of(), removed.uuids());
             Assertions.assertEquals(List.of(uuid), removed.reindexed());
+            Assertions.assertEquals(List.of(CO_KEY), assetKeys(uuid));
+
+            // Add with a failed reindex: the uuid is not added
+            var notAdded = withFailedReindex(() -> indexerSettingController
+                    .addSkipCoUuids(new IndexerSettingController.UuidsRequest(List.of(uuid))))
+                    .getBody();
+            Assertions.assertEquals(List.of(), notAdded.uuids());
+            Assertions.assertEquals(List.of(uuid), notAdded.reindexFailed());
+            Assertions.assertEquals(List.of(), indexerSettingService.getSkipCoSetting().uuids());
             Assertions.assertEquals(List.of(CO_KEY), assetKeys(uuid));
         }
         finally {
@@ -346,6 +375,25 @@ public class IndexerSettingServiceIT extends BaseTestClass {
         Assertions.assertEquals(DynamicMapping.False, mapping.dynamic());
         Assertions.assertEquals(Boolean.FALSE, mapping.properties().get("value").object().enabled());
         Assertions.assertTrue(mapping.properties().get("updated_at").isDate());
+    }
+
+    /**
+     * Run the call while the indexing of the controller fails for every record. The controller gets
+     * a failing indexer for the call only, the real one is put back after it.
+     */
+    private <T> T withFailedReindex(Callable<T> call) throws Exception {
+        IndexerMetadataService real = (IndexerMetadataService) ReflectionTestUtils.getField(indexerSettingController, "indexerMetadata");
+        IndexerMetadataService failing = Mockito.mock(IndexerMetadataService.class);
+        Mockito.when(failing.indexMetadata(Mockito.anyString()))
+                .thenReturn(CompletableFuture.failedFuture(new RuntimeException("index error")));
+
+        ReflectionTestUtils.setField(indexerSettingController, "indexerMetadata", failing);
+        try {
+            return call.call();
+        }
+        finally {
+            ReflectionTestUtils.setField(indexerSettingController, "indexerMetadata", real);
+        }
     }
 
     /** DAS returns both kinds of key for the uuid, every other DAS call keeps the default 404. */

@@ -64,6 +64,16 @@ public class IndexerSettingService {
     public record SkipCoSetting(List<String> uuids, String updatedAt) {}
 
     /**
+     * The result of an add or a remove
+     * @param uuids - The full list after the update
+     * @param updatedAt - The time of the last write, null if the setting is not created yet
+     * @param changed - The uuids that this call really added or removed. A uuid of the request that
+     *                was on the list already (add) or not on the list (remove) is not here, so the
+     *                caller knows what to undo.
+     */
+    public record SkipCoUpdate(List<String> uuids, String updatedAt, List<String> changed) {}
+
+    /**
      * One setting document. seqNo and primaryTerm come from the read and are null when the document
      * does not exist, the next write needs them to detect a change in between.
      */
@@ -136,40 +146,52 @@ public class IndexerSettingService {
      * Add uuids to the skip_co list. It is safe to repeat: a uuid on the list already is kept as is.
      *
      * @param uuids - The uuids to add
-     * @return - The setting after the update
+     * @return - The setting after the update and the uuids that are really added
      * @throws IOException - If Elasticsearch cannot be reached
      * @throws IndexerSettingConflictException - If someone else changed the list during the update
      */
-    public SkipCoSetting addSkipCoUuids(Collection<String> uuids) throws IOException {
+    public SkipCoUpdate addSkipCoUuids(Collection<String> uuids) throws IOException {
         return updateSkipCoUuids(uuids, true);
     }
     /**
      * Remove uuids from the skip_co list. It is safe to repeat: a uuid not on the list is ignored.
      *
      * @param uuids - The uuids to remove
-     * @return - The setting after the update
+     * @return - The setting after the update and the uuids that are really removed
      * @throws IOException - If Elasticsearch cannot be reached
      * @throws IndexerSettingConflictException - If someone else changed the list during the update
      */
-    public SkipCoSetting removeSkipCoUuids(Collection<String> uuids) throws IOException {
+    public SkipCoUpdate removeSkipCoUuids(Collection<String> uuids) throws IOException {
         return updateSkipCoUuids(uuids, false);
     }
 
-    protected SkipCoSetting updateSkipCoUuids(Collection<String> uuids, boolean add) throws IOException {
+    protected SkipCoUpdate updateSkipCoUuids(Collection<String> uuids, boolean add) throws IOException {
         StoredSetting stored = readSetting(SKIP_CO);
 
         // Keep the order of the list, new uuids go to the end
         Set<String> current = new LinkedHashSet<>(uuidsOf(stored));
-        boolean changed = add ? current.addAll(uuids) : current.removeAll(uuids);
 
-        if (!changed) {
+        // Add changes the list only for a uuid that is not on it, remove only for a uuid that is on it
+        List<String> changed = uuids.stream()
+                .distinct()
+                .filter(uuid -> add != current.contains(uuid))
+                .toList();
+
+        if (changed.isEmpty()) {
             log.info("Setting {} not changed by {} of {}", SKIP_CO, add ? "add" : "remove", uuids);
-            return new SkipCoSetting(List.copyOf(current), stored.updatedAt());
+            return new SkipCoUpdate(List.copyOf(current), stored.updatedAt(), changed);
+        }
+
+        if (add) {
+            current.addAll(changed);
+        }
+        else {
+            changed.forEach(current::remove);
         }
 
         SkipCoSetting updated = writeSkipCoUuids(new ArrayList<>(current), stored.seqNo(), stored.primaryTerm());
-        log.info("Setting {} updated by {} of {}, it has {} uuids now", SKIP_CO, add ? "add" : "remove", uuids, updated.uuids().size());
-        return updated;
+        log.info("Setting {} updated by {} of {}, it has {} uuids now", SKIP_CO, add ? "add" : "remove", changed, updated.uuids().size());
+        return new SkipCoUpdate(updated.uuids(), updated.updatedAt(), changed);
     }
     /**
      * Write the whole list once. Package-private so the test can write with an old seq_no.
