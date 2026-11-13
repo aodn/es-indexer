@@ -1,0 +1,9 @@
+{
+  "mappings": {
+    "dynamic": false,
+    "properties": {
+      "updated_at": { "type": "date" },
+      "value": { "type": "object", "enabled": false }
+    }
+  }
+}

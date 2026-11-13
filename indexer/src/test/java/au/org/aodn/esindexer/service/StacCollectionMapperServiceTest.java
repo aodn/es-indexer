@@ -95,6 +95,10 @@ public class StacCollectionMapperServiceTest {
     @MockitoBean
     protected AcronymService acronymService;
 
+    // Not stubbed by default, so no uuid is on the skip_co list
+    @MockitoBean
+    protected IndexerSettingService indexerSettingService;
+
     @Autowired
     protected StacCollectionMapperService service;
 
@@ -567,6 +571,77 @@ public class StacCollectionMapperServiceTest {
         assertEquals(DatasetMediaType.APPLICATION_NETCDF_LIST.getValue(), assets.get(netcdfKey).get("type").asText());
         assertEquals(netcdfKey, assets.get(netcdfKey).get("title").asText());
         assertEquals("Original NetCDF files list", assets.get(netcdfKey).get("description").asText());
+    }
+    /**
+     * The data access service returns the cloud-optimised key and the data-index key together.
+     * A uuid not on the skip_co list gets the cloud-optimised asset only.
+     * @throws IOException - Not expected to throw
+     */
+    @Test
+    public void verifyAssetsOfUuidNotOnSkipCoList() throws IOException {
+        String uuid = "35234913-aa3c-48ec-b9a4-77f822f66ef8";
+        String parquetKey = "vessel_xbt_realtime_nonqc.parquet";
+        String netcdfKey = "original_netcdfs";
+        mockCloudOptimisedAndDataIndexKeys(uuid, parquetKey, netcdfKey);
+
+        String xml = readResourceFile("classpath:canned/dataservice/35234913-aa3c-48ec-b9a4-77f822f66ef8/sample.xml");
+        indexerService.indexMetadata(xml);
+
+        JsonNode assets = objectMapper.readTree(lastRequest.get().document().toString()).get("assets");
+        assertEquals(1, assets.size());
+        assertEquals(AssetModel.Role.SUMMARY.name(), assets.get(parquetKey).get("role").asText());
+        assertEquals(DatasetMediaType.APPLICATION_PARQUET.getValue(), assets.get(parquetKey).get("type").asText());
+    }
+    /**
+     * The data access service returns the cloud-optimised key and the data-index key together.
+     * A uuid on the skip_co list gets the data-index asset only.
+     * @throws IOException - Not expected to throw
+     */
+    @Test
+    public void verifyAssetsOfUuidOnSkipCoList() throws IOException {
+        String uuid = "35234913-aa3c-48ec-b9a4-77f822f66ef8";
+        String parquetKey = "vessel_xbt_realtime_nonqc.parquet";
+        String netcdfKey = "original_netcdfs";
+        mockCloudOptimisedAndDataIndexKeys(uuid, parquetKey, netcdfKey);
+        when(indexerSettingService.isSkipCo(eq(uuid))).thenReturn(true);
+
+        String xml = readResourceFile("classpath:canned/dataservice/35234913-aa3c-48ec-b9a4-77f822f66ef8/sample.xml");
+        indexerService.indexMetadata(xml);
+
+        JsonNode assets = objectMapper.readTree(lastRequest.get().document().toString()).get("assets");
+        assertEquals(1, assets.size());
+        assertEquals(AssetModel.Role.FILE_LIST.name(), assets.get(netcdfKey).get("role").asText());
+        assertEquals(DatasetMediaType.APPLICATION_NETCDF_LIST.getValue(), assets.get(netcdfKey).get("type").asText());
+    }
+    /**
+     * A uuid on the skip_co list whose collection has no data-index key gets no assets, the
+     * cloud-optimised key is still skipped.
+     * @throws IOException - Not expected to throw
+     */
+    @Test
+    public void verifyNoAssetsOfUuidOnSkipCoListWithoutDataIndexKey() throws IOException {
+        // The default mock of createIndexerService() returns one cloud-optimised key for this uuid
+        when(indexerSettingService.isSkipCo(eq("35234913-aa3c-48ec-b9a4-77f822f66ef8"))).thenReturn(true);
+
+        String xml = readResourceFile("classpath:canned/dataservice/35234913-aa3c-48ec-b9a4-77f822f66ef8/sample.xml");
+        indexerService.indexMetadata(xml);
+
+        assertNull(objectMapper.readTree(lastRequest.get().document().toString()).get("assets"));
+    }
+
+    protected void mockCloudOptimisedAndDataIndexKeys(String uuid, String parquetKey, String netcdfKey) {
+        MetadataEntity parquetMetadata = new MetadataEntity();
+        parquetMetadata.setUuid(uuid);
+        parquetMetadata.setDname(parquetKey);
+        parquetMetadata.setType(MetadataKeyType.CLOUD_OPTIMISED.getValue());
+
+        MetadataEntity netcdfMetadata = new MetadataEntity();
+        netcdfMetadata.setUuid(uuid);
+        netcdfMetadata.setDname(netcdfKey);
+        netcdfMetadata.setType(MetadataKeyType.DATA_INDEX.getValue());
+
+        when(dataAccessService.getMetadataByUuid(eq(uuid)))
+                .thenReturn(Map.of(parquetKey, parquetMetadata, netcdfKey, netcdfMetadata));
     }
     /**
      * This XML contains an invalid value in the EAST point of the bounding box, it is set to 360, which is invalid value.

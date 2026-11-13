@@ -101,6 +101,51 @@ public class ElasticSearchIndexService {
     }
 
     /**
+     * Create the index only if it does not exist. Unlike recreateIndexFromMappingJSONFile, it never deletes
+     * an existing index, so use it for an index that must keep its documents, e.g. the indexer settings.
+     *
+     * @param indexMappingFile - The schema file name
+     * @param indexName - The index name
+     * @param indexSettings - Values to replace the ${key} in the schema file, can be null
+     * @return - True if the index is created by this call, false if it exists already
+     */
+    public boolean createIndexFromMappingJSONFileIfMissing(String indexMappingFile, String indexName, Map<String, String> indexSettings) {
+        try {
+            if (portalElasticsearchClient.indices().exists(b -> b.index(indexName)).value()) {
+                return false;
+            }
+        }
+        catch (ElasticsearchException | IOException e) {
+            throw new CreateIndexException("Failed to check if index exists: " + indexName + " | " + e.getMessage());
+        }
+
+        log.info("Reading index schema definition from JSON file: {}", indexMappingFile);
+        try (Reader reader = JsonUtil.createJsonStream(indexMappingFile, indexSettings)) {
+            log.info("Creating index: {}", indexName);
+            CreateIndexRequest req = CreateIndexRequest.of(b -> b
+                    .index(indexName)
+                    .withJson(reader)
+            );
+            CreateIndexResponse response = portalElasticsearchClient.indices().create(req);
+            log.info(response.toString());
+            return true;
+        }
+        catch (ElasticsearchException e) {
+            // Another instance created the index between the exists check and the create call
+            if (e.error() != null && "resource_already_exists_exception".equals(e.error().type())) {
+                log.info("Index: {} exists already, skip create", indexName);
+                return false;
+            }
+            log.error("Failed to create index: {} | {}", indexName, e.getMessage());
+            throw new CreateIndexException("Failed to elastic index from schema file: " + indexName + " | " + e.getMessage());
+        }
+        catch (IOException e) {
+            log.error("Failed to create index: {} | {}", indexName, e.getMessage());
+            throw new CreateIndexException("Failed to elastic index from schema file: " + indexName + " | " + e.getMessage());
+        }
+    }
+
+    /**
      * Generate a versioned index name by appending the current date and time to the base index name.
      * @param baseIndexName the base index name
      *

@@ -5,4 +5,7 @@ public interface AppConstants {
 
     // use the updated schema and see what will happen soon
     String VOCABS_INDEX_MAPPING_SCHEMA_FILE = "vocabs_index_schema.json";
+
+    // key-value store of the indexer settings, one document per setting
+    String INDEXER_CONFIG_MAPPING_JSON_FILE = "indexer_config_schema.json";
 }

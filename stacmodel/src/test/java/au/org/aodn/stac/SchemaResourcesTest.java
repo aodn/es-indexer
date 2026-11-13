@@ -26,6 +26,11 @@ class SchemaResourcesTest {
         assertLoadsAsJson("/schema/vocabs_index_schema.json");
     }
 
+    @Test
+    void indexerConfigSchema_isOnClasspath() throws Exception {
+        assertLoadsAsJson("/schema/indexer_config_schema.json");
+    }
+
     private void assertLoadsAsJson(String path) throws Exception {
         try (InputStream in = getClass().getResourceAsStream(path)) {
             assertNotNull(in, "resource not found on classpath: " + path);
