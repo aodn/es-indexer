@@ -82,6 +82,9 @@ public abstract class StacCollectionMapperService {
     @Autowired
     protected DataAccessService dataAccessService;
 
+    @Autowired
+    protected IndexerSettingService indexerSettingService;
+
     @Named("mapUUID")
     String mapUUID(MDMetadataType source) {
         return CommonUtils.getUUID(source);
@@ -1254,19 +1257,31 @@ public abstract class StacCollectionMapperService {
     /**
      * Maps assets for the collection. The keys are retrieved from the data access service.
      * For cloud-optimized datasets, the key is the dataset name and the asset role is SUMMARY.
-     * A collection with no cloud-optimized data may have one key of type "data_index" for the list of its
-     * original NetCDF files, the asset role is FILE_LIST.
+     * A collection may also have one key of type "data_index" for the list of its original NetCDF files,
+     * the asset role is FILE_LIST.
+     *
+     * The data access service can return both kinds of key, only one kind is mapped:
+     * - uuid on the skip_co list (see IndexerSettingService): the data-index key only
+     * - otherwise: the cloud-optimized keys only, or the data-index key if there is no cloud-optimized key
      */
     @Named("assets")
     protected Map<String, AssetModel> mapAssetsData(MDMetadataType source) {
         String collectionId = CommonUtils.getUUID(source);
         Map<String, MetadataEntity> datasetMetadata = dataAccessService.getMetadataByUuid(collectionId);
         if(datasetMetadata != null && !datasetMetadata.isEmpty()) {
+            // Read the list on every record, no cache, so that an update of the list is seen at once
+            boolean skipCo = indexerSettingService.isSkipCo(collectionId);
+            boolean hasCloudOptimized = datasetMetadata.values().stream().anyMatch(v -> !isDataIndex(v));
+            boolean mapDataIndex = skipCo || !hasCloudOptimized;
+
             var entries = new HashMap<String, AssetModel>();
             for (var entry : datasetMetadata.entrySet()) {
+                var dataIndex = isDataIndex(entry.getValue());
+                if (dataIndex != mapDataIndex) {
+                    continue;
+                }
                 var key = entry.getKey();
                 var dname = entry.getValue().getDname() != null ? entry.getValue().getDname() : key;
-                var dataIndex = entry.getValue().getType() == MetadataKeyType.DATA_INDEX;
                 entries.put(key, AssetModel.builder()
                         .role(dataIndex ? AssetModel.Role.FILE_LIST : AssetModel.Role.SUMMARY)
                         .type(dataIndex ? DatasetMediaType.APPLICATION_NETCDF_LIST.getValue() : getMediaTypeFromDname(dname))
@@ -1275,9 +1290,15 @@ public abstract class StacCollectionMapperService {
                         .description(dataIndex ? "Original NetCDF files list" : "Summary of cloud optimized data points")
                         .build());
             }
-            return entries;
+            // e.g. uuid on the skip_co list but the collection has no data-index key
+            return entries.isEmpty() ? null : entries;
         }
         return null;
+    }
+
+    // A key with no type, or an unknown type, is a cloud-optimized key
+    protected static boolean isDataIndex(MetadataEntity entity) {
+        return entity.getType() == MetadataKeyType.DATA_INDEX;
     }
 
     protected static String getMediaTypeFromDname(String dname) {

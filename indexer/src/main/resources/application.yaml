@@ -46,6 +46,8 @@ elasticsearch:
     name: portal_records
   vocabs_index:
     name: vocabs_index
+  config_index:
+    name: indexer_config
   analyser:
     tokens:
       name: shingle_analyser
