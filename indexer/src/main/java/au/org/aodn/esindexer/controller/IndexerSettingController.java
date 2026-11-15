@@ -11,7 +11,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,17 +26,16 @@ import java.util.concurrent.CompletionException;
 /**
  * Admin endpoints for the indexer settings. The only setting for now is the skip_co uuid list: a
  * record on the list is indexed with its data-index key and not with its cloud-optimised keys.
- *
+ * <p>
  * Add and delete update the list first and then reindex every uuid of the request, the reindex reads
  * the list so it must see the new one. The list and the record index must not disagree, so after
  * the reindex:
- *   1. Reindex ok: the change of the list stays.
- *   2. Reindex failed, for any reason: the list goes back to what it was before the request for
- *      that uuid. The undo only writes the list, it does not reindex. The admin repeats the same
- *      call after the cause is fixed.
- *   3. One exception, delete only: reindex failed but the uuid is still removed if no record depends
- *      on it, that is the uuid is not in the record index or the record is not in GeoNetwork. An
- *      old record of GeoNetwork can stay in the record index, the weekly full reindex removes it.
+ * 1. Reindex ok: the change of the list stays.
+ * 2. Reindex failed, for any reason: the list goes back to what it was before the request for
+ * that uuid.
+ * 3. One exception, delete only: reindex failed but the uuid is still removed if no record depends
+ * on it, that is the uuid is not in the record index or the record is not in GeoNetwork. An
+ * old record of GeoNetwork can stay in the record index, the weekly full reindex removes it.
  * The response has the full list and the result per uuid of the request. Both calls are safe to repeat.
  */
 @RestController
@@ -46,45 +44,55 @@ import java.util.concurrent.CompletionException;
 @Slf4j
 public class IndexerSettingController {
 
-    @Autowired
-    IndexerSettingService indexerSettingService;
+    protected final IndexerSettingService indexerSettingService;
+    protected final IndexerMetadataService indexerMetadata;
+    protected final GeoNetworkService geonetworkResourceService;
 
-    @Autowired
-    IndexerMetadataService indexerMetadata;
+    public IndexerSettingController(
+            IndexerSettingService indexerSettingService,
+            IndexerMetadataService indexerMetadata,
+            GeoNetworkService geonetworkResourceService) {
+        this.indexerSettingService = indexerSettingService;
+        this.indexerMetadata = indexerMetadata;
+        this.geonetworkResourceService = geonetworkResourceService;
+    }
 
-    @Autowired
-    GeoNetworkService geonetworkResourceService;
-
-    /** Body of the add and the remove request, one uuid is a list of one. */
-    public record UuidsRequest(List<String> uuids) {}
+    /**
+     * Body of the add and the remove request, one uuid is a list of one.
+     */
+    public record UuidsRequest(List<String> uuids) {
+    }
 
     /**
      * The result of one uuid of the request
-     * @param uuid - The uuid
+     *
+     * @param uuid      - The uuid
      * @param reindexed - True if the record is reindexed
-     * @param onList - True if the uuid is on the list after the call
-     * @param error - Why the reindex failed, not in the response if the record is reindexed
+     * @param onList    - True if the uuid is on the list after the call
+     * @param error     - Why the reindex failed, not in the response if the record is reindexed
      */
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public record UuidResult(
             String uuid,
             boolean reindexed,
             @JsonProperty("on_list") boolean onList,
-            String error) {}
+            String error) {
+    }
 
     /**
-     * @param uuids - The full list after the call
+     * @param uuids     - The full list after the call
      * @param updatedAt - The time of the last write of the list, null if the list is never written
-     * @param results - The result per uuid of the request, not in the GET response
+     * @param results   - The result per uuid of the request, not in the GET response
      */
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public record SkipCoResponse(
             List<String> uuids,
             @JsonProperty("updated_at") String updatedAt,
-            List<UuidResult> results) {}
+            List<UuidResult> results) {
+    }
 
     /**
-     * @param error - Why the reindex failed, null if the record is reindexed
+     * @param error           - Why the reindex failed, null if the record is reindexed
      * @param notInGeoNetwork - True if it failed because GeoNetwork does not have the record
      */
     protected record ReindexOutcome(String error, boolean notInGeoNetwork) {
@@ -93,6 +101,12 @@ public class IndexerSettingController {
         }
     }
 
+    /**
+     * It only reads the list, there is no reindex.
+     *
+     * @return - The full list and the time of its last write, with no reindex result
+     * @throws IOException - If the list cannot be read
+     */
     @GetMapping(path = "/skip_co", produces = "application/json")
     @Operation(security = {@SecurityRequirement(name = "X-API-Key")}, description = "Get the uuids that are indexed with the data-index key and not with the cloud-optimised keys")
     public ResponseEntity<SkipCoResponse> getSkipCoUuids() throws IOException {
@@ -100,6 +114,13 @@ public class IndexerSettingController {
         return ResponseEntity.ok(new SkipCoResponse(setting.uuids(), setting.updatedAt(), null));
     }
 
+    /**
+     * It takes a JSON body with the uuids, one uuid is a list of one.
+     *
+     * @param request - The uuids to add
+     * @return - The full list after the call and the reindex result per uuid
+     * @throws IOException - If the list cannot be written, then there is no reindex
+     */
     @PostMapping(path = "/skip_co/uuids", consumes = "application/json", produces = "application/json")
     @Operation(security = {@SecurityRequirement(name = "X-API-Key")}, description = "Add uuids to the skip_co list, then reindex them. A uuid that failed to reindex is not added, see the error in results. Safe to repeat")
     public ResponseEntity<SkipCoResponse> addSkipCoUuids(@RequestBody UuidsRequest request) throws IOException {
@@ -110,11 +131,13 @@ public class IndexerSettingController {
         SkipCoUpdate update = indexerSettingService.addSkipCoUuids(uuids);
         return ResponseEntity.ok(reindexThenUndoFailed(update, uuids, true));
     }
+
     /**
      * It takes the same JSON body as the add.
      *
      * @param request - The uuids to remove
      * @return - The full list after the call and the reindex result per uuid
+     * @throws IOException - If the list cannot be written, then there is no reindex
      */
     @DeleteMapping(path = "/skip_co/uuids", consumes = "application/json", produces = "application/json")
     @Operation(security = {@SecurityRequirement(name = "X-API-Key")}, description = "Remove uuids from the skip_co list, then reindex them. A uuid that failed to reindex is not removed if its record is in the index, see the error in results. Safe to repeat")
@@ -126,6 +149,7 @@ public class IndexerSettingController {
         SkipCoUpdate update = indexerSettingService.removeSkipCoUuids(cleaned);
         return ResponseEntity.ok(reindexThenUndoFailed(update, cleaned, false));
     }
+
     /**
      * Trim, drop blanks and duplicates.
      *
@@ -146,14 +170,15 @@ public class IndexerSettingController {
         }
         return cleaned;
     }
+
     /**
      * Reindex the uuids one by one, a failed uuid does not stop the others. Then undo the change of
      * the list for the failed uuids, see the rules on the class. The undo only writes the list, it
      * does not reindex, so it cannot loop.
      *
      * @param update - The result of the list update done before this call
-     * @param uuids - The uuids of the request
-     * @param add - True for the add request, false for the remove request
+     * @param uuids  - The uuids of the request
+     * @param add    - True for the add request, false for the remove request
      * @return - The list after the undo and the result per uuid
      * @throws ResponseStatusException - 500 if the undo failed, the list still has the change
      */
@@ -183,11 +208,12 @@ public class IndexerSettingController {
 
         return new SkipCoResponse(after.uuids(), after.updatedAt(), results);
     }
+
     /**
      * For a remove with a failed reindex: the uuid must stay on the list only if a record was
      * indexed with it and can still be reindexed.
      *
-     * @param uuid - The uuid of the record
+     * @param uuid    - The uuid of the record
      * @param outcome - The failed reindex of the uuid
      * @return - False if the uuid can be removed from the list anyway
      */
@@ -199,18 +225,18 @@ public class IndexerSettingController {
         }
         try {
             return indexerMetadata.isDocumentIndexed(uuid);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             // Not sure, so keep the uuid on the list, the admin repeats the call
             log.warn("Failed to check uuid {} in the record index, keep it on the list: {}", uuid, e.getMessage());
             return true;
         }
     }
+
     /**
      * Put the list back for these uuids, with no reindex.
      *
      * @param uuids - The uuids to take off the list (add) or to put back on the list (remove)
-     * @param add - True if the request was an add
+     * @param add   - True if the request was an add
      * @return - The list after the undo
      * @throws ResponseStatusException - 500 if the list cannot be written, it still has the change
      */
@@ -220,8 +246,7 @@ public class IndexerSettingController {
             return add
                     ? indexerSettingService.removeSkipCoUuids(uuids)
                     : indexerSettingService.addSkipCoUuids(uuids);
-        }
-        catch (IOException | RuntimeException e) {
+        } catch (IOException | RuntimeException e) {
             String message = String.format(
                     "Setting %s is not restored after a failed reindex, these uuids are still %s the list: %s",
                     IndexerSettingService.SKIP_CO, add ? "on" : "off", uuids);
@@ -229,6 +254,7 @@ public class IndexerSettingController {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, message, e);
         }
     }
+
     /**
      * Same steps as IndexerController.addDocumentByUUID(), it reads the new list during the mapping.
      *
@@ -247,16 +273,15 @@ public class IndexerSettingController {
             // 204 means the record is not published, so it is not indexed
             log.warn("Reindex of uuid {} not done, status {}", uuid, response != null ? response.getStatusCode() : null);
             return new ReindexOutcome("Record is not published in GeoNetwork, it is not indexed", false);
-        }
-        catch (MetadataNotFoundException e) {
+        } catch (MetadataNotFoundException e) {
             log.warn("Reindex of uuid {} not done, record not in GeoNetwork", uuid);
             return new ReindexOutcome(errorOf(e), true);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             log.warn("Reindex of uuid {} failed: {}", uuid, e.getMessage());
             return new ReindexOutcome(errorOf(e), false);
         }
     }
+
     /**
      * @param e - The exception of the reindex
      * @return - The message for the admin, never null

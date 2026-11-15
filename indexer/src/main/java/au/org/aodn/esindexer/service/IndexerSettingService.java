@@ -11,7 +11,6 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.client.ResponseException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -87,7 +86,6 @@ public class IndexerSettingService {
     protected final ElasticsearchClient portalElasticsearchClient;
     protected final ElasticSearchIndexService elasticSearchIndexService;
 
-    @Autowired
     public IndexerSettingService(
             @Value("${elasticsearch.config_index.name}") String configIndexName,
             @Qualifier("portalElasticsearchClient") ElasticsearchClient portalElasticsearchClient,
