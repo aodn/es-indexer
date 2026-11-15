@@ -20,6 +20,15 @@ public interface IndexerMetadataService extends IndexService {
     List<BulkResponse> indexAllMetadataRecordsFromGeoNetwork(String beginWithUuid, boolean confirm, Callback callback) throws IOException;
     Hit<ObjectNode> getDocumentByUUID(String uuid) throws IOException;
     Hit<ObjectNode> getDocumentByUUID(String uuid, String indexName) throws IOException;
+    /**
+     * Check by id, it is real-time so a record indexed just now is seen. getDocumentByUUID is a search,
+     * it has a refresh delay.
+     *
+     * @param uuid - The uuid of the record
+     * @return - True if the record is in the record index
+     * @throws IOException - If Elasticsearch cannot be reached
+     */
+    boolean isDocumentIndexed(String uuid) throws IOException;
     Set<String> extractTokensFromDescription(String description, String targetIndexName) throws IOException;
     boolean isMetadataPublished(String uuid);
     boolean isGeoNetworkInstanceReinstalled(long portalIndexDocumentsCount);

@@ -143,6 +143,16 @@ public class IndexerMetadataServiceImpl extends IndexServiceImpl implements Inde
     }
 
     @Override
+    public boolean isDocumentIndexed(String uuid) throws IOException {
+        try {
+            return portalElasticsearchClient.exists(e -> e.index(indexName).id(uuid)).value();
+        }
+        catch (ElasticsearchException e) {
+            throw new IOException("Failed to check document with UUID: " + uuid + " | " + e.getMessage());
+        }
+    }
+
+    @Override
     public boolean isGeoNetworkInstanceReinstalled(long portalIndexDocumentsCount) {
         /*
          * compare if GeoNetwork has only one metadata (the recently added one which triggered the indexer)

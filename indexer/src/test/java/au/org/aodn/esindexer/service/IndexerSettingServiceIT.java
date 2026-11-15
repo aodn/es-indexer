@@ -5,6 +5,7 @@ import au.org.aodn.esindexer.Application;
 import au.org.aodn.esindexer.BaseTestClass;
 import au.org.aodn.esindexer.configuration.GeoNetworkSearchTestConfig;
 import au.org.aodn.esindexer.controller.IndexerSettingController;
+import au.org.aodn.esindexer.controller.IndexerSettingController.UuidResult;
 import au.org.aodn.esindexer.exception.IndexerSettingConflictException;
 import au.org.aodn.esindexer.model.MockServer;
 import co.elastic.clients.elasticsearch._types.ElasticsearchException;
@@ -235,12 +236,13 @@ public class IndexerSettingServiceIT extends BaseTestClass {
                 url("/skip_co"), HttpMethod.GET, new HttpEntity<>(apiKeyHeaders()), JsonNode.class);
         Assertions.assertEquals(HttpStatus.OK, withKey.getStatusCode());
         Assertions.assertEquals(0, withKey.getBody().get("uuids").size());
-        Assertions.assertFalse(withKey.getBody().has("reindexed"), "GET has no reindex result");
+        Assertions.assertFalse(withKey.getBody().has("results"), "GET has no reindex result");
     }
 
     /**
-     * Over HTTP: the add takes a JSON body, the delete takes comma separated uuids in the query. A uuid
-     * that is not in GeoNetwork is never kept on the list and is reported in not_found, with status 200.
+     * Over HTTP: the add and the delete take the same JSON body. A uuid
+     * that is not in GeoNetwork is not added, and it can be removed. The status is 200 and the error
+     * is in the result of the uuid.
      */
     @Test
     public void addAndDeleteOverHttp() throws IOException {
@@ -249,27 +251,33 @@ public class IndexerSettingServiceIT extends BaseTestClass {
 
         ResponseEntity<JsonNode> added = testRestTemplate.exchange(
                 url("/skip_co/uuids"), HttpMethod.POST,
-                new HttpEntity<>("{ \"uuids\": [\"not-exist-1\", \" not-exist-2 \", \"not-exist-1\"] }", apiKeyHeaders()),
+                new HttpEntity<>("{ \"uuids\": [\"not-exist-1\", \" on-list \", \"not-exist-1\"] }", apiKeyHeaders()),
                 JsonNode.class);
 
         Assertions.assertEquals(HttpStatus.OK, added.getStatusCode());
         Assertions.assertEquals(List.of("on-list"), texts(added.getBody().get("uuids")), "The add is undone");
-        Assertions.assertEquals(List.of(), texts(added.getBody().get("reindexed")));
-        Assertions.assertEquals(List.of(), texts(added.getBody().get("reindex_failed")));
-        Assertions.assertEquals(List.of("not-exist-1", "not-exist-2"), texts(added.getBody().get("not_found")));
         Assertions.assertDoesNotThrow(() -> Instant.parse(added.getBody().get("updated_at").asText()));
         Assertions.assertEquals(List.of("on-list"), indexerSettingService.getSkipCoSetting().uuids());
 
-        // A uuid with no record can still be removed, there is nothing to reindex
+        // One result per uuid, in the order of the request, with the reason of the failure
+        JsonNode addResults = added.getBody().get("results");
+        Assertions.assertEquals(2, addResults.size());
+        assertResult(addResults.get(0), "not-exist-1", false, false);
+        // It was on the list before the request, so it stays as it was
+        assertResult(addResults.get(1), "on-list", false, true);
+        Assertions.assertTrue(addResults.get(0).get("error").asText().contains("not-exist-1"),
+                "The error says which record is not found; got " + addResults.get(0).get("error"));
+
+        // No record depends on these uuids, so they are removed even if the reindex failed
         ResponseEntity<JsonNode> deleted = testRestTemplate.exchange(
-                url("/skip_co/uuids?uuids=on-list,not-exist-1"), HttpMethod.DELETE,
-                new HttpEntity<>(apiKeyHeaders()),
+                url("/skip_co/uuids"), HttpMethod.DELETE,
+                new HttpEntity<>("{ \"uuids\": [\"on-list\", \" not-exist-1 \"] }", apiKeyHeaders()),
                 JsonNode.class);
 
         Assertions.assertEquals(HttpStatus.OK, deleted.getStatusCode());
         Assertions.assertEquals(List.of(), texts(deleted.getBody().get("uuids")));
-        Assertions.assertEquals(List.of(), texts(deleted.getBody().get("reindex_failed")));
-        Assertions.assertEquals(List.of("on-list", "not-exist-1"), texts(deleted.getBody().get("not_found")));
+        assertResult(deleted.getBody().get("results").get(0), "on-list", false, false);
+        assertResult(deleted.getBody().get("results").get(1), "not-exist-1", false, false);
         Assertions.assertEquals(List.of(), indexerSettingService.getSkipCoSetting().uuids());
 
         ResponseEntity<String> empty = testRestTemplate.exchange(
@@ -295,6 +303,13 @@ public class IndexerSettingServiceIT extends BaseTestClass {
             insertMetadataRecords(uuid, "classpath:canned/sample1.xml");
             mockDataAccessServiceKeys(uuid);
 
+            // Remove with a failed reindex and the record not in the index yet: no record depends
+            // on the list, so the uuid is still removed
+            indexerSettingService.addSkipCoUuids(List.of(uuid));
+            var removedWithNoRecord = withFailedReindex(() -> indexerSettingController.removeSkipCoUuids(new IndexerSettingController.UuidsRequest(List.of(uuid)))).getBody();
+            Assertions.assertEquals(List.of(), removedWithNoRecord.uuids());
+            Assertions.assertEquals(List.of(new UuidResult(uuid, false, false, "index error")), removedWithNoRecord.results());
+
             // Full reindex, uuid not on the list
             indexerService.indexAllMetadataRecordsFromGeoNetwork(null, true, null);
             Assertions.assertEquals(List.of(CO_KEY), assetKeys(uuid));
@@ -304,8 +319,7 @@ public class IndexerSettingServiceIT extends BaseTestClass {
                     .addSkipCoUuids(new IndexerSettingController.UuidsRequest(List.of(uuid)))
                     .getBody();
             Assertions.assertEquals(List.of(uuid), added.uuids());
-            Assertions.assertEquals(List.of(uuid), added.reindexed());
-            Assertions.assertEquals(List.of(), added.reindexFailed());
+            Assertions.assertEquals(List.of(new UuidResult(uuid, true, true, null)), added.results());
             Assertions.assertEquals(List.of(DATA_INDEX_KEY), assetKeys(uuid));
 
             // Full reindex, uuid on the list
@@ -314,17 +328,18 @@ public class IndexerSettingServiceIT extends BaseTestClass {
             Assertions.assertEquals(List.of(uuid), indexerSettingService.getSkipCoSetting().uuids(),
                     "A full reindex does not touch the settings");
 
-            // Remove with a failed reindex: the uuid is put back, the list and the record still agree
-            var notRemoved = withFailedReindex(() -> indexerSettingController.removeSkipCoUuids(List.of(uuid))).getBody();
+            // Remove with a failed reindex and the record in the index: the uuid is put back, the
+            // list and the record still agree
+            var notRemoved = withFailedReindex(() -> indexerSettingController.removeSkipCoUuids(new IndexerSettingController.UuidsRequest(List.of(uuid)))).getBody();
             Assertions.assertEquals(List.of(uuid), notRemoved.uuids());
-            Assertions.assertEquals(List.of(uuid), notRemoved.reindexFailed());
+            Assertions.assertEquals(List.of(new UuidResult(uuid, false, true, "index error")), notRemoved.results());
             Assertions.assertEquals(List.of(uuid), indexerSettingService.getSkipCoSetting().uuids());
             Assertions.assertEquals(List.of(DATA_INDEX_KEY), assetKeys(uuid));
 
             // Remove: the cloud-optimised asset is back
-            var removed = indexerSettingController.removeSkipCoUuids(List.of(uuid)).getBody();
+            var removed = indexerSettingController.removeSkipCoUuids(new IndexerSettingController.UuidsRequest(List.of(uuid))).getBody();
             Assertions.assertEquals(List.of(), removed.uuids());
-            Assertions.assertEquals(List.of(uuid), removed.reindexed());
+            Assertions.assertEquals(List.of(new UuidResult(uuid, true, false, null)), removed.results());
             Assertions.assertEquals(List.of(CO_KEY), assetKeys(uuid));
 
             // Add with a failed reindex: the uuid is not added
@@ -332,7 +347,7 @@ public class IndexerSettingServiceIT extends BaseTestClass {
                     .addSkipCoUuids(new IndexerSettingController.UuidsRequest(List.of(uuid))))
                     .getBody();
             Assertions.assertEquals(List.of(), notAdded.uuids());
-            Assertions.assertEquals(List.of(uuid), notAdded.reindexFailed());
+            Assertions.assertEquals(List.of(new UuidResult(uuid, false, false, "index error")), notAdded.results());
             Assertions.assertEquals(List.of(), indexerSettingService.getSkipCoSetting().uuids());
             Assertions.assertEquals(List.of(CO_KEY), assetKeys(uuid));
         }
@@ -357,6 +372,13 @@ public class IndexerSettingServiceIT extends BaseTestClass {
         headers.add(apiKeyHeader, apiKey);
         headers.setContentType(MediaType.APPLICATION_JSON);
         return headers;
+    }
+
+    private static void assertResult(JsonNode result, String uuid, boolean reindexed, boolean onList) {
+        Assertions.assertEquals(uuid, result.get("uuid").asText());
+        Assertions.assertEquals(reindexed, result.get("reindexed").asBoolean(), "reindexed of " + uuid);
+        Assertions.assertEquals(onList, result.get("on_list").asBoolean(), "on_list of " + uuid);
+        Assertions.assertEquals(!reindexed, result.has("error"), "error of " + uuid);
     }
 
     private static List<String> texts(JsonNode array) {
@@ -386,6 +408,9 @@ public class IndexerSettingServiceIT extends BaseTestClass {
         IndexerMetadataService failing = Mockito.mock(IndexerMetadataService.class);
         Mockito.when(failing.indexMetadata(Mockito.anyString()))
                 .thenReturn(CompletableFuture.failedFuture(new RuntimeException("index error")));
+        // Only the indexing fails, the check of the record index is the real one
+        Mockito.when(failing.isDocumentIndexed(Mockito.anyString()))
+                .thenAnswer(ans -> real.isDocumentIndexed(ans.getArgument(0)));
 
         ReflectionTestUtils.setField(indexerSettingController, "indexerMetadata", failing);
         try {
