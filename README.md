@@ -67,6 +67,8 @@ $ docker-compose -f docker-compose-dev.yaml up # [-d: in daemon mode | --build: 
 | Bulk index                                             | `/api/v1/indexer/index/all`            | All         |                                                                                                       |                                                                         |
 | Bulk index Async metadata on all                       | `/api/v1/indexer/index/async/all       | All         |                                                                                                       |                                                                         |
 | POST Index Async cloud optimized data on all           | `/api/v1/indexer/index/async/all-cloud | All         | Accept: text/event-stream, Content-Type: text/event-stream;charset=utf-8, X-API-Key: (Please ask Dev) |                                                                         |
+| GET the skip_co uuid list                              | `/api/v1/indexer/config/skip_co`       | All         | X-API-Key: (Please ask Dev)                                                                           |                                                                         |
+| POST/DELETE add or remove uuids of the skip_co list    | `/api/v1/indexer/config/skip_co/uuids` | All         | Content-Type: application/json, X-API-Key: (Please ask Dev)                                           | JSON body `{"uuids": ["..."]}`, see the skip_co note below              |
 | Swagger UI:                                            | `/swagger-ui/index.html`               | All         |                                                                                                       |                                                                         |
 
 > The 'async/all' endpoints use SSE (Server Side Events) to avoid gateway timeout, you should use
@@ -123,6 +125,19 @@ acronyms:
   manual:
   - "nrmn => national reef monitoring network"
 
+```
+
+### Skip cloud optimized list (skip_co)
+A collection can have two kinds of key from the data access service: the cloud-optimized keys and the data-index
+key. A uuid on the skip_co list is indexed with the data-index key only. The list is stored in the Elasticsearch
+index `indexer_config` and it survives a restart.
+
+Use the endpoints above to read the list, or to add and remove uuids. The add and the remove reindex the uuids of
+the request. If the reindex of a uuid failed, the list is not changed for that uuid, see `results` in the response.
+The full rules are in the doc of `IndexerSettingController`. The add and the remove take this JSON body:
+
+```json
+{ "uuids": ["<uuid-1>", "<uuid-2>"] }
 ```
 
 ## Branching name
