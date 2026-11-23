@@ -21,7 +21,7 @@ public class ObjectMapperConfig {
         // objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd"));
 
         // Configure property naming strategy (e.g., to use snake_case)
-        objectMapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
+        objectMapper.setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
 
         // Register custom serializers/deserializers if needed
         // SimpleModule customModule = new SimpleModule();
