@@ -135,7 +135,8 @@ public class GeoNetworkServiceIT extends BaseTestClass {
             insertMetadataRecords("9e5c3031-a026-48b3-a153-a70c2e2b78b9", "classpath:canned/sample1.xml");
             String group = geoNetworkService.findGroupById("9e5c3031-a026-48b3-a153-a70c2e2b78b9");
 
-            Assertions.assertEquals("sample", group, "Default group equals");
+            // The default group has name "sample" but label.eng "Sample group", we use the label
+            Assertions.assertEquals("Sample group", group, "Default group label equals");
 
         }
         finally {

@@ -749,6 +749,44 @@ public class StacCollectionMapperServiceTest {
         verify(expected);
     }
     /**
+     * Verify the GN4 group label of GA, NCI and eAtlas maps to the dataset_group value the portal
+     * organisation filter use, e.g. dataset_group = 'ga'
+     * @throws IOException - Not expected
+     * @throws JAXBException - Not expected
+     */
+    @Test
+    public void verifyHandleOrganisationGroupCorrectly() throws IOException, JAXBException {
+        MDMetadataType source = jaxbUtils.unmarshal(readResourceFile("classpath:canned/sample24.xml"));
+
+        Map<String, List<String>> expected = Map.of(
+                "GA", List.of("ga"),
+                "NCI", List.of("nci"),
+                "eAtlas", List.of("eatlas")
+        );
+
+        for (Map.Entry<String, List<String>> e : expected.entrySet()) {
+            when(geoNetworkResourceService.findGroupById("b9bf6b57-54a0-44b3-bd17-30ccfb2b246f"))
+                    .thenReturn(e.getKey());
+
+            assertEquals(e.getValue(), service.mapGeoNetworkGroup(source), "Group label " + e.getKey());
+        }
+    }
+    /**
+     * If the GN4 group has no English label, findGroupById throws. We must not stop the indexing,
+     * the record has no dataset_group and the error is in the log
+     * @throws IOException - Not expected
+     * @throws JAXBException - Not expected
+     */
+    @Test
+    public void verifyNoDatasetGroupWhenGroupHasNoLabel() throws IOException, JAXBException {
+        MDMetadataType source = jaxbUtils.unmarshal(readResourceFile("classpath:canned/sample24.xml"));
+
+        when(geoNetworkResourceService.findGroupById("b9bf6b57-54a0-44b3-bd17-30ccfb2b246f"))
+                .thenThrow(new IllegalStateException("Group 1460 (AIMS_IMOS) has no English label"));
+
+        assertNull(service.mapGeoNetworkGroup(source), "No dataset_group when group has no label");
+    }
+    /**
      * Verify the geonetwork categories, for example portal:IMOS, end up in summaries.categories of the
      * mapped model. The field is JsonIgnore so it must NOT appear in the document sent to elastic, we
      * therefore assert on the model captured on its way to the ranking service rather than on the

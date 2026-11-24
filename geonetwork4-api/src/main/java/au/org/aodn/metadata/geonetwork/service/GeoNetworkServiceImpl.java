@@ -64,7 +64,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
     protected RestTemplate indexerRestTemplate;
     /**
      * -- SETTER --
-     *  This is use in test only and therefore it is a protected member.
+     * This is use in test only and therefore it is a protected member.
      *
      */
     @Setter
@@ -104,11 +104,15 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
     }
 
     /**
+     * Find the owner group of the record. We return the English label and not the name, because
+     * since GN 4.4.10 the group name cannot have a comma, but the label can. The label keeps
+     * the value we want in dataset_group, e.g. name AIMS_IMOS, label.eng "AIMS, IMOS"
      *
      * @param uuid - The query UUID
-     * @return Group name
-     * @throws IOException - No record found with the given UUID
+     * @return Group English label
+     * @throws IOException                                 - No record found with the given UUID
      * @throws HttpServerErrorException.ServiceUnavailable - We are running in cloud and instance may be restarted
+     * @throws IllegalStateException                       - The group has no English label
      */
     public String findGroupById(String uuid) throws IOException, HttpServerErrorException.ServiceUnavailable {
         SearchRequest request = new SearchRequest.Builder()
@@ -121,7 +125,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
 
         final SearchResponse<ObjectNode> response = gn4ElasticClient.search(request, ObjectNode.class);
 
-        if(response.hits() != null && response.hits().hits() != null && !response.hits().hits().isEmpty()) {
+        if (response.hits() != null && response.hits().hits() != null && !response.hits().hits().isEmpty()) {
             // UUID should result in only 1 record, hence get(0) is ok.
             ObjectNode source = response.hits().hits().get(0).source();
             if (source != null) {
@@ -137,12 +141,20 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
                         JsonNode.class, params);
 
                 if (responseEntity.getStatusCode().is2xxSuccessful()) {
-                    return Objects.requireNonNull(responseEntity.getBody()).get("name").asText();
+                    JsonNode body = Objects.requireNonNull(responseEntity.getBody());
+                    JsonNode eng = body.path("label").path("eng");
+                    if (eng.isTextual() && !eng.asText().isBlank()) {
+                        return eng.asText();
+                    }
+                    throw new IllegalStateException(String.format(
+                            "Group %s (%s) of record %s has no English label (label.eng), please add it in the GN4 group config",
+                            group, body.path("name").asText(), uuid));
                 }
             }
         }
         return null;
     }
+
     /**
      * The category is set by the geonetwork harvester using GN3 protocol, it is use to identify which portal the record
      * belongs to, for example portal:IMOS. A record can have no category.
@@ -165,37 +177,38 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
                     defaultRequestEntity,
                     JsonNode.class, params);
 
-            if(responseEntity.getStatusCode().is2xxSuccessful() && responseEntity.getBody() != null) {
+            if (responseEntity.getStatusCode().is2xxSuccessful() && responseEntity.getBody() != null) {
                 List<String> result = new ArrayList<>();
                 responseEntity.getBody().forEach(tag -> {
-                    if(tag.hasNonNull("name")) {
+                    if (tag.hasNonNull("name")) {
                         result.add(tag.get("name").asText());
                     }
                 });
                 logger.debug("Found Categories: {}", result);
                 return result;
             }
-        }
-        catch(HttpClientErrorException clientErrorException) {
+        } catch (HttpClientErrorException clientErrorException) {
             logger.warn("Fail to get categories of record {}, reason {}", uuid, clientErrorException.getMessage());
         }
         return List.of();
     }
+
     /**
      * Please check comment section of getRecordRelated to understand how the structure looks like for
      * thumbnail section
+     *
      * @param uuid - UUID of record
      * @return - The LinkModel ref the thumbnail.
      */
     @Override
     public Optional<LinkModel> getThumbnail(String uuid) {
         Optional<Map<String, ?>> optRelated = self.getRecordRelated(uuid);
-        if(optRelated.isPresent()) {
+        if (optRelated.isPresent()) {
             Map<String, ?> node = optRelated.get();
-            if(node.containsKey(THUMB_NAILS) && node.get(THUMB_NAILS) instanceof List<?> thumbnails) {
+            if (node.containsKey(THUMB_NAILS) && node.get(THUMB_NAILS) instanceof List<?> thumbnails) {
                 // Always use the first item, not sure if it is good?
-                if(!thumbnails.isEmpty() && thumbnails.get(0) instanceof Map<?, ?> thumbnail) {
-                    if(thumbnail.containsKey(URL) && thumbnail.get(URL) instanceof Map<?,?> link) {
+                if (!thumbnails.isEmpty() && thumbnails.get(0) instanceof Map<?, ?> thumbnail) {
+                    if (thumbnail.containsKey(URL) && thumbnail.get(URL) instanceof Map<?, ?> link) {
                         return link.entrySet()
                                 .stream()
                                 .findFirst()
@@ -212,6 +225,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
         }
         return Optional.empty();
     }
+
     /**
      * Return a link to the logo if exist.
      *
@@ -221,11 +235,11 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
     @Override
     public Optional<LinkModel> getLogo(String uuid) {
         Optional<Map<String, Object>> optAdditionalInfo = self.getRecordExtraInfo(uuid);
-        if(optAdditionalInfo.isPresent()) {
+        if (optAdditionalInfo.isPresent()) {
             // We iterate logos link and add it to STAC
             Map<String, Object> additionalInfo = optAdditionalInfo.get();
-            if(additionalInfo.containsKey(SUGGEST_LOGOS)) {
-                if(additionalInfo.get(SUGGEST_LOGOS) instanceof List) {
+            if (additionalInfo.containsKey(SUGGEST_LOGOS)) {
+                if (additionalInfo.get(SUGGEST_LOGOS) instanceof List) {
                     return ((List<?>) additionalInfo.get(SUGGEST_LOGOS))
                             .stream()
                             .map(p -> (p instanceof String) ? (String) p : null)
@@ -266,37 +280,39 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
                     getAodnExtRecordsEndpoint(),
                     HttpMethod.GET,
                     defaultRequestEntity,
-                    new ParameterizedTypeReference<>() {},
+                    new ParameterizedTypeReference<>() {
+                    },
                     params);
 
             if (responseEntity.getStatusCode().is2xxSuccessful() && responseEntity.getBody() != null) {
                 return Optional.of(responseEntity.getBody());
             }
-        }
-        catch(HttpClientErrorException clientErrorException) {
+        } catch (HttpClientErrorException clientErrorException) {
             logger.warn("Fail to call API on additional info, please check api exist?");
             return Optional.empty();
         }
         return Optional.empty();
     }
+
     /**
      * Call the geonetwork API to get the related info given a uuid, in the related record, you will find the link
      * to the thumbnail
+     *
      * @param uuid - UUID of record
      * @return - A Json structure like this, but we limited the types of return so only children,
      * siblings thumbnails etc, check endpoint call
      * {
-     *     "children": null,
-     *     "parent": null,
-     *     "siblings": null,
-     *     "associated": null,
-     *     "services": null,
-     *     "datasets": null,
-     *     "fcats": null,
-     *     "hasfeaturecats": null,
-     *     "sources": null,
-     *     "hassources": null,
-     *     "related": null,
+     * "children": null,
+     * "parent": null,
+     * "siblings": null,
+     * "associated": null,
+     * "services": null,
+     * "datasets": null,
+     * "fcats": null,
+     * "hasfeaturecats": null,
+     * "sources": null,
+     * "hassources": null,
+     * "related": null,
      * }
      * The need of retryable is because the geonetwork elastic instance is too small, often it memory usage is
      * 75%, it will throw BadRequest exception if we push it too hard, so we need to retry on bad request
@@ -313,7 +329,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
     )
     protected Optional<Map<String, ?>> getRecordRelated(String uuid) {
         Map<String, ?> value = cache.get(uuid);
-        if(value == null) {
+        if (value == null) {
             try {
                 Map<String, Object> params = new HashMap<>();
                 params.put(UUID, uuid);
@@ -329,7 +345,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
                 );
 
                 if (responseEntity.getStatusCode().is2xxSuccessful()) {
-                    if(responseEntity.getBody() != null) {
+                    if (responseEntity.getBody() != null) {
                         // cache the result as same record will be called multiple times
                         // during single record creation
                         responseEntity
@@ -343,13 +359,14 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
             } catch (HttpClientErrorException.NotFound e) {
                 throw new MetadataNotFoundException("Unable to find metadata record with UUID: " + uuid + " in GeoNetwork");
             }
-        }
-        else {
+        } else {
             return Optional.of(value);
         }
     }
+
     /**
      * If geonetwork for some reason reboot, it is cloud env anyway, we keep retry evey 10 seconds
+     *
      * @param uuid - UUID of record
      * @return - The formatterId of the record, if not found, return XML
      */
@@ -381,21 +398,20 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
                 JsonNode node = Objects.requireNonNull(responseEntity.getBody());
                 if (node.hasNonNull("@xsi:schemaLocation") && node.get("@xsi:schemaLocation").asText().contains("www.isotc211.org/2005/gmd")) {
                     return AppConstants.FORMAT_ISO19115_3_2018;
-                }
-                else {
+                } else {
                     return AppConstants.FORMAT_XML;
                 }
-            }
-            else {
+            } else {
                 throw new MetadataNotFoundException("Unable to find metadata record with UUID: " + uuid + " in GeoNetwork");
             }
-        }
-        catch (HttpClientErrorException.NotFound e) {
+        } catch (HttpClientErrorException.NotFound e) {
             throw new MetadataNotFoundException("Unable to find metadata record with UUID: " + uuid + " in GeoNetwork");
         }
     }
+
     /**
      * Search a record in geonetwork
+     *
      * @param uuid - UUID of the record
      * @return - The XML give UUID
      * @throws HttpServerErrorException.ServiceUnavailable - We are running in cloud and instance may be restarted
@@ -428,15 +444,14 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
 
             if (responseEntity.getStatusCode().is2xxSuccessful()) {
                 return Objects.requireNonNull(responseEntity.getBody());
-            }
-            else {
+            } else {
                 throw new RuntimeException("Failed to fetch data from the API");
             }
-        }
-        catch (HttpClientErrorException.NotFound e) {
+        } catch (HttpClientErrorException.NotFound e) {
             throw new MetadataNotFoundException("Unable to find metadata record with UUID: " + uuid + " in GeoNetwork");
         }
     }
+
     /**
      * Need to use _search instead of the _count function because the geonetwork query to _count not work, but we
      * can achieve the same behavior by using _search with size = 0, this is much efficient then query all record
@@ -453,29 +468,28 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
         SearchResponse<ObjectNode> response = gn4ElasticClient.search(request, ObjectNode.class);
         TotalHits total = response.hits().total();
 
-        if(total != null) {
+        if (total != null) {
             logger.debug("Document count is {}", total.value());
             return total.value();
-        }
-        else {
+        } else {
             throw new RuntimeException("Fail to get count because total hit is null");
         }
     }
 
     @Override
     public boolean isMetadataRecordsCountLessThan(int c) {
-        if(c < 1) {
+        if (c < 1) {
             throw new IllegalArgumentException("Compare value less then 1 do not make sense");
         }
 
         try {
             Long count = this.getAllMetadataCounts();
             return (count < c);
-        }
-        catch (IOException ioe) {
+        } catch (IOException ioe) {
             throw new RuntimeException("Error getting total count, cannot proceed", ioe);
         }
     }
+
     /**
      * The need of retryable is because the geonetwork elastic instance is too small, often it memory usage is
      * 75%, it will throw BadRequest exception if we push it too hard, so we need to retry on bad request
@@ -499,7 +513,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
             final AtomicReference<SearchResponse<ObjectNode>> response =
                     new AtomicReference<>(gn4ElasticClient.search(req, ObjectNode.class));
 
-            if(response.get().hits() != null
+            if (response.get().hits() != null
                     && response.get().hits().hits() != null
                     && !response.get().hits().hits().isEmpty()) {
 
@@ -524,8 +538,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
                         // If we hit the end, that means we have iterated to end of page.
                         if (index < response.get().hits().hits().size()) {
                             return true;
-                        }
-                        else {
+                        } else {
                             // Check if we have next page
                             try {
                                 response.set(
@@ -536,12 +549,12 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
                                 // Reset counter from start
                                 index = 0;
                                 return index < response.get().hits().hits().size();
-                            }
-                            catch (IOException e) {
+                            } catch (IOException e) {
                                 throw new RuntimeException(e);
                             }
                         }
                     }
+
                     /**
                      * There is a problem with query the elastic directly because the index maybe outdated (not reindexed)
                      * hence there is a chance that the hit size > number of docs, so in case the doc is not found,
@@ -553,17 +566,15 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
                     public String next() {
                         String uuid = getUUID(index++);
 
-                        if(uuid == null) {
+                        if (uuid == null) {
                             return null;
-                        }
-                        else {
+                        } else {
                             // Remember the last UUID
                             lastUUID.set(uuid);
 
                             try {
                                 return self.searchRecordBy(uuid);
-                            }
-                            catch(MetadataNotFoundException me) {
+                            } catch (MetadataNotFoundException me) {
                                 // Should be a very rare case where someone deleted the doc in geonetwork
                                 // but the index is not refresh yet, so you will get document not found
                                 return null;
@@ -573,19 +584,17 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
 
                     private String getUUID(int index) {
                         ObjectNode source = response.get().hits().hits().get(index).source();
-                        if(source != null && source.has(UUID)) {
+                        if (source != null && source.has(UUID)) {
                             return source.get(UUID).asText();
                         }
                         return null;
                     }
                 };
-            }
-            else {
+            } else {
                 logger.warn("Query return empty: {}", response.toString());
                 throw new MetadataNotFoundException("Unable to find any metadata records in GeoNetwork");
             }
-        }
-        catch(IOException e) {
+        } catch (IOException e) {
             throw new RuntimeException(
                     String.format("Failed to fetch data from GeoNetwork Elastic API, too busy? Keep retry a few times - Query is %s", req.toString()),
                     e.getCause()
@@ -594,16 +603,24 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
     }
 
     @Override
-    public String getIndexName() { return indexName; }
+    public String getIndexName() {
+        return indexName;
+    }
 
     @Override
-    public void setIndexName(String i) { indexName = i; }
+    public void setIndexName(String i) {
+        indexName = i;
+    }
 
     @Override
-    public String getServer() { return server; }
+    public String getServer() {
+        return server;
+    }
 
     @Override
-    public void setServer(String s) { server = s; }
+    public void setServer(String s) {
+        server = s;
+    }
 
     @Override
     public Map<String, ?> getAssociatedRecords(String uuid) {
@@ -630,6 +647,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
     protected String getGeoNetworkRecordTagsEndpoint() {
         return getServer() + "/geonetwork/srv/api/records/{uuid}/tags";
     }
+
     /**
      * According to ElasticSearch Doc:
      * Avoid using from and size to page too deeply or request too many results at once. Search requests usually
@@ -656,7 +674,7 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
                 .size(ES_PAGE_SIZE);
 
         // Since we only sort by UUID, therefore we only need to searchAfter UUID only.
-        if(searchAfterUUID != null) {
+        if (searchAfterUUID != null) {
             builder = builder.searchAfter(
                     List.of(FieldValue.of(searchAfterUUID))
             );
