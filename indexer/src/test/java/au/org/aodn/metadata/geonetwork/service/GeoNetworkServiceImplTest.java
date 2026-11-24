@@ -1,8 +1,12 @@
 package au.org.aodn.metadata.geonetwork.service;
 
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
+import co.elastic.clients.elasticsearch.core.SearchRequest;
+import co.elastic.clients.elasticsearch.core.SearchResponse;
+import co.elastic.clients.elasticsearch.core.search.Hit;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
@@ -27,15 +31,17 @@ class GeoNetworkServiceImplTest {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
     private RestTemplate indexerRestTemplate;
+    private ElasticsearchClient gn4ElasticClient;
     private GeoNetworkServiceImpl geoNetworkService;
 
     @BeforeEach
     void setUp() {
         indexerRestTemplate = mock(RestTemplate.class);
+        gn4ElasticClient = mock(ElasticsearchClient.class);
         geoNetworkService = new GeoNetworkServiceImpl(
                 "http://localhost",
                 "records",
-                mock(ElasticsearchClient.class),
+                gn4ElasticClient,
                 indexerRestTemplate,
                 mock(FIFOCache.class)
         );
@@ -91,6 +97,67 @@ class GeoNetworkServiceImplTest {
                         HttpStatus.NOT_FOUND, "Not Found", null, null, null));
 
         assertEquals(List.of(), geoNetworkService.findCategoriesById("uuid"));
+    }
+
+    @Test
+    void findGroupByIdReturnsEnglishLabel() throws IOException {
+        mockGroupOwner("1460");
+        mockGroupResponse(ResponseEntity.ok(objectMapper.readTree("""
+                { "id": 1460, "name": "AIMS_IMOS", "label": { "eng": "AIMS, IMOS", "fre": "AIMS_IMOS" } }
+                """)));
+
+        assertEquals("AIMS, IMOS", geoNetworkService.findGroupById("uuid"));
+    }
+
+    @Test
+    void findGroupByIdReturnsNameWhenLabelIsMissing() throws IOException {
+        mockGroupOwner("1460");
+        mockGroupResponse(ResponseEntity.ok(objectMapper.readTree("""
+                { "id": 1460, "name": "AIMS_IMOS" }
+                """)));
+
+        assertEquals("AIMS_IMOS", geoNetworkService.findGroupById("uuid"));
+    }
+
+    @Test
+    void findGroupByIdReturnsNameWhenEnglishLabelIsMissing() throws IOException {
+        mockGroupOwner("1460");
+        mockGroupResponse(ResponseEntity.ok(objectMapper.readTree("""
+                { "id": 1460, "name": "AIMS_IMOS", "label": { "fre": "AIMS, IMOS" } }
+                """)));
+
+        assertEquals("AIMS_IMOS", geoNetworkService.findGroupById("uuid"));
+    }
+
+    @Test
+    void findGroupByIdReturnsNameWhenLabelIsBlank() throws IOException {
+        mockGroupOwner("1460");
+        mockGroupResponse(ResponseEntity.ok(objectMapper.readTree("""
+                { "id": 1460, "name": "AIMS_IMOS", "label": { "eng": "  " } }
+                """)));
+
+        assertEquals("AIMS_IMOS", geoNetworkService.findGroupById("uuid"));
+    }
+
+    private void mockGroupOwner(String groupId) throws IOException {
+        ObjectNode source = objectMapper.createObjectNode().put("groupOwner", groupId);
+        SearchResponse<ObjectNode> response = SearchResponse.of(r -> r
+                .took(1)
+                .timedOut(false)
+                .shards(s -> s.total(1).successful(1).failed(0))
+                .hits(h -> h.hits(List.of(Hit.of(hit -> hit.index("records").id("1").source(source))))));
+
+        when(gn4ElasticClient.search(any(SearchRequest.class), eq(ObjectNode.class))).thenReturn(response);
+    }
+
+    private void mockGroupResponse(ResponseEntity<JsonNode> response) {
+        when(indexerRestTemplate.exchange(
+                argThat(url -> url.contains("/geonetwork/srv/api/groups/")),
+                eq(HttpMethod.GET),
+                any(HttpEntity.class),
+                eq(JsonNode.class),
+                anyMap()))
+                .thenReturn(response);
     }
 
     private void mockTagsResponse(ResponseEntity<JsonNode> response) {

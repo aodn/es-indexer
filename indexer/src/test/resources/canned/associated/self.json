@@ -36,7 +36,7 @@
     "temporal" : [ {
       "start" : "2007-04-03T06:00:00Z"
     } ],
-    "dataset_group" : [ "sample" ],
+    "dataset_group" : [ "sample group" ],
     "dataset_provider" : "IMOS",
     "update_frequency" : "real-time",
     "proj:geometry" : {

@@ -607,8 +607,9 @@ public abstract class StacCollectionMapperService {
                 .anyMatch(p -> p.getName().contains("IMOS")) ? "IMOS" : null;
     }
     /**
-     * Get the group name from geonetwork and store it in dataset_group field. Multiple group
-     * support if the group name is comma separated
+     * Get the group English label (label.eng) from geonetwork and store it in dataset_group field,
+     * it falls back to the group name if there is no label. Multiple group support if the label
+     * is comma separated, e.g. "AIMS, IMOS" gives ["aims", "imos"]
      * @param source - The parsed dataset
      * @return - A list of group
      */
