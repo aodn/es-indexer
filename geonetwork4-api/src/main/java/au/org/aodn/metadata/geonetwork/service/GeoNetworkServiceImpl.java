@@ -109,9 +109,10 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
      * the value we want in dataset_group, e.g. name AIMS_IMOS, label.eng "AIMS, IMOS"
      *
      * @param uuid - The query UUID
-     * @return Group English label, or the name if there is no label
+     * @return Group English label
      * @throws IOException                                 - No record found with the given UUID
      * @throws HttpServerErrorException.ServiceUnavailable - We are running in cloud and instance may be restarted
+     * @throws IllegalStateException                       - The group has no English label
      */
     public String findGroupById(String uuid) throws IOException, HttpServerErrorException.ServiceUnavailable {
         SearchRequest request = new SearchRequest.Builder()
@@ -142,9 +143,12 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
                 if (responseEntity.getStatusCode().is2xxSuccessful()) {
                     JsonNode body = Objects.requireNonNull(responseEntity.getBody());
                     JsonNode eng = body.path("label").path("eng");
-                    return (eng.isTextual() && !eng.asText().isBlank())
-                            ? eng.asText()
-                            : body.get("name").asText();
+                    if (eng.isTextual() && !eng.asText().isBlank()) {
+                        return eng.asText();
+                    }
+                    throw new IllegalStateException(String.format(
+                            "Group %s (%s) of record %s has no English label (label.eng), please add it in the GN4 group config",
+                            group, body.path("name").asText(), uuid));
                 }
             }
         }

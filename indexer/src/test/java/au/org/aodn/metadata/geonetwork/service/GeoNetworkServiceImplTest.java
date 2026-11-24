@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyMap;
 import static org.mockito.ArgumentMatchers.argThat;
@@ -110,33 +111,42 @@ class GeoNetworkServiceImplTest {
     }
 
     @Test
-    void findGroupByIdReturnsNameWhenLabelIsMissing() throws IOException {
+    void findGroupByIdThrowsWhenLabelIsMissing() throws IOException {
         mockGroupOwner("1460");
         mockGroupResponse(ResponseEntity.ok(objectMapper.readTree("""
                 { "id": 1460, "name": "AIMS_IMOS" }
                 """)));
 
-        assertEquals("AIMS_IMOS", geoNetworkService.findGroupById("uuid"));
+        assertNoEnglishLabelError();
     }
 
     @Test
-    void findGroupByIdReturnsNameWhenEnglishLabelIsMissing() throws IOException {
+    void findGroupByIdThrowsWhenEnglishLabelIsMissing() throws IOException {
         mockGroupOwner("1460");
         mockGroupResponse(ResponseEntity.ok(objectMapper.readTree("""
                 { "id": 1460, "name": "AIMS_IMOS", "label": { "fre": "AIMS, IMOS" } }
                 """)));
 
-        assertEquals("AIMS_IMOS", geoNetworkService.findGroupById("uuid"));
+        assertNoEnglishLabelError();
     }
 
     @Test
-    void findGroupByIdReturnsNameWhenLabelIsBlank() throws IOException {
+    void findGroupByIdThrowsWhenLabelIsBlank() throws IOException {
         mockGroupOwner("1460");
         mockGroupResponse(ResponseEntity.ok(objectMapper.readTree("""
                 { "id": 1460, "name": "AIMS_IMOS", "label": { "eng": "  " } }
                 """)));
 
-        assertEquals("AIMS_IMOS", geoNetworkService.findGroupById("uuid"));
+        assertNoEnglishLabelError();
+    }
+
+    private void assertNoEnglishLabelError() {
+        IllegalStateException e = assertThrows(IllegalStateException.class,
+                () -> geoNetworkService.findGroupById("uuid"));
+
+        assertEquals(
+                "Group 1460 (AIMS_IMOS) of record uuid has no English label (label.eng), please add it in the GN4 group config",
+                e.getMessage());
     }
 
     private void mockGroupOwner(String groupId) throws IOException {

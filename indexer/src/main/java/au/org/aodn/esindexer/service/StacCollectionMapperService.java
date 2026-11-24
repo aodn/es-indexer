@@ -607,9 +607,9 @@ public abstract class StacCollectionMapperService {
                 .anyMatch(p -> p.getName().contains("IMOS")) ? "IMOS" : null;
     }
     /**
-     * Get the group English label (label.eng) from geonetwork and store it in dataset_group field,
-     * it falls back to the group name if there is no label. Multiple group support if the label
-     * is comma separated, e.g. "AIMS, IMOS" gives ["aims", "imos"]
+     * Get the group English label (label.eng) from geonetwork and store it in dataset_group field.
+     * Multiple group support if the label is comma separated, e.g. "AIMS, IMOS" gives ["aims", "imos"].
+     * If the group has no English label, we log an error and the record has no dataset_group.
      * @param source - The parsed dataset
      * @return - A list of group
      */
@@ -619,11 +619,15 @@ public abstract class StacCollectionMapperService {
         try {
             String group = geoNetworkService.findGroupById(uuid);
             if(group != null) {
-                // The group name can represent multiple group if it is comma separated
+                // The group label can represent multiple group if it is comma separated
                 return Arrays.stream(group.toLowerCase().split(","))
                         .map(String::trim)
                         .toList();
             }
+        }
+        catch (IllegalStateException e) {
+            // Group config issue in GN4, e.g. no label.eng
+            logger.error("Unable to map dataset_group for UUID: {}, reason: {}", uuid, e.getMessage());
         }
         catch (Exception e) {
             logger.warn("Unable to find group for UUID: {}", uuid, e);
