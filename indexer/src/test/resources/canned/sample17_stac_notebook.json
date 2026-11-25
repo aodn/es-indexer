@@ -65,7 +65,7 @@
     "href" : "https://nbviewer.org/github/aodn/aodn_cloud_optimised/blob/main/notebooks/autonomous_underwater_vehicle.ipynb",
     "rel" : "related",
     "type" : "application/x-ipynb+json",
-    "title" : "Python notebook example"
+    "title" : "Access to Jupyter notebook to query Cloud Optimised converted dataset"
   } ],
   "license" : "",
   "providers" : [ {
