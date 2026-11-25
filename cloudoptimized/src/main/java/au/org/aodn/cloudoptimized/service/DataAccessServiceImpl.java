@@ -245,7 +245,7 @@ public class DataAccessServiceImpl implements DataAccessService {
 
                     NotebookUrlCheck check = notebookUrlValidator.check(notebookUrl);
                     if (!check.valid()) {
-                        log.debug("Notebook link of {} is dropped, url: {}, reason: {}", uuid, notebookUrl, check.reason());
+                        log.warn("Notebook link of {} is dropped, url: {}, reason: {}", uuid, notebookUrl, check.reason());
                         return Optional.empty();
                     }
                     return Optional.of(notebookUrl);
