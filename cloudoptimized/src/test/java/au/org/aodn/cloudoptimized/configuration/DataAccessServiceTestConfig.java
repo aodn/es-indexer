@@ -1,6 +1,8 @@
 package au.org.aodn.cloudoptimized.configuration;
 
 import au.org.aodn.cloudoptimized.service.DataAccessServiceImpl;
+import au.org.aodn.cloudoptimized.service.NotebookUrlCheck;
+import au.org.aodn.cloudoptimized.service.NotebookUrlValidator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,14 +20,22 @@ public class DataAccessServiceTestConfig {
     public DataAccessServiceImpl createDataAccessService(
             RestTemplate restTemplate,
             WebClient webClient,
-            ObjectMapper objectMapper){
+            ObjectMapper objectMapper,
+            NotebookUrlValidator notebookUrlValidator){
 
         return new DataAccessServiceImpl(
                 "http://localhost",
                 "/api",
                 restTemplate,
                 webClient,
-                objectMapper);
+                objectMapper,
+                notebookUrlValidator);
+    }
+
+    @Bean
+    public NotebookUrlValidator notebookUrlValidator() {
+        // Always valid, so the test never sends a request to the notebook host
+        return url -> NotebookUrlCheck.ok();
     }
 
     @Bean

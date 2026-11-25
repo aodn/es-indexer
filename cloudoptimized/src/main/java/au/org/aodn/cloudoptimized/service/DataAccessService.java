@@ -7,6 +7,7 @@ import java.time.YearMonth;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 public interface DataAccessService {
 
@@ -43,7 +44,15 @@ public interface DataAccessService {
      * @return - The TemporalExtent value
      */
     List<TemporalExtent> getTemporalExtentOf(String uuid, String key);
-    Optional<String> getNotebookLink(String uuid);
+    /**
+     * Get the notebook url of a cloud optimized dataset, the url is returned only if it is usable. The metadata is
+     * the point of truth, so if the metadata already has the same link, nothing is returned.
+     *
+     * @param uuid - UUID of dataset
+     * @param existingHrefs - The hrefs of the links already in the metadata, can be null or empty
+     * @return - The url, or empty if there is no notebook, the metadata already has it, or the url is not usable
+     */
+    Optional<String> getNotebookLink(String uuid, Set<String> existingHrefs);
     Map<String, MetadataEntity> getMetadataByUuid(String uuid);
     Map<String, Map<String, MetadataEntity>> getAllMetadata();
     HealthStatus getHealthStatus();
