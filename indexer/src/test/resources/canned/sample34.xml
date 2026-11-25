@@ -1,0 +1,1157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdb:MD_Metadata xmlns:mdb="http://standards.iso.org/iso/19115/-3/mdb/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cat="http://standards.iso.org/iso/19115/-3/cat/1.0" xmlns:gfc="http://standards.iso.org/iso/19110/gfc/1.1" xmlns:cit="http://standards.iso.org/iso/19115/-3/cit/2.0" xmlns:gcx="http://standards.iso.org/iso/19115/-3/gcx/1.0" xmlns:gex="http://standards.iso.org/iso/19115/-3/gex/1.0" xmlns:lan="http://standards.iso.org/iso/19115/-3/lan/1.0" xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.1" xmlns:mas="http://standards.iso.org/iso/19115/-3/mas/1.0" xmlns:mcc="http://standards.iso.org/iso/19115/-3/mcc/1.0" xmlns:mco="http://standards.iso.org/iso/19115/-3/mco/1.0" xmlns:mda="http://standards.iso.org/iso/19115/-3/mda/1.0" xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/2.0" xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/2.0" xmlns:mex="http://standards.iso.org/iso/19115/-3/mex/1.0" xmlns:mmi="http://standards.iso.org/iso/19115/-3/mmi/1.0" xmlns:mpc="http://standards.iso.org/iso/19115/-3/mpc/1.0" xmlns:mrc="http://standards.iso.org/iso/19115/-3/mrc/2.0" xmlns:mrd="http://standards.iso.org/iso/19115/-3/mrd/1.0" xmlns:mri="http://standards.iso.org/iso/19115/-3/mri/1.0" xmlns:mrl="http://standards.iso.org/iso/19115/-3/mrl/2.0" xmlns:mrs="http://standards.iso.org/iso/19115/-3/mrs/1.0" xmlns:msr="http://standards.iso.org/iso/19115/-3/msr/2.0" xmlns:mdq="http://standards.iso.org/iso/19157/-2/mdq/1.0" xmlns:mac="http://standards.iso.org/iso/19115/-3/mac/2.0" xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://standards.iso.org/iso/19115/-3/cat/1.0 http://standards.iso.org/iso/19115/-3/cat/1.0/cat.xsd http://standards.iso.org/iso/19115/-3/cit/2.0 http://standards.iso.org/iso/19115/-3/cit/2.0/cit.xsd http://standards.iso.org/iso/19115/-3/gcx/1.0 http://standards.iso.org/iso/19115/-3/gcx/1.0/gcx.xsd http://standards.iso.org/iso/19115/-3/gex/1.0 http://standards.iso.org/iso/19115/-3/gex/1.0/gex.xsd http://standards.iso.org/iso/19115/-3/lan/1.0 http://standards.iso.org/iso/19115/-3/lan/1.0/lan.xsd http://standards.iso.org/iso/19115/-3/srv/2.0 http://standards.iso.org/iso/19115/-3/srv/2.0/srv.xsd http://standards.iso.org/iso/19115/-3/mas/1.0 http://standards.iso.org/iso/19115/-3/mas/1.0/mas.xsd http://standards.iso.org/iso/19115/-3/mcc/1.0 http://standards.iso.org/iso/19115/-3/mcc/1.0/mcc.xsd http://standards.iso.org/iso/19115/-3/mco/1.0 http://standards.iso.org/iso/19115/-3/mco/1.0/mco.xsd http://standards.iso.org/iso/19115/-3/mda/2.0 http://standards.iso.org/iso/19115/-3/mda/2.0/mda.xsd http://standards.iso.org/iso/19115/-3/mdb/2.0 http://standards.iso.org/iso/19115/-3/mdb/2.0/mdb.xsd http://standards.iso.org/iso/19115/-3/mds/2.0 http://standards.iso.org/iso/19115/-3/mds/2.0/mds.xsd http://standards.iso.org/iso/19115/-3/mdt/2.0 http://standards.iso.org/iso/19115/-3/mdt/2.0/mdt.xsd http://standards.iso.org/iso/19115/-3/mex/1.0 http://standards.iso.org/iso/19115/-3/mex/1.0/mex.xsd http://standards.iso.org/iso/19115/-3/mmi/1.0 http://standards.iso.org/iso/19115/-3/mmi/1.0/mmi.xsd http://standards.iso.org/iso/19115/-3/mpc/1.0 http://standards.iso.org/iso/19115/-3/mpc/1.0/mpc.xsd http://standards.iso.org/iso/19115/-3/mrc/2.0 http://standards.iso.org/iso/19115/-3/mrc/2.0/mrc.xsd http://standards.iso.org/iso/19115/-3/mrd/1.0 http://standards.iso.org/iso/19115/-3/mrd/1.0/mrd.xsd http://standards.iso.org/iso/19115/-3/mri/1.0 http://standards.iso.org/iso/19115/-3/mri/1.0/mri.xsd http://standards.iso.org/iso/19115/-3/mrl/2.0 http://standards.iso.org/iso/19115/-3/mrl/2.0/mrl.xsd http://standards.iso.org/iso/19115/-3/mrs/1.0 http://standards.iso.org/iso/19115/-3/mrs/1.0/mrs.xsd http://standards.iso.org/iso/19115/-3/msr/2.0 http://standards.iso.org/iso/19115/-3/msr/2.0/msr.xsd http://standards.iso.org/iso/19157/-2/mdq/1.0 http://standards.iso.org/iso/19157/-2/mdq/1.0/mdq.xsd http://standards.iso.org/iso/19115/-3/mac/2.0 http://standards.iso.org/iso/19115/-3/mac/2.0/mac.xsd http://standards.iso.org/iso/19115/-3/gco/1.0 http://standards.iso.org/iso/19115/-3/gco/1.0/gco.xsd http://standards.iso.org/iso/19115/-3/gmw/1.0 http://standards.iso.org/iso/19115/-3/gmw/1.0/gmw.xsd http://www.opengis.net/gml/3.2 http://schemas.opengis.net/gml/3.2.1/gml.xsd http://www.w3.org/1999/xlink http://www.w3.org/1999/xlink.xsd">
+    <mdb:metadataIdentifier>
+        <mcc:MD_Identifier>
+            <mcc:code>
+                <gco:CharacterString>3a083248-a4a0-4429-9bef-63e6acbabb14</gco:CharacterString>
+            </mcc:code>
+            <mcc:codeSpace>
+                <gco:CharacterString>urn:uuid</gco:CharacterString>
+            </mcc:codeSpace>
+        </mcc:MD_Identifier>
+    </mdb:metadataIdentifier>
+    <mdb:defaultLocale xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0" xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0" xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0">
+        <lan:PT_Locale id="EN">
+            <lan:language>
+                <lan:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="eng" />
+            </lan:language>
+            <lan:characterEncoding>
+                <lan:MD_CharacterSetCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_CharacterSetCode" codeListValue="utf8" />
+            </lan:characterEncoding>
+        </lan:PT_Locale>
+    </mdb:defaultLocale>
+    <mdb:metadataScope xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0" xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0" xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0">
+        <mdb:MD_MetadataScope>
+            <mdb:resourceScope>
+                <mcc:MD_ScopeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ScopeCode" codeListValue="dataset" />
+            </mdb:resourceScope>
+            <mdb:name>
+                <gco:CharacterString>IMAS Dataset level record</gco:CharacterString>
+            </mdb:name>
+        </mdb:MD_MetadataScope>
+    </mdb:metadataScope>
+    <mdb:contact>
+        <cit:CI_Responsibility>
+            <cit:role>
+                <cit:CI_RoleCode codeListValue="distributor" codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" />
+            </cit:role>
+            <cit:party>
+                <cit:CI_Organisation>
+                    <cit:name>
+                        <gco:CharacterString>Institute for Marine and Antarctic Studies</gco:CharacterString>
+                    </cit:name>
+                    <cit:contactInfo>
+                        <cit:CI_Contact>
+                            <cit:onlineResource>
+                                <cit:CI_OnlineResource>
+                                    <cit:linkage>
+                                        <gco:CharacterString>https://imas.utas.edu.au/</gco:CharacterString>
+                                    </cit:linkage>
+                                    <cit:protocol>
+                                        <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
+                                    </cit:protocol>
+                                    <cit:name>
+                                        <gco:CharacterString>IMAS website</gco:CharacterString>
+                                    </cit:name>
+                                </cit:CI_OnlineResource>
+                            </cit:onlineResource>
+                        </cit:CI_Contact>
+                    </cit:contactInfo>
+                    <cit:individual>
+                        <cit:CI_Individual>
+                            <cit:name gco:nilReason="missing">
+                                <gco:CharacterString />
+                            </cit:name>
+                            <cit:contactInfo>
+                                <cit:CI_Contact>
+                                    <cit:address>
+                                        <cit:CI_Address>
+                                            <cit:electronicMailAddress>
+                                                <gco:CharacterString>IMAS.DataManager@utas.edu.au</gco:CharacterString>
+                                            </cit:electronicMailAddress>
+                                        </cit:CI_Address>
+                                    </cit:address>
+                                </cit:CI_Contact>
+                            </cit:contactInfo>
+                            <cit:positionName>
+                                <gco:CharacterString>IMAS Data Manager</gco:CharacterString>
+                            </cit:positionName>
+                        </cit:CI_Individual>
+                    </cit:individual>
+                </cit:CI_Organisation>
+            </cit:party>
+        </cit:CI_Responsibility>
+    </mdb:contact>
+    <mdb:dateInfo xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0" xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0" xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0">
+        <!-- ID2 -->
+        <!-- Date when metadata record was *created*. This is automatically generated by the tool when the user first creates their record (note that date of *creation* and date of *revision* will be different, if a user has not submitted a record on the same day as creation). This is user-editable, if they choose.-->
+        <cit:CI_Date>
+            <cit:date>
+                <gco:DateTime>2025-11-24T00:00:00</gco:DateTime>
+            </cit:date>
+            <cit:dateType>
+                <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode" codeListValue="creation" />
+            </cit:dateType>
+        </cit:CI_Date>
+    </mdb:dateInfo>
+    <mdb:dateInfo>
+        <cit:CI_Date>
+            <cit:date>
+                <gco:DateTime>2026-10-30T09:19:23</gco:DateTime>
+            </cit:date>
+            <cit:dateType>
+                <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode" codeListValue="revision" />
+            </cit:dateType>
+        </cit:CI_Date>
+    </mdb:dateInfo>
+    <mdb:metadataStandard xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0" xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0" xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0">
+        <!-- Details of the metadata standard applied in this XML file. These details are set in the XML. -->
+        <cit:CI_Citation>
+            <cit:title>
+                <gco:CharacterString>ISO 19115-3:2018</gco:CharacterString>
+            </cit:title>
+        </cit:CI_Citation>
+    </mdb:metadataStandard>
+    <mdb:metadataLinkage xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0" xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0" xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0">
+        <!-- Details for Point-of-Truth URLs. The catalogue URL is extracted from the "site contents" entry, and the UUID is generated by this tool. -->
+        <cit:CI_OnlineResource>
+            <cit:linkage>
+                <gco:CharacterString>https://metadata.imas.utas.edu.au/geonetwork/srv/eng/catalog.search#/metadata/3a083248-a4a0-4429-9bef-63e6acbabb14</gco:CharacterString>
+            </cit:linkage>
+            <cit:protocol>
+                <gco:CharacterString>WWW:LINK-1.0-http--metadata-URL</gco:CharacterString>
+            </cit:protocol>
+            <cit:description>
+                <gco:CharacterString>Point of truth URL of this metadata record</gco:CharacterString>
+            </cit:description>
+        </cit:CI_OnlineResource>
+    </mdb:metadataLinkage>
+    <mdb:identificationInfo xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0" xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0" xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0">
+        <mri:MD_DataIdentification>
+            <mri:citation>
+                <cit:CI_Citation>
+                    <cit:title>
+                        <gco:CharacterString>Dissolved inorganic nitrogen uptake by seaweeds: a global analysis</gco:CharacterString>
+                    </cit:title>
+                    <cit:date>
+                        <!-- Date when a metadata record was *published*. This is set to today's date by default (ie will match *revision* date above). This is not user-editable. Note that Geonetwork admin may want to alter this date when actually *publishing* the record to Geonetwork (if catalogue is not set to auto-update this upon metadata insert). -->
+                        <cit:CI_Date>
+                            <cit:date>
+                                <gco:DateTime>2025-12-03T00:00:00</gco:DateTime>
+                            </cit:date>
+                            <cit:dateType>
+                                <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                            </cit:dateType>
+                        </cit:CI_Date>
+                    </cit:date>
+                    <cit:identifier>
+                        <mcc:MD_Identifier>
+                            <mcc:authority>
+                                <cit:CI_Citation>
+                                    <cit:title>
+                                        <gco:CharacterString>Information and documentation - Digital object identifier system</gco:CharacterString>
+                                    </cit:title>
+                                    <cit:identifier>
+                                        <mcc:MD_Identifier>
+                                            <mcc:code>
+                                                <gco:CharacterString>ISO 26324:2012</gco:CharacterString>
+                                            </mcc:code>
+                                        </mcc:MD_Identifier>
+                                    </cit:identifier>
+                                </cit:CI_Citation>
+                            </mcc:authority>
+                            <mcc:code>
+                                <gcx:Anchor xlink:href="https://doi.org/10.25959/V2RP-ZA91">10.25959/V2RP-ZA91</gcx:Anchor>
+                            </mcc:code>
+                            <mcc:codeSpace>
+                                <gco:CharacterString>doi.org</gco:CharacterString>
+                            </mcc:codeSpace>
+                            <mcc:description>
+                                <gco:CharacterString>Digital Object Identifier (DOI)</gco:CharacterString>
+                            </mcc:description>
+                        </mcc:MD_Identifier>
+                    </cit:identifier>
+                    <cit:citedResponsibleParty>
+                        <cit:CI_Responsibility>
+                            <cit:role>
+                                <!-- Who9 -->
+                                <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="principalInvestigator" />
+                            </cit:role>
+                            <cit:party>
+                                <cit:CI_Organisation>
+                                    <cit:name>
+                                        <gco:CharacterString>Institute for Marine and Antarctic Studies</gco:CharacterString>
+                                    </cit:name>
+                                    <cit:contactInfo>
+                                        <cit:CI_Contact>
+                                            <cit:onlineResource>
+                                                <cit:CI_OnlineResource>
+                                                    <cit:linkage>
+                                                        <gco:CharacterString>https://ror.org/00arpt780</gco:CharacterString>
+                                                    </cit:linkage>
+                                                    <cit:protocol>
+                                                        <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
+                                                    </cit:protocol>
+                                                    <cit:name>
+                                                        <gco:CharacterString>ROR ID</gco:CharacterString>
+                                                    </cit:name>
+                                                    <cit:description gco:nilReason="missing">
+                                                        <gco:CharacterString />
+                                                    </cit:description>
+                                                    <cit:function>
+                                                        <cit:CI_OnLineFunctionCode codeListValue="" codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_OnLineFunctionCode" />
+                                                    </cit:function>
+                                                </cit:CI_OnlineResource>
+                                            </cit:onlineResource>
+                                        </cit:CI_Contact>
+                                    </cit:contactInfo>
+                                    <cit:partyIdentifier>
+                                        <mcc:MD_Identifier>
+                                            <mcc:code>
+                                                <gcx:Anchor xlink:href="https://ror.org/00arpt780">00arpt780</gcx:Anchor>
+                                            </mcc:code>
+                                            <mcc:codeSpace>
+                                                <gco:CharacterString>ror.org</gco:CharacterString>
+                                            </mcc:codeSpace>
+                                            <mcc:description>
+                                                <gco:CharacterString>ROR ID</gco:CharacterString>
+                                            </mcc:description>
+                                        </mcc:MD_Identifier>
+                                    </cit:partyIdentifier>
+                                    <cit:individual>
+                                        <cit:CI_Individual>
+                                            <cit:name>
+                                                <gco:CharacterString>Hurd, Catriona</gco:CharacterString>
+                                            </cit:name>
+                                            <cit:contactInfo>
+                                                <cit:CI_Contact>
+                                                    <cit:address>
+                                                        <cit:CI_Address>
+                                                            <cit:deliveryPoint>
+                                                                <gco:CharacterString>University of Tasmania</gco:CharacterString>
+                                                            </cit:deliveryPoint>
+                                                            <cit:electronicMailAddress>
+                                                                <gco:CharacterString>catriona.hurd@utas.edu.au</gco:CharacterString>
+                                                            </cit:electronicMailAddress>
+                                                        </cit:CI_Address>
+                                                    </cit:address>
+                                                    <cit:onlineResource>
+                                                        <cit:CI_OnlineResource>
+                                                            <cit:linkage>
+                                                                <gco:CharacterString>https://orcid.org/0000-0001-9965-4917</gco:CharacterString>
+                                                            </cit:linkage>
+                                                            <cit:protocol>
+                                                                <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
+                                                            </cit:protocol>
+                                                            <cit:name>
+                                                                <gco:CharacterString>ORCID</gco:CharacterString>
+                                                            </cit:name>
+                                                        </cit:CI_OnlineResource>
+                                                    </cit:onlineResource>
+                                                </cit:CI_Contact>
+                                            </cit:contactInfo>
+                                            <cit:partyIdentifier>
+                                                <mcc:MD_Identifier>
+                                                    <mcc:code>
+                                                        <gcx:Anchor xlink:href="https://orcid.org/0000-0001-9965-4917">0000-0001-9965-4917</gcx:Anchor>
+                                                    </mcc:code>
+                                                    <mcc:codeSpace>
+                                                        <gco:CharacterString>orcid.org</gco:CharacterString>
+                                                    </mcc:codeSpace>
+                                                    <mcc:description>
+                                                        <gco:CharacterString>ORCID</gco:CharacterString>
+                                                    </mcc:description>
+                                                </mcc:MD_Identifier>
+                                            </cit:partyIdentifier>
+                                        </cit:CI_Individual>
+                                    </cit:individual>
+                                </cit:CI_Organisation>
+                            </cit:party>
+                        </cit:CI_Responsibility>
+                    </cit:citedResponsibleParty>
+                    <cit:citedResponsibleParty>
+                        <!--  At least one citedResponsibleParty must be entered by the user -->
+                        <cit:CI_Responsibility>
+                            <cit:role>
+                                <!-- Who9 -->
+                                <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="collaborator" />
+                            </cit:role>
+                            <cit:party>
+                                <cit:CI_Organisation>
+                                    <cit:name>
+                                        <gco:CharacterString>Institute for Marine and Antarctic Studies</gco:CharacterString>
+                                    </cit:name>
+                                    <cit:contactInfo>
+                                        <cit:CI_Contact>
+                                            <cit:onlineResource>
+                                                <cit:CI_OnlineResource>
+                                                    <cit:linkage>
+                                                        <gco:CharacterString>https://ror.org/00arpt780</gco:CharacterString>
+                                                    </cit:linkage>
+                                                    <cit:protocol>
+                                                        <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
+                                                    </cit:protocol>
+                                                    <cit:name>
+                                                        <gco:CharacterString>ROR ID</gco:CharacterString>
+                                                    </cit:name>
+                                                    <cit:description gco:nilReason="missing">
+                                                        <gco:CharacterString />
+                                                    </cit:description>
+                                                    <cit:function>
+                                                        <cit:CI_OnLineFunctionCode codeListValue="" codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_OnLineFunctionCode" />
+                                                    </cit:function>
+                                                </cit:CI_OnlineResource>
+                                            </cit:onlineResource>
+                                        </cit:CI_Contact>
+                                    </cit:contactInfo>
+                                    <cit:partyIdentifier>
+                                        <mcc:MD_Identifier>
+                                            <mcc:code>
+                                                <gcx:Anchor xlink:href="https://ror.org/00arpt780">00arpt780</gcx:Anchor>
+                                            </mcc:code>
+                                            <mcc:codeSpace>
+                                                <gco:CharacterString>ror.org</gco:CharacterString>
+                                            </mcc:codeSpace>
+                                            <mcc:description>
+                                                <gco:CharacterString>ROR ID</gco:CharacterString>
+                                            </mcc:description>
+                                        </mcc:MD_Identifier>
+                                    </cit:partyIdentifier>
+                                    <cit:individual>
+                                        <cit:CI_Individual>
+                                            <cit:name>
+                                                <gco:CharacterString>Lush, Harry</gco:CharacterString>
+                                            </cit:name>
+                                            <cit:contactInfo>
+                                                <cit:CI_Contact>
+                                                    <cit:address>
+                                                        <cit:CI_Address>
+                                                            <cit:deliveryPoint>
+                                                                <gco:CharacterString>University of Tasmania</gco:CharacterString>
+                                                            </cit:deliveryPoint>
+                                                            <cit:electronicMailAddress>
+                                                                <gco:CharacterString>harry.lush@utas.edu.au</gco:CharacterString>
+                                                            </cit:electronicMailAddress>
+                                                        </cit:CI_Address>
+                                                    </cit:address>
+                                                    <cit:onlineResource>
+                                                        <!--  ORCID URL is collected from user-entered field. cit:name and cit:protocol are retained from template -->
+                                                        <cit:CI_OnlineResource>
+                                                            <cit:linkage>
+                                                                <gco:CharacterString>https://orcid.org/0009-0003-2142-2077</gco:CharacterString>
+                                                            </cit:linkage>
+                                                            <cit:protocol>
+                                                                <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
+                                                            </cit:protocol>
+                                                            <cit:name>
+                                                                <gco:CharacterString>ORCID</gco:CharacterString>
+                                                            </cit:name>
+                                                        </cit:CI_OnlineResource>
+                                                    </cit:onlineResource>
+                                                </cit:CI_Contact>
+                                            </cit:contactInfo>
+                                            <cit:partyIdentifier>
+                                                <mcc:MD_Identifier>
+                                                    <mcc:code>
+                                                        <gcx:Anchor xlink:href="https://orcid.org/0009-0003-2142-2077">0009-0003-2142-2077</gcx:Anchor>
+                                                    </mcc:code>
+                                                    <mcc:codeSpace>
+                                                        <gco:CharacterString>orcid.org</gco:CharacterString>
+                                                    </mcc:codeSpace>
+                                                    <mcc:description>
+                                                        <gco:CharacterString>ORCID</gco:CharacterString>
+                                                    </mcc:description>
+                                                </mcc:MD_Identifier>
+                                            </cit:partyIdentifier>
+                                        </cit:CI_Individual>
+                                    </cit:individual>
+                                </cit:CI_Organisation>
+                            </cit:party>
+                        </cit:CI_Responsibility>
+                    </cit:citedResponsibleParty>
+                    <cit:citedResponsibleParty>
+                        <!--  At least one citedResponsibleParty must be entered by the user -->
+                        <cit:CI_Responsibility>
+                            <cit:role>
+                                <!-- Who9 -->
+                                <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="collaborator" />
+                            </cit:role>
+                            <cit:party>
+                                <cit:CI_Organisation>
+                                    <cit:name>
+                                        <gco:CharacterString>Institute for Marine and Antarctic Studies</gco:CharacterString>
+                                    </cit:name>
+                                    <cit:contactInfo>
+                                        <cit:CI_Contact>
+                                            <cit:onlineResource>
+                                                <cit:CI_OnlineResource>
+                                                    <cit:linkage>
+                                                        <gco:CharacterString>https://ror.org/00arpt780</gco:CharacterString>
+                                                    </cit:linkage>
+                                                    <cit:protocol>
+                                                        <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
+                                                    </cit:protocol>
+                                                    <cit:name>
+                                                        <gco:CharacterString>ROR ID</gco:CharacterString>
+                                                    </cit:name>
+                                                    <cit:description gco:nilReason="missing">
+                                                        <gco:CharacterString />
+                                                    </cit:description>
+                                                    <cit:function>
+                                                        <cit:CI_OnLineFunctionCode codeListValue="" codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_OnLineFunctionCode" />
+                                                    </cit:function>
+                                                </cit:CI_OnlineResource>
+                                            </cit:onlineResource>
+                                        </cit:CI_Contact>
+                                    </cit:contactInfo>
+                                    <cit:partyIdentifier>
+                                        <mcc:MD_Identifier>
+                                            <mcc:code>
+                                                <gcx:Anchor xlink:href="https://ror.org/00arpt780">00arpt780</gcx:Anchor>
+                                            </mcc:code>
+                                            <mcc:codeSpace>
+                                                <gco:CharacterString>ror.org</gco:CharacterString>
+                                            </mcc:codeSpace>
+                                            <mcc:description>
+                                                <gco:CharacterString>ROR ID</gco:CharacterString>
+                                            </mcc:description>
+                                        </mcc:MD_Identifier>
+                                    </cit:partyIdentifier>
+                                    <cit:individual>
+                                        <cit:CI_Individual>
+                                            <cit:name>
+                                                <gco:CharacterString>Gannon, Tamzin</gco:CharacterString>
+                                            </cit:name>
+                                            <cit:contactInfo>
+                                                <cit:CI_Contact>
+                                                    <cit:address>
+                                                        <cit:CI_Address>
+                                                            <cit:deliveryPoint>
+                                                                <gco:CharacterString>University of Tasmania</gco:CharacterString>
+                                                            </cit:deliveryPoint>
+                                                            <cit:electronicMailAddress>
+                                                                <gco:CharacterString>tamzin.gannon@utas.edu.au</gco:CharacterString>
+                                                            </cit:electronicMailAddress>
+                                                        </cit:CI_Address>
+                                                    </cit:address>
+                                                </cit:CI_Contact>
+                                            </cit:contactInfo>
+                                        </cit:CI_Individual>
+                                    </cit:individual>
+                                </cit:CI_Organisation>
+                            </cit:party>
+                        </cit:CI_Responsibility>
+                    </cit:citedResponsibleParty>
+                    <cit:citedResponsibleParty>
+                        <cit:CI_Responsibility>
+                            <cit:role>
+                                <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="collaborator" />
+                            </cit:role>
+                            <cit:party>
+                                <cit:CI_Organisation>
+                                    <cit:name>
+                                        <gco:CharacterString>Institute for Marine and Antarctic Studies</gco:CharacterString>
+                                    </cit:name>
+                                    <cit:contactInfo>
+                                        <cit:CI_Contact>
+                                            <cit:onlineResource>
+                                                <cit:CI_OnlineResource>
+                                                    <cit:linkage>
+                                                        <gco:CharacterString>https://ror.org/00arpt780</gco:CharacterString>
+                                                    </cit:linkage>
+                                                    <cit:protocol>
+                                                        <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
+                                                    </cit:protocol>
+                                                    <cit:name>
+                                                        <gco:CharacterString>ROR ID</gco:CharacterString>
+                                                    </cit:name>
+                                                    <cit:description gco:nilReason="missing">
+                                                        <gco:CharacterString />
+                                                    </cit:description>
+                                                    <cit:function>
+                                                        <cit:CI_OnLineFunctionCode codeListValue="" codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_OnLineFunctionCode" />
+                                                    </cit:function>
+                                                </cit:CI_OnlineResource>
+                                            </cit:onlineResource>
+                                        </cit:CI_Contact>
+                                    </cit:contactInfo>
+                                    <cit:partyIdentifier>
+                                        <mcc:MD_Identifier>
+                                            <mcc:code>
+                                                <gcx:Anchor xlink:href="https://ror.org/00arpt780">00arpt780</gcx:Anchor>
+                                            </mcc:code>
+                                            <mcc:codeSpace>
+                                                <gco:CharacterString>ror.org</gco:CharacterString>
+                                            </mcc:codeSpace>
+                                            <mcc:description>
+                                                <gco:CharacterString>ROR ID</gco:CharacterString>
+                                            </mcc:description>
+                                        </mcc:MD_Identifier>
+                                    </cit:partyIdentifier>
+                                    <cit:individual>
+                                        <cit:CI_Individual>
+                                            <cit:name>
+                                                <gco:CharacterString>Britton, Damon</gco:CharacterString>
+                                            </cit:name>
+                                            <cit:contactInfo>
+                                                <cit:CI_Contact>
+                                                    <cit:address>
+                                                        <cit:CI_Address>
+                                                            <cit:deliveryPoint>
+                                                                <gco:CharacterString>University of Tasmania</gco:CharacterString>
+                                                            </cit:deliveryPoint>
+                                                            <cit:electronicMailAddress>
+                                                                <gco:CharacterString>damon.britton@utas.edu.au</gco:CharacterString>
+                                                            </cit:electronicMailAddress>
+                                                        </cit:CI_Address>
+                                                    </cit:address>
+                                                    <cit:onlineResource>
+                                                        <!--  ORCID URL is collected from user-entered field. cit:name and cit:protocol are retained from template -->
+                                                        <cit:CI_OnlineResource>
+                                                            <cit:linkage>
+                                                                <gco:CharacterString>https://orcid.org/0000-0002-9029-7527</gco:CharacterString>
+                                                            </cit:linkage>
+                                                            <cit:protocol>
+                                                                <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
+                                                            </cit:protocol>
+                                                            <cit:name>
+                                                                <gco:CharacterString>ORCID</gco:CharacterString>
+                                                            </cit:name>
+                                                        </cit:CI_OnlineResource>
+                                                    </cit:onlineResource>
+                                                </cit:CI_Contact>
+                                            </cit:contactInfo>
+                                            <cit:partyIdentifier>
+                                                <mcc:MD_Identifier>
+                                                    <mcc:code>
+                                                        <gcx:Anchor xlink:href="https://orcid.org/0000-0002-9029-7527">0000-0002-9029-7527</gcx:Anchor>
+                                                    </mcc:code>
+                                                    <mcc:codeSpace>
+                                                        <gco:CharacterString>orcid.org</gco:CharacterString>
+                                                    </mcc:codeSpace>
+                                                    <mcc:description>
+                                                        <gco:CharacterString>ORCID</gco:CharacterString>
+                                                    </mcc:description>
+                                                </mcc:MD_Identifier>
+                                            </cit:partyIdentifier>
+                                        </cit:CI_Individual>
+                                    </cit:individual>
+                                </cit:CI_Organisation>
+                            </cit:party>
+                        </cit:CI_Responsibility>
+                    </cit:citedResponsibleParty>
+                </cit:CI_Citation>
+            </mri:citation>
+            <mri:abstract>
+                <gco:CharacterString>This dataset is presented as an Excel spreadsheet containing data that were collected and analysed for the project "&#x1d5de;&#x1d5f6;&#x1d5fb;&#x1d5f2;&#x1d601;&#x1d5f6;&#x1d5f0;&#x1d600; &#x1d5fc;&#x1d5f3; &#x1d5fb;&#x1d5f6;&#x1d601;&#x1d5ff;&#x1d5ee;&#x1d601;&#x1d5f2; &#x1d5ee;&#x1d5fb;&#x1d5f1; &#x1d5ee;&#x1d5fa;&#x1d5fa;&#x1d5fc;&#x1d5fb;&#x1d5f6;&#x1d602;&#x1d5fa; &#x1d602;&#x1d5fd;&#x1d601;&#x1d5ee;&#x1d5f8;&#x1d5f2; &#x1d5ef;&#x1d606; &#x1d600;&#x1d5f2;&#x1d5ee;&#x1d604;&#x1d5f2;&#x1d5f2;&#x1d5f1;&#x1d600;: &#x1d5ee; &#x1d5f4;&#x1d5f9;&#x1d5fc;&#x1d5ef;&#x1d5ee;&#x1d5f9; &#x1d5ee;&#x1d5fb;&#x1d5ee;&#x1d5f9;&#x1d606;&#x1d600;&#x1d5f6;&#x1d600;” published in &#x1d609;&#x1d630;&#x1d635;&#x1d622;&#x1d62f;&#x1d62a;&#x1d624;&#x1d622; &#x1d614;&#x1d622;&#x1d633;&#x1d62a;&#x1d62f;&#x1d622; by Hurd, CL, Lush H, Gannon T and Britton (2027).
+
+                    Data were collected between May 2025 and July 2025 from published studies on the uptake kinetics of nitrate (NO₃⁻) and ammonium (NH₄⁺) by marine macroalgae from the phyla Chlorophyta, Heterokontophyta and Rhodophyta. Articles were identified through searches on Google Scholar and ISI Web of Science. Each study contained data obtained from laboratory experiments on the rate of Dissolved Inorganic Nitrogen (DIN) uptake rate at a range of DIN concentrations. A total of 82 published studies were located, with 532 distinct data entries.
+
+                    Values of the Michaelis-Menten kinetic constants maximum uptake rate (Vmax) and the half saturation constant (Ks) were extracted from studies that reported saturating uptake, and cases where the pattern of uptake with concentration was linear or biphasic were also recorded.
+
+                    For each study, metadata was extracted and recorded that included: taxonomic information (phylum, order, genus and species), functional group using Steneck and Dethier (1994), the experimental subject (species and algal tissue used e.g. apical, basal), habitat of origin (subtidal, intertidal, or cultured), season of collection, and geographic coordinates of the study location (latitude and longitude).
+
+                    Each of the 82 studies in this dataset includes the full reference (author and year) and a functional DOI where available (as of November 2025).</gco:CharacterString>
+            </mri:abstract>
+            <mri:status>
+                <!-- ID4 -->
+                <!--  The user must select from a subset of ISO status codes. -->
+                <mcc:MD_ProgressCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ProgressCode" codeListValue="completed" />
+            </mri:status>
+            <mri:pointOfContact>
+                <!--  At least one pointOfContact must be entered by the user. -->
+                <cit:CI_Responsibility>
+                    <cit:role>
+                        <!-- Who1 -->
+                        <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="pointOfContact" />
+                    </cit:role>
+                    <cit:party>
+                        <cit:CI_Organisation>
+                            <cit:name>
+                                <gco:CharacterString>Institute for Marine and Antarctic Studies</gco:CharacterString>
+                            </cit:name>
+                            <cit:contactInfo>
+                                <cit:CI_Contact>
+                                    <cit:onlineResource>
+                                        <cit:CI_OnlineResource>
+                                            <cit:linkage>
+                                                <gco:CharacterString>https://ror.org/00arpt780</gco:CharacterString>
+                                            </cit:linkage>
+                                            <cit:protocol>
+                                                <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
+                                            </cit:protocol>
+                                            <cit:name>
+                                                <gco:CharacterString>ROR ID</gco:CharacterString>
+                                            </cit:name>
+                                            <cit:description gco:nilReason="missing">
+                                                <gco:CharacterString />
+                                            </cit:description>
+                                            <cit:function>
+                                                <cit:CI_OnLineFunctionCode codeListValue="" codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_OnLineFunctionCode" />
+                                            </cit:function>
+                                        </cit:CI_OnlineResource>
+                                    </cit:onlineResource>
+                                </cit:CI_Contact>
+                            </cit:contactInfo>
+                            <cit:partyIdentifier>
+                                <mcc:MD_Identifier>
+                                    <mcc:code>
+                                        <gcx:Anchor xlink:href="https://ror.org/00arpt780">00arpt780</gcx:Anchor>
+                                    </mcc:code>
+                                    <mcc:codeSpace>
+                                        <gco:CharacterString>ror.org</gco:CharacterString>
+                                    </mcc:codeSpace>
+                                    <mcc:description>
+                                        <gco:CharacterString>ROR ID</gco:CharacterString>
+                                    </mcc:description>
+                                </mcc:MD_Identifier>
+                            </cit:partyIdentifier>
+                            <cit:individual>
+                                <cit:CI_Individual>
+                                    <cit:name>
+                                        <gco:CharacterString>Hurd, Catriona</gco:CharacterString>
+                                    </cit:name>
+                                    <cit:contactInfo>
+                                        <cit:CI_Contact>
+                                            <cit:address>
+                                                <cit:CI_Address>
+                                                    <cit:deliveryPoint>
+                                                        <gco:CharacterString>University of Tasmania</gco:CharacterString>
+                                                    </cit:deliveryPoint>
+                                                    <cit:administrativeArea>
+                                                        <gco:CharacterString>Tasmania</gco:CharacterString>
+                                                    </cit:administrativeArea>
+                                                    <cit:country>
+                                                        <gco:CharacterString>Australia</gco:CharacterString>
+                                                    </cit:country>
+                                                    <cit:electronicMailAddress>
+                                                        <gco:CharacterString>catriona.hurd@utas.edu.au</gco:CharacterString>
+                                                    </cit:electronicMailAddress>
+                                                </cit:CI_Address>
+                                            </cit:address>
+                                            <cit:onlineResource>
+                                                <!--  ORCID URL is collected from user-entered field. cit:name and cit:protocol are retained from template -->
+                                                <cit:CI_OnlineResource>
+                                                    <cit:linkage>
+                                                        <gco:CharacterString>https://orcid.org/0000-0001-9965-4917</gco:CharacterString>
+                                                    </cit:linkage>
+                                                    <cit:protocol>
+                                                        <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
+                                                    </cit:protocol>
+                                                    <cit:name>
+                                                        <gco:CharacterString>ORCID</gco:CharacterString>
+                                                    </cit:name>
+                                                </cit:CI_OnlineResource>
+                                            </cit:onlineResource>
+                                        </cit:CI_Contact>
+                                    </cit:contactInfo>
+                                    <cit:partyIdentifier>
+                                        <mcc:MD_Identifier>
+                                            <mcc:code>
+                                                <gcx:Anchor xlink:href="https://orcid.org/0000-0001-9965-4917">0000-0001-9965-4917</gcx:Anchor>
+                                            </mcc:code>
+                                            <mcc:codeSpace>
+                                                <gco:CharacterString>orcid.org</gco:CharacterString>
+                                            </mcc:codeSpace>
+                                            <mcc:description>
+                                                <gco:CharacterString>ORCID</gco:CharacterString>
+                                            </mcc:description>
+                                        </mcc:MD_Identifier>
+                                    </cit:partyIdentifier>
+                                </cit:CI_Individual>
+                            </cit:individual>
+                        </cit:CI_Organisation>
+                    </cit:party>
+                </cit:CI_Responsibility>
+            </mri:pointOfContact>
+            <mri:pointOfContact>
+                <!--  At least one pointOfContact must be entered by the user. -->
+                <cit:CI_Responsibility>
+                    <cit:role>
+                        <!-- Who1 -->
+                        <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="pointOfContact" />
+                    </cit:role>
+                    <cit:party>
+                        <cit:CI_Organisation>
+                            <cit:name>
+                                <gco:CharacterString>Institute for Marine and Antarctic Studies</gco:CharacterString>
+                            </cit:name>
+                            <cit:contactInfo>
+                                <cit:CI_Contact>
+                                    <cit:address>
+                                        <cit:CI_Address>
+                                            <cit:electronicMailAddress gco:nilReason="missing">
+                                                <gco:CharacterString />
+                                            </cit:electronicMailAddress>
+                                        </cit:CI_Address>
+                                    </cit:address>
+                                    <cit:onlineResource>
+                                        <cit:CI_OnlineResource>
+                                            <cit:linkage>
+                                                <gco:CharacterString>https://ror.org/00arpt780</gco:CharacterString>
+                                            </cit:linkage>
+                                            <cit:protocol>
+                                                <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
+                                            </cit:protocol>
+                                            <cit:name>
+                                                <gco:CharacterString>ROR ID</gco:CharacterString>
+                                            </cit:name>
+                                            <cit:description gco:nilReason="missing">
+                                                <gco:CharacterString />
+                                            </cit:description>
+                                            <cit:function>
+                                                <cit:CI_OnLineFunctionCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_OnLineFunctionCode" codeListValue="" />
+                                            </cit:function>
+                                        </cit:CI_OnlineResource>
+                                    </cit:onlineResource>
+                                </cit:CI_Contact>
+                            </cit:contactInfo>
+                            <cit:partyIdentifier>
+                                <mcc:MD_Identifier>
+                                    <mcc:code>
+                                        <gcx:Anchor xlink:href="https://ror.org/00arpt780">00arpt780</gcx:Anchor>
+                                    </mcc:code>
+                                    <mcc:codeSpace>
+                                        <gco:CharacterString>ror.org</gco:CharacterString>
+                                    </mcc:codeSpace>
+                                    <mcc:description>
+                                        <gco:CharacterString>ROR ID</gco:CharacterString>
+                                    </mcc:description>
+                                </mcc:MD_Identifier>
+                            </cit:partyIdentifier>
+                            <cit:individual>
+                                <cit:CI_Individual>
+                                    <cit:name>
+                                        <gco:CharacterString>Britton, Damon</gco:CharacterString>
+                                    </cit:name>
+                                    <cit:contactInfo>
+                                        <cit:CI_Contact>
+                                            <cit:address>
+                                                <cit:CI_Address>
+                                                    <cit:deliveryPoint>
+                                                        <gco:CharacterString>University of Tasmania</gco:CharacterString>
+                                                    </cit:deliveryPoint>
+                                                    <cit:administrativeArea>
+                                                        <gco:CharacterString>Tasmania</gco:CharacterString>
+                                                    </cit:administrativeArea>
+                                                    <cit:country>
+                                                        <gco:CharacterString>Australia</gco:CharacterString>
+                                                    </cit:country>
+                                                    <cit:electronicMailAddress>
+                                                        <gco:CharacterString>damon.britton@utas.edu.au</gco:CharacterString>
+                                                    </cit:electronicMailAddress>
+                                                </cit:CI_Address>
+                                            </cit:address>
+                                            <cit:onlineResource>
+                                                <!--  ORCID URL is collected from user-entered field. cit:name and cit:protocol are retained from template -->
+                                                <cit:CI_OnlineResource>
+                                                    <cit:linkage>
+                                                        <gco:CharacterString>https://orcid.org/0000-0002-9029-7527</gco:CharacterString>
+                                                    </cit:linkage>
+                                                    <cit:protocol>
+                                                        <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
+                                                    </cit:protocol>
+                                                    <cit:name>
+                                                        <gco:CharacterString>ORCID</gco:CharacterString>
+                                                    </cit:name>
+                                                </cit:CI_OnlineResource>
+                                            </cit:onlineResource>
+                                        </cit:CI_Contact>
+                                    </cit:contactInfo>
+                                    <cit:partyIdentifier>
+                                        <mcc:MD_Identifier>
+                                            <mcc:code>
+                                                <gcx:Anchor xlink:href="https://orcid.org/0000-0002-9029-7527">0000-0002-9029-7527</gcx:Anchor>
+                                            </mcc:code>
+                                            <mcc:codeSpace>
+                                                <gco:CharacterString>orcid.org</gco:CharacterString>
+                                            </mcc:codeSpace>
+                                            <mcc:description>
+                                                <gco:CharacterString>ORCID</gco:CharacterString>
+                                            </mcc:description>
+                                        </mcc:MD_Identifier>
+                                    </cit:partyIdentifier>
+                                </cit:CI_Individual>
+                            </cit:individual>
+                        </cit:CI_Organisation>
+                    </cit:party>
+                </cit:CI_Responsibility>
+            </mri:pointOfContact>
+            <mri:topicCategory>
+                <mri:MD_TopicCategoryCode>biota</mri:MD_TopicCategoryCode>
+            </mri:topicCategory>
+            <mri:extent>
+                <gex:EX_Extent>
+                    <gex:geographicElement>
+                        <gex:EX_GeographicBoundingBox>
+                            <gex:westBoundLongitude>
+                                <gco:Decimal>-157.00</gco:Decimal>
+                            </gex:westBoundLongitude>
+                            <gex:eastBoundLongitude>
+                                <gco:Decimal>175.00</gco:Decimal>
+                            </gex:eastBoundLongitude>
+                            <gex:southBoundLatitude>
+                                <gco:Decimal>-45.00</gco:Decimal>
+                            </gex:southBoundLatitude>
+                            <gex:northBoundLatitude>
+                                <gco:Decimal>64.00</gco:Decimal>
+                            </gex:northBoundLatitude>
+                        </gex:EX_GeographicBoundingBox>
+                    </gex:geographicElement>
+                    <gex:temporalElement>
+                        <gex:EX_TemporalExtent>
+                            <gex:extent>
+                                <gml:TimePeriod gml:id="d5137372e782a1052958">
+                                    <gml:beginPosition>2025-05-01</gml:beginPosition>
+                                    <gml:endPosition>2025-07-01</gml:endPosition>
+                                </gml:TimePeriod>
+                            </gex:extent>
+                        </gex:EX_TemporalExtent>
+                    </gex:temporalElement>
+                </gex:EX_Extent>
+            </mri:extent>
+            <mri:resourceMaintenance>
+                <!-- ID5 -->
+                <!--  The user must select how frequently the data will be updated, from a list defined by ISO -->
+                <mmi:MD_MaintenanceInformation>
+                    <mmi:maintenanceAndUpdateFrequency>
+                        <mmi:MD_MaintenanceFrequencyCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_MaintenanceFrequencyCode" codeListValue="notPlanned" />
+                    </mmi:maintenanceAndUpdateFrequency>
+                </mmi:MD_MaintenanceInformation>
+            </mri:resourceMaintenance>
+            <mri:graphicOverview>
+                <mcc:MD_BrowseGraphic>
+                    <mcc:fileName>
+                        <gco:CharacterString>https://metadata.imas.utas.edu.au/geonetwork/srv/api/records/3a083248-a4a0-4429-9bef-63e6acbabb14/attachments/overview_map.png</gco:CharacterString>
+                    </mcc:fileName>
+                    <mcc:fileDescription>
+                        <gco:CharacterString>Spatial overview of global data collation</gco:CharacterString>
+                    </mcc:fileDescription>
+                </mcc:MD_BrowseGraphic>
+            </mri:graphicOverview>
+            <mri:descriptiveKeywords>
+                <mri:MD_Keywords>
+                    <mri:keyword>
+                        <gcx:Anchor xlink:href="https://gcmd.earthdata.nasa.gov/kms/concept/e731c2a1-e4b0-42e9-bed9-bd911c9b496c">MACROALGAE (SEAWEEDS)</gcx:Anchor>
+                    </mri:keyword>
+                    <mri:keyword>
+                        <gcx:Anchor xlink:href="https://gcmd.earthdata.nasa.gov/kms/concept/db5357c9-cc9d-4693-86fe-6bb88555d434">NITROGEN</gcx:Anchor>
+                    </mri:keyword>
+                    <mri:type>
+                        <mri:MD_KeywordTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_KeywordTypeCode" codeListValue="theme" />
+                    </mri:type>
+                    <mri:thesaurusName>
+                        <cit:CI_Citation>
+                            <cit:title>
+                                <gco:CharacterString>Global Change Master Directory Earth Science Keywords, Version 8.5</gco:CharacterString>
+                            </cit:title>
+                            <cit:alternateTitle>
+                                <gco:CharacterString>GCMD</gco:CharacterString>
+                            </cit:alternateTitle>
+                            <cit:date>
+                                <cit:CI_Date>
+                                    <cit:date>
+                                        <gco:Date>2017-04-21</gco:Date>
+                                    </cit:date>
+                                    <cit:dateType>
+                                        <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode" codeListValue="revision" />
+                                    </cit:dateType>
+                                </cit:CI_Date>
+                            </cit:date>
+                            <cit:edition>
+                                <gco:CharacterString>8.5</gco:CharacterString>
+                            </cit:edition>
+                            <cit:identifier>
+                                <mcc:MD_Identifier>
+                                    <mcc:code>
+                                        <gcx:Anchor xlink:href="https://metadata.imas.utas.edu.au/geonetwork/srv/eng/thesaurus.download?ref=external.theme.sciencekeywords">geonetwork.thesaurus.external.theme.sciencekeywords</gcx:Anchor>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </cit:identifier>
+                            <cit:citedResponsibleParty>
+                                <cit:CI_Responsibility>
+                                    <cit:role>
+                                        <cit:CI_RoleCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_RoleCode" codeListValue="owner" />
+                                    </cit:role>
+                                    <cit:party>
+                                        <cit:CI_Organisation>
+                                            <cit:name>
+                                                <gco:CharacterString>Global Change Data Center, Science and Exploration Directorate, Goddard Space Flight Center (GSFC) National Aeronautics and Space Administration (NASA)</gco:CharacterString>
+                                            </cit:name>
+                                        </cit:CI_Organisation>
+                                    </cit:party>
+                                </cit:CI_Responsibility>
+                            </cit:citedResponsibleParty>
+                        </cit:CI_Citation>
+                    </mri:thesaurusName>
+                </mri:MD_Keywords>
+            </mri:descriptiveKeywords>
+            <mri:descriptiveKeywords>
+                <mri:MD_Keywords>
+                    <mri:keyword>
+                        <gcx:Anchor xlink:href="http://vocab.aodn.org.au/def/geographicextents/entity/1">Global / Oceans | Global / Oceans | World</gcx:Anchor>
+                    </mri:keyword>
+                    <mri:type>
+                        <mri:MD_KeywordTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_KeywordTypeCode" codeListValue="place" />
+                    </mri:type>
+                    <mri:thesaurusName>
+                        <cit:CI_Citation>
+                            <cit:title>
+                                <gcx:Anchor xlink:href="http://vocab.aodn.org.au/def/geographicextents/1">AODN Geographic Extents Vocabulary</gcx:Anchor>
+                            </cit:title>
+                            <cit:date>
+                                <cit:CI_Date>
+                                    <cit:date>
+                                        <gco:Date>2021-09-02</gco:Date>
+                                    </cit:date>
+                                    <cit:dateType>
+                                        <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                                    </cit:dateType>
+                                </cit:CI_Date>
+                            </cit:date>
+                            <cit:identifier>
+                                <mcc:MD_Identifier>
+                                    <mcc:code>
+                                        <gcx:Anchor xlink:href="https://metadata.imas.utas.edu.au/geonetwork/srv/api/registries/vocabularies/external.place.aodn_aodn-geographic-extents-vocabulary">geonetwork.thesaurus.external.place.aodn_aodn-geographic-extents-vocabulary</gcx:Anchor>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </cit:identifier>
+                        </cit:CI_Citation>
+                    </mri:thesaurusName>
+                </mri:MD_Keywords>
+            </mri:descriptiveKeywords>
+            <mri:descriptiveKeywords>
+                <mri:MD_Keywords>
+                    <mri:keyword>
+                        <gcx:Anchor xlink:href="http://purl.org/au-research/vocabulary/anzsrc-for/2008/060205">Marine and Estuarine Ecology (incl. Marine Ichthyology)</gcx:Anchor>
+                    </mri:keyword>
+                    <mri:keyword>
+                        <gcx:Anchor xlink:href="http://purl.org/au-research/vocabulary/anzsrc-for/2008/060701">Phycology (incl. Marine Grasses)</gcx:Anchor>
+                    </mri:keyword>
+                    <mri:type>
+                        <mri:MD_KeywordTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_KeywordTypeCode" codeListValue="theme" />
+                    </mri:type>
+                    <mri:thesaurusName>
+                        <cit:CI_Citation>
+                            <cit:title>
+                                <gcx:Anchor xlink:href="http://purl.org/au-research/vocabulary/anzsrc-for/2008/">Australian and New Zealand Standard Research Classification (ANZSRC): Fields of Research</gcx:Anchor>
+                            </cit:title>
+                            <cit:date>
+                                <cit:CI_Date>
+                                    <cit:date>
+                                        <gco:Date>2021-07-12</gco:Date>
+                                    </cit:date>
+                                    <cit:dateType>
+                                        <cit:CI_DateTypeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                                    </cit:dateType>
+                                </cit:CI_Date>
+                            </cit:date>
+                            <cit:identifier>
+                                <mcc:MD_Identifier>
+                                    <mcc:code>
+                                        <gcx:Anchor xlink:href="https://metadata.imas.utas.edu.au/geonetwork/srv/api/registries/vocabularies/external.theme.ANZSRC_FOR_Codes">geonetwork.thesaurus.external.theme.ANZSRC_FOR_Codes</gcx:Anchor>
+                                    </mcc:code>
+                                </mcc:MD_Identifier>
+                            </cit:identifier>
+                        </cit:CI_Citation>
+                    </mri:thesaurusName>
+                </mri:MD_Keywords>
+            </mri:descriptiveKeywords>
+            <mri:resourceConstraints>
+                <mco:MD_Constraints>
+                    <mco:useLimitation>
+                        <gco:CharacterString>Data, products and services from IMAS are provided "as is" without any warranty as to fitness for a particular purpose.</gco:CharacterString>
+                    </mco:useLimitation>
+                </mco:MD_Constraints>
+            </mri:resourceConstraints>
+            <mri:resourceConstraints>
+                <mco:MD_LegalConstraints>
+                    <mco:graphic>
+                        <mcc:MD_BrowseGraphic>
+                            <mcc:fileName gco:nilReason="inapplicable" />
+                            <mcc:linkage>
+                                <cit:CI_OnlineResource>
+                                    <cit:linkage>
+                                        <gco:CharacterString>https://licensebuttons.net/l/by/4.0/88x31.png</gco:CharacterString>
+                                    </cit:linkage>
+                                    <cit:protocol>
+                                        <gco:CharacterString>WWW:LINK-1.0-http--related</gco:CharacterString>
+                                    </cit:protocol>
+                                    <cit:description>
+                                        <gco:CharacterString>License Graphic</gco:CharacterString>
+                                    </cit:description>
+                                </cit:CI_OnlineResource>
+                            </mcc:linkage>
+                        </mcc:MD_BrowseGraphic>
+                    </mco:graphic>
+                    <mco:reference>
+                        <!-- About5 -->
+                        <cit:CI_Citation>
+                            <cit:title>
+                                <gco:CharacterString>Creative Commons Attribution 4.0 International License</gco:CharacterString>
+                            </cit:title>
+                            <cit:alternateTitle>
+                                <gco:CharacterString>CC-BY</gco:CharacterString>
+                            </cit:alternateTitle>
+                            <cit:edition>
+                                <gco:CharacterString>4.0</gco:CharacterString>
+                            </cit:edition>
+                            <cit:citedResponsibleParty>
+                                <cit:CI_Responsibility>
+                                    <cit:party>
+                                        <cit:CI_Organisation>
+                                            <cit:contactInfo>
+                                                <cit:CI_Contact>
+                                                    <cit:onlineResource>
+                                                        <cit:CI_OnlineResource>
+                                                            <cit:linkage>
+                                                                <gco:CharacterString>http://creativecommons.org/international/</gco:CharacterString>
+                                                            </cit:linkage>
+                                                            <cit:protocol>
+                                                                <gco:CharacterString>WWW:LINK-1.0-http--related</gco:CharacterString>
+                                                            </cit:protocol>
+                                                        </cit:CI_OnlineResource>
+                                                    </cit:onlineResource>
+                                                </cit:CI_Contact>
+                                            </cit:contactInfo>
+                                        </cit:CI_Organisation>
+                                    </cit:party>
+                                </cit:CI_Responsibility>
+                            </cit:citedResponsibleParty>
+                            <cit:onlineResource>
+                                <cit:CI_OnlineResource>
+                                    <cit:linkage>
+                                        <gco:CharacterString>https://creativecommons.org/licenses/by/4.0/</gco:CharacterString>
+                                    </cit:linkage>
+                                    <cit:protocol>
+                                        <gco:CharacterString>WWW:LINK-1.0-http--related</gco:CharacterString>
+                                    </cit:protocol>
+                                    <cit:description>
+                                        <gco:CharacterString>License Text</gco:CharacterString>
+                                    </cit:description>
+                                </cit:CI_OnlineResource>
+                            </cit:onlineResource>
+                        </cit:CI_Citation>
+                    </mco:reference>
+                    <mco:otherConstraints>
+                        <gco:CharacterString>Cite data as: Hurd, C. L., Lush, H. A., Gannon, T., &amp; Britton, D. (2025). Dissolved inorganic nitrogen uptake by seaweeds: a global analysis [Data set]. Institute for Marine and Antarctic Studies. https://doi.org/10.25959/V2RP-ZA91</gco:CharacterString>
+                    </mco:otherConstraints>
+                    <mco:otherConstraints>
+                        <gco:CharacterString>Please also additionally cite the following publication when using this data: Hurd, C. L., Lush, H., Gannon, T., &amp; Britton, D. (2027). Dissolved inorganic nitrogen uptake by seaweeds: a global analysis, Botanica Marina</gco:CharacterString>
+                    </mco:otherConstraints>
+                    <mco:otherConstraints>
+                        <gco:CharacterString>Please contact either Dr Damon Britton or Professor Catriona Hurd prior to using this dataset for publication purposes.</gco:CharacterString>
+                    </mco:otherConstraints>
+                </mco:MD_LegalConstraints>
+            </mri:resourceConstraints>
+            <mri:defaultLocale>
+                <lan:PT_Locale>
+                    <lan:language>
+                        <lan:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="eng" />
+                    </lan:language>
+                    <lan:characterEncoding>
+                        <lan:MD_CharacterSetCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_CharacterSetCode" codeListValue="utf8" />
+                    </lan:characterEncoding>
+                </lan:PT_Locale>
+            </mri:defaultLocale>
+            <mri:supplementalInformation />
+        </mri:MD_DataIdentification>
+    </mdb:identificationInfo>
+    <mdb:distributionInfo xmlns:mds="http://standards.iso.org/iso/19115/-3/mds/1.0" xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0" xmlns:mdt="http://standards.iso.org/iso/19115/-3/mdt/1.0">
+        <mrd:MD_Distribution>
+            <mrd:distributionFormat>
+                <!-- Info on distribution format of data, from user input-->
+                <mrd:MD_Format>
+                    <mrd:formatSpecificationCitation>
+                        <cit:CI_Citation>
+                            <cit:title>
+                                <gco:CharacterString>.xlsx</gco:CharacterString>
+                            </cit:title>
+                        </cit:CI_Citation>
+                    </mrd:formatSpecificationCitation>
+                </mrd:MD_Format>
+            </mrd:distributionFormat>
+            <mrd:transferOptions>
+                <mrd:MD_DigitalTransferOptions>
+                    <mrd:onLine>
+                        <cit:CI_OnlineResource>
+                            <cit:protocol>
+                                <gco:CharacterString>WWW:DOWNLOAD-1.0-http--download</gco:CharacterString>
+                            </cit:protocol>
+                            <cit:name>
+                                <gco:CharacterString>DATA ACCESS - Macroalgae DIN uptake kinetics</gco:CharacterString>
+                            </cit:name>
+                        </cit:CI_OnlineResource>
+                    </mrd:onLine>
+                    <mrd:onLine>
+                        <cit:CI_OnlineResource>
+                            <cit:linkage gco:nilReason="missing">
+                                <gco:CharacterString />
+                            </cit:linkage>
+                            <cit:protocol>
+                                <gco:CharacterString>OGC:WMS-1.3.0-http-get-map</gco:CharacterString>
+                            </cit:protocol>
+                            <cit:name>
+                                <gco:CharacterString>global_analysis_DINuptake_seaweeds</gco:CharacterString>
+                            </cit:name>
+                            <cit:description>
+                                <gco:CharacterString>MAP - DIN uptake rate (Ks) of global seaweeds</gco:CharacterString>
+                            </cit:description>
+                        </cit:CI_OnlineResource>
+                    </mrd:onLine>
+                </mrd:MD_DigitalTransferOptions>
+            </mrd:transferOptions>
+        </mrd:MD_Distribution>
+    </mdb:distributionInfo>
+    <mdb:resourceLineage>
+        <mrl:LI_Lineage>
+            <mrl:statement>
+                <gco:CharacterString>Between May 2025 and July 2025, two databases were searched for articles that reported original data on macroalgal uptake rates of nitrate (NO3-) and ammonium (NH4+). The search included articles that reported the Michaelis-Menten kinetic parameters "Vmax" and "Ks (or Km)", or the uptake rate "V" at a given substrate concentration "S".
+
+                    The first database searched was Google Scholar with the search string: "macroalgae" OR "seaweed" OR "kelp" OR "marine plants" AND "nitrate uptake" OR "ammonium uptake" OR "Michaelis-Menten" OR "uptake kinetics" AND "Vmax" OR "Ks" OR "uptake rate". The second database was ISI Web of Science, using the topic field to search two topics simultaneously, following Sheppard et al. (2023): topic 1: ("macro algae" OR "macroalgae" OR "macro-algae" OR "macro algal" OR "macroalgal" OR "macro-algal" OR "kelp" OR "seaweed" OR "marine plants" OR "marine plant" OR "aquatic plants" OR "aquatic plant" OR "macrophyte") and topic 2: ("uptake-kinetics" OR "Vmax" OR "Ks" OR "Km" OR "Vmax/Ks" OR "Vmax/Km" OR "Michaelis-Menten" OR "nitrate" OR "ammonium" OR "nitrate-uptake" OR "ammonium-uptake" OR "saturating" OR "saturating-uptake" OR "linear-uptake" OR "linear" OR "multiple-flask" OR "time-course"). The reference sections of each article found were checked for additional relevant articles.
+
+                    All articles returned in searches that reported Vmax, Ks, linear uptake, and bi-phasic uptake by seaweeds for ammonium or nitrate were included in this review. Older works that reported only curves or slopes without numeric values of Vmax or Ks are also included: here, Vmax and Ks were estimated by printing the published graphs of uptake rate vs concentration and using a fine-scaled ruler to carefully obtain values.
+
+                    For each species in each study for both DIN sources, the pattern of uptake (linear, saturating or bi-phasic) was recorded. For saturating patterns of uptake, values of Vmax, Ks were recorded, and for a linear pattern of uptake, the slope is reported. All values for Vmax and linear uptake rates are reported in units of µmol g-1 (dry weight) h-1 and values for Ks are reported in µmol L-1. In studies where uptake rates were reported per unit wet weight or surface area, conversions to grams dry weight were made by using information provided by the source article, or by conversions provided by other studies where the subject was the same or similar species of seaweed. For example, in Korb and Gerard (2000) Vmax for Laminaria solidungula is reported using surface area, so we used Dunton (1990) who reported conversion factors between surface area and dry weight. Values in the accompanying database are provided in both the original units and on a dry weight basis where conversions were made. The binomial name of each species was checked in AlgaeBase (Guiry and Guiry 2026), and the current taxonomically accepted name applied.
+
+                    The metadata in the Excel spreadsheet includes: each species’ higher taxonomic level (Phylum, Order, Family, and Genus); functional group (using Steneck and Dethier 1994); habitat of origin (intertidal, subtidal, or a laboratory culture); season of collection; the</gco:CharacterString>
+            </mrl:statement>
+            <mrl:scope>
+                <mcc:MD_Scope>
+                    <mcc:level>
+                        <mcc:MD_ScopeCode codeList="http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ScopeCode" codeListValue="dataset" />
+                    </mcc:level>
+                </mcc:MD_Scope>
+            </mrl:scope>
+        </mrl:LI_Lineage>
+    </mdb:resourceLineage>
+    <geonet:info xmlns:geonet="http://www.fao.org/geonetwork">
+        <id>331193</id>
+        <schema>iso19115-3.2018</schema>
+        <createDate>2026-10-29T22:19:23Z</createDate>
+        <changeDate>2026-10-29T22:19:23Z</changeDate>
+        <isTemplate>n</isTemplate>
+        <title />
+        <source>8c9795ad-d153-4521-9be3-aabf8bdc7d15</source>
+        <uuid>3a083248-a4a0-4429-9bef-63e6acbabb14</uuid>
+        <isHarvested>y</isHarvested>
+        <popularity>6</popularity>
+        <rating>0</rating>
+        <displayOrder>0</displayOrder>
+        <harvestInfo>
+            <type>csw</type>
+        </harvestInfo>
+        <isPublishedToAll>true</isPublishedToAll>
+        <view>true</view>
+        <notify>false</notify>
+        <download>true</download>
+        <dynamic>true</dynamic>
+        <featured>false</featured>
+        <ownerId>1</ownerId>
+        <ownername>admin</ownername>
+        <groupOwnerName>IMAS</groupOwnerName>
+        <valid>-1</valid>
+        <baseUrl>https://geonetwork.edge.aodn.org.au/geonetwork</baseUrl>
+        <locService>/srv/en</locService>
+    </geonet:info>
+</mdb:MD_Metadata>

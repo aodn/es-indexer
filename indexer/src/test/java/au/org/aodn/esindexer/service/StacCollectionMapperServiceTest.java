@@ -117,7 +117,7 @@ public class StacCollectionMapperServiceTest {
     }
 
     protected void verify(String expected) throws JsonProcessingException, JSONException {
-        Map<?,?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
+        Map<?, ?> content = objectMapper.readValue(lastRequest.get().document().toString(), Map.class);
         String out = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(content);
         log.info(out);
         JSONAssert.assertEquals(
@@ -182,7 +182,7 @@ public class StacCollectionMapperServiceTest {
             return response;
         })
                 .when(portalElasticsearchClient)
-                        .index((IndexRequest<?>)any(IndexRequest.class));
+                .index((IndexRequest<?>) any(IndexRequest.class));
 
         doAnswer(ans -> {
             SearchResponse<ObjectNode> response = Mockito.mock();
@@ -196,7 +196,7 @@ public class StacCollectionMapperServiceTest {
             return response;
         })
                 .when(portalElasticsearchClient)
-                        .search(any(Function.class), eq(ObjectNode.class));
+                .search(any(Function.class), eq(ObjectNode.class));
 
         // Pretend empty elastic
         when(geoNetworkResourceService.isMetadataRecordsCountLessThan(anyInt()))
@@ -371,6 +371,7 @@ public class StacCollectionMapperServiceTest {
 
         verify(expected);
     }
+
     /**
      * During polygon construction, there are times that the XML do not provide the proper dimension, 2D or 3D.
      * We assume it is 2D by default and here is the test case for that.
@@ -403,9 +404,11 @@ public class StacCollectionMapperServiceTest {
 
         verify(expected);
     }
+
     /**
      * This test repeat some test with the exception that when calling the dataservice, it return something
-     * @throws IOException - Not expected
+     *
+     * @throws IOException   - Not expected
      * @throws JSONException - Not expected
      */
     @Test
@@ -420,6 +423,7 @@ public class StacCollectionMapperServiceTest {
 
         verify(expected);
     }
+
     /**
      * Metadata have geometry which result in a point and not a polygon
      *
@@ -433,6 +437,7 @@ public class StacCollectionMapperServiceTest {
 
         verify(expected);
     }
+
     /**
      * Metadata have geometry which result in a point and not a polygon
      *
@@ -446,6 +451,7 @@ public class StacCollectionMapperServiceTest {
 
         verify(expected);
     }
+
     /**
      * The date field contains year only or year-month only. We need to handle this case.
      *
@@ -459,8 +465,10 @@ public class StacCollectionMapperServiceTest {
 
         verify(expected);
     }
+
     /**
      * Sample contains invalid polygon where only x coor is valid but y is NaN
+     *
      * @throws IOException - Do not expect to throw
      */
     @Test
@@ -480,9 +488,11 @@ public class StacCollectionMapperServiceTest {
 
         verify(expected);
     }
+
     /**
      * There is a missing enum publication, this case is check if we works after fix
-     * @throws IOException - Not expect to throw
+     *
+     * @throws IOException   - Not expect to throw
      * @throws JSONException - Not expect to throw
      */
     @Test
@@ -493,9 +503,11 @@ public class StacCollectionMapperServiceTest {
 
         verify(expected);
     }
+
     /**
      * Make sure we do not include empty polygon and cause the GeometryJson parse error
-     * @throws IOException - Not expect to throw
+     *
+     * @throws IOException   - Not expect to throw
      * @throws JSONException - Not expect to throw
      */
     @Test
@@ -506,9 +518,11 @@ public class StacCollectionMapperServiceTest {
 
         verify(expected);
     }
+
     /**
      * Verify if cloud optimized data indexed, we will have the assets attribute.
-     * @throws IOException - Not expect to throw
+     *
+     * @throws IOException   - Not expect to throw
      * @throws JSONException - Not expect to throw
      */
     @Test
@@ -519,9 +533,11 @@ public class StacCollectionMapperServiceTest {
 
         verify(expected);
     }
+
     /**
      * Verify each asset's media type is derived from its own dataset file name, so a collection with
      * both parquet and zarr datasets gets the correct type per asset.
+     *
      * @throws IOException - Not expected to throw
      */
     @Test
@@ -546,9 +562,11 @@ public class StacCollectionMapperServiceTest {
         assertEquals(DatasetMediaType.APPLICATION_PARQUET.getValue(), assets.get(parquetDname).get("type").asText());
         assertEquals(DatasetMediaType.APPLICATION_ZARR.getValue(), assets.get(zarrDname).get("type").asText());
     }
+
     /**
      * A collection with no cloud-optimised data has one key for the list of its original NetCDF files.
      * Verify it is mapped to a file-list asset with type application/x-netcdf.
+     *
      * @throws IOException - Not expected to throw
      */
     @Test
@@ -572,9 +590,11 @@ public class StacCollectionMapperServiceTest {
         assertEquals(netcdfKey, assets.get(netcdfKey).get("title").asText());
         assertEquals("Original NetCDF files list", assets.get(netcdfKey).get("description").asText());
     }
+
     /**
      * The data access service returns the cloud-optimised key and the data-index key together.
      * A uuid not on the skip_co list gets the cloud-optimised asset only.
+     *
      * @throws IOException - Not expected to throw
      */
     @Test
@@ -592,9 +612,11 @@ public class StacCollectionMapperServiceTest {
         assertEquals(AssetModel.Role.SUMMARY.name(), assets.get(parquetKey).get("role").asText());
         assertEquals(DatasetMediaType.APPLICATION_PARQUET.getValue(), assets.get(parquetKey).get("type").asText());
     }
+
     /**
      * The data access service returns the cloud-optimised key and the data-index key together.
      * A uuid on the skip_co list gets the data-index asset only.
+     *
      * @throws IOException - Not expected to throw
      */
     @Test
@@ -613,9 +635,11 @@ public class StacCollectionMapperServiceTest {
         assertEquals(AssetModel.Role.FILE_LIST.name(), assets.get(netcdfKey).get("role").asText());
         assertEquals(DatasetMediaType.APPLICATION_NETCDF_LIST.getValue(), assets.get(netcdfKey).get("type").asText());
     }
+
     /**
      * A uuid on the skip_co list whose collection has no data-index key gets no assets, the
      * cloud-optimised key is still skipped.
+     *
      * @throws IOException - Not expected to throw
      */
     @Test
@@ -643,10 +667,12 @@ public class StacCollectionMapperServiceTest {
         when(dataAccessService.getMetadataByUuid(eq(uuid)))
                 .thenReturn(Map.of(parquetKey, parquetMetadata, netcdfKey, netcdfMetadata));
     }
+
     /**
      * This XML contains an invalid value in the EAST point of the bounding box, it is set to 360, which is invalid value.
      * Max value allow in this case is 180, so code to set it back to 180 if exceed 180
-     * @throws IOException - Not expected
+     *
+     * @throws IOException   - Not expected
      * @throws JSONException - Not expected
      */
     @Test
@@ -657,9 +683,11 @@ public class StacCollectionMapperServiceTest {
 
         verify(expected);
     }
+
     /**
      * Handle null exception in this case
-     * @throws IOException - Not expected
+     *
+     * @throws IOException   - Not expected
      * @throws JSONException - Not expected
      */
     @Test
@@ -670,9 +698,11 @@ public class StacCollectionMapperServiceTest {
 
         verify(expected);
     }
+
     /**
      * Handle case self intersect, code should manage the polygon correctly without problem
-     * @throws IOException - Not expected
+     *
+     * @throws IOException   - Not expected
      * @throws JSONException - Not expected
      */
     @Test
@@ -683,9 +713,11 @@ public class StacCollectionMapperServiceTest {
 
         verify(expected);
     }
+
     /**
      * Handle another self intersect case
-     * @throws IOException - Not expected
+     *
+     * @throws IOException   - Not expected
      * @throws JSONException - Not expected
      */
     @Test
@@ -696,9 +728,11 @@ public class StacCollectionMapperServiceTest {
 
         verify(expected);
     }
+
     /**
      * Handle null exception in this case
-     * @throws IOException - Not expected
+     *
+     * @throws IOException   - Not expected
      * @throws JSONException - Not expected
      */
     @Test
@@ -709,9 +743,11 @@ public class StacCollectionMapperServiceTest {
 
         verify(expected);
     }
+
     /**
      * Handle null exception in this case
-     * @throws IOException - Not expected
+     *
+     * @throws IOException   - Not expected
      * @throws JSONException - Not expected
      */
     @Test
@@ -731,9 +767,11 @@ public class StacCollectionMapperServiceTest {
 
         verify(expected);
     }
+
     /**
      * Verify dataset_group allow multiple group for same dataset
-     * @throws IOException - Not expected
+     *
+     * @throws IOException   - Not expected
      * @throws JSONException - Not expected
      */
     @Test
@@ -748,10 +786,12 @@ public class StacCollectionMapperServiceTest {
 
         verify(expected);
     }
+
     /**
      * Verify the GN4 group label of GA, NCI and eAtlas maps to the dataset_group value the portal
      * organisation filter use, e.g. dataset_group = 'ga'
-     * @throws IOException - Not expected
+     *
+     * @throws IOException   - Not expected
      * @throws JAXBException - Not expected
      */
     @Test
@@ -771,10 +811,12 @@ public class StacCollectionMapperServiceTest {
             assertEquals(e.getValue(), service.mapGeoNetworkGroup(source), "Group label " + e.getKey());
         }
     }
+
     /**
      * If the GN4 group has no English label, findGroupById throws. We must not stop the indexing,
      * the record has no dataset_group and the error is in the log
-     * @throws IOException - Not expected
+     *
+     * @throws IOException   - Not expected
      * @throws JAXBException - Not expected
      */
     @Test
@@ -786,11 +828,13 @@ public class StacCollectionMapperServiceTest {
 
         assertNull(service.mapGeoNetworkGroup(source), "No dataset_group when group has no label");
     }
+
     /**
      * Verify the geonetwork categories, for example portal:IMOS, end up in summaries.categories of the
      * mapped model. The field is JsonIgnore so it must NOT appear in the document sent to elastic, we
      * therefore assert on the model captured on its way to the ranking service rather than on the
      * indexed document.
+     *
      * @throws IOException - Not expected
      */
     @Test
@@ -820,9 +864,11 @@ public class StacCollectionMapperServiceTest {
                         .has("categories"),
                 "Categories must not be indexed");
     }
+
     /**
      * A record with no category in geonetwork must leave summaries.categories null so nothing
      * downstream mistakes an empty list for a real value.
+     *
      * @throws IOException - Not expected
      */
     @Test
@@ -845,9 +891,11 @@ public class StacCollectionMapperServiceTest {
                 captor.getValue().getSummaries().getCategories(),
                 "No category in geonetwork means null, not an empty list");
     }
+
     /**
      * We should not throw exception even if the word boundary is covering world.
-     * @throws IOException - Not expected
+     *
+     * @throws IOException   - Not expected
      * @throws JSONException - Not expected
      */
     @Test
@@ -885,16 +933,19 @@ public class StacCollectionMapperServiceTest {
         // additionally verify that GCMD descriptions are empty (TypeReference avoids unchecked casts)
         Map<String, Object> content = objectMapper.readValue(
                 lastRequest.get().document().toString(),
-                new TypeReference<>() {}
+                new TypeReference<>() {
+                }
         );
         List<Map<String, Object>> themes = objectMapper.convertValue(
                 content.get("themes"),
-                new TypeReference<>() {}
+                new TypeReference<>() {
+                }
         );
         for (Map<String, Object> theme : themes) {
             List<Map<String, Object>> concepts = objectMapper.convertValue(
                     theme.get("concepts"),
-                    new TypeReference<>() {}
+                    new TypeReference<>() {
+                    }
             );
             for (Map<String, Object> concept : concepts) {
                 String description = objectMapper.convertValue(concept.get("description"), String.class);
@@ -910,6 +961,7 @@ public class StacCollectionMapperServiceTest {
      * Test case when AI service is available and returns enhanced fields including: links, description, update frequency, and themes
      * This test verifies that while AI enhancement for link grouping, description formatting, and delivery mode classification always being called,
      * AI keyword classification only called when original themes don't have parameter or GCMD vocab, and ai:parameter_vocabs are properly set
+     *
      * @throws IOException - Not expected
      */
     @Test
@@ -1038,6 +1090,7 @@ public class StacCollectionMapperServiceTest {
      * Test case when AI service is available and returns enhanced links, enhanced description, and enhanced update frequency
      * This test verifies that both AI link grouping, AI description enhancement, AI delivery mode models are properly called and applied
      * during the indexing process in the service layer
+     *
      * @throws IOException - Not expected
      */
     @Test
@@ -1121,9 +1174,11 @@ public class StacCollectionMapperServiceTest {
 
         verify(expected);
     }
+
     /**
      * Source XML geometry may have description field, this test verify we capture it correctly
-     * @throws IOException - Not expected
+     *
+     * @throws IOException   - Not expected
      * @throws JSONException - Not expected
      */
     @Test
@@ -1137,7 +1192,8 @@ public class StacCollectionMapperServiceTest {
 
     /**
      * One extent description shared by two points, plus a described box, every geometry must carry its own
-     * @throws IOException - Not expected
+     *
+     * @throws IOException   - Not expected
      * @throws JSONException - Not expected
      */
     @Test
@@ -1148,10 +1204,12 @@ public class StacCollectionMapperServiceTest {
 
         verify(expected);
     }
+
     /**
      * This dataset had a similar issue with verifyRingParseCorrectly3, so if verifyRingParseCorrectly3 works, this
      * should work too.
-     * @throws IOException - Not expected
+     *
+     * @throws IOException   - Not expected
      * @throws JSONException - Not expected
      */
     @Test
@@ -1162,9 +1220,11 @@ public class StacCollectionMapperServiceTest {
 
         verify(expected);
     }
+
     /**
      * This dataset has -180 / 180 and -80 / 80 spatial extents, which means it cover the world.
-     * @throws IOException - Not expected
+     *
+     * @throws IOException   - Not expected
      * @throws JSONException - Not expected
      */
     @Test
@@ -1175,9 +1235,11 @@ public class StacCollectionMapperServiceTest {
 
         verify(expected);
     }
+
     /**
      * This dataset has a polygon with invalid geometry, which should be excluded from the spatial extent
-     * @throws IOException - Not expected
+     *
+     * @throws IOException   - Not expected
      * @throws JSONException - Not expected
      */
     @Test
@@ -1188,9 +1250,11 @@ public class StacCollectionMapperServiceTest {
 
         verify(expected);
     }
+
     /**
      * Another test for diff text sequence of the geometry field in XML
-     * @throws IOException - Not expected
+     *
+     * @throws IOException   - Not expected
      * @throws JSONException - Not expected
      */
     @Test
@@ -1201,9 +1265,11 @@ public class StacCollectionMapperServiceTest {
 
         verify(expected);
     }
+
     /**
      * Another test for diff text sequence of the geometry field in XML, innner ring and outer ring parse incorrectly
-     * @throws IOException - Not expected
+     *
+     * @throws IOException   - Not expected
      * @throws JSONException - Not expected
      */
     @Test
@@ -1219,6 +1285,15 @@ public class StacCollectionMapperServiceTest {
     public void verifyRingParseCorrectly4() throws IOException, JSONException {
         String xml = readResourceFile("classpath:canned/sample33.xml");
         String expected = readResourceFile("classpath:canned/sample33_stac.json");
+        indexerService.indexMetadata(xml);
+
+        verify(expected);
+    }
+
+    @Test
+    public void verifyNoErrorInProcessing() throws IOException, JSONException {
+        String xml = readResourceFile("classpath:canned/sample34.xml");
+        String expected = readResourceFile("classpath:canned/sample34_stac.json");
         indexerService.indexMetadata(xml);
 
         verify(expected);

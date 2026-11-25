@@ -892,29 +892,31 @@ public abstract class StacCollectionMapperService {
     }
 
     private void addLinkFromOnlineResource(AbstractOnlineResourcePropertyType link, List<LinkModel> results) {
-        if (link.getAbstractOnlineResource() == null) return;
-        if (!(link.getAbstractOnlineResource().getValue() instanceof CIOnlineResourceType2 ciOnlineResource)) return;
-        if (ciOnlineResource.getLinkage().getCharacterString() == null) return;
 
-        String href = ciOnlineResource.getLinkage().getCharacterString().getValue().toString();
-        if (href.isEmpty()) return;
+        if (link.getAbstractOnlineResource() != null && link.getAbstractOnlineResource().getValue() instanceof CIOnlineResourceType2 ciOnlineResource) {
+            if (ciOnlineResource.getLinkage() != null && ciOnlineResource.getLinkage().getCharacterString() != null) {
+                String href = ciOnlineResource.getLinkage().getCharacterString().getValue().toString();
+                if (href.isEmpty()) return;
 
-        LinkModel linkModel = LinkModel.builder().build();
-        if (ciOnlineResource.getProtocol() != null) {
-            linkModel.setType(Objects.equals(ciOnlineResource.getProtocol().getCharacterString().getValue().toString(), "WWW:LINK-1.0-http--link") ? "text/html" : "");
-        }
-        linkModel.setHref(href);
+                LinkModel linkModel = LinkModel.builder().build();
+                if (ciOnlineResource.getProtocol() != null) {
+                    linkModel.setType(Objects.equals(ciOnlineResource.getProtocol().getCharacterString().getValue().toString(), "WWW:LINK-1.0-http--link") ? "text/html" : "");
+                }
+                linkModel.setHref(href);
 
-        // an empty string by default
-        linkModel.setRel("");
+                // an empty string by default
+                linkModel.setRel("");
 
-        // differentiate WMS, WFS and others
-        safeGet(() -> ciOnlineResource.getProtocol().getCharacterString().getValue().toString())
-                .ifPresent(protocol ->
-                        linkModel.setRel(LinkUtils.getRelationType(protocol))
-                );
-        linkModel.setTitle(getOnlineResourceName(ciOnlineResource));
-        results.add(linkModel);
+                // differentiate WMS, WFS and others
+                safeGet(() -> ciOnlineResource.getProtocol().getCharacterString().getValue().toString())
+                        .ifPresent(protocol ->
+                                linkModel.setRel(LinkUtils.getRelationType(protocol))
+                        );
+                linkModel.setTitle(getOnlineResourceName(ciOnlineResource));
+                results.add(linkModel);
+
+            }
+        };
     }
 
     private List<LinkModel> getAssociatedRecords(MDMetadataType source) {
