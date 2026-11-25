@@ -38,6 +38,7 @@ public class DataAccessServiceImpl implements DataAccessService {
     protected final RestTemplate restTemplate;
     protected final WebClient webClient;
     protected final ObjectMapper objectMapper;
+    protected final NotebookUrlValidator notebookUrlValidator;
     protected ExecutorService executorService;
 
     private final static int MAX_RETRY_ATTEMPT = 100;  //times
@@ -47,11 +48,12 @@ public class DataAccessServiceImpl implements DataAccessService {
     @Value("${dataAccessService.server.healthCheck:true}")
     protected boolean healthCheck;
 
-    public DataAccessServiceImpl(String serverUrl, String baseUrl, RestTemplate restTemplate, WebClient webClient, ObjectMapper objectMapper) {
+    public DataAccessServiceImpl(String serverUrl, String baseUrl, RestTemplate restTemplate, WebClient webClient, ObjectMapper objectMapper, NotebookUrlValidator notebookUrlValidator) {
         this.accessEndPoint = serverUrl + baseUrl;
         this.restTemplate = restTemplate;
         this.webClient = webClient;
         this.objectMapper = objectMapper;
+        this.notebookUrlValidator = notebookUrlValidator;
         int numThreads = Runtime.getRuntime().availableProcessors();
         this.executorService = Executors.newFixedThreadPool(numThreads);
     }
@@ -207,7 +209,7 @@ public class DataAccessServiceImpl implements DataAccessService {
     }
 
     @Override
-    public Optional<String> getNotebookLink(String uuid) {
+    public Optional<String> getNotebookLink(String uuid, Set<String> existingHrefs) {
         try {
             HttpEntity<String> request = getRequestEntity(List.of(MediaType.APPLICATION_JSON));
 
@@ -230,6 +232,22 @@ public class DataAccessServiceImpl implements DataAccessService {
                     // The response is a JSON string (e.g., "https://..."), so we need to deserialize it
                     // to remove the enclosing quotes and handle any escape characters properly
                     String notebookUrl = objectMapper.readValue(responseEntity.getBody(), String.class);
+                    if (notebookUrl == null || notebookUrl.isBlank()) {
+                        return Optional.empty();
+                    }
+                    notebookUrl = notebookUrl.trim();
+
+                    // The metadata is the point of truth. If it has the link already, do not add it again.
+                    if (isInHrefs(notebookUrl, existingHrefs)) {
+                        log.debug("Metadata of {} has the notebook link {}, skip the one from cloud optimized config", uuid, notebookUrl);
+                        return Optional.empty();
+                    }
+
+                    NotebookUrlCheck check = notebookUrlValidator.check(notebookUrl);
+                    if (!check.valid()) {
+                        log.debug("Notebook link of {} is dropped, url: {}, reason: {}", uuid, notebookUrl, check.reason());
+                        return Optional.empty();
+                    }
                     return Optional.of(notebookUrl);
                 }
             }
@@ -237,6 +255,13 @@ public class DataAccessServiceImpl implements DataAccessService {
         } catch (Exception e) {
             return Optional.empty();
         }
+    }
+
+    protected boolean isInHrefs(String url, Set<String> hrefs) {
+        return hrefs != null && hrefs.stream()
+                .filter(Objects::nonNull)
+                .map(String::trim)
+                .anyMatch(url::equals);
     }
 
     protected void shutdownExecutor(ExecutorService executor) {
