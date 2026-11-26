@@ -73,6 +73,9 @@ public abstract class StacCollectionMapperService {
 
     protected static final Logger logger = LogManager.getLogger(StacCollectionMapperService.class);
 
+    // The same title as the notebook link in the metadata (GN4), the portal picks the notebook links by this title
+    protected static final String CO_NOTEBOOK_LINK_TITLE = "Access to Jupyter notebook to query Cloud Optimised converted dataset";
+
     @Value("${spring.jpa.properties.hibernate.jdbc.time_zone}")
     private String timeZoneId;
 
@@ -882,7 +885,7 @@ public abstract class StacCollectionMapperService {
         var associatedRecords = getAssociatedRecords(source);
         results.addAll(associatedRecords);
 
-        var notebook = getNotebookLink(source);
+        var notebook = getNotebookLink(source, results);
         if (notebook != null) {
             results.add(notebook);
         }
@@ -953,15 +956,21 @@ public abstract class StacCollectionMapperService {
         return links;
     }
 
-    protected LinkModel getNotebookLink(MDMetadataType source) {
+    protected LinkModel getNotebookLink(MDMetadataType source, List<LinkModel> existingLinks) {
         String uuid = CommonUtils.getUUID(source);
 
-        return dataAccessService.getNotebookLink(uuid)
+        Set<String> existingHrefs = existingLinks.stream()
+                .map(LinkModel::getHref)
+                .filter(Objects::nonNull)
+                .map(String::trim)
+                .collect(Collectors.toSet());
+
+        return dataAccessService.getNotebookLink(uuid, existingHrefs)
                 .map(i -> LinkModel.builder()
                         .href(i)
                         .rel(RelationType.RELATED.getValue())
                         .type("application/x-ipynb+json")
-                        .title("Python notebook example")
+                        .title(CO_NOTEBOOK_LINK_TITLE)
                         .build())
                 .orElse(null);
     }

@@ -7,6 +7,8 @@ import org.springframework.http.HttpHeaders;
 import au.org.aodn.cloudoptimized.service.DataAccessService;
 import au.org.aodn.cloudoptimized.service.DataAccessServiceImpl;
 import au.org.aodn.cloudoptimized.service.GzipDefaultHeadersInterceptor;
+import au.org.aodn.cloudoptimized.service.HttpNotebookUrlValidator;
+import au.org.aodn.cloudoptimized.service.NotebookUrlValidator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -37,7 +39,8 @@ public class DataAccessServiceAutoConfiguration {
             @Value("${dataaccess.baseUrl:/api/v1/das/}") String baseUrl,
             @Value("${dataaccess.apiKey:TEMP}") String apiKey,
             @Value("${dataaccess.internalHeaderSecret:TEMP}") String internalHeaderSecret,
-            @Qualifier("dataAccessWebClient") WebClient webClient){
+            @Qualifier("dataAccessWebClient") WebClient webClient,
+            NotebookUrlValidator notebookUrlValidator){
 
         // A special rest template that turn on compression on both send and receive
         // it is important because cloud optimize is large
@@ -46,7 +49,16 @@ public class DataAccessServiceAutoConfiguration {
         // Add interceptor for default headers and GZIP compression
         restTemplate.getInterceptors().add(new GzipDefaultHeadersInterceptor(apiKey, internalHeaderSecret));
 
-        return new DataAccessServiceImpl(serverUrl, baseUrl, restTemplate, webClient, objectMapper);
+        return new DataAccessServiceImpl(serverUrl, baseUrl, restTemplate, webClient, objectMapper, notebookUrlValidator);
+    }
+
+    @Bean
+    @ConditionalOnMissingBean(NotebookUrlValidator.class)
+    public NotebookUrlValidator createNotebookUrlValidator(
+            @Value("${dataaccess.notebook.check.enabled:true}") boolean enabled,
+            @Value("${dataaccess.notebook.check.timeoutMs:5000}") int timeoutMs) {
+
+        return new HttpNotebookUrlValidator(HttpNotebookUrlValidator.createRestTemplate(timeoutMs), enabled);
     }
 
     @Bean("dataAccessWebClient")

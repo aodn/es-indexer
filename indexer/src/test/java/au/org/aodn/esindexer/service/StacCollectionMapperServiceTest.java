@@ -53,6 +53,7 @@ import static au.org.aodn.esindexer.BaseTestClass.readResourceFile;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
@@ -416,7 +417,7 @@ public class StacCollectionMapperServiceTest {
         String xml = readResourceFile("classpath:canned/sample17.xml");
         String expected = readResourceFile("classpath:canned/sample17_stac_notebook.json");
 
-        when(dataAccessService.getNotebookLink(eq("0bef875d-5f77-4b31-bd56-de73fafc2b2e")))
+        when(dataAccessService.getNotebookLink(eq("0bef875d-5f77-4b31-bd56-de73fafc2b2e"), anySet()))
                 .thenReturn(Optional.of("https://nbviewer.org/github/aodn/aodn_cloud_optimised/blob/main/notebooks/autonomous_underwater_vehicle.ipynb"));
 
         indexerService.indexMetadata(xml);
@@ -424,6 +425,26 @@ public class StacCollectionMapperServiceTest {
         verify(expected);
     }
 
+    /**
+     * The metadata is the point of truth for the notebook link, so the mapper must tell the data access service
+     * which links the metadata already has, otherwise it cannot skip the duplicate.
+     *
+     * @throws IOException - Not expected
+     */
+    @Test
+    public void verifyNotebookLinkGetMetadataHrefs() throws IOException {
+        String xml = readResourceFile("classpath:canned/sample17.xml");
+
+        indexerService.indexMetadata(xml);
+
+        @SuppressWarnings("unchecked")
+        ArgumentCaptor<Set<String>> hrefs = ArgumentCaptor.forClass(Set.class);
+        Mockito.verify(dataAccessService, atLeastOnce())
+                .getNotebookLink(eq("0bef875d-5f77-4b31-bd56-de73fafc2b2e"), hrefs.capture());
+
+        assertTrue(hrefs.getValue().contains("http://data.aodn.org.au/TERN/ACEF/Ecology/ARRAerialSurveyRaw3.csv"));
+        assertTrue(hrefs.getValue().contains("https://catalogue.aodn.org.au:443/geonetwork/srv/api/records/0bef875d-5f77-4b31-bd56-de73fafc2b2e"));
+    }
     /**
      * Metadata have geometry which result in a point and not a polygon
      *
