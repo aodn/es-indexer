@@ -114,6 +114,16 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
      * @throws HttpServerErrorException.ServiceUnavailable - We are running in cloud and instance may be restarted
      * @throws IllegalStateException                       - The group has no English label
      */
+    @Retryable(
+            retryFor = {
+                    HttpClientErrorException.BadRequest.class,
+                    HttpServerErrorException.BadGateway.class,
+                    HttpServerErrorException.GatewayTimeout.class,
+                    HttpServerErrorException.ServiceUnavailable.class
+            },
+            maxAttempts = 10,
+            backoff = @Backoff(delay = DEFAULT_BACKOFF_TIME, multiplier = 2.0)
+    )
     public String findGroupById(String uuid) throws IOException, HttpServerErrorException.ServiceUnavailable {
         SearchRequest request = new SearchRequest.Builder()
                 .index(indexName)
@@ -165,6 +175,16 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
      * @param uuid - The query UUID
      * @return - Category names as stored in geonetwork, never null, empty list if none found
      */
+    @Retryable(
+            retryFor = {
+                    HttpClientErrorException.BadRequest.class,
+                    HttpServerErrorException.BadGateway.class,
+                    HttpServerErrorException.GatewayTimeout.class,
+                    HttpServerErrorException.ServiceUnavailable.class
+            },
+            maxAttempts = 10,
+            backoff = @Backoff(delay = DEFAULT_BACKOFF_TIME, multiplier = 2.0)
+    )
     @Override
     public List<String> findCategoriesById(String uuid) {
         Map<String, Object> params = new HashMap<>();
@@ -200,6 +220,16 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
      * @param uuid - UUID of record
      * @return - The LinkModel ref the thumbnail.
      */
+    @Retryable(
+            retryFor = {
+                    HttpClientErrorException.BadRequest.class,
+                    HttpServerErrorException.BadGateway.class,
+                    HttpServerErrorException.GatewayTimeout.class,
+                    HttpServerErrorException.ServiceUnavailable.class
+            },
+            maxAttempts = 10,
+            backoff = @Backoff(delay = DEFAULT_BACKOFF_TIME, multiplier = 2.0)
+    )
     @Override
     public Optional<LinkModel> getThumbnail(String uuid) {
         Optional<Map<String, ?>> optRelated = self.getRecordRelated(uuid);
@@ -232,6 +262,16 @@ public class GeoNetworkServiceImpl implements GeoNetworkService {
      * @param uuid - UUID of record
      * @return - Link if logo exist
      */
+    @Retryable(
+            retryFor = {
+                    HttpClientErrorException.BadRequest.class,
+                    HttpServerErrorException.BadGateway.class,
+                    HttpServerErrorException.GatewayTimeout.class,
+                    HttpServerErrorException.ServiceUnavailable.class
+            },
+            maxAttempts = 10,
+            backoff = @Backoff(delay = DEFAULT_BACKOFF_TIME, multiplier = 2.0)
+    )
     @Override
     public Optional<LinkModel> getLogo(String uuid) {
         Optional<Map<String, Object>> optAdditionalInfo = self.getRecordExtraInfo(uuid);
